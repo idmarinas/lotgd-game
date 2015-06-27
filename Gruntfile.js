@@ -55,13 +55,15 @@ module.exports = function(grunt) {
       },
       less : {
         compileCore : {
-          strictMath : true,
-          sourceMap : true,
-          outputSourceFiles : true
-        },
-        files : {
-          "dist/templates/dragon_verde.css" : "templates/dragon_verde.less"
-        }
+          options : {
+            strictMath : true,
+            sourceMap : true,
+            outputSourceFiles : true
+          },
+          files : {
+            "dist/templates/dragon_verde.css" : "templates/dragon_verde.less"
+          }
+        }        
       },
       cssmin : {
         main: {
