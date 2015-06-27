@@ -64,7 +64,7 @@ array_push($args, array("mail.php?op=address",$write));
 $mailfunctions = modulehook("mailfunctions", $args);
 
 //output_notl("<table width='25%' border='0' cellpadding='0' cellspacing='2'><tr><td><a href='mail.php' class='motd'>$inbox</a></td><td><a href='mail.php?op=address' class='motd'>$write</a></td>", true);
-rawoutput("<table width='50%' border='0' cellpadding='0' cellspacing='2'>");
+rawoutput("<table width='100%' border='0' cellpadding='0' cellspacing='2'>");
 rawoutput("<tr>");
 for($i=0;$i<count($mailfunctions);$i++) {
 	if (is_array($mailfunctions[$i])) {
@@ -203,7 +203,7 @@ if ($op==""){
 		$unread = translate_inline("Mark Unread");
 		$report = translate_inline("Report to Admin");
 		$problem = "Abusive Email Report:\nFrom: {$row['name']}\nSubject: {$row['subject']}\nSent: {$row['sent']}\nID: {$row['messageid']}\nBody:\n{$row['body']}";
-		rawoutput("<table width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
+		rawoutput("<table width='100%' border='0' cellpadding='0' cellspacing='5'><tr>
 			<td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td>
 			<td><a href='mail.php?op=del&id={$row['messageid']}' class='motd'>$del</a></td>
 			</tr><tr>
