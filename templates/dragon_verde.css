@@ -75,11 +75,13 @@ table#container td.header-content
 table#container td.footer-content
 {
 	background:url(dragon/bottom.png) repeat-x;
+	color: white;
 }
 table#container td.footer-content,
 table#container td.footer-content-bottom
 {
 	padding: 0 5px;
+	color: white;
 }
 table#container td.footer-content a,
 table#container td.footer-content-bottom a
