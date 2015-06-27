@@ -67,7 +67,7 @@ for($i=0;$i<$count_mailfunctions;++$i) {
 	}
 }
 rawoutput("</tr></table>");
-output_notl("`n`n");
+output_notl("`n");
 switch (httpget('even')) {
 	case "mailsent":
 		output("`vYour message was sent!`n");
