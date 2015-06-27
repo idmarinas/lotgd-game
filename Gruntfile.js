@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         compileCore : {
           options : {
             strictMath : true,
-            sourceMap : true,
+            // sourceMap : true,
             outputSourceFiles : true
           },
           files : {
@@ -66,10 +66,20 @@ module.exports = function(grunt) {
           }
         }        
       },
+      usebanner: {
+        options: {
+          position: 'top',
+          banner: '<%= banners.project %>'
+        },
+        files: {
+          src: 'dist/templates/dragon_verde.css'
+        }
+      },
       cssmin : {
         main: {
           options : {
-            banner : "<% banners.project %>"
+            keepSpecialComments: '*',
+            advanced: false
           },
           files : {
             "dist/templates/dragon_verde.css" : "dist/templates/dragon_verde.css"
@@ -83,10 +93,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-banner');
     // grunt.loadNpmTasks('grunt-contrib-concat');
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'copy', 'less', 'cssmin']); 
+    grunt.registerTask('default', ['clean', 'copy', 'less', 'usebanner', 'cssmin']); 
 };
