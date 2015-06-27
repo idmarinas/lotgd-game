@@ -1,2 +1,5 @@
 lotgd.esproj
 dbconnect.php
+/node_modules
+/dist
+/bower_components
