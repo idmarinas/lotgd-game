@@ -1,0 +1,155 @@
+<!-- Ventanas popup -->
+<!--!popuphead-->
+<!DOCTYPE html>
+<html lang="{lang}">
+	<head>
+		<title>{title}</title>
+	
+		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
+		<link href='templates/dragon_verde.css' rel='stylesheet' type='text/css'>
+		{headscript}{script}
+	</head>
+	<body>
+		<table id="popup">
+			<tr class="wrapper">
+				<td>
+					<h2>{title}</h2>
+					<!--!popupfoot-->
+				</td>
+			</tr>
+			<tr>
+				<td>{copyright}<br />Piel Dragón Verde por Iván D.M, <a href="http://dragonverde.infommo.es">InfoMMO</a></td>
+			</tr>
+		</table>
+	</body>
+</html>
+<!-- Páginas -->
+<!--!header-->
+<!DOCTYPE html>
+<html lang="{lang}">
+	<head>
+		<title>{title}</title>
+
+		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
+		<link href='templates/dragon_verde.css' rel='stylesheet' type='text/css'>
+		
+		<!-- Scripts para la página -->
+		{headscript}{script}
+	</head>
+
+	<body>
+		<table id="container">
+			<tbody>
+			<tr>
+				<td class="header-content">
+					{motd} | {petition}
+					<br>{mail}
+					<br>
+				</td>
+				<td class="header-content">{headerad}</td>
+				<td class="header-content"><img src="templates/dragon/top-center-green.png" alt="Medallón Verde" width="248" height="90"></td>
+			</tr>
+			<!-- Contenido -->
+			<tr class="wrapper">
+				<td id="sideLeft" class="nav">
+					{nav}
+					<p>&nbsp;</p>
+					{navad}
+				</td>
+				<td id="content">
+					{petitiondisplay}
+						<h2>{title}</h2>
+					<!--!footer-->
+				</td>
+				<td id="sideRight">
+					{stats}
+					<p>&nbsp;</p>
+					{paypal}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="footer-content text-left">
+					Piel Dragón Verde por Iván D.M, <a href="http://dragonverde.infommo.es">InfoMMO</a> {version}
+					<br>
+					{pagegen}
+					<span class="pull-right">{source}</span>
+				</td>
+				<td class="footer-content"><img src="templates/dragon/bottom-center.png" alt="Cierra del medallón" width="248" height="85"></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="footer-content-bottom">{copyright}</td>
+			</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+<!-- Para mostrar las estadísticas -->
+<!--!statstart-->
+<table class='charinfo statstart'>
+<!--!stathead-->
+<tr><td class='charhead' colspan='2'><b>{title}</b></td></tr>
+<!--!statrow-->
+<tr><td class='charinfo'><b>{title}</b></td><td class='charinfo'>{value}</td></tr>
+<!--!statbuff-->
+<tr><td class='charhead' colspan='2'><b>{title}:</b></td></tr><tr><td class='charinfo' colspan='2'>{value}</td></tr>
+<!--!statend-->
+</table>
+
+<!-- Para la navegación -->
+<!--!navhead-->
+<div class="navhead">{title}</div>
+<!--!navhelp-->
+<span class="navhelp">{text}</span><br clear='all'>
+<!--!navitem-->
+<i class="fa fa-angle-double-right  fa-fw"></i><a href="{link}"{accesskey}class='nav' {popup}>{text}</a><br clear='all'>
+
+<!--!petitioncount-->
+<table class="petitioncount" border='0' cellpadding='5' cellspacing='0' align='right'><tr><td>{petitioncount}</td></tr></table>
+
+<!-- Contenedor para un anuncio -->
+<!--!adwrapper-->
+<table class="adwrapper">
+ <tr>
+  <td valign='top' bgcolor='#222222'>{content}</td>
+ </tr>
+</table>
+
+<!-- Cuadro de conexión -->
+<!--!login-->
+<table border='0' cellpadding='0' cellspacing='0'>
+ <tr>
+  <td><img src='images/7.png' class='noborder'></td>
+ </tr>
+ <tr>
+  <td valign='center' align='center' class='noborder'>
+   <table border='0'>
+	<tr>
+	 <td align='center'><font color='#ffff00'>{username}:</font></td>
+	 <td align='center'><font color='#ffff00'>{password}:</font></td>
+	</tr>
+	<tr>
+	 <td><input name='name' id='name' accesskey='u' size='12'></td>
+	 <td><input name='password' id='password' accesskey='p' type='password' size='12'></td>
+	</tr>
+	<tr>
+	 <td colspan='2' align='center'><input type='submit' value='{button}' class='button'><br></td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+</table>
+<!--!loginfull-->
+<table border='0' cellpadding='0' cellspacing='0'>
+ <tr>
+  <td><img src='images/serverfull.jpg' class='noborder'></td>
+ </tr>
+ <tr>
+  <td valign='center' align='center' class='noborder'>
+   <table border='0'>
+	<tr>
+	 <td align='center'><font color='#ff0000'>¡Servidor lleno!</font></td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+</table>

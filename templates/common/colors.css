@@ -1,0 +1,101 @@
+/*Colors */ 
+
+.colDkBlue    { color: #000066;  font-weight: bold; }
+
+.colDkGreen   { color: #006600;  font-weight: bold; }
+
+.colDkCyan    { color: #006666;  font-weight: bold; }
+
+.colDkRed     { color: #660000;  font-weight: bold; }
+
+.colDkMagenta { color: #660066;  font-weight: bold; }
+
+.colDkYellow  { color: #666600;  font-weight: bold; }
+
+.colDkWhite   { color: #666666;  font-weight: bold; }
+
+.colLtBlue    { color: #0000BB;  font-weight: bold; }
+
+.colLtGreen   { color: #009900;  font-weight: bold; }
+
+.colLtCyan    { color: #006666;  font-weight: bold; }
+
+.colLtRed     { color: #990000;  font-weight: bold; }
+
+.colLtMagenta { color: #770077;  font-weight: bold; }
+
+.colLtYellow  { color: #777700;  font-weight: bold; }
+
+.colLtWhite   { color: #777700;  font-weight: bold; }
+
+.colLtBlack   { color: #555555;  font-weight: bold; }
+
+.colDkOrange  { color: #994400;  font-weight: bold; }
+
+.colLtOrange  { color: #AA6633;  font-weight: bold; }
+
+.colOtWhite   { color: #CCCCCC;  }
+
+.colBlue  		{ color: #0070FF; }
+
+.colLime  		{ color: #DDFFBB; }
+
+.colBlack  		{ color: #000000; }
+
+.colRose 		{ color: #EEBBEE; }
+
+.colblueviolet 	{ color: #9A5BEE; }
+
+.coliceviolet	{ color: #AABBEE; }
+
+.colLtBrown 	{ color: #F8DB83; }
+
+.colDkBrown 	{ color: #6b563f; }
+
+.colXLtGreen	{ color: #aaff99; }
+
+.colAttention 	{ background-color: #00FF00; color: #FF0000; }
+
+.colWhiteBlack 	{ background-color: #FFFFFF; color: #000000; }
+
+.colBack  		{ background-color: #00FFFF; color: #000000; }
+
+.colLtLinkBlue { color: #0099FF; }
+
+.colDkLinkBlue { color: #006BB3; }
+
+.colDkRust { color: #8D6060; }
+
+.colLtRust { color: #B07878; }
+
+.colMdBlue { color: #0000F0; }
+
+.colMdGrey { color: #DDDDDD; }
+
+.colbeige  { color: #F5F5DC; }
+
+.colkhaki  { color: #F0E68C; }
+
+.coldarkkhaki  { color: #BDB76B; }
+
+.colaquamarine  { color: #7FFFD4; }
+
+.coldarkseagreen  { color: #8FBC8F; }
+
+.collightsalmon  { color: #FFA07A; }
+
+.colsalmon  { color: #FA8072; }
+
+.colwheat  { color: #F5DEB3; }
+
+.coltan  { color: #D2B48C; }
+
+.colburlywood { color: #DEB887; }
+
+.trhead    { background-color:#FFFFFF; color:#000000; }
+
+.trlight   { background-color:#CDC8AA; color:#000000; }
+
+.trdark    { background-color:#A3A6A3; color:#000000; }
+
+.trhilight { background-color:#CDC8AA; color:#000000; }
