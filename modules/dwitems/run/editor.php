@@ -1,0 +1,51 @@
+<?php
+$tname = translate_inline("Name (50 characters max)");
+$ttype = translate_inline("Type");
+$tchance = translate_inline("Reciprocal of the possibility, one item has an effect on newday");
+$tamount = translate_inline("Amount of X added at newday (Can be negative. Leave empty for script items)");
+$tnewdaytext = translate_inline("Text shown on newday if item has an effect (200 characters max) (For script items: Leave empty if a script shall be executed at newday)");
+$tdwellingtext = translate_inline("Text shown inside dwelling (200 characters max) (For script items: Leave empty if a script shall be executed on entrance)");
+$tgoldcost = translate_inline("Gold to pay for this item");
+$tgemcost = translate_inline("Gems to pay for this item");
+$tmindk = translate_inline("Minimum dragonkills required for purchasing this item");
+$tdwellingtextplural = translate_inline("Text shown inside dwelling if more than one item of this type is there. Use %s for the number of items. (200 characters max)");
+$tsubmit = translate_inline("Submit");
+
+rawoutput("<form action='runmodule.php?module=dwitems&op=commit-item' method='POST'>");
+rawoutput("<br>$tname<br>");
+rawoutput("<input id='input' name='name' width='2' maxlength='50'>");
+rawoutput("<br>$ttype<br>");
+rawoutput("<select name='type' class='input'>");
+rawoutput("<option value=\"0\">Charm</option>");
+rawoutput("<option value=\"1\">Gold</option>");
+rawoutput("<option value=\"2\">Gem</option>");
+rawoutput("<option value=\"3\">HP</option>");
+rawoutput("<option value=\"4\">MaxHP</option>");
+rawoutput("<option value=\"5\">Favor</option>");
+rawoutput("<option value=\"6\">Turn</option>");
+rawoutput("<option value=\"7\">Script</option>");
+rawoutput("</select>");
+rawoutput("<br>$tamount<br>");
+rawoutput("<input id='input' name='amount' width='2' maxlength='5'>");
+rawoutput("<br>$tchance<br>");
+rawoutput("<input id='input' name='chance' width='2' maxlength='5'>");
+rawoutput("<br>$tgoldcost<br>");
+rawoutput("<input id='input' name='goldcost' width='2' maxlength='5'>");
+rawoutput("<br>$tgemcost<br>");
+rawoutput("<input id='input' name='gemcost' width='2' maxlength='5'>");
+rawoutput("<br>$tmindk<br>");
+rawoutput("<input id='input' name='mindk' width='2' maxlength='5'>");
+rawoutput("<br>$tnewdaytext<br>");
+rawoutput("<textarea name='newdaytext' class='input' cols='50' rows='4'></textarea>");
+rawoutput("<br>$tdwellingtext<br>");
+rawoutput("<textarea name='dwellingtext' class='input' cols='50' rows='4'></textarea>");
+rawoutput("<br>$tdwellingtextplural<br>");
+rawoutput("<textarea name='dwellingtextplural' class='input' cols='50' rows='4'></textarea>");
+rawoutput("<br><input type='submit' class='button' value='$tsubmit'>");
+rawoutput("</form>");
+
+addnav("","runmodule.php?module=dwitems&op=commit-item");
+addnav("Return to the Grotto", "superuser.php");
+addnav("Editor");
+addnav("Delete and Edit Items", "runmodule.php?module=dwitems&op=delete-items");
+?>
