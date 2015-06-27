@@ -1,0 +1,5 @@
+# Robot Control
+User-agent: *
+Disallow: /lib
+Disallow: /modules
+Disallow: /payment.php
