@@ -239,7 +239,7 @@ a.hotmotd {
 }
 
 table.charinfo {
-    width: auto;
+    width: 100%;
 }
 td.charhead {
 	font-weight:bold;
