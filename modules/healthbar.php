@@ -61,15 +61,15 @@ function healthbar_dohook($hookname,$args){
 		}
 		if ($pct > 60) {
 			if ($session['user']['alive']) $color = "#00ff00";
-			else $color = "#dddddd";
+			else $color = "#59a659";
 			$ccode = "`@";
 		} elseif ($pct > 25) {
 			if ($session['user']['alive']) $color = "#ffff00";
-			else $color = "#666666";
+			else $color = "#a6a659";
 			$ccode = "`^";
 		} else {
 			if ($session['user']['alive']) $color = "#ff0000";
-			else $color = "#880000";
+			else $color = "#a65959";
 			$ccode = "`$";
 		}
 		$hicode = "`&";
