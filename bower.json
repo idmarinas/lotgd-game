@@ -1,0 +1,21 @@
+{
+  "name": "idmarinas-dragonverde",
+  "version": "1.2.6",
+  "authors": [
+    "Iván Diaz Marinas <idmarinas@icloud.com>"
+  ],
+  "description": "Juego MMO de Rol para navegador en formato web",
+  "main": "Gruntfile.js",
+  "license": "MIT",
+  "homepage": "http://dragonverde.infommo.es",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.3.0"
+  }
+}
