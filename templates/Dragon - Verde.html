@@ -4,7 +4,6 @@
 <html lang="{lang}">
 	<head>
 		<title>{title}</title>
-	
 		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
 		<link href='templates/dragon_verde.css' rel='stylesheet' type='text/css'>
 		{headscript}{script}
@@ -18,10 +17,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td>{copyright}<br />Piel Dragón Verde por Iván D.M, <a href="http://dragonverde.infommo.es">InfoMMO</a></td>
+				<td>{copyright}
+					<br />Piel Dragón Verde por Iván D.M,
+					<a href="http://dragonverde.infommo.es">InfoMMO</a>
+				</td>
 			</tr>
 		</table>
 	</body>
+
 </html>
 <!-- Páginas -->
 <!--!header-->
@@ -29,133 +32,163 @@
 <html lang="{lang}">
 	<head>
 		<title>{title}</title>
-
 		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
 		<link href='templates/dragon_verde.css' rel='stylesheet' type='text/css'>
-		
-		<!-- Scripts para la página -->
-		{headscript}{script}
-	</head>
-
+		<!-- Scripts para la página -->{headscript}{script}</head>
 	<body>
 		<table id="dragon-container">
 			<tr id="dragon-header">
 				<td>
 					<table>
 						<tr>
-							<td id="dragon-motd">{motd} | {petition}<br>{mail}<br></td>
+							<td id="dragon-motd">{motd}
+								<i class="fa fa-fw fa-angle-double-right"></i>{petition}
+								<br>{mail}
+								<br>{petitiondisplay}</td>
 							<td id="dragon-banner">{headerad}</td>
 						</tr>
 					</table>
 				</td>
-				<td id="img-medallon"><img src="templates/dragon/top-center-green.png" alt="Medallón Verde" width="248" height="90"></td>
+				<td id="img-medallon">
+					<img src="templates/dragon/top-center-green.png" alt="Medallón Verde" width="248" height="90">
+				</td>
 			</tr>
 			<!-- Contenido -->
 			<tr>
 				<td colspan="2">
 					<table id="dragon-content">
 						<tr>
-							<td id="dragon-sideLeft" class="nav">
-								{nav}
-								<p>&nbsp;</p>
-								{navad}
-							</td>
+							<td id="dragon-navigation">{nav}
+								<p>&nbsp;</p>{navad}</td>
 							<td id="dragon-contain">
-								{petitiondisplay}
-									<h2>{title}</h2>
+								<h2>{title}</h2>
 								<!--!footer-->
 							</td>
-							<td id="dragon-sideRight">
-								{stats}
-								<p>&nbsp;</p>
-								{paypal}
-							</td>
+							<td id="dragon-stats">{stats}
+								<p>&nbsp;</p>{paypal}</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr id="dragon-footer">
-				<td>
-					Piel Dragón Verde por Iván D.M, <a href="http://dragonverde.infommo.es">InfoMMO</a> {version}
-					<br>
-					{pagegen}
+				<td>Piel Dragón Verde por Iván D.M,
+					<a href="http://dragonverde.infommo.es">InfoMMO</a>{version}
+					<br>{pagegen}
 					<span class="pull-right">{source}</span>
 				</td>
-				<td class="padding0"><img src="templates/dragon/bottom-center.png" alt="Cierra del medallón" width="248" height="85"></td>
+				<td class="padding0">
+					<img src="templates/dragon/bottom-center.png" alt="Cierra del medallón" width="248" height="85">
+				</td>
 			</tr>
 			<tr>
 				<td id="dragon-copyright" colspan="2">{copyright}</td>
 			</tr>
 		</table>
 	</body>
+
 </html>
 <!-- Para mostrar las estadísticas -->
 <!--!statstart-->
 <table class='charinfo statstart'>
-<!--!stathead-->
-<tr><td class='charhead' colspan='2'><b>{title}</b></td></tr>
-<!--!statrow-->
-<tr><td class='charinfo'><b>{title}</b></td><td class='charinfo'>{value}</td></tr>
-<!--!statbuff-->
-<tr><td class='charhead' colspan='2'><b>{title}:</b></td></tr><tr><td class='charinfo' colspan='2'>{value}</td></tr>
-<!--!statend-->
+	<!--!stathead-->
+	<tr>
+		<td class='charhead' colspan='2'>
+			<b>{title}</b>
+		</td>
+	</tr>
+	<!--!statrow-->
+	<tr>
+		<td class='charinfo'>
+			<b>{title}</b>
+		</td>
+		<td class='charinfo'>{value}</td>
+	</tr>
+	<!--!statbuff-->
+	<tr>
+		<td class='charhead' colspan='2'>
+			<b>{title}:</b>
+		</td>
+	</tr>
+	<tr>
+		<td class='charinfo' colspan='2'>{value}</td>
+	</tr>
+	<!--!statend-->
 </table>
-
 <!-- Para la navegación -->
 <!--!navhead-->
 <div class="navhead">{title}</div>
 <!--!navhelp-->
-<span class="navhelp">{text}</span><br clear='all'>
+<span class="navhelp">{text}</span>
+<br clear='all'>
 <!--!navitem-->
-<i class="fa fa-angle-double-right  fa-fw"></i><a href="{link}"{accesskey}class='nav' {popup}>{text}</a><br clear='all'>
-
+<a href="{link}" {accesskey}class='nav' {popup}><i class="fa fa-angle-double-right fa-fw"></i>{text}</a>
+<br clear='all'>
 <!--!petitioncount-->
-<table class="petitioncount" border='0' cellpadding='5' cellspacing='0' align='right'><tr><td>{petitioncount}</td></tr></table>
-
+<table class="petitioncount" border='0' cellpadding='5' cellspacing='0' align='right'>
+	<tr>
+		<td>{petitioncount}</td>
+	</tr>
+</table>
 <!-- Contenedor para un anuncio -->
 <!--!adwrapper-->
 <table class="adwrapper">
- <tr>
-  <td valign='top' bgcolor='#222222'>{content}</td>
- </tr>
+	<tr>
+		<td valign='top' bgcolor='#222222'>{content}</td>
+	</tr>
 </table>
-
 <!-- Cuadro de conexión -->
 <!--!login-->
 <table border='0' cellpadding='0' cellspacing='0'>
- <tr>
-  <td><img src='images/7.png' class='noborder'></td>
- </tr>
- <tr>
-  <td valign='center' align='center' class='noborder'>
-   <table border='0'>
 	<tr>
-	 <td align='center'><font color='#ffff00'>{username}:</font></td>
-	 <td align='center'><font color='#ffff00'>{password}:</font></td>
+		<td>
+			<img src='images/7.png' class='noborder'>
+		</td>
 	</tr>
 	<tr>
-	 <td><input name='name' id='name' accesskey='u' size='12'></td>
-	 <td><input name='password' id='password' accesskey='p' type='password' size='12'></td>
+		<td valign='center' align='center' class='noborder'>
+			<table border='0'>
+				<tr>
+					<td align='center'>
+						<font color='#ffff00'>{username}:</font>
+					</td>
+					<td align='center'>
+						<font color='#ffff00'>{password}:</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input name='name' id='name' accesskey='u' size='12'>
+					</td>
+					<td>
+						<input name='password' id='password' accesskey='p' type='password' size='12'>
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2' align='center'>
+						<input type='submit' value='{button}' class='button'>
+						<br>
+					</td>
+				</tr>
+			</table>
+		</td>
 	</tr>
-	<tr>
-	 <td colspan='2' align='center'><input type='submit' value='{button}' class='button'><br></td>
-	</tr>
-   </table>
-  </td>
- </tr>
 </table>
 <!--!loginfull-->
 <table border='0' cellpadding='0' cellspacing='0'>
- <tr>
-  <td><img src='images/serverfull.jpg' class='noborder'></td>
- </tr>
- <tr>
-  <td valign='center' align='center' class='noborder'>
-   <table border='0'>
 	<tr>
-	 <td align='center'><font color='#ff0000'>¡Servidor lleno!</font></td>
+		<td>
+			<img src='images/serverfull.jpg' class='noborder'>
+		</td>
 	</tr>
-   </table>
-  </td>
- </tr>
+	<tr>
+		<td valign='center' align='center' class='noborder'>
+			<table border='0'>
+				<tr>
+					<td align='center'>
+						<font color='#ff0000'>¡Servidor lleno!</font>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
 </table>
