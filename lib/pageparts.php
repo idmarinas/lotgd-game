@@ -351,14 +351,14 @@ function page_footer($saveuser=true){
 		$ued = translate_inline("`0`bUser Editor`b");
 		db_free_result($result);
 		if ($session['user']['superuser'] & SU_EDIT_USERS){
-			$p = "<a href='user.php'>$ued</a>|<a href='viewpetition.php'>$pet</a>";
+			$p = "<i class='fa fa-fw fa-angle-double-right'></i> <a href='user.php'>$ued</a> <i class='fa fa-fw fa-angle-double-right'></i> <a href='viewpetition.php'>$pet</a> ";
 			addnav("", "user.php");
 			addnav("", "viewpetition.php");
 		} else {
-			$p = "<a href='viewpetition.php'>$pet</a>";
+			$p = "<i class='fa fa-fw fa-angle-double-right'></i> <a href='viewpetition.php'>$pet</a>";
 			addnav("", "viewpetition.php");
 		}
-		$p .= "`n `\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
+		$p .= "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 		$pcount = templatereplace("petitioncount", array("petitioncount"=>appoencode($p, true)));
 		$footer = str_replace("{petitiondisplay}", $pcount, $footer);
 		$header = str_replace("{petitiondisplay}", $pcount, $header);
