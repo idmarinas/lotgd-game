@@ -29,7 +29,7 @@
 <!-- Páginas -->
 <!--!header-->
 <!DOCTYPE html>
-<html lang="{lang}">
+<html>
 	<head>
 		<title>{title}</title>
 		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
@@ -37,14 +37,14 @@
 		<!-- Scripts para la página -->{headscript}{script}</head>
 	<body>
 		<table id="dragon-container">
+			<thead>
 			<tr id="dragon-header">
 				<td>
 					<table>
 						<tr>
-							<td id="dragon-motd">{motd}
-								<i class="fa fa-fw fa-angle-double-right"></i>{petition}
-								<br>{mail}
-								<br>{petitiondisplay}</td>
+							<td id="dragon-motd">
+								<br>
+								<br></td>
 							<td id="dragon-banner">{headerad}</td>
 						</tr>
 					</table>
@@ -58,8 +58,15 @@
 				<td colspan="2">
 					<table id="dragon-content">
 						<tr>
-							<td id="dragon-navigation">{nav}
-								<p>&nbsp;</p>{navad}</td>
+							<td rowspan="2" id="dragon-navigation">{nav}<p>&nbsp;</p>{navad}</td>
+							<td colspan="2" class="menu text-right">
+								{motd} 
+								<i class="fa fa-fw fa-angle-double-right"></i> {petition} 
+								<i class="fa fa-fw fa-angle-double-right"></i> {mail} 
+								{petitiondisplay}
+							</td>				
+						</tr>
+						<tr>
 							<td id="dragon-contain">
 								<h2>{title}</h2>
 								<!--!footer-->
@@ -83,6 +90,7 @@
 			<tr>
 				<td id="dragon-copyright" colspan="2">{copyright}</td>
 			</tr>
+			</thead>
 		</table>
 	</body>
 
@@ -91,11 +99,13 @@
 <!--!statstart-->
 <table class='charinfo statstart'>
 	<!--!stathead-->
-	<tr>
-		<td class='charhead' colspan='2'>
-			<b>{title}</b>
-		</td>
-	</tr>
+	<thead>
+		<tr>
+			<th class='charhead' colspan='2'>
+				<b>{title}</b>
+			</th>
+		</tr>
+	</thead>
 	<!--!statrow-->
 	<tr>
 		<td class='charinfo'>
@@ -114,7 +124,9 @@
 	</tr>
 	<!--!statend-->
 </table>
+
 <!-- Para la navegación -->
+
 <!--!navhead-->
 <div class="navhead">{title}</div>
 <!--!navhelp-->
@@ -124,11 +136,7 @@
 <a href="{link}" {accesskey}class='nav' {popup}><i class="fa fa-angle-double-right fa-fw"></i>{text}</a>
 <br clear='all'>
 <!--!petitioncount-->
-<table class="petitioncount" border='0' cellpadding='5' cellspacing='0' align='right'>
-	<tr>
-		<td>{petitioncount}</td>
-	</tr>
-</table>
+{petitioncount}
 <!-- Contenedor para un anuncio -->
 <!--!adwrapper-->
 <table class="adwrapper">
@@ -138,57 +146,40 @@
 </table>
 <!-- Cuadro de conexión -->
 <!--!login-->
-<table border='0' cellpadding='0' cellspacing='0'>
+<table id="login">
 	<tr>
-		<td>
-			<img src='images/7.png' class='noborder'>
+		<td colspan="2" class="text-center">
+			<img src='images/7.png' width="199" height="207">
 		</td>
 	</tr>
 	<tr>
-		<td valign='center' align='center' class='noborder'>
-			<table border='0'>
-				<tr>
-					<td align='center'>
-						<font color='#ffff00'>{username}:</font>
-					</td>
-					<td align='center'>
-						<font color='#ffff00'>{password}:</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input name='name' id='name' accesskey='u' size='12'>
-					</td>
-					<td>
-						<input name='password' id='password' accesskey='p' type='password' size='12'>
-					</td>
-				</tr>
-				<tr>
-					<td colspan='2' align='center'>
-						<input type='submit' value='{button}' class='button'>
-						<br>
-					</td>
-				</tr>
-			</table>
+		<td>
+			{username}: <input name='name' id='name' accesskey='u' size='12'>
+		</td>
+		<td>
+			{password}: <input name='password' id='password' accesskey='p' type='password' size='12'>
+		</td>
+	</tr>
+	<tr>
+		<td colspan='2' align='center'>
+			<input type='submit' value='{button}' class='button'>
+			<br>
 		</td>
 	</tr>
 </table>
 <!--!loginfull-->
-<table border='0' cellpadding='0' cellspacing='0'>
+<table id="loginfull">
 	<tr>
-		<td>
-			<img src='images/serverfull.jpg' class='noborder'>
+		<td class="text-center">
+			<img src='images/4.png' width="199" height="207">
 		</td>
 	</tr>
 	<tr>
-		<td valign='center' align='center' class='noborder'>
-			<table border='0'>
-				<tr>
-					<td align='center'>
-						<font color='#ff0000'>¡Servidor lleno!</font>
-					</td>
-				</tr>
-			</table>
+		<td class="text-center">
+			<font color='#ff0000'>
+				Server Full!<br>
+				¡Servidor lleno!
+			</font>
 		</td>
 	</tr>
 </table>
