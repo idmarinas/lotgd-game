@@ -208,7 +208,7 @@ function page_footer($saveuser=true){
 	//NOTICE | paypal link, I do request, as the author of this software
 	//NOTICE | which I have made freely available to you, that you leave it in.
 	//NOTICE |
-	$paypalstr = '<table align="center"><tr><td>';
+	$paypalstr = '<table style="width:auto; margin: auto;"><tr><td>';
 	$currency = getsetting("paypalcurrency", "USD");
 
 	if (!isset($_SESSION['logdnet']) || !isset($_SESSION['logdnet']['']) || $_SESSION['logdnet']['']=="" || date("Y-m-d H:i:s",strtotime("-1 hour"))>$session['user']['laston']){
