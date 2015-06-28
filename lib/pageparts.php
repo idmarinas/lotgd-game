@@ -333,8 +333,8 @@ function page_footer($saveuser=true){
 		}
 		$footer=str_replace("{mail}",maillink(),$footer);
 	}else{
-		$header=str_replace("{mail}","",$header);
-		$footer=str_replace("{mail}","",$footer);
+		$header=str_replace("{mail}",translate_inline("Log in to see your Ye Olde Mail"),$header);
+		$footer=str_replace("{mail}",translate_inline("Log in to see your Ye Olde Mail"),$footer);
 	}
 	//output petition count
 
