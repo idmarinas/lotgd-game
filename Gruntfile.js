@@ -51,8 +51,16 @@ module.exports = function (grunt) {
             dest: "dist/fonts/"
           }
         ]
+      },
+      localhost : {
+        files : [
+          {
+            expand: true,
+            src : ['dist/**'],
+            dest : '/Users/Ivan/Sites/lotgd/'
+          }
+        ]
       }
-
     },
     less: {
       compileCore: {
@@ -109,5 +117,5 @@ module.exports = function (grunt) {
   // grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'copy', 'less', 'postcss', 'usebanner', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'copy:localhost']);
 };
