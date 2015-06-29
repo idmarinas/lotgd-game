@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     clean: ['dist'],
     //Copiar archivos del proyecto (para publicar)
     copy: {
-      main:  {
+      main: {
         files: [
           {
             expand: true,
@@ -66,6 +66,16 @@ module.exports = function (grunt) {
         }
       }
     },
+    postcss: {
+      options: {
+        processors: [
+          require('autoprefixer-core')({ browsers: 'last 10 versions, > 1%' }), // add vendor prefixes
+        ]
+      },
+      dist: {
+        src: 'dist/templates/dragon_verde.css'
+      }
+    },
     usebanner: {
       options: {
         position: 'top',
@@ -94,10 +104,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-banner');
-  // grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-postcss');
   // grunt.loadNpmTasks('grunt-contrib-uglify');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'copy', 'less', 'usebanner', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'copy', 'less', 'postcss', 'usebanner', 'cssmin']);
 };
