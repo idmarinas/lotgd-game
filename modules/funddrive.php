@@ -74,7 +74,7 @@ function funddrive_dohook($hookname,$args){
 		case 1:
 			$nonpct = 100-$pct;
 			if ($pct < 100){
-				$res = "<div align='center'><table align='center' style='border: solid 1px #000000;' bgcolor='#FF0000' cellpadding='0' cellspacing='0' width='90%' height='10'><caption align='bottom'>$res</caption><tr><td width='$pct%' bgcolor='#FFFF00'></td><td width='$nonpct%'></td></tr></table></div>";
+				$res = "<div align='center'><table align='center' style='border: solid 1px #000000;' bgcolor='#FF0000' cellpadding='0' cellspacing='0' width='90%' height='10'><caption align='bottom'>$res</caption><tr><td class='padding0' width='$pct%' bgcolor='#FFFF00'></td><td class='padding0' width='$nonpct%'></td></tr></table></div>";
 			}else{
 				$res = "<div align='center'><table align='center' style='border: solid 1px #000000;' bgcolor='#00FF00' cellpadding='0' cellspacing='0' width='150' height='10'><caption align='bottom'>$res</caption><tr><td width='100%'></td></tr></table></div>";
 			}
@@ -88,15 +88,15 @@ function funddrive_dohook($hookname,$args){
 			if ($pct < 100){
 				$res = "<table border='0' cellpadding='0' cellspacing='0' width='$imgwidth' height='$imgheight'>"
 					."<tr>"
-					."<td style=\"background-image: url(images/Medallion-Red.gif); background-position: top left; background-repeat: no-repeat;\" height='$topheight'><img src='images/trans.gif' width='$imgwidth' height='$topheight' alt=''></td>"
+					."<td class='padding0' style=\"background-image: url(images/Medallion-Red.gif); background-position: top left; background-repeat: no-repeat;\" height='$topheight'><img src='images/trans.gif' width='$imgwidth' height='$topheight' alt=''></td>"
 					."</tr><tr>"
-					."<td style=\"background-image: url(images/Medallion-Yellow.gif); background-position: bottom left; background-repeat: no-repeat;\" height='$bottomheight'><img src='images/trans.gif' width='$imgwidth' height='$bottomheight' alt=''></td>"
+					."<td class='padding0' style=\"background-image: url(images/Medallion-Yellow.gif); background-position: bottom left; background-repeat: no-repeat;\" height='$bottomheight'><img src='images/trans.gif' width='$imgwidth' height='$bottomheight' alt=''></td>"
 					."</tr>"
 					."</table><br><div align='center'>$res</div>";
 			}else{
 				$res = "<table border='0' cellpadding='0' cellspacing='0' width='$imgwidth' height='$imgheight'>"
 					."<tr>"
-					."<td style=\"background-image: url(images/Medallion-Green.gif); background-position: top left; background-repeat: no-repeat;\" height='$topheight'><img src='images/trans.gif' width='$imgwidth' height='$imgheight' alt=''></td>"
+					."<td class='padding0' style=\"background-image: url(images/Medallion-Green.gif); background-position: top left; background-repeat: no-repeat;\" height='$topheight'><img src='images/trans.gif' width='$imgwidth' height='$imgheight' alt=''></td>"
 					."</tr>"
 					."</table><br><div align='center'>$res</div>";
 			}
