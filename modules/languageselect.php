@@ -68,21 +68,21 @@ function languageselect_dohook($hookname,$args)
 		break;
 
 		case 'footer-home':
-			$languages = getsetting('serverlanguages','en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian');
+			$languages = getsetting('serverlanguages','en,English,fr,Franï¿½ais,dk,Danish,de,Deutsch,es,Espaï¿½ol,it,Italian');
 			if( !empty($languages) )
 			{
 				require_once('lib/showform.php');
-				rawoutput('<form action="home.php" method="POST"><table align="center"><tr><td>');
+				rawoutput('<form action="home.php" method="POST"><table style="width:auto; margin:auto;"><tr><td>');
 				$form = array('language'=>'Choose a different language:,enum,'.$languages);
 				$prefs['language'] = ( isset($_POST['language']) ) ? $_POST['language'] : (( isset($_COOKIE['language']) ) ? $_COOKIE['language'] : getsetting('defaultlanguage','en'));
 				showform($form, $prefs, TRUE);
 				$submit = translate_inline('Choose');
-				rawoutput('</td><td><br>&nbsp;<input type="submit" class="button" value="'.$submit.'"></td></tr></table></form>');
+				rawoutput('</td><td><br><p><input type="submit" class="button" value="'.$submit.'"></p></td></tr></table></form>');
 			}
 		break;
 
 		case 'create-form':
-			$serverlanguages = getsetting('serverlanguages','en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian');
+			$serverlanguages = getsetting('serverlanguages','en,English,fr,Franï¿½ais,dk,Danish,de,Deutsch,es,Espaï¿½ol,it,Italian');
 			if( !empty($serverlanguages) )
 			{
 				$languages = explode(',', $serverlanguages);
