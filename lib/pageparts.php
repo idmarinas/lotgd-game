@@ -325,7 +325,7 @@ function page_footer($saveuser=true){
 			</script>";
 					
 			$script.="<script src=\"/templates/jquery.js\"></script>";
-			$header=str_replace("{mail}","$add<div id='maillink'>".maillink()."</div><div id='notify'></div></body>",$header);
+			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span><span id='notify'></span></body>",$header);
 		} else {
 			//no AJAX for slower browsers etc
 			$add="";
