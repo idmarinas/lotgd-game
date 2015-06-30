@@ -15,7 +15,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 	$extensions = modulehook("showformextensions",$extensions);
 	rawoutput("<table width='100%' cellpadding='0' cellspacing='0'><tr><td>");
 	rawoutput("<div id='showFormSection$showform_id'></div>");
-	rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
+	// rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
 	rawoutput("<table cellpadding='2' cellspacing='0'>");
 	$i = 0;
 	foreach ($layout as $key=>$val) {
@@ -377,7 +377,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 		}
 		rawoutput("</td></tr>",true);
 	}
-	rawoutput("</table><br>",true);
+	rawoutput("</table>",true);
 	if ($showform_id==1){
 		$startIndex = (int)httppost("showFormTabIndex");
 		if ($startIndex == 0){
