@@ -1,0 +1,130 @@
+//Inputs, selects y textarea
+input,
+input[type="text"],
+select, 
+textarea
+{
+	background-color: @forms-bg-base;
+	color: contrast(@forms-bg-base);
+	padding: 5px 8px;
+	border: 1px solid darken(@forms-bg-base, 15%);
+	border-radius: @border-radius;
+	margin: 0px 5px;
+	
+	&:hover,
+	&:focus
+	{
+		background-color: lighten(@forms-bg-base, 22%);
+		border: 1px solid saturate(@forms-bg-base, 15%);
+	}
+	&:disabled
+	{
+		cursor: @cursor-disabled;
+		opacity: .60;
+	}	
+	&:focus
+	{
+		outline: none;
+	}
+	
+	&.block
+	{
+		width: 95%;
+		box-sizing: border-box;
+	}
+}
+
+//Eliminar estilos para cuando sea una imagen
+input[type="image"]
+{
+	background: transparent;
+	color: inherit;
+	border: 0px;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+{
+	font: normal normal normal 14px/1 FontAwesome;
+	display: inline-block;
+	font-size: inherit;
+	color: inherit;
+	background: transparent;
+	appearance: none;
+	padding: 0px;
+	border: 0px;
+}
+//Formato para los checkbox
+input[type="checkbox"]
+{
+	&:hover
+	{
+		color: 	@forms-bg-base;
+	}
+	&:after
+	{
+		content: "\f096";
+	}
+	&:checked:after
+	{
+		content: "\f046";
+	}
+}
+//Formato para los radio
+input[type="radio"]
+{	
+	&:hover
+	{
+		color: 	@forms-bg-base;
+	}
+	&:after
+	{
+		content: "\f10c";
+	}
+	&:checked:after
+	{
+		content: "\f05d";
+	}
+}
+
+
+//Botones
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"]
+{
+	// background-color: @forms-bg-base;
+	color: contrast(@forms-bg-base);
+	padding: 5px 8px;
+	border: 1px solid darken(@forms-bg-base, 14%);
+	border-radius: @border-radius;
+	white-space: nowrap;
+	margin-bottom: 0px;
+	display: inline-block;
+	text-shadow: 0 1px 0 desaturate(contrast(@forms-bg-base), 15%);
+	box-shadow: inset 0 1px 0 lighten(@forms-bg-base, 25%), 0 1px 1px darken(@forms-bg-base, 25%);
+	
+	 #gradient > .vertical(@start-color: @forms-bg-base; @end-color: darken(@forms-bg-base, 12%));
+	.reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners;
+	background-repeat: repeat-x;
+	
+	&:hover,
+	&:focus  {
+		background-color: darken(@forms-bg-base, 12%);
+	    background-position: 0 -15px;
+	}
+	
+	&:active{
+	    background-color: darken(@forms-bg-base, 12%);
+	    border-color: darken(@forms-bg-base, 14%);
+	}
+	
+	&:disabled,
+	&[disabled] {
+	    background-color: darken(@forms-bg-base, 12%);
+	    background-image: none;
+		cursor: @cursor-disabled;
+		opacity: .60;
+	}
+}

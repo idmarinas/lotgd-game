@@ -1,0 +1,60 @@
+//== Tipografía
+//
+//## Fuenta, line-height, y color para body texto, cabecera y más.
+//** Load fonts from this directory.
+@heading-font-path:          "../fonts/";
+//** File name for all font files.
+@heading-font-name:          "EG_Dragon_Caps";
+
+@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+//** Por defecto monospace para `<code>`, `<kbd>`, y `<pre>`.
+@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-base:        @font-family-sans-serif;
+
+@font-size-base:          14px;
+@font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
+@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
+
+@font-size-h1:            floor((@font-size-base * 2)); // ~36px
+@font-size-h2:            floor((@font-size-base * 1.75)); // ~30px
+@font-size-h3:            ceil((@font-size-base * 1.5)); // ~24px
+@font-size-h4:            ceil((@font-size-base * 1.25)); // ~18px
+@font-size-h5:            @font-size-base;
+@font-size-h6:            ceil((@font-size-base * 0.85)); // ~12px
+
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:        1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
+
+//** By default, this inherits from the `<body>`.
+@headings-font-family:    inherit;
+@headings-font-weight:    500;
+@headings-line-height:    1.1;
+@headings-color:          inherit;
+
+/**
+ * Colores base 
+ */
+@color-bg : rgb(25, 39, 20);
+@container-bg : rgb(194, 167, 129);
+@forms-bg-base : lighten(@color-bg, 20%);
+
+//** Disabled cursor for form controls and buttons.
+@cursor-disabled:                not-allowed;
+
+/* Colores para los enlaces */
+@color-link-base : lighten(@color-bg, 80%);
+@color-link-hover : darken(@color-link-base, 60%);
+
+
+/* Ancho para las tres columnas de la tabla principal */
+@stats-width : 248px;
+@navigation-width : 200px;
+@contain-min-width : 728px;
+
+/* Ancho que tiene el banner de la cabecera  */
+@header-banner-width : 728px;
+
+@border-radius: 4px;

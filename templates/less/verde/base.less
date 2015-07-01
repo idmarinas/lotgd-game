@@ -1,0 +1,170 @@
+@font-face {
+  font-family: 'EG Dragon Caps';
+  src: url('@{heading-font-path}@{heading-font-name}.otf') format('otf'),
+       url('@{heading-font-path}@{heading-font-name}.ttf') format('truetype'),
+}
+
+body
+{
+	background:url(dragon/pagebg-green.jpg) @color-bg;
+	color: black;
+	padding: 0px;
+	margin: 0px;
+	font-family: @font-family-base;
+	font-size: @font-size-base;
+	line-height: @line-height-base;
+}
+
+/* Base para las tablas */
+table
+{
+	width: 100%;
+	margin: 0px auto;
+	padding: 0px;
+	border: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	line-height: normal;
+	
+	tr 
+	{
+		padding: 0;
+		
+		td
+		{
+			vertical-align: top;
+			padding: 0;
+		}
+		
+		@trhead-color : darken(@container-bg, 50%);
+		&.trhead  
+		{ 
+			background-color: @trhead-color;
+			color : contrast(@trhead-color);
+			
+			.colLtWhite
+			{
+				color : inherit;
+			}
+			
+			@trhead-color-a : lighten(@trhead-color, 70%);
+			a
+			{
+				color: @trhead-color-a;
+				
+				span
+				{
+					color: inherit;
+				}
+				
+				&:hover
+				{
+					color: darken(@trhead-color-a, 50%);
+				}
+			}
+		}
+		
+		@trlight-color : lighten(@container-bg, 10%);
+		&.trlight
+		{ 
+			background-color: @trlight-color;
+			color: contrast(@trlight-color);
+			
+			.colLtWhite
+			{
+				color : inherit;
+			}
+			
+			@trlight-color-a : darken(@trlight-color, 40%);
+			a
+			{
+				color: @trlight-color-a;
+				
+				span
+				{
+					color: inherit;
+				}
+				
+				&:hover
+				{
+					color: darken(@trlight-color-a, 70%);
+				}
+			}
+			
+			&:hover
+			{
+				background-color: lighten(@container-bg, 20%);
+				color: contrast(lighten(@container-bg, 20%));
+				
+				span
+				{
+					color: inherit;
+				}
+			}
+		}
+		
+		@trdark-color : darken(@container-bg, 30%);
+		&.trdark  
+		{ 
+			background-color: @trdark-color;
+			color: contrast(@trdark-color);
+			
+			.colLtWhite
+			{
+				color : inherit;
+			}
+			
+			@trdark-color-a : lighten(@trdark-color, 60%);
+			a
+			{
+				color: @trdark-color-a;
+				border-bottom-color: contrast(@trdark-color);
+				
+				span
+				{
+					color: inherit;
+				}
+				
+				&:hover
+				{
+					color: darken(@trdark-color-a, 40%);
+				}
+			}
+			
+			&:hover
+			{
+				background-color: darken(@container-bg, 40%);
+				color: contrast(darken(@container-bg, 40%));
+				
+				span
+				{
+					color: inherit;
+				}
+			}
+		}
+	}	
+}
+
+//Para las pestañas
+div.trhead  
+{ 
+	background-color: darken(@container-bg, 50%);
+	color : contrast(darken(@container-bg, 50%));
+	border: 1px solid lighten(@container-bg, 50%) !important;
+}
+
+img
+{
+	border: 0px;
+}
+
+p
+{
+	margin: 5px;
+}
+
+//Notificación de caducidad de sesión
+#notify
+{
+  float: left;
+}
