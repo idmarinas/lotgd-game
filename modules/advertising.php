@@ -388,9 +388,9 @@ function advertising_run(){
 		$cost = get_module_setting("baseprice");
 		$what = httpget("what");
 		$intervals = array(
-			"1 month"=>600,
-			"3 months"=>1500,
-			"6 months"=>2500
+			translate_inline("1 month")=>600,
+			translate_inline("3 months")=>1500,
+			translate_inline("6 months")=>2500
 			);
 		global $session;
 		$avail = $session['user']['donation'] - $session['user']['donationspent'];
