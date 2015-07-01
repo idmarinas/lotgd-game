@@ -6,6 +6,7 @@ define('CRON_CHARCLEANUP',8);
 
 define("ALLOW_ANONYMOUS",true);
 require("settings.php");
+$game_dir = dirname(__FILE__);
 $result=chdir($game_dir);
 require_once("common.php");
 
