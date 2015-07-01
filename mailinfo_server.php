@@ -1,5 +1,6 @@
 <?php
-
+//translator ready
+ 
 define("OVERRIDE_FORCED_NAV",true);
 require("common.php");
 
@@ -28,9 +29,9 @@ function timeout_status($args=false) {
 	$warning='';
 	$timeout=strtotime($session['user']['laston'])-strtotime(date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds")));
 	if ($timeout<=1) {
-		$warning="`\$`b".translation_inline("Your session has timed out!").appoencode("`b");
+		$warning="`\$`b".output("Your session has timed out!").appoencode("`b");
 	} elseif ($timeout<120){
-		$warning="`t".sprintf(translation_inline("TIMEOUT in %s seconds!"),$timeout);
+		$warning="`t".sprintf(output("TIMEOUT in %s seconds!"),$timeout);
 	} else $warning='';
 	$objResponse = new xajaxResponse();
 	$objResponse->assign("notify","innerHTML", $warning);
