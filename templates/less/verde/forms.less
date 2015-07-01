@@ -11,10 +11,15 @@ textarea
 	border-radius: @border-radius;
 	margin: 0px 5px;
 	
-	&:hover,
-	&:focus
+	&:hover
 	{
 		background-color: lighten(@forms-bg-base, 22%);
+		border: 1px solid saturate(@forms-bg-base, 15%);
+	}
+	
+	&:focus
+	{
+		background-color: lighten(@forms-bg-base, 15%);
 		border: 1px solid saturate(@forms-bg-base, 15%);
 	}
 	&:disabled
