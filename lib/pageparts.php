@@ -63,18 +63,18 @@ function page_header(){
  * Returns an output formatted popup link based on JavaScript
  *
  * @param string $page The URL to open
- * @param string $size The size of the popup window (Default: 550x300)
+ * @param string $size The size of the popup window (Default: 728x400)
  * @return string
  */
-function popup($page,$size="550x300"){
+function popup($page,$size="728x400"){
 	// user prefs
 	global $session;
-	if ($size==="550x300" && $session['loggedin']) {
+	if ($size==="728x400" && $session['loggedin']) {
 		if (!isset($session['user']['prefs'])) {
-			$usersize='550x330';
+			$usersize='728x400';
 		} else {
 			$usersize = &$session['user']['prefs']['popupsize'];
-			if ($usersize=='') $usersize='550x330';
+			if ($usersize=='') $usersize='728x400';
 		}
 		$s=explode("x",$usersize);
 		$s[0]=(int)max(50,$s[0]);
