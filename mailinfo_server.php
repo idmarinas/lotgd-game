@@ -29,9 +29,11 @@ function timeout_status($args=false) {
 	$warning='';
 	$timeout=strtotime($session['user']['laston'])-strtotime(date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds")));
 	if ($timeout<=1) {
-		$warning="`\$`b".output("Your session has timed out!").appoencode("`b");
+		$text = translate_inline("Your session has timed out!");
+		$warning="".appoencode("`\$`b").$text.appoencode("`b");
 	} elseif ($timeout<120){
-		$warning="`t".sprintf(output("TIMEOUT in %s seconds!"),$timeout);
+		$text =translate_inline("TIMEOUT in %s seconds!");
+		$warning="".appoencode("`t").sprintf($text,$timeout);
 	} else $warning='';
 	$objResponse = new xajaxResponse();
 	$objResponse->assign("notify","innerHTML", $warning);
