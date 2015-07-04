@@ -219,7 +219,7 @@ if (getsetting("allowclans",1)) addnav("C?Clan Halls","clan.php");
 tlschema($schemas['infonav']);
 addnav($texts['infonav']);
 tlschema();
-addnav("??F.A.Q. (newbies start here)", "petition.php?op=faq",false,true);
+addnav("??F.A.Q. (newbies start here)", "petition.php?op=faq",false,true,"728x400");
 addnav("N?Daily News","news.php");
 addnav("L?List Warriors","list.php");
 addnav("o?Hall o' Fame","hof.php");
