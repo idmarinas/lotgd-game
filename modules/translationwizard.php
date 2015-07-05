@@ -2,7 +2,7 @@
 //For versioninfos just take a look at /modules/translationwizard/versions.txt
 
 // Okay, someone wants to use this outside of normal game flow.. no real harm
-if(!defined('OVERRIDE_FORCED_NAV')) define("OVERRIDE_FORCED_NAV",true);
+//if(!defined('OVERRIDE_FORCED_NAV')) define("OVERRIDE_FORCED_NAV",true);
 
 function translationwizard_getmoduleinfo(){
 	//Slightly modified by JT Traub in the original untranslated.php
@@ -12,6 +12,7 @@ function translationwizard_getmoduleinfo(){
 		"author"=>"`2Written by Oliver Brendel, `3based on the untranslated.php by Christian Rutsch`nFilescan by `qEdorian`n",
 		"category"=>"Translations",
 		"download"=>"http://lotgd-downloads.com",
+		"override_forced_nav" => true,
 		"settings"=>array(
 			"General Preferences,title",
 				"blocktrans"=>"Block the Untranslated Text in the grotto,bool|0",
@@ -34,7 +35,7 @@ function translationwizard_getmoduleinfo(){
 		),
 		"prefs"=>array(
 		    "Translation Wizard - User prefs,title",
-				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian"),
+				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Franï¿½ais,dk,Danish,de,Deutsch,es,Espaï¿½ol,it,Italian"),
 				"Note: don't change this if you don't need to... it is set up in the Translation Wizard!,note",
 				"allowed"=>"Does this user have unrestricted access to the wizard?,bool|0",
 				"Note: This is only active if the restriction settings is 'true' in the module settings,note",
