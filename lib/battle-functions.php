@@ -21,7 +21,7 @@ function __construct() {
 	$this->critical=0.3;
 
 	//set the bar sizes
-	$this->length=50; //pixel
+	$this->length=100; //pixel
 	$this->height=10; //pixel
 }
 
