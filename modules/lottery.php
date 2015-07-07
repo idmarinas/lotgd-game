@@ -149,7 +149,7 @@ function lottery_run(){
 			$n = $pick;
 			output("You bought a lottery ticket for tomorrow's drawing; the numbers you chose are: `^%s-%s-%s-%s`7`n`n", $n[0], $n[1], $n[2], $n[3]);
 		}else{
-			output("%s", $msg);
+			output_notl("%s", $msg);
 			output("Lottery tickets cost `^%s`0 gold.", $cost);
 			output("If you would like to buy one for tomorrow's drawing, please choose your numbers below and click \"Buy\".");
 			rawoutput("<form action='runmodule.php?module=lottery&op=buy' method='POST'>",true);

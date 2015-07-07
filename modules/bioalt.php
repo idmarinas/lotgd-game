@@ -108,7 +108,7 @@ function bioalt_run(){
 					rawoutput("<tr class='".($i%2?"trdark":"trlight")."'><td>");
 					output_notl("%s", $altname);
 					rawoutput("</td><td>$altip</td><td>$altid</td><td>$hits</td><td>$laston</td><td>");
-					output("%s",$refname);
+					output_notl("%s",$refname);
 					rawoutput("</td></tr>");
 				}
 				rawoutput("</table>");
