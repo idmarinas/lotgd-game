@@ -53,7 +53,7 @@ function show_enemies($enemies) {
 				$badguy['creaturename'],
 				$ccode, 
 				$badguy['creaturelevel']);
-			rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;'><tr><td>");
+			rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto; vertical-align:middle;'><tr><td>");
 			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
 			rawoutput("</td><td>");
 			rawoutput($fightbar->getBar($badguy['creaturehealth'],$badguy['creaturemaxhealth']));
@@ -69,7 +69,7 @@ function show_enemies($enemies) {
 				$badguy['creaturename'],
 				$ccode, 
 				$badguy['creaturelevel']);
-			rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;'><tr><td>");
+			rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto; vertical-align:middle;'><tr><td>");
 			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
 			rawoutput("</td><td>");
 			rawoutput($fightbar->getBar($badguy['creaturehealth'],$badguy['creaturemaxhealth']));
@@ -105,7 +105,7 @@ function show_enemies($enemies) {
 		output_notl("`l%s:`n",
 			$hitpointstext
 			);
-		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto;'><tr><td>");
+		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto; vertical-align:middle;'><tr><td>");
 		output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
 		rawoutput("</td><td>");
 		if (!$dead) rawoutput($fightbar->getBar($u['hitpoints'],$u['maxhitpoints']));
