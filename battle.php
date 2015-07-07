@@ -109,7 +109,7 @@ if ($enemycounter > 0) {
 		if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0) {
 			$badguyName = translate_inline($badguy['creaturename']);
 			$badguyWeapon = translate_inline($badguy['creatureweapon']);
-			output("`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n",$badguyName,$badbuyWeapon);
+			output("`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n",$badguyName,$badguyWeapon);
 		}
 	}
 	output_notl("`n");
