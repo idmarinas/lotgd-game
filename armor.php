@@ -123,7 +123,8 @@ if ($op==""){
 		output_notl("%s%s`0", $color, $row['defense']);
 		rawoutput("</td><td align='right'>");
 		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
-			output("%s%s`0", $color, $row['alternatetext']);
+			$texto = $row['alternatetext'];
+			output_notl("%s%s`0", $color, $texto);
 		} else {
 			output_notl("%s%s`0",$color,$row['value']);
 		}
