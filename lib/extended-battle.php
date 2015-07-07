@@ -102,10 +102,10 @@ function show_enemies($enemies) {
 	//your faction display (companions?)
 	switch ($barDisplay) {
 		case 2:
-		output("`l%s:`n",
+		output_notl("`l%s:`n",
 			$hitpointstext
 			);
-		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;'><tr><td>");
+		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto;'><tr><td>");
 		output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
 		rawoutput("</td><td>");
 		if (!$dead) rawoutput($fightbar->getBar($u['hitpoints'],$u['maxhitpoints']));
@@ -118,10 +118,10 @@ function show_enemies($enemies) {
 		break;
 
 		case 1:
-		output("`l%s:`n",
+		output_notl("`l%s:`n",
 			$hitpointstext
 			);
-		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;'><tr><td>");
+		rawoutput("<table style='border:0;padding:0;margin:0;margin-left:20px;width:auto;'><tr><td>");
 		output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
 		rawoutput("</td><td>");
 		if (!$dead) rawoutput($fightbar->getBar($u['hitpoints'],$u['maxhitpoints']));
