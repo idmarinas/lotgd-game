@@ -13,11 +13,11 @@ $resurrectioncost=getsetting('resurrectioncost',100);
 $default_actions=array();
 $default_actions[]=array(
 	"link"=>"graveyard.php?op=resurrection",
-	"linktext"=>"Resurrection",
+	"linktext"=>translate_inline("Resurrection"),
 	"linkhardcoded"=>1,
 	"favor"=>getsetting('resurrectioncost',100),
 	"text"=>"",
-	"titletext"=>"`\${deathoverlord}`) speaks, \"`7You have impressed me indeed.  I shall grant you the ability to visit your foes in the mortal world.`)\""
+	"titletext"=>translate_inline("`\${deathoverlord}`) speaks, \"`7You have impressed me indeed.  I shall grant you the ability to visit your foes in the mortal world.`)\"")
 	);
 
 //build navigation
