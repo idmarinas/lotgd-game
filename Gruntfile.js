@@ -50,6 +50,10 @@ module.exports = function (grunt) {
             cwd: 'bower_components/font-awesome/fonts',
             src: ["**"],
             dest: "dist/fonts/"
+          },
+          {
+            src: "bower_components/animate.css/animate.min.css",
+            dest: "dist/templates/animate.min.css"
           }
         ]
       },
