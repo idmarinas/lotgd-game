@@ -12,10 +12,12 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "dist",
     "test",
     "tests"
   ],
   "dependencies": {
-    "font-awesome": "^4.3.0"
+    "font-awesome": "^4.3.0",
+    "animate.css" : "*"
   }
 }
