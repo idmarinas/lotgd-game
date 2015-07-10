@@ -56,9 +56,11 @@ function expbar_dohook($hookname,$args){
 			$nonpct = 100;
 		}
 		if ($exp >= $req) {
-			$color = "blue";
+			$color = "progress-bar-ready";
+			$text = "<i class='fa fa-arrow-up'></i> " . translate_inline("Ready");
 		} else {
-			$color = "white";
+			$color = "progress-bar-in-progress progress-bar-striped";
+			$texr = "";
 		}
 		$old = getcharstat("Character Info", "Experience");
 		$new = "";
@@ -69,12 +71,10 @@ function expbar_dohook($hookname,$args){
 		if ($shownum) $new .= $old;
 		if ($shownum && $shownext) $new .= "`0/`@$req`0";
 		if ($showbar) {
-			if ($shownum) $new .= "<br />";
-			$new .= "<table style='border: solid 1px #000000;' bgcolor='red'  cellpadding='0' cellspacing='0' width='100%' height='5'><tr><td width='$pct%' bgcolor='$color'></td><td width='$nonpct%'></td></tr></table>";
-			
-			$new .= '<div class="progress">
-					  <div class="progress-bar" style="width: 60%;">60%</div>
-					</div>';
+			if ($shownum) $new .= "<br />";			
+			$new .= "<div class='progress active'>
+					  <div class='progress-bar $color' style='width: $pct%;'>$text</div>
+					</div>";
 		}
 		setcharstat("Character Info", "Experience", $new);
 		break;
