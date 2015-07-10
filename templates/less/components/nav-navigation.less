@@ -17,7 +17,7 @@
 	}
 	a.nav
 	{
-		color : lighten(@color-bg, 5%);
+		color : lighten(@body-bg, 5%);
 		text-decoration: none;
 		border: 0px;
 		display: inline-block;
@@ -25,18 +25,18 @@
 		
 		span.navhi 
 		{
-		    color: lighten(@color-bg, 65%);
+		    color: lighten(@body-bg, 65%);
 		    text-decoration: underline;
 		}
 		
 		&:hover
 		{
-			#gradient > .horizontal(@start-color: lighten(@color-bg, 60%), @end-color: transparent);
-			border-radius: @border-radius;
+			#gradient > .horizontal(@start-color: lighten(@body-bg, 60%), @end-color: transparent);
+			border-radius: @border-radius-base;
 			
 			span.navhi
 			{
-				color: lighten(@color-bg, 35%);
+				color: lighten(@body-bg, 35%);
 			}
 		}
 	}

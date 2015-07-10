@@ -4,27 +4,27 @@ input[type="text"],
 select, 
 textarea
 {
-	background-color: @forms-bg-base;
-	color: contrast(@forms-bg-base);
+	background-color: @forms-bg;
+	color: contrast(@forms-bg);
 	padding: 5px 8px;
-	border: 1px solid darken(@forms-bg-base, 15%);
-	border-radius: @border-radius;
+	border: 1px solid darken(@forms-bg, 15%);
+	border-radius: @border-radius-base;
 	margin: 0px 5px;
 	
 	&:hover
 	{
-		background-color: lighten(@forms-bg-base, 22%);
-		border: 1px solid saturate(@forms-bg-base, 5%);
+		background-color: lighten(@forms-bg, 22%);
+		border: 1px solid saturate(@forms-bg, 5%);
 	}
 	
 	&:focus
 	{
-		background-color: lighten(@forms-bg-base, 10%);
-		border: 1px solid saturate(@forms-bg-base, 15%);
+		background-color: lighten(@forms-bg, 10%);
+		border: 1px solid saturate(@forms-bg, 15%);
 	}
 	&:disabled
 	{
-		cursor: @cursor-disabled;
+		cursor:  not-allowed;
 		opacity: .60;
 	}	
 	&:focus
@@ -69,7 +69,7 @@ input[type="checkbox"]
 {
 	&:hover
 	{
-		color: 	@forms-bg-base;
+		color: 	@forms-bg;
 	}
 	&:after
 	{
@@ -85,7 +85,7 @@ input[type="radio"]
 {	
 	&:hover
 	{
-		color: 	@forms-bg-base;
+		color: 	@forms-bg;
 	}
 	&:after
 	{
@@ -104,37 +104,37 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"]
 {
-	// background-color: @forms-bg-base;
-	color: contrast(@forms-bg-base);
+	// background-color: @forms-bg;
+	color: contrast(@forms-bg);
 	padding: 5px 8px;
-	border: 1px solid darken(@forms-bg-base, 14%);
-	border-radius: @border-radius;
+	border: 1px solid darken(@forms-bg, 14%);
+	border-radius: @border-radius-base;
 	white-space: nowrap;
 	margin-bottom: 0px;
 	display: inline-block;
-	text-shadow: 0 1px 0 desaturate(contrast(@forms-bg-base), 15%);
-	box-shadow: inset 0 1px 0 lighten(@forms-bg-base, 25%), 0 1px 1px darken(@forms-bg-base, 25%);
+	text-shadow: 0 1px 0 desaturate(contrast(@forms-bg), 15%);
+	box-shadow: inset 0 1px 0 lighten(@forms-bg, 25%), 0 1px 1px darken(@forms-bg, 25%);
 	
-	 #gradient > .vertical(@start-color: @forms-bg-base; @end-color: darken(@forms-bg-base, 12%));
+	 #gradient > .vertical(@start-color: @forms-bg; @end-color: darken(@forms-bg, 12%));
 	.reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners;
 	background-repeat: repeat-x;
 	
 	&:hover,
 	&:focus  {
-		background-color: darken(@forms-bg-base, 12%);
+		background-color: darken(@forms-bg, 12%);
 	    background-position: 0 -15px;
 	}
 	
 	&:active{
-	    background-color: darken(@forms-bg-base, 12%);
-	    border-color: darken(@forms-bg-base, 14%);
+	    background-color: darken(@forms-bg, 12%);
+	    border-color: darken(@forms-bg, 14%);
 	}
 	
 	&:disabled,
 	&[disabled] {
-	    background-color: darken(@forms-bg-base, 12%);
+	    background-color: darken(@forms-bg, 12%);
 	    background-image: none;
-		cursor: @cursor-disabled;
+		cursor:  not-allowed;
 		opacity: .60;
 	}
 }
