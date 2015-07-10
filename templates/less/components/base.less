@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'EG Dragon Caps';
+  font-family: @headings-font-family;
   src: url('@{heading-font-path}@{heading-font-name}.otf') format('otf'),
        url('@{heading-font-path}@{heading-font-name}.ttf') format('truetype'),
 }
 
 body
 {
-	background:url(dragon/pagebg-green.jpg) @color-bg;
-	color: black;
+	background:url(dragon/pagebg-green.jpg) @body-bg;
+	color: @text-color;
 	padding: 0px;
 	margin: 0px;
 	font-family: @font-family-base;

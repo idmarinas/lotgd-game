@@ -6,8 +6,8 @@
 function expbar_getmoduleinfo(){
 	$info = array(
 		"name"=>"Experience Bar",
-		"version"=>"1.0",
-		"author"=>"JT Traub<br>based on idea by Dan Van Dyke",
+		"version"=>"1.1.0",
+		"author"=>"JT Traub and Iván D.M<br>based on idea by Dan Van Dyke",
 		"category"=>"Stat Display",
 		"download"=>"core_module",
 		"settings"=>array(
@@ -71,6 +71,10 @@ function expbar_dohook($hookname,$args){
 		if ($showbar) {
 			if ($shownum) $new .= "<br />";
 			$new .= "<table style='border: solid 1px #000000;' bgcolor='red'  cellpadding='0' cellspacing='0' width='100%' height='5'><tr><td width='$pct%' bgcolor='$color'></td><td width='$nonpct%'></td></tr></table>";
+			
+			$new .= '<div class="progress">
+					  <div class="progress-bar" style="width: 60%;">60%</div>
+					</div>';
 		}
 		setcharstat("Character Info", "Experience", $new);
 		break;
