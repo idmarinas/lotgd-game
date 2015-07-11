@@ -6,10 +6,10 @@
 function healthbar_getmoduleinfo(){
 	$info = array(
 		"name"=>"Health Bar",
-		"version"=>"1.0",
-		"author"=>"JT Traub",
+		"version"=>"2.0.0",
+		"author"=>"Iván D.M based on idea JT Traub",
 		"category"=>"Stat Display",
-		"download"=>"core_module",
+		"download"=>"",
 		"settings"=>array(
 			"Health Bar Module Settings,title",
 			"showcurrent"=>"Show current health number,bool|1",
@@ -60,7 +60,7 @@ function healthbar_dohook($hookname,$args){
 			$nonpct = 100;
 		}
 		if ($pct > 60) {
-			if ($session['user']['alive']) $color = "#00ff00";
+			if ($session['user']['alive']) $color = "";
 			else $color = "#59a659";
 			$ccode = "`@";
 		} elseif ($pct > 25) {
@@ -86,7 +86,11 @@ function healthbar_dohook($hookname,$args){
 		if ($showcur && $showmax) $new .= "`0/`&$realmax`0" . $max_adjustment;
 		if ($showbar) {
 			if ($showcur) $new .= "<br />";
-			$new .= "<table style='border: solid 1px #000000' bgcolor='#777777' cellpadding='0' cellspacing='0' width='100%' height='5'><tr><td width='$pct%' bgcolor='$color'></td><td width='$nonpct%'></td></tr></table>";
+			$new .= "<div class='progress expbar $animated'>
+					 	<div class='progress-bar $color' style='width: $pct%;'>$text</div>
+					 </div>
+					 $script
+			";
 		}
 		setcharstat("Character Info", $stat, $new);
 		break;

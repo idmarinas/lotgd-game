@@ -71,7 +71,7 @@ function expbar_dohook($hookname,$args){
 					</script>";
 		} else {
 			$animated = "active";
-			$color = "progress-expbar-in-progress progress-bar-striped";
+			$color = "progress-expbar-in-progress progress-expbar-striped";
 			$texr = "";
 			$script = "";
 		}
