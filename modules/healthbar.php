@@ -59,18 +59,32 @@ function healthbar_dohook($hookname,$args){
 			$pct = 0;
 			$nonpct = 100;
 		}
+		$text = $script = "";
 		if ($pct > 60) {
-			if ($session['user']['alive']) $color = "";
-			else $color = "#59a659";
+			if ($session['user']['alive']) $color = "progress-healthbar-alive-60 ";
+			else $color = "progress-healthbar-dead-60";
 			$ccode = "`@";
 		} elseif ($pct > 25) {
-			if ($session['user']['alive']) $color = "#ffff00";
-			else $color = "#a6a659";
+			if ($session['user']['alive']) $color = "progress-healthbar-alive-25 animated bounce";
+			else $color = "progress-healthbar-dead-25";
 			$ccode = "`^";
+			$text = '<i class="fa fa-exclamation fa-fw"></i>';
+			
 		} else {
-			if ($session['user']['alive']) $color = "#ff0000";
-			else $color = "#a65959";
+			if ($session['user']['alive']) $color = "progress-healthbar-alive-0 animated flash";
+			else $color = "progress-healthbar-dead-0";
 			$ccode = "`$";
+			$text = '<i class="fa fa-exclamation-triangle fa-fw"></i>';
+			$script = '<script>
+				$(".healthbar").on("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function(){
+					var self = this;
+					var animatedName = "animated flash";
+					$(self).removeClass(animatedName);
+					setTimeout(function(){
+						$(self).addClass(animatedName);
+					},5000);
+				});
+			</script>';
 		}
 		$hicode = "`&";
 		if (!$session['user']['alive']) {
@@ -86,8 +100,8 @@ function healthbar_dohook($hookname,$args){
 		if ($showcur && $showmax) $new .= "`0/`&$realmax`0" . $max_adjustment;
 		if ($showbar) {
 			if ($showcur) $new .= "<br />";
-			$new .= "<div class='progress expbar $animated'>
-					 	<div class='progress-bar $color' style='width: $pct%;'>$text</div>
+			$new .= "<div class='healthbar $animated'>
+					 	<div class='progress-healthbar $color' style='width: $pct%;'>$text</div>
 					 </div>
 					 $script
 			";
