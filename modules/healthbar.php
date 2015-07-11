@@ -50,14 +50,11 @@ function healthbar_dohook($hookname,$args){
 		else $max = $realmax;
 
 		$pct = round($cur / $max * 100, 0);
-		$nonpct = 100-$pct;
 		if ($pct > 100) {
 			$pct = 100;
-			$nonpct = 0;
 		}
 		if ($pct < 0) {
 			$pct = 0;
-			$nonpct = 100;
 		}
 		$text = $script = "";
 		if ($pct > 60) {
