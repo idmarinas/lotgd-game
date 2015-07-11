@@ -20,7 +20,7 @@
 }
 
 //Contenedor
-.progress 
+.expbar 
 {
   overflow: hidden;
   height: 15px;
@@ -30,7 +30,7 @@
 }
 
 //Barra de progreso
-.progress-bar 
+.progress-expbar 
 {
   float: left;
   width: 0%;
@@ -53,19 +53,19 @@
 }
 
 // Call animation for the active one
-.progress.active .progress-bar,
-.progress-bar.active 
+.expbar.active .progress-expbar,
+.progress-expbar.active 
 {
   animation: progress-bar-stripes 5s linear infinite;
 }
 
 
 //Variaciones
-.progress-bar-ready 
+.progress-expbar-ready 
 {
   .progress-bar-variant(@progress-expbar-ready);
 }
-.progress-bar-in-progress 
+.progress-expbar-in-progress 
 {
   .progress-bar-variant(@progress-expbar-in-progress);
 }

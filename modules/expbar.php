@@ -57,11 +57,11 @@ function expbar_dohook($hookname,$args){
 		}
 		if ($exp >= $req) {
 			$animated = "animated flash";
-			$color = "progress-bar-ready";
+			$color = "progress-expbar-ready";
 			$text = "<i class='fa fa-arrow-up'></i> " . translate_inline("Ready");
 			$script = "<script>
 						var animatedName = 'animated flash';
-						$('.progress.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+						$('.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 							var self = this;
 							$(self).removeClass(animatedName);
 							setTimeout(function(){
@@ -71,7 +71,7 @@ function expbar_dohook($hookname,$args){
 					</script>";
 		} else {
 			$animated = "active";
-			$color = "progress-bar-in-progress progress-bar-striped";
+			$color = "progress-expbar-in-progress progress-bar-striped";
 			$texr = "";
 			$script = "";
 		}
@@ -85,8 +85,8 @@ function expbar_dohook($hookname,$args){
 		if ($shownum && $shownext) $new .= "`0/`@$req`0";
 		if ($showbar) {
 			if ($shownum) $new .= "<br />";			
-			$new .= "<div class='progress expbar $animated'>
-					  <div class='progress-bar $color' style='width: $pct%;'>$text</div>
+			$new .= "<div class='expbar $animated'>
+					  <div class='progress-expbar $color' style='width: $pct%;'>$text</div>
 					</div>
 					$script
 					";
