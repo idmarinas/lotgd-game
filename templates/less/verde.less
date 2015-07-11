@@ -153,7 +153,23 @@
 
 //## Barra de experiencia
 
-//** Color de la barra cuando se tiene el exp  progress bar color
+//** Color de la barra cuando se tiene el experiencia
 @progress-expbar-ready: @col-lt-blue;
-//** Info progress bar color
+//** Color para cuando no se tiene la experiencia
 @progress-expbar-in-progress: @col-md-blue;
+
+//## Barra de salud
+
+//** Color cuando se está vivo y se tiene más del 60%
+@progress-healthbar-alive-60: #00ff00;
+//** Color cuando se está vivo y se tiene más del 25% y menos del 60%
+@progress-healthbar-alive-25: #ffff00;
+//** Color cuando se está vivo y se tiene más del 0% y menos del 25%
+@progress-healthbar-alive-0: #ff0000;
+
+//** Color cuando se está muerto y se tiene más del 60%
+@progress-healthbar-dead-60: desaturate(@progress-healthbar-alive-60, 70%);
+//** Color cuando se está muerto y se tiene más del 25% y menos del 60%
+@progress-healthbar-dead-25: desaturate(@progress-healthbar-alive-25, 70%);;
+//** Color cuando se está muerto y se tiene más del 0% y menos del 25%
+@progress-healthbar-dead-0: desaturate(@progress-healthbar-alive-0, 70%);;
