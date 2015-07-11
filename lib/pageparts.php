@@ -327,7 +327,7 @@ function page_footer($saveuser=true){
 			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span><span id='notify'></span></body>",$header);
 		} else {
 			//no AJAX for slower browsers etc
-			$script.="<script src=\"/templates/jquery.js\"></script>";
+			$script.="<script src=\"templates/jquery.js\"></script>";
 			$add="";
 			$header=str_replace("{mail}",maillink(),$header);
 		}
