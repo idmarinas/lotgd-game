@@ -60,7 +60,7 @@ function expbar_dohook($hookname,$args){
 			$color = "progress-bar-ready";
 			$text = "<i class='fa fa-arrow-up'></i> " . translate_inline("Ready");
 		} else {
-			$animated = "";
+			$animated = "active";
 			$color = "progress-bar-in-progress progress-bar-striped";
 			$texr = "";
 		}
@@ -74,9 +74,20 @@ function expbar_dohook($hookname,$args){
 		if ($shownum && $shownext) $new .= "`0/`@$req`0";
 		if ($showbar) {
 			if ($shownum) $new .= "<br />";			
-			$new .= "<div class='progress active $animated'>
+			$new .= "<div class='progress expbar $animated'>
 					  <div class='progress-bar $color' style='width: $pct%;'>$text</div>
-					</div>";
+					</div>
+					<script>
+						var animatedName = 'animated flash';
+						$('.progress.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+								var self = this;
+								$(self).removeClass(animatedName);
+								setTimeout(function(){
+									$(self).addClass(animatedName);
+								},5000);
+						});
+					</script>
+					";
 		}
 		setcharstat("Character Info", "Experience", $new);
 		break;
