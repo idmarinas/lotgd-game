@@ -59,10 +59,21 @@ function expbar_dohook($hookname,$args){
 			$animated = "animated flash";
 			$color = "progress-bar-ready";
 			$text = "<i class='fa fa-arrow-up'></i> " . translate_inline("Ready");
+			$script = "<script>
+						var animatedName = 'animated flash';
+						$('.progress.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+								var self = this;
+								$(self).removeClass(animatedName);
+								setTimeout(function(){
+									$(self).addClass(animatedName);
+								},5000);
+						});
+					</script>";
 		} else {
 			$animated = "active";
 			$color = "progress-bar-in-progress progress-bar-striped";
 			$texr = "";
+			$script = "";
 		}
 		$old = getcharstat("Character Info", "Experience");
 		$new = "";
@@ -77,16 +88,7 @@ function expbar_dohook($hookname,$args){
 			$new .= "<div class='progress expbar $animated'>
 					  <div class='progress-bar $color' style='width: $pct%;'>$text</div>
 					</div>
-					<script>
-						var animatedName = 'animated flash';
-						$('.progress.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-								var self = this;
-								$(self).removeClass(animatedName);
-								setTimeout(function(){
-									$(self).addClass(animatedName);
-								},5000);
-						});
-					</script>
+					$script
 					";
 		}
 		setcharstat("Character Info", "Experience", $new);
