@@ -62,11 +62,11 @@ function expbar_dohook($hookname,$args){
 			$script = "<script>
 						var animatedName = 'animated flash';
 						$('.progress.expbar').on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-								var self = this;
-								$(self).removeClass(animatedName);
-								setTimeout(function(){
-									$(self).addClass(animatedName);
-								},5000);
+							var self = this;
+							$(self).removeClass(animatedName);
+							setTimeout(function(){
+								$(self).addClass(animatedName);
+							},5000);
 						});
 					</script>";
 		} else {
