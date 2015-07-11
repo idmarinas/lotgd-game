@@ -56,9 +56,11 @@ function expbar_dohook($hookname,$args){
 			$nonpct = 100;
 		}
 		if ($exp >= $req) {
+			$animated = "animated flash";
 			$color = "progress-bar-ready";
 			$text = "<i class='fa fa-arrow-up'></i> " . translate_inline("Ready");
 		} else {
+			$animated = "";
 			$color = "progress-bar-in-progress progress-bar-striped";
 			$texr = "";
 		}
@@ -72,7 +74,7 @@ function expbar_dohook($hookname,$args){
 		if ($shownum && $shownext) $new .= "`0/`@$req`0";
 		if ($showbar) {
 			if ($shownum) $new .= "<br />";			
-			$new .= "<div class='progress active'>
+			$new .= "<div class='progress active $animated'>
 					  <div class='progress-bar $color' style='width: $pct%;'>$text</div>
 					</div>";
 		}
