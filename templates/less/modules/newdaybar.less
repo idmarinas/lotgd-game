@@ -1,0 +1,67 @@
+/** Barra de progreso para la salud
+ *
+ */
+
+// Barra animaciones
+// -------------------------
+
+// WebKit
+@-webkit-keyframes progress-bar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+// Spec and IE10+
+@keyframes progress-bar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+//Contenedor
+.newdaybar
+{
+  overflow: hidden;
+  height: 15px;
+  margin-bottom: 0;
+  background-color: @progress-bg;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+
+//Barra de progreso
+.progress-newdaybar 
+{
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 11px;
+  line-height: 15px;
+  color: @progress-bar-color;
+  text-align: center;
+  background-color: @progress-bg;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+  transition: width .6s ease;
+  white-space: nowrap;
+}
+
+// Striped bars
+.progress-striped .progress-newdaybar,
+.progress-newdaybar-striped 
+{
+  #gradient > .striped();
+  background-size: 25px 25px;
+}
+
+// Call animation for the active one
+.newdaybar.active .progress-newdaybar,
+.progress-newdaybar.active 
+{
+  animation: progress-bar-stripes 5s linear infinite;
+}
+
+//## Variaciones
+.progress-newdaybar-color 
+{
+  .progress-bar-variant(@progress-newdaybar-color);
+}

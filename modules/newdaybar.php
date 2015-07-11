@@ -55,23 +55,21 @@ function newdaybar_dohook($hookname,$args){
 
 	switch($hookname){
 		case "charstats":
-                        require_once("lib/datetime.php");
+        	require_once("lib/datetime.php");
 
-                        $details = gametimedetails();
-                        $secstonewday = secondstonextgameday($details);
+            $details = gametimedetails();
+            $secstonewday = secondstonextgameday($details);
 
-                        $newdaypct = round($details['realsecstotomorrow'] / $details['secsperday'] * 100,0);
-	        	$newdaynon = 100 - $newdaypct;
+            $newdaypct = round($details['realsecstotomorrow'] / $details['secsperday'] * 100, 4);
 
-        		$newdaytxt = date("G\\h i\\m s\\s",$secstonewday);
+        	$newdaytxt = date("G\\h i\\m s\\s",$secstonewday);
 
-		        if ($newdaypct > 100) { $newdaypct = 100; $newdaynon = 0; }
-        		elseif ($newdaypct < 0) { $newdaypct = 0; $newdaynon = 100; }
+		    if ($newdaypct > 100) { $newdaypct = 100; }
+        	elseif ($newdaypct < 0) { $newdaypct = 0; }
 
-		        $color = "#00ff00";
-        		$ccode = "`@";
+        	$ccode = "`@";
 			$hicode = "`&";
-	                $stat = "Next day";
+	        $stat = "Next day";
 
 			$showtime = get_module_setting("showtime");
 			$showbar  = get_module_setting("showbar");
@@ -81,7 +79,28 @@ function newdaybar_dohook($hookname,$args){
 			if ($showtime) $new .= $ccode . $newdaytxt;
 			if ($showbar) {
 				if ($showtime) $new .= "<br />";
-				$new .= "<table style='border: solid 1px #000000' bgcolor='#777777' cellpadding='0' cellspacing='0' width='100%' height='5' title='$newdaytxt'><tr><td width='$newdaypct%' bgcolor='$color'></td><td width='$newdaynon%'></td></tr></table>";
+				$new .= "<div class='newdaybar $animated'>
+					 	<div class='progress-newdaybar progress-newdaybar-color' style='width: $newdaypct%;'></div>
+					 </div>
+					 <script>
+					 	var realSecsToTomorrow = " . $details['realsecstotomorrow'] . ";
+						var secPerDay = " . $details['secsperday'] . ";
+						function newdaybar () {
+							if (realSecsToTomorrow > 0)
+							{
+								realSecsToTomorrow--;
+								var percentage = (realSecsToTomorrow / secPerDay) * 100;
+								$('.progress-newdaybar').css('width' , percentage.toFixed(10) + '%');
+								setTimeout(newdaybar,1000);
+							}
+							else
+							{
+								$('.progress-newdaybar').html('<i class=\"fa fa-sun-o fa-fw\"></i> " . translate_inline("New Day Here") . "');
+							}
+						}
+						newdaybar();
+					 </script>				
+				";
 			}
 			setcharstat("Personal Info", $stat, $new);
 			break;
