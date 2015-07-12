@@ -30,7 +30,7 @@ function newdaybar_getmoduleinfo(){
 		"name"=>"New Day Bar",
 		"version"=>"1.2",
 		"author"=>"Joshua Ecklund",
-                "download"=>"http://dragonprime.net/users/mProwler/newdaybar.zip",
+        "download"=>"http://dragonprime.net/users/mProwler/newdaybar.zip",
 		"category"=>"Stat Display",
 		"settings"=>array(
 			"New Day Bar Module Settings,title",
