@@ -1,0 +1,73 @@
+/** Barra de progreso para los fondos
+ *
+ */
+
+// Barra animaciones
+// -------------------------
+
+// WebKit
+@-webkit-keyframes progress-funddrivebar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+// Spec and IE10+
+@keyframes progress-funddrivebar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+//Contenedor
+.funddrivebar
+{
+  overflow: hidden;
+  height: 15px;
+  margin-bottom: 0;
+  background-color: @progress-bg;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+
+//Barra de progreso
+.progress-funddrivebar 
+{
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 11px;
+  line-height: 15px;
+  color: contrast(@progress-bg);
+  text-align: center;
+  background-color: @progress-bg;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+  transition: width .6s ease;
+  white-space: nowrap;
+}
+
+// Striped bars
+.progress-striped .progress-funddrivebar,
+.progress-funddrivebar-striped 
+{
+  #gradient > .striped();
+  background-size: 25px 25px;
+}
+
+// Call animation for the active one
+.funddrivebar.active .progress-funddrivebar,
+.progress-funddrivebar.active 
+{
+  animation: progress-funddrivebar-stripes 5s linear infinite;
+}
+
+//## Variaciones
+.progress-funddrivebar-color 
+{
+  .progress-bar-variant(@progress-funddrivebar-color);
+  color: contrast(@progress-funddrivebar-color);
+}
+.progress-funddrivebar-full 
+{
+  .progress-bar-variant(@progress-funddrivebar-full);
+  color: contrast(@progress-funddrivebar-full);
+}

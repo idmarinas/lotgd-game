@@ -55,7 +55,8 @@ function funddrive_dohook($hookname,$args){
 		$goal = $prog['goal'];
 		$pct = $prog['percent'];
 		$current = $prog['current'];
-
+		
+		$text = "";
 		if (get_module_setting("usetext")) {
 			$simbol = get_module_setting("simbol");
 			if (get_module_setting("simbolPosition"))
@@ -68,16 +69,14 @@ function funddrive_dohook($hookname,$args){
 			}
 			
 			
-			$res = "".str_replace(' ','&nbsp;',get_module_setting("indicatorText"))."&nbsp;$out".(get_module_setting("showdollars")?" ". $currencyText:"");
+			$text = "".str_replace(' ','&nbsp;',get_module_setting("indicatorText"))."&nbsp;$out".(get_module_setting("showdollars")?" ". $currencyText:"");
 		}
 		switch(get_module_setting("usebar")) {
 		case 1:
-			$nonpct = 100-$pct;
-			if ($pct < 100){
-				$res = "<div align='center'><table align='center' style='border: solid 1px #000000;' bgcolor='#FF0000' cellpadding='0' cellspacing='0' width='90%' height='10'><caption align='bottom'>$res</caption><tr><td class='padding0' width='$pct%' bgcolor='#FFFF00'></td><td class='padding0' width='$nonpct%'></td></tr></table></div>";
-			}else{
-				$res = "<div align='center'><table align='center' style='border: solid 1px #000000;' bgcolor='#00FF00' cellpadding='0' cellspacing='0' width='150' height='10'><caption align='bottom'>$res</caption><tr><td width='100%'></td></tr></table></div>";
-			}
+			$color = ($pct < 100 ? "progress-funddrivebar-color" : "progress-funddrivebar-full");
+			$res = "<div class='funddrivebar'>
+					 	<div class='progress-funddrivebar $color' style='width: $pct%;'>$text</div>
+					 </div>";
 			break;
 		case 2:
 			$nonpct = 100-$pct;
