@@ -75,7 +75,7 @@ function funddrive_dohook($hookname,$args){
 		case 1:
 			$color = ($pct < 100 ? "progress-funddrivebar-color" : "progress-funddrivebar-full");
 			$res = "<div class='funddrivebar'>
-					 	<div class='progress-funddrivebar $color' style='width: $pct%;'>$text</div>
+					 	<div class='progress-funddrivebar $color' style='width: $pct%;'>&nbsp;$text</div>
 					 </div>";
 			break;
 		case 2:
