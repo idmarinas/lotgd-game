@@ -136,7 +136,7 @@ function racetroll_dohook($hookname,$args){
 			racetroll_checkcity();
 			apply_buff("racialbenefit",array(
 				"name"=>"`@Trollish Strength`0",
-	 			"atkmod"=>"(<attack>?(1+((1+floor(<level>/5))/<attack>)):0)",
+	 			"atkmod"=>"(<attack>?(1+((1+floor(<level>/5))/<attack>)):1)",
 				"allowinpvp"=>1,
 				"allowintrain"=>1,
 				"rounds"=>-1,

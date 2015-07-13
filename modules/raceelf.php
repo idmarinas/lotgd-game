@@ -124,7 +124,7 @@ function raceelf_dohook($hookname,$args){
 			raceelf_checkcity();
 			apply_buff("racialbenefit",array(
 				"name"=>"`@Elvish Awareness`0",
-				"defmod"=>"(<defense>?(1+((1+floor(<level>/5))/<defense>)):0)",
+				"defmod"=>"(<defense>?(1+((1+floor(<level>/5))/<defense>)):1)",
 				"allowinpvp"=>1,
 				"allowintrain"=>1,
 				"rounds"=>-1,
