@@ -1,0 +1,585 @@
+//Colores sin variación
+.span-colors()
+{
+	//== Colores usados por el juego
+	//
+	//## Normal
+	.colBlue
+	{
+		color : @col-blue;
+	}
+	.colLime
+	{
+		color: @col-lime;
+	}
+	.colBlack
+	{
+		color: @col-black;
+	}
+	.colRose
+	{
+		color : @col-rose;
+	}
+	.colbeige
+	{
+		color: @col-beige;
+	}
+	.colkhaki
+	{
+		color: @col-khaki;
+	}
+	.colsalmon 
+	{
+		color: @col-salmon;
+	}
+	.colwheat 
+	{
+		color: @col-wheat;
+	}
+	.coltan 
+	{
+		color: @col-tan;
+	}
+	.colblueviolet 
+	{
+		color: @col-blue-violet;
+	}
+	.coliceviolet 
+	{
+		color : @col-ice-violet;
+	}
+	.colburlywood
+	{
+		color: @col-burlywood;
+	}
+	.colaquamarine
+	{
+		color: @col-aqua-marine;
+	}
+	.colMdBlue
+	{
+		color: @col-md-blue;
+	}
+	.colMdGrey
+	{
+		color: @col-md-grey;
+	}
+	
+	//## Ocuros
+	.colDkBlue
+	{
+		color: @col-dk-blue
+	}
+	.colDkGreen
+	{
+		color: @col-dk-green
+	}
+	.colDkCyan
+	{
+		color: @col-dk-cyan;
+	}
+	.colDkRed
+	{
+		color: @col-dk-red
+	}
+	.colDkMagenta
+	{
+		color: @col-dk-magenta;
+	}
+	.colDkYellow
+	{
+		color: @col-dk-yellow;
+	}
+	.colDkWhite
+	{
+		color: @col-dk-white;
+	}
+	.colDkOrange
+	{
+		color : @col-dk-orange;
+	}
+	.colDkBrown
+	{
+		color: @col-dk-brown;
+	}
+	.coldarkkhaki
+	{
+		color: @col-dk-khaki;
+	}
+	.colDkLinkBlue 
+	{
+		color: @col-dk-linkBlue;
+	}
+	.colLtRust
+	{
+		color: @col-dk-rust;
+	}
+	.coldarkseagreen
+	{
+		color: @col-dark-sea-green;
+	}
+	
+	//## Claros
+	.colLtBlue
+	{
+		color: @col-lt-blue;
+	}
+	.colLtGreen
+	{
+		color: @col-lt-green;
+	}
+	.colLtCyan
+	{
+		color: @col-lt-cyan;
+	}
+	.colLtRed
+	{
+		color: @col-lt-red;
+	}
+	.colLtMagenta
+	{
+		color: @col-lt-magenta;
+	}
+	.colLtYellow
+	{
+		color: @col-lt-yellow;
+	}
+	.colLtWhite
+	{
+		color: @col-lt-white;
+	}
+	.colLtBlack
+	{
+		color: @col-lt-black;
+	}
+	.colLtOrange
+	{
+		color: @col-lt-orange;
+	}
+	.colLtBrown
+	{
+		color: @col-lt-brown;
+	}
+	.colXLtGreen
+	{
+		color: @colX-lt-green;
+	}
+	.collightsalmon
+	{
+		color: @col-lt-salmon;
+	}
+	.colLtLinkBlue
+	{
+		color: @col-lt-linkBlue;
+	}
+	.colLtRust
+	{
+		color: @col-lt-rust;
+	}	
+}
+
+//Colores con variación más clara
+.span-colors-lighten(@percent : 0.2)
+{
+	//== Colores usados por el juego
+	//
+	//## Normal
+	.colBlue
+	{
+		color : lighten(@col-blue, percentage(@percent));
+	}
+	.colLime
+	{
+		color: lighten(@col-lime, percentage(@percent));
+	}
+	.colBlack
+	{
+		color: lighten(@col-black, percentage(@percent));
+	}
+	.colRose
+	{
+		color : lighten(@col-rose, percentage(@percent));
+	}
+	.colbeige
+	{
+		color: lighten(@col-beige, percentage(@percent));
+	}
+	.colkhaki
+	{
+		color: lighten(@col-khaki, percentage(@percent));
+	}
+	.colsalmon 
+	{
+		color: lighten(@col-salmon, percentage(@percent));
+	}
+	.colwheat 
+	{
+		color: lighten(@col-wheat, percentage(@percent));
+	}
+	.coltan 
+	{
+		color: lighten(@col-tan, percentage(@percent));
+	}
+	.colblueviolet 
+	{
+		color: lighten(@col-blue-violet, percentage(@percent));
+	}
+	.coliceviolet 
+	{
+		color : lighten(@col-ice-violet, percentage(@percent));
+	}
+	.colburlywood
+	{
+		color: lighten(@col-burlywood, percentage(@percent));
+	}
+	.colaquamarine
+	{
+		color: lighten(@col-aqua-marine, percentage(@percent));
+	}
+	.colMdBlue
+	{
+		color: lighten(@col-md-blue, percentage(@percent));
+	}
+	.colMdGrey
+	{
+		color: lighten(@col-md-grey, percentage(@percent));
+	}
+	
+	//## Ocuros
+	.colDkBlue
+	{
+		color: lighten(@col-dk-blue, percentage(@percent))
+	}
+	.colDkGreen
+	{
+		color: lighten(@col-dk-green, percentage(@percent))
+	}
+	.colDkCyan
+	{
+		color: lighten(@col-dk-cyan, percentage(@percent));
+	}
+	.colDkRed
+	{
+		color: lighten(@col-dk-red, percentage(@percent))
+	}
+	.colDkMagenta
+	{
+		color: lighten(@col-dk-magenta, percentage(@percent));
+	}
+	.colDkYellow
+	{
+		color: lighten(@col-dk-yellow, percentage(@percent));
+	}
+	.colDkWhite
+	{
+		color: lighten(@col-dk-white, percentage(@percent));
+	}
+	.colDkOrange
+	{
+		color : lighten(@col-dk-orange, percentage(@percent));
+	}
+	.colDkBrown
+	{
+		color: lighten(@col-dk-brown, percentage(@percent));
+	}
+	.coldarkkhaki
+	{
+		color: lighten(@col-dk-khaki, percentage(@percent));
+	}
+	.colDkLinkBlue 
+	{
+		color: lighten(@col-dk-linkBlue, percentage(@percent));
+	}
+	.colLtRust
+	{
+		color: lighten(@col-dk-rust, percentage(@percent));
+	}
+	.coldarkseagreen
+	{
+		color: lighten(@col-dark-sea-green, percentage(@percent));
+	}
+	
+	//## Claros
+	.colLtBlue
+	{
+		color: lighten(@col-lt-blue, percentage((@percent - 0.05)));
+	}
+	.colLtGreen
+	{
+		color: lighten(@col-lt-green, percentage((@percent - 0.05)));
+	}
+	.colLtCyan
+	{
+		color: lighten(@col-lt-cyan, percentage((@percent - 0.05)));
+	}
+	.colLtRed
+	{
+		color: lighten(@col-lt-red, percentage((@percent - 0.05)));
+	}
+	.colLtMagenta
+	{
+		color: lighten(@col-lt-magenta, percentage((@percent - 0.05)));
+	}
+	.colLtYellow
+	{
+		color: lighten(@col-lt-yellow, percentage((@percent - 0.05)));
+	}
+	.colLtWhite
+	{
+		color: lighten(@col-lt-white, percentage((@percent - 0.05)));
+	}
+	.colLtBlack
+	{
+		color: lighten(@col-lt-black, percentage((@percent - 0.05)));
+	}
+	.colLtOrange
+	{
+		color: lighten(@col-lt-orange, percentage((@percent - 0.05)));
+	}
+	.colLtBrown
+	{
+		color: lighten(@col-lt-brown, percentage((@percent - 0.05)));
+	}
+	.colXLtGreen
+	{
+		color: lighten(@colX-lt-green, percentage((@percent - 0.05)));
+	}
+	.collightsalmon
+	{
+		color: lighten(@col-lt-salmon, percentage((@percent - 0.05)));
+	}
+	.colLtLinkBlue
+	{
+		color: lighten(@col-lt-linkBlue, percentage((@percent - 0.05)));
+	}
+	.colLtRust
+	{
+		color: lighten(@col-lt-rust, percentage((@percent - 0.05)));
+	}	
+}
+
+//Colores con variación más oscura
+.span-colors-darken(@percent : 0.2)
+{
+	//== Colores usados por el juego
+	//
+	//## Normal
+	.colBlue
+	{
+		color : darken(@col-blue, @percent);
+	}
+	.colLime
+	{
+		color: darken(@col-lime, @percent);
+	}
+	.colBlack
+	{
+		color: darken(@col-black, @percent);
+	}
+	.colRose
+	{
+		color : darken(@col-rose, @percent);
+	}
+	.colbeige
+	{
+		color: darken(@col-beige, @percent);
+	}
+	.colkhaki
+	{
+		color: darken(@col-khaki, @percent);
+	}
+	.colsalmon 
+	{
+		color: darken(@col-salmon, @percent);
+	}
+	.colwheat 
+	{
+		color: darken(@col-wheat, @percent);
+	}
+	.coltan 
+	{
+		color: darken(@col-tan, @percent);
+	}
+	.colblueviolet 
+	{
+		color: darken(@col-blue-violet, @percent);
+	}
+	.coliceviolet 
+	{
+		color : darken(@col-ice-violet, @percent);
+	}
+	.colburlywood
+	{
+		color: darken(@col-burlywood, @percent);
+	}
+	.colaquamarine
+	{
+		color: darken(@col-aqua-marine, @percent);
+	}
+	.colMdBlue
+	{
+		color: darken(@col-md-blue, @percent);
+	}
+	.colMdGrey
+	{
+		color: darken(@col-md-grey, @percent);
+	}
+	
+	//## Ocuros
+	.colDkBlue
+	{
+		color: darken(@col-dk-blue, @percent)
+	}
+	.colDkGreen
+	{
+		color: darken(@col-dk-green, @percent)
+	}
+	.colDkCyan
+	{
+		color: darken(@col-dk-cyan, @percent);
+	}
+	.colDkRed
+	{
+		color: darken(@col-dk-red, @percent)
+	}
+	.colDkMagenta
+	{
+		color: darken(@col-dk-magenta, @percent);
+	}
+	.colDkYellow
+	{
+		color: darken(@col-dk-yellow, @percent);
+	}
+	.colDkWhite
+	{
+		color: darken(@col-dk-white, @percent);
+	}
+	.colDkOrange
+	{
+		color : darken(@col-dk-orange, @percent);
+	}
+	.colDkBrown
+	{
+		color: darken(@col-dk-brown, @percent);
+	}
+	.coldarkkhaki
+	{
+		color: darken(@col-dk-khaki, @percent);
+	}
+	.colDkLinkBlue 
+	{
+		color: darken(@col-dk-linkBlue, @percent);
+	}
+	.colLtRust
+	{
+		color: darken(@col-dk-rust, @percent);
+	}
+	.coldarkseagreen
+	{
+		color: darken(@col-dark-sea-green, @percent);
+	}
+	
+	//## Claros
+	.colLtBlue
+	{
+		color: darken(@col-lt-blue, percentage((@percent - 0.05)));
+	}
+	.colLtGreen
+	{
+		color: darken(@col-lt-green, percentage((@percent - 0.05)));
+	}
+	.colLtCyan
+	{
+		color: darken(@col-lt-cyan, percentage((@percent - 0.05)));
+	}
+	.colLtRed
+	{
+		color: darken(@col-lt-red, percentage((@percent - 0.05)));
+	}
+	.colLtMagenta
+	{
+		color: darken(@col-lt-magenta, percentage((@percent - 0.05)));
+	}
+	.colLtYellow
+	{
+		color: darken(@col-lt-yellow, percentage((@percent - 0.05)));
+	}
+	.colLtWhite
+	{
+		color: darken(@col-lt-white, percentage((@percent - 0.05)));
+	}
+	.colLtBlack
+	{
+		color: darken(@col-lt-black, percentage((@percent - 0.05)));
+	}
+	.colLtOrange
+	{
+		color: darken(@col-lt-orange, percentage((@percent - 0.05)));
+	}
+	.colLtBrown
+	{
+		color: darken(@col-lt-brown, percentage((@percent - 0.05)));
+	}
+	.colXLtGreen
+	{
+		color: darken(@colX-lt-green, percentage((@percent - 0.05)));
+	}
+	.collightsalmon
+	{
+		color: darken(@col-lt-salmon, percentage((@percent - 0.05)));
+	}
+	.colLtLinkBlue
+	{
+		color: darken(@col-lt-linkBlue, percentage((@percent - 0.05)));
+	}
+	.colLtRust
+	{
+		color: darken(@col-lt-rust, percentage((@percent - 0.05)));
+	}	
+}
+//Colores
+// .colDkBlue    { color: #000040; }
+// .colDkGreen   { color: #004000; }
+// .colDkCyan    { color: #004040; }
+// .colDkRed     { color: #400000; }
+// .colDkMagenta { color: #400040; }
+// .colDkYellow  { color: #404000; }
+// .colDkWhite   { color: #303030; }
+// .colLtBlue    { color: #000060; }
+// .colLtGreen   { color: #006000; }
+// .colLtCyan    { color: #006060; }
+// .colLtRed     { color: #600000; }
+// .colLtMagenta { color: #600060; }
+// .colLtYellow  { color: #606000; }
+// .colLtWhite   { color: #505050; }
+// .colLtBlack   { color: #222222; }
+// .colDkOrange  { color: #4a2100; }
+// .colLtOrange  { color: #994400; }
+// .colBlue  	{ color: #0070FF; }
+// .colLime  	{ color: #DDFFBB; }
+// .colBlack  	{ color: #000000; }
+// .colRose 	{ color: #9F819F; }
+// .colblueviolet 	{ color: #9A5BEE; }
+// .coliceviolet	{ color: #6D7B9F; }
+// .colLtBrown 	{ color: #8F7D47; }
+// .colDkBrown 	{ color: #6b563f; }
+// .colXLtGreen	{ color: #009900; }
+// .colAttention 	{ background-color: #00FF00; color: #FF0000; }
+// .colWhiteBlack 	{ background-color: #FFFFFF; color: #000000; }
+// .colbeige  { color: #F5F5DC; }
+// .colkhaki  { color: #F0E68C; }
+// .coldarkkhaki  { color: #5F5B35; }
+// .colaquamarine  { color: #7FFFD4; }
+// .coldarkseagreen  { color: #8FBC8F; }
+// .collightsalmon  { color: #8F6859; }
+// .colsalmon  { color: #7F5D4F; }
+// .colwheat  { color: #F5DEB3; }
+// .coltan  { color: #D2B48C; }
+// .colBack  	{ background-color: #00FFFF; color: #000000; }
+// .colLtLinkBlue { color: #0069AF; }
+// .colDkLinkBlue { color: #004C7F; }
+// .colDkRust { color: #8D6060; }
+// .colLtRust { color: #B07878; }
+// .colMdBlue { color: #0000F0; }
+// .colMdGrey { color: #444444; }
+// .colburlywood { color: #DEB887; }
