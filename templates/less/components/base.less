@@ -70,6 +70,8 @@ table
 			background-color: @trlight-color;
 			color: contrast(@trlight-color);
 			
+			.span-colors-darken();
+			
 			.colLtWhite
 			{
 				color : inherit;
@@ -96,6 +98,8 @@ table
 				background-color: lighten(@container-bg, 20%);
 				color: contrast(lighten(@container-bg, 20%));
 				
+				.span-colors-darken();
+				
 				span
 				{
 					color: inherit;
@@ -108,6 +112,8 @@ table
 		{ 
 			background-color: @trdark-color;
 			color: contrast(@trdark-color);
+			
+			.span-colors-lighten();
 			
 			.colLtWhite
 			{
@@ -135,6 +141,8 @@ table
 			{
 				background-color: darken(@container-bg, 40%);
 				color: contrast(darken(@container-bg, 40%));
+				
+				.span-colors-lighten();
 				
 				span
 				{
