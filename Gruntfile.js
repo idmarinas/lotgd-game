@@ -37,6 +37,7 @@ module.exports = function (grunt) {
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
               '!**/*.less',//Ignorar archivos .less
+              '!less/**',//Ignorar directorio less
               '!**/*.dist'//Ignorar archivos .dist
             ],
             dest: 'dist/'
