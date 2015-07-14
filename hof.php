@@ -95,7 +95,7 @@ function display_table($title, $sql, $none=false, $foot=false,
 	if ($totalplayers > $playersperpage) {
 		output("`c`b`^%s`0`b `7(Page %s: %s-%s of %s)`0`c`n", $title, $page, $from, $to, $totalplayers);
 	} else {
-		output("`c`b`^%s`0`b`c`n", $title);
+		output_notl("`c`b`^%s`0`b`c`n", $title);
 	}
 	rawoutput("<table cellspacing='0' cellpadding='2' align='center'>");
 	rawoutput("<tr class='trhead'>");
