@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html lang="{lang}">
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="imagetoolbar" content="false">
+		<meta http-equiv="Window-target" content="_top">
+		<meta name="robots" content="noindex, nofollow">
+		<meta http-equiv="Content-Language" content="es">
+		
 		<title>{title}</title>
 		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
 		<link href='templates/animate.min.css' rel='stylesheet' type='text/css'>
@@ -33,11 +41,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="imagetoolbar" content="false">
+		<meta http-equiv="Window-target" content="_top">
+		<meta name="robots" content="index, follow">
+		<meta http-equiv="Content-Language" content="es">
+		<meta name="description" content="Bienvenido a la Leyenda del Dragón Verde, un juego de rol de navegador, basado en Legend of the Red Dragon de Seth Able. Busca y derrota al temible Dragón Verde.">
+		
+		<!-- Meta datos Open Graph -->
+		<meta property="og:title" content="La Leyenda del Dragón Verde">
+		<meta property="og:image" content="http://dragonverde.infommo.es/images/Medallion-Green.gif">
+		<meta property="og:type" content="website">
+		<meta property="og:description" content="Bienvenido a la Leyenda del Dragón Verde, un juego de rol de navegador, basado en Legend of the Red Dragon de Seth Able. Busca y derrota al temible Dragón Verde.">
+		<meta property="og:url" content="http://dragonverde.infommo.es">
+		<meta property="og:locale" content="es_ES">
+		
 		<title>{title}</title>
 		<link href='templates/font-awesome.min.css' rel='stylesheet' type='text/css'>
 		<link href='templates/animate.min.css' rel='stylesheet' type='text/css'>
 		<link href='templates/dragon_verde.css' rel='stylesheet' type='text/css'>
-		<!-- Scripts para la página -->{headscript}{script}</head>
+		<!-- Scripts para la página -->
+		{headscript}{script}
+	</head>
 	<body>
 		<table id="dragon-container">
 			<tbody>
@@ -45,9 +72,7 @@
 				<td>
 					<table>
 						<tr>
-							<td id="dragon-motd">
-								<br>
-								<br></td>
+							<td>&nbsp;</td>
 							<td id="dragon-banner">{headerad}</td>
 						</tr>
 					</table>
