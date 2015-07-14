@@ -258,6 +258,10 @@ function newbieisland_dohook($hookname,$args){
 			blocknav("hof.php");
 			// Make sure that Blusprings can show up on newbie island.
 			unblocknav("train.php");
+			
+			//Desbloquear las dos tiendas
+			unblocknav("armor.php");
+			unblocknav("weapons.php");
 			//if you want your module to appear in the newbie village, you'll have to hook on village
 			//and unblocknav() it.  I warn you, very very few modules will ever be allowed in the newbie
 			//village and get support for appearing in the core distribution; one of the major reasons
