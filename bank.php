@@ -146,7 +146,7 @@ if ($op==""){
 		}
 	}
 }elseif($op=="deposit"){
-	output("`0");
+	output_notl("`0");
 	rawoutput("<form action='bank.php?op=depositfinish' method='POST'>");
 	$balance = translate_inline("`@Elessa`6 says, \"`@You have a balance of `^%s`@ gold in the bank.`6\"`n");
 	$debt = translate_inline("`@Elessa`6 says, \"`@You have a `\$debt`@ of `^%s`@ gold to the bank.`6\"`n");

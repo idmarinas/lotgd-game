@@ -14,7 +14,7 @@ foreach ($order as $current_rank) {
 		output("<li>MySQL5 is a minimum requirement</li>",true);
 		output("<li>Features should be done focussed on avoiding high-load and focussing on many (MMORG) users</li>",true);
 		output("<li>Roleplay like in D&D should be possible</li>",true);
-		output("</ul>`n`n",true);
+		output_notl("</ul>`n`n",true);
 		output("For the download of this version please go to <a href='http://nb-core.org'>http://nb-core.org</a> where the latest development version (daily snapshots) and stable versions are hosted.`n`n",true);
 		output("`n`nI do not ship modules with it, most modules from 1.x.x DP Editions and previous will work. However there is no guarantee... test them. And be aware that many unbalance gameplay as they give out too much EXP/Buffs/Atk+Def stats.");
 		output_notl("`n`n");
