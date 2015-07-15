@@ -98,11 +98,11 @@ if ($pdk==1){
 }
 
 if ($dp < $dkills) {
-	require("lib/newday/dragonpointspend.php");
+	require_once("lib/newday/dragonpointspend.php");
 } elseif (!$session['user']['race'] || $session['user']['race']==RACE_UNKNOWN){
-	require("lib/newday/setrace.php");
+	require_once("lib/newday/setrace.php");
 }elseif ($session['user']['specialty']==""){
-	require("lib/newday/setspecialty.php");
+	require_once("lib/newday/setspecialty.php");
 }else{
 	page_header("It is a new day!");
 	rawoutput("<font size='+1'>");
@@ -182,8 +182,8 @@ if ($dp < $dkills) {
 		apply_buff('mount',$buff);
 	}
 	if ($dkff>0) {
-		output("`n`2You gain `^%s`2 forest %s from spent dragon points!",
-				$dkff, translate_inline($dkff == 1?"fight":"fights"));
+	output("`n`2You gain `^%s`2 forest %s from spent dragon points!",
+	 		$dkff, translate_inline($dkff == 1?"fight":"fights"));
 	}
 	$r1 = e_rand(-1,1);
 	$r2 = e_rand(-1,1);
@@ -217,7 +217,7 @@ if ($dp < $dkills) {
 		}
 		$sff = abs($resurrectionturns);
 		output("`2As a result, you `^%s %s forest %s`2 for today!`n",
-				$gain, $sff, translate_inline($sff==1?"fight":"fights"));
+			$gain, $sff, translate_inline($sff==1?"fight":"fights"));
 	}
 	$rp = $session['user']['restorepage'];
 	$x = max(strrpos("&",$rp),strrpos("?",$rp));
