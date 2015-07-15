@@ -62,7 +62,7 @@ function healthbar_dohook($hookname,$args){
 			else $color = "progress-healthbar-dead-60";
 			$ccode = "`@";
 		} elseif ($pct > 25) {
-			if ($session['user']['alive']) $color = "progress-healthbar-alive-25 animated bounce";
+			if ($session['user']['alive']) $color = "progress-healthbar-alive-25 animated pulse";
 			else $color = "progress-healthbar-dead-25";
 			$ccode = "`^";
 			$text = '<i class="fa fa-exclamation fa-fw"></i>';

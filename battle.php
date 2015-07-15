@@ -228,6 +228,7 @@ if ($op != "newtarget") {
 						$companions = $newcompanions;
 
 						if ($op=="fight" || $op=="run" || $surprised){
+						$badguy = modulehook("startofround",$badguy);
 							// Grab an initial roll.
 							$roll = rolldamage(&$badguy);
 							if ($op=="fight" && !$surprised){
@@ -376,7 +377,9 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
-
+		if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
+			$badguy = modulehook("endofround",$badguy);
+		}
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
