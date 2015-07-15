@@ -323,6 +323,7 @@ function page_footer($saveuser=true){
 					window.clearInterval(active_mail_interval);
 				}
 			</script>";
+			$script.="<script src=\"templates/jquery.js\"></script>";
 					
 			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span><span id='notify'></span></body>",$header);
 		} else {
