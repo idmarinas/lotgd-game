@@ -214,10 +214,10 @@ function cities_dohook($hookname,$args){
 			tlschema();
 			addnav("H?Healer's Hut","healer.php?return=village.php");
 		}
-		tlschema($args['schemas']['gatenav']);
-		addnav($args['gatenav']);
-		tlschema();
-		addnav("Travel","runmodule.php?module=cities&op=travel");
+		//tlschema($args['schemas']['gatenav']);
+		//addnav($args['gatenav']);
+		//tlschema();
+		// addnav("Travel","runmodule.php?module=cities&op=travel"); No es necesario, se usa el mapa para viajar
 		if (get_module_pref("paidcost") > 0) set_module_pref("paidcost", 0);
 		break;
 	case "travel":
