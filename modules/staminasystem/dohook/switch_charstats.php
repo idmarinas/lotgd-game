@@ -38,8 +38,6 @@ $redpct = get_stamina(0);
 $amberpct = get_stamina(1);
 $greenpct = get_stamina(2);
 
-$stat = "Stamina";
-
 $pctoftotal = round($stamina / $daystamina * 100, 2);
 
 $greentotal = round((($daystamina - $redpoint - $amberpoint)/$daystamina)*100);
@@ -50,36 +48,25 @@ $greenwidth = (($greentotal / 100) * $greenpct);
 $amberwidth = (($ambertotal / 100) * $amberpct);
 $redwidth = (($redtotal / 100) * $redpct);
 
-$colorgreen = "#00FF00";
-$coloramber = "#FFA200";
-$colorred = "#FF0000";
-$colordarkgreen = "#003300";
-$colordarkamber = "#2F1E00";
-$colordarkred = "#330000";
-$colorbackground = $colordarkgreen;
+$greendarkwidth = $greentotal - $greenwidth;
+$amberdarkwidth = $ambertotal - $amberwidth;
+$redwdarkidth = $redtotal - $redwidth;
 
-if ($greenpct == 0){
-	$colorgreen = $colordarkamber;
-	$colorbackground = $colordarkamber;
-}
-if ($amberpct == 0){
-	$colorgreen = $colordarkred;
-	$coloramber = $colordarkred;
-	$colorbackground = $colordarkred;
-}
+$totalwidth = $greenwidth + $amberwidth + $redwidth;
 
-$pctgrey = (((100 - $greenwidth)-$amberwidth)-$redwidth);
+if ($totalwidth > 100) $greenwidth -= ($totalwidth -100);
 
-$new = "";
-$new .= "<font color=$colorbackground>$pctoftotal%</font>
-<br><table style='border: solid 1px #000000' bgcolor='$colorbackground' cellpadding='0' cellspacing='0' width='70' height='5'><tr><td width='$redwidth%' bgcolor='$colorred'></td><td width='$amberwidth%' bgcolor='$coloramber'></td><td width='$greenwidth%' bgcolor='$colorgreen'></td><td width='$pctgrey%'></td></tr></table>
+$new = "<a class='progress-staminabar-icon-info' title='$pctoftotal%' href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\"><i class='fa fa-info-circle fa-fw'></i></a>
+		<div class='staminabar $animated'>
+			<div class='progress-staminabar progress-staminabar-red' style='width: $redwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-red' style='width: $redwdarkidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-amber' style='width: $amberwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-amber' style='width: $amberdarkwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-green' style='width: $greenwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-green' style='width: $greendarkwidth%;'></div>
+		</div>";
 
-
-
-<a href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\">".translate_inline("Show Details")."</a>";
-
-// $new .= "<table style='border: solid 1px #000000' bgcolor='#777777' cellpadding='0' cellspacing='0' width='70' height='5'><tr><td width='$pctoftotal%' bgcolor='$color'></td><td width='$pctused%'></td></tr></table>";
-setcharstat("Character Info", $stat, $new);
+setcharstat("Character Info", "Stamina", $new);
 
 
 
