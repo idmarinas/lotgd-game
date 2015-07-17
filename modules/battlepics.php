@@ -1,9 +1,4 @@
 <?php
-if ($_GET['op']=="download"){ // this offers the module on every server for download
- $dl=join("",file("battlepics.php"));
- echo $dl;
-}
-
 /************************************************************************
 *                                                                       *
 *	Author: Melisande                     				*
@@ -67,7 +62,7 @@ function battlepics_getmoduleinfo(){
 		"author"=>"Melisande, mod. by Dorian and eph",
 		"version"=>"1.1",
 		"category"=>"General",
-		"download"=>"modules/battlepics.php?op=download",
+		"download"=>"http://dragonprime.net/index.php?module=Downloads;sa=dlview;id=525",
 		"settings"=>array(
     	"Image Display,title",
     	"allowforestpics"=>"Display images of creatures during forest fights,bool|true",
