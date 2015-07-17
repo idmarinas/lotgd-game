@@ -104,18 +104,22 @@ function staminafood_dohook($hookname,$args){
 				if ($nut < 0 && $nut >= -20){
 					output("`0You are feeling `4kinda weak and malnourished`0.  You lose some Stamina.`n");
 					removestamina(25000);
+					debug (-25000);
 				}
 				if ($nut < -20 && $nut >= -50){
 					output("`0You are feeling `4more than a little weak and malnourished`0.  You lose some Stamina.`n");
 					removestamina(50000);
+					debug (-50000);
 				}
 				if ($nut < -50 && $nut >= -100){
 					output("`0You are feeling `4very weak and ridiculously hungry`0.  You lose some Stamina.`n");
 					removestamina(100000);
+					debug (-100000);
 				}
 				if ($nut < -100){
 					output("`0You are `4slowly dying of malnutrition`0.  You lose some Stamina.`n");
 					removestamina(200000);
+					debug(-200000);
 				}
 				if ($nut >= 0 && $nut<50){
 					output("`0You are feeling quite healthy!`n");
@@ -123,14 +127,17 @@ function staminafood_dohook($hookname,$args){
 				if ($nut>=50 && $nut<100){
 					output("`0You are feeling `2well-nourished and content`0!  You gain some Stamina!`n");
 					addstamina(50000);
+					debug(50000);
 				}
 				if ($nut>=100){
 					output("`0You are feeling `2strong and energetic`0!  You gain some Stamina!`n");
 					addstamina(100000);
+					debug(100000);
 				}
 				if ($fat<0){
 					output("`0You are looking `2trim and slender`0!  You gain some Stamina!`n");
 					addstamina(50000);
+					debug(50000);
 				}
 				if ($fat>=0 && $fat<20){
 					output("`0You are looking pleasantly well-fed!`n");
@@ -138,14 +145,17 @@ function staminafood_dohook($hookname,$args){
 				if ($fat>=20 && $fat<50){
 					output("`0You are looking `4a little bit round!`0  You lose a little Stamina.`n");
 					removestamina(25000);
+					debug(-25000);
 				}
 				if ($fat>=50 && $fat<100){
 					output("`0You are looking `4pretty chunky!`0  You lose some Stamina.`n");
 					removestamina(50000);
+					debug(-50000);
 				}
 				if ($fat>=100){
 					output("`0You are looking... well, let's not mince words.  `4You're fat.  VERY fat.  You look like you just ate a schoolbus full of well-fed orphans`0.  You lose some Stamina.`n");
 					removestamina(100000);
+					debug(-100000);
 				}
 			}
 			break;
