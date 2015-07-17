@@ -90,9 +90,9 @@ function landsky_dohook($hookname,$args){
 			if (get_module_setting('moon2','moons')==1) $num++;
 			if (get_module_setting('moon3','moons')==1) $num++;
 			if (1 == $num) {
-				output("`nIt is too bright to make out the moon.");
+				output("It is too bright to make out the moon.");
 			} else{
-				output("`nIt is too bright to make out the moons.");				
+				output("It is too bright to make out the moons.");				
 			}
 		}
 		modulehook("landsky-moons",$args);
