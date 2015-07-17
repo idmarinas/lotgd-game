@@ -166,6 +166,7 @@ if ($op != "newtarget") {
 	// Run through as many rounds as needed.
 	do {
 		//we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
+		modulehook("startofround-prebuffs");
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
@@ -364,6 +365,10 @@ if ($op != "newtarget") {
 			$companions = $newcompanions;
 			unset($newcompanions);
 
+			if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
+				$badguy = modulehook("endofround",$badguy);
+			}
+			
 			// If any A.I. script wants the current enemy to be deleted completely, we will obey.
 			// For multiple rounds/multiple A.I. scripts we will although unset this order.
 
@@ -377,9 +382,6 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
-		if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
-			$badguy = modulehook("endofround",$badguy);
-		}
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
@@ -497,6 +499,10 @@ if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || 
 	output("`2`bEnd of Round:`b`n");
 	show_enemies($newenemies);
 }
+
+//extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
+$badguy = modulehook("endofpage",$badguy);
+//end extra code
 
 if ($session['user']['hitpoints'] <= 0) {
 	$session['user']['hitpoints'] = 0;
