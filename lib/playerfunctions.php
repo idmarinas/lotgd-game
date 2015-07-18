@@ -156,21 +156,28 @@ function get_player_dragonkillmod($withhitpoints=false) {
 	global $session;
 	$dragonpoints=array_count_values($session['user']['dragonpoints']);
 	$dk=0;
-	foreach ($dragonpoints as $key=>$val) {
-		switch ($key) {
-			//not for wisdom on full scale
-			case "wis":
-				$dk+=0.2*$val;
-				break;
-			case "con":case "str": case "int": case "dex":
-				$dk+=0.3*$val;
-				break;
-			case "at": case "de": 
-				$dk+=$val;
-				break;
-		}
-	}
-	if ($withhitpoints) $dk += (int)(($session['user']['maxhitpoints']-($session['user']['level']*10))/5);
+	// foreach ($dragonpoints as $key=>$val) {
+	// 	switch ($key) {
+	// 		//not for wisdom on full scale
+	// 		case "wis":
+	// 			$dk+=0.2*$val;
+	// 			break;
+	// 		case "con":case "str": case "int": case "dex":
+	// 			$dk+=0.3*$val;
+	// 			break;
+	// 		case "at": case "de": 
+	// 			$dk+=$val;
+	// 			break;
+	// 	}
+	// }
+	//Wisdowm
+	$dk+= (int)0.2*$dragonpoints['wis'];
+	//Constitution, Strength, Inteligence, Dexterity
+	$dk+= (int) 0.3*($dragonpoints['con']+$dragonpoints['str']+$dragonpoints['int']+$dragonpoints['dex']);
+	//Attack, Defense
+	$dk+= (int)($dragonpoints['at']+$dragonpoints['de']);
+	
+	if ($withhitpoints) $dk += (int)($dragonpoints['hp']);
 	return $dk;
 }
 ?>

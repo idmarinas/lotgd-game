@@ -119,7 +119,7 @@ function battlepics_prepname($bp_creature,$bp_level,$bp_picdir,$bp_type='xxx') {
 function battlepics_display($bp_showpic,$bp_pagetype,$hookname = null) {
 	global $bp_creature, $bp_id, $bp_level;
 	if ($bp_pagetype != 'none') {
-		rawoutput("<img src='$bp_showpic' align=\"left\">"); //eph: added align
+		rawoutput("<img class='battlepics' src='$bp_showpic'>"); //eph: added align
 	}
 
 	return true;

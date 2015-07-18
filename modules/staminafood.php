@@ -35,6 +35,7 @@ function staminafood_dohook($hookname,$args){
 			tlschema($args['schemas']['marketnav']);
 			addnav($args['marketnav']);
 			tlschema();
+			addnav("Joe's Diner","runmodule.php?module=staminafood&op=start&location=nh");
 			switch($session['user']['location']){
 				case "NewHome":
 					addnav("Joe's Diner","runmodule.php?module=staminafood&op=start&location=nh");
@@ -170,14 +171,18 @@ function staminafood_dohook($hookname,$args){
 
 function staminafood_run(){
 	global $session;
-	$pmeat1 = has_item_quantity("meat_low");
-	$pmeat2 = has_item_quantity("meat_medium");
-	$pmeat3 = has_item_quantity("meat_high");
+	// $pmeat1 = has_item_quantity("meat_low");
+	// $pmeat2 = has_item_quantity("meat_medium");
+	// $pmeat3 = has_item_quantity("meat_high");
+	$pmeat1 = 1;
+	$pmeat2 = 1;
+	$pmeat3 = 1;
 	addnav("Eat");
 	switch (httpget("op")){
 		case "sellmeat":
 			switch ($session['user']['location']){
 				case "NewHome":
+				default:
 					page_header("Joe's Diner");
 					if (httpget('q')==1){
 						delete_item(has_item("meat_medium"));

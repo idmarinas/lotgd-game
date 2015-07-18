@@ -107,9 +107,7 @@ if ($enemycounter > 0) {
 	modulehook("battle", $enemies);
 	foreach ($enemies as $index=>$badguy) {
 		if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0) {
-			$badguyName = translate_inline($badguy['creaturename']);
-			$badguyWeapon = translate_inline($badguy['creatureweapon']);
-			output("`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n",$badguyName,$badguyWeapon);
+			output("`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n",$badguy['creaturename'],$badguy['creatureweapon']);
 		}
 	}
 	output_notl("`n");
@@ -149,11 +147,10 @@ if ($op != "run" && $op != "fight" && $op != "newtarget") {
 			if (!$surprised) {
 				output("`b`\$Your skill allows you to get the first attack!`0`b`n`n");
 			} else {
-				$badguyName = translate_inline($badguy['creaturename']);
 				if ($options['type'] == 'pvp') {
-					output("`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n",$badguyName);
+					output("`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n",$badguy['creaturename']);
 				}else{
-					output("`b`^%s`\$ surprises you and gets the first round of attack!`0`b`n`n",$badguyName);
+					output("`b`^%s`\$ surprises you and gets the first round of attack!`0`b`n`n",$badguy['creaturename']);
 				}
 				$op = "run";
 			}
@@ -166,7 +163,6 @@ if ($op != "newtarget") {
 	// Run through as many rounds as needed.
 	do {
 		//we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
-		modulehook("startofround-prebuffs");
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
@@ -229,7 +225,6 @@ if ($op != "newtarget") {
 						$companions = $newcompanions;
 
 						if ($op=="fight" || $op=="run" || $surprised){
-						$badguy = modulehook("startofround",$badguy);
 							// Grab an initial roll.
 							$roll = rolldamage(&$badguy);
 							if ($op=="fight" && !$surprised){
@@ -299,8 +294,7 @@ if ($op != "newtarget") {
 									}
 								}
 							}else if($op=="run" && !$surprised){
-								$badguyName = translate_inline($badguy['creaturename']);
-								output("`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n",$badguyName);
+								output("`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n",$badguy['creaturename']);
 							}
 
 							//Need to insert this here because of auto-fighting!
@@ -365,10 +359,6 @@ if ($op != "newtarget") {
 			$companions = $newcompanions;
 			unset($newcompanions);
 
-			if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
-				$badguy = modulehook("endofround",$badguy);
-			}
-			
 			// If any A.I. script wants the current enemy to be deleted completely, we will obey.
 			// For multiple rounds/multiple A.I. scripts we will although unset this order.
 
@@ -382,6 +372,7 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
+
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
@@ -500,10 +491,6 @@ if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || 
 	show_enemies($newenemies);
 }
 
-//extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
-$badguy = modulehook("endofpage",$badguy);
-//end extra code
-
 if ($session['user']['hitpoints'] <= 0) {
 	$session['user']['hitpoints'] = 0;
 	$victory=false;
@@ -560,14 +547,12 @@ function battle_player_attacks($badguy) {
 	if ($options['type'] != "pvp") {
 		$creaturedmg = report_power_move($atk, $creaturedmg);
 	}
-	$badguyName = translate_inline($badguy['creaturename']);
-	
 	if ($creaturedmg==0){
-		output("`4You try to hit `^%s`4 but `\$MISS!`n",$badguyName);
+		output("`4You try to hit `^%s`4 but `\$MISS!`n",$badguy['creaturename']);
 		process_dmgshield($buffset['dmgshield'], 0);
 		process_lifetaps($buffset['lifetap'], 0);
 	}else if ($creaturedmg<0){
-		output("`4You try to hit `^%s`4 but are `\$RIPOSTED `4for `\$%s`4 points of damage!`n",$badguyName,(0-$creaturedmg));
+		output("`4You try to hit `^%s`4 but are `\$RIPOSTED `4for `\$%s`4 points of damage!`n",$badguy['creaturename'],(0-$creaturedmg));
 		$badguy['diddamage']=1;
 		$session['user']['hitpoints']+=$creaturedmg;
 		if ($session['user']['hitpoints'] <= 0) {
@@ -579,7 +564,7 @@ function battle_player_attacks($badguy) {
 		process_dmgshield($buffset['dmgshield'],-$creaturedmg);
 		process_lifetaps($buffset['lifetap'],$creaturedmg);
 	}else{
-		output("`4You hit `^%s`4 for `^%s`4 points of damage!`n",$badguyName,$creaturedmg);
+		output("`4You hit `^%s`4 for `^%s`4 points of damage!`n",$badguy['creaturename'],$creaturedmg);
 		$badguy['creaturehealth']-=$creaturedmg;
 		process_dmgshield($buffset['dmgshield'],-$creaturedmg);
 		process_lifetaps($buffset['lifetap'],$creaturedmg);
@@ -635,19 +620,18 @@ function battle_badguy_attacks($badguy) {
 			$newcompanions = $companions;
 		}
 		$companions = $newcompanions;
-		$badguyName = translate_inline($badguy['creaturename']);
 		if ($defended == false) {
 			if ($selfdmg==0){
-				output("`^%s`4 tries to hit you but `^MISSES!`n",$badguyName);
+				output("`^%s`4 tries to hit you but `^MISSES!`n",$badguy['creaturename']);
 				process_dmgshield($buffset['dmgshield'], 0);
 				process_lifetaps($buffset['lifetap'], 0);
 			}else if ($selfdmg<0){
-				output("`^%s`4 tries to hit you but you `^RIPOSTE`4 for `^%s`4 points of damage!`n",$badguyName,(0-$selfdmg));
+				output("`^%s`4 tries to hit you but you `^RIPOSTE`4 for `^%s`4 points of damage!`n",$badguy['creaturename'],(0-$selfdmg));
 				$badguy['creaturehealth']+=$selfdmg;
 				process_lifetaps($buffset['lifetap'], -$selfdmg);
 				process_dmgshield($buffset['dmgshield'], $selfdmg);
 			}else{
-				output("`^%s`4 hits you for `\$%s`4 points of damage!`n",$badguyName,$selfdmg);
+				output("`^%s`4 hits you for `\$%s`4 points of damage!`n",$badguy['creaturename'],$selfdmg);
 				$session['user']['hitpoints']-=$selfdmg;
 				if ($session['user']['hitpoints'] <= 0) {
 					$badguy['killedplayer'] = true;
