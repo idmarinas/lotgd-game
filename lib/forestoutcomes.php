@@ -187,7 +187,7 @@ function buffbadguy($badguy){
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
 
-	$atkflux = e_rand($dk/4, $dk);
+	$atkflux = e_rand($dk/4, $dk/2);
 	$defflux = $dk-$atkflux;
 
 	$hpflux = e_rand(($dk/2), $dk) * 5;
