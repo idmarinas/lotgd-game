@@ -187,10 +187,10 @@ function buffbadguy($badguy){
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
 
-	$atkflux = e_rand(0, $dk);
-	$defflux = e_rand(0, ($dk-$atkflux));
+	$atkflux = e_rand($dk/4, $dk);
+	$defflux = $dk-$atkflux;
 
-	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
+	$hpflux = e_rand(($dk/2), $dk) * 5;
 	$badguy['creatureattack']+=$atkflux;
 	$badguy['creaturedefense']+=$defflux;
 	$badguy['creaturehealth']+=$hpflux;
