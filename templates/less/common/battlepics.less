@@ -1,0 +1,15 @@
+img.battlepics
+{
+	display: inline-block;
+	float: left;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	padding: 4px;
+	line-height: @line-height-base;
+	background-color: lighten(@body-bg, 30%);
+	border: 1px solid #bbb;
+	border-radius: @border-radius-base;
+	transition: all .2s ease-in-out;
+	max-width: 100%; // Part 1: Set a maximum relative to the parent
+	height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
