@@ -1,0 +1,36 @@
+@trlight-color : lighten(@container-bg, 10%);
+@trdark-color : darken(@container-bg, 30%);
+table.inventory
+{
+	.items-list
+	{
+		td
+		{
+			padding: 5px 5px 5px 15px;
+		}
+		
+		&.trlight
+		{
+			background: @trlight-color;
+			color: contrast(@trlight-color);
+		}
+		
+		&.trdark
+		{
+			background: @trdark-color;
+			color: contrast(@trdark-color);
+		}
+	}
+	
+	.category
+	{
+		font-size: 1.2em;
+		font-weight: bold;
+		padding: 3px;
+	}
+	
+	.items-class
+	{
+		padding: 1px 1px 1px 15px;
+	}
+}
