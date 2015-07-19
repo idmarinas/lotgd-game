@@ -24,18 +24,18 @@
 		if ($item['exectext'] > "") {
 			output($item['exectext'], $item['name']);
 		} else {
-			output("¡Activaste %s!", $item['name']);
+			output("You activate %s!", $item['name']);
 		}
 		require_once("lib/itemeffects.php");
 		$text = get_effect($item, $item['noeffecttext']);
 		output_notl("`n`n%s", $text);
 		if ($session['user']['hitpoints'] <= 0 || $session['user']['alive'] == false) {
-			addnav("Volver");
-			addnav("Noticias Diarias", "news.php");
+			addnav("Return");
+			addnav("Daily News", "news.php");
 		} else {
 			display_item_nav(httpget('hookname'), $return);
-			addnav("Volver");
-			addnav("Volver por donde has venido", $return);
+			addnav("Return");
+			addnav("Return whence you came", $return);
 		}
 		page_footer();
 	} else {

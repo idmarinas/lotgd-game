@@ -1,14 +1,14 @@
 <?php
-	page_header("Editor Objetos");
+	page_header("Item Editor");
 	require_once("lib/superusernav.php");
 	superusernav();
-	addnav("Opciones - Objetos");
-	addnav("Nuevo Objeto", "runmodule.php?module=inventory&op=editor&op2=newitem");
-	addnav("Mostrar todos los objetos", "runmodule.php?module=inventory&op=editor&op2=showitems");
-	addnav("Opciones - Buffs");
-	addnav("Nuevo Buff", "runmodule.php?module=inventory&op=editor&op2=newbuff");
-	addnav("Mostrar todos los buffs", "runmodule.php?module=inventory&op=editor&op2=showbuffs");
-	addnav("Otras Opciones");
+	addnav("Options - Items");
+	addnav("New Item", "runmodule.php?module=inventory&op=editor&op2=newitem");
+	addnav("Show all items", "runmodule.php?module=inventory&op=editor&op2=showitems");
+	addnav("Options - Buffs");
+	addnav("New Buff", "runmodule.php?module=inventory&op=editor&op2=newbuff");
+	addnav("Show all buffs", "runmodule.php?module=inventory&op=editor&op2=showbuffs");
+	addnav("Other Options");
 	require_once("lib/showform.php");
 	switch(httpget('op2')) {
 		case "newitem2":

@@ -12,9 +12,9 @@
 		$count+=$destroyed;
 	}
 	if ($count == 1) {
-		output("`n`2Roto en pedazos estan los restos de lo que un día fue un objeto poderoso por el poder de las llamas del dragón. ");
+		output("`n`2Shattered around you lie the remains of a once mighty item destroyed by the power of the dragon's flames. ");
 	} else if ($count > 1) {
-		output("`n`2Rotos en pedazos estan los restos de lo que un día fue unos objetos poderosos por el poder de las llamas del dragón. ");
-		output("Parece que se han destruido `^%s objetos`2.", $count);
+		output("`n`2Shattered around you lie the remains of once mighty items destroyed by the power of the dragon's flames. ");
+		output("It seems `^%s items`2 have been destroyed.", $count);
 	}
 ?>
