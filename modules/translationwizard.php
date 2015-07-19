@@ -10,7 +10,7 @@ function translationwizard_getmoduleinfo(){
 	    "name"=>"Translation Wizard",
 		"version"=>"1.47",
 		"author"=>"`2Written by Oliver Brendel, `3based on the untranslated.php by Christian Rutsch`nFilescan by `qEdorian`n",
-		"category"=>"Translations",
+		"category"=>"Administrative",
 		"download"=>"http://lotgd-downloads.com",
 		"settings"=>array(
 			"General Preferences,title",
@@ -34,7 +34,7 @@ function translationwizard_getmoduleinfo(){
 		),
 		"prefs"=>array(
 		    "Translation Wizard - User prefs,title",
-				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian"),
+				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Franï¿½ais,dk,Danish,de,Deutsch,es,Espaï¿½ol,it,Italian"),
 				"Note: don't change this if you don't need to... it is set up in the Translation Wizard!,note",
 				"allowed"=>"Does this user have unrestricted access to the wizard?,bool|0",
 				"Note: This is only active if the restriction settings is 'true' in the module settings,note",
