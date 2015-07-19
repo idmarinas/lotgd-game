@@ -13,10 +13,10 @@ function landsky_getmoduleinfo(){
 			"moonBlock"=>"Should the Moons module be blocked during the day?,bool|1",
 			"showhome"=>"Show the Sky on Home Page,enum,0,No,1,Above Login,2,Below Login|1",
 		),
-		"prefs"=>array(
-			"The Sky - General,title",
-			"user_showsky"=>"View the Sky in the Village,bool|1",
-		),
+		// "prefs"=>array(
+		// 	"The Sky - General,title",
+		// 	"user_showsky"=>"View the Sky in the Village,bool|1",
+		// ),
 	);
 	return $info;
 }
