@@ -14,7 +14,7 @@
 			if ($item['exectext'] > "") {
 				output($item['exectext'], $item['name']);
 			} else {
-				output("You activate %s!", $item['name']);
+				output("¡Activaste %s!", $item['name']);
 			}
 			output_notl("%s`n", get_effect($item, $item['noeffecttext']));
 		}

@@ -27,10 +27,10 @@ function inventorypopup_dohook($hookname,$args){
 	global $session;
 	switch ($hookname) {
 		case "charstats":
-			$open = translate_inline("Open Inventory");
+			$open = translate_inline("Abrir Inventario");
 			addnav("runmodule.php?module=inventorypopup");
-			addcharstat("Equipment Info");
-			addcharstat("Inventory", "<a href='runmodule.php?module=inventorypopup' target='inventory' onClick=\"".popup("runmodule.php?module=inventorypopup&op=charstat").";return false;\">$open</a>");
+			addcharstat("Información Equipo");
+			addcharstat("Inventario", "<a href='runmodule.php?module=inventorypopup&TB_iframe=true&height=500&width=650' rel='sexylightbox' target='inventory'>$open</a>");
 			break;
 	}
 	return $args;
@@ -38,7 +38,7 @@ function inventorypopup_dohook($hookname,$args){
 
 function inventorypopup_run(){
 	global $session;
-	popup_header("Your Inventory");
+	popup_header("Tu inventario");
 	define("OVERRIDE_FORCED_NAV", true);
 	require_once("lib/itemhandler.php");
 	mydefine("HOOK_NEWDAY", 1);
@@ -98,30 +98,34 @@ function inventorypopup_run(){
 			if ($acitem['exectext'] > "") {
 				output($acitem['exectext'], $acitem['name']);
 			} else {
-				output("You activate %s!", $acitem['name']);
+				output("¡Activaste %s!", $acitem['name']);
 			}
 			require_once("lib/itemeffects.php");
 			output_notl("`n`n%s", get_effect($acitem));
 		}
 		break;
 	}
-	output("Your are currently wearing the following items:`n`n");
+	require_once("lib/objetos.php");
+	require_once("lib/penalizacion.php");
+	output("`n`&Tienes un total de `^%s`& objetos en tu inventario.`nEl máximo de objetos que puedes llevar es %s`&.`n`n",$totalcount,$maxcount);
+	output("El peso total de los objetos que llevas es `^%s`&.`nEl peso total que puedes llevar es %s.`nPorcentaje de peso $color%s%%.`n`n",$totalweight,$maxweight,$peso);
+	output("`7Estás llevando los siguientes objetos:`n`n");
 	$layout = array(
-	//		"Weapons,title",
-	//			"righthand",
-	//			"lefthand",
-	//		"Armor,title",
-	//			"head",
-	//			"body",
-	//			"arms",
-	//			"legs",
-	//			"feet",
-	"Miscellaneous,title",
-	//			"ring1",
-	//			"ring2",
-	//			"ring3",
-	//			"neck",
-	//			"belt",
+		//	"Weapons,title",
+		//		"righthand",
+		//		"lefthand",
+		//	"Armor,title",
+		//		"head",
+		//		"body",
+		//		"arms",
+		//		"legs",
+		//		"feet",
+	"Varios,title",
+		//		"ring1",
+		//		"ring2",
+		//   	"ring3",
+		//		"neck",
+		//		"belt",
 	//		"Unequippables,title",
 	"Unequippables",
 	);
@@ -134,8 +138,7 @@ function inventorypopup_run(){
 				FROM $item
 				INNER JOIN $inventory ON $inventory.itemid = $item.itemid
 				WHERE  $inventory.userid = {$session['user']['acctid']}
-				GROUP BY $inventory.itemid
-				ORDER BY $item.equipwhere ASC, $item.class ASC, $item.name ASC";
+				GROUP BY $item.class ASC, $item.equipwhere  ASC, $item.name";
 	/*$item.equippable = 0 AND*/
 	$result = db_query($sql);
 	$inventory = array();
@@ -214,12 +217,12 @@ function inventory_showform($layout,$row){
 	rawoutput("<div id='showFormSection$showform_id'></div>");
 	rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
 	$i = 0;
-	$wheres = translate(array("righthand"=>"Right Hand","lefthand"=>"Left Hand","head"=>"Your Head","body"=>"Upper Body","arms"=>"Your Arms","legs"=>"Lower Body","feet"=>"Your Feet","ring1"=>"First Ring","ring2"=>"Second Ring","ring3"=>"Third Ring","neck"=>"Around your Neck","belt"=>"Around your Waist"));
-	$equip = translate_inline("Equip");
-	$unequip = translate_inline("Unequip");
-	$activate = translate_inline("Activate");
-	$drop = translate_inline("Drop");
-	$dropall = translate_inline("All");
+	$where = translate(array("righthand"=>"Mano Derecha","lefthand"=>"Mano Izquierda","head"=>"Cabeza","body"=>"Cuerpo","arms"=>"Brazos","legs"=>"Piernas","feet"=>"Pies","ring"=>"Primer Anillo","ring2"=>"Segundo Anillo","ring3"=>"Tercer Anillo","neck"=>"Collar","belt"=>"Cinturón"));
+	$equip = translate_inline("Equipar");
+	$unequip = translate_inline("Desequipar");
+	$activate = translate_inline("Activar");
+	$drop = translate_inline("Tirar");
+	$dropall = translate_inline("Tirar Todo");
 	while(list($key,$val)=each($layout)){
 		if (is_array($val)) {
 			$v = $val[0];
@@ -291,7 +294,7 @@ function inventory_showform($layout,$row){
 						rawoutput("</td>");
 					}
 					rawoutput("<td nowrap>");
-					output("(Gold value: %s, Gem Value: %s)", max($itsval['gold'],$itsval['sellvaluegold']), max($itsval['gems'], $itsval['sellvaluegems']));
+					output("(Valor Oro: %s, Valor Gemas: %s)", max($itsval['gold'],$itsval['sellvaluegold']), max($itsval['gems'], $itsval['sellvaluegems']));
 					rawoutput("</td></tr>");
 					rawoutput("<tr><td colspan='5'>");
 					$tl_desc = translate_inline($itsval['description']);

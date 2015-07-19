@@ -10,7 +10,7 @@
 		case "show":
 			$sql = "SELECT $item.name, $item.description FROM $item WHERE itemid=$id;";
 			$row = db_fetch_assoc(db_query($sql));
-			output("`vDescription of %s`v:`n",$row['name']);
+			output("`vDescripción de %s`v:`n",$row['name']);
 			output_notl("%s`0`n`n",$row['description']);
 			break;
 		case "equip":
@@ -63,8 +63,8 @@
 			}
 			break;
 	}
-	popup_header("Your Inventory ");
-	output("You are currently wearing the following items:`n`n");
+	popup_header("Tu inventario ");
+	output("Estás llevando los siguientes objetos:`n`n");
 	$layout = array(
 //		"Weapons,title",
 //			"righthand",
@@ -75,7 +75,7 @@
 //			"arms",
 //			"legs",
 //			"feet",
-		"Miscellaneous,title",
+		"Varios,title",
 //			"ring1",
 //			"ring2",
 //			"ring3",
@@ -93,8 +93,8 @@
 				FROM $item
 				INNER JOIN $inventory ON $inventory.itemid = $item.itemid
 				WHERE  $inventory.userid = {$session['user']['acctid']}
-				GROUP BY $inventory.itemid
-				ORDER BY $item.equipwhere ASC, $item.class ASC, $item.name ASC";
+				GROUP BY $item.equipwhere ASC, $item.class ASC, $item.name ASC
+				ORDER BY $inventory.itemid";
 	/*$item.equippable = 0 AND*/
 	$result = db_query($sql);
 	$inventory = array();
@@ -174,11 +174,11 @@ function inventory_showform($layout,$row){
 	rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
 	$i = 0;
 	$wheres = translate(array("righthand"=>"Right Hand","lefthand"=>"Left Hand","head"=>"Your Head","body"=>"Upper Body","arms"=>"Your Arms","legs"=>"Lower Body","feet"=>"Your Feet","ring1"=>"First Ring","ring2"=>"Second Ring","ring3"=>"Third Ring","neck"=>"Around your Neck","belt"=>"Around your Waist"));
-	$equip = translate_inline("Equip");
-	$unequip = translate_inline("Unequip");
-	$activate = translate_inline("Activate");
-	$drop = translate_inline("Drop");
-	$dropall = translate_inline("All");
+	$equip = translate_inline("Equipar");
+	$unequip = translate_inline("Desequipar");
+	$activate = translate_inline("Activar");
+	$drop = translate_inline("Tirar");
+	$dropall = translate_inline("Tirar Todo");
 	while(list($key,$val)=each($layout)){
 		if (is_array($val)) {
 			$v = $val[0];
@@ -251,7 +251,7 @@ function inventory_showform($layout,$row){
 						rawoutput("</td>");
 					}
 					rawoutput("<td nowrap>");
-					output("(Gold value: %s, Gem Value: %s)", max($itsval['gold'],$itsval['sellvaluegold']), max($itsval['gems'], $itsval['sellvaluegems']));
+					output("(Valor Oro: %s, Valor Gemas: %s)", max($itsval['gold'],$itsval['sellvaluegold']), max($itsval['gems'], $itsval['sellvaluegems']));
 					rawoutput("</td></tr>");
 					rawoutput("<tr><td colspan='5'>");
 					$tl_desc = translate_inline($itsval['description']);

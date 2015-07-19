@@ -1,4 +1,4 @@
-<?
+<?php
 function inventoryviewer_getmoduleinfo(){
     $info = array(
         "name"=>"Inventory Viewer for Admins",
@@ -31,18 +31,18 @@ function inventoryviewer_dohook($hookname, $args){
 				$sql = "DELETE FROM $inventory WHERE invid = $itemid LIMIT 1";
 				db_query($sql);
 				if (db_affected_rows()) {
-					output("Item gelöscht.`n");
+					output("Item gelï¿½scht.`n");
 				}
 			} else if (httppostisset('additem') && httppost('additem') > 0) {
 				require_once("lib/itemhandler.php");
 				add_item((int)httppost('additem'), 1, $args['user']['acctid']);
-				output("Ein Item wurde hinzugefügt.`n");
+				output("Ein Item wurde hinzugefï¿½gt.`n");
 			} 
 			if (httppostisset('deleteitemarray') && count($array = httppost('deleteitemarray')) > 0){
 				$in = join(",", $array);
 				$sql = "DELETE FROM $inventory WHERE invid IN ($in)";
 				db_query($sql);
-				output("%s Items gelöscht.", db_affected_rows());
+				output("%s Items gelï¿½scht.", db_affected_rows());
 			}
 
 			$sql = "SELECT itemid, name, class FROM $item ORDER BY class ASC, name ASC";
@@ -73,7 +73,7 @@ function inventoryviewer_dohook($hookname, $args){
 			while ($row = db_fetch_assoc($result)){
 				$varname = 'inventory'.$row['invid'];
 				$args['userinfo'][$varname] = "<input type='checkbox' name='deleteitemarray[]' value='{$row['invid']}'> ".$row['class']." / ".sanitize($row['name']).",viewonly";
-				$args['user'][$varname] = sprintf("Gold %s, Gems %s, Ladungen %s [ <a href='user.php?op=edit&userid={$args['user']['acctid']}&deleteitem={$row['invid']}'>Löschen</a> ]", $row['sellvaluegold'], $row['sellvaluegems'], $row['charges']);
+				$args['user'][$varname] = sprintf("Oro %s, Gemas %s, Ladungen %s [ <a href='user.php?op=edit&userid={$args['user']['acctid']}&deleteitem={$row['invid']}'>Lï¿½schen</a> ]", $row['sellvaluegold'], $row['sellvaluegems'], $row['charges']);
 				addnav("", "user.php?op=edit&userid={$args['user']['acctid']}&deleteitem={$row['invid']}");
 			}
 			break;

@@ -10,8 +10,8 @@
 		}
 	}
 	if ($count == 1) {
-		output("`n`\$One of your items got damaged during the fight. ");
+		output("`n`\$Uno de tus objetos fue dañado durante la lucha. ");
 	} else if ($count > 1) {
-		output("`n`\$Overall `^%s`\$ of your items have been damaged during the fight.", $count);
+		output("`n`\$Un total de `^%s`\$ de tus objetos fueron dañados durante la lucha.", $count);
 	}
 ?>
