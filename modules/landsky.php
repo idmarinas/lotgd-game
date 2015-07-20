@@ -74,7 +74,6 @@ function landsky_dohook($hookname,$args){
 			if ($hookname=='graveyard-desc') rawoutput('<br>');
 			$status=array(0=>"Night of the Soul",1=>"Morn' of Death",2=>"Torment",3=>"Eternal Pain",4=>"Rebirth");
 		}
-		// translate_inline($status);
 		rawoutput("<br><table style='width:auto; margin:auto;'><tr><td style='padding:0;'>");
 		rawoutput("<table style='width:auto; border-spacing: 2px; border-collapse: separate; border:1px solid black;'><tr><td style='padding:0;'>");
 		rawoutput("<div name='landskyInner' style='background-image: url(./images/landsky/".landsky_image()."_bg.png);background-repeat: repeat;border:0;clip:auto;clear:both;width:50px;height:50px;overflow:hidden;'>");
@@ -99,10 +98,10 @@ function landsky_dohook($hookname,$args){
 		rawoutput("</td></tr></table>");
 		if (landsky_c()) {
 			if ($hookname == "index"&&$showhome == 1) output_notl("`c");
-			output_notl("`^`c`b%s`b`c`n",translate_inline($status[$num]));
+			output_notl("`^`c`b%s`b`c",translate_inline($status[$num]));
 			if ($hookname == "index"&&$showhome == 1) output_notl("`c");
 		} else {
-			output_notl("`3`c`b%s`b`c`n",translate_inline($status[$num]));
+			output_notl("`3`c`b%s`b`c",translate_inline($status[$num]));
 		}
 		
 	}
