@@ -713,6 +713,7 @@ function charstats(){
 
 		addcharstat("Character Info");
 		addcharstat("Name", $u['name']);
+		addcharstat("Dragonkills", "`b".$u['dragonkills']."`b");
 		addcharstat("Level", "`b".$u['level'].check_temp_stat("level",1)."`b");
 		if ($u['alive']) {
 			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
