@@ -102,7 +102,7 @@ function newdaybar_dohook($hookname,$args){
 					 </script>				
 				";
 			}
-			setcharstat("Personal Info", $stat, $new);
+			setcharstat("Extra Info", $stat, $new);
 			break;
 	}
 	return $args;
