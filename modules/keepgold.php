@@ -9,7 +9,7 @@ function keepgold_getmoduleinfo(){
 		"settings"=>array(
 			"howmuch"=>"How much percent of gold should be kept after dk?,int|50",
 			"gold"=>"Keep gold on hand?,bool|0",
-			"bank"=>"Keep gold in bank?,bool|0",
+			"bank"=>"Keep gold in bank?,bool|1",
 		),
 		"prefs"=>array(
 			"gold"=>"Saved gold,hidden|0",
@@ -35,6 +35,7 @@ function keepgold_dohook($hookname,$args){
 	switch ($hookname) {
 		case "dk-preserve":
 			$modifier = get_module_setting("howmuch") /100;
+			$modifier = e_rand($modifier / 2 , $modifier);
 			if (get_module_setting("gold")) set_module_pref("gold", round( $session['user']['gold'] * $modifier, 0));
 			if (get_module_setting("bank")) set_module_pref("bank",  round( $session['user']['goldinbank'] * $modifier, 0));
 			break;
