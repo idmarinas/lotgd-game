@@ -717,6 +717,8 @@ function charstats(){
 		addcharstat("Level", "`b".$u['level'].check_temp_stat("level",1)."`b");
 		if ($u['alive']) {
 			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
+			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
+			addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
 			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
 			addcharstat("Dexterity", $u['dexterity'].check_temp_stat("dexterity",1));
