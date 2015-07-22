@@ -302,7 +302,7 @@ if (!isset($args['block']) || $args['block'] != 'yes') {
 		tlschema($schemas['talk']);
 		output($texts['talk']);
 		tlschema();
-		commentdisplay("",$texts['section'],"Speak",25,$texts['sayline'], $schemas['sayline']);
+		commentdisplay("",$texts['section'],"Speak",25,translate_inline($texts['sayline']), $schemas['sayline']);
 }
 
 module_display_events("village", "village.php");
