@@ -128,13 +128,17 @@ function db_affected_rows($link=false){
 
 function db_pconnect($host,$user,$pass){
 	$fname = DBTYPE."_pconnect";
+	$charset = DBTYPE. "_set_charset";
 	$r = $fname($host,$user,$pass);
+	$charset("UTF8", $r);
 	return $r;
 }
 
 function db_connect($host,$user,$pass){
 	$fname = DBTYPE."_connect";
+	$charset = DBTYPE. "_set_charset";
 	$r = $fname($host,$user,$pass);
+	$charset("UTF8", $r);
 	return $r;
 }
 
