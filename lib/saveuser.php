@@ -4,7 +4,7 @@
 // mail ready
 
 function saveuser(){
-	global $session,$dbqueriesthishit,$baseaccount,$companions;
+	global $session,$dbqueriesthishit,$baseaccount,$companions,$chatloc;
 	if (defined("NO_SAVE_USER")) return false;
 
 	if ($session['loggedin'] && $session['user']['acctid']!=""){
@@ -12,6 +12,10 @@ function saveuser(){
 		// are undone.
 		restore_buff_fields();
 
+		if (!$chatloc){
+			$session['user']['chatloc']=0;
+		}
+		
 		$session['user']['allowednavs']=serialize($session['allowednavs']);
 		$session['user']['bufflist']=serialize($session['bufflist']);
 		//if (isset($companions)&& is_array($companions)) $session['user']['companions']=serialize($companions);
