@@ -66,7 +66,7 @@ function landsky_dohook($hookname,$args){
 		if ($showhome == 0&&($hookname == "footer-home" or $hookname == "index")) return $args;
 		if ($showhome == 1&&$hookname == "footer-home") return $args;
 		if ($showhome == 2&&$hookname == "index") return $args;
-		if ($hookname == "village-desc"&&get_module_pref("user_showsky") == 0) return $args;
+		// if ($hookname == "village-desc"&&get_module_pref("user_showsky") == 0) return $args;
 		$array=landsky_calc();
 		if (landsky_c()) {
 			$status=array(0=>"Night",1=>"Morning",2=>"Noon",3=>"Afternoon",4=>"Evening");
