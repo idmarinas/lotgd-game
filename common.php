@@ -242,6 +242,10 @@ if ($session['user']['loggedin']!=true && !ALLOW_ANONYMOUS){
 	redirect("login.php?op=logout");
 }
 
+if (!isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
+if (!isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
+if (!isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
+if (!isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
 if (!isset($session['counter'])) $session['counter']=0;
 $session['counter']++;
 $nokeeprestore=array("newday.php"=>1,"badnav.php"=>1,"motd.php"=>1,"mail.php"=>1,"petition.php"=>1);
@@ -251,7 +255,6 @@ if (!isset($nokeeprestore[$SCRIPT_NAME]) || !$nokeeprestore[$SCRIPT_NAME]) {
 }else{
 
 }
-
 if ($logd_version != getsetting("installer_version","-1") && !defined("IS_INSTALLER")){
 	page_header("Upgrade Needed");
 	output("`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.");
@@ -424,4 +427,22 @@ if (getsetting('debug',0)) {
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
 modulehook("everyhit");
+if ($session['user']['loggedin']) {
+	modulehook("everyhit-loggedin");
+}
+
+// This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of getsetting().
+global $fiveminuteload;
+$lastcheck = getsetting("systemload_lastcheck",0);
+$fiveminuteload = getsetting("systemload_lastload",0);
+$currenttime = time();
+if ($currenttime - $lastcheck > 30){
+	$load = exec("uptime");
+	$load = split("load average:", $load);
+	$load = split(", ", $load[1]);
+	$fiveminuteload = $load[1];
+	savesetting("systemload_lastload",$fiveminuteload);
+	savesetting("systemload_lastcheck",$currenttime);
+}
+
 ?>

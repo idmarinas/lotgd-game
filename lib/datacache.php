@@ -75,31 +75,40 @@ function updatedatacache($name,$data){
 
 //we want to be able to invalidate data caches when we know we've done
 //something which would change the data.
-function invalidatedatacache($name,$withpath=true){
+function invalidatedatacache($name,$full=false){
 	global $datacache;
 	if (getsetting("usedatacache",0)){
-		if ($withpath) $fullname = makecachetempname($name);
-			else $fullname=$name;
-		if (file_exists($fullname)) unlink($fullname);
-		if (!$withpath) unset($datacache[$name]);
+		if(!$full) $fullname = makecachetempname($name);
+		else $fullname = $name;
+		if (file_exists($fullname)){
+			// debug("Unlinking file ".$fullname);
+			@unlink($fullname);
+		} else {
+			// debug("Cannot unlink file ".$fullname);
+		}
+		unset($datacache[$name]);
 	}
 }
 
 
 //Invalidates *all* caches, which contain $name at the beginning of their filename.
-function massinvalidate($name="") {
+function massinvalidate($name,$dir=false) {
 	if (getsetting("usedatacache",0)){
-		$name = DATACACHE_FILENAME_PREFIX.$name;
+		//$name = DATACACHE_FILENAME_PREFIX.$name;
 		global $datacachefilepath;
-		if ($datacachefilepath=="")
-			$datacachefilepath = getsetting("datacachepath","/tmp");
-		$dir = dir($datacachefilepath);
-		while(false !== ($file = $dir->read())) {
+		if ($datacachefilepath=="") $datacachefilepath = getsetting("datacachepath","/tmp");
+		if ($dir){
+			$datacachefilepath.="/".$dir;
+		}
+		$cachepath = dir($datacachefilepath);
+		// debug("Trying to invalidate ".$name);
+		while(false !== ($file = $cachepath->read())) {
 			if (strpos($file, $name) !== false) {
-				invalidatedatacache($datacachefilepath."/".$file,false);
+				invalidatedatacache($cachepath->path."/".$file,true);
+				// debug("Invalidated ".$file);
 			}
 		}
-		$dir->close();
+		$cachepath->close();
 	}
 }
 
@@ -107,50 +116,85 @@ function massinvalidate($name="") {
 function makecachetempname($name){
 	//one place to sanitize names for data caches.
 	global $datacache, $datacachefilepath,$checkedforolddatacaches;
-	if ($datacachefilepath=="")
-		$datacachefilepath = getsetting("datacachepath","/tmp");
-	//let's make sure that someone can't trick us in to
-	$name = rawurlencode($name);
-	$name = str_replace("_","-",$name); //sanity measure
-	$name = DATACACHE_FILENAME_PREFIX.preg_replace("'[^A-Za-z0-9.-]'","",$name);
+	if ($datacachefilepath=="") $datacachefilepath = getsetting("datacachepath","/tmp");
+	$path = pathinfo($name);
+	if (!file_exists($datacachefilepath."/".$path['dirname'])){
+		@mkdir($datacachefilepath."/".$path['dirname'],0777,1);
+	}
 	$fullname = $datacachefilepath."/".$name;
-	//clean out double slashes (this also blocks file wrappers woot)
 	$fullname = preg_replace("'//'","/",$fullname);
 	$fullname = preg_replace("'\\\\'","\\",$fullname);
-
-
 	if ($checkedforolddatacaches==false){
 		$checkedforolddatacaches=true;
-		// we want this to be 1 in 100 chance per page hit, not per data
-		// cache call.
-		// Once a hundred page hits, we want to clean out old caches.
-
-		/* Add on from Nightborn
-			I recommend running a cronjob. If you cache directory contains 20k files... and you have 6k users... that 100th hit is about ... 3 times A SECOND(!) ... 
-			Cleaning up every hour is fine. 
-			cronjob should execute a line like:
-				for i in /MYTEMPDIR/*;do rm $i -f;done
-
-		*/
-
-//		if (mt_rand(1,100)<2){
-//			$handle = opendir($datacachefilepath);
-//			while (($file = readdir($handle)) !== false) {
-//				if (substr($file,0,strlen(DATACACHE_FILENAME_PREFIX)) ==
-//						DATACACHE_FILENAME_PREFIX){
-//					$fn = $datacachefilepath."/".$file;
-//					$fn = preg_replace("'//'","/",$fn);
-//					$fn = preg_replace("'\\\\'","\\",$fn);
-//					if (is_file($fn) &&
-//							filemtime($fn) < strtotime("-24 hours")){
-//						unlink($fn);
-//					}else{
-//					}
-//				}
-//			}
-//		}
 	}
+	// echo($fullname);
 	return $fullname;
+}
+
+
+function empty_datacache(){
+	global $datacache, $datacachefilepath;
+	recursive_remove_directory($datacachefilepath,true);
+	unset($datacache);
+}
+
+//ganked shamelessly from lixlpixel.org, called during maintenance to empty the datacache
+function recursive_remove_directory($directory, $empty=FALSE){
+	// if the path has a slash at the end we remove it here
+	if(substr($directory,-1) == '/')
+	{
+		$directory = substr($directory,0,-1);
+	}
+
+	// if the path is not valid or is not a directory ...
+	if(!file_exists($directory) || !is_dir($directory))
+	{
+		// ... we return false and exit the function
+		return FALSE;
+
+	// ... if the path is not readable
+	}elseif(!is_readable($directory))
+	{
+		// ... we return false and exit the function
+		return FALSE;
+
+	// ... else if the path is readable
+	}else{
+
+		// we open the directory
+		$handle = opendir($directory);
+
+		// and scan through the items inside
+		while (FALSE !== ($item = readdir($handle)))
+		{
+			// if the filepointer is not the current directory
+			// or the parent directory
+			if($item != '.' && $item != '..')
+			{
+				// we build the new path to delete
+				$path = $directory.'/'.$item;
+
+				// if the new path is a directory
+				if(is_dir($path)) 
+				{
+					// we call this function with the new path
+					recursive_remove_directory($path);
+
+				// if the new path is a file
+				}else{
+					// we remove the file
+					unlink($path);
+				}
+			}
+		}
+		// close the directory
+		closedir($handle);
+
+		// if the option to empty is not set to true
+		if($empty == FALSE)
+		@rmdir($directory);
+		return TRUE;
+	}
 }
 
 ?>

@@ -18,6 +18,33 @@ function do_forced_nav($anonymous,$overrideforced){
 			$session['user']['dragonpoints']=unserialize($session['user']['dragonpoints']);
 			$session['user']['prefs']=unserialize($session['user']['prefs']);
 			if (!is_array($session['user']['dragonpoints'])) $session['user']['dragonpoints']=array();
+		
+		
+			//get allowednavs
+			/*
+			accounts_everypage table includes:
+				acctid (primary key, unique)
+				allowednavs
+				laston
+				gentime
+				gentimecount
+				gensize
+			*/
+			$sql = "SELECT allowednavs,laston,gentime,gentimecount,gensize FROM ".db_prefix("accounts_everypage")." WHERE acctid = '".$session['user']['acctid']."'";
+			$result = db_query($sql);
+			if (db_num_rows($result)==1){
+				//debug("Getting fresh info from accounts_everypage");
+				$row = db_fetch_assoc($result);
+				$session['user']['allowednavs'] = $row['allowednavs'];
+				$session['user']['laston'] = $row['laston'];
+				$session['user']['gentime'] = $row['gentime'];
+				$session['user']['gentimecount'] = $row['gentimecount'];
+				$session['user']['gensize'] = $row['gensize'];
+			} else {
+				$sql = "INSERT INTO ".db_prefix("accounts_everypage")." (acctid,allowednavs,laston,gentime,gentimecount,gensize) VALUES ('".$session['user']['acctid']."','".$session['user']['allowednavs']."','".$session['user']['laston']."','".$session['user']['gentime']."','".$session['user']['gentimecount']."','".$session['user']['gensize']."')";
+				db_query($sql);
+			}
+		
 			if (is_array(unserialize($session['user']['allowednavs']))){
 				$session['allowednavs']=unserialize($session['user']['allowednavs']);
 			}else{

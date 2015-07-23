@@ -24,7 +24,7 @@ function injectmodule($modulename,$force=false){
 	if (file_exists($modulefilename)){
 		tlschema("module-{$modulename}");
 		$sql = "SELECT active,filemoddate,infokeys,version FROM " . db_prefix("modules") . " WHERE modulename='$modulename'";
-		$result = db_query_cached($sql, "inject-$modulename", 3600);
+		$result = db_query_cached($sql, "injections/inject-$modulename", 3600);
 		if (!$force) {
 			//our chance to abort if this module isn't currently installed
 			//or doesn't meet the prerequisites.
@@ -111,7 +111,7 @@ function injectmodule($modulename,$force=false){
 					module_wipehooks();
 					$fname = $modulename."_install";
 					$fname();
-					invalidatedatacache("inject-$modulename");
+					invalidatedatacache("injections/inject-$modulename");
 
 				}else{
 					$sql = "UNLOCK TABLES";
@@ -144,7 +144,7 @@ function module_status($modulename, $version=false) {
 	$status = MODULE_NO_INFO;
 	if (file_exists($modulefilename)) {
 		$sql = "SELECT active,filemoddate,infokeys,version FROM " . db_prefix("modules") . " WHERE modulename='$modulename'";
-		$result = db_query_cached($sql, "inject-$modulename", 3600);
+		$result = db_query_cached($sql, "injections/inject-$modulename", 3600);
 		if (db_num_rows($result) > 0) {
 			// The module is installed
 			$status = MODULE_INSTALLED;
@@ -458,7 +458,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 			ORDER BY
 				" . db_prefix("module_hooks") . ".priority,
 				" . db_prefix("module_hooks") . ".modulename";
-		$result = db_query_cached($sql,"hook-".$hookname);
+		$result = db_query_cached($sql,"hooks/hook-".$hookname);
 	}
 	// $args is an array passed by value and we take the output and pass it
 	// back through
@@ -616,7 +616,7 @@ function set_module_setting($name,$value,$module=false){
 		$sql = "INSERT INTO " . db_prefix("module_settings") . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
 		db_query($sql);
 	}
-	invalidatedatacache("modulesettings-$module");
+	invalidatedatacache("modulesettings/settings-$module");
 	$module_settings[$module][$name] = $value;
 }
 
@@ -632,7 +632,7 @@ function increment_module_setting($name, $value=1, $module=false){
 		$sql = "INSERT INTO " . db_prefix("module_settings") . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
 		db_query($sql);
 	}
-	invalidatedatacache("modulesettings-$module");
+	invalidatedatacache("modulesettings/settings-$module");
 	$module_settings[$module][$name] += $value;
 }
 
@@ -642,7 +642,7 @@ function clear_module_settings($module=false){
 	if (isset($module_settings[$module])){
 		debug("Deleted module settings cache for $module.");
 		unset($module_settings[$module]);
-		invalidatedatacache("modulesettings-$module");
+		invalidatedatacache("modulesettings/settings-$module");
 	}
 }
 
@@ -651,7 +651,7 @@ function load_module_settings($module){
 	if (!isset($module_settings[$module])){
 		$module_settings[$module] = array();
 		$sql = "SELECT * FROM " . db_prefix("module_settings") . " WHERE modulename='$module'";
-		$result = db_query_cached($sql,"modulesettings-$module");
+		$result = db_query_cached($sql,"modulesettings/settings-$module");
 		while ($row = db_fetch_assoc($result)){
 			$module_settings[$module][$row['setting']] = $row['value'];
 		}//end while
@@ -663,14 +663,14 @@ function module_delete_objprefs($objtype, $objid)
 {
 	$sql = "DELETE FROM " . db_prefix("module_objprefs") . " WHERE objtype='$objtype' AND objid='$objid'";
 	db_query($sql);
-	massinvalidate("objpref-$objtype-$objid");
+	massinvalidate("objprefs/objpref-$objtype-$objid");
 }
 
 function get_module_objpref($type, $objid, $name, $module=false){
 	global $mostrecentmodule;
 	if ($module === false) $module = $mostrecentmodule;
 	$sql = "SELECT value FROM ".db_prefix("module_objprefs")." WHERE modulename='$module' AND objtype='$type' AND setting='".addslashes($name)."' AND objid='$objid' ";
-	$result = db_query_cached($sql, "objpref-$type-$objid-$name-$module", 86400);
+	$result = db_query_cached($sql, "objprefs/objpref-$type-$objid-$name-$module", 86400);
 	if (db_num_rows($result)>0){
 		$row = db_fetch_assoc($result);
 		return $row['value'];
@@ -698,7 +698,7 @@ function set_module_objpref($objtype,$objid,$name,$value,$module=false){
 	// Delete the old version and insert the new
 	$sql = "REPLACE INTO " . db_prefix("module_objprefs") . "(modulename,objtype,setting,objid,value) VALUES ('$module', '$objtype', '$name', '$objid', '".addslashes($value)."')";
 	db_query($sql);
-	invalidatedatacache("objpref-$objtype-$objid-$name-$module");
+	invalidatedatacache("objprefs/objpref-$objtype-$objid-$name-$module");
 }
 
 function increment_module_objpref($objtype,$objid,$name,$value=1,$module=false) {
@@ -712,7 +712,7 @@ function increment_module_objpref($objtype,$objid,$name,$value=1,$module=false) 
 		$sql = "INSERT INTO " . db_prefix("module_objprefs") . "(modulename,objtype,setting,objid,value) VALUES ('$module', '$objtype', '$name', '$objid', '".addslashes($value)."')";
 		db_query($sql);
 	}
-	invalidatedatacache("objpref-$objtype-$objid-$name-$module");
+	invalidatedatacache("objprefs/objpref-$objtype-$objid-$name-$module");
 }
 
 
@@ -914,7 +914,7 @@ function module_wipehooks() {
 	$sql = "SELECT location FROM ".db_prefix("module_hooks")." WHERE modulename='$mostrecentmodule'";
 	$result = db_query($sql);
 	while ($row = db_fetch_assoc($result)){
-		invalidatedatacache("hook-".$row['location']);
+		invalidatedatacache("hooks/hook-".$row['location']);
 	}
 	invalidatedatacache("module_prepare");
 
@@ -946,7 +946,7 @@ function module_drophook($hookname,$functioncall=false){
 		$functioncall=$mostrecentmodule."_dohook";
 	$sql = "DELETE FROM " . db_prefix("module_hooks") . " WHERE modulename='$mostrecentmodule' AND location='".addslashes($hookname)."' AND function='".addslashes($functioncall)."'";
 	db_query($sql);
-	invalidatedatacache("hook-".$hookname);
+	invalidatedatacache("hooks/hook-".$hookname);
 	invalidatedatacache("module_prepare");
 }
 
@@ -985,7 +985,7 @@ function module_addhook_priority($hookname,$priority=50,$functioncall=false,$whe
 	//normally that won't be the case, and so this doesn't have any performance implications.
 	$sql = "REPLACE INTO " . db_prefix("module_hooks") . " (modulename,location,function,whenactive,priority) VALUES ('$mostrecentmodule','".addslashes($hookname)."','".addslashes($functioncall)."','".addslashes($whenactive)."','".addslashes($priority)."')";
 	db_query($sql);
-	invalidatedatacache("hook-".$hookname);
+	invalidatedatacache("hooks/hook-".$hookname);
 	invalidatedatacache("module_prepare");
 }
 
@@ -1253,7 +1253,7 @@ function activate_module($module){
 	}
 	$sql = "UPDATE " . db_prefix("modules") . " SET active=1 WHERE modulename='$module'";
 	db_query($sql);
-	invalidatedatacache("inject-$module");
+	invalidatedatacache("injections/inject-$module");
 	massinvalidate("module_prepare");
 	if (db_affected_rows() <= 0){
 		return false;
@@ -1273,7 +1273,7 @@ function deactivate_module($module){
 	}
 	$sql = "UPDATE " . db_prefix("modules") . " SET active=0 WHERE modulename='$module'";
 	$return=db_query($sql);
-	invalidatedatacache("inject-$module");
+	invalidatedatacache("injections/inject-$module");
 	massinvalidate("module_prepare");
 	massinvalidate("hook"); //all hooks invalid -> might lead to bad calls
 	if (db_affected_rows() <= 0 || !$return){
@@ -1304,7 +1304,7 @@ function uninstall_module($module){
 		$sql = "DELETE FROM " . db_prefix("module_settings") .
 			" WHERE modulename='$module'";
 		db_query($sql);
-		invalidatedatacache("modulesettings-$module");
+		invalidatedatacache("modulesettings/settings-$module");
 
 		output("Deleting module user prefs`n");
 		$sql = "DELETE FROM " . db_prefix("module_userprefs") .
@@ -1315,7 +1315,7 @@ function uninstall_module($module){
 		$sql = "DELETE FROM " . db_prefix("module_objprefs") .
 			" WHERE modulename='$module'";
 		db_query($sql);
-		invalidatedatacache("inject-$module");
+		invalidatedatacache("injections/inject-$module");
 		massinvalidate("module_prepare");
 		return true;
 	} else {
@@ -1374,7 +1374,7 @@ function install_module($module, $force=true){
 					}
 				}
 				output("`^Module installed.  It is not yet active.`n");
-				invalidatedatacache("inject-$mostrecentmodule");
+				invalidatedatacache("injections/inject-$mostrecentmodule");
 				massinvalidate("module_prepare");
 				return true;
 			}
