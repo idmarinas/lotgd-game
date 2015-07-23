@@ -44,7 +44,12 @@ output("Total Stamina: %s / %s | Amber point: %s | Red point: %s",number_format(
 
 output("`n`nHere is the nitty-gritty of your Stamina statistics.  The most important value is the total cost, over there on the right.  If there's anything in the Buff column, something's temporarily affecting the cost of performing that action (negative numbers are good!).  More details follow after the stats.`n`n");
 
-rawoutput("<table width=100%><tr><td><b>Action</b></td><td><b>Experience</b></td><td><b>Natural Cost</b></td><td><b>Buff</b></td><td><b>Total</b></td></tr>");
+$action = translate_inline("Action");
+$experience = translate_inline("Experience");
+$cost = translate_inline("Natural Cost");
+$buff = translate_inline("Buff");
+$total = translate_inline("Total");
+rawoutput("<table width=100%><tr><td><b>$action</b></td><td><b>$experience</b></td><td><b>$cost</b></td><td><b>$buff</b></td><td><b>$total</b></td></tr>");
 
 $act = get_player_action_list();
 
@@ -62,7 +67,7 @@ foreach($act AS $key => $values){
 		$bonus = "`\$".number_format($modifier)."`0";
 	};
 	rawoutput("<tr><td>");
-	output("`^$key`0 Lv $level");
+	output("`^$key`0 Lv %s", $level);
 	rawoutput("</td><td>");
 	$exp = number_format($exp);
 	output_notl("$exp");
