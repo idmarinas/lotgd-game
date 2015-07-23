@@ -22,7 +22,7 @@ function alignment_getmoduleinfo(){
 				"max-num"=>"What is the maximum alignment?,int|5000",
 				"min-num"=>"What is the minimum alignment?,int|-5000",
 			"Other Settings,title",
-				"shead"=>"What Stat heading does this go under,text|Character Info",
+				"shead"=>"What Stat heading does this go under,text|Personal Info",
 				"pvp"=>"Does PVP affect Alignment,bool|1",
 				"Whether to remove or add is based on a comparison of the warrior's alignment.,note",
 				"How much to remove or add is based from the character's level divided by two.,note",
