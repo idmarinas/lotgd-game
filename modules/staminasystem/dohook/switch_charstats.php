@@ -56,7 +56,7 @@ $totalwidth = $greenwidth + $amberwidth + $redwidth;
 
 if ($totalwidth > 100) $greenwidth -= ($totalwidth -100);
 
-$new = "<a class='progress-staminabar-icon-info' title='$pctoftotal%' href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\"><i class='fa fa-info-circle fa-fw'></i></a>
+$new = "<a title='$pctoftotal%' href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\">
 		<div class='staminabar $animated'>
 			<div class='progress-staminabar progress-staminabar-red' style='width: $redwidth%;'></div>
 			<div class='progress-staminabar progress-staminabar-dark-red' style='width: $redwdarkidth%;'></div>
@@ -64,7 +64,7 @@ $new = "<a class='progress-staminabar-icon-info' title='$pctoftotal%' href='runm
 			<div class='progress-staminabar progress-staminabar-dark-amber' style='width: $amberdarkwidth%;'></div>
 			<div class='progress-staminabar progress-staminabar-green' style='width: $greenwidth%;'></div>
 			<div class='progress-staminabar progress-staminabar-dark-green' style='width: $greendarkwidth%;'></div>
-		</div>";
+		</div></a>";
 
 setcharstat("Character Info", "Stamina", $new);
 
