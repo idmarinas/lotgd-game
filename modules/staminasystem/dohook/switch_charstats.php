@@ -26,7 +26,7 @@ if (get_module_setting("turns_emulation_base")!=0 ){
 //Then, since Turns are pretty well baked into core and we don't want to be playing around with adding turns just as they're needed for core to operate, we'll just add ten turns here and forget all about it...
 $session['user']['turns'] = 10;
 
-
+if (!$session['user']['alive']) return;
 
 //Display the actual Stamina bar
 
