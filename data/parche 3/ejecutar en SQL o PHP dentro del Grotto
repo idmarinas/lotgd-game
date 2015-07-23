@@ -1,0 +1,40 @@
+Para que se guarden correctamente los datos del output
+//En SQL 
+ALTER TABLE `accounts_output` CHANGE `output` `output` MEDIUMBLOB  NOT NULL;
+
+//En PHP para el nuevo sistema de comentarios
+	//alter the commentary table
+	$commentary = array(
+		'commentid'=>array('name'=>'commentid', 'type'=>'int(11) unsigned', 'null'=>1,'extra'=>'auto_increment'),
+		'section'=>array('name'=>'section', 'type'=>'varchar(255)', 'null'=>1),
+		'author'=>array('name'=>'author', 'type'=>'int(11) unsigned', 'null'=>1, 'default'=>0),
+		'comment'=>array('name'=>'comment', 'type'=>'varchar(255)', 'null'=>1),
+		'postdate'=>array('name'=>'postdate', 'type'=>'datetime', 'null'=>1, 'default'=>'0000-00-00 00:00:00'),
+		'info'=>array('name'=>'info', 'type'=>'text', 'null'=>1),
+		'name'=>array('name'=>'name', 'type'=>'text', 'null'=>1),
+		'key-PRIMARY'=>array('name'=>'PRIMARY', 'type'=>'primary key',	'unique'=>'1', 'columns'=>'commentid'),
+		'key-section'=>array('name'=>'section', 'type'=>'key', 'columns'=>'section'),
+		'key-postdate'=>array('name'=>'postdate', 'type'=>'key', 'columns'=>'postdate'),
+	);
+	
+	$accounts_everypage = array(
+		'acctid'=>array('name'=>'acctid', 'type'=>'int(11) unsigned', 'null'=>1),
+		'allowednavs'=>array('name'=>'allowednavs', 'type'=>'mediumtext', 'null'=>1),
+		'laston'=>array('name'=>'laston', 'type'=>'datetime', 'null'=>0),
+		'gentime'=>array('name'=>'gentime', 'type'=>'double', 'null'=>1),
+		'gentimecount'=>array('name'=>'gentimecount', 'type'=>'int(11) unsigned', 'null'=>1),
+		'gensize'=>array('name'=>'gensize', 'type'=>'int(11) unsigned', 'null'=>1),
+		'key-PRIMARY'=>array('name'=>'PRIMARY', 'type'=>'primary key',	'unique'=>'1', 'columns'=>'acctid'),
+	);
+	
+	$whostyping = array(
+		'time'=>array('name'=>'time', 'type'=>'int(11) unsigned', 'null'=>0),
+		'name'=>array('name'=>'name', 'type'=>'varchar(255)', 'null'=>0),
+		'section'=>array('name'=>'section', 'type'=>'varchar(255)', 'null'=>0),
+		'key-PRIMARY'=>array('name'=>'PRIMARY', 'type'=>'primary key',	'unique'=>'1', 'columns'=>'name'),
+	);
+	
+	require_once("lib/tabledescriptor.php");
+	synctable(db_prefix('commentary'), $commentary, true);
+	synctable(db_prefix('accounts_everypage'), $accounts_everypage, true);
+	synctable(db_prefix('whostyping'), $whostyping, true);
