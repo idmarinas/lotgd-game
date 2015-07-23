@@ -716,8 +716,8 @@ function charstats(){
 		addcharstat("Dragonkills", "`b".$u['dragonkills']."`b");
 		addcharstat("Level", "`b".$u['level'].check_temp_stat("level",1)."`b");
 		if ($u['alive']) {
-			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
 			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
+			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
 			addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
 			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
