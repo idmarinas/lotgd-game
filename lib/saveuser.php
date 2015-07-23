@@ -19,6 +19,21 @@ function saveuser(){
 		$session['user']['allowednavs']=serialize($session['allowednavs']);
 		$session['user']['bufflist']=serialize($session['bufflist']);
 		//if (isset($companions)&& is_array($companions)) $session['user']['companions']=serialize($companions);
+		
+		/*
+		accounts_everypage table includes:
+			acctid (primary key, unique)
+			allowednavs
+			laston
+			gentime
+			gentimecount
+			gensize
+		*/
+		
+		$everyhit_sql = "UPDATE ".db_prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
+		//debug($everyhit_sql);
+		db_query($everyhit_sql);
+		
 		$sql="";
 		foreach ($session['user'] as $key=>$val) {
 			if (is_array($val)) $val = serialize($val);
