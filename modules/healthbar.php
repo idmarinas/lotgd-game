@@ -12,8 +12,8 @@ function healthbar_getmoduleinfo(){
 		"download"=>"",
 		"prefs"=>array(
 			"Barra de salud,title",
-			"user_showcurrent"=>"Show current health number,bool|0",
-			"user_showmax"=>"Show max health (only if current ),bool|0"
+			"user_showcurrent"=>"Mostrar la salud actual en número,bool|0",
+			"user_showmax"=>"Mostrar la salud máxima (sólo si actual),bool|0"
 		)
 	);
 	return $info;
