@@ -25,7 +25,7 @@ function age_dohook($hookname,$args){
 	switch ($hookname){
 		case "charstats":
 			if (get_module_pref("user_showspec") == 1){
-			$title = "Character Info";
+			$title = "Personal Info";
 			$name = translate_inline("Age");
 			$spec = $session['user']['age']+10;
 			setcharstat($title,$name,$spec);
