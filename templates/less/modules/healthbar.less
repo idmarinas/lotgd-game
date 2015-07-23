@@ -28,6 +28,7 @@
   background-color: @progress-bg;
   box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
   border: 1px solid darken(@progress-bg, 40%);
+  white-space: nowrap;
 }
 
 //Barra de progreso
@@ -65,25 +66,31 @@
 .progress-healthbar-alive-60 
 {
   .progress-bar-variant(@progress-healthbar-alive-60);
+  color : contrast(@progress-healthbar-alive-60) !important;
 }
 .progress-healthbar-alive-25 
 {
   .progress-bar-variant(@progress-healthbar-alive-25);
+  color : contrast(@progress-healthbar-alive-25) !important;
 }
 .progress-healthbar-alive-0 
 {
   .progress-bar-variant(@progress-healthbar-alive-0);
+  color : contrast(@progress-healthbar-alive-0) !important;
 }
 //Muerto
 .progress-healthbar-dead-60 
 {
   .progress-bar-variant(@progress-healthbar-dead-60);
+  color : contrast(@progress-healthbar-dead-60) !important;
 }
 .progress-healthbar-dead-25 
 {
   .progress-bar-variant(@progress-healthbar-dead-25);
+  color : contrast(@progress-healthbar-dead-25) !important;
 }
 .progress-healthbar-dead-0 
 {
   .progress-bar-variant(@progress-healthbar-dead-0);
+  color : contrast(@progress-healthbar-dead-0) !important;
 }
