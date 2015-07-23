@@ -10,6 +10,8 @@ $redpct = get_stamina(0);
 $amberpct = get_stamina(1);
 $greenpct = get_stamina(2);
 
+$pctoftotal = round($stamina / $daystamina * 100, 2);
+
 $greentotal = round((($daystamina - $redpoint - $amberpoint)/$daystamina)*100);
 $ambertotal = round(((($daystamina - $redpoint)/$daystamina)*100) - $greentotal);
 $redtotal = (100 - $greentotal) - $ambertotal;
@@ -18,28 +20,24 @@ $greenwidth = (($greentotal / 100) * $greenpct);
 $amberwidth = (($ambertotal / 100) * $amberpct);
 $redwidth = (($redtotal / 100) * $redpct);
 
-$colorgreen = "#00FF00";
-$coloramber = "#FFA200";
-$colorred = "#FF0000";
-$colordarkgreen = "#003300";
-$colordarkamber = "#2F1E00";
-$colordarkred = "#330000";
-$colorbackground = $colordarkgreen;
+$greendarkwidth = $greentotal - $greenwidth;
+$amberdarkwidth = $ambertotal - $amberwidth;
+$redwdarkidth = $redtotal - $redwidth;
 
-if ($greenpct == 0){
-	$colorgreen = $colordarkamber;
-	$colorbackground = $colordarkamber;
-}
-if ($amberpct == 0){
-	$colorgreen = $colordarkred;
-	$coloramber = $colordarkred;
-	$colorbackground = $colordarkred;
-}
+$totalwidth = $greenwidth + $amberwidth + $redwidth;
 
-$pctgrey = (((100 - $greenwidth)-$amberwidth)-$redwidth);
+if ($totalwidth > 100) $greenwidth -= ($totalwidth -100);
 
-rawoutput("<table style='border: solid 1px #000000' bgcolor='$colorbackground' cellpadding='0' cellspacing='0' width='100%' height='20'><tr><td width='$redwidth%' bgcolor='$colorred'></td><td width='$amberwidth%' bgcolor='$coloramber'></td><td width='$greenwidth%' bgcolor='$colorgreen'></td><td width='$pctgrey%'></td></tr></table>");
+rawoutput("<div class='staminabar show'>
+			<div class='progress-staminabar progress-staminabar-red' style='width: $redwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-red' style='width: $redwdarkidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-amber' style='width: $amberwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-amber' style='width: $amberdarkwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-green' style='width: $greenwidth%;'></div>
+			<div class='progress-staminabar progress-staminabar-dark-green' style='width: $greendarkwidth%;'></div>
+		</div>");
 
+output_notl("`n");
 output("Total Stamina: %s / %s | Amber point: %s | Red point: %s",number_format($stamina), number_format($daystamina), number_format($amberpoint), number_format($redpoint));
 
 output("`n`nHere is the nitty-gritty of your Stamina statistics.  The most important value is the total cost, over there on the right.  If there's anything in the Buff column, something's temporarily affecting the cost of performing that action (negative numbers are good!).  More details follow after the stats.`n`n");
