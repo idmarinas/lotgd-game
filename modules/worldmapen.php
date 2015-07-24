@@ -149,14 +149,20 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>25,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
-		install_action("Travelling - Jungle",array(
+		install_action("Travelling - Forest",array(
 			"maxcost"=>10000,
 			"mincost"=>4000,
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>60,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - River",array(
@@ -165,6 +171,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>100,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Ocean",array(
@@ -173,6 +182,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Mountains",array(
@@ -181,6 +193,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>140,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Snow",array(
@@ -189,6 +204,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Beach",array(
@@ -197,6 +215,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>25,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Swamp",array(
@@ -205,6 +226,9 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>75,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 	} 
