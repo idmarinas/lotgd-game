@@ -91,7 +91,7 @@ function newdaybar_dohook($hookname,$args){
 								realSecsToTomorrow--;
 								var percentage = (realSecsToTomorrow / secPerDay) * 100;
 								$('.progress-newdaybar').css('width' , percentage.toFixed(10) + '%');
-								setTimeout(newdaybar,1000);
+								setTimeout(newdaybar,5000);
 							}
 							else
 							{
