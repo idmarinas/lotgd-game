@@ -17,7 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "font-awesome": "^4.3.0",
-    "animate.css" : "*"
+    "font-awesome": "~4.3",
+    "animate.css" : "~3.3",
+    "uikit" : "~2.21"
   }
 }

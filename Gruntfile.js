@@ -110,6 +110,17 @@ module.exports = function (grunt) {
           "dist/templates/dragon_verde.css": "dist/templates/dragon_verde.css"
         }
       }
+    },
+    uglify: {
+      main: {
+        files: {
+          'dist/templates/dragon.min.js': 
+            [
+              'bower_components/uikit/js/uikit.js',
+              'bower_components/uikit/js/components/tooltip.js'
+            ]
+        }
+      }
     }
   });
     
@@ -120,9 +131,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-banner');
   grunt.loadNpmTasks('grunt-postcss');
-  // grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'copy:localhost']);
+  grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'uglify', 'copy:localhost']);
 };
