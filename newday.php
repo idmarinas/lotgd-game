@@ -218,7 +218,7 @@ if ($dp < $dkills) {
 			$gain=translate_inline("lose");
 		}
 		$sff = abs($resurrectionturns);
-		output("`2As a result, you `^%s %s same Stamina`2 for today!`n", $gain, $sff);
+		output("`2As a result, you `^%s same Stamina`2 for today!`n", $gain);
 	}
 	$rp = $session['user']['restorepage'];
 	$x = max(strrpos("&",$rp),strrpos("?",$rp));
