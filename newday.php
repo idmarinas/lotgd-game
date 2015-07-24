@@ -168,13 +168,15 @@ if ($dp < $dkills) {
 
 	output("`2Hitpoints have been restored to `^%s`2.`n",$session['user']['maxhitpoints']);
 
-	reset($session['user']['dragonpoints']);
-	$dkff=0;
-	while(list($key,$val)=each($session['user']['dragonpoints'])){
-		if ($val=="ff"){
-			$dkff++;
-		}
-	}
+
+	//Comentado porque ya no se puede usar los puntos de dragón para aumentar los turnos.
+	// reset($session['user']['dragonpoints']);
+	// $dkff=0;
+	// while(list($key,$val)=each($session['user']['dragonpoints'])){
+	// 	if ($val=="ff"){
+	// 		$dkff++;
+	// 	}
+	// }
 	if ($session['user']['hashorse']){
 		$buff = unserialize($playermount['mountbuff']);
 		if (!isset($buff['schema']) || $buff['schema'] == "")
