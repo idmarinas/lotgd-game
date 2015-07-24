@@ -59,7 +59,7 @@ if ((count($session['user']['dragonpoints']) <
 $labels = array(
 		"General Stuff,title",
 		"hp"=>"Max Hitpoints + 5",
-		"ff"=>"Forest Fights + 1",
+		// "ff"=>"Forest Fights + 1",
 		"Attributes,title",
 		"str"=>"Strength +1",
 		"dex"=>"Dexterity +1",
@@ -74,7 +74,7 @@ $labels = array(
 );
 $canbuy = array(
 		"hp"=>1,
-		"ff"=>1,
+		"ff"=>0,
 		"str"=>1,
 		"dex"=>1,
 		"con"=>1,
@@ -120,7 +120,7 @@ if ($dp < $dkills) {
 	$session['user']['seenmaster']=0;
 	output("You open your eyes to discover that a new day has been bestowed upon you. It is day number `^%s.`0",$session['user']['age']);
 	output("You feel refreshed enough to take on the world!`n");
-	output("`2Turns for today set to `^%s`2.`n",$turnsperday);
+	// output("`2Turns for today set to `^%s`2.`n",$turnsperday);
 
 	$turnstoday = "Base: $turnsperday";
 	$args = modulehook("pre-newday",
@@ -181,10 +181,10 @@ if ($dp < $dkills) {
 			$buff['schema']="mounts";
 		apply_buff('mount',$buff);
 	}
-	if ($dkff>0) {
-		output("`n`2You gain `^%s`2 forest %s from spent dragon points!",
-				$dkff, translate_inline($dkff == 1?"fight":"fights"));
-	}
+	// if ($dkff>0) {
+		// output("`n`2You gain `^%s`2 forest %s from spent dragon points!",
+				// $dkff, translate_inline($dkff == 1?"fight":"fights"));
+	// }
 	$r1 = e_rand(-1,1);
 	$r2 = e_rand(-1,1);
 	$spirits = $r1+$r2;
@@ -216,8 +216,7 @@ if ($dp < $dkills) {
 			$gain=translate_inline("lose");
 		}
 		$sff = abs($resurrectionturns);
-		output("`2As a result, you `^%s %s forest %s`2 for today!`n",
-				$gain, $sff, translate_inline($sff==1?"fight":"fights"));
+		output("`2As a result, you `^%s %s same Stamina`2 for today!`n", $gain, $sff);
 	}
 	$rp = $session['user']['restorepage'];
 	$x = max(strrpos("&",$rp),strrpos("?",$rp));
@@ -322,5 +321,8 @@ if ($dp < $dkills) {
 	}
 
 }
+
+$session['user']['sentnotice']=0;
+
 page_footer();
 ?>
