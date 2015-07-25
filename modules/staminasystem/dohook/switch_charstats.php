@@ -56,8 +56,8 @@ $totalwidth = $greenwidth + $amberwidth + $redwidth;
 
 if ($totalwidth > 100) $greenwidth -= ($totalwidth -100);
 
-$new = "<a title='$pctoftotal%' href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\">
-		<div class='staminabar'>
+$new = "<a href='runmodule.php?module=staminasystem&op=show' target='_blank' onclick=\"".popup("runmodule.php?module=staminasystem&op=show").";return false;\">
+		<div data-uk-tooltip='{pos:'left'}' title='$pctoftotal%' class='staminabar'>
 			<div class='progress-staminabar progress-staminabar-red' style='width: $redwidth%;'></div>
 			<div class='progress-staminabar progress-staminabar-dark-red' style='width: $redwdarkidth%;'></div>
 			<div class='progress-staminabar progress-staminabar-amber' style='width: $amberwidth%;'></div>
