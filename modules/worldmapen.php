@@ -46,18 +46,18 @@ function worldmapen_getmoduleinfo(){
 		"usestamina"=>"Expanded Stamina system is installed and should be used instead of Travel points,bool|0",
 		
 		"Visual Map Settings,title",
-		"colorUserLoc"=>"What color background is the users current location?,text|#FF9900",
-		"colorPlains"=>"Color of plains? (default tile),text|#008800",
-		"colorForest"=>"Color of dense forest?,text|#005500",
-		"colorRiver"=>"Color of river?,text|#0000CC",
-		"colorOcean"=>"Color of ocean?,text|#000066",
-		"colorEarth"=>"Color of earth?,text|#DDDD33",
-		"colorSwamp"=>"Color of swamp?,text|#669900",
-		"colorMount"=>"Color of mountains?,text|#999999",
-		"colorSnow"=>"Color of Snow?,text|#FFFFFF",
-		"colorEarth"=>"Color of Earth?,text|#000000",
-		"colorAir"=>"Color of Air?,text|#0000FF",
-		'All colors must be in the format #RRGGBB&#44; where # is the # symbol&#44; RR is a value for red (from 00 to FF)&#44; GG is a value for green&#44; and BB is a value for blue.,note',
+		"colorUserLoc"=>"What color background is the users current location?,text|worldmapen-terrain-current",
+		"colorPlains"=>"Color of plains? (default tile),text|worldmapen-terrain-plains",
+		"colorForest"=>"Color of dense forest?,text|worldmapen-terrain-forest",
+		"colorRiver"=>"Color of river?,text|worldmapen-terrain-river",
+		"colorOcean"=>"Color of ocean?,text|worldmapen-terrain-ocean",
+		"colorDesert"=>"Color of desert?,text|worldmapen-terrain-desert",
+		"colorSwamp"=>"Color of swamp?,text|worldmapen-terrain-swamp",
+		"colorMount"=>"Color of mountains?,text|worldmapen-terrain-mountains",
+		"colorSnow"=>"Color of Snow?,text|worldmapen-terrain-snow",
+		"colorEarth"=>"Color of Earth?,text|worldmapen-terrain-earth",
+		"colorAir"=>"Color of Air?,text|worldmapen-terrain-air",
+		'All colors must be in CSS here is class name.,note',
 	
 		"Boundary Messages,title",
 		"nBoundary"=>"Northern boundary,text|To the north are the impenetrable mountains of Loa.",
@@ -77,11 +77,11 @@ function worldmapen_getmoduleinfo(){
 		"encounterForest"=>"Chance of encountering a monster when crossing dense forests?,int|85",
 		"encounterRiver"=>"Chance of encountering a monster when crossing rivers?,int|20",
 		"encounterOcean"=>"Chance of encountering a monster when crossing oceans?,int|20",
-		"encounterEarth"=>"Chance of encountering a monster when crossing earths?,int|85",
+		"encounterDesert"=>"Chance of encountering a monster when crossing desert?,int|5",
 		"encounterSwamp"=>"Chance of encountering a monster when crossing swamps?,int|85",
 		"encounterMount"=>"Chance of encountering a monster when crossing mountains?,int|20",
 		"encounterSnow"=>"Chance of encountering a monster when crossing snow?,int|20",
-		"encounterEarth"=>"Chance of encountering a monster when under surface?,int|1",
+		"encounterEarth"=>"Chance of encountering a monster when under surface?,int|85",
 		"encounterAir"=>"Chance of encountering a monster when traveling in the air?,int|0",
 
 		"Terrain Settings,title",
@@ -89,7 +89,7 @@ function worldmapen_getmoduleinfo(){
 		"moveCostForest"=>"Movement cost for crossing dense forests?,int|1",
 		"moveCostRiver"=>"Movement cost for crossing rivers?,int|1",
 		"moveCostOcean"=>"Movement cost for crossing oceans?,int|5",
-		"moveCostEarth"=>"Movement cost for crossing earth?,int|2",
+		"moveCostDesert"=>"Movement cost for crossing desert?,int|2",
 		"moveCostSwamp"=>"Movement cost for crossing swamps?,int|2",
 		"moveCostMount"=>"Movement cost for crossing mountains?,int|3",
 		"moveCostSnow"=>"Movement cost for crossing snow?,int|3",
@@ -187,7 +187,7 @@ function worldmapen_install(){
 			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
-		install_action("Travelling - Mountains",array(
+		install_action("Travelling - Mount",array(
 			"maxcost"=>20000,
 			"mincost"=>6000,
 			"firstlvlexp"=>500,
@@ -242,11 +242,34 @@ function worldmapen_install(){
 			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
+		install_action("Travelling - Desert",array(
+			"maxcost"=>25000,
+			"mincost"=>7500,
+			"firstlvlexp"=>500,
+			"expincrement"=>1.1,
+			"costreduction"=>175,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
+			"class"=>"Travelling"
+		));
 	} 
 	return true;
 }
 
 function worldmapen_uninstall(){
+	require_once('modules/staminasystem/lib/lib.php');
+	uninstall_action("Travelling - Plains");
+	uninstall_action("Travelling - Forest");
+	uninstall_action("Travelling - River");
+	uninstall_action("Travelling - Ocean");
+	uninstall_action("Travelling - Mount");
+	uninstall_action("Travelling - Snow");
+	uninstall_action("Travelling - Earth");
+	uninstall_action("Travelling - Swamp");
+	uninstall_action("Travelling - Air");
+	uninstall_action("Travelling - Desert");
+	
 	return true;
 }
 
