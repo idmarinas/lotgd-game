@@ -17,9 +17,9 @@ function staminasystem_getmoduleinfo(){
 		),
 		"prefs"=>array(
 			"stamina"=>"Player's current Stamina,int|0",
-			"daystamina"=>"Player's New Day Stamina,int|1500000",
-			"red"=>"Amount of the bar taken up in Red Stamina levels,int|200000",
-			"amber"=>"Amount of the bar taken up in Amber Stamina levels,int|400000",
+			"daystamina"=>"Player's New Day Stamina,int|2000000",
+			"red"=>"Amount of the bar taken up in Red Stamina levels,int|300000",
+			"amber"=>"Amount of the bar taken up in Amber Stamina levels,int|500000",
 			"actions"=>"Player's Actions array,textarea|array()",
 			"buffs"=>"Player's Buffs array,textarea|array()",
 		)
