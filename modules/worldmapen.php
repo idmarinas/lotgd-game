@@ -51,7 +51,7 @@ function worldmapen_getmoduleinfo(){
 		"colorForest"=>"Color of dense forest?,text|#005500",
 		"colorRiver"=>"Color of river?,text|#0000CC",
 		"colorOcean"=>"Color of ocean?,text|#000066",
-		"colorDesert"=>"Color of desert?,text|#DDDD33",
+		"colorEarth"=>"Color of earth?,text|#DDDD33",
 		"colorSwamp"=>"Color of swamp?,text|#669900",
 		"colorMount"=>"Color of mountains?,text|#999999",
 		"colorSnow"=>"Color of Snow?,text|#FFFFFF",
@@ -63,7 +63,7 @@ function worldmapen_getmoduleinfo(){
 		"nBoundary"=>"Northern boundary,text|To the north are the impenetrable mountains of Loa.",
 		"eBoundary"=>"Eastern boundary,text|The vast ocean of silence lay to your east.  Long before you can remember ships stopped sailing across to the other continents.  But why?",
 		"sBoundary"=>"Southern boundary,text|To the south you can see a great ravine that seems to stretch on forever.",
-		"wBoundary"=>"Western boundary,text|To the west lays the barren wasteland of the Goiu desert.  No one has ever survived out there.",
+		"wBoundary"=>"Western boundary,text|To the west lays the barren wasteland of the Goiu earth.  No one has ever survived out there.",
 	
 		"Gate Messages,title",
 		"LeaveGates1"=>"Leave gates of village. (1)|A shiver runs down your back as you face the forest around you.",
@@ -77,7 +77,7 @@ function worldmapen_getmoduleinfo(){
 		"encounterForest"=>"Chance of encountering a monster when crossing dense forests?,int|85",
 		"encounterRiver"=>"Chance of encountering a monster when crossing rivers?,int|20",
 		"encounterOcean"=>"Chance of encountering a monster when crossing oceans?,int|20",
-		"encounterDesert"=>"Chance of encountering a monster when crossing deserts?,int|85",
+		"encounterEarth"=>"Chance of encountering a monster when crossing earths?,int|85",
 		"encounterSwamp"=>"Chance of encountering a monster when crossing swamps?,int|85",
 		"encounterMount"=>"Chance of encountering a monster when crossing mountains?,int|20",
 		"encounterSnow"=>"Chance of encountering a monster when crossing snow?,int|20",
@@ -89,7 +89,7 @@ function worldmapen_getmoduleinfo(){
 		"moveCostForest"=>"Movement cost for crossing dense forests?,int|1",
 		"moveCostRiver"=>"Movement cost for crossing rivers?,int|1",
 		"moveCostOcean"=>"Movement cost for crossing oceans?,int|5",
-		"moveCostDesert"=>"Movement cost for crossing deserts?,int|2",
+		"moveCostEarth"=>"Movement cost for crossing earth?,int|2",
 		"moveCostSwamp"=>"Movement cost for crossing swamps?,int|2",
 		"moveCostMount"=>"Movement cost for crossing mountains?,int|3",
 		"moveCostSnow"=>"Movement cost for crossing snow?,int|3",
@@ -104,7 +104,7 @@ function worldmapen_getmoduleinfo(){
 		"worldmapbuy"=>"Did user buy map?,bool|0",
 		"encounterchance"=>"Player's encounter chance expressed as a percentage of normal,int|100",
 		"fuel"=>"The reduced-cost moves that a player has left because of his Mount,int|0",
-		"user_blindoutput"=>"BETA OPTION for blind or visually impaired players using a screen reader - Show textual information about your location on the World Map?,bool|0",
+		//"user_blindoutput"=>"BETA OPTION for blind or visually impaired players using a screen reader - Show textual information about your location on the World Map?,bool|0",
 	),
 	"prefs-mounts"=>array(
 		"World Map Mount Preferences,title",
@@ -113,7 +113,7 @@ function worldmapen_getmoduleinfo(){
 		"encounterForest"=>"Encounter rate for crossing dense forests?,float|1",
 		"encounterRiver"=>"Encounter rate for crossing rivers?,float|1",
 		"encounterOcean"=>"Encounter rate for crossing oceans?,float|1",
-		"encounterDesert"=>"Encounter rate for crossing deserts?,float|1",
+		"encounterEarth"=>"Encounter rate for crossing earths?,float|1",
 		"encounterSwamp"=>"Encounter rate for crossing swamps?,float|1",
 		"encounterMount"=>"Encounter rate for crossing mountains?,float|1",
 		"encounterSnow"=>"Encounter rate for crossing snow?,float|1",
@@ -209,7 +209,7 @@ function worldmapen_install(){
 			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
-		install_action("Travelling - Beach",array(
+		install_action("Travelling - Earth",array(
 			"maxcost"=>5000,
 			"mincost"=>2500,
 			"firstlvlexp"=>500,
@@ -226,6 +226,17 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>75,
+			"expperrep"=>100,
+			"expforlvl"=>1500,
+			"dkpct"=>3,
+			"class"=>"Travelling"
+		));
+		install_action("Travelling - Air",array(
+			"maxcost"=>25000,
+			"mincost"=>7500,
+			"firstlvlexp"=>500,
+			"expincrement"=>1.1,
+			"costreduction"=>175,
 			"expperrep"=>100,
 			"expforlvl"=>1500,
 			"dkpct"=>3,
