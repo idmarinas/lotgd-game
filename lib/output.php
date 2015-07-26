@@ -39,6 +39,7 @@ class output_collector {
 			"5" => "colDkMagenta",
 			"6" => "colDkYellow",
 			"7" => "colDkWhite",
+			"8" => "colLime",
 			"!" => "colLtBlue",
 			"@" => "colLtGreen",
 			"#" => "colLtCyan",
