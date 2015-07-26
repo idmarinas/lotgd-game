@@ -34,8 +34,9 @@ if (isset($actions_used)){
 			$actions_used[$action]['lvlinfo']['currentlvlexp']=1;
 		}
 		$pct = (($actions_used[$action]['lvlinfo']['exp']-$actions_used[$action]['lvlinfo']['currentlvlexp']) / ($actions_used[$action]['lvlinfo']['nextlvlexp']-$actions_used[$action]['lvlinfo']['currentlvlexp'])) * 100;
-		$nonpct = 100 - $pct;
-		$disp = "Lv".$actions_used[$action]['lvlinfo']['lvl']." (+`@".$actions_used[$action]['exp_earned']."`^ xp)<table style='border: solid 1px #000000;' bgcolor='red'  cellpadding='0' cellspacing='0' width='70' height='5'><tr><td width='$pct%' bgcolor='white'></td><td width='$nonpct%'></td></tr></table>";
+		$disp = "<div class='progressbar'>
+			<div class='progress-progressbar progress-progressbar-progress' style='width: $pct%;'>&nbsp;".translate_inline("Lv").$actions_used[$action]['lvlinfo']['lvl']." (+`8".$actions_used[$action]['exp_earned']."`0 xp)</div>
+		</div>";
 		setcharstat("Recent Actions",$action,$disp);
 		
 		if (get_module_pref("user_minihof")){
