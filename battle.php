@@ -489,6 +489,9 @@ $newenemies = autosettarget($newenemies);
 if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
 	output("`2`bEnd of Round:`b`n");
 	show_enemies($newenemies);
+	//extra code for "endofround" hook, used by combatbars.php
+	$badguy = modulehook("endofround",$badguy);
+	//end extra code
 }
 
 if ($session['user']['hitpoints'] <= 0) {
