@@ -1,0 +1,69 @@
+/** Barra de progreso para la experiencia
+ *
+ */
+
+// Bar animations
+// -------------------------
+
+// WebKit
+@-webkit-keyframes progress-progressbar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+// Spec and IE10+
+@keyframes progress-progressbar-stripes 
+{
+  from  { background-position: 40px 0; }
+  to    { background-position: 0 0; }
+}
+
+//Contenedor
+.progressbar 
+{
+  overflow: hidden;
+  height: 15px;
+  margin-bottom: 0;
+  background-color: @progress-bg;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+  border: 1px solid darken(@progress-bg, 40%);
+}
+
+//Barra de progreso
+.progress-progressbar 
+{
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 11px;
+  line-height: 15px;
+  color: @progress-bar-color;
+  text-align: center;
+  background-color: @progress-bg;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+  transition: width .6s ease;
+  white-space: nowrap;
+}
+
+// Striped bars
+.progress-striped .progress-progressbar,
+.progress-progressbar-striped 
+{
+  #gradient > .striped();
+  background-size: 25px 25px;
+}
+
+// Call animation for the active one
+.progressbar.active .progress-progressbar,
+.progress-progressbar.active 
+{
+  animation: progress-progressbar-stripes 5s linear infinite;
+}
+
+
+//Variaciones
+.progress-progressbar-progress
+{
+  .progress-bar-variant(@progress-bar-progress);
+}
