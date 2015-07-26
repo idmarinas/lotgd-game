@@ -59,15 +59,16 @@ Returns False if the action is not installed.
 function get_player_action($action, $userid=false) {
 	global $session;
 	if ($userid === false) $userid = $session['user']['acctid'];
-	$playeractions=unserialize(get_module_pref("actions", "staminasystem", $userid));
+	$playeractions=unserialize(get_module_pref("actions","staminasystem",$userid));
 	//Check to see if this action is set for this player, and if not, set it
 	if (!isset($playeractions[$action])){
+		//debug("Action ".$action." not set!");
 		$defaultactions = get_default_action_list();
 		if (isset($defaultactions[$action])){
+			//debug($defaultactions[$action]);
 			$playeractions[$action] = $defaultactions[$action];
-			$playeractions[$action]['level'] = 0;
-			$playeractions[$action]['dkexp'] = 0;
-			$playeractions[$action]['naturalcost'] = $playeractions[$action]['maxcost'];
+			$playeractions[$action]['lvl'] = 0;
+			$playeractions[$action]['naturalcost'] = $defaultactions[$action]['maxcost'];
 			set_module_pref("actions", serialize($playeractions), "staminasystem", $userid);
 			return($playeractions[$action]);
 		} else {
@@ -144,6 +145,7 @@ function stamina_calculate_buffed_cost($action, $userid=false){
 	if ($userid === false) $userid = $session['user']['acctid'];
 	$active_action_buffs = stamina_get_active_buffs($action, $userid);
 	$actiondetails = get_player_action($action, $userid);
+	//debug($actiondetails);
 	$naturalcost = $actiondetails['naturalcost'];
 	$buffedcost = $naturalcost;
 	if (is_array($active_action_buffs)){
@@ -166,11 +168,10 @@ function stamina_calculate_buffed_exp($action, $userid=false){
 	if ($userid === false) $userid = $session['user']['acctid'];
 	$active_action_buffs = stamina_get_active_buffs($action, $userid);
 	$actiondetails = get_player_action($action, $userid);
-	$startingexp = $actiondetails['expperrep'];
-	$buffedexp = $startingexp;
+	$buffedexp = e_rand(80,120);
 	if (is_array($active_action_buffs) && $active_action_buffs){
 		foreach($active_action_buffs as $buff => $values){
-			$buffedexp = $buffedexp * $values['expmod'];
+			$buffedexp = round($buffedexp * $values['expmod']);
 		}
 	}
 	return $buffedexp;
@@ -179,7 +180,7 @@ function stamina_calculate_buffed_exp($action, $userid=false){
 /*
 *******************************************************
 GET ACTIVE BUFFS
-Returns an array of buffs that relate to a particular action.
+Returns an array of buffs that relate to a particular action, or class of actions.
 *******************************************************
 */
 
@@ -188,15 +189,99 @@ function stamina_get_active_buffs($action, $userid=false){
 	if ($userid === false) $userid = $session['user']['acctid'];
 	
 	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	$actiondetails = get_player_action($action, $userid);
+	
+	//debug($bufflist);
 	
 	if (is_array($bufflist)) {
 		foreach($bufflist as $buff => $values){
-			if ($values['action'] == $action || $values['action']=="Global"){
-				$active_action_buffs[$buff] = $values;
+			if ($values['action'] == $action || $values['action']=="Global" || $values['class']==$actiondetails['class']){
+				if (!$values['suspended']){
+					//debug("not suspended!");
+					$active_action_buffs[$buff] = $values;
+				}
 			}
 		}
 	}
+	//debug($active_action_buffs);
 	return($active_action_buffs);
+}
+
+/*
+*******************************************************
+SUSPEND / RESTORE A BUFF / ALL BUFFS
+Temporarily suspends a Stamina buff.  Restore it afterwards, because this is saved back to the modulepref.  God this needs baking into core and rewriting.
+*******************************************************
+*/
+
+function suspend_stamina_buff($referencename, $userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	if (is_array($bufflist[$referencename])){
+		$bufflist[$referencename]['suspended'] = true;
+		set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
+		$rtrue = true;
+	}
+	if ($rtrue){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function restore_stamina_buff($referencename, $userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	if (is_array($bufflist[$referencename])){
+		if ($bufflist[$referencename]['suspended']){
+			$bufflist[$referencename]['suspended'] = false;
+			set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
+			$rtrue = true;
+		}
+	}
+	if ($rtrue){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function restore_all_stamina_buffs($userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	if (is_array($bufflist) && count($bufflist) > 0){
+		foreach($bufflist AS $buff=>$values){
+			$bufflist[$buff]['suspended'] = false;
+		}
+	}
+	//debug("restoring buffs");
+	set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
+}
+
+function mass_suspend_stamina_buffs($name,$userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	// debug($bufflist);
+	if (is_array($bufflist) && count($bufflist) > 0){
+		// debug("Okay, it's an array");
+		foreach($bufflist AS $buff=>$values){
+			if (strpos($buff, $name) !== false) {
+				//debug("Suspending buff ".$buff);
+				$bufflist[$buff]['suspended'] = true;
+				$rtrue = true;
+			}
+		}
+		set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
+	}
+	if ($rtrue){
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /*
@@ -210,25 +295,38 @@ Also outputs round and wearoff messages.
 function stamina_advance_buffs($action, $userid=false) {
 	global $session;
 	if ($userid === false) $userid = $session['user']['acctid'];
+	
 	$bufflist = unserialize(get_module_pref("buffs", "staminasystem", $userid));
+	$actiondetails = get_player_action($action, $userid);
+	
+	$write=0;
+	
 	if (is_array($bufflist)){
 		foreach($bufflist as $buff => $values){
-			if ($values['action'] == $action || $values['action']=="Global"){
-				output_notl("%s`n",stripslashes($values['roundmsg']));
-				$values['rounds']--;
-				if ($values['rounds']==0){
-					output_notl("%s`n",stripslashes($values['wearoffmsg']));
-					unset($bufflist[$buff]);
-				} else {
-					$bufflist[$buff]=$values;
+			if ($values['action'] == $action || $values['action']=="Global" || $values['class']==$actiondetails['class']){
+				if (!$values['suspended']){
+					if ($values['roundmsg']) output_notl("%s`n",stripslashes($values['roundmsg']));
+					if ($values['rounds'] > 0){
+						$values['rounds']--;
+						$write=1;
+					}
+					if ($values['rounds']==0){
+						if ($values['wearoffmsg']) output_notl("%s`n",stripslashes($values['wearoffmsg']));
+						$write=1;
+						unset($bufflist[$buff]);
+					} else {
+						$bufflist[$buff]=$values;
+					}
 				}
 			}
 		}
 	}
-	if (count($bufflist)!=0){
-		set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
-	} else {
-		set_module_pref("buffs", "array()", "staminasystem", $userid);
+	if ($write){
+		if (count($bufflist)!=0){
+			set_module_pref("buffs", serialize($bufflist), "staminasystem", $userid);
+		} else {
+			set_module_pref("buffs", "array()", "staminasystem", $userid);
+		}
 	}
 	return true;
 }
@@ -267,15 +365,14 @@ function stamina_strip_all_buffs($userid=false) {
 /*
 *******************************************************
 GET DISPLAY COST
-Returns a percentage of the player's total Stamina that is used when performing this action, by default to two decimal places.
+Returns a percentage of the player's total Stamina that is used when performing this action, by default to three decimal places.
 *******************************************************
 */
 
-function stamina_getdisplaycost($action, $precision=2, $userid=false){
+function stamina_getdisplaycost($action, $precision=3, $userid=false){
 	global $session;
 	$costval = stamina_calculate_buffed_cost($action, $userid);
-	$total = get_stamina(4, $userid);
-	$costpct = round(($costval/$total)*100, $precision);
+	$costpct = round(($costval/2000000)*100, $precision);
 	return $costpct;
 }
 
@@ -315,17 +412,24 @@ function stamina_award_exp($action, $userid=false) {
 /*
 *******************************************************
 PROCESS ACTION
-Calculates buffs, awards experience, removes cost, advances buffs, returns Stamina used and Experience gained.
+Calculates buffs, awards experience, upgrades level, removes cost, advances buffs, returns Stamina used and Experience gained.
 *******************************************************
 */
 
 function process_action($action, $userid=false) {
-	global $session;
+	global $session, $actions_used;
 	if ($userid === false) $userid = $session['user']['acctid'];
 	$info_to_return = array("points_used" => 0, "exp_earned" => 0);
 	$info_to_return['points_used']  = stamina_take_action_cost($action, $userid);
 	$info_to_return['exp_earned']  = stamina_award_exp($action, $userid);
 	stamina_advance_buffs($action, $userid);
+	$info_to_return['lvlinfo'] = stamina_level_up($action, $userid);
+	
+	$actions_used[$action]['exp_earned']+=$info_to_return['exp_earned'];
+	$actions_used[$action]['lvlinfo']=$info_to_return['lvlinfo'];
+	
+	//We want to put a ladder of some sort in here, where the player can see the player above them in the HOF and the player below them as well.
+	
 	return $info_to_return;
 }
 
@@ -369,7 +473,7 @@ function get_stamina($type = 1, $realvalue = false, $userid = false) {
 	if ($userid === false) $userid = $session['user']['acctid'];
 	
 	$totalstamina = get_module_pref("stamina", "staminasystem", $userid);
-	$maxstamina = get_module_pref("daystamina", "staminasystem", $userid);
+	$maxstamina = 2000000;
 	$totalpct = ($totalstamina/$maxstamina)*100;
 	$redpoint = get_module_pref("red", "staminasystem", $userid);
 	$amberpoint = get_module_pref("amber", "staminasystem", $userid);
@@ -440,11 +544,152 @@ function get_stamina($type = 1, $realvalue = false, $userid = false) {
 }
 
 
+/*
+*******************************************************
+LEVEL UP
+Determines whether the player is ready to level up, levels up if appropriate, returns start and end of EXP range for this level OR player has levelled up.
+*******************************************************
+*/
+
+function stamina_level_up($action, $userid = false) {
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+
+	$returninfo = array();
+	$stop = 0;
+	
+	$actions = get_player_action_list($userid);
+	if ($actions[$action]['lvl']>=100){
+		return false;
+	}
+	
+	while ($stop == 0){
+		$actions = get_player_action_list($userid);
+		$currentexp = $actions[$action]['exp'];
+		$currentlvl = $actions[$action]['lvl'];
+		$first = $actions[$action]['firstlvlexp'];
+		$increment = $actions[$action]['expincrement'];
+		$stop = 1;
+		//Determine the next level's EXP requirements
+		$addup = array();
+		$addup[0] = $first;
+		for ($i=1; $i<=100; $i++){
+			$addup[$i] = round($addup[$i-1]*$increment);
+		}
+
+		$levels = array();
+		$levels[0] = $first;
+
+		for ($i=1; $i<=100; $i++){
+			$levels[$i] = ($levels[$i-1] + $addup[$i]);
+		}
+		
+		if ($currentlvl != 0){
+			$currentlvlexp = $levels[$currentlvl];
+		} else {
+			$currentlvlexp = 0;
+		}
+		
+		$nextlvlexp = $levels[$currentlvl];
+		$currentlvlexp = $levels[$currentlvl-1];
+		
+		$returninfo['exp'] = $currentexp;
+		$returninfo['lvl'] = $currentlvl;
+		$returninfo['nextlvlexp'] = $nextlvlexp;
+		$returninfo['currentlvlexp'] = $currentlvlexp;
+		
+		//Check if player's exp is more than level requirement, and level up if true
+		if ($currentexp > $nextlvlexp && $actions[$action]['lvl']<=100){
+			$stop = 0;
+			//level up
+			$actions[$action]['lvl']++;
+			//reduce costs
+			$actions[$action]['naturalcost'] -= $actions[$action]['costreduction'];
+			//write back array to modulepref
+			set_module_pref("actions", serialize($actions), "staminasystem", $userid);
+			//set "levelledup" to true, so that the module can output levelling up text
+			$returninfo['levelledup'] = true;
+			$returninfo['newlvl'] = $actions[$action]['lvl'];
+		}
+	}
+	return $returninfo;
+}
+
+/*
+*******************************************************
+LEVEL DOWN
+Determines whether the player is ready to level up, levels up if appropriate, returns start and end of EXP range for this level OR player has levelled up.
+*******************************************************
+*/
+function stamina_level_down($action, $userid = false)
+{
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+
+	$returninfo = array();
+	$stop = 0;
+	
+	$actions = get_player_action_list($userid);
+	if ($actions[$action]['lvl']>=100){
+		return false;
+	}
+	
+	while ($stop == 0){
+		$actions = get_player_action_list($userid);
+		$currentexp = $actions[$action]['exp'];
+		$currentlvl = $actions[$action]['lvl'];
+		$first = $actions[$action]['firstlvlexp'];
+		$increment = $actions[$action]['expincrement'];
+		$stop = 1;
+		//Determine the next level's EXP requirements
+		$addup = array();
+		$addup[0] = $first;
+		for ($i=1; $i<=100; $i++){
+			$addup[$i] = round($addup[$i-1]*$increment);
+		}
+
+		$levels = array();
+		$levels[0] = $first;
+
+		for ($i=1; $i<=100; $i++){
+			$levels[$i] = ($levels[$i-1] + $addup[$i]);
+		}
+		
+		if ($currentlvl != 0){
+			$currentlvlexp = $levels[$currentlvl];
+		} else {
+			$currentlvlexp = 0;
+		}
+		
+		$nextlvlexp = $levels[$currentlvl];
+		$currentlvlexp = $levels[$currentlvl-1];
+		
+		$returninfo['exp'] = $currentexp;
+		$returninfo['lvl'] = $currentlvl;
+		$returninfo['nextlvlexp'] = $nextlvlexp;
+		$returninfo['currentlvlexp'] = $currentlvlexp;
+		
+		//Check if player's exp is more than level requirement, and level up if true
+		if ($currentexp > $nextlvlexp && $actions[$action]['lvl']<=100){
+			$stop = 0;
+			//level up
+			$actions[$action]['lvl']++;
+			//reduce costs
+			$actions[$action]['naturalcost'] -= $actions[$action]['costreduction'];
+			//write back array to modulepref
+			set_module_pref("actions", serialize($actions), "staminasystem", $userid);
+			//set "levelledup" to true, so that the module can output levelling up text
+			$returninfo['levelledup'] = true;
+			$returninfo['newlvl'] = $actions[$action]['lvl'];
+		}
+	}
+	return $returninfo;
+}
 
 /*
 *******************************************************
 PROCESS NEW DAY
-Awards levels, reduces action costs, strips buffs, resets Stamina to starting value.
+Strips buffs, resets Stamina to starting value.
 *******************************************************
 */
 
@@ -454,38 +699,13 @@ function stamina_process_newday($userid = false) {
 	if ($userid === false) $userid = $session['user']['acctid'];
 	
 	modulehook("stamina-newday-intercept");
-	
-	$actions = get_player_action_list($userid);
-
-	foreach($actions AS $key => $values){
-		$exp = $values['exp'];
-		$currentlvl = $values['level'];
-		$newlevel = floor($values['exp']/$values['expforlvl']);
-		$levelsgained = 0;
-		while ($newlevel > $currentlvl) {
-			// add experience, increase level, reduce costs
-			$currentlvl++;
-			$levelsgained++;
-			$values['naturalcost'] -= $values['costreduction'];
-			if ($values['naturalcost'] < $values['mincost']) {
-				$values['naturalcost'] = $values['mincost'];
-			};
-		};
-		if ($levelsgained == 1){
-			output("You gained a level in %s!`n", $key);
-		}
-		if ($levelsgained > 1){
-			output("You gained %s levels in %s!`n", $levelsgained, $key);
-		}
-		$values['level'] += $levelsgained;
-		$actions[$key]=$values;
-	};
-	set_module_pref("actions", serialize($actions), "staminasystem", $userid);
 	// remove buffs
 	stamina_strip_all_buffs($userid);
 
-	$startingstamina = get_module_pref("daystamina","staminasystem",$userid);
+	$startingstamina = 2000000;
 	set_module_pref("stamina",$startingstamina,"staminasystem",$userid);
+	set_module_pref("amber",500000,"staminasystem",$userid);
+	set_module_pref("red",300000,"staminasystem",$userid);
 	
 	modulehook("stamina-newday");
 	
@@ -496,23 +716,30 @@ function stamina_process_newday($userid = false) {
 *******************************************************
 PROCESS DRAGON KILL
 Retains a percentage of experience points, and resets action costs
+NOW DEPRECATED - The Stamina system no longer removes any info between Dragon Kills.
 *******************************************************
 */
 
-function stamina_process_dragonkill($userid = false){
-	global $session;
-	if ($userid === false) $userid = $session['user']['acctid'];
-	$actions = get_player_action_list($userid);
-	foreach($actions AS $key => $values){
-		$values['dkexp'] = round(($values['exp'] / 100) * $values['dkpct']) + $values['dkexp'];
-		$values['exp'] = $values['dkexp'];
-		$values['level'] = 0;
-		$values['naturalcost'] = $values['maxcost'];
-		$actions[$key]=$values;
-	};
-	set_module_pref("actions", serialize($actions), "staminasystem", $userid);
-	return true;
-}
+// function stamina_process_dragonkill($userid = false){
+// 	global $session;
+// 	if ($userid === false) $userid = $session['user']['acctid'];
+// 	$actions = get_player_action_list($userid);
+// 	foreach($actions AS $key => $values){
+// 		if (0 == $values['level']) continue;
+// 		// if (0 == e_rand(0, 1)) continue;
+// 		// $values['dkexp'] = round(($values['exp'] / 100) * $values['dkpct']) + $values['dkexp'];
+// 		$values['exp'] = round($values['exp'] * (e_rand(85,89)/100),0);
+// 		$levelLost = e_rand(1,5);
+// 		if ($levelLost < $values['level']) 
+// 			$values['level'] = $values['level'] - $levelLost;
+// 		else
+// 			$values['level'] = 0;
+// 		// $values['naturalcost'] = $values['maxcost'];
+// 		$actions[$key]=$values;
+// 	};
+// 	set_module_pref("actions", serialize($actions), "staminasystem", $userid);
+// 	return true;
+// }
 
 /*
 *******************************************************
@@ -524,8 +751,8 @@ Simple functions to add or remove Stamina from players.
 function addstamina($amount, $userid = false){
 	global $session;
 	
+	//debug("Adding ".$amount." Stamina points");
 	if ($userid === false) $userid = $session['user']['acctid'];
-	
 	$newstamina = get_module_pref("stamina", "staminasystem", $userid) + $amount;
 	set_module_pref("stamina",$newstamina,"staminasystem",$userid);
 	
@@ -537,6 +764,7 @@ function removestamina($amount, $userid = false){
 	
 	if ($userid === false) $userid = $session['user']['acctid'];
 	
+	
 	$newstamina = get_module_pref("stamina", "staminasystem", $userid) - $amount;
 	if ($newstamina < 0){
 		$newstamina = 0;
@@ -544,6 +772,274 @@ function removestamina($amount, $userid = false){
 	set_module_pref("stamina",$newstamina,"staminasystem",$userid);
 	
 	return $newstamina;
+}
+
+function stamina_minihof($action,$userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	$st = microtime(true);
+	$boardfilename = str_replace(" ","",$action);
+	$boardinfo = datacache("staminaboardinfo_".$boardfilename,120);
+	$en = microtime(true);
+	$to = $en - $st;
+	//debug("Cache: ".$to);
+	
+	if (!is_array($boardinfo)){
+		$board = array();
+		$staminasql = "SELECT setting,value,userid FROM ".db_prefix("module_userprefs")." WHERE modulename='staminasystem' AND setting='actions'";
+		$staminaresult = db_query($staminasql);
+		
+		$scount = db_num_rows($staminaresult);
+		for ($i=0;$i<$scount;$i++){
+			$row = db_fetch_assoc($staminaresult);
+			$actions_array = @unserialize($row['value']);
+			$actiondetails = $actions_array[$action];
+			$board[$row['userid']] = $actiondetails['exp'];
+		}
+		
+		$boardinfo = stamina_minihof_assignranks($board);
+		
+		updatedatacache("staminaboardinfo_".$boardfilename,$boardinfo);
+	}
+	
+	//set the player's entry in the board with brand-new data
+	$player_action = get_player_action($action);
+	$boardinfo['board'][$userid] = $player_action['exp'];
+	
+	$smallboard = stamina_minihof_makesmallboard($boardinfo,$userid);
+	
+	if (!$smallboard){
+		$boardinfo = stamina_minihof_assignranks($boardinfo['board']);
+		$smallboard = stamina_minihof_makesmallboard($boardinfo,$userid);
+	}
+	
+	//display the board!
+	
+	output("`n`n");
+	rawoutput("<div align=center>");
+	rawoutput("<table cellspacing='0' cellpadding='5'>");
+	rawoutput("<tr class='trhead'><td colspan=3><strong>$action</strong></td></tr>");
+	rawoutput("<tr class='trhead'><td><strong>Rank</strong></td><td><strong>Name</strong></td><td><strong>Experience</strong></td></tr>");
+	$count = count($smallboard);
+	for ($i=0; $i < $count; $i++){
+		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
+		if ($smallboard[$i]['acctid'] == $userid){
+			rawoutput("<td><strong>".number_format($smallboard[$i]['rank'])."</strong></td><td><strong>".appoencode($smallboard[$i]['name'])."</strong></td><td><strong>".number_format($smallboard[$i]['xp'])."</strong></td></tr>");
+		} else {
+			rawoutput("<td>".number_format($smallboard[$i]['rank'])."</td><td>".appoencode($smallboard[$i]['name'])."</td><td>".number_format($smallboard[$i]['xp'])."</td></tr>");
+		}
+	}
+	rawoutput("</table></div>");
+}
+
+function stamina_minihof_makesmallboard($boardinfo,$userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	
+	$ranks = $boardinfo['ranks'];
+	$board = $boardinfo['board'];
+	$smallboard = array();
+	//$myrank = $board[$userid]['rank'];
+	
+	$st = microtime(true);
+	$myrank = array_search($userid,$ranks);
+	$en = microtime(true);
+	$to = $en - $st;
+	//debug("find player rank: ".$to);
+	
+	$st = microtime(true);
+	//get the twenty players above and below, put them in arrays
+	$largeboard = array();
+	for ($i = -10; $i <= 10; $i++){
+		$acctid = $ranks[$myrank+$i];
+		$parray = array();
+		$parray['acctid'] = $acctid;
+		$parray['xp'] = $board[$acctid];
+		$parray['rank'] = $myrank+$i;
+		if ($acctid == $session['user']['acctid']){
+			$parray['name'] = $session['user']['name'];
+		}
+		if ($parray['acctid']){
+			$largeboard[] = $parray;
+		}
+	}
+	$en = microtime(true);
+	$to = $en - $st;
+	//debug("largeboard: ".$to);
+	
+	//now, check the player's rank is where it should be.  If not, re-work the ranks.  If the player is off the page, run assignranks and start again.
+	
+	if ($myrank >=10){
+		$playerposition = 10;
+	} else {
+		$playerposition = $myrank;
+	}
+	
+	$st = microtime(true);
+	while ($largeboard[$playerposition]['xp'] > $largeboard[$playerposition-1]['xp'] && $playerposition >= 0){
+		$temp = $largeboard[$playerposition];
+		$largeboard[$playerposition] = $largeboard[$playerposition-1];
+		$largeboard[$playerposition-1] = $temp;
+		$playerposition--;
+		$redoranks = true;
+	}
+	
+	//debug($largeboard);
+	
+	if ($playerposition <= 0){
+		return false;
+	}
+	$en = microtime(true);
+	$to = $en - $st;
+	//debug("checkranks: ".$to);
+	
+	//now recalc the ranks, from top to bottom
+	if ($redoranks && $playerposition){
+		$startrank = $largeboard[0]['rank'];
+		for ($i=1; $i<=20; $i++){
+			$largeboard[$i]['rank'] = $startrank+$i;
+		}
+	}
+	
+	$smallboard = array();
+	for ($i=-2; $i <= 2; $i++){
+		if ($largeboard[$playerposition+$i]){
+			$smallboard[]=$largeboard[$playerposition+$i];
+		}
+	}
+	
+	$st = microtime(true);
+	//get the names of the contestants in the small board
+	$sbc = count($smallboard);
+	for ($i=0; $i<$sbc; $i++){
+		if (!$smallboard[$i]['name']){
+			$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid='".$smallboard[$i]['acctid']."'";
+			$result = db_query_cached($sql,"playernames/playername_".$smallboard[$i]['acctid'],3600);
+			$row = db_fetch_assoc($result);
+			$smallboard[$i]['name'] = $row['name'];
+		}
+	}
+	$en = microtime(true);
+	$to = $en - $st;
+	
+	//debug($smallboard);
+	
+	//debug("smallboard: ".$to);
+	
+	return $smallboard;
+}
+
+function stamina_minihof_assignranks($board){
+	arsort($board);
+	//debug($board);
+	$r=1;
+	$ranks = array();
+	$st = microtime(true);
+	foreach($board AS $acctid => $exp){
+		$ranks[$r] = $acctid;
+		$r++;
+	}
+	$en = microtime(true);
+	$to = $en - $st;
+	//debug("Rank assignment: ".$to);
+	$boardinfo=array();
+	$boardinfo['board'] = $board;
+	$boardinfo['ranks'] = $ranks;
+	//debug($ranks);
+	return $boardinfo;
+}
+
+
+function stamina_minihof_old($action,$userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+
+	$st = microtime(true);
+	
+	$boardfilename = str_replace(" ","",$action);
+	$boardinfo = datacache("staminaboardinfo_".$boardfilename,20);
+	
+	$en = microtime(true);
+	$to = $en - $st;
+	debug("Cache: ".$to);
+	
+	if (!is_array($boardinfo)){
+		$board = array();
+		$staminasql = "SELECT setting,value,userid FROM ".db_prefix("module_userprefs")." WHERE modulename='staminasystem' AND setting='actions'";
+		$staminaresult = db_query($staminasql);
+		
+		$scount = db_num_rows($staminaresult);
+		for ($i=0;$i<$scount;$i++){
+			$row = db_fetch_assoc($staminaresult);
+			$actions_array = @unserialize($row['value']);
+			$actiondetails = $actions_array[$action];
+			if (!$actiondetails['exp']) continue;
+			$board[$row['userid']]['xp'] = $actiondetails['exp'];
+			$board[$row['userid']]['id'] = $row['userid'];
+			//$board[$row['userid']]['lvl'] = $actiondetails['lvl'];
+		}
+		
+		$boardinfo = stamina_minihof_assignranks($board);
+		updatedatacache("staminaboardinfo_".$boardfilename,$boardinfo);
+	}
+		
+	//set the player's entry in the board with brand-new data
+	$player_action = get_player_action($action);
+	$boardinfo['board'][$userid]['xp'] = $player_action['exp'];
+	
+	$smallboard = stamina_minihof_smallboard($boardinfo,$userid);
+	
+	debug($smallboard);
+}
+
+function stamina_minihof_sort($x, $y){
+	if ($x['xp'] == $y['xp']) return 0;
+	else if ($x['xp'] < $y['xp']) return 1;
+	else return -1;
+}
+
+function stamina_minihof_smallboard_old($boardinfo,$userid=false){
+	global $session;
+	if ($userid === false) $userid = $session['user']['acctid'];
+	
+	$ranks = $boardinfo['ranks'];
+	$board = $boardinfo['board'];
+	$smallboard = array();
+	//$myrank = $board[$userid]['rank'];
+	
+	$myrank = array_search($userid,$ranks);
+	
+	$smallboard[] = $board[$ranks[$myrank-2]];
+	$smallboard[] = $board[$ranks[$myrank-1]];
+	$smallboard[] = $board[$ranks[$myrank]];
+	$smallboard[] = $board[$ranks[$myrank+1]];
+	$smallboard[] = $board[$ranks[$myrank+2]];
+	
+	if ($smallboard[2]['xp']>$smallboard[1]['xp']){
+		debug("resorting...");
+		usort($smallboard,"stamina_minihof_sort");
+	}
+	return $smallboard;
+}
+
+function stamina_minihof_assignranks_old($board){
+	uasort($board,"stamina_minihof_sort");
+	$r=1;
+	$ranks = array();
+	$st = microtime(true);
+	foreach($board AS $acctid => $vals){
+		//$board[$acctid]['rank'] = $r;
+		$ranks[$r] = $acctid;
+		$r++;
+	}
+	$en = microtime(true);
+	$to = $en - $st;
+	debug("Rank assignment: ".$to);
+	$boardinfo=array();
+	$boardinfo['board'] = $board;
+	$boardinfo['ranks'] = $ranks;
+	debug($ranks);
+	return $boardinfo;
 }
 
 ?>
