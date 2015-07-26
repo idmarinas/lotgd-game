@@ -763,7 +763,8 @@ function charstats(){
 		}
 		addcharstat("Personal Info");
 		if ($u['alive']) {
-			addcharstat("Turns", $u['turns'].check_temp_stat("turns",1));
+			// No se usan los turnos
+			// addcharstat("Turns", $u['turns'].check_temp_stat("turns",1));
 			addcharstat("PvP", $u['playerfights']);
 			addcharstat("Spirits", translate_inline("`b".$spirits[(int)$u['spirits']]."`b"));
 			addcharstat("Gold", number_format($u['gold'].check_temp_stat("gold",1),0,$point,$sep));
