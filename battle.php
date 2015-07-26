@@ -163,12 +163,14 @@ if ($op != "newtarget") {
 	// Run through as many rounds as needed.
 	do {
 		//we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
+		modulehook("startofround-prebuffs");
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
 		//$newenemies = array();
 		// Run the beginning of round buffs (this also calculates all modifiers)
 		foreach ($enemies as $index=>$badguy) {
+			$badguy = modulehook("startofround-perbadguy-prebuff",$badguy);
 			if ($badguy['dead'] == false && $badguy['creaturehealth'] > 0) {
 				if (isset($badguy['alwaysattacks']) && $badguy['alwaysattacks'] == true) {
 				} else {
@@ -225,6 +227,7 @@ if ($op != "newtarget") {
 						$companions = $newcompanions;
 
 						if ($op=="fight" || $op=="run" || $surprised){
+						$badguy = modulehook("startofround",$badguy);
 							// Grab an initial roll.
 							$roll = rolldamage(&$badguy);
 							if ($op=="fight" && !$surprised){
@@ -358,7 +361,10 @@ if ($op != "newtarget") {
 			// We will also delete the now old set of companions. Just in case.
 			$companions = $newcompanions;
 			unset($newcompanions);
-
+			
+			if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
+				$badguy = modulehook("endofround",$badguy);
+			}
 			// If any A.I. script wants the current enemy to be deleted completely, we will obey.
 			// For multiple rounds/multiple A.I. scripts we will although unset this order.
 
@@ -372,7 +378,6 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
-
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
@@ -489,10 +494,11 @@ $newenemies = autosettarget($newenemies);
 if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
 	output("`2`bEnd of Round:`b`n");
 	show_enemies($newenemies);
-	//extra code for "endofround" hook, used by combatbars.php
-	$badguy = modulehook("endofround",$badguy);
-	//end extra code
 }
+
+//extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
+$badguy = modulehook("endofpage",$badguy);
+//end extra code
 
 if ($session['user']['hitpoints'] <= 0) {
 	$session['user']['hitpoints'] = 0;
@@ -522,8 +528,8 @@ if ($victory || $defeat){
 	}
 	if (is_array($newenemies)) {
 		foreach ($newenemies as $index => $badguy) {
-			//global $output;
-//			$badguy['fightoutput'] = $output;
+			global $output;
+			$badguy['fightoutput'] = $output;
 			// legacy support. Will be removed in one of the following versions!
 			// Please update all modules, that use the following hook to use the
 			// $options array instead of the $args array for their code.
@@ -531,7 +537,7 @@ if ($victory || $defeat){
 
 			if ($victory) $badguy = modulehook("battle-victory",$badguy);
 			if ($defeat) $badguy = modulehook("battle-defeat",$badguy);
-//			unset($badguy['fightoutput']);
+			unset($badguy['fightoutput']);
 		}
 	}
 }
