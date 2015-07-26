@@ -18,6 +18,7 @@ rawoutput("</table>");
 addnav("Edit Player","runmodule.php?module=staminasystem&op=editplayer");
 superusernav();
 
+debug($actions);
 page_footer();
 
 ?>

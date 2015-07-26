@@ -58,7 +58,7 @@ if($op2 == "edit" ){
 		}
 		rawoutput("</textarea><br /><br />");
 	}
-	rawoutput("<input type='submit' class='button' value='".translate_inline("Save")."'");
+	rawoutput("<button type='submit' class='button'>".translate_inline("Save")."</button>");
 	rawoutput("</form>");
 	addnav("","runmodule.php?module=staminasystem&op=editplayer&op2=save&id=".$id."");
 	addnav("Return");

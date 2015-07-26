@@ -5,7 +5,7 @@ require_once "modules/staminasystem/lib/lib.php";
 function staminasystem_getmoduleinfo(){
 	$info=array(
 		"name"=>"Expanded Stamina System - Core",
-		"version"=>"0.5 2009-01-12",
+		"version"=>"20090329",
 		"author"=>"Dan Hall, aka Caveman Joe, improbableisland.com",
 		"override_forced_nav"=>true,
 		"category"=>"Stamina",
@@ -17,11 +17,12 @@ function staminasystem_getmoduleinfo(){
 		),
 		"prefs"=>array(
 			"stamina"=>"Player's current Stamina,int|0",
-			"daystamina"=>"Player's New Day Stamina,int|2000000",
+			//"daystamina"=>"Player's New Day Stamina,int|2000000",
 			"red"=>"Amount of the bar taken up in Red Stamina levels,int|300000",
 			"amber"=>"Amount of the bar taken up in Amber Stamina levels,int|500000",
 			"actions"=>"Player's Actions array,textarea|array()",
 			"buffs"=>"Player's Buffs array,textarea|array()",
+			"user_minihof"=>"Show me the mini-HOF for Stamina-related actions,bool|true",
 		)
 	);
 	return $info;

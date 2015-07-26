@@ -1,5 +1,5 @@
 <?php
 
-stamina_process_dragonkill();
+// stamina_process_dragonkill();
 
 ?>
