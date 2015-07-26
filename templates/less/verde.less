@@ -54,7 +54,7 @@
 
 //## Claros
 @col-lt-blue    : #000060;
-@col-lt-green   : #008000;
+@col-lt-green   : lighten(#008000, 10%);
 @col-lt-cyan    : darken(#00FFFF, 20%);//#006060 LISTO
 @col-lt-red     : #600000;
 @col-lt-magenta : #600060;
@@ -63,7 +63,7 @@
 @col-lt-black   : #222222;
 @col-lt-orange  : #994400;
 @col-lt-brown 	: #8F7D47;
-@colX-lt-green	: #009900;
+@colX-lt-green	: lighten(#009900, 10%);
 @col-lt-salmon  : #8F6859;
 @col-lt-linkBlue : #0069AF;
 @col-lt-rust : #B07878;
@@ -146,10 +146,11 @@
 
 //** Color de fondo para el progreso entero
 @progress-bg: @gray-light;
+@progress-bar-bg : #003300;
 //** Color del texto de la barra de progreso
 @progress-bar-color: #fff;
 //** Color de la barra en progreso
-@progress-bar-progress: #ff0000;
+@progress-bar-progress: darken(#00FF00, 15%);
 //** Variable for setting rounded corners on progress bar.
 @progress-border-radius: @border-radius-base;
 
