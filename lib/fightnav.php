@@ -21,6 +21,8 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 		$fight = "F?Torment";
 		$run = "R?Flee";
 	}
+	modulehook("fightnav-prenav", array("script"=>$script));
+	addnav("Standard Fighting");
 	addnav($fight,$script."op=fight");
 	if ($allowflee) {
 		addnav($run,$script."op=run");
@@ -39,6 +41,11 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 		} elseif ($auto == 1 || ($auto == 2 && !$allowflee)) {
 			addnav("U?Until first enemy dies", $script."op=fight&auto=full");
 		}
+	}
+	
+	//added hook for the Stamina system
+	if (!$session['user']['alive']){
+		modulehook("fightnav-graveyard", array("script"=>$script));
 	}
 
 	if ($allowspecial) {
