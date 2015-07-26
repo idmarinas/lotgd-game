@@ -731,6 +731,7 @@ function charstats(){
 		} else {
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
 			addcharstat("Soulpoints", $u['soulpoints'].check_temp_stat("soulpoints",1)."`0/".$maxsoul);
+			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			addcharstat("Torments", $u['gravefights'].check_temp_stat("gravefights",1));
 			addcharstat("Psyche", 10+round(($u['level']-1)*1.5));
 			addcharstat("Spirit", 10+round(($u['level']-1)*1.5));
