@@ -109,49 +109,19 @@ function worldmapen_editor_terrain($op, $subop, $act) {
 		
 		output("Worldmap saved");
 	}
-	$colors = '';
+	$colors = array();
 	foreach( $worldmapen_globals['terrainDefs'] as $defs )
 	{
-		$colors.= '"'.$defs['color'].'", ';
+		$colors[]= $defs['color'];
 	}
-	$colors = rtrim( $colors, ', ' );
 	// -----------------------------------------------------------------------
 	// BEGIN - Java script to determine the terrain type by clicking on a td cell
 	// -----------------------------------------------------------------------
-	rawoutput("<script type=\"text/javascript\"><!--");
-	rawoutput( 'colors = ['.$colors.'];' );
-	rawoutput("cRGB = [];");
-	rawoutput("function toRGB(color){");
-	rawoutput("var rgb = \"rgb(\" + parseInt(color.substring(1,3), 16) + \", \" + parseInt(color.substring(3,5), 16) + \", \" + parseInt(color.substring(5,8), 16) + \")\";   ");
-	rawoutput("return rgb;");
-	rawoutput("}");
-	rawoutput("for(var i=0; i<colors.length; i++){");
-	rawoutput("cRGB[i] = toRGB(colors[i]);");
-	rawoutput("}");
-	rawoutput("function changeColor(target){");
-	rawoutput("var swapper = navigator.appVersion.indexOf(\"MSIE\")!=-1 ? toRGB(document.getElementById(target).style.backgroundColor) : document.getElementById(target).style.backgroundColor;");
-	rawoutput("var set = false;");
-	rawoutput("var xx;");
-	rawoutput("for(var i=0; i<cRGB.length; i++){");
-	rawoutput("if(swapper == cRGB[i]){");
-	rawoutput("if(((i+1)) >= cRGB.length){");
-	rawoutput("xx = 0;");
-	rawoutput("}else{");
-	rawoutput("xx = i+1;");
-	rawoutput("}");
-	rawoutput("document.getElementById(target).style.background = colors[xx];");
-	rawoutput("document.getElementById(target+\"b\").value = xx;");
-	rawoutput("set = true;");
-	rawoutput("i=cRGB.length;");
-	rawoutput("}");
-	rawoutput("}");
-	rawoutput("set ? null : (document.getElementById(target).style.background = colors[1], document.getElementById(target+\"b\").value = 1);");
-	rawoutput("}//-->");
-	rawoutput("</script>");
+	rawoutput('<script type="text/javascript">colors = '.json_encode($colors).';function changeColor(target){var length = colors.length;	var value = parseInt($("#"+target+"b").val());	value = isNaN(value) ? 0 : value+1;	if (value >= length) { value = 0; }$("#"+target).removeClass().addClass(colors[value]);$("#"+target+"b").val(value);}</script>');
 	// -----------------------------------------------------------------------
 	// END - Java script to determine the terrain type by clicking on a td cell
 	// -----------------------------------------------------------------------
-	output( '<noscript>JavaScript must be enabled for the terrain editor to work.</noscript>', true );
+	rawoutput( '<noscript>'.translate_inline("JavaScript must be enabled for the terrain editor to work.").'</noscript>', true );
 	worldmapen_viewmap(false);
 }
 ?>
