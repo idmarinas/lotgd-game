@@ -547,7 +547,7 @@ function worldmapen_determinenav(){
 			$nlink = "#";
 		}else{
 			$nlink = "#";
-			output("`c`n`!%s`0`n`c",get_module_setting("nBoundary"));
+			output_notl("`c`n`!%s`0`n`c",get_module_setting("nBoundary"));
 		}
 		if ($x + 1 <= $maxX && $EterrainCost <=  $free){
 			$elink = "runmodule.php?module=worldmapen&op=move&oloc=".rawurlencode ( $oloc )."&dir=east";
@@ -557,7 +557,7 @@ function worldmapen_determinenav(){
 			$elink = "#";
 		}else{
 			$elink = "#";
-			output("`c`n`!%s`0`c`n",get_module_setting("eBoundary"));
+			output_notl("`c`n`!%s`0`c`n",get_module_setting("eBoundary"));
 		}
 		if ($y - 1 >= $minY && $SterrainCost <=  $free){
 			$slink = "runmodule.php?module=worldmapen&op=move&oloc=".rawurlencode ( $oloc )."&dir=south";
@@ -567,7 +567,7 @@ function worldmapen_determinenav(){
 			$slink = "#";
 		}else{
 			$slink = "#";
-			output("`c`n`!%s`0`c`n",get_module_setting("sBoundary"));
+			output_notl("`c`n`!%s`0`c`n",get_module_setting("sBoundary"));
 		}
 		if ($x - 1 >= $minX && $WterrainCost <=  $free){
 			$wlink = "runmodule.php?module=worldmapen&op=move&oloc=".rawurlencode ( $oloc )."&dir=west";
@@ -577,7 +577,7 @@ function worldmapen_determinenav(){
 			$wlink = "#";
 		}else{
 			$wlink = "#";
-			output("`n`c`!%s`0`n`c",get_module_setting("wBoundary"));
+			output_notl("`n`c`!%s`0`n`c",get_module_setting("wBoundary"));
 		}
 		if (get_module_setting("compasspoints") == "1"){
 			if ($y + 1 <= $maxY && $x + 1 <= $maxX && $NEterrainCost <=  $free){
