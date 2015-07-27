@@ -98,58 +98,61 @@ function worldmapen_viewmap($showloc){
 		// BEGIN - Display the simple map
 		// -----------------------------------------------------------------------
 		if ($op=="viewmap" || $subop=="" || $subop=="regen"){
-			output_notl("`c");
-			rawoutput("<table border='0' cellpadding='0' cellspacing='1'>\n<tr>\n<td valign='middle' rowspan='{$rowspanY}' width='10'>");
-			output_notl("`6`bY`b`0");
-			rawoutput("</td>");
+			rawoutput("<div class='worldmapen'><table class='map1'>");
 
 			for ($y = $sizeY; $y > 0; $y--) {
 				rawoutput("<tr>");
-				rawoutput("<td width='20' align='right'>$y&nbsp;&nbsp;</td>");
+				rawoutput("<td width='20' align='right'>$y</td>");
 				for ($x = 1; $x <= $sizeX; $x++){
 					$cellvalue = $map[$x][$y];
-
-					if ($showloc){
-						if ($y == $worldmapY && $x == $worldmapX){
-							rawoutput("<td bgcolor='{$colorUserLoc}' align='center' valign='middle' height='15' width='15' alt='({$x}, {$y}) {$map[$x][$y]}' title='({$x}, {$y}) {$map[$x][$y]}'>");
-						}else{
-							rawoutput("<td bgcolor='{$colors[$cellvalue]}' align=center valign=middle height=15 width=15 alt='({$x}, {$y}) {$map[$x][$y]}' title='({$x}, {$y}) {$map[$x][$y]}'>");
-						}
-					}else{
-						rawoutput("<td bgcolor='{$colors[$cellvalue]}' align=center valign=middle height=15 width=15 alt='({$x}, {$y}) {$map[$x][$y]}' title='({$x}, {$y}) {$map[$x][$y]}'>");
-					}
+					$terrainName = translate_inline($map[$x][$y]);
+					
 					foreach($vloc as $loc=>$val) {
 						if ($y == get_module_setting($loc."Y") && $x == get_module_setting($loc."X")) {
-							output_notl("%s", substr($loc, 0, 3));
+							$cityText = "<i class='fa fa-home fa-fw' data-uk-tooltip title='$loc ({$x}, {$y}) ($terrainName)'></i>";
 							$city = true;
 							break;
-						} else {
+						}
+						else
+						{
+							$cityText = "";
 							$city = false;
 						}
 					}
-					if (!$city) {
-						rawoutput("<img src='images/trans.gif' height='15' width='15'>");
+					if ($showloc){
+						if ($y == $worldmapY && $x == $worldmapX){
+							rawoutput("<td class='{$colorUserLoc}'>");
+						}else{
+							if (!$city)
+								rawoutput("<td class='{$colors[$cellvalue]}' data-uk-tooltip alt='({$x}, {$y}) ($terrainName)' title='({$x}, {$y}) $terrainName'>");
+							else
+								rawoutput("<td class='{$colors[$cellvalue]}'>");
+						}
+					}else{
+						if (!$city)
+							rawoutput("<td class='{$colors[$cellvalue]}' data-uk-tooltip alt='({$x}, {$y}) ($terrainName)' title='({$x}, {$y}) $terrainName'>");
+						else
+							rawoutput("<td class='{$colors[$cellvalue]}'>");
 					}
+					rawoutput($cityText);
 					rawoutput("</td>");
 				}
 				rawoutput("</tr>");
 			}
 			rawoutput("<tr>");
-			rawoutput("<td colspan='2'>&nbsp;</td>");
+			output_notl("<td>`6`bY/X`b`0</td>",true);
 			for ($x = 1; $x <= $sizeX ; $x++){
-				rawoutput("<td align=middle><br>{$x}</td>",true);
+				rawoutput("<td>{$x}</td>",true);
 			}
 			rawoutput("</tr>");
-			rawoutput("<tr><td colspan='2'></td><td align='center' colspan='{$sizeX}'>");
-			output_notl("`6`bX`b`0");
-			rawoutput("</td></tr>");
 			rawoutput("</table>");
+			
 			if (get_module_setting("showcompass") == 1){
-				output_notl("`c");
+				rawoutput("<hr><table><tr><td>");
 				worldmapen_showcompass();
-			} else {
-				output_notl("`c");
+				rawoutput("</td></tr></table>");
 			}
+			rawoutput("</div>");
 		}
 
 		// -----------------------------------------------------------------------
@@ -160,46 +163,36 @@ function worldmapen_viewmap($showloc){
 		// BEGIN - Display the advanced map with terrain editor
 		// -----------------------------------------------------------------------
 		if ($subop=="terrain"){
-			output("<form method='post' action='runmodule.php?module=worldmapen&op=edit&subop=terrain&act=save'>",true);
-			output_notl("`c");
-			rawoutput("<table border=0 cellpadding=0 cellspacing=1>");
-			rawoutput("<tr>");
-			rawoutput("<td valign='middle' rowspan='$rowspanY' width='10'>");
-			output_notl("`6`bY`b`0");
-			rawoutput("</td>");
-
+			rawoutput("<form method='post' action='runmodule.php?module=worldmapen&op=edit&subop=terrain&act=save'>",true);
+			rawoutput("<div class='worldmapen text-center'>");
+			rawoutput("<table class='map2'>");
 			for ($y = $sizeY; $y > 0; $y--){
 				rawoutput("<tr>");
-				rawoutput("<td width='20' align='right'>{$y}&nbsp;&nbsp;</td>");
+				rawoutput("<td>{$y}</td>");
 				for ($x = 1; $x <= $sizeX; $x++){
 						
 					$cellvalue = $map[$x][$y];
-
+					$terrainName = translate_inline($map[$x][$y]);
 					// We do y x y for the id to address issues when x = 11 y = 5 and x = 1 and y = 15
-					rawoutput("<td id=\"".$y."".$x."".$y."\" onclick=\"changeColor(this.id);\" bgcolor=\"{$colors[$cellvalue]}\" align=center valign=middle height=25 width=30 alt='({$x}, {$y}) {$map[$x][$y]}' title='({$x}, {$y}) {$map[$x][$y]}'><input type=\"hidden\" id=\"".$y."".$x."".$y."b\" name=\"".$x.".".$y."\" value=\"{$cellvalue}\">",true);
+					rawoutput("<td id=\"".$x."-".$y."\" onclick=\"changeColor(this.id);\" class=\"{$colors[$cellvalue]}\" align=center valign=middle alt='({$x}, {$y}) $terrainName' title='({$x}, {$y}) $terrainName'><input type=\"hidden\" id=\"".$x."-".$y."b\" name=\"".$x.".".$y."\" value=\"{$cellvalue}\">",true);
 					foreach($vloc as $loc=>$val) {
-						if ($y+1 == get_module_setting($loc."Y") && $x+1 == get_module_setting($loc."X")) {
-							output_notl("%s", substr($loc, 0, 3));
-							$city = true;
+						if ($y == get_module_setting($loc."Y") && $x == get_module_setting($loc."X")) {
+							rawoutput("<i class='fa fa-home fa-fw' data-uk-tooltip title='$loc ({$x}, {$y}) $terrainName'></i>");
 							break;
-						} else {
-							$city = false;
 						}
-					}
-					if (!$city) {
-						rawoutput("<img src='images/trans.gif' height='25' width='30'>");
 					}
 				}
 				rawoutput("</tr>");
 			}
-
-			output_notl("<td colspan='2'></td>",true);
+			
+			rawoutput("<tr>");
+			output_notl("<td>`6`bY/X`b`0</td>",true);
 			for ($x = 1; $x <= $sizeX; $x++){
-				rawoutput("<td align='middle'>{$x}</td>",true);
+				rawoutput("<td>{$x}</td>",true);
 			}
-			output_notl("</tr><tr><td colspan='2'></td><td align='center' colspan=\"{$sizeX}\">`6`bX`b</td></tr>",true);
+			rawoutput("</tr>");
 			rawoutput("</table>");
-			output_notl("`n<input type='submit' value=\"Save Terrain\">`c",true);
+			output_notl("`n<input type='submit' value=\"".translate_inline("Save Terrain")."\">`c",true);
 			rawoutput("</form>");
 			addnav("","runmodule.php?module=worldmapen&op=edit&subop=terrain&act=save");
 		}
@@ -232,12 +225,15 @@ function worldmapen_viewsmallmap(){
 	$i=0;
 	
 	
-	output_notl("`c");
-	rawoutput("<table cellpadding='0' cellspacing='5' width='100%' border='0'>");
-	rawoutput("<tr><td height='1' bgcolor='#000000'></td><tr>");
-	rawoutput("</table>");
-	rawoutput("<table border='0' cellpadding='0' cellspacing='1'>");
-	rawoutput("<tr>");
+	rawoutput("<div class='worldmapen text-center'>");
+	rawoutput("<hr>");
+	rawoutput("<table><tr>");
+	if (get_module_setting("showcompass") == 1){
+		rawoutput("<td>");
+		worldmapen_showcompass();
+		rawoutput("</td>");
+	}
+	rawoutput("<td><table class='map4'><tr>");
 
 	$map = worldmapen_loadMap();
 	$colors = worldmapen_getColorDefinitions();
@@ -263,22 +259,28 @@ function worldmapen_viewsmallmap(){
 		    continue;
 		  }
 			$cellvalue = $map[$smallmapX][$smallmapY];
-
-			if ($i == floor($smallmapsize * $smallmapsize / 2)) {
-				rawoutput("<td bgcolor='{$colorUserLoc}' align='center' valign='middle' height='25' width='30'>");
-				$blindoutput.="Your current location: ";
-			} else if ($x < $sizeX){
-				rawoutput("<td bgcolor='{$colors[$cellvalue]}' align='center' valign='middle' height='25' width='30'>");
-			}
+			$terrainName = translate_inline($map[$smallmapX][$smallmapY]);
+			
 			foreach($vloc as $loc=>$val) {
 				if ($smallmapY == get_module_setting($loc."Y") && $smallmapX == get_module_setting($loc."X")) {
-					output_notl("%s", substr($loc, 0, 3));
+					$cityText = "<i class='fa fa-home fa-fw' data-uk-tooltip title='$loc ({$smallmapX}, {$smallmapY}) ($terrainName)'></i>";
 					$city = true;
 					break;
 				}else{
+					$cityText = "";
 					$city = false;
 				}
 			}
+			if ($i == floor($smallmapsize * $smallmapsize / 2)) {
+				rawoutput("<td class='{$colorUserLoc}'>");
+				$blindoutput.="Your current location: ";
+			} else if ($x < $sizeX){
+				if (!$city)
+					rawoutput("<td class='{$colors[$cellvalue]}' data-uk-tooltip title='({$smallmapX}, {$smallmapY}) ($terrainName)'>");
+				else
+					rawoutput("<td class='{$colors[$cellvalue]}'>");
+			}
+			rawoutput($cityText);
 			if ($smallmapY > $worldmapY+1 || $smallmapY < $worldmapY-1) $blind_dist_y = "Far ";
 			if ($smallmapX > $worldmapX+1 || $smallmapX < $worldmapX-1) $blind_dist_x = "Far ";
 			if ($smallmapX == $worldmapX){
@@ -293,10 +295,13 @@ function worldmapen_viewsmallmap(){
 			if ($smallmapY < $worldmapY) $blind_dir_y = "South";
 			if ($smallmapX > $worldmapX) $blind_dir_x = "East";
 			if ($smallmapX < $worldmapX) $blind_dir_x = "West";
-			if (!$city) {
-				rawoutput("<img src='images/trans.gif' height='25' width='30' alt='({$smallmapX}, {$smallmapY}) {$map[$smallmapX][$smallmapY]}' title='({$smallmapX}, {$smallmapY}) {$map[$smallmapX][$smallmapY]}'>");
+			if (!$city) 
+			{
+				// rawoutput("<img src='images/trans.gif' height='18' width='20' alt='({$smallmapX}, {$smallmapY}) {$map[$smallmapX][$smallmapY]}' title='({$smallmapX}, {$smallmapY}) {$map[$smallmapX][$smallmapY]}'>");
 				$blindoutput.=$blind_dist_y.$blind_dir_y.$blind_sep.$blind_dist_x.$blind_dir_x." - ".$map[$smallmapX][$smallmapY]."`n";
-			} else {
+			}
+			else 
+			{
 				$blindoutput.=$blind_dist_y.$blind_dir_y.$blind_sep.$blind_dist_x.$blind_dir_x." - ".$map[$smallmapX][$smallmapY]." - city of ".$loc."`n";
 			}
 			rawoutput("</td>");
@@ -306,18 +311,14 @@ function worldmapen_viewsmallmap(){
 		rawoutput("</tr>");
 		$smallmapY--;
 	}
-	rawoutput("</table>");
-	if (get_module_setting("showcompass") == 1){
-		output_notl("`c");
-		worldmapen_showcompass();
-	}else{
-		output_notl("`c");
-	}
+	rawoutput("</table></td></tr></table>");
+	rawoutput("</div>");
 	
-	if (get_module_pref("user_blindoutput","worldmapen")){
-		output_notl("%s",$blindoutput);
-	}
-	//modulehook("worldmap_belowmap");
+	
+	// if (get_module_pref("user_blindoutput","worldmapen")){
+	// 	output_notl("%s",$blindoutput);
+	// }
+	modulehook("worldmap_belowmap");
 	//worldmapen_viewmapkey(true, false);
 }
 
@@ -341,10 +342,8 @@ function worldmapen_showcompass() {
 	$w = translate_inline( 'West' );
 	$e = translate_inline( 'East' );
 	$compass = translate_inline( 'Compass' );
-	rawoutput("<table cellpadding='0' cellspacing='5' width='100%' border='0'>");
-	rawoutput("<tr><td height='1' bgcolor='#000000'></td><tr>");
-	rawoutput("</table>");
-	output('`c<IMG SRC="images/compass.png" WIDTH="198" HEIGHT="234" BORDER="0" ALT="'.$compass.'" USEMAP="#compass_Map">`c', true);
+	// rawoutput("<hr>");
+	rawoutput('<IMG SRC="images/compass.png" WIDTH="198" HEIGHT="234" BORDER="0" ALT="'.$compass.'" USEMAP="#compass_Map">', true);
 	rawoutput('<MAP NAME="compass_Map">');
 	rawoutput('<AREA SHAPE="poly" ALT="'.$nw.'" title="'.$nw.'" COORDS="67,109, 14,53, 31,39, 84,95" HREF="' . $nwlink . '">');
 	rawoutput('<AREA SHAPE="poly" ALT="'.$w.'" title="'.$w.'" COORDS="67,138, 0,138, 0,116, 66,115" HREF="' . $wlink . '">');
@@ -370,8 +369,8 @@ function worldmapen_viewmapkey($showloc,$small){
 	$colorUserLoc = get_module_setting("colorUserLoc");
 	
 	output_notl("`n`n",true);
-	rawoutput("<table cellpadding='0' cellspacing='5' width='100%' border='0'>");
-	rawoutput("<tr><td height='1' bgcolor='#000000'></td><tr>");
+	rawoutput("<div class='worldmapen legend'>");
+	rawoutput("<table class='map6'>");
 	rawoutput("<tr>");
 	output_notl("<td>`b`6{$mapkey}`0`b</td>",true);
 	rawoutput("</tr>");
@@ -388,13 +387,12 @@ function worldmapen_viewmapkey($showloc,$small){
 	$terrainColor   = $terrain["color"];
 
 	if ($showloc){
-		rawoutput("<table cellpadding='0' cellspacing='5'><tr>");
-		rawoutput("<td bgcolor=\"{$colorUserLoc}\" height='5' width='10'><img src='images/trans.gif' height='5' width='10'></td><td>"); output("Current Location"); rawoutput("</td>");
+		rawoutput("<table class='map7'><tr>");
+		rawoutput("<td class='terrain {$colorUserLoc}'>&nbsp;</td><td>"); output("Current Location"); rawoutput("</td>");
 		rawoutput("</tr><tr>");
 		if (get_module_setting("enableTerrains")==1){
-			rawoutput("<td bgcolor=\"{$terrainColor}\" height='5' width='10'><img src='images/trans.gif' height='5' width='10'></td><td>");
-			output("Current Terrain:"); 
-			output("$currentTerrain"); 
+			rawoutput("<td class='terrain {$terrainColor}'>&nbsp;</td><td>");
+			output("Current Terrain: %s", translate_inline($currentTerrain));
 			rawoutput("</td>");
 			rawoutput("</tr><tr>");
 		}
@@ -403,7 +401,7 @@ function worldmapen_viewmapkey($showloc,$small){
 	
 	if (get_module_setting("showcities") == 1){
 		output("`n");
-		rawoutput("<table cellpadding=0 cellspacing=5 border=0><tr>");
+		rawoutput("<table class='8' cellpadding=0 cellspacing=5 border=0><tr>");
 		output("<td>`b{$cities}`b</td>",true);
 		rawoutput("</tr>");
 		foreach($vloc as $loc=>$val) {
@@ -414,22 +412,21 @@ function worldmapen_viewmapkey($showloc,$small){
 	}
 	
 	if (get_module_setting("enableTerrains") ==1){
-		output("`n");
-		rawoutput("<table cellpadding='0' cellspacing='5' border='0' width='100%'>");
-		rawoutput("<img src='images/trans.gif' height='5' width='10'></td><td>"); output("Current Terrain:");  output_notl("`b`^"); output($currentTerrain); output_notl("`b`^`n"); rawoutput("<hr></td>",true);
+		rawoutput("<hr>");
+		rawoutput("<table class='map9'>");
 		rawoutput("<tr>");
 		rawoutput("<td>",true); output("Terrains"); rawoutput("</td>",true);
 		rawoutput("</tr><tr>");
 		output_notl("<td>(" . translate_inline("Terrain Color") .", ". translate_inline("Terrain Type") .", ". translate_inline("Terrain Movement Cost") .")</td>",true);
 		rawoutput("</tr><tr><br>");
-		rawoutput("<table cellpadding='2' cellspacing='5' border='0'><tr>");
+		rawoutput("<table class='map10'><tr>");
 		
 		$terrainDef = worldmapen_loadTerrainDefs();
 //		debug($terrainDef);
 		
 		$i = 0;
 		foreach ($terrainDef AS $name=>$terrain) {
-			if ($i % 4 == 0) {
+			if ($i % 6 == 0) {
 				rawoutput("</tr><tr>");
 	   		}
 			//Blame CMJ for this mess
@@ -440,7 +437,7 @@ function worldmapen_viewmapkey($showloc,$small){
 						$terrain["moveCost"] = stamina_getdisplaycost("Travelling - Plains")."%";
 						break;
 					case "Forest":
-						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Jungle")."%";
+						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Forest")."%";
 						break;
 					case "River":
 						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - River")."%";
@@ -448,28 +445,35 @@ function worldmapen_viewmapkey($showloc,$small){
 					case "Ocean":
 						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Ocean")."%";
 						break;
+					case "Earth":
+						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Earth")."%";
+						break;
 					case "Desert":
-						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Beach")."%";
+						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Desert")."%";
 						break;
 					case "Swamp":
 						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Swamp")."%";
 						break;
-					case "Mount":
+					case "Mountains":
 						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Mountains")."%";
 						break;
 					case "Snow":
 						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Snow")."%";
 						break;
+					case "Air":
+						$terrain['moveCost'] = stamina_getdisplaycost("Travelling - Air")."%";
+						break;
 				}
 			}
 			$terrainName = translate_inline($name);
-			rawoutput("<td bgcolor=\"{$terrain["color"]}\"><img src='images/trans.gif' height='5' width='10'></td><td>{$terrainName} - ".$terrain["moveCost"]."</td>");
+			rawoutput("<td class='terrain {$terrain['color']}'>&nbsp;</td><td>{$terrainName} - ".$terrain["moveCost"]."</td>");
 			
 			$i++;
 		}
-		rawoutput("<td bgcolor='#111111' height='5' width='10'><img src='images/trans.gif' height='5' width='10'></td><td>Map Edge</td>");
+		rawoutput("<td bgcolor='#111111' height='5' width='10'>&nbsp;</td><td>".translate_inline("Map Edge")."</td>");
 		rawoutput("</tr></table>");
 	}
+	rawoutput("</div>");
 }
 // -----------------------------------------------------------------------
 // END - World map key
@@ -672,8 +676,8 @@ function worldmapen_determinenav(){
 		"z"=>$z
 	);
 	$hook = modulehook("worldnav",$hook);
-	addnav("Inventory");
-	addnav("View your Inventory","inventory.php?items_context=worldmap");
+	// addnav("Inventory");
+	// addnav("View your Inventory","inventory.php?items_context=worldmap");
 }
 // -----------------------------------------------------------------------
 // END - worldmapen_determinenav determines in which direction a player
@@ -695,18 +699,21 @@ function worldmapen_camp_list(){
 	$last = date("Y-m-d H:i:s", strtotime("-".getsetting("LOGINTIMEOUT", 900)." sec"));
 	$id = $session['user']['acctid'];
 	$location = addslashes($session['user']['location']);
-	$sql = "SELECT a.acctid, a.name, a.alive, a.sex, a.level, a.laston, " .
-	"a.loggedin, a.login, a.pvpflag, b.value as location, " .
-	"c.clanshort, a.clanrank FROM " . db_prefix("accounts") . " a, " .
-	db_prefix("module_userprefs") . " b  LEFT JOIN " .
-	db_prefix("clans") . " c ON c.clanid=a.clanid WHERE " .
-	"a.acctid=b.userid AND b.value='$loc' AND (locked=0) " .
-	"AND (slaydragon=0) AND " .
-	"(age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) " .
-	"AND (level>=$lev1 AND level<=$lev2) AND (alive=1) AND " .
-	"(laston<'$last' OR loggedin=0) AND (acctid<>$id) " .
-	"AND a.location='$location' ORDER BY level DESC, " .
-	"experience DESC, dragonkills DESC";
+	$sql = "SELECT 
+		a.acctid, a.clanid, a.name, a.alive, a.sex, a.level, a.laston, a.loggedin, a.login, a.pvpflag, b.value as location, c.clanshort, a.clanrank 
+	FROM 
+		".db_prefix("accounts")." AS a  
+	LEFT JOIN ".db_prefix("clans")." AS c ON c.clanid=a.clanid 
+	LEFT JOIN ".db_prefix("module_userprefs")." AS b ON a.acctid=b.userid  
+	
+	WHERE 
+		b.value='$loc' 
+		AND (locked=0) AND (slaydragon=0) 
+		AND (age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) 
+		AND (level>=$lev1 AND level<=$lev2) AND (alive=1) 
+		AND (laston<'$last' OR loggedin=0) AND (acctid<>$id) 
+		AND a.location='$location' 
+	ORDER BY level DESC, experience DESC, dragonkills DESC";
 	//PvP Display
 	$_SERVER['REQUEST_URI'] = preg_replace( '/op=[a-z]*/', 'op=continue', $_SERVER['REQUEST_URI'] );
 	// ^- That's a hack to prevent stop cheaters from clicking BIO and back to get gold, turns, etc.
@@ -730,7 +737,7 @@ function worldmapen_terrain_cost($x, $y, $z=1) {
 				return stamina_getdisplaycost("Travelling - Plains",2);
 				break;
 			case "Forest":
-				return stamina_getdisplaycost("Travelling - Jungle",2);
+				return stamina_getdisplaycost("Travelling - Forest",2);
 				break;
 			case "River":
 				return stamina_getdisplaycost("Travelling - River",2);
@@ -738,13 +745,16 @@ function worldmapen_terrain_cost($x, $y, $z=1) {
 			case "Ocean":
 				return stamina_getdisplaycost("Travelling - Ocean",2);
 				break;
+			case "Earth":
+				return stamina_getdisplaycost("Travelling - Earth",2);
+				break;
 			case "Desert":
-				return stamina_getdisplaycost("Travelling - Beach",2);
+				return stamina_getdisplaycost("Travelling - Desert",2);
 				break;
 			case "Swamp":
 				return stamina_getdisplaycost("Travelling - Swamp",2);
 				break;
-			case "Mount":
+			case "Mountains":
 				return stamina_getdisplaycost("Travelling - Mountains",2);
 				break;
 			case "Snow":
@@ -765,7 +775,7 @@ function worldmapen_terrain_takestamina($x, $y, $z=1) {
 			$plains = process_action("Travelling - Plains");
 			break;
 		case "Forest":
-			$forest = process_action("Travelling - Jungle");
+			$forest = process_action("Travelling - Forest");
 			break;
 		case "River":
 			$river = process_action("Travelling - River");
@@ -773,13 +783,16 @@ function worldmapen_terrain_takestamina($x, $y, $z=1) {
 		case "Ocean":
 			$ocean = process_action("Travelling - Ocean");
 			break;
+		case "Earth":
+			$earth = process_action("Travelling - Earth");
+			break;
 		case "Desert":
-			$desert = process_action("Travelling - Beach");
+			$desert = process_action("Travelling - Desert");
 			break;
 		case "Swamp":
 			$swamp = process_action("Travelling - Swamp");
 			break;
-		case "Mount":
+		case "Mountains":
 			$mount = process_action("Travelling - Mountains");
 			break;
 		case "Snow":
@@ -798,8 +811,11 @@ function worldmapen_terrain_takestamina($x, $y, $z=1) {
 	if ($ocean['lvlinfo']['levelledup']==true){
 		output("`n`c`b`0You gained a level in Travel across deep water!  You are now level %s!  This action will cost fewer Stamina points now, so you can swim more in a single day.`b`c`n",$ocean['lvlinfo']['newlvl']);
 	}
+	if ($earth['lvlinfo']['levelledup']==true){
+		output("`n`c`b`0You gained a level in Travel across earth!  You are now level %s!  This action will cost fewer Stamina points now, so you can saunter across more beachy terrain in a single day.`b`c`n",$earth['lvlinfo']['newlvl']);
+	}
 	if ($desert['lvlinfo']['levelledup']==true){
-		output("`n`c`b`0You gained a level in Travel across beaches!  You are now level %s!  This action will cost fewer Stamina points now, so you can saunter across more beachy terrain in a single day.`b`c`n",$desert['lvlinfo']['newlvl']);
+		output("`n`c`b`0You gained a level in Travel across deserts!  You are now level %s!  This action will cost fewer Stamina points now, so you can saunter across more beachy terrain in a single day.`b`c`n",$desert['lvlinfo']['newlvl']);
 	}
 	if ($swamp['lvlinfo']['levelledup']==true){
 		output("`n`c`b`0You gained a level in Travel across swamps!  You are now level %s!  This action will cost fewer Stamina points now, so you can wade through more swampy goo every day.`b`c`n",$swamp['lvlinfo']['newlvl']);
@@ -838,8 +854,8 @@ function worldmapen_encounter($x, $y, $z=1) {
 			case "Swamp":
 				$terrain['encounter']=$terrain['encounter']*get_module_objpref("mounts",$id,"encounterSwamp");
 				break;
-			case "Mount":
-				$terrain['encounter']=$terrain['encounter']*get_module_objpref("mounts",$id,"encounterMount");
+			case "Mountains":
+				$terrain['encounter']=$terrain['encounter']*get_module_objpref("mounts",$id,"encounterMountains");
 				break;
 			case "Snow":
 				$terrain['encounter']=$terrain['encounter']*get_module_objpref("mounts",$id,"encounterSnow");
@@ -902,7 +918,7 @@ function worldmapen_setTerrain($x, $y, $z=1, $type="Forest") {
 			case 3: 	$type = "Ocean";  break;
 			case 4: 	$type = "Desert"; break;
 			case 5: 	$type = "Swamp";  break;
-			case 6: 	$type = "Mount";  break;
+			case 6: 	$type = "Mountains";  break;
 			case 7: 	$type = "Snow";   break;
 			
 			case 8:		$type = "Earth";  break;
@@ -933,7 +949,7 @@ function worldmapen_loadTerrainDefs() {
 			"Ocean"  => array("type" => "Ocean",  "color" => get_module_setting("colorOcean"),  "moveCost" => get_module_setting("moveCostOcean"),  "encounter" => get_module_setting("encounterOcean")),
 			"Desert" => array("type" => "Desert", "color" => get_module_setting("colorDesert"), "moveCost" => get_module_setting("moveCostDesert"), "encounter" => get_module_setting("encounterDesert")),
 			"Swamp"  => array("type" => "Swamp",  "color" => get_module_setting("colorSwamp"),  "moveCost" => get_module_setting("moveCostSwamp"),  "encounter" => get_module_setting("encounterSwamp")),
-			"Mount"  => array("type" => "Mount",  "color" => get_module_setting("colorMount"),  "moveCost" => get_module_setting("moveCostMount"),  "encounter" => get_module_setting("encounterMount")),
+			"Mountains"  => array("type" => "Mountains",  "color" => get_module_setting("colorMountains"),  "moveCost" => get_module_setting("moveCostMountains"),  "encounter" => get_module_setting("encounterMountains")),
 			"Snow"   => array("type" => "Snow",   "color" => get_module_setting("colorSnow"),   "moveCost" => get_module_setting("moveCostSnow"),   "encounter" => get_module_setting("encounterSnow")),
 			"Earth"	 => array("type" => "Earth",  "color" => get_module_setting("colorEarth"),  "moveCost" => get_module_setting("moveCostEarth"),  "encounter" => get_module_setting("encounterEarth")),
 			"Air"    => array("type" => "Air",    "color" => get_module_setting("colorAir"),    "moveCost" => get_module_setting("moveCostAir"),    "encounter" => get_module_setting("encounterAir")),
