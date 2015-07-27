@@ -53,7 +53,7 @@ function worldmapen_getmoduleinfo(){
 		"colorOcean"=>"Color of ocean?,text|worldmapen-terrain-ocean",
 		"colorDesert"=>"Color of desert?,text|worldmapen-terrain-desert",
 		"colorSwamp"=>"Color of swamp?,text|worldmapen-terrain-swamp",
-		"colorMount"=>"Color of mountains?,text|worldmapen-terrain-mountains",
+		"colorMountains"=>"Color of mountains?,text|worldmapen-terrain-mount",
 		"colorSnow"=>"Color of Snow?,text|worldmapen-terrain-snow",
 		"colorEarth"=>"Color of Earth?,text|worldmapen-terrain-earth",
 		"colorAir"=>"Color of Air?,text|worldmapen-terrain-air",
@@ -79,7 +79,7 @@ function worldmapen_getmoduleinfo(){
 		"encounterOcean"=>"Chance of encountering a monster when crossing oceans?,int|20",
 		"encounterDesert"=>"Chance of encountering a monster when crossing deserts?,int|85",
 		"encounterSwamp"=>"Chance of encountering a monster when crossing swamps?,int|85",
-		"encounterMount"=>"Chance of encountering a monster when crossing mountains?,int|20",
+		"encounterMountains"=>"Chance of encountering a monster when crossing mountains?,int|20",
 		"encounterSnow"=>"Chance of encountering a monster when crossing snow?,int|20",
 		"encounterEarth"=>"Chance of encountering a monster when under surface?,int|1",
 		"encounterAir"=>"Chance of encountering a monster when traveling in the air?,int|0",
@@ -91,7 +91,7 @@ function worldmapen_getmoduleinfo(){
 		"moveCostOcean"=>"Movement cost for crossing oceans?,int|5",
 		"moveCostDesert"=>"Movement cost for crossing deserts?,int|2",
 		"moveCostSwamp"=>"Movement cost for crossing swamps?,int|2",
-		"moveCostMount"=>"Movement cost for crossing mountains?,int|3",
+		"moveCostMountains"=>"Movement cost for crossing mountains?,int|3",
 		"moveCostSnow"=>"Movement cost for crossing snow?,int|3",
 		"moveCostEarh"=>"Movement costs for crossing earth?,int|1000",
 		"moveCostAir"=>"Movement costs for crossing air?,int|1000",
@@ -115,7 +115,7 @@ function worldmapen_getmoduleinfo(){
 		"encounterOcean"=>"Encounter rate for crossing oceans?,float|1",
 		"encounterDesert"=>"Encounter rate for crossing deserts?,float|1",
 		"encounterSwamp"=>"Encounter rate for crossing swamps?,float|1",
-		"encounterMount"=>"Encounter rate for crossing mountains?,float|1",
+		"encounterMountains"=>"Encounter rate for crossing mountains?,float|1",
 		"encounterSnow"=>"Encounter rate for crossing snow?,float|1",
 		"encounterEarth"=>"Encounter rate for crossing earth?,float|1",
 		"encounterAir"=>"Encounter rates for crossing air?,float|1",
@@ -149,9 +149,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>25,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Forest",array(
@@ -160,9 +157,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>60,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - River",array(
@@ -171,9 +165,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>100,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Ocean",array(
@@ -182,20 +173,14 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
-		install_action("Travelling - Mount",array(
+		install_action("Travelling - Mountains",array(
 			"maxcost"=>20000,
 			"mincost"=>6000,
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>140,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Snow",array(
@@ -204,9 +189,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Earth",array(
@@ -215,9 +197,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>25,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Swamp",array(
@@ -226,9 +205,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>75,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Air",array(
@@ -237,9 +213,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 		install_action("Travelling - Desert",array(
@@ -248,9 +221,6 @@ function worldmapen_install(){
 			"firstlvlexp"=>500,
 			"expincrement"=>1.1,
 			"costreduction"=>175,
-			"expperrep"=>100,
-			"expforlvl"=>1500,
-			"dkpct"=>3,
 			"class"=>"Travelling"
 		));
 	} 
@@ -263,7 +233,7 @@ function worldmapen_uninstall(){
 	uninstall_action("Travelling - Forest");
 	uninstall_action("Travelling - River");
 	uninstall_action("Travelling - Ocean");
-	uninstall_action("Travelling - Mount");
+	uninstall_action("Travelling - Mountains");
 	uninstall_action("Travelling - Snow");
 	uninstall_action("Travelling - Earth");
 	uninstall_action("Travelling - Swamp");
