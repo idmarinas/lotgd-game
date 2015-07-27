@@ -63,7 +63,7 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 		addnav("Targets");
 		foreach ($newenemies as $index=>$badguy){
 			if ($badguy['creaturehealth'] <= 0 || (isset($badguy['dead']) && $badguy['dead'] == true)) continue;
-			addnav(array("%s%s`0",(isset($badguy['istarget'])&&$badguy['istarget'])?"`#*`0":"", $badguy['creaturename']), $script."op=fight&newtarget=$index");
+			addnav_notl(array("%s%s`0",(isset($badguy['istarget'])&&$badguy['istarget'])?"`#*`0":"", $badguy['creaturename']), $script."op=fight&newtarget=$index");
 		}
 	}
 	tlschema();

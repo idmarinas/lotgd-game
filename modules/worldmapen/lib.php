@@ -402,7 +402,7 @@ function worldmapen_viewmapkey($showloc,$small){
 	if (get_module_setting("showcities") == 1){
 		output("`n");
 		rawoutput("<table class='8' cellpadding=0 cellspacing=5 border=0><tr>");
-		output("<td>`b{$cities}`b</td>",true);
+		output_notl("<td>`b{$cities}`b</td>",true);
 		rawoutput("</tr>");
 		foreach($vloc as $loc=>$val) {
 			rawoutput("<tr><td>"); output_notl(substr($loc,0,3)); rawoutput("</td>");

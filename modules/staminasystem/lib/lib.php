@@ -818,8 +818,8 @@ function stamina_minihof($action,$userid=false){
 	output("`n`n");
 	rawoutput("<div align=center>");
 	rawoutput("<table cellspacing='0' cellpadding='5'>");
-	rawoutput("<tr class='trhead'><td colspan=3><strong>$action</strong></td></tr>");
-	rawoutput("<tr class='trhead'><td><strong>Rank</strong></td><td><strong>Name</strong></td><td><strong>Experience</strong></td></tr>");
+	rawoutput("<tr class='trhead'><td colspan=3><strong>".translate_inline($action)."</strong></td></tr>");
+	rawoutput("<tr class='trhead'><td><strong>".translate_inline("Rank")."</strong></td><td><strong>".translate_inline("Name")."</strong></td><td><strong>".translate_inline("Experience")."</strong></td></tr>");
 	$count = count($smallboard);
 	for ($i=0; $i < $count; $i++){
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
