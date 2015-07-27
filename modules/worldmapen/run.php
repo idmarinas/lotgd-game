@@ -89,8 +89,8 @@ function worldmapen_run_real(){
 		output("`b`&The gates of %s`& stand closed behind you.`0`b`n`n",
 		$session['user']['location']);
 		$num = e_rand(1, 5);
-		$msg = get_module_setting("leaveGates$num");
-		output("`c`n`^%s`0`n`c`n",$msg);
+		$msg = translate_inline(get_module_setting("leaveGates$num"));
+		if ($msg) output_notl("`c`n`^$msg`0`n`c`n");
 		worldmapen_determinenav();
 		if (get_module_setting("smallmap")) worldmapen_viewsmallmap();
 		if (!$chatoverride){
