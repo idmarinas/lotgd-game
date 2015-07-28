@@ -334,6 +334,7 @@ function page_footer($saveuser=true){
 		}
 		$footer=str_replace("{mail}",maillink(),$footer);
 	}else{
+		$script.="<script src=\"templates/jquery.js\"></script>";
 		$header=str_replace("{mail}",translate_inline("Log in to see your Ye Olde Mail"),$header);
 		$footer=str_replace("{mail}",translate_inline("Log in to see your Ye Olde Mail"),$footer);
 	}
@@ -468,7 +469,7 @@ function popup_footer(){
 	$footer = str_replace("{".($z)."}",$$z, $footer);
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin']) {
 		if ($session['user']['prefs']['ajax']) {
-			$header = str_replace("{headscript}","<script src=\"/templates/jquery.js\"></script>",$header);
+			$header = str_replace("{headscript}","<script src=\"templates/jquery.js\"></script>",$header);
 			$add="<script type='text/javascript'>
 				$(window).ready(function(){
 					window.setTimeout('set_timeout_xajax()','".((getsetting("LOGINTIMEOUT",900)-120)*1000)."');
