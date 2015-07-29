@@ -70,25 +70,11 @@ module.exports = function (grunt) {
       },
       
       //Para copiar los módulos propios
-      modulesTools: {
-        files: [
-          {
-            expand: true,
-            cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/tools',
-            src: [//Archivos a copiar
-              '**',//Todos los archivos y subdirectorios
-            ],
-            dest: '/Users/Ivan/Sites/lotgd/modules/',
-            filter: 'isFile'
-          },
-        ]
-      },
-      modulesOther : {
+      modules : {
         expand: true,
         cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/',
         src: [//Archivos a copiar
-          '**',//Todos los archivos y subdirectorios
-          '!tools/**'//No copiar el directorio tools
+          '**'//Todos los archivos y subdirectorios
         ],
         dest: '/Users/Ivan/Sites/lotgd/modules/',
         filter: 'isFile'
@@ -161,5 +147,5 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'uglify', 'copy:localhost']);
-  grunt.registerTask('modules', ['copy:modulesTools', 'copy:modulesOther']);
+  grunt.registerTask('modules', ['copy:modules', 'copy:modules']);
 };
