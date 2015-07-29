@@ -103,30 +103,11 @@ function inventorypopup_run(){
 					output("You activate %s!", $acitem['name']);
 				}
 				require_once("lib/itemeffects.php");
-				output_notl("`n`n%s", get_effect($acitem));
+				output_notl("`n`n%s`n", get_effect($acitem));
 			}
 		break;
 	}
 	output("Your are currently wearing the following items:`n`n");
-	$layout = array(
-		"Weapons,title",
-			"righthand",
-			"lefthand",
-		"Armor,title",
-			"head",
-			"body",
-			"arms",
-			"legs",
-			"feet",
-		"Miscellaneous,title",
-			"ring1",
-			"ring2",
-			"ring3",
-			"neck",
-			"belt",
-		"Unequippables,title",
-			"unequippables",
-	);
 	$sql = "SELECT $item.*,
 					MAX($inventory.equipped) AS equipped,
 					COUNT($inventory.equipped) AS quantity,
@@ -137,17 +118,17 @@ function inventorypopup_run(){
 				INNER JOIN $inventory ON $inventory.itemid = $item.itemid
 				WHERE  $inventory.userid = {$session['user']['acctid']}
 				GROUP BY $inventory.itemid
-				ORDER BY $item.equipwhere ASC, $item.class ASC, $item.name ASC";
+				ORDER BY $item.class ASC, $item.name ASC";
 	/*$item.equippable = 0 AND*/
 	$result = db_query($sql);
 	$inventory = array();
+	$layout = array();
 	while($row = db_fetch_assoc($result)) {
-		if ($row['equippable'] == false)
-			$inventory['unequippables'][] = $row;
-		else
-			$inventory[$row['equipwhere']][] = $row;
+		$layout[] = $row['class'] . ",title";
+		$layout[] = $row['class'];
+		$inventory[$row['class']][] = $row;
 	}
-	inventory_showform($layout, $inventory);
+	inventory_showform(array_unique($layout), $inventory);
 	//echo '<pre style="color:white">'. var_export($inventory, true) .'</pre>';
 	popup_footer();
 }
@@ -179,9 +160,9 @@ function inventory_showform($layout,$row)
 			$info = explode(",",$val);
 		}
 		if (is_array($info[0])) {
-			$info[0] = call_user_func_array("sprintf_translate", $info[0]);
+			$info[0] = $info[0];
 		} else {
-			$info[0] = translate_inline($info[0]);
+			$info[0] = $info[0];
 		}
 		if (isset($info[1])) $info[1] = trim($info[1]);
 		else $info[1] = "";
@@ -190,37 +171,20 @@ function inventory_showform($layout,$row)
 		if ($info[1]=="title")
 		{
 		 	$title_id++;
-		 	$formSections[$title_id] = $info[0];
+		 	$formSections[$title_id] = translate_inline($info[0]);
 		 	rawoutput("<table id='showFormTable$title_id' cellpadding='2' cellspacing='0'>");
-			// rawoutput("<tr><td colspan='2' class='trhead'>",true);
-			// output_notl("`b%s`b", $info[0], true);
-			// rawoutput("</td></tr>",true);
 			$i=0;
 		}
 		//Items agrupados según categoría
 		else
 		{	
-			// echo '<pre style="color:white">'. var_export($row[$info[0]], true) .'</pre>';		
-			if ($wheres[$info[0]])
-			{
-				rawoutput("<tr class='trhead'><td colspan='2' class='category'>");
-				rawoutput("<i class='fa fa-list fa-fw'></i>");	
-				output_notl("%s", translate_inline($wheres[$info[0]]),true);
-				rawoutput("</td><tr><td colspan='2'>");
-			}
+			rawoutput("<tr><td>");
 			if (is_array($row[$info[0]]))
 			{
 				$itemI = 0;
 				$class = "";
 				foreach($row[$info[0]] as $value)
 				{
-					if ($value['class'] != $class) {
-						rawoutput("</td></tr><tr class='trhead'><td class='items-class'>");
-						$tl_class = translate_inline($value['class']);
-						rawoutput("<i class='fa fa-bars fa-fw'></i>");					
-						output_notl("%s", $tl_class);
-						rawoutput("</td></tr><tr><td colspan='2'>");
-					}
 					showRowItem($value, $itemI);
 					$class = $value['class'];
 					$itemI++;
