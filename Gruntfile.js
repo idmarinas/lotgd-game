@@ -37,10 +37,10 @@ module.exports = function (grunt) {
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
               '!**/*.less',//Ignorar archivos .less
-              '!less/**',//Ignorar directorio less
               '!**/*.dist'//Ignorar archivos .dist
             ],
-            dest: 'dist/'
+            dest: 'dist/',
+            filter : 'isFile'
           },
           {
             src: "bower_components/font-awesome/css/font-awesome.min.css",
@@ -67,6 +67,31 @@ module.exports = function (grunt) {
             dest : '/Users/Ivan/Sites/lotgd/'
           }
         ]
+      },
+      
+      //Para copiar los módulos propios
+      modulesTools: {
+        files: [
+          {
+            expand: true,
+            cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/tools',
+            src: [//Archivos a copiar
+              '**',//Todos los archivos y subdirectorios
+            ],
+            dest: '/Users/Ivan/Sites/lotgd/modules/',
+            filter: 'isFile'
+          },
+        ]
+      },
+      modulesOther : {
+        expand: true,
+        cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/',
+        src: [//Archivos a copiar
+          '**',//Todos los archivos y subdirectorios
+          '!tools/**'//No copiar el directorio tools
+        ],
+        dest: '/Users/Ivan/Sites/lotgd/modules/',
+        filter: 'isFile'
       }
     },
     less: {
@@ -136,4 +161,5 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'uglify', 'copy:localhost']);
+  grunt.registerTask('modules', ['copy:modulesTools', 'copy:modulesOther']);
 };
