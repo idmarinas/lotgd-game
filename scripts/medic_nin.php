@@ -7,7 +7,7 @@ global $badguy,$session;
 if(!isset($badguy['maxhealth'])) {
 	$badguy['maxhealth'] = $badguy['creaturehealth'];
 	//can heal up to the amount of DKs the user has
-	$badguy['healpoints'] = $session['user']['dragonkills'];
+	$badguy['healpoints'] = $session['user']['dragonkills']+1;
 } 
 //activates when the creature has less than 60% of his initial HP AND has healpoints left
 
@@ -16,7 +16,7 @@ if($badguy['creaturehealth'] < $badguy['maxhealth']*0.60 && $badguy['healpoints'
   $heal = min($badguy['healpoints'],e_rand(1,$badguy['maxhealth']/3));
   $badguy['healpoints']-=$heal;
   $badguy['creaturehealth'] += $heal;
-  output("`!%s`# heals for `$%s hitpoints`#.`n", $heal);
+  output("`!%s`# se cura por `$%s puntos de salud`#.`n",$badguy['creaturename'], $heal);
 }
 
 ?>
