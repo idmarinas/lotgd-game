@@ -69,13 +69,17 @@
 		{headscript}{script}
 		<script src="templates/dragon.min.js"></script>
 		
-		<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-		<script type="text/javascript">
-		    window.cookieconsent_options = {"message":"Este sitio web usa cookies propias y de terceros para su funcionamiento. Mediante el uso de nuestros servicios, usted acepta el uso de las cookies.","dismiss":"¡Lo tengo!","learnMore":"Más información","link":"http://www.infommo.es/disclaimers","theme":"dark-top"};
+		<!-- INICIO Consentimiento de Cookies -->
+		<script src='templates/jqueryCookieGuard.1.1.0.js'></script>
+		<script>
+		  $(document).ready(function(){
+		    $.cookieguard();
+		    $.cookieguard.cookies.add('PHP Session', 'PHPSESSID', 'This cookie is used to track important logical information for the smooth operation of the site', true);
+		    $.cookieguard.cookies.add('Google Analytics', '__utma,__utmb,__utmc,__utmz,__utmv,__utmt', 'These cookies are used to collect information about how visitors use our site. We use the information to compile reports and to help us improve the site. The cookies collect information in an anonymous form, including the number of visitors to the site, where visitors have come to the site from and the pages they visited.', true);
+		    $.cookieguard.run();
+		  });
 		</script>
-		
-		<script type="text/javascript" src="//s3.amazonaws.com/cc.silktide.com/cookieconsent.latest.min.js"></script>
-		<!-- End Cookie Consent plugin -->
+		<!-- FIN Consentimiento de Cookies -->
 	</head>
 	<body>
 		<table id="dragon-container">
@@ -124,7 +128,7 @@
 						<span class="pull-right">{source}</span>
 					</div>
 					<div class="padding2">
-						<span class="pull-left">{version}</span>
+						<span class="pull-left">{version} | <a href="http://www.infommo.es/disclaimers#Privacy">Política de privacidad</a></span>
 						<span class="pull-right">{pagegen}</span>
 					</div>
 					<div class="padding2">{copyright}</div>
