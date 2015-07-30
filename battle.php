@@ -111,7 +111,9 @@ if ($enemycounter > 0) {
 		}
 	}
 	output_notl("`n");
-	show_enemies($enemies);
+	//Añadido para mostrar la imagen y las barras de salud de ambos
+	modulehook("battle-info", $enemies);
+	// show_enemies($enemies);
 }
 
 suspend_buffs((($options['type'] == 'pvp')?"allowinpvp":false));
@@ -493,7 +495,7 @@ $newenemies = autosettarget($newenemies);
 
 if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
 	output("`2`bEnd of Round:`b`n");
-	show_enemies($newenemies);
+	// show_enemies($newenemies);
 }
 
 //extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
