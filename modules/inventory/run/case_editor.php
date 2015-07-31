@@ -85,10 +85,10 @@
 						"droppable"=>"Is this item droppable,bool",
 						"level"=>"Minimum level needed,range,1,15,1|1",
 						"dragonkills"=>"Dragonkills needed,int|0",
-						"customvalue"=>"Custom value,textarea",
-						"exectext"=>"Text to display upon activation of the item,string,70",
-						"Use %s to insert the item's name!,note",
-						"noeffecttext"=>"Text to display if item has no effect,string,70",
+						// "customvalue"=>"Custom value,textarea",
+						// "exectext"=>"Text to display upon activation of the item,string,70",
+						// "Use %s to insert the item's name!,note",
+						// "noeffecttext"=>"Text to display if item has no effect,string,70",
 						"execvalue"=>"Exec value,textarea",
 						"Please see the file 'lib/itemeffects.php' for possible values,note",
 						"hide"=>"Hide item from inventory?,bool",
@@ -114,8 +114,8 @@
 					"Special Settings,title",
 						"uniqueforserver"=>"Is this item unique (server)?,bool",
 						"uniqueforplayer"=>"Is this item unique for the player?,bool",
-						"equippable"=>"Is this item equippable?,bool",
-						"equipwhere"=>"Where can this item be equipped?,enum,$enum_equip",
+						//"equippable"=>"Is this item equippable?,bool",
+						//"equipwhere"=>"Where can this item be equipped?,enum,$enum_equip",
 			  );
 			  showform($format, $item);
 			  rawoutput("</form>");
