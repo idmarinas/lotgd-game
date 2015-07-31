@@ -117,7 +117,7 @@ if ($op=="search"){
 				if (e_rand(1,100) <= getsetting("multichance", 25)) {
 					$multi = e_rand(getsetting('multibasemin',2),getsetting('multibasemax',3));
 					if ($type=="slum") {
-						$multi -= e_rand(getsetting("multislummin", 0),getsetting("multibasemax", 1));
+						$multi -= e_rand(getsetting("multislummin", 0),getsetting("multislummax", 1));
 						if (e_rand(0,1)) {
 							$mintargetlevel = $targetlevel - 1;
 						} else {
@@ -150,7 +150,7 @@ if ($op=="search"){
 			if ($mintargetlevel > $targetlevel) $mintargetlevel = $targetlevel;
 			debug("Creatures: $multi Targetlevel: $targetlevel Mintargetlevel: $mintargetlevel");
 			if ($multi > 1) {
-				if (getsetting('allowpackmonsters',0)) $packofmonsters = (e_rand(0,5) == 0); // true or false
+				$packofmonsters = (bool)(e_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
 				switch($packofmonsters) {
 					case false:
 						$multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
@@ -222,10 +222,14 @@ if ($op=="search"){
 				} else {
 					while ($badguy = db_fetch_assoc($result)) {
 						//decode and test the AI script file in place if any
-						$aiscriptfile="scripts/".$badguy['creatureaiscript'].".php";
+						$aiscriptfile=$badguy['creatureaiscript'].".php";
 						if (file_exists($aiscriptfile)) {
 							//file there, get content and put it into the ai script field.
-							$badguy['creatureaiscript']="require('".$aiscriptfile."');";
+							$badguy['creatureaiscript']="require_once('".$aiscriptfile."');";
+						}
+						else
+						{
+							$badguy['creatureaiscript'] = '';
 						}
 						//AI setup
 						$badguy = buffbadguy($badguy);

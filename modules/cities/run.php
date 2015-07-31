@@ -117,10 +117,14 @@
 					$badguy['creaturedefense']=$session['user']['defense'];
 				} else {
 					$badguy = db_fetch_assoc($result);
-					$aiscriptfile="scripts/".$badguy['creatureaiscript'].".php";
+					$aiscriptfile=$badguy['creatureaiscript'].".php";
 					if (file_exists($aiscriptfile)) {
 						//file there, get content and put it into the ai script field.
-						$badguy['creatureaiscript']="require('".$aiscriptfile."');";
+						$badguy['creatureaiscript']="require_once('".$aiscriptfile."');";
+					}
+					else
+					{
+						$badguy['creatureaiscript'] = '';
 					}
 					$badguy = buffbadguy($badguy);
 				}
