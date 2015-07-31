@@ -4,6 +4,7 @@
 // mail ready
 require_once("common.php");
 require_once("lib/http.php");
+require_once("lib/listfiles.php");
 
 check_su_access(SU_EDIT_CREATURES);
 
@@ -257,22 +258,9 @@ if ($op=="" || $op=="search"){
 			}
 			//get available scripts
 			//(uncached, won't hit there very often
-			$dir="scripts";
-			if (is_dir($dir)) {
-				if ($opendir=opendir($dir)) {
-					$sort=array();
-					while (($file = readdir($opendir)) !== false) {
-						$names=explode(".",$file);
-						if (isset($names[1]) && $names[1]=="php") {
-							//sorting
-							$sort[]=",".$names[0].",".$names[0];
-						}
-					}
-					sort($sort);
-					$scriptenum=implode("",$sort);
-				}
-
-			}
+			list_files("creatureai");
+			sort($sort);
+			$scriptenum=implode("",$sort);
 			$scriptenum=",,none".$scriptenum;
 			$form = array(
 				"Creature Properties,title",

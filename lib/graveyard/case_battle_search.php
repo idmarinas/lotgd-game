@@ -33,10 +33,14 @@ if ($session['user']['gravefights']<=0){
 		$badguy['creaturedefense'] = (int)((9 + $shift + (($level-1) * 1.5)));
 		$badguy['creaturedefense'] *= .8;
 		if (isset($badguy['creatureaiscript'])) {
-			$aiscriptfile="scripts/".$badguy['creatureaiscript'].".php";
+			$aiscriptfile=$badguy['creatureaiscript'].".php";
 			if (file_exists($aiscriptfile)) {
 				//file there, get content and put it into the ai script field.
-				$badguy['creatureaiscript']="require('".$aiscriptfile."');";
+				$badguy['creatureaiscript']="require_once('".$aiscriptfile."');";
+			}
+			else
+			{
+				$badguy['creatureaiscript'] = '';
 			}
 		}
 		require_once("lib/playerfunctions.php");

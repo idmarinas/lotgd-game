@@ -109,6 +109,13 @@ function newbieisland_dohook($hookname,$args){
 		unblockmodule("deputymoderator");
 		unblockmodule("unclean");
 		unblockmodule("stattracker");
+		//Módulos desbloqueados para el servidor
+		unblockmodule('inventorypopup');
+		unblockmodule('staminasystem');
+		unblockmodule('staminacorecombat');
+		unblockmodule('combathealthbars');
+		unblockmodule('displaycp');
+		
 		//Let newbies see the Travel FAQ
 		//Nobody ever looks at the FAQ more than once
 		//so newbies have to see it right at the start
@@ -157,7 +164,9 @@ function newbieisland_dohook($hookname,$args){
 			$turns = round($turns/2);
 			$args['turnstoday'] .= ", Newbie Island: $turns";
 			$session['user']['turns']+= $turns;
-			output("`n`&The very air of this island invigorates you; you receive `^%s`& turns!`n`0",$turns);
+			//output("`n`&The very air of this island invigorates you; you receive `^%s`& turns!`n`0",$turns);
+			//Stamina compatibility
+			output("`n`&El mismo aire de esta isla le vigoriza; ¡recibes `^algo`& de resistencia!`n`0");
 			apply_buff("newbiecoddle",array(
 				"name"=>"",
 				"rounds"=>-1,
