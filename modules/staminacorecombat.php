@@ -136,9 +136,14 @@ function staminacorecombat_dohook($hookname,$args){
 
 		blocknav($script."op=fight");
 		blocknav($script."op=run");
+		blocknav($script."op=fight&auto=five");
+		blocknav($script."op=fight&auto=ten");
 		addnav("Standard Fighting");
 		addnav(array("F?Fight (`Q%s%%`0)", $fightcost),$script."op=fight&stam=fight");
 		addnav(array("R?Run (`Q%s%%`0)", $runcost),$script."op=run&stam=run");
+		addnav("Automatic Fighting");
+		addnav(array("5?For 5 Rounds (`Q%s%%`0)", ($fightcost*5)),$script."op=fight&auto=five&stam=fight");
+		addnav(array("1?For 10 Rounds (`Q%s%%`0)", ($fightcost*10)),$script."op=fight&auto=ten&stam=fight");
 		break;
 	case "startofround-prebuffs":
 		$process = httpget("stam");
