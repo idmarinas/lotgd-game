@@ -510,7 +510,8 @@ function worldmapen_determinenav(){
 			set_module_pref("lastCity", "");
 			addnav("Outpost Area");
 			addnav(array("O?Enter %s", $loc), "village.php");
-			addnav("Enter Forest","forest.php");
+			//Al bosque se entra desde la ciudad
+			// addnav("Enter Forest","forest.php");
 			$campingAllowed = 0;
 		}
 	}
