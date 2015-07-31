@@ -493,10 +493,11 @@ if ($op != "newtarget") {
 
 $newenemies = autosettarget($newenemies);
 
-if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
-	output("`2`bEnd of Round:`b`n");
-	// show_enemies($newenemies);
-}
+// Y no es necesario al no mostrar la información de salud al final de la página
+// if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
+// 	output("`2`bEnd of Round:`b`n");
+// 	show_enemies($newenemies);
+// }
 
 //extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
 $badguy = modulehook("endofpage",$badguy);
@@ -512,7 +513,9 @@ if ($session['user']['hitpoints'] <= 0) {
 
 
 if ($victory || $defeat){
-
+	//Para informar del fin del combate
+	output("`2`bEnd of Battle:`b");
+	output_notl('`n`n');
 	// expire any buffs which cannot persist across fights
 	expire_buffs_afterbattle();
 	//unsuspend any suspended buffs
