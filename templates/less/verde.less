@@ -173,10 +173,18 @@
 //** Color cuando se está muerto y se tiene más del 60%
 @progress-healthbar-dead-60: desaturate(@progress-healthbar-alive-60, 70%);
 //** Color cuando se está muerto y se tiene más del 25% y menos del 60%
-@progress-healthbar-dead-25: desaturate(@progress-healthbar-alive-25, 70%);;
+@progress-healthbar-dead-25: desaturate(@progress-healthbar-alive-25, 70%);
 //** Color cuando se está muerto y se tiene más del 0% y menos del 25%
-@progress-healthbar-dead-0: desaturate(@progress-healthbar-alive-0, 70%);;
+@progress-healthbar-dead-0: desaturate(@progress-healthbar-alive-0, 70%);
 
+//## Barra de Salud en Combate
+@progress-combathealthbars-60: darken(#00FF00, 15%);
+@progress-combathealthbars-25: #FFA200;
+@progress-combathealthbars-0: #FF0000;
+//** Color de fondo para las barras de salud en combate
+@progress-combathealthbars-bg-60: desaturate(@progress-combathealthbars-60, 70%);
+@progress-combathealthbars-bg-25: desaturate(@progress-combathealthbars-25, 70%);
+@progress-combathealthbars-bg-0: desaturate(@progress-combathealthbars-0, 70%);
 
 //## Barra de nuevo día
 @progress-newdaybar-color : #00ff00; 
