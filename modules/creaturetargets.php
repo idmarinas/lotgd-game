@@ -146,7 +146,7 @@ function creaturetargets_dohook($hookname,$args){
 		//Check to see if there's an AI Script involved with this creature, and if not, tell battle.php (via our modifications) to execute our AI Script at the start of the round, not the end - as long as we're actually using multiple hit targets with this creature, of course
 		if ($args['target1']['hitpoints']!=0){
 			if ($args['creatureaiscript']==''){
-				$args['creatureaiscript'] = "require(\"ai/creaturetargetai.php\");";
+				$args['creatureaiscript'] = "require_once(\"ai/creaturetargetai.php\");";
 			}
 		}
 		//Give the creature a set of starting hitpoints, because it's SO DAMNED USEFUL
