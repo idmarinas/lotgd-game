@@ -32,8 +32,8 @@
 		'buyable'=> array('name'=>'buyable', 'type'=>'tinyint(2)', 'default'=>'1', 'null'=>'0'),
 		'uniqueforserver'=> array('name'=>'uniqueforserver', 'type'=>'tinyint(2)', 'default'=>'0', 'null'=>'0'),
 		'uniqueforplayer'=> array('name'=>'uniqueforplayer', 'type'=>'tinyint(2)', 'default'=>'0', 'null'=>'0'),
-		'equippable'=> array('name'=>'equippable', 'type'=>'tinyint(2)', 'default'=>'0', 'null'=>'0'),
-		'equipwhere'=> array('name'=>'equipwhere', 'type'=>'varchar(15)', 'default'=>'', 'null'=>'0'),
+		//'equippable'=> array('name'=>'equippable', 'type'=>'tinyint(2)', 'default'=>'0', 'null'=>'0'),
+		//'equipwhere'=> array('name'=>'equipwhere', 'type'=>'varchar(15)', 'default'=>'', 'null'=>'0'),
 		'key-PRIMARY' => array('name'=>'PRIMARY', 'type'=>'primary key', 'unique'=>'1', 'columns'=>'itemid,name'));
 
 	$inventory_table = array(
