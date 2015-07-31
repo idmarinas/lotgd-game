@@ -1070,12 +1070,14 @@ function commentaryfooter($section,$message="Interject your own commentary?",$li
 	
 	//reinstating back and forward links
 	output_notl("`n");
-	$prev = "`0&lt;&lt;";
-	$next = "`0&gt;&gt;";
+	// $prev = "`0&lt;&lt;";
+	// $next = "`0&gt;&gt;";
+	$prev = '<i class="fa fa-fw fa-angle-double-left "></i>';
+	$next = '<i class="fa fa-fw fa-angle-double-right "></i>';
 
 	if ($rowcount>=$limit  && $com!=$val){
 		$req = buildcommentarylink("&comscroll=".($com+1));
-		output_notl("<a href=\"$req\">$prev</a> ",true);
+		output_notl("<a href=\"$req\">$prev</a> | ",true);
 		addnav("",$req);
 	}
 	$cplink = buildcommentarylink("&comscroll=".$com."&refresh=1");
@@ -1083,7 +1085,7 @@ function commentaryfooter($section,$message="Interject your own commentary?",$li
 	output_notl("`0<a href=\"$cplink\">".translate_inline("Refresh")."</a> | <a href=\"$nlink\">".translate_inline('Latest')."</a>",true);
 	if ($com>0){
 		$req = buildcommentarylink("&comscroll=".($com-1));
-		output_notl(" <a href=\"$req\">$next</a>",true);
+		output_notl(" | <a href=\"$req\">$next</a>",true);
 		addnav("",$req);
 	}
 	
@@ -1252,6 +1254,7 @@ function talkform($section,$talkline,$limit=10,$schema=false){
 	// *** AJAX CHAT MOD END ***
 	
 	global $fiveminuteload;
+	$add = htmlentities(translate_inline("Add"), ENT_QUOTES, getsetting("charset", "ISO-8859-1"));
 	
 	if ($session['user']['prefs']['commentary_auto_update'] && !httpget('comscroll') && $fiveminuteload < 8){
 		$jsec = strtolower($section);
@@ -1259,7 +1262,10 @@ function talkform($section,$talkline,$limit=10,$schema=false){
 		$jsec = str_replace("-","",$jsec);
 		$jsec = str_replace(",","0",$jsec);
 		//debug($jsec);
+		rawoutput('<div class="form-input">');
 		previewfield("insertcommentary", $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,$jsec,$session['user']['prefs']['ucol'],$focus);
+		output_notl("<input type='submit' class='form-button' value='$add'>",true);
+		rawoutput('</div>');
 		rawoutput("<script type=\"text/javascript\">
 			var typetimelimit".$jsec." = 0;
 			var timebetween".$jsec." = 1500;
@@ -1300,7 +1306,10 @@ function talkform($section,$talkline,$limit=10,$schema=false){
 		if ($fiveminuteload >= 8){
 			output("Server load is currently too high for auto-update chat.  This will hopefully balance out in a few minutes.`n");
 		}
+		rawoutput('<div class="form-input">');
 		previewfield("insertcommentary", $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,false,$session['user']['prefs']['ucol']);
+		output_notl("<input type='submit' class='form-button' value='$add'>",true);
+		rawoutput('</div>');
 		//debug("System load too high at ".$fiveminuteload);
 	}
 	rawoutput("<input type='hidden' name='talkline' value='$talkline'>");
@@ -1321,10 +1330,10 @@ function talkform($section,$talkline,$limit=10,$schema=false){
 	}else{
 		output_notl("<input type='hidden' name='section' value='$section'>",true);
 	}
-	$add = htmlentities(translate_inline("Add"), ENT_QUOTES, getsetting("charset", "ISO-8859-1"));
 
 	// *** DRAGONBG.COM CORE PATCH START***
-	output_notl("<input type='submit' class='button' value='$add'>	",true);
+	//Aparece junto al campo de texto
+	// output_notl("<input type='submit' class='button' value='$add'>	",true);
 	// *** DRAGONBG.COM CORE PATCH END***
 	rawoutput("</form>");
 	tlschema();
