@@ -193,11 +193,12 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	if ($charsleft == true) {
 		rawoutput("<span id='charsleft$nid'></span>");
 	}
+	rawoutput("<div id='previewtext$nid'></div>");
 	if (!is_array($info)) {
 		if ($default) {
-			rawoutput("<input name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);' value='$default'>");
+			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);' value='$default'>");
 		} else {
-			rawoutput("<input name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);'>");
+			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);'>");
 		}
 	} else {
 		if (isset($info['maxlength'])) {
@@ -208,7 +209,7 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 		if (isset($info['type']) && $info['type'] == 'textarea') {
 			rawoutput("<textarea name='$name' id='input$nid' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
 		} else {
-			rawoutput("<input name='$name' id='input$nid' ".$autocomplete." onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
+			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
 		}
 		foreach ($info as $key=>$val){
 			rawoutput("$key='$val'");
@@ -227,7 +228,6 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 			}
 		}
 	}
-	rawoutput("<div id='previewtext$nid'></div>");
 	if ($focus){
 		rawoutput("<script language='javascript'>document.getElementById('input".$nid."').focus();</script>");
 	}

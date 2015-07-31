@@ -1,0 +1,25 @@
+.form-input
+{
+	width: 100%;
+	display: inline-block;
+	
+	input
+	{
+		float: left;
+		margin: 0;
+		
+		&[type=text]
+		{
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			border-right: 0;
+		}
+		
+		&.form-button
+		{
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			box-shadow: none;
+		}
+	}
+}
