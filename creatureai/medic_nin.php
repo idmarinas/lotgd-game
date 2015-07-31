@@ -1,9 +1,8 @@
 ﻿<?php
-
 //script file for use with the creatureaiscript
 //mind that this is PURE PHP+lotgd, you can do anything nasty in here!
-
 global $badguy,$session;
+
 if(!isset($badguy['maxhealth'])) {
 	$badguy['maxhealth'] = $badguy['creaturehealth'];
 	//can heal up to the amount of DKs the user has
@@ -18,5 +17,3 @@ if($badguy['creaturehealth'] < $badguy['maxhealth']*0.60 && $badguy['healpoints'
   $badguy['creaturehealth'] += $heal;
   output("`!%s`# se cura por `$%s puntos de salud`#.`n",$badguy['creaturename'], $heal);
 }
-
-?>
