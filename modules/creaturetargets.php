@@ -109,11 +109,9 @@ function creaturetargets_install(){
 	install_action("Fighting - Targeted",array(
 		"maxcost"=>1000,
 		"mincost"=>500,
-		"expperrep"=>100,
-		"expforlvl"=>2000,
+		"firstlvlexp"=>2000,
 		"expincrement"=>1.12,
 		"costreduction"=>5,
-		"dkpct"=>2.5,
 		"class"=>"Combat"
 	));
 	return true;
