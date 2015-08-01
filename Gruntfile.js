@@ -70,13 +70,22 @@ module.exports = function (grunt) {
       },
       
       //Para copiar los módulos propios
-      modules : {
+      modules : {//Al local
         expand: true,
         cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/',
         src: [//Archivos a copiar
           '**'//Todos los archivos y subdirectorios
         ],
         dest: '/Users/Ivan/Sites/lotgd/modules/',
+        filter: 'isFile'
+      },
+      modulesDist : {//A la carpeta Dist
+        expand: true,
+        cwd : '/Users/Ivan/Documents/Proyectos Web/Dragón Verde/Módulos/Terminados/',
+        src: [//Archivos a copiar
+          '**'//Todos los archivos y subdirectorios
+        ],
+        dest: 'dist/modules/',
         filter: 'isFile'
       }
     },
@@ -145,7 +154,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  // Default task.
+  // Default task. Procesa los archivos y luego los copia en la carpeta del servidor local
   grunt.registerTask('default', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'uglify', 'copy:localhost']);
-  grunt.registerTask('modules', ['copy:modules', 'copy:modules']);
+  
+  //Copia archivos para luego publicarlo se incluyen los módulos propios
+  grunt.registerTask('production', ['clean', 'copy:main', 'less', 'postcss', 'usebanner', 'cssmin', 'uglify', 'copy:modulesDist']);
+  
+  //Copia sólo los módulos propios al servidor local
+  grunt.registerTask('modules', ['copy:modules']);
 };
