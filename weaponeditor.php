@@ -26,7 +26,7 @@ if ($weaponlevel == 1) {
 } else {
 	output("`&Weapons for %s Dragon Kills`0",$weaponlevel);
 }
-rawoutput("<h3>");
+rawoutput("</h3>");
 
 $weaponarray=array(
 	"Weapon,title",
