@@ -646,8 +646,8 @@ function charstats(){
 		$def=$u['defense'];
 		*/
 		require_once("lib/playerfunctions.php");
-		$o_atk=$atk=get_player_attack();
-		$o_def=$def=get_player_defense();
+		$o_atk=$atk=get_player_attack();//Ataque original
+		$o_def=$def=get_player_defense();//Defensa original
 		$spd=get_player_speed();
 
 		$buffcount = 0;
@@ -693,20 +693,20 @@ function charstats(){
 		$atk = round($atk, 2);
 		$def = round($def, 2);
 		if ($atk < $o_atk){
-			$atk = round($o_atk,1)."`\$".round($atk-$o_atk,1);
+			$atk = round($o_atk,2)."(`\$-".round($atk-$o_atk,2).'`0)';
 		}else if($atk > $o_atk){
-			$atk = round($o_atk,1)."`@+".round($atk-$o_atk,1);
+			$atk = round($o_atk,2)."(`@+".round($atk-$o_atk,2).'`0)';
 		} else {
 			// They are equal, display in the 1 signifigant digit format.
-			$atk = round($atk,1);
+			$atk = round($atk,2);
 		}
 		if ($def < $o_def){
-			$def = round($o_def,1)."`\$".round($def-$o_def,1);
+			$def = round($o_def,2)."(`\$-".round($def-$o_def,2).'`0)';
 		}else if($def > $o_def){
-			$def = round($o_def,1)."`@+".round($def-$o_def,1);
+			$def = round($o_def,2)."(`@+".round($def-$o_def,2).'`0)';
 		} else {
 			// They are equal, display in the 1 signifigant digit format.
-			$def = round($def, 1);
+			$def = round($def,2);
 		}
 		$point=getsetting('moneydecimalpoint',".");
 		$sep=getsetting('moneythousandssep',",");
@@ -725,8 +725,11 @@ function charstats(){
 			addcharstat("Intelligence", $u['intelligence'].check_temp_stat("intelligence",1));
 			addcharstat("Constitution", $u['constitution'].check_temp_stat("constitution",1));
 			addcharstat("Wisdom", $u['wisdom'].check_temp_stat("wisdom",1));
-			addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
-			addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
+			// Modificado para darle otro estilo a la presentación
+			// addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
+			// addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
+			addcharstat("Attack", $atk."`\$<i class='fa fa-question fa-fw pull-right' data-uk-tooltip title='".explained_get_player_attack()."'></i>`0".check_temp_stat("attack",1));
+			addcharstat("Defense", $def."`\$<i class='fa fa-question fa-fw pull-right' data-uk-tooltip title='".explained_get_player_defense()."'></i>`0".check_temp_stat("defense",1));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
 		} else {
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
