@@ -21,6 +21,7 @@ function creatureaddon_getmoduleinfo(){
 			"addattack"=>"How much additional attack do you wish to add?,int|0",
 			"adddefense"=>"How much additional defense do you wish to add?,int|0",
 			"addgold"=>"How much additional gold for this creature?,int|0",
+			"addexperience"=>"How much additional experience for this creature?,int|0",
 			"gemchance"=>"What are the chances of finding an extra gem with this creature?,range,0,100,1|0",
 			"gemmessage"=>"What is the message shown when the user finds a gem for this creature?,text",
 			"description"=>"Give the creature a full description.,textarea",
@@ -57,6 +58,8 @@ function creatureaddon_dohook($hookname,$args){
 			$args['creaturehealth'] += get_module_objpref("creatures",  $args['creatureid'], "addhit");
 			$args['creatureattack'] += get_module_objpref("creatures",  $args['creatureid'], "addattack");
 			$args['creaturedefense'] += get_module_objpref("creatures",  $args['creatureid'], "adddefense");
+			//Para añadir más experiencia debido a la dificultad
+			$args['creatureexp'] += get_module_objpref("creatures",  $args['creatureid'], "addexperience");
 
 			if (get_module_objpref("creatures",  $args['creatureid'], "image")){
 				rawoutput("<table width = \"100%\"><tr><td width=\"100%\" align = \"center\"><img src=\"./images/".get_module_objpref("creatures",  $args['creatureid'], "image")."\"></td></tr></table>");
