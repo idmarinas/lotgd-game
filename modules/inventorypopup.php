@@ -138,6 +138,15 @@ function inventory_showform($layout,$row)
 	global $session;
  	static $showform_id=0;
  	static $title_id=0;
+	if (is_array($layout) && empty($layout))
+	{
+		rawoutput("<table class='inventory'>");
+		rawoutput("<tr><td>".translate_inline("The inventory is empty")."</td></tr>");
+		rawoutput("</table>");
+		
+		return;
+	}
+	
  	$showform_id++;
  	$formSections = array();
 	$returnvalues = array();
