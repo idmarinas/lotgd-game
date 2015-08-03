@@ -749,6 +749,9 @@ function worldmapen_terrain_cost($x, $y, $z=1) {
 			case "Earth":
 				return stamina_getdisplaycost("Travelling - Earth",2);
 				break;
+			case "Air":
+				return stamina_getdisplaycost("Travelling - Air",2);
+				break;
 			case "Desert":
 				return stamina_getdisplaycost("Travelling - Desert",2);
 				break;
@@ -786,6 +789,9 @@ function worldmapen_terrain_takestamina($x, $y, $z=1) {
 			break;
 		case "Earth":
 			$earth = process_action("Travelling - Earth");
+			break;
+		case "Air":
+			$air = process_action("Travelling - Air");
 			break;
 		case "Desert":
 			$desert = process_action("Travelling - Desert");
@@ -826,6 +832,9 @@ function worldmapen_terrain_takestamina($x, $y, $z=1) {
 	}
 	if ($snow['lvlinfo']['levelledup']==true){
 		output("`n`c`b`0You gained a level in Travel across snow!  You are now level %s!  This action will cost fewer Stamina points now, so you can stomp through more snow in a single day.`b`c`n",$snow['lvlinfo']['newlvl']);
+	}
+	if ($air['lvlinfo']['levelledup']==true){
+		output("`n`c`b`0You gained a level in Travel across air!  You are now level %s!  This action will cost fewer Stamina points now, so you can fly through for air in a single day.`b`c`n",$air['lvlinfo']['newlvl']);
 	}
 }
 
