@@ -7,7 +7,7 @@ $info = array(
 		'download'=>'http://dragonprime.net/index.php?module=Downloads;sa=dlview;id=262',
 		'settings'=>array(
 			'Equipment Shop - Main,title',
-			'dkreq'=>'DK\'s needed to visit shop?,int|1',
+			'dkreq'=>'DK\'s needed to visit shop?,int|14',
 			'shopname'=>'What\'s the name of the shop?|Ye Olde Equipment Shoppe',
 			'shopkeepname'=>'What\'s the name of the shopkeep?|Illyria',
 			'Shop is available to everyone or to donators only. Take your pick.,note',
