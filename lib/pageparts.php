@@ -693,7 +693,7 @@ function charstats(){
 		$atk = round($atk, 2);
 		$def = round($def, 2);
 		if ($atk < $o_atk){
-			$atk = round($o_atk,2)."(`\$-".round($atk-$o_atk,2).'`0)';
+			$atk = round($o_atk,2)."(`\$".round($atk-$o_atk,2).'`0)';
 		}else if($atk > $o_atk){
 			$atk = round($o_atk,2)."(`@+".round($atk-$o_atk,2).'`0)';
 		} else {
@@ -701,7 +701,7 @@ function charstats(){
 			$atk = round($atk,2);
 		}
 		if ($def < $o_def){
-			$def = round($o_def,2)."(`\$-".round($def-$o_def,2).'`0)';
+			$def = round($o_def,2)."(`\$".round($def-$o_def,2).'`0)';
 		}else if($def > $o_def){
 			$def = round($o_def,2)."(`@+".round($def-$o_def,2).'`0)';
 		} else {
