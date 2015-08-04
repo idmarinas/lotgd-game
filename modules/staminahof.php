@@ -40,7 +40,7 @@ function staminahof_run(){
 	// Output navs to each action
 	foreach($actions AS $action => $vals){
 		addnav("Actions");
-		addnav(array("%s",$action),"runmodule.php?module=staminahof&action=".$action."&skip=0");
+		addnav($action,"runmodule.php?module=staminahof&action=".$action."&skip=0");
 	}
 	
 	
@@ -94,7 +94,7 @@ function staminahof_run(){
 		$dlvl = translate_inline("Level");
 		$drnk = translate_inline("Rank");
 		$style=0;
-		output("`n`b`c`@%s`n`n`c`b",$hof);
+		output_notl("`n`b`c`@".translate_inline($hof)."`n`n`c`b");
 		rawoutput("<table border='0' cellpadding='2' cellspacing='1' align='center' width='100%'>");
 		rawoutput("<tr class='trhead'><td align=center>$dname</td><td align=center>$drnk</td><td align=center>$dlvl</td><td align=center>$dexp</td></tr>");
 
