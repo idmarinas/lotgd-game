@@ -19,7 +19,7 @@ function collapse_getmoduleinfo(){
 		"override_forced_nav"=>true,
 		"prefs"=>array(
 			"Collapsible Region User Prefs,title",
-			"check_navs"=>"Should there be collapse handles on navs?,bool|0",
+			"check_navs"=>"Should there be collapse handles on navs?,bool|1",
 			"check_text"=>"Should there be collapse handles on text blocks?,bool|0",
 		),
 		"settings"=>array(
