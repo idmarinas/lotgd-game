@@ -34,7 +34,7 @@ function translationwizard_getmoduleinfo(){
 		),
 		"prefs"=>array(
 		    "Translation Wizard - User prefs,title",
-				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Fran�ais,dk,Danish,de,Deutsch,es,Espa�ol,it,Italian"),
+				"language"=>"Languages for the Wizard,enum,".getsetting("serverlanguages","en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian"),
 				"Note: don't change this if you don't need to... it is set up in the Translation Wizard!,note",
 				"allowed"=>"Does this user have unrestricted access to the wizard?,bool|0",
 				"Note: This is only active if the restriction settings is 'true' in the module settings,note",
