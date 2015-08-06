@@ -1,6 +1,7 @@
 <?php
 	page_header("Item Editor");
 	require_once("lib/superusernav.php");
+	require_once("lib/listfiles.php");
 	superusernav();
 	addnav("Options - Items");
 	addnav("New Item", "runmodule.php?module=inventory&op=editor&op2=newitem");
@@ -72,6 +73,10 @@
 				$enum_equip=",No where,righthand,Right Hand,lefthand,Left Hand,head,On the Head,body,On Upper Body,arms,On the Arms,legs,On Lower Body,feet,As Shoes,ring,As Ring,neck,Around the Neck,belt,As Belt";
 				rawoutput("<form action='runmodule.php?module=inventory&op=editor&op2=newitem2&id=$id' method='post'>");
 				addnav("", "runmodule.php?module=inventory&op=editor&op2=newitem2&id=$id");
+				$sort = list_files("items",array());
+				sort($sort);
+				$scriptenum=implode("",$sort);
+				$scriptenum=",,none".$scriptenum;
 				$format = array(
 					"Basic information,title",
 						"itemid"=>"Item id,viewonly",
@@ -89,7 +94,8 @@
 						// "exectext"=>"Text to display upon activation of the item,string,70",
 						// "Use %s to insert the item's name!,note",
 						// "noeffecttext"=>"Text to display if item has no effect,string,70",
-						"execvalue"=>"Exec value,textarea",
+						// "execvalue"=>"Exec value,textarea",
+						"execvalue"=>"Exec value file,enum".$scriptenum,
 						"Please see the file 'lib/itemeffects.php' for possible values,note",
 						"hide"=>"Hide item from inventory?,bool",
 					"Buffs and activation,title",
