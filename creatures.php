@@ -258,7 +258,7 @@ if ($op=="" || $op=="search"){
 			}
 			//get available scripts
 			//(uncached, won't hit there very often
-			list_files("creatureai");
+			$sort = list_files("creatureai", array());
 			sort($sort);
 			$scriptenum=implode("",$sort);
 			$scriptenum=",,none".$scriptenum;
