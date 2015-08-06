@@ -1,12 +1,11 @@
 <?php
-function list_files($ruta){
-	global $sort;
+function list_files($ruta, $sort){
 	//abrir un directorio y listarlo recursivo 
  	if (is_dir($ruta)) { 
 		if ($dh = opendir($ruta)) { 
 			while (($file = readdir($dh)) !== false) { 
 				if (is_dir($ruta ."/". $file) && $file!="." && $file!=".."){
-			    	list_files($ruta ."/". $file);
+			    	$sort = list_files($ruta ."/". $file, $sort);
 			    }
 				else
 				{
@@ -20,4 +19,5 @@ function list_files($ruta){
 			closedir($dh); 
 		} 
 	}
+	return $sort;
 }
