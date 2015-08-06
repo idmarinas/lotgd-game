@@ -20,3 +20,6 @@ VALUES
 	(6, 'Seth'),
 	(7, 'Karissa'),
 	(8, 'Ramius');
+
+/* Alterar campo de execvalue para la nueva forma */
+ALTER TABLE `item` CHANGE `execvalue` `execvalue` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_general_ci  NULL  DEFAULT '';
