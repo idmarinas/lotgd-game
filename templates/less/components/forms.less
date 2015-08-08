@@ -9,6 +9,7 @@ textarea
 	padding: 5px 8px;
 	border: 1px solid darken(@forms-bg, 15%);
 	border-radius: @border-radius-base;
+	appearance: none;
 	
 	&:hover
 	{
@@ -38,10 +39,15 @@ textarea
 	}
 }
 
-//Para evitar que el firefox agregue padding a los select
+//Para agregar la imagen de la flecha
 select
 {
-	padding: 0;	
+	background-image: url('down_arrow_select.png');
+	background-size: auto;
+	background-repeat: no-repeat;
+	background-position: 97% center;
+	background-size: 18px 18px;
+	padding-right: 25px;
 }
 //Eliminar estilos para cuando sea una imagen
 input[type="image"]
