@@ -11,7 +11,7 @@ mydefine("HOOK_TRAIN", 32);
 
 function get_buff($buffid) {
 	$sql = "SELECT * FROM ".db_prefix("itembuffs")." WHERE buffid = $buffid";
-	$result = db_query_cached($sql, "inventory-buff-$buffid", 525600);
+	$result = db_query_cached($sql, "inventory/buff-$buffid", 525600);
 	$buff = db_fetch_assoc($result);
 
 	// Here we'll sanitize the buff a little, so there are no values in it
@@ -340,7 +340,7 @@ function add_item_by_id($itemid, $qty=1, $user=0, $specialvalue="", $sellvaluego
 		db_query($sql);
 //		debuglog("has gained $qty item.", false, false, "item-$itemid", $qty);
 		debuglog("has gained $qty item (ID: $itemid).");
-		invalidatedatacache("inventory-user-$user");
+		invalidatedatacache("inventory/user-$user");
 		return $qty;
 	}
 }
@@ -387,7 +387,7 @@ function get_inventory($user=0, $showhide=false, $class=0, $singleonly=false) {
 					$item.name ASC";
 	}
 	if ($class === 0 && $singleonly===false)
-		$result = db_query_cached($sql, "inventory-user-$user");
+		$result = db_query_cached($sql, "inventory/user-$user");
 	else
 		$result = db_query($sql);
 	return $result;
@@ -488,7 +488,7 @@ function uncharge_item($itemid, $user=false, $invid=false) {
 	$result = db_query($sql);
 	$count = db_affected_rows($result);
 	if ($count) debuglog("uncharged and deleted $count items (ID: $itemid)", $user);
-	invalidatedatacache("inventory-user-$user");
+	invalidatedatacache("inventory/user-$user");
 }
 
 function recharge_item($itemid, $user=false, $invid=false) {
@@ -512,7 +512,7 @@ function recharge_item($itemid, $user=false, $invid=false) {
 	} else {
 		debuglog("recharged ".db_affected_rows($result)." items (ID: $itemid)", $user);
 	}
-	invalidatedatacache("inventory-user-$user");
+	invalidatedatacache("inventory/user-$user");
 }
 
 
@@ -630,8 +630,8 @@ function remove_item_by_id($item, $qty=1, $user=false, $invid=false) {
 	$sql = "DELETE FROM $inventory WHERE userid = $user AND itemid = $item $invsql LIMIT $qty";
 	debuglog("removed item $item from inventory", $user);
 	$result = db_query($sql);
-	invalidatedatacache("inventory-user-$user");
-	invalidatedatacache("inventory-item-$item-$user");
+	invalidatedatacache("inventory/user-$user");
+	invalidatedatacache("inventory/item-$item-$user");
 	return db_affected_rows($result);
 }
 
@@ -712,7 +712,7 @@ function shopnav($return, $class, $sell=false, $user=false, $sellall=false, $sho
 					output("`n`7%s`n`n", $description);
 				}
 			} else {
-				addnav(array("%s`n`^%s`0 Gold, `%%%s`0 Gems`n(`2%s Stück`0)", translate_inline($row['name']), $row['sellvaluegold'], $row['sellvaluegems'], $row['quantity']), $return."id=".$row['itemid']);
+				addnav(array("%s`n`^%s`0 Gold, `%%%s`0 Gems`n(`2%s Stï¿½ck`0)", translate_inline($row['name']), $row['sellvaluegold'], $row['sellvaluegems'], $row['quantity']), $return."id=".$row['itemid']);
 			}
 		}
 		tlschema();
