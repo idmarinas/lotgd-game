@@ -85,7 +85,8 @@ foreach($act AS $key => $values){
 	
 	if ($values['lvl']<100){
 		rawoutput("<div class='progressbar'>
-			<div class='progress-progressbar progress-progressbar-progress' style='width: $pct%;'>&nbsp;$exp / $nextlvlexpdisplay</div>
+			<div class='progress-progressbar progress-progressbar-progress' style='width: $pct%;'></div>
+			<div class='progress-text'>$exp / $nextlvlexpdisplay</div>
 		</div>");
 	} else {
 		output_notl("`4`b".translate_inline("Top Level!")."`b`0");
