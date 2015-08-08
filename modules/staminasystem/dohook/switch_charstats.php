@@ -35,7 +35,8 @@ if (isset($actions_used)){
 		}
 		$pct = (($actions_used[$action]['lvlinfo']['exp']-$actions_used[$action]['lvlinfo']['currentlvlexp']) / ($actions_used[$action]['lvlinfo']['nextlvlexp']-$actions_used[$action]['lvlinfo']['currentlvlexp'])) * 100;
 		$disp = "<div class='progressbar'>
-			<div class='progress-progressbar progress-progressbar-progress' style='width: $pct%;'>&nbsp;".translate_inline("Lv").$actions_used[$action]['lvlinfo']['lvl']." (+`8".$actions_used[$action]['exp_earned']."`0 xp)</div>
+			<div class='progress-progressbar progress-progressbar-progress' style='width: $pct%;'></div>
+			<div class='progress-text'>".translate_inline("Lv").$actions_used[$action]['lvlinfo']['lvl']." (+`8".$actions_used[$action]['exp_earned']."`0 xp)</div>
 		</div>";
 		setcharstat("Recent Actions",$action,$disp);
 		
