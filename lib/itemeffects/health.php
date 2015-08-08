@@ -3,13 +3,13 @@
  * Curar la salud actual
  * @var int $hitpoins Puede ser negativo
  * @var bool $overrideMaxhitpoints Para permitir curar más de la salud máxima del personaje
- * @var bool $canDie Indica si puede morir por el efecto del artículo
+ * @var bool $canDie Indica si puede morir por el efecto del objeto
  *
- * return $out array
+ * return $out string
  */
 function restore_hitpoints($hitpoints, $overrideMaxhitpoints = false, $canDie = true)
 {
-	global $session;
+	global $session, $item;
 	
 	$hitpoints = (int) $hitpoints;
 	
@@ -69,6 +69,9 @@ function restore_hitpoints($hitpoints, $overrideMaxhitpoints = false, $canDie = 
 		{
 			$out = sprintf_translate('Usaste "`i%s`i" pero no tuvo ningún efecto.`n',$item['name']);
 		}
-	}	
-	return $out;
+		
+		return $out;
+	}
+	
+	return false;
 }

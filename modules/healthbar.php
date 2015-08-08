@@ -85,11 +85,12 @@ function healthbar_dohook($hookname,$args){
 		$showbar = get_module_pref("user_showbar");
 		
 		if (!$showcur && !$showbar) $text.="";
-		if ($showcur) $text .= $cur . $cur_adjustment;
+		if ($showcur) $text .= '`&'.$cur . $cur_adjustment;
 		if ($showcur && $showmax) $text .= "`0/`&$realmax`0" . $max_adjustment;
 		
 		$new = "<div class='healthbar $animated'>
-				 	<div class='progress-healthbar $color' style='width: $pct%;'>$text</div>
+				 	<div class='progress-healthbar $color' style='width: $pct%;'></div>
+					<div class='progress-text'>$text</div>
 				</div>
 				$script
 		";
