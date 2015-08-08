@@ -16,7 +16,21 @@ function get_effect($item = false, $noeffecttext = "", $giveoutput = true) {
 			$out[] = sprintf_translate($noeffecttext);
 		}
 	} else {
-		include_once($item['execvalue']);
+		if ($session['user']['dragonkills'] >= $item['dragonkills'] && $session['user']['level'] >= $item['level'])
+		{
+			include_once($item['execvalue'].'.php');
+		}
+		else
+		{
+			$args = modulehook("item-noeffect", array("msg"=>"`&Nothing happens.`n", "item"=>$item));
+			$out[] = sprintf_translate($args['msg']);
+			$out[] = sprintf_translate('`4No tienes suficiente Rango y/o Nivel para poder usar `b%s`b`0.`n', $item['name']);
+			$out[] = sprintf_translate('`4Para poder usar `b%s`b, necesitas Rango `i%s`i`0 y Nivel `i%s`i`0.`n', 
+				$item['name'], 
+				$item['dragonkills'],
+				$item['level']
+			);
+		}
 	}
 	foreach($out as $index=>$text) {
 		if (is_array($text)) {
