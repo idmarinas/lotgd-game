@@ -12,6 +12,6 @@ if (get_module_pref("favor") AND $session['user']['resurrections']>get_module_pr
 if (get_module_pref("turnadd")>0){
 	$turns = get_module_pref("turnadd");
 	$session['user']['turns']+=$turns;
-	output("`2Thanks to enchantments on the items you carry, you gain `^%s `2extra turns.`n", $turns);
+	output("`2Thanks to enchantments on the items you carry, you gain some Stamina.`n");
 }
 ?>

@@ -44,7 +44,7 @@ function mysticalshop_delete_item( $id )
 				$default_weapon = db_fetch_assoc( db_query( 'DESC '.db_prefix( 'accounts' ).' weapon' ) );
 				$default_weapon = $default_weapon['Default'];
 			}
-			$extra_sql = ',armorvalue=0,armordef=0,weapon=\''.$default_weapon.'\'';
+			$extra_sql = ',weaponvalue=0,weapondmg=0,weapon=\''.$default_weapon.'\'';
 		}
 		elseif( $item_cat == 'armor' )
 		{
@@ -54,7 +54,7 @@ function mysticalshop_delete_item( $id )
 				$default_armor = db_fetch_assoc( db_query( 'DESC '.db_prefix( 'accounts' ).' armor' ) );
 				$default_armor = $default_armor['Default'];
 			}
-			$extra_sql = ',weaponvalue=0,weapondmg=0,armor=\''.$default_armor.'\'';
+			$extra_sql = ',armorvalue=0,armordef=0,armor=\''.$default_armor.'\'';
 		}
 		else
 			$extra_sql = '';

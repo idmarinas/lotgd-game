@@ -39,12 +39,11 @@ if( is_numeric( $id ) )
 			output("`&This item's enchantments will alter your maximum hit points by `^%s`&.`n",$row['hitpoints']);
 		if ($turns<>0)
 		{
-			$trn = translate_inline( 'turn' );
-			$trns = translate_inline( 'turns' );
-			output("`&This item's enchantments will grant `^%s `&extra %s.`n", $turns, abs( $turns ) != 1 ? $trns : $trn );
+			$stamina = number_format($turns*25000);
+			output("`&This item's enchantments will grant `^%s `&extra Stamina points with each day.`n",$stamina);
 		}
 		if ($favor<>0)
-			output( '`&This item\'s enchantments will alter your favor with %s`& by `^%s `&%s.`n', getsetting( 'deathoverlord', '`$Ramius' ), $favor, abs( $favor ) != 1 ? $points : $point );
+			output( '`&This item\'s unique properties will alter your favour with %s`& by `^%s `&%s.`n', getsetting( 'deathoverlord', '`$Ramius' ), $favor, abs( $favor ) != 1 ? $points : $point );
 	}
 	//Now let's check if they're buying or selling an item.
 	$gem = translate_inline( 'gem' );
@@ -72,10 +71,17 @@ if( is_numeric( $id ) )
 		addnav("Sales");
 		addnav( $purchase, $from."op=shop&what=purchase&id=$id&cat=$cat" );
 	}
-	if ($cat == 2 || $cat == 3){
-		output("`n`n`6Be aware that magical blades and armor are adaptive.");
-		output(" `6Precluding any extra magical properties, their attack and defensive properties are equal to your level.");
-		output(" `6As you grow in strength (gain a level), they do, too.");
+	if( $cat == 2 && get_module_setting( 'weapon_atk' ) == 0 )
+	{
+		output("`n`n`6Be aware that magical weapons are adaptive.");
+		output("Precluding any extra magical properties, their attack properties are equal to your level.");
+		output("As you grow in strength (gain a level), they do, too.");
+	}
+	elseif( $cat == 3 && get_module_setting( 'armor_def' ) == 0 )
+	{
+		output("`n`n`6Be aware that magical armor is adaptive.");
+		output("Precluding any extra magical properties, its defensive properties are equal to your level.");
+		output("As you grow in strength (gain a level), it does, too.");
 	}
 	output_notl( '`0`n`n' );
 }

@@ -2,7 +2,7 @@
 /**************
 Name: Equipment Shop
 Author: Eth - ethstavern(at)gmail(dot)com 
-Version: 3.813
+Version: 3.814
 About: A shop that sells a wide array of different items.
        Complete with editor and separate table in db.
 Translation compatible. Mostly.

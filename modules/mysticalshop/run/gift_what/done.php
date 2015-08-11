@@ -24,7 +24,7 @@ if( is_numeric( $id ) && is_numeric( $playerid ) )
 	$gifteeid = $row['acctid'];
 	$usersex = translate_inline($row['sex']?"She":"He");
 	output("`2You have bought `^%s`2 as a gift for `6%s`2!", $gifteditem, $pname );
-	output(" %s will receive a mail with details on how to pick it up.`0`n`n",$usersex);
+	output(" %s will receive mail with details on how to pick it up.`0`n`n",$usersex);
 	set_module_pref("gifted",1,"mysticalshop",$gifteeid);
 	set_module_pref("giftid",$id,"mysticalshop",$gifteeid);
 	set_module_pref("giftcat",$cat,"mysticalshop",$gifteeid);

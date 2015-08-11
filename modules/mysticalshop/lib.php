@@ -107,7 +107,7 @@ function mysticalshop_destroyitem($item_type,$rare_id = FALSE, $userid = FALSE){
 
 	// $id = FALSE; <-- What was that here for? --WK
 	set_module_pref($item_type,0,"mysticalshop",$userid);
-	set_module_pref($sing_item_type."id",0,"mysticalshop",$userid);
+	//set_module_pref($sing_item_type."id",0,"mysticalshop",$userid);
 	set_module_pref($sing_item_type."name","None","mysticalshop",$userid);
 }
 
@@ -149,7 +149,8 @@ function mysticalshop_resetbuffs( $itemid )
 				set_module_pref("turnadd",0); // assuming negatives are allowed (as turn penalty); $diff is undefined
 			}else{
 		*/
-		set_module_pref("turnadd",get_module_pref("turnadd")-$row['turns']);
+		$turnsremoval=get_module_pref("turnadd", "mysticalshop")-$row['turns'];
+		set_module_pref("turnadd", $turnsremoval, "mysticalshop");
 		//	} // end if
 		}
 		//Undo favor
@@ -160,10 +161,10 @@ function mysticalshop_resetbuffs( $itemid )
 				$session['user']['deathpower']-=$row['favor'];
 			}
 			set_module_pref("res",0);
-			$favoradd = get_module_pref("favoradd")-$row['favor'];
-			set_module_pref("favoradd", $favoradd);
+			$favoradd = get_module_pref("favoradd","mysticalshop")-$row['favor'];
+			set_module_pref("favoradd", $favoradd, "mysticalshop");
 			if( $favoradd == 0 ) // if it's not 0, assuming that other items are still affecting it
-				set_module_pref("favor",0);
+				set_module_pref("favor",0,"mysticalshop");
 		}
 	}
 	else
@@ -172,137 +173,192 @@ function mysticalshop_resetbuffs( $itemid )
 
 function mysticalshop_additem( $id, $cat, $seller_present=true )
 {
-	if( $seller_present )
-		$shopkeep = get_module_setting( 'shopkeepname' );
 	global $session;
 
+	if( $seller_present )
+		$shopkeep = get_module_setting( 'shopkeepname' );
 	$sql = 'SELECT * FROM '.db_prefix('magicitems').' WHERE id='.$id.' LIMIT 1';
 	$result = db_query($sql);
 	$row = db_fetch_assoc($result);
-	$attack = $row['attack'];
-	$defense = $row['defense'];
-	$charm = $row['charm'];
-	$health = $row['hitpoints'];
-	$turns = $row['turns'];
 	$name = $row['name'];
-	$rare = $row['rare'];
-	$subtract = ($row['rarenum']-1);
-	//if this is a limited item, let's subtract from the total available
-	if ($rare == 1){
-		$sql = "UPDATE ".db_prefix("magicitems")." SET rarenum=$subtract WHERE id=$id";
-		db_query($sql);
-		if( getsetting( 'usedatacache', false ) )
-		{
-			invalidatedatacache( 'modules-mysticalshop-enter' );
-			require_once( './modules/mysticalshop/libcoredup.php' );
-			mysticalshop_massinvalidate( 'modules-mysticalshop-viewgoods-'.$cat );
+	$turns = $row['turns'];
+	$charm = $row['charm'];
+	if( $turns + $session['user']['turns'] < 0 )
+	{
+		if( $seller_present )
+			output( '`^%s`^ sees that you are too tired to carry %s`^ right now and informs you that you should come back later.`n`n', $shopkeep, $name );
+		$row['gold'] = 0;
+		$row['gems'] = 0;
+		$name = false;
+	}
+	elseif( $charm + $session['user']['charm'] < 0 )
+	{
+		if( $seller_present )
+			output( '`^%s`^ refuses to give you %s`^ on the grounds of your current looks.`n`n', $shopkeep, $name );
+		$row['gold'] = 0;
+		$row['gems'] = 0;
+		$name = false;
+	}
+	elseif( $row['favor'] + $session['user']['deathpower'] < 0 )
+	{
+		if( $seller_present )
+			output( '`^%s`^ refuses to give you %s`^ on the grounds of your current status with a certain deity.`n`n', $shopkeep, $name );
+		$row['gold'] = 0;
+		$row['gems'] = 0;
+		$name = false;
+	}
+	else
+	{
+		$attack = $row['attack'];
+		$defense = $row['defense'];
+		$health = $row['hitpoints'];
+		$rare = $row['rare'];
+		$subtract = ($row['rarenum']-1);
+		//if this is a limited item, let's subtract from the total available
+		if ($rare == 1){
+			$sql = "UPDATE ".db_prefix("magicitems")." SET rarenum=$subtract WHERE id=$id";
+			db_query($sql);
+			if( getsetting( 'usedatacache', false ) )
+			{
+				invalidatedatacache( 'modules-mysticalshop-enter' );
+				require_once( './modules/mysticalshop/libcoredup.php' );
+				mysticalshop_massinvalidate( 'modules-mysticalshop-viewgoods-'.$cat );
+			}
 		}
-	}
 
-	if ($cat==0){
-		set_module_pref("ringid",$id);
-		set_module_pref("ring",1);
-		set_module_pref("ringname",$name);
-	}else if ($cat == 1){
-		set_module_pref("amuletid",$id);
-		set_module_pref("amulet",1);
-		set_module_pref("amuletname",$name);
-	}else if ($cat==2){
-		$value = $row['gold'];
-		//alright, let's first subtract the previous weapon damage
-		//credit to seretogis for catching this bug
-		if( $session['user']['weapondmg'] != 0 )
-			output( '`2Your `^%s`2 disintegrates as soon as you take hold of `^%s`2.`n`n', $session['user']['weapon'], $name );
-		$session['user']['attack']-=$session['user']['weapondmg'];
-		//these are magical blades, they adjust as you level
-		//i.e. each level, their attack goes up by one
-		$session['user']['weapon'] = $name;
-		$session['user']['weaponvalue'] = $value;
-		$session['user']['weapondmg']=$session['user']['level'];
-		$session['user']['attack']+=$session['user']['weapondmg'];
-		//
-		set_module_pref("weaponid",$id);
-		set_module_pref("weapon",1);
-		set_module_pref("weaponname",$name);
-		if( $seller_present )
-			output("`^\"I'm also sorry to say,\" %s`^ notes, \"that MightyE's Weapon Shop is closed to you until you sell your weapon back. Business rivarly, you know.\"`n`n", $shopkeep);
-	}else if ($cat==3){
-		$value = $row['gold'];
-		set_module_pref("armorid",$id);
-		set_module_pref("armor",1);
-		set_module_pref("armorname",$name);
-		//take away original armor value, the sister of the bug stated above
-		if( $session['user']['armordef'] != 0 )
-			output( "`2You touch `^%s`2 and watch your `^%s`2 fall apart.`n`n", $name, $session['user']['armor'] );
-		$session['user']['defense']-=$session['user']['armordef'];
-		//magical armor, adjusts as you level
-		$session['user']['armor'] = $name;
-		$session['user']['armorvalue'] = $value;
-		$session['user']['armordef'] = $session['user']['level'];
-		$session['user']['defense']+=$session['user']['level'];
-		//To defeat the double armor bug once and for all, I've blocked the armor shop from showing up. Let's tell the players this.
-		if( $seller_present )
-			output("`^\"I'm afraid to say Pegasus doesn't care too much for the competition,\" %s`^ notes. \"Her doors are closed to you until you sell your armor back to the shop.\"`n`n", $shopkeep);
-	}else if ($cat==4){
-		set_module_pref("cloakid",$id);
-		set_module_pref("cloak",1);
-		set_module_pref("cloakname",$name);
-	}else if ($cat==5){
-		set_module_pref("helmid",$id);
-		set_module_pref("helm",1);
-		set_module_pref("helmname",$name);
-	}else if ($cat==6){
-		set_module_pref("gloveid",$id);
-		set_module_pref("glove",1);
-		set_module_pref("glovename",$name);
-	}else if ($cat==7){
-		set_module_pref("bootid",$id);
-		set_module_pref("boots",1);
-		set_module_pref("bootname",$name);
-	}else if ($cat==8){
-		set_module_pref("miscid",$id);
-		set_module_pref("misc",1);
-		set_module_pref("miscname",$name);
-	}
-	//end
-	$point = translate_inline( 'point' );
-	$points = translate_inline( 'points' );
-	//alter stats if needed
-	if ($attack<>0) {
-		$session['user']['attack']+=$attack;
-		output("`&This item's enchantments have altered your attack by `^%s `&%s.`n", $attack, abs( $attack ) != 1 ? $points : $point );
-	}
-	if ($defense<>0) {
-		$session['user']['defense']+=$defense;
-		output("`&This item's enchantments have altered your defense by `^%s `&%s.`n", $defense, abs( $defense ) != 1 ? $points : $point );
-	}
-	if ($charm<>0) {
-		$session['user']['charm']=$session['user']['charm']+$charm;
-		output("`&This item's enchantments have altered your charm by `^%s `&%s.`n", $charm, abs( $charm ) != 1 ? $points : $point );
-	}
-	if ($health<>0) {
-		$session['user']['maxhitpoints']+=$health;
-		//adjust to fit
-		$session['user']['hitpoints']=$session['user']['maxhitpoints'];
-		output("`&This item's enchantments have altered your maximum hit points by `^%s`&.`n", $health );
-	}
-	//this needs to be adjusted at newday as well.
-	if ($turns<>0) {
-		$session['user']['turns']+=$turns;
-		output("`&This item's enchantments have altered your turns by `^%s`&.`n", $turns );
-		set_module_pref("turnadd",get_module_pref("turnadd")+$turns);
-	}
-	//items that grant favor are a little trickier, since they have to be restored upon each resurrection
-	//So, extra additions are needed. See newday above to see how this is done.
-	if ($row['favor']<>0) {
-	  $favor = $row['favor'];
-		//grant one-time automatic favor
-		$session['user']['deathpower']+=$favor;
-		//store favor granted to be restored upon resurrection
-		set_module_pref("res",$session['user']['resurrections']);
-		set_module_pref("favor",1);
-		set_module_pref("favoradd",get_module_pref("favoradd")+$favor);
-		output( '`&This item\'s enchantments have altered your favor with %s`& by `^%s `&%s.`n', getsetting( 'deathoverlord', '`$Ramius' ), $favor, abs( $favor ) != 1 ? $points : $point );
+		if ($cat==0){
+			set_module_pref("ringid",$id);
+			set_module_pref("ring",1);
+			set_module_pref("ringname",$name);
+		}else if ($cat == 1){
+			set_module_pref("amuletid",$id);
+			set_module_pref("amulet",1);
+			set_module_pref("amuletname",$name);
+		}else if ($cat==2){
+			$value = $row['gold'];
+			//alright, let's first subtract the previous weapon damage
+			//credit to seretogis for catching this bug
+			if( $session['user']['weapondmg'] != 0 )
+				output( '`2Your `^%s`2 disintegrates as soon as you take hold of `^%s`2.`n`n', $session['user']['weapon'], $name );
+			$session['user']['attack']-=$session['user']['weapondmg'];
+			//these are magical blades, they adjust as you level
+			//i.e. each level, their attack goes up by one
+			$session['user']['weapon'] = $name;
+			$session['user']['weaponvalue'] = $value;
+			
+			$weapon_base_atk = get_module_setting( 'weapon_atk' );
+			if( $weapon_base_atk == 0 )
+			{	// adaptive
+				$session['user']['weapondmg'] = $session['user']['level'];
+				$session['user']['attack'] += $session['user']['weapondmg'];
+			}
+			elseif( $weapon_base_atk == 1 )
+			{	// synchronous
+				$session['user']['weapondmg'] = $attack;
+			}
+			else
+			{	// static
+				$session['user']['weapondmg'] = (int)get_module_setting( 'weapon_atk_power' );
+			}
+			//
+			set_module_pref("weaponid",$id);
+			set_module_pref("weapon",1);
+			set_module_pref("weaponname",$name);
+			if( $seller_present )
+				output("`^\"I'm also sorry to say,\" %s`^ notes, \"that MightyE's Weapon Shop is closed to you until you sell your weapon back. Business rivarly, you know.\"`n`n", $shopkeep);
+		}else if ($cat==3){
+			$value = $row['gold'];
+			set_module_pref("armorid",$id);
+			set_module_pref("armor",1);
+			set_module_pref("armorname",$name);
+			//take away original armor value, the sister of the bug stated above
+			if( $session['user']['armordef'] != 0 )
+				output( "`2You touch `^%s`2 and watch your `^%s`2 fall apart.`n`n", $name, $session['user']['armor'] );
+			$session['user']['defense']-=$session['user']['armordef'];
+			//magical armor, adjusts as you level
+			$session['user']['armor'] = $name;
+			$session['user']['armorvalue'] = $value;
+			
+			$armor_base_def = get_module_setting( 'armor_def' );
+			if( $armor_base_def == 0 )
+			{	// adaptive
+				$session['user']['armordef'] = $session['user']['level'];
+				$session['user']['defense'] += $session['user']['armordef'];
+			}
+			elseif( $armor_base_def == 1 )
+			{	// synchronous
+				$session['user']['armordef'] = $defense;
+			}
+			else
+			{	// static
+				$session['user']['armordef'] = (int)get_module_setting( 'armor_def_power' );
+			}
+			
+			//To defeat the double armor bug once and for all, I've blocked the armor shop from showing up. Let's tell the players this.
+			if( $seller_present )
+				output("`^\"I'm afraid to say Pegasus doesn't care too much for the competition,\" %s`^ notes. \"Her doors are closed to you until you sell your armor back to the shop.\"`n`n", $shopkeep);
+		}else if ($cat==4){
+			set_module_pref("cloakid",$id);
+			set_module_pref("cloak",1);
+			set_module_pref("cloakname",$name);
+		}else if ($cat==5){
+			set_module_pref("helmid",$id);
+			set_module_pref("helm",1);
+			set_module_pref("helmname",$name);
+		}else if ($cat==6){
+			set_module_pref("gloveid",$id);
+			set_module_pref("glove",1);
+			set_module_pref("glovename",$name);
+		}else if ($cat==7){
+			set_module_pref("bootid",$id);
+			set_module_pref("boots",1);
+			set_module_pref("bootname",$name);
+		}else if ($cat==8){
+			set_module_pref("miscid",$id);
+			set_module_pref("misc",1);
+			set_module_pref("miscname",$name);
+		}
+		//end
+		$point = translate_inline( 'point' );
+		$points = translate_inline( 'points' );
+		//alter stats if needed
+		if ($attack<>0) {
+			$session['user']['attack']+=$attack;
+			output("`&This item has altered your attack by `^%s `&%s.`n", $attack, abs( $attack ) != 1 ? $points : $point );
+		}
+		if ($defense<>0) {
+			$session['user']['defense']+=$defense;
+			output("`&This item has altered your defense by `^%s `&%s.`n", $defense, abs( $defense ) != 1 ? $points : $point );
+		}
+		if ($charm<>0) {
+			$session['user']['charm']=$session['user']['charm']+$charm;
+			output("`&This item has altered your charm by `^%s `&%s.`n", $charm, abs( $charm ) != 1 ? $points : $point );
+		}
+		if ($health<>0) {
+			$session['user']['maxhitpoints']+=$health;
+			//adjust to fit
+			$session['user']['hitpoints']=$session['user']['maxhitpoints'];
+			output("`&This item has altered your maximum hit points by `^%s`&.`n", $health );
+		}
+		//this needs to be adjusted at newday as well.
+		if ($turns<>0) {
+			$session['user']['turns']+=$turns;
+			$stamina = number_format($turns*25000);
+			output("`&This item has increased your Stamina by `^%s`& points.`n", $stamina);
+			set_module_pref("turnadd",get_module_pref("turnadd")+$turns);
+		}
+		//items that grant favor are a little trickier, since they have to be restored upon each resurrection
+		//So, extra additions are needed. See newday above to see how this is done.
+		if ($row['favor']<>0) {
+		  $favor = $row['favor'];
+			//grant one-time automatic favor
+			$session['user']['deathpower']+=$favor;
+			//store favor granted to be restored upon resurrection
+			set_module_pref("res",$session['user']['resurrections']);
+			set_module_pref("favor",1);
+			set_module_pref("favoradd",get_module_pref("favoradd")+$favor);
+			output( '`&This item has altered your favor with %s`& by `^%s `&%s.`n', getsetting( 'deathoverlord', '`$Ramius' ), $favor, abs( $favor ) != 1 ? $points : $point );
+		}
 	}
 	return array( 'name'=>$name, 'gold'=>$row['gold'], 'gems'=>$row['gems'] );
 }
@@ -312,6 +368,10 @@ function mysticalshop_discount( &$gold, &$gems, $disnum, $charm )
 	if( $charm > 1 )
 	{
 		$discperc = ( $charm - 1 ) / ( $charm + $disnum / 1.34 ) - .001;
+		//Modification to prevent charm discount from going over 10 points, added by Caveman Joe
+		if ($discperc > 0.25) {
+			$discperc = 0.25;
+		}
 		if( $discperc < 0 )
 			$discperc = 0;
 		$discmod = 1 - $discperc; // was 1 - ( $session['user']['charm'] / $disnum );
@@ -326,9 +386,9 @@ function mysticalshop_discount( &$gold, &$gems, $disnum, $charm )
 		else
 			$gems = 0;
 	}
+	//Modification to prevent charm discount from going over 10 points, added by Caveman Joe
 	else
 		$discperc = 0;
-
 	return $discperc;
 }
 

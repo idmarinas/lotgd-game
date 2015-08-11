@@ -41,7 +41,7 @@ if( is_numeric( $giftid ) )
 		if ($favor<>0)
 			output( '`&This item\'s enchantments will alter your favor with %s`& by `^%s `&%s.`n', getsetting( 'deathoverlord', '`$Ramius' ), $favor, abs( $favor ) != 1 ? $points : $point );
 	}
-	output_notl( '`0' );
+	output_notl( '`0`n`n' );
 	addnav("Keep It", $from."op=gift&what=pickup");
 	addnav("Decline", $from."op=gift&what=decline");
 }

@@ -1,16 +1,26 @@
 <?php
 if( is_numeric( $id ) )
 {
-	$sql = 'SELECT attack,defense,hitpoints,name,gold,gems,rare FROM '.db_prefix('magicitems').' WHERE id='.$id.' LIMIT 1';
+	$sql = 'SELECT attack,defense,hitpoints,name,gold,gems,turns,charm,favor,rare FROM '.db_prefix('magicitems').' WHERE id='.$id.' LIMIT 1';
 	$result = db_query($sql);
 	$row = db_fetch_assoc($result);
+	
+	$user = &$session['user'];
 
-	if( $row['attack'] >= $session['user']['attack']
-			|| $row['defense'] >= $session['user']['defense']
-			|| $row['hitpoints'] >= $session['user']['maxhitpoints']
-		) {
+	if( $row['turns'] > $user['turns'] )
+	{
+		output( '`2%s`2 sizes you up, then decides that separating you from your %s`2 right now would be too exhausting an experience for you.', $shopkeep, $row['name'] );
+		output( 'The sale is off!`0`n`n' );
+	}
+	elseif( $row['attack'] >= $user['attack']
+			|| $row['defense'] >= $user['defense']
+			|| $row['hitpoints'] >= $user['maxhitpoints']
+			|| $row['charm'] > $user['charm']
+			|| $row['favor'] > $user['deathpower']
+		)
+	{
 		output( '`2%s`2 sizes you up, then decides that separating you from your %s`2 right now would be too painful for you.', $shopkeep, $row['name'] );
-		output( 'The sale is off!' );
+		output( 'The sale is off!`0`n`n' );
 	} else {
 		$gold = $row['gold'];
 		$gems = $row['gems'];
@@ -48,7 +58,10 @@ if( is_numeric( $id ) )
 				$default_weapon = $default_weapon['Default'];
 			}
 			$session['user']['weapon']= $default_weapon;
-			$session['user']['attack']-=$session['user']['weapondmg'];
+			if( get_module_setting( 'weapon_atk' ) == 0 )
+			{	// adaptive
+				$session['user']['attack']-=$session['user']['weapondmg'];
+			}
 			$session['user']['weapondmg']=0;
 			$session['user']['weaponvalue']=0;
 		}else if ($cat == 3){
@@ -61,7 +74,10 @@ if( is_numeric( $id ) )
 				$default_armor = $default_armor['Default'];
 			}
 			$session['user']['armor']= $default_armor;
-			$session['user']['defense']-=$session['user']['armordef'];
+			if ( get_module_setting( 'armor_def' ) == 0 )
+			{	// adaptive
+				$session['user']['defense']-=$session['user']['armordef'];
+			}
 			$session['user']['armordef']=0;
 			$session['user']['armorvalue']=0;
 		}else if ($cat == 4){
