@@ -189,7 +189,7 @@ $args['target'.$i.'']['hitpoints'] = round((($args['creaturehealth']/100)*get_mo
 					//Output the hit message.  We're using a buff so that it goes in the right place in the text.  The atkmod is only there to force the buff to output the start message.
 					apply_buff("creaturetargets",array(
 						"rounds"=>1,
-						"startmsg"=>array("%s",stripslashes($badguy['target'.$target.'']['hitmsg'])),
+						"startmsg"=>stripslashes($badguy['target'.$target.'']['hitmsg']),
 						"atkmod"=>1,
 						"schema"=>"module-creaturetargets",
 						)
