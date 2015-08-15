@@ -22,8 +22,11 @@ function checkban($login=false){
 		$id=$row['uniqueid'];
 	}
 	//first, remove bans, then select them.
-	db_query("DELETE FROM " . db_prefix("bans") . " WHERE banexpire < \"".date("Y-m-d H:m:s")."\" AND banexpire>'0000-00-00 00:00:00'");
-	$sql = "SELECT * FROM " . db_prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00 00:00:00' OR banexpire>='".date("Y-m-d H:m:s")."')";
+	//## Modificación: Se ha modificado como se selecciona la fecha
+	//## Ahora se usa la función de Mysql now()
+	db_query("DELETE FROM " . db_prefix("bans") . " WHERE banexpire < NOW() AND banexpire>'0000-00-00 00:00:00'");
+	$sql = "SELECT * FROM " . db_prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00 00:00:00' OR banexpire>=NOW())";
+	//## Fin modificación
 	$result = db_query($sql);
 	if (db_num_rows($result)>0){
 		$session=array();
