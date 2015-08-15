@@ -35,13 +35,16 @@ if ($name!=""){
 		} else {
 			$password = md5(md5($password));
 		}
+		//## Modificación: Se comprueba antes de procesar la petición si la IP está bloqueada
+		checkban(); //check if this computer is banned
+		//## Fin modificación
+		
 		$sql = "SELECT * FROM " . db_prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
 		$result = db_query($sql);
 		if (db_num_rows($result)==1){
 			$session['user']=db_fetch_assoc($result);
 			$baseaccount = $session['user'];
 			checkban($session['user']['login']); //check if this account is banned
-			checkban(); //check if this computer is banned
 			// If the player isn't allowed on for some reason, anything on
 			// this hook should automatically call page_footer and exit
 			// itself.
