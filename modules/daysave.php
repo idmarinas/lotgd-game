@@ -81,18 +81,18 @@ function daysave_dohook($hookname,$args){
 			break;
 		case "village":
 			//tlschema('daysavenav');
-			addnav("Saved Days");
-			addnav("New Day Menu","runmodule.php?module=daysave&op=start&return=village");
+			addnav("The Fields");
+			addnav("Saved Days","runmodule.php?module=daysave&op=start&return=village");
 		break;
 		case "shades":
 			//tlschema('daysavenav');
-			addnav("Saved Days");
-			addnav("New Day Menu","runmodule.php?module=daysave&op=start&return=shades");
+			addnav("New Day Menu");
+			addnav("Saved Days","runmodule.php?module=daysave&op=start&return=shades");
 		break;
 		case "worldnav":
 			//tlschema('daysavenav');
-			addnav("Saved Days");
-			addnav("New Day Menu","runmodule.php?module=daysave&op=start&return=worldmapen");
+			addnav("New Day Menu");
+			addnav("Saved Days","runmodule.php?module=daysave&op=start&return=worldmapen");
 		break;
 	}
 	return $args;
@@ -183,11 +183,12 @@ function daysave_run(){
 			break;
 			case "useday":
 				$days-=1;
+				$savedDay = translate_inline('Saved Day');
 				if ($days<0) $days=0;
 				set_module_pref("days", $days);
 				output("You have used one of your Chronospheres.  Now go forth and have fun!`n`n");
 				for ($full=1; $full<=$days; $full++){
-					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"Saved Day\" title=\"Saved Day\">");
+					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"$savedDay\" title=\"$savedDay\">");
 				}
 				for ($empty=$full; $empty<=$slots; $empty++){
 					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"Empty Day Slot\" title=\"Empty Day Slot\">");
@@ -195,9 +196,10 @@ function daysave_run(){
 				addnav("It is a New Day!","newday.php");
 			break;
 			case "buyday":
+			$savedDay = translate_inline('Saved Day');
 				output("You have bought one new Game Day in exchange for %s Donator Points, leaving you with %s points left to spend.  Your Chronospheres are unaffected.  Now go forth and have fun!`n`n",$buydaycost,number_format($dps-$buydaycost));
 				for ($full=1; $full<=$days; $full++){
-					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"Saved Day\" title=\"Saved Day\">");
+					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"$savedDay\" title=\"$savedDay\">");
 				}
 				for ($empty=$full; $empty<=$slots; $empty++){
 					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"Empty Day Slot\" title=\"Empty Day Slot\">");
@@ -207,6 +209,8 @@ function daysave_run(){
 				increment_module_pref("instantbuys");
 			break;
 			case "buyslot":
+				$savedDay = translate_inline('Saved Day');
+				$emptyDay = translate_inline('Empty Day Slot');
 				$session['user']['donationspent']+=$buyslotcost;
 				increment_module_pref("days");
 				increment_module_pref("slots");
@@ -215,10 +219,10 @@ function daysave_run(){
 				$dps = $session['user']['donation']-$session['user']['donationspent'];
 				output("You have bought one additional Chronosphere in exchange for %s Donator Points, leaving you with %s points left to spend.`n`n",$buyslotcost,number_format($dps));
 				for ($full=1; $full<=$days; $full++){
-					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"Saved Day\" title=\"Saved Day\">");
+					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"$savedDay\" title=\"$savedDay\">");
 				}
 				for ($empty=$full; $empty<=$slots; $empty++){
-					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"Empty Day Slot\" title=\"Empty Day Slot\">");
+					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"$emptyDay\" title=\"$emptyDay\">");
 				}
 				if ($days<$slots && $dps>=$fillslotcost){
 					addnav("Fill up Chronospheres","");
@@ -228,9 +232,9 @@ function daysave_run(){
 						$cost = $i*$fillslotcost;
 						if ($dps>=$cost){
 							if ($i==1){
-								$p = "Sphere";
+								$p = translate_inline("Sphere");
 							} else {
-								$p = "Spheres";
+								$p = translate_inline("Spheres");
 							}
 							addnav(array("Fill up %s %s for %s Donator Points",$i,$p,$cost),"runmodule.php?module=daysave&op=fillup&fill=".$i."&return=".$return);
 						}
@@ -240,22 +244,24 @@ function daysave_run(){
 				addnav("Back to the menu","runmodule.php?module=daysave&op=start&return=".$return);
 			break;
 			case "fillup":
+				$savedDay = translate_inline('Saved Day');
+				$emptyDay = translate_inline('Empty Day Slot');
 				$fill = httpget('fill');
 				$session['user']['donationspent']+=($fill*$fillslotcost);
 				$dps = $session['user']['donation']-$session['user']['donationspent'];
 				increment_module_pref("days",$fill);
 				$days = get_module_pref("days");
 				if ($fill==1){
-					$p = "Chronosphere";
+					$p = translate_inline("Chronosphere");
 				} else {
-					$p = "Chronospheres";
+					$p = translate_inline("Chronospheres");
 				}
 				output("You have filled up %s %s in exchange for %s Donator Points, leaving you with %s points left to spend.`n`n",$fill,$p,number_format($fill*$fillslotcost),number_format($dps));
 				for ($full=1; $full<=$days; $full++){
-					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"Saved Day\" title=\"Saved Day\">");
+					rawoutput("<img src=\"images/daysphere-full.png\" alt=\"$savedDay\" title=\"$savedDay\">");
 				}
 				for ($empty=$full; $empty<=$slots; $empty++){
-					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"Empty Day Slot\" title=\"Empty Day Slot\">");
+					rawoutput("<img src=\"images/daysphere-empty.png\" alt=\"$emptyDay\" title=\"$emptyDay\">");
 				}
 				addnav("Return","");
 				addnav("Back to the menu","runmodule.php?module=daysave&op=start&return=".$return);
