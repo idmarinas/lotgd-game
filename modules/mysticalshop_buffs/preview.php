@@ -17,7 +17,7 @@
 					if ($atkmod > 0) {
 						$sign1 = '+';
 					}
-					$atk = '`n'. $sign1. $atkmod. '% attack';
+					$atk = sprintf_translate(array('`n%s%s% attack',$sign1, $atkmod));
 				}
 			}
 			if (get_module_setting("toggledefmod") && $buff['defmod'] != "") {
@@ -27,7 +27,7 @@
 					if ($defmod > 0) {
 						$sign2 = '+';
 					}
-					$def = '`n'. $sign2. $defmod. '% defense';
+					$def = sprintf_translate(array('`n%s%s% defense',$sign2, $defmod));
 				}
 			}
 			if (get_module_setting("toggledmgmod") && $buff['dmgmod'] != "") {
@@ -37,7 +37,7 @@
 					if ($dmgmod > 0) {
 						$sign2 = '+';
 					}
-					$dmg = '`n'. $sign2. $dmgmod. '% damage';
+					$dmg = sprintf_translate(array('`n%s%s% damage',$sign2, $dmgmod));
 				}
 			}
 			if (get_module_setting("toggleregen") && $buff['regen'] != "") {
@@ -46,7 +46,7 @@
 					if ($var1 > 0) {
 						$sign3 = '+';
 					}
-				$regen = '`n'. $sign3. $var1. 'HP regeneration per round';
+				$regen = sprintf_translate(array('`n%s%s HP regeneration per round',$sign3, $var1));
 				}
 			}
 			if (get_module_setting("toggledmgshld") && $buff['damageshield'] != "") {
@@ -56,7 +56,7 @@
 					if ($damageshieldmod >= 0) {
 						$sign4 = '+';
 					}
-					$damageshield = '`n'. $sign4. $damageshieldmod. '% damage shield';
+					$damageshield = sprintf_translate(array('`n%s%s% damage shield', $sign4, $damageshieldmod ));
 				}
 			}
 			if (get_module_setting("togglelifetap") && $buff['lifetap'] != "") {
@@ -66,19 +66,19 @@
 					if ($lifetapmod >= 0) {
 						$sign5 = '+';
 					}
-					$lifetap = '`n'. $sign5. $lifetapmod. '% HP leech';
+					$lifetap = sprintf_translate(array('`n`n%s%s% HP leech',$sign5, $lifetapmod));
 				}
 			}
 			if (get_module_setting("toggleminioncount") && $buff['minioncount'] != "") {
 				$var4 = round(mysticalshop_buffs_calc($buff['minioncount']),0);
 				if ($var4 != 0) {
-					$minioncount = '`n'. $var4. ' attack(s) maximum per round';
+					$minioncount = sprintf_translate(array('`n%s attack(s) maximum per round', $var4));
 				}
 			}
 			  if (get_module_setting("togglemaxbadguydamage") && $buff['maxbadguydamage'] != "") {
 				$var5 = round(mysticalshop_buffs_calc($buff['maxbadguydamage']),0);
 				if ($var5 != 0) {
-					$maxbadguydamage = '`n'. $var5. ' maximum damage per attack';
+					$maxbadguydamage = sprintf_translate(array('`n%s maximum damage per attack', $var5));
 				}
 			}	 
 			  if (get_module_setting("togglebadguyatkmod") && $buff['badguyatkmod'] != "") {
@@ -88,7 +88,7 @@
 					if ($badguyatk >= 0) {
 						$sign6 = '+';
 					}
-					$badguyatkmod = '`n'. $sign6. $badguyatk. '% enemy attack';
+					$badguyatkmod = sprintf_translate(array('`n%s%s% enemy attack',$sign6, $badguyatk));
 				}
 			}	 
 			  if (get_module_setting("togglebadguydefmod") && $buff['badguydefmod'] != "") {
@@ -98,7 +98,7 @@
 					if ($badguydef >= 0) {
 						$sign7 = '+';
 					}
-					$badguydefmod = '`n'. $sign7. $badguydef. '% enemy defense';
+					$badguydefmod = sprintf_translate(array('`n%s%s% enemy defense', $sign7, $badguydef));
 				}
 			}	 
 			  if (get_module_setting("togglebadguydmgmod") && $buff['badguydmgmod'] != "") {
@@ -108,25 +108,24 @@
 					if ($badguydmg >= 0) {
 						$sign8 = '+';
 					}
-					$badguydmgmod ='`n'. $sign8. $badguydmg. '% enemy damage modifier';
+					$badguydmgmod = sprintf_translate(array('`n%s%s% enemy damage modifier', $sign8, $badguydmg));
 				}
 			}	 
 			  if (get_module_setting("toggleinv") && $buff['invulnerable'] != "") {
 				$var9 = round(mysticalshop_buffs_calc($buff['invulnerable']),0);
 				if ($var9 == 1) {
-					$var9 = "INVULNERABLE!!";
-					$inv = '`n'. $var9;
+					$inv = '`n'. translate_inline("INVULNERABLE!!");
 				}
 			}	 
 			if (get_module_setting("toggleround") && $buff['rounds'] != "" && $buff['rounds'] != 0) {
 				$round = $buff['rounds'];
-				if ($round < 0) $round = 'Permanent';
-				$rounds = '`n'.$round. ' Rounds';
+				if ($round < 0) $round = translate_inline('Permanent');
+				$rounds = '`n'.$round.' '.translate_inline('Rounds');
 			}
 			if ($buff['name'] != "") {
 				$name = $buff['name'];
 			}
 			output("`n`b`c`@Special Abilities`7`b`c");
-			output("`c`7$name`7 $rounds $atk $def $dmg $regen $damageshield $lifetap $minioncount $maxbadguydamage $badguyatkmod $badguydefmod $badguydmgmod`c`n");
+			output_notl("`c`7$name`7 $rounds $atk $def $dmg $regen $damageshield $lifetap $minioncount $maxbadguydamage $badguyatkmod $badguydefmod $badguydmgmod`c`n");
 		}
 ?>

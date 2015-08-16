@@ -16,7 +16,7 @@ if( is_numeric( $id ) )
 	//display that nice big description you typed out here
 	if( $verbose != '' )
 	{
-		output("`3%s`n`n", $verbose);
+		output_notl("`3%s`n`n", $verbose);
 	//otherwise, let's display a default one in it's place
 	}else{
 		output("`3No extended description for this item is available.`n`n");
