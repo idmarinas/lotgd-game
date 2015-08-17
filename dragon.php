@@ -19,13 +19,14 @@ if ($op==""){
 		output("`\$Fighting down every urge to flee, you cautiously enter the cave entrance, intent on catching the great green dragon sleeping, so that you might slay it with a minimum of pain.");
 		output("Sadly, this is not to be the case, for as you round a corner within the cave you discover the great beast sitting on its haunches on a huge pile of gold, picking its teeth with a rib.");
 	}
+	$maxlevel = getsetting('maxlevel',15);
 	$badguy = array(
 		"creaturename"=>translate_inline("`@The Green Dragon`0"),
-		"creaturelevel"=>getsetting('maxlevel',15)+2,
+		"creaturelevel"=>$maxlevel+2,
 		"creatureweapon"=>translate_inline("Great Flaming Maw"),
-                "creatureattack"=>30+getsetting('maxlevel',15),
-                "creaturedefense"=>10+getsetting('maxlevel',15),
-                "creaturehealth"=>150+getsetting('maxlevel',15)*10,
+        "creatureattack"=>30+$maxlevel,
+        "creaturedefense"=>10+$maxlevel,
+        "creaturehealth"=>150+$maxlevel*10,
 		"diddamage"=>0, 
 		"type"=>"dragon");
 
@@ -147,12 +148,14 @@ if ($op==""){
 				   ,"clanid"=>1
 				   ,"clanrank"=>1
 				   ,"clanjoindate"=>1
+				   ,"regdate"=>1
 				   ,"translatorlanguages"=>1
 				   ,"replaceemail"=>1
 				   ,"forgottenpassword"=>1
 				   );
 
 	$nochange = modulehook("dk-preserve", $nochange);
+	$session['user']['dragonkills']++;
 
 	$badguys = $session['user']['badguy']; //needed for the dragons name later
 
@@ -164,14 +167,13 @@ if ($op==""){
 	while ($row = db_fetch_assoc($result)) {
 		if (array_key_exists($row['Field'],$nochange) &&
 				$nochange[$row['Field']]){
+		}elseif($row['Field'] == "location"){
+			$session['user'][$row['Field']] = getsetting("villagename", LOCATION_FIELDS);
 		}else{
 			$session['user'][$row['Field']] = $row["Default"];
 		}
 	}
 	$session['user']['gold'] = getsetting("newplayerstartgold",50);
-	$session['user']['location'] = getsetting('villagename', LOCATION_FIELDS);
-	$session['user']['armor'] = getsetting('startarmor','T-Shirt');
-	$session['user']['weapon'] = getsetting('startweapon','Fists');
 
 	$newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
 
@@ -274,7 +276,7 @@ if ($battle){
 	if ($victory){
 		$flawless = 0;
 		if ($badguy['diddamage'] != 1) $flawless = 1;
-		$session['user']['dragonkills']++;
+		// $session['user']['dragonkills']++;
 		output("`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.",$badguy['creaturename']);
 		addnews("`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!",$session['user']['name'],$badguy['creaturename']);
 		tlschema("nav");
