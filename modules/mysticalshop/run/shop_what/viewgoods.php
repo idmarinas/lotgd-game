@@ -83,7 +83,7 @@ if ($count == 0){
 		$gem_pl = translate_inline( 'Gems' );
 		output( "`^%s Gold`0 and `%%s %s`0", $row['gold'], $row['gems'], abs( $row['gems'] ) != 1 ? $gem_pl : $gem );
 		rawoutput("</td><td>");
-		output("`Q%s`0",$instock);
+		output_notl("`Q%s`0",$instock);
 		rawoutput("</td>");
 		rawoutput("</tr>");
 		if (get_module_setting("displaydesc")){
