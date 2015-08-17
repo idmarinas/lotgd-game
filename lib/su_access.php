@@ -65,7 +65,7 @@ function check_su_access($level){
 			$subj = "`#%s`# tried to hack the superuser pages!";
 			$subj = sprintf($subj, $session['user']['name']);
 			$body = "Bad, bad, bad %s, they are a hacker!`n`nTried to access %s from %s.";
-			$body = sprintf($body, $session['user']['name'], $_SERVER['REQUEST_URI'], $SERVER['HTTP_REFERER']);
+			$body = sprintf($body, $session['user']['name'], $_SERVER['REQUEST_URI'], $_SERVER['HTTP_REFERER']);
 			systemmail($row['acctid'],$subj,$body);
 		}
 		page_footer();
