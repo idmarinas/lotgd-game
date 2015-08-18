@@ -67,37 +67,34 @@ function alignmentevents_runevent($type) {
 		addnav("`6Ignore","forest.php?op=ignore&op2=$rand");
 		switch($rand){
 			case 1:
-				output("`n`@Walking around in the forest you rest in a convenient tree... waking up a bit later, you notice a clingy ");
-				output("substance clinging to your face... feeling it, you realize it to be spider silk.`n`nAn enchanted spider ");
-				output("approaches you, and explains that it didn't mean to scare you, but it and it's friends are trying to learn ");
-				output("to spin thread, and it is `%not`@ going well.`n");
+				output("`n`@Walking around in the forest you rest in a convenient tree... waking up a bit later, you notice a clingy substance clinging to your face... feeling it, you realize it to be spider silk.`n`n ");
+				output("An enchanted spider approaches you, and explains that it didn't mean to scare you, but it and it's friends are trying to learn to spin thread, and it is `%not`@ going well.`n");
 				output("What are you going to do?");
 			break;
 			case 2:
-				output("`n`^You stumble upon a frothing, raging, running river, and see a stranded fishing boat sinking slowly, yet ");
-				output("held up slightly by a pile of rocks!`n`nThe boat is full of a worried looking crew, and they seem to notice ");
-				output("you!`n`n`3 \"`&Help! Help!`3\"`^ they yell.`n");
+				output("`n`^You stumble upon a frothing, raging, running river, and see a stranded fishing boat sinking slowly,");
+				output("yet held up slightly by a pile of rocks!`n`nThe boat is full of a worried looking crew, and they seem to notice you!`n`n");
+				output("`3 \"`&Help! Help!`3\"`^ they yell.`n");
 				output("What are you going to do?");
 			break;
 			case 3:
-				output("`n`#You wander across a group of children playing in a tree.  They cry out in fear as a branch begins to ");
-				output("break.  It looks like one of them will fall!`n");
+				output("`n`#You wander across a group of children playing in a tree.  They cry out in fear as a branch begins to break.");
+				output("It looks like one of them will fall!`n");
 				output("What are you going to do?");
 			break;
 			case 4:
-				output("`n`QA huge lion comes crashing through the forest. You notice he's limping! Since you've never seen a limping lion ");
-				output("before, you find this quite amazing.  He comes to within a couple of feet and raises his front foot ");
-				output("and you see a large thorn sticking out of it.`n");
+				output("`n`QA huge lion comes crashing through the forest. You notice he's limping! Since you've never seen a limping lion before,");
+				output("you find this quite amazing.  He comes to within a couple of feet and raises his front foot and you see a large thorn sticking out of it.`n");
 				output("What are you going to do?");
 			break;
 			case 5:
-				output("`n`%You come up to an open patch in the forest and see a young explorer yelling for help.  He's caught in ");
-				output("quicksand and he's going down fast.`n");
+				output("`n`%You come up to an open patch in the forest and see a young explorer yelling for help.");
+				output("He's caught in quicksand and he's going down fast.`n");
 				output("What are you going to do?");
 			break;
 			case 6:
-				output("`n`!You are wandering through the forest when you happen upon a group of young children. They are sitting  ");
-				output("huddled up against a tree, their clothes ragged and torn. They look as if they haven't eaten in days.`n");
+				output("`n`!You are wandering through the forest when you happen upon a group of young children.");
+				output("They are sitting huddled up against a tree, their clothes ragged and torn. They look as if they haven't eaten in days.`n");
 				output("What are you going todo?");
 			break;
 			case 7:
