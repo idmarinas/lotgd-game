@@ -259,7 +259,7 @@ function quester_runevent($type,$link) {
 
 function quester_run(){
 	global $session;
-	page_header();
+	page_header('Rumors in the realm');
 	$op=httpget('op');
 	$act=httpget('act');
 	addnav("Actions");
