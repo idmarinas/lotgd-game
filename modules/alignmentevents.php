@@ -148,10 +148,10 @@ function alignmentevents_runevent($type) {
 				output("What are you going to do?");
 			break;
 			case 12:
-				output("`QYou are wandering through the forest, enjoying the scenery, searching for the `@Green Dragon`Q when you look down and notice a");
-				output(" trail of `tcrumbs`Q. Thinking it might lead you to a bakery, you bend down and taste the `tcrumbs `Qbefore grinning happily.");
-				output(" You continue to follow the trail, gobbling down the `tcrumbs`Q. After a little while, the crumbs stop, and frowning, look up.");
-				output(" The sight before you is astounding! It's a house made entirely out of candy!`n");
+				output("`QYou are wandering through the forest, enjoying the scenery, searching for the `@Green Dragon`Q when you look down and notice a trail of `tcrumbs.");
+				output("`QThinking it might lead you to a bakery, you bend down and taste the `tcrumbs `Qbefore grinning happily.");
+				output("You continue to follow the trail, gobbling down the `tcrumbs`Q. After a little while, the crumbs stop, and frowning, look up.");
+				output("The sight before you is astounding! It's a house made entirely out of candy!`n");
 				output("Drooling, you rush up to the house, reaching out to take a piece of the window...`n");
 				output("When suddenly you hear a scream! You peek inside the window to see two local village children locked in a cage!`n");
 				output("A woman stands over them, grinning hideously. The children are in trouble! What are you going to do?!");
