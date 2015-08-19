@@ -113,10 +113,14 @@ function forestvictory($enemies,$denyflawless=false){
 		if ($denyflawless){
 			output("`c`\$%s`0`c", translate_inline($denyflawless));
 		}elseif ($session['user']['level']<=$creaturelevel){
-			output("`c`b`\$You receive an extra turn!`0`b`c`n");
+			// output("`c`b`\$You receive an extra turn!`0`b`c`n");
+			//## Adaptado el texto para Stamina system
+			output("`c`b`\$You receive some stamina!`0`b`c`n"); 
 			$session['user']['turns']++;
 		}else{
-			output("`c`\$A more difficult fight would have yielded an extra turn.`0`c`n");
+			// output("`c`\$A more difficult fight would have yielded an extra turn.`0`c`n");
+			//## Adaptado el texto para Stamina system
+			output("`c`\$A more difficult fight would have yielded some stamina.`0`c`n");
 		}
 	}
 	if ($session['user']['hitpoints'] <= 0) {
@@ -187,10 +191,10 @@ function buffbadguy($badguy){
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
 
-	$atkflux = e_rand($dk/4, $dk/2);
-	$defflux = $dk-$atkflux;
+	$atkflux = e_rand(0, $dk);
+	$defflux = e_rand(0, ($dk-$atkflux));
 
-	$hpflux = e_rand(($dk/2), $dk) * 5;
+	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
 	$badguy['creatureattack']+=$atkflux;
 	$badguy['creaturedefense']+=$defflux;
 	$badguy['creaturehealth']+=$hpflux;
