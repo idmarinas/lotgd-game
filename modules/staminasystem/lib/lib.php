@@ -779,7 +779,7 @@ function stamina_minihof($action,$userid=false){
 	if ($userid === false) $userid = $session['user']['acctid'];
 	$st = microtime(true);
 	$boardfilename = str_replace(" ","",$action);
-	$boardinfo = datacache("staminaboardinfo_".$boardfilename,120);
+	$boardinfo = datacache("modules/stamina/boardinfo_".$boardfilename,120);
 	$en = microtime(true);
 	$to = $en - $st;
 	//debug("Cache: ".$to);
@@ -799,7 +799,7 @@ function stamina_minihof($action,$userid=false){
 		
 		$boardinfo = stamina_minihof_assignranks($board);
 		
-		updatedatacache("staminaboardinfo_".$boardfilename,$boardinfo);
+		updatedatacache("modules/stamina/boardinfo_".$boardfilename,$boardinfo);
 	}
 	
 	//set the player's entry in the board with brand-new data
@@ -957,7 +957,7 @@ function stamina_minihof_old($action,$userid=false){
 	$st = microtime(true);
 	
 	$boardfilename = str_replace(" ","",$action);
-	$boardinfo = datacache("staminaboardinfo_".$boardfilename,20);
+	$boardinfo = datacache("modules/stamina/boardinfo_".$boardfilename,20);
 	
 	$en = microtime(true);
 	$to = $en - $st;
@@ -980,7 +980,7 @@ function stamina_minihof_old($action,$userid=false){
 		}
 		
 		$boardinfo = stamina_minihof_assignranks($board);
-		updatedatacache("staminaboardinfo_".$boardfilename,$boardinfo);
+		updatedatacache("modules/stamina/boardinfo_".$boardfilename,$boardinfo);
 	}
 		
 	//set the player's entry in the board with brand-new data
