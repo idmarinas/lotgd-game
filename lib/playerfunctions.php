@@ -9,11 +9,18 @@ function get_player_attack($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$strbonus=round((1/3)*$user['strength'],1);
-	$speedbonus=round((1/3)*get_player_speed($player),1);
-	$wisdombonus=round((1/6)*$user['wisdom'],1);
-	$intbonus=round((1/6)*$user['intelligence'],1);
-	$miscbonus=round($user['attack']-9,1);
+	// $strbonus=round((1/3)*$user['strength'],1);
+	// $speedbonus=round((1/3)*get_player_speed($player),1);
+	// $wisdombonus=round((1/6)*$user['wisdom'],1);
+	// $intbonus=round((1/6)*$user['intelligence'],1);
+	// $miscbonus=round($user['attack']-9,1);
+	//## Modificación no se redondea
+	$strbonus=(1/3)*$user['strength'];
+	$speedbonus=(1/3)*get_player_speed($player);
+	$wisdombonus=(1/6)*$user['wisdom'];
+	$intbonus=(1/6)*$user['intelligence'];
+	$miscbonus=$user['attack']-9;
+	
 	$attack = $strbonus+$speedbonus+$wisdombonus+$intbonus+$miscbonus;
 	return max($attack,0);
 }
@@ -28,16 +35,25 @@ function explained_get_player_attack($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$strbonus=round((1/3)*$user['strength'],1);
-	$speedbonus=round((1/3)*get_player_speed($player),1);
-	$wisdombonus=round((1/6)*$user['wisdom'],1);
-	$intbonus=round((1/6)*$user['intelligence'],1);
-	$miscbonus=round($user['attack']-9,1);
+	$strbonus=round((1/3)*$user['strength'],2);
+	$speedbonus=round((1/3)*get_player_speed($player),2);
+	$wisdombonus=round((1/6)*$user['wisdom'],2);
+	$intbonus=round((1/6)*$user['intelligence'],2);
+	$miscbonus=round($user['attack']-9,2);
 	$atk = $strbonus+$speedbonus+$wisdombonus+$intbonus+$miscbonus;
 	$weapondmg=(int)$user['weapondmg'];
 	$levelbonus=(int)$user['level']-1;
 	$miscbonus-=$weapondmg+$levelbonus;
-	$explained=sprintf_translate("%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ",$strbonus,$speedbonus,$wisdombonus,$intbonus,$weapondmg,$levelbonus,$miscbonus);
+	//## Mejorado el detalle de como se explica
+	$explained=sprintf_translate("%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ",
+		($strbonus >= 0 ? '`8+': '`$-'), abs($strbonus),
+		($speedbonus >= 0 ? '`8+': '`$-'), abs($speedbonus),
+		($wisdombonus >= 0 ? '`8+': '`$-'), abs($wisdombonus),
+		($intbonus >= 0 ? '`8+': '`$-'), abs($intbonus),
+		($weapondmg >= 0 ? '`8+': '`$-'), abs($weapondmg),
+		($levelbonus >= 0 ? '`8+': '`$-'), abs($levelbonus),
+		($miscbonus >= 0 ? '`8+': '`$-'), abs($miscbonus)
+	);
 	return $explained;
 }
 
@@ -50,10 +66,15 @@ function get_player_defense($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$wisdombonus = round((1/4)*$user['wisdom'],1);
-	$constbonus = round((3/8)*$user['constitution'],1);
-	$speedbonus = round((3/8)*get_player_speed($player),1);
-	$miscbonus = round($user['defense']-9,1);
+	// $wisdombonus = round((1/4)*$user['wisdom'],1);
+	// $constbonus = round((3/8)*$user['constitution'],1);
+	// $speedbonus = round((3/8)*get_player_speed($player),1);
+	// $miscbonus = round($user['defense']-9,1);
+	//## Modificación no se redondea
+	$wisdombonus = (1/4)*$user['wisdom'];
+	$constbonus = (3/8)*$user['constitution'];
+	$speedbonus = (3/8)*get_player_speed($player);
+	$miscbonus = $user['defense']-9;
 	$defense = $wisdombonus+$speedbonus+$constbonus+$miscbonus;
 	return max($defense,0);
 }
@@ -67,15 +88,22 @@ function explained_get_player_defense($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$wisdombonus = round((1/4)*$user['wisdom'],1);
-	$constbonus = round((3/8)*$user['constitution'],1);
-	$speedbonus = round((3/8)*get_player_speed($player),1);
-	$miscbonus = round($user['defense']-9,1);
+	$wisdombonus = round((1/4)*$user['wisdom'],2);
+	$constbonus = round((3/8)*$user['constitution'],2);
+	$speedbonus = round((3/8)*get_player_speed($player),2);
+	$miscbonus = round($user['defense']-9,2);
 	$defense = $wisdombonus+$speedbonus+$constbonus+$miscbonus;
 	$armordef=(int)$user['armordef'];
 	$levelbonus=(int)$user['level']-1;
 	$miscbonus-=$armordef+$levelbonus;
-	$explained=sprintf_translate("%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ",$wisdombonus,$constbonus,$speedbonus,$armordef,$levelbonus,$miscbonus);
+	$explained=sprintf_translate("%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC",
+		($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
+		($constbonus >= 0 ? '`8+' : '`$-'), abs($constbonus),
+		($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
+		($armordef >= 0 ? '`8+' : '`$-'), abs($armordef),
+		($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
+		($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
+	);
 	return $explained;
 }
 
@@ -88,7 +116,9 @@ function get_player_speed($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$speed = round((1/2)*$user['dexterity']+(1/4)*$user['intelligence']+(5/2),1);
+	// $speed = round((1/2)*$user['dexterity']+(1/4)*$user['intelligence']+(5/2),1);
+	//## Modificación no se redondea
+	$speed = (1/2)*$user['dexterity']+(1/4)*$user['intelligence']+(5/2);
 	return max($speed,0);
 }
 
@@ -101,7 +131,9 @@ function get_player_physical_resistance($player=false) {
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
-	$defense = round(log($user['wisdom'])+$user['constitution']*0.08+log($user['defense']),1);
+	// $defense = round(log($user['wisdom'])+$user['constitution']*0.08+log($user['defense']),1);
+	//## Modificación no se redondea
+	$defense = log($user['wisdom'])+$user['constitution']*0.08+log($user['defense']);
 	return max($defense,0);
 }
 

@@ -690,20 +690,20 @@ function charstats(){
 			$buffs.=appoencode(translate_inline("`^None`0"),true);
 		}
 
-		$atk = round($atk, 2);
-		$def = round($def, 2);
+		// $atk = $atk;
+		// $def = $def;
 		if ($atk < $o_atk){
-			$atk = round($o_atk,2)."(`\$".round($atk-$o_atk,2).'`0)';
+			$atk = round($atk,2)."(`\$".round($atk-$o_atk,2).'`0)';
 		}else if($atk > $o_atk){
-			$atk = round($o_atk,2)."(`@+".round($atk-$o_atk,2).'`0)';
+			$atk = round($atk,2)."(`@+".round($atk-$o_atk,2).'`0)';
 		} else {
 			// They are equal, display in the 1 signifigant digit format.
 			$atk = round($atk,2);
 		}
 		if ($def < $o_def){
-			$def = round($o_def,2)."(`\$".round($def-$o_def,2).'`0)';
+			$def = round($def,2)."(`\$".round($def-$o_def,2).'`0)';
 		}else if($def > $o_def){
-			$def = round($o_def,2)."(`@+".round($def-$o_def,2).'`0)';
+			$def = round($def,2)."(`@+".round($def-$o_def,2).'`0)';
 		} else {
 			// They are equal, display in the 1 signifigant digit format.
 			$def = round($def,2);
@@ -728,8 +728,8 @@ function charstats(){
 			// Modificado para darle otro estilo a la presentación
 			// addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
 			// addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
-			addcharstat("Attack", $atk."`\$<i class='fa fa-question fa-fw pull-right' data-uk-tooltip title='".explained_get_player_attack()."'></i>`0".check_temp_stat("attack",1));
-			addcharstat("Defense", $def."`\$<i class='fa fa-question fa-fw pull-right' data-uk-tooltip title='".explained_get_player_defense()."'></i>`0".check_temp_stat("defense",1));
+			addcharstat("Attack", $atk.'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_attack()).'"></i>`0'.check_temp_stat("attack",1));
+			addcharstat("Defense", $def.'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_defense()).'"></i>`0'.check_temp_stat("defense",1));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
 		} else {
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
