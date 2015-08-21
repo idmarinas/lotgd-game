@@ -174,6 +174,9 @@ if ($op==""){
 		}
 	}
 	$session['user']['gold'] = getsetting("newplayerstartgold",50);
+	$session['user']['location'] = getsetting('villagename', LOCATION_FIELDS);
+	$session['user']['armor'] = getsetting('startarmor','T-Shirt');
+	$session['user']['weapon'] = getsetting('startweapon','Fists');
 
 	$newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
 
