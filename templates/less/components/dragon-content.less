@@ -23,6 +23,10 @@
 			}
 		}
 		
+		#empty:before
+		{
+			content: " ";
+		}
 		#dragon-banner
 		{
 			width: @header-banner-width;
@@ -53,14 +57,16 @@
 		
 		#dragon-navigation
 		{
-			#gradient > .horizontal(@start-color: darken(@container-bg, 20%), @end-color: transparent);
+			min-width: @navigation-width;
 			width: @navigation-width;
+			#gradient > .horizontal(@start-color: darken(@container-bg, 20%), @end-color: transparent);
 		}
 		
 		#dragon-stats
 		{
-			#gradient > .horizontal(@start-color: transparent, @end-color: darken(@container-bg, 20%));
+			min-width: @stats-width;
 			width: @stats-width;
+			#gradient > .horizontal(@start-color: transparent, @end-color: darken(@container-bg, 20%));
 		}
 		
 		#dragon-contain
