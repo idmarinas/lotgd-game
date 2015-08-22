@@ -46,7 +46,8 @@ if (count($post)>0){
 				$msg .= "$tl_author: $name\n";
 				$msg .= "$tl_date : $date\n";
 				$msg .= "$tl_body :\n".output_array($post)."\n";
-				mail(getsetting("gameadminemail","postmaster@localhost.com"),$tl_subject, $msg);
+				//## Modificado - Se usa una función propia para generar un e-mail con formato html
+				html_mail(getsetting("gameadminemail","postmaster@localhost.com"),$tl_subject, $msg);
 			}
 			$session['user']['password']=$p;
 			output("Your petition has been sent to the server admin.");

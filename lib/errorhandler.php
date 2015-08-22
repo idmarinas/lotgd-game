@@ -113,8 +113,8 @@ $html_text
 			 **/
 			while (list($key,$email)=each($sendto)){
 				debug("Notifying $email of this error.");
-
-				mail($email, $subject, $body,
+				//## Modificado - Se usa una función propia para generar un e-mail con formato html
+				html_mail($email, $subject, $body,
 					"From: " . $from . "\n" .
 					"MIME-Version: 1.0\n" .
 					"Content-Type: multipart/alternative;\n" .

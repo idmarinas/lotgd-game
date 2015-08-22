@@ -75,7 +75,8 @@ if ($lastexpire < $needtoexpire){
 	$mheader .= 'From: '.getsetting("gameadminemail","postmaster@localhost")."\r\n";
 	$collector=array();
 	while ($row = db_fetch_assoc($result)) {
-		mail($row['emailaddress'],$subject,str_replace("{charname}",$row['login'],$message),$mheader);
+		//## Modificado - Se usa una función propia para generar un e-mail con formato html
+		html_mail($row['emailaddress'],$subject,str_replace("{charname}",$row['login'],$message),$mheader);
 		$collector[]=$row['acctid'];
 	}
 	if ($collector!=array()) {

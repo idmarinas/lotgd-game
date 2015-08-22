@@ -192,8 +192,9 @@ if ($payment_errors>"") {
 	$contents = ob_get_contents();
 	ob_end_clean();
 	$payment_errors .= "<hr>".$contents;
-
-	mail($adminEmail,$subj,$payment_errors."<hr>","From: " . getsetting("gameadminemail", "postmaster@localhost.com"));
+	
+	//## Modificado - Se usa una función propia para generar un e-mail con formato html
+	html_mail($adminEmail,$subj,$payment_errors."<hr>","From: " . getsetting("gameadminemail", "postmaster@localhost.com"));
 }
 $output = ob_get_contents();
 if ($output > ""){
@@ -208,7 +209,8 @@ if ($output > ""){
 	reset($_SERVER);
 	var_dump($_SERVER);
 	echo "</pre>";
-	mail($adminEmail,"Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}",ob_get_contents(),"Content-Type: text/html");
+	//## Modificado - Se usa una función propia para generar un e-mail con formato html
+	html_mail($adminEmail,"Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}",ob_get_contents(),"Content-Type: text/html");
 }
 ob_end_clean();
 ?>

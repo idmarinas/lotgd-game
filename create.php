@@ -7,7 +7,7 @@ require_once("common.php");
 require_once("lib/is_email.php");
 require_once("lib/checkban.php");
 require_once("lib/sanitize.php");
-require("lib/settings_extended.php");
+require_once("lib/settings_extended.php");
 require_once("lib/serverfunctions.class.php");
 
 tlschema("create");
@@ -156,8 +156,9 @@ if ($op=="forgot"){
 				$keys=array_keys($replace);
 				$values=array_values($replace);
 				$msg=str_replace($keys,$values,$msg);
-	
-				mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg),translate_inline("From:").getsetting("gameadminemail","postmaster@localhost.com"));
+				
+				//## Modificado - Se usa una función propia para generar un e-mail con formato html
+				html_mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg),translate_inline("From:").getsetting("gameadminemail","postmaster@localhost.com"));
 				output("`#Sent a new validation email to the address on file for that account.");
 				output("You may use the validation email to log in and change your password.");
 			}else{
@@ -308,8 +309,9 @@ if (getsetting("allowcreation",1)==0){
 							
 							$keys=array_keys($replace);
 							$values=array_values($replace);
-							$msg=str_replace($keys,$values,$msg);						
-							mail($email,$subj,str_replace("`n","\n",$msg),"From: ".getsetting("gameadminemail","postmaster@localhost.com"));
+							$msg=str_replace($keys,$values,$msg);
+							//## Modificado - Se usa una función propia para generar un e-mail con formato html					
+							html_mail($email,$subj,str_replace("`n","\n",$msg),"From: ".getsetting("gameadminemail","postmaster@localhost.com"));
 							output("`4An email was sent to `\$%s`4 to validate your address.  Click the link in the email to activate your account.`0`n`n", $email);
 						}else{
 							rawoutput("<form action='login.php' method='POST'>");

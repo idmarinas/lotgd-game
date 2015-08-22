@@ -59,6 +59,9 @@ require_once("lib/su_access.php");
 require_once("lib/datetime.php");
 require_once("lib/translator.php");
 require_once("lib/playerfunctions.php");
+//## Añadido - Para enviar e-mails en formato html
+require_once("lib/html_mail.php");
+//-- Fin añadido
 
 
 //start the gzip compression
