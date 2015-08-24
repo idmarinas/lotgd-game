@@ -319,3 +319,78 @@ VALUES
 	('staminamounts', 'mounts', 'buff9roundmsg', 3, ''),
 	('staminamounts', 'mounts', 'buff9rounds', 3, ''),
 	('staminamounts', 'mounts', 'buff9wearoffmsg', 3, '');
+	
+	
+	
+/* Equipamiento armas y armaduras */
+INSERT INTO `magicitems` (`id`, `category`, `name`, `description`, `gold`, `gems`, `dk`, `attack`, `defense`, `charm`, `hitpoints`, `turns`, `favor`, `bigdesc`, `align`, `odor`, `hunger`, `rare`, `rarenum`, `buffid`)
+VALUES
+	(1, 2, 'Rama de árbol afilada', 'Una simple y bonita rama de árbol debidamente afiliada en forma de pincho.', 50, 0, 0, '1', '0', '0', '0', '0', '0', 'Una simple y bonita rama de árbol delicadamente tallada para que tenga un lado puntiagudo.`nPero que... ¿enserio tengo que pagar por una rama de un árbol?,... a bueno que es de un manzano, eso ya es otra cosa.', '0', '0', '0', 0, 0, 0),
+	(2, 2, 'Palo acolchado', 'Un palo aconchado para entrenar de forma segura...', 220, 0, 0, '2', '0', '0', '0', '0', '0', 'Palo acolchado de entrenamiento. Entrénate de forma segura en el arte de la lucha con palo. ¡Un palo!, ¡Un palo! ¡Tengo un palo!', '0', '0', '0', 0, 0, 0),
+	(3, 2, 'Bastón de madera', 'Bastón de madera, muy útil para que los ancianos puedan caminar sin problemas.', 580, 0, 0, '3', '0', '0', '0', '0', '0', 'Un bastón de madera, útil para los ancianos y para moler a palos a tu enemigo y cuando te muelen a palos te ayudará a llegar al curandero.', '0', '0', '0', 0, 0, 0),
+	(4, 2, 'Espada de madera', 'Espada de madera, usada por los niños antes de llegar a la adolescencia.', 990, 0, 0, '4', '0', '0', '0', '0', '0', 'Espada de madera, el primer paso para la llegada a la adolescencia. Porque la lucha no es un juego de niños. Sigue mejorando...', '0', '0', '0', 0, 0, 0),
+	(5, 2, 'Piedras', 'Piedras, sí, piedras del bosque, también sirven en la lucha.', 1570, 0, 0, '5', '0', '0', '0', '0', '0', 'Piedras recogidas del bosque, y puestas a la venta.... muy...muy innecesario, pero ahorra tiempo. Recuerda recogerlas otra vez cuando termines el combate, sino quieres tener que comprar más.', '0', '0', '0', 0, 0, 0),
+	(6, 2, 'Rocas', 'Si se venden piedras ¿por qué no rocas?. Es obvio ¿no?', 2250, 0, 0, '6', '0', '0', '0', '0', '0', 'Rocas encontradas a la orilla del rio. Más efectivas que las piedras, pero también más pesadas. Complicadas de transportar pero efectivas en el combate.', '0', '0', '0', 0, 0, 0),
+	(7, 2, 'Pala', 'Pala con diferentes usos, tanto en la agricultura como en el combate.', 2790, 0, 0, '7', '0', '0', '0', '0', '0', 'Pala con la que se podrá apalear a su enemigo y después cavar su tumba o la propia.', '0', '0', '0', 0, 0, 0),
+	(8, 2, 'Rastrillo', 'Un rastrillo con diferentes usos en la agricultura, y también en la lucha.', 3400, 0, 0, '8', '0', '0', '0', '0', '0', 'Un rastrillo usado en la agricultura, aunque capaz de servir como arma en un combate. Fácil de usar y además le puedes hacer un buen cardado a tu enemigo. Lo que se llama un dos por uno. ', '0', '0', '0', 0, 0, 0),
+	(9, 2, 'Azada', 'Una herramienta útil en la agricultura, pero también en el combate.', 4230, 0, 0, '9', '0', '0', '0', '0', '0', 'Una azada, con diferentes usos. No sólo te ayudará a cultivar el campo sino que te ayudará a derrotar a tus enemigos. ¿Qué más se puede pedir?', '0', '0', '0', 0, 0, 0),
+	(10, 2, 'Tirachinas', 'Un tirachinas, puede lanzar pequeñas piedras a una gran distancia y hacer un daño considerable.', 5040, 0, 0, '10', '0', '0', '0', '0', '0', 'Un tirachinas, con un sólo propósito, lanzar piedras pequeñas. ¡Ojo! sólo piedras pequeñas, no apto para piedra medianas ni grandes. Vence a tus enemigos desde la cómoda distancia.', '0', '0', '0', 0, 0, 0),
+	(11, 2, 'Hoz', 'Una hoz utilizada para cortar trigo y hierba en general.', 5850, 0, 0, '11', '0', '0', '0', '0', '0', 'Una hoz utilizada para cortar vegetación y en la lucha si se quiere. Puedes intentar cortarle las piernas a tu enemigo...', '0', '0', '0', 0, 0, 0),
+	(12, 2, 'Cuchillo de trinchar', 'Usado en la cocina para trinchar la carne y poder cortarla con facilidad. Si también sirve como arma en un combate.', 6840, 0, 0, '12', '0', '0', '0', '0', '0', 'Cuchillo de trinchar, se usa en la cocina para trinchar la carne y en la lucha para trinchar a tu enemigo... Pero recuerda, tu enemigo no es comestible.', '0', '0', '0', 0, 0, 0),
+	(13, 2, 'Tijeras de podar', 'Unas tijeras de podar muy útiles en la jardinería y en un combate.', 8010, 0, 0, '13', '0', '0', '0', '0', '0', 'Unas tijeras de podar usadas en jardinería, útiles también en un combate por su capacidad cortante. Lo mismo podo un seto que le recorto las greñas al enemigo. ¡No corras con las tijeras en la mano hijo!', '0', '0', '0', 0, 0, 0),
+	(14, 2, 'Pico de minero', 'Un pico de minero, usando... ¿en la mina?, muy útil para extraer minerales y piedras preciosas.', 9000, 0, 0, '14', '0', '0', '0', '0', '0', 'Pico de minero, puedes extraer minerales y piedras preciosas en una mina. También puedes intentar extraer minerales de tu enemigo.... seguro que no funciona.', '0', '0', '0', 0, 0, 0),
+	(15, 2, 'Hacha de leñador', 'Un hacha de leñador, podrás talar árboles como un auténtico profesional.', 10350, 0, 0, '15', '0', '0', '0', '0', '0', 'Un hacha de leñador, ¡Tala árboles como un auténtico profesional!. Derrota a tus enemigos como un principiante, nunca se sabe lo que te puedes encontrar en el denso bosque.', '0', '0', '0', 0, 0, 0),
+	(16, 3, 'Camisa de hilo', 'Camisa hecha de fino hilo importado. Sencilla y barata.', 50, 0, 0, '0', '1', '0', '0', '0', '0', 'Camisa de fino hilo cosida a mano. Para los mas finos del Reino. Ir a la batalla no significa ir mal vestido.', '0', '0', '0', 0, 0, 0),
+	(17, 3, 'Camiseta de algodón', 'Camiseta de algodón finamente elaborada. De color blanco, como tiene que ser.', 220, 0, 0, '0', '2', '0', '0', '0', '0', 'Camisa finamente elaborada de algodón cosechado en el Reino. De un color blanco pulcro con leves manchas rojas. Atención: ¡No es sangre!, es un producto nuevo...', '0', '0', '0', 0, 0, 0),
+	(18, 3, 'Camisa de seda', 'Camisa hecha de fina seda importada desde el lejano Oriente. ', 580, 0, 0, '0', '3', '0', '0', '0', '0', 'Camisa de seda elaborada con hilo del lejano Oriente. Atención: si mancha de sangre su camisa, no será posible limpiarla. No se admiten devoluciones.', '0', '0', '0', 0, 0, 0),
+	(19, 3, 'Camisa y camiseta de seda y algodón', 'Camisa de seda y camiseta de algodón. La combinación perfecta.', 990, 0, 0, '0', '4', '0', '0', '0', '0', 'Camisa de seda y camiseta de algodón. Una combinación perfecta para los más presumidos del Reino.', '0', '0', '0', 0, 0, 0),
+	(20, 3, 'Camisa de franela', 'Camisa de franela a cuadros, para el leñador más rudo.', 1570, 0, 0, '0', '5', '0', '0', '0', '0', 'Camisa de franela, la camisa preferida por los leñadores... por algo será ¿no?', '0', '0', '0', 0, 0, 0),
+	(21, 3, 'Camisa y camiseta de franela y algodón', 'Camisa de franela y camiseta de algodón, para el leñador más flojo.', 2250, 0, 0, '0', '6', '0', '0', '0', '0', 'Camisa de franela y camiseta de algodón, los leñadores ya no pasaran más frío mientras realizan su trabajo.', '0', '0', '0', 0, 0, 0),
+	(22, 3, 'Camisa, camiseta y pantalones de algodón, seda y cuero', 'Camisa de algodón, camiseta de seda y pantalones de cuero, más redondo imposible.', 2790, 0, 0, '0', '7', '0', '0', '0', '0', 'Camisa de algodón, camiseta de seda y pantalones de cuero. Todo guerrero necesita unos buenos pantalones para rematar la combinación.', '0', '0', '0', 0, 0, 0),
+	(23, 3, 'Túnica y pantalones de cuero y algodón', 'Túnica de cuero y pantalones de algodón para aquellos que quieren viajar más ligeros.', 3420, 0, 0, '0', '8', '0', '0', '0', '0', 'Túnica de cuero y pantalones de algodón, para ir ligero en los viajes y protegido. Los pantalones de algodón evitan rozaduras.', '0', '0', '0', 0, 0, 0),
+	(24, 3, 'Lorica Lintea', 'Lorica Lintea cota de malla para una protección perfecta.', 4230, 0, 0, '0', '9', '0', '0', '0', '0', 'Lorica Lintea una cota de malla de tamaño estándar (bastante grande para la mayoría). Ofrece una buena protección.', '0', '0', '0', 0, 0, 0),
+	(25, 3, 'Lorica Hamata', 'Lorica Hamata fabricada con anillas y a medida del usuario.', 5040, 0, 0, '0', '10', '0', '0', '0', '0', 'Lorica Hamata hecha con anillas fabricadas por expertos herreros, Fabricada a medida para el usuario.', '0', '0', '0', 0, 0, 0),
+	(26, 3, 'Lorica Squamata', 'Lorica Squamata realizada para simular las escamas de un Bebé Dragón.', 5850, 0, 0, '0', '11', '0', '0', '0', '0', 'Lorica Squamata, una coraza fabricada con escamas celosamente fabricadas por expertos herreros intentando simular las escamas de un Bebé Dragón.', '0', '0', '0', 0, 0, 0),
+	(27, 3, 'Lorica Plumata', 'Lorica Plumata realizada por plumas forjadas, para simular.... ¿un pajarraco?', 6840, 0, 0, '0', '12', '0', '0', '0', '0', 'Lorica Plumata enteramente formada por plumas individuales que simulan ser una especie de ave.... No impresiona mucho, pero defiende.', '0', '0', '0', 0, 0, 0),
+	(28, 3, 'Lorica Serta', 'Lorica Serta se realiza simulando plumas y escamas, uniendo todo ello por medio de anillos.', 8010, 0, 0, '0', '13', '0', '0', '0', '0', 'Lorica Serta se realiza con plumas y escamas formadas, se unen por medio de anillas para un mejor refuerzo. Extraña combinación.', '0', '0', '0', 0, 0, 0),
+	(29, 3, 'Lorica Férrea', 'Lorica Férrea realizada de una sola pieza de hierro forjado.', 9000, 0, 0, '0', '14', '0', '0', '0', '0', 'Lorica Férrea realizada en una sola pieza de hierro forjado. Ofrece una excelente protección pero limita los movimientos.', '0', '0', '0', 0, 0, 0),
+	(30, 3, 'Lorica Segmentata', 'Lorica Segmentata realizada por varias tiras metálicas unidas.', 10350, 0, 0, '0', '15', '0', '0', '0', '0', 'Lorica Segmentata realizada por varias tiras metálicas unidas para mejorar la protección y movilidad del usuario. Muy vistosa a la vista.', '0', '0', '0', 0, 0, 0);
+
+/* Bonificaciones de moralidad */
+DELETE FROM `module_settings` WHERE (`modulename` = 'alignmentbuffs');
+INSERT INTO `module_settings` (`modulename`, `setting`, `value`)
+VALUES
+	('alignmentbuffs', 'activate1', '-2500'),
+	('alignmentbuffs', 'activate2', '-1250'),
+	('alignmentbuffs', 'activate3', '-625'),
+	('alignmentbuffs', 'activate4', '625'),
+	('alignmentbuffs', 'activate5', '1250'),
+	('alignmentbuffs', 'activate6', '2500'),
+	('alignmentbuffs', 'buffatt1', '1.3'),
+	('alignmentbuffs', 'buffatt2', '1.2'),
+	('alignmentbuffs', 'buffatt3', '1.1'),
+	('alignmentbuffs', 'buffatt4', '0.9'),
+	('alignmentbuffs', 'buffatt5', '0.85'),
+	('alignmentbuffs', 'buffatt6', '0.8'),
+	('alignmentbuffs', 'buffdef1', '0.85'),
+	('alignmentbuffs', 'buffdef2', '0.9'),
+	('alignmentbuffs', 'buffdef3', '0.95'),
+	('alignmentbuffs', 'buffdef4', '1.1'),
+	('alignmentbuffs', 'buffdef5', '1.2'),
+	('alignmentbuffs', 'buffdef6', '1.3'),
+	('alignmentbuffs', 'buffname1', 'Malo hasta la médula'),
+	('alignmentbuffs', 'buffname2', 'Hijo del demonio'),
+	('alignmentbuffs', 'buffname3', 'Un poquito malvado'),
+	('alignmentbuffs', 'buffname4', 'En sintonia con la naturaleza'),
+	('alignmentbuffs', 'buffname5', 'Escudo de fe'),
+	('alignmentbuffs', 'buffname6', 'Proctor del mundo'),
+	('alignmentbuffs', 'buffturns1', '500'),
+	('alignmentbuffs', 'buffturns2', '250'),
+	('alignmentbuffs', 'buffturns3', '100'),
+	('alignmentbuffs', 'buffturns4', '100'),
+	('alignmentbuffs', 'buffturns5', '250'),
+	('alignmentbuffs', 'buffturns6', '500');
+
+
+/* Traducción de los maestros */
+TRUNCATE TABLE `masters`;
