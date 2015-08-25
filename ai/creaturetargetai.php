@@ -21,7 +21,7 @@ for ($i=1;$i<=6;$i++) {
 //			debug("Removing target and altering stats");
 			//Output the target kill message
 			$msg = $badguy['target'.$i.'']['killmsg'];
-			output("%s`n",stripslashes($msg));
+			output_notl("%s`n",stripslashes($msg));
 			//Adjust stats
 			$badguy['creatureattack'] = ($badguy['creatureattack']*$badguy['target'.$i.'']['killatk']);
 			$badguy['creaturedefense'] = ($badguy['creaturedefense']*$badguy['target'.$i.'']['killdef']);
