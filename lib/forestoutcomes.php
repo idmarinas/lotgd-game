@@ -184,17 +184,19 @@ function buffbadguy($badguy){
 		// We want to add .05 for every 100 dragonkills.
 		// make it 0.1 +nb
 		$add = ($session['user']['dragonkills']/100)*.10;
-		$dk = round($dk * (.25 + $add));
+		// $dk = round($dk * (.25 + $add));
+		$dk = round($dk + $add);
 	}
 
 	$expflux = round($badguy['creatureexp']/10,0);
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
+	
+	$dkhp = round($dk * 0.25); 
+	$atkflux = e_rand(1, $dk * 0.65);
+	$defflux = $dk - $atkflux - $dkhp;
 
-	$atkflux = e_rand(0, $dk);
-	$defflux = e_rand(0, ($dk-$atkflux));
-
-	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
+	$hpflux = $dkhp * 5;
 	$badguy['creatureattack']+=$atkflux;
 	$badguy['creaturedefense']+=$defflux;
 	$badguy['creaturehealth']+=$hpflux;
