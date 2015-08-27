@@ -61,19 +61,20 @@ if ($op=="superuser"){
 	}
 }
 	//the settings
-if ($op!="superuser"){
-	$fullsize=get_module_setting("fullsize");
-	$remainsize=get_module_setting("remainsize");
-	$plantneed=get_module_setting("plantneed");
-	$daygrowth=get_module_setting("daygrowth");
-	$clearcutter=get_module_setting("clearcutter");
-	$clearcut=get_module_setting("clearcut");
-	$cccount=get_module_setting("cccount");
-	$cutpercent=get_module_setting("cutpercent");
-	$cutdown=get_module_setting("cutdown");
-	$lumberturns=get_module_setting("lumberturns");
-	$squarepay=get_module_setting("squarepay");
+$loc = city_id();		
+$fullsize=get_module_objpref("city",$loc,"fullsize","lumberyard");
+$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
+$plantneed=get_module_objpref("city",$loc,"plantneed","lumberyard");
+$daygrowth=get_module_objpref("city",$loc,"daygrowth","lumberyard");
+$clearcutter=get_module_objpref("city",$loc,"clearcutter","lumberyard");
+$clearcut=get_module_objpref("city",$loc,"clearcut","lumberyard");
+$cccount=get_module_objpref("city",$loc,"cccount","lumberyard");
+$cutpercent=get_module_objpref("city",$loc,"cutpercent","lumberyard");
+$cutdown=get_module_objpref("city",$loc,"cutdown","lumberyard");
+$lumberturns=get_module_setting("lumberturns");
+$squarepay=get_module_setting("squarepay");
 	
+if ($op!="superuser"){
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	$usedlts=$allprefs['usedlts'];
 	$phase=$allprefs['phase'];
@@ -83,9 +84,9 @@ if ($op!="superuser"){
 	$remaining=$plantneed-$remainsize;
 	//this marks the forest as cutdown if people ever cut down all the trees
 	if($remainsize<=0){
-		set_module_setting("remainsize",0);
-		set_module_setting("cutdown",1);
-		set_module_setting("cccount",0);
+		set_module_objpref("city",$loc,"remainsize", 0,"lumberyard");
+		set_module_objpref("city",$loc,"cutdown", 1, "lumberyard");
+		set_module_objpref("city",$loc,"cccount", 0, "lumberyard");
 	}
 	//check to see if player has used more turns than allowed
 	if($usedlts>=$lumberturns){
@@ -94,13 +95,13 @@ if ($op!="superuser"){
 		$allprefs=unserialize(get_module_pref('allprefs'));
 	}
 	//check to see if the forest has more trees than allowed
-	if($remainsize>$fullsize) set_module_setting("remainsize",get_module_setting("fullsize"));
+	if($remainsize>$fullsize) set_module_objpref("city",$loc,"remainsize", $fullsize, "lumberyard");
 	
 	//check to see if the squarepay needs to be adjusted for levels
 	if (get_module_setting("leveladj")==1) $squarepay=round($squarepay*$session['user']['level'] / 15);
 }
 if ($op=="enter") {
-	$cutdown=get_module_setting("cutdown");
+	// $cutdown=get_module_setting("cutdown");
 	$ccspiel=$allprefs['ccspiel'];
 	if ($cutdown==1 && $ccspiel==0) {
 		$allprefs['ccspiel']=1;
@@ -116,9 +117,9 @@ if ($op=="enter") {
 		addnav("No, but show me my Ledger","runmodule.php?module=lumberyard&op=clearno");
 		addnav("`@No, Back to the Forest","forest.php");
 	}elseif ($cutdown==1 && $ccspiel==1) {
-		if (get_module_setting("remainsize")>=get_module_setting("plantneed")) {
-			set_module_setting("cutdown",0);
-			set_module_setting("cccount",0);
+		if ($remainsize>=$plantneed) {
+			set_module_objpref("city",$loc,"cutdown", 0, "lumberyard");
+			set_module_objpref("city",$loc,"cccount", 0, "lumberyard");
 			output("`c`b`QT`qhe `QL`qumber `QY`qard `@Open!`b`c`n`n");
 			output("A smiling foreman comes to greet you.");
 			output("'`#Well, `b`QT`qhe `QL`qumber `QY`qard`b `#is back in business!'`n`n");
@@ -460,4 +461,13 @@ if ($op == "squareshof" || $op=="planthof") {
 	lumberyard_hof();
 }
 page_footer();
+
+//## Obtener el ID de la ciudad
+function city_id()
+{
+	global $session;
+	
+	require_once("modules/cityprefs/lib.php");
+	return get_cityprefs_cityid("location",$session['user']['location']);
+}
 ?>

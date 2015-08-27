@@ -10,19 +10,10 @@ function lumberyard_getmoduleinfo(){
 		"settings"=>array(
 			"Lumber Yard Settings,title",
 			"runonce"=>"Reset turns in the lumberyard only on server-generated game day?,bool|0",
-			"fullsize"=>"Size of the lumberyard when full,int|200",
-			"remainsize"=>"Number of trees left in lumberyard,int|200",
-			"plantneed"=>"Minimum number of trees before the Lumber Yard will allow chopping?,int|100",
 			"alignevil"=>"How many alignment points lost for cutting when the forest is low if triggered?,int|3",
-			"daygrowth"=>"Number of trees that the yard grows each system newday?,int|10",
-			"clearcutter"=>"Name of person that clear cuts the lumber trees,int|Evil Douglas",
-			"clearcut"=>"Number of counters before the lumber yard is clear cut, int|10",
-			"cccount"=>"Current number of clear cut counters, int|0",
-			"cutpercent"=>"Percentage that a counter will trigger on newday, int|50",
-			"cutdown"=>"Is the Lumber Yard Currently Clear cut?, bool|0",
 			"lumberturns"=>"How many activities can they perform in a day?,int|7",
 			"Note: The following are only need if you are NOT using the cityprefs module:,note",
-			"limitloc"=>"Limit Lumberyard's Location?,enum,0,No,1,Yes - One City by Location,2,Yes - By Cityprefs|0",
+			"limitloc"=>"Limit Lumberyard's Location?,enum,0,No,1,Yes - One City by Location,2,Yes - By Cityprefs|2",
 			"lumberloc"=>"If Limited by Location: Where does the Lumberyard appear,location|".getsetting("villagename", LOCATION_FIELDS),
 			"Note: Do NOT leave the Lumberyard's only location in a city without a Forest if you want it to be used!,note",
 			"Orchard Tie-In,title",
@@ -57,7 +48,18 @@ function lumberyard_getmoduleinfo(){
 			"Note: Please edit with caution. Consider using the Allprefs Editor instead.,note",
 			"allprefs"=>"Preferences for Lumberyard,textarea|",
 		),
-		"prefs-city"=>array(			"chophere" => "Allow the Lumberyard to appear here?, bool|1",		),
+		"prefs-city"=>array(
+			"chophere" => "Allow the Lumberyard to appear here?, bool|1",
+			"fullsize"=>"Size of the lumberyard when full,int|200",
+			"remainsize"=>"Number of trees left in lumberyard,int|200",
+			"plantneed"=>"Minimum number of trees before the Lumber Yard will allow chopping?,int|100",
+			"clearcutter"=>"Name of person that clear cuts the lumber trees,int|Evil Douglas",
+			"cutdown"=>"Is the Lumber Yard Currently Clear cut?, bool|0",
+			"daygrowth"=>"Number of trees that the yard grows each system newday?,int|10",
+			"clearcut"=>"Number of counters before the lumber yard is clear cut, int|10",
+			"cccount"=>"Current number of clear cut counters, int|0",
+			"cutpercent"=>"Percentage that a counter will trigger on newday, int|50",
+		),
 	);
 	return $info;
 }

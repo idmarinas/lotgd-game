@@ -1,4 +1,4 @@
-<?php
+<?php	
 function lumberyard_phase1(){
 	global $session;
 	output("`n`c`b`QT`qhe `QL`qumber `QY`qard `QP`qhase `Q1`0`c`b`n");

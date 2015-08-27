@@ -1,10 +1,11 @@
-<?php
+<?php		
 function lumberyard_rules(){
-	$fullsize=get_module_setting("fullsize");
-	$remainsize=get_module_setting("remainsize");
+	$loc = city_id();
+	$fullsize=get_module_objpref("city",$loc,"fullsize","lumberyard");
+	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 	$lumberturns=get_module_setting("lumberturns");
-	$plantneed=get_module_setting("plantneed");
-	$clearcutter=get_module_setting("clearcutter");
+	$plantneed=get_module_objpref("city",$loc,"plantneed","lumberyard");
+	$clearcutter=get_module_objpref("city",$loc,"clearcutter","lumberyard");
 
 	output("`@1. Everyday you may spend`b %s turns`b in the lumber yard.`n`n",$lumberturns);
 	output("`22. Your job here is to cut trees down and make`& squares of wood`2. A square is equal to 100 square feet of wood. I supply everything but the labor; and you get to keep 50% of the squares you cut!`n`n");

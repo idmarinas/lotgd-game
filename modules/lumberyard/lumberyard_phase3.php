@@ -1,16 +1,17 @@
-<?php
+<?php	
 function lumberyard_phase3(){
 	global $session;
 	output("`n`c`b`QT`qhe `QL`qumber `QY`qard `QP`qhase `Q3`0`c`b`n");
+	$loc = city_id();
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	$allprefs['phase']=1;
 	$allprefs['usedlts']=$allprefs['usedlts']+1;
 	$allprefs['squareshof']=$allprefs['squareshof']+1;
 	$allprefs['squares']=$allprefs['squares']+1;
 	set_module_pref('allprefs',serialize($allprefs));
-	increment_module_setting("remainsize",-1);
+	increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");
 	$session['user']['turns']--;
-	$remainsize=get_module_setting("remainsize");
+	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	$squares=$allprefs['squares'];
 	output("`^With the log ready to be cut, you enter the mill for some saw work.`n`n");
@@ -73,11 +74,11 @@ function lumberyard_phase3(){
 			$allprefs['squares']=$allprefs['squares']+1;
 			$squares=$allprefs['squares'];
 			set_module_pref('allprefs',serialize($allprefs));
-			increment_module_setting("remainsize",-1);
-			if (get_module_setting("remainsize")<0) {
-				set_module_setting("remainsize",0);
+			increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");
+			if (get_module_objpref("city",$loc,"remainsize","lumberyard")<0) {
+				set_module_objpref("city",$loc,"remainsize", 0,"lumberyard");
 			}
-			$remainsize=get_module_setting("remainsize");
+			$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 3 in the Lumberyard and gained two squares of wood.");
 		break;

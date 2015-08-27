@@ -1,8 +1,10 @@
 <?php
 function lumberyard_basicoffice(){
 	global $session;
-	$fullsize=get_module_setting("fullsize");
-	$remainsize=get_module_setting("remainsize");
+	
+	$loc = city_id();
+	$fullsize=get_module_objpref("city",$loc,"fullsize","lumberyard");
+	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 	$lumberturns=get_module_setting("lumberturns");
 	$plantneed=get_module_setting("plantneed");
 	$allprefs=unserialize(get_module_pref('allprefs'));

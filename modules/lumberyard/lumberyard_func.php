@@ -1,6 +1,19 @@
 <?php
+//## Obtener el ID de la ciudad
+function city_id()
+{
+	require_once("modules/cityprefs/lib.php");
+	return get_cityprefs_cityid("location",$session['user']['location']);
+}
+
 function lumberyard_planttrees(){
 	global $session;
+	
+	$loc = city_id();
+	$plantneed=get_module_objpref("city",$loc,"plantneed","lumberyard");
+	$clearcutter=get_module_objpref("city",$loc,"clearcutter","lumberyard");
+	$lumberturns=get_module_setting("lumberturns");
+	
 	output("`c`n`&`b Planting `@Trees`b`n`n`c");
 	output("`^You go to the nursery and grab a tree to plant.");
 	output("This is some of the most difficult work you've ever done in your life.`n`n");
@@ -11,9 +24,10 @@ function lumberyard_planttrees(){
 	$allprefs['usedlts']=$allprefs['usedlts']+2;
 	$allprefs['planthof']++;
 	$session['user']['turns']-=2;
-	$plantneed=get_module_setting("plantneed");
-	increment_module_setting("remainsize",1);
-	$remainsize=get_module_setting("remainsize");
+	// $plantneed=get_module_setting("plantneed");
+	increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");	
+	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
+	// $remainsize=get_module_setting("remainsize");
 	switch(e_rand(1,5)){
 		case 1:
 			switch(e_rand(1,10)){
@@ -24,18 +38,18 @@ function lumberyard_planttrees(){
 					debuglog("gained a gem planting 2 trees in the lumberyard.");
 				break;
 				case 10:
-					increment_module_setting("remainsize",-1);
+					increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");
 					$exploss = round($session['user']['experience']*.05);
 					output("`^Well, this is just really bad luck.");
-					output("The madman`b`$ %s `b`^sees you trying to plant trees.",get_module_setting("clearcutter"));
-					output("This sends`b`$ %s `b`^ into a berserker's rage.",get_module_setting("clearcutter"));
+					output("The madman`b`$ %s `b`^sees you trying to plant trees.",$clearcutter);
+					output("This sends`b`$ %s `b`^ into a berserker's rage.",$clearcutter);
 					output("You try to defend yourself, but honestly, it's a slaughter.");
 					output("You're`$ `bMOSTLY dead`b`^.`n`n");
 					output("`b`^ You lose `#%s experience`^.`b`n`n",$exploss);
 					output("`b`^ You are done working in the `QL`qumber `QY`qard for today`^`b.`n");
 					output("`c`n`@You are `\$MOSTLY dead`@... Which means you're still really alive.`b`c");
-					$allprefs['usedlts']=get_module_setting("lumberturns");
-					addnews("%s `@was rendered `\$MOSTLY dead `@by `\$%s`@ in the `QL`qumber `QY`qard`@.  `\$NO TREES!",$session['user']['name'],get_module_setting("clearcutter"));
+					$allprefs['usedlts']=$lumberturns;
+					addnews("%s `@was rendered `\$MOSTLY dead `@by `\$%s`@ in the `QL`qumber `QY`qard`@.  `\$NO TREES!",$session['user']['name'],$clearcutter);
 					blocknav("runmodule.php?module=lumberyard&op=office");
 					blocknav("runmodule.php?module=lumberyard&op=planttree");
 					blocknav("runmodule.php?module=lumberyard&op=work");

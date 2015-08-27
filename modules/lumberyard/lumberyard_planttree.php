@@ -1,10 +1,19 @@
 <?php
+//## Obtener el ID de la ciudad
+function city_id()
+{
+	require_once("modules/cityprefs/lib.php");
+	return get_cityprefs_cityid("location",$session['user']['location']);
+}
+
 function lumberyard_planttree(){
 	global $session;
-	$fullsize=get_module_setting("fullsize");
-	$remainsize=get_module_setting("remainsize");
+	
+	$loc = city_id();
+	$fullsize=get_module_objpref("city",$loc,"fullsize","lumberyard");
+	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 	$lumberturns=get_module_setting("lumberturns");
-	$plantneed=get_module_setting("plantneed");
+	$plantneed=get_module_objpref("city",$loc,"plantneed","lumberyard");
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	$usedlts=$allprefs['usedlts'];
 	$remaining=$plantneed-$remainsize;
@@ -33,10 +42,10 @@ function lumberyard_planttree(){
 		addnav("Remind Me of the Rules","runmodule.php?module=lumberyard&op=rules");
 		addnav("`@T`7he `@F`7oreman's `@O`7ffice","runmodule.php?module=lumberyard&op=office");
 	}else{
-		if ($remainsize>=$plantneed && get_module_setting("cutdown")==1){
+		if ($remainsize>=$plantneed && get_module_objpref("city",$loc,"cutdown","lumberyard")==1){
 			$allprefs['ccspiel']=0;
-			set_module_setting("cutdown",0);
-			set_module_setting("cccount",0);
+			set_module_objpref("city",$loc,"cutdown",0, "lumberyard");
+			set_module_objpref("city",$loc,"cccount",0, "lumberyard");
 			output("`n`c`b`QL`qumber `QY`qard `@Open!`b`c`n");
 			output("`^A smiling foreman comes to greet you.");
 			output("`#'Well, `b`QT`qhe `QL`qumber `QY`qard`b `#is back in business!'`n`n");

@@ -8,6 +8,7 @@ function lumberyard_phase2(){
 	set_module_pref('allprefs',serialize($allprefs));
 	$session['user']['turns']--;
 	
+	$loc = city_id();
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	output("`^You grab the tree that you chopped down and start to drag it to the mill.`n`n");
 	switch(e_rand(1,20)){
@@ -55,13 +56,15 @@ function lumberyard_phase2(){
 			output("Quickly you drag the log and zip through the mill and cut your wood down into 2 squares.");
 			output("`n`nThe foreman	comes over and smiles at your handiwork and gives you a voucher for one square of wood.");
 			output("`n`nYou completed `QTwo Phases`^ in the time that it usually takes to complete one!`n`n");
-			increment_module_setting("remainsize",-1);
+			// increment_module_setting("remainsize",-1);
+			increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");
+			$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 			$allprefs['phase']=1;
 			$allprefs['squares']=$allprefs['squares']+1;
 			$allprefs['squareshof']=$allprefs['squareshof']+1;
 			set_module_pref('allprefs',serialize($allprefs));
 			$squares=$allprefs['squares'];
-			output("`^You now have`& %s %s of Wood`^.`n`nThere are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),get_module_setting("remainsize"));
+			output("`^You now have`& %s %s of Wood`^.`n`nThere are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 2 and 3 in the Lumberyard all at once gaining a square of wood.");
 		break;
 		case 15:
