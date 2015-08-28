@@ -392,5 +392,10 @@ VALUES
 	('alignmentbuffs', 'buffturns6', '500');
 
 
-/* Traducción de los maestros */
-TRUNCATE TABLE `masters`;
+INSERT INTO `item` (`itemid`, `class`, `name`, `description`, `gold`, `gems`, `weight`, `droppable`, `level`, `dragonkills`, `buffid`, `charges`, `link`, `hide`, `customvalue`, `execvalue`, `exectext`, `noeffecttext`, `activationhook`, `findchance`, `loosechance`, `dkloosechance`, `sellable`, `buyable`, `uniqueforserver`, `uniqueforplayer`)
+VALUES
+	(1, 'Poción', 'Poción pequeña de salud', 'Una poción pequeña que cura una determinada cantidad de salud. Cura un pequeño porcentaje sobre la salud máxima.', 265, 1, 5, 1, 1, 1, 0, 0, '', 0, 'Esta pequeña poción es capaz de recuperar entre el `b15%`b y el `b30%`b de la salud máxima.', 'items/consumables/potions/smallPotionHealth', 'Bebes %s', 'Parece que no tuvo ningún efecto. ', '80', 0, 10, 20, 1, 1, 0, 0),
+	(2, 'Poción', 'Poción mediana de salud', 'Una poción mediana que cura una determinada cantidad de salud. Cura un porcentaje mediano sobre la salud máxima.', 975, 1, 10, 1, 1, 1, 0, 0, '', 0, 'Esta poción mediana es capaz de recuperar entre el `b25%`b y el `b50%`b de la salud máxima.', 'items/consumables/potions/mediumPotionHealth', 'Bebes %s', 'Parece que no tuvo ningún efecto. ', '64', 0, 15, 25, 1, 1, 0, 0),
+	(3, 'Poción', 'Poción grande de salud', 'Una poción grande que cura una determinada cantidad de salud. Cura un porcentaje grande sobre la salud máxima.', 1550, 2, 15, 1, 1, 1, 0, 0, '', 0, 'Esta poción grande es capaz de recuperar entre el `b35%`b y el `b70%`b de la salud máxima.', 'items/consumables/potions/bigPotionHealth', 'Bebes %s', 'Parece que no tuvo ningún efecto. ', '64', 0, 20, 30, 1, 1, 0, 0),
+	(4, 'Poción', 'Poción enorme de salud', 'Una poción enorme que cura una determinada cantidad de salud. Cura un porcentaje enorme sobre la salud máxima.', 2275, 3, 20, 1, 1, 1, 0, 0, '', 0, 'Esta poción enorme es capaz de recuperar entre el `b45%`b y el `b90%`b de la salud máxima.', 'items/consumables/potions/hugePotionHealth', 'Bebes %s', 'Parece que no tuvo ningún efecto. ', '64', 0, 25, 35, 1, 1, 0, 0);
+
