@@ -1,4 +1,4 @@
-<?
+<?php
 
 function serverbalance_getmoduleinfo(){
 $info = array(

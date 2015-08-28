@@ -1,4 +1,4 @@
-<?
+<?php
 
 function onlinelist_getmoduleinfo(){
     $info = array(
