@@ -436,7 +436,8 @@ if ($battle){
 			$allprefs['squares']=$allprefs['squares']-1;
 			$allprefs['squareshof']=$allprefs['squareshof']-1;
 			$allprefs['usedlts']=get_module_setting("lumberturns");
-			increment_module_setting("remainsize",1);
+			// increment_module_setting("remainsize",1);
+			increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");
 			$session['user']['hitpoints'] = 1;
 			debuglog("was defeated by a lumberjack in the lumberyard.");
 		}
