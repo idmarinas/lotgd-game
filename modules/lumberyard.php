@@ -42,8 +42,8 @@ function lumberyard_getmoduleinfo(){
 			"perpage"=>"How many players per page in Hall of Fame?,int|25",
 		),
 		"prefs"=>array(
-			"Lumber Yard,title",
-			"user_stat"=>"Display your number of squares in the Stat bar?,enum,0,No,1,Under Personal Info,2,Under Materials|0",
+			// "Lumber Yard,title",
+			// "user_stat"=>"Display your number of squares in the Stat bar?,enum,0,No,1,Under Personal Info,2,Under Materials|0",
 			"Lumber Yard User Preferences,title",
 			"Note: Please edit with caution. Consider using the Allprefs Editor instead.,note",
 			"allprefs"=>"Preferences for Lumberyard,textarea|",
@@ -70,7 +70,7 @@ function lumberyard_install(){
 	module_addhook("footer-hof");
 	module_addhook("allprefs");
 	module_addhook("allprefnavs");
-	module_addhook_priority("charstats",101);
+	// module_addhook_priority("charstats",101);
 	return true;
 }
 function lumberyard_uninstall(){
@@ -78,7 +78,8 @@ function lumberyard_uninstall(){
 }
 function lumberyard_dohook($hookname,$args){
 	global $session;
-	require("modules/lumberyard/dohook/$hookname.php");
+	require_once("modules/lumberyard/lib.php");
+	require_once("modules/lumberyard/dohook/$hookname.php");
 	return $args;
 }
 function lumberyard_run(){
