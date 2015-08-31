@@ -126,7 +126,7 @@ function lumberyard_phase1(){
 			output("`%Brave Sir %s `%ran away,`nBravely ran away, away.`n",$name);
 			output("When danger reared its ugly head,`n %s `%bravely turned tail and fled.`n",$name);
 			output("Yes, brave Sir %s `%turned about`nAnd gallantly, chickened out.`n Bravely taking to feet,`n",$name);
-			output("%s `%beat a very brave retreat,`nBravest of the brave, Sir %s`%.`n`n",$name,$name);
+			output("%s`% beat a very brave retreat,`nBravest of the brave, Sir %s`%.`n`n",$name,$name);
 			output("`^I think those minstrels will be following you around for a while, and you fail to complete any work in the lumber yard.`n`n");
 			$allprefs['phase']=1;
 			set_module_pref('allprefs',serialize($allprefs));
