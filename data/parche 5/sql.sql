@@ -1,0 +1,1 @@
+/* Configuración para el aserradero */

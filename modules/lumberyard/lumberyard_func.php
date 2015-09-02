@@ -1,11 +1,4 @@
 <?php
-//## Obtener el ID de la ciudad
-function city_id()
-{
-	require_once("modules/cityprefs/lib.php");
-	return get_cityprefs_cityid("location",$session['user']['location']);
-}
-
 function lumberyard_planttrees(){
 	global $session;
 	

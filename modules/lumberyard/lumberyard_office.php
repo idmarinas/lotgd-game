@@ -40,7 +40,8 @@ function lumberyard_office(){
 					addnav(array("Sell %s %s %s",translate_inline($left>1?"All":""),$left,translate_inline($left>1?"Squares":"Square")),"runmodule.php?module=lumberyard&op=clearcutsell&op2=$left");
 				}else addnav(array("Sell %s %s %s",translate_inline($squares>1?"All":""),$squares,translate_inline($squares>1?"Squares":"Square")),"runmodule.php?module=lumberyard&op=clearcutsell&op2=$squares");
 				output("`n`n How many would you like to sell?'");
-				output("<form action='runmodule.php?module=lumberyard&op=clearcutsell' method='POST'><input name='sell' id='sell'><input type='submit' class='button' value='sell'></form>",true);
+				$sell = translate_inline('Sell');
+				rawoutput("<form action='runmodule.php?module=lumberyard&op=clearcutsell' method='POST'><input name='sell' id='sell'><input type='submit' class='button' value='$sell'></form>",true);
 				addnav("","runmodule.php?module=lumberyard&op=clearcutsell");
 			}else{
 				output("`#Unfortunately, you've sold your maximum `^%s `&Squares of Wood`# today already.  Please come back tomorrow.'",$maximumsell);
