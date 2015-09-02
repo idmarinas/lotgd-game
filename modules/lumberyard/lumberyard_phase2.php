@@ -64,7 +64,7 @@ function lumberyard_phase2(){
 			$allprefs['squareshof']=$allprefs['squareshof']+1;
 			set_module_pref('allprefs',serialize($allprefs));
 			$squares=$allprefs['squares'];
-			output("`^You now have`& %s %s of Wood`^.`n`nThere are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
+			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 2 and 3 in the Lumberyard all at once gaining a square of wood.");
 		break;
 		case 15:
