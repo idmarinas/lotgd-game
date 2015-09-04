@@ -128,8 +128,12 @@ function inventorypopup_run(){
 		$layout[] = $row['class'];
 		$inventory[$row['class']][] = $row;
 	}
-	inventory_showform(array_unique($layout), $inventory);
-	//echo '<pre style="color:white">'. var_export($inventory, true) .'</pre>';
+	$layout = array_unique($layout);
+	$materials = collect_materials($layout, $inventory);
+	$layout = $materials['layout'];
+	$inventory = $materials['inventory'];
+	inventory_showform($layout, $inventory);
+	// echo '<pre style="color:white">'. var_export($inventory, true) .'</pre>';
 	popup_footer();
 }
 
@@ -194,7 +198,15 @@ function inventory_showform($layout,$row)
 				$class = "";
 				foreach($row[$info[0]] as $value)
 				{
-					showRowItem($value, $itemI);
+					debug($info[0]);
+					if ('Material' != $info[0])
+					{
+						showRowItem($value, $itemI);
+					}
+					else
+					{
+						show_material_row($value, $itemI);
+					}
 					$class = $value['class'];
 					$itemI++;
 				}
@@ -318,8 +330,79 @@ function showRowItem($itsval, $i)
 	rawoutput("<td nowrap>");
 	output("(Gold value: %s, Gem Value: %s)", max($itsval['gold'],$itsval['sellvaluegold']), max($itsval['gems'], $itsval['sellvaluegems']));
 	$tl_desc = translate_inline($itsval['description']);
-	rawoutput("</td></tr><tr><td colspan='3'>");
-	output_notl("`i%s`i", $tl_desc, true);
-	rawoutput("</td></tr></table>");
+	rawoutput("</td></tr>");
+	if ('' != $itsval['description']) 
+	{
+		rawoutput('<tr><td colspan="3">');
+		output_notl("`i%s`i", $tl_desc, true);
+		rawoutput('</td></tr>');
+	}
+	rawoutput("</table>");
+}
+
+/**
+ * Extraer los materiales disponibles
+ */
+function collect_materials($layout, $inventory)
+{	
+	global $session;
+	
+	//Madera disponible
+	$allprefs = unserialize(get_module_pref('allprefs','lumberyard'));
+	$squarepay = get_module_setting("squarepay",'lumberyard');
+
+	if (get_module_setting("leveladj",'lumberyard')==1) $squarepay=round($squarepay*$session['user']['level'] / 15);
+	$squares = array (
+		'class' => 'Material',
+		'name' => 'Pieza de madera',
+		'quantity' => (int) $allprefs['squares'],
+		'gold' => $squarepay
+	);
+		
+	if ($squares > 0)
+	{
+		$layout[] = 'Material,title';
+		$layout[] = 'Material';
+		$inventory['Material'][] = $squares;
+	}
+	
+	return array('layout' => $layout, 'inventory' => $inventory);
+
+// 	//BEGIN CHECK AND DISPLAY FOR QUARRY BY DAVES
+// 	if (is_module_installed("quarry")) {
+// 		$allprefs=unserialize(get_module_pref('allprefs','quarry'));
+// 		$blocks=$allprefs['blocks'];
+// 		if ($blocks >= '1') { 
+// 			$ti_sackcat_buildingmaterials=1;
+// 			$stone=1;
+// 		}
+// 	}
+// 
+// 	//BEGIN CHECK AND DISPLAY FOR METALMINE BY DAVES
+// 	if (is_module_installed("metalmine")) {
+// 		$allprefs=unserialize(get_module_pref('allprefs','metalmine'));
+// 		$metal1=$allprefs['metal1'];
+// 		$metal2=$allprefs['metal2'];
+// 		$metal3=$allprefs['metal3'];
+// 		if ($squares>=1 or $blocks>=1 or $metal1>=1 or $metal2>=1 or $metal3>=1) {
+// 			$ti_sackcat_buildingmaterials=1;
+// 			$metal=1;
+// 		}
+// 	}
+}
+
+/**
+ * Mostrar los materiales
+ */
+function show_material_row($itsval, $i)
+{
+	rawoutput("<table class='items-list ".($i%2?'trlight':'trdark')."'><tr><td>");
+	rawoutput($itsval['equipped']?"<i class='fa fa-asterisk fa-fw'></i>":"");
+	output_notl("`0%s (%s)", $itsval['name'], $itsval['quantity']);
+	rawoutput("</td>");
+	rawoutput("<td nowrap>");
+	output("Valor oro: %s. Este precio puede variar.", $itsval['gold']);
+	$tl_desc = translate_inline($itsval['description']);
+	rawoutput('</td></tr></table>');
 }
 ?>
