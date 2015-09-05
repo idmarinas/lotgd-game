@@ -131,9 +131,11 @@
 				rawoutput("</form>");
 				rawoutput("<script language='JavaScript'>document.getElementById('name').focus()</script>");
 			}else{
+				$name = translate_inline('Name');
+				$level = translate_inline('Level');
 				output("Which player did you mean?`n`n");
 				rawoutput("<table cellpadding='3' cellspacing='0' border='0'>");
-				rawoutput("<tr class='trhead'><td>Name</td><td>Level</td></tr>");
+				rawoutput("<tr class='trhead'><td>$name</td><td>$level</td></tr>");
 				for ($i=0;$i<db_num_rows($result);$i++){
 					$row = db_fetch_assoc($result);
 					rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td>");

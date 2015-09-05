@@ -146,9 +146,51 @@ function upkeep_dohook($hookname,$args) {
 		case "dwellings-management":
 			$dwid = $args['dwid'];
 			$typeid = get_module_setting("typeid",$args['type']);
-			$turns = get_module_objpref("dwellings",$dwid,"upkeepturns","upkeep");			$maxturns = get_module_objpref("dwellingtypes",$typeid,"upkeepturns","upkeep");			$turnsleft = $maxturns-$turns;			$gems = get_module_objpref("dwellings",$dwid,"upkeepgems","upkeep");			$maxgems = get_module_objpref("dwellingtypes",$typeid,"upkeepgems","upkeep");			$gemsleft = $maxgems - $gems;			$gold = get_module_objpref("dwellings",$dwid,"upkeepgold","upkeep");			$maxgold = get_module_objpref("dwellingtypes",$typeid,"upkeepgold","upkeep");			$goldleft = $maxgold - $gold;			$invest = translate_inline("Invest");			$inupkeep = translate_inline("in upkeep");			$dwturns = translate_inline("turns");
+			$turns = get_module_objpref("dwellings",$dwid,"upkeepturns","upkeep");
+			$maxturns = get_module_objpref("dwellingtypes",$typeid,"upkeepturns","upkeep");
+			$turnsleft = $maxturns-$turns;
+			$gems = get_module_objpref("dwellings",$dwid,"upkeepgems","upkeep");
+			$maxgems = get_module_objpref("dwellingtypes",$typeid,"upkeepgems","upkeep");
+			$gemsleft = $maxgems - $gems;
+			$gold = get_module_objpref("dwellings",$dwid,"upkeepgold","upkeep");
+			$maxgold = get_module_objpref("dwellingtypes",$typeid,"upkeepgold","upkeep");
+			$goldleft = $maxgold - $gold;
+			$invest = translate_inline("Invest");
+			$inupkeep = translate_inline("in upkeep");
+			$dwturns = translate_inline("turns");
 			$dwgems = translate_inline("Gems");
-			$dwgold = translate_inline("Gold");			rawoutput("<tr><td colspan=2 class='trhead' style='text-align:center;'>Dwellings Upkeep</td></tr>");			rawoutput("<tr height=30px class='trlight'><td colspan=2>");			output("This upkeep cycle will end in %s days out of %s days.",get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepdays","upkeep"),get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep"));			if($goldleft==0 && $gemsleft==0 && $turnsleft ==0)			output(" There's nothing to do, so just sit back and relax.");			rawoutput("</td></tr>");			$duringcycle = translate_inline("During this upkeep cycle you have invested");			rawoutput("<tr height=30px class='trdark'><td rowspan=3>$duringcycle</td><td>");			output("%s out of %s turns. ",$turns,$maxturns);			if($session['user']['turns']>=$turnsleft && $turnsleft>0){				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=turns&amount=$turnsleft&dwid=$dwid&type=$typeid'>$invest $turnsleft $dwturns $inupkeep</a></td></tr>");				addnav("","runmodule.php?module=upkeep&op=manage&invest=turns&amount=$turnsleft&dwid=$dwid&type=$typeid");			}else{				rawoutput("</td></tr>");			}			rawoutput("<tr height=30px class='trlight'><td>");			output("%s out of %s gems. ",$gems,$maxgems);			if($session['user']['gems']>=$gemsleft && $gemsleft>0){				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=gems&amount=$gemsleft&dwid=$dwid&type=$typeid'>$invest $gemsleft $dwgems $inupkeep</a></td></tr>");				addnav("","runmodule.php?module=upkeep&op=manage&invest=gems&amount=$gemsleft&dwid=$dwid&type=$typeid");			}else{				rawoutput("</td></tr>");			}			rawoutput("<tr height=30px class='trdark'><td>");			output("%s out of %s gold. ",$gold,$maxgold);			if($session['user']['gold']>=$goldleft && $goldleft>0){				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=gold&amount=$goldleft&dwid=$dwid&type=$typeid'>$invest $goldleft $dwgold $inupkeep</a></td></tr>");				addnav("","runmodule.php?module=upkeep&op=manage&invest=gold&amount=$goldleft&dwid=$dwid&type=$typeid");			}else{				rawoutput("</td></tr>");			}
+			$dwgold = translate_inline("Gold");
+			rawoutput("<tr class='trhead'><td colspan=2 style='text-align:center;'>Dwellings Upkeep</td></tr>");
+			rawoutput("<tr height=30px class='trlight'><td colspan=2>");
+			output("This upkeep cycle will end in %s days out of %s days.",get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepdays","upkeep"),get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep"));
+			if($goldleft==0 && $gemsleft==0 && $turnsleft ==0)
+			output(" There's nothing to do, so just sit back and relax.");
+			rawoutput("</td></tr>");
+			$duringcycle = translate_inline("During this upkeep cycle you have invested");
+			rawoutput("<tr height=30px class='trdark'><td rowspan=3>$duringcycle</td><td>");
+			output("%s out of %s turns. ",$turns,$maxturns);
+			if($session['user']['turns']>=$turnsleft && $turnsleft>0){
+				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=turns&amount=$turnsleft&dwid=$dwid&type=$typeid'>$invest $turnsleft $dwturns $inupkeep</a></td></tr>");
+				addnav("","runmodule.php?module=upkeep&op=manage&invest=turns&amount=$turnsleft&dwid=$dwid&type=$typeid");
+			}else{
+				rawoutput("</td></tr>");
+			}
+			rawoutput("<tr height=30px class='trlight'><td>");
+			output("%s out of %s gems. ",$gems,$maxgems);
+			if($session['user']['gems']>=$gemsleft && $gemsleft>0){
+				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=gems&amount=$gemsleft&dwid=$dwid&type=$typeid'>$invest $gemsleft $dwgems $inupkeep</a></td></tr>");
+				addnav("","runmodule.php?module=upkeep&op=manage&invest=gems&amount=$gemsleft&dwid=$dwid&type=$typeid");
+			}else{
+				rawoutput("</td></tr>");
+			}
+			rawoutput("<tr height=30px class='trdark'><td>");
+			output("%s out of %s gold. ",$gold,$maxgold);
+			if($session['user']['gold']>=$goldleft && $goldleft>0){
+				rawoutput("<a href='runmodule.php?module=upkeep&op=manage&invest=gold&amount=$goldleft&dwid=$dwid&type=$typeid'>$invest $goldleft $dwgold $inupkeep</a></td></tr>");
+				addnav("","runmodule.php?module=upkeep&op=manage&invest=gold&amount=$goldleft&dwid=$dwid&type=$typeid");
+			}else{
+				rawoutput("</td></tr>");
+			}
 			break;
 	}
 	return $args;
@@ -167,14 +209,22 @@ function upkeep_run(){
 	switch ($op){
 		case "manage":
 			if (httpget('amount')){
-				if(get_module_objpref("dwellingtypes",$typeid,"upkeepgold","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepgold","upkeep")==0 &&				get_module_objpref("dwellingtypes",$typeid,"upkeepturns","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepturns","upkeep")==0 &&				get_module_objpref("dwellingtypes",$typeid,"upkeepgems","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepgems","upkeep")==0){					output("PHEW!  You take a look around and see how much cleaner and orderly everything seems!  You're now set for the remaining %s upkeep days.",get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepdays","upkeep"));				}else{
-					$amount = httpget('amount');					output("`nYou dwelling shows the fruits of your labor.");
+				if(get_module_objpref("dwellingtypes",$typeid,"upkeepgold","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepgold","upkeep")==0 &&
+				get_module_objpref("dwellingtypes",$typeid,"upkeepturns","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepturns","upkeep")==0 &&
+				get_module_objpref("dwellingtypes",$typeid,"upkeepgems","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepgems","upkeep")==0){
+					output("PHEW!  You take a look around and see how much cleaner and orderly everything seems!  You're now set for the remaining %s upkeep days.",get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepdays","upkeep"));
+				}else{
+					$amount = httpget('amount');
+					output("`nYou dwelling shows the fruits of your labor.");
 					set_module_objpref("dwellings",
 					$dwid,
 										"upkeep".$invest,
 					$amount+get_module_objpref("dwellings",$dwid,"upkeep".$invest,
 										"upkeep"),
-										"upkeep");					$session['user'][$invest]-=$amount;					debuglog("invested $amount of $invest in the upkeep of his dwelling number $dwid");				}
+										"upkeep");
+					$session['user'][$invest]-=$amount;
+					debuglog("invested $amount of $invest in the upkeep of his dwelling number $dwid");
+				}
 			}
 			break;
 	}

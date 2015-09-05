@@ -96,7 +96,7 @@
 		}
 		if($outed == 0){ 
 			$none = translate_inline("None"); 
-			rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td align=center colspan=3><i>$none</i></td></tr>"); 
+			rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td align=center colspan=4><i>$none</i></td></tr>"); 
 		}
 	}
 	rawoutput("</table>");
@@ -122,7 +122,7 @@
 	$i = 0;
 	if(!db_num_rows($result)){
 		$none = translate_inline("None");
-		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td align=center  colspan=4><i>$none</i></td></tr>");
+		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td align=center colspan=5><i>$none</i></td></tr>");
 	}else{
 		while ($row = db_fetch_assoc($result)){
 			$type = $row['type'];
