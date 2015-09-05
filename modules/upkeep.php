@@ -160,7 +160,8 @@ function upkeep_dohook($hookname,$args) {
 			$dwturns = translate_inline("turns");
 			$dwgems = translate_inline("Gems");
 			$dwgold = translate_inline("Gold");
-			rawoutput("<tr class='trhead'><td colspan=2 style='text-align:center;'>Dwellings Upkeep</td></tr>");
+			$upkeep = translate_inline('Dwellings Upkeep');
+			rawoutput("<tr class='trhead'><td colspan=2 style='text-align:center;'>$upkeep</td></tr>");
 			rawoutput("<tr height=30px class='trlight'><td colspan=2>");
 			output("This upkeep cycle will end in %s days out of %s days.",get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep")-get_module_objpref("dwellings",$dwid,"upkeepdays","upkeep"),get_module_objpref("dwellingtypes",$typeid,"upkeepdays","upkeep"));
 			if($goldleft==0 && $gemsleft==0 && $turnsleft ==0)
