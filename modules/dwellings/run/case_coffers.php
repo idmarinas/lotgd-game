@@ -10,7 +10,7 @@
 	if (!is_numeric($amount)) $amount = 0;
 
 	page_header("Coffers");
-
+	
 	$sql = "SELECT ownerid,name,gold,gems,type FROM " . db_prefix("dwellings") . " WHERE dwid='$dwid'";
 	$result = db_query($sql);
 	$row = db_fetch_assoc($result);
@@ -35,9 +35,9 @@
 					debuglog("withdrew $amount $g from dwelling $dwid in ".$session['user']['location']);
 					$tamount = $cofg - $amount;
 					$session['user'][$g]+=$amount;
-					$message = sprintf_translate("::withdrew `4%s %s%s`&.", $amount, $g=="gems"?"`%":"`^", translate_inline($g));	
+					$message = sprintf_translate(":: withdrew `4%s %s%s`&.", $amount, $g=="gems"?"`%":"`^", translate_inline($g));	
 					require_once("lib/commentary.php");
-					injectrawcomment("coffers-$dwid", $session['user']['acctid'], $message);
+					injectrawcomment("coffers-$dwid", $session['user']['acctid'], $message, $session['user']['name']);
 					db_query("UPDATE ".db_prefix("dwellings")." SET $g=$g-$amount WHERE dwid=$dwid");
 					increment_module_pref("cofferwiths",1);
 					$cofferwiths--;
@@ -71,9 +71,9 @@
 						$tamount = $cofg + $amount;
 						$row[$g] = $tamount;
 						$session['user'][$g]-=$amount;
-						$message = sprintf_translate("::deposited `4%s %s%s`&.", $amount, $g=="gems"?"`%":"`^", $g);
+						$message = sprintf_translate(":: deposited `4%s %s%s`&.", $amount, $g=="gems"?"`%":"`^", translate_inline($g));
 						require_once("lib/commentary.php");
-						injectrawcomment("coffers-$dwid", $session['user']['acctid'], $message);
+						injectrawcomment("coffers-$dwid", $session['user']['acctid'], $message, $session['user']['name']);
 						db_query("UPDATE ".db_prefix("dwellings")." SET $g=$g+$amount WHERE dwid=$dwid");
 						increment_module_pref("cofferdeps",1);
 						$cofferdeps--;

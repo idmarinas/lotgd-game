@@ -203,7 +203,7 @@ function dwellings_plunder_run(){
 								$result=db_query($sql);
 								$message = sprintf_translate("::stole `^%s gold pieces`&.", $gold);
 								require_once("lib/commentary.php");
-								injectrawcomment("coffers-{$plunder['id']}", $session['user']['acctid'], $message);
+								injectrawcomment("coffers-{$plunder['id']}", $session['user']['acctid'], $message,$session['user']['name']);
 								require_once("lib/systemmail.php");
 								systemmail($plunder['ownerid'],array("`\$Plunder!"),array("`^The dwelling '%s`^' you own was plundered by the foul %s`^ and %s gold pieces were stolen!",$plunder['name'],$session['user']['name'],$gold));
 							}
