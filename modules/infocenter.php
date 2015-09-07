@@ -147,131 +147,131 @@ popup_header("Information Center");
 output("%s",get_module_setting("ctext"),true);
 output("<br><br><br>`b`!Navigation:`b`0<br>",true);
   		if ($show1 == 1){
-output("&#149; <a href='runmodule.php?module=infocenter&op=page1'>%s</a>",get_module_setting("name1"),true);
+rawoutput("&#149; <a href='runmodule.php?module=infocenter&op=page1'>%s</a>",get_module_setting("name1"),true);
 }
   		if ($show2 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page2'>%s</a>",get_module_setting("name2"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page2'>%s</a>",get_module_setting("name2"),true);
 }
   		if ($show3 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page3'>%s</a>",get_module_setting("name3"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page3'>%s</a>",get_module_setting("name3"),true);
 }
   		if ($show4 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page4'>%s</a>",get_module_setting("name4"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page4'>%s</a>",get_module_setting("name4"),true);
 }
   		if ($show5 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page5'>%s</a>",get_module_setting("name5"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page5'>%s</a>",get_module_setting("name5"),true);
 }
   		if ($show6 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page6'>%s</a>",get_module_setting("name6"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page6'>%s</a>",get_module_setting("name6"),true);
 }
   		if ($show7 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page7'>%s</a>",get_module_setting("name7"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page7'>%s</a>",get_module_setting("name7"),true);
 }
   		if ($show8 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page8'>%s</a>",get_module_setting("name8"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page8'>%s</a>",get_module_setting("name8"),true);
 }
   		if ($show9 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page9'>%s</a>",get_module_setting("name9"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page9'>%s</a>",get_module_setting("name9"),true);
 }
   		if ($show10 == 1){
-output("<br>&#149; <a href='runmodule.php?module=infocenter&op=page10'>%s</a>",get_module_setting("name10"),true);
+rawoutput("<br>&#149; <a href='runmodule.php?module=infocenter&op=page10'>%s</a>",get_module_setting("name10"),true);
 }
   		if ($faq == 1){
-output("<br>&#149; <a href='petition.php?op=faq'>FAQ</a>",true);
+rawoutput("<br>&#149; <a href='petition.php?op=faq'>FAQ</a>",true);
 }
   		if ($petition == 1){
-output("<br>&#149; <a href='petition.php'>Petition a Problem</a>",true);
+rawoutput("<br>&#149; <a href='petition.php'>Petition a Problem</a>",true);
 }
   		if ($link1 == 1){
 	  	if ($open1 == 1){
-output("<br>&#149; <a href='$url1' target='_blank'>$nlink1</a>",true);
+rawoutput("<br>&#149; <a href='$url1' target='_blank'>$nlink1</a>",true);
 }else{
-output("<br>&#149; <a href='$url1'>$nlink1</a>",true);
+rawoutput("<br>&#149; <a href='$url1'>$nlink1</a>",true);
 }
 }
   		if ($link2 == 1){
 	  	if ($open2 == 1){
-output("<br>&#149; <a href='$url2' target='_blank'>$nlink2</a>",true);
+rawoutput("<br>&#149; <a href='$url2' target='_blank'>$nlink2</a>",true);
 }else{
-output("<br>&#149; <a href='$url2'>$nlink2</a>",true);
+rawoutput("<br>&#149; <a href='$url2'>$nlink2</a>",true);
 }
 }
   		if ($link3 == 1){
 	  	if ($open3 == 1){
-output("<br>&#149; <a href='$url1' target='_blank'>$nlink3</a>",true);
+rawoutput("<br>&#149; <a href='$url1' target='_blank'>$nlink3</a>",true);
 }else{
-output("<br>&#149; <a href='$url3'>$nlink3</a>",true);
+rawoutput("<br>&#149; <a href='$url3'>$nlink3</a>",true);
 }
 }
   		if ($link4 == 1){
 	  	if ($open4 == 1){
-output("<br>&#149; <a href='$url1' target='_blank'>$nlink4</a>",true);
+rawoutput("<br>&#149; <a href='$url1' target='_blank'>$nlink4</a>",true);
 }else{
-output("<br>&#149; <a href='$url4'>$nlink4</a>",true);
+rawoutput("<br>&#149; <a href='$url4'>$nlink4</a>",true);
 }
 }
   		if ($link5 == 1){
 	  	if ($open5 == 1){
-output("<br>&#149; <a href='$url5' target='_blank'>$nlink5</a>",true);
+rawoutput("<br>&#149; <a href='$url5' target='_blank'>$nlink5</a>",true);
 }else{
-output("<br>&#149; <a href='$url5'>$nlink5</a>",true);
+rawoutput("<br>&#149; <a href='$url5'>$nlink5</a>",true);
 }
 }
 popup_footer();
  break;
   case"page1":
 popup_header("Information Center - %s",get_module_setting("name1"));
-output("`b`c%s`b`c`n`n",get_module_setting("name1"),true);
-output("%s`n`n`n",get_module_setting("text1"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name1"),true);
+output_notl("%s`n`n`n",get_module_setting("text1"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page2":
 popup_header("Information Center - %s",get_module_setting("name2"));
-output("`b`c%s`b`c`n`n",get_module_setting("name2"),true);
-output("%s`n`n`n",get_module_setting("text2"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name2"),true);
+output_notl("%s`n`n`n",get_module_setting("text2"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page3":
 popup_header("Information Center - %s",get_module_setting("name3"));
-output("`b`c%s`b`c`n`n",get_module_setting("name3"),true);
-output("%s`n`n`n",get_module_setting("text3"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name3"),true);
+output_notl("%s`n`n`n",get_module_setting("text3"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page4":
 popup_header("Information Center - %s",get_module_setting("name4"));
-output("`b`c%s`b`c`n`n",get_module_setting("name4"),true);
-output("%s`n`n`n",get_module_setting("text4"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name4"),true);
+output_notl("%s`n`n`n",get_module_setting("text4"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page5":
 popup_header("Information Center - %s",get_module_setting("name5"));
-output("`b`c%s`b`c`n`n",get_module_setting("name5"),true);
-output("%s`n`n`n",get_module_setting("text5"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name5"),true);
+output_notl("%s`n`n`n",get_module_setting("text5"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page6":
 popup_header("Information Center - %s",get_module_setting("name6"));
-output("`b`c%s`b`c`n`n",get_module_setting("name6"),true);
-output("%s`n`n`n",get_module_setting("text6"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name6"),true);
+output_notl("%s`n`n`n",get_module_setting("text6"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page7":
 popup_header("Information Center - %s",get_module_setting("name7"));
-output("`b`c%s`b`c`n`n",get_module_setting("name7"),true);
-output("%s`n`n`n",get_module_setting("text7"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name7"),true);
+output_notl("%s`n`n`n",get_module_setting("text7"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
   case"page8":
 popup_header("Information Center - %s",get_module_setting("name8"));
-output("`b`c%s`b`c`n`n",get_module_setting("name8"),true);
-output("%s`n`n`n",get_module_setting("text8"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name8"),true);
+output_notl("%s`n`n`n",get_module_setting("text8"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
@@ -284,8 +284,8 @@ popup_footer();
  break;
   case"page10":
 popup_header("Information Center - %s",get_module_setting("name10"));
-output("`b`c%s`b`c`n`n",get_module_setting("name10"),true);
-output("%s`n`n`n",get_module_setting("text10"),true);
+output_notl("`b`c%s`b`c`n`n",get_module_setting("name10"),true);
+output_notl("%s`n`n`n",get_module_setting("text10"),true);
 rawoutput("<center><a href='runmodule.php?module=infocenter&op=contents'><strong>Contents</strong></a></center>");
 popup_footer();
  break;
