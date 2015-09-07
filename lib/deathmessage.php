@@ -34,7 +34,7 @@ function select_deathmessage_array($forest=true,$extra=array(),$extrarep=array()
 	$where=($forest?"WHERE forest=1":"WHERE graveyard=1");
 
 	$sql = "SELECT deathmessage,taunt FROM " . db_prefix("deathmessages") .
-		" $WHERE ORDER BY rand(".e_rand() . ") LIMIT 1";
+		" $where ORDER BY rand(".e_rand() . ") LIMIT 1";
 
 	$result = db_query($sql);
 	if ($result) {
