@@ -156,6 +156,7 @@ function forestdefeat($enemies,$where="in the forest"){
 	} else {
 		$where=translate_inline($where);
 	}*/
+	$where = translate_inline($where);
 	$deathmessage=select_deathmessage_array(true,array("{where}"),array($where));
 	if ($deathmessage['taunt']==1) {
 		addnews("%s`n%s",$deathmessage['deathmessage'],$taunt);
