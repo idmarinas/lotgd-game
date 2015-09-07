@@ -67,9 +67,9 @@ if( is_numeric( $id ) )
 		output("`2\"Things go fast around here... much too fast sometimes,\" the shopkeeper notes.");
 	//otherwise, display the purchase nav
 	}else{
-		$purchase = translate_inline( array( 'Purchase %s', $what ) );
+		// $purchase = translate_inline( array( 'Purchase %s', $what ) );
 		addnav("Sales");
-		addnav( $purchase, $from."op=shop&what=purchase&id=$id&cat=$cat" );
+		addnav( array( 'Purchase %s', $what ), $from."op=shop&what=purchase&id=$id&cat=$cat" );
 	}
 	if( $cat == 2 && get_module_setting( 'weapon_atk' ) == 0 )
 	{
