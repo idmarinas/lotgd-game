@@ -50,7 +50,7 @@ VALUES
 	('lumberyard', 'city', 'clearcut', 6, '10'),
 	('lumberyard', 'city', 'clearcut', 7, '10'),
 	('lumberyard', 'city', 'clearcutter', 1, 'Evil Douglas'),
-	('lumberyard', 'city', 'clearcutter', 3, 'Amrod Ancalímon'),
+	('lumberyard', 'city', 'clearcutter', 3, 'Amrod Ciryatan'),
 	('lumberyard', 'city', 'clearcutter', 4, 'Evil Douglas'),
 	('lumberyard', 'city', 'clearcutter', 5, 'Evil Douglas'),
 	('lumberyard', 'city', 'clearcutter', 6, 'Malvado Douglas'),
