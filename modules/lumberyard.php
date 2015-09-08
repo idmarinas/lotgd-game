@@ -83,6 +83,6 @@ function lumberyard_dohook($hookname,$args){
 	return $args;
 }
 function lumberyard_run(){
-	include("modules/lumberyard/lumberyard.php");
+	require_once("modules/lumberyard/lumberyard.php");
 }
 ?>
