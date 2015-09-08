@@ -30,6 +30,7 @@ function staminacorecombat_getmoduleinfo(){
 }
 function staminacorecombat_install(){
 	module_addhook_priority("forest",0);
+	module_addhook('everyhit-loggedin');
 	module_addhook("startofround-prebuffs");
 	module_addhook("endofround");
 	module_addhook("fightnav");
@@ -107,6 +108,11 @@ function staminacorecombat_dohook($hookname,$args){
 	global $session;
 	static $damagestart = 0;
 	switch($hookname){
+	case "everyhit-loggedin":
+		if ($session['user']['alive']==1){
+			staminacorecombat_applystaminabuff();
+		}
+	break;
 	case "forest":
 		blocknav("forest.php?op=search");
 		blocknav("forest.php?op=search&type=slum");
