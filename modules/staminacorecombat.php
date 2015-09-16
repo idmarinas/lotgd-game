@@ -259,6 +259,8 @@ function staminacorecombat_applystaminabuff(){
 		if ($death > $red){
 			output("`\$Vision blurring, you succumb to the effects of exhaustion.  You take a step forward to strike your enemy, but instead trip over your own feet.`nAs the carpet of leaves and twigs drifts lazily up to meet your face, you close your eyes and halfheartedly reach out your hands to cushion the blow - but they sail through the ground as if it were made out of clouds.`nYou fall.`nUnconsciousness.  How you'd missed it.`0");
 			$session['user']['hitpoints']=0;
+			
+			redirect("shades.php");
 		}
 	}
 	return true;
