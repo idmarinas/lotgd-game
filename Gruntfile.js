@@ -99,6 +99,16 @@ module.exports = function (grunt) {
         files: {
           "dist/templates/dragon_verde.css": "templates/dragon_verde.less"
         }
+      },
+      uikit: {
+        options: {
+          strictMath: true,
+          // sourceMap : true,
+          outputSourceFiles: true
+        },
+        files: {
+          "dist/templates/uikit.css": "templates/uikit.less"
+        }
       }
     },
     postcss: {
@@ -129,6 +139,15 @@ module.exports = function (grunt) {
         files: {
           "dist/templates/dragon_verde.css": "dist/templates/dragon_verde.css"
         }
+      },
+      uikit: {
+        options: {
+          keepSpecialComments: '*',
+          advanced: false
+        },
+        files: {
+          "dist/templates/uikit.css": "dist/templates/uikit.css"
+        }
       }
     },
     uglify: {
@@ -137,7 +156,8 @@ module.exports = function (grunt) {
           'dist/templates/dragon.min.js': 
             [
               'bower_components/uikit/js/uikit.js',
-              'bower_components/uikit/js/components/tooltip.js'
+              'bower_components/uikit/js/components/tooltip.js',
+              'bower_components/uikit/js/components/notify.js'
             ]
         }
       }
