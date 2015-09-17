@@ -57,8 +57,8 @@ while ($row = db_fetch_assoc($result)) {
 	output_notl("`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0`c");
 	if ($session['user']['superuser'] & SU_EDIT_COMMENTS){
 		$del = translate_inline("Del");
-		rawoutput("[ <a href='superuser.php?op=newsdelete&newsid=".$row['newsid']."&return=".URLEncode($_SERVER['REQUEST_URI'])."'>$del</a> ]&nbsp;");
-		addnav("","superuser.php?op=newsdelete&newsid={$row['newsid']}&return=".URLEncode($_SERVER['REQUEST_URI']));
+		rawoutput("[ <a href='superuser.php?op=newsdelete&newsid=".$row['newsid']."&return=".urlencode($_SERVER['REQUEST_URI'])."'>$del</a> ]&nbsp;");
+		addnav("","superuser.php?op=newsdelete&newsid={$row['newsid']}&return=".urlencode($_SERVER['REQUEST_URI']));
 	}
 	tlschema($row['tlschema']);
 	if ($row['arguments']>""){

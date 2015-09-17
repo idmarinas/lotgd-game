@@ -16,7 +16,7 @@ function sanitize_uri(){
 			$i=0;
 			foreach ($get as $key=>$val) {
 				if ($i>0) $REQUEST_URI.="&";
-				$REQUEST_URI.="$key=".URLEncode($val);
+				$REQUEST_URI.="$key=".urlencode($val);
 				$i++;
 			}
 		}else{

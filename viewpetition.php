@@ -317,7 +317,7 @@ if ($op==""){
 	output("`@Body:`^`n");
 	output("`\$[ipaddress] `^= `#%s`^`n", $row['ip']);
 	$body = htmlentities(stripslashes($row['body']), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-	$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
+	$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
 	$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 	rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");
 	//position tracking
@@ -335,7 +335,7 @@ if ($op==""){
 		output("`n`n`@Page Info:`&`n");
 		$row['pageinfo']=stripslashes($row['pageinfo']);
 		$body = HTMLEntities($row['pageinfo'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-		$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
+		$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
 		$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 		rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");
 	}

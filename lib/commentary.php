@@ -405,7 +405,8 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	global $chatloc,$bottomcid;
 	
 	if (!$returnlink){
-		$returnlink = URLEncode($_SERVER['REQUEST_URI']);
+		$returnlink = urlencode($_SERVER['REQUEST_URI']);
+		$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
 	}
 	
 	if ($showmodlink){
@@ -498,7 +499,7 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	//prepare the actual comment line part of the comment - is it hidden, is it an action, is it a game comment, should we show a moderation link, clan rank colours, posting date abs/rel
 	$loop1start = getmicrotime(true);
 	$bioretlink = $returnlink;
-	$bioretlink = URLEncode(buildcommentarylink("&frombio=true",$returnlink));
+	$bioretlink = urlencode(buildcommentarylink("&frombio=true",$returnlink));
 	$restorelink = buildcommentarylink("&comscroll=".$com."&restorecomment=",$returnlink);
 	$removelink = buildcommentarylink("&comscroll=".$com."&removecomment=",$returnlink);
 	for ($i=0; $i < $rowcount; $i++){
@@ -936,7 +937,8 @@ function viewcommentary($section,$message="Interject your own commentary?",$limi
 	}
 	
 	if (!$returnlink){
-		$returnlink = URLEncode($_SERVER['REQUEST_URI']);
+		$returnlink = urlencode($_SERVER['REQUEST_URI']);
+		$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
 	}
 	
 	if (($session['user']['superuser'] & SU_EDIT_COMMENTS) || $overridemod){
@@ -1034,8 +1036,9 @@ function commentaryfooter($section,$message="Interject your own commentary?",$li
 	$rowcount = $val['c'];
 	$val = round($val['c'] / $limit + 0.5,0) - 1;
 
-	$returnlink = URLEncode($_SERVER['REQUEST_URI']);
-	$returnlink = URLEncode(buildcommentarylink("&frombio=true",$returnlink));
+	$returnlink = urlencode($_SERVER['REQUEST_URI']);
+	$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
+	$returnlink = urlencode(buildcommentarylink("&frombio=true",$returnlink));
 	
 	$hook = array(
 		"section"=>$section,

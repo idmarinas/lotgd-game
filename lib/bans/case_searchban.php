@@ -95,10 +95,10 @@ while ($row = db_fetch_assoc($result)) {
 	$liftban = translate_inline("Lift&nbsp;ban");
 	$showuser = translate_inline("Click&nbsp;to&nbsp;show&nbsp;users");
 	rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
-	rawoutput("<td><a href='bans.php?op=delban&ipfilter=".URLEncode($row['ipfilter'])."&uniqueid=".URLEncode($row['uniqueid'])."'>");
+	rawoutput("<td><a href='bans.php?op=delban&ipfilter=".urlencode($row['ipfilter'])."&uniqueid=".urlencode($row['uniqueid'])."'>");
 	output_notl("%s", $liftban, true);
 	rawoutput("</a>");
-	addnav("","bans.php?op=delban&ipfilter=".URLEncode($row['ipfilter'])."&uniqueid=".URLEncode($row['uniqueid']));
+	addnav("","bans.php?op=delban&ipfilter=".urlencode($row['ipfilter'])."&uniqueid=".urlencode($row['uniqueid']));
 	rawoutput("</td><td>");
 	output_notl("`&%s`0", $row['banner']);
 	rawoutput("</td><td>");

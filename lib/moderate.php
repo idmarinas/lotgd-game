@@ -150,7 +150,7 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 		}
 
 		$link = "bio.php?char=" . $row['acctid'] .
-			"&ret=".URLEncode($_SERVER['REQUEST_URI']);
+			"&ret=".urlencode($_SERVER['REQUEST_URI']);
 
 		if (substr($ft,0,2)=="::")
 			$ft = substr($ft,0,2);
@@ -252,8 +252,8 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 			}
 		}else{
 			if ($session['user']['superuser'] & SU_EDIT_COMMENTS) {
-				$out.="`2[<a href='".$return.$one."removecomment={$commentids[$i]}&section=$section&returnpath=/".URLEncode($return)."'>$del</a>`2]`0&nbsp;";
-				addnav("",$return.$one."removecomment={$commentids[$i]}&section=$section&returnpath=/".URLEncode($return)."");
+				$out.="`2[<a href='".$return.$one."removecomment={$commentids[$i]}&section=$section&returnpath=/".urlencode($return)."'>$del</a>`2]`0&nbsp;";
+				addnav("",$return.$one."removecomment={$commentids[$i]}&section=$section&returnpath=/".urlencode($return)."");
 			}
 			$out.=$op[$i];
 			if (!array_key_exists($sect,$outputcomments) || !is_array($outputcomments[$sect]))
@@ -264,14 +264,14 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 
 	if ($moderating){
 		$scriptname=substr($_SERVER['SCRIPT_NAME'],strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
-		addnav("","$scriptname?op=commentdelete&return=".URLEncode($_SERVER['REQUEST_URI']));
+		addnav("","$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI']));
 		$mod_Del1 = htmlentities(translate_inline("Delete Checked Comments"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 		$mod_Del2 = htmlentities(translate_inline("Delete Checked & Ban (3 days)"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 		$mod_Del_confirm = addslashes(htmlentities(translate_inline("Are you sure you wish to ban this user and have you specified the exact reason for the ban, i.e. cut/pasted their offensive comments?"), ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
 		$mod_reason = translate_inline("Reason:");
 		$mod_reason_desc = htmlentities(translate_inline("Banned for comments you posted."), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 
-		output_notl("<form action='$scriptname?op=commentdelete&return=".URLEncode($_SERVER['REQUEST_URI'])."' method='POST'>",true);
+		output_notl("<form action='$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI'])."' method='POST'>",true);
 		output_notl("<input type='submit' class='button' value=\"$mod_Del1\">",true);
 		output_notl("<input type='submit' class='button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">",true);
 		output_notl("`n$mod_reason <input name='reason0' size='40' value=\"$mod_reason_desc\" onChange=\"document.getElementById('reason').value=this.value;\">",true);

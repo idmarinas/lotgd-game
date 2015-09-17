@@ -11,7 +11,7 @@
 // deputies can only have the responsibility of one area, so they will
 // more likely focus their attention to that one area.
 
-// deputies are given a deletestick™ that can be used from the deputy's
+// deputies are given a deletestickï¿½ that can be used from the deputy's
 // moderation screen, which is accessible from the villages under the
 // header "deputy duties".  this screen allows deputies to view the
 // last 100 comments in the area assigned to them, and also allows them
@@ -47,9 +47,9 @@
 // but the deputy who deleted the comment is still recorded under
 // the deputy review screen.
 
-// note that deputies are only given a deletestick™ that works only
+// note that deputies are only given a deletestickï¿½ that works only
 // in one specific commentary area, and that they are deliberately not
-// given a mutestick™ nor a banstick™.  this way, the deputy has the
+// given a mutestickï¿½ nor a banstickï¿½.  this way, the deputy has the
 // powers to do the job required of them, but if the deputy abuses
 // the granted powers, the worst that could happen is that only one
 // commentary area gets wiped out, which any moderator will have the
@@ -58,7 +58,7 @@
 // deputies are also not given access to the grotto, the commentary
 // in the character biographies, the ability to speak without getting
 // one's comments parsed through the drunk filter, or anything else
-// aside from the deletestick™ that works only in that one specific
+// aside from the deletestickï¿½ that works only in that one specific
 // commentary area assigned to them, and the ability to bypass post
 // limits from the deputy's moderation screen.
 
@@ -408,7 +408,7 @@ function deputymoderator_formattedauthor($acctid)
 		$row = db_fetch_assoc($res);
 		$tag = deputymoderator_formattedclantag($row['clanid'], $row['clanrank']);
 		if ($tag != "") $tag .= " ";
-		$link = "bio.php?char=" . $acctid . "&ret=" . URLEncode($_SERVER['REQUEST_URI']);
+		$link = "bio.php?char=" . $acctid . "&ret=" . urlencode($_SERVER['REQUEST_URI']);
 		addnav("",$link);
 		return ($tag . "`0<a href='$link' style='text-decoration: none'>`&{$row['name']}`0</a>`&");
 	}

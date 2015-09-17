@@ -144,7 +144,7 @@ function friendlist_dohook($hookname,$args){
 								if (get_module_setting('linkType')==1) {
 									$onlinelist.="<a href='mail.php?op=write&to={$row['login']}' class='colLtGreen' target='_blank' onClick=\"".popup("mail.php?op=write&to={$row['login']}").";return false;\">";
 								} elseif (get_module_setting('linkType')==2&&$bl) {
-									$link="bio.php?char=".rawurlencode($row['login'])."&ret=".URLEncode($_SERVER['REQUEST_URI']);
+									$link="bio.php?char=".rawurlencode($row['login'])."&ret=".urlencode($_SERVER['REQUEST_URI']);
 									$onlinelist.="<a href='$link' class='colLtGreen'>";
 									addnav($link,"");
 								}

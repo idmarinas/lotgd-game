@@ -29,7 +29,7 @@ superusernav();
 addnav("Referer Options");
 addnav("",$_SERVER['REQUEST_URI']);
 $sort = httpget('sort');
-addnav("Refresh","referers.php?sort=".URLEncode($sort)."");
+addnav("Refresh","referers.php?sort=".urlencode($sort)."");
 addnav("C?Sort by Count","referers.php?sort=count".($sort=="count DESC"?"":"+DESC"));
 addnav("U?Sort by URL","referers.php?sort=uri".($sort=="uri"?"+DESC":""));
 addnav("T?Sort by Time","referers.php?sort=last".($sort=="last DESC"?"":"+DESC"));

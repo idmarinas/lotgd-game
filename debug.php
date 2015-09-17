@@ -15,8 +15,8 @@ superusernav();
 addnav("Debug Options");
 addnav("",$_SERVER['REQUEST_URI']);
 $sort = httpget('sort');
-addnav("Get Pageruntimes","debug.php?debug=pageruntime&sort=".URLEncode($sort));
-addnav("Get Modulehooktimes","debug.php?debug=hooksort&sort=".URLEncode($sort));
+addnav("Get Pageruntimes","debug.php?debug=pageruntime&sort=".urlencode($sort));
+addnav("Get Modulehooktimes","debug.php?debug=hooksort&sort=".urlencode($sort));
 
 
 page_header("Debug Analysis");
@@ -30,7 +30,7 @@ if ($ascdesc_raw) $ascdesc="ASC";
 addnav("Sorting");
 addnav("By Total","debug.php?debug=".$debug."&sort=sum&direction=".$ascdesc_raw);
 addnav("By Average","debug.php?debug=".$debug."&sort=medium&direction=".$ascdesc_raw);
-addnav("Switch ASC/DESC","debug.php?debug=".$debug."&sort=".URLEncode($sort)."&direction=".(!$ascdesc_raw));
+addnav("Switch ASC/DESC","debug.php?debug=".$debug."&sort=".urlencode($sort)."&direction=".(!$ascdesc_raw));
 
 
 switch ($debug) {

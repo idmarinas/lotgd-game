@@ -29,27 +29,27 @@
 				{
 					if( get_module_pref('hidden','hiddenplayers',$row['acctid']) == TRUE )
 					{
-						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . URLEncode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '<i>-hidden</i></span></a>';
+						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . urlencode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '<i>-hidden</i></span></a>';
 					}
 					else
 					{
-						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . URLEncode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
+						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . urlencode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
 					}
-					addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".URLEncode($_SERVER['REQUEST_URI']));
+					addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".urlencode($_SERVER['REQUEST_URI']));
 				}
 				else
 				{
 					if( get_module_pref('hidden','hiddenplayers', $row['acctid']) == FALSE )
 					{
-						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . URLEncode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
-						addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".URLEncode($_SERVER['REQUEST_URI']));
+						$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . urlencode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
+						addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".urlencode($_SERVER['REQUEST_URI']));
 					}
 				}
 			}
 			else
 			{
-				$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . URLEncode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
-				addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".URLEncode($_SERVER['REQUEST_URI']));
+				$pre .= '<a href="bio.php?char=' . rawurlencode($row['login']) . '&ret=' . urlencode($_SERVER['REQUEST_URI']) . '"><span>' . $row['name'] . '</span></a>';
+				addnav('',"bio.php?char=".rawurlencode($row['login'])."&ret=".urlencode($_SERVER['REQUEST_URI']));
 			}
 
 			if( $count >= 3 && $i != ($count-1) && $i != $count )

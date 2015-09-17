@@ -530,7 +530,7 @@ function advertising_run(){
 			}else{
 				$ext = @substr($_FILES['bannerimage']['name'],strrpos($_FILES['bannerimage']['name'],'.'));
 				if ($ext=="") $ext = ".png";
-				$uploadfile = "modules/advertising/ad-".rawURLEncode($session['user']['acctid'])."-".date("YmdHis").$ext;
+				$uploadfile = "modules/advertising/ad-".rawurlencode($session['user']['acctid'])."-".date("YmdHis").$ext;
 				if (move_uploaded_file($_FILES['bannerimage']['tmp_name'], $uploadfile)){
 					$info = getimagesize($uploadfile);
 					debug($info);
