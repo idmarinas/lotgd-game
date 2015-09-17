@@ -383,7 +383,7 @@ VALUES
 	('alignmentbuffs', 'buffname3', 'Un poquito malvado'),
 	('alignmentbuffs', 'buffname4', 'En sintonia con la naturaleza'),
 	('alignmentbuffs', 'buffname5', 'Escudo de fe'),
-	('alignmentbuffs', 'buffname6', 'Proctor del mundo'),
+	('alignmentbuffs', 'buffname6', 'Protector del mundo'),
 	('alignmentbuffs', 'buffturns1', '500'),
 	('alignmentbuffs', 'buffturns2', '250'),
 	('alignmentbuffs', 'buffturns3', '100'),
