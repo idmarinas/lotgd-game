@@ -406,7 +406,6 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	
 	if (!$returnlink){
 		$returnlink = urlencode($_SERVER['REQUEST_URI']);
-		$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
 	}
 	
 	if ($showmodlink){
@@ -494,7 +493,7 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	}
 	
 	//this array of userids means that with a single query we can figure out who's online and nearby
-	$acctidstoquery=array(1);
+	$acctidstoquery=array();
 	
 	//prepare the actual comment line part of the comment - is it hidden, is it an action, is it a game comment, should we show a moderation link, clan rank colours, posting date abs/rel
 	$loop1start = getmicrotime(true);
@@ -615,7 +614,7 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	
 	//get offline/online/nearby status
 	$acctids = join(',',$acctidstoquery);
-	$onlinesql = "SELECT acctid, laston, loggedin, chatloc FROM ".db_prefix("accounts")." WHERE acctid IN ($acctids)";
+	$onlinesql = "SELECT acctid, laston, loggedin, chatloc FROM ".db_prefix("accounts"). (!empty($acctids) ? " WHERE acctid IN ($acctids)" : "");
 	//cache it for 30 seconds
 	if (!$com){
 		$onlineresult = db_query_cached($onlinesql,"commentary/whosonline_".$section,30);
@@ -938,7 +937,6 @@ function viewcommentary($section,$message="Interject your own commentary?",$limi
 	
 	if (!$returnlink){
 		$returnlink = urlencode($_SERVER['REQUEST_URI']);
-		$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
 	}
 	
 	if (($session['user']['superuser'] & SU_EDIT_COMMENTS) || $overridemod){
@@ -1037,7 +1035,6 @@ function commentaryfooter($section,$message="Interject your own commentary?",$li
 	$val = round($val['c'] / $limit + 0.5,0) - 1;
 
 	$returnlink = urlencode($_SERVER['REQUEST_URI']);
-	$returnlink = substr($returnlink,strrpos($returnlink,"/")+1);
 	$returnlink = urlencode(buildcommentarylink("&frombio=true",$returnlink));
 	
 	$hook = array(
