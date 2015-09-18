@@ -181,6 +181,7 @@ if ($target = db_fetch_assoc($result)) {
 	  } else {
 		  addnav("Return whence you came",$return);
 	  }
+    addnav("Return to village",'village.php');
 	  tlschema();
   }
 	page_footer();
