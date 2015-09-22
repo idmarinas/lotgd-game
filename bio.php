@@ -157,6 +157,7 @@ if ($target = db_fetch_assoc($result)) {
 		  addnav("Return to the warrior list",$return);
 	  } else {
 		  addnav("Return whence you came",$return);
+      addnav("Return to village",'village.php');
 	  }
 	  tlschema();
   }
