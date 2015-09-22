@@ -10,6 +10,9 @@ function lumberyard_planttree(){
 	$allprefs=unserialize(get_module_pref('allprefs'));
 	$usedlts=$allprefs['usedlts'];
 	$remaining=$plantneed-$remainsize;
+	
+	$module = true;
+	$eventtype = '';
 	if ($session['user']['turns']<2){
 		output("`c`n`b`QT`qhe `QL`qumber `QY`qard`b`c`n`n");
 		output("`#'You look too tired to plant trees.");
@@ -17,6 +20,8 @@ function lumberyard_planttree(){
 		addnav("`@Back to the Forest","forest.php");
 		addnav("Remind Me of the Rules","runmodule.php?module=lumberyard&op=rules");
 		addnav("`@T`7he `@F`7oreman's `@O`7ffice","runmodule.php?module=lumberyard&op=office");
+		
+		$eventtype = 'tired';
 	}elseif ($usedlts>= $lumberturns) {
 		output("`c`n`b`QT`qhe `QL`qumber `QY`qard`b`c`n`n");
 		output("`#'Thank you for your enthusiasm, but I think you've spent enough time in the `b`QT`qhe `QL`qumber `QY`qard`b`#.'`n`n");
@@ -25,6 +30,8 @@ function lumberyard_planttree(){
 		addnav("Remind Me of the Rules","runmodule.php?module=lumberyard&op=rules");
 		addnav("`@T`7he `@F`7oreman's `@O`7ffice","runmodule.php?module=lumberyard&op=office");
 		if ($remainsize<$plantneed) output("I think the yard should be ready once we've got `6 %s more trees`# planted.`n`n",$remaining);
+		
+		$eventtype = 'noturns';
 	}elseif ($remainsize>=$fullsize){
 		output("`c`n`b`$ Forest Too Full To Plant`b`c`n`n");
 		output("`#'Thank you for your enthusiasm.");
@@ -34,6 +41,8 @@ function lumberyard_planttree(){
 		addnav("Cut Trees","runmodule.php?module=lumberyard&op=work");
 		addnav("Remind Me of the Rules","runmodule.php?module=lumberyard&op=rules");
 		addnav("`@T`7he `@F`7oreman's `@O`7ffice","runmodule.php?module=lumberyard&op=office");
+		
+		$eventtype = 'forestfull';
 	}else{
 		if ($remainsize>=$plantneed && get_module_objpref("city",$loc,"cutdown","lumberyard")==1){
 			$allprefs['ccspiel']=0;
@@ -49,8 +58,18 @@ function lumberyard_planttree(){
 			$allprefs=unserialize(get_module_pref('allprefs'));
 		}else{
 			require_once("modules/lumberyard/lumberyard_func.php");
-			lumberyard_planttrees();		
+			lumberyard_planttrees();
+			$module = false;
 		}
+	}
+	
+	if ($module)
+	{
+		//-- Activar hook de platar árboles
+		modulehook('lumberyard-planttree', array(
+			'treesplanted' => 0,
+			'event' => $eventtype
+		));
 	}
 }
 ?>

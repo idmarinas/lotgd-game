@@ -18,20 +18,27 @@ function lumberyard_planttrees(){
 	$allprefs['planthof']++;
 	$session['user']['turns']-=2;
 	// $plantneed=get_module_setting("plantneed");
-	increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");	
+	increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");
+	//-- Para saber los árboles que se han plantado
+	$treesplanted = 1;
 	$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 	// $remainsize=get_module_setting("remainsize");
 	switch(e_rand(1,5)){
 		case 1:
 			switch(e_rand(1,10)){
 				case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+					increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");
 					output("`^You do so well at planting trees that the foreman digs deep into his pocket and hands you `%a gem`^!`n`n");
 					output("`#'Thanks to your work, the yard now has `6 %s trees`# planted.'`n`n",$remainsize);
 					$session['user']['gems']++;
 					debuglog("gained a gem planting 2 trees in the lumberyard.");
+					
+					//-- Tipo de evento que se encuentra al plantar un árbol
+					$treesplanted = 2;
+					$eventtype = 'find-gem';
 				break;
 				case 10:
-					increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");
+					increment_module_objpref("city", $loc, "remainsize", -1, "lumberyard");					
 					$exploss = round($session['user']['experience']*.05);
 					output("`^Well, this is just really bad luck.");
 					output("The madman`b`$ %s `b`^sees you trying to plant trees.",$clearcutter);
@@ -49,6 +56,12 @@ function lumberyard_planttrees(){
 					$session['user']['experience']-=$exploss;
 					$session['user']['hitpoints']=1;
 					debuglog("became mostly dead trying to plant trees in the lumberyard and lost $exploss and left with 1 hitpoint.");
+					
+					//El odioso impide que plantes el árbol
+					$treesplanted = 0;
+					
+					//-- Tipo de evento que se encuentra al plantar un árbol
+					$eventtype = 'find-clearcutter';
 				break;
 			}
 		break;
@@ -61,6 +74,9 @@ function lumberyard_planttrees(){
 			output("`#'Thanks to your work, the yard now has `6 %s trees`# planted.'`n`n",$remainsize);
 			$session['user']['hitpoints']+= 25;
 			debuglog("planted a tree and gained 25 hitpoints in the lumberyard.");
+			
+			//-- Tipo de evento que se encuentra al plantar un árbol
+			$eventtype = 'get-hitpoint';
 		break;
 		case 3:
 			output("`^Being outdoors planting trees is invigorating.");
@@ -70,6 +86,9 @@ function lumberyard_planttrees(){
 			output("`#'Thanks to your work, the yard now has `6 %s trees`# planted.'`n`n",$remainsize);
 			$session['user']['turns']+=5;
 			debuglog("planted a tree and gained 5 turns planting a tree in the lumberyard.");
+			
+			//-- Tipo de evento que se encuentra al plantar un árbol
+			$eventtype = 'get-turns';
 		break;
 		case 4:
 			output("`^With great gusto you plant the trees.");
@@ -82,6 +101,9 @@ function lumberyard_planttrees(){
 			$session['user']['gold']+=200;
 			$session['user']['charm']++;
 			debuglog("planted a tree and gained 200 gold and 1 charm in the lumberyard.");
+			
+			//-- Tipo de evento que se encuentra al plantar un árbol
+			$eventtype = 'find-gold-charm';
 		break;
 		case 5:
 			output("`^The foreman watches you work and notices how efficient you are.");
@@ -94,9 +116,18 @@ function lumberyard_planttrees(){
 			));
 			output("`#'Thanks to your work, the yard now has `6 %s trees`# planted.'`n`n",$remainsize);
 			debuglog("planted a tree and gained the Lemonade Rush Buff in the lumberyard.");
+			
+			//-- Tipo de evento que se encuentra al plantar un árbol
+			$eventtype = 'get-lemonade';
 		break;
 	}
 	set_module_pref('allprefs',serialize($allprefs));
+	
+	//-- Activar hook de platar árboles
+	modulehook('lumberyard-planttree', array(
+		'treesplanted' => $treesplanted,
+		'event' => $eventtype
+	));
 }
 function lumberyard_sellsquare(){
 	global $session;
@@ -115,6 +146,9 @@ function lumberyard_sellsquare(){
 	if ($sell >= $max) $sell = $max;
 	if ($max < $sell) {
 		output("`^Foreman N. Hanson looks at you bewildered. `#'You know you don't have that many squares!'`n`n"); 
+		
+		//-- Cantidad que se vende y el precio
+		$quantity = $cost = 0;
 	}else{
 		$cost=$sell * $squarepay;
 		$session['user']['gold']+=$cost;
@@ -124,6 +158,18 @@ function lumberyard_sellsquare(){
 		set_module_pref('allprefs',serialize($allprefs));
 		increment_module_setting("woodsold",$sell);
 		output("`^Foreman N. Hanson gives you `b%s gold`b in return for`& %s %s`^.",$cost,$sell,translate_inline($sell>1?"squares":"square"));
+		
+		//-- Cantidad que se vende
+		$quantity = $sell;
 	}
+	
+	
+	//-- Entrar en la oficina
+	modulehook('lumberyard', array(
+		'event' => 'sellsquare',
+		'type' => 'office',
+		'quantity' => $quantity,
+		'cost' => $cost
+	));
 }
 ?>

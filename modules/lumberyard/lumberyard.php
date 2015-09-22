@@ -102,6 +102,8 @@ if ($op!="superuser"){
 }
 if ($op=="enter") {
 	// $cutdown=get_module_setting("cutdown");
+	$lumberyardState = '';
+	$gold = 0;
 	$ccspiel=$allprefs['ccspiel'];
 	if ($cutdown==1 && $ccspiel==0) {
 		$allprefs['ccspiel']=1;
@@ -116,6 +118,9 @@ if ($op=="enter") {
 		if ($session['user']['turns']>1) addnav("Yes, I'll help","runmodule.php?module=lumberyard&op=clearyes");
 		addnav("No, but show me my Ledger","runmodule.php?module=lumberyard&op=clearno");
 		addnav("`@No, Back to the Forest","forest.php");
+		
+		//-- Estado: Alerta de deforestación
+		$lumberyardState = 'clear-cut-alert';
 	}elseif ($cutdown==1 && $ccspiel==1) {
 		if ($remainsize>=$plantneed) {
 			set_module_objpref("city",$loc,"cutdown", 0, "lumberyard");
@@ -128,6 +133,9 @@ if ($op=="enter") {
 			addnav("Plant Trees","runmodule.php?module=lumberyard&op=clearyes");
 			addnav("No, but show me my Ledger","runmodule.php?module=lumberyard&op=office");
 			addnav("`@No, Back to the Forest","forest.php");
+			
+			//-- Estado: El aserradero se vuelve a abrir después de ser deforestado
+			$lumberyardState = 'clear-cut-open';
 		}elseif ($usedlts < $lumberturns) {
 			output("`n`$ `c`b Clear Cut Alert`b`n`n`c");
 			output("`^The foreman approaches you.");
@@ -137,12 +145,18 @@ if ($op=="enter") {
 			if ($session['user']['turns']>1) addnav("Yes, I'll help","runmodule.php?module=lumberyard&op=clearyes");
 			addnav("No, but show me my Ledger","runmodule.php?module=lumberyard&op=clearno");
 			addnav("`@No, Back to the Forest","forest.php");
+			
+			//-- Estado: Se requiere plantar más árboles
+			$lumberyardState = 'need-trees';
 		}else{
 			output("`c`n`b`$ Tree Shortage Alert`b`c`n`n");
 			output("`#Thank you for your enthusiasm, but I think you've spent enough time in the `b`QT`qhe `QL`qumber `QY`qard`b`#.");
 			output("`n`nPlease stop by to help tomorrow.`n`n");
 			addnav("`@Back to the Forest","forest.php");
 			if ($remainsize<$plantneed)	output("I think the yard should be ready once we've got `6 %s more trees`# planted.`n`n",$remaining);
+			
+			//-- Estado: Ya no dispone de turnos para poder ayudar
+			$lumberyardState = 'clear-cut-noturns';
 		}
 	}elseif ($plantneed>$remainsize){
 		output("`n`$ `c`bLumber Yard Shortage Warning`b`n`n`c");
@@ -153,11 +167,14 @@ if ($op=="enter") {
 		output("'You can reduce that number by one if you agree to help plant for 2 turns.'`n`n'Would you be able to give some of your time to plant more trees?'`n`n");
 		output("'I'm not going to stop you from chopping trees though, but I have to warn you that it's not really very nice to chop trees down if there's a shortage.'`n`n");
 		if ($session['user']['turns']>1) {
-			addnav("Yes, I'll help","runmodule.php?module=lumberyard&op=planttree");
+			addnav("Yes, I'll help","runmodule.php?module=lumberyard&op=clearyes");
 			addnav("I want to Chop","runmodule.php?module=lumberyard&op=evilchop");
 		}
 		addnav("No, but show me my Ledger","runmodule.php?module=lumberyard&op=shortoffice");
 		addnav("`@No, Back to the Forest","forest.php");
+		
+		//-- Estado: Solicitud de ayuda del capataz
+		$lumberyardState = 'foreman-help';
 	}else{
 		output("`n`c`b`QT`qhe `QL`qumber `QY`qard`0`c`b`n");
 		if ($allprefs['firstl']==1){
@@ -165,6 +182,9 @@ if ($op=="enter") {
 			output("`^There are currently`6 %s `^trees available in the forest.`n`n",$remainsize);
 			output("`^You now have`b`& %s `b%s of Wood`^.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"));
 			output("`^You are on `Q`bPhase %s`b`^.`n`n",$phase);
+			
+			//-- Estado: Solicitud de ayuda del capataz
+			$lumberyardState = 'enter-more';
 		}else{
 			$allprefs['firstl']=1;
 			debuglog("entered the Lumberyard Office and heard the rules.");
@@ -177,18 +197,32 @@ if ($op=="enter") {
 			output("`#'Man, you really ARE new to this. Okay, here's how things work around here:'`n`n");
 			require_once("modules/lumberyard/lumberyard_rules.php");
 			lumberyard_rules();
+			
+			//-- Estado: Solicitud de ayuda del capataz
+			$lumberyardState = 'enter-first-time';
 		}
 		require_once("modules/lumberyard/lumberyard_navs.php");
 		lumberyard_navs();
 	}
+	
+	//-- Activador para diversas funciones
+	modulehook('lumberyard-enter', array(
+		'event' => $lumberyardState //Indica si el aserradero está abierto (su estado)
+	));
 }
 if ($op=="clearyes" || $op=="planttree") {
 	require_once("modules/lumberyard/lumberyard_planttree.php");
 	lumberyard_planttree();
+	
+	//-- Se acepta ayudar a plantar
+	if ($op=="clearyes") modulehook('lumberyard', array('event'=>'acept-tohelp'));
 }
 if ($op=="shortoffice" || $op=="clearno") {
 	require_once("modules/lumberyard/lumberyard_office.php");
 	lumberyard_office();
+	
+	//-- Se rechaza ayudar a plantar
+	if ($op=="clearno") modulehook('lumberyard', array('event'=>'reject-tohelp'));
 }
 if ($op=="clearcutsell" || $op=="shortsell"){
 	addnav("`@To the forest","forest.php");
@@ -198,19 +232,29 @@ if ($op=="clearcutsell" || $op=="shortsell"){
 }
 if($op=="evilchop"){
 	output("`c`n`b`$ Forest Tree Level Low`b`c`n");
+	$eventType = '';
 	if ($session['user']['turns']<2){
 		output("`#'You look too tired to plant trees.");
 		output("Why don't you come back when you're feeling a little more energetic?'`n`n");
 		addnav("`@Back to the Forest","forest.php");
+		
+		//-- Intenta talar pero no tiene turnos
+		$eventType = 'evilchop-noturns';
 	}elseif ($usedlts>=$lumberturns){
 		output("`#'You've spent enough time in `b`QT`qhe `QL`qumber `QY`qard`b`#.");
 		output("Try back tomorrow.'");
 		addnav("`@To the Forest","forest.php");
+		
+		//-- Intenta talar pero no tiene turnos
+		$eventType = 'evilchop-noturns';
 	}elseif($remainsize<=0){
 		output("`#'Well, there are no trees to chop down.");
 		output("You can plant some though, or you can go back to what's left of the forest to destroy something else.'");
 		addnav("`@To the Forest","forest.php");
 		addnav("Plant Trees","runmodule.php?module=lumberyard&op=planttree");
+		
+		//-- Intenta talar ya no quedan árboles
+		$eventType = 'evilchop-notrees';
 	}else{
 		output("'Well, it is against my advice for you to cut trees when the forest is running low, but hey, it's your choice.`n`n");
 		debuglog("cut down a tree despite a tree shortage in the lumberyard.");
@@ -219,14 +263,22 @@ if($op=="evilchop"){
 			case 1: case 2: case 3:
 				output("`^You walk past the foreman carrying your axe.");
 				output("It looks like nobody else noticed.`n`n");
+				
+				//-- Coge el hacha
+				$eventType = 'evilchop-take-axe';
 			break;
 			case 4: case 5:
 				output("`^This is really a bad idea.");
 				output("An evil idea.");
 				output("In fact, you feel a little`$ evil`^ for going forward with it.");
 				addnews("%s `$ decided that cutting down trees is a right, even when the forest is low on trees.",$session['user']['name']);
-				if (is_module_active('alignment')) increment_module_pref("alignment",-get_module_setting("alignevil"),"alignment");
+				if (is_module_active('alignment')) increment_module_pref("alignment",-$align,"alignment");
+				$align = get_module_setting("alignevil");
 				debuglog("cut down a tree despite a tree shortage in the lumberyard.");
+				
+				//-- Se hace más malvado
+				$eventType = 'evilchop-more-evil';
+				$gold = $align;
 			break;
 			case 6: case 7:
 				$gold=$session['user']['gold'];
@@ -234,6 +286,9 @@ if($op=="evilchop"){
 				output("`^You boldly walk past the townsfolk that are helping to plant the trees and go to chop some down.`n`n");
 				if ($gold==0){
 					addnews("%s `$ decided that cutting down trees is a right, even when the forest is low on trees.",$name);
+					
+					//-- Encuentra a un recaudador de impuestos
+					$eventType = 'evilchop-taxman-nogold';	
 				}else{
 					output("`^Before you get very far, the taxman taps you on the shoulder.`n`n");
 					output("`#'You realize that this forest is currently regulated because of the declining numbers of the native insect;");
@@ -241,15 +296,27 @@ if($op=="evilchop"){
 						output("the spike-headed katydid. We currently have a tax to help restore their habitat, and I think I'll just take all your money and call us even.'`n`n");
 						addnews("%s `$ decided that cutting down trees is a right and endangered the rare spike-headed katydid. There was no consideration for the fact that the forest is low on trees.",$name);
 						$session['user']['gold']=0;
+						//-- Encuentra a un recaudador de impuestos
+						$eventType = 'evilchop-taxman-gold';
 					}else{
 						output("baby red-blue eagles. We are currently have a tax to help restore their habitat, and today it's going to cost you `^150 gold `#to take down that tree.'`n`n");
 						addnews("%s `$ decided that cutting down trees is a right and probably killed some baby eagles.  There was no consideration for the fact that the forest is low on trees.",$name);
-						$session['user']['gold']-=150;	
+						$session['user']['gold']-=150;
+						//-- Encuentra a un recaudador de impuestos
+						$gold = 150;
+						$eventType = 'evilchop-taxman-gold';
 					}
-				}
+				}		
 			break;
 		}
 	}
+	
+	//-- Se decide talar árboles cuando la población es baja
+	modulehook('lumberyard', array(
+		'type' => 'evilchop',
+		'event' => $eventType,
+		'quantity' => $gold
+	));
 }
 if($op=="rules"){
 	output("`n`c`b`QT`qhe `QL`qumber `QY`qard `QR`qules`0`c`b`n");
@@ -259,6 +326,11 @@ if($op=="rules"){
 	require_once("modules/lumberyard/lumberyard_navs.php");
 	lumberyard_navs();
 	blocknav("runmodule.php?module=lumberyard&op=rules");
+	
+	//-- Ver las reglas del aserradero
+	modulehook('lumberyard-enter', array(
+		'type' => 'rules',
+	));
 }
 if($op=="chopfruit"){
 	output("`n`c`b`QT`qhe `QL`qumber `QY`qard`0`c`b`n");
@@ -293,6 +365,11 @@ if($op=="chopfruit"){
 	addnews("`^Somebody intentionally chopped down one of %s`^'s trees in the orchard",$name);
 	require_once("modules/lumberyard/lumberyard_navs.php");
 	lumberyard_navs();
+	
+	//-- Se decide talar árboles frutales
+	modulehook('lumberyard', array(
+		'event' => 'chopfruit'
+	));
 }
 if($op=="savefruit"){
 	output("`n`c`b`QT`qhe `QL`qumber `QY`qard`0`c`b`n");
@@ -312,6 +389,11 @@ if($op=="savefruit"){
 	addnews("%s`^ spared one of %s`^'s trees in the orchard! Hurray for good people!",$session['user']['name'],$name);
 	require_once("modules/lumberyard/lumberyard_navs.php");
 	lumberyard_navs();
+	
+	//-- Se decide salvar un árbol frutal y no talarlo
+	modulehook('lumberyard', array(
+		'event' => 'savefruit'
+	));
 }
 if($op=="work"){
 	if ($phase>=4 || $phase<=0) {
@@ -363,6 +445,9 @@ if ($op=="attack") {
 			"type"=>"bear");
 		$session['user']['badguy']=createstring($badguy);
 		$op="fight";
+		
+		//-- Ser atacado por un oso
+		$eventType = 'bear';
 	}elseif ($phase==1){
 		//lumberjack
 		$level = $session['user']['level'];
@@ -379,7 +464,16 @@ if ($op=="attack") {
 			"type"=>"lumberjack");
 		$session['user']['badguy']=createstring($badguy);
 		$op="fight";
+		
+		//-- Ser atacado por un leñador
+		$eventType = 'lumberjack';
 	}
+	
+	//-- Se decide salvar un árbol frutal y no talarlo
+	modulehook('lumberyard', array(
+		'event' => $eventType,
+		'type' => 'attack'
+	));
 }
 //start here
 if ($op=="fight"){ $battle=true; }
@@ -395,6 +489,9 @@ if ($battle){
 			output("`n`@`bYou've gained `#%s experience`@.`b`n`n",$expgain);
 			output("`bThe adrenaline rush allows you to finish`Q Phase 2`@ and you `2don't lose a turn`@!`b`n`n");
 			if(is_module_active("bearhof")) increment_module_pref("bearkills",1,"bearhof");
+			
+			//-- Vencer a un oso
+			$eventType = 'bear';
 		}elseif ($phase==1){
 			//lumberjack
 			$expbonus=$session['user']['dragonkills']*6;
@@ -402,11 +499,20 @@ if ($battle){
 			output("`n`b`@You've gained `#%s experience`@.`b`b`n`n",$expgain);
 			output("`b`@The adrenaline rush allows you to finish `QPhase 3`@ and you `2don't lose a turn`@!`n`n");
 			output("`^You now have`& %s Squares of Wood`^.`n`nThere are now`6 %s trees `^left in the forest.`n`n",$squares,$remainsize);
+			
+			//-- Vencer a un leñador
+			$eventType = 'lumberjack';
 		}
 		$session['user']['turns']++;
 		$session['user']['experience']+=$expgain;
 		require_once("modules/lumberyard/lumberyard_navs.php");
 		lumberyard_navs();
+		
+		//-- Derrotar a un oso
+		modulehook('lumberyard', array(
+			'event' => $eventType,
+			'type' => 'fight-victory'
+		));
     }elseif($defeat){
 		require_once("lib/taunt.php");
 		$exploss = round($session['user']['experience']*.1);
@@ -426,6 +532,9 @@ if ($battle){
 			$session['user']['alive'] = false;
 			$session['user']['hitpoints'] = 0;
 			debuglog("was defeated by a bear in the lumberyard.");
+			
+			//-- Perder por un leñador
+			$eventType = 'bear';
 		}elseif ($phase==1){
 			//lumberjack
 			output("`n`n`b`$ The Lumber Jack steals your `^gold `4and leaves you for dead, but you fool him by not dying!`b`n`n");
@@ -440,8 +549,17 @@ if ($battle){
 			increment_module_objpref("city", $loc, "remainsize", 1, "lumberyard");
 			$session['user']['hitpoints'] = 1;
 			debuglog("was defeated by a lumberjack in the lumberyard.");
+			
+			//-- Perder por un leñador
+			$eventType = 'lumberjack';
 		}
 		set_module_pref('allprefs',serialize($allprefs));
+		
+		//-- Ser derrotado por un oso o un leñador
+		modulehook('lumberyard', array(
+			'event' => $eventType,
+			'type' => 'fight-defeated'
+		));
 	}else{
 		require_once("lib/fightnav.php");
 		fightnav(true,false,"runmodule.php?module=lumberyard");
@@ -450,6 +568,12 @@ if ($battle){
 if($op=="office"){
 	require_once("modules/lumberyard/lumberyard_basicoffice.php");
 	lumberyard_basicoffice();
+	
+	//-- Entrar en la oficina
+	modulehook('lumberyard', array(
+		'event' => 'enter',
+		'type' => 'office'
+	));
 }
 if ($op=="squaresell"){
 	require_once("modules/lumberyard/lumberyard_navs.php");
