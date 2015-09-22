@@ -4,7 +4,7 @@ $cat = get_module_pref("giftcat");
 //First, let's determine just what the item is, and record it thusly
 require_once( './modules/mysticalshop/lib.php' );
 
-$gift = mysticalshop_additem( $giftid, $cat );
+$gift = mysticalshop_additem( $giftid, $cat, false );
 if( $gift['name'] !== false )
 {
 	output("`n`2%s`2 compliments you on your gift:`n`n", $shopkeep);
