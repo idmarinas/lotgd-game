@@ -151,12 +151,11 @@ function forestdefeat($enemies,$where="in the forest"){
 	if (isset($lastname) && $lastname > "") $enemystring = "$enemystring $and $lastname";
 	$taunt = select_taunt_array();
 	//leave it for now, it's tricky 
-	/*if (is_array($where)) {
+	if (is_array($where)) {
 		$where=sprintf_translate($where);
 	} else {
 		$where=translate_inline($where);
-	}*/
-	$where = translate_inline($where);
+	}
 	$deathmessage=select_deathmessage_array(true,array("{where}"),array($where));
 	if ($deathmessage['taunt']==1) {
 		addnews("%s`n%s",$deathmessage['deathmessage'],$taunt);
