@@ -25,7 +25,6 @@ function lumberyard_phase1(){
 	elseif($n>100) $chopchance=3;
 	output("`^You grab your axe to attack a tree with all your strength.`n`n");
 	switch(e_rand(1,20)){
-	//switch (18){
 		case 1: case 2: case 3: case 4:
 			if (is_module_active("orchard")){
 				$allprefsorch=unserialize(get_module_pref('allprefs','orchard'));
@@ -48,6 +47,14 @@ function lumberyard_phase1(){
 			$session['user']['gems']+=$gems;
 			$session['user']['charm']--;
 			debuglog("completed phase 1 of the lumberyard and gained 100 gold, $gems gems, and lost 1 turn.");
+			
+			//-- Datos para los hook se encuentra escrementos de oso
+			return array(
+				'event' => 'beargem',
+				'gems' => $gems,
+				'gold' => 100,
+				'charm' => -1
+			);
 		break;
 		case 11:
 			output("`^As the tree falls, you realize you have no clue what you are doing and it falls right at you! You nimbly jump out of the way and smile at your good fortune.");
@@ -58,17 +65,32 @@ function lumberyard_phase1(){
 			$allprefs['phase']=1;
 			set_module_pref('allprefs',serialize($allprefs));
 			debuglog("almost got crushed by a tree in the lumberyard and was left with 1 hitpoint.");
+			
+			//-- Datos para los hook casi se corta una pierna
+			return array(
+				'event' => 'hitleg'
+			);
 		break;
 		case 12:
 			output("`^Your efficiency is inspiring. You are able to cut the tree, trim it down, and transport it back to the mill. `n`nYou accomplish `QTwo Phases`^ in `@one turn`^!");
 			$allprefs['phase']=3;
 			set_module_pref('allprefs',serialize($allprefs));
 			debuglog("completed phase 1 and 2 of the lumberyard all in one turn.");
+			
+			//-- Datos para los hook se completa la fase 1 y 2 en un turno
+			return array(
+				'event' => 'complete-phase-1-2'
+			);
 		break;
 		case 13:
 			output("`^You chop the tree down and trim it just as planned. The work takes `@one turn`^ to complete.`n`nHowever, when you finish, you look around and see `%a gem`^ in the dirt.");
 			$session['user']['gems']++;
 			debuglog("completed phase 1 of the lumberyard and gained a gem.");
+			
+			//-- Datos para los hook se encuentra una gema
+			return array(
+				'gems' => 1
+			);
 		break;
 		case 14:
 			$gold=$session['user']['gold'];
@@ -88,9 +110,16 @@ function lumberyard_phase1(){
 					output("lose some of your gold. You find you've `blost 100 gold`b!");
 					$session['user']['gold']-=100;
 					debuglog("completed phase 1 of the lumberyard and lost 100 gold.");
+					
+					$gold = 100;
 				}
 			}
 			output("`n`nYou've completed `QPhase 1`^ of work in the lumber yard. It only took you `@one turn`^.`n`n");
+			
+			//-- Datos para los hook pierde oro (en caso de tenerlo)
+			return array(
+				'gold' => -$gold
+			);
 		break;
 		case 15:
 			switch(e_rand(1,5)){
@@ -99,6 +128,11 @@ function lumberyard_phase1(){
 					output("`n`nAfter brushing yourself off and counting all of your fingers, you take a deep breath and think about how fortune has smiled upon you.`n`n");
 					output("You've completed `QPhase 1`^ of work in the lumber yard. It only took you `@one turn`^.`n`n");
 					debuglog("completed phase 1 of the lumberyard.");
+					
+					//-- Datos para los hook casi se le cae un árbol encima
+					return array(
+						'event' => 'treefall-save',
+					);
 				break;
 				case 4: case 5:
 					$lumberturns=get_module_setting("lumberturns");
@@ -114,9 +148,19 @@ function lumberyard_phase1(){
 					lumberyard_blocknavs();
 					$session['user']['experience']-=$exploss;
 					$session['user']['hitpoints']=1;
-					$session['user']['gold']*=.5;
+					$gold = $session['user']['gold']*.5;
+					$session['user']['gold'] = $gold;
 					debuglog("was almost crushed by a tree, lost $exploss, 1/2 gold, and left with 1 hitpoint.");
+					
+					//-- Datos para los hook se le cae un árbol encima
+					return array(
+						'event' => 'treefall-deadly',
+						'experience' => $exploss,
+						'gold' => $gold
+					);
 				break;
+				
+				
 			}
 		break;
 		case 16:
@@ -138,6 +182,11 @@ function lumberyard_phase1(){
 				"roundmsg"=>"`5The Minstrels sing`%' When danger reared its ugly head, you bravely turned your tail and fled!'",
 			));
 			debuglog("has some minstrels following him around from the lumberyard.");
+			
+			//-- Datos para los hook se encuentra con juglares
+			return array(
+				'event' => 'minstrels',
+			);
 		break;
 		case 17:
 			output("`^As you approach a tree, you are suddenly surrounded!`n`nYou fall to the ground paralyzed as a group of towering knights start shouting at you in a menacing tone!`n`n");
@@ -152,6 +201,11 @@ function lumberyard_phase1(){
 				"roundmsg"=>"`$ NI! NI! NI! NI!",
 			));
 			debuglog("completed phase 1 of the lumberyard and gained the NI! NI! NI! buff.");
+			
+			//-- Datos para los hook se encuentra con caballeros
+			return array(
+				'event' => 'knights'
+			);
 		break;
 		case 18:
 			//is the orchard active, are you allowed to chop down trees, and are there trees higher than apple available to be chopped down?
@@ -190,6 +244,11 @@ function lumberyard_phase1(){
 				}
 				output("and gives it to %s`^.",$name);
 				output("`n`n`^ You wonder off to cut down a NON-fruit tree. You `@lose one turn`^ finishing `QPhase 1`^.");
+				
+				//-- Datos para los hook casi tala un árbol frutal
+				return array(
+					'event' => 'orchard-nocut'
+				);
 			}else{
 				output("`^You've got this down. With amazing efficiency you take down the tree and trim the branches down. This was a very successful session.`n`n");
 				output("You've completed `QPhase 1`^ of work in the lumber yard. It only took you `@one turn`^.`n`n");
@@ -236,6 +295,11 @@ function lumberyard_phase1(){
 				blocknav("forest.php");
 				require_once("modules/lumberyard/lumberyard_blocknavs.php");
 				lumberyard_blocknavs();
+				
+				//-- Datos para los hook se encuentra con un árbol frutal y tiene que tomar una decisión de cortar o no cortar
+				return array(
+					'event' => 'orchard-dilemna'
+				);
 			}else{
 				output("`^You've got this down. With amazing efficiency you take down the tree and trim the branches down. This was a very successful session.`n`n");
 				output("You've completed `QPhase 1`^ of work in the lumber yard. It only took you `@one turn`^.`n`n");
@@ -300,6 +364,11 @@ function lumberyard_phase1(){
 				addnews("%s`^ accidentally chopped down one of %s`^'s trees in the orchard",$session['user']['name'],$name);
 				$session['user']['turns']+=3;
 				debuglog("accidentally chopped down one of $name's trees in the orchard.");
+				
+				//-- Datos para los hook se encuentra con un árbol frutal y lo tala por accidente
+				return array(
+					'event' => 'orchard-accidental-cut'
+				);
 			}else{
 				output("`^You've got this down. With amazing efficiency you take down the tree and trim the branches down. This was a very successful session.`n`n");
 				output("You've completed `QPhase 1`^ of work in the lumber yard. It only took you `@one turn`^.`n`n");

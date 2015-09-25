@@ -416,14 +416,17 @@ if($op=="work"){
 		output("Try back tomorrow.'");
 	}elseif ($phase==1){
 		require_once("modules/lumberyard/lumberyard_phase1.php");
-		lumberyard_phase1();
+		$event = lumberyard_phase1();
 	}elseif ($phase==2){
 		require_once("modules/lumberyard/lumberyard_phase2.php");
-		lumberyard_phase2();
+		$event = lumberyard_phase2();
 	}elseif ($phase==3){
 		require_once("modules/lumberyard/lumberyard_phase3.php");
-		lumberyard_phase3();
+		$event = lumberyard_phase3();
 	}
+	
+	//-- Talar árboles y eventos que pueden pasar
+	modulehook('lumberyard-cuttree', $event);
 }
 if ($op=="attack") {
 	$allprefs=unserialize(get_module_pref('allprefs'));

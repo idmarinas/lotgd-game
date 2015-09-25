@@ -22,6 +22,11 @@ function lumberyard_phase3(){
 			output("`n`nYou've completed `QPhase 3`^ in `@one turn`^.`n`n");
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood.");
+			
+			//-- Datos para los hook consigue una pieza de madera
+			return array(
+				'wood' => 1
+			);
 		break;
 		case 11:
 			output("`@You're a lumber jack and you're okay!`nYou work all night and you sleep all day!`nYou cut down trees. You eat your lunch.`n");
@@ -37,6 +42,12 @@ function lumberyard_phase3(){
 				"roundmsg"=>"You cut down trees. You skip and jump.",
 			));
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and the Lumberjack Strength Buff.");
+			
+			//-- Datos para los hook consigue una pieza de madera y un buff de fuerza
+			return array(
+				'event' => 'lumberjack-buff',
+				'wood' => 1
+			);
 		break;
 		case 12:
 			output("`^You work well with the saw, but a board kicks back and gives you a nasty little cut on your cheek.");
@@ -44,6 +55,12 @@ function lumberyard_phase3(){
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			$session['user']['charm']++;
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and gained a charm.");
+			
+			//-- Datos para los hook consigue encanto
+			return array(
+				'wood' => 1,
+				'charm' => 1
+			);
 		break;
 		case 13:
 			output("`^You steal someone's lunch and sell it back to them. Wow, that's kinda funny.`n`n You `bgain 50 gold`b.");
@@ -51,6 +68,12 @@ function lumberyard_phase3(){
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			$session['user']['gold']+=50;
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and gained 50 gold.");
+			
+			//-- Datos para los hook consigue oro
+			return array(
+				'wood' => 1,
+				'gold' => 50
+			);
 		break;
 		case 14:
 			$fingergem=get_module_setting("fingergem");
@@ -64,6 +87,14 @@ function lumberyard_phase3(){
 			$session['user']['gems']+=$fingergem;
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and found 10 gold and $fingergem gems.");
+			
+			//-- Datos para los hook consigue una pieza de madera
+			return array(
+				'event' => 'findfingers',
+				'wood' => 1,
+				'gems' => $fingergem,
+				'gold' => 10
+			);
 		break;
 		case 15:
 			output("`^You notice a second log just outside of the building that some careless adventurer has left at the doorstep. You figure that it's better not to waste the log.");
@@ -81,6 +112,12 @@ function lumberyard_phase3(){
 			$remainsize=get_module_objpref("city",$loc,"remainsize","lumberyard");
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 			debuglog("completed Phase 3 in the Lumberyard and gained two squares of wood.");
+			
+			//-- Datos para los hook consigue dos pieza de madera
+			return array(
+				'event' => 'getwood-log',
+				'wood' => 2
+			);
 		break;
 		case 16:
 			addnav("Lumberjack`$ Fight","runmodule.php?module=lumberyard&op=attack");
@@ -97,6 +134,13 @@ function lumberyard_phase3(){
 			$session['user']['turns']+=3;
 			$session['user']['charm']+=2;
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and gained 3 turns and 2 charm.");
+			
+			//-- Datos para los hook consigue una pieza de madera y gana turnos y encanto
+			return array(
+				'wood' => 1,
+				'truns' => 3,
+				'charm' => 2
+			);
 		break;
 		case 18:
 			output("You finish your work and the foreman hands you a voucher for`& One Completed Square`^.");
@@ -114,6 +158,12 @@ function lumberyard_phase3(){
 				"roundmsg"=>"You think there's two of them attacking you, and they hit you twice as hard as usual",
 			));
 			debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and gained the hallucination buff.");
+			
+			//-- Datos para los hook consigue una pieza de madera y un buff de alucinación
+			return array(
+				'event' => 'hallucination',
+				'wood' => 1
+			);
 		break;
 		case 19:
 			if (is_module_active("bakery")) {
@@ -137,16 +187,29 @@ function lumberyard_phase3(){
 				lumberyard_blocknavs();
 				blocknav("forest.php");
 				debuglog("couldn't complete Phase 3 in the Lumberyard and got sent to Hara's Bakery.");
+				
+				//-- Datos para los hook consigue una pieza de madera
+				return array(
+					'event' => 'bakery',
+					'wood' => 0
+				);
 			}else{
 				output("`^You get a good rhythm going and get that log cut into perfect boards of 2 squares.`n`n");
 				output("The foreman comes over and smiles at your handiwork, giving you a voucher for`& One Square of Wood`^.");
 				output("You've completed `QPhase 3`^ in `@one turn`^.`n`n");
 				output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
 				debuglog("completed Phase 3 in the Lumberyard and gained a square of wood.");
+				
+				//-- Datos para los hook consigue una pieza de madera
+				return array(
+					'wood' => 1
+				);
 			}
 		break;
 		case 20:
 			if ($session['user']['gold']<200){
+				$gold = 0;
+				$turns = -1;
 				output("`^You were going to pay someone off to do the work but you don't have enough gold on you.");
 				output("You`@ waste a turn `^looking for someone to do the work and you `@lose a turn`^ getting the job done.`n`n");
 				$session['user']['turns']--;
@@ -154,6 +217,8 @@ function lumberyard_phase3(){
 				output("The foreman gives you a voucher for`& One Square of Wood`^.");
 				debuglog("completed Phase 3 in the Lumberyard and gained a square of wood and spend an extra turn there.");
 			}else{
+				$gold = 200;
+				$turns = 1;
 				output("`^You decide to pay off someone to do the work.");
 				output("So instead you get to run off to the forest to use your turn more wisely!");
 				output("`n`n After paying out `b200 gold`b, you go to the foreman to get your voucher for`& One Square of Wood`^.");
@@ -162,6 +227,13 @@ function lumberyard_phase3(){
 				debuglog("completed Phase 3 in the Lumberyard and gained a square of wood, spent 200 gold, and didn't lose a turn.");
 			}
 			output("`^You now have`& %s %s of Wood`^.`n`n`^There are now`6 %s trees `^left in the forest.`n`n",$squares,translate_inline($squares>1?"Squares":"Square"),$remainsize);
+			
+			//-- Datos para los hook pierde oro y gana o pierde un turno
+			return array(
+				'wood' => 1,
+				'gold' => $gold,
+				'turns' => $turns
+			);
 		break;
 	}
 }
