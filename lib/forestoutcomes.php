@@ -206,7 +206,7 @@ function buffbadguy($badguy){
 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2)); 
 		$base /=1000;
 		$bonus = 1 + $base*($atkflux+$defflux) + .001*$hpflux;
-		$badguy['creaturegold'] = round(($badguy['creaturegold']*$bonus)*0.6, 0);
+		$badguy['creaturegold'] = round($badguy['creaturegold']*$bonus, 0);
 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
 	}
 
