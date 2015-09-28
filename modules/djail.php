@@ -1,4 +1,4 @@
-<?
+<?php
 function djail_getmoduleinfo(){
 	$info = array(
 		"name"=>"Dragon Eggs Jail",

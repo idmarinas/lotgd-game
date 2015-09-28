@@ -1,4 +1,4 @@
-<?
+<?php
 	module_addhook("village");
 	module_addhook("newday");
 	module_addhook("footer-hof");   

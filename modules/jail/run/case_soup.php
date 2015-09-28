@@ -1,4 +1,4 @@
-<?
+<?php
 if ($session['user']['gems'] == 0)
 {
 	output

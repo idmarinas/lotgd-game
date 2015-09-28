@@ -2,12 +2,12 @@
 global $session;
 $op=httpget('op');
 switch($type){
-	case cellar:
+	case 'cellar':
 		output("`%You spot a seed in the darkness, picking it up you realize it's the apple seed you've been looking for!");
 		require_once("modules/orchard/orchard_func.php");
 		orchard_findseed();
 	break;
-	case forest:
+	case 'forest':
 		$session['user']['specialinc'] = "module:orchard";
 		$allprefs=unserialize(get_module_pref('allprefs'));
 		$seed= $allprefs['seed'];
@@ -93,7 +93,7 @@ switch($type){
 			$session['user']['specialinc']="";
 		}
 	break;
-	case darkalley:
+	case 'darkalley':
 		$session['user']['specialinc'] = "module:orchard";
 		if($session['user']['gold']<1000){
 			output("`n`7A shady figure approaches out of the darkness of the alley.`n");

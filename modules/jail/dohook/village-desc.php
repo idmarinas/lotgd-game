@@ -1,4 +1,4 @@
-<?
+<?php
 if(get_module_pref('wantedlevel') > 1)
 	output
 	(

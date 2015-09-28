@@ -1,4 +1,4 @@
-<?
+<?php
 if (get_module_pref('injail'))
 {
 	if ($session['user']['restorepage'] != "runmodule.php?module=jail&op=wakeup")

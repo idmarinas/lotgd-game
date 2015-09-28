@@ -1,4 +1,4 @@
-<?
+<?php
 function jail_getmoduleinfo()
 {
 	require("modules/jail/getmoduleinfo.php");

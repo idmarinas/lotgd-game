@@ -1,4 +1,4 @@
-<?
+<?php
 addnav("Be a witness", "runmodule.php?module=jail&op=witness"); 
 addnav("Be the Barrister", "runmodule.php?module=jail&op=barrister"); 
 addnav("Forget it", "runmodule.php?module=jail"); 

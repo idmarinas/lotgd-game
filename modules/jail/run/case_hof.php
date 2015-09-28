@@ -1,4 +1,4 @@
-<?
+<?php
 page_header("Most Wanted");
 $accounts 			= db_prefix("accounts");
 $module_userprefs 	= db_prefix("module_userprefs");

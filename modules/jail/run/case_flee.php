@@ -1,4 +1,4 @@
-<?
+<?php
 $number = e_rand(1,10);
 if ($number > 8)
 {

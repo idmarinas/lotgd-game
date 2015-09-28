@@ -1,4 +1,4 @@
-<?
+<?php
 output("Who will you defend?`n");
 addnav("Back to jail", "runmodule.php?module=jail");
 $name		= translate_inline("Name");

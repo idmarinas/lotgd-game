@@ -1,4 +1,4 @@
-<?
+<?php
 if (get_module_pref('injail')) redirect("runmodule.php?module=jail");
 if (get_module_setting('oneloc'))
 {

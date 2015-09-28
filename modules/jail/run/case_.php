@@ -1,4 +1,4 @@
-<?
+<?php
 $injail = get_module_pref('injail');
 set_module_pref("village", $session['user']['location']);
 if($session['user']['alive'] == 0) redirect("shades.php");

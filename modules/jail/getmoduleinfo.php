@@ -1,4 +1,4 @@
-<?
+<?php
 	$info = array
 	(
 		"name"		=> "The Jail",

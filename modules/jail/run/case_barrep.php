@@ -1,4 +1,4 @@
-<?
+<?php
 $player 	= httpget('player');
 $sql 		= "SELECT acctid, name,login,level FROM ".db_prefix("accounts")." WHERE acctid =".$player;
 $result 	= db_query($sql) or die(db_error(LINK));

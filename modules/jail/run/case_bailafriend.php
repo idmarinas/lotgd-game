@@ -1,4 +1,4 @@
-<?
+<?php
 addnav("Back to jail", "runmodule.php?module=jail");
 output("`n`n%s`7 pulls out his log book to show you who he has currently in a cell.`n`n", $sheriffname);
 $name				= translate_inline("Name");

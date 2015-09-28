@@ -1,4 +1,4 @@
-<?
+<?php
 $barrister		= get_module_pref("barrister");
 $sql			= "SELECT name FROM ".db_prefix("accounts")." WHERE acctid = $barrister";
 $result 		= db_query($sql) or die(db_error(LINK));
