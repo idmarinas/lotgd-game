@@ -359,7 +359,7 @@ function collect_materials($layout, $inventory)
 		'gold' => $squarepay
 	);
 		
-	if ($squares > 0)
+	if ($squares['quantity'] > 0)
 	{
 		$layout[] = 'Material,title';
 		$layout[] = 'Material';
