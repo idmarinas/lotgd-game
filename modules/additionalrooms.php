@@ -70,7 +70,7 @@ function additionalrooms_dohook($hookname,$args) {
 			$inventory = db_prefix('inventory');
 			$sql = "SELECT $item.itemid AS itemid, $item.name AS name FROM $item INNER JOIN $inventory ON $item.itemid = $inventory.itemid
 						WHERE $inventory.userid = {$session['user']['acctid']} AND $inventory.specialvalue={$args['dwid']}
-							AND $item.class = 'Rooms'";
+							AND $item.class = 'Habitación'";
 			$result = db_query($sql);
 			if (db_num_rows($result)) {
 				addnav("Manage rooms", "runmodule.php?module=additionalrooms&op=manage&dwid={$args['dwid']}");
@@ -83,7 +83,7 @@ function additionalrooms_dohook($hookname,$args) {
 			$inventory = db_prefix('inventory');
 			$sql = "SELECT $item.itemid AS itemid, $item.name AS name FROM $item INNER JOIN $inventory ON $item.itemid = $inventory.itemid
 						WHERE $inventory.userid = {$args['owner']} AND $inventory.specialvalue={$args['dwid']}
-							AND $item.class = 'Rooms' ORDER BY $inventory.invid ASC";
+							AND $item.class = 'Habitación' ORDER BY $inventory.invid ASC";
 			$result = db_query($sql);
 			addnav("Rooms");
 			while ($row = db_fetch_assoc($result)) {
@@ -249,7 +249,7 @@ function additionalrooms_run(){
 			$inventory = db_prefix('inventory');
 			$sql = "SELECT $item.itemid, $item.name AS name, $inventory.invid AS invid FROM $item INNER JOIN $inventory ON $item.itemid = $inventory.itemid
 						WHERE $inventory.userid = {$session['user']['acctid']} AND $inventory.specialvalue=$dwid
-						AND $item.class = 'Rooms' ORDER BY $inventory.invid ASC";
+						AND $item.class = 'Habitación' ORDER BY $inventory.invid ASC";
 			$result = db_query($sql);
 			while ($row = db_fetch_assoc($result)) {
 				$roomname = translate_inline($row['name']);
