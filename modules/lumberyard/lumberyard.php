@@ -426,6 +426,7 @@ if($op=="work"){
 	}
 	
 	//-- Talar árboles y eventos que pueden pasar
+	$event = ( isset($event) && is_array($event) ? $event : array());
 	modulehook('lumberyard-cuttree', $event);
 }
 if ($op=="attack") {
