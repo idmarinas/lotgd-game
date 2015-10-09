@@ -1,6 +1,6 @@
 {
-  "name": "idmarinas-dragonverde",
-  "version": "1.2.6",
+  "name": "idmarinas-ignis",
+  "version": "1.2.0",
   "description": "Juego MMO de Rol para navegador en formato web",
   "engines": {
     "node": ">= 0.10.0"
@@ -8,26 +8,20 @@
   "main": "Gruntfile.js",
   "homepage": "http://dragonverde.infommo.es",
   "devDependencies": {
-    "autoprefixer-core": "^5.2.1",
     "grunt": "~0.4.5",
     "grunt-banner": "^0.4.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-copy": "~0.8.0",
-    "grunt-contrib-cssmin": "~0.12.3",
     "grunt-contrib-jshint": "~0.11.2",
-    "grunt-contrib-less": "~1.0.1",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-line-remover": "~0.0.2",
-    "grunt-postcss": "^0.5.4"
+    "grunt-contrib-nodeunit": "~0.4.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://idmarinas@bitbucket.org/idmarinas/lddv.git"
+    "url": "https://idmarinas@bitbucket.org/idmarinas/lotgd-juego.git"
   },
   "author": "Ivan Diaz Marinas",
-  "license": "proprietary"
+  "license": "SEE LICENSE IN <LICENSE.txt>"
 }
