@@ -325,7 +325,7 @@ function page_footer($saveuser=true){
 			</script>";
 			// $script.="<script src=\"templates/jquery.js\"></script>";
 					
-			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span><span id='notify'></span></body>",$header);
+			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span>",$header);
 		} else {
 			//no AJAX for slower browsers etc
 			// $script.="<script src=\"templates/jquery.js\"></script>";
@@ -483,7 +483,6 @@ function popup_footer(){
 				}
 			</script>";
 					
-			$add.="<div id='notify'></div>";
 		} else {
 			$add='';
 			//no AJAX for slower browsers etc
