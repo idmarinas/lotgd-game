@@ -118,6 +118,7 @@ if ($op==""){
 				   ,"login"=>1
 				   ,"dragonkills"=>1
 				   ,"locked"=>1
+				   ,"goldinbank"=>1 // Se conserva el oro en el banco al matar al Dragón
 				   ,"loggedin"=>1
 				   ,"superuser"=>1
 				   ,"gems"=>1
