@@ -24,10 +24,10 @@ module.exports = function (grunt) {
               '!**/*.dist'//Ignorar archivos .dist
             ],
             dest: '/Users/Ivan/Sites/ignis/',
-            filter : 'isFile'
+            //filter : 'isFile'
           }
         ]
-      }    
+      }  
     }
   });
     
