@@ -31,13 +31,13 @@ if ($db_num_rows>0){
 	$subject = translate_inline("Subject");
 	$from = translate_inline("Sender");
 	$date = translate_inline("Send Date");
-	$arrow = ($sorting_direction?"arrow_down.png":"arrow_up.png");
+	$arrow = ($sorting_direction?"fa-long-arrow-down":"fa-long-arrow-up");
 
 	rawoutput("<form action='mail.php?op=process' method='post'><table style='width: 100%;'>");
 	rawoutput("<tr class='trhead'><td></td>");
-	rawoutput("<td>".($sortorder=='subject'?"<img src='images/shapes/$arrow' alt='$arrow'>":"")." <a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></td>");
-	rawoutput("<td>".($sortorder=='name'?"<img src='images/shapes/$arrow' alt='$arrow'>":"")." <a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></td>");
-	rawoutput("<td>".($sortorder=='date'?"<img src='images/shapes/$arrow' alt='$arrow'>":"")." <a href='mail.php?sortorder=date&direction=".($sortorder=='date'?$newdirection:$sorting_direction)."'>$date</a></td>");
+	rawoutput("<td>".($sortorder=='subject'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></td>");
+	rawoutput("<td>".($sortorder=='name'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></td>");
+	rawoutput("<td>".($sortorder=='date'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=date&direction=".($sortorder=='date'?$newdirection:$sorting_direction)."'>$date</a></td>");
 	rawoutput("</tr>");
 	$from_list=array();
 	$rows=array();
@@ -54,7 +54,7 @@ if ($db_num_rows>0){
 
 		rawoutput("<tr>");
 		rawoutput("<td nowrap><input type='checkbox' id='".$row['messageid']."' name='msg[]' value='{$row['messageid']}'>");
-		rawoutput("<img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16px' height='16px' alt='".($row['seen']?"Old":"New")."'></td>");
+		rawoutput("<i class='fa fa-fw ".($row['seen']?"fa-eye":"fa-envelope-o")."'></i></td>");
 		rawoutput("<td>");
 		$status_image="";
 		if ((int)$row['msgfrom']==0){
@@ -69,8 +69,8 @@ if ($db_num_rows>0){
 		} else {
 			//get status
 			$online=$user_statuslist[$row['acctid']];
-			$status=($online?"online":"offline");
-			$status_image="<img src='images/$status.gif' alt='$status'>";
+			$status=($online?"colLtGreen":"colLtRed");
+			$status_image="<i src='fa fa-fw fa-user $status'></i>";
 		}
 		//collect sanitized names plus message IDs for later use
 		$sname=sanitize($row['name']);

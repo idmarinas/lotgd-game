@@ -32,8 +32,8 @@ if (db_num_rows($result)>0){
 	} else {
 		//get status
 		$online=(int)is_player_online($row['acctid']);
-		$status=($online?"online":"offline");
-		$status_image="<img src='images/$status.gif' alt='$status'>";
+		$status=($online?"colLtGreen":"colLtRed");
+		$status_image="<i src='fa fa-fw fa-user $status'></i>";
 	}
 	if (!$row['seen']) {
 		output("`b`#NEW`b`n");

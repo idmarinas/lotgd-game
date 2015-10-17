@@ -138,7 +138,7 @@ for($i=0;$i<$max;$i++){
 	rawoutput("</td><td>");
 	if ($session['user']['loggedin']) {
 		rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."").";return false;\">");
-		rawoutput("<img src='images/newscroll.GIF' width='16' height='16' alt='$writemail' border='0'></a>");
+		rawoutput("<i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$writemail'></i></a>");
 		rawoutput("<a href='bio.php?char=".$row['acctid']."'>");
 		addnav("","bio.php?char=".$row['acctid']."");
 	}
