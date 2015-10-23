@@ -80,8 +80,11 @@ if (abs(getsetting("OnlineCountLast",0) - strtotime("now")) > 60){
 }else{
 	$onlinecount = getsetting("OnlineCount",0);
 }
+
+modulehook("ignistext", array());
+
 if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
-	output("Enter your name and password to enter the realm.`n");
+	//output("Enter your name and password to enter the realm.`n");
 	if ($op=="timeout"){
 		$session['message'].= translate_inline(" Your session has timed out, you must log in again.`n");
 	}
@@ -103,10 +106,20 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	}
 	//-->
 	</script>");
-	$uname = translate_inline("<u>U</u>sername");
-	$pass = translate_inline("<u>P</u>assword");
+	$uname = translate_inline("Username");
+	$pass = translate_inline("Password");
 	$butt = translate_inline("Log in");
-	rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
+	
+	//Personalización
+	$textloginheading = translate_inline("Continuar aventura");
+	$textlogin = translate_inline("Continúa tu aventura donde lo dejaste. Termina esa lucha que dejaste a medias... recupérate de un ataque a traición mientras descansabas en los campos...");
+	$textcreateheading = translate_inline("Comenzar aventura");
+	$textcreate = translate_inline("Comienza tu aventra en el Reino de Draconia. Sumergete en una aventura de locos, y cada loco con su tema. En este mundo puede pasar cualquier cosa.");
+	$buttoncreate = translate_inline("Create a character");
+	
+	//Fin Personalización
+	
+	rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt, "textloginheading" => $textloginheading, "textlogin" => $textlogin, "textcreateheading" => $textcreateheading, "textcreate" => $textcreate, "buttoncreate" =>$buttoncreate))."</form>");
 	output("Did you forget your password? Go <a href='create.php?op=forgot'>here</a> to retrieve a new one!`n",true);
 	output_notl("`c");
 	addnav("","login.php");
