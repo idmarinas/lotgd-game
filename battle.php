@@ -169,7 +169,7 @@ if ($op != "newtarget") {
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
-		//$newenemies = array();
+		$newenemies = array();
 		// Run the beginning of round buffs (this also calculates all modifiers)
 		foreach ($enemies as $index=>$badguy) {
 			$badguy = modulehook("startofround-perbadguy-prebuff",$badguy);
@@ -210,7 +210,7 @@ if ($op != "newtarget") {
 								$newcompanions = array();
 								foreach ($companions as $name=>$companion) {
 									if ($companion['hitpoints'] > 0) {
-										$buffer = report_companion_move(&$badguy,$companion, "heal");
+										$buffer = report_companion_move($companion, "heal");
 										if ($buffer !== false) {
 											$newcompanions[$name] = $buffer;
 											unset($buffer);
@@ -231,7 +231,7 @@ if ($op != "newtarget") {
 						if ($op=="fight" || $op=="run" || $surprised){
 						$badguy = modulehook("startofround",$badguy);
 							// Grab an initial roll.
-							$roll = rolldamage(&$badguy);
+							$roll = rolldamage();
 							if ($op=="fight" && !$surprised){
 								$ggchancetodouble = $session['user']['dragonkills'];
 								$bgchancetodouble = $session['user']['dragonkills'];
@@ -243,7 +243,7 @@ if ($op != "newtarget") {
 											$newcompanions = array();
 											foreach ($companions as $name=>$companion) {
 												if ($companion['hitpoints'] > 0) {
-													$buffer = report_companion_move(&$badguy,$companion, "magic");
+													$buffer = report_companion_move($companion, "magic");
 													if ($buffer !== false) {
 														$newcompanions[$name] = $buffer;
 														unset($buffer);
@@ -281,13 +281,13 @@ if ($op != "newtarget") {
 												$newcompanions = $companions;
 												$needtostopfighting = true;
 											}else{
-												$needtostopfighting = battle_player_attacks(&$badguy);
+												$needtostopfighting = battle_player_attacks();
 											}
 											$r = mt_rand(0,100);
 											if ($r < $ggchancetodouble && $badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && !$needtostopfighting){
 												$additionalattack = true;
 												$ggchancetodouble -= ($r+5);
-												$roll = rolldamage(&$badguy);
+												$roll = rolldamage();
 											}else{
 												$additionalattack = false;
 											}
@@ -312,13 +312,13 @@ if ($op != "newtarget") {
 								$buffset = activate_buffs("defense");
 								do {
 									$defended = false;
-									$needtostopfighting = battle_badguy_attacks(&$badguy);
+									$needtostopfighting = battle_badguy_attacks();
 									$r = mt_rand(0,100);
 									if (!isset($bgchancetodouble)) $bgchancetodouble = 0;
 									if ($r < $bgchancetodouble && $badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && !$needtostopfighting){
 										$additionalattack = true;
 										$bgchancetodouble -= ($r+5);
-										$roll = rolldamage(&$badguy);
+										$roll = rolldamage();
 									}else{
 										$additionalattack = false;
 									}
@@ -329,7 +329,7 @@ if ($op != "newtarget") {
 								if (is_array($companions)) {
 									foreach ($companions as $name=>$companion) {
 										if ($companion['hitpoints'] > 0) {
-											$buffer = report_companion_move(&$badguy,$companion, "fight");
+											$buffer = report_companion_move($companion, "fight");
 											if ($buffer !== false) {
 												$newcompanions[$name] = $buffer;
 												unset($buffer);
@@ -380,6 +380,7 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
+		
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
@@ -520,8 +521,6 @@ if ($victory || $defeat){
 	expire_buffs_afterbattle();
 	//unsuspend any suspended buffs
 	unsuspend_buffs((($options['type']=='pvp')?"allowinpvp":false));
-
-
 	if ($session['user']['alive']) {
 		unsuspend_companions((($options['type']=='pvp')?"allowinpvp":false));
 	}
@@ -551,8 +550,8 @@ $session['user']['badguy']=createstring($attackstack);
 $session['user']['companions']=createstring($companions);
 tlschema();
 
-function battle_player_attacks($badguy) {
-	global $enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
+function battle_player_attacks() {
+	global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
 	global $creaturedefmod,$adjustment,$defmod,$atkmod,$compatkmod,$compdefmod,$buffset,$atk,$def,$options;
 	global $companions,$companion,$newcompanions,$roll,$count,$needtostopfighting;
 
@@ -592,8 +591,8 @@ function battle_player_attacks($badguy) {
 	return $break;
 }
 
-function battle_badguy_attacks($badguy) {
-	global $enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
+function battle_badguy_attacks() {
+	global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
 	global $creaturedefmod,$adjustment,$defmod,$atkmod,$compatkmod,$compdefmod,$buffset,$atk,$def,$options;
 	global $companions,$companion,$newcompanions,$roll,$count,$index,$defended,$needtostopfighting;
 
@@ -617,7 +616,7 @@ function battle_badguy_attacks($badguy) {
 			if (is_array($companions)) {
 			foreach ($companions as $name=>$companion) {
 				if ($companion['hitpoints'] > 0) {
-					$buffer = report_companion_move(&$badguy,$companion, "defend");
+					$buffer = report_companion_move($companion, "defend");
 					if ($buffer !== false) {
 						$newcompanions[$name] = $buffer;
 						unset($buffer);

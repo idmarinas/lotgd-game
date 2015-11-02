@@ -6,8 +6,8 @@ require_once("lib/bell_rand.php");
 require_once("lib/e_rand.php");
 require_once("lib/buffs.php");
 
-function rolldamage($badguy){
-	global $session,$creatureattack,$creatureatkmod,$adjustment;
+function rolldamage(){
+	global $badguy,$session,$creatureattack,$creatureatkmod,$adjustment;
 	global $creaturedefmod,$defmod,$atkmod,$buffset,$atk,$def,$options;
 
 	if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0){
