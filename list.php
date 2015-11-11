@@ -25,6 +25,7 @@ if ($session['user']['loggedin']) {
 		}
 	}
 }else{
+	addnav('Continuar aventura');
 	addnav("Login Screen","index.php");
 	addnav("Currently Online","list.php");
 }

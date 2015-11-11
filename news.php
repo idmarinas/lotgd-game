@@ -82,6 +82,7 @@ if (db_num_rows($result)==0){
 }
 output_notl("`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0`c");
 if (!$session['user']['loggedin']) {
+	addnav('Continuar aventura');
 	addnav("Login Screen", "index.php");
 } else if ($session['user']['alive']){
 	villagenav();
