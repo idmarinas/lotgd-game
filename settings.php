@@ -34,7 +34,7 @@ for instance. And then do an "apache2 -k graceful" and check with phpinfo() to s
 This will also be used in cases of database outages and so forth
 
 */
-$_defaultskin="Dragon - Verde.htm";
+$_defaultskin="modern.htm";
 
 
 ?>
