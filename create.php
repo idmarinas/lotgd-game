@@ -370,14 +370,6 @@ if (getsetting("allowcreation",1)==0){
 		// this is the first thing a new player will se, so let's make it look
 		// better
 		rawoutput("<input type='hidden' name='passlen' id='passlen' value='0'>");
-		rawoutput("<table><tr valign='top'><td>");
-		output("How will you be known to this world? ");
-		rawoutput("</td><td><input name='name'></td></tr><tr valign='top'><td>");
-		output("Enter a password: ");
-		rawoutput("</td><td><input type='password' name='pass1' id='pass1'></td></tr><tr valign='top'><td>");
-		output("Re-enter it for confirmation: ");
-		rawoutput("</td><td><input type='password' name='pass2' id='pass2'></td></tr><tr valign='top'><td>");
-		output("Enter your email address: ");
 		$r1 = translate_inline("`^(optional -- however, if you choose not to enter one, there will be no way that you can reset your password if you forget it!)`0");
 		$r2 = translate_inline("`\$(required)`0");
 		$r3 = translate_inline("`\$(required, an email will be sent to this address to verify it before you can log in)`0");
@@ -388,12 +380,25 @@ if (getsetting("allowcreation",1)==0){
 		} else {
 			$req = $r3;
 		}
-		rawoutput("</td><td><input name='email'>");
-		output_notl("%s", $req);
-		rawoutput("</td></tr></table>");
-		output("`nAnd are you a %s Female or a %s Male?`n",
-				"<input type='radio' name='sex' value='1'>",
-				"<input type='radio' name='sex' value='0' checked>",true);
+		
+		if (!is_module_active('creationignis'))
+		{
+			rawoutput("<table><tr valign='top'><td>");
+			output("How will you be known to this world? ");
+			rawoutput("</td><td><input name='name'></td></tr><tr valign='top'><td>");
+			output("Enter a password: ");
+			rawoutput("</td><td><input type='password' name='pass1' id='pass1'></td></tr><tr valign='top'><td>");
+			output("Re-enter it for confirmation: ");
+			rawoutput("</td><td><input type='password' name='pass2' id='pass2'></td></tr><tr valign='top'><td>");
+			output("Enter your email address: ");
+					rawoutput("</td><td><input name='email'>");
+			output_notl("%s", $req);
+			rawoutput("</td></tr></table>");
+			output("`nAnd are you a %s Female or a %s Male?`n",
+					"<input type='radio' name='sex' value='1'>",
+					"<input type='radio' name='sex' value='0' checked>",true);
+		}
+		modulehook("create-ignis-form", $req);
 		modulehook("create-form");
 		$createbutton = translate_inline("Create your character");
 		rawoutput("<input type='submit' class='button' value='$createbutton'>");
@@ -410,6 +415,7 @@ if (getsetting("allowcreation",1)==0){
 		rawoutput("</form>");
 	}
 }
+addnav('Continuar aventura');
 addnav("Login","index.php");
 page_footer();
 ?>
