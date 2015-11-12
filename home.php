@@ -51,7 +51,7 @@ if (getsetting("homenewestplayer", 1)) {
 		$name = $newplayer;
 	}
 	if ($name != "") {
-		output("`QThe newest resident of the realm is: `&%s`0`n`n", $name);
+		output("`QThe newest resident of the realm is: `&%s`0`n`n", $name, true);
 	}
 }
 
