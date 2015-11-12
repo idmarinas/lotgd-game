@@ -25,7 +25,7 @@ if ($session['user']['loggedin'] &&
 	$legal_start_dirs = array(
 			($subdir=="//"?"/":$subdir)."" => 1,
 			($subdir=="//"?"/":$subdir)."lib/" => 1,
-			($subdir=="//"?"/":$subdir)."modules/*" => 1,
+			($subdir=="//"?"/":$subdir)."modules/*" => 0,
 	);
 	$illegal_files = array(
 			($subdir=="//"?"/":$subdir)."dbconnect.php"=>"Contains sensitive information specific to this installation.",
