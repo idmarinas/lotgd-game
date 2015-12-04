@@ -3,7 +3,8 @@
 $creaturetats=array();
 $creatureexp=14;
 $creaturegold=36;
-for ($i=1;$i<=(getsetting('maxlevel',15)+4);$i++) {
+$maxlevel = getsetting('maxlevel',15);
+for ($i=1;$i<=($maxlevel+4);$i++) {
 	//apply algorithmic creature generation.
 	$level=$i;
 	$creaturehealth=($i*10)+($i-1)-round(sqrt($i-1));
