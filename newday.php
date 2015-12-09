@@ -217,7 +217,6 @@ if ($dp < $dkills) {
 		}else{
 			$gain=translate_inline("lose");
 		}
-		$sff = abs($resurrectionturns);
 		output("`2As a result, you `^%s some Stamina`2 for today!`n", $gain);
 	}
 	$rp = $session['user']['restorepage'];
@@ -313,6 +312,9 @@ if ($dp < $dkills) {
 	$args = modulehook("newday",
 			array("resurrection"=>$resurrection, "turnstoday"=>$turnstoday));
 	$turnstoday = $args['turnstoday'];
+	//## Para que procese la stamina por el estado de ánimo
+	modulehook('stamina-newday', array('spirits'=>$spirits));
+	
 	debuglog("New Day Turns: $turnstoday");
 
 	//legacy support if you have no playername set
