@@ -719,17 +719,18 @@ function charstats(){
 			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
-			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
-			addcharstat("Dexterity", $u['dexterity'].check_temp_stat("dexterity",1));
-			addcharstat("Intelligence", $u['intelligence'].check_temp_stat("intelligence",1));
-			addcharstat("Constitution", $u['constitution'].check_temp_stat("constitution",1));
-			addcharstat("Wisdom", $u['wisdom'].check_temp_stat("wisdom",1));
+			//-- Cambiado el orden en el que aparece
 			// Modificado para darle otro estilo a la presentación
 			// addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
 			// addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
 			addcharstat("Attack", $atk.'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_attack()).'"></i>`0'.check_temp_stat("attack",1));
 			addcharstat("Defense", $def.'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_defense()).'"></i>`0'.check_temp_stat("defense",1));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
+			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
+			addcharstat("Dexterity", $u['dexterity'].check_temp_stat("dexterity",1));
+			addcharstat("Intelligence", $u['intelligence'].check_temp_stat("intelligence",1));
+			addcharstat("Constitution", $u['constitution'].check_temp_stat("constitution",1));
+			addcharstat("Wisdom", $u['wisdom'].check_temp_stat("wisdom",1));
 		} else {
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
 			addcharstat("Soulpoints", $u['soulpoints'].check_temp_stat("soulpoints",1)."`0/".$maxsoul);
