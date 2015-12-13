@@ -181,27 +181,24 @@ if ($op=="" || $op=="search"){
 	$del = translate_inline("Del");
 
 	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
+	rawoutput('<tr class="trhead"><th colspan="8">Criaturas de nivel '.$level.'</th></tr>');
 	rawoutput("<tr class='trhead'>");
-	rawoutput("<td>$opshead</td><td>$idhead</td><td>$name</td><td>$cat</td><td>$lev</td><td>$weapon</td><td>$script</td><td>$winmsg</td><td>$diemsg</td><td>$author</td></tr>");
+	rawoutput("<td>$opshead</td><td>$name</td><td>$cat</td><td>$weapon</td><td>$script</td><td>$winmsg</td><td>$diemsg</td><td>$author</td></tr>");
 	addnav("","creatures.php");
 	$i=true;
 	while ($row = db_fetch_assoc($result)) {
 		$i=!$i;
 		rawoutput("<tr class='".($i?"trdark":"trlight")."'>", true);
-		rawoutput("<td>[ <a href='creatures.php?op=edit&creatureid={$row['creatureid']}'>");
+		rawoutput("<td class='uk-text-nowrap'>[ <a href='creatures.php?op=edit&creatureid={$row['creatureid']}'>");
 		output_notl("%s", $edit);
 		rawoutput("</a> | <a href='creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}' onClick='return confirm(\"$confirm\");'>");
 		output_notl("%s", $del);
 		rawoutput("</a> ]</td><td>");
 		addnav("","creatures.php?op=edit&creatureid={$row['creatureid']}");
 		addnav("","creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}");
-		output_notl("%s", $row['creatureid']);
-		rawoutput("</td><td>");
-		output_notl("%s", $row['creaturename']);
+		output_notl("(%s) %s", $row['creatureid'], $row['creaturename']);
 		rawoutput("</td><td>");
 		output_notl("%s", $row['creaturecategory']);
-		rawoutput("</td><td>");		
-		output_notl("%s", $row['creaturelevel']);
 		rawoutput("</td><td>");
 		output_notl("%s", $row['creatureweapon']);
 		rawoutput("</td><td>");
