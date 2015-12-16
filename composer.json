@@ -14,7 +14,6 @@
         "process-timeout": 5000
     },
     "require": {
-         "zendframework/zend-db" : ">=2.2",
-         "bjyoungblood/bjy-profiler" : ">=1"
+         "zendframework/zend-db" : ">=2.2"
     }
 }
