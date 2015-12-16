@@ -26,6 +26,9 @@ switch(DBTYPE) {
 	case 'mysqli_proc':
 		require('./lib/dbwrapper_mysqli_proc.php');
 		break;
+	case 'mysq_pdo':
+		require('./lib/dbwrapper_mysql_pdo.php');
+		break;
 	default:
 		require('./lib/dbwrapper_mysql.php');
 		break;
