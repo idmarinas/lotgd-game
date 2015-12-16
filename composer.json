@@ -1,0 +1,19 @@
+{
+    "name": "idmarinas/ignis",
+    "description": ".",
+    "type": "library",
+    "license": "proprietary",
+    "version": "1.0.0",
+    "homepage": "http://dragonverde.infommo.es",
+    "time": "2013-05-25",
+    "support": {
+        "email": "contacto@infommo.es",
+        "irc": "http://dragonverde.infommo.es"
+    },
+    "config": {
+        "process-timeout": 5000
+    },
+    "require": {
+         "zendframework/zend-db" : ">=2.2"
+    }
+}
