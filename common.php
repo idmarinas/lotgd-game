@@ -124,7 +124,7 @@ if (file_exists("dbconnect.php")){
 // http://php.net/manual/en/features.persistent-connections.php
 //
 //$link = db_pconnect($DB_HOST, $DB_USER, $DB_PASS);
-$link = db_connect($DB_HOST, $DB_USER, $DB_PASS);
+$link = db_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
 $out = ob_get_contents();
 ob_end_clean();
