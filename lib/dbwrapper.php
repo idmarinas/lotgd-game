@@ -17,6 +17,7 @@ define('DBTYPE',$DB_TYPE);
 
 $dbinfo = array();
 $dbinfo['queriesthishit']=0;
+$dbinfo['querytime']=0;
 
 //mysql is default even if gibberish is entered
 switch(DBTYPE) {
