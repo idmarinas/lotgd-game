@@ -4,4 +4,5 @@ dbconnect.php
 /dist
 /bower_components
 composer.phar
+composer.lock
 /vendor
