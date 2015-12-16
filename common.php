@@ -38,6 +38,12 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 
 $logd_version = "1.2.5 +nb Edition";
 
+//-- Rechazar solicitudes de archivos estáticos vuelve al servidor web PHP integrado
+if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
+
+//-- Autocargar las clases para agregar nuevas opciones al juego
+require('vendor/autoload.php');
+//-- Fin autocargar las clases
 
 // Include some commonly needed and useful routines
 require_once("lib/output.php");

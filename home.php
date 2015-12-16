@@ -3,9 +3,6 @@
 // addnews ready
 // mail ready
 
-//-- Rechazar solicitudes de archivos estáticos vuelve al servidor web PHP integrado
-if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
-
 if (isset($_POST['template'])){
 	$skin = $_POST['template'];
 	if ($skin > "") {
@@ -16,9 +13,6 @@ if (isset($_POST['template'])){
 
 define("ALLOW_ANONYMOUS",true);
 
-//-- Autocargar las clases para agregar nuevas opciones al juego
-require_once('vendor/autoload.php');
-//-- Fin autocargar las clases
 require_once("common.php");
 require_once("lib/http.php");
 
