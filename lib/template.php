@@ -11,8 +11,7 @@ function templatereplace($itemname,$vals=false){
 	if (!is_array($vals)) return $out;
 	foreach ($vals as $key=>$val) {
 		if (strpos($out,"{".$key."}")===false){
-			output("`bWarning:`b the `i%s`i piece was not found in the `i%s`i te".
-					"mplate part! (%s)`n", $key, $itemname, $out);
+			output("`bWarning:`b the `i%s`i piece was not found in the `i%s`i template part! (%s)`n", $key, $itemname, $out);
 			$out .= $val;
 		}else{
 			$out = str_replace("{"."$key"."}",$val,$out);
