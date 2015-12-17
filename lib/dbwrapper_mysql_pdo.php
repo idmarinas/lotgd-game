@@ -248,6 +248,7 @@ Class DB
 		return $adapter->getPlatform()->getName();
 	}
 	
+	//-- Función para crear una plantilla y mostrar una página en el die de la conexión
 	private static function template($title, $message, $showtrace = false)
 	{
 		require_once("lib/nltoappon.php");
