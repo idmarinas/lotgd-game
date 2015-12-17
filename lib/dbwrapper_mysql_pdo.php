@@ -194,7 +194,7 @@ Class DB
 		if (is_array($data))
 		{
 			reset($data);
-			$dbinfo['affected_rows']=-1;
+			self::$affectedRows = -1;
 			
 			return $data;
 		}
