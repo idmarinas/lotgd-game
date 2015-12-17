@@ -187,7 +187,6 @@ Class DB
 		//instead on disk cached data.
 		//if (getsetting("usedatacache", 0) == 1) debug("DataCache: $name");
 		//standard is 15 minutes, als hooks don't need to be cached *that* often, normally you invalidate the cache properly
-		global $dbinfo;
 		
 		$data = datacache($name,$duration);
 		
