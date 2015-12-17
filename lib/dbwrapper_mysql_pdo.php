@@ -159,10 +159,6 @@ Class DB
 	//-- Número de filas afectadas por la consulta
 	public static function db_affected_rows($result = false)
 	{
-		global $dbinfo;
-		
-		if (isset($dbinfo['affected_rows'])) return $dbinfo['affected_rows'];
-		
 		if (false === $result) return self::$affectedRows;
 		else return $result->getAffectedRows();
 	}
