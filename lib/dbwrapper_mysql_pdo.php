@@ -9,7 +9,7 @@ Class DB
 	private static $generatedValue = null;
 	private static $affectedRows = 0;
 	private static $errorInfo = null;
-		
+	
 	//-- Configura el adaptador
 	public static function setAdapter(Array $options)
 	{
@@ -24,7 +24,11 @@ Class DB
 	{
 		if (!self::$adapter)
 		{
-			die('Error al conectar a la base de datos');
+			$title = 'Error en la base de datos';
+			$message = 'Se ha producido un error al conectar a la base de datos del juego. `nPor favor espere uno minutos, si el problema continua pongase en contacto con los administradores.';
+			$body = self::template($title, $message);
+			
+			die($body);
 		}
 		return self::$adapter;
 	}
@@ -246,6 +250,17 @@ Class DB
 		$adapter = self::getAdapter();
 		
 		return $adapter->getPlatform()->getName();
+	}
+	
+	private static function template($title, $message)
+	{
+		require_once("lib/nltoappon.php");
+		// require_once("lib/show_backtrace.php");
+	
+		$file = file_get_contents('error_docs/template.html');
+		$message = full_sanitize(str_replace("`n", "<br />", nltoappon($message)));
+		
+		return str_replace(array("{subject}", "{message}"), array($title, $message), $file);	
 	}
 }
 
