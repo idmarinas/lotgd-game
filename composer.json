@@ -15,6 +15,7 @@
     },
     "require": {
          "zendframework/zend-db" : ">=2.2",
-         "zendframework/zend-paginator" : ">=2.2"
+         "zendframework/zend-paginator" : ">=2.2",
+         "zendframework/zend-servicemanager": ">=2.5"
     }
 }
