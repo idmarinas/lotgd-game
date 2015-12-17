@@ -101,14 +101,19 @@ Class DB
 			{
 				if ($session['user']['superuser'] & SU_DEVELOPER || 1)
 				{
-					require_once("lib/show_backtrace.php");
-					die(
-						"<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
-						.db_error(LINK)
-						.show_backtrace()
-						);
+					$title = 'Error en la base de datos';
+					$message = "<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
+						.db_error(LINK);
+			
+					die(self::template($title, $message, true));
 				}
-				else die("A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks.");
+				else 
+				{
+					$title = 'Error en la base de datos';
+					$message = "A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks";
+					
+					die(self::template($title, $message, true));
+				}
 			}
 		}
 		$profiler = $adapter->getProfiler()->getProfiles();
@@ -252,13 +257,14 @@ Class DB
 		return $adapter->getPlatform()->getName();
 	}
 	
-	private static function template($title, $message)
+	private static function template($title, $message, $showtrace = false)
 	{
 		require_once("lib/nltoappon.php");
-		// require_once("lib/show_backtrace.php");
+		require_once("lib/show_backtrace.php");
 	
 		$file = file_get_contents('error_docs/template.html');
 		$message = full_sanitize(str_replace("`n", "<br />", nltoappon($message)));
+		if ($showtrace) $message .= show_backtrace();
 		
 		return str_replace(array("{subject}", "{message}"), array($title, $message), $file);	
 	}
