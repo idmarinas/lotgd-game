@@ -143,10 +143,8 @@ Class DB
 		if (is_array($result))
 		{
 			//cached data
-			if (list($key,$val)=each($result))
-				return $val;
-			else
-				return false;
+			if (list($key,$val)=each($result)) return $val;
+			else return false;
 		}
 		else return $result->next();
 	}
