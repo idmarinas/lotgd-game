@@ -245,7 +245,7 @@ Class DB
 	}
 	
 	//-- Comprobar la versión del servidor base de datos
-	function db_get_server_version()
+	public static function db_get_server_version()
 	{
 		$adapter = self::getAdapter();
 		
