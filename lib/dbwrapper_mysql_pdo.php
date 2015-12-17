@@ -57,7 +57,8 @@ Class DB
 	{
 		global $DB_PREFIX;
 	
-		if ($force === false) {
+		if ($force === false) 
+		{
 			$special_prefixes = array();
 	
 			// The following file should be used to override or modify the
@@ -68,12 +69,10 @@ Class DB
 			if (file_exists("prefixes.php")) require_once("prefixes.php");
 	
 			$prefix = $DB_PREFIX;
-			if (isset($special_prefixes[$tablename])) {
-				$prefix = $special_prefixes[$tablename];
-			}
-		} else {
-			$prefix = $force;
+			if (isset($special_prefixes[$tablename])) $prefix = $special_prefixes[$tablename];
 		}
+		else $prefix = $force;
+		
 		return $prefix . $tablename;
 	}
 	
