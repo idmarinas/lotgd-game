@@ -2,6 +2,9 @@
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Profiler\Profiler;
 use Zend\Db\Metadata\Metadata;
+use Zend\Db\Sql\Sql;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Paginator\Paginator;
 
 Class DB 
 {
@@ -259,6 +262,71 @@ Class DB
 		if ($showtrace) $message .= show_backtrace();
 		
 		return str_replace(array("{subject}", "{message}"), array($title, $message), $file);	
+	}
+	
+	/**
+	 * Funciones propias de Zend
+	 * Se usan en mis módulos exclusivamente
+	 */
+	private static $sql = null;
+	
+	//-- Funciones de base de datos
+	public static function sql()
+	{
+		if (!self::$sql)
+		{
+			$adapter = self::getAdapter();
+			
+			self::$sql = new Sql($adapter);
+		}
+		
+		return self::$sql;
+	}
+	
+	public static function select($table = false)
+	{
+		if ($table) return self::sql()->select($table);
+		else  return self::sql()->select();
+	}
+	
+	public static function insert($table = false)
+	{
+		if ($table) return self::sql()->insert($table);
+		else  return self::sql()->insert();
+	}
+	public static function update($table = false)
+	{
+		if ($table) return self::sql()->update($table);
+		else  return self::sql()->update();
+	}
+	
+	public static function delete($table = false)
+	{
+		if ($table) return self::sql()->delete($table);
+		else  return self::sql()->delete();
+	}
+	
+	public static function execute($object)
+	{
+		if ('object' != gettype($object)) return false;
+		
+		$objectString = self::sql()->buildSqlString($object);
+		
+		return self::query($objectString);		
+	}
+	
+	//-- Funciones para paginación
+	
+	public static function paginator($select, $page = 1)
+	{
+		$paginatorAdapter = new DbSelect($select, self::getAdapter());
+        $paginator        = new Paginator($paginatorAdapter);
+        // Página actual
+        $paginator->setCurrentPageNumber($page);
+        // Número máximo de resultados por página
+        $paginator->setItemCountPerPage(25);
+			
+        return $paginator;
 	}
 }
 
