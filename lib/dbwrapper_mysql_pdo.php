@@ -33,7 +33,7 @@ Class DB
 	}
 	
 	//-- Realizar la conexión a la base de datos
-	public static function db_connect()
+	public static function connect()
 	{
 		$adapter = self::getAdapter();
 		$driver = $adapter->getDriver();
@@ -44,7 +44,7 @@ Class DB
 	}
 	
 	//-- Seleccionar la base de datos
-	public static function db_select_db($dbname)
+	public static function select_db($dbname)
 	{
 		$fname = DBTYPE."_select_db";
 		$r = $fname($dbname);
@@ -53,7 +53,7 @@ Class DB
 	}
 
 	//-- Prefijos para las tablas, permite una clave, el nombre de la tabla correcto
-	public static function db_prefix($tablename, $force = false) 
+	public static function prefix($tablename, $force = false) 
 	{
 		global $DB_PREFIX;
 	
@@ -77,7 +77,7 @@ Class DB
 	}
 	
 	//-- Realizar una consulta a la base de datos
-	public static function db_query($sql, $die = true)
+	public static function query($sql, $die = true)
 	{
 		if (defined("DB_NODB") && !defined("LINK")) return array();
 		
@@ -101,7 +101,7 @@ Class DB
 				{
 					$title = 'Error en la base de datos';
 					$message = "<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
-						.db_error(LINK);
+						.error(LINK);
 			
 					die(self::template($title, $message, true));
 				}
@@ -138,7 +138,7 @@ Class DB
 	}
 	
 	//-- Asociar los valores del resultado
-	public static function db_fetch_assoc(&$result)
+	public static function fetch_assoc(&$result)
 	{
 		if (is_array($result))
 		{
@@ -150,27 +150,27 @@ Class DB
 	}
 	
 	//-- Contar el número de resultados
-	public static function db_num_rows($result)
+	public static function num_rows($result)
 	{
 		if (is_array($result)) return count($result);
 		else return $result->count();
 	}
 	
 	//-- Número de filas afectadas por la consulta
-	public static function db_affected_rows($result = false)
+	public static function affected_rows($result = false)
 	{
 		if (false === $result) return self::$affectedRows;
 		else return $result->getAffectedRows();
 	}
 	
 	//-- Obtener el ID de ultimo registro insertado
-	public static function db_insert_id()
+	public static function insert_id()
 	{
 		return self::$generatedValue;
 	}
 	
 	//-- Liberar resultados
-	public static function db_free_result($result)
+	public static function free_result($result)
 	{
 		if (is_array($result)) unset($result);//cached data			
 		else return true;
@@ -180,7 +180,7 @@ Class DB
 	//since it's possible this array is large, we'll save ourselves
 	//the overhead of duplicating the array, then destroying the old
 	//one by returning a reference instead.
-	public static function &db_query_cached($sql, $name, $duration = 900)
+	public static function &query_cached($sql, $name, $duration = 900)
 	{
 		//this function takes advantage of the data caching library to make
 		//all of the other db_functions act just like MySQL queries but rely
@@ -199,9 +199,9 @@ Class DB
 		}
 		else
 		{
-			$result = self::db_query($sql);
+			$result = self::query($sql);
 			$data = array();
-			while ($row = self::db_fetch_assoc($result)) 
+			while ($row = self::fetch_assoc($result)) 
 			{
 				$data[] = $row;
 			}
@@ -213,7 +213,7 @@ Class DB
 	}
 	
 	//-- Obtener el error de la conexión
-	public static function db_error($result = false)
+	public static function error($result = false)
 	{
 		$fname = DBTYPE."_error";
 		if (false !== $result) $r = $result->getResource()->errorInfo();
@@ -223,7 +223,7 @@ Class DB
 	}
 	
 	//-- Comprobar si una tabla existe
-	public static function db_table_exists($tablename)
+	public static function table_exists($tablename)
 	{
 		if (defined("DB_NODB") && !defined("LINK")) return false;
 		
@@ -241,7 +241,7 @@ Class DB
 	}
 	
 	//-- Comprobar la versión del servidor base de datos
-	public static function db_get_server_version()
+	public static function get_server_version()
 	{
 		$adapter = self::getAdapter();
 		
@@ -277,11 +277,11 @@ function db_connect($host, $user, $pass, $database)
 	
 	DB::setAdapter($adapter);
 	
-	return DB::db_connect();
+	return DB::connect();
 }
 function db_pconnect($host, $user, $pass, $database)
 {
-	return db_connect($host, $user, $pass, $database);
+	return DB::connect($host, $user, $pass, $database);
 }
 function db_select_db($dbname)
 {
@@ -289,45 +289,45 @@ function db_select_db($dbname)
 }
 function db_prefix($tablename, $force = false)
 {
-	return DB::db_prefix($tablename, $force = false);
+	return DB::prefix($tablename, $force = false);
 }
 function db_query($sql, $die = true)
 {
-	return DB::db_query($sql, $die = true);
+	return DB::query($sql, $die = true);
 }
 function db_fetch_assoc(&$result)
 {
-	return DB::db_fetch_assoc($result);
+	return DB::fetch_assoc($result);
 }
 function db_num_rows($result)
 {
-	return DB::db_num_rows($result);
+	return DB::num_rows($result);
 }
 function db_affected_rows($link = false)
 {
-	return DB::db_affected_rows($link);
+	return DB::affected_rows($link);
 }
 function db_free_result($result)
 {
-	return DB::db_free_result($result);
+	return DB::free_result($result);
 }
 function &db_query_cached($sql, $name, $duration = 900)
 {
-	return DB::db_query_cached($sql, $name, $duration = 900);
+	return DB::query_cached($sql, $name, $duration = 900);
 }
 function db_insert_id()
 {
-	return DB::db_insert_id();
+	return DB::insert_id();
 }
 function db_error($link = false)
 {
-	return DB::db_error($link);
+	return DB::error($link);
 }
 function db_table_exists($tablename)
 {
-	return DB::db_table_exists($tablename);
+	return DB::table_exists($tablename);
 }
 function db_get_server_version()
 {
-	return DB::db_get_server_version();
+	return DB::get_server_version();
 }
