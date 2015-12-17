@@ -26,9 +26,8 @@ Class DB
 		{
 			$title = 'Error en la base de datos';
 			$message = 'Se ha producido un error al conectar a la base de datos del juego. `nPor favor espere uno minutos, si el problema continua pongase en contacto con los administradores.';
-			$body = self::template($title, $message);
 			
-			die($body);
+			die(self::template($title, $message));
 		}
 		return self::$adapter;
 	}
