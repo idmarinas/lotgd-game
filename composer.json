@@ -14,6 +14,7 @@
         "process-timeout": 5000
     },
     "require": {
-         "zendframework/zend-db" : ">=2.2"
+         "zendframework/zend-db" : ">=2.2",
+         "zendframework/zend-paginator" : ">=2.2"
     }
 }
