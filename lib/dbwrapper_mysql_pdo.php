@@ -100,21 +100,12 @@ Class DB
 			if (defined("IS_INSTALLER") && IS_INSTALLER) return array();
 			else
 			{
-				if ($session['user']['superuser'] & SU_DEVELOPER || 1)
-				{
-					$title = 'Error en la base de datos';
-					$message = "<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
+				$title = 'Error en la base de datos';
+				if ($session['user']['superuser'] & SU_DEVELOPER || 1) $message = "<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
 						.error(LINK);
-			
-					die(self::template($title, $message, true));
-				}
-				else 
-				{
-					$title = 'Error en la base de datos';
-					$message = "A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks";
-					
-					die(self::template($title, $message, true));
-				}
+				else $message = "A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks";
+				
+				die(self::template($title, $message, true));
 			}
 		}
 		$profiler = $adapter->getProfiler()->getProfiles();
