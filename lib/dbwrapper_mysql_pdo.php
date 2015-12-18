@@ -308,14 +308,14 @@ Class DB
 	
 	//-- Funciones para paginación
 	
-	public static function paginator($select, $page = 1)
+	public static function paginator($select, $page = 1, $perpage = 25)
 	{
 		$paginatorAdapter = new DbSelect($select, self::getAdapter());
         $paginator        = new Paginator($paginatorAdapter);
         // Página actual
         $paginator->setCurrentPageNumber($page);
         // Número máximo de resultados por página
-        $paginator->setItemCountPerPage(25);
+        $paginator->setItemCountPerPage($perpage);
 			
         return $paginator;
 	}
