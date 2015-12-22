@@ -345,9 +345,9 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			}
 			break;
 		case "int":
-			if (array_key_exists($key, $row)) $out = $row[$key];
+			if (array_key_exists($key, $row)) (int)$out = $row[$key];
 			else $out = 0;
-			rawoutput("<input name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>");
+			rawoutput("<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>");
 			break;
 		case "float":
 			rawoutput("<input name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8'>");
@@ -372,7 +372,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			}else{
 				if (array_key_exists($key, $row)) $val = $row[$key];
 				else $val = "";
-				rawoutput("<input size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+				rawoutput("<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
 			}
 		}
 		rawoutput("</td></tr>",true);
