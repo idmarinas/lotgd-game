@@ -12,6 +12,7 @@ Class DB
 	private static $generatedValue = null;
 	private static $affectedRows = 0;
 	private static $errorInfo = null;
+	private static $sqlString = null;
 	
 	//-- Configura el adaptador
 	public static function setAdapter(Array $options)
@@ -302,12 +303,17 @@ Class DB
 		if ('object' != gettype($object)) return false;
 		
 		$objectString = self::sql()->buildSqlString($object);
+        self::$sqlString = $objectString;
 		
 		return self::query($objectString);		
 	}
 	
+    public static function sqlString()
+    {
+        return self::$sqlString;
+    }
+        
 	//-- Funciones para paginación
-	
 	public static function paginator($select, $page = 1, $perpage = 25)
 	{
 		$paginatorAdapter = new DbSelect($select, self::getAdapter());
