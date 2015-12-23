@@ -8,15 +8,23 @@ use Zend\Paginator\Paginator;
 
 Class DB 
 {
+	private static $settings = [];
 	private static $adapter;
 	private static $generatedValue = null;
 	private static $affectedRows = 0;
 	private static $errorInfo = null;
 	private static $sqlString = null;
 	
+    //-- Guardar la configuración pra el Adapter
+    public static function setSettings(Array $options)
+    {
+        self::$settings = $options;
+    }
+    
 	//-- Configura el adaptador
 	public static function setAdapter(Array $options)
 	{
+        $options = array_merge($options, self::$settings);
 		$adapter = new Adapter($options);
 		$adapter->setProfiler(new Profiler());
 		
@@ -330,7 +338,16 @@ Class DB
  * Funciones legado, para que funcionen en todos los módulso y partes del juego
  */
 function db_connect($host, $user, $pass, $database)
-{	
+{
+	$adapter = [
+            'hostname' => $host,
+            'database' => $database,
+            'charset' => 'utf8',
+            'username' => $user,
+            'password' => $pass
+        ];
+	DB::setAdapter($adapter);
+	
 	return DB::connect();
 }
 function db_pconnect($host, $user, $pass, $database)
