@@ -72,7 +72,7 @@ if ($op == "save"){
 			$sql.=" graveyard='$grave', ";
 			$sql.=" createdby='".$session['user']['login']."' ";
 			$sql="UPDATE " . db_prefix("creatures") . " SET " . $sql . " WHERE creatureid='$id'";
-			$result=db_query($sql) or output("`\$".db_error(LINK)."`0`n`#$sql`0`n");
+			$result=db_query($sql) or output("`\$".db_error()."`0`n`#$sql`0`n");
 		}else{
 			$cols = array();
 			$vals = array();
@@ -129,7 +129,7 @@ if ($op=="del"){
 		output("Creature deleted`n`n");
 		module_delete_objprefs('creatures',$id);
 	}else{
-		output("Creature not deleted: %s", db_error(LINK));
+		output("Creature not deleted: %s", db_error());//Eliminado el LINK, ya no es necesario
 	}
 	$op="";
 	httpset('op', "");
