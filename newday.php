@@ -42,11 +42,11 @@ if ((count($session['user']['dragonpoints']) <
 			break;
 		case "wis":
 			$session['user']['wisdom']++;
-			break;	
+			break;
+        //legacy support	
 		case "hp":
 			$session['user']['maxhitpoints']+=5;
 			break;
-		//legacy support
 		case "at":
 			$session['user']['attack']++;
 			break;
@@ -73,7 +73,7 @@ $labels = array(
 		"unknown"=>"Unknown Spends (contact an admin to investigate!)",
 );
 $canbuy = array(
-		"hp"=>1,
+		"hp"=>0,
 		"ff"=>0,
 		"str"=>1,
 		"dex"=>1,
