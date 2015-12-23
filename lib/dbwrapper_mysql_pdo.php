@@ -210,7 +210,6 @@ Class DB
 	//-- Obtener el error de la conexión
 	public static function error($result = false)
 	{
-		$fname = DBTYPE."_error";
 		if (false !== $result) $r = $result->getResource()->errorInfo();
 		else $r = self::$errorInfo;
 			
