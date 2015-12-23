@@ -9,8 +9,9 @@ $game_dir='';
 // This DEPENDS on your hosting! It is 100% sure if you use shared hosting this is different
 // If you have a rootserver, you'd know what your directory is =)
 
-$DB_TYPE='mysql_pdo';
+$DB_TYPE='mysql';
 /* * * *
+ * All is PDO using Zend DB Component
  * Avaiable values for DBTYPE:
  *
  * - mysql:				The default value. Are you unsure take this.
