@@ -6,7 +6,7 @@
 // A slightly higher level SQL error reporting function.
 function sql_error($sql){
 	global $session;
-	return output_array($session)."SQL = <pre>$sql</pre>".db_error(LINK);
+	return output_array($session)."SQL = <pre>$sql</pre>".db_error();//Eliminado el LINK, ya no es necesario
 }
 
 ?>

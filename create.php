@@ -287,7 +287,7 @@ if (getsetting("allowcreation",1)==0){
 						VALUES
 						('$shortname','$title $shortname', '".getsetting("defaultsuperuser",0)."', '$title', '$dbpass', '$sex', '$shortname', '".date("Y-m-d H:i:s",strtotime("-1 day"))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting("newplayerstartgold",50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
 					db_query($sql);
-					if (db_affected_rows(LINK)<=0){
+					if (db_affected_rows()<=0){//Eliminado el LINK, ya no es necesario para saber las filas afectadas
 						output("`\$Error`^: Your account was not created for an unknown reason, please try again. ");
 					}else{
 						$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='$shortname'";

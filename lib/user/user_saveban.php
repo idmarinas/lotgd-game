@@ -38,7 +38,7 @@ if ($type=="ip"){
 if ($sql!=""){
 	$result=db_query($sql);
 	output("%s ban rows entered.`n`n", db_affected_rows($result));
-	output_notl("%s", db_error(LINK));
+	output_notl("%s", db_error());//Eliminado el LINK, ya no es necesario 
 	debuglog("entered a ban: " .  ($type=="ip"?  "IP: ".httppost("ip"): "ID: ".httppost("id")) . " Ends after: $duration  Reason: \"" .  httppost("reason")."\"");
 	/* log out affected players */
 	$sql = "SELECT acctid FROM ".db_prefix('accounts')." WHERE $key='$key_value'";
