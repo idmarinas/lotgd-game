@@ -7,7 +7,7 @@ function get_creature_stats($dk = 0)
     if (0 == $dk) $dk = $session['user']['dragonkills'];
 
     //-- Estan colocados por orden de importancia
-    $con = e_rand($dk/4,$dk);
+    $con = e_rand($dk/6,$dk/2);
     $dk -= $con;
     $str = e_rand(0,$dk);
     $dk -= $str;
@@ -16,13 +16,7 @@ function get_creature_stats($dk = 0)
     $int = e_rand(0,$dk);
     $wis = ($dk - $int);
     
-    return [
-        'str' => $str,
-        'dex' => $dex,
-        'con' => $con,
-        'int' => $int,
-        'wis' => $wis
-    ];
+    return ['str' => $str, 'dex' => $dex, 'con' => $con, 'int' => $int, 'wis' => $wis ];
 }
 
 function get_creature_hitpoints($attrs)
