@@ -33,7 +33,7 @@ function get_creature_hitpoints($attrs)
 function get_creature_attack($attrs) 
 {
 	$strbonus = (1/3) * $attrs['str'];
-	$speedbonus = (1/3) * get_player_speed($attrs);
+	$speedbonus = (1/3) * get_creature_speed($attrs);
 	$wisdombonus = (1/6) * $attrs['wis'];
 	$intbonus = (1/6) * $attrs['int'];
 	
