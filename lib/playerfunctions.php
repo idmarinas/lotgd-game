@@ -1,5 +1,64 @@
 <?php
 
+function get_player_hitpoints($player = false)
+{
+    global $session;
+    
+	if (false != $player) 
+    {
+        $select = DB::select('accounts');
+        $select->columns(['constitution','wisdom','strength', 'permahitpoints', 'level'])
+               ->where->equalTo('acctid', $player);
+        ;
+        $result = DB::execute($select)->current();
+		
+        if (!$row) return 0;
+        
+        $user = $row;
+	} else $user =& $session['user'];
+    
+    $conbonus = $user['constitution'] * .5;
+	$wisbonus = $user['wisdom'] * .2;
+	$strbonus = $user['strength'] * .3;
+	$levelbonus = ($user['level']-1) * 10;
+        
+    $hitpoints = round($conbonus + $wisbonus + $strbonus + $levelbonus + $user['permahitpoints'], 0);
+    
+    return max($hitpoints, 10);
+}
+
+function explained_get_player_hitpoints($player = false)
+{
+    global $session;
+    
+	if (false != $player) 
+    {
+        $select = DB::select('accounts');
+        $select->columns(['constitution','wisdom','strength', 'permahitpoints', 'level'])
+               ->where->equalTo('acctid', $player);
+        ;
+        $result = DB::execute($select)->current();
+		
+        if (!$row) return 0;
+        
+        $user = $row;
+	} else $user =& $session['user'];
+    
+    $conbonus = $user['constitution'] * .5;
+	$wisbonus = $user['wisdom'] * .2;
+	$strbonus = $user['strength'] * .3;
+	$levelbonus = ($user['level']-1) * 10;
+
+	$explained=sprintf_translate("%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC",
+		($conbonus >= 0 ? '`8+': '`$-'), abs($conbonus),
+		($wisbonus >= 0 ? '`8+': '`$-'), abs($wisbonus),
+		($strbonus >= 0 ? '`8+': '`$-'), abs($strbonus),
+		($levelbonus >= 0 ? '`8+': '`$-'), abs($levelbonus),
+		($user['permahitpoints'] >= 0 ? '`8+': '`$-'), abs($user['permahitpoints'])
+	);
+	return $explained;
+}
+
 function get_player_attack($player=false) {
 	global $session;
 	if ($player!==false) {
@@ -184,32 +243,39 @@ function mass_is_player_online($players=false) {
 	return $users;
 }
 
-function get_player_dragonkillmod($withhitpoints=false) {
-	global $session;
-	$dragonpoints=array_count_values($session['user']['dragonpoints']);
-	$dk=0;
-	// foreach ($dragonpoints as $key=>$val) {
-	// 	switch ($key) {
-	// 		//not for wisdom on full scale
-	// 		case "wis":
-	// 			$dk+=0.2*$val;
-	// 			break;
-	// 		case "con":case "str": case "int": case "dex":
-	// 			$dk+=0.3*$val;
-	// 			break;
-	// 		case "at": case "de": 
-	// 			$dk+=$val;
-	// 			break;
-	// 	}
-	// }
-	//Wisdowm
-	$dk+= (int)0.2*$dragonpoints['wis'];
-	//Constitution, Strength, Inteligence, Dexterity
-	$dk+= (int) 0.3*($dragonpoints['con']+$dragonpoints['str']+$dragonpoints['int']+$dragonpoints['dex']);
-	//Attack, Defense
-	$dk+= (int)($dragonpoints['at']+$dragonpoints['de']);
-	
-	if ($withhitpoints) $dk += (int)($dragonpoints['hp']);
-	return $dk;
+//-- Se sustituye por una función propia
+// function get_player_dragonkillmod($withhitpoints=false) {
+// 	global $session;
+// 	$dragonpoints=array_count_values($session['user']['dragonpoints']);
+// 	$dk=0;
+// 	foreach ($dragonpoints as $key=>$val) {
+// 		switch ($key) {
+// 			//not for wisdom on full scale
+// 			case "wis":
+// 				$dk+=0.2*$val;
+// 				break;
+// 			case "con":case "str": case "int": case "dex":
+// 				$dk+=0.3*$val;
+// 				break;
+// 			case "at": case "de": 
+// 				$dk+=$val;
+// 				break;
+// 		}
+// 	}
+// 	if ($withhitpoints) $dk += (int)(($session['user']['maxhitpoints']-($session['user']['level']*10))/5);
+// 	return $dk;
+// }
+
+/*
+ * Lo único que hace es devolver los DK que tiene el jugador
+ *
+ * Las criaturas se calculará su ataque, defensa y salud de una forma similar a los jugadores
+ */
+
+function get_player_dragonkillmod()
+{
+    global $session;
+    
+    return $session['user']['dragonkills'];
 }
 ?>
