@@ -250,7 +250,7 @@ function buffbadguy($badguy)
     //-- Ataque, defensa y salud que dan los atributos;
     $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
 	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
-	$badguy['creaturehealthattrs'] = get_creature_health($creatureattr);
+	$badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
 	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
     
 	//-- Sumar los bonos
