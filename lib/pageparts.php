@@ -649,7 +649,7 @@ function charstats(){
 		$o_def=$def=get_player_defense();//Defensa original
 		$spd=get_player_speed();
         $hitpoints = get_player_hitpoints();//Salud que tiene el personaje
-        $u['maxhitpoints'] = $hitpoints;
+        $session['user']['maxhitpoints'] = $u['maxhitpoints'] = $hitpoints;
 		
         $buffcount = 0;
 		$buffs = "";
