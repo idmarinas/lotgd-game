@@ -11,6 +11,7 @@ require_once("lib/taunt.php");
 require_once("lib/substitute.php");
 require_once("lib/villagenav.php");
 require_once("lib/experience.php");
+require_once("lib/creaturefunctions.php");
 
 tlschema("train");
 
