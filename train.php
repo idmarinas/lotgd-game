@@ -89,27 +89,50 @@ if (db_num_rows($result) > 0 && $session['user']['level'] < getsetting('maxlevel
 
 			if ($session['user']['experience']>=$exprequired){
 				restore_buff_fields();
-				$dk  = round(get_player_dragonkillmod(true)*0.33,0);
-
-				$atkflux = e_rand(0, $dk);
-				$atkflux = min($atkflux, round($dk*.25));
-				$defflux = e_rand(0, ($dk-$atkflux));
-				$defflux = min($defflux, round($dk*.25));
-
-				$hpflux = ($dk - ($atkflux+$defflux)) * 5;
-				debug("DEBUG: $dk modification points total.`n");
-				debug("DEBUG: +$atkflux allocated to attack.`n");
-				debug("DEBUG: +$defflux allocated to defense.`n");
-				debug("DEBUG: +".($hpflux/5)."*5 to hitpoints`n");
-				calculate_buff_fields();
-
-				$master['creatureattack']+=$atkflux;
-				$master['creaturedefense']+=$defflux;
-				$master['creaturehealth']+=$hpflux;
-				$attackstack['enemies'][0] = $master;
+                $dk = get_player_dragonkillmod();
+                $creatureattr = get_creature_stats($dk);
+                
+                //-- Bono a los atributos
+                $master['creaturestrbonus'] = $creatureattr['str'];
+                $master['creaturedexbonus'] = $creatureattr['dex'];
+                $master['creatureconbonus'] = $creatureattr['con'];
+                $master['creatureintbonus'] = $creatureattr['int'];
+                $master['creaturewisbonus'] = $creatureattr['wis'];
+                
+                //-- Atributos totales de la criatura
+                $master['creaturestr'] = $creatureattr['str'] + 10;
+                $master['creaturedex'] = $creatureattr['dex'] + 10;
+                $master['creaturecon'] = $creatureattr['con'] + 10;
+                $master['creatureint'] = $creatureattr['int'] + 10;
+                $master['creaturewis'] = $creatureattr['wis'] + 10;
+                
+                //-- Ataque, defensa y salud que dan los atributos;
+                $master['creatureattackattrs'] = get_creature_attack($creatureattr);
+                $master['creaturedefenseattrs'] = get_creature_defense($creatureattr);
+                $master['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
+                $master['creaturespeedattrs'] = get_creature_speed($creatureattr);
+                
+                //-- Sumar los bonos
+                calculate_buff_fields();
+                $master['creatureattack'] += $master['creatureattackattrs'];
+                $master['creaturedefense'] += $master['creaturedefenseattrs'];
+                $master['creaturehealth'] += $master['creaturehealthattrs'];
+                $master['creaturespeed'] += $master['creaturespeedattrs'];
+                $attackstack['enemies'][0] = $master;
 				$attackstack['options']['type'] = 'train';
 				$session['user']['badguy']=createstring($attackstack);
-
+                
+                debug("DEBUG: $dk modification points total for attributes.");
+                debug("DEBUG: +{$master['creaturestrbonus']} allocated to strength.");
+                debug("DEBUG: +{$master['creaturedexbonus']} allocated to dexterity.");
+                debug("DEBUG: +{$master['creatureconbonus']} allocated to constitution.");
+                debug("DEBUG: +{$master['creatureintbonus']} allocated to intelligence.");
+                debug("DEBUG: +{$master['creaturewisbonus']} allocated to wisdom.");
+                debug("DEBUG: +{$master['creatureattackattrs']} modification of attack.");
+                debug("DEBUG: +{$master['creaturedefenseattrs']} modification of defense.");
+                debug("DEBUG: +{$master['creaturespeedattrs']} modification of speed.");
+                debug("DEBUG: +{$master['creaturehealthattrs']} modification of hitpoints.");
+                
 				$battle=true;
 				if ($victory) {
 					$badguy = unserialize($session['user']['badguy']);
