@@ -36,6 +36,7 @@ if ($op==""){
 	// used on attack and defense.
 	// Coded by JT, based on collaboration with MightyE
 	restore_buff_fields();
+    $dk = get_player_dragonkillmod();
     $creatureattr = get_creature_stats($dk);
     
     //-- Bono a los atributos
