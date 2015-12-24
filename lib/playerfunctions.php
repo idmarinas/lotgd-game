@@ -271,7 +271,6 @@ function mass_is_player_online($players=false) {
  *
  * Las criaturas se calculará su ataque, defensa y salud de una forma similar a los jugadores
  */
-
 function get_player_dragonkillmod()
 {
     global $session;

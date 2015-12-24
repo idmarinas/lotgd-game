@@ -9,6 +9,7 @@ require_once("lib/pageparts.php");
 require_once("lib/output.php");
 require_once("lib/nav.php");
 require_once("lib/playerfunctions.php");
+require_once("lib/creaturefunctions.php");
 
 function forestvictory($enemies,$denyflawless=false){
 	global $session, $options;
@@ -173,35 +174,93 @@ function forestdefeat($enemies,$where="in the forest"){
 	page_footer();
 }
 
-function buffbadguy($badguy){
-	global $session;
-	static $dk = false;	// This will save us a lot of trouble when going through
-						// this function more than once...
-	if ($dk === false) {
-		//make badguys get harder as you advance in dragon kills.
-		$dk = get_player_dragonkillmod(true);
-		// How many of the dk points should actually be used.
-		// We want to add .05 for every 100 dragonkills.
-		// make it 0.1 +nb
-		$add = ($session['user']['dragonkills']/100)*.10;
-		// $dk = round($dk * (.25 + $add));
-		$dk = round($dk + $add);
-	}
+// function buffbadguy($badguy){
+// 	global $session;
+// 	static $dk = false;	// This will save us a lot of trouble when going through
+// 						// this function more than once...
+// 	if ($dk === false) {
+// 		//make badguys get harder as you advance in dragon kills.
+// 		$dk = get_player_dragonkillmod(true);
+// 		// How many of the dk points should actually be used.
+// 		// We want to add .05 for every 100 dragonkills.
+// 		// make it 0.1 +nb
+// 		$add = ($session['user']['dragonkills']/100)*.10;
+// 		$dk = round($dk * (.25 + $add));
+// 	}
+// 
+// 	$expflux = round($badguy['creatureexp']/10,0);
+// 	$expflux = e_rand(-$expflux,$expflux);
+// 	$badguy['creatureexp']+=$expflux;
+// 
+// 	$atkflux = e_rand(0, $dk);
+// 	$defflux = e_rand(0, ($dk-$atkflux));
+// 
+// 	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
+// 	$badguy['creatureattack']+=$atkflux;
+// 	$badguy['creaturedefense']+=$defflux;
+// 	$badguy['creaturehealth']+=$hpflux;
+// 
+// 	if (getsetting("disablebonuses", 1)) {
+// 		//adapting flux as for people with many DKs they will just bathe in gold....
+// 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2)); 
+// 		$base /=1000;
+// 		$bonus = 1 + $base*($atkflux+$defflux) + .001*$hpflux;
+// 		$badguy['creaturegold'] = round($badguy['creaturegold']*$bonus, 0);
+// 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
+// 	}
+// 
+// 	$badguy = modulehook("creatureencounter",$badguy);
+// 	debug("DEBUG: $dk modification points total.");
+// 	debug("DEBUG: +$atkflux allocated to attack.");
+// 	debug("DEBUG: +$defflux allocated to defense.");
+// 	debug("DEBUG: +".($hpflux/5)."*5 to hitpoints.");
+// 	return modulehook("buffbadguy",$badguy);
+// }
 
-	$expflux = round($badguy['creatureexp']/10,0);
+//-- Se reemplaza para reflejar los cambios en los calculos de ataque, defensa y salud
+function buffbadguy($badguy)
+{
+	global $session;
+    
+    // This will save us a lot of trouble when going through
+	static $dk = false;	// this function more than once...
+						
+	if ($dk === false) $dk = get_player_dragonkillmod();
+    
+    $expflux = round($badguy['creatureexp']/10,0);
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
-	
-	$dkhp = round($dk * 0.25); 
-	$atkflux = e_rand(1, $dk * 0.65);
-	$defflux = $dk - $atkflux - $dkhp;
+    
+    $creatureattr = get_creature_stats($dk);
+    
+    //-- Bono a los atributos
+    $badguy['creaturestrbonus'] = $creatureattr['str'];
+    $badguy['creaturedexbonus'] = $creatureattr['dex'];
+    $badguy['creatureconbonus'] = $creatureattr['con'];
+    $badguy['creatureintbonus'] = $creatureattr['int'];
+    $badguy['creaturewisbonus'] = $creatureattr['wis'];
+    
+    //-- Atributos totales de la criatura
+    $badguy['creaturestr'] = $creatureattr['str'] + 10;
+    $badguy['creaturedex'] = $creatureattr['dex'] + 10;
+    $badguy['creaturecon'] = $creatureattr['con'] + 10;
+    $badguy['creatureint'] = $creatureattr['int'] + 10;
+    $badguy['creaturewis'] = $creatureattr['wis'] + 10;
+    
+    //-- Ataque, defensa y salud que dan los atributos;
+    $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
+	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
+	$badguy['creaturehealthattrs'] = get_creature_health($creatureattr);
+	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
+    
+	//-- Sumar los bonos
+	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
+	$badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
+	$badguy['creaturehealth'] += $badguy['creaturespeedattrs'];
+	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
 
-	$hpflux = $dkhp * 5;
-	$badguy['creatureattack']+=$atkflux;
-	$badguy['creaturedefense']+=$defflux;
-	$badguy['creaturehealth']+=$hpflux;
-
-	if (getsetting("disablebonuses", 1)) {
+	if (getsetting("disablebonuses", 1)) 
+    {
 		//adapting flux as for people with many DKs they will just bathe in gold....
 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2)); 
 		$base /=1000;
@@ -211,11 +270,17 @@ function buffbadguy($badguy){
 	}
 
 	$badguy = modulehook("creatureencounter",$badguy);
-	debug("DEBUG: $dk modification points total.");
-	debug("DEBUG: +$atkflux allocated to attack.");
-	debug("DEBUG: +$defflux allocated to defense.");
-	debug("DEBUG: +".($hpflux/5)."*5 to hitpoints.");
+	debug("DEBUG: $dk modification points total for attributes.");
+	debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
+	debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
+	debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
+	debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
+	debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
+	debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
+	debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
+	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
+	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
+    
 	return modulehook("buffbadguy",$badguy);
 }
-
 ?>
