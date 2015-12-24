@@ -720,9 +720,9 @@ function charstats(){
         if ($u['alive']) {
             //-- Los HitPoints se calculan en función de los atributos
 			// addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
-            addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$hitpoints.check_temp_stat("maxhitpoints",1).'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_hitpoints()).'"></i>`0'.check_temp_stat("hitpoints",1));
-			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
-			addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
+            addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$hitpoints.check_temp_stat("maxhitpoints",1).'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_hitpoints()).'"></i>`0');
+			if (is_module_active('staminasystem')) addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
+			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
 			// addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
 			// addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
@@ -738,7 +738,7 @@ function charstats(){
 		} else {
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
 			addcharstat("Soulpoints", $u['soulpoints'].check_temp_stat("soulpoints",1)."`0/".$maxsoul);
-			addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
+			if (is_module_active('staminasystem')) addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			addcharstat("Torments", $u['gravefights'].check_temp_stat("gravefights",1));
 			addcharstat("Psyche", 10+round(($u['level']-1)*1.5));
 			addcharstat("Spirit", 10+round(($u['level']-1)*1.5));
