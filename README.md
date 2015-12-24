@@ -43,10 +43,13 @@ Para instalar la Fuente, solo es necesario seguir las instrucciones que se da en
     * Es posible realizar una consulta como `DB::query($sql);`
 2. Se ha eliminado la insercción por referencia en la batalla, haciendo que el juego sea compatible con PHP 5.4.
 3. En la edición de criaturas, se ha eliminado el que muestre el nivel en cada una de las criaturas, y se muestra como parte del titulo, además de algunos ajustes adicionales.
-4. Se ha cambiado el como se visualiza y el orden de ciertas estadísticas del personaje.
+4. Se ha cambiado el como y el orden en el que visualiza ciertas estadísticas del personaje.
 5. Se ha eliminado la posibilidad de subir la salud cuando se mata al Dragón. Ahora la salud se calcula en función de los atributos.
     * Se agrega un nuevo campo a la tabla `accounts` para registrar los puntos de salud que se modifica de forma permanente (puede ser negativo o positivo).
 6. Se han eliminado ciertas imagenes, y se han sustitudo por la fuente Font Awesome, si no se incluye esta fuente en la plantilla no se verán dichos iconos. Se puede cambiar, sólo hay que buscar un patrón similar a `<i class='fa fa-*'></i>`
+7. La salud del personaje esta generada en base a los atributos del personaje
+    * No es posible elegir la subida de salud cuando se mata al Dragón
+    * Sólo es posible subir los atributos cuando se mata al Dragón
 
 ### Añadidos ###
 
