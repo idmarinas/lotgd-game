@@ -9,6 +9,7 @@ require_once("lib/http.php");
 require_once("lib/buffs.php");
 require_once("lib/taunt.php");
 require_once("lib/names.php");
+require_once("lib/creaturefunctions.php");
 
 tlschema("dragon");
 $battle = false;
@@ -35,22 +36,47 @@ if ($op==""){
 	// used on attack and defense.
 	// Coded by JT, based on collaboration with MightyE
 	restore_buff_fields();
-	$points  = round(get_player_dragonkillmod(true)*0.75,0);
+    $creatureattr = get_creature_stats($dk);
+    
+    //-- Bono a los atributos
+    $badguy['creaturestrbonus'] = $creatureattr['str'];
+    $badguy['creaturedexbonus'] = $creatureattr['dex'];
+    $badguy['creatureconbonus'] = $creatureattr['con'];
+    $badguy['creatureintbonus'] = $creatureattr['int'];
+    $badguy['creaturewisbonus'] = $creatureattr['wis'];
+    
+    //-- Atributos totales de la criatura
+    $badguy['creaturestr'] = $creatureattr['str'] + 10;
+    $badguy['creaturedex'] = $creatureattr['dex'] + 10;
+    $badguy['creaturecon'] = $creatureattr['con'] + 10;
+    $badguy['creatureint'] = $creatureattr['int'] + 10;
+    $badguy['creaturewis'] = $creatureattr['wis'] + 10;
+    
+    //-- Ataque, defensa y salud que dan los atributos;
+    $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
+	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
+	$badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
+	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
+    
+	//-- Sumar los bonos
+    calculate_buff_fields();
+	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
+	$badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
+	$badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
+	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
 
-	$atkflux = e_rand(0, $points);
-	$defflux = e_rand(0,$points-$atkflux);
-
-	$hpflux = ($points - ($atkflux+$defflux)) * 5;
-	debug("DEBUG: $points modification points total.`0`n");
-	debug("DEBUG: +$atkflux allocated to attack.`n");
-	debug("DEBUG: +$defflux allocated to defense.`n");
-	debug("DEBUG: +". ($hpflux/5) . "*5 to hitpoints.`0`n");
-	calculate_buff_fields();
-	$badguy['creatureattack']+=$atkflux;
-	$badguy['creaturedefense']+=$defflux;
-	$badguy['creaturehealth']+=$hpflux;
-
-	$badguy = modulehook("buffdragon", $badguy);
+	debug("DEBUG: $dk modification points total for attributes.");
+	debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
+	debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
+	debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
+	debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
+	debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
+	debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
+	debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
+	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
+	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
+     
+   	$badguy = modulehook("buffdragon", $badguy);
 
 	$session['user']['badguy']=createstring($badguy);
 	$battle=true;
