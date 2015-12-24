@@ -256,7 +256,7 @@ function buffbadguy($badguy)
 	//-- Sumar los bonos
 	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
 	$badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
-	$badguy['creaturehealth'] += $badguy['creaturespeedattrs'];
+	$badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
 	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
 
 	if (getsetting("disablebonuses", 1)) 
