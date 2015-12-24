@@ -37,7 +37,7 @@ function get_creature_attack($attrs)
 	$wisdombonus = (1/6) * $attrs['wis'];
 	$intbonus = (1/6) * $attrs['int'];
 	
-	$attack = $strbonus + $speedbonus + $wisdombonus + $intbonus;
+	$attack = $strbonus + $wisdombonus + $intbonus;
     
 	return max($attack,0);
 }
@@ -48,7 +48,7 @@ function get_creature_defense($attrs)
 	$constbonus = (3/8) * $attrs['con'];
 	$speedbonus = (3/8) * get_player_speed($attrs);
     
-	$defense = $wisdombonus + $speedbonus + $constbonus;
+	$defense = $wisdombonus + $constbonus;
     
 	return max($defense,0);
 }
