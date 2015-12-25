@@ -59,12 +59,12 @@ Para instalar la Fuente, solo es necesario seguir las instrucciones que se da en
     2. `homeform` para sustituir el formulario por defecto por uno personalizado. 
         * `modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt])`
         * Como usarlo:
-```
-#!php
-rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
-       
-$args['showdefaultform'] = false;// Sino se incluye, se mostrará el formulario por defecto
-``` 
+        ```
+        #!php
+        rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
+            
+        $args['showdefaultform'] = false;// Sino se incluye, se mostrará el formulario por defecto
+        ``` 
 
 #### Para saber más sobre los componentes Zend ####
 
