@@ -55,10 +55,11 @@ Para instalar la Fuente, solo es necesario seguir las instrucciones que se da en
 
 1. Se añade el componente Zend Paginator, que se puede usar desde la clase `DB::paginator()`
 2. Hooks añadidos, que se pueden usar para personalizar tu versión del juego. Todos estos `hook` se pueden aprobechar creando un módulo.
-    1. `hometext` este hook esta justo antes de mostrar el formulario de conexión, se puede usar para añadir algún texto adicional.
-    2. `homeform` para sustituir el formulario por defecto por uno personalizado. 
-        * `modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt]);`
-        * Como usarlo:
+    1. `home.php`
+        * `hometext` este hook esta justo antes de mostrar el formulario de conexión, se puede usar para añadir algún texto adicional.
+        * `homeform` para sustituir el formulario por defecto por uno personalizado. 
+            * `modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt]);`
+            * Como usarlo:
 ```
 #!php
 rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
