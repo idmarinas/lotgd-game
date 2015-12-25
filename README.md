@@ -17,6 +17,9 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 
 Los nuevos requisitos para esta versión son los siguientes:
 
+* Es necesario descargar la versión 1.2.5 +nb Edition de Oliver Brendel para copiar las carpetas `templates`, `modules` e `images`
+    * Los archivos de templates no los usa mi versión, ya que he creado un template propio. Las imagenes he eliminado alguna. 
+    * Proximamente publicaré los módulos que usa **IDMarinas Edition** creados por otros desarrolladores. Está en un repositorio diferente. 
 * PHP 5.4 o superior (yo uso la versión 5.6 y no hay problemas)
 * Base de datos soportadas:
     * No debería haber problemas al usar estas bases de datos ya que se usa una extensión PDO para usarlas.
@@ -26,7 +29,7 @@ Los nuevos requisitos para esta versión son los siguientes:
         * Pdo_Mysql
         * Pdo_Sqlite
         * Pdo_Pgsql
-* Fuente ([Font Awesome](http://fortawesome.github.io/Font-Awesome/)) 
+* Fuente ([Font Awesome](http://fortawesome.github.io/Font-Awesome/))
         
 
 ## Instalacción ##
