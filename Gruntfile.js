@@ -9,8 +9,9 @@ module.exports = function (grunt) {
     meta: {
       name: "La Leyenda de Ignis",
     },
-    //Copiar archivos del proyecto (para publicar)
+    //Copiar archivos del proyecto 
     copy: {
+      // Para desarrollo (localhost)
       toLocalhost: {
         files: [
           {
@@ -21,13 +22,15 @@ module.exports = function (grunt) {
               '!bower_components/**',//No copiar el directorio de bower
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
-              '!**/*.dist'//Ignorar archivos .dist
+              '!**/*.dist',//Ignorar archivos .dist
+              '!**/*.md' // Ignorar archivos .md
             ],
             dest: '/Users/Ivan/Sites/ignis/',
             //filter : 'isFile'
           }
         ]
       },
+      //Para publicar
       production: {
         files: [
           {
@@ -38,7 +41,8 @@ module.exports = function (grunt) {
               '!bower_components/**',//No copiar el directorio de bower
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
-              '!**/*.dist'//Ignorar archivos .dist
+              '!**/*.dist',//Ignorar archivos .dist
+              '!**/*.md' // Ignorar archivos .md
             ],
             dest: '../production',
             //filter : 'isFile'
