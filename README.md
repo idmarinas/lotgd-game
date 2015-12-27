@@ -72,13 +72,15 @@ Para instalar la Fuente, solo es necesario seguir las instrucciones que se da en
         * `hometext` este hook esta justo antes de mostrar el formulario de conexión, se puede usar para añadir algún texto adicional.
         * `homeform` para sustituir el formulario por defecto por uno personalizado. 
             * `modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt]);`
-            * Como usarlo:
-```
-#!php
-rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
-       
-$args['showdefaultform'] = false;// Sino se incluye, se mostrará el formulario por defecto
-``` 
+            * Cómo usarlo: Es necesario incluir el formulario al completo y ademas `$args['showdefaultform'] = false;` para evitar que se muestre el formulario por defecto
+    2. `create.php`
+        * `create-default-form` para cambiar el formulario de creación de personajes
+            * `modulehook("create-default-form", ['showdefaultform' => true,'req' => $req]);`
+            * Cómo usarlo: Es necesario incluir todos los campos del formulario y ademas `$args['showdefaultform'] = false;` para evitar que se muestre el formulario por defecto
+        * `forgotten-password` permite sustituir el formulario de recuperación de contraseña.
+            * `modulehook('forgotten-password', ['showdefaultform'=>true]);`
+            * Cómo usarlo: Es necesario agregar `<input type='text' name='charname'>` y ademas `$args['showdefaultform'] = false;` para evitar que se muestre el formulario por defecto
+
 
 #### Para saber más sobre los componentes Zend ####
 
