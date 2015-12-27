@@ -171,13 +171,13 @@ if ($op=="forgot"){
 		}
 	}else{
 		rawoutput("<form action='create.php?op=forgot' method='POST'>");
-		if (!is_module_active('creationignis'))
+        $creationefault = modulehook('forgotten-password', ['showdefaultform'=>true]);
+		if ($creationefault['showdefaultform'])
 		{
 			output("`bForgotten Passwords:`b`n`n");
 			output("Enter your character's name: ");
-			rawoutput("<input name='charname'>");
+            rawoutput("<input type='text' name='charname'>");
 		}
-		modulehook('forgotten-password');
 		output_notl("`n");
 		$send = translate_inline("Email me my password");
 		rawoutput("<input type='submit' class='button' value='$send'>");
