@@ -385,7 +385,8 @@ if (getsetting("allowcreation",1)==0){
 			$req = $r3;
 		}
 		
-		if (!is_module_active('creationignis'))
+        $createdefaultform = modulehook("create-default-form", ['showdefaultform' => true,'req' => $req]);
+		if ($createdefaultform['showdefaultform'])
 		{
 			rawoutput("<table><tr valign='top'><td>");
 			output("How will you be known to this world? ");
@@ -402,7 +403,7 @@ if (getsetting("allowcreation",1)==0){
 					"<input type='radio' name='sex' value='1'>",
 					"<input type='radio' name='sex' value='0' checked>",true);
 		}
-		modulehook("create-ignis-form", $req);
+		
 		modulehook("create-form");
 		$createbutton = translate_inline("Create your character");
 		rawoutput("<input type='submit' class='button' value='$createbutton'>");
