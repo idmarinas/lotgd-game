@@ -419,7 +419,7 @@ if (getsetting("allowcreation",1)==0){
 		rawoutput("</form>");
 	}
 }
-addnav('Continuar aventura');
+addnav('Login page');
 addnav("Login","index.php");
 page_footer();
 ?>

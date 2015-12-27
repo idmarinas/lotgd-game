@@ -35,7 +35,7 @@ switch ($op) {
 if ($session['user']['loggedin']) {
 	addnav("Return to the news","news.php");
 }else{
-	addnav('Continuar aventura');
+	addnav('Login page');
 	addnav("Login Page","index.php");
 }
 page_footer();
