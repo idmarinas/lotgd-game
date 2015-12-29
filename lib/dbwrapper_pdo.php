@@ -130,7 +130,7 @@ Class DB
 		self::$generatedValue = $result->getGeneratedValue();
 		self::$affectedRows = $result->getAffectedRows();
 		self::$errorInfo = 	$result->getResource()->errorInfo();
-        self::$sqlString = $result->getResource()->getSql();
+        self::$sqlString = $statement->getSql();
 						
 		return $result;
 		
