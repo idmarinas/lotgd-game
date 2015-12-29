@@ -350,7 +350,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			rawoutput("<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>");
 			break;
 		case "float":
-			rawoutput("<input name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8'>");
+			rawoutput("<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8' step='any'>");
 			break;
 		case "string":
 			$len = 50;
