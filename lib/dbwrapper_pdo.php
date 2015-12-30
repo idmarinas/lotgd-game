@@ -324,6 +324,10 @@ Class DB
 	//-- Funciones para paginación
 	public static function paginator($select, $page = 1, $perpage = 25)
 	{
+        //-- Se combierte $page en un número y si es 0 se pone como 1
+        $page = (int) $page;
+        $page = ($page?$page:1);
+
 		$paginatorAdapter = new DbSelect($select, self::getAdapter());
         $paginator        = new Paginator($paginatorAdapter);
         // Página actual
