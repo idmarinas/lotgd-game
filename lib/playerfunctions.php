@@ -85,7 +85,7 @@ function get_player_attack($player=false) {
 }
 
 
-function explained_get_player_attack($player=false) {
+function explained_get_player_attack($player=false, $colored = false) {
 	global $session;
 	if ($player!==false) {
 		$sql="SELECT strength,wisdom,intelligence,attack FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
@@ -103,8 +103,8 @@ function explained_get_player_attack($player=false) {
 	$weapondmg=(int)$user['weapondmg'];
 	$levelbonus=(int)$user['level']-1;
 	$miscbonus-=$weapondmg+$levelbonus;
-	//## Mejorado el detalle de como se explica
-	$explained=sprintf_translate("%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ",
+	//## Mejorado el detalle de como se explica, se puede usar el antiguo
+    if ($colored) return sprintf_translate("%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ",
 		($strbonus >= 0 ? '`8+': '`$-'), abs($strbonus),
 		($speedbonus >= 0 ? '`8+': '`$-'), abs($speedbonus),
 		($wisdombonus >= 0 ? '`8+': '`$-'), abs($wisdombonus),
@@ -113,7 +113,7 @@ function explained_get_player_attack($player=false) {
 		($levelbonus >= 0 ? '`8+': '`$-'), abs($levelbonus),
 		($miscbonus >= 0 ? '`8+': '`$-'), abs($miscbonus)
 	);
-	return $explained;
+    else return sprintf_translate("%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ",$strbonus,$speedbonus,$wisdombonus,$intbonus,$weapondmg,$levelbonus,$miscbonus);
 }
 
 function get_player_defense($player=false) {
@@ -138,7 +138,7 @@ function get_player_defense($player=false) {
 	return max($defense,0);
 }
 
-function explained_get_player_defense($player=false) {
+function explained_get_player_defense($player=false, $colored = false) {
 	global $session;
 	if ($player!==false) {
 		$sql="SELECT constitution,wisdom,defense FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
@@ -155,7 +155,9 @@ function explained_get_player_defense($player=false) {
 	$armordef=(int)$user['armordef'];
 	$levelbonus=(int)$user['level']-1;
 	$miscbonus-=$armordef+$levelbonus;
-	$explained=sprintf_translate("%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC",
+    
+    //## Mejorado el detalle de como se explica, se puede usar el antiguo
+	if ($colored) return sprintf_translate("%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC",
 		($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
 		($constbonus >= 0 ? '`8+' : '`$-'), abs($constbonus),
 		($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
@@ -163,7 +165,7 @@ function explained_get_player_defense($player=false) {
 		($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
 		($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
 	);
-	return $explained;
+    else return sprintf_translate("%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ",$wisdombonus,$constbonus,$speedbonus,$armordef,$levelbonus,$miscbonus);
 }
 
 function get_player_speed($player=false) {
