@@ -27,7 +27,7 @@ function get_player_hitpoints($player = false)
     return max($hitpoints, 10);
 }
 
-function explained_get_player_hitpoints($player = false)
+function explained_get_player_hitpoints($player = false, $colored = false)
 {
     global $session;
     
@@ -49,14 +49,14 @@ function explained_get_player_hitpoints($player = false)
 	$strbonus = $user['strength'] * .3;
 	$levelbonus = ($user['level']-1) * 10;
 
-	$explained=sprintf_translate("%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC",
+	if ($colored) return sprintf_translate("%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC",
 		($conbonus >= 0 ? '`8+': '`$-'), abs($conbonus),
 		($wisbonus >= 0 ? '`8+': '`$-'), abs($wisbonus),
 		($strbonus >= 0 ? '`8+': '`$-'), abs($strbonus),
 		($levelbonus >= 0 ? '`8+': '`$-'), abs($levelbonus),
 		($user['permahitpoints'] >= 0 ? '`8+': '`$-'), abs($user['permahitpoints'])
 	);
-	return $explained;
+    else return sprintf_translate("%s CON %s WIS %s STR %s Train %s MISC", $conbonus, $wisbonus, $strbonus, $levelbonus, $user['permahitpoints'] );
 }
 
 function get_player_attack($player=false) {
