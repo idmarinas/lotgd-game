@@ -719,13 +719,12 @@ function charstats(){
 		//-- Modificado el orden en el que aparecen ciertas estadísticas
         if ($u['alive']) {
             //-- Los HitPoints se calculan en función de los atributos
-			// addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1));
-            addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$hitpoints.check_temp_stat("maxhitpoints",1).'`4<i class="fa fa-question fa-fw pull-right" data-uk-tooltip title="'.addslashes(explained_get_player_hitpoints()).'"></i>`0');
+			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1)." `\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
 			if (is_module_active('staminasystem')) addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
-			addcharstat("Attack", $atk."`\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
-			addcharstat("Defense", $def."`\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
+			addcharstat("Attack", $atk." `\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
+			addcharstat("Defense", $def." `\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
 			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
 			addcharstat("Dexterity", $u['dexterity'].check_temp_stat("dexterity",1));
