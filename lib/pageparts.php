@@ -719,7 +719,7 @@ function charstats(){
 		//-- Modificado el orden en el que aparecen ciertas estadísticas
         if ($u['alive']) {
             //-- Los HitPoints se calculan en función de los atributos
-			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1)." `\$<span title='".explained_get_player_hitpoints()."'>(?)</span>`0".check_temp_stat("attack",1));
+			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1)." `\$<span title='".explained_get_player_hitpoints()."'>(?)</span>`0");
 			if (is_module_active('staminasystem')) addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
