@@ -778,7 +778,7 @@ function charstats(){
 		}
 		addcharstat("Gems", number_format($u['gems'].check_temp_stat("gems",1),0,$point,$sep));
 		addcharstat("Equipment Info");
-		addcharstat("Inventory","");//para mostrar en el inventario en esta posición
+		if (is_module_active('inventorypopup')) addcharstat("Inventory","");//para mostrar en el inventario en esta posición
 		addcharstat("Weapon", $u['weapon']);
 		addcharstat("Armor", $u['armor']);
 		if ($u['hashorse'])
