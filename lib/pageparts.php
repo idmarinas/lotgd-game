@@ -710,7 +710,7 @@ function charstats(){
 			$def = round($def,2);
 		}
 		$point=getsetting('moneydecimalpoint',".");
-		$sep=getsetting('moneythousandssep',",");
+		$sep=getsetting('moneythousandssep',",");        
         
 		addcharstat("Character Info");
 		addcharstat("Name", $u['name']);
@@ -723,6 +723,7 @@ function charstats(){
 			if (is_module_active('staminasystem')) addcharstat("Stamina", "");//Para mostrar el aguante en esta posición
 			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");//Para mostrar el Alcholimetro en esta posición
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
+            //-- Cambiado el orden en el que se muestran los atributos, el ataque y defensa
 			addcharstat("Attack", $atk." `\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
 			addcharstat("Defense", $def." `\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
