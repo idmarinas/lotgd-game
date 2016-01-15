@@ -65,7 +65,7 @@ $mailfunctions = modulehook("mailfunctions", $args);
 
 //output_notl("<table width='25%' border='0' cellpadding='0' cellspacing='2'><tr><td><a href='mail.php' class='motd'>$inbox</a></td><td><a href='mail.php?op=address' class='motd'>$write</a></td>", true);
 // rawoutput("<table width='50%' border='0' cellpadding='0' cellspacing='2'>");
-rawoutput("<table class='mail-striped'><tr>");
+rawoutput("<table><tr>");
 for($i=0;$i<count($mailfunctions);$i++) {
 	if (is_array($mailfunctions[$i])) {
 		if (count($mailfunctions[$i])==2) {
@@ -125,7 +125,7 @@ if ($op==""){
 	$sql = "SELECT subject,messageid," . db_prefix("accounts") . ".name,msgfrom,seen,sent FROM " . db_prefix("mail") . " LEFT JOIN " . db_prefix("accounts") . " ON " . db_prefix("accounts") . ".acctid=" . db_prefix("mail") . ".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" ORDER BY sent DESC";
 	$result = db_query($sql);
 	if (db_num_rows($result)>0){
-		output_notl("<form action='mail.php?op=process' method='POST'><table>",true);
+		output_notl("<form action='mail.php?op=process' method='POST'><table class='mail-striped'>",true);
 		for ($i=0;$i<db_num_rows($result);$i++){
 			$row = db_fetch_assoc($result);
 			if ((int)$row['msgfrom']==0){
