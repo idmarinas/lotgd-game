@@ -308,6 +308,7 @@ if ($op==""){
 
 	output("`@From: ");
 	if ($row['login']>"") {
+        // rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti").";return false;\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
 		rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'></i></a>");
 	}
 	output_notl("`^`b%s`b`n", $row['name']);
@@ -317,7 +318,8 @@ if ($op==""){
 	output("`@Body:`^`n");
 	output("`\$[ipaddress] `^= `#%s`^`n", $row['ip']);
 	$body = htmlentities(stripslashes($row['body']), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-	$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
+	// $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
+    $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
 	$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 	rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");
 	//position tracking
@@ -335,7 +337,8 @@ if ($op==""){
 		output("`n`n`@Page Info:`&`n");
 		$row['pageinfo']=stripslashes($row['pageinfo']);
 		$body = HTMLEntities($row['pageinfo'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-		$body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
+		// $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
+        $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
 		$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 		rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");
 	}
