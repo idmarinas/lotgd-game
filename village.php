@@ -122,9 +122,7 @@ if ($session['user']['slaydragon'] == 1) {
 }
 
 
-if ($session['user']['alive']){ }else{
-	redirect("shades.php");
-}
+if (!$session['user']['alive']) redirect("shades.php");
 
 if (getsetting("automaster",1) && $session['user']['seenmaster']!=1){
 	//masters hunt down truant students
