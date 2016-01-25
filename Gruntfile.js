@@ -42,7 +42,9 @@ module.exports = function (grunt) {
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
               '!**/*.dist',//Ignorar archivos .dist
-              '!**/*.md' // Ignorar archivos .md
+              '!**/*.md', // Ignorar archivos .md
+              '!**/*.phar', // Ignorar los archivos .phar sólo se usa en el desarrollo
+              '!**/*.lock' // Ignorar los archivos .lock sólo se usa en el desarrollo
             ],
             dest: '../production',
             //filter : 'isFile'
