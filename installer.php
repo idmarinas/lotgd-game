@@ -10,12 +10,12 @@ define("IS_INSTALLER",true);
 
 
 //php 5 is required for this version
-//mysql 5.0.3 is required for this version
+//mysql 5.4.* is required for this version
 $requirements_met=true;
 $php_met=true;
 $mysql_met=true;
 
-if (version_compare(PHP_VERSION, '5.0.0') < 0) {
+if (version_compare(PHP_VERSION, '5.4.0') < 0) {
 	$requirements_met=false;
 	$php_met=false;
 } elseif (version_compare(mysql_get_client_info(), '5.0.3') < 0) {
