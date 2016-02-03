@@ -38,6 +38,9 @@ function page_header(){
 			$runheaders[$script] = false;
 		if (!$runheaders[$script]) {
 			modulehook("everyheader", array('script'=>$script));
+            if ($session['user']['loggedin']) {
+				modulehook("everyheader-loggedin", array('script'=>$script));
+			}
 			$runheaders[$script] = true;
 			modulehook("header-$script");
 		}
@@ -121,6 +124,9 @@ function page_footer($saveuser=true){
 	// invalid one which we can then blow away.
 	$replacementbits['__scriptfile__'] = $script;
 	$replacementbits = modulehook("everyfooter",$replacementbits);
+    if ($session['user']['loggedin']) {
+		$replacementbits = modulehook("everyfooter-loggedin", $replacementbits);
+	}
 	unset($replacementbits['__scriptfile__']);
 	//output any template part replacements that above hooks need (eg,
 	//advertising)
