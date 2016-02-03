@@ -24,6 +24,8 @@ module.exports = function (grunt) {
               '!Gruntfile.js',//Ignorar archivo Gruntfile
               '!**/*.dist',//Ignorar archivos .dist
               '!**/*.md', // Ignorar archivos .md
+              '!**/*.phar', // Ignorar los archivos .phar sólo se usa en el desarrollo
+              '!**/*.lock', // Ignorar los archivos .lock sólo se usa en el desarrollo
               '!lib/installer/**', // Ignorar todos los archivos de la carpeta
               '!installer.php' // Ignorar el archivo de instalación
             ],
