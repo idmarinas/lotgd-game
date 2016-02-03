@@ -23,7 +23,9 @@ module.exports = function (grunt) {
               '!*.json',//Ignorar archivos .json del directorio principal
               '!Gruntfile.js',//Ignorar archivo Gruntfile
               '!**/*.dist',//Ignorar archivos .dist
-              '!**/*.md' // Ignorar archivos .md
+              '!**/*.md', // Ignorar archivos .md
+              '!lib/installer/**', // Ignorar todos los archivos de la carpeta
+              '!installer.php' // Ignorar el archivo de instalación
             ],
             dest: '/Users/Ivan/Sites/ignis/',
             //filter : 'isFile'
@@ -44,7 +46,10 @@ module.exports = function (grunt) {
               '!**/*.dist',//Ignorar archivos .dist
               '!**/*.md', // Ignorar archivos .md
               '!**/*.phar', // Ignorar los archivos .phar sólo se usa en el desarrollo
-              '!**/*.lock' // Ignorar los archivos .lock sólo se usa en el desarrollo
+              '!**/*.lock', // Ignorar los archivos .lock sólo se usa en el desarrollo
+              '!lib/installer/**', // Ignorar todos los archivos de la carpeta
+              '!installer.php', // Ignorar el archivo de instalación
+              '!INSTALL.TXT' // Ignorar el archivo de instalación
             ],
             dest: '../production',
             //filter : 'isFile'
