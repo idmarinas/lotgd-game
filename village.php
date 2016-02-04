@@ -260,6 +260,7 @@ addnav("","stats.php");
 addnav("","viewpetition.php");
 addnav("","weaponeditor.php");
 
+modulehook("village-header");
 if (!$skipvillagedesc) {
 	modulehook("collapse{", array("name"=>"villagedesc-".$session['user']['location']));
 	tlschema($schemas['text']);
