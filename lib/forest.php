@@ -42,7 +42,8 @@ function forest($noshowmessage=false) {
 		}
 	}
 	if ($noshowmessage!=true){
-		output("`c`7`bThe Forest`b`0`c");
+		modulehook("forest-header");
+        output("`c`7`bThe Forest`b`0`c");
 		output("The Forest, home to evil creatures and evildoers of all sorts.`n`n");
 		output("The thick foliage of the forest restricts your view to only a few yards in most places.");
 		output("The paths would be imperceptible except for your trained eye.");
