@@ -80,6 +80,8 @@ Para instalar la Fuente, solo es necesario seguir las instrucciones que se da en
         * `forgotten-password` permite sustituir el formulario de recuperación de contraseña.
             * `modulehook('forgotten-password', ['showdefaultform'=>true]);`
             * Cómo usarlo: Es necesario agregar `<input type='text' name='charname'>` y ademas `$args['showdefaultform'] = false;` para evitar que se muestre el formulario por defecto
+    3. `village.php`
+        * `village-header` Se puede utilizar para agregar texto en la cabecera de la ciudad
 
 
 #### Para saber más sobre los componentes Zend ####
