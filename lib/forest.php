@@ -23,6 +23,7 @@ function forest($noshowmessage=false) {
 		}
 	}
 	addnav("Other");
+    modulehook("forest-header");
 	if ($session['user']['level']>=getsetting('maxlevel',15)  && $session['user']['seendragon']==0){
 		// Only put the green dragon link if we are a location which
 		// should have a forest.   Don't even ask how we got into a forest()
@@ -42,7 +43,6 @@ function forest($noshowmessage=false) {
 		}
 	}
 	if ($noshowmessage!=true){
-		modulehook("forest-header");
         output("`c`7`bThe Forest`b`0`c");
 		output("The Forest, home to evil creatures and evildoers of all sorts.`n`n");
 		output("The thick foliage of the forest restricts your view to only a few yards in most places.");
