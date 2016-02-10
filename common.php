@@ -144,11 +144,11 @@ if ($link===false){
 		//I won't, because all people can use it //Oliver
 		//Yet made a bit more interesting text than just the naughty normal "Unable to connect to database - sorry it didn't work out" stuff
 		$notified=false;
-		if (file_exists("lib/smsnotify.php")) {
-			$smsmessage = "No DB Server: " . db_error();
-			require_once("lib/smsnotify.php");
-			$notified=true;
-		}
+		// if (file_exists("lib/smsnotify.php")) {
+		// 	$smsmessage = "No DB Server: " . db_error();
+		// 	require_once("lib/smsnotify.php");
+		// 	$notified=true;
+		// }
 		// And tell the user it died.  No translation here, we need the DB for
 		// translation.
 	 	if (!defined("DB_NODB")) define("DB_NODB",true);
@@ -178,11 +178,11 @@ if ($link===false){
 if (!DB_CONNECTED || !db_select_db ($DB_NAME)){
 	if (!defined("IS_INSTALLER") && DB_CONNECTED){
 		// Ignore this bit.  It's only really for Eric's server
-		if (file_exists("lib/smsnotify.php")) {
-			$smsmessage = "Cant Attach to DB: " . db_error();
-			require_once("lib/smsnotify.php");
-			$notified=true;
-		}
+		// if (file_exists("lib/smsnotify.php")) {
+		// 	$smsmessage = "Cant Attach to DB: " . db_error();
+		// 	require_once("lib/smsnotify.php");
+		// 	$notified=true;
+		// }
 		// And tell the user it died.  No translation here, we need the DB for
 		// translation.
 	 	if (!defined("DB_NODB")) define("DB_NODB",true);
