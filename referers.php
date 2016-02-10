@@ -10,7 +10,8 @@ tlschema("referers");
 
 check_su_access(SU_EDIT_CONFIG);
 
-$sql = "DELETE FROM " . db_prefix("referers") . " WHERE last<'".date("Y-m-d H:i:s",strtotime("-".getsetting("expirecontent",180)." days"))."'";
+$expire = getsetting("expirecontent",180);
+if($expire > 0) $sql = "DELETE FROM " . db_prefix("referers") . " WHERE last<'".date("Y-m-d H:i:s",strtotime("-".$expire." days"))."'";
 db_query($sql);
 $op = httpget('op');
 
