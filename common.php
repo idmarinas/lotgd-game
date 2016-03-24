@@ -447,8 +447,8 @@ $fiveminuteload = getsetting("systemload_lastload",0);
 $currenttime = time();
 if ($currenttime - $lastcheck > 30){
 	$load = exec("uptime");
-	$load = split("load average:", $load);
-	$load = split(", ", $load[1]);
+	$load = explode("load average:", $load);
+	$load = explode(", ", $load[1]);
 	$fiveminuteload = $load[1];
 	savesetting("systemload_lastload",$fiveminuteload);
 	savesetting("systemload_lastcheck",$currenttime);
