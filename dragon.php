@@ -280,7 +280,7 @@ if ($op==""){
 
 
 
-	$howoften=($session['user']['dragonkills']>1?"times":"time"); // no translation, we never know who is viewing...
+	$howoften=translate_inline($session['user']['dragonkills']>1?"times":"time"); // no translation, we never know who is viewing...
 	addnews("`#%s`# has earned the title `&%s`# for having slain `@%s`& `^%s`# %s!",$regname,$session['user']['title'],$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
 	output("`n`n`^You are now known as `&%s`^!!",$session['user']['name']);
 	output("`n`n`&Because you have slain %s`& %s %s, you start with some extras.  You also keep additional permanent hitpoints you've earned.`n",$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
