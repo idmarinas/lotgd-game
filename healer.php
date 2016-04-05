@@ -65,8 +65,8 @@ if ($op==""){
 		}
 		output("`n`n`#You have been healed for %s points!", $diff);
 	}else{
-		output("`3The old creature pierces you with a gaze hard and cruel.");
-		output("Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.");
+		output("`3The old creature pierces you with a gaze hard and cruel.`n");
+		output("Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n");
 		output("Perhaps you should get some more money before you attempt to engage in local commerce.`n`n");
 		output("You recall that the creature had asked for `b`\$%s`3`b gold.", $newcost);
 	}
