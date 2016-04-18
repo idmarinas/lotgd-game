@@ -97,7 +97,7 @@ function display_table($title, $sql, $none=false, $foot=false,
 	} else {
 		output_notl("`c`b`^%s`0`b`c`n", $title);
 	}
-	rawoutput("<table cellspacing='0' cellpadding='2' align='center'>");
+	rawoutput('<table class="hof-table-list">');
 	rawoutput("<tr class='trhead'>");
 	output_notl("<td>`b$rank`b</td><td>`b$name`b</td>", true);
 	if ($data_header !== false) {
@@ -108,7 +108,7 @@ function display_table($title, $sql, $none=false, $foot=false,
 	$result = db_query($sql);
 	if (db_num_rows($result)==0){
 		$size = ($data_header === false) ? 2 : 2+count($data_header);
-		output_notl("<tr class='trlight'><td colspan='$size' align='center'>`&$none`0</td></tr>",true);
+		output_notl("<tr class='trlight'><td colspan='$size'>`&$none`0</td></tr>",true);
 	} else {
 		$i=-1;
 		while ($row = db_fetch_assoc($result)) {
@@ -128,7 +128,7 @@ function display_table($title, $sql, $none=false, $foot=false,
 						$val = translate_inline($val);
 					}
 					if ($tag !== false) $val = $val . " " . $tag[$j];
-					output_notl("<td align='right'>%s</td>", $val, true);
+					output_notl("<td>%s</td>", $val, true);
 				}
 			}
 			rawoutput("</tr>");
