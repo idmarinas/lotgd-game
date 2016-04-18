@@ -41,7 +41,7 @@
 			output_notl($ranks[$row['clanrank']].": `0".$row['c']."`n");
 			if ($row['clanrank']>=CLAN_LEADER) $leaders += $row['c'];
 		}
-		output("`n");
+		output_notl('`n');
 		$noleader = translate_inline("`^There is currently no leader!  Promoting %s`^ to leader as they are the highest ranking member (or oldest member in the event of a tie).`n`n");
 		if ($leaders==0){
 			//There's no leader here, probably because the leader's account

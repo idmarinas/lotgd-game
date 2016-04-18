@@ -40,7 +40,7 @@ if (db_num_rows($result)>0){
 	if (!$row['seen']) {
 		output("`b`#NEW`b`n");
 	}else{
-		output("`n");
+		output_notl('`n');
 	}
 	$sql = "SELECT messageid FROM $mail WHERE msgto='{$session['user']['acctid']}' AND messageid < '$id' ORDER BY messageid DESC LIMIT 1";
 	$result = db_query($sql);

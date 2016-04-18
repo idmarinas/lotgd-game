@@ -188,7 +188,7 @@ if ($op==""){
 			}
 		}
 		if (!$row['seen']) output("`b`#NEW`b`n");
-		else output("`n");
+		else output_notl("`n");
 		output("`b`2From:`b `^%s`n",$row['name']);
 		output("`b`2Subject:`b `^%s`n",$row['subject']);
 		output("`b`2Sent:`b `^%s`n",$row['sent']);

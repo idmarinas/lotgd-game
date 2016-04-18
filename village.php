@@ -294,7 +294,7 @@ modulehook("village",$texts);
 //special hook for all villages... saves queries...
 modulehook("village-{$session['user']['location']}",$texts);
 
-if ($skipvillagedesc) output("`n");
+if ($skipvillagedesc) output_notl("`n");
 
 $args = modulehook("blockcommentarea", array("section"=>$texts['section']));
 if (!isset($args['block']) || $args['block'] != 'yes') {
