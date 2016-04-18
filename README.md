@@ -5,7 +5,7 @@ La versión **IDMarinas Edition** esta basada en la versión **1.2.5 +nb Edition
 
 # Versión IDMarinas #
 
-La versión IDMarinas Edition está actualmente en la versión: 0.7.0-dev 
+La versión IDMarinas Edition está actualmente en la versión: 0.8.1-dev
 
 La intención de hacer una rama nueva del Core, es poder actualizar ciertos aspectos, que se habian quedado desactualizados, como por ejemplo el script que se usa para acceder a la base de datos, a la vez que corregir ciertos errores, y agregar nuevas opciones de personalización.
 
@@ -17,9 +17,9 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 
 Los nuevos requisitos para esta versión son los siguientes:
 
-* Es necesario descargar la versión 1.2.5 +nb Edition de Oliver Brendel para copiar las carpetas `templates`, `modules` e `images`
+* Es necesario descargar la versión 1.2.5 +nb Edition de Oliver Brendel para copiar las carpetas `templates` y `modules`
     * Próximamente publicaré los módulos que usa **IDMarinas Edition** creados por otros desarrolladores. Está en un repositorio diferente. 
-* PHP 5.4 o superior (yo uso la versión 5.6 y no hay problemas)
+* PHP >=5.4 (yo uso la versión 5.6 y no hay problemas)
 * Base de datos soportadas:
     * No debería haber problemas al usar estas bases de datos ya que se usa una extensión PDO para usarlas.
         * Mysqli
