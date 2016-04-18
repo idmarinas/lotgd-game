@@ -232,12 +232,12 @@ debug($sql);
 	$table = array($title, $sql, $none, false, $headers, false);
 } else {
 	$unk = translate_inline("Unknown");
-	$sql = "SELECT name,dragonkills AS data1,level AS data2,'&nbsp;' AS data3, IF(dragonage,dragonage,'$unk') AS data4, '&nbsp;' AS data5, IF(bestdragonage,bestdragonage,'$unk') AS data6 FROM " . db_prefix("accounts") . " WHERE $standardwhere $extra ORDER BY dragonkills $order,level $order,experience $order, acctid $order LIMIT $limit";
+	$sql = "SELECT name,dragonkills AS data1,level AS data2, IF(dragonage,dragonage,'$unk') AS data3, IF(bestdragonage,bestdragonage,'$unk') AS data4 FROM " . db_prefix("accounts") . " WHERE $standardwhere $extra ORDER BY dragonkills $order,level $order,experience $order, acctid $order LIMIT $limit";
 	if ($session['user']['dragonkills']>0) $me = "SELECT count(acctid) AS count FROM ".db_prefix("accounts")." WHERE $standardwhere $extra AND dragonkills $meop {$session['user']['dragonkills']}";
 	$adverb = "most";
 	if ($subop == "least") $adverb = "least";
 	$title = "Heroes with the $adverb dragon kills in the land";
-	$headers = array("Kills", "Level", "&nbsp;", "Days", "&nbsp;", "Best Days");
+	$headers = array("Kills", "Level", "Days", "Best Days");
 	$none = "There are no heroes in the land.";
 	$table = array($title, $sql, $none, false, $headers, false);
 }
