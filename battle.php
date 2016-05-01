@@ -363,7 +363,7 @@ if ($op != "newtarget") {
 			// We will also delete the now old set of companions. Just in case.
 			$companions = $newcompanions;
 			unset($newcompanions);
-			
+
 			if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
 				$badguy = modulehook("endofround",$badguy);
 			}
@@ -380,7 +380,7 @@ if ($op != "newtarget") {
 		expire_buffs();
 		$creaturedmg=0;
 		$selfdmg=0;
-		
+
 		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
 			output("`2`bNext round:`b`n");
 		}
@@ -543,7 +543,10 @@ if ($victory || $defeat){
 			if ($defeat) $badguy = modulehook("battle-defeat",$badguy);
 			unset($badguy['fightoutput']);
 		}
+		output_notl('`n');
 	}
+	if ($victory) $badguy = modulehook('battle-victory-end');
+	if ($defeat) $badguy = modulehook('battle-defeat-end');
 }
 $attackstack = array('enemies'=>$newenemies, 'options'=>$options);
 $session['user']['badguy']=createstring($attackstack);
