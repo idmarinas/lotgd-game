@@ -16,6 +16,7 @@
     "require": {
          "zendframework/zend-db" : "~2.6",
          "zendframework/zend-paginator" : "~2.5",
-         "zendframework/zend-servicemanager": "~2.5"
+         "zendframework/zend-servicemanager": "~2.5",
+         "zendframework/zend-filter": "~2.5"
     }
 }
