@@ -201,9 +201,9 @@ Class DB
 
 			return $data;
 		}
-		else if ('object' == gettype($object))
+		else if ('object' == gettype($sql))
 		{
-			$objectString = self::sql()->buildSqlString($object);
+			$objectString = self::sql()->buildSqlString($sql);
 			self::$sqlString = $objectString;
 
 			$result = self::query($objectString);
