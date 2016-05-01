@@ -79,4 +79,20 @@ function postparse($verify=false, $subval=false){
 	}
 	return array($sql, $keys, $vals);
 }
+
+/**
+ * Return base url
+ */
+function baseUrl($file = false)
+{
+	$basename = (!$file ? basename($_SERVER['SCRIPT_NAME']) : $file);
+	if ($basename)
+	{
+		$path = ($_SERVER['PHP_SELF'] ? trim($_SERVER['PHP_SELF'], '/') : '');
+		$basePos = strpos($path, $basename) ?: 0;
+		$baseUrl = substr($path, 0, $basePos);
+	}
+
+	return  $baseUrl;
+}
 ?>
