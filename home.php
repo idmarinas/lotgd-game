@@ -94,11 +94,11 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	}
 	if ($session['message']>"")
 		output_notl("`b`\$%s`b`n", $session['message'],true);
-    
+
     $uname = translate_inline("Username");
 	$pass = translate_inline("Password");
 	$butt = translate_inline("Log in");
-    
+
     $homeformmodification = modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt]);
     if ($homeformmodification['showdefaultform'])
     {
@@ -108,7 +108,7 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
         $butt = translate_inline("Log in");
         rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
     }
-            
+
 	rawoutput("<script language='JavaScript' src='lib/md5.js'></script>");
 	rawoutput("<script language='JavaScript'>
 	<!--
@@ -137,6 +137,8 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	rawoutput(templatereplace("loginfull",array()));
 	output_notl("`c");
 }
+
+modulehook('homemiddle', []);
 
 $msg = getsetting("loginbanner","*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*");
 output_notl("`n`c`b`&%s`0`b`c`n", $msg);
