@@ -545,8 +545,8 @@ if ($victory || $defeat){
 		}
 		output_notl('`n');
 	}
-	if ($victory) $badguy = modulehook('battle-victory-end');
-	if ($defeat) $badguy = modulehook('battle-defeat-end');
+	if ($victory) modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options]);
+	if ($defeat) modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options]);
 }
 $attackstack = array('enemies'=>$newenemies, 'options'=>$options);
 $session['user']['badguy']=createstring($attackstack);
