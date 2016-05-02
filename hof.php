@@ -169,12 +169,12 @@ if ($op=="money"){
 	$sql = "SELECT name,(round(
 						(CAST(goldinbank as signed)+cast(gold as signed))
 						*(1+0.05*(rand())),$round_money
-						)) as sort1 
+						)) as sort1
 		FROM " . db_prefix("accounts") . " WHERE $standardwhere ORDER BY sort1 $order, level $order, experience $order, acctid $order LIMIT $limit";
 	// for formatting, we need another query...
 	$sql = "SELECT name,format(sort1,0) as data1 FROM ($sql) t";
-	$me = "SELECT count(acctid) AS count FROM ".db_prefix("accounts")." WHERE $standardwhere 
-		AND round((CAST(goldinbank as signed)+cast(gold as signed))*(1+0.05*(rand())),$round_money) 
+	$me = "SELECT count(acctid) AS count FROM ".db_prefix("accounts")." WHERE $standardwhere
+		AND round((CAST(goldinbank as signed)+cast(gold as signed))*(1+0.05*(rand())),$round_money)
 		$meop ".($session['user']['goldinbank'] + $session['user']['gold']);
 	//edward pointed out that a cast is necessary as signed+unsigned=boffo
 //	$sql = "SELECT name,(goldinbank+gold+round((((rand()*10)-5)/100)*(goldinbank+gold))) AS data1 FROM " . db_prefix("accounts") . " WHERE $standardwhere ORDER BY data1 $order, level $order, experience $order, acctid $order LIMIT $limit";
