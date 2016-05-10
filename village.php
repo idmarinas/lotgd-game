@@ -64,6 +64,7 @@ $origtexts = array(
 	"fightnav"=>"Blades Boulevard",
 	"marketnav"=>"Market Street",
 	"tavernnav"=>"Tavern Street",
+	"industrialnav"=>"Industrial Street",
 	"infonav"=>"Info",
 	"othernav"=>"Other",
 	"section"=>"village",
@@ -87,6 +88,7 @@ $schemas = array(
 	"fightnav"=>"village",
 	"marketnav"=>"village",
 	"tavernnav"=>"village",
+	"industrialnav"=>"village",
 	"infonav"=>"village",
 	"othernav"=>"village",
 	"section"=>"village",
@@ -199,6 +201,10 @@ addnav("Z?Ze Gypsy Tent","gypsy.php");
 if (getsetting("betaperplayer", 1) == 1 && @file_exists("pavilion.php")) {
 	addnav("E?Eye-catching Pavilion","pavilion.php");
 }
+
+tlschema($schemas['industrialnav']);
+addnav($texts['industrialnav']);
+tlschema();
 
 tlschema($schemas['tavernnav']);
 addnav($texts['tavernnav']);
