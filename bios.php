@@ -38,7 +38,7 @@ output("`b`&Player Bios:`0`b`n");
 while ($row = db_fetch_assoc($result)) {
 	if ($row['biotime']>$session['user']['recentcomments'])
 		// rawoutput("<img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'> ");
-        rawoutput("<i class='fa fa-fw fa-envelope-o'></i>");
+        rawoutput("<i class='fa fa-fw fa-envelope-o'><img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'></i>");
 	output_notl("`![<a href='bios.php?op=block&userid={$row['acctid']}'>$block</a>]",true);
 	addnav("","bios.php?op=block&userid={$row['acctid']}");
 	output_notl("`&%s`0: `^%s`0`n", $row['name'], soap($row['bio']));

@@ -140,8 +140,7 @@ if ($op==""){
 				}
 			}
 			output_notl("<tr>",true);
-			// output_notl("<td nowrap><input id='checkbox$i' type='checkbox' name='msg[]' value='{$row['messageid']}'><img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16' height='16' alt='".($row['seen']?"Old":"New")."'></td>",true);
-            output_notl("<td nowrap><input id='checkbox$i' type='checkbox' name='msg[]' value='{$row['messageid']}'><i class='fa fa-fw ".($row['seen']?"fa-eye":"fa-envelope-o")."'></i></td>",true);
+            output_notl("<td nowrap><input id='checkbox$i' type='checkbox' name='msg[]' value='{$row['messageid']}'><i class='fa fa-fw ".($row['seen']?"fa-eye":"fa-envelope-o")."'></i><img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16' height='16' alt='".($row['seen']?"Old":"New")."'></td>",true);
 			output_notl("<td><a href='mail.php?op=read&id={$row['messageid']}'>",true);
 			if (trim($row['subject'])=="")
 				output("`i(No Subject)`i");

@@ -53,7 +53,7 @@ if ($target = db_fetch_assoc($result)) {
   $write = translate_inline("Write Mail");
   if ($session['user']['loggedin'])
       //rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
-	  rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'></i></a>");
+	  rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></i></a>");
   output_notl("`n`n");
 
   if ($target['clanname']>"" && getsetting("allowclans",false)){

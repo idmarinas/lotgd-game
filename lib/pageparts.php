@@ -330,7 +330,7 @@ function page_footer($saveuser=true){
 				}
 			</script>";
 			// $script.="<script src=\"templates/jquery.js\"></script>";
-					
+
 			$header=str_replace("{mail}","$add<span id='maillink'>".maillink()."</span>",$header);
 		} else {
 			//no AJAX for slower browsers etc
@@ -359,15 +359,14 @@ function page_footer($saveuser=true){
 		db_free_result($result);
 		if ($session['user']['superuser'] & SU_EDIT_USERS){
 			// $p = "<a href='user.php'>$ued</a>|<a href='viewpetition.php'>$pet</a>";
-            $p = "<i class='fa fa-fw' id='divider'>|</i> <a href='user.php'>$ued</a> <i class='fa fa-fw' id='divider'>|</i> <a href='viewpetition.php'>$pet</a> ";
+            $p = "<i class='fa fa-fw fa-angle-double-right'><span>|</span></i> <a href='user.php'>$ued</a> <i class='fa fa-fw fa-angle-double-right'><span>|</span></i> <a href='viewpetition.php'>$pet</a> ";
 			addnav("", "user.php");
 			addnav("", "viewpetition.php");
 		} else {
 			// $p = "<a href='viewpetition.php'>$pet</a>";
-            $p = "<i class='fa fa-fw' id='divider'>|</i> <a href='viewpetition.php'>$pet</a>";
+            $p = "<i class='fa fa-fw fa-angle-double-right'><span>|</span></i> <a href='viewpetition.php'>$pet</a>";
 			addnav("", "viewpetition.php");
 		}
-		// $p .= "`n `\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
         $p .= "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 		$pcount = templatereplace("petitioncount", array("petitioncount"=>appoencode($p, true)));
 		$footer = str_replace("{petitiondisplay}", $pcount, $footer);
@@ -391,7 +390,7 @@ function page_footer($saveuser=true){
 	$gentime = getmicrotime()-$pagestarttime;
 	$session['user']['gentime']+=$gentime;
 	$session['user']['gentimecount']++;
-	if (getsetting('debug',0)) {	
+	if (getsetting('debug',0)) {
 		global $SCRIPT_NAME;
 		$sql="INSERT INTO ".db_prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
 		$resultdebug=db_query($sql);
@@ -491,7 +490,7 @@ function popup_footer(){
 					window.clearInterval(active_interval);
 				}
 			</script>";
-					
+
 		} else {
 			$add='';
 			//no AJAX for slower browsers etc
@@ -659,7 +658,7 @@ function charstats(){
 		$spd=get_player_speed();
         $hitpoints = get_player_hitpoints();//Salud que tiene el personaje
         $session['user']['maxhitpoints'] = $u['maxhitpoints'] = $hitpoints;
-		
+
         $buffcount = 0;
 		$buffs = "";
 		foreach ($session['bufflist'] as $val) {
@@ -719,8 +718,8 @@ function charstats(){
 			$def = round($def,2);
 		}
 		$point=getsetting('moneydecimalpoint',".");
-		$sep=getsetting('moneythousandssep',",");        
-        
+		$sep=getsetting('moneythousandssep',",");
+
 		addcharstat("Character Info");
 		addcharstat("Name", $u['name']);
 		addcharstat("Dragonkills", "`b".$u['dragonkills']."`b");

@@ -31,7 +31,7 @@ if ($db_num_rows>0){
 	$subject = translate_inline("Subject");
 	$from = translate_inline("Sender");
 	$date = translate_inline("Send Date");
-    // $arrow = ($sorting_direction?"arrow_down.png":"arrow_up.png");
+    $arrowImage = ($sorting_direction?"arrow_down.png":"arrow_up.png");
 	$arrow = ($sorting_direction?"fa-long-arrow-down":"fa-long-arrow-up");
 
 	rawoutput("<form action='mail.php?op=process' method='post'><table class='mail-striped'>");
@@ -40,9 +40,9 @@ if ($db_num_rows>0){
 	// rawoutput("<td>".($sortorder=='subject'?"<img src='images/shapes/$arrow' alt='$arrow'":"")."<a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></td>");
 	// rawoutput("<td>".($sortorder=='name'?"<img src='images/shapes/$arrow' alt='$arrow'":"")."<a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></td>");
 	// rawoutput("<td>".($sortorder=='date'?"<img src='images/shapes/$arrow' alt='$arrow'":"")."<a href='mail.php?sortorder=date&direction=".($sortorder=='date'?$newdirection:$sorting_direction)."'>$date</a></td>");
-	rawoutput("<th>".($sortorder=='subject'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></th>");
-	rawoutput("<th>".($sortorder=='name'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></th>");
-	rawoutput("<th>".($sortorder=='date'?"<i class='fa fa-fw $arrow'></i>":"")." <a href='mail.php?sortorder=date&direction=".($sortorder=='date'?$newdirection:$sorting_direction)."'>$date</a></th>");
+	rawoutput("<th>".($sortorder=='subject'?"<i class='fa fa-fw $arrow'><img src='images/shapes/$arrowImage' alt='$arrow'></i>":"")." <a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></th>");
+	rawoutput("<th>".($sortorder=='name'?"<i class='fa fa-fw $arrow'><img src='images/shapes/$arrowImage' alt='$arrow'></i>":"")." <a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></th>");
+	rawoutput("<th>".($sortorder=='date'?"<i class='fa fa-fw $arrow'><img src='images/shapes/$arrowImage' alt='$arrow'></i>":"")." <a href='mail.php?sortorder=date&direction=".($sortorder=='date'?$newdirection:$sorting_direction)."'>$date</a></th>");
 	// rawoutput("</tr>/");
 	rawoutput("</tr></thead>");
 	$from_list=array();
@@ -61,7 +61,7 @@ if ($db_num_rows>0){
 		rawoutput("<tr>");
 		rawoutput("<td nowrap><input type='checkbox' id='".$row['messageid']."' name='msg[]' value='{$row['messageid']}'>");
 		// rawoutput("<img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16px' height='16px' alt='".($row['seen']?"Old":"New")."'></td>");
-        rawoutput("<i class='fa fa-fw ".($row['seen']?"fa-eye":"fa-envelope-o")."'></i></td>");
+        rawoutput("<i class='fa fa-fw ".($row['seen']?"fa-eye":"fa-envelope-o")."'><img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16px' height='16px' alt='".($row['seen']?"Old":"New")."'></i></td>");
 		rawoutput("<td>");
 		$status_image="";
 		if ((int)$row['msgfrom']==0){
@@ -76,10 +76,9 @@ if ($db_num_rows>0){
 		} else {
 			//get status
 			$online=$user_statuslist[$row['acctid']];
-            // $status=($online?"online":"offline");
-			// $status_image="<img src='images/$status.gif' alt='$status'>";
+            $statusImage=($online?"online":"offline");
 			$status=($online?"colLtGreen":"colLtRed");
-			$status_image="<i src='fa fa-fw fa-user $status'></i>";
+			$status_image="<i class='fa fa-fw fa-user $status'><img src='images/$statusImage.gif' alt='$statusImage'></i>";
 		}
 		//collect sanitized names plus message IDs for later use
 		$sname=sanitize($row['name']);
@@ -138,7 +137,7 @@ if ($db_num_rows>0){
 		$option.="<option value='$i'>".$key."</option>
 			";
 		$i++;
-	}		
+	}
 	$script.="var container = new Array($add);
 			var who = document.getElementById('check_name_select').value;
 			var unchecktext='".translate_inline("Uncheck all")."';

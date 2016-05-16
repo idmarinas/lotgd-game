@@ -32,10 +32,10 @@ if (db_num_rows($result)>0){
 	} else {
 		//get status
 		$online=(int)is_player_online($row['acctid']);
-        // $status=($online?"online":"offline");
+        $statusImage=($online?"online":"offline");
 		// $status_image="<img src='images/$status.gif' alt='$status'>";
 		$status=($online?"colLtGreen":"colLtRed");
-		$status_image="<i src='fa fa-fw fa-user $status'></i>";
+		$status_image="<i class='fa fa-fw fa-user $status'><img src='images/$statusImage.gif' alt='$statusImage'></i>";
 	}
 	if (!$row['seen']) {
 		output("`b`#NEW`b`n");
@@ -76,12 +76,12 @@ if (db_num_rows($result)>0){
 	}else{
 		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</td>");
 	}
-	rawoutput("</tr></table><br/>");
+	rawoutput("</tr></table><hr>");
 	output_notl(sanitize_mb(str_replace("\n","`n",$row['body'])));
 	$sql = "UPDATE $mail SET seen=1 WHERE  msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
 	db_query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
-	rawoutput("<table width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
+	rawoutput("<hr><table width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
 		<td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td>
 		<td><a href='mail.php?op=del&id={$row['messageid']}' class='motd'>$del</a></td>
 		</tr><tr>
