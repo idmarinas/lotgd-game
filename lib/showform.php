@@ -13,10 +13,10 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 	$returnvalues = array();
 	$extensions = array();
 	$extensions = modulehook("showformextensions",$extensions);
-	rawoutput("<table width='100%' cellpadding='0' cellspacing='0'><tr><td>");
+	// rawoutput("<table width='100%' cellpadding='0' cellspacing='0'><tr><td>");
 	rawoutput("<div id='showFormSection$showform_id'></div>");
 	// rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
-	rawoutput("<table cellpadding='2' cellspacing='0'>");
+	// rawoutput("<table cellpadding='2' cellspacing='0'>");
 	$i = 0;
 	foreach ($layout as $key=>$val) {
 		$pretrans = 0;
@@ -40,9 +40,9 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 
 		if ($info[1]=="title"){
 		 	$title_id++;
-		 	rawoutput("</table>");
+		 	// rawoutput("</table>");
 		 	$formSections[$title_id] = $info[0];
-		 	rawoutput("<table id='showFormTable$title_id' cellpadding='2' cellspacing='0'>");
+		 	rawoutput("<table id='showFormTable$title_id'>");
 			rawoutput("<tr><td colspan='2' class='trhead'>",true);
 			output_notl("`b%s`b", $info[0], true);
 			rawoutput("</td></tr>",true);
@@ -59,14 +59,98 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			rawoutput("</td><td valign='top'>");
 			$i++;
 		}
-		switch ($info[1]){
+
+		show_form_field($info, $row, $key, $val, $extensions);
+
+		rawoutput("</td></tr>",true);
+	}
+	// rawoutput("</table>",true);
+	if ($showform_id==1){
+		$startIndex = (int)httppost("showFormTabIndex");
+		if ($startIndex == 0){
+			$startIndex = 1;
+		}
+		if (isset($session['user']['prefs']['tabconfig']) &&
+				$session['user']['prefs']['tabconfig'] == 0) {
+		} else {
+		 	rawoutput("
+		 	<script language='JavaScript'>
+		 	function prepare_form(id){
+		 		var theTable;
+		 		var theDivs='';
+		 		var x=0;
+		 		var weight='';
+		 		for (x in formSections[id]){
+		 			theTable = document.getElementById('showFormTable'+x);
+		 			if (x != $startIndex ){
+			 			theTable.style.visibility='hidden';
+			 			theTable.style.display='none';
+			 			weight='';
+			 		}else{
+			 			theTable.style.visibility='visible';
+			 			theTable.style.display='';
+			 			weight='color: yellow;';
+			 		}
+			 		theDivs += \"<div id='showFormButton\"+x+\"' class='trhead' style='\"+weight+\"float: left; cursor: pointer; cursor: hand; padding: 5px; border: 1px solid #000000;' onClick='showFormTabClick(\"+id+\",\"+x+\");'>\"+formSections[id][x]+\"</div>\";
+		 		}
+		 		theDivs += \"<div style='display: block;'>&nbsp;</div>\";
+				theDivs += \"<input type='hidden' name='showFormTabIndex' value='$startIndex' id='showFormTabIndex'>\";
+		 		document.getElementById('showFormSection'+id).innerHTML = theDivs;
+		 	}
+		 	function showFormTabClick(formid,sectionid){
+		 		var theTable;
+		 		var theButton;
+		 		for (x in formSections[formid]){
+		 			theTable = document.getElementById('showFormTable'+x);
+		 			theButton = document.getElementById('showFormButton'+x);
+		 			if (x == sectionid){
+		 				theTable.style.visibility='visible';
+		 				theTable.style.display='';
+		 				theButton.style.fontWeight='normal';
+		 				theButton.style.color='yellow';
+						document.getElementById('showFormTabIndex').value = sectionid;
+		 			}else{
+		 				theTable.style.visibility='hidden';
+		 				theTable.style.display='none';
+		 				theButton.style.fontWeight='normal';
+		 				theButton.style.color='';
+		 			}
+		 		}
+		 	}
+		 	formSections = new Array();
+			</script>");
+		}
+	}
+	if (isset($session['user']['prefs']['tabconfig']) &&
+			$session['user']['prefs']['tabconfig'] == 0) {
+	} else {
+		rawoutput("<script language='JavaScript'>");
+		rawoutput("formSections[$showform_id] = new Array();");
+		foreach ($formSections as $key=>$val) {
+			rawoutput("formSections[$showform_id][$key] = '".addslashes($val)."';");
+		}
+		rawoutput("prepare_form($showform_id);</script>");
+	}
+	rawoutput("</td></tr></table>");
+	tlschema("showform");
+	$save = translate_inline("Save");
+	tlschema();
+	if (!$nosave) rawoutput("<input type='submit' class='button' value='$save'>");
+
+	return $returnvalues;
+}
+
+function show_form_field($info, $row, $key, $val, $extensions)
+{
+	switch ($info[1])
+	{
 		case "title":
 		case "note":
 			break;
 		case "theme":
 			// A generic way of allowing a theme to be selected.
 			$skins = array();
-		    $handle = @opendir("templates");
+			$handle = @opendir("templates");
 			// Template directory open failed
 			if (!$handle) {
 				output("None available");
@@ -260,7 +344,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			break;
 		case "enumpretrans":
 			$pretrans = 1;
-		    // FALLTHROUGH
+			// FALLTHROUGH
 		case "enum":
 			reset($info);
 			list($k,$v)=each($info);
@@ -324,7 +408,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 		case "textarea":
 			$cols = 0;
 			if (isset($info[2])) $cols = $info[2];
-		    if (!$cols) $cols = 70;
+			if (!$cols) $cols = 70;
 			$text = "";
 			if (isset($row[$key])) {
 				$text = $row[$key];
@@ -374,84 +458,6 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 				else $val = "";
 				rawoutput("<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
 			}
-		}
-		rawoutput("</td></tr>",true);
+		break;
 	}
-	rawoutput("</table>",true);
-	if ($showform_id==1){
-		$startIndex = (int)httppost("showFormTabIndex");
-		if ($startIndex == 0){
-			$startIndex = 1;
-		}
-		if (isset($session['user']['prefs']['tabconfig']) &&
-				$session['user']['prefs']['tabconfig'] == 0) {
-		} else {
-		 	rawoutput("
-		 	<script language='JavaScript'>
-		 	function prepare_form(id){
-		 		var theTable;
-		 		var theDivs='';
-		 		var x=0;
-		 		var weight='';
-		 		for (x in formSections[id]){
-		 			theTable = document.getElementById('showFormTable'+x);
-		 			if (x != $startIndex ){
-			 			theTable.style.visibility='hidden';
-			 			theTable.style.display='none';
-			 			weight='';
-			 		}else{
-			 			theTable.style.visibility='visible';
-			 			theTable.style.display='inline';
-			 			weight='color: yellow;';
-			 		}
-			 		theDivs += \"<div id='showFormButton\"+x+\"' class='trhead' style='\"+weight+\"float: left; cursor: pointer; cursor: hand; padding: 5px; border: 1px solid #000000;' onClick='showFormTabClick(\"+id+\",\"+x+\");'>\"+formSections[id][x]+\"</div>\";
-		 		}
-		 		theDivs += \"<div style='display: block;'>&nbsp;</div>\";
-				theDivs += \"<input type='hidden' name='showFormTabIndex' value='$startIndex' id='showFormTabIndex'>\";
-		 		document.getElementById('showFormSection'+id).innerHTML = theDivs;
-		 	}
-		 	function showFormTabClick(formid,sectionid){
-		 		var theTable;
-		 		var theButton;
-		 		for (x in formSections[formid]){
-		 			theTable = document.getElementById('showFormTable'+x);
-		 			theButton = document.getElementById('showFormButton'+x);
-		 			if (x == sectionid){
-		 				theTable.style.visibility='visible';
-		 				theTable.style.display='inline';
-		 				theButton.style.fontWeight='normal';
-		 				theButton.style.color='yellow';
-						document.getElementById('showFormTabIndex').value = sectionid;
-		 			}else{
-		 				theTable.style.visibility='hidden';
-		 				theTable.style.display='none';
-		 				theButton.style.fontWeight='normal';
-		 				theButton.style.color='';
-		 			}
-		 		}
-		 	}
-		 	formSections = new Array();
-			</script>");
-		}
-	}
-	if (isset($session['user']['prefs']['tabconfig']) &&
-			$session['user']['prefs']['tabconfig'] == 0) {
-	} else {
-		rawoutput("<script language='JavaScript'>");
-		rawoutput("formSections[$showform_id] = new Array();");
-		foreach ($formSections as $key=>$val) {
-			rawoutput("formSections[$showform_id][$key] = '".addslashes($val)."';");
-		}
-		rawoutput("
-		prepare_form($showform_id);
-		</script>");
-	}
-	rawoutput("</td></tr></table>");
-	tlschema("showform");
-	$save = translate_inline("Save");
-	tlschema();
-	if ($nosave) {}
-	else rawoutput("<input type='submit' class='button' value='$save'>");
-	return $returnvalues;
 }
-?>
