@@ -16,7 +16,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 	// rawoutput("<table width='100%' cellpadding='0' cellspacing='0'><tr><td>");
 	rawoutput("<div id='showFormSection$showform_id'></div>");
 	// rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
-	// rawoutput("<table cellpadding='2' cellspacing='0'>");
+	rawoutput("<table cellpadding='2' cellspacing='0'>");
 	$i = 0;
 	foreach ($layout as $key=>$val) {
 		$pretrans = 0;
@@ -40,7 +40,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 
 		if ($info[1]=="title"){
 		 	$title_id++;
-		 	// rawoutput("</table>");
+		 	rawoutput("</table>");
 		 	$formSections[$title_id] = $info[0];
 		 	rawoutput("<table id='showFormTable$title_id'>");
 			rawoutput("<tr><td colspan='2' class='trhead'>",true);
@@ -60,11 +60,11 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 			$i++;
 		}
 
-		show_form_field($info, $row, $key, $val, $extensions);
+		show_form_field($info, $row, $key, $keyout, $val, $extensions);
 
 		rawoutput("</td></tr>",true);
 	}
-	// rawoutput("</table>",true);
+	rawoutput("</table>",true);
 	if ($showform_id==1){
 		$startIndex = (int)httppost("showFormTabIndex");
 		if ($startIndex == 0){
@@ -131,7 +131,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 		}
 		rawoutput("prepare_form($showform_id);</script>");
 	}
-	rawoutput("</td></tr></table>");
+	// rawoutput("</td></tr></table>");
 	tlschema("showform");
 	$save = translate_inline("Save");
 	tlschema();
@@ -140,7 +140,7 @@ function showform($layout,$row,$nosave=false,$keypref=false){
 	return $returnvalues;
 }
 
-function show_form_field($info, $row, $key, $val, $extensions)
+function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 {
 	switch ($info[1])
 	{
