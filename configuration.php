@@ -42,7 +42,7 @@ switch ($type_setting) {
 				output("`^Extended Settings saved.`0");
 				$op = "";
 				httpset($op, "");
-				break;				
+				break;
 		}
 		break;
 	default:
@@ -230,24 +230,24 @@ module_editor_navs('settings', 'configuration.php?op=modulesettings&module=');
 switch ($type_setting) {
 	case "extended":
 		switch ($op) {
-		
+
 			case "":
-				
+
 				$useful_vals=array();
-				
+
 				//this is just a way to check and insert a setting I deem necessary without going through the installer
 				foreach ($setup_extended as $key=>$val) {
 					$settings_extended->getSetting($key);
 				}
 
-				//				
-				
+				//
+
 				$vals = $settings_extended->getArray() + $useful_vals;
 
 				rawoutput("<form action='configuration.php?settings=extended&op=save' method='POST'>");
 				addnav("","configuration.php?settings=extended&op=save");
 				showform($setup_extended,$vals);
-				rawoutput("</form>");		
+				rawoutput("</form>");
 				break;
 		}
 		break;
@@ -268,7 +268,7 @@ switch ($type_setting) {
 					$enum.=",$i,$str";
 				}
 				rawoutput(tlbutton_clear());
-				
+
 				$secstonewday = secondstonextgameday($details);
 				$useful_vals = array(
 					"datacachepath"=>$DB_DATACACHEPATH,
@@ -289,7 +289,7 @@ switch ($type_setting) {
 
 				//
 
-				
+
 				$vals = $settings->getArray() + $useful_vals;
 
 				rawoutput("<form action='configuration.php?op=save' method='POST'>");
