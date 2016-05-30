@@ -62,7 +62,7 @@ if (db_num_rows($result)>0){
 	output_notl($status_image."`n",true);
 	output("`b`2Subject:`b `^%s`n",$row['subject']);
 	output("`b`2Sent:`b `^%s`n",$row['sent']);
-	rawoutput("<table>");
+	rawoutput("<table class='table-bg-transparent'>");
 	rawoutput("<tr><td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td><td><a href='mail.php?op=address&id={$row['messageid']}' class='motd'>$forward</a><td>");
 	if ($pid > 0) {
 		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</a>");
@@ -81,10 +81,9 @@ if (db_num_rows($result)>0){
 	$sql = "UPDATE $mail SET seen=1 WHERE  msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
 	db_query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
-	rawoutput("<hr><table width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
+	rawoutput("<hr><table class='table-bg-transparent' width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
 		<td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td>
 		<td><a href='mail.php?op=del&id={$row['messageid']}' class='motd'>$del</a></td>
-		</tr><tr>
 		<td><a href='mail.php?op=unread&id={$row['messageid']}' class='motd'>$unread</a></td>");
 	// Don't allow reporting of system messages as abuse.
 	if ((int)$row['msgfrom']!=0) {
