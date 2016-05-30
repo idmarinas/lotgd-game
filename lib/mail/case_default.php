@@ -34,7 +34,7 @@ if ($db_num_rows>0){
     $arrowImage = ($sorting_direction?"arrow_down.png":"arrow_up.png");
 	$arrow = ($sorting_direction?"fa-long-arrow-down":"fa-long-arrow-up");
 
-	rawoutput("<form action='mail.php?op=process' method='post'><table class='mail-striped'>");
+	rawoutput("<form action='mail.php?op=process' method='post'><table class='table-auto-color table-mail-list'>");
 	rawoutput("<thead><tr class='trhead'><th></th>");
 	rawoutput("<th>".($sortorder=='subject'?"<i class='fa fa-fw $arrow'><img src='images/shapes/$arrowImage' alt='$arrow'></i>":"")." <a href='mail.php?sortorder=subject&direction=".($sortorder=='subject'?$newdirection:$sorting_direction)."'>$subject</a></th>");
 	rawoutput("<th>".($sortorder=='name'?"<i class='fa fa-fw $arrow'><img src='images/shapes/$arrowImage' alt='$arrow'></i>":"")." <a href='mail.php?sortorder=name&direction=".($sortorder=='name'?$newdirection:$sorting_direction)."'>$from</a></th>");
