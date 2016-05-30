@@ -133,7 +133,7 @@ if ($prefs['mailheight'] == "") {
 
 $cols=max(10,$prefs['mailwidth']);
 $rows=max(10,$prefs['mailheight']);
-rawoutput("<table style='border:0;cellspacing:10'><tr><td><input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'></td><td><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'></td>");
+rawoutput("<table class='table-bg-transparent' style='border:0;cellspacing:10'><tr><td><input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'></td><td><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'></td>");
 rawoutput("<td><input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'></td><td><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'></td></tr></table>");
 //substr is necessary if you have chars that take up more than 1 byte. That breaks the entire HTMLentities up and it returns nothing
 rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout' cols='$cols' rows='$rows'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","ISO-8859-1")))), ENT_COMPAT, getsetting("charset", "ISO-8859-1")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>");
