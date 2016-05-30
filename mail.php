@@ -53,7 +53,7 @@ array_push($args, array("mail.php?op=address",$write));
 // and "functionname" is the name of the mail function to add
 $mailfunctions = modulehook("mailfunctions", $args);
 
-rawoutput("<table width='50%' border='0' cellpadding='0' cellspacing='2'>");
+rawoutput("<table class='table-bg-transparent' width='50%' border='0' cellpadding='0' cellspacing='2'>");
 rawoutput("<tr>");
 $count_mailfunctions = count($mailfunctions);
 for($i=0;$i<$count_mailfunctions;++$i) {
