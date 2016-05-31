@@ -341,11 +341,10 @@ Class DB
 	public static function paginator($select, $page = 1, $perpage = 25)
 	{
         //-- Se combierte $page en un número y si es 0 se pone como 1
-        $page = (int) $page;
-        $page = ($page?$page:1);
+        $page = max(1, (int) $page);
 
 		$paginatorAdapter = new DbSelect($select, self::getAdapter());
-        $paginator        = new Paginator($paginatorAdapter);
+        $paginator = new Paginator($paginatorAdapter);
         // Página actual
         $paginator->setCurrentPageNumber($page);
         // Número máximo de resultados por página
