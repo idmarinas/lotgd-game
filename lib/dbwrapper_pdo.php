@@ -126,7 +126,7 @@ Class DB
 		$dbinfo['queriesthishit']++;
 		$dbinfo['querytime'] += $info['elapse'];
 
-		//-- Guardar tados útiles
+		//-- Guardar datos útiles
 		self::$generatedValue = $result->getGeneratedValue();
 		self::$affectedRows = $result->getAffectedRows();
 		self::$errorInfo = 	$result->getResource()->errorInfo();
