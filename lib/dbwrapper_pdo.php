@@ -37,7 +37,7 @@ Class DB
 		if (!self::$adapter)
 		{
 			$title = 'Error en la base de datos';
-			$message = 'Se ha producido un error al conectar a la base de datos del juego. `nPor favor espere uno minutos, si el problema continua pongase en contacto con los administradores.';
+			$message = 'Se ha producido un error al conectar a la base de datos del juego. `nPor favor espere unos minutos, si el problema continua póngase en contacto con los administradores.';
 
 			die(self::template($title, $message));
 		}
