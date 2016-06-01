@@ -5,7 +5,7 @@ La versión **IDMarinas Edition** esta basada en la versión **1.2.5 +nb Edition
 
 # Versión IDMarinas #
 
-La versión IDMarinas Edition está actualmente en la versión: 0.9.0-dev
+La versión IDMarinas Edition está actualmente en la versión: 0.9.0
 
 La intención de hacer una rama nueva del Core, es poder actualizar ciertos aspectos, que se habian quedado desactualizados, como por ejemplo el script que se usa para acceder a la base de datos, a la vez que corregir ciertos errores, y agregar nuevas opciones de personalización.
 
