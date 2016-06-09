@@ -49,9 +49,9 @@ function show_enemies($enemies) {
 			case 2:
 			output("%s%s%s%s (Level %s)`n",
 				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"", 
+				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
 				$badguy['creaturename'],
-				$ccode, 
+				$ccode,
 				$badguy['creaturelevel']);
 			rawoutput("<table class='battle-bar-display enemy'><tr><td>");
 			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
@@ -65,9 +65,9 @@ function show_enemies($enemies) {
 			case 1:
 			output("%s%s%s%s (Level %s)`n",
 				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"", 
+				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
 				$badguy['creaturename'],
-				$ccode, 
+				$ccode,
 				$badguy['creaturelevel']);
 			rawoutput("<table class='battle-bar-display enemy'><tr><td>");
 			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
@@ -81,11 +81,11 @@ function show_enemies($enemies) {
 			default:
 			output("%1s%s%s%s's %s%s (Level %s): `6%s`0`n",
 				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"", 
+				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
 				$badguy['creaturename'],
 				$ccode,
 				$hitpointstext,
-				$ccode, 
+				$ccode,
 				$badguy['creaturelevel'],
 				($badguy['creaturehealth']>0?$health:translate_inline("`7DEFEATED`0"))
 			);
@@ -290,7 +290,7 @@ function autosettarget($localenemies) {
  * @param string $activate The stage of activation. Can be one of these: "fight", "defend", "heal" or "magic".
  * @return array The changed companion
  */
-function report_companion_move($badguy,$companion, $activate="fight") {
+function report_companion_move(&$badguy,$companion, $activate="fight") {
 	global $session,$creatureattack,$creatureatkmod,$adjustment;
 	global $creaturedefmod,$defmod,$atkmod,$atk,$def,$count,$defended,$needtosstopfighting;
 
