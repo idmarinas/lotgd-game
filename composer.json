@@ -18,6 +18,8 @@
          "zendframework/zend-paginator" : "~2.5",
          "zendframework/zend-servicemanager": "~2.5",
          "zendframework/zend-filter": "~2.5",
-         "zendframework/zend-mail": "~2.5"
+         "zendframework/zend-mail": "~2.5",
+         "zendframework/zend-math": "~2.5",
+         "dwoo/dwoo" : "dev-beta"
     }
 }
