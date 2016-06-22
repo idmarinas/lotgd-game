@@ -1,11 +1,11 @@
-## Acerca de IDMarinas Edition ##
+# Acerca de IDMarinas Edition #
 
 La versión **IDMarinas Edition** esta basada en la versión **1.2.5 +nb Edition** de Oliver Brendel ([NB Core](http://nb-core.org)).
 
 
-# Versión IDMarinas #
+## Versión IDMarinas ##
 
-La versión IDMarinas Edition está actualmente en la versión: 0.9.0
+La versión IDMarinas Edition está actualmente en la versión: 0.9.1
 
 La intención de hacer una rama nueva del Core, es poder actualizar ciertos aspectos, que se habian quedado desactualizados, como por ejemplo el script que se usa para acceder a la base de datos, a la vez que corregir ciertos errores, y agregar nuevas opciones de personalización.
 
