@@ -42,7 +42,7 @@ if ($session['user']['loggedin']){
 	$no=translate_inline("`\$No!`0");
 	$none=translate_inline("`iNone`i");
 	output("`n`nAccounts which you referred:`n");
-	rawoutput("<table border='0' cellpadding='3' cellspacing='0'><tr><td>$name</td><td>$level</td><td>$awarded</td></tr>");
+	rawoutput("<table border='0' cellpadding='3' cellspacing='0'><tr class='trhead'><td>$name</td><td>$level</td><td>$awarded</td></tr>");
 	$number=db_num_rows($result);
 	for ($i=0;$i<$number;$i++){
 		$row = db_fetch_assoc($result);
@@ -55,7 +55,7 @@ if ($session['user']['loggedin']){
 		rawoutput("</td></tr>");
 	}
 	if (db_num_rows($result)==0){
-		rawoutput("<tr><td colspan='3' align='center'>");
+		rawoutput("<tr class='trlight'><td colspan='3' align='center'>");
 		output_notl($none);
 		rawoutput("</td></tr>");
 	}
