@@ -15,11 +15,11 @@ function saveuser(){
 		if (!$chatloc){
 			$session['user']['chatloc']=0;
 		}
-		
+
 		$session['user']['allowednavs']=serialize($session['allowednavs']);
 		$session['user']['bufflist']=serialize($session['bufflist']);
 		//if (isset($companions)&& is_array($companions)) $session['user']['companions']=serialize($companions);
-		
+
 		/*
 		accounts_everypage table includes:
 			acctid (primary key, unique)
@@ -29,23 +29,25 @@ function saveuser(){
 			gentimecount
 			gensize
 		*/
-		
+
 		$everyhit_sql = "UPDATE ".db_prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
 		//debug($everyhit_sql);
 		db_query($everyhit_sql);
-		
-		$sql="";
-		foreach ($session['user'] as $key=>$val) {
+
+		$sql = [];
+		foreach ($session['user'] as $key=>$val)
+		{
 			if (is_array($val)) $val = serialize($val);
 			//only update columns that have changed.
-			if ($baseaccount[$key]!=$val){
-				$sql.="$key='".addslashes($val)."', ";
+			if ($baseaccount[$key] != $val)
+			{
+				$sql[] = "`$key` = '".addslashes($val)."'";
 			}
 		}
 		//due to the change in the accounts table -> moved output -> save everyhit
 		$sql.="laston='".date("Y-m-d H:i:s")."', ";
 		$sql = substr($sql,0,strlen($sql)-2);
-		$sql="UPDATE " . db_prefix("accounts") . " SET " . $sql .
+		$sql="UPDATE " . db_prefix("accounts") . " SET " . implode(',', $sql) .
 			" WHERE acctid = ".$session['user']['acctid'];
 		db_query($sql);
 		if (isset($session['output']) && $session['output']) {
