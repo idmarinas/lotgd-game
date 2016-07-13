@@ -45,9 +45,8 @@ function saveuser(){
 			}
 		}
 		//due to the change in the accounts table -> moved output -> save everyhit
-		$sql.="laston='".date("Y-m-d H:i:s")."', ";
-		$sql = substr($sql,0,strlen($sql)-2);
-		$sql="UPDATE " . db_prefix("accounts") . " SET " . implode(',', $sql) .
+		$sql[] = "`laston` = '".date("Y-m-d H:i:s")."'";
+		$sql = "UPDATE " . db_prefix("accounts") . " SET " . implode(',', $sql) .
 			" WHERE acctid = ".$session['user']['acctid'];
 		db_query($sql);
 		if (isset($session['output']) && $session['output']) {
