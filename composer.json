@@ -14,12 +14,16 @@
         "process-timeout": 5000
     },
     "require": {
-         "zendframework/zend-db" : "^2.6",
-         "zendframework/zend-paginator" : "^2.5",
-         "zendframework/zend-servicemanager": "^2.5",
-         "zendframework/zend-filter": "^2.5",
-         "zendframework/zend-mail": "^2.5",
-         "zendframework/zend-math": "^2.5",
-         "dwoo/dwoo" : "dev-beta"
+        "zendframework/zend-db": "^2.8",
+        "zendframework/zend-paginator": "^2.7",
+        "zendframework/zend-servicemanager": "^2.5",
+        "zendframework/zend-filter": "^2.7",
+        "zendframework/zend-mail": "^2.7",
+        "zendframework/zend-math": "^2.5",
+        "zendframework/zend-cache": "^2.7",
+        "zendframework/zend-serializer": "^2.8",
+        "zendframework/zend-debug": "^2.5",
+        "zendframework/zend-escaper": "^2.5",
+        "dwoo/dwoo" : "dev-beta"
     }
 }
