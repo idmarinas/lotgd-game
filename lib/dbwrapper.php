@@ -8,7 +8,7 @@ require_once("settings.php");
 /* * * *
  * Avaiable values for DBTYPE:
  *
- *  mysqli:     The ext/mysqli driver 
+ *  mysqli:     The ext/mysqli driver
  *  pgsql:      The ext/pgsql driver
  *  sqlsrv:     The ext/sqlsrv driver (from Microsoft)
  *  mysql:      MySQL through the PDO extension -> DEFAULT
@@ -22,7 +22,7 @@ $dbinfo = array();
 $dbinfo['queriesthishit']=0;
 $dbinfo['querytime']=0;
 
-require('./lib/dbwrapper_pdo.php');
+require_once './lib/dbwrapper_pdo.php';
 
 if ('mysqli' == strtolower(DBTYPE)) $driver = 'Mysqli';
 else if ('pgsql' == strtolower(DBTYPE)) $driver = 'Pgsql';
