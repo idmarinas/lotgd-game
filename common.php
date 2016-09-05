@@ -42,7 +42,7 @@ $logd_version = "1.0.0 IDMarinas Edition";
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
 
 //-- Autocargar las clases para agregar nuevas opciones al juego
-require('vendor/autoload.php');
+require_once 'vendor/autoload.php';
 //-- Fin autocargar las clases
 
 // Include some commonly needed and useful routines
@@ -96,8 +96,6 @@ require_once("lib/debuglog.php");
 require_once("lib/forcednavigation.php");
 require_once("lib/php_generic_environment.php");
 
-//session_register("session");
-//deprecated
 session_start();
 
 $session =& $_SESSION['session'];
