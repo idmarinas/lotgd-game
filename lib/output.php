@@ -8,6 +8,8 @@
 * @author Eric Stevens+JT Traub, rewritten Oliver Brendel to OOP + adapted
 */
 
+use Zend\Debug\Debug as LotgdDebug;
+
 class output_collector {
 
 	private $output; //!< the output to the template body
@@ -19,7 +21,7 @@ class output_collector {
 	/**
 	* Constructor. Fill our class with the colors and set all up.
 	*/
-	
+
 	public function __construct() {
 		$this->output='';
 		$this->nestedtags=array();
@@ -80,8 +82,8 @@ class output_collector {
 		$escape=array(')','$',"(","[","]","{","}");
 		foreach ($escape as $letter) {
 			if (isset($cols[$letter])) $cols["\\".$letter]=$cols[$letter];
-			unset($cols[$letter]);	
-		}		
+			unset($cols[$letter]);
+		}
 		$this->colormap_esc=array_keys($cols); //please, no empty color array.
 		$this->colormap=array_keys($this->colors);
 	}
@@ -156,7 +158,7 @@ class output_collector {
 	* Returns the formatted output
 	* @return the complete output for the {content} tag
 	*/
-	
+
 	public function get_output(){
 		$output=$this->output;
 		//clean up unclosed output tags.
@@ -165,28 +167,28 @@ class output_collector {
 			if ($val === true) $output.="</".$key.">";
 		}
 		return $output;
-	
+
 	}
-	
+
 	/**
 	* Returns the formatted output
-	* @return the complete output WITHOUT closing open tags 
+	* @return the complete output WITHOUT closing open tags
 	*/
 	public function get_rawoutput(){
 		$output=$this->output;
 		return $output;
-	
-	}	
+
+	}
 	/**
 	* If you want to block new output, this is your function.
 	* @param $block boolean or 0,1 or similar
 	* @return void
 	*/
-	
+
 	function set_block_new_output($block) {
 		$this->block_new_output = ($block?true:false);
 	}
-	
+
 	/**
 	* Returns if new output is blocked or not
 	* @return boolean
@@ -202,24 +204,22 @@ class output_collector {
 	* @param $force Default is false, if true it will always be outputted to ANY user. If false, only SU_DEBUG will see it.
 	* @return void
 	*/
-	
-	function debug($text, $force=false){
+
+	function debug($text, $force=false)
+	{
 		global $session;
 		$temp = $this->get_block_new_output();
 		$this->set_block_new_output(false);
-		if ($force || $session['user']['superuser'] & SU_DEBUG_OUTPUT){
-			if (is_array($text)){
-				require_once("lib/dump_item.php");
-				$text = appoencode(dump_item($text),true);
-			}
-			$this->rawoutput("<div class='debug'>$text</div>");
+		if ($force || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
+		{
+			$this->rawoutput('<div class="debug">'.LotgdDebug::dump($text, null, false).'</div>');
 		}
 		$this->set_block_new_output($temp);
 	}
 
 	/**
 	* This function puts the lotgd formatting `whatever into HTML tags. It will automatically close previous tags before opening new ones for the same class.
-	* @param $data The logd formatted string. 
+	* @param $data The logd formatted string.
 	* @param $priv If true, it uses no htmlentites before outputting to the browser, means it will parse HTML code through. Default is false
 	* @return void
 	*/
@@ -335,7 +335,7 @@ class output_collector {
 		}
 		return $out;
 	}
-		
+
 	/**
 	* Returns the complete color array
 	* @return an array with $colorcode=>$csstag format
@@ -349,7 +349,7 @@ class output_collector {
 	* Colormap for use with sanitize commands
 	* @return Returns only the codes with no spaces: $colorcode$colorcode...
 	*/
-	
+
 	public function get_colormap() {
 		return implode("",$this->colormap);
 	}
@@ -371,10 +371,8 @@ class output_collector {
 	public function get_colormap_escaped_array() {
 		return $this->colormap_esc;
 	}
-	
+
 }
-
-
 
 /* END of OOP section */
 
