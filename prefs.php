@@ -170,7 +170,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 							$serveraddress=sprintf("http://%s?op=val&id=%s",$_SERVER['SERVER_NAME']."/create.php",$emailverification);
 							$serverurl=sprintf("http://%s",$_SERVER['SERVER_NAME']);
 						}
-						
+
 						$msg = translate_mail(array("An email change has been requested to this email account.`n`nLogin name: %s `n`n",$shortname));
 						$confirm = translate_mail(array("In order to confirm it, you will need to click on the link below.`n`n %s`n`nNote: You need to be LOGGED OUT of the game to do so. If you are logged in while clicking, log out and try again.`n`n",$serveraddress,$emailverification),0);
 						$oldconfirm = translate_mail(array("The validation link has been sent, along with this email address, to the old account to verify your change.`n`n"));
@@ -247,7 +247,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 
 		"Display Preferences,title",
 		"template"=>"Skin,theme",
-		"language"=>"Language,enum,".getsetting("serverlanguages","en,English,de,Deutsch,fr,Français,dk,Danish,es,Español,it,Italian"),
+		"language"=>"Language,enum,".getsetting("serverlanguages","en,English,de,Deutsch,fr,Franï¿½ais,dk,Danish,es,Espaï¿½ol,it,Italian"),
 		"tabconfig"=>"Show config sections in tabs,bool",
 		"forestcreaturebar"=>"Forest Creatures show health ...,enum,0,Only Text,1,Only Healthbar,2,Healthbar AND Text",
 		"ajax"=>"Turn AJAX on?,bool",
@@ -273,7 +273,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 		"bio"=>"Short Character Biography (255 chars max),string,255",
 		"nojump"=>"Don't jump to comment areas after refreshing or posting a comment?,bool",
 	);
-	rawoutput("<script language='JavaScript' src='lib/md5.js'></script>");
+	rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
 	$warn = translate_inline("Your password is too short.  It must be at least 4 characters long.");
 	rawoutput("<script language='JavaScript'>
 	<!--
@@ -409,7 +409,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 
 	if ($session['user']['replaceemail']!='') {
 		//we have an email change request here
-		$replacearray=explode("|",$session['user']['replaceemail']);	
+		$replacearray=explode("|",$session['user']['replaceemail']);
 		output("`\$There is an email change request pending to the email address `q\"%s`\$\" that was given at the timestamp %s (Server Time Zone).`n",$replacearray[0],$replacearray[1]);
 		$expirationdate=strtotime("+ ".getsetting('playerchangeemaildays',3)." days",strtotime($replacearray[1]));
 		$left=$expirationdate-strtotime("now");
@@ -426,7 +426,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 				addnav("","prefs.php?op=forcechangeemail");
 			}
 		} else {
-			output("`\$If you have trouble with this, please petition.`n`n");	
+			output("`\$If you have trouble with this, please petition.`n`n");
 		}
 		$cancelemail=translate_inline("Cancel email change request");
 		output("`\$Cancel the request with the following button:`n`n");

@@ -26,7 +26,7 @@ if ($op=='val' || $op=='forgotval') {
                 addnav("Login","index.php");
 
                 page_footer();
-	} 
+	}
 }
 
 if ($op=="forgotval"){
@@ -141,7 +141,7 @@ if ($op=="forgot"){
 					$sql = "UPDATE " . db_prefix("accounts") . " SET forgottenpassword='{$row['forgottenpassword']}' where login='{$row['login']}'";
 					db_query($sql);
 				}
-				
+
 				$subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'),$row['acctid']);
 				$msg = translate_mail($settings_extended->getSetting('forgottenpasswordmailtext'),$row['acctid']);
 				$replace=array(
@@ -152,11 +152,11 @@ if ($op=="forgot"){
 					"{gameurl}"=>($_SERVER['SERVER_PORT']==443?"https":"http")."://".($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
 					"{forgottenid}"=>$row['forgottenpassword'],
 					);
-				
+
 				$keys=array_keys($replace);
 				$values=array_values($replace);
 				$msg=str_replace($keys,$values,$msg);
-				
+
 				//## Modificado - Se usa una función propia para generar un e-mail con formato html
 				html_mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg),translate_inline("From:").getsetting("gameadminemail","postmaster@localhost.com"));
 				output("`#Sent a new validation email to the address on file for that account.");
@@ -310,11 +310,11 @@ if (getsetting("allowcreation",1)==0){
 								"{gameurl}"=>($_SERVER['SERVER_PORT']==443?"https":"http")."://".($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
 								"{validationid}"=>$emailverification,
 								);
-							
+
 							$keys=array_keys($replace);
 							$values=array_values($replace);
 							$msg=str_replace($keys,$values,$msg);
-							//## Modificado - Se usa una función propia para generar un e-mail con formato html					
+							//## Modificado - Se usa una función propia para generar un e-mail con formato html
 							html_mail($email,$subj,str_replace("`n","\n",$msg),"From: ".getsetting("gameadminemail","postmaster@localhost.com"));
 							output("`4An email was sent to `\$%s`4 to validate your address.  Click the link in the email to activate your account.`0`n`n", $email);
 						}else{
@@ -350,7 +350,7 @@ if (getsetting("allowcreation",1)==0){
 		$refer=httpget('r');
 		if ($refer) $refer = "&r=".htmlentities($refer, ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 
-		rawoutput("<script language='JavaScript' src='lib/md5.js'></script>");
+		rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
 		rawoutput("<script language='JavaScript'>
 		<!--
 		function md5pass(){
@@ -384,7 +384,7 @@ if (getsetting("allowcreation",1)==0){
 		} else {
 			$req = $r3;
 		}
-		
+
         $createdefaultform = modulehook("create-default-form", ['showdefaultform' => true,'req' => $req]);
 		if ($createdefaultform['showdefaultform'])
 		{
@@ -403,7 +403,7 @@ if (getsetting("allowcreation",1)==0){
 					"<input type='radio' name='sex' value='1'>",
 					"<input type='radio' name='sex' value='0' checked>",true);
 		}
-		
+
 		modulehook("create-form");
 		$createbutton = translate_inline("Create your character");
 		rawoutput("<input type='submit' class='button' value='$createbutton'>");

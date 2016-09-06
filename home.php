@@ -109,7 +109,7 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
         rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
     }
 
-	rawoutput("<script language='JavaScript' src='lib/md5.js'></script>");
+	rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
 	rawoutput("<script language='JavaScript'>
 	<!--
 	function md5pass(){
