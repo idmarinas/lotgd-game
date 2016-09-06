@@ -3,5 +3,5 @@
 // mail ready
 // addnews ready
 // mail ready
-rawoutput("<script language='JavaScript' src='lib/e_dom.js'></script>");
+rawoutput("<script language='JavaScript' src='resources/e_dom.js'></script>");
 ?>
