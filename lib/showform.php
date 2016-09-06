@@ -2,145 +2,112 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("lib/dump_item.php");
+require_once 'lib/dump_item.php';
 
-function showform($layout,$row,$nosave=false,$keypref=false){
-	global $session;
- 	static $showform_id=0;
- 	static $title_id=0;
+/**
+ * Construct FORM LOTGD style
+ *
+ * @var array $layout
+ * @var array $row
+ * @var boolean $nosave
+ * @var false|pattern $keypref
+ * @var callable $callback This can use for personalize the form used to show all inputs or for more process.
+ * 						   Can still use lotgd_show_form_field in your callable
+ *						   Both functions get same parameters function($info, $row, $key, $keyout, $val, $extensions)
+ */
+function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callable $callback = null)
+{
+ 	static $showform_id = 0;
+ 	static $title_id = 0;
+
  	$showform_id++;
- 	$formSections = array();
-	$returnvalues = array();
-	$extensions = array();
-	$extensions = modulehook("showformextensions",$extensions);
-	// rawoutput("<table width='100%' cellpadding='0' cellspacing='0'><tr><td>");
-	rawoutput("<div id='showFormSection$showform_id'></div>");
-	// rawoutput("</td></tr><tr><td>&nbsp;</td></tr><tr><td>");
-	rawoutput("<table cellpadding='2' cellspacing='0'>");
-	$i = 0;
-	foreach ($layout as $key=>$val) {
+	$returnvalues = [];
+	$extensions = modulehook("showformextensions", []);
+
+	$i = false;
+	$ulMenu = [];
+	$ulContent = [];
+	foreach ($layout as $key => $val)
+	{
 		$pretrans = 0;
+
 		if ($keypref !== false) $keyout = sprintf($keypref, $key);
 		else $keyout = $key;
-		if (is_array($val)) {
-			$v = $val[0];
-			$info = explode(",", $v);
+
+		if (is_array($val))
+		{
+			$info = explode(',', $val[0]);
 			$val[0] = $info[0];
 			$info[0] = $val;
-		} else {
-			$info = explode(",",$val);
 		}
-		if (is_array($info[0])) {
-			$info[0] = call_user_func_array("sprintf_translate", $info[0]);
-		} else {
-			$info[0] = translate($info[0]);
-		}
+		else $info = explode(',', $val);
+
+		if (is_array($info[0])) $info[0] = call_user_func_array("sprintf_translate", $info[0]);
+		else $info[0] = translate($info[0]);
+
 		if (isset($info[1])) $info[1] = trim($info[1]);
 		else $info[1] = "";
 
-		if ($info[1]=="title"){
+		if ($info[1] == "title")
+		{
+			$ulMenu[] = sprintf('<a href="#">%s</a>', $info[0]);
 		 	$title_id++;
-		 	rawoutput("</table>");
-		 	$formSections[$title_id] = $info[0];
-		 	rawoutput("<table id='showFormTable$title_id'>");
-			rawoutput("<tr><td colspan='2' class='trhead'>",true);
-			output_notl("`b%s`b", $info[0], true);
-			rawoutput("</td></tr>",true);
-			$i=0;
-		}elseif ($info[1]=="note"){
-			rawoutput("<tr class='".($i%2?'trlight':'trdark')."'><td colspan='2'>");
-			output_notl("`i%s`i", $info[0], true);
-			$i++;
-		}else{
-			if (isset($row[$key]))
-				$returnvalues[$key] = $row[$key];
-			rawoutput("<tr class='".($i%2?'trlight':'trdark')."'><td valign='top'>");
-			output_notl("%s", $info[0],true);
-			rawoutput("</td><td valign='top'>");
-			$i++;
-		}
+ 		}
+		elseif ($info[1]=="note")
+		{
+			$ulContent[$title_id][] = sprintf('<tr class="%s"><td colspan="2">%s</td></tr>', ($i?'trlight':'trdark'), $info[0]);
 
-		show_form_field($info, $row, $key, $keyout, $val, $extensions);
+			$i = !$i;
+		}
+		else
+		{
+			if (! $callback) $result = lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions);
+			else $result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
-		rawoutput("</td></tr>",true);
-	}
-	rawoutput("</table>",true);
-	if ($showform_id==1){
-		$startIndex = (int)httppost("showFormTabIndex");
-		if ($startIndex == 0){
-			$startIndex = 1;
-		}
-		if (isset($session['user']['prefs']['tabconfig']) &&
-				$session['user']['prefs']['tabconfig'] == 0) {
-		} else {
-		 	rawoutput("
-		 	<script language='JavaScript'>
-		 	function prepare_form(id){
-		 		var theTable;
-		 		var theDivs='';
-		 		var x=0;
-		 		var weight='';
-		 		for (x in formSections[id]){
-		 			theTable = document.getElementById('showFormTable'+x);
-		 			if (x != $startIndex ){
-			 			theTable.style.visibility='hidden';
-			 			theTable.style.display='none';
-			 			weight='';
-			 		}else{
-			 			theTable.style.visibility='visible';
-			 			theTable.style.display='';
-			 			weight='color: yellow;';
-			 		}
-			 		theDivs += \"<div id='showFormButton\"+x+\"' class='trhead' style='\"+weight+\"float: left; cursor: pointer; cursor: hand; padding: 5px; border: 1px solid #000000;' onClick='showFormTabClick(\"+id+\",\"+x+\");'>\"+formSections[id][x]+\"</div>\";
-		 		}
-		 		theDivs += \"<div style='display: block;'>&nbsp;</div>\";
-				theDivs += \"<input type='hidden' name='showFormTabIndex' value='$startIndex' id='showFormTabIndex'>\";
-		 		document.getElementById('showFormSection'+id).innerHTML = theDivs;
-		 	}
-		 	function showFormTabClick(formid,sectionid){
-		 		var theTable;
-		 		var theButton;
-		 		for (x in formSections[formid]){
-		 			theTable = document.getElementById('showFormTable'+x);
-		 			theButton = document.getElementById('showFormButton'+x);
-		 			if (x == sectionid){
-		 				theTable.style.visibility='visible';
-		 				theTable.style.display='';
-		 				theButton.style.fontWeight='normal';
-		 				theButton.style.color='yellow';
-						document.getElementById('showFormTabIndex').value = sectionid;
-		 			}else{
-		 				theTable.style.visibility='hidden';
-		 				theTable.style.display='none';
-		 				theButton.style.fontWeight='normal';
-		 				theButton.style.color='';
-		 			}
-		 		}
-		 	}
-		 	formSections = new Array();
-			</script>");
+			$ulContent[$title_id][] = sprintf('<tr class="%s"><td>%s</td><td>%s</td></tr>',
+				($i?'trlight':'trdark'),
+				$info[0],
+				$result
+			);
+
+			$i = !$i;
 		}
 	}
-	if (isset($session['user']['prefs']['tabconfig']) &&
-			$session['user']['prefs']['tabconfig'] == 0) {
-	} else {
-		rawoutput("<script language='JavaScript'>");
-		rawoutput("formSections[$showform_id] = new Array();");
-		foreach ($formSections as $key=>$val) {
-			rawoutput("formSections[$showform_id][$key] = '".addslashes($val)."';");
-		}
-		rawoutput("prepare_form($showform_id);</script>");
+
+	if (! empty($ulMenu))
+	{
+		rawoutput(sprintf('<ul class="uk-tab" data-uk-tab="{connect:\'#form-%s\'}"><li>%s</li></ul>',
+				$showform_id,
+				implode('</li><li>', $ulMenu)
+			)
+		);
 	}
-	// rawoutput("</td></tr></table>");
+
+	$content = [];
+	foreach($ulContent as $value)
+	{
+		$content[] = sprintf('<table>%s</table>',
+			implode('', $value)
+		);
+	}
+
+	rawoutput(sprintf('<ul class="uk-switcher uk-margin" id="form-%s"><li>%s</li></ul>',
+			$showform_id,
+			implode('</li><li>', $content)
+		)
+	);
+	unset($ulContent, $content, $ulMenu);
+
 	tlschema("showform");
 	$save = translate_inline("Save");
 	tlschema();
+
 	if (!$nosave) rawoutput("<input type='submit' class='button' value='$save'>");
 
 	return $returnvalues;
 }
 
-function show_form_field($info, $row, $key, $keyout, $val, $extensions)
+function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 {
 	switch ($info[1])
 	{
@@ -153,7 +120,7 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$handle = @opendir("templates");
 			// Template directory open failed
 			if (!$handle) {
-				output("None available");
+				return 'None available';
 				break;
 			}
 			while (false != ($file = @readdir($handle))) {
@@ -163,19 +130,25 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			}
 			// No templates installed!
 			if (count($skins) == 0) {
-				output("None available");
+				return "None available";
 				break;
 			}
 			natcasesort($skins); //sort them in natural order
-			rawoutput("<select name='$keyout'>");
-			foreach($skins as $skin) {
-				if ($skin == $row[$key]) {
-					rawoutput("<option value='$skin' selected>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
-				} else {
-					rawoutput("<option value='$skin'>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+			$select = "<select name='$keyout'>";
+			foreach($skins as $skin)
+			{
+				if ($skin == $row[$key])
+				{
+					$select .= "<option value='$skin' selected>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				}
+				else
+				{
+					$select .= "<option value='$skin'>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 				}
 			}
-			rawoutput("</select>");
+			$select .= '</select>';
+
+			return $select;
 			break;
 		case "location":
 			// A generic way of allowing the location to be specified for
@@ -191,16 +164,18 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$vloc = modulehook("validlocation", $vloc);
 			unset($vloc['all']);
 			reset($vloc);
-			rawoutput("<select name='$keyout'>");
+			$select .= "<select name='$keyout'>";
 			foreach($vloc as $loc=>$val) {
 				if ($loc == $row[$key]) {
-					rawoutput("<option value='$loc' selected>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+					$select .= "<option value='$loc' selected>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 				} else {
-					rawoutput("<option value='$loc'>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+					$select .="<option value='$loc'>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 				}
 
 			}
-			rawoutput("</select>");
+			$select .= '</select>';
+
+			return $select;
 			break;
 		case "checkpretrans":
 			$pretrans = 1;
@@ -228,7 +203,7 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				}
 				$select.="<input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked==$optval?" checked":"").">&nbsp;".("$optdis")."<br>";
 			}
-			rawoutput($select);
+			return $select;
 			break;
 		case "radiopretrans":
 			$pretrans = 1;
@@ -245,7 +220,7 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				if (!$pretrans) $optdis = translate_inline($optdis);
 				$select.=("<input type='radio' name='$keyout' value='$optval'".($row[$key]==$optval?" checked":"").">&nbsp;".("$optdis")."<br>");
 			}
-			rawoutput($select);
+			return $select;
 			break;
 		case "dayrange":
 			$start = strtotime(date("Y-m-d", strtotime("now")));
@@ -254,16 +229,19 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			// we should really try to avoid an infinite loop here if
 			// they define a time string which equates to 0 :/
 			$cur = $row[$key];
-			rawoutput("<select name='$keyout'>");
+			$select = "<select name='$keyout'>";
 			if ($cur && $cur < date("Y-m-d H:i:s", $start))
-				rawoutput("<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			for($j = $start; $j < $end; $j = strtotime($step, $j)) {
 				$d = date("Y-m-d H:i:s", $j);
-				rawoutput("<option value='$d'".($cur==$d?" selected":"").">".HTMLEntities("$d", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+				$select .= "<option value='$d'".($cur==$d?" selected":"").">".HTMLEntities("$d", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			}
 			if ($cur && $cur > date("Y-m-d H:i:s", $end))
-				rawoutput("<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
-			rawoutput("</select>");
+				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+
+			$select .="</select>";
+
+			return $select;
 			break;
 
 		case "range":
@@ -271,25 +249,29 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$max = (int)$info[3];
 			$step = (int)$info[4];
 			if ($step == 0) $step = 1;
-			rawoutput("<select name='$keyout'>");
+			$select = "<select name='$keyout'>";
 			if ($min<$max && ($max-$min)/$step>300)
 				$step=max(1,(int)(($max-$min)/300));
 			for($j = $min; $j <= $max; $j += $step) {
-				rawoutput("<option value='$j'".($row[$key]==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+				$select .= "<option value='$j'".($row[$key]==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			}
-			rawoutput("</select>");
+			$select .= "</select>";
+
+			return $select;
 			break;
 		case "floatrange":
 			$min = round((float)$info[2],2);
 			$max = round((float)$info[3],2);
 			$step = round((float)$info[4],2);
 			if ($step==0) $step=1;
-			rawoutput("<select name='$keyout'>", true);
+			$select = "<select name='$keyout'>";
 			$val = round((float)$row[$key], 2);
 			for($j = $min; $j <= $max; $j = round($j+$step,2)) {
-				rawoutput("<option value='$j'".($val==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>", true);
+				$select .= "<option value='$j'".($val==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			}
-			rawoutput("</select>", true);
+			$select .= "</select>";
+
+			return $select;
 			break;
 		case "bitfieldpretrans":
 			$pretrans = 1;
@@ -303,16 +285,18 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			list($k,$v)=each($info);
 			list($k,$v)=each($info);
 			list($k,$disablemask)=each($info);
-			rawoutput("<input type='hidden' name='$keyout"."[0]' value='1'>", true);
+			$input = "<input type='hidden' name='$keyout"."[0]' value='1'>";
 			while (list($k,$v)=each($info)){
-				rawoutput("<input type='checkbox' name='$keyout"."[$v]'"
+				$input .= "<input type='checkbox' name='$keyout"."[$v]'"
 					.((int)$row[$key] & (int)$v?" checked":"")
 					.($disablemask & (int)$v?"":" disabled")
-					." value='1'> ");
+					." value='1'> ";
 				list($k,$v)=each($info);
 				if (!$pretrans) $v = translate_inline($v);
-				output_notl("%s`n",$v,true);
+				$input .= sprintf("%s`n", $v);
 			}
+
+			return $input;
 			break;
 		case "datelength":
 			// However, there was a bug with your translation code wiping
@@ -336,11 +320,13 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				rawoutput(tlbutton_pop());
 			}
 			tlschema();
-			rawoutput("<select name='$keyout'>");
+			$select = "<select name='$keyout'>";
 			foreach ($vals as $k=>$v) {
-				rawoutput("<option value=\"".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"".($row[$key]==$v?" selected":"").">".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+				$select .= "<option value=\"".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"".($row[$key]==$v?" selected":"").">".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			}
-			rawoutput("</select>");
+			$select .= "</select>";
+
+			return $select;
 			break;
 		case "enumpretrans":
 			$pretrans = 1;
@@ -349,8 +335,8 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			reset($info);
 			list($k,$v)=each($info);
 			list($k,$v)=each($info);
-			$select="";
-			$select.=("<select name='$keyout'>");
+
+			$select = "<select name='$keyout'>";
 			while (list($k,$v)=each($info)){
 				$optval = $v;
 				list($k,$v)=each($info);
@@ -362,41 +348,45 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				if (isset($row[$key]) && $row[$key] == $optval)
 					$selected = 1;
 
-				$select.=("<option value='$optval'".($selected?" selected":"").">".HTMLEntities("$optdis", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>");
+				$select .= "<option value='$optval'".($selected?" selected":"").">".HTMLEntities("$optdis", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
 			}
-			$select.="</select>";
-			rawoutput($select);
+			$select .= "</select>";
+			return $select;
 			break;
 		case "password":
 			if (array_key_exists($key, $row)) $out = $row[$key];
 			else $out = "";
-			rawoutput("<input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'>");
+			return "<input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'>";
 			break;
 		case "bool":
 			tlschema("showform");
 			$yes = translate_inline("Yes");
 			$no = translate_inline("No");
 			tlschema();
-			rawoutput("<select name='$keyout'>");
-			rawoutput("<option value='0'".($row[$key]==0?" selected":"").">$no</option>");
-			rawoutput("<option value='1'".($row[$key]==1?" selected":"").">$yes</option>");
-			rawoutput("</select>", true);
+			$select = "<select name='$keyout'>";
+			$select .= "<option value='0'".($row[$key]==0?" selected":"").">$no</option>";
+			$select .= "<option value='1'".($row[$key]==1?" selected":"").">$yes</option>";
+			$select .= "</select>";
+
+			return $select;
 			break;
 		case "hidden":
-			rawoutput("<input type='hidden' name='$keyout' value=\"".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+			return "<input type='hidden' name='$keyout' value=\"".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 			break;
 		case "viewonly":
 			//don't unset it. it does not change, so nothing lost
 			unset($returnvalues[$key]);
 			if (isset($row[$key])) {
-				output_notl(dump_item($row[$key]),true);
+				return dump_item($row[$key]);
 			}
 			break;
 		case "viewhiddenonly":
 			//don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
 			if (isset($row[$key])) {
-				output_notl(dump_item($row[$key]),true);
-				rawoutput("<input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'>");
+				$text = dump_item($row[$key]);
+				$text .= "<input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'>";
+
+				return $text;
 			}
 			break;
 		case "rawtextarearesizeable":
@@ -419,22 +409,24 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				$text=str_replace("`n","\n",$text);
 			}
 			if (isset($resize) && $resize) {
-				rawoutput("<script type=\"text/javascript\">function increase(target, value){  if (target.rows + value > 3 && target.rows + value < 50) target.rows = target.rows + value;}</script>");
-				rawoutput("<script type=\"text/javascript\">function cincrease(target, value){  if (target.cols + value > 3 && target.cols + value < 150) target.cols = target.cols + value;}</script>");
-				rawoutput("<input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'>");
-				rawoutput("<input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'><br>");
-				rawoutput("<textarea id='textarea$key' class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>");
+				$text = "<script type=\"text/javascript\">function increase(target, value){  if (target.rows + value > 3 && target.rows + value < 50) target.rows = target.rows + value;}</script>";
+				$text .= "<script type=\"text/javascript\">function cincrease(target, value){  if (target.cols + value > 3 && target.cols + value < 150) target.cols = target.cols + value;}</script>";
+				$text .= "<input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'>";
+				$text .= "<input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'><br>";
+				$text .= "<textarea id='textarea$key' class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>";
+
+				return $text;
 			} else {
-				rawoutput("<textarea class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>");
+				return "<textarea class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>";
 			}
 			break;
 		case "int":
-			if (array_key_exists($key, $row)) (int)$out = $row[$key];
+			if (array_key_exists($key, $row)) (int) $out = $row[$key];
 			else $out = 0;
-			rawoutput("<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>");
+			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>";
 			break;
 		case "float":
-			rawoutput("<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8' step='any'>");
+			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8' step='any'>";
 			break;
 		case "string":
 			$len = 50;
@@ -445,7 +437,7 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			if ($minlen > 70) $minlen = 70;
 			if (array_key_exists($key, $row)) $val = $row[$key];
 			else $val = "";
-			rawoutput("<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+			return "<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">";
 			break;
 		default:
 			if (array_key_exists($info[1],$extensions)){
@@ -456,8 +448,20 @@ function show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			}else{
 				if (array_key_exists($key, $row)) $val = $row[$key];
 				else $val = "";
-				rawoutput("<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+				return "<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">";
 			}
 		break;
 	}
+}
+
+//-- LEGACY
+function showform($layout, $row, $nosave = false, $keypref = false)
+{
+	trigger_error(sprintf(
+            'Usage of %s is deprecated since v1.0.0; and delete in version 2.0.0 please use %s instead',
+            __METHOD__,
+			'lotgd_showform'
+        ), E_USER_DEPRECATED);
+
+	return lotgd_showform($layout, $row, $nosave, $keypref);
 }
