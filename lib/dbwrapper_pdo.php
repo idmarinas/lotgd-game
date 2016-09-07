@@ -261,9 +261,13 @@ Class DB
 	//-- Comprobar la versión del servidor base de datos
 	public static function get_server_version()
 	{
-		$adapter = self::getAdapter();
+		return self::getAdapter()->getPlatform()->getName();
+	}
 
-		return $adapter->getPlatform()->getName();
+	//-- Quote value for safe using in DB
+	public static function quoteValue($value)
+	{
+		return self::getAdapter()->getPlatform()->quoteValue($value);
 	}
 
 	//-- Función para crear una plantilla y mostrar una página en el die de la conexión
