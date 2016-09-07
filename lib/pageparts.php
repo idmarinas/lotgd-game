@@ -146,10 +146,10 @@ function page_footer($saveuser=true){
 
 	restore_buff_fields();
 
-	$sql = "SELECT motddate FROM " . db_prefix("motd") . " ORDER BY motditem DESC LIMIT 1";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
-	db_free_result($result);
+	$sql = "SELECT motddate FROM " . DB::prefix("motd") . " ORDER BY motditem DESC LIMIT 1";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
+	DB::free_result($result);
 	$headscript = "";
 	if (isset($session['user']['lastmotd']) &&
 			($row['motddate']>$session['user']['lastmotd']) &&
@@ -221,9 +221,9 @@ function page_footer($saveuser=true){
 
 	if (getsetting("logdnet",0) && $session['user']['loggedin'] && !$already_registered_logdnet){
 		//account counting, just for my own records, I don't use this in the calculation for server order.
-		$sql = "SELECT count(acctid) AS c FROM " . db_prefix("accounts");
-		$result = db_query_cached($sql,"acctcount",600);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts");
+		$result = DB::query_cached($sql,"acctcount",600);
+		$row = DB::fetch_assoc($result);
 		$c = $row['c'];
 		$a = getsetting("serverurl","http://".$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] == 80?"":":".$_SERVER['SERVER_PORT']).dirname($_SERVER['REQUEST_URI']));
 		if (!preg_match("/\/$/", $a)) {
@@ -344,15 +344,15 @@ function page_footer($saveuser=true){
 	$header=str_replace("{petition}","<a href='petition.php' onClick=\"".popup("petition.php").";return false;\" target='_blank' align='right' class='motd'>".translate_inline("Petition for Help")."</a>",$header);
 	$footer=str_replace("{petition}","<a href='petition.php' onClick=\"".popup("petition.php").";return false;\" target='_blank' align='right' class='motd'>".translate_inline("Petition for Help")."</a>",$footer);
 	if ($session['user']['superuser'] & SU_EDIT_PETITIONS){
-		$sql = "SELECT count(petitionid) AS c,status FROM " . db_prefix("petitions") . " GROUP BY status";
-		$result = db_query_cached($sql,"petition_counts");
+		$sql = "SELECT count(petitionid) AS c,status FROM " . DB::prefix("petitions") . " GROUP BY status";
+		$result = DB::query_cached($sql,"petition_counts");
 		$petitions=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0);
-		while ($row = db_fetch_assoc($result)) {
+		while ($row = DB::fetch_assoc($result)) {
 			$petitions[(int)$row['status']] = $row['c'];
 		}
 		$pet = translate_inline("`0`bPetitions:`b");
 		$ued = translate_inline("`0`bUser Editor`b");
-		db_free_result($result);
+		DB::free_result($result);
 		if ($session['user']['superuser'] & SU_EDIT_USERS){
 			// $p = "<a href='user.php'>$ued</a>|<a href='viewpetition.php'>$pet</a>";
             $p = "<i class='fa fa-fw fa-angle-double-right'><span>|</span></i> <a href='user.php'>$ued</a> <i class='fa fa-fw fa-angle-double-right'><span>|</span></i> <a href='viewpetition.php'>$pet</a> ";
@@ -388,10 +388,10 @@ function page_footer($saveuser=true){
 	$session['user']['gentimecount']++;
 	if (getsetting('debug',0)) {
 		global $SCRIPT_NAME;
-		$sql="INSERT INTO ".db_prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
-		$resultdebug=db_query($sql);
-		$sql="INSERT INTO ".db_prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($dbinfo['querytime'],3))."');";
-		$resultdebug=db_query($sql);
+		$sql="INSERT INTO ".DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
+		$resultdebug=DB::query($sql);
+		$sql="INSERT INTO ".DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($dbinfo['querytime'],3))."');";
+		$resultdebug=DB::query($sql);
 	}
 	$footer=str_replace("{pagegen}","Page gen: ".round($gentime,3)."s / ".$dbinfo['queriesthishit']." queries (".round($dbinfo['querytime'],3)."s), Ave: ".round($session['user']['gentime']/$session['user']['gentimecount'],3)."s - ".round($session['user']['gentime'],3)."/".round($session['user']['gentimecount'],3)."",$footer);
 
@@ -807,14 +807,14 @@ function charstats(){
 				$onlinecount = $list['count'];
 				$ret = $list['list'];
 			} else {
-				$sql="SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM " . db_prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' ORDER BY level DESC";
-				$result = db_query($sql);
-				$ret.=appoencode(sprintf(translate_inline("`bOnline Characters (%s players):`b`n"),db_num_rows($result)));
-				while ($row = db_fetch_assoc($result)) {
+				$sql="SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM " . DB::prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' ORDER BY level DESC";
+				$result = DB::query($sql);
+				$ret.=appoencode(sprintf(translate_inline("`bOnline Characters (%s players):`b`n"),DB::num_rows($result)));
+				while ($row = DB::fetch_assoc($result)) {
 					$ret.=appoencode("`^{$row['name']}`n");
 					$onlinecount++;
 				}
-				db_free_result($result);
+				DB::free_result($result);
 				if ($onlinecount==0)
 					$ret.=appoencode(translate_inline("`iNone`i"));
 			}
@@ -860,10 +860,10 @@ function loadtemplate($templatename){
  */
 function maillink(){
 	global $session;
-	$sql = "SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM " . db_prefix("mail") . " WHERE msgto=\"".$session['user']['acctid']."\"";
-	$result = db_query_cached($sql,"mail-{$session['user']['acctid']}",86400);
-	$row = db_fetch_assoc($result);
-	db_free_result($result);
+	$sql = "SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM " . DB::prefix("mail") . " WHERE msgto=\"".$session['user']['acctid']."\"";
+	$result = DB::query_cached($sql,"mail-{$session['user']['acctid']}",86400);
+	$row = DB::fetch_assoc($result);
+	DB::free_result($result);
 	$row['seencount']=(int)$row['seencount'];
 	$row['notseen']=(int)$row['notseen'];
 	if ($row['notseen']>0){

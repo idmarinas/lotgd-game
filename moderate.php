@@ -33,53 +33,53 @@ $op = httpget("op");
 if ($op=="commentdelete"){
 	$comment = httppost('comment');
 	if (httppost('delnban')>''){
-		$sql = "SELECT DISTINCT uniqueid,author FROM " . db_prefix("commentary") . " INNER JOIN " . db_prefix("accounts") . " ON acctid=author WHERE commentid IN ('" . join("','",array_keys($comment)) . "')";
-		$result = db_query($sql);
+		$sql = "SELECT DISTINCT uniqueid,author FROM " . DB::prefix("commentary") . " INNER JOIN " . DB::prefix("accounts") . " ON acctid=author WHERE commentid IN ('" . join("','",array_keys($comment)) . "')";
+		$result = DB::query($sql);
 		$untildate = date("Y-m-d H:i:s",strtotime("+3 days"));
 		$reason = httppost("reason");
 		$reason0 = httppost("reason0");
 		$default = "Banned for comments you posted.";
 		if ($reason0 != $reason && $reason0 != $default) $reason = $reason0;
 		if ($reason=="") $reason = $default;
-		while ($row = db_fetch_assoc($result)){
-			$sql = "SELECT * FROM " . db_prefix("bans") . " WHERE uniqueid = '{$row['uniqueid']}'";
-			$result2 = db_query($sql);
-			$sql = "INSERT INTO " . db_prefix("bans") . " (uniqueid,banexpire,banreason,banner) VALUES ('{$row['uniqueid']}','$untildate','$reason','".addslashes($session['user']['name'])."')";
-			$sql2 = "UPDATE " . db_prefix("accounts") . " SET loggedin=0 WHERE acctid={$row['author']}";
-			if (db_num_rows($result2)>0){
-				$row2 = db_fetch_assoc($result2);
+		while ($row = DB::fetch_assoc($result)){
+			$sql = "SELECT * FROM " . DB::prefix("bans") . " WHERE uniqueid = '{$row['uniqueid']}'";
+			$result2 = DB::query($sql);
+			$sql = "INSERT INTO " . DB::prefix("bans") . " (uniqueid,banexpire,banreason,banner) VALUES ('{$row['uniqueid']}','$untildate','$reason','".addslashes($session['user']['name'])."')";
+			$sql2 = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0 WHERE acctid={$row['author']}";
+			if (DB::num_rows($result2)>0){
+				$row2 = DB::fetch_assoc($result2);
 				if ($row2['banexpire'] < $untildate){
 					//don't enter a new ban if a longer lasting one is
 					//already here.
-					db_query($sql);
-					db_query($sql2);
+					DB::query($sql);
+					DB::query($sql2);
 				}
 			}else{
-				db_query($sql);
-				db_query($sql2);
+				DB::query($sql);
+				DB::query($sql2);
 			}
 		}
 	}
 	if (!isset($comment) || !is_array($comment)) $comment = array();
 	$sql = "SELECT " .
-		db_prefix("commentary").".*,".db_prefix("accounts").".name,".
-		db_prefix("accounts").".login, ".db_prefix("accounts").".clanrank,".
-		db_prefix("clans").".clanshort FROM ".db_prefix("commentary").
-		" INNER JOIN ".db_prefix("accounts")." ON ".
-		db_prefix("accounts").".acctid = " . db_prefix("commentary").
-		".author LEFT JOIN ".db_prefix("clans")." ON ".
-		db_prefix("clans").".clanid=".db_prefix("accounts").
+		DB::prefix("commentary").".*,".DB::prefix("accounts").".name,".
+		DB::prefix("accounts").".login, ".DB::prefix("accounts").".clanrank,".
+		DB::prefix("clans").".clanshort FROM ".DB::prefix("commentary").
+		" INNER JOIN ".DB::prefix("accounts")." ON ".
+		DB::prefix("accounts").".acctid = " . DB::prefix("commentary").
+		".author LEFT JOIN ".DB::prefix("clans")." ON ".
+		DB::prefix("clans").".clanid=".DB::prefix("accounts").
 		".clanid WHERE commentid IN ('".join("','",array_keys($comment))."')";
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	$invalsections = array();
-	while ($row = db_fetch_assoc($result)){
-		$sql = "INSERT LOW_PRIORITY INTO ".db_prefix("moderatedcomments").
+	while ($row = DB::fetch_assoc($result)){
+		$sql = "INSERT LOW_PRIORITY INTO ".DB::prefix("moderatedcomments").
 			" (moderator,moddate,comment) VALUES ('{$session['user']['acctid']}','".date("Y-m-d H:i:s")."','".addslashes(serialize($row))."')";
-		db_query($sql);
+		DB::query($sql);
 		$invalsections[$row['section']] = 1;
 	}
-	$sql = "DELETE FROM " . db_prefix("commentary") . " WHERE commentid IN ('" . join("','",array_keys($comment)) . "')";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("commentary") . " WHERE commentid IN ('" . join("','",array_keys($comment)) . "')";
+	DB::query($sql);
 	$return = httpget('return');
 	$return = cmd_sanitize($return);
 	$return = substr($return,strrpos($return,"/")+1);
@@ -125,36 +125,36 @@ if ($op==""){
 	if ($subop=="undelete") {
 		$unkeys = httppost("mod");
 		if ($unkeys && is_array($unkeys)) {
-			$sql = "SELECT * FROM ".db_prefix("moderatedcomments")." WHERE modid IN ('".join("','",array_keys($unkeys))."')";
-			$result = db_query($sql);
-			while ($row = db_fetch_assoc($result)){
+			$sql = "SELECT * FROM ".DB::prefix("moderatedcomments")." WHERE modid IN ('".join("','",array_keys($unkeys))."')";
+			$result = DB::query($sql);
+			while ($row = DB::fetch_assoc($result)){
 				$comment = unserialize($row['comment']);
 				$id = addslashes($comment['commentid']);
 				$postdate = addslashes($comment['postdate']);
 				$section = addslashes($comment['section']);
 				$author = addslashes($comment['author']);
 				$comment = addslashes($comment['comment']);
-				$sql = "INSERT LOW_PRIORITY INTO ".db_prefix("commentary")." (commentid,postdate,section,author,comment) VALUES ('$id','$postdate','$section','$author','$comment')";
-				db_query($sql);
+				$sql = "INSERT LOW_PRIORITY INTO ".DB::prefix("commentary")." (commentid,postdate,section,author,comment) VALUES ('$id','$postdate','$section','$author','$comment')";
+				DB::query($sql);
 				invalidatedatacache("comments-$section");
 			}
-			$sql = "DELETE FROM ".db_prefix("moderatedcomments")." WHERE modid IN ('".join("','",array_keys($unkeys))."')";
-			db_query($sql);
+			$sql = "DELETE FROM ".DB::prefix("moderatedcomments")." WHERE modid IN ('".join("','",array_keys($unkeys))."')";
+			DB::query($sql);
 		} else {
 			output("No items selected to undelete -- Please try again`n`n");
 		}
 	}
-	$sql = "SELECT DISTINCT acctid, name FROM ".db_prefix("accounts").
-		" INNER JOIN ".db_prefix("moderatedcomments").
+	$sql = "SELECT DISTINCT acctid, name FROM ".DB::prefix("accounts").
+		" INNER JOIN ".DB::prefix("moderatedcomments").
 		" ON acctid=moderator ORDER BY name";
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	addnav("Commentary");
 	addnav("Sections");
 	addnav("Modules");
 	addnav("Clan Halls");
 	addnav("Review by Moderator");
 	tlschema("notranslate");
-	while ($row = db_fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result)){
 		addnav(" ?".$row['name'],"moderate.php?op=audit&moderator={$row['acctid']}");
 	}
 	tlschema();
@@ -173,14 +173,14 @@ if ($op==""){
 	$where = "1=1 ";
 	$moderator = httpget("moderator");
 	if ($moderator>"") $where.="AND moderator=$moderator ";
-	$sql = "SELECT name, ".db_prefix("moderatedcomments").
-		".* FROM ".db_prefix("moderatedcomments")." LEFT JOIN ".
-		db_prefix("accounts").
+	$sql = "SELECT name, ".DB::prefix("moderatedcomments").
+		".* FROM ".DB::prefix("moderatedcomments")." LEFT JOIN ".
+		DB::prefix("accounts").
 		" ON acctid=moderator WHERE $where ORDER BY moddate DESC LIMIT $limit";
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	$i=0;
 	$clanrankcolors=array("`!","`#","`^","`&","\$");
-	while ($row = db_fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result)){
 		$i++;
 		rawoutput("<tr class='".($i%2?'trlight':'trdark')."'>");
 		rawoutput("<td><input type='checkbox' name='mod[{$row['modid']}]' value='1'></td>");
@@ -241,11 +241,11 @@ tlschema();
 
 if ($session['user']['superuser'] & SU_MODERATE_CLANS){
 	addnav("Clan Halls");
-	$sql = "SELECT clanid,clanname,clanshort FROM " . db_prefix("clans") . " ORDER BY clanid";
-	$result = db_query($sql);
+	$sql = "SELECT clanid,clanname,clanshort FROM " . DB::prefix("clans") . " ORDER BY clanid";
+	$result = DB::query($sql);
 	// these are proper names and shouldn't be translated.
 	tlschema("notranslate");
-	while ($row=db_fetch_assoc($result)){
+	while ($row=DB::fetch_assoc($result)){
 		addnav(array("<%s> %s", $row['clanshort'], $row['clanname']),
 				"moderate.php?area=clan-{$row['clanid']}");
 	}
@@ -264,11 +264,11 @@ if ($session['user']['superuser'] & SU_MODERATE_CLANS){
 	if (($session['user']['clanid'] != 0) &&
 			($session['user']['clanrank'] >= CLAN_OFFICER)) {
 		addnav("Clan Halls");
-		$sql = "SELECT clanid,clanname,clanshort FROM " . db_prefix("clans") . " WHERE clanid='" . $session['user']['clanid'] . "'";
-		$result = db_query($sql);
+		$sql = "SELECT clanid,clanname,clanshort FROM " . DB::prefix("clans") . " WHERE clanid='" . $session['user']['clanid'] . "'";
+		$result = DB::query($sql);
 		// these are proper names and shouldn't be translated.
 		tlschema("notranslate");
-		if ($row=db_fetch_assoc($result)){
+		if ($row=DB::fetch_assoc($result)){
 			addnav(array("<%s> %s", $row['clanshort'], $row['clanname']),
 					"moderate.php?area=clan-{$row['clanid']}");
 		} else {

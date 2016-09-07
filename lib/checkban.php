@@ -10,29 +10,29 @@ function checkban($login=false){
 		$ip=$_SERVER['REMOTE_ADDR'];
 		$id=$_COOKIE['lgi'];
 	}else{
-		$sql = "SELECT lastip,uniqueid,banoverride,superuser FROM " . db_prefix("accounts") . " WHERE login='$login'";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT lastip,uniqueid,banoverride,superuser FROM " . DB::prefix("accounts") . " WHERE login='$login'";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		if ($row['banoverride'] || ($row['superuser'] &~ SU_DOESNT_GIVE_GROTTO)){
 			$session['banoverride']=true;
 			return false;
 		}
-		db_free_result($result);
+		DB::free_result($result);
 		$ip=$row['lastip'];
 		$id=$row['uniqueid'];
 	}
 	//first, remove bans, then select them.
 	//## Modificación: Se ha modificado como se selecciona la fecha
 	//## Ahora se usa la función de Mysql now()
-	db_query("DELETE FROM " . db_prefix("bans") . " WHERE banexpire < NOW() AND banexpire>'0000-00-00 00:00:00'");
-	$sql = "SELECT * FROM " . db_prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00 00:00:00' OR banexpire>=NOW())";
+	DB::query("DELETE FROM " . DB::prefix("bans") . " WHERE banexpire < NOW() AND banexpire>'0000-00-00 00:00:00'");
+	$sql = "SELECT * FROM " . DB::prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00 00:00:00' OR banexpire>=NOW())";
 	//## Fin modificación
-	$result = db_query($sql);
-	if (db_num_rows($result)>0){
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0){
 		$session=array();
 		tlschema("ban");
 		$session['message'].=translate_inline("`n`4You fall under a ban currently in place on this website:`n");
-		while ($row = db_fetch_assoc($result)) {
+		while ($row = DB::fetch_assoc($result)) {
 			$session['message'].=$row['banreason']."`n";
 			if ($row['banexpire']=='0000-00-00 00:00:00')
 				$session['message'].=translate_inline("`\$This ban is permanent!`0");
@@ -45,8 +45,8 @@ function checkban($login=false){
 					$session['message'].=sprintf_translate("`^This ban will be removed `\$after`^ %s.`n`0",date("M d, Y",strtotime($row['banexpire'])));
 					$session['message'].=sprintf_translate("`^(This means in %s %s and %s %s)`0",$hours,$tl_hours,$mins,$tl_mins);
 				}
-			$sql = "UPDATE " . db_prefix("bans") . " SET lasthit='".date("Y-m-d H:i:s")."' WHERE ipfilter='{$row['ipfilter']}' AND uniqueid='{$row['uniqueidid']}'";
-			db_query($sql);
+			$sql = "UPDATE " . DB::prefix("bans") . " SET lasthit='".date("Y-m-d H:i:s")."' WHERE ipfilter='{$row['ipfilter']}' AND uniqueid='{$row['uniqueidid']}'";
+			DB::query($sql);
 			$session['message'].="`n";
 			$session['message'].=sprintf_translate("`n`4The ban was issued by %s`^.`n",$row['banner']);
 		}
@@ -55,7 +55,7 @@ function checkban($login=false){
 		header("Location: index.php");
 		exit();
 	}
-	db_free_result($result);
+	DB::free_result($result);
 }
 
 ?>

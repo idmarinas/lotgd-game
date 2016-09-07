@@ -74,8 +74,8 @@ foreach ($modules as $key=>$module) {
 		invalidatedatacache("inject-$module");
 		massinvalidate("module-prepare");
 	}elseif($op=="reinstall"){
-		$sql = "UPDATE " . db_prefix("modules") . " SET filemoddate='0000-00-00 00:00:00' WHERE modulename='$module'";
-		db_query($sql);
+		$sql = "UPDATE " . DB::prefix("modules") . " SET filemoddate='0000-00-00 00:00:00' WHERE modulename='$module'";
+		DB::query($sql);
 		// We don't care about the return value here at all.
 		$op="";
 		httpset('op', "");
@@ -129,16 +129,16 @@ if ($op==""){
 		addnav("","modules.php?cat=$cat&sortby=formalname&order=".($sortby=="formalname"?!$order:1));
 		addnav("","modules.php?cat=$cat&sortby=moduleauthor&order=".($sortby=="moduleauthor"?!$order:1));
 		addnav("","modules.php?cat=$cat&sortby=installdate&order=".($sortby=="installdate"?$order:0));
-		$sql = "SELECT * FROM " . db_prefix("modules") . " WHERE category='$cat' ORDER BY ".$sortby." ".($order?"ASC":"DESC");
-		$result = db_query($sql);
-		if (db_num_rows($result)==0){
+		$sql = "SELECT * FROM " . DB::prefix("modules") . " WHERE category='$cat' ORDER BY ".$sortby." ".($order?"ASC":"DESC");
+		$result = DB::query($sql);
+		if (DB::num_rows($result)==0){
 			rawoutput("<tr class='trlight'><td colspan='6' align='center'>");
 			output("`i-- No Modules Installed--`i");
 			rawoutput("</td></tr>");
 		}
-		$number=db_num_rows($result);
+		$number=DB::num_rows($result);
 		for ($i=0;$i<$number;$i++){
-			$row = db_fetch_assoc($result);
+			$row = DB::fetch_assoc($result);
 			rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>",true);
 			rawoutput("<td nowrap valign='top'>");
 			rawoutput("<input type='checkbox' name='module[]' value=\"{$row['modulename']}\">");

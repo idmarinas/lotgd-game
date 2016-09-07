@@ -1,10 +1,10 @@
 <?php
-$acc=db_prefix('accounts');
-$mail=db_prefix('mail');
+$acc=DB::prefix('accounts');
+$mail=DB::prefix('mail');
 $sql = "SELECT $mail.*,$acc.name,$acc.acctid FROM $mail LEFT JOIN $acc ON $acc.acctid=$mail.msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
-$result = db_query($sql);
-if (db_num_rows($result)>0){
-	$row = db_fetch_assoc($result);
+$result = DB::query($sql);
+if (DB::num_rows($result)>0){
+	$row = DB::fetch_assoc($result);
 	$reply = translate_inline("Reply");
 	$del = translate_inline("Delete");
 	$forward = translate_inline("Forward");
@@ -43,17 +43,17 @@ if (db_num_rows($result)>0){
 		output_notl('`n');
 	}
 	$sql = "SELECT messageid FROM $mail WHERE msgto='{$session['user']['acctid']}' AND messageid < '$id' ORDER BY messageid DESC LIMIT 1";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0){
-		$srow = db_fetch_assoc($result);
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0){
+		$srow = DB::fetch_assoc($result);
 		$pid = $srow['messageid'];
 	}else{
 		$pid = 0;
 	}
 	$sql = "SELECT messageid FROM $mail WHERE msgto='{$session['user']['acctid']}' AND messageid > '$id' ORDER BY messageid  LIMIT 1";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0){
-		$srow = db_fetch_assoc($result);
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0){
+		$srow = DB::fetch_assoc($result);
 		$nid = $srow['messageid'];
 	}else{
 		$nid = 0;
@@ -79,7 +79,7 @@ if (db_num_rows($result)>0){
 	rawoutput("</tr></table><hr>");
 	output_notl(sanitize_mb(str_replace("\n","`n",$row['body'])));
 	$sql = "UPDATE $mail SET seen=1 WHERE  msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
-	db_query($sql);
+	DB::query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
 	rawoutput("<hr><table class='table-bg-transparent' width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
 		<td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td>

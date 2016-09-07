@@ -36,33 +36,33 @@ $id = httpget("id");
 
 if (trim(httppost('insertcommentary'))!="") {
 	/* Update the bug if someone adds comments as well */
-	$sql = "UPDATE " . db_prefix("petitions") . " SET closeuserid='{$session['user']['acctid']}',closedate='".date("Y-m-d H:i:s")."' WHERE petitionid='$id'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("petitions") . " SET closeuserid='{$session['user']['acctid']}',closedate='".date("Y-m-d H:i:s")."' WHERE petitionid='$id'";
+	DB::query($sql);
 }
 
 // Eric decide he didn't want petitions to be manually deleted
 //
 //if ($op=="del"){
-//	$sql = "DELETE FROM " . db_prefix("petitions") . " WHERE petitionid='$id'";
-//	db_query($sql);
-//	$sql = "DELETE FROM " . db_prefix("commentary") . " WHERE section='pet-$id'";
-//	db_query($sql);
+//	$sql = "DELETE FROM " . DB::prefix("petitions") . " WHERE petitionid='$id'";
+//	DB::query($sql);
+//	$sql = "DELETE FROM " . DB::prefix("commentary") . " WHERE section='pet-$id'";
+//	DB::query($sql);
 //	invalidatedatacache("petition_counts");
 //	$op="";
 //}
 page_header("Petition Viewer");
 if ($op==""){
-	$sql = "DELETE FROM " . db_prefix("petitions") . " WHERE status=2 AND closedate<'".date("Y-m-d H:i:s",strtotime("-7 days"))."'";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("petitions") . " WHERE status=2 AND closedate<'".date("Y-m-d H:i:s",strtotime("-7 days"))."'";
+	DB::query($sql);
 	$setstat = httpget("setstat");
 	invalidatedatacache("petition_counts");
 	if ($setstat!=""){
-		$sql = "SELECT status FROM " . db_prefix("petitions") . " WHERE petitionid='$id'";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT status FROM " . DB::prefix("petitions") . " WHERE petitionid='$id'";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		if ($row['status']!=$setstat){
-			$sql = "UPDATE " . db_prefix("petitions") . " SET status='$setstat',closeuserid='{$session['user']['acctid']}',closedate='".date("Y-m-d H:i:s")."' WHERE petitionid='$id'";
-			db_query($sql);
+			$sql = "UPDATE " . DB::prefix("petitions") . " SET status='$setstat',closeuserid='{$session['user']['acctid']}',closedate='".date("Y-m-d H:i:s")."' WHERE petitionid='$id'";
+			DB::query($sql);
 		}
 	}
 	reset($statuses);
@@ -74,9 +74,9 @@ if ($op==""){
 	}
 
 	$petitionsperpage = 50;
-	$sql = "SELECT count(petitionid) AS c from ".db_prefix("petitions");
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT count(petitionid) AS c from ".DB::prefix("petitions");
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$totalpages = ceil($row['c']/$petitionsperpage);
 
 	$page = httpget("page");
@@ -111,26 +111,26 @@ if ($op==""){
 	$sql =
 	"SELECT
 		petitionid,
-		".db_prefix("accounts").".name,
-		".db_prefix("petitions").".date,
-		".db_prefix("petitions").".status,
-		".db_prefix("petitions").".body,
-		".db_prefix("petitions").".closedate,
+		".DB::prefix("accounts").".name,
+		".DB::prefix("petitions").".date,
+		".DB::prefix("petitions").".status,
+		".DB::prefix("petitions").".body,
+		".DB::prefix("petitions").".closedate,
 		accts.name AS closer,
 		CASE status $sort END AS sortorder
 	FROM
-		".db_prefix("petitions")."
+		".DB::prefix("petitions")."
 	LEFT JOIN
-		".db_prefix("accounts")."
-	ON	".db_prefix("accounts").".acctid=".db_prefix("petitions").".author
+		".DB::prefix("accounts")."
+	ON	".DB::prefix("accounts").".acctid=".DB::prefix("petitions").".author
 	LEFT JOIN
-		".db_prefix("accounts")." AS accts
-	ON	accts.acctid=".db_prefix("petitions").".closeuserid
+		".DB::prefix("accounts")." AS accts
+	ON	accts.acctid=".DB::prefix("petitions").".closeuserid
 	ORDER BY
 		sortorder ASC,
 		date ASC
 	LIMIT $limit";
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	addnav("Petitions");
 	addnav("Refresh","viewpetition.php");
 	$num = translate_inline("Num");
@@ -148,13 +148,13 @@ if ($op==""){
 	$i=0;
 	$laststatus=-1;
 	$catcount=array();
-	while($row = db_fetch_assoc($result)){
+	while($row = DB::fetch_assoc($result)){
 		if (isset($catcount[$row['status']])) $catcount[$row['status']]++;
 			else $catcount[$row['status']]=1;
 		$i=!$i;
-		$sql = "SELECT count(commentid) AS c FROM ". db_prefix("commentary") .  " WHERE section='pet-{$row['petitionid']}'";
-		$res = db_query($sql);
-		$counter = db_fetch_assoc($res);
+		$sql = "SELECT count(commentid) AS c FROM ". DB::prefix("commentary") .  " WHERE section='pet-{$row['petitionid']}'";
+		$res = DB::query($sql);
+		$counter = DB::fetch_assoc($res);
 		if (array_key_exists('status', $row) && $row['status']!=$laststatus){
 
 			rawoutput("<tr class='".($i?"trlight":"trdark")."'>");
@@ -266,9 +266,9 @@ if ($op==""){
 				"viewpetition.php?setstat=$key&id=$id");
 	}
 
-	$sql = "SELECT " . db_prefix("accounts") . ".name," .  db_prefix("accounts") . ".login," .  db_prefix("accounts") . ".acctid," .  "author,date,closedate,status,petitionid,ip,body,pageinfo," .  "accts.name AS closer FROM " .  db_prefix("petitions") . " LEFT JOIN " .  db_prefix("accounts ") . "ON " .  db_prefix("accounts") . ".acctid=author LEFT JOIN " .  db_prefix("accounts") . " AS accts ON accts.acctid=".  "closeuserid WHERE petitionid='$id' ORDER BY date ASC";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT " . DB::prefix("accounts") . ".name," .  DB::prefix("accounts") . ".login," .  DB::prefix("accounts") . ".acctid," .  "author,date,closedate,status,petitionid,ip,body,pageinfo," .  "accts.name AS closer FROM " .  DB::prefix("petitions") . " LEFT JOIN " .  DB::prefix("accounts ") . "ON " .  DB::prefix("accounts") . ".acctid=author LEFT JOIN " .  DB::prefix("accounts") . " AS accts ON accts.acctid=".  "closeuserid WHERE petitionid='$id' ORDER BY date ASC";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	addnav("User Ops");
 	if (isset($row['login'])) {
 		addnav("View User Biography","bio.php?char=" . $row['acctid']
@@ -345,10 +345,10 @@ if ($op==""){
 }
 
 if ($id && $op != ""){
-	$prevsql="SELECT p1.petitionid, p1.status FROM ".db_prefix("petitions")." AS p1, ".db_prefix("petitions")." AS p2
+	$prevsql="SELECT p1.petitionid, p1.status FROM ".DB::prefix("petitions")." AS p1, ".DB::prefix("petitions")." AS p2
 			WHERE p1.petitionid<'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid DESC LIMIT 1";
-	$prevresult=db_query($prevsql);
-	$prevrow=db_fetch_assoc($prevresult);
+	$prevresult=DB::query($prevsql);
+	$prevrow=DB::fetch_assoc($prevresult);
 	if ($prevrow){
 		$previd=$prevrow['petitionid'];
 		$s=$prevrow['status'];
@@ -356,10 +356,10 @@ if ($id && $op != ""){
 		addnav("Petitions");
 		addnav(array("Previous %s",$status),"viewpetition.php?op=view&id=$previd");
 	}
-	$nextsql="SELECT p1.petitionid, p1.status FROM ".db_prefix("petitions")." AS p1, ".db_prefix("petitions")." AS p2
+	$nextsql="SELECT p1.petitionid, p1.status FROM ".DB::prefix("petitions")." AS p1, ".DB::prefix("petitions")." AS p2
 			WHERE p1.petitionid>'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid ASC LIMIT 1";
-	$nextresult=db_query($nextsql);
-	$nextrow=db_fetch_assoc($nextresult);
+	$nextresult=DB::query($nextsql);
+	$nextrow=DB::fetch_assoc($nextresult);
 	if ($nextrow){
 		$nextid=$nextrow['petitionid'];
 		$s=$nextrow['status'];

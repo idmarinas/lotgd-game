@@ -17,14 +17,14 @@ addnav("Q?`%Quit`0 to the heavens","login.php?op=logout",true);
 
 $op = httpget('op');
 if ($op=="keepalive"){
-	$sql = "UPDATE " . db_prefix("accounts") . " SET laston='".date("Y-m-d H:i:s")."' WHERE acctid='{$session['user']['acctid']}'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("accounts") . " SET laston='".date("Y-m-d H:i:s")."' WHERE acctid='{$session['user']['acctid']}'";
+	DB::query($sql);
 	global $REQUEST_URI;
 	echo '<html><meta http-equiv="Refresh" content="30;url='.$REQUEST_URI.'"></html><body>'.date("Y-m-d H:i:s")."</body></html>";
 	exit();
 }elseif ($op=="newsdelete"){
-	$sql = "DELETE FROM " . db_prefix("news") . " WHERE newsid='".httpget('newsid')."'";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("news") . " WHERE newsid='".httpget('newsid')."'";
+	DB::query($sql);
 	$return = httpget('return');
 	$return = cmd_sanitize($return);
 	$return = substr($return,strrpos($return,"/")+1);
@@ -39,7 +39,7 @@ foreach ($lines as $line) {
 	//output it like an announcement, if any argument is given, automatically(!) centered
 	//ATTENTION! pre-translate your stuff in your own schema with translate_inline or sprintf_translate!
 	if (is_array($line)) call_user_func_array('output_notl',$line);
-		else output_notl($line); 
+		else output_notl($line);
 	output_notl("`n`n"); //separate lines
 }
 output_notl("`c");

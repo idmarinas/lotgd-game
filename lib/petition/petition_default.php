@@ -6,9 +6,9 @@ if (count($post)>0){
 	$ip = explode(".",$_SERVER['REMOTE_ADDR']);
 	array_pop($ip);
 	$ip = join($ip,".").".";
-	$sql = "SELECT count(petitionid) AS c FROM ".db_prefix("petitions")." WHERE (ip LIKE '$ip%' OR id = '".addslashes($_COOKIE['lgi'])."') AND date > '".date("Y-m-d H:i:s",strtotime("-1 day"))."'";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT count(petitionid) AS c FROM ".DB::prefix("petitions")." WHERE (ip LIKE '$ip%' OR id = '".addslashes($_COOKIE['lgi'])."') AND date > '".date("Y-m-d H:i:s",strtotime("-1 day"))."'";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	if ($row['c'] < 5 || (isset($session['user']['superuser']) && $session['user']['superuser']&~SU_DOESNT_GIVE_GROTTO)){
 		if (!isset($session['user']['acctid']))
 			$session['user']['acctid']=0;
@@ -21,8 +21,8 @@ if (count($post)>0){
 		//$post['cancelreason'] = 'The admins here decided they didn\'t like something about how you submitted your petition.  They were also too lazy to give a real reason.';
 		$post = modulehook("addpetition",$post);
 		if (!$post['cancelpetition']){
-			$sql = "INSERT INTO " . db_prefix("petitions") . " (author,date,body,pageinfo,ip,id) VALUES (".(int)$session['user']['acctid'].",'$date',\"".addslashes(output_array($post))."\",\"".addslashes(output_array($session,"Session:"))."\",'{$_SERVER['REMOTE_ADDR']}','".addslashes($_COOKIE['lgi'])."')";
-			db_query($sql);
+			$sql = "INSERT INTO " . DB::prefix("petitions") . " (author,date,body,pageinfo,ip,id) VALUES (".(int)$session['user']['acctid'].",'$date',\"".addslashes(output_array($post))."\",\"".addslashes(output_array($session,"Session:"))."\",'{$_SERVER['REMOTE_ADDR']}','".addslashes($_COOKIE['lgi'])."')";
+			DB::query($sql);
 			// If the admin wants it, email the petitions to them.
 			if (getsetting("emailpetitions", 0)) {
 				// Yeah, the format of this is ugly.

@@ -14,15 +14,15 @@
 // There's no support for foreign keys that INNODB offers.  Sorry.
 
 function synctable($tablename,$descriptor,$nodrop=false){
-	//table names should be db_prefix'd before they get in to
+	//table names should be DB::prefix'd before they get in to
 	//this function.
-	if (!db_table_exists($tablename)){
+	if (!DB::table_exists($tablename)){
 		//the table doesn't exist, so we create it and are done.
 		reset($descriptor);
 		$sql = table_create_from_descriptor($tablename,$descriptor);
 		debug($sql);
-		if(!db_query($sql)) {
-			output("`\$Error:`^ %s`n", db_error());
+		if(!DB::query($sql)) {
+			output("`\$Error:`^ %s`n", DB::error());
 			rawoutput("<pre>".htmlentities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>");
 		} else {
 			output("`^Table `#%s`^ created.`n", $tablename);
@@ -104,7 +104,7 @@ function synctable($tablename,$descriptor,$nodrop=false){
 			//we have changes to do!  Woohoo!
 			$sql = "ALTER TABLE $tablename \n".join(",\n",$changes);
 			debug(nl2br($sql));
-			db_query($sql);
+			DB::query($sql);
 			return count($changes);
 		}
 	}//end if
@@ -119,7 +119,7 @@ function table_create_from_descriptor($tablename,$descriptor){
 		if ($key === "RequireMyISAM" && $val == 1) {
 			// Let's hope that we don't run into badly formatted strings
 			// but you know what, if we do, tough
-			if (db_get_server_version() < "4.0.14") {
+			if (DB::get_server_version() < "4.0.14") {
 				$type = "MyISAM";
 			}
 			continue;
@@ -158,13 +158,13 @@ function table_create_from_descriptor($tablename,$descriptor){
 
 function table_create_descriptor($tablename){
 	//this function assumes that $tablename is already passed
-	//through db_prefix.
+	//through DB::prefix.
 	$descriptor = array();
 
 	//fetch column desc's
 	$sql = "DESCRIBE $tablename";
-	$result = db_query($sql);
-	while ($row = db_fetch_assoc($result)){
+	$result = DB::query($sql);
+	while ($row = DB::fetch_assoc($result)){
 		$item = array();
 		$item['name']=$row['Field'];
 		$item['type']=$row['Type'];
@@ -175,8 +175,8 @@ function table_create_descriptor($tablename){
 	}
 
 	$sql = "SHOW KEYS FROM $tablename";
-	$result = db_query($sql);
-	while ($row = db_fetch_assoc($result)){
+	$result = DB::query($sql);
+	while ($row = DB::fetch_assoc($result)){
 		if ($row['Seq_in_index']>1){
 			//this is a secondary+ column on some previous key;
 			//add this to that column's keys.

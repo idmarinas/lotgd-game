@@ -58,10 +58,10 @@ function check_su_access($level){
 		$session['user']['gold']=0;
 		$session['user']['experience']*=0.75;
 		addnav("Daily News","news.php");
-		$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE (superuser&".SU_EDIT_USERS.")";
-		$result = db_query($sql);
+		$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE (superuser&".SU_EDIT_USERS.")";
+		$result = DB::query($sql);
 		require_once("lib/systemmail.php");
-		while ($row = db_fetch_assoc($result)) {
+		while ($row = DB::fetch_assoc($result)) {
 			$subj = "`#%s`# tried to hack the superuser pages!";
 			$subj = sprintf($subj, $session['user']['name']);
 			$body = "Bad, bad, bad %s, they are a hacker!`n`nTried to access %s from %s.";

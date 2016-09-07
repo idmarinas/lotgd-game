@@ -9,12 +9,12 @@ require_once("lib/substitute.php");
 function select_taunt() {
 	global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . db_prefix("taunts") .
+	$sql = "SELECT taunt FROM " . DB::prefix("taunts") .
 		" ORDER BY rand(".e_rand() . ") LIMIT 1";
 
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	if ($result) {
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
 	} else {
 		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
@@ -27,12 +27,12 @@ function select_taunt() {
 function select_taunt_array(){
 	global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . db_prefix("taunts") .
+	$sql = "SELECT taunt FROM " . DB::prefix("taunts") .
 		" ORDER BY rand(".e_rand() . ") LIMIT 1";
 
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	if ($result) {
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
 	} else {
 		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";

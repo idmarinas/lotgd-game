@@ -21,14 +21,14 @@ if ($session['user']['gravefights']<=0){
 	} else {
 		$session['user']['gravefights']--;
  			$battle=true;
- 			$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE graveyard=1 ORDER BY rand(".e_rand().") LIMIT 1";
-		$result = db_query($sql);
-		$badguy = db_fetch_assoc($result);
+ 			$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE graveyard=1 ORDER BY rand(".e_rand().") LIMIT 1";
+		$result = DB::query($sql);
+		$badguy = DB::fetch_assoc($result);
 		$level = $session['user']['level'];
 		$shift = 0;
 		if ($level < 5) $shift = -1;
 		$badguy['creatureattack'] = 9 + $shift + (int)(($level-1) * 1.5);
-		
+
 		// Make graveyard creatures easier.
 		$badguy['creaturedefense'] = (int)((9 + $shift + (($level-1) * 1.5)));
 		$badguy['creaturedefense'] *= .8;
@@ -58,7 +58,7 @@ if ($session['user']['gravefights']<=0){
 		$attackstack['enemies'][0] = $badguy;
 		$attackstack['options']['type'] = 'graveyard';
 
-		
+
 		//no multifights currently, so this hook passes the badguy to modify
 		$attackstack = modulehook("graveyardfight-start",$attackstack);
 

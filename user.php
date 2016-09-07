@@ -73,9 +73,9 @@ addnav("Search for banned user","bans.php?op=searchban");
 
 // Collect a list of the mounts
 $mounts="0," . translate_inline("None");
-$sql = "SELECT mountid,mountname,mountcategory FROM " . db_prefix("mounts") .  " ORDER BY mountcategory";
-$result = db_query($sql);
-while ($row = db_fetch_assoc($result)){
+$sql = "SELECT mountid,mountname,mountcategory FROM " . DB::prefix("mounts") .  " ORDER BY mountcategory";
+$result = DB::query($sql);
+while ($row = DB::fetch_assoc($result)){
 	$mounts.=",{$row['mountid']},{$row['mountcategory']}: ".color_sanitize($row['mountname']);
 }
 
@@ -100,8 +100,8 @@ $races = modulehook("racenames");
 //all races here expect such ones no module covers, so we add the users race first.
 if ($op=='edit' || $op=='save') {
 	//add the race
-	$sql="SELECT race FROM ".db_prefix('accounts')." WHERE acctid=$userid LIMIT 1;";
-	$row=db_fetch_assoc(db_query($sql));
+	$sql="SELECT race FROM ".DB::prefix('accounts')." WHERE acctid=$userid LIMIT 1;";
+	$row=DB::fetch_assoc(DB::query($sql));
 	$racesenum=",".translate_inline("Undecided","race").",";
 	foreach ($races as $race) {
 		$racesenum.=$race.",".$race.",";
@@ -118,9 +118,9 @@ if ($op=='edit' || $op=='save') {
 	//later on: enumpretrans, because races are already translated in a way...
 }
 require("lib/data/user_account.php");
-$sql = "SELECT clanid,clanname,clanshort FROM " . db_prefix("clans") ." ORDER BY clanshort";
-$result = db_query($sql);
-while ($row=db_fetch_assoc($result)){
+$sql = "SELECT clanid,clanname,clanshort FROM " . DB::prefix("clans") ." ORDER BY clanshort";
+$result = DB::query($sql);
+while ($row=DB::fetch_assoc($result)){
 	//ok, we had nuts here wo made clan names with commas - so I replace them with ; ...
 	$userinfo['clanid'].=",{$row['clanid']},".str_replace(",",";","<{$row['clanshort']}> {$row['clanname']}");
 }

@@ -5,7 +5,7 @@ function lookup_user($query=false, $order=false, $fields=false, $where=false){
 	$searchresult = false;
 	if ($order !== false) $order = "ORDER BY $order";
 	if ($fields === false) $fields = "acctid,login,name,level,laston,loggedin,gentimecount,gentime,lastip,uniqueid,emailaddress";
-	$sql = "SELECT $fields FROM " . db_prefix("accounts");
+	$sql = "SELECT $fields FROM " . DB::prefix("accounts");
 
 	if ($query != "") {
 		// First try for an exact match on username or login
@@ -13,17 +13,17 @@ function lookup_user($query=false, $order=false, $fields=false, $where=false){
 			$sql_where = "WHERE login LIKE '$query' OR name LIKE '$query' OR acctid = '$query' OR emailaddress LIKE '$query' OR lastip LIKE '$query' OR uniqueid LIKE '$query'";
 		else
 			$sql_where = "WHERE $where";
-		$searchresult = db_query($sql . " $sql_where $order LIMIT 2");
+		$searchresult = DB::query($sql . " $sql_where $order LIMIT 2");
 	}
 
 	if ($query !== false || $searchresult) {
-		if (db_num_rows($searchresult) != 1) {
+		if (DB::num_rows($searchresult) != 1) {
 			// we didn't find an exact match
 			$name_query = "%";
 			for ($x=0;$x<strlen($query);$x++){
 				//mind escaped stuff - and carry it along unmodified
 				$char = substr($query,$x,1);
-				if ($char != "\\") 
+				if ($char != "\\")
 					$name_query .= $char."%";
 				else $name_query .= $char;
 			}
@@ -32,11 +32,11 @@ function lookup_user($query=false, $order=false, $fields=false, $where=false){
 			else
 				$sql_where = "WHERE $where";
 
-			$searchresult = db_query($sql . " $sql_where $order LIMIT 101");
+			$searchresult = DB::query($sql . " $sql_where $order LIMIT 101");
 		}
-		if (db_num_rows($searchresult)<=0){
+		if (DB::num_rows($searchresult)<=0){
 			$err = "`\$No results found`0";
-		}elseif (db_num_rows($searchresult)>100){
+		}elseif (DB::num_rows($searchresult)>100){
 			$err = "`\$Too many results found, narrow your search please.`0";
 		}else{
 			// Everything is good

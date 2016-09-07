@@ -41,9 +41,9 @@ function commentarylocs() {
 
 function removecommentary($cid,$reason,$mod){
 	global $session;
-	$sql = "SELECT * FROM ".db_prefix("commentary")." WHERE commentid=$cid";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT * FROM ".DB::prefix("commentary")." WHERE commentid=$cid";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$row['info']=@stripslashes($row['info']);
 	$row['info']=@unserialize($row['info']);
 	//debug($row);
@@ -53,8 +53,8 @@ function removecommentary($cid,$reason,$mod){
 	//debug($row);
 	$info = serialize($row['info']);
 	$info = addslashes($info);
-	$sql = "UPDATE ".db_prefix("commentary")." SET info='$info' WHERE commentid=$cid";
-	db_query($sql);
+	$sql = "UPDATE ".DB::prefix("commentary")." SET info='$info' WHERE commentid=$cid";
+	DB::query($sql);
 	invalidatedatacache("commentary/latestcommentary_".$row['section']);
 	invalidatedatacache("commentary/commentarycount_".$row['section']);
 	invalidatedatacache("commentary/whosonline_".$section);
@@ -62,9 +62,9 @@ function removecommentary($cid,$reason,$mod){
 
 function restorecommentary($cid,$reason,$mod){
 	global $session;
-	$sql = "SELECT * FROM ".db_prefix("commentary")." WHERE commentid=$cid";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT * FROM ".DB::prefix("commentary")." WHERE commentid=$cid";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$row['info']=@stripslashes($row['info']);
 	$row['info']=@unserialize($row['info']);
 	unset($row['info']['hidecomment']);
@@ -73,8 +73,8 @@ function restorecommentary($cid,$reason,$mod){
 	$row['info']['restored'][$time]['mod']=$mod;
 	$info = serialize($row['info']);
 	$info = addslashes($info);
-	$sql = "UPDATE ".db_prefix("commentary")." SET info='$info' WHERE commentid=$cid";
-	db_query($sql);
+	$sql = "UPDATE ".DB::prefix("commentary")." SET info='$info' WHERE commentid=$cid";
+	DB::query($sql);
 	invalidatedatacache("commentary/latestcommentary_".$row['section']);
 	invalidatedatacache("commentary/commentarycount_".$row['section']);
 	invalidatedatacache("commentary/whosonline_".$section);
@@ -207,9 +207,9 @@ function addcommentary() {
 		}
 		if ($comment=="GREM"){
 			//handle deleting the player's last comment
-			$sql = "SELECT * FROM ".db_prefix("commentary")." WHERE author='".$session['user']['acctid']."' ORDER BY commentid DESC LIMIT 1";
-			$result = db_query($sql);
-			while ($row = db_fetch_assoc($result)){
+			$sql = "SELECT * FROM ".DB::prefix("commentary")." WHERE author='".$session['user']['acctid']."' ORDER BY commentid DESC LIMIT 1";
+			$result = DB::query($sql);
+			while ($row = DB::fetch_assoc($result)){
 				$now = time();
 				$then = strtotime($row['postdate']);
 				$ago = $now - $then;
@@ -260,8 +260,8 @@ function injectrawcomment($section, $author, $comment, $name=false, $info=false)
 		$sqlinfo=addslashes($sqlinfo);
 	}
 	$name = addslashes($name);
-	$sql = "INSERT INTO " . db_prefix("commentary") . " (postdate,section,author,comment,name,info) VALUES ('".date("Y-m-d H:i:s")."','$section',$author,\"$comment\",\"$name\",\"$sqlinfo\")";
-	db_query($sql);
+	$sql = "INSERT INTO " . DB::prefix("commentary") . " (postdate,section,author,comment,name,info) VALUES ('".date("Y-m-d H:i:s")."','$section',$author,\"$comment\",\"$name\",\"$sqlinfo\")";
+	DB::query($sql);
 
 	//update datacache for latest commentary - no need to invalidate this and then rebuild it again, just pop one off the start and put our new one on the end
 	$commentbuffer = datacache("commentary/latestcommentary_".$section,60);
@@ -316,9 +316,9 @@ function injectcommentary($section, $talkline, $comment) {
 		$info['rawcomment']=$comment;
 		$clanid = $session['user']['clanid'];
 		if ($clanid && $session['user']['clanrank']){
-			$clansql = "SELECT clanname,clanshort FROM ".db_prefix("clans")." WHERE clanid='$clanid'";
-			$clanresult = db_query($clansql);
-			$clanrow = db_fetch_assoc($clanresult);
+			$clansql = "SELECT clanname,clanshort FROM ".DB::prefix("clans")." WHERE clanid='$clanid'";
+			$clanresult = DB::query($clansql);
+			$clanrow = DB::fetch_assoc($clanresult);
 			$info['clanname'] = $clanrow['clanname'];
 			$info['clanshort'] = $clanrow['clanshort'];
 			$info['clanid'] = $clanid;
@@ -371,10 +371,10 @@ function injectcommentary($section, $talkline, $comment) {
 					$doublepost = true;
 				}
 			} else {
-				$sql = "SELECT comment FROM " . db_prefix("commentary") . " WHERE section='$section' AND author='".$session['user']['acctid']."' ORDER BY commentid DESC LIMIT 1";
-				$result = db_query($sql);
-				$row = db_fetch_assoc($result);
-				db_free_result($result);
+				$sql = "SELECT comment FROM " . DB::prefix("commentary") . " WHERE section='$section' AND author='".$session['user']['acctid']."' ORDER BY commentid DESC LIMIT 1";
+				$result = DB::query($sql);
+				$row = DB::fetch_assoc($result);
+				DB::free_result($result);
 				if ($row['comment']==stripslashes($commentary)){
 					$doublepost = true;
 				}
@@ -441,21 +441,21 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 	if ($customsql){
 		$sql = $customsql;
 	} else if ($section=="all"){
-		$sql = "SELECT * FROM ".db_prefix("commentary")." WHERE section NOT LIKE 'dwelling%' AND section NOT LIKE 'clan%' AND section NOT LIKE 'pet-%' ORDER BY commentid DESC LIMIT ".($com*$limit).",$limit";
-		$result = db_query($sql);
+		$sql = "SELECT * FROM ".DB::prefix("commentary")." WHERE section NOT LIKE 'dwelling%' AND section NOT LIKE 'clan%' AND section NOT LIKE 'pet-%' ORDER BY commentid DESC LIMIT ".($com*$limit).",$limit";
+		$result = DB::query($sql);
 		$viewingallsections=1;
 	} else {
 		$start = microtime(true);
-		$sql = "SELECT * FROM ".db_prefix("commentary")." WHERE section='$section' ORDER BY commentid DESC LIMIT ".($com*$limit).",$limit";
+		$sql = "SELECT * FROM ".DB::prefix("commentary")." WHERE section='$section' ORDER BY commentid DESC LIMIT ".($com*$limit).",$limit";
 		if (!$com){
-			//save doing db_fetch_assoc on commentary that's already cached; just unserialize and load it in one chunk
+			//save doing DB::fetch_assoc on commentary that's already cached; just unserialize and load it in one chunk
 			$commentbuffer = datacache("commentary/latestcommentary_".$section,60);
 			//debug($commentbuffer);
 		}
 		if (!is_array($commentbuffer) || $com){
 			$commentbuffer = array();
-			$result = db_query($sql);
-			while ($row = db_fetch_assoc($result)){
+			$result = DB::query($sql);
+			while ($row = DB::fetch_assoc($result)){
 				$row['info']=@stripslashes($row['info']);
 				$row['info']=@unserialize($row['info']);
 				if (!is_array($row['info'])){
@@ -614,16 +614,16 @@ function getcommentary($section, $limit=25, $talkline, $customsql=false, $showmo
 
 	//get offline/online/nearby status
 	$acctids = join(',',$acctidstoquery);
-	$onlinesql = "SELECT acctid, laston, loggedin, chatloc FROM ".db_prefix("accounts"). (!empty($acctids) ? " WHERE acctid IN ($acctids)" : "");
+	$onlinesql = "SELECT acctid, laston, loggedin, chatloc FROM ".DB::prefix("accounts"). (!empty($acctids) ? " WHERE acctid IN ($acctids)" : "");
 	//cache it for 30 seconds
 	if (!$com){
-		$onlineresult = db_query_cached($onlinesql,"commentary/whosonline_".$section,30);
+		$onlineresult = DB::query_cached($onlinesql,"commentary/whosonline_".$section,30);
 	} else {
-		$onlineresult = db_query($onlinesql);
+		$onlineresult = DB::query($onlinesql);
 	}
 	$onlinestatus = array();
 	$offline = date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"));
-	while ($row = db_fetch_assoc($onlineresult)){
+	while ($row = DB::fetch_assoc($onlineresult)){
 		$onlinestatus[$row['acctid']]=$row;
 	}
 	$onlinestatus[$session['user']['acctid']]['chatloc']=$chatloc;
@@ -1024,13 +1024,13 @@ function commentaryfooter($section,$message="Interject your own commentary?",$li
 	//Output page jumpers
 	$com = httpget('comscroll');
 	if ($section=="all"){
-		$sql = "SELECT count(commentid) AS c FROM " . db_prefix("commentary") . " WHERE section NOT LIKE 'dwelling%' AND section NOT LIKE 'clan%' AND section NOT LIKE 'pet-%'";
+		$sql = "SELECT count(commentid) AS c FROM " . DB::prefix("commentary") . " WHERE section NOT LIKE 'dwelling%' AND section NOT LIKE 'clan%' AND section NOT LIKE 'pet-%'";
 	} else {
-		$sql = "SELECT count(commentid) AS c FROM " . db_prefix("commentary") . " WHERE section='$section'";
+		$sql = "SELECT count(commentid) AS c FROM " . DB::prefix("commentary") . " WHERE section='$section'";
 	}
-	$r = db_query_cached($sql,"commentary/commentarycount_".$section,60);
-	//$r = db_query($sql);
-	$val = db_fetch_assoc($r);
+	$r = DB::query_cached($sql,"commentary/commentarycount_".$section,60);
+	//$r = DB::query($sql);
+	$val = DB::fetch_assoc($r);
 	$rowcount = $val['c'];
 	$val = round($val['c'] / $limit + 0.5,0) - 1;
 

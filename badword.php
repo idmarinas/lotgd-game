@@ -56,9 +56,9 @@ output("`7Remove a word:`0");
 rawoutput("<input name='word'><input type='submit' class='button' value='$remove'></form>");
 
 
-$sql = "SELECT * FROM ".db_prefix("nastywords")." WHERE type='good'";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$sql = "SELECT * FROM ".DB::prefix("nastywords")." WHERE type='good'";
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $words = explode(" ",$row['words']);
 if ($op=="addgood"){
 
@@ -94,10 +94,10 @@ if ($op=="removegood"){
 
 show_word_list($words);
 if ($op=="addgood" || $op=="removegood"){
-	$sql = "DELETE FROM " . db_prefix("nastywords") . " WHERE type='good'";
-	db_query($sql);
-	$sql = "INSERT INTO " . db_prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','good')";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='good'";
+	DB::query($sql);
+	$sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','good')";
+	DB::query($sql);
 	invalidatedatacache("goodwordlist");
 }
 
@@ -116,9 +116,9 @@ addnav("","badword.php?op=remove");
 output("`7Remove a word:`0");
 rawoutput("<input name='word'><input type='submit' class='button' value='$remove'></form>");
 
-$sql = "SELECT * FROM " . db_prefix("nastywords") . " WHERE type='nasty'";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$sql = "SELECT * FROM " . DB::prefix("nastywords") . " WHERE type='nasty'";
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $words = explode(" ",$row['words']);
 reset($words);
 
@@ -151,10 +151,10 @@ show_word_list($words);
 output_notl("`0");
 
 if ($op=="add" || $op=="remove"){
-	$sql = "DELETE FROM " . db_prefix("nastywords") . " WHERE type='nasty'";
-	db_query($sql);
-	$sql = "INSERT INTO " . db_prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','nasty')";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='nasty'";
+	DB::query($sql);
+	$sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','nasty')";
+	DB::query($sql);
 	invalidatedatacache("nastywordlist");
 }
 page_footer();

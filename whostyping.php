@@ -49,29 +49,29 @@ $old = $now - 2;
 
 //update time
 if ($updateplayer){
-	$sql = "INSERT INTO ".db_prefix("whostyping")." (time,name,section) VALUES ('$now','$name','$section') ON DUPLICATE KEY UPDATE time = VALUES(time), section = VALUES(section)";
-	db_query($sql);
+	$sql = "INSERT INTO ".DB::prefix("whostyping")." (time,name,section) VALUES ('$now','$name','$section') ON DUPLICATE KEY UPDATE time = VALUES(time), section = VALUES(section)";
+	DB::query($sql);
 	//echo("Updating player");
 	//erase old entries once per ten seconds
 	$lastdigit = substr($now,-1);
 	if ($lastdigit=="0"){
-		$delsql = "DELETE FROM ".db_prefix("whostyping")." WHERE time < $old";
-		db_query($delsql);
+		$delsql = "DELETE FROM ".DB::prefix("whostyping")." WHERE time < $old";
+		DB::query($delsql);
 	}
 	invalidatedatacache("whostyping/whostyping_".$section);
 }
 
 //retrieve, deleting as appropriate
-$sql = "SELECT * FROM ".db_prefix("whostyping")." WHERE section='$section'";
-$result = db_query_cached($sql,"whostyping/whostyping_".$section,60);
+$sql = "SELECT * FROM ".DB::prefix("whostyping")." WHERE section='$section'";
+$result = DB::query_cached($sql,"whostyping/whostyping_".$section,60);
 $disp = array();
-while ($row = db_fetch_assoc($result)){
+while ($row = DB::fetch_assoc($result)){
 	if ($row['time'] > $old){
 		$disp[]=$row['name'];
 	}
 }
 
-//db_free_result($result);
+//DB::free_result($result);
 
 //display
 foreach($disp AS $name){

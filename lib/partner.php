@@ -2,7 +2,7 @@
 function get_partner($player=false)
 {
 	global $session;
-	if ($session['user']['prefs']['sexuality']=='') 
+	if ($session['user']['prefs']['sexuality']=='')
 		$session['user']['prefs']['sexuality']=!$session['user']['sex'];
 	if ($player === false) {
 		$partner = getsetting("barmaid", "`%Violet");
@@ -16,9 +16,9 @@ function get_partner($player=false)
 				$partner = getsetting("bard", "`^Seth");
 			}
 		} else {
-			$sql = "SELECT name FROM ".db_prefix("accounts")." WHERE acctid = {$session['user']['marriedto']}";
-			$result = db_query($sql);
-			if ($row = db_fetch_assoc($result)) {
+			$sql = "SELECT name FROM ".DB::prefix("accounts")." WHERE acctid = {$session['user']['marriedto']}";
+			$result = DB::query($sql);
+			if ($row = DB::fetch_assoc($result)) {
 				$partner = $row['name'];
 			} else {
 				$session['user']['marriedto'] = 0;

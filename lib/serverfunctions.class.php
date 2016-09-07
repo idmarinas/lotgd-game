@@ -2,9 +2,9 @@
 class ServerFunctions {
 	function isTheServerFull() {
 		if (abs(getsetting("OnlineCountLast",0) - strtotime("now")) > 60){
-			$sql="SELECT count(acctid) as counter FROM " . db_prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."'";
-			$result = db_query($sql);
-			$onlinecount = db_fetch_assoc($result);
+			$sql="SELECT count(acctid) as counter FROM " . DB::prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."'";
+			$result = DB::query($sql);
+			$onlinecount = DB::fetch_assoc($result);
 			$onlinecount = $onlinecount['counter'];
 			savesetting("OnlineCount",$onlinecount);
 			savesetting("OnlineCountLast",strtotime("now"));
@@ -23,10 +23,10 @@ class ServerFunctions {
 		} else  {
 			$where="WHERE acctid=$acctid";
 		}
-			$sql="SELECT acctid,dragonpoints FROM ".db_prefix('accounts')." $where";
-		$result=db_query($sql);
+			$sql="SELECT acctid,dragonpoints FROM ".DB::prefix('accounts')." $where";
+		$result=DB::query($sql);
 		//this is ugly, but fortunately only needed out of the ordinary
-		while($row=db_fetch_assoc($result)) {
+		while($row=DB::fetch_assoc($result)) {
 			$dkpoints=$row['dragonpoints'];
 			if ($dkpoints=="") continue; // no action
 			$dkpoints=unserialize(stripslashes($dkpoints));
@@ -72,8 +72,8 @@ class ServerFunctions {
 				$resetactions=",".implode(",",$sets);
 			} else $resetactions="";
 
-			$sql="UPDATE ".db_prefix('accounts')." SET dragonpoints=''$resetactions WHERE acctid=".$row['acctid'];
-			db_query($sql);
+			$sql="UPDATE ".DB::prefix('accounts')." SET dragonpoints=''$resetactions WHERE acctid=".$row['acctid'];
+			DB::query($sql);
 			//adding a hook, nasty, but you don't call this too often
 			modulehook("dragonpointreset",array($row));
 		}

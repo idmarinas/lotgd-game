@@ -8,11 +8,11 @@ require_once("lib/e_rand.php");
 
 function valid_dk_title($title, $dks, $gender)
 {
-	$sql = "SELECT dk,male,female FROM " . db_prefix("titles") .
+	$sql = "SELECT dk,male,female FROM " . DB::prefix("titles") .
 		" WHERE dk <= $dks ORDER by dk DESC";
-	$res = db_query($sql);
+	$res = DB::query($sql);
 	$d = -1;
-	while ($row = db_fetch_assoc($res)) {
+	while ($row = DB::fetch_assoc($res)) {
 		if ($d == -1) $d = $row['dk'];
 		// Only care about best dk rank for this person
 		if ($row['dk'] != $d) break;
@@ -34,17 +34,17 @@ function get_dk_title($dks, $gender, $ref=false)
 	// is a closer 'any' match, we will use that!
 	$refdk = -1;
 	if ($ref !== false) {
-		$sql = "SELECT max(dk) as dk FROM " . db_prefix("titles") .
+		$sql = "SELECT max(dk) as dk FROM " . DB::prefix("titles") .
 			" WHERE dk<='$dks' and ref='$ref'";
-		$res = db_query($sql);
-		$row = db_fetch_assoc($res);
+		$res = DB::query($sql);
+		$row = DB::fetch_assoc($res);
 		$refdk = $row['dk'];
 	}
 
-	$sql = "SELECT max(dk) as dk FROM " . db_prefix("titles") .
+	$sql = "SELECT max(dk) as dk FROM " . DB::prefix("titles") .
 		" WHERE dk<='$dks'";
-	$res = db_query($sql);
-	$row = db_fetch_assoc($res);
+	$res = DB::query($sql);
+	$row = DB::fetch_assoc($res);
 	$anydk = $row['dk'];
 
 	$useref = "";
@@ -57,13 +57,13 @@ function get_dk_title($dks, $gender, $ref=false)
 	// Okay, we now have the right dk target to use, so select a title from
 	// any titles available at that level.  We will prefer titles that
 	// match the ref if possible.
-	$sql = "SELECT male,female FROM " . db_prefix("titles") .
+	$sql = "SELECT male,female FROM " . DB::prefix("titles") .
 		" WHERE dk='$targetdk' $useref ORDER BY RAND(" .
 		e_rand() . ") LIMIT 1";
-	$res = db_query($sql);
+	$res = DB::query($sql);
 	$row = array('male'=>'God', 'female'=>'Goddess');
-	if (db_num_rows($res) != 0) {
-		$row = db_fetch_assoc($res);
+	if (DB::num_rows($res) != 0) {
+		$row = DB::fetch_assoc($res);
 	}
 	if ($gender == SEX_MALE)
 		return $row['male'];

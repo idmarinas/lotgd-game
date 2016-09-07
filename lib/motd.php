@@ -39,9 +39,9 @@ function motditem($subject,$body,$author,$date,$id){
 
 function pollitem($id,$subject,$body,$author,$date,$showpoll=true){
 	global $session;
-	$sql = "SELECT count(resultid) AS c, MAX(choice) AS choice FROM " . db_prefix("pollresults") . " WHERE motditem='$id' AND account='{$session['user']['acctid']}'";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT count(resultid) AS c, MAX(choice) AS choice FROM " . DB::prefix("pollresults") . " WHERE motditem='$id' AND account='{$session['user']['acctid']}'";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$choice = $row['choice'];
 	$body = unserialize($body);
 
@@ -54,12 +54,12 @@ function pollitem($id,$subject,$body,$author,$date,$showpoll=true){
 	if ($showpoll) motd_admin($id, true);
 	output_notl("`n`3%s`0 &#150; `#%s`0`n", $author, $date, true);
 	output_notl("`2%s`0`n", stripslashes($body['body']),true); // allow HTML
-	$sql = "SELECT count(resultid) AS c, choice FROM " . db_prefix("pollresults") . " WHERE motditem='$id' GROUP BY choice ORDER BY choice";
-	$result = db_query_cached($sql,"poll-$id");
+	$sql = "SELECT count(resultid) AS c, choice FROM " . DB::prefix("pollresults") . " WHERE motditem='$id' GROUP BY choice ORDER BY choice";
+	$result = DB::query_cached($sql,"poll-$id");
 	$choices=array();
 	$totalanswers=0;
 	$maxitem = 0;
-	while ($row = db_fetch_assoc($result)) {
+	while ($row = DB::fetch_assoc($result)) {
 		$choices[$row['choice']]=$row['c'];
 		$totalanswers+=$row['c'];
 		if ($row['c']>$maxitem) $maxitem = $row['c'];
@@ -109,10 +109,10 @@ function motd_form($id) {
 			"motdbody"=>"",
 		);
 		if ($id>""){
-			$sql = "SELECT " . db_prefix("motd") . ".*,name AS motdauthorname FROM " . db_prefix("motd") . " LEFT JOIN " . db_prefix("accounts") . " ON " . db_prefix("accounts") . ".acctid = " . db_prefix("motd") . ".motdauthor WHERE motditem='$id'";
-			$result = db_query($sql);
-			if (db_num_rows($result)>0){
-				$row = db_fetch_assoc($result);
+			$sql = "SELECT " . DB::prefix("motd") . ".*,name AS motdauthorname FROM " . DB::prefix("motd") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid = " . DB::prefix("motd") . ".motdauthor WHERE motditem='$id'";
+			$result = DB::query($sql);
+			if (DB::num_rows($result)>0){
+				$row = DB::fetch_assoc($result);
 				$msg = $edit;
 			}else{
 				$msg = $add;
@@ -159,24 +159,24 @@ function motd_form($id) {
 				$sql.=", motdauthor={$session['user']['acctid']}";
 			if (httppost('changedate'))
 				$sql.=", motddate='".date("Y-m-d H:i:s")."'";
-			$sql = "UPDATE " . db_prefix("motd") . $sql . " WHERE motditem='$id'";
-			db_query($sql);
+			$sql = "UPDATE " . DB::prefix("motd") . $sql . " WHERE motditem='$id'";
+			DB::query($sql);
 			invalidatedatacache("motd");
 			invalidatedatacache("lastmotd");
 			invalidatedatacache("motddate");
 		}
-		if ($id=="" || db_affected_rows()==0){
+		if ($id=="" || DB::affected_rows()==0){
 			if ($id>""){
-				$sql = "SELECT * FROM " . db_prefix("motd") . " WHERE motditem='$id'";
-				$result = db_query($sql);
-				if (db_num_rows($result)>0) $doinsert = false;
+				$sql = "SELECT * FROM " . DB::prefix("motd") . " WHERE motditem='$id'";
+				$result = DB::query($sql);
+				if (DB::num_rows($result)>0) $doinsert = false;
 				else $doinsert=true;
 			}else{
 				$doinsert=true;
 			}
 			if ($doinsert){
-				$sql = "INSERT INTO " . db_prefix("motd") . " (motdtitle,motdbody,motddate,motdauthor) VALUES (\"$subject\",\"$body\",'".date("Y-m-d H:i:s")."','{$session['user']['acctid']}')";
-				db_query($sql);
+				$sql = "INSERT INTO " . DB::prefix("motd") . " (motdtitle,motdbody,motddate,motdauthor) VALUES (\"$subject\",\"$body\",'".date("Y-m-d H:i:s")."','{$session['user']['acctid']}')";
+				DB::query($sql);
 				invalidatedatacache("motd");
 				invalidatedatacache("lastmotd");
 				invalidatedatacache("motddate");
@@ -217,8 +217,8 @@ function motd_poll_form() {
 	}else{
 		$opt = httppost("opt");
 		$body = array("body"=>$body,"opt"=>$opt);
-		$sql = "INSERT INTO " . db_prefix("motd") . " (motdtitle,motdbody,motddate,motdtype,motdauthor) VALUES (\"$subject\",\"".addslashes(serialize($body))."\",'".date("Y-m-d H:i:s")."',1,'{$session['user']['acctid']}')";
-		db_query($sql);
+		$sql = "INSERT INTO " . DB::prefix("motd") . " (motdtitle,motdbody,motddate,motdtype,motdauthor) VALUES (\"$subject\",\"".addslashes(serialize($body))."\",'".date("Y-m-d H:i:s")."',1,'{$session['user']['acctid']}')";
+		DB::query($sql);
 		invalidatedatacache("motd");
 		invalidatedatacache("lastmotd");
 		invalidatedatacache("motddate");
@@ -228,8 +228,8 @@ function motd_poll_form() {
 }
 
 function motd_del($id) {
-	$sql = "DELETE FROM " . db_prefix("motd") . " WHERE motditem=\"$id\"";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("motd") . " WHERE motditem=\"$id\"";
+	DB::query($sql);
 	invalidatedatacache("motd");
 	invalidatedatacache("lastmotd");
 	invalidatedatacache("motddate");

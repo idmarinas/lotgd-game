@@ -3,14 +3,14 @@
 		output("Having pressed the secret levers and turned the secret knobs on the lock of the door to your clan's hall, you gain entrance and chat with your clan mates.`n`n");
 		modulehook("}collapse");
 
-		$sql = "SELECT name FROM " . db_prefix("accounts")  . " WHERE acctid={$claninfo['motdauthor']}";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT name FROM " . DB::prefix("accounts")  . " WHERE acctid={$claninfo['motdauthor']}";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		$motdauthname = $row['name'];
 
-		$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid={$claninfo['descauthor']}";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid={$claninfo['descauthor']}";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		$descauthname = $row['name'];
 
 		if ($claninfo['clanmotd'] != '') {
@@ -31,13 +31,13 @@
 			output_notl(nltoappon($claninfo['clandesc']));
 			modulehook("}collapse");
 		}
-		$sql = "SELECT count(acctid) AS c, clanrank FROM " . db_prefix("accounts") . " WHERE clanid={$claninfo['clanid']} GROUP BY clanrank DESC";
-		$result = db_query($sql);
+		$sql = "SELECT count(acctid) AS c, clanrank FROM " . DB::prefix("accounts") . " WHERE clanid={$claninfo['clanid']} GROUP BY clanrank DESC";
+		$result = DB::query($sql);
 		// begin collapse
 		modulehook("collapse{", array("name"=>"clanmemberdet"));
 		output("`n`n`bMembership Details:`b`n");
 		$leaders = 0;
-		while ($row = db_fetch_assoc($result)){
+		while ($row = DB::fetch_assoc($result)){
 			output_notl($ranks[$row['clanrank']].": `0".$row['c']."`n");
 			if ($row['clanrank']>=CLAN_LEADER) $leaders += $row['c'];
 		}
@@ -46,12 +46,12 @@
 		if ($leaders==0){
 			//There's no leader here, probably because the leader's account
 			//expired.
-			$sql = "SELECT name,acctid,clanrank FROM " . db_prefix("accounts") . " WHERE clanid={$session['user']['clanid']} AND clanrank > " . CLAN_APPLICANT . " ORDER BY clanrank DESC, clanjoindate";
-			$result = db_query($sql);
-			if (db_num_rows($result)) {
-				$row = db_fetch_assoc($result);
-				$sql = "UPDATE " . db_prefix("accounts") . " SET clanrank=".CLAN_LEADER." WHERE acctid={$row['acctid']}";
-				db_query($sql);
+			$sql = "SELECT name,acctid,clanrank FROM " . DB::prefix("accounts") . " WHERE clanid={$session['user']['clanid']} AND clanrank > " . CLAN_APPLICANT . " ORDER BY clanrank DESC, clanjoindate";
+			$result = DB::query($sql);
+			if (DB::num_rows($result)) {
+				$row = DB::fetch_assoc($result);
+				$sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=".CLAN_LEADER." WHERE acctid={$row['acctid']}";
+				DB::query($sql);
 				output_notl($noleader,$row['name']);
 				if ($row['acctid']==$session['user']['acctid']){
 					//if it's the current user, we'll need to update their

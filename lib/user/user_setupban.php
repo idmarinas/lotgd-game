@@ -1,7 +1,7 @@
 <?php
-$sql = "SELECT name,lastip,uniqueid FROM " . db_prefix("accounts") . " WHERE acctid=\"$userid\"";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$sql = "SELECT name,lastip,uniqueid FROM " . DB::prefix("accounts") . " WHERE acctid=\"$userid\"";
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 if ($row['name']!="")
 	output("Setting up ban information based on `\$%s`0", $row['name']);
 rawoutput("<form action='user.php?op=saveban' method='POST'>");
@@ -34,10 +34,10 @@ if ($row['name']!=""){
 	$name = $row['name'];
 	output("`0To help locate similar users to `@%s`0, here are some other users who are close:`n", $name);
 	output("`bSame ID (%s):`b`n", $id);
-	$sql = "SELECT name, lastip, uniqueid, laston, gentimecount FROM " . db_prefix("accounts") . " WHERE uniqueid='".addslashes($id)."' ORDER BY lastip";
-	$result = db_query($sql);
-	while ($row = db_fetch_assoc($result)){
-		output("`0• (%s) `%%s`0 - %s hits, last: %s`n", $row['lastip'],
+	$sql = "SELECT name, lastip, uniqueid, laston, gentimecount FROM " . DB::prefix("accounts") . " WHERE uniqueid='".addslashes($id)."' ORDER BY lastip";
+	$result = DB::query($sql);
+	while ($row = DB::fetch_assoc($result)){
+		output("`0ï¿½ (%s) `%%s`0 - %s hits, last: %s`n", $row['lastip'],
 				$row['name'], $row['gentimecount'],
 				reltime(strtotime($row['laston'])));
 	}
@@ -48,18 +48,18 @@ if ($row['name']!=""){
 	for ($x=strlen($ip); $x>0; $x--){
 		if ($dots>1) break;
 		$thisip = substr($ip,0,$x);
-		$sql = "SELECT name, lastip, uniqueid, laston, gentimecount FROM " . db_prefix("accounts") . " WHERE lastip LIKE '$thisip%' AND NOT (lastip LIKE '$oip') ORDER BY uniqueid";
+		$sql = "SELECT name, lastip, uniqueid, laston, gentimecount FROM " . DB::prefix("accounts") . " WHERE lastip LIKE '$thisip%' AND NOT (lastip LIKE '$oip') ORDER BY uniqueid";
 		//output("$sql`n");
-		$result = db_query($sql);
-		if (db_num_rows($result)>0){
-			output("• IP Filter: %s ", $thisip);
+		$result = DB::query($sql);
+		if (DB::num_rows($result)>0){
+			output("ï¿½ IP Filter: %s ", $thisip);
 			rawoutput("<a href='#' onClick=\"document.getElementById('ip').value='$thisip'; document.getElementById('ipradio').checked = true; return false\">");
 			output("Use this filter");
 			rawoutput("</a>");
 			output_notl("`n");
-			while ($row=db_fetch_assoc($result)){
+			while ($row=DB::fetch_assoc($result)){
 				output("&nbsp;&nbsp;",true);
-				output("• (%s) [%s] `%%s`0 - %s hits, last: %s`n",
+				output("ï¿½ (%s) [%s] `%%s`0 - %s hits, last: %s`n",
 						$row['lastip'], $row['uniqueid'], $row['name'],
 						$row['gentimecount'],
 						reltime(strtotime($row['laston'])));

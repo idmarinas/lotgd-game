@@ -60,9 +60,9 @@ if ($op=="add2"){
 	$amt = httpget('amt');
 	$reason = httpget('reason');
 
-	$sql="SELECT name FROM ".db_prefix("accounts")." WHERE acctid=$id;";
-	$result=db_query($sql);
-	$row=db_fetch_assoc($result);
+	$sql="SELECT name FROM ".DB::prefix("accounts")." WHERE acctid=$id;";
+	$result=DB::query($sql);
+	$row=DB::fetch_assoc($result);
 	output("%s donation points added to %s`0, reason: `^%s`0",$amt,$row['name'],$reason);
 
 	$txnid = httpget("txnid");
@@ -85,13 +85,13 @@ if ($op=="add2"){
 	// ok to execute when this is the current user, they'll overwrite the
 	// value at the end of their page hit, and this will allow the display
 	// table to update in real time.
-	$sql = "UPDATE " . db_prefix("accounts") . " SET donation=donation+'$points' WHERE acctid='$id'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("accounts") . " SET donation=donation+'$points' WHERE acctid='$id'";
+	DB::query($sql);
 	modulehook("donation", array("id"=>$id, "amt"=>$points, "manual"=>($txnid>""?false:true)));
 
 	if ($txnid>""){
-		$sql = "UPDATE ".db_prefix("paylog")." SET acctid='$id', processed=1 WHERE txnid='$txnid'";
-		db_query($sql);
+		$sql = "UPDATE ".DB::prefix("paylog")." SET acctid='$id', processed=1 WHERE txnid='$txnid'";
+		DB::query($sql);
 		debuglog("Received donator points for donating -- Credited manually [$reason]",false,$id,"donation",$points,false);
 		redirect("paylog.php");
 	}else{
@@ -103,8 +103,8 @@ if ($op=="add2"){
 }
 
 if ($op==""){
-	$sql = "SELECT name,donation,donationspent FROM " . db_prefix("accounts") . " WHERE donation>0 ORDER BY donation DESC LIMIT 25";
-	$result = db_query($sql);
+	$sql = "SELECT name,donation,donationspent FROM " . DB::prefix("accounts") . " WHERE donation>0 ORDER BY donation DESC LIMIT 25";
+	$result = DB::query($sql);
 
 	$name = translate_inline("Name");
 	$points = translate_inline("Points");
@@ -112,9 +112,9 @@ if ($op==""){
 
 	rawoutput("<table border='0' cellpadding='3' cellspacing='1' bgcolor='#999999'>");
 	rawoutput("<tr class='trhead'><td>$name</td><td>$points</td><td>$spent</td></tr>");
-	$number=db_num_rows($result);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
 		rawoutput("<td>");
 		output_notl("`^%s`0",$row['name']);
@@ -131,17 +131,17 @@ if ($op==""){
 	$name = httppost('name');
 	if ($name=='') $name = httpget('name');
 	$search=str_replace("'","\'",$name);
-	$sql = "SELECT name,acctid,donation,donationspent FROM " . db_prefix("accounts") . " WHERE login LIKE '$search' or name LIKE '$search' LIMIT 100";
-	$result = db_query($sql);
-	if (db_num_rows($result)==0) {
+	$sql = "SELECT name,acctid,donation,donationspent FROM " . DB::prefix("accounts") . " WHERE login LIKE '$search' or name LIKE '$search' LIMIT 100";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)==0) {
 		for ($i=0;$i<strlen($name);$i++){
 			$z = substr($name, $i, 1);
 			if ($z == "'") $z = "\'";
 			$search.=$z."%";
 		}
-	
-		$sql = "SELECT name,acctid,donation,donationspent FROM " . db_prefix("accounts") . " WHERE login LIKE '$search' or name LIKE '$search' LIMIT 100";
-		$result = db_query($sql);
+
+		$sql = "SELECT name,acctid,donation,donationspent FROM " . DB::prefix("accounts") . " WHERE login LIKE '$search' or name LIKE '$search' LIMIT 100";
+		$result = DB::query($sql);
 	}
 	$ret = httpget('ret');
 	$amt = httppost('amt');
@@ -152,9 +152,9 @@ if ($op==""){
 	if ($txnid=='') $txnid = httpget("txnid");
 	output("Confirm the addition of %s points to:`n",$amt);
 	if ($reason) output("(Reason: `^`b`i%s`i`b`0)`n`n",$reason);
-	$number=db_num_rows($result);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		if ($ret!=""){
 			rawoutput("<a href='donators.php?op=add2&id={$row['acctid']}&amt=$amt&ret=".rawurlencode($ret)."&reason=".rawurlencode($reason)."'>");
 		}else{

@@ -175,13 +175,13 @@ foreach ($post as $key=>$val) {
 	}
 }
 	$sql=substr($sql,0,strlen($sql)-1);
-$sql = "UPDATE " . db_prefix("accounts") . " SET " . $sql . " WHERE acctid=\"$userid\"";
+$sql = "UPDATE " . DB::prefix("accounts") . " SET " . $sql . " WHERE acctid=\"$userid\"";
 	$petition = httpget("returnpetition");
 if ($petition!="")
 	addnav("","viewpetition.php?op=view&id=$petition");
 addnav("","user.php");
 	if ($updates>0){
-	db_query($sql);
+	DB::query($sql);
 	debug("Updated $updates fields in the user record with:\n$sql");
 	output("%s fields in the user's record were updated.", $updates);
 }else{

@@ -47,11 +47,11 @@ function addnews_for_user()
 		$arguments="";
 	}
 	if ($hidefrombio === true) $user = 0;
-	$sql = "INSERT INTO " . db_prefix("news") .
+	$sql = "INSERT INTO " . DB::prefix("news") .
 		" (newstext,newsdate,accountid,arguments,tlschema) VALUES ('" .
 		addslashes($news) . "','" . date("Y-m-d H:i:s") . "'," .
 		$user .",'".addslashes($arguments)."','".$translation_namespace."')";
-	return db_query($sql);
+	return DB::query($sql);
 }
 
 ?>

@@ -34,26 +34,26 @@ switch ($op) {
 		$ref = '';
 
 		if ((int)$id == 0) {
-			$sql = "INSERT INTO ".db_prefix("titles")." (titleid,dk,ref,male,female) VALUES ($id,$dk,'$ref','$male','$female')";
+			$sql = "INSERT INTO ".DB::prefix("titles")." (titleid,dk,ref,male,female) VALUES ($id,$dk,'$ref','$male','$female')";
 			$note = "`^New title added.`0";
 			$errnote = "`\$Unable to add title.`0";
 		}else {
-			$sql = "UPDATE " . db_prefix("titles") . " SET dk=$dk,ref='$ref',male='$male',female='$female' WHERE titleid=$id";
+			$sql = "UPDATE " . DB::prefix("titles") . " SET dk=$dk,ref='$ref',male='$male',female='$female' WHERE titleid=$id";
 			$note = "`^Title modified.`0";
 			$errnote = "`\$Unable to modify title.`0";
 		}
-		db_query($sql);
-		if (db_affected_rows() == 0) {
+		DB::query($sql);
+		if (DB::affected_rows() == 0) {
 			output($errnote);
-			rawoutput(db_error());
+			rawoutput(DB::error());
 		} else {
 			output($note);
 		}
 		$op = "";
 		break;
 	case "delete":
-		$sql = "DELETE FROM ".db_prefix("titles")." WHERE titleid='$id'";
-		db_query($sql);
+		$sql = "DELETE FROM ".DB::prefix("titles")." WHERE titleid='$id'";
+		DB::query($sql);
 		output("`^Title deleted.`0");
 		$op = "";
 		break;
@@ -67,11 +67,11 @@ switch ($op) {
 		require_once("lib/names.php");
 
 		output("`^Rebuilding all titles for all players.`0`n`n");
-		$sql = "SELECT name,title,dragonkills,acctid,sex,ctitle FROM " . db_prefix("accounts");
-		$result = db_query($sql);
-		$number=db_num_rows($result);
+		$sql = "SELECT name,title,dragonkills,acctid,sex,ctitle FROM " . DB::prefix("accounts");
+		$result = DB::query($sql);
+		$number=DB::num_rows($result);
 		for ($i=0;$i<$number;$i++){
-			$row = db_fetch_assoc($result);
+			$row = DB::fetch_assoc($result);
 			$oname = $row['name'];
 			$dk = $row['dragonkills'];
 			$otitle = $row['title'];
@@ -88,10 +88,10 @@ switch ($op) {
 						$session['user']['title']=$newtitle;
 						$session['user']['name']=$newname;
 					}else{
-						$sql = "UPDATE " . db_prefix("accounts") . " SET name='" .
+						$sql = "UPDATE " . DB::prefix("accounts") . " SET name='" .
 							addslashes($newname)."', title='".
 							addslashes($newtitle)."' WHERE acctid='$id'";
-						db_query($sql);
+						DB::query($sql);
 					}
 				}elseif ($otitle != $newtitle){
 					output("`@Changing only the title (not the name) of `^%s`@ `@(%s`@ [%s,%s])`n",
@@ -99,25 +99,25 @@ switch ($op) {
 					if ($session['user']['acctid']==$row['acctid']){
 						$session['user']['title']=$newtitle;
 					}else{
-						$sql = "UPDATE " . db_prefix("accounts") .
+						$sql = "UPDATE " . DB::prefix("accounts") .
 							" SET title='".addslashes($newtitle) .
 							"' WHERE acctid='$id'";
-						db_query($sql);
+						DB::query($sql);
 					}
 				}
 			}
 		}
 		output("`n`n`^Done.`0");
-		addnav("Main Title Editor", "titleedit.php");		
+		addnav("Main Title Editor", "titleedit.php");
 		break;
 
 	case "edit": case "add":
 		require_once("lib/showform.php");
 		if ($op=="edit"){
 			output("`\$Editing an existing title`n`n");
-			$sql = "SELECT * FROM ".db_prefix("titles")." WHERE titleid='$id'";
-			$result = db_query($sql);
-			$row = db_fetch_assoc($result);
+			$sql = "SELECT * FROM ".DB::prefix("titles")." WHERE titleid='$id'";
+			$result = DB::query($sql);
+			$row = DB::fetch_assoc($result);
 		} elseif ($op=="add") {
 			output("`\$Adding a new title`n`n");
 			$row = array('titleid'=>0, 'male'=>'', 'female'=>'', 'dk'=>0);
@@ -133,12 +133,12 @@ switch ($op) {
 		//fallthrough
 
 		default:
-			$sql = "SELECT * FROM ".db_prefix("titles")." ORDER BY dk, titleid";
-			$result = db_query($sql);
-			if (db_num_rows($result)<1){
+			$sql = "SELECT * FROM ".DB::prefix("titles")." ORDER BY dk, titleid";
+			$result = DB::query($sql);
+			if (DB::num_rows($result)<1){
 				output("");
 			}else{
-				$row = db_fetch_assoc($result);
+				$row = DB::fetch_assoc($result);
 			}
 			output("`@`c`b-=Title Editor=-`b`c");
 			$ops = translate_inline("Ops");
@@ -154,9 +154,9 @@ switch ($op) {
 			// reference tag is currently unused
 			// rawoutput("<tr class='trhead'><td>$ops</td><td>$dks</td><td>$reftag</td><td>$mtit</td><td>$ftit</td></tr>");
 			rawoutput("<tr class='trhead'><td>$ops</td><td>$dks</td><td>$mtit</td><td>$ftit</td></tr>");
-			$result = db_query($sql);
+			$result = DB::query($sql);
 			$i = 0;
-			while($row = db_fetch_assoc($result)) {
+			while($row = DB::fetch_assoc($result)) {
 				$id = $row['titleid'];
 				rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
 				rawoutput("<td>[<a href='titleedit.php?op=edit&id=$id'>$edit</a>|<a href='titleedit.php?op=delete&id=$id' onClick='return confirm(\"$delconfirm\");'>$del</a>]</td>");

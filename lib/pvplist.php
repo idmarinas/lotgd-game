@@ -34,10 +34,10 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 
 		$sql = "SELECT acctid, name, race, alive, location, sex, level, laston, " .
 			"loggedin, login, pvpflag, clanshort, clanrank, dragonkills, " .
-			db_prefix("accounts") . ".clanid FROM " .
-			db_prefix("accounts") . " LEFT JOIN " .
-			db_prefix("clans") . " ON " . db_prefix("clans") . ".clanid=" .
-			db_prefix("accounts") . ".clanid WHERE (locked=0) " .
+			DB::prefix("accounts") . ".clanid FROM " .
+			DB::prefix("accounts") . " LEFT JOIN " .
+			DB::prefix("clans") . " ON " . DB::prefix("clans") . ".clanid=" .
+			DB::prefix("accounts") . ".clanid WHERE (locked=0) " .
 			"AND (slaydragon=0) AND " .
 			"(age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) " .
 			($levdiff==-1?"":"AND (level>=$lev1 AND level<=$lev2)")." AND (alive=1) " .
@@ -46,10 +46,10 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 			"ORDER BY location='$loc' DESC, location, level DESC, " .
 			"experience DESC, dragonkills DESC";
 	}
-	$result = db_query($sql);
+	$result = DB::query($sql);
 
 	$pvp = array();
-	while($row = db_fetch_assoc($result)) {
+	while($row = DB::fetch_assoc($result)) {
 		$pvp[] = $row;
 	}
 
@@ -110,24 +110,24 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 		rawoutput("</tr>");
 	}
 
-	$sql="SELECT count(location) as counter, location FROM ".db_prefix('accounts').
+	$sql="SELECT count(location) as counter, location FROM ".DB::prefix('accounts').
 			" WHERE (locked=0) " .
 			"AND (slaydragon=0) AND " .
 			"(age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) " .
 			($levdiff==-1?"":"AND (level>=$lev1 AND level<=$lev2)")." AND (alive=1) " .
 			"AND (laston<'$last' OR loggedin=0) AND (acctid<>$id) " .
 			"AND location!='$loc' GROUP BY location ORDER BY location; ";
-	$result=db_query($sql);
-	
+	$result=DB::query($sql);
+
 	if ($j==0){
 		$noone = translate_inline("`iThere are no available targets.`i");
 		output_notl("<tr><td align='center' colspan='4'>$noone</td></tr>", true);
 	}
 	rawoutput("</table>",true);
 
-	if (db_num_rows($result)!= 0) {
+	if (DB::num_rows($result)!= 0) {
 		output("`n`n`&As you listen to different people around you talking, you glean the following additional information:`n");
-		while ($row=db_fetch_assoc($result)) {
+		while ($row=DB::fetch_assoc($result)) {
 			$loc=$row['location'];
 			$count=$row['counter'];
 			$args = modulehook("pvpcount", array('count'=>$count,'loc'=>$loc));

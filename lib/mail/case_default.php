@@ -4,8 +4,8 @@ if (isset($session['message'])) {
 	output($session['message']);
 }
 $session['message']="";
-$mail = db_prefix("mail");
-$accounts = db_prefix("accounts");
+$mail = DB::prefix("mail");
+$accounts = DB::prefix("accounts");
 $sortorder=httpget('sortorder');
 if ($sortorder=='') $sortorder='date';
 switch ($sortorder) {
@@ -24,9 +24,9 @@ if ($sorting_direction==0) $direction="DESC";
 $newdirection=(int)!$sorting_direction;
 
 $sql = "SELECT subject,messageid,".$accounts.".name,".$accounts.".acctid,msgfrom,seen,sent FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" ORDER BY $order $direction";
-$result = db_query($sql);
-$db_num_rows = db_num_rows($result);
-if ($db_num_rows>0){
+$result = DB::query($sql);
+$DB::num_rows = DB::num_rows($result);
+if ($DB::num_rows>0){
 	$no_subject = translate_inline("`i(No Subject)`i");
 	$subject = translate_inline("Subject");
 	$from = translate_inline("Sender");
@@ -45,7 +45,7 @@ if ($db_num_rows>0){
 	$rows=array();
 	$userlist=array();
 
-	while($row = db_fetch_assoc($result)){
+	while($row = DB::fetch_assoc($result)){
 		$rows[]=$row;
 		if ($row['acctid']) $userlist[]=$row['acctid'];
 	}
@@ -156,5 +156,5 @@ if ($db_num_rows>0){
 }else{
 	output("`i`4Aww, you have no mail, how sad.`i");
 }
-output("`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.",db_num_rows($result),getsetting('inboxlimit',50),getsetting("oldmail",14));
+output("`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.",DB::num_rows($result),getsetting('inboxlimit',50),getsetting("oldmail",14));
 ?>

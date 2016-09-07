@@ -3,27 +3,27 @@
 function get_player_hitpoints($player = false)
 {
     global $session;
-    
-	if (false != $player) 
+
+	if (false != $player)
     {
         $select = DB::select('accounts');
         $select->columns(['constitution','wisdom','strength', 'permahitpoints', 'level'])
                ->where->equalTo('acctid', $player);
         ;
         $result = DB::execute($select)->current();
-		
+
         if (!$row) return 0;
-        
+
         $user = $row;
 	} else $user =& $session['user'];
-    
+
     $conbonus = $user['constitution'] * .5;
 	$wisbonus = $user['wisdom'] * .2;
 	$strbonus = $user['strength'] * .3;
 	$levelbonus = ($user['level']-1) * 10;
-        
+
     $hitpoints = round($conbonus + $wisbonus + $strbonus + $levelbonus + $user['permahitpoints'], 0);
-    
+
     // La salud minima que puede tener el personaje es 10, independientemente de la penalización del permahitpoints
     return max($hitpoints, 10);
 }
@@ -31,20 +31,20 @@ function get_player_hitpoints($player = false)
 function explained_get_player_hitpoints($player = false, $colored = false)
 {
     global $session;
-    
-	if (false != $player) 
+
+	if (false != $player)
     {
         $select = DB::select('accounts');
         $select->columns(['constitution','wisdom','strength', 'permahitpoints', 'level'])
                ->where->equalTo('acctid', $player);
         ;
         $result = DB::execute($select)->current();
-		
+
         if (!$row) return 0;
-        
+
         $user = $row;
 	} else $user =& $session['user'];
-    
+
     $conbonus = $user['constitution'] * .5;
 	$wisbonus = $user['wisdom'] * .2;
 	$strbonus = $user['strength'] * .3;
@@ -63,9 +63,9 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 function get_player_attack($player=false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT strength,wisdom,intelligence,attack FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT strength,wisdom,intelligence,attack FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -80,7 +80,7 @@ function get_player_attack($player=false) {
 	$wisdombonus=(1/6)*$user['wisdom'];
 	$intbonus=(1/6)*$user['intelligence'];
 	$miscbonus=$user['attack']-9;
-	
+
 	$attack = $strbonus+$speedbonus+$wisdombonus+$intbonus+$miscbonus;
 	return max($attack,0);
 }
@@ -89,9 +89,9 @@ function get_player_attack($player=false) {
 function explained_get_player_attack($player=false, $colored = false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT strength,wisdom,intelligence,attack FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT strength,wisdom,intelligence,attack FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -120,9 +120,9 @@ function explained_get_player_attack($player=false, $colored = false) {
 function get_player_defense($player=false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT constitution,wisdom,defense FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT constitution,wisdom,defense FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -142,9 +142,9 @@ function get_player_defense($player=false) {
 function explained_get_player_defense($player=false, $colored = false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT constitution,wisdom,defense FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT constitution,wisdom,defense FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -156,7 +156,7 @@ function explained_get_player_defense($player=false, $colored = false) {
 	$armordef=(int)$user['armordef'];
 	$levelbonus=(int)$user['level']-1;
 	$miscbonus-=$armordef+$levelbonus;
-    
+
     //## Mejorado el detalle de como se explica, se puede usar el antiguo
 	if ($colored) return sprintf_translate("%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC",
 		($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
@@ -172,9 +172,9 @@ function explained_get_player_defense($player=false, $colored = false) {
 function get_player_speed($player=false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT dexterity,intelligence FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT dexterity,intelligence FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -187,9 +187,9 @@ function get_player_speed($player=false) {
 function get_player_physical_resistance($player=false) {
 	global $session;
 	if ($player!==false) {
-		$sql="SELECT constitution,wisdom,defense FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT constitution,wisdom,defense FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return 0;
 		$user=$row;
 	} else $user =& $session['user'];
@@ -210,9 +210,9 @@ function is_player_online($player=false) {
 		$user = &$checked_users[$player];
 	} else {
 		//fetch the data from the DB
-		$sql="SELECT laston,loggedin FROM ".db_prefix('accounts')." WHERE acctid=".((int)$player).";";
-		$result=db_query($sql);
-		$row=db_fetch_assoc($result);
+		$sql="SELECT laston,loggedin FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result=DB::query($sql);
+		$row=DB::fetch_assoc($result);
 		if (!$row) return false;
 		$checked_users[$player]=$row;
 		$user=$row;
@@ -221,7 +221,7 @@ function is_player_online($player=false) {
 		if (strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > strtotime($user['laston']) && strtotime($user['laston'])>0)  return false;
 		if (!$user['loggedin']) return false;
 		return true;
-	} 
+	}
 	return false;
 }
 
@@ -233,9 +233,9 @@ function mass_is_player_online($players=false) {
 		return array(); //nothing to do
 	} else {
 		//fetch the data from the DB
-		$sql="SELECT acctid,laston,loggedin FROM ".db_prefix('accounts')." WHERE acctid IN (".addslashes(implode(",",$players)).")";
-		$result=db_query($sql);
-		while ($user=db_fetch_assoc($result)) {
+		$sql="SELECT acctid,laston,loggedin FROM ".DB::prefix('accounts')." WHERE acctid IN (".addslashes(implode(",",$players)).")";
+		$result=DB::query($sql);
+		while ($user=DB::fetch_assoc($result)) {
 			$users[$user['acctid']]=1;
 			if (isset($user['laston']) && isset($user['loggedin'])) {
 				if (strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > strtotime($user['laston']) && $user['laston']>"")  $users[$user['acctid']]=0;
@@ -260,7 +260,7 @@ function mass_is_player_online($players=false) {
 // 			case "con":case "str": case "int": case "dex":
 // 				$dk+=0.3*$val;
 // 				break;
-// 			case "at": case "de": 
+// 			case "at": case "de":
 // 				$dk+=$val;
 // 				break;
 // 		}
@@ -277,7 +277,7 @@ function mass_is_player_online($players=false) {
 function get_player_dragonkillmod()
 {
     global $session;
-    
+
     return $session['user']['dragonkills'];
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-$sql = "INSERT INTO " . db_prefix("bans") . " (banner,";
+$sql = "INSERT INTO " . DB::prefix("bans") . " (banner,";
 $type = httppost("type");
 if ($type=="ip"){
 	$sql.="ipfilter";
@@ -36,22 +36,22 @@ if ($type=="ip"){
 	}
 }
 if ($sql!=""){
-	$result=db_query($sql);
-	output("%s ban rows entered.`n`n", db_affected_rows());//Eliminado el LINK, ya no es necesario para saber las filas afectadas
-	output_notl("%s", db_error(LINK));
+	$result=DB::query($sql);
+	output("%s ban rows entered.`n`n", DB::affected_rows());//Eliminado el LINK, ya no es necesario para saber las filas afectadas
+	output_notl("%s", DB::error(LINK));
 	debuglog("entered a ban: " .  ($type=="ip"?  "IP: ".httppost("ip"): "ID: ".httppost("id")) . " Ends after: $duration  Reason: \"" .  httppost("reason")."\"");
 	/* log out affected players */
-	$sql = "SELECT acctid FROM ".db_prefix('accounts')." WHERE $key='$key_value'";
-	$result=db_query($sql);
+	$sql = "SELECT acctid FROM ".DB::prefix('accounts')." WHERE $key='$key_value'";
+	$result=DB::query($sql);
 	$acctids=array();
-	while ($row=db_fetch_assoc($result)) {
+	while ($row=DB::fetch_assoc($result)) {
 		$acctids[]=$row['acctid'];
 	}
 	if ($acctids!=array()) {
-		$sql= " UPDATE ".db_prefix('accounts')." SET loggedin=0 WHERE acctid IN (".implode(",",$acctids).")";	
-		$result=db_query($sql);
+		$sql= " UPDATE ".DB::prefix('accounts')." SET loggedin=0 WHERE acctid IN (".implode(",",$acctids).")";
+		$result=DB::query($sql);
 		if ($result) {
-			output("`\$%s people have been logged out!`n`n`0",db_affected_rows($result));
+			output("`\$%s people have been logged out!`n`n`0",DB::affected_rows($result));
 		} else {
 			output("`\$Nobody was logged out. Acctids (%s) did not return rows!`n`n`0",implode(",",$acctids));
 		}

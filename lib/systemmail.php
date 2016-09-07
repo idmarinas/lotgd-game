@@ -7,10 +7,10 @@ require_once("lib/safeescape.php");
 require_once("lib/sanitize.php");
 
 function systemmail($to,$subject,$body,$from=0,$noemail=false){
-	$sql = "SELECT prefs,emailaddress FROM " . db_prefix("accounts") . " WHERE acctid='$to'";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
-	db_free_result($result);
+	$sql = "SELECT prefs,emailaddress FROM " . DB::prefix("accounts") . " WHERE acctid='$to'";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
+	DB::free_result($result);
 	$prefs = unserialize($row['prefs']);
 	$serialized=0;
 	if ($from==0){
@@ -36,8 +36,8 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		}
 	}
 
-	$sql = "INSERT INTO " . db_prefix("mail") . " (msgfrom,msgto,subject,body,sent) VALUES ('".(int)$from."','".(int)$to."','$subject','$body','".date("Y-m-d H:i:s")."')";
-	db_query($sql);
+	$sql = "INSERT INTO " . DB::prefix("mail") . " (msgfrom,msgto,subject,body,sent) VALUES ('".(int)$from."','".(int)$to."','$subject','$body','".date("Y-m-d H:i:s")."')";
+	DB::query($sql);
 	invalidatedatacache("mail-$to");
 	$email=false;
 	if (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from>0){
@@ -60,19 +60,19 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 			$subject = translate_mail($subject,$to);
 		}
 
-		$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid='$from'";
-		$result = db_query($sql);
-		$row1=db_fetch_assoc($result);
-		db_free_result($result);
+		$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid='$from'";
+		$result = DB::query($sql);
+		$row1=DB::fetch_assoc($result);
+		DB::free_result($result);
 		if ($row1['name']!="")
 			$fromline=full_sanitize($row1['name']);
 		else
 			$fromline=translate_inline("The Green Dragon","mail");
 
-		$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid='$to'";
-		$result = db_query($sql);
-		$row1=db_fetch_assoc($result);
-		db_free_result($result);
+		$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid='$to'";
+		$result = DB::query($sql);
+		$row1=DB::fetch_assoc($result);
+		DB::free_result($result);
 		$toline = full_sanitize($row1['name']);
 
 		// We've inserted it into the database, so.. strip out any formatting

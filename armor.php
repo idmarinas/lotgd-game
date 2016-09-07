@@ -62,12 +62,12 @@ if ($op==""){
   	}
   	tlschema();
 
-  	$sql = "SELECT max(level) AS level FROM " . db_prefix("armor") . " WHERE level<=".$session['user']['dragonkills'];
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+  	$sql = "SELECT max(level) AS level FROM " . DB::prefix("armor") . " WHERE level<=".$session['user']['dragonkills'];
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 
-	$sql = "SELECT * FROM " . db_prefix("armor") . " WHERE level={$row['level']} ORDER BY value";
-	$result = db_query($sql);
+	$sql = "SELECT * FROM " . DB::prefix("armor") . " WHERE level={$row['level']} ORDER BY value";
+	$result = DB::query($sql);
 
  	tlschema($schemas['tradein']);
   	if (is_array($texts['tradein'])) {
@@ -91,7 +91,7 @@ if ($op==""){
 	output_notl($acost);
 	rawoutput("</td></tr>");
 	$i = 0;
-	while($row = db_fetch_assoc($result)) {
+	while($row = DB::fetch_assoc($result)) {
 		$link = true;
 		$row = modulehook("modify-armor", $row);
 		if (isset($row['skip']) && $row['skip'] === true) {
@@ -135,9 +135,9 @@ if ($op==""){
 	villagenav();
 }elseif ($op=="buy"){
 	$id = httpget('id');
-	$sql = "SELECT * FROM " . db_prefix("armor") . " WHERE armorid='$id'";
-	$result = db_query($sql);
-	if (db_num_rows($result)==0){
+	$sql = "SELECT * FROM " . DB::prefix("armor") . " WHERE armorid='$id'";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)==0){
 		tlschema($schemas['nosuchweapon']);
 		output($texts['nosuchweapon']);
 		tlschema();
@@ -146,7 +146,7 @@ if ($op==""){
 		tlschema();
 		villagenav();
 	}else{
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$row = modulehook("modify-armor", $row);
 		if ($row['value']>($session['user']['gold']+$tradeinvalue)){
 			tlschema($schemas['notenoughgold']);

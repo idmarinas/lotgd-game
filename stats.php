@@ -21,9 +21,9 @@ addnav("Logon Graph","stats.php?op=graph");
 $op = httpget("op");
 
 if ($op=="stats" || $op==""){
-	$sql = "SELECT sum(gentimecount) AS c, sum(gentime) AS t, sum(gensize) AS s, count(acctid) AS a FROM " . db_prefix("accounts");
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT sum(gentimecount) AS c, sum(gentime) AS t, sum(gensize) AS s, count(acctid) AS a FROM " . DB::prefix("accounts");
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	output("`b`%For existing accounts:`b`n");
 	output("`@Total Accounts: `^%s`n",number_format($row['a']));
 	output("`@Total Hits: `^%s`n",number_format($row['c']));
@@ -37,20 +37,20 @@ if ($op=="stats" || $op==""){
 	$name = translate_inline("Name");
 	$refs = translate_inline("Referrals");
 	rawoutput("<tr class='trhead'><td><b>$name</b></td><td><b>$refs</b></td></tr>");
-	$sql = "SELECT count(*) AS c, acct.acctid,acct.name AS referer FROM " . db_prefix("accounts") . " INNER JOIN " . db_prefix("accounts") . " AS acct ON acct.acctid = " . db_prefix("accounts") . ".referer WHERE " . db_prefix("accounts") . ".referer>0 GROUP BY " . db_prefix("accounts") . ".referer DESC ORDER BY c DESC";
-	$result = db_query($sql);
-	$number=db_num_rows($result);
+	$sql = "SELECT count(*) AS c, acct.acctid,acct.name AS referer FROM " . DB::prefix("accounts") . " INNER JOIN " . DB::prefix("accounts") . " AS acct ON acct.acctid = " . DB::prefix("accounts") . ".referer WHERE " . DB::prefix("accounts") . ".referer>0 GROUP BY " . DB::prefix("accounts") . ".referer DESC ORDER BY c DESC";
+	$result = DB::query($sql);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		rawoutput("<tr class='".($i%2?"trdark":"trlight")."'><td>");
 		output_notl("`@{$row['referer']}`0");
 		rawoutput("</td><td>");
 		output_notl("`^{$row['c']}:`0  ");
-		$sql = "SELECT name,refererawarded FROM " . db_prefix("accounts") . " WHERE referer = ${row['acctid']} ORDER BY acctid ASC";
-		$res2 = db_query($sql);
-		$number2=db_num_rows($res2);
+		$sql = "SELECT name,refererawarded FROM " . DB::prefix("accounts") . " WHERE referer = ${row['acctid']} ORDER BY acctid ASC";
+		$res2 = DB::query($sql);
+		$number2=DB::num_rows($res2);
 		for ($j = 0; $j < $number2; $j++) {
-			$r = db_fetch_assoc($res2);
+			$r = DB::fetch_assoc($res2);
 			output_notl(($r['refererawarded']?"`&":"`$") . $r['name'] . "`0");
 			if ($j != $number2-1) output_notl(",");
 		}
@@ -58,17 +58,17 @@ if ($op=="stats" || $op==""){
 	}
 	rawoutput("</table>");
 }elseif($op=="graph"){
-	$sql = "SELECT count(acctid) AS c, substring(laston,1,10) AS d FROM " . db_prefix("accounts") . " GROUP BY d DESC ORDER BY d DESC";
-	$result = db_query($sql);
+	$sql = "SELECT count(acctid) AS c, substring(laston,1,10) AS d FROM " . DB::prefix("accounts") . " GROUP BY d DESC ORDER BY d DESC";
+	$result = DB::query($sql);
 	output("`n`%`bDate accounts last logged on:`b");
 	rawoutput("<table border='0' cellpadding='0' cellspacing='0'>");
 	$class="trlight";
 	$odate=date("Y-m-d");
 	$j=0;
 	$cumul = 0;
-	$number=db_num_rows($result);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$diff = (strtotime($odate)-strtotime($row['d']))/86400;
 		for ($x=1;$x<$diff;$x++){
 			//if ($j%7==0) $class=($class=="trlight"?"trdark":"trlight");

@@ -3,21 +3,21 @@ $subop = httpget("subop");
 $none = translate_inline('NONE');
 if ($subop=="xml"){
 	header("Content-Type: text/xml");
-	$sql = "SELECT DISTINCT " . db_prefix("accounts") . ".name FROM " . db_prefix("bans") . ", " . db_prefix("accounts") . " WHERE (ipfilter='".addslashes(httpget("ip"))."' AND " .
-		db_prefix("bans") . ".uniqueid='" .
+	$sql = "SELECT DISTINCT " . DB::prefix("accounts") . ".name FROM " . DB::prefix("bans") . ", " . DB::prefix("accounts") . " WHERE (ipfilter='".addslashes(httpget("ip"))."' AND " .
+		DB::prefix("bans") . ".uniqueid='" .
 		addslashes(httpget("id"))."') AND ((substring(" .
-		db_prefix("accounts") . ".lastip,1,length(ipfilter))=ipfilter " .
-		"AND ipfilter<>'') OR (" .  db_prefix("bans") . ".uniqueid=" .
-		db_prefix("accounts") . ".uniqueid AND " .
-		db_prefix("bans") . ".uniqueid<>''))";
-	$r = db_query($sql);
+		DB::prefix("accounts") . ".lastip,1,length(ipfilter))=ipfilter " .
+		"AND ipfilter<>'') OR (" .  DB::prefix("bans") . ".uniqueid=" .
+		DB::prefix("accounts") . ".uniqueid AND " .
+		DB::prefix("bans") . ".uniqueid<>''))";
+	$r = DB::query($sql);
 	echo "<xml>";
-	while ($ro = db_fetch_assoc($r)) {
+	while ($ro = DB::fetch_assoc($r)) {
 		echo "<name name=\"";
 		echo urlencode(appoencode("`0{$ro['name']}"));
 		echo "\"/>";
 	}
-	if (db_num_rows($r)==0)
+	if (DB::num_rows($r)==0)
 		echo "<name name=\"$none\"/>";
 	echo "</xml>";
 	exit();
@@ -37,8 +37,8 @@ if ($target=='') {
 } elseif (is_numeric($target)) {
 	//none
 	$sql="SELECT lastip,uniqueid FROM accounts WHERE acctid=".$target;
-	$result=db_query($sql);
-	$row=db_fetch_assoc($result);
+	$result=DB::query($sql);
+	$row=DB::fetch_assoc($result);
 	$since="WHERE ipfilter LIKE '%".$row['lastip']."%' OR uniqueid LIKE '%".$row['uniqueid']."%'";
 } else {
 	require_once("lib/lookup_user.php");
@@ -48,16 +48,16 @@ if ($target=='') {
 		addnav("","bans.php?op=searchban");
 		output("Search banned user by name: ");
 		rawoutput("<select name='target'>");
-		while ($row=db_fetch_assoc($names[0])) {
+		while ($row=DB::fetch_assoc($names[0])) {
 			rawoutput("<option value='".$row['acctid']."'>".$row['login']."</option>");
 		}
 		rawoutput("</select>");
 		rawoutput("<input type='submit' class='button' value='$submit'></from><br><br>");
 	}
 }
-	
-$sql = "SELECT * FROM " . db_prefix("bans") . " $since ORDER BY banexpire ASC";
-$result = db_query($sql);
+
+$sql = "SELECT * FROM " . DB::prefix("bans") . " $since ORDER BY banexpire ASC";
+$result = DB::query($sql);
 rawoutput("<script language='JavaScript'>
 function getUserInfo(ip,id,divid){
 	var filename='bans.php?op=removeban&subop=xml&ip='+ip+'&id='+id;
@@ -91,7 +91,7 @@ $aff = translate_inline("Affects");
 $l = translate_inline("Last");
 	rawoutput("<tr class='trhead'><td>$ops</td><td>$bauth</td><td>$ipd</td><td>$dur</td><td>$mssg</td><td>$aff</td><td>$l</td></tr>");
 $i=0;
-while ($row = db_fetch_assoc($result)) {
+while ($row = DB::fetch_assoc($result)) {
 	$liftban = translate_inline("Lift&nbsp;ban");
 	$showuser = translate_inline("Click&nbsp;to&nbsp;show&nbsp;users");
 	rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");

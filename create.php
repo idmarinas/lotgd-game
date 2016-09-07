@@ -31,12 +31,12 @@ if ($op=='val' || $op=='forgotval') {
 
 if ($op=="forgotval"){
 	$id = httpget('id');
-	$sql = "SELECT acctid,login,superuser,password,name,replaceemail,emailaddress,emailvalidation FROM ". db_prefix("accounts") . " WHERE forgottenpassword='".mysql_real_escape_string($id)."' AND forgottenpassword!=''";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0) {
-		$row = db_fetch_assoc($result);
-		$sql = "UPDATE " . db_prefix("accounts") . " SET forgottenpassword='' WHERE forgottenpassword='$id';";
-		db_query($sql);
+	$sql = "SELECT acctid,login,superuser,password,name,replaceemail,emailaddress,emailvalidation FROM ". DB::prefix("accounts") . " WHERE forgottenpassword='".DB::quoteValue($id)."' AND forgottenpassword!=''";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0) {
+		$row = DB::fetch_assoc($result);
+		$sql = "UPDATE " . DB::prefix("accounts") . " SET forgottenpassword='' WHERE forgottenpassword='$id';";
+		DB::query($sql);
 		output("`#`cYour login request has been validated.  You may now log in.`c`0");
 		rawoutput("<form action='login.php' method='POST'>");
 		rawoutput("<input name='name' value=\"{$row['login']}\" type='hidden'>");
@@ -56,8 +56,8 @@ if ($op=="forgotval"){
 		}
 		//rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
 		if ($row['emailvalidation']!="" && substr($row['emailvalidation'],0,1)!="x"){
-			$sql="UPDATE ".db_prefix('accounts')." SET emailvalidation='' WHERE acctid=".$row['acctid'];
-			db_query($sql);
+			$sql="UPDATE ".DB::prefix('accounts')." SET emailvalidation='' WHERE acctid=".$row['acctid'];
+			DB::query($sql);
 		}
 
 	}else{
@@ -67,16 +67,16 @@ if ($op=="forgotval"){
 	}
 } elseif ($op=="val"){
 	$id = httpget('id');
-	$sql = "SELECT acctid,login,superuser,password,name,replaceemail,emailaddress FROM ". db_prefix("accounts") . " WHERE emailvalidation='".mysql_real_escape_string($id)."' AND emailvalidation!=''";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0) {
-		$row = db_fetch_assoc($result);
+	$sql = "SELECT acctid,login,superuser,password,name,replaceemail,emailaddress FROM ". DB::prefix("accounts") . " WHERE emailvalidation='".DB::quoteValue($id)."' AND emailvalidation!=''";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0) {
+		$row = DB::fetch_assoc($result);
 		if ($row['replaceemail']!='') {
 			$replace_array=explode("|",$row['replaceemail']);
 			$replaceemail=$replace_array[0]; //1==date
 			//note: remove any forgotten password request!
-			$sql="UPDATE ".db_prefix("accounts")." SET emailaddress='".$replaceemail."', replaceemail='',forgottenpassword='' WHERE emailvalidation='$id';";
-			db_query($sql);
+			$sql="UPDATE ".DB::prefix("accounts")." SET emailaddress='".$replaceemail."', replaceemail='',forgottenpassword='' WHERE emailvalidation='$id';";
+			DB::query($sql);
 			output("`#`c Email changed successfully!`c`0`n");
 			require_once("lib/debuglog.php");
 			debuglog("Email change request validated by link from ".$row['emailaddress']." to ".$replaceemail,$row['acctid'],$row['acctid'],"Email");
@@ -85,19 +85,19 @@ if ($op=="forgotval"){
 				// 5 failed attempts for superuser, 10 for regular user
 				// send a system message to admin
 				require_once("lib/systemmail.php");
-				$sql = "SELECT acctid FROM " . db_prefix("accounts") ." WHERE (superuser&".SU_EDIT_USERS.")";
-				$result2 = db_query($sql);
+				$sql = "SELECT acctid FROM " . DB::prefix("accounts") ." WHERE (superuser&".SU_EDIT_USERS.")";
+				$result2 = DB::query($sql);
 				$subj = translate_mail(array("`#%s`j has changed the email address",$row['name']),0);
 				$alert = translate_mail(array("Email change request validated by link to %s from %s originally for login '%s'.",$replaceemail,$row['emailaddress'],$row['login']),0);
-				while ($row2 = db_fetch_assoc($result2)) {
+				while ($row2 = DB::fetch_assoc($result2)) {
 					$msg = translate_mail(array("This message is generated as a result of an email change to a superuser account.  Log Follows:`n`n%s",$alert),0);
 					systemmail($row2['acctid'],$subj,$msg,0,$noemail);
 				}
 			}
 
 		}
-		$sql = "UPDATE " . db_prefix("accounts") . " SET emailvalidation='' WHERE emailvalidation='$id';";
-		db_query($sql);
+		$sql = "UPDATE " . DB::prefix("accounts") . " SET emailvalidation='' WHERE emailvalidation='$id';";
+		DB::query($sql);
 		output("`#`cYour email has been validated.  You may now log in.`c`0");
 		output("Your email has been validated, your login name is `^%s`0.`n`n",
 				$row['login']);
@@ -131,15 +131,15 @@ if ($op=="forgotval"){
 if ($op=="forgot"){
 	$charname = httppost('charname');
 	if ($charname!=""){
-		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . db_prefix("accounts") . " WHERE login='".mysql_real_escape_string($charname)."'";
-		$result = db_query($sql);
-		if (db_num_rows($result)>0){
-			$row = db_fetch_assoc($result);
+		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login='".DB::quoteValue($charname)."'";
+		$result = DB::query($sql);
+		if (DB::num_rows($result)>0){
+			$row = DB::fetch_assoc($result);
 			if (trim($row['emailaddress'])!=""){
 				if ($row['forgottenpassword']==""){
 					$row['forgottenpassword']=substr("x".md5(date("Y-m-d H:i:s").$row['password']),0,32);
-					$sql = "UPDATE " . db_prefix("accounts") . " SET forgottenpassword='{$row['forgottenpassword']}' where login='{$row['login']}'";
-					db_query($sql);
+					$sql = "UPDATE " . DB::prefix("accounts") . " SET forgottenpassword='{$row['forgottenpassword']}' where login='{$row['login']}'";
+					DB::query($sql);
 				}
 
 				$subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'),$row['acctid']);
@@ -202,9 +202,9 @@ if (getsetting("allowcreation",1)==0){
 			$pass1= httppost('pass1');
 			$pass2= httppost('pass2');
 			if (getsetting("blockdupeemail",0)==1 && getsetting("requireemail",0)==1){
-				$sql = "SELECT login FROM " . db_prefix("accounts") . " WHERE emailaddress='".mysql_real_escape_string($email)."'";
-				$result = db_query($sql);
-				if (db_num_rows($result)>0){
+				$sql = "SELECT login FROM " . DB::prefix("accounts") . " WHERE emailaddress='".DB::quoteValue($email)."'";
+				$result = DB::query($sql);
+				if (DB::num_rows($result)>0){
 					$blockaccount=true;
 					$msg.= translate_inline("You may have only one account.`n");
 				}
@@ -243,12 +243,12 @@ if (getsetting("allowcreation",1)==0){
 			}
 
 			if (!$blockaccount){
-				$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE login='$shortname'";
-				$result = db_query($sql);
-				$count=db_num_rows($result);
-				$sql = "SELECT playername FROM " . db_prefix("accounts") ;
-				$result = db_query($sql);
-				while ($row=db_fetch_assoc($result)) {
+				$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
+				$result = DB::query($sql);
+				$count=DB::num_rows($result);
+				$sql = "SELECT playername FROM " . DB::prefix("accounts") ;
+				$result = DB::query($sql);
+				while ($row=DB::fetch_assoc($result)) {
 					if (sanitize($row['playername'])==$shortname) {
 						$count++;
 						break;
@@ -269,9 +269,9 @@ if (getsetting("allowcreation",1)==0){
 					}
 					$refer = httpget('r');
 					if ($refer>""){
-						$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='".mysql_real_escape_string($refer)."'";
-						$result = db_query($sql);
-						$ref = db_fetch_assoc($result);
+						$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='".DB::quoteValue($refer)."'";
+						$result = DB::query($sql);
+						$ref = DB::fetch_assoc($result);
 						$referer=$ref['acctid'];
 					}else{
 						$referer=0;
@@ -282,22 +282,22 @@ if (getsetting("allowcreation",1)==0){
 					} else {
 						$dbpass = md5(md5($pass1));
 					}
-					$sql = "INSERT INTO " . db_prefix("accounts") . "
+					$sql = "INSERT INTO " . DB::prefix("accounts") . "
 						(playername,name, superuser, title, password, sex, login, laston, uniqueid, lastip, gold, location, emailaddress, emailvalidation, referer, regdate)
 						VALUES
 						('$shortname','$title $shortname', '".getsetting("defaultsuperuser",0)."', '$title', '$dbpass', '$sex', '$shortname', '".date("Y-m-d H:i:s",strtotime("-1 day"))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting("newplayerstartgold",50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
-					db_query($sql);
-					if (db_affected_rows()<=0){//Eliminado el LINK, ya no es necesario para saber las filas afectadas
+					DB::query($sql);
+					if (DB::affected_rows()<=0){//Eliminado el LINK, ya no es necesario para saber las filas afectadas
 						output("`\$Error`^: Your account was not created for an unknown reason, please try again. ");
 					}else{
-						$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='$shortname'";
-						$result = db_query($sql);
-						$row = db_fetch_assoc($result);
+						$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
+						$result = DB::query($sql);
+						$row = DB::fetch_assoc($result);
 						$args = httpallpost();
 						$args['acctid'] = $row['acctid'];
 						//insert output
-						$sql_output = "INSERT INTO " . db_prefix("accounts_output") . " VALUES ({$row['acctid']},'');";
-						db_query($sql_output);
+						$sql_output = "INSERT INTO " . DB::prefix("accounts_output") . " VALUES ({$row['acctid']},'');";
+						DB::query($sql_output);
 						//end
 						modulehook("process-create", $args);
 						if ($emailverification!=""){

@@ -1,6 +1,6 @@
 <?php
-$result = db_query("SELECT * FROM " . db_prefix("accounts") . " WHERE acctid='$userid'");
-$row = db_fetch_assoc($result);
+$result = DB::query("SELECT * FROM " . DB::prefix("accounts") . " WHERE acctid='$userid'");
+$row = DB::fetch_assoc($result);
 $petition=httpget("returnpetition");
 if ($petition != "")
 	$returnpetition = "&returnpetition=$petition";
@@ -46,7 +46,7 @@ if (httpget("subop")==""){
 	//Add the count summary for DKs
 	if ($row['dragonkills']>0) $row['dragonpointssummary']=array_count_values(($row['dragonpoints']>''?unserialize($row['dragonpoints']):array()));
 		else $row['dragonpointssummary']=array();
-	
+
 	// Okay, munge the display name down to just the players name sans
 	// title
 	/*careful using this hook! add only things with 'viewonly' in there, nothing will be saved if do otherwise! Example:
@@ -87,9 +87,9 @@ if (httpget("subop")==""){
 			// Set up the defaults as well.
 			if (isset($x[1])) $data[$key] = $x[1];
 		}
-		$sql = "SELECT * FROM " . db_prefix("module_userprefs") ." WHERE modulename='$module' AND userid='$userid'";
-		$result = db_query($sql);
-		while ($row = db_fetch_assoc($result)){
+		$sql = "SELECT * FROM " . DB::prefix("module_userprefs") ." WHERE modulename='$module' AND userid='$userid'";
+		$result = DB::query($sql);
+		while ($row = DB::fetch_assoc($result)){
 			$data[$row['setting']] = $row['value'];
 		}
 		rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userid$returnpetition' method='POST'>");

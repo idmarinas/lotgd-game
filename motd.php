@@ -27,10 +27,10 @@ if ($session['user']['superuser'] & SU_POST_MOTD) {
 if ($op=="vote"){
 	$motditem = httppost('motditem');
 	$choice = httppost('choice');
-	$sql = "DELETE FROM " . db_prefix("pollresults") . " WHERE motditem='$motditem' AND account='{$session['user']['acctid']}'";
-	db_query($sql);
-	$sql = "INSERT INTO " . db_prefix("pollresults") . " (choice,account,motditem) VALUES ('$choice','{$session['user']['acctid']}','$motditem')";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("pollresults") . " WHERE motditem='$motditem' AND account='{$session['user']['acctid']}'";
+	DB::query($sql);
+	$sql = "INSERT INTO " . DB::prefix("pollresults") . " (choice,account,motditem) VALUES ('$choice','{$session['user']['acctid']}','$motditem')";
+	DB::query($sql);
 	invalidatedatacache("poll-$motditem");
 	header("Location: motd.php");
 	exit();
@@ -60,16 +60,16 @@ if ($op=="") {
 	*/
 	$m = httppost("month");
 	if ($m > ""){
-		$sql = "SELECT " . db_prefix("motd") . ".*,name AS motdauthorname FROM " . db_prefix("motd") . " LEFT JOIN " . db_prefix("accounts") . " ON " . db_prefix("accounts") . ".acctid = " . db_prefix("motd") . ".motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
-		$result = db_query_cached($sql,"motd-$m");
+		$sql = "SELECT " . DB::prefix("motd") . ".*,name AS motdauthorname FROM " . DB::prefix("motd") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid = " . DB::prefix("motd") . ".motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
+		$result = DB::query_cached($sql,"motd-$m");
 	}else{
-		$sql = "SELECT " . db_prefix("motd") . ".*,name AS motdauthorname FROM " . db_prefix("motd") . " LEFT JOIN " . db_prefix("accounts") . " ON " . db_prefix("accounts") . ".acctid = " . db_prefix("motd") . ".motdauthor ORDER BY motddate DESC limit $newcount,".($newcount+$count);
+		$sql = "SELECT " . DB::prefix("motd") . ".*,name AS motdauthorname FROM " . DB::prefix("motd") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid = " . DB::prefix("motd") . ".motdauthor ORDER BY motddate DESC limit $newcount,".($newcount+$count);
 		if ($newcount=0) //cache only the last x items
-			$result = db_query_cached($sql,"motd");
+			$result = DB::query_cached($sql,"motd");
 			else
-			$result = db_query($sql);
+			$result = DB::query($sql);
 	}
-	while ($row = db_fetch_assoc($result)) {
+	while ($row = DB::fetch_assoc($result)) {
 		if (!isset($session['user']['lastmotd']))
 			$session['user']['lastmotd']=0;
 		if ($row['motdauthorname']=="")
@@ -88,13 +88,13 @@ if ($op=="") {
 	motditem("Beta!","For those who might be unaware, this website is still in beta mode.  I'm working on it when I have time, which generally means a couple of changes a week.  Feel free to drop suggestions, I'm open to anything :-)","","", "");
 	*/
 
-	$result = db_query("SELECT mid(motddate,1,7) AS d, count(*) AS c FROM ".db_prefix("motd")." GROUP BY d ORDER BY d DESC");
-	$row = db_fetch_assoc($result);
+	$result = DB::query("SELECT mid(motddate,1,7) AS d, count(*) AS c FROM ".DB::prefix("motd")." GROUP BY d ORDER BY d DESC");
+	$row = DB::fetch_assoc($result);
 	rawoutput("<form action='motd.php' method='POST'>");
 	output("MoTD Archives:");
 	rawoutput("<select name='month' onChange='this.form.submit();' >");
 	rawoutput("<option value=''>--Current--</option>");
-	while ($row = db_fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result)){
 		$time = strtotime("{$row['d']}-01");
 		$m = translate_inline(date("M",$time));
 		rawoutput ("<option value='{$row['d']}'".(httpget("month")==$row['d']?" selected":"").">$m".date(", Y",$time)." ({$row['c']})</option>");
@@ -111,9 +111,9 @@ if ($op=="") {
 
 $session['needtoviewmotd']=false;
 
-$sql = "SELECT motddate FROM " . db_prefix("motd") ." ORDER BY motditem DESC LIMIT 1";
-$result = db_query_cached($sql, "motddate");
-$row = db_fetch_assoc($result);
+$sql = "SELECT motddate FROM " . DB::prefix("motd") ." ORDER BY motditem DESC LIMIT 1";
+$result = DB::query_cached($sql, "motddate");
+$row = DB::fetch_assoc($result);
 $session['user']['lastmotd']=$row['motddate'];
 
 popup_footer();

@@ -67,17 +67,17 @@ if ($op==""){
 	for ($x=0;$x<strlen($to);$x++){
 		$string .= substr($to,$x,1)."%";
 	}
-	$sql = "SELECT name,login FROM " . db_prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
-	$result = db_query($sql);
+	$sql = "SELECT name,login FROM " . DB::prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
+	$result = DB::query($sql);
 	$amt = abs((int)httppost('amount'));
-	if (db_num_rows($result)==1){
-		$row = db_fetch_assoc($result);
+	if (DB::num_rows($result)==1){
+		$row = DB::fetch_assoc($result);
 		$msg = translate_inline("Complete Transfer");
 		rawoutput("<form action='bank.php?op=transfer3' method='POST'>");
 		output("`6Transfer `^%s`6 to `&%s`6.",$amt,$row['name']);
 		rawoutput("<input type='hidden' name='to' value='".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);
 		addnav("","bank.php?op=transfer3");
-	}elseif(db_num_rows($result)>100){
+	}elseif(DB::num_rows($result)>100){
 		output("`@Elessa`6 looks at you disdainfully and coldly, but politely, suggests you try narrowing down the field of who you want to send money to just a little bit!`n`n");
 		$msg = translate_inline("Preview Transfer");
 		rawoutput("<form action='bank.php?op=transfer2' method='POST'>");
@@ -89,11 +89,11 @@ if ($op==""){
 		rawoutput("<input type='submit' class='button' value='$msg'></form>");
 		rawoutput("<script language='javascript'>document.getElementById('amount').focus();</script>",true);
 		addnav("","bank.php?op=transfer2");
-	}elseif(db_num_rows($result)>1){
+	}elseif(DB::num_rows($result)>1){
 		rawoutput("<form action='bank.php?op=transfer3' method='POST'>");
 		output("`6Transfer `^%s`6 to ",$amt);
 		rawoutput("<select name='to' class='input'>");
-		while ($row = db_fetch_assoc($result)) {
+		while ($row = DB::fetch_assoc($result)) {
 			rawoutput("<option value=\"".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".full_sanitize($row['name'])."</option>");
 		}
 		$msg = translate_inline("Complete Transfer");
@@ -109,10 +109,10 @@ if ($op==""){
 	if ($session['user']['gold']+$session['user']['goldinbank']<$amt){
 		output("`@Elessa`6 stands up to her full, but still diminutive height and glares at you, \"`@How can you transfer `^%s`@ gold when you only possess `^%s`@?`6\"",number_format($amt,0,$point,$sep),number_format($session['user']['gold']+$session['user']['goldinbank'],0,$point,$sep));
 	}else{
-		$sql = "SELECT name,acctid,level,transferredtoday FROM " . db_prefix("accounts") . " WHERE login='$to'";
-		$result = db_query($sql);
-		if (db_num_rows($result)==1){
-			$row = db_fetch_assoc($result);
+		$sql = "SELECT name,acctid,level,transferredtoday FROM " . DB::prefix("accounts") . " WHERE login='$to'";
+		$result = DB::query($sql);
+		if (DB::num_rows($result)==1){
+			$row = DB::fetch_assoc($result);
 			$maxout = $session['user']['level']*getsetting("maxtransferout",25);
 			$maxtfer = $row['level']*getsetting("transferperlevel",25);
 			if ($session['user']['amountouttoday']+$amt > $maxout) {
@@ -134,8 +134,8 @@ if ($op==""){
 					$session['user']['gold']=0;
 				}
 				$session['user']['amountouttoday']+= $amt;
-				$sql = "UPDATE ". db_prefix("accounts") . " SET goldinbank=goldinbank+$amt,transferredtoday=transferredtoday+1 WHERE acctid='{$row['acctid']}'";
-				db_query($sql);
+				$sql = "UPDATE ". DB::prefix("accounts") . " SET goldinbank=goldinbank+$amt,transferredtoday=transferredtoday+1 WHERE acctid='{$row['acctid']}'";
+				DB::query($sql);
 				output("`@Elessa`6 smiles, \"`@The transfer has been completed!`6\"");
 				$subj = array("`^You have received a money transfer!`0");
 				$body = array("`&%s`6 has transferred `^%s`6 gold to your bank account!",$session['user']['name'],$amt);

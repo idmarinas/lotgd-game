@@ -36,7 +36,7 @@ addnav("Switch ASC/DESC","debug.php?debug=".$debug."&sort=".urlencode($sort)."&d
 switch ($debug) {
 
 	case "hooksort":
-		$sql = "Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM ".db_prefix('debug')." WHERE type='hooktime' group by type,category,subcategory order by $order $ascdesc limit 30";
+		$sql = "Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM ".DB::prefix('debug')." WHERE type='hooktime' group by type,category,subcategory order by $order $ascdesc limit 30";
 		$category=translate_inline("Setting");
 		$subcategory=translate_inline("Module Name");
 		$sum_desc=translate_inline("Total Seconds");
@@ -47,7 +47,7 @@ switch ($debug) {
 	case "pageruntime":
 
 	default:
-	$sql = "Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM ".db_prefix('debug')." WHERE type='pagegentime' group by type,category,subcategory order by $order $ascdesc limit 30";
+	$sql = "Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM ".DB::prefix('debug')." WHERE type='pagegentime' group by type,category,subcategory order by $order $ascdesc limit 30";
 	$category=translate_inline("Setting");
 	$subcategory=translate_inline("Module Name");
 	$sum_desc=translate_inline("Total Seconds");
@@ -58,9 +58,9 @@ $none = translate_inline("`iNone`i");
 $notset = translate_inline("`iNot set`i");
 rawoutput("<table border=0 cellpadding=2 cellspacing=1><tr class='trhead'><td>$category</td><td>$subcategory</td><td>$sum_desc</td><td>$med_desc</td><td>$hits</td></tr>");
 debug($sql);
-$result = db_query($sql);
+$result = DB::query($sql);
 $i=true;
-while ($row = db_fetch_assoc($result)) {
+while ($row = DB::fetch_assoc($result)) {
 	$i=!$i;
 	rawoutput("<tr class='".($i?'trdark':'trlight')."'><td valign='top'>");
 	output_notl("`b".$row['category']."`b");

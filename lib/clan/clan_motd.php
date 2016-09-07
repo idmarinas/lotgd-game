@@ -5,8 +5,8 @@
 			$clanmotd = sanitize_mb(mb_substr(httppost('clanmotd'),0,4096));
 			if (httppostisset('clanmotd') &&
 					stripslashes($clanmotd)!=$claninfo['clanmotd']){
-				$sql = "UPDATE " . db_prefix("clans") . " SET clanmotd='$clanmotd',motdauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
-				db_query($sql);
+				$sql = "UPDATE " . DB::prefix("clans") . " SET clanmotd='$clanmotd',motdauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
+				DB::query($sql);
 				invalidatedatacache("clandata-{$claninfo['clanid']}");
 				$claninfo['clanmotd']=stripslashes($clanmotd);
 				output("Updating MoTD`n");
@@ -16,8 +16,8 @@
 			if (httppostisset('clandesc') &&
 					stripslashes($clandesc)!=$claninfo['clandesc'] &&
 					$claninfo['descauthor']!=4294967295){
-				$sql = "UPDATE " . db_prefix("clans") . " SET clandesc='".addslashes(substr(stripslashes($clandesc),0,4096))."',descauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
-				db_query($sql);
+				$sql = "UPDATE " . DB::prefix("clans") . " SET clandesc='".addslashes(substr(stripslashes($clandesc),0,4096))."',descauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
+				DB::query($sql);
 				invalidatedatacache("clandata-{$claninfo['clanid']}");
 				output("Updating description`n");
 				$claninfo['clandesc']=stripslashes($clandesc);
@@ -25,20 +25,20 @@
 			}
 			$customsay = httppost('customsay');
 			if (httppostisset('customsay') && $customsay!=$claninfo['customsay'] && $session['user']['clanrank']>=CLAN_LEADER){
-				$sql = "UPDATE " . db_prefix("clans") . " SET customsay='$customsay' WHERE clanid={$claninfo['clanid']}";
-				db_query($sql);
+				$sql = "UPDATE " . DB::prefix("clans") . " SET customsay='$customsay' WHERE clanid={$claninfo['clanid']}";
+				DB::query($sql);
 				invalidatedatacache("clandata-{$claninfo['clanid']}");
 				output("Updating custom say line`n");
 				$claninfo['customsay']=stripslashes($customsay);
 			}
-			$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid={$claninfo['motdauthor']}";
-			$result = db_query($sql);
-			$row = db_fetch_assoc($result);
+			$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid={$claninfo['motdauthor']}";
+			$result = DB::query($sql);
+			$row = DB::fetch_assoc($result);
 			$motdauthname = $row['name'];
 
-			$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid={$claninfo['descauthor']}";
-			$result = db_query($sql);
-			$row = db_fetch_assoc($result);
+			$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid={$claninfo['descauthor']}";
+			$result = DB::query($sql);
+			$row = DB::fetch_assoc($result);
 			$descauthname = $row['name'];
 
 			output("`&`bCurrent MoTD:`b `#by %s`2`n",$motdauthname);

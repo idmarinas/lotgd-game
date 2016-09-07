@@ -18,16 +18,16 @@ function setup_target($name) {
 	}else{
 		$where = "login='$name'";
 	}
-	$sql = "SELECT name AS creaturename, level AS creaturelevel, weapon AS creatureweapon, dragonkills AS dragonkills,gold AS creaturegold, experience AS creatureexp, maxhitpoints AS creaturehealth, attack AS creatureattack, defense AS creaturedefense, loggedin, location, laston, alive, acctid, pvpflag, boughtroomtoday, race FROM " . db_prefix("accounts") . " WHERE $where";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0){
-		$row = db_fetch_assoc($result);
+	$sql = "SELECT name AS creaturename, level AS creaturelevel, weapon AS creatureweapon, dragonkills AS dragonkills,gold AS creaturegold, experience AS creatureexp, maxhitpoints AS creaturehealth, attack AS creatureattack, defense AS creaturedefense, loggedin, location, laston, alive, acctid, pvpflag, boughtroomtoday, race FROM " . DB::prefix("accounts") . " WHERE $where";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0){
+		$row = DB::fetch_assoc($result);
 		if ($session['user']['dragonkills']<$row['dragonkills']) {
 			$diff = $row['dragonkills']-$session['user']['dragonkills'];
 			$row['creatureattack']=get_player_attack($row['acctid'])+round($diff/2);
 			$row['creaturedefense']=get_player_defense($row['acctid'])+round($diff/2);
 		}
-		//you cannot use any special stuff here, and when buffed up, players are just too strong on different levels. divide the dks 
+		//you cannot use any special stuff here, and when buffed up, players are just too strong on different levels. divide the dks
 		output("As you both cannot use any special gimmicks, the more dragonkills your victim has the stronger he gets.`n");
 		if (abs($session['user']['level']-$row['creaturelevel'])>getsetting('pvprange',2)){
 			output("`\$Error:`4 That user is out of your level range!");
@@ -44,8 +44,8 @@ function setup_target($name) {
 			output("`\$Error:`4 That user is not alive.");
 			return false;
 		}elseif ($session['user']['playerfights']>0){
-			$sql = "UPDATE " . db_prefix("accounts") . " SET pvpflag='".date("Y-m-d H:i:s")."' WHERE acctid={$row['acctid']}";
-			db_query($sql);
+			$sql = "UPDATE " . DB::prefix("accounts") . " SET pvpflag='".date("Y-m-d H:i:s")."' WHERE acctid={$row['acctid']}";
+			DB::query($sql);
 			$row['creatureexp'] = round($row['creatureexp'],0);
 			$row['playerstarthp'] = $session['user']['hitpoints'];
 			$row['fightstartdate'] = strtotime("now");
@@ -68,9 +68,9 @@ function pvpvictory($badguy, $killedloc, $options=false)
 	global $session;
 	// If the victim has logged on and banked some, give the lessor of
 	// the gold amounts.
-	$sql = "SELECT gold FROM " . db_prefix("accounts") . " WHERE acctid='".(int)$badguy['acctid']."'";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT gold FROM " . DB::prefix("accounts") . " WHERE acctid='".(int)$badguy['acctid']."'";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$badguy['creaturegold'] =
 		((int)$row['gold']>(int)$badguy['creaturegold']?
 		 (int)$badguy['creaturegold']:(int)$row['gold']);
@@ -138,9 +138,9 @@ function pvpvictory($badguy, $killedloc, $options=false)
 
 	//EXP fixed in 1.2.0
 
-	$sql = "UPDATE " . db_prefix("accounts") . " SET alive=0, goldinbank=(goldinbank+IF(gold<{$badguy['creaturegold']},gold-{$badguy['creaturegold']},0)),gold=IF(gold<{$badguy['creaturegold']},0,gold-{$badguy['creaturegold']}), experience=IF(experience>=$lostexp,experience-$lostexp,0) WHERE acctid=".(int)$badguy['acctid']."";
+	$sql = "UPDATE " . DB::prefix("accounts") . " SET alive=0, goldinbank=(goldinbank+IF(gold<{$badguy['creaturegold']},gold-{$badguy['creaturegold']},0)),gold=IF(gold<{$badguy['creaturegold']},0,gold-{$badguy['creaturegold']}), experience=IF(experience>=$lostexp,experience-$lostexp,0) WHERE acctid=".(int)$badguy['acctid']."";
 	debuglog($sql,(int)$badguy['acctid'],$session['user']['acctid']);
-	db_query($sql);
+	DB::query($sql);
 	return $args['handled'];
 }
 
@@ -161,9 +161,9 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 			log(max(1,$session['user']['gold'])),0);
 	if ($badguy['creaturelevel'] == 15)	$wonamount = 0;
 
-	$sql = "SELECT level FROM " . db_prefix("accounts") . " WHERE acctid={$badguy['acctid']}";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT level FROM " . DB::prefix("accounts") . " WHERE acctid={$badguy['acctid']}";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 
 	$wonexp = round($session['user']['experience']*getsetting("pvpdefgain",10)/100,0);
 	if (getsetting('pvphardlimit',0)) {
@@ -197,9 +197,9 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 
 	if ($row['level'] >= $badguy['creaturelevel']) {
 		// Only give the reward if the person didn't level down
-		$sql = "UPDATE " . db_prefix("accounts") . " SET gold=gold+".$winamount.", experience=experience+".$wonexp." WHERE acctid=".(int)$badguy['acctid']."";
+		$sql = "UPDATE " . DB::prefix("accounts") . " SET gold=gold+".$winamount.", experience=experience+".$wonexp." WHERE acctid=".(int)$badguy['acctid']."";
 		debuglog($sql);
-		db_query($sql);
+		DB::query($sql);
 	}
 
 	$session['user']['alive']=false;

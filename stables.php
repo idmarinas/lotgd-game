@@ -101,9 +101,9 @@ if ($op==""){
 	tlschema();
 	modulehook("stables-desc");
 }elseif($op=="examine"){
-	$sql = "SELECT * FROM " . db_prefix("mounts") . " WHERE mountid='$id'";
-	$result = db_query_cached($sql, "mountdata-$id", 3600);
-	if (db_num_rows($result)<=0){
+	$sql = "SELECT * FROM " . DB::prefix("mounts") . " WHERE mountid='$id'";
+	$result = DB::query_cached($sql, "mountdata-$id", 3600);
+	if (DB::num_rows($result)<=0){
 		tlschema($schemas['nosuchbeast']);
 		output($texts['nosuchbeast']);
 		tlschema();
@@ -113,7 +113,7 @@ if ($op==""){
 		tlschema($schemas['finebeast']);
 		output($texts['finebeast'][$t]);
 		tlschema();
-		$mount = db_fetch_assoc($result);
+		$mount = DB::fetch_assoc($result);
 		output("`7Creature: `&%s`0`n", $mount['mountname']);
 		output("`7Description: `&%s`0`n", $mount['mountdesc']);
 		output("`7Cost: `^%s`& gold, `%%s`& gems`n`n", $mount['mountcostgold'], $mount['mountcostgems']);
@@ -136,14 +136,14 @@ if ($op==""){
 	}
 }
 if ($op == 'confirmbuy') {
-	$sql = "SELECT * FROM " . db_prefix("mounts") . " WHERE mountid='$id'";
-	$result = db_query_cached($sql, "mountdata-$id", 3600);
-	if (db_num_rows($result)<=0){
+	$sql = "SELECT * FROM " . DB::prefix("mounts") . " WHERE mountid='$id'";
+	$result = DB::query_cached($sql, "mountdata-$id", 3600);
+	if (DB::num_rows($result)<=0){
 		tlschema($schemas['nosuchbeast']);
 		output($texts['nosuchbeast']);
 		tlschema();
 	}else{
-		$mount = db_fetch_assoc($result);
+		$mount = DB::fetch_assoc($result);
 		if (($session['user']['gold']+$repaygold) < $mount['mountcostgold'] ||
 			($session['user']['gems']+$repaygems) < $mount['mountcostgems']){
 			tlschema($schemas['toolittle']);
@@ -279,12 +279,12 @@ if ($confirm == 0) {
 		}
 	}
 
-	$sql = "SELECT mountname,mountid,mountcategory,mountdkcost FROM " . db_prefix("mounts") .  " WHERE mountactive=1 AND mountlocation IN ('all','{$session['user']['location']}') ORDER BY mountcategory,mountcostgems,mountcostgold";
-	$result = db_query($sql);
+	$sql = "SELECT mountname,mountid,mountcategory,mountdkcost FROM " . DB::prefix("mounts") .  " WHERE mountactive=1 AND mountlocation IN ('all','{$session['user']['location']}') ORDER BY mountcategory,mountcostgems,mountcostgold";
+	$result = DB::query($sql);
 	$category="";
-	$number=db_num_rows($result);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		if ($category!=$row['mountcategory']){
 			addnav(array("%s", $row['mountcategory']));
 			$category = $row['mountcategory'];

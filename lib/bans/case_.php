@@ -26,7 +26,7 @@ if ($display == 1){
 	addnav("","bans.php?sort=uniqueid$q");
 	$rn=0;
 	$oorder = "";
-	while ($row=db_fetch_assoc($searchresult)) {
+	while ($row=DB::fetch_assoc($searchresult)) {
 		$laston = relativedate($row['laston']);
 		$loggedin =
 			(date("U") - strtotime($row['laston']) <

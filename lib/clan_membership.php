@@ -5,38 +5,38 @@
 		$setrank = (int) httppost('setrank');
 		$whoacctid = (int)httpget('whoacctid');
 		if ($setrank>0 && $setrank<=$session['user']['clanrank']) {
-			$sql="SELECT name,login,clanrank FROM ".db_prefix("accounts")." WHERE acctid=$whoacctid LIMIT 1";
-			$result=db_query($sql);
-			$row=db_fetch_assoc($result);
+			$sql="SELECT name,login,clanrank FROM ".DB::prefix("accounts")." WHERE acctid=$whoacctid LIMIT 1";
+			$result=DB::query($sql);
+			$row=DB::fetch_assoc($result);
 			$who = $row['login'];
 			$whoname = $row['name'];
 			if ($setrank>""){
 				$args = modulehook("clan-setrank", array("setrank"=>$setrank, "login"=>$who, "name"=>$whoname, "acctid"=>$whoacctid, "clanid"=>$session['user']['clanid'], "oldrank"=>$row['clanrank']));
 				if (!(isset($args['handled']) && $args['handled'])) {
-					$sql = "UPDATE " . db_prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
-					db_query($sql);
+					$sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
+					DB::query($sql);
 					debuglog("Player {$session['user']['name']} changed rank of {$whoname} to {$setrank}.", $whoacctid);
 				}
 			}
 		}
 		$remove = httpget('remove');
 		if ($remove>""){
-			$sql = "SELECT name,login,clanrank FROM " . db_prefix("accounts") . " WHERE acctid='$remove'";
-			$row = db_fetch_assoc(db_query($sql));
+			$sql = "SELECT name,login,clanrank FROM " . DB::prefix("accounts") . " WHERE acctid='$remove'";
+			$row = DB::fetch_assoc(DB::query($sql));
 			$args = modulehook("clan-setrank", array("setrank"=>0, "login"=>$row['login'], "name"=>$row['name'], "acctid"=>$remove, "clanid"=>$session['user']['clanid'], "oldrank"=>$row['clanrank']));
-			$sql = "UPDATE " . db_prefix("accounts") . " SET clanrank=".CLAN_APPLICANT.",clanid=0,clanjoindate='0000-00-00 00:00:00' WHERE acctid='$remove' AND clanrank<={$session['user']['clanrank']}";
-			db_query($sql);
+			$sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=".CLAN_APPLICANT.",clanid=0,clanjoindate='0000-00-00 00:00:00' WHERE acctid='$remove' AND clanrank<={$session['user']['clanrank']}";
+			DB::query($sql);
 			debuglog("Player {$session['user']['name']} removed player {$row['login']} from {$claninfo['clanname']}.", $remove);
 			//delete unread application emails from this user.
 			//breaks if the applicant has had their name changed via
 			//dragon kill, superuser edit, or lodge color change
 			require_once("lib/safeescape.php");
 			$subj = safeescape(serialize(array($apply_short, $row['name'])));
-			$sql = "DELETE FROM " . db_prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='$subj'";
-			db_query($sql);
+			$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='$subj'";
+			DB::query($sql);
 		}
-		$sql = "SELECT name,login,acctid,clanrank,laston,clanjoindate,dragonkills,level FROM " . db_prefix("accounts") . " WHERE clanid={$claninfo['clanid']} ORDER BY clanrank DESC ,dragonkills DESC,level DESC,clanjoindate";
-		$result = db_query($sql);
+		$sql = "SELECT name,login,acctid,clanrank,laston,clanjoindate,dragonkills,level FROM " . DB::prefix("accounts") . " WHERE clanid={$claninfo['clanid']} ORDER BY clanrank DESC ,dragonkills DESC,level DESC,clanjoindate";
+		$result = DB::query($sql);
 		rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
 		$rank = translate_inline("Rank");
 		$name = translate_inline("Name");
@@ -55,7 +55,7 @@
 		$i=false;
 		$tot = 0;
 		require_once("lib/clan/func.php");
-		while ($row=db_fetch_assoc($result)){
+		while ($row=DB::fetch_assoc($result)){
 			$i=!$i;
 			$list='';
 			foreach($ranks as $key=>$value) {

@@ -3,26 +3,26 @@ $subop = httpget("subop");
 $none = translate_inline('NONE');
 if ($subop=="xml"){
 	header("Content-Type: text/xml");
-	$sql = "SELECT DISTINCT " . db_prefix("accounts") . ".name FROM " . db_prefix("bans") . ", " . db_prefix("accounts") . " WHERE (ipfilter='".addslashes(httpget("ip"))."' AND " .
-		db_prefix("bans") . ".uniqueid='" .
+	$sql = "SELECT DISTINCT " . DB::prefix("accounts") . ".name FROM " . DB::prefix("bans") . ", " . DB::prefix("accounts") . " WHERE (ipfilter='".addslashes(httpget("ip"))."' AND " .
+		DB::prefix("bans") . ".uniqueid='" .
 		addslashes(httpget("id"))."') AND ((substring(" .
-		db_prefix("accounts") . ".lastip,1,length(ipfilter))=ipfilter " .
-		"AND ipfilter<>'') OR (" .  db_prefix("bans") . ".uniqueid=" .
-		db_prefix("accounts") . ".uniqueid AND " .
-		db_prefix("bans") . ".uniqueid<>''))";
-	$r = db_query($sql);
+		DB::prefix("accounts") . ".lastip,1,length(ipfilter))=ipfilter " .
+		"AND ipfilter<>'') OR (" .  DB::prefix("bans") . ".uniqueid=" .
+		DB::prefix("accounts") . ".uniqueid AND " .
+		DB::prefix("bans") . ".uniqueid<>''))";
+	$r = DB::query($sql);
 	echo "<xml>";
-	while ($ro = db_fetch_assoc($r)) {
+	while ($ro = DB::fetch_assoc($r)) {
 		echo "<name name=\"";
 		echo urlencode(appoencode("`0{$ro['name']}"));
 		echo "\"/>";
 	}
-	if (db_num_rows($r)==0)
+	if (DB::num_rows($r)==0)
 		echo "<name name=\"$none\"/>";
 	echo "</xml>";
 	exit();
 }
-	db_query("DELETE FROM " . db_prefix("bans") . " WHERE banexpire < \"".date("Y-m-d")."\" AND banexpire>'0000-00-00'");
+	DB::query("DELETE FROM " . DB::prefix("bans") . " WHERE banexpire < \"".date("Y-m-d")."\" AND banexpire>'0000-00-00'");
 $duration =  httpget("duration");
 if (httpget('notbefore')) {
 	$operator=">=";
@@ -73,8 +73,8 @@ addnav("1 year","user.php?op=removeban&duration=1+year&notbefore=1");
 addnav("2 years","user.php?op=removeban&duration=2+years&notbefore=1");
 addnav("4 years","user.php?op=removeban&duration=4+years&notbefore=1");
 
-$sql = "SELECT * FROM " . db_prefix("bans") . " $since ORDER BY banexpire ASC";
-$result = db_query($sql);
+$sql = "SELECT * FROM " . DB::prefix("bans") . " $since ORDER BY banexpire ASC";
+$result = DB::query($sql);
 rawoutput("<script language='JavaScript'>
 function getUserInfo(ip,id,divid){
 	var filename='user.php?op=removeban&subop=xml&ip='+ip+'&id='+id;
@@ -108,7 +108,7 @@ $aff = translate_inline("Affects");
 $l = translate_inline("Last");
 	rawoutput("<tr class='trhead'><td>$ops</td><td>$bauth</td><td>$ipd</td><td>$dur</td><td>$mssg</td><td>$aff</td><td>$l</td></tr>");
 $i=0;
-while ($row = db_fetch_assoc($result)) {
+while ($row = DB::fetch_assoc($result)) {
 	$liftban = translate_inline("Lift&nbsp;ban");
 	$showuser = translate_inline("Click&nbsp;to&nbsp;show&nbsp;users");
 	rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");

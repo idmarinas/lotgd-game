@@ -7,25 +7,25 @@
 		case 1:
 			$order='clanname ASC';
 			break;
-		case 2: 
+		case 2:
 			$order='clanshort ASC';
 			break;
 		default:
 			$order='c DESC';
 			break;
 	}
-	$sql = "SELECT MAX(" . db_prefix("clans") . ".clanid) AS clanid, MAX(clanshort) AS clanshort, MAX(clanname) AS clanname,count(" . db_prefix("accounts") . ".acctid) AS c FROM " . db_prefix("clans") . " LEFT JOIN " . db_prefix("accounts") . " ON " . db_prefix("clans") . ".clanid=" . db_prefix("accounts") . ".clanid AND clanrank>".CLAN_APPLICANT." GROUP BY " . db_prefix("clans") . ".clanid ORDER BY $order";
-	$result = db_query($sql);
-	if (db_num_rows($result)>0){
+	$sql = "SELECT MAX(" . DB::prefix("clans") . ".clanid) AS clanid, MAX(clanshort) AS clanshort, MAX(clanname) AS clanname,count(" . DB::prefix("accounts") . ".acctid) AS c FROM " . DB::prefix("clans") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("clans") . ".clanid=" . DB::prefix("accounts") . ".clanid AND clanrank>".CLAN_APPLICANT." GROUP BY " . DB::prefix("clans") . ".clanid ORDER BY $order";
+	$result = DB::query($sql);
+	if (DB::num_rows($result)>0){
 		output("`7You ask %s`7 for the clan listings.  She points you toward a marquee board near the entrance of the lobby that lists the clans.`0`n`n",$registrar);
 		$v = 0;
 		$memb_n = translate_inline("(%s members)");
 		$memb_1 = translate_inline("(%s member)");
 		rawoutput('<table cellspacing="0" cellpadding="2" align="left">');
-		while ($row = db_fetch_assoc($result)){
+		while ($row = DB::fetch_assoc($result)){
 			if ($row['c']==0){
-				$sql = "DELETE FROM " . db_prefix("clans") . " WHERE clanid={$row['clanid']}";
-				db_query($sql);
+				$sql = "DELETE FROM " . DB::prefix("clans") . " WHERE clanid={$row['clanid']}";
+				DB::query($sql);
 			}else{
 				rawoutput('<tr class="' . ($v%2?"trlight":"trdark").'"><td>', true);
 				if ($row['c'] == 1) {

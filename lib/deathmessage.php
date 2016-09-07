@@ -11,12 +11,12 @@ function select_deathmessage($forest=true,$extra=array(),$extrarep=array()) {
 
 	$where=($forest?"WHERE forest=1":"WHERE graveyard=1");
 
-	$sql = "SELECT deathmessage,taunt FROM " . db_prefix("deathmessages") .
+	$sql = "SELECT deathmessage,taunt FROM " . DB::prefix("deathmessages") .
 		" $where ORDER BY rand(".e_rand() . ") LIMIT 1";
 
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	if ($result) {
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$deathmessage = $row['deathmessage'];
 		$taunt=$row['taunt'];
 	} else {
@@ -30,15 +30,15 @@ function select_deathmessage($forest=true,$extra=array(),$extrarep=array()) {
 
 function select_deathmessage_array($forest=true,$extra=array(),$extrarep=array()){
 	global $session, $badguy;
-	
+
 	$where=($forest?"WHERE forest=1":"WHERE graveyard=1");
 
-	$sql = "SELECT deathmessage,taunt FROM " . db_prefix("deathmessages") .
+	$sql = "SELECT deathmessage,taunt FROM " . DB::prefix("deathmessages") .
 		" $where ORDER BY rand(".e_rand() . ") LIMIT 1";
 
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	if ($result) {
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		$deathmessage = $row['deathmessage'];
 		$taunt=$row['taunt'];
 	} else {

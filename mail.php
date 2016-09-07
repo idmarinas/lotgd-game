@@ -13,8 +13,8 @@ $superusermessage = getsetting("superuseryommessage","Asking an admin for gems, 
 $op = httpget('op');
 $id = (int)httpget('id');
 if($op=="del" &&!$args['done'] ){
-	$sql = "DELETE FROM " . db_prefix("mail") . " WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
+	DB::query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
 	header("Location: mail.php");
 	exit();
@@ -25,15 +25,15 @@ if($op=="del" &&!$args['done'] ){
 		header("Location: mail.php");
 		exit();
 	}else{
-		$sql = "DELETE FROM " . db_prefix("mail") . " WHERE msgto='".$session['user']['acctid']."' AND messageid IN ('".join("','",$msg)."')";
-		db_query($sql);
+		$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgto='".$session['user']['acctid']."' AND messageid IN ('".join("','",$msg)."')";
+		DB::query($sql);
 		invalidatedatacache("mail-{$session['user']['acctid']}");
 		header("Location: mail.php");
 		exit();
 	}
 }elseif ($op=="unread" &&!$args['done']){
-	$sql = "UPDATE " . db_prefix("mail") . " SET seen=0 WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("mail") . " SET seen=0 WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
+	DB::query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
 	header("Location: mail.php");
 	exit();

@@ -9,8 +9,8 @@ class settings {
 	private $tablename,$settings;
 
 	function __construct($tablename=false) {
-		if ($tablename===false) $tablename=db_prefix('settings');
-			else $tablename=db_prefix($tablename);
+		if ($tablename===false) $tablename=DB::prefix('settings');
+			else $tablename=DB::prefix($tablename);
 		$this->tablename=$tablename;
 		$this->settings="";
 		$this->loadSettings();
@@ -25,10 +25,10 @@ class settings {
 		} else {
 			return false;
 		}
-		db_query($sql);
+		DB::query($sql);
 		$this->settings[$settingname]=$value;
 		invalidatedatacache("game".$this->tablename);
-		if (db_affected_rows()>0) {
+		if (DB::affected_rows()>0) {
 			return true;
 		}else{
 			return false;
@@ -41,11 +41,11 @@ class settings {
 			if (!is_array($this->settings)){
 				$this->settings=array();
 				$sql = "SELECT * FROM " . $this->tablename;
-				$result = db_query($sql);
-				while ($row = db_fetch_assoc($result)) {
+				$result = DB::query($sql);
+				while ($row = DB::fetch_assoc($result)) {
 					$this->settings[$row['setting']] = $row['value'];
 				}
-				db_free_result($result);
+				DB::free_result($result);
 				updatedatacache("game".$this->tablename,$this->settings);
 			}
 		}

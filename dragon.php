@@ -28,7 +28,7 @@ if ($op==""){
         "creatureattack"=>30+$maxlevel,
         "creaturedefense"=>10+$maxlevel,
         "creaturehealth"=>150+$maxlevel*10,
-		"diddamage"=>0, 
+		"diddamage"=>0,
 		"type"=>"dragon");
 
 	//toughen up each consecutive dragon.
@@ -38,27 +38,27 @@ if ($op==""){
 	restore_buff_fields();
     $dk = get_player_dragonkillmod();
     $creatureattr = get_creature_stats($dk);
-    
+
     //-- Bono a los atributos
     $badguy['creaturestrbonus'] = $creatureattr['str'];
     $badguy['creaturedexbonus'] = $creatureattr['dex'];
     $badguy['creatureconbonus'] = $creatureattr['con'];
     $badguy['creatureintbonus'] = $creatureattr['int'];
     $badguy['creaturewisbonus'] = $creatureattr['wis'];
-    
+
     //-- Atributos totales de la criatura
     $badguy['creaturestr'] = $creatureattr['str'] + 10;
     $badguy['creaturedex'] = $creatureattr['dex'] + 10;
     $badguy['creaturecon'] = $creatureattr['con'] + 10;
     $badguy['creatureint'] = $creatureattr['int'] + 10;
     $badguy['creaturewis'] = $creatureattr['wis'] + 10;
-    
+
     //-- Ataque, defensa y salud que dan los atributos;
     $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
 	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
 	$badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
 	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
-    
+
 	//-- Sumar los bonos
     calculate_buff_fields();
 	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
@@ -76,7 +76,7 @@ if ($op==""){
 	debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
 	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
 	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
-     
+
    	$badguy = modulehook("buffdragon", $badguy);
 
 	$session['user']['badguy']=createstring($badguy);
@@ -111,8 +111,8 @@ if ($op==""){
 	}
 	addnav("It is a new day","news.php");
 	strip_all_buffs();
-	$sql = "DESCRIBE " . db_prefix("accounts");
-	$result = db_query($sql);
+	$sql = "DESCRIBE " . DB::prefix("accounts");
+	$result = DB::query($sql);
 
 	$dkpoints = 0;
 	foreach ($session['user']['dragonpoints'] as $val) {
@@ -192,7 +192,7 @@ if ($op==""){
 			$session['user']['bestdragonage'] == 0) {
 		$session['user']['bestdragonage'] = $session['user']['dragonage'];
 	}
-	while ($row = db_fetch_assoc($result)) {
+	while ($row = DB::fetch_assoc($result)) {
 		if (array_key_exists($row['Field'],$nochange) &&
 				$nochange[$row['Field']]){
 		}elseif($row['Field'] == "location"){

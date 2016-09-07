@@ -30,9 +30,9 @@ function saveuser(){
 			gensize
 		*/
 
-		$everyhit_sql = "UPDATE ".db_prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
+		$everyhit_sql = "UPDATE ".DB::prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
 		//debug($everyhit_sql);
-		db_query($everyhit_sql);
+		DB::query($everyhit_sql);
 
 		$sql = [];
 		foreach ($session['user'] as $key=>$val)
@@ -46,15 +46,15 @@ function saveuser(){
 		}
 		//due to the change in the accounts table -> moved output -> save everyhit
 		$sql[] = "`laston` = '".date("Y-m-d H:i:s")."'";
-		$sql = "UPDATE " . db_prefix("accounts") . " SET " . implode(',', $sql) .
+		$sql = "UPDATE " . DB::prefix("accounts") . " SET " . implode(',', $sql) .
 			" WHERE acctid = ".$session['user']['acctid'];
-		db_query($sql);
+		DB::query($sql);
 		if (isset($session['output']) && $session['output']) {
-			$sql_output="UPDATE " . db_prefix("accounts_output") . " SET output='".addslashes(gzcompress($session['output'],1))."' WHERE acctid={$session['user']['acctid']};";
-			$result=db_query($sql_output);
-			if (db_affected_rows($result)<1) {
-				$sql_output="REPLACE INTO " . db_prefix("accounts_output") . " VALUES ({$session['user']['acctid']},'".addslashes(gzcompress($session['output'],1))."');";
-				db_query($sql_output);
+			$sql_output="UPDATE " . DB::prefix("accounts_output") . " SET output='".addslashes(gzcompress($session['output'],1))."' WHERE acctid={$session['user']['acctid']};";
+			$result=DB::query($sql_output);
+			if (DB::affected_rows($result)<1) {
+				$sql_output="REPLACE INTO " . DB::prefix("accounts_output") . " VALUES ({$session['user']['acctid']},'".addslashes(gzcompress($session['output'],1))."');";
+				DB::query($sql_output);
 			}
 		}
 		unset($session['bufflist']);

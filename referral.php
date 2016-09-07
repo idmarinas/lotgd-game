@@ -33,8 +33,8 @@ if ($session['user']['loggedin']){
 	output("If you do, the site will know that you were the one who sent them here.");
 	output("When they reach level %s for the first time, you'll get your points!", getsetting("referminlevel", 4));
 
-	$sql = "SELECT name,level,refererawarded FROM " . db_prefix("accounts") . " WHERE referer={$session['user']['acctid']} ORDER BY dragonkills,level";
-	$result = db_query($sql);
+	$sql = "SELECT name,level,refererawarded FROM " . DB::prefix("accounts") . " WHERE referer={$session['user']['acctid']} ORDER BY dragonkills,level";
+	$result = DB::query($sql);
 	$name=translate_inline("Name");
 	$level=translate_inline("Level");
 	$awarded=translate_inline("Awarded?");
@@ -43,9 +43,9 @@ if ($session['user']['loggedin']){
 	$none=translate_inline("`iNone`i");
 	output("`n`nAccounts which you referred:`n");
 	rawoutput("<table border='0' cellpadding='3' cellspacing='0'><tr class='trhead'><td>$name</td><td>$level</td><td>$awarded</td></tr>");
-	$number=db_num_rows($result);
+	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td>");
 		output_notl($row['name']);
 		rawoutput("</td><td>");
@@ -54,7 +54,7 @@ if ($session['user']['loggedin']){
 		output_notl($row['refererawarded']?$yes:$no);
 		rawoutput("</td></tr>");
 	}
-	if (db_num_rows($result)==0){
+	if (DB::num_rows($result)==0){
 		rawoutput("<tr class='trlight'><td colspan='3' align='center'>");
 		output_notl($none);
 		rawoutput("</td></tr>");

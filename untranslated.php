@@ -37,10 +37,10 @@ if ($op == "list") {
 		if ($outtext <> "") {
 			$login = $session['user']['login'];
 			$language = $session['user']['prefs']['language'];
-			$sql = "INSERT INTO " . db_prefix("translations") . " (language,uri,intext,outtext,author,version) VALUES" . " ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
-			db_query($sql);
-			$sql = "DELETE FROM " . db_prefix("untranslated") . " WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
-			db_query($sql);
+			$sql = "INSERT INTO " . DB::prefix("translations") . " (language,uri,intext,outtext,author,version) VALUES" . " ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
+			DB::query($sql);
+			$sql = "DELETE FROM " . DB::prefix("untranslated") . " WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
+			DB::query($sql);
 		}
 	}
 
@@ -52,12 +52,12 @@ if ($op == "list") {
 		addnav("", "untranslated.php?op=list");
 	}
 
-	$sql = "SELECT namespace,count(*) AS c FROM " . db_prefix("untranslated") . " WHERE language='".$session['user']['prefs']['language']."' GROUP BY namespace ORDER BY namespace ASC";
-	$result = db_query($sql);
+	$sql = "SELECT namespace,count(*) AS c FROM " . DB::prefix("untranslated") . " WHERE language='".$session['user']['prefs']['language']."' GROUP BY namespace ORDER BY namespace ASC";
+	$result = DB::query($sql);
 	rawoutput("<input type='hidden' name='op' value='list'>");
 	output("Known Namespaces:");
 	rawoutput("<select name='ns'>");
-	while ($row = db_fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result)){
 		rawoutput("<option value=\"".htmlentities($row['namespace'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"".((htmlentities($row['namespace'], ENT_COMPAT, getsetting("charset", "ISO-8859-1")) == $namespace) ? "selected" : "").">".htmlentities($row['namespace'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))." ({$row['c']})</option>");
 	}
 	rawoutput("</select>");
@@ -73,11 +73,11 @@ if ($op == "list") {
 	} else {
 		rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
 		rawoutput("<tr class='trhead'><td>". translate_inline("Ops") ."</td><td>". translate_inline("Text") ."</td></tr>");
-		$sql = "SELECT * FROM " . db_prefix("untranslated") . " WHERE language='".$session['user']['prefs']['language']."' AND namespace='".$namespace."'";
-		$result = db_query($sql);
-		if (db_num_rows($result)>0){
+		$sql = "SELECT * FROM " . DB::prefix("untranslated") . " WHERE language='".$session['user']['prefs']['language']."' AND namespace='".$namespace."'";
+		$result = DB::query($sql);
+		if (DB::num_rows($result)>0){
 			$i = 0;
-			while ($row = db_fetch_assoc($result)){
+			while ($row = DB::fetch_assoc($result)){
 				$i++;
 				rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td>");
 				rawoutput("<a href='untranslated.php?op=list&mode=edit&ns=". rawurlencode($row['namespace']) ."&intext=". rawurlencode($row['intext']) ."'>". translate_inline("Edit") ."</a>");
@@ -102,21 +102,21 @@ if ($op == "list") {
 		$language = httppost('language');
 		if ($outtext <> "") {
 			$login = $session['user']['login'];
-			$sql = "INSERT INTO " . db_prefix("translations") . " (language,uri,intext,outtext,author,version) VALUES" . " ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
-			db_query($sql);
-			$sql = "DELETE FROM " . db_prefix("untranslated") . " WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
-			db_query($sql);
+			$sql = "INSERT INTO " . DB::prefix("translations") . " (language,uri,intext,outtext,author,version) VALUES" . " ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
+			DB::query($sql);
+			$sql = "DELETE FROM " . DB::prefix("untranslated") . " WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
+			DB::query($sql);
 			invalidatedatacache("translations-".$namespace."-".$language);
 		}
 	}
 
-	$sql = "SELECT count(intext) AS count FROM " . db_prefix("untranslated");
-	$count = db_fetch_assoc(db_query($sql));
+	$sql = "SELECT count(intext) AS count FROM " . DB::prefix("untranslated");
+	$count = DB::fetch_assoc(DB::query($sql));
 	if ($count['count'] > 0) {
-		$sql = "SELECT * FROM " . db_prefix("untranslated") . " WHERE language = '" . $session['user']['prefs']['language'] . "' ORDER BY rand(".e_rand().") LIMIT 1";
-		$result = db_query($sql);
-		if (db_num_rows($result) == 1) {
-			$row = db_fetch_assoc($result);
+		$sql = "SELECT * FROM " . DB::prefix("untranslated") . " WHERE language = '" . $session['user']['prefs']['language'] . "' ORDER BY rand(".e_rand().") LIMIT 1";
+		$result = DB::query($sql);
+		if (DB::num_rows($result) == 1) {
+			$row = DB::fetch_assoc($result);
 			$row['intext'] = stripslashes($row['intext']);
 			$submit = translate_inline("Save Translation");
 			$skip = translate_inline("Skip Translation");

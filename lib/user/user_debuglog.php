@@ -3,9 +3,9 @@ if ($petition !=""){
 	addnav("Navigation");
 	addnav("Return to the petition","viewpetition.php?op=view&id=$petition");
 }
-$debuglog = db_prefix('debuglog');
-$debuglog_archive = db_prefix('debuglog_archive');
-$accounts = db_prefix('accounts');
+$debuglog = DB::prefix('debuglog');
+$debuglog_archive = DB::prefix('debuglog_archive');
+$accounts = DB::prefix('accounts');
 
 
 // As mySQL cannot use two different indexes in a single query this query can take up to 25s on its own!
@@ -15,23 +15,23 @@ $accounts = db_prefix('accounts');
 // $sql = "SELECT count(id) AS c FROM $debuglog WHERE actor=$userid OR target=$userid";
 
 $sql = "SELECT COUNT(id) AS c FROM $debuglog WHERE target=$userid";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $max = $row['c'];
 
 $sql = "SELECT COUNT(id) AS c FROM $debuglog WHERE actor=$userid";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $max += $row['c'];
 
 $sql = "SELECT COUNT(id) AS c FROM $debuglog_archive WHERE target=$userid";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $max = $row['c'];
 
 $sql = "SELECT COUNT(id) AS c FROM $debuglog_archive WHERE actor=$userid";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $max += $row['c'];
 
 
@@ -79,9 +79,9 @@ if ($start > 0) {
 	addnav("Previous page",
 			"user.php?op=debuglog&userid=$userid&start=$prev$returnpetition");
 }
-$result = db_query($sql);
+$result = DB::query($sql);
 $odate = "";
-while ($row = db_fetch_assoc($result)) {
+while ($row = DB::fetch_assoc($result)) {
 	$dom = date("D, M d",strtotime($row['date']));
 	if ($odate != $dom){
 		output_notl("`n`b`@%s`0`b`n", $dom);

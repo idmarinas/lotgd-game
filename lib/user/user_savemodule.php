@@ -14,8 +14,8 @@ if (isset($post['validation_error']) && $post['validation_error']) {
 	output_notl("`n");
 	foreach ($post as $key=>$val) {
 		output("`\$Setting '`2%s`\$' to '`2%s`\$'`n", $key, stripslashes($val));
-		$sql = "REPLACE INTO " . db_prefix("module_userprefs") . " (modulename,userid,setting,value) VALUES ('$module','$userid','$key','$val')";
-		db_query($sql);
+		$sql = "REPLACE INTO " . DB::prefix("module_userprefs") . " (modulename,userid,setting,value) VALUES ('$module','$userid','$key','$val')";
+		DB::query($sql);
 	}
 	output("`^Preferences for module %s saved.`n", $module);
 }

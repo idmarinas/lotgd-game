@@ -23,29 +23,29 @@ addnav("Add a companion","companions.php?op=add");
 $op = httpget('op');
 $id = httpget('id');
 if ($op=="deactivate"){
-	$sql = "UPDATE " . db_prefix("companions") . " SET companionactive=0 WHERE companionid='$id'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("companions") . " SET companionactive=0 WHERE companionid='$id'";
+	DB::query($sql);
 	$op="";
 	httpset("op", "");
 	invalidatedatacache("companionsdata-$id");
 } elseif ($op=="activate"){
-	$sql = "UPDATE " . db_prefix("companions") . " SET companionactive=1 WHERE companionid='$id'";
-	db_query($sql);
+	$sql = "UPDATE " . DB::prefix("companions") . " SET companionactive=1 WHERE companionid='$id'";
+	DB::query($sql);
 	$op="";
 	httpset("op", "");
 	invalidatedatacache("companiondata-$id");
 } elseif ($op=="del") {
 	//drop the companion.
-	$sql = "DELETE FROM " . db_prefix("companions") . " WHERE companionid='$id'";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("companions") . " WHERE companionid='$id'";
+	DB::query($sql);
 	module_delete_objprefs('companions', $id);
 	$op = "";
 	httpset("op", "");
 	invalidatedatacache("companiondata-$id");
 } elseif ($op=="take"){
-	$sql = "SELECT * FROM " . db_prefix("companions") . " WHERE companionid='$id'";
-	$result = db_query($sql);
-	if ($row = db_fetch_assoc($result)) {
+	$sql = "SELECT * FROM " . DB::prefix("companions") . " WHERE companionid='$id'";
+	$result = DB::query($sql);
+	if ($row = DB::fetch_assoc($result)) {
 		$row['attack'] = $row['attack'] + $row['attackperlevel'] * $session['user']['level'];
 		$row['defense'] = $row['defense'] + $row['defenseperlevel'] * $session['user']['level'];
 		$row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
@@ -99,15 +99,15 @@ if ($op=="deactivate"){
 				$i++;
 			}
 			if ($id>""){
-				$sql="UPDATE " . db_prefix("companions") .
+				$sql="UPDATE " . DB::prefix("companions") .
 					" SET $sql WHERE companionid='$id'";
 			}else{
-				$sql="INSERT INTO " . db_prefix("companions") .
+				$sql="INSERT INTO " . DB::prefix("companions") .
 					" ($keys) VALUES ($vals)";
 			}
-			db_query($sql);
+			DB::query($sql);
 			invalidatedatacache("companiondata-$id");
-			if (db_affected_rows()>0){
+			if (DB::affected_rows()>0){
 				output("`^Companion saved!`0`n`n");
 			}else{
 //				if (strlen($sql) > 400) $sql = substr($sql,0,200)." ... ".substr($sql,strlen($sql)-200);
@@ -133,8 +133,8 @@ if ($op=="deactivate"){
 }
 
 if ($op==""){
-	$sql = "SELECT * FROM " . db_prefix("companions") . " ORDER BY category, name";
-	$result = db_query($sql);
+	$sql = "SELECT * FROM " . DB::prefix("companions") . " ORDER BY category, name";
+	$result = DB::query($sql);
 
 	$ops = translate_inline("Ops");
 	$name = translate_inline("Name");
@@ -151,7 +151,7 @@ if ($op==""){
 	$cat = "";
 	$count=0;
 
-	while ($row=db_fetch_assoc($result)) {
+	while ($row=DB::fetch_assoc($result)) {
 		if ($cat!=$row['category']){
 			rawoutput("<tr class='trlight'><td colspan='5'>");
 			output("Category: %s", $row['category']);
@@ -198,9 +198,9 @@ if ($op==""){
 	companionform(array());
 }elseif ($op=="edit"){
 	addnav("Companion Editor Home","companions.php");
-	$sql = "SELECT * FROM " . db_prefix("companions") . " WHERE companionid='$id'";
-	$result = db_query_cached($sql, "companiondata-$id", 3600);
-	if (db_num_rows($result)<=0){
+	$sql = "SELECT * FROM " . DB::prefix("companions") . " WHERE companionid='$id'";
+	$result = DB::query_cached($sql, "companiondata-$id", 3600);
+	if (DB::num_rows($result)<=0){
 		output("`iThis companion was not found.`i");
 	}else{
 		addnav("Companion properties", "companions.php?op=edit&id=$id");
@@ -214,7 +214,7 @@ if ($op==""){
 			addnav("", "companions.php?op=save&subop=module&id=$id&module=$module");
 		} else {
 			output("Companion Editor:`n");
-			$row = db_fetch_assoc($result);
+			$row = DB::fetch_assoc($result);
 			$row['abilities'] = @unserialize($row['abilities']);
 			companionform($row);
 		}

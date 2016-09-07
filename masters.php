@@ -18,8 +18,8 @@ require_once("lib/superusernav.php");
 superusernav();
 
 if ($op == "del") {
-	$sql = "DELETE FROM " . db_prefix("masters") . " WHERE creatureid=$id";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("masters") . " WHERE creatureid=$id";
+	DB::query($sql);
 	output("`^Master deleted.`0");
 	$op = "";
 	httpset("op", "");
@@ -30,15 +30,15 @@ if ($op == "del") {
 	$lose = addslashes(httppost('lose'));
 	$lev = (int)httppost('level');
 	if ($id != 0) {
-		$sql = "UPDATE " . db_prefix("masters") . " SET creaturelevel=$lev, creaturename='$name', creatureweapon='$weapon',  creaturewin='$win', creaturelose='$lose' WHERE creatureid=$id";
+		$sql = "UPDATE " . DB::prefix("masters") . " SET creaturelevel=$lev, creaturename='$name', creatureweapon='$weapon',  creaturewin='$win', creaturelose='$lose' WHERE creatureid=$id";
 	} else {
 		$atk = $lev * 2;
 		$def = $lev * 2;
 		$hp = $lev*11;
 		if ($hp == 11) $hp++;
-		$sql = "INSERT INTO " . db_prefix("masters") . " (creatureid,creaturelevel,creaturename,creatureweapon,creaturewin,creaturelose,creaturehealth,creatureattack,creaturedefense) VALUES ($id,$lev,'$name', '$weapon', '$win', '$lose', '$hp', '$atk', '$def')";
+		$sql = "INSERT INTO " . DB::prefix("masters") . " (creatureid,creaturelevel,creaturename,creatureweapon,creaturewin,creaturelose,creaturehealth,creatureattack,creaturedefense) VALUES ($id,$lev,'$name', '$weapon', '$win', '$lose', '$hp', '$atk', '$def')";
 	}
-	db_query($sql);
+	DB::query($sql);
 	if ($id == 0) {
 		output("`^Master %s`^ added.", stripslashes($name));
 	} else {
@@ -49,9 +49,9 @@ if ($op == "del") {
 } elseif ($op == "edit") {
 	addnav("Functions");
 	addnav("Return to Masters Editor", "masters.php");
-	$sql = "SELECT * FROM ".db_prefix("masters")." WHERE creatureid=$id";
-	$res = db_query($sql);
-	if (db_num_rows($res) == 0) {
+	$sql = "SELECT * FROM ".DB::prefix("masters")." WHERE creatureid=$id";
+	$res = DB::query($sql);
+	if (DB::num_rows($res) == 0) {
 		$row = array(
 			'creaturelevel'=>1,
 			'creaturename'=>'',
@@ -60,7 +60,7 @@ if ($op == "del") {
 			'creaturelose'=>''
 		);
 	} else {
-		$row = db_fetch_assoc($res);
+		$row = DB::fetch_assoc($res);
 	}
 	addnav("","masters.php?op=save&id=$id");
 	rawoutput("<form action='masters.php?op=save&id=$id' method='POST'>");
@@ -105,9 +105,9 @@ if ($op == "") {
 	addnav("Functions");
 	addnav("Refresh list", "masters.php");
 	addnav("Add master", "masters.php?op=edit&id=0");
-	$sql = "SELECT * FROM ".db_prefix("masters")." ORDER BY creaturelevel";
-	$res = db_query($sql);
-	$count = db_num_rows($res);
+	$sql = "SELECT * FROM ".DB::prefix("masters")." ORDER BY creaturelevel";
+	$res = DB::query($sql);
+	$count = DB::num_rows($res);
 	$ops = translate_inline("Ops");
 	$edit = translate_inline("edit");
 	$del = translate_inline("del");
@@ -120,7 +120,7 @@ if ($op == "") {
 	rawoutput("<table border='0' cellpadding='2' cellspacing='1' align='center' bgcolor='#999999'>");
 	rawoutput("<tr class='trhead'><td>$ops</td><td>$level</td><td>$name</td><td>$weapon</td><td>$win</td><td>$lose</tr>");
 	$i = false;
-	while ($row = db_fetch_assoc($res)) {
+	while ($row = DB::fetch_assoc($res)) {
 		$id = $row['creatureid'];
 		rawoutput("<tr class='".($i?"trdark":"trlight")."'><td nowrap>");
 		rawoutput("[ <a href='masters.php?op=edit&id=$id'>");

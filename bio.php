@@ -29,9 +29,9 @@ if (is_numeric($char)){
 } else {
 	$where = "login = '$char'";
 }
-$sql = "SELECT login, name, level, sex, title, specialty, hashorse, acctid, resurrections, bio, dragonkills, race, clanname, clanshort, clanrank, ".db_prefix("accounts").".clanid, laston, loggedin FROM " . db_prefix("accounts") . " LEFT JOIN " . db_prefix("clans") . " ON " . db_prefix("accounts") . ".clanid = " . db_prefix("clans") . ".clanid WHERE $where";
-$result = db_query($sql);
-if ($target = db_fetch_assoc($result)) {
+$sql = "SELECT login, name, level, sex, title, specialty, hashorse, acctid, resurrections, bio, dragonkills, race, clanname, clanshort, clanrank, ".DB::prefix("accounts").".clanid, laston, loggedin FROM " . DB::prefix("accounts") . " LEFT JOIN " . DB::prefix("clans") . " ON " . DB::prefix("accounts") . ".clanid = " . DB::prefix("clans") . ".clanid WHERE $where";
+$result = DB::query($sql);
+if ($target = DB::fetch_assoc($result)) {
   $target['login'] = rawurlencode($target['login']);
   $id = $target['acctid'];
   $target['return_link']=$return;
@@ -93,9 +93,9 @@ if ($target = db_fetch_assoc($result)) {
   if (isset($specialties[$target['specialty']])) {
 		output("`^Specialty: `@%s`n",$specialties[$target['specialty']]);
   }
-  $sql = "SELECT * FROM " . db_prefix("mounts") . " WHERE mountid='{$target['hashorse']}'";
-  $result = db_query_cached($sql, "mountdata-{$target['hashorse']}", 3600);
-  $mount = db_fetch_assoc($result);
+  $sql = "SELECT * FROM " . DB::prefix("mounts") . " WHERE mountid='{$target['hashorse']}'";
+  $result = DB::query_cached($sql, "mountdata-{$target['hashorse']}", 3600);
+  $mount = DB::fetch_assoc($result);
 
   $mount['acctid']=$target['acctid'];
   $mount = modulehook("bio-mount",$mount);
@@ -115,11 +115,11 @@ if ($target = db_fetch_assoc($result)) {
   modulehook("bioinfo", $target);
 
   output("`n`^Recent accomplishments (and defeats) of %s`^",$target['name']);
-  $result = db_query("SELECT * FROM " . db_prefix("news") . " WHERE accountid={$target['acctid']} ORDER BY newsdate DESC,newsid ASC LIMIT 100");
+  $result = DB::query("SELECT * FROM " . DB::prefix("news") . " WHERE accountid={$target['acctid']} ORDER BY newsdate DESC,newsid ASC LIMIT 100");
 
   $odate="";
   tlschema("news");
-  while ($row = db_fetch_assoc($result)) {
+  while ($row = DB::fetch_assoc($result)) {
 	  tlschema($row['tlschema']);
 	  if ($row['arguments'] > "") {
 		  $arguments = array();

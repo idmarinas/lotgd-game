@@ -21,9 +21,9 @@ case "edit":
 	rawoutput("<form action='deathmessages.php?op=save&deathmessageid=$deathmessageid' method='POST'>",true);
 	addnav("","deathmessages.php?op=save&deathmessageid=$deathmessageid");
 	if ($deathmessageid!=""){
-		$sql = "SELECT * FROM " . db_prefix("deathmessages") . " WHERE deathmessageid=\"$deathmessageid\"";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT * FROM " . DB::prefix("deathmessages") . " WHERE deathmessageid=\"$deathmessageid\"";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		require_once("lib/substitute.php");
 		$badguy=array('creaturename'=>'`2The Nasty Rabbit', 'creatureweapon'=>'Rabbit Ears');
 		$deathmessage = substitute_array($row['deathmessage'],array("{where}"),array("in the fields"));
@@ -55,8 +55,8 @@ case "edit":
 	rawoutput("</form>");
 	break;
 case "del":
-	$sql = "DELETE FROM " . db_prefix("deathmessages") . " WHERE deathmessageid=\"$deathmessageid\"";
-	db_query($sql);
+	$sql = "DELETE FROM " . DB::prefix("deathmessages") . " WHERE deathmessageid=\"$deathmessageid\"";
+	DB::query($sql);
 	$op = "";
 	httpset("op", "");
 	break;
@@ -66,19 +66,19 @@ case "save":
 	$graveyard = (int) httppost('graveyard');
 	$taunt = (int) httppost('taunt');
 	if ($deathmessageid!=""){
-		$sql = "UPDATE " . db_prefix("deathmessages") . " SET deathmessage=\"$deathmessage\",taunt=$taunt,forest=$forest,graveyard=$graveyard,editor=\"".addslashes($session['user']['login'])."\" WHERE deathmessageid=\"$deathmessageid\"";
+		$sql = "UPDATE " . DB::prefix("deathmessages") . " SET deathmessage=\"$deathmessage\",taunt=$taunt,forest=$forest,graveyard=$graveyard,editor=\"".addslashes($session['user']['login'])."\" WHERE deathmessageid=\"$deathmessageid\"";
 	}else{
-		$sql = "INSERT INTO " . db_prefix("deathmessages") . " (deathmessage,taunt,forest,graveyard,editor) VALUES (\"$deathmessage\",$taunt,$forest,$graveyard,\"".addslashes($session['user']['login'])."\")";
+		$sql = "INSERT INTO " . DB::prefix("deathmessages") . " (deathmessage,taunt,forest,graveyard,editor) VALUES (\"$deathmessage\",$taunt,$forest,$graveyard,\"".addslashes($session['user']['login'])."\")";
 	}
-	db_query($sql);
+	DB::query($sql);
 	$op = "";
 	httpset("op", "");
 	break;
 }
 if ($op == "") {
 	output("`i`\$Note: These messages are NEWS messages the user will trigger when he/she dies in the forest or graveyard.`0`i`n`n");
-	$sql = "SELECT * FROM " . db_prefix("deathmessages");
-	$result = db_query($sql);
+	$sql = "SELECT * FROM " . DB::prefix("deathmessages");
+	$result = DB::query($sql);
 	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
 	$op = translate_inline("Ops");
 	$t = translate_inline("Deathmessage String");
@@ -88,7 +88,7 @@ if ($op == "") {
 	$ta = translate_inline("With Taunt");
 	rawoutput("<tr class='trhead'><td nowrap>$op</td><td>$t</td><td>$f</td><td>$g</td><td>$ta</td><td>$auth</td></tr>");
 	$i=true;
-	while ($row=db_fetch_assoc($result)) {
+	while ($row=DB::fetch_assoc($result)) {
 		$i=!$i;
 		rawoutput("<tr class='".($i?"trdark":"trlight")."'>",true);
 		rawoutput("<td nowrap>");

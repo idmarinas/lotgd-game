@@ -10,9 +10,9 @@ require_once("lib/http.php");
 
 tlschema("payment");
 
-// Send an empty HTTP 200 OK response to acknowledge receipt of the notification 
-header('HTTP/1.1 200 OK'); 
-  
+// Send an empty HTTP 200 OK response to acknowledge receipt of the notification
+header('HTTP/1.1 200 OK');
+
 
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
@@ -71,9 +71,9 @@ if (!$fp) {
 					$payment_fee = 0;
 					$txn_type = 'refund';
 				}
-				$sql = "SELECT * FROM " . db_prefix("paylog") . " WHERE txnid='{$txn_id}'";
-				$result = db_query($sql);
-				if (db_num_rows($result)==1){
+				$sql = "SELECT * FROM " . DB::prefix("paylog") . " WHERE txnid='{$txn_id}'";
+				$result = DB::query($sql);
+				if (DB::num_rows($result)==1){
 					$emsg .= "Already logged this transaction ID ($txn_id)\n";
 					payment_error(E_ERROR,$emsg,__FILE__,__LINE__);
 				}
@@ -105,9 +105,9 @@ function writelog($response){
 	$match = array();
 	preg_match("'([^:]*):([^/])*'",$item_number,$match);
 	if ($match[1]>""){
-		$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='{$match[1]}'";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+		$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='{$match[1]}'";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		$acctid = $row['acctid'];
 		if ($acctid>0){
 			$donation = $payment_amount;
@@ -121,9 +121,9 @@ function writelog($response){
 			//updated to make a setting here for each Dollar, Euro, Shekel
 			$hookresult['points'] = round($hookresult['points']);
 
-			$sql = "UPDATE " . db_prefix("accounts") . " SET donation = donation + '{$hookresult['points']}' WHERE acctid=$acctid";
+			$sql = "UPDATE " . DB::prefix("accounts") . " SET donation = donation + '{$hookresult['points']}' WHERE acctid=$acctid";
 
-			$result = db_query($sql);
+			$result = DB::query($sql);
 			debuglog("Received donator points for donating -- Credited Automatically",false,$acctid,"donation",$hookresult['points'],false);
 			if (!is_array($hookresult['messages'])){
 				$hookresult['messages'] = array($hookresult['messages']);
@@ -131,11 +131,11 @@ function writelog($response){
 			foreach ($hookresult['messages'] as $id=>$message){
 				debuglog($message,false,$acctid,"donation",0,false);
 			}
-			if (db_affected_rows()>0) $processed = 1;
+			if (DB::affected_rows()>0) $processed = 1;
 		}
 	}
 	$sql = "
-		INSERT INTO " . db_prefix("paylog") . " (
+		INSERT INTO " . DB::prefix("paylog") . " (
 			info,
 			response,
 			txnid,
@@ -158,10 +158,10 @@ function writelog($response){
 			'$payment_fee',
 			'".date("Y-m-d H:i:s")."'
 		)";
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	if ($match[1]>"" && $acctid>0) modulehook("donation", array("id"=>$acctid, "amt"=>$donation*getsetting('dpointspercurrencyunit',100), "manual"=>false));
 	modulehook("donation-processed",$post);
-	$err = db_error();
+	$err = DB::error();
 	if ($err) {
 		payment_error(E_ERROR,"SQL: $sql\nERR: $err", __FILE__,__LINE__);
 	}
@@ -192,7 +192,7 @@ if ($payment_errors>"") {
 	$contents = ob_get_contents();
 	ob_end_clean();
 	$payment_errors .= "<hr>".$contents;
-	
+
 	//## Modificado - Se usa una función propia para generar un e-mail con formato html
 	html_mail($adminEmail,$subj,$payment_errors."<hr>","From: " . getsetting("gameadminemail", "postmaster@localhost.com"));
 }

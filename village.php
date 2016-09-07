@@ -29,10 +29,10 @@ if ($newestplayer == $session['user']['acctid']) {
 } else {
 	$newtext = "`n`2Wandering near the inn is `&%s`2, looking completely lost.";
 	if ((int)$newestplayer != 0) {
-		$sql = "SELECT name FROM " . db_prefix("accounts") . " WHERE acctid='$newestplayer'";
-		$result = db_query_cached($sql, "newest");
-		if (db_num_rows($result) == 1) {
-			$row = db_fetch_assoc($result);
+		$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE acctid='$newestplayer'";
+		$result = DB::query_cached($sql, "newest");
+		if (DB::num_rows($result) == 1) {
+			$row = DB::fetch_assoc($result);
 			$newestname = $row['name'];
 		} else {
 			$newestplayer = "";

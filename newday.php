@@ -43,7 +43,7 @@ if ((count($session['user']['dragonpoints']) <
 		case "wis":
 			$session['user']['wisdom']++;
 			break;
-        //legacy support	
+        //legacy support
 		case "hp":
 			$session['user']['maxhitpoints']+=5;
 			break;
@@ -79,7 +79,7 @@ $canbuy = array(
 		"dex"=>1,
 		"con"=>1,
 		"int"=>1,
-		"wis"=>1,	
+		"wis"=>1,
 		"at"=>0,
 		"de"=>0,
 		"unknown"=>0,
@@ -290,8 +290,8 @@ if ($dp < $dkills) {
 		if (gmdate("Ymd",$gametoday)!=gmdate("Ymd",$lastnewdaysemaphore)){
 				// it appears to be a different game day, acquire semaphore and
 				// check again.
-            $sql = "LOCK TABLES " . db_prefix("settings") . " WRITE";
-            db_query($sql);
+            $sql = "LOCK TABLES " . DB::prefix("settings") . " WRITE";
+            DB::query($sql);
             clearsettings();
             $lastnewdaysemaphore = convertgametime(strtotime(getsetting("newdaySemaphore","0000-00-00 00:00:00") . " +0000"));
                 $gametoday = gametime();
@@ -299,12 +299,12 @@ if ($dp < $dkills) {
                 //we need to run the hook, update the setting, and unlock.
                 savesetting("newdaySemaphore",gmdate("Y-m-d H:i:s"));
                 $sql = "UNLOCK TABLES";
-                db_query($sql);
+                DB::query($sql);
 				require("lib/newday/newday_runonce.php");
 			}else{
 	            //someone else beat us to it, unlock.
                 $sql = "UNLOCK TABLES";
-                db_query($sql);
+                DB::query($sql);
 			}
 		}
 
@@ -314,7 +314,7 @@ if ($dp < $dkills) {
 	$turnstoday = $args['turnstoday'];
 	//## Para que procese la stamina por el estado de ánimo
 	modulehook('stamina-newday', array('spirits'=>$spirits));
-	
+
 	debuglog("New Day Turns: $turnstoday");
 
 	//legacy support if you have no playername set

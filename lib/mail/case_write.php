@@ -7,11 +7,11 @@ $forwardto = (int) httppost('forwardto');
 if ($replyto>0) $msgid=$replyto;
 	else $msgid=$forwardto;
 if ($msgid>0){
-	$mail = db_prefix("mail");
-	$accounts = db_prefix("accounts");
+	$mail = DB::prefix("mail");
+	$accounts = DB::prefix("accounts");
 	$sql = "SELECT ".$mail.".sent,".$mail.".body,".$mail.".msgfrom, ".$mail.".subject,".$accounts.".login, ".$accounts.".superuser, ".$accounts.".name FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$msgid."\"";
-	$result = db_query($sql);
-	if ($row = db_fetch_assoc($result)){
+	$result = DB::query($sql);
+	if ($row = DB::fetch_assoc($result)){
 		if ($row['login']=="" && $forwardto==0) {
 			output("You cannot reply to a system message.`n`nPress the \"Back\" button in your browser to get back.");
 			$row=array();
@@ -24,9 +24,9 @@ if ($msgid>0){
 }
 $to = httpget('to');
 if ($to){
-	$sql = "SELECT login,name, superuser FROM " . db_prefix("accounts") . " WHERE login=\"$to\"";
-	$result = db_query($sql);
-	if (!($row = db_fetch_assoc($result))){
+	$sql = "SELECT login,name, superuser FROM " . DB::prefix("accounts") . " WHERE login=\"$to\"";
+	$result = DB::query($sql);
+	if (!($row = DB::fetch_assoc($result))){
 		output("Could not find that person.`n");
 	}
 }
@@ -66,27 +66,27 @@ if (isset($row['login']) && $row['login']!=""){
 }else{
 	output("`2To: ");
 	$to = httppost('to');
-	$sql = "SELECT login,name,superuser FROM ".db_prefix('accounts')." WHERE login = '".addslashes($to)."' AND locked = 0";
-	$result = db_query($sql);
-	$db_num_rows = db_num_rows($result);
-	if($db_num_rows != 1) {
+	$sql = "SELECT login,name,superuser FROM ".DB::prefix('accounts')." WHERE login = '".addslashes($to)."' AND locked = 0";
+	$result = DB::query($sql);
+	$DB::num_rows = DB::num_rows($result);
+	if($DB::num_rows != 1) {
 		$string="%";
 		$to_len = strlen($to);
 		for($x=0; $x < $to_len; ++$x) {
 			$string .= $to{$x}."%";
 		}
-		$sql = "SELECT login,name,superuser FROM " . db_prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
-		$result = db_query($sql);
-		$db_num_rows = db_num_rows($result);
+		$sql = "SELECT login,name,superuser FROM " . DB::prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
+		$result = DB::query($sql);
+		$DB::num_rows = DB::num_rows($result);
 	}
-	if ($db_num_rows==1){
-		$row = db_fetch_assoc($result);
+	if ($DB::num_rows==1){
+		$row = DB::fetch_assoc($result);
 		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
 		output_notl("`^{$row['name']}`n");
 		if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 			array_push($superusers,$row['login']);
 		}
-	}elseif ($db_num_rows==0){
+	}elseif ($DB::num_rows==0){
 		output("`\$No one was found who matches \"%s\".`n",stripslashes($to));
 		output("`@Please try again.`n");
 		httpset('prepop', $to, true);
@@ -96,7 +96,7 @@ if (isset($row['login']) && $row['login']!=""){
 	}else{
 		output_notl("<select name='to' id='to' onchange='check_su_warning();'>",true);
 		$superusers = array();
-		while($row = db_fetch_assoc($result)) {
+		while($row = DB::fetch_assoc($result)) {
 			output_notl("<option value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
 			require_once("lib/sanitize.php");
 			output_notl("%s", full_sanitize($row['name']));

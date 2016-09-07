@@ -5,27 +5,27 @@
 		$clanshort = httppost('clanshort');
 		if ($clanshort) $clanshort = full_sanitize($clanshort);
 		if ($clanname>"" && $clanshort>""){
-			$sql = "UPDATE " . db_prefix("clans") . " SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
+			$sql = "UPDATE " . DB::prefix("clans") . " SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
 			output("Updating clan names`n");
-			db_query($sql);
+			DB::query($sql);
 			invalidatedatacache("clandata-$detail");
 		}
 		if (httppost('block')>""){
 			$blockdesc = translate_inline("Description blocked for inappropriate usage.");
-			$sql = "UPDATE " . db_prefix("clans") . " SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
+			$sql = "UPDATE " . DB::prefix("clans") . " SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
 			output("Blocking public description`n");
-			db_query($sql);
+			DB::query($sql);
 			invalidatedatacache("clandata-$detail");
 		}elseif (httppost('unblock')>""){
-			$sql = "UPDATE " . db_prefix("clans") . " SET descauthor=0, clandesc='' where clanid='$detail'";
+			$sql = "UPDATE " . DB::prefix("clans") . " SET descauthor=0, clandesc='' where clanid='$detail'";
 			output("UNblocking public description`n");
-			db_query($sql);
+			DB::query($sql);
 			invalidatedatacache("clandata-$detail");
 		}
 	}
-	$sql = "SELECT * FROM " . db_prefix("clans") . " WHERE clanid='$detail'";
-	$result1 = db_query_cached($sql, "clandata-$detail", 3600);
-	$row1 = db_fetch_assoc($result1);
+	$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanid='$detail'";
+	$result1 = DB::query_cached($sql, "clandata-$detail", 3600);
+	$row1 = DB::fetch_assoc($result1);
 	if ($session['user']['superuser'] & SU_AUDIT_MODERATION){
 		rawoutput("<div id='hidearea'>");
 		rawoutput("<form action='clan.php?detail=$detail' method='POST'>");
@@ -64,15 +64,15 @@
 	rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
 	rawoutput("<tr class='trhead'><td>$rank</td><td>$name</td><td>$dk</td><td>$jd</td></tr>");
 	$i=0;
-	$sql = "SELECT acctid,name,login,clanrank,clanjoindate,dragonkills FROM " . db_prefix("accounts") . " WHERE clanid=$detail ORDER BY clanrank DESC,clanjoindate";
-	$result = db_query($sql);
+	$sql = "SELECT acctid,name,login,clanrank,clanjoindate,dragonkills FROM " . DB::prefix("accounts") . " WHERE clanid=$detail ORDER BY clanrank DESC,clanjoindate";
+	$result = DB::query($sql);
 	$tot = 0;
 	//little hack with the hook...can't think of any other way
 	$ranks = array(CLAN_APPLICANT=>"`!Applicant`0",CLAN_MEMBER=>"`#Member`0",CLAN_OFFICER=>"`^Officer`0",CLAN_LEADER=>"`&Leader`0", CLAN_FOUNDER=>"`\$Founder");
 	$args = modulehook("clanranks", array("ranks"=>$ranks, "clanid"=>$detail));
 	$ranks = translate_inline($args['ranks']);
 	//end
-	while ($row=db_fetch_assoc($result)){
+	while ($row=DB::fetch_assoc($result)){
 		$i++;
 		$tot += $row['dragonkills'];
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");

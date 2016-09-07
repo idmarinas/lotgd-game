@@ -10,7 +10,7 @@ check_su_access(SU_EDIT_CREATURES);
 
 tlschema("creatures");
 
-//this is a setup where all the creatures are generated. 
+//this is a setup where all the creatures are generated.
 $creaturetats=array();
 $creatureexp=14;
 $creaturegold=36;
@@ -71,8 +71,8 @@ if ($op == "save"){
 			$sql.=" forest='$forest', ";
 			$sql.=" graveyard='$grave', ";
 			$sql.=" createdby='".$session['user']['login']."' ";
-			$sql="UPDATE " . db_prefix("creatures") . " SET " . $sql . " WHERE creatureid='$id'";
-			$result=db_query($sql) or output("`\$".db_error()."`0`n`#$sql`0`n");
+			$sql="UPDATE " . DB::prefix("creatures") . " SET " . $sql . " WHERE creatureid='$id'";
+			$result=DB::query($sql) or output("`\$".DB::error()."`0`n`#$sql`0`n");
 		}else{
 			$cols = array();
 			$vals = array();
@@ -95,9 +95,9 @@ if ($op == "save"){
 					array_push($vals,$val);
 				}
 			}
-			$sql="INSERT INTO " . db_prefix("creatures") . " (".join(",",$cols).",createdby) VALUES (\"".join("\",\"",$vals)."\",\"".addslashes($session['user']['login'])."\")";
-			$result=db_query($sql);
-			$id = db_insert_id();
+			$sql="INSERT INTO " . DB::prefix("creatures") . " (".join(",",$cols).",createdby) VALUES (\"".join("\",\"",$vals)."\",\"".addslashes($session['user']['login'])."\")";
+			$result=DB::query($sql);
+			$id = DB::insert_id();
 		}
 		if ($result) {
 			output("`^Creature saved!`0`n");
@@ -123,13 +123,13 @@ if ($op == "save"){
 $op = httpget('op');
 $id = httpget('creatureid');
 if ($op=="del"){
-	$sql = "DELETE FROM " . db_prefix("creatures") . " WHERE creatureid = '$id'";
-	db_query($sql);
-	if (db_affected_rows()>0){
+	$sql = "DELETE FROM " . DB::prefix("creatures") . " WHERE creatureid = '$id'";
+	DB::query($sql);
+	if (DB::affected_rows()>0){
 		output("Creature deleted`n`n");
 		module_delete_objprefs('creatures',$id);
 	}else{
-		output("Creature not deleted: %s", db_error());//Eliminado el LINK, ya no es necesario
+		output("Creature not deleted: %s", DB::error());//Eliminado el LINK, ya no es necesario
 	}
 	$op="";
 	httpset('op', "");
@@ -143,8 +143,8 @@ if ($op=="" || $op=="search"){
 	} else {
 		$where = "creaturelevel='$level'";
 	}
-	$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE $where ORDER BY creaturelevel,creaturename";
-	$result = db_query($sql);
+	$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE $where ORDER BY creaturelevel,creaturename";
+	$result = DB::query($sql);
 	// Search form
 	$search = translate_inline("Search");
 	rawoutput("<form action='creatures.php?op=search' method='POST'>");
@@ -156,9 +156,9 @@ if ($op=="" || $op=="search"){
 	addnav("","creatures.php?op=search");
 
 	addnav("Levels");
-	$sql1 = "SELECT count(creatureid) AS n,creaturelevel FROM " . db_prefix("creatures") . " group by creaturelevel order by creaturelevel";
-	$result1 = db_query($sql1);
-	while ($row = db_fetch_assoc($result1)) {
+	$sql1 = "SELECT count(creatureid) AS n,creaturelevel FROM " . DB::prefix("creatures") . " group by creaturelevel order by creaturelevel";
+	$result1 = DB::query($sql1);
+	while ($row = DB::fetch_assoc($result1)) {
 		addnav(array("Level %s: (%s creatures)", $row['creaturelevel'], $row['n']),
 				"creatures.php?level={$row['creaturelevel']}");
 	}
@@ -186,7 +186,7 @@ if ($op=="" || $op=="search"){
 	rawoutput("<td>$opshead</td><td>$name</td><td>$cat</td><td>$weapon</td><td>$script</td><td>$winmsg</td><td>$diemsg</td><td>$author</td></tr>");
 	addnav("","creatures.php");
 	$i=true;
-	while ($row = db_fetch_assoc($result)) {
+	while ($row = DB::fetch_assoc($result)) {
 		$i=!$i;
 		rawoutput("<tr class='".($i?"trdark":"trlight")."'>", true);
 		rawoutput("<td class='uk-text-nowrap'>[ <a href='creatures.php?op=edit&creatureid={$row['creatureid']}'>");
@@ -232,12 +232,12 @@ if ($op=="" || $op=="search"){
 			addnav("", "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
 		} else {
 			if ($op=="edit" && $id!=""){
-				$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE creatureid=$id";
-				$result = db_query($sql);
-				if (db_num_rows($result)<>1){
+				$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creatureid=$id";
+				$result = DB::query($sql);
+				if (DB::num_rows($result)<>1){
 					output("`4Error`0, that creature was not found!");
 				}else{
-					$row = db_fetch_assoc($result);
+					$row = DB::fetch_assoc($result);
 				}
 				$level = $row['creaturelevel'];
 			} else {

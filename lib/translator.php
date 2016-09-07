@@ -58,15 +58,15 @@ function translate($indata,$namespace=FALSE){
 				// It has been requested to be removed.
 				/*
 				if (getsetting("collecttexts", false)) {
-					$sql = "DELETE FROM " . db_prefix("untranslated") .
+					$sql = "DELETE FROM " . DB::prefix("untranslated") .
 						" WHERE intext='" . addslashes($indata) .
 						"' AND language='" . LANGUAGE . "'";
-					db_query($sql);
+					DB::query($sql);
 				}
 				*/
 			} elseif (getsetting("collecttexts", false)) {
-				$sql = "INSERT IGNORE INTO " .  db_prefix("untranslated") .  " (intext,language,namespace) VALUES ('" .  addslashes($indata) . "', '" . LANGUAGE . "', " .  "'$namespace')";
-				db_query($sql,false);
+				$sql = "INSERT IGNORE INTO " .  DB::prefix("untranslated") .  " (intext,language,namespace) VALUES ('" .  addslashes($indata) . "', '" . LANGUAGE . "', " .  "'$namespace')";
+				DB::query($sql,false);
 			}
 			tlbutton_push($indata,!$foundtranslation,$namespace);
 		} else {
@@ -127,7 +127,7 @@ function translate_mail($in,$to=0){
 	//this is done by sprintf_translate.
 	//$in[0] = str_replace("`%","`%%",$in[0]);
 	if ($to>0){
-		$language = db_fetch_assoc(db_query("SELECT prefs FROM ".db_prefix("accounts")." WHERE acctid=$to"));
+		$language = DB::fetch_assoc(DB::query("SELECT prefs FROM ".DB::prefix("accounts")." WHERE acctid=$to"));
 		$language['prefs'] = unserialize($language['prefs']);
 		$session['tlanguage'] = $language['prefs']['language']?$language['prefs']['language']:getsetting("defaultlanguage","en");
 	}
@@ -159,18 +159,18 @@ function translate_loadnamespace($namespace,$language=false){
 		$where = "(uri='$page' OR uri='$uri')";
 	$sql = "
 		SELECT intext,outtext
-		FROM ".db_prefix("translations")."
+		FROM ".DB::prefix("translations")."
 		WHERE language='$language'
 			AND $where";
 /*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1")))); */
 	if (!getsetting("cachetranslations",0)) {
-		$result = db_query($sql);
+		$result = DB::query($sql);
 	} else {
-		$result = db_query_cached($sql,"translations-".$namespace."-".$language,600);
+		$result = DB::query_cached($sql,"translations-".$namespace."-".$language,600);
 		//store it for 10 Minutes, normally you don't need to refresh this often
 	}
 	$out = array();
-	while ($row = db_fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result)){
 		$out[$row['intext']] = $row['outtext'];
 	}
 	return $out;

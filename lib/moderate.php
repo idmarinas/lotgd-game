@@ -33,7 +33,7 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 	//works here with %, so we need a LIKE and explode it if not empty
 	if ($excludes!='') {
 		$array=explode(',',$excludes);
-		foreach ($array as $entry) {	
+		foreach ($array as $entry) {
 			$sectselect.="section NOT LIKE '$entry' AND ";
 		}
 	}
@@ -71,13 +71,13 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 	if ($com > 0 || $cid > 0) {
 		// Find newly added comments.
 		$sql = "SELECT COUNT(commentid) AS newadded FROM " .
-			db_prefix("commentary") . " LEFT JOIN " .
-			db_prefix("accounts") . " ON " .
-			db_prefix("accounts") . ".acctid = " .
-			db_prefix("commentary"). ".author WHERE $sectselect " .
-			"(".db_prefix("accounts").".locked=0 or ".db_prefix('accounts').".locked is null) AND commentid > '$cid'";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
+			DB::prefix("commentary") . " LEFT JOIN " .
+			DB::prefix("accounts") . " ON " .
+			DB::prefix("accounts") . ".acctid = " .
+			DB::prefix("commentary"). ".author WHERE $sectselect " .
+			"(".DB::prefix("accounts").".locked=0 or ".DB::prefix('accounts').".locked is null) AND commentid > '$cid'";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
 		$newadded = $row['newadded'];
 	} else {
 		$newadded = 0;
@@ -85,45 +85,45 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 
 	$commentbuffer = array();
 	if ($cid == 0) {
-		$sql = "SELECT ". db_prefix("commentary") . ".*, " .
-			db_prefix("accounts").".name, " .
-			db_prefix("accounts").".acctid, " .
-			db_prefix("accounts").".clanrank, " .
-			db_prefix("clans") .  ".clanshort FROM " .
-			db_prefix("commentary") . " LEFT JOIN " .
-			db_prefix("accounts") . " ON " .
-			db_prefix("accounts") .  ".acctid = " .
-			db_prefix("commentary"). ".author LEFT JOIN " .
-			db_prefix("clans") . " ON " .
-			db_prefix("clans") . ".clanid=" .
-			db_prefix("accounts") .
+		$sql = "SELECT ". DB::prefix("commentary") . ".*, " .
+			DB::prefix("accounts").".name, " .
+			DB::prefix("accounts").".acctid, " .
+			DB::prefix("accounts").".clanrank, " .
+			DB::prefix("clans") .  ".clanshort FROM " .
+			DB::prefix("commentary") . " LEFT JOIN " .
+			DB::prefix("accounts") . " ON " .
+			DB::prefix("accounts") .  ".acctid = " .
+			DB::prefix("commentary"). ".author LEFT JOIN " .
+			DB::prefix("clans") . " ON " .
+			DB::prefix("clans") . ".clanid=" .
+			DB::prefix("accounts") .
 			".clanid WHERE $sectselect " .
-			"( ".db_prefix("accounts") . ".locked=0 OR ".db_prefix("accounts") .".locked is null ) ".
+			"( ".DB::prefix("accounts") . ".locked=0 OR ".DB::prefix("accounts") .".locked is null ) ".
 			"ORDER BY commentid DESC LIMIT " .
 			($com*$limit).",$limit";
 		if ($com==0 && strstr( $_SERVER['REQUEST_URI'], "/moderate.php" ) !== $_SERVER['REQUEST_URI'] )
-			$result = db_query_cached($sql,"comments-{$section}");
+			$result = DB::query_cached($sql,"comments-{$section}");
 		else
-			$result = db_query($sql);
-		while($row = db_fetch_assoc($result)) $commentbuffer[] = $row;
+			$result = DB::query($sql);
+		while($row = DB::fetch_assoc($result)) $commentbuffer[] = $row;
 	} else {
-		$sql = "SELECT " . db_prefix("commentary") . ".*, " .
-			db_prefix("accounts").".name, " .
-			db_prefix("accounts").".acctid, " .
-			db_prefix("accounts").".clanrank, " .
-			db_prefix("clans").".clanshort FROM " .
-			db_prefix("commentary") . " LEFT JOIN " .
-			db_prefix("accounts") . " ON " .
-			db_prefix("accounts") . ".acctid = " .
-			db_prefix("commentary"). ".author LEFT JOIN " .
-			db_prefix("clans") . " ON " . db_prefix("clans") . ".clanid=" .
-			db_prefix("accounts") .
+		$sql = "SELECT " . DB::prefix("commentary") . ".*, " .
+			DB::prefix("accounts").".name, " .
+			DB::prefix("accounts").".acctid, " .
+			DB::prefix("accounts").".clanrank, " .
+			DB::prefix("clans").".clanshort FROM " .
+			DB::prefix("commentary") . " LEFT JOIN " .
+			DB::prefix("accounts") . " ON " .
+			DB::prefix("accounts") . ".acctid = " .
+			DB::prefix("commentary"). ".author LEFT JOIN " .
+			DB::prefix("clans") . " ON " . DB::prefix("clans") . ".clanid=" .
+			DB::prefix("accounts") .
 			".clanid WHERE $sectselect " .
-			"( ".db_prefix("accounts") . ".locked=0 OR ".db_prefix("accounts") .".locked is null ) ".
+			"( ".DB::prefix("accounts") . ".locked=0 OR ".DB::prefix("accounts") .".locked is null ) ".
 			"AND commentid > '$cid' " .
 			"ORDER BY commentid ASC LIMIT $limit";
-		$result = db_query($sql);
-		while ($row = db_fetch_assoc($result)) $commentbuffer[] = $row;
+		$result = DB::query($sql);
+		while ($row = DB::fetch_assoc($result)) $commentbuffer[] = $row;
 		$commentbuffer = array_reverse($commentbuffer);
 	}
 
@@ -351,9 +351,9 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 	$next = translate_inline("Next &gt;");
 	$lastu = translate_inline("Last Page &gt;&gt;");
 	if ($rowcount>=$limit || $cid>0){
-		$sql = "SELECT count(commentid) AS c FROM " . db_prefix("commentary") . " WHERE section='$section' AND postdate > '{$session['user']['recentcomments']}'";
-		$r = db_query($sql);
-		$val = db_fetch_assoc($r);
+		$sql = "SELECT count(commentid) AS c FROM " . DB::prefix("commentary") . " WHERE section='$section' AND postdate > '{$session['user']['recentcomments']}'";
+		$r = DB::query($sql);
+		$val = DB::fetch_assoc($r);
 		$val = round($val['c'] / $limit + 0.5,0) - 1;
 		if ($val>0){
 			$first = comscroll_sanitize($REQUEST_URI)."&comscroll=".($val);
@@ -410,7 +410,7 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 	}else{
 		output_notl("$next $lastu",true);
 	}
-	if (!$cc) db_free_result($result);
+	if (!$cc) DB::free_result($result);
 	tlschema();
 	if ($needclose) modulehook("}collapse");
 }

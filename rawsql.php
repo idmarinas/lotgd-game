@@ -22,17 +22,17 @@ if ($op=="" || $op=="sql"){
 	if ($sql != "") {
 		$sql = stripslashes($sql);
 		modulehook("rawsql-execsql",array("sql"=>$sql));
-		$r = db_query($sql, false);
+		$r = DB::query($sql, false);
 		if (!$r) {
-			output("`\$SQL Error:`& %s`0`n`n",db_error($r));
+			output("`\$SQL Error:`& %s`0`n`n",DB::error($r));
 		} else {
-			if (db_affected_rows() > 0) {
-				output("`&%s rows affected.`n`n",db_affected_rows());
+			if (DB::affected_rows() > 0) {
+				output("`&%s rows affected.`n`n",DB::affected_rows());
 			}
 			rawoutput("<table cellspacing='1' cellpadding='2' border='0' bgcolor='#999999'>");
-			$number = db_num_rows($r);
+			$number = DB::num_rows($r);
 			for ($i = 0; $i < $number; $i++) {
-				$row = db_fetch_assoc($r);
+				$row = DB::fetch_assoc($r);
 				if ($i == 0) {
 					rawoutput("<tr class='trhead'>");
 					$keys = array_keys($row);

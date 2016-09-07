@@ -154,18 +154,18 @@ if ($op=="search"){
 				switch($packofmonsters) {
 					case false:
 						$multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
-						$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 $multicat ORDER BY rand(".e_rand().") LIMIT $multi";
+						$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 $multicat ORDER BY rand(".e_rand().") LIMIT $multi";
 						break;
 					case true:
-						$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
+						$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
 						break;
 				}
 			} else {
-				$sql = "SELECT * FROM " . db_prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
+				$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
 			}
-			$result = db_query($sql);
+			$result = DB::query($sql);
 			restore_buff_fields();
-			if (db_num_rows($result) == 0) {
+			if (DB::num_rows($result) == 0) {
 				// There is nothing in the database to challenge you, let's
 				// give you a doppleganger.
 				$badguy = array();
@@ -183,7 +183,7 @@ if ($op=="search"){
 			} else {
 				require_once("lib/forestoutcomes.php");
 				if ($packofmonsters == true) {
-					$initialbadguy = db_fetch_assoc($result);
+					$initialbadguy = DB::fetch_assoc($result);
 					$prefixs = array("Elite","Dangerous","Lethal","Savage","Deadly","Malevolent","Malignant");
 					for($i=0;$i<$multi;$i++) {
 						$initialbadguy['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
@@ -220,7 +220,7 @@ if ($op=="search"){
 						output("`2You encounter a group of `^%i`2 %s`2.`n`n", $multi, $badguy['creaturename']);
 					}
 				} else {
-					while ($badguy = db_fetch_assoc($result)) {
+					while ($badguy = DB::fetch_assoc($result)) {
 						//decode and test the AI script file in place if any
 						$aiscriptfile=$badguy['creatureaiscript'].".php";
 						if (file_exists($aiscriptfile)) {

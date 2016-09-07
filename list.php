@@ -32,9 +32,9 @@ if ($session['user']['loggedin']) {
 
 $playersperpage=50;
 
-$sql = "SELECT count(acctid) AS c FROM " . db_prefix("accounts") . " WHERE locked=0";
-$result = db_query($sql);
-$row = db_fetch_assoc($result);
+$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts") . " WHERE locked=0";
+$result = DB::query($sql);
+$row = DB::fetch_assoc($result);
 $totalplayers = $row['c'];
 
 $op = httpget('op');
@@ -44,7 +44,7 @@ $limit = "";
 
 if ($op=="search"){
 	$search="%";
-	$n = mysql_real_escape_string(httppost('name'));
+	$n = DB::quoteValue(httppost('name'));
 	for ($x=0;$x<strlen($n);$x++){
 		$search .= substr($n,$x,1)."%";
 	}
@@ -73,12 +73,12 @@ for ($i=0;$i<$totalplayers;$i+=$playersperpage){
 // wouldn't show up
 if ($page=="" && $op==""){
 	$title = translate_inline("Warriors Currently Online");
-	$sql = "SELECT acctid,name,login,alive,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . db_prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' ORDER BY level DESC, dragonkills DESC, login ASC";
-	$result = db_query_cached($sql,"list.php-warsonline");
+	$sql = "SELECT acctid,name,login,alive,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . DB::prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' ORDER BY level DESC, dragonkills DESC, login ASC";
+	$result = DB::query_cached($sql,"list.php-warsonline");
 }elseif($op=='clan'){
 	$title = translate_inline("Clan Members Online");
-	$sql = "SELECT acctid,name,login,alive,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . db_prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' AND clanid='{$session['user']['clanid']}' ORDER BY level DESC, dragonkills DESC, login ASC";
-	$result = db_query($sql);
+	$sql = "SELECT acctid,name,login,alive,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . DB::prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."' AND clanid='{$session['user']['clanid']}' ORDER BY level DESC, dragonkills DESC, login ASC";
+	$result = DB::query($sql);
 }else{
 	if ($totalplayers > $playersperpage && $op != "search") {
 		$title = sprintf_translate("Warriors of the realm (Page %s: %s-%s of %s)", ($pageoffset/$playersperpage+1), $from, $to, $totalplayers);
@@ -86,8 +86,8 @@ if ($page=="" && $op==""){
 		$title = sprintf_translate("Warriors of the realm");
 	}
 	rawoutput(tlbutton_clear());
-	$sql = "SELECT acctid,name,login,alive,hitpoints,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . db_prefix("accounts") . " WHERE locked=0 $search ORDER BY level DESC, dragonkills DESC, login ASC $limit";
-	$result = db_query($sql);
+	$sql = "SELECT acctid,name,login,alive,hitpoints,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM " . DB::prefix("accounts") . " WHERE locked=0 $search ORDER BY level DESC, dragonkills DESC, login ASC $limit";
+	$result = DB::query($sql);
 }
 if ($session['user']['loggedin']){
 	$search = translate_inline("Search by name: ");
@@ -97,7 +97,7 @@ if ($session['user']['loggedin']){
 	addnav("","list.php?op=search");
 }
 
-$max = db_num_rows($result);
+$max = DB::num_rows($result);
 if ($max>getsetting("maxlistsize", 100)) {
 	output("`\$Too many names match that search.  Showing only the first %s.`0`n", getsetting("maxlistsize", 100));
 	$max = getsetting("maxlistsize", 100);
@@ -123,7 +123,7 @@ $alive = translate_inline("`1Yes`0");
 $dead = translate_inline("`4No`0");
 $unconscious = translate_inline("`6Unconscious`0");
 for($i=0;$i<$max;$i++){
-	$row = db_fetch_assoc($result);
+	$row = DB::fetch_assoc($result);
 	rawoutput("<tr class='".($i%2?"trdark":"trlight")."'><td>",true);
 	if ($row['alive'] == true) {
 		$a = $alive;

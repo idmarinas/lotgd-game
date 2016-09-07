@@ -9,20 +9,20 @@
 			$session['user']['clanid']=$to;
 			$session['user']['clanrank']=CLAN_APPLICANT;
 			$session['user']['clanjoindate']=date("Y-m-d H:i:s");
-			$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE clanid='{$session['user']['clanid']}' AND clanrank>=".CLAN_OFFICER;
-			$result = db_query($sql);
-			$sql = "DELETE FROM . ".  db_prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($apply_subj))."'";
-			db_query($sql);
-			while ($row = db_fetch_assoc($result)){
+			$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE clanid='{$session['user']['clanid']}' AND clanrank>=".CLAN_OFFICER;
+			$result = DB::query($sql);
+			$sql = "DELETE FROM . ".  DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($apply_subj))."'";
+			DB::query($sql);
+			while ($row = DB::fetch_assoc($result)){
 				$msg = array("`^You have a new clan applicant!  `&%s`^ has completed a membership application for your clan!",$session['user']['name']);
 				systemmail($row['acctid'],$apply_subj,$msg);
 			}
 
 			// send reminder mail if clan of choice has a description
 
-			$sql = "SELECT * FROM " . db_prefix("clans") . " WHERE clanid='$to'";
-			$res = db_query_cached($sql, "clandata-$to", 3600);
-			$row = db_fetch_assoc($res);
+			$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanid='$to'";
+			$res = DB::query_cached($sql, "clandata-$to", 3600);
+			$row = DB::fetch_assoc($res);
 
 			if ( nltoappon($row['clandesc']) != "" ) {
 
@@ -41,17 +41,17 @@
 					$order='c DESC';
 					break;
 			}
-			$sql = "SELECT MAX(" . db_prefix("clans") . ".clanid) AS clanid,MAX(clanname) AS clanname,count(" . db_prefix("accounts") . ".acctid) AS c FROM " . db_prefix("clans") . " INNER JOIN " . db_prefix("accounts") . " ON " . db_prefix("clans") . ".clanid=" . db_prefix("accounts") . ".clanid WHERE " . db_prefix("accounts") . ".clanrank > ".CLAN_APPLICANT." GROUP BY " . db_prefix("clans") . ".clanid ORDER BY $order";
-			$result = db_query($sql);
-			if (db_num_rows($result)>0){
+			$sql = "SELECT MAX(" . DB::prefix("clans") . ".clanid) AS clanid,MAX(clanname) AS clanname,count(" . DB::prefix("accounts") . ".acctid) AS c FROM " . DB::prefix("clans") . " INNER JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("clans") . ".clanid=" . DB::prefix("accounts") . ".clanid WHERE " . DB::prefix("accounts") . ".clanrank > ".CLAN_APPLICANT." GROUP BY " . DB::prefix("clans") . ".clanid ORDER BY $order";
+			$result = DB::query($sql);
+			if (DB::num_rows($result)>0){
 				output("`7You ask %s`7 for a clan membership application form.",$registrar);
 				output("She opens a drawer in her desk and pulls out a form.  It contains only two lines: Name and Clan Name.");
 				output("You furrow your brow, not sure if you really like having to deal with all this red tape, and get set to concentrate really hard in order to complete the form.");
 				output("Noticing your attempt to write on the form with your %s, %s`7 claims the form back from you, writes %s`7 on the first line, and asks you the name of the clan that you'd like to join:`n`n",$session['user']['weapon'],$registrar,$session['user']['name']);
-				while ($row = db_fetch_assoc($result)) {
+				while ($row = DB::fetch_assoc($result)) {
 					if ($row['c']==0){
-						$sql = "DELETE FROM " . db_prefix("clans") . " WHERE clanid={$row['clanid']}";
-						db_query($sql);
+						$sql = "DELETE FROM " . DB::prefix("clans") . " WHERE clanid={$row['clanid']}";
+						DB::query($sql);
 					}else{
 /*//*/					$row = modulehook("clan-applymember", $row);
 /*//*/					if (isset($row['handled']) && $row['handled']) continue;

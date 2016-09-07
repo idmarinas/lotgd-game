@@ -11,8 +11,8 @@
 			$clanshort = full_sanitize($ocs);
 			if (getsetting('clanshortnamesanitize',0)) $clanshort = preg_replace("'[^[:alpha:]]'","",$clanshort);
 			httppostset('clanshort', $clanshort);
-			$sql = "SELECT * FROM " . db_prefix("clans") . " WHERE clanname='$clanname'";
-			$result = db_query($sql);
+			$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanname='$clanname'";
+			$result = DB::query($sql);
 			$e = array (translate_inline("%s`7 looks over your form but informs you that your clan name must consist only of letters, spaces, apostrophes, or dashes.  Also, your short name can consist only of letters. She hands you a blank form."),
 				translate_inline("%s`7 looks over your form but informs you that you must have at least 5 and no more than 50 characters in your clan's name (and they must consist only of letters, spaces, apostrophes, or dashes), then hands you a blank form."),
 				translate_inline("%s`7 looks over your form but informs you that you must have at least 2 and no more than %s characters in your clan's short name (and they must all be letters), then hands you a blank form."),
@@ -35,7 +35,7 @@
 				output_notl($e[2],$registrar,getsetting('clanshortnamelength',5));
 				clanform();
 				addnav("Return to the Lobby","clan.php");
-			}elseif (db_num_rows($result)>0){
+			}elseif (DB::num_rows($result)>0){
 				output_notl($e[3],$registrar,stripslashes($clanname));
 				clanform();
 				addnav("Return to the Lobby","clan.php");
@@ -43,9 +43,9 @@
 				//too many stupids put < and > in their clanshort name -_-
 				$clanshort=str_replace("<","",$clanshort);
 				$clanshort=str_replace(">","",$clanshort);
-				$sql = "SELECT * FROM " . db_prefix("clans") . " WHERE clanshort='$clanshort'";
-				$result = db_query($sql);
-				if (db_num_rows($result)>0){
+				$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanshort='$clanshort'";
+				$result = DB::query($sql);
+				if (DB::num_rows($result)>0){
 					output_notl($e[4],$registrar,stripslashes($clanshort));
 					clanform();
 					addnav("Return to the Lobby","clan.php");
@@ -64,9 +64,9 @@
 /*//*/							clanform();
 /*//*/							addnav("Return to the Lobby","clan.php");
 /*//*/						} else {
-							$sql = "INSERT INTO " . db_prefix("clans") . " (clanname,clanshort) VALUES ('$clanname','$clanshort')";
-							db_query($sql);
-							$id = db_insert_id();
+							$sql = "INSERT INTO " . DB::prefix("clans") . " (clanname,clanshort) VALUES ('$clanname','$clanshort')";
+							DB::query($sql);
+							$id = DB::insert_id();
 							$session['user']['clanid'] = $id;
 							$session['user']['clanrank']=CLAN_LEADER+1; //+1 because he is the founder
 							$session['user']['clanjoindate']=date("Y-m-d H:i:s");

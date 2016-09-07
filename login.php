@@ -38,11 +38,11 @@ if ($name!=""){
 		//## Modificación: Se comprueba antes de procesar la petición si la IP está bloqueada
 		checkban(); //check if this computer is banned
 		//## Fin modificación
-		
-		$sql = "SELECT * FROM " . db_prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
-		$result = db_query($sql);
-		if (db_num_rows($result)==1){
-			$session['user']=db_fetch_assoc($result);
+
+		$sql = "SELECT * FROM " . DB::prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
+		$result = DB::query($sql);
+		if (DB::num_rows($result)==1){
+			$session['user']=DB::fetch_assoc($result);
 			$baseaccount = $session['user'];
 			checkban($session['user']['login']); //check if this account is banned
 			// If the player isn't allowed on for some reason, anything on
@@ -94,7 +94,7 @@ if ($name!=""){
 					exit();
 				}
 
-				db_query("UPDATE " . db_prefix("accounts") . " SET loggedin=".true.", laston='".date("Y-m-d H:i:s")."' WHERE acctid = ".$session['user']['acctid']);
+				DB::query("UPDATE " . DB::prefix("accounts") . " SET loggedin=".true.", laston='".date("Y-m-d H:i:s")."' WHERE acctid = ".$session['user']['acctid']);
 
 				$session['user']['loggedin']=true;
 				$location = $session['user']['location'];
@@ -115,24 +115,24 @@ if ($name!=""){
 			$session['message']=translate_inline("`4Error, your login was incorrect`0");
 			//now we'll log the failed attempt and begin to issue bans if
 			//there are too many, plus notify the admins.
-			$sql = "DELETE FROM " . db_prefix("faillog") . " WHERE date<'".date("Y-m-d H:i:s",strtotime("-".(getsetting("expirecontent",180)/4)." days"))."'";
+			$sql = "DELETE FROM " . DB::prefix("faillog") . " WHERE date<'".date("Y-m-d H:i:s",strtotime("-".(getsetting("expirecontent",180)/4)." days"))."'";
 			checkban();
-			//db_query($sql);
-			$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='$name'";
-			$result = db_query($sql);
-			if (db_num_rows($result)>0){
+			//DB::query($sql);
+			$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$name'";
+			$result = DB::query($sql);
+			if (DB::num_rows($result)>0){
 				// just in case there manage to be multiple accounts on
 				// this name.
-				while ($row=db_fetch_assoc($result)){
+				while ($row=DB::fetch_assoc($result)){
 					$post = httpallpost();
-					$sql = "INSERT INTO " . db_prefix("faillog") . " VALUES (0,'".date("Y-m-d H:i:s")."','".addslashes(serialize($post))."','{$_SERVER['REMOTE_ADDR']}','{$row['acctid']}','{$_COOKIE['lgi']}')";
-					db_query($sql);
-					$sql = "SELECT " . db_prefix("faillog") . ".*," . db_prefix("accounts") . ".superuser,name,login FROM " . db_prefix("faillog") . " INNER JOIN " . db_prefix("accounts") . " ON " . db_prefix("accounts") . ".acctid=" . db_prefix("faillog") . ".acctid WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND date>'".date("Y-m-d H:i:s",strtotime("-1 day"))."'";
-					$result2 = db_query($sql);
+					$sql = "INSERT INTO " . DB::prefix("faillog") . " VALUES (0,'".date("Y-m-d H:i:s")."','".addslashes(serialize($post))."','{$_SERVER['REMOTE_ADDR']}','{$row['acctid']}','{$_COOKIE['lgi']}')";
+					DB::query($sql);
+					$sql = "SELECT " . DB::prefix("faillog") . ".*," . DB::prefix("accounts") . ".superuser,name,login FROM " . DB::prefix("faillog") . " INNER JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid=" . DB::prefix("faillog") . ".acctid WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND date>'".date("Y-m-d H:i:s",strtotime("-1 day"))."'";
+					$result2 = DB::query($sql);
 					$c=0;
 					$alert="";
 					$su=false;
-					while ($row2=db_fetch_assoc($result2)){
+					while ($row2=DB::fetch_assoc($result2)){
 						if ($row2['superuser']>0) {$c+=1; $su=true;}
 						$c+=1;
 						$alert.="`3{$row2['date']}`7: Failed attempt from `&{$row2['ip']}`7 [`3{$row2['id']}`7] to log on to `^{$row2['login']}`7 ({$row2['name']}`7)`n";
@@ -140,27 +140,27 @@ if ($name!=""){
 					if ($c>=10){
 						// 5 failed attempts for superuser, 10 for regular user
 						$banmessage=translate_inline("Automatic System Ban: Too many failed login attempts.");
-						//$sql = "INSERT INTO " . db_prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+".($c*3)." hours"))."','$banmessage','System','0000-00-00 00:00:00')";
-						$sql = "INSERT INTO " . db_prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+15 minutes"))."','$banmessage','System','0000-00-00 00:00:00')";
-						db_query($sql);
+						//$sql = "INSERT INTO " . DB::prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+".($c*3)." hours"))."','$banmessage','System','0000-00-00 00:00:00')";
+						$sql = "INSERT INTO " . DB::prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+15 minutes"))."','$banmessage','System','0000-00-00 00:00:00')";
+						DB::query($sql);
 						if ($su){
 							// send a system message to admins regarding
 							// this failed attempt if it includes superusers.
-							$sql = "SELECT acctid FROM " . db_prefix("accounts") ." WHERE (superuser&".SU_EDIT_USERS.")";
-							$result2 = db_query($sql);
+							$sql = "SELECT acctid FROM " . DB::prefix("accounts") ." WHERE (superuser&".SU_EDIT_USERS.")";
+							$result2 = DB::query($sql);
 							$subj = translate_mail(array("`#%s failed to log in too many times!",$_SERVER['REMOTE_ADDR']),0);
-							while ($row2 = db_fetch_assoc($result2)) {
+							while ($row2 = DB::fetch_assoc($result2)) {
 								//delete old messages that
-								$sql = "DELETE FROM " . db_prefix("mail") . " WHERE msgto={$row2['acctid']} AND msgfrom=0 AND subject = '".serialize($subj)."' AND seen=0";
-								db_query($sql);
-								if (db_affected_rows()>0) $noemail = true; else $noemail = false;
+								$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgto={$row2['acctid']} AND msgfrom=0 AND subject = '".serialize($subj)."' AND seen=0";
+								DB::query($sql);
+								if (DB::affected_rows()>0) $noemail = true; else $noemail = false;
 								$msg = translate_mail(array("This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s",$alert),0);
 								systemmail($row2['acctid'],$subj,$msg,0,$noemail);
 							}//end for
 						}//end if($su)
 					}//end if($c>=10)
 				}//end while
-			}//end if (db_num_rows)
+			}//end if (DB::num_rows)
 			redirect("index.php");
 		}
 	}
@@ -174,8 +174,8 @@ if ($name!=""){
 		} else {
 			$session['user']['restorepage']="news.php";
 		}
-	  $sql = "UPDATE " . db_prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
-		db_query($sql);
+	  $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
+		DB::query($sql);
 		invalidatedatacache("charlisthomepage");
 		invalidatedatacache("list.php-warsonline");
 

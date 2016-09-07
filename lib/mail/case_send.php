@@ -1,18 +1,18 @@
 <?php
 $to = httppost('to');
-$sql = "SELECT acctid FROM " . db_prefix("accounts") . " WHERE login='$to'";
-$result = db_query($sql);
+$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$to'";
+$result = DB::query($sql);
 $return = (int) httppost("returnto");
-if(db_num_rows($result)>0){
-	$row1 = db_fetch_assoc($result);
+if(DB::num_rows($result)>0){
+	$row1 = DB::fetch_assoc($result);
 	if (getsetting("onlyunreadmails",true)) {
 		$maillimitsql = "AND seen=0";
 	} else {
 		$maillimitsql = "";
 	}
-	$sql = "SELECT count(messageid) AS count FROM " . db_prefix("mail") . " WHERE msgto='".$row1['acctid']."' $maillimitsql";
-	$result = db_query($sql);
-	$row = db_fetch_assoc($result);
+	$sql = "SELECT count(messageid) AS count FROM " . DB::prefix("mail") . " WHERE msgto='".$row1['acctid']."' $maillimitsql";
+	$result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	if ($row['count']>=getsetting("inboxlimit",50)) {
 		output("`\$You cannot send that person mail, their mailbox is full!`0`n`n");
 	}else{

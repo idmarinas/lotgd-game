@@ -23,8 +23,8 @@
 			output("`7You tell `%%s`7 that you're no longer interested in joining %s.",$registrar, $claninfo['clanname']);
 			output("She reaches into her desk, withdraws your application, and tears it up.  \"`5You wouldn't have been happy there anyhow, I don't think,`7\" as she tosses the shreds in her trash can.");
 			$claninfo = array();
-			$sql = "DELETE FROM " . db_prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($apply_subj))."'";
-			db_query($sql);
+			$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($apply_subj))."'";
+			DB::query($sql);
 			output("You are not a member of any clan.");
 			addnav("Apply for Membership to a Clan","clan.php?op=apply");
 			addnav("Apply for a New Clan","clan.php?op=new");
