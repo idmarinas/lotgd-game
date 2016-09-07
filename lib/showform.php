@@ -91,7 +91,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		);
 	}
 
-	rawoutput(sprintf('<ul class="uk-switcher uk-margin" id="form-%s"><li>%s</li></ul>',
+	rawoutput(sprintf('<ul class="uk-switcher" id="form-%s"><li>%s</li></ul>',
 			$showform_id,
 			implode('</li><li>', $content)
 		)
