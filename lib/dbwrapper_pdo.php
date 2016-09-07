@@ -176,8 +176,7 @@ Class DB
 	//-- Liberar resultados
 	public static function free_result($result)
 	{
-		if (is_array($result)) unset($result);//cached data
-		else return true;
+		unset($result);
 	}
 
 	//& at the start returns a reference to the data array.
@@ -357,70 +356,124 @@ Class DB
 }
 
 /**
- * Funciones legado, para que funcionen en todos los módulso y partes del juego
+ * Funciones legado, para que funcionen en todos los módulos y partes del juego
  */
-function db_connect($host, $user, $pass, $database)
-{
-	$adapter = [
-            'hostname' => $host,
-            'database' => $database,
-            'charset' => 'utf8',
-            'username' => $user,
-            'password' => $pass
-        ];
-	DB::setAdapter($adapter);
-
-	return DB::connect();
-}
-function db_pconnect($host, $user, $pass, $database)
-{
-	return DB::connect($host, $user, $pass, $database);
-}
 function db_select_db($dbname)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
 	return true;
 }
 function db_prefix($tablename, $force = false)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::prefix'
+    ), E_USER_DEPRECATED);
+
 	return DB::prefix($tablename, $force = false);
 }
 function db_query($sql, $die = true)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::query'
+    ), E_USER_DEPRECATED);
+
 	return DB::query($sql, $die = true);
 }
 function db_fetch_assoc(&$result)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::fetch_assoc'
+    ), E_USER_DEPRECATED);
+
 	return DB::fetch_assoc($result);
 }
 function db_num_rows($result)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::num_rows'
+    ), E_USER_DEPRECATED);
+
 	return DB::num_rows($result);
 }
 function db_affected_rows($link = false)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::affected_rows'
+    ), E_USER_DEPRECATED);
+
 	return DB::affected_rows($link);
 }
 function db_free_result($result)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::free_result'
+    ), E_USER_DEPRECATED);
+
 	return DB::free_result($result);
 }
 function &db_query_cached($sql, $name, $duration = 900)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::query_cached'
+    ), E_USER_DEPRECATED);
+
 	return DB::query_cached($sql, $name, $duration = 900);
 }
 function db_insert_id()
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::insert_id'
+    ), E_USER_DEPRECATED);
+
 	return DB::insert_id();
 }
 function db_error($link = false)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::error'
+    ), E_USER_DEPRECATED);
+
 	return DB::error($link);
 }
 function db_table_exists($tablename)
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::table_exists'
+    ), E_USER_DEPRECATED);
+
 	return DB::table_exists($tablename);
 }
 function db_get_server_version()
 {
+	trigger_error(sprintf(
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        __METHOD__,
+		'DB::get_server_version'
+    ), E_USER_DEPRECATED);
+
 	return DB::get_server_version();
 }
