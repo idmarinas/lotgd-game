@@ -47,9 +47,8 @@ require_once 'vendor/autoload.php';
 
 // Include some commonly needed and useful routines
 require_once("lib/output.php");
-$output=new output_collector();
+$output = new output_collector();
 require_once("lib/nav.php");
-require_once("lib/local_config.php");
 require_once("lib/dbwrapper.php");
 require_once("lib/holiday_texts.php");
 require_once("lib/constants.php");
