@@ -1,3 +1,4 @@
+OLD - Changes made for Oliver Brendel +nb Edition
 Changes to 1.2.4 +nb
 [CHANGES]
 *home.php --> added a "forgotten password" link below the Login Button
@@ -33,7 +34,7 @@ Changes to 1.2.2 +nb
 
 [FIXES]
 *moderate.php --> bans could not be inserted if the banning member has ' or " in his name - there was no escape sequence for these chars in the SQL statement
-*user.php --> Clan names with commas broke the view in the pulldown ... 
+*user.php --> Clan names with commas broke the view in the pulldown ...
 *viewpetition.php,lib/petition/petition_default.php,lib/data/configuration.php --> added a category selection for the game. Now people who petition can select a category / type of the petition they enter. The points can be set in the settings.
 *lib/bans/case_removeban.php --> DELETE query for bans altered and added the H:m:s as it was only for full days before. Added that query to lib/checkban.php too so we do a better cleanup.
 *lib/charcleanup.php --> Finally found the nasty bug that caused CLAN_FOUNDERs to be demoted ... when a leader expires/deletes himself, the check was basically missing any founders, "promoting"  them to CLAN_LEADER
@@ -41,7 +42,7 @@ Changes to 1.2.2 +nb
 *lib/graveyard/case_question.php --> fixed a wrongful "restore soul" heal count if you have more soulpoints than your max (i.e. via event).
 *lib/user.php --> words over 45 letters would always break, soap or not. Afkamm/Dragonprime reported this
 [FEATURES]
-*account.php --> new file, you can use the "accountstats" hook to add $array("title"=>$title,"value"=>$value) to the stat array that gets displayed. Please pre-translate any title output in your module ;) this is linked on the village page. If you don't want these stats, make a module and wipe above mentioned array clear. 
+*account.php --> new file, you can use the "accountstats" hook to add $array("title"=>$title,"value"=>$value) to the stat array that gets displayed. Please pre-translate any title output in your module ;) this is linked on the village page. If you don't want these stats, make a module and wipe above mentioned array clear.
 [REMOVES]
 [NOTES]
 *viewpetition.php --> small cleanup & nav moving
@@ -119,7 +120,7 @@ Changes to 1.2.0 +nb
 [FIXES]
 -translatortool.php --> datacache was on cached translations wrongly invalidated ($namespace did not exist, $uri did)
 -lib/all_tables.php --> defense and attack have a default of 0, not 1, in the database...
-	->note: if you have old race files that have buffs like 
+	->note: if you have old race files that have buffs like
 		 "defmod"=>"(<defense>?(1+((1+floor(<level>/5))/<defense>)):0)",
 		 then you have a problem. defense is 0 (it's now calculated so this is only the weapondmg etc.) and hence you get defmod 0...means the user has NO defense at all... please edit all your racefiles to make sure you have
 		  "defmod"=>"(<defense>?(1+((1+floor(<level>/5))/<defense>)):1)",
