@@ -8,36 +8,56 @@ define("ALLOW_ANONYMOUS",true);
 define("OVERRIDE_FORCED_NAV",true);
 define("IS_INSTALLER",true);
 
+/**
+ * This edition of LOTGD not compare version of MYSQL, because you can use other DB engine
+ */
 
-//php 5 is required for this version
-//mysql 5.4.* is required for this version
-$requirements_met=true;
-$php_met=true;
-$mysql_met=true;
+//php 5.6 is required for this version
+$requirements_met = true;
+$php_met = true;
+$memory_met = true;
+$execution_met = true;
 
-if (version_compare(PHP_VERSION, '5.4.0') < 0) {
-	$requirements_met=false;
-	$php_met=false;
-} elseif (version_compare(mysql_get_client_info(), '5.0.3') < 0) {
-	$requirements_met=false;
-	$mysql_met=false;
+$memoryLimit = @ini_get('memory_limit');
+preg_match( "#^(\d+)(\w+)$#", strtolower($memoryLimit), $match );
+if( $match[2] == 'g' ) $memoryLimit = intval( $memoryLimit ) * 1024 * 1024 * 1024;
+else if ( $match[2] == 'm' ) $memoryLimit = intval( $memoryLimit ) * 1024 * 1024;
+else if ( $match[2] == 'k' ) $memoryLimit = intval( $memoryLimit ) * 1024;
+else $memoryLimit = intval( $memoryLimit );
+
+ if ( $memoryLimit < 128 * 1024 * 1024 )
+ {
+	 $requirements_met = false;
+	 $memory_met = false;
+ }
+
+$executionTime = @ini_get('max_execution_time');
+if ($executionTime < 30)
+{
+	$requirements_met = false;
+	$execution_met = false;
 }
 
-if (!$requirements_met) {
+if (version_compare(PHP_VERSION, '5.6.0') < 0)
+{
+	$requirements_met = false;
+	$php_met = false;
+}
+
+if (! $requirements_met)
+{
 	//we have NO output object possibly :( hence no nice formatting
-	echo "<h1>Requirements not sufficient<br/><br/>";
-	if (!$php_met) echo sprintf("You need PHP5 to install this version. Please upgrade from your existing PHP version %s.<br/>",PHP_VERSION);
-	if (!$mysql_met) echo sprintf("You need Mysql 5.0 to install this version. Please upgrade from your existing Mysql version %s.<br/>",mysql_get_client_info());
+	echo "<h1>Requirements not sufficient</h1><br><br><big>";
+	if (! $php_met) echo sprintf('You need PHP 5.6 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
+	if (! $memory_met) echo 'Your PHP memory limit is too low. It needs to be set to 128M or more.<br>';
+	if (! $execution_met) echo 'Your PHP execution time is too low. It needs to be set to 30 or more.<br>';
+	echo '</big>';
 	exit(1);
 }
 
-if (!file_exists("dbconnect.php")){
-	define("DB_NODB",true);
-}
-require_once("common.php");
-if (file_exists("dbconnect.php")){
-	require_once("dbconnect.php");
-}
+if (! file_exists('dbconnect.php')) define('DB_NODB', true);
+
+require_once 'common.php';
 
 $noinstallnavs=false;
 
@@ -47,7 +67,7 @@ $DB_USEDATACACHE = 0;
 
 tlschema("installer");
 
-$stages=array(
+$stages = [
 	"1. Introduction",
 	"2. License Agreement",
 	"3. I Agree",
@@ -60,14 +80,13 @@ $stages=array(
 	"10. Build Tables",
 	"11. Admin Accounts",
 	"12. Done!",
-);
+];
 
-$recommended_modules = array(
+$recommended_modules = [
 	"abigail",
 	"breakin",
 	"calendar",
 	"cedrikspotions",
-//	"cities", //I don't think this is good for most people.
 	"collapse",
 	"crazyaudrey",
 	"crying",
@@ -123,7 +142,7 @@ $recommended_modules = array(
 	"tutor",
 	"tynan",
 	"waterfall",
-);
+];
 
 $DB_USEDATACACHE=0; //Necessary
 
@@ -149,10 +168,10 @@ if ($stage > $session['stagecompleted']) $session['stagecompleted'] = $stage;
 page_header("LoGD Installer &#151; %s",$stages[$stage]);
 switch($stage) {
 	case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
-		require_once("lib/installer/installer_stage_$stage.php");
+		require_once "lib/installer/installer_stage_$stage.php";
 		break;
 	default:
-		require_once("lib/installer/installer_stage_default.php");
+		require_once 'lib/installer/installer_stage_default.php';
 		break;
 }
 
