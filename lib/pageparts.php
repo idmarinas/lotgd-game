@@ -160,12 +160,8 @@ function page_footer($saveuser=true){
 	}else{
 		$session['needtoviewmotd']=false;
 	}
-	$pre_headscript = "<LINK REL=\"shortcut icon\" HREF=\"favicon.ico\" TYPE=\"image/x-icon\"/>";
-	if ($headscript>""){
-		$header=str_replace("{headscript}",$pre_headscript."<script language='JavaScript'>".$headscript."</script>",$header);
-	}else{
-		$header = str_replace("{headscript}",$pre_headscript,$header);
-	}
+
+	if ($headscript>"") $header = str_replace("{headscript}","<script language='JavaScript'>".$headscript."</script>",$header);
 
 	$script = "";
 
@@ -475,8 +471,8 @@ function popup_footer(){
 	$z = $y2^$z2;
 	$footer = str_replace("{".($z)."}",$$z, $footer);
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin']) {
-		if ($session['user']['prefs']['ajax']) {
-			// $header = str_replace("{headscript}","<script src=\"/templates/jquery.js\"></script>",$header);
+		if ($session['user']['prefs']['ajax'])
+		{
 			$add="<script type='text/javascript'>
 				$(window).ready(function(){
 					window.setTimeout('set_timeout_xajax()','".((getsetting("LOGINTIMEOUT",900)-120)*1000)."');
