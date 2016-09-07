@@ -36,7 +36,7 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 // work.  This license text may not be removed nor altered in any way.
 // Please see the file LICENSE for a full textual description of the license.
 
-$logd_version = "1.0.0 IDMarinas Edition";
+$logd_version = '1.0.0 IDMarinas Edition';
 
 //-- Rechazar solicitudes de archivos estáticos vuelve al servidor web PHP integrado
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
@@ -64,14 +64,14 @@ require_once("lib/su_access.php");
 require_once("lib/datetime.php");
 require_once("lib/translator.php");
 require_once("lib/playerfunctions.php");
-//## Añadido - Para enviar e-mails en formato html
+//## Add IDMarinas - For send e-mails in html format
 require_once("lib/html_mail.php");
-//-- Fin añadido
+//-- End IDMarinas
 
 
 //start the gzip compression
 if (isset ($gz_handler_on) && $gz_handler_on) ob_start('ob_gzhandler');
-	else ob_start();
+else ob_start();
 
 $pagestarttime = getmicrotime();
 
@@ -103,9 +103,9 @@ $session =& $_SESSION['session'];
 // problem connecting to the database server.  Useful for migration moves
 // like LotGD.net experienced on 7/20/04.
 ob_start();
-if (file_exists("dbconnect.php")){
-	require_once("dbconnect.php");
-}else{
+if (file_exists('dbconnect.php')) require_once 'dbconnect.php';
+else
+{
 	if (!defined("IS_INSTALLER")){
 	 	if (!defined("DB_NODB")) define("DB_NODB",true);
 	 	page_header("The game has not yet been installed");
@@ -126,28 +126,24 @@ if (file_exists("dbconnect.php")){
 // For more details, see
 // http://php.net/manual/en/features.persistent-connections.php
 //
-//$link = db_pconnect($DB_HOST, $DB_USER, $DB_PASS);
-$link = db_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
-$out = ob_get_contents();
-ob_end_clean();
-unset($DB_HOST);
-unset($DB_USER);
-unset($DB_PASS);
+DB::setAdapter([
+	'hostname' => $DB_HOST,
+	'database' => $DB_NAME,
+	'charset' => 'utf8',
+	'username' => $DB_USER,
+	'password' => $DB_PASS
+]);
 
-if ($link===false){
- 	if (!defined("IS_INSTALLER")){
-		// Ignore this bit.  It's only really for Eric's server
-		//I won't, because all people can use it //Oliver
-		//Yet made a bit more interesting text than just the naughty normal "Unable to connect to database - sorry it didn't work out" stuff
+$link = DB::connect();
+unset($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+if (false === $link)
+{
+ 	if (!defined("IS_INSTALLER"))
+	 {
 		$notified=false;
-		// if (file_exists("lib/smsnotify.php")) {
-		// 	$smsmessage = "No DB Server: " . db_error();
-		// 	require_once("lib/smsnotify.php");
-		// 	$notified=true;
-		// }
-		// And tell the user it died.  No translation here, we need the DB for
-		// translation.
+
 	 	if (!defined("DB_NODB")) define("DB_NODB",true);
 		page_header("Database Connection Error");
 		output("`c`\$Database Connection Error`0`c`n`n");
@@ -172,16 +168,10 @@ if ($link===false){
 	define("DB_CONNECTED",true);
 }
 
-if (!DB_CONNECTED || !db_select_db ($DB_NAME)){
-	if (!defined("IS_INSTALLER") && DB_CONNECTED){
-		// Ignore this bit.  It's only really for Eric's server
-		// if (file_exists("lib/smsnotify.php")) {
-		// 	$smsmessage = "Cant Attach to DB: " . db_error();
-		// 	require_once("lib/smsnotify.php");
-		// 	$notified=true;
-		// }
-		// And tell the user it died.  No translation here, we need the DB for
-		// translation.
+if (! DB_CONNECTED)
+{
+	if (!defined("IS_INSTALLER") && DB_CONNECTED)
+	{
 	 	if (!defined("DB_NODB")) define("DB_NODB",true);
 		page_header("Database Connection Error");
 		output("`c`\$Database Connection Error`0`c`n`n");
@@ -209,9 +199,9 @@ if (!DB_CONNECTED || !db_select_db ($DB_NAME)){
 if ($logd_version == getsetting("installer_version","-1")) {
 	define("IS_INSTALLER", false);
 }
-//Generate our settings object
-$settings=new settings("settings");
 
+//Generate our settings object
+$settings = new settings('settings');
 header("Content-Type: text/html; charset=".getsetting('charset','ISO-8859-1'));
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin']){
@@ -327,16 +317,16 @@ if (
 	$host = str_replace(":80","",$_SERVER['HTTP_HOST']);
 
 	if ($site != $host){
-		$sql = "SELECT * FROM " . db_prefix("referers") . " WHERE uri='{$_SERVER['HTTP_REFERER']}'";
-		$result = db_query($sql);
-		$row = db_fetch_assoc($result);
-		db_free_result($result);
+		$sql = "SELECT * FROM " . DB::prefix("referers") . " WHERE uri='{$_SERVER['HTTP_REFERER']}'";
+		$result = DB::query($sql);
+		$row = DB::fetch_assoc($result);
+		DB::free_result($result);
 		if ($row['refererid']>""){
-			$sql = "UPDATE " . db_prefix("referers") . " SET count=count+1,last='".date("Y-m-d H:i:s")."',site='".addslashes($site)."',dest='".addslashes($host)."/".addslashes($REQUEST_URI)."',ip='{$_SERVER['REMOTE_ADDR']}' WHERE refererid='{$row['refererid']}'";
+			$sql = "UPDATE " . DB::prefix("referers") . " SET count=count+1,last='".date("Y-m-d H:i:s")."',site='".addslashes($site)."',dest='".addslashes($host)."/".addslashes($REQUEST_URI)."',ip='{$_SERVER['REMOTE_ADDR']}' WHERE refererid='{$row['refererid']}'";
 		}else{
-			$sql = "INSERT INTO " . db_prefix("referers") . " (uri,count,last,site,dest,ip) VALUES ('{$_SERVER['HTTP_REFERER']}',1,'".date("Y-m-d H:i:s")."','".addslashes($site)."','".addslashes($host)."/".addslashes($REQUEST_URI)."','{$_SERVER['REMOTE_ADDR']}')";
+			$sql = "INSERT INTO " . DB::prefix("referers") . " (uri,count,last,site,dest,ip) VALUES ('{$_SERVER['HTTP_REFERER']}',1,'".date("Y-m-d H:i:s")."','".addslashes($site)."','".addslashes($host)."/".addslashes($REQUEST_URI)."','{$_SERVER['REMOTE_ADDR']}')";
 		}
-		db_query($sql);
+		DB::query($sql);
 	}
 }
 
@@ -390,10 +380,10 @@ if (!$beta && getsetting("betaperplayer", 1) == 1)
 		else $beta=0;
 
 if (isset($session['user']['clanid'])) {
-	$sql = "SELECT * FROM " . db_prefix("clans") . " WHERE clanid='{$session['user']['clanid']}'";
-	$result = db_query_cached($sql, "clandata-{$session['user']['clanid']}", 3600);
-	if (db_num_rows($result)>0){
-		$claninfo = db_fetch_assoc($result);
+	$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanid='{$session['user']['clanid']}'";
+	$result = DB::query_cached($sql, "clandata-{$session['user']['clanid']}", 3600);
+	if (DB::num_rows($result)>0){
+		$claninfo = DB::fetch_assoc($result);
 	}else{
 		$claninfo = array();
 		$session['user']['clanid']=0;
