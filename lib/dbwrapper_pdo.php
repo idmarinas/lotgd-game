@@ -1,8 +1,10 @@
 <?php
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Profiler\Profiler;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\Sql\Sql;
+
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
@@ -133,12 +135,6 @@ Class DB
         self::$sqlString = $statement->getSql();
 
 		return $result;
-
-	// 'sql' => 'SELECT * FROM settings',
-    // 'parameters' => NULL,
-    // 'start' => 1450281530.4497969150543212890625,
-    // 'end' => 1450281530.4507191181182861328125,
-    // 'elapse' => 0.00092220306396484375,
 	}
 
 	//-- Asociar los valores del resultado
@@ -285,7 +281,6 @@ Class DB
 
 	/**
 	 * Funciones propias de Zend
-	 * Se usan en mis módulos exclusivamente
 	 */
 	private static $sql = null;
 
@@ -356,6 +351,18 @@ Class DB
         self::$sqlString = $select->getSqlString();
 
         return $paginator;
+	}
+
+	/**
+	 * Get an array of result of DB::query
+	 *
+	 * @return array
+	 */
+	public static function toArray($result)
+	{
+		$resultSet = new ResultSet;
+
+		return $resultSet->initialize($result)->toArray();
 	}
 }
 
