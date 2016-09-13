@@ -24,7 +24,6 @@
         "zendframework/zend-serializer": "^2.8",
         "zendframework/zend-debug": "^2.5",
         "zendframework/zend-escaper": "^2.5",
-        "dwoo/dwoo" : "dev-beta",
         "twig/twig": "^1.24"
     }
 }
