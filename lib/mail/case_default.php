@@ -25,8 +25,8 @@ $newdirection=(int)!$sorting_direction;
 
 $sql = "SELECT subject,messageid,".$accounts.".name,".$accounts.".acctid,msgfrom,seen,sent FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" ORDER BY $order $direction";
 $result = DB::query($sql);
-$DB::num_rows = DB::num_rows($result);
-if ($DB::num_rows>0){
+if (0 < DB::num_rows($result))
+{
 	$no_subject = translate_inline("`i(No Subject)`i");
 	$subject = translate_inline("Subject");
 	$from = translate_inline("Sender");
