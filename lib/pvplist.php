@@ -101,7 +101,7 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 			output("`i(Can't reach them from here)`i");
 		}elseif (isset($row['invalid']) && $row['invalid']!="") {
 			if ($row['invalid']==1) $row['invalid']=translate_inline("Unable to attack");
-			output("`i`4(%s`4)`i",$row['invalid']);
+			output_not("`i`4(%s`4)`i",$row['invalid']);
 		}else{
 			rawoutput("<a href='$link$extra&name=".$row['acctid']."'>$att</a>");
 			addnav("","$link$extra&name=".$row['acctid']);
