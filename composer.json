@@ -10,9 +10,19 @@
         "email": "contacto@infommo.es",
         "web": "https://bitbucket.org/idmarinas/lotgd-juego/issues?status=new&status=open"
     },
+    "authors" : [
+		{
+			"name"     : "Iván Diaz Marinas",
+			"email"    : "contacto@infommo.es",
+			"homepage" : "http://dragonverde.infommo.es",
+			"role"     : "Developer, Creator"
+		}
+	],
     "config": {
         "process-timeout": 5000
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "zendframework/zend-db": "^2.8",
         "zendframework/zend-paginator": "^2.7",
