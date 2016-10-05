@@ -35,7 +35,7 @@ var filesCopy = [
 ];
 
 //-- Construir la aplicación
-gulp.task('build', function () {
+gulp.task('copy', function () {
 	return gulp.src(filesCopy)
 		.pipe(gulp.dest(variables.build_dir))
 	;

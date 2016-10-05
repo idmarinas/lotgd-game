@@ -3,13 +3,9 @@ var runSequence = require('run-sequence');
 
 gulp.task('production', function (callback) {
 	runSequence(
-		'build-empty',
 		'build',
-		'js-lotgd',
-		'js-uikit',
-
-
 		'prod-js-min',
+
 		//-- Copia todos los archivos a la carpeta de producción
 		'prod-copy',
 

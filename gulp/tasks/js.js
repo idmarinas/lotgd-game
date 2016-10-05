@@ -19,16 +19,24 @@ gulp.task('js-lotgd', function () {
 gulp.task('js-uikit', function () {
 	return gulp.src([
 		'bower_components/uikit/js/uikit.js',
-		'bower_components/uikit/js/core/tab.js',
-		'bower_components/uikit/js/core/switcher.js',
-		'bower_components/uikit/js/core/dropdown.js',
-		'bower_components/uikit/js/core/nav.js',
+		// 'bower_components/uikit/js/core/tab.js',
+		// 'bower_components/uikit/js/core/switcher.js',
+		// 'bower_components/uikit/js/core/dropdown.js',
+		// 'bower_components/uikit/js/core/nav.js',
 		'bower_components/uikit/js/components/tooltip.js',
 		'bower_components/uikit/js/components/notify.js',
 		'bower_components/uikit/js/components/grid.js',
-		'bower_components/uikit/js/components/modal.js',
-		'bower_components/uikit/js/components/alert.js',
+		// 'bower_components/uikit/js/components/modal.js',
+		// 'bower_components/uikit/js/components/alert.js',
 	])
 		.pipe(concat('uikit.js'))
 		.pipe(gulp.dest(variables.build_dir + '/resources/'));
+});
+
+//-- Copiar el archivo jquery
+gulp.task('js-jquery', function () {
+	return gulp.src('bower_components/jquery/dist/jquery.js')
+		.pipe()
+		.pipe(gulp.dest(variables.build_dir + '/resources/'))
+		;
 });
