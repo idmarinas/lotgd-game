@@ -1,9 +1,3 @@
-/*
- * translator ready
- * addnews ready
- * mail ready
- */
-
 //Javascript Generic DOM
 //By Eric Stevens
 //
