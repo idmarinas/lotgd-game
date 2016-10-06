@@ -506,7 +506,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 			if ($cond == "" || module_condition($cond) == true) {
 				// call the module's hook code
 				// $outputbeforehook=$output;
-				// $output=new output_collector();
+				// $output=new LotgdOutputCollector;
 				//before, this was just string switching, NOW we make new objects everytime Oo craaaazy load, I am removing this. if you want to collapse, put it in, it's a MODULE
 
 

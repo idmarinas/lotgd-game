@@ -10,7 +10,7 @@ function redirect($location,$reason=false){
 		//deliberately html in translations so admins can personalize this, also in one schema
 		$session['allowednavs']=array();
 		addnav("",$location);
-		$failoutput=new output_collector();
+		$failoutput=new LotgdOutputCollector;
 		$failoutput->output_notl("`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n");
 		$failoutput->output_notl("`\$");
 		$failoutput->rawoutput("<a href=\"".HTMLEntities($location, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".translate_inline("Click here to continue.","badnav")."</a>");
@@ -32,9 +32,9 @@ function redirect($location,$reason=false){
 	//echo "<a href='$location'>$location</a><br><br>";
 	//$session['debug']="$http://$host$uri/$location";
 	//echo $location;
-	
+
 	// we should never hit this one here. in case we do, show the debug output along with some text
-	// this might be the case if your php session handling is messed up or something. 
+	// this might be the case if your php session handling is messed up or something.
 	echo translate_inline("Whoops. There has been an error concering redirecting your to your new page. Please inform the admins about this. More Information for your petition down below:\n\n");
 	echo $session['debug'];
 	exit();

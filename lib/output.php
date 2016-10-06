@@ -1,17 +1,18 @@
 <?php
 
 /**
-* \class output_collector
+* \class LotgdOutputCollector
 * \brief Library Functions for page output stored in the class
 * This class holds the output until it gets echo()'d to the browser in pageparts.php.
 * It also has currently legacy support wrapper functions defined outside
 * @author Eric Stevens+JT Traub, rewritten Oliver Brendel to OOP + adapted
+* @author rewritten + adapted IDMarinas
 */
 
 use Zend\Debug\Debug as LotgdDebug;
 
-class output_collector {
-
+class LotgdOutputCollector
+{
 	private $output; //!< the output to the template body
 	private $block_new_output; //!< is current output blocked? boolean
 	private $colors; //!< the color codes=>CSS tags
@@ -22,7 +23,8 @@ class output_collector {
 	* Constructor. Fill our class with the colors and set all up.
 	*/
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->output='';
 		$this->nestedtags=array();
 		$this->block_new_output=false;
@@ -376,7 +378,8 @@ class output_collector {
 
 /* END of OOP section */
 
-
+//-- INIT Output Collector
+$output = new LotgdOutputCollector;
 
 /*function support without the object call */
 
