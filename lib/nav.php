@@ -515,7 +515,7 @@ function private_addnav($text,$link=false,$priv=false,$pop=false,$popsize="500x3
 				"accesskey"=>$keyrep,
 				"popup"=>($pop==true ? "target='_blank'".($popsize>""?" onClick=\"".popup($link,$popsize)."; return false;\"":"") : "")
 				));
-				
+
 
 			$n = str_replace("<a ",tlbutton_pop()."<a ",$n);
 			$thisnav.=$n;
@@ -567,7 +567,7 @@ function clearoutput(){
 	global $output,$nestedtags,$header,$nav,$session;
 
 	clearnav();
-	$output=new output_collector();
+	$output=new LotgdOutputCollector;
 	$header="";
 	$nav="";
 }
