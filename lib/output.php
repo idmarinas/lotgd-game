@@ -15,7 +15,51 @@ class LotgdOutputCollector
 {
 	private $output; //!< the output to the template body
 	private $block_new_output; //!< is current output blocked? boolean
-	private $colors; //!< the color codes=>CSS tags
+	//!< the color codes=>CSS tags
+	private $colors = [
+		'1' => 'colDkBlue',
+		'2' => 'colDkGreen',
+		'3' => 'colDkCyan',
+		'4' => 'colDkRed',
+		'5' => 'colDkMagenta',
+		'6' => 'colDkYellow',
+		'7' => 'colDkWhite',
+		'8' => 'colLime',
+		'!' => 'colLtBlue',
+		'@' => 'colLtGreen',
+		'#' => 'colLtCyan',
+		'\$' => 'colLtRed',
+		'%' => 'colLtMagenta',
+		'^' => 'colLtYellow',
+		'&' => 'colLtWhite',
+		'q' => 'colDkOrange',
+		'Q' => 'colLtOrange',
+		')' => 'colLtBlack',
+		'R' => 'colRose',
+		'V' => 'colBlueViolet',
+		'v' => 'coliceviolet',
+		'g' => 'colXLtGreen',
+		'G' => 'colXLtGreen',
+		'T' => 'colDkBrown',
+		't' => 'colLtBrown',
+		'~' => 'colBlack',
+		'e' => 'colDkRust',
+		'E' => 'colLtRust',
+		'j' => 'colMdGrey',
+		'J' => 'colMdBlue',
+		'l' => 'colDkLinkBlue',
+		'L' => 'colLtLinkBlue',
+		'x' => 'colburlywood',
+		'X' => 'colbeige',
+		'y' => 'colkhaki',
+		'Y' => 'coldarkkhaki',
+		'k' => 'colaquamarine',
+		'K' => 'coldarkseagreen',
+		'p' => 'collightsalmon',
+		'P' => 'colsalmon',
+		'm' => 'colwheat',
+		'M' => 'coltan',
+	];
 	private $color_map,$colormap_esc; //!< the letters of color codes only, escaped and not escaped
 	private $nestedtags; //!<open spans, or whatever...we need to make sure that we close them on output
 
@@ -25,8 +69,8 @@ class LotgdOutputCollector
 
 	public function __construct()
 	{
-		$this->output='';
-		$this->nestedtags=array();
+		$this->output = '';
+		$this->nestedtags = [];
 		$this->block_new_output=false;
 		$this->nestedtags['font']=false;
 		$this->nestedtags['div']=false;
@@ -35,50 +79,6 @@ class LotgdOutputCollector
 		$this->nestedtags['<']=false;
 		$this->nestedtags['>']=false;
 		$this->nestedtags['B']=false;
-		$this->colors = array(
-			"1" => "colDkBlue",
-			"2" => "colDkGreen",
-			"3" => "colDkCyan",
-			"4" => "colDkRed",
-			"5" => "colDkMagenta",
-			"6" => "colDkYellow",
-			"7" => "colDkWhite",
-			"8" => "colLime",
-			"!" => "colLtBlue",
-			"@" => "colLtGreen",
-			"#" => "colLtCyan",
-			"\$" => "colLtRed",
-			"%" => "colLtMagenta",
-			"^" => "colLtYellow",
-			"&" => "colLtWhite",
-			"q" => "colDkOrange",
-			"Q" => "colLtOrange",
-			")" => "colLtBlack",
-			"R" => "colRose",
-			"V" => "colBlueViolet",
-			"v" => "coliceviolet",
-			"g" => "colXLtGreen",
-			"G" => "colXLtGreen",
-			"T" => "colDkBrown",
-			"t" => "colLtBrown",
-			"~" => "colBlack",
-			"e" => "colDkRust",
-			"E" => "colLtRust",
-			"j" => "colMdGrey",
-			"J" => "colMdBlue",
-			"l" => "colDkLinkBlue",
-			"L" => "colLtLinkBlue",
-			"x" => "colburlywood",
-			"X" => "colbeige",
-			"y" => "colkhaki",
-			"Y" => "coldarkkhaki",
-			"k" => "colaquamarine",
-			"K" => "coldarkseagreen",
-			"p" => "collightsalmon",
-			"P" => "colsalmon",
-			"m" => "colwheat",
-			"M" => "coltan",
- 		);
 		//*cough* if you choose color codes like \ or whatnot... SENSITIVE codes like special programmer chars... then escape them. Sadly we have % (breaks sprintf i.e.) AND ) in it... (breaks regular expressions)
 		$cols=$this->colors;
 		$escape=array(')','$',"(","[","]","{","}");
@@ -104,7 +104,8 @@ class LotgdOutputCollector
 	 *
 	 * @see appoencode
 	 */
-	public function output_notl(){
+	public function output_notl()
+	{
 		if ($this->block_new_output) return;
 
 		$args = func_get_args();
@@ -226,7 +227,8 @@ class LotgdOutputCollector
 	* @return void
 	*/
 
-	function appoencode($data,$priv=false){
+	function appoencode($data,$priv=false)
+	{
 		$start = 0;
 		$out="";
 		if( ($pos = strpos($data, "`")) !== false) {
@@ -342,8 +344,8 @@ class LotgdOutputCollector
 	* Returns the complete color array
 	* @return an array with $colorcode=>$csstag format
 	*/
-
-	public function get_colors() {
+	public function get_colors()
+	{
 		return $this->colors;
 	}
 
@@ -456,7 +458,3 @@ function appoencode($data,$priv=false) {
 	global $output;
 	return $output->appoencode($data,$priv);
 }
-
-
-
-?>
