@@ -48,6 +48,13 @@ gulp.task('dev-copy', function () {
 	;
 });
 
+//-- Copiar los archivos a la carpeta de desarrollo
+gulp.task('test-copy-dev', function () {
+	return gulp.src(variables.build_dir + '/**')
+		.pipe(gulp.dest(variables.development_test_dir))
+	;
+});
+
 //-- Copiar los archivos a la carpeta de producción
 gulp.task('prod-copy', function () {
 	return gulp.src(variables.build_dir + '/**')

@@ -4,6 +4,7 @@ var runSequence = require('run-sequence');
 gulp.task('build', function (callback) {
 	runSequence(
 		'build-empty',
+		'copy',
 		'js-lotgd',
 		'js-uikit',
 		'js-jquery',

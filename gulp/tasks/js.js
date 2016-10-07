@@ -36,7 +36,6 @@ gulp.task('js-uikit', function () {
 //-- Copiar el archivo jquery
 gulp.task('js-jquery', function () {
 	return gulp.src('bower_components/jquery/dist/jquery.js')
-		.pipe()
 		.pipe(gulp.dest(variables.build_dir + '/resources/'))
 		;
 });
