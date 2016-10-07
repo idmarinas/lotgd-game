@@ -6,7 +6,7 @@
 * This class holds the output until it gets echo()'d to the browser in pageparts.php.
 * It also has currently legacy support wrapper functions defined outside
 * @author Eric Stevens+JT Traub, rewritten Oliver Brendel to OOP + adapted
-* @author rewritten + adapted IDMarinas
+* @author rewritten + adapted by IDMarinas
 */
 
 use Zend\Debug\Debug as LotgdDebug;
@@ -28,7 +28,7 @@ class LotgdOutputCollector
 		'!' => 'colLtBlue',
 		'@' => 'colLtGreen',
 		'#' => 'colLtCyan',
-		'\$' => 'colLtRed',
+		'$' => 'colLtRed',
 		'%' => 'colLtMagenta',
 		'^' => 'colLtYellow',
 		'&' => 'colLtWhite',
