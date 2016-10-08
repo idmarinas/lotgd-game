@@ -46,26 +46,26 @@ require_once 'vendor/autoload.php';
 //-- Fin autocargar las clases
 
 // Include some commonly needed and useful routines
-require_once("lib/output.php");
-$output = new output_collector();
-require_once("lib/nav.php");
-require_once("lib/dbwrapper.php");
-require_once("lib/holiday_texts.php");
-require_once("lib/constants.php");
-require_once("lib/datacache.php");
-require_once("lib/modules.php");
-require_once("lib/http.php");
-require_once("lib/e_rand.php");
-require_once("lib/buffs.php");
-require_once("lib/pageparts.php");
-require_once("lib/sanitize.php");
-require_once("lib/tempstat.php");
-require_once("lib/su_access.php");
-require_once("lib/datetime.php");
-require_once("lib/translator.php");
-require_once("lib/playerfunctions.php");
-//## Add IDMarinas - For send e-mails in html format
-require_once("lib/html_mail.php");
+require_once 'lib/cache.php';
+require_once 'lib/output.php';
+require_once 'lib/nav.php';
+require_once 'lib/dbwrapper.php';
+require_once 'lib/holiday_texts.php';
+require_once 'lib/constants.php';
+require_once 'lib/datacache.php';
+require_once 'lib/modules.php';
+require_once 'lib/http.php';
+require_once 'lib/e_rand.php';
+require_once 'lib/buffs.php';
+require_once 'lib/pageparts.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/tempstat.php';
+require_once 'lib/su_access.php';
+require_once 'lib/datetime.php';
+require_once 'lib/translator.php';
+require_once 'lib/playerfunctions.php';
+//## Add IDMarinas
+require_once 'lib/html_mail.php';
 //-- End IDMarinas
 
 
@@ -77,23 +77,22 @@ $pagestarttime = getmicrotime();
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
-if(!defined("OVERRIDE_FORCED_NAV")) define("OVERRIDE_FORCED_NAV",false);
-if(!defined("ALLOW_ANONYMOUS")) define("ALLOW_ANONYMOUS",false);
+if(! defined('OVERRIDE_FORCED_NAV')) define('OVERRIDE_FORCED_NAV', false);
+if(! defined('ALLOW_ANONYMOUS')) define('ALLOW_ANONYMOUS', false);
 
 //Initialize variables required for this page
 
-require_once("lib/template.php");
-require_once("lib/settings.php");
-require_once("lib/redirect.php");
-require_once("lib/censor.php");
-require_once("lib/saveuser.php");
-require_once("lib/arrayutil.php");
-require_once("lib/addnews.php");
-require_once("lib/sql.php");
-require_once("lib/mounts.php");
-require_once("lib/debuglog.php");
-require_once("lib/forcednavigation.php");
-require_once("lib/php_generic_environment.php");
+require_once 'lib/settings.php';
+require_once 'lib/template.php';
+require_once 'lib/redirect.php';
+require_once 'lib/censor.php';
+require_once 'lib/saveuser.php';
+require_once 'lib/arrayutil.php';
+require_once 'lib/addnews.php';
+require_once 'lib/mounts.php';
+require_once 'lib/debuglog.php';
+require_once 'lib/forcednavigation.php';
+require_once 'lib/php_generic_environment.php';
 
 session_start();
 
@@ -358,8 +357,6 @@ if ($session['user']['superuser']==0){
 	$x = 0;
 	$lc = $l;
 }
-
-prepare_template();
 
 if (!isset($session['user']['hashorse'])) $session['user']['hashorse']=0;
 $playermount = getmount($session['user']['hashorse']);

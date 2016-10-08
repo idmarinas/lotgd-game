@@ -213,7 +213,7 @@ function tlbutton_pop(){
 	if ($session['user']['superuser'] & SU_IS_TRANSLATOR){
 		return array_pop($translatorbuttons);
 	}else{
-		return "";
+		return;
 	}
 }
 
@@ -224,7 +224,7 @@ function tlbutton_clear(){
 		$translatorbuttons = array();
 		return $return;
 	}else{
-		return "";
+		return;
 	}
 }
 
