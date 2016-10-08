@@ -13,14 +13,12 @@ if (isset($_POST['template'])){
 
 define("ALLOW_ANONYMOUS",true);
 
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 
-if (!isset($session['loggedin'])) $session['loggedin']=false;
-if ($session['loggedin']){
-	redirect("badnav.php");
-}
+if (! isset($session['loggedin'])) $session['loggedin']=false;
+if ($session['loggedin']) redirect("badnav.php");
 
 tlschema("home");
 
@@ -92,22 +90,15 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 		$session['message'].=translate_inline("It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n");
 		$session['message'].=translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
 	}
-	if ($session['message']>"")
-		output_notl("`b`\$%s`b`n", $session['message'],true);
+	if ($session['message']>"") output_notl("`b`\$%s`b`n", $session['message'],true);
 
-    $uname = translate_inline("Username");
-	$pass = translate_inline("Password");
-	$butt = translate_inline("Log in");
-
-    $homeformmodification = modulehook("homeform", ['showdefaultform'=>true, 'uname'=>$uname, 'pass'=>$pass, 'butt'=> $butt]);
-    if ($homeformmodification['showdefaultform'])
-    {
-        output("Enter your name and password to enter the realm.`n");
-        $uname = translate_inline("<u>U</u>sername");
-        $pass = translate_inline("<u>P</u>assword");
-        $butt = translate_inline("Log in");
-        rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".templatereplace("login",array("username"=>$uname,"password"=>$pass,"button"=>$butt))."</form>");
-    }
+    $formLogin = $lotgd_tpl->renderThemeTemplate('body/login.html', [
+		'text' => translate_inline('Enter your name and password to enter the realm.`n'),
+		'username' => translate_inline("<u>U</u>sername"),
+		'password' => translate_inline("<u>P</u>assword"),
+		'button' => translate_inline("Log in")
+	]);
+    rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".$formLogin."</form>");
 
 	rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
 	rawoutput("<script language='JavaScript'>
@@ -124,7 +115,9 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	output("Did you forget your password? Go <a href='create.php?op=forgot'>here</a> to retrieve a new one!`n",true);
 	output_notl("`c");
 	addnav("","login.php");
-} else {
+}
+else
+{
 	output("`\$`bServer full!`b`n`^Please wait until some users have logged out.`n`n`0");
 	if ($op=="timeout"){
 		$session['message'].= translate_inline(" Your session has timed out, you must log in again.`n");
@@ -134,7 +127,7 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 		$session['message'].=translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
 	}
 	if ($session['message']>"") output("`b`\$%s`b`n", $session['message'],true);
-	rawoutput(templatereplace("loginfull",array()));
+	rawoutput($lotgd_tpl->renderThemeTemplate('body/loginfull.html', ['text' => translate_inline('Server Full!')]));
 	output_notl("`c");
 }
 
