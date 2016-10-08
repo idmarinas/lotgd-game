@@ -19,7 +19,7 @@ $DB_TYPE='mysql';
  * - mysqli_oos:		The MySQLi extension of PHP5, object oriented style
  * - mysqli_proc:		The MySQLi extension of PHP5, procedural style
  *
- If you encounter problems with one of them, please let the developer know at http://nb-core.org
+ If you encounter problems with one of them, please let the developer know at https://bitbucket.org/idmarinas/lotgd-juego
  Any other than "mysql" seem to be not perfectly integrated somehow, but work most of the time.
  */
 
