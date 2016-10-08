@@ -16,9 +16,9 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 ## Dependencias y requisitos LOTGD - IDMarinas Edition ##
 * PHP >= 5.6
 * Utiliza componentes de:
-	* ([Uikit Framework](http://getuikit.com))
-	* ([Zend Framework](https://zendframework.github.io))
-* Sistema de plantillas de ([Twig](http://twig.sensiolabs.org))
+	* [Uikit Framework](http://getuikit.com)
+	* [Zend Framework](https://zendframework.github.io)
+* Sistema de plantillas de [Twig](http://twig.sensiolabs.org)
 
 ## Cambios importantes ##
 * Se actualiza la versión del juego a la 1.0.0 IDMarinas Edition y se agrega IDMarinas al Copyright para indicar que esta versión está modificada.
@@ -29,12 +29,12 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 	* Las funciones antiguas seguirán funcionando pero dan una advertencia de función obsoleta. Se borrarán en la versión 2.0.0
 
 ## Añadidos ##
-* *lib/showtabs.php* **lotgd_showtabs()** Permite mostrar contenido mediante pestañas. Se debe incluir cuando se necesite.
+* *lib/showtabs.php* **lotgd_showtabs()** Permite mostrar contenido mediante pestañas. Se debe incluir el archivo cuando se necesite usar esta función.
 
 
 # Compatiblidad #
-* Esta versión es posible que no sea compatible con la mayor parte de los módulos disponibles para la versión 1.1.0 DragonPrime Edition
-* * Aunque, se ha modificado el script de conexión a la base de datos, las funciones antiguas relacionadas con la base de datos siguen funcionando.
+* Esta versión es posible que no sea compatible con la mayor parte de los módulos disponibles para la versión 1.1.* DragonPrime Edition
+	* Aunque, se ha modificado el script de conexión a la base de datos, las funciones antiguas relacionadas con la base de datos siguen funcionando.
 
 ## Advertencias ##
 * Esta es una versión de desarrollo y por lo tanto inestable
