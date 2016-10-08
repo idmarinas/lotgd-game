@@ -1,92 +1,140 @@
 <?php
-// translator ready
-// addnews ready
-// mail ready
 
-function templatereplace($itemname,$vals=false){
-	global $template;
-	if (!isset($template[$itemname]))
-		output("`bWarning:`b The `i%s`i template part was not found!`n", $itemname);
-	$out = $template[$itemname];
-	if (!is_array($vals)) return $out;
-	foreach ($vals as $key=>$val) {
-		if (strpos($out,"{".$key."}")===false){
-			output("`bWarning:`b the `i%s`i piece was not found in the `i%s`i template part! (%s)`n", $key, $itemname, $out);
-			$out .= $val;
-		}else{
-			$out = str_replace("{"."$key"."}",$val,$out);
+use Zend\Filter\FilterChain;
+use Zend\Filter\StringToLower;
+use Zend\Filter\Word\SeparatorToDash;
+use Zend\Filter\Word\UnderscoreToDash;
+
+class LotgdTemplate
+{
+	protected $twig;
+	protected $templatename;
+	protected $themefolder;
+
+	public function __construct()
+	{
+		$this->prepareTheme();
+
+		$loader = new Twig_Loader_Filesystem(['themes', 'templates']);
+		$this->twig = new Twig_Environment($loader, [
+			'cache' => 'cache/templates',
+			'autoescape' => false
+		]);
+
+		//-- Add filters to Twig
+		foreach($this->getFilters() as $filter)
+		{
+			$this->twig->addFilter($filter);
 		}
 	}
-	return $out;
-}
 
-function prepare_template($force=false){
-	if (!$force) {
-		if (defined("TEMPLATE_IS_PREPARED")) return;
-		define("TEMPLATE_IS_PREPARED",true);
+	/**
+	 *
+	 */
+	public function renderTheme($context)
+	{
+		return $this->twig->render($this->getTheme(), $context);
 	}
- 	
- 	global $templatename, $templatemessage, $template, $session, $y, $z, $y2, $z2, $copyright, $lc, $x, $templatetags,$_defaultskin;
-	 if (!isset($_COOKIE['template'])) $_COOKIE['template']="";
-	$templatename="";
-	$templatemessage="";
-	if ($_COOKIE['template']!="")
-		$templatename=$_COOKIE['template'];
-	if ($templatename=="" || !file_exists("templates/$templatename"))
-		$templatename=getsetting("defaultskin", $_defaultskin);
-	if ($templatename=="" || !file_exists("templates/$templatename"))
-		$templatename=$_defaultskin;
-	$template = loadtemplate($templatename);
-	if (isset ($session['templatename']) && $session['templatename'] == $templatename &&
-			$session['templatemtime']==filemtime("templates/$templatename")){
-		//We do not have to check that the template is valid since it has
-		//not changed.
-	}else{
-		//We need to double check that the template is valid since the name
-		// or file mod time have changed.
 
-		//tags that must appear in the header
-		$templatetags=array("title","headscript","script");
-		foreach ($templatetags as $val) {
-			if (strpos($template['header'],"{".$val."}")===false && $val)
-				$templatemessage .=
-					"You do not have {".$val."} defined in your header\n";
-		}
-		//tags that must appear in the footer
-		$templatetags=array();
-		foreach ($templatetags as $val) {
-			if (strpos($template['footer'],"{".$val."}")===false && $val)
-				$templatemessage .=
-					"You do not have {".$val."} defined in your footer\n";
-		}
-
-		//tags that may appear anywhere but must appear
-		$templatetags=array("nav","stats","petition","motd","mail",
-				"paypal","source","version", "copyright");
-		foreach ($templatetags as $key=>$val) {
-			if (!$key) array_push($templatetags,$y2^$z2);
-			if (strpos($template['header'],"{".$val."}")===false &&
-					strpos($template['footer'],"{".$val."}")===false && $val)
-				$templatemessage .=
-					"You do not have {".$val."} defined in either your header or footer\n";
-		}
-		if ($templatemessage==""){
-			$session['templatename'] = $templatename;
-			$session['templatemtime'] = filemtime("templates/$templatename");
-		}
+	/**
+	 * Renders a template of the theme
+	 *
+	 * @param string $name    The template name
+     * @param array  $context An array of parameters to pass to the template
+     *
+     * @return string The rendered template
+	 */
+	public function renderThemeTemplate($name, $context)
+	{
+		$folder = $this->themefolder . '/templates';
+		return $this->twig->render($folder.'/'.$name, $context);
 	}
-	if ($templatemessage!=""){
-		echo "<b>You have one or more errors in your template page!</b><br>".nl2br($templatemessage);
-		$template=loadtemplate("yarbrough.htm");
-	}else {
+
+	/**
+	 * Renders a template of LOTGD.
+	 *
+	 * @param string $name    The template name
+     * @param array  $context An array of parameters to pass to the template
+     *
+     * @return string The rendered template
+	 */
+	public function renderLotgdTemplate($name, $context)
+	{
+		return $this->twig->render($name, $context);
+	}
+
+	/**
+	 * Filters create for LOTGD
+	 *
+	 * @return array
+	 */
+	private function getFilters()
+	{
+		return [
+			//-- Access to appoencode function in template
+			new Twig_SimpleFilter('appoencode', function ($string)
+			{
+				return appoencode($string, true);
+			}),
+			//-- Access to color_sanitize function in template
+			new Twig_SimpleFilter('color_sanitize', function ($string)
+			{
+				return color_sanitize($string);
+			}),
+			//-- Add a link, but not nav
+			new Twig_SimpleFilter('lotgd_url', function ($url)
+			{
+				addnav('', $url);
+
+				return $url;
+			})
+		];
+	}
+
+	/**
+	 * Get active theme
+	 *
+	 * @return string
+	 */
+	public function getTheme()
+	{
+		return $this->templatename;
+	}
+
+	/**
+	 * Preparece template for use
+	 *
+	 * @return array
+	 */
+	private function prepareTheme()
+	{
+		global $templatename, $session, $y, $z, $y2, $z2, $lc, $x, $_defaultskin;
+
+		if ('' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
+		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $_defaultskin);
+		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $_defaultskin;
+
+		$this->templatename = $templatename;
+
+		//-- Prepare name folder of theme, base on filename of theme
+		$this->themefolder = pathinfo($this->templatename, PATHINFO_FILENAME);//-- Delete extension
+		$filterChain = new FilterChain();
+		$filterChain
+			->attach(new StringToLower())
+			->attach(new SeparatorToDash())
+			->attach(new UnderscoreToDash());
+
+		$this->themefolder = $filterChain->filter($this->themefolder);
+
 		$y = 0;
 		$z = $y2^$z2;
-		if ($session['user']['loggedin'] && $x > ''){
-	// I am sick of the hash stuff ... that does not seem to work :-/
-	//	$$z = $x;
-		}
-		$$z = $lc . $$z . "<br />";
+		$$z = $lc . $$z . '<br>';
 	}
-
 }
-?>
+
+function templatereplace()
+{
+	return;
+}
+
+$lotgd_tpl = new LotgdTemplate;
