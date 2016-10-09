@@ -303,6 +303,7 @@ function page_footer($saveuser = true)
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 
 		$html['petitiondisplay'] = $lotgd_tpl->renderLotgdTemplate('other/petition.html', [
+			'administrator' => $administrator,
 			'petitioncount' => $p,
 			'petition' => $pet,
 			'ueditor' => $ued
