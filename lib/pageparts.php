@@ -149,7 +149,6 @@ function page_footer($saveuser = true)
 	tlschema('common');
 
 	$charstats = charstats();
-
 	restore_buff_fields();
 
 	$sql = "SELECT motddate FROM " . DB::prefix("motd") . " ORDER BY motditem DESC LIMIT 1";
@@ -312,6 +311,7 @@ function page_footer($saveuser = true)
 
 	//output character stats
 	$html['stats'] = $charstats;
+	unset($charstats);
 	//Add all script in page
 	$html['script'] = $script;
 	//output view PHP source link
@@ -726,13 +726,12 @@ function charstats()
 	}
 	else
 	{
-		$ret = "";
-		if ($ret != datacache("charlisthomepage"))
+		if (! $ret = datacache("charlisthomepage"))
 		{
-			$onlinecount=0;
+			$onlinecount = 0;
 			// If a module wants to do it's own display of the online chars,
 			// let it.
-			$list = modulehook("onlinecharlist", array());
+			$list = modulehook('onlinecharlist', []);
 			if ($list['handled'])
 			{
 				$onlinecount = $list['count'];
