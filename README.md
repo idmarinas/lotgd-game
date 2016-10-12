@@ -1,3 +1,7 @@
+[![Bitbucket issues](https://img.shields.io/bitbucket/issues/idmarinas/lotgd-juego.svg?maxAge=2592000)]()
+[![Installation](https://img.shields.io/badge/install-fail-red.svg?maxAge=2592000)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-red.svg?maxAge=2592000)]()
+
 # Acerca de IDMarinas Edition #
 
 La versión **IDMarinas Edition** esta basada en la versión **1.2.5 +nb Edition** de Oliver Brendel ([NB Core](http://nb-core.org)).
