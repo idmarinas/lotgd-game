@@ -8,7 +8,7 @@ var variables = require('../variables');
 gulp.task('js-lotgd', function () {
 	return gulp.src([
 		'assets/lotgd.js',
-		'assets/component/*.js'
+		'assets/components/*.js'
 	])
 		.pipe(concat('lotgd.js'))
 		.pipe(strip({ safe: true }))
