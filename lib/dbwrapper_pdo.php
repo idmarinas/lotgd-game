@@ -17,13 +17,11 @@ Class DB
 	private static $errorInfo = null;
 	private static $sqlString = null;
 
-    //-- Guardar la configuración pra el Adapter
     public static function setSettings(Array $options)
     {
         self::$settings = $options;
     }
 
-	//-- Configura el adaptador
 	public static function setAdapter(Array $options)
 	{
         $options = array_merge($options, self::$settings);
@@ -33,7 +31,6 @@ Class DB
 		if (!self::$adapter) self::$adapter = $adapter;
 	}
 
-	//-- Obtiene el adaptador
 	private static function getAdapter()
 	{
 		if (!self::$adapter)
@@ -92,7 +89,7 @@ Class DB
 	//-- Realizar una consulta a la base de datos
 	public static function query($sql, $die = true)
 	{
-		if (defined("DB_NODB") && !defined("LINK")) return array();
+		if (defined('DB_NODB') && ! defined('LINK')) return [];
 
 		global $session, $dbinfo;
 
@@ -104,28 +101,29 @@ Class DB
 
 		$result = $statement->execute();
 
-		if (!$result && $die === true)
+		if (! $result && $die === true)
 		{
 			//online if the installer is running ignore this, else THROW error
-			if (defined("IS_INSTALLER") && IS_INSTALLER) return array();
+			if (defined('IS_INSTALLER') && IS_INSTALLER) return [];
 			else
 			{
 				$title = 'Error en la base de datos';
-				if ($session['user']['superuser'] & SU_DEVELOPER || 1) $message = "<pre>".HTMLEntities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>"
-						.error(LINK);
+				if ($session['user']['superuser'] & SU_DEVELOPER || 1) $message = '<pre>'.HTMLEntities($sql, ENT_COMPAT, getsetting('charset', 'UTF_8')).'</pre>'.error(LINK);
 				else $message = "A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks";
 
 				die(self::template($title, $message, true));
 			}
 		}
 		$profiler = $adapter->getProfiler()->getProfiles();
-		$info = $profiler[0];
 
-		if ($info['elapse'] >= 0.5)
-			debug("Slow Query (".round($info['elapse'],3)."s): ".(HTMLEntities($statement->getSql(), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))));
+		if ($profiler[0]['elapse'] >= 0.5)
+			debug(sprintf('Slow Query (%ss): %s',
+				round($profiler[0]['elapse'],3),
+				HTMLEntities($statement->getSql(), ENT_COMPAT, getsetting('charset', 'UTF_8'))
+			));
 
 		$dbinfo['queriesthishit']++;
-		$dbinfo['querytime'] += $info['elapse'];
+		$dbinfo['querytime'] += $profiler[0]['elapse'];
 
 		//-- Guardar datos útiles
 		self::$generatedValue = $result->getGeneratedValue();
