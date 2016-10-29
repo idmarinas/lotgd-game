@@ -398,9 +398,9 @@ function db_query($sql, $die = true)
 function db_fetch_assoc(&$result)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 no need use this function. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
-		'DB::fetch_assoc'
+		'https://docs.zendframework.com/zend-db/'
     ), E_USER_DEPRECATED);
 
 	return DB::fetch_assoc($result);
@@ -408,9 +408,10 @@ function db_fetch_assoc(&$result)
 function db_num_rows($result)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
-		'DB::num_rows'
+		'$result->count()',
+		'https://docs.zendframework.com/zend-db/'
     ), E_USER_DEPRECATED);
 
 	return DB::num_rows($result);
@@ -418,9 +419,10 @@ function db_num_rows($result)
 function db_affected_rows($link = false)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
-		'DB::affected_rows'
+		'$result->getAffectedRows()',
+		'https://docs.zendframework.com/zend-db/'
     ), E_USER_DEPRECATED);
 
 	return DB::affected_rows($link);
