@@ -53,8 +53,7 @@ Class DB
 		$driver = $adapter->getDriver();
 		$connection = $driver->getConnection();
 
-		// return $connection->isConnected();
-		return true;
+		return $connection->isConnected();
 	}
 
 	//-- Seleccionar la base de datos
