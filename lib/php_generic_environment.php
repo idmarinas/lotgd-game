@@ -2,7 +2,8 @@
 // addnews ready
 // translator ready
 // mail ready
-function sanitize_uri(){
+function sanitize_uri()
+{
 	global $PATH_INFO,$SCRIPT_NAME,$REQUEST_URI;
 	if (isset($PATH_INFO) && $PATH_INFO!="") {
 		$SCRIPT_NAME=$PATH_INFO;
@@ -31,8 +32,10 @@ function sanitize_uri(){
 		$REQUEST_URI=$SCRIPT_NAME;
 	}
 }
-function php_generic_environment(){
-	require_once("lib/register_global.php");
+function php_generic_environment()
+{
+	require_once 'lib/register_global.php';
+
 	register_global($_SERVER);
 	sanitize_uri();
 }
