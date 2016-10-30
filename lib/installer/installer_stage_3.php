@@ -19,7 +19,7 @@ else
 	output("`iIf you are unsure of the answer to any of these questions, please check with your server's ISP, or read the documentation on MySQL`i`n");
 
 	output('`nWhat is the driver of your DataBase?`n');
-	rawoutput('<select name="DB_DBTYPE"><option value="Mysqli">Mysqli</option><option value="Pdo_Mysql" selected>Pdo_Mysql</option></select>');
+	rawoutput('<select name="DB_DBDRIVER"><option value="Mysqli">Mysqli</option><option value="Pdo_Mysql" selected>Pdo_Mysql</option></select>');
 	tip('Select de driver to connect to your Database. Default is PDO Mysql.');
 
 	output("`nWhat is the address of your database server?`n");
