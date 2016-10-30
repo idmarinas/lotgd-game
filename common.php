@@ -41,10 +41,7 @@ $logd_version = '1.0.0 IDMarinas Edition';
 //-- Rechazar solicitudes de archivos estáticos vuelve al servidor web PHP integrado
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
 
-//-- Autocargar las clases para agregar nuevas opciones al juego
-require_once 'vendor/autoload.php';
-//-- Fin autocargar las clases
-
+require_once 'vendor/autoload.php';//-- Autoload class for new options of game
 // Include some commonly needed and useful routines
 require_once 'lib/cache.php';
 require_once 'lib/output.php';
@@ -105,8 +102,9 @@ ob_start();
 if (file_exists('dbconnect.php')) require_once 'dbconnect.php';
 else
 {
-	if (!defined("IS_INSTALLER")){
-	 	if (!defined("DB_NODB")) define("DB_NODB",true);
+	if (! defined('IS_INSTALLER'))
+	{
+	 	if (! defined("DB_NODB")) define("DB_NODB",true);
 	 	page_header("The game has not yet been installed");
 		output("`#Welcome to `@Legend of the Green Dragon`#, a game by Eric Stevens & JT Traub.`n`n");
 		output("You must run the game's installer, and follow its instructions in order to set up LoGD.  You can go to the installer <a href='installer.php'>here</a>.",true);
@@ -118,14 +116,7 @@ else
 	}
 }
 
-// If you are running a server that has high overhead to *connect* to your
-// database (such as a high latency network connection to mysql),
-// reversing the commenting of the following two code lines may significantly
-// increase your overall performance.  Pconnect uses more server resources though.
-// For more details, see
-// http://php.net/manual/en/features.persistent-connections.php
-//
-
+//-- Settings for Database Adapter
 DB::setAdapter([
 	'hostname' => $DB_HOST,
 	'database' => $DB_NAME,
@@ -137,71 +128,55 @@ DB::setAdapter([
 $link = DB::connect();
 unset($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
-if (false === $link)
+if (false !== $link) define('DB_CONNECTED', true);
+else
 {
- 	if (!defined("IS_INSTALLER"))
+	if (! defined('IS_INSTALLER'))
 	 {
-		$notified=false;
-
-	 	if (!defined("DB_NODB")) define("DB_NODB",true);
+	 	if (! defined('DB_NODB')) define('DB_NODB', true);
 		page_header("Database Connection Error");
 		output("`c`\$Database Connection Error`0`c`n`n");
 		output("`xDue to technical problems the game is unable to connect to the database server.`n`n");
-		if (!$notified) {
-			//the admin did not want to notify him with a script
-			output("Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n");
-			//add the message as it was not enclosed and posted to the smsnotify file
-			output("Please give them the following error message:`n");
-			output("`i`1%s`0`i`n`n",$smsmessage,true);
-		} else {
-			//in any other case
-			output("The admins have been notified of this. As soon as possible they will fix this up.`n`n");
-		}
+
+		//the admin did not want to notify him with a script
+		output("Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n");
 		output("Sorry for the inconvenience,`n");
-		output("Staff of %s",$_SERVER['SERVER_NAME']);
-		addnav("Home","index.php");
+		output("Staff of %s", $_SERVER['SERVER_NAME']);
+		addnav('Home', 'index.php');
 		page_footer();
 	}
-	define("DB_CONNECTED",false);
-}else{
-	define("DB_CONNECTED",true);
+	define('DB_CONNECTED', false);
 }
 
-if (! DB_CONNECTED)
+if (DB_CONNECTED)
 {
-	if (!defined("IS_INSTALLER") && DB_CONNECTED)
+	define('LINK', $link);
+	define('DB_CHOSEN', true);
+}
+else
+{
+	if (! defined('IS_INSTALLER') && DB_CONNECTED)
 	{
-	 	if (!defined("DB_NODB")) define("DB_NODB",true);
+	 	if (! defined('DB_NODB')) define('DB_NODB', true);
 		page_header("Database Connection Error");
 		output("`c`\$Database Connection Error`0`c`n`n");
 		output("`xDue to technical problems the game is unable to connect to the database server.`n`n");
-		if (!$notified) {
-			//the admin did not want to notify him with a script
-			output("Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n");
-			//add the message as it was not enclosed and posted to the smsnotify file
-			output("Please give them the following error message:`n");
-			output("`i`1%s`0`i`n`n",$smsmessage,true);
-		} else {
-			//in any other case
-			output("The admins have been notified of this. As soon as possible they will fix this up.`n`n");
-		}
+		//the admin did not want to notify him with a script
+		output("Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n");
+		//add the message as it was not enclosed and posted to the smsnotify file
+		output("Please give them the following error message:`n");
 		output("Sorry for the inconvenience,`n");
 		output("Staff of %s",$_SERVER['SERVER_NAME']);
-		addnav("Home","index.php");
+		addnav('Home', 'index.php');
 		page_footer();
 	}
-	define("DB_CHOSEN",false);
-}else{
-	define("LINK",$link);
-	define("DB_CHOSEN",true);
+	define('DB_CHOSEN', false);
 }
-if ($logd_version == getsetting("installer_version","-1")) {
-	define("IS_INSTALLER", false);
-}
+if ($logd_version == getsetting('installer_version', '-1')) define('IS_INSTALLER', false);
 
 //Generate our settings object
 $settings = new settings('settings');
-header("Content-Type: text/html; charset=".getsetting('charset','ISO-8859-1'));
+header("Content-Type: text/html; charset=".getsetting('charset','UTF-8'));
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin']){
 	// force the abandoning of the session when the user should have been
@@ -219,7 +194,7 @@ $cp = $copyright;
 $l = $license;
 
 php_generic_environment();
-do_forced_nav(ALLOW_ANONYMOUS,OVERRIDE_FORCED_NAV);
+do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
 $script = substr($SCRIPT_NAME,0,strrpos($SCRIPT_NAME,"."));
 mass_module_prepare(array(
@@ -231,26 +206,26 @@ mass_module_prepare(array(
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession=$session;
-if (!isset($session['user']['loggedin'])) $session['user']['loggedin']=false;
+if (! isset($session['user']['loggedin'])) $session['user']['loggedin']=false;
 
 if ($session['user']['loggedin']!=true && !ALLOW_ANONYMOUS){
 	redirect("login.php?op=logout");
 }
 
-if (!isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
-if (!isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
-if (!isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
-if (!isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
-if (!isset($session['counter'])) $session['counter']=0;
-$session['counter']++;
-$nokeeprestore=array("newday.php"=>1,"badnav.php"=>1,"motd.php"=>1,"mail.php"=>1,"petition.php"=>1);
-if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME]=1;
-if (!isset($nokeeprestore[$SCRIPT_NAME]) || !$nokeeprestore[$SCRIPT_NAME]) {
-  $session['user']['restorepage']=$REQUEST_URI;
-}else{
+if (! isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
+if (! isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
+if (! isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
+if (! isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
+if (! isset($session['counter'])) $session['counter']=0;
 
-}
-if ($logd_version != getsetting("installer_version","-1") && !defined("IS_INSTALLER")){
+$session['counter']++;
+$nokeeprestore = ['newday.php' => 1,'badnav.php' => 1,'motd.php' => 1,'mail.php' => 1,'petition.php' => 1];
+
+if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME]=1;
+if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME]) $session['user']['restorepage']=$REQUEST_URI;
+
+if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
+{
 	page_header("Upgrade Needed");
 	output("`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.");
 	output("In order to perform the upgrade, an admin will have to run through the installer.");
@@ -260,7 +235,9 @@ if ($logd_version != getsetting("installer_version","-1") && !defined("IS_INSTAL
 	addnav("Installer (Admins only!)","installer.php");
 	define("NO_SAVE_USER",true);
 	page_footer();
-} elseif ($logd_version == getsetting("installer_version","-1")  && file_exists('installer.php') && substr($_SERVER['SCRIPT_NAME'],-13)!="installer.php") {
+}
+elseif (file_exists('installer.php') && substr($_SERVER['SCRIPT_NAME'],-13) != "installer.php")
+{
 // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
 	page_header("Major Security Risk");
 	output("`\$Remove the file named 'installer.php' from your main game directory! You need to comply in order to get the game up and running.");
@@ -269,19 +246,15 @@ if ($logd_version != getsetting("installer_version","-1") && !defined("IS_INSTAL
 }
 
 
-if (isset($session['user']['hitpoints']) && $session['user']['hitpoints']>0){
-	$session['user']['alive']=true;
-}else{
-	$session['user']['alive']=false;
-}
+if (isset($session['user']['hitpoints']) && $session['user']['hitpoints']>0) $session['user']['alive'] = true;
+else $session['user']['alive'] = false;
 
-if (isset($session['user']['bufflist']))
-	$session['bufflist']=unserialize($session['user']['bufflist']);
-else
-	$session['bufflist'] = array();
-if (!is_array($session['bufflist'])) $session['bufflist']=array();
+if (isset($session['user']['bufflist'])) $session['bufflist']=unserialize($session['user']['bufflist']);
+else $session['bufflist'] = array();
+
+if (! is_array($session['bufflist'])) $session['bufflist']=array();
 $session['user']['lastip']=$REMOTE_ADDR;
-if (!isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi'])<32){
+if (! isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi'])<32){
 	if (!isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid'])<32){
 		$u=md5(microtime());
 		setcookie("lgi",$u,strtotime("+365 days"));
@@ -419,17 +392,16 @@ if (getsetting('debug',0)) {
 // This however is the only context where blockmodule can be called safely!
 // You should do as LITTLE as possible here and consider if you can hook on
 // a page header instead.
-modulehook("everyhit");
-if ($session['user']['loggedin']) {
-	modulehook("everyhit-loggedin");
-}
+modulehook('everyhit');
+if ($session['user']['loggedin']) modulehook("everyhit-loggedin");
 
 // This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of getsetting().
 global $fiveminuteload;
 $lastcheck = getsetting("systemload_lastcheck",0);
 $fiveminuteload = getsetting("systemload_lastload",0);
 $currenttime = time();
-if ($currenttime - $lastcheck > 30){
+if ($currenttime - $lastcheck > 30)
+{
 	$load = exec("uptime");
 	$load = explode("load average:", $load);
 	$load = explode(", ", $load[1]);
