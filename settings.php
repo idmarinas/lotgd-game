@@ -9,20 +9,6 @@ $game_dir='';
 // This DEPENDS on your hosting! It is 100% sure if you use shared hosting this is different
 // If you have a rootserver, you'd know what your directory is =)
 
-$DB_TYPE='mysql';
-/* * * *
- * All is PDO using Zend DB Component
- * Avaiable values for DBTYPE:
- *
- * - mysql:				The default value. Are you unsure take this.
- * - mysql_pdo:			The MySQL extesion PDO oriented. This use Zend DB component
- * - mysqli_oos:		The MySQLi extension of PHP5, object oriented style
- * - mysqli_proc:		The MySQLi extension of PHP5, procedural style
- *
- If you encounter problems with one of them, please let the developer know at https://bitbucket.org/idmarinas/lotgd-juego
- Any other than "mysql" seem to be not perfectly integrated somehow, but work most of the time.
- */
-
 $gz_handler_on=0;
 /* set to 1 if you want to enable gzip compression to save bandwith (~30-50%), but it costs slightly more processor power for PHP to get it done. z_lib in apache is favoured if you have direct access to your machine.
 Actually, if you can set this to 0 and add these lines in i.e. /etc/php5/apache2/conf.d into a randomly named .ini file:
