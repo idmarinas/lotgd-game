@@ -10,19 +10,14 @@ preg_match_all("'<body[^>]*>(.*)</body>'", $license, $shortlicense);
 $license = $shortlicense[1][0];
 output("`@`c`bLicense Agreement`b`c`0");
 output("`2Before continuing, you must read and understand the following license agreement.`0`n`n");
-/**
- * Old md5 484d213db9a69e79321feafb85915ff1
- * New md5 bad87ff158157c4f5b600e807c6e25c2
- */
-if (md5($license) == 'bad87ff158157c4f5b600e807c6e25c2')
+
+if (md5($license) == '484d213db9a69e79321feafb85915ff1')
 {
 	rawoutput("<div style='height: 350px; max-height: 350px; overflow: auto; color: #FFFFFF; background-color: #000000; padding: 10px;'>");
-	rawoutput("<base href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode'>");
-	rawoutput("<base target='_blank'>");
+	rawoutput("<base href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode' target='_blank'>");
 	rawoutput($license);
 	rawoutput("</div>");
-	rawoutput("<base href='http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."'>");
-	rawoutput("<base target='_self'>");
+	rawoutput("<base href='http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."' target='_self'>");
 }
 else
 {
