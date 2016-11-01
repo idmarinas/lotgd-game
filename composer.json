@@ -1,8 +1,7 @@
 {
-    "name": "idmarinas/ignis",
+    "name": "idmarinas/lotgd",
     "description": ".",
-    "type": "library",
-    "license": "proprietary",
+    "license": "LICENSE.txt",
     "version": "1.0.0",
     "homepage": "http://dragonverde.infommo.es",
     "time": "2016-09-06",
@@ -15,7 +14,7 @@
 			"name"     : "Iván Diaz Marinas",
 			"email"    : "contacto@infommo.es",
 			"homepage" : "http://dragonverde.infommo.es",
-			"role"     : "Developer, Creator"
+			"role"     : "Developer"
 		}
 	],
     "config": {
