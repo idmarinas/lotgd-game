@@ -33,7 +33,8 @@ ob_end_clean();
 if (false === $link)
 {
 	output("`\$Blast!  I wasn't able to connect to the database server with the information you provided!");
-	output("`2This means that either the database server address, database username, or database password you provided were wrong, or else the database server isn't running.");
+	output("`2This means that either the database server address, database username, database password or database name you provided were wrong, or else the database server isn't running.`n");
+	output('`$Remember create database before try connect.`2`n');
 	output("The specific error the database returned was:");
 	rawoutput("<blockquote>".$error."</blockquote>");
 	output("If you believe you provided the correct information, make sure that the database server is running (check documentation for how to determine this).");
