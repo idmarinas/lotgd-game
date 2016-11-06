@@ -77,14 +77,14 @@ Class DB
 
 		if ($force === false)
 		{
-			$special_prefixes = array();
+			$special_prefixes = [];
 
 			// The following file should be used to override or modify the
 			// special_prefixes array to be correct for your site.  Do NOT
 			// do this unles you know EXACTLY what this means to you, your
 			// game, your county, your state, your nation, your planet and
 			// your universe!
-			if (file_exists("prefixes.php")) require_once("prefixes.php");
+			if (file_exists('prefixes.php')) require_once 'prefixes.php';
 
 			$prefix = $DB_PREFIX;
 			if (isset($special_prefixes[$tablename])) $prefix = $special_prefixes[$tablename];
@@ -102,25 +102,19 @@ Class DB
 
 		$adapter = self::getAdapter();
 
-		$adapter->getProfiler()->profilerStart($sql);
-		$statement = $adapter->query($sql);
-		$adapter->getProfiler()->profilerFinish();
-
-		$result = $statement->execute();
-
-		if (! $result && $die === true)
+		try
 		{
-			//online if the installer is running ignore this, else THROW error
-			if (defined('IS_INSTALLER') && IS_INSTALLER) return [];
-			else
-			{
-				$title = 'Error in the database';
-				if ($session['user']['superuser'] & SU_DEVELOPER || 1) $message = '<pre>'.HTMLEntities($sql, ENT_COMPAT, getsetting('charset', 'UTF_8')).'</pre>'.error(LINK);
-				else $message = "A most bogus error has occurred.  I apologise, but the page you were trying to access is broken.  Please use your browser's back button and try again. Additionally, report this via petition to somebody from staff with the precise location and what you did. <br/><br/>Thanks";
+			$adapter->getProfiler()->profilerStart($sql);
+			$statement = $adapter->query($sql);
+			$adapter->getProfiler()->profilerFinish();
 
-				die(self::template($title, $message, true));
-			}
+			$result = $statement->execute();
 		}
+		catch(\Exception $ex)
+		{
+			return false;
+		}
+
 		$profiler = $adapter->getProfiler()->getProfiles();
 
 		if ($profiler[0]['elapse'] >= 0.5)
@@ -132,7 +126,7 @@ Class DB
 		$dbinfo['queriesthishit']++;
 		$dbinfo['querytime'] += $profiler[0]['elapse'];
 
-		//-- Guardar datos útiles
+		//-- Save data for usage
 		self::$generatedValue = $result->getGeneratedValue();
 		self::$affectedRows = $result->getAffectedRows();
 		self::$errorInfo = 	$result->getResource()->errorInfo();
@@ -146,16 +140,18 @@ Class DB
 		if (is_array($result))
 		{
 			//cached data
-			if (list($key,$val)=each($result)) return $val;
+			if (list($key, $val) = each($result)) return $val;
 			else return false;
 		}
-		else return $result->next();
+		else if ('object' == gettype($sresultql)) return $result->next();
+		else $result;
 	}
 
 	public static function num_rows($result)
 	{
 		if (is_array($result)) return count($result);
-		else return $result->count();
+		else if ('object' == gettype($result)) return $result->count();
+		else return (int) $result;
 	}
 
 	public static function affected_rows($result = false)
@@ -201,12 +197,9 @@ Class DB
 			self::$sqlString = $objectString;
 
 			$result = self::query($objectString);
-			$data = [];
-			while ($row = self::fetch_assoc($result))
-			{
-				$data[] = $row;
-			}
-			updatedatacache($name,$data);
+			if (false === $result) $data = [];
+			else $data = self::toArray($result);
+			updatedatacache($name, $data);
 			reset($data);
 
 			return $data;
@@ -214,12 +207,9 @@ Class DB
 		else
 		{
 			$result = self::query($sql);
-			$data = array();
-			while ($row = self::fetch_assoc($result))
-			{
-				$data[] = $row;
-			}
-			updatedatacache($name,$data);
+			if (false === $result) $data = [];
+			else $data = self::toArray($result);
+			updatedatacache($name, $data);
 			reset($data);
 
 			return $data;
