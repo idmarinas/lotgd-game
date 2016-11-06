@@ -1,13 +1,19 @@
 <?php
-require_once("lib/installer/installer_functions.php");
-if (array_key_exists('modulesok',$_POST)){
+require_once 'lib/installer/installer_functions.php';
+
+if (array_key_exists('modulesok',$_POST))
+{
 	$session['moduleoperations'] = $_POST['modules'];
 	$session['stagecompleted'] = $stage;
 	header("Location: installer.php?stage=".($stage+1));
 	exit();
-}elseif (array_key_exists('moduleoperations',$session) && is_array($session['moduleoperations'])){
+}
+elseif (array_key_exists('moduleoperations',$session) && is_array($session['moduleoperations']))
+{
 	$session['stagecompleted'] = $stage;
-}else{
+}
+else
+{
 	$session['stagecompleted'] = $stage - 1;
 }
 output("`@`c`bManage Modules`b`c");
@@ -18,17 +24,20 @@ output("Not all modules are ideal for all sites, for example, there's a module c
 output("`n`n`^If you are not familiar with Legend of the Green Dragon, and how the game is played, it is probably wisest to choose the default set of modules to be installed.");
 output("`n`n`@There is an extensive community of users who write modules for LoGD at <a href='http://dragonprime.net/'>http://dragonprime.net/</a>.",true);
 $phpram = ini_get("memory_limit");
-if (return_bytes($phpram) < 12582912 && $phpram!=-1 && !$session['overridememorylimit'] && !$session['dbinfo']['upgrade']) {// 12 MBytes
+if (return_bytes($phpram) < 12582912 && $phpram!=-1 && ! $session['overridememorylimit'] && !$session['dbinfo']['upgrade']) // 12 MBytes
+{
 	// enter this ONLY if it's not an upgrade and if the limit is really too low
 	output("`n`n`\$Warning: Your PHP memory limit is set to a very low level.");
 	output("Smaller servers should not be affected by this during normal gameplay but for this installation step you should assign at least 12 Megabytes of RAM for your PHP process.");
 	output("For now we will skip this step, but before installing any module, make sure to increase you memory limit.");
 	output("`nYou can proceed at your own risk. Be aware that a blank screen indicates you *must* increase the memory limit.");
 	output("`n`nTo override click again on \"Set Up Modules\".");
-	$session['stagecompleted'] = "8";
+	$session['stagecompleted'] = 8;
 	$session['overridememorylimit'] = true;
 	$session['skipmodules'] = true;
-} else {
+}
+else
+{
 	if (isset($session['overridememorylimit']) && $session['overridememorylimit']) {
 		output("`4`n`nYou have been warned... you are now working on your own risk.`n`n");
 		$session['skipmodules'] = false;
@@ -36,12 +45,14 @@ if (return_bytes($phpram) < 12582912 && $phpram!=-1 && !$session['overridememory
 	$submit = translate_inline("Save Module Settings");
 	$install = translate_inline("Select Recommended Modules");
 	$reset = translate_inline("Reset Values");
-	$all_modules = array();
-	$sql = "SELECT * FROM ".db_prefix("modules")." ORDER BY category,active DESC,formalname";
-	$result = @db_query($sql);
-	if ($result!==false){
-		while ($row = db_fetch_assoc($result)){
-			if (!array_key_exists($row['category'],$all_modules)){
+	$all_modules = [];
+	$result = DB::query("SELECT * FROM ".db_prefix("modules")." ORDER BY category, active DESC, formalname");
+	if (false !== $result)
+	{
+		foreach($result as $row)
+		{
+			if (! array_key_exists($row['category'], $all_modules))
+			{
 				$all_modules[$row['category']] = array();
 			}
 			$row['installed']=true;
@@ -49,30 +60,31 @@ if (return_bytes($phpram) < 12582912 && $phpram!=-1 && !$session['overridememory
 		}
 	}
 	$install_status = get_module_install_status();
-		$uninstalled = $install_status['uninstalledmodules'];
+	$uninstalled = $install_status['uninstalledmodules'];
 	reset($uninstalled);
-	$invalidmodule = array(
-				"version"=>"",
-				"author"=>"",
-				"category"=>"Invalid Modules",
-				"download"=>"",
-				"description"=>"",
-				"invalid"=>true,
-			);
+	$invalidmodule = [
+		'version' => '',
+		'author' => '',
+		'category' => 'Invalid Modules',
+		'download' => '',
+		'description' => '',
+		'invalid' => true,
+	];
 	while (list($key,$modulename) = each($uninstalled)){
-		$row = array();
+		$row = [];
 		//test if the file is a valid module or a lib file/whatever that got in, maybe even malcode that does not have module form
 		$file = file_get_contents("modules/$modulename.php");
-		if (strpos($file,$modulename."_getmoduleinfo")===false ||
+		if (strpos($file, $modulename."_getmoduleinfo") === false ||
 			//strpos($file,$shortname."_dohook")===false ||
 			//do_hook is not a necessity
-			strpos($file,$modulename."_install")===false ||
-			strpos($file,$modulename."_uninstall")===false) {
+			strpos($file, $modulename."_install") === false ||
+			strpos($file, $modulename."_uninstall") === false)
+		{
 			//here the files has neither do_hook nor getinfo, which means it won't execute as a module here --> block it + notify the admin who is the manage modules section
-			$moduleinfo=array_merge($invalidmodule,array("name"=>$modulename.".php ".appoencode(translate_inline("(`\$Invalid Module! Contact Author or check file!`0)"))));
-		} else {
-			$moduleinfo= get_module_info($modulename);
+			$modulenametext = $modulename.".php ".appoencode(translate_inline("(`\$Invalid Module! Contact Author or check file!`0)"));
+			$moduleinfo = array_merge($invalidmodule, [ 'name' => $modulenametext] );
 		}
+		else $moduleinfo = get_module_info($modulename);
 		//end of testing
 		$row['installed'] = false;
 		$row['active'] = false;
@@ -96,11 +108,12 @@ if (return_bytes($phpram) < 12582912 && $phpram!=-1 && !$session['overridememory
 	ksort($all_modules);
 	reset($all_modules);
 	$x=0;
-	while (list($categoryName,$categoryItems)=each($all_modules)){
+	while (list($categoryName, $categoryItems) = each($all_modules)){
 		rawoutput("<tr class='trhead'><td colspan='6'>".tl($categoryName)."</td></tr>");
 		rawoutput("<tr class='trhead'><td>".tl("Uninstalled")."</td><td>".tl("Installed")."</td><td>".tl("Activated")."</td><td>".tl("Recommended")."</td><td>".tl("Module Name")."</td><td>".tl("Author")."</td></tr>");
 		reset($categoryItems);
-		while (list($modulename,$moduleinfo)=each($categoryItems)){
+		while (list($modulename,$moduleinfo) = each($categoryItems))
+		{
 			$x++;
 			//if we specified things in a previous hit on this page, let's update the modules array here as we go along.
 			$moduleinfo['realactive'] = $moduleinfo['active'];
@@ -108,23 +121,25 @@ if (return_bytes($phpram) < 12582912 && $phpram!=-1 && !$session['overridememory
 			if (array_key_exists('moduleoperations',$session) && is_array($session['moduleoperations']) && array_key_exists($modulename,$session['moduleoperations'])){
 				$ops = explode(",",$session['moduleoperations'][$modulename]);
 				reset($ops);
-				while (list($trash,$op) = each($ops)){
-					switch($op){
+				while (list($trash,$op) = each($ops))
+				{
+					switch($op)
+					{
 						case "uninstall":
-						$moduleinfo['installed'] = false;
-						$moduleinfo['active'] = false;
+							$moduleinfo['installed'] = false;
+							$moduleinfo['active'] = false;
 						break;
 						case "install":
-						$moduleinfo['installed'] = true;
-						$moduleinfo['active'] = false;
+							$moduleinfo['installed'] = true;
+							$moduleinfo['active'] = false;
 						break;
 						case "activate":
-						$moduleinfo['installed'] = true;
-						$moduleinfo['active'] = true;
+							$moduleinfo['installed'] = true;
+							$moduleinfo['active'] = true;
 						break;
 						case "deactivate":
-						$moduleinfo['installed'] = true;
-						$moduleinfo['active'] = false;
+							$moduleinfo['installed'] = true;
+							$moduleinfo['active'] = false;
 						break;
 						case "donothing":
 						break;
