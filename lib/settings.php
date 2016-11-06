@@ -3,7 +3,7 @@
 // addnews ready
 // mail ready
 
-require_once("lib/settings.class.php");
+require_once 'lib/settings.class.php';
 
 function savesetting($settingname,$value){
 	global $settings;

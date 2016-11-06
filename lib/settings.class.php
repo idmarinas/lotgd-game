@@ -8,25 +8,32 @@ class settings {
 
 	private $tablename,$settings;
 
-	function __construct($tablename=false) {
-		if ($tablename===false) $tablename=DB::prefix('settings');
-			else $tablename=DB::prefix($tablename);
-		$this->tablename=$tablename;
-		$this->settings="";
+	function __construct($tablename=false)
+	{
+		if ($tablename === false) $tablename = DB::prefix('settings');
+		else $tablename=DB::prefix($tablename);
+
+		$this->tablename = $tablename;
+		$this->settings = '';
 		$this->loadSettings();
 	}
 
 	function saveSetting($settingname,$value){
 		$this->loadSettings();
-		if (!isset($this->settings[$settingname]) && $value){ //value needs to be elimintated - once we have our defaults in lib/data/settings.php ... this can GO
-				$sql = "INSERT INTO " . $this->tablename . " (setting,value) VALUES (\"".addslashes($settingname)."\",\"".addslashes($value)."\")";
-		}elseif (isset($this->settings[$settingname])) {
-				$sql = "UPDATE " . $this->tablename . " SET value=\"".addslashes($value)."\" WHERE setting=\"".addslashes($settingname)."\"";
-		} else {
+		if (!isset($this->settings[$settingname]) && $value)
+		{ //value needs to be elimintated - once we have our defaults in lib/data/settings.php ... this can GO
+			$sql = "INSERT INTO " . $this->tablename . " (setting,value) VALUES (\"".addslashes($settingname)."\",\"".addslashes($value)."\")";
+		}
+		elseif (isset($this->settings[$settingname]))
+		{
+			$sql = "UPDATE " . $this->tablename . " SET value=\"".addslashes($value)."\" WHERE setting=\"".addslashes($settingname)."\"";
+		}
+		else
+		{
 			return false;
 		}
 		DB::query($sql);
-		$this->settings[$settingname]=$value;
+		$this->settings[$settingname] = $value;
 		invalidatedatacache("game".$this->tablename);
 		if (DB::affected_rows()>0) {
 			return true;
@@ -35,18 +42,29 @@ class settings {
 		}
 	}
 
-	function loadSettings(){
-		if (!is_array($this->settings)){
-			$this->settings=datacache("game".$this->tablename);
-			if (!is_array($this->settings)){
-				$this->settings=array();
-				$sql = "SELECT * FROM " . $this->tablename;
-				$result = DB::query($sql);
-				while ($row = DB::fetch_assoc($result)) {
-					$this->settings[$row['setting']] = $row['value'];
+	function loadSettings()
+	{
+		if (!is_array($this->settings))
+		{
+			$this->settings = datacache('game' . $this->tablename);
+			if (! is_array($this->settings))
+			{
+				try
+				{
+					$this->settings = [];
+					$sql = "SELECT * FROM " . $this->tablename;
+					$result = DB::query($sql);
+					while ($row = DB::fetch_assoc($result))
+					{
+						$this->settings[$row['setting']] = $row['value'];
+					}
+					DB::free_result($result);
+					updatedatacache('game'.$this->tablename, $this->settings);
 				}
-				DB::free_result($result);
-				updatedatacache("game".$this->tablename,$this->settings);
+				catch( \Exception $ex)
+				{
+					debug('Cant get Settings.');
+				}
 			}
 		}
 	}
