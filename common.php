@@ -99,12 +99,24 @@ $session =& $_SESSION['session'];
 // problem connecting to the database server.  Useful for migration moves
 // like LotGD.net experienced on 7/20/04.
 ob_start();
-if (file_exists('dbconnect.php')) require_once 'dbconnect.php';
+if (file_exists('dbconnect.php'))
+{
+	require_once 'dbconnect.php';
+
+	//-- Settings for Database Adapter
+	DB::setAdapter($adapter);
+
+	$link = DB::connect();
+
+	unset($adapter);
+}
 else
 {
+	$link = false;
+
 	if (! defined('IS_INSTALLER'))
 	{
-	 	if (! defined("DB_NODB")) define("DB_NODB",true);
+	 	if (! defined('DB_NODB')) define('DB_NODB', true);
 	 	page_header("The game has not yet been installed");
 		output("`#Welcome to `@Legend of the Green Dragon`#, a game by Eric Stevens & JT Traub.`n`n");
 		output("You must run the game's installer, and follow its instructions in order to set up LoGD.  You can go to the installer <a href='installer.php'>here</a>.",true);
@@ -115,18 +127,6 @@ else
 		page_footer();
 	}
 }
-
-//-- Settings for Database Adapter
-DB::setAdapter([
-	'hostname' => $DB_HOST,
-	'database' => $DB_NAME,
-	'charset' => 'utf8',
-	'username' => $DB_USER,
-	'password' => $DB_PASS
-]);
-
-$link = DB::connect();
-unset($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (false !== $link) define('DB_CONNECTED', true);
 else
@@ -176,7 +176,6 @@ if ($logd_version == getsetting('installer_version', '-1')) define('IS_INSTALLER
 
 //Generate our settings object
 $settings = new settings('settings');
-header("Content-Type: text/html; charset=".getsetting('charset','UTF-8'));
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin']){
 	// force the abandoning of the session when the user should have been
