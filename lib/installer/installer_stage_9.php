@@ -1,6 +1,8 @@
 <?php
-require_once("lib/installer/installer_sqlstatements.php");
-require_once("lib/installer/installer_functions.php");
+require_once 'lib/installer/installer_sqlstatements.php';
+require_once 'lib/installer/installer_functions.php';
+require_once 'lib/tabledescriptor.php';
+
 output("`@`c`bBuilding the Tables`b`c");
 output("`2I'm now going to build the tables.");
 output("If this is an upgrade, your current tables will be brought in line with the current version.");
@@ -8,7 +10,6 @@ output("If it's an install, the necessary tables will be placed in your database
 output("`n`@Table Synchronization Logs:`n");
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 $descriptors = descriptors($DB_PREFIX);
-require_once("lib/tabledescriptor.php");
 reset($descriptors);
 while (list($tablename,$descriptor)=each($descriptors)){
 	output("`3Synchronizing table `#$tablename`3..`n");
@@ -23,7 +24,8 @@ output("`n`2The tables now have new fields and columns added, I'm going to begin
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 $dosql = false;
 reset($sql_upgrade_statements);
-foreach ($sql_upgrade_statements as $key=>$val) {
+foreach ($sql_upgrade_statements as $key => $val)
+{
 	if ($dosql){
 		output("`3Version `#%s`3: %s SQL statements...`n",$key,count($val));
 		if (count($val)>0){
@@ -68,7 +70,8 @@ install_module($modulename, false);
 }
 rawoutput("</div>");
 */
-if (!$session['skipmodules']) {
+if (! $session['skipmodules'])
+{
   output("`n`2Now I'll install and configure your modules.");
   reset($session['moduleoperations']);
   rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
@@ -121,7 +124,8 @@ if (!$session['skipmodules']) {
 output("`n`2Finally, I'll clean up old data.`n");
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 reset($descriptors);
-while (list($tablename,$descriptor)=each($descriptors)){
+while (list($tablename,$descriptor)=each($descriptors))
+{
 	output("`3Cleaning up `#$tablename`3...`n");
 	synctable($tablename,$descriptor);
 }
