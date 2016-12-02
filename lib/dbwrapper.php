@@ -115,16 +115,16 @@ Class DB
 			return false;
 		}
 
-		$profiler = $adapter->getProfiler()->getProfiles();
+		$profiler = $adapter->getProfiler()->getLastProfile();
 
-		if ($profiler[0]['elapse'] >= 0.5)
+		if ($profiler['elapse'] >= 0.5)
 			debug(sprintf('Slow Query (%ss): %s',
-				round($profiler[0]['elapse'],3),
+				round($profiler['elapse'],3),
 				HTMLEntities($statement->getSql(), ENT_COMPAT, getsetting('charset', 'UTF_8'))
 			));
 
 		$dbinfo['queriesthishit']++;
-		$dbinfo['querytime'] += $profiler[0]['elapse'];
+		$dbinfo['querytime'] += $profiler['elapse'];
 
 		//-- Save data for usage
 		self::$generatedValue = $result->getGeneratedValue();
