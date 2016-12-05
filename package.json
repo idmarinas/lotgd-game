@@ -23,7 +23,8 @@
     "gulp-uglifycss": "^1.0.5",
     "require-dir": "^0.3.0",
     "merge-stream": "^1.0.0",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "jscs": "^3.0.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
