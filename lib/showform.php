@@ -74,15 +74,6 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		}
 	}
 
-	if (! empty($ulMenu))
-	{
-		rawoutput(sprintf('<ul class="uk-tab" data-uk-tab="{connect:\'#form-%s\'}"><li>%s</li></ul>',
-				$showform_id,
-				implode('</li><li>', $ulMenu)
-			)
-		);
-	}
-
 	$content = [];
 	foreach($ulContent as $value)
 	{
@@ -91,11 +82,25 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		);
 	}
 
-	rawoutput(sprintf('<ul class="uk-switcher" id="form-%s"><li>%s</li></ul>',
-			$showform_id,
-			implode('</li><li>', $content)
-		)
-	);
+	if (! empty($ulMenu))
+	{
+		rawoutput(sprintf('<ul class="uk-tab" data-uk-tab="{connect:\'#form-%s\'}"><li>%s</li></ul>',
+				$showform_id,
+				implode('</li><li>', $ulMenu)
+			)
+		);
+
+		rawoutput(sprintf('<ul class="uk-switcher" id="form-%s"><li>%s</li></ul>',
+				$showform_id,
+				implode('</li><li>', $content)
+			)
+		);
+	}
+	else
+	{
+		rawoutput(implode('', $content));
+	}
+
 	unset($ulContent, $content, $ulMenu);
 
 	tlschema("showform");
