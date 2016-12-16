@@ -6,4 +6,4 @@ dbconnect.php
 composer.phar
 composer.lock
 /vendor
-gulp/tasks/variables.js
+/gulp/variables.js
