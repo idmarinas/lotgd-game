@@ -1,7 +1,7 @@
 lotgd.esproj
 dbconnect.php
 /node_modules
-/dist
+/build
 /bower_components
 composer.phar
 composer.lock
