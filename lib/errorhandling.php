@@ -3,7 +3,7 @@
 // translator ready
 // mail ready
 // Set error reporting to all but notice (for now)
-error_reporting (E_ALL ^ E_NOTICE);
+// error_reporting (E_ALL ^ E_NOTICE);
 #error_reporting (E_ALL);
 
 function set_magic_quotes(&$vars) {
