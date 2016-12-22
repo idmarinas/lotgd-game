@@ -1,0 +1,21 @@
+/**
+ * Modify with your data
+ */
+module.exports = {
+    //-- Data for development
+	development : {
+		dir : '/lotgd', //Directory for beta version
+		alpha : 'lotgd-alpha' //-- Directory for alpha version
+	},
+	//-- Name of build folder
+	build : {
+		dir : 'build' //-- Directory for construct game
+	},
+	//-- Themes for game
+	themes : {
+		dir : 'Templates - LOTGD' //-- Directory of themes for game
+	},
+	production : {
+		dir : '../production'
+	}
+};
