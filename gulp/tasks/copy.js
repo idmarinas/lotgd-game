@@ -4,28 +4,20 @@ var variables = require('../variables');
 var filesCopy = [
 	//-- Todos los archivos y subdirectorios
 	'**/**',
-	//-- Ignorar archivos de ejecución de tareas
-	'!gulp',
-	'!gulp/**',
-	'!gulpfile.js',
-	'!Gruntfile.js',
 	//-- Ignorar archivos que solo se usan en el desarrollo
-	'!assets',
-	'!assets/**',
-	'!dist',
-	'!dist/**',
-	'!node_modules',
-	'!node_modules/**',
-	'!bower_components',
-	'!bower_components/**',
+	'!gulp{,/**}',
+	'!assets{,/**}',
+	'!build{,/**}',
+	'!node_modules{,/**}',
+	'!bower_components{,/**}',
 	'!**/*.dist',
 	'!**/*.md',
 	'!**/*.lock',
 	'!*.json',
+	'!gulpfile.js',
 	//-- Ignorar archivos de instalación
-	'!lib/installer',
-	'!lib/installer/**',
-	'!installer.php',
+	// '!lib/installer{,/**}',
+	// '!installer.php',
 	'!INSTALL.TXT',
 	//-- Otros archivos
 	'!CHANGELOG.txt',
