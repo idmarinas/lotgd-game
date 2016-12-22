@@ -2,10 +2,10 @@
  * Modify with your data
  */
 module.exports = {
-    //-- Data for development
+	//-- Data for development
 	development : {
-		dir : '/lotgd', //Directory for beta version
-		alpha : 'lotgd-alpha' //-- Directory for alpha version
+		dir : 'C:/MAMP/htdocs/lotgd', //Directory for beta version
+		alpha : 'C:/MAMP/htdocs/lotgd-alpha' //-- Directory for alpha version
 	},
 	//-- Name of build folder
 	build : {
@@ -13,7 +13,24 @@ module.exports = {
 	},
 	//-- Themes for game
 	themes : {
-		dir : 'Templates - LOTGD' //-- Directory of themes for game
+		dir : 'C:/Documents/Templates - LOTGD', //-- Directory of themes for game
+		//-- List of themes names for game
+		names : ['jade'],
+		//-- Components for UiKit
+		uikit : {
+			//-- Components of UiKit - Add all components you need
+			components : [
+				'/dist/js/components/tooltip.js',//-- Necesary
+				'/dist/js/components/notify.js',//-- Necesary
+				'/dist/js/components/grid.js',//-- Necesary
+				//-- ADD new components here
+			],
+			//-- Files to ignore
+			exclude : [
+				'/dist/js/components/*.min.js',//-- Ignore min version - NECESARY
+				'/dist/js/components/slideshow-fx.js'//-- Ignore for errors - NECESARY
+			]
+		}
 	},
 	production : {
 		dir : '../production'
