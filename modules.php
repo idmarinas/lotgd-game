@@ -258,7 +258,7 @@ if ($op==""){
 			for ($a=0;$a<count($moduleinfo);$a++) {
 				$i=$numberarray[$a];
 				rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
-				if ($moduleinfo[$i]['invalid']===true) {
+				if (isset($moduleinfo[$i]['invalid']) && $moduleinfo[$i]['invalid']===true) {
 					rawoutput("<td></td><td nowrap valign='top'>");
 					output("Not installable");
 					rawoutput("</td>");
@@ -284,7 +284,7 @@ if ($op==""){
 				rawoutput($moduleinfo[$i]['shortname'] . ".php");
 				rawoutput("</td>");
 				rawoutput("</tr>");
-				if (count($moduleinfo[$i]['requires'])){
+				if (isset($moduleinfo[$i]['requires']) && count($moduleinfo[$i]['requires'])){
 					rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
 					rawoutput("<td>&nbsp;</td>");
 					rawoutput("<td colspan='6'>");
@@ -296,7 +296,8 @@ if ($op==""){
 						}else{
 							output_notl("`\$");
 						}
-						output_notl("$key {$info[0]} -- {$info[1]}`n");
+						if (isset($info[1])) output_notl("$key {$info[0]} -- {$info[1]}`n");
+						else output_notl("$key {$info[0]}`n");
 					}
 					rawoutput("</td>");
 					rawoutput("</tr>");
