@@ -371,7 +371,7 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 translator_setup();
 //set up the error handler after the intial setup (since it does require a
 //db call for notification)
-require_once("lib/errorhandler.php");
+require_once 'lib/errorhandler.php';
 
 if (getsetting('debug',0)) {
 	//Server runs in Debug mode, tell the superuser about it
@@ -401,12 +401,15 @@ $fiveminuteload = getsetting("systemload_lastload",0);
 $currenttime = time();
 if ($currenttime - $lastcheck > 30)
 {
-	$load = exec("uptime");
-	$load = explode("load average:", $load);
-	$load = explode(", ", $load[1]);
-	$fiveminuteload = $load[1];
-	savesetting("systemload_lastload",$fiveminuteload);
-	savesetting("systemload_lastcheck",$currenttime);
+	$load = exec("uptime");//-- Only work in Linux systems
+	if ($load)
+	{
+		$load = explode("load average:", $load);
+		$load = explode(", ", $load[1]);
+		$fiveminuteload = $load[1];
+		savesetting("systemload_lastload",$fiveminuteload);
+		savesetting("systemload_lastcheck",$currenttime);
+	}
 }
 
 ?>
