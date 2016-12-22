@@ -109,7 +109,7 @@ function page_footer($saveuser = true)
 	$z = $y2^$z2;
 
 	//add XAJAX mail stuff
-	if ($session['user']['prefs']['ajax'])
+	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
 		require 'mailinfo_common.php';
 		$xajax->printJavascript('lib/xajax');
