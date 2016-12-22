@@ -250,11 +250,11 @@ class LotgdOutputCollector
 						$out.="<br>\n";
 						break;
 					case "0":
-						if ($this->nestedtags['font']) $out.="</span>";
+						if (isset($this->nestedtags['font']) && $this->nestedtags['font']) $out.="</span>";
 						$this->nestedtags['font'] = false;
 						break;
 					case "b":
-						if ($this->nestedtags['b']){
+						if (isset($this->nestedtags['b']) && $this->nestedtags['b']){
 							$out.="</b>";
 							$this->nestedtags['b']=false;
 						}else{
@@ -263,7 +263,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case "i":
-						if ($this->nestedtags['i']) {
+						if (isset($this->nestedtags['i']) && $this->nestedtags['i']) {
 							$out.="</i>";
 							$this->nestedtags['i']=false;
 						}else{
@@ -272,7 +272,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case "c":
-						if ($this->nestedtags['div']) {
+						if (isset($this->nestedtags['div']) && $this->nestedtags['div']) {
 							$out.="</div>";
 							$this->nestedtags['div']=false;
 						}else{
@@ -281,7 +281,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case "B":
-						if ($this->nestedtags['B']) {
+						if (isset($this->nestedtags['B']) && $this->nestedtags['B']) {
 							$out.="</em>";
 							$this->nestedtags['B']=false;
 						}else{
@@ -290,7 +290,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case ">":
-						if ($this->nestedtags['>']){
+						if (isset($this->nestedtags['>']) && $this->nestedtags['>']){
 							$this->nestedtags['>']=false;
 							$out.="</div>";
 						}else{
@@ -299,7 +299,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case "<":
-						if ($this->nestedtags['<']){
+						if (isset($this->nestedtags['<']) && $this->nestedtags['<']){
 							$this->nestedtags['<']=false;
 							$out.="</div>";
 						}else{
@@ -308,7 +308,7 @@ class LotgdOutputCollector
 						}
 						break;
 					case "H":
-						if ($this->nestedtags['span']) {
+						if (isset($this->nestedtags['span']) && $this->nestedtags['span']) {
 							$out.="</span>";
 							$this->nestedtags['span']=false;
 						}else{
@@ -318,7 +318,7 @@ class LotgdOutputCollector
 						break;
 					case "w":
 						global $session;
-						if(!isset($session['user']['weapon']))
+						if(! isset($session['user']['weapon']))
 							$session['user']['weapon']="";
 						$out.=sanitize($session['user']['weapon']);
 						break;
