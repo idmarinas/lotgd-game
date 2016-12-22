@@ -129,5 +129,5 @@ $html_text
 	updatedatacache("error_notify",$data);
 	debug($data);
 }
-set_error_handler("logd_error_handler");
+// set_error_handler("logd_error_handler");
 ?>
