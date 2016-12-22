@@ -1,36 +1,32 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 
-gulp.task('development', function (callback) {
+gulp.task('development-beta', function (callback) {
 	runSequence(
 		'build',
-
-		//-- Copia todos los archivos a la carpeta de desarrollo
-		'dev-copy',
+		'copy-beta',
 
 		function (error) {
 			if (error) {
 				console.log(error.message);
 			} else {
-				console.log('SE HAN TERMINADO LAS TAREAS DE DESARROLLO CON ÉXITO');
+				console.log('DEVELEPMENT: BETA - FINISHED');
 			}
 			callback(error);
 		}
 	);
 });
 
-gulp.task('test-development', function (callback) {
+gulp.task('development-alpha', function (callback) {
 	runSequence(
 		'build',
-
-		//-- Copia todos los archivos a la carpeta de desarrollo (versión test)
-		'test-copy-dev',
+		'copy-alpha',
 
 		function (error) {
 			if (error) {
 				console.log(error.message);
 			} else {
-				console.log('SE HAN TERMINADO LAS TAREAS DE DESARROLLO CON ÉXITO');
+				console.log('DEVELEPMENT: ALPHA - FINISHED');
 			}
 			callback(error);
 		}

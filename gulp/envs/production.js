@@ -4,7 +4,7 @@ var runSequence = require('run-sequence');
 gulp.task('production', function (callback) {
 	runSequence(
 		'build',
-		'prod-js-min',
+		'min',
 
 		//-- Copia todos los archivos a la carpeta de producción
 		'prod-copy',
@@ -13,7 +13,7 @@ gulp.task('production', function (callback) {
 			if (error) {
 				console.log(error.message);
 			} else {
-				console.log('SE HAN TERMINADO LAS TAREAS DE DESARROLLO CON ÉXITO');
+				console.log('PRODUCTION: FINISHED');
 			}
 			callback(error);
 		}

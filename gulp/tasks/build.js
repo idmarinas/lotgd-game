@@ -4,16 +4,13 @@ var runSequence = require('run-sequence');
 gulp.task('build', function (callback) {
 	runSequence(
 		'build-empty',
-		'copy',
-		'js-lotgd',
-		'js-uikit',
-		'js-jquery',
+		'copy-main',
+		'lotgd',
+		'copy-theme',
 
 		function (error) {
 			if (error) {
 				console.log(error.message);
-			} else {
-				console.log('SE HAN TERMINADO LAS TAREAS DE CONTRUCCIÓN DEL PROYECTO CON ÉXITO');
 			}
 			callback(error);
 		}

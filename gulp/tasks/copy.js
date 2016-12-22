@@ -26,30 +26,30 @@ var filesCopy = [
 	'!README.txt'
 ];
 
-//-- Construir la aplicación
-gulp.task('copy', function () {
+//-- Copy files of game
+gulp.task('copy-main', function () {
 	return gulp.src(filesCopy)
-		.pipe(gulp.dest(variables.build_dir))
+		.pipe(gulp.dest(variables.build.dir))
 	;
 });
 
-//-- Copiar los archivos a la carpeta de desarrollo
-gulp.task('dev-copy', function () {
-	return gulp.src(variables.build_dir + '/**')
-		.pipe(gulp.dest(variables.development_dir))
+//-- Copy to localhost beta
+gulp.task('copy-beta', function () {
+	return gulp.src(variables.build.dir + '{/**,/**/.*}')
+		.pipe(gulp.dest(variables.development.dir))
 	;
 });
 
-//-- Copiar los archivos a la carpeta de desarrollo
-gulp.task('test-copy-dev', function () {
-	return gulp.src(variables.build_dir + '/**')
-		.pipe(gulp.dest(variables.development_test_dir))
+//-- Copy to localhost alpha
+gulp.task('copy-alpha', function () {
+	return gulp.src(variables.build.dir + '{/**,/**/.*}')
+		.pipe(gulp.dest(variables.development.alpha))
 	;
 });
 
-//-- Copiar los archivos a la carpeta de producción
-gulp.task('prod-copy', function () {
-	return gulp.src(variables.build_dir + '/**')
-		.pipe(gulp.dest(variables.production_dir))
+//-- Copy to production directory
+gulp.task('copy-prod', function () {
+	return gulp.src(variables.build.dir + '{/**,/**/.*}')
+		.pipe(gulp.dest(variables.production.dir))
 	;
 });

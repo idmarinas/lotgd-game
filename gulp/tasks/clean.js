@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var del = require('del');
 var variables = require('../variables');
 
-//-- Borrar los archivos de la carpeta CSS
+//-- Delete content of directory build
 gulp.task('build-empty', function () {
 	return del([
-		variables.build_dir
+		variables.build.dir
 	]);
 });
