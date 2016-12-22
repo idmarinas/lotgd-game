@@ -1,6 +1,6 @@
-//Javascript Generic DOM
-//By Eric Stevens
-//
+/*! Javascript Generic DOM
+ * By Eric Stevens
+ */
 function fetchDOM(filename){
 	var xmldom;
 	if (document.implementation &&

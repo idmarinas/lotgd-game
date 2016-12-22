@@ -1,4 +1,4 @@
-/*
+/*!
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
  * Version 2.1a Copyright Paul Johnston 2000 - 2002.
