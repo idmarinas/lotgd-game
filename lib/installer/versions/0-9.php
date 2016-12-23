@@ -205,6 +205,6 @@ return [
 	"INSERT INTO " . db_prefix("masters") . " VALUES (13,'Adoawyr',13,'Gargantuan Broad Sword','If I could have picked up this sword, I probably would have done better!','Haha, I couldn\\'t even pick the sword UP and I still won!',NULL,NULL,143,26,26)",
 	"INSERT INTO " . db_prefix("masters") . " VALUES (14,'Yoresh',14,'Death Touch','Well, you evaded my touch.  I salute you!','Watch out for my touch next time!',NULL,NULL,154,28,28)",
 
-	"INSERT INTO " . db_prefix("news") . " VALUES (1,'`^A strange awakening takes place in the world.`0',now(), 0, '', '')",
+	"INSERT INTO " . db_prefix("news") . " VALUES (1,'`^A strange awakening takes place in the world.`0',now(), 0, '', '')"
 
-]
+];
