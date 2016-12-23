@@ -110,7 +110,7 @@ class LotgdTemplate
 	{
 		global $templatename, $session, $y, $z, $y2, $z2, $lc, $x, $_defaultskin;
 
-		if ('' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
+		if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
 		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $_defaultskin);
 		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $_defaultskin;
 
@@ -126,9 +126,10 @@ class LotgdTemplate
 
 		$this->themefolder = $filterChain->filter($this->themefolder);
 
-		$y = 0;
-		$z = $y2^$z2;
-		$$z = $lc . $$z . '<br>';
+		//-- Seem to not have function
+		// $y = 0;
+		// $z = $y2^$z2;
+		// $$z = $lc . $$z . '<br>';
 	}
 }
 
