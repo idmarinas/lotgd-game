@@ -8,15 +8,15 @@ output("`nPlease note that in order to use the installer, you must have cookies 
 if (DB_CHOSEN)
 {
 	$sql = "SELECT count(*) AS c FROM accounts WHERE superuser & ".SU_MEGAUSER;
-	$result = db_query($sql);
+	$result = DB::query($sql);
 	$row = db_fetch_assoc($result);
 	if ($row['c'] == 0){
 		$needsauthentication = false;
 	}
 	if (httppost("username")>""){
 		debug(md5(md5(stripslashes(httppost("password")))), true);
-		$sql = "SELECT * FROM ".db_prefix("accounts")." WHERE login='".httppost("username")."' AND password='".md5(md5(stripslashes(httppost("password"))))."' AND superuser & ".SU_MEGAUSER;
-		$result = db_query($sql);
+		$sql = "SELECT * FROM ".DB::prefix("accounts")." WHERE login='".httppost("username")."' AND password='".md5(md5(stripslashes(httppost("password"))))."' AND superuser & ".SU_MEGAUSER;
+		$result = DB::query($sql);
 		if (db_num_rows($result) > 0){
 			$row = db_fetch_assoc($result);
 			debug($row['password'], true);
@@ -52,8 +52,8 @@ if (DB_CHOSEN)
 			output("`\$That username / password was not found, or is not an account with sufficient privileges to perform the upgrade.`n");
 		}
 	}else{
-		$sql = "SELECT count(*) AS c FROM ".db_prefix("accounts")." WHERE superuser & ".SU_MEGAUSER;
-		$result = db_query($sql);
+		$sql = "SELECT count(*) AS c FROM ".DB::prefix("accounts")." WHERE superuser & ".SU_MEGAUSER;
+		$result = DB::query($sql);
 		$row = db_fetch_assoc($result);
 		if ($row['c']>0){
 			$needsauthentication=true;

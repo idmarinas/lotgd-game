@@ -2,7 +2,7 @@
 output("`@`c`bSuperuser Accounts`b`c");
 debug($logd_version, true);
 $sql = "SELECT login, password FROM ".db_prefix("accounts")." WHERE superuser & ".SU_MEGAUSER;
-$result = db_query($sql);
+$result = DB::query($sql);
 if (db_num_rows($result)==0){
 	if (httppost("name")>""){
 		$showform=false;
@@ -26,9 +26,9 @@ if (db_num_rows($result)==0){
 			$name = httppost("name");
 			$pass = md5(md5(stripslashes(httppost("pass1"))));
 			$sql = "DELETE FROM ".db_prefix("accounts")." WHERE login='$name'";
-			db_query($sql);
+			DB::query($sql);
 			$sql = "INSERT INTO " .db_prefix("accounts") ." (login,password,superuser,name,ctitle,regdate) VALUES('$name','$pass',$su,'`%Admin `&$name`0','`%Admin', NOW())";
-			$result=db_query($sql);
+			$result=DB::query($sql);
 			if (db_affected_rows($result)==0) {
 				print_r($sql);
 				die("Failed to create Admin account. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.");

@@ -16,7 +16,7 @@ while (list($tablename,$descriptor)=each($descriptors)){
 	synctable($tablename,$descriptor,true);
 	if ($session['dbinfo']['upgrade']==false){
 		//on a clean install, destroy all old data.
-		db_query("TRUNCATE TABLE $tablename");
+		DB::query("TRUNCATE TABLE $tablename");
 	}
 }
 rawoutput("</div>");
@@ -46,7 +46,7 @@ foreach ($sql_upgrade_statements as $key => $val)
 				$count++;
 				if ($count%10==0 && $count!=count($val))
 				output_notl("`6$count...");
-				if (!db_query($sql)) {
+				if (!DB::query($sql)) {
 					output("`n`\$Error: `^'%s'`7 executing `#'%s'`7.`n",
 					db_error(), $sql);
 				}
