@@ -143,7 +143,7 @@ Class DB
 			if (list($key, $val) = each($result)) return $val;
 			else return false;
 		}
-		else if ('object' == gettype($sresultql)) return $result->next();
+		else if ('object' == gettype($result)) return $result->next();
 		else $result;
 	}
 
