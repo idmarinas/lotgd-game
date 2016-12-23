@@ -3,7 +3,7 @@ $creaturefields = "(creatureid,creaturename,creaturelevel,creatureweapon,creatur
 $creaturefields111 = "(creatureid,creaturename,creaturelevel,creatureweapon,creaturelose,creaturewin,creaturegold,creatureexp,creaturehealth,creatureattack,creaturedefense,creatureaiscript,createdby,forest,graveyard)";
 return array(
 	'-1' => [], //needed just as a placeholder for new installs.
-	'0.9' => include_once 'lib/installer/versions/09.php',
+	'0.9' => include_once 'lib/installer/versions/0-9.php',
 "0.9.1"=>array(
 "INSERT INTO " . db_prefix("taunts") . " VALUES (0,'`5\"`6Just wait for my revenge, `4{badguy}`6. It will be swift!`5\" {goodguy} declares.','Bluspring')",
 "INSERT INTO " . db_prefix("taunts") . " VALUES (0,'`5\"`6I\\'m really going to enjoy this new `4{weapon}`6 that {goodguy}`6 had,`5\" exclaimed {badguy}.','joe')",
