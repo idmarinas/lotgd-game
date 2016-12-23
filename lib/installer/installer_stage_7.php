@@ -25,6 +25,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	rawoutput("</td><td>");
 	$version = getsetting('installer_version', '-1');
 	if ($version != '-1') $session['dbinfo']['upgrade'] = true;
+	output('For now not is can do a upgrade installation.`n');
 	// rawoutput("<input type='radio' value='upgrade' name='type' ".($session['dbinfo']['upgrade']? 'checked' : '').">");
 	// output(" `2Perform an upgrade from ");
 	// if ($version == '-1') $version = '0.9.7';
