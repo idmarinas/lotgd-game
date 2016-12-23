@@ -77,7 +77,7 @@ function popup($page, $size = '728x400')
 	// user prefs
 	global $session;
 
-	if ($size === '728x400' && $session['loggedin'])
+	if ($size === '728x400' && isset($session['loggedin']) && $session['loggedin'])
 	{
 		if (!isset($session['user']['prefs'])) $usersize = '728x400';
 		else
@@ -575,7 +575,7 @@ function charstats()
 
 	$u =& $session['user'];
 
-	if ($session['loggedin'])
+	if (isset($session['loggedin']) && $session['loggedin'])
 	{
 		$u['hitpoints']=round($u['hitpoints'],0);
 		$u['experience']=round($u['experience'],0);
@@ -732,7 +732,7 @@ function charstats()
 			// If a module wants to do it's own display of the online chars,
 			// let it.
 			$list = modulehook('onlinecharlist', []);
-			if ($list['handled'])
+			if (isset($list['handled']) && $list['handled'])
 			{
 				$onlinecount = $list['count'];
 				$ret = $list['list'];

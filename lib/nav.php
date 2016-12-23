@@ -306,12 +306,12 @@ function buildnavs()
 		{
 			if ($key > '')
 			{
-				if ($session['loggedin']) tlschema($navschema[$key]);
+				if (isset($session['loggedin']) && $session['loggedin']) tlschema($navschema[$key]);
 				if (substr($key,0,7)=="!array!") $key = unserialize(substr($key,7));
 
 				$navbanner = private_addnav($key);
 
-				if ($session['loggedin']) tlschema();
+				if (isset($session['loggedin']) && $session['loggedin']) tlschema();
 			}
 
 			$sublinks = [];
@@ -379,7 +379,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	}
 	else
 	{
-		if ($text && $session['loggedin'] && $translate)
+		if ($text && isset($session['loggedin']) && $session['loggedin'] && $translate)
 		{
 			tlschema($navschema[$text]);
 			$unschema = 1;
