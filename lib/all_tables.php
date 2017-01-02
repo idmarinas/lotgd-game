@@ -2,1627 +2,1628 @@
 //translator ready
 //addnews ready
 //mail ready
-function get_all_tables(){
-return array(
-	'accounts'=>array(
-		'acctid'=>array(
+function get_all_tables()
+{
+return [
+	'accounts'=>[
+		'acctid'=>[
 			'name'=>'acctid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment' //the unique account ID
-			),
-		'name'=>array(
+		],
+		'name'=>[
 			'name'=>'name', 'type'=>'varchar(100)' //100 chars as UTF-8 take more space, control that yourself in the module or whatnot where you save name/etc
-			),
-		'playername'=>array(
+		],
+		'playername'=>[
 			'name'=>'playername', 'type'=>'varchar(40)' // this is the raw name of the player to modify, use the lib/names.php to do so, it does the work for you.
-			),
-		'sex'=>array(
+		],
+		'sex'=>[
 			'name'=>'sex', 'type'=>'tinyint(4) unsigned', 'default'=>'0' //use SEX_MALE, SEX_FEMALE constnats to check  this!
-			),
-		'strength'=>array(
+		],
+		'strength'=>[
 			'name'=>'strength', 'type'=>'smallint(4) unsigned', 'default'=>'10' //strength of the user
-			),
-		'dexterity'=>array(
+		],
+		'dexterity'=>[
 			'name'=>'dexterity', 'type'=>'smallint(4) unsigned', 'default'=>'10' //dexterity of the user
-			),
-		'intelligence'=>array(
+		],
+		'intelligence'=>[
 			'name'=>'intelligence', 'type'=>'smallint(4) unsigned', 'default'=>'10' //intelligence of the user
-			),
-		'constitution'=>array(
+		],
+		'constitution'=>[
 			'name'=>'constitution', 'type'=>'smallint(4) unsigned', 'default'=>'10' //constitution of the user
-			),
-		'wisdom'=>array(
+		],
+		'wisdom'=>[
 			'name'=>'wisdom', 'type'=>'smallint(4) unsigned', 'default'=>'10' // wisdom of the user
-			),			
+		],
 		//these are the main stats. buffed up attack or defense will be reset eventually =)
-		'specialty'=>array(
+		'specialty'=>[
 			'name'=>'specialty', 'type'=>'varchar(20)', //normally 2 chars are used only
-			),
-		'experience'=>array(
+		],
+		'experience'=>[
 			'name'=>'experience', 'type'=>'bigint(11) unsigned', 'default'=>'0' //the amount of experience
-			),
-		'gold'=>array(
+		],
+		'gold'=>[
 			'name'=>'gold', 'type'=>'int(11) unsigned', 'default'=>'0' //gold on hand
-			),
-		'weapon'=>array(
+		],
+		'weapon'=>[
 			'name'=>'weapon', 'type'=>'varchar(50)', 'default'=>'Fists' //note the default value: not translated here, use at own discretion and remember to check after an update of the core game
-			),
-		'armor'=>array(
+		],
+		'armor'=>[
 			'name'=>'armor', 'type'=>'varchar(50)', 'default'=>'T-Shirt' //same here
-			),
-		'seenmaster'=>array(
+		],
+		'seenmaster'=>[
 			'name'=>'seenmaster', 'type'=>'tinyint(4) unsigned', 'default'=>'0' //has he seen his master today?
-			),
-		'level'=>array(
+		],
+		'level'=>[
 			'name'=>'level', 'type'=>'smallint(4) unsigned', 'default'=>'1' //what level is he? note: reduced to range 0-65535, that's enough.
-			),
-		'defense'=>array(
+		],
+		'defense'=>[
 			'name'=>'defense', 'type'=>'int(11) unsigned', 'default'=>'0' //defensive power the user has which is additional to the base calculated based on stats
-			),
-		'attack'=>array(
+		],
+		'attack'=>[
 			'name'=>'attack', 'type'=>'int(11) unsigned', 'default'=>'0' //offensive power which is additional to the base calculated based on stats
-			),
-		'alive'=>array(
+		],
+		'alive'=>[
 			'name'=>'alive', 'type'=>'tinyint(1) unsigned', 'default'=>'1' //is he alive? redundant as hitpoints<=0 is the exact same thing.
-			),
-		'goldinbank'=>array(
+		],
+		'goldinbank'=>[
 			'name'=>'goldinbank', 'type'=>'int(11)', 'default'=>'0' //gold stored in the bank
-			),
-		'marriedto'=>array(
+		],
+		'marriedto'=>[
 			'name'=>'marriedto', 'type'=>'int(11) unsigned', 'default'=>'0' //married to? note: core does not allow you to marry players, you need a module that can do that
-			),
-		'spirits'=>array(
-			'name'=>'spirits', 'type'=>'int(4)', 'default'=>'0' //in what spirits are you? up from -128 till +127 (I don't remember how SQL calculates that), basically gives the + or - turns a day
-			),
-		'laston'=>array(
+		],
+		'spirits'=>[
+			'name'=>'spirits', 'type'=>'int(4)', 'default'=>'0' //in what spirits are you? up from -128 till +127 (I don't remember how SQL calculates that], basically gives the + or - turns a day
+		],
+		'laston'=>[
 			'name'=>'laston', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00' //last on
-			),
-		'hitpoints'=>array(
+		],
+		'hitpoints'=>[
 			'name'=>'hitpoints', 'type'=>'int(11)', 'default'=>'10' //user hitpoints he currently has
-			),
-		'maxhitpoints'=>array(
+		],
+		'maxhitpoints'=>[
 			'name'=>'maxhitpoints', 'type'=>'int(11) unsigned', 'default'=>'10' //maximum hitpoints he can have
-			),
-		'gems'=>array(
+		],
+		'gems'=>[
 			'name'=>'gems', 'type'=>'int(11) unsigned', 'default'=>'0' //number of gems he has on hand
-			),
-		'weaponvalue'=>array(
+		],
+		'weaponvalue'=>[
 			'name'=>'weaponvalue', 'type'=>'int(11) unsigned', 'default'=>'0' //price of his weapon
-			),
-		'armorvalue'=>array(
+		],
+		'armorvalue'=>[
 			'name'=>'armorvalue', 'type'=>'int(11) unsigned', 'default'=>'0' //price of the armour
-			),
-		'location'=>array(
+		],
+		'location'=>[
 			'name'=>'location', 'type'=>'varchar(50)', 'default'=>'Degolburg' //location he is in
-			),
-		'turns'=>array(
+		],
+		'turns'=>[
 			'name'=>'turns', 'type'=>'int(11) unsigned', 'default'=>'10' //amount of turns he has
-			),
-		'title'=>array(
+		],
+		'title'=>[
 			'name'=>'title', 'type'=>'varchar(50)' //the dragonkilltitle the user has
-			),
-		'password'=>array(
+		],
+		'password'=>[
 			'name'=>'password', 'type'=>'varchar(32)' //the password stored as MD5 hash
-			),
-		'badguy'=>array(
+		],
+		'badguy'=>[
 			'name'=>'badguy', 'type'=>'text' //well, what guy(s) does he fight / did he fight last
-			),
-		'companions'=>array(
+		],
+		'companions'=>[
 			'name'=>'companions', 'type'=>'text' //what are his companions
-			),
-		'allowednavs'=>array(
+		],
+		'allowednavs'=>[
 			'name'=>'allowednavs', 'type'=>'mediumtext' //what navs is he allowed to access (excluding anonymous ones
-			),
-		'loggedin'=>array(
+		],
+		'loggedin'=>[
 			'name'=>'loggedin', 'type'=>'tinyint(4) unsigned', 'default'=>'0' //is he currently logged in? (note to check for a timeout too!)
-			),
-		'resurrections'=>array(
+		],
+		'resurrections'=>[
 			'name'=>'resurrections', 'type'=>'int(11) unsigned', 'default'=>'0' // how often did he resurrect?
-			),
-		'superuser'=>array(
+		],
+		'superuser'=>[
 			'name'=>'superuser', 'type'=>'int(11) unsigned', 'default'=>'1' // superuser flags are stored here
-			),
-		'weapondmg'=>array(
+		],
+		'weapondmg'=>[
 			'name'=>'weapondmg', 'type'=>'int(11)', 'default'=>'0' //damage his weapons deals, already added to attack
-			),
-		'armordef'=>array(
+		],
+		'armordef'=>[
 			'name'=>'armordef', 'type'=>'int(11)', 'default'=>'0' //defense of the armour, already added to defense
-			),
-		'age'=>array(
+		],
+		'age'=>[
 			'name'=>'age', 'type'=>'int(11) unsigned', 'default'=>'0' //increases as it is the number of newdays he had since the last DK
-			),
-		'charm'=>array(
+		],
+		'charm'=>[
 			'name'=>'charm', 'type'=>'int(11) unsigned', 'default'=>'0' //amount of charm points he has
-			),
-		'specialinc'=>array(
+		],
+		'specialinc'=>[
 			'name'=>'specialinc', 'type'=>'varchar(50)' // used to tell the core a special needs to be executed like module:fairy which is used in the forest i.e.
-			),
-		'specialmisc'=>array(
+		],
+		'specialmisc'=>[
 			'name'=>'specialmisc', 'type'=>'varchar(1000)' //put anything in you want, but it can be overwritten by modules that need it!
-			),
-		'login'=>array(
+		],
+		'login'=>[
 			'name'=>'login', 'type'=>'varchar(50)' //login name ... might differ from playername!
-			),
-		'lastmotd'=>array(
+		],
+		'lastmotd'=>[
 			'name'=>'lastmotd',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			), //explains itself
-		'playerfights'=>array(
+		], //explains itself
+		'playerfights'=>[
 			'name'=>'playerfights', 'type'=>'int(11) unsigned', 'default'=>'3' //number of PvP
-			),
-		'lasthit'=>array(
+		],
+		'lasthit'=>[
 			'name'=>'lasthit', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00' //last pagehit when?
-			),
-		'seendragon'=>array(
+		],
+		'seendragon'=>[
 			'name'=>'seendragon', 'type'=>'tinyint(4) unsigned', 'default'=>'0' //already seen the dragon today?
-			),
-		'dragonkills'=>array(
+		],
+		'dragonkills'=>[
 			'name'=>'dragonkills', 'type'=>'int(11) unsigned', 'default'=>'0' //amount of dragonkills
-			),
-		'locked'=>array(
+		],
+		'locked'=>[
 			'name'=>'locked', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'restorepage'=>array(
+		],
+		'restorepage'=>[
 			'name'=>'restorepage', 'type'=>'varchar(128)', 'null'=>'1'
-			),
-		'hashorse'=>array(
+		],
+		'hashorse'=>[
 			'name'=>'hashorse', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'bufflist'=>array(
+		],
+		'bufflist'=>[
 			'name'=>'bufflist', 'type'=>'text'
-			),
-		'gentime'=>array(
+		],
+		'gentime'=>[
 			'name'=>'gentime', 'type'=>'double unsigned', 'default'=>'0'
-			),
-		'gentimecount'=>array(
+		],
+		'gentimecount'=>[
 			'name'=>'gentimecount', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'lastip'=>array(
+		],
+		'lastip'=>[
 			'name'=>'lastip', 'type'=>'varchar(40)'
-			),
-		'uniqueid'=>array(
+		],
+		'uniqueid'=>[
 			'name'=>'uniqueid', 'type'=>'varchar(32)', 'null'=>'1'
-			),
-		'dragonpoints'=>array(
+		],
+		'dragonpoints'=>[
 			'name'=>'dragonpoints', 'type'=>'text'
-			),
-		'boughtroomtoday'=>array(
+		],
+		'boughtroomtoday'=>[
 			'name'=>'boughtroomtoday', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'emailaddress'=>array(
+		],
+		'emailaddress'=>[
 			'name'=>'emailaddress', 'type'=>'varchar(128)'
-			),
-		'replaceemail'=>array(
+		],
+		'replaceemail'=>[
 			'name'=>'replaceemail', 'type'=>'varchar(128)'
-			),
-		'emailvalidation'=>array(
+		],
+		'emailvalidation'=>[
 			'name'=>'emailvalidation', 'type'=>'varchar(32)'
-			),
-		'forgottenpassowrd'=>array(
+		],
+		'forgottenpassowrd'=>[
 			'name'=>'forgottenpassword', 'type'=>'varchar(32)'
-			),
-		'sentnotice'=>array(
+		],
+		'sentnotice'=>[
 			'name'=>'sentnotice', 'type'=>'tinyint(1)', 'default'=>'0'
-			),
-		'prefs'=>array(
+		],
+		'prefs'=>[
 			'name'=>'prefs', 'type'=>'text'
-			),
-		'pvpflag'=>array(
+		],
+		'pvpflag'=>[
 			'name'=>'pvpflag', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'transferredtoday'=>array(
+		],
+		'transferredtoday'=>[
 			'name'=>'transferredtoday', 'type'=>'smallint(2) unsigned', 'default'=>'0'
-			),
-		'soulpoints'=>array(
+		],
+		'soulpoints'=>[
 			'name'=>'soulpoints', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'gravefights'=>array(
+		],
+		'gravefights'=>[
 			'name'=>'gravefights', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'hauntedby'=>array(
+		],
+		'hauntedby'=>[
 			'name'=>'hauntedby', 'type'=>'varchar(50)'
-			),
-		'deathpower'=>array(
+		],
+		'deathpower'=>[
 			'name'=>'deathpower', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'gensize'=>array(
+		],
+		'gensize'=>[
 			'name'=>'gensize', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'recentcomments'=>array(
+		],
+		'recentcomments'=>[
 			'name'=>'recentcomments',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'donation'=>array(
+		],
+		'donation'=>[
 			'name'=>'donation', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'donationspent'=>array(
+		],
+		'donationspent'=>[
 			'name'=>'donationspent', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'donationconfig'=>array(
+		],
+		'donationconfig'=>[
 			'name'=>'donationconfig', 'type'=>'text'
-			),
-		'referer'=>array(
+		],
+		'referer'=>[
 			'name'=>'referer', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'refererawarded'=>array(
+		],
+		'refererawarded'=>[
 			'name'=>'refererawarded', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'bio'=>array(
+		],
+		'bio'=>[
 			'name'=>'bio', 'type'=>'varchar(255)'
-			),
-		'race'=>array(
+		],
+		'race'=>[
 			'name'=>'race', 'type'=>'varchar(50)', 'default'=>'0'
-			),
-		'biotime'=>array(
+		],
+		'biotime'=>[
 			'name'=>'biotime', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'banoverride'=>array(
+		],
+		'banoverride'=>[
 			'name'=>'banoverride',
 			'type'=>'tinyint(4)',
 			'null'=>'1',
 			'default'=>'0'
-			),
-		'translatorlanguages'=>array(
+		],
+		'translatorlanguages'=>[
 			'name'=>'translatorlanguages', 'type'=>'varchar(128)', 'default'=>'en'
-			),
-		'amountouttoday'=>array(
+		],
+		'amountouttoday'=>[
 			'name'=>'amountouttoday', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'pk'=>array(
+		],
+		'pk'=>[
 			'name'=>'pk', 'type'=>'tinyint(3) unsigned', 'default'=>'0'
-			),
-		'dragonage'=>array(
+		],
+		'dragonage'=>[
 			'name'=>'dragonage', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'bestdragonage'=>array(
+		],
+		'bestdragonage'=>[
 			'name'=>'bestdragonage', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'ctitle'=>array(
+		],
+		'ctitle'=>[
 			'name'=>'ctitle', 'type'=>'varchar(25)'
-			),
-		'beta'=>array(
+		],
+		'beta'=>[
 			'name'=>'beta', 'type'=>'tinyint(3) unsigned', 'default'=>'0'
-			),
-		'slaydragon'=>array(
+		],
+		'slaydragon'=>[
 			'name'=>'slaydragon', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'fedmount'=>array(
+		],
+		'fedmount'=>[
 			'name'=>'fedmount', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'regdate'=>array(
+		],
+		'regdate'=>[
 			'name'=>'regdate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'clanid'=>array(
+		],
+		'clanid'=>[
 			'name'=>'clanid', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'clanrank'=>array(
+		],
+		'clanrank'=>[
 			'name'=>'clanrank', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'clanjoindate'=>array(
+		],
+		'clanjoindate'=>[
 			'name'=>'clanjoindate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'acctid'
-			),
-		'key-name'=>array(
+		],
+		'key-name'=>[
 			'name'=>'name', 'type'=>'key', 'columns'=>'name'
-			),
-		'key-level'=>array(
+		],
+		'key-level'=>[
 			'name'=>'level', 'type'=>'key', 'columns'=>'level'
-			),
-		'key-login'=>array(
+		],
+		'key-login'=>[
 			'name'=>'login', 'type'=>'key', 'columns'=>'login'
-			),
-		'key-alive'=>array(
+		],
+		'key-alive'=>[
 			'name'=>'alive', 'type'=>'key', 'columns'=>'alive'
-			),
-		'key-laston'=>array(
+		],
+		'key-laston'=>[
 			'name'=>'laston', 'type'=>'key', 'columns'=>'laston'
-			),
-		'key-lasthit'=>array(
+		],
+		'key-lasthit'=>[
 			'name'=>'lasthit', 'type'=>'key', 'columns'=>'lasthit'
-			),
-		'key-emailaddress'=>array(
+		],
+		'key-emailaddress'=>[
 			'name'=>'emailaddress', 'type'=>'key', 'columns'=>'emailaddress'
-			),
-		'key-clanid'=>array(
+		],
+		'key-clanid'=>[
 			'name'=>'clanid', 'type'=>'key', 'columns'=>'clanid'
-			),
-		'key-locked'=>array(
+		],
+		'key-locked'=>[
 			'name'=>'locked', 'type'=>'key', 'columns'=>'locked,loggedin,laston'
-			),
-		'key-referer'=>array(
+		],
+		'key-referer'=>[
 			'name'=>'referer', 'type'=>'key', 'columns'=>'referer'
-			),
-		'key-uniqueid'=>array(
+		],
+		'key-uniqueid'=>[
 			'name'=>'uniqueid', 'type'=>'key', 'columns'=>'uniqueid'
-			),
-		'key-emailvalidation'=>array(
+		],
+		'key-emailvalidation'=>[
 			'name'=>'emailvalidation', 'type'=>'key', 'columns'=>'emailvalidation'
-			),
-		),
-	'accounts_output'=>array(
-		'acctid'=>array(
+		],
+		],
+	'accounts_output'=>[
+		'acctid'=>[
 			'name'=>'acctid', 'type'=>'int(11) unsigned'
-			),
-		'output'=>array(
+		],
+		'output'=>[
 			'name'=>'output', 'type'=>'mediumtext'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'acctid'
-			),
-		),
-	'companions'=>array(
-		'companionid'=>array(
+		],
+		],
+	'companions'=>[
+		'companionid'=>[
 			'name'=>'companionid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment',
-			),
-		'name'=>array(
+		],
+		'name'=>[
 			'name'=>'name', 'type'=>'varchar(50)', 'null'=>'0'
-			),
-		'category'=>array(
+		],
+		'category'=>[
 			'name'=>'category', 'type'=>'varchar(50)', 'null'=>'0'
-			),
-		'description'=>array(
+		],
+		'description'=>[
 			'name'=>'description', 'type'=>'text', 'null'=>'0'
-			),
-		'attack'=>array(
+		],
+		'attack'=>[
 			'name'=>'attack', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'1'
-			),
-		'attackperlevel'=>array(
+		],
+		'attackperlevel'=>[
 			'name'=>'attackperlevel', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'0'
-			),
-		'defense'=>array(
+		],
+		'defense'=>[
 			'name'=>'defense', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'1'
-			),
-		'defenseperlevel'=>array(
+		],
+		'defenseperlevel'=>[
 			'name'=>'defenseperlevel', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'0'
-			),
-		'maxhitpoints'=>array(
+		],
+		'maxhitpoints'=>[
 			'name'=>'maxhitpoints', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'10'
-			),
-		'maxhitpointsperlevel'=>array(
+		],
+		'maxhitpointsperlevel'=>[
 			'name'=>'maxhitpointsperlevel', 'type'=>'int(6) unsigned', 'null'=>'0', 'default'=>'10'
-			),
-		'abilities'=>array(
+		],
+		'abilities'=>[
 			'name'=>'abilities', 'type'=>'text', 'null'=>'0', 'default'=>''
-			),
-		'cannotdie'=>array(
+		],
+		'cannotdie'=>[
 			'name'=>'cannotdie', 'type'=>'tinyint(4)', 'null'=>'0', 'default'=>'0'
-			),
-		'cannotbehealed'=>array(
+		],
+		'cannotbehealed'=>[
 			'name'=>'cannotbehealed', 'type'=>'tinyint(4)', 'null'=>'0', 'default'=>'1'
-			),
-		'companionlocation'=>array(
+		],
+		'companionlocation'=>[
 			'name'=>'companionlocation', 'type'=>'varchar(25)', 'default'=>'all'
-			),
-		'companionactive'=>array(
+		],
+		'companionactive'=>[
 			'name'=>'companionactive', 'type'=>'tinyint(25)', 'default'=>'1'
-			),
-		'companioncostdks'=>array(
+		],
+		'companioncostdks'=>[
 			'name'=>'companioncostdks', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'companioncostgems'=>array(
+		],
+		'companioncostgems'=>[
 			'name'=>'companioncostgems', 'type'=>'int(6)', 'default'=>'0'
-			),
-		'companioncostgold'=>array(
+		],
+		'companioncostgold'=>[
 			'name'=>'companioncostgold', 'type'=>'int(10)', 'default'=>'0'
-			),
-		'jointext'=>array(
+		],
+		'jointext'=>[
 			'name'=>'jointext', 'type'=>'text', 'default'=>''
-			),
-		'dyingtext'=>array(
+		],
+		'dyingtext'=>[
 			'name'=>'dyingtext', 'type'=>'varchar(255)', 'default'=>''
-			),
-		'allowinshades'=>array(
+		],
+		'allowinshades'=>[
 			'name'=>'allowinshades', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'allowinpvp'=>array(
+		],
+		'allowinpvp'=>[
 			'name'=>'allowinpvp', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'allowintrain'=>array(
+		],
+		'allowintrain'=>[
 			'name'=>'allowintrain', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'companionid'
-			),
-	),
-	'debug'=>array(
-		'id'=>array(
+		],
+		],
+	'debug'=>[
+		'id'=>[
 			'name'=>'id',
 			'type'=>'bigint(11) unsigned',
 			'extra'=>'auto_increment',
-			),
-		'type'=>array(
+		],
+		'type'=>[
 			'name'=>'type',
 			'type'=>'varchar(100)',
 			'null'=>'1',
-			),
-		'category'=>array(
+		],
+		'category'=>[
 			'name'=>'category',
 			'type'=>'varchar(100)',
 			'null'=>'1',
-			),
-		'subcategory'=>array(
+		],
+		'subcategory'=>[
 			'name'=>'subcategory',
 			'type'=>'varchar(100)',
 			'null'=>'1',
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value',
 			'type'=>'varchar(100)',
 			'null'=>'1',
-			),
-		'key-primary'=>array(
+		],
+		'key-primary'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'id',
-		'key-combikey'=>array(
+		'key-combikey'=>[
 			'name'=>'combikey',
 			'type'=>'key',
 			'unique'=>'1',
 			'columns'=>'type,category,subcategory',
-			),
-		),
-	),
+		],
+		],
+		],
 
-	'deathmessages'=>array(
-		'id'=>array(
+	'deathmessages'=>[
+		'id'=>[
 			'name'=>'deathmessageid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'deathmessage'=>array(
+		],
+		'deathmessage'=>[
 			'name'=>'deathmessage', 'type'=>'varchar(500)', 'null'=>'1'
-			),
-		'forest'=>array(
+		],
+		'forest'=>[
 			'name'=>'forest', 'type'=>'tinyint', 'default'=>'1'
-			),
-		'graveyard'=>array(
+		],
+		'graveyard'=>[
 			'name'=>'graveyard', 'type'=>'tinyint', 'default'=>'0'
-			),
-		'taunt'=>array(
+		],
+		'taunt'=>[
 			'name'=>'taunt', 'type'=>'tinyint', 'default'=>'1'
-			),
-		'editor'=>array(
+		],
+		'editor'=>[
 			'name'=>'editor', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'key-forest'=>array(
+		],
+		'key-forest'=>[
 			'name'=>'forest', 'type'=>'key', 'columns'=>'forest'
-			),
-		'key-graveyard'=>array(
+		],
+		'key-graveyard'=>[
 			'name'=>'graveyard', 'type'=>'key', 'columns'=>'graveyard'
-			),
-		'key-taunt'=>array(
+		],
+		'key-taunt'=>[
 			'name'=>'taunt', 'type'=>'key', 'columns'=>'taunt'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'deathmessageid'
-			)
-		),
-	'paylog'=>array(
-		'payid'=>array(
+			]
+		],
+	'paylog'=>[
+		'payid'=>[
 			'name'=>'payid', 'type'=>'int(11)', 'null'=>'0', 'extra'=>'auto_increment'
-			),
-		'info'=>array(
+		],
+		'info'=>[
 			'name'=>'info', 'type'=>'text'
-			),
-		'response'=>array(
+		],
+		'response'=>[
 			'name'=>'response', 'type'=>'text', 'null'=>'0'
-			),
-		'txnid'=>array(
+		],
+		'txnid'=>[
 			'name'=>'txnid', 'type'=>'varchar(32)', 'null'=>'0'
-			),
-		'amount'=>array(
+		],
+		'amount'=>[
 			'name'=>'amount', 'type'=>'float(9,2)', 'null'=>'0', 'default'=>'0.00'
-			),
-		'name'=>array(
+		],
+		'name'=>[
 			'name'=>'name', 'type'=>'varchar(50)', 'null'=>'0'
-			),
-		'acctid'=>array(
+		],
+		'acctid'=>[
 			'name'=>'acctid', 'type'=>'int(11) unsigned', 'null'=>'0', 'default'=>'0',
-			),
-		'processed'=>array(
+		],
+		'processed'=>[
 			'name'=>'processed', 'type'=>'tinyint(4) unsigned', 'null'=>'0',
 			'default'=>'0'
-			),
-		'filed'=>array(
+		],
+		'filed'=>[
 			'name'=>'filed', 'type'=>'tinyint(4) unsigned', 'null'=>'0',
 			'default'=>'0'
-			),
-		'txfee'=>array(
+		],
+		'txfee'=>[
 			'name'=>'txfee', 'type'=>'float(9,2)', 'null'=>'0',
 			'default'=>'0.00'
-			),
-		'processdate'=>array(
+		],
+		'processdate'=>[
 			'name'=>'processdate', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'payid'
-			),
-		'key-txnid'=>array(
+		],
+		'key-txnid'=>[
 			'name'=>'txnid', 'type'=>'key', 'columns'=>'txnid'
-			),
-		),
-	'armor'=>array(
-		'armorid'=>array(
+		],
+		],
+	'armor'=>[
+		'armorid'=>[
 			'name'=>'armorid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'armorname'=>array(
+		],
+		'armorname'=>[
 			'name'=>'armorname', 'type'=>'varchar(128)', 'null'=>'1'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'defense'=>array(
+		],
+		'defense'=>[
 			'name'=>'defense', 'type'=>'int(11)', 'default'=>'1'
-			),
-		'level'=>array(
+		],
+		'level'=>[
 			'name'=>'level', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'armorid'
-			),
-		),
-	'bans'=>array(
-		'ipfilter'=>array(
+		],
+		],
+	'bans'=>[
+		'ipfilter'=>[
 			'name'=>'ipfilter', 'type'=>'varchar(15)'
-			),
-		'uniqueid'=>array(
+		],
+		'uniqueid'=>[
 			'name'=>'uniqueid', 'type'=>'varchar(32)'
-			),
-		'banexpire'=>array(
+		],
+		'banexpire'=>[
 			'name'=>'banexpire', 'type'=>'datetime', 'null'=>'1'
-			),
-		'banreason'=>array(
+		],
+		'banreason'=>[
 			'name'=>'banreason', 'type'=>'text'
-			),
-		'banner'=>array(
+		],
+		'banner'=>[
 			'name'=>'banner', 'type'=>'varchar(50)'
-			),
-		'lasthit'=>array(
+		],
+		'lasthit'=>[
 			'name'=>'lasthit', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'columns'=>'banexpire,uniqueid,ipfilter'
-			),
-		),
-	'clans'=>array(
-		'clanid'=>array(
+		],
+		],
+	'clans'=>[
+		'clanid'=>[
 			'name'=>'clanid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment'
-			),
-		'clanname'=>array(
+		],
+		'clanname'=>[
 			'name'=>'clanname', 'type'=>'varchar(255)'
-			),
-		'clanshort'=>array(
+		],
+		'clanshort'=>[
 			'name'=>'clanshort', 'type'=>'varchar(50)'
-			),
-		'clanmotd'=>array(
+		],
+		'clanmotd'=>[
 			'name'=>'clanmotd', 'type'=>'text', 'null'=>'1'
-			),
-		'clandesc'=>array(
+		],
+		'clandesc'=>[
 			'name'=>'clandesc', 'type'=>'text', 'null'=>'1'
-			),
-		'motdauthor'=>array(
+		],
+		'motdauthor'=>[
 			'name'=>'motdauthor', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'descauthor'=>array(
+		],
+		'descauthor'=>[
 			'name'=>'descauthor', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'customsay'=>array(
+		],
+		'customsay'=>[
 			'name'=>'customsay', 'type'=>'varchar(15)'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'clanid'
-			),
-		'key-clanname'=>array(
+		],
+		'key-clanname'=>[
 			'name'=>'clanname', 'type'=>'key', 'columns'=>'clanname'
-			),
-		'key-clanshort'=>array(
+		],
+		'key-clanshort'=>[
 			'name'=>'clanshort', 'type'=>'key', 'columns'=>'clanshort'
-			)
-		),
-	'commentary'=>array(
-		'commentid'=>array(
+			]
+		],
+	'commentary'=>[
+		'commentid'=>[
 			'name'=>'commentid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'section'=>array(
+		],
+		'section'=>[
 			'name'=>'section', 'type'=>'varchar(20)', 'null'=>'1'
-			),
-		'author'=>array(
+		],
+		'author'=>[
 			'name'=>'author', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'comment'=>array(
+		],
+		'comment'=>[
 			'name'=>'comment', 'type'=>'varchar(600)'
-			),
-		'postdate'=>array(
+		],
+		'postdate'=>[
 			'name'=>'postdate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'commentid'
-			),
-		'key-section'=>array(
+		],
+		'key-section'=>[
 			'name'=>'section', 'type'=>'key', 'columns'=>'section'
-			),
-		'key-postdate'=>array(
+		],
+		'key-postdate'=>[
 			'name'=>'postdate', 'type'=>'key', 'columns'=>'postdate'
-			)
-		),
-	'creatures'=>array(
-		'creatureid'=>array(
+			]
+		],
+	'creatures'=>[
+		'creatureid'=>[
 			'name'=>'creatureid', 'type'=>'int(11)', 'extra'=>'auto_increment'
-			),
-		'creaturename'=>array(
+		],
+		'creaturename'=>[
 			'name'=>'creaturename', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'creaturecategory'=>array(
+		],
+		'creaturecategory'=>[
 			'name'=>'creaturecategory', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'creaturelevel'=>array(
+		],
+		'creaturelevel'=>[
 			'name'=>'creaturelevel', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureweapon'=>array(
+		],
+		'creatureweapon'=>[
 			'name'=>'creatureweapon', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'creaturelose'=>array(
+		],
+		'creaturelose'=>[
 			'name'=>'creaturelose', 'type'=>'varchar(120)', 'null'=>'1'
-			),
-		'creaturewin'=>array(
+		],
+		'creaturewin'=>[
 			'name'=>'creaturewin', 'type'=>'varchar(120)', 'null'=>'1'
-			),
-		'creaturegold'=>array(
+		],
+		'creaturegold'=>[
 			'name'=>'creaturegold', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureexp'=>array(
+		],
+		'creatureexp'=>[
 			'name'=>'creatureexp', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'oldcreatureexp'=>array(
+		],
+		'oldcreatureexp'=>[
 			'name'=>'oldcreatureexp', 'type'=>'int(11)', 'null'=>'1'
-			), //this field is obsolete and will be dropped by the installer
-		'creaturehealth'=>array(
+		], //this field is obsolete and will be dropped by the installer
+		'creaturehealth'=>[
 			'name'=>'creaturehealth', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureattack'=>array(
+		],
+		'creatureattack'=>[
 			'name'=>'creatureattack', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creaturedefense'=>array(
+		],
+		'creaturedefense'=>[
 			'name'=>'creaturedefense', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureaiscript'=>array(
+		],
+		'creatureaiscript'=>[
 			'name'=>'creatureaiscript', 'type'=>'text', 'null'=>'1'
-			),
-		'createdby'=>array(
+		],
+		'createdby'=>[
 			'name'=>'createdby', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'forest'=>array(
+		],
+		'forest'=>[
 			'name'=>'forest', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'graveyard'=>array(
+		],
+		'graveyard'=>[
 			'name'=>'graveyard', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'creatureid'
-			),
-		'key-creaturecategory'=>array(
+		],
+		'key-creaturecategory'=>[
 			'name'=>'creaturecategory', 'type'=>'key', 'columns'=>'creaturecategory'
-			),			
-		'key-creaturelevel'=>array(
+		],
+		'key-creaturelevel'=>[
 			'name'=>'creaturelevel', 'type'=>'key', 'columns'=>'creaturelevel'
-			)
-		),
-	'debuglog'=>array(
-		'id'=>array(
+			]
+		],
+	'debuglog'=>[
+		'id'=>[
 			'name'=>'id', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment'
-			),
-		'date'=>array(
+		],
+		'date'=>[
 			'name'=>'date', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'actor'=>array(
+		],
+		'actor'=>[
 			'name'=>'actor', 'type'=>'int(11) unsigned', 'null'=>'1'
-			),
-		'target'=>array(
+		],
+		'target'=>[
 			'name'=>'target', 'type'=>'int(11) unsigned', 'null'=>'1'
-			),
-		'message'=>array(
+		],
+		'message'=>[
 			'name'=>'message', 'type'=>'text'
-			),
-		'field'=>array(
+		],
+		'field'=>[
 			'name'=>'field', 'type'=>'varchar(20)', 'null'=>'0', 'default'=>''
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'float(9,2)', 'null'=>'0', 'default'=>'0.00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'id'
-			),
-		'key-date'=>array(
+		],
+		'key-date'=>[
 			'name'=>'date', 'type'=>'key', 'columns'=>'date'
-			),
-		'key-target'=>array(
+		],
+		'key-target'=>[
 			'name'=>'target', 'type'=>'key', 'columns'=>'target'
-			),
-		'key-field'=>array(
+		],
+		'key-field'=>[
 			'name'=>'field', 'type'=>'key', 'columns'=>'actor,field'
-			),
-		),
-	'debuglog_archive'=>array(
-		'id'=>array(
+		],
+		],
+	'debuglog_archive'=>[
+		'id'=>[
 			'name'=>'id', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment'
-			),
-		'date'=>array(
+		],
+		'date'=>[
 			'name'=>'date', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'actor'=>array(
+		],
+		'actor'=>[
 			'name'=>'actor', 'type'=>'int(11) unsigned', 'null'=>'1'
-			),
-		'target'=>array(
+		],
+		'target'=>[
 			'name'=>'target', 'type'=>'int(11) unsigned', 'null'=>'1'
-			),
-		'message'=>array(
+		],
+		'message'=>[
 			'name'=>'message', 'type'=>'text'
-			),
-		'field'=>array(
+		],
+		'field'=>[
 			'name'=>'field', 'type'=>'varchar(20)', 'null'=>'0', 'default'=>''
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'float(9,2)', 'null'=>'0', 'default'=>'0.00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'id'
-			),
-		'key-date'=>array(
+		],
+		'key-date'=>[
 			'name'=>'date', 'type'=>'key', 'columns'=>'date'
-			),
-		'key-target'=>array(
+		],
+		'key-target'=>[
 			'name'=>'target', 'type'=>'key', 'columns'=>'target'
-			),
-		'key-field'=>array(
+		],
+		'key-field'=>[
 			'name'=>'field', 'type'=>'key', 'columns'=>'actor,field'
-			),
-		),
-	'faillog'=>array(
-		'eventid'=>array(
+		],
+		],
+	'faillog'=>[
+		'eventid'=>[
 			'name'=>'eventid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'date'=>array(
+		],
+		'date'=>[
 			'name'=>'date', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'post'=>array(
+		],
+		'post'=>[
 			'name'=>'post', 'type'=>'tinytext'
-			),
-		'ip'=>array(
+		],
+		'ip'=>[
 			'name'=>'ip', 'type'=>'varchar(40)'
-			),
-		'acctid'=>array(
+		],
+		'acctid'=>[
 			'name'=>'acctid', 'type'=>'int(11) unsigned', 'null'=>'1'
-			),
-		'id'=>array(
+		],
+		'id'=>[
 			'name'=>'id', 'type'=>'varchar(32)'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'eventid'
-			),
-		'key-date'=>array(
+		],
+		'key-date'=>[
 			'name'=>'date', 'type'=>'key', 'columns'=>'date'
-			),
-		'key-acctid'=>array(
+		],
+		'key-acctid'=>[
 			'name'=>'acctid', 'type'=>'key', 'columns'=>'acctid'
-			),
-		'key-ip'=>array(
+		],
+		'key-ip'=>[
 			'name'=>'ip', 'type'=>'key', 'columns'=>'ip'
-			)
-		),
-	'gamelog'=>array(
-		'logid'=>array(
+			]
+		],
+	'gamelog'=>[
+		'logid'=>[
 			'name'=>'logid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment',
-			),
-		'message'=>array(
+		],
+		'message'=>[
 			'name'=>'message',
 			'type'=>'text',
-			),
-		'category'=>array(
+		],
+		'category'=>[
 			'name'=>'category',
 			'type'=>'varchar(50)',
-			),
-		'filed'=>array(
+		],
+		'filed'=>[
 			'name'=>'filed',
 			'type'=>'tinyint(4)',
 			'default'=>'0',
-			),
-		'date'=>array(
+		],
+		'date'=>[
 			'name'=>'date',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00',
-			),
-		'who'=>array(
+		],
+		'who'=>[
 			'name'=>'who',
 			'type'=>'int(11) unsigned',
 			'default'=>'0',
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'logid',
-			),
-		'key-date'=>array(
+		],
+		'key-date'=>[
 			'name'=>'date',
 			'type'=>'key',
 			'columns'=>'category,date',
-			),
-		),
-	'logdnetbans'=>array(
-		'banid'=>array('name'=>'banid','type'=>'int(11) unsigned','extra'=>'auto_increment'),
-		'bantype'=>array('name'=>'bantype','type'=>'varchar(20)'),
-		'banvalue'=>array('name'=>'banvalue','type'=>'varchar(255)'),
-		'key-PRIMARY'=>array('name'=>'PRIMARY','type'=>'PRIMARY KEY','unique'=>'1','columns'=>'banid'),
-		),
-	'logdnet'=>array(
-		'serverid'=>array(
+		],
+		],
+	'logdnetbans'=>[
+		'banid'=>['name'=>'banid','type'=>'int(11) unsigned','extra'=>'auto_increment'],
+		'bantype'=>['name'=>'bantype','type'=>'varchar(20)'],
+		'banvalue'=>['name'=>'banvalue','type'=>'varchar(255)'],
+		'key-PRIMARY'=>['name'=>'PRIMARY','type'=>'PRIMARY KEY','unique'=>'1','columns'=>'banid'],
+		],
+	'logdnet'=>[
+		'serverid'=>[
 			'name'=>'serverid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'address'=>array(
+		],
+		'address'=>[
 			'name'=>'address', 'type'=>'varchar(255)'
-			),
-		'description'=>array(
+		],
+		'description'=>[
 			'name'=>'description', 'type'=>'varchar(255)'
-			),
-		'priority'=>array(
+		],
+		'priority'=>[
 			'name'=>'priority', 'type'=>'double', 'default'=>'100'
-			),
-		'lastupdate'=>array(
+		],
+		'lastupdate'=>[
 			'name'=>'lastupdate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'version'=>array(
+		],
+		'version'=>[
 			'name'=>'version', 'type'=>'varchar(255)', 'default'=>'Unknown'
-			),
-		'admin'=>array(
+		],
+		'admin'=>[
 			'name'=>'admin', 'type'=>'varchar(255)', 'default'=>'unknown'
-			),
-		'lastping'=>array(
+		],
+		'lastping'=>[
 			'name'=>'lastping',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'recentips'=>array(
+		],
+		'recentips'=>[
 			'name'=>'recentips',
 			'type'=>'varchar(255)',
 			'default'=>'',
-			),
-		'count'=>array(
+		],
+		'count'=>[
 			'name'=>'count',
 			'type'=>'int(11) unsigned',
 			'default'=>'0',
-			),
-		'lang'=>array(
+		],
+		'lang'=>[
 			'name'=>'lang',
 			'type'=>'varchar(20)',
 			'default'=>'',
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'serverid'
-			)
-		),
-	'mail'=>array(
-		'messageid'=>array(
+			]
+		],
+	'mail'=>[
+		'messageid'=>[
 			'name'=>'messageid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'msgfrom'=>array(
+		],
+		'msgfrom'=>[
 			'name'=>'msgfrom', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'msgto'=>array(
+		],
+		'msgto'=>[
 			'name'=>'msgto', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'subject'=>array(
+		],
+		'subject'=>[
 			'name'=>'subject', 'type'=>'varchar(255)'
-			),
-		'body'=>array(
+		],
+		'body'=>[
 			'name'=>'body', 'type'=>'text'
-			),
-		'sent'=>array(
+		],
+		'sent'=>[
 			'name'=>'sent', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'seen'=>array(
+		],
+		'seen'=>[
 			'name'=>'seen', 'type'=>'tinyint(1)', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'messageid'
-			),
-		'key-msgto'=>array(
+		],
+		'key-msgto'=>[
 			'name'=>'msgto', 'type'=>'key', 'columns'=>'msgto'
-			),
-		'key-seen'=>array(
+		],
+		'key-seen'=>[
 			'name'=>'seen', 'type'=>'key', 'columns'=>'seen'
-			)
-		),
-	'masters'=>array(
-		'creatureid'=>array(
+			]
+		],
+	'masters'=>[
+		'creatureid'=>[
 			'name'=>'creatureid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'creaturename'=>array(
+		],
+		'creaturename'=>[
 			'name'=>'creaturename', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'creaturelevel'=>array(
+		],
+		'creaturelevel'=>[
 			'name'=>'creaturelevel', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureweapon'=>array(
+		],
+		'creatureweapon'=>[
 			'name'=>'creatureweapon', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'creaturelose'=>array(
+		],
+		'creaturelose'=>[
 			'name'=>'creaturelose', 'type'=>'varchar(120)', 'null'=>'1'
-			),
-		'creaturewin'=>array(
+		],
+		'creaturewin'=>[
 			'name'=>'creaturewin', 'type'=>'varchar(120)', 'null'=>'1'
-			),
-		'creaturegold'=>array(
+		],
+		'creaturegold'=>[
 			'name'=>'creaturegold', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureexp'=>array(
+		],
+		'creatureexp'=>[
 			'name'=>'creatureexp', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creaturehealth'=>array(
+		],
+		'creaturehealth'=>[
 			'name'=>'creaturehealth', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creatureattack'=>array(
+		],
+		'creatureattack'=>[
 			'name'=>'creatureattack', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'creaturedefense'=>array(
+		],
+		'creaturedefense'=>[
 			'name'=>'creaturedefense', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'creatureid'
-			)
-		),
-	'moderatedcomments'=>array(
-		'modid'=>array(
+			]
+		],
+	'moderatedcomments'=>[
+		'modid'=>[
 			'name'=>'modid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment'
-			),
-		'comment'=>array(
+		],
+		'comment'=>[
 			'name'=>'comment', 'type'=>'text', 'null'=>'1'
-			),
-		'moderator'=>array(
+		],
+		'moderator'=>[
 			'name'=>'moderator', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'moddate'=>array(
+		],
+		'moddate'=>[
 			'name'=>'moddate', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modid'
-			)
-		),
-	'module_event_hooks'=>array(
-		'event_type'=>array(
+			]
+		],
+	'module_event_hooks'=>[
+		'event_type'=>[
 			'name'=>'event_type', 'type'=>'varchar(20)'
-			),
-		'modulename'=>array(
+		],
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'event_chance'=>array(
+		],
+		'event_chance'=>[
 			'name'=>'event_chance', 'type'=>'text'
-			),
-		'key-modulename'=>array(
+		],
+		'key-modulename'=>[
 			'name'=>'modulename', 'type'=>'key', 'columns'=>'modulename'
-			),
-		'key-event_type'=>array(
+		],
+		'key-event_type'=>[
 			'name'=>'event_type', 'type'=>'key', 'columns'=>'event_type'
-			)
-		),
-	'module_hooks'=>array(
-		'modulename'=>array(
+			]
+		],
+	'module_hooks'=>[
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'location'=>array(
+		],
+		'location'=>[
 			'name'=>'location', 'type'=>'varchar(50)'
-			),
-		'function'=>array(
+		],
+		'function'=>[
 			'name'=>'function', 'type'=>'varchar(50)'
-			),
-		'whenactive'=>array(
+		],
+		'whenactive'=>[
 			'name'=>'whenactive', 'type'=>'text'
-			),
-		'priority'=>array(
+		],
+		'priority'=>[
 			'name'=>'priority','type'=>'int(11)','default'=>'50'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modulename,location,function'
-			),
-		'key-location'=>array(
+		],
+		'key-location'=>[
 			'name'=>'location', 'type'=>'key', 'columns'=>'location'
-			),
-		),
-	'module_objprefs'=>array(
-		'modulename'=>array(
+		],
+		],
+	'module_objprefs'=>[
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'objtype'=>array(
+		],
+		'objtype'=>[
 			'name'=>'objtype', 'type'=>'varchar(50)'
-			),
-		'setting'=>array(
+		],
+		'setting'=>[
 			'name'=>'setting', 'type'=>'varchar(50)'
-			),
-		'objid'=>array(
+		],
+		'objid'=>[
 			'name'=>'objid', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'text', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modulename,objtype,setting,objid'
-			)
-		),
+			]
+		],
 
-	'module_settings'=>array(
-		'modulename'=>array(
+	'module_settings'=>[
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'setting'=>array(
+		],
+		'setting'=>[
 			'name'=>'setting', 'type'=>'varchar(50)'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'text', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modulename,setting'
-			)
-		),
-	'module_userprefs'=>array(
-		'modulename'=>array(
+			]
+		],
+	'module_userprefs'=>[
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'setting'=>array(
+		],
+		'setting'=>[
 			'name'=>'setting', 'type'=>'varchar(50)'
-			),
-		'userid'=>array(
+		],
+		'userid'=>[
 			'name'=>'userid', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'text', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modulename,setting,userid'
-			),
-		'key-modulename'=>array(
+		],
+		'key-modulename'=>[
 			'name'=>'modulename', 'type'=>'key', 'columns'=>'modulename,userid'
-			),
-		),
-	'modules'=>array(
-		'modulename'=>array(
+		],
+		],
+	'modules'=>[
+		'modulename'=>[
 			'name'=>'modulename', 'type'=>'varchar(50)'
-			),
-		'formalname'=>array(
+		],
+		'formalname'=>[
 			'name'=>'formalname', 'type'=>'varchar(255)'
-			),
-		'description'=>array(
+		],
+		'description'=>[
 			'name'=>'description', 'type'=>'text'
-			),
-		'moduleauthor'=>array(
+		],
+		'moduleauthor'=>[
 			'name'=>'moduleauthor', 'type'=>'varchar(255)'
-			),
-		'active'=>array(
+		],
+		'active'=>[
 			'name'=>'active', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'filename'=>array(
+		],
+		'filename'=>[
 			'name'=>'filename', 'type'=>'varchar(255)'
-			),
-		'installdate'=>array(
+		],
+		'installdate'=>[
 			'name'=>'installdate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'installedby'=>array(
+		],
+		'installedby'=>[
 			'name'=>'installedby', 'type'=>'varchar(50)'
-			),
-		'filemoddate'=>array(
+		],
+		'filemoddate'=>[
 			'name'=>'filemoddate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'type'=>array(
+		],
+		'type'=>[
 			'name'=>'type', 'type'=>'tinyint(4)', 'default'=>'0'
-			),
-		'extras'=>array(
+		],
+		'extras'=>[
 			'name'=>'extras', 'type'=>'text', 'null'=>'1'
-			),
-		'category'=>array(
+		],
+		'category'=>[
 			'name'=>'category', 'type'=>'varchar(50)'
-			),
-		'infokeys'=>array(
+		],
+		'infokeys'=>[
 			'name'=>'infokeys', 'type'=>'text'
-			),
-		'version'=>array(
+		],
+		'version'=>[
 			'name'=>'version', 'type'=>'varchar(10)', 'null'=>'1'
-			),
-		'download'=>array(
+		],
+		'download'=>[
 			'name'=>'download', 'type'=>'varchar(200)', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'modulename'
-			)
-		),
-	'motd'=>array(
-		'motditem'=>array(
+			]
+		],
+	'motd'=>[
+		'motditem'=>[
 			'name'=>'motditem',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'motdtitle'=>array(
+		],
+		'motdtitle'=>[
 			'name'=>'motdtitle', 'type'=>'varchar(200)', 'null'=>'1'
-			),
-		'motdbody'=>array(
+		],
+		'motdbody'=>[
 			'name'=>'motdbody', 'type'=>'text', 'null'=>'1'
-			),
-		'motddate'=>array(
+		],
+		'motddate'=>[
 			'name'=>'motddate', 'type'=>'datetime', 'null'=>'1'
-			),
-		'motdtype'=>array(
+		],
+		'motdtype'=>[
 			'name'=>'motdtype', 'type'=>'tinyint(4) unsigned', 'default'=>'0'
-			),
-		'motdauthor'=>array(
+		],
+		'motdauthor'=>[
 			'name'=>'motdauthor', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'motditem'
-			)
-		),
-	'mounts'=>array(
-		'mountid'=>array(
+			]
+		],
+	'mounts'=>[
+		'mountid'=>[
 			'name'=>'mountid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'mountname'=>array(
+		],
+		'mountname'=>[
 			'name'=>'mountname', 'type'=>'varchar(50)'
-			),
-		'mountdesc'=>array(
+		],
+		'mountdesc'=>[
 			'name'=>'mountdesc', 'type'=>'text', 'null'=>'1'
-			),
-		'mountcategory'=>array(
+		],
+		'mountcategory'=>[
 			'name'=>'mountcategory', 'type'=>'varchar(50)'
-			),
-		'mountbuff'=>array(
+		],
+		'mountbuff'=>[
 			'name'=>'mountbuff', 'type'=>'text', 'null'=>'1'
-			),
-		'mountcostgems'=>array(
+		],
+		'mountcostgems'=>[
 			'name'=>'mountcostgems', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'mountcostgold'=>array(
+		],
+		'mountcostgold'=>[
 			'name'=>'mountcostgold', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'mountactive'=>array(
+		],
+		'mountactive'=>[
 			'name'=>'mountactive', 'type'=>'int(11) unsigned', 'default'=>'1'
-			),
-		'mountforestfights'=>array(
+		],
+		'mountforestfights'=>[
 			'name'=>'mountforestfights', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'newday'=>array(
+		],
+		'newday'=>[
 			'name'=>'newday', 'type'=>'text'
-			),
-		'recharge'=>array(
+		],
+		'recharge'=>[
 			'name'=>'recharge', 'type'=>'text'
-			),
-		'partrecharge'=>array(
+		],
+		'partrecharge'=>[
 			'name'=>'partrecharge', 'type'=>'text'
-			),
-		'mountfeedcost'=>array(
+		],
+		'mountfeedcost'=>[
 			'name'=>'mountfeedcost', 'type'=>'int(11) unsigned', 'default'=>'20'
-			),
-		'mountlocation'=>array(
+		],
+		'mountlocation'=>[
 			'name'=>'mountlocation', 'type'=>'varchar(25)', 'default'=>'all'
-			),
-		'mountdkcost'=>array(
+		],
+		'mountdkcost'=>[
 			'name'=>'mountdkcost', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'mountid'
-			),
-		'key-mountid'=>array(
+		],
+		'key-mountid'=>[
 			'name'=>'mountid', 'type'=>'key', 'columns'=>'mountid'
-			)
-		),
-	'nastywords'=>array(
-		'words'=>array(
+			]
+		],
+	'nastywords'=>[
+		'words'=>[
 			'name'=>'words', 'type'=>'text', 'null'=>'1'
-			),
-		'type'=>array(
+		],
+		'type'=>[
 			'name'=>'type', 'type'=>'varchar(10)', 'null'=>'1'
-			)
-		),
-	'news'=>array(
-		'newsid'=>array(
+			]
+		],
+	'news'=>[
+		'newsid'=>[
 			'name'=>'newsid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment'
-			),
-		'newstext'=>array(
+		],
+		'newstext'=>[
 			'name'=>'newstext', 'type'=>'text'
-			),
-		'newsdate'=>array(
+		],
+		'newsdate'=>[
 			'name'=>'newsdate', 'type'=>'date', 'default'=>'0000-00-00'
-			),
-		'accountid'=>array(
+		],
+		'accountid'=>[
 			'name'=>'accountid', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'arguments'=>array(
+		],
+		'arguments'=>[
 			'name'=>'arguments', 'type'=>'text'
-			),
-		'tlschema'=>array(
+		],
+		'tlschema'=>[
 			'name'=>'tlschema', 'type'=>'varchar(255)', 'default'=>'news'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'newsid,newsdate'
-			),
-		'key-accountid'=>array(
+		],
+		'key-accountid'=>[
 			'name'=>'accountid', 'type'=>'key', 'columns'=>'accountid'
-			),
-		'key-newsdate'=>array(
+		],
+		'key-newsdate'=>[
 			'name'=>'newsdate', 'type'=>'key', 'columns'=>'newsdate'
-			),
-		),
-	'petitions'=>array(
-		'petitionid'=>array(
+		],
+		],
+	'petitions'=>[
+		'petitionid'=>[
 			'name'=>'petitionid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'author'=>array(
+		],
+		'author'=>[
 			'name'=>'author', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'date'=>array(
+		],
+		'date'=>[
 			'name'=>'date', 'type'=>'datetime', 'default'=>'0000-00-00 00:00:00'
-			),
-		'status'=>array(
+		],
+		'status'=>[
 			'name'=>'status', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'body'=>array(
+		],
+		'body'=>[
 			'name'=>'body', 'type'=>'text', 'null'=>'1'
-			),
-		'pageinfo'=>array(
+		],
+		'pageinfo'=>[
 			'name'=>'pageinfo', 'type'=>'text', 'null'=>'1'
-			),
-		'closedate'=>array(
+		],
+		'closedate'=>[
 			'name'=>'closedate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
-			),
-		'closeuserid'=>array(
+		],
+		'closeuserid'=>[
 			'name'=>'closeuserid', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'ip'=>array(
+		],
+		'ip'=>[
 			'name'=>'ip', 'type'=>'varchar(40)', 'default'=>''
-			),
-		'id'=>array(
+		],
+		'id'=>[
 			'name'=>'id', 'type'=>'varchar(32)', 'default'=>''
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'petitionid'
-			)
-		),
-	'pollresults'=>array(
-		'resultid'=>array(
+			]
+		],
+	'pollresults'=>[
+		'resultid'=>[
 			'name'=>'resultid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'choice'=>array(
+		],
+		'choice'=>[
 			'name'=>'choice', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'account'=>array(
+		],
+		'account'=>[
 			'name'=>'account', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'motditem'=>array(
+		],
+		'motditem'=>[
 			'name'=>'motditem', 'type'=>'int(11) unsigned', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'resultid'
-			)
-		),
-	'referers'=>array(
+			]
+		],
+	'referers'=>[
 		// This table needs to be myISAM since pre-4.0.14 mysql cannot index
 		// on blob tables under innoDB and we have no way to determine
 		// with 100% accuracy (mysql_get_server_info merely returns an
 		// arbitrary string) what the version of the database is. :/
 		'RequireMyISAM'=>1,
-		'refererid'=>array(
+		'refererid'=>[
 			'name'=>'refererid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'uri'=>array(
+		],
+		'uri'=>[
 			'name'=>'uri', 'type'=>'text', 'null'=>'1'
-			),
-		'count'=>array(
+		],
+		'count'=>[
 			'name'=>'count', 'type'=>'int(11)', 'null'=>'1'
-			),
-		'last'=>array(
+		],
+		'last'=>[
 			'name'=>'last', 'type'=>'datetime', 'null'=>'1'
-			),
-		'site'=>array(
+		],
+		'site'=>[
 			'name'=>'site', 'type'=>'varchar(50)'
-			),
-		'dest'=>array(
+		],
+		'dest'=>[
 			'name'=>'dest', 'type'=>'varchar(255)', 'null'=>'1'
-			),
-		'ip'=>array(
+		],
+		'ip'=>[
 			'name'=>'ip', 'type'=>'varchar(40)', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'refererid'
-			),
-		'key-uri'=>array(
+		],
+		'key-uri'=>[
 			'name'=>'uri', 'type'=>'key', 'columns'=>'uri(100)'
-			),
-		'key-site'=>array(
+		],
+		'key-site'=>[
 			'name'=>'site', 'type'=>'key', 'columns'=>'site'
-			)
-		),
-	'settings'=>array(
-		'setting'=>array(
+			]
+		],
+	'settings'=>[
+		'setting'=>[
 			'name'=>'setting', 'type'=>'varchar(25)'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'varchar(255)'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'setting'
-			)
-		),
-	'settings_extended'=>array(
-		'setting'=>array(
+			]
+		],
+	'settings_extended'=>[
+		'setting'=>[
 			'name'=>'setting', 'type'=>'varchar(50)'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'text'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'setting'
-			)
-		),
-	'taunts'=>array(
-		'tauntid'=>array(
+			]
+		],
+	'taunts'=>[
+		'tauntid'=>[
 			'name'=>'tauntid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'taunt'=>array(
+		],
+		'taunt'=>[
 			'name'=>'taunt', 'type'=>'text', 'null'=>'1'
-			),
-		'editor'=>array(
+		],
+		'editor'=>[
 			'name'=>'editor', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'tauntid'
-			)
-		),
-	'untranslated'=>array(
+			]
+		],
+	'untranslated'=>[
 		// This table needs to be myISAM since pre-4.0.14 mysql cannot index
 		// on blob tables under innoDB and we have no way to determine
 		// with 100% accuracy (mysql_get_server_info merely returns an
 		// arbitrary string) what the version of the database is. :/
 		'RequireMyISAM'=>1,
-		'intext'=>array(
+		'intext'=>[
 			'name'=>'intext', 'type'=>'blob', 'null'=>'0'
-			),
-		'language'=>array(
+		],
+		'language'=>[
 			'name'=>'language', 'type'=>'varchar(10)'
-			),
-		'namespace'=>array(
+		],
+		'namespace'=>[
 			'name'=>'namespace', 'type'=>'varchar(255)'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
-			'columns'=>'intext(200),language,namespace'
-			),
-		'key-language'=>array(
+		'columns'=>'intext(200],language,namespace'
+		],
+		'key-language'=>[
 			'name'=>'language', 'type'=>'key', 'columns'=>'language'
-			),
-		'key-intext1'=>array(
-			'name'=>'intext1', 'type'=>'key', 'columns'=>'intext(200),language'
-			),
-		),
-	'translations'=>array(
-		'tid'=>array(
+		],
+		'key-intext1'=>[
+		'name'=>'intext1', 'type'=>'key', 'columns'=>'intext(200],language'
+		],
+		],
+	'translations'=>[
+		'tid'=>[
 			'name'=>'tid', 'type'=>'int(11)', 'extra'=>'auto_increment'
-			),
-		'language'=>array(
+		],
+		'language'=>[
 			'name'=>'language', 'type'=>'varchar(10)'
-			),
-		'uri'=>array(
+		],
+		'uri'=>[
 			'name'=>'uri', 'type'=>'varchar(255)'
-			),
-		'intext'=>array(
+		],
+		'intext'=>[
 			'name'=>'intext', 'type'=>'blob'
-			),
-		'outtext'=>array(
+		],
+		'outtext'=>[
 			'name'=>'outtext', 'type'=>'blob'
-			),
-		'author'=>array(
+		],
+		'author'=>[
 			'name'=>'author', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'version'=>array(
+		],
+		'version'=>[
 			'name'=>'version', 'type'=>'varchar(50)', 'null'=>'1'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'tid'
-			),
-		'key-language'=>array(
+		],
+		'key-language'=>[
 			'name'=>'language', 'type'=>'key', 'columns'=>'language,uri'
-			),
-		'key-uri'=>array(
+		],
+		'key-uri'=>[
 			'name'=>'uri', 'type'=>'key', 'columns'=>'uri'
-			),
-		),
-	'weapons'=>array(
-		'weaponid'=>array(
+		],
+		],
+	'weapons'=>[
+		'weaponid'=>[
 			'name'=>'weaponid',
 			'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'weaponname'=>array(
+		],
+		'weaponname'=>[
 			'name'=>'weaponname', 'type'=>'varchar(128)', 'null'=>'1'
-			),
-		'value'=>array(
+		],
+		'value'=>[
 			'name'=>'value', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'damage'=>array(
+		],
+		'damage'=>[
 			'name'=>'damage', 'type'=>'int(11)', 'default'=>'1'
-			),
-		'level'=>array(
+		],
+		'level'=>[
 			'name'=>'level', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'key-PRIMARY'=>array(
+		],
+		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
 			'columns'=>'weaponid'
-			)
-		),
-	'titles'=>array(
-		'titleid'=>array(
+			]
+		],
+	'titles'=>[
+		'titleid'=>[
 			'name'=>'titleid', 'type'=>'int(11) unsigned',
 			'extra'=>'auto_increment'
-			),
-		'dk'=>array(
+		],
+		'dk'=>[
 			'name'=>'dk', 'type'=>'int(11)', 'default'=>'0'
-			),
-		'ref'=>array(
+		],
+		'ref'=>[
 			'name'=>'ref', 'type'=>'varchar(100)', 'null'=>'0', 'default'=>""
-			),
-		'male'=>array(
+		],
+		'male'=>[
 			'name'=>'male', 'type'=>'varchar(25)', 'null'=>'0', 'default'=>""
-			),
-		'female'=>array(
+		],
+		'female'=>[
 			'name'=>'female', 'type'=>'varchar(25)', 'null'=>'0', 'default'=>""
-			),
-		'key-PRIMARY' => array(
+		],
+		'key-PRIMARY' => [
 			'name' => 'PRIMARY',
 			'type' => 'primary key',
 			'unique' => '1',
 			'columns' => 'titleid',
-			),
-		'key-dk' => array(
+		],
+		'key-dk' => [
 			'name' => 'dk',
 			'type' => 'key',
 			'columns' => 'dk',
-			),
-		),
-);
+			],
+		],
+	];
 }
 ?>
 
