@@ -47,4 +47,4 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 
 ## Errores que se conocen ##
 * Es posible que no sea posible hacer una instalación limpia
-* Realizar una instalación, actualizando desde una versión anterior, puede hacer que se pierdan datos, y se alteren las tablas orignales del juego (si se habian alterados por algunos módulos intalados)
+* Realizar una instalación, actualizando desde una versión anterior, puede hacer que se pierdan datos, y se alteren las tablas orignales del juego (si se habian alterado por algunos módulos instalados)
