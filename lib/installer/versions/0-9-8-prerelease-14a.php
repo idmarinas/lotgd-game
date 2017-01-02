@@ -1,0 +1,38 @@
+<?php
+
+$titlesTable = DB::prefix('titles');
+
+return [
+	"INSERT INTO $titlesTable VALUES (1, 0, '', 'Farmboy', 'Farmgirl')",
+	"INSERT INTO $titlesTable VALUES (2, 1, '', 'Page', 'Page')",
+	"INSERT INTO $titlesTable VALUES (3, 2, '', 'Squire', 'Squire')",
+	"INSERT INTO $titlesTable VALUES (4, 3, '', 'Gladiator', 'Gladiatrix')",
+	"INSERT INTO $titlesTable VALUES (5, 4, '', 'Legionnaire', 'Legioness')",
+	"INSERT INTO $titlesTable VALUES (6, 5, '', 'Centurion', 'Centurioness')",
+	"INSERT INTO $titlesTable VALUES (7, 6, '', 'Sir', 'Madam')",
+	"INSERT INTO $titlesTable VALUES (8, 7, '', 'Reeve', 'Reeve')",
+	"INSERT INTO $titlesTable VALUES (9, 8, '', 'Steward', 'Steward')",
+	"INSERT INTO $titlesTable VALUES (10, 9, '', 'Mayor', 'Mayoress')",
+	"INSERT INTO $titlesTable VALUES (11, 10, '', 'Baron', 'Baroness')",
+	"INSERT INTO $titlesTable VALUES (12, 11, '', 'Count', 'Countess')",
+	"INSERT INTO $titlesTable VALUES (13, 12, '', 'Viscount', 'Viscountess')",
+	"INSERT INTO $titlesTable VALUES (14, 13, '', 'Marquis', 'Marchioness')",
+	"INSERT INTO $titlesTable VALUES (15, 14, '', 'Chancellor', 'Chancelloress')",
+	"INSERT INTO $titlesTable VALUES (16, 15, '', 'Prince', 'Princess')",
+	"INSERT INTO $titlesTable VALUES (17, 16, '', 'King', 'Queen')",
+	"INSERT INTO $titlesTable VALUES (18, 17, '', 'Emperor', 'Empress')",
+	"INSERT INTO $titlesTable VALUES (19, 18, '', 'Angel', 'Angel')",
+	"INSERT INTO $titlesTable VALUES (20, 19, '', 'Archangel', 'Archangel')",
+	"INSERT INTO $titlesTable VALUES (21, 20, '', 'Principality', 'Principality')",
+	"INSERT INTO $titlesTable VALUES (22, 21, '', 'Power', 'Power')",
+	"INSERT INTO $titlesTable VALUES (23, 22, '', 'Virtue', 'Virtue')",
+	"INSERT INTO $titlesTable VALUES (24, 23, '', 'Dominion', 'Dominion')",
+	"INSERT INTO $titlesTable VALUES (25, 24, '', 'Throne', 'Throne')",
+	"INSERT INTO $titlesTable VALUES (26, 25, '', 'Cherub', 'Cherub')",
+	"INSERT INTO $titlesTable VALUES (27, 26, '', 'Seraph', 'Seraph')",
+	"INSERT INTO $titlesTable VALUES (28, 27, '', 'Demigod', 'Demigoddess')",
+	"INSERT INTO $titlesTable VALUES (29, 28, '', 'Titan', 'Titaness')",
+	"INSERT INTO $titlesTable VALUES (30, 29, '', 'Archtitan', 'Archtitaness')",
+	"INSERT INTO $titlesTable VALUES (31, 30, '', 'Undergod', 'Undergoddess')",
+	"INSERT INTO $titlesTable VALUES (32, 31, '', 'God', 'Goddess')",
+];
