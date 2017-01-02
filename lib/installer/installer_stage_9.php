@@ -48,7 +48,7 @@ foreach ($sql_upgrade_statements as $key => $val)
 				output_notl("`6$count...");
 				if (!DB::query($sql)) {
 					output("`n`\$Error: `^'%s'`7 executing `#'%s'`7.`n",
-					db_error(), $sql);
+					DB::error(), $sql);
 				}
 			}
 			output("$count.`n");

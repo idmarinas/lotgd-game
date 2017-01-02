@@ -46,7 +46,7 @@ else
 	$install = translate_inline("Select Recommended Modules");
 	$reset = translate_inline("Reset Values");
 	$all_modules = [];
-	$result = DB::query("SELECT * FROM ".db_prefix("modules")." ORDER BY category, active DESC, formalname");
+	$result = DB::query("SELECT * FROM ".DB::prefix("modules")." ORDER BY category, active DESC, formalname");
 	if (false !== $result)
 	{
 		foreach($result as $row)
