@@ -569,7 +569,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				if (!isset($row['info']['talkcolour']) || $row['info']['talkcolour']===false) $thiscomment.="`#";
 				else $thiscomment.="`".$row['info']['talkcolour'];
 			}
-			$thiscomment.=str_replace("&amp;","&",htmlentities($row['comment'], ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+			$thiscomment.=str_replace("&amp;","&",htmlentities($row['comment'], ENT_COMPAT, getsetting("charset", "UTF-8")));
 			$thiscomment.="`0";
 			if (!$row['skiptalkline']) $thiscomment.="\"";
 			if ($row['info']['hidecomment']) $thiscomment.="</del>";
@@ -1237,7 +1237,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 	// *** AJAX CHAT MOD END ***
 
 	global $fiveminuteload;
-	$add = htmlentities(translate_inline("Add"), ENT_QUOTES, getsetting("charset", "ISO-8859-1"));
+	$add = htmlentities(translate_inline("Add"), ENT_QUOTES, getsetting("charset", "UTF-8"));
 
 	if ($session['user']['prefs']['commentary_auto_update'] && !httpget('comscroll') && $fiveminuteload < 8)
 	{

@@ -36,7 +36,7 @@
 				output_notl("&#149; &#60;%s&#62; <a href='clan.php?detail=%s'>%s</a> %s`n",
 						$row['clanshort'],
 						$row['clanid'],
-						htmlentities(full_sanitize($row['clanname']), ENT_COMPAT, getsetting("charset", "ISO-8859-1")),
+						htmlentities(full_sanitize($row['clanname']), ENT_COMPAT, getsetting("charset", "UTF-8")),
 						$memb, true);
 				rawoutput('</td></tr>');
 				addnav("","clan.php?detail={$row['clanid']}");

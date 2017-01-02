@@ -134,7 +134,7 @@ function sanitize_html($str)
 }
 
 function sanitize_mb($str) {
-	while (!mb_check_encoding($str,getsetting('charset','ISO-8859-1')) && strlen($str)>0) {
+	while (!mb_check_encoding($str,getsetting('charset','UTF-8')) && strlen($str)>0) {
 		$str=substr($str,0,strlen($str)-1);
 	}
 	return $str;

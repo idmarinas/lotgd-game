@@ -65,16 +65,16 @@ if (DB::num_rows($result)>0){
 	rawoutput("<table class='table-bg-transparent'>");
 	rawoutput("<tr><td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td><td><a href='mail.php?op=address&id={$row['messageid']}' class='motd'>$forward</a><td>");
 	if ($pid > 0) {
-		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</a>");
+		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
 		rawoutput("</td><td nowrap='true'>");
 	}else{
-		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "UTF-8"));
 		rawoutput("</td><td nowrap='true'>");
 	}
 	if ($nid > 0){
-		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</a></td>");
+		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a></td>");
 	}else{
-		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</td>");
+		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</td>");
 	}
 	rawoutput("</tr></table><hr>");
 	output_notl(sanitize_mb(str_replace("\n","`n",$row['body'])));
@@ -94,15 +94,15 @@ if (DB::num_rows($result)>0){
 	rawoutput("</tr><tr>");
 	rawoutput("<td nowrap='true'>");
 	if ($pid > 0) {
-		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</a>");
+		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
 	}else{
-		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "UTF-8"));
 	}
 	rawoutput("</td><td nowrap='true'>");
 	if ($nid > 0){
-		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</a>");
+		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
 	}else{
-		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8")));
 	}
 	rawoutput("</td>");
 	rawoutput("</tr></table>");

@@ -75,7 +75,7 @@ if ($op==""){
 		$msg = translate_inline("Complete Transfer");
 		rawoutput("<form action='bank.php?op=transfer3' method='POST'>");
 		output("`6Transfer `^%s`6 to `&%s`6.",$amt,$row['name']);
-		rawoutput("<input type='hidden' name='to' value='".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);
+		rawoutput("<input type='hidden' name='to' value='".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);
 		addnav("","bank.php?op=transfer3");
 	}elseif(DB::num_rows($result)>100){
 		output("`@Elessa`6 looks at you disdainfully and coldly, but politely, suggests you try narrowing down the field of who you want to send money to just a little bit!`n`n");
@@ -94,7 +94,7 @@ if ($op==""){
 		output("`6Transfer `^%s`6 to ",$amt);
 		rawoutput("<select name='to' class='input'>");
 		while ($row = DB::fetch_assoc($result)) {
-			rawoutput("<option value=\"".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".full_sanitize($row['name'])."</option>");
+			rawoutput("<option value=\"".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">".full_sanitize($row['name'])."</option>");
 		}
 		$msg = translate_inline("Complete Transfer");
 		rawoutput("</select><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);

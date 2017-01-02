@@ -248,7 +248,7 @@ if ($op==""){
 		$row['version']=sanitize_mb($row['version']);
 
 
-		$row['description'] = htmlentities(stripslashes($row['description']), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		$row['description'] = htmlentities(stripslashes($row['description']), ENT_COMPAT, getsetting("charset", "UTF-8"));
 		$row['description'] = str_replace("`&amp;", "`&", $row['description']);
 
 		// Correct for old logdnet servers
@@ -256,7 +256,7 @@ if ($op==""){
 
 		// Output the information we have.
 		rawoutput("<tr class='" . ($i%2==0?"trlight":"trdark") . "'>");
-		rawoutput("<td><a href=\"".HTMLEntities($row['address'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" target='_blank'>");
+		rawoutput("<td><a href=\"".HTMLEntities($row['address'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" target='_blank'>");
 		output_notl("`&%s`0",$row['description'], true);
 		rawoutput("</a></td><td>");
 		output_notl("`^%s`0", $row['version']); // so we are able to translate "`^Unknown`0"

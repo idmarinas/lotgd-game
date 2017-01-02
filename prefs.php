@@ -438,7 +438,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	rawoutput("<form action='prefs.php?op=save' method='POST' onSubmit='return(md5pass)'>");
 	$info = showform($form,$prefs);
 	rawoutput("<input type='hidden' value=\"" .
-			htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" name='oldvalues'>");
+			htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
 
 	rawoutput("</form><br>");
 	addnav("","prefs.php?op=save");

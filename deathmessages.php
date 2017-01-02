@@ -44,7 +44,7 @@ case "edit":
 	output("{where}         = The location like 'in the forest' or 'in the fields' or whatnot`n");
 	$save = translate_inline("Save");
 	output("`n`n`4Deathmessage: ");
-	rawoutput("<input name='deathmessage' value=\"".HTMLEntities($row['deathmessage'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='70'><br>");
+	rawoutput("<input name='deathmessage' value=\"".HTMLEntities($row['deathmessage'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='70'><br>");
 	output("Is this a Forest Deathmessage: ");
 	rawoutput("<input name='forest' ".((int)$row['forest']?"checked":"")." value='1' type='checkbox'><br>");
 	output("Is this a Graveyard Deathmessage: ");

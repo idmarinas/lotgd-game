@@ -32,7 +32,7 @@ if ($op=="edit"){
 		$row = array('tauntid'=>0, 'taunt'=>"");
 	}
 	output("Taunt: ");
-	rawoutput("<input name='taunt' value=\"".HTMLEntities($row['taunt'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='70'><br>");
+	rawoutput("<input name='taunt' value=\"".HTMLEntities($row['taunt'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='70'><br>");
 	output("The following codes are supported (case matters):`n");
 	output("{goodguyname}	= The player's name (also can be specified as {goodguy}`n");
 	output("{goodguyweapon}	= The player's weapon (also can be specified as {weapon}`n");

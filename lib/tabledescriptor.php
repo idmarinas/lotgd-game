@@ -23,7 +23,7 @@ function synctable($tablename,$descriptor,$nodrop=false){
 		debug($sql);
 		if(!DB::query($sql)) {
 			output("`\$Error:`^ %s`n", DB::error());
-			rawoutput("<pre>".htmlentities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</pre>");
+			rawoutput("<pre>".htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8"))."</pre>");
 		} else {
 			output("`^Table `#%s`^ created.`n", $tablename);
 		}

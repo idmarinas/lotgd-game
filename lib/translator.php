@@ -162,7 +162,7 @@ function translate_loadnamespace($namespace,$language=false){
 		FROM ".DB::prefix("translations")."
 		WHERE language='$language'
 			AND $where";
-/*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "ISO-8859-1")))); */
+/*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
 	if (!getsetting("cachetranslations",0)) {
 		$result = DB::query($sql);
 	} else {

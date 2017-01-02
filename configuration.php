@@ -199,7 +199,7 @@ switch ($type_setting) {
 						}
 					}
 				}else{
-					output("I was not able to inject the module %s. Sorry it didn't work out.", htmlentities($module, ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+					output("I was not able to inject the module %s. Sorry it didn't work out.", htmlentities($module, ENT_COMPAT, getsetting("charset", "UTF-8")));
 				}
 				break;
 	}

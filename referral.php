@@ -65,7 +65,7 @@ if ($session['user']['loggedin']){
 	page_header("Welcome to Legend of the Green Dragon");
 	output("`@Legend of the Green Dragon is a remake of the classic BBS Door Game Legend of the Red Dragon.");
 	output("Adventure into the classic realm that was one of the world's very first multiplayer roleplaying games!");
-	addnav("Create a character","create.php?r=".HTMLEntities(httpget('r'), ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+	addnav("Create a character","create.php?r=".HTMLEntities(httpget('r'), ENT_COMPAT, getsetting("charset", "UTF-8")));
 	addnav("Login Page","index.php");
 	page_footer();
 }

@@ -71,7 +71,7 @@ if ($lastexpire < $needtoexpire){
 	*/
 
 	$mheader  = 'MIME-Version: 1.0' . "\r\n";
-	$mheader .= 'Content-type: text/plain; charset='.getsetting('charset','ISO-8859-1'). "\r\n";
+	$mheader .= 'Content-type: text/plain; charset='.getsetting('charset','UTF-8'). "\r\n";
 	$mheader .= 'From: '.getsetting("gameadminemail","postmaster@localhost")."\r\n";
 	$collector=array();
 	while ($row = DB::fetch_assoc($result)) {

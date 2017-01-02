@@ -55,10 +55,10 @@ if (is_array($row)){
 	}
 }
 rawoutput("<form action='mail.php?op=send' method='post'>");
-rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslashes($msgid), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslashes($msgid), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 $superusers = array();
 if (isset($row['login']) && $row['login']!=""){
-	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
+	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 	output("`2To: `^%s`n",$row['name']);
 	if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 		array_push($superusers,$row['login']);
@@ -81,7 +81,7 @@ if (isset($row['login']) && $row['login']!=""){
 	}
 	if ($DB::num_rows==1){
 		$row = DB::fetch_assoc($result);
-		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
+		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 		output_notl("`^{$row['name']}`n");
 		if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 			array_push($superusers,$row['login']);
@@ -97,7 +97,7 @@ if (isset($row['login']) && $row['login']!=""){
 		output_notl("<select name='to' id='to' onchange='check_su_warning();'>",true);
 		$superusers = array();
 		while($row = DB::fetch_assoc($result)) {
-			output_notl("<option value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
+			output_notl("<option value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 			require_once("lib/sanitize.php");
 			output_notl("%s", full_sanitize($row['name']));
 			if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
@@ -113,7 +113,7 @@ foreach($superusers as $val) {
 }
 rawoutput("</script>");
 output("`2Subject:");
-rawoutput("<input name='subject' value=\"".htmlentities($subject,ENT_COMPAT, getsetting("charset","ISO-8859-1")).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"><br>");
+rawoutput("<input name='subject' value=\"".htmlentities($subject,ENT_COMPAT, getsetting("charset","UTF-8")).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\"><br>");
 rawoutput("<div id='warning' style='visibility: hidden; display: none;'>");
 //superuser messages do not get translated.
 output("`2Notice: `^%s`n",$superusermessage);
@@ -136,8 +136,8 @@ $rows=max(10,$prefs['mailheight']);
 rawoutput("<table class='table-bg-transparent' style='border:0;cellspacing:10'><tr><td><input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'></td><td><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'></td>");
 rawoutput("<td><input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'></td><td><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'></td></tr></table>");
 //substr is necessary if you have chars that take up more than 1 byte. That breaks the entire HTMLentities up and it returns nothing
-rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout' cols='$cols' rows='$rows'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","ISO-8859-1")))), ENT_COMPAT, getsetting("charset", "ISO-8859-1")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>");
-//rawoutput("<textarea name='body' id='textarea' class='input' cols='60' rows='9' onKeyUp='sizeCount(this);'>".htmlentities($body, ENT_COMPAT, getsetting("charset", "ISO-8859-1")).htmlentities(stripslashes(httpget('body')), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea><br>");
+rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout' cols='$cols' rows='$rows'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","UTF-8")))), ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>");
+//rawoutput("<textarea name='body' id='textarea' class='input' cols='60' rows='9' onKeyUp='sizeCount(this);'>".htmlentities($body, ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(stripslashes(httpget('body')), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br>");
 $send = translate_inline("Send");
 $sendclose = translate_inline("Send and Close");
 $sendback = translate_inline("Send and back to main Mailbox");

@@ -38,12 +38,12 @@ if ($reason == "") $reason = translate_inline("manual donation entry");
 
 output("`bAdd Donation Points:`b`n");
 output("Character: ");
-rawoutput("<input name='name' value=\"".htmlentities($name, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+rawoutput("<input name='name' value=\"".htmlentities($name, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 output("`nPoints: ");
-rawoutput("<input name='amt' size='3' value=\"".htmlentities($amt, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+rawoutput("<input name='amt' size='3' value=\"".htmlentities($amt, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 output("`nReason: ");
-rawoutput("<input name='reason' size='30' value=\"".htmlentities($reason, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
-rawoutput("<input type='hidden' name='txnid' value=\"".htmlentities($txnid, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+rawoutput("<input name='reason' size='30' value=\"".htmlentities($reason, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("<input type='hidden' name='txnid' value=\"".htmlentities($txnid, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 output_notl("`n");
 if ($txnid>"") output("For transaction: %s`n",$txnid);
 rawoutput("<input type='submit' class='button' value='$add'>");

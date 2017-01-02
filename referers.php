@@ -76,7 +76,7 @@ while ($row = DB::fetch_assoc($result)) {
 			output_notl(dhms($diffsecs));
 			rawoutput("</td><td valign='top'>");
 			if ($row1['uri']>"")
-				rawoutput("<a href='".HTMLEntities($row1['uri'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."' target='_blank'>".HTMLEntities(substr($row1['uri'],0,100))."</a>");
+				rawoutput("<a href='".HTMLEntities($row1['uri'], ENT_COMPAT, getsetting("charset", "UTF-8"))."' target='_blank'>".HTMLEntities(substr($row1['uri'],0,100))."</a>");
 			else
 				output_notl($none);
 			output_notl("`n");

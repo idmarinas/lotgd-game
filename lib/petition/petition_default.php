@@ -70,15 +70,15 @@ if (count($post)>0){
 	if ($session['user']['loggedin']) {
 		output("Your Character's Name: ");
 		output_notl("%s", $session['user']['name']);
-		rawoutput("<input type='hidden' name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+		rawoutput("<input type='hidden' name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 		output("`nYour email address: ");
 		output_notl("%s", htmlentities($session['user']['emailaddress']));
-		rawoutput("<input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">");
+		rawoutput("<input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 	} else {
 		output("Your Character's Name: ");
-		rawoutput("<input name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='46'>");
+		rawoutput("<input name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='46'>");
 		output("`nYour email address: ");
-		rawoutput("<input name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='50'>");
+		rawoutput("<input name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='50'>");
 		$nolog = translate_inline("Character is not logged in!!");
 		rawoutput("<input name='unverified' type='hidden' value='$nolog'>");
 	}
@@ -87,7 +87,7 @@ if (count($post)>0){
 	$types=getsetting('petition_types','General');
 	$types=explode(",",$types);
 	foreach ($types as $type) {
-		$type=htmlentities($type,ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		$type=htmlentities($type,ENT_COMPAT, getsetting("charset", "UTF-8"));
 		rawoutput("<option value='".$type."'>$type</option>");
 
 	}
@@ -96,10 +96,10 @@ if (count($post)>0){
 	$abuse = httpget("abuse");
 	if ($abuse == "yes") {
 		rawoutput("<textarea name='description' cols='55' rows='7' class='input'></textarea>");
-		rawoutput("<input type='hidden' name='abuse' value=\"".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "ISO-8859-1")))."\"><br><hr><pre>".stripslashes(htmlentities(httpget("problem")))."</pre><hr><br>");
+		rawoutput("<input type='hidden' name='abuse' value=\"".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."\"><br><hr><pre>".stripslashes(htmlentities(httpget("problem")))."</pre><hr><br>");
 		rawoutput("<input type='hidden' name='abuseplayer' value=\"".httpget('abuseplayer')."\">");
 	} else {
-		rawoutput("<textarea name='description' cols='55' rows='7' class='input'>".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "ISO-8859-1")))."</textarea>");
+		rawoutput("<textarea name='description' cols='55' rows='7' class='input'>".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."</textarea>");
 	}
 	modulehook("petitionform",array());
 	$submit = translate_inline("Submit");

@@ -143,9 +143,9 @@ if (0 < DB::num_rows($result))
 		}
 					</script>";
 	rawoutput($script);
-	$checkall = htmlentities(translate_inline("Check All"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-	$delchecked = htmlentities(translate_inline("Delete Checked"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-	$checknames = htmlentities(translate_inline("`vCheck by Name"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+	$checkall = htmlentities(translate_inline("Check All"), ENT_COMPAT, getsetting("charset", "UTF-8"));
+	$delchecked = htmlentities(translate_inline("Delete Checked"), ENT_COMPAT, getsetting("charset", "UTF-8"));
+	$checknames = htmlentities(translate_inline("`vCheck by Name"), ENT_COMPAT, getsetting("charset", "UTF-8"));
 	output_notl($checknames." <select onchange='check_name()' id='check_name_select'>".$option."</select><br>",true);
 	rawoutput("<input type='button' id='button_check' value=\"$checkall\" class='button' onClick='check_all()'>");
 	rawoutput("<input type='submit' class='button' value=\"$delchecked\">");

@@ -35,7 +35,7 @@ function dump_item_ascode($item,$indent="\t"){
 		}
 		$out .= "\n$indent)";
 	} else {
-		$out .= "'".htmlentities(addslashes($item), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'";
+		$out .= "'".htmlentities(addslashes($item), ENT_COMPAT, getsetting("charset", "UTF-8"))."'";
 	}
 	return $out;
 }

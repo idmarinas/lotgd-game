@@ -95,7 +95,7 @@ if ($act==""){
 	output("`% Got it?`0\"  You can practice below:");
 	rawoutput("<form action=\"$REQUEST_URI\" method='POST'>",true);
 	$testtext = httppost('testtext');
-	output("You entered %s`n", prevent_colors(HTMLEntities($testtext, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))), true);
+	output("You entered %s`n", prevent_colors(HTMLEntities($testtext, ENT_COMPAT, getsetting("charset", "UTF-8"))), true);
 	output("It looks like %s`n", $testtext);
 	$try = translate_inline("Try");
 	rawoutput("<input name='testtext' id='input'>");

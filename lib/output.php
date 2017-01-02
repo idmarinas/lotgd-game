@@ -235,7 +235,7 @@ class LotgdOutputCollector
 			do {
 				++$pos;
 				if ($priv === false){
-					$out .= HTMLEntities(substr($data, $start, $pos - $start - 1), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+					$out .= HTMLEntities(substr($data, $start, $pos - $start - 1), ENT_COMPAT, getsetting("charset", "UTF-8"));
 				} else {
 					$out .= substr($data, $start, $pos - $start - 1);
 				}
@@ -333,7 +333,7 @@ class LotgdOutputCollector
 			} while( ($pos = strpos($data, "`", $pos)) !== false);
 		}
 		if ($priv === false){
-			$out .= HTMLEntities(substr($data, $start), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+			$out .= HTMLEntities(substr($data, $start), ENT_COMPAT, getsetting("charset", "UTF-8"));
 		} else {
 			$out .= substr($data, $start);
 		}

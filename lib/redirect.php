@@ -13,7 +13,7 @@ function redirect($location,$reason=false){
 		$failoutput=new LotgdOutputCollector;
 		$failoutput->output_notl("`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n");
 		$failoutput->output_notl("`\$");
-		$failoutput->rawoutput("<a href=\"".HTMLEntities($location, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".translate_inline("Click here to continue.","badnav")."</a>");
+		$failoutput->rawoutput("<a href=\"".HTMLEntities($location, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">".translate_inline("Click here to continue.","badnav")."</a>");
 		$failoutput->output_notl(translate_inline("`n`n`\$If you cannot leave this page, notify the staff via <a href='petition.php'>petition</a> `\$and tell them where this happened and what you did. Thanks.","badnav"),true);
 		$text=$failoutput->get_output();
 		$session['output']="<html><head><link href=\"templates/common/colors.css\" rel=\"stylesheet\" type=\"text/css\"></head><body style='background-color: #000000'>$text</body></html>";

@@ -57,7 +57,7 @@ if (httpget("subop")==""){
 	*/
 	$showformargs = modulehook("modifyuserview", array("userinfo"=>$userinfo, "user"=>$row));
 	$info = showform($showformargs['userinfo'],$showformargs['user']);
-	rawoutput("<input type='hidden' value=\"".htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" name='oldvalues'>");
+	rawoutput("<input type='hidden' value=\"".htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
 	rawoutput("</form>");
 		output("`n`nLast Page Viewed:`n");
 	rawoutput("<iframe src='user.php?op=lasthit&userid=$userid' width='100%' height='400'>");

@@ -20,14 +20,14 @@ if ($op==""){
 	$namespace = translate_inline("Namespace:");
 	$texta = translate_inline("Text:");
 	$translation = translate_inline("Translation:");
-	$saveclose = htmlentities(translate_inline("Save & Close"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
-	$savenotclose = htmlentities(translate_inline("Save No Close"), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+	$saveclose = htmlentities(translate_inline("Save & Close"), ENT_COMPAT, getsetting("charset", "UTF-8"));
+	$savenotclose = htmlentities(translate_inline("Save No Close"), ENT_COMPAT, getsetting("charset", "UTF-8"));
 	rawoutput("<form action='translatortool.php?op=save' method='POST'>");
-	rawoutput("$namespace <input name='uri' value=\"".htmlentities(stripslashes($uri), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" readonly><br/>");
+	rawoutput("$namespace <input name='uri' value=\"".htmlentities(stripslashes($uri), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" readonly><br/>");
 	rawoutput("$texta<br>");
-	rawoutput("<textarea name='text' cols='60' rows='5' readonly>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea><br/>");
+	rawoutput("<textarea name='text' cols='60' rows='5' readonly>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br/>");
 	rawoutput("$translation<br>");
-	rawoutput("<textarea name='trans' cols='60' rows='5'>".htmlentities(stripslashes($trans), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea><br/>");
+	rawoutput("<textarea name='trans' cols='60' rows='5'>".htmlentities(stripslashes($trans), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br/>");
 	rawoutput("<input type='submit' value=\"$saveclose\" class='button'>");
 	rawoutput("<input type='submit' value=\"$savenotclose\" class='button' name='savenotclose'>");
 	rawoutput("</form>");
@@ -100,7 +100,7 @@ if ($op==""){
 	output("Known Namespaces:");
 	output_notl("<select name='u'>",true);
 	while ($row = DB::fetch_assoc($result)){
-		output_notl("<option value=\"".htmlentities($row['uri'])."\">".htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))." ({$row['c']})</option>",true);
+		output_notl("<option value=\"".htmlentities($row['uri'])."\">".htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "UTF-8"))." ({$row['c']})</option>",true);
 	}
 	output_notl("</select>",true);
 	$show = translate_inline("Show");
@@ -124,9 +124,9 @@ if ($op==""){
 			$edit = translate_inline("Edit");
 			output_notl("<a href='translatortool.php?u=".rawurlencode($row['uri'])."&t=".rawurlencode($row['intext'])."'>$edit</a>",true);
 			output_notl("</td><td>",true);
-			rawoutput(htmlentities($row['intext'], ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+			rawoutput(htmlentities($row['intext'], ENT_COMPAT, getsetting("charset", "UTF-8")));
 			output_notl("</td><td>",true);
-			rawoutput(htmlentities($row['outtext'], ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+			rawoutput(htmlentities($row['outtext'], ENT_COMPAT, getsetting("charset", "UTF-8")));
 			output_notl("</td><td>",true);
 			output_notl($row['version']);
 			output_notl("</td><td>",true);

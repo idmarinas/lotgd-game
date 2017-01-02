@@ -34,7 +34,7 @@ $licensemd5s = [
 if (isset($licensemd5s[md5($license)])){
 	// Reload it so we get the right line breaks, etc.
 	//$license = file("LICENSE.txt");
-	$license = htmlentities($license, ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+	$license = htmlentities($license, ENT_COMPAT, getsetting("charset", "UTF-8"));
 	$license = nl2br($license);
 	//$license = preg_replace("/<br[^>]*>\s+<br[^>]*>/i","<p>",$license);
 	//$license = preg_replace("/<br[^>]*>/i",'',$license);

@@ -91,7 +91,7 @@ if ($op==""){
 				$memo = $info['memo'];
 			}
 			$link = "donators.php?op=add1&name=".rawurlencode($memo)."&amt=$amt&txnid={$row['txnid']}";
-			rawoutput("-=( <a href='$link' title=\"".htmlentities($info['item_number'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" alt=\"".htmlentities($info['item_number'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">[".htmlentities($memo, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."]</a> )=-");
+			rawoutput("-=( <a href='$link' title=\"".htmlentities($info['item_number'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" alt=\"".htmlentities($info['item_number'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">[".htmlentities($memo, ENT_COMPAT, getsetting("charset", "UTF-8"))."]</a> )=-");
 			addnav("",$link);
 		}
 		rawoutput("</td></tr>");

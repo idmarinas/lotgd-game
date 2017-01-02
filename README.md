@@ -32,6 +32,7 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 	* Se renombra showform() por lotgd_showform()
 * Se sustituyen todas las funciones relacionadas con la base de datos (Ejem: db_query...) por sus equivalentes DB::query...
 	* Las funciones antiguas seguirán funcionando pero dan una advertencia de función obsoleta. Se borrarán en la versión 2.0.0
+* Codificación por defecto UTF-8
 
 ## Añadidos ##
 * *lib/showtabs.php* **lotgd_showtabs()** Permite mostrar contenido mediante pestañas. Se debe incluir el archivo cuando se necesite usar esta función.

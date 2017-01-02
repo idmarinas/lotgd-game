@@ -144,11 +144,11 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			{
 				if ($skin == $row[$key])
 				{
-					$select .= "<option value='$skin' selected>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+					$select .= "<option value='$skin' selected>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 				}
 				else
 				{
-					$select .= "<option value='$skin'>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+					$select .= "<option value='$skin'>".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 				}
 			}
 			$select .= '</select>';
@@ -172,9 +172,9 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select .= "<select name='$keyout'>";
 			foreach($vloc as $loc=>$val) {
 				if ($loc == $row[$key]) {
-					$select .= "<option value='$loc' selected>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+					$select .= "<option value='$loc' selected>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 				} else {
-					$select .="<option value='$loc'>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+					$select .="<option value='$loc'>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 				}
 
 			}
@@ -236,13 +236,13 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$cur = $row[$key];
 			$select = "<select name='$keyout'>";
 			if ($cur && $cur < date("Y-m-d H:i:s", $start))
-				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			for($j = $start; $j < $end; $j = strtotime($step, $j)) {
 				$d = date("Y-m-d H:i:s", $j);
-				$select .= "<option value='$d'".($cur==$d?" selected":"").">".HTMLEntities("$d", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$d'".($cur==$d?" selected":"").">".HTMLEntities("$d", ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			if ($cur && $cur > date("Y-m-d H:i:s", $end))
-				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 
 			$select .="</select>";
 
@@ -258,7 +258,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			if ($min<$max && ($max-$min)/$step>300)
 				$step=max(1,(int)(($max-$min)/300));
 			for($j = $min; $j <= $max; $j += $step) {
-				$select .= "<option value='$j'".($row[$key]==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$j'".($row[$key]==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= "</select>";
 
@@ -272,7 +272,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select name='$keyout'>";
 			$val = round((float)$row[$key], 2);
 			for($j = $min; $j <= $max; $j = round($j+$step,2)) {
-				$select .= "<option value='$j'".($val==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$j'".($val==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= "</select>";
 
@@ -327,7 +327,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			tlschema();
 			$select = "<select name='$keyout'>";
 			foreach ($vals as $k=>$v) {
-				$select .= "<option value=\"".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"".($row[$key]==$v?" selected":"").">".htmlentities($v, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value=\"".htmlentities($v, ENT_COMPAT, getsetting("charset", "UTF-8"))."\"".($row[$key]==$v?" selected":"").">".htmlentities($v, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= "</select>";
 
@@ -353,7 +353,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				if (isset($row[$key]) && $row[$key] == $optval)
 					$selected = 1;
 
-				$select .= "<option value='$optval'".($selected?" selected":"").">".HTMLEntities("$optdis", ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</option>";
+				$select .= "<option value='$optval'".($selected?" selected":"").">".HTMLEntities("$optdis", ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= "</select>";
 			return $select;
@@ -361,7 +361,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "password":
 			if (array_key_exists($key, $row)) $out = $row[$key];
 			else $out = "";
-			return "<input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."'>";
+			return "<input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."'>";
 			break;
 		case "bool":
 			tlschema("showform");
@@ -376,7 +376,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			return $select;
 			break;
 		case "hidden":
-			return "<input type='hidden' name='$keyout' value=\"".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+			return "<input type='hidden' name='$keyout' value=\"".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">".HTMLEntities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"));
 			break;
 		case "viewonly":
 			//don't unset it. it does not change, so nothing lost
@@ -418,20 +418,20 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				$text .= "<script type=\"text/javascript\">function cincrease(target, value){  if (target.cols + value > 3 && target.cols + value < 150) target.cols = target.cols + value;}</script>";
 				$text .= "<input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'>";
 				$text .= "<input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'><br>";
-				$text .= "<textarea id='textarea$key' class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>";
+				$text .= "<textarea id='textarea$key' class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
 
 				return $text;
 			} else {
-				return "<textarea class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."</textarea>";
+				return "<textarea class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
 			}
 			break;
 		case "int":
 			if (array_key_exists($key, $row)) (int) $out = $row[$key];
 			else $out = 0;
-			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='5'>";
+			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='5'>";
 			break;
 		case "float":
-			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\" size='8' step='any'>";
+			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='8' step='any'>";
 			break;
 		case "string":
 			$len = 50;
@@ -442,7 +442,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			if ($minlen > 70) $minlen = 70;
 			if (array_key_exists($key, $row)) $val = $row[$key];
 			else $val = "";
-			return "<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">";
+			return "<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
 			break;
 		default:
 			if (array_key_exists($info[1],$extensions)){
@@ -453,7 +453,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			}else{
 				if (array_key_exists($key, $row)) $val = $row[$key];
 				else $val = "";
-				return "<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">";
+				return "<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
 			}
 		break;
 	}

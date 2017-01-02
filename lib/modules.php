@@ -428,7 +428,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 				}elseif (is_object($val)){
 					$arg.="object(".get_class($val).")";
 				}else{
-					$arg.=htmlentities(substr($val,0,25), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+					$arg.=htmlentities(substr($val,0,25), ENT_COMPAT, getsetting("charset", "UTF-8"));
 				}
 				rawoutput("  arg: $arg");
 			}

@@ -52,7 +52,7 @@ if ($session['user']['loggedin'] &&
 
 	rawoutput("<h1>");
 	output("View Source: ");
-	output_notl("%s", htmlentities($url, ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+	output_notl("%s", htmlentities($url, ENT_COMPAT, getsetting("charset", "UTF-8")));
 	rawoutput("</h1>");
 	output("<a href='#source'>Click here for the source,</a> OR`n", true);
 	output("`bOther files that you may wish to view the source of:`b");
@@ -135,7 +135,7 @@ if ($session['user']['loggedin'] &&
 	rawoutput("</ul>");
 
 	rawoutput("<h1><a name='source'>");
-	output("Source of: %s", htmlentities($url, ENT_COMPAT, getsetting("charset", "ISO-8859-1")));
+	output("Source of: %s", htmlentities($url, ENT_COMPAT, getsetting("charset", "UTF-8")));
 	rawoutput("</a></h1>");
 
 	$page_name = substr($url,strlen($subdir)-1);

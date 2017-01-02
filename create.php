@@ -348,7 +348,7 @@ if (getsetting("allowcreation",1)==0){
 	if ($op==""){
 		output("`&`c`bCreate a Character`b`c`0");
 		$refer=httpget('r');
-		if ($refer) $refer = "&r=".htmlentities($refer, ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		if ($refer) $refer = "&r=".htmlentities($refer, ENT_COMPAT, getsetting("charset", "UTF-8"));
 
 		rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
 		rawoutput("<script language='JavaScript'>

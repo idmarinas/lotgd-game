@@ -64,7 +64,7 @@
 						}
 						output_notl("&#149; <a href='clan.php?op=apply&to=%s'>%s</a> %s`n",
 								$row['clanid'],
-								full_sanitize(htmlentities($row['clanname'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))),
+								full_sanitize(htmlentities($row['clanname'], ENT_COMPAT, getsetting("charset", "UTF-8"))),
 								$memb, true);
 						addnav("","clan.php?op=apply&to={$row['clanid']}");
 					}

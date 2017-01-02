@@ -80,7 +80,7 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		// unreadable
 		$body = preg_replace("'[`]n'", "\n", $body);
 		$body = full_sanitize($body);
-		$subject = htmlentities(full_sanitize($subject), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
+		$subject = htmlentities(full_sanitize($subject), ENT_COMPAT, getsetting("charset", "UTF-8"));
 		require("lib/settings_extended.php");
 		$subj = translate_mail($settings_extended->getSetting('notificationmailsubject'),$to);
 		$msg = translate_mail($settings_extended->getSetting('notificationmailtext'),$to);
