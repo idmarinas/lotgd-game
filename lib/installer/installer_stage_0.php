@@ -9,7 +9,7 @@ if (DB_CHOSEN)
 {
 	$sql = "SELECT count(*) AS c FROM accounts WHERE superuser & ".SU_MEGAUSER;
 	$result = DB::query($sql);
-	$row = db_fetch_assoc($result);
+	$row = DB::fetch_assoc($result);
 	if ($row['c'] == 0){
 		$needsauthentication = false;
 	}
@@ -17,8 +17,8 @@ if (DB_CHOSEN)
 		debug(md5(md5(stripslashes(httppost("password")))), true);
 		$sql = "SELECT * FROM ".DB::prefix("accounts")." WHERE login='".httppost("username")."' AND password='".md5(md5(stripslashes(httppost("password"))))."' AND superuser & ".SU_MEGAUSER;
 		$result = DB::query($sql);
-		if (db_num_rows($result) > 0){
-			$row = db_fetch_assoc($result);
+		if ($result->count() > 0){
+			$row = DB::fetch_assoc($result);
 			debug($row['password'], true);
 			debug(httppost('password'), true);
 			// Okay, we have a username with megauser, now we need to do
@@ -54,7 +54,7 @@ if (DB_CHOSEN)
 	}else{
 		$sql = "SELECT count(*) AS c FROM ".DB::prefix("accounts")." WHERE superuser & ".SU_MEGAUSER;
 		$result = DB::query($sql);
-		$row = db_fetch_assoc($result);
+		$row = DB::fetch_assoc($result);
 		if ($row['c']>0){
 			$needsauthentication=true;
 		}else{

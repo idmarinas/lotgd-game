@@ -25,6 +25,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	rawoutput("</td><td>");
 	$version = getsetting('installer_version', '-1');
 	if ($version != '-1') $session['dbinfo']['upgrade'] = true;
+	else $session['dbinfo']['upgrade'] = false;
 	// rawoutput("<input type='radio' value='upgrade' name='type' ".($session['dbinfo']['upgrade']? 'checked' : '').">");
 	output(" `2Perform an upgrade from ");
 	output('`$For now cant do a upgrade installation.`2`n');
