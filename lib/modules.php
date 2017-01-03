@@ -1230,7 +1230,7 @@ function module_objpref_edit($type, $module, $id)
 			$data[$row['setting']] = $row['value'];
 		}
 		tlschema("module-$module");
-		showform($msettings, $data);
+		lotgd_showform($msettings, $data);
 		tlschema();
 	}
 }

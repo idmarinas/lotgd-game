@@ -191,7 +191,7 @@ switch ($type_setting) {
 							rawoutput("<form action='configuration.php?op=modulesettings&module=$module&save=1' method='POST'>",true);
 							addnav("","configuration.php?op=modulesettings&module=$module&save=1");
 							tlschema("module-$module");
-							showform($msettings,$module_settings[$mostrecentmodule]);
+							lotgd_showform($msettings,$module_settings[$mostrecentmodule]);
 							tlschema();
 							rawoutput("</form>",true);
 						}else{
@@ -246,7 +246,7 @@ switch ($type_setting) {
 
 				rawoutput("<form action='configuration.php?settings=extended&op=save' method='POST'>");
 				addnav("","configuration.php?settings=extended&op=save");
-				showform($setup_extended,$vals);
+				lotgd_showform($setup_extended,$vals);
 				rawoutput("</form>");
 				break;
 		}
@@ -294,7 +294,7 @@ switch ($type_setting) {
 
 				rawoutput("<form action='configuration.php?op=save' method='POST'>");
 				addnav("","configuration.php?op=save");
-				showform($setup,$vals);
+				lotgd_showform($setup,$vals);
 				rawoutput("</form>");
 				break;
 		}

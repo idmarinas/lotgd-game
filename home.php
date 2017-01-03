@@ -146,7 +146,7 @@ if (getsetting("homeskinselect", 1)) {
 	if ($prefs['template'] == "")
 		$prefs['template'] = getsetting("defaultskin", "yarbrough.htm");
 	require_once("lib/showform.php");
-	showform($form, $prefs, true);
+	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
 	rawoutput("</td><td><br>&nbsp;<input type='submit' class='button' value='$submit'></td>");
 	rawoutput("</tr></table></form>");

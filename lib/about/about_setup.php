@@ -71,5 +71,5 @@ $form = array_merge($setup, $args['settings']);
 $form = array_merge($form, $useful);
 $vals = array_merge($localsettings, $args['values']);
 $vals = array_merge($vals, $useful_vals);
-showform($form,$vals,true);
+lotgd_showform($form,$vals,true);
 ?>

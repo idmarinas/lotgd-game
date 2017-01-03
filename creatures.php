@@ -282,7 +282,7 @@ if ($op=="" || $op=="search"){
 				"creatureaiscript"=>"Creature's A.I.,enum".$scriptenum,
 			);
 			rawoutput("<form action='creatures.php?op=save' method='POST'>");
-			showform($form, $row);
+			lotgd_showform($form, $row);
 			$refresh=translate_inline("Refresh");
 			rawoutput("<input type='submit' class='button' name='refresh' value='$refresh'>");
 			rawoutput("</form>");

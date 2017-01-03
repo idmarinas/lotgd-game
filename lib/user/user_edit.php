@@ -56,7 +56,7 @@ if (httpget("subop")==""){
 	$args['user']['test'] = "Is out there???";
 	*/
 	$showformargs = modulehook("modifyuserview", array("userinfo"=>$userinfo, "user"=>$row));
-	$info = showform($showformargs['userinfo'],$showformargs['user']);
+	$info = lotgd_showform($showformargs['userinfo'],$showformargs['user']);
 	rawoutput("<input type='hidden' value=\"".htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
 	rawoutput("</form>");
 		output("`n`nLast Page Viewed:`n");
@@ -95,7 +95,7 @@ if (httpget("subop")==""){
 		rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userid$returnpetition' method='POST'>");
 		addnav("","user.php?op=savemodule&module=$module&userid=$userid$returnpetition");
 		tlschema("module-$module");
-		showform($msettings,$data);
+		lotgd_showform($msettings,$data);
 		tlschema();
 		rawoutput("</form>");
 	}else{

@@ -436,7 +436,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	}
 
 	rawoutput("<form action='prefs.php?op=save' method='POST' onSubmit='return(md5pass)'>");
-	$info = showform($form,$prefs);
+	$info = lotgd_showform($form,$prefs);
 	rawoutput("<input type='hidden' value=\"" .
 			htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
 

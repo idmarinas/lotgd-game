@@ -125,7 +125,7 @@ switch ($op) {
 		}
 		rawoutput("<form action='titleedit.php?op=save&id=$id' method='POST'>");
 		addnav("","titleedit.php?op=save&id=$id");
-		showform($editarray,$row);
+		lotgd_showform($editarray,$row);
 		rawoutput("</form>");
 		addnav("Functions");
 		addnav("Main Title Editor", "titleedit.php");

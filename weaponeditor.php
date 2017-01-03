@@ -48,7 +48,7 @@ if($op=="edit" || $op=="add"){
 	}
 	rawoutput("<form action='weaponeditor.php?op=save&level=$weaponlevel' method='POST'>");
 	addnav("","weaponeditor.php?op=save&level=$weaponlevel");
-	showform($weaponarray,$row);
+	lotgd_showform($weaponarray,$row);
 	rawoutput("</form>");
 }else if($op=="del"){
 	$sql = "DELETE FROM " . DB::prefix("weapons") . " WHERE weaponid='$id'";
