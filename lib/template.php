@@ -10,6 +10,7 @@ class LotgdTemplate
 	protected $twig;
 	protected $templatename;
 	protected $themefolder;
+	protected $defaultSkin = 'jade.html';
 
 	public function __construct()
 	{
@@ -71,11 +72,6 @@ class LotgdTemplate
 	private function getFilters()
 	{
 		return [
-			//-- Access to appoencode function in template
-			new Twig_SimpleFilter('appoencode', function ($string)
-			{
-				return appoencode($string, true);
-			}),
 			//-- Access to color_sanitize function in template
 			new Twig_SimpleFilter('color_sanitize', function ($string)
 			{
@@ -108,11 +104,11 @@ class LotgdTemplate
 	 */
 	private function prepareTheme()
 	{
-		global $templatename, $session, $y, $z, $y2, $z2, $lc, $x, $_defaultskin;
+		global $templatename, $session, $y, $z, $y2, $z2, $lc, $x;
 
 		if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
-		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $_defaultskin);
-		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $_defaultskin;
+		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $this->getDefaultSkin());
+		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $this->getDefaultSkin();
 
 		$this->templatename = $templatename;
 
@@ -130,6 +126,17 @@ class LotgdTemplate
 		// $y = 0;
 		// $z = $y2^$z2;
 		// $$z = $lc . $$z . '<br>';
+	}
+
+
+	/**
+	 * Get default skin of game
+	 *
+	 * @return string
+	 */
+	public function getDefaultSkin()
+	{
+		return $this->defaultSkin;
 	}
 }
 
