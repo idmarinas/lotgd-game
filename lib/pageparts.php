@@ -178,7 +178,7 @@ function page_footer($saveuser = true)
 
 	//output keypress script
 	reset($quickkeys);
-	$script .= $lotgd_tpl->renderLotgdTemplate('key-press-script.html', ['quickkeys' => $quickkeys]);
+	$script .= $lotgd_tpl->renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
 
 	//NOTICE |
 	//NOTICE | Although under the license, you're not required to keep this
@@ -249,7 +249,7 @@ function page_footer($saveuser = true)
 		$paypalData['paypalcountry-code'] = getsetting('paypalcountry-code', 'US');
 	}
 
-	$html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.html', $paypalData);
+	$html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
 	unset($paypalData);
 
 	//NOTICE |
@@ -260,8 +260,8 @@ function page_footer($saveuser = true)
 
 	//output the nav
 	// $footer = str_replace("{".($z)."}",$$z,$footer);
-	$html[$z] = $$z;
-	$html['nav'] = $lotgd_tpl->renderThemeTemplate('navs/menu.html', ['menu' => $builtnavs]);
+	// $html[$z] = $$z;
+	$html['nav'] = $lotgd_tpl->renderThemeTemplate('navs/menu.twig', ['menu' => $builtnavs]);
 
 	//output the motd
 	$html['motd'] = motdlink();
@@ -270,7 +270,7 @@ function page_footer($saveuser = true)
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin']) {
 		if ($session['user']['prefs']['ajax'])
 		{
-			$script .= $lotgd_tpl->renderLotgdTemplate('mail-ajax.html', [
+			$script .= $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
 				'set_timeout' => ((getsetting('LOGINTIMEOUT',900)-120)*1000),
 				'clear_xajax' => ((getsetting('LOGINTIMEOUT',900)+5)*1000)
 			]);
@@ -301,7 +301,7 @@ function page_footer($saveuser = true)
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 
-		$html['petitiondisplay'] = $lotgd_tpl->renderLotgdTemplate('other/petition.html', [
+		$html['petitiondisplay'] = $lotgd_tpl->renderLotgdTemplate('other/petition.twig', [
 			'administrator' => $administrator,
 			'petitioncount' => $p,
 			'petition' => $pet,
@@ -415,7 +415,7 @@ function popup_footer()
 	{
 		if ($session['user']['prefs']['ajax'])
 		{
-			$html['script'] = $lotgd_tpl->renderLotgdTemplate('mail-ajax.html', [
+			$html['script'] = $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
 				'set_timeout' => ((getsetting('LOGINTIMEOUT',900)-120)*1000),
 				'clear_xajax' => ((getsetting('LOGINTIMEOUT',900)+5)*1000)
 			]);
@@ -426,7 +426,7 @@ function popup_footer()
 	$html['content'] = $output->get_output();
 	saveuser();
 	session_write_close();
-	echo $lotgd_tpl->renderThemeTemplate('popup.html', $html);
+	echo $lotgd_tpl->renderThemeTemplate('popup.twig', $html);
 	exit();
 }
 
@@ -534,12 +534,12 @@ function getcharstats($buffs)
 		}
 	}
 
-	$statbuff = $lotgd_tpl->renderLotgdTemplate('character/statbuff.html', [
+	$statbuff = $lotgd_tpl->renderLotgdTemplate('character/statbuff.twig', [
 		'title' => translate_inline("`0Buffs"),
 		'value' => $buffs
 	]);
 
-	return appoencode($lotgd_tpl->renderLotgdTemplate('character/stats.html', [
+	return appoencode($lotgd_tpl->renderLotgdTemplate('character/stats.twig', [
 		'charstat' => $charstattpl,
 		'statbuff' => $statbuff
 	]), true);
