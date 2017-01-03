@@ -90,7 +90,7 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 		$session['message'].=translate_inline("It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n");
 		$session['message'].=translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
 	}
-	if ($session['message']>"") output_notl("`b`\$%s`b`n", $session['message'],true);
+	if (isset($session['message']) && $session['message']>"") output_notl("`b`\$%s`b`n", $session['message'],true);
 
     $formLogin = $lotgd_tpl->renderThemeTemplate('body/login.twig', [
 		'text' => translate_inline('Enter your name and password to enter the realm.`n'),
@@ -126,7 +126,7 @@ else
 		$session['message'].=translate_inline("It appears that you may be blocking cookies from this site. At least session cookies must be enabled in order to use this site.`n");
 		$session['message'].=translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
 	}
-	if ($session['message']>"") output("`b`\$%s`b`n", $session['message'],true);
+	if (isset($session['message']) && $session['message']>"") output("`b`\$%s`b`n", $session['message'],true);
 	rawoutput($lotgd_tpl->renderThemeTemplate('body/loginfull.twig', ['text' => translate_inline('Server Full!')]));
 	output_notl("`c");
 }
@@ -145,7 +145,7 @@ if (getsetting("homeskinselect", 1)) {
 	$prefs['template'] = $_COOKIE['template'];
 	if ($prefs['template'] == "")
 		$prefs['template'] = getsetting("defaultskin", "yarbrough.htm");
-	require_once("lib/showform.php");
+	require_once 'lib/showform.php';
 	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
 	rawoutput("</td><td><br>&nbsp;<input type='submit' class='button' value='$submit'></td>");
