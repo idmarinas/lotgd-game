@@ -72,6 +72,11 @@ class LotgdTemplate
 	private function getFilters()
 	{
 		return [
+			//-- Access to appoencode function in template
+			new Twig_SimpleFilter('appoencode', function ($string)
+			{
+				return appoencode($string, true);
+			}),
 			//-- Access to color_sanitize function in template
 			new Twig_SimpleFilter('color_sanitize', function ($string)
 			{
