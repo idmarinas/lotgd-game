@@ -41,7 +41,7 @@ else
 	output("`nDo you want to use datacaching (high load optimization)?`n");
 	rawoutput("<select name='DB_USEDATACACHE'>");
 	rawoutput("<option value=\"1\" ".($session['dbinfo']['DB_USEDATACACHE']?'selected=\"selected\"':'').">".translate_inline("Yes")."</option>");
-	rawoutput("<option value=\"0\" ".(!$session['dbinfo']['DB_USEDATACACHE']?'selected=\"selected\"':'').">".translate_inline("No")."</option>");
+	rawoutput("<option value=\"0\" ".(! $session['dbinfo']['DB_USEDATACACHE']?'selected=\"selected\"':'').">".translate_inline("No")."</option>");
 	rawoutput("</select>");
 	tip("Do you want to use a datacache for the sql queries? Many internal queries produce the same results and can be cached. This feature is *highly* recommended to use as the MySQL server is usually high frequented. When using in an environment where Safe Mode is enabled; this needs to be a path that has the same UID as the web server runs.");
 
