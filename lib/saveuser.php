@@ -3,11 +3,13 @@
 // addnews ready
 // mail ready
 
-function saveuser(){
+function saveuser()
+{
 	global $session,$dbqueriesthishit,$baseaccount,$companions,$chatloc;
+
 	if (defined("NO_SAVE_USER")) return false;
 
-	if ($session['loggedin'] && $session['user']['acctid']!=""){
+	if (isset($session['loggedin']) && $session['loggedin'] && $session['user']['acctid']!=""){
 		// Any time we go to save a user, make SURE that any tempstat changes
 		// are undone.
 		restore_buff_fields();

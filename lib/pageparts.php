@@ -134,7 +134,7 @@ function page_footer($saveuser = true)
 	// invalid one which we can then blow away.
 	$replacementbits['__scriptfile__'] = $script;
 	$replacementbits = modulehook('everyfooter', $replacementbits);
-    if ($session['user']['loggedin'])  $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
+	if (isset($session['user']['loggedin']) && $session['user']['loggedin'])  $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
 
 	unset($replacementbits['__scriptfile__']);
 	//output any template part replacements that above hooks need (eg,
@@ -284,7 +284,7 @@ function page_footer($saveuser = true)
 	//output petition count
 	$html['petition'] = "<a href='petition.php' onClick=\"".popup('petition.php').";return false;\" target='_blank' align='right' class='motd'>".translate_inline('Petition for Help')."</a>";
 
-	if ($session['user']['superuser'] & SU_EDIT_PETITIONS)
+	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
 	{
 		$sql = "SELECT count(1) AS c, status FROM " . DB::prefix('petitions') . " GROUP BY status";
 		$result = DB::query_cached($sql, 'petition_counts');
