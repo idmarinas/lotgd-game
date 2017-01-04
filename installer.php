@@ -150,7 +150,7 @@ $stage = (int) httpget('stage');
 
 if (! isset($session['stagecompleted'])) $session['stagecompleted']=-1;
 if ($stage > $session['stagecompleted']+1) $stage = $session['stagecompleted'];
-if (! isset($session['dbinfo'])) $session['dbinfo'] = ['DB_HOST' => '', 'DB_USER' => '', 'DB_PASS' => '', 'DB_NAME' => ''];
+if (! isset($session['dbinfo'])) $session['dbinfo'] = ['DB_HOST' => '', 'DB_USER' => '', 'DB_PASS' => '', 'DB_NAME' => '', 'DB_USEDATACACHE' => false, 'DB_DATACACHEPATH' => 'cache', 'DB_PREFIX' => ''];
 if (file_exists('dbconnect.php') && ( $stage == 3 || $stage == 4 || $stage == 5 ))
 {
 	output("`%This stage was completed during a previous installation.");
