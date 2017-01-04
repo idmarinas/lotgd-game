@@ -1,7 +1,9 @@
 <?php
-require_once 'lib/installer/installer_sqlstatements.php';
+$sql_upgrade_statements = include 'lib/installer/installer_sqlstatements.php';
 require_once 'lib/installer/installer_functions.php';
 require_once 'lib/tabledescriptor.php';
+
+set_time_limit(660);//-- Temporary increased limit execution time
 
 output("`@`c`bBuilding the Tables`b`c");
 output("`2I'm now going to build the tables.");
@@ -26,27 +28,32 @@ $dosql = false;
 reset($sql_upgrade_statements);
 foreach ($sql_upgrade_statements as $key => $val)
 {
-	if ($dosql){
-		output("`3Version `#%s`3: %s SQL statements...`n",$key,count($val));
-		if (count($val)>0){
+	if ($dosql)
+	{
+		output("`3Version `#%s`3: %s SQL statements...`n", $key, count($val));
+		if (count($val)>0)
+		{
 			output("`^Doing: `6");
 			reset($val);
 			$count=0;
-			while (list($id,$sql)=each($val)){
+			while (list($id,$sql) = each($val))
+			{
 				$onlyupgrade = 0;
-				if (substr($sql, 0, 2) == "1|") {
+				if (substr($sql, 0, 2) == "1|")
+				{
 					$sql = substr($sql, 2);
 					$onlyupgrade = 1;
 				}
 				// Skip any statements that should only be run during
 				// upgrades from previous versions.
-				if (!$session['dbinfo']['upgrade'] && $onlyupgrade) {
+				if (! $session['dbinfo']['upgrade'] && $onlyupgrade)
+				{
 					continue;
 				}
 				$count++;
-				if ($count%10==0 && $count!=count($val))
-				output_notl("`6$count...");
-				if (!DB::query($sql)) {
+				if ($count%10==0 && $count!=count($val)) output_notl("`6$count...");
+				if (! DB::query($sql))
+				{
 					output("`n`\$Error: `^'%s'`7 executing `#'%s'`7.`n",
 					DB::error(), $sql);
 				}
@@ -54,8 +61,7 @@ foreach ($sql_upgrade_statements as $key => $val)
 			output("$count.`n");
 		}
 	}
-	if ($key == $session['fromversion'] ||
-	$session['dbinfo']['upgrade'] == false) $dosql=true;
+	if ($key == $session['fromversion'] || $session['dbinfo']['upgrade'] == false) $dosql = true;
 }
 rawoutput("</div>");
 	/*
