@@ -46,7 +46,11 @@ else
 
 	$result = file_put_contents('dbconnect.php', $code);
 
-	if (false !== $result) output("`n`@Success!`2  I was able to write your dbconnect.php file, you can continue on to the next step.");
+	if (false !== $result)
+	{
+		$failure = false;
+		output("`n`@Success!`2  I was able to write your dbconnect.php file, you can continue on to the next step.");
+	}
 	else $failure = true;
 
 	if ($failure)
