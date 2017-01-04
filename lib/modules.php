@@ -415,7 +415,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 		}
 		debug("Args parameter to modulehook $hookname from $where is not an array.");
 	}
-	if ($session['user']['superuser'] & SU_DEBUG_OUTPUT && !isset($hookcomment[$hookname])){
+	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && !isset($hookcomment[$hookname])){
 		rawoutput("<!--Module Hook: $hookname; allow inactive: ".($allowinactive?"true":"false")."; only this module: ".($only!==false?$only:"any module"));
 		if (!is_array($args)) {
 			$arg = $args . " (NOT AN ARRAY!)";

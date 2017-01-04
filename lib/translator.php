@@ -210,7 +210,7 @@ function tlbutton_push($indata,$hot=false,$namespace=FALSE){
 
 function tlbutton_pop(){
 	global $translatorbuttons,$session;
-	if ($session['user']['superuser'] & SU_IS_TRANSLATOR){
+	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR){
 		return array_pop($translatorbuttons);
 	}else{
 		return;
@@ -219,7 +219,7 @@ function tlbutton_pop(){
 
 function tlbutton_clear(){
 	global $translatorbuttons,$session;
-	if ($session['user']['superuser'] & SU_IS_TRANSLATOR){
+	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR){
 		$return = tlbutton_pop().join("",$translatorbuttons);
 		$translatorbuttons = array();
 		return $return;
