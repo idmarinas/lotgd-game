@@ -142,9 +142,9 @@ if (getsetting("homeskinselect", 1)) {
 	rawoutput("<form action='home.php' method='POST'>");
 	rawoutput("<table align='center'><tr><td>");
 	$form = array("template"=>"Choose a different display skin:,theme");
-	$prefs['template'] = $_COOKIE['template'];
+	$prefs['template'] = (isset($_COOKIE['template']) ? $_COOKIE['template'] : '');
 	if ($prefs['template'] == "")
-		$prefs['template'] = getsetting("defaultskin", "yarbrough.htm");
+		$prefs['template'] = getsetting("defaultskin", "jade.htm");
 	require_once 'lib/showform.php';
 	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
