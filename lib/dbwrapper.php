@@ -120,7 +120,7 @@ Class DB
 		if ($profiler['elapse'] >= 0.5)
 			debug(sprintf('Slow Query (%ss): %s',
 				round($profiler['elapse'],3),
-				HTMLEntities($statement->getSql(), ENT_COMPAT, getsetting('charset', 'UTF_8'))
+				HTMLEntities($statement->getSql(), ENT_COMPAT, getsetting('charset', 'UTF-8'))
 			));
 
 		$dbinfo['queriesthishit']++;
