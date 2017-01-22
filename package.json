@@ -1,6 +1,6 @@
 {
   "name": "idmarinas-ignis",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "Juego MMO de Rol para navegador en formato web",
   "engines": {
     "node": ">= 0.10.0"
