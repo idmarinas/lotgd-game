@@ -1,11 +1,26 @@
 {
-  "name": "idmarinas-ignis",
+  "name": "idmarinas-lotgd",
   "version": "1.0.0",
-  "description": "Juego MMO de Rol para navegador en formato web",
+  "description": "A new version of The Legend of the Green Dragon, upgrade scripts for PHP >= 5.6. And optimization",
+  "title": "The Legend of the Green Dragon",
   "engines": {
     "node": ">= 0.10.0"
   },
+  "authors": [
+    {
+      "name": "Iván Diaz Marinas",
+      "email": "contacto@infommo.es",
+      "homepage": "https://bitbucket.org/idmarinas/lotgd-juego",
+      "role": "Contributor, Maintainer"
+    },
+    {
+      "name": "DragonPrime",
+      "homepage": "http://www.dragonprime.net",
+      "role": "Developer, Maintaner"
+    }
+  ],
   "homepage": "http://dragonverde.infommo.es",
+  "license": "SEE LICENSE IN <LICENSE.txt>",
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
@@ -22,6 +37,7 @@
     "gulp-if": "^2.0.2",
     "gulp-flatten": "^0.3.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-replace": "^0.5.4",
     "semantic-ui": "^2.2.7",
     "jscs": "^3.0.7",
     "minimist": "^1.2.0"
@@ -32,7 +48,5 @@
   "repository": {
     "type": "git",
     "url": "https://idmarinas@bitbucket.org/idmarinas/lotgd-juego.git"
-  },
-  "author": "Ivan Diaz Marinas",
-  "license": "SEE LICENSE IN <LICENSE.txt>"
+  }
 }
