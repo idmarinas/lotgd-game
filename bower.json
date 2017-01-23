@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "uikit" : "~2"
+    "jQuery": "^2.2.1"
   }
 }
