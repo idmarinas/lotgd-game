@@ -1,4 +1,4 @@
-/*!
+/**
  * Javascript for LOTGD
  * By IDMarinas
  *
