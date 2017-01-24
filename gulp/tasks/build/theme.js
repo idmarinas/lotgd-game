@@ -30,6 +30,7 @@ module.exports = function(callback)
 	//-- Copy CSS file
 	var css = gulp.src(config.paths.semantic + (isProduction ? '/semantic.min.css' : '/semantic.css'))
 		.pipe(rename(themeName + '.css'))
+		.pipe(gulpif(isProduction, header(banner, settings.header)))
 		.pipe(gulp.dest(config.paths.build + '/themes'))
 		.pipe(print(log.copied))
 	;
