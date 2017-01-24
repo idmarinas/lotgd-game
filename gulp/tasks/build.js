@@ -1,18 +1,25 @@
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
+var
+	//-- Dependencies
+	gulp = require('gulp-help')(require('gulp')),
+	runSequence = require('run-sequence')
+;
 
-gulp.task('build', function (callback) {
+require('./collections/build')(gulp);
+
+module.exports = function(callback)
+{
+  	console.info('Building application');
+
 	runSequence(
-		'build-empty',
-		'copy-main',
-		'lotgd',
-		'copy-theme',
+		'delete',
+		'main',
+		'pre-theme',
+		'semantic-ui',
+		'theme',
+		'assets',
+		'application',
+		'clean',
 
-		function (error) {
-			if (error) {
-				console.log(error.message);
-			}
-			callback(error);
-		}
+		callback
 	);
-});
+};
