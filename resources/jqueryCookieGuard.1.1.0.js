@@ -24,10 +24,17 @@
 // - Responsive (CSS based in percentages)
 // - Script Cookies with 2 expiration days
 //
+/*!
+ * CookieGuard v1.1
+ * (c) 2012 Ultimateweb LTD <info@ultimateweb.co.uk>
+ * All Rights Reserved.
+ *
+ * GNU General Public License <http://www.gnu.org/licenses/>.
+ */
 (function ($) {
     if (typeof $.cookieguard === 'undefined') {
         $.cookieguard = function (options) {
-			
+
 			// Defaults
             var defaults = {
                 cookieDeleteDelay: 100,
@@ -44,7 +51,7 @@
 			var userLang = navigator.language || navigator.userLanguage;
 			userLang=userLang.split('-')[0];
 			if (options!=null) { if (options.userLang!=null) userLang = options.userLang; }
-				
+
 			// Default Messages (English)
 			var messages = {
 				bannerTitle: ' This website uses cookies to track usage and preferences.',
@@ -85,9 +92,9 @@
 					buttonOK: 'Okay',
 					cookieGuardName: 'Cookie Guard',
 					cookieGuardDescription: 'Diese Cookie speichert Ihre Auswahl verschiedener Cookies (blockiert/erlaubt) w&auml;hrend des Surfens von der Webseite.'
-				};	
+				};
 			}
-			
+
 			// Spanish Messages
 			if (userLang === "es") {
 				delete messages;
@@ -110,12 +117,12 @@
 					cookieGuardDescription: 'Esta cookie guarda sus preferencias respecto a las distintas cookies (bloqueada/permitida) durante su navegación por nuestra web.'
 				};
 			}
-			
+
 			var buttons = {
 				buttonsConfigDefault:  '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a>' + '<a href="#" id="authoriseCookies">' + messages.buttonAllow + '</a>' + '<a href="#" id="denyCookies">' + messages.buttonBlock + '</a></div>',
 				buttonsOK: '<div id="cookieButtons"><a href="#" id="showCookies">'+messages.buttonShow+'</a><a href="#" id="cookieGuardOkay">'+messages.buttonOK+'</a></div>'
 			};
-			
+
             $.cookieguard.settings = $.extend(defaults, messages, buttons, options, { 'cookiesUsed': new Array(), 'messageHideTimeout': null });
         };
     }
@@ -661,12 +668,12 @@
         $.cookieguard.createCSS = function () {
             var style = '<style id="cookieGuardStyles" type="text/css">';
 		        style += '#cookieGuardMsg { position: absolute; text-align: left; top: 0; left: 0; width: 100%; display: none; border-bottom: 2px solid #5c5c5c; font-size: 12px; font-family: Arial, Helvetica, Sans-Serif; color: #333; background: #e2e2e2 url(http://cookieguard.eu/images/cookieguardicon.png) no-repeat 12px 12px; min-height: 50px; z-index:99999; }';
-			style += "#cookieGuardMsgInner { padding: 10px 10px 10px 60px; }"; 
-			style += "#cookieGuardMsg a { text-decoration: none; font-weight: normal; font-style: normal; }"; 
-			style += "#cookieButtons { width: 100%; text-align: right;}"; 
+			style += "#cookieGuardMsgInner { padding: 10px 10px 10px 60px; }";
+			style += "#cookieGuardMsg a { text-decoration: none; font-weight: normal; font-style: normal; }";
+			style += "#cookieButtons { width: 100%; text-align: right;}";
 			style += "#showCookies { border: 1px solid #999; background: #f4f4f4; color: #5b5858; padding: 5px 10px; margin: 0 1%;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
 			style += "#showCookies:hover { border-color: #666; }";
-			style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";style += "#authoriseCookies:hover { border-color: #6f8f59; }"; 
+			style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";style += "#authoriseCookies:hover { border-color: #6f8f59; }";
 			style += "#denyCookies { border: 1px solid #cc9c9c; background: #ecc1c1; color: #7e5353; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
 			style += "#denyCookies:hover { border-color: #9e6a6a;}";
 			style += "#cookieList { display: none; padding: 10px 60px 0 0; }";
