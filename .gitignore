@@ -13,3 +13,4 @@ composer.phar
 composer.lock
 phpunit.xml
 /semantic/dist/**
+/semantic/src/theme.config
