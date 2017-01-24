@@ -19,6 +19,8 @@ var
 
 module.exports = function(callback)
 {
+	console.info('Creation theme: ' + themeName);
+
 	del('semantic/src/theme.config');
 
 	return gulp.src('semantic/src/theme.config.default')
