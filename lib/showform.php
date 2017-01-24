@@ -107,7 +107,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 	$save = translate_inline("Save");
 	tlschema();
 
-	if (!$nosave) rawoutput("<input type='submit' class='button' value='$save'>");
+	if (!$nosave) rawoutput("<input class='ui primary button' type='submit' class='button' value='$save'>");
 
 	return $returnvalues;
 }
@@ -139,7 +139,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				break;
 			}
 			natcasesort($skins); //sort them in natural order
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			foreach($skins as $skin)
 			{
 				if ($skin == $row[$key])
@@ -169,7 +169,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$vloc = modulehook("validlocation", $vloc);
 			unset($vloc['all']);
 			reset($vloc);
-			$select .= "<select name='$keyout'>";
+			$select .= "<select class='ui dropdown' name='$keyout'>";
 			foreach($vloc as $loc=>$val) {
 				if ($loc == $row[$key]) {
 					$select .= "<option value='$loc' selected>".htmlentities($loc, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
@@ -206,7 +206,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 					debug("You must pass an array as the value when using a checklist.");
 					$checked=false;
 				}
-				$select.="<input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked==$optval?" checked":"").">&nbsp;".("$optdis")."<br>";
+				$select.="<div class='ui checkbox'><input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked==$optval?" checked":"")."><label>".("$optdis")."</label></div>";
 			}
 			return $select;
 			break;
@@ -217,14 +217,15 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			reset($info);
 			list($k,$v)=each($info);
 			list($k,$v)=each($info);
-			$select="";
+			$select = '<div class="ui form">';
 			while (list($k,$v)=each($info)){
 				$optval = $v;
 				list($k,$v)=each($info);
 				$optdis = $v;
 				if (!$pretrans) $optdis = translate_inline($optdis);
-				$select.=("<input type='radio' name='$keyout' value='$optval'".($row[$key]==$optval?" checked":"").">&nbsp;".("$optdis")."<br>");
+				$select.=("<div class='ui radio checkbox'><input type='radio' name='$keyout' value='$optval'".($row[$key]==$optval?" checked":"")."><label>".("$optdis")."</label></div>");
 			}
+			$select .= '</div>';
 			return $select;
 			break;
 		case "dayrange":
@@ -234,7 +235,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			// we should really try to avoid an infinite loop here if
 			// they define a time string which equates to 0 :/
 			$cur = $row[$key];
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			if ($cur && $cur < date("Y-m-d H:i:s", $start))
 				$select .= "<option value='$cur' selected>".htmlentities($cur, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			for($j = $start; $j < $end; $j = strtotime($step, $j)) {
@@ -254,7 +255,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$max = (int)$info[3];
 			$step = (int)$info[4];
 			if ($step == 0) $step = 1;
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			if ($min<$max && ($max-$min)/$step>300)
 				$step=max(1,(int)(($max-$min)/300));
 			for($j = $min; $j <= $max; $j += $step) {
@@ -269,7 +270,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$max = round((float)$info[3],2);
 			$step = round((float)$info[4],2);
 			if ($step==0) $step=1;
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			$val = round((float)$row[$key], 2);
 			for($j = $min; $j <= $max; $j = round($j+$step,2)) {
 				$select .= "<option value='$j'".($val==$j?" selected":"").">".HTMLEntities("$j", ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
@@ -325,7 +326,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				rawoutput(tlbutton_pop());
 			}
 			tlschema();
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			foreach ($vals as $k=>$v) {
 				$select .= "<option value=\"".htmlentities($v, ENT_COMPAT, getsetting("charset", "UTF-8"))."\"".($row[$key]==$v?" selected":"").">".htmlentities($v, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
@@ -341,7 +342,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			list($k,$v)=each($info);
 			list($k,$v)=each($info);
 
-			$select = "<select name='$keyout'>";
+			$select = "<select class='ui dropdown' name='$keyout'>";
 			while (list($k,$v)=each($info)){
 				$optval = $v;
 				list($k,$v)=each($info);
@@ -361,7 +362,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "password":
 			if (array_key_exists($key, $row)) $out = $row[$key];
 			else $out = "";
-			return "<input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."'>";
+			return "<div class='ui input'><input type='password' name='$keyout' value='".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."'></div>";
 			break;
 		case "bool":
 			tlschema("showform");
@@ -389,7 +390,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			//don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
 			if (isset($row[$key])) {
 				$text = dump_item($row[$key]);
-				$text .= "<input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'>";
+				$text .= "<div class='ui input'><input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'></div>";
 
 				return $text;
 			}
@@ -428,10 +429,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "int":
 			if (array_key_exists($key, $row)) (int) $out = $row[$key];
 			else $out = 0;
-			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='5'>";
+				return "<div class='ui input'><input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='5'></div>";
 			break;
 		case "float":
-			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='8' step='any'>";
+			return "<div class='ui input'><input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='8' step='any'></div>";
 			break;
 		case "string":
 			$len = 50;
@@ -442,7 +443,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			if ($minlen > 70) $minlen = 70;
 			if (array_key_exists($key, $row)) $val = $row[$key];
 			else $val = "";
-			return "<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
+			return "<div class='ui input'><input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\"></div>";
 			break;
 		default:
 			if (array_key_exists($info[1],$extensions)){
@@ -453,7 +454,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			}else{
 				if (array_key_exists($key, $row)) $val = $row[$key];
 				else $val = "";
-				return "<input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
+				return "<div class='ui input'><input type='text' size='50' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\"></div>";
 			}
 		break;
 	}
