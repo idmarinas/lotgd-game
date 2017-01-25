@@ -83,7 +83,7 @@ $setup = array(
 	"clanregistrar"=>"Name of the clan registrar",
 	"deathoverlord"=>"Name of the death overlord",
 	"bankername"=>"Name of the banker",
-	
+
 	"SU titles,title",
 	"This will display tags to the name in chats,note",
 	"enable_chat_tags"=>"Enable chat tags in general,bool",
@@ -129,7 +129,7 @@ $setup = array(
 	"maxlevel"=>"Which is the maximum attainable level (at which also the Dragon shows up)?,int",
 	"exp-array"=>"Give here what experience is necessary for each level",
 	"Note: Use comma seperated values climbing from the exp necessary for level 1 to the exp necessary for the max. level. If you enter more values they won't be used. If you enter too few then the last value + 20 percent will be the necessary experience (failsafe). Low levels will have it easier - the higher the level the more deadly this standard setting will be!,note",
-	
+
 
 	"Clans,title",
 	"allowclans"=>"Enable Clan System?,bool",
@@ -255,7 +255,7 @@ $setup = array(
 	"gziphandler"=>"Is the GzHandler turned on,viewonly",
 	"databasetype"=>"Type of database,viewonly",
 
-	
+
 
 	"LoGDnet Setup,title",
 	"(LoGDnet requires your PHP configuration to have file wrappers enabled!!),note",
@@ -273,7 +273,8 @@ $setup = array(
 	"curservertime"=>"Current Server Time,viewonly",
 	"lastnewday"=>"Last new day,viewonly",
 	"nextnewday"=>"Next new day,viewonly",
-	"gameoffsetseconds"=>"Real time to offset new day,$enum",
+	// "gameoffsetseconds"=>"Real time to offset new day,$enum",
+	"gameoffsetseconds"=>"Real time to offset new day",
 
 	"Translation & Language Setup,title",
 	"enabletranslation"=>"Enable the use of the translation engine,bool",

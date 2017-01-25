@@ -41,7 +41,7 @@ function saveuser()
 		{
 			if (is_array($val)) $val = serialize($val);
 			//only update columns that have changed.
-			if ($baseaccount[$key] != $val)
+			if (isset($baseaccount[$key]) && $baseaccount[$key] != $val)
 			{
 				$sql[] = "`$key` = '".addslashes($val)."'";
 			}

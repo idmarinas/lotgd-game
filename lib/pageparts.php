@@ -41,7 +41,7 @@ function page_header()
 	{
 		if (! array_key_exists($script, $runheaders)) $runheaders[$script] = false;
 
-		if (! $runheaders[$script])
+		if (isset($runheaders[$script]) && ! $runheaders[$script])
 		{
 			modulehook('everyheader', ['script' => $script] );
             if ($session['user']['loggedin'])
@@ -268,7 +268,7 @@ function page_footer($saveuser = true)
 
 	//output the mail link
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin']) {
-		if ($session['user']['prefs']['ajax'])
+		if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 		{
 			$script .= $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
 				'set_timeout' => ((getsetting('LOGINTIMEOUT',900)-120)*1000),
@@ -301,7 +301,7 @@ function page_footer($saveuser = true)
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 
-		$html['petitiondisplay'] = $lotgd_tpl->renderLotgdTemplate('other/petition.twig', [
+		$html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('other/petition.twig', [
 			'administrator' => $administrator,
 			'petitioncount' => $p,
 			'petition' => $pet,
@@ -391,7 +391,7 @@ function popup_footer()
 
 	$footer = $template['popupfoot'];
 	//add XAJAX mail stuff
-	if ($session['user']['prefs']['ajax'])
+	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
 		require 'mailinfo_common.php';
 
@@ -523,7 +523,8 @@ function getcharstats($buffs)
 	{
 		if (count($section))
 		{
-			$arr = array("title"=>translate_inline($label));
+			// $arr = array("title"=>translate_inline($label));
+			$arr = translate_inline($label);
 			$charstattpl[$arr] = [];
 			reset($section);
 			foreach ($section as $name => $val)
@@ -534,12 +535,12 @@ function getcharstats($buffs)
 		}
 	}
 
-	$statbuff = $lotgd_tpl->renderLotgdTemplate('character/statbuff.twig', [
+	$statbuff = $lotgd_tpl->renderThemeTemplate('character/statbuff.twig', [
 		'title' => translate_inline("`0Buffs"),
 		'value' => $buffs
 	]);
 
-	return appoencode($lotgd_tpl->renderLotgdTemplate('character/stats.twig', [
+	return appoencode($lotgd_tpl->renderThemeTemplate('character/stats.twig', [
 		'charstat' => $charstattpl,
 		'statbuff' => $statbuff
 	]), true);
