@@ -68,8 +68,8 @@ if (isset($row['login']) && $row['login']!=""){
 	$to = httppost('to');
 	$sql = "SELECT login,name,superuser FROM ".DB::prefix('accounts')." WHERE login = '".addslashes($to)."' AND locked = 0";
 	$result = DB::query($sql);
-	$DB::num_rows = DB::num_rows($result);
-	if($DB::num_rows != 1) {
+	$count = DB::num_rows($result);
+	if($count != 1) {
 		$string="%";
 		$to_len = strlen($to);
 		for($x=0; $x < $to_len; ++$x) {
@@ -77,16 +77,18 @@ if (isset($row['login']) && $row['login']!=""){
 		}
 		$sql = "SELECT login,name,superuser FROM " . DB::prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
 		$result = DB::query($sql);
-		$DB::num_rows = DB::num_rows($result);
+		$count = DB::num_rows($result);
 	}
-	if ($DB::num_rows==1){
+	if ($count == 1)
+	{
 		$row = DB::fetch_assoc($result);
 		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 		output_notl("`^{$row['name']}`n");
 		if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 			array_push($superusers,$row['login']);
 		}
-	}elseif ($DB::num_rows==0){
+	}elseif ($count == 0)
+	{
 		output("`\$No one was found who matches \"%s\".`n",stripslashes($to));
 		output("`@Please try again.`n");
 		httpset('prepop', $to, true);
