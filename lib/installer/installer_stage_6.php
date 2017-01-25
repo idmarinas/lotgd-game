@@ -14,6 +14,7 @@ $body .= '];' . PHP_EOL . PHP_EOL;
 $body .= '$DB_PREFIX = \'' . (isset($session['dbinfo']['DB_PREFIX'])?$session['dbinfo']['DB_PREFIX']:null) . '\';' . PHP_EOL;
 $body .= '$DB_USEDATACACHE = \'' . (isset($session['dbinfo']['DB_USEDATACACHE'])?$session['dbinfo']['DB_USEDATACACHE']:null) . '\';' . PHP_EOL;
 $body .= '$DB_DATACACHEPATH = \'' . (isset($session['dbinfo']['DB_DATACACHEPATH'])?$session['dbinfo']['DB_DATACACHEPATH']:null) . '\';' . PHP_EOL;
+$body .= '$gz_handler_on = 0;' . PHP_EOL;
 
 $file = FileGenerator::fromArray([
 	'docblock' => DocBlockGenerator::fromArray([
