@@ -40,7 +40,7 @@ Class DB
 		}
 	}
 
-	private static function getAdapter()
+	public static function getAdapter()
 	{
 		if (! self::$adapter)
 		{
