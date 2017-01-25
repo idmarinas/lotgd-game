@@ -4,9 +4,9 @@
 // mail ready
 
 
-require_once("common.php");
-require_once("lib/showform.php");
-require("lib/settings_extended.php");
+require_once 'common.php';
+require_once 'lib/showform.php';
+require 'lib/settings_extended.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
@@ -22,7 +22,7 @@ switch ($type_setting) {
 	case "extended":
 		switch ($op) {
 			case "save":
-				include_once("lib/gamelog.php");
+				include_once 'lib/gamelog.php';
 				$post = httpallpost();
 				$old=$settings_extended->getArray();
 				$current=$settings_extended->getArray();
@@ -48,7 +48,7 @@ switch ($type_setting) {
 	default:
 		switch ($op) {
 			case "save":
-				include_once("lib/gamelog.php");
+				include_once 'lib/gamelog.php';
 				if ((int)httppost('blockdupemail') == 1 &&
 						(int)httppost('requirevalidemail') != 1) {
 					httppostset('requirevalidemail', "1");
@@ -252,8 +252,8 @@ switch ($type_setting) {
 		}
 		break;
 	default:
-		switch ($op) {
-
+		switch ($op)
+		{
 			case "":
 				$enum="enumpretrans";
 				require_once("lib/datetime.php");
@@ -270,12 +270,14 @@ switch ($type_setting) {
 				rawoutput(tlbutton_clear());
 
 				$secstonewday = secondstonextgameday($details);
+				$adapter = DB::getAdapter();
+				$platform = $adapter->getPlatform();
 				$useful_vals = array(
 					"datacachepath"=>$DB_DATACACHEPATH,
 					"usedatacache"=>$DB_USEDATACACHE,
 					"dayduration"=>round(($details['dayduration']/60/60),0)." hours",
 					"gziphandler"=>$gz_handler_on,
-					"databasetype"=>$DB_TYPE,
+					"databasetype"=>$platform->getName(),
 					"curgametime"=>getgametime(),
 					"curservertime"=>date("Y-m-d h:i:s a"),
 					"lastnewday"=>date("h:i:s a",
