@@ -76,9 +76,9 @@ if (count($post)>0){
 		rawoutput("<input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 	} else {
 		output("Your Character's Name: ");
-		rawoutput("<input name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='46'>");
+		rawoutput("<input name='charname' value='' size='46'>");
 		output("`nYour email address: ");
-		rawoutput("<input name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='50'>");
+		rawoutput("<input name='email' value='' size='50'>");
 		$nolog = translate_inline("Character is not logged in!!");
 		rawoutput("<input name='unverified' type='hidden' value='$nolog'>");
 	}
