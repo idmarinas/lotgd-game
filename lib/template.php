@@ -88,6 +88,11 @@ class LotgdTemplate
 				addnav('', $url);
 
 				return $url;
+			}),
+			//-- Translate a text in template
+			new Twig_SimpleFilter('t', function ($text)
+			{
+				return translate_inline($text);
 			})
 		];
 	}
