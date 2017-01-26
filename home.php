@@ -82,6 +82,7 @@ if (abs(getsetting("OnlineCountLast",0) - strtotime("now")) > 60){
 
 modulehook("hometext", array());
 
+if (! isset($session['message'])) $session['message'] = '';
 if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	if ($op=="timeout"){
 		$session['message'].= translate_inline(" Your session has timed out, you must log in again.`n");
