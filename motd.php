@@ -106,7 +106,7 @@ if ($op=="") {
 	rawoutput(" <input type='submit' value='".translate_inline("Submit")."' class='button'>");
 	rawoutput("</form>");
 
-	if ($session['user']['online']) commentdisplay("`n`@Commentary:`0`n", "motd");
+	if (isset($session['user']['online']) && $session['user']['online']) commentdisplay("`n`@Commentary:`0`n", "motd");
 }
 
 $session['needtoviewmotd']=false;
