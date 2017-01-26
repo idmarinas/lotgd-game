@@ -375,38 +375,27 @@ if (getsetting("allowcreation",1)==0){
 		// better
 		rawoutput("<input type='hidden' name='passlen' id='passlen' value='0'>");
 		$r1 = translate_inline("`^(optional -- however, if you choose not to enter one, there will be no way that you can reset your password if you forget it!)`0");
-		$r2 = translate_inline("`\$(required)`0");
 		$r3 = translate_inline("`\$(required, an email will be sent to this address to verify it before you can log in)`0");
 		if (getsetting("requireemail", 0) == 0) {
 			$req = $r1;
+			$reqbool = false;
 		} elseif (getsetting("requirevalidemail", 0) == 0) {
-			$req = $r2;
+			$reqbool = true;
 		} else {
 			$req = $r3;
-		}
-
-        $createdefaultform = modulehook("create-default-form", ['showdefaultform' => true,'req' => $req]);
-		if ($createdefaultform['showdefaultform'])
-		{
-			rawoutput("<table><tr valign='top'><td>");
-			output("How will you be known to this world? ");
-			rawoutput("</td><td><input name='name'></td></tr><tr valign='top'><td>");
-			output("Enter a password: ");
-			rawoutput("</td><td><input type='password' name='pass1' id='pass1'></td></tr><tr valign='top'><td>");
-			output("Re-enter it for confirmation: ");
-			rawoutput("</td><td><input type='password' name='pass2' id='pass2'></td></tr><tr valign='top'><td>");
-			output("Enter your email address: ");
-					rawoutput("</td><td><input name='email'>");
-			output_notl("%s", $req);
-			rawoutput("</td></tr></table>");
-			output("`nAnd are you a %s Female or a %s Male?`n",
-					"<input type='radio' name='sex' value='1'>",
-					"<input type='radio' name='sex' value='0' checked>",true);
+			$reqbool = true;
 		}
 
 		modulehook("create-form");
 		$createbutton = translate_inline("Create your character");
-		rawoutput("<input type='submit' class='button' value='$createbutton'>");
+		$data = [
+			'createbutton' => $createbutton,
+			'reqemailtext' => $req,
+			'reqemail' => $reqbool
+		];
+		rawoutput($lotgd_tpl->renderThemeTemplate('parts/register.twig', $data));
+		unset($data);
+		// rawoutput("<input type='submit' class='button' value='$createbutton'>");
 		output_notl("`n`n");
 		if ($trash > 0) {
 			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
