@@ -388,8 +388,6 @@ function popup_footer()
 {
 	global $output, $html, $session, $y2, $z2, $copyright, $lotgd_tpl;
 
-
-	$footer = $template['popupfoot'];
 	//add XAJAX mail stuff
 	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
