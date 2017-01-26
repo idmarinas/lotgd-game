@@ -43,5 +43,6 @@ return [
 	'1.2.2 +nb Edition' => [],
 	'1.2.3 +nb Edition' => [],
 	'1.2.4 +nb Edition' => [],
-	'1.2.5 +nb Edition' => []
+	'1.2.5 +nb Edition' => [],
+	'2.0.0 IDMarinas Edition' => include 'lib/installer/versions/2-0-0-IDMarinas-Edition.php'
 ];
