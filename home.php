@@ -92,11 +92,11 @@ if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
 	}
 	if (isset($session['message']) && $session['message']>"") output_notl("`b`\$%s`b`n", $session['message'],true);
 
-    $formLogin = $lotgd_tpl->renderThemeTemplate('body/login.twig', [
+    $formLogin = $lotgd_tpl->renderThemeTemplate('parts/login.twig', [
 		'text' => translate_inline('Enter your name and password to enter the realm.`n'),
-		'username' => translate_inline("<u>U</u>sername"),
-		'password' => translate_inline("<u>P</u>assword"),
-		'button' => translate_inline("Log in")
+		'username' => translate_inline('Username'),
+		'password' => translate_inline('Password'),
+		'button' => translate_inline('Log in')
 	]);
     rawoutput("<form action='login.php' method='POST' onSubmit=\"md5pass();\">".$formLogin."</form>");
 
@@ -127,7 +127,7 @@ else
 		$session['message'].=translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
 	}
 	if (isset($session['message']) && $session['message']>"") output("`b`\$%s`b`n", $session['message'],true);
-	rawoutput($lotgd_tpl->renderThemeTemplate('body/loginfull.twig', ['text' => translate_inline('Server Full!')]));
+	rawoutput($lotgd_tpl->renderThemeTemplate('parts/loginfull.twig', ['text' => translate_inline('Server Full!')]));
 	output_notl("`c");
 }
 
