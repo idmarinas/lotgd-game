@@ -1,0 +1,44 @@
+/* Floated */
+@floatedDistance: 1em;
+
+/*------------------
+ Translation links
+-------------------*/
+/* Translated */
+@lotgd_tBorder: 1px dotted  #0000FF;
+@lotgd_tBgColor: #9999FF;
+@lotgd_tTextColor: #FFFFFF;
+@lotgd_tWidth: 7px;
+@lotgd_tHeight: 7px;
+@lotgd_tFontSize: 7px;
+@lotgd_tPadding: 0 1px 0 1px;
+@lotgd_tTexDecoration: none;
+
+/* Need translate */
+@lotgd_thotBorder: 1px dotted  #FF0000;
+@lotgd_thotBgColor: #FF9999;
+@lotgd_thotTextColor: #FFFFFF;
+@lotgd_thotWidth: 7px;
+@lotgd_thotHeight: 7px;
+@lotgd_thotFontSize: 7px;
+@lotgd_thotPadding: 0 1px 0 1px;
+@lotgd_thotTexDecoration: none;
+
+
+/* Debug */
+@lotgd_debugBgColor: #FFFFFF;
+@lotgd_debugTextColor: #000000;
+@lotgd_debugFontSize: 10px;
+@lotgd_debugBorder: 1px dotted #000000;
+@lotgd_debugWidth: auto;
+@lotgd_debugHeight: auto;
+
+/* Page title */
+@lotgd_pTitleFontFamily: "Arial Black", "Courier";
+@lotgd_pTitleFontVariant: small-caps;
+@lotgd_pTitleFontSize: 20px;
+@lotgd_pTitleTextColor: #FFFFFF;
+
+/**/
+@lotgd_navhiTextColor: #00FF00;
+@lotgd_navhiTextDecoration: underline;
