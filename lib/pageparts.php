@@ -411,7 +411,7 @@ function popup_footer()
 	$html[$z] = $$z;
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin'])
 	{
-		if ($session['user']['prefs']['ajax'])
+		if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 		{
 			$html['script'] = $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
 				'set_timeout' => ((getsetting('LOGINTIMEOUT',900)-120)*1000),
