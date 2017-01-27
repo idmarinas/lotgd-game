@@ -1,0 +1,155 @@
+<table class="lotgd table">
+	{# Header #}
+	<tr>
+		<td>
+			<table class="lotgd table">
+				<tr>
+					<td class="top aligned lotgd-text-nowrap">
+						<table  class="lotgd table">
+							<tr>
+								<td class="border tlc"></td>
+								<td class="border tm"></td>
+								<td class="border trc"></td>
+							</tr>
+							<tr>
+								<td class="border tlt"></td>
+								<td class="top aligned lotgd-text-nowrap"><span class='pagetitle'>&#149; {{ title }}</span></td>
+								<td class="border trt"></td>
+							</tr>
+							<tr>
+								<td class="border blc"></td>
+								<td class="border btm"></td>
+								<td class="border brc"></td>
+							</tr>
+						</table>
+					</td>
+					<td class="top aligned right aligned"><img src='themes/jade/images/logo.jpg'></td>
+				</tr>
+				<tr>
+					<td class="top aligned" colspan='2'>
+						{# Start advertising module #}
+						<div class="left floated">{{ headerad }}</div>
+						{# End advertising module #}
+						<div class="right floated">{{ motd }} | {{ mail }} | {{ petition }}<br>{{ petitiondisplay|appoencode }}<br></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	{# Content #}
+	<tr>
+		<td>
+			<table class="lotgd table">
+				<tr>
+					<td class="top aligned navigation">
+						<table class="lotgd table">
+							<tr>
+								<td class="border tlc"></td>
+								<td class="border tm"></td>
+								<td class="border trc"></td>
+							</tr>
+							<tr>
+								<td class="border tlt"></td>
+								<td class="lotgd top aligned nav">
+									{# Start advertising module #}
+									<div style='position: relative; top: -15;' class="center aligned">{{ navad }}</div>
+									{# End advertising module #}
+									<div class="center aligned">{{ nav }}</div>
+								</td>
+								<td class="border trt"></td>
+							</tr>
+							<tr>
+								<td class="border blc"></td>
+								<td class="border btm"></td>
+								<td class="border brc"></td>
+							</tr>
+						</table>
+					</td>
+					<td class="top aligned">
+						<table class="lotgd table">
+							<tr>
+								<td class="border tlc"></td>
+								<td class="border tm"></td>
+								<td class="border trc"></td>
+							</tr>
+							<tr>
+								<td class="border tlt"></td>
+								<td class="top aligned headrow">
+									<table class="lotgd table">
+										<tr>
+											<td class="top aligned left aligned">
+												{# Start advertising module #}
+												<div style="float: right">{{ verticalad }}</div>
+												{{ bodyad }}
+												{# End advertising module #}
+												{{ content }}
+											</td>
+											<td class="top aligned characterstats">
+												<table class="lotgd table">
+													<tr>
+														<td class="border tlc"></td>
+														<td class="border tm"></td>
+														<td class="border trc"></td>
+													</tr>
+													<tr>
+														<td class="border tlt"></td>
+														<td class="top aligned nav left aligned lotgd-text-nowrap">
+															{{ stats }}
+															<p>&nbsp;</p>
+															{{ paypal }}
+														</td>
+														<td class="border trt"></td>
+													</tr>
+													<tr>
+														<td class="border blc"></td>
+														<td class="border btm"></td>
+														<td class="border brc"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td class="border trt"></td>
+							</tr>
+							<tr>
+								<td class="border blc"></td>
+								<td class="border btm"></td>
+								<td class="border brc"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	{# Footer #}
+	<tr>
+		<td>
+			<table class="lotgd table">
+				<tr>
+					<td class="border tlc"></td>
+					<td class="border tm"></td>
+					<td class="border trc"></td>
+				</tr>
+				<tr>
+					<td class="border tlt"></td>
+					<td class="top aligned">
+						<table class="lotgd table">
+							<tr>
+								<td class="top aligned"><a href="#" uk-totop uk-scroll></a> {{ copyright }} Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target='_blank'>HFS</a></td>
+								<td class="top aligned right aligned">{{ source }}<br />{{ version }}<br />({{ pagegen }})</td>
+							</tr>
+						</table>
+					</td>
+					<td class="border trt"></td>
+				</tr>
+				<tr>
+					<td class="border blc"></td>
+					<td class="border btm"></td>
+					<td class="border brc"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

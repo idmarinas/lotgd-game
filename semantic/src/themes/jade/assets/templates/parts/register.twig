@@ -1,0 +1,67 @@
+<div class="ui form">
+	<div class="field">
+		<div class="ui grid">
+			<div class="four wide right aligned middle aligned column">
+				<label>{{ 'How will you be known to this world?'|t }}</label>
+			</div>
+			<div class="twelve wide column">
+				<input name='name'>
+			</div>
+		</div>
+	</div>
+	<div class="required field">
+		<div class="ui grid">
+			<div class="four wide right aligned middle aligned column">
+				<label>{{ 'Enter a password:'|t }}</label>
+			</div>
+			<div class="twelve wide column">
+				<input type='password' name='pass1' id='pass1'>
+			</div>
+		</div>
+	</div>
+	<div class="required field">
+		<div class="ui grid">
+			<div class="four wide right aligned middle aligned column">
+				<label>{{ 'Re-enter it for confirmation:'|t }}</label>
+			</div>
+			<div class="twelve wide column">
+				<input type='password' name='pass2' id='pass2'>
+			</div>
+		</div>
+	</div>
+	<div class="{{ reqemail ? 'required' }} field">
+		<div class="ui grid">
+			<div class="four wide right aligned middle aligned column">
+				<label>{{ 'Enter your email address:'|t }}</label>
+			</div>
+			<div class="twelve wide column">
+				<input name='email'>
+				{% if reqemailtext %}<div class="ui bottom attached info message">{{ reqemailtext }}</div>{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="inline fields">
+		<label>{{ 'And are you a..?'|t }}</label>
+		<div class="field">
+			<div class="ui radio checkbox">
+				<input type="radio" name="sex" value="0" checked>
+				<label>a Male</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui radio checkbox">
+				<input type="radio" name="sex" value="1">
+				<label>a Female</label>
+			</div>
+		</div>
+	</div>
+	<div class="center aligned field">
+		<input class="ui big primary button" type="submit" value="{{ createbutton }}">
+		<div class="ui animated button" tabindex="0">
+			<div class="visible content">Next</div>
+			<div class="hidden content">
+				<i class="right arrow icon"></i>
+			</div>
+		</div>
+	</div>
+</div>

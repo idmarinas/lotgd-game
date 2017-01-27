@@ -1,0 +1,23 @@
+{{ text|appoencode }}
+<table class="ui center aligned collapsing simple table">
+	<tr>
+		<td><img src='images/logindragon.gif' class='noborder'></td>
+	</tr>
+	<tr>
+		<td>
+			<div class="ui form">
+				<div class="inline fields">
+					<div class="field">
+						<input name='name' id='name' accesskey='u' placeholder="{{ username }}">
+					</div>
+					<div class="field">
+						<input name='password' id='password' accesskey='p' type='password' placeholder="{{ password }}">
+					</div>
+					<div class="field">
+						<input class="ui primary button" type='submit' value='{{ button }}'>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
