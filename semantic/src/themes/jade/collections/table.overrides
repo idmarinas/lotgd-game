@@ -1,0 +1,14 @@
+
+/*-----------------
+ Additional class
+------------------*/
+.ui.table.transparent
+{
+	background: transparent;
+}
+.ui.table.simple
+{
+	background: transparent;
+	border: none;
+	border-radius: 0;
+}

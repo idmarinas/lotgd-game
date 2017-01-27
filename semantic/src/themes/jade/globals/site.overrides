@@ -1,0 +1,9 @@
+/*******************************
+	Global Overrides
+*******************************/
+
+//-- Add margin to page
+body
+{
+	margin: 10px;
+}
