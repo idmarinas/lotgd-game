@@ -399,7 +399,8 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			// $select .= "</select>";
 
 			$select = '<div class="ui toggle checkbox">';
-			$select .= '<input type="checkbox" name="public" name="'.$keyout.'" '.(isset($row[$key]) && 1 == $row[$key]?" checked":"").'>';
+			$select .= '<input type="hidden" name="'.$keyout.'" value="0">';
+			$select .= '<input type="checkbox" value="1" name="'.$keyout.'" '.(isset($row[$key]) && 1 == $row[$key]?" checked":"").'>';
 			$select .= '</div>';
 
 			return $select;
