@@ -497,7 +497,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 function showform($layout, $row, $nosave = false, $keypref = false)
 {
 	trigger_error(sprintf(
-            'Usage of %s is deprecated since v1.0.0; and delete in version 2.0.0 please use %s instead',
+            'Usage of %s is deprecated since 2.0.0; and delete in version 3.0.0 please use %s instead',
             __FUNCTION__,
 			'lotgd_showform'
         ), E_USER_DEPRECATED);

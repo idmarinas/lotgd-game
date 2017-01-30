@@ -258,8 +258,8 @@ Class DB
 	//-- Función para crear una plantilla y mostrar una página en el die de la conexión
 	private static function template($title, $message, $showtrace = false)
 	{
-		require_once("lib/nltoappon.php");
-		require_once("lib/show_backtrace.php");
+		require_once 'lib/nltoappon.php';
+		require_once 'lib/show_backtrace.php';
 
 		$file = file_get_contents('error_docs/template.html');
 		$message = full_sanitize(str_replace("`n", "<br />", nltoappon($message)));
@@ -361,7 +361,7 @@ Class DB
 function db_prefix($tablename, $force = false)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::prefix'
     ), E_USER_DEPRECATED);
@@ -371,7 +371,7 @@ function db_prefix($tablename, $force = false)
 function db_query($sql, $die = true)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::query'
     ), E_USER_DEPRECATED);
@@ -381,7 +381,7 @@ function db_query($sql, $die = true)
 function db_fetch_assoc(&$result)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 no need use this function. Please read documentation of Zend\\Db for see how use this component. Link %s',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 2.0.0 no need use this function. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
 		'https://docs.zendframework.com/zend-db/'
     ), E_USER_DEPRECATED);
@@ -391,7 +391,7 @@ function db_fetch_assoc(&$result)
 function db_num_rows($result)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
 		'$result->count()',
 		'https://docs.zendframework.com/zend-db/'
@@ -402,7 +402,7 @@ function db_num_rows($result)
 function db_affected_rows($link = false)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
 		'$result->getAffectedRows()',
 		'https://docs.zendframework.com/zend-db/'
@@ -413,7 +413,7 @@ function db_affected_rows($link = false)
 function db_free_result($result)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::free_result'
     ), E_USER_DEPRECATED);
@@ -423,7 +423,7 @@ function db_free_result($result)
 function &db_query_cached($sql, $name, $duration = 900)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::query_cached'
     ), E_USER_DEPRECATED);
@@ -433,7 +433,7 @@ function &db_query_cached($sql, $name, $duration = 900)
 function db_insert_id()
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::insert_id'
     ), E_USER_DEPRECATED);
@@ -443,7 +443,7 @@ function db_insert_id()
 function db_error($link = false)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::error'
     ), E_USER_DEPRECATED);
@@ -453,7 +453,7 @@ function db_error($link = false)
 function db_table_exists($tablename)
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::table_exists'
     ), E_USER_DEPRECATED);
@@ -463,7 +463,7 @@ function db_table_exists($tablename)
 function db_get_server_version()
 {
 	trigger_error(sprintf(
-        'Usage of %s is obsolete since v0.8.0; and delete in version 2.0.0 please use "%s" instead',
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead',
         __METHOD__,
 		'DB::get_server_version'
     ), E_USER_DEPRECATED);
