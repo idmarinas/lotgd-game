@@ -10,7 +10,7 @@
 @verticalMargin: @medium;
 @horizontalMargin: 0em;
 @margin: @verticalMargin @horizontalMargin;
-@background: #FFFFFF;
+@background: rgba(255, 255, 255, 0.4);
 @fontFamily: @pageFont;
 @itemBackground: none;
 @fontWeight: normal;
@@ -167,15 +167,15 @@
 
 
 /* Active Item */
-@activeItemBackground: @transparentBlack;
-@activeItemTextColor: @selectedTextColor;
+@activeItemBackground: @veryStrongTransparentBlack;
+@activeItemTextColor: @invertedSelectedTextColor;
 @activeItemFontWeight: normal;
 @activeIconOpacity: 1;
 @activeItemBoxShadow: none;
 
 /* Active Hovered Item */
-@activeHoverItemBackground: @transparentBlack;
-@activeHoverItemColor: @selectedTextColor;
+@activeHoverItemBackground: @veryStrongTransparentBlack;
+@activeHoverItemColor: @invertedSelectedTextColor;
 
 /* Selected Dropdown */
 @dropdownSelectedItemBackground: @transparentBlack;
