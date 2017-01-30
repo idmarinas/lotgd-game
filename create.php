@@ -128,12 +128,15 @@ if ($op=="forgotval"){
 	}
 }
 
-if ($op=="forgot"){
+if ($op=="forgot")
+{
 	$charname = httppost('charname');
-	if ($charname!=""){
-		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login='".DB::quoteValue($charname)."'";
+	if ('' != $charname)
+	{
+		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login=".DB::quoteValue($charname)."";
 		$result = DB::query($sql);
-		if (DB::num_rows($result)>0){
+		if (0 < DB::num_rows($result))
+		{
 			$row = DB::fetch_assoc($result);
 			if (trim($row['emailaddress'])!=""){
 				if ($row['forgottenpassword']==""){
@@ -171,21 +174,20 @@ if ($op=="forgot"){
 		}
 	}else{
 		rawoutput("<form action='create.php?op=forgot' method='POST'>");
-        $creationefault = modulehook('forgotten-password', ['showdefaultform'=>true]);
-		if ($creationefault['showdefaultform'])
-		{
-			output("`bForgotten Passwords:`b`n`n");
-			output("Enter your character's name: ");
-            rawoutput("<input type='text' name='charname'>");
-		}
+
 		output_notl("`n");
-		$send = translate_inline("Email me my password");
-		rawoutput("<input type='submit' class='button' value='$send'>");
+
+		$data = [
+			'sendbutton' => translate_inline('Email me my password')
+		];
+		output_notl($lotgd_tpl->renderThemeTemplate('parts/forgot.twig', $data), true);
+		unset($data);
 		rawoutput("</form>");
 	}
 }
 page_header("Create A Character");
-if (getsetting("allowcreation",1)==0){
+if (0 == getsetting("allowcreation",1))
+{
 	output("`\$Creation of new accounts is disabled on this server.");
 	output("You may try it again another day or contact an administrator.");
 }else{
