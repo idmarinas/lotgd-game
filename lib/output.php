@@ -81,13 +81,14 @@ class LotgdOutputCollector
 		$this->nestedtags['B']=false;
 		//*cough* if you choose color codes like \ or whatnot... SENSITIVE codes like special programmer chars... then escape them. Sadly we have % (breaks sprintf i.e.) AND ) in it... (breaks regular expressions)
 		$cols=$this->colors;
-		$escape=array(')','$',"(","[","]","{","}");
-		foreach ($escape as $letter) {
+		$escape = [')','$',"(","[","]","{","}"];
+		foreach ($escape as $letter)
+		{
 			if (isset($cols[$letter])) $cols["\\".$letter]=$cols[$letter];
 			unset($cols[$letter]);
 		}
-		$this->colormap_esc=array_keys($cols); //please, no empty color array.
-		$this->colormap=array_keys($this->colors);
+		$this->colormap_esc = array_keys($cols); //please, no empty color array.
+		$this->colormap = array_keys($this->colors);
 	}
 	/**
 	 * Raw output (unprocessed) appended to the output buffer
