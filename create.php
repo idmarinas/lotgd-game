@@ -387,16 +387,14 @@ if (getsetting("allowcreation",1)==0){
 		}
 
 		modulehook("create-form");
-		$createbutton = translate_inline("Create your character");
 		$data = [
-			'createbutton' => $createbutton,
+			'createbutton' => translate_inline('Create your character'),
 			'reqemailtext' => $req,
 			'reqemail' => $reqbool
 		];
-		rawoutput($lotgd_tpl->renderThemeTemplate('parts/register.twig', $data));
+		output_notl($lotgd_tpl->renderThemeTemplate('parts/register.twig', $data), true);
 		unset($data);
-		// rawoutput("<input type='submit' class='button' value='$createbutton'>");
-		output_notl("`n`n");
+		output_notl('`n`n');
 		if ($trash > 0) {
 			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
 		}
