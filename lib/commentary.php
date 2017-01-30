@@ -399,6 +399,8 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	//$gcstart = getmicrotime(true);
 	global $session, $REQUEST_URI, $translation_namespace, $chatloc, $bottomcid;
 
+	$com = max((int)httpget("comscroll"), 0);
+
 	if (! $returnlink) $returnlink = urlencode($_SERVER['REQUEST_URI']);
 
 	if ($showmodlink)
@@ -418,8 +420,6 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 
 	// Needs to be here because scrolling through the commentary pages, entering a bio, then scrolling again forward
 	// then re-entering another bio will lead to $com being smaller than 0 and this will lead to an SQL error later on.
-	$com=(int)httpget("comscroll");
-	if ($com < 0) $com = 0;
 	if (httpget("comscroll") !== false && (int)$session['lastcom'] == $com+1) $cid = (int)$session['lastcommentid'];
 	else $cid = 0;
 
@@ -851,7 +851,8 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 	$ret = "";
 
 	//skip assigning chatloc if this chatloc's id ends with "_aux" - this way we can have dual chat areas
-	if (!$afk && $session['user']['chatloc']!="DNI"){
+	if (!$afk && isset($session['user']['chatloc']) && $session['user']['chatloc'] != 'DNI')
+	{
 		if (substr($section,strlen($section)-4,strlen($section))!="_aux"){
 			$chatloc = $section;
 		} else {
@@ -938,7 +939,7 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 
 	if (httpget("enable_auto_update")) $session['user']['prefs']['commentary_auto_update'] = 1;
 
-	if (! $returnlink) $returnlink = urlencode($_SERVER['REQUEST_URI']);
+	if (! isset($returnlink) || ! $returnlink) $returnlink = urlencode($_SERVER['REQUEST_URI']);
 
 	if (($session['user']['superuser'] & SU_EDIT_COMMENTS) || $overridemod) $showmodlink=true;
 	else $showmodlink=false;
@@ -1046,7 +1047,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
 		{
 			$message="`n`@$message`0`n";
 			output($message,true);
-			if (! $hook['blocktalkform']) talkform($section,$talkline,$limit,$schema);
+			if (! isset($hook['blocktalkform']) || ! $hook['blocktalkform']) talkform($section,$talkline,$limit,$schema);
 		}
 	}
 

@@ -2,13 +2,13 @@
 // addnews ready
 // translator ready
 // mail ready
-require_once("common.php");
-require_once("lib/forest.php");
-require_once("lib/fightnav.php");
-require_once("lib/http.php");
-require_once("lib/taunt.php");
-require_once("lib/events.php");
-require_once("lib/battle-skills.php");
+require_once 'common.php';
+require_once 'lib/forest.php';
+require_once 'lib/fightnav.php';
+require_once 'lib/http.php';
+require_once 'lib/taunt.php';
+require_once 'lib/events.php';
+require_once 'lib/battle-skills.php';
 
 tlschema("forest");
 
@@ -149,9 +149,11 @@ if ($op=="search"){
 			if ($mintargetlevel<1) $mintargetlevel=1;
 			if ($mintargetlevel > $targetlevel) $mintargetlevel = $targetlevel;
 			debug("Creatures: $multi Targetlevel: $targetlevel Mintargetlevel: $mintargetlevel");
-			if ($multi > 1) {
-				$packofmonsters = (bool)(e_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
-				switch($packofmonsters) {
+			$packofmonsters = (bool)(e_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
+			if ($multi > 1)
+			{
+				switch($packofmonsters)
+				{
 					case false:
 						$multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
 						$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 $multicat ORDER BY rand(".e_rand().") LIMIT $multi";
@@ -181,7 +183,7 @@ if ($op=="search"){
 				$badguy['creaturedefense']=$session['user']['defense'];
 				$stack[] = $badguy;
 			} else {
-				require_once("lib/forestoutcomes.php");
+				require_once 'lib/forestoutcomes.php';
 				if ($packofmonsters == true) {
 					$initialbadguy = DB::fetch_assoc($result);
 					$prefixs = array("Elite","Dangerous","Lethal","Savage","Deadly","Malevolent","Malignant");
@@ -290,25 +292,31 @@ if ($op=="fight" || $op=="run" || $op == "newtarget"){
 	$battle=true;
 }
 
-if ($battle){
+if ($battle)
+{
+	require_once 'battle.php';
 
-	require_once("battle.php");
-
-	if ($victory){
-		require_once("lib/forestoutcomes.php");
+	if ($victory)
+	{
+		require_once 'lib/forestoutcomes.php';
 		$op="";
 		httpset('op', "");
 		forestvictory($newenemies,isset($options['denyflawless'])?$options['denyflawless']:false);
 		$dontdisplayforestmessage=true;
-	}elseif($defeat){
-		require_once("lib/forestoutcomes.php");
+	}
+	elseif($defeat)
+	{
+		require_once 'lib/forestoutcomes.php';
 		forestdefeat($newenemies);
-	}else{
+	}
+	else
+	{
 		fightnav();
 	}
 }
 
-if ($op==""){
+if ($op=="")
+{
 	// Need to pass the variable here so that we show the forest message
 	// sometimes, but not others.
 	forest($dontdisplayforestmessage);

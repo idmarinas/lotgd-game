@@ -10,6 +10,7 @@ require_once "common.php";
 $now = time();
 $minute = round($now/60)*60;
 
+if (! isset($session['chatrequests'][$minute])) $session['chatrequests'][$minute] = 0;
 $session['chatrequests'][$minute] += 1;
 //echo("Chat requests: ".$session['chatrequests'][$minute]." this minute (minute number ".$minute.").<br />");
 if ($session['chatrequests'][$minute] >= 50){
@@ -26,7 +27,7 @@ if ($session['chatrequests'][$minute] >= 50){
 
 $expiresin = strtotime($session['user']['laston']) + 600;
 $section = $_REQUEST['section'];
-if ($now > $expiresin || ($session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section)){
+if ($now > $expiresin || (isset($session['user']['chatloc']) && $session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section)){
 	echo "Chat disabled due to inactivity";
 } else {
 	require_once "lib/commentary.php";
@@ -34,8 +35,8 @@ if ($now > $expiresin || ($session['user']['chatloc'] != "global_banter" && $sec
 	$limit = $_REQUEST['limit'];
 	$talkline = $_REQUEST['talkline'];
 	$returnlink = urlencode($_REQUEST['returnlink']);
-	$showmodlink = $_REQUEST['showmodlink'];
-	
+	$showmodlink = (isset($_REQUEST['showmodlink']) ? $_REQUEST['showmodlink'] : '');
+
 	$commentary = preparecommentaryblock($section,$message,$limit,$talkline,$schema=false,$skipfooter=false,$customsql=false,$skiprecentupdate=false,$showmodlink,$returnlink);
 	$commentary = appoencode("`n".$commentary."`n",true);
 	echo($commentary);

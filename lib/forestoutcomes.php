@@ -2,17 +2,19 @@
 // addnews ready
 // translator ready
 // mail ready
-require_once("lib/taunt.php");
-require_once("lib/deathmessage.php");
-require_once("lib/e_rand.php");
-require_once("lib/pageparts.php");
-require_once("lib/output.php");
-require_once("lib/nav.php");
-require_once("lib/playerfunctions.php");
-require_once("lib/creaturefunctions.php");
+require_once 'lib/taunt.php';
+require_once 'lib/deathmessage.php';
+require_once 'lib/e_rand.php';
+require_once 'lib/pageparts.php';
+require_once 'lib/output.php';
+require_once 'lib/nav.php';
+require_once 'lib/playerfunctions.php';
+require_once 'lib/creaturefunctions.php';
 
-function forestvictory($enemies,$denyflawless=false){
+function forestvictory($enemies,$denyflawless=false)
+{
 	global $session, $options;
+
 	$diddamage = false;
 	$creaturelevel = 0;
 	$gold = 0;
@@ -116,7 +118,7 @@ function forestvictory($enemies,$denyflawless=false){
 		}elseif ($session['user']['level']<=$creaturelevel){
 			// output("`c`b`\$You receive an extra turn!`0`b`c`n");
 			//## Adaptado el texto para Stamina system
-			output("`c`b`\$You receive some stamina!`0`b`c`n"); 
+			output("`c`b`\$You receive some stamina!`0`b`c`n");
 			$session['user']['turns']++;
 		}else{
 			// output("`c`\$A more difficult fight would have yielded an extra turn.`0`c`n");
@@ -132,7 +134,7 @@ function forestvictory($enemies,$denyflawless=false){
 	}
 }
 
-function forestdefeat($enemies,$where="in the forest"){ 
+function forestdefeat($enemies,$where="in the forest"){
 	global $session;
 	$percent=getsetting('forestexploss',10);
 	addnav("Daily news","news.php");
@@ -151,7 +153,7 @@ function forestdefeat($enemies,$where="in the forest"){
 	$and = translate_inline("and");
 	if (isset($lastname) && $lastname > "") $enemystring = "$enemystring $and $lastname";
 	$taunt = select_taunt_array();
-	//leave it for now, it's tricky 
+	//leave it for now, it's tricky
 	if (is_array($where)) {
 		$where=sprintf_translate($where);
 	} else {
@@ -187,28 +189,28 @@ function forestdefeat($enemies,$where="in the forest"){
 // 		$add = ($session['user']['dragonkills']/100)*.10;
 // 		$dk = round($dk * (.25 + $add));
 // 	}
-// 
+//
 // 	$expflux = round($badguy['creatureexp']/10,0);
 // 	$expflux = e_rand(-$expflux,$expflux);
 // 	$badguy['creatureexp']+=$expflux;
-// 
+//
 // 	$atkflux = e_rand(0, $dk);
 // 	$defflux = e_rand(0, ($dk-$atkflux));
-// 
+//
 // 	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
 // 	$badguy['creatureattack']+=$atkflux;
 // 	$badguy['creaturedefense']+=$defflux;
 // 	$badguy['creaturehealth']+=$hpflux;
-// 
+//
 // 	if (getsetting("disablebonuses", 1)) {
 // 		//adapting flux as for people with many DKs they will just bathe in gold....
-// 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2)); 
+// 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2));
 // 		$base /=1000;
 // 		$bonus = 1 + $base*($atkflux+$defflux) + .001*$hpflux;
 // 		$badguy['creaturegold'] = round($badguy['creaturegold']*$bonus, 0);
 // 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
 // 	}
-// 
+//
 // 	$badguy = modulehook("creatureencounter",$badguy);
 // 	debug("DEBUG: $dk modification points total.");
 // 	debug("DEBUG: +$atkflux allocated to attack.");
@@ -221,55 +223,59 @@ function forestdefeat($enemies,$where="in the forest"){
 function buffbadguy($badguy)
 {
 	global $session;
-    
+
     // This will save us a lot of trouble when going through
 	static $dk = false;	// this function more than once...
-						
+
 	if ($dk === false) $dk = get_player_dragonkillmod();
-    
+
     $expflux = round($badguy['creatureexp']/10,0);
 	$expflux = e_rand(-$expflux,$expflux);
 	$badguy['creatureexp']+=$expflux;
-    
+
+
+	if (! isset($badguy['creaturespeed'])) $badguy['creaturespeed'] = 2.5;
+
     $creatureattr = get_creature_stats($dk);
-    
-    //-- Bono a los atributos
+
+    //-- Bonus to atributes
     $badguy['creaturestrbonus'] = $creatureattr['str'];
     $badguy['creaturedexbonus'] = $creatureattr['dex'];
     $badguy['creatureconbonus'] = $creatureattr['con'];
     $badguy['creatureintbonus'] = $creatureattr['int'];
     $badguy['creaturewisbonus'] = $creatureattr['wis'];
-    
-    //-- Atributos totales de la criatura
+
+    //-- Total atributes of creature
     $badguy['creaturestr'] = $creatureattr['str'] + 10;
     $badguy['creaturedex'] = $creatureattr['dex'] + 10;
     $badguy['creaturecon'] = $creatureattr['con'] + 10;
     $badguy['creatureint'] = $creatureattr['int'] + 10;
     $badguy['creaturewis'] = $creatureattr['wis'] + 10;
-    
-    //-- Ataque, defensa y salud que dan los atributos;
+
+    //-- Attack, defense, health from attributes
     $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
 	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
 	$badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
 	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
-    
-	//-- Sumar los bonos
+
+	//-- Sum bonus
 	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
 	$badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
 	$badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
 	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
 
-	if (getsetting("disablebonuses", 1)) 
+	if (getsetting('disablebonuses', 1))
     {
 		//adapting flux as for people with many DKs they will just bathe in gold....
-		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2)); 
+		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2));
 		$base /=1000;
-		$bonus = 1 + $base*($atkflux+$defflux) + .001*$hpflux;
+		$bonus = 1 + $base*($badguy['creatureattackattrs']+$badguy['creaturedefenseattrs']) + .001*$badguy['creaturehealthattrs'];
 		$badguy['creaturegold'] = round($badguy['creaturegold']*$bonus, 0);
 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
 	}
 
 	$badguy = modulehook("creatureencounter",$badguy);
+	debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
 	debug("DEBUG: $dk modification points total for attributes.");
 	debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
 	debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
@@ -280,7 +286,7 @@ function buffbadguy($badguy)
 	debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
 	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
 	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
-    
-	return modulehook("buffbadguy",$badguy);
+
+	return modulehook('buffbadguy', $badguy);
 }
 ?>

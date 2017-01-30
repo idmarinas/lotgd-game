@@ -13,6 +13,7 @@ require_once "common.php";
 $now = time();
 $minute = round($now/60)*60;
 
+if (! isset($session['typerequests'][$minute])) $session['typerequests'][$minute] = 0;
 $session['typerequests'][$minute] += 1;
 //echo("Type requests: ".$session['typerequests'][$minute]." this minute (minute number ".$minute.").<br />");
 if ($session['typerequests'][$minute] >= 200){

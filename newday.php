@@ -2,10 +2,10 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/sanitize.php");
-require_once("lib/buffs.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/buffs.php';
 
 tlschema("newday");
 //mass_module_prepare(array("newday-intercept", "newday"));
@@ -169,9 +169,9 @@ if ($dp < $dkills) {
 	output("`2Hitpoints have been restored to `^%s`2.`n",$session['user']['maxhitpoints']);
 
 
-	//Comentado porque ya no se puede usar los puntos de dragón para aumentar los turnos.
+	//-- Can use dragonkill to upgrade turns
 	// reset($session['user']['dragonpoints']);
-	// $dkff=0;
+	$dkff=0;
 	// while(list($key,$val)=each($session['user']['dragonpoints'])){
 	// 	if ($val=="ff"){
 	// 		$dkff++;
