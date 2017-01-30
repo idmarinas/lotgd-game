@@ -64,14 +64,14 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
  		}
 		elseif ($info[1]=="note")
 		{
-			$tabContent[$title_id][] = sprintf('<div class="field"><div class="ui info message">%s</div></div>', $info[0]);
+			$tabContent[$title_id][] = sprintf('<div class="ui info message">%s</div>', $info[0]);
 		}
 		else
 		{
 			if (! $callback) $result = lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions);
 			else $result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
-			$tabContent[$title_id][] = sprintf('<div class="field"><label>%s</label>%s</div>',
+			$tabContent[$title_id][] = sprintf('<div class="inline field"><label>%s</label>%s</div>',
 				$info[0],
 				$result
 			);
@@ -87,7 +87,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			implode('', $value)
 		);
 
-		if (0 < $key) $text = sprintf('<div class="ui bottom tab segment %s" data-tab="tab-%s">%s</div>',
+		if (0 < $key) $text = sprintf('<div class="ui tab segment %s" data-tab="tab-%s">%s</div>',
 			(1 == $key?'active':null),
 			$key,
 			$text
@@ -140,8 +140,8 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			break;
 		case "theme":
 			// A generic way of allowing a theme to be selected.
-			$skins = array();
-			$handle = @opendir("themes");
+			$skins = [];
+			$handle = @opendir('themes');
 			// Template directory open failed
 			if (!$handle) {
 				return 'None available';
@@ -410,13 +410,13 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			//don't unset it. it does not change, so nothing lost
 			if (isset($row[$key]))
 			{
-				return dump_item($row[$key]);
+				return '<span>' . dump_item($row[$key]) . '</span>';
 			}
 			break;
 		case "viewhiddenonly":
 			//don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
 			if (isset($row[$key])) {
-				$text = dump_item($row[$key]);
+				$text = '<span>' . dump_item($row[$key]) . '</span>';
 				$text .= "<input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'>";
 
 				return $text;
@@ -498,7 +498,7 @@ function showform($layout, $row, $nosave = false, $keypref = false)
 {
 	trigger_error(sprintf(
             'Usage of %s is deprecated since v1.0.0; and delete in version 2.0.0 please use %s instead',
-            __METHOD__,
+            __FUNCTION__,
 			'lotgd_showform'
         ), E_USER_DEPRECATED);
 
