@@ -108,6 +108,8 @@ function page_footer($saveuser = true)
 
 	$z = $y2^$z2;
 
+
+	$html['copyright'] = $copyright;
 	//add XAJAX mail stuff
 	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
@@ -387,6 +389,8 @@ function popup_header($title = 'Legend of the Green Dragon')
 function popup_footer()
 {
 	global $output, $html, $session, $y2, $z2, $copyright, $lotgd_tpl;
+
+	$html['copyright'] = $copyright;
 
 	//add XAJAX mail stuff
 	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
