@@ -96,6 +96,8 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
  		$content[] = $text;
 	}
 
+	unset($text);
+
 	if (! empty($tabMenu))
 	{
 		$tabMenu = array_chunk($tabMenu , ceil(count($tabMenu)/4));
@@ -108,8 +110,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			$popupMenu .= implode('', $menu);
 			$popupMenu .= '</div></div>';
 		}
-		$popupMenu .= '</div>';
-		$popupMenu .= '</div>';
+		$popupMenu .= '</div></div>';
 
 		output_notl(sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
 				translate_inline('Browse'),
@@ -118,17 +119,19 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			),
 			true
 		);
+
+		unset($popupMenu);
 	}
 
 	output_notl(implode('', $content), true);
 
-	unset($tabContent, $content, $tabMenu, $text, $popupMenu);
+	unset($tabContent, $content, $tabMenu);
 
 	tlschema("showform");
 	$save = translate_inline("Save");
 	tlschema();
 
-	if (!$nosave) rawoutput("<input class='ui primary button' type='submit' class='button' value='$save'>");
+	if (! $nosave) rawoutput("<input class='ui primary button' type='submit' class='button' value='$save'>");
 }
 
 function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
