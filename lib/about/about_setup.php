@@ -61,9 +61,9 @@ $useful_vals = array(
 	"nextnewday"=>date("h:i:s a",strtotime("+{$details['realsecstotomorrow']} seconds"))." (".date("H\\h i\\m s\\s",$secstonextday).")"
 );
 
-output("`@<h3>Settings for this game</h3>`n`n",true);
+output("<h3>`@Settings for this game`0</h3>",true);
 
-$localsettings=$settings->getArray();
+$localsettings = $settings->getArray();
 
 $args = array('settings'=>array(),'values'=>array());
 $args = modulehook("showsettings", $args);
@@ -71,5 +71,6 @@ $form = array_merge($setup, $args['settings']);
 $form = array_merge($form, $useful);
 $vals = array_merge($localsettings, $args['values']);
 $vals = array_merge($vals, $useful_vals);
-lotgd_showform($form,$vals,true);
+
+lotgd_showform($form, $vals, true);
 ?>
