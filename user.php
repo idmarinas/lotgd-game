@@ -1,12 +1,12 @@
 <?php
 //addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/showform.php");
-require_once("lib/datetime.php");
-require_once("lib/http.php");
-require_once("lib/sanitize.php");
-require_once("lib/names.php");
+require_once 'common.php';
+require_once 'lib/showform.php';
+require_once 'lib/datetime.php';
+require_once 'lib/http.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/names.php';
 
 tlschema("user");
 check_su_access(SU_EDIT_USERS);
@@ -36,7 +36,7 @@ if ($query === false) $query = httpget('q');
 if (!$query && $sort) $query = "%";
 
 if ($op=="search" || $op== ""){
-	require_once("lib/lookup_user.php");
+	require_once 'lib/lookup_user.php';
 	list($searchresult, $err) = lookup_user($query, $order);
 	$op = "";
 	if ($err) {
@@ -51,13 +51,13 @@ $m = httpget("module");
 if ($m) $m = "&module=$m&subop=module";
 rawoutput("<form action='user.php?op=search$m' method='POST'>");
 output("Search by any field below: ");
-rawoutput("<input name='q' id='q'>");
+rawoutput("<div class='ui action input'><input name='q' id='q'>");
 $se = translate_inline("Search");
-rawoutput("<input type='submit' class='button' value='$se'>");
-rawoutput("</form>");
+rawoutput("<button type='submit' class='ui primary button'>$se</button>");
+rawoutput("</div></form>");
 rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>");
 addnav("","user.php?op=search$m");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 addnav("Bans");
 addnav("Add a ban","bans.php?op=setupban");
@@ -102,7 +102,7 @@ if ($op=='edit' || $op=='save') {
 	//add the race
 	$sql="SELECT race FROM ".DB::prefix('accounts')." WHERE acctid=$userid LIMIT 1;";
 	$row=DB::fetch_assoc(DB::query($sql));
-	$racesenum=",".translate_inline("Undecided","race").",";
+	$racesenum = ",".translate_inline("Undecided","race").",";
 	foreach ($races as $race) {
 		$racesenum.=$race.",".$race.",";
 	}
@@ -117,7 +117,11 @@ if ($op=='edit' || $op=='save') {
 	$racesenum=substr($racesenum,0,strlen($racesenum)-1);
 	//later on: enumpretrans, because races are already translated in a way...
 }
-require("lib/data/user_account.php");
+else
+{
+	$racesenum = '';
+}
+require 'lib/data/user_account.php';
 $sql = "SELECT clanid,clanname,clanshort FROM " . DB::prefix("clans") ." ORDER BY clanshort";
 $result = DB::query($sql);
 while ($row=DB::fetch_assoc($result)){
@@ -127,46 +131,46 @@ while ($row=DB::fetch_assoc($result)){
 
 switch ($op) {
 	case "lasthit":
-		require("lib/user/user_lasthit.php");
+		require 'lib/user/user_lasthit.php';
 		break;
 	case "savemodule":
-		require("lib/user/user_savemodule.php");
+		require 'lib/user/user_savemodule.php';
 		break;
 	case "special":
-		require("lib/user/user_special.php");
+		require 'lib/user/user_special.php';
 		break;
 	case "save":
-		require("lib/user/user_save.php");
+		require 'lib/user/user_save.php';
 		break;
 }
 
 switch($op) {
 	case "edit":
-		require("lib/user/user_edit.php");
+		require 'lib/user/user_edit.php';
 		break;
 	case "setupban":
-		require("lib/user/user_setupban.php");
+		require 'lib/user/user_setupban.php';
 		break;
 	case "del":
-		require("lib/user/user_del.php");
+		require 'lib/user/user_del.php';
 		break;
 	case "saveban":
-		require("lib/user/user_saveban.php");
+		require 'lib/user/user_saveban.php';
 		break;
 	case "delban":
-		require("lib/user/user_delban.php");
+		require 'lib/user/user_delban.php';
 		break;
 	case "removeban":
-		require("lib/user/user_removeban.php");
+		require 'lib/user/user_removeban.php';
 		break;
 	case "searchban":
-		require("lib/user/user_searchban.php");
+		require 'lib/user/user_searchban.php';
 		break;
 	case "debuglog":
-		require("lib/user/user_debuglog.php");
+		require 'lib/user/user_debuglog.php';
 		break;
 	case "":
-		require("lib/user/user_.php");
+		require 'lib/user/user_.php';
 		break;
 }
 page_footer();
