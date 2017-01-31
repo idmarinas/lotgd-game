@@ -393,10 +393,6 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$yes = translate_inline("Yes");
 			$no = translate_inline("No");
 			tlschema();
-			// $select = "<select name='$keyout'>";
-			// $select .= "<option value='0'".($row[$key]==0?" selected":"").">$no</option>";
-			// $select .= "<option value='1'".($row[$key]==1?" selected":"").">$yes</option>";
-			// $select .= "</select>";
 
 			$select = '<div class="ui toggle checkbox">';
 			$select .= '<input type="hidden" name="'.$keyout.'" value="0">';
