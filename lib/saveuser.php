@@ -5,7 +5,7 @@
 
 function saveuser()
 {
-	global $session,$dbqueriesthishit,$baseaccount,$companions,$chatloc;
+	global $session, $dbqueriesthishit, $baseaccount, $companions, $chatloc;
 
 	if (defined("NO_SAVE_USER")) return false;
 
@@ -37,7 +37,7 @@ function saveuser()
 		DB::query($everyhit_sql);
 
 		$sql = [];
-		foreach ($session['user'] as $key=>$val)
+		foreach ($session['user'] as $key => $val)
 		{
 			if (is_array($val)) $val = serialize($val);
 			//only update columns that have changed.
@@ -51,19 +51,16 @@ function saveuser()
 		$sql = "UPDATE " . DB::prefix("accounts") . " SET " . implode(',', $sql) .
 			" WHERE acctid = ".$session['user']['acctid'];
 		DB::query($sql);
-		if (isset($session['output']) && $session['output']) {
-			$sql_output="UPDATE " . DB::prefix("accounts_output") . " SET output='".addslashes(gzcompress($session['output'],1))."' WHERE acctid={$session['user']['acctid']};";
-			$result=DB::query($sql_output);
-			if (DB::affected_rows($result)<1) {
-				$sql_output="REPLACE INTO " . DB::prefix("accounts_output") . " VALUES ({$session['user']['acctid']},'".addslashes(gzcompress($session['output'],1))."');";
-				DB::query($sql_output);
-			}
+		if (isset($session['output']) && $session['output'])
+		{
+			$sql_output = "REPLACE INTO " . DB::prefix("accounts_output") . " VALUES ({$session['user']['acctid']}, '".addslashes(gzcompress($session['output'], 1))."');";
+			$result = DB::query($sql_output);
 		}
 		unset($session['bufflist']);
-		$session['user'] = array(
-			"acctid"=>$session['user']['acctid'],
-			"login"=>$session['user']['login'],
-		);
+		$session['user'] = [
+			"acctid" => $session['user']['acctid'],
+			"login" => $session['user']['login'],
+		];
 	}
 }
 
