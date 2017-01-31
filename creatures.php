@@ -2,18 +2,19 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/listfiles.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/listfiles.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
 tlschema("creatures");
 
 //this is a setup where all the creatures are generated.
-$creaturetats=array();
-$creatureexp=14;
-$creaturegold=36;
+$creaturetats = [];
+$creatureexp = 14;
+$creaturegold = 36;
+$creaturedefense = 0;
 for ($i=1;$i<=(getsetting('maxlevel',15)+4);$i++) {
 	//apply algorithmic creature generation.
 	$level=$i;
@@ -37,7 +38,7 @@ for ($i=1;$i<=(getsetting('maxlevel',15)+4);$i++) {
 
 page_header("Creature Editor");
 
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 $op = httpget("op");
@@ -149,9 +150,9 @@ if ($op=="" || $op=="search"){
 	$search = translate_inline("Search");
 	rawoutput("<form action='creatures.php?op=search' method='POST'>");
 	output("Search by field: ");
-	rawoutput("<input name='q' id='q'>");
-	rawoutput("<input type='submit' class='button' value='$search'>");
-	rawoutput("</form>");
+	rawoutput("<div class='ui action input'><input name='q' id='q'>");
+	rawoutput("<button type='submit' class='ui primary button'>$search</button>");
+	rawoutput("</div></form>");
 	rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>",true);
 	addnav("","creatures.php?op=search");
 
@@ -181,7 +182,7 @@ if ($op=="" || $op=="search"){
 	$del = translate_inline("Del");
 
 	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
-	rawoutput('<tr class="trhead"><th colspan="8">Criaturas de nivel '.$level.'</th></tr>');
+	rawoutput('<tr class="trhead"><th colspan="8">Creatures level "'.$level.'"</th></tr>');
 	rawoutput("<tr class='trhead'>");
 	rawoutput("<td>$opshead</td><td>$name</td><td>$cat</td><td>$weapon</td><td>$script</td><td>$winmsg</td><td>$diemsg</td><td>$author</td></tr>");
 	addnav("","creatures.php");
@@ -218,7 +219,7 @@ if ($op=="" || $op=="search"){
 	if (!$level) $level=(int)httppost('level');
 	if (!$level) $level = 1;
 	if ($op=="edit" || $op=="add"){
-		require_once("lib/showform.php");
+		require_once 'lib/showform.php';
 		addnav("Edit");
 		addnav("Creature properties", "creatures.php?op=edit&creatureid=$id");
 		addnav("Add");
