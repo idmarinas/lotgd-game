@@ -41,8 +41,9 @@ if ($name!=""){
 
 		$sql = "SELECT * FROM " . DB::prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
 		$result = DB::query($sql);
-		if (DB::num_rows($result)==1){
-			$session['user']=DB::fetch_assoc($result);
+		if (DB::num_rows($result)==1)
+		{
+			$session['user'] = DB::fetch_assoc($result);
 			$baseaccount = $session['user'];
 			checkban($session['user']['login']); //check if this account is banned
 			// If the player isn't allowed on for some reason, anything on
