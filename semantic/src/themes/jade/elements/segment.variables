@@ -7,7 +7,7 @@
 --------------------*/
 
 // @background: @white;
-@background: rgba(255, 255, 255, 0.05);
+@background: @veryStrongTransparentBlack;
 @borderWidth: 1px;
 @border: @borderWidth solid @borderColor;
 

@@ -134,7 +134,7 @@
 @sliderLabelLineHeight: 1rem;
 
 /* Slider States */
-@sliderHoverLaneBackground: @veryStrongTransparentBlack;
+@sliderHoverLaneBackground: @transparentWhite;
 @sliderHoverLabelColor: @hoveredTextColor;
 
 @sliderOnLineColor: @lightBlack;
@@ -160,7 +160,7 @@
   left @sliderTransitionDuration @defaultEasing
 ;
 
-@toggleLaneBackground: @transparentBlack;
+@toggleLaneBackground: @strongTransparentWhite;
 @toggleLaneHeight: @toggleHandleSize;
 @toggleLaneBoxShadow: none;
 @toggleLaneVerticalOffset: 0rem;

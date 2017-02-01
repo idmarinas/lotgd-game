@@ -446,11 +446,11 @@
 // @strongSelectedBorderColor : rgba(34, 36, 38, 0.5);
 // @disabledBorderColor       : rgba(34, 36, 38, 0.5);
 
-@borderColor               : lighten(@pageBackground, 22%);
-@strongBorderColor         : lighten(@pageBackground, 15%);
-@internalBorderColor       : lighten(@pageBackground, 10%);
-@selectedBorderColor       : lighten(@pageBackground, 50%);
-@strongSelectedBorderColor : lighten(@pageBackground, 35%);
+@borderColor               : lighten(@pageBackground, 17%);
+@strongBorderColor         : lighten(@pageBackground, 10%);
+@internalBorderColor       : lighten(@pageBackground, 5%);
+@selectedBorderColor       : lighten(@pageBackground, 45%);
+@strongSelectedBorderColor : lighten(@pageBackground, 30%);
 @disabledBorderColor       : rgba(34, 36, 38, 0.5);
 
 @solidInternalBorderColor  : #FAFAFA;
