@@ -104,12 +104,10 @@ function popup($page, $size = '728x400')
  */
 function page_footer($saveuser = true)
 {
-	global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version,$copyright, $SCRIPT_NAME, $nopopups, $dbinfo;
+	global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $dbinfo;
 
 	$z = $y2^$z2;
-
-
-	$html['copyright'] = $copyright;
+	$html[$z] = $license . $$z;
 	//add XAJAX mail stuff
 	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
@@ -388,19 +386,7 @@ function popup_header($title = 'Legend of the Green Dragon')
  */
 function popup_footer()
 {
-	global $output, $html, $session, $y2, $z2, $copyright, $lotgd_tpl;
-
-	$html['copyright'] = $copyright;
-
-	//add XAJAX mail stuff
-	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
-	{
-		require 'mailinfo_common.php';
-
-		$xajax->printJavascript("lib/xajax");
-		addnav('', 'mailinfo_server.php');
-	}
-	//END XAJAX
+	global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgd_tpl;
 
 	// Pass the script file down into the footer so we can do something if
 	// we need to on certain pages (much like we do on the header.
@@ -412,11 +398,18 @@ function popup_footer()
 	foreach ($replacementbits as $key=>$val) $html[$key] = $val;
 
 	$z = $y2^$z2;
-	$html[$z] = $$z;
+	$html[$z] = $license . $$z;
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin'])
 	{
 		if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 		{
+			//add XAJAX mail stuff
+			require 'mailinfo_common.php';
+
+			$xajax->printJavascript("lib/xajax");
+			addnav('', 'mailinfo_server.php');
+			//END XAJAX
+
 			$html['script'] = $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
 				'set_timeout' => ((getsetting('LOGINTIMEOUT',900)-120)*1000),
 				'clear_xajax' => ((getsetting('LOGINTIMEOUT',900)+5)*1000)
