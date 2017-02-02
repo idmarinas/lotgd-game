@@ -411,9 +411,9 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	}
 	else
 	{
-		if ($text!="")
+		if ('' != $text)
 		{
-			$extra="";
+			$extra = '';
 			if (strpos($link,"?")) $extra = "&c={$session['counter']}";
 			else $extra = "?c={$session['counter']}";
 
