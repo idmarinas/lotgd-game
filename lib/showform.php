@@ -150,9 +150,11 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 				return 'None available';
 				break;
 			}
-			while (false != ($file = @readdir($handle))) {
-				if (strpos($file,".htm") > 0) {
-					array_push($skins, $file);
+			while (false != ($file = @readdir($handle)))
+			{
+				if (strpos($file,'.htm') > 0)
+				{
+					$skins[] = $file;
 				}
 			}
 			// No templates installed!
@@ -164,7 +166,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select class='ui dropdown' name='$keyout'>";
 			foreach($skins as $skin)
 			{
-				$select .= "<option value='$skin' ".($skin == $row[$key]?'selected':null).">".htmlentities(substr($skin, 0, strpos($skin, ".htm")), ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
+				$select .= "<option value='$skin' ".($skin == $row[$key]?'selected':null).">".htmlentities(ucfirst(substr($skin, 0, strpos($skin, ".htm"))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= '</select>';
 
