@@ -36,9 +36,9 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 // work.  This license text may not be removed nor altered in any way.
 // Please see the file LICENSE for a full textual description of the license.
 
-$logd_version = '1.0.0 IDMarinas Edition';
+$logd_version = '2.0.0 IDMarinas Edition';
 
-//-- Rechazar solicitudes de archivos estáticos vuelve al servidor web PHP integrado
+// Decline static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
 
 require_once 'vendor/autoload.php';//-- Autoload class for new options of game
@@ -65,11 +65,6 @@ require_once 'lib/playerfunctions.php';
 require_once 'lib/html_mail.php';
 //-- End IDMarinas
 
-
-//start the gzip compression
-if (isset ($gz_handler_on) && $gz_handler_on) ob_start('ob_gzhandler');
-else ob_start();
-
 $pagestarttime = getmicrotime();
 
 // Set some constant defaults in case they weren't set before the inclusion of
@@ -95,10 +90,20 @@ session_start();
 
 $session =& $_SESSION['session'];
 
+if (! isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
+if (! isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
+if (! isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
+if (! isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
+if (! isset($session['counter'])) $session['counter'] = 0;
+
+$session['counter']++;
+
+$y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
+$z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
+
 // lets us provide output in dbconnect.php that only appears if there's a
 // problem connecting to the database server.  Useful for migration moves
 // like LotGD.net experienced on 7/20/04.
-ob_start();
 if (file_exists('dbconnect.php'))
 {
 	require_once 'dbconnect.php';
@@ -127,6 +132,10 @@ else
 		page_footer();
 	}
 }
+
+//start the gzip compression
+if (isset($gz_handler_on) && $gz_handler_on) ob_start('ob_gzhandler');
+else ob_start();
 
 if (false !== $link) define('DB_CONNECTED', true);
 else
@@ -211,16 +220,9 @@ if ($session['user']['loggedin']!=true && !ALLOW_ANONYMOUS){
 	redirect("login.php?op=logout");
 }
 
-if (! isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
-if (! isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
-if (! isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
-if (! isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
-if (! isset($session['counter'])) $session['counter']=0;
-
-$session['counter']++;
 $nokeeprestore = ['newday.php' => 1,'badnav.php' => 1,'motd.php' => 1,'mail.php' => 1,'petition.php' => 1];
 
-if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME]=1;
+if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME] = 1;
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME]) $session['user']['restorepage']=$REQUEST_URI;
 
 if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
@@ -272,7 +274,7 @@ $url = substr($url,0,strlen($url)-1);
 $urlport = "http://".$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'].dirname($_SERVER['REQUEST_URI']);
 $urlport = substr($urlport,0,strlen($urlport)-1);
 
-if (!isset($_SERVER['HTTP_REFERER'])) $_SERVER['HTTP_REFERER'] = "";
+if (! isset($_SERVER['HTTP_REFERER'])) $_SERVER['HTTP_REFERER'] = '';
 
 if (
 	substr($_SERVER['HTTP_REFERER'],0,strlen($url))==$url ||
@@ -281,7 +283,9 @@ if (
 	strtolower(substr($_SERVER['HTTP_REFERER'],0,7))!="http://"
 	){
 
-}else{
+}
+else
+{
 	$site = str_replace("http://","",$_SERVER['HTTP_REFERER']);
 	if (strpos($site,"/"))
 		$site = substr($site,0,strpos($site,"/"));
@@ -301,11 +305,10 @@ if (
 	}
 }
 
-if (!isset($session['user']['superuser'])) $session['user']['superuser']=0;
+if (! isset($session['user']['superuser'])) $session['user']['superuser'] = 0;
 
-$y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
-$z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
-if ($session['user']['superuser']==0){
+if (0 == $session['user']['superuser'])
+{
 	//not a superuser, check the account's hash to detect player cheats which
 	// we don't catch elsewhere.
 	$y = "\x45\x0\x4c\x1d\x0\x37\x7\x0\x5\x0\x4d\x0\x2\x5e\x3\x18\x9\x0\x0\x62\x2\x18\x22\x49\x22\x9\x4f\x3\x1\x59\x58\x0\x1\x0\x0\x0\x0\x0\x8\x49\x0\x12\x0\x52\x4\x40\x8\x0\x19\x0\x7\x0\x55\x0\x0\x0\x0\x2\x8\x0\x0\x5\x5e\x4b\x35\x14\x49\xa\x0\x25\x7\x0\x0\x3f\x0\x5d\x3f\x0\x3d\x7\x0\x0\x45\x4a\x0\x1\x8\x2\x0\x43\x0\x0\x3a\x0\x6\x52\x3\x2a\x3b\x0\x0\x3\x3\x0\x8\x49\x0\x13\x0\x0\x0\x40\x26\x0\x1\x38\x3f\x3\x0\x13\x39\x4\x0\x0\x0\x0\x0\x43\x5\x1e\x0\x0\x0\x3\x2b\x4a\x0\x0\x38\x40\x0\x48\x6\x0\x0\x25\x0\x1b\x17\x5\x0\x4f\x4c\x49\x7\x54\x7\x0\x8\x4f\x5e\x20\x1\x0\x3\x38\x37\x41\x15\x0\x35\x4\x5b\x6\x23\x0\x27\x5\x4\x8\x1\x20\x38\x9\x44\x0\x3b\x6\x0\x31\xd\x7\x25\x0\x8\x3e\x1\x0\x17\x0\x0\x40\x31\x3e\x3\x13";
