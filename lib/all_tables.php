@@ -82,6 +82,9 @@ return [
 		'maxhitpoints'=>[
 			'name'=>'maxhitpoints', 'type'=>'int(11) unsigned', 'default'=>'10' //maximum hitpoints he can have
 		],
+		'permahitpoints'=>[
+			'name'=>'permahitpoints', 'type'=>'int(11)', 'default' => '0'
+		],
 		'gems'=>[
 			'name'=>'gems', 'type'=>'int(11) unsigned', 'default'=>'0' //number of gems he has on hand
 		],
@@ -354,7 +357,7 @@ return [
 			'name'=>'acctid', 'type'=>'int(11) unsigned'
 		],
 		'output'=>[
-			'name'=>'output', 'type'=>'mediumtext'
+			'name'=>'output', 'type'=>'MEDIUMBLOB'
 		],
 		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
@@ -671,6 +674,12 @@ return [
 			'name'=>'postdate',
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
+		],
+		'info' => [
+			'name' => 'info', 'type' => 'TEXT', 'null' => 0
+		],
+		'name' => [
+			'name' => 'name', 'type' => 'TEXT', 'null' => 0
 		],
 		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
@@ -1525,14 +1534,14 @@ return [
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
 			'unique'=>'1',
-		'columns'=>'intext(200],language,namespace'
+		'columns'=>'intext(200),language,namespace'
 		],
 		'key-language'=>[
 			'name'=>'language', 'type'=>'key', 'columns'=>'language'
 		],
 		'key-intext1'=>[
-		'name'=>'intext1', 'type'=>'key', 'columns'=>'intext(200],language'
-		],
+			'name'=>'intext1', 'type'=>'key', 'columns'=>'intext(200),language'
+			],
 		],
 	'translations'=>[
 		'tid'=>[
@@ -1567,7 +1576,7 @@ return [
 		],
 		'key-uri'=>[
 			'name'=>'uri', 'type'=>'key', 'columns'=>'uri'
-		],
+			],
 		],
 	'weapons'=>[
 		'weaponid'=>[
