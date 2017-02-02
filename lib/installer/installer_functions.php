@@ -1,8 +1,10 @@
 <?php
 
 $tipid=0;
-function tip(){
+function tip()
+{
 	global $tipid;
+
 	$tip = translate_inline("Tip");
 	output_notl("<div style='cursor: pointer; cursor: hand; display: inline;' onMouseOver=\"tip$tipid.style.visibility='visible'; tip$tipid.style.display='inline';\" onMouseOut=\"tip$tipid.style.visibility='hidden'; tip$tipid.style.display='none';\">`i[ `b{$tip}`b ]`i",true);
 	rawoutput("<div class='debug' id='tip$tipid' style='position: absolute; width: 200px; max-width: 200px; float: right;'>");
@@ -13,13 +15,17 @@ function tip(){
 	$tipid++;
 }
 
-function descriptors($prefix=""){
-	require_once("lib/all_tables.php");
+function descriptors($prefix="")
+{
+	require_once 'lib/all_tables.php';
+
 	$array = get_all_tables();
-	$out = array();
-	while (list($key,$val)=each($array)){
-		$out[$prefix.$key]=$val;
+	$out = [];
+	foreach($array as $key => $val)
+	{
+		$out[$prefix.$key] = $val;
 	}
+
 	return $out;
 }
 
