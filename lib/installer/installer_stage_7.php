@@ -44,7 +44,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	output(" `2Perform a clean install.");
 	rawoutput("</td></tr></table>");
 	$submit = translate_inline("Submit");
-	rawoutput("<input type='submit' value='$submit' class='button'>");
+	rawoutput("<input type='submit' value='$submit' class='ui primary button'>");
 	rawoutput("</form>");
 
 	$session['stagecompleted'] = $stage - 1;
