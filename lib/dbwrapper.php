@@ -17,7 +17,7 @@ require_once 'lib/datacache.php';
 require_once 'settings.php';
 
 $dbinfo = [];
-$dbinfo['queriesthishit']=0;
+$dbinfo['queriesthishit'] = 0 ;
 $dbinfo['querytime']=0;
 
 Class DB
@@ -112,6 +112,8 @@ Class DB
 		}
 		catch(\Exception $ex)
 		{
+			self::$errorInfo = $ex->getMessage();
+
 			return false;
 		}
 
