@@ -7,7 +7,7 @@ function saveuser()
 {
 	global $session, $dbqueriesthishit, $baseaccount, $companions, $chatloc;
 
-	if (defined("NO_SAVE_USER")) return false;
+	if (defined('NO_SAVE_USER')) return false;
 
 	if (isset($session['loggedin']) && $session['loggedin'] && $session['user']['acctid']!=""){
 		// Any time we go to save a user, make SURE that any tempstat changes
@@ -18,8 +18,8 @@ function saveuser()
 			$session['user']['chatloc']=0;
 		}
 
-		$session['user']['allowednavs']=serialize($session['allowednavs']);
-		$session['user']['bufflist']=serialize($session['bufflist']);
+		$session['user']['allowednavs'] = serialize($session['allowednavs']);
+		$session['user']['bufflist'] = serialize($session['bufflist']);
 		//if (isset($companions)&& is_array($companions)) $session['user']['companions']=serialize($companions);
 
 		/*
@@ -63,5 +63,4 @@ function saveuser()
 		];
 	}
 }
-
 ?>

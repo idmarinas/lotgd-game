@@ -349,7 +349,7 @@ function page_footer($saveuser = true)
 	$browser_output = $lotgd_tpl->renderTheme($html);
 	$session['user']['gensize'] += strlen($browser_output);
 	$session['output'] = $browser_output;
-	if ($saveuser === true)  saveuser();
+	if ($saveuser === true) saveuser();
 
 	unset($session['output']);
 	//this somehow allows some frames to load before the user's navs say it can
