@@ -3,13 +3,13 @@ require_once 'lib/dbwrapper.php';
 
 if (httppostisset("DB_HOST"))
 {
-	$session['dbinfo']['DB_DRIVER'] = httppost("DB_DRIVER");
-	$session['dbinfo']['DB_HOST'] = httppost("DB_HOST");
-	$session['dbinfo']['DB_USER'] = httppost("DB_USER");
-	$session['dbinfo']['DB_PASS'] = httppost("DB_PASS");
-	$session['dbinfo']['DB_NAME'] = httppost("DB_NAME");
-	$session['dbinfo']['DB_USEDATACACHE'] = (bool)httppost("DB_USEDATACACHE");
-	$session['dbinfo']['DB_DATACACHEPATH'] = httppost("DB_DATACACHEPATH");
+	$session['dbinfo']['DB_DRIVER'] = (string) httppost("DB_DRIVER");
+	$session['dbinfo']['DB_HOST'] = (string) httppost("DB_HOST");
+	$session['dbinfo']['DB_USER'] = (string) httppost("DB_USER");
+	$session['dbinfo']['DB_PASS'] = (string) httppost("DB_PASS");
+	$session['dbinfo']['DB_NAME'] = (string) httppost("DB_NAME");
+	$session['dbinfo']['DB_USEDATACACHE'] = (bool) httppost("DB_USEDATACACHE");
+	$session['dbinfo']['DB_DATACACHEPATH'] = (string) httppost("DB_DATACACHEPATH");
 }
 
 output("`@`c`bTesting the Database Connection`b`c`2");
@@ -46,7 +46,7 @@ else
 	output("`^Yahoo, I was able to connect to the database server!");
 	output("`2This means that the database server address, database username, and database password you provided were probably accurate, and that your database server is running and accepting connections.`n");
 
-	define("DB_INSTALLER_STAGE4", true);
+	define('DB_INSTALLER_STAGE4', true);
 	output("`n`@Tests`2`n");
 	output("I'm now going to run a series of tests to determine what the permissions of this account are.`n");
 	$issues = [];
@@ -58,7 +58,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`^Warning:`2 The installer will not be able to create the tables necessary to install LoGD.  If these tables already exist, or you have created them manually, then you can ignore this.  Also, many modules rely on being able to create tables, so you will not be able to use these modules.");
+		$issues[] = "`^Warning:`2 The installer will not be able to create the tables necessary to install LoGD.  If these tables already exist, or you have created them manually, then you can ignore this.  Also, many modules rely on being able to create tables, so you will not be able to use these modules.";
 	}
 	else
 	{
@@ -70,7 +70,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`^Warning:`2 The installer will not be able to modify existing tables (if any) to line up with new configurations.  Also, many modules rely on table modification permissions, so you will not be able to use these modules.");
+		$issues[] = "`^Warning:`2 The installer will not be able to modify existing tables (if any) to line up with new configurations.  Also, many modules rely on table modification permissions, so you will not be able to use these modules.";
 	}
 	else
 	{
@@ -82,7 +82,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`^Warning:`2 The installer will not be able to create indices on your tables.  Indices are extremely important for an active server, but can be done without on a small server.");
+		$issues[] = "`^Warning:`2 The installer will not be able to create indices on your tables.  Indices are extremely important for an active server, but can be done without on a small server.";
 	}
 	else
 	{
@@ -94,7 +94,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game will not be able to function with out the ability to insert rows.");
+		$issues[] = "`\$Critical:`2 The game will not be able to function with out the ability to insert rows.";
 		$session['stagecompleted']=3;
 	}
 	else
@@ -107,7 +107,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game will not be able to function with out the ability to select rows.");
+		$issues[] = "`\$Critical:`2 The game will not be able to function with out the ability to select rows.";
 		$session['stagecompleted']=3;
 	}
 	else
@@ -121,7 +121,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game will not be able to function with out the ability to update rows.");
+		$issues[] = "`\$Critical:`2 The game will not be able to function with out the ability to update rows.";
 		$session['stagecompleted']=3;
 	}
 	else
@@ -135,7 +135,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game database will grow very large with out the ability to delete rows.");
+		$issues[] = "`\$Critical:`2 The game database will grow very large with out the ability to delete rows.";
 		$session['stagecompleted']=3;
 	}
 	else
@@ -149,7 +149,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game will not run correctly without the ability to lock tables.");
+		$issues[] = "`\$Critical:`2 The game will not run correctly without the ability to lock tables.";
 		$session['stagecompleted']=3;
 	} else {
 		output("`2Result: `@Pass`n");
@@ -160,7 +160,7 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`\$Critical:`2 The game will not run correctly without the ability to unlock tables.");
+		$issues[] = "`\$Critical:`2 The game will not run correctly without the ability to unlock tables.";
 		$session['stagecompleted']=3;
 	} else {
 		output("`2Result: `@Pass`n");
@@ -171,28 +171,31 @@ else
 	{
 		output("`2Result: `\$Fail`n");
 		rawoutput("<blockquote>$error</blockquote>");
-		array_push($issues,"`^Warning:`2 The installer will not be able to delete old tables (if any).  Also, many modules need to be able to delete the tables they put in place when they are uninstalled.  Although the game will function, you may end up with a lot of old data sitting around.");
+		$issues[] = "`^Warning:`2 The installer will not be able to delete old tables (if any).  Also, many modules need to be able to delete the tables they put in place when they are uninstalled.  Although the game will function, you may end up with a lot of old data sitting around.";
 	}
 	else
 	{
 		output("`2Result: `@Pass`n");
 	}
 	output("`n`^Test: `#Checking datacache`n");
-	if (! $session['dbinfo']['DB_USEDATACACHE']) {
+	if (! $session['dbinfo']['DB_USEDATACACHE'])
+	{
 		output("-----skipping, not selected-----`n");
 	}
 	else
 	{
-		$fp = @fopen($session['dbinfo']['DB_DATACACHEPATH']."/dummy.php","w+");
-		if ($fp){
-			if (fwrite($fp,	$dbconnect)!==false){
+		$fp = @fopen($session['dbinfo']['DB_DATACACHEPATH'].'/dummy.php','w+');
+		if ($fp)
+		{
+			if (false != fwrite($fp, 'Dummy test'))
+			{
 				output("`2Result: `@Pass`n");
 			}
 			else
 			{
 				output("`2Result: `\$Fail`n");
 				rawoutput("<blockquote>");
-				array_push($issues,"`^I was not able to write to your datacache directory!`n");
+				$issues[] = "`^I was not able to write to your datacache directory!`n";
 				rawoutput("</blockquote>");
 			}
 			fclose($fp);
@@ -201,11 +204,11 @@ else
 		else
 		{
 			output("`2Result: `\$Fail`n");
-			array_push($issues,"`^I was not able to write to your datacache directory! Check your permissions there!`n");
+			$issues[] = "`^I was not able to write to your datacache directory! Check your permissions there!`n";
 		}
 	}
 	output("`n`^Overall results:`2`n");
-	if (count($issues) == 0)
+	if (0 == count($issues))
 	{
 		output("You've passed all the tests, you're ready for the next stage.");
 	}
