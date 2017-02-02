@@ -16,7 +16,7 @@
   background @defaultDuration @defaultEasing,
   color @defaultDuration @defaultEasing
 ;
-@background: @white;
+@background: #004000;
 @color: @textColor;
 @borderWidth: 1px;
 @border: @borderWidth solid @borderColor;
@@ -40,10 +40,10 @@
 /* Table Header */
 @headerBorder: 1px solid @internalBorderColor;
 @headerDivider: none;
-@headerBackground: @offWhite;
+@headerBackground: #006600;
 @headerAlign: inherit;
 @headerVerticalAlign: inherit;
-@headerColor: @textColor;
+@headerColor: #FFFFFF;
 @headerVerticalPadding: @relativeSmall;
 @headerHorizontalPadding: @cellHorizontalPadding;
 @headerFontStyle: none;
@@ -55,10 +55,10 @@
 @footerBoxShadow: none;
 @footerBorder: 1px solid @borderColor;
 @footerDivider: none;
-@footerBackground: @offWhite;
+@footerBackground: #006600;
 @footerAlign: inherit;
 @footerVerticalAlign: middle;
-@footerColor: @textColor;
+@footerColor: #FFFFFF;
 @footerVerticalPadding: @cellVerticalPadding;
 @footerHorizontalPadding: @cellHorizontalPadding;
 @footerFontStyle: normal;
@@ -160,11 +160,11 @@
 ;
 
 /* Striped */
-@stripedBackground: rgba(0, 0, 50, 0.02);
-@invertedStripedBackground: rgba(255, 255, 255, 0.05);
+@stripedBackground: rgba(0, 0, 50, 0.10);
+@invertedStripedBackground: rgba(255, 255, 255, 0.12);
 
 /* Selectable */
-@selectableBackground: @transparentBlack;
+@selectableBackground: inherit;
 @selectableTextColor: @selectedTextColor;
 @selectableInvertedBackground: @transparentWhite;
 @selectableInvertedTextColor: @invertedSelectedTextColor;
