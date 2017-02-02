@@ -5,9 +5,11 @@
 
 $buffreplacements = array();
 $debuggedbuffs = array();
-function calculate_buff_fields(){
+function calculate_buff_fields()
+{
 	global $session, $badguy, $buffreplacements, $debuggedbuffs;
-	if (!$session['bufflist']) return;
+
+	if (! isset($session['bufflist']) || ! $session['bufflist']) return;
 
 	//run temp stats
 	reset($session['bufflist']);
@@ -118,7 +120,7 @@ function restore_buff_fields(){
 	}//end if
 
 	//restore temp stats
-	if (!is_array($session['bufflist'])) $session['bufflist'] = array();
+	if (! isset($session['bufflist']) || ! is_array($session['bufflist'])) $session['bufflist'] = [];
 	reset($session['bufflist']);
 	foreach ($session['bufflist'] as $buffname=>$buff) {
 		if (array_key_exists("tempstats_calculated",$buff) && $buff['tempstats_calculated']){
