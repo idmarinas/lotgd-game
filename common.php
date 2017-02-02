@@ -186,7 +186,8 @@ if ($logd_version == getsetting('installer_version', '-1')) define('IS_INSTALLER
 //Generate our settings object
 $settings = new settings('settings');
 
-if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin']){
+if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin'])
+{
 	// force the abandoning of the session when the user should have been
 	// sent to the fields.
 	$session=[];
@@ -196,7 +197,7 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".g
 	translator_setup();
 	$session['message'].=translate_inline("`nYour session has expired!`n","common");
 }
-$session['lasthit']=strtotime("now");
+$session['lasthit'] = strtotime('now');
 
 $cp = $copyright;
 $l = $license;
@@ -214,7 +215,7 @@ mass_module_prepare(array(
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession=$session;
-if (! isset($session['user']['loggedin'])) $session['user']['loggedin']=false;
+if (! isset($session['user']['loggedin'])) $session['user']['loggedin'] = false;
 
 if ($session['user']['loggedin'] != true && !ALLOW_ANONYMOUS)
 {
@@ -227,7 +228,7 @@ if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME] = 1;
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
 	$session['user']['restorepage'] = $REQUEST_URI;
-	debug($REQUEST_URI, true);
+	debug($REQUEST_URI);
 }
 
 if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
