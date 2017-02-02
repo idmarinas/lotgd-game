@@ -165,7 +165,7 @@
 
 /* Selectable */
 @selectableBackground: inherit;
-@selectableTextColor: @selectedTextColor;
+@selectableTextColor: rgb(255, 255, 255);
 @selectableInvertedBackground: @transparentWhite;
 @selectableInvertedTextColor: @invertedSelectedTextColor;
 
