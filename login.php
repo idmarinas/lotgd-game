@@ -41,7 +41,7 @@ if ($name!=""){
 
 		$sql = "SELECT * FROM " . DB::prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
 		$result = DB::query($sql);
-		if (DB::num_rows($result)==1)
+		if (1 == DB::num_rows($result))
 		{
 			$session['user'] = DB::fetch_assoc($result);
 			$baseaccount = $session['user'];
@@ -112,8 +112,10 @@ if ($name!=""){
 					}
 				}
 			}
-		}else{
-			$session['message']=translate_inline("`4Error, your login was incorrect`0");
+		}
+		else
+		{
+			$session['message'] = translate_inline("`4Error, your login was incorrect`0");
 			//now we'll log the failed attempt and begin to issue bans if
 			//there are too many, plus notify the admins.
 			$sql = "DELETE FROM " . DB::prefix("faillog") . " WHERE date<'".date("Y-m-d H:i:s",strtotime("-".(getsetting("expirecontent",180)/4)." days"))."'";
@@ -121,7 +123,8 @@ if ($name!=""){
 			//DB::query($sql);
 			$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$name'";
 			$result = DB::query($sql);
-			if (DB::num_rows($result)>0){
+			if (DB::num_rows($result)>0)
+			{
 				// just in case there manage to be multiple accounts on
 				// this name.
 				while ($row=DB::fetch_assoc($result)){
@@ -133,12 +136,14 @@ if ($name!=""){
 					$c=0;
 					$alert="";
 					$su=false;
-					while ($row2=DB::fetch_assoc($result2)){
+					while ($row2=DB::fetch_assoc($result2))
+					{
 						if ($row2['superuser']>0) {$c+=1; $su=true;}
 						$c+=1;
 						$alert.="`3{$row2['date']}`7: Failed attempt from `&{$row2['ip']}`7 [`3{$row2['id']}`7] to log on to `^{$row2['login']}`7 ({$row2['name']}`7)`n";
 					}
-					if ($c>=10){
+					if ($c>=10)
+					{
 						// 5 failed attempts for superuser, 10 for regular user
 						$banmessage=translate_inline("Automatic System Ban: Too many failed login attempts.");
 						//$sql = "INSERT INTO " . DB::prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+".($c*3)." hours"))."','$banmessage','System','0000-00-00 00:00:00')";
@@ -165,7 +170,9 @@ if ($name!=""){
 			redirect("index.php");
 		}
 	}
-}else if ($op=="logout"){
+}
+else if ($op=="logout")
+{
 	if ($session['user']['loggedin']){
 		$location = $session['user']['location'];
 		if ($location == $iname) {
@@ -177,8 +184,8 @@ if ($name!=""){
 		}
 	  $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
 		DB::query($sql);
-		invalidatedatacache("charlisthomepage");
-		invalidatedatacache("list.php-warsonline");
+		invalidatedatacache('charlisthomepage');
+		invalidatedatacache('list.php-warsonline');
 
 		// Handle the change in number of users online
 		translator_check_collect_texts();
@@ -188,11 +195,11 @@ if ($name!=""){
 		// when someone logs in or off can do so.
 		modulehook("player-logout");
 	}
-	$session=array();
+	$session = [];
 	redirect("index.php");
 }
 // If you enter an empty username, don't just say oops.. do something useful.
-$session=array();
-$session['message']=translate_inline("`4Error, your login was incorrect`0");
+$session = [];
+$session['message'] = translate_inline("`4Error, your login was incorrect`0");
 redirect("index.php");
 ?>
