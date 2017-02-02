@@ -189,7 +189,7 @@ $settings = new settings('settings');
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin']){
 	// force the abandoning of the session when the user should have been
 	// sent to the fields.
-	$session=array();
+	$session=[];
 	// technically we should be able to translate this, but for now,
 	// ignore it.
 	// 1.1.1 now should be a good time to get it on with it, added tl-inline
@@ -216,14 +216,19 @@ mass_module_prepare(array(
 $revertsession=$session;
 if (! isset($session['user']['loggedin'])) $session['user']['loggedin']=false;
 
-if ($session['user']['loggedin']!=true && !ALLOW_ANONYMOUS){
+if ($session['user']['loggedin'] != true && !ALLOW_ANONYMOUS)
+{
 	redirect("login.php?op=logout");
 }
 
-$nokeeprestore = ['newday.php' => 1,'badnav.php' => 1,'motd.php' => 1,'mail.php' => 1,'petition.php' => 1];
+$nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.php' => 1, 'petition.php' => 1];
 
 if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME] = 1;
-if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME]) $session['user']['restorepage']=$REQUEST_URI;
+if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
+{
+	$session['user']['restorepage'] = $REQUEST_URI;
+	debug($REQUEST_URI, true);
+}
 
 if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
 {
@@ -247,13 +252,13 @@ elseif (file_exists('installer.php') && substr($_SERVER['SCRIPT_NAME'],-13) != "
 }
 
 
-if (isset($session['user']['hitpoints']) && $session['user']['hitpoints']>0) $session['user']['alive'] = true;
+if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints']) $session['user']['alive'] = true;
 else $session['user']['alive'] = false;
 
 if (isset($session['user']['bufflist'])) $session['bufflist']=unserialize($session['user']['bufflist']);
-else $session['bufflist'] = array();
+else $session['bufflist'] = [];
 
-if (! is_array($session['bufflist'])) $session['bufflist']=array();
+if (! is_array($session['bufflist'])) $session['bufflist']=[];
 $session['user']['lastip']=$REMOTE_ADDR;
 if (! isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi'])<32){
 	if (!isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid'])<32){
@@ -336,7 +341,7 @@ if (0 == $session['user']['superuser'])
 if (!isset($session['user']['hashorse'])) $session['user']['hashorse']=0;
 $playermount = getmount($session['user']['hashorse']);
 $temp_comp = @unserialize($session['user']['companions']);
-$companions = array();
+$companions = [];
 if(is_array($temp_comp)) {
 	foreach ($temp_comp as $name => $companion) {
 		if (is_array($companion)) {
@@ -357,12 +362,12 @@ if (isset($session['user']['clanid'])) {
 	if (DB::num_rows($result)>0){
 		$claninfo = DB::fetch_assoc($result);
 	}else{
-		$claninfo = array();
+		$claninfo = [];
 		$session['user']['clanid']=0;
 		$session['user']['clanrank']=0;
 	}
 } else {
-	$claninfo = array();
+	$claninfo = [];
 	$session['user']['clanid']=0;
 	$session['user']['clanrank']=0;
 }
