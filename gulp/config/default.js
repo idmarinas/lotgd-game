@@ -29,13 +29,13 @@ module.exports = {
 			'!bower_components{,/**}',
 			'!**/*.{dist,md,lock,json}',
 			'!semantic{,/**}',
-			//-- Ignore or not files of installation
-			// '!lib/installer{,/**}',
+			//-- Ignore files of installation
+			'!lib/installer{,/**}',
 			'!installer.php',
-			'!INSTALL.TXT',
+			//-- Ignore because then we process files for min in production
+			'!resources{,/**}',
 			//-- Other files
-			'!resources{,/**}',//-- Ignore because then we process files for min in production
-			'!{CHANGELOG.txt,QUICKINSTALL.TXT,README_FIRST.txt,README.txt}'
+			'!{CHANGELOG.txt,QUICKINSTALL.TXT,README_FIRST.txt,README.txt,INSTALL.TXT}'
 		]
 	}
 };
