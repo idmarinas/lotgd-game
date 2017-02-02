@@ -470,8 +470,9 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	if ($rowcount > 0) $session['lastcommentid'] = $commentbuffer[0]['commentid'];
 
 	//figure out whether to handle absolute or relative time
-	if (!array_key_exists('timestamp', $session['user']['prefs'])) $session['user']['prefs']['timestamp'] = 0;
-	$session['user']['prefs']['timeoffset'] = round($session['user']['prefs']['timeoffset'],1);
+	if (! array_key_exists('timestamp', $session['user']['prefs'])) $session['user']['prefs']['timestamp'] = 0;
+	if (isset($session['user']['prefs']['timeoffset'])) $session['user']['prefs']['timeoffset'] = round($session['user']['prefs']['timeoffset'], 1);
+	else $session['user']['prefs']['timeoffset'] = 0;
 
 	if (!array_key_exists('commentary_reverse', $session['user']['prefs'])) $session['user']['prefs']['commentary_reverse'] = 0;
 
