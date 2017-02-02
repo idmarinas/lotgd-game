@@ -10,13 +10,13 @@
 *
 */
 define("OVERRIDE_FORCED_NAV",true);
-require_once("common.php");
-require_once("lib/villagenav.php");
+require_once 'common.php';
+require_once 'lib/villagenav.php';
 
 tlschema("badnav");
 
 if ($session['user']['loggedin'] && $session['loggedin']){
-	if (strpos($session['output'],"<!--CheckNewDay()-->")){
+	if (isset($session['output']) && strpos($session['output'],"<!--CheckNewDay()-->")){
 		checkday();
 	}
 	foreach ($session['allowednavs'] as $key=>$val) {
