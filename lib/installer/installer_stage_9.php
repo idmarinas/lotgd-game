@@ -13,7 +13,8 @@ output("`n`@Table Synchronization Logs:`n");
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 $descriptors = descriptors($DB_PREFIX);
 reset($descriptors);
-while (list($tablename,$descriptor)=each($descriptors)){
+while (list($tablename,$descriptor) = each($descriptors))
+{
 	output("`3Synchronizing table `#$tablename`3..`n");
 	synctable($tablename,$descriptor,true);
 	if ($session['dbinfo']['upgrade']==false){
@@ -76,7 +77,7 @@ install_module($modulename, false);
 }
 rawoutput("</div>");
 */
-if (! $session['skipmodules'])
+if (! isset($session['skipmodules']) || ! $session['skipmodules'])
 {
   output("`n`2Now I'll install and configure your modules.");
   reset($session['moduleoperations']);

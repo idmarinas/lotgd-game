@@ -209,12 +209,12 @@ class LotgdOutputCollector
 	* @return void
 	*/
 
-	function debug($text, $force=false)
+	function debug($text, $force = false)
 	{
 		global $session;
 		$temp = $this->get_block_new_output();
 		$this->set_block_new_output(false);
-		if ($force || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
+		if ($force || isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT)
 		{
 			$this->rawoutput('<div class="debug">'.LotgdDebug::dump($text, null, false).'</div>');
 		}
