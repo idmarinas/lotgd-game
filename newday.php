@@ -220,11 +220,15 @@ if ($dp < $dkills) {
 		output("`2As a result, you `^%s some Stamina`2 for today!`n", $gain);
 	}
 	$rp = $session['user']['restorepage'];
+	debug('New: '. $rp);
 	$x = max(strrpos("&",$rp),strrpos("?",$rp));
 	if ($x>0) $rp = substr($rp,0,$x);
-	if (substr($rp,0,10)=="badnav.php"){
+	if (substr($rp,0,10) == 'badnav.php' || '' == $rp)
+	{
 		addnav("Continue","news.php");
-	}else{
+	}
+	else
+	{
 		addnav("Continue", cmd_sanitize($rp));
 	}
 
