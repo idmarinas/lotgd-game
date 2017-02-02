@@ -50,7 +50,7 @@ if (0 == DB::num_rows($result))
 	}
 	if ($showform)
 	{
-		rawoutput("<div class='ui form'><form action='installer.php?stage=$stage' method='POST'><div class='inline field'><label>");
+		rawoutput("<br><div class='ui form'><form action='installer.php?stage=$stage' method='POST'><div class='inline field'><label>");
 		output("Enter a name for your superuser account:");
 		rawoutput("</label><input name='name' value=\"".htmlentities(httppost("name"), ENT_COMPAT, getsetting("charset", "UTF-8"))."\"></div><div class='inline field'><label>");
 		output("`nEnter a password: ");
