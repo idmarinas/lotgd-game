@@ -21,17 +21,17 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 ## Dependencias y requisitos LOTGD - IDMarinas Edition ##
 * PHP >= 5.6
 * Utiliza componentes de:
-	* [Uikit Framework](http://getuikit.com)
+	* [Semantic UI Framework](http://semantic-ui.com/)
 	* [Zend Framework](https://zendframework.github.io)
 * Sistema de plantillas de [Twig](http://twig.sensiolabs.org)
 
 ## Cambios importantes ##
-* Se actualiza la versión del juego a la 1.0.0 IDMarinas Edition y se agrega IDMarinas al Copyright para indicar que esta versión está modificada.
+* Se actualiza la versión del juego a la 2.0.0 IDMarinas Edition y se agrega IDMarinas al Copyright para indicar que esta versión está modificada.
 * Se usa Gulp para automatizar tareas a la hora de construir el proyecto y poder copiarlo al servidor
-* Se modifica el comportamiento del showform() -> Ya no genera el Javascript por si mismo, sino que utiliza Uikit para generar las pestañas
+* Se modifica el comportamiento del showform() -> Ya no genera el Javascript por si mismo, sino que utiliza Semantic UI para generar las pestañas
 	* Se renombra showform() por lotgd_showform()
 * Se sustituyen todas las funciones relacionadas con la base de datos (Ejem: db_query...) por sus equivalentes DB::query...
-	* Las funciones antiguas seguirán funcionando pero dan una advertencia de función obsoleta. Se borrarán en la versión 2.0.0
+	* Las funciones antiguas seguirán funcionando pero dan una advertencia de función obsoleta. Se borrarán en la versión 3.0.0
 * Codificación por defecto UTF-8
 
 ## Añadidos ##
@@ -41,11 +41,11 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 # Compatiblidad #
 * Esta versión es posible que no sea compatible con la mayor parte de los módulos disponibles para la versión 1.1.* DragonPrime Edition
 	* Aunque, se ha modificado el script de conexión a la base de datos, las funciones antiguas relacionadas con la base de datos siguen funcionando.
+	* La versión 3.0.0 no será compatible con muchos módulos que hacen uso de la base de datos. Ya que se eliminará las funciones antiguas de conexión a la base de datos.
 
 ## Advertencias ##
 * Esta es una versión de desarrollo y por lo tanto inestable
 * No usar en un servidor de producción ni actualizar desde una versión anterior
 
 ## Errores que se conocen ##
-* Es posible que no sea posible hacer una instalación limpia
-* Realizar una instalación, actualizando desde una versión anterior, puede hacer que se pierdan datos, y se alteren las tablas orignales del juego (si se habian alterado por algunos módulos instalados)
+* No es posible hacer una instalación de actualización
