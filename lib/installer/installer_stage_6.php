@@ -4,16 +4,16 @@ use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\FileGenerator;
 
 $body = '$adapter = ['  . PHP_EOL;
-$body .= '	\'driver\' => \'' . (isset($session['dbinfo']['DB_DRIVER'])?$session['dbinfo']['DB_DRIVER']:null) . '\','  . PHP_EOL;
-$body .= '	\'hostname\' => \'' . (isset($session['dbinfo']['DB_HOST'])?$session['dbinfo']['DB_HOST']:null) . '\','  . PHP_EOL;
-$body .= '	\'database\' => \'' . (isset($session['dbinfo']['DB_NAME'])?$session['dbinfo']['DB_NAME']:null) . '\','  . PHP_EOL;
+$body .= '	\'driver\' => \'' . $session['dbinfo']['DB_DRIVER'] . '\','  . PHP_EOL;
+$body .= '	\'hostname\' => \'' . $session['dbinfo']['DB_HOST'] . '\','  . PHP_EOL;
+$body .= '	\'database\' => \'' . $session['dbinfo']['DB_NAME'] . '\','  . PHP_EOL;
 $body .= '	\'charset\' => \'utf8\','  . PHP_EOL;
-$body .= '	\'username\' => \'' . (isset($session['dbinfo']['DB_USER'])?$session['dbinfo']['DB_USER']:null) . '\','  . PHP_EOL;
+$body .= '	\'username\' => \'' . $session['dbinfo']['DB_USER'] . '\','  . PHP_EOL;
 $body .= '	\'password\' => \'' . $session['dbinfo']['DB_PASS'] . '\'' . PHP_EOL;
 $body .= '];' . PHP_EOL . PHP_EOL;
-$body .= '$DB_PREFIX = \'' . (isset($session['dbinfo']['DB_PREFIX'])?$session['dbinfo']['DB_PREFIX']:null) . '\';' . PHP_EOL;
-$body .= '$DB_USEDATACACHE = \'' . (isset($session['dbinfo']['DB_USEDATACACHE'])?$session['dbinfo']['DB_USEDATACACHE']:null) . '\';' . PHP_EOL;
-$body .= '$DB_DATACACHEPATH = \'' . (isset($session['dbinfo']['DB_DATACACHEPATH'])?$session['dbinfo']['DB_DATACACHEPATH']:null) . '\';' . PHP_EOL;
+$body .= '$DB_PREFIX = \'' . $session['dbinfo']['DB_PREFIX'] . '\';' . PHP_EOL;
+$body .= '$DB_USEDATACACHE = \'' . $session['dbinfo']['DB_USEDATACACHE'] . '\';' . PHP_EOL;
+$body .= '$DB_DATACACHEPATH = \'' . $session['dbinfo']['DB_DATACACHEPATH'] . '\';' . PHP_EOL;
 $body .= '$gz_handler_on = 0;' . PHP_EOL;
 
 $file = FileGenerator::fromArray([
