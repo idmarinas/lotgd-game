@@ -3,15 +3,17 @@
 // addnews ready
 // mail ready
 
-if (isset($_POST['template'])){
+if (isset($_POST['template']))
+{
 	$skin = $_POST['template'];
-	if ($skin > "") {
-		setcookie("template",$skin ,strtotime("+45 days"));
+	if ($skin > '')
+	{
+		setcookie('template', $skin , strtotime('+45 days'));
 		$_COOKIE['template']=$skin;
 	}
 }
 
-define("ALLOW_ANONYMOUS",true);
+define("ALLOW_ANONYMOUS", true);
 
 require_once 'common.php';
 require_once 'lib/http.php';
@@ -20,7 +22,7 @@ require_once 'lib/http.php';
 if (! isset($session['loggedin'])) $session['loggedin']=false;
 if ($session['loggedin']) redirect("badnav.php");
 
-tlschema("home");
+tlschema('home');
 
 $op = httpget('op');
 
@@ -67,7 +69,7 @@ if (getsetting('impressum','')!='') addnav("Imprint","about.php");
 addnav("Game Setup Info", "about.php?op=setup");
 addnav("LoGD Net","logdnet.php?op=list");
 
-modulehook("index", array());
+modulehook("index", []);
 
 if (abs(getsetting("OnlineCountLast",0) - strtotime("now")) > 60){
 	$sql="SELECT count(acctid) as onlinecount FROM " . DB::prefix("accounts") . " WHERE locked=0 AND loggedin=1 AND laston>'".date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"))."'";
@@ -80,7 +82,7 @@ if (abs(getsetting("OnlineCountLast",0) - strtotime("now")) > 60){
 	$onlinecount = getsetting("OnlineCount",0);
 }
 
-modulehook("hometext", array());
+modulehook("hometext", []);
 
 if (! isset($session['message'])) $session['message'] = '';
 if ($onlinecount<getsetting("maxonline",0) || getsetting("maxonline",0)==0){
@@ -139,18 +141,20 @@ output_notl("`n`c`b`&%s`0`b`c`n", $msg);
 $session['message']="";
 output("`c`2Game server running version: `@%s`0`c", $logd_version);
 
-if (getsetting("homeskinselect", 1)) {
-	rawoutput("<form action='home.php' method='POST'>");
-	rawoutput("<table align='center'><tr><td>");
-	$form = array("template"=>"Choose a different display skin:,theme");
-	$prefs['template'] = (isset($_COOKIE['template']) ? $_COOKIE['template'] : '');
-	if ($prefs['template'] == "")
-		$prefs['template'] = getsetting("defaultskin", "jade.htm");
+if (getsetting('homeskinselect', 1))
+{
 	require_once 'lib/showform.php';
+
+	$prefs['template'] = (isset($_COOKIE['template']) ? $_COOKIE['template'] : '');
+	if ($prefs['template'] == '') $prefs['template'] = getsetting('defaultskin', 'jade.htm');
+	$form = ['template' => 'Choose a different display skin:,theme'];
+
+	rawoutput("<br><form action='home.php' method='POST'>");
+	rawoutput('<table class="ui centered collapsing simple table"><tr><td><div class="ui form"><div class="inline fields"><div class="field">');
 	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
-	rawoutput("</td><td><br>&nbsp;<input type='submit' class='button' value='$submit'></td>");
-	rawoutput("</tr></table></form>");
+	rawoutput("</div><div class='field'><input type='submit' class='ui primary button' value='$submit'></div>");
+	rawoutput("</div></div></td></tr></table></form>");
 }
 page_footer();
 ?>
