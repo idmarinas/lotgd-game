@@ -8,7 +8,7 @@ $modulePagehooksTable = DB::prefix('module_pagehooks');
 $moduleSettingdescTable = DB::prefix('module_settingdesc');
 $modulePrefdescTable = DB::prefix('module_prefdesc');
 
-$creaturefields = "(creatureid,creaturename,creaturelevel,creatureweapon,creaturelose,creaturewin,creaturegold,creatureexp,creaturehealth,creatureattack,creaturedefense,creatureaiscript,createdby,forest,graveyard";
+$creaturefields = "creatureid,creaturename,creaturelevel,creatureweapon,creaturelose,creaturewin,creaturegold,creatureexp,creaturehealth,creatureattack,creaturedefense,creatureaiscript,createdby,forest,graveyard";
 
 return [
 	"INSERT INTO $settingsTable VALUES ('allowclans','1')",
