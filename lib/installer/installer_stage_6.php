@@ -3,36 +3,6 @@
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\FileGenerator;
 
-$body = '$adapter = ['  . PHP_EOL;
-$body .= '	\'driver\' => \'' . $session['dbinfo']['DB_DRIVER'] . '\','  . PHP_EOL;
-$body .= '	\'hostname\' => \'' . $session['dbinfo']['DB_HOST'] . '\','  . PHP_EOL;
-$body .= '	\'database\' => \'' . $session['dbinfo']['DB_NAME'] . '\','  . PHP_EOL;
-$body .= '	\'charset\' => \'utf8\','  . PHP_EOL;
-$body .= '	\'username\' => \'' . $session['dbinfo']['DB_USER'] . '\','  . PHP_EOL;
-$body .= '	\'password\' => \'' . $session['dbinfo']['DB_PASS'] . '\'' . PHP_EOL;
-$body .= '];' . PHP_EOL . PHP_EOL;
-$body .= '$DB_PREFIX = \'' . $session['dbinfo']['DB_PREFIX'] . '\';' . PHP_EOL;
-$body .= '$DB_USEDATACACHE = \'' . $session['dbinfo']['DB_USEDATACACHE'] . '\';' . PHP_EOL;
-$body .= '$DB_DATACACHEPATH = \'' . $session['dbinfo']['DB_DATACACHEPATH'] . '\';' . PHP_EOL;
-$body .= '$gz_handler_on = 0;' . PHP_EOL;
-
-$file = FileGenerator::fromArray([
-	'docblock' => DocBlockGenerator::fromArray([
-		'shortDescription' => 'This file is automatically created by installer.php',
-		'longDescription' => null,
-		'tags' => [
-			[
-				'name' => 'create',
-				'description' => date('M d, Y h:i a'),
-			],
-		],
-	]),
-	'body' => $body,
-]);
-unset($body);
-
-$code = $file->generate();
-
 if (file_exists('dbconnect.php'))
 {
 	$success = true;
@@ -44,6 +14,36 @@ else
 	output("`@`c`bWriting your dbconnect.php file`b`c");
 	output("`2I'm attempting to write a file named 'dbconnect.php' to your site root.");
 	output("This file tells LoGD how to connect to the database, and is necessary to continue installation.`n");
+
+	$body = '$adapter = ['  . PHP_EOL;
+	$body .= '	\'driver\' => \'' . $session['dbinfo']['DB_DRIVER'] . '\','  . PHP_EOL;
+	$body .= '	\'hostname\' => \'' . $session['dbinfo']['DB_HOST'] . '\','  . PHP_EOL;
+	$body .= '	\'database\' => \'' . $session['dbinfo']['DB_NAME'] . '\','  . PHP_EOL;
+	$body .= '	\'charset\' => \'utf8\','  . PHP_EOL;
+	$body .= '	\'username\' => \'' . $session['dbinfo']['DB_USER'] . '\','  . PHP_EOL;
+	$body .= '	\'password\' => \'' . $session['dbinfo']['DB_PASS'] . '\'' . PHP_EOL;
+	$body .= '];' . PHP_EOL . PHP_EOL;
+	$body .= '$DB_PREFIX = \'' . $session['dbinfo']['DB_PREFIX'] . '\';' . PHP_EOL;
+	$body .= '$DB_USEDATACACHE = \'' . $session['dbinfo']['DB_USEDATACACHE'] . '\';' . PHP_EOL;
+	$body .= '$DB_DATACACHEPATH = \'' . $session['dbinfo']['DB_DATACACHEPATH'] . '\';' . PHP_EOL;
+	$body .= '$gz_handler_on = 0;' . PHP_EOL;
+
+	$file = FileGenerator::fromArray([
+		'docblock' => DocBlockGenerator::fromArray([
+			'shortDescription' => 'This file is automatically created by installer.php',
+			'longDescription' => null,
+			'tags' => [
+				[
+					'name' => 'create',
+					'description' => date('M d, Y h:i a'),
+				],
+			],
+		]),
+		'body' => $body,
+	]);
+	unset($body);
+
+	$code = $file->generate();
 
 	$result = file_put_contents('dbconnect.php', $code);
 
