@@ -120,7 +120,7 @@ function addcommentary()
 
 	if (! $comment) return false;
 
-	if ('DNI' == $session['user']['chatloc']) $dni = true;
+	if (isset($session['user']['chatloc']) && 'DNI' == $session['user']['chatloc']) $dni = true;
 
 	//-- Colors of LOTGD
 	$colors = $output->get_colors();
@@ -330,7 +330,7 @@ function injectcommentary($section, $talkline, $comment)
 		//debug($args);
 
 		//A module tells us to ignore this comment, so we will
-		if (1 == $args['ignore']) return false;
+		if (isset($args['ignore']) && 1 == $args['ignore']) return false;
 
 		$commentary = $args['commentline'];
 		$talkline = $args['commenttalk'];
@@ -425,6 +425,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 
 	$session['lastcom'] = $com;
 
+	$viewingallsections = 0;
 	if (!$cid) $cid=1;
 	if ($customsql) $sql = $customsql;
 	else if ($section=="all")
@@ -487,7 +488,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	$removelink = buildcommentarylink("&comscroll=".$com."&removecomment=",$returnlink);
 	for ($i=0; $i < $rowcount; $i++)
 	{
-		if ((!$commentbuffer[$i]['info']['hidecomment']) || $showmodlink)
+		if ((! isset($commentbuffer[$i]['info']['hidecomment']) || ! $commentbuffer[$i]['info']['hidecomment']) || $showmodlink)
 		{
 			$thiscomment="";
 			if ($viewingallsections) $thiscomment.="`b".$row['section']."`0`b: ";
@@ -516,19 +517,23 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 					$row['comment'] = substr($row['comment'],1);
 				}
 			}
-			if ($row['info']['gamecomment'] || (substr($row['comment'],0,5)=="/game" && !$row['name']))
+			$row['gamecomment'] = false;
+			$row['skiptalkline'] = false;
+			$row['info']['icons'] = [];
+
+			if (isset($row['info']['gamecomment']) && $row['info']['gamecomment'] || (substr($row['comment'],0,5)=="/game" && !$row['name']))
 			{
 				//debug("Game Comment: ".$row['comment']);
-				$row['gamecomment']=true;
-				$row['skiptalkline']=true;
-				$row['info']['icons']=array();
+				$row['gamecomment'] = true;
+				$row['skiptalkline'] = true;
+				$row['info']['icons'] = [];
 				//$length = strlen($row['comment']);
 				$row['comment'] = str_replace("/game","",$row['comment']);
 			}
 			if ($linkbios && !isset($row['biolink']))$row['biolink']=true;
 			if ($showmodlink)
 			{
-				if ($row['info']['hidecomment'])
+				if (isset($row['info']['hidecomment']) && $row['info']['hidecomment'])
 				{
 					//$link = buildcommentarylink("&restorecomment=".$row['commentid']."&comscroll=".$com,$returnlink);
 					$thiscomment.="`0[<a href='$restorelink".$row['commentid']."'>$undel</a>]`0 <del>";
@@ -541,7 +546,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 					addnav("",$removelink.$row['commentid']);
 				}
 			}
-			if (!$row['gamecomment'] && ($row['info']['clanid'] || $row['info']['clanid']===0) && $row['info']['clanrank']){
+			if (!$row['gamecomment'] && isset($row['info']['clanid']) && ($row['info']['clanid'] || $row['info']['clanid'] === 0) && $row['info']['clanrank']){
 				$clanrankcolors=array(CLAN_APPLICANT=>"`!",CLAN_MEMBER=>"`3",CLAN_OFFICER=>"`^",CLAN_LEADER=>"`&", CLAN_FOUNDER=>"`\$");
 				$thiscomment.="`0<a title=\"".$row['info']['clanname']."\">&lt;".$clanrankcolors[$row['info']['clanrank']].$row['info']['clanshort']."`0&gt;</a>";
 			}
@@ -572,8 +577,8 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 			}
 			$thiscomment.=str_replace("&amp;","&",htmlentities($row['comment'], ENT_COMPAT, getsetting("charset", "UTF-8")));
 			$thiscomment.="`0";
-			if (!$row['skiptalkline']) $thiscomment.="\"";
-			if ($row['info']['hidecomment']) $thiscomment.="</del>";
+			if (! $row['skiptalkline']) $thiscomment.="\"";
+			if (isset($row['info']['hidecomment']) && $row['info']['hidecomment']) $thiscomment.="</del>";
 			$commentbuffer[$i]['comment']=$thiscomment;
 			$commentbuffer[$i]['icons']=$row['info']['icons'];
 			$commentbuffer[$i]['time']=strtotime($row['postdate']);
@@ -689,10 +694,10 @@ function preparecommentaryline($line)
 	$finaloutput="";
 
 	//debug($line);
-	if (!$line['info']['gamecomment'])
+	if (! isset($line['info']['gamecomment']) || ! $line['info']['gamecomment'])
 	{
 		$icons = $line['info']['icons'];
-		$mouseover = $line['info']['mouseover'];
+		$mouseover = (isset($line['info']['mouseover'])?$line['info']['mouseover']:null);
 		//debug($line);
 
 		//make it so that online icons always show up first
@@ -722,7 +727,7 @@ function preparecommentaryline($line)
 			}
 		}
 	}
-	$finaloutput.=$line['displaytime'];
+	$finaloutput.=(isset($line['displaytime'])?$line['displaytime']:'');
 	$finaloutput.=$line['comment'];
 
 	return $finaloutput;
