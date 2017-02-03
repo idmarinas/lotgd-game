@@ -37,7 +37,7 @@ if ($op=="run"){
 }
 
 if ($op=="dragon"){
-	require_once("lib/partner.php");
+	require_once 'lib/partner.php';
 	addnav("Enter the cave","dragon.php");
 	addnav("Run away like a baby","inn.php?op=fleedragon");
 	output("`\$You approach the blackened entrance of a cave deep in the forest, though the trees are scorched to stumps for a hundred yards all around.");
@@ -59,7 +59,7 @@ if ($op=="search"){
 		$op="";
 		httpset('op', "");
 	}else{
-		modulehook("forestsearch", array());
+		modulehook("forestsearch", []);
 		$args = array(
 			'soberval'=>0.9,
 			'sobermsg'=>"`&Faced with the prospect of death, you sober up a little.`n",
@@ -170,7 +170,7 @@ if ($op=="search"){
 			if (DB::num_rows($result) == 0) {
 				// There is nothing in the database to challenge you, let's
 				// give you a doppleganger.
-				$badguy = array();
+				$badguy = [];
 				$badguy['creaturename']=
 					"An evil doppleganger of ".$session['user']['name'];
 				$badguy['creatureweapon']=$session['user']['weapon'];
@@ -288,8 +288,9 @@ if ($op=="search"){
 	}
 }
 
-if ($op=="fight" || $op=="run" || $op == "newtarget"){
-	$battle=true;
+if ($op=="fight" || $op=="run" || $op == "newtarget")
+{
+	$battle = true;
 }
 
 if ($battle)
