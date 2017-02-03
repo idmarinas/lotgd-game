@@ -10,13 +10,13 @@
 * @see lib/battle-skills.php
 * @see lib/extended-battle.php
 */
-require_once("lib/bell_rand.php");
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/battle-buffs.php");
-require_once("lib/battle-skills.php");
-require_once("lib/buffs.php");
-require_once("lib/extended-battle.php");
+require_once 'lib/bell_rand.php';
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/battle-buffs.php';
+require_once 'lib/battle-skills.php';
+require_once 'lib/buffs.php';
+require_once 'lib/extended-battle.php';
 
 //just in case we're called from within a function.Yuck is this ugly.
 global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
@@ -25,7 +25,7 @@ global $companions,$companion,$newcompanions,$count,$defended,$needtostopfightin
 
 tlschema("battle");
 
-$newcompanions = array();
+$newcompanions = [];
 $attackstack = @unserialize($session['user']['badguy']);
 if (isset($attackstack['enemies'])) $enemies = $attackstack['enemies'];
 if (isset($attackstack['options'])) $options = $attackstack['options'];
@@ -33,7 +33,7 @@ if (isset($attackstack['options'])) $options = $attackstack['options'];
 // Make the new battle script compatible with old, single enemy fights.
 if (isset($attackstack['creaturename']) && $attackstack['creaturename'] > "") {
 	$safe = $attackstack;
-	$enemies = array();
+	$enemies = [];
 	$enemies[0]=$safe;
 	unset($safe);
 } elseif (isset($attackstack[0]['creaturename']) && $attackstack['creaturename'] > "") {
@@ -113,7 +113,8 @@ if ($enemycounter > 0) {
 	output_notl("`n");
 	//Añadido para mostrar la imagen y las barras de salud de ambos
 	modulehook("battle-info", $enemies);
-	// show_enemies($enemies);
+	show_enemies($enemies);
+	rawoutput('<br>');
 }
 
 suspend_buffs((($options['type'] == 'pvp')?"allowinpvp":false));
@@ -169,7 +170,7 @@ if ($op != "newtarget") {
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
-		$newenemies = array();
+		$newenemies = [];
 		// Run the beginning of round buffs (this also calculates all modifiers)
 		foreach ($enemies as $index=>$badguy) {
 			$badguy = modulehook("startofround-perbadguy-prebuff",$badguy);
@@ -207,7 +208,7 @@ if ($op != "newtarget") {
 						$compdefmod=$buffset['compdefmod'];
 						if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
 							if (is_array($companions)) {
-								$newcompanions = array();
+								$newcompanions = [];
 								foreach ($companions as $name=>$companion) {
 									if ($companion['hitpoints'] > 0) {
 										$buffer = report_companion_move($badguy, $companion, "heal");
@@ -240,7 +241,7 @@ if ($op != "newtarget") {
 									$buffset = activate_buffs("offense");
 									if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
 										if (is_array($companions)) {
-											$newcompanions = array();
+											$newcompanions = [];
 											foreach ($companions as $name=>$companion) {
 												if ($companion['hitpoints'] > 0) {
 													$buffer = report_companion_move($badguy, $companion, "magic");
@@ -495,10 +496,11 @@ if ($op != "newtarget") {
 $newenemies = autosettarget($newenemies);
 
 // Y no es necesario al no mostrar la información de salud al final de la página
-// if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
-// 	output("`2`bEnd of Round:`b`n");
-// 	show_enemies($newenemies);
-// }
+if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
+ 	output("`n`2`bEnd of Round:`b`0`n");
+	show_enemies($newenemies);
+	rawoutput('<br>');
+}
 
 //extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
 $badguy = modulehook("endofpage",$badguy);
@@ -515,8 +517,8 @@ if ($session['user']['hitpoints'] <= 0) {
 
 if ($victory || $defeat){
 	//Para informar del fin del combate
-	output("`2`bEnd of Battle:`b");
-	output_notl('`n`n');
+	output("`n`n`2`bEnd of Battle:`0`b");
+	output_notl('`n');
 	// expire any buffs which cannot persist across fights
 	expire_buffs_afterbattle();
 	//unsuspend any suspended buffs
