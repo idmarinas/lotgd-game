@@ -9,18 +9,43 @@
  *
  * @param array $enemies The enemies to be displayed.
  */
-function show_enemies($enemies) {
-	global $enemycounter, $session;
-	require_once("lib/battle-functions.php");
-	$u=&$session['user']; //fast and better, by pointer
+function show_enemies($enemies)
+{
+	global $enemycounter, $session, $lotgd_tpl;
+
+	require_once 'lib/battle-functions.php';
+
+	$u = &$session['user']; //fast and better, by pointer
 	static $fightbar=NULL;
 	if ($fightbar===NULL) {
 		//only once per fight
 		$fightbar=new fightbar();
 	}
 
+	if (isset($u['prefs']['forestcreaturebar']))
+	{
+		$barDisplay = (int) $u['prefs']['forestcreaturebar'];
+	}
+	else
+	{
+		$barDisplay = (int) getsetting('forestcreaturebar',0); //get default
+		$u['prefs']['forestcreaturebar'] = $barDisplay;
+	}
+
+	if ($u['alive'])
+	{
+		$hitpointstext=translate_inline("Hitpoints");
+		$healthtext=appoencode(translate_inline("`^Health"));
+	}
+	else
+	{
+		$hitpointstext=translate_inline("Soulpoints");
+		$healthtext=appoencode(translate_inline("`)Soul"));
+	}
+
 	//show all enemies including their stats
-	foreach ($enemies as $index => $badguy) {
+	foreach ($enemies as $index => $badguy)
+	{
 		if ((isset($badguy['istarget']) && $badguy['istarget'] == true) && $enemycounter > 1)
 			$ccode = "`#";
 		else
@@ -31,68 +56,57 @@ function show_enemies($enemies) {
 			$health = $badguy['creaturehealth'];
 			$maxhealth = $badguy['creaturemaxhealth'];
 		}
-		if (!isset($badguy['creaturemaxhealth']) && isset($badguy['creaturehealth'])) $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
-		if (isset($session['user']['prefs']['forestcreaturebar'])) {
-			$barDisplay=(int)$session['user']['prefs']['forestcreaturebar'];
-		} else {
-			$barDisplay=getsetting('forestcreaturebar',0); //get default
-			$session['user']['prefs']['forestcreaturebar']=$barDisplay;
-		}
-		if ($u['alive']){
-			$hitpointstext=translate_inline("Hitpoints");
-			$healthtext=appoencode(translate_inline("`^Health"));
-		} else {
-			$hitpointstext=translate_inline("Soulpoints");
-			$healthtext=appoencode(translate_inline("`)Soul"));
-		}
-		switch ($barDisplay) {
+		if (! isset($badguy['creaturemaxhealth']) && isset($badguy['creaturehealth'])) $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+
+		switch ($barDisplay)
+		{
 			case 2:
-			output("%s%s%s%s (Level %s)`n",
-				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
-				$badguy['creaturename'],
-				$ccode,
-				$badguy['creaturelevel']);
-			rawoutput("<table class='battle-bar-display enemy'><tr><td>");
-			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
-			rawoutput("</td><td>");
-			rawoutput($fightbar->getBar($badguy['creaturehealth'],$badguy['creaturemaxhealth']));
-			rawoutput("</td><td>");
-			output_notl("(%s/%s) %s`0`n",$health,$maxhealth,$badguy['creaturehealth']>0?"":translate_inline("`7DEFEATED`0"),true);
-			rawoutput("</td></tr></table>");
+				$data = [
+					'value' => $badguy['creaturehealth'],
+					'total' => $badguy['creaturemaxhealth'],
+					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
+					'who' => translate_inline('Enemy'),
+					'name' => $ccode.$badguy['creaturename'].$ccode,
+					'level' => $badguy['creaturelevel'],
+					'healthtext' => $healthtext,
+					'hptext' => sprintf("(%s/%s) %s`0`n", $health, $maxhealth, $badguy['creaturehealth']>0? "" : translate_inline("`7DEFEATED`0")),
+					'showBar' => true
+				];
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+
 			break;
 
 			case 1:
-			output("%s%s%s%s (Level %s)`n",
-				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
-				$badguy['creaturename'],
-				$ccode,
-				$badguy['creaturelevel']);
-			rawoutput("<table class='battle-bar-display enemy'><tr><td>");
-			output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
-			rawoutput("</td><td>");
-			rawoutput($fightbar->getBar($badguy['creaturehealth'],$badguy['creaturemaxhealth']));
-			rawoutput("</td><td>");
-			output_notl("%s`0`n",$badguy['creaturehealth']>0?"":translate_inline("`7DEFEATED`0"),true);
-			rawoutput("</td></tr></table>");
+				$data = [
+					'value' => $badguy['creaturehealth'],
+					'total' => $badguy['creaturemaxhealth'],
+					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
+					'who' => translate_inline('Enemy'),
+					'name' => $ccode.$badguy['creaturename'].$ccode,
+					'level' => $badguy['creaturelevel'],
+					'healthtext' => $healthtext,
+					'hptext' => ($badguy['creaturehealth']>0?"":translate_inline("`7DEFEATED`0")),
+					'showBar' => true
+				];
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
 
-
+			break;
 			default:
-			output("%1s%s%s%s's %s%s (Level %s): `6%s`0`n",
-				$ccode,
-				(isset($badguy['istarget'])&&$badguy['istarget']&&$enemycounter>1)?"*":"",
-				$badguy['creaturename'],
-				$ccode,
-				$hitpointstext,
-				$ccode,
-				$badguy['creaturelevel'],
-				($badguy['creaturehealth']>0?$health:translate_inline("`7DEFEATED`0"))
-			);
+				$data = [
+					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
+					'who' => translate_inline('Enemy'),
+					'name' => $ccode.$badguy['creaturename'].$ccode,
+					'level' => $badguy['creaturelevel'],
+					'showBar' => false,
+					'hptext' => '`6'.($badguy['creaturehealth']>0?$health:translate_inline("`7DEFEATED`0")).'`0'
+				];
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+			break;
 		}
 	}
 	if ($u['alive']){
 		$hitpointstext=$u['name']."`0";
+		$dead = false;
 	} else {
 		$hitpointstext=sprintf_translate("Soul of %s",$u['name']);
 		$dead=true;
@@ -100,39 +114,55 @@ function show_enemies($enemies) {
 
 	}
 	//your faction display (companions?)
-	switch ($barDisplay) {
+	switch ($barDisplay)
+	{
 		case 2:
-		output_notl("`l%s:`n",
-			$hitpointstext
-			);
-		rawoutput("<table class='battle-bar-display player'><tr><td>");
-		output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
-		rawoutput("</td><td>");
-		if (!$dead) rawoutput($fightbar->getBar($u['hitpoints'],$u['maxhitpoints']));
-			else rawoutput($fightbar->getBar($u['hitpoints'],$maxsoul));
-		rawoutput("</td><td>");
-		if (!$dead) output_notl("(%s/%s) %s`0`n",$u['hitpoints'],$u['maxhitpoints'],$u['hitpoints']>0?"":translate_inline("`7DEFEATED`0"),true);
-			else output_notl("(%s/%s) %s`0`n",$u['hitpoints'],$maxsoul,$u['hitpoints']>0?"":translate_inline("`7DEFEATED`0"),true);
+			if (!$dead) $hptext = sprintf("(%s/%s) %s`0`n",$u['hitpoints'],$u['maxhitpoints'],$u['hitpoints']>0?"":translate_inline("`7DEFEATED`0"),true);
+			else $hptext = sprintf("(%s/%s) %s`0`n",$u['hitpoints'],$maxsoul,$u['hitpoints']>0?"":translate_inline("`7DEFEATED`0"),true);
 
-		rawoutput("</td></tr></table>");
+			$data = [
+				'value' => $u['hitpoints'],
+				'total' => (! $dead ? $u['maxhitpoints'] : $maxsoul),
+				'isTarget' => false,
+				'who' => translate_inline('You'),
+				'name' => $hitpointstext,
+				'level' => $u['level'],
+				'healthtext' => $healthtext,
+				'hptext' => $hptext,
+				'showBar' => true
+			];
+
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
 		break;
 
 		case 1:
-		output_notl("`l%s:`n",
-			$hitpointstext
-			);
-		rawoutput("<table class='battle-bar-display player'><tr><td>");
-		output_notl("&nbsp;&nbsp;&nbsp;%s: ",$healthtext,true);
-		rawoutput("</td><td>");
-		if (!$dead) rawoutput($fightbar->getBar($u['hitpoints'],$u['maxhitpoints']));
-			else rawoutput($fightbar->getBar($u['hitpoints'],$maxsoul));
-		rawoutput("</td><td>");
+			$data = [
+				'value' => $u['hitpoints'],
+				'total' => (! $dead ? $u['maxhitpoints'] : $maxsoul),
+				'isTarget' => false,
+				'who' => translate_inline('You'),
+				'name' => $hitpointstext,
+				'level' => $u['level'],
+				'healthtext' => $healthtext,
+				'hptext' => ($u['hitpoints']>0?"":translate_inline("`7DEFEATED`0")),
+				'showBar' => true
+			];
 
-		rawoutput("</td></tr></table>");
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
 
-
+		break;
 		default:
-		output("`l%s: `6%s`0`n",$hitpointstext,$u['hitpoints']);
+			$data = [
+				'isTarget' => false,
+				'who' => translate_inline('You'),
+				'name' => $hitpointstext,
+				'level' => $u['level'],
+				'hptext' => '`6'.($u['maxhitpoints']>0?$u['maxhitpoints']:translate_inline("`7DEFEATED`0")).'`0',
+				'showBar' => false
+			];
+
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+		break;
 	}
 }
 
