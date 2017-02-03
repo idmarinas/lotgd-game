@@ -1253,10 +1253,11 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 		$jsec = str_replace("-","",$jsec);
 		$jsec = str_replace(",","0",$jsec);
 		//debug($jsec);
-		rawoutput('<div class="ui action input">');
-		previewfield("insertcommentary", $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,$jsec,$session['user']['prefs']['ucol'],$focus);
+		// rawoutput('<div class="ui action input">');
+		previewfield('insertcommentary', $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,$jsec,$session['user']['prefs']['ucol'],$focus);
 		output_notl("<button type='submit' class='ui primary button'>$add</button>",true);
 		rawoutput('</div>');
+
 		rawoutput("<script type=\"text/javascript\">
 			var typetimelimit".$jsec." = 0;
 			var timebetween".$jsec." = 1500;
@@ -1300,7 +1301,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 		{
 			output("Server load is currently too high for auto-update chat.  This will hopefully balance out in a few minutes.`n");
 		}
-		rawoutput('<div class="ui action input">');
+		// rawoutput('<div class="ui action input">');
 		previewfield("insertcommentary", $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,false,$session['user']['prefs']['ucol']);
 		output_notl("<button type='submit' class='ui primary button'>$add</button>",true);
 		rawoutput('</div>');

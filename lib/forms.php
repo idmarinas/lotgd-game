@@ -1,29 +1,31 @@
 <?php
-function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=true, $info=false, $default=false, $jsec=false, $ucol=false, $focus=false) {
-	global $schema,$session,$output,$chatsonpage;
+function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=true, $info=false, $default=false, $jsec=false, $ucol=false, $focus=false)
+{
+	global $schema, $session, $output, $chatsonpage;
+
 	$talkline = translate_inline($talkline, $schema);
 	$youhave = translate_inline("You have ");
 	$charsleft = translate_inline(" characters left.");
 	$chatsonpage+=1;
-	
+
 	//figure out whether to handle absolute or relative time
 	if (!array_key_exists('commentary_autocomplete', $session['user']['prefs'])){
 		$session['user']['prefs']['commentary_autocomplete'] = 0;
 	}
-	
+
 	if ($session['user']['prefs']['commentary_autocomplete']){
 		$autocomplete = "";
 	} else {
 		$autocomplete = "autocomplete='off'";
 	}
-	
+
 	if (!$jsec){
 		$nid = $name.$chatsonpage;
 	} else {
 		$nid = $jsec;
 	}
 	//debug($nid);
-	
+
 	if ($ucol!==false){
 		$exclude = array("J");
 		$colors = getcolors($exclude);
@@ -31,7 +33,7 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	} else {
 		$usercol = "colLtCyan";
 	}
-	
+
 	if ($startdiv === false)
 		$startdiv = "";
 	rawoutput("<script language='JavaScript'>
@@ -193,7 +195,7 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	if ($charsleft == true) {
 		rawoutput("<span id='charsleft$nid'></span>");
 	}
-	rawoutput("<div id='previewtext$nid'></div>");
+	rawoutput("<div id='previewtext$nid'></div><div class='ui action input'>");
 	if (!is_array($info)) {
 		if ($default) {
 			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);' value='$default'>");
