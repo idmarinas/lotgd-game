@@ -2,9 +2,10 @@
 // addnews ready
 // translator ready
 // mail ready
-require_once("lib/villagenav.php");
+require_once 'lib/villagenav.php';
 
-function forest($noshowmessage=false) {
+function forest($noshowmessage=false)
+{
 	global $session,$playermount;
 	tlschema("forest");
 //	mass_module_prepare(array("forest", "validforestloc"));
