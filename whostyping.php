@@ -8,7 +8,7 @@ define("NO_SAVE_USER",true);
 
 //echo("Test!");
 
-require_once "common.php";
+require_once 'common.php';
 
 $now = time();
 $minute = round($now/60)*60;
@@ -76,7 +76,8 @@ while ($row = DB::fetch_assoc($result)){
 //DB::free_result($result);
 
 //display
-foreach($disp AS $name){
+foreach($disp AS $name)
+{
 	$encodedname = appoencode($name."`0 takes a breath...`n");
 	echo($encodedname);
 }
