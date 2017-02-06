@@ -166,7 +166,8 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select class='ui dropdown' name='$keyout'>";
 			foreach($skins as $skin)
 			{
-				$select .= "<option value='$skin' ".($skin == $row[$key]?'selected':null).">".htmlentities(ucfirst(substr($skin, 0, strpos($skin, ".htm"))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
+				$name = str_replace('-', ' ', ucfirst(substr($skin, 0, strpos($skin, ".htm"))));
+				$select .= "<option value='$skin' ".($skin == $row[$key]?'selected':null).">".htmlentities($name, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= '</select>';
 
