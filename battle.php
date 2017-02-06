@@ -517,7 +517,7 @@ if ($session['user']['hitpoints'] <= 0) {
 
 if ($victory || $defeat){
 	//Para informar del fin del combate
-	output("`n`n`2`bEnd of Battle:`0`b");
+	output("`2`bEnd of Battle:`0`b");
 	output_notl('`n');
 	// expire any buffs which cannot persist across fights
 	expire_buffs_afterbattle();
