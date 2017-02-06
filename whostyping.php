@@ -44,6 +44,7 @@ $updateplayer = $_REQUEST['updateplayer'];
 $name = addslashes($session['user']['name']);
 $now = time();
 
+if (! isset($session['iterations'])) $session['iterations'] = 0;
 $session['iterations'] += 1;
 
 $old = $now - 2;
@@ -59,7 +60,7 @@ if ($updateplayer){
 		$delsql = "DELETE FROM ".DB::prefix("whostyping")." WHERE time < $old";
 		DB::query($delsql);
 	}
-	invalidatedatacache("whostyping/whostyping_".$section);
+	invalidatedatacache("whostyping/whostyping_$section");
 }
 
 //retrieve, deleting as appropriate
