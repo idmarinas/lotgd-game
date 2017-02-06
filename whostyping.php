@@ -2,9 +2,9 @@
 
 global $session,$fiveminuteload;
 
-define("ALLOW_ANONYMOUS",true);
-define("OVERRIDE_FORCED_NAV",true);
-define("NO_SAVE_USER",true);
+define('ALLOW_ANONYMOUS', true);
+define('OVERRIDE_FORCED_NAV', true);
+define('NO_SAVE_USER', true);
 
 //echo("Test!");
 
