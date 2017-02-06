@@ -2,10 +2,14 @@
 // translator ready
 // addnews ready
 // mail ready
-function redirect($location,$reason=false){
-	global $session,$REQUEST_URI;
+function redirect($location,$reason=false)
+{
+	global $session, $REQUEST_URI;
+
 	// This function is deliberately not localized.  It is meant as error
 	// handling.
+	if (! isset($session['debug'])) $session['debug'] = '';
+
 	if (strpos($location,"badnav.php")===false) {
 		//deliberately html in translations so admins can personalize this, also in one schema
 		$session['allowednavs']=array();
