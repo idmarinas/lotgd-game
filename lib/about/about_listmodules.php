@@ -9,10 +9,9 @@ $mname = translate_inline("Module Name");
 $mver = translate_inline("Version");
 $mauth = translate_inline("Module Author");
 $mdown = translate_inline("Download Location");
-rawoutput("<table border='0' cellpadding='2' cellspacing='1' bgcolor='#999999'>",true);
-rawoutput("<tr class='trhead'><td>$mname</td><td>$mver</td><td>$mauth</td><td>$mdown</td></tr>",true);
+rawoutput("<table class='ui very compact striped table'>",true);
 if (DB::num_rows($result) == 0) {
-	rawoutput("<tr class='trlight'><td colspan='4' align='center'>");
+	rawoutput("<tr><td colspan='4' class='center aligned'>");
 	output("`i-- No modules installed --`i");
 	rawoutput("</td></tr>");
 }
@@ -21,20 +20,21 @@ $i=0;
 while ($row = DB::fetch_assoc($result)) {
 	$i++;
 	if ($cat != $row['category']) {
-		rawoutput("<tr class='trhead'><td colspan='4' align='left'>");
+		rawoutput("<thead><tr><th colspan='4'>");
 		output($row['category']);
-		rawoutput(":</td></tr>");
+		rawoutput(":</th></tr>");
 		$cat = $row['category'];
+		rawoutput("<tr><th>$mname</th><th>$mver</th><th>$mauth</th><th>$mdown</th></tr></thead>",true);
 	}
 
-	rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
-	rawoutput("<td valign='top'>");
+	rawoutput("<tr>");
+	rawoutput("<td>");
 	output_notl("`&%s`0", $row['formalname']);
-	rawoutput("<td valign='top'>",true);
+	rawoutput("<td>",true);
 	output_notl("`^%s`0", $row['version']);
-	rawoutput("</td><td valign='top'>");
+	rawoutput("</td><td>");
 	output_notl("`^%s`0", $row['moduleauthor'], true);
-	rawoutput("</td><td nowrap valign='top'>");
+	rawoutput("</td><td nowrap>");
 	if ($row['download'] == "core_module") {
 		rawoutput("<a href='http://dragonprime.net/index.php?op=download;id=8' target='_blank'>");
 		output("Core Distribution");
