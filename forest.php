@@ -167,23 +167,25 @@ if ($op=="search"){
 			}
 			$result = DB::query($sql);
 			restore_buff_fields();
-			if (DB::num_rows($result) == 0) {
+			if (DB::num_rows($result) == 0)
+			{
 				// There is nothing in the database to challenge you, let's
 				// give you a doppleganger.
 				$badguy = [];
-				$badguy['creaturename']=
-					"An evil doppleganger of ".$session['user']['name'];
-				$badguy['creatureweapon']=$session['user']['weapon'];
-				$badguy['creaturelevel']=$session['user']['level'];
-				$badguy['creaturegold']=0;
-				$badguy['creatureexp'] =
-				round($session['user']['experience']/10, 0);
-				$badguy['creaturehealth']=$session['user']['maxhitpoints'];
-				$badguy['creatureattack']=$session['user']['attack'];
-				$badguy['creaturedefense']=$session['user']['defense'];
+				$badguy['creaturename'] = "An evil doppleganger of ".$session['user']['name'];
+				$badguy['creatureweapon'] = $session['user']['weapon'];
+				$badguy['creaturelevel'] = $session['user']['level'];
+				$badguy['creaturegold'] = 0;
+				$badguy['creatureexp'] = round($session['user']['experience']/10, 0);
+				$badguy['creaturehealth'] = $session['user']['maxhitpoints'];
+				$badguy['creatureattack'] = $session['user']['attack'];
+				$badguy['creaturedefense'] = $session['user']['defense'];
 				$stack[] = $badguy;
-			} else {
+			}
+			else
+			{
 				require_once 'lib/forestoutcomes.php';
+
 				if ($packofmonsters == true) {
 					$initialbadguy = DB::fetch_assoc($result);
 					$prefixs = array("Elite","Dangerous","Lethal","Savage","Deadly","Malevolent","Malignant");
