@@ -3,7 +3,8 @@
 // addnews ready
 // mail ready
 
-function translator_setup(){
+function translator_setup()
+{
 	//Determine what language to use
 	if (defined("TRANSLATOR_IS_SET_UP")) return;
 	define("TRANSLATOR_IS_SET_UP",true);
@@ -22,7 +23,7 @@ function translator_setup(){
 	define("LANGUAGE",preg_replace("/[^a-z]/i","",$language));
 }
 
-$translation_table = array();
+$translation_table = [];
 function translate($indata,$namespace=FALSE){
 	if (getsetting("enabletranslation", true) == false) return $indata;
 	global $session,$translation_table,$translation_namespace;
@@ -43,7 +44,7 @@ function translate($indata,$namespace=FALSE){
 
 	if (is_array($indata)){
 		//recursive translation on arrays.
-		$outdata = array();
+		$outdata = [];
 		foreach ($indata as $key=>$val) {
 			$outdata[$key] = translate($val,$namespace);
 		}
@@ -123,7 +124,7 @@ function translate_inline($in,$namespace=FALSE){
 function translate_mail($in,$to=0){
 	global $session;
 	tlschema("mail"); // should be same schema like systemmails!
-	if (!is_array($in)) $in=array($in);
+	if (!is_array($in)) $in = [$in];
 	//this is done by sprintf_translate.
 	//$in[0] = str_replace("`%","`%%",$in[0]);
 	if ($to>0){
@@ -169,15 +170,15 @@ function translate_loadnamespace($namespace,$language=false){
 		$result = DB::query_cached($sql,"translations-".$namespace."-".$language,600);
 		//store it for 10 Minutes, normally you don't need to refresh this often
 	}
-	$out = array();
+	$out = [];
 	while ($row = DB::fetch_assoc($result)){
 		$out[$row['intext']] = $row['outtext'];
 	}
 	return $out;
 }
 
-$translatorbuttons = array();
-$seentlbuttons = array();
+$translatorbuttons = [];
+$seentlbuttons = [];
 function tlbutton_push($indata,$hot=false,$namespace=FALSE){
 	global $translatorbuttons;
 	global $translation_is_enabled,$seentlbuttons,$session,$language;
@@ -221,7 +222,7 @@ function tlbutton_clear(){
 	global $translatorbuttons,$session;
 	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR){
 		$return = tlbutton_pop().join("",$translatorbuttons);
-		$translatorbuttons = array();
+		$translatorbuttons = [];
 		return $return;
 	}else{
 		return;
@@ -235,7 +236,7 @@ function enable_translation($enable=true){
 }
 
 $translation_namespace = "";
-$translation_namespace_stack = array();
+$translation_namespace_stack = [];
 function tlschema($schema=false){
 	global $translation_namespace,$translation_namespace_stack,$REQUEST_URI;
 	if ($schema===false){
