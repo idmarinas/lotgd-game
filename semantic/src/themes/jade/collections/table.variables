@@ -160,8 +160,8 @@
 ;
 
 /* Striped */
-@stripedBackground: rgba(0, 0, 50, 0.10);
-@invertedStripedBackground: rgba(255, 255, 255, 0.12);
+@stripedBackground: rgba(0, 0, 50, 0.15);
+@invertedStripedBackground: rgba(255, 255, 255, 0.17);
 
 /* Selectable */
 @selectableBackground: inherit;
