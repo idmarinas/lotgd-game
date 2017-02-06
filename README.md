@@ -20,9 +20,8 @@ Se debe tener en cuenta que muchos de los módulos usados se pueden descargar de
 
 ## Dependencias y requisitos LOTGD - IDMarinas Edition ##
 * PHP >= 5.6
-* Utiliza componentes de:
-	* [Semantic UI Framework](http://semantic-ui.com/)
-	* [Zend Framework](https://zendframework.github.io)
+* [Zend Framework](https://zendframework.github.io)
+* [Semantic UI Framework](http://semantic-ui.com/)
 * Sistema de plantillas de [Twig](http://twig.sensiolabs.org)
 
 ## Cambios importantes ##
