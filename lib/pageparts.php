@@ -650,7 +650,8 @@ function charstats()
 		{
             //-- HitPoints are calculated in base to attributes
 			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1)." `\$<span title='".explained_get_player_hitpoints()."'>(?)</span>`0");
-			if (is_module_active('staminasystem')) addcharstat("Stamina", "");
+			if (is_module_active('staminasystem')) addcharstat('Stamina', '');
+			else addcharstat("Turns", $u['turns'].check_temp_stat("turns",1));
 			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
 			addcharstat("Attack", $atk." `\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
