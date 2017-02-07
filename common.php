@@ -41,6 +41,19 @@ $logd_version = '2.0.0 IDMarinas Edition';
 // Decline static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) return false;
 
+
+session_start();
+
+$session =& $_SESSION['session'];
+
+if (! isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
+if (! isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
+if (! isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
+if (! isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
+if (! isset($session['counter'])) $session['counter'] = 0;
+
+$session['counter']++;
+
 require_once 'vendor/autoload.php';//-- Autoload class for new options of game
 // Include some commonly needed and useful routines
 require_once 'lib/cache.php';
@@ -85,18 +98,6 @@ require_once 'lib/mounts.php';
 require_once 'lib/debuglog.php';
 require_once 'lib/forcednavigation.php';
 require_once 'lib/php_generic_environment.php';
-
-session_start();
-
-$session =& $_SESSION['session'];
-
-if (! isset($session['user']['gentime'])) $session['user']['gentime'] = 0;
-if (! isset($session['user']['gentimecount'])) $session['user']['gentimecount'] = 0;
-if (! isset($session['user']['gensize'])) $session['user']['gensize'] = 0;
-if (! isset($session['user']['acctid'])) $session['user']['acctid'] = 0;
-if (! isset($session['counter'])) $session['counter'] = 0;
-
-$session['counter']++;
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
@@ -185,17 +186,17 @@ if ($logd_version == getsetting('installer_version', '-1')) define('IS_INSTALLER
 
 //Generate our settings object
 $settings = new settings('settings');
-
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds") > $session['lasthit'] && $session['lasthit']>0 && $session['loggedin'])
 {
 	// force the abandoning of the session when the user should have been
 	// sent to the fields.
-	$session=[];
+	$session = [];
 	// technically we should be able to translate this, but for now,
 	// ignore it.
 	// 1.1.1 now should be a good time to get it on with it, added tl-inline
 	translator_setup();
-	$session['message'].=translate_inline("`nYour session has expired!`n","common");
+	if (! isset($session['message'])) $session['message'] = '';
+	$session['message'] .= translate_inline("`nYour session has expired!`n","common");
 }
 $session['lasthit'] = strtotime('now');
 
