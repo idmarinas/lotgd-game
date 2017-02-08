@@ -7,7 +7,7 @@
 --------------------*/
 
 @zIndex: 1900;
-@background: @white;
+@background: @pageBackground;
 
 @maxWidth: 250px;
 @borderColor: @solidBorderColor;
@@ -43,7 +43,7 @@
 @border: @borderWidth solid @borderColor;
 
 /* Arrow */
-@arrowBackground: @white;
+@arrowBackground: @pageBackground;
 @arrowZIndex: 2;
 @arrowJitter: 0.05em;
 @arrowOffset: -(@arrowSize / 2) + @arrowJitter;
