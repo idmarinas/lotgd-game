@@ -106,7 +106,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		$popupMenu .= '<div class="ui four column relaxed equal height divided grid">';
 		foreach($tabMenu as $menu)
 		{
-			$popupMenu .= '<div class="column"><div class="ui link list">';
+			$popupMenu .= '<div class="column"><div class="ui list">';
 			$popupMenu .= implode('', $menu);
 			$popupMenu .= '</div></div>';
 		}
@@ -172,6 +172,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select .= '</select>';
 
 			return $select;
+
 			break;
 		case "location":
 			// A generic way of allowing the location to be specified for
@@ -242,7 +243,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
 			return $select;
 
-		break;
+			break;
 		case "dayrange":
 			$start = strtotime(date("Y-m-d", strtotime("now")));
 			$end = strtotime($info[2]);
