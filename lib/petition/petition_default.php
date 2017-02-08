@@ -2,7 +2,8 @@
 tlschema("petition");
 popup_header("Petition for Help");
 $post = httpallpost();
-if (count($post)>0){
+if (count($post)>0)
+{
 	$ip = explode(".",$_SERVER['REMOTE_ADDR']);
 	array_pop($ip);
 	$ip = join($ip,".").".";
@@ -26,7 +27,7 @@ if (count($post)>0){
 			// If the admin wants it, email the petitions to them.
 			if (getsetting("emailpetitions", 0)) {
 				// Yeah, the format of this is ugly.
-				require_once("lib/sanitize.php");
+				require_once 'lib/sanitize.php';
 				$name = color_sanitize($session['user']['name']);
 				$url = getsetting("serverurl",
 					"http://".$_SERVER['SERVER_NAME'] .
@@ -63,47 +64,65 @@ if (count($post)>0){
 		output("`\$`bError:`b There have already been %s petitions filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.",$row['c']);
 		output("If you have multiple issues to bring up with the staff of this server, you might think about consolidating those issues to reduce the overall number of petitions you file.");
 	}
-}else{
+}
+else
+{
 	output("`c`b`\$Before sending a petition, please make sure you have read the motd.`n");
 	output("Petitions about problems we already know about just take up time we could be using to fix those problems.`b`c`n");
-	rawoutput("<form action='petition.php?op=submit' method='POST'>");
-	if ($session['user']['loggedin']) {
-		output("Your Character's Name: ");
+	rawoutput("<form action='petition.php?op=submit' method='POST' class='ui form'>");
+	if ($session['user']['loggedin'])
+	{
+		rawoutput('<div class="inline field"><label>');
+		output("Your Character's Name:");
 		output_notl("%s", $session['user']['name']);
-		rawoutput("<input type='hidden' name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+		rawoutput("</label><input type='hidden' name='charname' value=\"".htmlentities($session['user']['name'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+		rawoutput('</div><div class="inline field"><label>');
 		output("`nYour email address: ");
 		output_notl("%s", htmlentities($session['user']['emailaddress']));
-		rawoutput("<input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
-	} else {
+		rawoutput("</label><input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+		rawoutput('</div>');
+	}
+	else
+	{
+		rawoutput('<div class="inline field"><label>');
 		output("Your Character's Name: ");
-		rawoutput("<input name='charname' value='' size='46'>");
+		rawoutput("</label><input name='charname' value=''>");
+		rawoutput('</div><div class="inline field"><label>');
 		output("`nYour email address: ");
-		rawoutput("<input name='email' value='' size='50'>");
+		rawoutput("</label><input name='email' value=''>");
 		$nolog = translate_inline("Character is not logged in!!");
 		rawoutput("<input name='unverified' type='hidden' value='$nolog'>");
+		rawoutput('</div>');
 	}
+	rawoutput('<div class="inline field"><label>');
 	output("`nType of your Problem / Enquiry: ");
-	rawoutput("<select name='problem_type'>");
+	rawoutput("</label><select class='ui dropdown' name='problem_type'>");
 	$types=getsetting('petition_types','General');
 	$types=explode(",",$types);
-	foreach ($types as $type) {
+	foreach ($types as $type)
+	{
 		$type=htmlentities($type,ENT_COMPAT, getsetting("charset", "UTF-8"));
 		rawoutput("<option value='".$type."'>$type</option>");
 
 	}
-	rawoutput("</select><br/>");
-	output("`nDescription of the problem:`n");
+	rawoutput("</select></div><div class='inline field'><label>");
+	output("Description of the problem:");
+	rawoutput('</label>');
 	$abuse = httpget("abuse");
-	if ($abuse == "yes") {
-		rawoutput("<textarea name='description' cols='55' rows='7' class='input'></textarea>");
+	if ($abuse == "yes")
+	{
+		rawoutput("<textarea name='description'></textarea>");
 		rawoutput("<input type='hidden' name='abuse' value=\"".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."\"><br><hr><pre>".stripslashes(htmlentities(httpget("problem")))."</pre><hr><br>");
 		rawoutput("<input type='hidden' name='abuseplayer' value=\"".httpget('abuseplayer')."\">");
-	} else {
-		rawoutput("<textarea name='description' cols='55' rows='7' class='input'>".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."</textarea>");
 	}
-	modulehook("petitionform",array());
+	else
+	{
+		rawoutput("<textarea name='description'>".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."</textarea>");
+	}
+	rawoutput('</div>');
+	modulehook("petitionform", []);
 	$submit = translate_inline("Submit");
-	rawoutput("<br/><input type='submit' class='button' value='$submit'><br/>");
+	rawoutput("<p><input type='submit' class='ui primary button' value='$submit'></p>");
 	output("Please be as descriptive as possible in your petition.");
 	output("If you have questions about how the game works, please check out the <a href='petition.php?op=faq'>FAQ</a>.", true);
 	output("Petitions about game mechanics will more than likely not be answered unless they have something to do with a bug.");
