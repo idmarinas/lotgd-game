@@ -137,7 +137,7 @@ if ($dp < $dkills) {
 		$stamina = get_stamina(3);
 		$canGetInterest = ($stamina <= 40);
 	}
-	else $canGetInterest = ($session['user']['turns'] > getsetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0)
+	else $canGetInterest = ($session['user']['turns'] > getsetting('fightsforinterest', 4) && $session['user']['goldinbank'] >= 0);
 
 	if ($canGetInterest)
 	{
