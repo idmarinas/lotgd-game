@@ -117,8 +117,8 @@ $race = translate_inline("Race");
 $sex = translate_inline("Sex");
 $last = translate_inline("Last On");
 
-rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>",true);
-rawoutput("<tr class='trhead'><td>$alive</td><td>$level</td><td>$name</td><td>$loc</td><td>$race</td><td>$sex</td><td>$last</tr>");
+rawoutput("<table class='ui very compact striped selectable table'>",true);
+rawoutput("<thead><tr><th>$alive</th><th>$level</th><th>$name</th><th>$loc</th><th>$race</th><th>$sex</th><th>$last</tr></thead>");
 $writemail = translate_inline("Write Mail");
 $alive = translate_inline("`1Yes`0");
 $dead = translate_inline("`4No`0");
@@ -126,7 +126,7 @@ $unconscious = translate_inline("`6Unconscious`0");
 for($i=0; $i<$max; $i++)
 {
 	$row = DB::fetch_assoc($result);
-	rawoutput("<tr class='".($i%2?"trdark":"trlight")."'><td>",true);
+	rawoutput("<tr><td>",true);
 	if ($row['alive'] == true) {
 		$a = $alive;
 	} else if ($row['hitpoints'] > 0) {
@@ -134,7 +134,7 @@ for($i=0; $i<$max; $i++)
 	} else {
 		$a = $dead;
 	}
-	//$a = translate_inline($row['alive']?"`1Yes`0":"`4No`0");
+
 	output_notl("%s", $a);
 	rawoutput("</td><td>");
 	output_notl("`^%s`0", $row['level']);
