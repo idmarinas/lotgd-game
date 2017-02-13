@@ -19,8 +19,8 @@ if ($display == 1){
 	$conf = translate_inline("Are you sure you wish to delete this user?");
 	$ban = translate_inline("Ban");
 	$log = translate_inline("Log");
-		rawoutput("<table>");
-	rawoutput("<tr class='trhead'><td>$ops</td><td><a href='user.php?sort=acctid$q'>$acid</a></td><td><a href='user.php?sort=login$q'>$login</a></td><td><a href='user.php?sort=name$q'>$nm</a></td><td><a href='user.php?sort=level$q'>$lev</a></td><td><a href='user.php?sort=laston$q'>$lon</a></td><td><a href='user.php?sort=gentimecount$q'>$hits</a></td><td><a href='user.php?sort=lastip$q'>$lip</a></td><td><a href='user.php?sort=uniqueid$q'>$lid</a></td><td><a href='user.php?sort=emailaddress$q'>$email</a></td></tr>");
+		rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$ops</th><th><a href='user.php?sort=acctid$q'>$acid</a></th><th><a href='user.php?sort=login$q'>$login</a></th><th><a href='user.php?sort=name$q'>$nm</a></th><th><a href='user.php?sort=level$q'>$lev</a></th><th><a href='user.php?sort=laston$q'>$lon</a></th><th><a href='user.php?sort=gentimecount$q'>$hits</a></th><th><a href='user.php?sort=lastip$q'>$lip</a></th><th><a href='user.php?sort=uniqueid$q'>$lid</a></th><th><a href='user.php?sort=emailaddress$q'>$email</a></th></tr></thead>");
 	addnav("","user.php?sort=acctid$q");
 	addnav("","user.php?sort=login$q");
 	addnav("","user.php?sort=name$q");
@@ -41,7 +41,7 @@ if ($display == 1){
 		$row['laston']=$laston;
 		if ($row[$order]!=$oorder) $rn++;
 		$oorder = $row[$order];
-		rawoutput("<tr class='".($rn%2?"trlight":"trdark")."'>");
+		rawoutput("<tr>");
 		rawoutput("<td nowrap>");
 		rawoutput("[ <a href='user.php?op=edit&userid={$row['acctid']}$m'>$ed</a> | <a href='user.php?op=del&userid={$row['acctid']}' onClick=\"return confirm('$conf');\">$del</a> | <a href='bans.php?op=setupban&userid={$row['acctid']}'>$ban</a> | <a href='user.php?op=debuglog&userid={$row['acctid']}'>$log</a> ]");
 		addnav("","user.php?op=edit&userid={$row['acctid']}$m");
