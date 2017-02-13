@@ -2,9 +2,9 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/commentary.php");
-require_once("lib/datetime.php");
+require_once 'common.php';
+require_once 'lib/commentary.php';
+require_once 'lib/datetime.php';
 
 
 tlschema("account");
@@ -15,12 +15,12 @@ checkday();
 
 output("`\$Some stats concerning your account. Note that this in the timezone of the server.`0`n`n");
 addnav("Navigation");
-require_once("lib/villagenav.php");
+require_once 'lib/villagenav.php';
 villagenav();
 addnav("Actions");
 addnav("Refresh","account.php");
 
-$user=$session['user'];
+$user = $session['user'];
 
 //pre-fill
 $stats = [];
