@@ -26,7 +26,7 @@
 @textTransition: none;
 
 /* Menu */
-@menuBackground: #FFFFFF;
+@menuBackground: @inputBackground;
 @menuMargin: 0em;
 @menuPadding: 0em 0em;
 @menuTop: 100%;
@@ -297,8 +297,8 @@
 @activeItemColor: @selectedTextColor;
 
 /* Selected */
-@selectedBackground: @subtleTransparentBlack;
-@selectedColor: @selectedTextColor;
+@selectedBackground: @veryStrongTransparentBlack;
+@selectedColor: @invertedUnselectedTextColor;
 
 /* Error */
 @errorLabelBackground: #EACBCB;
