@@ -150,8 +150,15 @@ function tl($in){
 	return tlbutton_clear().$out;
 }
 
-function translate_loadnamespace($namespace,$language=false){
-	if ($language===false) $language = LANGUAGE;
+function translate_loadnamespace($namespace, $language = false)
+{
+	if ($language === false)
+	{
+		translator_setup();
+
+		$language = LANGUAGE;
+	}
+
 	$page = translator_page($namespace);
 	$uri = translator_uri($namespace);
 	if ($page==$uri)
