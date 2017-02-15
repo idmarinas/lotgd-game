@@ -176,50 +176,7 @@ function forestdefeat($enemies,$where="in the forest"){
 	page_footer();
 }
 
-// function buffbadguy($badguy){
-// 	global $session;
-// 	static $dk = false;	// This will save us a lot of trouble when going through
-// 						// this function more than once...
-// 	if ($dk === false) {
-// 		//make badguys get harder as you advance in dragon kills.
-// 		$dk = get_player_dragonkillmod(true);
-// 		// How many of the dk points should actually be used.
-// 		// We want to add .05 for every 100 dragonkills.
-// 		// make it 0.1 +nb
-// 		$add = ($session['user']['dragonkills']/100)*.10;
-// 		$dk = round($dk * (.25 + $add));
-// 	}
-//
-// 	$expflux = round($badguy['creatureexp']/10,0);
-// 	$expflux = e_rand(-$expflux,$expflux);
-// 	$badguy['creatureexp']+=$expflux;
-//
-// 	$atkflux = e_rand(0, $dk);
-// 	$defflux = e_rand(0, ($dk-$atkflux));
-//
-// 	$hpflux = ($dk - ($atkflux+$defflux)) * 5;
-// 	$badguy['creatureattack']+=$atkflux;
-// 	$badguy['creaturedefense']+=$defflux;
-// 	$badguy['creaturehealth']+=$hpflux;
-//
-// 	if (getsetting("disablebonuses", 1)) {
-// 		//adapting flux as for people with many DKs they will just bathe in gold....
-// 		$base = 30 - min(20,round(sqrt($session['user']['dragonkills'])/2));
-// 		$base /=1000;
-// 		$bonus = 1 + $base*($atkflux+$defflux) + .001*$hpflux;
-// 		$badguy['creaturegold'] = round($badguy['creaturegold']*$bonus, 0);
-// 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
-// 	}
-//
-// 	$badguy = modulehook("creatureencounter",$badguy);
-// 	debug("DEBUG: $dk modification points total.");
-// 	debug("DEBUG: +$atkflux allocated to attack.");
-// 	debug("DEBUG: +$defflux allocated to defense.");
-// 	debug("DEBUG: +".($hpflux/5)."*5 to hitpoints.");
-// 	return modulehook("buffbadguy",$badguy);
-// }
-
-//-- Se reemplaza para reflejar los cambios en los calculos de ataque, defensa y salud
+//-- Remplace for changes ins attk, def and health
 function buffbadguy($badguy)
 {
 	global $session;
