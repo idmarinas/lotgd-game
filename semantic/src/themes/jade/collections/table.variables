@@ -244,3 +244,30 @@
 @small: 0.9em;
 @medium: 1em;
 @large: 1.1em;
+
+
+/* View petition status */
+
+@viePetitionAwaitingPointsBackground: @lightPink;
+@viewPetitionAwaitingPointserrorColor: @pink;
+
+@viePetitionBugBackground: @lightViolet;
+@viewPetitionBugerrorColor: @violet;
+
+@viePetitionTopLevelBackground: @lightRed;
+@viewPetitionTopLevelerrorColor: @red;
+
+@viePetitionScalatedBackground: @lightOrange;
+@viewPetitionScalatederrorColor: @orange;
+
+@viePetitionInformationalBackground: @lightBlue;
+@viewPetitionInformationalerrorColor: @blue;
+
+@viePetitionClosedBackground: @lightOlive;
+@viewPetitionClosederrorColor: @olive;
+
+@viePetitionInProgressBackground: @lightYellow;
+@viewPetitionInProgresserrorColor: @yellow;
+
+@viePetitionUnhandledBackground: @lightGrey;
+@viewPetitionUnhandlederrorColor: @grey;
