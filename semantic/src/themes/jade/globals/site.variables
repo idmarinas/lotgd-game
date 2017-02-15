@@ -191,34 +191,34 @@
 --------------------*/
 
 /*---  Colors  ---*/
-@red              : #DB2828;
-@orange           : #F2711C;
-@yellow           : #FBBD08;
-@olive            : #B5CC18;
-@green            : #21BA45;
-@teal             : #00B5AD;
-@blue             : #2185D0;
-@violet           : #6435C9;
-@purple           : #A333C8;
-@pink             : #E03997;
-@brown            : #A5673F;
-@grey             : #767676;
-@black            : #1B1C1D;
+@red              : saturate(darken(#DB2828, 5), 10, relative);
+@orange           : saturate(darken(#F2711C, 5), 10, relative);
+@yellow           : saturate(darken(#FBBD08, 5), 10, relative);
+@olive            : saturate(darken(#B5CC18, 5), 10, relative);
+@green            : saturate(darken(#21BA45, 5), 10, relative);
+@teal             : saturate(darken(#00B5AD, 5), 10, relative);
+@blue             : saturate(darken(#2185D0, 5), 10, relative);
+@violet           : saturate(darken(#6435C9, 5), 10, relative);
+@purple           : saturate(darken(#A333C8, 5), 10, relative);
+@pink             : saturate(darken(#E03997, 5), 10, relative);
+@brown            : saturate(darken(#A5673F, 5), 10, relative);
+@grey             : saturate(darken(#767676, 5), 10, relative);
+@black            : saturate(darken(#1B1C1D, 5), 10, relative);
 
 /*---  Light Colors  ---*/
-@lightRed         : #FF695E;
-@lightOrange      : #FF851B;
-@lightYellow      : #FFE21F;
-@lightOlive       : #D9E778;
-@lightGreen       : #2ECC40;
-@lightTeal        : #6DFFFF;
-@lightBlue        : #54C8FF;
-@lightViolet      : #A291FB;
-@lightPurple      : #DC73FF;
-@lightPink        : #FF8EDF;
-@lightBrown       : #D67C1C;
-@lightGrey        : #DCDDDE;
-@lightBlack       : #545454;
+@lightRed         : saturate(darken(#FF695E, 5), 10, relative);
+@lightOrange      : saturate(darken(#FF851B, 5), 10, relative);
+@lightYellow      : saturate(darken(#FFE21F, 5), 10, relative);
+@lightOlive       : saturate(darken(#D9E778, 5), 10, relative);
+@lightGreen       : saturate(darken(#2ECC40, 5), 10, relative);
+@lightTeal        : saturate(darken(#6DFFFF, 5), 10, relative);
+@lightBlue        : saturate(darken(#54C8FF, 5), 10, relative);
+@lightViolet      : saturate(darken(#A291FB, 5), 10, relative);
+@lightPurple      : saturate(darken(#DC73FF, 5), 10, relative);
+@lightPink        : saturate(darken(#FF8EDF, 5), 10, relative);
+@lightBrown       : saturate(darken(#D67C1C, 5), 10, relative);
+@lightGrey        : saturate(darken(#DCDDDE, 5), 10, relative);
+@lightBlack       : saturate(darken(#545454, 5), 10, relative);
 
 /*---   Neutrals  ---*/
 @fullBlack        : #000000;
