@@ -3,9 +3,9 @@
 // addnews ready
 // mail ready
 
-require_once("common.php");
-require_once("lib/commentary.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/commentary.php';
+require_once 'lib/http.php';
 
 tlschema("petition");
 
@@ -13,23 +13,23 @@ check_su_access(SU_EDIT_PETITIONS);
 
 addcommentary();
 
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 //WHEN 0 THEN 2 WHEN 1 THEN 3 WHEN 2 THEN 7 WHEN 3 THEN 5 WHEN 4 THEN 1 WHEN 5 THEN 0 WHEN 6 THEN 4 WHEN 7 THEN 6
-$statuses=array(
-	5=>"`\$Top Level`0",
-	4=>"`^Escalated`0",
-	0=>"`bUnhandled`b",
-	1=>"In-Progress",
-	6=>"`%Bug`0",
-	7=>"`#Awaiting Points`0",
-	3=>"`!Informational`0",
-	2=>"`iClosed`i",
-	);
+$statuses = [
+	5 => '`$Top Level`0',
+	4 => '`^Escalated`0',
+	0 => '`bUnhandled`b',
+	1 => 'In-Progress',
+	6 => '`%Bug`0',
+	7 => '`#Awaiting Points`0',
+	3 => '`!Informational`0',
+	2 => '`iClosed`i',
+];
 
 $statuses = modulehook("petition-status", $statuses);
-$statuses=translate_inline($statuses);
+$statuses = translate_inline($statuses);
 
 $op = httpget("op");
 $id = httpget("id");
@@ -144,10 +144,10 @@ if ($op==""){
 	$close = translate_inline("Close");
 	$mark = translate_inline("Mark");
 
-	rawoutput("<table border='0'><tr class='trhead'><td>$num</td><td>$ops</td><td>$from</td><td>$sent</td><td>$com</td><td>$last</td><td>$when</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$num</th><th>$ops</th><th>$from</th><th>$sent</th><th>$com</th><th>$last</th><th>$when</th></tr></thead>");
 	$i=0;
-	$laststatus=-1;
-	$catcount=array();
+	$laststatus = -1;
+	$catcount = [];
 	while($row = DB::fetch_assoc($result)){
 		if (isset($catcount[$row['status']])) $catcount[$row['status']]++;
 			else $catcount[$row['status']]=1;
@@ -155,31 +155,33 @@ if ($op==""){
 		$sql = "SELECT count(commentid) AS c FROM ". DB::prefix("commentary") .  " WHERE section='pet-{$row['petitionid']}'";
 		$res = DB::query($sql);
 		$counter = DB::fetch_assoc($res);
+
 		if (array_key_exists('status', $row) && $row['status']!=$laststatus){
 
-			rawoutput("<tr class='".($i?"trlight":"trdark")."'>");
-			rawoutput("<td colspan='7' style='background-color:#FAA000'>");
-			output_notl("%s", $statuses[$row['status']],true);
+			rawoutput("<tr'>");
+			rawoutput("<td colspan='7' class='".strtolower(color_sanitize($statuses[$row['status']]))."'>");
+			output_notl("%s", color_sanitize($statuses[$row['status']]), true);
 			rawoutput("</td></tr>");
 			$i=1;
 			$laststatus=$row['status'];
 		}
-		rawoutput("<tr class='".($i?"trlight":"trdark")."'>");
-		rawoutput("<td>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>");
 		output_notl("%s", $row['petitionid']);
 		rawoutput("</td>");
-		rawoutput("<td nowrap>[ ");
-		rawoutput("<a href='viewpetition.php?op=view&id={$row['petitionid']}'>$view</a>",true);
-		rawoutput(" | <a href='viewpetition.php?setstat=2&id={$row['petitionid']}'>$close</a>");
+		rawoutput("<td class='collapsing'>[ ");
+		rawoutput("<a data-tooltip='$view' href='viewpetition.php?op=view&id={$row['petitionid']}'><i class='unhide icon'></i></a>",true);
+		rawoutput(" | <a data-tooltip='$close' href='viewpetition.php?setstat=2&id={$row['petitionid']}'><i class='green remove icon'></i></a>");
 		output_notl(" | %s: ", $mark);
-		output_notl("<a href='viewpetition.php?setstat=0&id={$row['petitionid']}'>`b`&U`0`b</a>/",true);
-		output_notl("<a href='viewpetition.php?setstat=1&id={$row['petitionid']}'>`7P`0</a>/",true);
-		//output_notl("<a href='viewpetition.php?setstat=3&id={$row['petitionid']}'>`!I`0</a>/",true);
-		output_notl("<a href='viewpetition.php?setstat=4&id={$row['petitionid']}'>`^E`0</a>",true);
-		//output_notl("<a href='viewpetition.php?setstat=5&id={$row['petitionid']}'>`\$T`0</a>/",true);
-		//output_notl("<a href='viewpetition.php?setstat=6&id={$row['petitionid']}'>`%B`0</a>/",true);
-		//output_notl("<a href='viewpetition.php?setstat=7&id={$row['petitionid']}'>`#A`0</a>",true);
+		output_notl("<a data-tooltip='".color_sanitize($statuses[0])."' href='viewpetition.php?setstat=0&id={$row['petitionid']}'>`b`&U`0`b</a>/",true);
+		output_notl("<a data-tooltip='".color_sanitize($statuses[1])."' href='viewpetition.php?setstat=1&id={$row['petitionid']}'>`7P`0</a>/",true);
+		//output_notl("<a data-tooltip='".color_sanitize($statuses[3])."' href='viewpetition.php?setstat=3&id={$row['petitionid']}'>`!I`0</a>/",true);
+		output_notl("<a data-tooltip='".color_sanitize($statuses[4])."' href='viewpetition.php?setstat=4&id={$row['petitionid']}'>`^E`0</a>",true);
+		//output_notl("<a data-tooltip='".color_sanitize($statuses[5])."' href='viewpetition.php?setstat=5&id={$row['petitionid']}'>`\$T`0</a>/",true);
+		//output_notl("<a data-tooltip='".color_sanitize($statuses[6])."' href='viewpetition.php?setstat=6&id={$row['petitionid']}'>`%B`0</a>/",true);
+		//output_notl("<a data-tooltip='".color_sanitize($statuses[7])."' href='viewpetition.php?setstat=7&id={$row['petitionid']}'>`#A`0</a>",true);
 		rawoutput(" ]</td>");
+
 		addnav("","viewpetition.php?op=view&id={$row['petitionid']}");
 		addnav("","viewpetition.php?setstat=2&id={$row['petitionid']}");
 		addnav("","viewpetition.php?setstat=0&id={$row['petitionid']}");
@@ -217,7 +219,7 @@ if ($op==""){
 	}
 	rawoutput("</table>");
 	//navlist with counter
-	if ($catcount!=array()) addnav("Overview");
+	if ($catcount!=[]) addnav("Overview");
 	foreach ($catcount as $categorynumber=>$amount) {
 		addnav(array("`t%s`t(%s)",$statuses[$categorynumber],$amount),"viewpetition.php?page=".((int)httpget('page')));
 	}
@@ -242,7 +244,7 @@ if ($op==""){
 	output("`!I = Informational`0 petitions are just around for others to view, either nothing needed to be done with them, or their issue has been dealt with, but you feel other admins could benefit from reading it.");
 	rawoutput("</li><li>");
 	output("`iClosed`i petitions are for you have dealt with an issue, these will auto delete when they have been closed for 7 days.");
-	modulehook("petitions-descriptions", array());
+	modulehook("petitions-descriptions", []);
 	rawoutput("</li></ul>");
 }elseif($op=="view"){
 	addnav("Petitions");
