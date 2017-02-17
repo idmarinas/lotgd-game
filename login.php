@@ -3,11 +3,11 @@
 // addnews ready
 // translator ready
 define("ALLOW_ANONYMOUS",true);
-require_once("common.php");
-require_once("lib/systemmail.php");
-require_once("lib/checkban.php");
-require_once("lib/http.php");
-require_once("lib/serverfunctions.class.php");
+require_once 'common.php';
+require_once 'lib/systemmail.php';
+require_once 'lib/checkban.php';
+require_once 'lib/http.php';
+require_once 'lib/serverfunctions.class.php';
 
 tlschema("login");
 translator_setup();
@@ -50,15 +50,16 @@ if ($name!=""){
 			// this hook should automatically call page_footer and exit
 			// itself.
 			modulehook("check-login");
-			if (ServerFunctions::isTheServerFull()==true && httppost('force')!=1) {
+			if (ServerFunctions::isTheServerFull() == true && httppost('force') != 1)
+			{
 				//sanity check if the server is / got full --> back to home
-				$session['message']=translate_inline("`4Sorry, server full!");
-				$session['user']=array();
-				redirect("home.php");
+				$session['message'] = translate_inline("`4Sorry, server full!");
+				$session['user'] = [];
+				redirect('home.php');
 			}
 
 			if ($session['user']['emailvalidation']!="" && substr($session['user']['emailvalidation'],0,1)!="x"){
-				$session['user']=array();
+				$session['user'] = [];
 				$session['message']=translate_inline("`4Error, you must validate your email address before you can log in.");
 				echo appoencode($session['message']);
 				exit();
@@ -70,8 +71,8 @@ if ($name!=""){
 				$session['user']['prefs']=unserialize($session['user']['prefs']);
 				$session['bufflist']=unserialize($session['user']['bufflist']);
 				if (!is_array($session['bufflist']))
-					$session['bufflist'] = array();
-				if (!is_array($session['user']['dragonpoints'])) $session['user']['dragonpoints']=array();
+					$session['bufflist'] = [];
+				if (!is_array($session['user']['dragonpoints'])) $session['user']['dragonpoints'] = [];
 				invalidatedatacache("charlisthomepage");
 				invalidatedatacache("list.php-warsonline");
 				$session['user']['laston'] = date("Y-m-d H:i:s");
