@@ -1,37 +1,49 @@
 <?php
-$subject=httppost('subject');
-$body="";
-$row="";
-$replyto = (int)httpget('replyto');
+
+$subject = httppost('subject');
+$body = '';
+$row = '';
+$replyto = (int) httpget('replyto');
 $forwardto = (int) httppost('forwardto');
-if ($replyto>0) $msgid=$replyto;
-	else $msgid=$forwardto;
-if ($msgid>0){
+
+if ($replyto>0) $msgid = $replyto;
+else $msgid = $forwardto;
+
+if ($msgid > 0)
+{
 	$mail = DB::prefix("mail");
 	$accounts = DB::prefix("accounts");
 	$sql = "SELECT ".$mail.".sent,".$mail.".body,".$mail.".msgfrom, ".$mail.".subject,".$accounts.".login, ".$accounts.".superuser, ".$accounts.".name FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$msgid."\"";
 	$result = DB::query($sql);
-	if ($row = DB::fetch_assoc($result)){
-		if ($row['login']=="" && $forwardto==0) {
+	if ($row = DB::fetch_assoc($result))
+	{
+		if ($row['login']=="" && $forwardto==0)
+		{
 			output("You cannot reply to a system message.`n`nPress the \"Back\" button in your browser to get back.");
 			$row=array();
 			popup_footer();
 		}
 		if ($forwardto>0) $row['login']=0;
-	}else{
+	}
+	else
+	{
 		output("Eek, no such message was found!`n");
 	}
 }
 $to = httpget('to');
-if ($to){
+if ($to)
+{
 	$sql = "SELECT login,name, superuser FROM " . DB::prefix("accounts") . " WHERE login=\"$to\"";
 	$result = DB::query($sql);
-	if (!($row = DB::fetch_assoc($result))){
+	if (!($row = DB::fetch_assoc($result)))
+	{
 		output("Could not find that person.`n");
 	}
 }
-if (is_array($row)){
-	if (isset($row['subject']) && $row['subject']){
+if (is_array($row))
+{
+	if (isset($row['subject']) && $row['subject'])
+	{
 		if ((int)$row['msgfrom']==0){
 			$row['name']=translate_inline("`i`^System`0`i");
 			// No translation for subject if it's not an array
@@ -54,25 +66,32 @@ if (is_array($row)){
 		$body="\n\n---".sprintf_translate(array("Original Message from %s(%s)",sanitize($row['name']),date("Y-m-d H:i:s",strtotime($row['sent']))))."---\n".$row['body'];
 	}
 }
-rawoutput("<form action='mail.php?op=send' method='post'>");
+rawoutput("<form action='mail.php?op=send' method='post' class='ui form'>");
 rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslashes($msgid), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
-$superusers = array();
-if (isset($row['login']) && $row['login']!=""){
+$superusers = [];
+if (isset($row['login']) && $row['login'] != '')
+{
 	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 	output("`2To: `^%s`n",$row['name']);
 	if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 		array_push($superusers,$row['login']);
 	}
-}else{
+}
+else
+{
+	rawoutput('<div class="inline field"></label>');
 	output("`2To: ");
+	rawoutput('</label>');
 	$to = httppost('to');
 	$sql = "SELECT login,name,superuser FROM ".DB::prefix('accounts')." WHERE login = '".addslashes($to)."' AND locked = 0";
 	$result = DB::query($sql);
 	$count = DB::num_rows($result);
-	if($count != 1) {
+	if($count != 1)
+	{
 		$string="%";
 		$to_len = strlen($to);
-		for($x=0; $x < $to_len; ++$x) {
+		for($x=0; $x < $to_len; ++$x)
+		{
 			$string .= $to{$x}."%";
 		}
 		$sql = "SELECT login,name,superuser FROM " . DB::prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
@@ -87,20 +106,24 @@ if (isset($row['login']) && $row['login']!=""){
 		if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 			array_push($superusers,$row['login']);
 		}
-	}elseif ($count == 0)
+	}
+	elseif ($count == 0)
 	{
 		output("`\$No one was found who matches \"%s\".`n",stripslashes($to));
 		output("`@Please try again.`n");
 		httpset('prepop', $to, true);
 		rawoutput("</form>");
-		require("lib/mail/case_address.php");
+		require 'lib/mail/case_address.php';
 		popup_footer();
-	}else{
-		output_notl("<select name='to' id='to' onchange='check_su_warning();'>",true);
+	}
+	else
+	{
+		output_notl("<select class='ui dropdown' name='to' id='to' onchange='check_su_warning();'>",true);
 		$superusers = array();
-		while($row = DB::fetch_assoc($result)) {
+		while($row = DB::fetch_assoc($result))
+		{
 			output_notl("<option value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
-			require_once("lib/sanitize.php");
+			require_once 'lib/sanitize.php';
 			output_notl("%s", full_sanitize($row['name']));
 			if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 				array_push($superusers,$row['login']);
@@ -108,42 +131,50 @@ if (isset($row['login']) && $row['login']!=""){
 		}
 		output_notl("</select>`n",true);
 	}
+	rawoutput('</div>');
 }
 rawoutput("<script type='text/javascript'>var superusers = new Array();");
-foreach($superusers as $val) {
+foreach($superusers as $val)
+{
 	rawoutput("	superusers['".addslashes($val)."'] = true;");
 }
-rawoutput("</script>");
+rawoutput("</script><div class='inline field'><label>");
 output("`2Subject:");
-rawoutput("<input name='subject' value=\"".htmlentities($subject,ENT_COMPAT, getsetting("charset","UTF-8")).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\"><br>");
-rawoutput("<div id='warning' style='visibility: hidden; display: none;'>");
+rawoutput("</label><input name='subject' value=\"".htmlentities($subject,ENT_COMPAT, getsetting("charset","UTF-8")).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\"></div>");
+rawoutput("<div id='warning' style='visibility: hidden; display: none;' class='ui warning message'>");
 //superuser messages do not get translated.
-output("`2Notice: `^%s`n",$superusermessage);
-rawoutput("</div>");
-output("`2Body:`n");
-rawoutput("<script type=\"text/javascript\">function increase(target, value){  if (target.rows + value > 3 && target.rows + value < 50) target.rows = target.rows + value;}</script>");
-rawoutput("<script type=\"text/javascript\">function cincrease(target, value){  if (target.cols + value > 3 && target.cols + value < 150) target.cols = target.cols + value;}</script>");
+output("`bNotice:`b %s",$superusermessage);
+rawoutput("</div><div class='inline field'><label>");
+output("`2Body:");
+rawoutput('</label><span id="sizemsg"></span>');
+
 $key=1;
-$keyout='body';
-$prefs=&$session['user']['prefs'];
-if ($prefs['mailwidth'] == "") {
+$keyout = 'body';
+$prefs = &$session['user']['prefs'];
+if ($prefs['mailwidth'] == "")
+{
 	$prefs['mailwidth'] = 60;
 }
-if ($prefs['mailheight'] == "") {
+if ($prefs['mailheight'] == "")
+{
 	$prefs['mailheight'] = 9;
 }
 
 $cols=max(10,$prefs['mailwidth']);
 $rows=max(10,$prefs['mailheight']);
-rawoutput("<table class='table-bg-transparent' style='border:0;cellspacing:10'><tr><td><input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'></td><td><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'></td>");
-rawoutput("<td><input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'></td><td><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'></td></tr></table>");
+
 //substr is necessary if you have chars that take up more than 1 byte. That breaks the entire HTMLentities up and it returns nothing
 rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout' cols='$cols' rows='$rows'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","UTF-8")))), ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>");
-//rawoutput("<textarea name='body' id='textarea' class='input' cols='60' rows='9' onKeyUp='sizeCount(this);'>".htmlentities($body, ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(stripslashes(httpget('body')), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br>");
 $send = translate_inline("Send");
 $sendclose = translate_inline("Send and Close");
 $sendback = translate_inline("Send and back to main Mailbox");
-rawoutput("<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td><input type='submit' class='button' value='$send'></td><td style='width:20px;'></td><td><input type='submit' class='button' value='$sendclose' name='sendclose'></td><td><input type='submit' class='button' value='$sendback' name='sendback'></td><td align='right'><div id='sizemsg'></div></td></tr></table>");
+
+rawoutput('</div><div class="ui buttons">');
+rawoutput("<button type='submit' class='ui primary button'>$send</button>");
+rawoutput("<button type='submit' class='ui orange button'>$sendback</button>");
+rawoutput("<button type='submit' class='ui red button'>$sendclose</button>");
+rawoutput('</div>');
+
 rawoutput("</form>");
 $sizemsg = "`#Max message size is `@%s`#, you have `^XX`# characters left.";
 $sizemsg = translate_inline($sizemsg);
@@ -172,12 +203,12 @@ rawoutput("
 		document.getElementById('sizemsg').innerHTML = msg;
 	}
 	sizeCount(document.getElementById('textarea'));
-		function check_su_warning(){
+	function check_su_warning(){
 		var to = document.getElementById('to');
 		var warning = document.getElementById('warning');
 		if (superusers[to.value]){
 			warning.style.visibility = 'visible';
-			warning.style.display = 'inline';
+			warning.style.display = 'block';
 		}else{
 			warning.style.visibility = 'hidden';
 			warning.style.display = 'none';

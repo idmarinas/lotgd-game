@@ -3,7 +3,7 @@
 // addnews ready
 // mail ready
 define("OVERRIDE_FORCED_NAV",true);
-require_once("common.php");
+require_once 'common.php';
 
 tlschema("mail");
 $args=modulehook("header-mail",array("done"=>0));
@@ -44,49 +44,54 @@ $inbox = translate_inline("Inbox");
 $write = translate_inline("Write");
 
 // Build the initial args array
-$args = array();
-array_push($args, array("mail.php", $inbox));
-array_push($args, array("mail.php?op=address",$write));
+$args = [];
+array_push($args, ["mail.php", $inbox]);
+array_push($args, ["mail.php?op=address",$write]);
 // to use this hook,
 // just call array_push($args, array("pagename", "functionname"));,
 // where "pagename" is the name of the page to forward the user to,
 // and "functionname" is the name of the mail function to add
 $mailfunctions = modulehook("mailfunctions", $args);
 
-rawoutput("<table class='table-bg-transparent' width='50%' border='0' cellpadding='0' cellspacing='2'>");
-rawoutput("<tr>");
+rawoutput('<div class="ui buttons">');
 $count_mailfunctions = count($mailfunctions);
-for($i=0;$i<$count_mailfunctions;++$i) {
-	if (is_array($mailfunctions[$i])) {
-		if (count($mailfunctions[$i])==2) {
+for($i = 0; $i < $count_mailfunctions; ++$i)
+{
+	if (is_array($mailfunctions[$i]))
+	{
+		if (count($mailfunctions[$i]) == 2)
+		{
 			$page = $mailfunctions[$i][0];
 			$name = $mailfunctions[$i][1]; // already translated
-			rawoutput("<td><a href='$page' class='motd'>$name</a></td>");
+			rawoutput("<a href='$page' class='ui primary button'>$name</a>");
 			// No need for addnav since mail function pages are (or should be) outside the page nav system.
 		}
 	}
 }
-rawoutput("</tr></table>");
-output_notl("`n");
-switch (httpget('even')) {
+rawoutput('</div>');
+output_notl('`n`n');
+switch (httpget('even'))
+{
 	case "mailsent":
 		output("`vYour message was sent!`n");
-		break;
-}
-
-if($op=="send"){
-	//needs to be handled first.
-	require("lib/mail/case_send.php");
-}
-
-switch ($op) {
-case "read":
-case "address":
-case "write":
-	require("lib/mail/case_".$op.".php");
 	break;
-default:
-	require("lib/mail/case_default.php");
+}
+
+if($op == "send")
+{
+	//needs to be handled first.
+	require 'lib/mail/case_send.php';
+}
+
+switch ($op)
+{
+	case "read":
+	case "address":
+	case "write":
+		require "lib/mail/case_$op.php";
+	break;
+	default:
+		require 'lib/mail/case_default.php';
 	break;
 }
 popup_footer();

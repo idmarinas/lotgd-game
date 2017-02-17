@@ -3,7 +3,8 @@ $acc=DB::prefix('accounts');
 $mail=DB::prefix('mail');
 $sql = "SELECT $mail.*,$acc.name,$acc.acctid FROM $mail LEFT JOIN $acc ON $acc.acctid=$mail.msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
 $result = DB::query($sql);
-if (DB::num_rows($result)>0){
+if (DB::num_rows($result) > 0)
+{
 	$row = DB::fetch_assoc($result);
 	$reply = translate_inline("Reply");
 	$del = translate_inline("Delete");
@@ -15,7 +16,8 @@ if (DB::num_rows($result)>0){
 	$problem = "Abusive Email Report:\nFrom: {$row['name']}\nSubject: {$row['subject']}\nSent: {$row['sent']}\nID: {$row['messageid']}\nBody:\n{$row['body']}";
 	$problemplayer = (int)$row['msgfrom'];
 	$status_image="";
-	if ((int)$row['msgfrom']==0){
+	if ((int)$row['msgfrom']==0)
+	{
 		$row['name']=translate_inline("`i`^System`0`i");
 		// No translation for subject if it's not an array
 		$row_subject = @unserialize($row['subject']);
@@ -33,15 +35,9 @@ if (DB::num_rows($result)>0){
 		//get status
 		$online=(int)is_player_online($row['acctid']);
         $statusImage=($online?"online":"offline");
-		// $status_image="<img src='images/$status.gif' alt='$status'>";
-		$status=($online?"colLtGreen":"colLtRed");
-		$status_image="<i class='fa fa-fw fa-user $status'><img src='images/$statusImage.gif' alt='$statusImage'></i>";
+		$status_image="<img src='images/$statusImage.gif' alt='".ucfirst($statusImage)."'>";
 	}
-	if (!$row['seen']) {
-		output("`b`#NEW`b`n");
-	}else{
-		output_notl('`n');
-	}
+
 	$sql = "SELECT messageid FROM $mail WHERE msgto='{$session['user']['acctid']}' AND messageid < '$id' ORDER BY messageid DESC LIMIT 1";
 	$result = DB::query($sql);
 	if (DB::num_rows($result)>0){
@@ -58,55 +54,57 @@ if (DB::num_rows($result)>0){
 	}else{
 		$nid = 0;
 	}
-	output("`b`2From:`b `^%s",$row['name']);
-	output_notl($status_image."`n",true);
-	output("`b`2Subject:`b `^%s`n",$row['subject']);
-	output("`b`2Sent:`b `^%s`n",$row['sent']);
-	rawoutput("<table class='table-bg-transparent'>");
-	rawoutput("<tr><td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td><td><a href='mail.php?op=address&id={$row['messageid']}' class='motd'>$forward</a><td>");
-	if ($pid > 0) {
-		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
-		rawoutput("</td><td nowrap='true'>");
-	}else{
-		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "UTF-8"));
-		rawoutput("</td><td nowrap='true'>");
+
+	//-- Buttons
+	$buttonsMenuTop = '<div class="ui top attached primary buttons">';
+	$buttonsMenuTop .= "<a class='ui button' href='mail.php?op=write&replyto={$row['messageid']}'>$reply</a>";
+	$buttonsMenuTop .= "<a class='ui button' href='mail.php?op=del&id={$row['messageid']}'>$del</a>";
+	$buttonsMenuTop .= "<a class='ui button' href='mail.php?op=unread&id={$row['messageid']}'>$unread</a>";
+	// Don't allow reporting of system messages as abuse.
+	if ((int) $row['msgfrom'] != 0)
+	{
+		$buttonsMenuTop .= "<a class='ui button' href=\"petition.php?problem=".rawurlencode($problem)."&abuse=yes&abuseplayer=$problemplayer\">$report</a>";
 	}
-	if ($nid > 0){
-		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a></td>");
-	}else{
-		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</td>");
+	$buttonsMenuTop .= '</div>';
+
+	$buttonsMenuBottom = '<div class="ui bottom attached primary buttons">';
+	if ($pid > 0)
+	{
+		$buttonsMenuBottom .= "<a class='ui button' href='mail.php?op=read&id=$pid'>".htmlentities($prev, ENT_COMPAT, getsetting('charset', 'UTF-8'))."</a>";
 	}
-	rawoutput("</tr></table><hr>");
-	output_notl(sanitize_mb(str_replace("\n","`n",$row['body'])));
+	else
+	{
+		$buttonsMenuBottom .= '<a class="ui disabled button">' . htmlentities($prev, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</a>';
+	}
+
+	if ($nid > 0)
+	{
+		$buttonsMenuBottom .= "<a class='ui button' href='mail.php?op=read&id=$nid'>".htmlentities($next, ENT_COMPAT, getsetting('charset', 'UTF-8'))."</a>";
+	}
+	else
+	{
+		$buttonsMenuBottom .= '<a class="ui disabled button">' . htmlentities($next, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</a>';
+	}
+	$buttonsMenuBottom .= '</div>';
+
+	$label = '';
+	if (! $row['seen'])
+	{
+		$label = ' <a class="ui teal ribbon label">'.appoencode(translate('`bNEW`b')).'</a>';
+	}
+
+	rawoutput('<div class="ui fluid card">');
+	rawoutput($buttonsMenuTop.'<div class="content">'.$label.'<div class="right floated meta">'.appoencode(translate(sprintf('`b`2Sent:`b `^%s`0', $row['sent']))).'</div>'.appoencode(translate(sprintf('`b`2From:`b %s `^%s`0', $status_image, $row['name'])), true).'</div>');
+	rawoutput('<div class="content"><span class="ui header">'.$row['subject'].'</span><p></p><p>'.sanitize_mb(str_replace("\n","`n",$row['body'])).'</p></div>');
+	rawoutput($buttonsMenuBottom);
+	rawoutput('</div>');
+
 	$sql = "UPDATE $mail SET seen=1 WHERE  msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
 	DB::query($sql);
-	invalidatedatacache("mail-{$session['user']['acctid']}");
-	rawoutput("<hr><table class='table-bg-transparent' width='50%' border='0' cellpadding='0' cellspacing='5'><tr>
-		<td><a href='mail.php?op=write&replyto={$row['messageid']}' class='motd'>$reply</a></td>
-		<td><a href='mail.php?op=del&id={$row['messageid']}' class='motd'>$del</a></td>
-		<td><a href='mail.php?op=unread&id={$row['messageid']}' class='motd'>$unread</a></td>");
-	// Don't allow reporting of system messages as abuse.
-	if ((int)$row['msgfrom']!=0) {
-		rawoutput("<td><a href=\"petition.php?problem=".rawurlencode($problem)."&abuse=yes&abuseplayer=$problemplayer\" class='motd'>$report</a></td>");
-	} else {
-		rawoutput("<td>&nbsp;</td>");
-	}
-	rawoutput("</tr><tr>");
-	rawoutput("<td nowrap='true'>");
-	if ($pid > 0) {
-		rawoutput("<a href='mail.php?op=read&id=$pid' class='motd'>".htmlentities($prev, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
-	}else{
-		rawoutput(htmlentities($prev), ENT_COMPAT, getsetting("charset", "UTF-8"));
-	}
-	rawoutput("</td><td nowrap='true'>");
-	if ($nid > 0){
-		rawoutput("<a href='mail.php?op=read&id=$nid' class='motd'>".htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8"))."</a>");
-	}else{
-		rawoutput(htmlentities($next, ENT_COMPAT, getsetting("charset", "UTF-8")));
-	}
-	rawoutput("</td>");
-	rawoutput("</tr></table>");
-}else{
+
+}
+else
+{
 	output("Eek, no such message was found!");
 }
 ?>

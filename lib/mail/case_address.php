@@ -1,18 +1,22 @@
 <?php
-output_notl("<form action='mail.php?op=write' method='post'>",true);
-output("`b`2Address:`b`n");
+
+$id = (int) httpget('id');
+$forwardlink = '';
+
 $to = translate_inline("To: ");
 $forwardto = translate_inline("Forward To: ");
 $search = htmlentities(translate_inline("Search"), ENT_COMPAT, getsetting("charset", "UTF-8"));
-$id =(int) httpget('id');
-$forwardlink='';
-if ($id>0) {
-	$to=$forwardto;
-	$forwardlink="<input type='hidden' name='forwardto' value='$id'>";
+
+if ($id>0)
+{
+	$to = $forwardto;
+	$forwardlink = "<input type='hidden' name='forwardto' value='$id'>";
 }
-output_notl("`2$to <input name='to' id='to' value=\"".htmlentities(stripslashes(httpget('prepop')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
-output_notl("<input type='submit' class='button' value=\"$search\">", true);
-rawoutput($forwardlink);
-rawoutput("</form>");
-rawoutput("<script type='text/javascript'>document.getElementById(\"to\").focus();</script>");
-?>
+
+rawoutput("<form action='mail.php?op=write' method='post' class='ui form'>");
+output("`b`2Address:`b`n");
+rawoutput(sprintf("<div class='inline field'><label>%s</label> <div class='ui action input'>", appoencode("`2$to`0")));
+output_notl("<input autofocus name='to' id='to' value=\"".htmlentities(stripslashes(httpget('prepop')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
+output_notl("<button type='submit' class='ui primary button'>$search</button>", true);
+rawoutput($forwardlink.'</div>');
+rawoutput('</form>');
