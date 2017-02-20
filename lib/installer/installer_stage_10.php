@@ -58,7 +58,7 @@ if (0 == DB::num_rows($result))
 		output("`nConfirm your password: ");
 		rawoutput("</label><input name='pass2' type='password'></div>");
 		$submit = translate_inline("Create");
-		rawoutput("<div class='inline field'><input type='submit' value='$submit' class='ui primary button'></div>");
+		rawoutput("<div class='inline field'><input type='submit' value='$submit' class='ui button'></div>");
 		rawoutput("</form>");
 	}
 }

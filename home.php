@@ -153,7 +153,7 @@ if (getsetting('homeskinselect', 1))
 	rawoutput('<table class="ui centered collapsing simple table"><tr><td><div class="ui form"><div class="inline fields"><div class="field">');
 	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
-	rawoutput("</div><div class='field'><input type='submit' class='ui primary button' value='$submit'></div>");
+	rawoutput("</div><div class='field'><input type='submit' class='ui button' value='$submit'></div>");
 	rawoutput("</div></div></td></tr></table></form>");
 }
 page_footer();

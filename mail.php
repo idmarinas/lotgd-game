@@ -63,7 +63,7 @@ for($i = 0; $i < $count_mailfunctions; ++$i)
 		{
 			$page = $mailfunctions[$i][0];
 			$name = $mailfunctions[$i][1]; // already translated
-			rawoutput("<a href='$page' class='ui primary button'>$name</a>");
+			rawoutput("<a href='$page' class='ui button'>$name</a>");
 			// No need for addnav since mail function pages are (or should be) outside the page nav system.
 		}
 	}

@@ -108,7 +108,7 @@ else
 	}
 	output_notl("`0");
 	rawoutput("<form action='installer.php?stage=".$stage."' method='POST'>");
-	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui primary button'>");
+	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui button'>");
 	rawoutput("<input type='button' onClick='chooseRecommendedModules();' class='ui secondary button' value='$install'>");
 	rawoutput("<input type='reset' value='$reset' class='ui yellow button'>");
 	rawoutput("<table class='ui compact selectable striped table'>");
@@ -213,7 +213,7 @@ else
 		}
 	}
 	rawoutput("</tbody></table>");
-	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui primary button'>");
+	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui button'>");
 	rawoutput("<input type='button' onClick='chooseRecommendedModules();' class='ui secondary button' value='$install'>");
 	rawoutput("<input type='reset' value='$reset' class='ui yellow button'>");
 	rawoutput("</form>");

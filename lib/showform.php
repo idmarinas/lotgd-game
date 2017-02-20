@@ -131,7 +131,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 	$save = translate_inline("Save");
 	tlschema();
 
-	if (! $nosave) rawoutput("<input class='ui primary button' type='submit' class='button' value='$save'>");
+	if (! $nosave) rawoutput("<input class='ui button' type='submit' value='$save'>");
 }
 
 function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)

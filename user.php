@@ -53,7 +53,7 @@ rawoutput("<form action='user.php?op=search$m' method='POST'>");
 output("Search by any field below: ");
 rawoutput("<div class='ui action input'><input name='q' id='q'>");
 $se = translate_inline("Search");
-rawoutput("<button type='submit' class='ui primary button'>$se</button>");
+rawoutput("<button type='submit' class='ui button'>$se</button>");
 rawoutput("</div></form>");
 rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>");
 addnav("","user.php?op=search$m");
