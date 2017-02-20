@@ -90,7 +90,7 @@ if (DB::num_rows($result) > 0)
 	$label = '';
 	if (! $row['seen'])
 	{
-		$label = ' <a class="ui teal ribbon label">'.appoencode(translate('`bNEW`b')).'</a>';
+		$label = ' <span class="ui teal ribbon label">'.appoencode(translate('`bNEW`b')).'</span>';
 	}
 
 	rawoutput('<div class="ui fluid card">');
