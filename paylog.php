@@ -50,7 +50,7 @@ if ($op==""){
 	$enddate = date("Y-m-d H:i:s",strtotime("+1 month",strtotime($startdate)));
 	$sql = "SELECT " . DB::prefix("paylog") . ".*," . DB::prefix("accounts") . ".name," . DB::prefix("accounts") . ".donation," . DB::prefix("accounts") . ".donationspent FROM " . DB::prefix("paylog") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("paylog") . ".acctid = " . DB::prefix("accounts") . ".acctid WHERE processdate>='$startdate' AND processdate < '$enddate' ORDER BY payid DESC";
 	$result = DB::query($sql);
-	rawoutput("<table border='0' cellpadding='2' cellspacing='1' bgcolor='#999999'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	$type = translate_inline("Type");
 	$gross = translate_inline("Gross");
 	$fee = translate_inline("Fee");
@@ -58,9 +58,10 @@ if ($op==""){
 	$processed = translate_inline("Processed");
 	$id = translate_inline("Transaction ID");
 	$who = translate_inline("Who");
-	rawoutput("<tr class='trhead'><td>Date</td><td>$id</td><td>$type</td><td>$gross</td><td>$fee</td><td>$net</td><td>$processed</td><td>$who</td></tr>");
+	rawoutput("<thead><tr><th>Date</th><th>$id</th><th>$type</th><th>$gross</th><th>$fee</th><th>$net</th><th>$processed</th><th>$who</th></tr></thead>");
 	$number=DB::num_rows($result);
-	for ($i=0;$i<$number;$i++){
+	for ($i=0;$i<$number;$i++)
+	{
 		$row = DB::fetch_assoc($result);
 		$info = unserialize($row['info']);
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td nowrap>");
@@ -95,6 +96,13 @@ if ($op==""){
 			addnav("",$link);
 		}
 		rawoutput("</td></tr>");
+	}
+
+	if (! $number)
+	{
+		rawoutput('<tr><td colspan="8" class="center aligned">');
+		output('No records found');
+		rawoutput('</td></tr>');
 	}
 	rawoutput("</table>");
 	addnav("Refresh","paylog.php");

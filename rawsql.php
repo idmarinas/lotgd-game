@@ -2,22 +2,23 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 tlschema("rawsql");
 
 check_su_access(SU_RAW_SQL);
 
 page_header("Raw SQL/PHP execution");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 addnav("Execution");
 addnav("SQL","rawsql.php");
 addnav("PHP","rawsql.php?op=php");
 
 $op = httpget("op");
-if ($op=="" || $op=="sql"){
+if ($op=="" || $op=="sql")
+{
 	$sql = httppost('sql');
 	if ($sql != "") {
 		$sql = stripslashes($sql);
@@ -55,9 +56,9 @@ if ($op=="" || $op=="sql"){
 	$execute = translate_inline("Execute");
 	$ret = modulehook("rawsql-modsql",array("sql"=>$sql));
 	$sql = $ret['sql'];
-	rawoutput("<form action='rawsql.php' method='post'>");
-	rawoutput("<textarea name='sql' class='input' cols='60' rows='10'>".htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br>");
-	rawoutput("<input type='submit' class='button' value='$execute'>");
+	rawoutput("<form action='rawsql.php' method='post' class='ui form'>");
+	rawoutput("<div class='field'><textarea name='sql' class='input' cols='60' rows='10'>".htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea></div>");
+	rawoutput("<div class='field'><input type='submit' class='ui button' value='$execute'></div>");
 	rawoutput("</form>");
 	addnav("", "rawsql.php");
 }else{
@@ -78,9 +79,9 @@ if ($op=="" || $op=="sql"){
 	output("`n`nType your code:");
 	$ret = modulehook("rawsql-modphp",array("php"=>$php));
 	$php = $ret['php'];
-	rawoutput("<form action='rawsql.php?op=php' method='post'>");
-	rawoutput("&lt;?php<br><textarea name='php' class='input' cols='60' rows='10'>".htmlentities($php, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea><br>?&gt;<br>");
-	rawoutput("<input type='submit' class='button' value='$execute'>");
+	rawoutput("<form action='rawsql.php?op=php' method='post' class='ui form'>");
+	rawoutput("<div class='field'>&lt;?php<textarea name='php'>".htmlentities($php, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>?&gt;</div>");
+	rawoutput("<div class='field'><input type='submit' class='ui button' value='$execute'></div>");
 	rawoutput("</form>");
 	addnav("", "rawsql.php?op=php");
 }

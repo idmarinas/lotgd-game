@@ -2,10 +2,10 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/sanitize.php");
-require_once("lib/http.php");
-require_once("lib/moderate.php");
+require_once 'common.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/http.php';
+require_once 'lib/moderate.php';
 
 tlschema("moderate");
 
@@ -13,7 +13,7 @@ addcommentary();
 
 check_su_access(SU_EDIT_COMMENTS);
 
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 addnav("Other");
@@ -108,7 +108,7 @@ if ($op==""){
 	$link = "moderate.php" . ($area ? "?area=$area" : "");
 	$refresh = translate_inline("Refresh");
 	rawoutput("<form action='$link' method='POST'>");
-	rawoutput("<input type='submit' class='button' value='$refresh'>");
+	rawoutput("<input type='submit' class='ui button' value='$refresh'>");
 	rawoutput("</form>");
 	addnav("", "$link");
 	if ($area==""){
@@ -167,7 +167,7 @@ if ($op==""){
 	$unmod = translate_inline("Unmoderate");
 	rawoutput("<form action='moderate.php?op=audit&subop=undelete' method='POST'>");
 	addnav("","moderate.php?op=audit&subop=undelete");
-	rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<tr class='trhead'><td>$ops</td><td>$mod</td><td>$when</td><td>$com</td></tr>");
 	$limit = "75";
 	$where = "1=1 ";
@@ -205,7 +205,7 @@ if ($op==""){
 		rawoutput("</tr>");
 	}
 	rawoutput("</table>");
-	rawoutput("<input type='submit' class='button' value='$unmod'>");
+	rawoutput("<input type='submit' class='ui button' value='$unmod'>");
 	rawoutput("</form>");
 }
 

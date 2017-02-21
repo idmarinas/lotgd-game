@@ -2,10 +2,10 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("lib/datetime.php");
-require_once("lib/commentary.php");
-require_once("lib/sanitize.php");
-require_once("lib/http.php");
+require_once 'lib/datetime.php';
+require_once 'lib/commentary.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/http.php';
 
 function commentmoderate($intro,$section, $message,$limit=10,$talkline="says",$schema=false,$viewall=false) {
 	//function to display comments easily to moderate only, not in the normal gameflow but in the grotto i.e. ... or your might want to write your own modules that do the trick
@@ -271,10 +271,10 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 		$mod_reason = translate_inline("Reason:");
 		$mod_reason_desc = htmlentities(translate_inline("Banned for comments you posted."), ENT_COMPAT, getsetting("charset", "UTF-8"));
 
-		output_notl("<form action='$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI'])."' method='POST'>",true);
-		output_notl("<input type='submit' class='button' value=\"$mod_Del1\">",true);
-		output_notl("<input type='submit' class='button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">",true);
-		output_notl("`n$mod_reason <input name='reason0' size='40' value=\"$mod_reason_desc\" onChange=\"document.getElementById('reason').value=this.value;\">",true);
+		output_notl("<br><form action='$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI'])."' method='POST'>",true);
+		output_notl("<input type='submit' class='ui button' value=\"$mod_Del1\">",true);
+		output_notl("<input type='submit' class='ui button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">",true);
+		output_notl("`n`n$mod_reason <div class='ui input'><input name='reason0' size='40' value=\"$mod_reason_desc\" onChange=\"document.getElementById('reason').value=this.value;\"></div>",true);
 	}
 
 
@@ -312,10 +312,10 @@ function viewmoderatedcommentary($section,$message="Interject your own commentar
 
 	if ($moderating){
 		output_notl("`n");
-		rawoutput("<input type='submit' class='button' value=\"$mod_Del1\">");
-		rawoutput("<input type='submit' class='button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">");
-		output_notl("`n%s ", $mod_reason);
-		rawoutput("<input name='reason' size='40' id='reason' value=\"$mod_reason_desc\">");
+		rawoutput("<input type='submit' class='ui button' value=\"$mod_Del1\">");
+		rawoutput("<input type='submit' class='ui button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">");
+		output_notl("`n`n%s ", $mod_reason);
+		rawoutput("<div class='ui input'><input type='text' name='reason' size='40' id='reason' value=\"$mod_reason_desc\"></div>");
 		rawoutput("</form>");
 		output_notl("`n");
 	}
