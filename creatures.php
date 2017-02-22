@@ -151,7 +151,7 @@ if ($op=="" || $op=="search"){
 	rawoutput("<form action='creatures.php?op=search' method='POST'>");
 	output("Search by field: ");
 	rawoutput("<div class='ui action input'><input name='q' id='q'>");
-	rawoutput("<button type='submit' class='ui primary button'>$search</button>");
+	rawoutput("<button type='submit' class='ui button'>$search</button>");
 	rawoutput("</div></form>");
 	rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>",true);
 	addnav("","creatures.php?op=search");
@@ -181,20 +181,16 @@ if ($op=="" || $op=="search"){
 	$confirm = translate_inline("Are you sure you wish to delete this creature?");
 	$del = translate_inline("Del");
 
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
-	rawoutput('<tr class="trhead"><th colspan="8">Creatures level "'.$level.'"</th></tr>');
-	rawoutput("<tr class='trhead'>");
-	rawoutput("<td>$opshead</td><td>$name</td><td>$cat</td><td>$weapon</td><td>$script</td><td>$winmsg</td><td>$diemsg</td><td>$author</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput('<thead><tr><th colspan="8" class="center aligned">Creatures level "'.$level.'"</th></tr>');
+	rawoutput("<tr><th>$opshead</th><th>$name</th><th>$cat</th><th>$weapon</th><th>$script</th><th>$winmsg</th><th>$diemsg</th><th>$author</th></tr></thead>");
 	addnav("","creatures.php");
-	$i=true;
-	while ($row = DB::fetch_assoc($result)) {
-		$i=!$i;
-		rawoutput("<tr class='".($i?"trdark":"trlight")."'>", true);
-		rawoutput("<td class='uk-text-nowrap'>[ <a href='creatures.php?op=edit&creatureid={$row['creatureid']}'>");
-		output_notl("%s", $edit);
-		rawoutput("</a> | <a href='creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}' onClick='return confirm(\"$confirm\");'>");
-		output_notl("%s", $del);
-		rawoutput("</a> ]</td><td>");
+	while ($row = DB::fetch_assoc($result))
+	{
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>[ <a data-tooltip='$edit' href='creatures.php?op=edit&creatureid={$row['creatureid']}'><i class='write icon'></i></a>");
+		rawoutput(" | <a data-tooltip='$del' href='creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}' onClick='return confirm(\"$confirm\");'>");
+		rawoutput("<i class='trash icon'></i></a> ]</td><td>");
 		addnav("","creatures.php?op=edit&creatureid={$row['creatureid']}");
 		addnav("","creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}");
 		output_notl("(%s) %s", $row['creatureid'], $row['creaturename']);
