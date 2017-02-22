@@ -47,7 +47,7 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : #257625;
+@primaryColor        : lighten(@pageBackground, 15);
 @secondaryColor      : #50C391;
 
 @lightPrimaryColor   : lighten(@primaryColor, 15%);
