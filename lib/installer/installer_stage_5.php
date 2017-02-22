@@ -79,7 +79,7 @@ else
 $result = DB::query('SHOW GRANTS FOR CURRENT_USER()');
 output("`2These are the rights for your mysql user, `\$make sure you have the 'LOCK TABLES' privileges OR a \"GRANT ALL PRIVLEGES\" on the tables.`2`n`n");
 output("If you do not know what this means, ask your hosting provider that supplied you with the database credentials.`n`n");
-rawoutput("<table cellspacing='1' cellpadding='2' border='0' bgcolor='#999999'>");
+rawoutput("<table class='ui very compact striped selectable table'>");
 $i = 0;
 foreach($result as $row)
 {

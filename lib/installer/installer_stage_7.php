@@ -20,7 +20,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	output("`@`c`bConfirmation`b`c");
 	output("`2Please confirm the following:`0`n");
 	rawoutput("<form action='installer.php?stage=7' method='POST'>");
-	rawoutput("<table border='0' cellpadding='0' cellspacing='0'><tr><td valign='top'>");
+	rawoutput("<table class='ui very compact striped selectable table'><tr><td valign='top'>");
 	output("`2I should:`0");
 	rawoutput("</td><td>");
 	$version = getsetting('installer_version', '-1');
@@ -44,7 +44,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	output(" `2Perform a clean install.");
 	rawoutput("</td></tr></table>");
 	$submit = translate_inline("Submit");
-	rawoutput("<input type='submit' value='$submit' class='ui primary button'>");
+	rawoutput("<input type='submit' value='$submit' class='ui button'>");
 	rawoutput("</form>");
 
 	$session['stagecompleted'] = $stage - 1;
