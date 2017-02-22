@@ -2,9 +2,9 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/showform.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/showform.php';
+require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_EQUIPMENT);
 
@@ -12,7 +12,7 @@ tlschema("weapon");
 
 page_header("Weapon Editor");
 $weaponlevel = (int)httpget("level");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 addnav("Editor");
@@ -91,13 +91,13 @@ if ($op==""){
 	$del = translate_inline("Del");
 	$delconfirm = translate_inline("Are you sure you wish to delete this weapon?");
 
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
-	rawoutput("<tr class='trhead'><td>$ops</td><td>$name</td><td>$cost</td><td>$damage</td><td>$level</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$ops</th><th>$name</th><th>$cost</th><th>$damage</th><th>$level</th></tr></thead>");
 	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
 		$row = DB::fetch_assoc($result);
-		rawoutput("<tr class='".($i%2?"trdark":"trlight")."'>");
-		rawoutput("<td>[<a href='weaponeditor.php?op=edit&id={$row['weaponid']}&level=$weaponlevel'>$edit</a>|<a href='weaponeditor.php?op=del&id={$row['weaponid']}&level=$weaponlevel' onClick='return confirm(\"Are you sure you wish to delete this weapon?\");'>$del</a>]</td>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>[<a href='weaponeditor.php?op=edit&id={$row['weaponid']}&level=$weaponlevel'>$edit</a>|<a href='weaponeditor.php?op=del&id={$row['weaponid']}&level=$weaponlevel' onClick='return confirm(\"Are you sure you wish to delete this weapon?\");'>$del</a>]</td>");
 		addnav("","weaponeditor.php?op=edit&id={$row['weaponid']}&level=$weaponlevel");
 		addnav("","weaponeditor.php?op=del&id={$row['weaponid']}&level=$weaponlevel");
 		rawoutput("<td>");

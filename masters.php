@@ -117,12 +117,12 @@ if ($op == "") {
 	$lose = translate_inline("Lose to Master");
 	$win = translate_inline("Win against Master");
 	$weapon = translate_inline("Weapon");
-	rawoutput("<table border='0' cellpadding='2' cellspacing='1' align='center' bgcolor='#999999'>");
-	rawoutput("<tr class='trhead'><td>$ops</td><td>$level</td><td>$name</td><td>$weapon</td><td>$win</td><td>$lose</tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$ops</th><th>$level</th><th>$name</th><th>$weapon</th><th>$win</th><th>$lose</tr></thead>");
 	$i = false;
 	while ($row = DB::fetch_assoc($res)) {
 		$id = $row['creatureid'];
-		rawoutput("<tr class='".($i?"trdark":"trlight")."'><td nowrap>");
+		rawoutput("<tr><td class='collapsing'>");
 		rawoutput("[ <a href='masters.php?op=edit&id=$id'>");
 		output_notl($edit);
 		rawoutput("</a> | <a href='masters.php?op=del&id=$id' onClick='return confirm(\"$delconfirm\");'>");
