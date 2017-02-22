@@ -407,7 +407,9 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
 		break;
 		case "hidden":
-			return "<input type='hidden' name='$keyout' value=\"".HTMLEntities($row[$key], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\">".HTMLEntities($row[$key], ENT_COMPAT, getsetting('charset', 'UTF-8'));
+			if (array_key_exists($key, $row)) $val = $row[$key];
+			else $val = '';
+			return "<input type='hidden' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting('charset', 'UTF-8'))."\">".HTMLEntities($val, ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
 		break;
 		case "viewonly":
