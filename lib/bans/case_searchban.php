@@ -29,11 +29,11 @@ $target=httppost('target');
 $since='WHERE 0';
 $submit=translate_inline("Search");
 if ($target=='') {
-	rawoutput("<form action='bans.php?op=searchban' method='POST'>");
+	rawoutput("<br><form action='bans.php?op=searchban' method='POST' class='ui form'><div class='inline field'><label>");
 	addnav("","bans.php?op=searchban");
 	output("Search banned user by name: ");
-	rawoutput("<input name='target' value='$target'>");
-	rawoutput("<input type='submit' class='button' value='$submit'></from><br><br>");
+	rawoutput("</label><div class='ui action input'><input name='target' value='$target'>");
+	rawoutput("<button type='submit' class='ui button'>$submit</button></div></div></from>");
 } elseif (is_numeric($target)) {
 	//none
 	$sql="SELECT lastip,uniqueid FROM accounts WHERE acctid=".$target;
@@ -41,7 +41,7 @@ if ($target=='') {
 	$row=DB::fetch_assoc($result);
 	$since="WHERE ipfilter LIKE '%".$row['lastip']."%' OR uniqueid LIKE '%".$row['uniqueid']."%'";
 } else {
-	require_once("lib/lookup_user.php");
+	require_once 'lib/lookup_user.php';
 	$names=lookup_user($target);
 	if ($names[0]!==false) {
 		rawoutput("<form action='bans.php?op=searchban' method='POST'>");
@@ -81,7 +81,7 @@ function getUserInfo(ip,id,divid){
 }
 </script>
 ");
-rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
+rawoutput("<table class='ui very compact striped selectable table'>");
 $ops = translate_inline("Ops");
 $bauth = translate_inline("Ban Author");
 $ipd = translate_inline("IP/ID");
@@ -89,12 +89,13 @@ $dur = translate_inline("Duration");
 $mssg = translate_inline("Message");
 $aff = translate_inline("Affects");
 $l = translate_inline("Last");
-	rawoutput("<tr class='trhead'><td>$ops</td><td>$bauth</td><td>$ipd</td><td>$dur</td><td>$mssg</td><td>$aff</td><td>$l</td></tr>");
+	rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead>");
 $i=0;
-while ($row = DB::fetch_assoc($result)) {
+while ($row = DB::fetch_assoc($result))
+{
 	$liftban = translate_inline("Lift&nbsp;ban");
 	$showuser = translate_inline("Click&nbsp;to&nbsp;show&nbsp;users");
-	rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
+	rawoutput("<tr>");
 	rawoutput("<td><a href='bans.php?op=delban&ipfilter=".urlencode($row['ipfilter'])."&uniqueid=".urlencode($row['uniqueid'])."'>");
 	output_notl("%s", $liftban, true);
 	rawoutput("</a>");

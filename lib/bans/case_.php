@@ -14,8 +14,8 @@ if ($display == 1){
 	$lip =translate_inline("Last IP");
 	$lid =translate_inline("Last ID");
 	$ban = translate_inline("Ban");
-		rawoutput("<table>");
-	rawoutput("<tr class='trhead'><td>$ops</td><td><a href='bans.php?sort=acctid$q'>$acid</a></td><td><a href='bans.php?sort=login$q'>$login</a></td><td><a href='bans.php?sort=name$q'>$nm</a></td><td><a href='bans.php?sort=level$q'>$lev</a></td><td><a href='bans.php?sort=laston$q'>$lon</a></td><td><a href='bans.php?sort=gentimecount$q'>$hits</a></td><td><a href='bans.php?sort=lastip$q'>$lip</a></td><td><a href='bans.php?sort=uniqueid$q'>$lid</a></td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$ops</th><th><a href='bans.php?sort=acctid$q'>$acid</a></th><th><a href='bans.php?sort=login$q'>$login</a></th><th><a href='bans.php?sort=name$q'>$nm</a></th><th><a href='bans.php?sort=level$q'>$lev</a></th><th><a href='bans.php?sort=laston$q'>$lon</a></th><th><a href='bans.php?sort=gentimecount$q'>$hits</a></th><th><a href='bans.php?sort=lastip$q'>$lip</a></th><th><a href='bans.php?sort=uniqueid$q'>$lid</a></th></tr></thead>");
 	addnav("","bans.php?sort=acctid$q");
 	addnav("","bans.php?sort=login$q");
 	addnav("","bans.php?sort=name$q");
@@ -26,7 +26,8 @@ if ($display == 1){
 	addnav("","bans.php?sort=uniqueid$q");
 	$rn=0;
 	$oorder = "";
-	while ($row=DB::fetch_assoc($searchresult)) {
+	while ($row=DB::fetch_assoc($searchresult))
+	{
 		$laston = relativedate($row['laston']);
 		$loggedin =
 			(date("U") - strtotime($row['laston']) <
@@ -36,8 +37,7 @@ if ($display == 1){
 		$row['laston']=$laston;
 		if ($row[$order]!=$oorder) $rn++;
 		$oorder = $row[$order];
-		rawoutput("<tr class='".($rn%2?"trlight":"trdark")."'>");
-		rawoutput("<td nowrap>");
+		rawoutput("<tr><td class='collapsing'>");
 		rawoutput("[ <a href='bans.php?op=setupban&userid={$row['acctid']}'>$ban</a> ]");
 		addnav("","bans.php?op=setupban&userid={$row['acctid']}");
 		rawoutput("</td><td>");
@@ -56,7 +56,7 @@ if ($display == 1){
 		output_notl("%s", $row['lastip']);
 		rawoutput("</td><td>");
 		output_notl("%s", $row['uniqueid']);
-		rawoutput("</td><td>");
+		rawoutput("</td>");
 		$gentimecount+=$row['gentimecount'];
 		$gentime+=$row['gentime'];
 	}
