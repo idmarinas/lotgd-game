@@ -1,8 +1,8 @@
 <?php
 //Author: Lonny Luberts - 3/18/2005
 //Heavily modified by JT Traub
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_USERS);
 
@@ -20,11 +20,12 @@ $editarray=array(
 	"female"=>"Female Title,text|",
 );
 addnav("Other");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 addnav("Functions");
 
-switch ($op) {
+switch ($op)
+{
 	case "save":
 		$male = httppost('male');
 		$female = httppost('female');
@@ -59,15 +60,15 @@ switch ($op) {
 		break;
 }
 
-switch ($op) {
-
+switch ($op)
+{
 	case "reset":
 
-		require_once("lib/titles.php");
-		require_once("lib/names.php");
+		require_once 'lib/titles.php';
+		require_once 'lib/names.php';
 
 		output("`^Rebuilding all titles for all players.`0`n`n");
-		$sql = "SELECT name,title,dragonkills,acctid,sex,ctitle FROM " . DB::prefix("accounts");
+		$sql = "SELECT name,title,dragonkills,acctid,sex,ctitle,playername FROM " . DB::prefix("accounts");
 		$result = DB::query($sql);
 		$number=DB::num_rows($result);
 		for ($i=0;$i<$number;$i++){
@@ -112,7 +113,7 @@ switch ($op) {
 		break;
 
 	case "edit": case "add":
-		require_once("lib/showform.php");
+		require_once 'lib/showform.php';
 		if ($op=="edit"){
 			output("`\$Editing an existing title`n`n");
 			$sql = "SELECT * FROM ".DB::prefix("titles")." WHERE titleid='$id'";
@@ -123,7 +124,7 @@ switch ($op) {
 			$row = array('titleid'=>0, 'male'=>'', 'female'=>'', 'dk'=>0);
 			$id = 0;
 		}
-		rawoutput("<form action='titleedit.php?op=save&id=$id' method='POST'>");
+		rawoutput("<form action='titleedit.php?op=save&id=$id' method='POST' class='ui form'>");
 		addnav("","titleedit.php?op=save&id=$id");
 		lotgd_showform($editarray,$row);
 		rawoutput("</form>");
@@ -150,16 +151,16 @@ switch ($op) {
 			$edit = translate_inline("Edit");
 			$del = translate_inline("Delete");
 			$delconfirm = translate_inline("Are you sure you wish to delete this title?");
-			rawoutput("<table border=0 cellspacing=0 cellpadding=2 width='100%' align='center'>");
+			rawoutput("<table class='ui very compact striped selectable table'>");
 			// reference tag is currently unused
 			// rawoutput("<tr class='trhead'><td>$ops</td><td>$dks</td><td>$reftag</td><td>$mtit</td><td>$ftit</td></tr>");
-			rawoutput("<tr class='trhead'><td>$ops</td><td>$dks</td><td>$mtit</td><td>$ftit</td></tr>");
+			rawoutput("<thead><tr><th>$ops</th><th>$dks</th><th>$mtit</th><th>$ftit</th></tr></thead>");
 			$result = DB::query($sql);
 			$i = 0;
 			while($row = DB::fetch_assoc($result)) {
 				$id = $row['titleid'];
-				rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
-				rawoutput("<td>[<a href='titleedit.php?op=edit&id=$id'>$edit</a>|<a href='titleedit.php?op=delete&id=$id' onClick='return confirm(\"$delconfirm\");'>$del</a>]</td>");
+				rawoutput("<tr>");
+				rawoutput("<td class='collapsing'>[<a data-tooltip='$edit' href='titleedit.php?op=edit&id=$id'><i class='write icon'></i></a>|<a href='titleedit.php?op=delete&id=$id' onClick='return confirm(\"$delconfirm\");' data-tooltip='$del'><i class='trash icon'></i></a>]</td>");
 				addnav("","titleedit.php?op=edit&id=$id");
 				addnav("","titleedit.php?op=delete&id=$id");
 				rawoutput("<td>");
