@@ -83,14 +83,14 @@ if ($op==""){
 	$wname=translate_inline("`bName`b");
 	$wdam=translate_inline("`bDamage`b");
 	$wcost=translate_inline("`bCost`b");
-	rawoutput("<table border='0' cellpadding='0'>");
-	rawoutput("<tr class='trhead'><td>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>");
 	output_notl($wname);
-	rawoutput("</td><td align='center'>");
+	rawoutput("</th><td align='center'>");
 	output_notl($wdam);
-	rawoutput("</td><td align='right'>");
+	rawoutput("</th><td align='right'>");
 	output_notl($wcost);
-	rawoutput("</td></tr>");
+	rawoutput("</th></tr></thead>");
 	$i=0;
 	while($row = DB::fetch_assoc($result)) {
 		$link = true;
