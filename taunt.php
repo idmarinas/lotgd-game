@@ -2,28 +2,28 @@
 // addnews ready
 // mail ready
 // translator ready
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 tlschema("taunt");
 
 check_su_access(SU_EDIT_CREATURES);
 
 page_header("Taunt Editor");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 $op = httpget('op');
 $tauntid = httpget('tauntid');
 if ($op=="edit"){
 	addnav("Taunts");
 	addnav("Return to the taunt editor","taunt.php");
-	rawoutput("<form action='taunt.php?op=save&tauntid=$tauntid' method='POST'>",true);
+	rawoutput("<form action='taunt.php?op=save&tauntid=$tauntid' method='POST' class='ui form'>",true);
 	addnav("","taunt.php?op=save&tauntid=$tauntid");
 	if ($tauntid!=""){
 		$sql = "SELECT * FROM " . DB::prefix("taunts") . " WHERE tauntid=\"$tauntid\"";
 		$result = DB::query($sql);
 		$row = DB::fetch_assoc($result);
-		require_once("lib/substitute.php");
+		require_once 'lib/substitute.php';
 		$badguy=array('creaturename'=>'Baron Munchausen', 'creatureweapon'=>'Bad Puns');
 		$taunt = substitute_array($row['taunt']);
 		$taunt = call_user_func_array("sprintf_translate", $taunt);
@@ -43,7 +43,7 @@ if ($op=="edit"){
 	output("{badguyname}	= The monster's name (also can be specified as {badguy}`n");
 	output("{badguyweapon}	= The monster's weapon (also can be specified as {creatureweapon}`n");
 	$save = translate_inline("Save");
-	rawoutput("<input type='submit' class='button' value='$save'>");
+	rawoutput("<input type='submit' class='ui button' value='$save'>");
 	rawoutput("</form>");
 }else if($op=="del"){
 	$sql = "DELETE FROM " . DB::prefix("taunts") . " WHERE tauntid=\"$tauntid\"";
@@ -64,16 +64,16 @@ if ($op=="edit"){
 if ($op == "") {
 	$sql = "SELECT * FROM " . DB::prefix("taunts");
 	$result = DB::query($sql);
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	$op = translate_inline("Ops");
 	$t = translate_inline("Taunt String");
 	$auth = translate_inline("Author");
-	rawoutput("<tr class='trhead'><td nowrap>$op</td><td>$t</td><td>$auth</td></tr>");
+	rawoutput("<thead><tr><th>$op</th><th>$t</th><th>$auth</th></tr></thead>");
 	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
 		$row=DB::fetch_assoc($result);
-		rawoutput("<tr class='".($i%2==0?"trdark":"trlight")."'>",true);
-		rawoutput("<td nowrap>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>");
 		$edit = translate_inline("Edit");
 		$del = translate_inline("Del");
 		$conf = translate_inline("Are you sure you wish to delete this taunt?");

@@ -79,19 +79,19 @@ if ($op == "") {
 	output("`i`\$Note: These messages are NEWS messages the user will trigger when he/she dies in the forest or graveyard.`0`i`n`n");
 	$sql = "SELECT * FROM " . DB::prefix("deathmessages");
 	$result = DB::query($sql);
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	$op = translate_inline("Ops");
 	$t = translate_inline("Deathmessage String");
 	$auth = translate_inline("Author");
 	$f = translate_inline("Forest Message");
 	$g = translate_inline("Graveyard Message");
 	$ta = translate_inline("With Taunt");
-	rawoutput("<tr class='trhead'><td nowrap>$op</td><td>$t</td><td>$f</td><td>$g</td><td>$ta</td><td>$auth</td></tr>");
+	rawoutput("<thead><tr><th>$op</th><th>$t</th><th>$f</th><th>$g</th><th>$ta</th><th>$auth</th></tr></thead>");
 	$i=true;
 	while ($row=DB::fetch_assoc($result)) {
 		$i=!$i;
-		rawoutput("<tr class='".($i?"trdark":"trlight")."'>",true);
-		rawoutput("<td nowrap>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>");
 		$edit = translate_inline("Edit");
 		$del = translate_inline("Del");
 		$conf = translate_inline("Are you sure you wish to delete this deathmessage?");
