@@ -88,7 +88,6 @@ if ($session['user']['superuser'] & SU_MANAGE_MODULES) addnav("Manage Modules","
 
 if ($session['user']['superuser'] & SU_EDIT_CONFIG) addnav("Mechanics");
 if ($session['user']['superuser'] & SU_EDIT_CONFIG) addnav("Game Settings","configuration.php");
-if ($session['user']['superuser'] & SU_MEGAUSER) addnav("Core News","corenews.php");
 if ($session['user']['superuser'] & SU_MEGAUSER) addnav("Global User Functions","globaluserfunctions.php");
 if ($session['user']['superuser'] & SU_EDIT_CONFIG) addnav("Debug Analysis","debug.php");
 if ($session['user']['superuser'] & SU_EDIT_CONFIG) addnav("Referring URLs","referers.php");
