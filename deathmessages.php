@@ -30,7 +30,7 @@ case "edit":
 		$deathmessage = call_user_func_array("sprintf_translate", $deathmessage);
 		output("Preview: %s`0`n`n", $deathmessage);
 	} else {
-		$row = array('deathmessageid'=>0, 'deathmessage'=>"");
+		$row = ['deathmessageid' => 0, 'deathmessage' => '', 'forest'=> 0, 'graveyard' => 0, 'taunt' => 0];
 	}
 	output("The following codes are supported (case matters):`n");
 	output("{goodguyname}	= The player's name (also can be specified as {goodguy}`n");
