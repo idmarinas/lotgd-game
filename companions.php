@@ -146,16 +146,16 @@ if ($op==""){
 	$deac = translate_inline("Deactivate");
 	$act = translate_inline("Activate");
 
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
-	rawoutput("<tr class='trhead'><td nowrap>$ops</td><td>$name</td><td>$cost</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$ops</th><th>$name</th><th>$cost</th></tr></thead>");
 	$cat = "";
 	$count=0;
 
 	while ($row=DB::fetch_assoc($result)) {
 		if ($cat!=$row['category']){
-			rawoutput("<tr class='trlight'><td colspan='5'>");
+			rawoutput("<thead><tr><td colspan='5'>");
 			output("Category: %s", $row['category']);
-			rawoutput("</td></tr>");
+			rawoutput("</td></tr></thead>");
 			$cat = $row['category'];
 			$count=0;
 		}

@@ -169,8 +169,8 @@ if ($op==""){
 
 	$conf = translate_inline("There are %s user(s) who own this mount, are you sure you wish to delete it?");
 
-	rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
-	rawoutput("<tr class='trhead'><td nowrap>$ops</td><td>$name</td><td>$cost</td><td>$feat</td><td nowrap>$owners</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr'><th>$ops</th><th>$name</th><th>$cost</th><th>$feat</th><th>$owners</th></tr></thead>");
 	$result = DB::query($sql);
 	$cat = "";
 	$count=0;
