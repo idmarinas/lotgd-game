@@ -32,6 +32,7 @@ if ($category > "") {
 
 $asc_desc=($sortorder==0?"DESC":"ASC");
 
+$sqlsort = '';
 if ($sortby!='') {
 	$sqlsort=" ORDER BY ".$sortby." ".$asc_desc;
 }
