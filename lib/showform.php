@@ -64,7 +64,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
  		}
 		elseif ($info[1]=="note")
 		{
-			$tabContent[$title_id][] = sprintf('<div class="ui small info message">%s</div>', $info[0]);
+			$tabContent[$title_id][] = sprintf('<div class="ui small info message">%s</div>', appoencode($info[0]));
 		}
 		else
 		{
@@ -309,22 +309,31 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			//1-26-03 added disablemask so this field type can be used
 			// on bitfields other than superuser.
 			reset($info);
-			list($k,$v)=each($info);
-			list($k,$v)=each($info);
+			next($info);
+			next($info);
 			list($k,$disablemask)=each($info);
 			$input = "<input type='hidden' name='$keyout"."[0]' value='1'>";
-			while (list($k,$v)=each($info))
+			while (list($k, $v) = each($info))
 			{
-				$input .= "<div class='ui checkbox'><input type='checkbox' name='$keyout"."[$v]'"
-					.(isset($row[$key]) && (int)$row[$key] & (int)$v?" checked":"")
-					.($disablemask & (int)$v?"":" disabled")
-					." value='1'> ";
-				list($k,$v)=each($info);
-				if (! isset($pretrans) || !$pretrans) $v = translate_inline($v);
-				$input .= sprintf("<label>%s</label></div>`n", $v);
+				if ('title' != $v)
+				{
+					$input .= "<div class='ui toggle checkbox'><input type='checkbox' name='$keyout"."[$v]'"
+						.(isset($row[$key]) && (int)$row[$key] & (int)$v?" checked":"")
+						.($disablemask & (int)$v?"":" disabled")
+						." value='1'> ";
+					list($k,$v)=each($info);
+					if (! isset($pretrans) || !$pretrans) $v = translate_inline($v);
+					$input .= sprintf("<label>%s</label></div><br>", $v);
+				}
+				else
+				{
+					list($k,$v)=each($info);
+					if (! isset($pretrans) || !$pretrans) $v = translate_inline($v);
+					$input .= sprintf("%s<br>", $v);
+				}
 			}
 
-			return $input;
+			return '<div class="right floated">'.$input.'</div>';
 		break;
 		case "datelength":
 			// However, there was a bug with your translation code wiping
@@ -421,7 +430,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "viewhiddenonly":
 			//don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
 			if (isset($row[$key])) {
-				$text = '<span>' . dump_item($row[$key]) . '</span>';
+				$text = '<span>' . appoencode(dump_item($row[$key])) . '</span>';
 				$text .= "<input type='hidden' name='".addslashes($key)."' value='".addslashes($row[$key])."'>";
 
 				return $text;
