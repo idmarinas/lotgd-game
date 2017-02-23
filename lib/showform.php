@@ -112,18 +112,17 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		}
 		$popupMenu .= '</div></div>';
 
-		output_notl(sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
+		rawoutput(sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
 				translate_inline('Browse'),
 				$popupMenu,
 				$tabActive
-			),
-			true
+			)
 		);
 
 		unset($popupMenu);
 	}
 
-	output_notl(implode('', $content), true);
+	rawoutput(implode('', $content));
 
 	unset($tabContent, $content, $tabMenu);
 
