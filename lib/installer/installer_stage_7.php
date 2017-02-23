@@ -20,7 +20,7 @@ if (! isset($session['fromversion']) || $session['fromversion'] == '')
 	output("`@`c`bConfirmation`b`c");
 	output("`2Please confirm the following:`0`n");
 	rawoutput("<form action='installer.php?stage=7' method='POST'>");
-	rawoutput("<table class='ui very compact striped selectable table'><tr><td valign='top'>");
+	rawoutput("<table class='ui very basic table'><tr><td>");
 	output("`2I should:`0");
 	rawoutput("</td><td>");
 	$version = getsetting('installer_version', '-1');
