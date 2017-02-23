@@ -1,4 +1,4 @@
-<?php 
+<?php
 $userinfo = array(
 	"Account info,title",
 	"acctid"=>"User id,viewonly",
@@ -40,7 +40,7 @@ $userinfo = array(
 	"defense"=>"Bonus Defense (includes armor defense),int",
 	"totalattack"=>"Total Attack (Composita),viewonly",
 	"totaldefense"=>"Total Defense (Composita),viewonly",
-	
+
 	"More Stats,title",
 	"turns"=>"Turns left,int",
 	"playerfights"=>"Playerfights left,int",
@@ -85,13 +85,13 @@ $userinfo = array(
 
 	"Superuser Flags,title",
 	"superuser"=>"Superuser Permissions".
-	    "<br/><i>For the most part you can only set flags that you yourself possess;".
-		"<br/>if you try to set one that you don't have; it won't stick.</i>,".
+	    "<br><i>For the most part you can only set flags that you yourself possess;".
+		"<br>if you try to set one that you don't have; it won't stick.</i>,".
 		"bitfield,".
 		($session['user']['superuser'] | SU_ANYONE_CAN_SET |
 		  ($session['user']['superuser']&SU_MEGAUSER ? 0xFFFFFFFF : 0)).",".
-		SU_MEGAUSER.        ",MEGA USER (enable all permissions)* <i>(this applies to any future flags as well)</i>".
-		"<br/><br/><b>Editors</b>,".
+		SU_MEGAUSER.        ",MEGA USER (enable all permissions)* <i>(this applies to any future flags as well)</i>,".
+		"title,<br><br><b>Editors</b><br>,".
 		SU_EDIT_CONFIG.     ",Edit Game Configurations*,".
 		SU_EDIT_USERS.      ",Edit Users*,".
 		SU_IS_BANMASTER.    ",Edit Bans,".
@@ -99,19 +99,19 @@ $userinfo = array(
 		SU_EDIT_CREATURES.  ",Edit Creatures & Taunts,".
 		SU_EDIT_EQUIPMENT.  ",Edit Armor & Weapons,".
 		SU_EDIT_RIDDLES.    ",Edit Riddles,".
-		SU_MANAGE_MODULES.  ",Manage Modules".
-		"<br/><br/><b>Customer Service</b>,".
+		SU_MANAGE_MODULES.  ",Manage Modules,".
+		"title,<br><br><b>Customer Service</b><br>,".
 		SU_IS_GAMEMASTER.   ",Can post comments as gamemaster,".
 		SU_EDIT_PETITIONS.  ",Handle Petitions,".
 		SU_EDIT_COMMENTS.   ",Moderate Comments,".
 		SU_MODERATE_CLANS.  ",Moderate Clan Commentary,".
 		SU_AUDIT_MODERATION.",Audit Moderated Comments,".
         SU_OVERRIDE_YOM_WARNING.",Do NOT display YOM warning for this person,".
-		SU_POST_MOTD.       ",Post MoTD's".
-		"<br/><br/><b>Donations</b>,".
+		SU_POST_MOTD.       ",Post MoTD's,".
+		"title,<br><br><b>Donations</b><br>,".
 		SU_EDIT_DONATIONS.  ",Manage Donations*,".
-		SU_EDIT_PAYLOG.     ",Manage Payment Log".
-		"<br/><br/><b>Game Development</b>,".
+		SU_EDIT_PAYLOG.     ",Manage Payment Log,".
+		"title,<br><br><b>Game Development</b><br>,".
 		SU_INFINITE_DAYS.   ",Infinite Days*,".
 		SU_DEVELOPER.       ",Game Developer* (super powers),".
 		SU_IS_TRANSLATOR.   ",Enable Translation Tool,".
@@ -120,8 +120,8 @@ $userinfo = array(
 		SU_RAW_SQL.         ",Execute Raw SQL*,".
 		SU_VIEW_SOURCE.     ",View source code,".
 		SU_GIVE_GROTTO.     ",Grotto access (only if not granted implicitly in another permission),".
-		SU_NEVER_EXPIRE.    ",Account never expires".
-		"<br/><br/>* Granting any of these options will hide the user from the HoF",
+		SU_NEVER_EXPIRE.    ",Account never expires,".
+		"title,<br><br>* Granting any of these options will hide the user from the HoF",
 
 	"translatorlanguages"=>"Allowed languages to translate (use the 2 chars given in the enum field in the game settings and seperate by comma)",
 
