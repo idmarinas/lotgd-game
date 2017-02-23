@@ -152,7 +152,7 @@ if (0 < DB::num_rows($result))
 	$delchecked = htmlentities(translate_inline("Delete Checked"), ENT_COMPAT, getsetting("charset", "UTF-8"));
 	$checknames = htmlentities(translate_inline("`vCheck by Name"), ENT_COMPAT, getsetting("charset", "UTF-8"));
 	output_notl("<div class='inline field'><label>$checknames</label><select class='ui dropdown' onchange='check_name()' id='check_name_select'>".$option."</select></div>",true);
-	rawoutput("<div class='field'><div class='ui buttons'><input type='button' class='ui primary button' id='button_check' value=\"$checkall\" class='button' onClick='check_all()'>");
+	rawoutput("<div class='field'><div class='ui buttons'><input type='button' class='ui button' id='button_check' value=\"$checkall\" class='button' onClick='check_all()'>");
 	rawoutput("<input type='submit' class='ui red button' value=\"$delchecked\">");
 	//enter here more input buttons as you like, you can then evaluate them via the mailfunctions hook
 	modulehook('mailform', []);

@@ -170,7 +170,7 @@ $sendclose = translate_inline("Send and Close");
 $sendback = translate_inline("Send and back to main Mailbox");
 
 rawoutput('</div><div class="ui buttons">');
-rawoutput("<button type='submit' class='ui primary button'>$send</button>");
+rawoutput("<button type='submit' class='ui button'>$send</button>");
 rawoutput("<button type='submit' class='ui orange button'>$sendback</button>");
 rawoutput("<button type='submit' class='ui red button'>$sendclose</button>");
 rawoutput('</div>');
