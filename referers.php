@@ -2,9 +2,9 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/dhms.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/dhms.php';
+require_once 'lib/http.php';
 
 tlschema("referers");
 
@@ -25,7 +25,7 @@ if ($op=="rebuild"){
 		DB::query($sql);
 	}
 }
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 addnav("Referer Options");
 addnav("",$_SERVER['REQUEST_URI']);
@@ -47,10 +47,11 @@ $dest = translate_inline("Destination");
 $none = translate_inline("`iNone`i");
 $notset = translate_inline("`iNot set`i");
 $skipped = translate_inline("`i%s records skipped (over a week old)`i");
-rawoutput("<table border=0 cellpadding=2 cellspacing=1><tr class='trhead'><td>$count</td><td>$last</td><td>URL</td><td>$dest</td><td>IP</td></tr>");
+rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$count</th><th>$last</th><th>URL</th><th>$dest</th><th>IP</th></tr></thead>");
 $result = DB::query($sql);
-while ($row = DB::fetch_assoc($result)) {
-	rawoutput("<tr class='trdark'><td valign='top'>");
+while ($row = DB::fetch_assoc($result))
+{
+	rawoutput("<tr><td valign='top'>");
 	output_notl("`b".$row['count']."`b");
 	rawoutput("</td><td valign='top'>");
 	$diffsecs = strtotime("now")-strtotime($row['last']);
@@ -68,8 +69,9 @@ while ($row = DB::fetch_assoc($result)) {
 	for ($k=0;$k<$number;$k++){
 		$row1=DB::fetch_assoc($result1);
 		$diffsecs = strtotime("now")-strtotime($row1['last']);
-		if ($diffsecs<=604800){
-			rawoutput("<tr class='trlight'><td>");
+		if ($diffsecs<=604800)
+		{
+			rawoutput("<tr><td>");
 			output_notl($row1['count']);
 			rawoutput("</td><td valign='top'>");
 			//output((int)($diffsecs/86400)."d".(int)($diffsecs/3600%3600)."h".(int)($diffsecs/60%60)."m".(int)($diffsecs%60)."s");
@@ -91,7 +93,7 @@ while ($row = DB::fetch_assoc($result)) {
 		}
 	}
 	if ($skippedcount>0){
-		rawoutput("<tr class='trlight'><td>$skippedtotal</td><td valign='top' colspan='4'>");
+		rawoutput("<tr><td>$skippedtotal</td><td valign='top' colspan='4'>");
 		output_notl(sprintf($skipped,$skippedcount));
 		rawoutput("</td></tr>");
 	}
