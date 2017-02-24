@@ -3,7 +3,7 @@
 // mail ready
 // translator ready
 
-require_once("lib/http.php");
+require_once 'lib/http.php';
 
 $skin = httppost('template');
 if ($skin > "") {
@@ -11,14 +11,14 @@ if ($skin > "") {
 	$_COOKIE['template']=$skin;
 }
 
-require_once("lib/villagenav.php");
-require_once("common.php");
+require_once 'lib/villagenav.php';
+require_once 'common.php';
 
 tlschema("prefs");
 
-require_once("lib/is_email.php");
-require_once("lib/showform.php");
-require_once("lib/sanitize.php");
+require_once 'lib/is_email.php';
+require_once 'lib/showform.php';
+require_once 'lib/sanitize.php';
 
 page_header("Preferences");
 
@@ -28,15 +28,15 @@ addnav("Navigation");
 
 if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	$userid = httpget('userid');
-	require_once("lib/charcleanup.php");
+	require_once 'lib/charcleanup.php';
 	char_cleanup($userid, CHAR_DELETE_SUICIDE);
 	$sql = "DELETE FROM " . DB::prefix("accounts") . " WHERE acctid='$userid'";
 	DB::query($sql);
 	output("Your character has been deleted!");
 	addnews("`#%s quietly passed from this world.",$session['user']['name']);
 	addnav("Login Page", "index.php");
-	$session=array();
-	$session['user'] = array();
+	$session= [];
+	$session['user'] =  [];
 	$session['loggedin'] = false;
 	$session['user']['loggedin'] = false;
 	invalidatedatacache("charlisthomepage");
@@ -299,7 +299,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	//
 	$prefs = $session['user']['prefs'];
 	$prefs['bio'] = $session['user']['bio'];
-	$prefs['template'] = $_COOKIE['template'];
+	$prefs['template'] = isset($_COOKIE['template']) ?: '';
 	if ($prefs['template'] == "")
 		$prefs['template'] = getsetting("defaultskin", "jade.htm");
 	if ($prefs['sexuality'] == "") {
@@ -321,15 +321,15 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	$sql = "SELECT modulename FROM " . DB::prefix("modules") . " WHERE infokeys LIKE '%|prefs|%' AND active=1 ORDER BY modulename";
 	$result = DB::query($sql);
 	$everfound = 0;
-	$foundmodules=array();
-	$msettings = array();
-	$mdata = array();
+	$foundmodules= [];
+	$msettings =  [];
+	$mdata =  [];
 	while ($row = DB::fetch_assoc($result)) {
 		$module = $row['modulename'];
 		$info = get_module_info($module);
 		if (count($info['prefs']) <= 0) continue;
-		$tempsettings = array();
-		$tempdata = array();
+		$tempsettings =  [];
+		$tempdata =  [];
 		$found = 0;
 		while (list($key, $val) = each($info['prefs'])) {
 			$isuser = preg_match("/^user_/", $key);
@@ -357,8 +357,8 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 					$msettings = array_merge($msettings, $tempsettings);
 					$mdata = array_merge($mdata, $tempdata);
 				}
-				$tempsettings = array();
-				$tempdata = array();
+				$tempsettings =  [];
+				$tempdata =  [];
 			}
 
 			if (!$isuser && !$ischeck && !strstr($type,"title") &&
@@ -396,7 +396,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 			$foundmodules[]=$module;
 		}
 	}
-	if ($foundmodules!=array()) {
+	if ($foundmodules!= []) {
 		$sql = "SELECT * FROM " . DB::prefix("module_userprefs") . " WHERE modulename IN ('".implode("','",$foundmodules)."') AND (setting LIKE 'user_%' OR setting LIKE 'check_%') AND userid='".$session['user']['acctid']."'";
 		$result1 = DB::query($sql);
 		while($row1 = DB::fetch_assoc($result1)) {
