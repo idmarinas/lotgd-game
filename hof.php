@@ -97,14 +97,15 @@ function display_table($title, $sql, $none=false, $foot=false,
 	} else {
 		output_notl("`c`b`^%s`0`b`c`n", $title);
 	}
-	rawoutput('<table class="hof-table-list">');
-	rawoutput("<tr class='trhead'>");
-	output_notl("<td>`b$rank`b</td><td>`b$name`b</td>", true);
+	rawoutput('<table class="ui very compact striped selectable table">');
+	rawoutput("<thead><tr>");
+	output_notl("<th>`b$rank`b</th><th>`b$name`b</th>", true);
 	if ($data_header !== false) {
 		for ($i = 0; $i < count($data_header); $i++) {
-			output_notl("<td>`b{$data_header[$i]}`b</td>", true);
+			output_notl("<th>`b{$data_header[$i]}`b</th>", true);
 		}
 	}
+	rawoutput('</tr></thead>');
 	$result = DB::query($sql);
 	if (DB::num_rows($result)==0){
 		$size = ($data_header === false) ? 2 : 2+count($data_header);
@@ -178,7 +179,7 @@ if ($op=="money"){
 		$meop ".($session['user']['goldinbank'] + $session['user']['gold']);
 	//edward pointed out that a cast is necessary as signed+unsigned=boffo
 //	$sql = "SELECT name,(goldinbank+gold+round((((rand()*10)-5)/100)*(goldinbank+gold))) AS data1 FROM " . DB::prefix("accounts") . " WHERE $standardwhere ORDER BY data1 $order, level $order, experience $order, acctid $order LIMIT $limit";
-//	$me = "SELECT count(acctid) AS count FROM ".DB::prefix("accounts")." WHERE $standardwhere AND (goldinbank+gold+round((((rand()*10)-5)/100)*(goldinbank+gold))) $meop ".($session['user']['goldinbank'] + $session['user']['gold']);
+// $me = "SELECT count(acctid) AS count FROM ".DB::prefix("accounts")." WHERE $standardwhere AND (goldinbank+gold+round((((rand()*10)-5)/100)*(goldinbank+gold))) $meop ".($session['user']['goldinbank'] + $session['user']['gold']);
 debug($sql);
 	$adverb = "richest";
 	if ($subop == "least") $adverb = "poorest";
@@ -234,6 +235,7 @@ debug($sql);
 	$unk = translate_inline("Unknown");
 	$sql = "SELECT name,dragonkills AS data1,level AS data2, IF(dragonage,dragonage,'$unk') AS data3, IF(bestdragonage,bestdragonage,'$unk') AS data4 FROM " . DB::prefix("accounts") . " WHERE $standardwhere $extra ORDER BY dragonkills $order,level $order,experience $order, acctid $order LIMIT $limit";
 	if ($session['user']['dragonkills']>0) $me = "SELECT count(acctid) AS count FROM ".DB::prefix("accounts")." WHERE $standardwhere $extra AND dragonkills $meop {$session['user']['dragonkills']}";
+	$me = '';
 	$adverb = "most";
 	if ($subop == "least") $adverb = "least";
 	$title = "Heroes with the $adverb dragon kills in the land";
