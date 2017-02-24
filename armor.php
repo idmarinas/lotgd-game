@@ -8,9 +8,9 @@
 * @see village.php
 * @see armoreditor.php
 */
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/villagenav.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/villagenav.php';
 
 tlschema("armor");
 
@@ -82,14 +82,14 @@ if ($op==""){
 	$aname = translate_inline("`bName`b");
 	$adef = translate_inline("`bDefense`b");
 	$acost = translate_inline("`bCost`b");
-	rawoutput("<table border='0' cellpadding='0'>");
-	rawoutput("<tr class='trhead'><td>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>");
 	output_notl($aname);
-	rawoutput("</td><td align='center'>");
+	rawoutput("</th><th>");
 	output_notl($adef);
-	rawoutput("</td><td align='right'>");
+	rawoutput("</th><th>");
 	output_notl($acost);
-	rawoutput("</td></tr>");
+	rawoutput("</th></tr></thead>");
 	$i = 0;
 	while($row = DB::fetch_assoc($result)) {
 		$link = true;
@@ -100,8 +100,8 @@ if ($op==""){
 		if (isset($row['unavailable']) && $row['unavailable'] == true) {
 			$link = false;
 		}
-		rawoutput("<tr class='".($i%2==1?"trlight":"trdark")."'>");
-		rawoutput("<td>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'>");
 		$color = "`)";
 		if ($row['value']<=($session['user']['gold']+$tradeinvalue)){
 			if ($link) {
@@ -119,9 +119,9 @@ if ($op==""){
 			output_notl("%s%s`0", $color, $row['armorname']);
 			addnav("","armor.php?op=buy&id={$row['armorid']}");
 		}
-		rawoutput("</td><td align='center'>");
+		rawoutput("</td><td>");
 		output_notl("%s%s`0", $color, $row['defense']);
-		rawoutput("</td><td align='right'>");
+		rawoutput("</td><td>");
 		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
 			$texto = $row['alternatetext'];
 			output_notl("%s%s`0", $color, $texto);

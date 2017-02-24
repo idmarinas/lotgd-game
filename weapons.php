@@ -86,13 +86,14 @@ if ($op==""){
 	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<thead><tr><th>");
 	output_notl($wname);
-	rawoutput("</th><td align='center'>");
+	rawoutput("</th><th>");
 	output_notl($wdam);
-	rawoutput("</th><td align='right'>");
+	rawoutput("</th><th>");
 	output_notl($wcost);
 	rawoutput("</th></tr></thead>");
 	$i=0;
-	while($row = DB::fetch_assoc($result)) {
+	while($row = DB::fetch_assoc($result))
+	{
 		$link = true;
 		$row = modulehook("modify-weapon", $row);
 		if (isset($row['skip']) && $row['skip'] === true) {
@@ -101,7 +102,7 @@ if ($op==""){
 		if (isset($row['unavailable']) && $row['unavailable'] == true) {
 			$link = false;
 		}
-		rawoutput("<tr class='".($i%2==1?"trlight":"trdark")."'><td>");
+		rawoutput("<tr><td class='collapsing'>");
 		$color = "`)";
 		if ($row['value']<=($session['user']['gold']+$tradeinvalue)){
 
@@ -120,9 +121,9 @@ if ($op==""){
 			output_notl("%s%s`0",$color,$row['weaponname']);
 			addnav("","weapons.php?op=buy&id={$row['weaponid']}");
 		}
-		rawoutput("</td><td align='center'>");
+		rawoutput("</td><td>");
 		output_notl("%s%s`0",$color,$row['damage']);
-		rawoutput("</td><td align='right'>");
+		rawoutput("</td><td>");
 		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
 			output_notl("%s%s`0", $color, $row['alternatetext']);
 		} else {
