@@ -94,7 +94,7 @@ if ($session['user']['loggedin']){
 	$search = translate_inline("Search by name: ");
 	$search2 = translate_inline("Search");
 
-	rawoutput("<form action='list.php?op=search' method='POST'>$search<input name='name'><input type='submit' class='button' value='$search2'></form>");
+	rawoutput("<form action='list.php?op=search' method='POST'><div class='ui action input'>$search<input name='name'><button type='submit' class='ui button'> $search2</button></div></form>");
 	addnav("","list.php?op=search");
 }
 
