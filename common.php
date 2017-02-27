@@ -229,7 +229,6 @@ if (OVERRIDE_FORCED_NAV) $nokeeprestore[$SCRIPT_NAME] = 1;
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
 	$session['user']['restorepage'] = $REQUEST_URI;
-	debug($REQUEST_URI);
 }
 
 if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
