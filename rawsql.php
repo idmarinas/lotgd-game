@@ -30,19 +30,19 @@ if ($op=="" || $op=="sql")
 			if (DB::affected_rows() > 0) {
 				output("`&%s rows affected.`n`n",DB::affected_rows());
 			}
-			rawoutput("<table cellspacing='1' cellpadding='2' border='0' bgcolor='#999999'>");
+			rawoutput("<table class='ui very compact striped table'>");
 			$number = DB::num_rows($r);
 			for ($i = 0; $i < $number; $i++) {
 				$row = DB::fetch_assoc($r);
 				if ($i == 0) {
-					rawoutput("<tr class='trhead'>");
+					rawoutput("<thead><tr>");
 					$keys = array_keys($row);
 					foreach ($keys as $value) {
-						rawoutput("<td>$value</td>");
+						rawoutput("<th>$value</th>");
 					}
-					rawoutput("</tr>");
+					rawoutput("</tr></thead>");
 				}
-				rawoutput("<tr class='".($i%2==0?"trlight":"trdark")."'>");
+				rawoutput("<tr>");
 				foreach ($keys as $value) {
 					rawoutput("<td valign='top'>{$row[$value]}</td>");
 				}
