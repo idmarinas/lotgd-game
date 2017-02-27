@@ -72,7 +72,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			else $result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
 			$tabContent[$title_id][] = sprintf('<div class="inline field"><label>%s</label>%s</div>',
-				$info[0],
+				appoencode($info[0]),
 				$result
 			);
 
