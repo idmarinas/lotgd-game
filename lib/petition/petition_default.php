@@ -18,8 +18,8 @@ if (count($post)>0)
 		$p = $session['user']['password'];
 		unset($session['user']['password']);
 		$date = date("Y-m-d H:i:s");
-		//$post['cancelpetition'] = false;
-		//$post['cancelreason'] = 'The admins here decided they didn\'t like something about how you submitted your petition.  They were also too lazy to give a real reason.';
+		if (! isset($post['cancelpetition'])) $post['cancelpetition'] = false;
+		if (! isset($post['cancelreason'])) $post['cancelreason'] = 'The admins here decided they didn\'t like something about how you submitted your petition.  They were also too lazy to give a real reason.';
 		$post = modulehook("addpetition",$post);
 		if (!$post['cancelpetition']){
 			$sql = "INSERT INTO " . DB::prefix("petitions") . " (author,date,body,pageinfo,ip,id) VALUES (".(int)$session['user']['acctid'].",'$date',\"".addslashes(output_array($post))."\",\"".addslashes(output_array($session,"Session:"))."\",'{$_SERVER['REMOTE_ADDR']}','".addslashes($_COOKIE['lgi'])."')";
@@ -122,7 +122,7 @@ else
 	rawoutput('</div>');
 	modulehook("petitionform", []);
 	$submit = translate_inline("Submit");
-	rawoutput("<p><input type='submit' class='ui primary button' value='$submit'></p>");
+	rawoutput("<p><input type='submit' class='ui button' value='$submit'></p>");
 	output("Please be as descriptive as possible in your petition.");
 	output("If you have questions about how the game works, please check out the <a href='petition.php?op=faq'>FAQ</a>.", true);
 	output("Petitions about game mechanics will more than likely not be answered unless they have something to do with a bug.");
