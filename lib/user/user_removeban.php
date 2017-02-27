@@ -98,7 +98,7 @@ function getUserInfo(ip,id,divid){
 }
 </script>
 ");
-rawoutput("<table border=0 cellpadding=2 cellspacing=1 bgcolor='#999999'>");
+rawoutput("<table class='ui very compact striped selectable table'>");
 $ops = translate_inline("Ops");
 $bauth = translate_inline("Ban Author");
 $ipd = translate_inline("IP/ID");
@@ -106,7 +106,7 @@ $dur = translate_inline("Duration");
 $mssg = translate_inline("Message");
 $aff = translate_inline("Affects");
 $l = translate_inline("Last");
-	rawoutput("<tr class='trhead'><td>$ops</td><td>$bauth</td><td>$ipd</td><td>$dur</td><td>$mssg</td><td>$aff</td><td>$l</td></tr>");
+	rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead");
 $i=0;
 while ($row = DB::fetch_assoc($result)) {
 	$liftban = translate_inline("Lift&nbsp;ban");
