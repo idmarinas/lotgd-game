@@ -183,8 +183,13 @@ function forestdefeat($enemies,$where="in the forest"){
 	page_footer();
 }
 
-//-- Remplace for changes ins attk, def and health
-function buffbadguy($badguy)
+/**
+ * Buff creature for optimiza to character stats
+ *
+ * @var array $badguy Information of creature
+ * @var string $hook Hook to activate when buff badguy
+ */
+function buffbadguy($badguy, $hook = 'buffbadguy')
 {
 	global $session;
 
@@ -251,6 +256,6 @@ function buffbadguy($badguy)
 	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
 	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
 
-	return modulehook('buffbadguy', $badguy);
+	return modulehook($hook, $badguy);
 }
 ?>
