@@ -61,8 +61,8 @@ if (httpget("subop")==""){
 	$args['user']['test'] = "Is out there???";
 	*/
 	$showformargs = modulehook("modifyuserview", array("userinfo"=>$userinfo, "user"=>$row));
-	$info = lotgd_showform($showformargs['userinfo'],$showformargs['user']);
-	rawoutput("<input type='hidden' value=\"".htmlentities(serialize($info), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
+	lotgd_showform($showformargs['userinfo'],$showformargs['user']);
+	rawoutput("<input type='hidden' value=\"".htmlentities(serialize($showformargs['user']), ENT_COMPAT, getsetting("charset", "UTF-8"))."\" name='oldvalues'>");
 	rawoutput("</form>");
 		output("`n`nLast Page Viewed:`n");
 	rawoutput("<iframe src='user.php?op=lasthit&userid=$userid' width='100%' height='400'>");
