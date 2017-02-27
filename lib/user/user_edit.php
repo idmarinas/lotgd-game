@@ -22,11 +22,11 @@ if (httpget("subop")==""){
 	rawoutput("<br><form action='user.php?op=special&userid=$userid$returnpetition' method='POST'>");
 	addnav("","user.php?op=special&userid=$userid$returnpetition");
 	$grant = translate_inline("Grant New Day");
-	rawoutput("<input type='submit' class='ui primary button' name='newday' value='$grant'>");
+	rawoutput("<input type='submit' class='ui button' name='newday' value='$grant'>");
 	$fix = translate_inline("Fix Broken Navs");
-	rawoutput("<input type='submit' class='ui primary button' name='fixnavs' value='$fix'>");
+	rawoutput("<input type='submit' class='ui button' name='fixnavs' value='$fix'>");
 	$mark = translate_inline("Mark Email As Valid");
-	rawoutput("<input type='submit' class='ui primary button' name='clearvalidation' value='$mark'>");
+	rawoutput("<input type='submit' class='ui button' name='clearvalidation' value='$mark'>");
 	rawoutput("</form>");
 		//Show a user's usertable
 	rawoutput("<form action='user.php?op=save&userid=$userid$returnpetition' method='POST'>");
@@ -43,7 +43,7 @@ if (httpget("subop")==""){
 	}
 	else
 	{
-		rawoutput("<br><input type='submit' class='ui primary button' value='$save'>");
+		rawoutput("<br><input type='submit' class='ui button' value='$save'>");
 	}
 	//Add new composita attack
 	$row['totalattack']=get_player_attack($row['acctid']);
