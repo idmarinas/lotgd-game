@@ -74,7 +74,9 @@ foreach ($post as $key=>$val) {
 			if ($session['user']['acctid']==$userid) {
 				$session['user']['name'] = $newname;
 			}
-		} elseif ($key=="title" && stripslashes($val)!=$oldvalues[$key]) {
+		}
+		elseif ($key == "title" && isset($oldvalues[$key]) && stripslashes($val)!=$oldvalues[$key])
+		{
 			$updates++;
 			$tmp = sanitize_colorname(true, stripslashes($val), true);
 			$tmp = preg_replace("/[`][cHw]/", "", $tmp);
@@ -101,7 +103,7 @@ foreach ($post as $key=>$val) {
 			if ($session['user']['acctid']==$userid) {
 				$session['user']['title'] = $tmp;
 			}
-		} elseif ($key=="ctitle" && stripslashes($val)!=$oldvalues[$key]) {
+		} elseif ($key=="ctitle" && isset($oldvalues[$key]) && stripslashes($val)!=$oldvalues[$key]) {
 			$updates++;
 			$tmp = sanitize_colorname(true, stripslashes($val), true);
 			$tmp = preg_replace("/[`][cHw]/", "", $tmp);
@@ -149,7 +151,7 @@ foreach ($post as $key=>$val) {
 			$sql.="$key = \"$val\",";
 			output("`2Changed player name from `\$%s`2 to `\$%s`2`n", $oldvalues['playername'], $tmp);
 			$oldvalues[$key]=$tmp;
-			if ($newname != $oldvalues['name']) {
+			if (isset($oldvalues['name']) && $newname != $oldvalues['name']) {
 				$sql.="name = \"".addslashes($newname)."\",";
 				debuglog($session['user']['name'] . "`0 changed player name to $newname`0 due to changed custom title", $userid);
 				$oldvalues['name']=$newname;
@@ -162,7 +164,7 @@ foreach ($post as $key=>$val) {
 			}
 		}elseif ($key=="oldvalues"){
 			//donothing.
-		}elseif ($oldvalues[$key]!=stripslashes($val) && isset($oldvalues[$key])){
+		}elseif (isset($oldvalues[$key]) && $oldvalues[$key]!=stripslashes($val)){
 			if ($key=='name') continue; //well, name is composed now
 			$sql.="$key = \"$val\",";
 			$updates++;
