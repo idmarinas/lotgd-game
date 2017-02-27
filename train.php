@@ -2,16 +2,16 @@
 //addnews ready
 // mail ready
 // translator ready
-require_once("common.php");
-require_once("lib/systemmail.php");
-require_once("lib/increment_specialty.php");
-require_once("lib/fightnav.php");
-require_once("lib/http.php");
-require_once("lib/taunt.php");
-require_once("lib/substitute.php");
-require_once("lib/villagenav.php");
-require_once("lib/experience.php");
-require_once("lib/creaturefunctions.php");
+require_once 'common.php';
+require_once 'lib/systemmail.php';
+require_once 'lib/increment_specialty.php';
+require_once 'lib/fightnav.php';
+require_once 'lib/http.php';
+require_once 'lib/taunt.php';
+require_once 'lib/substitute.php';
+require_once 'lib/villagenav.php';
+require_once 'lib/experience.php';
+require_once 'lib/forestoutcomes.php';
 
 tlschema("train");
 
@@ -88,51 +88,15 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 			$session['user']['seenmaster'] = 1;
 			debuglog("Challenged master, setting seenmaster to 1");
 
-			if ($session['user']['experience']>=$exprequired){
+			if ($session['user']['experience'] >= $exprequired)
+			{
 				restore_buff_fields();
-                $dk = get_player_dragonkillmod();
-                $creatureattr = get_creature_stats($dk);
 
-                //-- Bono a los atributos
-                $master['creaturestrbonus'] = $creatureattr['str'];
-                $master['creaturedexbonus'] = $creatureattr['dex'];
-                $master['creatureconbonus'] = $creatureattr['con'];
-                $master['creatureintbonus'] = $creatureattr['int'];
-                $master['creaturewisbonus'] = $creatureattr['wis'];
+				$master = buffbadguy($master, 'buffmaster');
 
-                //-- Atributos totales de la criatura
-                $master['creaturestr'] = $creatureattr['str'] + 10;
-                $master['creaturedex'] = $creatureattr['dex'] + 10;
-                $master['creaturecon'] = $creatureattr['con'] + 10;
-                $master['creatureint'] = $creatureattr['int'] + 10;
-                $master['creaturewis'] = $creatureattr['wis'] + 10;
-
-                //-- Ataque, defensa y salud que dan los atributos;
-                $master['creatureattackattrs'] = get_creature_attack($creatureattr);
-                $master['creaturedefenseattrs'] = get_creature_defense($creatureattr);
-                $master['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
-                $master['creaturespeedattrs'] = get_creature_speed($creatureattr);
-
-                //-- Sumar los bonos
-                calculate_buff_fields();
-                $master['creatureattack'] += $master['creatureattackattrs'];
-                $master['creaturedefense'] += $master['creaturedefenseattrs'];
-                $master['creaturehealth'] += $master['creaturehealthattrs'];
-                $master['creaturespeed'] += $master['creaturespeedattrs'];
                 $attackstack['enemies'][0] = $master;
 				$attackstack['options']['type'] = 'train';
-				$session['user']['badguy']=createstring($attackstack);
-
-                debug("DEBUG: $dk modification points total for attributes.");
-                debug("DEBUG: +{$master['creaturestrbonus']} allocated to strength.");
-                debug("DEBUG: +{$master['creaturedexbonus']} allocated to dexterity.");
-                debug("DEBUG: +{$master['creatureconbonus']} allocated to constitution.");
-                debug("DEBUG: +{$master['creatureintbonus']} allocated to intelligence.");
-                debug("DEBUG: +{$master['creaturewisbonus']} allocated to wisdom.");
-                debug("DEBUG: +{$master['creatureattackattrs']} modification of attack.");
-                debug("DEBUG: +{$master['creaturedefenseattrs']} modification of defense.");
-                debug("DEBUG: +{$master['creaturespeedattrs']} modification of speed.");
-                debug("DEBUG: +{$master['creaturehealthattrs']} modification of hitpoints.");
+				$session['user']['badguy'] = createstring($attackstack);
 
 				$battle=true;
 				if ($victory) {
@@ -188,12 +152,12 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 	}
 
 	if($battle){
-		require_once("lib/battle-skills.php");
-		require_once("lib/extended-battle.php");
+		require_once 'lib/battle-skills.php';
+		require_once 'lib/extended-battle.php';
 		suspend_buffs('allowintrain', "`&Your pride prevents you from using extra abilities during the fight!`0`n");
 		suspend_companions("allowintrain");
 		if (!$victory) {
-			require_once("battle.php");
+			require_once 'battle.php';
 		}
 		if ($victory){
 			$badguy['creaturelose']=substitute_array($badguy['creaturelose']);
