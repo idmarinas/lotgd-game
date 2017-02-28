@@ -18,7 +18,7 @@ $(function(){
     $('.ui.menu.form.lotgd .browse').popup({
         inline     : true,
         hoverable  : true,
-        position   : 'bottom left',
+        position   : 'top left',
     });
     $('.ui.progress.battle').progress({precision: 10});
 });

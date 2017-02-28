@@ -102,7 +102,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 	{
 		$tabMenu = array_chunk($tabMenu , ceil(count($tabMenu)/4));
 
-		$popupMenu = '<div class="ui fluid popup bottom left transition hidden lotgd form">';
+		$popupMenu = '<div class="ui fluid popup top left transition hidden lotgd form">';
 		$popupMenu .= '<div class="ui four column relaxed equal height divided grid">';
 		foreach($tabMenu as $menu)
 		{
