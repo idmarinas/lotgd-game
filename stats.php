@@ -33,7 +33,7 @@ if ($op=="stats" || $op==""){
 	output("`@Average Page Gen Size: `^%s`n",number_format($row['s']/$row['c']));
 }elseif ($op=="referers"){
 	output("`n`%`bTop Referers:`b`0`n");
-	rawoutput("<table border='0' cellpadding='2' cellspacing='1' bgcolor='#999999'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	$name = translate_inline("Name");
 	$refs = translate_inline("Referrals");
 	rawoutput("<tr class='trhead'><td><b>$name</b></td><td><b>$refs</b></td></tr>");

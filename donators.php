@@ -110,8 +110,8 @@ if ($op==""){
 	$points = translate_inline("Points");
 	$spent = translate_inline("Spent");
 
-	rawoutput("<table border='0' cellpadding='3' cellspacing='1' bgcolor='#999999'>");
-	rawoutput("<tr class='trhead'><td>$name</td><td>$points</td><td>$spent</td></tr>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<thead><tr><th>$name</th><th>$points</th><th>$spent</th></tr></thead>");
 	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++){
 		$row = DB::fetch_assoc($result);

@@ -21,7 +21,7 @@
 		$v = 0;
 		$memb_n = translate_inline("(%s members)");
 		$memb_1 = translate_inline("(%s member)");
-		rawoutput('<table cellspacing="0" cellpadding="2" align="left">');
+		rawoutput('<table class="ui very compact striped selectable table">');
 		while ($row = DB::fetch_assoc($result)){
 			if ($row['c']==0){
 				$sql = "DELETE FROM " . DB::prefix("clans") . " WHERE clanid={$row['clanid']}";

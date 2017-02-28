@@ -2,12 +2,13 @@
 // addnews ready
 // translator ready
 // mail ready
-function reltime($date,$short=true){
+function reltime($date,$short=true)
+{
 	$now = strtotime("now");
 	$x = abs($now - $date);
 	$o = readabletime($x);
 	return $o;
-//obsolete rest
+	//obsolete rest
 	$d = (int)($x/86400);
 	$x = $x % 86400;
 	$h = (int)($x/3600);
@@ -27,7 +28,7 @@ function reltime($date,$short=true){
 		else
 			$o = $s.$array['s'];
 
-/*		if ($d > 0)
+		/*		if ($d > 0)
 			$o = sprintf("%3s%2s",$d.$array['d'],($h>0?$h.$array['h']:""));
 		elseif ($h > 0)
 			$o = sprintf("%3s%2s",$h.$array['h'],($m>0?$m.$array['m']:""));

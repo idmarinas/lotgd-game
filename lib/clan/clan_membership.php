@@ -42,7 +42,7 @@
 		}
 		$sql = "SELECT name,login,acctid,clanrank,laston,clanjoindate,dragonkills,level FROM " . DB::prefix("accounts") . " WHERE clanid={$claninfo['clanid']} ORDER BY clanrank DESC ,dragonkills DESC,level DESC,clanjoindate";
 		$result = DB::query($sql);
-		rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
+		rawoutput("<table class='ui very compact striped selectable table'>");
 		$rank = translate_inline("Rank");
 		$name = translate_inline("Name");
 		$lev = translate_inline("Level");

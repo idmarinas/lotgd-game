@@ -61,7 +61,7 @@
 	$name = translate_inline("Name");
 	$dk = translate_inline("Dragon Kills");
 	$jd = translate_inline("Join Date");
-	rawoutput("<table border='0' cellpadding='2' cellspacing='0'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<tr class='trhead'><td>$rank</td><td>$name</td><td>$dk</td><td>$jd</td></tr>");
 	$i=0;
 	$sql = "SELECT acctid,name,login,clanrank,clanjoindate,dragonkills FROM " . DB::prefix("accounts") . " WHERE clanid=$detail ORDER BY clanrank DESC,clanjoindate";

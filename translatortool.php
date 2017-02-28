@@ -112,7 +112,7 @@ if ($op==""){
 	$version = translate_inline("Version");
 	$author = translate_inline("Author");
 	$norows = translate_inline("No rows found");
-	output_notl("<table border='0' cellpadding='2' cellspacing='0'>",true);
+	output_notl("<table class='ui very compact striped selectable table'>",true);
 	output_notl("<tr class='trhead'><td>$ops</td><td>$from</td><td>$to</td><td>$version</td><td>$author</td></tr>",true);
 	$sql = "SELECT * FROM " . DB::prefix("translations") . " WHERE language='".LANGUAGE."' AND uri='".httpget("u")."'";
 	$result = DB::query($sql);

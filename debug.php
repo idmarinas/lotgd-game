@@ -56,13 +56,13 @@ switch ($debug) {
 }
 $none = translate_inline("`iNone`i");
 $notset = translate_inline("`iNot set`i");
-rawoutput("<table border=0 cellpadding=2 cellspacing=1><tr class='trhead'><td>$category</td><td>$subcategory</td><td>$sum_desc</td><td>$med_desc</td><td>$hits</td></tr>");
+rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$category</th><th>$subcategory</th><th>$sum_desc</th><th>$med_desc</th><th>$hits</th></tr></thead>");
 debug($sql);
 $result = DB::query($sql);
 $i=true;
 while ($row = DB::fetch_assoc($result)) {
 	$i=!$i;
-	rawoutput("<tr class='".($i?'trdark':'trlight')."'><td valign='top'>");
+	rawoutput("<tr'><td valign='top'>");
 	output_notl("`b".$row['category']."`b");
 	rawoutput("</td><td valign='top'>");
 	output_notl("`b".$row['subcategory']."`b");

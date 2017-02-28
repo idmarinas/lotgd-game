@@ -681,7 +681,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	$loop2tot = $loop2end - $loop2start;
 	//debug("Loop 2: ".$loop2tot);
 
-	//debug($commentbuffer);
+	debug($commentbuffer);
 	// $gcend = getmicrotime(true);
 	// $gctotal = $gcend - $gcstart;
 	// debug("getcommentary execution time: ".$gctotal);
@@ -797,7 +797,7 @@ function dualcommentary($section, $message = 'Interject your own commentary?', $
 		else
 		{
 			//Side-by-side output
-			rawoutput("<table width=100% border=0 cellpadding=5 cellspacing=0><tr><td width=50% valign=top>");
+			rawoutput("<table class='ui very compact striped selectable table'><tr><td width=50% valign=top>");
 			rawoutput("<table width=100% border=0 cellpadding=0 cellspacing=0><tr><td>");
 			output("`bStory Channel`b (<a href=\"$nlink&switchmultichat=3\">hide</a> | <a href=\"$nlink&switchstack=1\">stack</a> | <a href=\"javascript:commentaryHelp('roleplay')\">?</a>)",true);
 			rawoutput("<div id='roleplay' style='display:none;'>");
@@ -897,6 +897,7 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 		if (!$session['user']['prefs']['commentary_reverse'])
 		{
 			//debug($session['recentcomments']);
+			if (! isset($session['recentcomments'])) $session['recentcomments'] = '0';
 			for ($i=$rowcount-1; $i>=0; $i--)
 			{
 				$line = preparecommentaryline($commentbuffer[$i]);
@@ -1009,7 +1010,7 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 
 	if ($showmodlink){
 		//moderation link mass delete button
-		rawoutput('<input type="submit" class="ui primary button" value="Mass Delete"></form>');
+		rawoutput('<input type="submit" class="ui button" value="Mass Delete"></form>');
 	}
 
 	if (!$skipfooter) commentaryfooter($section,$message,$limit,$talkline,$schema);
@@ -1255,7 +1256,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 		//debug($jsec);
 		// rawoutput('<div class="ui action input">');
 		previewfield('insertcommentary', $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,$jsec,$session['user']['prefs']['ucol'],$focus);
-		output_notl("<button type='submit' class='ui primary button'>$add</button>",true);
+		output_notl("<button type='submit' class='ui button'>$add</button>",true);
 		rawoutput('</div>');
 
 		rawoutput("<script type=\"text/javascript\">
@@ -1303,7 +1304,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 		}
 		// rawoutput('<div class="ui action input">');
 		previewfield("insertcommentary", $session['user']['name'], $talkline, true, array("size"=>"30", "maxlength"=>255-$tll),false,false,$session['user']['prefs']['ucol']);
-		output_notl("<button type='submit' class='ui primary button'>$add</button>",true);
+		output_notl("<button type='submit' class='ui button'>$add</button>",true);
 		rawoutput('</div>');
 		//debug("System load too high at ".$fiveminuteload);
 	}
@@ -1312,12 +1313,13 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 	rawoutput("<input type='hidden' name='focus' value='$section'>");
 	rawoutput("<input type='hidden' name='counter' value='{$session['counter']}'>");
 	$session['commentcounter'] = $session['counter'];
-	if ($section=="X"){
+	if ($section=="X")
+	{
 		$vname = getsetting("villagename", LOCATION_FIELDS);
 		$iname = getsetting("innname", LOCATION_INN);
 		$sections = commentarylocs();
 		reset ($sections);
-		output_notl("<select name='section'>",true);
+		output_notl("<select class='ui dropdown' name='section'>",true);
 		while (list($key,$val)=each($sections)){
 			output_notl("<option value='$key'>$val</option>",true);
 		}
@@ -1328,10 +1330,6 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 		output_notl("<input type='hidden' name='section' value='$section'>",true);
 	}
 
-	// *** DRAGONBG.COM CORE PATCH START***
-	//Aparece junto al campo de texto
-	// output_notl("<input type='submit' class='button' value='$add'>	",true);
-	// *** DRAGONBG.COM CORE PATCH END***
 	rawoutput("</form>");
 	tlschema();
 }

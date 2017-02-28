@@ -8,9 +8,9 @@ if (!isset($_GET['op']) || $_GET['op']!='list'){
 	//don't want people to be able to visit the list while logged in -- breaks their navs.
 	define("OVERRIDE_FORCED_NAV",true);
 }
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/sanitize.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/sanitize.php';
 
 tlschema("logdnet");
 
@@ -203,13 +203,13 @@ if ($op==""){
 	output("If you've been banned already, chances are you know why, and chances are we've got no interest in removing the ban.");
 	output("We provide this free of charge, at the expense of considerable bandwidth and server load, so if you've had the gall to abuse our charity, don't expect it to be won back very easily.`n`n");
 	output("If you are well behaved, we don't have an interest in blocking you from this listing. `0`n");
-	rawoutput("<table border='0' cellpadding='1' cellspacing='0'>");
-	rawoutput("<tr class='trhead'><td>");
+	rawoutput("<table  class='ui very compact striped selected table'>");
+	rawoutput("<thead><tr><th>");
 	output("Server");
-	rawoutput("</td><td>");
+	rawoutput("</th><th>");
 	output("Version");
-	rawoutput("</td>");
-	require_once("lib/pullurl.php");
+	rawoutput("</th></tr></thead>");
+	require_once 'lib/pullurl.php';
 	$u = getsetting("logdnetserver", "http://logdnet.logd.com/");
 	if (!preg_match("/\/$/", $u)) {
 		$u = $u . "/";
@@ -255,8 +255,8 @@ if ($op==""){
 		if ($row['version']=="") $row['version'] = translate_inline("Unknown");
 
 		// Output the information we have.
-		rawoutput("<tr class='" . ($i%2==0?"trlight":"trdark") . "'>");
-		rawoutput("<td><a href=\"".HTMLEntities($row['address'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" target='_blank'>");
+		rawoutput("<tr>");
+		rawoutput("<td class='collapsing'><a href=\"".HTMLEntities($row['address'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" target='_blank'>");
 		output_notl("`&%s`0",$row['description'], true);
 		rawoutput("</a></td><td>");
 		output_notl("`^%s`0", $row['version']); // so we are able to translate "`^Unknown`0"

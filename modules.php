@@ -200,7 +200,7 @@ if ($op==""){
 		$deactivate = translate_inline("Deactivate");
 		$reinstall = translate_inline("Reinstall");
 		$uninstall = translate_inline("Uninstall");
-		rawoutput("<input type='submit' name='activate' class='ui primary button' value='$activate'>");
+		rawoutput("<input type='submit' name='activate' class='ui button' value='$activate'>");
 		rawoutput("<input type='submit' name='deactivate' class='ui secondary button' value='$deactivate'>");
 		rawoutput("<input type='submit' name='reinstall' class='ui yellow button' value='$reinstall'>");
 		rawoutput("<input type='submit' name='uninstall' class='ui negative button' value='$uninstall'>");
@@ -314,7 +314,7 @@ if ($op==""){
 		}
 		rawoutput("</table><br />");
 		$install = translate_inline("Install");
-		rawoutput("<input type='submit' name='install' class='ui primary button' value='$install'>");
+		rawoutput("<input type='submit' name='install' class='ui button' value='$install'>");
 	}
 }
 

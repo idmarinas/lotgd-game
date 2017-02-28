@@ -63,7 +63,7 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 	$bio = translate_inline("Bio");
 	$att = translate_inline("Attack");
 
-	rawoutput("<table border='0' cellpadding='3' cellspacing='0'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<tr class='trhead'><td>$n</td><td>$l</td><td>$loc</td><td>$ops</td></tr>");
 	$loc_counts = array();
 	$num = count($pvp);

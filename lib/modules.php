@@ -1157,7 +1157,7 @@ function module_display_events($eventtype, $forcescript=false) {
 	$name = translate_inline("Name");
 	$rchance = translate_inline("Raw Chance");
 	$nchance = translate_inline("Normalized Chance");
-	rawoutput("<table cellspacing='1' cellpadding='2' border='0' bgcolor='#999999'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<tr class='trhead'>");
 	rawoutput("<td>$name</td><td>$rchance</td><td>nchance</td>");
 	rawoutput("</tr>");

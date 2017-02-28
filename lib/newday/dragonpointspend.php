@@ -51,7 +51,7 @@ if ($dkills-$dp > 1) {
 		$link = appendcount("newday.php?pdk=1$resline");
 		rawoutput("<form id='dkForm' action='$link' method='POST'>");
 	addnav("",$link);
-	rawoutput("<br><table class='table-bg-transparent' cellpadding='0' cellspacing='0' border='0' width='200'>");
+	rawoutput("<br><table cellpadding='0' cellspacing='0' border='0' width='200'>");
 	foreach($labels as $type=>$label) {
 		$head=explode(",",$label);//debug($label);
 		if (count($head)>1) {
