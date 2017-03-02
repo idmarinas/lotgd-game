@@ -16,6 +16,17 @@ Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home)
 	* With Semantic UI can personalize components and add more. And have a good structure for LOTGD.
 * Working on compatibility with ***PHP 7.0***
 
+[FEATURES]
+* Now LOTGD use a ***composer*** for manage external dependencies.
+	* Only add a dependence in a *composer.json* file and run:
+		```
+		#!sudo
+
+		$ composer install
+		```
+* New **function** `lotgd_generate_creature_levels()`
+	* With this function you can generate levels for a creature base. You can use this functio in your own modules. You can use `buffbadguy()` to adapt the creature.
+
 [FIXES]
 * Error of *deprecated* mysql extension for PHP >=5.6
 * Error in *battle.php* with references variables, *deprecated* in PHP >=5.4
