@@ -1,4 +1,4 @@
-# Changes made for Iván Diaz - IDMarinas Edition #
+# Changes made for Ivï¿½n Diaz - IDMarinas Edition #
 See CHANGELOG.txt for see changes made for  Oliver Brendel +nb Edition
 
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home) for more details.
@@ -22,8 +22,6 @@ Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home)
 * Now LOTGD use a ***composer*** for manage external dependencies.
 	* Only add a dependence in a *composer.json* file and run:
 		```
-		#!sudo
-
 		$ composer install
 		```
 * New **function** `lotgd_generate_creature_levels()`
