@@ -1,10 +1,11 @@
-# Changes made for IvÃ¡n Diaz - IDMarinas Edition #
+# Changes made for Iván Diaz - IDMarinas Edition #
 See CHANGELOG.txt for see changes made for  Oliver Brendel +nb Edition
 
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home) for more details.
 
 ## Version: 2.0.0
 [CHANGES]
+
 * Now LOTGD use ***Zend\Db*** component for connect to database. You can access with `*"DB::*"*` or `*"db_*"*`
 	* All functions `*"db_*"*` emit a deprecation warning.
 	* In version 3.0.0 `*"db_*"*` functions will be deleted, use `"*DB::*"*` instead.
@@ -17,6 +18,7 @@ Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home)
 * Working on compatibility with ***PHP 7.0***
 
 [FEATURES]
+
 * Now LOTGD use a ***composer*** for manage external dependencies.
 	* Only add a dependence in a *composer.json* file and run:
 		```
@@ -32,6 +34,7 @@ Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home)
 * Error in *battle.php* with references variables, *deprecated* in PHP >=5.4
 
 [REMOVES]
+
 
 [NOTES]
 * Now LOTGD require minium PHP 5.4 version
