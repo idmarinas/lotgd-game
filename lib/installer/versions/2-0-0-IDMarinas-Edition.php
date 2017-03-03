@@ -11,6 +11,8 @@ return [
 		('barmaid','`%Violet`0'),
 		('bard','`^Seth`0'),
 		('clanregistrar','`%Karissa`0'),
-		('bankername','`@Elessa`0')
+		('bankername','`@Elessa`0'),
+		('motditems','5'),
+		('petition_types','Bug,General')
 	ON DUPLICATE KEY UPDATE value=VALUES(value);"
 ];
