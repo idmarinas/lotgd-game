@@ -101,6 +101,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 				$battle=true;
 				if ($victory) {
 					$badguy = unserialize($session['user']['badguy']);
+					$badguy = $badguy['enemies'][0];//-- Fix error that no get data of a master
 					output("With a flurry of blows you dispatch your master.`n");
 				}
 			}else{
