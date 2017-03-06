@@ -20,5 +20,5 @@ $(function(){
         hoverable  : true,
         position   : 'bottom left',
     });
-    $('.ui.progress.battle').progress({precision: 10});
+    $('.ui.progress').progress({precision: 10});
 });
