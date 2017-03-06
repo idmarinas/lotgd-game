@@ -4,11 +4,11 @@
 // mail ready
 define("ALLOW_ANONYMOUS",true);
 define("OVERRIDE_FORCED_NAV",true);
-require_once("common.php");
-require_once("lib/commentary.php");
-require_once("lib/nltoappon.php");
-require_once("lib/http.php");
-require_once("lib/motd.php");
+require_once 'common.php';
+require_once 'lib/commentary.php';
+require_once 'lib/nltoappon.php';
+require_once 'lib/http.php';
+require_once 'lib/motd.php';
 
 tlschema("motd");
 
@@ -54,47 +54,49 @@ if ($op == "add" || $op == "addpoll" || $op == "del")  {
 if ($op=="") {
 	$count = getsetting("motditems", 5);
 	$newcount = (int)httppost("newcount");
-	if ($newcount==0 || httppost('proceed')=='') $newcount=0;
+	if ($newcount == 0 || httppost('proceed')=='') $newcount = 0;
 	/*
 	motditem("Beta!","Please see the beta message below.","","", "");
 	*/
-	$m = httppost("month");
+	$m = httppost('month');
 	if ($m > ""){
-		$sql = "SELECT " . DB::prefix("motd") . ".*,name AS motdauthorname FROM " . DB::prefix("motd") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid = " . DB::prefix("motd") . ".motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
+		$sql = "SELECT motd.*, name AS motdauthorname FROM " . DB::prefix("motd") . " AS `motd`LEFT JOIN " . DB::prefix("accounts") . " AS `acct` ON acct.acctid = motd.motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
 		$result = DB::query_cached($sql,"motd-$m");
 	}else{
-		$sql = "SELECT " . DB::prefix("motd") . ".*,name AS motdauthorname FROM " . DB::prefix("motd") . " LEFT JOIN " . DB::prefix("accounts") . " ON " . DB::prefix("accounts") . ".acctid = " . DB::prefix("motd") . ".motdauthor ORDER BY motddate DESC limit $newcount,".($newcount+$count);
-		if ($newcount=0) //cache only the last x items
-			$result = DB::query_cached($sql,"motd");
-			else
-			$result = DB::query($sql);
+		$sql = "SELECT motd.*, name AS motdauthorname FROM ".DB::prefix("motd")." AS `motd` LEFT JOIN " . DB::prefix("accounts") . " AS `acct` ON acct.acctid = motd.motdauthor ORDER BY motddate DESC limit $newcount,".($newcount+$count);
+		//cache only the last x items
+		if ($newcount=0) $result = DB::query_cached($sql,"motd");
+		else $result = DB::query($sql);
 	}
-	while ($row = DB::fetch_assoc($result)) {
+	rawoutput('<div class="ui divided items">');
+	foreach ($result as $row)
+	{
 		if (!isset($session['user']['lastmotd']))
 			$session['user']['lastmotd']=0;
 		if ($row['motdauthorname']=="")
 			$row['motdauthorname']="`@Green Dragon Staff`0";
-		if ($row['motdtype']==0){
-			motditem($row['motdtitle'], $row['motdbody'],
-					$row['motdauthorname'], $row['motddate'],
-					$row['motditem']);
-		}else{
-			pollitem($row['motditem'], $row['motdtitle'], $row['motdbody'],
-					$row['motdauthorname'],$row['motddate'],
-					$row['motditem']);
+		if ($row['motdtype'] == 0)
+		{
+			motditem($row['motdtitle'], $row['motdbody'], $row['motdauthorname'], $row['motddate'], $row['motditem']);
+		}
+		else
+		{
+			pollitem($row['motditem'], $row['motdtitle'], $row['motdbody'], $row['motdauthorname'], $row['motddate'], $row['motditem']);
 		}
 	}
+	rawoutput('</div>');
 	/*
 	motditem("Beta!","For those who might be unaware, this website is still in beta mode.  I'm working on it when I have time, which generally means a couple of changes a week.  Feel free to drop suggestions, I'm open to anything :-)","","", "");
 	*/
 
 	$result = DB::query("SELECT mid(motddate,1,7) AS d, count(*) AS c FROM ".DB::prefix("motd")." GROUP BY d ORDER BY d DESC");
 	$row = DB::fetch_assoc($result);
-	rawoutput("<form action='motd.php' method='POST'>");
+	rawoutput("<form action='motd.php' method='POST' class='ui form'>");
 	output("MoTD Archives:");
-	rawoutput("<select name='month' onChange='this.form.submit();' >");
+	rawoutput("<select class='ui dropdown' name='month' onChange='this.form.submit();' >");
 	rawoutput("<option value=''>--Current--</option>");
-	while ($row = DB::fetch_assoc($result)){
+	while ($row = DB::fetch_assoc($result))
+	{
 		$time = strtotime("{$row['d']}-01");
 		$m = translate_inline(date("M",$time));
 		rawoutput ("<option value='{$row['d']}'".(httpget("month")==$row['d']?" selected":"").">$m".date(", Y",$time)." ({$row['c']})</option>");
@@ -102,8 +104,8 @@ if ($op=="") {
 	rawoutput("</select>".tlbutton_clear());
 	$showmore=translate_inline("Show more");
 	rawoutput("<input type='hidden' name='newcount' value='".($count+$newcount)."'>");
-	rawoutput("<input type='submit' value='$showmore' name='proceed'  class='button'>");
-	rawoutput(" <input type='submit' value='".translate_inline("Submit")."' class='button'>");
+	rawoutput("<input type='submit' value='$showmore' name='proceed'  class='ui button'>");
+	rawoutput("<input type='submit' value='".translate_inline("Submit")."' class='ui button'>");
 	rawoutput("</form>");
 
 	if (isset($session['user']['online']) && $session['user']['online']) commentdisplay("`n`@Commentary:`0`n", "motd");
