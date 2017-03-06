@@ -15,6 +15,8 @@ function forestvictory($enemies,$denyflawless=false)
 {
 	global $session, $options;
 
+	tlschema('battle');
+
 	$diddamage = false;
 	$creaturelevel = 0;
 	$gold = 0;
@@ -139,10 +141,16 @@ function forestvictory($enemies,$denyflawless=false)
 		output("Even raw they have some restorative properties.`n");
 		$session['user']['hitpoints'] = 1;
 	}
+
+	tlschema();
 }
 
-function forestdefeat($enemies,$where="in the forest"){
+function forestdefeat($enemies,$where="in the forest")
+{
 	global $session;
+
+	tlschema('battle');
+
 	$percent=getsetting('forestexploss',10);
 	addnav("Daily news","news.php");
 	$names = array();
@@ -180,6 +188,9 @@ function forestdefeat($enemies,$where="in the forest"){
 	output("`4All gold on hand has been lost!`n");
 	output("`4%s %% of experience has been lost!`b`n",$percent);
 	output("You may begin fighting again tomorrow.");
+
+	tlschema();
+
 	page_footer();
 }
 
