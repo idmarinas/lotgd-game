@@ -32,7 +32,7 @@ function motditem($subject, $body, $author, $date, $id)
 
 	$item = '<div class="item"><div class="content">';
 	$item .= sprintf('<div class="header">%s</div> %s', $subject, $showpolltext);
-	$item .= '<div class="meta"><span class="author">'.$author.'</span><span class="date">`#'.$date.'`0</span></div>';
+	$item .= '<div class="meta"><span class="author">'.$author.'</span><small class="date">`#'.$date.'`0</small></div>';
 	$item .= '';
 	$item .= '<div class="description"><p>`2'.nltoappon($body).'`0</p></div>';
 	$item .= '</div></div>';
@@ -53,7 +53,7 @@ function pollitem($id, $subject, $body, $author, $date, $showpoll = true)
 
 	$item = '<div class="item"><div class="content">';
 	$item .= sprintf('<div class="header">%s %s</div> %s',$poll, $subject, $showpolltext);
-	$item .= '<div class="meta"><span class="author">'.$author.'</span><span class="date">`#'.$date.'`0</span></div>';
+	$item .= '<div class="meta"><span class="author">'.$author.'</span><small class="date">`#'.$date.'`0</small></div>';
 	$item .= '<div class="description"><p>`2'.stripslashes($body['body']).'`0</p></div>';
 
 	if ($session['user']['loggedin'] && $showpoll)
