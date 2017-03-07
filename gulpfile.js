@@ -3,6 +3,7 @@ var
 
 	//-- Tasks
 	build = require('./gulp/tasks/build'),
+	theme = require('./gulp/tasks/theme'),
 	del = require('./gulp/tasks/delete'),
 	clean = require('./gulp/tasks/clean')
 
@@ -18,6 +19,8 @@ gulp.task('default', false, [
 ]);
 
 gulp.task('build' , 'Builds all files from source', build);
+
+gulp.task('theme' , 'Create theme for LOTGD', theme);
 
 gulp.task('clean' , 'Clean dist application source', clean);
 

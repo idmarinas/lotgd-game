@@ -4,21 +4,14 @@ var
 	runSequence = require('run-sequence')
 ;
 
-require('./collections/build')(gulp);
-
 module.exports = function(callback)
 {
-  	console.info('Building application');
+  	console.info('Building theme for LOTGD');
 
 	runSequence(
-		'delete',
-		'main',
 		'theme-pre',
 		'semantic-ui',
 		'theme-post',
-		'assets',
-		'application',
-		'clean',
 
 		callback
 	);
