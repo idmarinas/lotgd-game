@@ -443,16 +443,9 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			}
 		break;
 		case "rawtextarearesizeable":
-			$raw=true;
-			//BOING
 		case "textarearesizeable":
-			$resize=true;
-			//FALLTHROUGH
 		case "textarea":
-			$cols = 0;
-			if (isset($info[2])) $cols = $info[2];
-			if (!$cols) $cols = 70;
-			$text = "";
+			$text = '';
 			if (isset($row[$key])) {
 				$text = $row[$key];
 			}
@@ -461,17 +454,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			} else {
 				$text=str_replace("`n","\n",$text);
 			}
-			if (isset($resize) && $resize) {
-				$text = "<script type=\"text/javascript\">function increase(target, value){  if (target.rows + value > 3 && target.rows + value < 50) target.rows = target.rows + value;}</script>";
-				$text .= "<script type=\"text/javascript\">function cincrease(target, value){  if (target.cols + value > 3 && target.cols + value < 150) target.cols = target.cols + value;}</script>";
-				$text .= "<input type='button' onClick=\"increase(textarea$key,1);\" value='+' accesskey='+'><input type='button' onClick=\"increase(textarea$key,-1);\" value='-' accesskey='-'>";
-				$text .= "<input type='button' onClick=\"cincrease(textarea$key,-1);\" value='<-'><input type='button' onClick=\"cincrease(textarea$key,1);\" value='->' accesskey='-'><br>";
-				$text .= "<textarea id='textarea$key' class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
-
-				return $text;
-			} else {
-				return "<textarea class='input' name='$keyout' cols='$cols' rows='5'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
-			}
+			return "<textarea class='input' name='$keyout'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
 			break;
 		case "int":
 			if (array_key_exists($key, $row)) (int) $out = $row[$key];
