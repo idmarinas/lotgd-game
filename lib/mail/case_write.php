@@ -151,20 +151,9 @@ rawoutput('</label><span id="sizemsg"></span>');
 $key=1;
 $keyout = 'body';
 $prefs = &$session['user']['prefs'];
-if ($prefs['mailwidth'] == "")
-{
-	$prefs['mailwidth'] = 60;
-}
-if ($prefs['mailheight'] == "")
-{
-	$prefs['mailheight'] = 9;
-}
-
-$cols=max(10,$prefs['mailwidth']);
-$rows=max(10,$prefs['mailheight']);
 
 //substr is necessary if you have chars that take up more than 1 byte. That breaks the entire HTMLentities up and it returns nothing
-rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout' cols='$cols' rows='$rows'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","UTF-8")))), ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>");
+rawoutput("<textarea id='textarea$key' class='input' onKeyUp='sizeCount(this);' name='$keyout'>".htmlentities(str_replace("`n", "\n", mb_substr($body,0,getsetting("mailsizelimit",1024,getsetting("charset","UTF-8")))), ENT_COMPAT, getsetting("charset", "UTF-8")).htmlentities(sanitize_mb(stripslashes(httpget('body'))), ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>");
 $send = translate_inline("Send");
 $sendclose = translate_inline("Send and Close");
 $sendback = translate_inline("Send and back to main Mailbox");
