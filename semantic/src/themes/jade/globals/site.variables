@@ -72,8 +72,8 @@
 
 /* This adjusts the default form input across all elements */
 @inputBackground        : #257625;
-@inputVerticalPadding   : @relative10px;
-@inputHorizontalPadding : @relative13px;
+@inputVerticalPadding   : @relative8px;
+@inputHorizontalPadding : @relative10px;
 @inputPadding           : @inputVerticalPadding @inputHorizontalPadding;
 
 /* Input Text Color */

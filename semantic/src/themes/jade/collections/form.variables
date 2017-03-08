@@ -8,7 +8,7 @@
 
 /* Form */
 @gutterWidth: 1em;
-@rowDistance: 1em;
+@rowDistance: 0.5em;
 
 /* Text */
 @paragraphMargin: @rowDistance 0em;

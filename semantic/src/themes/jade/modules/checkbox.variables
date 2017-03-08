@@ -51,7 +51,7 @@
 @checkboxFocusBackground: @white;
 @checkboxFocusBorderColor: @focusedFormMutedBorderColor;
 @checkboxFocusCheckColor: @selectedTextColor;
-@labelFocusColor: @selectedTextColor;
+@labelFocusColor: @invertedSelectedTextColor;
 
 /* Active */
 @labelActiveColor: @selectedTextColor;
@@ -129,16 +129,16 @@
 @sliderTravelDistance: @sliderLineWidth - @sliderHandleSize;
 
 @sliderLabelDistance: @sliderLineWidth + 1rem;
-@sliderOffLabelColor: @unselectedTextColor;
+@sliderOffLabelColor: @invertedUnselectedTextColor;
 
 @sliderLabelLineHeight: 1rem;
 
 /* Slider States */
 @sliderHoverLaneBackground: @transparentWhite;
-@sliderHoverLabelColor: @hoveredTextColor;
+@sliderHoverLabelColor: @invertedHoveredTextColor;
 
 @sliderOnLineColor: @lightBlack;
-@sliderOnLabelColor: @selectedTextColor;
+@sliderOnLabelColor: @invertedSelectedTextColor;
 
 @sliderOnFocusLineColor: @lightBlackFocus;
 @sliderOnFocusLabelColor: @sliderOnLabelColor;
@@ -178,14 +178,14 @@
 @toggleOffLabelColor: @checkboxColor;
 @toggleOffHandleBoxShadow: none;
 
-@toggleOnLabelColor: @selectedTextColor;
+@toggleOnLabelColor: @invertedSelectedTextColor;
 @toggleOnLaneColor: @green;
 @toggleOnLaneHoverColor: @lightGreen;
 
 @toggleOnHandleBoxShadow: none;
 
 @toggleOnFocusLaneColor: @toggleOnLaneColor;
-@toggleOnFocusLabelColor: @toggleOnLabelColor;
+@toggleOnFocusLabelColor: @invertedSelectedTextColor;
 
 
 
