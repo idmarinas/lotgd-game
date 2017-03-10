@@ -13,7 +13,7 @@ return [
 		('clanregistrar', '`%Karissa`0'),
 		('bankername', '`@Elessa`0'),
 		('motditems', '5'),
-		('petition_types', 'Bug,General'),
+		('petition_types', 'General,Bug'),
 		('defaultskin', 'jade.html')
 	ON DUPLICATE KEY UPDATE value=VALUES(value);"
 ];
