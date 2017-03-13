@@ -186,7 +186,7 @@ else
 			$isRecommended = in_array($modulename,$recommended_modules);
 			$disabled = '';
 			if (isset($moduleinfo['invalid']) && $moduleinfo['invalid'] == true) $disabled = 'disabled';
-			rawoutput('<td><div class="ui radio checkbox">');
+			rawoutput('<td class="collapsing"><div class="ui radio checkbox">');
 			rawoutput("<input type='radio' name='modules[$modulename]' id='uninstall-$modulename' value='$uninstallop'".($uninstallcheck?" checked":"")." $disabled><label>".tl("Uninstalled")."</label>");
 			rawoutput("</div>&nbsp;&nbsp;<div class='ui radio checkbox'><input type='radio' name='modules[$modulename]' id='install-$modulename' value='$installop'".($installcheck?" checked":"")." $disabled><label>".tl("Installed")."</label>");
 			rawoutput("</div>&nbsp;&nbsp;<div class='ui radio checkbox'><input type='radio' ".('' == $disabled && $isRecommended ?"data-recommended":null)." name='modules[$modulename]' id='activate-$modulename' value='$activateop' ".($activatecheck?" checked":"")." $disabled><label>".tl("Activated")."</label>");
