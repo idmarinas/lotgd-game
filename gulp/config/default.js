@@ -29,7 +29,7 @@ module.exports = {
 			'!bower_components{,/**}',
 			'!**/*.{dist,md,lock,json}',
 			'!semantic{,/**}',
-			//-- Ignore files of installation
+			//-- Ignore files of installation (Only need one time)
 			'!lib/installer{,/**}',
 			'!installer.php',
 			//-- Ignore because then we process files for min in production
