@@ -17,7 +17,7 @@ module.exports = function(callback)
 		'semantic-ui',
 		'theme-post',
 		'assets',
-		'application',
+		'lotgd-js',
 		'clean',
 
 		callback
