@@ -1,7 +1,7 @@
 <?php
 
 return [
-	"INSERT INTO `settings`
+	"INSERT IGNORE INTO `settings`
 		(`setting`, `value`)
 	VALUES
 		('deathoverlord', '`\$Ramius`0'),
@@ -14,6 +14,5 @@ return [
 		('bankername', '`@Elessa`0'),
 		('motditems', '5'),
 		('petition_types', 'General,Bug'),
-		('defaultskin', 'jade.html')
-	ON DUPLICATE KEY UPDATE value=VALUES(value);"
+		('defaultskin', 'jade.html');"
 ];
