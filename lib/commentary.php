@@ -632,7 +632,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		if (isset($commentbuffer[$i]))
 		{
 			$row = $commentbuffer[$i];
-			if ($onlinestatus[$row['author']]['chatloc']=="AFK")
+			if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']=="AFK")
 			{
 				$commentbuffer[$i]['info']['online']=-1;
 				$icon = [
@@ -642,7 +642,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				$commentbuffer[$i]['info']['icons']['online']=$icon;
 				continue;
 			}
-			if ($onlinestatus[$row['author']]['chatloc']=="DNI"){
+			if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']=="DNI"){
 				$commentbuffer[$i]['info']['online']=-1;
 				$icon = [
 					'icon' => "images/icons/onlinestatus/dni.png",
@@ -651,14 +651,15 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				$commentbuffer[$i]['info']['icons']['online']=$icon;
 				continue;
 			}
-			if ($onlinestatus[$row['author']]['laston'] < $offline || !$onlinestatus[$row['author']]['loggedin']){
+			if (isset($onlinestatus[$row['author']]) && ($onlinestatus[$row['author']]['laston'] < $offline || !$onlinestatus[$row['author']]['loggedin']) )
+            {
 				$commentbuffer[$i]['info']['online']=0;
 				$icon = [
 					'icon' => "images/icons/onlinestatus/offline.png",
 					'mouseover' => "Offline",
 				];
 			}
-			else if ($onlinestatus[$row['author']]['chatloc']==$chatloc)
+			else if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']==$chatloc)
 			{
 				$commentbuffer[$i]['info']['online']=2;
 				$icon = [
