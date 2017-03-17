@@ -24,6 +24,9 @@ module.exports = {
 		},
 		copied: function(file) {
 			return 'Copied: ' + file;
+		},
+		deleted: function(file) {
+			return 'Deleted: ' + file;
 		}
 	},
 	//-- Determinate if is a enviroment of DEVELOPMENT or PRODUCTION
