@@ -43,7 +43,8 @@
         "gulp-replace": "^0.5.4",
         "gulp-util": "^3.0.8",
         "jscs": "^3.0.7",
-        "minimist": "^1.2.0"
+        "minimist": "^1.2.0",
+        "vinyl-paths": "^2.1.0"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
