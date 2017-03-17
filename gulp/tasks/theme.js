@@ -12,6 +12,7 @@ module.exports = function(callback)
 		'theme-pre',
 		'semantic-ui',
 		'theme-post',
+		'theme-end',
 
 		callback
 	);

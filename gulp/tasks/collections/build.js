@@ -11,6 +11,7 @@ module.exports = function(gulp)
 		lotgdJs = require('../build/lotgd-js'),
 		themePre = require('../build/theme-pre'),
 		themePost = require('../build/theme-post'),
+		themeEnd = require('../build/theme-end'),
 		semantic = require('../../../semantic/tasks/build')
 	;
 
@@ -19,5 +20,6 @@ module.exports = function(gulp)
 	gulp.task('assets', 'Copy sources for application', assets);
 	gulp.task('theme-pre', false, themePre);
 	gulp.task('theme-post', false, themePost);
+	gulp.task('theme-end', false, themeEnd);
 	gulp.task('semantic-ui', 'Build Semantic UI', semantic);
 };
