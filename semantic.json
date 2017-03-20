@@ -36,6 +36,7 @@
     "reveal",
     "segment",
     "step",
+    "_lotgd-tlink",
 
     "breadcrumb",
     "form",
@@ -50,8 +51,10 @@
     "feed",
     "item",
     "statistic",
-    "lotgd",
-    "lotgdcolors",
+    "_lotgd-character",
+    "_lotgd-colors",
+    "_lotgd-lotgd",
+    "_lotgd-navigation",
 
     "accordion",
     "checkbox",
