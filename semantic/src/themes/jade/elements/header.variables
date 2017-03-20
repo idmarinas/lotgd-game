@@ -149,3 +149,9 @@
 
 /* Floated */
 @floatedMargin: 0.5em;
+
+
+/* Page title LOTGD */
+@lotgd_pTitleFontVariant: small-caps;
+@lotgd_pTitleFontSize: 20px;
+@lotgd_pTitleTextColor: #FFFFFF;
