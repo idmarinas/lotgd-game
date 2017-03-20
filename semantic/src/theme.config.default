@@ -22,21 +22,22 @@
 @reset       : 'default';
 
 /* Elements */
-@button      : 'default';
-@container   : 'default';
-@divider     : 'default';
-@flag        : 'default';
-@header      : 'default';
-@icon        : 'default';
-@image       : 'default';
-@input       : 'default';
-@label       : 'default';
-@list        : 'default';
-@loader      : 'default';
-@rail        : 'default';
-@reveal      : 'default';
-@segment     : 'default';
-@step        : 'default';
+@button       : 'default';
+@container    : 'default';
+@divider      : 'default';
+@flag         : 'default';
+@header       : 'default';
+@icon         : 'default';
+@image        : 'default';
+@input        : 'default';
+@label        : 'default';
+@list         : 'default';
+@loader       : 'default';
+@rail         : 'default';
+@reveal       : 'default';
+@segment      : 'default';
+@step         : 'default';
+@_lotgd-tlink : 'default';
 
 /* Collections */
 @breadcrumb  : 'default';
@@ -47,32 +48,34 @@
 @table       : 'default';
 
 /* Modules */
-@accordion   : 'default';
-@checkbox    : 'default';
-@dimmer      : 'default';
-@dropdown    : 'default';
-@embed       : 'default';
-@modal       : 'default';
-@nag         : 'default';
-@popup       : 'default';
-@progress    : 'default';
-@rating      : 'default';
-@search      : 'default';
-@shape       : 'default';
-@sidebar     : 'default';
-@sticky      : 'default';
-@tab         : 'default';
-@transition  : 'default';
+@accordion    : 'default';
+@checkbox     : 'default';
+@dimmer       : 'default';
+@dropdown     : 'default';
+@embed        : 'default';
+@modal        : 'default';
+@nag          : 'default';
+@popup        : 'default';
+@progress     : 'default';
+@rating       : 'default';
+@search       : 'default';
+@shape        : 'default';
+@sidebar      : 'default';
+@sticky       : 'default';
+@tab          : 'default';
+@transition   : 'default';
 
 /* Views */
-@ad          : 'default';
-@card        : 'default';
-@comment     : 'default';
-@feed        : 'default';
-@item        : 'default';
-@statistic   : 'default';
-@lotgd       : 'default';
-@lotgdcolors : 'default';
+@ad                : 'default';
+@card              : 'default';
+@comment           : 'default';
+@feed              : 'default';
+@item              : 'default';
+@statistic         : 'default';
+@_lotgd-lotgd      : 'default';
+@_lotgd-colors     : 'default';
+@_lotgd-navigation : 'default';
+@_lotgd-character : 'default';
 
 /*******************************
             Folders
