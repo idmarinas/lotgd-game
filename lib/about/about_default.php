@@ -6,7 +6,7 @@ foreach ($order as $current_rank) {
 		case '4':
 			output('`$For the original "Legend of the Green Dragon" #About information check more below.`0`n`n');
 			output_notl('`QIDMarinas edition');
-			output_notl('`nBy Iván Diaz (<a href="http://dragonverde.infommo.es">IDMarinas Edition</a>) `n`n',true);
+			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
 			output('This version is a forked version of 1.2.5 nb Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
 			output('If you want use this core, you need to be aware:`n<ul>',true);
 			output('<li>PHP 5.6 is a minimum requirement</li>', true);
