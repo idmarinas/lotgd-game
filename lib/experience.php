@@ -52,7 +52,10 @@ function exp_for_next_level($curlevel, $curdk)
 
 		updatedatacache("exparraydk".$curdk,$exparray);
 	}
-	$exprequired = $exparray[$curlevel-1];
+    //-- Avoid level less than 0
+    $curlevel = max($curlevel-1, 0);
+
+	$exprequired = $exparray[$curlevel];
 
 	return $exprequired;
 }
