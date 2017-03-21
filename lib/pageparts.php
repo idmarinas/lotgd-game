@@ -12,7 +12,7 @@
 
 $nopopups = [];
 $runheaders = [];
-$html = [];
+$html = ['content' => ''];
 
 /**
  * Starts page output.  Inits the template and translator modules.
@@ -60,7 +60,8 @@ function page_header()
 	calculate_buff_fields();
 
 	//-- Add to html
-	$html['title'] = $title . tlbutton_pop();
+	$html['title'] = $title;
+    $html['content'] .= tlbutton_pop();
 
 	if (getsetting('debug', 0)) $session['debugstart'] = microtime();
 }
@@ -345,7 +346,7 @@ function page_footer($saveuser = true)
 	tlschema();
 
 	//finalize output
-	$html['content'] = $output->get_output();
+	$html['content'] .= $output->get_output();
 	$browser_output = $lotgd_tpl->renderTheme($html);
 	$session['user']['gensize'] += strlen($browser_output);
 	$session['output'] = $browser_output;
@@ -418,7 +419,7 @@ function popup_footer()
 	}
 
 	//finalize output
-	$html['content'] = $output->get_output();
+	$html['content'] .= $output->get_output();
 	saveuser();
 	session_write_close();
 	echo $lotgd_tpl->renderThemeTemplate('popup.twig', $html);
