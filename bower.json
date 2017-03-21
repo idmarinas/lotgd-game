@@ -6,7 +6,7 @@
   ],
   "description": "Juego MMO de Rol para navegador en formato web",
   "license": "MIT",
-  "homepage": "http://dragonverde.infommo.es",
+  "homepage": "http://lotgd.infommo.es",
   "ignore": [
     "**/.*",
     "node_modules",

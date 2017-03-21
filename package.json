@@ -14,12 +14,17 @@
             "role": "Contributor, Maintainer"
         },
         {
+            "name": "Oliver Brendel",
+            "homepage": "http://nb-core.org",
+            "role": "Contributor"
+        },
+        {
             "name": "DragonPrime",
             "homepage": "http://www.dragonprime.net",
-            "role": "Developer, Maintaner"
+            "role": "Developer, Maintainer"
         }
     ],
-    "homepage": "http://dragonverde.infommo.es",
+    "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
         "semantic-ui": "2.2.9"
