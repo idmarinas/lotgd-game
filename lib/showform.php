@@ -459,10 +459,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "int":
 			if (array_key_exists($key, $row)) (int) $out = $row[$key];
 			else $out = 0;
-				return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='5'>";
+				return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
 			break;
 		case "float":
-			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" size='8' step='any'>";
+			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" step='any'>";
 			break;
 		case "string":
 			$len = 50;
