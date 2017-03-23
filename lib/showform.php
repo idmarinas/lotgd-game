@@ -54,11 +54,11 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			if (1 == $title_id)
 			{
 				$tabActive = $info[0];
-				$tabMenu[] = sprintf('<a href="#" class="item active" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
+				$tabMenu[] = sprintf('<a class="item active" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
 			}
 			else
 			{
-				$tabMenu[] = sprintf('<a href="#" class="item" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
+				$tabMenu[] = sprintf('<a class="item" data-tab="tab-%s">%s</a>', $title_id, $info[0]);
 			}
 
  		}
