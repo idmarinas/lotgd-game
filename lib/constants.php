@@ -3,11 +3,17 @@
 // translator ready
 // mail ready
 
-$defines = array();
-function myDefine($name,$value){
+$defines = [];
+function myDefine($name,$value)
+{
 	global $defines;
-	define($name,$value);
-	$defines[$name] = $value;
+
+    //-- No try to define a defined constant
+    if (! defined($name))
+    {
+        define($name,$value);
+	    $defines[$name] = $value;
+    }
 }
 
 //Superuser constants
