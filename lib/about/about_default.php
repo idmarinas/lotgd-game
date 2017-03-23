@@ -11,10 +11,10 @@ foreach ($order as $current_rank) {
 			output('If you want use this core, you need to be aware:`n<ul>',true);
 			output('<li>PHP 5.6 is a minimum requirement</li>', true);
 			output('<li>Came with others dependencies that need install.</li>', true);
-			output('<li><a href="https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home" target="_blank">More information of requirement and dependencies</a></li>', true);
-			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-juego" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
+			output('<li><a href="https://bitbucket.org/idmarinas/lotgd-game/wiki/Home" target="_blank">More information of requirement and dependencies</a></li>', true);
+			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
 			output('`n`nI do not ship modules with it, most modules from 1.x.x DP Editions will work. However there is no guarantee... test them.`n');
-			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modulos-ajenos" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
+			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
 			output_notl("`0`n`n");
 		break;
 	case "3":

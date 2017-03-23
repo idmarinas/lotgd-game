@@ -1,7 +1,7 @@
 # Changes made for Iván Diaz - IDMarinas Edition #
 See CHANGELOG.txt for see changes made for  Oliver Brendel +nb Edition
 
-Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-juego/wiki/Home) for more details.
+Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 
 ## Version: 2.0.0
 [CHANGES]
