@@ -187,7 +187,7 @@ function page_footer($saveuser = true)
 	//NOTICE | which I have made freely available to you, that you leave it in.
 	//NOTICE |
 
-	$paypalData['currency'] = getsetting('paypalcurrency', 'USD');
+	$paypalData = ['currency' => getsetting('paypalcurrency', 'USD')];
 	if (! isset($_SESSION['logdnet'])
 		|| ! isset($_SESSION['logdnet'][''])
 		|| $_SESSION['logdnet']['']==''
@@ -195,11 +195,9 @@ function page_footer($saveuser = true)
 	) $already_registered_logdnet = false;
 	else $already_registered_logdnet = true;
 
-	$paypalData['registered_logdnet'] = false;
+	$paypalData['registered_logdnet'] = $already_registered_logdnet;
 	if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $already_registered_logdnet)
 	{
-		$paypalData['registered_logdnet'] = true;
-
 		//account counting, just for my own records, I don't use this in the calculation for server order.
 		$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts");
 		$result = DB::query_cached($sql,"acctcount",600);
