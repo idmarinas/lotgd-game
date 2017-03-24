@@ -10,7 +10,7 @@
 	<tr>
 		<td>
 			{% if registered_logdnet %}
-				<embed style="width: 62px; height: 57px; margin-bottom: 1em;" src='images/logdnet.php?op=register&c={{ c }}&l={{ l }}&v={{ v }}&a={{ a }}&d={{ d }}&e={{ e }}&u={{ u }}'></embed>
+				<embed style="width: 62px; height: 57px; margin-bottom: 1em;" src='{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(c, l, v, a, d, e, u) }}'></embed>
 			{% else %}
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 					<input type="hidden" name="cmd" value="_xclick">
