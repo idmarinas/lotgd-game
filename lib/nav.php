@@ -381,7 +381,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	{
 		if ($text && isset($session['loggedin']) && $session['loggedin'] && $translate)
 		{
-			tlschema($navschema[$text]);
+			if (isset($navschema[$text])) tlschema($navschema[$text]);
 			$unschema = 1;
 		}
 		if ($link != "!!!addraw!!!" && $text>"" && $translate) $text = translate($text); //leave the hack in here for now, use addnav_notl please
@@ -401,7 +401,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	{
 		$text = holidayize($text,'nav');
 		$thisnav .= $lotgd_tpl->renderThemeTemplate('navs/help.twig', [
-			'title' => appoencode($text,$priv),
+			'text' => appoencode($text,$priv),
 			'tlbutton' => tlbutton_pop()
 		]);
 	}
