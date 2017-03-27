@@ -42,7 +42,7 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 			addnav("U?Until first enemy dies", $script."op=fight&auto=full");
 		}
 	}
-	
+
 	//added hook for the Stamina system
 	if (!$session['user']['alive']){
 		modulehook("fightnav-graveyard", array("script"=>$script));
@@ -54,7 +54,7 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 
 		if ($session['user']['superuser'] & SU_DEVELOPER) {
 			addnav("`&Super user`0","");
-			addnav("!?`&&#149; __GOD MODE",$script."op=fight&skill=godmode",true);
+			addnav("!?`&&#149; __GOD MODE`0",$script."op=fight&skill=godmode",true);
 		}
 		modulehook("fightnav", array("script"=>$script));
 	}
