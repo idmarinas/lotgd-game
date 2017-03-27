@@ -2,8 +2,10 @@
 // translator ready
 // addnews ready
 // mail ready
-function fightnav($allowspecial=true, $allowflee=true,$script=false){
-	global $PHP_SELF,$session,$newenemies,$companions;
+function fightnav($allowspecial=true, $allowflee=true,$script=false)
+{
+	global $PHP_SELF, $session, $newenemies, $companions;
+
 	tlschema("fightnav");
 	if ($script===false){
 		$script = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1)."?";
@@ -53,8 +55,8 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false){
 		modulehook("fightnav-specialties", array("script"=>$script));
 
 		if ($session['user']['superuser'] & SU_DEVELOPER) {
-			addnav("`&Super user`0","");
-			addnav("!?`&&#149; __GOD MODE`0",$script."op=fight&skill=godmode",true);
+			addnav('`&Super user`0', '');
+			addnav("!?`&&#149; __GOD MODE`0","{$script}op=fight&skill=godmode",true);
 		}
 		modulehook("fightnav", array("script"=>$script));
 	}
