@@ -123,7 +123,7 @@ if ($op==""){
 		$inactive = translate_inline("`\$Inactive`0");
 		rawoutput("<form action='modules.php?op=mass&cat=$cat' method='POST'>");
 		addnav("","modules.php?op=mass&cat=$cat");
-		rawoutput("<table class='ui very compact selectable striped table'>",true);
+		rawoutput("<table class='ui small very compact selectable striped table'>",true);
 		rawoutput("<thead><tr><th>&nbsp;</th><th>$ops</th><th><a href='modules.php?cat=$cat&sortby=active&order=".($sortby=="active"?!$order:1)."'>$status</a></th><th><a href='modules.php?cat=$cat&sortby=formalname&order=".($sortby=="formalname"?!$order:1)."'>$mname</a></th><th><a href='modules.php?cat=$cat&sortby=moduleauthor&order=".($sortby=="moduleauthor"?!$order:1)."'>$mauth</a></th><th><a href='modules.php?cat=$cat&sortby=installdate&order=".($sortby=="installdate"?!$order:0)."'>$inon</a></th></thead></tr>");
 		addnav("","modules.php?cat=$cat&sortby=active&order=".($sortby=="active"?!$order:1));
 		addnav("","modules.php?cat=$cat&sortby=formalname&order=".($sortby=="formalname"?!$order:1));
@@ -141,43 +141,43 @@ if ($op==""){
 			$row = DB::fetch_assoc($result);
 			rawoutput("<tr>",true);
 			rawoutput("<td class='collapsing'>");
-			rawoutput("<div class='ui toggle checkbox'><input type='checkbox' name='module[]' value=\"{$row['modulename']}\"></div>");
-			rawoutput("</td><td class='collapsing'>[ ");
+			rawoutput("<div class='ui checkbox'><input type='checkbox' name='module[]' value=\"{$row['modulename']}\"></div>");
+			rawoutput("</td><td class='collapsing'>");
 			if ($row['active']){
-				rawoutput("<a href='modules.php?op=deactivate&module={$row['modulename']}&cat=$cat'>");
-				output_notl('<i data-tooltip="%s" class="large icons"><i class="green link power icon"></i><i class="red corner minus icon"></i></i>', $deactivate, true);
+				rawoutput("<a data-tooltip='$deactivate' href='modules.php?op=deactivate&module={$row['modulename']}&cat=$cat'>");
+				output_notl('<i class="green link power icon"></i>', true);
 				rawoutput("</a>");
 				addnav("","modules.php?op=deactivate&module={$row['modulename']}&cat=$cat");
 			}else{
-				rawoutput("<a href='modules.php?op=activate&module={$row['modulename']}&cat=$cat'>");
-				output_notl('<i data-tooltip="%s" class="large icons"><i class="red link power icon"></i><i class="green corner plus icon"></i></i>', $activate, true);
+				rawoutput("<a data-tooltip='$activate' href='modules.php?op=activate&module={$row['modulename']}&cat=$cat'>");
+				output_notl('<i class="red link power icon"></i>', true);
 				rawoutput("</a>");
 				addnav("","modules.php?op=activate&module={$row['modulename']}&cat=$cat");
 			}
-			rawoutput(" |<a href='modules.php?op=uninstall&module={$row['modulename']}&cat=$cat' onClick='return confirm(\"$uninstallconfirm\");'>");
-			output_notl('<i data-tooltip="%s" class="large icons"><i class="red link configure icon"></i><i class="red corner remove icon"></i></i>', $uninstall, true);
+			rawoutput(" <a data-tooltip='$uninstall' href='modules.php?op=uninstall&module={$row['modulename']}&cat=$cat' onClick='return confirm(\"$uninstallconfirm\");'>");
+			output_notl('<i class="red corner remove icon"></i>', true);
 			rawoutput("</a>");
 			addnav("","modules.php?op=uninstall&module={$row['modulename']}&cat=$cat");
-			rawoutput(" | <a href='modules.php?op=reinstall&module={$row['modulename']}&cat=$cat'>");
-			output_notl('<i data-tooltip="%s" class="large icons"><i class="orange link configure icon"></i><i class="orange corner undo icon"></i></i>', $reinstall, true);
+			rawoutput(" <a data-tooltip='$reinstall' href='modules.php?op=reinstall&module={$row['modulename']}&cat=$cat'>");
+			output_notl('<i class="orange corner undo icon"></i>', true);
 			rawoutput("</a>");
 			addnav("","modules.php?op=reinstall&module={$row['modulename']}&cat=$cat");
 
 			if ($session['user']['superuser'] & SU_EDIT_CONFIG) {
 				if (strstr($row['infokeys'], "|settings|"))
 				{
-					rawoutput(" | <a href='configuration.php?op=modulesettings&module={$row['modulename']}'>");
-					output_notl('<span data-tooltip="%s"><i class="large blue link settings icon"></i></span>', $strsettings, true);
+					rawoutput(" <a data-tooltip='$strsettings' href='configuration.php?op=modulesettings&module={$row['modulename']}'>");
+					output_notl('<i class="blue link settings icon"></i>', true);
 					rawoutput("</a>");
 					addnav("","configuration.php?op=modulesettings&module={$row['modulename']}");
 				}
 				else
 				{
-					output_notl(' | <span data-tooltip="%s"><i class="large red settings icon"></i></span>', $strnosettings, true);
+					output_notl(' <span data-tooltip="%s"><i class="red settings icon"></i></span>', $strnosettings, true);
 				}
 			}
 
-			rawoutput(" ]</td><td>");
+			rawoutput("</td><td>");
 			output_notl($row['active']?$active:$inactive);
 			require_once("lib/sanitize.php");
 			rawoutput("</td><td nowrap><span title=\"".
@@ -211,6 +211,7 @@ if ($op==""){
 		$order=httpget('order');
 		output("`bUninstalled Modules`b`n");
 		$install = translate_inline("Install");
+		$notinstallable = translate_inline("Not installable");
 		$mname = translate_inline("Module Name");
 		$ops = translate_inline("Ops");
 		$mauth = translate_inline("Module Author");
@@ -218,7 +219,7 @@ if ($op==""){
 		$fname = translate_inline("Filename");
 		rawoutput("<form action='modules.php?op=mass&cat=$cat' method='POST'>");
 		addnav("","modules.php?op=mass&cat=$cat");
-		rawoutput("<table class='ui very compact selectable striped table'>",true);
+		rawoutput("<table class='ui small very compact selectable striped table'>",true);
 		rawoutput("<thead><tr><th>&nbsp;</th><th>$ops</th><th><a href='modules.php?sorting=name&order=".($sorting=="name"?!$order:0)."'>$mname</a></th><th><a href='modules.php?sorting=author&order=".($sorting=="author"?!$order:0)."'>$mauth</a></th><th><a href='modules.php?sorting=category&order=".($sorting=="category"?!$order:0)."'>$categ</a></th><th><a href='modules.php?sorting=shortname&order=".($sorting=="shortname"?!$order:0)."'>$fname</a></th></tr></thead>");
 		addnav("","modules.php?sorting=name&order=".($sorting=="name"?!$order:0));
 		addnav("","modules.php?sorting=author&order=".($sorting=="author"?!$order:0));
@@ -261,28 +262,31 @@ if ($op==""){
 			for ($a=0;$a<count($moduleinfo);$a++) {
 				$i=$numberarray[$a];
 				rawoutput("<tr>");
+                $description = (isset($moduleinfo[$i]['description']) ? $moduleinfo[$i]['description'] : '');
 				if (isset($moduleinfo[$i]['invalid']) && $moduleinfo[$i]['invalid']===true)
 				{
-					rawoutput("<td></td><td class='collapsing'>");
-					output("Not installable");
+					rawoutput("<td></td><td>");
+					output_notl('<span data-tooltip="%s"><i class="red configure icon"></i></span>', $notinstallable, true);
 					rawoutput("</td>");
+                    rawoutput('<td colspan="3"><span title="'.($description?$description:sanitize($moduleinfo[$i]['name'])).'">');
+                    rawoutput($moduleinfo[$i]['name']." ".$moduleinfo[$i]['version']);
+				    rawoutput("</span>");
 				}
 				else
 				{
-					rawoutput("<td class='collapsing'><div class='ui toggle checkbox'><input type='checkbox' name='module[]' value='{$moduleinfo[$i]['shortname']}'></div></td>");
+					rawoutput("<td class='collapsing'><div class='ui checkbox'><input type='checkbox' name='module[]' value='{$moduleinfo[$i]['shortname']}'></div></td>");
 					rawoutput("<td class='collapsing'>");
-					rawoutput("[ <a href='modules.php?op=install&module={$moduleinfo[$i]['shortname']}&cat={$moduleinfo[$i]['category']}'>");
-					output_notl('<i data-tooltip="%s" class="large icons"><i class="green link configure icon"></i><i class="green corner plus icon"></i></i>', $install, true);
-					rawoutput("</a>]</td>");
+					rawoutput("<a href='modules.php?op=install&module={$moduleinfo[$i]['shortname']}&cat={$moduleinfo[$i]['category']}'>");
+					output_notl('<span data-tooltip="%s"><i class="green link configure icon"></i></span>', $install, true);
+					rawoutput("</a></td>");
 					addnav("","modules.php?op=install&module={$moduleinfo[$i]['shortname']}&cat={$moduleinfo[$i]['category']}");
+                    rawoutput('<td><span title="'.($description?$description:sanitize($moduleinfo[$i]['name'])).'">');
+                    rawoutput($moduleinfo[$i]['name']." ".$moduleinfo[$i]['version']);
+				    rawoutput("</span></td><td>");
+				    output_notl("`#%s`0", $moduleinfo[$i]['author'], true);
+                    rawoutput("</td><td>");
+                    rawoutput($moduleinfo[$i]['category']);
 				}
-				$description = (isset($moduleinfo[$i]['description']) ? $moduleinfo[$i]['description'] : '');
-			    rawoutput('<td><span title="'.($description?$description:sanitize($moduleinfo[$i]['name'])).'">');
-				rawoutput($moduleinfo[$i]['name']." ".$moduleinfo[$i]['version']);
-				rawoutput("</span></td><td>");
-				output_notl("`#%s`0", $moduleinfo[$i]['author'], true);
-				rawoutput("</td><td>");
-				rawoutput($moduleinfo[$i]['category']);
 				rawoutput("</td><td>");
 				rawoutput($moduleinfo[$i]['shortname'] . ".php");
 				rawoutput("</td>");
@@ -290,7 +294,7 @@ if ($op==""){
 				if (isset($moduleinfo[$i]['requires']) && count($moduleinfo[$i]['requires'])){
 					rawoutput("<tr>");
 					rawoutput("<td>&nbsp;</td>");
-					rawoutput("<td colspan='6'>");
+					rawoutput("<td colspan='5'>");
 					output("`bRequires:`b`n");
 					foreach ($moduleinfo[$i]['requires'] as $key=>$val) {
 						$info = explode("|",$val);
