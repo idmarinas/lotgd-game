@@ -624,7 +624,7 @@ function charstats()
 				tlschema();
 			}
 		}
-		if (count($buffs)) $buffs[] = appoencode(translate_inline("`^None`0"), true);
+		if (! count($buffs)) $buffs[] = appoencode(translate_inline("`^None`0"), true);
 
 		// $atk = $atk;
 		// $def = $def;
