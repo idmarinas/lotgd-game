@@ -1,3 +1,11 @@
+/*--------------------
+   Heredate font size
+--------------------*/
+table
+{
+    font-size: inherit;
+}
+
 /*--------------
    Selectable
 ---------------*/
