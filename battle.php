@@ -495,7 +495,6 @@ if ($op != "newtarget") {
 
 $newenemies = autosettarget($newenemies);
 
-// Y no es necesario al no mostrar la información de salud al final de la página
 if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
  	output("`n`2`bEnd of Round:`b`0`n");
 	show_enemies($newenemies);
