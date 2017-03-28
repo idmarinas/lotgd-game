@@ -187,7 +187,7 @@ function page_footer($saveuser = true)
 	//NOTICE | which I have made freely available to you, that you leave it in.
 	//NOTICE |
 
-	$paypalData = ['currency' => getsetting('paypalcurrency', 'USD')];
+	$paypalData = ['site' => ['currency' => getsetting('paypalcurrency', 'USD')]];
 	if (! isset($_SESSION['logdnet'])
 		|| ! isset($_SESSION['logdnet'][''])
 		|| $_SESSION['logdnet']['']==''
@@ -195,7 +195,9 @@ function page_footer($saveuser = true)
 	) $already_registered_logdnet = false;
 	else $already_registered_logdnet = true;
 
-	$paypalData['registered_logdnet'] = $already_registered_logdnet;
+	$paypalData['author']['registered_logdnet'] = $already_registered_logdnet;
+    $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
+	$paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $already_registered_logdnet)
 	{
 		//account counting, just for my own records, I don't use this in the calculation for server order.
@@ -220,32 +222,28 @@ function page_footer($saveuser = true)
 			savesetting('logdnetserver', $u);
 		}
 
-		$paypalData['v'] = rawurlencode($logd_version);
-		$paypalData['c'] = rawurlencode($c);
-		$paypalData['a'] = rawurlencode($a);
-		$paypalData['l'] = rawurlencode($l);
-		$paypalData['d'] = rawurlencode($d);
-		$paypalData['e'] = rawurlencode($e);
-		$paypalData['u'] = rawurlencode($u);
+		$paypalData['author']['v'] = rawurlencode($logd_version);
+		$paypalData['author']['c'] = rawurlencode($c);
+		$paypalData['author']['a'] = rawurlencode($a);
+		$paypalData['author']['l'] = rawurlencode($l);
+		$paypalData['author']['d'] = rawurlencode($d);
+		$paypalData['author']['e'] = rawurlencode($e);
+		$paypalData['author']['u'] = rawurlencode($u);
 	}
-	else
-	{
-		$paypalData['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
-		$paypalData['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-	}
+
 	$paysite = getsetting('paypalemail', '');
 	if ($paysite != '')
 	{
-		$paypalData['paysite'] = $paysite;
-		$paypalData['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
-		$paypalData['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$paypalData['site']['paysite'] = $paysite;
+		$paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
+		$paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 		if (file_exists("payment.php"))
 		{
-			$paypalData['notify_url'] = 'http://'.$_SERVER["HTTP_HOST"].dirname($_SERVER['REQUEST_URI']).'/payment.php';
+			$paypalData['site']['notify_url'] = 'http://'.$_SERVER["HTTP_HOST"].dirname($_SERVER['REQUEST_URI']).'/payment.php';
 		}
 
-		$paypalData['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
+		$paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
 	}
 
 	$html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);

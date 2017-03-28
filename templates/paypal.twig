@@ -9,14 +9,14 @@
 <table style="width:auto; margin: auto; background: transparent;">
 	<tr>
 		<td>
-			{% if registered_logdnet %}
-				<embed style="width: 62px; height: 57px; margin-bottom: 1em;" src='{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(c, l, v, a, d, e, u) }}'></embed>
+			{% if author.registered_logdnet %}
+				<embed style="width: 62px; height: 57px; margin-bottom: 1em;" src='{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(author.c, author.l, author.v, author.a, author.d, author.e, author.u) }}'></embed>
 			{% else %}
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 					<input type="hidden" name="cmd" value="_xclick">
 					<input type="hidden" name="business" value="logd@mightye.org">
-					<input type="hidden" name="item_name" value="{{ item_name }}">
-					<input type="hidden" name="item_number" value="{{ item_number }}">
+					<input type="hidden" name="item_name" value="{{ author.item_name }}">
+					<input type="hidden" name="item_number" value="{{ author.item_number }}">
 					<input type="hidden" name="no_shipping" value="1">
 					<input type="hidden" name="notify_url" value="http://lotgd.net/payment.php">
 					<input type="hidden" name="cn" value="Your Character Name">
@@ -27,21 +27,21 @@
 				</form>
 			{% endif %}
 		</td>
-		{% if paysite %}
+		{% if site.paysite %}
 			<td>
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 					<input type="hidden" name="cmd" value="_xclick">
-					<input type="hidden" name="business" value="{{ paysite }}">
-					<input type="hidden" name="item_name" value="{{ item_name }}">
-					<input type="hidden" name="item_number" value="{{ item_number }}">
+					<input type="hidden" name="business" value="{{ site.paysite }}">
+					<input type="hidden" name="item_name" value="{{ site.item_name }}">
+					<input type="hidden" name="item_number" value="{{ site.item_number }}">
 					<input type="hidden" name="no_shipping" value="1">
 					{% if notify_url %}
-						<input type="hidden" name="notify_url" value="{{ notify_url }}">
+						<input type="hidden" name="notify_url" value="{{ site.notify_url }}">
 					{% endif %}
 					<input type="hidden" name="cn" value="Your Character Name">
 					<input type="hidden" name="cs" value="1">
-					<input type="hidden" name="currency_code" value="{{ currency }}">
-					<input type="hidden" name="lc" value="{{ paypalcountry_code }}">
+					<input type="hidden" name="currency_code" value="{{ site.currency }}">
+					<input type="hidden" name="lc" value="{{ site.paypalcountry_code }}">
 					<input type="hidden" name="bn" value="PP-DonationsBF">
 					<input type="hidden" name="tax" value="0">
 					<input type="image" src="images/paypal2.gif" border="0" name="submit" alt="Donate to the Site">
