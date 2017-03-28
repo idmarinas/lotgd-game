@@ -1157,15 +1157,14 @@ function module_display_events($eventtype, $forcescript=false) {
 	$name = translate_inline("Name");
 	$rchance = translate_inline("Raw Chance");
 	$nchance = translate_inline("Normalized Chance");
-	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<tr class='trhead'>");
-	rawoutput("<td>$name</td><td>$rchance</td><td>nchance</td>");
-	rawoutput("</tr>");
+	rawoutput("<table class='ui small very compact striped selectable table'>");
+	rawoutput("<thead><tr>");
+	rawoutput("<th>$name</th><th>$rchance</th><th>nchance</th>");
+	rawoutput("</tr></thead>");
 	$i = 0;
 	foreach($events as $event) {
 		// Each event is an associative array of 'modulename',
 		// 'rawchance' and 'normchance'
-		rawoutput("<tr class='" . ($i%2==0?"trdark":"trlight")."'>");
 		$i++;
 		if ($event['modulename']) {
 			$link = "module-{$event['modulename']}";
@@ -1178,7 +1177,7 @@ function module_display_events($eventtype, $forcescript=false) {
 		$rl2 = substr($rlink, $first+1);
 		$rl2 = str_replace("?", "&", $rl2);
 		$rlink = $rl1 . $rl2;
-		rawoutput("<td><a href='$rlink'>$name</a></td>");
+		rawoutput("<tr><td><a href='$rlink'>$name</a></td>");
 		addnav("", "$rlink");
 		rawoutput("<td>{$event['rawchance']}</td>");
 		rawoutput("<td>{$event['normchance']}</td>");
