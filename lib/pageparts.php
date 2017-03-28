@@ -245,7 +245,7 @@ function page_footer($saveuser = true)
 			$paypalData['notify_url'] = 'http://'.$_SERVER["HTTP_HOST"].dirname($_SERVER['REQUEST_URI']).'/payment.php';
 		}
 
-		$paypalData['paypalcountry-code'] = getsetting('paypalcountry-code', 'US');
+		$paypalData['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
 	}
 
 	$html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
