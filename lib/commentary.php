@@ -617,10 +617,13 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	}
 	$onlinestatus = [];
 	$offline = date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT",900)." seconds"));
-	while ($row = DB::fetch_assoc($onlineresult)){
+	foreach ($onlineresult as $row)
+	{
 		$onlinestatus[$row['acctid']]=$row;
 	}
 	$onlinestatus[$session['user']['acctid']]['chatloc']=$chatloc;
+	$onlinestatus[$session['user']['acctid']]['laston']=$session['user']['laston'];
+	$onlinestatus[$session['user']['acctid']]['loggedin']=$session['user']['loggedin'];
 
 	$commentbuffer = array_values($commentbuffer);
 	$rowcount = count($commentbuffer);
@@ -632,7 +635,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		if (isset($commentbuffer[$i]))
 		{
 			$row = $commentbuffer[$i];
-			if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']=="AFK")
+			if (isset($onlinestatus[$row['author']]) && $onlinestatus[$row['author']]['chatloc']=="AFK")
 			{
 				$commentbuffer[$i]['info']['online']=-1;
 				$icon = [
@@ -642,7 +645,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				$commentbuffer[$i]['info']['icons']['online']=$icon;
 				continue;
 			}
-			if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']=="DNI"){
+			if (isset($onlinestatus[$row['author']]) && $onlinestatus[$row['author']]['chatloc']=="DNI"){
 				$commentbuffer[$i]['info']['online']=-1;
 				$icon = [
 					'icon' => "images/icons/onlinestatus/dni.png",
@@ -651,7 +654,8 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				$commentbuffer[$i]['info']['icons']['online']=$icon;
 				continue;
 			}
-			if (isset($onlinestatus[$row['author']]) && ($onlinestatus[$row['author']]['laston'] < $offline || !$onlinestatus[$row['author']]['loggedin']) )
+
+			if (! isset($onlinestatus[$row['author']]) || $onlinestatus[$row['author']]['laston'] < $offline || !$onlinestatus[$row['author']]['loggedin'])
             {
 				$commentbuffer[$i]['info']['online']=0;
 				$icon = [
@@ -659,7 +663,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 					'mouseover' => "Offline",
 				];
 			}
-			else if (isset($onlinestatus[$row['author']]['chatloc']) && $onlinestatus[$row['author']]['chatloc']==$chatloc)
+			else if ( $onlinestatus[$row['author']]['chatloc']==$chatloc)
 			{
 				$commentbuffer[$i]['info']['online']=2;
 				$icon = [
@@ -682,7 +686,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	$loop2tot = $loop2end - $loop2start;
 	//debug("Loop 2: ".$loop2tot);
 
-	debug($commentbuffer);
+	// debug($onlinestatus);
 	// $gcend = getmicrotime(true);
 	// $gctotal = $gcend - $gcstart;
 	// debug("getcommentary execution time: ".$gctotal);
@@ -858,7 +862,7 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 	$ret = "";
 
 	//skip assigning chatloc if this chatloc's id ends with "_aux" - this way we can have dual chat areas
-	if (!$afk && isset($session['user']['chatloc']) && $session['user']['chatloc'] != 'DNI')
+	if (!$afk && (!isset($session['user']['chatloc']) || $session['user']['chatloc'] != 'DNI'))
 	{
 		if (substr($section,strlen($section)-4,strlen($section))!="_aux"){
 			$chatloc = $section;
