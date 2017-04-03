@@ -20,5 +20,6 @@ $(function(){
         hoverable  : true,
         position   : 'bottom left',
     });
+    $('.ui.tooltip').popup();
     $('.ui.progress').progress({precision: 10});
 });
