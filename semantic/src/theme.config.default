@@ -73,7 +73,6 @@
 @item              : 'default';
 @statistic         : 'default';
 @_lotgd-lotgd      : 'default';
-@_lotgd-colors     : 'default';
 @_lotgd-navigation : 'default';
 @_lotgd-character : 'default';
 
