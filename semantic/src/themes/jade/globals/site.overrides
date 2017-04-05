@@ -92,3 +92,29 @@ a
 	left: 0px;
 	height: auto;
 }
+
+/*-----------
+       Debug
+-------------*/
+div.debug
+{
+	background-color: @lotgd_debugBgColor;
+	color: @lotgd_debugTextColor;
+	font-size: @lotgd_debugFontSize;
+	border: @lotgd_debugBorder;
+	width: @lotgd_debugWidth;
+	height: @lotgd_debugHeight;
+
+	pre
+	{
+		margin: 0;
+    	white-space: normal;
+	}
+}
+
+/**/
+.navhi
+{
+	color: @lotgd_navhiTextColor;
+	text-decoration: @lotgd_navhiTextDecoration;
+}

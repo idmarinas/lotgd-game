@@ -271,3 +271,10 @@
 
 @viePetitionUnhandledBackground: @lightGrey;
 @viewPetitionUnhandlederrorColor: @grey;
+
+/**
+ * LOTGD Styles
+ */
+/* Floated */
+@floatedDistance: 1em;
+

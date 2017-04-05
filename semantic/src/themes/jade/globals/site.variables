@@ -1003,3 +1003,15 @@
 @lotgdTlinkHotFontSize: 7px;
 @lotgdTlinkHotPadding: 0 1px 0 1px;
 @lotgdTlinkHotTexDecoration: none;
+
+/* Debug */
+@lotgd_debugBgColor: #FFFFFF;
+@lotgd_debugTextColor: #000000;
+@lotgd_debugFontSize: 10px;
+@lotgd_debugBorder: 1px dotted #000000;
+@lotgd_debugWidth: auto;
+@lotgd_debugHeight: auto;
+
+/**/
+@lotgd_navhiTextColor: #00FF00;
+@lotgd_navhiTextDecoration: underline;
