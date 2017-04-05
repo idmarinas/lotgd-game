@@ -71,7 +71,6 @@
 @feed              : 'default';
 @item              : 'default';
 @statistic         : 'default';
-@_lotgd-navigation : 'default';
 @_lotgd-character : 'default';
 
 /*******************************
