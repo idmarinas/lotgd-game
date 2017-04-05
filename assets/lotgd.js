@@ -14,6 +14,7 @@ $(function(){
             $('.ui.menu.lotgd.form .header.item').text(text);
         },
     });
+    $('.ui.lotgd.tabular.menu .item').tab();
     $('.ui.checkbox').checkbox();
     $('.ui.menu.form.lotgd .browse').popup({
         inline     : true,
