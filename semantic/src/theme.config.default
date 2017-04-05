@@ -37,7 +37,6 @@
 @reveal       : 'default';
 @segment      : 'default';
 @step         : 'default';
-@_lotgd-tlink : 'default';
 
 /* Collections */
 @breadcrumb  : 'default';

@@ -980,3 +980,26 @@
 @colwheat: #F5DEB3;
 @coltan: #D2B48C;
 @colburlywood: #DEB887;
+
+/*------------------
+ Translation links
+-------------------*/
+/* Translated */
+@lotgdTlinkBorder: 1px dotted  #0000FF;
+@lotgdTlinkBgColor: #9999FF;
+@lotgdTlinkTextColor: #FFFFFF;
+@lotgdTlinkWidth: 7px;
+@lotgdTlinkHeight: 7px;
+@lotgdTlinkGontSize: 7px;
+@lotgdTlinkPadding: 0 1px 0 1px;
+@lotgdTlinkTexDecoration: none;
+
+/* Need translate */
+@lotgdTlinkHotBorder: 1px dotted  #FF0000;
+@lotgdTlinkHotBgColor: #FF9999;
+@lotgdTlinkHotTextColor: #FFFFFF;
+@lotgdTlinkHotWidth: 7px;
+@lotgdTlinkHotHeight: 7px;
+@lotgdTlinkHotFontSize: 7px;
+@lotgdTlinkHotPadding: 0 1px 0 1px;
+@lotgdTlinkHotTexDecoration: none;

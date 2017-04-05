@@ -50,3 +50,45 @@ body { margin: 10px; }
 .colwheat { color: @colwheat; }
 .coltan { color: @coltan; }
 .colburlywood { color: @colburlywood; }
+
+/*------------------
+ Translation links
+-------------------*/
+a
+{
+	&.t
+	{
+		width: @lotgdTlinkWidth;
+		height: @lotgdTlinkHeight;
+		border: @lotgdTlinkBorder;
+		background-color: @lotgdTlinkBgColor;
+		color: @lotgdTlinkTextColor;
+		font-size: @lotgdTlinkFontSize;
+		text-decoration: @lotgdTlinkTexDecoration;
+		padding: @lotgdTlinkPadding;
+	}
+
+	&.thot
+	{
+		width: @lotgdTlinkHotWidth;
+		height: @lotgdTlinkHotHeight;
+		border: @lotgdTlinkHotBorder;
+		background-color: @lotgdTlinkHotBgColor;
+		color: @lotgdTlinkHotTextColor;
+		font-size: @lotgdTlinkHotFontSize;
+		text-decoration: @lotgdTlinkHotTexDecoration;
+		padding: @lotgdTlinkHotPadding;
+	}
+}
+.nav a.thot
+{
+	position: absolute;
+	left: 0px;
+	height: auto;
+}
+&.nav a.t
+{
+	position: absolute;
+	left: 0px;
+	height: auto;
+}
