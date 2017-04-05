@@ -990,7 +990,7 @@
 @lotgdTlinkTextColor: #FFFFFF;
 @lotgdTlinkWidth: 7px;
 @lotgdTlinkHeight: 7px;
-@lotgdTlinkGontSize: 7px;
+@lotgdTlinkFontSize: 7px;
 @lotgdTlinkPadding: 0 1px 0 1px;
 @lotgdTlinkTexDecoration: none;
 
