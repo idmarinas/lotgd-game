@@ -4,7 +4,7 @@
 // mail ready
 
 /**
- * Construct TABS Uikit style
+ * Construct TABS Semantic UI style
  *
  * @var array $tabs Format:
  *						[
@@ -19,22 +19,25 @@ function lotgd_showtabs($tabs, callable $callback = null)
 	static $showtab_id = 0;
 
 	$showtab_id++;
+    $tab_id = 0;
 
 	$ulMenu = '';
 	$ulContent = '';
 
 	foreach($tabs as $title => $content)
 	{
+        $tab_id++;
+        $class = (1 < $tab_id ? '' : 'active');
 		//-- Title of tab
-		$ulMenu .= sprintf('<li><a href="#">%s</a></li>', translate($title));
+		$ulMenu .= sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
 
 		//-- Content of tab
-		if (! $callback) $ulContent .= '<li>'.$content.'</li>';
-		else $ulContent .= '<li>'.$callback($content, $title).'</li>';
+		if (! $callback) $ulContent .= sprintf('<div class="ui bottom attached %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
+		else $ulContent .= sprintf('<div class="ui bottom attached %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $callback($content, $title));
 	}
 
-	rawoutput(sprintf('<ul class="uk-tab" data-uk-tab="{connect:\'#tabs-%s\'}">%s</ul>', $showtab_id, $ulMenu )	);
+	rawoutput(sprintf('<div class="ui top attached lotgd tabular menu">%s</div>',$ulMenu ));
 
-	rawoutput(sprintf('<ul class="uk-switcher" id="tabs-%s">%s</ul>', $showtab_id, $ulContent ) );
+	rawoutput($ulContent);
 	unset($ulContent, $ulMenu);
 }
