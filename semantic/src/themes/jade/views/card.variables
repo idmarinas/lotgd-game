@@ -79,7 +79,7 @@
 /* Metadata */
 @metaFontSize: @relativeMedium;
 @metaSpacing: 0.3em;
-@metaColor: @lightTextColor;
+@metaColor: @invertedUnselectedTextColor;
 
 /* Icons */
 @actionOpacity: 0.75;
@@ -100,7 +100,7 @@
 @headerLinkColor: @headerColor;
 @headerLinkHoverColor: @linkHoverColor;
 
-@metaLinkColor: @lightTextColor;
+@metaLinkColor: @invertedUnselectedTextColor;
 @metaLinkHoverColor: @textColor;
 
 /* Description */
@@ -132,7 +132,7 @@
 @extraMargin: 0em 0em;
 @extraPadding: 0.75em 1em;
 @extraBoxShadow: none;
-@extraColor: @lightTextColor;
+@extraColor: @invertedUnselectedTextColor;
 @extraTransition: color @defaultDuration @defaultEasing;
 
 /* Extra Links */
