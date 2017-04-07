@@ -25,7 +25,6 @@
     "require": {
         "zendframework/zend-db": "^2.8",
         "zendframework/zend-paginator": "^2.7",
-        "zendframework/zend-servicemanager": "^2.5",
         "zendframework/zend-filter": "^2.7",
         "zendframework/zend-mail": "^2.7",
         "zendframework/zend-math": "^2.5",
