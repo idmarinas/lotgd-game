@@ -56,7 +56,7 @@
 @itemHeaderColor: @textColor;
 
 /* Description */
-@itemDescriptionColor: rgba(0, 0, 0, 0.7);
+@itemDescriptionColor: rgba(255, 255, 255, 0.7);
 
 /* Link */
 @itemLinkColor: @linkColor;
@@ -221,4 +221,3 @@
 @veryRelaxedChildItemVerticalPadding: @relative4px;
 @veryRelaxedHeaderMargin: 0.5rem;
 @veryRelaxedHorizontalPadding: 1.5rem;
-
