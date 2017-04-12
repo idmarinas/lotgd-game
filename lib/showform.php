@@ -80,7 +80,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		}
 	}
 
-	$content = [];
+	$content = '';
 	foreach($tabContent as $key => $value)
 	{
 		$text = sprintf('<div class="ui form">%s</div>',
@@ -93,7 +93,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 			$text
 		);
 
- 		$content[] = $text;
+ 		$content .= $text;
 	}
 
 	unset($text);
@@ -122,7 +122,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, callab
 		unset($popupMenu);
 	}
 
-	rawoutput(implode('', $content));
+	rawoutput($content);
 
 	unset($tabContent, $content, $tabMenu);
 
