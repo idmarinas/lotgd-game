@@ -140,7 +140,11 @@ function page_footer($saveuser = true)
 	unset($replacementbits['__scriptfile__']);
 	//output any template part replacements that above hooks need (eg,
 	//advertising)
-	foreach ($replacementbits as $key => $val) $html[$key] = $val;
+	foreach ($replacementbits as $key => $val)
+    {
+        if (! isset($html[$key])) $html[$key] = $val;
+        else $html[$key] .= $val;
+    }
 
 	$builtnavs = buildnavs();
 
@@ -392,7 +396,11 @@ function popup_footer()
 	$replacementbits = modulehook('footer-popup', []);
 	//output any template part replacements that above hooks need
 	reset($replacementbits);
-	foreach ($replacementbits as $key=>$val) $html[$key] = $val;
+	foreach ($replacementbits as $key=>$val)
+    {
+        if (! isset($html[$key])) $html[$key] = $val;
+        else $html[$key] .= $val;
+    }
 
 	$z = $y2^$z2;
 	$html[$z] = $license . $$z;
