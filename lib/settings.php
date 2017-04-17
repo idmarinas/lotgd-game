@@ -5,8 +5,10 @@
 
 require_once 'lib/settings.class.php';
 
-function savesetting($settingname,$value){
+function savesetting($settingname,$value)
+{
 	global $settings;
+
 	if (is_a($settings,"settings")) $settings->saveSetting($settingname,$value);
 }
 
@@ -22,17 +24,22 @@ function loadsettings(){
 //	$settings->loadSettings();
 }
 
-function clearsettings(){
+function clearsettings()
+{
 	//scraps the loadsettings() data to force it to reload.
 	global $settings;
+
 	if (is_a($settings,"settings")) $settings->clearSettings();
 	unset($settings);
-	$settings=new settings("settings");
+	$settings = new settings("settings");
 }
 
-function getsetting($settingname,$default){
+function getsetting($settingname,$default)
+{
 	global $settings;
-	if (!is_a($settings,"settings")) return "";
+
+	if (!is_a($settings,"settings")) return '';
+
 	return $settings->getSetting($settingname,$default);
 }
 ?>
