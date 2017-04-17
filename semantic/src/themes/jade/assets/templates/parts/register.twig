@@ -55,6 +55,37 @@
 			</div>
 		</div>
 	</div>
+
+    {% if requireprivacy or requireterms or requireage %}
+        <div class="ui grid required field">
+            <label class="five wide right aligned middle aligned column">{{ '`%Por último y no menos importante...`0'|appoencode }}</label>
+            <div class="eleven wide column">
+                {% if requireage %}
+                    <div class="ui checkbox field">
+                        {{ requireageinput }}
+                        <label>{{ requireage }}</label>
+                    </div>
+                    <br>
+                {% endif %}
+
+                {% if requireterms %}
+                    <div class="ui checkbox field">
+                        {{ requiretermsinput }}
+                        <label>{{ requireterms }}</label>
+                    </div>
+                    <br>
+                {% endif %}
+
+                {% if requireprivacy %}
+                    <div class="ui checkbox field">
+                        {{ requireprivacyinput }}
+                        <label>{{ requireprivacy }}</label>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
 	<div class="center aligned field">
 		<input class="ui big primary button" type="submit" value="{{ createbutton }}">
 	</div>
