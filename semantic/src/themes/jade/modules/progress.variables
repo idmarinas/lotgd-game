@@ -48,7 +48,7 @@
 /* Label */
 @labelWidth: 100%;
 @labelHeight: 1.5em;
-@labelSize: 1em;
+@labelSize: 0.9em;
 @labelPosition: absolute;
 @labelTop: 100%;
 @labelLeft: 0%;
