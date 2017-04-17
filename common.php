@@ -99,7 +99,7 @@ require_once 'lib/debuglog.php';
 require_once 'lib/forcednavigation.php';
 require_once 'lib/php_generic_environment.php';
 
-//-- Only for upgrade for previous versions
+//-- Only for upgrade from previous versions
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\FileGenerator;
 //-- End - This code delete in version 3.0.0
