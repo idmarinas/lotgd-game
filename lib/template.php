@@ -119,6 +119,29 @@ class LotgdTemplate
 		if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
 		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $this->getDefaultSkin());
 		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $this->getDefaultSkin();
+        //-- Search for a valid template in directory
+        if (! file_exists("themes/$templatename"))
+        {
+            // A generic way of allowing a theme to be selected.
+			$skins = [];
+			$handle = @opendir('themes');
+			while (false !== ($file = @readdir($handle)))
+			{
+				if (strpos($file,'.htm') > 0)
+                {
+                    $skins[] = $file;
+
+                    break; //-- We have 1 theme, no need more
+                }
+			}
+
+            if (count($skins))
+            {
+                $templatename = $skins[0];
+            }
+        }
+
+        if (! isset($_COOKIE['template']) || $_COOKIE['template'] == '') $_COOKIE['template'] = $templatename;
 
 		$this->templatename = $templatename;
 
