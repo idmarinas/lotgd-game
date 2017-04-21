@@ -2,6 +2,7 @@
 See CHANGELOG.txt for see changes made for  Oliver Brendel +nb Edition
 
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
+Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
 
 ## Version: 2.0.0
 [CHANGES]
@@ -21,8 +22,11 @@ Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) 
 	* Using this template system allow you to separate HTML of PHP code, increased code reading for you.
 * Now LOTGD use ***Semantic UI*** to create the UI.
 	* With Semantic UI can personalize components and add more. And have a good structure for LOTGD.
+    * **Old system for create a theme (template) are not compatible with this version.**
 * New **function** `lotgd_generate_creature_levels()`
-	* With this function you can generate levels for a creature base. You can use this functio in your own modules. You can use `buffbadguy()` to adapt the creature.
+	* With this function you can generate levels for a creature base. You can use this functioN in your own modules. You can use `buffbadguy()` to adapt the creature.
+* New **function** `lotgd_showtabs()` You need load *lib/showtabs.php* in your script.
+    * Do same as `lotgd_showform` but not is for show forms.
 
 [FIXES]
 
