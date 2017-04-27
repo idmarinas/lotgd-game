@@ -258,6 +258,8 @@ function injectsystemcomment($section, $comment)
 
 function injectrawcomment($section, $author, $comment, $name = false, $info = false)
 {
+    $sqlinfo = '';
+
 	if ($info)
 	{
 		$sqlinfo = @serialize($info);
@@ -446,15 +448,18 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		}
 		if (!is_array($commentbuffer) || $com)
 		{
-			$commentbuffer = array();
+			$commentbuffer = [];
 			$result = DB::query($sql);
-			while ($row = DB::fetch_assoc($result))
+			foreach ($result as $row)
 			{
-				$row['info']=@stripslashes($row['info']);
-				$row['info']=@unserialize($row['info']);
-				if (!is_array($row['info'])) $row['info']=array();
+				$row['info'] = @stripslashes($row['info']);
+				$row['info'] = @unserialize($row['info']);
+				if (! is_array($row['info'])) $row['info'] = [];
 				$row['info']['link'] = buildcommentarylink("&commentid=".$row['commentid']);
-				$commentbuffer[]=$row;
+			    $row['skiptalkline'] = false;
+                $row['gamecomment'] = false;
+			    $row['info']['icons'] = [];
+				$commentbuffer[] = $row;
 			}
 			if (!$com) updatedatacache("commentary/latestcommentary_$section", $commentbuffer);
 		}
@@ -498,7 +503,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 			//$row['comment'] = comment_sanitize($row['comment']);
 			if (substr($row['comment'],0,1)==":" || substr($row['comment'],0,3)=="/me")
 			{
-				$row['skiptalkline']=true;
+				$row['skiptalkline'] = true;
 				//remove beginning /me
 				//$length = strlen($row['comment']);
 				if (substr($row['comment'],0,3)=="/me")
@@ -517,9 +522,6 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 					$row['comment'] = substr($row['comment'],1);
 				}
 			}
-			$row['gamecomment'] = false;
-			$row['skiptalkline'] = false;
-			$row['info']['icons'] = [];
 
 			if (isset($row['info']['gamecomment']) && $row['info']['gamecomment'] || (substr($row['comment'],0,5)=="/game" && !$row['name']))
 			{
