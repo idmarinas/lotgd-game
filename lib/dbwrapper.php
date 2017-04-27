@@ -339,7 +339,7 @@ Class DB
         // Número máximo de resultados por página
         $paginator->setItemCountPerPage($perpage);
 
-        self::$sqlString = $select->getSqlString();
+        self::$sqlString = self::sql()->buildSqlString($select);
 
         return $paginator;
 	}
