@@ -4,9 +4,6 @@
 [![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)]()
 [![Version](https://img.shields.io/badge/version-2.0.1--dev-orange.svg?maxAge=2592000)]()
 
-
-# Translation coming soon #
-
 # About IDMarinas Edition
 
 The version **IDMarinas Edition** is based on the version **1.2.5 + nb Edition** by Oliver Brendel ([NB Core](http://nb-core.org)).
