@@ -7,4 +7,4 @@
  *
  * The Legend of the Green Dragon
  */
-@import 'overrides/menu.less'
+@import 'overrides/menu.less';

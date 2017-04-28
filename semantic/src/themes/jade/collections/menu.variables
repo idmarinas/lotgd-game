@@ -462,4 +462,4 @@
  *
  * The Legend of the Green Dragon
  */
-@import 'variables/menu.less'
+@import 'variables/menu.less';
