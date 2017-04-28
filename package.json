@@ -27,7 +27,7 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "semantic-ui": "2.2.9"
+        "semantic-ui": "2.2.10"
     },
     "devDependencies": {
         "del": "^2.2.0",
