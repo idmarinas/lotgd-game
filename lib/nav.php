@@ -357,7 +357,8 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
 	if (is_array($text))
 	{
-		if ($text[0] && $session['loggedin']) {
+		if ($text[0] && isset($session['loggedin']) && $session['loggedin'])
+        {
 
 			if ($link === false) $schema = "!array!" . serialize($text);
 			else $schema = $text[0];
