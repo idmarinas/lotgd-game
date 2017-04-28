@@ -5,13 +5,14 @@
 require_once 'common.php';
 require_once 'lib/http.php';
 require_once 'lib/listfiles.php';
+require_once 'lib/creaturefunctions.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
 tlschema("creatures");
 
 //this is a setup where all the creatures are generated.
-$creaturestats = lotgd_generate_creatures_level();
+$creaturestats = lotgd_generate_creature_levels();
 
 page_header("Creature Editor");
 
