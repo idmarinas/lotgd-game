@@ -29,8 +29,8 @@
 @headerVerticalPadding: 1.25rem;
 @headerHorizontalPadding: 1.5rem;
 @headerPadding: @headerVerticalPadding @headerHorizontalPadding;
-@headerBackground: @white;
-@headerColor: @darkTextColor;
+@headerBackground: transparent;
+@headerColor: @invertedTextColor;
 @headerFontSize: @huge;
 @headerBoxShadow: none;
 @headerFontWeight: bold;
@@ -41,7 +41,7 @@
 @contentFontSize: 1em;
 @contentPadding: 1.5rem;
 @contentLineHeight: 1.4;
-@contentBackground: @pageBackground;
+@contentBackground: transparent;
 
 /* Image / Description */
 @imageWidth: '';
@@ -55,7 +55,7 @@
 
 /* Modal Actions */
 @actionBorder: 1px solid @borderColor;
-@actionBackground: @offWhite;
+@actionBackground: transparent;
 @actionPadding: 1rem 1rem;
 @actionAlign: right;
 
