@@ -4,8 +4,8 @@
 		<td>
 			<table class="lotgd table">
 				<tr>
-					<td class="top aligned lotgd-text-nowrap">
-						<table  class="lotgd table">
+					<td class="middle aligned lotgd-text-nowrap">
+						<table class="lotgd table">
 							<tr>
 								<td class="border tlc"></td>
 								<td class="border tm"></td>
@@ -27,10 +27,15 @@
 				</tr>
 				<tr>
 					<td class="top aligned" colspan='2'>
-						{# Start advertising module #}
-						<div class="left floated">{{ headerad }}</div>
-						{# End advertising module #}
-						<div class="right floated">{{ motd }} | {{ mail }} | {{ petition }} {{ petitiondisplay|appoencode }}<br></div>
+                        <table class="lotgd table">
+                            <tr>
+                                {# Start advertising module #}
+                                <td class="collapsing">{{ headerad }}</td>
+						        {# End advertising module #}
+
+                                <td class="right aligned bottom aligned">{{ motd }} | {{ mail }} | {{ petition }} {{ petitiondisplay|appoencode }}</td>
+                            </tr>
+                        </table>
 					</td>
 				</tr>
 			</table>
@@ -51,9 +56,6 @@
 							<tr>
 								<td class="border tlt"></td>
 								<td class="lotgd top aligned nav">
-									{# Start advertising module #}
-									<div class="center aligned">{{ navad }}</div>
-									{# End advertising module #}
 									<div class="left aligned">{{ nav }}</div>
 								</td>
 								<td class="border trt"></td>
@@ -64,6 +66,9 @@
 								<td class="border brc"></td>
 							</tr>
 						</table>
+						{# Start advertising module #}
+						{{ navad }}
+						{# End advertising module #}
 					</td>
 					<td class="top aligned">
 						<table class="lotgd table">
