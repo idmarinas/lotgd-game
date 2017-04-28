@@ -148,7 +148,6 @@ if (file_exists('dbconnect.php'))
         $code = $file->generate();
 
         $result = file_put_contents('dbconnect.php', $code);
-        $result = false;
         if (false !== $result)
         {
             $message = 'Please reload page for apply changes to dbconnect.php.<br>';
