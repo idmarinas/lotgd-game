@@ -31,12 +31,6 @@ table
 {
 	background: transparent;
 }
-.ui.table.simple
-{
-	background: transparent;
-	border: none;
-	border-radius: 0;
-}
 
 /* View petition status */
 .ui.selectable.table tr[class*="top level"]:hover,
