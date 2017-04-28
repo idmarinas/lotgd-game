@@ -15,6 +15,7 @@ Version of the IDMarinas Edition: *2.0.1-dev*
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 
 IDMarinas Edition is used in:
+
 * [La Leyenda de Ignis](http://dragonverde.infommo.es)
 * [The Legend of the Green Dragon](http://lotgd.infommo.es) (Demo)
 
