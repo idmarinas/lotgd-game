@@ -456,3 +456,10 @@
 @hugeWidth: 20rem;
 @bigWidth: 22rem;
 @massiveWidth: 25rem;
+
+/**
+ * LOTGD Styles
+ *
+ * The Legend of the Green Dragon
+ */
+@import 'variables/menu.less'
