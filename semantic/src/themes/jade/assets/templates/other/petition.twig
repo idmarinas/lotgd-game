@@ -1,5 +1,5 @@
 {# Show only to administrators #}
 {% if administrator %}
-	<span>|</span> <a href="{{ 'user.php'|lotgd_url }}">{{ ueditor }}</a> <span>|</span> <a href='{{ 'viewpetition.php'|lotgd_url }}'>{{ petition }}</a>
+	<br> <a href="{{ 'user.php'|lotgd_url }}">{{ ueditor }}</a> <span>|</span> <a href='{{ 'viewpetition.php'|lotgd_url }}'>{{ petition }}</a>
 	{{ petitioncount }}
 {% endif %}
