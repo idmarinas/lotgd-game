@@ -55,6 +55,9 @@ class settings
 					$this->settings = [];
 					$sql = "SELECT * FROM " . $this->tablename;
 					$result = DB::query($sql);
+
+					if (! $result) return;
+
 					foreach($result as $row)
 					{
 						$this->settings[$row['setting']] = $row['value'];
