@@ -43,7 +43,7 @@ if ($op=="forgotval"){
 		rawoutput("<input name='password' value=\"!md52!{$row['password']}\" type='hidden'>");
 		rawoutput("<input name='force' value='1' type='hidden'>");
 		$click = translate_inline("Click here to log in");
-		rawoutput("<input type='submit' class='button' value='$click'></form>");
+		rawoutput("<input type='submit' class='ui button' value='$click'></form>");
 		output_notl("`n");
 		if ($trash > 0) {
 			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
@@ -108,7 +108,7 @@ if ($op=="forgotval"){
 			rawoutput("<input name='password' value=\"!md52!{$row['password']}\" type='hidden'>");
 			rawoutput("<input name='force' value='1' type='hidden'>");
 			$click = translate_inline("Click here to log in");
-			rawoutput("<input type='submit' class='button' value='$click'></form>");
+			rawoutput("<input type='submit' class='ui button' value='$click'></form>");
 		}
 		output_notl("`n");
 		if ($trash > 0) {
@@ -325,7 +325,7 @@ if (0 == getsetting("allowcreation",1))
 							rawoutput("<input name='name' value=\"$shortname\" type='hidden'>");
 							rawoutput("<input name='password' value=\"$pass1\" type='hidden'>");
 							$click = translate_inline("Click here to log in");
-							rawoutput("<input type='submit' class='button' value='$click'>");
+							rawoutput("<input type='submit' class='ui button' value='$click'>");
 							rawoutput("</form>");
 							output_notl("`n");
 							savesetting("newestplayer", $row['acctid']);
