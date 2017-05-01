@@ -115,21 +115,29 @@ if ($op==""){
 
 	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<thead><tr><th>$name</th><th>$points</th><th>$spent</th></tr></thead>");
-	$number=DB::num_rows($result);
-	for ($i=0;$i<$number;$i++){
-		$row = DB::fetch_assoc($result);
-		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
-		rawoutput("<td>");
-		output_notl("`^%s`0",$row['name']);
-		rawoutput("</td><td>");
-		output_notl("`@%s`0", number_format($row['donation']));
-		rawoutput("</td><td>");
-		output_notl("`%%s`0", number_format($row['donationspent']));
-		rawoutput("</td>");
-		rawoutput("</tr>");
+    if ($result->count())
+    {
+        foreach ($result as $row)
+        {
+            rawoutput("<tr><td>");
+            output_notl("`^%s`0",$row['name']);
+            rawoutput("</td><td>");
+            output_notl("`@%s`0", number_format($row['donation']));
+            rawoutput("</td><td>");
+            output_notl("`%%s`0", number_format($row['donationspent']));
+            rawoutput("</td></tr>");
+        }
 	}
+    else
+    {
+        rawoutput("<tr><td>");
+        output('Not found donators');
+        rawoutput("</td></tr>");
+    }
 	rawoutput("</table>",true);
-}else if ($op=="add1"){
+}
+else if ($op=="add1")
+{
 	$search="%";
 	$name = httppost('name');
 	if ($name=='') $name = httpget('name');
