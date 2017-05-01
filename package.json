@@ -1,16 +1,21 @@
 {
     "name": "idmarinas-lotgd",
     "title": "The Legend of the Green Dragon",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts for PHP >= 5.6. And optimization",
+    "time": "2017-04-21",
     "engines": {
         "node": ">= 0.10.0"
+    },
+    "support": {
+        "email": "contacto@infommo.es",
+        "issues": "https://bitbucket.org/idmarinas/lotgd-game/issues?status=new&status=open"
     },
     "authors": [
         {
             "name": "Iván Diaz Marinas",
             "email": "contacto@infommo.es",
-            "homepage": "https://bitbucket.org/idmarinas/lotgd-juego",
+            "homepage": "https://bitbucket.org/idmarinas/lotgd-game",
             "role": "Contributor, Maintainer"
         },
         {
