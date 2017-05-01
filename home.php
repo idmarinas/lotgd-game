@@ -150,7 +150,7 @@ if (getsetting('homeskinselect', 1))
 	$form = ['template' => 'Choose a different display skin:,theme'];
 
 	rawoutput("<br><form action='home.php' method='POST'>");
-	rawoutput('<table class="ui centered collapsing simple table"><tr><td><div class="ui form"><div class="inline fields"><div class="field">');
+	rawoutput('<table class="ui very basic centered collapsing table"><tr><td><div class="ui form"><div class="inline fields"><div class="field">');
 	lotgd_showform($form, $prefs, true);
 	$submit = translate_inline("Choose");
 	rawoutput("</div><div class='field'><input type='submit' class='ui button' value='$submit'></div>");
