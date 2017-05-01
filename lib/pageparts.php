@@ -250,7 +250,8 @@ function page_footer($saveuser = true)
 		$paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
 	}
 
-	$html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
+	if (isset($html['paypal'])) $html['paypal'] .= $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
+	else $html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
 	unset($paypalData);
 
 	//NOTICE |
