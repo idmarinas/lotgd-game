@@ -1,22 +1,5 @@
 {
     "name": "idmarinas/lotgd",
-    "description": ".",
-    "license": "LICENSE.txt",
-    "version": "2.0.0",
-    "homepage": "http://lotgd.infommo.es",
-    "time": "2016-09-06",
-    "support": {
-        "email": "contacto@infommo.es",
-        "web": "https://bitbucket.org/idmarinas/lotgd-juego/issues?status=new&status=open"
-    },
-    "authors" : [
-		{
-			"name"     : "Iván Diaz Marinas",
-			"email"    : "contacto@infommo.es",
-			"homepage" : "http://dragonverde.infommo.es",
-			"role"     : "Developer"
-		}
-	],
     "config": {
         "process-timeout": 5000
     },
