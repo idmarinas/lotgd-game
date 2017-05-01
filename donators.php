@@ -2,16 +2,16 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/systemmail.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/systemmail.php';
 
 check_su_access(SU_EDIT_DONATIONS);
 
 tlschema("donation");
 
 page_header("Donator's Page");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 
@@ -23,7 +23,7 @@ addnav("Return whence you came",$return);
 tlschema();
 
 $add = translate_inline("Add Donation");
-rawoutput("<form action='donators.php?op=add1&ret=".rawurlencode($ret)."' method='POST'>");
+rawoutput("<form action='donators.php?op=add1&ret=".rawurlencode($ret)."' method='POST' class='ui form'>");
 addnav("","donators.php?op=add1&ret=".rawurlencode($ret)."");
 $name = httppost("name");
 if ($name=="") $name = httpget("name");
@@ -37,16 +37,19 @@ if ($reason == "") $reason = translate_inline("manual donation entry");
 
 
 output("`bAdd Donation Points:`b`n");
+rawoutput('<div class="inline field"><label>');
 output("Character: ");
-rawoutput("<input name='name' value=\"".htmlentities($name, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("</label><input name='name' value=\"".htmlentities($name, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput('</div><div class="inline field"><label>');
 output("`nPoints: ");
-rawoutput("<input name='amt' size='3' value=\"".htmlentities($amt, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("</label><input name='amt' size='3' value=\"".htmlentities($amt, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput('</div><div class="inline field"><label>');
 output("`nReason: ");
-rawoutput("<input name='reason' size='30' value=\"".htmlentities($reason, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
-rawoutput("<input type='hidden' name='txnid' value=\"".htmlentities($txnid, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("</label><input name='reason' size='30' value=\"".htmlentities($reason, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("</div><input type='hidden' name='txnid' value=\"".htmlentities($txnid, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 output_notl("`n");
 if ($txnid>"") output("For transaction: %s`n",$txnid);
-rawoutput("<input type='submit' class='button' value='$add'>");
+rawoutput("<div class='field'><input type='submit' class='ui button' value='$add'></div>");
 rawoutput("</form>");
 
 addnav("Donations");
