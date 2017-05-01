@@ -28,5 +28,3 @@ Replace `jade` with the name of your theme.
 ```
 $ gulp --theme jade
 ```
-
-semantic/src/themes/jade/assets/templates
