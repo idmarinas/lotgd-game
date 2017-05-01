@@ -87,7 +87,6 @@ if ($op==""){
 		exit();
 	}else{
 		popup_header("Updated");
-		debug($debug);
 		rawoutput("<script language='javascript'>window.close();</script>");
 		popup_footer();
 	}
