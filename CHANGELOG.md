@@ -4,6 +4,53 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
 
+## Version: 2.0.1
+[CHANGES]
+
+* **Themes**
+    * Improvements in visualization
+* *Semantic UI*
+    * Personalization for LOTGD: upgrade and improvements in organization
+    * Upgrade to version 2.2.10
+* `lib/showform.php` 'notes' in forms use *color_sanitize* function for eliminate color code
+* *Gulp tasks* always copy installer files, because always need use in updates
+
+[FEATURES]
+
+* Nothing
+
+[FIXES]
+
+* `petition.php` code error that make not found files required
+* `masters` error in the name of the master level 5 by the encoding
+* `dbwrapper.php` possible security vulnerabilities with queries to the database
+* `lib/commentary.php` now show correct comments with '/me' or ':'
+* `common.php` Delete line of code for force FALSE in 'if' condition (not remember delete before ^_^)
+* `lib/settings.class.php` *loadSettings()* Avoid foreach if no get data
+* `creatures.php` error with new function *lotgd_generate_creature_levels* incorrect name in file and not load file with function
+* `lib/pageparts.php` now check if 'paypal' key have code and add PayPal buttons to existed code
+* `lib/installer/intaller_stage_0.php` form have Semantic UI style
+* `lib/installer/intaller_stage_1.php` now not replace copyright of footer
+* `lib/nav.php` warnings with undefined variables
+* `create.php` now all buttons have style
+* `lib/mail/case_read.php` process color codes and correct function for translate
+* `translatortool.php` delete line of code unnecessary
+* `donators.php` now have a full style and a small optimization
+* Correct class for the tables
+    * `home.php`
+    * `templates/parts/login.twig`
+    * `templates/parts/loginfull.twig`
+* `home.php` and `templates/parts/login.twig` forget password link transfer to template
+
+[REMOVES]
+
+* Nothing
+
+[NOTES]
+
+* Now README.md are translated to English
+
+
 ## Version: 2.0.0
 [CHANGES]
 
@@ -36,6 +83,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 [REMOVES]
 
+* Nothing
 
 [NOTES]
 
