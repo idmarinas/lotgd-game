@@ -98,7 +98,7 @@ if (DB::num_rows($result) > 0)
     output('`b`2Sent:`b `^%s`0', $row['sent']);
     rawoutput('</div>');
     output('`b`2From:`b %s `^%s`0', $status_image, $row['name'], true);
-	rawoutput('</div><div class="content"><span class="ui header">'.appencode($row['subject']).'</span><p>'.appoencode(sanitize_mb(str_replace("\n","`n",$row['body']))));
+	rawoutput('</div><div class="content"><span class="ui header">'.appoencode($row['subject']).'</span><p>'.appoencode(sanitize_mb(str_replace("\n","`n",$row['body']))));
 	rawoutput('</p></div>'.$buttonsMenuBottom.'</div>');
 
 	$sql = "UPDATE $mail SET seen=1 WHERE  msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$id."\"";
