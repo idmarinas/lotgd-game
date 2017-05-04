@@ -30,5 +30,3 @@ class LotgdCache extends Filesystem
 		$this->addPlugin($plugin);
 	}
 }
-
-$lotgd_cache = new LotgdCache;
