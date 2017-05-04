@@ -1,6 +1,6 @@
 <?php
 
-global $session,$fiveminuteload;
+global $session, $fiveminuteload;
 
 define('ALLOW_ANONYMOUS', true);
 define('OVERRIDE_FORCED_NAV', true);
@@ -41,7 +41,7 @@ if ($fiveminuteload>=8){
 
 $section = $_REQUEST['section'];
 $updateplayer = $_REQUEST['updateplayer'];
-$name = addslashes($session['user']['name']);
+$name = addslashes((isset($session['user']['name'])?$session['user']['name']:''));
 $now = time();
 
 if (! isset($session['iterations'])) $session['iterations'] = 0;
