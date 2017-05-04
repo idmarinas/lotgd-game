@@ -1,5 +1,6 @@
 {
     "name": "idmarinas/lotgd",
+    "description": "",
     "config": {
         "process-timeout": 5000
     },
