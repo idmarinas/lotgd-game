@@ -45,7 +45,7 @@ Class DB
 		if (! self::$adapter)
 		{
 			$title = 'Error in the database';
-			$message = 'Se ha producido un error al conectar a la base de datos del juego. <br>Por favor espere unos minutos, si el problema continua póngase en contacto con los administradores.';
+			$message = 'There was an error connecting to the game database. <br> Please wait a few minutes, if the problem persists contact the administrators.';
 
 			die(self::template($title, $message));
 		}
@@ -260,6 +260,7 @@ Class DB
 	//-- Función para crear una plantilla y mostrar una página en el die de la conexión
 	private static function template($title, $message, $showtrace = false)
 	{
+		require_once 'lib/sanitize.php';
 		require_once 'lib/nltoappon.php';
 		require_once 'lib/show_backtrace.php';
 
