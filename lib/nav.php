@@ -532,7 +532,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
 			$thisnav .= $lotgd_tpl->renderThemeTemplate('navs/item.twig', [
 				'text' => appoencode($text,$priv),
-				'link' => HTMLEntities($link.($pop != true ? $extra : ''), ENT_COMPAT, getsetting('charset', 'UFT-8')),
+				'link' => HTMLEntities($link.($pop != true ? $extra : ''), ENT_COMPAT, getsetting('charset', 'utf-8')),
 				'accesskey' => $keyrep,
 				'popup' => ($pop==true ? "target='_blank'".($popsize>""?" onClick=\"".popup($link,$popsize)."; return false;\"":"") : ""),
 				'tlbutton' => tlbutton_pop()
