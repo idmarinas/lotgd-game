@@ -34,11 +34,11 @@ function clearsettings()
 	$settings = new settings("settings");
 }
 
-function getsetting($settingname,$default)
+function getsetting($settingname, $default)
 {
 	global $settings;
 
-	if (!is_a($settings,"settings")) return '';
+	if (!is_a($settings,"settings")) return $default;
 
 	return $settings->getSetting($settingname,$default);
 }
