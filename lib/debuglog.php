@@ -16,13 +16,17 @@
 *@param int $value how much was gained or lost.  Only useful if also using $field and $consolidate (optional)
 *@param bool $consolidate add $value to previous log lines with the same $field, keeping a running total for today (optional, defaults to true)
 */
-function debuglog($message,$target=false,$user=false,$field=false,$value=false,$consolidate=true){
-	if ($target===false) $target=0;
-	static $needsdebuglogdelete = true;
+function debuglog($message, $target = false, $user = false, $field = false, $value = false, $consolidate = true)
+{
 	global $session;
-	$args = func_get_args();
+
+	static $needsdebuglogdelete = true;
+
+	if ($target === false) $target = 0;
 	if ($user === false) $user = $session['user']['acctid'];
+
 	$corevalue = $value;
+
 	$id=0;
 	if ($field !== false && $value !==false && $consolidate){
 		$sql = "SELECT * FROM ".DB::prefix("debuglog")." WHERE actor=$user AND field='$field' AND date>'".date("Y-m-d 00:00:00")."'";
