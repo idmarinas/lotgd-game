@@ -24,7 +24,7 @@ function get_player_hitpoints($player = false)
 
     $hitpoints = round($conbonus + $wisbonus + $strbonus + $levelbonus + $user['permahitpoints'], 0);
 
-    // La salud minima que puede tener el personaje es 10, independientemente de la penalización del permahitpoints
+    //-- The minimum hitpoints the character can have is 10, regardless of the penalty of the 'permahitpoints'
     return max($hitpoints, 10);
 }
 
