@@ -290,24 +290,24 @@ Class DB
 
 	public static function select($table = false)
 	{
-		if ($table) return self::sql()->select($table);
+		if ($table) return self::sql()->select(DB::prefix($table));
 		else  return self::sql()->select();
 	}
 
 	public static function insert($table = false)
 	{
-		if ($table) return self::sql()->insert($table);
+		if ($table) return self::sql()->insert(DB::prefix($table));
 		else  return self::sql()->insert();
 	}
 	public static function update($table = false)
 	{
-		if ($table) return self::sql()->update($table);
+		if ($table) return self::sql()->update(DB::prefix($table));
 		else  return self::sql()->update();
 	}
 
 	public static function delete($table = false)
 	{
-		if ($table) return self::sql()->delete($table);
+		if ($table) return self::sql()->delete(DB::prefix($table));
 		else  return self::sql()->delete();
 	}
 
