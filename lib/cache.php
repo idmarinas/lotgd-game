@@ -15,7 +15,8 @@ class LotgdCache extends Filesystem
 			$options = [
 				'namespace' => 'lotgd',
 				'cache_dir' => 'cache/',
-				'ttl' => 900
+				'ttl' => 900,
+                'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di'
 			];
 		}
 
