@@ -2,14 +2,14 @@
 // addnews ready
 // translator ready
 // mail ready
-require_once("common.php");
-require_once("lib/fightnav.php");
-require_once("lib/titles.php");
-require_once("lib/http.php");
-require_once("lib/buffs.php");
-require_once("lib/taunt.php");
-require_once("lib/names.php");
-require_once("lib/creaturefunctions.php");
+require_once 'common.php';
+require_once 'lib/fightnav.php';
+require_once 'lib/titles.php';
+require_once 'lib/http.php';
+require_once 'lib/buffs.php';
+require_once 'lib/taunt.php';
+require_once 'lib/names.php';
+require_once 'lib/creaturefunctions.php';
 
 tlschema("dragon");
 $battle = false;
@@ -20,62 +20,23 @@ if ($op==""){
 		output("`\$Fighting down every urge to flee, you cautiously enter the cave entrance, intent on catching the great green dragon sleeping, so that you might slay it with a minimum of pain.");
 		output("Sadly, this is not to be the case, for as you round a corner within the cave you discover the great beast sitting on its haunches on a huge pile of gold, picking its teeth with a rib.");
 	}
-	$maxlevel = getsetting('maxlevel',15);
-	$badguy = array(
-		"creaturename"=>translate_inline("`@The Green Dragon`0"),
-		"creaturelevel"=>$maxlevel+2,
-		"creatureweapon"=>translate_inline("Great Flaming Maw"),
-        "creatureattack"=>30+$maxlevel,
-        "creaturedefense"=>10+$maxlevel,
-        "creaturehealth"=>150+$maxlevel*10,
-		"diddamage"=>0,
-		"type"=>"dragon");
+	$maxlevel = getsetting('maxlevel', 15);
+	$badguy = [
+		'creaturename' => translate_inline('`@The Green Dragon`0'),
+		'creaturelevel' => $maxlevel+2,
+		'creatureweapon' => translate_inline('Great Flaming Maw'),
+        'creatureattack' => 30+$maxlevel,
+        'creaturedefense' => 10+$maxlevel,
+        'creaturehealth' => 150+$maxlevel*10,
+        'creaturespeed' => 2.5+$maxlevel,
+		'diddamage' => 0,
+		'type' => 'dragon'
+    ];
 
-	//toughen up each consecutive dragon.
-	// First, find out how each dragonpoint has been spent and count those
-	// used on attack and defense.
-	// Coded by JT, based on collaboration with MightyE
+    //--  Transform Dragon to adapt to player
 	restore_buff_fields();
-    $dk = get_player_dragonkillmod();
-    $creatureattr = get_creature_stats($dk);
-
-    //-- Bono a los atributos
-    $badguy['creaturestrbonus'] = $creatureattr['str'];
-    $badguy['creaturedexbonus'] = $creatureattr['dex'];
-    $badguy['creatureconbonus'] = $creatureattr['con'];
-    $badguy['creatureintbonus'] = $creatureattr['int'];
-    $badguy['creaturewisbonus'] = $creatureattr['wis'];
-
-    //-- Atributos totales de la criatura
-    $badguy['creaturestr'] = $creatureattr['str'] + 10;
-    $badguy['creaturedex'] = $creatureattr['dex'] + 10;
-    $badguy['creaturecon'] = $creatureattr['con'] + 10;
-    $badguy['creatureint'] = $creatureattr['int'] + 10;
-    $badguy['creaturewis'] = $creatureattr['wis'] + 10;
-
-    //-- Ataque, defensa y salud que dan los atributos;
-    $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
-	$badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
-	$badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
-	$badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
-
-	//-- Sumar los bonos
+    $badguy = lotgd_transform_creature($badguy);
     calculate_buff_fields();
-	$badguy['creatureattack'] += $badguy['creatureattackattrs'];
-	$badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
-	$badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
-	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
-
-	debug("DEBUG: $dk modification points total for attributes.");
-	debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
-	debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
-	debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
-	debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
-	debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
-	debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
-	debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
-	debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
-	debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
 
    	$badguy = modulehook("buffdragon", $badguy);
 
@@ -115,18 +76,14 @@ if ($op==""){
 	$result = DB::query($sql);
 
 	$dkpoints = 0;
-	foreach ($session['user']['dragonpoints'] as $val) {
-		if ($val=="hp") $dkpoints+=5;
-	}
 
 	restore_buff_fields();
-	$hpgain = array(
-			'total' => $session['user']['maxhitpoints'],
-			'dkpoints' => $dkpoints,
-			'extra' => $session['user']['maxhitpoints'] - $dkpoints -
-					($session['user']['level']*10),
-			'base' => $dkpoints + ($session['user']['level'] * 10),
-			);
+	$hpgain = [
+		'total' => $session['user']['maxhitpoints'],
+		'dkpoints' => $dkpoints,
+		'extra' => $session['user']['maxhitpoints'] - $dkpoints - ($session['user']['level']*10),
+		'base' => $dkpoints + ($session['user']['level'] * 10),
+    ];
 	$hpgain = modulehook("hprecalc", $hpgain);
 	calculate_buff_fields();
 
@@ -145,7 +102,6 @@ if ($op==""){
 				   ,"login"=>1
 				   ,"dragonkills"=>1
 				   ,"locked"=>1
-				   ,"goldinbank"=>1 // Se conserva el oro en el banco al matar al Dragón
 				   ,"loggedin"=>1
 				   ,"superuser"=>1
 				   ,"gems"=>1
@@ -183,7 +139,7 @@ if ($op==""){
 				   );
 
 	$nochange = modulehook("dk-preserve", $nochange);
-	$session['user']['dragonkills']++;
+    $session['user']['dragonkills']++;
 
 	$badguys = $session['user']['badguy']; //needed for the dragons name later
 
@@ -228,9 +184,8 @@ if ($op==""){
 		$session['user']['gems'] += 1;
 	}
 
-	$session['user']['maxhitpoints'] = 10 + $hpgain['dkpoints'] +
-		$hpgain['extra'];
-	$session['user']['hitpoints']=$session['user']['maxhitpoints'];
+	$session['user']['maxhitpoints'] = 10 + $hpgain['dkpoints'] + $hpgain['extra'];
+	$session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
 	// Sanity check
 	if ($session['user']['maxhitpoints'] < 1) {
@@ -302,12 +257,11 @@ if ($op=="fight" || $op=="run"){
 	$battle=true;
 }
 if ($battle){
-	require_once("battle.php");
+	require_once 'battle.php';
 
 	if ($victory){
 		$flawless = 0;
 		if ($badguy['diddamage'] != 1) $flawless = 1;
-		// $session['user']['dragonkills']++;
 		output("`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.",$badguy['creaturename']);
 		addnews("`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!",$session['user']['name'],$badguy['creaturename']);
 		tlschema("nav");
@@ -343,4 +297,3 @@ if ($battle){
 	}
 }
 page_footer();
-?>
