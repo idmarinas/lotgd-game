@@ -56,7 +56,6 @@ $session['counter']++;
 
 require_once 'vendor/autoload.php';//-- Autoload class for new options of game
 // Include some commonly needed and useful routines
-require_once 'lib/cache.php';
 require_once 'lib/output.php';
 require_once 'lib/nav.php';
 require_once 'lib/dbwrapper.php';
