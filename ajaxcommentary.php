@@ -7,6 +7,8 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
+if (! $session['user']['loggedin']) return;
+
 $now = time();
 $minute = round($now/60)*60;
 
@@ -25,10 +27,9 @@ if ($session['chatrequests'][$minute] >= 50)
 	// echo ("Server load is too high for auto-update at the moment.  This will hopefully balance out in a few minutes.");
 	// exit();
 // }
-if (isset($session['user']['laston'])) $expiresin = strtotime($session['user']['laston']) + 600;
-else $expiresin = strtotime(date('now')) + 600;
+$expiresin = strtotime($session['user']['laston']) + 600;
 $section = $_REQUEST['section'];
-if ($now > $expiresin || (isset($session['user']['chatloc']) && $session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
+if ($now > $expiresin || ($session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
 {
 	echo "Chat disabled due to inactivity";
 }
