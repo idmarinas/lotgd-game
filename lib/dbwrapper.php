@@ -195,10 +195,9 @@ Class DB
 		}
 		else if ('object' == gettype($sql))
 		{
-			$objectString = self::sql()->buildSqlString($sql);
-			self::$sqlString = $objectString;
+			self::$sqlString = self::sql()->buildSqlString($sql);
 
-			$result = self::query($objectString);
+			$result = self::query(self::$sqlString);
 			if (false === $result) $data = [];
 			else $data = self::toArray($result);
 			updatedatacache($name, $data);
