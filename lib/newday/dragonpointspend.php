@@ -89,9 +89,11 @@ if ($dkills-$dp > 1) {
 			$count++;
 		}
 	}
-}else{
+}
+else
+{
 	page_header("Dragon Points");
-	$dist = array();
+	$dist = [];
 	foreach ($labels as $type=>$label) {
 		$head=explode(",",$label);
 		if (count($head)>1) {
@@ -103,11 +105,11 @@ if ($dkills-$dp > 1) {
 			addnav($label, "newday.php?dk=$type$resline");
 		}
 	}
-		output("`@You have `&1`@ unspent dragon point.");
+	output("`@You have `&1`@ unspent dragon point.");
 	output("How do you wish to spend it?`n`n");
 	output("You earn one dragon point each time you slay the dragon.");
 	output("Advancements made by spending dragon points are permanent!");
-	$player_dkpoints=count($session['user']['dragonpoints']);
+	$player_dkpoints = count($session['user']['dragonpoints']);
 	for ($i=0; $i<$player_dkpoints; $i++) {
 		if (isset($dist[$session['user']['dragonpoints'][$i]])) {
 			$dist[$session['user']['dragonpoints'][$i]]++;
@@ -115,21 +117,22 @@ if ($dkills-$dp > 1) {
 			$dist['unknown']++;
 		}
 	}
-		output("`n`nCurrently, the dragon points you have already spent are distributed in the following manner.");
-	rawoutput("<blockquote>");
-	rawoutput("<table class='table-bg-transparent'>");
+	output("`n`nCurrently, the dragon points you have already spent are distributed in the following manner.");
+	rawoutput("<table class='ui very compact very basic collapsing centered table'>");
 
-	foreach ($labels as $type=>$label) {
+	foreach ($labels as $type => $label)
+    {
 		$head=explode(",",$label);
-		if ($dist[$type]==0) continue;
 		if (count($head)>1) {
-			rawoutput("<tr><td colspan='2' nowrap>");
+			rawoutput("<tr><td colspan='2' class='center aligned'>");
 			output("`b`4%s`0`b`n",translate_inline($head[0])); //got a headline here
 			rawoutput("</td></tr>");
 			continue;
 		}
+
+        if (! isset($canbuy[$type]) || ! $canbuy[$type]) continue;//-- Ignore if cant buy
 		if ($type == 'unknown' && $dist[$type] == 0) continue;
-		rawoutput("<tr><td nowrap>");
+		rawoutput("<tr><td>");
 		output($label);
 		output_notl(":");
 		rawoutput("</td><td>&nbsp;&nbsp;</td><td>");
@@ -137,6 +140,5 @@ if ($dkills-$dp > 1) {
 		rawoutput("</td></tr>");
 	}
 	rawoutput("</table>");
-	rawoutput("</blockquote>");
 }
 ?>
