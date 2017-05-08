@@ -2,11 +2,11 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/buffs.php");
-require_once("lib/sanitize.php");
-require_once("lib/villagenav.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/buffs.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/villagenav.php';
 
 tlschema('stables');
 
@@ -38,6 +38,8 @@ $basetext=array(
 	"confirmsale"=>"`n`n`7Merick whistles.  \"`&Yer mount shure is a foyne one, %s. Are ye sure ye wish t' part wae it?`7\"`n`nHe waits for your answer.`0",
 	"mountsold"=>"`7As sad as it is to do so, you give up your precious %s`7, and a lone tear escapes your eye.`n`nHowever, the moment you spot the %s, you find that you're feeling quite a bit better.",
 	"offer"=>"`n`nMerick offers you `^%s`& gold and `%%s`& gems for %s`7.",
+    'lass' => 'lass',
+    'lad' => 'lad'
 );
 $schemas = array(
 	'title'=>'stables',
@@ -69,7 +71,7 @@ addnav("Other");
 villagenav();
 modulehook("stables-nav");
 
-require_once("lib/mountname.php");
+require_once 'lib/mountname.php';
 list($name, $lcname) = getmountname();
 
 $repaygold = 0;
@@ -178,7 +180,7 @@ if ($op == 'confirmbuy') {
 			// Recalculate the special name as well.
 			modulehook("stable-mount", array());
 			modulehook("boughtmount");
-			require_once("lib/mountname.php");
+			require_once 'lib/mountname.php';
 			list($name, $lcname) = getmountname();
 			$grubprice = round($session['user']['level']*$playermount['mountfeedcost'], 0);
 		}
@@ -191,7 +193,7 @@ if ($op == 'confirmbuy') {
 		tlschema();
 	} elseif($session['user']['gold']>=$grubprice) {
 		$buff = unserialize($playermount['mountbuff']);
-		if ($buff['schema'] == "") $buff['schema'] = "mounts";
+		if (! isset($buff['schema']) || $buff['schema'] == "") $buff['schema'] = "mounts";
 		if ($session['bufflist']['mount']['rounds'] == $buff['rounds']) {
 			tlschema($schemas['nothungry']);
 			output($texts['nothungry'],$name);
@@ -215,8 +217,7 @@ if ($op == 'confirmbuy') {
 			tlschema($schemas['mountfull']);
 			output($texts['mountfull'],
 				translate_inline($session['user']['sex']?$texts["lass"]:$texts["lad"]),
-				($playermount['basename']?
-				 $playermount['basename']:$playermount['mountname']));
+				(isset($playermount['basename']) && $playermount['basename']? $playermount['basename']:$playermount['mountname']));
 			tlschema();
 		}
 	} else {

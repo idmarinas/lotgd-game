@@ -771,12 +771,12 @@ function maillink()
 {
 	global $session;
 
-	$sql = "SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM " . DB::prefix("mail") . " WHERE msgto=\"".$session['user']['acctid']."\"";
+	$sql = "SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM " . DB::prefix("mail") . " WHERE msgto='{$session['user']['acctid']}'";
 	$result = DB::query_cached($sql,"mail-{$session['user']['acctid']}",86400);
 	$row = DB::fetch_assoc($result);
 	DB::free_result($result);
-	$row['seencount'] = (int)$row['seencount'];
-	$row['notseen'] = (int)$row['notseen'];
+	$row['seencount'] = (int) isset($row['seencount']) ? $row['seencount'] : 0;
+	$row['notseen'] = (int) isset($row['notseen']) ? $row['notseen'] : 0;
 	if ($row['notseen']>0)
 		return sprintf("<a href='mail.php' target='_blank' onClick=\"".popup("mail.php").";return false;\" class='hotmotd'>".translate_inline("Ye Olde Mail: %s new, %s old","common")."</a>",$row['notseen'],$row['seencount']);
 	else
