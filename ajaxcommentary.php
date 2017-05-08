@@ -29,7 +29,7 @@ if ($session['chatrequests'][$minute] >= 50)
 // }
 $expiresin = strtotime($session['user']['laston']) + 600;
 $section = $_REQUEST['section'];
-if ($now > $expiresin || ($session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
+if ($now > $expiresin || (isset($session['user']['chatloc']) && $session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
 {
 	echo "Chat disabled due to inactivity";
 }
