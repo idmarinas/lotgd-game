@@ -97,7 +97,7 @@ class LotgdOutputCollector
 	 */
 	public function rawoutput($indata) {
 		if ($this->block_new_output) return;
-		$this->output .= $indata . "\n";
+        if (is_string($indata) && ! is_null($indata)) $this->output .= $indata . "\n";
 	}
 
 	/**
