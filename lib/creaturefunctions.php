@@ -52,6 +52,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
 	if ($dk === false) $dk = get_player_dragonkillmod();
 
     if (! isset($badguy['creaturespeed'])) $badguy['creaturespeed'] = 2.5;
+    if (! isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
 
     $creatureattr = get_creature_stats($dk);
 
