@@ -59,19 +59,20 @@ if ((count($session['user']['dragonpoints']) <
 $labels = [
 		"General Stuff,title",
 		"ff"=>"Forest Fights + 1",
+		"hp"=>"Max Hitpoints + 5",//-- Legacy
+		"at"=>"Attack + 1",//-- Legacy
+		"de"=>"Defense + 1",//-- Legacy
 		"Attributes,title",
 		"str"=>"Strength +1",
 		"dex"=>"Dexterity +1",
 		"con"=>"Constitution +1",
 		"int"=>"Intelligence +1",
 		"wis"=>"Wisdom +1",
-		/*Legacy Support, you cannot buy them anymore*/
-		/*well, to be precise you can if you write a module that sets $canbuy['at']=1 ;) */
-		"at"=>"Attack + 1",
-		"de"=>"Defense + 1",
-		"hp"=>"Max Hitpoints + 5",
 		"unknown"=>"Unknown Spends (contact an admin to investigate!)",
 ];
+/**
+ * Use modulehook dkpointlabels to activate desactivate labels or add more labels
+ */
 $canbuy = [
 		"hp"=>0,
 		"ff"=>1,
