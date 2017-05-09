@@ -1,6 +1,6 @@
 define([
     '../core',
-    'jquery'
+    '../external/jquery'
 ], function (Lotgd, jQuery)
 {
     'use strict'

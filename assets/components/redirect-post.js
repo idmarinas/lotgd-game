@@ -1,6 +1,6 @@
 define([
     '../core',
-    'jquery',
+    '../external/jquery',
     '../var/document'
 ], function (Lotgd, jQuery, document)
 {

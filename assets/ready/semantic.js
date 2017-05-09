@@ -1,5 +1,5 @@
 define([
-    'jquery'
+    '../external/jquery'
 ], function (jQuery)
 {
     'use strict'
