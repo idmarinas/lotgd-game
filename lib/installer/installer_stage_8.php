@@ -109,7 +109,7 @@ else
 	output_notl("`0");
 	rawoutput("<form action='installer.php?stage=".$stage."' method='POST'>");
 	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui button'>");
-	rawoutput("<input type='button' onClick='chooseRecommendedModules();' class='ui secondary button' value='$install'>");
+	rawoutput("<input type='button' onClick='Lotgd.recommendedModules();' class='ui secondary button' value='$install'>");
 	rawoutput("<input type='reset' value='$reset' class='ui yellow button'>");
 	rawoutput("<table class='ui compact selectable striped table'>");
 	ksort($all_modules);
@@ -214,13 +214,13 @@ else
 	}
 	rawoutput("</tbody></table>");
 	rawoutput("<input type='submit' name='modulesok' value='$submit' class='ui button'>");
-	rawoutput("<input type='button' onClick='chooseRecommendedModules();' class='ui secondary button' value='$install'>");
+	rawoutput("<input type='button' onClick='Lotgd.recommendedModules();' class='ui secondary button' value='$install'>");
 	rawoutput("<input type='reset' value='$reset' class='ui yellow button'>");
 	rawoutput("</form>");
 	rawoutput("<script language='JavaScript'>");
 	if (! $session['dbinfo']['upgrade'])
 	{
-		rawoutput("chooseRecommendedModules();");
+		rawoutput("Lotgd.recommendedModules();");
 	}
 	rawoutput("</script>");
 }
