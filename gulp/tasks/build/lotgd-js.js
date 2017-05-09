@@ -1,37 +1,41 @@
 /**
- * Concat lotgd JS files
+ * Create lotgd.js
  */
 var
 	//-- Dependencies
-	gulp = require('gulp'),
-	concat = require('gulp-concat'),
-	print = require('gulp-print'),
-	gulpif = require('gulp-if'),
-	uglify = require('gulp-uglify'),
-	plumber = require('gulp-plumber'),
-	header = require('gulp-header'),
+	webpack = require('webpack'),
+	ora = require('ora'),
 
 	//-- Configuration
-	config = require('../../config/default'),
 	configTasks = require('../../config/tasks'),
 
 	log = configTasks.log,
-	isProduction = configTasks.isProduction(),
-	settings = configTasks.settings,
-	banner = configTasks.banner.js
+	isProduction = configTasks.isProduction()
 ;
+
+if (isProduction)
+{
+	var webpackConfig = require('../../config/webpack.prod.conf');
+	var spinner = ora('building LOTGD JS App for production...');
+}
+else
+{
+	var webpackConfig = require('../../config/webpack.dev.conf');
+	var spinner = ora('building LOTGD JS App for development...');
+}
 
 module.exports = function(callback)
 {
-	return gulp.src([
-			'assets/lotgd.js',
-			'assets/components/*.js'
-		])
-		.pipe(plumber())
-        .pipe(concat('lotgd.js'))
-		.pipe(gulpif(isProduction, uglify(configTasks.settings.uglify.noComments)))
-		.pipe(gulpif(isProduction, header(banner, settings.header)))
-        .pipe(gulp.dest(config.paths.build + '/resources'))
-		.pipe(print(log.created))
-	;
+	spinner.start();
+	return webpack(webpackConfig, function (err, stats) {
+		spinner.stop()
+		if (err) throw err
+		process.stdout.write(stats.toString({
+			colors: true,
+			modules: false,
+			children: false,
+			chunks: false,
+			chunkModules: false
+		}) + '\n')
+	});
 }

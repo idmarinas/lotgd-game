@@ -1,10 +1,20 @@
-/**
- * Select all recommended modules
- */
-function chooseRecommendedModules()
+define([
+    '../core',
+    'jquery'
+], function (Lotgd, jQuery)
 {
-	$(':radio[data-recommended]').each(function()
+    'use strict'
+
+    /**
+     * Select all recommended modules
+     */
+    Lotgd.recommendedModules = function ()
     {
-		$(this).prop('checked', true);
-	});
-}
+        jQuery(':radio[data-recommended]').each(function ()
+        {
+            jQuery(this).prop('checked', true)
+        })
+    }
+
+    return Lotgd
+})
