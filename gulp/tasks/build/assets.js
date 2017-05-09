@@ -23,13 +23,6 @@ module.exports = function(callback)
 	/** Copy files JS **/
 	/************************/
 
-	//-- jQuery
-	var jQuery = gulp.src(config.paths.jQuery + (isProduction ? '/jquery.min.js' : '/jquery.js'))
-		.pipe(rename('jquery.js'))
-        .pipe(gulp.dest(config.paths.build + '/resources'))
-		.pipe(print(log.copied))
-	;
-
 	//-- Resources folder - Only JS
 	var resourceJS = gulp.src('resources/**/*.js')
 		.pipe(gulpif(isProduction, uglify(settings.uglify.some)))
@@ -44,5 +37,5 @@ module.exports = function(callback)
 		.pipe(gulp.dest(config.paths.build + '/resources'))
 	;
 
-	return merge(jQuery, resourceJS, resourceOther);
+	return merge(resourceJS, resourceOther);
 };
