@@ -1159,7 +1159,7 @@ function module_display_events($eventtype, $forcescript=false) {
 	$nchance = translate_inline("Normalized Chance");
 	rawoutput("<table class='ui small very compact striped selectable table'>");
 	rawoutput("<thead><tr>");
-	rawoutput("<th>$name</th><th>$rchance</th><th>nchance</th>");
+	rawoutput("<th>$name</th><th>$rchance</th><th>$nchance</th>");
 	rawoutput("</tr></thead>");
 	$i = 0;
 	foreach($events as $event) {
