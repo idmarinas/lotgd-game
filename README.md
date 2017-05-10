@@ -6,7 +6,7 @@
 
 # About
 
-The version **IDMarinas Edition** is based on the version **1.2.5 + nb Edition** by Oliver Brendel ([NB Core](http://nb-core.org)).
+The version **IDMarinas Edition** is based on the version **1.1.0 Dragonprime** by Dragonprime Development Team ([Dragonprime](http://dragonprime.net)) and have code of Oliver Brendel ([NB Core](http://nb-core.org)).
 
 
 ## IDMarinas Edition ##
