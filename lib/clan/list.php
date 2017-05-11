@@ -27,7 +27,7 @@
 				$sql = "DELETE FROM " . DB::prefix("clans") . " WHERE clanid={$row['clanid']}";
 				DB::query($sql);
 			}else{
-				rawoutput('<tr class="' . ($v%2?"trlight":"trdark").'"><td>', true);
+				rawoutput('<tr><td>', true);
 				if ($row['c'] == 1) {
 					$memb = sprintf($memb_1, $row['c']);
 				} else {
