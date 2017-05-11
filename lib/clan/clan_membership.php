@@ -11,8 +11,7 @@
 		$whoacctid = (int)httpget('whoacctid');
 		if ($setrank>=0 && $setrank<=$session['user']['clanrank']) {
 			$sql="SELECT name,login,clanrank FROM ".DB::prefix("accounts")." WHERE acctid=$whoacctid LIMIT 1";
-			$result=DB::query($sql);
-			$row=DB::fetch_assoc($result);
+			$row = DB::query($sql)->current();
 			$who = $row['login'];
 			$whoname = $row['name'];
 			if ($setrank>0) {
@@ -35,7 +34,7 @@
 			//delete unread application emails from this user.
 			//breaks if the applicant has had their name changed via
 			//dragon kill, superuser edit, or lodge color change
-			require_once("lib/safeescape.php");
+			require_once 'lib/safeescape.php';
 			$subj = safeescape(serialize(array($apply_short, $row['name'])));
 			$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='$subj'";
 			DB::query($sql);
@@ -56,10 +55,10 @@
 		$remove = translate_inline("Remove From Clan");
 		$submit = translate_inline("Set Rank");
 		$confirm = translate_inline("Are you sure you wish to remove this member from your clan?");
-		rawoutput("<tr class='trhead'><td>$rank</td><td>$name</td><td>$lev</td><td>$dk</td><td>$jd</td><td>$lo</td><td>$ops</td></tr>",true);
+		rawoutput("<thead><tr><th>$rank</th><th>$name</th><th>$lev</th><th>$dk</th><th>$jd</th><th>$lo</th><th>$ops</th></tr></thead>",true);
 		$i=false;
 		$tot = 0;
-		require_once("lib/clan/func.php");
+		require_once 'lib/clan/func.php';
 		$validranks=array_intersect_key($ranks,range(0,$session['user']['clanrank']));
 		while ($row=DB::fetch_assoc($result)){
 			$i=!$i;
@@ -69,8 +68,7 @@
 				$list.="<option value='$key' ".($row['clanrank']==$key?'selected ':'').">".sanitize($value)."</option>";
 			}
 			$tot += $row['dragonkills'];
-			rawoutput("<tr class='".($i?"trlight":"trdark")."'>");
-			rawoutput("<td>");
+			rawoutput("<tr><td>");
 			output_notl($ranks[$row['clanrank']]);
 			rawoutput("</td><td>");
 			$link = "bio.php?char=".$row['acctid']."&ret=".urlencode($_SERVER['REQUEST_URI']);
@@ -88,7 +86,7 @@
 			output_notl("`#%s`0",reltime(strtotime($row['laston'])));
 			rawoutput("</td>");
 			if ($session['user']['clanrank']>=CLAN_OFFICER && $row['clanrank']<=$session['user']['clanrank'] ){
-				rawoutput("<td nowrap>");
+				rawoutput("<td class='collapsing'>");
 				/*if ($row['clanrank']<$session['user']['clanrank'] && $row['clanrank']<CLAN_FOUNDER){
 					rawoutput("[ <a href='clan.php?op=membership&setrank=".clan_nextrank($ranks,$row['clanrank'])."&who=".rawurlencode($row['login'])."&whoname=".rawurlencode($row['name'])."&whoacctid=".$row['acctid']."'>$promote</a> | ");
 					addnav("","clan.php?op=membership&setrank=".clan_nextrank($ranks,$row['clanrank'])."&who=".rawurlencode($row['login'])."&whoname=".rawurlencode($row['name'])."&whoacctid=".$row['acctid']);
@@ -107,22 +105,22 @@
 				//new promote/demote system
 				if ($row['clanrank']==CLAN_FOUNDER && $row['login']==$session['user']['login']){
 					$conf=translate_inline("Are you really sure to step down as founder? You can NEVER rise again to that rank!");
-					output_notl("<form action='clan.php?op=membership&setrank=".clan_previousrank($ranks,$row['clanrank'])."&whoacctid=".$row['acctid']."' METHOD='POST'><input type='submit' class='button' onClick='return confirm(\"$conf\");' value='".sanitize($stepdown)."'></form> | ",true);
+					output_notl("<form action='clan.php?op=membership&setrank=".clan_previousrank($ranks,$row['clanrank'])."&whoacctid=".$row['acctid']."' METHOD='POST'><button type='submit' class='ui orange button' onClick='return confirm(\"$conf\");'>".sanitize($stepdown)."</button>",true);
 					addnav("","clan.php?op=membership&setrank=".clan_previousrank($ranks,$row['clanrank'])."&whoacctid=".$row['acctid']);
 				} elseif ($row['clanrank']!=CLAN_FOUNDER) {
-					rawoutput("<form action='clan.php?op=membership&whoacctid={$row['acctid']}' method='post'><select name='setrank'>");
+					rawoutput("<form action='clan.php?op=membership&whoacctid={$row['acctid']}' method='post'><select class='ui combo dropdown' name='setrank'>");
 					rawoutput($list);
 					rawoutput("</select>");
-					rawoutput("<input type='submit' class='button' value='$submit'></form>");
+					rawoutput("<button class='ui icon button tooltip top aligned' data-content='$submit' type='submit'><i class='configure icon'></i></button>");
 					addnav('',"clan.php?op=membership&whoacctid={$row['acctid']}");
 				}
 				if ($row['clanrank'] <= $session['user']['clanrank'] && $row['login']!=$session['user']['login'] && $row['clanrank']<CLAN_FOUNDER && $session['user']['clanrank']>=CLAN_ADMINISTRATIVE){
-					rawoutput("[<a href='clan.php?op=membership&remove=".$row['acctid']."' onClick=\"return confirm('$confirm');\"> $remove</a> ]");
+					rawoutput("<a class='ui red icon button tooltip top aligned' data-content='$remove' href='clan.php?op=membership&remove=".$row['acctid']."' onClick=\"return confirm('$confirm');\"><i class='remove user icon'></i></a>");
 					addnav('',"clan.php?op=membership&remove=".$row['acctid']);
 				}else{
-					output_notl("`2[ `)%s`2 ]", $remove);
+                    rawoutput("<a class='ui disabled red icon button tooltip top aligned' data-content='$remove'><i class='remove user icon'></i></a>");
 				}
-				rawoutput('</td>');
+				rawoutput('</form></td>');
 			} else {
 				rawoutput("<td>");
 				output("None");

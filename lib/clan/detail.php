@@ -62,8 +62,7 @@
 	$dk = translate_inline("Dragon Kills");
 	$jd = translate_inline("Join Date");
 	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<tr class='trhead'><td>$rank</td><td>$name</td><td>$dk</td><td>$jd</td></tr>");
-	$i=0;
+	rawoutput("<thead><tr><th>$rank</th><th>$name</th><th>$dk</th><th>$jd</th></tr></thead>");
 	$sql = "SELECT acctid,name,login,clanrank,clanjoindate,dragonkills FROM " . DB::prefix("accounts") . " WHERE clanid=$detail ORDER BY clanrank DESC,clanjoindate";
 	$result = DB::query($sql);
 	$tot = 0;
@@ -73,9 +72,8 @@
 	$ranks = translate_inline($args['ranks']);
 	//end
 	while ($row=DB::fetch_assoc($result)){
-		$i++;
 		$tot += $row['dragonkills'];
-		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'>");
+		rawoutput("<tr>");
 		rawoutput("<td>");
 		output_notl($ranks[$row['clanrank']]); //translated earlier
 		rawoutput("</td><td>");
