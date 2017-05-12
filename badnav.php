@@ -2,13 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file badnav.php
-* This file handles the badnavs that occurr and displays either the last pagehit or an empty page where the user can petition.
-* @see lib/redirect.php
-*
-*
-*/
 define("OVERRIDE_FORCED_NAV",true);
 require_once 'common.php';
 require_once 'lib/villagenav.php';
@@ -31,7 +24,7 @@ if ($session['user']['loggedin'] && $session['loggedin']){
 	$sql="SELECT output FROM ".DB::prefix("accounts_output")." WHERE acctid={$session['user']['acctid']};";
 	$result=DB::query($sql);
 	$row=DB::fetch_assoc($result);
-	if ($row['output']>"") $row['output']=gzuncompress($row['output']);
+    if ($row['output']>"") $row['output']=gzuncompress($row['output']);
 	if (strpos("HTML",$row['output'])!==false && $row['output']!='')
 		$row['output']=gzuncompress($row['output']);
 		//check if the output needs to be unzipped again
@@ -59,5 +52,3 @@ if ($session['user']['loggedin'] && $session['loggedin']){
 	translator_setup();
 	redirect("index.php");
 }
-
-?>

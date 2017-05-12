@@ -2,12 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file armoreditor.php
-* This file represents the grotto armor editor where you can create or edit new weapons for the shop.
-* @see armor.php
-*
-*/
 require_once 'common.php';
 require_once 'lib/showform.php';
 require_once 'lib/http.php';

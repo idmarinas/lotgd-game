@@ -2,14 +2,8 @@
 // addnews ready
 // translator ready
 // mail ready
-/**
-* \file bio.php
-* This file holds the code for the user bio view. It features hooks to let modules add code and hence descriptions. The user can set a bio description in his preferences.
-* @see village.php
-* @see prefs.php
-*/
-require_once("common.php");
-require_once("lib/sanitize.php");
+require_once 'common.php';
+require_once 'lib/sanitize.php';
 
 tlschema("bio");
 
@@ -52,7 +46,6 @@ if ($target = DB::fetch_assoc($result)) {
   output("`^Biography for %s`^.",$target['name']);
   $write = translate_inline("Write Mail");
   if ($session['user']['loggedin'])
-      //rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
 	  rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></i></a>");
   output_notl("`n`n");
 
@@ -81,7 +74,9 @@ if ($target = DB::fetch_assoc($result)) {
 
   $race = $target['race'];
   if (!$race) $race = RACE_UNKNOWN;
-  $race = translate_inline($race,"race","race");
+  tlschema("race");
+  $race = translate_inline($race);
+  tlschema();
   output("`^Race: `@%s`n",$race);
 
   $genders = array("Male","Female");
@@ -158,7 +153,7 @@ if ($target = DB::fetch_assoc($result)) {
 		  addnav("Return to the warrior list",$return);
 	  } else {
 		  addnav("Return whence you came",$return);
-      addnav("Return to village",'village.php');
+          addnav("Return to village",'village.php');
 	  }
 	  tlschema();
   }
@@ -183,7 +178,7 @@ if ($target = DB::fetch_assoc($result)) {
 	  } else {
 		  addnav("Return whence you came",$return);
 	  }
-    addnav("Return to village",'village.php');
+      addnav("Return to village",'village.php');
 	  tlschema();
   }
 	page_footer();

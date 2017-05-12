@@ -2,16 +2,11 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file bank.php
-* This file holds the entire bank code for the village bank. You can withdraw or depost gold here as user.
-* @see village.php
-*/
-require_once("common.php");
-require_once("lib/systemmail.php");
-require_once("lib/sanitize.php");
-require_once("lib/http.php");
-require_once("lib/villagenav.php");
+require_once 'common.php';
+require_once 'lib/systemmail.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/http.php';
+require_once 'lib/villagenav.php';
 
 tlschema("bank");
 
