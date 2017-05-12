@@ -161,8 +161,6 @@ if ($op=="days") {
 $sexsel = "IF(sex,'`%Female`0','`!Male`0')";
 $racesel = "IF(race!='0' and race!='',race,'".RACE_UNKNOWN."')";
 
-//round modifier for gold	- equals left side of , rounding
-//				+ equals right side of , rounding
 $round_money="-2";
 
 if ($op=="money"){
@@ -235,7 +233,6 @@ debug($sql);
 	$unk = translate_inline("Unknown");
 	$sql = "SELECT name,dragonkills AS data1,level AS data2, IF(dragonage,dragonage,'$unk') AS data3, IF(bestdragonage,bestdragonage,'$unk') AS data4 FROM " . DB::prefix("accounts") . " WHERE $standardwhere $extra ORDER BY dragonkills $order,level $order,experience $order, acctid $order LIMIT $limit";
 	if ($session['user']['dragonkills']>0) $me = "SELECT count(acctid) AS count FROM ".DB::prefix("accounts")." WHERE $standardwhere $extra AND dragonkills $meop {$session['user']['dragonkills']}";
-	$me = '';
 	$adverb = "most";
 	if ($subop == "least") $adverb = "least";
 	$title = "Heroes with the $adverb dragon kills in the land";
@@ -246,7 +243,7 @@ debug($sql);
 
 if (isset($table) && is_array($table)){
 	call_user_func_array("display_table",$table);
-	if ($me>"" && $totalplayers){
+	if (isset($me) && $me>"" && $totalplayers){
 		$meresult = DB::query($me);
 		$row = DB::fetch_assoc($meresult);
 		$pct = round(100*$row['count']/$totalplayers, 0);
@@ -256,4 +253,3 @@ if (isset($table) && is_array($table)){
 }
 
 page_footer();
-?>

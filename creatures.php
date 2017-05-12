@@ -78,7 +78,7 @@ if ($op == "save"){
 			$result=DB::query($sql);
 			$id = DB::insert_id();
 		}
-		if ($result) {
+		if (DB::affected_rows()) {
 			output("`^Creature saved!`0`n");
 		} else {
 			output("`^Creature `\$not`^ saved!`0`n");
@@ -106,15 +106,15 @@ if ($op=="del"){
 	DB::query($sql);
 	if (DB::affected_rows()>0){
 		output("Creature deleted`n`n");
-		module_delete_objprefs('creatures',$id);
+        module_delete_objprefs('creatures',$id);
 	}else{
-		output("Creature not deleted: %s", DB::error());//Eliminado el LINK, ya no es necesario
+		output("Creature not deleted: %s", DB::error());
 	}
 	$op="";
 	httpset('op', "");
 }
 if ($op=="" || $op=="search"){
-	$level = (int)httpget("level");
+	$level = (int) httpget("level");
 	if (!$level) $level = 1;
 	$q = httppost("q");
 	if ($q) {
@@ -178,7 +178,7 @@ if ($op=="" || $op=="search"){
 		output_notl("%s", $row['creatureweapon']);
 		rawoutput("</td><td>");
 		if ($row['creatureaiscript']!='') output_notl($yes);
-			else output_notl($no);
+		else output_notl($no);
 		rawoutput("</td><td>");
 		output_notl("%s", $row['creaturewin']);
 		rawoutput("</td><td>");
@@ -189,8 +189,7 @@ if ($op=="" || $op=="search"){
 	}
 	rawoutput("</table>");
 }else{
-	$level = (int)httpget('level');
-	if (!$level) $level=(int)httppost('level');
+	$level = (int) httpget('level');
 	if (!$level) $level = 1;
 	if ($op=="edit" || $op=="add"){
 		require_once 'lib/showform.php';
@@ -230,7 +229,7 @@ if ($op=="" || $op=="search"){
 			}
 			//get available scripts
 			//(uncached, won't hit there very often
-			$sort = list_files("creatureai", array());
+			$sort = list_files("creatureai", []);
 			sort($sort);
 			$scriptenum=implode("",$sort);
 			$scriptenum=",,none".$scriptenum;

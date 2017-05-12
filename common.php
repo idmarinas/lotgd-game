@@ -12,7 +12,7 @@
 // 		name at the end indicating which parts are copyright by you.
 // Eg:
 // Copyright 2002-2004, Game: Eric Stevens & JT Traub, modified by Your Name
-$copyright = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy 2007-2014 Oliver Brendel remodelling and enhancing, &copy; 2015-2017 IDMarinas remodelling and enhancing';
+$copyright = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & JT Traub, &copy; 2006-2007, Dragonprime Development Team, &copy; 2015-2017 IDMarinas remodelling and enhancing';
 // **** NOTICE ****
 // This series of scripts (collectively known as Legend of the Green Dragon
 // or LotGD) is copyright as per above.   Read the above paragraph for
@@ -111,7 +111,7 @@ if (file_exists('dbconnect.php'))
 {
 	require_once 'dbconnect.php';
 
-    //-- Only for upgrade for previous versions
+    //-- Only for upgrade for previous versions (1.0.0 IDMarinas edition and below)
     if (! isset($adapter))
     {
         $body = '$adapter = ['  . PHP_EOL;
@@ -275,6 +275,8 @@ mass_module_prepare(array(
 // can revert to:
 $revertsession=$session;
 if (! isset($session['user']['loggedin'])) $session['user']['loggedin'] = false;
+if (! $session['user']['loggedin']) $session['loggedin'] = false;
+else $session['loggedin'] = true;
 
 if ($session['user']['loggedin'] != true && !ALLOW_ANONYMOUS)
 {
@@ -412,8 +414,10 @@ unset($temp_comp);
 
 $beta = getsetting("beta", 0);
 if (!$beta && getsetting("betaperplayer", 1) == 1)
+{
 	if (isset($session['user']['beta'])) $beta = $session['user']['beta'];
-		else $beta=0;
+	else $beta=0;
+}
 
 if (isset($session['user']['clanid'])) {
 	$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanid='{$session['user']['clanid']}'";
@@ -452,7 +456,7 @@ if (getsetting('debug',0)) {
 }
 
 // WARNING:
-// do not hook on this modulehook unless you really need your module to run
+// do not hook on these modulehooks unless you really need your module to run
 // on every single page hit.  This is called even when the user is not
 // logged in!!!
 // This however is the only context where blockmodule can be called safely!

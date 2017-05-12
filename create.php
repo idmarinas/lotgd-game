@@ -6,6 +6,7 @@ define("ALLOW_ANONYMOUS",true);
 require_once("common.php");
 require_once("lib/is_email.php");
 require_once("lib/checkban.php");
+require_once("lib/http.php");
 require_once("lib/sanitize.php");
 require_once("lib/settings_extended.php");
 require_once("lib/serverfunctions.class.php");
@@ -59,12 +60,11 @@ if ($op=="forgotval"){
 			$sql="UPDATE ".DB::prefix('accounts')." SET emailvalidation='' WHERE acctid=".$row['acctid'];
 			DB::query($sql);
 		}
-
 	}else{
 		output("`#Your request could not be verified.`n`n");
 		output("This may be because the link you used is invalid.");
 		output("Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail.`n`nIn case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got.`n`n");
-	}
+    }
 } elseif ($op=="val"){
 	$id = httpget('id');
 	$sql = "SELECT acctid,login,superuser,password,name,replaceemail,emailaddress FROM ". DB::prefix("accounts") . " WHERE emailvalidation='".DB::quoteValue($id)."' AND emailvalidation!=''";
@@ -132,11 +132,11 @@ if ($op=="forgot")
 {
 	$charname = httppost('charname');
 	if ('' != $charname)
-	{
-		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login=".DB::quoteValue($charname)."";
+    {
+		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login='$charname'";
 		$result = DB::query($sql);
 		if (0 < DB::num_rows($result))
-		{
+        {
 			$row = DB::fetch_assoc($result);
 			if (trim($row['emailaddress'])!=""){
 				if ($row['forgottenpassword']==""){
@@ -145,7 +145,7 @@ if ($op=="forgot")
 					DB::query($sql);
 				}
 
-				$subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'),$row['acctid']);
+                $subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'),$row['acctid']);
 				$msg = translate_mail($settings_extended->getSetting('forgottenpasswordmailtext'),$row['acctid']);
 				$replace=array(
 					"{login}"=>$row['login'],
@@ -239,24 +239,16 @@ if (0 == getsetting("allowcreation",1))
 				$blockaccount=true;
 			}
 			$args = modulehook("check-create", httpallpost());
-			if($args['blockaccount']) {
+			if(isset($args['blockaccount']) && $args['blockaccount']) {
 				$msg .= $args['msg'];
 				$blockaccount = true;
 			}
 
 			if (!$blockaccount){
+				$shortname = preg_replace("/\s+/", " ", $shortname);
 				$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
 				$result = DB::query($sql);
-				$count=DB::num_rows($result);
-				$sql = "SELECT playername FROM " . DB::prefix("accounts") ;
-				$result = DB::query($sql);
-				while ($row=DB::fetch_assoc($result)) {
-					if (sanitize($row['playername'])==$shortname) {
-						$count++;
-						break;
-					}
-				}
-				if ($count>0){
+				if (DB::num_rows($result)>0){
 					output("`\$Error`^: Someone is already known by that name in this realm, please try again.");
 					$op="";
 				}else{
@@ -289,7 +281,7 @@ if (0 == getsetting("allowcreation",1))
 						VALUES
 						('$shortname','$title $shortname', '".getsetting("defaultsuperuser",0)."', '$title', '$dbpass', '$sex', '$shortname', '".date("Y-m-d H:i:s",strtotime("-1 day"))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting("newplayerstartgold",50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
 					DB::query($sql);
-					if (DB::affected_rows()<=0){//Eliminado el LINK, ya no es necesario para saber las filas afectadas
+					if (DB::affected_rows()<=0){
 						output("`\$Error`^: Your account was not created for an unknown reason, please try again. ");
 					}else{
 						$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
@@ -322,13 +314,13 @@ if (0 == getsetting("allowcreation",1))
 							rawoutput("<form action='login.php' method='POST'>");
 							rawoutput("<input name='name' value=\"$shortname\" type='hidden'>");
 							rawoutput("<input name='password' value=\"$pass1\" type='hidden'>");
+							output("Your account was created, your login name is `^%s`0.`n`n", $shortname);
 							$click = translate_inline("Click here to log in");
 							rawoutput("<input type='submit' class='ui button' value='$click'>");
 							rawoutput("</form>");
 							output_notl("`n");
 							savesetting("newestplayer", $row['acctid']);
 						}
-						output("`\$Your account was created, your login name is `^%s`\$.`n`n", $shortname);
 						if ($trash > 0) {
 							output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
 						}
@@ -376,17 +368,18 @@ if (0 == getsetting("allowcreation",1))
 		// better
 		rawoutput("<input type='hidden' name='passlen' id='passlen' value='0'>");
 		$r1 = translate_inline("`^(optional -- however, if you choose not to enter one, there will be no way that you can reset your password if you forget it!)`0");
+		$r2 = translate_inline("`\$(required)`0");
 		$r3 = translate_inline("`\$(required, an email will be sent to this address to verify it before you can log in)`0");
 		if (getsetting("requireemail", 0) == 0) {
 			$req = $r1;
 			$reqbool = false;
 		} elseif (getsetting("requirevalidemail", 0) == 0) {
+			$req = $r2;
 			$reqbool = true;
 		} else {
 			$req = $r3;
 			$reqbool = true;
 		}
-
 		$data = [
 			'createbutton' => translate_inline('Create your character'),
 			'reqemailtext' => $req,
