@@ -4,24 +4,6 @@
 // mail ready
 function substitute($string, $extra=false, $extrarep=false) {
 	global $badguy, $session;
-	
-	//that is only provoking stuff here...
-	/*$search = array("%s",
-		"%o",
-		"%p",
-		"%x",
-		"%X",
-		"%a",
-		"%W",
-		"%w",
-		"{badguy}",
-		"{goodguy}",
-		"{weapon}",
-		"{armor}",
-		"{creatureweapon}",
-		);
-	// I had a player using `%orog in his name, and in the marriage buff it become `%%orog... %o got filtered... great idea... now making failsafe...
-	*/
 
 	$search = array(
 		"{himher}",
@@ -90,7 +72,7 @@ function substitute_array($string, $extra=false, $extrarep=false){
 		"{weapon}",
 		"{armor}",
 		"{creatureweapon}",
-	);
+		);
 
 	$replace = array(
 		$session['user']['weapon'],
@@ -113,8 +95,10 @@ function substitute_array($string, $extra=false, $extrarep=false){
 
 	// Do this the right way.
 	// Iterate the string and find the replacements in order
-	$length=strlen($replacement_array[0]);
-	for ($x=0; $x<$length; $x++){
+    $length = strlen($replacement_array[0]);
+	for ($x = 0; $x < $length; $x++)
+    {
+		reset($search);
 		foreach ($search as $skey=>$sval) {
 			// Get the replacement for this value.
 			$rval = $replace[$skey];

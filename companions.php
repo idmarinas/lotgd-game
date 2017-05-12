@@ -4,9 +4,9 @@
 // translator ready
 
 // hilarious copy of mounts.php
-require_once("common.php");
-require_once("lib/http.php");
-require_once("lib/showform.php");
+require_once 'common.php';
+require_once 'lib/http.php';
+require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_MOUNTS);
 
@@ -14,7 +14,7 @@ tlschema("companions");
 
 page_header("Companion Editor");
 
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 addnav("Companion Editor");
@@ -52,7 +52,7 @@ if ($op=="deactivate"){
 		$row['hitpoints'] = $row['maxhitpoints'];
 		$row = modulehook("alter-companion", $row);
 		$row['abilities'] = @unserialize($row['abilities']);
-		require_once("lib/buffs.php");
+		require_once 'lib/buffs.php';
 		if (apply_companion($row['name'], $row)) {
 			output("`\$Successfully taken `^%s`\$ as companion.", $row['name']);
 		} else {
@@ -66,15 +66,15 @@ if ($op=="deactivate"){
 	if ($subop == "") {
 		$companion = httppost('companion');
 		if ($companion) {
-		if (!isset($companion['allowinshades'])) {
-			$companion['allowinshades'] = 0;
+			if (!isset($companion['allowinshades'])) {
+				$companion['allowinshades'] = 0;
 			}
 			if (!isset($companion['allowinpvp'])) {
 				$companion['allowinpvp'] = 0;
-				}
-				if (!isset($companion['allowintrain'])) {
-					$companion['allowintrain'] = 0;
-					}
+			}
+			if (!isset($companion['allowintrain'])) {
+				$companion['allowintrain'] = 0;
+			}
 			if (!isset($companion['abilities']['fight'])) {
 				$companion['abilities']['fight'] = false;
 			}

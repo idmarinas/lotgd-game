@@ -19,7 +19,11 @@ function lotgdsort($a, $b)
 	// $a and $b are table rows.
 
 	global $logd_version;
-	$official_prefixes = array(
+	$official_prefixes = [
+        '2.1.0 IDMarinas Edition',
+        '2.0.1 IDMarinas Edition',
+        '2.0.0 IDMarinas Edition',
+		"1.1.2 Dragonprime Edition",
 		"1.1.1 Dragonprime Edition",
 		"1.1.0 Dragonprime Edition",
 		"1.0.6",
@@ -31,7 +35,7 @@ function lotgdsort($a, $b)
 		"1.0.0",
 		// MUST REMEMBER TO PUT NEW PRE-RELEASES HERE
 		"0.9.7"
-	);
+    ];
 
 	$aver = strtolower(str_replace(' ', '', $a['version']));
 	$bver = strtolower(str_replace(' ', '', $b['version']));
@@ -189,7 +193,7 @@ if ($op==""){
 }else{
 	page_header("LoGD Net");
 	addnav('Login page');
-	addnav("Login","index.php");
+	addnav("Login page","index.php");
 	output("`@Below are a list of other LoGD servers that have registered with the LoGD Net.`n");
 	output("`2It should be noted that this list is subject to editing and culling by the administrators of logdnet.logd.com. ");
 	output("Normally this list is a comprehensive list of all servers that have elected to register with LoGDnet, but I'm making changes to that. ");
@@ -211,7 +215,7 @@ if ($op==""){
 	rawoutput("</th></tr></thead>");
 	require_once 'lib/pullurl.php';
 	$u = getsetting("logdnetserver", "http://logdnet.logd.com/");
-	if (!preg_match("/\/$/", $u)) {
+	if (!preg_match("/\\/$/", $u)) {
 		$u = $u . "/";
 		savesetting("logdnetserver", $u);
 	}
@@ -241,12 +245,6 @@ if ($op==""){
 		// Limit descs to 75 characters.
 		if (strlen($row['description']) > 75)
 			$row['description'] = substr($row['description'], 0, 75);
-
-
-//make valid
-		$row['description']=sanitize_mb($row['description']);
-		$row['version']=sanitize_mb($row['version']);
-
 
 		$row['description'] = htmlentities(stripslashes($row['description']), ENT_COMPAT, getsetting("charset", "UTF-8"));
 		$row['description'] = str_replace("`&amp;", "`&", $row['description']);
