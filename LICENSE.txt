@@ -64,14 +64,3 @@ to change the copyright or license upon their work.  [Additionally,
 reworking the modifications will be a good idea anyway as the mechanism for
 making modifications is substantially cleaner/clearer starting with the
 0.9.8-prerelease code.]
-
-
-#######Additions for +nb
-If you have code that does not show up in Dragonprime Edition 1.1.1, then this is +nb added, like on the feature list.
-You are NOT allowed to take the code and put it into your game without telling where you have it from. You MUST make a notice in your core code, tellingwhat pieces belong to this +nb version.
-
-Example:
-
-###Taken from 1.1.1+nb
-//code
-###End
