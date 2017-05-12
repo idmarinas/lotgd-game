@@ -1,46 +1,45 @@
 <?php
 
-$setup_extended = array(
+$setup_extended = [
 	"Mail Texts,title",
-	"No HTML possible! No colors possible!`n Restrictions apply as then we'd need proper header formatting and you'll most likely end up in the spam folders,note",
-	
-	"Replacements:`n
-{login}=login name`n
-{acctid}=account id`n
-{emailaddress}=Emailaddress of the char`n
-{gameurl}=URL extracted from the site`n
-{validationid}=ID generated (!!! important !!!)`n
-,note",
+    'sendhtmlmail' => 'Send mail in HTML format?,bool',
+    'You can find the template in "themes/jade/templates/mail.twig",note',
+    "No HTML possible! No colors possible!<br> Restrictions apply as then we'd need proper header formatting and you'll most likely end up in the spam folders,note",
 	"verificationmailsubject"=>"Subject to send for verification,text",
 	"verificationmailtext"=>"Text to send for verification,textarea",
-	
-"Replacements:`n
-{login}=login name`n
-{acctid}=account id`n
-{gameurl}=URL extracted from the site`n
-{requester_IP}=IP of the requester`n
-{forgottenid}=ID generated (!!! important !!!)`n
-,note",
+
+	"Replacements:<br>
+    {login}=login name<br>
+    {acctid}=account id<br>
+    {emailaddress}=Emailaddress of the char<br>
+    {gameurl}=URL extracted from the site<br>
+    {validationid}=ID generated (!!! important !!!)<br>
+    ,note",
+
 	"forgottenpasswordmailsubject"=>"Subject to send for a forgottenpassword,text",
 	"forgottenpasswordmailtext"=>"Text to send for a forgottenpassword,textarea",
-	
-"Replacements:`n
-{charactername}=login name`n
-{server}=Your servers URL`n
-,note
-",
+    "Replacements:<br>
+    {login}=login name<br>
+    {acctid}=account id<br>
+    {gameurl}=URL extracted from the site<br>
+    {requester_IP}=IP of the requester<br>
+    {forgottenid}=ID generated (!!! important !!!)<br>
+    ,note",
+
 	"expirationnoticesubject"=>"Subject to send to an email when a char is about to expire,text",
 	"expirationnoticetext"=>"Text to send to an email when a char is about to expire,textarea",
+    "Replacements:<br>
+    {charactername}=login name<br>
+    {server}=Your servers URL<br>
+    ,note",
 
-"Replacements:`n
-{gameurl}=Your servers URL`n
-{subject}=Subject in the YOM`n
-{body}=Body of the YOM`n
-{sendername}=Name of the Sender`n
-{receivername}=Name of the Receiver`n
-,note
-",
 	"notificationmailsubject"=>"Subject to send to notify the user of a received YOM,text",
 	"notificationmailtext"=>"Text to send to notify the user of a received YOM,textarea",
-
-);
+    "Replacements:<br>
+    {gameurl}=Your servers URL<br>
+    {subject}=Subject in the YOM<br>
+    {body}=Body of the YOM<br>
+    {sendername}=Name of the Sender<br>
+    {receivername}=Name of the Receiver<br>
+    ,note"
+];
