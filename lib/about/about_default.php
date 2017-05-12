@@ -1,13 +1,14 @@
 <?php
-$order=['2','4','3','1']; //arbitrary, this order the following hooks and whatnot
+$order=['2','3','1']; //arbitrary, this order the following hooks and whatnot
 
 foreach ($order as $current_rank) {
 	switch($current_rank){
-		case '4':
+		case '3':
+            //-- Notes for IDMarinas Edition
 			output('`$For the original "Legend of the Green Dragon" #About information check more below.`0`n`n');
 			output_notl('`QIDMarinas edition');
 			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
-			output('This version is a forked version of 1.2.5 nb Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
+			output('This version is a forked version of 1.1.1 Dragonprime Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
 			output('If you want use this core, you need to be aware:`n<ul>',true);
 			output('<li>PHP 5.6 is a minimum requirement</li>', true);
 			output('<li>Came with others dependencies that need install.</li>', true);
@@ -15,24 +16,8 @@ foreach ($order as $current_rank) {
 			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
 			output('`n`nI do not ship modules with it, most modules from 1.x.x DP Editions will work. However there is no guarantee... test them.`n');
 			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
+            output('In this version has code of +nb Edition by Oliver Brender %s', '(<a href="http://nb-core.org"  target="_blank">NB Core</a>)');
 			output_notl("`0`n`n");
-		break;
-	case "3":
-		//notes for the +nb Editions
-		output("`\$For the original 'Legend of the Green Dragon' #About information check below.`n`n");
-		output("`l+nb Edition");
-		output("`nBy Oliver Brendel (<a href='http://nb-core.org'  target='_blank'>NB Core</a>) `n`n",true);
-		output("This version is a forked version of the pre-1.1.1 DP Edition core shortly after I stopped developing for this specific version.`n`nThe reasons were mainly that the path the leading people there wanted to go was not my path at all. Hence this version reflects mostly what *I* wanted to see different *without* having to rewrite the core using modules... and still be stuck with the old structures. Also I don't have to ask for changes with the high probability of getting no answer or a negative one.`n`n");
-		output("If you use this core, you need to be aware of the goals of my optimizations:`n`n<ul>",true);
-		output("<li>PHP5 is a minimum requirement</li>",true);
-		output("<li>MySQL5 is a minimum requirement</li>",true);
-		output("<li>Features should be done focussed on avoiding high-load and focussing on many (MMORG) users</li>",true);
-		output("<li>Roleplay like in D&D should be possible</li>",true);
-		output_notl("</ul>`n`n",true);
-		output("For the download of this version please go to <a href='http://nb-core.org' target='_blank'>http://nb-core.org</a> where the latest development version (daily snapshots) and stable versions are hosted.`n`n",true);
-		output("`n`nI do not ship modules with it, most modules from 1.x.x DP Editions and previous will work. However there is no guarantee... test them. And be aware that many unbalance gameplay as they give out too much EXP/Buffs/Atk+Def stats.");
-		output_notl("`n`n");
-
 		break;
 	case "2":
 		/* NOTICE
@@ -42,7 +27,8 @@ foreach ($order as $current_rank) {
 		 */
 		rawoutput("<hr>");
 		$imprint = getsetting("impressum", ""); //yes, it's named impressum after the German word. We have to thank somebody for that - w00t
-		if ($imprint > "") {
+		if ($imprint)
+        {
 			require_once 'lib/nltoappon.php';
 			output_notl("%s", nltoappon($imprint),true); //yes, HTML possible
 		}
