@@ -160,8 +160,7 @@ if ($op=="forgot")
 				$values=array_values($replace);
 				$msg=str_replace($keys,$values,$msg);
 
-				//## Modificado - Se usa una función propia para generar un e-mail con formato html
-				html_mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg),translate_inline("From:").getsetting("gameadminemail","postmaster@localhost.com"));
+				lotgd_mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg));
 				output("`#Sent a new validation email to the address on file for that account.");
 				output("You may use the validation email to log in and change your password.");
 			}else{
@@ -317,8 +316,7 @@ if (0 == getsetting("allowcreation",1))
 							$keys=array_keys($replace);
 							$values=array_values($replace);
 							$msg=str_replace($keys,$values,$msg);
-							//## Modificado - Se usa una función propia para generar un e-mail con formato html
-							html_mail($email,$subj,str_replace("`n","\n",$msg),"From: ".getsetting("gameadminemail","postmaster@localhost.com"));
+							lotgd_mail($email,$subj,str_replace("`n","\n",$msg));
 							output("`4An email was sent to `\$%s`4 to validate your address.  Click the link in the email to activate your account.`0`n`n", $email);
 						}else{
 							rawoutput("<form action='login.php' method='POST'>");

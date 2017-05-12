@@ -75,8 +75,7 @@ if ($lastexpire < $needtoexpire){
 	$mheader .= 'From: '.getsetting("gameadminemail","postmaster@localhost")."\r\n";
 	$collector=array();
 	while ($row = DB::fetch_assoc($result)) {
-		//## Modificado - Se usa una función propia para generar un e-mail con formato html
-		html_mail($row['emailaddress'],$subject,str_replace("{charname}",$row['login'],$message),$mheader);
+		lotgd_mail($row['emailaddress'],$subject,str_replace("{charname}",$row['login'],$message),$mheader);
 		$collector[]=$row['acctid'];
 	}
 	if ($collector!=array()) {
