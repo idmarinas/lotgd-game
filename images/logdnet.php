@@ -60,7 +60,7 @@ if (isset($_GET['op']) && $_GET['op']=="register"){
 			//require_once("../lib/dbwrapper.php");
 			//require_once("../lib/settings.php");
 			echo "document.write(\"".sprintf($o,full_sanitize($_SESSION['session']['user']['login']),
-						htmlentities($_SESSION['session']['user']['login']).":".$_SERVER['HTTP_HOST'].$refer,ENT_COMPAT,"UTF-8")."\");";
+						htmlentities($_SESSION['session']['user']['login']).":".$_SERVER['HTTP_HOST'].$refer,ENT_COMPAT,"ISO-8859-1")."\");";
 		} else {
 			$image = join("",file("paypal1.gif"));
 			header("Content-Type: image/gif");
