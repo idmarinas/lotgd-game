@@ -2,19 +2,10 @@
 // translator ready
 // addnews ready
 // mail ready
-
-
-/** 
-* \file about.php
-* This file displays the 'About Lotgd' navigation and the appropriate Text including the license.
-*
-*
-*
-*/
 define("ALLOW_ANONYMOUS",true);
-require_once("common.php");
-require_once("lib/showform.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/showform.php';
+require_once 'lib/http.php';
 
 tlschema("about");
 
@@ -35,8 +26,7 @@ switch ($op) {
 if ($session['user']['loggedin']) {
 	addnav("Return to the news","news.php");
 }else{
-	addnav('Login page');
+    addnav('Login page');
 	addnav("Login Page","index.php");
 }
 page_footer();
-?>
