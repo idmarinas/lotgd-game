@@ -2,6 +2,7 @@
 
 $setup = array(
 	"Game Setup,title",
+    'servername' => 'Name for the server,text|The Legend of the Green Dragon',
 	"loginbanner"=>"Login Banner (under login prompt: 255 chars)",
 	"maxonline"=>"Max # of players online (0 for unlimited), int",
 	"allowcreation"=>"Allow creation of new characters,bool",
