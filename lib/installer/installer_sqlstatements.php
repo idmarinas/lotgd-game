@@ -47,5 +47,5 @@ return [
 	'1.0.0 IDMarinas Edition' => [],//-- Only need for my server
 	'2.0.0 IDMarinas Edition' => include 'lib/installer/versions/2-0-0-IDMarinas-Edition.php',
 	'2.0.1 IDMarinas Edition' => [],
-	'2.1.0 IDMarinas Edition' => []
+	'2.1.0 IDMarinas Edition' => include 'lib/installer/versions/2-1-0-IDMarinas-Edition.php'
 ];
