@@ -73,9 +73,7 @@ require_once 'lib/su_access.php';
 require_once 'lib/datetime.php';
 require_once 'lib/translator.php';
 require_once 'lib/playerfunctions.php';
-//## Add IDMarinas
-if (file_exists('lib/html_mail.php')) require_once 'lib/html_mail.php';
-//-- End IDMarinas
+require_once 'lib/lotgd_mail.php';
 
 $pagestarttime = getmicrotime();
 
