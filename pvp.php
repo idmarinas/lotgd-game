@@ -49,7 +49,7 @@ if ($op=="" && $act!="attack"){
 		$attackstack['enemies'][0] = $badguy;
 		$attackstack['options'] = $options;
 		$session['user']['badguy']=createstring($attackstack);
-		//debug($session['user']['badguy']);
+		debug($session['user']['badguy']);
 		$session['user']['playerfights']--;
 	}
 

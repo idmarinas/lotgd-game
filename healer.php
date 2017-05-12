@@ -56,6 +56,7 @@ if ($op==""){
 		debuglog("spent gold on healing",false,false,"healing",$newcost);
 		$diff = round(($session['user']['maxhitpoints']-$session['user']['hitpoints'])*$pct/100,0);
 		$session['user']['hitpoints'] += $diff;
+		output("`3With a grimace, you up-end the potion the creature hands you, and despite the foul flavor, you feel a warmth spreading through your veins as your muscles knit back together.");
 		if($newcost){
 			output("`3With a grimace, you up-end the potion the creature hands you, and despite the foul flavor, you feel a warmth spreading through your veins as your muscles knit back together.");
 			output("Staggering some, you hand it your gold and are ready to be out of here.");
@@ -63,7 +64,11 @@ if ($op==""){
 			output("`3With a grimace, you up-end the potion the creature hands you, and despite the foul flavor, you feel a warmth spreading through your veins.");
 			output("Staggering some you are ready to be out of here.");
 		}
-		output("`n`n`#You have been healed for %s points!", $diff);
+		if($diff == 1) {
+			output("`n`n`#You have been healed for one point!", $diff);
+		} else {
+			output("`n`n`#You have been healed for %s points!", $diff);
+		}
 	}else{
 		output("`3The old creature pierces you with a gaze hard and cruel.`n");
 		output("Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n");
@@ -72,7 +77,7 @@ if ($op==""){
 	}
 }elseif ($op=="companion"){
 	$compcost = httpget('compcost');
-	
+
 	if($session['user']['gold'] < $compcost){
 		output("`3The old creature pierces you with a gaze hard and cruel.`n");
 		output("Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n");
@@ -82,7 +87,6 @@ if ($op==""){
 		$name = stripslashes(rawurldecode(httpget('name')));
 		$session['user']['gold'] -= $compcost;
 		$companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];
-		$session['user']['companions']=serialize($companions);
 		output("`3With a grimace, %s`3 up-ends the potion from the creature.`n", $companions[$name]['name']);
 		output("Muscles knit back together, cuts close and bruises fade. %s`3 is ready to battle once again!`n", $companions[$name]['name']);
 		output("You hand the creature your gold and are ready to be out of here.");
@@ -111,7 +115,6 @@ foreach($companions as $name => $companion){
 		}
 	}
 }
-
 tlschema("nav");
 addnav("`bReturn`b");
 if ($return==""){
@@ -127,7 +130,6 @@ if ($return==""){
 	addnav("R?Return whence you came",$return);
 }
 tlschema();
-
 output_notl("`0");
 page_footer();
 ?>

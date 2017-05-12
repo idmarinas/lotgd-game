@@ -35,17 +35,18 @@ if ($name!=""){
 		} else {
 			$password = md5(md5($password));
 		}
-		//## Modificación: Se comprueba antes de procesar la petición si la IP está bloqueada
-		checkban(); //check if this computer is banned
-		//## Fin modificación
+
+        checkban(); //check if this computer is banned
 
 		$sql = "SELECT * FROM " . DB::prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
 		$result = DB::query($sql);
-		if (1 == DB::num_rows($result))
-		{
-			$session['user'] = DB::fetch_assoc($result);
+		if (DB::num_rows($result)==1){
+			$session['user']=DB::fetch_assoc($result);
+			$companions = @unserialize($session['user']['companions']);
+			if (!is_array($companions)) $companions = [];
 			$baseaccount = $session['user'];
 			checkban($session['user']['login']); //check if this account is banned
+
 			// If the player isn't allowed on for some reason, anything on
 			// this hook should automatically call page_footer and exit
 			// itself.
@@ -119,9 +120,7 @@ if ($name!=""){
 			$session['message'] = translate_inline("`4Error, your login was incorrect`0");
 			//now we'll log the failed attempt and begin to issue bans if
 			//there are too many, plus notify the admins.
-			$sql = "DELETE FROM " . DB::prefix("faillog") . " WHERE date<'".date("Y-m-d H:i:s",strtotime("-".(getsetting("expirecontent",180)/4)." days"))."'";
 			checkban();
-			//DB::query($sql);
 			$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$name'";
 			$result = DB::query($sql);
 			if (DB::num_rows($result)>0)
@@ -147,7 +146,6 @@ if ($name!=""){
 					{
 						// 5 failed attempts for superuser, 10 for regular user
 						$banmessage=translate_inline("Automatic System Ban: Too many failed login attempts.");
-						//$sql = "INSERT INTO " . DB::prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+".($c*3)." hours"))."','$banmessage','System','0000-00-00 00:00:00')";
 						$sql = "INSERT INTO " . DB::prefix("bans") . " VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date("Y-m-d H:i:s",strtotime("+15 minutes"))."','$banmessage','System','0000-00-00 00:00:00')";
 						DB::query($sql);
 						if ($su){
@@ -183,7 +181,7 @@ else if ($op=="logout")
 		} else {
 			$session['user']['restorepage']="news.php";
 		}
-	  $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
+	    $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
 		DB::query($sql);
 		invalidatedatacache('charlisthomepage');
 		invalidatedatacache('list.php-warsonline');
@@ -195,6 +193,7 @@ else if ($op=="logout")
 		// like the stafflist which need to invalidate the cache
 		// when someone logs in or off can do so.
 		modulehook("player-logout");
+		saveuser();
 	}
 	$session = [];
 	redirect("index.php");

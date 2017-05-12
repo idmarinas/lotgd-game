@@ -70,12 +70,11 @@ if ($op==""){
 				DB::query($sql1);
 			}
 		}elseif(DB::num_rows($result)>1){
-		/* To say the least, this case is bad. Simply because if there are duplicates, you make them even more equal. But most likely you won't get this far, as the code itself should not produce duplicates unless you insert manually or via module the same row more than once*/
 			$rows = array();
 			while ($row = DB::fetch_assoc($result)){
 				// MySQL is case insensitive so we need to do it here.
 				if ($row['intext'] == $text){
-					$rows[]=$row['tid'];
+					$rows['tid']=$row['tid'];
 				}
 			}
 			$sql = "UPDATE ".DB::prefix("translations")." SET author='{$session['user']['login']}', version='$logd_version', uri='$page', outtext='$trans' WHERE tid IN (".join(",",$rows).")";
@@ -94,48 +93,48 @@ if ($op==""){
 	popup_header("Translation List");
 	$sql = "SELECT uri,count(*) AS c FROM " . DB::prefix("translations") . " WHERE language='".LANGUAGE."' GROUP BY uri ORDER BY uri ASC";
 	$result = DB::query($sql);
-	output_notl("<form action='translatortool.php' method='GET'>",true);
-	output_notl("<input type='hidden' name='op' value='list'>",true);
+	rawoutput("<form action='translatortool.php' method='GET'>");
+	rawoutput("<input type='hidden' name='op' value='list'>");
 	output("Known Namespaces:");
-	output_notl("<select name='u'>",true);
+	rawoutput("<select name='u'>");
 	while ($row = DB::fetch_assoc($result)){
-		output_notl("<option value=\"".htmlentities($row['uri'])."\">".htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "UTF-8"))." ({$row['c']})</option>",true);
+		rawoutput("<option value=\"".rawurlencode(htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "UTF-8")))."\">".htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "UTF-8"))." ({$row['c']})</option>",true);
 	}
-	output_notl("</select>",true);
+	rawoutput("</select>");
 	$show = translate_inline("Show");
-	output_notl("<input type='submit' class='button' value=\"$show\">",true);
-	output_notl("</form>",true);
+	rawoutput("<input type='submit' class='ui button' value=\"$show\">");
+	rawoutput("</form>");
 	$ops = translate_inline("Ops");
 	$from = translate_inline("From");
 	$to = translate_inline("To");
 	$version = translate_inline("Version");
 	$author = translate_inline("Author");
 	$norows = translate_inline("No rows found");
-	output_notl("<table class='ui very compact striped selectable table'>",true);
-	output_notl("<tr class='trhead'><td>$ops</td><td>$from</td><td>$to</td><td>$version</td><td>$author</td></tr>",true);
+	rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<tr class='trhead'><td>$ops</td><td>$from</td><td>$to</td><td>$version</td><td>$author</td></tr>");
 	$sql = "SELECT * FROM " . DB::prefix("translations") . " WHERE language='".LANGUAGE."' AND uri='".httpget("u")."'";
 	$result = DB::query($sql);
 	if (DB::num_rows($result)>0){
 		$i=0;
 		while ($row = DB::fetch_assoc($result)){
 			$i++;
-			output_notl("<tr class='".($i%2?"trlight":"trdark")."'><td>",true);
+			rawoutput("<tr><td>");
 			$edit = translate_inline("Edit");
-			output_notl("<a href='translatortool.php?u=".rawurlencode($row['uri'])."&t=".rawurlencode($row['intext'])."'>$edit</a>",true);
-			output_notl("</td><td>",true);
+			rawoutput("<a href='translatortool.php?u=".rawurlencode(htmlentities($row['uri'], ENT_COMPAT, getsetting("charset", "UTF-8")))."&t=".rawurlencode(htmlentities($row['intext']))."'>$edit</a>");
+			rawoutput("</td><td>");
 			rawoutput(htmlentities($row['intext'], ENT_COMPAT, getsetting("charset", "UTF-8")));
-			output_notl("</td><td>",true);
+			rawoutput("</td><td>");
 			rawoutput(htmlentities($row['outtext'], ENT_COMPAT, getsetting("charset", "UTF-8")));
-			output_notl("</td><td>",true);
-			output_notl($row['version']);
-			output_notl("</td><td>",true);
-			output_notl($row['author']);
-			output_notl("</td></tr>",true);
+			rawoutput("</td><td>");
+			rawoutput($row['version']);
+			rawoutput("</td><td>");
+			rawoutput($row['author']);
+			rawoutput("</td></tr>");
 		}
 	}else{
-		output_notl("<tr><td colspan='5'>$norows</td></tr>",true);
+		rawoutput("<tr><td colspan='5'>$norows</td></tr>");
 	}
-	output_notl("</table>",true);
+	rawoutput("</table>");
 	popup_footer();
 }
 ?>

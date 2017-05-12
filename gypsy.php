@@ -13,8 +13,6 @@ addcommentary();
 
 $cost = $session['user']['level']*20;
 $op = httpget('op');
-addnav("Navigation");
-addnav("Forget it","village.php");
 
 if ($op=="pay"){
 	if ($session['user']['gold']>=$cost){ // Gunnar Kreitz
@@ -42,6 +40,8 @@ if ($op=="pay"){
 	addnav(array("Pay to talk to the dead (%s gold)", $cost),"gypsy.php?op=pay");
 	if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 		addnav("Superuser Entry","gypsy.php?op=talk");
+	addnav("Other");
+	addnav("Forget it","village.php");
 	modulehook("gypsy");
 }
 page_footer();
