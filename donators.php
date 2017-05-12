@@ -100,7 +100,11 @@ if ($op=="add2"){
 	}else{
 		debuglog("Received donator points -- Manually assigned, not based on a known dollar donation [$reason]",false,$id,"donation",$amt,false);
 	}
-	systemmail($id,array("Donation Points Added"),array("`2You have received %s donation points for %s.",$points,$reason));
+	if ($points == 1) {
+		systemmail($id,array("Donation Point Added"),array("`2You have received a donation point for %s.",$reason));
+	}else {
+		systemmail($id,array("Donation Points Added"),array("`2You have received %d donation points for %s.",$points,$reason));
+	}
 	httpset('op', "");
 	$op = "";
 }

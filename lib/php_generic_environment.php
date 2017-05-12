@@ -14,6 +14,7 @@ function sanitize_uri()
 		$get = httpallget();
 		if (count($get) > 0) {
 			$REQUEST_URI=$SCRIPT_NAME."?";
+			reset($get);
 			$i=0;
 			foreach ($get as $key=>$val) {
 				if ($i>0) $REQUEST_URI.="&";

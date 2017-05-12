@@ -30,7 +30,6 @@ $op = httpget('op');
 switch ($op) {
 	case "search":
 		require_once("lib/graveyard/case_battle_search.php");
-
 		break;
 case "run":
 	if (e_rand(0,2)==1) {
@@ -62,10 +61,6 @@ if ($battle){
 	$session['user']['hitpoints'] = $session['user']['soulpoints'];
 	$originalattack = $session['user']['attack'];
 	$originaldefense = $session['user']['defense'];
-//	$session['user']['attack'] =
-//		10 + round(($session['user']['level'] - 1) * 1.5);
-//	$session['user']['defense'] =
-//		10 + round(($session['user']['level'] - 1) * 1.5);
 
 	require_once("battle.php");
 
@@ -97,7 +92,6 @@ if ($battle){
 			} else {
 				addnews("%s",$deathmessage['deathmessage']);
 			}
-//			addnews("`)%s`) has been defeated in the graveyard by %s.`n%s",$session['user']['name'],$badguy['creaturename'],$taunt);
 			output("`b`&You have been defeated by `%%s`&!!!`n", $badguy['creaturename']);
 			output("You may not torment any more souls today.");
 			$session['user']['gravefights']=0;

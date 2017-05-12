@@ -2,12 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file clan.php
-* This file contains the base for the clans. This feature can be deactivated in the grotto.
-* @see village.php
-* @see lib/clan
-*/
 require_once("common.php");
 require_once("lib/nltoappon.php");
 require_once("lib/commentary.php");

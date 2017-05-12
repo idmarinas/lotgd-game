@@ -2,6 +2,9 @@ Legend of the Green Dragon
 by  Eric "MightyE" Stevens (http://www.mightye.org)
 and JT "Kendaer" Traub (http://www.dragoncat.net)
 
+Software Project Page:
+http://sourceforge.net/projects/lotgd
+
 Modification AND Support Community Page:
 http://dragonprime.net
 
@@ -27,7 +30,7 @@ We also *STRONGLY* recommend that you shut down access to your game and
 BACK UP your game database AND existing logd source files before attempting
 an upgrade as most of the changes are NOT easily reversible!
 
-If you are running a previous pre-release of 0.9.8 you can do this by going
+If you are running a version after 0.9.7 you can do this by going
 into the manage modules, installing the serversuspend module and then
 activating it.  If you are running a 0.9.7 version, you will need to do
 this some other way, such as via .htaccess under apache.  Consult the
