@@ -50,6 +50,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/data/configuration.php** add new setting 'servername' allows you to name the server. Used for now to send mails.
 * **lib/lotgd_mail.php**
     * Add new function `lotgd_mail` Has the same structure as the php `mail()` function. But allow send mails in html format.
+* **source.php** new *modulehook* "source-illegal-files" for add files that you not want show code
 
 ### DEPRECATED
 
