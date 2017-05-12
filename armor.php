@@ -2,12 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file armor.php
-* This file holds the village armor shop which gets added as a nav by village.php.
-* @see village.php
-* @see armoreditor.php
-*/
 require_once 'common.php';
 require_once 'lib/http.php';
 require_once 'lib/villagenav.php';
@@ -28,7 +22,7 @@ $basetext=array(
 	),
 	"nosuchweapon"	=>	"`#Pegasus`5 looks at you, confused for a second, then realizes that you've apparently taken one too many bonks on the head, and nods and smiles.",
 	"tryagain"		=>	"Try again?",
-	"notenoughgold"	=>	"`5Waiting until `#Pegasus`5 looks away, you reach carefully for the `%%s`5, which you silently remove from the stack of clothes on which it sits. Secure in your theft, you begin to turn around only to realize that your turning action is hindered by a fist closed tightly around your throat.  Glancing down, you trace the fist to the arm on which it is attached, which in turn is attached to a very muscular `!MightyE`5. You try to explain what happened here, but your throat doesn't seem to be able to open up to let your voice through, let alone essential oxygen.`n`nAs darkness creeps in on the edge of your vision, you glance pleadingly, but futilly at `%Pegasus`5 who is staring dreamily at `!MightyE`5, her hands clutched next to her face, which is painted with a large admiring smile.`n`n`n`nYou wake up some time later, having been tossed unconscious into the street.",
+	"notenoughgold"	=>	"`5Waiting until `#Pegasus`5 looks away, you reach carefully for the `%%s`5, which you silently remove from the stack of clothes on which it sits. Secure in your theft, you begin to turn around only to realize that your turning action is hindered by a fist closed tightly around your throat.  Glancing down, you trace the fist to the arm on which it is attached, which in turn is attached to a very muscular `!MightyE`5. You try to explain what happened here, but your throat doesn't seem to be able to open up to let your voice through, let alone essential oxygen.`n`nAs darkness creeps in on the edge of your vision, you glance pleadingly, but futilely at `%Pegasus`5 who is staring dreamily at `!MightyE`5, her hands clutched next to her face, which is painted with a large admiring smile.`n`n`n`nYou wake up some time later, having been tossed unconscious into the street.",
 	"payarmor"		=>	"`#Pegasus`5 takes your gold, and much to your surprise she also takes your `%%s`5 and promptly puts a price on it, setting it neatly on another stack of clothes.`n`nIn return, she hands you a beautiful  new `%%s`5.`n`nYou begin to protest, \"`@Won't I look silly wearing nothing but my `&%s`@?`5\" you ask. You ponder it a moment, and then realize that everyone else in the town is doing the same thing. \"`@Oh well, when in Rome...`5\"",
 );
 
@@ -58,7 +52,7 @@ if ($op==""){
   			output_notl(sprintf_translate($description));
   		}
   	} else {
-  		output($basetext['desc']);
+  		output($texts['desc']);
   	}
   	tlschema();
 
@@ -123,8 +117,7 @@ if ($op==""){
 		output_notl("%s%s`0", $color, $row['defense']);
 		rawoutput("</td><td>");
 		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
-			$texto = $row['alternatetext'];
-			output_notl("%s%s`0", $color, $texto);
+			output("%s%s`0", $color, $row['alternatetext']);
 		} else {
 			output_notl("%s%s`0",$color,$row['value']);
 		}
