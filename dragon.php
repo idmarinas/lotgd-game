@@ -141,7 +141,7 @@ if ($op==""){
 	$nochange = modulehook("dk-preserve", $nochange);
     $session['user']['dragonkills']++;
 
-	$badguys = $session['user']['badguy']; //needed for the dragons name later
+	$badguy = $session['user']['badguy']; //needed for the dragons name later
 
 	$session['user']['dragonage'] = $session['user']['age'];
 	if ($session['user']['dragonage'] <  $session['user']['bestdragonage'] ||
@@ -190,7 +190,7 @@ if ($op==""){
 	// Sanity check
 	if ($session['user']['maxhitpoints'] < 1) {
 		// Yes, this is a freaking hack.
-		die("ACK!! Somehow this user would end up perma-dead.. Not allowing DK to proceed!  Notify admin and figure out why this would happen so that it can be fixed before DK can continue. Most likely, you have less than Level*10 Hitpoints when you kill the dragon. Let this fix and tell the admin that such a case should not happen. If necessary, bite her/his toes until she/he complies.");
+		die("ACK!! Somehow this user would end up perma-dead.. Not allowing DK to proceed!  Notify admin and figure out why this would happen so that it can be fixed before DK can continue.");
 		exit();
 	}
 
@@ -199,19 +199,8 @@ if ($op==""){
 	$session['user']['title'] = $newtitle;
 	$session['user']['name'] = $newname;
 
-	foreach ($session['user']['dragonpoints'] as $val) {
-		switch ($val) {
-		//legacy support
-			case "at":
-				$session['user']['attack']++;
-				break;
-			case "de":
-				$session['user']['defense']++;
-				break;
-		}
-	}
 	$session['user']['laston']=date("Y-m-d H:i:s",strtotime("-1 day"));
-	if (!getsetting('pvpdragonoptout',0)) $session['user']['slaydragon'] = 1;
+	$session['user']['slaydragon'] = 1;
 	$companions = array();
 	$session['user']['companions'] = array();
 
@@ -222,17 +211,6 @@ if ($op==""){
 	modulehook("dragonkilltext");
 
 	$regname = get_player_basename();
-	//get the dragons name
-	$badguys = @unserialize ($badguys);
-	$badguy=array("creaturename"=>translate_inline("`@The Green Dragon`0"));
-	foreach ($badguys['enemies'] as $opponent) {
-		if ($opponent['type']=='dragon') {
-			//hit
-			$badguy=$opponent;
-			break;
-		}
-	}
-
 
 
 	$howoften=translate_inline($session['user']['dragonkills']>1?"times":"time"); // no translation, we never know who is viewing...
@@ -262,6 +240,7 @@ if ($battle){
 	if ($victory){
 		$flawless = 0;
 		if ($badguy['diddamage'] != 1) $flawless = 1;
+		// $session['user']['dragonkills']++;
 		output("`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.",$badguy['creaturename']);
 		addnews("`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!",$session['user']['name'],$badguy['creaturename']);
 		tlschema("nav");
@@ -284,9 +263,8 @@ if ($battle){
 			$session['user']['hitpoints']=0;
 			output("`b`&You have been slain by `@%s`&!!!`n",$badguy['creaturename']);
 			output("`4All gold on hand has been lost!`n");
-			//grant modules a chance to exclusively hook in here and do worse things to the user =)
 			output_notl("`n");
-			modulehook("dragondeath",array());
+			modulehook("dragondeath", []);
 			output_notl("`n");
 			output("You may begin fighting again tomorrow.");
 
@@ -297,3 +275,4 @@ if ($battle){
 	}
 }
 page_footer();
+?>
