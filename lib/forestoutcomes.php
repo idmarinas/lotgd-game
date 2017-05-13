@@ -15,28 +15,25 @@ function forestvictory($enemies,$denyflawless=false)
 {
 	global $session, $options;
 
-	tlschema('battle');
-
 	$diddamage = false;
 	$creaturelevel = 0;
 	$gold = 0;
 	$exp = 0;
 	$expbonus = 0;
-	$count = 0;
+	$count = count($enemies);
 	$totalbackup = 0;
-	foreach ($enemies as $badguy) {
+	foreach ($enemies as $index => $badguy) {
 		if (getsetting("dropmingold",0)){
 			$badguy['creaturegold']= e_rand(round($badguy['creaturegold']/4), round(3*$badguy['creaturegold']/4));
 		}else{
 			$badguy['creaturegold']=e_rand(0,$badguy['creaturegold']);
 		}
 		$gold += $badguy['creaturegold'];
-		if (isset($badguy['creaturelose'])) {
-			$msg = translate_inline($badguy['creaturelose'],"battle");
-			output_notl("`b`&%s`0`b`n",$msg);
-		}
+		tlschema("battle");
+		if(isset($badguy['creaturelose'])) $msg = translate_inline($badguy['creaturelose']);
+		tlschema();
+		if(isset($msg)) output_notl("`b`&%s`0`b`n",$msg);
 		output("`b`\$You have slain %s!`0`b`n",$badguy['creaturename']);
-		$count++;
 		// If any creature did damage, we have no flawless fight. Easy as that.
 		if ($badguy['diddamage'] == 1) {
 			$diddamage = true;
@@ -50,13 +47,13 @@ function forestvictory($enemies,$denyflawless=false)
 	$multibonus = $count>1?1:0;
 	$expbonus += $session['user']['dragonkills'] * $session['user']['level'] * $multibonus;
 	$totalexp = 0;
-	foreach ($options['experience'] as $experience) {
+	foreach ($options['experience'] as $index=>$experience) {
 		$totalexp += $experience;
 	}
 	// We now have the total experience which should have been gained during the fight.
 	// Now we will calculate the average exp per enemy.
 	$exp = round($totalexp / $count);
-	$gold = e_rand(round($gold/$count),round($gold),0);
+	$gold = e_rand(round($gold/$count),round($gold/$count)*round(($count+1)*pow(1.2, $count-1),0));
 	$expbonus = round ($expbonus/$count,0);
 
 	if ($gold) {
@@ -73,7 +70,7 @@ function forestvictory($enemies,$denyflawless=false)
 	}
 	if (getsetting("instantexp",false) == true) {
 		$expgained = 0;
-		foreach ($options['experiencegained'] as $experience) {
+		foreach ($options['experiencegained'] as $index => $experience) {
 			$expgained += $experience;
 		}
 
@@ -141,34 +138,30 @@ function forestvictory($enemies,$denyflawless=false)
 		output("Even raw they have some restorative properties.`n");
 		$session['user']['hitpoints'] = 1;
 	}
-
-	tlschema();
 }
 
 function forestdefeat($enemies,$where="in the forest")
 {
 	global $session;
-
-	tlschema('battle');
-
 	$percent=getsetting('forestexploss',10);
 	addnav("Daily news","news.php");
 	$names = array();
 	$killer = false;
-	foreach ($enemies as $badguy) {
+	foreach ($enemies as $index=>$badguy) {
 		$names[] = $badguy['creaturename'];
-		if (isset($badguy['killedplayer']) && $badguy['killedplayer'] == true) $killer = $badguy['creaturename'];
+		if (isset($badguy['killedplayer']) && $badguy['killedplayer'] == true) $killer = $badguy;
 		if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > "") {
 			$msg = translate_inline($badguy['creaturewin'],"battle");
 			output_notl("`b`&%s`0`b`n",$msg);
 		}
 	}
+	if($killer) $badguy = $killer;
+	elseif(!isset($badguy['creaturename'])) $badguy = $enemies[0];
 	if (count($names) > 1) $lastname = array_pop($names);
 	$enemystring = join(", ", $names);
 	$and = translate_inline("and");
 	if (isset($lastname) && $lastname > "") $enemystring = "$enemystring $and $lastname";
 	$taunt = select_taunt_array();
-	//leave it for now, it's tricky
 	if (is_array($where)) {
 		$where=sprintf_translate($where);
 	} else {
@@ -188,14 +181,11 @@ function forestdefeat($enemies,$where="in the forest")
 	output("`4All gold on hand has been lost!`n");
 	output("`4%s %% of experience has been lost!`b`n",$percent);
 	output("You may begin fighting again tomorrow.");
-
-	tlschema();
-
 	page_footer();
 }
 
 /**
- * Buff creature for optimiza to character stats
+ * Buff creature for optimize to character stats
  *
  * @var array $badguy Information of creature
  * @var string $hook Hook to activate when buff badguy
@@ -204,7 +194,7 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
 {
 	global $session;
 
-    $badguy = lotgd_transform_creature($badguy, false);
+	$badguy = lotgd_transform_creature($badguy, false);
 
     $expflux = round($badguy['creatureexp']/10,0);
 	$expflux = e_rand(-$expflux,$expflux);

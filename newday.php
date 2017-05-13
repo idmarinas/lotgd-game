@@ -86,7 +86,6 @@ $canbuy = [
 		"unknown"=>0,
 ];
 if (is_module_active('staminasystem')) $canbuy['ff'] = 0;
-
 $retargs = modulehook("dkpointlabels", array('desc'=>$labels, 'buy'=>$canbuy));
 $labels = $retargs['desc'];
 $canbuy = $retargs['buy'];
@@ -96,17 +95,14 @@ $pdk=httpget("pdk");
 $dp = count($session['user']['dragonpoints']);
 $dkills = $session['user']['dragonkills'];
 
-if ($pdk == 1)
-{
-	require 'lib/newday/dp_recalc.php';
-}
+if ($pdk == 1) require_once 'lib/newday/dp_recalc.php';
 
 if ($dp < $dkills) {
-	require 'lib/newday/dragonpointspend.php';
+	require_once 'lib/newday/dragonpointspend.php';
 } elseif (!$session['user']['race'] || $session['user']['race']==RACE_UNKNOWN){
-	require 'lib/newday/setrace.php';
+	require_once 'lib/newday/setrace.php';
 }elseif ($session['user']['specialty']==""){
-	require 'lib/newday/setspecialty.php';
+	require_once 'lib/newday/setspecialty.php';
 }else{
 	page_header("It is a new day!");
 	rawoutput("<font size='+1'>");
@@ -115,7 +111,7 @@ if ($dp < $dkills) {
 	$resurrection = httpget('resurrection');
 
 	if ($session['user']['alive']!=true)
-	{
+    {
 		$session['user']['resurrections']++;
 		output("`@You are resurrected!  This is resurrection number %s.`0`n",$session['user']['resurrections']);
 		$session['user']['alive']=true;
@@ -150,8 +146,8 @@ if ($dp < $dkills) {
 		$interestrate = 1;
 		output("`2Today's interest rate: `^0%% (The bank will not pay interest on accounts equal or greater than %s to retain solvency)`2.`n", getsetting('maxgoldforinterest', 100000));
 	}
-	else
-	{
+    else
+    {
 		output("`2Today's interest rate: `^%s%% `n",($interestrate-1)*100);
 		if ($session['user']['goldinbank']>=0) output("`2Gold earned from interest: `^%s`2.`n",(int)($session['user']['goldinbank']*($interestrate-1)));
 		else output("`2Interest Accrued on Debt: `^%s`2 gold.`n",-(int)($session['user']['goldinbank']*($interestrate-1)));
@@ -182,7 +178,6 @@ if ($dp < $dkills) {
 
 	output("`2Hitpoints have been restored to `^%s`2.`n",$session['user']['maxhitpoints']);
 
-	//-- Can use dragonkill to upgrade turns
 	reset($session['user']['dragonpoints']);
 	$dkff = 0;
 	if (! is_module_active('staminasystem'))
@@ -196,9 +191,8 @@ if ($dp < $dkills) {
 			output("`n`2You gain `^%s`2 forest %s from spent dragon points!", $dkff, translate_inline($dkff == 1?"fight":"fights"));
 		}
 	}
-
 	if ($session['user']['hashorse'])
-	{
+    {
 		$buff = unserialize($playermount['mountbuff']);
 		if (!isset($buff['schema']) || $buff['schema'] == "")
 			$buff['schema']="mounts";
@@ -210,7 +204,7 @@ if ($dp < $dkills) {
 	$spirits = $r1+$r2;
 	$resurrectionturns = $spirits;
 	if ($resurrection == "true")
-	{
+    {
 		addnews("`&%s`& has been resurrected by %s`&.",$session['user']['name'],getsetting('deathoverlord','`$Ramius'));
 		$spirits=-6;
 		$resurrectionturns=getsetting('resurrectionturns',-6);
@@ -222,8 +216,8 @@ if ($dp < $dkills) {
 		} else {
 			if ($resurrectionturns<-($turnsperday+$dkff)) $resurrectionturns=-($turnsperday+$dkff);
 		}
-		$session['user']['deathpower']-=getsetting('resurrectioncost',100);
-		$session['user']['restorepage']="village.php?c=1";
+		$session['user']['deathpower'] -= getsetting('resurrectioncost',100);
+		$session['user']['restorepage'] = 'village.php?c=1';
 	}
 
 	$sp = [(-6) => 'Resurrected', (-2) => 'Very Low', (-1) => 'Low', (0) => 'Normal', 1 => 'High', 2 => 'Very High'];
@@ -241,18 +235,11 @@ if ($dp < $dkills) {
 			output("`2As a result, you `^%s %s forest %s`2 for today!`n", $gain, $sff, translate_inline($sff==1?"fight":"fights"));
 		}
 	}
-
 	$rp = $session['user']['restorepage'];
 	$x = max(strrpos("&",$rp),strrpos("?",$rp));
 	if ($x>0) $rp = substr($rp,0,$x);
-	if (substr($rp,0,10) == 'badnav.php' || '' == $rp)
-	{
-		addnav("Continue","news.php");
-	}
-	else
-	{
-		addnav("Continue", cmd_sanitize($rp));
-	}
+	if (substr($rp,0,10) == 'badnav.php' || '' == $rp) addnav("Continue","news.php");
+    else addnav("Continue", cmd_sanitize($rp));
 
 	$session['user']['laston'] = date("Y-m-d H:i:s");
 	$bgold = $session['user']['goldinbank'];
@@ -280,7 +267,7 @@ if ($dp < $dkills) {
 	$session['user']['recentcomments']=$session['user']['lasthit'];
 	$session['user']['lasthit'] = gmdate("Y-m-d H:i:s");
 	if ($session['user']['hashorse'])
-	{
+    {
 		$msg = $playermount['newday'];
 		require_once 'lib/substitute.php';
 		$msg = substitute_array("`n`&".$msg."`0`n");
@@ -305,12 +292,31 @@ if ($dp < $dkills) {
 	}else{
 		output("`n`&You strap your `%%s`& to your back and head out for some adventure.`0",$session['user']['weapon']);
 	}
+	if ($session['user']['hauntedby']>"")
+    {
+        if (is_module_active('staminasystem'))
+	    {
+		    require_once 'modules/staminasystem/lib/lib.php';
+
+            removestamina(25000);
+            output("`n`n`)You have been haunted by %s`); as a result, you lose some Stamina!",$session['user']['hauntedby']);
+            $session['user']['hauntedby'] = '';
+            $turnstoday.=", Haunted: Stamina reduction";
+        }
+        else
+        {
+            output("`n`n`)You have been haunted by %s`); as a result, you lose a forest fight!",$session['user']['hauntedby']);
+            $session['user']['turns']--;
+            $session['user']['hauntedby'] = '';
+            $turnstoday.=", Haunted: -1";
+        }
+	}
 
 	require_once 'lib/extended-battle.php';
 	unsuspend_companions("allowinshades");
 
 	if (! getsetting("newdaycron",0))
-	{
+    {
 		//check last time we did this vs now to see if it was a different game day.
 		$lastnewdaysemaphore = convertgametime(strtotime(getsetting("newdaySemaphore","0000-00-00 00:00:00") . " +0000"));
 		$gametoday = gametime();

@@ -114,18 +114,18 @@ if ($op=="search"){
 			$targetlevel = ($session['user']['level'] + $plev - $nlev );
 			$mintargetlevel = $targetlevel;
 			if (getsetting("multifightdk", 10) <= $session['user']['dragonkills']) {
-				if (e_rand(1,100) <= getsetting("multichance", 25)) {
-					$multi = e_rand(getsetting('multibasemin',2),getsetting('multibasemax',3));
+				if (mt_rand(1, 100) <= getsetting("multichance", 25)) {
+					$multi = e_rand(getsetting('multibasemin', 2),getsetting('multibasemax', 3));
 					if ($type=="slum") {
 						$multi -= e_rand(getsetting("multislummin", 0),getsetting("multislummax", 1));
-						if (e_rand(0,1)) {
+						if (mt_rand(0, 1)) {
 							$mintargetlevel = $targetlevel - 1;
 						} else {
 							$mintargetlevel = $targetlevel - 2;
 						}
 					} else if ($type == "thrill") {
 						$multi += e_rand(getsetting("multithrillmin", 1),getsetting("multithrillmax", 2));
-						if (e_rand(0,1)) {
+						if (mt_rand(0, 1)) {
 							$targetlevel++;
 							$mintargetlevel = $targetlevel - 1;
 						} else {
@@ -133,7 +133,7 @@ if ($op=="search"){
 						}
 					} else if ($type == "suicide") {
 						$multi += e_rand(getsetting("multisuimin", 2),getsetting("multisuimax", 4));
-						if (e_rand(0,1)) {
+						if (mt_rand(0, 1)) {
 							$mintargetlevel = $targetlevel - 1;
 						} else {
 							$targetlevel++;
@@ -145,25 +145,31 @@ if ($op=="search"){
 			} else {
 				$multi = 1;
 			}
+			$multi = max(1, $multi);
 			if ($targetlevel<1) $targetlevel=1;
 			if ($mintargetlevel<1) $mintargetlevel=1;
 			if ($mintargetlevel > $targetlevel) $mintargetlevel = $targetlevel;
+			if ($targetlevel > 17)
+            {
+				$multi += $targetlevel - 17;
+				$targetlevel = 17;
+			}
 			debug("Creatures: $multi Targetlevel: $targetlevel Mintargetlevel: $mintargetlevel");
-			$packofmonsters = (bool)(e_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
 			if ($multi > 1)
-			{
-				switch($packofmonsters)
-				{
-					case false:
-						$multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
-						$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 $multicat ORDER BY rand(".e_rand().") LIMIT $multi";
-						break;
-					case true:
-						$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
-						break;
-				}
+            {
+				$packofmonsters = (bool)(mt_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
+				if (false === $packofmonsters)
+                {
+                    $multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
+					$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT $multi";
+                }
+                else
+                {
+					$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
+                }
 			} else {
 				$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
+				$packofmonsters = 0;
 			}
 			$result = DB::query($sql);
 			restore_buff_fields();
@@ -191,6 +197,8 @@ if ($op=="search"){
 					$prefixs = array("Elite","Dangerous","Lethal","Savage","Deadly","Malevolent","Malignant");
 					for($i=0;$i<$multi;$i++) {
 						$initialbadguy['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
+						$initialbadguy['playerstarthp'] = $session['user']['hitpoints'];
+						$initialbadguy['diddamage'] = 0;
 						$badguy = buffbadguy($initialbadguy);
 						if ($type == "thrill") {
 							// 10% more experience
@@ -216,8 +224,6 @@ if ($op=="search"){
 							$prefix = $prefixs[$key];
 							$badguy['creaturename'] = $prefix . " " . $badguy['creaturename'];
 						}
-						$badguy['playerstarthp']=$session['user']['hitpoints'];
-						if (!isset($badguy['diddamage'])) $badguy['diddamage']=0;
 						$stack[$i] = $badguy;
 					}
 					if ($multi > 1) {
@@ -225,16 +231,14 @@ if ($op=="search"){
 					}
 				} else {
 					while ($badguy = DB::fetch_assoc($result)) {
+						$badguy['playerstarthp'] = $session['user']['hitpoints'];
+						$badguy['diddamage'] = 0;
 						//decode and test the AI script file in place if any
 						$aiscriptfile=$badguy['creatureaiscript'].".php";
-						if (file_exists($aiscriptfile)) {
-							//file there, get content and put it into the ai script field.
-							$badguy['creatureaiscript']="require_once('".$aiscriptfile."');";
-						}
-						else
-						{
-							$badguy['creatureaiscript'] = '';
-						}
+						//file there, get content and put it into the ai script field.
+						if (file_exists($aiscriptfile)) $badguy['creatureaiscript'] = "require_once '$aiscriptfile';";
+						else $badguy['creatureaiscript'] = '';
+
 						//AI setup
 						$badguy = buffbadguy($badguy);
 						// Okay, they are thrillseeking, let's give them a bit extra
@@ -264,8 +268,6 @@ if ($op=="search"){
 							$prefix = $prefixs[$key];
 							$badguy['creaturename'] = $prefix . " " . $badguy['creaturename'];
 						}
-						$badguy['playerstarthp']=$session['user']['hitpoints'];
-						if (!isset($badguy['diddamage'])) $badguy['diddamage']=0;
 						$stack[] = $badguy;
 					}
 				}
@@ -290,8 +292,7 @@ if ($op=="search"){
 	}
 }
 
-if ($op=="fight" || $op=="run" || $op == "newtarget")
-{
+if ($op=="fight" || $op=="run" || $op == "newtarget"){
 	$battle = true;
 }
 
@@ -307,13 +308,13 @@ if ($battle)
 		forestvictory($newenemies,isset($options['denyflawless'])?$options['denyflawless']:false);
 		$dontdisplayforestmessage=true;
 	}
-	elseif($defeat)
-	{
+    elseif($defeat)
+    {
 		require_once 'lib/forestoutcomes.php';
 		forestdefeat($newenemies);
 	}
-	else
-	{
+    else
+    {
 		fightnav();
 	}
 }

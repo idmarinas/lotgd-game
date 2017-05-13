@@ -8,7 +8,7 @@
  * Returns the experience needed to advance to the next level.
  *
  * @param int $curlevel The current level of the player.
- * @param int $label The current number of dragonkills.
+ * @param int $curdk The current number of dragonkills.
  * @return int The amount of experience needed to advance to the next level.
  */
 function exp_for_next_level($curlevel, $curdk)
@@ -16,11 +16,10 @@ function exp_for_next_level($curlevel, $curdk)
 	require_once 'lib/datacache.php';
 
 	$maxlevel = getsetting('maxlevel',15);
-	$expstring = getsetting('exp-array','100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');
-		//the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
+	$expstring = getsetting('exp-array','100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');		//the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
 
-	$stored = datacache("exparraydk".$curdk); //fetch all for that DK if already calculated!
-	if ($stored!== false && is_array($stored)) { //check if datacache is here
+	$stored = datacache("exparraydk$curdk", 600, true); //fetch all for that DK if already calculated!
+	if ($stored && is_array($stored)) { //check if datacache is here
 		//fine
 		$exparray = $stored;
 	}
@@ -30,7 +29,6 @@ function exp_for_next_level($curlevel, $curdk)
 
 		$exparray = explode(',',$expstring);
 		$count = count($exparray);
-		if ($count < $maxlevel)
 
 		if ($curlevel < 1) return 0;
 
@@ -50,10 +48,10 @@ function exp_for_next_level($curlevel, $curdk)
 			}
 		}
 
-		updatedatacache("exparraydk".$curdk,$exparray);
+		updatedatacache("exparraydk$curdk", $exparray, true);
 	}
-    //-- Avoid level less than 0
-    $curlevel = max($curlevel-1, 0);
+    //-- Avoid level less than 0 and more than max lvl
+    $curlevel = min(max($curlevel-1, 0), $maxlevel);
 
 	$exprequired = $exparray[$curlevel];
 

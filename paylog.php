@@ -2,8 +2,8 @@
 // mail ready
 // addnews ready
 // translator ready
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 tlschema("paylog");
 
@@ -25,9 +25,9 @@ check_su_access(SU_EDIT_PAYLOG);
 +-----------+---------------------+------+-----+---------+----------------+
 */
 page_header("Payment Log");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
-modulehook("paylog",array());
+modulehook("paylog", []);
 
 $op = httpget('op');
 if ($op==""){
@@ -61,7 +61,7 @@ if ($op==""){
 	rawoutput("<thead><tr><th>Date</th><th>$id</th><th>$type</th><th>$gross</th><th>$fee</th><th>$net</th><th>$processed</th><th>$who</th></tr></thead>");
 	$number=DB::num_rows($result);
 	for ($i=0;$i<$number;$i++)
-	{
+    {
 		$row = DB::fetch_assoc($result);
 		$info = unserialize($row['info']);
 		rawoutput("<tr class='".($i%2?"trlight":"trdark")."'><td nowrap>");
@@ -96,9 +96,9 @@ if ($op==""){
 			addnav("",$link);
 		}
 		rawoutput("</td></tr>");
-	}
+    }
 
-	if (! $number)
+    if (! $number)
 	{
 		rawoutput('<tr><td colspan="8" class="center aligned">');
 		output('No records found');
