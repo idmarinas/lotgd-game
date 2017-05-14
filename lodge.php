@@ -38,7 +38,7 @@ if ($op==""){
 	output("A guard stops you at the door and asks to see your membership card.`n`n");
 
 	if ($entry){
-		modulehook("lodge-desc");
+        modulehook("lodge-desc");
 		output("Upon showing it to him, he says, `3\"Very good %s, welcome to the J. C. Petersen Hunting Lodge.", translate_inline($session['user']['sex']?"ma'am":"sir"));
 		output("You have earned `^%s`3 points and have `^%s`3 points available to spend,\"`7 and admits you in.`n`n", $session['user']['donation'], $pointsavailable);
 		output("You enter a room dominated by a large fireplace at the far end.");
@@ -52,7 +52,7 @@ if ($op==""){
 		modulehook("lodge");
 	}else{
 		$iname = getsetting("innname", LOCATION_INN);
-		output("You pull out your Frequent Boozer Card from %s, with 9 out of the 10 slots punched out with a small profile of %s`7's Head.`n`n", $iname,getsetting('barkeep','`tCedrik'));
+		output("You pull out your Frequent Boozer Card from %s, with 9 out of the 10 slots punched out with a small profile of %s`7's Head.`0`n`n", $iname,getsetting('barkeep','`tCedrik`0'));
 		output("The guard glances at it, advises you not to drink so much, and directs you down the path.");
 	}
 }else if ($op=="points"){
@@ -66,9 +66,9 @@ if ($op==""){
 		)
 	);
 	foreach($points_messages['messages'] as $id => $message){
-		output_notl($message."`n", true);
+		output_notl($message.'`n', true);
 	}
-	output("`n`n\"`&But what are points,`7\" you ask?");
+	output("`n\"`&But what are points,`7\" you ask?");
 	output("Points can be redeemed for various advantages in the game.");
 	output("You'll find access to these advantages in the Hunter's Lodge.");
 	output("As time goes on, more advantages will likely be added, which can be purchased when they are made available.`n`n");

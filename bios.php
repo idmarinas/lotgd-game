@@ -2,11 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file bios.php
-* This file provides the basic block of a users bio, hence it will display a warning. Blocking and unblocking can be done from the bio of the user.
-* @see bio.php
-*/
 require_once("common.php");
 require_once("lib/systemmail.php");
 require_once("lib/http.php");
@@ -37,8 +32,7 @@ $block = translate_inline("Block");
 output("`b`&Player Bios:`0`b`n");
 while ($row = DB::fetch_assoc($result)) {
 	if ($row['biotime']>$session['user']['recentcomments'])
-		// rawoutput("<img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'> ");
-        rawoutput("<i class='fa fa-fw fa-envelope-o'><img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'></i>");
+		rawoutput("<img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'> ");
 	output_notl("`![<a href='bios.php?op=block&userid={$row['acctid']}'>$block</a>]",true);
 	addnav("","bios.php?op=block&userid={$row['acctid']}");
 	output_notl("`&%s`0: `^%s`0`n", $row['name'], soap($row['bio']));

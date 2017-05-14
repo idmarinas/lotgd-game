@@ -2,14 +2,6 @@
 // translator ready
 // addnews ready
 // mail ready
-/**
-* \file battle.php
-* This file holds the generic battle code that gets normally require()'d and executes basic fight functions.
-* @see lib/buffs.php
-* @see lib/battle-buffs.php
-* @see lib/battle-skills.php
-* @see lib/extended-battle.php
-*/
 require_once 'lib/bell_rand.php';
 require_once 'common.php';
 require_once 'lib/http.php';
@@ -66,6 +58,8 @@ $skill=httpget("skill");
 $l=httpget("l");
 $newtarget = httpget('newtarget');
 if ($newtarget != "") $op = "newtarget";
+//if (!$targetted) $op = "newtarget";
+
 if ($op=="fight"){
 	apply_skill($skill,$l);
 } else if ($op=="newtarget") {
@@ -97,11 +91,6 @@ if ($op=="fight"){
 $victory = false;
 $defeat = false;
 
-foreach ($enemies as $index=>$enemy) {
-	//sue me
-	if (!isset($enemies[$index]['creaturemaxhealth'])) $enemies[$index]['creaturemaxhealth']=$enemies[$index]['creaturehealth']; //set in the first round - we do better later in OOP :(
-}
-
 if ($enemycounter > 0) {
 	output ("`\$`c`b~ ~ ~ Fight ~ ~ ~`b`c`0");
 	modulehook("battle", $enemies);
@@ -111,7 +100,6 @@ if ($enemycounter > 0) {
 		}
 	}
 	output_notl("`n");
-	//Añadido para mostrar la imagen y las barras de salud de ambos
 	modulehook("battle-info", $enemies);
 	show_enemies($enemies);
 	rawoutput('<br>');
@@ -211,7 +199,7 @@ if ($op != "newtarget") {
 								$newcompanions = [];
 								foreach ($companions as $name=>$companion) {
 									if ($companion['hitpoints'] > 0) {
-										$buffer = report_companion_move($badguy, $companion, "heal");
+										$buffer = report_companion_move($companion, "heal");
 										if ($buffer !== false) {
 											$newcompanions[$name] = $buffer;
 											unset($buffer);
@@ -244,7 +232,7 @@ if ($op != "newtarget") {
 											$newcompanions = [];
 											foreach ($companions as $name=>$companion) {
 												if ($companion['hitpoints'] > 0) {
-													$buffer = report_companion_move($badguy, $companion, "magic");
+													$buffer = report_companion_move($companion, "magic");
 													if ($buffer !== false) {
 														$newcompanions[$name] = $buffer;
 														unset($buffer);
@@ -330,7 +318,7 @@ if ($op != "newtarget") {
 								if (is_array($companions)) {
 									foreach ($companions as $name=>$companion) {
 										if ($companion['hitpoints'] > 0) {
-											$buffer = report_companion_move($badguy, $companion, "fight");
+											$buffer = report_companion_move($companion, "fight");
 											if ($buffer !== false) {
 												$newcompanions[$name] = $buffer;
 												unset($buffer);
@@ -350,10 +338,8 @@ if ($op != "newtarget") {
 							$newcompanions = $companions;
 						}
 						if($badguy['dead'] == false && isset($badguy['creatureaiscript']) && $badguy['creatureaiscript'] > "") {
-							global $unsetme,$session;
-							$lasthp=$session['user']['hitpoints'];
+							global $unsetme;
 							execute_ai_script($badguy['creatureaiscript']);
-							if ($session['user']['hitpoints']<$lasthp) $badguy['diddamage']=1;
 						}
 					}
 				}
@@ -387,6 +373,7 @@ if ($op != "newtarget") {
 		}
 
 		if (count($newenemies) > 0) {
+			$verynewenemies = [];
 			$alive = 0;
 			$fleeable = 0;
 			$leaderisdead = false;
@@ -406,15 +393,15 @@ if ($op != "newtarget") {
 					// experience for graveyard fights.
 					if (getsetting("instantexp",false) == true && $session['user']['alive'] && $options['type'] != "pvp" && $options['type'] != "train") {
 						if (!isset($badguy['expgained']) || $badguy['expgained'] == false) {
+							if (!isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
 							$session['user']['experience'] += round($badguy['creatureexp']/count($newenemies));
-							if (isset($badguy['creatureexp'])) output("`#You receive `^%s`# experience!`n`0",round($badguy['creatureexp']/count($newenemies)));
+							output("`#You receive `^%s`# experience!`n`0",round($badguy['creatureexp']/count($newenemies)));
 							$options['experience'][$index] = $badguy['creatureexp'];
 							$options['experiencegained'][$index] = round($badguy['creatureexp']/count($newenemies));
 							$badguy['expgained']=true;
 						}
 					} else {
 						$options['experience'][$index] = $badguy['creatureexp'];
-						$options['experiencegained'][$index] = $badguy['creatureexp'];
 					}
 				}else{
 					$alive++;
@@ -500,22 +487,18 @@ if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || 
 	show_enemies($newenemies);
 	rawoutput('<br>');
 }
-
-//extra code for "endofpage" hook, used by combatbars.php - executed once per "click" of combat, and fired once at the bottom of every combat page regardless of victory, defeat or indeed anything else.
 $badguy = modulehook("endofpage",$badguy);
-//end extra code
 
-if ($session['user']['hitpoints'] <= 0) {
+if ($session['user']['hitpoints'] <= 0)
+{
 	$session['user']['hitpoints'] = 0;
 	$victory=false;
 	$defeat=true;
-	//you can whatever you want with this after your include();
-	//dead user is dead user. will not talk much.
 }
 
-
 if ($victory || $defeat){
-	//Para informar del fin del combate
+	// expire any buffs which cannot persist across fights and
+	// unsuspend any suspended buffs
 	output("`2`bEnd of Battle:`0`b");
 	output_notl('`n');
 	// expire any buffs which cannot persist across fights
@@ -620,7 +603,7 @@ function battle_badguy_attacks() {
 			if (is_array($companions)) {
 			foreach ($companions as $name=>$companion) {
 				if ($companion['hitpoints'] > 0) {
-					$buffer = report_companion_move($badguy, $companion, "defend");
+					$buffer = report_companion_move($companion, "defend");
 					if ($buffer !== false) {
 						$newcompanions[$name] = $buffer;
 						unset($buffer);

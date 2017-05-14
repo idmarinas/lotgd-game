@@ -126,7 +126,7 @@ $unconscious = translate_inline("`6Unconscious`0");
 for($i=0; $i<$max; $i++)
 {
 	$row = DB::fetch_assoc($result);
-	rawoutput("<tr><td>",true);
+	rawoutput("<tr><td>");
 	if ($row['alive'] == true) {
 		$a = $alive;
 	} else if ($row['hitpoints'] > 0) {
@@ -134,15 +134,14 @@ for($i=0; $i<$max; $i++)
 	} else {
 		$a = $dead;
 	}
-
+	//$a = translate_inline($row['alive']?"`1Yes`0":"`4No`0");
 	output_notl("%s", $a);
 	rawoutput("</td><td>");
 	output_notl("`^%s`0", $row['level']);
 	rawoutput("</td><td>");
 	if ($session['user']['loggedin']) {
 		rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."").";return false;\">");
-		// rawoutput("<img src='images/newscroll.GIF' width='16' height='16' alt='$writemail' border='0'></a>");
-        rawoutput("<i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$writemail'><img src='images/newscroll.GIF' width='16' height='16' alt='$writemail' border='0'></i></a>");
+		rawoutput("<img src='images/newscroll.GIF' width='16' height='16' alt='$writemail' border='0'></a>");
 		rawoutput("<a href='bio.php?char=".$row['acctid']."'>");
 		addnav("","bio.php?char=".$row['acctid']."");
 	}

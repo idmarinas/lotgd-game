@@ -1,8 +1,16 @@
 <?php
 $to = httppost('to');
+if ($session['user']['superuser'] & SU_IS_GAMEMASTER) {
+	$from = httppost('from');
+	if ($from == "" || is_numeric(trim($from)) || $from == "0") {
+		$from = $session['user']['acctid'];
+	}
+} else {
+	$from = $session['user']['acctid'];
+}
+
 $sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='$to'";
 $result = DB::query($sql);
-$return = (int) httppost("returnto");
 if(DB::num_rows($result)>0){
 	$row1 = DB::fetch_assoc($result);
 	if (getsetting("onlyunreadmails",true)) {
@@ -22,18 +30,15 @@ if(DB::num_rows($result)>0){
 		$body = str_replace("\r","\n",$body);
 		$body = addslashes(substr(stripslashes($body),0,(int)getsetting("mailsizelimit",1024)));
 		require_once("lib/systemmail.php");
-		systemmail($row1['acctid'],$subject,$body,$session['user']['acctid']);
+		systemmail($row1['acctid'],$subject,$body,$from);
 		invalidatedatacache("mail-{$row1['acctid']}");
-		output("Your message was sent!`n");
-		if (httppost('sendclose')) rawoutput("<script language='javascript'>window.close();</script>");
-		if (httppost('sendback')) {
-			$return=0;
-		}
+		output("`@Your message was sent!`0`n");
 	}
 }else{
 	output("Could not find the recipient, please try again.`n");
 }
-if ($return>0){
+$return = (int) httppost("returnto");
+if($return){
 	$op="read";
 	httpset('op','read');
 	$id = $return;

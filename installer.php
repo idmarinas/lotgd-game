@@ -9,10 +9,10 @@ define("OVERRIDE_FORCED_NAV",true);
 define("IS_INSTALLER",true);
 
 /**
- * This edition of LOTGD not compare version of MYSQL, because you can use other DB engine
+ * Checking basic prerequisites for LOTGD
  */
 
-//php 5.6 is required for this version
+//php 5.6 or better is required for this version
 $requirements_met = true;
 $php_met = true;
 $memory_met = true;
@@ -62,8 +62,6 @@ require_once 'common.php';
 $noinstallnavs = false;
 
 invalidatedatacache('gamesettings');
-$DB_USEDATACACHE = 0;
-//make sure we do not use the caching during this, else we might need to run  through the installer multiple times. AND we now need to reset the game settings, as these were due to faulty code not cached before.
 
 tlschema('installer');
 
@@ -153,10 +151,10 @@ if ($stage > $session['stagecompleted']+1) $stage = $session['stagecompleted'];
 if (! isset($session['dbinfo'])) $session['dbinfo'] = ['DB_HOST' => '', 'DB_USER' => '', 'DB_PASS' => '', 'DB_NAME' => '', 'DB_USEDATACACHE' => false, 'DB_DATACACHEPATH' => 'cache', 'DB_PREFIX' => ''];
 if (file_exists('dbconnect.php') && ( $stage == 3 || $stage == 4 || $stage == 5 ))
 {
-	output("`%This stage was completed during a previous installation.");
-	output("`2If you wish to perform stages 4 through 6 again, please delete the file named \"dbconnect.php\" from your site.`n`n");
-	$stage = 6;
-}
+		output("`%This stage was completed during a previous installation.");
+		output("`2If you wish to perform stages 4 through 6 again, please delete the file named \"dbconnect.php\" from your site.`n`n");
+		$stage = 6;
+	}
 if ($stage > $session['stagecompleted']) $session['stagecompleted'] = $stage;
 
 page_header("LoGD Installer &#151; %s",$stages[$stage]);
@@ -164,11 +162,10 @@ switch($stage)
 {
 	case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
 		require_once "lib/installer/installer_stage_$stage.php";
-	break;
-
+		break;
 	default:
 		require_once 'lib/installer/installer_stage_default.php';
-	break;
+		break;
 }
 
 
@@ -178,7 +175,7 @@ if (! $noinstallnavs)
 	addnav("Install Stages");
 
 	for ($x=0; $x<=min(count($stages)-1,$session['stagecompleted']+1); $x++)
-	{
+    {
 		if ($x == $stage) $stages[$x]="`^{$stages[$x]} <----";
 		addnav($stages[$x], "installer.php?stage=$x");
 	}
