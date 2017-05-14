@@ -19,17 +19,14 @@ output("Each bears telltale signs of the means by which they met their end.`n`n"
 output("Their souls whisper their torments, haunting your mind with their despair:`n");
 
 output("`nA sepulchral voice intones, \"`QIt is now %s in the world above.`\$\"`n`n",getgametime());
+modulehook("shades", array());
+commentdisplay("`n`QNearby, some lost souls lament:`n", "shade","Despair",25,"despairs");
 addnav("Log Out");
 addnav("Log out","login.php?op=logout");
-
 addnav("Places");
 addnav("The Graveyard","graveyard.php");
 
 addnav("Return to the news","news.php");
-
-modulehook("shades", array()); // if this is too low, you can use footer-shades...
-
-commentdisplay("`n`QNearby, some lost souls lament:`n", "shade","Despair",25,"despairs");
 
 tlschema("nav");
 

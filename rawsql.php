@@ -23,6 +23,7 @@ if ($op=="" || $op=="sql")
 	if ($sql != "") {
 		$sql = stripslashes($sql);
 		modulehook("rawsql-execsql",array("sql"=>$sql));
+		debuglog('Ran Raw SQL: ' . $sql);
 		$r = DB::query($sql, false);
 		if (!$r) {
 			output("`\$SQL Error:`& %s`0`n`n",DB::error($r));
@@ -73,8 +74,9 @@ if ($op=="" || $op=="sql")
 		modulehook("rawsql-execphp",array("php"=>$php));
 		ob_start();
 		eval($php);
-		output(ob_get_contents(),true);
+		output_notl(ob_get_contents(),true);
 		ob_end_clean();
+		debuglog('Ran Raw PHP: ' . $php);
 	}
 	output("`n`nType your code:");
 	$ret = modulehook("rawsql-modphp",array("php"=>$php));

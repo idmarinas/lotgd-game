@@ -37,7 +37,7 @@ $basetext=array(
 	"nofeedgold"=>"`7You don't have enough gold with you to pay for the food. Merick refuses to feed your creature and advises you to look for somewhere else to let %s`7 graze for free, such as in the `@Forest`7.",
 	"confirmsale"=>"`n`n`7Merick whistles.  \"`&Yer mount shure is a foyne one, %s. Are ye sure ye wish t' part wae it?`7\"`n`nHe waits for your answer.`0",
 	"mountsold"=>"`7As sad as it is to do so, you give up your precious %s`7, and a lone tear escapes your eye.`n`nHowever, the moment you spot the %s, you find that you're feeling quite a bit better.",
-	"offer"=>"`n`nMerick offers you `^%s`& gold and `%%s`& gems for %s`7.",
+	"offer"=>"`n`n`&Merick offers you `^%s`& gold and `%%s`& gems for %s`7.",
     'lass' => 'lass',
     'lad' => 'lad'
 );
@@ -199,7 +199,7 @@ if ($op == 'confirmbuy') {
 			output($texts['nothungry'],$name);
 			tlschema();
 		} else {
-			if ($session['bufflist']['mount']['rounds'] > $buff['rounds']*.5) {
+			if (isset($session['bufflist']['mount']) && $session['bufflist']['mount']['rounds'] > $buff['rounds']*.5) {
 				$grubprice=round($grubprice/2,0);
 				tlschema($schemas['halfhungry']);
 				output($texts['halfhungry'], $name, $name, $grubprice);

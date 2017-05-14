@@ -34,6 +34,7 @@ if (is_array($module)){
 	if ($module) $modules = array($module);
 	else $modules = array();
 }
+reset($modules);
 foreach ($modules as $key=>$module) {
 	$op = $theOp;
 	output("`2Performing `^%s`2 on `%%s`0`n", translate_inline($op), $module);
@@ -51,7 +52,6 @@ foreach ($modules as $key=>$module) {
 	}elseif($op=="uninstall"){
 		if (uninstall_module($module)) {
 		} else {
-			output("`\$Error, module could not be uninstalled!`n`n");
 			output("Unable to inject module.  Module not uninstalled.`n");
 		}
 		$op="";
@@ -93,6 +93,7 @@ $ucount = $install_status['uninstcount'];
 
 ksort($seencats);
 addnav(array(" ?Uninstalled - (%s modules)", $ucount), "modules.php");
+reset($seencats);
 foreach ($seencats as $cat=>$count) {
 	addnav(array(" ?%s - (%s modules)", $cat, $count), "modules.php?cat=$cat");
 }
@@ -225,20 +226,21 @@ if ($op==""){
 		addnav("","modules.php?sorting=author&order=".($sorting=="author"?!$order:0));
 		addnav("","modules.php?sorting=category&order=".($sorting=="category"?!$order:0));
 		addnav("","modules.php?sorting=shortname&order=".($sorting=="shortname"?!$order:0));
-		$invalidmodule = array(
-			"version"=>"",
-			"author"=>"",
-			"category"=>"",
-			"download"=>"",
-			"invalid"=>true,
-		);
 		if (count($uninstmodules) > 0) {
 			$count = 0;
 			$moduleinfo=array();
 			$sortby=array();
 			$numberarray=array();
+			$invalidmodule = array(
+				"version"=>"",
+				"author"=>"",
+				"category"=>"",
+				"download"=>"",
+				"invalid"=>true,
+			);
 			foreach($uninstmodules as $key=>$shortname) {
 				//test if the file is a valid module or a lib file/whatever that got in, maybe even malcode that does not have module form
+				$shortname = strtolower($shortname);
 				$file = file_get_contents("modules/$shortname.php");
 				if (strpos($file,$shortname."_getmoduleinfo")===false ||
 					//strpos($file,$shortname."_dohook")===false ||
@@ -246,7 +248,7 @@ if ($op==""){
 					strpos($file,$shortname."_install")===false ||
 					strpos($file,$shortname."_uninstall")===false) {
 					//here the files has neither do_hook nor getinfo, which means it won't execute as a module here --> block it + notify the admin who is the manage modules section
- 					$temp=array_merge($invalidmodule,array("name"=>$shortname.".php ".appoencode(translate_inline("(`\$Invalid Module! Contact Author or check file!`0)"))));
+					$temp=array_merge($invalidmodule,array("name"=>$shortname.".php ".appoencode(translate_inline("(`\$Invalid Module! Contact Author or check file!`0)"))));
 				} else {
 					$temp= get_module_info($shortname);
 				}
@@ -296,6 +298,7 @@ if ($op==""){
 					rawoutput("<td>&nbsp;</td>");
 					rawoutput("<td colspan='5'>");
 					output("`bRequires:`b`n");
+					reset($moduleinfo[$i]['requires']);
 					foreach ($moduleinfo[$i]['requires'] as $key=>$val) {
 						$info = explode("|",$val);
 						if (module_check_requirements(array($key=>$val))){

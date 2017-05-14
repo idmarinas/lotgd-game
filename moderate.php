@@ -113,9 +113,7 @@ if ($op==""){
 	addnav("", "$link");
 	if ($area==""){
 		talkform("X","says");
-		//commentdisplay("", "' or '1'='1","X",100); //sure, encourage hacking...
 		commentmoderate('','','X',100,'says',false,true);
-
 	}else{
 		commentmoderate("", $area,"X",100);
 		talkform($area,"says");
@@ -168,7 +166,7 @@ if ($op==""){
 	rawoutput("<form action='moderate.php?op=audit&subop=undelete' method='POST'>");
 	addnav("","moderate.php?op=audit&subop=undelete");
 	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<tr class='trhead'><td>$ops</td><td>$mod</td><td>$when</td><td>$com</td></tr>");
+	rawoutput("<thead><tr><td>$ops</td><td>$mod</td><td>$when</td><td>$com</td></tr></thead>");
 	$limit = "75";
 	$where = "1=1 ";
 	$moderator = httpget("moderator");

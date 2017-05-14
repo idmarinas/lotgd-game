@@ -53,36 +53,30 @@ if ($op == "add" || $op == "addpoll" || $op == "del")  {
 }
 if ($op=="") {
 	$count = getsetting("motditems", 5);
-	$newcount = (int)httppost("newcount");
-	if ($newcount == 0 || httppost('proceed')=='') $newcount = 0;
+	$newcount = (int) httppost("newcount");
+	if (! httppost('proceed')) $newcount = 0;
 	/*
 	motditem("Beta!","Please see the beta message below.","","", "");
 	*/
-	$m = httppost('month');
+	$m = httppost("month");
 	if ($m > ""){
 		$sql = "SELECT motd.*, name AS motdauthorname FROM " . DB::prefix("motd") . " AS `motd`LEFT JOIN " . DB::prefix("accounts") . " AS `acct` ON acct.acctid = motd.motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
 		$result = DB::query_cached($sql,"motd-$m");
 	}else{
 		$sql = "SELECT motd.*, name AS motdauthorname FROM ".DB::prefix("motd")." AS `motd` LEFT JOIN " . DB::prefix("accounts") . " AS `acct` ON acct.acctid = motd.motdauthor ORDER BY motddate DESC limit $newcount,".($newcount+$count);
 		//cache only the last x items
-		if ($newcount=0) $result = DB::query_cached($sql,"motd");
+        if ($newcount=0) $result = DB::query_cached($sql,"motd");
 		else $result = DB::query($sql);
 	}
 	rawoutput('<div class="ui divided items">');
 	foreach ($result as $row)
-	{
+    {
 		if (!isset($session['user']['lastmotd']))
 			$session['user']['lastmotd']=0;
 		if ($row['motdauthorname']=="")
 			$row['motdauthorname']="`@Green Dragon Staff`0";
-		if ($row['motdtype'] == 0)
-		{
-			motditem($row['motdtitle'], $row['motdbody'], $row['motdauthorname'], $row['motddate'], $row['motditem']);
-		}
-		else
-		{
-			pollitem($row['motditem'], $row['motdtitle'], $row['motdbody'], $row['motdauthorname'], $row['motddate'], $row['motditem']);
-		}
+		if ($row['motdtype'] == 0) motditem($row['motdtitle'], $row['motdbody'], $row['motdauthorname'], $row['motddate'], $row['motditem']);
+        else pollitem($row['motditem'], $row['motdtitle'], $row['motdbody'], $row['motdauthorname'],$row['motddate'], $row['motditem']);
 	}
 	rawoutput('</div>');
 	/*
@@ -96,7 +90,7 @@ if ($op=="") {
 	rawoutput("<select class='ui dropdown' name='month' onChange='this.form.submit();' >");
 	rawoutput("<option value=''>--Current--</option>");
 	while ($row = DB::fetch_assoc($result))
-	{
+    {
 		$time = strtotime("{$row['d']}-01");
 		$m = translate_inline(date("M",$time));
 		rawoutput ("<option value='{$row['d']}'".(httpget("month")==$row['d']?" selected":"").">$m".date(", Y",$time)." ({$row['c']})</option>");
@@ -108,6 +102,7 @@ if ($op=="") {
 	rawoutput("<input type='submit' value='".translate_inline("Submit")."' class='ui button'>");
 	rawoutput("</form>");
 
+    //-- Show comentary only if user are online
 	if (isset($session['user']['online']) && $session['user']['online']) commentdisplay("`n`@Commentary:`0`n", "motd");
 }
 

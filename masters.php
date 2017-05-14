@@ -2,8 +2,8 @@
 // Initially written as a module by Chris Vorndran.
 // Moved into core by JT Traub
 
-require_once("common.php");
-require_once("lib/http.php");
+require_once 'common.php';
+require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
@@ -14,7 +14,7 @@ $id = (int)httpget('id');
 $act = httpget('act');
 
 page_header("Masters Editor");
-require_once("lib/superusernav.php");
+require_once 'lib/superusernav.php';
 superusernav();
 
 if ($op == "del") {
@@ -119,7 +119,6 @@ if ($op == "") {
 	$weapon = translate_inline("Weapon");
 	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<thead><tr><th>$ops</th><th>$level</th><th>$name</th><th>$weapon</th><th>$win</th><th>$lose</tr></thead>");
-	$i = false;
 	while ($row = DB::fetch_assoc($res)) {
 		$id = $row['creatureid'];
 		rawoutput("<tr><td class='collapsing'>");
@@ -141,7 +140,6 @@ if ($op == "") {
 		rawoutput("</td><td>");
 		output_notl("`^%s`0",stripslashes($row['creaturewin']));
 		rawoutput("</td></tr>");
-		$i=!$i;
 	}
 	rawoutput("</table>");
 	output("`n`#You can change the names, weapons and messages of all of the Training Masters.");

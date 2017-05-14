@@ -51,7 +51,6 @@ if ($session['user']['sex']==SEX_FEMALE){
 	output("Inside you are greeted by the sight of numerous scantily clad buxom women who wave palm fronds at you and offer to feed you grapes as you lounge on Greco-Roman couches draped with silk.`n`n");
 }
 //comment visible only for those who are MORE than translators
-
 if ($session['user']['superuser'] !=SU_IS_TRANSLATOR) commentdisplay("", "superuser","Engage in idle conversation with other gods:",25);
 
 addnav("Actions");
@@ -66,14 +65,9 @@ if (file_exists("paylog.php")  &&
 if ($session['user']['superuser'] & SU_RAW_SQL) addnav("Q?Run Raw SQL", "rawsql.php");
 if ($session['user']['superuser'] & SU_IS_TRANSLATOR) addnav("U?Untranslated Texts", "untranslated.php");
 
-addnav("Places");
-if ($session['user']['superuser'] & SU_IS_TRANSLATOR) addnav("L?Translator Lounge", "translatorlounge.php");
-
-
 addnav("Editors");
 if ($session['user']['superuser'] & SU_EDIT_USERS) addnav("User Editor","user.php");
 if ($session['user']['superuser'] & SU_EDIT_BANS) addnav("Ban Editor","bans.php");
-
 if ($session['user']['superuser'] & SU_EDIT_USERS) addnav("Title Editor","titleedit.php");
 if ($session['user']['superuser'] & SU_EDIT_CREATURES) addnav("E?Creature Editor","creatures.php");
 if ($session['user']['superuser'] & SU_EDIT_MOUNTS) addnav("Mount Editor","mounts.php");

@@ -84,7 +84,6 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	$oldvalues = unserialize($oldvalues);
 
 	$post = httpallpost();
-	//strip unnecessary values
 	unset($post['oldvalues']);
 	unset($post['showFormTabIndex']);
 
@@ -118,7 +117,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 			"template"=>1,
 			"bio"=>1
 		);
-		foreach ($post as $key=>$val) {
+		foreach($post as $key=>$val){
 			// If this is one we don't save, skip
 			if (isset($nonsettings[$key]) && $nonsettings[$key]) continue;
 			if (isset($oldvalues[$key]) &&
@@ -126,6 +125,9 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 			// If this is a module userpref handle and skip
 			debug("Setting $key to $val");
 			if (strstr($key, "___")) {
+				if (strpos($key, 'user_') === false && strpos($key, 'check_') === false) {
+					continue;
+				}
 				$val = httppost($key);
 				$x = explode("___", $key);
 				$module = $x[0];
@@ -344,6 +346,8 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 				$x = explode("|", $val);
 			}
 
+			if(is_array($x[0])) $x[0] = call_user_func_array('sprintf', $x[0]);
+			//$type = split(",", $x[0]);
 			$type = explode(",", $x[0]);
 			if (isset($type[1])) $type = trim($type[1]);
 			else $type = "string";
@@ -402,12 +406,13 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 		while($row1 = DB::fetch_assoc($result1)) {
 			$mdata[$row1['modulename']."___".$row1['setting']] = $row1['value'];
 		}
-		$form = array_merge($form, $msettings);
-		$prefs = array_merge($prefs, $mdata);
 	}
+	addnav('View Bio','bio.php?char='.$session['user']['acctid'].'&ret='.urlencode($_SERVER['REQUEST_URI']));
 
+	$form = array_merge($form, $msettings);
+	$prefs = array_merge($prefs, $mdata);
 
-	if ($session['user']['replaceemail']!='') {
+    	if ($session['user']['replaceemail']!='') {
 		//we have an email change request here
 		$replacearray=explode("|",$session['user']['replaceemail']);
 		output("`\$There is an email change request pending to the email address `q\"%s`\$\" that was given at the timestamp %s (Server Time Zone).`n",$replacearray[0],$replacearray[1]);

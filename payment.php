@@ -10,10 +10,6 @@ require_once("lib/http.php");
 
 tlschema("payment");
 
-// Send an empty HTTP 200 OK response to acknowledge receipt of the notification
-header('HTTP/1.1 200 OK');
-
-
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
 
@@ -24,18 +20,14 @@ foreach ($post as $key => $value) {
 	$req .= "&$key=$value";
 }
 
-// Set up the acknowledgement request headers
-$header  = "POST /cgi-bin/webscr HTTP/1.1\r\n";                    // HTTP POST request
-$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+// post back to PayPal system to validate
+$header = "";
+$header .= "POST /cgi-bin/webscr HTTP/1.1\r\n";
 $header .= "Content-Length: " . strlen($req) . "\r\n";
-$header .="Host: www.paypal.com\r\n";
-$header .="Connection: close\r\n\r\n";
-
-// Open a socket for the acknowledgement request
-
+$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+$header .= "Host: www.paypal.com\r\n";
+$header .= "Connection: close\r\n\r\n";
 $fp = fsockopen ('ssl://www.paypal.com', 443, $errno, $errstr, 30);
-//$fp = fsockopen ('www.paypal.com', 80, $errno, $errstr, 30);
-//$fp = fsockopen ('ssl://www.sandbox.paypal.com', 443, $errno, $errstr, 30);
 
 // assign posted variables to local variables
 $item_name = httppost('item_name');
@@ -44,7 +36,7 @@ $payment_status = httppost('payment_status');
 $payment_amount = httppost('mc_gross');
 $payment_currency = httppost('mc_currency');
 $txn_id = httppost('txn_id');
-$receiver_email = httppost('business'); //formerly receiver_email, but with using multiple emails for paypal it's gross
+$receiver_email = httppost('business');
 $payer_email = httppost('payer_email');
 $payment_fee = httppost('mc_fee');
 
@@ -79,7 +71,7 @@ if (!$fp) {
 				}
 				if (($receiver_email != "logd@mightye.org") &&
 					($receiver_email != getsetting("paypalemail", ""))) {
-					$emsg = "This payment isn't to me(".getsetting("paypalemail", "").")!  It's to $receiver_email.\n";
+					$emsg = "This payment isn't to me!  It's to $receiver_email.\n";
 					payment_error(E_WARNING,$emsg,__FILE__,__LINE__);
 				}
 				writelog($response);
@@ -102,9 +94,10 @@ function writelog($response){
 	global $item_name, $item_number, $payment_status, $payment_amount;
 	global $payment_currency, $txn_id, $receiver_email, $payer_email;
 	global $payment_fee,$txn_type;
-	$match = array();
+	$match = [];
 	preg_match("'([^:]*):([^/])*'",$item_number,$match);
 	if ($match[1]>""){
+		$match[1] = addslashes($match[1]);
 		$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='{$match[1]}'";
 		$result = DB::query($sql);
 		$row = DB::fetch_assoc($result);
@@ -118,7 +111,6 @@ function writelog($response){
 			if ($txn_type =="reversal") $donation -= $payment_fee;
 
 			$hookresult = modulehook("donation_adjustments",array("points"=>$donation*getsetting('dpointspercurrencyunit',100),"amount"=>$donation,"acctid"=>$acctid,"messages"=>array()));
-			//updated to make a setting here for each Dollar, Euro, Shekel
 			$hookresult['points'] = round($hookresult['points']);
 
 			$sql = "UPDATE " . DB::prefix("accounts") . " SET donation = donation + '{$hookresult['points']}' WHERE acctid=$acctid";
@@ -132,6 +124,7 @@ function writelog($response){
 				debuglog($message,false,$acctid,"donation",0,false);
 			}
 			if (DB::affected_rows()>0) $processed = 1;
+			modulehook("donation", array("id"=>$acctid, "amt"=>$donation*getsetting('dpointspercurrencyunit',100), "manual"=>false));
 		}
 	}
 	$sql = "
@@ -158,9 +151,7 @@ function writelog($response){
 			'$payment_fee',
 			'".date("Y-m-d H:i:s")."'
 		)";
-	$result = DB::query($sql);
-	if ($match[1]>"" && $acctid>0) modulehook("donation", array("id"=>$acctid, "amt"=>$donation*getsetting('dpointspercurrencyunit',100), "manual"=>false));
-	modulehook("donation-processed",$post);
+	DB::query($sql);
 	$err = DB::error();
 	if ($err) {
 		payment_error(E_ERROR,"SQL: $sql\nERR: $err", __FILE__,__LINE__);
@@ -193,7 +184,7 @@ if ($payment_errors>"") {
 	ob_end_clean();
 	$payment_errors .= "<hr>".$contents;
 
-	lotgd_mail($adminEmail,$subj,$payment_errors."<hr>");
+	mail($adminEmail,$subj,$payment_errors."<hr>","From: " . getsetting("gameadminemail", "postmaster@localhost.com"));
 }
 $output = ob_get_contents();
 if ($output > ""){
@@ -208,7 +199,7 @@ if ($output > ""){
 	reset($_SERVER);
 	var_dump($_SERVER);
 	echo "</pre>";
-	lotgd_mail($adminEmail,"Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}",ob_get_contents(),"Content-Type: text/html");
+	mail($adminEmail,"Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}",ob_get_contents(),"Content-Type: text/html");
 }
 ob_end_clean();
 ?>

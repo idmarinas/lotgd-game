@@ -42,12 +42,12 @@ $basetext=array(
 		"That is when you notice a large mangy dog in a tug-of-war with a troll.",
 		"Clenched in the dog's teeth is a very large bone with bits of flesh still clinging to it.",
 		"You can't tell if the troll is growling louder than the dog as it tries to wrest the bone from its jaw.",
-		"Hanging from the troll's wide belt is a gnarled club tht resets against filthy breeches of animal skins.",
+		"Hanging from the troll's wide belt a gnarled club hangs against filthy breeches of animal skins.",
 
 		"The sound of the man's voice brings your attention back to the matter at hand.`n`n",
 		"\"`PYes. As a matter of fact I am looking for someone,`Q\"  you reply.",
 		"\"`PI have gold in my purse to pay for the best fighter willing to join me in ridding this realm of vermin.`Q\"`n`n",
-		"You look around to see if somebody is willing to join you.`n`n"
+        "You look around to see if somebody is willing to join you.`n`n"
 	),
 	"buynav"		=> "Hire a mercenary",
 	"healnav"		=> "Heal a companion",
@@ -65,9 +65,12 @@ $basetext=array(
 		"You gladly hand him the money owed for healing your companion and start heading back to the village.",
     ),
     "toomanycompanions"=> array(
-    	"It seems no one his willing to follow you.",
+    	"It seems no one is willing to follow you.",
     	"You simply lead too many companions at the moment."
-    )
+    ),
+    "manycompanions" => "Several mercenaries offer to join you:`n`n",
+    "onecompanion" => "One mercenary offers to join you:`n`n",
+    "nocompanions" => "No mercenaries off to join you.",
 );
 
 $schemas = array(
@@ -78,7 +81,10 @@ $schemas = array(
 	"healtext"=>"mercenarycamp",
 	"healnotenough"=>"mercenarycamp",
 	"healpaid"=>"mercenarycamp",
-	"toomanycompanions"=>"mercenarycamp"
+	"toomanycompanions"=>"mercenarycamp",
+	"manycompanions"=>"mercenarycamp",
+	"onecompanion"=>"mercenarycamp",
+	"nocompanions"=>"mercenarycamp",
 );
 
 $basetext['schemas'] = $schemas;
@@ -113,6 +119,35 @@ if ($op==""){
   	tlschema($schemas['buynav']);
 	addnav($texts['buynav']);
 	tlschema();
+	switch (DB::num_rows($result)) {
+		case 0:
+			if (is_array($texts['nocompanions'])) {
+				foreach ($texts['nocompanions'] as $description) {
+					output_notl(sprintf_translate($description));
+				}
+			} else {
+				output($texts['nocompanions']);
+			}
+			break;
+		case 1:
+			if (is_array($texts['onecompanion'])) {
+				foreach ($texts['onecompanion'] as $description) {
+					output_notl(sprintf_translate($description));
+				}
+			} else {
+				output($texts['onecompanion']);
+			}
+			break;
+		default:
+			if (is_array($texts['manycompanions'])) {
+				foreach ($texts['manycompanions'] as $description) {
+					output_notl(sprintf_translate($description));
+				}
+			} else {
+				output($texts['manycompanions']);
+			}
+			break;
+	}
 	while ($row = DB::fetch_assoc($result)) {
 		$row = modulehook("alter-companion", $row);
 		if ($row['companioncostgold'] && $row['companioncostgems']) {
