@@ -11,10 +11,6 @@
 //basically the idea behind this library is to provide a non-blocking
 //storage mechanism for non-critical data.
 
-/* Add on from Nightborn
- * use of this is very well recommended as it cuts down database load to a minimum at the expense of doing more PHP file checking
- */
-
 /**
  * Reworked by IDMarinas
  */

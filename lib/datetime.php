@@ -4,52 +4,7 @@
 // mail ready
 function reltime($date,$short=true)
 {
-	$now = strtotime("now");
-	$x = abs($now - $date);
-	$o = readabletime($x);
-	return $o;
-	//obsolete rest
-	$d = (int)($x/86400);
-	$x = $x % 86400;
-	$h = (int)($x/3600);
-	$x = $x % 3600;
-	$m = (int)($x/60);
-	$x = $x % 60;
-	$s = (int)($x);
-	if ($short){
-		$array=array("d"=>"d","h"=>"h","m"=>"m","s"=>"s");
-		$array=translate_inline($array,"datetime");
-		if ($d > 0)
-			$o = $d.$array['d'].($h>0?$h.$array['h']:"");
-		elseif ($h > 0)
-			$o = $h.$array['h'].($m>0?$m.$array['m']:"");
-		elseif ($m > 0)
-			$o = $m.$array['m'].($s>0?$s.$array['s']:"");
-		else
-			$o = $s.$array['s'];
-
-		/*		if ($d > 0)
-			$o = sprintf("%3s%2s",$d.$array['d'],($h>0?$h.$array['h']:""));
-		elseif ($h > 0)
-			$o = sprintf("%3s%2s",$h.$array['h'],($m>0?$m.$array['m']:""));
-		elseif ($m > 0)
-			$o = sprintf("%3s%2s",$m.$array['m'],($s>0?$s.$array['s']:""));
-		else
-			$o = sprintf("%5s", $s.$array['s']);
-		$o = str_replace(" ", "&nbsp;", $o);*/
-	}else{
-		$array=array("day"=>"day","days"=>"days","hour"=>"hour","hours"=>"hours","minute"=>"minute","minutes"=>"minutes","second"=>"second","seconds"=>"second");
-		$array=translate_inline($array,"datetime"); //translate it... tl-ready now
-		if ($d > 0)
-			$o = "$d ".($d>1?$array['days']:$array['day']).($h>0?", $h ".($h>1?$array['hours']:$array['hour']):"");
-		elseif ($h > 0)
-			$o = "$h ".($h>1?$array['hours']:$array['hour']).($m>0?", $m ".($m>1?$array['minutes']:$array['minute']):"");
-		elseif ($m > 0)
-			$o = "$m ".($m>1?$array['minutes']:$array['minute']).($s>0?", $s ".($s>1?$array['seconds']:$array['second']):"");
-		else
-			$o = "$s ".($s>0?$array['seconds']:$array['second']);
-	}
-	return $o;
+	return readabletime($date, $short);
 }
 
 function readabletime($date,$short=true){
@@ -122,11 +77,18 @@ function checkday()
 	if ($session['user']['loggedin']){
 		output_notl("<!--CheckNewDay()-->",true);
 		if(is_new_day()){
-			$session=$revertsession;
-			$session['user']['restorepage'] = $REQUEST_URI;
-			$session['allowednavs']=array();
-			addnav("","newday.php");
-			redirect("newday.php");
+			$post = $_POST;
+			unset($post['i_am_a_hack']);
+			if (count($post) > 0){
+				$session['user']['lasthit'] = "0000-00-00 00:00:00";
+				return;
+			} else {
+				$session=$revertsession;
+				$session['user']['restorepage']=$REQUEST_URI;
+				$session['allowednavs']=array();
+				addnav("","newday.php");
+				redirect("newday.php");
+			}
 		}
 	}
 }
