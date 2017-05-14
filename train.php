@@ -32,7 +32,7 @@ if ($mid) {
 	$sql = "SELECT max(creaturelevel) as level FROM " . DB::prefix("masters") . " WHERE creaturelevel <= " . $session['user']['level'];
 	$res = DB::query($sql);
 	$row = DB::fetch_assoc($res);
-	$l = (int)$row['level'];
+	$l = (int) $row['level'];
 
 	$sql = "SELECT * FROM " . DB::prefix("masters") . " WHERE creaturelevel=$l ORDER BY RAND(".e_rand().") LIMIT 1";
 }
@@ -45,13 +45,11 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 	$master['creaturewin'] = stripslashes($master['creaturewin']);
 	$master['creaturelose'] = stripslashes($master['creaturelose']);
 	$master['creatureweapon'] = stripslashes($master['creatureweapon']);
-	//this is a piece of old work I will leave in, if you don't have Gadriel, then well...
 	if ($master['creaturename'] == "Gadriel the Elven Ranger" &&
 			$session['user']['race'] == "Elf") {
 		$master['creaturewin'] = "You call yourself an Elf?? Maybe Half-Elf! Come back when you've been better trained.";
 		$master['creaturelose'] = "It is only fitting that another Elf should best me.  You make good progress.";
 	}
-	//end of old piece
 	$level = $session['user']['level'];
 	$dks = $session['user']['dragonkills'];
 	$exprequired=exp_for_next_level($level, $dks);
@@ -89,19 +87,19 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 			debuglog("Challenged master, setting seenmaster to 1");
 
 			if ($session['user']['experience'] >= $exprequired)
-			{
+            {
 				restore_buff_fields();
 
-				$master = buffbadguy($master, 'buffmaster');
+                $master = buffbadguy($master, 'buffmaster');
 
-                $attackstack['enemies'][0] = $master;
+				$attackstack['enemies'][0] = $master;
 				$attackstack['options']['type'] = 'train';
 				$session['user']['badguy'] = createstring($attackstack);
 
 				$battle=true;
 				if ($victory) {
 					$badguy = unserialize($session['user']['badguy']);
-					$badguy = $badguy['enemies'][0];//-- Fix error that no get data of a master
+					$badguy = $badguy['enemies'][0];
 					output("With a flurry of blows you dispatch your master.`n");
 				}
 			}else{
@@ -124,7 +122,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 		if($session['user']['experience']>=$exprequired){
 			output("`n`n`^%s`0 says, \"Gee, your muscles are getting bigger than mine...\"",$master['creaturename']);
 		}else{
-			output("`n`n`^%s`0 states that you will need `%%s`0 more experience before you are ready to challenge him in battle.",$master['creaturename'],number_format($exprequired-$session['user']['experience'],0,$point,$sep));
+			output("`n`n`^%s`0 states that you will need `%%s`0 more experience before you are ready to challenge him in battle.",$master['creaturename'],($exprequired-$session['user']['experience']));
 		}
 		addnav("Question Master","train.php?op=question&master=$mid");
 		addnav("M?Challenge Master","train.php?op=challenge&master=$mid");
@@ -208,6 +206,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 					$companion['hitpoints'] = $companion['maxhitpoints'];
 					$newcompanions[$name] = $companion;
 				}
+				$companions = $newcompanions;
 			}
 
 			invalidatedatacache("list.php-warsonline");

@@ -42,7 +42,7 @@ if ($op=="search" || $op== ""){
 	if ($err) {
 		output($err);
 	} else {
-		if ($searchresult) $display = 1;
+		$display = 1;
 	}
 }
 
@@ -63,7 +63,6 @@ addnav("Bans");
 addnav("Add a ban","bans.php?op=setupban");
 addnav("List/Remove bans","bans.php?op=removeban");
 addnav("Search for banned user","bans.php?op=searchban");
-
 
 // This doesn't seem to be used, so I'm going to comment it out now
 //$msg = httpget('msg');
@@ -121,11 +120,10 @@ else
 {
 	$racesenum = '';
 }
-require 'lib/data/user_account.php';
+$userinfo = include_once 'lib/data/user_account.php';
 $sql = "SELECT clanid,clanname,clanshort FROM " . DB::prefix("clans") ." ORDER BY clanshort";
 $result = DB::query($sql);
 while ($row=DB::fetch_assoc($result)){
-	//ok, we had nuts here wo made clan names with commas - so I replace them with ; ...
 	$userinfo['clanid'].=",{$row['clanid']},".str_replace(",",";","<{$row['clanshort']}> {$row['clanname']}");
 }
 

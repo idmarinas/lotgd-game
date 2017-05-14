@@ -1,5 +1,5 @@
 <?php
-$userinfo = array(
+return [
 	"Account info,title",
 	"acctid"=>"User id,viewonly",
 	"login"=>"Login",
@@ -144,4 +144,4 @@ $userinfo = array(
 	"Battle Info,title",
 	"companions"=>"List of companions,viewonly",
 	"badguy"=>"Last Badguy,viewonly"
-);
+];

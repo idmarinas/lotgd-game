@@ -2,13 +2,23 @@
 // translator ready
 // addnews ready
 // mail ready
+/**
+ *
+ *
+ * @copyright Copyright © 2002-2005, Eric Stevens & JT Traub, © 2006-2009, Dragonprime Development Team
+ * @version Lotgd 1.1.2 DragonPrime Edition
+ * @package Core
+ * @subpackage Library
+ * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ */
+
 require_once("lib/substitute.php");
 
 function activate_buffs($tag) {
 	global $session, $badguy, $count;
 	tlschema("buffs");
 	reset($session['bufflist']);
-	$result = array();
+	$result = [];
 	$result['invulnerable'] = 0;
 	$result['dmgmod'] = 1;
 	$result['compdmgmod'] = 1;
@@ -22,7 +32,7 @@ function activate_buffs($tag) {
 	$result['lifetap'] = array();
 	$result['dmgshield'] = array();
 
-	foreach ($session['bufflist'] as $key=>$buff) { 
+	foreach($session['bufflist'] as $key=>$buff) {
 		if (array_key_exists('suspended',$buff) && $buff['suspended']) continue;
 		if ($buff['schema']) tlschema($buff['schema']);
 		if (isset($buff['startmsg'])) {
@@ -172,11 +182,11 @@ function activate_buffs($tag) {
 			if (isset($buff['maxbadguydamage']) &&
 					$buff['maxbadguydamage']  <> 0) {
 				$max = $buff['maxbadguydamage'];
-				$min = $buff['minbadguydamage'];
+				$min = isset($buff['minbadguydamage'])?$buff['minbadguydamage']:0;
 				$who = 0;
 			} else {
-				$max = $buff['maxgoodguydamage'];
-				$min = $buff['mingoodguydamage'];
+				$max = isset($buff['maxgoodguydamage'])?$buff['maxgoodguydamage']:0;
+				$min = isset($buff['mingoodguydamage'])?$buff['mingoodguydamage']:0;
 				$who = 1;
 			}
 			$minioncounter = 1;
@@ -223,22 +233,15 @@ function process_lifetaps($ltaps, $damage) {
 	foreach ($ltaps as $buff) {
 		if (isset($buff['suspended']) && $buff['suspended']) continue;
 		if ($buff['schema']) tlschema($buff['schema']);
-		$healhp = $session['user']['maxhitpoints'] -
-			$session['user']['hitpoints'];
+		$healhp = $session['user']['maxhitpoints'] - $session['user']['hitpoints'];
 		if ($healhp < 0) $healhp = 0;
-		if ($healhp == 0) {
-			$msg = $buff['effectnodmgmsg'];
-		} else {
-			if ($healhp > $damage * $buff['lifetap'])
-				$healhp = round($damage * $buff['lifetap'], 0);
+		if ($healhp == 0) $msg = isset($buff['effectnodmgmsg'])?$buff['effectnodmgmsg']:"";
+		else
+        {
+			if ($healhp > $damage * $buff['lifetap']) $healhp = round($damage * $buff['lifetap'], 0);
 			if ($healhp < 0) $healhp = 0;
-			if ($damage > 0) {
-				$msg = $buff['effectmsg'];
-			} else if ($damage == 0) {
-				$msg = $buff['effectfailmsg'];
-			} else if ($damage < 0) {
-				$msg = $buff['effectfailmsg'];
-			}
+			if ($healhp > 0) $msg = isset($buff['effectmsg'])?$buff['effectmsg']:"";
+			else if ($healhp == 0) $msg = isset($buff['effectfailmsg'])?$buff['effectfailmsg']:"";
 		}
 		$session['user']['hitpoints'] += $healhp;
 		if (is_array($msg)) {
@@ -257,7 +260,7 @@ function process_lifetaps($ltaps, $damage) {
 function process_dmgshield($dshield, $damage) {
 	global $session, $badguy;
 	tlschema("buffs");
-	foreach ($dshield as $buff) {
+	foreach($dshield as $buff) {
 		if (isset($buff['suspended']) && $buff['suspended']) continue;
 		if ($buff['schema']) tlschema($buff['schema']);
 		$realdamage = round($damage * $buff['damageshield'], 0);
@@ -266,7 +269,7 @@ function process_dmgshield($dshield, $damage) {
 		if ($realdamage > 0) {
 			if (isset($buff['effectmsg'])) $msg = $buff['effectmsg'];
 		} else if ($realdamage == 0) {
-			if (isset($buf['effectnodmgmsg'])) $msg = $buff['effectnodmgmsg'];
+			if (isset($buff['effectfailmsg'])) $msg = $buff['effectfailmsg'];
 		} else if ($realdamage < 0) {
 			if (isset($buff['effectfailmsg'])) $msg = $buff['effectfailmsg'];
 		}
@@ -292,7 +295,7 @@ function process_dmgshield($dshield, $damage) {
 function expire_buffs() {
 	global $session, $badguy;
 	tlschema("buffs");
-	foreach ($session['bufflist'] as $key=>$buff) {
+	foreach($session['bufflist'] as $key=>$buff) {
 		if (array_key_exists('suspended',$buff) && $buff['suspended']) continue;
 		if ($buff['schema']) tlschema($buff['schema']);
 		if (array_key_exists('used',$buff) && $buff['used']) {

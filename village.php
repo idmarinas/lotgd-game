@@ -124,17 +124,14 @@ if ($session['user']['slaydragon'] == 1) {
 }
 
 
-if (!$session['user']['alive']) redirect("shades.php");
+if (! $session['user']['alive']) redirect("shades.php");
 
 if (getsetting("automaster",1) && $session['user']['seenmaster']!=1){
 	//masters hunt down truant students
 	$level = $session['user']['level']+1;
 	$dks = $session['user']['dragonkills'];
 	$expreqd = exp_for_next_level($level, $dks);
-	if ($session['user']['experience']>$expreqd &&
-			$session['user']['level']<getsetting('maxlevel',15)){
-		redirect("train.php?op=autochallenge");
-	}
+	if ($session['user']['experience']>$expreqd && $session['user']['level']<getsetting('maxlevel',15)) redirect("train.php?op=autochallenge");
 }
 
 $op = httpget('op');
@@ -160,11 +157,6 @@ if (!$op && $com=="" && !$comment && !$refresh && !$commenting) {
 	}
 }
 
-tlschema($schemas['fields']);
-addnav($texts['fields']);
-addnav("Q?`%Quit`0 to the fields","login.php?op=logout",true);
-tlschema();
-
 tlschema($schemas['gatenav']);
 addnav($texts['gatenav']);
 tlschema();
@@ -173,6 +165,10 @@ addnav("F?Forest","forest.php");
 if (getsetting("pvp",1)){
 	addnav("S?Slay Other Players","pvp.php");
 }
+tlschema($schemas['fields']);
+addnav($texts['fields']);
+addnav("Q?`%Quit`0 to the fields","login.php?op=logout",true);
+tlschema();
 if (getsetting("enablecompanions",true)) {
 	tlschema($schemas['mercenarycamp']);
 	addnav($texts['mercenarycamp'], "mercenarycamp.php");

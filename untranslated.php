@@ -11,6 +11,7 @@ define("OVERRIDE_FORCED_NAV",true);
 // Slightly modified by JT Traub
 require_once("common.php");
 require_once("lib/http.php");
+require_once("lib/superusernav.php");
 
 check_su_access(SU_IS_TRANSLATOR);
 
@@ -19,7 +20,6 @@ tlschema("untranslated");
 $op = httpget('op');
 page_header("Untranslated Texts");
 
-require_once("lib/superusernav.php");
 //chcek if he/she is allowed to edit that language
 if (!in_array($session['user']['prefs']['language'],explode(",",$session['user']['translatorlanguages']))) {
 	output("Sorry, please change your language to one you are allowed to translate.`n`n");

@@ -2,7 +2,28 @@
 // addnews ready (duh ;))
 // translator ready
 // mail ready
-
+/**
+ * News functions
+ *
+ * Contains functions for adding news
+ * items.
+ *
+ * @copyright Copyright © 2002-2005, Eric Stevens & JT Traub, © 2006-2009, Dragonprime Development Team
+ * @version Lotgd 1.1.2 DragonPrime Edition
+ * @package Core
+ * @subpackage Library
+ * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ */
+/**
+ * Adds a news item for the current user
+ *
+ * @param $text The text of the news
+ * @param $arguments... The sprintf style replacement
+ * @param $hidefrombio Set to true to hide from bio
+ * @return resource The result resource from the inserting query
+ * @see addnews_for_user()
+ * @uses addnews_for_user() Function actually adds the news item to the database
+ */
 function addnews(){
 	// Format: addnews($text[, $sprintf_style_replacement1
 	//					  [, $sprintf_style_replacement2...]]
@@ -20,20 +41,29 @@ function addnews(){
 	array_unshift($args, $session['user']['acctid']);
 	return call_user_func_array("addnews_for_user", $args);
 }
-
+/**
+ * Adds a news item for a user
+ *
+ * @param $user The id of the user for the news
+ * @param $text The text of the news
+ * @param $arguments... The sprintf style replacement
+ * @param $hidefrombio Set to true to hide from bio
+ * @return resource The result resource from the inserting query
+ * @see addnews()
+ */
 function addnews_for_user()
 {
 	global $translation_namespace;
 	// this works just like addnews, except it can be used to add a message
 	// to a different player other than the triggering player.
 	$args = func_get_args();
-	$user = array_shift($args); //extract user
-	$news = array_shift($args); //extract news
+	$user = array_shift($args);
+	$news = array_shift($args);
 	$hidefrombio = false;
 
 	if (count($args)>0){
 		$arguments=array();
-		foreach ($args as $key=>$val) {
+		foreach($args as $key=>$val){
 			if ($key==count($args)-1 && $val===true){
 				//if the last argument is true, we're hiding from bio;
 				//don't put this in the array.

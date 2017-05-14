@@ -6,6 +6,7 @@
 require_once 'common.php';
 require_once 'lib/commentary.php';
 require_once 'lib/http.php';
+require_once 'lib/superusernav.php';
 
 tlschema("petition");
 
@@ -13,8 +14,6 @@ check_su_access(SU_EDIT_PETITIONS);
 
 addcommentary();
 
-require_once 'lib/superusernav.php';
-superusernav();
 
 //WHEN 0 THEN 2 WHEN 1 THEN 3 WHEN 2 THEN 7 WHEN 3 THEN 5 WHEN 4 THEN 1 WHEN 5 THEN 0 WHEN 6 THEN 4 WHEN 7 THEN 6
 $statuses = [
@@ -28,7 +27,7 @@ $statuses = [
 	2 => '`iClosed`i',
 ];
 
-$statuses = modulehook("petition-status", $statuses);
+$statuses = modulehook("petition-status", $status);
 $statuses = translate_inline($statuses);
 
 $op = httpget("op");
@@ -51,11 +50,14 @@ if (trim(httppost('insertcommentary'))!="") {
 //	$op="";
 //}
 page_header("Petition Viewer");
+superusernav();
 if ($op==""){
 	$sql = "DELETE FROM " . DB::prefix("petitions") . " WHERE status=2 AND closedate<'".date("Y-m-d H:i:s",strtotime("-7 days"))."'";
 	DB::query($sql);
+	if(DB::affected_rows()) {
+		invalidatedatacache("petition_counts");
+	}
 	$setstat = httpget("setstat");
-	invalidatedatacache("petition_counts");
 	if ($setstat!=""){
 		$sql = "SELECT status FROM " . DB::prefix("petitions") . " WHERE petitionid='$id'";
 		$result = DB::query($sql);
@@ -63,6 +65,7 @@ if ($op==""){
 		if ($row['status']!=$setstat){
 			$sql = "UPDATE " . DB::prefix("petitions") . " SET status='$setstat',closeuserid='{$session['user']['acctid']}',closedate='".date("Y-m-d H:i:s")."' WHERE petitionid='$id'";
 			DB::query($sql);
+			invalidatedatacache("petition_counts");
 		}
 	}
 	reset($statuses);
@@ -145,24 +148,19 @@ if ($op==""){
 	$mark = translate_inline("Mark");
 
 	rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$num</th><th>$ops</th><th>$from</th><th>$sent</th><th>$com</th><th>$last</th><th>$when</th></tr></thead>");
-	$i=0;
 	$laststatus = -1;
 	$catcount = [];
 	while($row = DB::fetch_assoc($result)){
-		if (isset($catcount[$row['status']])) $catcount[$row['status']]++;
-			else $catcount[$row['status']]=1;
-		$i=!$i;
+        if (isset($catcount[$row['status']])) $catcount[$row['status']]++;
+		else $catcount[$row['status']]=1;
 		$sql = "SELECT count(commentid) AS c FROM ". DB::prefix("commentary") .  " WHERE section='pet-{$row['petitionid']}'";
 		$res = DB::query($sql);
 		$counter = DB::fetch_assoc($res);
-
 		if (array_key_exists('status', $row) && $row['status']!=$laststatus){
-
-			rawoutput("<tr'>");
+			rawoutput("<tr>");
 			rawoutput("<td colspan='7' class='".strtolower(color_sanitize($statuses[$row['status']]))."'>");
 			output_notl("%s", color_sanitize($statuses[$row['status']]), true);
 			rawoutput("</td></tr>");
-			$i=1;
 			$laststatus=$row['status'];
 		}
 		rawoutput("<tr>");
@@ -181,7 +179,6 @@ if ($op==""){
 		//output_notl("<a data-tooltip='".color_sanitize($statuses[6])."' href='viewpetition.php?setstat=6&id={$row['petitionid']}'>`%B`0</a>/",true);
 		//output_notl("<a data-tooltip='".color_sanitize($statuses[7])."' href='viewpetition.php?setstat=7&id={$row['petitionid']}'>`#A`0</a>",true);
 		rawoutput(" ]</td>");
-
 		addnav("","viewpetition.php?op=view&id={$row['petitionid']}");
 		addnav("","viewpetition.php?setstat=2&id={$row['petitionid']}");
 		addnav("","viewpetition.php?setstat=0&id={$row['petitionid']}");
@@ -224,7 +221,6 @@ if ($op==""){
 		addnav(array("`t%s`t(%s)",$statuses[$categorynumber],$amount),"viewpetition.php?page=".((int)httpget('page')));
 	}
 
-	//end
 	output("`i(Closed petitions will automatically delete themselves when they have been closed for 7 days)`i");
 	output("`n`bKey:`b`n");
 	rawoutput("<ul><li>");
@@ -304,27 +300,22 @@ if ($op==""){
 			output("`2Category: %s`n",substr($line,strlen($category_check)-1));
 			rawoutput("</h2>");
 		}
-
 	}
-
-
 	output("`@From: ");
 	if ($row['login']>"") {
-        // rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti").";return false;\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
-		rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></i></a>");
+		rawoutput("<a href=\"mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to=".rawurlencode($row['login'])."&body=".rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti").";return false;\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
 	}
 	output_notl("`^`b%s`b`n", $row['name']);
 	output("`@Date: `^`b%s`b (%s)`n", $row['date'], reltime(strtotime($row['date'])));
 	output("`@Status: %s`n", $statuses[$row['status']]);
-	if ($row['closer']!='') output("`@Last Update: `^%s`@ on `^%s (%s)`n", $row['closer'], $row['closedate'],  reltime(strtotime($row['closedate'])));
+	if($row['closedate']) output("`@Last Update: `^%s`@ on `^%s (%s)`n", $row['closer'], $row['closedate'],  reltime(strtotime($row['closedate'])));
 	output("`@Body:`^`n");
 	output("`\$[ipaddress] `^= `#%s`^`n", $row['ip']);
-	$body = htmlentities(stripslashes($row['body']), ENT_COMPAT, getsetting("charset", "UTF-8"));
-	// $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
+	$body = htmlentities(stripslashes($row['body']), ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
     $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".stripslashes($row['body'])))."'>\\1</a>",$body);
 	$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 	rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");
-	//position tracking
+    //position tracking
 	if ($row['body']!='') {
 		$pos=strpos($row['body'],"[abuseplayer]")+16;
 		$endpos=strpos($row['body'],chr(10),$pos);
@@ -334,12 +325,11 @@ if ($op==""){
 			if ($search!=0) modulehook("petition-abuse",array("acctid"=>$search,"abused"=>$row['author']));
 		}
 	}
-	commentdisplay("`n`@Commentary:`0`n", "pet-$id","Add information",200);
+    commentdisplay("`n`@Commentary:`0`n", "pet-$id","Add information",200);
 	if ($viewpageinfo){
 		output("`n`n`@Page Info:`&`n");
 		$row['pageinfo']=stripslashes($row['pageinfo']);
 		$body = HTMLEntities($row['pageinfo'], ENT_COMPAT, getsetting("charset", "UTF-8"));
-		// $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",URLEncode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
         $body = preg_replace("'([[:alnum:]_.-]+[@][[:alnum:]_.-]{2,}([.][[:alnum:]_.-]{2,})+)'i","<a href='mailto:\\1?subject=RE: $peti&body=".str_replace("+"," ",urlencode("\n\n----- $yourpeti -----\n".$row['body']))."'>\\1</a>",$body);
 		$body = preg_replace("'([\\[][[:alnum:]_.-]+[\\]])'i","<span class='colLtRed'>\\1</span>",$body);
 		rawoutput("<span style='font-family: fixed-width'>".nl2br($body)."</span>");

@@ -30,15 +30,12 @@ function rolldamage(){
 		debug("Adjusted creature attack: $creatureattack");
 		debug("Adjusted self defense: $adjustedselfdefense");
 		*/
-		//legacy support
 		if (!isset($badguy['physicalresistance'])) $badguy['physicalresistance']=0;
 		$powerattack=(int)getsetting('forestpowerattackchance',10);
 		$powerattackmulti=(float)getsetting('forestpowerattackmulti',3);
-		
 		while(!isset($creaturedmg) || !isset($selfdmg) || $creaturedmg==0 && $selfdmg==0){
 			$atk = get_player_attack()*$atkmod;
-			//power attack in all 20 turns
-			if (e_rand(1,20)==1 && $options['type'] != "pvp") $atk*=2;
+			if (mt_rand(1,20)==1 && $options['type'] != "pvp") $atk*=3;
 			/*
 			debug("Attack score: $atk");
 			*/
@@ -58,18 +55,16 @@ function rolldamage(){
 			$creaturedmg = 0-(int)($catkroll - $patkroll);
 			if ($creaturedmg<0) {
 				$creaturedmg = (int)($creaturedmg/2);
-				$creaturedmg = round($buffset['badguydmgmod'] *
-						$creaturedmg, 0);
-				$creaturedmg = min(0,round($creaturedmg-$badguy['physicalresistance']));						
+				$creaturedmg = round($buffset['badguydmgmod'] * $creaturedmg, 0);
+				$creaturedmg = min(0,round($creaturedmg-$badguy['physicalresistance']));
+
 			}
 			if ($creaturedmg > 0) {
 				$creaturedmg = round($buffset['dmgmod']*$creaturedmg,0);
-				//hit
-				$creaturedmg = max(0,round($creaturedmg-$badguy['physicalresistance']));			
+				$creaturedmg = max(0,round($creaturedmg-$badguy['physicalresistance']));
 			}
 			$pdefroll = bell_rand(0,$adjustedselfdefense);
 			$catkroll = bell_rand(0,$creatureattack);
-			//enemy power attack
 			if ($powerattack!=0 && $options['type']!='pvp') {
 				if (e_rand(1,$powerattack)==1) $catkroll*=$powerattackmulti;
 			}
@@ -85,8 +80,7 @@ function rolldamage(){
 			}
 			if ($selfdmg > 0) {
 				$selfdmg = round($selfdmg*$buffset['badguydmgmod'], 0);
-				//player gets hurt
-				$selfdmg = max(0,round($selfdmg-((int)get_player_physical_resistance()),0));				
+				$selfdmg = max(0,round($selfdmg-((int)get_player_physical_resistance()),0));
 			}
 		}
 	}else{

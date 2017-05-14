@@ -2,6 +2,20 @@
 //translator ready
 //addnews ready
 //mail ready
+/**
+ * Contains information for all the tables
+ *
+ * @copyright Copyright © 2002-2005, Eric Stevens & JT Traub, © 2006-2009, Dragonprime Development Team
+ * @version Lotgd 1.1.2 DragonPrime Edition
+ * @package Core
+ * @subpackage Library
+ * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ */
+/**
+ * Returns information on all the tables
+ *
+ * @return array Information on all the tables
+ */
 function get_all_tables()
 {
 return [
@@ -1634,5 +1648,3 @@ return [
 		],
 	];
 }
-?>
-
