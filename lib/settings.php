@@ -46,7 +46,7 @@ function clearsettings()
 	$settings = new settings("settings");
 }
 
-function getsetting($settingname, $default)
+function getsetting($settingname, $default = false)
 {
 	global $settings;
 
