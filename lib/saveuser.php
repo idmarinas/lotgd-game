@@ -21,6 +21,11 @@ function saveuser()
 		$session['user']['allowednavs'] = serialize($session['allowednavs']);
 		$session['user']['bufflist'] = serialize($session['bufflist']);
 		if (isset($companions) && is_array($companions)) $session['user']['companions'] = serialize($companions);
+
+        $everyhit_sql = "UPDATE ".DB::prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
+		//debug($everyhit_sql);
+		DB::query($everyhit_sql);
+
 		$sql = [];
 		reset($session['user']);
 		foreach ($session['user'] as $key => $val)
