@@ -380,6 +380,15 @@ return [
 			'columns'=>'acctid'
 		],
 		],
+    'accounts_everypage' => [
+        'acctid' => ['name' => 'acctid', 'type' => 'INT(11) UNSIGNED', 'null' => false, 'default' => 0],
+        'allowednavs' => ['name' => 'allowednavs', 'type' => 'MEDIUMTEXT'],
+        'laston' => ['name' => 'laston', 'type' => 'DATETIME', 'null' => false],
+        'gentime' => ['name' => 'gentime', 'type' => 'DOUBLE'],
+        'gentimecount' => ['name' => 'gentimecount', 'type' => 'INT(11) UNSIGNED'],
+        'gensize' => ['name' => 'gensize', 'type' => 'INT(11) UNSIGNED'],
+        'key-PRIMARY'=>[ 'name'=>'PRIMARY', 'type'=>'primary key', 'columns'=>'acctid'],
+    ],
 	'companions'=>[
 		'companionid'=>[
 			'name'=>'companionid', 'type'=>'int(11) unsigned', 'extra'=>'auto_increment',
@@ -1644,7 +1653,14 @@ return [
 			'name' => 'dk',
 			'type' => 'key',
 			'columns' => 'dk',
-			],
+			]
 		],
+        'whostyping' => [
+            'time' => ['name' => 'time', 'type' => 'INT(11) UNSIGNED', 'null' => false],
+            'name' => ['name' => 'name', 'type' => 'VARCHAR(255)', 'null' => false],
+            'section' => ['name' => 'section', 'type' => 'VARCHAR(255)', 'null' => false],
+            'key-PRIMARY' => ['name' => 'PRIMARY', 'type' => 'primary key', 'columns' => 'name'],
+        ]
+
 	];
 }
