@@ -1,10 +1,38 @@
 <?php
-$order=['2','3','1']; //arbitrary, this order the following hooks and whatnot
-
-foreach ($order as $current_rank) {
-	switch($current_rank){
+/**
+ * Page explaining what LotGD is
+ *
+ * This page is part of the about page system
+ * and is MightyE explaining what LotGD is. It
+ * also contains a way in which a server admin
+ * can display information about his/her server.
+ *
+ * @copyright Copyright © 2002-2005, Eric Stevens & JT Traub, © 2006-2009, Dragonprime Development Team
+ * @version Lotgd 1.1.2 DragonPrime Edition
+ * @package Core
+ * @subpackage Library
+ * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ */
+$order = [1,3,2];
+foreach ($order as $key => $val)
+{
+	switch($val)
+    {
 		case '3':
             //-- Notes for IDMarinas Edition
+			output_notl('`QIDMarinas edition');
+			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
+			output('This version is a forked version of 1.1.1 Dragonprime Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
+			output('If you want use this core, you need to be aware:`n<ul>',true);
+			output('<li>PHP 5.6 is a minimum requirement</li>', true);
+			output('<li>Came with others dependencies that need install.</li>', true);
+			output('<li><a href="https://bitbucket.org/idmarinas/lotgd-game/wiki/Home" target="_blank">More information of requirement and dependencies</a></li>', true);
+			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
+			output('`n`nI do not ship modules with it, most modules from 1.x.x DP Editions will work. However there is no guarantee... test them.`n');
+			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
+            output('In this version has code of +nb Edition by Oliver Brender %s', '(<a href="http://nb-core.org"  target="_blank">NB Core</a>)');
+			output_notl("`0`n`n");
+		break;            //-- Notes for IDMarinas Edition
 			output('`$For the original "Legend of the Green Dragon" #About information check more below.`0`n`n');
 			output_notl('`QIDMarinas edition');
 			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
@@ -26,13 +54,12 @@ foreach ($order as $current_rank) {
 		 * NOTICE
 		 */
 		rawoutput("<hr>");
-		$imprint = getsetting("impressum", ""); //yes, it's named impressum after the German word. We have to thank somebody for that - w00t
-		if ($imprint)
-        {
+		$impressum = getsetting("impressum", "");
+		if ($impressum > "") {
 			require_once 'lib/nltoappon.php';
-			output_notl("%s", nltoappon($imprint),true); //yes, HTML possible
+			output_notl("%s", nltoappon($impressum), true);
 		}
-		rawoutput("<br/><br/>");
+		rawoutput("<hr>");
 		break;
 	case "1":
 		/* NOTICE
@@ -40,7 +67,7 @@ foreach ($order as $current_rank) {
 		 * NOTICE Server Specific section above.
 		 * NOTICE
 		 */
-		output("`@Legend of the Green Dragon Engine`nBy Eric Stevens & JT Traub`n`n");
+		output("`@Legend of the Green Dragon`nBy Eric Stevens & JT Traub`n`n");
 		output("`cLoGD version ");
 		output_notl("$logd_version`c");
 		/*
@@ -96,11 +123,9 @@ foreach ($order as $current_rank) {
 		 */
 		break;
 	}
-	rawoutput("<hr>");
 }
 addnav("About LoGD");
 addnav("Game Setup Info","about.php?op=setup");
 addnav("Module Info","about.php?op=listmodules");
 addnav("License Info", "about.php?op=license");
 modulehook("about");
-?>

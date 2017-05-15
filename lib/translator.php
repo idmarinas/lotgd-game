@@ -187,8 +187,7 @@ function translate_loadnamespace($namespace, $language = false)
 $translatorbuttons = [];
 $seentlbuttons = [];
 function tlbutton_push($indata,$hot=false,$namespace=FALSE){
-	global $translatorbuttons;
-	global $translation_is_enabled,$seentlbuttons,$session,$language;
+	global $translatorbuttons, $translation_is_enabled, $seentlbuttons, $session, $language;
 	if (!$translation_is_enabled) return;
 	if (!$namespace) $namespace="unknown";
 	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR){
@@ -260,12 +259,9 @@ function translator_check_collect_texts()
 {
 	$tlmax = getsetting("tl_maxallowed",0);
 
-	if (getsetting("permacollect", 0))
-		savesetting("collecttexts", 1);
-	elseif ($tlmax && getsetting("OnlineCount", 0) <= $tlmax)
-		savesetting("collecttexts", 1);
-	else
-		savesetting("collecttexts", 0);
+	if (getsetting("permacollect", 0)) savesetting("collecttexts", 1);
+	elseif ($tlmax && getsetting("OnlineCount", 0) <= $tlmax) savesetting("collecttexts", 1);
+	else savesetting("collecttexts", 0);
 }
 
 ?>

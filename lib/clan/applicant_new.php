@@ -40,9 +40,7 @@
 				clanform();
 				addnav("Return to the Lobby","clan.php");
 			}else{
-				//too many stupids put < and > in their clanshort name -_-
-				$clanshort=str_replace("<","",$clanshort);
-				$clanshort=str_replace(">","",$clanshort);
+				$clanshort=str_replace(['<', '>'],"",$clanshort);
 				$sql = "SELECT * FROM " . DB::prefix("clans") . " WHERE clanshort='$clanshort'";
 				$result = DB::query($sql);
 				if (DB::num_rows($result)>0){
