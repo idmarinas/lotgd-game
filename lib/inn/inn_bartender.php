@@ -54,7 +54,7 @@ if ($act==""){
 			if (e_rand(0,100)<$chance){
 				output("%s`0 leans over the counter toward you.  \"`%What can I do for you, kid?`0\" he asks.",$barkeep);
 				addnav("What do you want?");
-				modulehook("bartenderbribe",array());
+				modulehook("bartenderbribe",[]);
 				if (getsetting("pvp",1)) {
 					addnav("Who's upstairs?","inn.php?op=bartender&act=listupstairs");
 				}

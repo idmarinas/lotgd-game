@@ -11,6 +11,7 @@ if ($dkills-$dp > 1) {
 	function pointsLeft() {
 			var form = document.getElementById(\"dkForm\");
 	";
+	reset($labels);
 	foreach($labels as $type=>$label) {
 		$head=explode(",",$label);
 		if (count($head)>1) continue; //got a headline here
@@ -19,6 +20,7 @@ if ($dkills-$dp > 1) {
 			";
 		}
 	}
+	reset($labels);
 	foreach($labels as $type=>$label) {
 		$head=explode(",",$label);
 		if (count($head)>1) continue; //got a headline here
@@ -52,6 +54,7 @@ if ($dkills-$dp > 1) {
 		rawoutput("<form id='dkForm' action='$link' method='POST'>");
 	addnav("",$link);
 	rawoutput("<br><table cellpadding='0' cellspacing='0' border='0' width='200'>");
+	reset($labels);
 	foreach($labels as $type=>$label) {
 		$head=explode(",",$label);//debug($label);
 		if (count($head)>1) {
@@ -79,6 +82,7 @@ if ($dkills-$dp > 1) {
 	rawoutput("</td></tr>");
 	rawoutput("</table>");
 	rawoutput("</form>");
+	reset($labels);
 	$count = 0;
 	foreach($labels as $type=>$label) {
 		$head=explode(",",$label);
@@ -89,10 +93,9 @@ if ($dkills-$dp > 1) {
 			$count++;
 		}
 	}
-}
-else
-{
+}else{
 	page_header("Dragon Points");
+	reset ($labels);
 	$dist = [];
 	foreach ($labels as $type=>$label) {
 		$head=explode(",",$label);
@@ -119,7 +122,7 @@ else
 	}
 	output("`n`nCurrently, the dragon points you have already spent are distributed in the following manner.");
 	rawoutput("<table class='ui very compact very basic collapsing centered table'>");
-
+	reset ($labels);
 	foreach ($labels as $type => $label)
     {
 		$head=explode(",",$label);
@@ -140,5 +143,6 @@ else
 		rawoutput("</td></tr>");
 	}
 	rawoutput("</table>");
+	rawoutput("</blockquote>");
 }
 ?>

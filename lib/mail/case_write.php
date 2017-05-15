@@ -5,7 +5,7 @@ $body = '';
 $row = '';
 $replyto = (int) httpget('replyto');
 $forwardto = (int) httppost('forwardto');
-
+if ($session['user']['superuser'] & SU_IS_GAMEMASTER) $from = httppost('from');
 if ($replyto>0) $msgid = $replyto;
 else $msgid = $forwardto;
 
@@ -13,20 +13,20 @@ if ($msgid > 0)
 {
 	$mail = DB::prefix("mail");
 	$accounts = DB::prefix("accounts");
-	$sql = "SELECT ".$mail.".sent,".$mail.".body,".$mail.".msgfrom, ".$mail.".subject,".$accounts.".login, ".$accounts.".superuser, ".$accounts.".name FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$msgid."\"";
+	$sql = "SELECT ".$mail.".sent,".$mail.".body,".$mail.".msgfrom, ".$mail.".subject,".$accounts.".login, ".$accounts.".superuser, ".$accounts.".name FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" AND messageid=\"".$replyto."\"";
 	$result = DB::query($sql);
 	if ($row = DB::fetch_assoc($result))
-	{
+    {
 		if ($row['login']=="" && $forwardto==0)
-		{
-			output("You cannot reply to a system message.`n`nPress the \"Back\" button in your browser to get back.");
+        {
+			output("You cannot reply to a system message.`n");
 			$row=array();
 			popup_footer();
 		}
 		if ($forwardto>0) $row['login']=0;
 	}
-	else
-	{
+    else
+    {
 		output("Eek, no such message was found!`n");
 	}
 }
@@ -36,14 +36,14 @@ if ($to)
 	$sql = "SELECT login,name, superuser FROM " . DB::prefix("accounts") . " WHERE login=\"$to\"";
 	$result = DB::query($sql);
 	if (!($row = DB::fetch_assoc($result)))
-	{
+    {
 		output("Could not find that person.`n");
 	}
 }
 if (is_array($row))
 {
 	if (isset($row['subject']) && $row['subject'])
-	{
+    {
 		if ((int)$row['msgfrom']==0){
 			$row['name']=translate_inline("`i`^System`0`i");
 			// No translation for subject if it's not an array
@@ -63,7 +63,7 @@ if (is_array($row))
 		}
 	}
 	if (isset($row['body']) && $row['body']){
-		$body="\n\n---".sprintf_translate(array("Original Message from %s(%s)",sanitize($row['name']),date("Y-m-d H:i:s",strtotime($row['sent']))))."---\n".$row['body'];
+		$body="\n\n---".sprintf_translate(array("Original Message from %s (%s)",sanitize($row['name']),date("Y-m-d H:i:s",strtotime($row['sent']))))."---\n".$row['body'];
 	}
 }
 rawoutput("<form action='mail.php?op=send' method='post' class='ui form'>");
@@ -71,7 +71,7 @@ rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslas
 $superusers = [];
 if (isset($row['login']) && $row['login'] != '')
 {
-	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
+	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
 	output("`2To: `^%s`n",$row['name']);
 	if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 		array_push($superusers,$row['login']);
@@ -79,19 +79,17 @@ if (isset($row['login']) && $row['login'] != '')
 }
 else
 {
-	rawoutput('<div class="inline field"></label>');
+    rawoutput('<div class="inline field"></label>');
 	output("`2To: ");
-	rawoutput('</label>');
-	$to = httppost('to');
-	$sql = "SELECT login,name,superuser FROM ".DB::prefix('accounts')." WHERE login = '".addslashes($to)."' AND locked = 0";
+	rawoutput('</label>');	$to = httppost('to');
+	$sql = "SELECT login,name,superuser FROM accounts WHERE login = '".addslashes($to)."' AND locked = 0";
 	$result = DB::query($sql);
 	$count = DB::num_rows($result);
 	if($count != 1)
-	{
+    {
 		$string="%";
 		$to_len = strlen($to);
-		for($x=0; $x < $to_len; ++$x)
-		{
+		for($x=0; $x < $to_len; ++$x) {
 			$string .= $to{$x}."%";
 		}
 		$sql = "SELECT login,name,superuser FROM " . DB::prefix("accounts") . " WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
@@ -99,16 +97,16 @@ else
 		$count = DB::num_rows($result);
 	}
 	if ($count == 1)
-	{
+    {
 		$row = DB::fetch_assoc($result);
-		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
+		output_notl("<input type='hidden' id='to' name='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
 		output_notl("`^{$row['name']}`n");
 		if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 			array_push($superusers,$row['login']);
 		}
 	}
-	elseif ($count == 0)
-	{
+    elseif ($count == 0)
+    {
 		output("`\$No one was found who matches \"%s\".`n",stripslashes($to));
 		output("`@Please try again.`n");
 		httpset('prepop', $to, true);
@@ -116,12 +114,12 @@ else
 		require 'lib/mail/case_address.php';
 		popup_footer();
 	}
-	else
-	{
+    else
+    {
 		output_notl("<select class='ui dropdown' name='to' id='to' onchange='check_su_warning();'>",true);
 		$superusers = array();
 		while($row = DB::fetch_assoc($result))
-		{
+        {
 			output_notl("<option value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">",true);
 			require_once 'lib/sanitize.php';
 			output_notl("%s", full_sanitize($row['name']));
@@ -131,7 +129,6 @@ else
 		}
 		output_notl("</select>`n",true);
 	}
-	rawoutput('</div>');
 }
 rawoutput("<script type='text/javascript'>var superusers = new Array();");
 foreach($superusers as $val)
@@ -142,7 +139,6 @@ rawoutput("</script><div class='inline field'><label>");
 output("`2Subject:");
 rawoutput("</label><input name='subject' value=\"".htmlentities($subject,ENT_COMPAT, getsetting("charset","UTF-8")).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\"></div>");
 rawoutput("<div id='warning' style='visibility: hidden; display: none;' class='ui warning message'>");
-//superuser messages do not get translated.
 output("`bNotice:`b %s",$superusermessage);
 rawoutput("</div><div class='inline field'><label>");
 output("`2Body:");

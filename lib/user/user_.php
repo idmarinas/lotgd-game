@@ -19,7 +19,7 @@ if ($display == 1){
 	$conf = translate_inline("Are you sure you wish to delete this user?");
 	$ban = translate_inline("Ban");
 	$log = translate_inline("Log");
-		rawoutput("<table class='ui very compact striped selectable table'>");
+	rawoutput("<table class='ui very compact striped selectable table'>");
 	rawoutput("<thead><tr><th>$ops</th><th><a href='user.php?sort=acctid$q'>$acid</a></th><th><a href='user.php?sort=login$q'>$login</a></th><th><a href='user.php?sort=name$q'>$nm</a></th><th><a href='user.php?sort=level$q'>$lev</a></th><th><a href='user.php?sort=laston$q'>$lon</a></th><th><a href='user.php?sort=gentimecount$q'>$hits</a></th><th><a href='user.php?sort=lastip$q'>$lip</a></th><th><a href='user.php?sort=uniqueid$q'>$lid</a></th><th><a href='user.php?sort=emailaddress$q'>$email</a></th></tr></thead>");
 	addnav("","user.php?sort=acctid$q");
 	addnav("","user.php?sort=login$q");

@@ -9,14 +9,15 @@ if (!$skipgraveyardtext) {
 	output("The plaque above the door reads `\$%s`), Overlord of Death`).",$deathoverlord);
 	modulehook("graveyard-desc");
 }
+
 addnav("S?Return to the Shades","shades.php");
-if ($session['user']['gravefights']) {
+if ($session['user']['gravefights'])
+{
 	addnav("Torment");
 	addnav("Look for Something to Torment","graveyard.php?op=search");
 }
 addnav("Places");
 addnav("W?List Warriors","list.php");
 addnav("M?Enter the Mausoleum","graveyard.php?op=enter");
-modulehook("graveyard");
 module_display_events("graveyard", "graveyard.php");
 ?>

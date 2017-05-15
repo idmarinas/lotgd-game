@@ -11,9 +11,9 @@ if (isset($post['validation_error']) && $post['validation_error']) {
 	tlschema();
 	output("Unable to change settings: `\$%s`0", $post['validation_error']);
 } else {
-	output_notl("`n");
+	reset($post);
 	foreach ($post as $key=>$val) {
-		output("`\$Setting '`2%s`\$' to '`2%s`\$'`n", $key, stripslashes($val));
+		output('`$Setting "`2%s`$" to "`2%s`$"`n', $key, stripslashes($val));
 		$sql = "REPLACE INTO " . DB::prefix("module_userprefs") . " (modulename,userid,setting,value) VALUES ('$module','$userid','$key','$val')";
 		DB::query($sql);
 	}

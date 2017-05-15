@@ -24,6 +24,8 @@ if (count($post)>0)
 		if (!$post['cancelpetition']){
 			$sql = "INSERT INTO " . DB::prefix("petitions") . " (author,date,body,pageinfo,ip,id) VALUES (".(int)$session['user']['acctid'].",'$date',\"".addslashes(output_array($post))."\",\"".addslashes(output_array($session,"Session:"))."\",'{$_SERVER['REMOTE_ADDR']}','".addslashes($_COOKIE['lgi'])."')";
 			DB::query($sql);
+			// Fix the counter
+			invalidatedatacache("petitioncounts");
 			// If the admin wants it, email the petitions to them.
 			if (getsetting("emailpetitions", 0)) {
 				// Yeah, the format of this is ugly.
@@ -33,7 +35,7 @@ if (count($post)>0)
 					"http://".$_SERVER['SERVER_NAME'] .
 					($_SERVER['SERVER_PORT']==80?"":":".$_SERVER['SERVER_PORT']) .
 					dirname($_SERVER['REQUEST_URI']));
-				if (!preg_match("/\/$/", $url)) {
+				if (!preg_match("/\\/$/", $url)) {
 					$url = $url . "/";
 					savesetting("serverurl", $url);
 				}
@@ -70,7 +72,7 @@ else
 	output("Petitions about problems we already know about just take up time we could be using to fix those problems.`b`c`n");
 	rawoutput("<form action='petition.php?op=submit' method='POST' class='ui form'>");
 	if ($session['user']['loggedin'])
-	{
+    {
 		rawoutput('<div class="inline field"><label>');
 		output("Your Character's Name:");
 		output_notl("%s", $session['user']['name']);
@@ -81,8 +83,8 @@ else
 		rawoutput("</label><input type='hidden' name='email' value=\"".htmlentities($session['user']['emailaddress'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
 		rawoutput('</div>');
 	}
-	else
-	{
+    else
+    {
 		rawoutput('<div class="inline field"><label>');
 		output("Your Character's Name: ");
 		rawoutput("</label><input name='charname' value=''>");
@@ -109,13 +111,13 @@ else
 	rawoutput('</label>');
 	$abuse = httpget("abuse");
 	if ($abuse == "yes")
-	{
+    {
 		rawoutput("<textarea name='description'></textarea>");
 		rawoutput("<input type='hidden' name='abuse' value=\"".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."\"><br><hr><pre>".stripslashes(htmlentities(httpget("problem")))."</pre><hr><br>");
 		rawoutput("<input type='hidden' name='abuseplayer' value=\"".httpget('abuseplayer')."\">");
 	}
-	else
-	{
+    else
+    {
 		rawoutput("<textarea name='description'>".stripslashes_deep(htmlentities(httpget("problem"), ENT_COMPAT, getsetting("charset", "UTF-8")))."</textarea>");
 	}
 	rawoutput('</div>');
