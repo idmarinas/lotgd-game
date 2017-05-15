@@ -382,12 +382,12 @@ return [
 		],
     'accounts_everypage' => [
         'acctid' => ['name' => 'acctid', 'type' => 'INT(11) UNSIGNED', 'null' => false, 'default' => 0],
-        'allowednavs' => ['name' => 'allowednavs', 'type' => 'MEDIUMTEXT'],
+        'allowednavs' => ['name' => 'allowednavs', 'type' => 'MEDIUMTEXT', 'null' => true],
         'laston' => ['name' => 'laston', 'type' => 'DATETIME', 'null' => false],
-        'gentime' => ['name' => 'gentime', 'type' => 'DOUBLE'],
-        'gentimecount' => ['name' => 'gentimecount', 'type' => 'INT(11) UNSIGNED'],
-        'gensize' => ['name' => 'gensize', 'type' => 'INT(11) UNSIGNED'],
-        'key-PRIMARY'=>[ 'name'=>'PRIMARY', 'type'=>'primary key', 'columns'=>'acctid'],
+        'gentime' => ['name' => 'gentime', 'type' => 'DOUBLE', 'null' => true],
+        'gentimecount' => ['name' => 'gentimecount', 'type' => 'INT(11) UNSIGNED', 'null' => true],
+        'gensize' => ['name' => 'gensize', 'type' => 'INT(11) UNSIGNED', 'null' => true],
+        'key-PRIMARY'=>[ 'name'=>'PRIMARY', 'type'=>'primary key', 'columns'=>'acctid', 'null' => true],
     ],
 	'companions'=>[
 		'companionid'=>[
