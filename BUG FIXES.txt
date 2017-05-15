@@ -1,0 +1,38 @@
+• common.php
+	Removal of session_register(), replaced with session_start().
+• create.php
+	Fixing of ability to use same name as another, with multiple spaces.
+• dragon.php
+	Dragonkills incremented on page after kill, to prevent timing out to stay at level 15, but keeping the new dragonkill.
+• payment.php
+	Trim the IPN validation response.
+• prefs.php
+	Change from split() to explode().
+• rawsql.php
+	Switched the debuglog() and db_query(), so that the db_error() function is connected to the latter, instead of the former.
+• lib/datetime.php
+	checkday() does not redirect to the new day page if there are posted variables (e.g. commentary, prefs, etc.) to prevent loss of entered text.
+• lib/errorhandling.php
+	set_magic_quotes_runtime() removed.
+• lib/events.php
+	Change from split() to explode().
+• lib/forms.php
+	Crash-safe event added to keep value of chat input in case the browser or tab crashes.
+• lib/installer/installer_stage_1.php
+	Removal of <base> tags, so that the installation is smooth-running, and doesn't link to the commons lincense website.
+• lib/modules.php
+	"showFormTabIndex" not saved as a module setting, object pref or user pref.
+• lib/pageparts.php
+	Change from split() to explode().
+• lib/pullurl.php
+	Change from split() to explode().
+	"if (function_exists("curl_init")) return _curl($url);" removed.
+	"curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);" removed.
+• lib/settings.php
+	"showFormTabIndex" not saved as a game setting.
+• lib/showform.php
+	Change from split() to explode().
+• lib/su_access.php
+	Fixed usage of $_SERVER['HTTP_REFERER'] variable.
+• lib/tabldescriptor.php
+	Replace ") Type=$type"; with ") engine=$type";
