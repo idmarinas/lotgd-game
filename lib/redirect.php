@@ -25,17 +25,11 @@ function redirect($location,$reason=false)
 	restore_buff_fields();
 	$session['debug'].="Redirected to $location from $REQUEST_URI.  $reason<br>";
 	saveuser();
-	//header("Location: $location");
 	$host  = $_SERVER['HTTP_HOST'];
 	if ($_SERVER['SERVER_PORT']==443) $http="https";
 		else $http="http";
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	header("Location: $http://$host$uri/$location");
-	// obsolete
-	//echo "<html><head><meta http-equiv='refresh' content='0;url=$location'></head></html>";
-	//echo "<a href='$location'>$location</a><br><br>";
-	//$session['debug']="$http://$host$uri/$location";
-	//echo $location;
 
 	// we should never hit this one here. in case we do, show the debug output along with some text
 	// this might be the case if your php session handling is messed up or something.

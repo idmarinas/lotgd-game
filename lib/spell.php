@@ -36,7 +36,7 @@ function spell($input,$words=false,$prefix="<span style='border: 1px dotted #FF0
 		$input = preg_split("/([<>])/",$input,-1,PREG_SPLIT_DELIM_CAPTURE);
 		$intag = false;
 		$output = "";
-		foreach ($input as $val) {
+		foreach ($input as $key => $val) {
 			if ($val=="<"){
 				$intag = true;
 			}elseif ($val==">"){
@@ -47,7 +47,7 @@ function spell($input,$words=false,$prefix="<span style='border: 1px dotted #FF0
 					preg_split("/([\t\n\r[:space:]-])/",
 						$val,-1,PREG_SPLIT_DELIM_CAPTURE);
 				$val = "";
-				foreach ($line as $v) {
+				foreach ($line as $k => $v) {
 					$lookups = array();
 					$i=0;
 					//look for common variations on words

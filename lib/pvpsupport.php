@@ -111,7 +111,10 @@ function pvpvictory($badguy, $killedloc, $options=false)
 
 	$lostexp = round($badguy['creatureexp']*getsetting("pvpdeflose",5)/100,0);
 
-	debuglog("gained $winamount ({$badguy['creaturegold']} base) gold and $wonexp exp (loser lost $lostexp) for killing ", $badguy['acctid']);
+//	debuglog("gained $winamount ({$badguy['creaturegold']} base) gold and $wonexp exp (loser lost $lostexp) for killing ", $badguy['acctid']);
+	//player wins gold and exp from badguy
+	debuglog("started the fight and defeated {$badguy['creaturename']} in $killedloc (earned $winamount of {$badguy['creaturegold']} gold and $wonexp of $lostexp exp)",false,$session['user']['acctid']);
+	debuglog("was victim and has been defeated by {$session['user']['name']} in $killedloc (lost {$badguy['creaturegold']} gold and $lostexp exp, actor tooks $winamount gold and $wonexp exp)",false,$badguy['acctid']);
 
 	$args=array('pvpmessageadd'=>"", 'handled'=>false, 'badguy'=>$badguy, 'options'=>$options);
 	$args = modulehook("pvpwin", $args);
@@ -136,9 +139,8 @@ function pvpvictory($badguy, $killedloc, $options=false)
 			$mailmessage);
 	// /\- Gunnar Kreitz
 
-	//EXP fixed in 1.2.0
-
 	$sql = "UPDATE " . DB::prefix("accounts") . " SET alive=0, goldinbank=(goldinbank+IF(gold<{$badguy['creaturegold']},gold-{$badguy['creaturegold']},0)),gold=IF(gold<{$badguy['creaturegold']},0,gold-{$badguy['creaturegold']}), experience=IF(experience>=$lostexp,experience-$lostexp,0) WHERE acctid=".(int)$badguy['acctid']."";
+
 	debuglog($sql,(int)$badguy['acctid'],$session['user']['acctid']);
 	DB::query($sql);
 	return $args['handled'];
@@ -166,7 +168,7 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 	$row = DB::fetch_assoc($result);
 
 	$wonexp = round($session['user']['experience']*getsetting("pvpdefgain",10)/100,0);
-	if (getsetting('pvphardlimit',0)) {
+    if (getsetting('pvphardlimit',0)) {
 		$max=getsetting('pvphardlimitamount',15000);
 		if ($wonexp>$max) $wonexp=$max;
 	}
@@ -198,12 +200,15 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 	if ($row['level'] >= $badguy['creaturelevel']) {
 		// Only give the reward if the person didn't level down
 		$sql = "UPDATE " . DB::prefix("accounts") . " SET gold=gold+".$winamount.", experience=experience+".$wonexp." WHERE acctid=".(int)$badguy['acctid']."";
-		debuglog($sql);
 		DB::query($sql);
 	}
 
 	$session['user']['alive']=false;
-	debuglog("lost {$session['user']['gold']} ($winamount to winner) gold and $lostexp exp ($wonexp to winner) being slain by ", $badguy['acctid']);
+	//debuglog("lost {$session['user']['gold']} ($winamount to winner) gold and $lostexp exp ($wonexp to winner) being slain by ", $badguy['acctid']);
+
+	debuglog("started the fight and has been defeated by {$badguy['creaturename']} in $killedloc (lost {$session['user']['gold']} gold and $lostexp exp, victim tooks $winamount gold and $wonexp exp)",false,$session['user']['acctid']);
+	debuglog("was the victim and won aginst {$session['user']['name']} in $killedloc (earned $winamount gold and $wonexp exp)",false,$badguy['acctid']);
+
 	$session['user']['gold']=0;
 	$session['user']['hitpoints']=0;
 	$session['user']['experience'] =

@@ -11,8 +11,8 @@
 function register_global(&$var){
 	if (!is_array($var)) return;
 	foreach ($var as $key=>$val) {
-		global $$key;
-		$$key = $val;
+		global ${$key};
+		${$key} = $val;
 	}
 }
 ?>

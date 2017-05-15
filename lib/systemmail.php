@@ -2,11 +2,12 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("lib/is_email.php");
-require_once("lib/safeescape.php");
-require_once("lib/sanitize.php");
+require_once 'lib/is_email.php';
+require_once 'lib/safeescape.php';
+require_once 'lib/sanitize.php';
 
 function systemmail($to,$subject,$body,$from=0,$noemail=false){
+	global $session;
 	$sql = "SELECT prefs,emailaddress FROM " . DB::prefix("accounts") . " WHERE acctid='$to'";
 	$result = DB::query($sql);
 	$row = DB::fetch_assoc($result);
@@ -36,7 +37,7 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		}
 	}
 
-	$sql = "INSERT INTO " . DB::prefix("mail") . " (msgfrom,msgto,subject,body,sent) VALUES ('".(int)$from."','".(int)$to."','$subject','$body','".date("Y-m-d H:i:s")."')";
+	$sql = "INSERT INTO " . DB::prefix("mail") . " (msgfrom,msgto,subject,body,sent,originator) VALUES ('".$from."','".(int)$to."','$subject','$body','".date("Y-m-d H:i:s")."', ".($session['user']['acctid']).")";
 	DB::query($sql);
 	invalidatedatacache("mail-$to");
 	$email=false;
@@ -81,7 +82,7 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		$body = preg_replace("'[`]n'", "\n", $body);
 		$body = full_sanitize($body);
 		$subject = htmlentities(full_sanitize($subject), ENT_COMPAT, getsetting("charset", "UTF-8"));
-		require("lib/settings_extended.php");
+		require_once 'lib/settings_extended.php';
 		$subj = translate_mail($settings_extended->getSetting('notificationmailsubject'),$to);
 		$msg = translate_mail($settings_extended->getSetting('notificationmailtext'),$to);
 		$replace=array(
@@ -97,12 +98,7 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		$mailbody=str_replace($keys,$values,$msg);
 		$mailsubj=str_replace($keys,$values,$subj);
 		$mailbody=str_replace("`n","\n\n",$mailbody);
-
-		require_once("lib/sendmail.php");
-		$to=array($emailadd=>$toline);
-		$from=array(getsetting("gameadminemail","postmaster@localhost")=>getsetting("gameadminemail","postmaster@localhost"));
-		send_email($to,$mailbody,$mailsubj,$from,false,"text/plain");
-//		mail($row['emailaddress'],$mailsubj,str_replace("`n","\n",$mailbody),$header);
+		lotgd_mail($row['emailaddress'],$mailsubj,str_replace("`n","\n",$mailbody));
 	}
 	invalidatedatacache("mail-$to");
 }

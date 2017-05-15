@@ -20,29 +20,15 @@ function saveuser()
 
 		$session['user']['allowednavs'] = serialize($session['allowednavs']);
 		$session['user']['bufflist'] = serialize($session['bufflist']);
-		//if (isset($companions)&& is_array($companions)) $session['user']['companions']=serialize($companions);
-
-		/*
-		accounts_everypage table includes:
-			acctid (primary key, unique)
-			allowednavs
-			laston
-			gentime
-			gentimecount
-			gensize
-		*/
-
-		$everyhit_sql = "UPDATE ".DB::prefix("accounts_everypage")." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date("Y-m-d H:i:s")."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
-		//debug($everyhit_sql);
-		DB::query($everyhit_sql);
-
+		if (isset($companions) && is_array($companions)) $session['user']['companions'] = serialize($companions);
 		$sql = [];
+		reset($session['user']);
 		foreach ($session['user'] as $key => $val)
-		{
+        {
 			if (is_array($val)) $val = serialize($val);
 			//only update columns that have changed.
 			if (isset($baseaccount[$key]) && $baseaccount[$key] != $val)
-			{
+            {
 				$sql[] = "`$key` = '".addslashes($val)."'";
 			}
 		}
@@ -52,15 +38,15 @@ function saveuser()
 			" WHERE acctid = ".$session['user']['acctid'];
 		DB::query($sql);
 		if (isset($session['output']) && $session['output'])
-		{
+        {
 			$sql_output = "REPLACE INTO " . DB::prefix("accounts_output") . " VALUES ({$session['user']['acctid']}, '".addslashes(gzcompress($session['output'], 1))."');";
 			$result = DB::query($sql_output);
 		}
 		unset($session['bufflist']);
 		$session['user'] = [
 			"acctid" => $session['user']['acctid'],
-			"login" => $session['user']['login'],
-		];
+			"login" => $session['user']['login']
+        ];
 	}
 }
-?>
+

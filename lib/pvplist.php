@@ -23,13 +23,13 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 	$days = getsetting("pvpimmunity", 5);
 	$exp = getsetting("pvpminexp", 1500);
 	$clanrankcolors=array("`!","`#","`^","`&", "`\$");
-	$id = $session['user']['acctid'];
-	$levdiff  = getsetting('pvprange',2);
-	$lev1 = $session['user']['level']-$levdiff+1;
-	$lev2 = $session['user']['level']+$levdiff;
-	$last = date("Y-m-d H:i:s",strtotime("-".getsetting("LOGINTIMEOUT", 900)." sec"));
 
 	if ($sql === false) {
+        $levdiff  = getsetting('pvprange',2);
+		$lev1 = $session['user']['level']-1;
+		$lev2 = $session['user']['level']+2;
+		$last = date("Y-m-d H:i:s", strtotime("-".getsetting("LOGINTIMEOUT", 900)." sec"));
+		$id = $session['user']['acctid'];
 		$loc = addslashes($location);
 
 		$sql = "SELECT acctid, name, race, alive, location, sex, level, laston, " .
@@ -42,7 +42,6 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 			"(age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) " .
 			($levdiff==-1?"":"AND (level>=$lev1 AND level<=$lev2)")." AND (alive=1) " .
 			"AND (laston<'$last' OR loggedin=0) AND (acctid<>$id) " .
-			"AND location='$loc' ".
 			"ORDER BY location='$loc' DESC, location, level DESC, " .
 			"experience DESC, dragonkills DESC";
 	}
@@ -64,18 +63,18 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 	$att = translate_inline("Attack");
 
 	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<tr class='trhead'><td>$n</td><td>$l</td><td>$loc</td><td>$ops</td></tr>");
+	rawoutput("<thead>tr><th>$n</th><th>$l</th><th>$loc</th><th>$ops</th></tr></thead>");
 	$loc_counts = array();
 	$num = count($pvp);
 	$j = 0;
 	for ($i=0;$i<$num;$i++){
 		$row = $pvp[$i];
 
-		if (isset($row['silentinvalid']) && $row['silentinvalid']) continue;
-		//if (!isset($loc_counts[$row['location']]))
-		//	$loc_counts[$row['location']] = 0;
-		//$loc_counts[$row['location']]++;
-		//if ($row['location'] != $location) continue;
+		if (isset($row['invalid']) && $row['invalid']) continue;
+		if (!isset($loc_counts[$row['location']]))
+			$loc_counts[$row['location']] = 0;
+		$loc_counts[$row['location']]++;
+		if ($row['location'] != $location) continue;
 		$j++;
 		$biolink="bio.php?char=".$row['acctid']."&ret=".urlencode($_SERVER['REQUEST_URI']);
 		addnav("", $biolink);
@@ -97,7 +96,7 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 		rawoutput("<td>[ <a href='$biolink'>$bio</a> | ");
 		if($row['pvpflag']>$pvptimeout){
 			output("`i(Attacked too recently)`i");
-		}elseif ($location!=$row['location'] && (!isset($row['anylocation']) || !$row['anylocation'])){
+		}elseif ($location!=$row['location']){
 			output("`i(Can't reach them from here)`i");
 		}elseif (isset($row['invalid']) && $row['invalid']!="") {
 			if ($row['invalid']==1) $row['invalid']=translate_inline("Unable to attack");
@@ -110,32 +109,22 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 		rawoutput("</tr>");
 	}
 
-	$sql="SELECT count(location) as counter, location FROM ".DB::prefix('accounts').
-			" WHERE (locked=0) " .
-			"AND (slaydragon=0) AND " .
-			"(age>$days OR dragonkills>0 OR pk>0 OR experience>$exp) " .
-			($levdiff==-1?"":"AND (level>=$lev1 AND level<=$lev2)")." AND (alive=1) " .
-			"AND (laston<'$last' OR loggedin=0) AND (acctid<>$id) " .
-			"AND location!='$loc' GROUP BY location ORDER BY location; ";
-	$result=DB::query($sql);
-
-	if ($j==0){
+	if (!isset($loc_counts[$location]) || $loc_counts[$location]==0){
 		$noone = translate_inline("`iThere are no available targets.`i");
 		output_notl("<tr><td align='center' colspan='4'>$noone</td></tr>", true);
 	}
 	rawoutput("</table>",true);
 
-	if (DB::num_rows($result)!= 0) {
+	if ($num != 0 && (!isset($loc_counts[$location]) || $loc_counts[$location] != $num)) {
 		output("`n`n`&As you listen to different people around you talking, you glean the following additional information:`n");
-		while ($row=DB::fetch_assoc($result)) {
-			$loc=$row['location'];
-			$count=$row['counter'];
+		foreach ($loc_counts as $loc=>$count) {
+			if ($loc == $location) continue;
 			$args = modulehook("pvpcount", array('count'=>$count,'loc'=>$loc));
 			if (isset($args['handled']) && $args['handled']) continue;
 			if ($count == 1) {
-				output("`&There is `^%s`& person sleeping in %s whom you might find interesting.`0`n", $count, $loc);
+			output("`&There is `^%s`& person sleeping in %s whom you might find interesting.`0`n", $count, $loc);
 			} else {
-				output("`&There are `^%s`& people sleeping in %s whom you might find interesting.`0`n", $count, $loc);
+			output("`&There are `^%s`& people sleeping in %s whom you might find interesting.`0`n", $count, $loc);
 			}
 		}
 	}
