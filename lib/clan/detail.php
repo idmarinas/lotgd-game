@@ -73,16 +73,14 @@
 	//end
 	while ($row=DB::fetch_assoc($result)){
 		$tot += $row['dragonkills'];
-		rawoutput("<tr>");
-		rawoutput("<td>");
+		rawoutput("<tr><td>");
 		output_notl($ranks[$row['clanrank']]); //translated earlier
 		rawoutput("</td><td>");
 		$link = "bio.php?char=".$row['acctid']."&ret=".urlencode($_SERVER['REQUEST_URI']);
 		rawoutput("<a href='$link'>");
 		addnav("", $link);
 		output_notl("`&%s`0", $row['name']);
-		rawoutput("</a>");
-		rawoutput("</td><td align='center'>");
+		rawoutput("</a></td><td align='center'>");
 		output_notl("`\$%s`0", $row['dragonkills']);
 		rawoutput("</td><td>");
 		output_notl("`3%s`0", $row['clanjoindate']);

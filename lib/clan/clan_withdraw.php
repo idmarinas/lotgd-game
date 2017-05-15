@@ -2,7 +2,7 @@
 		modulehook("clan-withdraw", array('clanid'=>$session['user']['clanid'], 'clanrank'=>$session['user']['clanrank'], 'acctid'=>$session['user']['acctid']));
 		if ($session['user']['clanrank']>=CLAN_LEADER){
 			//first test to see if we were the leader.
-			$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts") . " WHERE clanid={$session['user']['clanid']} AND clanrank>=".CLAN_LEADER." AND acctid<>{$session['user']['acctid']}";
+			$sql = "SELECT count(1) AS c FROM " . DB::prefix("accounts") . " WHERE clanid={$session['user']['clanid']} AND clanrank>=".CLAN_LEADER." AND acctid<>{$session['user']['acctid']}";
 			$result = DB::query($sql);
 			$row = DB::fetch_assoc($result);
 			if ($row['c']==0){
@@ -27,7 +27,7 @@
 					$sql = "UPDATE " . DB::prefix("accounts") . " SET clanid=0,clanrank=".CLAN_APPLICANT.",clanjoindate='0000-00-00 00:00:00' WHERE clanid={$session['user']['clanid']}";
 					DB::query($sql);
 					output("`^As you were the last member of this clan, it has been deleted.");
-					require_once("lib/gamelog.php");
+					require_once 'lib/gamelog.php';
 					gamelog("Clan ".$session['user']['clanid']." has been deleted, last member gone","Clan");
 				}
 			}else{
@@ -43,7 +43,7 @@
 		$result = DB::query($sql);
 		$withdraw_subj = array("`\$Clan Withdraw: `&%s`0",$session['user']['name']);
 		$msg = array("`^One of your clan members has resigned their membership.  `&%s`^ has surrendered their position within your clan!",$session['user']['name']);
-		$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($withdraw_subj))."'"; //addslashes for names with ' inside
+		$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($withdraw_subj))."'";
 		DB::query($sql);
 		while ($row = DB::fetch_assoc($result)){
 			systemmail($row['acctid'],$withdraw_subj,$msg);

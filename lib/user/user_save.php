@@ -22,7 +22,7 @@ foreach ($post as $key=>$val) {
 			if ($val>"") {
 				$sql.="password=\"".md5(md5($val))."\",";
 				$updates++;
-				output("`\$Password value has been updated.`0`n");
+				output('`$Password value has been updated.`0`n');
 				debuglog($session['user']['name']."`0 changed password to $val",$userid);
 				if ($session['user']['acctid']==$userid) {
 					$session['user']['password']=md5(md5($val));
@@ -45,14 +45,14 @@ foreach ($post as $key=>$val) {
 			if ((int)$value != (int)$oldvalues['superuser']){
 				$sql.="$key = \"$value\",";
 				$updates++;
-				output("`\$Superuser values have changed.`0`n");
+				output('`$Superuser values have changed.`0`n');
 				if ($session['user']['acctid']==$userid) {
 					$session['user']['superuser']=$value;
 				}
-				debuglog($session['user']['name']."`0 changed superuser to ".show_bitfield($value),$userid) . "`n";
+				debuglog($session['user']['name']."`0 changed superuser to ".show_bitfield($value),$userid);
 				debug("superuser has changed to $value");
 			}
-		} elseif ($key=="name33" && stripslashes($val)!=$oldvalues[$key]) {
+		} elseif ($key=="name" && stripslashes($val)!=$oldvalues[$key]) {
 			$updates++;
 			$tmp = sanitize_colorname(getsetting("spaceinname", 0),
 					stripslashes($val), true);
@@ -74,9 +74,9 @@ foreach ($post as $key=>$val) {
 			if ($session['user']['acctid']==$userid) {
 				$session['user']['name'] = $newname;
 			}
-		}
+        }
 		elseif ($key == "title" && isset($oldvalues[$key]) && stripslashes($val)!=$oldvalues[$key])
-		{
+        {
 			$updates++;
 			$tmp = sanitize_colorname(true, stripslashes($val), true);
 			$tmp = preg_replace("/[`][cHw]/", "", $tmp);

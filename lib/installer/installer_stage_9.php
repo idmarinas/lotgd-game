@@ -13,7 +13,7 @@ output("`n`@Table Synchronization Logs:`n");
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 $descriptors = descriptors($DB_PREFIX);
 reset($descriptors);
-while (list($tablename,$descriptor) = each($descriptors))
+foreach ($descriptors as $tablename => $descriptor)
 {
 	output("`3Synchronizing table `#$tablename`3..`n");
 	synctable($tablename,$descriptor,true);

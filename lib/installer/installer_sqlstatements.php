@@ -34,6 +34,7 @@ return [
 	'1.0.6' => [],
 	'1.1.0 Dragonprime Edition' => include 'lib/installer/versions/1-1-0-Dragonprime-Edition.php',
 	'1.1.1 Dragonprime Edition' => include 'lib/installer/versions/1-1-1-Dragonprime-Edition.php',
+	'1.1.2 Dragonprime Edition' => [],
 	'1.1.1.0 Dragonprime Edition +nb' => include 'lib/installer/versions/1-1-1-0-Dragonprime-Edition-+nb.php',
 	'1.1.1.1 Dragonprime Edition +nb'=> include 'lib/installer/versions/1-1-1-1-Dragonprime-Edition-+nb.php',
 	'1.0.0 IDMarinas Edition' => [],//-- Only need for my server

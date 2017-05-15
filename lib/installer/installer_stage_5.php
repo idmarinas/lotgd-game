@@ -40,9 +40,8 @@ foreach($result as $row)
 }
 
 $missing = count($descriptors)-$game;
-//looks like an upgrade
-if ($missing*10 < $game) $upgrade = true;
-else $upgrade = false;
+if ($missing*10 < $game) $upgrade=true; //looks like an upgrade
+else $upgrade=false;
 
 if (httpget('type') == 'install') $upgrade = false;
 if (httpget('type') == 'upgrade') $upgrade = true;
@@ -100,16 +99,14 @@ foreach($result as $row)
 rawoutput("</table>");
 //done
 
-// rawoutput("<form action='installer.php?stage=5' method='POST'>");
 output("`nTo provide a table prefix, enter it here.");
 output("If you don't know what this means, you should either leave it blank, or enter an intuitive value such as \"logd\".`n");
 output("`n`$ For now, prefix not are supported.`0`n`n");
-// rawoutput("<input name='DB_PREFIX' value=\"".htmlentities($session['dbinfo']['DB_PREFIX'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\"><br>");
+// rawoutput("<form action='installer.php?stage=5' method='POST'>");
+// rawoutput("<input name='DB_PREFIX' value=\"".htmlentities($session['dbinfo']['DB_PREFIX'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"><br>");
 // $submit = translate_inline("Submit your prefix.");
 // rawoutput("<input type='submit' value='$submit' class='button'>");
 // rawoutput("</form>");
-if (count($conflict)==0){
-	output("`^It looks like you can probably safely skip this step if you don't know what it means.");
-}
+if (count($conflict)==0) output("`^It looks like you can probably safely skip this step if you don't know what it means.");
 output("`n`n`@Once you have submitted your prefix, you will be returned to this page to select the next step.");
 output("If you don't need a prefix, just select the next step now.");

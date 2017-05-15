@@ -53,4 +53,3 @@ else
 	header("Location: installer.php?stage=".($stage+1));
 	exit();
 }
-?>

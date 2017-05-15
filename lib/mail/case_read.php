@@ -109,4 +109,3 @@ else
 {
 	output("Eek, no such message was found!");
 }
-?>

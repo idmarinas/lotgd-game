@@ -12,7 +12,9 @@ if ($subop=="xml"){
 		DB::prefix("bans") . ".uniqueid<>''))";
 	$r = DB::query($sql);
 	echo "<xml>";
-	while ($ro = DB::fetch_assoc($r)) {
+	$number=DB::num_rows($r);
+	for ($x=0;$x<$number;$x++){
+		$ro = DB::fetch_assoc($r);
 		echo "<name name=\"";
 		echo urlencode(appoencode("`0{$ro['name']}"));
 		echo "\"/>";
@@ -106,7 +108,7 @@ $dur = translate_inline("Duration");
 $mssg = translate_inline("Message");
 $aff = translate_inline("Affects");
 $l = translate_inline("Last");
-	rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead");
+rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead");
 $i=0;
 while ($row = DB::fetch_assoc($result)) {
 	$liftban = translate_inline("Lift&nbsp;ban");
