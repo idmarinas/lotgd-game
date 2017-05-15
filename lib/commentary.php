@@ -19,26 +19,20 @@ function commentarylocs()
 
 	$vname = getsetting('villagename', LOCATION_FIELDS);
 	$iname = getsetting('innname', LOCATION_INN);
-	tlschema('commentary');
-	$comsecs['village'] = sprintf_translate("%s Square", $vname);
-	if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) {
-		$comsecs['superuser']=translate_inline("Grotto");
-	}
+	$comsecs['village'] = sprintf_translate('%s Square', $vname);
+	if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) $comsecs['superuser'] = translate_inline('Grotto');
 	$comsecs['shade']=translate_inline('Land of the Shades');
 	$comsecs['grassyfield']=translate_inline('Grassy Field');
-	$comsecs['inn']="$iname";
+	$comsecs['inn'] = $iname;
 	$comsecs['motd']=translate_inline('MotD');
 	$comsecs['veterans']=translate_inline('Veterans Club');
 	$comsecs['hunterlodge']=translate_inline("Hunter's Lodge");
 	$comsecs['gardens']=translate_inline('Gardens');
 	$comsecs['waiting']=translate_inline('Clan Hall Waiting Area');
-	if (getsetting("betaperplayer", 1) == 1 && @file_exists('pavilion.php')) $comsecs['beta']=translate_inline('Pavilion');
-
-	tlschema();
+	if (getsetting('betaperplayer', 1) == 1 && file_exists('pavilion.php')) $comsecs['beta']=translate_inline('Pavilion');
 	// All of the ones after this will be translated in the modules.
 	$comsecs = modulehook('moderate', $comsecs);
 	rawoutput(tlbutton_clear());
-
 	return $comsecs;
 }
 
@@ -249,9 +243,15 @@ function addcommentary()
 	}
 }
 
+/**
+ * Lets gamemasters put in comments without a user association...be careful, it is not trackable who posted it
+ *
+ * @param string $section
+ * @param string $comment
+ * @return void
+ */
 function injectsystemcomment($section, $comment)
 {
-
 	if (strncmp($comment, "/game", 5) !== 0) $comment = "/game" . $comment;
 	injectrawcomment($section, 0, $comment);
 }

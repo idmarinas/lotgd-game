@@ -1,6 +1,6 @@
 <?php
-//this is a setup where all the creatures are generated. 
-$creaturetats=array();
+//this is a setup where all the creatures are generated.
+$creaturetats = [];
 $creatureexp=14;
 $creaturegold=36;
 $maxlevel = getsetting('maxlevel',15);
@@ -15,14 +15,14 @@ for ($i=1;$i<=($maxlevel+4);$i++) {
 		$creaturegold+=31*($i<4?2:1);
 		//give lower levels more gold
 	}
-	$creaturestats[$i]=array(
-		'creaturelevel'=>$i,
-		'creaturehealth'=>$creaturehealth,
-		'creatureattack'=>$creatureattack,
-		'creaturedefense'=>$creaturedefense,
-		'creatureexp'=>$creatureexp,
-		'creaturegold'=>$creaturegold,
-		);
+	$creaturestats[$i] = [
+		'creaturelevel' => $i,
+		'creaturehealth' => $creaturehealth,
+		'creatureattack' => $creatureattack,
+		'creaturedefense' => $creaturedefense,
+		'creatureexp' => $creatureexp,
+		'creaturegold' => $creaturegold,
+	];
 }
 function creature_stats($level){
 	$creaturestats[$level];

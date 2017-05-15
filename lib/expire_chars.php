@@ -15,7 +15,7 @@ if ($lastexpire < $needtoexpire){
 	$trash = getsetting("expiretrashacct",1);
 
 	# First, get the account ids to delete the user prefs.
-	$sql1 = "SELECT login,acctid,dragonkills,level FROM " . DB::prefix("accounts") . " WHERE (superuser&".NO_ACCOUNT_EXPIRATION.")=0 AND (1=0\n".($old>0?"OR (laston < \"".date("Y-m-d H:i:s",strtotime("-$old days"))."\")\n":"").($new>0?"OR (laston < \"".date("Y-m-d H:i:s",strtotime("-$new days"))."\" AND level=1 AND dragonkills=0)\n":"").($trash>0?"OR (laston < \"".date("Y-m-d H:i:s",strtotime("-".($trash+1)." days"))."\" AND level=1 AND experience < 10 AND dragonkills=0)\n":"").")";
+	$sql1 = "SELECT login,acctid,dragonkills,level FROM " . DB::prefix("accounts") . " WHERE (superuser&".NO_ACCOUNT_EXPIRATION.")=0 AND (1=0\n".($old>0?"OR (laston < \"".date("Y-m-d H:i:s",strtotime("-$old days"))."\")\n":"").($new>0?"OR (laston < \"".date("Y-m-d H:i:s",strtotime("-$new days"))."\" AND level=1 AND dragonkills=0)\n":"").($trash>0?"OR (regdate < date_add(NOW(),interval -".$trash." day) AND laston < regdate)\n":"").")";
 	$result1 = DB::query($sql1);
 	$acctids = array();
 	$pinfo = array();
@@ -26,7 +26,7 @@ if ($lastexpire < $needtoexpire){
 	$dks = 0;
 	while($row1 = DB::fetch_assoc($result1)) {
 		require_once("lib/charcleanup.php");
-		char_cleanup($row1['acctid'], CHAR_DELETE_AUTO);
+		if(!char_cleanup($row1['acctid'], CHAR_DELETE_AUTO)) continue;
 		array_push($acctids,$row1['acctid']);
 		array_push($pinfo,"{$row1['login']}:dk{$row1['dragonkills']}-lv{$row1['level']}");
 		if ($row1['dragonkills']==0) {
@@ -73,12 +73,12 @@ if ($lastexpire < $needtoexpire){
 	$mheader  = 'MIME-Version: 1.0' . "\r\n";
 	$mheader .= 'Content-type: text/plain; charset='.getsetting('charset','UTF-8'). "\r\n";
 	$mheader .= 'From: '.getsetting("gameadminemail","postmaster@localhost")."\r\n";
-	$collector=array();
+	$collector = [];
 	while ($row = DB::fetch_assoc($result)) {
 		lotgd_mail($row['emailaddress'],$subject,str_replace("{charname}",$row['login'],$message),$mheader);
 		$collector[]=$row['acctid'];
 	}
-	if ($collector!=array()) {
+	if (! empty($collector)) {
 		$sql = "UPDATE " . DB::prefix("accounts") . " SET sentnotice=1 WHERE acctid IN (".implode(",",$collector).");";
 		DB::query($sql);
 	}

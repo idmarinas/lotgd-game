@@ -320,15 +320,15 @@ function autosettarget($localenemies) {
  * @param string $activate The stage of activation. Can be one of these: "fight", "defend", "heal" or "magic".
  * @return array The changed companion
  */
-function report_companion_move(&$badguy,$companion, $activate="fight") {
-	global $session,$creatureattack,$creatureatkmod,$adjustment;
+function report_companion_move($companion, $activate="fight") {
+	global $badguy,$session,$creatureattack,$creatureatkmod,$adjustment;
 	global $creaturedefmod,$defmod,$atkmod,$atk,$def,$count,$defended,$needtosstopfighting;
 
 	if (isset($companion['suspended']) && $companion['suspended'] == true) {
 		return $companion;
 	}
 	if ($activate == "fight" && isset($companion['abilities']['fight']) && $companion['abilities']['fight'] == true && $companion['used'] == false) {
-		$roll = rollcompaniondamage($badguy,$companion);
+		$roll = rollcompaniondamage($companion);
 		$damage_done = $roll['creaturedmg'];
 		$damage_received = $roll['selfdmg'];
 		if ($damage_done==0){
@@ -363,7 +363,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 			$session['user']['hitpoints'] += $hptoheal;
 			$companion['used'] = true;
 			$msg = $companion['healmsg'];
-			if ($msg == "") $msg = "{companion} heals your wounds. You regenerate {damage} hitpoint(s).";
+			if ($msg == "") $msg = "{companion} heals your wounds. You regenerate {damage} hitpoints.";
 			$msg = substitute_array("`)".$msg."`0`n", array("{companion}","{damage}"),array($companion['name'],$hptoheal));
 			tlschema(isset($companion['schema'])?$companion['schema']:"battle");
 			output($msg);
@@ -378,7 +378,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 				if ($mycompanion['hitpoints'] >= $mycompanion['maxhitpoints'] || $healed || (isset($companion['cannotbehealed']) && $companion['cannotbehealed'] == true)) {
 					continue;
 				} else {
-					$hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints]']);
+					$hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints']);
 					$mycompanion['hitpoints'] += $hptoheal;
 					$companion['used'] = true;
 					$msg = $companion['healcompanionmsg'];
@@ -407,7 +407,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 							if ($mycompanion['hitpoints'] >= $mycompanion['maxhitpoints'] || $healed) {
 								continue;
 							} else {
-								$hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints]']);
+								$hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints']);
 								$mycompanion['hitpoints'] += $hptoheal;
 								$companion['used'] = true;
 								$msg = $companion['healcompanionmsg'];
@@ -426,7 +426,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 		} // else						// comments.
 		unset($mynewcompanions);
 		unset($mycompanions);
-		$roll = rollcompaniondamage($badguy,$companion);
+		$roll = rollcompaniondamage($companion);
 		$damage_done = $roll['creaturedmg'];
 		$damage_received = $roll['selfdmg'];
 		if ($badguy['creaturehealth'] >= 0) {
@@ -443,7 +443,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 		$companion['used'] = true;
 	} else if ($activate == "defend" && isset($companion['abilities']['defend']) && $companion['abilities']['defend'] == true && $defended == false && $companion['used'] == false) {
 		$defended = 1;
-		$roll = rollcompaniondamage($badguy,$companion);
+		$roll = rollcompaniondamage($companion);
 		$damage_done = $roll['creaturedmg'];
 		$damage_received = $roll['selfdmg'];
 		if ($damage_done==0){
@@ -469,7 +469,7 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 		}
 		$companion['used'] = true;
 	} else if ($activate == "magic" && isset($companion['abilities']['magic']) && $companion['abilities']['magic'] == true && $companion['used'] == false) {
-		$roll = rollcompaniondamage($badguy,$companion);
+		$roll = rollcompaniondamage($companion);
 		$damage_done = abs($roll['creaturedmg']);
 		if ($damage_done==0){
 			$msg = $companion['magicfailmsg'];
@@ -501,14 +501,13 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
 	}
 	if ($companion['hitpoints'] <= 0) {
 		if (isset($companion['dyingtext']) && $companion['dyingtext']>"") {
-			$msg = $companion['dyingtext'];
+			$msg = translate_inline($companion['dyingtext']);
 		} else {
-			$msg = "`5Your companion catches his last breath before it dies.";
+			$msg = translate_inline("`5Your companion catches his last breath before it dies.");
 		}
 		$msg = substitute_array("`)".$msg."`0`n", array("{companion}"), array($companion['name']));
 		tlschema(isset($companion['schema'])?$companion['schema']:"battle");
-		output($msg);
-		output_notl("`0`n");
+		output_notl("`5".$msg."`0`n");
 		tlschema();
 		if (isset($companion['cannotdie']) && $companion['cannotdie'] == true) {
 			$companion['hitpoints'] = 0;
@@ -527,8 +526,8 @@ function report_companion_move(&$badguy,$companion, $activate="fight") {
  * @return array
  */
 
-function rollcompaniondamage($badguy,$companion){
-	global $creatureattack,$creatureatkmod,$adjustment,$options;
+function rollcompaniondamage($companion){
+	global $badguy,$creatureattack,$creatureatkmod,$adjustment,$options;
 	global $creaturedefmod,$compdefmod,$compatkmod,$buffset,$atk,$def;
 
 	if ($badguy['creaturehealth']>0 && $companion['hitpoints']>0){
@@ -613,7 +612,7 @@ function rollcompaniondamage($badguy,$companion){
  */
 function battle_spawn($creature) {
 	global $enemies, $newenemies, $badguy,$nextindex;
-	if (!is_array($newenemies)) $newenemies=array();
+	if (!is_array($newenemies)) $newenemies = [];
 	if (!isset($nextindex)) {
 		$nextindex = count($enemies);
 	} else {

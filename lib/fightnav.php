@@ -41,7 +41,7 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false)
 		if (($auto == 1 || ($auto == 2 && !$allowflee)) && count($newenemies)==1) {
 			addnav("U?Until End", $script."op=fight&auto=full");
 		} elseif ($auto == 1 || ($auto == 2 && !$allowflee)) {
-			addnav("U?Until first enemy dies", $script."op=fight&auto=full");
+			addnav("U?Until current enemy dies", $script."op=fight&auto=full");
 		}
 	}
 
@@ -49,7 +49,6 @@ function fightnav($allowspecial=true, $allowflee=true,$script=false)
 	if (!$session['user']['alive']){
 		modulehook("fightnav-graveyard", array("script"=>$script));
 	}
-
 	if ($allowspecial) {
 		addnav("Special Abilities");
 		modulehook("fightnav-specialties", array("script"=>$script));
