@@ -24,7 +24,7 @@ function checkban($login=false){
 	//first, remove bans, then select them.
 	DB::query("DELETE FROM " . DB::prefix("bans") . " WHERE banexpire < NOW() AND banexpire>'0000-00-00 00:00:00'");
 
-	$sql = "SELECT * FROM " . DB::prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00' OR banexpire>=NOW()";
+	$sql = "SELECT * FROM " . DB::prefix("bans") . " where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00' OR banexpire>=NOW())";
 	$result = DB::query($sql);
 	if (DB::num_rows($result)>0){
 		$session=array();
