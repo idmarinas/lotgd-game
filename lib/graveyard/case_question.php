@@ -1,8 +1,8 @@
 <?php
 
-addnav("G?Return to the Graveyard","graveyard.php");
 addnav("Places");
 addnav("S?Land of the Shades","shades.php");
+addnav("G?Return to the Graveyard","graveyard.php");
 addnav("Souls");
 if ($favortoheal>0) addnav(array("Restore Your Soul (%s favor)",$favortoheal),"graveyard.php?op=restore");
 
@@ -65,7 +65,7 @@ for ($i=0;$i<$length;$i++) {
 	addnav(array("%s`) (%s favors)",$linktext[$i],$favorcostlist[$i]),$linklist[$i]);
 	if (isset($textlist[$i]) && $textlist[$i]!="") {
 		$textlist[$i]=str_replace("{deathoverlord}",$deathoverlord,$textlist[$i]);
-		output_notl($textlist[$i]);	
+		output_notl($textlist[$i]);
 	}
 }
 addnav("Other");

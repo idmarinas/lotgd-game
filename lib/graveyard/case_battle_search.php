@@ -31,12 +31,12 @@ if ($session['user']['gravefights']<=0){
 
 		// Make graveyard creatures easier.
 		$badguy['creaturedefense'] = (int)((9 + $shift + (($level-1) * 1.5)));
-		$badguy['creaturedefense'] *= .8;
+		$badguy['creaturedefense'] *= .7;
 		if (isset($badguy['creatureaiscript'])) {
 			$aiscriptfile=$badguy['creatureaiscript'].".php";
 			if (file_exists($aiscriptfile)) {
 				//file there, get content and put it into the ai script field.
-				$badguy['creatureaiscript']="require_once('".$aiscriptfile."');";
+				$badguy['creatureaiscript'] = " require_once '{$aiscriptfile}';";
 			}
 			else
 			{
@@ -47,17 +47,14 @@ if ($session['user']['gravefights']<=0){
 		require_once("lib/bell_rand.php");
 		$atk=get_player_attack();
 		$def=get_player_defense();
-		//$badguy['creatureattack']*=1.7+round($atk/(10 + round(($session['user']['level'] - 1) )));
-		//$badguy['creaturedefense']*=1.6+round($def/(10 + round(($session['user']['level'] - 1))));
 		$modificator = 1.5;
 		$badguy['creatureattack']=max(2,$atk-bell_rand(2,ceil($level/$modificator)+$modificator*sqrt($session['user']['dragonkills'])));
 		$badguy['creaturedefense']=max(2,$def-bell_rand(2,ceil($level/$modificator)+$modificator*sqrt($session['user']['dragonkills'])));
 		$badguy['creaturehealth'] = $level * 5 + 50+ round($session['user']['dragonkills']*2);
-		$badguy['creatureexp'] = e_rand(10,15)+round($level/3);
+		$badguy['creatureexp'] = e_rand(10 + round($level/3), 20 + round($level/3));
 		$badguy['creaturelevel'] = $level;
 		$attackstack['enemies'][0] = $badguy;
 		$attackstack['options']['type'] = 'graveyard';
-
 
 		//no multifights currently, so this hook passes the badguy to modify
 		$attackstack = modulehook("graveyardfight-start",$attackstack);

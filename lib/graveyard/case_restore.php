@@ -12,9 +12,8 @@ if ($session['user']['soulpoints']<$max){
 	output("`\$%s`) sighs and mumbles something about, \"`7just 'cause they're dead, does that mean they don't have to think?`)\"`n`n",$deathoverlord);
 	output("Perhaps you'd like to actually `ineed`i restoration before you ask for it.");
 }
-addnav("G?Return to the Graveyard","graveyard.php");
 addnav("Places");
 addnav("S?Land of the Shades","shades.php");
+addnav("G?Return to the Graveyard","graveyard.php");
 addnav("Souls");
 addnav(array("Question `\$%s`0 about the worth of your soul",$deathoverlord),"graveyard.php?op=question");
-?>
