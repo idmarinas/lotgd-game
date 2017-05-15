@@ -401,9 +401,10 @@ if (0 == $session['user']['superuser'])
 
 if (!isset($session['user']['hashorse'])) $session['user']['hashorse']=0;
 $playermount = getmount($session['user']['hashorse']);
-$temp_comp = @unserialize($session['user']['companions']);
+if (isset($session['user']['companions'])) $temp_comp = unserialize($session['user']['companions']);
+else $temp_comp = [];
 $companions = [];
-if(is_array($temp_comp)) {
+if(! empty($temp_comp)) {
 	foreach ($temp_comp as $name => $companion) {
 		if (is_array($companion)) {
 			$companions[$name] = $companion;
