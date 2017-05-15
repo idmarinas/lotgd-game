@@ -6,7 +6,7 @@ function httpget($var){
 	global $HTTP_GET_VARS;
 
 	$res = isset($_GET[$var]) ? $_GET[$var] : false;
-	if ($res == "") {
+	if ($res === false || $res == '') {
 		$res = isset($HTTP_GET_VARS[$var]) ? $HTTP_GET_VARS[$var] : false;
 	}
 	return $res;
@@ -26,7 +26,7 @@ function httppost($var){
 	global $HTTP_POST_VARS;
 
 	$res = isset($_POST[$var]) ? $_POST[$var] : false;
-	if ($res == "") {
+	if ($res === false || $res == '') {
 		$res = isset($HTTP_POST_VARS[$var]) ?
 			$HTTP_POST_VARS[$var] : false;
 	}
@@ -37,7 +37,7 @@ function httppostisset($var) {
 	global $HTTP_POST_VARS;
 
 	$res = isset($_POST[$var]) ? 1 : 0;
-	if ($res == "") {
+	if ($res === 0) {
 		$res = isset($HTTP_POST_VARS[$var]) ? 1 : 0;
 	}
 	return $res;
@@ -64,6 +64,7 @@ function postparse($verify=false, $subval=false){
 	if ($subval) $var = $_POST[$subval];
 	else $var = $_POST;
 
+	reset($var);
 	$sql = "";
 	$keys = "";
 	$vals = "";
@@ -81,9 +82,13 @@ function postparse($verify=false, $subval=false){
 }
 
 /**
- * Return base url
+ * Return base url of game
+ *
+ * @param false|string $file
+ *
+ * @return string
  */
-function baseUrl($file = false)
+function lotgd_base_url($file = false)
 {
 	$basename = (!$file ? basename($_SERVER['SCRIPT_NAME']) : $file);
 	if ($basename)
@@ -95,4 +100,17 @@ function baseUrl($file = false)
 
 	return  $baseUrl;
 }
-?>
+
+/**
+ * Deprecated
+ */
+function baseUrl($file = false)
+{
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 2.1.0; and delete in version 3.0.0 please use "%s" instead',
+        __METHOD__,
+		'lotgd_base_url'
+    ), E_USER_DEPRECATED);
+
+    return lotgd_base_url($file);
+}

@@ -6,19 +6,19 @@ function get_partner($player=false)
 		$session['user']['prefs']['sexuality'] = ! $session['user']['sex'];
 	if ($player === false)
 	{
-		$partner = getsetting("barmaid", "`%Violet");
+		$partner = getsetting("barmaid");
 		if ($session['user']['prefs']['sexuality'] == SEX_MALE) {
-			$partner = getsetting("bard", "`^Seth");
+			$partner = getsetting("bard");
 		}
 	}
 	else
 	{
 		if ($session['user']['marriedto'] == INT_MAX)
 		{
-			$partner = getsetting("barmaid", "`%Violet");
+			$partner = getsetting("barmaid");
 			if ($session['user']['prefs']['sexuality'] == SEX_MALE)
 			{
-				$partner = getsetting("bard", "`^Seth");
+				$partner = getsetting("bard");
 			}
 		}
 		else

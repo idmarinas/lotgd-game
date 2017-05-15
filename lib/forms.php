@@ -48,21 +48,31 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	if ($talkline !== false) {
 		rawoutput("	if (t.substr(0,2)=='::'){
 						x=2;
+						out += '</span><span class=\\'colLtWhite\\'>';
 					}else if (t.substr(0,1)==':'){
 						x=1;
+						out += '</span><span class=\\'colLtWhite\\'>';
 					}else if (t.substr(0,3)=='/me'){
-						x=3;");
+						x=3;
+						out += '</span><span class=\\'colLtWhite\\'>';");
 		if ($session['user']['superuser']&SU_IS_GAMEMASTER) {
 			rawoutput("
 					}else if (t.substr(0,5)=='/game'){
-						x=5;");
+						x=5;
+						out = '<span class=\\'colLtWhite\\'>';");
 		}
 		rawoutput("	}else{
-						out += '</span><span class=\\'colDkCyan\\'> ".addslashes(appoencode($talkline))." \"</span><span class=\\'$usercol\\'>';
+						out += '</span><span class=\\'colDkCyan\\'> ".addslashes(appoencode($talkline)).", \"</span><span class=\\'$usercol\\'>';
 						end += '</span><span class=\\'colDkCyan\\'>\"';
 					}");
 	}
 	if ($showcharsleft == true) {
+/*		if (translate_inline($talkline,$schema)!="says")
+		$tll = strlen(translate_inline($talkline,$schema))+11;
+		else $tll=0;  // Don't know why needed
+		rawoutput("	if (x!=0) {
+						if (max.maxlength!=200-$tll) max.maxlength=200-$tll;
+						l=200-$tll; */ // Don't know why needed
 		rawoutput("	if (x!=0) {
 						if (max.maxLength!=255) max.maxLength=255;
 						l=255;
@@ -145,6 +155,8 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 									out += '</span><span class=\\'colBlack\\'>';
 								}else if (z=='j'){
 									out += '</span><span class=\\'colMdGrey\\'>';
+								}else if (z=='J'){
+									out += '</span><span class=\\'colMdBlue\\'>';
 								}else if (z=='e'){
 									out += '</span><span class=\\'colDkRust\\'>';
 								}else if (z=='E'){
@@ -198,9 +210,9 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	rawoutput("<div id='previewtext$nid'></div><div class='ui action input'>");
 	if (!is_array($info)) {
 		if ($default) {
-			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);' value='$default'>");
+			rawoutput("<input type='text' name='$name' id='input$nid' {$autocomplete} maxlength='255' onKeyUp='previewtext$name(document.getElementById(\"input$name\").value,255);' value='$default'>");
 		} else {
-			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." maxlength='255' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,255);'>");
+			rawoutput("<input type='text' name='$name' id='input$nid' {$autocomplete} maxlength='255' onKeyUp='previewtext$name(document.getElementById(\"input$name\").value,255);'>");
 		}
 	} else {
 		if (isset($info['maxlength'])) {
@@ -211,7 +223,7 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 		if (isset($info['type']) && $info['type'] == 'textarea') {
 			rawoutput("<textarea name='$name' id='input$nid' onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
 		} else {
-			rawoutput("<input type='text' name='$name' id='input$nid' ".$autocomplete." onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
+			rawoutput("<input type='text' name='$name' id='input$nid' {$autocomplete} onKeyUp='previewtext$nid(document.getElementById(\"input$nid\").value,$l);' ");
 		}
 		foreach ($info as $key=>$val){
 			rawoutput("$key='$val'");
@@ -233,6 +245,15 @@ function previewfield($name, $startdiv=false, $talkline="says", $showcharsleft=t
 	if ($focus){
 		rawoutput("<script language='javascript'>document.getElementById('input".$nid."').focus();</script>");
 	}
+	rawoutput("
+		<script language='JavaScript'>
+			input$nid.addEvent('keyup', function(){
+				window.localStorage['value'] = input$nid.value;
+				window.localStorage['timestamp'] = (new Date()). getTime();
+			}, false);
+			input$nid.value = window.localStorage['value'];
+		</script>
+	");
 }
 
 function previewfield_countup($name,$maxchars=false,$default=""){
@@ -316,5 +337,3 @@ function previewfield_countup($name,$maxchars=false,$default=""){
 	rawoutput("<span id='charsleft$id'>0 Characters</span><br />");
 	rawoutput("<textarea name='$name' id='input$id' cols='60' rows='6' onKeyUp='previewtext$id(document.getElementById(\"input$id\").value);'>".$default."</textarea>");
 }
-
-?>

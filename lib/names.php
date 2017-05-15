@@ -20,28 +20,19 @@ function get_player_title($old=false) {
 function get_player_basename($old=false) {
 	global $session;
 	$name = "";
-	
-	// legacy support below!
 	$title = get_player_title($old);
 	if ($old===false) {
 		$name = $session['user']['name'];
-		$pname = $session['user']['playername'];
 	} else {
 		$name = $old['name'];
-		$pname = $old['playername'];
-	}
-	if ($pname!='') {
-		return (str_replace("`0", "", $pname));
 	}
 	if ($title) {
 		$x = strpos($name, $title);
 		if ($x !== false)
-			$pname = trim(substr($name,$x+strlen($title)));
+			$name = trim(substr($name,$x+strlen($title)));
 	}
 
-	$pname = str_replace("`0", "", $pname);
-	
-	return $pname;
+	return str_replace("`0", "", $name);
 }
 
 function change_player_name($newname, $old=false) {
@@ -51,14 +42,11 @@ function change_player_name($newname, $old=false) {
 	$newname = str_replace("`0", "", $newname);
 
 	$title = get_player_title($old);
-
-	//$session['user']['playername'] = str_replace("`0","",$newname);
-
 	if ($title) {
-		/*$x = strpos($newname, $title);
+		$x = strpos($newname, $title);
 		if ($x === 0)
 			$newname = trim(substr($newname, $x+strlen($title)));
-		*/$newname =  $title . " " . $newname . "`0";
+		$newname =  $title . " " . $newname . "`0";
 	}
 	return $newname;
 }

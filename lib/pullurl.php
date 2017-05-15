@@ -28,6 +28,7 @@ function _curl($url)
 	// close curl resource, and free up system resources
 	curl_close($ch);
 
+	//$val = split("\n", $ret);
 	$val = explode("\n", $ret);
 	$total = count($val);
 	$cur = 0;
@@ -75,8 +76,8 @@ function _sock($url)
 	return $done;
 }
 
-function pullurl($url) {
-	//99% of all servers have basedir set - and will be even in PHP 6, so I am disabling curl here.
+function pullurl($url)
+{
 	//if (function_exists("curl_init")) return _curl($url);
 	// For some reason the socket code isn't working
 	//if (function_exists("fsockopen")) return _sock($url);
