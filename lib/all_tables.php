@@ -1655,12 +1655,11 @@ return [
 			'columns' => 'dk',
 			]
 		],
-        'whostyping' => [
-            'time' => ['name' => 'time', 'type' => 'INT(11) UNSIGNED', 'null' => false],
-            'name' => ['name' => 'name', 'type' => 'VARCHAR(255)', 'null' => false],
-            'section' => ['name' => 'section', 'type' => 'VARCHAR(255)', 'null' => false],
-            'key-PRIMARY' => ['name' => 'PRIMARY', 'type' => 'primary key', 'columns' => 'name'],
-        ]
-
-	];
+    'whostyping' => [
+        'time' => ['name' => 'time', 'type' => 'INT(11) UNSIGNED', 'null' => false],
+        'name' => ['name' => 'name', 'type' => 'VARCHAR(255)', 'null' => false],
+        'section' => ['name' => 'section', 'type' => 'VARCHAR(255)', 'null' => false],
+        'key-PRIMARY' => ['name' => 'PRIMARY', 'type' => 'primary key', 'columns' => 'name'],
+    ]
+];
 }
