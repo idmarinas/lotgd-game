@@ -32,7 +32,8 @@ else $memoryLimit = intval( $memoryLimit );
  }
 
 $executionTime = @ini_get('max_execution_time');
-if ($executionTime < 30)
+//-- For avoid error when execute xDebug or similar
+if ($executionTime < 30 && $executionTime != 0)
 {
 	$requirements_met = false;
 	$execution_met = false;
