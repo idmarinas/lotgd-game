@@ -32,6 +32,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
     * **lib/errorhandler.php**
     * **lib/expire_chars.php**
     * **lib/petition/pettion_default.php**
+* **lib/is_email.php** Now use Zend\\Validator component
 
 
 ### FEATURES
@@ -51,6 +52,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/lotgd_mail.php**
     * Add new function `lotgd_mail` Has the same structure as the php `mail()` function. But allow send mails in html format.
 * **source.php** new *modulehook* "source-illegal-files" for add files that you not want show code
+* **lib/http.php** new function `lotgd_base_url`
 
 ### DEPRECATED
 
@@ -79,7 +81,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/pageparts.php** possible unefined index
 * **lib/clan/clan_membership.php** styled using Semantic UI
 * **lib/clan/detail.php** styled using Semantic UI
-
+* **DataBase**, Missing tables added to database
 * Other minor bug fixes
 
 ### NOTES
