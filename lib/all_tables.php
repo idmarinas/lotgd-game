@@ -323,6 +323,7 @@ return [
 			'type'=>'datetime',
 			'default'=>'0000-00-00 00:00:00'
 		],
+        'chatloc' => [ 'name' => 'chatloc', 'type' => 'VARCHAR(255)', 'null' => false ],
 		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
