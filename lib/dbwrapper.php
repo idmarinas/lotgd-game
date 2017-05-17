@@ -70,28 +70,40 @@ Class DB
 		}
 	}
 
-	//-- Prefijos para las tablas, permite una clave, el nombre de la tabla correcto
+    /**
+     * Prefix for tables
+     *
+     * @param string|array $tablename Name of table
+     * @param false|string $force If you want to force a prefix
+     *
+     * @return string|array
+     */
 	public static function prefix($tablename, $force = false)
 	{
 		global $DB_PREFIX;
 
 		if ($force === false)
 		{
-			$special_prefixes = [];
-
 			// The following file should be used to override or modify the
 			// special_prefixes array to be correct for your site.  Do NOT
 			// do this unles you know EXACTLY what this means to you, your
 			// game, your county, your state, your nation, your planet and
 			// your universe!
-			if (file_exists('prefixes.php')) require_once 'prefixes.php';
+			// Example: you change name of a table
+			if (file_exists('prefixes.php')) $special_prefixes = include_once 'prefixes.php';
 
 			$prefix = $DB_PREFIX;
 			if (isset($special_prefixes[$tablename])) $prefix = $special_prefixes[$tablename];
 		}
-		else $prefix = $force;
+		else return $prefix = $force;
 
-		return $prefix . $tablename;
+		if (is_array($tablename))
+        {
+            list($key, $value) = each($tablename);
+
+            return [$key => $prefix . $value];
+        }
+        else return $prefix . $tablename;
 	}
 
 	public static function query($sql, $die = true)
