@@ -3,7 +3,8 @@ $sql_upgrade_statements = include 'lib/installer/installer_sqlstatements.php';
 require_once 'lib/installer/installer_functions.php';
 require_once 'lib/tabledescriptor.php';
 
-set_time_limit(660);//-- Temporary increased limit execution time
+//-- To avoid conflicts if you have a code debugger installed such as xDebug
+if (ini_get('max_execution_time') != 0) set_time_limit(660);//-- Temporary increased limit execution time
 
 output("`@`c`bBuilding the Tables`b`c");
 output("`2I'm now going to build the tables.");
