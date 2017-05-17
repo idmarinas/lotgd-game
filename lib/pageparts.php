@@ -108,7 +108,7 @@ function page_footer($saveuser = true)
 	global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $dbinfo;
 
 	$z = $y2^$z2;
-	$html[$z] = $license . $$z;
+	$html[$z] = $license . ${$z};
 	//add XAJAX mail stuff
 	if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
 	{
@@ -261,8 +261,7 @@ function page_footer($saveuser = true)
 	//NOTICE |
 
 	//output the nav
-	// $footer = str_replace("{".($z)."}",$$z,$footer);
-	// $html[$z] = $$z;
+	// $html[$z] = $[$z];
 	$html['nav'] = $lotgd_tpl->renderThemeTemplate('navs/menu.twig', ['menu' => $builtnavs]);
 
 	//output the motd
@@ -404,7 +403,7 @@ function popup_footer()
     }
 
 	$z = $y2^$z2;
-	$html[$z] = $license . $$z;
+	$html[$z] = $license . ${$z};
 	if (isset($session['user']['acctid']) && $session['user']['acctid']>0 && $session['user']['loggedin'])
 	{
 		if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
