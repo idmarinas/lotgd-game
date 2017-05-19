@@ -27,7 +27,7 @@ $statuses = [
 	2 => '`iClosed`i',
 ];
 
-$statuses = modulehook("petition-status", $status);
+$statuses = modulehook("petition-status", $statuses);
 $statuses = translate_inline($statuses);
 
 $op = httpget("op");
