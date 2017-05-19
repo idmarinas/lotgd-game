@@ -3,37 +3,49 @@
 /**
  * Generate a base creature stats
  * Can use for generated your own creatures in your modules
+ *
+ * @param false|int $level Level of creature
+ *
+ * @return array
  */
-function lotgd_generate_creature_levels()
+function lotgd_generate_creature_levels($level = false)
 {
-	$stats = [];
-	$maxlvl = getsetting('maxlevel', 15) + 4;
-	$creatureexp = 14;
-	$creaturegold = 36;
-	$creaturedefense = 0;
-	for ($i = 1; $i <= $maxlvl; $i++)
-	{
-		//apply algorithmic creature generation.
-		$creaturehealth = ($i*10) + ($i-1) - round(sqrt($i-1));
-		$creatureattack = 1+($i-1) * 2;
-		$creaturedefense += ($i%2?1:2);
-		if ($i > 1)
-		{
-			$creatureexp += round(10 + 1.5 * log($i));
-			$creaturegold += (31 * ($i<4?2:1));
-			//give lower levels more gold
-		}
-		$stats[$i] = [
-			'creaturelevel' => $i,
-			'creaturehealth' => $creaturehealth,
-			'creatureattack' => $creatureattack,
-			'creaturedefense' => $creaturedefense,
-			'creatureexp' => $creatureexp,
-			'creaturegold' => $creaturegold,
-		];
-	}
+	$maxlvl = getsetting('maxlevel', 15) + 5;
+	$stats = datacache("lotgd-generate-creature-levels-$maxlvl", 83000, true);
 
-	return $stats;
+    if (empty($stats))
+    {
+        $creatureexp = 14;
+        $creaturegold = 36;
+        $creaturedefense = 0;
+        for ($i = 1; $i <= $maxlvl; $i++)
+        {
+            //apply algorithmic creature generation.
+            $creaturehealth = ($i*10) + ($i-1) - round(sqrt($i-1));
+            $creatureattack = 1+($i-1) * 2;
+            $creaturedefense += ($i%2?1:2);
+            if ($i > 1)
+            {
+                $creatureexp += round(10 + 1.5 * log($i));
+                $creaturegold += (31 * ($i<4?2:1));
+                //give lower levels more gold
+            }
+            $stats[$i] = [
+                'creaturelevel' => $i,
+                'creaturehealth' => $creaturehealth,
+                'creatureattack' => $creatureattack,
+                'creaturedefense' => $creaturedefense,
+                'creatureexp' => $creatureexp,
+                'creaturegold' => $creaturegold,
+            ];
+        }
+
+        updatedatacache("lotgd-generate-creature-levels-$maxlvl", $stats, true);
+    }
+
+    if (false === $level) return $stats;
+    else if (isset($stats[$level])) return $stats[$level];
+    else $stats;
 }
 
 /**
