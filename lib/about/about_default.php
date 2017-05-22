@@ -19,32 +19,20 @@ foreach ($order as $key => $val)
 	switch($val)
     {
 		case '3':
+		    rawoutput("<hr>");
             //-- Notes for IDMarinas Edition
-			output_notl('`QIDMarinas edition');
-			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
-			output('This version is a forked version of 1.1.1 Dragonprime Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
+			output_notl('`^IDMarinas edition');
+			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>)`0`n`n',true);
+			output('`6This version is a forked version of 1.1.2 Dragonprime Edition and has code of +nb Edition by Oliver Brender %s.', '(<a href="http://nb-core.org"  target="_blank">NB Core</a>)', true);
+			output('`nIs a update the core of the game to better adapt to the current times, it is only a set-up of the core of the game and some improvements. For example, the template system has been changed and the database connection script has been updated.');
 			output('If you want use this core, you need to be aware:`n<ul>',true);
-			output('<li>PHP 5.6 is a minimum requirement</li>', true);
+			output('<li>`^PHP 5.6 is a minimum requirement`6</li>', true);
+			output('<li>PHP 7. * 100% compatibility is not guaranteed, but there may not be many problems</li>', true);
 			output('<li>Came with others dependencies that need install.</li>', true);
-			output('<li><a href="https://bitbucket.org/idmarinas/lotgd-game/wiki/Home" target="_blank">More information of requirement and dependencies</a></li>', true);
-			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
+			output('<li>%s</li>', '<a href="https://bitbucket.org/idmarinas/lotgd-game/wiki/Home" target="_blank">More information of requirement and dependencies</a>', true);
+			output('</ul>For the download of this version please go to %s where the latest development version (daily snapshots) and stable versions are hosted.', '<a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a>', true);
 			output('`n`nI do not ship modules with it, most modules from 1.x.x DP Editions will work. However there is no guarantee... test them.`n');
-			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
-            output('In this version has code of +nb Edition by Oliver Brender %s', '(<a href="http://nb-core.org"  target="_blank">NB Core</a>)');
-			output_notl("`0`n`n");
-		break;            //-- Notes for IDMarinas Edition
-			output('`$For the original "Legend of the Green Dragon" #About information check more below.`0`n`n');
-			output_notl('`QIDMarinas edition');
-			output_notl('`nBy Iván Diaz (<a href="http://lotgd.infommo.es">IDMarinas Edition</a>) `n`n',true);
-			output('This version is a forked version of 1.1.1 Dragonprime Edition.`n`nThe reasons of forked project is for optimization and update all components.`n`n');
-			output('If you want use this core, you need to be aware:`n<ul>',true);
-			output('<li>PHP 5.6 is a minimum requirement</li>', true);
-			output('<li>Came with others dependencies that need install.</li>', true);
-			output('<li><a href="https://bitbucket.org/idmarinas/lotgd-game/wiki/Home" target="_blank">More information of requirement and dependencies</a></li>', true);
-			output('</ul>For the download of this version please go to <a href="https://bitbucket.org/idmarinas/lotgd-game" target="_blank">LOTGD - Game</a> where the latest development version (daily snapshots) and stable versions are hosted.', true);
-			output('`n`nI do not ship modules with it, most modules from 1.x.x DP Editions will work. However there is no guarantee... test them.`n');
-			output('In this other repository <a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a> you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.', true);
-            output('In this version has code of +nb Edition by Oliver Brender %s', '(<a href="http://nb-core.org"  target="_blank">NB Core</a>)');
+            output('In this other repository %s you can find all modules that I use in my version of game. This modules are an adaptation of modules create by others to work in my version.`n', '<a href="https://bitbucket.org/idmarinas/lotgd-modules" target="_blank">LOTGD - Modules</a>', true);
 			output_notl("`0`n`n");
 		break;
 	case "2":
@@ -59,7 +47,6 @@ foreach ($order as $key => $val)
 			require_once 'lib/nltoappon.php';
 			output_notl("%s", nltoappon($impressum), true);
 		}
-		rawoutput("<hr>");
 		break;
 	case "1":
 		/* NOTICE
