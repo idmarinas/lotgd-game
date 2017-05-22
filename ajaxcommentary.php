@@ -44,7 +44,7 @@ else
 
 	$commentary = preparecommentaryblock($section,$message,$limit,$talkline,$schema=false,$skipfooter=false,$customsql=false,$skiprecentupdate=false,$showmodlink,$returnlink);
 	$commentary = '<br>'.$commentary.'<br>';
-	echo($commentary);
+	echo appoencode($commentary, true);
 }
 saveuser();
 exit();
