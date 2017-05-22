@@ -8,11 +8,11 @@
 
 <table style="width:auto; margin: auto; background: transparent;">
 	<tr>
-		<td>
-			{% if author.registered_logdnet %}
-				<embed style="width: 62px; height: 57px; margin-bottom: 1em;" src='{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(author.c, author.l, author.v, author.a, author.d, author.e, author.u) }}'></embed>
+		<td class="center aligned">
+			{% if author.register_logdnet %}
+				<script language="JavaScript" src="{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(author.c, author.l, author.v, author.a, author.d, author.e, author.u) }}"></script>
 			{% else %}
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display: inline-block;">
 					<input type="hidden" name="cmd" value="_xclick">
 					<input type="hidden" name="business" value="logd@mightye.org">
 					<input type="hidden" name="item_name" value="{{ author.item_name }}">
@@ -26,28 +26,39 @@
 					<input type="image" src="images/paypal1.gif" border="0" name="submit" alt="Donate to Eric Stevens">
 				</form>
 			{% endif %}
-		</td>
+        	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display: inline-block;">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="derbugmeister@shaw.ca">
+                <input type="hidden" name="item_name" value="{{ dp.item_name }}">
+                <input type="hidden" name="item_number" value="{{ dp.item_number }}">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="notify_url" value="http://dragonprimelogd.net/payment.php">
+                <input type="hidden" name="cn" value="Your Character Name">
+                <input type="hidden" name="cs" value="1">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="tax" value="0">
+                <input type="image" src="images/paypal3.gif" border="0" name="submit" alt="Donate!">
+            </form>
 		{% if site.paysite %}
-			<td>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-					<input type="hidden" name="cmd" value="_xclick">
-					<input type="hidden" name="business" value="{{ site.paysite }}">
-					<input type="hidden" name="item_name" value="{{ site.item_name }}">
-					<input type="hidden" name="item_number" value="{{ site.item_number }}">
-					<input type="hidden" name="no_shipping" value="1">
-					{% if notify_url %}
-						<input type="hidden" name="notify_url" value="{{ site.notify_url }}">
-					{% endif %}
-					<input type="hidden" name="cn" value="Your Character Name">
-					<input type="hidden" name="cs" value="1">
-					<input type="hidden" name="currency_code" value="{{ site.currency }}">
-					<input type="hidden" name="lc" value="{{ site.paypalcountry_code }}">
-					<input type="hidden" name="bn" value="PP-DonationsBF">
-					<input type="hidden" name="tax" value="0">
-					<input type="image" src="images/paypal2.gif" border="0" name="submit" alt="Donate to the Site">
-				</form>
-			</td>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display: inline-block;">
+				<input type="hidden" name="cmd" value="_xclick">
+				<input type="hidden" name="business" value="{{ site.paysite }}">
+				<input type="hidden" name="item_name" value="{{ site.item_name }}">
+				<input type="hidden" name="item_number" value="{{ site.item_number }}">
+				<input type="hidden" name="no_shipping" value="1">
+				{% if notify_url %}
+					<input type="hidden" name="notify_url" value="{{ site.notify_url }}">
+				{% endif %}
+				<input type="hidden" name="cn" value="Your Character Name">
+				<input type="hidden" name="cs" value="1">
+				<input type="hidden" name="currency_code" value="{{ site.currency }}">
+				<input type="hidden" name="lc" value="{{ site.paypalcountry_code }}">
+				<input type="hidden" name="bn" value="PP-DonationsBF">
+				<input type="hidden" name="tax" value="0">
+				<input type="image" src="images/paypal2.gif" border="0" name="submit" alt="Donate to the Site">
+			</form>
 		{% endif %}
+		</td>
 	</tr>
 </table>
 {#

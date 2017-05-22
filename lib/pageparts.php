@@ -192,14 +192,14 @@ function page_footer($saveuser = true)
 	//NOTICE |
 
 	$paypalData = ['site' => ['currency' => getsetting('paypalcurrency', 'USD')]];
-	if (! isset($_SESSION['logdnet'])
-		|| ! isset($_SESSION['logdnet'][''])
-		|| $_SESSION['logdnet']['']==''
-		|| date('Y-m-d H:i:s', strtotime('-1 hour')) > $session['user']['laston']
-	) $already_registered_logdnet = false;
+    if (! isset($_SESSION['logdnet'][''])
+        || $_SESSION['logdnet']['']==''
+        || ! isset($session['user']['laston'])
+        || date('Y-m-d H:i:s', strtotime('-1 hour')) > $session['user']['laston']
+    ) $already_registered_logdnet = false;
 	else $already_registered_logdnet = true;
 
-	$paypalData['author']['registered_logdnet'] = $already_registered_logdnet;
+	$paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
 	$paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $already_registered_logdnet)
@@ -207,7 +207,7 @@ function page_footer($saveuser = true)
 		//account counting, just for my own records, I don't use this in the calculation for server order.
 		$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts");
 		$result = DB::query_cached($sql,"acctcount",600);
-		$row = DB::fetch_assoc($result);
+		$row = $result->current();
 		$c = $row['c'];
 		$a = getsetting("serverurl","http://".$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] == 80?"":":".$_SERVER['SERVER_PORT']).dirname($_SERVER['REQUEST_URI']));
 		if (!preg_match("/\/$/", $a)) {
@@ -226,6 +226,7 @@ function page_footer($saveuser = true)
 			savesetting('logdnetserver', $u);
 		}
 
+		$paypalData['author']['register_logdnet'] = true;
 		$paypalData['author']['v'] = rawurlencode($logd_version);
 		$paypalData['author']['c'] = rawurlencode($c);
 		$paypalData['author']['a'] = rawurlencode($a);
@@ -249,6 +250,10 @@ function page_footer($saveuser = true)
 
 		$paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
 	}
+
+    //-- Dragon Prime
+	$paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
+	$paypalData['dp']['item_number'] = htmlentities($session['user']['login'].":".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"));
 
 	if (isset($html['paypal'])) $html['paypal'] .= $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
 	else $html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
