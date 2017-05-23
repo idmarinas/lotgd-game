@@ -1,5 +1,6 @@
 var
     //-- Dependencias
+    webpack = require('webpack'),
     path = require('path'),
     utils = require('./utils'),
 
@@ -19,7 +20,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json'],
         alias: {
-            jquery: 'jquery/src/jquery.js'
+            jquery: 'jquery/src/jquery.js',
+            'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss'
         }
     },
     module: {
