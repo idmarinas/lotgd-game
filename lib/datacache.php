@@ -118,7 +118,7 @@ function massinvalidate($prefix, $force = false)
  *
  * @return bool
  */
-function empty_datacache()
+function datacache_empty()
 {
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
