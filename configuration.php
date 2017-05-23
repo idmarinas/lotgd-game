@@ -45,6 +45,9 @@ switch ($type_setting) {
 				break;
 		}
 		break;
+    case 'cache':
+
+    break;
 	default:
 		switch ($op) {
 			case "save":
@@ -218,11 +221,13 @@ if ($module) {
 addnav("Game Settings");
 addnav("Standard settings", "configuration.php");
 addnav("Extended settings", "configuration.php?settings=extended");
+addnav("Cache settings", "configuration.php?settings=cache");
 addnav("",$REQUEST_URI);
 
 //get arrays
 require 'lib/data/configuration.php';
 require 'lib/data/configuration_extended.php';
+$setup_cache = include_once 'lib/data/configuration_cache.php';
 
 
 module_editor_navs('settings', 'configuration.php?op=modulesettings&module=');
@@ -232,9 +237,6 @@ switch ($type_setting) {
 		switch ($op) {
 
 			case "":
-
-				$useful_vals=array();
-
 				//this is just a way to check and insert a setting I deem necessary without going through the installer
 				foreach ($setup_extended as $key=>$val) {
 					$settings_extended->getSetting($key);
@@ -242,7 +244,7 @@ switch ($type_setting) {
 
 				//
 
-				$vals = $settings_extended->getArray() + $useful_vals;
+				$vals = $settings_extended->getArray();
 
 				rawoutput("<form action='configuration.php?settings=extended&op=save' method='POST'>");
 				addnav("","configuration.php?settings=extended&op=save");
@@ -251,6 +253,9 @@ switch ($type_setting) {
 				break;
 		}
 		break;
+    case 'cache':
+        require_once 'lib/configuration_cache.php';
+    break;
 	default:
 		switch ($op)
 		{
@@ -270,14 +275,8 @@ switch ($type_setting) {
 				rawoutput(tlbutton_clear());
 
 				$secstonewday = secondstonextgameday($details);
-				$adapter = DB::getAdapter();
-				$platform = $adapter->getPlatform();
 				$useful_vals = array(
-					"datacachepath"=>$DB_DATACACHEPATH,
-					"usedatacache"=>$DB_USEDATACACHE,
 					"dayduration"=>round(($details['dayduration']/60/60),0)." hours",
-					"gziphandler"=>$gz_handler_on,
-					"databasetype"=>$platform->getName(),
 					"curgametime"=>getgametime(),
 					"curservertime"=>date("Y-m-d h:i:s a"),
 					"lastnewday"=>date("h:i:s a",

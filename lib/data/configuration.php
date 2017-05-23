@@ -245,18 +245,6 @@ $setup = array(
 	"expireoldacct"=>"Days to keep all other accounts? (0 = infinite),int",
 	"LOGINTIMEOUT"=>"Seconds of inactivity before auto-logoff,int",
 
-	//taken out in 1.1.1 as the game settings were not cacheable if there was no directory known for the cache without database access
-	//here to display what has *been* in there.
-	"High Load Optimization,title",
-	"This has been moved to the dbconnect.php,note",
-	"usedatacache"=>"Use Data Caching,viewonly",
-	"datacachepath"=>"Path to store data cache information`n`iNote`i when using in an environment where Safe Mode is enabled; this needs to be a path that has the same UID as the web server runs.,viewonly",
-	"This is in settings.php,note",
-	"gziphandler"=>"Is the GzHandler turned on,viewonly",
-	"databasetype"=>"Type of database,viewonly",
-
-
-
 	"LoGDnet Setup,title",
 	"(LoGDnet requires your PHP configuration to have file wrappers enabled!!),note",
 	"logdnet"=>"Register with LoGDnet?,bool",
