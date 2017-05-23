@@ -4,6 +4,8 @@ define([
     //-- Components
     './components/redirect-post',
     './components/recommended-modules',
+    './components/swal',
+    './components/datacache',
 
     //-- Modules
     // ...
@@ -11,7 +13,10 @@ define([
     './ready/semantic',
 
     './exports/amd',
-    './exports/global'
+    './exports/global',
+
+    //-- Extra
+    'sweetalert2.css'
 ], function (Lotgd)
 {
     'use strict'
