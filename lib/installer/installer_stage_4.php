@@ -8,7 +8,7 @@ if (httppostisset("DB_HOST"))
 	$session['dbinfo']['DB_USER'] = (string) httppost("DB_USER");
 	$session['dbinfo']['DB_PASS'] = (string) httppost("DB_PASS");
 	$session['dbinfo']['DB_NAME'] = (string) httppost("DB_NAME");
-	$session['dbinfo']['DB_USEDATACACHE'] = (bool) httppost("DB_USEDATACACHE");
+	$session['dbinfo']['DB_USEDATACACHE'] = (int) httppost("DB_USEDATACACHE");
 	$session['dbinfo']['DB_DATACACHEPATH'] = (string) httppost("DB_DATACACHEPATH");
 }
 
