@@ -29,14 +29,14 @@ $lotgd_cache = new LotgdCache;
  */
 function datacache($name, $duration = 120, $force = false)
 {
-	global $lotgd_cache;
+	global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) getsetting('usedatacache', 0);
+    $usedatacache = (boolean) $DB_USEDATACACHE;
 
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     //-- Set Duration
     $lotgd_cache->getOptions()->setTtl($duration);
@@ -55,14 +55,14 @@ function datacache($name, $duration = 120, $force = false)
  */
 function updatedatacache($name, $data, $force = false)
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) getsetting('usedatacache', 0);
+    $usedatacache = (boolean) $DB_USEDATACACHE;
 
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->setItem($name, $data);
 }
@@ -78,14 +78,14 @@ function updatedatacache($name, $data, $force = false)
  */
 function invalidatedatacache($name, $force = false)
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) getsetting('usedatacache', 0);
+    $usedatacache = (boolean) $DB_USEDATACACHE;
 
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->removeItem($name);
 }
@@ -100,14 +100,14 @@ function invalidatedatacache($name, $force = false)
  */
 function massinvalidate($prefix, $force = false)
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) getsetting('usedatacache', 0);
+    $usedatacache = (boolean) $DB_USEDATACACHE;
 
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->clearByPrefix($prefix);
 }
@@ -120,10 +120,10 @@ function massinvalidate($prefix, $force = false)
  */
 function empty_datacache()
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->flush();
 }
@@ -135,10 +135,10 @@ function empty_datacache()
  */
 function datacache_clearExpired()
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->clearExpired();
 }
@@ -150,10 +150,10 @@ function datacache_clearExpired()
  */
 function datacache_optimize()
 {
-    global $lotgd_cache;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir(getsetting('datacachepath', '/tmp'));
+    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->optimize();
 }
