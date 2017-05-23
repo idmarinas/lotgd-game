@@ -36,7 +36,7 @@ function datacache($name, $duration = 120, $force = false)
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     //-- Set Duration
     $lotgd_cache->getOptions()->setTtl($duration);
@@ -62,7 +62,7 @@ function updatedatacache($name, $data, $force = false)
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->setItem($name, $data);
 }
@@ -85,7 +85,7 @@ function invalidatedatacache($name, $force = false)
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->removeItem($name);
 }
@@ -107,7 +107,7 @@ function massinvalidate($prefix, $force = false)
     if (false === $usedatacache && false === $force) return false;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->clearByPrefix($prefix);
 }
@@ -123,7 +123,7 @@ function empty_datacache()
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->flush();
 }
@@ -138,7 +138,7 @@ function datacache_clearExpired()
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->clearExpired();
 }
@@ -153,7 +153,7 @@ function datacache_optimize()
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
     //-- Set Cache Dir
-    $lotgd_cache->getOptions()->getCacheDir($DB_DATACACHEPATH);
+    $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     return $lotgd_cache->optimize();
 }
