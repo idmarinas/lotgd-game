@@ -45,9 +45,6 @@ switch ($type_setting) {
 				break;
 		}
 		break;
-    case 'cache':
-
-    break;
 	default:
 		switch ($op) {
 			case "save":
@@ -218,17 +215,16 @@ if ($module) {
 	addnav(array("Module Category - `^%s`0", translate_inline($cat)), "modules.php?cat=$cat");
 }
 
-addnav("Game Settings");
-addnav("Standard settings", "configuration.php");
-addnav("Extended settings", "configuration.php?settings=extended");
-addnav("Cache settings", "configuration.php?settings=cache");
-addnav("",$REQUEST_URI);
+addnav('Game Settings');
+addnav('Standard settings', 'configuration.php');
+addnav('Extended settings', 'configuration.php?settings=extended');
+addnav('Cache settings', 'configuration.php?settings=cache');
+addnav('Cronjob settings', 'configuration.php?settings=cronjob');
+addnav('',$REQUEST_URI);
 
 //get arrays
 require 'lib/data/configuration.php';
 require 'lib/data/configuration_extended.php';
-$setup_cache = include_once 'lib/data/configuration_cache.php';
-
 
 module_editor_navs('settings', 'configuration.php?op=modulesettings&module=');
 
@@ -254,7 +250,10 @@ switch ($type_setting) {
 		}
 		break;
     case 'cache':
-        require_once 'lib/configuration_cache.php';
+        require_once 'lib/configuration/configuration_cache.php';
+    break;
+    case 'cronjob':
+        require_once 'lib/configuration/configuration_cronjob.php';
     break;
 	default:
 		switch ($op)
