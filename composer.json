@@ -17,6 +17,8 @@
         "zendframework/zend-debug": "^2.5",
         "zendframework/zend-escaper": "^2.5",
         "zendframework/zend-code": "^3.1",
-        "twig/twig": "^1.24"
+        "zendframework/zend-i18n": "^2.7",
+        "twig/twig": "^1.24",
+        "hellogerard/jobby" : "^3.2"
     }
 }
