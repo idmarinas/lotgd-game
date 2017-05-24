@@ -356,6 +356,30 @@ Class DB
         return $paginator;
 	}
 
+    /**
+     * Navigation menu used with Paginator
+     *
+     * @param Zend\Paginator\Paginator $paginator
+     * @param string $url
+     */
+    public static function pagination($paginator, $url)
+    {
+        if ($paginator instanceof Paginator) $paginator = $paginator->getPages('all');
+
+        if (1 >= $paginator->pageCount) return;
+
+        addnav('Pages');
+        foreach($paginator->pagesInRange as $page)
+        {
+            $minpage = (($page - 1) * $paginator->itemCountPerPage) + 1;
+            $maxpage = $paginator->itemCountPerPage * $page;
+            $maxpage = ($paginator->totalItemCount >= $maxpage? $maxpage : $paginator->totalItemCount);
+
+            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`bPage %s (%s-%s)`b');
+            addnav([$text, $page, $minpage, $maxpage], $url . "&page=$page");
+        }
+    }
+
 	/**
 	 * Get an array of result of DB::query
 	 *
