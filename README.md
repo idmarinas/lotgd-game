@@ -37,3 +37,4 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
     * User interface [Semantic UI Framework](http://semantic-ui.com/)
     * Templates system [Twig](http://twig.sensiolabs.org)
     * A simple JavaScript popup boxes [SweetAlert2](https://limonte.github.io/sweetalert2/)
+    * A simple CronJob manager [Jobby, a PHP cron job manager](https://github.com/jobbyphp/jobby)
