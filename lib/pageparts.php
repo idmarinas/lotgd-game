@@ -267,7 +267,7 @@ function page_footer($saveuser = true)
 
 	//output the nav
 	// $html[$z] = $[$z];
-	$html['nav'] = $lotgd_tpl->renderThemeTemplate('navs/menu.twig', ['menu' => $builtnavs]);
+	$html['nav'] = $lotgd_tpl->renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
 
 	//output the motd
 	$html['motd'] = motdlink();
@@ -307,7 +307,7 @@ function page_footer($saveuser = true)
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 
-		$html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('other/petition.twig', [
+		$html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('parts/petition.twig', [
 			'administrator' => $administrator,
 			'petitioncount' => $p,
 			'petition' => $pet,
@@ -540,12 +540,12 @@ function getcharstats($buffs)
 		}
 	}
 
-	$statbuff = $lotgd_tpl->renderThemeTemplate('character/statbuff.twig', [
+	$statbuff = $lotgd_tpl->renderThemeTemplate('sidebar/character/statbuff.twig', [
 		'title' => translate_inline("`0Buffs"),
 		'value' => $buffs
 	]);
 
-	return appoencode($lotgd_tpl->renderThemeTemplate('character/stats.twig', [
+	return appoencode($lotgd_tpl->renderThemeTemplate('sidebar/character/stats.twig', [
 		'charstat' => $charstattpl,
 		'statbuff' => $statbuff
 	]), true);

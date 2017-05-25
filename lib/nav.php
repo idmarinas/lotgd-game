@@ -393,7 +393,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	if ($link===false)
 	{
 		$text = holidayize($text,'nav');
-		$thisnav .= $lotgd_tpl->renderThemeTemplate('navs/head.twig', [
+		$thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/head.twig', [
 			'title' => appoencode($text,$priv),
 			'tlbutton' => tlbutton_pop()
 		]);
@@ -401,7 +401,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 	elseif ($link === "")
 	{
 		$text = holidayize($text,'nav');
-		$thisnav .= $lotgd_tpl->renderThemeTemplate('navs/help.twig', [
+		$thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/help.twig', [
 			'text' => appoencode($text,$priv),
 			'tlbutton' => tlbutton_pop()
 		]);
@@ -530,7 +530,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 				else $quickkeys[$key] = "window.location='$link$extra'";
 			}
 
-			$thisnav .= $lotgd_tpl->renderThemeTemplate('navs/item.twig', [
+			$thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/item.twig', [
 				'text' => appoencode($text,$priv),
 				'link' => HTMLEntities($link.($pop != true ? $extra : ''), ENT_COMPAT, getsetting('charset', 'utf-8')),
 				'accesskey' => $keyrep,
