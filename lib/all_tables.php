@@ -1661,6 +1661,30 @@ return [
         'name' => ['name' => 'name', 'type' => 'VARCHAR(255)', 'null' => false],
         'section' => ['name' => 'section', 'type' => 'VARCHAR(255)', 'null' => false],
         'key-PRIMARY' => ['name' => 'PRIMARY', 'type' => 'primary key', 'columns' => 'name'],
+    ],
+    'cronjob' => [
+        'name' => ['name' => 'name', 'type' => 'VARCHAR(255)', 'null' => false],
+        'command' => ['name' => 'command', 'type' => 'TEXT', 'null' => false],
+        'schedule' => ['name' => 'schedule', 'type' => 'VARCHAR(255)', 'null' => false],
+        'mailer' => ['name' => 'mailer', 'type' => 'VARCHAR(255)', 'null' => true, 'default' => 'sendmail'],
+        'maxRuntime' => ['name' => 'maxRuntime', 'type' => 'INT(10) UNSIGNED', 'null' => true],
+        'smtpHost' => ['name' => 'smtpHost', 'type' => 'VARCHAR(255)', 'null' => true],
+        'smtpPort' => ['name' => 'smtpPort', 'type' => 'SMALLINT(5) UNSIGNED', 'null' => true],
+        'smtpUsername' => ['name' => 'smtpUsername', 'type' => 'VARCHAR(255)', 'null' => true],
+        'smtpPassword' => ['name' => 'smtpPassword', 'type' => 'VARCHAR(255)', 'null' => true],
+        'smtpSender' => ['name' => 'smtpSender', 'type' => 'VARCHAR(255)', 'null' => true, 'default' => 'jobby@localhost'],
+        'smtpSenderName' => ['name' => 'smtpSenderName', 'type' => 'VARCHAR(255)', 'null' => true, 'default' => 'Jobby'],
+        'smtpSecurity' => ['name' => 'smtpSecurity', 'type' => 'VARCHAR(255)', 'null' => true],
+        'runAs' => ['name' => 'runAs', 'type' => 'VARCHAR(255)', 'null' => true],
+        'environment' => ['name' => 'environment', 'type' => 'TEXT', 'null' => true],
+        'runOnHost' => ['name' => 'runOnHost', 'type' => 'VARCHAR(255)', 'null' => true],
+        'output' => ['name' => 'output', 'type' => 'VARCHAR(255)', 'null' => true],
+        'dateFormat' => ['name' => 'dateFormat', 'type' => 'VARCHAR(100)', 'null' => true, 'default' => 'Y-m-d H:i:s'],
+        'enabled' => ['name' => 'enabled', 'type' => 'TINYINT(1)', 'null' => true, 'default' => 1],
+        'haltDir' => ['name' => 'haltDir', 'type' => 'VARCHAR(255)', 'null' => true],
+        'debug' => ['name' => 'debug', 'type' => 'TINYINT(1) UNSIGNED', 'null' => true, 'default' => 0],
+
+        'key-PRIMARY' => ['name' => 'PRIMARY', 'type' => 'primary key', 'columns' => 'name'],
     ]
 ];
 }
