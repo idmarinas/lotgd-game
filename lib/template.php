@@ -27,6 +27,12 @@ class LotgdTemplate
 		{
 			$this->twig->addFilter($filter);
 		}
+
+		//-- Add functions to Twig
+		foreach($this->getFunctions() as $function)
+		{
+			$this->twig->addFunction($function);
+		}
 	}
 
 	/**
@@ -96,6 +102,15 @@ class LotgdTemplate
 			})
 		];
 	}
+
+    private function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('modulehook', function ($name, $data) {
+                return modulehook($name, $data);
+            })
+        ];
+    }
 
 	/**
 	 * Get active theme
