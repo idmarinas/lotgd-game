@@ -182,7 +182,7 @@ else
         rawoutput('</td><td>');
         output_notl('php ' . $value['command'] . '.php');
         rawoutput('</td><td>');
-        output_notl($value['schedule']);
+        output_notl('<a href="https://crontab.guru/#%s" target="_blank"><i class="info icon"></i> `b%s`b</a>', str_replace(' ', '_', $value['schedule']),$value['schedule'], true);
         rawoutput('</td><td>');
         output_notl(($value['debug']?$yes:$no));
         rawoutput('</td><td>');
