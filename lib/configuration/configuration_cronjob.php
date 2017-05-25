@@ -180,7 +180,7 @@ else
         rawoutput('<tr><td>');
         output_notl($value['name']);
         rawoutput('</td><td>');
-        output_notl($value['command']);
+        output_notl('php ' . $value['command'] . '.php');
         rawoutput('</td><td>');
         output_notl($value['schedule']);
         rawoutput('</td><td>');
