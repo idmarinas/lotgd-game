@@ -1,0 +1,42 @@
+<table class='ui very compact striped selectable table'>
+    <thead>
+        <tr>
+            <th>{{ 'Name'|t }}</th>
+            <th>{{ 'Defense'|t }}</th>
+            <th>{{ 'Cost'|t }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in content %}
+            {% set row = modulehook('modify-armor', row) %}
+            {% if not row.skip %}
+                <tr>
+                    <td class="collapsing">
+                        {% set color = '`)' %}
+                        {% if row.value <= (user.gold + tradeinvalue) %}
+                            {% if not unavailable %}
+                                {% set color = '`&' %}
+                                <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|appoencode }}</a>
+                            {% else %}
+                                {% set color = '`7' %}
+                                {{ (color ~ row.armorname ~ '`0')|appoencode }}
+                            {% endif %}
+                        {% else %}
+                            {{ (color ~ row.armorname ~ '`0')|appoencode }}
+                        {% endif %}
+                    </td>
+                    <td>{{ (color ~ row.defense)|appoencode }}</td>
+                    <td>
+                        {% if row.alternatetext %}
+                            {{ (color ~ row.alternatetext)|appoencode }}
+                        {% else %}
+                            {{ (color ~ row.value)|appoencode }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% else %}
+
+        {% endfor %}
+    </tbody>
+</table>

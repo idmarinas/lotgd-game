@@ -73,60 +73,18 @@ if ($op==""){
   	}
   	tlschema();
 
-	$aname = translate_inline("`bName`b");
-	$adef = translate_inline("`bDefense`b");
-	$acost = translate_inline("`bCost`b");
-	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<thead><tr><th>");
-	output_notl($aname);
-	rawoutput("</th><th>");
-	output_notl($adef);
-	rawoutput("</th><th>");
-	output_notl($acost);
-	rawoutput("</th></tr></thead>");
-	$i = 0;
-	while($row = DB::fetch_assoc($result)) {
-		$link = true;
-		$row = modulehook("modify-armor", $row);
-		if (isset($row['skip']) && $row['skip'] === true) {
-			continue;
-		}
-		if (isset($row['unavailable']) && $row['unavailable'] == true) {
-			$link = false;
-		}
-		rawoutput("<tr>");
-		rawoutput("<td class='collapsing'>");
-		$color = "`)";
-		if ($row['value']<=($session['user']['gold']+$tradeinvalue)){
-			if ($link) {
-				$color = "`&";
-				rawoutput("<a href='armor.php?op=buy&id={$row['armorid']}'>");
-			} else {
-				$color = "`7";
-			}
-			output_notl("%s%s`0", $color, $row['armorname']);
-			if ($link) {
-				rawoutput("</a>");
-			}
-			addnav("","armor.php?op=buy&id={$row['armorid']}");
-		}else{
-			output_notl("%s%s`0", $color, $row['armorname']);
-			addnav("","armor.php?op=buy&id={$row['armorid']}");
-		}
-		rawoutput("</td><td>");
-		output_notl("%s%s`0", $color, $row['defense']);
-		rawoutput("</td><td>");
-		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
-			output("%s%s`0", $color, $row['alternatetext']);
-		} else {
-			output_notl("%s%s`0",$color,$row['value']);
-		}
-		rawoutput("</td></tr>");
-		++$i;
-	}
-	rawoutput("</table>",true);
+    //-- Render template: list of armors
+    $data = [
+        'content' => $result,
+        'user' => $session['user'],
+        'tradeinvalue' => $tradeinvalue
+    ];
+    rawoutput($lotgd_tpl->renderThemeTemplate('pages/armor/list.twig', $data));
+
 	villagenav();
-}elseif ($op=="buy"){
+}
+elseif ($op=="buy")
+{
 	$id = httpget('id');
 	$sql = "SELECT * FROM " . DB::prefix("armor") . " WHERE armorid='$id'";
 	$result = DB::query($sql);
