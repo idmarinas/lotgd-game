@@ -9,6 +9,8 @@ modulehook('newday-runonce', []);
 //only if not done by cron
 if (! getsetting('newdaycron', 0))
 {
+    require_once 'lib/gamelog.php';
+
     //Do some high-load-cleanup
     if (datacache_clearExpired()) gamelog('Expired cache data has been deleted', 'maintenance');
     if (datacache_optimize()) gamelog('Cache data has been optimized', 'maintenance');
