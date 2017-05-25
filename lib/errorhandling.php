@@ -18,7 +18,7 @@ function set_magic_quotes(&$vars) {
 if (!get_magic_quotes_gpc()){
 	set_magic_quotes($_GET);
 	set_magic_quotes($_POST);
-	set_magic_quotes($_SESSION);
+	// set_magic_quotes($_SESSION); //-- This may corrupted any data and emit a error "Allowed memory size of XXX bytes exhausted"
 	set_magic_quotes($_COOKIE);
 	ini_set("magic_quotes_gpc",1);
 }
