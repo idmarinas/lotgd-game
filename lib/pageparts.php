@@ -207,7 +207,7 @@ function page_footer($saveuser = true)
 		//account counting, just for my own records, I don't use this in the calculation for server order.
 		$sql = "SELECT count(acctid) AS c FROM " . DB::prefix("accounts");
 		$result = DB::query_cached($sql,"acctcount",600);
-		$row = $result->current();
+		$row = DB::fetch_assoc($result);
 		$c = $row['c'];
 		$a = getsetting("serverurl","http://".$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT'] == 80?"":":".$_SERVER['SERVER_PORT']).dirname($_SERVER['REQUEST_URI']));
 		if (!preg_match("/\/$/", $a)) {
