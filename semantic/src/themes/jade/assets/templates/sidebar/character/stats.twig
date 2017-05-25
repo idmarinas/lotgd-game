@@ -1,0 +1,11 @@
+<table class='lotgd table charinfo'>
+	{% for title, section in charstat %}
+		{% include 'jade/templates/sidebar/character/stathead.twig' with {'title' : title} %}
+
+		{% for name, value in section %}
+			{% include 'jade/templates/sidebar/character/statrow.twig' with {'title': name, 'value': value} %}
+		{% endfor %}
+	{% endfor %}
+
+	{{ statbuff}}
+</table>
