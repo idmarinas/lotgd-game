@@ -80,59 +80,14 @@ if ($op==""){
   	}
   	tlschema();
 
-	$wname=translate_inline("`bName`b");
-	$wdam=translate_inline("`bDamage`b");
-	$wcost=translate_inline("`bCost`b");
-	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<thead><tr><th>");
-	output_notl($wname);
-	rawoutput("</th><th>");
-	output_notl($wdam);
-	rawoutput("</th><th>");
-	output_notl($wcost);
-	rawoutput("</th></tr></thead>");
-	$i=0;
-	while($row = DB::fetch_assoc($result))
-	{
-		$link = true;
-		$row = modulehook("modify-weapon", $row);
-		if (isset($row['skip']) && $row['skip'] === true) {
-			continue;
-		}
-		if (isset($row['unavailable']) && $row['unavailable'] == true) {
-			$link = false;
-		}
-		rawoutput("<tr><td class='collapsing'>");
-		$color = "`)";
-		if ($row['value']<=($session['user']['gold']+$tradeinvalue)){
+    //-- Render template: list of weapons
+    $data = [
+        'content' => $result,
+        'user' => $session['user'],
+        'tradeinvalue' => $tradeinvalue
+    ];
+    rawoutput($lotgd_tpl->renderThemeTemplate('pages/weapon/list.twig', $data));
 
-			if ($link) {
-				$color = "`&";
-				rawoutput("<a href='weapons.php?op=buy&id={$row['weaponid']}'>");
-			} else {
-				$color = "`7";
-			}
-			output_notl("%s%s`0",$color,$row['weaponname']);
-			if ($link) {
-				rawoutput("</a>");
-			}
-			addnav("","weapons.php?op=buy&id={$row['weaponid']}");
-		}else{
-			output_notl("%s%s`0",$color,$row['weaponname']);
-			addnav("","weapons.php?op=buy&id={$row['weaponid']}");
-		}
-		rawoutput("</td><td>");
-		output_notl("%s%s`0",$color,$row['damage']);
-		rawoutput("</td><td>");
-		if (isset($row['alternatetext']) && $row['alternatetext'] > "") {
-			output_notl("%s%s`0", $color, $row['alternatetext']);
-		} else {
-			output_notl("%s%s`0",$color,$row['value']);
-		}
-		rawoutput("</td></tr>");
-		++$i;
-	}
-	rawoutput("</table>");
 	villagenav();
 }else if ($op=="buy"){
 	$id = httpget("id");
