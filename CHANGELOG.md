@@ -4,6 +4,68 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
 
+# Version: 2.2.0
+
+### CHANGES
+
+* **lib/dbwrapper.php** upgrade function `DB::prefix`
+    * You now have documentation
+    * Detects if it is an array to correctly add the prefix
+* **lib/creaturefunctions.php** `lotgd_generate_creature_levels` accept a param `$level` for get only stats for a creature of a determinate level
+    * Now use cache for save stats, not is necesary regenerate
+* Removed code referring to `$HTTP_GET_VARS`, `$HTTP_POST_VARS` and `$HTTP_COOKIE_VARS`
+    * **lib/http.php**
+    * **lib/errorhandling.php**
+* Add new variable to hook *clan-rank* `$prevclanrank` indicationg previous clan rank
+* **Theme *Jade***
+    * Template files have been rearranged
+    * **armor.php** now have a template for show a list of armors
+    * **weapons.php** now have a template for show a list of weapons
+
+### FEATURES
+
+* **resources/lotgd.js**
+    * New function for data cache of games `Lotgd.datacache(optimize|clearexpire|clearall|clearbyprefix)`
+    * Add funciton, can use it with `Lotgd.swal`, show a JavaScript popup box using a SweetAlert2
+* **New CronJob system** more easy, more customizable you can add your own cronjobs very easy.
+    * Now the CronJobs system use Jobby
+* **configuration.php**
+    * New section "Cache Settings" for control data cache of game, for example: optimize and clear.
+    * New section "CronJob Settings" for control all CronJobs of game.
+* **lib/dbwrapper.php** new function `DB::pagination` create a navigation menu when you use `DB::paginator`
+    * `DB::pagination($paginator, $url));`
+
+### DEPRECATED
+
+* Nothing
+
+### REMOVES
+
+* **lib/creatures.php** file removed, function `creature_stats` is remplaced for `lotgd_generate_creature_levels`
+* **images/** `headbkg.GIF` and `title.gif` are deleted because not are in used.
+
+### FIXES
+
+* **lib/all_tables.php** added missing field in table `accounts`
+* **lib/intaller/installer_stage_9.php** fixed possible error if xDebug or similar is installed on the server
+* **viewpetition.php** fixed error in hook, recibe a variable not defined
+* **lib/about/about_default.php** it adjusts and fixed information
+* Fixed bug not being registered on lotgd.net
+    * **lib/pageparts.php**
+    * **templates/paypal.twig**
+* **ajaxcommentary.php** now show the appropriate colors
+* **lib/datacache.php**
+    * Now use vars stored in dbconnect.php
+    * Fixed error when try to set cache directory (Incorrect function was used)
+
+### NOTES
+
+* Compatibility with PHP 7 improved
+* Wiki are now translated and updated
+* Note for theme system: Everything that has to do with html / text is planned to be passed to templates. It is not intended to make a strict MVC architecture, but an approximation.
+
+
+
 # Version: 2.1.0
 
 ### CHANGES
@@ -163,7 +225,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 	* With Semantic UI can personalize components and add more. And have a good structure for LOTGD.
     * **Old system for create a theme (template) are not compatible with this version.**
 * New **function** `lotgd_generate_creature_levels()`
-	* With this function you can generate levels for a creature base. You can use this functioN in your own modules. You can use `buffbadguy()` to adapt the creature.
+	* With this function you can generate levels for a creature base. You can use this function in your own modules. You can use `buffbadguy()` to adapt the creature.
 * New **function** `lotgd_showtabs()` You need load *lib/showtabs.php* in your script.
     * Do same as `lotgd_showform` but not is for show forms.
 
