@@ -13,10 +13,9 @@
 			$sql="SELECT name,login,clanrank FROM ".DB::prefix("accounts")." WHERE acctid=$whoacctid LIMIT 1";
 			$row = DB::query($sql)->current();
 			$who = $row['login'];
-			$whoname = $row['name'];
             $prevclanrank = $row['clanrank'];
 			if ($setrank>0) {
-				$args = modulehook("clan-setrank", array("setrank"=>$setrank, "login"=>$who, "name"=>$whoname, "acctid"=>$whoacctid, "clanid"=>$session['user']['clanid'], "oldrank"=>$row['clanrank'], 'prevclanrank' => $prevclanrank));
+				$args = modulehook("clan-setrank", array("setrank"=>$setrank, "login"=>$who, "name"=>$whoname, "acctid"=>$whoacctid, "clanid"=>$session['user']['clanid'], "oldrank"=>$row['clanrank']));
 				if (!(isset($args['handled']) && $args['handled'])) {
 					$sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
 					DB::query($sql);
