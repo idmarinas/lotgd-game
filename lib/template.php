@@ -8,9 +8,9 @@ use Zend\Filter\Word\UnderscoreToDash;
 class LotgdTemplate
 {
 	protected $twig;
-	protected $templatename;
+	protected $themename;
 	protected $themefolder;
-	protected $defaultSkin = 'jade.html';
+	protected $defaultSkin;
 
 	public function __construct()
 	{
@@ -119,7 +119,7 @@ class LotgdTemplate
 	 */
 	public function getTheme()
 	{
-		return $this->templatename;
+		return $this->themename;
 	}
 
 	/**
@@ -129,53 +129,28 @@ class LotgdTemplate
 	 */
 	private function prepareTheme()
 	{
-		global $templatename, $session, $y, $z, $y2, $z2, $lc, $x;
+		global $themename, $session, $y, $z, $y2, $z2, $lc, $x;
 
-		if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $templatename = $_COOKIE['template'];
-		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = getsetting('defaultskin', $this->getDefaultSkin());
-		if ('' == $templatename || ! file_exists("themes/$templatename")) $templatename = $this->getDefaultSkin();
-        //-- Search for a valid template in directory
-        if (! file_exists("themes/$templatename"))
+		$this->themename = $this->getDefaultSkin();
+
+        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themename))
         {
-            // A generic way of allowing a theme to be selected.
-			$skins = [];
-			$handle = @opendir('themes');
-			while (false !== ($file = @readdir($handle)))
-			{
-				if (strpos($file,'.htm') > 0)
-                {
-                    $skins[] = $file;
+            //-- Prepare name folder of theme, base on filename of theme
+            $this->themefolder = pathinfo($this->themename, PATHINFO_FILENAME);//-- Delete extension
+            $filterChain = new FilterChain();
+            $filterChain
+                ->attach(new StringToLower())
+                ->attach(new SeparatorToDash())
+                ->attach(new UnderscoreToDash());
 
-                    break; //-- We have 1 theme, no need more
-                }
-			}
-
-            if (count($skins))
-            {
-                $templatename = $skins[0];
-            }
+            $this->themefolder = $filterChain->filter($this->themefolder);
         }
-
-        if (! isset($_COOKIE['template']) || $_COOKIE['template'] == '') $_COOKIE['template'] = $templatename;
-
-		$this->templatename = $templatename;
-
-		//-- Prepare name folder of theme, base on filename of theme
-		$this->themefolder = pathinfo($this->templatename, PATHINFO_FILENAME);//-- Delete extension
-		$filterChain = new FilterChain();
-		$filterChain
-			->attach(new StringToLower())
-			->attach(new SeparatorToDash())
-			->attach(new UnderscoreToDash());
-
-		$this->themefolder = $filterChain->filter($this->themefolder);
 
 		//-- Seem to not have function
 		// $y = 0;
 		// $z = $y2^$z2;
 		// $$z = $lc . $$z . '<br>';
 	}
-
 
 	/**
 	 * Get default skin of game
@@ -184,12 +159,52 @@ class LotgdTemplate
 	 */
 	public function getDefaultSkin()
 	{
+        if (empty($this->defaultSkin))
+        {
+            if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $themename = $_COOKIE['template'];
+            if ('' == $themename || ! file_exists("themes/$themename")) $themename = getsetting('defaultskin', 'jade.html');
+            if ('' == $themename || ! file_exists("themes/$themename")) $themename = 'jade.html';
+
+            //-- Search for a valid theme in directory
+            if (! file_exists("themes/$themename"))
+            {
+                // A generic way of allowing a theme to be selected.
+                $skins = [];
+                $handle = @opendir('themes');
+                while (false !== ($file = @readdir($handle)))
+                {
+                    if (strpos($file,'.htm') > 0)
+                    {
+                        $skins[] = $file;
+
+                        break; //-- We have 1 theme, no need more
+                    }
+                }
+
+                if (count($skins))
+                {
+                    $themename = $skins[0];
+                }
+            }
+
+            if (! isset($_COOKIE['template']) || $_COOKIE['template'] == '') $_COOKIE['template'] = $themename;
+
+            $this->defaultSkin = $themename;
+
+            savesetting('defaultskin', $themename);
+        }
+
 		return $this->defaultSkin;
 	}
 }
 
 function templatereplace()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
 	return;
 }
 
