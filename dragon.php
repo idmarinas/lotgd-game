@@ -141,7 +141,7 @@ if ($op==""){
 	$nochange = modulehook("dk-preserve", $nochange);
     $session['user']['dragonkills']++;
 
-	$badguy = $session['user']['badguy']; //needed for the dragons name later
+	$badguys = $session['user']['badguy']; //needed for the dragons name later
 
 	$session['user']['dragonage'] = $session['user']['age'];
 	if ($session['user']['dragonage'] <  $session['user']['bestdragonage'] ||
@@ -211,7 +211,15 @@ if ($op==""){
 	modulehook("dragonkilltext");
 
 	$regname = get_player_basename();
-
+	$badguys = ! is_array($badguys) ? @unserialize($badguys) : $badguys;
+	foreach ($badguys['enemies'] as $opponent)
+	{
+		if ($opponent['type']=='dragon')
+		{
+			$badguy = $opponent;
+			break;
+		}
+	}
 
 	$howoften=translate_inline($session['user']['dragonkills']>1?"times":"time"); // no translation, we never know who is viewing...
 	addnews("`#%s`# has earned the title `&%s`# for having slain `@%s`& `^%s`# %s!",$regname,$session['user']['title'],$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
