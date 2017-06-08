@@ -7,6 +7,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Profiler\Profiler;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Metadata\Metadata;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Db\Sql\Sql;
 
 use Zend\Paginator\Adapter\DbSelect;
@@ -27,6 +28,7 @@ Class DB
 	private static $affectedRows = 0;
 	private static $errorInfo = null;
 	private static $sqlString = null;
+	private static $sql = null;
 
 	public static function setAdapter(Array $options, $force = false)
 	{
@@ -285,10 +287,9 @@ Class DB
 	/**
 	 * Funciones propias de Zend
 	 */
-	private static $sql = null;
 
 	//-- Funciones de base de datos
-	public static function sql()
+	private static function sql()
 	{
 		if (!self::$sql)
 		{
@@ -331,6 +332,23 @@ Class DB
         self::$sqlString = $objectString;
 
 		return self::query($objectString);
+	}
+
+	/**
+	 * Create Zend\Db\Sql\Predicate\Expression for uses in Zend DB
+	 *
+	 * @param string $expresion
+	 *
+	 * @return string
+	 */
+	public static function expression($expresion = null)
+	{
+		if (is_string($expresion))
+		{
+			return new Expression($expresion);
+		}
+
+		return;
 	}
 
     public static function sqlString()
