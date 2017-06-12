@@ -150,7 +150,7 @@ function show_enemies($enemies)
 				'who' => translate_inline('You'),
 				'name' => $hitpointstext,
 				'level' => $u['level'],
-				'hptext' => '`6'.($u['maxhitpoints']>0?$u['maxhitpoints']:translate_inline("`7DEFEATED`0")).'`0',
+				'hptext' => '`6'.($u['hitpoints']>0?$u['hitpoints']:translate_inline("`7DEFEATED`0")).'`0',
 				'showBar' => false
 			];
 
