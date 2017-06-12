@@ -39,17 +39,17 @@ function show_enemies($enemies)
 	//show all enemies including their stats
 	foreach ($enemies as $index => $badguy)
 	{
-		if ((isset($badguy['istarget']) && $badguy['istarget'] == true) && $enemycounter > 1)
-			$ccode = "`#";
-		else
-			$ccode = "`2";
+		if ((isset($badguy['istarget']) && $badguy['istarget'] == true) && $enemycounter > 1) $ccode = "`#";
+		else $ccode = "`2";
+
+		if (! isset($badguy['creaturemaxhealth']) && isset($badguy['creaturehealth'])) $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+
 		if (isset($badguy['hidehitpoints']) && $badguy['hidehitpoints'] == true) {
 			$maxhealth = $health = "???";
 		} else {
 			$health = $badguy['creaturehealth'];
 			$maxhealth = $badguy['creaturemaxhealth'];
 		}
-		if (! isset($badguy['creaturemaxhealth']) && isset($badguy['creaturehealth'])) $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
 
 		switch ($barDisplay)
 		{
