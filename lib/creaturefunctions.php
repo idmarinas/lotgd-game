@@ -94,6 +94,9 @@ function lotgd_transform_creature(array $badguy, $debug = true)
 	$badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
 	$badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
 
+    //-- Set max health for creature
+	$badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+
     //-- Not show debug
     if (! $debug) return $badguy;
 

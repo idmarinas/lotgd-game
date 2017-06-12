@@ -210,8 +210,15 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
 		$badguy['creatureexp'] = round($badguy['creatureexp']*$bonus, 0);
 	}
 
+    //-- Activate hook when find a creature
 	$badguy = modulehook("creatureencounter", $badguy);
 
-	return modulehook($hook, $badguy);
+    //-- Activate hook personalice or default (buffbadguy)
+	$badguy = modulehook($hook, $badguy);
+
+    //-- Update max creature health
+	$badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+
+    return $badguy;
 }
 ?>
