@@ -129,7 +129,7 @@ class LotgdTemplate
 	 */
 	private function prepareTheme()
 	{
-		global $themename, $session, $y, $z, $y2, $z2, $lc, $x;
+		global $y, $z, $y2, $z2, $lc, $x;
 
 		$this->themename = $this->getDefaultSkin();
 
@@ -161,6 +161,8 @@ class LotgdTemplate
 	{
         if (empty($this->defaultSkin))
         {
+            $themename = '';
+
             if (isset($_COOKIE['template']) && '' != $_COOKIE['template']) $themename = $_COOKIE['template'];
             if ('' == $themename || ! file_exists("themes/$themename")) $themename = getsetting('defaultskin', 'jade.html');
             if ('' == $themename || ! file_exists("themes/$themename")) $themename = 'jade.html';
