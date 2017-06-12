@@ -13,7 +13,6 @@
 			$sql="SELECT name,login,clanrank FROM ".DB::prefix("accounts")." WHERE acctid=$whoacctid LIMIT 1";
 			$row = DB::query($sql)->current();
 			$who = $row['login'];
-            $prevclanrank = $row['clanrank'];
 			if ($setrank>0) {
 				$args = modulehook("clan-setrank", array("setrank"=>$setrank, "login"=>$who, "name"=>$whoname, "acctid"=>$whoacctid, "clanid"=>$session['user']['clanid'], "oldrank"=>$row['clanrank']));
 				if (!(isset($args['handled']) && $args['handled'])) {
