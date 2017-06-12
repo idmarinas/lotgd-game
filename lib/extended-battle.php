@@ -13,14 +13,7 @@ function show_enemies($enemies)
 {
 	global $enemycounter, $session, $lotgd_tpl;
 
-	require_once 'lib/battle-functions.php';
-
 	$u = &$session['user']; //fast and better, by pointer
-	static $fightbar=NULL;
-	if ($fightbar===NULL) {
-		//only once per fight
-		$fightbar=new fightbar();
-	}
 
 	if (isset($u['prefs']['forestcreaturebar']))
 	{
