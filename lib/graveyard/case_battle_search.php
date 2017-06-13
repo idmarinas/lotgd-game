@@ -4,7 +4,9 @@ if ($session['user']['gravefights']<=0){
 	$op="";
 	httpset('op', "");
 }else{
-	require_once("lib/extended-battle.php");
+	require_once 'lib/extended-battle.php';
+	require_once 'lib/creaturefunctions.php';
+
 	suspend_companions("allowinshades", true);
 	if (module_events("graveyard", getsetting("gravechance", 0)) != 0) {
 		if (!checknavs()) {
@@ -20,46 +22,27 @@ if ($session['user']['gravefights']<=0){
 		}
 	} else {
 		$session['user']['gravefights']--;
- 			$battle=true;
- 			$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE graveyard=1 ORDER BY rand(".e_rand().") LIMIT 1";
+		$level = (int) $session['user']['level'];
+        $battle = true;
+ 		$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE graveyard = '1' and creaturelevel = '$level' ORDER BY rand(".e_rand().") LIMIT 1";
 		$result = DB::query($sql);
-		$badguy = DB::fetch_assoc($result);
-		$level = $session['user']['level'];
-		$shift = 0;
-		if ($level < 5) $shift = -1;
-		$badguy['creatureattack'] = 9 + $shift + (int)(($level-1) * 1.5);
+
+        $badguy = lotgd_transform_creature($result->current());
+		$badguy['creaturehealth'] += 50;
+		$badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
 
 		// Make graveyard creatures easier.
-		$badguy['creaturedefense'] = (int)((9 + $shift + (($level-1) * 1.5)));
+		$badguy['creatureattack'] *= .7;
 		$badguy['creaturedefense'] *= .7;
-		if (isset($badguy['creatureaiscript'])) {
-			$aiscriptfile=$badguy['creatureaiscript'].".php";
-			if (file_exists($aiscriptfile)) {
-				//file there, get content and put it into the ai script field.
-				$badguy['creatureaiscript'] = " require_once '{$aiscriptfile}';";
-			}
-			else
-			{
-				$badguy['creatureaiscript'] = '';
-			}
-		}
-		require_once("lib/playerfunctions.php");
-		require_once("lib/bell_rand.php");
-		$atk=get_player_attack();
-		$def=get_player_defense();
-		$modificator = 1.5;
-		$badguy['creatureattack']=max(2,$atk-bell_rand(2,ceil($level/$modificator)+$modificator*sqrt($session['user']['dragonkills'])));
-		$badguy['creaturedefense']=max(2,$def-bell_rand(2,ceil($level/$modificator)+$modificator*sqrt($session['user']['dragonkills'])));
-		$badguy['creaturehealth'] = $level * 5 + 50+ round($session['user']['dragonkills']*2);
-		$badguy['creatureexp'] = e_rand(10 + round($level/3), 20 + round($level/3));
-		$badguy['creaturelevel'] = $level;
+
+		// Add enemy
 		$attackstack['enemies'][0] = $badguy;
 		$attackstack['options']['type'] = 'graveyard';
 
 		//no multifights currently, so this hook passes the badguy to modify
-		$attackstack = modulehook("graveyardfight-start",$attackstack);
+		$attackstack = modulehook('graveyardfight-start', $attackstack);
 
-		$session['user']['badguy']=createstring($attackstack);
+		$session['user']['badguy'] = createstring($attackstack);
 	}
 }
 ?>
