@@ -130,7 +130,7 @@ function get_creature_stats($dk = 0)
 
     if (0 == $dk) $dk = $session['user']['dragonkills'];
 
-    //-- Estan colocados por orden de importancia
+    //-- They are placed in order of importance
     $con = e_rand($dk/6,$dk/2);
     $dk -= $con;
     $str = e_rand(0,$dk);
