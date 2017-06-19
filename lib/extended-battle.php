@@ -42,8 +42,6 @@ function show_enemies($enemies)
 		if ((isset($badguy['istarget']) && $badguy['istarget'] == true) && $enemycounter > 1) $ccode = "`#";
 		else $ccode = "`2";
 
-		if (! isset($badguy['creaturemaxhealth']) && isset($badguy['creaturehealth'])) $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
-
 		if (isset($badguy['hidehitpoints']) && $badguy['hidehitpoints'] == true) {
 			$maxhealth = $health = "???";
 		} else {
@@ -65,7 +63,7 @@ function show_enemies($enemies)
 					'hptext' => sprintf("(%s/%s) %s`0`n", $health, $maxhealth, $badguy['creaturehealth']>0? "" : translate_inline("`7DEFEATED`0")),
 					'showBar' => true
 				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 
 			break;
 
@@ -81,7 +79,7 @@ function show_enemies($enemies)
 					'hptext' => ($badguy['creaturehealth']>0?"":translate_inline("`7DEFEATED`0")),
 					'showBar' => true
 				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 
 			break;
 			default:
@@ -93,7 +91,7 @@ function show_enemies($enemies)
 					'showBar' => false,
 					'hptext' => '`6'.($badguy['creaturehealth']>0?$health:translate_inline("`7DEFEATED`0")).'`0'
 				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 			break;
 		}
 	}
@@ -125,7 +123,7 @@ function show_enemies($enemies)
 				'showBar' => true
 			];
 
-			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 		break;
 
 		case 1:
@@ -141,7 +139,7 @@ function show_enemies($enemies)
 				'showBar' => true
 			];
 
-			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 
 		break;
 		default:
@@ -154,7 +152,7 @@ function show_enemies($enemies)
 				'showBar' => false
 			];
 
-			output_notl($lotgd_tpl->renderThemeTemplate('battle/forestcreaturebar.twig', $data), true);
+			output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
 		break;
 	}
 }
