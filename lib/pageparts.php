@@ -380,10 +380,12 @@ function popup_header($title = 'Legend of the Green Dragon')
 	$arguments = func_get_args();
 	if (!$arguments || count($arguments) == 0) $arguments = ['Legend of the Green Dragon'];
 
+    $title = call_user_func_array('sprintf_translate', $arguments);
 	$title = sanitize(holidayize($title, 'title'));
 
 	//-- Add to html
-	$html['title'] = $title . tlbutton_pop();
+	$html['title'] = $title;
+	$html['content'] .= tlbutton_pop();
 }
 
 /**
