@@ -49,62 +49,72 @@ function show_enemies($enemies)
 			$maxhealth = $badguy['creaturemaxhealth'];
 		}
 
-		switch ($barDisplay)
+		$data = [
+			'showbar' => false,
+			'showhptext' => true,
+			'who' => translate_inline('`$Enemy`0'),
+			'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
+			'name' => $ccode.$badguy['creaturename'].$ccode,
+			'level' => $badguy['creaturelevel'],
+			'healthtext' => $healthtext,
+			'hpvalue' => $badguy['creaturehealth'],
+			'hptotal' => $badguy['creaturemaxhealth'],
+			'hpvaluetext' => $health,
+			'hptotaltext' => $maxhealth
+		];
+
+		if (1 == $barDisplay)
 		{
-			case 2:
-				$data = [
-					'value' => $badguy['creaturehealth'],
-					'total' => $badguy['creaturemaxhealth'],
-					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
-					'who' => translate_inline('Enemy'),
-					'name' => $ccode.$badguy['creaturename'].$ccode,
-					'level' => $badguy['creaturelevel'],
-					'healthtext' => $healthtext,
-					'hptext' => sprintf("(%s/%s) %s`0`n", $health, $maxhealth, $badguy['creaturehealth']>0? "" : translate_inline("`7DEFEATED`0")),
-					'showBar' => true
-				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
-
-			break;
-
-			case 1:
-				$data = [
-					'value' => $badguy['creaturehealth'],
-					'total' => $badguy['creaturemaxhealth'],
-					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
-					'who' => translate_inline('Enemy'),
-					'name' => $ccode.$badguy['creaturename'].$ccode,
-					'level' => $badguy['creaturelevel'],
-					'healthtext' => $healthtext,
-					'hptext' => ($badguy['creaturehealth']>0?"":translate_inline("`7DEFEATED`0")),
-					'showBar' => true
-				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
-
-			break;
-			default:
-				$data = [
-					'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
-					'who' => translate_inline('Enemy'),
-					'name' => $ccode.$badguy['creaturename'].$ccode,
-					'level' => $badguy['creaturelevel'],
-					'showBar' => false,
-					'hptext' => '`6'.($badguy['creaturehealth']>0?$health:translate_inline("`7DEFEATED`0")).'`0'
-				];
-				output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
-			break;
+			$data['showhptext'] = false;
+			$data['showbar'] = true;
 		}
-	}
-	if ($u['alive']){
-		$hitpointstext=$u['name']."`0";
-		$dead = false;
-	} else {
-		$hitpointstext=sprintf_translate("Soul of %s",$u['name']);
-		$dead=true;
-		$maxsoul= 50 + 10 * $u['level']+$u['dragonkills']*2;
+		elseif (2 == $barDisplay)
+		{
+			$data['showbar'] = true;
+		}
 
+		output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
+	}
+
+	if ($u['alive'])
+	{
+		$hitpointstext = $u['name'].'`0';
+		$hitpointstext = sprintf_translate("Soul of %s",$u['name']);
+		$dead = false;
+	}
+	else
+	{
+		$hitpointstext = sprintf_translate("Soul of %s",$u['name']);
+		$dead = true;
+		$maxsoul= 50 + 10 * $u['level']+$u['dragonkills']*2;
 	}
 	//your faction display (companions?)
+	$data = [
+		'showbar' => false,
+		'showhptext' => true,
+		'who' => translate_inline('`!You`0'),
+		'isTarget' => false,
+		'name' => $hitpointstext,
+		'level' => $u['level'],
+		'healthtext' => $healthtext,
+		'hpvalue' => $u['hitpoints'],
+		'hptotal' => (! $dead ? $u['maxhitpoints'] : $maxsoul),
+		'hpvaluetext' => $u['hitpoints'],
+		'hptotaltext' => (! $dead ? $u['maxhitpoints'] : $maxsoul)
+	];
+
+	if (1 == $barDisplay)
+	{
+		$data['showhptext'] = false;
+		$data['showbar'] = true;
+	}
+	elseif (2 == $barDisplay)
+	{
+		$data['showbar'] = true;
+	}
+
+	output_notl($lotgd_tpl->renderThemeTemplate('battle/combathealthbar.twig', $data), true);
+return;
 	switch ($barDisplay)
 	{
 		case 2:
@@ -115,7 +125,7 @@ function show_enemies($enemies)
 				'value' => $u['hitpoints'],
 				'total' => (! $dead ? $u['maxhitpoints'] : $maxsoul),
 				'isTarget' => false,
-				'who' => translate_inline('You'),
+				'who' => translate_inline('`!You`0'),
 				'name' => $hitpointstext,
 				'level' => $u['level'],
 				'healthtext' => $healthtext,
@@ -131,7 +141,7 @@ function show_enemies($enemies)
 				'value' => $u['hitpoints'],
 				'total' => (! $dead ? $u['maxhitpoints'] : $maxsoul),
 				'isTarget' => false,
-				'who' => translate_inline('You'),
+				'who' => translate_inline('`!You`0'),
 				'name' => $hitpointstext,
 				'level' => $u['level'],
 				'healthtext' => $healthtext,
@@ -145,7 +155,7 @@ function show_enemies($enemies)
 		default:
 			$data = [
 				'isTarget' => false,
-				'who' => translate_inline('You'),
+				'who' => translate_inline('`!You`0'),
 				'name' => $hitpointstext,
 				'level' => $u['level'],
 				'hptext' => '`6'.($u['hitpoints']>0?$u['hitpoints']:translate_inline("`7DEFEATED`0")).'`0',
