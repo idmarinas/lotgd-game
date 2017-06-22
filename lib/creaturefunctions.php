@@ -65,6 +65,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
 
     if (! isset($badguy['creaturespeed'])) $badguy['creaturespeed'] = 2.5;
     if (! isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
+    if (! isset($badguy['physicalresistance'])) $badguy['physicalresistance'] = 0;
 
     $creatureattr = get_creature_stats($dk);
 
