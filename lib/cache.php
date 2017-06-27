@@ -10,15 +10,14 @@ class LotgdCache extends Filesystem
 {
 	public function __construct(array $options = [])
 	{
-		if (empty($options))
-		{
-			$options = [
-				'namespace' => 'lotgd',
-				'cache_dir' => 'cache/',
-				'ttl' => 900,
-                'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di'
-			];
-		}
+		$default = [
+			'namespace' => 'lotgd',
+			'cache_dir' => 'cache/',
+			'ttl' => 900,
+            'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di'
+		];
+
+        $options = array_merge($default, $options);
 
 		parent::__construct($options);
 
