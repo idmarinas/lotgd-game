@@ -8,7 +8,6 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
     global $lotgd_tpl, $copyright;
 
 	require_once 'lib/nltoappon.php';
-    require_once 'lib/settings_extended.php';
 
     $message = full_sanitize(str_replace('`n', '<br>', nltoappon($message)));
     $headers = [];
@@ -17,7 +16,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
     if (! strstr($additional_headers, "From")) $headers[] = "From: ".getsetting('servername', 'The Legend of the Green Dragon')." <".getsetting('gameadminemail','postmaster@localhost.com').">";
 
     //-- Send mail in HTML format
-    if ($settings_extended->getsetting('sendhtmlmail', 0))
+    if (getsetting('sendhtmlmail', 0))
     {
         if (! strstr($additional_headers, "MIME-Version")) $headers[] = "MIME-Version: 1.0";
 	    if (! strstr($additional_headers, "Content-type")) $headers[] = "Content-type: text/html; charset=UTF-8";
