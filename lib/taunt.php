@@ -2,44 +2,52 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once("lib/dbwrapper.php");
-require_once("lib/e_rand.php");
-require_once("lib/substitute.php");
+require_once 'lib/dbwrapper.php';
+require_once 'lib/e_rand.php';
+require_once 'lib/substitute.php';
 
-function select_taunt() {
+function select_taunt()
+{
 	global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . DB::prefix("taunts") .
-		" ORDER BY rand(".e_rand() . ") LIMIT 1";
+	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
 
 	$result = DB::query($sql);
-	if ($result) {
+	if ($result)
+    {
 		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
-	} else {
+	}
+    else
+    {
 		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
 	}
 
 	$taunt = substitute($taunt);
+
 	return $taunt;
 }
 
-function select_taunt_array(){
+function select_taunt_array()
+{
 	global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . DB::prefix("taunts") .
-		" ORDER BY rand(".e_rand() . ") LIMIT 1";
+	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
 
 	$result = DB::query($sql);
-	if ($result) {
+	if ($result)
+    {
 		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
-	} else {
+	}
+    else
+    {
 		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
 	}
 
 	$taunt = substitute_array($taunt);
-	array_unshift($taunt, true, "taunts");
+	array_unshift($taunt, true, 'taunts');
+
 	return $taunt;
 }
 ?>
