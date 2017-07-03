@@ -96,9 +96,16 @@ class LotgdTemplate
 				return $url;
 			}),
 			//-- Translate a text in template
-			new Twig_SimpleFilter('t', function ($text)
+			new Twig_SimpleFilter('t', function ($data, $namespace = false)
 			{
-				return translate_inline($text);
+                if (is_array($data))
+                {
+                    $text = str_replace('`%','`%%', $data[0]);
+                    unset($data[0]);
+
+                    return vsprintf(translate_inline($text, $namespace), $data);
+                }
+                else return translate_inline($data, $namespace);
 			})
 		];
 	}
