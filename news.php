@@ -98,7 +98,7 @@ if (!$session['user']['loggedin']) {
 	}
 	addnav("S?Land of Shades","shades.php");
 	addnav("G?The Graveyard","graveyard.php");
-	require_once("lib/extended-battle.php");
+    require_once 'lib/battle/extended.php';
 	suspend_companions("allowinshades", true);
 	tlschema();
 }

@@ -312,7 +312,7 @@ if ($dp < $dkills) {
         }
 	}
 
-	require_once 'lib/extended-battle.php';
+    require_once 'lib/battle/extended.php';
 	unsuspend_companions("allowinshades");
 
 	if (! getsetting("newdaycron",0))

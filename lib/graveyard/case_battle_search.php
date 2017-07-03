@@ -4,7 +4,7 @@ if ($session['user']['gravefights']<=0){
 	$op="";
 	httpset('op', "");
 }else{
-	require_once 'lib/extended-battle.php';
+    require_once 'lib/battle/extended.php';
 	require_once 'lib/creaturefunctions.php';
 
 	suspend_companions("allowinshades", true);
