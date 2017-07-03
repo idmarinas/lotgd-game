@@ -110,7 +110,7 @@
 @dividedIconPadding: 0em;
 
 /* Block */
-@blockBackground: @darkWhite;
+@blockBackground: @strongTransparentBlack;
 @blockBoxShadow: none;
 @blockBorderWidth: 1px;
 @blockBorder: @blockBorderWidth solid @solidBorderColor;
@@ -130,7 +130,7 @@
 @attachedBorder: 1px solid @solidBorderColor;
 @attachedVerticalPadding: @blockVerticalPadding;
 @attachedHorizontalPadding: @blockHorizontalPadding;
-@attachedBackground: @white;
+@attachedBackground: @transparentWhite;
 @attachedBorderRadius: @blockBorderRadius;
 
 @tinyAttachedSize: @relativeTiny;
