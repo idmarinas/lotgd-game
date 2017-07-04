@@ -1,5 +1,5 @@
 {{ '`$`c`b~ ~ ~ Fight ~ ~ ~`b`c`0'|t }}
-
+<br><br>
 {# Information when encounter criature/s #}
 {% for text in encounter %}
     {{ text|t }}
@@ -47,7 +47,7 @@
 {% endif %}
 {# Information of end of battle #}
 {% if battleend %}
-    <h5 class="ui attached header">{{ '`2End of Battle:`0'|t }}</h5>
+    <h5 class="ui attached header">{{ '`2End of Battle`0'|t }}</h5>
     <div class="ui bottom attached divided segment">
         {% for msg in battleend %}
             {{ msg|t }}
