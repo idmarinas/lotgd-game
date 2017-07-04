@@ -67,7 +67,7 @@ if ($battle)
 {
 	//-- Any data for personalize results
 	$battleDefeatWhere = 'in the graveyard';
-	$battleDefeatForest = false;
+	$battleInForest = false;
 	$battleDefeatLostGold = false;
 	$battleDefeatLostExp = false;
 	$battleDefeatCanDie = false;
