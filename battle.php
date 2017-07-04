@@ -5,254 +5,280 @@
 require_once 'lib/bell_rand.php';
 require_once 'common.php';
 require_once 'lib/http.php';
-require_once 'lib/battle-buffs.php';
-require_once 'lib/battle-skills.php';
+require_once 'lib/substitute.php';
+require_once 'lib/battle/functions.php';
+require_once 'lib/battle/buffs.php';
+require_once 'lib/battle/skills.php';
+require_once 'lib/battle/extended.php';
 require_once 'lib/buffs.php';
-require_once 'lib/extended-battle.php';
 
 //just in case we're called from within a function.Yuck is this ugly.
-global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
-global $creaturedefmod,$adjustment,$defmod,$atkmod,$compdefmod,$compatkmod,$buffset,$atk,$def,$options;
-global $companions,$companion,$newcompanions,$count,$defended,$needtostopfighting,$roll;
+global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
+global $creaturedefmod, $adjustment, $defmod, $atkmod, $compdefmod, $compatkmod, $buffset, $atk, $def, $options;
+global $companions, $companion, $newcompanions, $countround, $defended, $needtostopfighting, $roll, $content;
 
-tlschema("battle");
+tlschema('battle');
 
 $newcompanions = [];
+$content = [
+    'msg' => [],
+    'encounter' => [],
+	'battlebars' => [],
+	'battlestart' => [],
+    'battlerounds' => [],
+	'battleend' => []
+];
+
 $attackstack = @unserialize($session['user']['badguy']);
 if (isset($attackstack['enemies'])) $enemies = $attackstack['enemies'];
 if (isset($attackstack['options'])) $options = $attackstack['options'];
 
 // Make the new battle script compatible with old, single enemy fights.
-if (isset($attackstack['creaturename']) && $attackstack['creaturename'] > "") {
+if (isset($attackstack['creaturename']) && $attackstack['creaturename'] > '')
+{
 	$safe = $attackstack;
 	$enemies = [];
-	$enemies[0]=$safe;
+	$enemies[0] = $safe;
 	unset($safe);
-} elseif (isset($attackstack[0]['creaturename']) && $attackstack['creaturename'] > "") {
-	$enemies=$attackstack;
 }
-if (!isset($options)) {
-	if (isset($enemies[0]['type'])) $options['type'] = $enemies[0]['type'];
-}
+elseif (isset($attackstack[0]['creaturename']) && $attackstack['creaturename'] > '') $enemies=$attackstack;
+
+if (!isset($options) && isset($enemies[0]['type'])) $options['type'] = $enemies[0]['type'];
 
 $options = prepare_fight($options);
 
-$roundcounter=0;
+$roundcounter = 0;
 $adjustment = 1;
 
 $count = 1;
 $auto = httpget('auto');
-if ($auto == 'full') {
-	$count = -1;
-} else if ($auto == 'five') {
-	$count = 5;
-} else if ($auto == 'ten') {
-	$count = 10;
-}
+if ($auto == 'full') { $count = -1; }
+else if ($auto == 'five') { $count = 5; }
+else if ($auto == 'ten') { $count = 10; }
 
 $enemycounter = count($enemies);
 $enemies = autosettarget($enemies);
 
-$op=httpget("op");
-$skill=httpget("skill");
-$l=httpget("l");
+$op = httpget("op");
+$skill = httpget("skill");
+$l = httpget("l");
 $newtarget = httpget('newtarget');
-if ($newtarget != "") $op = "newtarget";
+if ($newtarget != '') $op = 'newtarget';
 //if (!$targetted) $op = "newtarget";
 
-if ($op=="fight"){
-	apply_skill($skill,$l);
-} else if ($op=="newtarget") {
-	foreach ($enemies as $index=>$badguy){
-		if ($index == (int)$newtarget) {
-			if (!isset($badguy['cannotbetarget']) || $badguy['cannotbetarget'] === false) {
-				$enemies[$index]['istarget'] = 1;
-			}else{
-				if (is_array($badguy['cannotbetarget'])) {
-					$msg = sprintf_translate($badguy['cannotbetarget']);
-					$msg = substitute($msg);
-					output_notl($msg); //Here it's already translated
-				}else{
-					if ($badguy['cannotbetarget'] === true) {
-						$msg = "{badguy} cannot be selected as target.";
-					} else {
-						$msg = $badguy['cannotbetarget'];
-					}
-					$msg = substitute_array("`5".$msg."`0`n");
-					output($msg);
+if ($op == 'fight') apply_skill($skill, $l);
+else if ($op == 'newtarget')
+{
+	foreach ($enemies as $index => $badguy)
+    {
+		if ($index == (int) $newtarget)
+        {
+			if (!isset($badguy['cannotbetarget']) || $badguy['cannotbetarget'] === false) $enemies[$index]['istarget'] = 1;
+			else
+            {
+				if (is_array($badguy['cannotbetarget'])) $content['msg'][] = substitute($msg);
+                else
+                {
+                    $msg = $badguy['cannotbetarget'];
+					if ($badguy['cannotbetarget'] === true) $msg = "{badguy} cannot be selected as target.";
+
+					$content['msg'][] = substitute_array("`5{$msg}`0`n");
 				}
 			}
-		} else {
-			$enemies[$index]['istarget'] = 0;
 		}
+        else $enemies[$index]['istarget'] = 0;
 	}
 }
 
 $victory = false;
 $defeat = false;
 
-if ($enemycounter > 0) {
-	output ("`\$`c`b~ ~ ~ Fight ~ ~ ~`b`c`0");
-	modulehook("battle", $enemies);
-	foreach ($enemies as $index=>$badguy) {
-		if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0) {
-			output("`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n",$badguy['creaturename'],$badguy['creatureweapon']);
+if ($enemycounter > 0)
+{
+	modulehook('battle', $enemies);
+	foreach ($enemies as $index=>$badguy)
+    {
+		if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0)
+        {
+            $content['encounter'][] = ['`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n', $badguy['creaturename'], $badguy['creatureweapon'] ];
 		}
 	}
-	output_notl("`n");
-	modulehook("battle-info", $enemies);
-	show_enemies($enemies);
-	rawoutput('<br>');
+
+	$data = prepare_data_battlebars($enemies);
+	$content['battlebars']['start'] = [
+		'player' => $data['user'],
+		'companions' => $data['companions'],
+		'enemies' => $data['enemies']
+	];
+	unset($data);
 }
 
-suspend_buffs((($options['type'] == 'pvp')?"allowinpvp":false));
-suspend_companions((($options['type'] == 'pvp')?"allowinpvp":false));
+suspend_buffs((($options['type'] == 'pvp')?'allowinpvp':false));
+suspend_companions((($options['type'] == 'pvp')?'allowinpvp':false));
 
 // Now that the bufflist is sane, see if we should add in the bodyguard.
-$inn = (int)httpget('inn');
-if ($options['type']=='pvp' && $inn==1) {
-	apply_bodyguard($badguy['bodyguardlevel']);
-}
+$inn = (int) httpget('inn');
+if ($options['type'] == 'pvp' && $inn == 1) apply_bodyguard($badguy['bodyguardlevel']);
 
 $surprised = false;
-if ($op != "run" && $op != "fight" && $op != "newtarget") {
-	if (count($enemies) > 1) {
+if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
+{
+	if (count($enemies) > 1)
+    {
 		$surprised = true;
-		output("`b`^YOUR ENEMIES`\$ surprise you and get the first round of attack!`0`b`n`n");
-	} else {
+		$content['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`\$ surprise you and get the first round of attack!`0`b`n`n';
+	}
+    else
+    {
 		// Let's try this instead.Biggest change is that it adds possibility of
 		// being surprised to all fights.
-		if (!array_key_exists('didsurprise',$options) || !$options['didsurprise']) {
+		if (!array_key_exists('didsurprise', $options) || !$options['didsurprise'])
+        {
 			// By default, surprise is 50/50
 			$surprised = e_rand(0, 1) ? true : false;
 			// Now, adjust for slum/thrill
 			$type = httpget('type');
-			if ($type == 'slum' || $type == 'thrill') {
+			if ($type == 'slum' || $type == 'thrill')
+            {
 				$num = e_rand(0, 2);
 				$surprised = true;
-				if ($type == 'slum' && $num != 2)
-				$surprised = false;
-				if (($type == 'thrill' || $type=='suicide') && $num == 2)
-				$surprised = false;
+				if ($type == 'slum' && $num != 2) $surprised = false;
+				if (($type == 'thrill' || $type == 'suicide') && $num == 2) $surprised = false;
 			}
-			if (!$surprised) {
-				output("`b`\$Your skill allows you to get the first attack!`0`b`n`n");
-			} else {
-				if ($options['type'] == 'pvp') {
-					output("`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n",$badguy['creaturename']);
-				}else{
-					output("`b`^%s`\$ surprises you and gets the first round of attack!`0`b`n`n",$badguy['creaturename']);
-				}
-				$op = "run";
+
+			if (!$surprised) $content['battlestart'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
+			else
+            {
+				if ($options['type'] == 'pvp') $content['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $badguy['creaturename']];
+                else $content['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $badguy['creaturename']];
+
+				$op = 'run';
 			}
-			$options['didsurprise']=1;
+			$options['didsurprise'] = 1;
 		}
 	}
 }
 $needtostopfighting = false;
-if ($op != "newtarget") {
+if ($op != 'newtarget')
+{
+	$countround = 0;
 	// Run through as many rounds as needed.
-	do {
+	do
+    {
 		//we need to restore and calculate here to reflect changes that happen throughout the course of multiple rounds.
-		modulehook("startofround-prebuffs");
+		modulehook('startofround-prebuffs'); //-- For Stamina System
 		restore_buff_fields();
 		calculate_buff_fields();
 		prepare_companions();
 		$newenemies = [];
 		// Run the beginning of round buffs (this also calculates all modifiers)
-		foreach ($enemies as $index=>$badguy) {
-			$badguy = modulehook("startofround-perbadguy-prebuff",$badguy);
-			if ($badguy['dead'] == false && $badguy['creaturehealth'] > 0) {
-				if (isset($badguy['alwaysattacks']) && $badguy['alwaysattacks'] == true) {
-				} else {
-					$roundcounter++;
-				}
-				if (($roundcounter > $options['maxattacks']) && $badguy['istarget'] == false) {
-					$newcompanions = $companions;
-				} else {
-					$buffset = activate_buffs("roundstart");
-					if ($badguy['creaturehealth']<=0 || $session['user']['hitpoints']<=0){
+		foreach ($enemies as $index => $badguy)
+        {
+			if ($badguy['dead'] == false && $badguy['creaturehealth'] > 0)
+            {
+                if (! isset($badguy['alwaysattacks']) || $badguy['alwaysattacks'] != true) $roundcounter++;
+
+				if (($roundcounter > $options['maxattacks']) && $badguy['istarget'] == false) $newcompanions = $companions;
+				else
+                {
+					$buffset = activate_buffs('roundstart');
+					if ($badguy['creaturehealth'] <= 0 || $session['user']['hitpoints'] <= 0)
+                    {
 						$creaturedmg = 0;
 						$selfdmg = 0;
-						if ($badguy['creaturehealth'] <= 0) {
+						if ($badguy['creaturehealth'] <= 0)
+                        {
 							$badguy['dead'] = true;
 							$badguy['istarget'] = false;
 							$count = 1;
 							$needtostopfighting = true;
 						}
-						if ($session['user']['hitpoints'] <= 0) {
+						if ($session['user']['hitpoints'] <= 0)
+                        {
 							$count = 1;
 							$needtostopfighting = true;
 						}
 						$newenemies[$index] = $badguy;
 						$newcompanions = $companions;
 						// No break here. It would break the foreach statement.
-					} else {
-						$creaturedefmod=$buffset['badguydefmod'];
-						$creatureatkmod=$buffset['badguyatkmod'];
-						$atkmod=$buffset['atkmod'];
-						$defmod=$buffset['defmod'];
-						$compatkmod=$buffset['compatkmod'];
-						$compdefmod=$buffset['compdefmod'];
-						if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
-							if (is_array($companions)) {
+					}
+                    else
+                    {
+						$creaturedefmod = $buffset['badguydefmod'];
+						$creatureatkmod = $buffset['badguyatkmod'];
+						$atkmod = $buffset['atkmod'];
+						$defmod = $buffset['defmod'];
+						$compatkmod = $buffset['compatkmod'];
+						$compdefmod = $buffset['compdefmod'];
+						if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0 && $badguy['istarget'])
+						{
+							if (is_array($companions))
+							{
 								$newcompanions = [];
-								foreach ($companions as $name=>$companion) {
-									if ($companion['hitpoints'] > 0) {
-										$buffer = report_companion_move($companion, "heal");
-										if ($buffer !== false) {
+								foreach ($companions as $name => $companion)
+								{
+									if ($companion['hitpoints'] > 0)
+									{
+										$buffer = report_companion_move($companion, 'heal');
+										if ($buffer !== false)
+										{
 											$newcompanions[$name] = $buffer;
 											unset($buffer);
-										} else {
-											unset($companion);
-											unset($newcompanions[$name]);
 										}
-									} else {
-										$newcompanions[$name] = $companion;
+										else unset($companion, $newcompanions[$name]);
 									}
+									else $newcompanions[$name] = $companion;
 								}
 							}
-						} else {
-							$newcompanions = $companions;
 						}
+						else $newcompanions = $companions;
+
 						$companions = $newcompanions;
 
-						if ($op=="fight" || $op=="run" || $surprised){
-						$badguy = modulehook("startofround",$badguy);
+						if ($op == 'fight' || $op == 'run' || $surprised)
+                        {
 							// Grab an initial roll.
 							$roll = rolldamage();
-							if ($op=="fight" && !$surprised){
+							if ($op == 'fight' && !$surprised)
+                            {
 								$ggchancetodouble = $session['user']['dragonkills'];
 								$bgchancetodouble = $session['user']['dragonkills'];
 
-								if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0) {
-									$buffset = activate_buffs("offense");
-									if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
-										if (is_array($companions)) {
+								if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0)
+								{
+									$buffset = activate_buffs('offense');
+
+									if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0 && $badguy['istarget'] && is_array($companions))
+                                    {
+										if (is_array($companions))
+										{
 											$newcompanions = [];
-											foreach ($companions as $name=>$companion) {
-												if ($companion['hitpoints'] > 0) {
-													$buffer = report_companion_move($companion, "magic");
-													if ($buffer !== false) {
+											foreach ($companions as $name=>$companion)
+											{
+												if ($companion['hitpoints'] > 0)
+												{
+													$buffer = report_companion_move($companion, 'magic');
+													if ($buffer !== false)
+													{
 														$newcompanions[$name] = $buffer;
 														unset($buffer);
-													} else {
-														unset($companion);
-														unset($newcompanions[$name]);
 													}
-												} else {
-													$newcompanions[$name] = $companion;
+													else unset($companion, $newcompanions[$name]);
 												}
+												else $newcompanions[$name] = $companion;
 											}
+
 										}
-									} else {
-										$newcompanions = $companions;
 									}
+                                    else $newcompanions = $companions;
+
 									$companions = $newcompanions;
-									if ($badguy['creaturehealth']<=0 || $session['user']['hitpoints']<=0){
+									if ($badguy['creaturehealth'] <= 0 || $session['user']['hitpoints'] <= 0)
+                                    {
 										$creaturedmg = 0;
 										$selfdmg = 0;
-										if ($badguy['creaturehealth'] <= 0) {
+										if ($badguy['creaturehealth'] <= 0)
+                                        {
 											$badguy['dead'] = true;
 											$badguy['istarget'] = false;
 											$count = 1;
@@ -261,125 +287,133 @@ if ($op != "newtarget") {
 										$newenemies[$index] = $badguy;
 										$newcompanions = $companions;
 										// No break here. It would break the foreach statement.
-									} else if ($badguy['istarget'] == true) {
-										do {
-											if ($badguy['creaturehealth']<=0 || $session['user']['hitpoints']<=0){
+									}
+                                    else if ($badguy['istarget'] == true)
+                                    {
+										do
+                                        {
+											if ($badguy['creaturehealth']<=0 || $session['user']['hitpoints']<=0)
+                                            {
 												$creaturedmg = 0;
 												$selfdmg = 0;
 												$newenemies[$index] = $badguy;
 												$newcompanions = $companions;
 												$needtostopfighting = true;
-											}else{
-												$needtostopfighting = battle_player_attacks();
 											}
+                                            else $needtostopfighting = battle_player_attacks();
+
 											$r = mt_rand(0,100);
 											if ($r < $ggchancetodouble && $badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && !$needtostopfighting){
 												$additionalattack = true;
 												$ggchancetodouble -= ($r+5);
 												$roll = rolldamage();
-											}else{
-												$additionalattack = false;
 											}
-										} while($additionalattack && !$needtostopfighting);
-										if ($needtostopfighting) {
-											$newcompanions = $companions;
+                                            else $additionalattack = false;
 										}
-									} else {
+                                        while($additionalattack && !$needtostopfighting);
+
+										if ($needtostopfighting) $newcompanions = $companions;
 									}
 								}
-							}else if($op=="run" && !$surprised){
-								output("`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n",$badguy['creaturename']);
+							}
+                            else if ($op == 'run' && !$surprised)
+							{
+								$content['battlerounds'][$countround]['allied'][] = ["`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n", $badguy['creaturename']];
 							}
 
 							//Need to insert this here because of auto-fighting!
-							if ($op != "newtarget")	$op = "fight";
+							if ($op != 'newtarget')	$op = 'fight';
 
 							// We need to check both user health and creature health. Otherwise
 							// the user can win a battle by a RIPOSTE after he has gone <= 0 HP.
 							//-- Gunnar Kreitz
-							if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $roundcounter <= $options['maxattacks']){
-								$buffset = activate_buffs("defense");
-								do {
+							if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0 && $roundcounter <= $options['maxattacks'])
+							{
+								$buffset = activate_buffs('defense');
+								do
+								{
 									$defended = false;
 									$needtostopfighting = battle_badguy_attacks();
 									$r = mt_rand(0,100);
 									if (!isset($bgchancetodouble)) $bgchancetodouble = 0;
-									if ($r < $bgchancetodouble && $badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && !$needtostopfighting){
+									if ($r < $bgchancetodouble && $badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && !$needtostopfighting)
+									{
 										$additionalattack = true;
 										$bgchancetodouble -= ($r+5);
 										$roll = rolldamage();
-									}else{
-										$additionalattack = false;
 									}
-								} while ($additionalattack && !$defended);
+									else $additionalattack = false;
+								}
+								while ($additionalattack && !$defended);
 							}
+
 							$companions = $newcompanions;
-							if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
-								if (is_array($companions)) {
-									foreach ($companions as $name=>$companion) {
-										if ($companion['hitpoints'] > 0) {
-											$buffer = report_companion_move($companion, "fight");
-											if ($buffer !== false) {
+							if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints']>0 && $badguy['istarget'])
+							{
+								if (is_array($companions))
+								{
+									foreach ($companions as $name=>$companion)
+									{
+										if ($companion['hitpoints'] > 0)
+										{
+											$buffer = report_companion_move($companion, 'fight');
+											if ($buffer !== false)
+											{
 												$newcompanions[$name] = $buffer;
 												unset($buffer);
-											} else {
-												unset($companion);
-												unset($newcompanions[$name]);
 											}
-										} else {
-											$newcompanions[$name] = $companion;
+											else unset($companion, $newcompanions[$name]);
 										}
+										else $newcompanions[$name] = $companion;
 									}
 								}
-							} else {
-								$newcompanions = $companions;
 							}
-						} else {
-							$newcompanions = $companions;
+							else { $newcompanions = $companions; }
 						}
-						if($badguy['dead'] == false && isset($badguy['creatureaiscript']) && $badguy['creatureaiscript'] > "") {
+						else { $newcompanions = $companions; }
+
+						if($badguy['dead'] == false && isset($badguy['creatureaiscript']) && $badguy['creatureaiscript'] > '')
+						{
 							global $unsetme;
+
 							execute_ai_script($badguy['creatureaiscript']);
 						}
 					}
 				}
-			} else {
-				$newcompanions = $companions;
 			}
+			else $newcompanions = $companions;
 			// Copy the companions back so in the next round (multiple rounds) they can be used again.
 			// We will also delete the now old set of companions. Just in case.
 			$companions = $newcompanions;
 			unset($newcompanions);
 
-			if ($surprised || $op == "run" || $op == "fight" || $op == "newtarget"){
-				$badguy = modulehook("endofround",$badguy);
-			}
 			// If any A.I. script wants the current enemy to be deleted completely, we will obey.
 			// For multiple rounds/multiple A.I. scripts we will although unset this order.
-
-			if (isset($unsetme) && $unsetme === true) {
+			if (isset($unsetme) && $unsetme === true)
+			{
 				$unsetme = false;
 				unset($unsetme);
-			} else {
-				$newenemies[$index] = $badguy;
 			}
+			else $newenemies[$index] = $badguy;
+
+			if ($surprised || $op == 'run' || $op == 'fight' || $op == 'newtarget') $badguy = modulehook('endofround', $badguy); //-- For Stamina System
 		}
 		expire_buffs();
-		$creaturedmg=0;
-		$selfdmg=0;
+		$creaturedmg = 0;
+		$selfdmg = 0;
 
-		if (($count != 1 || ($needtostopfighting && $count > 1)) && $session['user']['hitpoints'] > 0 && count($enemies) > 0) {
-			output("`2`bNext round:`b`n");
-		}
-
-		if (count($newenemies) > 0) {
+		if (count($newenemies) > 0)
+		{
 			$verynewenemies = [];
 			$alive = 0;
 			$fleeable = 0;
 			$leaderisdead = false;
-			foreach ($newenemies as $index => $badguy) {
-				if ($badguy['dead'] == true || $badguy['creaturehealth'] <= 0){
-					if (isset($badguy['essentialleader']) && $badguy['essentialleader'] == true) {
+			foreach ($newenemies as $index => $badguy)
+			{
+				if ($badguy['dead'] == true || $badguy['creaturehealth'] <= 0)
+				{
+					if (isset($badguy['essentialleader']) && $badguy['essentialleader'] == true)
+					{
 						$defeat = false;
 						$victory = true;
 						$needtostopfighting = true;
@@ -391,264 +425,208 @@ if ($op != "newtarget") {
 					// experience would stay the same
 					// We'll also check if the user is actually alive. If we didn't, we would hand out
 					// experience for graveyard fights.
-					if (getsetting("instantexp",false) == true && $session['user']['alive'] && $options['type'] != "pvp" && $options['type'] != "train") {
-						if (!isset($badguy['expgained']) || $badguy['expgained'] == false) {
+					if (getsetting('instantexp', false) == true && $session['user']['alive'] && $options['type'] != 'pvp' && $options['type'] != 'train')
+					{
+						if (!isset($badguy['expgained']) || $badguy['expgained'] == false)
+						{
 							if (!isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
 							$session['user']['experience'] += round($badguy['creatureexp']/count($newenemies));
-							output("`#You receive `^%s`# experience!`n`0",round($badguy['creatureexp']/count($newenemies)));
+							$content['battlerounds'][$countround]['allied'][] = ['`#You receive `^%s`# experience!`n`0', round($badguy['creatureexp']/count($newenemies))];
 							$options['experience'][$index] = $badguy['creatureexp'];
 							$options['experiencegained'][$index] = round($badguy['creatureexp']/count($newenemies));
 							$badguy['expgained']=true;
 						}
-					} else {
+					}
+					else
+					{
 						$options['experience'][$index] = $badguy['creatureexp'];
 					}
-				}else{
+				}
+				else
+				{
 					$alive++;
 					if (isset($badguy['fleesifalone']) && $badguy['fleesifalone'] == true) $fleeable++;
-					if ($session['user']['hitpoints']<=0){
-						$defeat=true;
-						$victory=false;
+
+					if ($session['user']['hitpoints'] <= 0)
+					{
+						$defeat = true;
+						$victory = false;
+
 						break;
-					}else if(!$leaderisdead) {
-						$defeat=false;
-						$victory=false;
+					}
+					else if(!$leaderisdead)
+					{
+						$defeat = false;
+						$victory = false;
 					}
 				}
+
 				$verynewenemies[$index] = $badguy;
 			}
 			$enemiesflown = false;
-			if ($alive == $fleeable && $session['user']['hitpoints'] > 0) {
-				$defeat=false;
-				$victory=true;
-				$enemiesflown=true;
-				$needtostopfighting=true;
-			}
-			if (getsetting("instantexp",false) == true) {
-				$newenemies = $verynewenemies;
+			if ($alive == $fleeable && $session['user']['hitpoints'] > 0)
+			{
+				$defeat = false;
+				$victory = true;
+				$enemiesflown = true;
+				$needtostopfighting = true;
 			}
 		}
-		if ($alive == 0) {
+		if ($alive == 0)
+		{
 			$defeat=false;
 			$victory=true;
 			$needtostopfighting=true;
 		}
-		if ($count != -1) $count--;
-		if ($needtostopfighting) $count = 0;
-		if ($enemiesflown) {
-			foreach ($newenemies as $index => $badguy) {
-				if (isset($badguy['fleesifalone']) && $badguy['fleesifalone'] == true) {
-					if (is_array($badguy['fleesifalone'])) {
-						$msg = sprintf_translate($badguy['fleesifalone']);
-						$msg = substitute($msg);
-						output_notl($msg); //Here it's already translated
-					}else{
-						if ($badguy['fleesifalone'] === true) {
-							$msg = "{badguy} flees in panic.";
-						} else {
-							$msg = $badguy['fleesifalone'];
-						}
-						$msg = substitute_array("`5".$msg."`0`n");
-						output($msg);
+		if ($count != -1) { $count--; }
+		if ($needtostopfighting) { $count = 0; }
+		if ($enemiesflown)
+		{
+			foreach ($newenemies as $index => $badguy)
+			{
+				if (isset($badguy['fleesifalone']) && $badguy['fleesifalone'] == true)
+				{
+					if (is_array($badguy['fleesifalone'])) { $msg = substitute($badguy['fleesifalone']); }
+					else
+					{
+						if ($badguy['fleesifalone'] === true) { $msg = "{badguy} flees in panic."; }
+						else { $msg = $badguy['fleesifalone']; }
+
+						$msg = substitute_array("`5{$msg}`0`n");
 					}
-				} else {
-					$newenemies[$index]=$badguy;
+
+					$content['battlerounds'][$countround]['enemy'][] = $msg;
 				}
+				else { $newenemies[$index] = $badguy; }
 			}
-		} else if ($leaderisdead) {
-			if (is_array($badguy['essentialleader'])) {
-				$msg = sprintf_translate($badguy['essentialleader']);
-				$msg = substitute($msg);
-				output_notl($msg); //Here it's already translated
-			}else{
-				if ($badguy['essentialleader'] === true) {
+		}
+		else if ($leaderisdead)
+		{
+			if (is_array($badguy['essentialleader']))
+			{
+				$msg = substitute($badguy['essentialleader']);
+				$content['battlerounds'][$countround]['enemy'][] = $msg;
+			}
+			else
+			{
+				if ($badguy['essentialleader'] === true)
+				{
 					$msg = "All other other enemies flee in panic as `^{badguy}`5 falls to the ground.";
-				} else {
+				}
+				else
+				{
 					$msg = $badguy['essentialleader'];
 				}
-				$msg = substitute_array("`5".$msg."`0`n");
-				output($msg);
+				$msg = substitute_array("`5{$msg}`0`n");
+				$content['battlerounds'][$countround]['enemy'][] = $msg;
 			}
 		}
-		if (is_array($newenemies)) {
-			$enemies = $newenemies;
-		}
+		if (is_array($newenemies)) { $enemies = $newenemies; }
+
 		$roundcounter = 0;
-	} while ($count > 0 || $count == -1);
-	$newenemies = $enemies;
-} else {
+		$countround ++;
+	}
+    while ($count > 0 || $count == -1);
+
 	$newenemies = $enemies;
 }
+else { $newenemies = $enemies; }
 
 $newenemies = autosettarget($newenemies);
 
-if ($session['user']['hitpoints']>0 && count($newenemies)>0 && ($op=="fight" || $op=="run")){
- 	output("`n`2`bEnd of Round:`b`0`n");
-	show_enemies($newenemies);
-	rawoutput('<br>');
+$badguy = modulehook('endofpage', $badguy);
+
+if ($session['user']['hitpoints'] > 0 && count($newenemies) > 0 && ($op == 'fight' || $op == 'run'))
+{
+	$data = prepare_data_battlebars($newenemies);
+	$content['battlebars']['end'] = [
+		'player' => $data['user'],
+		'companions' => $data['companions'],
+		'enemies' => $data['enemies']
+	];
+	unset($data);
 }
-$badguy = modulehook("endofpage",$badguy);
+else
+{
+	$content['battlebars']['end'] = [
+		'player' => [],
+		'companions' => [],
+		'enemies' => []
+	];
+}
 
 if ($session['user']['hitpoints'] <= 0)
 {
 	$session['user']['hitpoints'] = 0;
-	$victory=false;
-	$defeat=true;
+	$victory = false;
+	$defeat = true;
 }
 
-if ($victory || $defeat){
+//-- Any data for personalize results
+if (! isset($battleDefeatWhere)) $battleDefeatWhere = 'in the forest';//-- Use for create a news, set to false for not create news
+if (! isset($battleInForest)) $battleInForest = true;//-- Indicating if is a Forest (true) or Graveyard (false)
+if (! isset($battleDefeatLostGold)) $battleDefeatLostGold = true;//-- Indicating if lost gold when lost in battle
+if (! isset($battleDefeatLostExp)) $battleDefeatLostExp = true;//-- Indicating if lost exp when lost in battle
+if (! isset($battleDefeatCanDie)) $battleDefeatCanDie = true;//-- Indicating if die when lost in battle
+if (! isset($battleDenyFlawless)) $battleDenyFlawless = false;//-- Deny flawlees for perfect battle
+if (! isset($battleShowResult)) $battleShowResult = true;//-- Show result of battle. If no need any extra modification of result no need change this
+
+if ($victory || $defeat)
+{
 	// expire any buffs which cannot persist across fights and
 	// unsuspend any suspended buffs
-	output("`2`bEnd of Battle:`0`b");
-	output_notl('`n');
-	// expire any buffs which cannot persist across fights
 	expire_buffs_afterbattle();
 	//unsuspend any suspended buffs
-	unsuspend_buffs((($options['type']=='pvp')?"allowinpvp":false));
-	if ($session['user']['alive']) {
-		unsuspend_companions((($options['type']=='pvp')?"allowinpvp":false));
-	}
-	foreach($companions as $index => $companion) {
-		if(isset($companion['expireafterfight']) && $companion['expireafterfight']) {
-			output($companion['dyingtext']);
+	unsuspend_buffs((($options['type']=='pvp') ? 'allowinpvp' : false));
+	if ($session['user']['alive']) unsuspend_companions((($options['type'] == 'pvp') ? 'allowinpvp' : false));
+
+	foreach($companions as $index => $companion)
+    {
+		if(isset($companion['expireafterfight']) && $companion['expireafterfight'])
+        {
+			$content['battleend'][] = $companion['dyingtext'];
 			unset($companions[$index]);
 		}
 	}
-	if (is_array($newenemies)) {
-		foreach ($newenemies as $index => $badguy) {
-			global $output;
-			$badguy['fightoutput'] = $output;
-			// legacy support. Will be removed in one of the following versions!
-			// Please update all modules, that use the following hook to use the
-			// $options array instead of the $args array for their code.
-			$badguy['type'] = $options['type'];
 
-			if ($victory) $badguy = modulehook("battle-victory",$badguy);
-			if ($defeat) $badguy = modulehook("battle-defeat",$badguy);
-			unset($badguy['fightoutput']);
+	if (is_array($newenemies))
+	{
+		foreach ($newenemies as $index => $badguy)
+		{
+			//-- Not use this hooks, better use battle-victory-end and battle-defeat-end
+			//-- This other hooks have an array with all enemies and can add a extra information
+
+			//-- This hooks triger for each badguy and maybe saturate server
+			//-- Legacy support
+			if ($victory) $badguy = modulehook('battle-victory', $badguy);
+			if ($defeat) $badguy = modulehook('battle-defeat', $badguy);
 		}
-		output_notl('`n');
 	}
-	if ($victory) modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options]);
-	if ($defeat) modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options]);
+	if ($victory)
+	{
+		$result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+
+		$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+
+		battlevictory($newenemies, (isset($options['denyflawless'])?$options['denyflawless']:$battleDenyFlawless), $battleInForest);
+	}
+	else if ($defeat)
+	{
+		$result = modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+
+		$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+
+		battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
+	}
 }
-$attackstack = array('enemies'=>$newenemies, 'options'=>$options);
-$session['user']['badguy']=createstring($attackstack);
-$session['user']['companions']=createstring($companions);
+
+$attackstack = ['enemies' => $newenemies, 'options' => $options];
+$session['user']['badguy'] = createstring($attackstack);
+$session['user']['companions'] = createstring($companions);
+
+if ($battleShowResult) battleshowresults($content);
+
 tlschema();
 
-function battle_player_attacks() {
-	global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
-	global $creaturedefmod,$adjustment,$defmod,$atkmod,$compatkmod,$compdefmod,$buffset,$atk,$def,$options;
-	global $companions,$companion,$newcompanions,$roll,$count,$needtostopfighting;
-
-	$break = false;
-	$creaturedmg = $roll['creaturedmg'];
-	if ($options['type'] != "pvp") {
-		$creaturedmg = report_power_move($atk, $creaturedmg);
-	}
-	if ($creaturedmg==0){
-		output("`4You try to hit `^%s`4 but `\$MISS!`n",$badguy['creaturename']);
-		process_dmgshield($buffset['dmgshield'], 0);
-		process_lifetaps($buffset['lifetap'], 0);
-	}else if ($creaturedmg<0){
-		output("`4You try to hit `^%s`4 but are `\$RIPOSTED `4for `\$%s`4 points of damage!`n",$badguy['creaturename'],(0-$creaturedmg));
-		$badguy['diddamage']=1;
-		$session['user']['hitpoints']+=$creaturedmg;
-		if ($session['user']['hitpoints'] <= 0) {
-			$badguy['killedplayer'] = true;
-			$count = 1;
-			$break = true;
-			$needtostopfighting = true;
-		}
-		process_dmgshield($buffset['dmgshield'],-$creaturedmg);
-		process_lifetaps($buffset['lifetap'],$creaturedmg);
-	}else{
-		output("`4You hit `^%s`4 for `^%s`4 points of damage!`n",$badguy['creaturename'],$creaturedmg);
-		$badguy['creaturehealth']-=$creaturedmg;
-		process_dmgshield($buffset['dmgshield'],-$creaturedmg);
-		process_lifetaps($buffset['lifetap'],$creaturedmg);
-	}
-	if ($badguy['creaturehealth'] <= 0) {
-		$badguy['dead'] = true;
-		$badguy['istarget'] = false;
-		$count = 1;
-		$break = true;
-	}
-	return $break;
-}
-
-function battle_badguy_attacks() {
-	global $badguy,$enemies,$newenemies,$session,$creatureattack,$creatureatkmod, $beta;
-	global $creaturedefmod,$adjustment,$defmod,$atkmod,$compatkmod,$compdefmod,$buffset,$atk,$def,$options;
-	global $companions,$companion,$newcompanions,$roll,$count,$index,$defended,$needtostopfighting;
-
-	$break = false;
-	$selfdmg = $roll['selfdmg'];
-	if ($badguy['creaturehealth']<=0 && $session['user']['hitpoints']<=0){
-		$creaturedmg = 0;
-		$selfdmg = 0;
-		if ($badguy['creaturehealth'] <= 0) {
-			$badguy['dead'] = true;
-			$badguy['istarget'] = false;
-			$count = 1;
-			$needtostopfighting = true;
-			$break = true;
-		}
-		$newenemies[$index] = $badguy;
-		$newcompanions = $companions;
-		$break = true;
-	}else{
-		if ($badguy['creaturehealth']>0 && $session['user']['hitpoints']>0 && $badguy['istarget']){
-			if (is_array($companions)) {
-			foreach ($companions as $name=>$companion) {
-				if ($companion['hitpoints'] > 0) {
-					$buffer = report_companion_move($companion, "defend");
-					if ($buffer !== false) {
-						$newcompanions[$name] = $buffer;
-						unset($buffer);
-					} else {
-						unset($companion);
-						unset($newcompanions[$name]);
-					}
-				} else {
-					$newcompanions[$name] = $companion;
-				}
-			}
-			}
-		} else {
-			$newcompanions = $companions;
-		}
-		$companions = $newcompanions;
-		if ($defended == false) {
-			if ($selfdmg==0){
-				output("`^%s`4 tries to hit you but `^MISSES!`n",$badguy['creaturename']);
-				process_dmgshield($buffset['dmgshield'], 0);
-				process_lifetaps($buffset['lifetap'], 0);
-			}else if ($selfdmg<0){
-				output("`^%s`4 tries to hit you but you `^RIPOSTE`4 for `^%s`4 points of damage!`n",$badguy['creaturename'],(0-$selfdmg));
-				$badguy['creaturehealth']+=$selfdmg;
-				process_lifetaps($buffset['lifetap'], -$selfdmg);
-				process_dmgshield($buffset['dmgshield'], $selfdmg);
-			}else{
-				output("`^%s`4 hits you for `\$%s`4 points of damage!`n",$badguy['creaturename'],$selfdmg);
-				$session['user']['hitpoints']-=$selfdmg;
-				if ($session['user']['hitpoints'] <= 0) {
-					$badguy['killedplayer'] = true;
-					$count = 1;
-				}
-				process_dmgshield($buffset['dmgshield'], $selfdmg);
-				process_lifetaps($buffset['lifetap'], -$selfdmg);
-				$badguy['diddamage']=1;
-			}
-		}
-		if ($badguy['creaturehealth'] <= 0) {
-			$badguy['dead'] = true;
-			$badguy['istarget'] = false;
-			$count = 1;
-			$break = true;
-		}
-	}
-	return $break;
-}
-?>
+//-- If battle end in defeat, break page after show content
+if ($defeat && $battleShowResult) page_footer();
