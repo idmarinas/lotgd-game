@@ -8,36 +8,38 @@ require_once 'lib/fightnav.php';
 require_once 'lib/http.php';
 require_once 'lib/taunt.php';
 require_once 'lib/events.php';
-require_once 'lib/battle-skills.php';
+require_once 'lib/battle/skills.php';
 
 tlschema("forest");
 
 $fight = false;
-page_header("The Forest");
-$dontdisplayforestmessage=handle_event("forest");
+page_header('The Forest');
+$dontdisplayforestmessage = handle_event("forest");
 
 $op = httpget("op");
 
 $battle = false;
 
-if ($op=="run"){
-	if (e_rand()%3 == 0){
+if ($op == 'run')
+{
+	if (e_rand()%3 == 0)
+	{
 		output ("`c`b`&You have successfully fled your opponent!`0`b`c`n");
-		$op="";
-		httpset('op', "");
+		$op = '';
+		httpset('op', '');
 		unsuspend_buffs();
-		foreach($companions as $index => $companion) {
-			if(isset($companion['expireafterfight']) && $companion['expireafterfight']) {
-				unset($companions[$index]);
-			}
+		foreach($companions as $index => $companion)
+		{
+			if(isset($companion['expireafterfight']) && $companion['expireafterfight']) { unset($companions[$index]); }
 		}
-	}else{
-		output("`c`b`\$You failed to flee your opponent!`0`b`c");
 	}
+	else { output("`c`b`\$You failed to flee your opponent!`0`b`c"); }
 }
 
-if ($op=="dragon"){
+if ($op == 'dragon')
+{
 	require_once 'lib/partner.php';
+
 	addnav("Enter the cave","dragon.php");
 	addnav("Run away like a baby","inn.php?op=fleedragon");
 	output("`\$You approach the blackened entrance of a cave deep in the forest, though the trees are scorched to stumps for a hundred yards all around.");
@@ -49,62 +51,82 @@ if ($op=="dragon"){
 	output("You clamber up the debris pile leading to the mouth of the cave, your feet crunching on the apparent remains of previous heroes, or perhaps hors d'oeuvres.`n`n");
 	output("Every instinct in your body wants to run, and run quickly, back to the warm inn, and the even warmer %s`\$.", get_partner());
 	output("What do you do?`0");
-	$session['user']['seendragon']=1;
+	$session['user']['seendragon'] = 1;
 }
 
-if ($op=="search"){
+if ($op == 'search')
+{
 	checkday();
-	if ($session['user']['turns']<=0){
+	if ($session['user']['turns'] <= 0)
+	{
 		output("`\$`bYou are too tired to search the forest any longer today.  Perhaps tomorrow you will have more energy.`b`0");
-		$op="";
-		httpset('op', "");
-	}else{
-		modulehook("forestsearch", []);
-		$args = array(
-			'soberval'=>0.9,
-			'sobermsg'=>"`&Faced with the prospect of death, you sober up a little.`n",
-			'schema'=>'forest');
-		modulehook("soberup", $args);
-		if (module_events("forest", getsetting("forestchance", 15)) != 0) {
-			if (!checknavs()) {
+		$op = '';
+		httpset('op', '');
+	}
+	else
+	{
+		modulehook('forestsearch', []);
+		$args = [
+			'soberval' => 0.9,
+			'sobermsg' => "`&Faced with the prospect of death, you sober up a little.`n",
+			'schema' => 'forest'
+		];
+		modulehook('soberup', $args);
+		if (module_events("forest", getsetting("forestchance", 15)) != 0)
+		{
+			if (!checknavs())
+			{
 				// If we're showing the forest, make sure to reset the special
 				// and the specialmisc
-				$session['user']['specialinc'] = "";
-				$session['user']['specialmisc'] = "";
+				$session['user']['specialinc'] = '';
+				$session['user']['specialmisc'] = '';
 				$dontdisplayforestmessage=true;
-				$op = "";
-				httpset("op", "");
-			} else {
-				page_footer();
+				$op = '';
+				httpset('op', '');
 			}
-		}else{
+			else { page_footer(); }
+		}
+		else
+		{
 			$session['user']['turns']--;
-			$battle=true;
-			if (e_rand(0,2)==1){
+			$battle = true;
+			if (e_rand(0,2) == 1)
+			{
 				$plev = (e_rand(1,5)==1?1:0);
 				$nlev = (e_rand(1,3)==1?1:0);
-			}else{
+			}
+			else
+			{
 				$plev=0;
 				$nlev=0;
 			}
+
 			$type = httpget('type');
-			if ($type=="slum"){
+			if ($type == 'slum')
+			{
 				$nlev++;
 				output("`\$You head for the section of forest you know to contain foes that you're a bit more comfortable with.`0`n");
 			}
-			if ($type=="thrill"){
+			if ($type == 'thrill')
+			{
 				$plev++;
 				output("`\$You head for the section of forest which contains creatures of your nightmares, hoping to find one of them injured.`0`n");
 			}
 			$extrabuff = 0;
-			if ($type=="suicide"){
-				if ($session['user']['level'] <= 7) {
+			if ($type=="suicide")
+			{
+				if ($session['user']['level'] <= 7)
+				{
 					$plev += 1;
 					$extrabuf = .25;
-				} elseif ($session['user']['level'] < 14) {
+				}
+				elseif ($session['user']['level'] < 14)
+				{
 					$plev+=2;
 					$extrabuf = 0;
-				} else {
+				}
+				else
+				{
 					$plev++;
 					$extrabuff = .4;
 				}
@@ -113,41 +135,48 @@ if ($op=="search"){
 			$multi = 1;
 			$targetlevel = ($session['user']['level'] + $plev - $nlev );
 			$mintargetlevel = $targetlevel;
-			if (getsetting("multifightdk", 10) <= $session['user']['dragonkills']) {
-				if (mt_rand(1, 100) <= getsetting("multichance", 25)) {
+			if (getsetting("multifightdk", 10) <= $session['user']['dragonkills'])
+			{
+				if (mt_rand(1, 100) <= getsetting("multichance", 25))
+				{
 					$multi = e_rand(getsetting('multibasemin', 2),getsetting('multibasemax', 3));
-					if ($type=="slum") {
+					if ($type=="slum")
+					{
 						$multi -= e_rand(getsetting("multislummin", 0),getsetting("multislummax", 1));
-						if (mt_rand(0, 1)) {
-							$mintargetlevel = $targetlevel - 1;
-						} else {
-							$mintargetlevel = $targetlevel - 2;
-						}
-					} else if ($type == "thrill") {
+						if (mt_rand(0, 1)) { $mintargetlevel = $targetlevel - 1; }
+						else { $mintargetlevel = $targetlevel - 2; }
+					}
+					else if ($type == "thrill")
+					{
 						$multi += e_rand(getsetting("multithrillmin", 1),getsetting("multithrillmax", 2));
-						if (mt_rand(0, 1)) {
+						if (mt_rand(0, 1))
+						{
 							$targetlevel++;
 							$mintargetlevel = $targetlevel - 1;
-						} else {
+						}
+						else
+						{
 							$mintargetlevel = $targetlevel-1;
 						}
-					} else if ($type == "suicide") {
-						$multi += e_rand(getsetting("multisuimin", 2),getsetting("multisuimax", 4));
-						if (mt_rand(0, 1)) {
-							$mintargetlevel = $targetlevel - 1;
-						} else {
+					}
+					else if ($type == "suicide")
+					{
+						$multi += e_rand(getsetting('multisuimin', 2), getsetting('multisuimax', 4));
+						if (mt_rand(0, 1)) { $mintargetlevel = $targetlevel - 1; }
+						else
+						{
 							$targetlevel++;
 							$mintargetlevel = $targetlevel - 1;
 						}
 					}
 					$multi = min($multi, $session['user']['level']);
 				}
-			} else {
-				$multi = 1;
 			}
+			else { $multi = 1; }
+
 			$multi = max(1, $multi);
-			if ($targetlevel<1) $targetlevel=1;
-			if ($mintargetlevel<1) $mintargetlevel=1;
+			if ($targetlevel<1) $targetlevel = 1;
+			if ($mintargetlevel<1) $mintargetlevel = 1;
 			if ($mintargetlevel > $targetlevel) $mintargetlevel = $targetlevel;
 			if ($targetlevel > 17)
             {
@@ -160,14 +189,16 @@ if ($op=="search"){
 				$packofmonsters = (bool)(mt_rand(0,5) == 0 && getsetting("allowpackofmonsters", true)); // true or false
 				if (false === $packofmonsters)
                 {
-                    $multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":"");
+                    $multicat=(getsetting('multicategory',0)?"GROUP BY creaturecategory":'');
 					$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT $multi";
                 }
                 else
                 {
 					$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
                 }
-			} else {
+			}
+			else
+			{
 				$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT 1";
 				$packofmonsters = 0;
 			}
@@ -178,7 +209,7 @@ if ($op=="search"){
 				// There is nothing in the database to challenge you, let's
 				// give you a doppleganger.
 				$badguy = [];
-				$badguy['creaturename'] = "An evil doppleganger of ".$session['user']['name'];
+				$badguy['creaturename'] = "An evil doppleganger of {$session['user']['name']}";
 				$badguy['creatureweapon'] = $session['user']['weapon'];
 				$badguy['creaturelevel'] = $session['user']['level'];
 				$badguy['creaturegold'] = 0;
@@ -192,15 +223,18 @@ if ($op=="search"){
 			{
 				require_once 'lib/forestoutcomes.php';
 
-				if ($packofmonsters == true) {
+				if ($packofmonsters == true)
+				{
 					$initialbadguy = DB::fetch_assoc($result);
-					$prefixs = array("Elite","Dangerous","Lethal","Savage","Deadly","Malevolent","Malignant");
-					for($i=0;$i<$multi;$i++) {
+					$prefixs = ['Elite','Dangerous', 'Lethal', 'Savage', 'Deadly', 'Malevolent', 'Malignant'];
+					for($i = 0; $i < $multi; $i++)
+					{
 						$initialbadguy['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
 						$initialbadguy['playerstarthp'] = $session['user']['hitpoints'];
 						$initialbadguy['diddamage'] = 0;
 						$badguy = buffbadguy($initialbadguy);
-						if ($type == "thrill") {
+						if ($type == "thrill")
+						{
 							// 10% more experience
 							$badguy['creatureexp'] = round($badguy['creatureexp']*1.1, 0);
 							// 10% more gold
@@ -226,15 +260,19 @@ if ($op=="search"){
 						}
 						$stack[$i] = $badguy;
 					}
-					if ($multi > 1) {
+					if ($multi > 1)
+					{
 						output("`2You encounter a group of `^%i`2 %s`2.`n`n", $multi, $badguy['creaturename']);
 					}
-				} else {
-					while ($badguy = DB::fetch_assoc($result)) {
+				}
+				else
+				{
+					while ($badguy = DB::fetch_assoc($result))
+					{
 						$badguy['playerstarthp'] = $session['user']['hitpoints'];
 						$badguy['diddamage'] = 0;
 						//decode and test the AI script file in place if any
-						$aiscriptfile=$badguy['creatureaiscript'].".php";
+						$aiscriptfile = $badguy['creatureaiscript'].".php";
 						//file there, get content and put it into the ai script field.
 						if (file_exists($aiscriptfile)) $badguy['creatureaiscript'] = "require_once '$aiscriptfile';";
 						else $badguy['creatureaiscript'] = '';
@@ -243,13 +281,15 @@ if ($op=="search"){
 						$badguy = buffbadguy($badguy);
 						// Okay, they are thrillseeking, let's give them a bit extra
 						// exp and gold.
-						if ($type == "thrill") {
+						if ($type == "thrill")
+						{
 							// 10% more experience
 							$badguy['creatureexp'] = round($badguy['creatureexp']*1.1, 0);
 							// 10% more gold
 							$badguy['creaturegold'] = round($badguy['creaturegold']*1.1, 0);
 						}
-						if ($type == "suicide") {
+						if ($type == "suicide")
+						{
 							// Okay, suicide fights give even more rewards, but
 							// are much harder
 							// 25% more experience
@@ -273,18 +313,20 @@ if ($op=="search"){
 				}
 			}
 			calculate_buff_fields();
-			$attackstack = array(
-				"enemies"=>$stack,
-				"options"=>array(
-					"type"=>"forest"
-				)
-			);
-			$attackstack = modulehook("forestfight-start",$attackstack);
-			$session['user']['badguy']=createstring($attackstack);
+			$attackstack = [
+				'enemies' => $stack,
+				'options' => [
+					'type' => 'forest'
+				]
+			];
+			$attackstack = modulehook('forestfight-start', $attackstack);
+
+			$session['user']['badguy'] = createstring($attackstack);
 			// If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
 			// because they are already set in the nav itself, we need this here.
 			// It will not break anything else. I hope.
-			if(httpget('auto') != "") {
+			if(httpget('auto') != '')
+			{
 				httpset('op', 'fight');
 				$op = 'fight';
 			}
@@ -292,9 +334,7 @@ if ($op=="search"){
 	}
 }
 
-if ($op=="fight" || $op=="run" || $op == "newtarget"){
-	$battle = true;
-}
+if ($op == 'fight' || $op == 'run' || $op == 'newtarget') { $battle = true; }
 
 if ($battle)
 {
@@ -302,16 +342,9 @@ if ($battle)
 
 	if ($victory)
 	{
-		require_once 'lib/forestoutcomes.php';
-		$op="";
-		httpset('op', "");
-		forestvictory($newenemies,isset($options['denyflawless'])?$options['denyflawless']:false);
-		$dontdisplayforestmessage=true;
-	}
-    elseif($defeat)
-    {
-		require_once 'lib/forestoutcomes.php';
-		forestdefeat($newenemies);
+		$op = '';
+		httpset('op', '');
+		$dontdisplayforestmessage = true;
 	}
     else
     {
@@ -319,11 +352,11 @@ if ($battle)
 	}
 }
 
-if ($op=="")
+if ($op == '')
 {
 	// Need to pass the variable here so that we show the forest message
 	// sometimes, but not others.
 	forest($dontdisplayforestmessage);
 }
+
 page_footer();
-?>
