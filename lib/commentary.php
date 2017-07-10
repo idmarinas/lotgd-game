@@ -514,7 +514,7 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 	if ($session['user']['prefs']['commentary_auto_update'])
 	{
 		$timeout = translate_inline('Auto-update has timed out. Click any link to restart the clock.');
-		rawoutput("<div id='ajaxcommentarydiv$section' onload='Lotgd.loadnewchat(this, $section, $message, $limit, $talkline, $returnlink, $timeout)'>");
+		rawoutput("<script>setInterval(function () { Lotgd.loadnewchat(\"ajaxcommentarydiv$section\", \"$section\", \"$message\", $limit, \"$talkline\", \"$returnlink\", \"$timeout\") }, 3000)</script><div id='ajaxcommentarydiv$section'>");
 	}
 
 	$out = preparecommentaryblock($section, $message, $limit, $talkline, $schema, $skipfooter, $customsql, $skiprecentupdate, $overridemod, $returnlink);
