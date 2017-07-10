@@ -128,7 +128,9 @@ Class DB
 		{
 			self::$errorInfo = $ex->getMessage();
 
-			return false;
+            $resultSet = new ResultSet;
+
+		    return $resultSet->initialize([]);
 		}
 
 		$profiler = $adapter->getProfiler()->getLastProfile();
