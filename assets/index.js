@@ -6,10 +6,16 @@ define([
     './components/recommended-modules',
     './components/swal',
     './components/datacache',
+    './components/previewfield',
 
     //-- Modules
     // ...
 
+    //-- Tools
+    './tools/appoencode',
+    './tools/escapeRegex',
+
+    //-- Others
     './ready/semantic',
 
     './exports/amd',
