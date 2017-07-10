@@ -100,7 +100,8 @@ $races = modulehook("racenames");
 if ($op=='edit' || $op=='save') {
 	//add the race
 	$sql="SELECT race FROM ".DB::prefix('accounts')." WHERE acctid=$userid LIMIT 1;";
-	$row=DB::fetch_assoc(DB::query($sql));
+    $result = DB::query($sql);
+	$row = DB::fetch_assoc($result);
 	$racesenum = ",".translate_inline("Undecided","race").",";
 	foreach ($races as $race) {
 		$racesenum.=$race.",".$race.",";
