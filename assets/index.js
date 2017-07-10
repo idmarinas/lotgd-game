@@ -7,6 +7,7 @@ define([
     './components/swal',
     './components/datacache',
     './components/previewfield',
+    './components/loadnewchat',
 
     //-- Modules
     // ...
