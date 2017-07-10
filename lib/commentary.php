@@ -514,7 +514,8 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 	if ($session['user']['prefs']['commentary_auto_update'])
 	{
 		$timeout = translate_inline('Auto-update has timed out. Click any link to restart the clock.');
-		rawoutput("<script>setInterval(function () { Lotgd.loadnewchat(\"ajaxcommentarydiv$section\", \"$section\", \"$message\", $limit, \"$talkline\", \"$returnlink\", \"$timeout\") }, 3000)</script><div id='ajaxcommentarydiv$section'>");
+		rawoutput("<script>setInterval(function () { Lotgd.loadnewchat(\"ajaxcommentarydiv$section\", \"$section\", \"$message\", $limit, \"$talkline\", \"$returnlink\", \"$timeout\") }, 3000)</script>");
+		rawoutput("<div id='ajaxcommentarydiv$section'>");
 	}
 
 	$out = preparecommentaryblock($section, $message, $limit, $talkline, $schema, $skipfooter, $customsql, $skiprecentupdate, $overridemod, $returnlink);
@@ -706,7 +707,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		if ((! isset($commentbuffer[$i]['info']['hidecomment']) || ! $commentbuffer[$i]['info']['hidecomment']) || $showmodlink)
 		{
 			$thiscomment = '';
-			$row = $commentbuffer[$i];
+			$row = &$commentbuffer[$i];
 			$row['acctid'] = $row['author'];
 			$acctidstoquery[] = $row['author'];
 			if (substr($row['comment'], 0, 1) == ':' || substr($row['comment'], 0, 3) == '/me')
@@ -717,7 +718,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				elseif (substr($row['comment'], 0, 1) == ':') { $row['comment'] = substr($row['comment'], 1); }
 			}
 
-			if (isset($row['info']['gamecomment']) && $row['info']['gamecomment'] || (substr($row['comment'],0,5) == '/game' && !$row['name']))
+			if (isset($row['gamecomment']) && $row['gamecomment'] || (substr($row['comment'], 0, 5) == '/game' && !$row['name']))
 			{
 				$row['gamecomment'] = true;
 				$row['skiptalkline'] = true;
@@ -733,13 +734,11 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				{
 					$restorelink = buildcommentarylink("&restorecomment={$row['commentid']}&comscroll=$com");
 					$thiscomment = sprintf('[<a href="%s">`@%s`0</a>] <del>', $restorelink, $undel);
-					addnav('', $restorelink);
 				}
 				else
 				{
 					$removelink = buildcommentarylink("&removecomment={$row['commentid']}&comscroll=$com");
 					$thiscomment = sprintf('[<a href="%s">`$%s`0</a>] <input type="checkbox" name="deletecomment_%s">', $removelink, $del, $row['commentid']);
-					addnav('', $removelink);
 				}
 			}
 
@@ -778,9 +777,11 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 			}
 			else
 			{
-				$thiscomment = sprintf('%s `i`)%s`0`i %s',
+				$thiscomment = sprintf('%s %s%s%s %s',
 					$thiscomment,
+                    $row['gamecomment'] == false ? '`i`)' : '`i`b`7',
 					str_replace('&amp;', '&', htmlentities($row['comment'], ENT_COMPAT, getsetting('charset', 'UTF-8'))),
+					$row['gamecomment'] == false ? '`i`0' : '`b`i`0',
 					(isset($row['info']['hidecomment']) && $row['info']['hidecomment']) ? '</del>' : ''
 				);
 			}
@@ -901,10 +902,9 @@ function preparecommentaryline($line)
 {
 	$finaloutput = '<div class="item">';
 
-	if (! isset($line['info']['gamecomment']) || ! $line['info']['gamecomment'])
+	if (! isset($line['gamecomment']) || ! $line['gamecomment'])
 	{
 		$icons = $line['info']['icons'];
-		//debug($line);
 
 		//make it so that online icons always show up first
 		$online = $icons['online'];
