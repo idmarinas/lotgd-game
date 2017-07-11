@@ -18,7 +18,7 @@ The intention to make a new branch of the Core, is to be able to update certain 
 IDMarinas Edition is used in:
 
 * [The Legend of the Green Dragon](http://lotgd.infommo.es) (Demo)
-* [La Leyenda de Ignis](http://dragonverde.infommo.es)
+* [La Leyenda de Ignis](http://draconia.infommo.es)
 
 
 ## Modules
