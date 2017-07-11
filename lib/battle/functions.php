@@ -433,5 +433,7 @@ function battleshowresults(array $content)
 {
     global $lotgd_tpl;
 
+    tlschema('battle');
     output_notl($lotgd_tpl->renderThemeTemplate('battle/battle.twig', $content), true);
+	tlschema();
 }
