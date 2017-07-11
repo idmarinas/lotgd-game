@@ -4,6 +4,72 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
 
+# Version: 2.3.0
+
+### CHANGES
+
+* **lib/template.php** code is improved not to repeat calculations
+    * Filter for translation now admit a second param for add a *namespace*
+* **lib/errorhandling.php** unactivate custom error_handling function
+* **lib/creaturesfunctions.php** and **lib/forestoutcomes.php** now set/update 'creaturemaxhealth' for the creature, this do that in battle olways show de real maxhp of creature and not current hp as maxhp
+* **lib/newday/dbcleanup.php** small optimization
+* **lib/creaturefunctions.php** check if creature have AI Script
+* **lib/graveyard/case_battle_search.php** now creatures are created using function `lotgd_transform_creature`
+* **lib/cache.php** now array of options merge default array
+* **lib/dbwrapper.php** return a empty result object when query fail. With this not get error al use this functions `$queryResult->count()`, `$queryResult->current()`
+* **lib/forms.php** Removes all JavaScript from php file and remade to improve appearance and information
+
+* Improved the format of files of battle
+    * **lib/extended-battle.php** moved and renamed to **lib/battle/extended.php**
+        * Delete code for old battlebar
+        * Updated to reduce complexity and adapt it to the new template
+    * **lib/battle-buffs.php** moved and renamed to **lib/battle/buffs** small optimization
+    * **lib/battle-skills.php** moved and renamed to **lib/battle/skills** small optimization
+    * **lib/battle.php** now use the new template system for show all information of battle
+        * Functions `battle_player_attacks` and `battle_badguy_attacks` are moved to file **lib/battle/functions.php**
+    * Other changes in battle system:
+        * Now `battle.php` control the result of battle executing functions `battlevictory` or `battledefeat` as necessary
+        * New template `battle/battle.twig` added for show information of battle as results. This allow you to customize appearance of battle
+    * Others files changed for new battle format
+        * **forest.php**
+        * **graveyard.php**
+        * **train.php**
+* *Theme*
+    * **templates/battle/forestcreaturebar.twig** change name to **templates/battle/combathealthbar.twig** and updated
+
+### FEATURES
+
+* **lib/dbwrarpper.php** add new function `DB::expression` is a shortcut for class *Zend\Db\Sql\Predicate\Expression*
+* **JavaScript**
+    * New functions
+        * `Lotgd.previewfield` Used for preview field (used for file **lib/forms.php**)
+        * `Lotgd.appoencode` Format a text with game colors
+        * `Lotgd.escapeRegex` Escape text for used in RegExp patterns
+        * `Lotgd.loadnewchat` Load new comments of chat
+
+### DEPRECATED
+
+* **Functions**
+    * **lib/forestoutcomes.php**
+        * `forestvictory` and `forestdefeat` not are used anymore. `battle.php` execute functions for victory and defeat
+
+### REMOVES
+
+* **lib/battle-funtions.php** delete file not in used
+
+### FIXES
+
+* **dragon.php** corrected error concerning the printing of the name of the Dragon
+* **lib/pageparts.php** corrected error by which the title of the popup was not translated
+* **lib/creaturefunctions.php** now when create a new creature define `physicalresistance` stat if not defined
+* **lib/commentary.php** and **lib/forms.php** Comments can be sent again
+
+### NOTES
+
+* Battle now have a new format, and have a template for customize appearance
+    * If you use `battle.php` in your modules remember make changes for compatibility with this version
+
+
 # Version: 2.2.0
 
 ### CHANGES
