@@ -29,21 +29,22 @@ if ($session['chatrequests'][$minute] >= 50)
 // }
 $expiresin = strtotime($session['user']['laston']) + 600;
 $section = $_REQUEST['section'];
-if ($now > $expiresin || (isset($session['user']['chatloc']) && $session['user']['chatloc'] != "global_banter" && $section != "global_banter" && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
+if ($now > $expiresin || (isset($session['user']['chatloc']) && $session['user']['chatloc'] != "global_banter" && $section != 'global_banter' && $session['user']['chatloc'] != $section  && $session['user']['chatloc']."_aux" != $section))
 {
 	echo "Chat disabled due to inactivity";
 }
 else
 {
 	require_once 'lib/commentary.php';
+
 	$message = $_REQUEST['message'];
 	$limit = $_REQUEST['limit'];
 	$talkline = $_REQUEST['talkline'];
 	$returnlink = urlencode($_REQUEST['returnlink']);
 	$showmodlink = (isset($_REQUEST['showmodlink']) ? $_REQUEST['showmodlink'] : '');
 
-	$commentary = preparecommentaryblock($section,$message,$limit,$talkline,$schema=false,$skipfooter=false,$customsql=false,$skiprecentupdate=false,$showmodlink,$returnlink);
-	$commentary = '<br>'.$commentary.'<br>';
+	$commentary = preparecommentaryblock($section, $message, $limit, $talkline, false, false, false, false, $showmodlink, $returnlink);
+
 	echo appoencode($commentary, true);
 }
 saveuser();
