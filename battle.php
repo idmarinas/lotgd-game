@@ -126,7 +126,7 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 	if (count($enemies) > 1)
     {
 		$surprised = true;
-		$content['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`\$ surprise you and get the first round of attack!`0`b`n`n';
+		$content['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0`b`n`n';
 	}
     else
     {
