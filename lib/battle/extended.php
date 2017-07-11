@@ -76,7 +76,6 @@ function prepare_data_battlebars(array $enemies)
     if ($user['alive'])
 	{
 		$hitpointstext = $user['name'].'`0';
-		$hitpointstext = sprintf_translate('Soul of %s', $user['name']);
 		$dead = false;
 	}
 	else
