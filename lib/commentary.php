@@ -18,6 +18,8 @@ function commentarylocs()
 {
 	global $session;
 
+	tlschema('commentary');
+
 	$comsecs = datacache('commentary-comsecs', 600, true);
 
 	if (is_array($comsecs) && count($comsecs)) return $comsecs;
@@ -43,6 +45,8 @@ function commentarylocs()
 	updatedatacache('commentary-comsecs', $comsecs, true);
 
 	rawoutput(tlbutton_clear());
+
+	tlschema();
 
 	return $comsecs;
 }
@@ -495,6 +499,8 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 {
 	global $session, $REQUEST_URI, $doublepost, $translation_namespace, $emptypost, $chatloc, $afk, $dni, $moderating, $fiveminuteload;
 
+	tlschema('commentary');
+
 	if (! array_key_exists('commentary_auto_update', $session['user']['prefs'])) $session['user']['prefs']['commentary_auto_update'] = 1;
 
 	if (httpget("disable_auto_update")) $session['user']['prefs']['commentary_auto_update'] = 0;
@@ -528,6 +534,8 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 	if (! $skipfooter) commentaryfooter($section, $message, $limit, $talkline, $schema);
 
 	rawoutput("<!--end of commentary area-->");
+
+	tlschema();
 }
 
 /**
@@ -631,6 +639,8 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 function getcommentary($section, $limit = 25, $talkline, $customsql = false, $showmodlink = false, $returnlink = false)
 {
 	global $session, $REQUEST_URI, $translation_namespace, $chatloc, $bottomcid;
+
+	tlschema('commentary');
 
 	$com = max((int) httpget('comscroll'), 0);
 
@@ -889,6 +899,8 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		$commentbuffer[$i]['info']['icons']['online'] = $icon;
 	}
 
+	tlschema();
+
 	return $commentbuffer;
 }
 
@@ -944,6 +956,8 @@ function preparecommentaryline($line)
 function commentaryfooter($section, $message = 'Interject your own commentary?', $limit = 25, $talkline = 'says', $schema = false)
 {
  	global $session, $REQUEST_URI, $doublepost, $translation_namespace, $emptypost, $chatloc, $moderating, $bottomcid;
+
+	tlschema('commentary');
 
 	//Output page jumpers
 	$com = max((int) httpget('comscroll'), 0);
@@ -1049,6 +1063,8 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
 	output_notl('`n');
 	if ($moderating) output("`bLast Comment ID shown on this page: %s`b`n",number_format($bottomcid));
 	else modulehook('commentaryoptions');
+
+	tlschema();
 }
 
 /**
@@ -1123,6 +1139,8 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 {
 	require_once 'lib/forms.php';
 
+	tlschema('commentary');
+
 	global $REQUEST_URI, $session, $translation_namespace, $chatsonpage, $fiveminuteload;
 
 	if ($schema === false) $schema = $translation_namespace;
@@ -1175,6 +1193,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 	}
 
 	rawoutput("</form>");
+
 	tlschema();
 }
 
