@@ -30,7 +30,7 @@ $stats[] = ["title"=>"Last Comment posted:","value"=>$user['recentcomments']];
 $stats[] = ["title"=>"Last PvP happened:","value"=>$user['pvpflag']];
 $stats[] = ["title"=>"Dragonkills:","value"=>$user['dragonkills']];
 $stats[] = ["title"=>"Total Pages generated for you:","value"=>$user['gentimecount']];
-$stats[] = ["title"=>"How long did these pages take to generate:","value"=>readabletime($user['gentime'])];
+$stats[] = ["title"=>"How long did these pages take to generate:","value"=>reltime($user['gentime'])];
 $stats[] = ["title"=>"You are Account Number:","value"=>($user['acctid']-1)];
 //Add the count summary for DKs
 $dksummary = '';
