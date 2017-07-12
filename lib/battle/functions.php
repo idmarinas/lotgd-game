@@ -378,12 +378,15 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 
 	if (is_string($where))
     {
-        $taunt = select_taunt();
         if (is_array($where)) { $where = sprintf_translate($where); }
         else { $where = translate_inline($where); }
 
         $deathmessage = select_deathmessage($forest, ['{where}'], [$where]);
-        if ($deathmessage['taunt'] == 1) { addnews('%s`n%s', $deathmessage['deathmessage'], $taunt); }
+        if ($deathmessage['taunt'] == 1)
+        {
+            $taunt = select_taunt();
+            addnews('%s &ensp;&rarr;&ensp;`b`i%s`i`b', $deathmessage['deathmessage'], $taunt);
+        }
         else { addnews('%s', $deathmessage['deathmessage']); }
     }
 
