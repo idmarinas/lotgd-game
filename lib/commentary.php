@@ -377,7 +377,7 @@ function injectcommentary($section, $talkline, $comment)
 					'info' => $row['info']
 				];
 
-				updatedatacache("commentary-latestcommentary_$section", $commentbuffer, true);
+				updatedatacache("commentary-latestcommentary_$section", [$commentbuffer], true);
 			}
 		}
 
