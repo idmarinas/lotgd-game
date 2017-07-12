@@ -512,7 +512,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 
 
 /*******************************************************/
-				$starttime = getmicrotime();
+				$starttime = microtime(true);
 /*******************************************************/
 				if (function_exists($row['function'])) {
 					$res = $row['function']($hookname, $args);
@@ -520,7 +520,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 					trigger_error("Unknown function {$row['function']} for hookname $hookname in module {$row['module']}.", E_USER_WARNING);
 				}
 /*******************************************************/
-				$endtime = getmicrotime();
+				$endtime = microtime(true);
 				if (($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))){
 					debug("Slow Hook (".round($endtime-$starttime,2)."s): $hookname - {$row['modulename']}`n");
 				}

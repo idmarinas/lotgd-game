@@ -29,7 +29,7 @@ if ($fiveminuteload>=8){
 }
 
 
-//$start = getmicrotime(true);
+//$start = microtime(true);
 
 //echo("Test!");
 
@@ -84,7 +84,7 @@ foreach($disp AS $name)
 
 unset($disp);
 
-// $end = getmicrotime(true);
+// $end = microtime(true);
 // $total = $end - $start;
 //echo("CavemanJoe is debugging in the middle of the night, and this cycle of whostyping.php took this long: ");
 //echo($total);

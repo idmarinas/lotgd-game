@@ -75,7 +75,7 @@ require_once 'lib/translator.php';
 require_once 'lib/playerfunctions.php';
 require_once 'lib/lotgd_mail.php';
 
-$pagestarttime = getmicrotime();
+$pagestarttime = microtime(true);
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php

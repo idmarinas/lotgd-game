@@ -326,7 +326,7 @@ function page_footer($saveuser = true)
 	//output version
 	$html['version'] = "Version: $logd_version";
 	//output page generation time
-	$gentime = getmicrotime()-$pagestarttime;
+	$gentime = microtime(true)-$pagestarttime;
 	$session['user']['gentime']+=$gentime;
 	$session['user']['gentimecount']++;
 	if (getsetting('debug',0))

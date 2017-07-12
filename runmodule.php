@@ -27,11 +27,11 @@ if (injectmodule(httpget('module'), (httpget('admin')?true:false))){
 	}
 	do_forced_nav($allowanonymous,$override_forced_nav);
 
-	$starttime = getmicrotime();
+	$starttime = microtime(true);
 	$fname = $mostrecentmodule."_run";
 	tlschema("module-$mostrecentmodule");
 	$fname();
-	$endtime = getmicrotime();
+	$endtime = microtime(true);
 	if (($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))){
 		debug("Slow Module (".round($endtime-$starttime,2)."s): $mostrecentmodule`n");
 	}

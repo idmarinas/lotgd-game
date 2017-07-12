@@ -8,7 +8,7 @@ savesetting('lastdboptimize', date('Y-m-d H:i:s'));
 $result = DB::query("SHOW TABLES");
 
 $tables = [];
-$start = getmicrotime();
+$start = microtime(true);
 
 foreach($result as $key => $value)
 {
@@ -17,6 +17,6 @@ foreach($result as $key => $value)
     array_push($tables, $valor);
 }
 
-$time = round(getmicrotime() - $start,2);
+$time = round(microtime(true) - $start,2);
 
 gamelog("Optimized tables: ".join(", ",$tables)." in $time seconds.","maintenance");

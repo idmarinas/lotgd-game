@@ -696,7 +696,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	$acctidstoquery = [];
 
 	//prepare the actual comment line part of the comment - is it hidden, is it an action, is it a game comment, should we show a moderation link, clan rank colours, posting date abs/rel
-	$loop1start = getmicrotime(true);
+	$loop1start = microtime(true);
 	$bioretlink = urlencode(buildcommentarylink('&frombio=true', $returnlink));
 	$del = 'Del';
 	$undel = 'UNDel';
