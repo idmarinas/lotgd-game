@@ -25,7 +25,7 @@ function previewfield($name, $startdiv = false, $talkline = 'says', $showcharsle
 	{
 		$maxchars = getsetting('maxchars', 200);
 		//adding maxchars + a misc overflow which we don't need when javascript is enabled ^^ 100 as failsafe should be enough for a name
-		$input = "<input name='$name' id='input$name' maxsize='".($maxchars+100)."' onkeyup='Lotgd.previewfield(this, $maxchars, \"$name\", \"$startdiv\", \"$talkline\", $showcharsleft, \"$youhave\");'>";
+		$input = "<input autocomplete='off' name='$name' id='input$name' maxsize='".($maxchars+100)."' onkeyup='Lotgd.previewfield(this, $maxchars, \"$name\", \"$startdiv\", \"$talkline\", $showcharsleft, \"$youhave\");'>";
 	}
 	else
 	{
@@ -41,7 +41,7 @@ function previewfield($name, $startdiv = false, $talkline = 'says', $showcharsle
 		}
 		else
 		{
-			$input = "<input type='text' name='$name' id='input$name' onkeyup='Lotgd.previewfield(this, $l, \"$name\", \"$startdiv\", \"$talkline\", $showcharsleft, \"$youhave\");' $attributes>";
+			$input = "<input autocomplete='off' type='text' name='$name' id='input$name' onkeyup='Lotgd.previewfield(this, $l, \"$name\", \"$startdiv\", \"$talkline\", $showcharsleft, \"$youhave\");' $attributes>";
 		}
 	}
 	$add = translate_inline('Add');
