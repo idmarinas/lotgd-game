@@ -809,7 +809,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 			elseif ($session['user']['prefs']['timestamp'] == 2)
 			{
 				$s = reltime(strtotime($row['postdate']));
-				$commentbuffer[$i]['displaytime'] = "[$s]";
+				$commentbuffer[$i]['displaytime'] = "`7[$s]`0 ";
 			}
 		}
 		else unset($commentbuffer[$i]);
@@ -929,7 +929,7 @@ function preparecommentaryline($line)
 			foreach($icons as $key => $vals)
 			{
 				if (file_exists($vals['icon'])) $finaloutput .= sprintf('<img src="%s" title="%s" alt="%s"> ', $vals['icon'], $vals['mouseover'], $vals['mouseover']);
-				else $finaloutput .= $vals['mouseover']." ";
+				else $finaloutput .= $vals['mouseover'] . ' ';
 			}
 		}
 	}
