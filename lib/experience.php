@@ -15,19 +15,25 @@ function exp_for_next_level($curlevel, $curdk)
 {
 	require_once 'lib/datacache.php';
 
-	$maxlevel = getsetting('maxlevel',15);
-	$expstring = getsetting('exp-array','100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');		//the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
+	$maxlevel = getsetting('maxlevel', 15);
+    //the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
+	$expstring = getsetting('exp-array','100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');
 
-	$stored = datacache("exparraydk$curdk", 600, true); //fetch all for that DK if already calculated!
-	if ($stored && is_array($stored)) { //check if datacache is here
-		//fine
-		$exparray = $stored;
-	}
-	else
+    $dataCacheKey = "exp-for-next-level-array-".md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}-";
+
+	$exparray = datacache($dataCacheKey, 86400, true); //fetch all for that DK if already calculated!
+    //check if datacache is here
+	if (! is_array($exparray))
 	{
-		if ($expstring=='') return 0; //error!
+        //error!
+		if ($expstring == '')
+        {
+            debug('`$Setting "exp-array" is empty. Configure this setting. Return 0 as exp need for next level.`0');
 
-		$exparray = explode(',',$expstring);
+            return 0;
+        }
+
+		$exparray = explode(',', $expstring);
 		$count = count($exparray);
 
 		if ($curlevel < 1) return 0;
@@ -48,14 +54,18 @@ function exp_for_next_level($curlevel, $curdk)
 			}
 		}
 
-		updatedatacache("exparraydk$curdk", $exparray, true);
+		updatedatacache($dataCacheKey, $exparray, true);
 	}
     //-- Avoid level less than 0 and more than max lvl
     $curlevel = min(max($curlevel-1, 0), $maxlevel);
 
-	$exprequired = $exparray[$curlevel];
+    //-- If not find level invalidate cache and redo it
+    if (! isset($exparray[$curlevel]))
+    {
+        invalidatedatacache($dataCacheKey, true);
 
-	return $exprequired;
+        return exp_for_next_level($curlevel, $curdk);
+    }
+
+	return $exparray[$curlevel];
 }
-
-?>
