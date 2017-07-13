@@ -23,7 +23,7 @@ output("Their souls whisper their torments, haunting your mind with their despai
 output("`nA sepulchral voice intones, \"`QIt is now %s in the world above.`\$\"`n`n",getgametime());
 
 modulehook('shades', []);
-commentdisplay('`n`QNearby, some lost souls lament:`n', 'shade', 'Despair', 25, 'despairs');
+commentdisplay('`n`QNearby, some lost souls lament:`n', 'shade', 'Despair', 25, translate_inline('despairs'));
 
 addnav('Log Out');
 addnav('Log out', 'login.php?op=logout');
