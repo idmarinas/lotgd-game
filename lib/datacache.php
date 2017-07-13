@@ -16,6 +16,8 @@
  */
 require_once 'lib/cache.php';
 
+global $lotgd_cache;
+
 $lotgd_cache = new LotgdCache;
 
 /**
