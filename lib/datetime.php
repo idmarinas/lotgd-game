@@ -180,10 +180,10 @@ function secondstonextgameday($details=false)
  */
 function getmicrotime()
 {
-    // trigger_error(sprintf(
-    //     'Usage of %s is obsolete since 2.3.0; and delete in version 3.0.0 please use "microtime(true)" instead',
-    //     __METHOD__
-    // ), E_USER_DEPRECATED);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 2.3.0; and delete in version 3.0.0 please use "microtime(true)" instead',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
 	return microtime(true);
 }
