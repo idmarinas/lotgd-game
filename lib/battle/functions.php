@@ -278,6 +278,8 @@ function battlegainexperienceforest()
 {
     global $content, $options, $enemies, $session, $expbonus, $exp;
 
+	$count = count($enemies);
+
     if (getsetting('instantexp', false) == true)
     {
 		$expgained = 0;
