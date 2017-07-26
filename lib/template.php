@@ -5,7 +5,7 @@ use Zend\Filter\StringToLower;
 use Zend\Filter\Word\SeparatorToDash;
 use Zend\Filter\Word\UnderscoreToDash;
 
-class LotgdTemplate
+class LotgdTemplate extends Twig_Environment
 {
 	protected $twig;
 	protected $themename;
@@ -16,31 +16,35 @@ class LotgdTemplate
 	{
 		$this->prepareTheme();
 
-		$loader = new Twig_Loader_Filesystem(['themes', 'templates']);
-		$this->twig = new Twig_Environment($loader, [
+		$options = [
 			'cache' => 'cache/templates',
 			'autoescape' => false
-		]);
+		];
+
+		$loader = new Twig_Loader_Filesystem(['themes', 'templates']);
+
+		parent::__construct($loader, $options);
 
 		//-- Add filters to Twig
-		foreach($this->getFilters() as $filter)
+		foreach($this->lotgdFilters() as $filter)
 		{
-			$this->twig->addFilter($filter);
+			$this->addFilter($filter);
 		}
 
 		//-- Add functions to Twig
-		foreach($this->getFunctions() as $function)
+		foreach($this->lotgdFunctions() as $function)
 		{
-			$this->twig->addFunction($function);
+			$this->addFunction($function);
 		}
 	}
 
 	/**
-	 *
+	 * Render a theme
+     * Used in pageparts.php for render a page
 	 */
 	public function renderTheme($context)
 	{
-		return $this->twig->render($this->getTheme(), $context);
+		return $this->render($this->getTheme(), $context);
 	}
 
 	/**
@@ -54,7 +58,7 @@ class LotgdTemplate
 	public function renderThemeTemplate($name, $context)
 	{
 		$folder = $this->themefolder . '/templates';
-		return $this->twig->render($folder.'/'.$name, $context);
+		return $this->render($folder.'/'.$name, $context);
 	}
 
 	/**
@@ -67,7 +71,7 @@ class LotgdTemplate
 	 */
 	public function renderLotgdTemplate($name, $context)
 	{
-		return $this->twig->render($name, $context);
+		return $this->render($name, $context);
 	}
 
 	/**
@@ -75,7 +79,7 @@ class LotgdTemplate
 	 *
 	 * @return array
 	 */
-	private function getFilters()
+	private function lotgdFilters()
 	{
 		return [
 			//-- Access to appoencode function in template
@@ -110,7 +114,7 @@ class LotgdTemplate
 		];
 	}
 
-    private function getFunctions()
+    private function lotgdFunctions()
     {
         return [
             new Twig_SimpleFunction('modulehook', function ($name, $data) {
