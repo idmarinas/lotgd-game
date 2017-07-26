@@ -126,7 +126,7 @@ function activate_buffs($tag)
 			$session['user']['hitpoints'] += $hptoregen;
 			// Now, take abs value just incase this was a damaging buff
 			$hptoregen = abs($hptoregen);
-			if ($hptoregen == 0) $msg = $buff['effectnodmgmsg'];
+			if ($hptoregen == 0) $msg = isset($buff['effectnodmgmsg']) ? $buff['effectnodmgmsg'] : '';
 			else $msg = $buff['effectmsg'];
 
 			if (is_array($msg))
