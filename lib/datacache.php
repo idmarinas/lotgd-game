@@ -127,7 +127,18 @@ function datacache_empty()
     //-- Set Cache Dir
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
-    return $lotgd_cache->flush();
+    try
+    {
+        $result = $lotgd_cache->flush();
+    }
+    catch (\Exception $ex)
+    {
+        //-- With this avoid a 500 server error
+        //-- In some cases it may not be possible to delete certain files and directories because it not have permissions.
+        $result = true;
+    }
+
+    return $result;
 }
 
 /**
