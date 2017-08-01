@@ -14,7 +14,7 @@ require_once __DIR__ . '/common.php';
 
 $jobby = new \Jobby\Jobby();
 
-$cronjobs = datacache('cronjobstable', 86400, true);//-- Cache for 1 day
+$cronjobs = datacache('tablecronjobs', 86400, true);//-- Cache for 1 day
 if (!$cronjobs)
 {
     $select = DB::select('cronjob');
@@ -23,7 +23,7 @@ if (!$cronjobs)
     ;
     $cronjobs = DB::toArray(DB::execute($select));
 
-    updatedatacache('cronjobstable', $cronjobs, true);
+    updatedatacache('tablecronjobs', $cronjobs, true);
 }
 
 //-- Add all cronjobs to Jobby CronJob
