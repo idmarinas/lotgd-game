@@ -70,6 +70,7 @@ define([
                 text: 'Type the prefix of the cache data to be deleted',
                 input: 'text',
                 showLoaderOnConfirm: true,
+                showCancelButton: true,
                 preConfirm: function (prefix)
                 {
                     return jQuery.get('ajaxdatacache.php?op=clearbyprefix&prefix=' + prefix)
