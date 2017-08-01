@@ -10,7 +10,6 @@ if(substr(php_sapi_name(), 0, 3) != 'cli' || ! empty($_SERVER['REMOTE_ADDR']))
 
 define('ALLOW_ANONYMOUS', true);
 
-require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/common.php';
 
 $jobby = new \Jobby\Jobby();
