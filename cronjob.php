@@ -14,6 +14,7 @@ require_once __DIR__ . '/common.php';
 
 $jobby = new \Jobby\Jobby();
 
+$lotgd_cache->getOptions()-setNamespace('cronjob');//-- For avoid possible problems with other cache
 $cronjobs = datacache('tablecronjobs', 86400, true);//-- Cache for 1 day
 if (!$cronjobs)
 {
