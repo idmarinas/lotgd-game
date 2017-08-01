@@ -15,7 +15,7 @@ require_once __DIR__ . '/common.php';
 
 $jobby = new \Jobby\Jobby();
 
-$cronjobs = datacache('cronjobs', 86400, true);//-- Cache for 1 day
+$cronjobs = datacache('cronjobstable', 86400, true);//-- Cache for 1 day
 if (!$cronjobs)
 {
     $select = DB::select('cronjob');
