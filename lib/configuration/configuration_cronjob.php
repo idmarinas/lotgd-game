@@ -55,6 +55,8 @@ elseif ('delcronjob' == $op)
 
         output('`$CronJob deleted successful.`0');
         gamelog("`4Delete CronJob `^$cronid`4 by admin {$session['user']['playername']}", 'cronjob');
+
+        invalidatedatacache('cronjobstable', true);
     }
 }
 
@@ -97,8 +99,8 @@ elseif ('newcronjob' == $op)
 
     $sort = list_files('cronjob', []);
 	sort($sort);
-	$scriptenum=implode('',$sort);
-	$scriptenum=',,none'.$scriptenum;
+	$scriptenum = implode('', $sort);
+	$scriptenum = ',,none'.$scriptenum;
 
     $form = [
         'Job requires these,title',
