@@ -12,11 +12,11 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once __DIR__ . '/common.php';
 
-$jobby = new \Jobby\Jobby();
+$jobby = new Jobby\Jobby();
 
-$lotgd_cache->getOptions()-setNamespace('cronjob');//-- For avoid possible problems with other cache
+$lotgd_cache->getOptions()->setNamespace('cronjob');//-- For avoid possible problems with other cache
 $cronjobs = datacache('tablecronjobs', 86400, true);//-- Cache for 1 day
-if (!$cronjobs)
+if (! is_array($cronjobs) || empty($cronjobs))
 {
     $select = DB::select('cronjob');
     $select->columns(['*'])
