@@ -147,8 +147,9 @@ else
 
     rawoutput('<div class="ui info message">');
     output('Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.`n');
-    output('This is de unique cronjob need create. Copy and change `b"/path/to/project"`b to where is the game installed. This cronjob execute all CronJobs in the game.`n`n');
-    output_notl('* * * * * cd /path/to/project && php cronjob.php 1>> /dev/null 2>&1');
+    output('This is de unique cronjob need create. Copy and change `b"/path/to/project"`b to where is the game installed. This cronjob execute all CronJobs in the game.`n`n`i');
+    output_notl('* * * * * `bwww-data`b cd /path/to/project && php cronjob.php 1>> /dev/null 2>&1`n`n');
+    output_notl('`iNote: `bwww-data`b is the Apache user, some CronJob may need to write/read files and these files must be written/read by Apache.');
     rawoutput('</div><div class="ui red message">');
     output('If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: %s', '<a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>', true);
     rawoutput('</div>');
