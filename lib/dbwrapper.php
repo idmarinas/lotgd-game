@@ -451,7 +451,7 @@ function db_num_rows($result)
 	trigger_error(sprintf(
         'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0 please use "%s" instead. Please read documentation of Zend\\Db for see how use this component. Link %s',
         __METHOD__,
-		'$result->count()',
+		'DB::num_rows',
 		'https://docs.zendframework.com/zend-db/'
     ), E_USER_DEPRECATED);
 
