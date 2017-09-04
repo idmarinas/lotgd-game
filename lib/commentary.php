@@ -655,23 +655,31 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	// Needs to be here because scrolling through the commentary pages, entering a bio, then scrolling again forward
 	// then re-entering another bio will lead to $com being smaller than 0 and this will lead to an SQL error later on.
 	if (httpget('comscroll') !== false && (int) $session['lastcom'] == $com+1) $cid = (int) $session['lastcommentid'];
-	else $cid = 0;
+	else $cid = 1;
 
 	$session['lastcom'] = $com;
 
-	if (!$cid) $cid = 1;
-
-	if ($customsql) { $sql = $customsql; }
-	else { $sql = "SELECT * FROM ".DB::prefix('commentary')." WHERE section='$section' ORDER BY commentid DESC LIMIT ".($com*$limit).", $limit"; }
-
 	$start = microtime(true);
+    $commentbuffer = datacache("commentary-latestcommentary_$section$com", 30);
 
-	$commentbuffer = datacache("commentary-latestcommentary_$section$com", 30);
-
-	if (! is_array($commentbuffer) || (is_array($commentbuffer) && empty($commentbuffer)))
+	if (! is_array($commentbuffer) || empty($commentbuffer))
 	{
+		if ($customsql)
+		{
+			$result = DB::query($customsql);
+		}
+		else
+		{
+			$select = DB::select(['c' => 'commentary']);
+			$select->order('c.commentid DESC')
+				->join(['a' => 'accounts'], 'a.acctid = c.author', ['acctid', 'laston', 'loggedin', 'chatloc'], 'LEFT')
+				->where->equalTo('c.section', $section)
+			;
+
+			$result = DB::paginator($select, $com, $limit);
+		}
+
 		$commentbuffer = [];
-		$result = DB::query($sql);
 		foreach ($result as $row)
 		{
 			$row['info'] = @unserialize($row['info']);
@@ -712,6 +720,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 	$undel = 'UNDel';
 
 	$clanrankcolors = [CLAN_APPLICANT => '`!', CLAN_MEMBER => '`3', CLAN_OFFICER => '`^', CLAN_LEADER => '`&', CLAN_FOUNDER => '`4'];
+	$offline = date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'));
 	foreach ($commentbuffer as $i => $comment)
 	{
 		if ((! isset($commentbuffer[$i]['info']['hidecomment']) || ! $commentbuffer[$i]['info']['hidecomment']) || $showmodlink)
@@ -719,7 +728,6 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 			$thiscomment = '';
 			$row = &$commentbuffer[$i];
 			$row['acctid'] = $row['author'];
-			$acctidstoquery[] = $row['author'];
 			if (substr($row['comment'], 0, 1) == ':' || substr($row['comment'], 0, 3) == '/me')
 			{
 				$row['skiptalkline'] = true;
@@ -811,6 +819,50 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 				$s = reltime(strtotime($row['postdate']));
 				$commentbuffer[$i]['displaytime'] = "`7[$s]`0 ";
 			}
+
+			//-- Add basic status icons for online/offline/nearby/afk/dnd
+			if ($row['chatloc'] == 'AFK')
+			{
+				$commentbuffer[$i]['info']['online'] =- 1;
+				$icon = [
+					'icon' => 'images/icons/onlinestatus/afk.png',
+					'mouseover' => translate_inline('Away from Keyboard'),
+				];
+				$commentbuffer[$i]['info']['icons']['online'] = $icon;
+			}
+			else if ($row['chatloc'] == 'DNI')
+			{
+				$commentbuffer[$i]['info']['online']=-1;
+				$icon = [
+					'icon' => 'images/icons/onlinestatus/dni.png',
+					'mouseover' => translate_inline("DNI (please don't try to talk to this player right now!)"),
+				];
+				$commentbuffer[$i]['info']['icons']['online'] = $icon;
+			}
+			else if ($row['laston'] < $offline || !$row['loggedin'])
+			{
+				$commentbuffer[$i]['info']['online'] = 0;
+				$commentbuffer[$i]['info']['icons']['online'] = [
+					'icon' => 'images/icons/onlinestatus/offline.png',
+					'mouseover' => translate_inline('Offline'),
+				];
+			}
+			else if ($row['chatloc'] == $chatloc)
+			{
+				$commentbuffer[$i]['info']['online'] = 2;
+				$commentbuffer[$i]['info']['icons']['online'] = [
+					'icon' => 'images/icons/onlinestatus/nearby.png',
+					'mouseover' => translate_inline('Nearby'),
+				];
+			}
+			else
+			{
+				$commentbuffer[$i]['info']['online'] = 1;
+				$commentbuffer[$i]['info']['icons']['online'] = [
+					'icon' => 'images/icons/onlinestatus/online.png',
+					'mouseover' => translate_inline('Online'),
+				];
+			}
 		}
 		else unset($commentbuffer[$i]);
 
@@ -819,85 +871,6 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 
 	//send through a modulehook for additional processing by modules
 	$commentbuffer = modulehook('commentbuffer', $commentbuffer);
-
-	//get offline/online/nearby status
-	$acctids = join(',', $acctidstoquery);
-	$onlinesql = "SELECT acctid, laston, loggedin, chatloc FROM ".DB::prefix('accounts'). (!empty($acctids) ? " WHERE acctid IN ($acctids)" : "");
-
-	$onlineresult = datacache("commentary/whosonline_$section$com", 30);
-
-	if (! is_array($onlineresult) || (is_array($onlineresult) && empty($onlineresult)))
-	{
-		$onlineresult = DB::query($onlinesql);
-
-		updatedatacache("commentary/whosonline_$section$com", $onlineresult);
-	}
-
-	$onlinestatus = [];
-	$offline = date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'));
-
-	foreach ($onlineresult as $row) { $onlinestatus[$row['acctid']] = $row; }
-
-	$onlinestatus[$session['user']['acctid']]['chatloc'] = $chatloc;
-	$onlinestatus[$session['user']['acctid']]['laston'] = $session['user']['laston'];
-	$onlinestatus[$session['user']['acctid']]['loggedin'] = $session['user']['loggedin'];
-
-	$commentbuffer = array_values($commentbuffer);
-
-	//second loop through - add basic status icons for online/offline/nearby/afk/dnd
-	foreach ($commentbuffer as $i => $comment)
-	{
-		$row = $commentbuffer[$i];
-		if (isset($onlinestatus[$row['author']]) && $onlinestatus[$row['author']]['chatloc'] == 'AFK')
-		{
-			$commentbuffer[$i]['info']['online'] =- 1;
-			$icon = [
-				'icon' => 'images/icons/onlinestatus/afk.png',
-				'mouseover' => translate_inline('Away from Keyboard'),
-			];
-			$commentbuffer[$i]['info']['icons']['online'] = $icon;
-
-			continue;
-		}
-		if (isset($onlinestatus[$row['author']]) && $onlinestatus[$row['author']]['chatloc'] == 'DNI')
-		{
-			$commentbuffer[$i]['info']['online']=-1;
-			$icon = [
-				'icon' => 'images/icons/onlinestatus/dni.png',
-				'mouseover' => translate_inline("DNI (please don't try to talk to this player right now!)"),
-			];
-			$commentbuffer[$i]['info']['icons']['online'] = $icon;
-
-			continue;
-		}
-
-		if (! isset($onlinestatus[$row['author']]) || $onlinestatus[$row['author']]['laston'] < $offline || !$onlinestatus[$row['author']]['loggedin'])
-           {
-			$commentbuffer[$i]['info']['online'] = 0;
-			$icon = [
-				'icon' => 'images/icons/onlinestatus/offline.png',
-				'mouseover' => translate_inline('Offline'),
-			];
-		}
-		else if ($onlinestatus[$row['author']]['chatloc'] == $chatloc)
-		{
-			$commentbuffer[$i]['info']['online'] = 2;
-			$icon = [
-				'icon' => 'images/icons/onlinestatus/nearby.png',
-				'mouseover' => translate_inline('Nearby'),
-			];
-		}
-		else
-		{
-			$commentbuffer[$i]['info']['online'] = 1;
-			$icon = [
-				'icon' => 'images/icons/onlinestatus/online.png',
-				'mouseover' => translate_inline('Online'),
-			];
-		}
-
-		$commentbuffer[$i]['info']['icons']['online'] = $icon;
-	}
 
 	tlschema();
 
