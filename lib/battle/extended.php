@@ -118,8 +118,8 @@ function prepare_data_battlebars(array $enemies)
 		if (isset($companion['hidehitpoints']) && $companion['hidehitpoints'] == true) { $maxhealth = $health = "???"; }
         else
         {
-            $health = $companion['creaturehealth'];
-			$maxhealth = $companion['creaturemaxhealth'];
+            $health = $companion['hitpoints'];
+			$maxhealth = $companion['maxhitpoints'];
 		}
 
 		$data['companions'][$index] = [
@@ -127,12 +127,12 @@ function prepare_data_battlebars(array $enemies)
 			'showhptext' => true,
 			'who' => translate_inline('`^Companion`0'),
 			'isTarget' => (isset($companion['istarget']) && $companion['istarget'] && $enemycounter > 1),
-			'name' => $ccode.$companion['creaturename'].$ccode,
-			'level' => $companion['creaturelevel'],
+			'name' => $ccode.$companion['name'].$ccode,
+			'level' => $session['user']['level'],
 			'hitpointstext' => $hitpointstext,
 			'healthtext' => $healthtext,
-			'hpvalue' => $companion['creaturehealth'], //-- Real health of companion
-			'hptotal' => $companion['companionmaxhealth'], //-- Real max health of creature
+			'hpvalue' => $companion['hitpoints'], //-- Real health of companion
+			'hptotal' => $companion['maxhitpoints'], //-- Real max health of creature
 			'hpvaluetext' => $health,
 			'hptotaltext' => $maxhealth
 		];
