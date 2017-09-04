@@ -63,7 +63,7 @@ function pvplist($location=false,$link=false,$extra=false,$sql=false){
 	$att = translate_inline("Attack");
 
 	rawoutput("<table class='ui very compact striped selectable table'>");
-	rawoutput("<thead>tr><th>$n</th><th>$l</th><th>$loc</th><th>$ops</th></tr></thead>");
+	rawoutput("<thead><tr><th>$n</th><th>$l</th><th>$loc</th><th>$ops</th></tr></thead>");
 	$loc_counts = array();
 	$num = count($pvp);
 	$j = 0;
