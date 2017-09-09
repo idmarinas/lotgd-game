@@ -171,7 +171,7 @@ if ($op == 'confirmbuy') {
 			$session['user']['gems']+=$gemcost;
 			debuglog(($goldcost <= 0?"spent ":"gained ") . abs($goldcost) . " gold and " . ($gemcost <= 0?"spent ":"gained ") . abs($gemcost) . " gems trading $debugmount1 for a new mount, a $debugmount2");
 			$buff = unserialize($mount['mountbuff']);
-			if ($buff['schema'] == "") $buff['schema'] = "mounts";
+			if (! isset($buff['schema']) || $buff['schema'] == "") $buff['schema'] = "mounts";
 			apply_buff('mount',unserialize($mount['mountbuff']));
 			// Recalculate so the selling stuff works right
 			$playermount = getmount($mount['mountid']);
