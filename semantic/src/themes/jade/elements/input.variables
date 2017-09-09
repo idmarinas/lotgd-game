@@ -51,7 +51,7 @@
 /* Labeled Input */
 @labelCornerTop: @borderWidth;
 @labelCornerRight: @borderWidth;
-@labelCornerSize: @relative9px;
+@labelCornerSize: @relative7px;
 @labelSize: 1em;
 @labelVerticalPadding: (@verticalPadding - @lineHeightOffset);
 
