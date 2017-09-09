@@ -32,7 +32,7 @@
 @lineHeight: @relativeLarge;
 @alignItems: center;
 @justifyContent: center;
-@backgroundColor: @white;
+@backgroundColor: lighten(@pageBackground, 6%);
 @background: @backgroundColor;
 @borderRadius: 0em;
 @borderWidth: 1px;
@@ -108,20 +108,20 @@
 @completedColor: @positiveColor;
 
 /* Hover */
-@hoverBackground: @offWhite;
-@hoverColor: @hoveredTextColor;
+@hoverBackground: lighten(@pageBackground, 9%);
+@hoverColor: @invertedHoveredTextColor;
 
 /* Down */
-@downBackground: @darkWhite;
+@downBackground: lighten(@pageBackground, 11%);
 @downColor: @pressedTextColor;
 
 /* Active */
-@activeBackground: @darkWhite;
+@activeBackground: lighten(@pageBackground, 2%);
 @activeColor: @linkColor;
-@activeIconColor: @darkTextColor;
+@activeIconColor: @invertedMutedTextColor;
 
 /* Active + Hover */
-@activeHoverBackground: @lightGrey;
+@activeHoverBackground: lighten(@pageBackground, 4%);
 @activeHoverColor: @textColor;
 
 
