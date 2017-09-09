@@ -173,14 +173,17 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			return $select;
 
 			break;
-		case "location":
+		case 'location':
 			// A generic way of allowing the location to be specified for
 			// things which only want to be in one place.  There are other
 			// things which would be good to do as well of course, such
 			// as making sure to handle village name changes in the module
 			// that cares about this or what not, but this at least gives
 			// some support.
-			$vloc = array();
+			$location = '';
+            if (isset($row[$key])) $location = $row[$key];
+
+			$vloc = [];
 			$vname = getsetting("villagename", LOCATION_FIELDS);
 			$vloc[$vname]="village";
 			$vloc['all'] = 1;
@@ -190,7 +193,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			$select = "<select class='ui dropdown' name='$keyout'>";
 			foreach($vloc as $loc=>$val)
 			{
-				$select .= "<option value='$loc' ".($loc == $row[$key]?'selected':null).">".htmlentities($loc, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
+				$select .= "<option value='$loc' ".($loc == $location?'selected':null).">".htmlentities($loc, ENT_COMPAT, getsetting("charset", "UTF-8"))."</option>";
 			}
 			$select .= '</select>';
 
@@ -446,25 +449,24 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 		case "textarearesizeable":
 		case "textarea":
 			$text = '';
-			if (isset($row[$key])) {
-				$text = $row[$key];
-			}
-			if (isset($raw) && $raw) {
-				//nothing
-			} else {
-				$text=str_replace("`n","\n",$text);
-			}
+            if (isset($row[$key])) { $text = $row[$key]; }
+			if (! isset($raw) || ! $raw) { $text = str_replace("`n","\n",$text); }
+
 			return "<textarea class='input' name='$keyout'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
-			break;
-		case "int":
-			if (array_key_exists($key, $row)) (int) $out = $row[$key];
-			else $out = 0;
-				return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
-			break;
-		case "float":
-			return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" step='any'>";
-			break;
-		case "string":
+
+		case 'int':
+			if (array_key_exists($key, $row)) { (int) $out = $row[$key]; }
+            else $out = 0;
+
+			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
+
+        case 'float':
+            $text = '';
+            if (isset($row[$key])) { $text = $row[$key]; }
+
+            return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" step='any'>";
+
+		case 'string':
 			$len = 50;
 			$minlen = 50;
 			if (isset($info[2])) $len = (int)$info[2];
@@ -472,9 +474,10 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			if ($len > $minlen) $minlen = $len/2;
 			if ($minlen > 70) $minlen = 70;
 			if (array_key_exists($key, $row)) $val = $row[$key];
-			else $val = "";
+            else $val = "";
+
 			return "<input size='$minlen' maxlength='$len' name='$keyout' value=\"".HTMLEntities($val, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
-			break;
+
 		default:
 			if (array_key_exists($info[1],$extensions)){
 				$func=$extensions[$info[1]];
