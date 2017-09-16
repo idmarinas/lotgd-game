@@ -4,6 +4,62 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
 
+# Version: 2.4.0
+
+### CHANGES
+
+* **lib/battle/functions.php** Only load the taunt if death message have a taunt, have a new appearance for death message with taunt
+* **lib/commentary.php** Set autocomplete off for inputs
+* **lib/datetime.php** Optimizations
+* **lib/experience.php** Increases cache lifetime and improves cache control
+* **lib/template.php** Class `LotgdTemplate` extends class `Twig_Environment`, now is more easy extends `LotgdTemplate` for create a new class for your modules
+* **assets/components/datacache.js** Now the modal to delete by prefix has a button to cancel.
+* **create.php** Has a new structure and changes some queries by the new functions of the DB script
+* **lib/commentary.php** Optimize viewing of comments by eliminating an unnecessary extra loop
+* **lib/showform.php** Small optimization
+* **Theme template Jade**
+    * "Step" now has a chord color for the Jade theme
+    * "Input" fits the size of the corner label
+
+### FEATURES
+
+* Nothing
+
+### DEPRECATED
+
+* **Functions**
+    * **lib/datetime.php**
+        * `getmicrotime` is unnecesary function, use `microtime(true)` instead
+
+### REMOVES
+
+* **Functions**
+    * **lib/datetime.php**
+        * `readabletime` use `reltime` instead
+
+### FIXES
+
+* **lib/commentary.php** Fixed error with data cache of `commentary-latestcommentary_`
+* **lib/datetime.php** Fixed error with `reltime` function, not show real time.
+* **shades.php** The line says, now it's translated
+* **lib/battle/functions.php** Added missing variable `$count` in a function
+* **lib/battle/buffs.php** Fixed error with undefined index
+* **cronjob.php** Fixed error with key used for cache (did not match the key to get with the update), removed unnecessary required file and avoid potential problems with other cache data and optimization/removal processes
+* **lib/datacache.php** Fixed error that in some cases it may not be possible to delete certain files and directories because they do not have permissions.
+* **lib/configuration/configuration_cronjob.php** When delete a CronJob invalidate data cache
+* **create.php** Fixed error with variables/index not defined
+* **lib/battle/extended.php** Fixed error with index names creatures and companions not share same names ^_^
+* **lib/pvplist.php** Fixed error with HTML of table
+* **lib/showform.php** Fixed error with 'float' and 'location' field give an undefined key error
+* **stables.php** Fixed error with undefined variable
+* **Theme template Jade**
+    * Fix error with names of files CSS.
+
+### NOTES
+
+* Nothing
+
+
 # Version: 2.3.0
 
 ### CHANGES
@@ -11,7 +67,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/template.php** code is improved not to repeat calculations
     * Filter for translation now admit a second param for add a *namespace*
 * **lib/errorhandling.php** unactivate custom error_handling function
-* **lib/creaturesfunctions.php** and **lib/forestoutcomes.php** now set/update 'creaturemaxhealth' for the creature, this do that in battle olways show de real maxhp of creature and not current hp as maxhp
+* **lib/creaturesfunctions.php** and **lib/forestoutcomes.php** now set/update 'creaturemaxhealth' for the creature, this do that in battle always show de real maxhp of creature and not current hp as maxhp
 * **lib/newday/dbcleanup.php** small optimization
 * **lib/creaturefunctions.php** check if creature have AI Script
 * **lib/graveyard/case_battle_search.php** now creatures are created using function `lotgd_transform_creature`
