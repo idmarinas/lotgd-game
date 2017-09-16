@@ -6,57 +6,73 @@ require_once 'lib/is_email.php';
 require_once 'lib/safeescape.php';
 require_once 'lib/sanitize.php';
 
-function systemmail($to,$subject,$body,$from=0,$noemail=false){
-	global $session;
-	$sql = "SELECT prefs,emailaddress FROM " . DB::prefix("accounts") . " WHERE acctid='$to'";
+function systemmail($to, $subject, $body, $from = 0, $noemail = false)
+{
+    global $session;
+
+	$sql = "SELECT prefs, emailaddress FROM " . DB::prefix("accounts") . " WHERE acctid='$to'";
 	$result = DB::query($sql);
 	$row = DB::fetch_assoc($result);
 	DB::free_result($result);
 	$prefs = unserialize($row['prefs']);
 	$serialized=0;
-	if ($from==0){
-		if (is_array($subject)){
+    if ($from == 0)
+    {
+        if (is_array($subject))
+        {
 			$subject = serialize($subject);
 			$serialized=1;
 		}
-		if (is_array($body)){
+        if (is_array($body))
+        {
 			$body = serialize($body);
 			$serialized+=2;
 		}
 		$subject = safeescape($subject);
 		$body = safeescape($body);
-	}else{
+    }
+    else
+    {
 		$subject = safeescape($subject);
 		$subject=str_replace("\n","",$subject);
 		$subject=str_replace("`n","",$subject);
 		$body = safeescape($body);
-		if ((isset($prefs['dirtyemail']) && $prefs['dirtyemail']) || $from==0){
-		}else{
-			$subject=soap($subject,false,"mail");
-			$body=soap($body,false,"mail");
+		if ((isset($prefs['dirtyemail']) && $prefs['dirtyemail']) || $from == 0) {}
+        else
+        {
+			$subject = soap($subject,false,"mail");
+			$body = soap($body,false,"mail");
 		}
 	}
 
-	$sql = "INSERT INTO " . DB::prefix("mail") . " (msgfrom,msgto,subject,body,sent,originator) VALUES ('".$from."','".(int)$to."','$subject','$body','".date("Y-m-d H:i:s")."', ".($session['user']['acctid']).")";
-	DB::query($sql);
+    $insert = DB::insert('mail');
+    $insert->values([
+        'msgfrom' => (int) $from,
+        'msgto' => (int) $to,
+        'subject' => $subject,
+        'body' => $body,
+        'sent' => date('Y-m-d H:i:s'),
+        'originator' => $session['user']['acctid']
+    ]);
+
+	DB::execute($insert);
 	invalidatedatacache("mail-$to");
 	$email=false;
-	if (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from>0){
-		$email=true;
-	}elseif(isset($prefs['emailonmail']) && $prefs['emailonmail'] &&
-			$from==0 && isset($prefs['systemmail']) && $prefs['systemmail']){
-		$email=true;
-	}
-	$emailadd = "";
-	if (isset($row['emailaddress'])) $emailadd = $row['emailaddress'];
+    if (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from > 0) { $email = true; }
+    elseif (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from == 0 && isset($prefs['systemmail']) && $prefs['systemmail']) { $email = true; }
+	$emailadd = '';
+	if (isset($row['emailaddress'])) { $emailadd = $row['emailaddress']; }
 
 	if (!is_email($emailadd)) $email=false;
-	if ($email && !$noemail){
-		if ($serialized&2){
+    if ($email && !$noemail)
+    {
+        if ($serialized&2)
+        {
 			$body = unserialize(stripslashes($body));
 			$body = translate_mail($body,$to);
 		}
-		if ($serialized&1){
+        if ($serialized&1)
+        {
 			$subject = unserialize(stripslashes($subject));
 			$subject = translate_mail($subject,$to);
 		}
@@ -82,7 +98,9 @@ function systemmail($to,$subject,$body,$from=0,$noemail=false){
 		$body = preg_replace("'[`]n'", "\n", $body);
 		$body = full_sanitize($body);
 		$subject = htmlentities(full_sanitize($subject), ENT_COMPAT, getsetting("charset", "UTF-8"));
-		require_once 'lib/settings_extended.php';
+
+        require_once 'lib/settings_extended.php';
+
 		$subj = translate_mail($settings_extended->getSetting('notificationmailsubject'),$to);
 		$msg = translate_mail($settings_extended->getSetting('notificationmailtext'),$to);
 		$replace=array(
