@@ -12,13 +12,16 @@ $superusermessage = getsetting("superuseryommessage","Asking an admin for gems, 
 
 $op = httpget('op');
 $id = (int)httpget('id');
-if($op=="del"){
+if($op == 'del')
+{
 	$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
 	DB::query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
 	header("Location: mail.php");
 	exit();
-}elseif($op=="process"){
+}
+elseif($op == 'process')
+{
 	$msg = httppost('msg');
 	if (!is_array($msg) || count($msg)<1){
 		$session['message'] = "`n`n`\$`bYou cannot delete zero messages!  What does this mean?  You pressed \"Delete Checked\" but there are no messages checked!  What sort of world is this that people press buttons that have no meaning?!?`b`0";
@@ -31,7 +34,9 @@ if($op=="del"){
 		header("Location: mail.php");
 		exit();
 	}
-}elseif ($op=="unread"){
+}
+elseif ($op == 'unread')
+{
 	$sql = "UPDATE " . DB::prefix("mail") . " SET seen=0 WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
 	DB::query($sql);
 	invalidatedatacache("mail-{$session['user']['acctid']}");
@@ -54,7 +59,6 @@ array_push($args, ["mail.php?op=address",$write]);
 $mailfunctions = modulehook("mailfunctions", $args);
 
 rawoutput('<div class="ui buttons">');
-rawoutput("<tr>");
 $count_mailfunctions = count($mailfunctions);
 for($i = 0; $i < $count_mailfunctions; ++$i)
 {
@@ -72,17 +76,17 @@ for($i = 0; $i < $count_mailfunctions; ++$i)
 rawoutput('</div>');
 output_notl('`n`n');
 
-if($op=="send") require_once 'lib/mail/case_send.php';
+if($op == 'send') require_once 'lib/mail/case_send.php';
 
 switch ($op)
 {
-    case "read":
+    case 'read':
         require_once 'lib/mail/case_read.php';
     break;
-    case "address":
+    case 'address':
         require_once 'lib/mail/case_address.php';
     break;
-    case "write":
+    case 'write':
         require_once 'lib/mail/case_write.php';
     break;
     default:
