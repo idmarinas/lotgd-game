@@ -1,27 +1,28 @@
 <?php
-output("`b`iMail Box`i`b");
-if (isset($session['message'])) {
-	output($session['message']);
-}
+output('`b`iMail Box`i`b');
+
+if (isset($session['message'])) { output($session['message']); }
 $session['message']="";
 $mail = DB::prefix("mail");
 $accounts = DB::prefix("accounts");
 $sortorder = httpget('sortorder');
-if ($sortorder=='') $sortorder='date';
-switch ($sortorder) {
-	case "subject":
-		$order="subject";
-		break;
-	case "name":
-		$order=$accounts.".name";
-		break;
+if ($sortorder == '') $sortorder = 'date';
+switch ($sortorder)
+{
+	case 'subject':
+		$order = 'subject';
+	break;
+	case 'name':
+		$order = $accounts.'.name';
+	break;
 	default: //date
-		$order="sent";
+        $order = 'sent';
+    break;
 }
-$sorting_direction=(int)httpget('direction');
-if ($sorting_direction==0) $direction="DESC";
-	else $direction="ASC";
-$newdirection=(int)!$sorting_direction;
+$sorting_direction = (int) httpget('direction');
+if ($sorting_direction == 0) $direction = 'DESC';
+else $direction = 'ASC';
+$newdirection = (int) ! $sorting_direction;
 
 $sql = "SELECT subject,messageid,".$accounts.".name,".$accounts.".acctid,msgfrom,seen,sent FROM ".$mail." LEFT JOIN ".$accounts." ON ".$accounts.".acctid=".$mail.".msgfrom WHERE msgto=\"".$session['user']['acctid']."\" ORDER BY $order $direction";
 $result = DB::query($sql);
@@ -161,7 +162,8 @@ if (0 < DB::num_rows($result))
 }
 else
 {
-	output("`i`4Aww, you have no mail, how sad.`i");
+    rawoutput('<br><br>');
+	output('`i`4Aww, you have no mail, how sad.`0`i');
 }
-output("`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.",DB::num_rows($result),getsetting('inboxlimit',50),getsetting("oldmail",14));
+output("`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.`i",DB::num_rows($result),getsetting('inboxlimit',50),getsetting("oldmail",14));
 ?>

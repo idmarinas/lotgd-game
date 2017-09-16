@@ -20,7 +20,7 @@ if ($msgid > 0)
 		if ($row['login']=="" && $forwardto==0)
         {
 			output("You cannot reply to a system message.`n");
-			$row=array();
+			$row = [];
 			popup_footer();
 		}
 		if ($forwardto>0) $row['login']=0;
@@ -44,34 +44,39 @@ if (is_array($row))
 {
 	if (isset($row['subject']) && $row['subject'])
     {
-		if ((int)$row['msgfrom']==0){
-			$row['name']=translate_inline("`i`^System`0`i");
+        if ((int)$row['msgfrom'] == 0)
+        {
+			$row['name'] = translate_inline("`i`^System`0`i");
 			// No translation for subject if it's not an array
 			$row_subject = @unserialize($row['subject']);
-			if ($row_subject !== false) {
+            if ($row_subject !== false)
+            {
 				$row['subject'] = call_user_func_array("sprintf_translate", $row_subject);
 			}
 			// No translation for body if it's not an array
 			$row_body = @unserialize($row['body']);
-			if ($row_body !== false) {
+            if ($row_body !== false)
+            {
 				$row['body'] = call_user_func_array("sprintf_translate", $row_body);
 			}
 		}
-		$subject=$row['subject'];
-		if (strncmp($subject,"RE: ",4) !== 0 ) {
-			$subject="RE: $subject";
+		$subject = $row['subject'];
+        if (strncmp($subject,"RE: ",4) !== 0 )
+        {
+			$subject = "RE: $subject";
 		}
 	}
-	if (isset($row['body']) && $row['body']){
-		$body="\n\n---".sprintf_translate(array("Original Message from %s (%s)",sanitize($row['name']),date("Y-m-d H:i:s",strtotime($row['sent']))))."---\n".$row['body'];
+    if (isset($row['body']) && $row['body'])
+    {
+		$body = "\n\n---".sprintf_translate(array("Original Message from %s (%s)",sanitize($row['name']),date("Y-m-d H:i:s",strtotime($row['sent']))))."---\n".$row['body'];
 	}
 }
 rawoutput("<form action='mail.php?op=send' method='post' class='ui form'>");
-rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslashes($msgid), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
+rawoutput("<input type='hidden' name='returnto' value=\"".htmlentities(stripslashes($msgid), ENT_COMPAT, getsetting('charset', 'UTF-8'))."\">");
 $superusers = [];
 if (isset($row['login']) && $row['login'] != '')
 {
-	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\">",true);
+	output_notl("<input type='hidden' name='to' id='to' value=\"".htmlentities($row['login'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\">",true);
 	output("`2To: `^%s`n",$row['name']);
 	if (($row['superuser'] & SU_GIVES_YOM_WARNING) && !($row['superuser'] & SU_OVERRIDE_YOM_WARNING)) {
 		array_push($superusers,$row['login']);
