@@ -1020,6 +1020,9 @@ return [
 		'seen'=>[
 			'name'=>'seen', 'type'=>'tinyint(1)', 'default'=>'0'
 		],
+		'originator' => [
+			'name' => 'originator', 'type'=>'int(10) unsigned', 'default' => '0'
+        ],
 		'key-PRIMARY'=>[
 			'name'=>'PRIMARY',
 			'type'=>'primary key',
