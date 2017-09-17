@@ -202,7 +202,7 @@ function prepare_companions()
  */
 function suspend_companions($susp, $nomsg = false)
 {
-	global $companions, $countround, $content;
+	global $companions, $countround, $lotgdBattleContent;
 
 	$newcompanions = [];
 	$suspended = false;
@@ -230,7 +230,7 @@ function suspend_companions($susp, $nomsg = false)
     {
 		if ($nomsg === false) { $nomsg = '`&Your companions stand back during this fight!`n'; }
 
-		if ($nomsg !== true) { $content['battlerounds'][$countround]['allied'][] = $nomsg; }
+		if ($nomsg !== true) { $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg; }
 	}
 
 	$companions = $newcompanions;
@@ -265,7 +265,7 @@ function unsuspend_companions($susp, $nomsg = false)
 	if ($notify)
     {
 		if ($nomsg === false) { $nomsg = '`&Your companions return to stand by your side!`n'; }
-		if ($nomsg !== true) { $content['battlerounds'][$countround]['allied'][] = $nomsg; }
+		if ($nomsg !== true) { $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg; }
 	}
 
 	$companions = $newcompanions;

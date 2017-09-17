@@ -15,12 +15,12 @@ require_once 'lib/buffs.php';
 //just in case we're called from within a function.Yuck is this ugly.
 global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
 global $creaturedefmod, $adjustment, $defmod, $atkmod, $compdefmod, $compatkmod, $buffset, $atk, $def, $options;
-global $companions, $companion, $newcompanions, $countround, $defended, $needtostopfighting, $roll, $content;
+global $companions, $companion, $newcompanions, $countround, $defended, $needtostopfighting, $roll, $lotgdBattleContent, $content;
 
 tlschema('battle');
 
 $newcompanions = [];
-$content = [
+$lotgdBattleContent = [
     'msg' => [],
     'encounter' => [],
 	'battlebars' => [],
@@ -28,6 +28,7 @@ $content = [
     'battlerounds' => [],
 	'battleend' => []
 ];
+$content = &$lotgdBattleContent;
 
 $attackstack = @unserialize($session['user']['badguy']);
 if (isset($attackstack['enemies'])) $enemies = $attackstack['enemies'];
@@ -76,13 +77,13 @@ else if ($op == 'newtarget')
 			if (!isset($badguy['cannotbetarget']) || $badguy['cannotbetarget'] === false) $enemies[$index]['istarget'] = 1;
 			else
             {
-				if (is_array($badguy['cannotbetarget'])) $content['msg'][] = substitute($msg);
+				if (is_array($badguy['cannotbetarget'])) $lotgdBattleContent['msg'][] = substitute($msg);
                 else
                 {
                     $msg = $badguy['cannotbetarget'];
 					if ($badguy['cannotbetarget'] === true) $msg = "{badguy} cannot be selected as target.";
 
-					$content['msg'][] = substitute_array("`5{$msg}`0`n");
+					$lotgdBattleContent['msg'][] = substitute_array("`5{$msg}`0`n");
 				}
 			}
 		}
@@ -100,12 +101,12 @@ if ($enemycounter > 0)
     {
 		if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0)
         {
-            $content['encounter'][] = ['`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n', $badguy['creaturename'], $badguy['creatureweapon'] ];
+            $lotgdBattleContent['encounter'][] = ['`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n', $badguy['creaturename'], $badguy['creatureweapon'] ];
 		}
 	}
 
 	$data = prepare_data_battlebars($enemies);
-	$content['battlebars']['start'] = [
+	$lotgdBattleContent['battlebars']['start'] = [
 		'player' => $data['user'],
 		'companions' => $data['companions'],
 		'enemies' => $data['enemies']
@@ -126,7 +127,7 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 	if (count($enemies) > 1)
     {
 		$surprised = true;
-		$content['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0`b`n`n';
+		$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0`b`n`n';
 	}
     else
     {
@@ -146,11 +147,11 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 				if (($type == 'thrill' || $type == 'suicide') && $num == 2) $surprised = false;
 			}
 
-			if (!$surprised) $content['battlestart'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
+			if (!$surprised) $lotgdBattleContent['battlestart'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
 			else
             {
-				if ($options['type'] == 'pvp') $content['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $badguy['creaturename']];
-                else $content['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $badguy['creaturename']];
+				if ($options['type'] == 'pvp') $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $badguy['creaturename']];
+                else $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $badguy['creaturename']];
 
 				$op = 'run';
 			}
@@ -318,7 +319,7 @@ if ($op != 'newtarget')
 							}
                             else if ($op == 'run' && !$surprised)
 							{
-								$content['battlerounds'][$countround]['allied'][] = ["`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n", $badguy['creaturename']];
+								$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n", $badguy['creaturename']];
 							}
 
 							//Need to insert this here because of auto-fighting!
@@ -431,7 +432,7 @@ if ($op != 'newtarget')
 						{
 							if (!isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
 							$session['user']['experience'] += round($badguy['creatureexp']/count($newenemies));
-							$content['battlerounds'][$countround]['allied'][] = ['`#You receive `^%s`# experience!`n`0', round($badguy['creatureexp']/count($newenemies))];
+							$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`#You receive `^%s`# experience!`n`0', round($badguy['creatureexp']/count($newenemies))];
 							$options['experience'][$index] = $badguy['creatureexp'];
 							$options['experiencegained'][$index] = round($badguy['creatureexp']/count($newenemies));
 							$badguy['expgained']=true;
@@ -495,7 +496,7 @@ if ($op != 'newtarget')
 						$msg = substitute_array("`5{$msg}`0`n");
 					}
 
-					$content['battlerounds'][$countround]['enemy'][] = $msg;
+					$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
 				}
 				else { $newenemies[$index] = $badguy; }
 			}
@@ -505,7 +506,7 @@ if ($op != 'newtarget')
 			if (is_array($badguy['essentialleader']))
 			{
 				$msg = substitute($badguy['essentialleader']);
-				$content['battlerounds'][$countround]['enemy'][] = $msg;
+				$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
 			}
 			else
 			{
@@ -518,7 +519,7 @@ if ($op != 'newtarget')
 					$msg = $badguy['essentialleader'];
 				}
 				$msg = substitute_array("`5{$msg}`0`n");
-				$content['battlerounds'][$countround]['enemy'][] = $msg;
+				$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
 			}
 		}
 		if (is_array($newenemies)) { $enemies = $newenemies; }
@@ -539,7 +540,7 @@ $badguy = modulehook('endofpage', $badguy);
 if ($session['user']['hitpoints'] > 0 && count($newenemies) > 0 && ($op == 'fight' || $op == 'run'))
 {
 	$data = prepare_data_battlebars($newenemies);
-	$content['battlebars']['end'] = [
+	$lotgdBattleContent['battlebars']['end'] = [
 		'player' => $data['user'],
 		'companions' => $data['companions'],
 		'enemies' => $data['enemies']
@@ -548,7 +549,7 @@ if ($session['user']['hitpoints'] > 0 && count($newenemies) > 0 && ($op == 'figh
 }
 else
 {
-	$content['battlebars']['end'] = [
+	$lotgdBattleContent['battlebars']['end'] = [
 		'player' => [],
 		'companions' => [],
 		'enemies' => []
@@ -584,7 +585,7 @@ if ($victory || $defeat)
     {
 		if(isset($companion['expireafterfight']) && $companion['expireafterfight'])
         {
-			$content['battleend'][] = $companion['dyingtext'];
+			$lotgdBattleContent['battleend'][] = $companion['dyingtext'];
 			unset($companions[$index]);
 		}
 	}
@@ -606,7 +607,7 @@ if ($victory || $defeat)
 	{
 		$result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
 
-		$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
 		battlevictory($newenemies, (isset($options['denyflawless'])?$options['denyflawless']:$battleDenyFlawless), $battleInForest);
 	}
@@ -614,7 +615,7 @@ if ($victory || $defeat)
 	{
 		$result = modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
 
-		$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
 		battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
 	}
@@ -624,7 +625,7 @@ $attackstack = ['enemies' => $newenemies, 'options' => $options];
 $session['user']['badguy'] = createstring($attackstack);
 $session['user']['companions'] = createstring($companions);
 
-if ($battleShowResult) battleshowresults($content);
+if ($battleShowResult) battleshowresults($lotgdBattleContent);
 
 tlschema();
 

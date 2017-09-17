@@ -103,7 +103,7 @@ function rolldamage()
 
 function report_power_move($crit, $dmg)
 {
-	global $session, $countround, $content;
+	global $session, $countround, $lotgdBattleContent;
 
 	$uatk = get_player_attack();
 
@@ -134,7 +134,7 @@ function report_power_move($crit, $dmg)
 
 		if ($power)
         {
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
 			$dmg += e_rand($crit/4, $crit/2);
 			$dmg = max($dmg, 1);
@@ -173,7 +173,7 @@ function suspend_buffs($susp = false, $msg = false)
 			$msg = "`&The gods have suspended some of your enhancements!`n";
 		}
 
-		$content['battlerounds'][$countround]['allied'][] = sanitize_mb($msg);
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = sanitize_mb($msg);
 	}
 }
 

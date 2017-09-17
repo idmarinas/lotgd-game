@@ -161,7 +161,7 @@ function battle_badguy_attacks()
  */
 function battlevictory($enemies, $denyflawless = false, $forest = true)
 {
-	global $session, $options, $content, $expbonus, $exp, $enemies, $deathoverlord;
+	global $session, $options, $lotgdBattleContent, $expbonus, $exp, $enemies, $deathoverlord;
 
 	$diddamage = false;
 	$creaturelevel = 0;
@@ -178,10 +178,10 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
 		$gold += $badguy['creaturegold'];
 
-		if(isset($badguy['creaturelose'])) $content['battleend'][] = substitute_array($badguy['creaturelose'].'`n');
+		if(isset($badguy['creaturelose'])) $lotgdBattleContent['battleend'][] = substitute_array($badguy['creaturelose'].'`n');
 
-		if ($forest === true) $content['battleend'][] = ["`b`\$You have slain %s!`0`b`n", $badguy['creaturename']];
-        elseif ($forest === false) $content['battleend'][] = ["`b`\$You have tormented %s!`0`b`n", $badguy['creaturename']];
+		if ($forest === true) $lotgdBattleContent['battleend'][] = ["`b`\$You have slain %s!`0`b`n", $badguy['creaturename']];
+        elseif ($forest === false) $lotgdBattleContent['battleend'][] = ["`b`\$You have tormented %s!`0`b`n", $badguy['creaturename']];
 
 		// If any creature did damage, we have no flawless fight. Easy as that.
 		if (isset($badguy['diddamage']) && $badguy['diddamage'] == 1) { $diddamage = true; }
@@ -204,7 +204,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
 	if ($gold && $forest === true)//-- Only in forest
 	{
-		$content['battleend'][] = ['`#You receive `^%s`# gold!`n', $gold];
+		$lotgdBattleContent['battleend'][] = ['`#You receive `^%s`# gold!`n', $gold];
         $session['user']['gold'] += $gold;
 		debuglog('received gold for slaying a monster.', false, false, 'forestwin', $badguy['creaturegold']);
 	}
@@ -213,7 +213,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 	$gemchances = $args['chance'];
 	if ($session['user']['level'] < getsetting('maxlevel', 15) && e_rand(1,$gemchances) == 1 && $forest === true)//-- Only find in forest
     {
-		$content['battleend'][] = ["`&You find A GEM!`n`#"];
+		$lotgdBattleContent['battleend'][] = ["`&You find A GEM!`n`#"];
 		$session['user']['gems']++;
 		debuglog("found gem when slaying a monster.",false,false,"forestwingem",1);
 	}
@@ -231,7 +231,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 	if (!$diddamage)
     {
 		$content['battleend'][] = "`c`b`&~~ Flawless Fight! ~~`0`b`c";
-		if ($denyflawless) { $content['battleend'][] = "`c`\${$denyflawless}`0`c"; }
+		if ($denyflawless) { $lotgdBattleContent['battleend'][] = "`c`\${$denyflawless}`0`c"; }
 		elseif ($session['user']['level'] <= $creaturelevel)
 		{
 			if (is_module_active('staminasystem') && $forest)//-- Only When active stamina system and is forest
