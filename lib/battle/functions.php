@@ -211,7 +211,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 	// No gem hunters allowed!
 	$args = modulehook('alter-gemchance', ['chance' => getsetting('forestgemchance', 25)]);
 	$gemchances = $args['chance'];
-	if ($session['user']['level'] < getsetting('maxlevel', 15) && e_rand(1,$gemchances) == 1 && $forest)//-- Only find in forest
+	if ($session['user']['level'] < getsetting('maxlevel', 15) && e_rand(1,$gemchances) == 1 && $forest === true)//-- Only find in forest
     {
 		$content['battleend'][] = ["`&You find A GEM!`n`#"];
 		$session['user']['gems']++;
