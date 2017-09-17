@@ -866,7 +866,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 		}
 		else unset($commentbuffer[$i]);
 
-		$bottomcid = $commentbuffer[$i]['commentid'];
+		if (isset($commentbuffer[$i])) $bottomcid = $commentbuffer[$i]['commentid'];
 	}
 
 	//send through a modulehook for additional processing by modules
