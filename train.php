@@ -258,8 +258,8 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 		{
 			if (getsetting('displaymasternews',1))
 			{
-				$taunt = select_taunt_array();
-				addnews("`%%s`5 has challenged their master, %s and lost!`n%s", $session['user']['name'], $badguy['creaturename'], $taunt);
+				$taunt = select_taunt();
+				addnews('`%%s`5 has challenged their master, %s and lost!`n%s', $session['user']['name'], $badguy['creaturename'], $taunt);
 			}
 
 			$session['user']['hitpoints'] = $session['user']['maxhitpoints'];
