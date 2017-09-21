@@ -122,6 +122,7 @@ $inn = (int) httpget('inn');
 if ($options['type'] == 'pvp' && $inn == 1) apply_bodyguard($badguy['bodyguardlevel']);
 
 $surprised = false;
+$countround = 0;
 if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 {
 	if (count($enemies) > 1)
@@ -147,7 +148,7 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 				if (($type == 'thrill' || $type == 'suicide') && $num == 2) $surprised = false;
 			}
 
-			if (!$surprised) $lotgdBattleContent['battlestart'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
+			if (!$surprised) $lotgdBattleContent['battlerounds'][$countround]['allied'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
 			else
             {
 				if ($options['type'] == 'pvp') $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $badguy['creaturename']];
@@ -162,7 +163,6 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 $needtostopfighting = false;
 if ($op != 'newtarget')
 {
-	$countround = 0;
 	// Run through as many rounds as needed.
 	do
     {
