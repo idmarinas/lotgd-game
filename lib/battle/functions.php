@@ -385,10 +385,11 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
         $deathmessage = select_deathmessage($forest, ['{where}'], [$where]);
         if ($deathmessage['taunt'] == 1)
         {
-            $taunt = select_taunt();
-            addnews('%s &ensp;&rarr;&ensp;`b`i%s`i`b', $deathmessage['deathmessage'], $taunt);
+            $taunt = '`n' . select_taunt();
         }
-        else { addnews('%s', $deathmessage['deathmessage']); }
+        else { $taunt = ''; }
+
+        addnews('%s `b`i%s`i`b', $deathmessage['deathmessage'], $taunt);
     }
 
     if ($lostgold)
