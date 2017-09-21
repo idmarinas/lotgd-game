@@ -9,7 +9,7 @@ function battle_player_attacks()
 {
 	global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
 	global $creaturedefmod, $adjustment, $defmod,$atkmod,$compatkmod, $compdefmod, $buffset, $atk, $def, $options;
-	global $companions, $companion, $newcompanions, $roll, $countround, $needtostopfighting, $content;
+	global $companions, $companion, $newcompanions, $roll, $countround, $needtostopfighting, $lotgdBattleContent;
 
 	$break = false;
 	$creaturedmg = $roll['creaturedmg'];
@@ -17,13 +17,13 @@ function battle_player_attacks()
 
 	if ($creaturedmg == 0)
     {
-		$content['battlerounds'][$countround]['allied'][] = ["`4You try to hit `^%s`4 but `\$MISS!`n", $badguy['creaturename']];
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`4You try to hit `^%s`4 but `\$MISS!`n", $badguy['creaturename']];
 		process_dmgshield($buffset['dmgshield'], 0);
 		process_lifetaps($buffset['lifetap'], 0);
 	}
     else if ($creaturedmg < 0)
     {
-		$content['battlerounds'][$countround]['allied'][] = ["`4You try to hit `^%s`4 but are `\$RIPOSTED `4for `\$%s`4 points of damage!`n", $badguy['creaturename'], (0-$creaturedmg)];
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`4You try to hit `^%s`4 but are `\$RIPOSTED `4for `\$%s`4 points of damage!`n", $badguy['creaturename'], (0-$creaturedmg)];
 		$badguy['diddamage'] = 1;
 		$session['user']['hitpoints'] += $creaturedmg;
 		if ($session['user']['hitpoints'] <= 0)
@@ -38,7 +38,7 @@ function battle_player_attacks()
 	}
     else
     {
-		$content['battlerounds'][$countround]['allied'][] = ["`4You hit `^%s`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $creaturedmg];
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`4You hit `^%s`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $creaturedmg];
 		$badguy['creaturehealth']-=$creaturedmg;
 		process_dmgshield($buffset['dmgshield'],-$creaturedmg);
 		process_lifetaps($buffset['lifetap'],$creaturedmg);
@@ -64,7 +64,7 @@ function battle_badguy_attacks()
 {
 	global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmod, $beta;
 	global $creaturedefmod, $adjustment, $defmod, $atkmod, $compatkmod, $compdefmod, $buffset, $atk, $def, $options;
-	global $companions, $companion, $newcompanions, $roll, $countround, $index, $defended, $needtostopfighting, $content;
+	global $companions, $companion, $newcompanions, $roll, $countround, $index, $defended, $needtostopfighting, $lotgdBattleContent;
 
 	$break = false;
 	$selfdmg = $roll['selfdmg'];
@@ -113,20 +113,20 @@ function battle_badguy_attacks()
         {
 			if ($selfdmg == 0)
             {
-				$content['battlerounds'][$countround]['enemy'][] = ["`^%s`4 tries to hit you but `^MISSES!`n", $badguy['creaturename']];
+				$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`4 tries to hit you but `^MISSES!`n", $badguy['creaturename']];
 				process_dmgshield($buffset['dmgshield'], 0);
 				process_lifetaps($buffset['lifetap'], 0);
 			}
             else if ($selfdmg < 0)
             {
-				$content['battlerounds'][$countround]['enemy'][] = ["`^%s`4 tries to hit you but you `^RIPOSTE`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], (0-$selfdmg)];
+				$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`4 tries to hit you but you `^RIPOSTE`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], (0-$selfdmg)];
 				$badguy['creaturehealth']+=$selfdmg;
 				process_lifetaps($buffset['lifetap'], -$selfdmg);
 				process_dmgshield($buffset['dmgshield'], $selfdmg);
 			}
             else
             {
-				$content['battlerounds'][$countround]['enemy'][] = ["`^%s`4 hits you for `\$%s`4 points of damage!`n", $badguy['creaturename'], $selfdmg];
+				$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`4 hits you for `\$%s`4 points of damage!`n", $badguy['creaturename'], $selfdmg];
 				$session['user']['hitpoints']-=$selfdmg;
 				if ($session['user']['hitpoints'] <= 0)
                 {
@@ -230,7 +230,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     //-- Perfect battle
 	if (!$diddamage)
     {
-		$content['battleend'][] = "`c`b`&~~ Flawless Fight! ~~`0`b`c";
+		$lotgdBattleContent['battleend'][] = "`c`b`&~~ Flawless Fight! ~~`0`b`c";
 		if ($denyflawless) { $lotgdBattleContent['battleend'][] = "`c`\${$denyflawless}`0`c"; }
 		elseif ($session['user']['level'] <= $creaturelevel)
 		{
@@ -238,33 +238,33 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 			{
 				require_once 'modules/staminasystem/lib/lib.php';
 
-				$content['battleend'][] = "`c`b`\$You receive some stamina!`0`b`c`n";
+				$lotgdBattleContent['battleend'][] = "`c`b`\$You receive some stamina!`0`b`c`n";
 				addstamina(25000);
 			}
 			else if (! $forest)//-- Only when is a Graveyard
             {
-                $content['battleend'][] = "`c`b`\$You receive an extra torment!`0`b`c`n";
+                $lotgdBattleContent['battleend'][] = "`c`b`\$You receive an extra torment!`0`b`c`n";
 				$session['user']['gravefights']++;
             }
             else//-- Other
 			{
-				$content['battleend'][] = "`c`b`\$You receive an extra turn!`0`b`c`n";
+				$lotgdBattleContent['battleend'][] = "`c`b`\$You receive an extra turn!`0`b`c`n";
 				$session['user']['turns']++;
 			}
 		}
 		else
 		{
-			if (is_module_active('staminasystem') && $forest) $content['battleend'][] = "`c`\$A more difficult fight would have yielded some stamina.`0`c`n";
-            elseif (! $forest) $content['battleend'][] = "`c`\$A more difficult fight would have yielded an extra torment.`0`c`n";
-			else $content['battleend'][] = "`c`\$A more difficult fight would have yielded an extra turn.`0`c`n";
+			if (is_module_active('staminasystem') && $forest) $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded some stamina.`0`c`n";
+            elseif (! $forest) $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded an extra torment.`0`c`n";
+			else $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded an extra turn.`0`c`n";
 		}
 	}
 
 	if ($session['user']['hitpoints'] <= 0)
 	{
-		$content['battleend'][] = 'With your dying breath you spy a small stand of mushrooms off to the side.';
-		$content['battleend'][] = 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.';
-		$content['battleend'][] = 'Even raw they have some restorative properties.`n';
+		$lotgdBattleContent['battleend'][] = 'With your dying breath you spy a small stand of mushrooms off to the side.';
+		$lotgdBattleContent['battleend'][] = 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.';
+		$lotgdBattleContent['battleend'][] = 'Even raw they have some restorative properties.`n';
 		$session['user']['hitpoints'] = 1;
 	}
 }
@@ -276,7 +276,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
  */
 function battlegainexperienceforest()
 {
-    global $content, $options, $enemies, $session, $expbonus, $exp;
+    global $lotgdBattleContent, $options, $enemies, $session, $expbonus, $exp;
 
 	$count = count($enemies);
 
@@ -292,15 +292,15 @@ function battlegainexperienceforest()
 		if ($expbonus > 0)
 		{
 			$expbonus = round($expbonus * pow(1+(getsetting('addexp', 5)/100), $count-1),0);
-			$content['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# experience! `n",$expbonus];
+			$lotgdBattleContent['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# experience! `n",$expbonus];
 		}
         elseif ($expbonus < 0)
         {
-			$content['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience! `n",abs($expbonus)];
+			$lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience! `n",abs($expbonus)];
 		}
 		if (count($enemies) > 1)
         {
-			$content['battleend'][] = ["During this fight you received `^%s`# total experience!`n`0",$exp+$expbonus];
+			$lotgdBattleContent['battleend'][] = ["During this fight you received `^%s`# total experience!`n`0",$exp+$expbonus];
 		}
 		$session['user']['experience'] += $expbonus;
 	}
@@ -310,14 +310,14 @@ function battlegainexperienceforest()
 		if ($expbonus > 0)
         {
 			$expbonus = round($expbonus * pow(1+(getsetting('addexp', 5)/100), $count-1),0);
-			$content['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# experience! `n(%s + %s = %s) ",$expbonus,$exp,abs($expbonus), $exp+$expbonus];
+			$lotgdBattleContent['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# experience! `n(%s + %s = %s) ",$expbonus,$exp,abs($expbonus), $exp+$expbonus];
 		}
         elseif ($expbonus < 0)
         {
-			$content['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
+			$lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
 		}
 
-		$content['battleend'][] = ['You receive `^%s`# total experience!`n`0', $exp+$expbonus];
+		$lotgdBattleContent['battleend'][] = ['You receive `^%s`# total experience!`n`0', $exp+$expbonus];
 		$session['user']['experience'] += ($exp+$expbonus);
 	}
 }
@@ -329,21 +329,21 @@ function battlegainexperienceforest()
  */
 function battlegainexperiencegraveyard()
 {
-    global $content, $options, $session, $expbonus, $exp, $deathoverlord;
+    global $lotgdBattleContent, $options, $session, $expbonus, $exp, $deathoverlord;
 
     if (floor($exp + $expbonus) < 0) { $expbonus = -$exp+1; }
 
 	if ($expbonus > 0)
     {
 		$expbonus = round($expbonus * pow(1+(getsetting('addexp', 5)/100), $count-1),0);
-		$content['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# favor! `n(%s + %s = %s) ",$expbonus,$exp,abs($expbonus), $exp+$expbonus];
+		$lotgdBattleContent['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# favor! `n(%s + %s = %s) ",$expbonus,$exp,abs($expbonus), $exp+$expbonus];
 	}
     elseif ($expbonus < 0)
     {
-		$content['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# favor! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
+		$lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# favor! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
 	}
 
-	$content['battleend'][] = ["`#You receive `^%s`# favor with `\$%s`#!`n`0", $exp+$expbonus, $deathoverlord];
+	$lotgdBattleContent['battleend'][] = ["`#You receive `^%s`# favor with `\$%s`#!`n`0", $exp+$expbonus, $deathoverlord];
 	$session['user']['deathpower'] += ($exp+$expbonus);
 }
 
@@ -360,22 +360,22 @@ function battlegainexperiencegraveyard()
  */
 function battledefeat($enemies, $where = 'in the forest', $forest = true, $candie = true, $lostexp = true, $lostgold = true)
 {
+    global $session, $lotgdBattleContent;
+
     require_once 'lib/deathmessage.php';
     require_once 'lib/taunt.php';
-
-	global $session, $content;
 
 	$percent = getsetting('forestexploss', 10);
 	$killer = false;
 	foreach ($enemies as $index => $badguy)
     {
 		if (isset($badguy['killedplayer']) && $badguy['killedplayer'] == true) { $killer = $badguy; }
-		if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > '') { $content['battleend'][] = substitute_array("`b`&{$badguy['creaturewin']}`0`b`n"); }
+		if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > '') { $lotgdBattleContent['battleend'][] = substitute_array("`b`&{$badguy['creaturewin']}`0`b`n"); }
 	}
 
     if ($killer)
     {
-        $content['battleend'][] = ["`&`bYou have been defeated by `%%s`&!`b`n", $killer['creaturename']];
+        $lotgdBattleContent['battleend'][] = ["`&`bYou have been defeated by `%%s`&!`b`n", $killer['creaturename']];
     }
 
 	if (is_string($where))
@@ -397,14 +397,14 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
         debuglog("lost gold when they were slain $where", false, false, 'forestlose', -$session['user']['gold']);
         $session['user']['gold'] = 0;
 
-        $content['battleend'][] = '`4All gold on hand has been lost!`n';
+        $lotgdBattleContent['battleend'][] = '`4All gold on hand has been lost!`n';
     }
 
     if ($lostexp)
     {
         $session['user']['experience'] = round($session['user']['experience']*(1-($percent/100)),0);
 
-        $content['battleend'][] = ['`4%s %% of experience has been lost!`b`n', $percent];
+        $lotgdBattleContent['battleend'][] = ['`4%s %% of experience has been lost!`b`n', $percent];
     }
 
     if ($candie)
@@ -415,7 +415,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 
         $session['user']['alive'] = false;
 	    $session['user']['hitpoints'] = 0;
-        $content['battleend'][] = 'You may begin fighting again tomorrow.';
+        $lotgdBattleContent['battleend'][] = 'You may begin fighting again tomorrow.';
     }
     elseif ($forest === false)
     {
@@ -424,21 +424,21 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 		tlschema();
 
 		$session['user']['gravefights'] = 0;
-        $content['battleend'][] = 'You may not torment any more souls today.';
+        $lotgdBattleContent['battleend'][] = 'You may not torment any more souls today.';
     }
 }
 
 /**
  * Show result of battle
  *
- * @param array $content
+ * @param array $lotgdBattleContent
  * @return void
  */
-function battleshowresults(array $content)
+function battleshowresults(array $lotgdBattleContent)
 {
     global $lotgd_tpl;
 
     tlschema('battle');
-    output_notl($lotgd_tpl->renderThemeTemplate('battle/battle.twig', $content), true);
+    output_notl($lotgd_tpl->renderThemeTemplate('battle/battle.twig', $lotgdBattleContent), true);
 	tlschema();
 }

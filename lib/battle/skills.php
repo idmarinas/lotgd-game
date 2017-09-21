@@ -147,7 +147,7 @@ function report_power_move($crit, $dmg)
 
 function suspend_buffs($susp = false, $msg = false)
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	$suspendnotify = 0;
 	reset($session['bufflist']);
@@ -179,7 +179,7 @@ function suspend_buffs($susp = false, $msg = false)
 
 function suspend_buff_by_name($name, $msg=false)
 {
-	global $session, $countround, $content;
+	global $session, $countround, $lotgdBattleContent;
 
 	// If it's not already suspended.
 	if ($session['bufflist'][$name] && !$session['bufflist'][$name]['suspended'])
@@ -192,13 +192,13 @@ function suspend_buff_by_name($name, $msg=false)
 			$msg = "`&The gods have suspended some of your enhancements!`n";
 		}
 
-		$content['battlerounds'][$countround]['allied'][] = $msg;
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 	}
 }
 
 function unsuspend_buff_by_name($name, $msg=false)
 {
-	global $session, $countround, $content;
+	global $session, $countround, $lotgdBattleContent;
 
 	// If it's not already suspended.
 	if ($session['bufflist'][$name] && $session['bufflist'][$name]['suspended'])
@@ -211,7 +211,7 @@ function unsuspend_buff_by_name($name, $msg=false)
 			$msg = "`&The gods have restored all suspended enhancements.`n`n";
 		}
 
-		$content['battlerounds'][$countround]['allied'][] = $msg;
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 	}
 }
 
@@ -225,7 +225,7 @@ function is_buff_active($name)
 
 function unsuspend_buffs($susp = false, $msg = false)
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	$unsuspendnotify = 0;
 	reset($session['bufflist']);
@@ -246,7 +246,7 @@ function unsuspend_buffs($susp = false, $msg = false)
 			$msg = "`&The gods have restored all suspended enhancements.`n`n";
 		}
 
-		$content['battlerounds'][$countround]['allied'][] = $msg;
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 	}
 }
 

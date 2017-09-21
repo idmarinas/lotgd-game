@@ -224,7 +224,7 @@ function activate_buffs($tag)
 
 function process_lifetaps($ltaps, $damage)
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	foreach ($ltaps as $buff)
     {
@@ -249,7 +249,7 @@ function process_lifetaps($ltaps, $damage)
         else if ($msg>'')
         {
 			$msg = substitute_array("`){$msg}`0`n", ['{damage}'], [$healhp]);
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 		}
 
 		if ($buff['schema']) tlschema();
@@ -258,7 +258,7 @@ function process_lifetaps($ltaps, $damage)
 
 function process_dmgshield($dshield, $damage)
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	foreach($dshield as $buff)
     {
@@ -291,19 +291,19 @@ function process_dmgshield($dshield, $damage)
 		if (is_array($msg))
         {
 			$msg = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 		}
         else if ($msg > '')
         {
 			$msg = substitute_array("`){$msg}`0`n", ['{damage}'], [$realdamage]);
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 		}
 	}
 }
 
 function expire_buffs()
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	foreach($session['bufflist'] as $key=>$buff)
     {
@@ -326,12 +326,12 @@ function expire_buffs()
 						$buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
 						$msg = substitute("`5{$buff['wearoff']}`0`n");
 
-						$content['battlerounds'][$countround]['allied'][] = $msg;
+						$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 					}
                     else
                     {
 						$msg = substitute_array("`5{$buff['wearoff']}`0`n");
-						$content['battlerounds'][$countround]['allied'][] = $msg;
+						$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 					}
 				}
 				strip_buff($key);
@@ -342,7 +342,7 @@ function expire_buffs()
 
 function expire_buffs_afterbattle()
 {
-	global $session, $badguy, $countround, $content;
+	global $session, $badguy, $countround, $lotgdBattleContent;
 
 	//this is a copy of the expire_buffs, but only to be called at the very end of a battle to strip buffs that are only meant to last until a victory/defeat
 	//redundant due to the nature of having a check at the beginning of a battle, and now one at the end.
@@ -363,12 +363,12 @@ function expire_buffs_afterbattle()
 						$buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
 						$msg = substitute("`5{$buff['wearoff']}`0`n");
 
-						$content['battlerounds'][$countround]['allied'][] = $msg;
+						$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 					}
                     else
                     {
 						$msg = substitute_array("`5{$buff['wearoff']}`0`n");
-						$content['battlerounds'][$countround]['allied'][] = $msg;
+						$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 					}
 				}
 				strip_buff($key);

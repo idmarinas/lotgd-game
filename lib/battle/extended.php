@@ -244,7 +244,7 @@ function suspend_companions($susp, $nomsg = false)
  */
 function unsuspend_companions($susp, $nomsg = false)
 {
-	global $companions, $countround, $content;
+	global $companions, $countround, $lotgdBattleContent;
 
 	$notify = false;
 	$newcompanions = [];
@@ -319,7 +319,7 @@ function autosettarget($localenemies)
 function report_companion_move($companion, $activate = 'fight')
 {
 	global $badguy, $session, $creatureattack, $creatureatkmod, $adjustment;
-	global $creaturedefmod, $defmod, $atkmod, $atk, $def, $countround, $defended, $needtosstopfighting, $content;
+	global $creaturedefmod, $defmod, $atkmod, $atk, $def, $countround, $defended, $needtosstopfighting, $lotgdBattleContent;
 
 	if (isset($companion['suspended']) && $companion['suspended'] == true) { return $companion;	}
 
@@ -331,16 +331,16 @@ function report_companion_move($companion, $activate = 'fight')
 		$damage_received = $roll['selfdmg'];
 		if ($damage_done == 0)
         {
-            $content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but `\$MISSES!`n", $companion['name'], $badguy['creaturename']];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but `\$MISSES!`n", $companion['name'], $badguy['creaturename']];
         }
         else if ($damage_done < 0)
         {
-            $content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but %s `\$RIPOSTES`4 for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but %s `\$RIPOSTES`4 for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
 			$companion['hitpoints'] += $damage_done;
 		}
         else
         {
-			$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits %s for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $damage_done];
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits %s for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $damage_done];
 			$badguy['creaturehealth']-=$damage_done;
 		}
 
@@ -348,16 +348,16 @@ function report_companion_move($companion, $activate = 'fight')
         {
 			if ($damage_received == 0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
 			}
             else if ($damage_received < 0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
 				$badguy['creaturehealth'] += $damage_received;
 			}
             else
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
 				$companion['hitpoints'] -= $damage_received;
 			}
 		}
@@ -380,7 +380,7 @@ function report_companion_move($companion, $activate = 'fight')
 			if ($msg == '') $msg = "{companion} heals your wounds. You regenerate {damage} hitpoints.";
 			$msg = substitute_array("`)".$msg."`0`n", ['{companion}', '{damage}'], [$companion['name'], $hptoheal]);
 
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 		}
         else
         {
@@ -405,7 +405,7 @@ function report_companion_move($companion, $activate = 'fight')
 					if ($msg == "") $msg = "{companion} heals {target}'s wounds. {target} regenerates {damage} hitpoints.";
 					$msg = substitute_array("`)".$msg."`0`n", ['{companion}', '{damage}', '{target}'], [$companion['name'], $hptoheal, $mycompanion['name']]);
 
-					$content['battlerounds'][$countround]['allied'][] = $msg;
+					$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 					$healed = true;
 					$newcompanions[$myname] = $mycompanion;
 				}
@@ -442,7 +442,7 @@ function report_companion_move($companion, $activate = 'fight')
 								if ($msg == "") $msg = "{companion} heals {target}'s wounds. {target} regenerates {damage} hitpoints.";
 								$msg = substitute_array("`)".$msg."`0`n", ['{companion}','{damage}','{target}'], [$companion['name'], $hptoheal, $mycompanion['name']]);
 
-								$content['battlerounds'][$countround]['allied'][] = $msg;
+								$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
 								$healed = true;
 								$companions[$myname] = $mycompanion;
@@ -461,17 +461,17 @@ function report_companion_move($companion, $activate = 'fight')
         {
 			if ($damage_received == 0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
 			}
             else if ($damage_received < 0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
 
 				$badguy['creaturehealth'] += $damage_received;
 			}
             else
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
 
 				$companion['hitpoints'] -= $damage_received;
 			}
@@ -486,17 +486,17 @@ function report_companion_move($companion, $activate = 'fight')
 		$damage_received = $roll['selfdmg'];
 		if ($damage_done == 0)
         {
-			$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but `^MISSES!`n", $companion['name'], $badguy['creaturename']];
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but `^MISSES!`n", $companion['name'], $badguy['creaturename']];
 		}
         else if ($damage_done < 0)
         {
-			$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit %s but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
 
 			$companion['hitpoints'] += $damage_done;
 		}
         else
         {
-			$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits %s for `\$%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $damage_done];
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits %s for `\$%s`4 points of damage!`n", $companion['name'], $badguy['creaturename'], $damage_done];
 
 			$badguy['creaturehealth'] -= $damage_done;
 		}
@@ -505,17 +505,17 @@ function report_companion_move($companion, $activate = 'fight')
         {
 			if ($damage_received==0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but `^MISSES!`n", $badguy['creaturename'], $companion['name']];
 			}
             else if ($damage_received<0)
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 tries to hit `\$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
 
 				$badguy['creaturehealth'] += $damage_received;
 			}
             else
             {
-				$content['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
+				$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ["`^%s`4 hits `\$%s`4 for `\$%s`4 points of damage!`n", $badguy['creaturename'], $companion['name'], $damage_received];
 				$companion['hitpoints']-=$damage_received;
 			}
 		}
@@ -532,7 +532,7 @@ function report_companion_move($companion, $activate = 'fight')
 			if ($msg == "") $msg = "{companion} shoots a magical arrow at {badguy} but misses.";
 			$msg = substitute_array("`)".$msg."`0`n", array("{companion}"), array($companion['name']));
 
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 		}
         else
         {
@@ -546,7 +546,7 @@ function report_companion_move($companion, $activate = 'fight')
 			}
 			$msg = substitute_array("`)".$msg."`0`n", array("{companion}","{damage}"), array($companion['name'], $damage_done));
 
-			$content['battlerounds'][$countround]['allied'][] = $msg;
+			$lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
 			$badguy['creaturehealth'] -= $damage_done;
 		}
@@ -573,7 +573,7 @@ function report_companion_move($companion, $activate = 'fight')
 			$msg = '`5Your companion catches his last breath before it dies.';
 		}
 
-		$content['battlerounds'][$countround]['allied'][] = substitute_array("`){$msg}`0`n", ['{companion}'], [$companion['name']]);
+		$lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`){$msg}`0`n", ['{companion}'], [$companion['name']]);
 
 		if (isset($companion['cannotdie']) && $companion['cannotdie'] == true)
         {
@@ -695,7 +695,7 @@ function rollcompaniondamage($companion)
  */
 function battle_spawn($creature)
 {
-	global $enemies, $newenemies, $badguy, $nextindex, $countround, $content;
+	global $enemies, $newenemies, $badguy, $nextindex, $countround, $lotgdBattleContent;
 
 	if (!is_array($newenemies)) $newenemies = [];
 
@@ -709,7 +709,7 @@ function battle_spawn($creature)
 		if ($row = DB::fetch_assoc($result))
         {
 			$newenemies[$nextindex] = $row;
-			$content['battlerounds'][$countround]['enemy'][] = ["`^%s`2 summons `^%s`2 for help!`n", $badguy['creaturename'], $row['creaturename']];
+			$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`2 summons `^%s`2 for help!`n", $badguy['creaturename'], $row['creaturename']];
 		}
 	}
     else if(is_array($creature)) { $newenemies[$nextindex] = $creature;	}
@@ -725,14 +725,14 @@ function battle_spawn($creature)
  */
 function battle_heal($amount, $target = false)
 {
-	global $newenemies, $enemies, $badguy, $countround, $content;
+	global $newenemies, $enemies, $badguy, $countround, $lotgdBattleContent;
 
 	if ($amount > 0)
     {
 		if ($target === false)
         {
 			$badguy['creaturehealth']+=$amount;
-			$content['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heals itself for `^%s`2 hitpoints.", $badguy['creaturename'], $amount];
+			$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heals itself for `^%s`2 hitpoints.", $badguy['creaturename'], $amount];
 		}
         else
         {
@@ -742,7 +742,7 @@ function battle_heal($amount, $target = false)
 				if ($newenemies[$target]['dead'] == false)
                 {
 					$newenemies[$target]['creaturehealth'] += $amount;
-					$content['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.", $badguy['creaturename'], $newenemies[$target]['creaturename'], $amount];
+					$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.", $badguy['creaturename'], $newenemies[$target]['creaturename'], $amount];
 				}
 			}
             else
@@ -750,7 +750,7 @@ function battle_heal($amount, $target = false)
 				if ($enemies[$target]['dead'] == false)
                 {
 					$enemies[$target]['creaturehealth'] += $amount;
-					$content['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.", $badguy['creaturename'], $enemies[$target]['creaturename'], $amount];
+					$lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.", $badguy['creaturename'], $enemies[$target]['creaturename'], $amount];
 				}
 			}
 		}
