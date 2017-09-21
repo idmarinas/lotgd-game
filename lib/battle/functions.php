@@ -380,8 +380,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 
 	if (is_string($where))
     {
-        if (is_array($where)) { $where = sprintf_translate($where); }
-        else { $where = translate_inline($where); }
+        $where = translate_inline($where);
 
         $deathmessage = select_deathmessage($forest, ['{where}'], [$where]);
         if ($deathmessage['taunt'] == 1)
