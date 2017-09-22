@@ -29,5 +29,6 @@
 	background-color: #009900;
 	border: none;
 	cursor: default;
-	color: #FFFF00;
+    color: #FFFF00;
+    padding: 2px 5px;
 }
