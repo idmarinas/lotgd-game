@@ -42,14 +42,14 @@ if ($op==""){
 		}
 		output_notl("`n");
 		$preview = translate_inline("Preview Transfer");
-		rawoutput("<form action='bank.php?op=transfer2' method='POST'>");
+		rawoutput("<form action='bank.php?op=transfer2' method='POST' class='ui form'>");
 		output("Transfer how much: ");
 		rawoutput("<input name='amount' id='amount' width='5'>");
 		output_notl("`n");
 		output("To: ");
 		rawoutput("<input name='to'>");
 		output(" (partial names are ok, you will be asked to confirm the transaction before it occurs).`n");
-		rawoutput("<input type='submit' class='button' value='$preview'></form>");
+		rawoutput("<input type='submit' class='ui button' value='$preview'></form>");
 		rawoutput("<script language='javascript'>document.getElementById('amount').focus();</script>");
 		addnav("","bank.php?op=transfer2");
 	}else{
@@ -68,9 +68,9 @@ if ($op==""){
 	if (DB::num_rows($result)==1){
 		$row = DB::fetch_assoc($result);
 		$msg = translate_inline("Complete Transfer");
-		rawoutput("<form action='bank.php?op=transfer3' method='POST'>");
+		rawoutput("<form action='bank.php?op=transfer3' method='POST' class='ui form'>");
 		output("`6Transfer `^%s`6 to `&%s`6.",$amt,$row['name']);
-		rawoutput("<input type='hidden' name='to' value='".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);
+		rawoutput("<input type='hidden' name='to' value='".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='ui button' value='$msg'></form>",true);
 		addnav("","bank.php?op=transfer3");
 	}elseif(DB::num_rows($result)>100){
 		output("`@Elessa`6 looks at you disdainfully and coldly, but politely, suggests you try narrowing down the field of who you want to send money to just a little bit!`n`n");
@@ -81,18 +81,18 @@ if ($op==""){
 		output("To: ");
 		rawoutput("<input name='to' value='$to'>");
 		output(" (partial names are ok, you will be asked to confirm the transaction before it occurs).`n");
-		rawoutput("<input type='submit' class='button' value='$msg'></form>");
+		rawoutput("<input type='submit' class='ui button' value='$msg'></form>");
 		rawoutput("<script language='javascript'>document.getElementById('amount').focus();</script>",true);
 		addnav("","bank.php?op=transfer2");
 	}elseif(DB::num_rows($result)>1){
-		rawoutput("<form action='bank.php?op=transfer3' method='POST'>");
+		rawoutput("<form action='bank.php?op=transfer3' method='POST' class='ui form'>");
 		output("`6Transfer `^%s`6 to ",$amt);
 		rawoutput("<select name='to' class='input'>");
 		while ($row = DB::fetch_assoc($result)) {
 			rawoutput("<option value=\"".HTMLEntities($row['login'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\">".full_sanitize($row['name'])."</option>");
 		}
 		$msg = translate_inline("Complete Transfer");
-		rawoutput("</select><input type='hidden' name='amount' value='$amt'><input type='submit' class='button' value='$msg'></form>",true);
+        rawoutput("</select><div class='ui action input'><input type='hidden' name='amount' value='$amt'> <button type='submit' class='ui button'>$msg</button></div>");
 		addnav("","bank.php?op=transfer3");
 	}else{
 		output("`@Elessa`6 blinks at you from behind her spectacles, \"`@I'm sorry, but I can find no one matching that name who does business with our bank!  Please try again.`6\"");
@@ -151,7 +151,7 @@ if ($op==""){
 	$pay = translate_inline("`^Pay off how much?");
 	output_notl($session['user']['goldinbank']>=0?$dep:$pay);
 	$dep = translate_inline("Deposit");
-	rawoutput(" <input id='input' name='amount' width=5 > <input type='submit' class='button' value='$dep'>");
+    rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$dep</button></div>");
 	output("`n`iEnter 0 or nothing to deposit it all`i");
 	rawoutput("</form>");
 	rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>",true);
@@ -180,7 +180,7 @@ if ($op==""){
 	rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
 	output_notl($session['user']['goldinbank']>=0?$balance:$debt,number_format(abs($session['user']['goldinbank']),0,$point,$sep));
 	output("`6\"`@How much would you like to borrow `&%s`@?  At your level, you may borrow up to a total of `^%s`@ from the bank.`6\"`n`n",$session['user']['name'], $maxborrow);
-	rawoutput(" <input id='input' name='amount' width=5 > <input type='hidden' name='borrow' value='x'><input type='submit' class='button' value='$borrow'>");
+    rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$borrow</button></div>");
 	output("`n(Money will be withdrawn until you have none left, the remainder will be borrowed)");
 	rawoutput("</form>");
 	rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
@@ -192,7 +192,7 @@ if ($op==""){
 	rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
 	output_notl($session['user']['goldinbank']>=0?$balance:$debt,number_format(abs($session['user']['goldinbank']),0,$point,$sep));
 	output("`6\"`@How much would you like to withdraw `&%s`@?`6\"`n`n",$session['user']['name']);
-	rawoutput("<input id='input' name='amount' width=5 > <input type='submit' class='button' value='$withdraw'>");
+	rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$withdraw</button></div>");
 	output("`n`iEnter 0 or nothing to withdraw it all`i");
 	rawoutput("</form>");
 	rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
