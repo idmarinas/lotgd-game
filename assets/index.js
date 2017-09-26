@@ -8,6 +8,7 @@ define([
     './components/datacache',
     './components/previewfield',
     './components/loadnewchat',
+    './components/notify',
 
     //-- Modules
     // ...
