@@ -317,8 +317,13 @@ function battlegainexperienceforest()
 			$lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
 		}
 
-		$lotgdBattleContent['battleend'][] = ['You receive `^%s`# total experience!`n`0', $exp+$expbonus];
-		$session['user']['experience'] += ($exp+$expbonus);
+        $totalExp = ($exp+$expbonus);
+        //-- Only show if win Exp
+        if ($totalExp)
+        {
+            $lotgdBattleContent['battleend'][] = ['You receive `^%s`# total experience!`n`0', $totalExp];
+            $session['user']['experience'] += $totalExp;
+        }
 	}
 }
 
@@ -343,8 +348,13 @@ function battlegainexperiencegraveyard()
 		$lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# favor! `n(%s - %s = %s) ",abs($expbonus),$exp,abs($expbonus), $exp+$expbonus];
 	}
 
-	$lotgdBattleContent['battleend'][] = ["`#You receive `^%s`# favor with `\$%s`#!`n`0", $exp+$expbonus, $deathoverlord];
-	$session['user']['deathpower'] += ($exp+$expbonus);
+    $totalExp = ($exp+$expbonus);
+    //-- Only show if win Exp/favor
+    if ($totalExp)
+    {
+        $lotgdBattleContent['battleend'][] = ["`#You receive `^%s`# favor with `\$%s`#!`n`0", $totalExp, $deathoverlord];
+        $session['user']['deathpower'] += $totalExp;
+    }
 }
 
 /**
