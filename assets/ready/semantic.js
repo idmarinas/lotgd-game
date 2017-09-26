@@ -18,6 +18,7 @@ define([
         jQuery('.ui.checkbox').checkbox()
         jQuery('.ui.menu.form.lotgd .browse').popup({
             inline: true,
+            on: 'click',
             hoverable: true,
             position: 'bottom left'
         })
