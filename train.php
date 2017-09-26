@@ -198,14 +198,14 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 				$session['user']['seenmaster'] = 0;
 				debuglog("Defeated master, setting seenmaster to 0");
 			}
-			$content['battleend'][] = 'With a flurry of blows you dispatch your master.`n`n';
-			$content['battleend'][] = ['`#You advance to level `^%s`#!`n',$session['user']['level']];
-			$content['battleend'][] = ['Your maximum hitpoints are now `^%s`#!`n', $session['user']['maxhitpoints']];
-			$content['battleend'][] = 'You gain an attack point!`n';
-			$content['battleend'][] = 'You gain a defense point!`n';
+			$lotgdBattleContent['battleend'][] = 'With a flurry of blows you dispatch your master.`n`n';
+			$lotgdBattleContent['battleend'][] = ['`#You advance to level `^%s`#!`n',$session['user']['level']];
+			$lotgdBattleContent['battleend'][] = ['Your maximum hitpoints are now `^%s`#!`n', $session['user']['maxhitpoints']];
+			$lotgdBattleContent['battleend'][] = 'You gain an attack point!`n';
+			$lotgdBattleContent['battleend'][] = 'You gain a defense point!`n';
 
-			if ($session['user']['level'] < 15) { $content['battleend'][] = 'You have a new master.`n'; }
-			else { $content['battleend'][] = 'None in the land are mightier than you!`n'; }
+			if ($session['user']['level'] < 15) { $lotgdBattleContent['battleend'][] = 'You have a new master.`n'; }
+			else { $lotgdBattleContent['battleend'][] = 'None in the land are mightier than you!`n'; }
 
 			if ($session['user']['referer'] > 0 && ($session['user']['level'] >= getsetting('referminlevel', 4) || $session['user']['dragonkills'] > 0) && $session['user']['refererawarded'] < 1)
 			{
@@ -245,7 +245,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 
 			$result = modulehook('training-victory', ['badguy' => $badguy, 'messages' => []]);
 
-			$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+			$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
 			addnav('Navigation');
 			villagenav();
@@ -264,11 +264,11 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 
 			$session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
-			$content['battleend'][] = ["`%%s`\$ halts just before delivering the final blow, and instead extends a hand to help you to your feet, and hands you a complementary healing potion.`n", $badguy['creaturename']];
+			$lotgdBattleContent['battleend'][] = ["`%%s`\$ halts just before delivering the final blow, and instead extends a hand to help you to your feet, and hands you a complementary healing potion.`n", $badguy['creaturename']];
 
 			$result = modulehook('training-defeat', ['badguy' => $badguy, 'messages' => []]);
 
-			$content['battleend'] = array_merge($content['battleend'], $result['messages']);
+			$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
 			addnav('Navigation');
 			villagenav();
@@ -282,7 +282,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 			fightnav(false, false, "train.php?master=$mid");
 		}
 
-		battleshowresults($content);
+		battleshowresults($lotgdBattleContent);
 
 		if ($victory || $defeat)
 		{
