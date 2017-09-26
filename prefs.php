@@ -299,18 +299,18 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 	//-->
 	</script>");
 	//
-	$prefs = $session['user']['prefs'];
+	$prefs = &$session['user']['prefs'];
 	$prefs['bio'] = $session['user']['bio'];
 	$prefs['template'] = isset($_COOKIE['template']) ?: '';
 	if ($prefs['template'] == "")
 		$prefs['template'] = getsetting("defaultskin", "jade.htm");
-	if ($prefs['sexuality'] == "") {
+	if (! isset($prefs['sexuality']) || $prefs['sexuality'] == "") {
 		$prefs['sexuality'] = !$session['user']['sex'];
 	}
-	if ($prefs['mailwidth'] == "") {
+	if (! isset($prefs['mailwidth']) || $prefs['mailwidth'] == "") {
 		$prefs['mailwidth'] = 60;
 	}
-	if ($prefs['mailheight'] == "") {
+	if (! isset($prefs['mailheight']) || $prefs['mailheight'] == "") {
 		$prefs['mailheight'] = 9;
 	}
 	$prefs['email'] = $session['user']['emailaddress'];
@@ -427,7 +427,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 				// display the direct link to change it.
 				$changeemail=translate_inline("Force your email address NOW");
 				output("`n`qTime is up, you can now accept the change via this button:`n`n");
-				rawoutput("<form action='prefs.php?op=forcechangeemail' method='POST'><input type='submit' class='button' value='$changeemail'></form><br>");
+				rawoutput("<form action='prefs.php?op=forcechangeemail' method='POST'><input type='submit' class='ui button' value='$changeemail'></form><br>");
 				addnav("","prefs.php?op=forcechangeemail");
 			}
 		} else {
@@ -435,7 +435,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 		}
 		$cancelemail=translate_inline("Cancel email change request");
 		output("`\$Cancel the request with the following button:`n`n");
-		rawoutput("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='button' value='$cancelemail'></form><br>");
+		rawoutput("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='ui button' value='$cancelemail'></form><br>");
 		addnav("","prefs.php?op=cancelemail");
 
 	}
@@ -454,9 +454,7 @@ if ($op=="suicide" && getsetting("selfdelete",0)!=0) {
 		rawoutput("<form action='prefs.php?op=suicide&userid={$session['user']['acctid']}' method='POST'>");
 		$deltext = translate_inline('Delete Character');
 		$conf = translate_inline("Are you sure you wish to PERMANENTLY delete your character?");
-		rawoutput("<table class='noborder' width='100%'><tr><td width='100%'></td><td style='background-color:#FF00FF' align='right'>");
-		rawoutput("<input type='submit' class='button' value='$deltext' onClick='return confirm(\"$conf\");'>");
-		rawoutput("</td></tr></table>");
+		rawoutput("<input type='submit' class='ui right floated red button' value='$deltext' onClick='return confirm(\"$conf\");'>");
 		rawoutput("</form><br>");
 		addnav("","prefs.php?op=suicide&userid={$session['user']['acctid']}");
 	}
