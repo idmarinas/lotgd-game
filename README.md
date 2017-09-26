@@ -38,3 +38,4 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
     * Templates system [Twig](http://twig.sensiolabs.org)
     * A simple JavaScript popup boxes [SweetAlert2](https://limonte.github.io/sweetalert2/)
     * A simple CronJob manager [Jobby, a PHP cron job manager](https://github.com/jobbyphp/jobby)
+    * toastr, Javascript library for non-blocking notifications. [toastr](https://codeseven.github.io/toastr/)
