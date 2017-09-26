@@ -105,7 +105,7 @@
 
 /* Description */
 @descriptionDistance: 0.5em;
-@descriptionColor: rgba(0, 0, 0, 0.68);
+@descriptionColor: rgba(255, 255, 255, 0.68);
 
 /* Content Image */
 @contentImageWidth: '';
@@ -136,7 +136,7 @@
 @extraTransition: color @defaultDuration @defaultEasing;
 
 /* Extra Links */
-@extraLinkColor: @unselectedTextColor;
+@extraLinkColor: @invertedUnselectedTextColor;
 @extraLinkHoverColor: @linkHoverColor;
 
 /* Buttons */
@@ -148,7 +148,7 @@
 --------------------*/
 
 /* Link */
-@linkHoverBackground: @white;
+@linkHoverBackground: @strongTransparentWhite;
 @linkHoverBorder: @border;
 @linkHoverZIndex: 5;
 @linkHoverRaiseDistance: 3px;
