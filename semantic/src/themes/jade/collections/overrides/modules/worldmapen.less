@@ -1,0 +1,77 @@
+.worldmapen
+{
+	hr
+	{
+		border: 1px solid black;
+	}
+
+	table
+	{
+		width: auto;
+		background: transparent;
+
+		td
+		{
+			padding: 0 !important;
+            vertical-align: middle;
+            cursor: default;
+        }
+
+        &.map1,
+        &.map2,
+        &.map3,
+        &.map4,
+        &.map5
+        {
+            width: auto;
+            border-spacing: 1px;
+            border-collapse: separate;
+
+            td
+            {
+                text-align: center;
+                width: 15px;
+                height: 15px;
+                padding: 1px !important;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+	}
+
+	table.map4 td
+	{
+		width: 20px;
+		height: 22px;
+	}
+
+	&.legend
+	{
+		table.map10,
+		table.map7
+		{
+			width: auto;
+			border-spacing: 5px;
+			border-collapse: separate;
+
+			td
+			{
+				padding-right: 10px;
+
+				&.terrain
+				{
+					width: 20px;
+					height: 20px;
+					padding: 0;
+				}
+			}
+		}
+
+		table.map9,
+		table.map7,
+		table.map6
+		{
+			width: 100%;
+		}
+	}
+}
