@@ -2,13 +2,15 @@
 See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
-Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md?fileviewer=file-view-default).
+Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md).
 
 # Version: 2.4.0
 
 ### CHANGES
 
-* **lib/battle/functions.php** Only load the taunt if death message have a taunt, have a new appearance for death message with taunt
+* **lib/battle/functions.php**
+    * Only load the taunt if death message have a taunt, have a new appearance for death message with taunt
+    * The text exp/favor gained, is only displayed if it is greater than zero.
 * **lib/commentary.php** Set autocomplete off for inputs
 * **lib/datetime.php** Optimizations
 * **lib/experience.php** Increases cache lifetime and improves cache control
@@ -17,13 +19,14 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **create.php** Has a new structure and changes some queries by the new functions of the DB script
 * **lib/commentary.php** Optimize viewing of comments by eliminating an unnecessary extra loop
 * **lib/showform.php** Small optimization
+* **battle.php** Renamed variable name `$content` to `$lotgdBattleContent`. For now you can use `$content` in `battle.php` both are associated `$content = &$lotgdBattleContent`
 * **Theme template Jade**
     * "Step" now has a chord color for the Jade theme
     * "Input" fits the size of the corner label
 
 ### FEATURES
 
-* Nothing
+* **lotgd.js** JavaScript `Lotgd` now have a new function `Lotgd.notify`. This function use *toastr* for notifications generation.
 
 ### DEPRECATED
 
@@ -33,6 +36,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 ### REMOVES
 
+* **lib/mail.php** Removed unused file
 * **Functions**
     * **lib/datetime.php**
         * `readabletime` use `reltime` instead
@@ -52,12 +56,22 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/pvplist.php** Fixed error with HTML of table
 * **lib/showform.php** Fixed error with 'float' and 'location' field give an undefined key error
 * **stables.php** Fixed error with undefined variable
+* **mail.php**
+    * Fixed bug with text display in email
+    * Fixed issue with sending emails
+* **lib/all_tables.php** Fixed error with fields in table 'mail' was missing field 'originator'
+* **lib/creaturefuntions.php** Now all creatures have 'creaturegold' default is 0, for avoid errors in same functions
+* **train.php** Fixed error that did not show the taunt to be defeated by the master
+* **battle.php** The message that shows who got the first attack is no longer shown as if it were one more round.
+* **bank.php** Now buttons and inputs have LOTGD style
 * **Theme template Jade**
     * Fix error with names of files CSS.
+    * Semantic UI element 'Steps' now have a new color pattern
+    * Character stats "charhead" element have now padding
 
 ### NOTES
 
-* Nothing
+* Battle: renamed variable name `$content` to `$lotgdBattleContent`. Remember revise your modules.
 
 
 # Version: 2.3.0
