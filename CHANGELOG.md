@@ -23,6 +23,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **Theme template Jade**
     * "Step" now has a chord color for the Jade theme
     * "Input" fits the size of the corner label
+    * Modules
+        * Now include style for module *Worldmapen*
 
 ### FEATURES
 
