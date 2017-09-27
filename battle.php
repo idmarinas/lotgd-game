@@ -571,6 +571,7 @@ if (! isset($battleDefeatLostExp)) $battleDefeatLostExp = true;//-- Indicating i
 if (! isset($battleDefeatCanDie)) $battleDefeatCanDie = true;//-- Indicating if die when lost in battle
 if (! isset($battleDenyFlawless)) $battleDenyFlawless = false;//-- Deny flawlees for perfect battle
 if (! isset($battleShowResult)) $battleShowResult = true;//-- Show result of battle. If no need any extra modification of result no need change this
+if (! isset($battleProcessVictoryDefeat)) $battleProcessVictoryDefeat = true;//-- Process victory or defeat functions when the battle is over
 
 if ($victory || $defeat)
 {
@@ -602,14 +603,15 @@ if ($victory || $defeat)
 			if ($victory) $badguy = modulehook('battle-victory', $badguy);
 			if ($defeat) $badguy = modulehook('battle-defeat', $badguy);
 		}
-	}
+    }
+
 	if ($victory)
 	{
 		$result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
 
 		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
-		battlevictory($newenemies, (isset($options['denyflawless'])?$options['denyflawless']:$battleDenyFlawless), $battleInForest);
+		if ($battleProcessVictoryDefeat) battlevictory($newenemies, (isset($options['denyflawless'])?$options['denyflawless']:$battleDenyFlawless), $battleInForest);
 	}
 	else if ($defeat)
 	{
@@ -617,7 +619,7 @@ if ($victory || $defeat)
 
 		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
 
-		battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
+		if ($battleProcessVictoryDefeat) battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
 	}
 }
 
