@@ -65,6 +65,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **lib/creaturefuntions.php** Now all creatures have 'creaturegold' default is 0, for avoid errors in same functions
 * **train.php** Fixed error that did not show the taunt to be defeated by the master
 * **battle.php** The message that shows who got the first attack is no longer shown as if it were one more round.
+* **pvp.php** It adapts to the new format of the battle
 * **bank.php** Now buttons and inputs have LOTGD style
 * **Theme template Jade**
     * Fix error with names of files CSS.
