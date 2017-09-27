@@ -238,25 +238,25 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 			{
 				require_once 'modules/staminasystem/lib/lib.php';
 
-				$lotgdBattleContent['battleend'][] = "`c`b`\$You receive some stamina!`0`b`c`n";
+				$lotgdBattleContent['battleend'][] = '`c`b`\$You receive some stamina!`0`b`c`n';
 				addstamina(25000);
 			}
 			else if (! $forest)//-- Only when is a Graveyard
             {
-                $lotgdBattleContent['battleend'][] = "`c`b`\$You receive an extra torment!`0`b`c`n";
+                $lotgdBattleContent['battleend'][] = '`c`b`\$You receive an extra torment!`0`b`c`n';
 				$session['user']['gravefights']++;
             }
             else//-- Other
 			{
-				$lotgdBattleContent['battleend'][] = "`c`b`\$You receive an extra turn!`0`b`c`n";
+				$lotgdBattleContent['battleend'][] = '`c`b`\$You receive an extra turn!`0`b`c`n';
 				$session['user']['turns']++;
 			}
 		}
 		else
 		{
-			if (is_module_active('staminasystem') && $forest) $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded some stamina.`0`c`n";
-            elseif (! $forest) $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded an extra torment.`0`c`n";
-			else $lotgdBattleContent['battleend'][] = "`c`\$A more difficult fight would have yielded an extra turn.`0`c`n";
+			if (is_module_active('staminasystem') && $forest) $lotgdBattleContent['battleend'][] = '`c`\$A more difficult fight would have yielded some stamina.`0`c`n';
+            elseif (! $forest) $lotgdBattleContent['battleend'][] = '`c`\$A more difficult fight would have yielded an extra torment.`0`c`n';
+			else $lotgdBattleContent['battleend'][] = '`c`\$A more difficult fight would have yielded an extra turn.`0`c`n';
 		}
 	}
 
