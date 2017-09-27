@@ -58,14 +58,15 @@ if (0 < DB::num_rows($result))
 	foreach ($rows as $row)
 	{
 		rawoutput("<tr>");
-		rawoutput("<td class='collapsing'><div class='ui toggle checkbox'><input type='checkbox' id='".$row['messageid']."' name='msg[]' value='{$row['messageid']}'></div>");
+        rawoutput("<td class='collapsing'><div class='ui toggle checkbox'><input type='checkbox' id='".$row['messageid']."' name='msg[]' value='{$row['messageid']}'></div>");
+		rawoutput("<a href='mail.php?op=read&id={$row['messageid']}'>");
         rawoutput("<img src='images/".($row['seen']?"old":"new")."scroll.GIF' width='16px' height='16px' alt='".($row['seen']?$old:$new)."'>");
-		rawoutput("</td><td>");
+		rawoutput("</a></td><td>");
 		$status_image="";
 		if ((int)$row['msgfrom']==0){
 			$row['name'] = $system;
 			// Only translate the subject if it's an array, ie, it came from the game.
-			$row_subject = @unserialize($row['subject']);
+			$row_subject = @unserialize(stripslashes($row['subject']));
 			if ($row_subject !== false) {
 				$row['subject'] = call_user_func_array("sprintf_translate", $row_subject);
 			}

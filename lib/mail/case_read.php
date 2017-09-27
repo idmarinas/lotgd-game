@@ -20,12 +20,13 @@ if (DB::num_rows($result) > 0)
 	{
 		$row['name']=translate_inline("`i`^System`0`i");
 		// No translation for subject if it's not an array
-		$row_subject = @unserialize($row['subject']);
+		$row_subject = @unserialize(stripslashes($row['subject']));
 		if ($row_subject !== false) {
-			$row['subject'] = call_user_func_array("sprintf_translate", $row_subject);
+            $row['subject'] = call_user_func_array("sprintf_translate", $row_subject);
+            debug('traducido', true);
 		}
 		// No translation for body if it's not an array
-		$row_body = @unserialize($row['body']);
+		$row_body = @unserialize(stripslashes($row['body']));
 		if ($row_body !== false) {
 			$row['body'] = call_user_func_array("sprintf_translate", $row_body);
 		}
