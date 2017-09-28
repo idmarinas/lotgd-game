@@ -28,7 +28,9 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 ### FEATURES
 
-* **lotgd.js** JavaScript `Lotgd` now have a new function `Lotgd.notify`. This function use *toastr* for notifications generation.
+* **lotgd.js** JavaScript `Lotgd` now have a new functions
+    * `Lotgd.notify`. This function use *toastr* for notifications generation.
+    * `Lotgd.confirm` Displays a confirmation dialog before going to the URL using swal
 
 ### DEPRECATED
 
@@ -67,7 +69,9 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
     * Fixed error that did not show the taunt to be defeated by the master
     * Fixed error for not working correctly 'Superuser Gain Level'
 * **battle.php** The message that shows who got the first attack is no longer shown as if it were one more round.
-* **pvp.php** It adapts to the new format of the battle
+* It adapts to the new format of the battle
+    * **pvp.php**
+    * **dragon.php**
 * **bank.php** Now buttons and inputs have LOTGD style
 * **lib/taunt.php** Fixed the error by not selecting a taunt with the `select_taunt` function
 * **Theme template Jade**
@@ -110,7 +114,6 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * **forest.php**
         * **graveyard.php**
         * **train.php**
-        * **dragon.php**
 * *Theme*
     * **templates/battle/forestcreaturebar.twig** change name to **templates/battle/combathealthbar.twig** and updated
 
@@ -123,7 +126,6 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * `Lotgd.appoencode` Format a text with game colors
         * `Lotgd.escapeRegex` Escape text for used in RegExp patterns
         * `Lotgd.loadnewchat` Load new comments of chat
-        * `Lotgd.confirm` Displays a confirmation dialog before going to the URL
 
 ### DEPRECATED
 
