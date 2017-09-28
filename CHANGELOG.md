@@ -69,6 +69,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **battle.php** The message that shows who got the first attack is no longer shown as if it were one more round.
 * **pvp.php** It adapts to the new format of the battle
 * **bank.php** Now buttons and inputs have LOTGD style
+* **lib/taunt.php** Fixed the error by not selecting a taunt with the `select_taunt` function
 * **Theme template Jade**
     * Fix error with names of files CSS.
     * Semantic UI element 'Steps' now have a new color pattern
@@ -109,6 +110,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * **forest.php**
         * **graveyard.php**
         * **train.php**
+        * **dragon.php**
 * *Theme*
     * **templates/battle/forestcreaturebar.twig** change name to **templates/battle/combathealthbar.twig** and updated
 
