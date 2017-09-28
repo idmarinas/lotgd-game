@@ -15,7 +15,8 @@ tlschema("dragon");
 $battle = false;
 page_header("The Green Dragon!");
 $op = httpget('op');
-if ($op==""){
+if ($op == '')
+{
 	if (!httpget('nointro')) {
 		output("`\$Fighting down every urge to flee, you cautiously enter the cave entrance, intent on catching the great green dragon sleeping, so that you might slay it with a minimum of pain.");
 		output("Sadly, this is not to be the case, for as you round a corner within the cave you discover the great beast sitting on its haunches on a huge pile of gold, picking its teeth with a rib.");
@@ -42,7 +43,9 @@ if ($op==""){
 
 	$session['user']['badguy']=createstring($badguy);
 	$battle=true;
-}elseif($op=="prologue1"){
+}
+elseif($op == 'prologue1')
+{
 	output("`@Victory!`n`n");
 	$flawless = (int)(httpget('flawless'));
   	if ($flawless) {
@@ -222,7 +225,7 @@ if ($op==""){
 	}
 
 	$howoften=translate_inline($session['user']['dragonkills']>1?"times":"time"); // no translation, we never know who is viewing...
-	addnews("`#%s`# has earned the title `&%s`# for having slain `@%s`& `^%s`# %s!",$regname,$session['user']['title'],$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
+	addnews("`#%s`# has earned the title `&%s`# for having slain `@%s`& `^%s`# %s!`0",$regname,$session['user']['title'],$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
 	output("`n`n`^You are now known as `&%s`^!!",$session['user']['name']);
 	output("`n`n`&Because you have slain %s`& %s %s, you start with some extras.  You also keep additional permanent hitpoints you've earned.`n",$badguy['creaturename'],$session['user']['dragonkills'],$howoften);
 	$session['user']['charm']+=5;
@@ -234,53 +237,65 @@ if ($op==""){
 	invalidatedatacache("list.php-warsonline");
 }
 
-if ($op=="run"){
+if ($op == 'run')
+{
 	output("The creature's tail blocks the only exit to its lair!");
-	$op="fight";
+	$op = 'fight';
 	httpset('op', 'fight');
 }
-if ($op=="fight" || $op=="run"){
-	$battle=true;
-}
-if ($battle){
+if ($op == 'fight' || $op == 'run') { $battle=true; }
+
+if ($battle)
+{
+    //-- Any data for personalize results
+    $battleDefeatWhere = false;//-- Use for create a news, set to false for not create news
+    $battleInForest = 'dragon';//-- Indicating if is a Forest (true) or Graveyard (false)
+    $battleShowResult = false;//-- Show result of battle.
+
 	require_once 'battle.php';
 
-	if ($victory){
+    if ($victory)
+    {
 		$flawless = 0;
-		if ($badguy['diddamage'] != 1) $flawless = 1;
-		// $session['user']['dragonkills']++;
-		output("`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.",$badguy['creaturename']);
-		addnews("`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!",$session['user']['name'],$badguy['creaturename']);
-		tlschema("nav");
-		addnav("Continue","dragon.php?op=prologue1&flawless=$flawless");
-		tlschema();
-	}else{
-		if($defeat){
-			tlschema("nav");
-			addnav("Daily news","news.php");
-			tlschema();
-			$taunt = select_taunt_array();
-			if ($session['user']['sex']){
-				addnews("`%%s`5 has been slain when she encountered `@%s`5!!!  Her bones now litter the cave entrance, just like the bones of those who came before.`n%s",$session['user']['name'],$badguy['creaturename'],$taunt);
-			}else{
-				addnews("`%%s`5 has been slain when he encountered `@%s`5!!!  His bones now litter the cave entrance, just like the bones of those who came before.`n%s",$session['user']['name'],$badguy['creaturename'],$taunt);
-			}
-			$session['user']['alive']=false;
-			debuglog("lost {$session['user']['gold']} gold when they were slain");
-			$session['user']['gold']=0;
-			$session['user']['hitpoints']=0;
-			output("`b`&You have been slain by `@%s`&!!!`n",$badguy['creaturename']);
-			output("`4All gold on hand has been lost!`n");
-			output_notl("`n");
-			modulehook("dragondeath", []);
-			output_notl("`n");
-			output("You may begin fighting again tomorrow.");
+        if ($badguy['diddamage'] != 1) { $flawless = 1; }
 
-			page_footer();
-		}else{
-		  fightnav(true,false);
-		}
-	}
+        tlschema('nav');
+		addnav('Continue', "dragon.php?op=prologue1&flawless=$flawless");
+		tlschema();
+
+        $lotgdBattleContent['battleend'][] =  ["`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.", $badguy['creaturename']];
+        $lotgdBattleContent['battleend'][] = ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']];
+
+		addnews('`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!`0', $session['user']['name'],$badguy['creaturename']);
+    }
+    elseif ($defeat)
+    {
+        tlschema('nav');
+        addnav("Daily news","news.php");
+        tlschema();
+
+        $taunt = select_taunt();
+        if ($session['user']['sex'])
+        {
+            addnews('`%%s`5 has been slain when she encountered `@%s`5!!!  Her bones now litter the cave entrance, just like the bones of those who came before.`n%s', $session['user']['name'],$badguy['creaturename'],$taunt);
+        }
+        else
+        {
+            addnews('`%%s`5 has been slain when he encountered `@%s`5!!!  His bones now litter the cave entrance, just like the bones of those who came before.`n%s',$session['user']['name'], $badguy['creaturename'],$taunt);
+        }
+
+        $result = modulehook('dragondeath', []);
+        $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result);
+
+        battleshowresults($lotgdBattleContent);
+
+        page_footer();
+    }
+    else
+    {
+        fightnav(true, false);
+    }
+
+    battleshowresults($lotgdBattleContent);
 }
 page_footer();
-?>
