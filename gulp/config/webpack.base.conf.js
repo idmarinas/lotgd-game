@@ -18,8 +18,10 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json'],
         alias: {
+            // 'toastr$': 'toastr/toastr.js,
             jquery: 'jquery/src/jquery.js',
-            'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss'
+            'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss',
+            'toastr.css$': 'toastr/toastr.scss'
         }
     },
     module: {

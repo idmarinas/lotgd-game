@@ -16,7 +16,7 @@ module.exports = {
         semantic: 'semantic/dist', //-- Directory of compiled files of Semantic UI
         jQuery: 'bower_components/jQuery/dist', //-- Directory of jQuery
         //-- Directory for construct game
-        build: path.resolve(__dirname, '/../../dist')
+        build: path.resolve(__dirname, '../../dist')
     },
     files: {
         //-- Files to copy
