@@ -10,19 +10,18 @@ function select_taunt()
 {
 	global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
-
-    $result = DB::query($sql);
+    $select = DB::select('taunts');
+    $select->columns(['taunt'])
+        ->limit(1)
+        ->order(DB::expression('RAND('.e_rand().')'));
+    $result = DB::execute($select);
 
 	if ($result->count())
     {
-		$row = DB::fetch_assoc($result);
+		$row = $result->current();
 		$taunt = $row['taunt'];
 	}
-    else
-    {
-		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
-	}
+    else { $taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}."; }
 
 	$taunt = substitute($taunt);
 
@@ -36,7 +35,7 @@ function select_taunt_array()
 	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
 
 	$result = DB::query($sql);
-	if ($result)
+	if ($result->count())
     {
 		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
