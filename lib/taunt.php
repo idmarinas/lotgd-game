@@ -12,8 +12,9 @@ function select_taunt()
 
 	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
 
-	$result = DB::query($sql);
-	if ($result)
+    $result = DB::query($sql);
+
+	if ($result->count())
     {
 		$row = DB::fetch_assoc($result);
 		$taunt = $row['taunt'];
