@@ -1,19 +1,16 @@
-var
-	//-- Dependencies
-	gulp = require('gulp'),
-	print = require('gulp-print'),
-    vinylPaths = require('vinyl-paths'),
-    del = require('del'),
+//-- Dependencies
+var gulp = require('gulp')
+var print = require('gulp-print')
+var vinylPaths = require('vinyl-paths')
+var del = require('del')
 
-	//-- Configuration
-	config = require('../../config/default'),
-	configTasks = require('../../config/tasks'),
+//-- Configuration
+var config = require('../../config/default')
+var configTasks = require('../../config/tasks')
+var log = configTasks.log
+var themeName = configTasks.theme()
 
-	log = configTasks.log,
-	isProduction = configTasks.isProduction(),
-	themeName = configTasks.theme()
-
-module.exports = function(callback)
+module.exports = function (callback)
 {
     //-- Copy and delete themeName.html in correct folder
     return gulp.src(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')

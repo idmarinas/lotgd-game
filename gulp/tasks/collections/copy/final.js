@@ -1,16 +1,13 @@
-var
-	//-- Dependencies
-	gulp = require('gulp'),
+//-- Dependencies
+var gulp = require('gulp')
 
-	//-- Configuration
-	config = require('../../../config/default')
-;
+//-- Configuration
+var config = require('../../../config/default')
 
-module.exports = function(callback)
+module.exports = function (callback)
 {
-	console.info('Copy to final folder server');
+    console.info('Copy to final folder server')
 
-	return gulp.src(config.paths.build + '/**{,/.*}')
-		.pipe(gulp.dest(config.paths.development.final));
-	;
+    return gulp.src(config.paths.build + '/**{,/.*}')
+        .pipe(gulp.dest(config.paths.development.final))
 }

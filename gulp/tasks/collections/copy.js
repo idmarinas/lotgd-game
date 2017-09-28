@@ -1,18 +1,15 @@
-/*******************************
-				Define Sub-Tasks
+/**
+                Define Sub-Tasks
 *******************************/
 
-module.exports = function(gulp)
+module.exports = function (gulp)
 {
-	var
-		//-- Tasks
-		alpha = require('./copy/alpha'),
-		beta = require('./copy/beta'),
-		final = require('./copy/final')
-	;
+    //-- Tasks
+    var alpha = require('./copy/alpha')
+    var beta = require('./copy/beta')
+    var final = require('./copy/final')
 
-	gulp.task('copy-alpha', 'Copy files to alpha folder server', alpha);
-	gulp.task('copy-beta', 'Copy files to beta folder server', beta);
-	gulp.task('copy-final', 'Copy files to final folder server', final);
-
-};
+    gulp.task('copy-alpha', 'Copy files to alpha folder server', alpha)
+    gulp.task('copy-beta', 'Copy files to beta folder server', beta)
+    gulp.task('copy-final', 'Copy files to final folder server', final)
+}

@@ -1,41 +1,35 @@
-var
-	//-- Dependencies
-	gulp = require('gulp'),
-	merge = require('merge-stream'),
-	rename = require('gulp-rename'),
-	print = require('gulp-print'),
-	gulpif = require('gulp-if'),
-	uglify = require('gulp-uglify'),
+//-- Dependencies
+var gulp = require('gulp')
+var merge = require('merge-stream')
+var print = require('gulp-print')
+var gulpif = require('gulp-if')
+var uglify = require('gulp-uglify')
 
-	//-- Configuration
-	config = require('../../config/default'),
-	configTasks = require('../../config/tasks'),
+//-- Configuration
+var config = require('../../config/default')
+var configTasks = require('../../config/tasks')
 
+var log = configTasks.log
+var isProduction = configTasks.isProduction()
+var settings = configTasks.settings
 
-	log = configTasks.log,
-	isProduction = configTasks.isProduction(),
-	settings = configTasks.settings
-;
-
-module.exports = function(callback)
+module.exports = function (callback)
 {
-	/************************/
-	/** Copy files JS **/
-	/************************/
+    /** ******************** **/
+    /** Copy files JS **/
+    /** ******************** **/
 
-	//-- Resources folder - Only JS
-	var resourceJS = gulp.src('resources/**/*.js')
-		.pipe(gulpif(isProduction, uglify(settings.uglify.some)))
-		.pipe(gulp.dest(config.paths.build + '/resources'))
-		.pipe(print(log.copied))
-	;
+    //-- Resources folder - Only JS
+    var resourceJS = gulp.src('resources/**/*.js')
+        .pipe(gulpif(isProduction, uglify(settings.uglify.some)))
+        .pipe(gulp.dest(config.paths.build + '/resources'))
+        .pipe(print(log.copied))
 
-	var resourceOther = gulp.src([
-		'resources/**/**',
-		'!resources/**/*.js'
-	])
-		.pipe(gulp.dest(config.paths.build + '/resources'))
-	;
+    var resourceOther = gulp.src([
+        'resources/**/**',
+        '!resources/**/*.js'
+    ])
+        .pipe(gulp.dest(config.paths.build + '/resources'))
 
-	return merge(resourceJS, resourceOther);
+    return merge(resourceJS, resourceOther)
 };

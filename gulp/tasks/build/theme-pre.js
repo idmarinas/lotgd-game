@@ -1,33 +1,26 @@
-var
-	//-- Dependencies
-	gulp = require('gulp'),
-	replace = require('gulp-replace'),
-	rename = require('gulp-rename'),
-	print = require('gulp-print'),
-	plumber = require('gulp-plumber'),
-	del = require('del'),
+//-- Dependencies
+var gulp = require('gulp')
+var replace = require('gulp-replace')
+var rename = require('gulp-rename')
+var print = require('gulp-print')
+var plumber = require('gulp-plumber')
+var del = require('del')
 
-	//-- Configuration
-	config = require('../../config/default'),
-	configTasks = require('../../config/tasks'),
+//-- Configuration
+var configTasks = require('../../config/tasks')
+var log = configTasks.log
+var themeName = configTasks.theme()
 
-	log = configTasks.log,
-	isProduction = configTasks.isProduction(),
-	themeName = configTasks.theme()
-;
-
-
-module.exports = function(callback)
+module.exports = function (callback)
 {
-	console.info('Creation theme: ' + themeName);
+    console.info('Creation theme: ' + themeName)
 
-	del('semantic/src/theme.config');
+    del('semantic/src/theme.config')
 
-	return gulp.src('semantic/src/theme.config.default')
-		.pipe(replace('default', themeName))
-		.pipe(plumber())
-		.pipe(rename('theme.config'))
-		.pipe(gulp.dest('semantic/src'))
-		.pipe(print(log.copied))
-	;
+    return gulp.src('semantic/src/theme.config.default')
+        .pipe(replace('default', themeName))
+        .pipe(plumber())
+        .pipe(rename('theme.config'))
+        .pipe(gulp.dest('semantic/src'))
+        .pipe(print(log.copied))
 }

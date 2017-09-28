@@ -1,23 +1,19 @@
-var
-	//-- Dependencies
-	gulp = require('gulp'),
-	del = require('del'),
+//-- Dependencies
+var del = require('del')
 
-	//-- Configuration
-	config = require('../config/default'),
-	configTasks = require('../config/tasks'),
+//-- Configuration
+var config = require('../config/default')
+var configTasks = require('../config/tasks')
 
-	themeName = configTasks.theme()
-;
+var themeName = configTasks.theme()
 
-
-module.exports = function(callback)
+module.exports = function (callback)
 {
-	//-- Move html of them to correct directory
-	var assetsMove = gulp.src(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')
-		.pipe(gulp.dest(config.paths.build + '/themes'))
-	;
-	del(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html');
+    //-- Move html of them to correct directory
+    // var assetsMove = gulp.src(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')
+    //     .pipe(gulp.dest(config.paths.build + '/themes'))
 
-	return callback;
+    del(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')
+
+    return callback
 }

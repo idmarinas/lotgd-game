@@ -1,14 +1,12 @@
-var
-    //-- Dependencias
-    webpack = require('webpack'),
-    merge = require('webpack-merge'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin'),
+//-- Dependencias
+var webpack = require('webpack')
+var merge = require('webpack-merge')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-    //-- Configuración
-    utils = require('./utils'),
-    baseWebpackConfig = require('./webpack.base.conf')
-;
+//-- Configuración
+var utils = require('./utils')
+var baseWebpackConfig = require('./webpack.base.conf')
 
 module.exports = merge(baseWebpackConfig, {
     module: {

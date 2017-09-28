@@ -1,12 +1,10 @@
-var
-    //-- Dependencias
-    webpack = require('webpack'),
-    path = require('path'),
-    utils = require('./utils'),
+//-- Dependencias
+var webpack = require('webpack')
+var path = require('path')
+var utils = require('./utils')
 
-    //-- Configuración
-    config = require('./default')
-;
+//-- Configuración
+var config = require('./default')
 
 module.exports = {
     entry: {
@@ -29,7 +27,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'eslint-loader',
-                enforce: "pre",
+                enforce: 'pre',
                 include: [path.resolve(__dirname, '../../assets')],
                 options: {
                     formatter: require('eslint-friendly-formatter')
@@ -61,9 +59,10 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: function (module) {
+            minChunks: function (module)
+            {
                 // this assumes your vendor imports exist in the node_modules directory
-                return module.context && module.context.indexOf('node_modules') !== -1;
+                return module.context && module.context.indexOf('node_modules') !== -1
             }
         }),
         // CommonChunksPlugin will now extract all the common modules from vendor and main bundles
