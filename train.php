@@ -165,7 +165,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 		output("`\$Your pride prevents you from running from this conflict!`0");
 		$op = 'fight';
 		$battle = true;
-	}
+    }
 
 	if($battle)
 	{
@@ -180,7 +180,14 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 		require_once 'battle.php';
 
 		suspend_buffs('allowintrain', '`&Your pride prevents you from using extra abilities during the fight!`0`n');
-		suspend_companions('allowintrain');
+        suspend_companions('allowintrain');
+
+        //-- Superuser Gain level
+        if (httpget('victory'))
+        {
+            $victory = true;
+            $defeat = false;
+        }
 
 		if ($victory)
 		{
