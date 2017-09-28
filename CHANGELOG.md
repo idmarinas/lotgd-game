@@ -123,6 +123,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * `Lotgd.appoencode` Format a text with game colors
         * `Lotgd.escapeRegex` Escape text for used in RegExp patterns
         * `Lotgd.loadnewchat` Load new comments of chat
+        * `Lotgd.confirm` Displays a confirmation dialog before going to the URL
 
 ### DEPRECATED
 

@@ -9,6 +9,7 @@ define([
     './components/previewfield',
     './components/loadnewchat',
     './components/notify',
+    './components/confirmation',
 
     //-- Modules
     // ...
