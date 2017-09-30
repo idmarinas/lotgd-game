@@ -9,7 +9,7 @@ function savesetting($settingname,$value)
 {
 	global $settings;
 
-	if (is_a($settings,"settings")) $settings->saveSetting($settingname,$value);
+	if (is_a($settings, 'settings')) $settings->saveSetting($settingname, $value);
 }
 
 function loadsettings()
@@ -41,17 +41,16 @@ function clearsettings()
 	//scraps the loadsettings() data to force it to reload.
 	global $settings;
 
-	if (is_a($settings,"settings")) $settings->clearSettings();
+	if (is_a($settings, 'settings')) $settings->clearSettings();
 	unset($settings);
-	$settings = new settings("settings");
+	$settings = new settings('settings');
 }
 
 function getsetting($settingname, $default = false)
 {
 	global $settings;
 
-	if (!is_a($settings,"settings")) return $default;
+	if (!is_a($settings, 'settings')) return $default;
 
-	return $settings->getSetting($settingname,$default);
+	return $settings->getSetting($settingname, $default);
 }
-?>
