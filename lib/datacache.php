@@ -41,7 +41,8 @@ function datacache($name, $duration = 120, $force = false)
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     //-- Set Duration
-    $lotgd_cache->getOptions()->setTtl($duration);
+    if (is_numeric($duration) && $duration > 0) { $lotgd_cache->getOptions()->setTtl($duration); }
+    else { $lotgd_cache->getOptions()->setTtl(120); }
 
     return $lotgd_cache->getItem($name);
 }
