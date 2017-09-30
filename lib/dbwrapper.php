@@ -303,26 +303,30 @@ Class DB
 		return self::$sql;
 	}
 
-	public static function select($table = false)
+	public static function select($table = false, $prefixed = true)
 	{
-		if ($table) return self::sql()->select(DB::prefix($table));
+        if ($table && $prefixed) return self::sql()->select(DB::prefix($table));
+        elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else  return self::sql()->select();
 	}
 
-	public static function insert($table = false)
+	public static function insert($table = false, $prefixed = true)
 	{
-		if ($table) return self::sql()->insert(DB::prefix($table));
+		if ($table && $prefixed) return self::sql()->insert(DB::prefix($table));
+        elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else  return self::sql()->insert();
 	}
-	public static function update($table = false)
+	public static function update($table = false, $prefixed = true)
 	{
-		if ($table) return self::sql()->update(DB::prefix($table));
+		if ($table && $prefixed) return self::sql()->update(DB::prefix($table));
+        elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else  return self::sql()->update();
 	}
 
-	public static function delete($table = false)
+	public static function delete($table = false, $prefixed = true)
 	{
-		if ($table) return self::sql()->delete(DB::prefix($table));
+		if ($table && $prefixed) return self::sql()->delete(DB::prefix($table));
+        elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else  return self::sql()->delete();
 	}
 
