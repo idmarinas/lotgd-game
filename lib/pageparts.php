@@ -661,25 +661,26 @@ function charstats()
         if ($u['alive'])
 		{
             //-- HitPoints are calculated in base to attributes
-			addcharstat("Hitpoints", $u['hitpoints'].check_temp_stat("hitpoints",1)."`0/".$u['maxhitpoints'].check_temp_stat("maxhitpoints",1)." `\$<span title='".explained_get_player_hitpoints()."'>(?)</span>`0");
-			if (is_module_active('staminasystem')) addcharstat('Stamina', '');
-			else addcharstat("Turns", $u['turns'].check_temp_stat("turns",1));
-			if (is_module_active('displaycp')) addcharstat("Drunkeness", "");
+			addcharstat('Hitpoints', sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
+			if (is_module_active('staminasystem')) { addcharstat('Stamina', ''); }
+			else { addcharstat('Turns', $u['turns'].check_temp_stat('turns', 1)); }
+			if (is_module_active('displaycp')) { addcharstat('Drunkeness', ''); }
+			if (is_module_active('dietsystem')) { addcharstat('Diet', ''); }
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
-			addcharstat("Attack", $atk." `\$<span title='".explained_get_player_attack()."'>(?)</span>`0".check_temp_stat("attack",1));
-			addcharstat("Defense", $def." `\$<span title='".explained_get_player_defense()."'>(?)</span>`0".check_temp_stat("defense",1));
+			addcharstat("Attack", sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
+			addcharstat("Defense", sprinft("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
 			addcharstat("Speed", $spd.check_temp_stat("speed",1));
 			addcharstat("Strength", $u['strength'].check_temp_stat("strength",1));
 			addcharstat("Dexterity", $u['dexterity'].check_temp_stat("dexterity",1));
 			addcharstat("Intelligence", $u['intelligence'].check_temp_stat("intelligence",1));
 			addcharstat("Constitution", $u['constitution'].check_temp_stat("constitution",1));
-			addcharstat("Wisdom", $u['wisdom'].check_temp_stat("wisdom",1));
+			addcharstat('Wisdom', $u['wisdom'].check_temp_stat('wisdom', 1));
 		}
 		else
 		{
 			$maxsoul = 50 + 10 * $u['level']+$u['dragonkills']*2;
 			addcharstat("Soulpoints", $u['soulpoints'].check_temp_stat("soulpoints",1)."`0/".$maxsoul);
-			if (is_module_active('staminasystem')) addcharstat("Stamina", "");
+			if (is_module_active('staminasystem')) { addcharstat('Stamina', ''); }
 			addcharstat("Torments", $u['gravefights'].check_temp_stat("gravefights",1));
 			addcharstat("Psyche", 10+round(($u['level']-1)*1.5));
 			addcharstat("Spirit", 10+round(($u['level']-1)*1.5));
