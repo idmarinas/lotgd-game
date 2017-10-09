@@ -6,7 +6,7 @@ class settings
     protected $settings = [];
     protected $settingsKey = 'game-settings-';
 
-	function __construct($tablename = false)
+	public function __construct($tablename = false)
 	{
 		if ($tablename === false) $tablename = DB::prefix('settings');
 		else $tablename = DB::prefix($tablename);
@@ -24,7 +24,7 @@ class settings
      *
      * @return bool
      */
-	function saveSetting($settingname, $value)
+	public function saveSetting($settingname, $value)
     {
         $this->loadSettings();
         $key = $this->settingsKey . $this->tablename;
@@ -65,7 +65,7 @@ class settings
      *
      * @return void
      */
-	function loadSettings()
+	public function loadSettings()
 	{
         $key = $this->settingsKey . $this->tablename;
         $this->settings = datacache($key, 86400, true);
@@ -93,14 +93,14 @@ class settings
 		}
 	}
 
-    function clearSettings()
+    public function clearSettings()
     {
 		//scraps the $this->loadSettings() data to force it to reload.
 		invalidatedatacache($this->settingsKey . $this->tablename, true);
 		$this->settings = [];
 	}
 
-	function getSetting($settingname, $default = false)
+	public function getSetting($settingname, $default = false)
     {
 		global $DB_USEDATACACHE,$DB_DATACACHEPATH;
 
@@ -137,5 +137,5 @@ class settings
 		}
 	}
 
-	function getArray() { return $this->settings; }
+	public function getArray() { return $this->settings; }
 }
