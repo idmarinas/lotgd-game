@@ -84,7 +84,7 @@ if ($battle)
     $battleShowResult = false;//-- Show result of battle.
     $battleProcessVictoryDefeat = false;//-- Process victory or defeat functions when the battle is over
 
-	require_once 'battle.php ';
+	require_once 'battle.php';
 
     if ($victory)
     {
