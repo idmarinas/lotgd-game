@@ -290,6 +290,10 @@ if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
 	$session['user']['restorepage'] = $REQUEST_URI;
 }
+else
+{
+    $session['user']['restorepage'] = '';
+}
 
 if ($logd_version != getsetting('installer_version', '-1') && !defined('IS_INSTALLER'))
 {
