@@ -10,28 +10,30 @@ if ($favortoheal>0) addnav(array("Restore Your Soul (%s favor)",$favortoheal),"g
 $hauntcost=getsetting('hauntcost',25);
 $resurrectioncost=getsetting('resurrectioncost',100);
 
-$default_actions=array();
-$default_actions[]=array(
-	"link"=>"graveyard.php?op=resurrection",
-	"linktext"=>translate_inline("Resurrection"),
-	"linkhardcoded"=>1,
-	"favor"=>getsetting('resurrectioncost',100),
-	"text"=>"",
-	"titletext"=>translate_inline("`\${deathoverlord}`) speaks, \"`7You have impressed me indeed.  I shall grant you the ability to visit your foes in the mortal world.`)\"")
+$default_actions = [];
+$default_actions[] = array(
+	"link" => "graveyard.php?op=resurrection",
+	"linktext" => translate_inline("Resurrection"),
+	"linkhardcoded" => 1,
+	"favor" => getsetting('resurrectioncost',100),
+	"text" => "",
+	"titletext" => translate_inline("`\${deathoverlord}`) speaks, \"`7You have impressed me indeed.  I shall grant you the ability to visit your foes in the mortal world.`)\"")
 	);
 
 //build navigation
-$actions = modulehook("deathoverlord_actions",$default_actions);
+$actions = modulehook("deathoverlord_actions", $default_actions);
 
-
-foreach ($actions as $key=>$row) {
-	if ($row['favor']>$session['user']['deathpower']) {
+$linktext = [];
+foreach ($actions as $key => $row)
+{
+    if ($row['favor']>$session['user']['deathpower'])
+    {
 		if (!isset($row['hidden']) || !$row['hidden']) {
 			continue; //strip the not buyable and hidden
 		}
 		$row['link']="";
 	}
-	$linktext[$key]=$row['linktext']; //linktext to use
+	$linktext[$key] = $row['linktext']; //linktext to use
 	if (!isset($row['linkhardcoded']) || !$row['linkhardcoded']) {
 		$linklist[$key]=($row['link']>""?"runmodule.php?module=".$row['link']:""); //link to use
 	} else $linklist[$key]=$row['link'];
@@ -40,7 +42,7 @@ foreach ($actions as $key=>$row) {
 	$overlord[$key]=$row['titletext']; //text if this is the highest possible buy
 }
 
-$length=count($linktext);
+$length = count($linktext);
 
 //sort entries low to high
 if ($length>0) array_multisort($favorcostlist, SORT_ASC, $linklist,$textlist,$overlord,$linktext);
@@ -72,4 +74,3 @@ addnav("Other");
 modulehook("ramiusfavors");
 
 output("`n`nYou have `6%s`) favor with `\$%s`).", $session['user']['deathpower'],$deathoverlord);
-?>
