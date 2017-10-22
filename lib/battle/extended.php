@@ -375,7 +375,7 @@ function report_companion_move($companion, $activate = 'fight')
 			$hptoheal = min($companion['abilities']['heal'], $session['user']['maxhitpoints'] - $session['user']['hitpoints']);
 			$session['user']['hitpoints'] += $hptoheal;
 			$companion['used'] = true;
-			$msg = $companion['healmsg'];
+			$msg = isset($companion['healmsg']) ? $companion['healmsg'] : '';
 
 			if ($msg == '') $msg = "{companion} heals your wounds. You regenerate {damage} hitpoints.";
 			$msg = substitute_array("`)".$msg."`0`n", ['{companion}', '{damage}'], [$companion['name'], $hptoheal]);
