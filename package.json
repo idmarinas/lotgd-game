@@ -33,7 +33,7 @@
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
         "jquery": "^3.1.1",
-        "semantic-ui": "2.2.10",
+        "semantic-ui": "2.2.13",
         "toastr": "^2.1.2",
         "sweetalert2": "^6.4.2"
     },
