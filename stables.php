@@ -161,7 +161,7 @@ if ($op == 'confirmbuy') {
 				output($texts['newmount'], $mount['mountname']);
 				tlschema();
 			}
-			$debugmount1=$playermount['mountname'];
+			$debugmount1 = isset($playermount['mountname']) ? $playermount['mountname'] : '';
 			if ($debugmount1) $debugmount1="a ".$debugmount1;
 			$session['user']['hashorse']=$mount['mountid'];
 			$debugmount2=$mount['mountname'];
@@ -194,7 +194,7 @@ if ($op == 'confirmbuy') {
 	} elseif($session['user']['gold']>=$grubprice) {
 		$buff = unserialize($playermount['mountbuff']);
 		if (! isset($buff['schema']) || $buff['schema'] == "") $buff['schema'] = "mounts";
-		if ($session['bufflist']['mount']['rounds'] == $buff['rounds']) {
+		if (isset($session['bufflist']['mount']) && $session['bufflist']['mount']['rounds'] == $buff['rounds']) {
 			tlschema($schemas['nothungry']);
 			output($texts['nothungry'],$name);
 			tlschema();
