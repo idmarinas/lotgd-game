@@ -2,14 +2,18 @@
 // translator ready
 // addnews ready
 // mail ready
-function checkban($login=false){
+function checkban($login = false)
+{
 	global $session;
-	if (isset($session['banoverride']) && $session['banoverride'])
-		return false;
-	if ($login===false){
-		$ip=$_SERVER['REMOTE_ADDR'];
-		$id=$_COOKIE['lgi'];
-	}else{
+	if (isset($session['banoverride']) && $session['banoverride']) { return false; }
+
+    if ($login === false)
+    {
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$id = isset($_COOKIE['lgi']) ? $_COOKIE['lgi'] : '';
+    }
+    else
+    {
 		$sql = "SELECT lastip,uniqueid,banoverride,superuser FROM " . DB::prefix("accounts") . " WHERE login='$login'";
 		$result = DB::query($sql);
 		$row = DB::fetch_assoc($result);
