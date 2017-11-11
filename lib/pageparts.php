@@ -665,7 +665,6 @@ function charstats()
 			if (is_module_active('staminasystem')) { addcharstat('Stamina', ''); }
 			else { addcharstat('Turns', $u['turns'].check_temp_stat('turns', 1)); }
 			if (is_module_active('displaycp')) { addcharstat('Drunkeness', ''); }
-			if (is_module_active('dietsystem')) { addcharstat('Diet', ''); }
 			addcharstat("Experience",  number_format($u['experience'].check_temp_stat("experience",1),0,$point,$sep));
 			addcharstat("Attack", sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
 			addcharstat("Defense", sprinft("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
