@@ -2,7 +2,7 @@
 // translator ready
 // addnews ready
 // mail ready
-function redirect($location,$reason=false)
+function redirect($location, $reason = false)
 {
 	global $session, $REQUEST_URI;
 
@@ -10,25 +10,28 @@ function redirect($location,$reason=false)
 	// handling.
 	if (! isset($session['debug'])) $session['debug'] = '';
 
-	if (strpos($location,"badnav.php")===false) {
+    if (strpos($location, 'badnav.php') === false)
+    {
 		//deliberately html in translations so admins can personalize this, also in one schema
-		$session['allowednavs']=array();
-		addnav("",$location);
-		$failoutput=new LotgdOutputCollector;
+		$session['allowednavs'] = [];
+		addnav('', $location);
+		$failoutput = new LotgdOutputCollector;
 		$failoutput->output_notl("`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n");
 		$failoutput->output_notl("`\$");
 		$failoutput->rawoutput("<a href=\"".HTMLEntities($location, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">".translate_inline("Click here to continue.","badnav")."</a>");
 		$failoutput->output_notl(translate_inline("`n`n`\$If you cannot leave this page, notify the staff via <a href='petition.php'>petition</a> `\$and tell them where this happened and what you did. Thanks.","badnav"),true);
-		$text=$failoutput->get_output();
-		$session['output']="<html><head><link href=\"templates/common/colors.css\" rel=\"stylesheet\" type=\"text/css\"></head><body style='background-color: #000000'>$text</body></html>";
+        $text = $failoutput->get_output();
+        $title = translate_inline('Your navigation is broken');
+		$session['output']="<html><head><title>$title</title></head><body style='background-color: #ffffff'>$text</body></html>";
 	}
 	restore_buff_fields();
-	$session['debug'].="Redirected to $location from $REQUEST_URI.  $reason<br>";
+	$session['debug'] .= "Redirected to $location from $REQUEST_URI.  $reason<br>";
 	saveuser();
 	$host  = $_SERVER['HTTP_HOST'];
 	if ($_SERVER['SERVER_PORT']==443) $http="https";
-		else $http="http";
-	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	else $http="http";
+
+    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	header("Location: $http://$host$uri/$location");
 
 	// we should never hit this one here. in case we do, show the debug output along with some text
