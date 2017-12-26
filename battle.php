@@ -609,7 +609,7 @@ if ($victory || $defeat)
 	{
 		$result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
 
-		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
+		$lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
 
 		if ($battleProcessVictoryDefeat) battlevictory($newenemies, (isset($options['denyflawless'])?$options['denyflawless']:$battleDenyFlawless), $battleInForest);
 	}
@@ -617,7 +617,7 @@ if ($victory || $defeat)
 	{
 		$result = modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
 
-		$lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result['messages']);
+		$lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
 
 		if ($battleProcessVictoryDefeat) battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
 	}
