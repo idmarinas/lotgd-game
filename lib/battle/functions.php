@@ -178,10 +178,10 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
 		$gold += $badguy['creaturegold'];
 
-		if(isset($badguy['creaturelose'])) $lotgdBattleContent['battleend'][] = substitute_array($badguy['creaturelose'].'`n');
-
 		if ($forest === true) $lotgdBattleContent['battleend'][] = ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']];
         elseif ($forest === false) $lotgdBattleContent['battleend'][] = ['`b`$You have tormented %s!`0`b`n', $badguy['creaturename']];
+
+		if(isset($badguy['creaturelose'])) $lotgdBattleContent['battleend'][] = substitute_array($badguy['creaturelose'].'`n');
 
 		// If any creature did damage, we have no flawless fight. Easy as that.
 		if (isset($badguy['diddamage']) && $badguy['diddamage'] == 1) { $diddamage = true; }
