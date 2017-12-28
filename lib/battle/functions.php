@@ -171,6 +171,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 	$count = count($enemies);
 	$totalbackup = 0;
 
+	array_unshift($lotgdBattleContent['battleend'], '`n');
 	foreach ($enemies as $index => $badguy)
     {
 		if (getsetting('dropmingold', 0)) { $badguy['creaturegold'] = e_rand(round($badguy['creaturegold']/4), round(3*$badguy['creaturegold']/4)); }
@@ -178,10 +179,10 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
 		$gold += $badguy['creaturegold'];
 
-		if ($forest === true) $lotgdBattleContent['battleend'][] = ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']];
-        elseif ($forest === false) $lotgdBattleContent['battleend'][] = ['`b`$You have tormented %s!`0`b`n', $badguy['creaturename']];
+		if(isset($badguy['creaturelose'])) array_unshift($lotgdBattleContent['battleend'], substitute_array($badguy['creaturelose'].'`n'));
 
-		if(isset($badguy['creaturelose'])) $lotgdBattleContent['battleend'][] = substitute_array($badguy['creaturelose'].'`n');
+		if ($forest === true) array_unshift($lotgdBattleContent['battleend'], ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']]);
+		elseif ($forest === false) array_unshift($lotgdBattleContent['battleend'], ['`b`$You have tormented %s!`0`b`n', $badguy['creaturename']]);
 
 		// If any creature did damage, we have no flawless fight. Easy as that.
 		if (isset($badguy['diddamage']) && $badguy['diddamage'] == 1) { $diddamage = true; }
