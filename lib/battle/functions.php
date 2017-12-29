@@ -203,21 +203,24 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 	$gold = e_rand(round($gold/$count), round($gold/$count)*round(($count+1)*pow(1.2, $count-1), 0));
 	$expbonus = round($expbonus/$count, 0);
 
-	if ($gold && $forest === true)//-- Only in forest
+	//-- No gem hunters allowed!
+	$args = modulehook('alter-gemchance', ['chance' => getsetting('forestgemchance', 25)]);
+    $gemchances = $args['chance'];
+    //-- Gems only find in forest
+	if ($session['user']['level'] < getsetting('maxlevel', 15) && e_rand(1,$gemchances) == 1 && $forest === true)
+    {
+		$lotgdBattleContent['battleend'][] = ["`&You find A GEM!`n`#"];
+		$session['user']['gems']++;
+		debuglog('found gem when slaying a monster.', false, false, 'forestwingem', 1);
+    }
+
+    //-- Gold for user only in forest
+	if ($gold && $forest === true)
 	{
 		$lotgdBattleContent['battleend'][] = ['`#You receive `^%s`# gold!`n', $gold];
         $session['user']['gold'] += $gold;
 		debuglog('received gold for slaying a monster.', false, false, 'forestwin', $badguy['creaturegold']);
-	}
-	// No gem hunters allowed!
-	$args = modulehook('alter-gemchance', ['chance' => getsetting('forestgemchance', 25)]);
-	$gemchances = $args['chance'];
-	if ($session['user']['level'] < getsetting('maxlevel', 15) && e_rand(1,$gemchances) == 1 && $forest === true)//-- Only find in forest
-    {
-		$lotgdBattleContent['battleend'][] = ["`&You find A GEM!`n`#"];
-		$session['user']['gems']++;
-		debuglog("found gem when slaying a monster.",false,false,"forestwingem",1);
-	}
+    }
 
     //-- Process exp/favor
     if ($forest === true) battlegainexperienceforest();
