@@ -12,16 +12,20 @@ class LotgdTemplate extends Twig_Environment
 	protected $themefolder;
 	protected $defaultSkin;
 
-	public function __construct()
+	public function __construct(array $loader = [], array $options = [])
 	{
 		$this->prepareTheme();
 
-		$options = [
+        //-- Merge options
+		$default = [
 			'cache' => 'cache/templates',
 			'autoescape' => false
-		];
+        ];
+        $options = array_merge($default, $options);
 
-		$loader = new Twig_Loader_Filesystem(['themes', 'templates']);
+        //-- Merge loaders
+        $loader = array_merge(['themes', 'templates'], $loader);
+		$loader = new Twig_Loader_Filesystem($loader);
 
 		parent::__construct($loader, $options);
 
