@@ -50,7 +50,7 @@ class settings
 			return false;
         }
 
-        DB::query($sql);
+        DB::execute($sql);
 
         $this->settings[$settingname] = $value;
 
