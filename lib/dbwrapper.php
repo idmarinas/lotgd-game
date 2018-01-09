@@ -108,7 +108,14 @@ Class DB
         else return $prefix . $tablename;
 	}
 
-	public static function query($sql, $die = true)
+	/**
+	 * Execute a query
+	 *
+	 * @param string $sql
+	 *
+	 * @return ResultSet
+	 */
+	public static function query($sql)
 	{
 		if (defined('DB_NODB') && ! defined('LINK')) return [];
 
@@ -330,6 +337,13 @@ Class DB
 		else  return self::sql()->delete();
 	}
 
+    /**
+     * Execute a object type SQL
+     *
+     * @param object $object
+     *
+     * @return ResultSet
+     */
 	public static function execute($object)
 	{
 		if ('object' != gettype($object)) return false;
