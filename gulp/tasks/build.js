@@ -10,8 +10,7 @@ module.exports = function (callback)
 
     runSequence(
         'delete',
-        'main',
-        'theme',
+        ['main', 'theme'],
         'assets',
         'lotgd-js',
         'clean',
