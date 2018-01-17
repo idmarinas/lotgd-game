@@ -15,5 +15,5 @@ module.exports = function (callback)
 
     del(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')
 
-    return callback
+    return callback()
 }
