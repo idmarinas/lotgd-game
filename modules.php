@@ -133,7 +133,7 @@ if ($op==""){
 		$sql = "SELECT * FROM " . DB::prefix("modules") . " WHERE category='$cat' ORDER BY ".$sortby." ".($order?"ASC":"DESC");
 		$result = DB::query($sql);
 		if (DB::num_rows($result)==0){
-			rawoutput("<tr class='trlight'><td colspan='6' align='center'>");
+			rawoutput("<tr><td colspan='6' align='center'>");
 			output("`i-- No Modules Installed--`i");
 			rawoutput("</td></tr>");
 		}
