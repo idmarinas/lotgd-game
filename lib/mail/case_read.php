@@ -15,18 +15,20 @@ if (DB::num_rows($result) > 0)
 	$next = translate_inline("Next >");
 	$problem = "Abusive Email Report:\nFrom: {$row['name']}\nSubject: {$row['subject']}\nSent: {$row['sent']}\nID: {$row['messageid']}\nBody:\n{$row['body']}";
 	$problemplayer = (int)$row['msgfrom'];
-	$status_image="";
+    $status_image = '';
+    $row['subject'] = stripslashes($row['subject']);
+    $row['body'] = stripslashes($row['body']);
 	if ((int)$row['msgfrom']==0)
 	{
 		$row['name']=translate_inline("`i`^System`0`i");
 		// No translation for subject if it's not an array
-		$row_subject = @unserialize(stripslashes($row['subject']));
+		$row_subject = @unserialize($row['subject']);
 		if ($row_subject !== false) {
             $row['subject'] = call_user_func_array("sprintf_translate", $row_subject);
             debug('traducido', true);
 		}
 		// No translation for body if it's not an array
-		$row_body = @unserialize(stripslashes($row['body']));
+		$row_body = @unserialize($row['body']);
 		if ($row_body !== false) {
 			$row['body'] = call_user_func_array("sprintf_translate", $row_body);
 		}

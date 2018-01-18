@@ -44,6 +44,8 @@ if (is_array($row))
 {
 	if (isset($row['subject']) && $row['subject'])
     {
+        $row['subject'] = stripslashes($row['subject']);
+        $row['body'] = stripslashes($row['body']);
         if ((int)$row['msgfrom'] == 0)
         {
 			$row['name'] = translate_inline("`i`^System`0`i");
