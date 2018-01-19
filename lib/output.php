@@ -278,7 +278,7 @@ class LotgdOutputCollector
 							$this->nestedtags['div']=false;
 						}else{
 							$this->nestedtags['div']=true;
-							$out.="<div align='center'>";
+							$out.="<div class='center aligned'>";
 						}
 						break;
 					case "B":
