@@ -234,41 +234,41 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     //-- Perfect battle
 	if (! $diddamage)
     {
-		$lotgdBattleContent['battleend'][] = "`n`c`b`&~~ Flawless Fight! ~~`0`b`c";
-		if ($denyflawless) { $lotgdBattleContent['battleend'][] = "`c`\${$denyflawless}`0`c"; }
+		array_push($lotgdBattleContent['battleend'], "`n`c`b`&~~ Flawless Fight! ~~`0`b`c");
+		if ($denyflawless) { array_push($lotgdBattleContent['battleend'], "`c`\${$denyflawless}`0`c"); }
 		elseif ($session['user']['level'] <= $creaturelevel)
 		{
 			if (is_module_active('staminasystem') && $forest === true)//-- Only When active stamina system and is forest
 			{
 				require_once 'modules/staminasystem/lib/lib.php';
 
-				$lotgdBattleContent['battleend'][] = '`c`b`$You receive some stamina!`0`b`c';
+				array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b`c');
 				addstamina(25000);
 			}
 			else if ($forest === false)//-- Only when is a Graveyard
             {
-                $lotgdBattleContent['battleend'][] = '`c`b`$You receive an extra torment!`0`b`c';
+                array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0`b`c');
 				$session['user']['gravefights']++;
             }
             else//-- Other
 			{
-				$lotgdBattleContent['battleend'][] = '`c`b`$You receive an extra turn!`0`b`c';
+				array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b`c');
 				$session['user']['turns']++;
 			}
 		}
 		else
 		{
-			if (is_module_active('staminasystem') && $forest === true) $lotgdBattleContent['battleend'][] = '`c`$A more difficult fight would have yielded some stamina.`0`c`n';
-            elseif ($forest === false) $lotgdBattleContent['battleend'][] = '`c`$A more difficult fight would have yielded an extra torment.`0`c`n';
-			else $lotgdBattleContent['battleend'][] = '`c`$A more difficult fight would have yielded an extra turn.`0`c`n';
+			if (is_module_active('staminasystem') && $forest === true) array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded some stamina.`0`c`n');
+            elseif ($forest === false) array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra torment.`0`c`n');
+			else array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra turn.`0`c`n');
 		}
 	}
 
 	if ($session['user']['hitpoints'] <= 0)
 	{
-		$lotgdBattleContent['battleend'][] = 'With your dying breath you spy a small stand of mushrooms off to the side.';
-		$lotgdBattleContent['battleend'][] = 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.';
-		$lotgdBattleContent['battleend'][] = 'Even raw they have some restorative properties.`n';
+		array_push($lotgdBattleContent['battleend'], 'With your dying breath you spy a small stand of mushrooms off to the side.');
+		array_push($lotgdBattleContent['battleend'], 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.');
+		array_push($lotgdBattleContent['battleend'], 'Even raw they have some restorative properties.`n');
 		$session['user']['hitpoints'] = 1;
 	}
 }
