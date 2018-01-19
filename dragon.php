@@ -46,11 +46,9 @@ if ($op == '')
 }
 elseif($op == 'prologue1')
 {
+	$flawless = (int) httpget('flawless');
+  	if ($flawless) { output("`b`c`&~~ Flawless Fight ~~`0`c`b`n`n"); }
 	output("`@Victory!`n`n");
-	$flawless = (int)(httpget('flawless'));
-  	if ($flawless) {
-		output("`b`c`&~~ Flawless Fight ~~`0`c`b`n`n");
-	}
 	output("`2Before you, the great dragon lies immobile, its heavy breathing like acid to your lungs.");
 	output("You are covered, head to toe, with the foul creature's thick black blood.");
 	output("The great beast begins to move its mouth.  You spring back, angry at yourself for having been fooled by its ploy of death, and watch for its huge tail to come sweeping your way.");
