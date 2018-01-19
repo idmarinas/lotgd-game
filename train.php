@@ -233,9 +233,9 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 				$newcompanions = $companions;
 				foreach ($companions as $name => $companion)
 				{
-					$companion['attack'] = $companion['attack'] + $companion['attackperlevel'];
-					$companion['defense'] = $companion['defense'] + $companion['defenseperlevel'];
-					$companion['maxhitpoints'] = $companion['maxhitpoints'] + $companion['maxhitpointsperlevel'];
+					$companion['attack'] = $companion['attack'] + (isset($companion['attackperlevel']) ? $companion['attackperlevel'] : 0);
+					$companion['defense'] = $companion['defense'] + (isset($companion['defenseperlevel']) ? $companion['defenseperlevel'] : 0);
+					$companion['maxhitpoints'] = $companion['maxhitpoints'] + (isset($companion['maxhitpointsperlevel']) ? $companion['maxhitpointsperlevel'] : 0);
 					$companion['hitpoints'] = $companion['maxhitpoints'];
 					$newcompanions[$name] = $companion;
 				}
