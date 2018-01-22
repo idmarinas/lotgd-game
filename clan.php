@@ -45,17 +45,7 @@ if ($detail>0){
 
 page_footer();
 
-function clanform(){
-	rawoutput("<form action='clan.php?op=new&apply=1' method='POST'>");
-	addnav("","clan.php?op=new&apply=1");
-	output("`b`cNew Clan Application Form`c`b");
-	output("Clan Name: ");
-	rawoutput("<input name='clanname' maxlength='50' value=\"".htmlentities(stripslashes(httppost('clanname')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
-	output("`nShort Name: ");
-	rawoutput("<input name='clanshort' maxlength='5' size='5' value=\"".htmlentities(stripslashes(httppost('clanshort')), ENT_COMPAT, getsetting("charset", "UTF-8"))."\">");
-	output("`nNote, color codes are permitted in neither clan names nor short names.");
-	output("The clan name is shown on player bios and on clan overview pages while the short name is displayed next to players' names in comment areas and such.`n");
-	$apply = translate_inline("Apply");
-	rawoutput("<input type='submit' class='button' value='$apply'></form>");
+function clanform()
+{
+    output_notl($lotgd_tpl->renderThemeTemplate('pages/clan/new.twig', $data), true);
 }
-?>
