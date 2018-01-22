@@ -41,5 +41,10 @@ page_footer();
 
 function clanform()
 {
+    $data = [
+        'clanname' => htmlentities(stripslashes(httppost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
+        'clanshort' => htmlentities(stripslashes(httppost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
+    ];
+
     output_notl($lotgd_tpl->renderThemeTemplate('pages/clan/new.twig', $data), true);
 }
