@@ -77,7 +77,8 @@ if ('savecron' == $op)
 	$op = '';
 	httpset($op, '');
 }
-elseif ('newcronjob' == $op)
+
+if ('newcronjob' == $op)
 {
     require_once 'lib/listfiles.php';
 
@@ -153,6 +154,7 @@ else
     output('If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: %s', '<a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>', true);
     rawoutput('</div>');
     output_notl('`n`n');
+    addnav('', 'configuration.php?settings=cronjob&op=savecron');
     rawoutput("<form action='configuration.php?settings=cronjob&op=savecron' method='POST'>");
     lotgd_showform($setup_cronjob, ['newdaycron' => getsetting('newdaycron', 0)]);
     rawoutput("</form>");
