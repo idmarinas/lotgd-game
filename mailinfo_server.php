@@ -1,10 +1,11 @@
 <?php
 //translator ready
 
-define("OVERRIDE_FORCED_NAV",true);
-require("common.php");
+define('OVERRIDE_FORCED_NAV', true);
+require_once 'common.php';
 
-function mail_status($args=false) {
+function mail_status($args=false)
+{
 	if ($args===false) return;
 	$timeout_setting=120; // seconds
 	$new=maillink();
@@ -48,28 +49,23 @@ function timeout_status($args=false)
 }
 
 
-function commentary_text($args=false) {
+function commentary_text($args = false)
+{
 	global $session;
-	if ($args===false || !is_array($args)) return;
-	$section=$args['section'];
-	$message="";
-	$limit=25;
-	$talkline="says";
-	$schema=$args['schema'];
-	$viewonly=$args['viewonly'];
-	$new=viewcommentary($section, $message, $limit, $talkline, $schema,$viewonly,1);
-	$new=maillink();
+	if ($args === false || ! is_array($args)) return;
+	$section = $args['section'];
+	$message = '';
+	$limit = 25;
+	$talkline = translate_inline('says');
+	$schema = $args['schema'];
+	$viewonly = $args['viewonly'];
+	$new = viewcommentary($section, $message, $limit, $talkline, $schema,$viewonly,1);
+	$new = maillink();
 	$objResponse = new xajaxResponse();
 	$objResponse->assign($section,"innerHTML", $new);
 }
 
 
 
-require("mailinfo_common.php");
+require 'mailinfo_common.php';
 $xajax->processRequest();
-
-
-
-
-
-?>
