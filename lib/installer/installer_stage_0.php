@@ -19,8 +19,8 @@ if (DB_CHOSEN)
 		$result = DB::query($sql);
 		if ($result->count() > 0){
 			$row = DB::fetch_assoc($result);
-			debug($row['password'], true);
-			debug(httppost('password'), true);
+			// debug($row['password']);
+			// debug(httppost('password'));
 			// Okay, we have a username with megauser, now we need to do
 			// some hackery with the password.
 			$needsauthentication=true;
