@@ -3,69 +3,82 @@
 // addnews ready
 // mail ready
 
-require_once("lib/arraytourl.php");
+require_once 'lib/arraytourl.php';
 
-$injected_modules = array(1=>array(),0=>array());
+$injected_modules = [1 => [], 0 => []];
 
-function injectmodule($modulename,$force=false){
-	global $mostrecentmodule,$injected_modules;
+function injectmodule($modulename, $force = false)
+{
+    global $mostrecentmodule, $injected_modules;
+
 	//try to circumvent the array_key_exists() problem we've been having.
 	if ($force) $force = 1; else $force = 0;
 
 	//early escape if we already called injectmodule this hit with the
 	//same args.
-	if (isset($injected_modules[$force][$modulename])) {
-		$mostrecentmodule=$modulename;
+    if (isset($injected_modules[$force][$modulename]))
+    {
+        $mostrecentmodule = $modulename;
+
 		return $injected_modules[$force][$modulename];
 	}
 
 	$modulename = modulename_sanitize($modulename);
 	$modulefilename = "modules/{$modulename}.php";
-	if (file_exists($modulefilename)){
+    if (file_exists($modulefilename))
+    {
 		tlschema("module-{$modulename}");
 		$sql = "SELECT active,filemoddate,infokeys,version FROM " . DB::prefix("modules") . " WHERE modulename='$modulename'";
 		$result = DB::query_cached($sql, "injections-inject-$modulename", 3600);
-		if (!$force) {
+        if (! $force)
+        {
 			//our chance to abort if this module isn't currently installed
 			//or doesn't meet the prerequisites.
-			if (DB::num_rows($result)==0) {
+            if (DB::num_rows($result) == 0)
+            {
 				tlschema();
 			 	output_notl("`n`3Module `#%s`3 is not installed, but was attempted to be injected.`n",$modulename);
-				$injected_modules[$force][$modulename]=false;
+                $injected_modules[$force][$modulename] = false;
+
 				return false;
 			}
 			$row = DB::fetch_assoc($result);
-			if ($row['active']){ } else {
+            if (! $row['active'])
+            {
 				tlschema();
 			 	output("`n`3Module `#%s`3 is not active, but was attempted to be injected.`n",$modulename);
-				$injected_modules[$force][$modulename]=false;
+                $injected_modules[$force][$modulename] = false;
+
 				return false;
 			}
 		}
-		require_once($modulefilename);
+		require_once $modulefilename;
 		$mostrecentmodule = $modulename;
-		$info = "";
-		if (!$force){
+		$info = '';
+        if (!$force)
+        {
 			//avoid calling the function if we're forcing the module
 			$fname = $modulename."_getmoduleinfo";
 			$info = $fname();
-			if (!isset($info['requires'])) $info['requires'] = array();
-			if (!is_array($info['requires'])) $info['requires'] = array();
-			if (!isset($info['download'])) $info['download']="";
-			if (!isset($info['description'])) $info['description']="";
-			if (!module_check_requirements($info['requires'])) {
-				$injected_modules[$force][$modulename]=false;
+			if (!isset($info['requires'])) $info['requires'] = [];
+			if (!is_array($info['requires'])) $info['requires'] = [];
+			if (!isset($info['download'])) $info['download']='';
+			if (!isset($info['description'])) $info['description']='';
+            if (!module_check_requirements($info['requires']))
+            {
+				$injected_modules[$force][$modulename] = false;
 				tlschema();
 				output("`n`3Module `#%s`3 does not meet its prerequisites.`n",$modulename);
 				return false;
 			}
 		}
 		//check to see if the module needs to be upgraded.
-		if (DB::num_rows($result)>0){
+        if (DB::num_rows($result)>0)
+        {
 			if (!isset($row)) $row = DB::fetch_assoc($result);
 			$filemoddate = date("Y-m-d H:i:s",filemtime($modulefilename));
-			if ($row['filemoddate']!=$filemoddate || $row['infokeys']=="" ||
-					$row['infokeys'][0] != '|' || $row['version']==''){
+            if ($row['filemoddate']!=$filemoddate || $row['infokeys']=='' || $row['infokeys'][0] != '|' || $row['version']=='')
+            {
 				//The file has recently been modified, lock tables and
 				//check again (knowing we're the only one who can do this
 				//at one shot)
@@ -75,8 +88,8 @@ function injectmodule($modulename,$force=false){
 				$sql = "SELECT filemoddate FROM " . DB::prefix("modules") . " WHERE modulename='$modulename'";
 				$result = DB::query($sql);
 				$row = DB::fetch_assoc($result);
-				if ($row['filemoddate']!=$filemoddate || !isset($row['infokeys']) || $row['infokeys']=="" || $row['infokeys'][0] != '|' ||
-						$row['version']==''){
+                if ($row['filemoddate']!=$filemoddate || !isset($row['infokeys']) || $row['infokeys']=='' || $row['infokeys'][0] != '|' || $row['version']=='')
+                {
 					//the file mod time is still different from that
 					//recorded in the database, time to update the database
 					//and upgrade the module.
@@ -87,7 +100,7 @@ function injectmodule($modulename,$force=false){
 						$fname = $modulename."_getmoduleinfo";
 						$info = $fname();
 						if (!isset($info['download']))
-							$info['download']="";
+							$info['download']='';
 						if (!isset($info['version']))
 							$info['version']="0.0";
 						if (!isset($info['description']))
@@ -107,12 +120,12 @@ function injectmodule($modulename,$force=false){
 					// Remove any old hooks (install will reset them)
 					module_wipehooks();
 					$fname = $modulename."_install";
-					if ($fname() === false) {
-						return false;
-					}
+					if ($fname() === false) { return false; }
 					invalidatedatacache("injections-inject-$modulename");
 
-				}else{
+                }
+                else
+                {
 					$sql = "UNLOCK TABLES";
 					DB::query($sql);
 				}
@@ -121,7 +134,9 @@ function injectmodule($modulename,$force=false){
 		tlschema();
 		$injected_modules[$force][$modulename]=true;
 		return true;
-	}else{
+    }
+    else
+    {
 	 	output("`n`\$Module `^%s`\$ was not found in the modules directory.`n",$modulename);
 		$injected_modules[$force][$modulename]=false;
 		return false;
@@ -135,20 +150,23 @@ function injectmodule($modulename,$force=false){
  * @param string $version The version to check for (false for don't care)
  * @return int The status codes for the module
  */
-function module_status($modulename, $version=false) {
+function module_status($modulename, $version=false)
+{
 	global $injected_modules;
 
 	$modulename = modulename_sanitize($modulename);
 	$modulefilename = "modules/$modulename.php";
 	$status = MODULE_NO_INFO;
-	if (file_exists($modulefilename)) {
+    if (file_exists($modulefilename))
+    {
 		$sql = "SELECT active,filemoddate,infokeys,version FROM " . DB::prefix("modules") . " WHERE modulename='$modulename'";
 		$result = DB::query_cached($sql, "injections-inject-$modulename", 3600);
 		if (DB::num_rows($result) > 0) {
 			// The module is installed
 			$status = MODULE_INSTALLED;
 			$row = DB::fetch_assoc($result);
-			if ($row['active']) {
+            if ($row['active'])
+            {
 				// Module is here and active
 				$status |= MODULE_ACTIVE;
 				// In this case, the module could have been force injected or
@@ -159,30 +177,43 @@ function module_status($modulename, $version=false) {
 				if (array_key_exists($modulename, $injected_modules[1]) &&
 						$injected_modules[1][$modulename])
 					$status |= MODULE_INJECTED;
-			} else {
+            }
+            else
+            {
 				// Force-injected modules can be injected but not active.
 				if (array_key_exists($modulename, $injected_modules[1]) &&
 						$injected_modules[1][$modulename])
 					$status |= MODULE_INJECTED;
 			}
 			// Check the version number
-			if ($version===false) {
+            if ($version===false)
+            {
 				$status |= MODULE_VERSION_OK;
-			} else {
-				if (module_compare_versions($row['version'], $version) < 0) {
+            }
+            else
+            {
+                if (module_compare_versions($row['version'], $version) < 0)
+                {
 					$status |= MODULE_VERSION_TOO_LOW;
-				} else {
+                }
+                else
+                {
 					$status |= MODULE_VERSION_OK;
 				}
 			}
-		} else {
+        }
+        else
+        {
 			// The module isn't installed
 			$status = MODULE_NOT_INSTALLED;
 		}
-	} else {
+    }
+    else
+    {
 		// The module file doesn't exist.
 		$status = MODULE_FILE_NOT_PRESENT;
-	}
+    }
+
 	return $status;
 }
 
@@ -193,7 +224,8 @@ function module_status($modulename, $version=false) {
  * @param string $modulename The module name
  * @return bool If the module is active or not
  */
-function is_module_active($modulename){
+function is_module_active($modulename)
+{
 	return (module_status($modulename) & MODULE_ACTIVE);
 }
 
@@ -204,11 +236,11 @@ function is_module_active($modulename){
  * @param string $version The version to check for
  * @return bool If the module is installed
  */
-function is_module_installed($modulename,$version=false){
+function is_module_installed($modulename, $version = false)
+{
 	// Status will say the version is okay if we don't care about the
 	// version or if the version is actually correct
-	return (module_status($modulename, $version) &
-			(MODULE_INSTALLED|MODULE_VERSION_OK));
+	return (module_status($modulename, $version) & (MODULE_INSTALLED|MODULE_VERSION_OK));
 }
 
 /**
@@ -218,7 +250,8 @@ function is_module_installed($modulename,$version=false){
  * @param array $reqs Requirements of a module from _getmoduleinfo()
  * @return bool If successful or not
  */
-function module_check_requirements($reqs, $forceinject=false){
+function module_check_requirements($reqs, $forceinject=false)
+{
 	// Since we can inject here, we need to save off the module we're on
 	global $mostrecentmodule;
 
@@ -229,20 +262,18 @@ function module_check_requirements($reqs, $forceinject=false){
 
 	// Check the requirements.
 	reset($reqs);
-	foreach ($reqs as $key=>$val) {
+    foreach ($reqs as $key=>$val)
+    {
 		$info = explode("|",$val);
-		if (!is_module_installed($key,$info[0])) {
-			return false;
-		}
+        if (!is_module_installed($key,$info[0])) { return false; }
 		// This is actually cheap since we cache the result
 		$status = module_status($key);
 		// If it's not injected and we should force it, do so.
-		if (!($status & MODULE_INJECTED) && $forceinject) {
-			$result = $result && injectmodule($key);
-		}
+        if (!($status & MODULE_INJECTED) && $forceinject) { $result = $result && injectmodule($key); }
 	}
 
-	$mostrecentmodule = $oldmodule;
+    $mostrecentmodule = $oldmodule;
+
 	return $result;
 }
 
@@ -259,12 +290,15 @@ function module_check_requirements($reqs, $forceinject=false){
  * @return void
  */
 $block_all_modules = false;
-$blocked_modules = array();
-function blockmodule($modulename) {
+$blocked_modules = [];
+function blockmodule($modulename)
+{
 	global $blocked_modules, $block_all_modules, $currenthook;
 
-	if ($modulename === true) {
-		$block_all_modules = true;
+    if ($modulename === true)
+    {
+        $block_all_modules = true;
+
 		return;
 	}
 	$blocked_modules[$modulename]=1;
@@ -282,18 +316,21 @@ function blockmodule($modulename) {
  * @param mixed $modulename The name of the module you wish to unblock or true if you want to unblock all modules.
  * @return void
  */
-$unblocked_modules = array();
-function unblockmodule($modulename) {
+$unblocked_modules = [];
+function unblockmodule($modulename)
+{
 	global $unblocked_modules, $block_all_modules;
 
-	if ($modulename === true) {
-		$block_all_modules = false;
+    if ($modulename === true)
+    {
+        $block_all_modules = false;
+
 		return;
 	}
 	$unblocked_modules[$modulename]=1;
 }
 
-$module_preload = array();
+$module_preload = [];
 /**
  * Preloads data for multiple modules in one shot rather than
  * having to make SQL calls for each hook, when many of the hooks
@@ -301,7 +338,8 @@ $module_preload = array();
  * @param array $hooknames Names of hooks whose attached modules should be preloaded.
  * @return bool Success
  */
-function mass_module_prepare($hooknames){
+function mass_module_prepare($hooknames)
+{
 	sort($hooknames);
 	$Pmodules = DB::prefix("modules");
 	$Pmodule_hooks = DB::prefix("module_hooks");
@@ -332,14 +370,16 @@ function mass_module_prepare($hooknames){
 		ORDER BY
 			$Pmodule_hooks.location,
 			$Pmodule_hooks.priority,
-			$Pmodule_hooks.modulename";
+            $Pmodule_hooks.modulename";
 	$result = DB::query_cached($sql,"moduleprepare-".md5(join($hooknames)));
-	$modulenames = array();
-	while ($row = DB::fetch_assoc($result)){
+	$modulenames = [];
+    while ($row = DB::fetch_assoc($result))
+    {
 		$modulenames[$row['modulename']] = $row['modulename'];
-		if (!isset($module_preload[$row['location']])) {
-			$module_preload[$row['location']] = array();
-			$modulehook_queries[$row['location']] = array();
+        if (!isset($module_preload[$row['location']]))
+        {
+			$module_preload[$row['location']] = [];
+			$modulehook_queries[$row['location']] = [];
 		}
 		//a little black magic trickery: formatting entries in
 		//$modulehook_queries the same way that DB::query_cached
@@ -361,7 +401,8 @@ function mass_module_prepare($hooknames){
 		WHERE
 			modulename IN ($modulelist)";
 	$result = DB::query($sql);
-	while ($row = DB::fetch_assoc($result)){
+    while ($row = DB::fetch_assoc($result))
+    {
 		$module_settings[$row['modulename']][$row['setting']] = $row['value'];
 	}
 
@@ -380,9 +421,11 @@ function mass_module_prepare($hooknames){
 			modulename IN ($modulelist)
 		AND	userid = ".(int)$session['user']['acctid'];
 	$result = DB::query($sql);
-	while ($row = DB::fetch_assoc($result)){
+    while ($row = DB::fetch_assoc($result))
+    {
 		$module_prefs[$row['userid']][$row['modulename']][$row['setting']] = $row['value'];
-	}
+    }
+
 	return true;
 }
 
@@ -395,42 +438,48 @@ function mass_module_prepare($hooknames){
  * @param bool $only Only this module?
  * @return array The args modified by the event handlers
  */
-$currenthook = "";
-function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
+$currenthook = '';
+function modulehook($hookname, $args = false, $allowinactive = false, $only = false)
+{
 	global $navsection, $mostrecentmodule;
 	global $blocked_modules, $block_all_modules, $unblocked_modules;
 	global $output, $session, $modulehook_queries;
-	global $currenthook;
+    global $currenthook;
+
 	$lasthook = $currenthook;
 	$currenthook = $hookname;
-	static $hookcomment = array();
-	if ($args===false) $args = array();
-	$active = "";
+	static $hookcomment = [];
+	if ($args===false) $args = [];
+	$active = '';
 	if (!$allowinactive) $active = " ". DB::prefix("modules") .".active=1 AND";
-	if (!is_array($args)){
+    if (!is_array($args))
+    {
 		$where = $mostrecentmodule;
-		if (!$where) {
-			global $SCRIPT_NAME;
+        if (!$where)
+        {
+            global $SCRIPT_NAME;
+
 			$where = $SCRIPT_NAME;
 		}
 		debug("Args parameter to modulehook $hookname from $where is not an array.");
 	}
 	if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && !isset($hookcomment[$hookname])){
 		rawoutput("<!--Module Hook: $hookname; allow inactive: ".($allowinactive?"true":"false")."; only this module: ".($only!==false?$only:"any module"));
-		if (!is_array($args)) {
+        if (!is_array($args))
+        {
 			$arg = $args . " (NOT AN ARRAY!)";
 			rawoutput("  arg: $arg");
-		} else {
+        }
+        else
+        {
 			reset($args);
-			foreach ($args as $key=>$val) {
+            foreach ($args as $key=>$val)
+            {
 				$arg = $key." = ";
-				if (is_array($val)){
-					$arg.="array(".count($val).")";
-				}elseif (is_object($val)){
-					$arg.="object(".get_class($val).")";
-				}else{
-					$arg.=htmlentities(substr($val,0,25), ENT_COMPAT, getsetting("charset", "UTF-8"));
-				}
+                if (is_array($val)) { $arg .= "array(".count($val).")"; }
+                elseif (is_object($val)) { $arg.= "object(".get_class($val).")"; }
+                else { $arg .= htmlentities(substr($val,0,25), ENT_COMPAT, getsetting('charset', 'UTF-8')); }
+
 				rawoutput("  arg: $arg");
 			}
 		}
@@ -439,9 +488,12 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 	}
 	if (isset($modulehook_queries[$hookname]) //This data was pre fetched in mass_module_prepare
 		&& $allowinactive == false //We only ever prefetch for active modules, if we're doing inactive, do the regular query.
-		){
+        )
+    {
 		$result = $modulehook_queries[$hookname];
-	}else{
+    }
+    else
+    {
 		$sql =
 			"SELECT
 				" . DB::prefix("module_hooks") . ".modulename,
@@ -465,33 +517,30 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 	// back through
 	// Try at least and fix up a bogus arg so it doesn't cause additional
 	// problems later.
-	if (!is_array($args)) {
-		$args = array('bogus_args'=>$args);
-	}
+	if (!is_array($args)) { $args = ['bogus_args' => $args]; }
 
 	// Save off the mostrecent module since having that change can change
 	// behaviour especially if a module calls modulehooks itself or calls
 	// library functions which cause them to be called.
 	$mod = $mostrecentmodule;
 
-	while ($row = DB::fetch_assoc($result)){
+    while ($row = DB::fetch_assoc($result))
+    {
 		// If we are only running hooks for a specific module, skip all
 		// others.
 		if ($only !== false && $row['modulename']!=$only) continue;
 		// Skip any module invocations which should be blocked.
 
-		if (!array_key_exists($row['modulename'],$blocked_modules)){
-			$blocked_modules[$row['modulename']] = false;
-		}
-		if (!array_key_exists($row['modulename'],$unblocked_modules)){
-			$unblocked_modules[$row['modulename']] = false;
-		}
-		if (($block_all_modules || $blocked_modules[$row['modulename']]) &&
-				!$unblocked_modules[$row['modulename']]) {
+		if (!array_key_exists($row['modulename'] ,$blocked_modules)) { $blocked_modules[$row['modulename']] = false; }
+		if (!array_key_exists($row['modulename'], $unblocked_modules)) { $unblocked_modules[$row['modulename']] = false; }
+
+        if (($block_all_modules || $blocked_modules[$row['modulename']]) && !$unblocked_modules[$row['modulename']])
+        {
 			continue;
 		}
 
-		if (injectmodule($row['modulename'], $allowinactive)) {
+        if (injectmodule($row['modulename'], $allowinactive))
+        {
 			$oldnavsection = $navsection;
 			tlschema("module-{$row['modulename']}");
 			// Pass the args into the function and reassign them to the
@@ -504,22 +553,23 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 			// Test the condition code
 			if (!array_key_exists('whenactive',$row)) $row['whenactive'] = '';
 			$cond = trim($row['whenactive']);
-			if ($cond == "" || module_condition($cond) == true) {
+            if ($cond == '' || module_condition($cond) == true)
+            {
 				// call the module's hook code
 				// $outputbeforehook=$output;
 				// $output=new LotgdOutputCollector;
 				//before, this was just string switching, NOW we make new objects everytime Oo craaaazy load, I am removing this. if you want to collapse, put it in, it's a MODULE
 
 
-/*******************************************************/
+                /*******************************************************/
 				$starttime = microtime(true);
-/*******************************************************/
+                /*******************************************************/
 				if (function_exists($row['function'])) {
 					$res = $row['function']($hookname, $args);
 				} else {
 					trigger_error("Unknown function {$row['function']} for hookname $hookname in module {$row['module']}.", E_USER_WARNING);
 				}
-/*******************************************************/
+                /*******************************************************/
 				$endtime = microtime(true);
 				if (($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))){
 					debug("Slow Hook (".round($endtime-$starttime,2)."s): $hookname - {$row['modulename']}`n");
@@ -528,7 +578,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 					$sql="INSERT INTO ".DB::prefix('debug')." VALUES (0,'hooktime','".$hookname."','".$row['modulename']."','".($endtime-$starttime)."');";
 					$resultdebug=DB::query($sql);
 				}
-/*******************************************************/
+                /*******************************************************/
 				// $outputafterhook = $output;
 				// $output=$outputbeforehook;
 				// test to see if we had any output and if the module allows
@@ -538,7 +588,7 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 					trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>$hookname</b>.",E_USER_WARNING);
 					$res = $args;
 				}
-				// if ($testout >"" &&
+				// if ($testout >'' &&
 				// 		$hookname!="collapse{" &&
 				// 		$hookname!="}collapse" &&
 				// 		$hookname!="collapse-nav{" &&
@@ -572,92 +622,127 @@ function modulehook($hookname, $args=false, $allowinactive=false, $only=false){
 	return $args;
 }
 
-$module_settings = array();
-function get_all_module_settings($module=false){
+function get_all_module_settings($module=false)
+{
 	//returns an associative array of all the settings for the given module
-	global $module_settings,$mostrecentmodule;
+	global $mostrecentmodule;
 	if ($module === false) $module = $mostrecentmodule;
 
-	load_module_settings($module);
-	return $module_settings[$module];
+	return load_module_settings($module);
 }
 
-function get_module_setting($name,$module=false){
-	global $module_settings,$mostrecentmodule;
+function get_module_setting($name, $module = false)
+{
+    global $mostrecentmodule;
+
 	if ($module === false) $module = $mostrecentmodule;
 
-	load_module_settings($module);
-	if (isset($module_settings[$module][$name])) {
-		return $module_settings[$module][$name];
-	}else{
+	$module_settings = load_module_settings($module);
+    if (isset($module_settings[$name]))
+    {
+		return $module_settings[$name];
+    }
+    else
+    {
 		$info = get_module_info($module);
-		if (isset($info['settings'][$name])){
-			if (is_array($info['settings'][$name])) {
+        if (isset($info['settings'][$name]))
+        {
+            if (is_array($info['settings'][$name]))
+            {
 				$v = $info['settings'][$name][0];
 				$x = explode("|", $v);
-			} else {
-				$x = explode("|",$info['settings'][$name]);
-			}
-			if (isset($x[1])){
-				return $x[1];
-			}
+            }
+            else { $x = explode("|",$info['settings'][$name]); }
+            if (isset($x[1]))
+            {
+                //-- Set and return default setting
+                set_module_setting($name, $x[1], $module);
+
+                return $x[1];
+            }
 		}
 		return NULL;
 	}
 }
 
-function set_module_setting($name,$value,$module=false){
-	if ($name == "showFormTabIndex") return true;
-	global $module_settings,$mostrecentmodule;
+function set_module_setting($name, $value, $module = false)
+{
+    if ($name == "showFormTabIndex") return true;
+
+    global $mostrecentmodule;
+
 	if ($module === false) $module = $mostrecentmodule;
-	load_module_settings($module);
-	if (isset($module_settings[$module][$name])){
-		$sql = "UPDATE " . DB::prefix("module_settings") . " SET value='".addslashes($value)."' WHERE modulename='$module' AND setting='".addslashes($name)."'";
+	$module_settings = load_module_settings($module);
+    if (isset($module_settings[$name]))
+    {
+		$sql = "UPDATE " . DB::prefix('module_settings') . " SET value='".addslashes($value)."' WHERE modulename='$module' AND setting='".addslashes($name)."'";
 		DB::query($sql);
-	}else{
-		$sql = "INSERT INTO " . DB::prefix("module_settings") . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
+    }
+    else
+    {
+		$sql = "INSERT INTO " . DB::prefix('module_settings') . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
 		DB::query($sql);
 	}
-	invalidatedatacache("modulesettings-settings-$module");
-	$module_settings[$module][$name] = $value;
+	invalidatedatacache("module-settings-$module");
 }
 
-function increment_module_setting($name, $value=1, $module=false){
-	global $module_settings,$mostrecentmodule;
+function increment_module_setting($name, $value = 1, $module = false)
+{
+    global $mostrecentmodule;
+
 	$value = (float)$value;
 	if ($module === false) $module = $mostrecentmodule;
-	load_module_settings($module);
-	if (isset($module_settings[$module][$name])){
-		$sql = "UPDATE " . DB::prefix("module_settings") . " SET value=value+$value WHERE modulename='$module' AND setting='".addslashes($name)."'";
+	$module_settings = load_module_settings($module);
+    if (isset($module_settings[$name]))
+    {
+		$sql = "UPDATE " . DB::prefix('module_settings') . " SET value=value+$value WHERE modulename='$module' AND setting='".addslashes($name)."'";
 		DB::query($sql);
-	}else{
-		$sql = "INSERT INTO " . DB::prefix("module_settings") . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
+    }
+    else
+    {
+		$sql = "INSERT INTO " . DB::prefix('module_settings') . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
 		DB::query($sql);
 	}
-	invalidatedatacache("modulesettings-settings-$module");
-	$module_settings[$module][$name] += $value;
+    invalidatedatacache("module-settings-$module", true);
 }
 
-function clear_module_settings($module=false){
-	global $module_settings,$mostrecentmodule;
-	if ($module === false) $module = $mostrecentmodule;
-	if (isset($module_settings[$module])){
-		debug("Deleted module settings cache for $module.");
-		unset($module_settings[$module]);
-		invalidatedatacache("modulesettings-settings-$module");
-	}
+function clear_module_settings($module = false)
+{
+    global $mostrecentmodule;
+
+    if ($module === false) $module = $mostrecentmodule;
+
+    debug("Deleted module settings cache for $module.");
+	invalidatedatacache("module-settings-$module");
 }
 
-function load_module_settings($module){
-	global $module_settings;
-	if (!isset($module_settings[$module])){
-		$module_settings[$module] = array();
+/**
+ * Load settings of a module
+ *
+ * @param string $module
+ *
+ * @return array
+ */
+function load_module_settings($module)
+{
+    $keyCache = "module-settings-$module";
+
+    $module_settings = datacache($keyCache, 86400, true);
+
+    if (! is_array($module_settings))
+    {
+		$module_settings = [];
 		$sql = "SELECT * FROM " . DB::prefix("module_settings") . " WHERE modulename='$module'";
-		$result = DB::query_cached($sql,"modulesettings-settings-$module");
-		while ($row = DB::fetch_assoc($result)){
-			$module_settings[$module][$row['setting']] = $row['value'];
-		}//end while
-	}//end if
+		$result = DB::query($sql);
+        while ($row = DB::fetch_assoc($result))
+        {
+			$module_settings[$row['setting']] = $row['value'];
+        }//end while
+
+        updatedatacache($keyCache, $module_settings, true);
+    }//end if
+
+    return $module_settings;
 }//end function
 
 
@@ -668,7 +753,8 @@ function module_delete_objprefs($objtype, $objid)
 	massinvalidate("objprefs-objpref-$objtype-$objid");
 }
 
-function get_module_objpref($type, $objid, $name, $module=false){
+function get_module_objpref($type, $objid, $name, $module = false)
+{
 	global $mostrecentmodule;
 	if ($module === false) $module = $mostrecentmodule;
 	$sql = "SELECT value FROM ".DB::prefix("module_objprefs")." WHERE modulename='$module' AND objtype='$type' AND setting='".addslashes($name)."' AND objid='$objid' ";
@@ -680,21 +766,25 @@ function get_module_objpref($type, $objid, $name, $module=false){
 	//we couldn't find this elsewhere, load the default value if it exists.
 	$info = get_module_info($module);
 	if (isset($info['prefs-'.$type][$name])){
-		if (is_array($info['prefs-'.$type][$name])) {
+        if (is_array($info['prefs-'.$type][$name]))
+        {
 			$v = $info['prefs-'.$type][$name][0];
 			$x = explode("|", $v);
-		} else {
-			$x = explode("|",$info['prefs-'.$type][$name]);
-		}
-		if (isset($x[1])){
-			set_module_objpref($type,$objid,$name,$x[1],$module);
+        }
+        else { $x = explode("|",$info['prefs-'.$type][$name]); }
+        if (isset($x[1]))
+        {
+            set_module_objpref($type,$objid,$name,$x[1],$module);
+
 			return $x[1];
 		}
-	}
+    }
+
 	return NULL;
 }
 
-function set_module_objpref($objtype,$objid,$name,$value,$module=false){
+function set_module_objpref($objtype,$objid,$name,$value,$module=false)
+{
 	global $mostrecentmodule;
 	if ($module === false) $module = $mostrecentmodule;
 	// Delete the old version and insert the new
@@ -703,13 +793,16 @@ function set_module_objpref($objtype,$objid,$name,$value,$module=false){
 	invalidatedatacache("objprefs-objpref-$objtype-$objid-$name-$module");
 }
 
-function increment_module_objpref($objtype,$objid,$name,$value=1,$module=false) {
-	global $mostrecentmodule;
+function increment_module_objpref($objtype,$objid,$name,$value=1,$module=false)
+{
+    global $mostrecentmodule;
+
 	$value = (float)$value;
 	if ($module === false) $module = $mostrecentmodule;
 	$sql = "UPDATE " . DB::prefix("module_objprefs") . " SET value=value+$value WHERE modulename='$module' AND setting='".addslashes($name)."' AND objtype='".addslashes($objtype)."' AND objid=$objid;";
 	$result= DB::query($sql);
-	if (DB::affected_rows($result)==0){
+    if (DB::affected_rows($result) == 0)
+    {
 		//if the update did not do anything, insert the row
 		$sql = "INSERT INTO " . DB::prefix("module_objprefs") . "(modulename,objtype,setting,objid,value) VALUES ('$module', '$objtype', '$name', '$objid', '".addslashes($value)."')";
 		DB::query($sql);
@@ -718,14 +811,17 @@ function increment_module_objpref($objtype,$objid,$name,$value=1,$module=false) 
 }
 
 
-function module_delete_userprefs($user){
+function module_delete_userprefs($user)
+{
 	$sql = "DELETE FROM " . DB::prefix("module_userprefs") . " WHERE userid='$user'";
 	DB::query($sql);
 }
 
-$module_prefs=array();
-function get_all_module_prefs($module=false,$user=false){
-	global $module_prefs,$mostrecentmodule,$session;
+$module_prefs = [];
+function get_all_module_prefs($module=false,$user=false)
+{
+    global $module_prefs, $mostrecentmodule, $session;
+
 	if ($module === false) $module = $mostrecentmodule;
 	if ($user === false) $user = $session['user']['acctid'];
 	load_module_prefs($module,$user);
@@ -733,49 +829,57 @@ function get_all_module_prefs($module=false,$user=false){
 	return $module_prefs[$user][$module];
 }
 
-function get_module_pref($name,$module=false,$user=false){
-	global $module_prefs,$mostrecentmodule,$session;
+function get_module_pref($name, $module = false, $user = false)
+{
+    global $module_prefs,$mostrecentmodule,$session;
+
 	if ($module === false) $module = $mostrecentmodule;
-	if ($user===false) {
+    if ($user===false)
+    {
 		if(isset($session['user']['loggedin']) && $session['user']['loggedin']) $user = $session['user']['acctid'];
 		else $user = 0;
 	}
 
-	if (isset($module_prefs[$user][$module][$name])) {
-		return $module_prefs[$user][$module][$name];
-	}
+	if (isset($module_prefs[$user][$module][$name])) { return $module_prefs[$user][$module][$name]; }
 
 	//load here, not before
 	load_module_prefs($module,$user);
 	//check if *now* it's loaded
-	if (isset($module_prefs[$user][$module][$name])) {
-		return $module_prefs[$user][$module][$name];
-	}
+	if (isset($module_prefs[$user][$module][$name])) { return $module_prefs[$user][$module][$name]; }
 
 	if (!is_module_active($module)) return NULL;
 
 	//we couldn't find this elsewhere, load the default value if it exists.
 	$info = get_module_info($module);
-	if (isset($info['prefs'][$name])){
-		if (is_array($info['prefs'][$name])) {
+    if (isset($info['prefs'][$name]))
+    {
+        if (is_array($info['prefs'][$name]))
+        {
 			$v = $info['prefs'][$name][0];
 			$x = explode("|", $v);
-		} else {
+        }
+        else
+        {
 			$x = explode("|",$info['prefs'][$name]);
 		}
-		if (isset($x[1])){
-			set_module_pref($name,$x[1],$module,$user);
+        if (isset($x[1]))
+        {
+            set_module_pref($name, $x[1], $module, $user);
+
 			return $x[1];
 		}
 	}
 	return NULL;
 }
 
-function set_module_pref($name,$value,$module=false,$user=false){
-	global $module_prefs,$mostrecentmodule,$session;
+function set_module_pref($name, $value, $module = false, $user=false)
+{
+    global $module_prefs, $mostrecentmodule, $session;
+
 	if ($module === false) $module = $mostrecentmodule;
-	if ($user === false) $uid=$session['user']['acctid'];
-	else $uid = $user;
+	if ($user === false) $uid = $session['user']['acctid'];
+    else $uid = $user;
+
 	load_module_prefs($module, $uid);
 
 	//don't write to the DB if the user isn't logged in.
@@ -785,43 +889,55 @@ function set_module_pref($name,$value,$module=false,$user=false){
 		return;
 	}
 
-	if (isset($module_prefs[$uid][$module][$name])){
+    if (isset($module_prefs[$uid][$module][$name]))
+    {
 		$sql = "UPDATE " . DB::prefix("module_userprefs") . " SET value='".addslashes($value)."' WHERE modulename='$module' AND setting='$name' AND userid='$uid'";
 		DB::query($sql);
-	}else{
+    }
+    else
+    {
 		$sql = "INSERT INTO " . DB::prefix("module_userprefs"). " (modulename,setting,userid,value) VALUES ('$module','$name','$uid','".addslashes($value)."')";
 		DB::query($sql);
 	}
 	$module_prefs[$uid][$module][$name] = $value;
 }
 
-function increment_module_pref($name,$value=1,$module=false,$user=false){
-	global $module_prefs,$mostrecentmodule,$session;
+function increment_module_pref($name, $value = 1, $module = false, $user = false)
+{
+    global $module_prefs, $mostrecentmodule, $session;
+
 	$value = (float)$value;
 	if ($module === false) $module = $mostrecentmodule;
 	if ($user === false) $uid=$session['user']['acctid'];
-	else $uid = $user;
+    else $uid = $user;
+
 	load_module_prefs($module, $uid);
 
 	//don't write to the DB if the user isn't logged in.
-	if (!$session['user']['loggedin'] && !$user) {
+    if (!$session['user']['loggedin'] && !$user)
+    {
 		// We do need to save to the loaded copy here however
-		$module_prefs[$uid][$module][$name] += $value;
+        $module_prefs[$uid][$module][$name] += $value;
+
 		return;
 	}
 
-	if (isset($module_prefs[$uid][$module][$name])){
+    if (isset($module_prefs[$uid][$module][$name]))
+    {
 		$sql = "UPDATE " . DB::prefix("module_userprefs") . " SET value=value+$value WHERE modulename='$module' AND setting='$name' AND userid='$uid'";
 		DB::query($sql);
 		$module_prefs[$uid][$module][$name] += $value;
-	}else{
+    }
+    else
+    {
 		$sql = "INSERT INTO " . DB::prefix("module_userprefs"). " (modulename,setting,userid,value) VALUES ('$module','$name','$uid','".addslashes($value)."')";
 		DB::query($sql);
 		$module_prefs[$uid][$module][$name] = $value;
 	}
 }
 
-function clear_module_pref($name,$module=false,$user=false){
+function clear_module_pref($name, $module = false, $user = false)
+{
  	global $module_prefs,$mostrecentmodule,$session;
 	if ($module === false) $module = $mostrecentmodule;
 	if ($user === false) $uid=$session['user']['acctid'];
@@ -829,89 +945,97 @@ function clear_module_pref($name,$module=false,$user=false){
 	load_module_prefs($module, $uid);
 
 	//don't write to the DB if the user isn't logged in.
-	if (!$session['user']['loggedin'] && !$user) {
+    if (!$session['user']['loggedin'] && !$user)
+    {
 		// We do need to trash the loaded copy here however
-		unset($module_prefs[$uid][$module][$name]);
+        unset($module_prefs[$uid][$module][$name]);
+
 		return;
 	}
 
-	if (isset($module_prefs[$uid][$module][$name])){
+    if (isset($module_prefs[$uid][$module][$name]))
+    {
 		$sql = "DELETE FROM " . DB::prefix("module_userprefs") . " WHERE modulename='$module' AND setting='$name' AND userid='$uid'";
 		DB::query($sql);
 	}
 	unset($module_prefs[$uid][$module][$name]);
 }
 
-function load_module_prefs($module, $user=false){
-	global $module_prefs,$session;
+function load_module_prefs($module, $user = false)
+{
+    global $module_prefs, $session;
+
 	if ($user===false) $user = $session['user']['acctid'];
 	if (!isset($module_prefs[$user])) $module_prefs[$user] = array();
-	if (!isset($module_prefs[$user][$module])){
+    if (!isset($module_prefs[$user][$module]))
+    {
 		$module_prefs[$user][$module] = array();
 		$sql = "SELECT setting,value FROM " . DB::prefix("module_userprefs") . " WHERE modulename='$module' AND userid='$user'";
 		$result = DB::query($sql);
-		while ($row = DB::fetch_assoc($result)){
+        while ($row = DB::fetch_assoc($result))
+        {
 			$module_prefs[$user][$module][$row['setting']] = $row['value'];
 		}//end while
 	}//end if
 }//end function
 
-function get_module_info($shortname){
+function get_module_info($shortname)
+{
 	global $mostrecentmodule;
 
-	$moduleinfo = array();
+	$moduleinfo = [];
 
 	// Save off the mostrecent module.
 	$mod = $mostrecentmodule;
 
-	if(injectmodule($shortname,true)) {
-		$fname = $shortname."_getmoduleinfo";
-		if (function_exists($fname)){
+    if(injectmodule($shortname,true))
+    {
+		$fname = "{$shortname}_getmoduleinfo";
+        if (function_exists($fname))
+        {
 			tlschema("module-$shortname");
 			$moduleinfo = $fname();
 			tlschema();
 			// Don't pick up this text unless we need it.
-			if (!isset($moduleinfo['name']) ||
-					!isset($moduleinfo['category']) ||
-					!isset($moduleinfo['author']) ||
-					!isset($moduleinfo['version'])) {
+			if (!isset($moduleinfo['name']) || !isset($moduleinfo['category']) || !isset($moduleinfo['author']) || !isset($moduleinfo['version']))
+            {
 				$ns = translate_inline("Not specified","common");
 			}
-			if (!isset($moduleinfo['name']))
-				$moduleinfo['name']="$ns ($shortname)";
-			if (!isset($moduleinfo['category']))
-				$moduleinfo['category']="$ns ($shortname)";
-			if (!isset($moduleinfo['author']))
-				$moduleinfo['author']="$ns ($shortname)";
-			if (!isset($moduleinfo['version']))
-				$moduleinfo['version']="0.0";
-			if (!isset($moduleinfo['download']))
-				$moduleinfo['download'] = "";
-			if (!isset($moduleinfo['description']))
-				$moduleinfo['description'] = "";
+			if (!isset($moduleinfo['name'])) $moduleinfo['name'] = "$ns ($shortname)";
+			if (!isset($moduleinfo['category'])) $moduleinfo['category'] = "$ns ($shortname)";
+			if (!isset($moduleinfo['author'])) $moduleinfo['author'] = "$ns ($shortname)";
+			if (!isset($moduleinfo['version'])) $moduleinfo['version'] = "0.0";
+			if (!isset($moduleinfo['download'])) $moduleinfo['download'] = '';
+			if (!isset($moduleinfo['description'])) $moduleinfo['description'] = '';
+        }
+
+        if (!is_array($moduleinfo) || count($moduleinfo) < 2)
+        {
+			$mf = translate_inline('Missing function', 'common');
+			$moduleinfo = [
+				'name' => "$mf ({$shortname}_getmoduleinfo)",
+				'version' => '0.0',
+				'author' => "$mf ({$shortname}_getmoduleinfo)",
+		    	'category' => "$mf ({$shortname}_getmoduleinfo)",
+				'download' => '',
+            ];
 		}
-		if (!is_array($moduleinfo) || count($moduleinfo)<2){
-			$mf = translate_inline("Missing function","common");
-			$moduleinfo = array(
-					"name"=>"$mf ({$shortname}_getmoduleinfo)",
-					"version"=>"0.0",
-					"author"=>"$mf ({$shortname}_getmoduleinfo)",
-					"category"=>"$mf ({$shortname}_getmoduleinfo)",
-					"download"=>"",
-				);
-		}
-	} else {
+    }
+    else
+    {
 		// This module couldn't be injected at all.
-		return array();
+		return [];
 	}
 	$mostrecentmodule = $mod;
-	if (!isset($moduleinfo['requires']))
-		$moduleinfo['requires'] = array();
+    if (!isset($moduleinfo['requires'])) $moduleinfo['requires'] = [];
+
 	return $moduleinfo;
 }
 
-function module_wipehooks() {
-	global $mostrecentmodule;
+function module_wipehooks()
+{
+    global $mostrecentmodule;
+
 	//lock the module hooks table.
 	$sql = "LOCK TABLES ".DB::prefix("module_hooks")." WRITE";
 	DB::query($sql);
@@ -919,7 +1043,8 @@ function module_wipehooks() {
 	//invalidate data caches for module hooks associated with this module.
 	$sql = "SELECT location FROM ".DB::prefix("module_hooks")." WHERE modulename='$mostrecentmodule'";
 	$result = DB::query($sql);
-	while ($row = DB::fetch_assoc($result)){
+    while ($row = DB::fetch_assoc($result))
+    {
 		invalidatedatacache("hooks-hook-".$row['location']);
 	}
 	invalidatedatacache("moduleprepare");
@@ -936,24 +1061,27 @@ function module_wipehooks() {
 
 }
 
-function module_addeventhook($type, $chance){
-	global $mostrecentmodule;
+function module_addeventhook($type, $chance)
+{
+    global $mostrecentmodule;
+
 	debug("Adding an event hook on $type events for $mostrecentmodule");
 	$sql = "DELETE FROM " . DB::prefix("module_event_hooks") . " WHERE modulename='$mostrecentmodule' AND event_type='$type'";
 	DB::query($sql);
 	$sql = "INSERT INTO " . DB::prefix("module_event_hooks") . " (event_type,modulename,event_chance) VALUES ('$type', '$mostrecentmodule','".addslashes($chance)."')";
 	DB::query($sql);
-	invalidatedatacache("event-".$type);
+	invalidatedatacache("event-$type");
 }
 
-function module_drophook($hookname,$functioncall=false){
+function module_drophook($hookname, $functioncall = false)
+{
 	global $mostrecentmodule;
-	if ($functioncall===false)
-		$functioncall=$mostrecentmodule."_dohook";
+    if ($functioncall === false) $functioncall= "{$mostrecentmodule}_dohook";
+
 	$sql = "DELETE FROM " . DB::prefix("module_hooks") . " WHERE modulename='$mostrecentmodule' AND location='".addslashes($hookname)."' AND function='".addslashes($functioncall)."'";
 	DB::query($sql);
-	invalidatedatacache("hooks-hook-".$hookname);
-	invalidatedatacache("moduleprepare");
+	invalidatedatacache("hooks-hook-$hookname");
+	invalidatedatacache('moduleprepare');
 }
 
 /**
@@ -965,8 +1093,9 @@ function module_drophook($hookname,$functioncall=false){
   * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
   * @param string $whenactive An expression that should be evaluated before triggering the event, if not specified, none.
    */
-function module_addhook($hookname,$functioncall=false,$whenactive=false){
-	module_addhook_priority($hookname,50,$functioncall,$whenactive);
+function module_addhook($hookname, $functioncall = false, $whenactive = false)
+{
+	module_addhook_priority($hookname, 50, $functioncall, $whenactive);
 }
 
 /**
@@ -979,11 +1108,13 @@ function module_addhook($hookname,$functioncall=false,$whenactive=false){
   * @param string $functioncall The function that should be called, if not specified, use {modulename}_dohook() as the function
   * @param string $whenactive An expression that should be evaluated before triggering the event, if not specified, none.
    */
-function module_addhook_priority($hookname,$priority=50,$functioncall=false,$whenactive=false){
-	global $mostrecentmodule;
-	module_drophook($hookname,$functioncall);
+function module_addhook_priority($hookname, $priority = 50, $functioncall = false, $whenactive = false)
+{
+    global $mostrecentmodule;
 
-	if ($functioncall===false) $functioncall=$mostrecentmodule."_dohook";
+	module_drophook($hookname, $functioncall);
+
+	if ($functioncall===false) $functioncall = "{$mostrecentmodule}_dohook";
 	if ($whenactive === false) $whenactive = '';
 
 	debug("Adding a hook at $hookname for $mostrecentmodule to $functioncall which is active on condition '$whenactive'");
@@ -991,11 +1122,12 @@ function module_addhook_priority($hookname,$priority=50,$functioncall=false,$whe
 	//normally that won't be the case, and so this doesn't have any performance implications.
 	$sql = "REPLACE INTO " . DB::prefix("module_hooks") . " (modulename,location,function,whenactive,priority) VALUES ('$mostrecentmodule','".addslashes($hookname)."','".addslashes($functioncall)."','".addslashes($whenactive)."','".addslashes($priority)."')";
 	DB::query($sql);
-	invalidatedatacache("hooks-hook-".$hookname);
-	invalidatedatacache("moduleprepare");
+	invalidatedatacache("hooks-hook-$hookname");
+	invalidatedatacache('moduleprepare');
 }
 
-function module_sem_acquire(){
+function module_sem_acquire()
+{
 	//DANGER DANGER WILL ROBINSON
 	//use of this function can be EXTREMELY DANGEROUS
 	//If there is ANY WAY you can avoid using it, I strongly recommend you
@@ -1015,23 +1147,27 @@ function module_sem_acquire(){
 	DB::query($sql);
 }
 
-function module_sem_release(){
+function module_sem_release()
+{
 	//please see warnings in module_sem_acquire()
-	$sql = "UNLOCK TABLES";
+    $sql = 'UNLOCK TABLES';
+
 	DB::query($sql);
 }
 
-function module_collect_events($type, $allowinactive=false)
+function module_collect_events($type, $allowinactive = false)
 {
 	global $session, $playermount;
-	global $blocked_modules, $block_all_modules, $unblocked_modules;
-	$active = "";
-	$events = array();
+    global $blocked_modules, $block_all_modules, $unblocked_modules;
+
+	$active = '';
+	$events = [];
 	if (!$allowinactive) $active = " active=1 AND";
 
 	$sql = "SELECT " . DB::prefix("module_event_hooks") . ".* FROM " . DB::prefix("module_event_hooks") . " INNER JOIN " . DB::prefix("modules") . " ON ". DB::prefix("modules") . ".modulename = " . DB::prefix("module_event_hooks") . ".modulename WHERE $active event_type='$type' ORDER BY RAND(".e_rand().")";
 	$result = DB::query_cached($sql,"event-{$type}-".((int)$allowinactive));
-	while ($row = DB::fetch_assoc($result)){
+    while ($row = DB::fetch_assoc($result))
+    {
 		// The event_chance bit needs to return a value, but it can do that
 		// in any way it wants, and can have if/then or other logical
 		// structures, so we cannot just force the 'return' syntax unlike
@@ -1040,93 +1176,111 @@ function module_collect_events($type, $allowinactive=false)
 		$chance = eval($row['event_chance'].";");
 		$err = ob_get_contents();
 		ob_end_clean();
-		if ($err > ""){
+        if ($err > '')
+        {
 			debug(array("error"=>$err,"Eval code"=>$row['event_chance']));
 		}
 		if ($chance < 0) $chance = 0;
 		if ($chance > 100) $chance = 100;
-		if (($block_all_modules || array_key_exists($row['modulename'],$blocked_modules) && $blocked_modules[$row['modulename']]) &&
-				(!array_key_exists($row['modulename'],$unblocked_modules) || !$unblocked_modules[$row['modulename']])) {
+        if ( ($block_all_modules || array_key_exists($row['modulename'], $blocked_modules)
+            && $blocked_modules[$row['modulename']])
+            && (!array_key_exists($row['modulename'],$unblocked_modules) || !$unblocked_modules[$row['modulename']]))
+        {
 			$chance = 0;
 		}
-		$events[] = array('modulename'=>$row['modulename'],
-				'rawchance' => $chance);
+		$events[] = array('modulename'=>$row['modulename'], 'rawchance' => $chance);
 	}
 
 	// Now, normalize all of the event chances
 	$sum = 0;
 	reset($events);
-	foreach($events as $event) {
+    foreach($events as $event)
+    {
 		$sum += $event['rawchance'];
 	}
 	reset($events);
-	foreach($events as $index=>$event) {
-		if ($sum == 0) {
-			$events[$index]['normchance'] = 0;
-		} else {
-			$events[$index]['normchance'] =
-				round($event['rawchance']/$sum*100,3);
+    foreach($events as $index=>$event)
+    {
+        if ($sum == 0) { $events[$index]['normchance'] = 0; }
+        else
+        {
+			$events[$index]['normchance'] = round($event['rawchance']/$sum*100, 3);
 			// If an event requests 1% chance, don't give them more!
-			if ($events[$index]['normchance'] > $event['rawchance'])
-				$events[$index]['normchance'] = $event['rawchance'];
+			if ($events[$index]['normchance'] > $event['rawchance']) $events[$index]['normchance'] = $event['rawchance'];
 		}
-	}
+    }
+
 	return modulehook("collect-events", $events);
 }
 
-function module_events($eventtype, $basechance, $baseLink = false) {
-	if ($baseLink === false){
-		global $PHP_SELF;
+function module_events($eventtype, $basechance, $baseLink = false)
+{
+    if ($baseLink === false)
+    {
+        global $PHP_SELF;
+
 		$baseLink = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1)."?";
-	}else{
+    }
+    else
+    {
 		//debug("Base link was specified as $baseLink");
 		//debug(debug_backtrace());
-	}
-	if (e_rand(1, 100) <= $basechance) {
+    }
+
+    if (e_rand(1, 100) <= $basechance)
+    {
 		global $PHP_SELF;
 		$events = module_collect_events($eventtype);
 		$chance = r_rand(1, 100);
 		reset($events);
 		$sum = 0;
-		foreach($events as $event) {
-			if ($event['rawchance'] == 0) {
-				continue;
-			}
-			if ($chance > $sum && $chance <= $sum + $event['normchance']) {
+        foreach($events as $event)
+        {
+            if ($event['rawchance'] == 0) { continue; }
+
+            if ($chance > $sum && $chance <= $sum + $event['normchance'])
+            {
 				$_POST['i_am_a_hack'] = 'true';
 				tlschema("events");
 				output("`^`c`bSomething Special!`c`b`0");
 				tlschema();
 				$op = httpget('op');
-				httpset('op', "");
+				httpset('op', '');
 				module_do_event($eventtype, $event['modulename'], false, $baseLink);
-				httpset('op', $op);
+                httpset('op', $op);
+
 				return 1;
 			}
 			$sum += $event['normchance'];
 		}
-	}
+    }
+
 	return 0;
 }
 
-function module_do_event($type, $module, $allowinactive=false, $baseLink=false)
+function module_do_event($type, $module, $allowinactive = false, $baseLink = false)
 {
 	global $navsection;
 
-	if ($baseLink === false){
-		global $PHP_SELF;
+    if ($baseLink === false)
+    {
+        global $PHP_SELF;
+
 		$baseLink = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1)."?";
-	}else{
+    }
+    else
+    {
 		//debug("Base link was specified as $baseLink");
 		//debug(debug_backtrace());
 	}
 	// Save off the mostrecent module since having that change can change
 	// behaviour especially if a module calls modulehooks itself or calls
 	// library functions which cause them to be called.
-	if (!isset($mostrecentmodule)) $mostrecentmodule = "";
+	if (!isset($mostrecentmodule)) $mostrecentmodule = '';
 	$mod = $mostrecentmodule;
 	$_POST['i_am_a_hack'] = 'true';
-	if(injectmodule($module, $allowinactive)) {
+    if(injectmodule($module, $allowinactive))
+    {
 		$oldnavsection = $navsection;
 		tlschema("module-$module");
 		$fname = $module."_runevent";
@@ -1137,7 +1291,7 @@ function module_do_event($type, $module, $allowinactive=false, $baseLink=false)
 		//revert nav section after we're done here.
 		$navsection = $oldnavsection;
 	}
-	$mostrecentmodule=$mod;
+	$mostrecentmodule = $mod;
 }
 
 function event_sort($a, $b)
@@ -1145,13 +1299,15 @@ function event_sort($a, $b)
 	return strcmp($a['modulename'], $b['modulename']);
 }
 
-function module_display_events($eventtype, $forcescript=false) {
-	global $PHP_SELF, $session;
-	if (!($session['user']['superuser'] & SU_DEVELOPER)) return;
-	if ($forcescript === false)
-		$script = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1);
-	else
-		$script = $forcescript;
+function module_display_events($eventtype, $forcescript=false)
+{
+    global $PHP_SELF, $session;
+
+    if (! ($session['user']['superuser'] & SU_DEVELOPER)) return;
+
+	if ($forcescript === false) $script = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1);
+    else $script = $forcescript;
+
 	$events = module_collect_events($eventtype,true);
 
 	if (!is_array($events) || count($events) == 0) return;
@@ -1168,11 +1324,13 @@ function module_display_events($eventtype, $forcescript=false) {
 	rawoutput("<th>$name</th><th>$rchance</th><th>$nchance</th>");
 	rawoutput("</tr></thead>");
 	$i = 0;
-	foreach($events as $event) {
+    foreach($events as $event)
+    {
 		// Each event is an associative array of 'modulename',
 		// 'rawchance' and 'normchance'
 		$i++;
-		if ($event['modulename']) {
+        if ($event['modulename'])
+        {
 			$link = "module-{$event['modulename']}";
 			$name = $event['modulename'];
 		}
@@ -1184,7 +1342,7 @@ function module_display_events($eventtype, $forcescript=false) {
 		$rl2 = str_replace("?", "&", $rl2);
 		$rlink = $rl1 . $rl2;
 		rawoutput("<tr><td><a href='$rlink'>$name</a></td>");
-		addnav("", "$rlink");
+		addnav('', "$rlink");
 		rawoutput("<td>{$event['rawchance']}</td>");
 		rawoutput("<td>{$event['normchance']}</td>");
 		rawoutput("</tr>");
@@ -1196,42 +1354,47 @@ function module_editor_navs($like, $linkprefix)
 {
 	$sql = "SELECT formalname,modulename,active,category FROM " . DB::prefix("modules") . " WHERE infokeys LIKE '%|$like|%' ORDER BY category,formalname";
 	$result = DB::query($sql);
-	$curcat = "";
-	while($row = DB::fetch_assoc($result)) {
-		if ($curcat != $row['category']) {
+	$curcat = '';
+    while($row = DB::fetch_assoc($result))
+    {
+        if ($curcat != $row['category'])
+        {
 			$curcat = $row['category'];
 			addnav(array("%s Modules",$curcat));
 		}
 		//I really think we should give keyboard shortcuts even if they're
 		//susceptible to change (which only happens here when the admin changes
 		//modules around).  This annoys me every single time I come in to this page.
-		addnav_notl(($row['active'] ? "" : "`)") . $row['formalname']."`0",
-				$linkprefix . $row['modulename']);
+		addnav_notl(($row['active'] ? '' : "`)") . $row['formalname']."`0", $linkprefix . $row['modulename']);
 	}
 }
 
 function module_objpref_edit($type, $module, $id)
 {
 	$info = get_module_info($module);
-	if (count($info['prefs-'.$type]) > 0) {
-		$data = array();
-		$msettings = array();
-		foreach ($info['prefs-'.$type] as $key=>$val) {
-			if (is_array($val)) {
+    if (count($info['prefs-'.$type]) > 0)
+    {
+		$data = [];
+		$msettings = [];
+        foreach ($info['prefs-'.$type] as $key=>$val)
+        {
+            if (is_array($val))
+            {
 				$v = $val[0];
 				$x = explode("|", $v);
 				$val[0] = $x[0];
 				$x[0] = $val;
-			} else {
-				$x = explode("|", $val);
-			}
+            }
+            else { $x = explode("|", $val); }
+
 			$msettings[$key]=$x[0];
 			// Set up default
 			if (isset($x[1])) $data[$key]=$x[1];
 		}
 		$sql = "SELECT setting, value FROM " . DB::prefix("module_objprefs") . " WHERE modulename='$module' AND objtype='$type' AND objid='$id'";
 		$result = DB::query($sql);
-		while($row = DB::fetch_assoc($result)) {
+        while($row = DB::fetch_assoc($result))
+        {
 			$data[$row['setting']] = $row['value'];
 		}
 		tlschema("module-$module");
@@ -1240,38 +1403,40 @@ function module_objpref_edit($type, $module, $id)
 	}
 }
 
-function module_compare_versions($a,$b){
+function module_compare_versions($a, $b)
+{
 	//this function returns -1 when $a < $b, 1 when $a > $b, and 0 when $a == $b
 	//insert alternate version detection and comparison algorithms here.
 
 	//default case, typecast as float
 	$a = (float)$a;
-	$b = (float)$b;
+    $b = (float)$b;
+
 	return ($a < $b ? -1 : ($a > $b ? 1 : 0) );
 }
 
-function activate_module($module){
-	if (!is_module_installed($module)){
-		if (!install_module($module)){
-			return false;
-		}
+function activate_module($module)
+{
+    if (!is_module_installed($module))
+    {
+		if (!install_module($module)) { return false; }
 	}
 	$sql = "UPDATE " . DB::prefix("modules") . " SET active=1 WHERE modulename='$module'";
 	DB::query($sql);
 	invalidatedatacache("injections-inject-$module");
-	massinvalidate("moduleprepare");
-	if (DB::affected_rows() <= 0){
-		return false;
-	}else{
-		return true;
-	}
+    massinvalidate("moduleprepare");
+
+    if (DB::affected_rows() <= 0) { return false; }
+    else { return true; }
 }
 
-function deactivate_module($module){
-	if (!is_module_installed($module)){
-		if (!install_module($module)){
-			return false;
-		}else{
+function deactivate_module($module)
+{
+    if (!is_module_installed($module))
+    {
+        if (!install_module($module)) { return false; }
+        else
+        {
 			//modules that weren't installed go to deactivated state by default in install_module
 			return true;
 		}
@@ -1279,16 +1444,16 @@ function deactivate_module($module){
 	$sql = "UPDATE " . DB::prefix("modules") . " SET active=0 WHERE modulename='$module'";
 	DB::query($sql);
 	invalidatedatacache("injections-inject-$module");
-	massinvalidate("moduleprepare");
-	if (DB::affected_rows() <= 0){
-		return false;
-	}else{
-		return true;
-	}
+    massinvalidate("moduleprepare");
+
+    if (DB::affected_rows() <= 0) { return false; }
+    else { return true; }
 }
 
-function uninstall_module($module){
-	if (injectmodule($module,true)) {
+function uninstall_module($module)
+{
+    if (injectmodule($module,true))
+    {
 		$fname = $module."_uninstall";
 		output("Running module uninstall script`n");
 		tlschema("module-{$module}");
@@ -1319,70 +1484,92 @@ function uninstall_module($module){
 			" WHERE modulename='$module'";
 		DB::query($sql);
 		invalidatedatacache("injections-inject-$module");
-		massinvalidate("moduleprepare");
+        massinvalidate('moduleprepare');
+
 		return true;
-	} else {
-		return false;
-	}
+	} else { return false; }
 }
 
-function install_module($module, $force=true){
+function install_module($module, $force = true)
+{
  	global $mostrecentmodule, $session;
-	$name = $session['user']['name'];
+    $name = $session['user']['name'];
+
 	if (!$name) $name = '`@System`0';
 
-	require_once("lib/sanitize.php");
-	if (modulename_sanitize($module)!=$module){
+    require_once 'lib/sanitize.php';
+
+    if (modulename_sanitize($module)!=$module)
+    {
 		output("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
-		return false;
-	}else{
+
+        return false;
+    }
+    else
+    {
 		// If we are forcing an install, then whack the old version.
-		if ($force) {
+        if ($force)
+        {
 			$sql = "DELETE FROM " . DB::prefix("modules") . " WHERE modulename='$module'";
 			DB::query($sql);
 		}
 		// We want to do the inject so that it auto-upgrades any installed
 		// version correctly.
-		if (injectmodule($module,true)) {
+        if (injectmodule($module,true))
+        {
 			// If we're not forcing and this is already installed, we are done
-			if (!$force && is_module_installed($module))
-				return true;
+            if (!$force && is_module_installed($module)) return true;
+
 			$info = get_module_info($module);
 			//check installation requirements
-			if (!module_check_requirements($info['requires'])){
+			if (!module_check_requirements($info['requires'])) {
 				output("`\$Module could not installed -- it did not meet its prerequisites.`n");
-				return false;
-			}else{
+
+                return false;
+            }
+            else
+            {
 				$keys = "|".join(array_keys($info), "|")."|";
 				$sql = "INSERT INTO " . DB::prefix("modules") . " (modulename,formalname,moduleauthor,active,filename,installdate,installedby,category,infokeys,version,download,description) VALUES ('$mostrecentmodule','".addslashes($info['name'])."','".addslashes($info['author'])."',0,'{$mostrecentmodule}.php','".date("Y-m-d H:i:s")."','".addslashes($name)."','".addslashes($info['category'])."','$keys','".addslashes($info['version'])."','".addslashes($info['download'])."', '".addslashes($info['description'])."')";
 				DB::query($sql);
 				$fname = $mostrecentmodule."_install";
-				if (isset($info['settings']) && count($info['settings']) > 0) {
+                if (isset($info['settings']) && count($info['settings']) > 0)
+                {
 					foreach ($info['settings'] as $key=>$val) {
-						if (is_array($val)) {
+                        if (is_array($val))
+                        {
 							$x = explode("|", $val[0]);
-						} else {
+                        }
+                        else
+                        {
 							$x = explode("|",$val);
 						}
-						if (isset($x[1])){
+                        if (isset($x[1]))
+                        {
 							set_module_setting($key,$x[1]);
 							debug("Setting $key to default {$x[1]}");
 						}
 					}
 				}
-				if ($fname() === false) {
+                if ($fname() === false)
+                {
 					return false;
-				}
-				output("`^Module installed.  It is not yet active.`n");
+                }
+
+				output('`^Module installed.  It is not yet active.`n');
 				invalidatedatacache("injections-inject-$mostrecentmodule");
-				massinvalidate("moduleprepare");
+                massinvalidate('moduleprepare');
+
 				return true;
 			}
-		} else {
+        }
+        else
+        {
 			output("`\$Module could not be injected.");
-			output("Module not installed.");
-			output("This is probably due to the module file having a parse error or not existing in the filesystem.`n");
-			return false;
+			output('Module not installed.');
+			output('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
+
+            return false;
 		}
 	}
 
@@ -1394,61 +1581,76 @@ function install_module($module, $force=true){
   * @param string $condition The PHP condition to evaluate
   * @return bool The result of the evaluated expression
   */
-function module_condition($condition) {
-	global $session;
-	$result = eval($condition);
+function module_condition($condition)
+{
+    global $session;
+
+    $result = eval($condition);
+
 	return (bool)$result;
 }
 
-function get_module_install_status(){
+function get_module_install_status()
+{
 	// Collect the names of all installed modules.
-	$seenmodules = array();
-	$seencats = array();
-	$sql = "SELECT modulename,category FROM " . DB::prefix("modules");
+	$seenmodules = [];
+	$seencats = [];
+	$sql = "SELECT modulename,category FROM " . DB::prefix('modules');
 	$result = @DB::query($sql);
-	if ($result !== false){
-		while ($row = DB::fetch_assoc($result)) {
-			$seenmodules[$row['modulename'].".php"] = true;
-			if (!array_key_exists($row['category'], $seencats))
-				$seencats[$row['category']] = 1;
-			else
-				$seencats[$row['category']]++;
+    if ($result !== false)
+    {
+        while ($row = DB::fetch_assoc($result))
+        {
+			$seenmodules["{$row['modulename']}.php"] = true;
+			if (!array_key_exists($row['category'], $seencats)) $seencats[$row['category']] = 1;
+			else $seencats[$row['category']]++;
 		}
 	}
 
-	$uninstmodules = array();
-	if ($handle = opendir("modules")){
+	$uninstmodules = [];
+    if ($handle = opendir("modules"))
+    {
 		$ucount=0;
-		while (false !== ($file = readdir($handle))){
+        while (false !== ($file = readdir($handle)))
+        {
 			if ($file[0] == ".") continue;
-			if (preg_match("/\\.php$/", $file) && !isset($seenmodules[$file])){
+            if (preg_match("/\\.php$/", $file) && !isset($seenmodules[$file]))
+            {
 				$ucount++;
 				$uninstmodules[] = substr($file, 0, strlen($file)-4);
 			}
 		}
 	}
 	closedir($handle);
-	sort($uninstmodules);
+    sort($uninstmodules);
+
 	return array('installedcategories'=>$seencats,'installedmodules'=>$seenmodules,'uninstalledmodules'=>$uninstmodules, 'uninstcount'=>$ucount);
 }
 
-function get_racename($thisuser=true) {
-	if ($thisuser === true) {
-		global $session;
-		return translate_inline($session['user']['race'],"race");
-	} else {
-		return translate_inline($thisuser,"race");
-	}
+function get_racename($thisuser = true)
+{
+    if ($thisuser === true)
+    {
+        global $session;
+
+		return translate_inline($session['user']['race'], 'race');
+    }
+    else { return translate_inline($thisuser, 'race'); }
 }
 
-function module_delete_oldvalues($table,$key) {
+function module_delete_oldvalues($table,$key)
+{
     require_once 'lib/gamelog.php';
+
     $total = 0;
     $res = DB::query("SELECT modulename FROM ".DB::prefix('modules')." WHERE infokeys LIKE '%|$key|%'");
-    while ($row = DB::fetch_assoc($res)) {
+    while ($row = DB::fetch_assoc($res))
+    {
         $mod = $row['modulename'];
+
         require_once "modules/{$mod}.php";
-        $func = $mod."_getmoduleinfo";
+
+        $func = "{$mod}_getmoduleinfo";
         $info = $func();
 		$keys = array_filter(array_keys($info[$key]), "module_pref_filter");
 		$keys = array_map("addslashes", $keys);
@@ -1456,11 +1658,11 @@ function module_delete_oldvalues($table,$key) {
         if ($keys) DB::query("DELETE FROM ".DB::prefix($table)." WHERE modulename='$mod' AND setting NOT IN ('$keys')");
         $total += DB::affected_rows();
     }
+
     gamelog("Cleaned up $total old values in $table that don't exist anymore", 'maintenance');
 }
 
-function module_pref_filter($a){
+function module_pref_filter($a)
+{
     return !is_numeric($a);
 }
-
-?>
