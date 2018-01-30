@@ -6,48 +6,14 @@
        Element
 --------------------*/
 
-@margin: 1rem 0rem;
-
-@highlightWidth: 1px;
-@highlightColor: @whiteBorderColor;
-
-@shadowWidth: 1px;
-@shadowColor: @borderColor;
-
 /* Text */
-@letterSpacing: 0.05em;
-@fontWeight: bold;
 @color: @invertedTextColor;
-@textTransform: uppercase;
-
-/*-------------------
-       Coupling
---------------------*/
-
-/* Icon */
-@dividerIconSize: 1rem;
-@dividerIconMargin: 0rem;
 
 
 /*******************************
          Variations
 *******************************/
 
-/* Horizontal / Vertical */
-@horizontalMargin: '';
-@horizontalDividerMargin: 1em;
-@horizontalRulerOffset: ~"calc(-50% - "(@horizontalDividerMargin)~")";
-
-@verticalDividerMargin: 1rem;
-@verticalDividerHeight: ~"calc(100% - "(@verticalDividerMargin)~")";
-
 /* Inverted */
 @invertedTextColor: @invertedMutedTextColor;
 @invertedHighlightColor: rgba(0, 0, 0, 0.15);
-@invertedShadowColor: @borderColor;
-
-/* Section */
-@sectionMargin: 2rem;
-
-/* Sizes */
-@medium: 1rem;
