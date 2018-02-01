@@ -257,10 +257,10 @@ function addcommentary()
 		//-- Process additional commands
 		$returnedhook = modulehook('commentarycommand', ['command' => $comment, 'section' => $section]);
 
-		if (! $returnedhook['skipcommand'])
+		if (isset($returnedhook['skipcommand']) && ! $returnedhook['skipcommand'])
 		{
 			//if for some reason you're going to involve a command that can be a mix of upper and lower case, set $args['skipcommand'] and $args['ignore'] to true and handle it in postcomment instead.
-			if (! $returnedhook['processed'])
+			if (isset($returnedhook['processed']) && ! $returnedhook['processed'])
 			{
 				output("`c`b`JCommand Not Recognized`b`0`nWhen you type in ALL CAPS, the game doesn't think you're talking to other players; it thinks you're trying to perform an action within the game.  For example, typing `#GREM`0 will remove the last comment you posted, as long as you posted it less than two minutes ago.  Typing `#AFK`0 or `#BRB`0 will turn your online status bar grey, so that people know you're `#A`0way `#F`0rom the `#K`0eyboard (or, if you prefer, that you'll `#B`0e `#R`0ight `#B`0ack).  Typing `#DNI`0 will let other players know that you're busy talking to one particular player - maybe somewhere off-camera - and that you don't want to be interrupted right now.`nSome areas have special hidden commands or other easter eggs that you can hunt for.  This time around, you didn't trigger anything special.`c`0`n");
 			}
