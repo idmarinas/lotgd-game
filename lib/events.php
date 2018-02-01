@@ -45,15 +45,16 @@ function handle_event($location, $baseLink=false, $needHeader=false)
 		if ($needHeader !== false) { page_header($needHeader); }
 
 		output('`^`c`bSomething Special!`c`b`0');
-        if (strchr($specialinc, ":"))
+        if (strchr($specialinc, ':'))
         {
-			$array = explode(":", $specialinc);
+            $array = explode(':', $specialinc);
+            $modulename = $array[1];
 			$starttime = microtime(true);
-			module_do_event($location, $array[1], $allowinactive, $baseLink);
+			module_do_event($location, $modulename, $allowinactive, $baseLink);
 			$endtime = microtime(true);
             if (($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT)))
             {
-				debug("Slow Event (".round($endtime-$starttime,2)."s): $hookname - {$row['modulename']}`n");
+				debug("Slow Event (".round($endtime-$starttime,2)."s): $location - {$modulename}`n");
 			}
         }
 
