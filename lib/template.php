@@ -90,6 +90,11 @@ class LotgdTemplate extends Twig_Environment
 			new Twig_SimpleFilter('appoencode', function ($string)
 			{
 				return appoencode($string, true);
+            }),
+            //-- Alias for appoencode
+			new Twig_SimpleFilter('colorize', function ($string)
+			{
+				return appoencode($string, true);
 			}),
 			//-- Access to color_sanitize function in template
 			new Twig_SimpleFilter('color_sanitize', function ($string)
