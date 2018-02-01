@@ -8,19 +8,19 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.6 || ^7.0",
-        "zendframework/zend-db": "^2.8",
-        "zendframework/zend-paginator": "^2.7",
-        "zendframework/zend-filter": "^2.7",
-        "zendframework/zend-mail": "^2.7",
-        "zendframework/zend-math": "^2.5",
-        "zendframework/zend-cache": "^2.7",
-        "zendframework/zend-serializer": "^2.8",
-        "zendframework/zend-debug": "^2.5",
-        "zendframework/zend-escaper": "^2.5",
-        "zendframework/zend-code": "^3.1",
-        "zendframework/zend-i18n": "^2.7",
-        "twig/twig": "^1.24",
-        "hellogerard/jobby" : "^3.2",
-        "ezyang/htmlpurifier": "^4.9"
+        "zendframework/zend-db": "^2.9.2",
+        "zendframework/zend-paginator": "^2.8.1",
+        "zendframework/zend-filter": "^2.7.2",
+        "zendframework/zend-mail": "^2.8.0",
+        "zendframework/zend-math": "^2.7.0",
+        "zendframework/zend-cache": "^2.7.2",
+        "zendframework/zend-serializer": "^2.8.1",
+        "zendframework/zend-debug": "^2.5.1",
+        "zendframework/zend-escaper": "^2.5.2",
+        "zendframework/zend-code": "^3.1.0",
+        "zendframework/zend-i18n": "^2.7.4",
+        "twig/twig": "^1.35.0",
+        "hellogerard/jobby" : "^3.3.2",
+        "ezyang/htmlpurifier": "^4.9.3"
     }
 }
