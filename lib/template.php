@@ -128,7 +128,16 @@ class LotgdTemplate extends Twig_Environment
         return [
             new Twig_SimpleFunction('modulehook', function ($name, $data) {
                 return modulehook($name, $data);
-            })
+            }),
+            new Twig_SimpleFunction('isValidProtocol', function ($url) {
+                // We should check all legeal protocols
+                $protocols = array('http', 'https', 'ftp', 'ftps');
+                $protocol = explode(':', $url, 2);
+                $protocol = $protocol[0];
+
+                // This will take care of download strings such as: not publically released or contact admin
+                return in_array($protocol, $protocols);
+            }),
         ];
     }
 
