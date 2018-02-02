@@ -54,3 +54,13 @@ function getsetting($settingname, $default = false)
 
 	return $settings->getSetting($settingname, $default);
 }
+
+
+function getAllSettings()
+{
+    global $settings;
+
+	if (!is_a($settings, 'settings')) return $default;
+
+	return $settings->getAllSettings();
+}

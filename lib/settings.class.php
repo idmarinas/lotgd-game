@@ -26,11 +26,11 @@ class settings
      */
 	public function saveSetting($settingname, $value)
     {
-        $this->loadSettings();
-        $key = $this->settingsKey . $this->tablename;
+        $key = $this->getCacheKey();
         $settingname = (string) $settingname;
+        $settings = $this->getAllSettings();
 
-		if (! isset($this->settings[$settingname]) && $value)
+		if (! isset($settings[$settingname]) && $value)
 		{ //value needs to be elimintated - once we have our defaults in lib/data/settings.php ... this can GO
             $sql = DB::insert($this->tablename);
             $sql->values([
@@ -38,7 +38,7 @@ class settings
                 'value' => $value
             ]);
 		}
-		elseif (isset($this->settings[$settingname]))
+		elseif (isset($settings[$settingname]))
 		{
             $sql = DB::update($this->tablename);
             $sql->set(['value' => $value])
@@ -52,9 +52,11 @@ class settings
 
         DB::execute($sql);
 
-        $this->settings[$settingname] = $value;
+        $settings[$settingname] = $value;
 
-		updatedatacache($key, $this->settings, true);
+        updatedatacache($key, $settings, true);
+
+        $this->settings = $settings;
 
 		if (DB::affected_rows() > 0) return true;
 		else return false;
@@ -67,7 +69,7 @@ class settings
      */
 	public function loadSettings()
 	{
-        $key = $this->settingsKey . $this->tablename;
+        $key = $this->getCacheKey();
         $this->settings = datacache($key, 86400, true);
 
 		if (! is_array($this->settings) || empty($this->settings))
@@ -93,6 +95,11 @@ class settings
 		}
 	}
 
+    /**
+     * Force to reload all settings
+     *
+     * @return void
+     */
     public function clearSettings()
     {
 		//scraps the $this->loadSettings() data to force it to reload.
@@ -100,6 +107,14 @@ class settings
 		$this->settings = [];
 	}
 
+    /**
+     * Get a value of a setting
+     *
+     * @param string $settingname
+     * @param string|false $default
+     *
+     * @return string
+     */
 	public function getSetting($settingname, $default = false)
     {
 		global $DB_USEDATACACHE,$DB_DATACACHEPATH;
@@ -131,7 +146,37 @@ class settings
         {
 			return $this->settings[$settingname];
 		}
-	}
+    }
 
-	public function getArray() { return $this->settings; }
+    /**
+     * Get all settings of game
+     *
+     * @return array
+     */
+    public function getAllSettings()
+    {
+		if (! is_array($this->settings) || empty($this->settings))
+		{
+			$this->loadSettings();
+        }
+
+        return $this->settings;
+    }
+
+    /**
+     * Get key of cache
+     *
+     * @return string
+     */
+    private function getCacheKey()
+    {
+        return $this->settingsKey . $this->tablename;
+    }
+
+    /**
+     * Alias of getAllSettings()
+     *
+     * @return array
+     */
+	public function getArray() { return $this->getAllSettings(); }
 }
