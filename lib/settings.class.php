@@ -107,22 +107,18 @@ class settings
 		if ($settingname == 'usedatacache') return $DB_USEDATACACHE;
 		elseif ($settingname == 'datacachepath') return $DB_DATACACHEPATH;
 
-        if ( 'object' == gettype($this) && !isset($this->settings[$settingname]))
+        if (! is_array($this->settings) || ('object' == gettype($this) && !isset($this->settings[$settingname])) )
         {
 			$this->loadSettings();
 		}
-        else
-        {
-			return $this->settings[$settingname];
-		}
 
-		if (!isset($this->settings[$settingname]))
+		if (! isset($this->settings[$settingname]))
         {
 			//nothing set, we have to use the default value
 			if (file_exists("lib/data/{$this->tablename}.php")) { require "lib/data/{$this->tablename}.php"; }
 			if ($default === false)
             {
-				if (isset($defaults[$settingname])) $setDefault=$defaults[$settingname];
+				if (isset($defaults[$settingname])) $setDefault = $defaults[$settingname];
 				else $setDefault = '';
 			}
             else $setDefault = $default;
