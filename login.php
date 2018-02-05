@@ -2,37 +2,49 @@
 // mail ready
 // addnews ready
 // translator ready
-define("ALLOW_ANONYMOUS",true);
+define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
 require_once 'lib/http.php';
 require_once 'lib/serverfunctions.class.php';
 
-tlschema("login");
+tlschema('login');
 translator_setup();
 $op = httpget('op');
 $name = httppost('name');
-$iname = getsetting("innname", LOCATION_INN);
-$vname = getsetting("villagename", LOCATION_FIELDS);
+$iname = getsetting('innname', LOCATION_INN);
+$vname = getsetting('villagename', LOCATION_FIELDS);
 
-if ($name!=""){
-	if ($session['loggedin']){
-		redirect("badnav.php");
-	}else{
+if ($name != '')
+{
+    if ($session['loggedin'])
+    {
+		redirect('badnav.php');
+    }
+    else
+    {
 		$password = httppost('password');
 		$password = stripslashes($password);
-		if (substr($password, 0, 5) == "!md5!") {
+        if (substr($password, 0, 5) == "!md5!")
+        {
 			$password = md5(substr($password, 5));
-		} elseif (substr($password, 0, 6) == "!md52!" && strlen($password) == 38) {
+        }
+        elseif (substr($password, 0, 6) == "!md52!" && strlen($password) == 38)
+        {
 			$force = httppost('force');
-			if ($force) {
+            if ($force)
+            {
 				$password = substr($password, 6);
 				$password = preg_replace("/[^a-f0-9]/", "", $password);
-			} else {
+            }
+            else
+            {
 				$password='no hax0rs for j00!';
 			}
-		} else {
+        }
+        else
+        {
 			$password = md5(md5($password));
 		}
 
@@ -40,8 +52,9 @@ if ($name!=""){
 
 		$sql = "SELECT * FROM " . DB::prefix("accounts") . " WHERE login = '$name' AND password='$password' AND locked=0";
 		$result = DB::query($sql);
-		if (DB::num_rows($result)==1){
-			$session['user']=DB::fetch_assoc($result);
+        if ($result->count() == 1)
+        {
+            $session['user'] = $result->current();
 			$companions = @unserialize($session['user']['companions']);
 			if (!is_array($companions)) $companions = [];
 			$baseaccount = $session['user'];
@@ -50,7 +63,7 @@ if ($name!=""){
 			// If the player isn't allowed on for some reason, anything on
 			// this hook should automatically call page_footer and exit
 			// itself.
-			modulehook("check-login");
+			modulehook('check-login');
 			if (ServerFunctions::isTheServerFull() == true && httppost('force') != 1)
 			{
 				//sanity check if the server is / got full --> back to home
@@ -59,14 +72,17 @@ if ($name!=""){
 				redirect('home.php');
 			}
 
-			if ($session['user']['emailvalidation']!="" && substr($session['user']['emailvalidation'],0,1)!="x"){
+            if ($session['user']['emailvalidation'] != '' && substr($session['user']['emailvalidation'],0,1) != 'x')
+            {
 				$session['user'] = [];
-				$session['message']=translate_inline("`4Error, you must validate your email address before you can log in.");
+				$session['message'] = translate_inline("`4Error, you must validate your email address before you can log in.");
 				echo appoencode($session['message']);
 				exit();
-			}else{
-				$session['loggedin']=true;
-				$session['laston']=date("Y-m-d H:i:s");
+            }
+            else
+            {
+				$session['loggedin'] = true;
+				$session['laston'] = date('Y-m-d H:i:s');
 				$session['sentnotice']=0;
 				$session['user']['dragonpoints']=unserialize($session['user']['dragonpoints']);
 				$session['user']['prefs']=unserialize($session['user']['prefs']);
@@ -86,11 +102,13 @@ if ($name!=""){
 				// when someone logs in or off can do so.
 				modulehook("player-login");
 
-				if ($session['user']['loggedin']){
-					$session['allowednavs']=unserialize($session['user']['allowednavs']);
-					$link = "<a href='" . $session['user']['restorepage'] . "'>" . $session['user']['restorepage'] . "</a>";
+                if ($session['user']['loggedin'])
+                {
+                    $session['allowednavs']=unserialize($session['user']['allowednavs']);
+                    $session['user']['restorepage'] = $session['user']['restorepage'] != '' ?: 'news.php';
+                    $link = sprintf('<a href="%s">%s</a>' , $session['user']['restorepage'], $session['user']['restorepage']);
 
-					$str = sprintf_translate("Sending you to %s, have a safe journey", $link);
+					$str = sprintf_translate('Sending you to %s, have a safe journey', $link);
 					header("Location: {$session['user']['restorepage']}");
 					saveuser();
 					echo $str;
@@ -99,18 +117,22 @@ if ($name!=""){
 
 				DB::query("UPDATE " . DB::prefix("accounts") . " SET loggedin=".true.", laston='".date("Y-m-d H:i:s")."' WHERE acctid = ".$session['user']['acctid']);
 
-				$session['user']['loggedin']=true;
-				$location = $session['user']['location'];
-				if ($session['user']['location']==$iname)
-					$session['user']['location']=$vname;
+				$session['user']['loggedin'] = true;
+				if ($session['user']['location'] == $iname) $session['user']['location'] = $vname;
 
-				if ($session['user']['restorepage']>""){
+                if ($session['user']['restorepage'] > '')
+                {
 					redirect($session['user']['restorepage']);
-				}else{
-					if ($location == $iname) {
-						redirect("inn.php?op=strolldown");
-					}else{
-						redirect("news.php");
+                }
+                else
+                {
+                    if ($session['user']['location'] == $iname)
+                    {
+						redirect('inn.php?op=strolldown');
+                    }
+                    else
+                    {
+						redirect('news.php');
 					}
 				}
 			}
@@ -172,16 +194,21 @@ if ($name!=""){
 }
 else if ($op=="logout")
 {
-	if ($session['user']['loggedin']){
+    if ($session['user']['loggedin'])
+    {
 		$location = $session['user']['location'];
-		if ($location == $iname) {
-			$session['user']['restorepage']="inn.php?op=strolldown";
-		} elseif ($session['user']['superuser'] & (0xFFFFFFFF &~ SU_DOESNT_GIVE_GROTTO)) {
-			$session['user']['restorepage']="superuser.php";
-		} else {
-			$session['user']['restorepage']="news.php";
+        if ($location == $iname)
+        {
+			$session['user']['restorepage'] = 'inn.php?op=strolldown';
+        }
+        elseif ($session['user']['superuser'] & (0xFFFFFFFF &~ SU_DOESNT_GIVE_GROTTO))
+        {
+			$session['user']['restorepage'] = 'superuser.php';
+        }
+        else {
+			$session['user']['restorepage'] = 'news.php';
 		}
-	    $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0,restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
+	    $sql = "UPDATE " . DB::prefix("accounts") . " SET loggedin=0, restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
 		DB::query($sql);
 		invalidatedatacache('charlisthomepage');
 		invalidatedatacache('list.php-warsonline');
@@ -192,14 +219,14 @@ else if ($op=="logout")
 		// Let's throw a logout module hook in here so that modules
 		// like the stafflist which need to invalidate the cache
 		// when someone logs in or off can do so.
-		modulehook("player-logout");
+		modulehook('player-logout');
 		saveuser();
 	}
 	$session = [];
-	redirect("index.php");
+	redirect('index.php');
 }
 // If you enter an empty username, don't just say oops.. do something useful.
 $session = [];
-$session['message'] = translate_inline("`4Error, your login was incorrect`0");
-redirect("index.php");
-?>
+$session['message'] = translate_inline('`4Error, your login was incorrect`0');
+
+redirect('index.php');
