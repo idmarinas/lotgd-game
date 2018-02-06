@@ -273,14 +273,14 @@ mass_module_prepare(array(
 
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
-$revertsession=$session;
+$revertsession = $session;
 if (! isset($session['user']['loggedin'])) $session['user']['loggedin'] = false;
 if (! $session['user']['loggedin']) $session['loggedin'] = false;
 else $session['loggedin'] = true;
 
 if ($session['user']['loggedin'] != true && !ALLOW_ANONYMOUS)
 {
-	redirect("login.php?op=logout");
+	redirect('login.php?op=logout');
 }
 
 $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.php' => 1, 'petition.php' => 1];
