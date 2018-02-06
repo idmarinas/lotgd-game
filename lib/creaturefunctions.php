@@ -98,6 +98,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
 
     //-- Set max health for creature
 	$badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+	$badguy['creaturestartinghealth'] = $badguy['creaturehealth'];
 
     //-- Check if script exist
     if (isset($badguy['creatureaiscript']))
