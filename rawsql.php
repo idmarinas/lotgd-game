@@ -25,32 +25,40 @@ if ($op == '' || $op == 'sql')
 		$sql = stripslashes($sql);
 		modulehook("rawsql-execsql",array("sql"=>$sql));
 		debuglog('Ran Raw SQL: ' . $sql);
-		$r = DB::query($sql, false);
-		if (!$r) { output("`\$SQL Error:`& %s`0`n`n", DB::error($r)); }
-        else
+        try
         {
-			if (DB::affected_rows() > 0) { output('`&%s rows affected.`n`n', DB::affected_rows()); }
-			rawoutput("<table class='ui very compact striped table'>");
-			$number = DB::num_rows($r);
-			for ($i = 0; $i < $number; $i++) {
-				$row = DB::fetch_assoc($r);
-				if ($i == 0) {
-					rawoutput("<thead><tr>");
-					$keys = array_keys($row);
-					foreach ($keys as $value) {
-						rawoutput("<th>$value</th>");
-					}
-					rawoutput('</tr></thead>');
-				}
-				rawoutput('<tr>');
-                foreach ($keys as $value)
-                {
-					rawoutput("<td valign='top'>{$row[$value]}</td>");
-				}
-				rawoutput('</tr>');
-			}
-			rawoutput('</table>');
-		}
+            $r = DB::query($sql, false);
+            if (!$r) { output("`\$SQL Error:`& %s`0`n`n", DB::error($r)); }
+            else
+            {
+                if (DB::affected_rows() > 0) { output('`&%s rows affected.`n`n', DB::affected_rows()); }
+                rawoutput("<table class='ui very compact striped table'>");
+                $number = DB::num_rows($r);
+                for ($i = 0; $i < $number; $i++) {
+                    $row = DB::fetch_assoc($r);
+                    if ($i == 0) {
+                        rawoutput("<thead><tr>");
+                        $keys = array_keys($row);
+                        foreach ($keys as $value) {
+                            rawoutput("<th>$value</th>");
+                        }
+                        rawoutput('</tr></thead>');
+                    }
+                    rawoutput('<tr>');
+                    foreach ($keys as $value)
+                    {
+                        rawoutput("<td valign='top'>{$row[$value]}</td>");
+                    }
+                    rawoutput('</tr>');
+                }
+                rawoutput('</table>');
+            }
+        }
+        catch(Exception $ex)
+        {
+            output('`$An exception occurred while executing SQL query:`0`n');
+            output_notl($ex->getMessage());
+        }
 	}
 
 	output('Type your query');
@@ -75,10 +83,18 @@ else
 		rawoutput('</div>');
 		output('`bResults:`b`n');
 		modulehook('rawsql-execphp', ['php' => $php]);
-		ob_start();
-		eval($php);
-		output_notl(ob_get_contents(), true);
-		ob_end_clean();
+        try
+        {
+            ob_start();
+            eval($php);
+            output_notl(ob_get_contents(), true);
+            ob_end_clean();
+        }
+        catch(Exception $ex)
+        {
+            output('`$An exception occurred while executing PHP code:`0`n');
+            output_notl($ex->getMessage());
+        }
 		debuglog('Ran Raw PHP: ' . $php);
 	}
 	output('`n`nType your code:');
