@@ -32,6 +32,39 @@
 @selectableBackground: inherit;
 @selectableTextColor: rgb(255, 255, 255);
 
+/*--------------
+     States
+---------------*/
+
+/* Positive */
+@positiveColor: rgba(44, 102, 45, 0.45);
+@positiveBoxShadow: @stateMarkerWidth 0px 0px @positiveBorderColor inset;
+@positiveBackgroundHover: darken(@positiveBackgroundColor, 3);
+@positiveColorHover: darken(@positiveColor, 3);
+
+/* Negative */
+@negativeColor: rgba(159, 58, 56 0.45);
+@negativeBoxShadow: @stateMarkerWidth 0px 0px @negativeBorderColor inset;
+@negativeBackgroundHover: darken(@negativeBackgroundColor, 3);
+@negativeColorHover: darken(@negativeColor, 3);
+
+/* Error */
+@errorColor: @negativeColor;
+@errorBoxShadow: @stateMarkerWidth 0px 0px @errorBorderColor inset;
+@errorBackgroundHover: darken(@errorBackgroundColor, 3);
+@errorColorHover: darken(@errorColor, 3);
+
+/* Warning */
+@warningColor: rgba(87, 58, 8, 0.45);
+@warningBoxShadow: @stateMarkerWidth 0px 0px @warningBorderColor inset;
+@warningBackgroundHover: darken(@warningBackgroundColor, 3);
+@warningColorHover: darken(@warningColor, 3);
+
+/* Active */
+@activeColor: @textColor;
+@activeBackgroundColor: rgba(0, 0, 50, 0.45);
+@activeBoxShadow: @stateMarkerWidth 0px 0px @activeColor inset;
+
 /**
  * LOTGD Styles
  *
