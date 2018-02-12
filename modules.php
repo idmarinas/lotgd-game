@@ -141,7 +141,7 @@ if ($op == '')
 		$inon = translate_inline('Installed On');
 		$installstr = translate_inline('by %s');
 		$active = translate_inline('`@Active`0');
-		$inactive = translate_inline('`\$Inactive`0');
+		$inactive = translate_inline('`$Inactive`0');
 		rawoutput("<form action='modules.php?op=mass&cat=$cat' method='POST'>");
 		addnav('', "modules.php?op=mass&cat=$cat");
 		rawoutput("<table class='ui small very compact selectable striped table'>",true);
