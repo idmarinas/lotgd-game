@@ -43,5 +43,6 @@ return [
 	'2.1.0 IDMarinas Edition' => include 'lib/installer/versions/2-1-0-IDMarinas-Edition.php',
 	'2.2.0 IDMarinas Edition' => include 'lib/installer/versions/2-2-0-IDMarinas-Edition.php',
 	'2.3.0 IDMarinas Edition' => [],
-	'2.4.0 IDMarinas Edition' => []
+	'2.4.0 IDMarinas Edition' => [],
+	'2.5.0 IDMarinas Edition' => [],
 ];
