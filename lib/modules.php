@@ -682,8 +682,8 @@ function set_module_setting($name, $value, $module = false)
     {
 		$sql = "INSERT INTO " . DB::prefix('module_settings') . " (modulename,setting,value) VALUES ('$module','".addslashes($name)."','".addslashes($value)."')";
 		DB::query($sql);
-	}
-	invalidatedatacache("module-settings-$module");
+    }
+    invalidatedatacache("module-settings-$module", true);
 }
 
 function increment_module_setting($name, $value = 1, $module = false)
