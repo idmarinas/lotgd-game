@@ -30,7 +30,6 @@ module.exports = {
             '!dist{,/**}',
             '!node_modules{,/**}',
             '!bower_components{,/**}',
-            '!**/*.{dist,md,lock}',
             '!semantic{,/**}',
             //-- Ignore because then we process files for min in production
             '!resources{,/**}',

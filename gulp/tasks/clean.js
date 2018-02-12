@@ -17,8 +17,8 @@ module.exports = function (callback)
 
     del(config.paths.build + '/themes/' + themeName + '/' + themeName + '.html')
 
-    //-- JSON files not is necesary in production
-    if (isProduction) { del(config.paths.build + '/**/*.json') }
+    //-- This files not is necesary in production
+    if (isProduction) { del(config.paths.build + '/**/*.{dist,md,lock,json}') }
 
     return callback()
 }

@@ -12,8 +12,8 @@ module.exports = function (callback)
         'delete',
         ['main', 'theme'],
         'assets',
-        'clean',
         'composer',
+        'clean',
         'lotgd-js',
 
         callback
