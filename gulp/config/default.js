@@ -30,7 +30,7 @@ module.exports = {
             '!dist{,/**}',
             '!node_modules{,/**}',
             '!bower_components{,/**}',
-            '!**/*.{dist,md,lock,json}',
+            '!**/*.{dist,md,lock}',
             '!semantic{,/**}',
             //-- Ignore because then we process files for min in production
             '!resources{,/**}',
@@ -38,4 +38,4 @@ module.exports = {
             '!{CHANGELOG.txt,QUICKINSTALL.TXT,README_FIRST.txt,README.txt,INSTALL.TXT}'
         ]
     }
-};
+}
