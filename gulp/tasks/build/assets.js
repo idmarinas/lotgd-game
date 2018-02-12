@@ -32,4 +32,4 @@ module.exports = function (callback)
         .pipe(gulp.dest(config.paths.build + '/resources'))
 
     return merge(resourceJS, resourceOther)
-};
+}
