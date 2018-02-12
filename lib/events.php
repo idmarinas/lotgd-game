@@ -17,11 +17,11 @@ function handle_event($location, $baseLink=false, $needHeader=false)
 		global $PHP_SELF;
 		$baseLink = substr($PHP_SELF,strrpos($PHP_SELF,"/")+1)."?";
     }
-    else
-    {
-		//debug("Base link was specified as $baseLink");
-		//debug(debug_backtrace());
-	}
+    // else
+    // {
+	// 	debug("Base link was specified as $baseLink");
+	// 	debug(debug_backtrace());
+	// }
 	$skipdesc = false;
 
 	tlschema('events');
@@ -31,7 +31,7 @@ function handle_event($location, $baseLink=false, $needHeader=false)
     {
 		$allowinactive = true;
 		$array = preg_split("/[:-]/", $eventhandler);
-        if ($array[0] == "module") { $session['user']['specialinc'] = "module:" . $array[1]; }
+        if ($array[0] == 'module') { $session['user']['specialinc'] = 'module:' . $array[1]; }
         else { $session['user']['specialinc'] = ''; }
 	}
 
@@ -68,7 +68,7 @@ function handle_event($location, $baseLink=false, $needHeader=false)
 			$skipdesc=true;
 			$session['user']['specialinc'] = '';
 			$session['user']['specialmisc'] = '';
-			httpset("op", '');
+			httpset('op', '');
 		}
 	}
     tlschema();
