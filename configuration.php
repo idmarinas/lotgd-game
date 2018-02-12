@@ -210,8 +210,8 @@ switch ($type_setting)
 							}
 							rawoutput("<form action='configuration.php?op=modulesettings&module=$module&save=1' method='POST'>",true);
 							addnav("","configuration.php?op=modulesettings&module=$module&save=1");
-							tlschema("module-$module");
-							lotgd_showform($msettings,$module_settings[$mostrecentmodule]);
+                            tlschema("module-$module");
+							lotgd_showform($msettings, $module_settings);
 							tlschema();
 							rawoutput("</form>",true);
                         }
