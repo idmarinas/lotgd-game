@@ -4,6 +4,75 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md).
 
+# Version: 2.5.0
+
+### CHANGES
+
+* **dragon.php** Changed order of messages:
+    * First message of slayed Dragon.
+    * First message of flawless fight
+* **clan.php** The form for create new clan are now in template system `semantic/src/themes/jade/assets/templates/pages/clan/new.twig`.
+* **rawsql.php** Now when execute a PHP or SQL code catch error and show it
+* **lib/settings.class.php**
+    * All functions are now public explicitly
+    * It is forced to save the configuration in the cache, to reduce the load of the database.
+    * Optimized for better performance
+* **lib/datacache.php** When `getdatacache` is used, check that`$duration` is a numeric value and greater than 0
+* **lib/dbwrapper.php** Functions `DB::select`, `DB::update`, `DB::insert`, `DB::delete` can support two params: `$table` and `$prefixed`, the second param is used for indicate whether you want that table name need prefixed or no, default is `TRUE`
+* **lib/template.php** Class `LotgdTemplate`, change function `__construct(array $loader = [], array $options = [])`, now can pass `loaders` and `options` for your extend class in your modules
+* **lib/output.php** Use `class="center aligned"` to center text with code ``c`
+* **lib/about/about_listmodules.php** Now use Twig template for show table
+* **lib/battle/functions.php** Change order of messages:
+    * First name of creature and them creature die text
+    * First gems reward and them gold
+    * Message of flawless fight always at the end
+* **lib/modules.php** Now settings of a modules is forced to use data cache
+* THEME
+    * Updated Semantic UI version 2.2.10 => 2.2.14
+    * The `*.variables` files in the `Jade` theme have only the variables that have been changed.
+    * Change text color element -> divider
+
+### FEATURES
+
+* **lib/template.php**
+    * Added new filter to templates `colorize` is an alias of `appoencode`
+    * Added new function to templates `isValidProtocol` check if a url string have a valid protocol `http, https, ftp, fpts`
+* **lib/settings.class.php** Added new function for get all settings of game `getAllSettings()`
+
+### DEPRECATED
+
+* Nothing
+
+### REMOVES
+
+* Nothing
+
+### FIXES
+
+* **common.php** Fixed error with index undefined
+* **pvp.php** Fixed error with name of required file, deleted unnecesary space
+* **stables.php** Fixed error with index undefined
+* **train.php** Fixed error with index undefined
+* **login.php** Fixed posible error with blank `restorepage`
+* **lib/events.php** Fixed error with index and variable undefined
+* **lib/checkban.php** Fixed error with undefined index/variable
+* **lib/settings.class.php** Fixed error in the function `saveSetting`, did not save the new data in the BD.
+* **lib/events.php** Fixed error with index undefined
+* **lib/about/about_listmodules.php** Fixed an error that did not show links to downloads of the modules
+* **lib/configuration/configuration_cronjob.php** Fixed error of badnav when activate/desactivate cronjob
+* **lib/mail/{case_read.php, case_write.php}** Fixed error for not un-quotes a quoted string of "subject" and "body" of messages.
+* **lib/battle/extended.php** Fixed error with index undefined
+* **lib/graveyard/case_question.php** Fixed error with undefined variable
+
+
+### NOTES
+
+* Add *.eslintignore* file for ignore files in *semantic/* folder. These files are maintained by Semantic UI
+* **lib/dbwrapper.php** Documented function `DB::query`
+* **package.json** Updated dependencies
+* **Gulp tasks** Added a new `composer` task, removes all PHP dependencies that are only used in a development environment and also optimizes the "autoloader", when use build app `gulp --env production`
+
+
 # Version: 2.4.0
 
 ### CHANGES
