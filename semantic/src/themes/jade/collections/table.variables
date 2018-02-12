@@ -43,7 +43,7 @@
 @positiveColorHover: darken(@positiveColor, 3);
 
 /* Negative */
-@negativeColor: rgba(159, 58, 56 0.45);
+@negativeColor: rgba(159, 58, 56, 0.45);
 @negativeBoxShadow: @stateMarkerWidth 0px 0px @negativeBorderColor inset;
 @negativeBackgroundHover: darken(@negativeBackgroundColor, 3);
 @negativeColorHover: darken(@negativeColor, 3);
