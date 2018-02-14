@@ -9,26 +9,30 @@ require_once 'lib/creaturefunctions.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
-tlschema("creatures");
+tlschema('creatures');
 
 //this is a setup where all the creatures are generated.
 $creaturestats = lotgd_generate_creature_levels();
 
-page_header("Creature Editor");
+page_header('Creature Editor');
 
 require_once 'lib/superusernav.php';
 superusernav();
 
-$op = httpget("op");
-$subop = httpget("subop");
-if (httppost('refresh')) {
+$op = httpget('op');
+$subop = httpget('subop');
+if (httppost('refresh'))
+{
 	httpset('op','add');
-	$op="add";
-	$subop='';
-	$refresh=1; //let them know this is a refresh
+	$op = 'add';
+	$subop = '';
+	$refresh = 1; //let them know this is a refresh
 	//had to do this as there is no onchange in a form...
-} else ($refresh=0);
-if ($op == "save"){
+}
+else { $refresh = 0; }
+
+if ($op == "save")
+{
 	$forest = (int)(httppost('forest'));
 	$grave = (int)(httppost('graveyard'));
 	$id = httppost('creatureid');
@@ -52,12 +56,16 @@ if ($op == "save"){
 			$sql.=" createdby='".$session['user']['login']."' ";
 			$sql="UPDATE " . DB::prefix("creatures") . " SET " . $sql . " WHERE creatureid='$id'";
 			$result=DB::query($sql) or output("`\$".DB::error()."`0`n`#$sql`0`n");
-		}else{
-			$cols = array();
-			$vals = array();
+        }
+        else
+        {
+			$cols = [];
+			$vals = [];
 
-			foreach ($post as $key=>$val) {
-				if (substr($key,0,8)=="creature") {
+            foreach ($post as $key=>$val)
+            {
+                if (substr($key,0,8)=="creature")
+                {
 					array_push($cols,$key);
 					array_push($vals,$val);
 				}
@@ -67,9 +75,11 @@ if ($op == "save"){
 			array_push($cols, "graveyard");
 			array_push($vals, $grave);
 			reset($creaturestats[$lev]);
-			foreach ($creaturestats[$lev] as $key=>$val){
-				if ($post[$key]!="") continue;
-				if ($key!="creaturelevel"&& substr($key,0,8)=="creature"){
+            foreach ($creaturestats[$lev] as $key=>$val)
+            {
+				if (isset($post[$key]) && $post[$key] != '') continue;
+                if ($key != 'creaturelevel' && substr($key,0,8) == 'creature')
+                {
 					array_push($cols,$key);
 					array_push($vals,$val);
 				}
@@ -78,17 +88,17 @@ if ($op == "save"){
 			$result=DB::query($sql);
 			$id = DB::insert_id();
 		}
-		if (DB::affected_rows()) {
-			output("`^Creature saved!`0`n");
-		} else {
-			output("`^Creature `\$not`^ saved!`0`n");
-		}
-	} elseif ($subop == "module") {
+        if (DB::affected_rows()) { output("`^Creature saved!`0`n"); }
+        else { output("`^Creature `\$not`^ saved!`0`n"); }
+    }
+    elseif ($subop == 'module')
+    {
 		// Save module settings
 		$module = httpget("module");
 		$post = httpallpost();
 		reset($post);
-		while(list($key, $val) = each($post)) {
+        while(list($key, $val) = each($post))
+        {
 			set_module_objpref("creatures", $id, $key, $val, $module);
 		}
 		output("`^Saved!`0`n");
@@ -101,7 +111,8 @@ if ($op == "save"){
 
 $op = httpget('op');
 $id = httpget('creatureid');
-if ($op=="del"){
+if ($op=="del")
+{
 	$sql = "DELETE FROM " . DB::prefix("creatures") . " WHERE creatureid = '$id'";
 	DB::query($sql);
 	if (DB::affected_rows()>0){
@@ -110,16 +121,20 @@ if ($op=="del"){
 	}else{
 		output("Creature not deleted: %s", DB::error());
 	}
-	$op="";
-	httpset('op', "");
+	$op = '';
+	httpset('op', '');
 }
-if ($op=="" || $op=="search"){
-	$level = (int) httpget("level");
+if ($op == '' || $op == 'search')
+{
+	$level = (int) httpget('level');
 	if (!$level) $level = 1;
-	$q = httppost("q");
-	if ($q) {
+	$q = httppost('q');
+    if ($q)
+    {
 		$where = "creaturename LIKE '%$q%' OR creaturecategory LIKE '%$q%' OR creatureweapon LIKE '%$q%' OR creaturelose LIKE '%$q%' OR createdby LIKE '%$q%'";
-	} else {
+    }
+    else
+    {
 		$where = "creaturelevel='$level'";
 	}
 	$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE $where ORDER BY creaturelevel,creaturename";
@@ -188,33 +203,44 @@ if ($op=="" || $op=="search"){
 		rawoutput("</td></tr>");
 	}
 	rawoutput("</table>");
-}else{
+}
+else
+{
 	$level = (int) httpget('level');
 	if (!$level) $level = 1;
-	if ($op=="edit" || $op=="add"){
+    if ($op == 'edit' || $op == 'add')
+    {
 		require_once 'lib/showform.php';
 		addnav("Edit");
 		addnav("Creature properties", "creatures.php?op=edit&creatureid=$id");
 		addnav("Add");
 		addnav("Add Another Creature", "creatures.php?op=add&level=$level");
 		module_editor_navs("prefs-creatures", "creatures.php?op=edit&subop=module&creatureid=$id&module=");
-		if ($subop == "module") {
+        if ($subop == "module")
+        {
 			$module = httpget("module");
 			rawoutput("<form action='creatures.php?op=save&subop=module&creatureid=$id&module=$module' method='POST'>");
 			module_objpref_edit("creatures", $module, $id);
 			rawoutput("</form>");
 			addnav("", "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
-		} else {
+        }
+        else
+        {
 			if ($op=="edit" && $id!=""){
 				$sql = "SELECT * FROM " . DB::prefix("creatures") . " WHERE creatureid=$id";
 				$result = DB::query($sql);
-				if (DB::num_rows($result)<>1){
+                if (DB::num_rows($result)<>1)
+                {
 					output("`4Error`0, that creature was not found!");
-				}else{
+                }
+                else
+                {
 					$row = DB::fetch_assoc($result);
 				}
 				$level = $row['creaturelevel'];
-			} else {
+            }
+            else
+            {
 				//check what was posted if this is a refresh, always fill in the base values
 				if ($refresh) $level = (int)httppost('creaturelevel');
 				$row = $creaturestats[$level];
@@ -257,27 +283,30 @@ if ($op=="" || $op=="search"){
 			);
 			rawoutput("<form action='creatures.php?op=save' method='POST'>");
 			lotgd_showform($form, $row);
-			$refresh=translate_inline("Refresh");
-			rawoutput("<input type='submit' class='button' name='refresh' value='$refresh'>");
+			$refresh = translate_inline("Refresh");
+			rawoutput("<input type='submit' class='ui yellow button' name='refresh' value='$refresh'>");
 			rawoutput("</form>");
-			addnav("","creatures.php?op=save");
-			if ($row['creatureaiscript']!='') {
+			addnav('', "creatures.php?op=save");
+            if ($row['creatureaiscript']!='')
+            {
 				$scriptfile="scripts/".$row['creatureaiscript'].".php";
-				if (file_exists($scriptfile)) {
+                if (file_exists($scriptfile))
+                {
 					output("Current Script File Content:`n`n");
 					output_notl(implode("`n",str_replace(array("`n"),array("``n"),color_sanitize(file($scriptfile)))));
 				}
 			}
 		}
-	}else{
+    }
+    else
+    {
 		$module = httpget("module");
 		rawoutput("<form action='mounts.php?op=save&subop=module&creatureid=$id&module=$module' method='POST'>");
 		module_objpref_edit("creatures", $module, $id);
 		rawoutput("</form>");
-		addnav("", "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
+		addnav('', "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
 	}
-	addnav("Navigation");
-	addnav("Return to the creature editor","creatures.php?level=$level");
+	addnav('Navigation');
+	addnav('Return to the creature editor', "creatures.php?level=$level");
 }
 page_footer();
-?>
