@@ -77,7 +77,6 @@ define([
                 }
             }).then(function () {}, function () {})
         }
-        else return
     }
 
     return Lotgd

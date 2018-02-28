@@ -66,8 +66,6 @@ define([
 
             arr[name].set(value)
         }
-
-        return
     }
 
     /**

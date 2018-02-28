@@ -44,8 +44,6 @@ define([
         }
 
         toastr.configRestart()
-
-        return
     }
 
     return Lotgd
