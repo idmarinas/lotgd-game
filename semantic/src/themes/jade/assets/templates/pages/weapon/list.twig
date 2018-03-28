@@ -16,21 +16,21 @@
                         {% if row.value <= (user.gold + tradeinvalue) %}
                             {% if not unavailable %}
                                 {% set color = '`&' %}
-                                <a href='{{ ('weapons.php?op=buy&id=' ~ row.weaponid)|lotgd_url }}'>{{ (color ~ row.weaponname ~ '`0')|appoencode }}</a>
+                                <a href='{{ ('weapons.php?op=buy&id=' ~ row.weaponid)|lotgd_url }}'>{{ (color ~ row.weaponname ~ '`0')|colorize }}</a>
                             {% else %}
                                 {% set color = '`7' %}
-                                {{ (color ~ row.weaponname ~ '`0')|appoencode }}
+                                {{ (color ~ row.weaponname ~ '`0')|colorize }}
                             {% endif %}
                         {% else %}
-                            {{ (color ~ row.weaponname ~ '`0')|appoencode }}
+                            {{ (color ~ row.weaponname ~ '`0')|colorize }}
                         {% endif %}
                     </td>
-                    <td>{{ (color ~ row.damage)|appoencode }}</td>
+                    <td>{{ (color ~ row.damage)|colorize }}</td>
                     <td>
                         {% if row.alternatetext %}
-                            {{ (color ~ row.alternatetext)|appoencode }}
+                            {{ (color ~ row.alternatetext)|colorize }}
                         {% else %}
-                            {{ (color ~ row.value)|appoencode }}
+                            {{ (color ~ row.value)|colorize }}
                         {% endif %}
                     </td>
                 </tr>
