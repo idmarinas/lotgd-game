@@ -10,6 +10,8 @@
  * @package defaultPackage
  */
 
+global $html;
+
 $nopopups = [];
 $runheaders = [];
 $html = ['content' => ''];
@@ -24,7 +26,7 @@ $html = ['content' => ''];
  */
 function page_header()
 {
-	global $html, $SCRIPT_NAME, $session, $template, $runheaders, $nopopups;
+	global $html, $SCRIPT_NAME, $session, $template, $runheaders, $nopopups, $lotgdBattleContent;
 
 	$nopopups['login.php'] = 1;
 	$nopopups['motd.php'] = 1;
