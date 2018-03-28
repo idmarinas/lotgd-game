@@ -1,0 +1,80 @@
+<div class="center aligned">
+    {{ "Welcome to Legend of the Green Dragon, a browser based role playing game, based on Seth Able's Legend of the Red Dragon"|t }}
+    <br>
+    {% if getsetting('homecurtime', 1) %}
+        {{ '`@The current time in %s is `%%%s`@.`0'|t|format(getsetting('villagename', LOCATION_FIELDS), gametime())|colorize }}<br>
+    {% endif %}
+
+    {% if getsetting('homenewdaytime', 1) %}
+        {{ '`@Next new game day in: `$%s (real time)`0'|t|format(secondstonextgameday()|date('G\\h, i\\m, s\\s'))|colorize }}<br><br>
+    {% endif %}
+
+    {% if getsetting('homenewestplayer', 1) and homenewestplayer %}
+        {{ '`QThe newest resident of the realm is: `&%s`0'|t|format(homenewestplayer)|colorize }}<br><br>
+    {% endif %}
+
+    {% set result = modulehook('index', []) %}
+    {% for message in result.messages %}
+        {{ message|t|colorize }}
+    {% endfor %}
+
+    {% set result = modulehook('hometext', []) %}
+    {% for message in result.messages %}
+        {{ message|t|colorize }}
+    {% endfor %}
+
+    {% if onlinecount < getsetting('maxonline', 0) or getsetting('maxonline', 0) == 0 %}
+        {{ message|t|colorize }}<br>
+        <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="md5pass();">
+            {% include 'jade/templates/pages/home/login.twig' with {
+                text: 'Enter your name and password to enter the realm.`n'|t,
+                username: 'Username'|t,
+                password: 'Password'|t,
+                button: 'Log in'|t
+            } %}
+        </form>
+        <script language='JavaScript' src='resources/md5.js'></script>
+        <script language='JavaScript'>
+            function md5pass()
+            {
+                //encode passwords before submission to protect them even from network sniffing attacks.
+                var passbox = document.getElementById('password');
+                if (passbox.value.substring(0, 5) != '!md5!')
+                {
+                    passbox.value = '!md5!' + hex_md5(passbox.value);
+                }
+            }
+        </script>
+    {% else %}
+        {{ '`$`bServer full!`b`n`^Please wait until some users have logged out.`0'|t }}<br><br>
+        {% include 'jade/templates/pages/home/loginfull.twig' with { text: 'Server Full!'|t } %}
+    {% endif %}
+
+    {% set result = modulehook('homemiddle', []) %}
+    {% for message in result.messages %}
+        {{ message|t|colorize }}
+    {% endfor %}
+
+    {% set msg = getsetting('loginbanner', '*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*') %}
+    {{ '`n`c`b`&%s`0`b`c`n'|format(msg|t)|colorize }}
+
+    {{ '`c`2Game server running version: `@%s`0`c'|t|format(logd_version)|colorize }}
+
+    {% if skinselect %}
+        <br>
+        <form action="home.php" method="POST">
+            <table class="ui very basic centered collapsing table">
+                <tr>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline fields">
+                                <div class="field">{{ skinselect }}</div>
+                                <div class='field'><input type='submit' class='ui button' value='{{ 'Choose'|t }}'></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+</div>
