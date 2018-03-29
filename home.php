@@ -72,32 +72,17 @@ if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
 
 $data['onlinecount'] = getsetting('OnlineCount', 0);
 
-// modulehook("hometext", []);
-
 if (! isset($session['message'])) $session['message'] = '';
+
+if ($op == 'timeout') { $session['message'] .= ' Your session has timed out, you must log in again.`n'; }
+
+if (!isset($_COOKIE['lgi']))
+{
+	$session['message'] .= 'It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n';
+	$session['message'] .= "`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n";
+}
+
 $data['message'] = $session['message'];
-if ($data['onlinecount'] < getsetting('maxonline', 0) || getsetting('maxonline', 0) == 0)
-{
-    if ($op == 'timeout') { $session['message'] .= ' Your session has timed out, you must log in again.`n'; }
-
-    if (!isset($_COOKIE['lgi']))
-    {
-		$session['message'] .= 'It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n';
-		$session['message'] .= "`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n";
-    }
-
-    $data['message'] = $session['message'];
-}
-else
-{
-    if ($op == 'timeout') { $session['message'] .= ' Your session has timed out, you must log in again.`n'; }
-
-    if (!isset($_COOKIE['lgi']))
-    {
-		$session['message'] .= 'It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n';
-		$session['message'] .= "`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n";
-    }
-}
 
 $session['message'] = '';
 $data['logd_version'] = $logd_version;
