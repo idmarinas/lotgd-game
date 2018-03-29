@@ -32,12 +32,7 @@
     {% if onlinecount < getsetting('maxonline', 0) or getsetting('maxonline', 0) == 0 %}
         {{ message|t|colorize }}<br>
         <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="md5pass();">
-            {% include 'jade/templates/pages/home/login.twig' with {
-                text: 'Enter your name and password to enter the realm.`n'|t,
-                username: 'Username'|t,
-                password: 'Password'|t,
-                button: 'Log in'|t
-            } %}
+            {% include 'jade/templates/pages/home/login.twig' %}
         </form>
         <script language='JavaScript' src='resources/md5.js'></script>
         <script language='JavaScript'>
@@ -53,7 +48,7 @@
         </script>
     {% else %}
         {{ '`$`bServer full!`b`n`^Please wait until some users have logged out.`0'|t }}<br><br>
-        {% include 'jade/templates/pages/home/loginfull.twig' with { text: 'Server Full!'|t } %}
+        {% include 'jade/templates/pages/home/loginfull.twig' } %}
     {% endif %}
 
     {# Hook of home middle. If want show messages need return and array of messages #}

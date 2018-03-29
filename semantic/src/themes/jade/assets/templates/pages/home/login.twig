@@ -1,4 +1,5 @@
-{{ text|colorize }}
+{{ 'Enter your name and password to enter the realm.'|t }}
+<br>
 <table class="ui centered center aligned very basic collapsing table">
 	<tr>
 		<td><img src='images/logindragon.gif' class='noborder'></td>
@@ -8,13 +9,13 @@
 			<div class="ui form">
 				<div class="inline fields">
 					<div class="field">
-						<input name='name' id='name' accesskey='u' placeholder="{{ username }}">
+						<input name='name' id='name' accesskey='u' placeholder="{{ 'Username'|t }}">
 					</div>
 					<div class="field">
-						<input name='password' id='password' accesskey='p' type='password' placeholder="{{ password }}">
+						<input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'Password'|t }}">
 					</div>
 					<div class="field">
-						<input class="ui button" type='submit' value='{{ button }}'>
+						<input class="ui button" type='submit' value='{{ 'Log in'|t }}'>
 					</div>
 				</div>
 			</div>
@@ -22,4 +23,4 @@
 	</tr>
 </table>
 
-<p>Did you forget your password? Go <a href='create.php?op=forgot'>here</a> to retrieve a new one!</p>
+<p>{{ 'Did you forget your password? Go %shere%s to retrieve a new one!'|t|format('<a href="create.php?op=forgot">', '</a>') }}</p>
