@@ -1,28 +1,34 @@
 <div class="center aligned">
     {{ "Welcome to Legend of the Green Dragon, a browser based role playing game, based on Seth Able's Legend of the Red Dragon"|t }}
     <br>
+    {# Show de game time #}
     {% if getsetting('homecurtime', 1) %}
         {{ '`@The current time in %s is `%%%s`@.`0'|t|format(getsetting('villagename', LOCATION_FIELDS), gametime())|colorize }}<br>
     {% endif %}
 
+    {# Show the next game day #}
     {% if getsetting('homenewdaytime', 1) %}
         {{ '`@Next new game day in: `$%s (real time)`0'|t|format(secondstonextgameday()|date('G\\h, i\\m, s\\s'))|colorize }}<br><br>
     {% endif %}
 
+    {# Show de most newest resident in realm #}
     {% if getsetting('homenewestplayer', 1) and homenewestplayer %}
         {{ '`QThe newest resident of the realm is: `&%s`0'|t|format(homenewestplayer)|colorize }}<br><br>
     {% endif %}
 
+    {# Hook of home index. If want show messages need return and array of menssages #}
     {% set result = modulehook('index', []) %}
     {% for message in result.messages %}
         {{ message|t|colorize }}
     {% endfor %}
 
+    {# Hook of home text. If want show messages need return and array of menssages #}
     {% set result = modulehook('hometext', []) %}
     {% for message in result.messages %}
         {{ message|t|colorize }}
     {% endfor %}
 
+    {# Show login form or full message #}
     {% if onlinecount < getsetting('maxonline', 0) or getsetting('maxonline', 0) == 0 %}
         {{ message|t|colorize }}<br>
         <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="md5pass();">
@@ -50,16 +56,20 @@
         {% include 'jade/templates/pages/home/loginfull.twig' with { text: 'Server Full!'|t } %}
     {% endif %}
 
+    {# Hook of home middle. If want show messages need return and array of menssages #}
     {% set result = modulehook('homemiddle', []) %}
     {% for message in result.messages %}
         {{ message|t|colorize }}
     {% endfor %}
 
+    {# Login banner - Can change in Game Settings #}
     {% set msg = getsetting('loginbanner', '*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*') %}
     {{ '`n`c`b`&%s`0`b`c`n'|format(msg|t)|colorize }}
 
+    {# Version of game #}
     {{ '`c`2Game server running version: `@%s`0`c'|t|format(logd_version)|colorize }}
 
+    {# Show a skin selector #}
     {% if skinselect %}
         <br>
         <form action="home.php" method="POST">
