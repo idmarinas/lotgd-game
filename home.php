@@ -28,16 +28,16 @@ $op = httpget('op');
 page_header();
 
 clearnav();
-addnav("New to LoGD?");
-addnav("Create a character","create.php");
-addnav("Game Functions");
-addnav("Forgotten Password","create.php?op=forgot");
-addnav("List Warriors","list.php");
-addnav("Daily News", "news.php");
-addnav("Other Info");
-addnav("About LoGD","about.php");
-addnav("Game Setup Info", "about.php?op=setup");
-addnav("LoGD Net","logdnet.php?op=list");
+addnav('New to LoGD?');
+addnav('Create a character', 'create.php');
+addnav('Game Functions');
+addnav('Forgotten Password', 'create.php?op=forgot');
+addnav('List Warriors', 'list.php');
+addnav('Daily News', 'news.php');
+addnav('Other Info');
+addnav('About LoGD', 'about.php');
+addnav('Game Setup Info', 'about.php?op=setup');
+addnav('LoGD Net', 'logdnet.php?op=list');
 
 $data = [];
 if (getsetting('homenewestplayer', 1))
