@@ -1,13 +1,16 @@
 define([
     './core',
 
+    //-- Functions used in LOTGD
+    './game/md5passregister',
+    './game/datacache',
+    './game/previewfield',
+    './game/loadnewchat',
+    './game/recommended-modules',
+
     //-- Components
     './components/redirect-post',
-    './components/recommended-modules',
     './components/swal',
-    './components/datacache',
-    './components/previewfield',
-    './components/loadnewchat',
     './components/notify',
     './components/confirmation',
 
