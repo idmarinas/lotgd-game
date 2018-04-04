@@ -249,16 +249,23 @@ Class DB
 		return $r;
 	}
 
-	//-- Comprobar si una tabla existe
+    /**
+     * Check if table exist
+     *
+     * @param string $tablename
+     *
+     * @return false
+     */
 	public static function table_exists($tablename)
 	{
-		if (defined("DB_NODB") && !defined("LINK")) return false;
+		if (defined('DB_NODB') && !defined('LINK')) return false;
 
 		$metadata = new Metadata(self::getAdapter());
 
 		try
 		{
-			$table = $metadata->getTable($tablename);
+            $table = $metadata->getTable($tablename);
+
 			return true;
 		}
 		catch(Exception $e)
@@ -273,13 +280,27 @@ Class DB
 		return self::getAdapter()->getPlatform()->getName();
 	}
 
-	//-- Quote value for safe using in DB
+    /**
+     * Quote value for safe using in DB
+     *
+     * @param string $value
+     *
+     * @return string
+     */
 	public static function quoteValue($value)
 	{
-		return self::getAdapter()->getPlatform()->quoteValue($value);
-	}
+		return (string) self::getAdapter()->getPlatform()->quoteValue((string) $value);
+    }
 
-	//-- Función para crear una plantilla y mostrar una página en el die de la conexión
+	/**
+     * Function to create template and show page on conexion die
+     *
+     * @param string $title
+     * @param string $message
+     * @param boolean $showtrace
+     *
+     * @return string
+     */
 	private static function template($title, $message, $showtrace = false)
 	{
 		require_once 'lib/sanitize.php';
@@ -294,13 +315,13 @@ Class DB
 	}
 
 	/**
-	 * Funciones propias de Zend
+	 * Alias for funtions of Zend Framework (Component Zend DB)
 	 */
 
 	//-- Funciones de base de datos
 	private static function sql()
 	{
-		if (!self::$sql)
+		if (! self::$sql)
 		{
 			$adapter = self::getAdapter();
 
@@ -310,31 +331,64 @@ Class DB
 		return self::$sql;
 	}
 
+    /**
+     * Select API
+     *
+     * @param string|false $table
+     * @param boolean $prefixed
+     *
+     * @return Object
+     */
 	public static function select($table = false, $prefixed = true)
 	{
         if ($table && $prefixed) return self::sql()->select(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
-		else  return self::sql()->select();
+		else return self::sql()->select();
 	}
 
+    /**
+     * Insert API
+     *
+     * @param string|false $table
+     * @param boolean $prefixed
+     *
+     * @return Object
+     */
 	public static function insert($table = false, $prefixed = true)
 	{
 		if ($table && $prefixed) return self::sql()->insert(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
-		else  return self::sql()->insert();
-	}
+		else return self::sql()->insert();
+    }
+
+    /**
+     * Update API
+     *
+     * @param string|false $table
+     * @param boolean $prefixed
+     *
+     * @return Object
+     */
 	public static function update($table = false, $prefixed = true)
 	{
 		if ($table && $prefixed) return self::sql()->update(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
-		else  return self::sql()->update();
+		else return self::sql()->update();
 	}
 
+    /**
+     * Delete API
+     *
+     * @param string|false $table
+     * @param boolean $prefixed
+     *
+     * @return Object
+     */
 	public static function delete($table = false, $prefixed = true)
 	{
 		if ($table && $prefixed) return self::sql()->delete(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
-		else  return self::sql()->delete();
+		else return self::sql()->delete();
 	}
 
     /**
@@ -371,12 +425,26 @@ Class DB
 		return;
 	}
 
+    /**
+     * Get a sql query string
+     *
+     * @return string
+     */
     public static function sqlString()
     {
         return self::$sqlString;
     }
 
-	//-- Funciones para paginación
+    //-- Funciones para paginación
+    /**
+     * Undocumented function
+     *
+     * @param Select $select
+     * @param integer $page
+     * @param integer $perpage
+     *
+     * @return Object|Paginator
+     */
 	public static function paginator($select, $page = 1, $perpage = 25)
 	{
         //-- Se combierte $page en un número y si es 0 se pone como 1
