@@ -1,0 +1,22 @@
+<p class="center aligned">{{ '`#Your login request has been validated. You may now log in.`0' |t|colorize}}</p>
+<form action="login.php" method="POST">
+    <input name="name" value="{{ login }}" type="hidden">
+    <input name="password" value="{{ password }}" type="hidden">
+    <input name="force" value="1" type="hidden">
+
+    <input type="submit" class="ui button" value="{{ 'Click here to log in'|t }}">
+</form>
+
+<br><br>
+
+{% if trash %}
+    {{ '`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`0'|t|format(trash)|colorize }}<br>
+{% endif %}
+
+{% if new %}
+    {{ '`^Characters that have never reached level 2 will be deleted after %s days of no activity.`0'|t|format(new)|colorize }}<br>
+{% endif %}
+
+{% if old %}
+    {{ '`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`0'|t|format(old)|colorize }}<br>
+{% endif %}

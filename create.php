@@ -2,7 +2,7 @@
 // translator ready
 // addnews ready
 // mail ready
-define('ALLOW_ANONYMOUS',true);
+define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 require_once 'lib/is_email.php';
@@ -12,26 +12,32 @@ require_once 'lib/sanitize.php';
 require_once 'lib/settings_extended.php';
 require_once 'lib/serverfunctions.class.php';
 
+checkban();
+
 tlschema('create');
 
-$trash = getsetting("expiretrashacct",1);
-$new = getsetting("expirenewacct",10);
-$old = getsetting("expireoldacct",45);
+$trash = getsetting('expiretrashacct', 1);
+$new = getsetting('expirenewacct', 10);
+$old = getsetting('expireoldacct', 45);
 
-checkban();
 $op = httpget('op');
+
 if ($op == 'val' || $op == 'forgotval')
 {
     if (ServerFunctions::isTheServerFull() == true)
     {
-		//server is full, your "cheat" does not work here buddy ;) you can't bypass this!
-        page_header('Account Validation');
-		output('Sorry, there are too many people online. Click at the link you used to get here later on. Thank you.');
+        //server is full, your "cheat" does not work here buddy ;) you can't bypass this!
         addnav('Login', 'index.php');
+
+        page_header('Account Validation');
+
+        rawoutput($lotgd_tpl->renderThemeTemplate('pages/create/serverfull.twig', []));
 
         page_footer();
 	}
 }
+
+page_header('Create A Character');
 
 if ($op == 'forgotval')
 {
@@ -44,43 +50,37 @@ if ($op == 'forgotval')
 
     $result = DB::execute($select);
 
-    if (DB::num_rows($result) > 0)
+    if ($result->count() > 0)
     {
         $row = $result->current();
 
-		$sql = "UPDATE " . DB::prefix("accounts") . " SET forgottenpassword='' WHERE forgottenpassword='$id';";
-		DB::query($sql);
-		output("`#`cYour login request has been validated.  You may now log in.`c`0");
-		rawoutput("<form action='login.php' method='POST'>");
-		rawoutput("<input name='name' value=\"{$row['login']}\" type='hidden'>");
-		rawoutput("<input name='password' value=\"!md52!{$row['password']}\" type='hidden'>");
-		rawoutput("<input name='force' value='1' type='hidden'>");
-		$click = translate_inline("Click here to log in");
-		rawoutput("<input type='submit' class='ui button' value='$click'></form>");
-		output_notl("`n");
-        if ($trash > 0)
-        {
-			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
-		}
-        if ($new > 0)
-        {
-			output("`^Characters that have never reached level 2 will be deleted after %s days of no activity.`n`0", $new);
-		}
-        if ($old > 0)
-        {
-			output("`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`n`0", $old);
-		}
+        $update = DB::update('accounts');
+        $update->set(['forgottenpassword' => ''])
+            ->where->equalTo('forgottenpassword', $id);
+        DB::execute($update);
+
 		//rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
-		if ($row['emailvalidation']!="" && substr($row['emailvalidation'],0,1)!="x"){
-			$sql="UPDATE ".DB::prefix('accounts')." SET emailvalidation='' WHERE acctid=".$row['acctid'];
-			DB::query($sql);
-		}
+        if ($row['emailvalidation'] != '' && substr($row['emailvalidation'], 0, 1) != 'x')
+        {
+            $update = DB::update('accounts');
+            $update->set(['emailvalidation' => ''])
+                ->where->equalTo('acctid', $row['acctid']);
+            DB::execute($update);
+        }
+
+        $data = [
+            'login' => $row['login'],
+            'password' => "!md52!{$row['password']}",
+            'trash' => $trash,
+            'new' => $new,
+            'old' => $old,
+        ];
+
+        rawoutput($lotgd_tpl->render('pages/forgotval/result.twig', $data));
     }
     else
     {
-		output("`#Your request could not be verified.`n`n");
-		output("This may be because the link you used is invalid.");
-		output("Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail.`n`nIn case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got.`n`n");
+        rawoutput($lotgd_tpl->render('pages/forgotval/noresult.twig', []));
     }
 }
 elseif ($op == 'val')
@@ -94,247 +94,260 @@ elseif ($op == 'val')
 
     $result = DB::execute($select);
 
-    if (DB::num_rows($result) > 0)
+    if ($result->count() > 0)
     {
 		$row = $result->current();
+        $dataTpl = [
+            'login' => $row['login'],
+            'password' => "!md52!{$row['password']}",
+            'trash' => $trash,
+            'new' => $new,
+            'old' => $old,
+        ];
         if ($row['replaceemail'] != '')
         {
-			$replace_array=explode("|",$row['replaceemail']);
-			$replaceemail=$replace_array[0]; //1==date
+            require_once 'lib/debuglog.php';
+
+			$replace_array = explode('|', $row['replaceemail']);
+			$replaceemail = $replace_array[0]; //1==date
 			//note: remove any forgotten password request!
-			$sql="UPDATE ".DB::prefix("accounts")." SET emailaddress='".$replaceemail."', replaceemail='',forgottenpassword='' WHERE emailvalidation='$id';";
-			DB::query($sql);
-			output("`#`c Email changed successfully!`c`0`n");
-			require_once("lib/debuglog.php");
-			debuglog("Email change request validated by link from ".$row['emailaddress']." to ".$replaceemail,$row['acctid'],$row['acctid'],"Email");
+
+            $update = DB::update('accounts');
+            $update->set(['emailaddress' => $replaceemail, 'replaceemail' => '', 'forgottenpassword' => ''])
+                ->where->equalTo('emailvalidation', $id);
+            DB::execute($update);
+
+			$data['messages'][] = '`#`c Email changed successfully!`c`0`n';
+            debuglog("Email change request validated by link from ".$row['emailaddress']." to ".$replaceemail, $row['acctid'], $row['acctid'], 'Email');
+
 			//If a superuser changes email, we want to know about it... at least those who can ee it anyway, the user editors...
-			if ($row['superuser']>0) {
+            if ($row['superuser'] > 0)
+            {
 				// 5 failed attempts for superuser, 10 for regular user
 				// send a system message to admin
-				require_once("lib/systemmail.php");
+                require_once 'lib/systemmail.php';
+
 				$sql = "SELECT acctid FROM " . DB::prefix("accounts") ." WHERE (superuser&".SU_EDIT_USERS.")";
 				$result2 = DB::query($sql);
-				$subj = translate_mail(array("`#%s`j has changed the email address",$row['name']),0);
-				$alert = translate_mail(array("Email change request validated by link to %s from %s originally for login '%s'.",$replaceemail,$row['emailaddress'],$row['login']),0);
-				while ($row2 = DB::fetch_assoc($result2)) {
-					$msg = translate_mail(array("This message is generated as a result of an email change to a superuser account.  Log Follows:`n`n%s",$alert),0);
-					systemmail($row2['acctid'],$subj,$msg,0,$noemail);
+				$subj = translate_mail(['`#%s`j has changed the email address', $row['name']], 0);
+				$alert = translate_mail(["Email change request validated by link to %s from %s originally for login '%s'.", $replaceemail, $row['emailaddress'], $row['login']], 0);
+                while ($row2 = DB::fetch_assoc($result2))
+                {
+					$msg = translate_mail(['This message is generated as a result of an email change to a superuser account. Log Follows:`n`n%s', $alert], 0);
+					systemmail($row2['acctid'], $subj, $msg, 0, $noemail);
 				}
 			}
+        }
+        $update = DB::update('accounts');
+        $update->set(['emailvalidation' => ''])
+            ->where->equalTo('emailvalidation', $id);
+        DB::execute($update);
 
-		}
-		$sql = "UPDATE " . DB::prefix("accounts") . " SET emailvalidation='' WHERE emailvalidation='$id';";
-		DB::query($sql);
-		output("`#`cYour email has been validated.  You may now log in.`c`0");
-		output("Your email has been validated, your login name is `^%s`0.`n`n",
-				$row['login']);
-        if ($row['replaceemail']=='')
-        {
-			//no auto-login for email changers
-			rawoutput("<form action='login.php' method='POST'>");
-			rawoutput("<input name='name' value=\"{$row['login']}\" type='hidden'>");
-			rawoutput("<input name='password' value=\"!md52!{$row['password']}\" type='hidden'>");
-			rawoutput("<input name='force' value='1' type='hidden'>");
-			$click = translate_inline("Click here to log in");
-			rawoutput("<input type='submit' class='ui button' value='$click'></form>");
-		}
-		output_notl("`n");
-        if ($trash > 0)
-        {
-			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
-		}
-        if ($new > 0)
-        {
-			output("`^Characters that have never reached level 2 will be deleted after %s days of no activity.`n`0", $new);
-		}
-        if ($old > 0)
-        {
-			output("`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`n`0", $old);
-		}
-		savesetting("newestplayer", $row['acctid']);
+		$dataTpl['replaceemail'] = $row['replaceemail'];
+
+        savesetting('newestplayer', $row['acctid']);
+
+        rawoutput($lotgd_tpl->render('pages/val/result.twig', $dataTpl));
     }
     else
     {
-		output("`#Your email could not be verified.`n`n");
-		output("This may be because you already validated your email.");
-		output("Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail.`n`nIn case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got.`n`n");
+		rawoutput($lotgd_tpl->render('pages/val/noresult.twig', []));
 	}
 }
 
 if ($op == 'forgot')
 {
-	$charname = httppost('charname');
-	if ('' != $charname)
+    $charname = httppost('charname');
+
+    $data = [
+        'requireemail' => getsetting('requireemail', 0)
+    ];
+
+	if ($charname != '')
     {
-		$sql = "SELECT acctid,login,emailaddress,forgottenpassword,password FROM " . DB::prefix("accounts") . " WHERE login='$charname'";
-		$result = DB::query($sql);
-		if (0 < DB::num_rows($result))
+        $select = DB::select('accounts');
+        $select->columns(['acctid', 'login', 'emailaddress', 'forgottenpassword', 'password'])
+            ->where->equalTo('login', $charname);
+
+        $result = DB::execute($select);
+
+		if ($result->count() > 0)
         {
 			$row = DB::fetch_assoc($result);
-            if (trim($row['emailaddress'])!="")
+            if (trim($row['emailaddress']) != '')
             {
-                if ($row['forgottenpassword']=="")
+                if ($row['forgottenpassword'] == '')
                 {
-					$row['forgottenpassword']=substr("x".md5(date("Y-m-d H:i:s").$row['password']),0,32);
+					$row['forgottenpassword'] = substr('x'.md5(date('Y-m-d H:i:s').$row['password']), 0, 32);
 					$sql = "UPDATE " . DB::prefix("accounts") . " SET forgottenpassword='{$row['forgottenpassword']}' where login='{$row['login']}'";
 					DB::query($sql);
 				}
 
-                $subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'),$row['acctid']);
-				$msg = translate_mail($settings_extended->getSetting('forgottenpasswordmailtext'),$row['acctid']);
-				$replace=array(
-					"{login}"=>$row['login'],
-					"{acctid}"=>$row['acctid'],
-					"{emailaddress}"=>$row['emailaddress'],
-					"{requester_ip}"=>$_SERVER['REMOTE_ADDR'],
-					"{gameurl}"=>($_SERVER['SERVER_PORT']==443?"https":"http")."://".($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
-					"{forgottenid}"=>$row['forgottenpassword'],
-					);
+                $subj = translate_mail($settings_extended->getSetting('forgottenpasswordmailsubject'), $row['acctid']);
+				$msg = translate_mail($settings_extended->getSetting('forgottenpasswordmailtext'), $row['acctid']);
+				$replace = [
+					'{login}' => $row['login'],
+					'{acctid}' => $row['acctid'],
+					'{emailaddress}' => $row['emailaddress'],
+					'{requester_ip}' => $_SERVER['REMOTE_ADDR'],
+					'{gameurl}' => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
+					'{forgottenid}' => $row['forgottenpassword'],
+                ];
 
-				$keys=array_keys($replace);
-				$values=array_values($replace);
-				$msg=str_replace($keys,$values,$msg);
+				$keys = array_keys($replace);
+				$values = array_values($replace);
+				$msg = str_replace($keys,$values,$msg);
 
-				lotgd_mail($row['emailaddress'],$subj,str_replace("`n","\n",$msg));
-				output("`#Sent a new validation email to the address on file for that account.");
-				output("You may use the validation email to log in and change your password.");
+                lotgd_mail($row['emailaddress'], $subj, str_replace('`n', '\n', $msg));
+
+				$data['messages'][] = '`#Sent a new validation email to the address on file for that account.`0`n';
+				$data['messages'][] = '`#You may use the validation email to log in and change your password.`0`n';
             }
             else
             {
-				output("`#We're sorry, but that account does not have an email address associated with it, and so we cannot help you with your forgotten password.");
-				output("Use the Petition for Help link at the bottom of the page to request help with resolving your problem.");
+				$data['messages'][] = "`#We're sorry, but that account does not have an email address associated with it, and so we cannot help you with your forgotten password.`0`n";
+				$data['messages'][] = '`#Use the Petition for Help link at the bottom of the page to request help with resolving your problem.`0`n';
 			}
         }
         else
         {
-			output("`#Could not locate a character with that name.");
-			output("Look at the List Warriors page off the login page to make sure that the character hasn't expired and been deleted.");
+			$data['messages'][] = '`#Could not locate a character with that name.`0`n';
+			$data['messages'][] = "`#Look at the List Warriors page off the login page to make sure that the character hasn't expired and been deleted.`0`n";
 		}
     }
-    else
-    {
-		rawoutput("<form action='create.php?op=forgot' method='POST'>");
 
-		output_notl("`n");
+    rawoutput($lotgd_tpl->renderThemeTemplate('pages/create/forgot.twig', $data));
+}
 
-		$data = [
-            'requireemail' => getsetting("requireemail", 0),
-			'sendbutton' => translate_inline('Email me my password')
-		];
-		output_notl($lotgd_tpl->renderThemeTemplate('content/forgot.twig', $data), true);
-		unset($data);
-		rawoutput("</form>");
-	}
-}
-page_header("Create A Character");
-if (0 == getsetting("allowcreation",1))
-{
-	output("`\$Creation of new accounts is disabled on this server.");
-	output("You may try it again another day or contact an administrator.");
-}
+if (0 == getsetting('allowcreation', 1)) { rawoutput($lotgd_tpl->renderThemeTemplate('pages/create/notallowcreation.twig', [])); }
 else
 {
+    $data = [];
     if ($op == 'create')
     {
-		$emailverification="";
-		$shortname = sanitize_name(getsetting("spaceinname", 0), httppost('name'));
+		$emailverification = '';
+		$shortname = sanitize_name(getsetting('spaceinname', 0), httppost('name'));
 
-        if (soap($shortname)!=$shortname)
+        if (soap($shortname) != $shortname)
         {
-			output("`\$Error`^: Bad language was found in your name, please consider revising it.`n");
-			$op="";
+            $data['messages'] = [
+                '`$Error: `^Bad language was found in your name, please consider revising it.`n`0'
+            ];
+			$op = '';
         }
         else
         {
             $blockaccount = false;
-            $msg = '';
 			$email = httppost('email');
-			$pass1= httppost('pass1');
-			$pass2= httppost('pass2');
-			if (getsetting("blockdupeemail",0)==1 && getsetting("requireemail",0)==1){
-				$sql = "SELECT login FROM " . DB::prefix("accounts") . " WHERE emailaddress='".DB::quoteValue($email)."'";
-				$result = DB::query($sql);
-				if (DB::num_rows($result)>0){
-					$blockaccount=true;
-					$msg.= translate_inline("You may have only one account.`n");
+			$pass1 = httppost('pass1');
+			$pass2 = httppost('pass2');
+            if (getsetting('blockdupeemail', 0) == 1 && getsetting('requireemail', 0) == 1)
+            {
+                $select = DB::select('accounts');
+                $select->columns(['login'])
+                    ->where->equalTo('emailaddress', (string) $email);
+
+                $result = DB::execute($select);
+
+                if ($result->count() > 0)
+                {
+					$blockaccount = true;
+					$data['messages'][] = 'You may have only one account.`n';
 				}
 			}
 
-			$passlen = (int)httppost("passlen");
-            if (substr($pass1, 0, 5) != "!md5!" && substr($pass1, 0, 6) != "!md52!")
+			$passlen = (int) httppost('passlen');
+            if (substr($pass1, 0, 5) != '!md5!' && substr($pass1, 0, 6) != '!md52!')
             {
 				$passlen = strlen($pass1);
-			}
-            if ($passlen<=3)
+            }
+
+            if ($passlen <= 3)
             {
-				$msg.=translate_inline("Your password must be at least 4 characters long.`n");
-				$blockaccount=true;
-			}
+				$data['messages'][] = 'Your password must be at least 4 characters long.`n';
+				$blockaccount = true;
+            }
+
             if ($pass1 != $pass2)
             {
-				$msg.=translate_inline("Your passwords do not match.`n");
-				$blockaccount=true;
-			}
+				$data['messages'][] = 'Your passwords do not match.`n';
+				$blockaccount = true;
+            }
+
             if (strlen($shortname) < 3)
             {
-				$msg.=translate_inline("Your name must be at least 3 characters long.`n");
-				$blockaccount=true;
-			}
+				$data['messages'][] = 'Your name must be at least 3 characters long.`n';
+				$blockaccount = true;
+            }
+
             if (strlen($shortname) > 25)
             {
-				$msg.=translate_inline("Your character's name cannot exceed 25 characters.`n");
-				$blockaccount=true;
-			}
-			if (getsetting('requireemail', 0) == 1 && is_email($email) || getsetting('requireemail', 0) == 0) {}
-            else
+				$data['messages'][] = "Your character's name cannot exceed 25 characters.`n";
+				$blockaccount = true;
+            }
+
+			if (getsetting('requireemail', 0) == 1 && ! is_email($email) || getsetting('requireemail', 0))
             {
-				$msg .= translate_inline("You must enter a valid email address.`n");
-				$blockaccount=true;
-			}
-			$args = modulehook("check-create", httpallpost());
+				$data['messages'][] = 'You must enter a valid email address.`n';
+				$blockaccount = true;
+            }
+
+			$args = modulehook('check-create', httpallpost());
             if(isset($args['blockaccount']) && $args['blockaccount'])
             {
-				$msg .= $args['msg'];
-				$blockaccount = true;
-			}
-
-            if (!$blockaccount)
-            {
-				$shortname = preg_replace("/\s+/", " ", $shortname);
-				$sql = "SELECT name FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
-				$result = DB::query($sql);
-                if (DB::num_rows($result) > 0)
+                if (is_array($args['msg']))
                 {
-					output("`\$Error`^: Someone is already known by that name in this realm, please try again.");
-					$op="";
+                    $data['messages'] = array_merge($data['messages'], $args['msg']);
                 }
                 else
                 {
-					$sex = (int)httppost('sex');
+                    $data['messages'][] = $args['msg'];
+                }
+
+				$blockaccount = true;
+			}
+
+            if (! $blockaccount)
+            {
+				$shortname = preg_replace("/\s+/", ' ', $shortname);
+
+                $select = DB::select('accounts');
+                $select->columns(['name'])
+                    ->where->equalTo('login', $shortname);
+
+                $result = DB::execute($select);
+
+                if ($result->count() > 0)
+                {
+					$data['messages'][] = '`$Error`^: Someone is already known by that name in this realm, please try again.`0';
+					$op = '';
+                }
+                else
+                {
+                    require_once 'lib/titles.php';
+
+					$sex = (int) httppost('sex');
 					// Inserted the following line to prevent hacking
 					// Reported by Eliwood
 					if ($sex <> SEX_MALE) $sex = SEX_FEMALE;
-
-                    require_once 'lib/titles.php';
 
 					$title = get_dk_title(0, $sex);
                     if (getsetting('requirevalidemail', 0))
                     {
 						$emailverification = md5(date('Y-m-d H:i:s').$email);
-					}
-					$refer = httpget('r');
+                    }
+
+                    $refer = httpget('r');
+                    $referer = 0;
                     if ($refer > '')
                     {
 						$sql = "SELECT acctid FROM " . DB::prefix("accounts") . " WHERE login='".DB::quoteValue($refer)."'";
 						$result = DB::query($sql);
 						$ref = DB::fetch_assoc($result);
-						$referer=$ref['acctid'];
+						$referer = $ref['acctid'];
                     }
-                    else
-                    {
-						$referer = 0;
-					}
-					$dbpass = "";
+
+					$dbpass = '';
                     if (substr($pass1, 0, 5) == "!md5!")
                     {
 						$dbpass = md5(substr($pass1, 5));
@@ -342,149 +355,104 @@ else
                     else
                     {
 						$dbpass = md5(md5($pass1));
-					}
+                    }
+
 					$sql = "INSERT INTO " . DB::prefix("accounts") . "
 						(playername,name, superuser, title, password, sex, login, laston, uniqueid, lastip, gold, location, emailaddress, emailvalidation, referer, regdate)
 						VALUES
-						('$shortname','$title $shortname', '".getsetting("defaultsuperuser",0)."', '$title', '$dbpass', '$sex', '$shortname', '".date("Y-m-d H:i:s",strtotime("-1 day"))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting("newplayerstartgold",50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
-					DB::query($sql);
+                        ('$shortname','$title $shortname', '".getsetting("defaultsuperuser",0)."', '$title', '$dbpass', '$sex', '$shortname', '".date("Y-m-d H:i:s",strtotime("-1 day"))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting("newplayerstartgold",50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
+
+                    DB::query($sql);
+
                     if (DB::affected_rows() <= 0)
                     {
-						output("`\$Error`^: Your account was not created for an unknown reason, please try again. ");
+						$data['messages'][] = '`$Error`^: Your account was not created for an unknown reason, please try again. ';
                     }
                     else
                     {
-						$sql = "SELECT acctid, emailaddress  FROM " . DB::prefix("accounts") . " WHERE login='$shortname'";
+						$sql = "SELECT acctid, emailaddress  FROM " . DB::prefix('accounts') . " WHERE login='$shortname'";
 						$result = DB::query($sql);
 						$row = DB::fetch_assoc($result);
 						$args = httpallpost();
 						$args['acctid'] = $row['acctid'];
 						//insert output
-						$sql_output = "INSERT INTO " . DB::prefix("accounts_output") . " VALUES ({$row['acctid']},'');";
+						$sql_output = "INSERT INTO " . DB::prefix('accounts_output') . " VALUES ({$row['acctid']}, '');";
 						DB::query($sql_output);
 						//end
-						modulehook("process-create", $args);
-						if ($emailverification!=""){
-							$subj = translate_mail($settings_extended->getSetting('verificationmailsubject'),0);
-							$msg = translate_mail($settings_extended->getSetting('verificationmailtext'),0);
-							$replace=array(
-								"{login}"=>$shortname,
-								"{acctid}"=>$row['acctid'],
-								"{emailaddress}"=>$row['emailaddress'],
-								"{gameurl}"=>($_SERVER['SERVER_PORT']==443?"https":"http")."://".($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
-								"{validationid}"=>$emailverification,
-								);
+                        modulehook('process-create', $args);
 
-							$keys=array_keys($replace);
-							$values=array_values($replace);
-							$msg=str_replace($keys,$values,$msg);
-							lotgd_mail($email,$subj,str_replace("`n","\n",$msg));
-							output("`4An email was sent to `\$%s`4 to validate your address.  Click the link in the email to activate your account.`0`n`n", $email);
+                        if ($emailverification != '')
+                        {
+							$subj = translate_mail($settings_extended->getSetting('verificationmailsubject'), 0);
+							$msg = translate_mail($settings_extended->getSetting('verificationmailtext'), 0);
+							$replace = [
+								'{login}' => $shortname,
+								'{acctid}' => $row['acctid'],
+								'{emailaddress}' => $row['emailaddress'],
+								'{gameurl}' => ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http').'://'.($_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']),
+								'{validationid}' => $emailverification,
+							];
+
+							$keys = array_keys($replace);
+							$values = array_values($replace);
+                            $msg = str_replace($keys,$values,$msg);
+
+                            lotgd_mail($email, $subj, str_replace('`n','\n', $msg));
                         }
                         else
                         {
-							rawoutput("<form action='login.php' method='POST'>");
-							rawoutput("<input name='name' value=\"$shortname\" type='hidden'>");
-							rawoutput("<input name='password' value=\"$pass1\" type='hidden'>");
-							output("Your account was created, your login name is `^%s`0.`n`n", $shortname);
-							$click = translate_inline("Click here to log in");
-							rawoutput("<input type='submit' class='ui button' value='$click'>");
-							rawoutput("</form>");
-							output_notl("`n");
-							savesetting("newestplayer", $row['acctid']);
-						}
-                        if ($trash > 0)
-                        {
-							output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
-						}
-                        if ($new > 0)
-                        {
-							output("`^Characters that have never reached level 2 will be deleted after %s days of no activity.`n`0",$new);
-						}
-                        if ($old > 0)
-                        {
-							output("`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`n`0", $old);
-						}
+                            savesetting('newestplayer', $row['acctid']);
+                        }
+
+                        $data = [
+                            'emailverification' => $emailverification,
+                            'email' => $email,
+                            'trash' => $trash,
+                            'new' => $new,
+                            'old' => $old,
+                            'shortname' => $shortname
+                        ];
+
+                        rawoutput($lotgd_tpl->renderThemeTemplate('pages/create/created.twig', $data));
 					}
 				}
             }
             else
             {
-				output("`\$Error`^:`n%s", $msg);
+                array_unshift($data['messages'], '`$Error:`0`n');
 				$op = '';
 			}
 		}
-	}
+    }
+
     if ($op == '')
     {
-		output("`&`c`bCreate a Character`b`c`0");
-		$refer=httpget('r');
-		if ($refer) $refer = "&r=".htmlentities($refer, ENT_COMPAT, getsetting("charset", "UTF-8"));
+        $refer = httpget('r');
+        if ($refer) $refer = '&r=' . htmlentities($refer, ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
-		rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
-		rawoutput("<script language='JavaScript'>
-		<!--
-		function md5pass(){
-			// encode passwords
-			var plen = document.getElementById('passlen');
-			var pass1 = document.getElementById('pass1');
-			plen.value = pass1.value.length;
+		$reqbool = true;
+        $req = '`^(optional -- however, if you choose not to enter one, there will be no way that you can reset your password if you forget it!)`0';
 
-			if(pass1.value.substring(0, 5) != '!md5!') {
-				pass1.value = '!md5!'+hex_md5(pass1.value);
-			}
-			var pass2 = document.getElementById('pass2');
-			if(pass2.value.substring(0, 5) != '!md5!') {
-				pass2.value = '!md5!'+hex_md5(pass2.value);
-			}
-		}
-		//-->
-		</script>");
-		rawoutput("<form action=\"create.php?op=create$refer\" method='POST' onSubmit=\"md5pass();\">");
-		// this is the first thing a new player will se, so let's make it look
-		// better
-		rawoutput("<input type='hidden' name='passlen' id='passlen' value='0'>");
-		$r1 = translate_inline("`^(optional -- however, if you choose not to enter one, there will be no way that you can reset your password if you forget it!)`0");
-		$r2 = translate_inline("`\$(required)`0");
-		$r3 = translate_inline("`\$(required, an email will be sent to this address to verify it before you can log in)`0");
-        if (getsetting("requireemail", 0) == 0)
+        if (getsetting('requireemail', 0) == 0)
         {
-			$req = $r1;
+			$req = '`$(required, an email will be sent to this address to verify it before you can log in)`0';
 			$reqbool = false;
         }
-        elseif (getsetting("requirevalidemail", 0) == 0)
-        {
-			$req = $r2;
-			$reqbool = true;
-        }
-        else
-        {
-			$req = $r3;
-			$reqbool = true;
-		}
-		$data = [
-			'createbutton' => translate_inline('Create your character'),
-			'reqemailtext' => $req,
-			'reqemail' => $reqbool
-		];
-        $data = modulehook("create-form", $data);
+        elseif (getsetting('requirevalidemail', 0) == 0) { $req = '`$(required)`0'; }
 
-		output_notl($lotgd_tpl->renderThemeTemplate('content/register.twig', $data), true);
-		unset($data);
-		output_notl('`n`n');
-        if ($trash > 0)
-        {
-			output("`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`n`0", $trash);
-		}
-        if ($new > 0)
-        {
-			output("`^Characters that have never reached level 2 will be deleted after %s days of no activity.`n`0",$new);
-		}
-        if ($old > 0)
-        {
-			output("`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`n`0", $old);
-		}
-		rawoutput("</form>");
+        $data = array_merge($data, [
+                'formurlsubmit' => "create.php?op=create$refer",
+                'trash' => $trash,
+                'new' => $new,
+                'old' => $old,
+                'reqemail' => $reqbool,
+                'reqemailtext' => $req
+            ]
+        );
+
+        $data = modulehook('create-form', $data);
+
+		rawoutput($lotgd_tpl->renderThemeTemplate('pages/create/register.twig', $data));
 	}
 }
 addnav('Login page');

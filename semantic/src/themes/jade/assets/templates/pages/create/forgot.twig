@@ -1,0 +1,13 @@
+{% for message in messages %}
+    {{ ('`^' ~ message ~ '`0')|t|colorize }}
+{% endfor %}
+<br>
+<form action="create.php?op=forgot" method="POST">
+    <div class="ui form">
+        <div class="inline field">
+            <label>{{ "Enter your character's name:"|t|colorize }}</label>
+            <input type="text" name="charname">
+        </div>
+        <input type="submit" class="ui button" value="{{ "Email me my password"|t }}">
+    </div>
+</form>

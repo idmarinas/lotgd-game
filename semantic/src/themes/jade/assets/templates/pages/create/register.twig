@@ -1,0 +1,119 @@
+{#
+    this is the first thing a new player will se, so let's make it look better
+ #}
+
+<p class="center aligned">{{ '`&`bCreate a Character`b`0'|t|colorize }}</p>
+
+{% for message in messages %}
+    {{ ('`^' ~ message ~ '`0')|t|colorize }}
+{% endfor %}
+<br>
+<form action="{{ formurlsubmit }}" method="POST" onsubmit="Lotgd.md5PassRegister();">
+    <input type="hidden" name="passlen" id="passlen" value="0">
+    <div class="ui form">
+        <div class="field">
+            <div class="ui stackable grid">
+                <div class="four wide right aligned middle aligned column">
+                    <label>{{ 'How will you be known to this world?'|t }}</label>
+                </div>
+                <div class="twelve wide column">
+                    <input type="text" name='name' >
+                </div>
+            </div>
+        </div>
+        <div class="required field">
+            <div class="ui stackable grid">
+                <div class="four wide right aligned middle aligned column">
+                    <label>{{ 'Enter a password:'|t }}</label>
+                </div>
+                <div class="twelve wide column">
+                    <input type='password' name='pass1' id='pass1'>
+                </div>
+            </div>
+        </div>
+        <div class="required field">
+            <div class="ui stackable grid">
+                <div class="four wide right aligned middle aligned column">
+                    <label>{{ 'Re-enter it for confirmation:'|t }}</label>
+                </div>
+                <div class="twelve wide column">
+                    <input type='password' name='pass2' id='pass2'>
+                </div>
+            </div>
+        </div>
+        <div class="{{ reqemail ? 'required' }} field">
+            <div class="ui stackable grid">
+                <div class="four wide right aligned middle aligned column">
+                    <label>{{ 'Enter your email address:'|t }}</label>
+                </div>
+                <div class="twelve wide column">
+                    <input type="email" name='email'>
+                    {% if reqemailtext %}<div class="ui info message">{{ reqemailtext|t|uncolorize }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>{{ 'And are you a..?'|t }}</label>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sex" value="0" checked>
+                    <label>a Male</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="sex" value="1">
+                    <label>a Female</label>
+                </div>
+            </div>
+        </div>
+
+        {% if requireprivacy or requireterms or requireage %}
+            <div class="ui stackable grid required field">
+                <label class="five wide right aligned middle aligned column">{{ creationmsg|colorize }}</label>
+                <div class="eleven wide column">
+                    {% if requireage %}
+                        <div class="ui checkbox field">
+                            {{ requireageinput }}
+                            <label>{{ requireage|colorize }}</label>
+                        </div>
+                        <br>
+                    {% endif %}
+
+                    {% if requireterms %}
+                        <div class="ui checkbox field">
+                            {{ requiretermsinput }}
+                            <label>{{ requireterms|colorize }}</label>
+                        </div>
+                        <br>
+                    {% endif %}
+
+                    {% if requireprivacy %}
+                        <div class="ui checkbox field">
+                            {{ requireprivacyinput }}
+                            <label>{{ requireprivacy|colorize }}</label>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="center aligned field">
+            <input class="ui big primary button" type="submit" value="{{ 'Create your character'|t }}">
+        </div>
+    </div>
+</form>
+
+<br><br>
+
+{% if trash %}
+    {{ '`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`0'|t|format(trash)|colorize }}<br>
+{% endif %}
+
+{% if new %}
+    {{ '`^Characters that have never reached level 2 will be deleted after %s days of no activity.`0'|t|format(new)|colorize }}<br>
+{% endif %}
+
+{% if old %}
+    {{ '`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`0'|t|format(old)|colorize }}<br>
+{% endif %}

@@ -1,0 +1,38 @@
+{#
+    Data avaible in this template
+
+    array [
+        'emailverification',
+        'email', // E-mail used to registered
+        'trash',
+        'new',
+        'old',
+        'shortname //
+    ]
+ #}
+{% if emailverification %}
+    {{ '`4An email was sent to `$%s`4 to validate your address. Click the link in the email to activate your account.`0'|t|format(email)|colorize }}
+{% else %}
+    <form action='login.php' method='POST'>
+        <input type="hidden" name="name" value="{{ shortname }}">
+        <input type="hidden" name="password" value="{{ pass1 }}">
+
+        {{ 'Your account was created, your login name is `^%s`0.'|t|format(shortname)|colorize }}
+        <br><br>
+        <input type='submit' class='ui button' value="{{ 'Click here to log in'|t }}">
+    </form>
+{% endif %}
+
+<br><br>
+
+{% if trash %}
+    {{ '`^Characters that have never been logged into will be deleted after %s day(s) of no activity.`0'|t|format(trash)|colorize }}<br>
+{% endif %}
+
+{% if new %}
+    {{ '`^Characters that have never reached level 2 will be deleted after %s days of no activity.`0'|t|format(new)|colorize }}<br>
+{% endif %}
+
+{% if old %}
+    {{ '`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`0'|t|format(old)|colorize }}<br>
+{% endif %}
