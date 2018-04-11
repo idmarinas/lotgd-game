@@ -15,11 +15,13 @@
  * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
  */
 addnav('About LoGD');
-addnav('About LoGD','about.php');
-addnav('Game Setup Info','about.php?op=setup');
+addnav('About LoGD', 'about.php');
+addnav('Game Setup Info', 'about.php?op=setup');
 addnav('License Info', 'about.php?op=license');
 
-$sql = "SELECT * from " . DB::prefix("modules") . " WHERE active=1 ORDER BY category, formalname";
-$result = DB::query($sql);
+$select = DB::select('modules');
+$select->order('category, formalname')
+    ->where->equalTo('active', 1);
+$result = DB::execute($select);
 
 rawoutput($lotgd_tpl->renderThemeTemplate('pages/about/listmodules.twig', ['result' => $result]));

@@ -1,0 +1,18 @@
+{#
+    NOTICE
+    NOTICE Server admins may put their own information here,
+    NOTICE please leave the main about body untouched.
+    NOTICE
+
+    Data avaible in this template
+
+    [
+        'logd_version' => string
+    ]
+ #}
+{% set impressum = getsetting('impressum', '') %}
+
+{% if impressum %}
+    <hr>
+    {{ ''|nltoappon|colorize }}
+{% endif %}
