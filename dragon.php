@@ -68,7 +68,8 @@ elseif($op == 'prologue1')
 	output("Your final thought is that although you defeated the dragon, you reflect on the irony that it defeated you.`n`n");
 	output("As your vision winks out, far away in the dragon's lair, an egg shuffles to its side, and a small crack appears in its thick leathery skin.");
 
-	if ($flawless) {
+    if ($flawless)
+    {
 		output("`n`nYou fall forward, and remember at the last moment that you at least managed to grab some of the dragon's treasure, so maybe it wasn't all a total loss.");
 	}
 	addnav("It is a new day","news.php");
@@ -85,103 +86,101 @@ elseif($op == 'prologue1')
 		'extra' => $session['user']['maxhitpoints'] - $dkpoints - ($session['user']['level']*10),
 		'base' => $dkpoints + ($session['user']['level'] * 10),
     ];
-	$hpgain = modulehook("hprecalc", $hpgain);
+	$hpgain = modulehook('hprecalc', $hpgain);
 	calculate_buff_fields();
 
-	$nochange=array("acctid"=>1
-				   ,"name"=>1
-				   ,"sex"=>1
-				   ,"playername"=>1
-				   ,"strength"=>1
-				   ,"dexterity"=>1
-				   ,"intelligence"=>1
-				   ,"constitution"=>1
-				   ,"wisdom"=>1
-				   ,"password"=>1
-				   ,"marriedto"=>1
-				   ,"title"=>1
-				   ,"login"=>1
-				   ,"dragonkills"=>1
-				   ,"locked"=>1
-				   ,"loggedin"=>1
-				   ,"superuser"=>1
-				   ,"gems"=>1
-				   ,"hashorse"=>1
-				   ,"gentime"=>1
-				   ,"gentimecount"=>1
-				   ,"lastip"=>1
-				   ,"uniqueid"=>1
-				   ,"dragonpoints"=>1
-				   ,"laston"=>1
-				   ,"prefs"=>1
-				   ,"lastmotd"=>1
-				   ,"emailaddress"=>1
-				   ,"emailvalidation"=>1
-				   ,"gensize"=>1
-				   ,"bestdragonage"=>1
-				   ,"dragonage"=>1
-				   ,"donation"=>1
-				   ,"donationspent"=>1
-				   ,"donationconfig"=>1
-				   ,"bio"=>1
-				   ,"charm"=>1
-				   ,"banoverride"=>1
-				   ,"referer"=>1
-				   ,"refererawarded"=>1
-				   ,"ctitle"=>1
-				   ,"beta"=>1
-				   ,"clanid"=>1
-				   ,"clanrank"=>1
-				   ,"clanjoindate"=>1
-				   ,"regdate"=>1
-				   ,"translatorlanguages"=>1
-				   ,"replaceemail"=>1
-				   ,"forgottenpassword"=>1
-				   );
+	$nochange = [
+        'acctid' => 1,
+		'name' => 1,
+		'sex' => 1,
+		'playername' => 1,
+		'strength' => 1,
+		'dexterity' => 1,
+		'intelligence' => 1,
+		'constitution' => 1,
+		'wisdom' => 1,
+		'password' => 1,
+		'marriedto' => 1,
+		'title' => 1,
+		'login' => 1,
+		'dragonkills' => 1,
+		'locked' => 1,
+		'loggedin' => 1,
+		'superuser' => 1,
+		'gems' => 1,
+		'hashorse' => 1,
+		'gentime' => 1,
+		'gentimecount' => 1,
+		'lastip' => 1,
+		'uniqueid' => 1,
+		'dragonpoints' => 1,
+		'laston' => 1,
+		'prefs' => 1,
+		'lastmotd' => 1,
+		'emailaddress' => 1,
+		'emailvalidation' => 1,
+		'gensize' => 1,
+		'bestdragonage' => 1,
+		'dragonage' => 1,
+		'donation' => 1,
+		'donationspent' => 1,
+		'donationconfig' => 1,
+		'bio' => 1,
+		'charm' => 1,
+		'banoverride' => 1,
+		'referer' => 1,
+		'refererawarded' => 1,
+		'ctitle' => 1,
+		'beta' => 1,
+		'clanid' => 1,
+		'clanrank' => 1,
+		'clanjoindate' => 1,
+		'regdate' => 1,
+		'translatorlanguages' => 1,
+		'replaceemail' => 1,
+		'forgottenpassword' => 1,
+    ];
 
-	$nochange = modulehook("dk-preserve", $nochange);
+	$nochange = modulehook('dk-preserve', $nochange);
     $session['user']['dragonkills']++;
 
 	$badguys = $session['user']['badguy']; //needed for the dragons name later
 
 	$session['user']['dragonage'] = $session['user']['age'];
-	if ($session['user']['dragonage'] <  $session['user']['bestdragonage'] ||
-			$session['user']['bestdragonage'] == 0) {
+    if ($session['user']['dragonage'] <  $session['user']['bestdragonage'] || $session['user']['bestdragonage'] == 0)
+    {
 		$session['user']['bestdragonage'] = $session['user']['dragonage'];
 	}
-	while ($row = DB::fetch_assoc($result)) {
-		if (array_key_exists($row['Field'],$nochange) &&
-				$nochange[$row['Field']]){
-		}elseif($row['Field'] == "location"){
-			$session['user'][$row['Field']] = getsetting("villagename", LOCATION_FIELDS);
-		}else{
-			$session['user'][$row['Field']] = $row["Default"];
-		}
+    while ($row = DB::fetch_assoc($result))
+    {
+        if (array_key_exists($row['Field'], $nochange) && $nochange[$row['Field']]) { continue; }
+
+        $session['user'][$row['Field']] = $row['Default'];
 	}
-	$session['user']['gold'] = getsetting("newplayerstartgold",50);
+	$session['user']['gold'] = getsetting('newplayerstartgold', 50);
 	$session['user']['location'] = getsetting('villagename', LOCATION_FIELDS);
 	$session['user']['armor'] = getsetting('startarmor','T-Shirt');
-	$session['user']['weapon'] = getsetting('startweapon','Fists');
+    $session['user']['weapon'] = getsetting('startweapon','Fists');
 
 	$newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
 
-	$restartgold = $session['user']['gold'] +
-		getsetting("newplayerstartgold", 50)*$session['user']['dragonkills'];
+	$restartgold = $session['user']['gold'] + getsetting("newplayerstartgold", 50)*$session['user']['dragonkills'];
 	$restartgems = 0;
-	if ($restartgold > getsetting("maxrestartgold", 300)) {
-		$restartgold = getsetting("maxrestartgold", 300);
-		$restartgems = max(0,($session['user']['dragonkills'] -
-				(getsetting("maxrestartgold", 300)/
-				 getsetting("newplayerstartgold", 50)) - 1));
-		if ($restartgems > getsetting("maxrestartgems", 10)) {
-			$restartgems = getsetting("maxrestartgems", 10);
+    if ($restartgold > getsetting('maxrestartgold', 300))
+    {
+		$restartgold = getsetting('maxrestartgold', 300);
+		$restartgems = max(0,($session['user']['dragonkills'] - (getsetting('maxrestartgold', 300)/ getsetting('newplayerstartgold', 50)) - 1));
+        if ($restartgems > getsetting('maxrestartgems', 10))
+        {
+			$restartgems = getsetting('maxrestartgems', 10);
 		}
 	}
 	$session['user']['gold'] = $restartgold;
 	$session['user']['gems'] += $restartgems;
 
-	if ($flawless) {
-		$session['user']['gold'] += 3*getsetting("newplayerstartgold",50);
+    if ($flawless)
+    {
+		$session['user']['gold'] += 3*getsetting('newplayerstartgold',50);
 		$session['user']['gems'] += 1;
 	}
 
@@ -189,7 +188,8 @@ elseif($op == 'prologue1')
 	$session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
 	// Sanity check
-	if ($session['user']['maxhitpoints'] < 1) {
+    if ($session['user']['maxhitpoints'] < 1)
+    {
 		// Yes, this is a freaking hack.
 		die("ACK!! Somehow this user would end up perma-dead.. Not allowing DK to proceed!  Notify admin and figure out why this would happen so that it can be fixed before DK can continue.");
 		exit();
@@ -202,14 +202,14 @@ elseif($op == 'prologue1')
 
 	$session['user']['laston']=date("Y-m-d H:i:s",strtotime("-1 day"));
 	$session['user']['slaydragon'] = 1;
-	$companions = array();
-	$session['user']['companions'] = array();
+	$companions = [];
+	$session['user']['companions'] = [];
 
 	output("`n`nYou wake up in the midst of some trees.  Nearby you hear the sounds of a village.");
 	output("Dimly you remember that you are a new warrior, and something of a dangerous Green Dragon that is plaguing the area.  You decide you would like to earn a name for yourself by perhaps some day confronting this vile creature.");
 
 	// allow explanative text as well.
-	modulehook("dragonkilltext");
+	modulehook('dragonkilltext');
 
 	$regname = get_player_basename();
 	$badguys = ! is_array($badguys) ? @unserialize($badguys) : $badguys;
@@ -231,7 +231,7 @@ elseif($op == 'prologue1')
 	debuglog("slew the dragon and starts with {$session['user']['gold']} gold and {$session['user']['gems']} gems");
 
 	// Moved this hear to make some things easier.
-	modulehook("dragonkill", array());
+	modulehook('dragonkill', []);
 	invalidatedatacache("list.php-warsonline");
 }
 
