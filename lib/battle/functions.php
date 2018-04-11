@@ -238,22 +238,26 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 		if ($denyflawless) { array_push($lotgdBattleContent['battleend'], "`c`\${$denyflawless}`0`c"); }
 		elseif ($session['user']['level'] <= $creaturelevel)
 		{
-			if (is_module_active('staminasystem') && $forest === true)//-- Only When active stamina system and is forest
-			{
-				require_once 'modules/staminasystem/lib/lib.php';
-
-				array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b`c');
-				addstamina(25000);
-			}
-			else if ($forest === false)//-- Only when is a Graveyard
+			if ($forest === false)//-- Only when is a Graveyard
             {
                 array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0`b`c');
 				$session['user']['gravefights']++;
             }
-            else//-- Other
+            //-- $forest === true or is other value
+            else
 			{
-				array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b`c');
-				$session['user']['turns']++;
+				if (is_module_active('staminasystem'))
+                {
+                    require_once 'modules/staminasystem/lib/lib.php';
+
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b`c');
+                    addstamina(25000);
+                }
+                else
+                {
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b`c');
+                    $session['user']['turns']++;
+                }
 			}
 		}
 		else
