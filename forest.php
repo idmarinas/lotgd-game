@@ -31,9 +31,17 @@ if ($op == 'run')
 		foreach($companions as $index => $companion)
 		{
 			if(isset($companion['expireafterfight']) && $companion['expireafterfight']) { unset($companions[$index]); }
-		}
+        }
+
+        if (is_string($session['user']['badguy'])) $enemies = unserialize($session['user']['badguy']);
+
+        if (is_array($enemies))
+        {
+            $enemies['options']['endbattle'] = 1;
+
+            $session['user']['badguy'] = createstring($enemies);
+        }
 	}
-	else { output("`c`b`\$You failed to flee your opponent!`0`b`c"); }
 }
 
 if ($op == 'dragon')
