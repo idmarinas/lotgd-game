@@ -1,3 +1,4 @@
+{# This template get same data of his parent #}
 <table class='ui very compact striped selectable table'>
     <thead>
         <tr>
@@ -7,7 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for row in content %}
+        {% for row in armors %}
             {% set row = modulehook('modify-armor', row) %}
             {% if not row.skip %}
                 <tr>
