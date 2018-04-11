@@ -2,12 +2,17 @@
 // translator ready
 // addnews ready
 // mail ready
-use Zend\Validator\EmailAddress;
 
+/**
+ * Check if given email is valid
+ *
+ * @param string $email
+ *
+ * @return boolean
+ */
 function is_email($email)
 {
-    $validator = new EmailAddress();
+    $validator = new Zend\Validator\EmailAddress;
 
     return $validator->isValid($email);
 }
-?>
