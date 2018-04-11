@@ -170,7 +170,7 @@ if ($op==""){
 		if ($row['companionactive']){
 			rawoutput("$del |");
 		}else{
-			$mconf = sprintf($conf, $companions[$row['companionid']]);
+			// $mconf = sprintf($conf, $companions[$row['companionid']]);
 			rawoutput("<a href='companions.php?op=del&id={$row['companionid']}'>$del</a> |");
 			addnav("","companions.php?op=del&id={$row['companionid']}");
 		}
