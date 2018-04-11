@@ -54,14 +54,19 @@ class LotgdTemplate extends Twig_Environment
 	/**
 	 * Renders a template of the theme
 	 *
-	 * @param string $name    The template name
+	 * @param string $name The template name
      * @param array  $context An array of parameters to pass to the template
      *
      * @return string The rendered template
 	 */
 	public function renderThemeTemplate($name, $context)
 	{
+        global $session;
+
 		$folder = $this->themefolder . '/templates';
+
+        $context = array_merge($context, ['user' => $session['user']]);
+
 		return $this->render($folder.'/'.$name, $context);
 	}
 
@@ -162,6 +167,19 @@ class LotgdTemplate extends Twig_Environment
                 // This will take care of download strings such as: not publically released or contact admin
                 return in_array($protocol, $protocols);
             }),
+            //-- Get value of setting
+            new Twig_SimpleFunction('getsetting', function ($name, $default) {
+                return getsetting($name, $default);
+            }),
+            //-- Time in the game
+            new Twig_SimpleFunction('gametime', function () {
+                return getgametime();
+            }),
+            //-- Seconds to next game day
+            new Twig_SimpleFunction('secondstonextgameday', function () {
+                return secondstonextgameday();
+            }),
+
         ];
     }
 
