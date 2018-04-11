@@ -2,21 +2,27 @@
 // translator ready
 // addnews ready
 // mail ready
-define("ALLOW_ANONYMOUS",true);
-define("OVERRIDE_FORCED_NAV",true);
-require_once("common.php");
-require_once("lib/errorhandling.php");
-require_once("lib/http.php");
+define('ALLOW_ANONYMOUS', true);
+define('OVERRIDE_FORCED_NAV', true);
 
-tlschema("source");
+require_once 'common.php';
+require_once 'lib/errorhandling.php';
+require_once 'lib/http.php';
 
-$url=httpget('url');
-if ($url) {
-	popup_header(sprintf("Source code for %s", htmlentities($url, ENT_COMPAT, getsetting("charset", "UTF-8"))));
-} else {
-	popup_header("Source code");
+tlschema('source');
+
+$url = httpget('url');
+if ($url)
+{
+	popup_header('Source code for %s', htmlentities($url, ENT_COMPAT, getsetting("charset", "UTF-8")));
 }
-if (!isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $session['user']['superuser'] & SU_VIEW_SOURCE)) {
+else
+{
+	popup_header('Source code');
+}
+
+if (! isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $session['user']['superuser'] & SU_VIEW_SOURCE))
+{
 	output("Due to the behaviour of people in the past, access to the source code online has been restricted.");
 	output("You may download the entirety of the latest publically released stable version from <a href='http://www.dragonprime.net' target='_blank'>DragonPrime</a>.", true);
 	output("You may then work with that code within the restrictions of its license.");
@@ -29,25 +35,35 @@ if (!isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $s
 	output("Removing portions of the code required to be kept intact by licensing.");
 	rawoutput("</li><li>");
 	output("Claiming copyright of items which they did not create.");
-	rawoutput("</li></ul>");
+    rawoutput("</li></ul>");
+
+    tlschema();
 	popup_footer();
-} else {
+}
+else
+{
 	$legal_start_dirs = array(
 		"" => 1,
 		"lib/*" => 1,
 		"modules/*" => 1,
 		"modules/avatar" => 0, // No PHP files, so don't show
 	);
-	if ($url) {
+    if ($url)
+    {
 		$dirname = dirname($url);
-		foreach ($legal_start_dirs as $dirs=>$value) {
-			if (strpos($dirs,"/") === false || !$value) {
+        foreach ($legal_start_dirs as $dirs=>$value)
+        {
+            if (strpos($dirs,"/") === false || !$value)
+            {
 				continue;
 			}
-			if (strpos($dirs,"/*")) {
+            if (strpos($dirs,"/*"))
+            {
 				$ghjkl = str_replace("/*","",$dirs);
 				$dirname = preg_replace("!".$ghjkl."/?\\w*/?!","",$dirname);
-			}else {
+            }
+            else
+            {
 				$ghjkl = str_replace("/","",$dirs);
 				$dirname = preg_replace("!".$ghjkl."/?!","",$dirname);
 			}
@@ -85,7 +101,7 @@ if (!isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $s
 		"modules/tournament.php"=>"X", // hide
 	);
     $illegal_files = modulehook('source-illegal-files', $illegal_files);
-	$legal_files=array();
+	$legal_files = [];
 
 	rawoutput("<h1>");
 	output("View Source: ");
@@ -95,7 +111,7 @@ if (!isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $s
 	output("`bOther files that you may wish to view the source of:`b");
 	rawoutput("<ul>");
 	// Gather all the legal dirs
-	$legal_dirs = array();
+	$legal_dirs = [];
 	foreach ($legal_start_dirs as $dir=>$value) {
 		// If this is a dir to exclude, skip it
 		if (!$value) continue;
@@ -195,7 +211,8 @@ if (!isset($session['user']['loggedin']) || !($session['user']['loggedin'] && $s
 		}else {
 			output("`nCannot view this file.`n");
 		}
-	}
+    }
+
+    tlschema();
 	popup_footer();
 }
-?>
