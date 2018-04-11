@@ -21,6 +21,7 @@ tlschema('battle');
 
 $newcompanions = [];
 $lotgdBattleContent = [
+    'battlestatus' => true,
     'msg' => [],
     'encounter' => [],
 	'battlebars' => [],
@@ -157,6 +158,7 @@ if ($op != 'run' && $op != 'fight' && $op != 'newtarget')
 				$op = 'run';
 			}
 			$options['didsurprise'] = 1;
+			$options['endbattle'] = 0;
 		}
 	}
 }
@@ -575,6 +577,7 @@ if (! isset($battleProcessVictoryDefeat)) $battleProcessVictoryDefeat = true;//-
 
 if ($victory || $defeat)
 {
+	$options['endbattle'] = 1;
 	// expire any buffs which cannot persist across fights and
 	// unsuspend any suspended buffs
 	expire_buffs_afterbattle();
