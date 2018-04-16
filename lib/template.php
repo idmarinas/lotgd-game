@@ -130,8 +130,29 @@ class LotgdTemplate extends Twig_Environment
 				return $url;
             }),
             //-- Create a link popup
-            new Twig_SimpleFilter('lotgd_popup', function ($url) {
+            new Twig_SimpleFilter('lotgd_popup', function ($url)
+            {
                 return popup($url);
+            }),
+            new Twig_SimpleFilter('nltoappon', function ($string)
+            {
+                require_once 'lib/nltoappon.php';
+
+                return nltoappon($string);
+            }),
+            /**
+             * Format a number
+             *
+             * @param float $number
+             * @param int $decimals
+             *
+             * @return string
+             */
+            new Twig_SimpleFilter('numeral', function ($number, $decimals = 0)
+            {
+                global $lotgdFormat;
+
+                return $lotgdFormat->numeral($number, $decimals);
             }),
 			//-- Translate a text in template
 			new Twig_SimpleFilter('t', function ($data, $namespace = false)
@@ -146,7 +167,8 @@ class LotgdTemplate extends Twig_Environment
                 else return translate_inline($data, $namespace);
             }),
             //-- Show a relative date from now
-            new Twig_SimpleFilter('relativedate', function ($string) {
+            new Twig_SimpleFilter('relativedate', function ($string)
+            {
                 return relativedate($string);
             })
 		];
@@ -155,10 +177,12 @@ class LotgdTemplate extends Twig_Environment
     private function lotgdFunctions()
     {
         return [
-            new Twig_SimpleFunction('modulehook', function ($name, $data) {
+            new Twig_SimpleFunction('modulehook', function ($name, $data)
+            {
                 return modulehook($name, $data);
             }),
-            new Twig_SimpleFunction('isValidProtocol', function ($url) {
+            new Twig_SimpleFunction('isValidProtocol', function ($url)
+            {
                 // We should check all legeal protocols
                 $protocols = array('http', 'https', 'ftp', 'ftps');
                 $protocol = explode(':', $url, 2);
@@ -168,15 +192,18 @@ class LotgdTemplate extends Twig_Environment
                 return in_array($protocol, $protocols);
             }),
             //-- Get value of setting
-            new Twig_SimpleFunction('getsetting', function ($name, $default) {
+            new Twig_SimpleFunction('getsetting', function ($name, $default)
+            {
                 return getsetting($name, $default);
             }),
             //-- Time in the game
-            new Twig_SimpleFunction('gametime', function () {
+            new Twig_SimpleFunction('gametime', function ()
+            {
                 return getgametime();
             }),
             //-- Seconds to next game day
-            new Twig_SimpleFunction('secondstonextgameday', function () {
+            new Twig_SimpleFunction('secondstonextgameday', function ()
+            {
                 return secondstonextgameday();
             }),
 
@@ -281,4 +308,7 @@ function templatereplace()
 	return;
 }
 
-$lotgd_tpl = new LotgdTemplate;
+global $lotgd_tpl, $lotgdTpl;
+
+$lotgdTpl = new LotgdTemplate;
+$lotgd_tpl =& $lotgdTpl;
