@@ -1,0 +1,32 @@
+{% if user.goldinbank >= 0 %}
+    {% for text in texts.deposit.desc.balance %}
+        {{ text|t(schemas.deposit.desc.balance)|colorize }}
+    {% else %}
+        {{ texts.deposit.desc.balance|t(schemas.deposit.desc.balance)|colorize }}
+    {% endfor %}
+{% else %}
+    {% for text in texts.deposit.desc.debt %}
+        {{ text|t(schemas.deposit.desc.debt)|colorize }}
+    {% else %}
+        {{ texts.deposit.desc.debt|t(schemas.deposit.desc.debt)|colorize }}
+    {% endfor %}
+{% endif %}
+
+{% for text in texts.deposit.desc.hand %}
+    {{ text|t(schemas.deposit.desc.hand)|colorize }}
+{% else %}
+    {{ texts.deposit.desc.hand|t(schemas.deposit.desc.hand)|colorize }}
+{% endfor %}
+
+<form action="{{ 'bank.php?op=depositfinish'|lotgd_url }}" method="POST">
+    {% if user.goldinbank >= 0 %}
+        {{ texts.deposit.question.dep|t(schemas.deposit.question.dep)|colorize }}
+    {% else %}
+        {{ texts.deposit.question.pay|t(schemas.deposit.question.pay)|colorize }}
+    {% endif %}
+    <div class='ui action input'>
+        <input id="input" name="amount" width="5" >
+        <button type="submit" class="ui button">{{ texts.deposit.button|t }}</button>
+    </div>
+    {{ texts.deposit.help|t|colorize }}
+</form>

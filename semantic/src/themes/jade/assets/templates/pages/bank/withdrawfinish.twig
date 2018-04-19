@@ -1,0 +1,47 @@
+{% if withdrawal is same as(true) %} {# Withdraw money from bank #}
+    {% for text in texts.withdraw.finish.success %}
+        {{ text|t(schemas.withdraw.finish.success)|colorize }}
+    {% else %}
+        {{ texts.withdraw.finish.success|t(schemas.withdraw.finish.success)|colorize }}
+    {% endfor %}
+{% elseif withdrawal is same as(false) %} {# Get error when try withdraw #}
+    {% for text in texts.withdraw.finish.error %}
+        {{ text|t(schemas.withdraw.finish.error)|colorize }}
+    {% else %}
+        {{ texts.withdraw.finish.error|t(schemas.withdraw.finish.error)|colorize }}
+    {% endfor %}
+{% else %}
+    {% if canborrow is same as(false) %} {# Cant get a borrow #}
+        {% for text in texts.withdraw.finish.borrow.error %}
+            {{ text|t(schemas.withdraw.finish.borrow.error)|colorize }}
+        {% else %}
+            {{ texts.withdraw.finish.borrow.error|t(schemas.withdraw.finish.borrow.error)|colorize }}
+        {% endfor %}
+    {% else %}
+        {% if didwithdraw %} {# Withdraw money from bank first #}
+            {% for text in texts.withdraw.finish.borrow.success %}
+                {{ text|t(schemas.withdraw.finish.borrow.success)|colorize }}
+            {% else %}
+                {{ texts.withdraw.finish.borrow.success|t(schemas.withdraw.finish.borrow.success)|colorize }}
+            {% endfor %}
+        {% endif %}
+
+        {% if borrow is same as(true) %} {# Get a borrow #}
+            {% if didwithdraw %}
+                {{ texts.withdraw.finish.borrow.can.didwithdraw|t(schemas.withdraw.finish.borrow.can.didwithdraw)|colorize }}
+            {% else %}
+                {{ texts.withdraw.finish.borrow.can.nodidwithdraw|t(schemas.withdraw.finish.borrow.can.nodidwithdraw)|colorize }}
+            {% endif %}
+
+            {{ texts.withdraw.finish.borrow.can.desc|t(schemas.withdraw.finish.borrow.can.desc)|colorize }}
+        {% else %} {# Cant get a borrow #}
+            {% if didwithdraw %}
+                {{ texts.withdraw.finish.borrow.cant.didwithdraw|t(schemas.withdraw.finish.borrow.cant.didwithdraw)|colorize }}
+            {% else %}
+                {{ texts.withdraw.finish.borrow.cant.nodidwithdraw|t(schemas.withdraw.finish.borrow.cant.nodidwithdraw)|colorize }}
+            {% endif %}
+
+            {{ texts.withdraw.finish.borrow.cant.desc|t(schemas.withdraw.finish.borrow.cant.desc)|colorize }}
+        {% endif %}
+    {% endif %}
+{% endif %}

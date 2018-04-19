@@ -1,0 +1,51 @@
+{% for text in texts.transfer.confirm.subtitle %}
+    {{ text|t(schemas.transfer.confirm.subtitle)|colorize }}
+{% else %}
+    {{ texts.transfer.confirm.subtitle|t(schemas.transfer.subtitle)|colorize }}
+{% endfor %}
+
+{% if found is same as(false) %}
+    {% for text in texts.transfer.confirm.noresults %}
+        {{ text|t(schemas.transfer.confirm.noresults)|colorize }}
+    {% else %}
+        {{ texts.transfer.confirm.noresults|t(schemas.transfer.noresults)|colorize }}
+    {% endfor %}
+{% elseif found is same as(true) %}
+    <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" class="ui form">
+        <input type="hidden" name="to" value="{{ row.login }}">
+        <input type="hidden" name="amount" value="{{ amt }}">
+
+        <div class="field">
+            {{ texts.transfer.confirm.oneresult|t(schemas.transfer.confirm.oneresult)|format(amt, row.name)|colorize }}
+        </div>
+        <input type="submit" class="ui button" value="{{ texts.transfer.confirm.button }}">
+    </form>
+{% elseif found > 100 %}
+    {{ texts.transfer.confirm.tomuchresults|t(schemas.transfer.confirm.tomuchresults)|format(amt, row.name)|colorize }}
+    <form action="{{ 'bank.php?op=transfer2'|lotgd_url }}" method="POST" class="ui form">
+        <div class="two fields">
+            <div class="field">
+                <label for="amount">{{ texts.transfer.amount|t(schemas.transfer.amount)|colorize }}</label>
+                <input name="amount" id="amount" width="5">
+            </div>
+            <div class="field">
+                <label for="to">{{ texts.transfer.to|t(schemas.transfer.to)|colorize }}</label>
+                <input name="to" id="to">
+                {{ texts.transfer.help|t(schemas.transfer.help)|colorize }}
+            </div>
+        </div>
+        <input type="submit" class="ui button" value="{{ texts.transfer.button }}">
+    </form>
+{% else %}
+    <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" class="ui form">
+        <div class="field">
+            {{ texts.transfer.confirm.results|t(schemas.transfer.confirm.results)|format(amt)|colorize }}
+            <select name="to" id="to" class="ui dropdown">
+                {% for key, value in select %}
+                    <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" class="ui button" value="{{ texts.transfer.confirm.button }}">
+    </form>
+{% endif %}

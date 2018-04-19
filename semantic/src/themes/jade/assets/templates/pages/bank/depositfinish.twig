@@ -1,0 +1,21 @@
+{% if deposited is same as(true) %}
+    {% if user.goldinbank >= 0 %}
+        {% for text in texts.deposit.finish.balance %}
+            {{ text|t(schemas.deposit.finish.balance)|colorize }}
+        {% else %}
+            {{ texts.deposit.finish.balance|t(schemas.deposit.finish.balance)|colorize }}
+        {% endfor %}
+    {% else %}
+        {% for text in texts.deposit.finish.debt %}
+            {{ text|t(schemas.deposit.finish.debt)|colorize }}
+        {% else %}
+            {{ texts.deposit.finish.debt|t(schemas.deposit.finish.debt)|colorize }}
+        {% endfor %}
+    {% endif %}
+{% else %}
+    {% for text in texts.deposit.finish.notenough %}
+        {{ text|t(schemas.deposit.finish.notenough)|colorize }}
+    {% else %}
+        {{ texts.deposit.finish.notenough|t(schemas.deposit.finish.notenough)|colorize }}
+    {% endfor %}
+{% endif %}

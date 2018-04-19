@@ -1,0 +1,51 @@
+{% for text in texts.transfer.finish.subtitle %}
+    {{ text|t(schemas.transfer.finish.subtitle)|colorize }}
+{% else %}
+    {{ texts.transfer.finish.subtitle|t(schemas.transfer.subtitle)|colorize }}
+{% endfor %}
+
+{% if transfered is same as(true) %}
+
+{% elseif transfered is same as(false) %} {# Error in transfer #}
+    {% for text in texts.transfer.finish.error %}
+        {{ text|t(schemas.transfer.finish.error)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.error|t(schemas.transfer.error)|colorize }}
+    {% endfor %}
+{% elseif transfered is same as(0) %}  {# Not found account to transfer #}
+    {% for text in texts.transfer.finish.notfound %}
+        {{ text|t(schemas.transfer.finish.notfound)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.notfound|t(schemas.transfer.notfound)|colorize }}
+    {% endfor %}
+{% elseif transfered == 'sameacct' %} {# You can not transfer money to yourself #}
+    {% for text in texts.transfer.finish.sameacct %}
+        {{ text|t(schemas.transfer.finish.sameacct)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.sameacct|t(schemas.transfer.sameacct)|colorize }}
+    {% endfor %}
+{% elseif transfered == 'maxout' %} {# You cant transfer more money today #}
+    {% for text in texts.transfer.finish.maxout %}
+        {{ text|t(schemas.transfer.finish.maxout)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.maxout|t(schemas.transfer.maxout)|colorize }}
+    {% endfor %}
+{% elseif transfered == 'maxtfer' %} {# The recipient can not receive as much money per transfer on the same day #}
+    {% for text in texts.transfer.finish.maxtfer %}
+        {{ text|t(schemas.transfer.finish.maxtfer)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.maxtfer|t(schemas.transfer.maxtfer)|colorize }}
+    {% endfor %}
+{% elseif transfered == 'tomanytfer' %} {# The receiver has received many transfers today #}
+    {% for text in texts.transfer.finish.tomanytfer %}
+        {{ text|t(schemas.transfer.finish.tomanytfer)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.tomanytfer|t(schemas.transfer.tomanytfer)|colorize }}
+    {% endfor %}
+{% elseif transfered == 'level' %} {# The value of the transfer is lower than your level #}
+    {% for text in texts.transfer.finish.level %}
+        {{ text|t(schemas.transfer.finish.level)|colorize }}
+    {% else %}
+        {{ texts.transfer.finish.level|t(schemas.transfer.level)|colorize }}
+    {% endfor %}
+{% endif %}
