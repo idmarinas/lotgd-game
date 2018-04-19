@@ -7,11 +7,11 @@
 
 {# Show HP of combatants #}
 {% for enemy in battlebars.start.enemies %}
-    {% include 'jade/templates/battle/combathealthbar.twig' with enemy %}
+    {% include 'jade/templates/pages/battle/combathealthbar.twig' with enemy %}
 {% endfor %}
-{% include 'jade/templates/battle/combathealthbar.twig' with battlebars.start.player %}
+{% include 'jade/templates/pages/battle/combathealthbar.twig' with battlebars.start.player %}
 {% for companion in battlebars.start.companions %}
-    {% include 'jade/templates/battle/combathealthbar.twig' with companion %}
+    {% include 'jade/templates/pages/battle/combathealthbar.twig' with companion %}
 {% endfor %}
 
 {# Information when battle start #}
@@ -57,9 +57,9 @@
 
 {# Show HP of combatants #}
 {% for enemy in battlebars.end.enemies %}
-    {% include 'jade/templates/battle/combathealthbar.twig' with enemy %}
+    {% include 'jade/templates/pages/battle/combathealthbar.twig' with enemy %}
 {% endfor %}
-{% if battlebars.end.player %}{% include 'jade/templates/battle/combathealthbar.twig' with battlebars.end.player %}{% endif %}
+{% if battlebars.end.player %}{% include 'jade/templates/pages/battle/combathealthbar.twig' with battlebars.end.player %}{% endif %}
 {% for companion in battlebars.end.companions %}
-    {% include 'jade/templates/battle/combathealthbar.twig' with companion %}
+    {% include 'jade/templates/pages/battle/combathealthbar.twig' with companion %}
 {% endfor %}
