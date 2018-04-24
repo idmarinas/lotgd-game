@@ -1,0 +1,66 @@
+{% if user.loggedin %}
+    <a href target="_blank" onclick="{{ 'mail.php?op=write&to=%s'|format(target.login)|lotgd_popup }};" data-tooltip="{{ 'Write Mail'|t }}">
+        <img src="images/newscroll.GIF" width="16" height="16" alt="{{ 'Write Mail'|t }}">
+    </a>
+{% endif %}
+{{ '`^Biography for %s`^.'|t|format(target.name)|colorize }}
+<br><br>
+{% if target.clanname %}
+    {{ '`@%s`2 is a %s`2 to `%%%s`2`n'|t|format(target.name, ranks[target.clanrank], target.clanname)|colorize }}
+{% endif %}
+
+{{ '`^Title: `@%s`n'|t|format(target.title)|colorize }}
+{% if target.dragonkills %}
+    {{ '`^Dragon Kills: `@%s`n'|t|format(target.dragonkills)|colorize }}
+{% endif %}
+{{ '`^Level: `@%s`n'|t|format(target.level)|colorize }}
+{{ '`^Status: `@%s`n'|t|format(target.loggedin ? '`#Online`0'|t : '`$Offline`0'|t)|colorize }}
+{{ '`^Resurrections: `@%s`n'|t|format(target.resurrections)|colorize }}
+{{ '`^Race: `@%s`n'|t|format(target.race|t('race'))|colorize }}
+{{ '`^Gender: `@%s`n'|t|format(target.sex ? 'Female'|t : 'Male'|t)|colorize }}
+{% if target.specialties[target.specialty] %}
+    {{ '`^Specialty: `@%s`n'|t|format(target.specialties[target.specialty]|t('specialties'))|colorize }}
+{% endif %}
+{{ '`^Creature: `@%s`n'|t|format(target.mount.mountname ?: 'None'|t)|colorize }}
+
+{# Additional statistics #}
+{% for stat in biostats %}
+    {{ stat|t|colorize }}
+{% else %}
+    {% if biostats %}
+        {{ biostats|t|colorize }}
+    {% endif %}
+{% endfor %}
+
+{% if target.bio %}
+    {{ '`^Bio: `@%s`n'|t|format(target.bio)|colorize }}
+{% endif %}
+
+{# Additional information #}
+{% for info in bioinfo %}
+    {{ info|t|colorize }}
+{% else %}
+    {% if bioinfo %}
+        {{ bioinfo|t|colorize }}
+    {% endif %}
+{% endfor %}
+
+<br>
+{{ '`n`^Recent accomplishments (and defeats) of %s`^'|t|format(target.name)|colorize }}
+<br>
+{% for id, news in bionews %}
+    {{ '`n`b`@%s`0`b`n'|format(id)|colorize }}
+    {% for row in news %}
+        {{ '`@%s`0`n'|format(row.newstext|t((row.tlschema ?: 'news'), true))|colorize }}
+    {% endfor %}
+{% else %}
+    <div class="center aligned">
+        <span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span>
+    </div>
+    <div class="center aligned">
+        {{ "`^%s `$hasn't done anything at the moment.`0"|t|format(target.name)|colorize }}
+    </div>
+    <div class="center aligned">
+        <span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span><span class="colLtGreen">=-=</span><span class="colDkGreen">-=-</span>
+    </div>
+{% endfor %}
