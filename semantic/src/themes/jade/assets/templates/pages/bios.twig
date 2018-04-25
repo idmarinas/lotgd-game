@@ -1,0 +1,18 @@
+{{ '`b`&Player Bios:`0`b`n'|t|colorize }}
+{% for bio in playersbios %}
+    [<a href="{{ ('bios.php?op=block&userid=' ~ bio.acctid)|lotgd_url }}">{{ 'Block'|t|colorize }}</a>]
+    {{ '`&%s`0: `^%s`0'|format(bio.name, bio.bio)|colorize }}
+    <br>
+{% else %}
+    {{ '`tNo players bios found`0`n'|t|colorize }}
+{% endfor %}
+<br>
+{{ '`n`n`b`&Blocked Bios:`0`b`n'|t|colorize }}
+{% for bio in biosblocked %}
+    [<a href="{{ ('bios.php?op=unblock&userid=' ~ bio.acctid)|lotgd_url }}">{{ 'Unblock'|t|colorize }}</a>]
+    {{ '`&%s`0: `^%s`0'|format(bio.name, bio.bio)|colorize }}
+    <br>
+{% else %}
+    {{ '`@No bios blocked found`0`n'|t|colorize }}
+{% endfor %}
+
