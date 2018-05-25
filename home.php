@@ -74,7 +74,7 @@ $data['onlinecount'] = getsetting('OnlineCount', 0);
 
 if (! isset($session['message'])) $session['message'] = '';
 
-if ($op == 'timeout') { $data['sessiontimeout'] = ' Your session has timed out, you must log in again.`n'; }
+if ($op == 'timeout') { $data['sessiontimeout'] = '`$Your session has timed out, you must log in again.`0`n'; }
 
 $data['cookieactive'] = isset($_COOKIE['lgi']);
 
