@@ -21,6 +21,7 @@
         "zendframework/zend-i18n": "^2.7.4",
         "twig/twig": "^1.35.0",
         "hellogerard/jobby" : "^3.3.2",
-        "ezyang/htmlpurifier": "^4.9.3"
+        "ezyang/htmlpurifier": "^4.9.3",
+        "paragonie/random_compat": "^2.0"
     }
 }
