@@ -432,18 +432,19 @@ if ($op != 'newtarget')
 					{
 						if (!isset($badguy['expgained']) || $badguy['expgained'] == false)
 						{
+                            $expgain = round($badguy['creatureexp']/count($newenemies));
 							if (!isset($badguy['creatureexp'])) $badguy['creatureexp'] = 0;
-							$session['user']['experience'] += round($badguy['creatureexp']/count($newenemies));
-							$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`#You receive `^%s`# experience!`n`0', round($badguy['creatureexp']/count($newenemies))];
+							$session['user']['experience'] += $expgain;
+							$lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`#You receive `^%s`# experience!`n`0', $expgain];
 							$options['experience'][$index] = $badguy['creatureexp'];
-							$options['experiencegained'][$index] = round($badguy['creatureexp']/count($newenemies));
-							$badguy['expgained']=true;
+							$options['experiencegained'][$index] = $expgain;
+							$badguy['expgained'] = true;
 						}
 					}
 					else
 					{
 						$options['experience'][$index] = $badguy['creatureexp'];
-					}
+                    }
 				}
 				else
 				{
