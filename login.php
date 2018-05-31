@@ -102,10 +102,15 @@ if ($name != '')
 				// when someone logs in or off can do so.
 				modulehook("player-login");
 
+                //-- Check for valid restorepage
+                if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']))
+                {
+                    $session['user']['restorepage'] = 'news.php';
+                }
+
                 if ($session['user']['loggedin'])
                 {
                     $session['allowednavs'] = unserialize($session['user']['allowednavs']);
-                    $session['user']['restorepage'] = $session['user']['restorepage'] > '' ?: 'news.php';
                     $link = sprintf('<a href="%s">%s</a>' , $session['user']['restorepage'], $session['user']['restorepage']);
 
 					$str = sprintf_translate('Sending you to %s, have a safe journey', $link);
