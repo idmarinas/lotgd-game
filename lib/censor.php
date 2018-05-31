@@ -2,40 +2,49 @@
 // translator ready
 // addnews ready
 // mail ready
-function soap($input,$debug=false,$skiphook=false){
-	global $session;
-	require_once("lib/sanitize.php");
+function soap($input, $debug = false, $skiphook = false)
+{
+    global $session;
+
+    require_once 'lib/sanitize.php';
+
 	$final_output = $input;
 	// $output is the color code-less (fully sanitized) input against which
 	// we search.
 	$output = full_sanitize($input);
 	// the mask of displayable chars that should be masked out;
 	// X displays, _ masks.
-	$mix_mask = str_pad("",strlen($output),"X");
-	if (getsetting("soap",1)){
+	$mix_mask = str_pad('', strlen($output), 'X');
+    if (getsetting('soap', 1))
+    {
 		$search = nasty_word_list();
 		$exceptions = array_flip(good_word_list());
 		$changed_content = false;
-		foreach ($search as $word) {
+        foreach ($search as $word)
+        {
 			do {
-				if ($word > "")
-					$times = preg_match_all($word,$output,$matches);
-				else
-					$times = 0;
+				if ($word > '') $times = preg_match_all($word, $output, $matches);
+				else $times = 0;
 				for ($x=0; $x<$times; $x++){
-					if (strlen($matches[0][$x]) < strlen($matches[1][$x])){
+                    if (strlen($matches[0][$x]) < strlen($matches[1][$x]))
+                    {
 						$shortword = $matches[0][$x];
 						$longword = $matches[1][$x];
-					}else{
+                    }
+                    else
+                    {
 						$shortword = $matches[1][$x];
 						$longword = $matches[0][$x];
 					}
-					if (isset($exceptions[strtolower($longword)])){
+                    if (isset($exceptions[strtolower($longword)]))
+                    {
 						$x--;
 						$times--;
 						if ($debug)
 							output("This word is ok because it was caught by an exception: `b`^%s`7`b`n",$longword);
-					}else{
+                    }
+                    else
+                    {
 						if ($debug)
 							output("`7This word is not ok: \"`%%s`7\"; it blocks on the pattern `i%s`i at \"`\$%s`7\".`n",sanitize_mb($longword),$word,$shortword);
 						// if the word should be filtered, drop it from the
@@ -83,14 +92,16 @@ function soap($input,$debug=false,$skiphook=false){
 	}
 }
 
-function good_word_list(){
+function good_word_list()
+{
 	$sql = "SELECT * FROM " . DB::prefix("nastywords") . " WHERE type='good'";
 	$result = DB::query_cached($sql,"goodwordlist");
 	$row = DB::fetch_assoc($result);
 	return explode(" ",$row['words']);
 }
 
-function nasty_word_list(){
+function nasty_word_list()
+{
 	$search = datacache("nastywordlist",600);
 	if ($search!==false && is_array($search)) return $search;
 
@@ -135,4 +146,3 @@ function nasty_word_list(){
 	updatedatacache("nastywordlist",$search);
 	return $search;
 }
-?>
