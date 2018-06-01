@@ -1,0 +1,9 @@
+{% if gold > 0 and gems <= 0 %}
+    {{ '%s`7 asks for the %s gold to start the clan, but you seem to be unable to produce the fees.'|t|format(registrar)|colorize }}
+{% elseif gems > 0 and gold <= 0 %}
+    {{ '%s`7 asks for the %s gems to start the clan, but you seem to be unable to produce the fees.'|t|format(registrar)|colorize }}
+{% else %}
+    {{ '%s`7 asks for the %s gold and %s gems to start the clan, but you seem to be unable to produce the fees.'|t|format(registrar)|colorize }}
+{% endif %}
+
+{{ 'She takes your application, and stamps it "`\$DENIED`7".'|t|colorize }}
