@@ -238,18 +238,18 @@ else
         else
         {
             $blockaccount = false;
-			$email = httppost('email');
+			$email = (string) trim(httppost('email'));
 			$pass1 = httppost('pass1');
 			$pass2 = httppost('pass2');
             if (getsetting('blockdupeemail', 0) == 1 && getsetting('requireemail', 0) == 1)
             {
                 $select = DB::select('accounts');
                 $select->columns(['login'])
-                    ->where->equalTo('emailaddress', (string) $email);
+                    ->where->equalTo('emailaddress', $email);
 
                 $result = DB::execute($select);
 
-                if ($result->count() > 0)
+                if ($result->count())
                 {
 					$blockaccount = true;
 					$data['messages'][] = 'You may have only one account.`n';
