@@ -15,19 +15,28 @@ define([
      *
      * @param {Object} element
      * @param {Object} event
+     * @param {Boolean} form Indicate if is a form
      */
-    Lotgd.confirm = function (element, event)
+    Lotgd.confirm = function (element, event, form = false)
     {
         event.preventDefault()
 
-        var options = jQuery(element).data('options')
+        element = jQuery(element)
+        var options = element.data('options')
         options = jQuery.extend({type: 'question', showCancelButton: true}, options)
 
         var success = function ()
         {
-            window.location = element.href
+            if (form === false)
+            {
+                window.location = element.href
 
-            return window.location
+                return window.location
+            }
+            else
+            {
+                element.parent('form').submit()
+            }
         }
 
         Lotgd.swal(options).then(success, function () {})
