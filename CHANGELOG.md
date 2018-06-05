@@ -7,7 +7,6 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 # Version: 2.6.0 **In development**
 
 ### CHANGES
-Se  crea una plantila con el texto de la página
 * **battle.php** `$options` now have a new index `endbattle` that indicate if battle end
 * **lib/dbwrapper.php** Updated comments and added new comments for explain the functions
 * **s**
@@ -65,10 +64,15 @@ Se  crea una plantila con el texto de la página
         * `~/pages/clan/form/new.twig`
         * `~/pages/clan/list/clans.twig`
         * `~/pages/clan/list/none.twig`
+        * `~/pages/clan/start/motd/edit.twig`
+        * `~/pages/clan/start/motd/prohibited.twig`
         * `~/pages/clan/start/wthdraw/confirm.twig`
         * `~/pages/clan/start/default.twig`
+        * `~/pages/clan/start/membership.twig`
+        * `~/pages/clan/start/withdraw.twig`
         * `~/pages/clan/applicant.twig`
         * `~/pages/clan/detail.twig`
+        * `~/pages/clan/new.twig`
         * `~/pages/clan/waiting.twig`
 
 
