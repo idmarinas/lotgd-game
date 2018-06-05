@@ -44,7 +44,7 @@ if ($session['user']['clanrank'] >= CLAN_OFFICER)
         ])
         ->where->equalTo('acctid', $claninfo['motdauthor'])
     ;
-    $result = DB::execute($select);
+    $result = DB::execute($select)->current();
 
     $twig = [
         'registrar' => $registrar,

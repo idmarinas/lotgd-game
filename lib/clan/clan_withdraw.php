@@ -3,8 +3,7 @@
 modulehook('clan-withdraw', ['clanid' => $session['user']['clanid'], 'clanrank' => $session['user']['clanrank'], 'acctid' => $session['user']['acctid']]);
 
 $twig = [
-    'registrar' => $registrar,
-    'messages' => []
+    'registrar' => $registrar
 ];
 
 if ($session['user']['clanrank'] >= CLAN_LEADER)
@@ -18,7 +17,7 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
     ;
     $row = DB::execute($select)->current();
 
-    if ($row['c'] == 0)
+    if ($row['count'] == 0)
     {
         $select = DB::select('accounts');
         $select->columns(['name', 'acctid', 'clanrank'])

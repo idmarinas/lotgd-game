@@ -12,6 +12,6 @@ elseif ($op == 'withdrawconfirm')
 	addnav('No', 'clan.php');
     addnav('!?Yes', 'clan.php?op=withdraw');
 
-    rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/confirm.twig', ['registrar' => $registrar]));
+    rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/withdraw/confirm.twig', ['registrar' => $registrar]));
 }
 elseif ($op == 'withdraw') { require_once 'lib/clan/clan_withdraw.php'; }

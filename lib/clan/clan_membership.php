@@ -30,7 +30,13 @@ if ($setrank >= 0 && $setrank <= $session['user']['clanrank'])
 
         if (! isset($args['handled']) || !$args['handled'])
         {
-			$sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
+            $sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
+
+            if ($whoacctid == $session['user']['acctid'])
+            {
+                $session['user']['clanrank'] = max(0, min($session['user']['clanrank'], $setrank));
+            }
+
 			DB::query($sql);
 			debuglog("Player {$session['user']['name']} changed rank of {$row['name']} from {$row['clanrank']} to {$setrank}.", $whoacctid);
 		}
@@ -83,7 +89,7 @@ $select->columns(['name', 'login', 'acctid', 'clanrank', 'laston', 'clanjoindate
     ->where->equalTo('clanid', $claninfo['clanid'])
 ;
 $members = DB::execute($select);
-debug(DB::sqlString());
+
 $twig = [
     'members' => $members,
     'ranks' => $ranks,
