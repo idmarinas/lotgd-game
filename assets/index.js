@@ -14,6 +14,8 @@ define([
     './components/swal',
     './components/notify',
     './components/confirmation',
+    './components/modal',
+    './components/modal-form',
 
     //-- Modules
     // ...
