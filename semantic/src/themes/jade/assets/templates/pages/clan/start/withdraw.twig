@@ -1,0 +1,7 @@
+{% for message in messages %}
+    {{ message|t|colorize }}
+{% else %}
+    {{ messages|t|colorize }}
+{% endfor %}
+<br>
+{{ '`&You have withdrawn from your clan.'|t|colorize }}

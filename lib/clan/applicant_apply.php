@@ -85,14 +85,3 @@ else
         rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/apply/noclans.twig', ['registrar' => $registrar]));
     }
 }
-
-
-if ($to>0){
-}else{
-
-	if (DB::num_rows($result)>0){
-
-	}else{
-	}
-}
-?>

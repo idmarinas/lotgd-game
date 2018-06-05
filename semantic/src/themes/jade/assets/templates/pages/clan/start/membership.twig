@@ -1,0 +1,59 @@
+{{ '`i`\$Clan Rank Structure:`n'|t|colorize }}
+{{ '`2Rank >=Officer(20) can promote/demote people equal or lower than his rank.`n'|t|colorize }}
+{{ '`2Rank >=Administrative(25) can promote/demote AND remove people equal or lower than his rank.`n`n'|t|colorize }}
+{{ '`\$Exception: A founder can never be removed, a leader can by another leader.`i`0`n`n'|t|colorize }}
+{{ '`4This is your current clan membership:`n'|t|colorize }}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'Rank'|t }}</th>
+            <th>{{ 'Name'|t }}</th>
+            <th>{{ 'Level'|t }}</th>
+            <th>{{ 'Dragon Kills'|t }}</th>
+            <th>{{ 'Join Date'|t }}</th>
+            <th>{{ 'Last On'|t }}</th>
+            <th>{{ 'Operations'|t }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set totaldragonkills = 0 %}
+        {% for member in members %}
+            {% set totaldragonkills = totaldragonkills + member.dragonkills %}
+            <tr>
+                <td>{{ ranks[member.clanrank]|t|colorize }}</td>
+                <td><a href="{{ ('bio.php?char=' ~ member.acctid)|lotgd_url }}">{{ ('`&' ~ member.name ~ '`0')|colorize }}</a></td>
+                <td>{{ ('`^' ~ member.level ~ '`0')|colorize }}</td>
+                <td>{{ ('`$' ~ member.dragonkills ~ '`0')|colorize }}</td>
+                <td>{{ ('`3' ~ member.clanjoindate ~ '`0')|colorize }}</td>
+                <td>{{ ('`#' ~ member.laston|relativedate|t ~ '`0')|colorize }}</td>
+                {% if user.clanrank >= CLAN_OFFICER and member.clanrank <= user.clanrank %}
+                    <td class="collapsing">
+                        <form action="{{ ('clan.php?op=membership&whoacctid=' ~ member.acctid)|lotgd_url }}" method="POST" style="margin: 0;">
+                            {% if member.clanrank == CLAN_FOUNDER and member.login == user.login %}
+                                <input type="hidden" name="setrank" value="{{ CLAN_OFFICER }}">
+                                <button type="submit" class="ui orange button" onclick="Lotgd.confirm(this, event, true);" data-options='{"text" : "{{ 'Are you really sure to step down as founder? You can NEVER rise again to that rank!'|t }}"}'>{{ 'Step down as founder'|t }}</button>
+                            {% elseif member.clanrank != CLAN_FOUNDER %}
+                                <select class="ui combo dropdown" name="setrank">
+                                    {% for id, rank in validranks if (id <= user.clanrank and id != CLAN_FOUNDER) %}
+                                        <option value="{{ id }}" {% if member.clanrank == id %}selected{% endif %}>{{ rank|uncolorize }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="ui icon button tooltip top aligned" data-content="{{ 'Set Rank'|t }}"><i class="configure icon"></i></button>
+                            {% endif %}
+
+                            {% if member.clanrank <= user.clanrank and member.login != user.login and member.clanrank < CLAN_FOUNDER and user.clanrank >= CLAN_ADMINISTRATIVE %}
+                                <a class='ui red icon button tooltip top aligned' data-content="{{ 'Remove From Clan'|t }}" href="{{ ('clan.php?op=membership&remove=' ~ member.acctid)|lotgd_url }}" data-options='{"text" : "{{ 'Are you sure you wish to remove this member from your clan?'|t }}"}' onclick="Lotgd.confirm(this, event);"><i class='remove user icon'></i></a>
+                            {% else %}
+                                <a class='ui disabled red icon button tooltip top aligned' data-content="{{ 'Remove From Clan'|t }}"><i class='remove user icon'></i></a>
+                            {% endif %}
+                        </form>
+                    </td>
+                {% else %}
+                    <td>{{ 'None'|t|colorize }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{{ '`n`n`^This clan has a total of `$%s`^ dragon kills.'|t|format(totaldragonkills)|colorize }}

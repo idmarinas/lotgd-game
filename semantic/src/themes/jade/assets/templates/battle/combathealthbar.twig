@@ -1,0 +1,39 @@
+{#
+	All variables that get this template and type of content
+	[
+		'showbar' => boolean,
+		'showhptext' => boolean,
+		'who' => string,
+		'isTarget' => boolean,
+		'name' => string,
+		'level' => int,
+		'healthtext' => string,
+		'hpvalue' => int,
+		'hptotal' => int
+	]
+#}
+<table class="ui collapsing very basic very compact table">
+	<tr>
+		<td colspan="3">
+			{% if isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
+			{{ '(%s) %s (Level `b%s`b)`0'|t|format(who, name, level) }}
+			{% if not showbar %}
+				{% if hpvalue > 0 %}: {% if showhptext %}`6{{ hpvaluetext }}`0{% endif %}{% else %}{{ '`7DEFEATED`0'|t }}{% endif %}
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		{% if showbar %}
+			<td>&nbsp;&nbsp;{{ healthtext }}:&nbsp;</td>
+			<td style="width: 150px;">
+				<div style="margin: 0em;" class="ui tiny indicating progress battle" data-value="{{ hpvalue }}" data-total="{{ hptotal }}">
+					<div class="bar"></div>
+				</div>
+			</td>
+		{% endif %}
+		{% if showbar and showhptext %}
+			{% set text = hpvalue > 0 ? '' : '`7DEFEATED`0'|t %}
+			<td>&nbsp;{{ '(%s/%s) %s`0`n'|format(hpvaluetext, hptotaltext, text) }}</td>
+		{% endif %}
+	</tr>
+</table>

@@ -2,8 +2,6 @@
 
 page_header('Clan Halls');
 
-$registrar = getsetting('clanregistrar', '`%Karissa');
-
 addnav("Clan Options");
 
 if ($op == 'apply') { require_once 'lib/clan/applicant_apply.php'; }

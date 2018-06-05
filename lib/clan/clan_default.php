@@ -7,7 +7,7 @@ $select->columns([
     ])
     ->where->equalTo('acctid', $claninfo['motdauthor'])
 ;
-$result = DB::execute($select);
+$result = DB::execute($select)->current();
 
 $twig = [
     'registrar' => $registrar,
@@ -21,7 +21,8 @@ $twig = [
 //-- Count members
 $select = DB::select('accounts');
 $select->columns(['clanrank', 'count' => DB::expression('COUNT(1)')])
-    ->group('clanrank DESC')
+    ->order('clanrank DESC')
+    ->group('clanrank')
     ->where->equalTo('clanid', $claninfo['clanid'])
 ;
 $twig['members'] = DB::execute($select);
@@ -29,7 +30,8 @@ $twig['members'] = DB::execute($select);
 //-- Check for leaders
 $select = DB::select('accounts');
 $select->columns(['count' => DB::expression('COUNT(1)')])
-    ->group('clanrank DESC')
+    ->order('clanrank DESC')
+    ->group('clanrank')
     ->where->equalTo('clanid', $claninfo['clanid'])
         ->greaterThanOrEqualTo('clanrank', CLAN_LEADER)
 ;
@@ -74,7 +76,7 @@ addnav('Online Members', 'list.php?op=clan');
 addnav("Your Clan's Waiting Area", 'clan.php?op=waiting');
 addnav('`$Withdraw From Your Clan`0', 'clan.php?op=withdrawconfirm');
 
-rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/new/default.twig', $twig));
+rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/default.twig', $twig));
 
 modulehook('clanhall');
 
