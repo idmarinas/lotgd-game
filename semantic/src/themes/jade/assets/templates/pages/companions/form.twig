@@ -1,0 +1,239 @@
+<form class="ui form" action="{{ ('companions.php?op=save&id=' ~ companion.companionid)|lotgd_url }}" method="POST">
+    <input type="hidden" name="companion[companionactive]" value="{{ companion.companionactive }}">
+    <table class="ui very compact table">
+        <tbody>
+            <tr>
+                <td class="collapsing">{{ 'Companion Name'|t|colorize }}</td>
+                <td><input name="companion[name]" value="{{ companion.name }}" maxlength="50"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Dyingtext'|t|colorize }}</td>
+                <td><input name="companion[dyingtext]" value="{{ companion.dyingtext }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Description'|t|colorize }}</td>
+                <td><textarea name="companion[description]">{{ companion.description }}</textarea></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion join text'|t|colorize }}</td>
+                <td><textarea name="companion[jointext]">{{ companion.jointext }}</textarea></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Category'|t|colorize }}</td>
+                <td><input name="companion[category]" value="{{ companion.category }}" maxlength="50"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Availability'|t|colorize }}</td>
+                <td>
+                    <select name="companion[companionlocation]" class="ui fluid dropdown">
+                        {% for loc, name in locs %}
+                            <option value="{{ loc }}" {% if companion.companionlocation == loc %}selected{% endif %} >{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'Maxhitpoints'|t|colorize }}</div>
+                                <input name="companion[maxhitpoints]" value="{{ companion.maxhitpoints }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'Hitpoints bonus per level'|t|colorize }}</div>
+                                <input name="companion[maxhitpointsperlevel]" value="{{ companion.maxhitpointsperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'Attack'|t|colorize }}</div>
+                                <input name="companion[attack]" value="{{ companion.attack }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'Attack bonus per level'|t|colorize }}</div>
+                                <input name="companion[attackperlevel]" value="{{ companion.attackperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'Defense'|t|colorize }}</div>
+                                <input name="companion[defense]" value="{{ companion.defense }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'Defense bonus per level'|t|colorize }}</div>
+                                <input name="companion[defenseperlevel]" value="{{ companion.defenseperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Fighter?'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[abilities][fight]" value="0">
+                        <input id="fighter" type="checkbox" name="companion[abilities][fight]" value="1" {% if true == companion.abilities.fight %}checked{% endif %} >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Defender?'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[abilities][defend]" value="0">
+                        <input id="defender" type="checkbox" name="companion[abilities][defend]" value="1" {{ true == companion.abilities.defend ? 'checked' : '' }} >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Healer level'|t|colorize }}</td>
+                <td>
+                    <select class="ui dropdown" name='companion[abilities][heal]'>
+                        {% for i in 0..30 %}
+                            <option value="{{ i }}" {{ companion.abilities.heal == i ? ' selected' : '' }}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ '`iThis value determines the maximum amount of HP healed per round`i'|t|colorize }}
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Magician?'|t|colorize }}</td>
+                <td>
+                    <select class="ui dropdown" name='companion[abilities][magic]'>
+                        {% for i in 0..30 %}
+                            <option value="{{ i }}" {{ companion.abilities.magic == i ? ' selected' : '' }}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ '`iThis value determines the maximum amount of damage caused per round`i'|t|colorize }}
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion cannot die'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[cannotdie]" value="0">
+                        <input type="checkbox" name="companion[cannotdie]" value="1" {{ true == companion.cannotdie ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion cannot be healed'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[cannotbehealed]" value="0">
+                        <input type="checkbox" name="companion[cannotbehealed]" value="1" {{ true == companion.cannotbehealed ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Cost (DKs)'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostdks]" value="{{ companion.companioncostdks }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Cost (Gems)'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostgems]" value="{{ companion.companioncostgems }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Companion Cost (Gold)'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostgold]" value="{{ companion.companioncostgold }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Allow in shades'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowinshades]" value="0">
+                        <input type="checkbox" name="companion[allowinshades]" value="1" {{ true == companion.allowinshades ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Allow in PvP'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowinpvp]" value="0">
+                        <input type="checkbox" name="companion[allowinpvp]" value="1" {{ true == companion.allowinpvp ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'Allow in train'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowintrain]" value="0">
+                        <input type="checkbox" name="companion[allowintrain]" value="1" {{ true == companion.allowintrain ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="ui button">{{ 'Save'|t }}</button>
+</form>
+<script>
+    $(document).ready(function ()
+    {
+        if ($('#defender').prop('checked'))
+        {
+            $('#fighter').prop('disabled', true)
+            $('#fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#fighter').prop('disabled', false)
+        }
+
+        if ($('#fighter').prop('checked'))
+        {
+            $('#defender').prop('disabled', true)
+            $('#defender').prop('checked', false)
+        }
+        else
+        {
+            $('#defender').prop('disabled', false)
+        }
+    })
+
+    $('#defender').on('change', function ()
+    {
+        if ($('#defender').prop('checked'))
+        {
+            $('#fighter').prop('disabled', true)
+            $('#fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#fighter').prop('disabled', false)
+        }
+    })
+
+    $('#fighter').on('change', function ()
+    {
+        if ($('#fighter').prop('checked'))
+        {
+            $('#defender').prop('disabled', true)
+            $('#defender').prop('checked', false)
+        }
+        else
+        {
+            $('#defender').prop('disabled', false)
+        }
+    })
+</script>

@@ -1,0 +1,40 @@
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'Ops'|t }}</th>
+            <th>{{ 'Name'|t }}</th>
+            <th>{{ 'Cost'|t }}</th>
+        </tr>
+    </thead>
+    {% set cat = '' %}
+    {% for companion in companions %}
+        {% if cat != companion.category %}
+            {% set cat = companion.category %}
+            <thead>
+                <td colspan="3">{{ 'Category: %s'|t|format(companion.category)|colorize }}</td>
+            </thead>
+        {% endif %}
+        <tr>
+            <td>
+                [
+                    <a href="{{ ('companions.php?op=edit&id=' ~ companion.companionid)|lotgd_url }}">{{ 'Edit'|t|colorize }}</a> |
+                    {% if companion.companionactive %}
+                        {{ delText }} |
+                        <a href="{{ ('companions.php?op=deactivate&id=' ~ companion.companionid)|lotgd_url }}">{{ 'Deactivate'|t|colorize }}</a> |
+                    {% else %}
+                        <a href="{{ ('companions.php?op=del&id=' ~ companion.companionid)|lotgd_url }}">{{ 'Del'|t|colorize }}</a> |
+                        <a href="{{ ('companions.php?op=activate&id=' ~ companion.companionid)|lotgd_url }}">{{ 'Activate'|t|colorize }}</a> |
+                    {% endif %}
+                    <a href="{{ ('companions.php?op=take&id=' ~ companion.companionid)|lotgd_url }}">{{ 'Take'|t|colorize }}</a>
+                ]
+            </td>
+            <td>{{ '`&%s`0'|format(companion.name)|colorize }}</td>
+            <td>{{ '`%%%s gems`0, `^%s gold`0'|t|format(companion.companioncostgems, companion.companioncostgold)|colorize }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">{{ '`$Not found companions`0'|t|colorize }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{{ '`nIf you wish to delete a companion, you have to deactivate it first.'|t|colorize}}
