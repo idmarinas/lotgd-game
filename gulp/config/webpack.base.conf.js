@@ -1,9 +1,9 @@
-//-- Dependencias
-var webpack = require('webpack')
+//-- Dependencies
 var path = require('path')
 var utils = require('./utils')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-//-- Configuración
+//-- Configuration
 var config = require('./default')
 
 module.exports = {
@@ -12,13 +12,13 @@ module.exports = {
     },
     output: {
         path: config.paths.build,
-        filename: '[name].js',
-        chunkFilename: utils.assetsPath('js/[id].js')
+        filename: utils.assetsPath('js/[name].js'),
+        chunkFilename: utils.assetsPath('js/[name].js')
     },
     resolve: {
         extensions: ['.js', '.json'],
         alias: {
-            jquery: 'jquery/src/jquery.js',
+            'jquery': 'jquery/src/jquery.js',
             'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss',
             'toastr.css$': 'toastr/toastr.scss'
         }
@@ -54,21 +54,39 @@ module.exports = {
                     limit: 10000,
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
             }
         ]
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            name: 'vendor'
+        },
+        runtimeChunk: {
+            name: 'manifest'
+        }
+    },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function (module)
-            {
-                // this assumes your vendor imports exist in the node_modules directory
-                return module.context && module.context.indexOf('node_modules') !== -1
-            }
-        }),
-        // CommonChunksPlugin will now extract all the common modules from vendor and main bundles
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest' // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: utils.assetsPath('css/[name].css'),
+            chunkFilename: utils.assetsPath('css/[name].css')
         })
     ]
 }
