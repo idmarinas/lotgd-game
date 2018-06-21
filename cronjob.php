@@ -1,7 +1,7 @@
 <?php
 
 //-- Only can invoke in cli (shell)
-if(substr(php_sapi_name(), 0, 3) != 'cli' || ! empty($_SERVER['REMOTE_ADDR']))
+if ('cli' != substr(php_sapi_name(), 0, 3) || ! empty($_SERVER['REMOTE_ADDR']))
 {
     echo 'Only in cli';
 
@@ -10,7 +10,7 @@ if(substr(php_sapi_name(), 0, 3) != 'cli' || ! empty($_SERVER['REMOTE_ADDR']))
 
 define('ALLOW_ANONYMOUS', true);
 
-require_once __DIR__ . '/common.php';
+require_once __DIR__.'/common.php';
 
 $jobby = new Jobby\Jobby();
 
@@ -18,7 +18,7 @@ $jobby = new Jobby\Jobby();
 $lotgd_cache->getOptions()->setNamespace('cronjob');
 $lotgd_cache->getOptions()->setDirPermission(0777);
 
-$cronjobs = datacache('tablecronjobs', 86400, true);//-- Cache for 1 day
+$cronjobs = datacache('tablecronjobs', 86400, true); //-- Cache for 1 day
 if (! is_array($cronjobs) || empty($cronjobs))
 {
     $select = DB::select('cronjob');
@@ -36,7 +36,7 @@ foreach ($cronjobs as $key => $job)
     $job = array_filter($job);
 
     $jobName = $job['name'];
-    $job['command'] = 'php ' . $job['command'] . '.php';
+    $job['command'] = "php {$job['command']}.php";
     unset($job['name']);
     $jobby->add($jobName, $job);
 }
