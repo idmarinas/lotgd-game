@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -14,40 +15,60 @@ require_once 'lib/villagenav.php';
 
 if (injectmodule(httpget('module'), (httpget('admin') ? true : false)))
 {
-	$info = get_module_info(httpget('module'));
-    if (!isset($info['allowanonymous'])) { $allowanonymous = false; }
-    else { $allowanonymous = $info['allowanonymous']; }
+    $info = get_module_info(httpget('module'));
 
-    if (!isset($info['override_forced_nav'])) { $override_forced_nav = false; }
-    else { $override_forced_nav=$info['override_forced_nav']; }
+    if (! isset($info['allowanonymous']))
+    {
+        $allowanonymous = false;
+    }
+    else
+    {
+        $allowanonymous = $info['allowanonymous'];
+    }
 
-	do_forced_nav($allowanonymous, $override_forced_nav);
+    if (! isset($info['override_forced_nav']))
+    {
+        $override_forced_nav = false;
+    }
+    else
+    {
+        $override_forced_nav = $info['override_forced_nav'];
+    }
 
-	$starttime = microtime(true);
-    $fname = $mostrecentmodule."_run";
+    do_forced_nav($allowanonymous, $override_forced_nav);
 
-	tlschema("module-$mostrecentmodule");
-	$fname();
+    $starttime = microtime(true);
+    $fname = $mostrecentmodule.'_run';
+
+    tlschema("module-$mostrecentmodule");
+    $fname();
     $endtime = microtime(true);
     $time = $endtime - $starttime;
+
     if (($time >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT)))
     {
-		debug("Slow Module (".round($time, 2)."s): $mostrecentmodule`n");
-	}
-	tlschema();
+        debug('Slow Module ('.round($time, 2)."s): $mostrecentmodule`n");
+    }
+    tlschema();
 }
 else
 {
-	do_forced_nav(false, false);
+    do_forced_nav(false, false);
 
-	tlschema('badnav');
+    tlschema('badnav');
 
-	page_header("Error");
-    if ($session['user']['loggedin']) { villagenav(); }
-    else { addnav('L?Return to the Login","index.php'); }
+    page_header('Error');
 
-	output('You are attempting to use a module which is no longer active, or has been uninstalled.');
+    if ($session['user']['loggedin'])
+    {
+        villagenav();
+    }
+    else
+    {
+        addnav('L?Return to the Login","index.php');
+    }
+
+    output('You are attempting to use a module which is no longer active, or has been uninstalled.');
 
     page_footer();
 }
-?>
