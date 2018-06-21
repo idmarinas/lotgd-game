@@ -1,5 +1,5 @@
 <?php
-$sql = "DELETE FROM " . DB::prefix("bans") . " WHERE ipfilter = '".httpget("ipfilter"). "' AND uniqueid = '".httpget("uniqueid")."'";
+
+$sql = 'DELETE FROM '.DB::prefix('bans')." WHERE ipfilter = '".httpget('ipfilter')."' AND uniqueid = '".httpget('uniqueid')."'";
 DB::query($sql);
-redirect("bans.php?op=removeban");
-?>
+redirect('bans.php?op=removeban');

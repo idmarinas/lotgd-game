@@ -1,79 +1,102 @@
 <?php
-$subop = httpget("subop");
+
+$subop = httpget('subop');
 $none = translate_inline('NONE');
-if ($subop=="xml"){
-	header("Content-Type: text/xml");
-	$sql = "SELECT DISTINCT " . DB::prefix("accounts") . ".name FROM " . DB::prefix("bans") . ", " . DB::prefix("accounts") . " WHERE (ipfilter='".addslashes(httpget("ip"))."' AND " .
-		DB::prefix("bans") . ".uniqueid='" .
-		addslashes(httpget("id"))."') AND ((substring(" .
-		DB::prefix("accounts") . ".lastip,1,length(ipfilter))=ipfilter " .
-		"AND ipfilter<>'') OR (" .  DB::prefix("bans") . ".uniqueid=" .
-		DB::prefix("accounts") . ".uniqueid AND " .
-		DB::prefix("bans") . ".uniqueid<>''))";
-	$r = DB::query($sql);
-	echo "<xml>";
-	while ($ro = DB::fetch_assoc($r)) {
-		echo "<name name=\"";
-		echo urlencode(appoencode("`0{$ro['name']}"));
-		echo "\"/>";
-	}
-	if (DB::num_rows($r)==0)
-		echo "<name name=\"$none\"/>";
-	echo "</xml>";
-	exit();
-}
-DB::query("DELETE FROM " . DB::prefix("bans") . " WHERE banexpire < \"".date("Y-m-d H:m:s")."\" AND banexpire>'0000-00-00 00:00:00'");
-$duration =  httpget("duration");
-if (httpget('notbefore')) {
-	$operator=">=";
-} else $operator="<=";
 
-if ($duration=="") {
-	$since = " WHERE banexpire $operator '".date("Y-m-d H:i:s",strtotime("+2 weeks"))."' AND banexpire > '0000-00-00 00:00:00'";
-		output("`bShowing bans that will expire within 2 weeks.`b`n`n");
-}else{
-	if ($duration=="forever") {
-		$since=" WHERE banexpire='0000-00-00 00:00:00'";
-		output("`bShowing all permanent bans`b`n`n");
-	} elseif ($duration=="all") {
-		$since="";
-		output("`bShowing all bans`b`n`n");
-	} else {
-		$since = " WHERE banexpire $operator '".date("Y-m-d H:i:s",strtotime("+".$duration))."' AND banexpire > '0000-00-00 00:00:00'";
-		output("`bShowing bans that will expire within %s.`b`n`n",$duration);
-	}
-}
-addnav("Perma-Bans");
-addnav("Show","bans.php?op=removeban&duration=forever");
-addnav("Will Expire Within");
-addnav("1 week","bans.php?op=removeban&duration=1+week");
-addnav(array("%s weeks", 2),"bans.php?op=removeban&duration=2+weeks");
-addnav(array("%s weeks", 3),"bans.php?op=removeban&duration=3+weeks");
-addnav(array("%s weeks", 4),"bans.php?op=removeban&duration=4+weeks");
-addnav(array("%s months", 2),"bans.php?op=removeban&duration=2+months");
-addnav(array("%s months", 3),"bans.php?op=removeban&duration=3+months");
-addnav(array("%s months", 4),"bans.php?op=removeban&duration=4+months");
-addnav(array("%s months", 5),"bans.php?op=removeban&duration=5+months");
-addnav(array("%s months", 6),"bans.php?op=removeban&duration=6+months");
-addnav("1 year","bans.php?op=removeban&duration=1+year");
-addnav(array("%s years", 2),"bans.php?op=removeban&duration=2+years");
-addnav(array("%s years", 4),"bans.php?op=removeban&duration=4+years");
-addnav("Show all","bans.php?op=removeban&duration=all");
-addnav("Will Expire not before");
-addnav("1 week","bans.php?op=removeban&duration=1+week&notbefore=1");
-addnav(array("%s weeks", 2),"bans.php?op=removeban&duration=2+weeks&notbefore=1");
-addnav(array("%s weeks", 3),"bans.php?op=removeban&duration=3+weeks&notbefore=1");
-addnav(array("%s weeks", 4),"bans.php?op=removeban&duration=4+weeks&notbefore=1");
-addnav(array("%s months", 2),"bans.php?op=removeban&duration=2+months&notbefore=1");
-addnav(array("%s months", 3),"bans.php?op=removeban&duration=3+months&notbefore=1");
-addnav(array("%s months", 4),"bans.php?op=removeban&duration=4+months&notbefore=1");
-addnav(array("%s months", 5),"bans.php?op=removeban&duration=5+months&notbefore=1");
-addnav(array("%s months", 6),"bans.php?op=removeban&duration=6+months&notbefore=1");
-addnav("1 year","bans.php?op=removeban&duration=1+year&notbefore=1");
-addnav(array("%s years", 2),"bans.php?op=removeban&duration=2+years&notbefore=1");
-addnav(array("%s years", 4),"bans.php?op=removeban&duration=4+years&notbefore=1");
+if ('xml' == $subop)
+{
+    header('Content-Type: text/xml');
+    $sql = 'SELECT DISTINCT '.DB::prefix('accounts').'.name FROM '.DB::prefix('bans').', '.DB::prefix('accounts')." WHERE (ipfilter='".addslashes(httpget('ip'))."' AND ".
+        DB::prefix('bans').".uniqueid='".
+        addslashes(httpget('id'))."') AND ((substring(".
+        DB::prefix('accounts').'.lastip,1,length(ipfilter))=ipfilter '.
+        "AND ipfilter<>'') OR (".DB::prefix('bans').'.uniqueid='.
+        DB::prefix('accounts').'.uniqueid AND '.
+        DB::prefix('bans').".uniqueid<>''))";
+    $r = DB::query($sql);
+    echo '<xml>';
 
-$sql = "SELECT * FROM " . DB::prefix("bans") . " $since ORDER BY banexpire ASC";
+    while ($ro = DB::fetch_assoc($r))
+    {
+        echo '<name name="';
+        echo urlencode(appoencode("`0{$ro['name']}"));
+        echo '"/>';
+    }
+
+    if (0 == DB::num_rows($r))
+    {
+        echo "<name name=\"$none\"/>";
+    }
+    echo '</xml>';
+
+    exit();
+}
+DB::query('DELETE FROM '.DB::prefix('bans').' WHERE banexpire < "'.date('Y-m-d H:m:s')."\" AND banexpire>'0000-00-00 00:00:00'");
+$duration = httpget('duration');
+
+if (httpget('notbefore'))
+{
+    $operator = '>=';
+}
+else
+{
+    $operator = '<=';
+}
+
+if ('' == $duration)
+{
+    $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+2 weeks'))."' AND banexpire > '0000-00-00 00:00:00'";
+    output('`bShowing bans that will expire within 2 weeks.`b`n`n');
+}
+else
+{
+    if ('forever' == $duration)
+    {
+        $since = " WHERE banexpire='0000-00-00 00:00:00'";
+        output('`bShowing all permanent bans`b`n`n');
+    }
+    elseif ('all' == $duration)
+    {
+        $since = '';
+        output('`bShowing all bans`b`n`n');
+    }
+    else
+    {
+        $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+'.$duration))."' AND banexpire > '0000-00-00 00:00:00'";
+        output('`bShowing bans that will expire within %s.`b`n`n', $duration);
+    }
+}
+addnav('Perma-Bans');
+addnav('Show', 'bans.php?op=removeban&duration=forever');
+addnav('Will Expire Within');
+addnav('1 week', 'bans.php?op=removeban&duration=1+week');
+addnav(['%s weeks', 2], 'bans.php?op=removeban&duration=2+weeks');
+addnav(['%s weeks', 3], 'bans.php?op=removeban&duration=3+weeks');
+addnav(['%s weeks', 4], 'bans.php?op=removeban&duration=4+weeks');
+addnav(['%s months', 2], 'bans.php?op=removeban&duration=2+months');
+addnav(['%s months', 3], 'bans.php?op=removeban&duration=3+months');
+addnav(['%s months', 4], 'bans.php?op=removeban&duration=4+months');
+addnav(['%s months', 5], 'bans.php?op=removeban&duration=5+months');
+addnav(['%s months', 6], 'bans.php?op=removeban&duration=6+months');
+addnav('1 year', 'bans.php?op=removeban&duration=1+year');
+addnav(['%s years', 2], 'bans.php?op=removeban&duration=2+years');
+addnav(['%s years', 4], 'bans.php?op=removeban&duration=4+years');
+addnav('Show all', 'bans.php?op=removeban&duration=all');
+addnav('Will Expire not before');
+addnav('1 week', 'bans.php?op=removeban&duration=1+week&notbefore=1');
+addnav(['%s weeks', 2], 'bans.php?op=removeban&duration=2+weeks&notbefore=1');
+addnav(['%s weeks', 3], 'bans.php?op=removeban&duration=3+weeks&notbefore=1');
+addnav(['%s weeks', 4], 'bans.php?op=removeban&duration=4+weeks&notbefore=1');
+addnav(['%s months', 2], 'bans.php?op=removeban&duration=2+months&notbefore=1');
+addnav(['%s months', 3], 'bans.php?op=removeban&duration=3+months&notbefore=1');
+addnav(['%s months', 4], 'bans.php?op=removeban&duration=4+months&notbefore=1');
+addnav(['%s months', 5], 'bans.php?op=removeban&duration=5+months&notbefore=1');
+addnav(['%s months', 6], 'bans.php?op=removeban&duration=6+months&notbefore=1');
+addnav('1 year', 'bans.php?op=removeban&duration=1+year&notbefore=1');
+addnav(['%s years', 2], 'bans.php?op=removeban&duration=2+years&notbefore=1');
+addnav(['%s years', 4], 'bans.php?op=removeban&duration=4+years&notbefore=1');
+
+$sql = 'SELECT * FROM '.DB::prefix('bans')." $since ORDER BY banexpire ASC";
 $result = DB::query($sql);
 rawoutput("<script language='JavaScript'>
 function getUserInfo(ip,id,divid){
@@ -99,55 +122,68 @@ function getUserInfo(ip,id,divid){
 </script>
 ");
 rawoutput("<table class='ui very compact striped selectable table'>");
-$ops = translate_inline("Ops");
-$bauth = translate_inline("Ban Author");
-$ipd = translate_inline("IP/ID");
-$dur = translate_inline("Duration");
-$mssg = translate_inline("Message");
-$aff = translate_inline("Affects");
-$l = translate_inline("Last");
-	rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead>");
-$i=0;
-while ($row = DB::fetch_assoc($result)) {
-	$liftban = translate_inline("Lift&nbsp;ban");
-	$showuser = translate_inline("Click&nbsp;to&nbsp;show&nbsp;users");
-	rawoutput("<tr>");
-	rawoutput("<td><a href='bans.php?op=delban&ipfilter=".urlencode($row['ipfilter'])."&uniqueid=".urlencode($row['uniqueid'])."'>");
-	output_notl("%s", $liftban, true);
-	rawoutput("</a>");
-	addnav("","bans.php?op=delban&ipfilter=".urlencode($row['ipfilter'])."&uniqueid=".urlencode($row['uniqueid']));
-	rawoutput("</td><td>");
-	output_notl("`&%s`0", $row['banner']);
-	rawoutput("</td><td>");
-	output_notl("%s", $row['ipfilter']);
-	output_notl("%s", $row['uniqueid']);
-	rawoutput("</td><td>");
-		// "43200" used so will basically round to nearest day rather than floor number of days
+$ops = translate_inline('Ops');
+$bauth = translate_inline('Ban Author');
+$ipd = translate_inline('IP/ID');
+$dur = translate_inline('Duration');
+$mssg = translate_inline('Message');
+$aff = translate_inline('Affects');
+$l = translate_inline('Last');
+    rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead>");
+$i = 0;
 
-	$expire= sprintf_translate("%s days",
-			round((strtotime($row['banexpire'])+43200-strtotime("now"))/86400,0));
-	if (substr($expire,0,2)=="1 ")
-		$expire= translate_inline("1 day");
-	if (date("Y-m-d",strtotime($row['banexpire'])) == date("Y-m-d"))
-		$expire=translate_inline("Today");
-	if (date("Y-m-d",strtotime($row['banexpire'])) ==
-			date("Y-m-d",strtotime("1 day")))
-		$expire=translate_inline("Tomorrow");
-	if ($row['banexpire']=="0000-00-00 00:00:00")
-		$expire=translate_inline("Never");
-	output_notl("%s", $expire);
-	rawoutput("</td><td>");
-	output_notl("%s", $row['banreason']);
-	rawoutput("</td><td>");
-	$file = "bans.php?op=removeban&subop=xml&ip={$row['ipfilter']}&id={$row['uniqueid']}";
-	rawoutput("<div id='user$i'><a href='$file' target='_blank' onClick=\"getUserInfo('{$row['ipfilter']}','{$row['uniqueid']}',$i); return false;\">");
-	output_notl("%s", $showuser, true);
-	rawoutput("</a></div>");
-	addnav("",$file);
-	rawoutput("</td><td>");
-	output_notl("%s", relativedate($row['lasthit']));
-	rawoutput("</td></tr>");
-	$i++;
+while ($row = DB::fetch_assoc($result))
+{
+    $liftban = translate_inline('Lift&nbsp;ban');
+    $showuser = translate_inline('Click&nbsp;to&nbsp;show&nbsp;users');
+    rawoutput('<tr>');
+    rawoutput("<td><a href='bans.php?op=delban&ipfilter=".urlencode($row['ipfilter']).'&uniqueid='.urlencode($row['uniqueid'])."'>");
+    output_notl('%s', $liftban, true);
+    rawoutput('</a>');
+    addnav('', 'bans.php?op=delban&ipfilter='.urlencode($row['ipfilter']).'&uniqueid='.urlencode($row['uniqueid']));
+    rawoutput('</td><td>');
+    output_notl('`&%s`0', $row['banner']);
+    rawoutput('</td><td>');
+    output_notl('%s', $row['ipfilter']);
+    output_notl('%s', $row['uniqueid']);
+    rawoutput('</td><td>');
+    // "43200" used so will basically round to nearest day rather than floor number of days
+
+    $expire = sprintf_translate('%s days',
+            round((strtotime($row['banexpire']) + 43200 - strtotime('now')) / 86400, 0));
+
+    if ('1 ' == substr($expire, 0, 2))
+    {
+        $expire = translate_inline('1 day');
+    }
+
+    if (date('Y-m-d', strtotime($row['banexpire'])) == date('Y-m-d'))
+    {
+        $expire = translate_inline('Today');
+    }
+
+    if (date('Y-m-d', strtotime($row['banexpire'])) ==
+            date('Y-m-d', strtotime('1 day')))
+    {
+        $expire = translate_inline('Tomorrow');
+    }
+
+    if ('0000-00-00 00:00:00' == $row['banexpire'])
+    {
+        $expire = translate_inline('Never');
+    }
+    output_notl('%s', $expire);
+    rawoutput('</td><td>');
+    output_notl('%s', $row['banreason']);
+    rawoutput('</td><td>');
+    $file = "bans.php?op=removeban&subop=xml&ip={$row['ipfilter']}&id={$row['uniqueid']}";
+    rawoutput("<div id='user$i'><a href='$file' target='_blank' onClick=\"getUserInfo('{$row['ipfilter']}','{$row['uniqueid']}',$i); return false;\">");
+    output_notl('%s', $showuser, true);
+    rawoutput('</a></div>');
+    addnav('', $file);
+    rawoutput('</td><td>');
+    output_notl('%s', relativedate($row['lasthit']));
+    rawoutput('</td></tr>');
+    $i++;
 }
-rawoutput("</table>");
-?>
+rawoutput('</table>');
