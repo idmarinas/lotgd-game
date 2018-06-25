@@ -1,0 +1,26 @@
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'Setting'|t|colorize }}</th>
+            <th>{{ 'Module Name'|t|colorize }}</th>
+            <th>{{ 'Total Seconds'|t|colorize }}</th>
+            <th>{{ 'Average per Hit'|t|colorize }}</th>
+            <th>{{ 'Hits'|t|colorize }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in content %}
+            <tr>
+                <td><strong>{{ row.category }}</strong></td>
+                <td><strong>{{ row.subcategory }}</strong></td>
+                <td>{{ row.sum }}</td>
+                <td>{{ row.medium }}</td>
+                <td>{{ row.counter }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">{{ '`$Not records found.`0'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
