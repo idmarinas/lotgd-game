@@ -1,0 +1,79 @@
+{{ 'The following codes are supported (case matters):`n'|t|colorize }}
+<table class="ui very compact very basic table">
+    <tr>
+        <td class="collapsing right aligned">{goodguyname} {goodguy}</td>
+        <td>{{ "The player's name "|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{goodguyweapon} {weapon}</td>
+        <td>{{ "The player's weapon "|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{armorname} {armor}</td>
+        <td>{{ "The player's armor"|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{himher}</td>
+        <td>{{ 'Subjective pronoun for the player (him her)'|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{hisher}</td>
+        <td>{{ 'Possessive pronoun for the player (his her)'|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{heshe}</td>
+        <td>{{ 'Objective pronoun for the player (he she)'|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{badguyname} {badguy}</td>
+        <td>{{ "The monster's name"|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{badguyweapon} {creatureweapon}</td>
+        <td>{{ "The monster's weapon"|t|colorize }}</td>
+    </tr>
+    <tr>
+        <td class="collapsing right aligned">{where}</td>
+        <td>{{ "The location like 'in the forest' or 'in the fields' or whatnot"|t|colorize }}</td>
+    </tr>
+</table>
+<br>
+<br>
+<form action="{{ ('deathmessages.php?op=save&deathmessageid=' ~ deathmessageid)|lotgd_url }}" method="POST" class="ui form">
+    <table class="ui very compact very basic table">
+        <tr>
+            <td class="collapsing">{{ '`4Deathmessage'|t|colorize }}</td>
+            <td><input name="deathmessage" value="{{ content.deathmessage|htmlentities }}"></td>
+        </tr>
+        <tr>
+            <td class="collapsing">{{ 'Is this a Forest Deathmessage'|t|colorize }}</td>
+            <td>
+                <div class="ui toggle checkbox">
+                    <input type="hidden" name="forest" value="0">
+                    <input type="checkbox" name="forest" value="1" {{ true == content.forest ? 'checked' : '' }}>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">{{ 'Is this a Graveyard Deathmessage'|t|colorize }}</td>
+            <td>
+                <div class="ui toggle checkbox">
+                    <input type="hidden" name="graveyard" value="0">
+                    <input type="checkbox" name="graveyard" value="1" {{ true == content.graveyard ? 'checked' : '' }}>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">{{ 'Is a Taunt displayed along with it?'|t|colorize }}</td>
+            <td>
+                <div class="ui toggle checkbox">
+                    <input type="hidden" name="taunt" value="0">
+                    <input type="checkbox" name="taunt" value="1" {{ true == content.taunt ? 'checked' : '' }}>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="field">
+        <input type="submit" class="ui button" value="{{ 'Save'|t }}">
+    </div>
+</form>

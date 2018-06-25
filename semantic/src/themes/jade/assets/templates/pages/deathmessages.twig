@@ -1,0 +1,31 @@
+{{ '`i`$Note: These messages are NEWS messages the user will trigger when he/she dies in the forest or graveyard.`0`i`n`n'|t|colorize }}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <th>{{ 'Ops'|t }}</th>
+        <th>{{ 'Deathmessage String'|t }}</th>
+        <th>{{ 'Forest Message'|t }}</th>
+        <th>{{ 'Graveyard Message'|t }}</th>
+        <th>{{ 'With Taunt'|t }}</th>
+        <th>{{ 'Author'|t }}</th>
+    </thead>
+    <tbody>
+        {% for message in deathmessages %}
+            <tr>
+                <td class="collapsing">
+                    [<a href={{ ('deathmessages.php?op=edit&deathmessageid=' ~ message.deathmessageid)|lotgd_url }}>{{ 'Edit'|t }}</a> |
+                    <a href="{{ ('deathmessages.php?op=del&deathmessageid=' ~ message.deathmessageid)|lotgd_url }}" data-options='{"text" : "{{ 'Are you sure you wish to delete this deathmessage?'|t }}"}' onclick="return Lotgd.confirm(this, event);">{{ 'Del'|t }}</a>]
+                </td>
+                <td>{{ message.deathmessage }}</td>
+                <td>{{ message.forest ? 'Yes'|t : 'No'|t }}</td>
+                <td>{{ message.graveyard ? 'Yes'|t : 'No'|t }}</td>
+                <td>{{ message.taunt ? 'Yes'|t : 'No'|t }}</td>
+                <td>{{ message.editor }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="center aligned">{{ '`$Not found death messages in data base.`0'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
