@@ -10,8 +10,6 @@ node_modules/
 bower_components/
 dist/
 composer.phar
-composer.lock
-package-lock.json
 phpunit.xml
 /semantic/dist/**
 /semantic/src/theme.config
