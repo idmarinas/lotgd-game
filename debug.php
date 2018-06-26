@@ -14,7 +14,10 @@ check_su_access(SU_EDIT_CONFIG);
 
 $sort = (string) httpget('sort');
 $debug = (string) httpget('debug');
+$debug = $debug ?: 'pageruntime';
 $ascdesc_raw = (int) httpget('direction');
+$order = $sort ?: 'sum';
+$ascdesc = $ascdesc_raw ? 'ASC' : 'DESC';
 
 superusernav();
 addnav('Debug Options');
@@ -25,11 +28,6 @@ addnav('Get Modulehooktimes', 'debug.php?debug=hooksort&sort='.urlencode($sort))
 page_header('Debug Analysis');
 
 $select = DB::select('debug');
-
-if ('' == $debug)
-{
-    $debug = 'pageruntime';
-}
 
 switch ($debug)
 {
@@ -48,18 +46,6 @@ switch ($debug)
             ->group('type, category, subcategory')
             ->where->equalTo('type', 'pagegentime')
         ;
-}
-
-$order = 'sum';
-if ('' != $sort)
-{
-    $order = $sort;
-}
-
-$ascdesc = 'DESC';
-if ($ascdesc_raw)
-{
-    $ascdesc = 'ASC';
 }
 
 $select->order("$order $ascdesc");
