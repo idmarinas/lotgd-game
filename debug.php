@@ -25,6 +25,12 @@ addnav('Get Modulehooktimes', 'debug.php?debug=hooksort&sort='.urlencode($sort))
 page_header('Debug Analysis');
 
 $select = DB::select('debug');
+
+if ('' == $debug)
+{
+    $debug = 'pageruntime';
+}
+
 switch ($debug)
 {
     case 'hooksort':
@@ -44,27 +50,16 @@ switch ($debug)
         ;
 }
 
+$order = 'sum';
 if ('' != $sort)
 {
     $order = $sort;
 }
-else
-{
-    $order = 'sum';
-}
 
-if ('' == $debug)
-{
-    $debug = 'pageruntime';
-}
-
+$ascdesc = 'DESC';
 if ($ascdesc_raw)
 {
     $ascdesc = 'ASC';
-}
-else
-{
-    $ascdesc = 'DESC';
 }
 
 $select->order("$order $ascdesc");
