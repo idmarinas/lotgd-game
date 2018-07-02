@@ -38,8 +38,8 @@ if ('savecronjob' == $op)
         gamelog("`@Create CronJob `^{$post['name']}`$ by admin {$session['user']['playername']}", 'cronjob');
     }
 
-	$op = '';
-	httpset($op, '');
+    $op = '';
+    httpset($op, '');
 
     invalidatedatacache('cronjobstable', true);
 }
@@ -67,15 +67,15 @@ if ('savecron' == $op)
 
     if ($old != $new)
     {
-		savesetting('newdaycron', $new);
-		output("Setting %s to %s`n", 'newdaycron', $new);
-		gamelog("`@Changed core setting `^newdaycron`@ from `#{$old}`@ to `&$new`0","settings");
-		// Notify every module
-		modulehook('changesetting', ['module' => 'core', 'setting' => 'newdaycron', 'old' => $old, 'new' => $new], true);
-	}
-	output("`^Settings saved.`0");
-	$op = '';
-	httpset($op, '');
+        savesetting('newdaycron', $new);
+        output('Setting %s to %s`n', 'newdaycron', $new);
+        gamelog("`@Changed core setting `^newdaycron`@ from `#{$old}`@ to `&$new`0", 'settings');
+        // Notify every module
+        modulehook('changesetting', ['module' => 'core', 'setting' => 'newdaycron', 'old' => $old, 'new' => $new], true);
+    }
+    output('`^Settings saved.`0');
+    $op = '';
+    httpset($op, '');
 }
 
 if ('newcronjob' == $op)
@@ -85,6 +85,7 @@ if ('newcronjob' == $op)
     $cronid = (string) httpget('cronid');
 
     $data = ['enabled' => 1];
+
     if ($cronid)
     {
         $select = DB::select('cronjob');
@@ -95,52 +96,55 @@ if ('newcronjob' == $op)
 
         $result = DB::execute($select)->current();
 
-        if ($result) $data = $result;
+        if ($result)
+        {
+            $data = $result;
+        }
     }
 
     $sort = list_files('cronjob', []);
-	sort($sort);
-	$scriptenum = implode('', $sort);
-	$scriptenum = ',,none'.$scriptenum;
+    sort($sort);
+    $scriptenum = implode('', $sort);
+    $scriptenum = ',,none'.$scriptenum;
 
     $form = [
         'Job requires these,title',
-            'Note: This three options are mandatory,note',
-            'name' => 'Name for CronJob. There can not be another with the same name',
-            'schedule' => 'Crontab schedule format (man -s 5 crontab) or DateTime format (Y-m-d H:i:s) (https://crontab.guru)',
-            'command' => 'The shell command to run,enum'.$scriptenum,
-            'Note: if you want add new CronJob add your Cron PHP file in "cronjob/" folder,note',
+        'Note: This three options are mandatory,note',
+        'name' => 'Name for CronJob. There can not be another with the same name',
+        'schedule' => 'Crontab schedule format (man -s 5 crontab) or DateTime format (Y-m-d H:i:s) (https://crontab.guru)',
+        'command' => 'The shell command to run,enum'.$scriptenum,
+        'Note: if you want add new CronJob add your Cron PHP file in "cronjob/" folder,note',
         'Other,title',
-            'runAs' => 'Run as this user, if crontab user has sudo privileges',
-            'debug' => 'Send jobby internal messages to "debug.log",bool',
+        'runAs' => 'Run as this user, if crontab user has sudo privileges',
+        'debug' => 'Send jobby internal messages to "debug.log",bool',
         'Filtering,title',
-            'environment' => 'Development environment for this job,textarea',
-            'runOnHost' => 'Run jobs only on this hostname',
-            'maxRuntime' => 'Maximum execution time for this job (in seconds),number',
-            'enabled' => 'Run this job at scheduled times (enable or disabled),bool',
-            'haltDir' => 'A job will not run if this directory contains a file bearing the job\'s name',
+        'environment' => 'Development environment for this job,textarea',
+        'runOnHost' => 'Run jobs only on this hostname',
+        'maxRuntime' => 'Maximum execution time for this job (in seconds),number',
+        'enabled' => 'Run this job at scheduled times (enable or disabled),bool',
+        'haltDir' => 'A job will not run if this directory contains a file bearing the job\'s name',
         'Logging,title',
-            'output' => 'Redirect stdout and stderr to this file',
-            'dateFormat' => 'Format for dates on jobby log messages',
+        'output' => 'Redirect stdout and stderr to this file',
+        'dateFormat' => 'Format for dates on jobby log messages',
         'Mailing,title',
-            'recipients' => 'Comma-separated string of email addresses',
-            'mailer' => 'Email method: sendmail or smtp or mail',
-            'smtpHost' => 'SMTP host; if mailer is smtp',
-            'smtpPort' => 'SMTP port; if mailer is smtp,number',
-            'smtpUsername' => 'SMTP user; if mailer is smtp',
-            'smtpPassword' => 'SMTP password; if mailer is smtp',
-            'smtpSecurity' => 'SMTP security option: ssl or tls, if mailer is smtp',
-            'smtpSender' => 'The sender and from addresses used in SMTP notices',
-            'smtpSenderName' => 'Jobby	The name used in the from field for SMTP messages',
+        'recipients' => 'Comma-separated string of email addresses',
+        'mailer' => 'Email method: sendmail or smtp or mail',
+        'smtpHost' => 'SMTP host; if mailer is smtp',
+        'smtpPort' => 'SMTP port; if mailer is smtp,number',
+        'smtpUsername' => 'SMTP user; if mailer is smtp',
+        'smtpPassword' => 'SMTP password; if mailer is smtp',
+        'smtpSecurity' => 'SMTP security option: ssl or tls, if mailer is smtp',
+        'smtpSender' => 'The sender and from addresses used in SMTP notices',
+        'smtpSenderName' => 'Jobby	The name used in the from field for SMTP messages',
     ];
 
     addnav('', "configuration.php?settings=cronjob&op=savecronjob&cronid=$cronid");
     rawoutput("<form action='configuration.php?settings=cronjob&op=savecronjob&cronid=$cronid' method='POST'>");
     lotgd_showform($form, $data);
-    rawoutput("</form>");
+    rawoutput('</form>');
 
-	$op = '';
-	httpset($op, '');
+    $op = '';
+    httpset($op, '');
 }
 else
 {
@@ -157,7 +161,7 @@ else
     addnav('', 'configuration.php?settings=cronjob&op=savecron');
     rawoutput("<form action='configuration.php?settings=cronjob&op=savecron' method='POST'>");
     lotgd_showform($setup_cronjob, ['newdaycron' => getsetting('newdaycron', 0)]);
-    rawoutput("</form>");
+    rawoutput('</form>');
     output_notl('`n`n');
 
     $yes = translate_inline('`@Yes`0');
@@ -179,18 +183,19 @@ else
     addnav('', 'configuration.php?settings=cronjob&op=newcronjob');
     rawoutput('<br><br><table class="ui very compact striped selectable table">');
     rawoutput('<thead><tr><th>Name</th><th>Command</th><th>Schedule</th><th>Debug</th><th>Enabled</th><th>Opcs</th></tr></thead>');
-    foreach($result as $key => $value)
+
+    foreach ($result as $key => $value)
     {
         rawoutput('<tr><td>');
         output_notl($value['name']);
         rawoutput('</td><td>');
-        output_notl('php ' . $value['command'] . '.php');
+        output_notl('php '.$value['command'].'.php');
         rawoutput('</td><td>');
-        output_notl('<a href="https://crontab.guru/#%s" target="_blank"><i class="info icon"></i> `b%s`b</a>', str_replace(' ', '_', $value['schedule']),$value['schedule'], true);
+        output_notl('<a href="https://crontab.guru/#%s" target="_blank"><i class="info icon"></i> `b%s`b</a>', str_replace(' ', '_', $value['schedule']), $value['schedule'], true);
         rawoutput('</td><td>');
-        output_notl(($value['debug']?$yes:$no));
+        output_notl(($value['debug'] ? $yes : $no));
         rawoutput('</td><td>');
-        output_notl(($value['enabled']?$yes:$no));
+        output_notl(($value['enabled'] ? $yes : $no));
         rawoutput('</td><td>');
         $editlink = "configuration.php?settings=cronjob&op=newcronjob&cronid={$value['name']}";
         $deletelink = "configuration.php?settings=cronjob&op=delcronjob&cronid={$value['name']}";
@@ -201,6 +206,6 @@ else
     }
     rawoutput('</table>');
 
-	$op = '';
-	httpset($op, '');
+    $op = '';
+    httpset($op, '');
 }

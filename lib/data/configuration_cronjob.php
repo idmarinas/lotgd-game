@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'newdaycron' => 'Let the newday-runonce run via a cronjob,bool'
+    'newdaycron' => 'Let the newday-runonce run via a cronjob,bool'
 ];
