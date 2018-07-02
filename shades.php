@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -13,14 +14,17 @@ page_header('Land of the Shades');
 
 addcommentary();
 
-if ($session['user']['alive']) redirect('village.php');
+if ($session['user']['alive'])
+{
+    redirect('village.php');
+}
 
-output("`\$You walk among the dead now, you are a shade. ");
-output("Everywhere around you are the souls of those who have fallen in battle, in old age, and in grievous accidents. ");
-output("Each bears telltale signs of the means by which they met their end.`n`n");
-output("Their souls whisper their torments, haunting your mind with their despair:`n");
+output('`$You walk among the dead now, you are a shade. ');
+output('Everywhere around you are the souls of those who have fallen in battle, in old age, and in grievous accidents. ');
+output('Each bears telltale signs of the means by which they met their end.`n`n');
+output('Their souls whisper their torments, haunting your mind with their despair:`n');
 
-output("`nA sepulchral voice intones, \"`QIt is now %s in the world above.`\$\"`n`n",getgametime());
+output('`nA sepulchral voice intones, "`QIt is now %s in the world above.`$"`n`n', getgametime());
 
 modulehook('shades', []);
 commentdisplay('`n`QNearby, some lost souls lament:`n', 'shade', 'Despair', 25, translate_inline('despairs'));
@@ -42,18 +46,20 @@ addnav('??F.A.Q. (Frequently Asked Questions)', 'petition.php?op=faq', false, tr
 
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
-	addnav('Superuser');
-	addnav(',?Comment Moderation', 'moderate.php');
+    addnav('Superuser');
+    addnav(',?Comment Moderation', 'moderate.php');
 }
-if ($session['user']['superuser'] &~ SU_DOESNT_GIVE_GROTTO)
+
+if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
 {
-	addnav('Superuser');
-	addnav('X?Superuser Grotto', 'superuser.php');
+    addnav('Superuser');
+    addnav('X?Superuser Grotto', 'superuser.php');
 }
+
 if ($session['user']['superuser'] & SU_INFINITE_DAYS)
 {
-	addnav('Superuser');
-	addnav('/?New Day', 'newday.php');
+    addnav('Superuser');
+    addnav('/?New Day', 'newday.php');
 }
 
 tlschema();
