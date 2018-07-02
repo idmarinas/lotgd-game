@@ -2,33 +2,42 @@
 
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
-	$clanname = httppost('clanname');
-	$clanshort = httppost('clanshort');
-	if ($clanname) $clanname = full_sanitize($clanname);
-    if ($clanshort) $clanshort = full_sanitize($clanshort);
+    $clanname = httppost('clanname');
+    $clanshort = httppost('clanshort');
+
+    if ($clanname)
+    {
+        $clanname = full_sanitize($clanname);
+    }
+
+    if ($clanshort)
+    {
+        $clanshort = full_sanitize($clanshort);
+    }
 
     if ($clanname > '' && $clanshort > '')
     {
-		$sql = "UPDATE " . DB::prefix("clans") . " SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
-		output("Updating clan names`n");
-		DB::query($sql);
-		invalidatedatacache("clandata-$detail");
-	}
+        $sql = 'UPDATE '.DB::prefix('clans')." SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
+        output('Updating clan names`n');
+        DB::query($sql);
+        invalidatedatacache("clandata-$detail");
+    }
+
     if (httppost('block') > '')
     {
-		$blockdesc = translate_inline("Description blocked for inappropriate usage.");
-		$sql = "UPDATE " . DB::prefix("clans") . " SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
-		output("Blocking public description`n");
-		DB::query($sql);
-		invalidatedatacache("clandata-$detail");
+        $blockdesc = translate_inline('Description blocked for inappropriate usage.');
+        $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
+        output('Blocking public description`n');
+        DB::query($sql);
+        invalidatedatacache("clandata-$detail");
     }
     elseif (httppost('unblock') > '')
     {
-		$sql = "UPDATE " . DB::prefix("clans") . " SET descauthor=0, clandesc='' where clanid='$detail'";
-		output("UNblocking public description`n");
-		DB::query($sql);
-		invalidatedatacache("clandata-$detail");
-	}
+        $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=0, clandesc='' where clanid='$detail'";
+        output('UNblocking public description`n');
+        DB::query($sql);
+        invalidatedatacache("clandata-$detail");
+    }
 }
 
 //-- Info of Clan
@@ -45,7 +54,7 @@ $members = DB::execute($select);
 
 page_header('Clan Membership for %s &lt;%s&gt;', full_sanitize($clan['clanname']), full_sanitize($clan['clanshort']));
 
-addnav("Clan Options");
+addnav('Clan Options');
 
 //little hack with the hook...can't think of any other way
 $args = modulehook('clanranks', ['ranks' => $defaultRanks, 'clanid' => $detail]);

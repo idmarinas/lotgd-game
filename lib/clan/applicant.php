@@ -2,16 +2,22 @@
 
 page_header('Clan Halls');
 
-addnav("Clan Options");
+addnav('Clan Options');
 
-if ($op == 'apply') { require_once 'lib/clan/applicant_apply.php'; }
-elseif ($op == 'new') { require_once 'lib/clan/applicant_new.php'; }
+if ('apply' == $op)
+{
+    require_once 'lib/clan/applicant_apply.php';
+}
+elseif ('new' == $op)
+{
+    require_once 'lib/clan/applicant_new.php';
+}
 else
 {
     rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant.twig', ['registrar' => $registrar]));
     modulehook('clan-enter');
 
-    if ($op == 'withdraw')
+    if ('withdraw' == $op)
     {
         $session['user']['clanid'] = 0;
         $session['user']['clanrank'] = CLAN_APPLICANT;
@@ -27,8 +33,8 @@ else
         ;
         DB::execute($select);
 
-		addnav('Apply for Membership to a Clan', 'clan.php?op=apply');
-		addnav('Apply for a New Clan', 'clan.php?op=new');
+        addnav('Apply for Membership to a Clan', 'clan.php?op=apply');
+        addnav('Apply for a New Clan', 'clan.php?op=new');
     }
     else
     {

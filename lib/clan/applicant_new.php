@@ -2,19 +2,27 @@
 
 $apply = (int) httpget('apply');
 
-if ($apply == 1)
+if (1 == $apply)
 {
     $ocn = httppost('clanname');
     $clanname = stripslashes($ocn);
     $clanname = full_sanitize($clanname);
-    if (getsetting('clannamesanitize', 0)) $clanname = preg_replace("'[^[:alpha:] \\'-]'", '',$clanname);
+
+    if (getsetting('clannamesanitize', 0))
+    {
+        $clanname = preg_replace("'[^[:alpha:] \\'-]'", '', $clanname);
+    }
     $clanname = addslashes($clanname);
     httppostset('clanname', $clanname);
 
     $ocs = httppost('clanshort');
     $clanshort = stripslashes($ocs);
     $clanshort = full_sanitize($ocs);
-    if (getsetting('clanshortnamesanitize', 0)) $clanshort = preg_replace("'[^[:alpha:]]'", '',$clanshort);
+
+    if (getsetting('clanshortnamesanitize', 0))
+    {
+        $clanshort = preg_replace("'[^[:alpha:]]'", '', $clanshort);
+    }
     httppostset('clanshort', $clanshort);
 
     //-- Check if clan name exist
@@ -27,7 +35,7 @@ if ($apply == 1)
     //-- Check if clan short name exist
     $select = DB::select('clans');
     $select->columns(['clanid'])
-        ->where->equalTo('clanshort', str_replace(['<', '>'], '',$clanshort))
+        ->where->equalTo('clanshort', str_replace(['<', '>'], '', $clanshort))
     ;
     $clanshortexist = DB::execute($select);
 
@@ -42,7 +50,7 @@ if ($apply == 1)
 
         rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/new/apply/errornames.twig', $twig));
     }
-    elseif ((strlen($clanname) < 5 || strlen($clanname) > 50) || (strlen($clanshort) < 2 || strlen($clanshort) > getsetting('clanshortnamelength', 5)) )
+    elseif ((strlen($clanname) < 5 || strlen($clanname) > 50) || (strlen($clanshort) < 2 || strlen($clanshort) > getsetting('clanshortnamelength', 5)))
     {
         addnav('Return to the Lobby', 'clan.php');
 
@@ -53,9 +61,9 @@ if ($apply == 1)
     }
     elseif ($clannameexist->count() || $clanshortexist->count())
     {
-        $twig['nameexist'] = (boolean) $clannameexist->count();
+        $twig['nameexist'] = (bool) $clannameexist->count();
         $twig['name'] = stripslashes($clanname);
-        $twig['shortnameexist'] = (boolean) $clanshortexist->count();
+        $twig['shortnameexist'] = (bool) $clanshortexist->count();
         $twig['shortname'] = stripslashes($clanshort);
 
         rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/new/apply/errorexist.twig', $twig));
@@ -81,13 +89,13 @@ if ($apply == 1)
             else
             {
                 $insert = DB::insert('clans');
-                $insert->values([ 'clanname' => $clanname, 'clanshort' => $clanshort ]);
+                $insert->values(['clanname' => $clanname, 'clanshort' => $clanshort]);
                 DB::execute($insert);
                 $id = DB::insert_id();
 
                 $session['user']['clanid'] = $id;
                 $session['user']['clanrank'] = CLAN_LEADER + 1; //+1 because he is the founder
-                $session['user']['clanjoindate'] = date("Y-m-d H:i:s");
+                $session['user']['clanjoindate'] = date('Y-m-d H:i:s');
                 $session['user']['gold'] -= $gold;
                 $session['user']['gems'] -= $gems;
 

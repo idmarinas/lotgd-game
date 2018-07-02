@@ -5,7 +5,7 @@ $to = (int) httpget('to');
 if ($to)
 {
     $session['user']['clanid'] = $to;
-	$session['user']['clanrank'] = CLAN_APPLICANT;
+    $session['user']['clanrank'] = CLAN_APPLICANT;
     $session['user']['clanjoindate'] = date('Y-m-d H:i:s');
 
     $select = DB::select('accounts');
@@ -17,8 +17,8 @@ if ($to)
 
     while ($row = $officers->next())
     {
-        $msg = ['`^You have a new clan applicant!  `&%s`^ has completed a membership application for your clan!', $session['user']['name'] ];
-		systemmail($row['acctid'], $apply_subj, $msg);
+        $msg = ['`^You have a new clan applicant!  `&%s`^ has completed a membership application for your clan!', $session['user']['name']];
+        systemmail($row['acctid'], $apply_subj, $msg);
     }
 
     $delete = DB::delete('mail');
@@ -34,12 +34,12 @@ if ($to)
         ->where->equalTo('clanid', $to);
     $result = DB::execute($select)->current();
 
-    if (nltoappon($result['clandesc']) != '' )
+    if ('' != nltoappon($result['clandesc']))
     {
-		$subject = 'Clan Application Reminder';
+        $subject = 'Clan Application Reminder';
         $mail = '`&Did you remember to read the description of the clan of your choice before applying?  Note that some clans may have requirements that you have to fulfill before you can become a member.  If you are not accepted into the clan of your choice anytime soon, it may be because you have not fulfilled these requirements.  For your convenience, the description of the clan you are applying to is reproduced below.`n`n`c`#%s`@ <`^%s`@>`0`c`n%s';
 
-		systemmail($session['user']['acctid'], [$subject], [$mail, $result['clanname'], $result['clanshort'], addslashes(nltoappon($result['clandesc']))] );
+        systemmail($session['user']['acctid'], [$subject], [$mail, $result['clanname'], $result['clanshort'], addslashes(nltoappon($result['clandesc']))]);
     }
 
     addnav('Return to the Lobby', 'clan.php');
@@ -52,34 +52,43 @@ else
     $order = (int) httpget('order');
 
     //-- Frist delete clans with 0 members
-    DB::query("DELETE FROM `clans` WHERE (SELECT COUNT(`acctid`) FROM `accounts` WHERE `clans`.`clanid` = `accounts`.`clanid` AND `accounts`.`clanrank` > " . CLAN_APPLICANT . ") = 0");
+    DB::query('DELETE FROM `clans` WHERE (SELECT COUNT(`acctid`) FROM `accounts` WHERE `clans`.`clanid` = `accounts`.`clanid` AND `accounts`.`clanrank` > '.CLAN_APPLICANT.') = 0');
 
     //-- Select clans and total members
     $select = DB::select('clans');
     $select->columns(['clanid', 'clanshort', 'clanname'])
-        ->join('accounts', DB::expression('`accounts`.`clanid` = `clans`.`clanid` AND `accounts`.`clanrank` > ' . CLAN_APPLICANT), ['count' => DB::expression('COUNT(`accounts`.`acctid`)')])
+        ->join('accounts', DB::expression('`accounts`.`clanid` = `clans`.`clanid` AND `accounts`.`clanrank` > '.CLAN_APPLICANT), ['count' => DB::expression('COUNT(`accounts`.`acctid`)')])
         ->group('clans.clanid')
     ;
 
     //-- Order of results
-    if ($order == 1) { $select->order('clans.clanname DESC'); }
-    elseif ($order == 2) { $select->order('clans.clanshort DESC'); }
-    else { $select->order('count DESC'); }
+    if (1 == $order)
+    {
+        $select->order('clans.clanname DESC');
+    }
+    elseif (2 == $order)
+    {
+        $select->order('clans.clanshort DESC');
+    }
+    else
+    {
+        $select->order('count DESC');
+    }
 
     $clans = DB::execute($select);
 
     if ($clans->count())
     {
-		addnav('Return to the Lobby', 'clan.php');
-		addnav('Sorting');
-		addnav('Order by Membercount', 'clan.php?op=apply&order=0');
+        addnav('Return to the Lobby', 'clan.php');
+        addnav('Sorting');
+        addnav('Order by Membercount', 'clan.php?op=apply&order=0');
         addnav('Order by Clanname', 'clan.php?op=apply&order=1');
 
         rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/apply/clans.twig', ['registrar' => $registrar, 'clans' => $clans]));
     }
     else
     {
-		addnav('Apply for a New Clan', 'clan.php?op=new');
+        addnav('Apply for a New Clan', 'clan.php?op=new');
         addnav('Return to the Lobby', 'clan.php');
 
         rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/applicant/apply/noclans.twig', ['registrar' => $registrar]));

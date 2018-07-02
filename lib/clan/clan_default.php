@@ -2,9 +2,9 @@
 
 $select = DB::select('accounts');
 $select->columns([
-        'motdauthname' => 'name',
-        'descauthname' => DB::expression("(SELECT `name` FROM `accounts` WHERE `acctid` = '{$claninfo['descauthor']}')")
-    ])
+    'motdauthname' => 'name',
+    'descauthname' => DB::expression("(SELECT `name` FROM `accounts` WHERE `acctid` = '{$claninfo['descauthor']}')")
+])
     ->where->equalTo('acctid', $claninfo['motdauthor'])
 ;
 $result = DB::execute($select)->current();
@@ -39,7 +39,7 @@ $leaders = DB::execute($select)->current();
 
 $twig['newleader'] = false;
 //-- There's no leader here, probably because the leader's account expired.
-if ($leaders['count'] == 0)
+if (0 == $leaders['count'])
 {
     $select = DB::select('accounts');
     $select->columns(['name', 'acctid', 'clanrank'])
@@ -62,14 +62,17 @@ if ($leaders['count'] == 0)
 
         if ($row['acctid'] == $session['user']['acctid'])
         {
-			//if it's the current user, we'll need to update their
-			//session in order for the db write to take effect.
-			$session['user']['clanrank'] = CLAN_LEADER;
-		}
+            //if it's the current user, we'll need to update their
+            //session in order for the db write to take effect.
+            $session['user']['clanrank'] = CLAN_LEADER;
+        }
     }
 }
 
-if ($session['user']['clanrank'] > CLAN_MEMBER) { addnav('Update MoTD / Clan Desc', 'clan.php?op=motd'); }
+if ($session['user']['clanrank'] > CLAN_MEMBER)
+{
+    addnav('Update MoTD / Clan Desc', 'clan.php?op=motd');
+}
 
 addnav('M?View Membership', 'clan.php?op=membership');
 addnav('Online Members', 'list.php?op=clan');
@@ -80,4 +83,4 @@ rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/default.twig', $twig)
 
 modulehook('clanhall');
 
-commentdisplay('', "clan-{$claninfo['clanid']}", 'Speak', 25, ($claninfo['customsay']?:'says'));
+commentdisplay('', "clan-{$claninfo['clanid']}", 'Speak', 25, ($claninfo['customsay'] ?: 'says'));

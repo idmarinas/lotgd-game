@@ -3,7 +3,11 @@
 // require_once 'lib/clan/func.php';
 
 $setrank = (int) httppost('setrank');
-if ($setrank === 0) $setrank = (int) httpget('setrank');
+
+if (0 === $setrank)
+{
+    $setrank = (int) httpget('setrank');
+}
 $whoacctid = (int) httpget('whoacctid');
 $remove = (int) httpget('remove');
 
@@ -28,19 +32,19 @@ if ($setrank >= 0 && $setrank <= $session['user']['clanrank'])
         ];
         $args = modulehook('clan-setrank', $args);
 
-        if (! isset($args['handled']) || !$args['handled'])
+        if (! isset($args['handled']) || ! $args['handled'])
         {
-            $sql = "UPDATE " . DB::prefix("accounts") . " SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
+            $sql = 'UPDATE '.DB::prefix('accounts')." SET clanrank=GREATEST(0,least({$session['user']['clanrank']},$setrank)) WHERE acctid=$whoacctid";
 
             if ($whoacctid == $session['user']['acctid'])
             {
                 $session['user']['clanrank'] = max(0, min($session['user']['clanrank'], $setrank));
             }
 
-			DB::query($sql);
-			debuglog("Player {$session['user']['name']} changed rank of {$row['name']} from {$row['clanrank']} to {$setrank}.", $whoacctid);
-		}
-	}
+            DB::query($sql);
+            debuglog("Player {$session['user']['name']} changed rank of {$row['name']} from {$row['clanrank']} to {$setrank}.", $whoacctid);
+        }
+    }
 }
 
 if ($remove)
@@ -57,7 +61,7 @@ if ($remove)
     $args = [
         'setrank' => 0,
         'login' => $row['login'],
-        'name'  =>  $row['name'],
+        'name' => $row['name'],
         'acctid' => $remove,
         'clanid' => $session['user']['clanid'],
         'oldrank' => $row['clanrank']
@@ -72,12 +76,12 @@ if ($remove)
     DB::execute($update);
     debuglog("Player {$session['user']['name']} removed player {$row['login']} from {$claninfo['clanname']}.", $remove);
 
-	//delete unread application emails from this user.
-	//breaks if the applicant has had their name changed via
-	//dragon kill, superuser edit, or lodge color change
-	$subj = safeescape(serialize(array($apply_short, $row['name'])));
-	$sql = "DELETE FROM " . DB::prefix("mail") . " WHERE msgfrom=0 AND seen=0 AND subject='$subj'";
-	DB::query($sql);
+    //delete unread application emails from this user.
+    //breaks if the applicant has had their name changed via
+    //dragon kill, superuser edit, or lodge color change
+    $subj = safeescape(serialize([$apply_short, $row['name']]));
+    $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgfrom=0 AND seen=0 AND subject='$subj'";
+    DB::query($sql);
 }
 
 addnav('Clan Hall', 'clan.php');
