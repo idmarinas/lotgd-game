@@ -13,8 +13,7 @@ global $deathoverlord;
 tlschema('graveyard');
 
 page_header('The Graveyard');
-$skipgraveyardtext = handle_event('grave
-yard');
+$skipgraveyardtext = handle_event('graveyard');
 $deathoverlord = getsetting('deathoverlord', '`$Ramius`0');
 
 if (! $skipgraveyardtext)

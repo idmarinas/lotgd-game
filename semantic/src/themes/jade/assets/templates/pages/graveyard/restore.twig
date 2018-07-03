@@ -1,0 +1,12 @@
+{{ '`)`b`cThe Mausoleum`c`b'|t|colorize }}
+
+{% if needrestore %}
+    {% if restoredsoul %}
+        {{ '`$%s`) calls you weak for needing restoration, but as you have enough favor with him, he grants your request at the cost of `4%s`) favor.'|t|format(deathoverlord, favortoheal)|colorize }}
+    {% else %}
+        {{ '`$%s`) curses you and throws you from the Mausoleum, you must gain more favor with him before he will grant restoration.'|t|format(deathoverlord)|colorize }}
+    {% endif %}
+{% else %}
+    {{ "`\$%s`) sighs and mumbles something about, \"`7just 'cause they're dead, does that mean they don't have to think?`)\"`n`n"|t|format(deathoverlord)|colorize }}
+    {{ "Perhaps you'd like to actually `ineed`i restoration before you ask for it."|t|colorize }}
+{% endif %}

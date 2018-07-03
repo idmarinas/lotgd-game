@@ -1,0 +1,15 @@
+{{ '`)`c`bThe Mausoleum`b`c'|t|colorize }}
+
+{% if found is same as(true) %}
+    {% if content.hauntedby %}
+        {{ 'That person has already been haunted, please select another target'|t|colorize }}
+    {% else %}
+        {% if success is same as (true) %}
+            {{ 'You have successfully haunted `7%s`)!'|t|format(content.name)|colorize }}
+        {% else %}
+            {{ msg|t|format(content.name)|colorize }}
+        {% endif %}
+    {% endif %}
+{% else %}
+    {{ '`$%s`) has lost their concentration on this person, you cannot haunt them now.'|t|format(deathoverlord)|colorize }}
+{% endif %}

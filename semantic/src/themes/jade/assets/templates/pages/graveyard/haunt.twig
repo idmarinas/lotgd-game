@@ -1,0 +1,11 @@
+{{ '`$%s`) is impressed with your actions, and grants you the power to haunt a foe.`n`n'|t|format(deathoverlord)|colorize }}
+
+<form action="{{ 'graveyard.php?op=haunt2'|lotgd_url }}">
+    <div class="field">
+        <label>{{ 'Who would you like to haunt?'|t|colorize }}</label>
+        <input type="text" name="name" id="name">
+    </div>
+    <div class="field">
+        <input type="submit" class="ui button" value="{{ 'Search'|t }}">
+    </div>
+</form>
