@@ -1,0 +1,26 @@
+{% set odate = '' %}
+{% set categories = [] %}
+
+{% for row in paginator %}
+    {% set dom = row.date|date('D, M d') %}
+
+    {% if odate != dom %}
+        {{ '`n`b`@%s`0`b`n'|format(dom)|colorize }}
+        {% set odate = dom %}
+    {% endif %}
+
+    {% set time = row.date|date('H:i:s') ~ ' (' ~ row.date|relativedate|t ~ ')'  %}
+
+    {% if row.name %}
+        {{ '`7(`$%s`7) %s `7(`&%s`7) (`v%s`7)'|format(row.category, row.message, row.name, time)|colorize }}<br>
+    {% else %}
+        {{ '`7(`$%s`7) %s `7(`v%s`7)'|format(row.category, row.message, time)|colorize }}<br>
+    {% endif %}
+
+    {% if not categories[row.category] and '' == category %}
+        {{ addnav(['View by `i%s`i', row.category], ('gamelog.php?cat=' ~ row.category)) }}
+        {% set categories = categories|merge({ (row.category) : 1 }) %}
+    {% endif %}
+{% else %}
+    {{ '`$Not found records`0'|t|colorize }}
+{% endfor %}
