@@ -53,8 +53,6 @@ elseif ('prologue1' == $op)
 
     addnav('It is a new day', 'news.php');
     strip_all_buffs();
-    $sql = 'DESCRIBE '.DB::prefix('accounts');
-    $result = DB::query($sql);
 
     $dkpoints = 0;
 
@@ -131,6 +129,9 @@ elseif ('prologue1' == $op)
     {
         $session['user']['bestdragonage'] = $session['user']['dragonage'];
     }
+
+    $sql = 'DESCRIBE '.DB::prefix('accounts');
+    $result = DB::query($sql);
 
     while ($row = DB::fetch_assoc($result))
     {
