@@ -19,7 +19,8 @@ output('`n`c`q~~~~~ `$Global User Functions `q~~~~~`c`n`n');
 
 $op = httpget('op');
 
-switch ($op) {
+switch ($op)
+{
     case 'dkpointreset':
         output('`qThis lets you reset all the dragonpoints for all users on your server.`n`n`$Handle with care!`q`n`nIf you hit `l"Reset!"`q there is no turning back!`n`nAlso note that the hitpoints will be recalculated and the players can respend their points.`n`nThere is also a hook in there allowing modules to reset any things they did.');
         addnav('Dragonpoints');
