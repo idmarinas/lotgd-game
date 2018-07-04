@@ -32,7 +32,14 @@ Class DB
 
 	public static function setAdapter(Array $options, $force = false)
 	{
-		if (! isset($options['driver']) || $options['driver'] == '') $options['driver'] = 'Pdo_Mysql';
+        if (! isset($options['driver']) || $options['driver'] == '') $options['driver'] = 'Pdo_Mysql';
+
+        if ('Pdo_Mysql' == $options['driver'])
+        {
+            $options['driver_options'] = [
+                \PDO::MYSQL_ATTR_FOUND_ROWS => true
+            ];
+        }
 
 		if (! self::$adapter || true === $force )
 		{
