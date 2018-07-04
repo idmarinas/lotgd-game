@@ -1,0 +1,10 @@
+{% if hasmoney is same as(false) %}
+    {{ '`3The old creature pierces you with a gaze hard and cruel.`n'|t|colorize }}
+    {{ 'Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n'|t|colorize }}
+    {{ 'Perhaps you should get some more money before you attempt to engage in local commerce.`n`n'|t|colorize }}
+    {{ 'You recall that the creature had asked for `b`$%s`3`b gold.'|t|format(compcost)|colorize }}
+{% else %}
+    {{ '`3With a grimace, %s`3 up-ends the potion from the creature.`n'|t|format(companionname)|colorize }}
+    {{ 'Muscles knit back together, cuts close and bruises fade. %s`3 is ready to battle once again!`n'|t|format(companionname)|colorize }}
+    {{ 'You hand the creature your gold and are ready to be out of here.'|t|colorize }}
+{% endif %}
