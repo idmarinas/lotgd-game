@@ -1,0 +1,33 @@
+{% if pay %}
+    {% if cantbuy is same as(true) %}
+        {{ "\"Aah, so that's how it is,\" %s`0 says as he puts the key he had retrieved back on to its hook behind his counter."|t|format(barkeep)|colorize }}
+        {{ "Perhaps you'd like to get sufficient funds before you attempt to engage in local commerce."|t|colorize }}
+    {% endif %}
+{% else %}
+    {% if user.boughtroomtoday %}
+        {{ 'You already paid for a room for the day.'|t|colorize }}
+    {% else %}
+        {{ 'You stroll over to the bartender and request a room.'|t|colorize }}
+        {{ 'He eyes you up and says, "It will cost `$%s`0 gold for the night in a standard room.'|t|format(expense)|colorize }}
+
+        {% if user.goldinbank >= bankexpense and bankexpense != expense %}
+            {{ "And since you are such a fine person, I'll even offer you a rate of `\$%s`0 gold if you pay direct from the bank."|t|format(bankexpense)|colorize }}
+            {% if feepercent %}
+                {{ 'That includes a %s transaction fee.'|t|format(fee)|colorize }}
+            {% else %}
+                {{ 'That includes a transaction fee of %s gold.'|t|format(fee)|colorize }}
+            {% endif %}
+        {% endif %}
+
+        {{ "`n`n\"Also, let me tell you about our new 'Bodyguard Assistance Program' &#151; BAP.  You see, you hire one of my guards here, and they'll protect you should anyone happen to, er, pick the locks of your room,\" he says as he gestures to a series of men sitting at one of the inn's tables drinking ale."|t|colorize }}
+        {{ 'They range in size from a skinny shifty-eyed fellow who appears barely able to lift his stein to a great bear of a fellow.'|t|colorize }}
+        {{ "This bruiser has a tattoo of a heart with \"Mom\" written across it on his huge bicep, and goes to take a sip from his ale, but instead crushes his stein, squirting it all over the skinny fellow who doesn't voice any objection for obvious reasons."|t|colorize }}
+        {{ '"We call it the BAP program because when someone tries to sneak into your room, BAP BAP BAP, our guys go to work.'|t|colorize }}
+        {{ "There's only two conditions: you pay your fee up front, and the guard you choose gets to keep a portion of the rewards from any fights.\""|t|colorize }}
+        {{ '`n`nNot wanting to part with your money when the fields offer a place to sleep, you debate the issue.'|t|colorize }}
+        {{ 'You realize, however, that the inn is a considerably safer place to sleep.'|t|colorize }}
+        {{ 'It is far harder for vagabonds to get you in your room while you sleep.'|t|colorize }}
+        {{ 'Also, those bodyguards sound pretty safe to you.'|t|colorize }}
+        {# {{ '`n`bNote, bodyguard levels not yet implemented`b`n'|t|colorize }} #}
+    {% endif %}
+{% endif %}

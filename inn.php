@@ -12,13 +12,14 @@ require_once 'lib/http.php';
 require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 require_once 'lib/villagenav.php';
+require_once 'lib/partner.php';
 
 tlschema('inn');
 
 addcommentary();
 $iname = getsetting('innname', LOCATION_INN);
 $vname = getsetting('villagename', LOCATION_FIELDS);
-$barkeep = getsetting('barkeep', '`tCedrik');
+$barkeep = getsetting('barkeep', '`tCedrik`0');
 
 $op = httpget('op');
 // Correctly reset the location if they fleeing the dragon
@@ -45,26 +46,26 @@ $subop = httpget('subop');
 $com = httpget('comscroll');
 $comment = httppost('insertcommentary');
 
-require_once 'lib/partner.php';
 $partner = get_partner();
 addnav('Other');
 villagenav();
 addnav('I?Return to the Inn', 'inn.php');
 
-switch ($op) {
+switch ($op)
+{
     case '': case 'strolldown': case 'fleedragon':
         require 'lib/inn/inn_default.php';
         blocknav('inn.php');
-        break;
+    break;
     case 'converse':
         commentdisplay('You stroll over to a table, place your foot up on the bench and listen in on the conversation:`n', 'inn', 'Add to the conversation?', 20);
-        break;
+    break;
     case 'bartender':
         require 'lib/inn/inn_bartender.php';
-        break;
+    break;
     case 'room':
         require 'lib/inn/inn_room.php';
-        break;
+    break;
 }
 
 if (! $skipinndesc)

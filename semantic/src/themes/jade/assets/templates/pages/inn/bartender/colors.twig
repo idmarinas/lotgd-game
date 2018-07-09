@@ -1,0 +1,24 @@
+{{ '%s`0 leans on the bar.  "`%%So you want to know about colors, do you?`0" he asks.'|t|format(barkeep)|colorize }}
+{{ 'You are about to answer when you realize the question was posed in the rhetoric.'|t|colorize }}
+{{ "%s`0 continues, \"`%%To do colors, here's what you need to do."|t|format(barkeep)|colorize }}
+{{ 'First, you use a &#0096; mark (found right above the tab key) followed by %s'|t|format(colors|keys|join(', '))|colorize }}
+{{ 'Each of those corresponds with a color to look like this:'|t|colorize }}
+
+<br>
+{% for key, color in colors %}
+    {{ '`0| `%s&#0096;%s'|format(key, key)|colorize }}
+{% endfor %}
+{{ ' `0|'|colorize }}
+<br><br>
+{{ '`% You can use &#0096;0 to close the color.'|t|colorize }}
+{{ '`% Got it?`0" You can practice below:'|t|colorize }}
+<br>
+<form action="{{ REQUEST_URI|lotgd_url }}" method="POST">
+    {{ 'You entered `b"%s"`b`n'|t|format(preventtesttext)|colorize }}
+    {{ 'It looks like `b"%s"`b`n'|t|format(testtext)|colorize }}
+    <div class="ui action input">
+        <input type="text" name="testtext" id="input">
+        <button type="submit" class="ui button">{{ 'Try'|t }}</button>
+    </div>
+</form>
+{{ '`0`n`nThese colors can be used in your name, and in any conversations you have.'|t|colorize }}
