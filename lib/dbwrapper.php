@@ -474,22 +474,26 @@ Class DB
      *
      * @param Zend\Paginator\Paginator $paginator
      * @param string $url
+     * @param boolean $forcePages Force to show pages if only have 1 page
+     *
+     * @return void
      */
-    public static function pagination($paginator, $url)
+    public static function pagination($paginator, $url, $forcePages = false)
     {
         if ($paginator instanceof Paginator) $paginator = $paginator->getPages('all');
 
-        if (1 >= $paginator->pageCount) return;
+        if (1 >= $paginator->pageCount && ! $forcePages) return;
 
         addnav('Pages');
-        foreach($paginator->pagesInRange as $page)
+        $union = strpos($url, '?') === false ? '?' : '&';
+        foreach($paginator->pagesInRange as $key => $page)
         {
             $minpage = (($page - 1) * $paginator->itemCountPerPage) + 1;
             $maxpage = $paginator->itemCountPerPage * $page;
             $maxpage = ($paginator->totalItemCount >= $maxpage? $maxpage : $paginator->totalItemCount);
 
-            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`bPage %s (%s-%s)`b');
-            addnav([$text, $page, $minpage, $maxpage], $url . "&page=$page");
+            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`b`#Page %s (%s-%s)`0`b');
+            addnav([$text, $page, $minpage, $maxpage], "$url{$union}page=$page");
         }
     }
 
