@@ -8,99 +8,28 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 ### CHANGES
 * **battle.php** `$options` now have a new index `endbattle` that indicate if battle end
-* **lib/dbwrapper.php** Updated comments and added new comments for explain the functions
-* **s**
-* *Templates* **THIS IS A IMPORTANT CHANGE**
-    * The name of variable for this instance changed to `$lotgdTpl` is global and for now can use old variable `$lotgd_tpl`
-    * All texts are translate in `.twig` files now. Is a better solution for a consistant translation of game.
-    * **Note** Most of the `.php` files from which a Twig template has been created have been made a slight optimization of the code.
-    * ***NOTE important***: This is a first approach to how the templates of the pages will be, all these pages will undergo a change to adapt it better to the new template system.
-    * Note: all template files are in base directory of Jade theme: `semantic/src/themes/jade/assets/templates`.
-    * **about.php** Template file in `~/pages/about.twig`
-    * **account.php** Template file in `~/pages/account.twig`
-    * **armor.php** Template files in:
-        * `~/pages/armor.twig`
-        * `~/pages/armor/buy.twig`
-        * `~/pages/armor/list.twig`
-    * **armoreditor.php** Template files in:
-        * `~/pages/armoreditor.twig`
-        * `~/pages/armoreditor/add.twig`
-        * `~/pages/armoreditor/edit.twig`
-        * `~/pages/armoreditor/list.twig`
-    * **bank.php** Template files in:
-        * `~/pages/bank.twig`
-        * `~/pages/bank/borrow.twig`
-        * `~/pages/bank/deposit.twig`
-        * `~/pages/bank/depositfinish.twig`
-        * `~/pages/bank/enter.twig`
-        * `~/pages/bank/transfer.twig`
-        * `~/pages/bank/transfer2.twig`
-        * `~/pages/bank/transfer3.twig`
-        * `~/pages/bank/withdraw.twig`
-        * `~/pages/bank/withdrawfinish.twig`
+* *Templates*
     * **battle.php** Template files in:
         * Note: these files were moved from their previous folder `~/content`
         * `~/pages/battle.twig`
         * `~/pages/battle/combathealthbar.twig`
-    * **bio.php** Template files in:
-        * `~/pages/bio.twig`
-        * `~/pages/bio/deleted.twig`
-    * **bios.php** Template files in:
-        * `~/pages/bios.twig`
-    * **clan.php** Template files in:
-        * `~/pages/clan/applicant/apply/clans.twig`
-        * `~/pages/clan/applicant/apply/noclans.twig`
-        * `~/pages/clan/applicant/apply/sucess.twig`
-        * `~/pages/clan/applicant/new/apply/created.twig`
-        * `~/pages/clan/applicant/new/apply/errorexist.twig`
-        * `~/pages/clan/applicant/new/apply/errornames.twig`
-        * `~/pages/clan/applicant/new/apply/errornameslength.twig`
-        * `~/pages/clan/applicant/new/apply/errornomoney.twig`
-        * `~/pages/clan/applicant/new/default.twig`
-        * `~/pages/clan/applicant/noclan.twig`
-        * `~/pages/clan/applicant/waiting.twig`
-        * `~/pages/clan/applicant/withdraw.twig`
-        * `~/pages/clan/form/moderator.twig`
-        * `~/pages/clan/form/new.twig`
-        * `~/pages/clan/list/clans.twig`
-        * `~/pages/clan/list/none.twig`
-        * `~/pages/clan/start/motd/edit.twig`
-        * `~/pages/clan/start/motd/prohibited.twig`
-        * `~/pages/clan/start/wthdraw/confirm.twig`
-        * `~/pages/clan/start/default.twig`
-        * `~/pages/clan/start/membership.twig`
-        * `~/pages/clan/start/withdraw.twig`
-        * `~/pages/clan/applicant.twig`
-        * `~/pages/clan/detail.twig`
-        * `~/pages/clan/new.twig`
-        * `~/pages/clan/waiting.twig`
-
-
-    * **create.php** Template files in:
-        * `~/pages/create/created.twig`
-        * `~/pages/create/forgot.twig`
-        * `~/pages/create/notallowcreation.twig`
-        * `~/pages/create/register.twig`
-        * `~/pages/create/serverfull.twig`
-        * `~/pages/create/forgotval/notresult.twig`
-        * `~/pages/create/forgotval/result.twig`
-        * `~/pages/create/val/notresult.twig`
-        * `~/pages/create/val/result.twig`
-
-    * **home.php** Template file in `~/pages/home.twig`
+    * **home.php** Template files in:
+        * Note: these files were moved from their previous folder `~/content`
+        * `~/pages/home/login.twig`
+        * `~/pages/home/loginfull.twig`
 
 * THEME
     * Updated Semantic UI version 2.2.14 => 2.3.1
 
 ### FEATURES
 
-* **bank.php** Now you can customize the bank, just like a village
 * **lib/lotgdFormat.php** New file for formats functions
     * This file create a instance in a global variable with name `$lotgdFormat`
     * `numeral(float $number, int $decimals = 0, string $dec_point = false, string $thousands_sep = false)` format a number with grouped thousands
         * By default if you don't pass `dec_point` and/or `$thousands_sep` use the game settings values.
 * **lib/pageparts.php** Now var `$html` is global. You can use in your modules for add your content to templates
-* **lib/templates.php**
+* **lib/template.class.php**
+    * New file that contain a base class `LotgdTemplate` with functions for templates
     * New filter `relativedate` show a relative date from now
     * New filter `lotgd_popup` generate a popup link
     * New filter `nltoappon` convert all line breaks to LOTGD style
@@ -108,7 +37,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
     * New filter `pluralize` select the plural or singular form according to the last number
     * All theme templates now obtain the `user` variable that contains the user information as well as `$session['user']`
         * Note: Keep in mind that the information you get is the most up to date.
-* **THIS IS A IMPORTANT FEATURE** *Twig templates* It moves some of the text and HTML to the twig files. Look at the folder `semantics/src/themes/jade/assets/templates/pages` to find out which pages are moved and which you can modify.
+    * **Note** Now by default yout `LotgdTemplate` is this base class for templates in LOTGD and not load innecesary functions of `LotgdTheme`
+* **template.php** Class `LotgdTheme` that only contain funcions for themes of LOTGD extends base class of `LotgdTemplate`
 
 ### DEPRECATED
 
@@ -134,8 +64,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 * **package.json** Updated/Deleted dependencies
 * **composer.json** Addes a new dependencie `paragonie/random_compat` Need in PHP 5.6 needed for component `Zend\Math`
+* Most `.php` files have had a slight code optimization.
 * ***TODO***
-    * Get a better consistency in the template system and the game pages.
     * Create a system for replacing keywords by their value for templates. Ahem: {playername} would be replaced by the player's name.
 
 
