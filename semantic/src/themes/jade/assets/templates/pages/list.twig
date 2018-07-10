@@ -1,0 +1,72 @@
+{% if user.loggedin %}
+    <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST" class="ui form">
+        <label>Search by name:</label>
+        <div class="ui action input">
+            <input name="name"><button type="submit" class="ui button">Search</button>
+        </div>
+    </form>
+{% endif %}
+
+{{ ('`c`b' ~ title|t ~ '`b`c')|colorize }}
+
+<table class="ui very compact striped table">
+    <thead>
+        <th>{{ 'Alive'|t }}</th>
+        <th>{{ 'Level'|t }}</th>
+        <th>{{ 'Name'|t }}</th>
+        <th>{{ 'Location'|t }}</th>
+        <th>{{ 'Race'|t }}</th>
+        <th>{{ 'Sex'|t }}</th>
+        <th>{{ 'Last On'|t }}</th>
+    </thead>
+    <tbody>
+        {% for row in paginator %}
+            <tr>
+                <td>
+                    {% if row.alive == true %}
+                        {{ '`1Yes`0'|t|colorize }}
+                    {% elseif row.hitpoints > 0 %}
+                        {{ '`6Unconscious`0'|t|colorize }}
+                    {% else %}
+                        {{ '`4No`0'|t|colorize }}
+                    {% endif %}
+                </td>
+                <td>{{ '`^%s`0'|format(row.level)|colorize }}</td>
+                <td>
+                    {% if user.loggedin %}
+                        <a href="{{ ('mail.php?op=write&to=' ~ row.login|rawurlencode )|lotgd_url }}"><img src="images/newscroll.GIF" width="16" height="16" alt="{{ 'Write Mail'|t }}" border="0"></a>
+                        <a href="{{ ('bio.php?char=' ~ row.acctid)|lotgd_url }}">{{ '`&%s`0'|format(row.name)|colorize }}</a>
+                    {% else %}
+                        {{ '`&%s`0'|format(row.name)|colorize }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% set loggedin =  ('now'|date('U') - row.laston|date('U') < getsetting('LOGINTIMEOUT', 900) and row.loggedin) %}
+                    {{ '`&%s`0'|format(row.location)|colorize }}
+                    {% if loggedin %}
+                        {{ '`#(Online)`0'|t|colorize }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not row.race %}
+                        {{ RACE_UNKNOWN|t('race')|colorize }}
+                    {% else %}
+                        {{ row.race|t('race')|colorize }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if row.sex %}
+                        {{ '`%Female`0'|t|colorize }}
+                    {% else %}
+                        {{ '`!Male`0'|t|colorize }}
+                    {% endif %}
+                </td>
+                <td>{{ row.laston|relativedate|t }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7" class="center aligned">{{ '`$No characters found in realm`0'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
