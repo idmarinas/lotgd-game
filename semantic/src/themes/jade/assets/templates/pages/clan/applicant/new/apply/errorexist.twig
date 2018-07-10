@@ -1,9 +1,0 @@
-{{ '%s`7 looks over your form but informs you that:`n'|t|format(registrar)|colorize }}
-
-{% if nameexist %}
-    {{ '`nThe clan name %s is already taken, and hands you a blank form.'|t|format(name)|colorize }}
-{% endif %}
-
-{% if shortnameexist %}
-    {{ '`nThe short name %s is already taken, and hands you a blank form.'|t|format(shortname)|colorize }}
-{% endif %}

@@ -1,4 +1,3 @@
-{# This template get same data of his parent #}
 <table class='ui very compact striped selectable table'>
     <thead>
         <tr>
@@ -8,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for row in armors %}
+        {% for row in content %}
             {% set row = modulehook('modify-armor', row) %}
             {% if not row.skip %}
                 <tr>
@@ -17,21 +16,21 @@
                         {% if row.value <= (user.gold + tradeinvalue) %}
                             {% if not unavailable %}
                                 {% set color = '`&' %}
-                                <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|colorize }}</a>
+                                <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|appoencode }}</a>
                             {% else %}
                                 {% set color = '`7' %}
-                                {{ (color ~ row.armorname ~ '`0')|colorize }}
+                                {{ (color ~ row.armorname ~ '`0')|appoencode }}
                             {% endif %}
                         {% else %}
-                            {{ (color ~ row.armorname ~ '`0')|colorize }}
+                            {{ (color ~ row.armorname ~ '`0')|appoencode }}
                         {% endif %}
                     </td>
-                    <td>{{ (color ~ row.defense)|colorize }}</td>
+                    <td>{{ (color ~ row.defense)|appoencode }}</td>
                     <td>
                         {% if row.alternatetext %}
-                            {{ (color ~ row.alternatetext)|colorize }}
+                            {{ (color ~ row.alternatetext)|appoencode }}
                         {% else %}
-                            {{ (color ~ row.value)|colorize }}
+                            {{ (color ~ row.value)|appoencode }}
                         {% endif %}
                     </td>
                 </tr>

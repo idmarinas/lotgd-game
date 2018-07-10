@@ -1,9 +1,0 @@
-{{ '%s`7 looks over your form but informs you that:`n'|t|format(registrar)|colorize }}
-
-{% if namelength %}
-    {{ "`nYou must have at least 5 and no more than 50 characters in your clan's name (and they must consist only of letters, spaces, apostrophes, or dashes), then hands you a blank form."|t|colorize }}
-{% endif %}
-
-{% if shortnamelength %}
-    {{ "`nYou must have at least 2 and no more than %s characters in your clan's short name (and they must all be letters), then hands you a blank form."|t|format(getsetting('clanshortnamelength', 5))|colorize }}
-{% endif %}
