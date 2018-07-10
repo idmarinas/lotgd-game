@@ -45,4 +45,5 @@ return [
 	'2.3.0 IDMarinas Edition' => [],
 	'2.4.0 IDMarinas Edition' => [],
 	'2.5.0 IDMarinas Edition' => [],
+	'2.6.0 IDMarinas Edition' => [],
 ];
