@@ -1,7 +1,6 @@
 <?php
 
 page_header('Clan Hall for %s', full_sanitize($claninfo['clanname']));
-
 addnav('Clan Options');
 
 if ('' == $op)
@@ -18,11 +17,10 @@ elseif ('membership' == $op)
 }
 elseif ('withdrawconfirm' == $op)
 {
+    output('Are you sure you want to withdraw from your clan?');
     addnav('Withdraw?');
     addnav('No', 'clan.php');
     addnav('!?Yes', 'clan.php?op=withdraw');
-
-    rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/withdraw/confirm.twig', ['registrar' => $registrar]));
 }
 elseif ('withdraw' == $op)
 {

@@ -1,86 +1,92 @@
 <?php
+        modulehook('collapse{', ['name' => 'clanentry']);
+        output("Having pressed the secret levers and turned the secret knobs on the lock of the door to your clan's hall, you gain entrance and chat with your clan mates.`n`n");
+        modulehook('}collapse');
 
-$select = DB::select('accounts');
-$select->columns([
-    'motdauthname' => 'name',
-    'descauthname' => DB::expression("(SELECT `name` FROM `accounts` WHERE `acctid` = '{$claninfo['descauthor']}')")
-])
-    ->where->equalTo('acctid', $claninfo['motdauthor'])
-;
-$result = DB::execute($select)->current();
+        $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid={$claninfo['motdauthor']}";
+        $result = DB::query($sql);
+        $row = DB::fetch_assoc($result);
+        $motdauthname = $row['name'];
 
-$twig = [
-    'registrar' => $registrar,
-    'claninfo' => $claninfo,
-    'ranks' => $ranks,
-    // 'CLAN_LEADER' => CLAN_LEADER,
-    'motdauthname' => $result['motdauthname'],
-    'descauthname' => $result['descauthname']
-];
+        $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid={$claninfo['descauthor']}";
+        $result = DB::query($sql);
+        $row = DB::fetch_assoc($result);
+        $descauthname = $row['name'];
 
-//-- Count members
-$select = DB::select('accounts');
-$select->columns(['clanrank', 'count' => DB::expression('COUNT(1)')])
-    ->order('clanrank DESC')
-    ->group('clanrank')
-    ->where->equalTo('clanid', $claninfo['clanid'])
-;
-$twig['members'] = DB::execute($select);
-
-//-- Check for leaders
-$select = DB::select('accounts');
-$select->columns(['count' => DB::expression('COUNT(1)')])
-    ->order('clanrank DESC')
-    ->group('clanrank')
-    ->where->equalTo('clanid', $claninfo['clanid'])
-        ->greaterThanOrEqualTo('clanrank', CLAN_LEADER)
-;
-$leaders = DB::execute($select)->current();
-
-$twig['newleader'] = false;
-//-- There's no leader here, probably because the leader's account expired.
-if (0 == $leaders['count'])
-{
-    $select = DB::select('accounts');
-    $select->columns(['name', 'acctid', 'clanrank'])
-        ->order('clanrank DESC, clanjoindate')
-        ->where->equalTo('clanid', $session['user']['clanid'])
-            ->greaterThan('clanrank', CLAN_APPLICANT)
-    ;
-    $result = DB::execute($select);
-
-    if ($result->count())
-    {
-        $row = $result->current();
-        $twig['newleader'] = $row['name'];
-
-        $update = DB::update('accounts');
-        $update->set(['clanrank' => CLAN_LEADER])
-            ->where->equalTo('acctid', $row['acctid'])
-        ;
-        DB::execute($update);
-
-        if ($row['acctid'] == $session['user']['acctid'])
+        if ('' != $claninfo['clanmotd'])
         {
-            //if it's the current user, we'll need to update their
-            //session in order for the db write to take effect.
-            $session['user']['clanrank'] = CLAN_LEADER;
+            rawoutput("<div style='margin-left: 15px; padding-left: 15px;'>");
+            output('`&`bCurrent MoTD:`b `#by %s`2`n', $motdauthname);
+            output_notl(nltoappon($claninfo['clanmotd']).'`n');
+            rawoutput('</div>');
+            output_notl('`n');
         }
-    }
-}
 
-if ($session['user']['clanrank'] > CLAN_MEMBER)
-{
-    addnav('Update MoTD / Clan Desc', 'clan.php?op=motd');
-}
+        commentdisplay('', "clan-{$claninfo['clanid']}", 'Speak', 25, ($claninfo['customsay'] > '' ? $claninfo['customsay'] : 'says'));
 
-addnav('M?View Membership', 'clan.php?op=membership');
-addnav('Online Members', 'list.php?op=clan');
-addnav("Your Clan's Waiting Area", 'clan.php?op=waiting');
-addnav('`$Withdraw From Your Clan`0', 'clan.php?op=withdrawconfirm');
+        modulehook('clanhall');
 
-rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/start/default.twig', $twig));
+        if ('' != $claninfo['clandesc'])
+        {
+            modulehook('collapse{', ['name' => 'collapsedesc']);
+            output('`n`n`&`bCurrent Description:`b `#by %s`2`n', $descauthname);
+            output_notl(nltoappon($claninfo['clandesc']));
+            modulehook('}collapse');
+        }
+        $sql = 'SELECT count(1) AS c, clanrank FROM '.DB::prefix('accounts')." WHERE clanid={$claninfo['clanid']} GROUP BY clanrank DESC";
+        $result = DB::query($sql);
+        // begin collapse
+        modulehook('collapse{', ['name' => 'clanmemberdet']);
+        output('`n`n`bMembership Details:`b`n');
+        $leaders = 0;
 
-modulehook('clanhall');
+        while ($row = DB::fetch_assoc($result))
+        {
+            output_notl($ranks[$row['clanrank']].': `0'.$row['c'].'`n');
 
-commentdisplay('', "clan-{$claninfo['clanid']}", 'Speak', 25, ($claninfo['customsay'] ?: 'says'));
+            if ($row['clanrank'] >= CLAN_LEADER)
+            {
+                $leaders += $row['c'];
+            }
+        }
+        output_notl('`n');
+        $noleader = translate_inline('`^There is currently no leader!  Promoting %s`^ to leader as they are the highest ranking member (or oldest member in the event of a tie).`n`n');
+
+        if (0 == $leaders)
+        {
+            //There's no leader here, probably because the leader's account
+            //expired.
+            $sql = 'SELECT name,acctid,clanrank FROM '.DB::prefix('accounts')." WHERE clanid={$session['user']['clanid']} AND clanrank > ".CLAN_APPLICANT.' ORDER BY clanrank DESC, clanjoindate';
+            $result = DB::query($sql);
+
+            if (DB::num_rows($result))
+            {
+                $row = DB::fetch_assoc($result);
+                $sql = 'UPDATE '.DB::prefix('accounts').' SET clanrank='.CLAN_LEADER." WHERE acctid={$row['acctid']}";
+                DB::query($sql);
+                output_notl($noleader, $row['name']);
+
+                if ($row['acctid'] == $session['user']['acctid'])
+                {
+                    //if it's the current user, we'll need to update their
+                    //session in order for the db write to take effect.
+                    $session['user']['clanrank'] = CLAN_LEADER;
+                }
+            }
+            else
+            {
+                // There are no viable leaders.  But we cannot disband the clan
+                // here.
+            }
+        }
+        // end collapse
+        modulehook('}collapse');
+
+        if ($session['user']['clanrank'] > CLAN_MEMBER)
+        {
+            addnav('Update MoTD / Clan Desc', 'clan.php?op=motd');
+        }
+        addnav('M?View Membership', 'clan.php?op=membership');
+        addnav('Online Members', 'list.php?op=clan');
+        addnav("Your Clan's Waiting Area", 'clan.php?op=waiting');
+        addnav('Withdraw From Your Clan', 'clan.php?op=withdrawconfirm');

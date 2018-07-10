@@ -1,71 +1,117 @@
 <?php
-
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-{
-    $clanname = httppost('clanname');
-    $clanshort = httppost('clanshort');
-
-    if ($clanname)
+    if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
     {
-        $clanname = full_sanitize($clanname);
+        $clanname = httppost('clanname');
+
+        if ($clanname)
+        {
+            $clanname = full_sanitize($clanname);
+        }
+        $clanshort = httppost('clanshort');
+
+        if ($clanshort)
+        {
+            $clanshort = full_sanitize($clanshort);
+        }
+
+        if ($clanname > '' && $clanshort > '')
+        {
+            $sql = 'UPDATE '.DB::prefix('clans')." SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
+            output('Updating clan names`n');
+            DB::query($sql);
+            invalidatedatacache("clandata-$detail");
+        }
+
+        if (httppost('block') > '')
+        {
+            $blockdesc = translate_inline('Description blocked for inappropriate usage.');
+            $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
+            output('Blocking public description`n');
+            DB::query($sql);
+            invalidatedatacache("clandata-$detail");
+        }
+        elseif (httppost('unblock') > '')
+        {
+            $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=0, clandesc='' where clanid='$detail'";
+            output('UNblocking public description`n');
+            DB::query($sql);
+            invalidatedatacache("clandata-$detail");
+        }
+    }
+    $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='$detail'";
+    $result1 = DB::query_cached($sql, "clandata-$detail", 3600);
+    $row1 = DB::fetch_assoc($result1);
+
+    if ($session['user']['superuser'] & SU_AUDIT_MODERATION)
+    {
+        rawoutput("<div id='hidearea'>");
+        rawoutput("<form action='clan.php?detail=$detail' method='POST'>");
+        addnav('', "clan.php?detail=$detail");
+        output('Superuser / Moderator renaming:`n');
+        output('Long Name: ');
+        rawoutput("<input name='clanname' value=\"".htmlentities($row1['clanname'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'" maxlength=50 size=50>');
+        output('`nShort Name: ');
+        rawoutput("<input name='clanshort' value=\"".htmlentities($row1['clanshort'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'" maxlength=5 size=5>');
+        output_notl('`n');
+        $save = translate_inline('Save');
+        rawoutput("<input type='submit' class='button' value=\"$save\">");
+        $snu = htmlentities(translate_inline('Save & UNblock public description'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+        $snb = htmlentities(translate_inline('Save & Block public description'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+
+        if ('4294967295' == $row1['descauthor'])
+        {
+            rawoutput("<input type='submit' name='unblock' value=\"$snu\" class='button'>");
+        }
+        else
+        {
+            rawoutput("<input type='submit' name='block' value=\"$snb\" class='button'>");
+        }
+        rawoutput('</form>');
+        rawoutput('</div>');
+        rawoutput("<script language='JavaScript'>var hidearea = document.getElementById('hidearea');hidearea.style.visibility='hidden';hidearea.style.display='none';</script>", true);
+        $e = translate_inline('Edit Clan Info');
+        rawoutput("<a href='#' onClick='hidearea.style.visibility=\"visible\"; hidearea.style.display=\"inline\"; return false;'>$e</a>", true);
+        output_notl('`n');
     }
 
-    if ($clanshort)
+    output_notl(nltoappon($row1['clandesc']));
+
+    if ('' != nltoappon($row1['clandesc']))
     {
-        $clanshort = full_sanitize($clanshort);
+        output('`n`n');
     }
-
-    if ($clanname > '' && $clanshort > '')
+    output('`0This is the current clan membership of %s < %s >:`n', $row1['clanname'], $row1['clanshort']);
+    page_header('Clan Membership for %s &lt;%s&gt;', full_sanitize($row1['clanname']), full_sanitize($row1['clanshort']));
+    addnav('Clan Options');
+    $rank = translate_inline('Rank');
+    $name = translate_inline('Name');
+    $dk = translate_inline('Dragon Kills');
+    $jd = translate_inline('Join Date');
+    rawoutput("<table class='ui very compact striped selectable table'>");
+    rawoutput("<thead><tr><th>$rank</th><th>$name</th><th>$dk</th><th>$jd</th></tr></thead>");
+    $sql = 'SELECT acctid,name,login,clanrank,clanjoindate,dragonkills FROM '.DB::prefix('accounts')." WHERE clanid=$detail ORDER BY clanrank DESC,clanjoindate";
+    $result = DB::query($sql);
+    $tot = 0;
+    //little hack with the hook...can't think of any other way
+    $ranks = [CLAN_APPLICANT => '`!Applicant`0', CLAN_MEMBER => '`#Member`0', CLAN_OFFICER => '`^Officer`0', CLAN_LEADER => '`&Leader`0', CLAN_FOUNDER => '`$Founder'];
+    $args = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $detail]);
+    $ranks = translate_inline($args['ranks']);
+    //end
+    while ($row = DB::fetch_assoc($result))
     {
-        $sql = 'UPDATE '.DB::prefix('clans')." SET clanname='$clanname',clanshort='$clanshort' WHERE clanid='$detail'";
-        output('Updating clan names`n');
-        DB::query($sql);
-        invalidatedatacache("clandata-$detail");
+        $tot += $row['dragonkills'];
+        rawoutput('<tr><td>');
+        output_notl($ranks[$row['clanrank']]); //translated earlier
+        rawoutput('</td><td>');
+        $link = 'bio.php?char='.$row['acctid'].'&ret='.urlencode($_SERVER['REQUEST_URI']);
+        rawoutput("<a href='$link'>");
+        addnav('', $link);
+        output_notl('`&%s`0', $row['name']);
+        rawoutput("</a></td><td align='center'>");
+        output_notl('`$%s`0', $row['dragonkills']);
+        rawoutput('</td><td>');
+        output_notl('`3%s`0', $row['clanjoindate']);
+        rawoutput('</td></tr>');
     }
-
-    if (httppost('block') > '')
-    {
-        $blockdesc = translate_inline('Description blocked for inappropriate usage.');
-        $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=4294967295, clandesc='$blockdesc' where clanid='$detail'";
-        output('Blocking public description`n');
-        DB::query($sql);
-        invalidatedatacache("clandata-$detail");
-    }
-    elseif (httppost('unblock') > '')
-    {
-        $sql = 'UPDATE '.DB::prefix('clans')." SET descauthor=0, clandesc='' where clanid='$detail'";
-        output('UNblocking public description`n');
-        DB::query($sql);
-        invalidatedatacache("clandata-$detail");
-    }
-}
-
-//-- Info of Clan
-$select = DB::select('clans');
-$select->where->equalTo('clanid', $detail);
-$clan = DB::execute($select)->current();
-
-//-- List of members
-$select = DB::select('accounts');
-$select->columns(['acctid', 'name', 'login', 'clanrank', 'clanjoindate', 'dragonkills'])
-    ->order('clanrank DESC')
-    ->where->equalTo('clanid', $detail);
-$members = DB::execute($select);
-
-page_header('Clan Membership for %s &lt;%s&gt;', full_sanitize($clan['clanname']), full_sanitize($clan['clanshort']));
-
-addnav('Clan Options');
-
-//little hack with the hook...can't think of any other way
-$args = modulehook('clanranks', ['ranks' => $defaultRanks, 'clanid' => $detail]);
-
-$data = [
-    'clan' => $clan,
-    'members' => $members,
-    'ranks' => $args['ranks'],
-    'ret' => urlencode($_SERVER['REQUEST_URI']),
-    'moderator' => ($session['user']['superuser'] & SU_AUDIT_MODERATION),
-    'moderatorform' => htmlspecialchars($lotgdTpl->renderThemeTemplate('pages/clan/form/moderator.twig', ['clan' => $clan]))
-];
-
-rawoutput($lotgdTpl->renderThemeTemplate('pages/clan/detail.twig', $data));
+    rawoutput('</table>');
+    output('`n`n`^This clan has a total of `$%s`^ dragon kills.', $tot);
