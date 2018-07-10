@@ -15,8 +15,6 @@ addcommentary();
 $cost = $session['user']['level'] * 20;
 $op = httpget('op');
 
-$twig = ['cost' => $cost];
-
 if ('pay' == $op)
 {
     if ($session['user']['gold'] >= $cost)
@@ -27,11 +25,9 @@ if ('pay' == $op)
     }
     else
     {
-        $twig['paid'] = false;
         page_header("Gypsy Seer's tent");
         villagenav();
-
-        rawoutput($lotgd_tpl->renderThemeTemplate('pages/gypsy/nomoney.twig', $twig));
+        output("`5You offer the old gypsy woman your `^%s`5 gold for your gen-u-wine say-ance, however she informs you that the dead may be dead, but they ain't cheap.", $session['user']['gold']);
     }
 }
 elseif ('talk' == $op)
@@ -44,8 +40,11 @@ else
 {
     checkday();
     page_header("Gypsy Seer's tent");
-
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/gypsy.twig', $twig));
+    output('`5You duck into a gypsy tent like many you have seen throughout the realm.');
+    output('All of them promise to let you talk with the deceased, and most of them surprisingly seem to work.');
+    output('There are also rumors that the gypsy have the power to speak over distances other than just those of the afterlife.');
+    output('In typical gypsy style, the old woman sitting behind a somewhat smudgy crystal ball informs you that the dead only speak with the paying.');
+    output('"`!For you, %s, the price is a trifling `^%s`! gold.`5", she rasps.', translate_inline($session['user']['sex'] ? 'my pretty' : 'my handsome'), $cost);
 
     addnav('Seance');
     addnav(['Pay to talk to the dead (%s gold)', $cost], 'gypsy.php?op=pay');
@@ -59,5 +58,4 @@ else
     addnav('Forget it', 'village.php');
     modulehook('gypsy');
 }
-
 page_footer();

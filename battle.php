@@ -444,7 +444,7 @@ if ($op != 'newtarget')
 					else
 					{
 						$options['experience'][$index] = $badguy['creatureexp'];
-                    }
+					}
 				}
 				else
 				{

@@ -37,18 +37,10 @@ if ('run' == $op)
                 unset($companions[$index]);
             }
         }
-
-        if (is_string($session['user']['badguy']))
-        {
-            $enemies = unserialize($session['user']['badguy']);
-        }
-
-        if (is_array($enemies))
-        {
-            $enemies['options']['endbattle'] = 1;
-
-            $session['user']['badguy'] = createstring($enemies);
-        }
+    }
+    else
+    {
+        output('`c`b`$You failed to flee your opponent!`0`b`c');
     }
 }
 
@@ -58,13 +50,15 @@ if ('dragon' == $op)
 
     addnav('Enter the cave', 'dragon.php');
     addnav('Run away like a baby', 'inn.php?op=fleedragon');
-
-    $twig = [
-        'partner' => get_partner()
-    ];
-
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/forest/dragon.twig', $twig));
-
+    output('`$You approach the blackened entrance of a cave deep in the forest, though the trees are scorched to stumps for a hundred yards all around.');
+    output("A thin tendril of smoke escapes the roof of the cave's entrance, and is whisked away by a suddenly cold and brisk wind.");
+    output('The mouth of the cave lies up a dozen feet from the forest floor, set in the side of a cliff, with debris making a conical ramp to the opening.');
+    output('Stalactites and stalagmites near the entrance trigger your imagination to inspire thoughts that the opening is really the mouth of a great leech.`n`n');
+    output('You cautiously approach the entrance of the cave, and as you do, you hear, or perhaps feel a deep rumble that lasts thirty seconds or so, before silencing to a breeze of sulfur-air which wafts out of the cave.');
+    output('The sound starts again, and stops again in a regular rhythm.`n`n');
+    output("You clamber up the debris pile leading to the mouth of the cave, your feet crunching on the apparent remains of previous heroes, or perhaps hors d'oeuvres.`n`n");
+    output('Every instinct in your body wants to run, and run quickly, back to the warm inn, and the even warmer %s`$.', get_partner());
+    output('What do you do?`0');
     $session['user']['seendragon'] = 1;
 }
 

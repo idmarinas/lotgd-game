@@ -7,7 +7,6 @@ require_once 'common.php';
 require_once 'lib/http.php';
 require_once 'lib/listfiles.php';
 require_once 'lib/creaturefunctions.php';
-require_once 'lib/superusernav.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
@@ -18,12 +17,12 @@ $creaturestats = lotgd_generate_creature_levels();
 
 page_header('Creature Editor');
 
+require_once 'lib/superusernav.php';
 superusernav();
 
 $op = httpget('op');
 $subop = httpget('subop');
 
-$refresh = 0;
 if (httppost('refresh'))
 {
     httpset('op', 'add');
@@ -32,6 +31,7 @@ if (httppost('refresh'))
     $refresh = 1; //let them know this is a refresh
     //had to do this as there is no onchange in a form...
 }
+else ($refresh = 0);
 
 if ('save' == $op)
 {
@@ -100,7 +100,7 @@ if ('save' == $op)
 
             foreach ($creaturestats[$lev] as $key => $val)
             {
-                if (isset($post[$key]) && '' != $post[$key])
+                if ('' != $post[$key])
                 {
                     continue;
                 }
@@ -165,57 +165,110 @@ if ('del' == $op)
     httpset('op', '');
 }
 
-$level = (int) httpget('level');
-$level = max(1, $level);
-
 if ('' == $op || 'search' == $op)
 {
-    $q = (string) httppost('q');
+    $level = (int) httpget('level');
 
-    addnav('Levels');
-    $select = DB::select('creatures');
-    $select->columns(['n' => DB::expression('COUNT(1)'), 'creaturelevel'])
-        ->group('creaturelevel')
-        ->order('creaturelevel')
-    ;
-    $result = DB::execute($select);
-
-    while ($row = $result->next())
+    if (! $level)
     {
-        addnav(['Level %s: (%s creatures)', $row['creaturelevel'], $row['n']], "creatures.php?level={$row['creaturelevel']}");
+        $level = 1;
     }
-    addnav('Edit');
-    addnav('Add a creature', "creatures.php?op=add&level=$level");
+    $q = httppost('q');
 
-    $select = DB::select('creatures');
-    $select->order('creaturelevel, creaturename');
-
-    //-- Search query
     if ($q)
     {
-        $select->where->like('creaturename', "%$q%")
-            ->or->like('creaturecategory', "%$q%")
-            ->or->like('creatureweapon', "%$q%")
-            ->or->like('creaturelose', "%$q%")
-            ->or->like('createdby', "%$q%")
-        ;
+        $where = "creaturename LIKE '%$q%' OR creaturecategory LIKE '%$q%' OR creatureweapon LIKE '%$q%' OR creaturelose LIKE '%$q%' OR createdby LIKE '%$q%'";
     }
     else
     {
-        $select->where->equalTo('creaturelevel', $level);
+        $where = "creaturelevel='$level'";
     }
-    $result = DB::execute($select);
+    $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE $where ORDER BY creaturelevel,creaturename";
+    $result = DB::query($sql);
+    // Search form
+    $search = translate_inline('Search');
+    rawoutput("<form action='creatures.php?op=search' method='POST'>");
+    output('Search by field: ');
+    rawoutput("<div class='ui action input'><input name='q' id='q'>");
+    rawoutput("<button type='submit' class='ui button'>$search</button>");
+    rawoutput('</div></form>');
+    rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>", true);
+    addnav('', 'creatures.php?op=search');
 
-    $twig = [
-        'creatures' => $result,
-        'level' => $level,
-        'searched' => $q
-    ];
+    addnav('Levels');
+    $sql1 = 'SELECT count(creatureid) AS n,creaturelevel FROM '.DB::prefix('creatures').' group by creaturelevel order by creaturelevel';
+    $result1 = DB::query($sql1);
 
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/creatures.twig', $twig));
+    while ($row = DB::fetch_assoc($result1))
+    {
+        addnav(['Level %s: (%s creatures)', $row['creaturelevel'], $row['n']],
+                "creatures.php?level={$row['creaturelevel']}");
+    }
+    addnav('Edit');
+    addnav('Add a creature', "creatures.php?op=add&level=$level");
+    $opshead = translate_inline('Ops');
+    $idhead = translate_inline('ID');
+    $name = translate_inline('Name');
+    $lev = translate_inline('Level');
+    $weapon = translate_inline('Weapon');
+    $winmsg = translate_inline('Win');
+    $diemsg = translate_inline('Die');
+    $cat = translate_inline('Category');
+    $script = translate_inline('Script?');
+    $author = translate_inline('Author');
+    $edit = translate_inline('Edit');
+    $yes = translate_inline('Yes');
+    $no = translate_inline('No');
+    $confirm = translate_inline('Are you sure you wish to delete this creature?');
+    $del = translate_inline('Del');
+
+    rawoutput("<table class='ui very compact striped selectable table'>");
+    rawoutput('<thead><tr><th colspan="8" class="center aligned">Creatures level "'.$level.'"</th></tr>');
+    rawoutput("<tr><th>$opshead</th><th>$name</th><th>$cat</th><th>$weapon</th><th>$script</th><th>$winmsg</th><th>$diemsg</th><th>$author</th></tr></thead>");
+    addnav('', 'creatures.php');
+
+    while ($row = DB::fetch_assoc($result))
+    {
+        rawoutput('<tr>');
+        rawoutput("<td class='collapsing'>[ <a data-tooltip='$edit' href='creatures.php?op=edit&creatureid={$row['creatureid']}'><i class='write icon'></i></a>");
+        rawoutput(" | <a data-tooltip='$del' href='creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}' onClick='return confirm(\"$confirm\");'>");
+        rawoutput("<i class='trash icon'></i></a> ]</td><td>");
+        addnav('', "creatures.php?op=edit&creatureid={$row['creatureid']}");
+        addnav('', "creatures.php?op=del&creatureid={$row['creatureid']}&level={$row['creaturelevel']}");
+        output_notl('(%s) %s', $row['creatureid'], $row['creaturename']);
+        rawoutput('</td><td>');
+        output_notl('%s', $row['creaturecategory']);
+        rawoutput('</td><td>');
+        output_notl('%s', $row['creatureweapon']);
+        rawoutput('</td><td>');
+
+        if ('' != $row['creatureaiscript'])
+        {
+            output_notl($yes);
+        }
+        else
+        {
+            output_notl($no);
+        }
+        rawoutput('</td><td>');
+        output_notl('%s', $row['creaturewin']);
+        rawoutput('</td><td>');
+        output_notl('%s', $row['creaturelose']);
+        rawoutput('</td><td>');
+        output_notl('%s', $row['createdby']);
+        rawoutput('</td></tr>');
+    }
+    rawoutput('</table>');
 }
 else
 {
+    $level = (int) httpget('level');
+
+    if (! $level)
+    {
+        $level = 1;
+    }
+
     if ('edit' == $op || 'add' == $op)
     {
         require_once 'lib/showform.php';
@@ -308,7 +361,7 @@ else
             rawoutput("<form action='creatures.php?op=save' method='POST'>");
             lotgd_showform($form, $row);
             $refresh = translate_inline('Refresh');
-            rawoutput("<input type='submit' class='ui yellow button' name='refresh' value='$refresh'>");
+            rawoutput("<input type='submit' class='button' name='refresh' value='$refresh'>");
             rawoutput('</form>');
             addnav('', 'creatures.php?op=save');
 

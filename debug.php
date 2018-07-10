@@ -6,60 +6,88 @@
 require_once 'common.php';
 require_once 'lib/dhms.php';
 require_once 'lib/http.php';
-require_once 'lib/superusernav.php';
 
 tlschema('debug');
 
 check_su_access(SU_EDIT_CONFIG);
 
-$sort = (string) httpget('sort');
-$debug = (string) httpget('debug');
-$debug = $debug ?: 'pageruntime';
-$ascdesc_raw = (int) httpget('direction');
-$order = $sort ?: 'sum';
-$ascdesc = $ascdesc_raw ? 'ASC' : 'DESC';
-
+require_once 'lib/superusernav.php';
 superusernav();
 addnav('Debug Options');
 addnav('', $_SERVER['REQUEST_URI']);
+$sort = httpget('sort');
 addnav('Get Pageruntimes', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
 addnav('Get Modulehooktimes', 'debug.php?debug=hooksort&sort='.urlencode($sort));
 
 page_header('Debug Analysis');
+$order = 'sum';
 
-$select = DB::select('debug');
-
-switch ($debug)
+if ('' != $sort)
 {
-    case 'hooksort':
-        $select->columns(['category', 'subcategory', 'sum' => 'value', 'medium' => DB::expression('value/COUNT(1)'), 'counter' => DB::expression('COUNT(1')])
-            ->limit(30)
-            ->group('type, category, subcategory')
-            ->where->equalTo('type', 'hooktime')
-        ;
-        break;
-
-    case 'pageruntime':
-    default:
-        $select->columns(['category', 'subcategory', 'sum' => 'value', 'medium' => DB::expression('value/COUNT(1)'), 'counter' => DB::expression('COUNT(1')])
-            ->limit(30)
-            ->group('type, category, subcategory')
-            ->where->equalTo('type', 'pagegentime')
-        ;
+    $order = $sort;
 }
+$debug = httpget('debug');
 
-$select->order("$order $ascdesc");
-$result = DB::execute($select);
+if ('' == $debug)
+{
+    $debug = 'pageruntime';
+}
+$ascdesc_raw = (int) httpget('direction');
 
+if ($ascdesc_raw)
+{
+    $ascdesc = 'ASC';
+}
+    else
+    {
+        $ascdesc = 'DESC';
+    }
 addnav('Sorting');
 addnav('By Total', 'debug.php?debug='.$debug.'&sort=sum&direction='.$ascdesc_raw);
 addnav('By Average', 'debug.php?debug='.$debug.'&sort=medium&direction='.$ascdesc_raw);
 addnav('Switch ASC/DESC', 'debug.php?debug='.$debug.'&sort='.urlencode($sort).'&direction='.(! $ascdesc_raw));
 
-$twig = [
-    'content' => $result,
-];
+switch ($debug) {
+    case 'hooksort':
+        $sql = 'Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM '.DB::prefix('debug')." WHERE type='hooktime' group by type,category,subcategory order by $order $ascdesc limit 30";
+        $category = translate_inline('Setting');
+        $subcategory = translate_inline('Module Name');
+        $sum_desc = translate_inline('Total Seconds');
+        $med_desc = translate_inline('Average per Hit');
+        $hits = translate_inline('Hits');
+        break;
 
-rawoutput($lotgd_tpl->renderThemeTemplate('pages/debug.twig', $twig));
+    case 'pageruntime':
 
+    default:
+    $sql = 'Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM '.DB::prefix('debug')." WHERE type='pagegentime' group by type,category,subcategory order by $order $ascdesc limit 30";
+    $category = translate_inline('Setting');
+    $subcategory = translate_inline('Module Name');
+    $sum_desc = translate_inline('Total Seconds');
+    $med_desc = translate_inline('Average per Hit');
+    $hits = translate_inline('Hits');
+}
+$none = translate_inline('`iNone`i');
+$notset = translate_inline('`iNot set`i');
+rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$category</th><th>$subcategory</th><th>$sum_desc</th><th>$med_desc</th><th>$hits</th></tr></thead>");
+debug($sql);
+$result = DB::query($sql);
+$i = true;
+
+while ($row = DB::fetch_assoc($result))
+{
+    $i = ! $i;
+    rawoutput("<tr'><td valign='top'>");
+    output_notl('`b'.$row['category'].'`b');
+    rawoutput("</td><td valign='top'>");
+    output_notl('`b'.$row['subcategory'].'`b');
+    rawoutput("</td><td valign='top'>");
+    output_notl($row['sum']);
+    rawoutput("</td><td valign='top'>");
+    output_notl($row['medium']);
+    rawoutput("</td><td valign='top'>");
+    output_notl($row['counter']);
+    rawoutput('</td></tr>');
+}
+rawoutput('</table>');
 page_footer();

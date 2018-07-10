@@ -51,8 +51,38 @@ elseif ('prologue1' == $op)
 {
     $flawless = (int) httpget('flawless');
 
+    if ($flawless)
+    {
+        output('`b`c`&~~ Flawless Fight ~~`0`c`b`n`n');
+    }
+    output('`@Victory!`n`n');
+    output('`2Before you, the great dragon lies immobile, its heavy breathing like acid to your lungs.');
+    output("You are covered, head to toe, with the foul creature's thick black blood.");
+    output('The great beast begins to move its mouth.  You spring back, angry at yourself for having been fooled by its ploy of death, and watch for its huge tail to come sweeping your way.');
+    output('But it does not.');
+    output('Instead the dragon begins to speak.`n`n');
+    output('"`^Why have you come here mortal?  What have I done to you?`2" it says with obvious effort.');
+    output('"`^Always my kind are sought out to be destroyed.  Why?  Because of stories from distant lands that tell of dragons preying on the weak?  I tell you that these stories come only from misunderstanding of us, and not because we devour your children.`2"');
+    output('The beast pauses, breathing heavily before continuing, "`^I will tell you a secret.  Behind me now are my eggs.  They will hatch, and the young will battle each other.  Only one will survive, but she will be the strongest.  She will quickly grow, and be as powerful as me.`2"');
+    output('Breath comes shorter and shallower for the great beast.`n`n');
+    output("\"`#Why do you tell me this?  Don't you know that I will destroy your eggs?`2\" you ask.`n`n");
+    output('"`^No, you will not, for I know of one more secret that you do not.`2"`n`n');
+    output('"`#Pray tell oh mighty beast!`2"`n`n');
+    output('The great beast pauses, gathering the last of its energy.  "`^Your kind cannot tolerate the blood of my kind.  Even if you survive, you will be a feeble creature, barely able to hold a weapon, your mind blank of all that you have learned.  No, you are no threat to my children, for you are already dead!`2"`n`n');
+    output("Realizing that already the edges of your vision are a little dim, you flee from the cave, bound to reach the healer's hut before it is too late.");
+    output('Somewhere along the way you lose your weapon, and finally you trip on a stone in a shallow stream, sight now limited to only a small circle that seems to float around your head.');
+    output('As you lay, staring up through the trees, you think that nearby you can hear the sounds of the village.');
+    output('Your final thought is that although you defeated the dragon, you reflect on the irony that it defeated you.`n`n');
+    output("As your vision winks out, far away in the dragon's lair, an egg shuffles to its side, and a small crack appears in its thick leathery skin.");
+
+    if ($flawless)
+    {
+        output("`n`nYou fall forward, and remember at the last moment that you at least managed to grab some of the dragon's treasure, so maybe it wasn't all a total loss.");
+    }
     addnav('It is a new day', 'news.php');
     strip_all_buffs();
+    $sql = 'DESCRIBE '.DB::prefix('accounts');
+    $result = DB::query($sql);
 
     $dkpoints = 0;
 
@@ -61,9 +91,9 @@ elseif ('prologue1' == $op)
         'total' => $session['user']['maxhitpoints'],
         'dkpoints' => $dkpoints,
         'extra' => $session['user']['maxhitpoints'] - $dkpoints - ($session['user']['level'] * 10),
-        'base' => $dkpoints + get_player_hitpoints(),
+        'base' => $dkpoints + ($session['user']['level'] * 10),
     ];
-    modulehook('hprecalc', $hpgain);
+    $hpgain = modulehook('hprecalc', $hpgain);
     calculate_buff_fields();
 
     $nochange = [
@@ -125,22 +155,25 @@ elseif ('prologue1' == $op)
 
     $session['user']['dragonage'] = $session['user']['age'];
 
-    if ($session['user']['dragonage'] < $session['user']['bestdragonage'] || 0 == $session['user']['bestdragonage'])
+    if ($session['user']['dragonage'] < $session['user']['bestdragonage'] ||
+            0 == $session['user']['bestdragonage'])
     {
         $session['user']['bestdragonage'] = $session['user']['dragonage'];
     }
-
-    $sql = 'DESCRIBE '.DB::prefix('accounts');
-    $result = DB::query($sql);
 
     while ($row = DB::fetch_assoc($result))
     {
         if (array_key_exists($row['Field'], $nochange) && $nochange[$row['Field']])
         {
-            continue;
         }
-
-        $session['user'][$row['Field']] = $row['Default'];
+        elseif ('location' == $row['Field'])
+        {
+            $session['user'][$row['Field']] = getsetting('villagename', LOCATION_FIELDS);
+        }
+        else
+        {
+            $session['user'][$row['Field']] = $row['Default'];
+        }
     }
     $session['user']['gold'] = getsetting('newplayerstartgold', 50);
     $session['user']['location'] = getsetting('villagename', LOCATION_FIELDS);
@@ -149,13 +182,16 @@ elseif ('prologue1' == $op)
 
     $newtitle = get_dk_title($session['user']['dragonkills'], $session['user']['sex']);
 
-    $restartgold = $session['user']['gold'] + getsetting('newplayerstartgold', 50) * $session['user']['dragonkills'];
+    $restartgold = $session['user']['gold'] +
+        getsetting('newplayerstartgold', 50) * $session['user']['dragonkills'];
     $restartgems = 0;
 
     if ($restartgold > getsetting('maxrestartgold', 300))
     {
         $restartgold = getsetting('maxrestartgold', 300);
-        $restartgems = max(0, ($session['user']['dragonkills'] - (getsetting('maxrestartgold', 300) / getsetting('newplayerstartgold', 50)) - 1));
+        $restartgems = max(0, ($session['user']['dragonkills'] -
+                (getsetting('maxrestartgold', 300) /
+                 getsetting('newplayerstartgold', 50)) - 1));
 
         if ($restartgems > getsetting('maxrestartgems', 10))
         {
@@ -171,17 +207,33 @@ elseif ('prologue1' == $op)
         $session['user']['gems']++;
     }
 
-    $session['user']['maxhitpoints'] = get_player_hitpoints();
+    $session['user']['maxhitpoints'] = 10 + $hpgain['dkpoints'] + $hpgain['extra'];
     $session['user']['hitpoints'] = $session['user']['maxhitpoints'];
 
+    // Sanity check
+    if ($session['user']['maxhitpoints'] < 1)
+    {
+        // Yes, this is a freaking hack.
+        die('ACK!! Somehow this user would end up perma-dead.. Not allowing DK to proceed!  Notify admin and figure out why this would happen so that it can be fixed before DK can continue.');
+
+        exit();
+    }
+
     // Set the new title.
-    $session['user']['title'] = change_player_title($newtitle);
+    $newname = change_player_title($newtitle);
+    $session['user']['title'] = $newtitle;
     $session['user']['name'] = $newname;
 
     $session['user']['laston'] = date('Y-m-d H:i:s', strtotime('-1 day'));
     $session['user']['slaydragon'] = 1;
     $companions = [];
-    $session['user']['companions'] = $companions;
+    $session['user']['companions'] = [];
+
+    output('`n`nYou wake up in the midst of some trees.  Nearby you hear the sounds of a village.');
+    output('Dimly you remember that you are a new warrior, and something of a dangerous Green Dragon that is plaguing the area.  You decide you would like to earn a name for yourself by perhaps some day confronting this vile creature.');
+
+    // allow explanative text as well.
+    modulehook('dragonkilltext');
 
     $regname = get_player_basename();
     $badguys = ! is_array($badguys) ? @unserialize($badguys) : $badguys;
@@ -197,15 +249,11 @@ elseif ('prologue1' == $op)
 
     $howoften = translate_inline($session['user']['dragonkills'] > 1 ? 'times' : 'time'); // no translation, we never know who is viewing...
     addnews('`#%s`# has earned the title `&%s`# for having slain `@%s`& `^%s`# %s!`0', $regname, $session['user']['title'], $badguy['creaturename'], $session['user']['dragonkills'], $howoften);
-
+    output('`n`n`^You are now known as `&%s`^!!', $session['user']['name']);
+    output("`n`n`&Because you have slain %s`& %s %s, you start with some extras.  You also keep additional permanent hitpoints you've earned.`n", $badguy['creaturename'], $session['user']['dragonkills'], $howoften);
+    $session['user']['charm'] += 5;
+    output('`^You gain FIVE charm points for having defeated the dragon!`n');
     debuglog("slew the dragon and starts with {$session['user']['gold']} gold and {$session['user']['gems']} gems");
-
-    $twig = [
-        'flawless' => $flawless,
-        'creaturename' => $badguy['creaturename']
-    ];
-
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/dragon.twig', $twig));
 
     // Moved this hear to make some things easier.
     modulehook('dragonkill', []);

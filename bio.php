@@ -1,4 +1,5 @@
 <?php
+
 // addnews ready
 // translator ready
 // mail ready
@@ -10,29 +11,34 @@ tlschema('bio');
 checkday();
 
 $ret = httpget('ret');
-if ($ret == '') { $return = '/list.php'; }
-else { $return = cmd_sanitize($ret); }
+
+if ('' == $ret)
+{
+    $return = '/list.php';
+}
+else
+{
+    $return = cmd_sanitize($ret);
+}
 
 $char = httpget('char');
-$select = DB::select('accounts');
-$select->columns(['login', 'name', 'level', 'sex', 'title', 'specialty', 'hashorse', 'acctid', 'resurrections', 'bio', 'dragonkills', 'race', 'race', 'clanrank', 'clanid', 'laston', 'loggedin'])
-    ->join('clans', 'accounts.clanid = clans.clanid', ['clanname', 'clanshort'], 'LEFT')
-;
-
 //Legacy support
-if (is_numeric($char)) { $select->where->equalTo('acctid', $char); }
-else { $select->where->equalTo('login', $char); }
-
-$result = DB::execute($select);
-
-if ($result->count() == 1)
+if (is_numeric($char))
 {
-    $target = $result->current();
+    $where = "acctid = $char";
+}
+else
+{
+    $where = "login = '$char'";
+}
+$sql = 'SELECT login, name, level, sex, title, specialty, hashorse, acctid, resurrections, bio, dragonkills, race, clanname, clanshort, clanrank, '.DB::prefix('accounts').'.clanid, laston, loggedin FROM '.DB::prefix('accounts').' LEFT JOIN '.DB::prefix('clans').' ON '.DB::prefix('accounts').'.clanid = '.DB::prefix('clans').".clanid WHERE $where";
+$result = DB::query($sql);
+
+if ($target = DB::fetch_assoc($result))
+{
     $target['login'] = rawurlencode($target['login']);
     $id = $target['acctid'];
     $target['return_link'] = $return;
-
-    $twig = ['target' => $target];
 
     page_header('Character Biography: %s', full_sanitize($target['name']));
 
@@ -42,74 +48,138 @@ if ($result->count() == 1)
 
     if ($session['user']['superuser'] & SU_EDIT_USERS)
     {
-        addnav("Update", "bio.php?char=$char");
         addnav('Superuser');
         addnav('Edit User', "user.php?op=edit&userid=$id");
     }
 
     modulehook('biotop', $target);
 
+    output('`^Biography for %s`^.', $target['name']);
+    $write = translate_inline('Write Mail');
+
+    if ($session['user']['loggedin'])
+    {
+        rawoutput("<a href=\"mail.php?op=write&to={$target['login']}\" target=\"_blank\" onClick=\"".popup("mail.php?op=write&to={$target['login']}").";return false;\"><i class='fa fa-fw fa-envelope-o' data-uk-tooltip title='$write'><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></i></a>");
+    }
+    output_notl('`n`n');
+
     if ($target['clanname'] > '' && getsetting('allowclans', false))
     {
-        $ranks = [
-            CLAN_APPLICANT => '`!Applicant`0',
-            CLAN_MEMBER => '`#Member`0',
-            CLAN_OFFICER => '`^Officer`0',
-            CLAN_LEADER => '`&Leader`0',
-            CLAN_FOUNDER => '`$Founder`0'
-        ];
+        $ranks = [CLAN_APPLICANT => '`!Applicant`0', CLAN_MEMBER => '`#Member`0', CLAN_OFFICER => '`^Officer`0', CLAN_LEADER => '`&Leader`0', CLAN_FOUNDER => '`$Founder'];
         $ranks = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $target['clanid']]);
+        tlschema('clans'); //just to be in the right schema
         array_push($ranks['ranks'], '`$Founder');
-        $twig['ranks'] = $ranks['ranks'];
+        $ranks = translate_inline($ranks['ranks']);
+        tlschema();
+        output('`@%s`2 is a %s`2 to `%%s`2`n', $target['name'], str_replace(['`c', '`i'], '', $ranks[$target['clanrank']]), str_replace(['`c', '`i'], '', $target['clanname']));
     }
 
-    $twig['target']['loggedin'] = false;
-    if ($target['loggedin'] && (date("U") - strtotime($target['laston']) < getsetting("LOGINTIMEOUT", 900)))
+    output('`^Title: `@%s`n', $target['title']);
+    output('`^Level: `@%s`n', $target['level']);
+    $loggedin = false;
+
+    if ($target['loggedin'] &&
+          (date('U') - strtotime($target['laston']) <
+            getsetting('LOGINTIMEOUT', 900)))
     {
-        $twig['target']['loggedin'] = true;
+        $loggedin = true;
     }
+    $status = translate_inline($loggedin ? '`#Online`0' : '`$Offline`0');
+    output('`^Status: %s`n', $status);
 
-    if (! $target['race']) $twig['target']['race'] = RACE_UNKNOWN;
+    output('`^Resurrections: `@%s`n', $target['resurrections']);
 
-    $sql = "SELECT * FROM " . DB::prefix("mounts") . " WHERE mountid='{$target['hashorse']}'";
+    $race = $target['race'];
+
+    if (! $race)
+    {
+        $race = RACE_UNKNOWN;
+    }
+    tlschema('race');
+    $race = translate_inline($race);
+    tlschema();
+    output('`^Race: `@%s`n', $race);
+
+    $genders = ['Male', 'Female'];
+    $genders = translate_inline($genders);
+    output('`^Gender: `@%s`n', $genders[$target['sex']]);
+
+    $specialties = modulehook('specialtynames',
+          ['' => translate_inline('Unspecified')]);
+
+    if (isset($specialties[$target['specialty']]))
+    {
+        output('`^Specialty: `@%s`n', $specialties[$target['specialty']]);
+    }
+    $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='{$target['hashorse']}'";
     $result = DB::query_cached($sql, "mountdata-{$target['hashorse']}", 3600);
     $mount = DB::fetch_assoc($result);
 
     $mount['acctid'] = $target['acctid'];
     $mount = modulehook('bio-mount', $mount);
-    $twig['target']['mount'] = $mount;
+    $none = translate_inline('`iNone`i');
 
-    $extrastats = modulehook('biostat', ['target' => $target, 'biostats' => []]);
-    $twig['biostats'] = $extrastats['biostats'];
+    if (! isset($mount['mountname']) || '' == $mount['mountname'])
+    {
+        $mount['mountname'] = $none;
+    }
+    output('`^Creature: `@%s`0`n', $mount['mountname']);
 
-    $twig['target']['bio'] = soap($target['bio']);
+    modulehook('biostat', $target);
 
-    $extrainfo = modulehook('bioinfo', ['target' => $target, 'bioinfo' => []]);
-    $twig['bioinfo'] = $extrainfo['bioinfo'];
+    if ($target['dragonkills'] > 0)
+    {
+        output('`^Dragon Kills: `@%s`n', $target['dragonkills']);
+    }
 
-    $result = DB::query("SELECT * FROM " . DB::prefix("news") . " WHERE accountid={$target['acctid']} ORDER BY newsdate DESC,newsid ASC LIMIT 100");
+    if ($target['bio'] > '')
+    {
+        output('`^Bio: `@`n%s`n', soap($target['bio']));
+    }
+
+    modulehook('bioinfo', $target);
+
+    output('`n`^Recent accomplishments (and defeats) of %s`^', $target['name']);
+    $result = DB::query('SELECT * FROM '.DB::prefix('news')." WHERE accountid={$target['acctid']} ORDER BY newsdate DESC,newsid ASC LIMIT 100");
 
     $odate = '';
-    $twig['bionews'] = [];
+    tlschema('news');
+
     while ($row = DB::fetch_assoc($result))
     {
+        tlschema($row['tlschema']);
+
         if ($row['arguments'] > '')
         {
             $arguments = [];
             $base_arguments = unserialize($row['arguments']);
             array_push($arguments, $row['newstext']);
-            while(list($key, $val) = each($base_arguments))
+
+            while (list($key, $val) = each($base_arguments))
             {
                 array_push($arguments, $val);
             }
-            $row['newstext'] = $arguments;
+            $news = call_user_func_array('sprintf_translate', $arguments);
+            rawoutput(tlbutton_clear());
         }
-        $twig['bionews'][date('D, M d', strtotime($row['newsdate']))][] = $row;
+        else
+        {
+            $news = translate_inline($row['newstext']);
+            rawoutput(tlbutton_clear());
+        }
+        tlschema();
+
+        if ($odate != $row['newsdate'])
+        {
+            output_notl('`n`b`@%s`0`b`n',
+                  date('D, M d', strtotime($row['newsdate'])));
+            $odate = $row['newsdate'];
+        }
+        output_notl('`@'.sanitize_mb($news).'`0`n');
     }
+    tlschema();
 
-    rawoutput($lotgdTpl->renderThemeTemplate('pages/bio.twig', $twig));
-
-    if ($ret == '')
+    if ('' == $ret)
     {
         $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
@@ -119,32 +189,31 @@ if ($result->count() == 1)
     }
     else
     {
-        $return = substr($return, strrpos($return, '/')+1);
+        $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
-        if ($return == 'list.php')
+
+        if ('list.php' == $return)
         {
             addnav('Return to the warrior list', $return);
         }
         else
         {
             addnav('Return whence you came', $return);
-            addnav('Return to village','village.php');
+            addnav('Return to village', 'village.php');
         }
         tlschema();
     }
 
     modulehook('bioend', $target);
-
     page_footer();
 }
 else
 {
     page_header('Character has been deleted');
+    output('This character is already deleted.');
 
-    rawoutput($lotgdTpl->renderThemeTemplate('pages/bio/deleted.twig', []));
-
-    if ($ret == '')
+    if ('' == $ret)
     {
         $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
@@ -157,10 +226,17 @@ else
         $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
-        if ($return == 'list.php') { addnav('Return to the warrior list', $return); }
-        else { addnav('Return whence you came', $return); }
+
+        if ('list.php' == $return)
+        {
+            addnav('Return to the warrior list', $return);
+        }
+        else
+        {
+            addnav('Return whence you came', $return);
+        }
         addnav('Return to village', 'village.php');
         tlschema();
     }
-	page_footer();
+    page_footer();
 }
