@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -12,7 +13,7 @@
  */
 function is_email($email)
 {
-    $validator = new Zend\Validator\EmailAddress;
+    $validator = new Zend\Validator\EmailAddress();
 
     return $validator->isValid($email);
 }
