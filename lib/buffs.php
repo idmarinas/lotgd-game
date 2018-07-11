@@ -247,7 +247,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
             {
                 if ($thisname != $name)
                 {
-                    ++$current;
+                    $current++;
                 }
             }
         }

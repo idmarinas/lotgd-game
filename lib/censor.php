@@ -16,11 +16,13 @@ function soap($input, $debug = false, $skiphook = false)
     // the mask of displayable chars that should be masked out;
     // X displays, _ masks.
     $mix_mask = str_pad('', strlen($output), 'X');
+
     if (getsetting('soap', 1))
     {
         $search = nasty_word_list();
         $exceptions = array_flip(good_word_list());
         $changed_content = false;
+
         foreach ($search as $word)
         {
             do

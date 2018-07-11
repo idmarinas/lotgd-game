@@ -1,22 +1,27 @@
 <?php
+
 // addnews ready
 // translator ready
 // mail ready
-require_once("lib/modules.php");
+require_once 'lib/modules.php';
 
-function holidayize($text,$type='unknown'){
-	global $session;
-	if (!isset($session['user']['prefs']['ihavenocheer']))
-		$session['user']['prefs']['ihavenocheer'] = 0;
-	if ($session['user']['prefs']['ihavenocheer']) {
-		return $text;
-	}
+function holidayize($text, $type = 'unknown')
+{
+    global $session;
 
-	$args = array('text'=>$text,'type'=>$type);
-	$args = modulehook("holiday", $args);
-	$text = $args['text'];
+    if (! isset($session['user']['prefs']['ihavenocheer']))
+    {
+        $session['user']['prefs']['ihavenocheer'] = 0;
+    }
 
-	return $text;
+    if ($session['user']['prefs']['ihavenocheer'])
+    {
+        return $text;
+    }
+
+    $args = ['text' => $text, 'type' => $type];
+    $args = modulehook('holiday', $args);
+    $text = $args['text'];
+
+    return $text;
 }
-
-?>

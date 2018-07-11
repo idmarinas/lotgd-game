@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -12,57 +13,69 @@
 //storage mechanism for non-critical data.
 
 /**
- * Reworked by IDMarinas
+ * Reworked by IDMarinas.
  */
 require_once 'lib/cache.php';
 
 global $lotgd_cache;
 
-$lotgd_cache = new LotgdCache;
+$lotgd_cache = new LotgdCache();
 
 /**
- * Get data cache
+ * Get data cache.
  *
- * @param string $name Key for a data storage
- * @param int $duration Duration of the cache
- * @param bolean $force Force to use cache
+ * @param string $name     Key for a data storage
+ * @param int    $duration Duration of the cache
+ * @param bolean $force    Force to use cache
  *
  * @return mixed Data on success, null on failure
  */
 function datacache($name, $duration = 120, $force = false)
 {
-	global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
+    global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) $DB_USEDATACACHE;
+    $usedatacache = (bool) $DB_USEDATACACHE;
 
-    if (false === $usedatacache && false === $force) return false;
+    if (false === $usedatacache && false === $force)
+    {
+        return false;
+    }
 
     //-- Set Cache Dir
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
 
     //-- Set Duration
-    if (is_numeric($duration) && $duration > 0) { $lotgd_cache->getOptions()->setTtl($duration); }
-    else { $lotgd_cache->getOptions()->setTtl(120); }
+    if (is_numeric($duration) && $duration > 0)
+    {
+        $lotgd_cache->getOptions()->setTtl($duration);
+    }
+    else
+    {
+        $lotgd_cache->getOptions()->setTtl(120);
+    }
 
     return $lotgd_cache->getItem($name);
 }
 
 /**
- * Set data cache
+ * Set data cache.
  *
- * @param string $name Key for a data storage
- * @param mix $data Data to cache
+ * @param string $name  Key for a data storage
+ * @param mix    $data  Data to cache
  * @param bolean $force Force to update cache
  *
- * @return boolean
+ * @return bool
  */
 function updatedatacache($name, $data, $force = false)
 {
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) $DB_USEDATACACHE;
+    $usedatacache = (bool) $DB_USEDATACACHE;
 
-    if (false === $usedatacache && false === $force) return false;
+    if (false === $usedatacache && false === $force)
+    {
+        return false;
+    }
 
     //-- Set Cache Dir
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
@@ -74,7 +87,7 @@ function updatedatacache($name, $data, $force = false)
  * We want to be able to invalidate data caches when we know we've done
  * something which would change the data.
  *
- * @param string $name Key for a data storage
+ * @param string $name  Key for a data storage
  * @param bolean $force Force to invalidate cache
  *
  * @return bool
@@ -83,9 +96,12 @@ function invalidatedatacache($name, $force = false)
 {
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) $DB_USEDATACACHE;
+    $usedatacache = (bool) $DB_USEDATACACHE;
 
-    if (false === $usedatacache && false === $force) return false;
+    if (false === $usedatacache && false === $force)
+    {
+        return false;
+    }
 
     //-- Set Cache Dir
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
@@ -97,17 +113,20 @@ function invalidatedatacache($name, $force = false)
  * Invalidates *all* caches, which $prefix of their filename.
  *
  * @param string $prefix Prefix to invalidate
- * @param bolean $force Force to remove cache
+ * @param bolean $force  Force to remove cache
  *
- * @return boolean
+ * @return bool
  */
 function massinvalidate($prefix, $force = false)
 {
     global $lotgd_cache, $DB_DATACACHEPATH, $DB_USEDATACACHE;
 
-    $usedatacache = (boolean) $DB_USEDATACACHE;
+    $usedatacache = (bool) $DB_USEDATACACHE;
 
-    if (false === $usedatacache && false === $force) return false;
+    if (false === $usedatacache && false === $force)
+    {
+        return false;
+    }
 
     //-- Set Cache Dir
     $lotgd_cache->getOptions()->setCacheDir($DB_DATACACHEPATH);
@@ -115,9 +134,8 @@ function massinvalidate($prefix, $force = false)
     return $lotgd_cache->clearByPrefix($prefix);
 }
 
-
 /**
- * Flush the whole storage
+ * Flush the whole storage.
  *
  * @return bool
  */
@@ -143,7 +161,7 @@ function datacache_empty()
 }
 
 /**
- * Remove expired data cache
+ * Remove expired data cache.
  *
  * @return bool
  */
@@ -158,7 +176,7 @@ function datacache_clearExpired()
 }
 
 /**
- * Optimize the storage
+ * Optimize the storage.
  *
  * @return bool
  */

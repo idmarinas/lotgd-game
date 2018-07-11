@@ -1,4 +1,5 @@
 <?php
+
 // addnews ready
 // translator ready
 // mail ready
@@ -8,11 +9,16 @@
 // get around sites that don't automatically register some globals we want to
 // deal with.  Yes, we could find all references to this stuff and get rid
 // of the dependancy, but it's not really worth it.
-function register_global(&$var){
-	if (!is_array($var)) return;
-	foreach ($var as $key=>$val) {
-		global ${$key};
-		${$key} = $val;
-	}
+function register_global(&$var)
+{
+    if (! is_array($var))
+    {
+        return;
+    }
+
+    foreach ($var as $key => $val)
+    {
+        global ${$key};
+        ${$key} = $val;
+    }
 }
-?>

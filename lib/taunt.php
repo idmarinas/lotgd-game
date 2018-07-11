@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -8,46 +9,50 @@ require_once 'lib/substitute.php';
 
 function select_taunt()
 {
-	global $session, $badguy;
+    global $session, $badguy;
 
     $select = DB::select('taunts');
     $select->columns(['taunt'])
         ->limit(1)
-        ->order(DB::expression('RAND('.e_rand().')'));
+        ->order(DB::expression('RAND('.e_rand().')'))
+    ;
     $result = DB::execute($select);
 
-	if ($result->count())
+    if ($result->count())
     {
-		$row = $result->current();
-		$taunt = $row['taunt'];
-	}
-    else { $taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}."; }
+        $row = $result->current();
+        $taunt = $row['taunt'];
+    }
+    else
+    {
+        $taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
+    }
 
-	$taunt = substitute($taunt);
+    $taunt = substitute($taunt);
 
-	return $taunt;
+    return $taunt;
 }
 
 function select_taunt_array()
 {
-	global $session, $badguy;
+    global $session, $badguy;
 
-	$sql = "SELECT taunt FROM " . DB::prefix("taunts") . "ORDER BY rand(".e_rand() . ") LIMIT 1";
+    $sql = 'SELECT taunt FROM '.DB::prefix('taunts').'ORDER BY rand('.e_rand().') LIMIT 1';
 
-	$result = DB::query($sql);
-	if ($result->count())
+    $result = DB::query($sql);
+
+    if ($result->count())
     {
-		$row = DB::fetch_assoc($result);
-		$taunt = $row['taunt'];
-	}
+        $row = DB::fetch_assoc($result);
+        $taunt = $row['taunt'];
+    }
     else
     {
-		$taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
-	}
+        $taunt = "`5\"`6{badgyuname}'s mother wears combat boots`5\", screams {goodguyname}.";
+    }
 
-	$taunt = substitute_array($taunt);
-	array_unshift($taunt, true, 'taunts');
+    $taunt = substitute_array($taunt);
+    array_unshift($taunt, true, 'taunts');
 
-	return $taunt;
+    return $taunt;
 }
-?>

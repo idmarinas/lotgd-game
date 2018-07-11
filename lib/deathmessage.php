@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -8,54 +9,59 @@ require_once 'lib/substitute.php';
 
 function select_deathmessage($forest = true, $extra = [], $extrarep = [])
 {
-	global $session, $badguy;
+    global $session, $badguy;
 
-	$where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
+    $where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
 
-	$sql = "SELECT deathmessage,taunt FROM " . DB::prefix("deathmessages") . " $where ORDER BY rand(".e_rand().") LIMIT 1";
+    $sql = 'SELECT deathmessage,taunt FROM '.DB::prefix('deathmessages')." $where ORDER BY rand(".e_rand().') LIMIT 1';
 
-	$result = DB::query($sql);
-	if ($result)
+    $result = DB::query($sql);
+
+    if ($result)
     {
-		$row = DB::fetch_assoc($result);
-		$deathmessage = $row['deathmessage'];
-		$taunt=$row['taunt'];
-	}
+        $row = DB::fetch_assoc($result);
+        $deathmessage = $row['deathmessage'];
+        $taunt = $row['taunt'];
+    }
     else
     {
-		$taunt = 1;
-		$deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
-	}
+        $taunt = 1;
+        $deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
+    }
 
-	$deathmessage = substitute($deathmessage,$extra,$extrarep);
+    $deathmessage = substitute($deathmessage, $extra, $extrarep);
 
-	return array('deathmessage' => $deathmessage, 'taunt' => $taunt);
+    return ['deathmessage' => $deathmessage, 'taunt' => $taunt];
 }
 
 function select_deathmessage_array($forest = true, $extra = [], $extrarep = [])
 {
-	global $session, $badguy;
+    global $session, $badguy;
 
-	$where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
+    $where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
 
-	$sql = "SELECT deathmessage, taunt FROM ".DB::prefix('deathmessages')." $where ORDER BY rand(".e_rand().") LIMIT 1";
+    $sql = 'SELECT deathmessage, taunt FROM '.DB::prefix('deathmessages')." $where ORDER BY rand(".e_rand().') LIMIT 1';
 
-	$result = DB::query($sql);
-	if ($result)
+    $result = DB::query($sql);
+
+    if ($result)
     {
-		$row = DB::fetch_assoc($result);
-		$deathmessage = $row['deathmessage'];
-		$taunt = $row['taunt'];
-	}
+        $row = DB::fetch_assoc($result);
+        $deathmessage = $row['deathmessage'];
+        $taunt = $row['taunt'];
+    }
     else
     {
-		$taunt = 1;
-		$deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
-	}
-	if ($extra[0] == '{where}') $deathmessage = str_replace($extra[0], $extrarep[0], $deathmessage);
-	$deathmessage = substitute_array($deathmessage, $extra, $extrarep);
-	array_unshift($deathmessage, true, 'deathmessages');
+        $taunt = 1;
+        $deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
+    }
 
-	return array('deathmessage' => $deathmessage, 'taunt' => $taunt);
+    if ('{where}' == $extra[0])
+    {
+        $deathmessage = str_replace($extra[0], $extrarep[0], $deathmessage);
+    }
+    $deathmessage = substitute_array($deathmessage, $extra, $extrarep);
+    array_unshift($deathmessage, true, 'deathmessages');
+
+    return ['deathmessage' => $deathmessage, 'taunt' => $taunt];
 }
-?>

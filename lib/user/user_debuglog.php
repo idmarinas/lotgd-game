@@ -1,12 +1,13 @@
 <?php
-if ($petition !=""){
-	addnav("Navigation");
-	addnav("Return to the petition","viewpetition.php?op=view&id=$petition");
+
+if ('' != $petition)
+{
+    addnav('Navigation');
+    addnav('Return to the petition', "viewpetition.php?op=view&id=$petition");
 }
 $debuglog = DB::prefix('debuglog');
 $debuglog_archive = DB::prefix('debuglog_archive');
 $accounts = DB::prefix('accounts');
-
 
 // As mySQL cannot use two different indexes in a single query this query can take up to 25s on its own!
 // This happens solely on larger debuglogs (where full table scans take quite long), smaller servers
@@ -34,8 +35,7 @@ $result = DB::query($sql);
 $row = DB::fetch_assoc($result);
 $max += $row['c'];
 
-
-$start = (int)httpget('start');
+$start = (int) httpget('start');
 
 $sql = "(
 			SELECT $debuglog. * , a1.name AS actorname, a2.name AS targetname
@@ -66,32 +66,41 @@ $sql = "(
 		ORDER BY date DESC
 		LIMIT $start,500";
 
-$next = $start+500;
-$prev = $start-500;
-addnav("Operations");
-addnav("Edit user info","user.php?op=edit&userid=$userid$returnpetition");
-addnav("Refresh", "user.php?op=debuglog&userid=$userid&start=$start$returnpetition");
-addnav("Debug Log");
-if ($next < $max) {
-	addnav("Next page","user.php?op=debuglog&userid=$userid&start=$next$returnpetition");
+$next = $start + 500;
+$prev = $start - 500;
+addnav('Operations');
+addnav('Edit user info', "user.php?op=edit&userid=$userid$returnpetition");
+addnav('Refresh', "user.php?op=debuglog&userid=$userid&start=$start$returnpetition");
+addnav('Debug Log');
+
+if ($next < $max)
+{
+    addnav('Next page', "user.php?op=debuglog&userid=$userid&start=$next$returnpetition");
 }
-if ($start > 0) {
-	addnav("Previous page",
-			"user.php?op=debuglog&userid=$userid&start=$prev$returnpetition");
+
+if ($start > 0)
+{
+    addnav('Previous page',
+            "user.php?op=debuglog&userid=$userid&start=$prev$returnpetition");
 }
 $result = DB::query($sql);
-$odate = "";
-while ($row = DB::fetch_assoc($result)) {
-	$dom = date("D, M d",strtotime($row['date']));
-	if ($odate != $dom){
-		output_notl("`n`b`@%s`0`b`n", $dom);
-		$odate = $dom;
-	}
-	$time = date("H:i:s", strtotime($row['date']))." (".reltime(strtotime($row['date'])).")";
-	output_notl("`#%s (%s) `^%s - `&%s`7 %s`0", $row['field'], $row['value'], $time, $row['actorname'], $row['message']);
-	if ($row['target']) {
-		output(" \\-- Recipient = `\$%s`0", $row['targetname']);
-	}
-	output_notl("`n");
+$odate = '';
+
+while ($row = DB::fetch_assoc($result))
+{
+    $dom = date('D, M d', strtotime($row['date']));
+
+    if ($odate != $dom)
+    {
+        output_notl('`n`b`@%s`0`b`n', $dom);
+        $odate = $dom;
+    }
+    $time = date('H:i:s', strtotime($row['date'])).' ('.reltime(strtotime($row['date'])).')';
+    output_notl('`#%s (%s) `^%s - `&%s`7 %s`0', $row['field'], $row['value'], $time, $row['actorname'], $row['message']);
+
+    if ($row['target'])
+    {
+        output(' \\-- Recipient = `$%s`0', $row['targetname']);
+    }
+    output_notl('`n');
 }
-?>
