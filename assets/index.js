@@ -16,6 +16,7 @@ define([
     './components/confirmation',
     './components/modal',
     './components/modal-form',
+    './components/embed',
 
     //-- Modules
     // ...
