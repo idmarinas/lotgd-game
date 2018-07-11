@@ -33,7 +33,7 @@ define([
         {
             var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '"><i class="close icon"></i>' +
             (title !== undefined && title !== '' ? '<div class="header">' + title + '</div>' : '') +
-            '<div class="content">' + message + '</div>' +
+            '<div class="scrolling content">' + message + '</div>' +
             '<div class="actions">' +
                 (options.denyButton ? '<div class="ui red cancel button">Cancelar</div>' : '') +
                 (options.approveButton ? '<div class="ui green ok button">Ok</div>' : '') +
