@@ -94,7 +94,7 @@
         "sass-loader": "^7.0.3",
         "url-loader": "^1.0.1",
         "vinyl-paths": "^2.1.0",
-        "webpack": "^4.15.1",
+        "webpack": "^4.16.0",
         "webpack-bundle-analyzer": "^2.13.1",
         "webpack-merge": "^4.1.3"
     },
