@@ -100,7 +100,7 @@ if ('save' == $op)
 
             foreach ($creaturestats[$lev] as $key => $val)
             {
-                if ('' != $post[$key])
+                if (isset($post[$key]) && '' != $post[$key])
                 {
                     continue;
                 }
