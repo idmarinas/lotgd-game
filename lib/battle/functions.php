@@ -457,6 +457,6 @@ function battleshowresults(array $lotgdBattleContent)
     global $lotgd_tpl;
 
     tlschema('battle');
-    output_notl($lotgd_tpl->renderThemeTemplate('pages/battle.twig', $lotgdBattleContent), true);
+    rawoutput($lotgd_tpl->renderThemeTemplate('pages/battle.twig', $lotgdBattleContent));
 	tlschema();
 }
