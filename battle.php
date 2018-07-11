@@ -97,14 +97,8 @@ $defeat = false;
 
 if ($enemycounter > 0)
 {
-	modulehook('battle', $enemies);
-	foreach ($enemies as $index=>$badguy)
-    {
-		if ($badguy['creaturehealth'] > 0 && $session['user']['hitpoints'] > 0)
-        {
-            $lotgdBattleContent['encounter'][] = ['`@You have encountered `^%s`@ which lunges at you with `%%s`@!`0`n', $badguy['creaturename'], $badguy['creatureweapon'] ];
-		}
-	}
+    modulehook('battle', $enemies);
+    $lotgdBattleContent['enemies'] = $enemies;
 
 	$data = prepare_data_battlebars($enemies);
 	$lotgdBattleContent['battlebars']['start'] = [
