@@ -361,7 +361,7 @@ function page_footer($saveuser = true)
     }
 
     //output petition count
-    $html['petition'] = "<a href='petition.php' onClick=\"".popup('petition.php').";return false;\" target='_blank' align='right' class='motd'>".translate_inline('Petition for Help').'</a>';
+    $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';;
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
@@ -995,12 +995,15 @@ function maillink()
     $row['seencount'] = (int) isset($row['seencount']) ? $row['seencount'] : 0;
     $row['notseen'] = (int) isset($row['notseen']) ? $row['notseen'] : 0;
 
+    $text = sprintf(translate_inline('Ye Olde Mail: %s new, %s old', 'common'), $row['notseen'], $row['seencount']);
     if ($row['notseen'] > 0)
     {
-        return sprintf("<a href='mail.php' target='_blank' onClick=\"".popup('mail.php').";return false;\" class='hotmotd'>".translate_inline('Ye Olde Mail: %s new, %s old', 'common').'</a>', $row['notseen'], $row['seencount']);
+        return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" onclick="Lotgd.embed(this)"><b>'.$text.'</b></a>';
     }
     else
     {
+        return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" onclick="Lotgd.embed(this)">'.$text.'</a>';
+
         return sprintf("<a href='mail.php' target='_blank' onClick=\"".popup('mail.php').";return false;\" class='motd'>".translate_inline('Ye Olde Mail: %s new, %s old', 'common').'</a>', $row['notseen'], $row['seencount']);
     }
 }
@@ -1016,10 +1019,10 @@ function motdlink()
 
     if ($session['needtoviewmotd'])
     {
-        return "<a href='motd.php' target='_blank' onClick=\"".popup('motd.php').";return false;\" class='hotmotd'><b>".translate_inline('MoTD').'</b></a>';
+        return '<a href="motd.php" target="_blank" id="motd-embed" class="hotmotd" onclick="Lotgd.embed(this)"><b>'.translate_inline('MoTD').'</b></a>';
     }
     else
     {
-        return "<a href='motd.php' target='_blank' onClick=\"".popup('motd.php').";return false;\" class='motd'><b>".translate_inline('MoTD').'</b></a>';
+        return '<a href="motd.php" target="_blank" id="motd-embed" class="motd" onclick="Lotgd.embed(this)">'.translate_inline('MoTD').'</a>';
     }
 }
