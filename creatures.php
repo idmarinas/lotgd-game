@@ -16,10 +16,6 @@ tlschema('creatures');
 //this is a setup where all the creatures are generated.
 $creaturestats = lotgd_generate_creature_levels();
 
-/**
- * Agregar la edición de la descripción y la imagen
- */
-
 page_header('Creature Editor');
 
 superusernav();
@@ -27,6 +23,7 @@ superusernav();
 $op = httpget('op');
 $subop = httpget('subop');
 
+$refresh = 0;
 if (httppost('refresh'))
 {
     httpset('op', 'add');
@@ -35,7 +32,6 @@ if (httppost('refresh'))
     $refresh = 1; //let them know this is a refresh
     //had to do this as there is no onchange in a form...
 }
-else ($refresh = 0);
 
 if ('save' == $op)
 {
