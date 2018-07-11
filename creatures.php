@@ -7,6 +7,7 @@ require_once 'common.php';
 require_once 'lib/http.php';
 require_once 'lib/listfiles.php';
 require_once 'lib/creaturefunctions.php';
+require_once 'lib/superusernav.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
@@ -15,9 +16,12 @@ tlschema('creatures');
 //this is a setup where all the creatures are generated.
 $creaturestats = lotgd_generate_creature_levels();
 
+/**
+ * Agregar la edición de la descripción y la imagen
+ */
+
 page_header('Creature Editor');
 
-require_once 'lib/superusernav.php';
 superusernav();
 
 $op = httpget('op');
@@ -343,6 +347,8 @@ else
                 'Note: After changing the level causes please refresh the form to put the new preset stats for that level in,note',
                 'creaturecategory' => 'Creature Category',
                 'creaturename' => 'Creature Name',
+                'creatureimage' => 'Creature image',
+                'creaturedescription' => 'Creature description,textarea',
                 'creaturehealth' => 'Creature Health',
                 'creatureweapon' => 'Weapon',
                 'creatureexp' => 'Creature Experience',
@@ -361,7 +367,7 @@ else
             rawoutput("<form action='creatures.php?op=save' method='POST'>");
             lotgd_showform($form, $row);
             $refresh = translate_inline('Refresh');
-            rawoutput("<input type='submit' class='button' name='refresh' value='$refresh'>");
+            rawoutput("<input type='submit' class='ui button' name='refresh' value='$refresh'>");
             rawoutput('</form>');
             addnav('', 'creatures.php?op=save');
 
