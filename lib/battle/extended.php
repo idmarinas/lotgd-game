@@ -26,13 +26,13 @@ function prepare_data_battlebars(array $enemies)
 
     if ($user['alive'])
 	{
-		$hitpointstext = translate_inline('Hitpoints');
-		$healthtext = appoencode(translate_inline('`^Health`0'));
+		$hitpointstext = 'Hitpoints';
+		$healthtext = '`^Health`0';
 	}
 	else
 	{
-		$hitpointstext = translate_inline('Soulpoints');
-		$healthtext = appoencode(translate_inline('`)Soul`0'));
+		$hitpointstext = 'Soulpoints';
+		$healthtext = '`)Soul`0';
 	}
 
     $data['enemies'] = [];
@@ -52,7 +52,7 @@ function prepare_data_battlebars(array $enemies)
 		$data['enemies'][$index] = [
 			'showbar' => false,
 			'showhptext' => true,
-			'who' => translate_inline('`$Enemy`0'),
+			'who' => '`$Enemy`0',
 			'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
 			'name' => $ccode.$badguy['creaturename'].$ccode,
 			'level' => $badguy['creaturelevel'],
@@ -80,7 +80,7 @@ function prepare_data_battlebars(array $enemies)
 	}
 	else
 	{
-		$hitpointstext = sprintf_translate('Soul of %s', $user['name']);
+		$hitpointstext = ['Soul of %s', $user['name']];
 		$dead = true;
 		$maxsoul = 50 + 10 * $user['level'] + $user['dragonkills']*2;
 	}
