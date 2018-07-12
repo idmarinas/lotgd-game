@@ -6,6 +6,8 @@
         States
 --------------------*/
 
+/* Hover */
+@labelHoverColor: @invertedHoveredTextColor;
 
 /* Focus */
 @labelFocusColor: @invertedSelectedTextColor;
