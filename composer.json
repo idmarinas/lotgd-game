@@ -23,6 +23,7 @@
         "hellogerard/jobby" : "^3.3.2",
         "ezyang/htmlpurifier": "^4.9.3",
         "paragonie/random_compat": "^2.0.0",
-        "jaxon-php/jaxon-core": "^2.2.0"
+        "jaxon-php/jaxon-core": "^2.2.0",
+        "jaxon-php/jaxon-dialogs": "~1.2.2"
     }
 }
