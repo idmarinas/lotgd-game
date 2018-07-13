@@ -129,18 +129,10 @@ function popup($page, $size = '728x400')
  */
 function page_footer($saveuser = true)
 {
-    global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $dbinfo;
+    global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $dbinfo, $lotgdJaxon;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
-    //add XAJAX mail stuff
-    if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
-    {
-        require 'mailinfo_common.php';
-        $xajax->printJavascript('lib/xajax');
-        addnav('', 'mailinfo_server.php');
-    }
-    //END XAJAX
 
     //page footer module hooks
     $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
@@ -214,22 +206,16 @@ function page_footer($saveuser = true)
         $session['needtoviewmotd'] = false;
     }
 
+    $html['scripthead'] = '';
     if ('' != $headscript)
     {
-        $html['headscript'] = "<script language='JavaScript'>".$headscript.'</script>';
+        $html['scripthead'] = "<script language='text/javascript'>".$headscript.'</script>';
     }
 
     $script = '';
 
-    if (! isset($session['user']['name']))
-    {
-        $session['user']['name'] = '';
-    }
-
-    if (! isset($session['user']['login']))
-    {
-        $session['user']['login'] = '';
-    }
+    $session['user']['name'] = !isset($session['user']['name']) ? '' : $session['user']['name'];
+    $session['user']['login'] = !isset($session['user']['login']) ? '' : $session['user']['login'];
 
     //output keypress script
     reset($quickkeys);
@@ -343,11 +329,7 @@ function page_footer($saveuser = true)
     {
         if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
         {
-            $script .= $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
-                'set_timeout' => ((getsetting('LOGINTIMEOUT', 900) - 120) * 1000),
-                'clear_xajax' => ((getsetting('LOGINTIMEOUT', 900) + 5) * 1000)
-            ]);
-
+            $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Timeout.status()", 10000);</script>';
             $html['mail'] = '<span id="maillink">'.maillink().'</span>';
         }
         else
@@ -429,7 +411,13 @@ function page_footer($saveuser = true)
 
     tlschema();
 
-    //finalize output
+    //-- Finalize output
+    $lotgdJaxon->processRequest();
+
+    $html['csshead'] = $lotgdJaxon->getCss();
+    $html['scripthead'] .= $lotgdJaxon->getJs();
+    $html['scripthead'] .= $lotgdJaxon->getScript();
+
     $html['content'] .= $output->get_output();
     $browser_output = $lotgd_tpl->renderTheme($html);
     $session['user']['gensize'] += strlen($browser_output);
@@ -481,7 +469,7 @@ function popup_header($title = 'Legend of the Green Dragon')
  */
 function popup_footer()
 {
-    global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgd_tpl;
+    global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgd_tpl, $lotgdJaxon;
 
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
@@ -506,25 +494,13 @@ function popup_footer()
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
 
-    if (isset($session['user']['acctid']) && $session['user']['acctid'] > 0 && $session['user']['loggedin'])
-    {
-        if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
-        {
-            //add XAJAX mail stuff
-            require 'mailinfo_common.php';
+    //-- Finalize output
+    $lotgdJaxon->processRequest();
 
-            $xajax->printJavascript('lib/xajax');
-            addnav('', 'mailinfo_server.php');
-            //END XAJAX
+    $html['csshead'] = $lotgdJaxon->getCss();
+    $html['scripthead'] .= $lotgdJaxon->getJs();
+    $html['scripthead'] .= $lotgdJaxon->getScript();
 
-            $html['script'] = $lotgd_tpl->renderLotgdTemplate('mail-ajax.twig', [
-                'set_timeout' => ((getsetting('LOGINTIMEOUT', 900) - 120) * 1000),
-                'clear_xajax' => ((getsetting('LOGINTIMEOUT', 900) + 5) * 1000)
-            ]);
-        }
-    }
-
-    //finalize output
     $html['content'] .= $output->get_output();
     saveuser();
     session_write_close();
