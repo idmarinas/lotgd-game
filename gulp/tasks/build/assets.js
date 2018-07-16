@@ -4,6 +4,7 @@ var merge = require('merge-stream')
 var print = require('gulp-print')
 var gulpif = require('gulp-if')
 var uglify = require('gulp-uglify')
+var gutil = require('gulp-util')
 
 //-- Configuration
 var config = require('../../config/default')
@@ -22,6 +23,7 @@ module.exports = function (callback)
     //-- Resources folder - Only JS
     var resourceJS = gulp.src('resources/**/*.js')
         .pipe(gulpif(isProduction, uglify(settings.uglify.some)))
+        .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()) })
         .pipe(gulp.dest(config.paths.build + '/resources'))
         .pipe(print(log.copied))
 
