@@ -71,11 +71,15 @@ module.exports = {
         uglify: {
             some: {
                 mangle: true,
-                preserveComments: 'some'
+                output: {
+                    comments: 'some'
+                }
             },
             noComments: {
                 mangle: true,
-                preserveComments: false
+                output: {
+                    comments: false
+                }
             }
         },
 
