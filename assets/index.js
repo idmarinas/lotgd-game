@@ -32,8 +32,8 @@ define([
     './exports/global',
 
     //-- Extra
-    'sweetalert2.css',
-    'toastr.css'
+    'sweetalert2.css'
+    // 'toastr.css'
 ], function (Lotgd)
 {
     'use strict'
