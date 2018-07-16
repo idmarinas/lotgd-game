@@ -3,7 +3,7 @@ var release = require('./project/release')
 var gutil = require('gulp-util')
 
 //-- Options
-var themeOptions =  { theme: gutil.env.theme || 'jade' }
+var themeOptions = { theme: gutil.env.theme || 'jade' }
 var envOptions = { env: gutil.env.env || 'development' }
 var options = Object.assign(gutil.env, envOptions, themeOptions)
 
