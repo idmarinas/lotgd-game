@@ -4,22 +4,26 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md).
 
-# Version: 2.6.0 **In development**
+# Version: 2.6.0
 
 ### CHANGES
 * **battle.php** `$options` now have a new index `endbattle` that indicate if battle end
+* **motd.php**, **mail.php** and **petition.php** now open its content in a modal, and not in new window.
+* **Xajax** Xajax is replaced by Jaxon-PHP a fork of Xajax
 * *Templates*
+    * Any templates, added filters to colorize and translate text
     * **battle.php** Template files in:
         * Note: these files were moved from their previous folder `~/content`
         * `~/pages/battle.twig`
+            * Now show image and description of creature if have it
         * `~/pages/battle/combathealthbar.twig`
     * **home.php** Template files in:
         * Note: these files were moved from their previous folder `~/content`
         * `~/pages/home/login.twig`
         * `~/pages/home/loginfull.twig`
-
 * THEME
-    * Updated Semantic UI version 2.2.14 => 2.3.1
+    * Updated Semantic UI version 2.2.14 => 2.3.2
+    * Some adjustments are made to improve the appearance
 
 ### FEATURES
 
@@ -39,6 +43,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * Note: Keep in mind that the information you get is the most up to date.
     * **Note** Now by default yout `LotgdTemplate` is this base class for templates in LOTGD and not load innecesary functions of `LotgdTheme`
 * **template.php** Class `LotgdTheme` that only contain funcions for themes of LOTGD extends base class of `LotgdTemplate`
+* **creatures.php** Now the creatures can have a description and image, both are optional.
+* **Jaxon-php** In the folder `jaxon` you can place your classes in order to use Ajax globally in LOTGD
 
 ### DEPRECATED
 
@@ -52,7 +58,10 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 ### REMOVES
 
-* Nothing
+* **mailinfo_common.php** Reemplace for Jaxon.
+* **mailinfo_server.php** Reemplace for Jaxon.
+* **templates/mail-ajax.twig** Not used with Jaxon
+* **xajax/** Folder and content
 
 ### FIXES
 
@@ -63,8 +72,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 ### NOTES
 
 * **package.json** Updated/Deleted dependencies
-* **composer.json** Addes a new dependencie `paragonie/random_compat` Need in PHP 5.6 needed for component `Zend\Math`
-* Most `.php` files have had a slight code optimization.
+* **composer.json** Added a new dependencie `paragonie/random_compat` Needed in PHP 5.6 for component `Zend\Math`
+* **Optimization** Most of `.php` files have had a slight code optimization using CS Fixer.
 * ***TODO***
     * Create a system for replacing keywords by their value for templates. Ahem: {playername} would be replaced by the player's name.
 
