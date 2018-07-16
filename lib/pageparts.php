@@ -498,7 +498,7 @@ function popup_footer()
     $lotgdJaxon->processRequest();
 
     $html['csshead'] = $lotgdJaxon->getCss();
-    $html['scripthead'] .= $lotgdJaxon->getJs();
+    $html['scripthead'] = $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
     $html['content'] .= $output->get_output();
