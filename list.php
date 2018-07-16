@@ -222,8 +222,10 @@ for ($i = 0; $i < $max; $i++)
     $sex = translate_inline($row['sex'] ? '`%Female`0' : '`!Male`0');
     output_notl('%s', $sex);
     rawoutput('</td><td>');
-    $laston = relativedate($row['laston']);
-    output_notl('%s', $laston);
+    $laston = $lotgdFormat->relativedate($row['laston']);
+    tlschema('datetime');
+    output_notl(sprintf_translate($laston));
+    tlschema();
     rawoutput('</td></tr>');
 }
 rawoutput('</table>');
