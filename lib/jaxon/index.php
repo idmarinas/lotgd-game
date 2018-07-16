@@ -4,6 +4,11 @@ global $lotgdJaxon;
 
 $lotgdJaxon = new Jaxon\Jaxon();
 $lotgdJaxon->setOptions([
+    'core' => [
+        'request' => [
+            'uri' => 'jaxon.php'
+        ]
+    ],
     'dialogs' => [
         'default' => [
             'alert' => 'toastr'
