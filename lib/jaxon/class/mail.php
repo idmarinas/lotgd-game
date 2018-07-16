@@ -16,8 +16,6 @@ class Mail
             return $response;
         }
 
-        $response->script('cosa script');
-
         $response->html('maillink', maillink());
 
         return $response;
