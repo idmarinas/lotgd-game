@@ -26,9 +26,8 @@ define([
         let options = {}
         options = jQuery.extend({size: '', denyButton: true, approveButton: false}, options)
 
-        let template = '<div class="ui embed ' + elementId + '" data-url="' + url + '"></div>'
+        let template = '<iframe id="iframe-' + elementId + '" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
 
         Lotgd.modal(template, undefined, elementId, options)
-        jQuery('.ui.embed.' + elementId).embed()
     }
 })
