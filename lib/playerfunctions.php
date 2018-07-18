@@ -117,35 +117,54 @@ function get_player_attack($player = false)
     return max($attack, 0);
 }
 
-function explained_get_player_attack($player = false, $colored = false)
+function explained_row_get_player_attack($player = false)
 {
     global $session;
 
-    if (false !== $player)
+    if ($player !== false)
     {
-        $sql = 'SELECT strength,wisdom,intelligence,attack FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+		$sql = "SELECT strength,wisdom,intelligence,attack,weapondmg,level FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result = DB::query($sql);
+		$row = $result->current();
+        if (! $row) return '';
 
-        if (! $row)
-        {
-            return 0;
-        }
-        $user = $row;
+		$user = $row;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
-    $strbonus = round((1 / 3) * $user['strength'], 2);
-    $speedbonus = round((1 / 3) * get_player_speed($player), 2);
-    $wisdombonus = round((1 / 6) * $user['wisdom'], 2);
-    $intbonus = round((1 / 6) * $user['intelligence'], 2);
-    $miscbonus = round($user['attack'] - 9, 2);
-    $atk = $strbonus + $speedbonus + $wisdombonus + $intbonus + $miscbonus;
-    $weapondmg = (int) $user['weapondmg'];
-    $levelbonus = (int) $user['level'] - 1;
-    $miscbonus -= $weapondmg + $levelbonus;
+    else { $user =& $session['user']; }
+
+	$strbonus = round((1/3)*$user['strength'],2);
+	$speedbonus = round((1/3)*get_player_speed($player),2);
+	$wisdombonus = round((1/6)*$user['wisdom'],2);
+	$intbonus = round((1/6)*$user['intelligence'],2);
+	$miscbonus = round($user['attack']-9,2);
+	// $atk = $strbonus+$speedbonus+$wisdombonus+$intbonus+$miscbonus;
+	$weapondmg = (int) $user['weapondmg'];
+	$levelbonus = (int) $user['level']-1;
+    $miscbonus -= $weapondmg+$levelbonus;
+
+    return [
+        'strbonus' => $strbonus,
+        'speedbonus' => $speedbonus,
+        'wisdombonus' => $wisdombonus,
+        'intbonus' => $intbonus,
+        'weapondmg' => $weapondmg,
+        'levelbonus' => $levelbonus,
+        'miscbonus' => $miscbonus
+    ];
+}
+
+function explained_get_player_attack($player = false, $colored = false)
+{
+    $result = explained_row_get_player_attack($player);
+
+    $strbonus = $result['strbonus'];
+	$speedbonus = $result['speedbonus'];
+	$wisdombonus = $result['wisdombonus'];
+	$intbonus = $result['intbonus'];
+	$weapondmg = $result['weapondmg'];
+	$levelbonus = $result['levelbonus'];
+    $miscbonus = $result['miscbonus'];
+
     //## Mejorado el detalle de como se explica, se puede usar el antiguo
     if ($colored)
     {
@@ -199,34 +218,50 @@ function get_player_defense($player = false)
     return max($defense, 0);
 }
 
-function explained_get_player_defense($player = false, $colored = false)
+function explained_row_get_player_defense($player = false)
 {
     global $session;
 
-    if (false !== $player)
+    if ($player !== false)
     {
-        $sql = 'SELECT constitution,wisdom,defense FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+		$sql = "SELECT constitution,wisdom,defense,armordef,level FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		$result = DB::query($sql);
+		$row = $result->current();
+        if (! $row) return '';
 
-        if (! $row)
-        {
-            return 0;
-        }
-        $user = $row;
+		$user = $row;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
-    $wisdombonus = round((1 / 4) * $user['wisdom'], 2);
-    $constbonus = round((3 / 8) * $user['constitution'], 2);
-    $speedbonus = round((3 / 8) * get_player_speed($player), 2);
-    $miscbonus = round($user['defense'] - 9, 2);
-    $defense = $wisdombonus + $speedbonus + $constbonus + $miscbonus;
-    $armordef = (int) $user['armordef'];
-    $levelbonus = (int) $user['level'] - 1;
+    else { $user =& $session['user']; }
+
+	$wisdombonus = round((1/4)*$user['wisdom'],2);
+	$constbonus = round((3/8)*$user['constitution'],2);
+	$speedbonus = round((3/8)*get_player_speed($player),2);
+	$miscbonus = round($user['defense']-9,2);
+	// $defense = $wisdombonus+$speedbonus+$constbonus+$miscbonus;
+	$armordef = (int) $user['armordef'];
+	$levelbonus = (int) $user['level'] - 1;
     $miscbonus -= $armordef + $levelbonus;
+
+    return [
+        'wisdombonus' => $wisdombonus,
+        'constbonus' => $constbonus,
+        'speedbonus' => $speedbonus,
+        'armordef' => $armordef,
+        'levelbonus' => $levelbonus,
+        'miscbonus' => $miscbonus
+    ];
+}
+
+function explained_get_player_defense($player = false, $colored = false)
+{
+    $result = explained_row_get_player_defense($player);
+
+    $wisdombonus = $result['wisdombonus'];
+	$constbonus = $result['constbonus'];
+	$speedbonus = $result['speedbonus'];
+	$armordef = $result['armordef'];
+	$levelbonus = $result['levelbonus'];
+	$miscbonus = $result['miscbonus'];
 
     //## Mejorado el detalle de como se explica, se puede usar el antiguo
     if ($colored)
@@ -422,4 +457,32 @@ function get_player_dragonkillmod()
     global $session;
 
     return $session['user']['dragonkills'];
+}
+
+function get_player_info($player = false)
+{
+    global $session;
+
+    if ($player !== false)
+    {
+		// $sql="SELECT strength,wisdom,intelligence,attack FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
+		// $result=DB::query($sql);
+        // $row=DB::fetch_assoc($result);
+
+        $select = DB::select('accounts');
+        $select->where->equalTo('acctid', (int) $player);
+        $user = DB::execute($select)->current();
+        if (! $user) return [];
+
+        unset($user['password']);
+
+		$user['dragonpoints'] = unserialize($user['dragonpoints']);
+		$user['prefs'] = unserialize($user['prefs']);
+		$user['bufflist'] = unserialize($user['bufflist']);
+		if (! is_array($user['bufflist'])) $user['bufflist'] = [];
+		if (! is_array($user['dragonpoints'])) $user['dragonpoints'] = [];
+    }
+    else { $user =& $session['user']; }
+
+    return $user;
 }
