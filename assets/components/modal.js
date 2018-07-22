@@ -27,8 +27,15 @@ define([
         let modalId = ''
         if (id) { modalId = id }
         else { modalId = lotgdModalId++ }
-
         modalId = 'modal-' + modalId
+
+        //-- Force to redo the modal
+        if (options.force !== undefined && options.force === true)
+        {
+            jQuery('#' + modalId).remove()
+        }
+        delete (options.force)
+
         if (!jQuery('#' + modalId).length)
         {
             var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '"><i class="close icon"></i>' +
