@@ -22,7 +22,7 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
         * `~/pages/home/login.twig`
         * `~/pages/home/loginfull.twig`
 * THEME
-    * Updated Semantic UI version 2.2.14 => 2.3.2
+    * Updated Semantic UI version 2.2.14 => 2.3.3
     * Some adjustments are made to improve the appearance
 
 ### FEATURES
@@ -45,6 +45,8 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 * **template.php** Class `LotgdTheme` that only contain funcions for themes of LOTGD extends base class of `LotgdTemplate`
 * **creatures.php** Now the creatures can have a description and image, both are optional.
 * **Jaxon-php** In the folder `jaxon` you can place your classes in order to use Ajax globally in LOTGD
+* **lib/playerfunctions.php** New functions:
+    * `explained_row_get_player_attack` and `explained_row_get_player_defense` with this functions can get a raw info
 
 ### DEPRECATED
 
