@@ -34,7 +34,6 @@ define([
         {
             jQuery('#' + modalId).remove()
         }
-        delete (options.force)
 
         if (!jQuery('#' + modalId).length)
         {
@@ -48,6 +47,9 @@ define([
 
             jQuery(template).appendTo('body')
         }
+
+        delete (options.force)
+        delete (options.size)
 
         jQuery('#' + modalId).modal(options).modal('show')
     }
