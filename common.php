@@ -96,7 +96,6 @@ if (! defined('ALLOW_ANONYMOUS'))
 //Initialize variables required for this page
 
 require_once 'lib/settings.php';
-require_once 'lib/template.php';
 require_once 'lib/redirect.php';
 require_once 'lib/censor.php';
 require_once 'lib/saveuser.php';
@@ -107,7 +106,6 @@ require_once 'lib/debuglog.php';
 require_once 'lib/forcednavigation.php';
 require_once 'lib/php_generic_environment.php';
 require_once 'lib/lotgd_mail.php';
-require_once 'lib/lotgdFormat.php';
 require_once 'lib/jaxon/index.php';
 
 //-- Only for upgrade from previous versions
@@ -282,6 +280,10 @@ if ($logd_version == getsetting('installer_version', '-1'))
 
 //Generate our settings object
 $settings = new settings('settings');
+
+//-- This files need that settings work
+require_once 'lib/lotgdFormat.php';
+require_once 'lib/template.php';
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
 {
