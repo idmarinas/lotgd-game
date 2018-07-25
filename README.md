@@ -39,3 +39,4 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
     * A simple JavaScript popup boxes [SweetAlert2](https://limonte.github.io/sweetalert2/)
     * A simple CronJob manager [Jobby, a PHP cron job manager](https://github.com/jobbyphp/jobby)
     * Toastr, Javascript library for non-blocking notifications. [toastr](https://codeseven.github.io/toastr/)
+    * Jaxon-PHP, Easily create Ajax applications with PHP. [Jaxon](https://www.jaxon-php.org)
