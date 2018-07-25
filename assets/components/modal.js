@@ -22,7 +22,7 @@ define([
     Lotgd.modal = function (message, title, id, options)
     {
         options = options || {}
-        options = jQuery.extend({size: '', denyButton: true, approveButton: false}, options)
+        options = jQuery.extend({size: '', denyButton: true, approveButton: false, closeIcon: true}, options)
 
         let modalId = ''
         if (id) { modalId = id }
@@ -37,7 +37,8 @@ define([
 
         if (!jQuery('#' + modalId).length)
         {
-            var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '"><i class="close icon"></i>' +
+            var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '">' +
+            (options.closeIcon ? '<i class="close icon"></i>' : '') +
             (title !== undefined && title !== '' ? '<div class="header">' + title + '</div>' : '') +
             '<div class="scrolling content">' + message + '</div>' +
             '<div class="actions">' +
@@ -50,6 +51,7 @@ define([
 
         delete (options.force)
         delete (options.size)
+        delete (options.closeIcon)
 
         jQuery('#' + modalId).modal(options).modal('show')
     }
