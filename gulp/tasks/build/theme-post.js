@@ -2,7 +2,7 @@
 var gulp = require('gulp')
 var merge = require('merge-stream')
 var rename = require('gulp-rename')
-var print = require('gulp-print')
+var print = require('gulp-print').default
 var gulpif = require('gulp-if')
 var header = require('gulp-header')
 

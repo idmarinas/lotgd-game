@@ -2,7 +2,7 @@
 var gulp = require('gulp')
 var replace = require('gulp-replace')
 var rename = require('gulp-rename')
-var print = require('gulp-print')
+var print = require('gulp-print').default
 var plumber = require('gulp-plumber')
 var del = require('del')
 
@@ -18,9 +18,10 @@ module.exports = function (callback)
     del('semantic/src/theme.config')
 
     return gulp.src('semantic/src/theme.config.default')
-        .pipe(replace('default', themeName))
         .pipe(plumber())
+        .pipe(replace('default', themeName, {skipBinary: false}))
         .pipe(rename('theme.config'))
+        .pipe(plumber.stop())
         .pipe(gulp.dest('semantic/src'))
         .pipe(print(log.copied))
 }

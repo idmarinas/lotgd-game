@@ -1,7 +1,7 @@
 //-- Dependencies
 var gulp = require('gulp')
 var merge = require('merge-stream')
-var print = require('gulp-print')
+var print = require('gulp-print').default
 var gulpif = require('gulp-if')
 var uglify = require('gulp-uglify')
 var gutil = require('gulp-util')
