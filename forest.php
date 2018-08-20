@@ -257,15 +257,11 @@ if ('search' == $op)
             {
                 // There is nothing in the database to challenge you, let's
                 // give you a doppleganger.
-                $badguy = [];
+                $badguy = lotgd_generate_creature_levels($session['user']['level']);
                 $badguy['creaturename'] = "An evil doppleganger of {$session['user']['name']}";
                 $badguy['creatureweapon'] = $session['user']['weapon'];
-                $badguy['creaturelevel'] = $session['user']['level'];
                 $badguy['creaturegold'] = 0;
-                $badguy['creatureexp'] = round($session['user']['experience'] / 10, 0);
-                $badguy['creaturehealth'] = $session['user']['maxhitpoints'];
-                $badguy['creatureattack'] = $session['user']['attack'];
-                $badguy['creaturedefense'] = $session['user']['defense'];
+
                 $stack[] = $badguy;
             }
             else
@@ -348,8 +344,7 @@ if ('search' == $op)
                             // 10% more gold
                             $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.1, 0);
                         }
-
-                        if ('suicide' == $type)
+                        else if ('suicide' == $type)
                         {
                             // Okay, suicide fights give even more rewards, but
                             // are much harder
