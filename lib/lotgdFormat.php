@@ -60,8 +60,6 @@ class LotgdFormat
         $laston = is_numeric($indate) ? $indate : strtotime($indate);
         $laston = round((time() - strtotime($indate)) / 86400, 0).' days';
 
-        tlschema('datetime');
-
         if ('1 ' == substr($laston, 0, 2))
         {
             $laston = '1 day';
@@ -83,6 +81,8 @@ class LotgdFormat
             $laston = ['%s days', round((time() - strtotime($indate)) / 86400, 0)];
         }
 
+        tlschema('datetime');
+        $laston = sprintf_translate($laston);
         tlschema();
 
         return $laston;
