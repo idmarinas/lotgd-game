@@ -162,7 +162,7 @@ $inn = (int) httpget('inn');
 
 if ('pvp' == $options['type'] && 1 == $inn)
 {
-    apply_bodyguard($badguy['bodyguardlevel']);
+    apply_bodyguard($enemies[0]['bodyguardlevel']);
 }
 
 $surprised = false;
@@ -210,11 +210,11 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
             {
                 if ('pvp' == $options['type'])
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $badguy['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $enemies[0]['creaturename']];
                 }
                 else
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $badguy['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $enemies[0]['creaturename']];
                 }
 
                 $op = 'run';
