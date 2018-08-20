@@ -8,20 +8,20 @@
 		var ctrlKey;
 		if (window.event != null)
 		{
-			c=String.fromCharCode(window.event.keyCode).toUpperCase();
-			altKey=window.event.altKey;
-			ctrlKey=window.event.ctrlKey;
+			c = String.fromCharCode(window.event.keyCode).toUpperCase();
+			altKey = window.event.altKey;
+			ctrlKey = window.event.ctrlKey;
 		}
 		else
 		{
-			c=String.fromCharCode(e.charCode).toUpperCase();
-			altKey=e.altKey;
-			ctrlKey=e.ctrlKey;
+			c = String.fromCharCode(e.charCode).toUpperCase();
+			altKey = e.altKey;
+			ctrlKey = e.ctrlKey;
 		}
 		if (window.event != null) target=window.event.srcElement;
-		else target=e.originalTarget;
+		else target = e.originalTarget;
 
-		if (target.nodeName.toUpperCase() != 'INPUT' && target.nodeName.toUpperCase() != 'TEXTAREA' && ! altKey && ! ctrlKey)
+		if (target.nodeName.toUpperCase() !== 'INPUT' && target.nodeName.toUpperCase() !== 'TEXTAREA' && ! altKey && ! ctrlKey)
 		{
 			{% for key, val in quickkeys %}
 				if (c == "{{ key|upper }}") { {{ val }}; return false; }
