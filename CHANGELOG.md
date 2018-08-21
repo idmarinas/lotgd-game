@@ -4,6 +4,41 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
 Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md).
 
+# Version: 2.7.0 **DEV**
+
+### CHANGES
+
+* **lib/lotgdFormat.php** `relativedate($indate)` now translate text before return
+* **THEME**
+    * Some adjustments are made to improve the appearance
+
+### FEATURES
+
+* **Javascript**
+    * Modal, added option for add classes to content
+
+### DEPRECATED
+
+* Nothing
+
+### REMOVES
+
+* Nothing
+
+### FIXES
+
+* **battle.php** Fixed error that didn't show the name of the creature
+* **forest.php** Fixed error that doppelganger was not generated correctly
+
+### NOTES
+
+* **package.json** Updated/Deleted dependencies
+* **gulp** Some gulp tasks have been updated
+* **Optimization** Most of `.php` files have had a slight code optimization using CS Fixer.
+* ***TODO***
+    * Create a system for replacing keywords by their value for templates. Ahem: {playername} would be replaced by the player's name.
+
+
 # Version: 2.6.0
 
 ### CHANGES
