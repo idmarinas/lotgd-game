@@ -1,5 +1,6 @@
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![Website](https://img.shields.io/website-up-down-green-red/https/www.infommo.es.svg?label=LOTGD)
+![Libraries.io for GitHub](https://img.shields.io/librariesio/github/idmarinas/lotgd-game.svg)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 [![Installation](https://img.shields.io/badge/install-success-green.svg?maxAge=2592000)]()
