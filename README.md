@@ -1,11 +1,12 @@
-[![Bitbucket issues](https://img.shields.io/bitbucket/issues/idmarinas/lotgd-game.svg?maxAge=2592000)]()
-[![Installation](https://img.shields.io/badge/install-success-orange.svg?maxAge=2592000)]()
-[![Upgrade](https://img.shields.io/badge/upgrade-success-orange.svg?maxAge=2592000)]()
-[![Working](https://img.shields.io/badge/working-succes-orange.svg?maxAge=2592000)]()
-[![Version](https://img.shields.io/badge/version-2.7.0--dev-orange.svg?maxAge=2592000)]()
-![GitHub tag](https://img.shields.io/github/tag/idmarinas/lotgd-game.svg)
-
+![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![Website](https://img.shields.io/website-up-down-green-red/https/www.infommo.es.svg?label=LOTGD)
+
+![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
+[![Installation](https://img.shields.io/badge/install-success-green.svg?maxAge=2592000)]()
+[![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)]()
+[![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)]()
+
+![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
 
 # About
 
