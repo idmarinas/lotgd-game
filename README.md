@@ -6,6 +6,7 @@
 [![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)]()
 [![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)]()
 
+[![Dev](https://img.shields.io/badge/dev-2.7.0-orange.svg)]()
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
 
 # About
