@@ -3,7 +3,9 @@
 [![Upgrade](https://img.shields.io/badge/upgrade-success-orange.svg?maxAge=2592000)]()
 [![Working](https://img.shields.io/badge/working-succes-orange.svg?maxAge=2592000)]()
 [![Version](https://img.shields.io/badge/version-2.7.0--dev-orange.svg?maxAge=2592000)]()
-[![Requires.io](https://img.shields.io/requires/bitbucket/idmarinas/lotgd-game.svg)]()
+[![Libraries.io](https://img.shields.io/librariesio/release/idmarinas/lotgd-game.svg?branch=master)]()
+
+![Website](https://img.shields.io/website-up-down-green-red/https/www.infommo.es.svg?label=LOTGD)
 
 # About
 
