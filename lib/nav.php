@@ -442,7 +442,7 @@ $quickkeys = [];
  * @param string $link
  * @param bool   $priv
  * @param bool   $pop
- * @param bool   $popsize
+ * @param string   $popsize
  *
  * @return mixed
  */
@@ -519,7 +519,6 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     }
 
     $extra = '';
-    $ignoreuntil = '';
 
     if (false === $link)
     {
@@ -558,174 +557,10 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
             $extra .= '-'.date('His');
             //hotkey for the link.
-            $key = '';
-
-            if ('?' == $text[1])
-            {
-                // check to see if a key was specified up front.
-                $hchar = strtolower($text[0]);
-
-                if (' ' == $hchar || array_key_exists($hchar, $accesskeys) && 1 == $accesskeys[$hchar])
-                {
-                    $text = substr($text, 2);
-                    $text = holidayize($text, 'nav');
-
-                    if (' ' == $hchar)
-                    {
-                        $key = ' ';
-                    }
-                }
-                else
-                {
-                    $key = $text[0];
-                    $text = substr($text, 2);
-                    $text = holidayize($text, 'nav');
-                    $found = false;
-                    $text_len = strlen($text);
-
-                    for ($i = 0; $i < $text_len; $i++)
-                    {
-                        $char = $text[$i];
-
-                        if ($ignoreuntil == $char)
-                        {
-                            $ignoreuntil = '';
-                        }
-                        else
-                        {
-                            if ('' != $ignoreuntil)
-                            {
-                                if ('<' == $char)
-                                {
-                                    $ignoreuntil = '>';
-                                }
-
-                                if ('&' == $char)
-                                {
-                                    $ignoreuntil = ';';
-                                }
-
-                                if ('`' == $char)
-                                {
-                                    $ignoreuntil = $text[$i + 1];
-                                }
-                            }
-                            else
-                            {
-                                if ($char == $key)
-                                {
-                                    $found = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (false == $found)
-                    {
-                        //the hotkey for this link wasn't actually in the
-                        //text, prepend it in parens.
-                        if (false !== strpos($text, '__'))
-                        {
-                            $text = str_replace('__', '('.$key.') ', $text);
-                        }
-                        else
-                        {
-                            $text = '('.strtoupper($key).') '.$text;
-                        }
-                        $i = strpos($text, $key);
-                    }
-                }
-            }
-            else
-            {
-                $text = holidayize($text, 'nav');
-            }
-
-            if ('' == $key)
-            {
-                //we have no previously defined key.  Look for a new one.
-                for ($i = 0; $i < strlen($text); $i++)
-                {
-                    $char = substr($text, $i, 1);
-
-                    if ($ignoreuntil == $char)
-                    {
-                        $ignoreuntil = '';
-                    }
-                    else
-                    {
-                        if ((isset($accesskeys[strtolower($char)]) && 1 == $accesskeys[strtolower($char)]) || (false === strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) || '' != $ignoreuntil)
-                        {
-                            if ('<' == $char)
-                            {
-                                $ignoreuntil = '>';
-                            }
-
-                            if ('&' == $char)
-                            {
-                                $ignoreuntil = ';';
-                            }
-
-                            if ('`' == $char)
-                            {
-                                $ignoreuntil = substr($text, $i + 1, 1);
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (! isset($i))
-            {
-                $i = 0;
-            }
-
-            if ($i < strlen($text) && ' ' != $key)
-            {
-                $key = substr($text, $i, 1);
-                $accesskeys[strtolower($key)] = 1;
-                $keyrep = " accesskey=\"$key\" ";
-            }
-            else
-            {
-                $key = '';
-                $keyrep = '';
-            }
-
-            if ('' != $key || ' ' != $key)
-            {
-                $pattern1 = '/^'.preg_quote($key, '/').'/';
-                $pattern2 = '/([^`])'.preg_quote($key, '/').'/';
-                $rep1 = "`H$key`H";
-                $rep2 = "\$1`H$key`H";
-                $text = preg_replace($pattern1, $rep1, $text, 1);
-
-                if (false === strpos($text, '`H'))
-                {
-                    $text = preg_replace($pattern2, $rep2, $text, 1);
-                }
-
-                if ($pop)
-                {
-                    if ('' == $popsize)
-                    {
-                        $quickkeys[$key] = "window.open('$link')";
-                    }
-                    else
-                    {
-                        $quickkeys[$key] = popup($link, $popsize);
-                    }
-                }
-                else
-                {
-                    $quickkeys[$key] = "window.location='$link$extra'";
-                }
-            }
+            $hotkey = add_accesskey($text, $link, $pop, $popsize, $extra);
+            $key = $hotkey['key'];
+            $keyrep = $hotkey['keyrep'];
+            $text = $hotkey['text'];
 
             $thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/item.twig', [
                 'text' => appoencode($text, $priv),
@@ -735,6 +570,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
                 'tlbutton' => tlbutton_pop()
             ]);
         }
+
         $session['allowednavs'][$link.$extra] = true;
         $session['allowednavs'][str_replace(' ', '%20', $link).$extra] = true;
         $session['allowednavs'][str_replace(' ', '+', $link).$extra] = true;
@@ -803,4 +639,192 @@ function clearoutput()
     $output = new LotgdOutputCollector();
     $header = '';
     $nav = '';
+}
+
+/**
+ * Adds an access key for a text
+ * You need to add the attribute "accesskey" to an HTML element
+ *
+ * @param string|array $text
+ * @param string $link
+ * @param boolean $pop
+ * @param string $popsize
+ * @param string $extra
+ *
+ * @return string A string that contain a key
+ */
+function add_accesskey($text, $link, $pop, $popsize , $extra)
+{
+    global $accesskeys, $quickkeys;
+
+    $key = '';
+    $ignoreuntil = '';
+    if ('?' == $text[1])
+    {
+        // check to see if a key was specified up front.
+        $hchar = strtolower($text[0]);
+
+        if (' ' == $hchar || array_key_exists($hchar, $accesskeys) && 1 == $accesskeys[$hchar])
+        {
+            $text = substr($text, 2);
+            $text = holidayize($text, 'nav');
+
+            if (' ' == $hchar)
+            {
+                $key = ' ';
+            }
+        }
+        else
+        {
+            $key = $text[0];
+            $text = substr($text, 2);
+            $text = holidayize($text, 'nav');
+            $found = false;
+            $text_len = strlen($text);
+
+            for ($i = 0; $i < $text_len; $i++)
+            {
+                $char = $text[$i];
+
+                if ($ignoreuntil == $char)
+                {
+                    $ignoreuntil = '';
+                }
+                else
+                {
+                    if ('' != $ignoreuntil)
+                    {
+                        if ('<' == $char)
+                        {
+                            $ignoreuntil = '>';
+                        }
+
+                        if ('&' == $char)
+                        {
+                            $ignoreuntil = ';';
+                        }
+
+                        if ('`' == $char)
+                        {
+                            $ignoreuntil = $text[$i + 1];
+                        }
+                    }
+                    else
+                    {
+                        if ($char == $key)
+                        {
+                            $found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (false == $found)
+            {
+                //the hotkey for this link wasn't actually in the
+                //text, prepend it in parens.
+                if (false !== strpos($text, '__'))
+                {
+                    $text = str_replace('__', '('.$key.') ', $text);
+                }
+                else
+                {
+                    $text = '('.strtoupper($key).') '.$text;
+                }
+                $i = strpos($text, $key);
+            }
+        }
+    }
+    else
+    {
+        $text = holidayize($text, 'nav');
+    }
+
+    //we have no previously defined key.  Look for a new one.
+    $strlen = strlen($text);
+    for ($i = 0; $i < $strlen; $i++)
+    {
+        $char = substr($text, $i, 1);
+
+        if ($ignoreuntil == $char)
+        {
+            $ignoreuntil = '';
+        }
+        else
+        {
+            if ((isset($accesskeys[strtolower($char)]) && 1 == $accesskeys[strtolower($char)]) || (false === strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) || '' != $ignoreuntil)
+            {
+                if ('<' == $char)
+                {
+                    $ignoreuntil = '>';
+                }
+                else if ('&' == $char)
+                {
+                    $ignoreuntil = ';';
+                }
+                else if ('`' == $char)
+                {
+                    $ignoreuntil = substr($text, $i + 1, 1);
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    if (! isset($i))
+    {
+        $i = 0;
+    }
+
+    if ($i < strlen($text) && ' ' != $key)
+    {
+        $key = substr($text, $i, 1);
+        $accesskeys[strtolower($key)] = 1;
+        $keyrep = " accesskey=\"$key\" ";
+    }
+    else
+    {
+        $key = '';
+        $keyrep = '';
+    }
+
+    if ('' != $key || ' ' != $key)
+    {
+        $pattern1 = '/^'.preg_quote($key, '/').'/';
+        $pattern2 = '/([^`])'.preg_quote($key, '/').'/';
+        $rep1 = "`H$key`H";
+        $rep2 = "\$1`H$key`H";
+        $text = preg_replace($pattern1, $rep1, $text, 1);
+
+        if (false === strpos($text, '`H'))
+        {
+            $text = preg_replace($pattern2, $rep2, $text, 1);
+        }
+
+        if ($pop)
+        {
+            if ('' == $popsize)
+            {
+                $quickkeys[$key] = "window.open('$link')";
+            }
+            else
+            {
+                $quickkeys[$key] = popup($link, $popsize);
+            }
+        }
+        else
+        {
+            $quickkeys[$key] = "window.location='$link$extra'";
+        }
+    }
+
+    return [
+        'key' => $key,
+        'keyrep' => $keyrep,
+        'text' => $text
+    ];
 }
