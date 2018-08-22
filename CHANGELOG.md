@@ -1,14 +1,15 @@
 # Changes made for Iván Diaz - IDMarinas Edition #
 See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 
-Visit the [Documentation](https://bitbucket.org/idmarinas/lotgd-game/wiki/Home) for more details.
-Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.md).
+Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
+Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
 # Version: 2.7.0 **DEV**
 
 ### CHANGES
 
 * **lib/lotgdFormat.php** `relativedate($indate)` now translate text before return
+* **lib/nav.php** Create function `add_accesskey()` to generate a keys for navs
 * **THEME**
     * Some adjustments are made to improve the appearance
 
@@ -29,9 +30,20 @@ Visit the [README](https://bitbucket.org/idmarinas/lotgd-game/src/master/README.
 
 * **battle.php** Fixed error that didn't show the name of the creature
 * **forest.php** Fixed error that doppelganger was not generated correctly
+* **lib/serverfunctions.class.php** Fixed Error where in some cases the variable `$onlinecount` was not obtained
+* Replaced obsolete function
+    * **lib/template.class.php**
+    * **lib/bans/case_.php**
+    * **lib/bans/case_removebnan.php**
+    * **lib/bans/case_searchban.php**
+    * **lib/user/user_.php**
+    * **lib/user/user_removeban.php**
+    * **lib/user/user_searchban.php**
 
 ### NOTES
 
+* **IMPORTANT** PHP <= 5.6 is not supported now by LOTGD IDMarinas Edition
+* **Transfer repository** Transfer repository from Bitbucket to GitHub
 * **package.json** Updated/Deleted dependencies
 * **gulp** Some gulp tasks have been updated
 * **Optimization** Most of `.php` files have had a slight code optimization using CS Fixer.
