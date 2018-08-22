@@ -16,10 +16,8 @@ class ServerFunctions
 			savesetting('OnlineCount', $result['counter']);
 			savesetting('OnlineCountLast', strtotime('now'));
         }
-        else
-        {
-			$onlinecount = getsetting('OnlineCount', 0);
-        }
+
+        $onlinecount = (int) getsetting('OnlineCount', 0);
 
         if ($onlinecount >= getsetting('maxonline', 0) && getsetting('maxonline', 0) != 0) return true;
 
