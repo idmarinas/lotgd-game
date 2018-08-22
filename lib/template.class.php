@@ -123,7 +123,9 @@ class LotgdTemplate extends Twig_Environment
             //-- Show a relative date from now
             new Twig_SimpleFilter('relativedate', function ($string)
             {
-                return relativedate($string);
+                global $lotgdFormat;
+
+                return $lotgdFormat->relativedate($string);
             })
         ];
     }
