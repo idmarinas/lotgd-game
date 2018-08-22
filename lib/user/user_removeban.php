@@ -184,7 +184,7 @@ while ($row = DB::fetch_assoc($result))
     rawoutput('</a></div>');
     addnav('', $file);
     rawoutput('</td><td>');
-    output_notl('%s', relativedate($row['lasthit']));
+    output_notl($lotgdFormat->relativedate($row['lasthit']));
     rawoutput('</td></tr>');
     $i++;
 }

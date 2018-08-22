@@ -33,15 +33,11 @@ if (1 == $display)
     addnav('', "user.php?sort=gentimecount$q");
     addnav('', "user.php?sort=lastip$q");
     addnav('', "user.php?sort=uniqueid$q");
-    $rn = 0;
-    $oorder = '';
 
     while ($row = DB::fetch_assoc($searchresult))
     {
-        $laston = relativedate($row['laston']);
-        $loggedin =
-            (date('U') - strtotime($row['laston']) <
-             getsetting('LOGINTIMEOUT', 900) && $row['loggedin']);
+        $laston = $lotgdFormat->relativedate($row['laston']);
+        $loggedin = (date('U') - strtotime($row['laston']) < getsetting('LOGINTIMEOUT', 900) && $row['loggedin']);
 
         if ($loggedin)
         {
@@ -49,11 +45,6 @@ if (1 == $display)
         }
         $row['laston'] = $laston;
 
-        if ($row[$order] != $oorder)
-        {
-            $rn++;
-        }
-        $oorder = $row[$order];
         rawoutput('<tr>');
         rawoutput('<td nowrap>');
         rawoutput("[ <a href='user.php?op=edit&userid={$row['acctid']}$m'>$ed</a> | <a href='user.php?op=del&userid={$row['acctid']}' onClick=\"return confirm('$conf');\">$del</a> | <a href='bans.php?op=setupban&userid={$row['acctid']}'>$ban</a> | <a href='user.php?op=debuglog&userid={$row['acctid']}'>$log</a> ]");
@@ -70,7 +61,7 @@ if (1 == $display)
         rawoutput('</td><td>');
         output_notl('`^%s`0', $row['level']);
         rawoutput('</td><td>');
-        output_notl('%s', $row['laston']);
+        output_notl($row['laston']);
         rawoutput('</td><td>');
         output_notl('%s', $row['gentimecount']);
         rawoutput('</td><td>');
