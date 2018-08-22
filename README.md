@@ -1,6 +1,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![Website](https://img.shields.io/website-up-down-green-red/https/www.infommo.es.svg?label=LOTGD)
 ![Libraries.io for GitHub](https://img.shields.io/librariesio/github/idmarinas/lotgd-game.svg)
+[![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC)](http://gulpjs.com/)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 [![Installation](https://img.shields.io/badge/install-success-green.svg?maxAge=2592000)]()
