@@ -33,12 +33,11 @@ DB::setAdapter([
 
 $link = DB::connect();
 
-$result = DB::query('SHOW TABLES');
+$metadata = new Zend\Db\Metadata\Metadata(DB::getAdapter());
+$tableNames = $metadata->getTableNames();
 //the conflicts seems not to work - we should check this.
-foreach ($result as $row)
+foreach ($tableNames as $key => $val)
 {
-    list($key, $val) = each($row);
-
     if (isset($descriptors[$val]))
     {
         $game++;
@@ -97,7 +96,7 @@ else
             $session['sure i want to overwrite the tables'] = true;
         }
 
-        if (! $session['sure i want to overwrite the tables'])
+        if (! isset($session['sure i want to overwrite the tables']) || ! $session['sure i want to overwrite the tables'])
         {
             $session['stagecompleted'] = 4;
             output("`nIf you are sure that you wish to overwrite these tables, <a href='installer.php?stage=5&op=confirm_overwrite'>click here</a>.`n", true);
