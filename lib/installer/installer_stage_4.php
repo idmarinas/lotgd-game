@@ -26,18 +26,13 @@ DB::setAdapter([
     'password' => $session['dbinfo']['DB_PASS']
 ], true);
 
-ob_start();
-$link = DB::connect();
-$error = ob_get_contents();
-ob_end_clean();
-
-if (false === $link)
+if (false === DB::connect())
 {
     output("`\$Blast!  I wasn't able to connect to the database server with the information you provided!");
     output("`2This means that either the database server address, database username, database password or database name you provided were wrong, or else the database server isn't running.`n");
     output('`$Remember create database before try connect.`2`n');
     output('The specific error the database returned was:');
-    rawoutput('<blockquote>'.$error.'</blockquote>');
+    rawoutput('<blockquote>'.DB::error().'</blockquote>');
     output('If you believe you provided the correct information, make sure that the database server is running (check documentation for how to determine this).');
     output('Otherwise, you should return to the previous step, "Database Info" and double-check that the information provided there is accurate.');
     $session['stagecompleted'] = 3;
