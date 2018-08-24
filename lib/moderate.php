@@ -6,7 +6,6 @@
 require_once 'lib/datetime.php';
 require_once 'lib/commentary.php';
 require_once 'lib/sanitize.php';
-require_once 'lib/http.php';
 
 function commentmoderate($intro, $section, $message, $limit = 10, $talkline = 'says', $schema = false, $viewall = false)
 {

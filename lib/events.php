@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'lib/constants.php';
-require_once 'lib/http.php';
 
 // This file encapsulates all the special event handling for most locations
 
