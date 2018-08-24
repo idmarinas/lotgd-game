@@ -13,7 +13,6 @@ use Zend\Db\Sql\Sql;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
-require_once 'lib/errorhandling.php';
 require_once 'lib/datacache.php';
 require_once 'settings.php';
 
