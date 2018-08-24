@@ -1,8 +1,16 @@
 <?php
 
+// Decline static file requests back to the PHP built-in webserver
+if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)))
+{
+    return false;
+}
+
 // translator ready
 // addnews ready
 // mail ready
+
+$pagestarttime = microtime(true);
 
 // **** NOTICE ****
 // This series of scripts (collectively known as Legend of the Green Dragon
@@ -40,12 +48,6 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 
 $logd_version = '2.6.0 IDMarinas Edition';
 
-// Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)))
-{
-    return false;
-}
-
 session_start();
 
 $session = &$_SESSION['session'];
@@ -79,8 +81,6 @@ require_once 'lib/datetime.php';
 require_once 'lib/translator.php';
 require_once 'lib/playerfunctions.php';
 
-$pagestarttime = microtime(true);
-
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 if (! defined('OVERRIDE_FORCED_NAV'))
@@ -107,6 +107,12 @@ require_once 'lib/forcednavigation.php';
 require_once 'lib/php_generic_environment.php';
 require_once 'lib/lotgd_mail.php';
 require_once 'lib/jaxon/index.php';
+
+global $settings;
+
+//-- This files need that settings work
+require_once 'lib/lotgdFormat.php';
+require_once 'lib/template.php';
 
 //-- Only for upgrade from previous versions
 use Zend\Code\Generator\DocBlockGenerator;
@@ -280,10 +286,6 @@ if ($logd_version == getsetting('installer_version', '-1'))
 
 //Generate our settings object
 $settings = new settings('settings');
-
-//-- This files need that settings work
-require_once 'lib/lotgdFormat.php';
-require_once 'lib/template.php';
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
 {
