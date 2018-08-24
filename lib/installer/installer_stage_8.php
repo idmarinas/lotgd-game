@@ -7,7 +7,7 @@ $session['skipmodules'] = false;
 
 if (array_key_exists('modulesok', $_POST))
 {
-    $session['moduleoperations'] = $_POST['modules'];
+    $session['moduleoperations'] = $_POST['modules'] ?? [];
     $session['stagecompleted'] = $stage;
     header('Location: installer.php?stage='.($stage + 1));
 
