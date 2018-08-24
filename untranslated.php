@@ -11,7 +11,6 @@ define('OVERRIDE_FORCED_NAV', true);
 // Originally Written by Christian Rutsch
 // Slightly modified by JT Traub
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/superusernav.php';
 
 check_su_access(SU_IS_TRANSLATOR);

@@ -3,7 +3,6 @@
 //Author: Lonny Luberts - 3/18/2005
 //Heavily modified by JT Traub
 require_once 'common.php';
-require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_USERS);
 

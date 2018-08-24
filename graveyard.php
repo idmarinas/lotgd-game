@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 

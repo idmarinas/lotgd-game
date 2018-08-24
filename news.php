@@ -5,7 +5,6 @@
 // mail ready
 define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/villagenav.php';
 
 tlschema('news');

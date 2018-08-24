@@ -6,7 +6,6 @@
 define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/http.php';
 
 tlschema('about');
 

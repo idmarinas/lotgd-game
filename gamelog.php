@@ -7,7 +7,6 @@
 // Written by Christian Rutsch
 
 require_once 'common.php';
-require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_CONFIG);
 

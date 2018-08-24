@@ -4,18 +4,19 @@
 // mail ready
 // translator ready
 
-require_once 'lib/http.php';
-
-$skin = httppost('template');
-
-if ($skin > '')
+if (isset($_POST['template']))
 {
-    setcookie('template', $skin, strtotime('+45 days'));
-    $_COOKIE['template'] = $skin;
+    $skin = $_POST['template'];
+
+    if ($skin > '')
+    {
+        setcookie('template', $skin, strtotime('+45 days'));
+        $_COOKIE['template'] = $skin;
+    }
 }
 
-require_once 'lib/villagenav.php';
 require_once 'common.php';
+require_once 'lib/villagenav.php';
 
 tlschema('prefs');
 

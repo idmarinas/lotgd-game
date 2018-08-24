@@ -7,7 +7,6 @@ define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
-require_once 'lib/http.php';
 require_once 'lib/serverfunctions.class.php';
 
 tlschema('login');

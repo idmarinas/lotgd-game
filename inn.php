@@ -8,7 +8,6 @@ require_once 'lib/commentary.php';
 require_once 'lib/pvpwarning.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/pvplist.php';
-require_once 'lib/http.php';
 require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 require_once 'lib/villagenav.php';

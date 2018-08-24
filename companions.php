@@ -6,7 +6,6 @@
 
 // hilarious copy of mounts.php
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/showform.php';
 require_once 'lib/superusernav.php';
 

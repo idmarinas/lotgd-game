@@ -5,7 +5,6 @@
 // mail ready
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/http.php';
 
 tlschema('bio');
 check_su_access(SU_EDIT_COMMENTS);

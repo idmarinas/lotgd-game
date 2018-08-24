@@ -8,7 +8,6 @@
 // http://www.anpera.net/forum/viewforum.php?f=27
 
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/villagenav.php';
 
 tlschema('hof');

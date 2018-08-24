@@ -4,7 +4,6 @@
 // Moved into core by JT Traub
 
 require_once 'common.php';
-require_once 'lib/http.php';
 
 check_su_access(SU_EDIT_CREATURES);
 

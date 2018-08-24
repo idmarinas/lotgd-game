@@ -6,7 +6,6 @@
 require_once 'common.php';
 require_once 'lib/forest.php';
 require_once 'lib/fightnav.php';
-require_once 'lib/http.php';
 require_once 'lib/taunt.php';
 require_once 'lib/events.php';
 require_once 'lib/battle/skills.php';

@@ -8,7 +8,6 @@ define('ALLOW_ANONYMOUS', true);
 define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/dump_item.php';
 require_once 'lib/modules.php';
 require_once 'lib/villagenav.php';

@@ -5,7 +5,6 @@
 require_once 'common.php';
 require_once 'lib/showform.php';
 require_once 'lib/datetime.php';
-require_once 'lib/http.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/names.php';
 

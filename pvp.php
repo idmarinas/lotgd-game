@@ -8,7 +8,6 @@ require_once 'lib/fightnav.php';
 require_once 'lib/pvpwarning.php';
 require_once 'lib/pvplist.php';
 require_once 'lib/pvpsupport.php';
-require_once 'lib/http.php';
 require_once 'lib/taunt.php';
 require_once 'lib/villagenav.php';
 

@@ -6,7 +6,6 @@
 
 require_once 'common.php';
 require_once 'lib/commentary.php';
-require_once 'lib/http.php';
 require_once 'lib/superusernav.php';
 
 tlschema('petition');

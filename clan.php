@@ -8,7 +8,6 @@ require_once 'lib/nltoappon.php';
 require_once 'lib/commentary.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/sanitize.php';
-require_once 'lib/http.php';
 require_once 'lib/villagenav.php';
 
 tlschema('clans');

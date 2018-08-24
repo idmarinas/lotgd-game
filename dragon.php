@@ -6,7 +6,6 @@
 require_once 'common.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/titles.php';
-require_once 'lib/http.php';
 require_once 'lib/buffs.php';
 require_once 'lib/taunt.php';
 require_once 'lib/names.php';

@@ -7,7 +7,6 @@ ob_start();
 set_error_handler('payment_error');
 define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
-require_once 'lib/http.php';
 
 tlschema('payment');
 

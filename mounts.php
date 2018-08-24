@@ -4,7 +4,6 @@
 // mail ready
 // translator ready
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/showform.php';
 
 $op = httpget('op');

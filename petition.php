@@ -9,7 +9,6 @@ define('OVERRIDE_FORCED_NAV', true);
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/output_array.php';
-require_once 'lib/http.php';
 require_once 'lib/stripslashes_deep.php';
 
 $op = httpget('op');
