@@ -104,10 +104,6 @@ if (! isset($session['skipmodules']) || ! $session['skipmodules'])
 
     rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 
-    if (! is_array($session['moduleoperations']))
-    {
-        $session['moduleoperations'] = [];
-    }
     reset($session['moduleoperations']);
     while (list($modulename, $val) = each($session['moduleoperations']))
     {
