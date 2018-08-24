@@ -15,3 +15,11 @@ else
 }
 savesetting('installer_version', $logd_version);
 $noinstallnavs = true;
+
+//-- Delete stage of installer
+$session['stagecompleted'] = 0;
+//-- Delete data base info
+unset($session['dbinfo']);
+
+//-- Cache is cleared to force update
+datacache_empty();
