@@ -163,14 +163,14 @@ function convertgametime($intime, $debug = false)
     // the GMT offset:
     $epoch = strtotime(getsetting('game_epoch', gmdate('Y-m-d 00:00:00 O', strtotime('-30 days'))));
     $now = strtotime(gmdate('Y-m-d H:i:s O', $intime));
-    $logd_timestamp = ($now - $epoch) * getsetting('daysperday', 4);
+    $logd_timestamp = round(($now - $epoch) * getsetting('daysperday', 4), 0);
 
     if ($debug)
     {
         echo 'Game Timestamp: '.$logd_timestamp.', which makes it '.gmdate('Y-m-d H:i:s', $logd_timestamp).'<br>';
     }
 
-    return $logd_timestamp;
+    return (int) $logd_timestamp;
 }
 
 function gametimedetails()
