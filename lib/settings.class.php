@@ -32,27 +32,9 @@ class settings
         $settingname = (string) $settingname;
         $settings = $this->getAllSettings();
 
-		if (! isset($settings[$settingname]) && $value)
-		{ //value needs to be elimintated - once we have our defaults in lib/data/settings.php ... this can GO
-            $sql = DB::insert($this->tablename);
-            $sql->values([
-                'setting' => $settingname,
-                'value' => $value
-            ]);
-		}
-		elseif (isset($settings[$settingname]))
-		{
-            $sql = DB::update($this->tablename);
-            $sql->set(['value' => $value])
-                ->where->equalTo('setting', $settingname)
-            ;
-		}
-		else
-		{
-			return false;
-        }
-
-        DB::execute($sql);
+        //-- To ensure that a new record is inserted or the existing one is updated
+        $sql = sprintf("REPLACE INTO `%s` (`setting`, `value`) VALUES (%s, %s)", $this->tablename, DB::quoteValue($settingname), DB::quoteValue($value));
+        DB::query($sql);
 
         $settings[$settingname] = $value;
 
