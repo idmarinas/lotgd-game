@@ -101,9 +101,14 @@ rawoutput("</div>");
 if (! isset($session['skipmodules']) || ! $session['skipmodules'])
 {
     output("`n`2Now I'll install and configure your modules.");
-    reset($session['moduleoperations']);
+
     rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
 
+    if (! is_array($session['moduleoperations']))
+    {
+        $session['moduleoperations'] = [];
+    }
+    reset($session['moduleoperations']);
     while (list($modulename, $val) = each($session['moduleoperations']))
     {
         $ops = explode(',', $val);
@@ -170,14 +175,14 @@ if (! isset($session['skipmodules']) || ! $session['skipmodules'])
     }
     rawoutput('</div>');
 }
-output("`n`2Finally, I'll clean up old data.`n");
-rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-reset($descriptors);
+// output("`n`2Finally, I'll clean up old data.`n");
+// rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
+// reset($descriptors);
 
-while (list($tablename, $descriptor) = each($descriptors))
-{
-    output("`3Cleaning up `#$tablename`3...`n");
-    synctable($tablename, $descriptor);
-}
-rawoutput('</div>');
+// while (list($tablename, $descriptor) = each($descriptors))
+// {
+//     output("`3Cleaning up `#$tablename`3...`n");
+//     synctable($tablename, $descriptor);
+// }
+// rawoutput('</div>');
 output("`n`n`^You're ready for the next step.");
