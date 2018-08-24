@@ -65,16 +65,16 @@ Class DB
 	{
 		try
 		{
-			$connection = self::getAdapter()->getDriver()->getConnection();
+			//-- Execute a simple query for test connection
+			$metadata = new Zend\Db\Metadata\Metadata(self::getAdapter());
+			$metadata->getTableNames();
 
-			$connection->connect();
-			$result = $connection->isConnected();
-			$connection->disconnect();
-
-			return $result;
+			return true;
 		}
-		catch(\Exception $e)
+		catch(\Exception $ex)
 		{
+			self::$errorInfo = $ex->getMessage();
+
 			return false;
 		}
 	}
@@ -314,7 +314,7 @@ Class DB
 		require_once 'lib/nltoappon.php';
 		require_once 'lib/show_backtrace.php';
 
-		$file = file_get_contents('error_docs/template.html');
+		$file = file_get_contents('error_docs/dberror.html');
 		$message = full_sanitize(str_replace("`n", "<br />", nltoappon($message)));
 		if ($showtrace) $message .= show_backtrace();
 
@@ -348,6 +348,8 @@ Class DB
      */
 	public static function select($table = false, $prefixed = true)
 	{
+		if (defined('DB_NODB') && ! defined('LINK')) return false;
+
         if ($table && $prefixed) return self::sql()->select(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else return self::sql()->select();
@@ -363,6 +365,8 @@ Class DB
      */
 	public static function insert($table = false, $prefixed = true)
 	{
+		if (defined('DB_NODB') && ! defined('LINK')) return false;
+
 		if ($table && $prefixed) return self::sql()->insert(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else return self::sql()->insert();
@@ -378,6 +382,8 @@ Class DB
      */
 	public static function update($table = false, $prefixed = true)
 	{
+		if (defined('DB_NODB') && ! defined('LINK')) return false;
+
 		if ($table && $prefixed) return self::sql()->update(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else return self::sql()->update();
@@ -393,6 +399,8 @@ Class DB
      */
 	public static function delete($table = false, $prefixed = true)
 	{
+		if (defined('DB_NODB') && ! defined('LINK')) return false;
+
 		if ($table && $prefixed) return self::sql()->delete(DB::prefix($table));
         elseif ($table && ! $prefixed) return self::sql()->select($table);
 		else return self::sql()->delete();
