@@ -728,13 +728,7 @@ function get_all_tables()
             'creaturecategory' => [
                 'name' => 'creaturecategory', 'type' => 'varchar(50)', 'null' => '1'
             ],
-            'creatureimage' => [
-                'name' => 'creatureimage', 'type' => 'varchar(250)', 'null' => '1'
-            ],
-            'creaturedescription' => [
-                'name' => 'creaturedescription', 'type' => 'text', 'null' => '1'
-            ],
-            'creaturelevel' => [
+            'creaturelevel' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creaturelevel', 'type' => 'int(11)', 'null' => '1'
             ],
             'creatureweapon' => [
@@ -746,22 +740,22 @@ function get_all_tables()
             'creaturewin' => [
                 'name' => 'creaturewin', 'type' => 'varchar(120)', 'null' => '1'
             ],
-            'creaturegold' => [
+            'creaturegold' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creaturegold', 'type' => 'int(11)', 'null' => '1'
             ],
-            'creatureexp' => [
+            'creatureexp' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creatureexp', 'type' => 'int(11)', 'null' => '1'
             ],
-            'oldcreatureexp' => [
+            'oldcreatureexp' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'oldcreatureexp', 'type' => 'int(11)', 'null' => '1'
-            ], //this field is obsolete and will be dropped by the installer
-            'creaturehealth' => [
+            ],
+            'creaturehealth' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creaturehealth', 'type' => 'int(11)', 'null' => '1'
             ],
-            'creatureattack' => [
+            'creatureattack' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creatureattack', 'type' => 'int(11)', 'null' => '1'
             ],
-            'creaturedefense' => [
+            'creaturedefense' => [//this field is obsolete and will be dropped by the installer
                 'name' => 'creaturedefense', 'type' => 'int(11)', 'null' => '1'
             ],
             'creatureaiscript' => [
