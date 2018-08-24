@@ -26,6 +26,8 @@ class settings
      */
 	public function saveSetting($settingname, $value)
     {
+        if (defined('DB_NODB') && ! defined('LINK')) return false;
+
         $key = $this->getCacheKey();
         $settingname = (string) $settingname;
         $settings = $this->getAllSettings();
@@ -69,6 +71,8 @@ class settings
      */
 	public function loadSettings()
 	{
+        if (defined('DB_NODB') && ! defined('LINK')) return false;
+
         $key = $this->getCacheKey();
         $this->settings = datacache($key, 86400, true);
 
