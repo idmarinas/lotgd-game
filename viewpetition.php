@@ -319,13 +319,16 @@ elseif ('view' == $op)
     addnav('User Ops');
 
     addnav('Petition Ops');
-    reset($statuses);
 
-    while (list($key, $val) = each($statuses))
+    //-- Corregir
+    if (count($statuses))
     {
-        $plain = full_sanitize($val);
-        addnav(['%s?Mark %s', substr($plain, 0, 1), $val],
-                "viewpetition.php?setstat=$key&id=$id");
+        reset($statuses);
+        foreach($statuses as $key => $val)
+        {
+            $plain = full_sanitize($val);
+            addnav(['%s?Mark %s', substr($plain, 0, 1), $val], "viewpetition.php?setstat=$key&id=$id");
+        }
     }
 
     $sql = 'SELECT '.DB::prefix('accounts').'.name,'.DB::prefix('accounts').'.login,'.DB::prefix('accounts').'.acctid,'.'author,date,closedate,status,petitionid,ip,body,pageinfo,'.'accts.name AS closer FROM '.DB::prefix('petitions').' LEFT JOIN '.DB::prefix('accounts ').'ON '.DB::prefix('accounts').'.acctid=author LEFT JOIN '.DB::prefix('accounts').' AS accts ON accts.acctid='."closeuserid WHERE petitionid='$id' ORDER BY date ASC";
@@ -335,8 +338,7 @@ elseif ('view' == $op)
 
     if (isset($row['login']))
     {
-        addnav('View User Biography', 'bio.php?char='.$row['acctid']
-                        .'&ret=%2Fviewpetition.php%3Fop%3Dview%26id='.$id);
+        addnav('View User Biography', 'bio.php?char='.$row['acctid'] .'&ret=%2Fviewpetition.php%3Fop%3Dview%26id='.$id);
     }
 
     if ($row['acctid'] > 0 && $session['user']['superuser'] & SU_EDIT_USERS)
