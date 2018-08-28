@@ -14,11 +14,12 @@ $ret = httpget('ret');
 
 if ('' == $ret)
 {
-    $return = '/list.php';
+    $return = 'list.php';
 }
 else
 {
     $return = cmd_sanitize($ret);
+    $return = trim($return, '/');
 }
 
 $char = httpget('char');
@@ -181,7 +182,6 @@ if ($target = DB::fetch_assoc($result))
 
     if ('' == $ret)
     {
-        $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
         addnav('Return to the warrior list', $return);
@@ -189,7 +189,6 @@ if ($target = DB::fetch_assoc($result))
     }
     else
     {
-        $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
 
@@ -215,7 +214,6 @@ else
 
     if ('' == $ret)
     {
-        $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
         addnav('Return to the warrior list', $return);
@@ -223,7 +221,6 @@ else
     }
     else
     {
-        $return = substr($return, strrpos($return, '/') + 1);
         tlschema('nav');
         addnav('Return');
 
