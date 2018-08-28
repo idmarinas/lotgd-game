@@ -65,5 +65,7 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
     //-- Update max creature health
     $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
 
+    lotgd_show_debug_creature($badguy);
+
     return $badguy;
 }
