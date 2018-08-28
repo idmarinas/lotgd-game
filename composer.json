@@ -1,29 +1,34 @@
 {
     "name": "idmarinas/lotgd",
-    "description": "",
+    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.0.",
     "config": {
-        "process-timeout": 5000
+        "process-timeout": 5000,
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": "^7.0",
-        "zendframework/zend-db": "^2.9.2",
-        "zendframework/zend-paginator": "^2.8.1",
-        "zendframework/zend-filter": "^2.7.2",
-        "zendframework/zend-mail": "^2.10.0",
-        "zendframework/zend-math": "^3.1.1",
+        "ezyang/htmlpurifier": "^4.9.3",
+        "hellogerard/jobby": "^3.3.2",
+        "jaxon-php/jaxon-core": "^2.2.0",
+        "jaxon-php/jaxon-dialogs": "~1.2.2",
+        "paragonie/random_compat": "^2.0.0",
+        "twig/twig": "^2.5",
         "zendframework/zend-cache": "^2.7.2",
-        "zendframework/zend-serializer": "^2.9.0",
+        "zendframework/zend-code": "^3.1.0",
+        "zendframework/zend-db": "^2.9.2",
         "zendframework/zend-debug": "^2.5.1",
         "zendframework/zend-escaper": "^2.5.2",
-        "zendframework/zend-code": "^3.1.0",
+        "zendframework/zend-filter": "^2.7.2",
+        "zendframework/zend-http": "^2.8",
         "zendframework/zend-i18n": "^2.7.4",
-        "twig/twig": "^1.35.0",
-        "hellogerard/jobby" : "^3.3.2",
-        "ezyang/htmlpurifier": "^4.9.3",
-        "paragonie/random_compat": "^2.0.0",
-        "jaxon-php/jaxon-core": "^2.2.0",
-        "jaxon-php/jaxon-dialogs": "~1.2.2"
+        "zendframework/zend-mail": "^2.10.0",
+        "zendframework/zend-math": "^3.1.1",
+        "zendframework/zend-paginator": "^2.8.1",
+        "zendframework/zend-serializer": "^2.9.0"
+    },
+    "require-dev": {
+        "psecio/iniscan": "^3.6"
     }
 }
