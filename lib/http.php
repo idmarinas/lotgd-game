@@ -3,41 +3,108 @@
 // translator ready
 // addnews ready
 // mail ready
-function httpget($var)
+
+use Zend\Http\PhpEnvironment\Request;
+
+global $lotgd_request;
+
+$lotgd_request = new Request();
+
+/**
+ * Return single get parameter.
+ *
+ * @param string $name
+ * @param mixed  $default
+ *
+ * @return mixed
+ */
+function httpget($name, $default = null)
 {
-    return isset($_GET[$var]) ? $_GET[$var] : false;
+    global $lotgd_request;
+
+    return $lotgd_request->getQuery($name, $default);
 }
 
-function httpallget()
+/**
+ * Return all get parameters.
+ *
+ * @param bool $array For get or not data in array format
+ *
+ * @return array|object
+ */
+function httpallget($array = true)
 {
-    return $_GET;
-}
+    global $lotgd_request;
 
-function httpset($var, $val, $force = false)
-{
-    if (isset($_GET[$var]) || $force)
+    if ($array)
     {
-        $_GET[$var] = $val;
+        return $lotgd_request->getQuery()->toArray();
+    }
+    else
+    {
+        return $lotgd_request->getQuery();
     }
 }
 
-function httppost($var)
+/**
+ * Set single get parameter.
+ *
+ * @param string $var
+ * @param mixed  $val
+ * @param bool   $force
+ */
+function httpset($var, $val, $force = false)
 {
-    return isset($_POST[$var]) ? $_POST[$var] : false;
+    global $lotgd_request;
+
+    $get = $lotgd_request->getQuery();
+
+    if ($get->offsetExists($var) || $force)
+    {
+        $get->set($var, $val);
+    }
+}
+
+/**
+ * Return single post parameter.
+ *
+ * @param string $name
+ * @param mixed  $default
+ *
+ * @return mixed
+ */
+function httppost($name, $default = null)
+{
+    global $lotgd_request;
+
+    return $lotgd_request->getPost($name, $default);
 }
 
 function httppostisset($var)
 {
-    return (bool) isset($_POST[$var]) ? 1 : 0;
+    global $lotgd_request;
+
+    return $lotgd_request->getPost()->offsetExists($var);
 }
 
+/**
+ * Set single post parameter.
+ *
+ * @param string $var
+ * @param mixed  $val
+ * @param bool   $sub
+ */
 function httppostset($var, $val, $sub = false)
 {
+    global $lotgd_request;
+
+    $post = $lotgd_request->getPost();
+
     if (false === $sub)
     {
-        if (isset($_POST[$var]))
+        if ($post->offsetExists($var))
         {
-            $_POST[$var] = $val;
+            $post->set($var, $val);
         }
     }
     else
@@ -45,24 +112,42 @@ function httppostset($var, $val, $sub = false)
         if (isset($_POST[$var]) && isset($_POST[$var][$sub]))
         {
             $_POST[$var][$sub] = $val;
+
+            $lotgd_request->setPost($_POST);
         }
     }
 }
 
-function httpallpost()
+/**
+ * Get all post data.
+ *
+ * @param bool $array For get or not data in array format
+ *
+ * @return array|object
+ */
+function httpallpost($array = true)
 {
-    return $_POST;
+    global $lotgd_request;
+
+    if ($array)
+    {
+        return $lotgd_request->getPost()->toArray();
+    }
+    else
+    {
+        return $lotgd_request->getPost();
+    }
 }
 
 function postparse($verify = false, $subval = false)
 {
     if ($subval)
     {
-        $var = $_POST[$subval];
+        $var = httppost($subval);
     }
     else
     {
-        $var = $_POST;
+        $var = httpallpost();
     }
 
     reset($var);
