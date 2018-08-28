@@ -77,25 +77,13 @@ function lotgd_transform_creature(array $badguy, $debug = true)
         $dk = get_player_dragonkillmod();
     }
 
-    if (! isset($badguy['creaturespeed']))
-    {
-        $badguy['creaturespeed'] = 2.5;
-    }
+    $badguy = array_merge($badguy, lotgd_generate_creature_levels($badguy['creaturelevel']));
 
-    if (! isset($badguy['creatureexp']))
-    {
-        $badguy['creatureexp'] = 0;
-    }
-
-    if (! isset($badguy['physicalresistance']))
-    {
-        $badguy['physicalresistance'] = 0;
-    }
-
-    if (! isset($badguy['creaturegold']))
-    {
-        $badguy['creaturegold'] = 0;
-    }
+    $badguy['playerdragonkills'] = $dk;
+    $badguy['creaturespeed'] = $badguy['creaturespeed'] ?? 2.5;
+    $badguy['creatureexp'] = $badguy['creatureexp'] ?? 0;
+    $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
+    $badguy['creaturegold'] = $badguy['creaturegold'] ?? 0;
 
     $creatureattr = get_creature_stats($dk);
 
@@ -150,19 +138,59 @@ function lotgd_transform_creature(array $badguy, $debug = true)
         return $badguy;
     }
 
-    debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
-    debug("DEBUG: $dk modification points total for attributes.");
-    debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
-    debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
-    debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
-    debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
-    debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
-    debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
-    debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
-    debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
-    debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
+    lotgd_show_debug_creature($badguy);
 
     return $badguy;
+}
+
+/**
+ * Search for creature in data base.
+ *
+ * @param int       $multi
+ * @param int       $targetlevel
+ * @param int       $mintargetlevel
+ * @param bool      $packofmonsters For diferent or same creatures
+ * @param bool|null $forest         TRUE for creature of forest, FALSE for graveyard and NULL for none
+ *
+ * @return array
+ */
+function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, $forest = true): array
+{
+    $limit = ($multi > 1 ? (false === $packofmonsters ? $multi : 1) : 1);
+
+    $select = DB::select('creatures');
+    $select
+        ->limit($limit)
+        ->order(DB::expression('RAND('.e_rand().')'))
+    ;
+
+    if (true === $forest)
+    {
+        $select->where->equalTo('forest', 1);
+    }
+    elseif (false === $forest)
+    {
+        $select->where->equalTo('graveyard', 1);
+    }
+
+    //-- Select creatures of diferent categories
+    if (getsetting('multicategory', 0) && $limit > 1)
+    {
+        $select->group('creaturecategory');
+    }
+
+    $result = DB::execute($select);
+
+    $creatures = DB::toArray($result);
+    if (count($creatures))
+    {
+        foreach($creatures as $key => $creature)
+        {
+            $creatures[$key]['creaturelevel'] = mt_rand($mintargetlevel, $targetlevel);
+        }
+    }
+
+    return $creatures;
 }
 
 function get_creature_stats($dk = 0)
@@ -226,4 +254,19 @@ function get_creature_speed($attrs)
     $speed = (1 / 2) * $attrs['dex'] + (1 / 4) * $attrs['int'] + (5 / 2);
 
     return max($speed, 0);
+}
+
+function lotgd_show_debug_creature(array $badguy)
+{
+    debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
+    debug("DEBUG: {$badguy['dk']} modification points total for attributes.");
+    debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
+    debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
+    debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
+    debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
+    debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
+    debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
+    debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
+    debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
+    debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
 }
