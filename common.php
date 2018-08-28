@@ -35,7 +35,7 @@ $copyright = 'Game Design and Code: Copyright &copy; 2002-2005, Eric Stevens & J
 // license must be used on the distribution of any works derived from this
 // work.  This license text may not be removed nor altered in any way.
 // Please see the file LICENSE for a full textual description of the license.
-$license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
+// $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank'><img clear='right' align='left' alt='Creative Commons License' border='0' src='images/somerights20.gif' /></a>\nThis work is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/2.0/' target='_blank'>Creative Commons License</a>.<br />\n<!-- /Creative Commons License -->\n<!--\n  <rdf:RDF xmlns='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n	<Work rdf:about=''>\n	  <dc:type rdf:resource='http://purl.org/dc/dcmitype/Interactive' />\n	  <license rdf:resource='http://creativecommons.org/licenses/by-nc-sa/2.0/' />\n	</Work>\n	<License rdf:about='http://creativecommons.org/licenses/by-nc-sa/2.0/'>\n	  <permits rdf:resource='http://web.resource.org/cc/Reproduction' />\n	  <permits rdf:resource='http://web.resource.org/cc/Distribution' />\n	  <requires rdf:resource='http://web.resource.org/cc/Notice' />\n	  <requires rdf:resource='http://web.resource.org/cc/Attribution' />\n	  <prohibits rdf:resource='http://web.resource.org/cc/CommercialUse' />\n	  <permits rdf:resource='http://web.resource.org/cc/DerivativeWorks' />\n	  <requires rdf:resource='http://web.resource.org/cc/ShareAlike' />\n	</License>\n  </rdf:RDF>\n-->\n";
 
 // **** NOTICE *****
 // This series of scripts (collectively known as Legend of the Green Dragon
@@ -52,12 +52,11 @@ session_start();
 
 $session = &$_SESSION['session'];
 
-$session['user']['gentime'] = isset($session['user']['gentime']) ? $session['user']['gentime'] : 0;
-$session['user']['gentimecount'] = isset($session['user']['gentimecount']) ? $session['user']['gentimecount'] : 0;
-$session['user']['gensize'] = isset($session['user']['gensize']) ? $session['user']['gensize'] : 0;
-$session['user']['acctid'] = isset($session['user']['acctid']) ? $session['user']['acctid'] : 0;
-
-$session['counter'] = isset($session['counter']) ? $session['counter'] : 0;
+$session['user']['gentime'] = $session['user']['gentime'] ?? 0;
+$session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
+$session['user']['gensize'] = $session['user']['gensize'] ?? 0;
+$session['user']['acctid'] = $session['user']['acctid'] ?? 0;
+$session['counter'] = $session['counter'] ?? 0;
 
 $session['counter']++;
 
@@ -297,10 +296,7 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.g
     // 1.1.1 now should be a good time to get it on with it, added tl-inline
     translator_setup();
 
-    if (! isset($session['message']))
-    {
-        $session['message'] = '';
-    }
+    $session['message'] = $session['message'] ?? '';
     $session['message'] .= translate_inline('`nYour session has expired!`n', 'common');
 }
 $session['lasthit'] = strtotime('now');
@@ -322,19 +318,8 @@ mass_module_prepare([
 // can revert to:
 $revertsession = $session;
 
-if (! isset($session['user']['loggedin']))
-{
-    $session['user']['loggedin'] = false;
-}
-
-if (! $session['user']['loggedin'])
-{
-    $session['loggedin'] = false;
-}
-else
-{
-    $session['loggedin'] = true;
-}
+$session['user']['loggedin'] = (bool) $session['user']['loggedin'] ?? false;
+$session['loggedin'] = $session['user']['loggedin'];
 
 if (true != $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
@@ -387,14 +372,7 @@ else
     $session['user']['alive'] = false;
 }
 
-if (isset($session['user']['bufflist']))
-{
-    $session['bufflist'] = unserialize($session['user']['bufflist']);
-}
-else
-{
-    $session['bufflist'] = [];
-}
+$session['bufflist'] = isset($session['user']['bufflist']) ? unserialize($session['user']['bufflist']) : [];
 
 if (! is_array($session['bufflist']))
 {
@@ -512,10 +490,7 @@ else
     $lc = $l;
 }
 
-if (! isset($session['user']['hashorse']))
-{
-    $session['user']['hashorse'] = 0;
-}
+$session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
 $playermount = getmount($session['user']['hashorse']);
 
 if (isset($session['user']['companions']))
@@ -559,9 +534,9 @@ if (isset($session['user']['clanid']))
     $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='{$session['user']['clanid']}'";
     $result = DB::query_cached($sql, "clandata-{$session['user']['clanid']}", 3600);
 
-    if (DB::num_rows($result) > 0)
+    if ($result->count() > 0)
     {
-        $claninfo = DB::fetch_assoc($result);
+        $claninfo = $result->current();
     }
     else
     {
