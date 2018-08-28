@@ -65,6 +65,8 @@ if ('search' == $op)
 {
     checkday();
 
+    require_once 'lib/forestoutcomes.php';
+
     if ($session['user']['turns'] <= 0)
     {
         output('`$`bYou are too tired to search the forest any longer today.  Perhaps tomorrow you will have more energy.`b`0');
@@ -207,52 +209,26 @@ if ('search' == $op)
                 $multi = 1;
             }
 
-            $multi = max(1, $multi);
-
-            if ($targetlevel < 1)
-            {
-                $targetlevel = 1;
-            }
-
-            if ($mintargetlevel < 1)
-            {
-                $mintargetlevel = 1;
-            }
-
-            if ($mintargetlevel > $targetlevel)
-            {
-                $mintargetlevel = $targetlevel;
-            }
+            $multi = (int) max(1, $multi);
+            $targetlevel = (int) max(1, $targetlevel);
+            $mintargetlevel = (int) max(1, min($mintargetlevel, $targetlevel));
 
             if ($targetlevel > 17)
             {
-                $multi += $targetlevel - 17;
-                $targetlevel = 17;
+                $multi += $targetlevel - 17;//-- More dificult if have more level than 15
+                // $targetlevel = 17; //-- Not avoid level range setting
             }
             debug("Creatures: $multi Targetlevel: $targetlevel Mintargetlevel: $mintargetlevel");
 
-            if ($multi > 1)
-            {
-                $packofmonsters = (bool) (0 == mt_rand(0, 5) && getsetting('allowpackofmonsters', true)); // true or false
-                if (false === $packofmonsters)
-                {
-                    $multicat = (getsetting('multicategory', 0) ? 'GROUP BY creaturecategory' : '');
-                    $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().") LIMIT $multi";
-                }
-                else
-                {
-                    $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().') LIMIT 1';
-                }
-            }
-            else
-            {
-                $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE creaturelevel <= $targetlevel AND creaturelevel >= $mintargetlevel AND forest=1 ORDER BY rand(".e_rand().') LIMIT 1';
-                $packofmonsters = 0;
-            }
-            $result = DB::query($sql);
+            $packofmonsters = (bool) (0 == mt_rand(0, 5) && getsetting('allowpackofmonsters', true)); // true or false
+            $packofmonsters = ($multi > 1) ? $packofmonsters : false;
+
+            $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
+
+            // var_dump($result);
             restore_buff_fields();
 
-            if (0 == DB::num_rows($result))
+            if (0 == count($result))
             {
                 // There is nothing in the database to challenge you, let's
                 // give you a doppleganger.
@@ -265,8 +241,6 @@ if ('search' == $op)
             }
             else
             {
-                require_once 'lib/forestoutcomes.php';
-
                 if (true == $packofmonsters)
                 {
                     $initialbadguy = DB::fetch_assoc($result);
@@ -316,23 +290,11 @@ if ('search' == $op)
                 }
                 else
                 {
-                    while ($badguy = DB::fetch_assoc($result))
+                    foreach ($result as $key => $badguy)
                     {
                         $badguy['playerstarthp'] = $session['user']['hitpoints'];
                         $badguy['diddamage'] = 0;
-                        //decode and test the AI script file in place if any
-                        $aiscriptfile = $badguy['creatureaiscript'].'.php';
-                        //file there, get content and put it into the ai script field.
-                        if (file_exists($aiscriptfile))
-                        {
-                            $badguy['creatureaiscript'] = "require_once '$aiscriptfile';";
-                        }
-                        else
-                        {
-                            $badguy['creatureaiscript'] = '';
-                        }
 
-                        //AI setup
                         $badguy = buffbadguy($badguy);
                         // Okay, they are thrillseeking, let's give them a bit extra
                         // exp and gold.

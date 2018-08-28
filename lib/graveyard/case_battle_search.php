@@ -35,12 +35,11 @@ else
         $session['user']['gravefights']--;
         $level = (int) $session['user']['level'];
         $battle = true;
-        $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE graveyard = '1' and creaturelevel = '$level' ORDER BY rand(".e_rand().') LIMIT 1';
-        $result = DB::query($sql);
+        $result = lotgd_search_creature(1, $level, $level, false, false);
 
-        $badguy = lotgd_transform_creature($result->current());
+        $badguy = lotgd_transform_creature($result[0]);
         $badguy['creaturehealth'] += 50;
-        $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+        $badguy['creaturemaxhealth'] += 50;
 
         // Make graveyard creatures easier.
         $badguy['creatureattack'] *= .7;
