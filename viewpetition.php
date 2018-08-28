@@ -320,7 +320,6 @@ elseif ('view' == $op)
 
     addnav('Petition Ops');
 
-    //-- Corregir
     if (count($statuses))
     {
         reset($statuses);
