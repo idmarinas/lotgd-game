@@ -33,7 +33,9 @@ class Timeout
             return $response;
         }
 
-        $response->dialog->warning($warning);
+        $options =  ['timeOut' => 0, 'extendedTimeOut' => 0]; //-- Prevent from Auto Hiding
+
+        $response->dialog->warning($warning, $options);
 
         return $response;
     }
