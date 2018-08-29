@@ -126,6 +126,13 @@ class LotgdTemplate extends Twig_Environment
                 global $lotgdFormat;
 
                 return $lotgdFormat->relativedate($string);
+            }),
+            //-- Search and replace keywords
+            new Twig_SimpleFilter('sustitute', function ($string)
+            {
+                global $output;
+
+                return $output->sustitute((string) $string);
             })
         ];
     }
