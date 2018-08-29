@@ -143,6 +143,7 @@ class LotgdOutputCollector
         // $args[0]=&$out;
         //apply variables
         $out = &$args[0];
+        $out = $this->sustitute($out);
 
         if (count($args) > 1)
         {
@@ -194,6 +195,26 @@ class LotgdOutputCollector
         call_user_func_array([&$this, 'output_notl'], $args);
     }
 
+    /**
+     * Search and replace keywords
+     *
+     * @param string $out
+     *
+     * @return string
+     */
+    public function sustitute(string $out): string
+    {
+        global $session;
+
+        //-- Sustitute placeholders
+        $sustitute = [
+            '{playername}' => $session['user']['name'],
+            '{playerweapon}' => $session['user']['weapon'],
+            '{playerarmor}' => $session['user']['armor']
+        ];
+
+        return str_replace(array_keys($sustitute), array_values($sustitute), $out);
+    }
     /**
      * Returns the formatted output.
      *
