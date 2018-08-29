@@ -40,7 +40,7 @@ function translate($indata, $namespace = false)
     {
         return $indata;
     }
-    global $session,$translation_table,$translation_namespace;
+    global $session, $translation_table, $translation_namespace;
 
     if (! $namespace)
     {
@@ -57,12 +57,10 @@ function translate($indata, $namespace = false)
 
     if ('notranslate' != $namespace)
     {
-        if (! isset($translation_table[$namespace]) ||
-                ! is_array($translation_table[$namespace]))
+        if (! isset($translation_table[$namespace]) || ! is_array($translation_table[$namespace]))
         {
             //build translation table for this page hit.
-            $translation_table[$namespace] =
-                translate_loadnamespace($namespace, (isset($session['tlanguage']) ? $session['tlanguage'] : false));
+            $translation_table[$namespace] = translate_loadnamespace($namespace, (isset($session['tlanguage']) ? $session['tlanguage'] : false));
         }
     }
 
