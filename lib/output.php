@@ -206,6 +206,12 @@ class LotgdOutputCollector
     {
         global $session;
 
+        //-- This options are only available when user are signed in
+        if (! $session['loggedin'])
+        {
+            return $out;
+        }
+
         //-- Sustitute placeholders
         $sustitute = [
             '{playername}' => $session['user']['name'],
