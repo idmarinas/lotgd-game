@@ -259,7 +259,7 @@ function get_creature_speed($attrs)
 function lotgd_show_debug_creature(array $badguy)
 {
     debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
-    debug("DEBUG: {$badguy['dk']} modification points total for attributes.");
+    debug("DEBUG: {$badguy['playerdragonkills']} modification points total for attributes.");
     debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
     debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
     debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
