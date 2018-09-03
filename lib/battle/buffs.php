@@ -521,16 +521,15 @@ function expire_buffs()
                 {
                     if (is_array($buff['wearoff']))
                     {
-                        $buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg = substitute("`5{$buff['wearoff']}`0`n");
-
-                        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                        $msg = substitute_array("`5{$buff['wearoff']}`0`n");
                     }
                     else
                     {
-                        $msg = substitute_array("`5{$buff['wearoff']}`0`n");
-                        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
+                        $buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
+                        $msg = substitute("`5{$buff['wearoff']}`0`n");
                     }
+
+                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                 }
                 strip_buff($key);
             }
