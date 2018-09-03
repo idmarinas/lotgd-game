@@ -4,17 +4,43 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
-# Version: 2.7.0 **DEV**
+# Version: 2.7.0
 
 ### CHANGES
 
+* **lib/jaxon/class/timeout.class** Add options to prevent from Auto Hiding
 * **lib/lotgdFormat.php** `relativedate($indate)` now translate text before return
-* **lib/nav.php** Create function `add_accesskey()` to generate a keys for navs
+* **lib/nav.php** Created function `add_accesskey()` to generate a keys for navs
+* **lib/http.php** Now use a Class `Zend\Http\PhpEnvironment\Request` store in var `$lotgd_request`. More info in: https://docs.zendframework.com/zend-http/
+* **viewpetition.php** Changed `each` loop for `foreach` loop. `each` are DEPRECATED IN PHP 7.2
+* **IMPORTANT**
+    * *Creatures system*
+        * Creatures in data base now not have:
+            * Level
+            * Health
+            * Gold
+            * Experience
+            * Attack
+            * Defense
+        * The creatures are generated in a dynamic way.
+        * You can still alter a creature using the hook `buffbadguy`
+        * Example of usage are in Forest and Graveyard
+* **lib/graveyard/case_battle_search.php** and **forest.php** It adapts to generate the creature in a dynamic way.
+* **lib/creaturesfunctions.php** It creates function to look for creatures in the database and generate it dynamically.
+* **lib/forestcomes.php** Show a debug of creature when use `buffbadguy`
+* ***IMPORTANT*** Updated Twig to version 2.5. This version is only compatible with PHP >= 7.0
 * **THEME**
     * Some adjustments are made to improve the appearance
 
 ### FEATURES
 
+* **lib/output.php** New system for replacing keywords for their value, using functions `output()` and `output_notl()`
+    * For now can use this keywords:
+        * `{playername}` Replaced by player's name
+        * `{playerweapon}` Replaced by the name of the player's weapon
+        * `{playerarmor}` Replaced by the name of the player's armor
+* **Templates**
+    * New filter `sustitute` Does the same as the `output()` and `output_notl()` functions
 * **Javascript**
     * Modal, added option for add classes to content
 
@@ -24,13 +50,21 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### REMOVES
 
-* Nothing
+* **PHP** <= 5.6 is not supported now by LOTGD IDMarinas Edition
 
 ### FIXES
 
+* **Installer script** Fixed error where it was not possible to install in a clean installation
+* **bio.php** It's about fixing the bug where you didn't create the URL correctly
 * **battle.php** Fixed error that didn't show the name of the creature
 * **forest.php** Fixed error that doppelganger was not generated correctly
 * **lib/serverfunctions.class.php** Fixed Error where in some cases the variable `$onlinecount` was not obtained
+* **lib/dbwrapper.php**
+    * The database connection check is improved.
+    * In SQL functions the query is omitted if a active connection to the database is not successful
+* **lib/battle/buffs.php** Fixed error with incorrect use of functions
+* **THEME**
+    * **jade/template/battle/combathealthbar.twig** Fixed error for that show a string "array" when name is array (Battle in Graveyard)
 * Replaced obsolete function
     * **lib/template.class.php**
     * **lib/bans/case_.php**
@@ -44,6 +78,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 * **IMPORTANT** PHP <= 5.6 is not supported now by LOTGD IDMarinas Edition
 * **Transfer repository** Transfer repository from Bitbucket to GitHub
+* **composer.json** Updated/Deleted dependencies
 * **package.json** Updated/Deleted dependencies
 * **gulp** Some gulp tasks have been updated
 * **Optimization** Most of `.php` files have had a slight code optimization using CS Fixer.
@@ -168,7 +203,9 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### REMOVES
 
-* Nothing
+* **errorhandling.php** Removed file
+    * `magic_quotes_gpc` is DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0
+* **http.php** It is removed from numerous files, **common.php** already includes this file
 
 ### FIXES
 
