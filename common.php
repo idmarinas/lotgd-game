@@ -46,7 +46,7 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 // work.  This license text may not be removed nor altered in any way.
 // Please see the file LICENSE for a full textual description of the license.
 
-$logd_version = '2.6.0 IDMarinas Edition';
+$logd_version = '2.7.0 IDMarinas Edition';
 
 session_start();
 
