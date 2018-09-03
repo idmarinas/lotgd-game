@@ -802,6 +802,7 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
 
     // Needs to be here because scrolling through the commentary pages, entering a bio, then scrolling again forward
     // then re-entering another bio will lead to $com being smaller than 0 and this will lead to an SQL error later on.
+    $session['lastcom'] = $session['lastcom'] ?? 0;
     if (false !== httpget('comscroll') && (int) $session['lastcom'] == $com + 1)
     {
         $cid = (int) $session['lastcommentid'];
