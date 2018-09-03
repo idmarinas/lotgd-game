@@ -4,11 +4,11 @@
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC)](http://gulpjs.com/)
 
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
-[![Installation](https://img.shields.io/badge/install-fail-red.svg?maxAge=2592000)]()
+[![Installation](https://img.shields.io/badge/install-sucess-green.svg?maxAge=2592000)]()
 [![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)]()
 [![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)]()
 
-[![Dev](https://img.shields.io/badge/dev-2.7.0-orange.svg)]()
+[![Dev](https://img.shields.io/badge/dev-3.0.0-orange.svg)]()
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
 
 # About
@@ -18,7 +18,7 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 ## IDMarinas Edition
 
-Version of the IDMarinas Edition: ***2.7.0-dev***
+Version of the IDMarinas Edition: ***2.7.0***
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 
