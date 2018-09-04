@@ -259,6 +259,8 @@ elseif ('edit' == $op || 'add' == $op)
             'creatureimage' => 'Creature image',
             'creaturedescription' => 'Creature description,textarea',
             'creatureweapon' => 'Weapon',
+            'creaturegoldmultiplier' => 'Gold multiplier,float',
+            'It is a multiplier for the gold that the creature carries; between 0 and 99.99,note',
             'creaturewin' => 'Win Message',
             'creaturelose' => 'Death Message',
             'forest' => 'Creature is in forest?,bool',
