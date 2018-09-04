@@ -23,6 +23,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             * Attack
             * Defense
         * The creatures are generated in a dynamic way.
+        * Add option `creaturegoldmultiplier` to modify the amount of gold the creature is carrying
         * You can still alter a creature using the hook `buffbadguy`
         * Example of usage are in Forest and Graveyard
 * **lib/graveyard/case_battle_search.php** and **forest.php** It adapts to generate the creature in a dynamic way.
