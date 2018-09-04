@@ -12,7 +12,8 @@ class LotgdTemplate extends Twig_Environment
         //-- Merge options
         $default = [
             'cache' => 'cache/templates',
-            'autoescape' => false
+            'autoescape' => false,
+            // 'auto_reload' => true
         ];
         $options = array_merge($default, $options);
 
