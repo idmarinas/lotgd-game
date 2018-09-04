@@ -318,7 +318,7 @@ mass_module_prepare([
 // can revert to:
 $revertsession = $session;
 
-$session['user']['loggedin'] = (bool) $session['user']['loggedin'] ?? false;
+$session['user']['loggedin'] = (bool) ($session['user']['loggedin'] ?? false);
 $session['loggedin'] = $session['user']['loggedin'];
 
 if (true != $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
