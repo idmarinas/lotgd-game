@@ -718,23 +718,18 @@ $newenemies = autosettarget($newenemies);
 
 $badguy = modulehook('endofpage', $badguy);
 
-if ($session['user']['hitpoints'] > 0 && count($newenemies) > 0 && ('fight' == $op || 'run' == $op))
+if ($enemycounter > 0)
 {
-    $data = prepare_data_battlebars($newenemies);
-    $lotgdBattleContent['battlebars']['end'] = [
+    modulehook('battle', $enemies);
+    $lotgdBattleContent['enemies'] = $enemies;
+
+    $data = prepare_data_battlebars($enemies);
+    $lotgdBattleContent['battlebars']['start'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
         'enemies' => $data['enemies']
     ];
     unset($data);
-}
-else
-{
-    $lotgdBattleContent['battlebars']['end'] = [
-        'player' => [],
-        'companions' => [],
-        'enemies' => []
-    ];
 }
 
 if ($session['user']['hitpoints'] <= 0)
@@ -745,39 +740,23 @@ if ($session['user']['hitpoints'] <= 0)
 }
 
 //-- Any data for personalize results
-if (! isset($battleDefeatWhere))
-{
-    $battleDefeatWhere = 'in the forest';
-} //-- Use for create a news, set to false for not create news
-if (! isset($battleInForest))
-{
-    $battleInForest = true;
-} //-- Indicating if is a Forest (true) or Graveyard (false)
-if (! isset($battleDefeatLostGold))
-{
-    $battleDefeatLostGold = true;
-} //-- Indicating if lost gold when lost in battle
-if (! isset($battleDefeatLostExp))
-{
-    $battleDefeatLostExp = true;
-} //-- Indicating if lost exp when lost in battle
-if (! isset($battleDefeatCanDie))
-{
-    $battleDefeatCanDie = true;
-} //-- Indicating if die when lost in battle
-if (! isset($battleDenyFlawless))
-{
-    $battleDenyFlawless = false;
-} //-- Deny flawlees for perfect battle
-if (! isset($battleShowResult))
-{
-    $battleShowResult = true;
-} //-- Show result of battle. If no need any extra modification of result no need change this
-if (! isset($battleProcessVictoryDefeat))
-{
-    $battleProcessVictoryDefeat = true;
-} //-- Process victory or defeat functions when the battle is over
+$battleDefeatWhere = $battleDefeatWhere ?? 'in the forest';
+//-- Use for create a news, set to false for not create news
+$battleInForest = $battleInForest ?? true;
+//-- Indicating if is a Forest (true) or Graveyard (false)
+$battleDefeatLostGold = $battleDefeatLostGold ?? true;
+//-- Indicating if lost gold when lost in battle
+$battleDefeatLostExp = $battleDefeatLostExp ?? true;
+//-- Indicating if lost exp when lost in battle
+$battleDefeatCanDie = $battleDefeatCanDie ?? true;
+//-- Indicating if die when lost in battle
+$battleDenyFlawless = $battleDenyFlawless ?? false;
+//-- Deny flawlees for perfect battle
+$battleShowResult = $battleShowResult ?? true;
+//-- Show result of battle. If no need any extra modification of result no need change this
+$battleProcessVictoryDefeat = $battleProcessVictoryDefeat ?? true;
 
+//-- Process victory or defeat functions when the battle is over
 if ($victory || $defeat)
 {
     $options['endbattle'] = 1;
