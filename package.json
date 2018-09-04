@@ -61,7 +61,7 @@
         "file-loader": "^1.1.11",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "gulp": "^3.9.1",
-        "gulp-autoprefixer": "^5.0.0",
+        "gulp-autoprefixer": "^6.0.0",
         "gulp-clean-css": "^3.10.0",
         "gulp-clone": "^1.1.4",
         "gulp-composer": "^0.4.5",
@@ -93,7 +93,7 @@
         "sass-loader": "^7.1.0",
         "url-loader": "^1.1.1",
         "vinyl-paths": "^2.1.0",
-        "webpack": "^4.17.1",
+        "webpack": "^4.17.2",
         "webpack-bundle-analyzer": "^2.13.1",
         "webpack-merge": "^4.1.4"
     },
