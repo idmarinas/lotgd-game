@@ -37,6 +37,7 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
 * This version may not be compatible with most of the modules available for version 1.1.* DragonPrime Edition
     * It may be necessary to adapt the modules to work in *IDMarinas Edition*
 	* In *IDMarinas Edition 3.0.0*, most modules will not work
+* From the 2.7.0 IDMarinas Edition you need PHP 7.0 or better
 
 # Other
 * Components used in IDMarinas Edition
