@@ -55,6 +55,8 @@ page_footer();
 
 function clanform()
 {
+    global $lotgd_tpl;
+
     $data = [
         'clanname' => htmlentities(stripslashes(httppost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
         'clanshort' => htmlentities(stripslashes(httppost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
