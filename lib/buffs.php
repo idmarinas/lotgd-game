@@ -109,27 +109,9 @@ function calculate_buff_fields()
 
                 $session['user']['superuser'] = OLDSU;
 
-                //Avoiding PHP bug 27646
-                // (http://bugs.php.net/bug.php?id=27646&edit=2) -
-                // Unserialize doesn't recognize NAN, -INF and INF
-                if (function_exists('is_nan'))
+                if (is_numeric($val) && (is_nan($val) || is_infinite($val)))
                 {
-                    if (is_numeric($val) &&
-                            (is_nan($val) || is_infinite($val)))
-                    {
-                        $val = $value;
-                    }
-                }
-                else
-                {
-                    // We have an older version of PHP, so, let's try
-                    // something else.
-                    $l = strtolower("$val");
-
-                    if (('nan' == substr($l, 3)) || ('inf' == substr($l, -3)))
-                    {
-                        $val = $value;
-                    }
+                    $val = $value;
                 }
 
                 if (! isset($output))
