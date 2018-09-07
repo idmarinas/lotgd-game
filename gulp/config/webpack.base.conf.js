@@ -31,7 +31,8 @@ module.exports = {
                 enforce: 'pre',
                 include: [path.resolve(__dirname, '../../assets')],
                 options: {
-                    formatter: require('eslint-friendly-formatter')
+                    formatter: require('eslint-friendly-formatter'),
+                    fix: true
                 }
             },
             {
