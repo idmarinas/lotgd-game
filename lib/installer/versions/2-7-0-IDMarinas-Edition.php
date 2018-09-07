@@ -11,5 +11,8 @@ return [
         DROP creaturegold,
         DROP creaturehealth;",
     "ALTER TABLE `$creaturesTable`
-	    ADD COLUMN `creaturegoldmultiplier` DECIMAL(4,2) UNSIGNED NOT NULL DEFAULT '1.00' AFTER `creatureweapon`"
+	    ADD COLUMN `creaturegoldbonus` DECIMAL(4,2) UNSIGNED NOT NULL DEFAULT '1.00' AFTER `creatureweapon`,
+	    ADD COLUMN `creatureattackbonus` DECIMAL(4,2) UNSIGNED NOT NULL DEFAULT '1.00' AFTER `creaturegoldbonus`,
+	    ADD COLUMN `creaturedefensebonus` DECIMAL(4,2) UNSIGNED NOT NULL DEFAULT '1.00' AFTER `creatureattackbonus`
+	    ADD COLUMN `creaturehealthbonus` DECIMAL(4,2) UNSIGNED NOT NULL DEFAULT '1.00' AFTER `creaturedefensebonus`"
 ];

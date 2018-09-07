@@ -83,7 +83,12 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     $badguy['creaturespeed'] = $badguy['creaturespeed'] ?? 2.5;
     $badguy['creatureexp'] = $badguy['creatureexp'] ?? 0;
     $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
-    $badguy['creaturegold'] = round($badguy['creaturegold'] * $badguy['creaturegoldmultiplier']);
+
+    //-- Apply multipliers
+    $badguy['creaturegold'] = round($badguy['creaturegold'] * $badguy['creaturegoldbonus']);
+    $badguy['creatureattack'] = $badguy['creatureattack'] * $badguy['creatureattackbonus'];
+    $badguy['creaturedefense'] = $badguy['creaturedefense'] * $badguy['creaturedefensebonus'];
+    $badguy['creaturehealth'] = round($badguy['creaturehealth'] * $badguy['creaturehealthbonus']);
 
     $creatureattr = get_creature_stats($dk);
 
