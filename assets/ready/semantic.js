@@ -23,6 +23,6 @@ define([
             position: 'bottom left'
         })
         jQuery('.ui.tooltip').popup()
-        jQuery('.ui.progress').progress({precision: 10})
+        jQuery('.ui.progress').progress({ precision: 10 })
     })
 })

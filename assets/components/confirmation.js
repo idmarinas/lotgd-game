@@ -23,7 +23,7 @@ define([
 
         element = jQuery(element)
         var options = element.data('options')
-        options = jQuery.extend({type: 'question', showCancelButton: true}, options)
+        options = jQuery.extend({ type: 'question', showCancelButton: true }, options)
 
         var success = function ()
         {

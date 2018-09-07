@@ -22,7 +22,7 @@ define([
     Lotgd.modalForm = function (message, title, id, options)
     {
         options = options || {}
-        options = jQuery.extend({size: '', denyButton: true}, options)
+        options = jQuery.extend({ size: '', denyButton: true }, options)
 
         let modalId = ''
         if (id) { modalId = id }
