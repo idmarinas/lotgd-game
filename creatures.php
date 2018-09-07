@@ -263,7 +263,7 @@ elseif ('edit' == $op || 'add' == $op)
             'It is a multiplier that affects the basis of the attribute for the gold that the creature carries; between 0 and 99.99,note',
             'creaturedefensebonus' => 'Defense multiplier,float',
             'It is a multiplier that affects the basis of the attribute for the defense that the creature has; between 0 and 99.99,note',
-            'creatureattackdbonus' => 'Attack multiplier,float',
+            'creatureattackbonus' => 'Attack multiplier,float',
             'It is a multiplier that affects the basis of the attribute for the attack that the creature has; between 0 and 99.99,note',
             'creaturehealthbonus' => 'Health multiplier,float',
             'It is a multiplier that affects the basis of the attribute for the health that the creature has; between 0 and 99.99,note',
