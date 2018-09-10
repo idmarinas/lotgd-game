@@ -12,7 +12,7 @@
         "ezyang/htmlpurifier": "^4.9",
         "hellogerard/jobby": "^3.3",
         "jaxon-php/jaxon-core": "^2.2",
-        "jaxon-php/jaxon-dialogs": "~1.2",
+        "jaxon-php/jaxon-dialogs": "^1.2",
         "twig/twig": "^2.5",
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.1",
