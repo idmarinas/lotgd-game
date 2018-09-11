@@ -473,7 +473,7 @@ function report_companion_move($companion, $activate = 'fight')
                     $hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints']);
                     $mycompanion['hitpoints'] += $hptoheal;
                     $companion['used'] = true;
-                    $msg = isset($companion['healcompanionmsg']) ? $companion['healcompanionmsg'] : '';
+                    $msg = $companion['healcompanionmsg'] ?? '';
 
                     if ('' == $msg)
                     {
@@ -519,7 +519,7 @@ function report_companion_move($companion, $activate = 'fight')
                                 $hptoheal = min($companion['abilities']['heal'], $mycompanion['maxhitpoints'] - $mycompanion['hitpoints']);
                                 $mycompanion['hitpoints'] += $hptoheal;
                                 $companion['used'] = true;
-                                $msg = $companion['healcompanionmsg'];
+                                $msg = $companion['healcompanionmsg'] ?? '';
 
                                 if ('' == $msg)
                                 {
