@@ -117,8 +117,6 @@ class LotgdTheme extends LotgdTemplate
         {
 			$themename = $_COOKIE['template'] ?? '';
 
-			debug($themename, true);
-
             if ('' == $themename || ! file_exists("themes/$themename"))
             {
                 $themename = getsetting('defaultskin', 'jade.html');
@@ -128,8 +126,6 @@ class LotgdTheme extends LotgdTemplate
             {
                 $themename = 'jade.html';
             }
-            debug($themename, true);
-
 
             //-- Search for a valid theme in directory
             if (! file_exists("themes/$themename"))
