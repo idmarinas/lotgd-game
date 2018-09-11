@@ -69,6 +69,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * In SQL functions the query is omitted if a active connection to the database is not successful
 * **lib/commentary.php** Fixed possible error with undefined index
 * **lib/battle/buffs.php** Fixed error with incorrect use of functions
+* **lib/battle/extended.php** Fixed undefined index error
 * **THEME**
     * **jade/template/battle/combathealthbar.twig** Fixed error for that show a string "array" when name is array (Battle in Graveyard)
 * Replaced obsolete function
