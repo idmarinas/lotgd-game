@@ -67,6 +67,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **lib/dbwrapper.php**
     * The database connection check is improved.
     * In SQL functions the query is omitted if a active connection to the database is not successful
+    * Fixed error of declaration, now use `Throwable` that is de correct declaration in PHP 7.0
 * **lib/commentary.php** Fixed possible error with undefined index
 * **lib/battle/buffs.php** Fixed error with incorrect use of functions
 * **lib/battle/extended.php** Fixed undefined index error
