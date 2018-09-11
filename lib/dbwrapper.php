@@ -70,7 +70,7 @@ Class DB
 
 			return true;
 		}
-		catch(\Exception $ex)
+		catch(\Throwable $ex)
 		{
 			self::$errorInfo = $ex->getMessage();
 
@@ -137,7 +137,7 @@ Class DB
 
 			$result = $statement->execute();
 		}
-		catch(\Exception $ex)
+		catch(\Throwable $ex)
 		{
 			self::$errorInfo = $ex->getMessage();
 
@@ -274,7 +274,7 @@ Class DB
 
 			return true;
 		}
-		catch(Exception $e)
+		catch(\Throwable $e)
 		{
 			return false;
 		}
