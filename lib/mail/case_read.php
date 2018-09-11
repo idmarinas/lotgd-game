@@ -30,7 +30,6 @@ if (DB::num_rows($result) > 0)
         if (false !== $row_subject)
         {
             $row['subject'] = call_user_func_array('sprintf_translate', $row_subject);
-            debug('traducido', true);
         }
         // No translation for body if it's not an array
         $row_body = @unserialize($row['body']);
