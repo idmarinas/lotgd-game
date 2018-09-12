@@ -207,7 +207,7 @@ class LotgdOutputCollector
         global $session;
 
         //-- This options are only available when user are signed in
-        if (! $session['loggedin'])
+        if (! ($session['loggedin'] ?? false))
         {
             return $out;
         }
