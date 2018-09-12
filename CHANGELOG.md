@@ -63,6 +63,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **battle.php** Fixed error that didn't show the name of the creature
 * **forest.php** Fixed error that doppelganger was not generated correctly
 * **clan.php** Fixed error with undefined variable
+    * Fixed error in template **page/clan/new.twig**
 * **lib/serverfunctions.class.php** Fixed Error where in some cases the variable `$onlinecount` was not obtained
 * **lib/dbwrapper.php**
     * The database connection check is improved.
