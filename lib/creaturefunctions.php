@@ -77,7 +77,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
         $dk = get_player_dragonkillmod();
     }
 
-    $badguy = array_merge($badguy, lotgd_generate_creature_levels($badguy['creaturelevel']));
+    $badguy = array_merge(lotgd_generate_creature_levels($badguy['creaturelevel']), $badguy);
 
     $badguy['playerdragonkills'] = $dk;
     $badguy['creaturespeed'] = $badguy['creaturespeed'] ?? 2.5;
@@ -85,10 +85,10 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
 
     //-- Apply multipliers
-    $badguy['creaturegold'] = round($badguy['creaturegold'] * $badguy['creaturegoldbonus']);
-    $badguy['creatureattack'] = $badguy['creatureattack'] * $badguy['creatureattackbonus'];
-    $badguy['creaturedefense'] = $badguy['creaturedefense'] * $badguy['creaturedefensebonus'];
-    $badguy['creaturehealth'] = round($badguy['creaturehealth'] * $badguy['creaturehealthbonus']);
+    $badguy['creaturegold'] = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
+    $badguy['creatureattack'] = $badguy['creatureattack'] * ($badguy['creatureattackbonus'] ?? 1);
+    $badguy['creaturedefense'] = $badguy['creaturedefense'] * ($badguy['creaturedefensebonus'] ?? 1);
+    $badguy['creaturehealth'] = round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
 
     $creatureattr = get_creature_stats($dk);
 
