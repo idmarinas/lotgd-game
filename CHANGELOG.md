@@ -33,7 +33,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **lib/creaturesfunctions.php** It creates function to look for creatures in the database and generate it dynamically.
 * **lib/forestcomes.php** Show a debug of creature when use `buffbadguy`
 * ***IMPORTANT*** Updated Twig to version 2.5. This version is only compatible with PHP >= 7.0
+* **JavaScript**
+    * Update Sweetalert2 from version 6.11.5 to 7.26.29
+        * Files in `assets` folder are updated
 * **THEME**
+    * Updated Semantic UI version 2.3.3 => 2.4.0
     * Some adjustments are made to improve the appearance
 
 ### FEATURES
@@ -91,8 +95,6 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **package.json** Updated/Deleted dependencies
 * **gulp** Some gulp tasks have been updated
 * **Optimization** Most of `.php` files have had a slight code optimization using CS Fixer.
-* ***TODO***
-    * Create a system for replacing keywords by their value for templates. Ahem: {playername} would be replaced by the player's name.
 
 
 # Version: 2.6.0
