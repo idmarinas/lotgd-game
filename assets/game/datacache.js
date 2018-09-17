@@ -25,11 +25,11 @@ define([
                 text: 'Want optimize data cache of game?',
                 showLoaderOnConfirm: true,
                 showCancelButton: true,
-                preConfirm: function ()
+                preConfirm: () =>
                 {
                     return jQuery.get('ajaxdatacache.php?op=optimize')
                 }
-            }).then(function () {}, function () {})
+            })
         }
         else if (type === 'clearexpire')
         {
@@ -40,11 +40,11 @@ define([
                 text: 'Want clear expire data cache of game?',
                 showLoaderOnConfirm: true,
                 showCancelButton: true,
-                preConfirm: function ()
+                preConfirm: () =>
                 {
                     return jQuery.get('ajaxdatacache.php?op=clearexpire')
                 }
-            }).then(function () {}, function () {})
+            })
         }
         else if (type === 'clearall')
         {
@@ -59,7 +59,7 @@ define([
                 {
                     return jQuery.get('ajaxdatacache.php?op=clearall')
                 }
-            }).then(function () {}, function () {})
+            })
         }
         else if (type === 'clearbyprefix')
         {
@@ -75,7 +75,7 @@ define([
                 {
                     return jQuery.get('ajaxdatacache.php?op=clearbyprefix&prefix=' + prefix)
                 }
-            }).then(function () {}, function () {})
+            })
         }
     }
 

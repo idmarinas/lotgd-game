@@ -25,20 +25,21 @@ define([
         var options = element.data('options')
         options = jQuery.extend({ type: 'question', showCancelButton: true }, options)
 
-        var success = function ()
+        Lotgd.swal(options).then(result =>
         {
-            if (form === false)
+            if (result.value)
             {
-                window.location = element.href
+                if (form === false)
+                {
+                    window.location = element.href
 
-                return window.location
+                    return window.location
+                }
+                else
+                {
+                    element.parent('form').submit()
+                }
             }
-            else
-            {
-                element.parent('form').submit()
-            }
-        }
-
-        Lotgd.swal(options).then(success, function () {})
+        })
     }
 })

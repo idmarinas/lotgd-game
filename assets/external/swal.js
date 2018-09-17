@@ -58,13 +58,14 @@ define([
             onOpen: null,
             onClose: null
         },
+        swalCustom: {},
 
         //-- Change configuration of swal
         configChange (options)
         {
             options = options || {}
 
-            swal.setDefaults(jQuery.extend({}, this.defaultParams, options))
+            this.swalCustom = swal.mixin(jQuery.extend({}, this.defaultParams, options))
         },
 
         //-- Restart default custom configuration
@@ -76,7 +77,7 @@ define([
         //-- Get instance
         get ()
         {
-            return swal
+            return this.swalCustom
         },
 
         //-- Init swall with custom configuration
