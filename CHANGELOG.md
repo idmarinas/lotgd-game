@@ -38,6 +38,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * Files in `assets` folder are updated
 * **THEME**
     * Updated Semantic UI version 2.3.3 => 2.4.0
+    * Now all `.overrides` files of Jade Theme import default `.overrides` file (When need)
     * Some adjustments are made to improve the appearance
 
 ### FEATURES
