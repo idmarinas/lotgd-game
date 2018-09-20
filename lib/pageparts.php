@@ -420,6 +420,7 @@ function page_footer($saveuser = true)
     $html['scripthead'] .= $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
+    $html['user'] = $session['user'] ?? [];
     $html['content'] .= $output->get_output();
     $browser_output = $lotgd_tpl->renderTheme($html);
     $session['user']['gensize'] += strlen($browser_output);
@@ -429,8 +430,6 @@ function page_footer($saveuser = true)
     {
         saveuser();
     }
-
-    $html['user'] = $session['user'] ?? [];
 
     unset($session['output']);
     //this somehow allows some frames to load before the user's navs say it can
@@ -503,14 +502,14 @@ function popup_footer()
     //-- Finalize output
     $lotgdJaxon->processRequest();
 
+
+    $html['user'] = $session['user'] ?? [];
     $html['csshead'] = $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
     $html['content'] .= $output->get_output();
     saveuser();
-
-    $html['user'] = $session['user'] ?? [];
 
     session_write_close();
     echo $lotgd_tpl->renderThemeTemplate('popup.twig', $html);
