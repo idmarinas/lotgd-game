@@ -385,7 +385,7 @@ function buildnavs()
 {
     global $navbysection, $navschema, $session, $navnocollapse;
 
-    $builtnavs = '';
+    $builtnavs = [];
 
     foreach ($navbysection as $key => $val)
     {
