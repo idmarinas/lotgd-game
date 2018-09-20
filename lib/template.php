@@ -47,8 +47,6 @@ class LotgdTheme extends LotgdTemplate
 
         $folder = $this->themefolder.'/templates';
 
-        $context = array_merge($context, ['user' => $session['user']]);
-
         return $this->render($folder.'/'.$name, $context);
     }
 

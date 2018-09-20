@@ -74,6 +74,8 @@ function page_header()
     $html['title'] = $title;
     $html['content'] .= tlbutton_pop();
 
+    $html['userPre'] = $session['user'] ?? [];
+
     if (getsetting('debug', 0))
     {
         $session['debugstart'] = microtime();
@@ -428,6 +430,8 @@ function page_footer($saveuser = true)
         saveuser();
     }
 
+    $html['user'] = $session['user'] ?? [];
+
     unset($session['output']);
     //this somehow allows some frames to load before the user's navs say it can
     session_write_close();
@@ -458,6 +462,8 @@ function popup_header($title = 'Legend of the Green Dragon')
 
     $title = call_user_func_array('sprintf_translate', $arguments);
     $title = sanitize(holidayize($title, 'title'));
+
+    $html['userPre'] = $session['user'] ?? [];
 
     //-- Add to html
     $html['title'] = $title;
@@ -503,6 +509,9 @@ function popup_footer()
 
     $html['content'] .= $output->get_output();
     saveuser();
+
+    $html['user'] = $session['user'] ?? [];
+
     session_write_close();
     echo $lotgd_tpl->renderThemeTemplate('popup.twig', $html);
 
