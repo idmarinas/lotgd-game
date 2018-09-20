@@ -40,6 +40,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * Updated Semantic UI version 2.3.3 => 2.4.0
     * Now all `.overrides` files of Jade Theme import default `.overrides` file (When need)
     * Some adjustments are made to improve the appearance
+    * Now you can access in templates to:
+        * Var `userPre` that have array data of user, in `page_header()` or `popup_header()`
+        * Var `user` that have array data of user, in `page_footer()` or `popup_footer()`
+            * EXAMPLE: `{{ user.name }}` or `{{ userPre.gold }}`
 
 ### FEATURES
 
