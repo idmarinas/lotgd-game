@@ -30,15 +30,17 @@ if ('' == $op)
     $translation = translate_inline('Translation:');
     $saveclose = htmlentities(translate_inline('Save & Close'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
     $savenotclose = htmlentities(translate_inline('Save No Close'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
-    rawoutput("<form action='translatortool.php?op=save' method='POST'>");
-    rawoutput("$namespace <input name='uri' value=\"".htmlentities(stripslashes($uri), ENT_COMPAT, getsetting('charset', 'UTF-8')).'" readonly><br/>');
-    rawoutput("$texta<br>");
-    rawoutput("<textarea name='text' cols='60' rows='5' readonly>".htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea><br/>');
-    rawoutput("$translation<br>");
-    rawoutput("<textarea name='trans' cols='60' rows='5'>".htmlentities(stripslashes($trans), ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea><br/>');
-    rawoutput("<input type='submit' value=\"$saveclose\" class='button'>");
-    rawoutput("<input type='submit' value=\"$savenotclose\" class='button' name='savenotclose'>");
+
+    rawoutput("<form action='translatortool.php?op=save' method='POST' class='ui form'>");
+    rawoutput("<div class='field'><label>$namespace</label> <input name='uri' value=\"".htmlentities(stripslashes($uri), ENT_COMPAT, getsetting('charset', 'UTF-8')).'" readonly></div>');
+    rawoutput("<div class='field'><label>$texta</label><br>");
+    rawoutput("<textarea name='text' cols='60' rows='5' readonly>".htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea></div>');
+    rawoutput("<div class='field'><label>$translation</label><br>");
+    rawoutput("<textarea name='trans' cols='60' rows='5'>".htmlentities(stripslashes($trans), ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea></div><div class="field">');
+    // rawoutput("<input type='submit' value=\"$saveclose\" class='ui button'>");
+    rawoutput("<input type='submit' value=\"$savenotclose\" class='ui button' name='savenotclose'></div>");
     rawoutput('</form>');
+
     popup_footer();
 }
 elseif ('save' == $op)

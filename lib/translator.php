@@ -286,11 +286,11 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
                 require_once 'lib/sanitize.php';
                 $uri = cmd_sanitize($namespace);
                 $uri = comscroll_sanitize($uri);
-                $link = 'translatortool.php?u='.
-                    rawurlencode($uri).'&t='.rawurlencode($indata);
-                $link = "<a href='$link' target='_blank' onClick=\"".
-                    popup($link).";return false;\" class='t".
-                    ($hot ? 'hot' : '')."'>T</a>";
+                $link = 'translatortool.php?u='.rawurlencode($uri).'&t='.rawurlencode($indata);
+                $link = sprintf('<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
+                    $link,
+                    ($hot ? 'hot' : '')
+                );
             }
             array_push($translatorbuttons, $link);
         }
