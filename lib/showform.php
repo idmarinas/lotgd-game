@@ -455,16 +455,14 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			return "<textarea class='input' name='$keyout'>".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."</textarea>";
 
 		case 'int':
-			if (array_key_exists($key, $row)) { (int) $out = $row[$key]; }
-            else $out = 0;
+            $out = $row[$key] ?? 0;
 
 			return "<input type='number' name='$keyout' value=\"".HTMLEntities($out, ENT_COMPAT, getsetting("charset", "UTF-8"))."\">";
 
         case 'float':
-            $text = '';
-            if (isset($row[$key])) { $text = $row[$key]; }
+            $text = $row[$key] ?? '';
 
-            return "<input type='number' name='$keyout' value=\"".htmlentities($row[$key], ENT_COMPAT, getsetting("charset", "UTF-8"))."\" step='any'>";
+            return "<input type='number' name='$keyout' value=\"".htmlentities($text, ENT_COMPAT, getsetting("charset", "UTF-8"))."\" step='any'>";
 
 		case 'string':
 			$len = 50;
