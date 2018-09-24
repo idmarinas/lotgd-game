@@ -54,6 +54,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * `{playerarmor}` Replaced by the name of the player's armor
 * **Templates**
     * New filter `sustitute` Does the same as the `output()` and `output_notl()` functions
+    * All templates can access to `user` and `session` data (`session` data not have `user` data)
 * **Javascript**
     * Modal, added option for add classes to content
 
