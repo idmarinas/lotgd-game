@@ -973,7 +973,7 @@ function charstats()
  *
  * @return string The formatted mail link
  */
-function maillink()
+function maillink(): string
 {
     global $session;
 
@@ -981,8 +981,11 @@ function maillink()
     $result = DB::query_cached($sql, "mail-{$session['user']['acctid']}", 86400);
     $row = DB::fetch_assoc($result);
     DB::free_result($result);
-    $row['seencount'] = (int) isset($row['seencount']) ? $row['seencount'] : 0;
-    $row['notseen'] = (int) isset($row['notseen']) ? $row['notseen'] : 0;
+    $row['seencount'] = (int) ($row['seencount'] ?? 0);
+    $row['notseen'] = (int) ($row['notseen'] ?? 0);
+
+    $session['mail']['seencount'] = $row['seencount'];
+    $session['mail']['notseen'] = $row['notseen'];
 
     $text = sprintf(translate_inline('Ye Olde Mail: %s new, %s old', 'common'), $row['notseen'], $row['seencount']);
     if ($row['notseen'] > 0)
