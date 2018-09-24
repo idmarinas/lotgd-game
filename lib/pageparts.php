@@ -345,7 +345,7 @@ function page_footer($saveuser = true)
     }
 
     //output petition count
-    $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';;
+    $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
@@ -421,6 +421,9 @@ function page_footer($saveuser = true)
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
     $html['user'] = $session['user'] ?? [];
+    $html['session'] = $session ?? [];
+    unset($html['session']['user']);
+
     $html['content'] .= $output->get_output();
     $browser_output = $lotgd_tpl->renderTheme($html);
     $session['user']['gensize'] += strlen($browser_output);
@@ -503,6 +506,9 @@ function popup_footer()
     $lotgdJaxon->processRequest();
 
     $html['user'] = $session['user'] ?? [];
+    $html['session'] = $session ?? [];
+    unset($html['session']['user']);
+
     $html['csshead'] = $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
