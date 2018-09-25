@@ -314,27 +314,36 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 			reset($info);
 			next($info);
 			next($info);
-			list($k,$disablemask)=each($info);
+			list($k, $disablemask) = each($info);
+			$disablemask = trim($disablemask);
 			$input = "<input type='hidden' name='$keyout"."[0]' value='1'>";
-			while (list($k, $v) = each($info))
-			{
-				if ('title' != $v)
-				{
-					$input .= "<div class='ui toggle checkbox'><input type='checkbox' name='$keyout"."[$v]'"
-						.(isset($row[$key]) && (int)$row[$key] & (int)$v?" checked":"")
-						.($disablemask & (int)$v?"":" disabled")
-						." value='1'> ";
-					list($k,$v)=each($info);
-					if (! isset($pretrans) || !$pretrans) $v = translate_inline($v);
-					$input .= sprintf("<label>%s</label></div><br>", $v);
-				}
-				else
-				{
-					list($k,$v)=each($info);
-					if (! isset($pretrans) || !$pretrans) $v = translate_inline($v);
-					$input .= sprintf("%s<br>", $v);
-				}
-			}
+
+            while (list($k, $v) = each($info))
+            {
+                if ('title' != $v)
+                {
+                    $input .= "<div class='ui toggle checkbox'><input type='checkbox' name='$keyout"."[$v]'"
+                                    .(isset($row[$key]) && (int) $row[$key] & (int) $v ? ' checked' : '')
+                                    .($disablemask & (int) $v ? '' : ' disabled')." value='1'> ";
+                    list($k, $v) = each($info);
+
+                    if (! isset($pretrans) || ! $pretrans)
+                    {
+                        $v = translate_inline($v);
+                    }
+                    $input .= sprintf('<label>%s</label></div><br>', $v);
+                }
+                else
+                {
+                    list($k, $v) = each($info);
+
+                    if (! isset($pretrans) || ! $pretrans)
+                    {
+                        $v = translate_inline($v);
+                    }
+                    $input .= sprintf('%s<br>', $v);
+                }
+            }
 
 			return '<div class="right floated">'.$input.'</div>';
 		break;
