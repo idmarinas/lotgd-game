@@ -724,7 +724,7 @@ if ($enemycounter > 0)
     $lotgdBattleContent['enemies'] = $enemies;
 
     $data = prepare_data_battlebars($enemies);
-    $lotgdBattleContent['battlebars']['start'] = [
+    $lotgdBattleContent['battlebars']['end'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
         'enemies' => $data['enemies']
