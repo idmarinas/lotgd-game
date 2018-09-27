@@ -6,6 +6,7 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PHP56Migration' => true,
         '@PHP70Migration' => true,
+        '@PHP71Migration' => true,
         '@PSR2' => true,
         '@Symfony' => true,
         'blank_line_after_opening_tag' => true,
