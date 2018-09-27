@@ -43,11 +43,19 @@ class LotgdTheme extends LotgdTemplate
      */
     public function renderThemeTemplate($name, $context)
     {
-        global $session;
+        global $html, $session;
 
         $folder = $this->themefolder.'/templates';
 
-        return $this->render($folder.'/'.$name, $context);
+        $userPre = $html['userPre'] ?? [];
+        $user = $session['user'] ?? [];
+        unset($user['password']);
+        $sesion = $session ?? [];
+        unset($user['user']);
+
+        $context = array_merge(['userPre' => $userPre, 'user' => $user, 'session' => $sesion], $context);
+
+        return $this->render("{$folder}/{$name}", $context);
     }
 
     /**
