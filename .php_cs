@@ -40,7 +40,6 @@ return PhpCsFixer\Config::create()
         ],
         'single_import_per_statement' => false,
         'no_leading_import_slash' => true,
-        'single_line_after_imports' => false,
         'trailing_comma_in_multiline_array' => false,
         'line_ending' => true
     ])
