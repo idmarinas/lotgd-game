@@ -19,10 +19,7 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-if (! isset($session['loggedin']))
-{
-    $session['loggedin'] = false;
-}
+$session['loggedin'] = $session['loggedin'] ?? false;
 
 if ($session['loggedin'])
 {
