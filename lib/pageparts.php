@@ -75,6 +75,7 @@ function page_header()
     $html['content'] .= tlbutton_pop();
 
     $html['userPre'] = $session['user'] ?? [];
+    unset($html['userPre']['password']);
 
     if (getsetting('debug', 0))
     {
@@ -420,9 +421,9 @@ function page_footer($saveuser = true)
     $html['scripthead'] .= $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
-    $html['user'] = $session['user'] ?? [];
+    $html['userPost'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
-    unset($html['session']['user']);
+    unset($html['session']['user'], $html['user']['password']);
 
     $html['content'] .= $output->get_output();
     $browser_output = $lotgd_tpl->renderTheme($html);
@@ -466,6 +467,7 @@ function popup_header($title = 'Legend of the Green Dragon')
     $title = sanitize(holidayize($title, 'title'));
 
     $html['userPre'] = $session['user'] ?? [];
+    unset($html['userPre']['password']);
 
     //-- Add to html
     $html['title'] = $title;
@@ -505,9 +507,9 @@ function popup_footer()
     //-- Finalize output
     $lotgdJaxon->processRequest();
 
-    $html['user'] = $session['user'] ?? [];
+    $html['userPost'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
-    unset($html['session']['user']);
+    unset($html['session']['user'], $html['user']['password']);
 
     $html['csshead'] = $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
