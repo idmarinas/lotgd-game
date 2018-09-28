@@ -271,8 +271,14 @@ function motd_form($id)
 
             if ($doinsert)
             {
-                $sql = 'INSERT INTO '.DB::prefix('motd')." (motdtitle,motdbody,motddate,motdauthor) VALUES (\"$subject\",\"$body\",'".date('Y-m-d H:i:s')."','{$session['user']['acctid']}')";
-                DB::query($sql);
+                $insert = DB::insert('motd');
+                $insert->values([
+                    'motdtitle' => $subject,
+                    'motdbody' => $body,
+                    'motddate' => date('Y-m-d H:i:s'),
+                    'motdauthor' => $session['user']['acctid']
+                ]);
+                DB::execute($insert);
                 invalidatedatacache('motd');
                 invalidatedatacache('lastmotd');
                 invalidatedatacache('motddate');
