@@ -50,12 +50,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * `{playerarmor}` Replaced by the name of the player's armor
 * **Templates**
     * New filter `sustitute` Does the same as the `output()` and `output_notl()` functions
-    * All templates can access to `user` and `session` data (`session` data not have `user` data)
-    * Now you can access in templates to:
-        * Var `userPre` that have array data of user, in `page_header()` or `popup_header()`
-        * Var `user` that have array data of user, in `page_footer()` or `popup_footer()`
-            * EXAMPLE: `{{ user.name }}` or `{{ userPre.gold }}`
-        * Var `session` have array data of session (exclude user data)
+    * Now you can access in templates with:
+        * `renderThemeTemplate()` and `renderTheme()`
+            * Var `userPre` that have array data of user, in `page_header()` or `popup_header()`
+        * Load templates with `renderThemeTemplate()` function:
+            * Var `session` have array data of session (exclude user data) in `page_footer()` or `popup_footer()`
+            * Var `user` that have array data of user, at the time the `renderThemeTemplate()` function is used
+        * Only available in `renderTheme()`
+            * Var `userPost` that have array data of user, in `page_footer()` or `popup_footer()`
 * **Javascript**
     * Modal, added option for add classes to content
 
