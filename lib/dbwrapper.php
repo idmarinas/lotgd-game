@@ -29,6 +29,14 @@ class DB
     private static $sqlString = null;
     private static $sql = null;
 
+    /**
+     * Configure adapter for DB.
+     *
+     * @param array $options
+     * @param bool $force
+     *
+     * @return void
+     */
     public static function setAdapter(array $options, $force = false)
     {
         if (! isset($options['driver']) || '' == $options['driver'])
@@ -64,7 +72,12 @@ class DB
         return self::$adapter;
     }
 
-    public static function connect()
+    /**
+     * Check connection to DB
+     *
+     * @return bool
+     */
+    public static function connect(): bool
     {
         try
         {
@@ -212,7 +225,7 @@ class DB
         }
     }
 
-    public static function num_rows($result)
+    public static function num_rows($result): int
     {
         if (is_array($result))
         {
@@ -228,7 +241,7 @@ class DB
         }
     }
 
-    public static function affected_rows($result = false)
+    public static function affected_rows($result = false): int
     {
         if (false === $result)
         {
