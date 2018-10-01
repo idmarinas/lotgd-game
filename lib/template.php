@@ -170,16 +170,6 @@ class LotgdTheme extends LotgdTemplate
     }
 }
 
-function templatereplace()
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.0.0; and delete in version 3.0.0.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    return;
-}
-
 global $lotgd_tpl, $lotgdTpl;
 
 $lotgdTpl = new LotgdTheme();

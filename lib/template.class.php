@@ -43,33 +43,11 @@ class LotgdTemplate extends Twig_Environment
     {
         return [
             //-- Access to appoencode function in template
-            new Twig_SimpleFilter('appoencode', function ($string)
-            {
-                trigger_error(sprintf(
-                    'Filter %s is obsolete since 2.6.0; and delete in version 3.0.0 please use "%s" instead',
-                    'appoencode',
-                    'colorize'
-                ), E_USER_DEPRECATED);
-
-                return appoencode($string, true);
-            }),
-            //-- Alias for appoencode
             new Twig_SimpleFilter('colorize', function ($string)
             {
                 return appoencode($string, true);
             }),
             //-- Access to color_sanitize function in template
-            new Twig_SimpleFilter('color_sanitize', function ($string)
-            {
-                trigger_error(sprintf(
-                    'Filter %s is obsolete since 2.6.0; and delete in version 3.0.0 please use "%s" instead',
-                    'color_sanitize',
-                    'uncolorize'
-                ), E_USER_DEPRECATED);
-
-                return color_sanitize($string);
-            }),
-            //-- Alias for color_sanitize
             new Twig_SimpleFilter('uncolorize', function ($string)
             {
                 return color_sanitize($string);

@@ -194,17 +194,3 @@ function lotgd_base_url($file = false)
 
     return  $baseUrl;
 }
-
-/**
- * Deprecated.
- */
-function baseUrl($file = false)
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.1.0; and delete in version 3.0.0 please use "%s" instead',
-        __METHOD__,
-        'lotgd_base_url'
-    ), E_USER_DEPRECATED);
-
-    return lotgd_base_url($file);
-}

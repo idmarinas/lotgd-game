@@ -63,18 +63,6 @@ function reltime($date, $short = true)
     return $o;
 }
 
-function relativedate($indate)
-{
-    global $lotgdFormat;
-
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.6.0; and delete in version 3.0.0 please use "$lotgdFormat->relativedate($date)" instead',
-        __FUNCTION__
-    ), E_USER_DEPRECATED);
-
-    return $lotgdFormat->relativedate($indate);
-}
-
 /**
  * Check if is a new day.
  */
@@ -200,19 +188,4 @@ function secondstonextgameday($details = false)
     }
 
     return strtotime("{$details['now']} + {$details['realsecstotomorrow']} seconds");
-}
-
-/**
- * DEPRECATED.
- *
- * @return float
- */
-function getmicrotime()
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.3.0; and delete in version 3.0.0 please use "microtime(true)" instead',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    return microtime(true);
 }

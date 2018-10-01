@@ -8,26 +8,6 @@ require_once 'lib/output.php';
 require_once 'lib/nav.php';
 require_once 'lib/creaturefunctions.php';
 
-function forestvictory($enemies, $denyflawless = false)
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.3.0; and delete in version 3.0.0, now this function is used in "battle.php"',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    return;
-}
-
-function forestdefeat($enemies, $where = 'in the forest')
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 2.3.0; and delete in version 3.0.0, now this function is used in "battle.php"',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    return;
-}
-
 /**
  * Buff creature for optimize to character stats.
  *
