@@ -113,12 +113,6 @@ global $settings;
 require_once 'lib/lotgdFormat.php';
 require_once 'lib/template.php';
 
-//-- Only for upgrade from previous versions
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\FileGenerator;
-
-//-- End - This code delete in version 3.0.0
-
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
@@ -128,63 +122,6 @@ $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 if (file_exists('dbconnect.php'))
 {
     require_once 'dbconnect.php';
-
-    //-- Only for upgrade for previous versions (1.0.0 IDMarinas edition and below)
-    if (! isset($adapter))
-    {
-        $body = '$adapter = ['.PHP_EOL;
-        $body .= '	\'driver\' => \'Pdo_Mysql\','.PHP_EOL;
-        $body .= '	\'hostname\' => \''.$DB_HOST.'\','.PHP_EOL;
-        $body .= '	\'database\' => \''.$DB_NAME.'\','.PHP_EOL;
-        $body .= '	\'charset\' => \'utf8\','.PHP_EOL;
-        $body .= '	\'username\' => \''.$DB_USER.'\','.PHP_EOL;
-        $body .= '	\'password\' => \''.$DB_PASS.'\''.PHP_EOL;
-        $body .= '];'.PHP_EOL.PHP_EOL;
-        $body .= '$DB_PREFIX = \''.$DB_PREFIX.'\';'.PHP_EOL;
-        $body .= '$DB_USEDATACACHE = \''.$DB_USEDATACACHE.'\';'.PHP_EOL;
-        $body .= '$DB_DATACACHEPATH = \''.$DB_DATACACHEPATH.'\';'.PHP_EOL;
-        $body .= '$gz_handler_on = 0;'.PHP_EOL;
-
-        $file = FileGenerator::fromArray([
-            'docblock' => DocBlockGenerator::fromArray([
-                'shortDescription' => 'This file is automatically created by installer.php',
-                'longDescription' => null,
-                'tags' => [
-                    [
-                        'name' => 'create',
-                        'description' => date('M d, Y h:i a'),
-                    ],
-                ],
-            ]),
-            'body' => $body,
-        ]);
-        unset($body);
-
-        $code = $file->generate();
-
-        $result = file_put_contents('dbconnect.php', $code);
-
-        if (false !== $result)
-        {
-            $message = 'Please reload page for apply changes to dbconnect.php.<br>';
-            $message .= 'This new version of game, use a diferent format.';
-
-            die($message);
-        }
-        else
-        {
-            $message = 'Unfortunately, I was not able to write your dbconnect.php file.<br>';
-            $message .= 'You will have to create this file yourself, and upload it to your web server.<br>';
-            $message .= 'The contents of this file should be as follows:<br>';
-            $message .= '<blockquote><pre>'.htmlentities($code, ENT_COMPAT, 'UTF-8').'</pre></blockquote>';
-            $message .= 'Create a new file, past the entire contents from above into it.';
-            $message .= "When you have that done, save the file as 'dbconnect.php' and upload this to the location you have LoGD at.";
-            $message .= 'You can refresh this page to see if you were successful.';
-
-            die($message);
-        }
-    }
-    //-- End - This code delete in version 3.0.0
 
     //-- Settings for Database Adapter
     DB::setAdapter($adapter);
