@@ -358,23 +358,16 @@ function page_footer($saveuser = true)
         {
             $petitions[(int) $row['status']] = $row['c'];
         }
-        $pet = translate_inline('`0`bPetitions:`b');
-        $ued = translate_inline('`0`bUser Editor`b');
-        DB::free_result($result);
-        $administrator = false;
 
-        if ($session['user']['superuser'] & SU_EDIT_USERS)
-        {
-            $administrator = true;
-        }
+        DB::free_result($result);
+
+        $administrator = ($session['user']['superuser'] & SU_EDIT_USERS);
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
 
         $html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('parts/petition.twig', [
             'administrator' => $administrator,
-            'petitioncount' => $p,
-            'petition' => $pet,
-            'ueditor' => $ued
+            'petitioncount' => $p
         ]);
     }
 
