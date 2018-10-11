@@ -58,47 +58,82 @@ elseif ('save' == $op)
 
     if ('' == $trans)
     {
-        $sql = 'DELETE ';
+        $sql = DB::delete('translations');
     }
     else
     {
-        $sql = 'SELECT * ';
+        $sql = DB::select('translations');
     }
-    $sql .= '
-		FROM '.DB::prefix('translations')."
-		WHERE language='".LANGUAGE."'
-			AND intext='$text'
-			AND (uri='$page' OR uri='$uri')";
+    $sql->where->equalTo('language', LANGUAGE)
+        ->equalTo('intext', $text)
+        ->nest()
+        ->equalTo('uri', $page)
+        ->or
+        ->equalTo('uri', $uri)
+        ->unnest()
+    ;
 
     if ($trans > '')
     {
-        $result = DB::query($sql);
+        $result = DB::execute($sql);
         invalidatedatacache('translations-'.$uri.'-'.$language);
 
-        if (0 == DB::num_rows($result))
+        if (0 == $result->count())
         {
-            $sql = 'INSERT INTO '.DB::prefix('translations')." (language,uri,intext,outtext,author,version) VALUES ('".LANGUAGE."','$uri','$text','$trans','{$session['user']['login']}','$logd_version ')";
-            $sql1 = 'DELETE FROM '.DB::prefix('untranslated').
-                " WHERE intext='$text' AND language='".LANGUAGE.
-                "' AND namespace='$url'";
-            DB::query($sql1);
+            $sql = DB::insert('translations');
+            $sql->values([
+                'language' => LANGUAGE,
+                'uri' => $uri,
+                'intext' => $text,
+                'outtext' => $trans,
+                'author' => $session['user']['login'],
+                'version' => $logd_version
+            ]);
+
+            $delete = DB::delete('untranslated');
+            $delete->where->equalTo('intext', $text)
+                ->equalTo('language', LANGUAGE)
+                ->equalTo('namespace', $url)
+            ;
+            DB::execute($delete);
         }
-        elseif (1 == DB::num_rows($result))
+        elseif (1 == $result->count())
         {
-            $row = DB::fetch_assoc($result);
+            $row = $result->current();
             // MySQL is case insensitive so we need to do it here.
             if ($row['intext'] == $text)
             {
-                $sql = 'UPDATE '.DB::prefix('translations')." SET author='{$session['user']['login']}', version='$logd_version', uri='$uri', outtext='$trans' WHERE tid={$row['tid']}";
+                $sql = DB::update('translations');
+                $sql->set([
+                    'author' => $session['user']['login'],
+                    'version' => $logd_version,
+                    'uri' => $uri,
+                    'outtext' => $trans,
+                ])
+                    ->where->equalTo('tid', $row['tid'])
+                ;
             }
             else
             {
-                $sql = 'INSERT INTO '.DB::prefix('translations')." (language,uri,intext,outtext,author,version) VALUES ('".LANGUAGE."','$uri','$text','$trans','{$session['user']['login']}','$logd_version ')";
-                $sql1 = 'DELETE FROM '.DB::prefix('untranslated')." WHERE intext='$text' AND language='".LANGUAGE."' AND namespace='$url'";
-                DB::query($sql1);
+                $sql = DB::insert('translations');
+                $sql->values([
+                    'language' => LANGUAGE,
+                    'uri' => $uri,
+                    'intext' => $text,
+                    'outtext' => $trans,
+                    'author' => $session['user']['login'],
+                    'version' => $logd_version
+                ]);
+
+                $delete = DB::delete('untranslated');
+                $delete->where->equalTo('intext', $text)
+                    ->equalTo('language', LANGUAGE)
+                    ->equalTo('namespace', $url)
+                ;
+                DB::execute($delete);
             }
         }
-        elseif (DB::num_rows($result) > 1)
+        elseif ($result->count() > 1)
         {
             $rows = [];
 
@@ -110,10 +145,18 @@ elseif ('save' == $op)
                     $rows['tid'] = $row['tid'];
                 }
             }
-            $sql = 'UPDATE '.DB::prefix('translations')." SET author='{$session['user']['login']}', version='$logd_version', uri='$page', outtext='$trans' WHERE tid IN (".join(',', $rows).')';
+            $sql = DB::update('translations');
+            $sql->set([
+                'author' => $session['user']['login'],
+                'version' => $logd_version,
+                'uri' => $page,
+                'outtext' => $trans,
+            ])
+                ->where->int('tid', $rows)
+            ;
         }
     }
-    DB::query($sql);
+    DB::execute($sql);
 
     if (httppost('savenotclose') > '')
     {
@@ -124,7 +167,7 @@ elseif ('save' == $op)
     else
     {
         popup_header('Updated');
-        rawoutput("<script language='javascript'>window.close();</script>");
+        rawoutput("<script language='javascript'>$('#modal-translator').modal('hide');</script>");
         popup_footer();
     }
 }
