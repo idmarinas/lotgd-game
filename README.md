@@ -18,7 +18,7 @@ The version **IDMarinas Edition** is based on the version **1.1.2 Dragonprime** 
 
 ## IDMarinas Edition
 
-Version of the IDMarinas Edition: ***2.7.0***
+Version of the IDMarinas Edition: ***3.0.0-dev***
 
 The intention to make a new branch of the Core, is to be able to update certain aspects, which were outdated, such as the script that is used to access the database, while correcting certain errors, and adding new options of customization.
 
@@ -29,7 +29,7 @@ IDMarinas Edition is used in:
 
 
 ## Modules
-You can find modules revised for IDMarinas Edition in [LOTGD - Modules](https://idmarinas@bitbucket.org/idmarinas/lotgd-modules).
+You can find modules revised for IDMarinas Edition in [LOTGD - Modules](https://github.com/idmarinas/lotgd-modules).
 If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can find more modules and you can revised for work in IDMarinas Edition
 
 
