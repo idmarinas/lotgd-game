@@ -244,7 +244,7 @@ elseif ('borrow' == $op)
     rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
     output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, number_format(abs($session['user']['goldinbank']), 0, $point, $sep));
     output('`6"`@How much would you like to borrow `&%s`@?  At your level, you may borrow up to a total of `^%s`@ from the bank.`6"`n`n', $session['user']['name'], $maxborrow);
-    rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$borrow</button></div>");
+    rawoutput("<input type='hidden' name='borrow' value='x'> <div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$borrow</button></div>");
     output('`n(Money will be withdrawn until you have none left, the remainder will be borrowed)');
     rawoutput('</form>');
     rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
