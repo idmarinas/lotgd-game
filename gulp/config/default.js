@@ -31,6 +31,8 @@ module.exports = {
             '!node_modules{,/**}',
             '!bower_components{,/**}',
             '!semantic{,/**}',
+            //-- Ignore because using composer to update all packages
+            '!vendor{,/**}',
             //-- Ignore because then we process files for min in production
             '!resources{,/**}',
             //-- Other files
