@@ -363,7 +363,7 @@ function page_footer($saveuser = true)
 
         $administrator = ($session['user']['superuser'] & SU_EDIT_USERS);
 
-        $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|`i{$petitions[2]}`i";
+        $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
 
         $html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('parts/petition.twig', [
             'administrator' => $administrator,
@@ -518,6 +518,7 @@ function popup_footer()
 }
 
 $charstat_info = [];
+$charstat_info_copy = [];
 $last_charstat_label = '';
 
 /**
@@ -528,6 +529,7 @@ function wipe_charstats()
     global $charstat_info, $last_charstat_label;
 
     $charstat_info = [];
+    $charstat_info_copy = [];
     $last_charstat_label = '';
 }
 
@@ -539,7 +541,7 @@ function wipe_charstats()
  */
 function addcharstat($label, $value = false)
 {
-    global $charstat_info, $last_charstat_label;
+    global $charstat_info, $charstat_info_copy, $last_charstat_label;
 
     if (false === $value)
     {
@@ -558,6 +560,8 @@ function addcharstat($label, $value = false)
         }
         $charstat_info[$last_charstat_label][$label] = $value;
     }
+
+    $charstat_info_copy = $charstat_info;
 }
 
 /**
@@ -584,7 +588,7 @@ function getcharstat($cat, $label)
  */
 function setcharstat($cat, $label, $val)
 {
-    global $charstat_info, $last_charstat_label;
+    global $charstat_info, $charstat_info_copy, $last_charstat_label;
 
     if (! isset($charstat_info[$cat][$label]))
     {
@@ -597,8 +601,11 @@ function setcharstat($cat, $label, $val)
     {
         $charstat_info[$cat][$label] = $val;
     }
+
+    $charstat_info_copy = $charstat_info;
 }
 
+$statbuff = '';
 /**
  * Returns output formatted character stats.
  *
@@ -609,7 +616,7 @@ function setcharstat($cat, $label, $val)
 function getcharstats($buffs)
 {
     //returns output formatted character statistics.
-    global $charstat_info, $lotgd_tpl;
+    global $charstat_info, $charstat_info_copy, $statbuff, $lotgd_tpl;
 
     reset($charstat_info);
     $charstattpl = [];
@@ -885,8 +892,6 @@ function charstats()
 
         if ($u['alive'])
         {
-            // In version IDMarinas not use turns based game
-            // addcharstat("Turns", $u['turns'].check_temp_stat("turns",1));
             addcharstat('PvP', $u['playerfights']);
             addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'`b'));
             addcharstat('Gold', number_format($u['gold'].check_temp_stat('gold', 1), 0, $point, $sep));
