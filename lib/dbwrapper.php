@@ -14,7 +14,6 @@ use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
 require_once 'lib/datacache.php';
-require_once 'settings.php';
 
 $dbinfo = [];
 $dbinfo['queriesthishit'] = 0;
