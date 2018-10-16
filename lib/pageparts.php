@@ -332,7 +332,7 @@ function page_footer($saveuser = true)
     {
         if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
         {
-            $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Timeout.status()", 10000);</script>';
+            $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Core.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Core.Timeout.status()", 10000);</script>';
             $html['mail'] = '<span id="maillink">'.maillink().'</span>';
         }
         else
