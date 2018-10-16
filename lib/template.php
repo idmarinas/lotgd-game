@@ -82,37 +82,6 @@ class LotgdTheme extends LotgdTemplate
     }
 
     /**
-     * Preparece template for use.
-     *
-     * @return array
-     */
-    private function prepareTheme()
-    {
-        global $y, $z, $y2, $z2, $lc, $x;
-
-        $this->themename = $this->getDefaultSkin();
-
-        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themename))
-        {
-            //-- Prepare name folder of theme, base on filename of theme
-            $this->themefolder = pathinfo($this->themename, PATHINFO_FILENAME); //-- Delete extension
-            $filterChain = new FilterChain();
-            $filterChain
-                ->attach(new StringToLower())
-                ->attach(new SeparatorToDash())
-                ->attach(new UnderscoreToDash())
-            ;
-
-            $this->themefolder = $filterChain->filter($this->themefolder);
-        }
-
-        //-- Seem to not have function
-        // $y = 0;
-        // $z = $y2^$z2;
-        // $$z = $lc . $$z . '<br>';
-    }
-
-    /**
      * Get default skin of game.
      *
      * @return string
@@ -121,7 +90,7 @@ class LotgdTheme extends LotgdTemplate
     {
         if (empty($this->defaultSkin))
         {
-			$themename = $_COOKIE['template'] ?? '';
+            $themename = $_COOKIE['template'] ?? '';
 
             if ('' == $themename || ! file_exists("themes/$themename"))
             {
@@ -159,7 +128,7 @@ class LotgdTheme extends LotgdTemplate
             $this->defaultSkin = $themename;
 
             savesetting('defaultskin', $themename);
-		}
+        }
 
         if (! isset($_COOKIE['template']) || '' == $_COOKIE['template'])
         {
@@ -167,6 +136,37 @@ class LotgdTheme extends LotgdTemplate
         }
 
         return $this->defaultSkin;
+    }
+
+    /**
+     * Preparece template for use.
+     *
+     * @return void
+     */
+    private function prepareTheme()
+    {
+        global $y, $z, $y2, $z2, $lc, $x;
+
+        $this->themename = $this->getDefaultSkin();
+
+        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themename))
+        {
+            //-- Prepare name folder of theme, base on filename of theme
+            $this->themefolder = pathinfo($this->themename, PATHINFO_FILENAME); //-- Delete extension
+            $filterChain = new FilterChain();
+            $filterChain
+                ->attach(new StringToLower())
+                ->attach(new SeparatorToDash())
+                ->attach(new UnderscoreToDash())
+            ;
+
+            $this->themefolder = $filterChain->filter($this->themefolder);
+        }
+
+        //-- Seem to not have function
+        // $y = 0;
+        // $z = $y2^$z2;
+        // $$z = $lc . $$z . '<br>';
     }
 }
 
