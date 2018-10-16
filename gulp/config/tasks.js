@@ -1,11 +1,11 @@
 //-- Dependencies
 var release = require('./project/release')
-var gutil = require('gulp-util')
+var env = require('minimist')(process.argv.slice(2))
 
 //-- Options
-var themeOptions = { theme: gutil.env.theme || 'jade' }
-var envOptions = { env: gutil.env.env || 'development' }
-var options = Object.assign(gutil.env, envOptions, themeOptions)
+var themeOptions = { theme: env.theme || 'jade' }
+var envOptions = { env: env.env || 'development' }
+var options = Object.assign(env, envOptions, themeOptions)
 
 module.exports = {
     banner: release.banner,
