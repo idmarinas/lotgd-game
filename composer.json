@@ -1,6 +1,6 @@
 {
     "name": "idmarinas/lotgd",
-    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.0.",
+    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.0",
     "config": {
         "process-timeout": 5000,
         "sort-packages": true
@@ -26,7 +26,8 @@
         "zendframework/zend-mail": "^2.10",
         "zendframework/zend-math": "^3.1",
         "zendframework/zend-paginator": "^2.8",
-        "zendframework/zend-serializer": "^2.9"
+        "zendframework/zend-serializer": "^2.9",
+        "zendframework/zend-servicemanager": "^3.3"
     },
     "require-dev": {
         "psecio/iniscan": "^3.6"
