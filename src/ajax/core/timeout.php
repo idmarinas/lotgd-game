@@ -1,6 +1,6 @@
 <?php
 
-namespace Lotgd\Ajax;
+namespace Lotgd\Ajax\Core;
 
 class Timeout
 {

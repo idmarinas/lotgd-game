@@ -5,7 +5,7 @@ If you just want the functions to be available in a certain module or modules, a
 
 # Example of usage
 ```php
-namespace Global\Ajax;
+namespace Lotgd\Ajax\Local;
 
 class Example
 {
@@ -20,10 +20,11 @@ class Example
 > Output code that generates Jaxon is like this:
 
 ```javascript
-JaxonGlobal = {};
-JaxonGlobal.Ajax = {};
-JaxonGlobal.Ajax.Mail = {};
-JaxonGlobal.Ajax.Mail.exampleMethod = function() {
+JaxonLotgd = {};
+JaxonLotgd.Ajax = {};
+JaxonLotgd.Ajax.Local = {};
+JaxonLotgd.Ajax.Local.Example = {};
+JaxonLotgd.Ajax.Local.Example.exampleMethod = function() {
     return jaxon.request(
         { jxncls: 'Global.Ajax.Mail', jxnmthd: 'exampleMethod' },
         { parameters: arguments }
@@ -34,5 +35,5 @@ JaxonGlobal.Ajax.Mail.exampleMethod = function() {
 
 > To use that PHP function in your JavaScript you can do it with something similar to this:
 ```html
-<button onclick="JaxonGlobal.Ajax.Mail.exampleMethod()">Clicky button</button>
+<button onclick="JaxonLotgd.Ajax.Local.Example.exampleMethod()">Clicky button</button>
 ```

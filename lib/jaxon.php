@@ -24,11 +24,12 @@ $lotgdJaxon->setOptions([
     ]
 ]);
 
-//-- Register all class of Lotgd in dir "lib/jaxon/class"
-$lotgdJaxon->addClassDir(realpath(__DIR__) . '/class', 'Lotgd\\Ajax');
+$lotgdJaxon->useComposerAutoloader();
+
+//-- Register all class of Lotgd in dir "src/ajax/core"
+$lotgdJaxon->addClassDir(realpath(__DIR__) . '/../src/ajax/core', 'Lotgd\\Ajax\\Core\\');
 $lotgdJaxon->registerClasses();
 
 //-- Register all custom class (Available globally)
-//-- Put files here if you need that this custom jaxon ajax are available globally
-$lotgdJaxon->addClassDir(realpath(__DIR__) . '/../../jaxon', 'Global\\Ajax');
+$lotgdJaxon->addClassDir(realpath(__DIR__) . '/../lotgd/ajax', 'Lotgd\\Ajax\\Local\\');
 $lotgdJaxon->registerClasses();
