@@ -4,6 +4,49 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 3.0.0
+
+### CHANGES
+
+* **translatetool.php** It uses the new way of generating queries to the DB (this method avoids problems with some characters when making queries, like for example the simple quotation)
+* **Jaxon** Files for jaxon has moved to new dir
+* **lib/pageparts.php** Updating the JavaScript function name to the new name (Jaxon)
+* **lib/output.php** Now used the Service Manager to generate class that use the output functions
+* **lib/e_rand.php** Some improvements and added comments to functions
+* **THEME**
+    * Updated Semantic UI version 2.4.0 => 2.4.1
+
+### FEATURES
+
+* **lib/pageparts.php** Added variable `$charstat_info_copy` to have original copy of stats of character
+
+### DEPRECATED
+
+* Nothing
+
+### FIXES
+
+* **bank.php** Fixed error by which you could not borrow money
+
+### REMOVES
+
+* **common.php** Code removed for version upgrade previous versions 1.0.0 IDMarinas edition and below
+    * This makes that from the 3.0.0 version it is impossible to update a previous version to the 1.0.0 IDmarinas Edition
+* **settings.php** Removed unused file
+* ***Removed deprecate functions***
+    **lib/datetime.php**
+    **lib/dbwrapper.php**
+    **lib/http.php**
+    **lib/forestoutcomes.php**
+    **lib/showform.php**
+    **lib/template.class.php**
+    **lib/template.php**
+
+### NOTES
+
+* **Optimization** Many files `.php`' have had a slight optimization of code using CS Fixer.
+
+
 # Version: 2.7.0
 
 ### CHANGES
