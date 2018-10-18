@@ -10,72 +10,62 @@ function make_seed()
     return (float) $sec + ((float) $usec * 100000);
 }
 
-function e_rand($min = false, $max = false)
+/**
+ * Alias of mt_rand with some improvements.
+ *
+ * @param int|float $min
+ * @param int|float $max
+ *
+ * @return int
+ */
+function e_rand($min = null, $max = null): int
 {
-    if (false === $min)
+    if (! is_numeric($min))
     {
-        return @mt_rand();
+        return mt_rand();
     }
     $min = round($min);
 
-    if (false === $max)
+    if (! is_numeric($max))
     {
-        return @mt_rand($min);
+        return mt_rand($min);
     }
     $max = round($max);
 
-    if ($min == $max)
+    if ($min > $max)
     {
-        return $min;
-    }
-    //do NOT ask me why the following line can be executed, it makes no sense,
-    // but it *does* get executed.
-    if (0 == $min && 0 == $max)
-    {
-        return 0;
+        return mt_rand($max, $min);
     }
 
-    if ($min < $max)
-    {
-        return @mt_rand($min, $max);
-    }
-    elseif ($min > $max)
-    {
-        return @mt_rand($max, $min);
-    }
+    return mt_rand($min, $max);
 }
 
-function r_rand($min = false, $max = false)
+/**
+ * Same as e_rand but $min and $max are multiplied by 1000
+ *
+ * @param int|float $min
+ * @param int|float $max
+ *
+ * @return int|float
+ */
+function r_rand($min = null, $max = null)
 {
-    if (false === $min)
+    if (! is_numeric($min))
     {
         return mt_rand();
     }
     $min *= 1000;
 
-    if (false === $max)
+    if (! is_numeric($max))
     {
         return mt_rand($min) / 1000;
     }
     $max *= 1000;
 
-    if ($min == $max)
+    if ($min > $max)
     {
-        return $min / 1000;
-    }
-    //do NOT ask me why the following line can be executed, it makes no sense,
-    // but it *does* get executed.
-    if (0 == $min && 0 == $max)
-    {
-        return 0;
+        return mt_rand($max, $min) / 1000;
     }
 
-    if ($min < $max)
-    {
-        return @mt_rand($min, $max) / 1000;
-    }
-    elseif ($min > $max)
-    {
-        return @mt_rand($max, $min) / 1000;
-    }
+    return mt_rand($min, $max) / 1000;
 }
