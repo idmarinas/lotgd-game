@@ -4,25 +4,19 @@
 // addnews ready
 // mail ready
 
-use Zend\Http\PhpEnvironment\Request;
-
-global $lotgd_request;
-
-$lotgd_request = new Request();
-
 /**
  * Return single get parameter.
  *
  * @param string $name
- * @param mixed  $default
+ * @param string  $default
  *
  * @return mixed
  */
-function httpget($name, $default = null)
+function httpget(string $name, string $default = null)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
-    return $lotgd_request->getQuery($name, $default);
+    return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getQuery($name, $default);
 }
 
 /**
@@ -32,17 +26,17 @@ function httpget($name, $default = null)
  *
  * @return array|object
  */
-function httpallget($array = true)
+function httpallget(bool $array = true)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
     if ($array)
     {
-        return $lotgd_request->getQuery()->toArray();
+        return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getQuery()->toArray();
     }
     else
     {
-        return $lotgd_request->getQuery();
+        return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getQuery();
     }
 }
 
@@ -53,11 +47,11 @@ function httpallget($array = true)
  * @param mixed  $val
  * @param bool   $force
  */
-function httpset($var, $val, $force = false)
+function httpset(string $var, $val, bool $force = false)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
-    $get = $lotgd_request->getQuery();
+    $get = $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getQuery();
 
     if ($get->offsetExists($var) || $force)
     {
@@ -75,16 +69,16 @@ function httpset($var, $val, $force = false)
  */
 function httppost($name, $default = null)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
-    return $lotgd_request->getPost($name, $default);
+    return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getPost($name, $default);
 }
 
 function httppostisset($var)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
-    return $lotgd_request->getPost()->offsetExists($var);
+    return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getPost()->offsetExists($var);
 }
 
 /**
@@ -96,9 +90,9 @@ function httppostisset($var)
  */
 function httppostset($var, $val, $sub = false)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
-    $post = $lotgd_request->getPost();
+    $post = $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getPost();
 
     if (false === $sub)
     {
@@ -113,7 +107,7 @@ function httppostset($var, $val, $sub = false)
         {
             $_POST[$var][$sub] = $val;
 
-            $lotgd_request->setPost($_POST);
+            $lotgdServiceManager->get(\Lotgd\Core\Http::class)->setPost($_POST);
         }
     }
 }
@@ -127,15 +121,15 @@ function httppostset($var, $val, $sub = false)
  */
 function httpallpost($array = true)
 {
-    global $lotgd_request;
+    global $lotgdServiceManager;
 
     if ($array)
     {
-        return $lotgd_request->getPost()->toArray();
+        return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getPost()->toArray();
     }
     else
     {
-        return $lotgd_request->getPost();
+        return $lotgdServiceManager->get(\Lotgd\Core\Http::class)->getPost();
     }
 }
 
