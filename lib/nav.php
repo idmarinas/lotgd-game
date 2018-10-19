@@ -1,12 +1,5 @@
 <?php
 
-$blockednavs = [
-    'blockpartial' => [],
-    'blockfull' => [],
-    'unblockpartial' => [],
-    'unblockfull' => []
-];
-
 /**
  * Called to block the display of a nav
  * if $partial is true, it will block any nav that begins with the given $link.
@@ -15,28 +8,20 @@ $blockednavs = [
  * @param string $link    The URL to block
  * @param bool   $partial
  */
-function blocknav($link, $partial = false)
+function blocknav(string $link, bool $partial = false)
 {
     //prevents a script from being able to generate navs on the given $link.
-    global $blockednavs;
+    global $lotgdServiceManager;
 
-    $p = ($partial ? 'partial' : 'full');
-    $blockednavs["block$p"][$link] = true;
-    //eliminate any unblocked navs that match this description.
-    if (isset($blockednavs["unblock$p"][$link]))
-    {
-        unset($blockednavs["unblock$p"][$link]);
-    }
+    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
-        foreach ($blockednavs['unblockpartial'] as $val)
-        {
-            if (substr($link, 0, strlen($val)) == $val || substr($val, 0, strlen($link)) == $link)
-            {
-                unset($blockednavs['unblockpartial'][$val]);
-            }
-        }
+        $block->blockPartialNav($link);
+    }
+    else
+    {
+        $block->blockFullNav($link);
     }
 }
 
@@ -52,25 +37,17 @@ function unblocknav($link, $partial = false)
 {
     //prevents a link that was otherwise blocked with blocknav() from
     //actually being blocked.
-    global $blockednavs;
+    global $lotgdServiceManager;
 
-    $p = ($partial ? 'partial' : 'full');
-    $blockednavs["unblock$p"][$link] = true;
-    //eliminate any blocked navs that match this description.
-    if (isset($blockednavs["block$p"][$link]))
-    {
-        unset($blockednavs["block$p"][$link]);
-    }
+    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
-        foreach ($blockednavs['blockpartial'] as $val)
-        {
-            if (substr($link, 0, strlen($val)) == $val || substr($val, 0, strlen($link)) == $link)
-            {
-                unset($blockednavs['blockpartial'][$val]);
-            }
-        }
+        $block->unBlockPartialNav($link);
+    }
+    else
+    {
+        $block->unBlockFullNav($link);
     }
 }
 
@@ -274,39 +251,13 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
  *
  * @return bool
  */
-function is_blocked($link)
+function is_blocked(string $link): bool
 {
-    global $blockednavs;
+    global $lotgdServiceManager;
 
-    if (isset($blockednavs['blockfull'][$link]))
-    {
-        return true;
-    }
+    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
 
-    foreach ($blockednavs['blockpartial'] as $l => $dummy)
-    {
-        $shouldblock = false;
-
-        if (substr($link, 0, strlen($l)) == $l)
-        {
-            if (isset($blockednavs['unblockfull'][$link]) && $blockednavs['unblockfull'][$link])
-            {
-                return false;
-            }
-
-            foreach ($blockednavs['unblockpartial'] as $l2 => $dummy)
-            {
-                if (substr($link, 0, strlen($l2)) == $l2)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-    return false;
+    return $block->isBlocked($link);
 }
 
 /**
