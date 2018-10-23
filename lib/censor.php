@@ -127,7 +127,7 @@ function soap($input, $debug = false, $skiphook = false)
 function good_word_list()
 {
     $sql = 'SELECT * FROM '.DB::prefix('nastywords')." WHERE type='good'";
-    $result = DB::query_cached($sql, 'goodwordlist');
+    $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
 
     return explode(' ', $row['words']);

@@ -1153,7 +1153,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
         $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section='$section'";
     }
 
-    $r = DB::query_cached($sql, "commentary/commentarycount_$section", 60);
+    $r = DB::query($sql);
     $val = DB::fetch_assoc($r);
     $rowcount = $val['c'];
     $val = round($val['c'] / $limit + 0.5, 0) - 1;
