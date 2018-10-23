@@ -121,8 +121,6 @@ class Cache extends Filesystem
      */
     function dataEmpty()
     {
-        global $lotgdCache;
-
         try
         {
             $result = $this->flush();
