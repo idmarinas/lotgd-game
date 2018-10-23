@@ -132,7 +132,7 @@ function popup($page, $size = '728x400')
  */
 function page_footer($saveuser = true)
 {
-    global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $dbinfo, $lotgdJaxon;
+    global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon, $lotgdServiceManager;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
@@ -386,20 +386,21 @@ function page_footer($saveuser = true)
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 
+    $wrapper = $lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class);
     if (getsetting('debug', 0))
     {
         global $SCRIPT_NAME;
         $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
         $resultdebug = DB::query($sql);
-        $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($dbinfo['querytime'], 3))."');";
+        $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($wrapper->getQueryTime(), 3))."');";
         $resultdebug = DB::query($sql);
     }
 
     //-- Add pagegen info
     $html['pagegen'] = sprintf('Page gen: %ss / %s queries (%ss Ave: %ss - %s/%s',
         round($gentime, 3),
-        $dbinfo['queriesthishit'],
-        round($dbinfo['querytime'], 3),
+        $wrapper->getQueriesThisHit(),
+        round($wrapper->getQueryTime(), 3),
         round($session['user']['gentime'] / $session['user']['gentimecount'], 3),
         round($session['user']['gentime'], 3),
         round($session['user']['gentimecount'], 3)
