@@ -48,38 +48,6 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 
 $logd_version = '2.7.0 IDMarinas Edition';
 
-session_start();
-
-$session = &$_SESSION['session'];
-
-$session['user']['gentime'] = $session['user']['gentime'] ?? 0;
-$session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
-$session['user']['gensize'] = $session['user']['gensize'] ?? 0;
-$session['user']['acctid'] = $session['user']['acctid'] ?? 0;
-$session['counter'] = $session['counter'] ?? 0;
-
-$session['counter']++;
-
-require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
-// Include some commonly needed and useful routines
-require_once 'lib/output.php';
-require_once 'lib/nav.php';
-require_once 'lib/dbwrapper.php';
-require_once 'lib/holiday_texts.php';
-require_once 'lib/constants.php';
-require_once 'lib/datacache.php';
-require_once 'lib/modules.php';
-require_once 'lib/http.php';
-require_once 'lib/e_rand.php';
-require_once 'lib/buffs.php';
-require_once 'lib/pageparts.php';
-require_once 'lib/sanitize.php';
-require_once 'lib/tempstat.php';
-require_once 'lib/su_access.php';
-require_once 'lib/datetime.php';
-require_once 'lib/translator.php';
-require_once 'lib/playerfunctions.php';
-
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 if (! defined('OVERRIDE_FORCED_NAV'))
@@ -92,74 +60,150 @@ if (! defined('ALLOW_ANONYMOUS'))
     define('ALLOW_ANONYMOUS', false);
 }
 
-//Initialize variables required for this page
+session_start();
 
-require_once 'lib/settings.php';
-require_once 'lib/redirect.php';
-require_once 'lib/censor.php';
-require_once 'lib/saveuser.php';
-require_once 'lib/arrayutil.php';
-require_once 'lib/addnews.php';
-require_once 'lib/mounts.php';
-require_once 'lib/debuglog.php';
-require_once 'lib/forcednavigation.php';
-require_once 'lib/php_generic_environment.php';
-require_once 'lib/lotgd_mail.php';
-require_once 'lib/jaxon/index.php';
+$session = &$_SESSION['session'];
 
-global $settings;
+$session['user']['gentime'] = $session['user']['gentime'] ?? 0;
+$session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
+$session['user']['gensize'] = $session['user']['gensize'] ?? 0;
+$session['user']['acctid'] = $session['user']['acctid'] ?? 0;
+$session['counter'] = $session['counter'] ?? 0;
 
-//-- This files need that settings work
-require_once 'lib/lotgdFormat.php';
-require_once 'lib/template.php';
+$session['counter']++;
+
+include 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
-// lets us provide output in dbconnect.php that only appears if there's a
-// problem connecting to the database server.  Useful for migration moves
-// like LotGD.net experienced on 7/20/04.
-if (file_exists('dbconnect.php'))
+//-- Prepare the service manager
+$lotgdServiceManager = new Lotgd\Core\ServiceManager(require 'config/config.php');
+
+// Include some commonly needed and useful routines
+require_once 'lib/constants.php';
+require_once 'lib/php_generic_environment.php';
+require_once 'lib/datacache.php';
+require_once 'lib/sanitize.php';
+require_once 'lib/output.php';
+require_once 'lib/dbwrapper.php';
+require_once 'lib/settings.php';
+require_once 'lib/e_rand.php';
+require_once 'lib/holiday_texts.php';
+require_once 'lib/nav.php';
+require_once 'lib/arrayutil.php';
+require_once 'lib/redirect.php';
+require_once 'lib/debuglog.php';
+require_once 'lib/su_access.php';
+require_once 'lib/datetime.php';
+require_once 'lib/http.php';
+require_once 'lib/modules.php';
+require_once 'lib/tempstat.php';
+require_once 'lib/buffs.php';
+require_once 'lib/censor.php';
+require_once 'lib/saveuser.php';
+require_once 'lib/addnews.php';
+require_once 'lib/forcednavigation.php';
+require_once 'lib/mounts.php';
+require_once 'lib/lotgd_mail.php';
+require_once 'lib/playerfunctions.php';
+require_once 'lib/pageparts.php';
+require_once 'lib/translator.php';
+require_once 'lib/lotgdFormat.php';
+require_once 'lib/template.php';
+require_once 'lib/jaxon.php';
+
+//-- Update dbconnect.php if necesary
+//-- This code will be deleted in the 3.1.0 version
+if (! file_exists('config/autoload/local/dbconnect.php'))
 {
-    require_once 'dbconnect.php';
-
-    //-- Settings for Database Adapter
-    DB::setAdapter($adapter);
-
-    $link = DB::connect();
-
-    unset($adapter);
-}
-else
-{
-    $link = false;
-
-    if (! defined('IS_INSTALLER'))
+    //-- Check if exist old dbconnect.php and updated to new format
+    //-- Only for upgrade from previous versions (1.0.0 IDMarinas edition and up / 2.7.0 IDMarinas edition and below)
+    if (file_exists('dbconnect.php'))
     {
-        if (! defined('DB_NODB'))
+        require_once 'dbconnect.php';
+
+        $configuration = [
+            'lotgd_core' => [
+                'db' => [
+                    'adapter' => [
+                        'driver' => $adapter['driver'],
+                        'hostname' => $adapter['hostname'],
+                        'database' => $adapter['database'],
+                        'charset' => 'utf8',
+                        'username' => $adapter['username'],
+                        'password' => $adapter['password']
+                    ],
+                    'prefix' => $DB_PREFIX
+                ],
+                'cache' => [
+                    'active' => $DB_USEDATACACHE,
+                    'config' => [
+                        'namespace' => 'lotgd',
+                        'ttl' => 900,
+                        'cache_dir' => $DB_DATACACHEPATH,
+                    ]
+                ]
+            ]
+        ];
+
+        $file = Zend\Code\Generator\FileGenerator::fromArray([
+            'docblock' => Zend\Code\Generator\DocBlockGenerator::fromArray([
+                'shortDescription' => 'This file is automatically updated for version 3.0.0 IDMarinas Edition.',
+                'longDescription' => null,
+                'tags' => [
+                    [
+                        'name' => 'create',
+                        'description' => date('M d, Y h:i a'),
+                    ],
+                ],
+            ]),
+            'body' => 'return '.new Zend\Code\Generator\ValueGenerator($configuration, Zend\Code\Generator\ValueGenerator::TYPE_ARRAY_SHORT).';',
+        ]);
+        unset($configuration);
+
+        $code = $file->generate();
+
+        $result = file_put_contents('config/autoload/local/dbconnect.php', $code);
+
+        if (false !== $result)
         {
-            define('DB_NODB', true);
+            $message = 'Please reload page for apply changes to dbconnect.php.<br>';
+            $message .= 'This new version of game, use a diferent format.';
+
+            //-- Delete cache of config to force to re-configure
+            if (file_exists('cache/service-manager.config.php'))
+            {
+                unlink('cache/service-manager.config.php');
+            }
+
+            //-- Rename old file
+            rename('dbconnect.php', 'dbconnect.php.old');
+
+            die($message);
         }
-        page_header('The game has not yet been installed');
-        output('`#Welcome to `@Legend of the Green Dragon`#, a game by Eric Stevens & JT Traub.`n`n');
-        output("You must run the game's installer, and follow its instructions in order to set up LoGD.  You can go to the installer <a href='installer.php'>here</a>.", true);
-        output("`n`nIf you're not sure why you're seeing this message, it's because this game is not properly configured right now. ");
-        output("If you've previously been running the game here, chances are that you lost a file called '`%dbconnect.php`#' from your site.");
-        output("If that's the case, no worries, we can get you back up and running in no time, and the installer can help!");
-        addnav('Game Installer', 'installer.php');
-        page_footer();
+        else
+        {
+            $message = 'Unfortunately, I was not able to write your dbconnect.php file.<br>';
+            $message .= 'You will have to create this file yourself, and upload it to your web server.<br>';
+            $message .= 'The contents of this file should be as follows:<br>';
+            $message .= '<blockquote><pre>'.htmlentities($code, ENT_COMPAT, 'UTF-8').'</pre></blockquote>';
+            $message .= 'Create a new file, past the entire contents from above into it.';
+            $message .= "When you have that done, save the file as 'dbconnect.php' and upload this to the location you have LoGD at.";
+            $message .= 'You can refresh this page to see if you were successful.';
+
+            die($message);
+        }
     }
 }
+//-- End - This code will be deleted in the 3.1.0 version
 
-//start the gzip compression
-if (isset($gz_handler_on) && $gz_handler_on)
-{
-    ob_start('ob_gzhandler');
-}
-else
-{
-    ob_start();
-}
+//-- Configure db settings and check connection
+$wrapper = $lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class);
+DB::wrapper($wrapper);
+$link = DB::connect();
+
+ob_start();
 
 if (false !== $link)
 {
@@ -206,7 +250,6 @@ else
         //the admin did not want to notify him with a script
         output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
         //add the message as it was not enclosed and posted to the smsnotify file
-        output('Please give them the following error message:`n');
         output('Sorry for the inconvenience,`n');
         output('Staff of %s', $_SERVER['SERVER_NAME']);
         addnav('Home', 'index.php');
@@ -219,9 +262,6 @@ if ($logd_version == getsetting('installer_version', '-1'))
 {
     define('IS_INSTALLER', false);
 }
-
-//Generate our settings object
-$settings = new settings('settings');
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
 {
