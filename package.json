@@ -34,14 +34,14 @@
     "dependencies": {
         "jquery": "^3.3.1",
         "semantic-ui": "2.4.1",
-        "sweetalert2": "^7.28.5",
+        "sweetalert2": "^7.28.8",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",
         "@babel/plugin-transform-runtime": "^7.1.0",
         "@babel/preset-env": "^7.1.0",
-        "ansi-colors": "^3.1.0",
+        "ansi-colors": "^3.2.1",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.4",
         "babel-plugin-istanbul": "^5.1.0",
@@ -93,8 +93,8 @@
         "sass-loader": "^7.1.0",
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
-        "webpack": "^4.20.2",
-        "webpack-bundle-analyzer": "^3.0.2",
+        "webpack": "^4.22.0",
+        "webpack-bundle-analyzer": "^3.0.3",
         "webpack-merge": "^4.1.4"
     },
     "scripts": {
