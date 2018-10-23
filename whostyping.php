@@ -77,7 +77,7 @@ if ($updateplayer)
 
 //retrieve, deleting as appropriate
 $sql = 'SELECT * FROM '.DB::prefix('whostyping')." WHERE section='$section'";
-$result = DB::query_cached($sql, 'whostyping/whostyping_'.$section, 60);
+$result = DB::query($sql);
 $disp = [];
 
 while ($row = DB::fetch_assoc($result))

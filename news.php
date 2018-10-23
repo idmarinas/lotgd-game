@@ -50,7 +50,7 @@ if ($totaltoday > $newsperpage)
 }
 
 $sql2 = 'SELECT '.DB::prefix('motd').'.*,name AS motdauthorname FROM '.DB::prefix('motd').' LEFT JOIN '.DB::prefix('accounts').' ON '.DB::prefix('accounts').'.acctid = '.DB::prefix('motd').'.motdauthor ORDER BY motddate DESC LIMIT 1';
-$result2 = DB::query_cached($sql2, 'lastmotd');
+$result2 = DB::query($sql2);
 
 while ($row = DB::fetch_assoc($result2))
 {

@@ -54,7 +54,7 @@ if (getsetting('homenewestplayer', 1))
     if (0 != $newplayer)
     {
         $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid='$newplayer'";
-        $result = DB::query_cached($sql, 'newest');
+        $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
         $name = $row['name'];
     }

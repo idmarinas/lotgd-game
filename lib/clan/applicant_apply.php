@@ -25,7 +25,7 @@
             // send reminder mail if clan of choice has a description
 
             $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='$to'";
-            $res = DB::query_cached($sql, "clandata-$to", 3600);
+            $res = DB::query($sql);
             $row = DB::fetch_assoc($res);
 
             if ('' != nltoappon($row['clandesc']))

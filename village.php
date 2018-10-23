@@ -38,7 +38,7 @@ else
     if (0 != (int) $newestplayer)
     {
         $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid='$newestplayer'";
-        $result = DB::query_cached($sql, 'newest');
+        $result = DB::query($sql);
 
         if (1 == DB::num_rows($result))
         {

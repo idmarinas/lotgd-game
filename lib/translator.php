@@ -238,7 +238,7 @@ function translate_loadnamespace($namespace, $language = false)
     }
     else
     {
-        $result = DB::query_cached($sql, 'translations-'.$namespace.'-'.$language, 600);
+        $result = DB::query($sql);
         //store it for 10 Minutes, normally you don't need to refresh this often
     }
     $out = [];

@@ -252,7 +252,7 @@ function page_footer($saveuser = true)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
         $sql = 'SELECT count(acctid) AS c FROM '.DB::prefix('accounts');
-        $result = DB::query_cached($sql, 'acctcount', 600);
+        $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
         $c = $row['c'];
         $a = getsetting('serverurl', 'http://'.$_SERVER['SERVER_NAME'].(80 == $_SERVER['SERVER_PORT'] ? '' : ':'.$_SERVER['SERVER_PORT']).dirname($_SERVER['REQUEST_URI']));
@@ -351,7 +351,7 @@ function page_footer($saveuser = true)
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
         $sql = 'SELECT count(1) AS c, status FROM '.DB::prefix('petitions').' GROUP BY status';
-        $result = DB::query_cached($sql, 'petition_counts');
+        $result = DB::query($sql);
         $petitions = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
 
         while ($row = DB::fetch_assoc($result))
@@ -978,7 +978,7 @@ function maillink(): string
     global $session;
 
     $sql = 'SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM '.DB::prefix('mail')." WHERE msgto='{$session['user']['acctid']}'";
-    $result = DB::query_cached($sql, "mail-{$session['user']['acctid']}", 86400);
+    $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
     DB::free_result($result);
     $row['seencount'] = (int) ($row['seencount'] ?? 0);

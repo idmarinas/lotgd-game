@@ -6,7 +6,7 @@
 function getmount($horse = 0)
 {
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$horse'";
-    $result = DB::query_cached($sql, "mountdata-$horse", 3600);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) > 0)
     {

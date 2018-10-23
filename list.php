@@ -102,7 +102,7 @@ if ('' == $page && '' == $op)
 {
     $title = translate_inline('Warriors Currently Online');
     $sql = 'SELECT acctid,name,login,alive,hitpoints,location,race,sex,level,laston,loggedin,lastip,uniqueid FROM '.DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC, dragonkills DESC, login ASC";
-    $result = DB::query_cached($sql, 'list.php-warsonline');
+    $result = DB::query($sql);
 }
 elseif ('clan' == $op)
 {

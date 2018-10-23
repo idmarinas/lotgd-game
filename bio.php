@@ -113,7 +113,7 @@ if ($target = DB::fetch_assoc($result))
         output('`^Specialty: `@%s`n', $specialties[$target['specialty']]);
     }
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='{$target['hashorse']}'";
-    $result = DB::query_cached($sql, "mountdata-{$target['hashorse']}", 3600);
+    $result = DB::query($sql);
     $mount = DB::fetch_assoc($result);
 
     $mount['acctid'] = $target['acctid'];

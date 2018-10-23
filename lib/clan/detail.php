@@ -39,7 +39,7 @@
         }
     }
     $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='$detail'";
-    $result1 = DB::query_cached($sql, "clandata-$detail", 3600);
+    $result1 = DB::query($sql);
     $row1 = DB::fetch_assoc($result1);
 
     if ($session['user']['superuser'] & SU_AUDIT_MODERATION)

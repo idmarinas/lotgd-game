@@ -154,7 +154,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
         if (0 == $com && strstr($_SERVER['REQUEST_URI'], '/moderate.php') !== $_SERVER['REQUEST_URI'])
         {
-            $result = DB::query_cached($sql, "comments-{$section}");
+            $result = DB::query($sql);
         }
         else
         {

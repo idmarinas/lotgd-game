@@ -38,7 +38,7 @@ function injectmodule($modulename, $force = false)
     {
         tlschema("module-{$modulename}");
         $sql = 'SELECT active,filemoddate,infokeys,version FROM '.DB::prefix('modules')." WHERE modulename='$modulename'";
-        $result = DB::query_cached($sql, "injections-inject-$modulename", 3600);
+        $result = DB::query($sql);
 
         if (! $force)
         {
@@ -212,7 +212,7 @@ function module_status($modulename, $version = false)
     if (file_exists($modulefilename))
     {
         $sql = 'SELECT active,filemoddate,infokeys,version FROM '.DB::prefix('modules')." WHERE modulename='$modulename'";
-        $result = DB::query_cached($sql, "injections-inject-$modulename", 3600);
+        $result = DB::query($sql);
 
         if (DB::num_rows($result) > 0)
         {
@@ -446,7 +446,7 @@ function mass_module_prepare($hooknames)
 			$Pmodule_hooks.location,
 			$Pmodule_hooks.priority,
             $Pmodule_hooks.modulename";
-    $result = DB::query_cached($sql, 'moduleprepare-'.md5(join($hooknames)));
+    $result = DB::query($sql);
     $modulenames = [];
 
     while ($row = DB::fetch_assoc($result))
@@ -618,7 +618,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 			ORDER BY
 				".DB::prefix('module_hooks').'.priority,
 				'.DB::prefix('module_hooks').'.modulename';
-        $result = DB::query_cached($sql, 'hooks-hook-'.$hookname);
+        $result = DB::query($sql);
     }
     // $args is an array passed by value and we take the output and pass it
     // back through
@@ -925,7 +925,7 @@ function get_module_objpref($type, $objid, $name, $module = false)
         $module = $mostrecentmodule;
     }
     $sql = 'SELECT value FROM '.DB::prefix('module_objprefs')." WHERE modulename='$module' AND objtype='$type' AND setting='".addslashes($name)."' AND objid='$objid' ";
-    $result = DB::query_cached($sql, "objprefs-objpref-$type-$objid-$name-$module", 86400);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) > 0)
     {
@@ -1465,7 +1465,7 @@ function module_collect_events($type, $allowinactive = false)
     }
 
     $sql = 'SELECT '.DB::prefix('module_event_hooks').'.* FROM '.DB::prefix('module_event_hooks').' INNER JOIN '.DB::prefix('modules').' ON '.DB::prefix('modules').'.modulename = '.DB::prefix('module_event_hooks').".modulename WHERE $active event_type='$type' ORDER BY RAND(".e_rand().')';
-    $result = DB::query_cached($sql, "event-{$type}-".((int) $allowinactive));
+    $result = DB::query($sql);
 
     while ($row = DB::fetch_assoc($result))
     {

@@ -113,7 +113,7 @@ if ('' == $op)
 elseif ('examine' == $op)
 {
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$id'";
-    $result = DB::query_cached($sql, "mountdata-$id", 3600);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) <= 0)
     {
@@ -159,7 +159,7 @@ elseif ('buymount' == $op)
 if ('confirmbuy' == $op)
 {
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$id'";
-    $result = DB::query_cached($sql, "mountdata-$id", 3600);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) <= 0)
     {

@@ -65,7 +65,7 @@ function pollitem($id, $subject, $body, $author, $date, $showpoll = true)
     }
 
     $sql = 'SELECT count(resultid) AS c, choice FROM '.DB::prefix('pollresults')." WHERE motditem='$id' GROUP BY choice ORDER BY choice";
-    $result = DB::query_cached($sql, "poll-$id");
+    $result = DB::query($sql);
     $choices = [];
     $totalanswers = 0;
     $maxitem = 0;

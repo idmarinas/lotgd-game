@@ -272,7 +272,7 @@ elseif ('edit' == $op)
 {
     addnav('Companion Editor Home', 'companions.php');
     $sql = 'SELECT * FROM '.DB::prefix('companions')." WHERE companionid='$id'";
-    $result = DB::query_cached($sql, "companiondata-$id", 3600);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) <= 0)
     {

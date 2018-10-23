@@ -64,7 +64,7 @@ elseif ('del' == $op)
 {
     //refund for anyone who has a mount of this type.
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$id'";
-    $result = DB::query_cached($sql, "mountdata-$id", 3600);
+    $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
     $sql = 'UPDATE '.DB::prefix('accounts')." SET gems=gems+{$row['mountcostgems']}, goldinbank=goldinbank+{$row['mountcostgold']}, hashorse=0 WHERE hashorse={$row['mountid']}";
     DB::query($sql);
@@ -81,7 +81,7 @@ elseif ('give' == $op)
     $session['user']['hashorse'] = $id;
     // changed to make use of the cached query
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$id'";
-    $result = DB::query_cached($sql, "mountdata-$id", 3600);
+    $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
     $buff = unserialize($row['mountbuff']);
 
@@ -310,7 +310,7 @@ elseif ('edit' == $op)
 {
     addnav('Mount Editor Home', 'mounts.php');
     $sql = 'SELECT * FROM '.DB::prefix('mounts')." WHERE mountid='$id'";
-    $result = DB::query_cached($sql, "mountdata-$id", 3600);
+    $result = DB::query($sql);
 
     if (DB::num_rows($result) <= 0)
     {

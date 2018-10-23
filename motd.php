@@ -87,7 +87,7 @@ if ('' == $op)
     if ($m > '')
     {
         $sql = 'SELECT motd.*, name AS motdauthorname FROM '.DB::prefix('motd').' AS `motd`LEFT JOIN '.DB::prefix('accounts')." AS `acct` ON acct.acctid = motd.motdauthor WHERE motddate >= '{$m}-01' AND motddate <= '{$m}-31' ORDER BY motddate DESC";
-        $result = DB::query_cached($sql, "motd-$m");
+        $result = DB::query($sql);
     }
     else
     {
@@ -95,7 +95,7 @@ if ('' == $op)
         //cache only the last x items
         if ($newcount = 0)
         {
-            $result = DB::query_cached($sql, 'motd');
+            $result = DB::query($sql);
         }
         else
         {
@@ -160,7 +160,7 @@ if ('' == $op)
 $session['needtoviewmotd'] = false;
 
 $sql = 'SELECT motddate FROM '.DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
-$result = DB::query_cached($sql, 'motddate');
+$result = DB::query($sql);
 $row = DB::fetch_assoc($result);
 $session['user']['lastmotd'] = $row['motddate'];
 
