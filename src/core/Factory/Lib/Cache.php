@@ -23,7 +23,7 @@ class Cache implements FactoryInterface
         $config = is_array($config) ? $config : [];
 
         $cache = new LibCache($config);
-        $cache->setActive((bool) $options['active'] ?? false);
+        $cache->setActive((bool) ($options['active'] ?? false));
 
         return $cache;
     }
