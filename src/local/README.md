@@ -5,7 +5,10 @@ Or add other class for your custom server.
 ```php
 namespace Lotgd\Local;
 
-class Example
+use Lotgd\Core\Class as LotgdClass;
+
+//-- Can extends any class of Core
+class Example extends LotgdClass
 {
     public function exampleMethod()
     {
