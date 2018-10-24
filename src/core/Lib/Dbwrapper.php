@@ -167,12 +167,12 @@ class Dbwrapper
     /**
      * Select API.
      *
-     * @param string|false $table
-     * @param bool         $prefixed
+     * @param null|string|array|TableIdentifier $table
+     * @param bool                              $prefixed
      *
      * @return object
      */
-    public function select(string $table = '', bool $prefixed = true)
+    public function select($table = null, bool $prefixed = true)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -189,12 +189,12 @@ class Dbwrapper
     /**
      * Insert API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public function insert(string $table = '', bool $prefixed = true)
+    public function insert($table = null, bool $prefixed = true)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -211,12 +211,12 @@ class Dbwrapper
     /**
      * Update API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public function update(string $table = '', bool $prefixed = true)
+    public function update($table = null, bool $prefixed = true)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -233,12 +233,12 @@ class Dbwrapper
     /**
      * Delete API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public function delete(string $table = '', bool $prefixed = true)
+    public function delete($table = null, bool $prefixed = true)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 

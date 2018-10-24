@@ -7,14 +7,11 @@
 use Lotgd\Core\Lib\Dbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Paginator\Adapter\DbSelect as DbSelectPaginator;
 use Zend\Paginator\Paginator;
 
 class DB
 {
     private static $wrapper;
-
-
 
     private static $generatedValue = null;
     private static $affectedRows = 0;
@@ -59,12 +56,12 @@ class DB
     /**
      * Select API.
      *
-     * @param string|false $table
-     * @param bool         $prefixed
+     * @param null|string|array|TableIdentifier $table
+     * @param bool                              $prefixed
      *
      * @return object
      */
-    public static function select(string $table = '', bool $prefixed = true)
+    public static function select($table = null, bool $prefixed = true)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
@@ -77,12 +74,12 @@ class DB
     /**
      * Insert API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public static function insert(string $table = '', bool $prefixed = true)
+    public static function insert($table = null, bool $prefixed = true)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
@@ -95,12 +92,12 @@ class DB
     /**
      * Update API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public static function update(string $table = '', bool $prefixed = true)
+    public static function update($table = null, bool $prefixed = true)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
@@ -113,12 +110,12 @@ class DB
     /**
      * Delete API.
      *
-     * @param string $table
-     * @param bool   $prefixed
+     * @param null|string|TableIdentifier $table
+     * @param bool                        $prefixed
      *
      * @return object
      */
-    public static function delete(string $table = '', bool $prefixed = true)
+    public static function delete($table = null, bool $prefixed = true)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
@@ -335,7 +332,6 @@ class DB
     {
         self::$wrapper = $wrapper;
     }
-
 
     /**
      * @deprecated
