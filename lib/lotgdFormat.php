@@ -6,33 +6,27 @@
  */
 class LotgdFormat
 {
-    protected $dec_point;
-    protected $thousands_sep;
-
-    public function __construct()
-    {
-        $this->dec_point = getsetting('moneydecimalpoint', '.');
-        $this->thousands_sep = getsetting('moneythousandssep', ',');
-    }
+    protected static $dec_point;
+    protected static $thousands_sep;
 
     /**
      * Format a number.
      *
-     * @param float  $number
-     * @param int    $decimals
-     * @param string $point
-     * @param string $sep
+     * @param float|int $number
+     * @param int       $decimals
+     * @param string    $point
+     * @param string    $sep
      *
      * @return number
      */
-    public function numeral($number, $decimals = 0, $dec_point = false, $thousands_sep = false)
+    public static function numeral($number, int $decimals = 0, $dec_point = null, $thousands_sep = null)
     {
         $number = (float) $number;
         $decimals = (int) $decimals;
 
         //-- Check if use default value or custom
-        $dec_point = $dec_point ?: $this->dec_point;
-        $thousands_sep = $thousands_sep ?: $this->thousands_sep;
+        $dec_point = $dec_point ?: self::$dec_point;
+        $thousands_sep = $thousands_sep ?: self::$thousands_sep;
 
         //-- If decimals is negative, it is automatically determined
         if ($decimals < 0)
@@ -49,13 +43,13 @@ class LotgdFormat
     }
 
     /**
-     * Undocumented function.
+     * Show a relative date.
      *
      * @param string $indate
      *
-     * @return string|array
+     * @return string
      */
-    public function relativedate($indate)
+    public static function relativedate($indate)
     {
         $laston = is_numeric($indate) ? $indate : strtotime($indate);
         $laston = round((time() - strtotime($indate)) / 86400, 0).' days';
@@ -87,8 +81,28 @@ class LotgdFormat
 
         return $laston;
     }
+
+    /**
+     * Set decimal point.
+     *
+     * @param string $val
+     */
+    public static function setDecPoint(string $val)
+    {
+        self::$dec_point = $val;
+    }
+
+    /**
+     * Set thousands separation.
+     *
+     * @param string $val
+     */
+    public static function setThousandsSep(string $val)
+    {
+        self::$thousands_sep = $val;
+    }
 }
 
-global $lotgdFormat;
-
-$lotgdFormat = new LotgdFormat();
+//-- Configure money decimal and thousands
+LotgdFormat::setDecPoint(getsetting('moneydecimalpoint', '.'));
+LotgdFormat::setThousandsSep(getsetting('moneythousandssep', ','));
