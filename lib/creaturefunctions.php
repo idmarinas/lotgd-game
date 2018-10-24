@@ -159,7 +159,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
  *
  * @return array
  */
-function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, $forest = true): array
+function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters = false, $forest = true): array
 {
     $limit = ($multi > 1 ? (false === $packofmonsters ? $multi : 1) : 1);
 
