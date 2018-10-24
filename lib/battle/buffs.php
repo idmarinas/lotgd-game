@@ -236,7 +236,7 @@ function activate_buffs($tag)
 
             if (0 == $hptoregen)
             {
-                $msg = isset($buff['effectnodmgmsg']) ? $buff['effectnodmgmsg'] : '';
+                $msg = $buff['effectnodmgmsg'] ?? '';
             }
             else
             {
@@ -338,15 +338,15 @@ function activate_buffs($tag)
 
                 if ($damage < 0)
                 {
-                    $msg = $buff['effectfailmsg'];
+                    $msg = $buff['effectfailmsg'] ?? '';
                 }
                 elseif (0 == $damage)
                 {
-                    $msg = $buff['effectnodmgmsg'];
+                    $msg = $buff['effectnodmgmsg'] ?? '';
                 }
                 elseif ($damage > 0)
                 {
-                    $msg = $buff['effectmsg'];
+                    $msg = $buff['effectmsg'] ?? '';
                 }
 
                 if (is_array($msg))
@@ -397,7 +397,7 @@ function process_lifetaps($ltaps, $damage)
 
         if (0 == $healhp)
         {
-            $msg = isset($buff['effectnodmgmsg']) ? $buff['effectnodmgmsg'] : '';
+            $msg = $buff['effectnodmgmsg'] ?? '';
         }
         else
         {
