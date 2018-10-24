@@ -2,8 +2,9 @@
 
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Generator\ValueGenerator;
 
-if (file_exists('dbconnect.php'))
+if (file_exists('config/autoload/local/dbconnect.php'))
 {
     $success = true;
     $initial = false;
@@ -15,18 +16,29 @@ else
     output("`2I'm attempting to write a file named 'dbconnect.php' to your site root.");
     output('This file tells LoGD how to connect to the database, and is necessary to continue installation.`n');
 
-    $body = '$adapter = ['.PHP_EOL;
-    $body .= '	\'driver\' => \''.$session['dbinfo']['DB_DRIVER'].'\','.PHP_EOL;
-    $body .= '	\'hostname\' => \''.$session['dbinfo']['DB_HOST'].'\','.PHP_EOL;
-    $body .= '	\'database\' => \''.$session['dbinfo']['DB_NAME'].'\','.PHP_EOL;
-    $body .= '	\'charset\' => \'utf8\','.PHP_EOL;
-    $body .= '	\'username\' => \''.$session['dbinfo']['DB_USER'].'\','.PHP_EOL;
-    $body .= '	\'password\' => \''.$session['dbinfo']['DB_PASS'].'\''.PHP_EOL;
-    $body .= '];'.PHP_EOL.PHP_EOL;
-    $body .= '$DB_PREFIX = \''.$session['dbinfo']['DB_PREFIX'].'\';'.PHP_EOL;
-    $body .= '$DB_USEDATACACHE = \''.$session['dbinfo']['DB_USEDATACACHE'].'\';'.PHP_EOL;
-    $body .= '$DB_DATACACHEPATH = \''.$session['dbinfo']['DB_DATACACHEPATH'].'\';'.PHP_EOL;
-    $body .= '$gz_handler_on = 0;'.PHP_EOL;
+    $configuration = [
+        'lotgd_core' => [
+            'db' => [
+                'adapter' => [
+                    'driver' => $session['dbinfo']['DB_DRIVER'],
+                    'hostname' => $session['dbinfo']['DB_HOST'],
+                    'database' => $session['dbinfo']['DB_NAME'],
+                    'charset' => 'utf8',
+                    'username' => $session['dbinfo']['DB_USER'],
+                    'password' => $session['dbinfo']['DB_PASS']
+                ],
+                'prefix' => $session['dbinfo']['DB_PREFIX']
+            ],
+            'cache' => [
+                'active' => $session['dbinfo']['DB_USEDATACACHE'],
+                'config' => [
+                    'namespace' => 'lotgd',
+                    'ttl' => 900,
+                    'cache_dir' => $session['dbinfo']['DB_DATACACHEPATH'],
+                ]
+            ]
+        ]
+    ];
 
     $file = FileGenerator::fromArray([
         'docblock' => DocBlockGenerator::fromArray([
@@ -39,13 +51,13 @@ else
                 ],
             ],
         ]),
-        'body' => $body,
+        'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';',
     ]);
-    unset($body);
+    unset($configuration);
 
     $code = $file->generate();
 
-    $result = file_put_contents('dbconnect.php', $code);
+    $result = file_put_contents('config/autoload/local/dbconnect.php', $code);
 
     if (false !== $result)
     {
