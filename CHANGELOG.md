@@ -10,9 +10,45 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 * **translatetool.php** It uses the new way of generating queries to the DB (this method avoids problems with some characters when making queries, like for example the simple quotation)
 * **Jaxon** Files for jaxon has moved to new dir
+    * Can add your own files for jaxon in `src/ajax/local`
+* **common.php** Now use Service Manager to load some factories. This method allows to use any factory and always load the same.
+    * Factories can be remplaced for your own
+    * `ob_start()` not use anymore `ob_gzhandler`
 * **lib/pageparts.php** Updating the JavaScript function name to the new name (Jaxon)
 * **lib/output.php** Now used the Service Manager to generate class that use the output functions
+* **lib/redirect.php** Using Service Manager to load Output Collector
+* **lib/nav.php** Blockednavs are in Service Manager
+* **lib/http.php** Using Service Manager
+* **lib/datacache.php** Using Service Manager
 * **lib/e_rand.php** Some improvements and added comments to functions
+* **lib/creaturefunctions.php** Now param `$packofmonsters` have a default value
+* **lib/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
+    * Using class `LotgdTheme::` for render templates:
+     * **armor.php**
+     * **clan.php**
+     * **create.php**
+     * **home.php**
+     * **weapons.php**
+     * **lib/lotgd_mail.php**
+     * **lib/nav.php**
+     * **lib/pageparts.php**
+     * **lib/about/about_listmodules.php**
+     * **lib/battle/functions.php**
+     * **lib/configuration/configuration_cache.php**
+* **lib/lotgdFormat.php** Is now a class of static functions no needed be instantiated
+    * Using class `LotgdFormat::` for format numbers and any dates in:
+        * **bank.php**
+        * **donators.php**
+        * **list.php**
+        * **stats.php**
+        * **lib/commentary.php**
+        * **lib/template.class.php**
+        * **lib/bans/case_.php**
+        * **lib/bans/case_removeban.php**
+        * **lib/bans/case_searchban.php**
+        * **lib/user/user_.php.php**
+        * **lib/user/user_removeban.php.php**
+        * **lib/user/user_searchban.php.php**
 * **THEME**
     * Updated Semantic UI version 2.4.0 => 2.4.1
 
@@ -22,11 +58,13 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### DEPRECATED
 
-* Nothing
+* **lib/dbwrapper.php** Function `query_cached` is deprecated and deleted in a future version
+    * Use data cache system to cache data of query when needed
 
 ### FIXES
 
 * **bank.php** Fixed error by which you could not borrow money
+* **lib/buffs.php** Fixed error with undefined index
 
 ### REMOVES
 
