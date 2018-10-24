@@ -13,8 +13,6 @@ tlschema('bank');
 page_header('Ye Olde Bank');
 output('`^`c`bYe Olde Bank`b`c');
 $op = httpget('op');
-$point = getsetting('moneydecimalpoint', '.');
-$sep = getsetting('moneythousandssep', ',');
 
 if ('' == $op)
 {
@@ -31,11 +29,11 @@ if ('' == $op)
 
     if ($session['user']['goldinbank'] >= 0)
     {
-        output('`6"`@Aah, yes, here we are.  You have `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', number_format($session['user']['goldinbank'], 0, $point, $sep));
+        output('`6"`@Aah, yes, here we are.  You have `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', LotgdFormat::numeral($session['user']['goldinbank']));
     }
     else
     {
-        output('`6"`@Aah, yes, here we are.  You have a `&debt`@ of `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', number_format(abs($session['user']['goldinbank']), 0, $point, $sep));
+        output('`6"`@Aah, yes, here we are.  You have a `&debt`@ of `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', LotgdFormat::numeral(abs($session['user']['goldinbank'])));
     }
 }
 elseif ('transfer' == $op)
@@ -134,7 +132,7 @@ elseif ('transfer3' == $op)
 
     if ($session['user']['gold'] + $session['user']['goldinbank'] < $amt)
     {
-        output('`@Elessa`6 stands up to her full, but still diminutive height and glares at you, "`@How can you transfer `^%s`@ gold when you only possess `^%s`@?`6"', number_format($amt, 0, $point, $sep), number_format($session['user']['gold'] + $session['user']['goldinbank'], 0, $point, $sep));
+        output('`@Elessa`6 stands up to her full, but still diminutive height and glares at you, "`@How can you transfer `^%s`@ gold when you only possess `^%s`@?`6"', LotgdFormat::numeral($amt), LotgdFormat::numeral($session['user']['gold'] + $session['user']['goldinbank']));
     }
     else
     {
@@ -199,8 +197,8 @@ elseif ('deposit' == $op)
     rawoutput("<form action='bank.php?op=depositfinish' method='POST'>");
     $balance = translate_inline('`@Elessa`6 says, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
     $debt = translate_inline('`@Elessa`6 says, "`@You have a `$debt`@ of `^%s`@ gold to the bank.`6"`n');
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, number_format(abs($session['user']['goldinbank']), 0, $point, $sep));
-    output('`6Searching through all your pockets and pouches, you calculate that you currently have `^%s`6 gold on hand.`n`n', number_format($session['user']['gold'], 0, $point, $sep));
+    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
+    output('`6Searching through all your pockets and pouches, you calculate that you currently have `^%s`6 gold on hand.`n`n', LotgdFormat::numeral($session['user']['gold']));
     $dep = translate_inline('`^Deposit how much?');
     $pay = translate_inline('`^Pay off how much?');
     output_notl($session['user']['goldinbank'] >= 0 ? $dep : $pay);
@@ -225,14 +223,14 @@ elseif ('depositfinish' == $op)
 
     if ($amount > $session['user']['gold'])
     {
-        output_notl($notenough, number_format($session['user']['gold'], 0, $point, $sep), number_format($amount, 0, $point, $sep));
+        output_notl($notenough, LotgdFormat::numeral($session['user']['gold']), LotgdFormat::numeral($amount));
     }
     else
     {
         debuglog('deposited '.$amount.' gold in the bank');
         $session['user']['goldinbank'] += $amount;
         $session['user']['gold'] -= $amount;
-        output_notl($session['user']['goldinbank'] >= 0 ? $depositbalance : $depositdebt, number_format($amount, 0, $point, $sep), $session['user']['name'], number_format(abs($session['user']['goldinbank']), 0, $point, $sep), number_format($session['user']['gold'], 0, $point, $sep));
+        output_notl($session['user']['goldinbank'] >= 0 ? $depositbalance : $depositdebt, LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
     }
 }
 elseif ('borrow' == $op)
@@ -242,7 +240,7 @@ elseif ('borrow' == $op)
     $balance = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
     $debt = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a `$debt`@ of `^%s`@ gold to the bank.`6"`n');
     rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, number_format(abs($session['user']['goldinbank']), 0, $point, $sep));
+    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
     output('`6"`@How much would you like to borrow `&%s`@?  At your level, you may borrow up to a total of `^%s`@ from the bank.`6"`n`n', $session['user']['name'], $maxborrow);
     rawoutput("<input type='hidden' name='borrow' value='x'> <div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$borrow</button></div>");
     output('`n(Money will be withdrawn until you have none left, the remainder will be borrowed)');
@@ -256,7 +254,7 @@ elseif ('withdraw' == $op)
     $balance = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
     $debt = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a `$debt`@ of `^%s`@ gold in the bank.`6"`n');
     rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, number_format(abs($session['user']['goldinbank']), 0, $point, $sep));
+    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
     output('`6"`@How much would you like to withdraw `&%s`@?`6"`n`n', $session['user']['name']);
     rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$withdraw</button></div>");
     output('`n`iEnter 0 or nothing to withdraw it all`i');
@@ -276,7 +274,7 @@ elseif ('withdrawfinish' == $op)
     if ($amount > $session['user']['goldinbank'] && '' == httppost('borrow'))
     {
         output('`$ERROR: Not enough gold in the bank to withdraw.`^`n`n');
-        output('`6Having been informed that you have `^%s`6 gold in your account, you declare that you would like to withdraw all `^%s`6 of it.`n`n', number_format($session['user']['goldinbank'], 0, $point, $sep), number_format($amount, 0, $point, $sep));
+        output('`6Having been informed that you have `^%s`6 gold in your account, you declare that you would like to withdraw all `^%s`6 of it.`n`n', LotgdFormat::numeral($session['user']['goldinbank']), LotgdFormat::numeral($amount));
         output('`@Elessa`6 looks at you for a few moments without blinking, then advises you to take basic arithmetic.  You realize your folly and think you should try again.');
     }
     elseif ($amount > $session['user']['goldinbank'])
@@ -289,7 +287,7 @@ elseif ('withdrawfinish' == $op)
         {
             if ($session['user']['goldinbank'] > 0)
             {
-                output('`6You withdraw your remaining `^%s`6 gold.', number_format($session['user']['goldinbank'], 0, $point, $sep));
+                output('`6You withdraw your remaining `^%s`6 gold.', LotgdFormat::numeral($session['user']['goldinbank']));
                 $lefttoborrow -= $session['user']['goldinbank'];
                 $session['user']['gold'] += $session['user']['goldinbank'];
                 $session['user']['goldinbank'] = 0;
@@ -301,33 +299,33 @@ elseif ('withdrawfinish' == $op)
             {
                 if ($didwithdraw)
                 {
-                    output('`6Additionally, you ask to borrow `^%s`6 gold.', number_format($leftoborrow, 0, $point, $sep));
+                    output('`6Additionally, you ask to borrow `^%s`6 gold.', LotgdFormat::numeral($leftoborrow));
                 }
                 else
                 {
-                    output('`6You ask to borrow `^%s`6 gold.', number_format($lefttoborrow, 0, $point, $sep));
+                    output('`6You ask to borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
                 }
-                output('`@Elessa`6 looks up your account and informs you that you may only borrow up to `^%s`6 gold.', number_format($maxborrow, 0, $point, $sep));
+                output('`@Elessa`6 looks up your account and informs you that you may only borrow up to `^%s`6 gold.', LotgdFormat::numeral($maxborrow));
             }
             else
             {
                 if ($didwithdraw)
                 {
-                    output('`6Additionally, you borrow `^%s`6 gold.', number_format($lefttoborrow, 0, $point, $sep));
+                    output('`6Additionally, you borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
                 }
                 else
                 {
-                    output('`6You borrow `^%s`6 gold.', number_format($lefttoborrow, 0, $point, $sep));
+                    output('`6You borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
                 }
                 $session['user']['goldinbank'] -= $lefttoborrow;
                 $session['user']['gold'] += $lefttoborrow;
                 debuglog("borrows $lefttoborrow gold from the bank");
-                output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a debt of `$%s`@ gold to the bank and `^%s`@ gold in hand.`6"', number_format($amount, 0, $point, $sep), $session['user']['name'], number_format(abs($session['user']['goldinbank']), 0, $point, $sep), number_format($session['user']['gold'], 0, $point, $sep));
+                output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a debt of `$%s`@ gold to the bank and `^%s`@ gold in hand.`6"', LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
             }
         }
         else
         {
-            output('`6Considering the `^%s`6 gold in your account, you ask to borrow `^%s`6. `@Elessa`6 peers through her ledger, runs a few calculations and then informs you that, at your level, you may only borrow up to a total of `^%s`6 gold.', number_format($session['user']['goldinbank'], 0, $point, $sep), number_format($lefttoborrow - $session['user']['goldinbank'], 0, $point, $sep), number_format($maxborrow, 0, $point, $sep));
+            output('`6Considering the `^%s`6 gold in your account, you ask to borrow `^%s`6. `@Elessa`6 peers through her ledger, runs a few calculations and then informs you that, at your level, you may only borrow up to a total of `^%s`6 gold.', LotgdFormat::numeral($session['user']['goldinbank']), LotgdFormat::numeral($lefttoborrow - $session['user']['goldinbank']), LotgdFormat::numeral($maxborrow));
         }
     }
     else
@@ -335,7 +333,7 @@ elseif ('withdrawfinish' == $op)
         $session['user']['goldinbank'] -= $amount;
         $session['user']['gold'] += $amount;
         debuglog("withdrew $amount gold from the bank");
-        output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a balance of `^%s`@ gold in the bank and `^%s`@ gold in hand.`6"', number_format($amount, 0, $point, $sep), $session['user']['name'], number_format(abs($session['user']['goldinbank']), 0, $point, $sep), number_format($session['user']['gold'], 0, $point, $sep));
+        output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a balance of `^%s`@ gold in the bank and `^%s`@ gold in hand.`6"', LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
     }
 }
 villagenav();

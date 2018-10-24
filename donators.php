@@ -171,9 +171,9 @@ if ('' == $op)
             rawoutput('<tr><td>');
             output_notl('`^%s`0', $row['name']);
             rawoutput('</td><td>');
-            output_notl('`@%s`0', number_format($row['donation']));
+            output_notl('`@%s`0', LotgdFormat::numeral($row['donation']));
             rawoutput('</td><td>');
-            output_notl('`%%s`0', number_format($row['donationspent']));
+            output_notl('`%%s`0', LotgdFormat::numeral($row['donationspent']));
             rawoutput('</td></tr>');
         }
     }

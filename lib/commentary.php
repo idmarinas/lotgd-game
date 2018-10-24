@@ -1267,7 +1267,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
 
     if ($moderating)
     {
-        output('`bLast Comment ID shown on this page: %s`b`n', number_format($bottomcid));
+        output('`bLast Comment ID shown on this page: %s`b`n', LotgdFormat::numeral($bottomcid));
     }
     else
     {

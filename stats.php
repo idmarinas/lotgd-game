@@ -27,12 +27,12 @@ if ('stats' == $op || '' == $op)
     $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
     output('`b`%For existing accounts:`b`n');
-    output('`@Total Accounts: `^%s`n', number_format($row['a']));
-    output('`@Total Hits: `^%s`n', number_format($row['c']));
+    output('`@Total Accounts: `^%s`n', LotgdFormat::numeral($row['a']));
+    output('`@Total Hits: `^%s`n', LotgdFormat::numeral($row['c']));
     output('`@Total Page Gen Time: `^%s`n', dhms($row['t']));
-    output('`@Total Page Gen Size: `^%sb`n', number_format($row['s']));
+    output('`@Total Page Gen Size: `^%sb`n', LotgdFormat::numeral($row['s']));
     output('`@Average Page Gen Time: `^%s`n', dhms($row['t'] / $row['c'], true));
-    output('`@Average Page Gen Size: `^%s`n', number_format($row['s'] / $row['c']));
+    output('`@Average Page Gen Size: `^%s`n', LotgdFormat::numeral($row['s'] / $row['c']));
 }
 elseif ('referers' == $op)
 {

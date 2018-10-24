@@ -80,9 +80,7 @@ class LotgdTemplate extends Twig_Environment
              */
             new Twig_SimpleFilter('numeral', function ($number, $decimals = 0)
             {
-                global $lotgdFormat;
-
-                return $lotgdFormat->numeral($number, $decimals);
+                return LotgdFormat::numeral($number, $decimals);
             }),
             //-- Translate a text in template
             new Twig_SimpleFilter('t', function ($data, $namespace = false)
@@ -102,9 +100,7 @@ class LotgdTemplate extends Twig_Environment
             //-- Show a relative date from now
             new Twig_SimpleFilter('relativedate', function ($string)
             {
-                global $lotgdFormat;
-
-                return $lotgdFormat->relativedate($string);
+                return LotgdFormat::relativedate($string);
             }),
             //-- Search and replace keywords
             new Twig_SimpleFilter('sustitute', function ($string)

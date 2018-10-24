@@ -36,7 +36,7 @@ if (1 == $display)
 
     while ($row = DB::fetch_assoc($searchresult))
     {
-        $laston = $lotgdFormat->relativedate($row['laston']);
+        $laston = LotgdFormat::relativedate($row['laston']);
         $loggedin = (date('U') - strtotime($row['laston']) < getsetting('LOGINTIMEOUT', 900) && $row['loggedin']);
 
         if ($loggedin)
