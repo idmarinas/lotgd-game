@@ -400,7 +400,7 @@ $quickkeys = [];
 function private_addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
     //don't call this directly please.  I'll break your thumbs if you do.
-    global $lotgd_tpl, $nav, $session, $accesskeys, $REQUEST_URI, $quickkeys, $navschema, $notranslate;
+    global $nav, $session, $accesskeys, $REQUEST_URI, $quickkeys, $navschema, $notranslate;
 
     if (is_blocked($link))
     {
@@ -474,7 +474,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     if (false === $link)
     {
         $text = holidayize($text, 'nav');
-        $thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/head.twig', [
+        $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/head.twig', [
             'title' => appoencode($text, $priv),
             'tlbutton' => tlbutton_pop()
         ]);
@@ -482,7 +482,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     elseif ('' === $link)
     {
         $text = holidayize($text, 'nav');
-        $thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/help.twig', [
+        $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/help.twig', [
             'text' => appoencode($text, $priv),
             'tlbutton' => tlbutton_pop()
         ]);
@@ -513,7 +513,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
             $keyrep = $hotkey['keyrep'];
             $text = $hotkey['text'];
 
-            $thisnav .= $lotgd_tpl->renderThemeTemplate('sidebar/navigation/item.twig', [
+            $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/item.twig', [
                 'text' => appoencode($text, $priv),
                 'link' => htmlentities($link.(true != $pop ? $extra : ''), ENT_COMPAT, getsetting('charset', 'utf-8')),
                 'accesskey' => $keyrep,

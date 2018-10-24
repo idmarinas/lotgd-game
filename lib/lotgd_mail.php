@@ -5,7 +5,7 @@
  */
 function lotgd_mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
 {
-    global $lotgd_tpl, $copyright;
+    global $copyright;
 
     require_once 'lib/nltoappon.php';
 
@@ -38,7 +38,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
             'url' => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME'])
         ];
 
-        $message = $lotgd_tpl->renderThemeTemplate('mail.twig', $data);
+        $message = LotgdTheme::renderThemeTemplate('mail.twig', $data);
         unset($data);
     }
 

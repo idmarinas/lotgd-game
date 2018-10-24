@@ -132,7 +132,7 @@ function popup($page, $size = '728x400')
  */
 function page_footer($saveuser = true)
 {
-    global $output, $lotgd_tpl, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon, $lotgdServiceManager;
+    global $output, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon, $lotgdServiceManager;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
@@ -222,7 +222,7 @@ function page_footer($saveuser = true)
 
     //output keypress script
     reset($quickkeys);
-    $script .= $lotgd_tpl->renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
+    $script .= LotgdTheme::renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
 
     //NOTICE |
     //NOTICE | Although under the license, you're not required to keep this
@@ -302,15 +302,15 @@ function page_footer($saveuser = true)
 
     //-- Dragon Prime
     $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], ENT_COMPAT, getsetting('charset', 'ISO-8859-1'));
+    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     if (isset($html['paypal']))
     {
-        $html['paypal'] .= $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
+        $html['paypal'] .= LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
     }
     else
     {
-        $html['paypal'] = $lotgd_tpl->renderLotgdTemplate('paypal.twig', $paypalData);
+        $html['paypal'] = LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
     }
     unset($paypalData);
 
@@ -322,7 +322,7 @@ function page_footer($saveuser = true)
 
     //output the nav
     // $html[$z] = $[$z];
-    $html['nav'] = $lotgd_tpl->renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
+    $html['nav'] = LotgdTheme::renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
 
     //output the motd
     $html['motd'] = motdlink();
@@ -365,7 +365,7 @@ function page_footer($saveuser = true)
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
 
-        $html['petitiondisplay'] = $lotgd_tpl->renderThemeTemplate('parts/petition.twig', [
+        $html['petitiondisplay'] = LotgdTheme::renderThemeTemplate('parts/petition.twig', [
             'administrator' => $administrator,
             'petitioncount' => $p
         ]);
@@ -420,7 +420,7 @@ function page_footer($saveuser = true)
     unset($html['session']['user'], $html['user']['password']);
 
     $html['content'] .= $output->get_output();
-    $browser_output = $lotgd_tpl->renderTheme($html);
+    $browser_output = LotgdTheme::renderTheme($html);
     $session['user']['gensize'] += strlen($browser_output);
     $session['output'] = $browser_output;
 
@@ -473,7 +473,7 @@ function popup_header($title = 'Legend of the Green Dragon')
  */
 function popup_footer()
 {
-    global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgd_tpl, $lotgdJaxon;
+    global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgdJaxon;
 
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
@@ -513,7 +513,7 @@ function popup_footer()
     saveuser();
 
     session_write_close();
-    echo $lotgd_tpl->renderThemeTemplate('popup.twig', $html);
+    echo LotgdTheme::renderThemeTemplate('popup.twig', $html);
 
     exit();
 }
@@ -617,7 +617,7 @@ $statbuff = '';
 function getcharstats($buffs)
 {
     //returns output formatted character statistics.
-    global $charstat_info, $charstat_info_copy, $statbuff, $lotgd_tpl;
+    global $charstat_info, $charstat_info_copy, $statbuff;
 
     reset($charstat_info);
     $charstattpl = [];
@@ -639,12 +639,12 @@ function getcharstats($buffs)
         }
     }
 
-    $statbuff = $lotgd_tpl->renderThemeTemplate('sidebar/character/statbuff.twig', [
+    $statbuff = LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
         'title' => translate_inline('`0Buffs'),
         'value' => $buffs
     ]);
 
-    return appoencode($lotgd_tpl->renderThemeTemplate('sidebar/character/stats.twig', [
+    return appoencode(LotgdTheme::renderThemeTemplate('sidebar/character/stats.twig', [
         'charstat' => $charstattpl,
         'statbuff' => $statbuff
     ]), true);
@@ -821,7 +821,7 @@ function charstats()
             {
                 addcharstat('Drunkeness', '');
             }
-            addcharstat('Experience', number_format($u['experience'].check_temp_stat('experience', 1), 0, $point, $sep));
+            addcharstat('Experience', LotgdFormat::numeral($u['experience'].check_temp_stat('experience', 1)));
             addcharstat('Attack', sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
             addcharstat('Defense', sprintf("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
             addcharstat('Speed', $spd.check_temp_stat('speed', 1));
@@ -895,14 +895,14 @@ function charstats()
         {
             addcharstat('PvP', $u['playerfights']);
             addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'`b'));
-            addcharstat('Gold', number_format($u['gold'].check_temp_stat('gold', 1), 0, $point, $sep));
+            addcharstat('Gold', LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
         }
         else
         {
             addcharstat('Favor', $u['deathpower'].check_temp_stat('deathpower', 1));
         }
 
-        addcharstat('Gems', number_format($u['gems'].check_temp_stat('gems', 1), 0, $point, $sep));
+        addcharstat('Gems', LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
         addcharstat('Equipment Info');
 
         if (is_module_active('inventorypopup'))

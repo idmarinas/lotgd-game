@@ -24,4 +24,4 @@ $select->order('category, formalname')
     ->where->equalTo('active', 1);
 $result = DB::execute($select);
 
-rawoutput($lotgd_tpl->renderThemeTemplate('pages/about/listmodules.twig', ['result' => $result]));
+rawoutput(LotgdTheme::renderThemeTemplate('pages/about/listmodules.twig', ['result' => $result]));

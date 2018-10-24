@@ -13,7 +13,7 @@ $vals = [
     'databasetype' => $platform->getName(),
 ];
 
-output_notl($lotgd_tpl->renderLotgdTemplate('configuration/cache.twig', []), true);
+output_notl(LotgdTheme::renderLotgdTemplate('configuration/cache.twig', []), true);
 output_notl('`n`n');
 output('`^Legend`0:`n');
 output('(D) This has been moved to the dbconnect.php`n');

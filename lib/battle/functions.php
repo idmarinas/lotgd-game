@@ -546,9 +546,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
  */
 function battleshowresults(array $lotgdBattleContent)
 {
-    global $lotgd_tpl;
-
     tlschema('battle');
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/battle.twig', $lotgdBattleContent));
+    rawoutput(LotgdTheme::renderThemeTemplate('pages/battle.twig', $lotgdBattleContent));
     tlschema();
 }

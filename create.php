@@ -237,7 +237,7 @@ if ('forgot' == $op)
             'requireemail' => getsetting('requireemail', 0),
             'sendbutton' => translate_inline('Email me my password')
         ];
-        output_notl($lotgd_tpl->renderThemeTemplate('content/forgot.twig', $data), true);
+        output_notl(LotgdTheme::renderThemeTemplate('content/forgot.twig', $data), true);
         unset($data);
         rawoutput('</form>');
     }
@@ -518,7 +518,7 @@ else
         ];
         $data = modulehook('create-form', $data);
 
-        output_notl($lotgd_tpl->renderThemeTemplate('content/register.twig', $data), true);
+        output_notl(LotgdTheme::renderThemeTemplate('content/register.twig', $data), true);
         unset($data);
         output_notl('`n`n');
 

@@ -122,7 +122,7 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
         output_notl('`b`$%s`b`n', $session['message'], true);
     }
 
-    $formLogin = $lotgd_tpl->renderThemeTemplate('pages/home/login.twig', [
+    $formLogin = LotgdTheme::renderThemeTemplate('pages/home/login.twig', [
         'text' => translate_inline('Enter your name and password to enter the realm.`n'),
         'username' => translate_inline('Username'),
         'password' => translate_inline('Password'),
@@ -164,7 +164,7 @@ else
     {
         output('`b`$%s`b`n', $session['message'], true);
     }
-    rawoutput($lotgd_tpl->renderThemeTemplate('pages/home/loginfull.twig', ['text' => translate_inline('Server Full!')]));
+    rawoutput(LotgdTheme::renderThemeTemplate('pages/home/loginfull.twig', ['text' => translate_inline('Server Full!')]));
     output_notl('`c');
 }
 
