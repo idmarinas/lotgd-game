@@ -82,12 +82,14 @@ $lotgdServiceManager = new Lotgd\Core\ServiceManager(require 'config/config.php'
 
 // Include some commonly needed and useful routines
 require_once 'lib/constants.php';
-require_once 'lib/php_generic_environment.php';
-require_once 'lib/datacache.php';
-require_once 'lib/sanitize.php';
 require_once 'lib/output.php';
 require_once 'lib/dbwrapper.php';
 require_once 'lib/settings.php';
+require_once 'lib/lotgdFormat.php';
+require_once 'lib/template.php';
+require_once 'lib/php_generic_environment.php';
+require_once 'lib/datacache.php';
+require_once 'lib/sanitize.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/holiday_texts.php';
 require_once 'lib/nav.php';
@@ -109,8 +111,6 @@ require_once 'lib/lotgd_mail.php';
 require_once 'lib/playerfunctions.php';
 require_once 'lib/pageparts.php';
 require_once 'lib/translator.php';
-require_once 'lib/lotgdFormat.php';
-require_once 'lib/template.php';
 require_once 'lib/jaxon.php';
 
 //-- Update dbconnect.php if necesary
@@ -198,9 +198,11 @@ if (! file_exists('config/autoload/local/dbconnect.php'))
 }
 //-- End - This code will be deleted in the 3.1.0 version
 
-//-- Configure db settings and check connection
-$wrapper = $lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class);
-DB::wrapper($wrapper);
+//-- Configure Theme template
+LotgdTheme::wrapper($lotgdServiceManager->get(Lotgd\Core\Template\Theme::class));
+
+//-- Configure DB settings and check connection
+DB::wrapper($lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class));
 $link = DB::connect();
 
 ob_start();
