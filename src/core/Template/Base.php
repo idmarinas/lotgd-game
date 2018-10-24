@@ -1,6 +1,19 @@
 <?php
 
-class LotgdTemplate extends Twig_Environment
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @author IDMarinas
+ */
+
+namespace Lotgd\Core\Template;
+
+use Twig_Environment;
+use Twig_Loader_Filesystem;
+use Twig_SimpleFilter;
+use Twig_SimpleFunction;
+
+class Base extends Twig_Environment
 {
     protected $twig;
     protected $themename;
@@ -80,7 +93,7 @@ class LotgdTemplate extends Twig_Environment
              */
             new Twig_SimpleFilter('numeral', function ($number, $decimals = 0)
             {
-                return LotgdFormat::numeral($number, $decimals);
+                return \LotgdFormat::numeral($number, $decimals);
             }),
             //-- Translate a text in template
             new Twig_SimpleFilter('t', function ($data, $namespace = false)
@@ -100,7 +113,7 @@ class LotgdTemplate extends Twig_Environment
             //-- Show a relative date from now
             new Twig_SimpleFilter('relativedate', function ($string)
             {
-                return LotgdFormat::relativedate($string);
+                return \LotgdFormat::relativedate($string);
             }),
             //-- Search and replace keywords
             new Twig_SimpleFilter('sustitute', function ($string)
