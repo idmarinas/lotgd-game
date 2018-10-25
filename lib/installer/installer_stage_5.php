@@ -22,18 +22,21 @@ $conflict = [];
 //Or we could save ourselves the dbtype stuff
 
 //-- Settings for Database Adapter
-DB::setAdapter([
+$adapter = new Lotgd\Core\Lib\Dbwrapper([
     'driver' => $session['dbinfo']['DB_DRIVER'],
     'hostname' => $session['dbinfo']['DB_HOST'],
     'database' => $session['dbinfo']['DB_NAME'],
     'charset' => 'utf8',
     'username' => $session['dbinfo']['DB_USER'],
     'password' => $session['dbinfo']['DB_PASS']
-], true);
+]);
+$adapter->setPrefix($session['dbinfo']['DB_PREFIX']);
+//-- Configure DB
+DB::wrapper($adapter);
 
 $link = DB::connect();
 
-$metadata = new Zend\Db\Metadata\Metadata(DB::getAdapter());
+$metadata = new Zend\Db\Metadata\Metadata($adapter->getAdapter());
 $tableNames = $metadata->getTableNames();
 //the conflicts seems not to work - we should check this.
 foreach ($tableNames as $key => $val)
@@ -141,12 +144,11 @@ rawoutput('</table>');
 
 output('`nTo provide a table prefix, enter it here.');
 output("If you don't know what this means, you should either leave it blank, or enter an intuitive value such as \"logd\".`n");
-output('`n`$ For now, prefix not are supported.`0`n`n');
-// rawoutput("<form action='installer.php?stage=5' method='POST'>");
-// rawoutput("<input name='DB_PREFIX' value=\"".htmlentities($session['dbinfo']['DB_PREFIX'], ENT_COMPAT, getsetting("charset", "ISO-8859-1"))."\"><br>");
-// $submit = translate_inline("Submit your prefix.");
-// rawoutput("<input type='submit' value='$submit' class='button'>");
-// rawoutput("</form>");
+rawoutput("<form action='installer.php?stage=5' method='POST' class='ui form'><div class='ui action input'>");
+rawoutput("<input name='DB_PREFIX' value=\"".htmlentities($session['dbinfo']['DB_PREFIX'], ENT_COMPAT, getsetting("charset", "UTF-8"))."\"><br>");
+$submit = translate_inline("Submit your prefix.");
+rawoutput("<button type='submit' class='ui button'>$submit</button>");
+rawoutput("</div></form>");
 if (0 == count($conflict))
 {
     output("`^It looks like you can probably safely skip this step if you don't know what it means.");
