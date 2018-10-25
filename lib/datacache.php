@@ -15,7 +15,7 @@
 /**
  * Reworked by IDMarinas.
  */
-$lotgdCache = $lotgdServiceManager->get(Lotgd\Core\Lib\Cache::class);
+$lotgdCache = LotgdLocator::get(Lotgd\Core\Lib\Cache::class);
 
 /**
  * Get data cache.

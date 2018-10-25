@@ -3,7 +3,7 @@
 // addnews ready
 // mail ready
 
-$settings = $lotgdServiceManager->get(Lotgd\Core\Lib\Settings::class);
+$settings = LotgdLocator::get(Lotgd\Core\Lib\Settings::class);
 
 function savesetting(string $settingname, $value)
 {

@@ -132,7 +132,7 @@ function popup($page, $size = '728x400')
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon, $lotgdServiceManager;
+    global $output, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
@@ -386,7 +386,7 @@ function page_footer($saveuser = true)
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 
-    $wrapper = $lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class);
+    $wrapper = LotgdLocator::get(Lotgd\Core\Lib\Dbwrapper::class);
     if (getsetting('debug', 0))
     {
         global $SCRIPT_NAME;

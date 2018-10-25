@@ -349,4 +349,4 @@ class DB
 }
 
 //-- Configure DB
-DB::wrapper($lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class));
+DB::wrapper(LotgdLocator::get(Lotgd\Core\Lib\Dbwrapper::class));

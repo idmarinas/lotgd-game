@@ -11,9 +11,8 @@
 function blocknav(string $link, bool $partial = false)
 {
     //prevents a script from being able to generate navs on the given $link.
-    global $lotgdServiceManager;
 
-    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
+    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
@@ -37,9 +36,8 @@ function unblocknav($link, $partial = false)
 {
     //prevents a link that was otherwise blocked with blocknav() from
     //actually being blocked.
-    global $lotgdServiceManager;
 
-    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
+    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
@@ -253,9 +251,7 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
  */
 function is_blocked(string $link): bool
 {
-    global $lotgdServiceManager;
-
-    $block = $lotgdServiceManager->get(\Lotgd\Core\Nav\Blocked::class);
+    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     return $block->isBlocked($link);
 }

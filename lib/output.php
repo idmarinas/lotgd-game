@@ -1,7 +1,7 @@
 <?php
 
 //-- INIT Output Collector
-$output = $lotgdServiceManager->get(Lotgd\Core\Output\Collector::class);
+$output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
 
 /*function support without the object call */
 

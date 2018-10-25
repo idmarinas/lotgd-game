@@ -5,7 +5,7 @@
 // mail ready
 function redirect($location, $reason = false)
 {
-    global $session, $REQUEST_URI, $lotgdServiceManager;
+    global $session, $REQUEST_URI;
 
     // This function is deliberately not localized.  It is meant as error
     // handling.
@@ -19,7 +19,7 @@ function redirect($location, $reason = false)
         //deliberately html in translations so admins can personalize this, also in one schema
         $session['allowednavs'] = [];
         addnav('', $location);
-        $failoutput = $lotgdServiceManager->build(Lotgd\Core\Output\Collector::class);
+        $failoutput = LotgdLocator::build(Lotgd\Core\Output\Collector::class);
         $failoutput->output_notl('`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n');
         $failoutput->output_notl('`$');
         $failoutput->rawoutput('<a href="'.htmlentities($location, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">'.translate_inline('Click here to continue.', 'badnav').'</a>');
