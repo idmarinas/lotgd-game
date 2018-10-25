@@ -1,7 +1,5 @@
 <?php
 
-require_once 'lib/dbwrapper.php';
-
 if (httppostisset('DB_HOST'))
 {
     $session['dbinfo']['DB_DRIVER'] = (string) httppost('DB_DRIVER');
@@ -17,14 +15,17 @@ output('`@`c`bTesting the Database Connection`b`c`2');
 output('Trying to establish a connection with the database:`n');
 
 //-- Settings for Database Adapter
-DB::setAdapter([
+$adapter = new Lotgd\Core\Lib\Dbwrapper([
     'driver' => $session['dbinfo']['DB_DRIVER'],
     'hostname' => $session['dbinfo']['DB_HOST'],
     'database' => $session['dbinfo']['DB_NAME'],
     'charset' => 'utf8',
     'username' => $session['dbinfo']['DB_USER'],
     'password' => $session['dbinfo']['DB_PASS']
-], true);
+]);
+//-- Configure DB
+DB::wrapper($adapter);
+
 
 if (false === DB::connect())
 {

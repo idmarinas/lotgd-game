@@ -16,7 +16,8 @@ output('If this is an upgrade, your current tables will be brought in line with 
 output("If it's an install, the necessary tables will be placed in your database.`n");
 output('`n`@Table Synchronization Logs:`n');
 rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-$descriptors = descriptors($DB_PREFIX);
+$adapter = LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
+$descriptors = descriptors($adapter->getPrefix());
 reset($descriptors);
 
 foreach ($descriptors as $tablename => $descriptor)
