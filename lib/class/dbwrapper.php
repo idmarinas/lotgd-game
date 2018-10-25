@@ -347,3 +347,6 @@ class DB
         return self::query($sql);
     }
 }
+
+//-- Configure DB
+DB::wrapper($lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class));

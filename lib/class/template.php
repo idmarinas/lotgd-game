@@ -61,3 +61,6 @@ class LotgdTheme
         self::$wrapper = $wrapper;
     }
 }
+
+//-- Configure Theme template
+LotgdTheme::wrapper($lotgdServiceManager->get(Lotgd\Core\Template\Theme::class));
