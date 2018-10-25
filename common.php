@@ -78,8 +78,7 @@ $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
 //-- Prepare the service manager
-$lotgdServiceManager = new Lotgd\Core\ServiceManager(require 'config/config.php');
-
+require_once 'lib/class/servicemanager.php';
 // Include some commonly needed and useful routines
 require_once 'lib/constants.php';
 require_once 'lib/output.php';
@@ -256,7 +255,7 @@ else
     define('DB_CHOSEN', false);
 }
 
-if ($logd_version == getsetting('installer_version', '-1'))
+if ($logd_version == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     define('IS_INSTALLER', false);
 }
