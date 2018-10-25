@@ -63,4 +63,4 @@ class LotgdTheme
 }
 
 //-- Configure Theme template
-LotgdTheme::wrapper(LotgdLocator::get(Lotgd\Core\Template\Theme::class));
+LotgdTheme::wrapper(LotgdLocator::get(Theme::class));
