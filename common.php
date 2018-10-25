@@ -83,10 +83,10 @@ $lotgdServiceManager = new Lotgd\Core\ServiceManager(require 'config/config.php'
 // Include some commonly needed and useful routines
 require_once 'lib/constants.php';
 require_once 'lib/output.php';
-require_once 'lib/dbwrapper.php';
+require_once 'lib/class/dbwrapper.php';
 require_once 'lib/settings.php';
-require_once 'lib/lotgdFormat.php';
-require_once 'lib/template.php';
+require_once 'lib/class/lotgdFormat.php';
+require_once 'lib/class/template.php';
 require_once 'lib/php_generic_environment.php';
 require_once 'lib/datacache.php';
 require_once 'lib/sanitize.php';
@@ -198,11 +198,7 @@ if (! file_exists('config/autoload/local/dbconnect.php'))
 }
 //-- End - This code will be deleted in the 3.1.0 version
 
-//-- Configure Theme template
-LotgdTheme::wrapper($lotgdServiceManager->get(Lotgd\Core\Template\Theme::class));
-
-//-- Configure DB settings and check connection
-DB::wrapper($lotgdServiceManager->get(Lotgd\Core\Lib\Dbwrapper::class));
+//-- Check connection to DB
 $link = DB::connect();
 
 ob_start();
