@@ -3,7 +3,7 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once 'lib/dbwrapper.php';
+require_once 'lib/class/dbwrapper.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/substitute.php';
 

@@ -3,7 +3,6 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once 'lib/dbwrapper.php';
 
 function get_player_title($old = false)
 {
