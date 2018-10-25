@@ -111,7 +111,7 @@ class Dbwrapper
         //-- Save data for usage
         $this->generatedValue = $result->getGeneratedValue();
         $this->affectedRows = $result->getAffectedRows();
-        $this->errorInfo = $result->getResource()->errorInfo();
+        $this->errorInfo = $result->getResource()->errorInfo()[2];
         $this->sqlString = $statement->getSql();
 
         return $result;
@@ -437,7 +437,7 @@ class Dbwrapper
     {
         if (false !== $result)
         {
-            $r = $result->getResource()->errorInfo();
+            $r = $result->getResource()->errorInfo()[2];
         }
         else
         {
