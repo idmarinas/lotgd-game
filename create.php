@@ -9,8 +9,10 @@ require_once 'common.php';
 require_once 'lib/is_email.php';
 require_once 'lib/checkban.php';
 require_once 'lib/sanitize.php';
-require_once 'lib/settings_extended.php';
 require_once 'lib/serverfunctions.class.php';
+
+//-- Settings extended
+$settings_extended = LotgdLocator::get(Lotgd\Core\Lib\SettingsExtended::class);
 
 checkban();
 

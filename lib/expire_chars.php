@@ -5,7 +5,9 @@
 // mail ready
 
 require_once 'lib/constants.php';
-require_once 'lib/settings_extended.php';
+
+//-- Settings extended
+$settings_extended = LotgdLocator::get(Lotgd\Core\Lib\SettingsExtended::class);
 
 $lastexpire = strtotime(getsetting('last_char_expire', '0000-00-00 00:00:00'));
 $needtoexpire = strtotime('-23 hours');

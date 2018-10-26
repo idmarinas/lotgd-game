@@ -6,12 +6,14 @@
 
 require_once 'common.php';
 require_once 'lib/showform.php';
-require 'lib/settings_extended.php';
 include_once 'lib/gamelog.php';
 require_once 'lib/superusernav.php';
 //get arrays
 require 'lib/data/configuration.php';
 require 'lib/data/configuration_extended.php';
+
+//-- Settings extended
+$settings_extended = LotgdLocator::get(Lotgd\Core\Lib\SettingsExtended::class);
 
 check_su_access(SU_EDIT_CONFIG);
 

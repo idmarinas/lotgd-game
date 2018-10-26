@@ -126,7 +126,8 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
         $body = full_sanitize($body);
         $subject = htmlentities(full_sanitize($subject), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
-        require_once 'lib/settings_extended.php';
+        //-- Settings extended
+        $settings_extended = LotgdLocator::get(Lotgd\Core\Lib\SettingsExtended::class);
 
         $subj = translate_mail($settings_extended->getSetting('notificationmailsubject'), $to);
         $msg = translate_mail($settings_extended->getSetting('notificationmailtext'), $to);
