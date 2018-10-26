@@ -23,7 +23,7 @@ module.exports = function (callback)
         del([
             config.paths.build + '/**/*.{dist,md,lock,json,.yml}',
             config.paths.build + '/config/development/{**,*}',
-            config.paths.build + '/config/**/{{,*.}development}.*'
+            config.paths.build + '/config/{**,*}/development{,.*}.*'
         ])
     }
 
