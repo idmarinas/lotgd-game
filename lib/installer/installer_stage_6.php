@@ -62,7 +62,7 @@ else
     if (false !== $result)
     {
         $failure = false;
-        output('`n`@Success!`2  I was able to write your dbconnect.php file, you can continue on to the next step.');
+        output('`n`@Success!`2  I was able to write your "config/autoload/local/dbconnect.php" file, you can continue on to the next step.');
     }
     else
     {
@@ -71,18 +71,22 @@ else
 
     if ($failure)
     {
-        output('`n`$Unfortunately, I was not able to write your dbconnect.php file.');
+        output('`n`$Unfortunately, I was not able to write your "config/autoload/local/dbconnect.php" file.');
         output('`2You will have to create this file yourself, and upload it to your web server.');
         output('The contents of this file should be as follows:`3');
         rawoutput('<blockquote><pre>'.htmlentities($code, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</pre></blockquote>');
         output('`2Create a new file, past the entire contents from above into it`2 ).');
-        output("When you have that done, save the file as 'dbconnect.php' and upload this to the location you have LoGD at.");
+        output('When you have that done, save the file as "config/autoload/local/dbconnect.php" and upload this to the location you have LoGD at.');
         output('You can refresh this page to see if you were successful.');
+        output('`nIf have problems, you can try delete file "cache/service-manager.config.php".');
     }
     else
     {
         $success = true;
     }
+
+    //-- Delete the old cache file from the Service Manager and force it to generate it again.
+    unlink('cache/service-manager.config.php');
 }
 
 if (! $success)
