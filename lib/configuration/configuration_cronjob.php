@@ -1,6 +1,5 @@
 <?php
 
-require_once 'lib/settings.class.php';
 include_once 'lib/gamelog.php';
 
 if ('savecronjob' == $op)
