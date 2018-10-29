@@ -331,7 +331,7 @@ function page_footer($saveuser = true)
     $html['script'] = $script;
     //output view PHP source link
     $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', ($_SERVER['REQUEST_URI']));
-    $html['source'] = "<a href='$sourcelink' onclick=\"".popup($sourcelink).";return false;\" target='_blank'>".translate_inline('View PHP Source').'</a>';
+    $html['source'] = "<a href='$sourcelink' id='source' onclick='Lotgd.embed(this)' data-size='fullscreen' target='_blank'>".translate_inline('View PHP Source').'</a>';
     //output version
     $html['version'] = "Version: $logd_version";
     //output page generation time
