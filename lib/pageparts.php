@@ -84,47 +84,6 @@ function page_header()
 }
 
 /**
- * Returns an output formatted popup link based on JavaScript.
- *
- * @param string $page The URL to open
- * @param string $size The size of the popup window (Default: 728x400)
- *
- * @return string
- */
-function popup($page, $size = '728x400')
-{
-    // user prefs
-    global $session;
-
-    if ('728x400' === $size && isset($session['loggedin']) && $session['loggedin'])
-    {
-        if (! isset($session['user']['prefs']))
-        {
-            $usersize = '728x400';
-        }
-        else
-        {
-            $usersize = &$session['user']['prefs']['popupsize'];
-
-            if (! $usersize)
-            {
-                $usersize = '728x400';
-            }
-        }
-        $s = explode('x', $usersize);
-        $s[0] = (int) max(50, $s[0]);
-        $s[1] = (int) max(50, $s[1]);
-    }
-    else
-    {
-        $s = explode('x', $size);
-    }
-
-    //user prefs
-    return "window.open('$page','".preg_replace('([^[:alnum:]])', '', $page)."','scrollbars=yes,resizable=yes,width={$s[0]},height={$s[1]}').focus()";
-}
-
-/**
  * Brings all the output elements together and terminates the rendering of the page.  Saves the current user info and updates the rendering statistics
  * Hooks provided:
  *	footer-{$script name}
@@ -162,8 +121,7 @@ function page_footer($saveuser = true)
     }
 
     unset($replacementbits['__scriptfile__']);
-    //output any template part replacements that above hooks need (eg,
-    //advertising)
+    //output any template part replacements that above hooks need (eg, advertising)
     foreach ($replacementbits as $key => $val)
     {
         if (! isset($html[$key]))
@@ -1013,4 +971,53 @@ function motdlink()
     {
         return '<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">'.translate_inline('MoTD').'</a>';
     }
+}
+
+/**
+ * Returns an output formatted popup link based on JavaScript.
+ *
+ * @param string $page The URL to open
+ * @param string $size The size of the popup window (Default: 728x400)
+ *
+ * @return string
+ *
+ * @deprecated 3.0.0 delete in 3.1.0
+ */
+function popup($page, $size = '728x400')
+{
+    // user prefs
+    global $session;
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.0.0; and delete in version 3.1.0 please ovoid use "%s", use "Lotgd.embed()" JavaScript function',
+        __METHOD__,
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    if ('728x400' === $size && isset($session['loggedin']) && $session['loggedin'])
+    {
+        if (! isset($session['user']['prefs']))
+        {
+            $usersize = '728x400';
+        }
+        else
+        {
+            $usersize = &$session['user']['prefs']['popupsize'];
+
+            if (! $usersize)
+            {
+                $usersize = '728x400';
+            }
+        }
+        $s = explode('x', $usersize);
+        $s[0] = (int) max(50, $s[0]);
+        $s[1] = (int) max(50, $s[1]);
+    }
+    else
+    {
+        $s = explode('x', $size);
+    }
+
+    //user prefs
+    return "window.open('$page','".preg_replace('([^[:alnum:]])', '', $page)."','scrollbars=yes,resizable=yes,width={$s[0]},height={$s[1]}').focus()";
 }
