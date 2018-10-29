@@ -795,9 +795,6 @@ function charstats()
             $def = round($def, 2);
         }
 
-        $point = getsetting('moneydecimalpoint', '.');
-        $sep = getsetting('moneythousandssep', ',');
-
         addcharstat('Character Info');
         addcharstat('Name', $u['name']);
         addcharstat('Dragonkills', '`b'.$u['dragonkills'].'`b');
