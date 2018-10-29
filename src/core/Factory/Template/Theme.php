@@ -17,7 +17,12 @@ class Theme implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new TemplateTheme();
+        $options = $container->get('GameConfig');
+
+        return new TemplateTheme([], [
+            //-- Used in development for reload .twig templates
+            'auto_reload' => (bool) ($options['lotgd_core']['development'] ?? false)
+        ]);
     }
 
     public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
