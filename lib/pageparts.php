@@ -155,11 +155,6 @@ function page_footer($saveuser = true)
         && (! isset($nopopup[$SCRIPT_NAME]) || 1 != $nopopups[$SCRIPT_NAME])
         && $session['user']['loggedin']
     ) {
-        if (getsetting('forcedmotdpopup', 0))
-        {
-            $headscript .= popup('motd.php');
-        }
-
         $session['needtoviewmotd'] = true;
     }
     else
@@ -496,31 +491,13 @@ function wipe_charstats()
  * Add a attribute and/or value to the character stats display.
  *
  * @param string $label The label to use
- * @param mixed  $value (optional) value to display
+ * @param string  $value (optional) value to display
  */
-function addcharstat($label, $value = false)
+function addcharstat($label, $value = null)
 {
-    global $charstat_info, $charstat_info_copy, $last_charstat_label;
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
-    if (false === $value)
-    {
-        if (! isset($charstat_info[$label]))
-        {
-            $charstat_info[$label] = [];
-        }
-        $last_charstat_label = $label;
-    }
-    else
-    {
-        if ('' == $last_charstat_label)
-        {
-            $last_charstat_label = 'Other Info';
-            addcharstat($last_charstat_label);
-        }
-        $charstat_info[$last_charstat_label][$label] = $value;
-    }
-
-    $charstat_info_copy = $charstat_info;
+    return $stats->addcharstat($label, $value);
 }
 
 /**
@@ -547,21 +524,9 @@ function getcharstat($cat, $label)
  */
 function setcharstat($cat, $label, $val)
 {
-    global $charstat_info, $charstat_info_copy, $last_charstat_label;
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
-    if (! isset($charstat_info[$cat][$label]))
-    {
-        $oldlabel = $last_charstat_label;
-        addcharstat($cat);
-        addcharstat($label, $val);
-        $last_charstat_label = $oldlabel;
-    }
-    else
-    {
-        $charstat_info[$cat][$label] = $val;
-    }
-
-    $charstat_info_copy = $charstat_info;
+    return $stats->setcharstat($label, $value);
 }
 
 $statbuff = '';
@@ -575,9 +540,12 @@ $statbuff = '';
 function getcharstats($buffs)
 {
     //returns output formatted character statistics.
-    global $charstat_info, $charstat_info_copy, $statbuff;
+    global $charstat_info_copy, $statbuff;
 
-    reset($charstat_info);
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+
+    $charstat_info = $stats->getStats();
+    $charstat_info_copy = $charstat_info;
     $charstattpl = [];
 
     foreach ($charstat_info as $label => $section)
