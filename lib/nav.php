@@ -513,7 +513,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
                 'text' => appoencode($text, $priv),
                 'link' => htmlentities($link.(true != $pop ? $extra : ''), ENT_COMPAT, getsetting('charset', 'utf-8')),
                 'accesskey' => $keyrep,
-                'popup' => (true == $pop ? "target='_blank'".($popsize > '' ? ' onClick="'.popup($link, $popsize).'; return false;"' : '') : ''),
+                'popup' => (true == $pop ? "target='_blank' onClick='Lotgd.embed(this)' data-force='true'" : ''),
                 'tlbutton' => tlbutton_pop()
             ]);
         }
@@ -760,7 +760,7 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
             }
             else
             {
-                $quickkeys[$key] = popup($link, $popsize);
+                $quickkeys[$key] = 'onclick="Lotgd.embed(this)"';
             }
         }
         else

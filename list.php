@@ -188,7 +188,7 @@ for ($i = 0; $i < $max; $i++)
 
     if ($session['user']['loggedin'])
     {
-        rawoutput('<a href="mail.php?op=write&to='.rawurlencode($row['login']).'" target="_blank" onClick="'.popup('mail.php?op=write&to='.rawurlencode($row['login']).'').';return false;">');
+        rawoutput('<a href="mail.php?op=write&to='.rawurlencode($row['login']).'" target="_blank" onClick="Lotgd.embed(this)">');
         rawoutput("<img src='images/newscroll.GIF' width='16' height='16' alt='$writemail' border='0'></a>");
         rawoutput("<a href='bio.php?char=".$row['acctid']."'>");
         addnav('', 'bio.php?char='.$row['acctid'].'');
