@@ -480,7 +480,9 @@ $last_charstat_label = '';
  */
 function wipe_charstats()
 {
-    global $charstat_info, $last_charstat_label;
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+
+    return $stats->wipeStats();
 
     $charstat_info = [];
     $charstat_info_copy = [];
@@ -506,13 +508,13 @@ function addcharstat($label, $value = null)
  * @param string $cat   The relavent category for the stat
  * @param string $label The label of the character stat
  *
- * @return mixed The value associated with the stat
+ * @return string The value associated with the stat
  */
 function getcharstat($cat, $label)
 {
-    global $charstat_info;
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
-    return $charstat_info[$cat][$label];
+    return $stats->getcharstat($cat, $label);
 }
 
 /**
@@ -526,7 +528,22 @@ function setcharstat($cat, $label, $val)
 {
     $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
-    return $stats->setcharstat($label, $value);
+    return $stats->setcharstat($cat, $label, $val);
+}
+
+/**
+ * Is alias of getcharstat
+ *
+ * @param string $section The character stat section
+ * @param string $title   The stat display label
+ *
+ * @return string The value associated with the stat
+ */
+function getcharstat_value($section, $title)
+{
+    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+
+    return $stats->getcharstat($cat, $label);
 }
 
 $statbuff = '';
@@ -577,35 +594,15 @@ function getcharstats($buffs)
 }
 
 /**
- * Returns the value associated with the section & label.  Returns an empty string if the stat isn't set.
- *
- * @param string $section The character stat section
- * @param string $title   The stat display label
- *
- * @return mixed The value associated with the stat
- */
-function getcharstat_value($section, $title)
-{
-    global $charstat_info;
-
-    if (isset($charstat_info[$section][$title]))
-    {
-        return $charstat_info[$section][$title];
-    }
-    else
-    {
-        return;
-    }
-}
-
-/**
  * Returns the current character stats or (if the character isn't logged in) the currently online players
  * Hooks provided:
  *		charstats.
  *
+ * @param bool $return
+ *
  * @return array The current stats for this character or the list of online players
  */
-function charstats()
+function charstats($return = true)
 {
     global $session, $playermount, $companions;
 
@@ -842,14 +839,19 @@ function charstats()
 
         modulehook('charstats');
 
-        $charstat = getcharstats($buffs);
-
-        if (! is_array($session['bufflist']))
+        if ($return)
         {
-            $session['bufflist'] = [];
+            $charstat = getcharstats($buffs);
+
+            if (! is_array($session['bufflist']))
+            {
+                $session['bufflist'] = [];
+            }
+
+            return $charstat;
         }
 
-        return $charstat;
+        return;
     }
     else
     {
