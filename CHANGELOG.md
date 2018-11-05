@@ -22,7 +22,21 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **lib/datacache.php** Using Service Manager
 * **lib/e_rand.php** Some improvements and added comments to functions
 * **lib/creaturefunctions.php** Now param `$packofmonsters` have a default value
-* **lib/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
+* **lib/modules.php** This file has been divided into different files, to improve comprehension.
+    * New files:
+        * **lib/modules.php**
+        * **lib/modules/actions.php**
+        * **lib/modules/blockunblock.php**
+        * **lib/modules/event.php**
+        * **lib/modules/hook.php**
+        * **lib/modules/injectmodule.php**
+        * **lib/modules/modulestatus.php**
+        * **lib/modules/objpref.php**
+            * Now used forced cache to get ObjPref for a given module
+        * **lib/modules/prefs.php**
+            * Now used forced cache to get Prefs for a given module and user
+        * **lib/modules/settings.php**
+* **lib/class/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
     * Using class `LotgdTheme::` for render templates:
      * **armor.php**
      * **clan.php**
@@ -35,7 +49,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
      * **lib/about/about_listmodules.php**
      * **lib/battle/functions.php**
      * **lib/configuration/configuration_cache.php**
-* **lib/lotgdFormat.php** Is now a class of static functions no needed be instantiated
+* **lib/class/lotgdFormat.php** Is now a class of static functions no needed be instantiated
     * Using class `LotgdFormat::` for format numbers and any dates in:
         * **bank.php**
         * **donators.php**
@@ -49,21 +63,25 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * **lib/user/user_.php.php**
         * **lib/user/user_removeban.php.php**
         * **lib/user/user_searchban.php.php**
+* **lib/installer/installer_stage_6.php** File `dbconnect.php` are in a new folder and have a new structure.
 * **THEME**
-    * Updated Semantic UI version 2.4.0 => 2.4.1
+    * Updated Semantic UI version 2.4.0 => 2.4.2
 
 ### FEATURES
 
-* **lib/pageparts.php** Added variable `$charstat_info_copy` to have original copy of stats of character
+* Now Lotgd IDMarinas Edition supported prefix for tables. You can add a prefix to name of tables in database. But may be not are full supported for any query in game. Remember use function `DB::prefix(string)` for add a prefix to name of table.
+* **lib/pageparts.php** Transfer character stats to a factory
 
 ### DEPRECATED
 
-* **lib/dbwrapper.php** Function `query_cached` is deprecated and deleted in a future version
+* **lib/class/dbwrapper.php** Function `query_cached` is deprecated and deleted in a future version
     * Use data cache system to cache data of query when needed
+* **lib/pageparts.php** Function `popup()` is deprecated and deleted in 3.1.0 version
 
 ### FIXES
 
 * **bank.php** Fixed error by which you could not borrow money
+* **rumodule.php** Fixed error with link added with addnav
 * **lib/buffs.php** Fixed error with undefined index
 
 ### REMOVES
@@ -71,9 +89,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **common.php** Code removed for version upgrade previous versions 1.0.0 IDMarinas edition and below
     * This makes that from the 3.0.0 version it is impossible to update a previous version to the 1.0.0 IDmarinas Edition
 * **settings.php** Removed unused file
+* **PhpMailer** Deleted all files, not used in Lotgd Core. If you need, you can load via Composer
 * ***Removed deprecate functions***
     **lib/datetime.php**
-    **lib/dbwrapper.php**
+    **lib/class/dbwrapper.php**
     **lib/http.php**
     **lib/forestoutcomes.php**
     **lib/showform.php**
