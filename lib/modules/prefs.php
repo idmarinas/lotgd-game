@@ -168,6 +168,14 @@ function set_module_pref($name, $value, $module = false, $user = false)
     invalidatedatacache("module-prefs-$user-$module", true);
 }
 
+/**
+ * Increment pref of user for a given module and setting.
+ *
+ * @param string    $name
+ * @param int|float $value
+ * @param string    $module
+ * @param int       $user
+ */
 function increment_module_pref($name, $value = 1, $module = false, $user = false)
 {
     global $mostrecentmodule, $session;
