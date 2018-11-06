@@ -24,7 +24,7 @@ else
 if (! isset($session['user']['loggedin']) || ! ($session['user']['loggedin'] && $session['user']['superuser'] & SU_VIEW_SOURCE))
 {
     output('Due to the behaviour of people in the past, access to the source code online has been restricted.');
-    output("You may download the entirety of the latest publically released stable version from <a href='http://www.dragonprime.net' target='_blank'>DragonPrime</a>.", true);
+    output("You may download the entirety of the latest publically released stable version from <a href='http://www.dragonprime.net' target='_blank' rel='noopener noreferrer'>DragonPrime</a>.", true);
     output('You may then work with that code within the restrictions of its license.');
     output('`n`nHopefully this will help put an end to actions like the following:');
     rawoutput('<ul><li>');

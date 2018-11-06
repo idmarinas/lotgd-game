@@ -6,7 +6,7 @@ rawoutput("<form id='install-3' action='installer.php?stage=4' method='POST'>");
 output('`@`c`bDatabase Connection Information`b`c`2');
 output('In order to run Legend of the Green Dragon, your server must have access to a MySQL database.');
 output("If you are not sure if you meet this need, talk to server's Internet Service Provider (ISP), and make sure they offer MySQL databases.");
-output("If you are running on your own machine or a server under your control, you can download and install MySQL from <a href='http://www.mysql.com/' target='_blank'>the MySQL website</a> for free.`n", true);
+output("If you are running on your own machine or a server under your control, you can download and install MySQL from <a href='http://www.mysql.com/' target='_blank' rel='noopener noreferrer'>the MySQL website</a> for free.`n", true);
 
 if (file_exists('dbconnect.php'))
 {

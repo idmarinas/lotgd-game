@@ -324,7 +324,7 @@ else
 
         // Output the information we have.
         rawoutput('<tr>');
-        rawoutput("<td class='collapsing'><a href=\"".htmlentities($row['address'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" target='_blank'>");
+        rawoutput("<td class='collapsing'><a href=\"".htmlentities($row['address'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" target='_blank' rel='noopener noreferrer'>");
         output_notl('`&%s`0', $row['description'], true);
         rawoutput('</a></td><td>');
         output_notl('`^%s`0', $row['version']); // so we are able to translate "`^Unknown`0"

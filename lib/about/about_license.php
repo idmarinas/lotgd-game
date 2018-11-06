@@ -17,7 +17,7 @@ addnav('About LoGD', 'about.php');
 addnav('Game Setup Info', 'about.php?op=setup');
 addnav('Module Info', 'about.php?op=listmodules');
 output("`@MightyE tells you, \"`2We're going to take a few moments to try and explain this new license and the reasons behind it in plain English.");
-output("The legalese for the license can be found online at <a href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode' target='_blank'>http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode</a> and should be read and understood in detail before you use this code.`@\"`n`n", true);
+output("The legalese for the license can be found online at <a href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode' target='_blank' rel='noopener noreferrer'>http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode</a> and should be read and understood in detail before you use this code.`@\"`n`n", true);
 output('`@"`2This new license was chosen because of a failing with the GPL.');
 output('It only covered distribution of source if and only if binaries were distributed.`@"`n`n');
 output('`@"`2In a web environment, specifically an interpreted web environment such as PHP, merely installing a game does not constitute distribution, and therefore people were taking our work, making modifications to it and not releasing the source code to their modifications so that the entire community could benefit.');
