@@ -19,7 +19,7 @@
 			{% if isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
 			{{ '(%s) %s (Level `b%s`b)`0'|t|format(who|t, nametext, level)|colorize }}
 			{% if not showbar %}
-				{% if hpvalue > 0 %}: {% if showhptext %}`6{{ hpvaluetext }}`0{% endif %}{% else %}{{ '`7DEFEATED`0'|t|colorize }}{% endif %}
+				{% if hpvalue > 0 %}: {% if showhptext %}{{ ( '`6' ~ hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ '`7DEFEATED`0'|t|colorize }}{% endif %}
 			{% endif %}
 		</td>
 	</tr>
