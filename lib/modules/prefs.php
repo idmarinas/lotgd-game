@@ -192,7 +192,7 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
         $user = $session['user']['acctid'];
     }
 
-    $module_prefs = load_module_prefs($module, $uid);
+    $module_prefs = load_module_prefs($module, $user);
 
     //don't write to the DB if the user isn't logged in.
     if (! $session['user']['loggedin'] && ! $user)
