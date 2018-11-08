@@ -8,6 +8,18 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### CHANGES
 
+* **Improve** performance and prevent security vulnerabilities for external links in this files:
+    * **common.php**
+    * **lotgdnet.php**
+    * **source.php**
+    * **lib/nav.php**
+    * **lib/about/about_default.php**
+    * **lib/about/about_license.php**
+    * **lib/configuration/configuration_cronjob.php**
+    * **lib/installer/installer_sqlstatements.php**
+    * **lib/installer/installer_stage_1.php**
+    * **lib/installer/installer_stage_3.php**
+    * **templates/paypal.twig**
 * **translatetool.php** It uses the new way of generating queries to the DB (this method avoids problems with some characters when making queries, like for example the simple quotation)
 * **Jaxon** Files for jaxon has moved to new dir
     * Can add your own files for jaxon in `src/ajax/local`
@@ -71,6 +83,12 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 * Now Lotgd IDMarinas Edition supported prefix for tables. You can add a prefix to name of tables in database. But may be not are full supported for any query in game. Remember use function `DB::prefix(string)` for add a prefix to name of table.
 * **lib/pageparts.php** Transfer character stats to a factory
+* **lib/class/doctrine.php** Add a Doctrine ORM to core of Lotgd. Now you can use in your modules.
+    * This, is perhaps, the prelude to its use in the whole core. :laughing:
+    * Functions allowed for now:
+        * `Doctrine::getRepository(string [EntityClassName])`
+        * `Doctrine::syncEntity(string [EntityClassName])` Synchronize a Entity with database.
+        * `Doctrine::syncEntities(array [EntityClassName])` Synchronizes an array of Entities with database.
 
 ### DEPRECATED
 
@@ -89,7 +107,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **common.php** Code removed for version upgrade previous versions 1.0.0 IDMarinas edition and below
     * This makes that from the 3.0.0 version it is impossible to update a previous version to the 1.0.0 IDmarinas Edition
 * **settings.php** Removed unused file
-* **PhpMailer** Deleted all files, not used in Lotgd Core. If you need, you can load via Composer
+* **lib/phpmailer/** Deleted all files, not used in Lotgd Core. If you need, you can load via Composer
+* **lib/sendmail.php** Removed from the core of the game, was not being used.
 * ***Removed deprecate functions***
     **lib/datetime.php**
     **lib/class/dbwrapper.php**
