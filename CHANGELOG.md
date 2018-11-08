@@ -6,7 +6,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 # Version: 3.0.0
 
-### CHANGES
+### :cyclone: CHANGES
 
 * **Improve** performance and prevent security vulnerabilities for external links in this files:
     * **common.php**
@@ -48,38 +48,39 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * **lib/modules/prefs.php**
             * Now used forced cache to get Prefs for a given module and user
         * **lib/modules/settings.php**
-* **lib/class/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
-    * Using class `LotgdTheme::` for render templates:
-     * **armor.php**
-     * **clan.php**
-     * **create.php**
-     * **home.php**
-     * **weapons.php**
-     * **lib/lotgd_mail.php**
-     * **lib/nav.php**
-     * **lib/pageparts.php**
-     * **lib/about/about_listmodules.php**
-     * **lib/battle/functions.php**
-     * **lib/configuration/configuration_cache.php**
-* **lib/class/lotgdFormat.php** Is now a class of static functions no needed be instantiated
-    * Using class `LotgdFormat::` for format numbers and any dates in:
-        * **bank.php**
-        * **donators.php**
-        * **list.php**
-        * **stats.php**
-        * **lib/commentary.php**
-        * **lib/template.class.php**
-        * **lib/bans/case_.php**
-        * **lib/bans/case_removeban.php**
-        * **lib/bans/case_searchban.php**
-        * **lib/user/user_.php.php**
-        * **lib/user/user_removeban.php.php**
-        * **lib/user/user_searchban.php.php**
+* :warning: ***IMPORTANT***
+    * **lib/class/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
+        * Using class `LotgdTheme::` for render templates:
+        * **armor.php**
+        * **clan.php**
+        * **create.php**
+        * **home.php**
+        * **weapons.php**
+        * **lib/lotgd_mail.php**
+        * **lib/nav.php**
+        * **lib/pageparts.php**
+        * **lib/about/about_listmodules.php**
+        * **lib/battle/functions.php**
+        * **lib/configuration/configuration_cache.php**
+    * **lib/class/lotgdFormat.php** Is now a class of static functions no needed be instantiated
+        * Using class `LotgdFormat::` for format numbers and any dates in:
+            * **bank.php**
+            * **donators.php**
+            * **list.php**
+            * **stats.php**
+            * **lib/commentary.php**
+            * **lib/template.class.php**
+            * **lib/bans/case_.php**
+            * **lib/bans/case_removeban.php**
+            * **lib/bans/case_searchban.php**
+            * **lib/user/user_.php.php**
+            * **lib/user/user_removeban.php.php**
+            * **lib/user/user_searchban.php.php**
 * **lib/installer/installer_stage_6.php** File `dbconnect.php` are in a new folder and have a new structure.
 * **THEME**
     * Updated Semantic UI version 2.4.0 => 2.4.2
 
-### FEATURES
+### :star: FEATURES
 
 * Now Lotgd IDMarinas Edition supported prefix for tables. You can add a prefix to name of tables in database. But may be not are full supported for any query in game. Remember use function `DB::prefix(string)` for add a prefix to name of table.
 * **lib/pageparts.php** Transfer character stats to a factory
@@ -90,35 +91,35 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * `Doctrine::syncEntity(string [EntityClassName])` Synchronize a Entity with database.
         * `Doctrine::syncEntities(array [EntityClassName])` Synchronizes an array of Entities with database.
 
-### DEPRECATED
+### :fire: DEPRECATED
 
 * **lib/class/dbwrapper.php** Function `query_cached` is deprecated and deleted in a future version
     * Use data cache system to cache data of query when needed
 * **lib/pageparts.php** Function `popup()` is deprecated and deleted in 3.1.0 version
 
-### FIXES
+### :wrench: FIXES
 
 * **bank.php** Fixed error by which you could not borrow money
 * **rumodule.php** Fixed error with link added with addnav
 * **lib/buffs.php** Fixed error with undefined index
 
-### REMOVES
+### :x: REMOVES
 
 * **common.php** Code removed for version upgrade previous versions 1.0.0 IDMarinas edition and below
     * This makes that from the 3.0.0 version it is impossible to update a previous version to the 1.0.0 IDmarinas Edition
 * **settings.php** Removed unused file
 * **lib/phpmailer/** Deleted all files, not used in Lotgd Core. If you need, you can load via Composer
 * **lib/sendmail.php** Removed from the core of the game, was not being used.
-* ***Removed deprecate functions***
-    **lib/datetime.php**
-    **lib/class/dbwrapper.php**
-    **lib/http.php**
-    **lib/forestoutcomes.php**
-    **lib/showform.php**
-    **lib/template.class.php**
-    **lib/template.php**
+* *Removed deprecate functions*
+    * **lib/datetime.php**
+    * **lib/class/dbwrapper.php**
+    * **lib/http.php**
+    * **lib/forestoutcomes.php**
+    * **lib/showform.php**
+    * **lib/template.class.php**
+    * **lib/template.php**
 
-### NOTES
+### :notebook: NOTES
 
 * **Optimization** Many files `.php`' have had a slight optimization of code using CS Fixer.
 
