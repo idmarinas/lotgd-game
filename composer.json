@@ -10,6 +10,7 @@
     "license": "CC-BY-NC-SA-2.0",
     "require": {
         "php": "^7.0",
+        "doctrine/orm": "^2.5",
         "ezyang/htmlpurifier": "^4.9",
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
