@@ -138,8 +138,6 @@ function set_module_pref($name, $value, $module = false, $user = false)
         // We do need to save to the loaded copy here however
         $module_prefs[$name] = $value;
 
-        updatedatacache("module-prefs-$user-$module", $module_prefs, true);
-
         return;
     }
 
@@ -164,8 +162,6 @@ function set_module_pref($name, $value, $module = false, $user = false)
         ]);
         DB::execute($insert);
     }
-
-    invalidatedatacache("module-prefs-$user-$module", true);
 }
 
 /**
@@ -207,8 +203,6 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
             $module_prefs[$name] = $value;
         }
 
-        updatedatacache("module-prefs-$user-$module", $module_prefs, true);
-
         return;
     }
 
@@ -233,8 +227,6 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
         ]);
         DB::execute($insert);
     }
-
-    invalidatedatacache("module-prefs-$user-$module", true);
 }
 
 /**
@@ -280,8 +272,6 @@ function clear_module_pref($name, $module = false, $user = false)
         ;
         DB::execute($delete);
     }
-
-    invalidatedatacache("module-prefs-$user-$module", true);
 }
 
 /**
@@ -301,24 +291,17 @@ function load_module_prefs($module, $user = false): array
         $user = $session['user']['acctid'];
     }
 
-    $module_prefs = datacache("module-prefs-$user-$module", 300, true);
+    $module_prefs = [];
+    $select = DB::select('module_userprefs');
+    $select->columns(['setting', 'value'])
+        ->where->equalTo('modulename', $module)
+            ->equalTo('userid', $user)
+    ;
+    $result = DB::execute($select);
 
-    if (! is_array($module_prefs))
+    while ($row = DB::fetch_assoc($result))
     {
-        $module_prefs = [];
-        $select = DB::select('module_userprefs');
-        $select->columns(['setting', 'value'])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('userid', $user)
-        ;
-        $result = DB::execute($select);
-
-        while ($row = DB::fetch_assoc($result))
-        {
-            $module_prefs[$row['setting']] = $row['value'];
-        }
-
-        updatedatacache("module-prefs-$user-$module", $module_prefs, true);
+        $module_prefs[$row['setting']] = $row['value'];
     }
 
     return $module_prefs;
