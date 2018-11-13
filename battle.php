@@ -141,7 +141,7 @@ $defeat = false;
 
 if ($enemycounter > 0)
 {
-    modulehook('battle', $enemies);
+    modulehook('battle-turn-start', $enemies);
     $lotgdBattleContent['enemies'] = $enemies;
 
     $data = prepare_data_battlebars($enemies);
@@ -718,20 +718,6 @@ $newenemies = autosettarget($newenemies);
 
 $badguy = modulehook('endofpage', $badguy);
 
-if ($enemycounter > 0)
-{
-    modulehook('battle', $enemies);
-    $lotgdBattleContent['enemies'] = $enemies;
-
-    $data = prepare_data_battlebars($enemies);
-    $lotgdBattleContent['battlebars']['end'] = [
-        'player' => $data['user'],
-        'companions' => $data['companions'],
-        'enemies' => $data['enemies']
-    ];
-    unset($data);
-}
-
 if ($session['user']['hitpoints'] <= 0)
 {
     $session['user']['hitpoints'] = 0;
@@ -804,6 +790,7 @@ if ($victory || $defeat)
     if ($victory)
     {
         $result = modulehook('battle-victory-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        $newenemies = $result['enemies'];
 
         $lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
 
@@ -815,6 +802,7 @@ if ($victory || $defeat)
     elseif ($defeat)
     {
         $result = modulehook('battle-defeat-end', ['enemies' => $newenemies, 'options' => $options, 'messages' => []]);
+        $newenemies = $result['enemies'];
 
         $lotgdBattleContent['battleend'] = $lotgdBattleContent['battleend'] + $result['messages'];
 
@@ -823,6 +811,21 @@ if ($victory || $defeat)
             battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
         }
     }
+}
+
+if ($enemycounter > 0)
+{
+    debug('end');
+    modulehook('battle-turn-end', $newenemies);
+    $lotgdBattleContent['enemies'] = $newenemies;
+
+    $data = prepare_data_battlebars($newenemies);
+    $lotgdBattleContent['battlebars']['end'] = [
+        'player' => $data['user'],
+        'companions' => $data['companions'],
+        'enemies' => $data['enemies']
+    ];
+    unset($data);
 }
 
 $attackstack = ['enemies' => $newenemies, 'options' => $options];
