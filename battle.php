@@ -148,7 +148,8 @@ if ($enemycounter > 0)
     $lotgdBattleContent['battlebars']['start'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
-        'enemies' => $data['enemies']
+        'enemies' => $data['enemies'],
+        'battleoptions' => $options
     ];
     unset($data);
 }
@@ -823,7 +824,8 @@ if ($enemycounter > 0)
     $lotgdBattleContent['battlebars']['end'] = [
         'player' => $data['user'],
         'companions' => $data['companions'],
-        'enemies' => $data['enemies']
+        'enemies' => $data['enemies'],
+        'battleoptions' => $options
     ];
     unset($data);
 }
