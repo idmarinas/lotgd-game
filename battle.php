@@ -816,7 +816,6 @@ if ($victory || $defeat)
 
 if ($enemycounter > 0)
 {
-    debug('end');
     modulehook('battle-turn-end', $newenemies);
     $lotgdBattleContent['enemies'] = $newenemies;
 
@@ -833,6 +832,7 @@ if ($enemycounter > 0)
 $attackstack = ['enemies' => $newenemies, 'options' => $options];
 $session['user']['badguy'] = createstring($attackstack);
 $session['user']['companions'] = createstring($companions);
+$session['user']['battle']['options'] = $options;
 
 if ($battleShowResult)
 {
