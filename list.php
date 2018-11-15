@@ -50,7 +50,7 @@ $row = DB::fetch_assoc($result);
 $totalplayers = $row['c'];
 
 $op = httpget('op');
-$page = httpget('page');
+$page = (int) httpget('page');
 $search = '';
 $limit = '';
 

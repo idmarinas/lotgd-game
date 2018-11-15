@@ -170,7 +170,7 @@ else
     $delete = translate_inline('Delete');
     $confirm = translate_inline('Are you sure you wish to delete this CronJob?');
 
-    $page = max(1, (int) httpget('page'));
+    $page = (int) httpget('page');
 
     $select = DB::select('cronjob');
     $select->columns(['*']);

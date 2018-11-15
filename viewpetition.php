@@ -92,7 +92,7 @@ if ('' == $op)
     $row = DB::fetch_assoc($result);
     $totalpages = ceil($row['c'] / $petitionsperpage);
 
-    $page = httpget('page');
+    $page = (int) httpget('page');
 
     if ('' == $page)
     {
