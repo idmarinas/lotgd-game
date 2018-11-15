@@ -112,7 +112,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
         DB::execute($insert);
     }
 
-    invalidatedatacache("module-objpref-$objtype-$objid-$module");
+    invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
 }
 
 /**
@@ -159,7 +159,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
         DB::execute($insert);
     }
 
-    invalidatedatacache("module-objpref-$objtype-$objid-$module");
+    invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
 }
 
 /**
