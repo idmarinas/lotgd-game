@@ -83,6 +83,7 @@ require_once 'lib/class/servicemanager.php';
 require_once 'lib/constants.php';
 require_once 'lib/output.php';
 require_once 'lib/class/dbwrapper.php';
+require_once 'lib/class/doctrine.php';
 require_once 'lib/settings.php';
 require_once 'lib/class/lotgdFormat.php';
 require_once 'lib/class/template.php';
