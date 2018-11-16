@@ -195,7 +195,17 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
         }
     }
 
-    return $creatures;
+    //-- You can add more creatures. This is good, when not find nothing in data base
+    $creatures = modulehook('creature-search', [
+        'creatures' => $creatures,
+        'multi' => $multi,
+        'targetlevel' => $targetlevel,
+        'mintargetlevel' => $mintargetlevel,
+        'packofmonsters' => $packofmonsters,
+        'forest' => $forest
+    ]);
+
+    return $creatures['creatures'];
 }
 
 function get_creature_stats($dk = 0)
