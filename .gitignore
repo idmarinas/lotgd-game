@@ -15,3 +15,7 @@ phpunit.xml
 /semantic/src/theme.config
 wiki.md
 master/
+src/ajax/local
+!src/ajax/local/README.md
+src/local
+!src/local/README.md
