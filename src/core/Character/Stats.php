@@ -145,4 +145,17 @@ class Stats
     {
         return $this->stats;
     }
+
+    /**
+     * Set array stats of character. (THIS ACTION REMPLACE ALL STATS)
+     * Use for alter original stats (getStats())
+     *
+     * @return array
+     */
+    public function setStats(array $stats)
+    {
+        $this->stats = $stats;
+
+        return $this;
+    }
 }
