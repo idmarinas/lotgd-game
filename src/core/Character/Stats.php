@@ -32,8 +32,6 @@ class Stats
      */
     public function addcharstat(string $label, $value = null)
     {
-
-        // \Zend\Debug\Debug::dump($label);
         if (null !== $value)
         {
             if (! $this->getLastCat())
@@ -57,15 +55,18 @@ class Stats
      * Sets a value to the passed category & label for character stats.
      *
      * @param string $cat   The category for the char stat
-     * @param string $label The label associated with the value
+     * @param string $label (Optional) The label associated with the value
      * @param string $val   The value of the attribute
      */
-    public function setcharstat($cat, $label, $val)
+    public function setcharstat($cat, $label = null, $val)
     {
-        if (! isset($this->stats[$cat][$label]))
+        if (! $label)
+        {
+            $this->stats[$cat] = $val;
+        }
+        elseif (! isset($this->stats[$cat][$label]))
         {
             $oldlabel = $this->getLastCat();
-            // \Zend\Debug\Debug::dump($oldlabel);
             $this->addcharstat($cat);
             $this->addcharstat($label, $val);
             $this->setLastCat($oldlabel);
@@ -90,7 +91,7 @@ class Stats
         {
             return $this->stats[$section][$title];
         }
-        else if (isset($this->stats[$section]))
+        elseif (isset($this->stats[$section]))
         {
             return $this->stats[$section];
         }
@@ -103,7 +104,7 @@ class Stats
     /**
      * Resets the character stats array.
      */
-    function wipeStats()
+    public function wipeStats()
     {
         $this->lastCat = 'Other Info';
         $this->stats = [];
