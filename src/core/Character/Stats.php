@@ -80,15 +80,19 @@ class Stats
      * Returns the value associated with the section & label.  Returns an empty string if the stat isn't set.
      *
      * @param string $section The character stat section
-     * @param string $title   The stat display label
+     * @param string $title   (Optional) The stat display label
      *
      * @return mixed The value associated with the stat
      */
-    public function getcharstat($section, $title)
+    public function getcharstat($section, $title = null)
     {
         if (isset($this->stats[$section][$title]))
         {
             return $this->stats[$section][$title];
+        }
+        else if (isset($this->stats[$section]))
+        {
+            return $this->stats[$section];
         }
         else
         {
