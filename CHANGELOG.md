@@ -21,17 +21,17 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * **lib/installer/installer_stage_3.php**
     * **templates/paypal.twig**
 * **translatetool.php** It uses the new way of generating queries to the DB (this method avoids problems with some characters when making queries, like for example the simple quotation)
-* **Jaxon** Files for jaxon has moved to new dir
-    * Can add your own files for jaxon in `src/ajax/local`
 * **common.php** Now use Service Manager to load some factories. This method allows to use any factory and always load the same.
     * Factories can be remplaced for your own
     * `ob_start()` not use anymore `ob_gzhandler`
 * **lib/pageparts.php** Updating the JavaScript function name to the new name (Jaxon)
-* **lib/output.php** Now used the Service Manager to generate class that use the output functions
-* **lib/redirect.php** Using Service Manager to load Output Collector
-* **lib/nav.php** Blockednavs are in Service Manager
-* **lib/http.php** Using Service Manager
-* **lib/datacache.php** Using Service Manager
+* *Using Service Manager* in this files
+    * **lib/nav.php** Blockednavs are in Service Manager
+    * **lib/http.php**
+    * **lib/datacache.php**
+    * **lib/output.php** For generate class that use the output functions
+    * **lib/redirect.php** For load Output Collector
+
 * **lib/e_rand.php** Some improvements and added comments to functions
 * **lib/creaturefunctions.php** Now param `$packofmonsters` have a default value
 * **lib/modules.php** This file has been divided into different files, to improve comprehension.
@@ -44,11 +44,13 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         * **lib/modules/injectmodule.php**
         * **lib/modules/modulestatus.php**
         * **lib/modules/objpref.php**
-            * Now used forced cache to get ObjPref for a given module
+            * Now used forced cache to get ObjPref for a given module. This data is a object config and not change so much.
         * **lib/modules/prefs.php**
-            * Now used forced cache to get Prefs for a given module and user
+            * In this part not used cache because with some modules not work good.
         * **lib/modules/settings.php**
 * :warning: ***IMPORTANT***
+    * **Jaxon** Files for jaxon has moved to new dir
+    * Can add your own files for jaxon in `src/ajax/local`
     * **lib/class/template.php** Is now a class of static functions no needed be instantiated `LotgdTheme::`
         * Using class `LotgdTheme::` for render templates:
         * **armor.php**
@@ -325,6 +327,13 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * First gems reward and them gold
     * Message of flawless fight always at the end
 * **lib/modules.php** Now settings of a modules is forced to use data cache
+* **battle.php**
+    * Changed name of hook
+        * `battle` to `battle-turn-start` and `battle-turn-end`
+    * Changed position of `battle-turn-end`
+    * Can use hook `battle-victory-end` and `battle-defeat-end` for add data to creatures, and reflect in `battlebars-end`
+* **lib/creaturefunctions.php** New modulehook `creature-search`
+    * With this hook, you can add or remove creatures, when invoke the function `lotgd_search_creature`
 * THEME
     * Updated Semantic UI version 2.2.10 => 2.2.14
     * The `*.variables` files in the `Jade` theme have only the variables that have been changed.
@@ -336,6 +345,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * Added new filter to templates `colorize` is an alias of `appoencode`
     * Added new function to templates `isValidProtocol` check if a url string have a valid protocol `http, https, ftp, fpts`
 * **lib/settings.class.php** Added new function for get all settings of game `getAllSettings()`
+* **battle.php** Added battle options to user session
 
 ### DEPRECATED
 
@@ -354,6 +364,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **stables.php** Fixed error with undefined index
 * **train.php** Fixed error with undefined index
 * **login.php** Fixed posible error with blank `restorepage`
+* **newday.php** Fixed error with decimals when calculate interest rate with gold in bank
 * **lib/events.php** Fixed error with index and variable undefined
 * **lib/checkban.php** Fixed error with undefined index/variable
 * **lib/settings.class.php** Fixed error in the function `saveSetting`, did not save the new data in the BD.
