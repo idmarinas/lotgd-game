@@ -56,12 +56,12 @@ class Base extends Twig_Environment
     {
         return [
             //-- Access to appoencode function in template
-            new Twig_SimpleFilter('colorize', function ($string)
+            new Twig_SimpleFilter('colorize', function (string $string)
             {
                 return appoencode($string, true);
             }),
             //-- Access to color_sanitize function in template
-            new Twig_SimpleFilter('uncolorize', function ($string)
+            new Twig_SimpleFilter('uncolorize', function (string $string)
             {
                 return color_sanitize($string);
             }),
