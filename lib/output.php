@@ -77,7 +77,7 @@ function debug($text, $force = false)
  *
  * @return string An output (HTML) formatted string
  */
-function appoencode($data, $priv = false)
+function appoencode(string $data, $priv = false)
 {
     global $output;
 

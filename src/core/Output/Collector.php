@@ -233,10 +233,10 @@ class Collector
     /**
      * This function puts the lotgd formatting `whatever into HTML tags. It will automatically close previous tags before opening new ones for the same class.
      *
-     * @param $data the logd formatted string
+     * @param string $data the logd formatted string
      * @param $priv If true, it uses no htmlentites before outputting to the browser, means it will parse HTML code through. Default is false
      */
-    public function appoencode($data, $priv = false)
+    public function appoencode(string $data, $priv = false)
     {
         $start = 0;
         $out = '';
