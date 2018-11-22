@@ -327,7 +327,7 @@ else
 
     $session['user']['laston'] = date('Y-m-d H:i:s');
     $bgold = $session['user']['goldinbank'];
-    $session['user']['goldinbank'] *= $interestrate;
+    $session['user']['goldinbank'] = round($session['user']['goldinbank'] * $interestrate);
     $nbgold = $session['user']['goldinbank'] - $bgold;
 
     if (0 != $nbgold)
