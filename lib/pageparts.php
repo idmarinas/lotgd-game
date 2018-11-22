@@ -618,7 +618,7 @@ function charstats($return = true)
 
         if (! $u['alive'])
         {
-            $spirits[(int) $u['spirits']] = translate_inline('DEAD', 'stats');
+            $spirits[(int) $u['spirits']] = 'DEAD';
         }
         //calculate_buff_fields();
         reset($session['bufflist']);
@@ -814,15 +814,16 @@ function charstats($return = true)
         if ($u['alive'])
         {
             addcharstat('PvP', $u['playerfights']);
-            addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'`b'));
-            addcharstat('Gold', LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
         }
         else
         {
             addcharstat('Favor', $u['deathpower'].check_temp_stat('deathpower', 1));
         }
 
+        addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'`b'));
+        addcharstat('Gold', LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
         addcharstat('Gems', LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
+
         addcharstat('Equipment Info');
 
         if (is_module_active('inventorypopup'))
