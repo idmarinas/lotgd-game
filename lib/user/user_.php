@@ -9,14 +9,11 @@ if (1 == $display)
         $q = "&q=$query";
     }
     $ops = translate_inline('Ops');
-    $acid = translate_inline('AcctID');
-    $login = translate_inline('Login');
+    $acid = translate_inline('ID');
     $nm = translate_inline('Name');
-    $lev = translate_inline('Level');
     $lon = translate_inline('Last On');
     $hits = translate_inline('Hits');
     $lip = translate_inline('Last IP');
-    $lid = translate_inline('Last ID');
     $email = translate_inline('Email');
     $ed = translate_inline('Edit');
     $del = translate_inline('Del');
@@ -24,15 +21,12 @@ if (1 == $display)
     $ban = translate_inline('Ban');
     $log = translate_inline('Log');
     rawoutput("<table class='ui very compact striped selectable table'>");
-    rawoutput("<thead><tr><th>$ops</th><th><a href='user.php?sort=acctid$q'>$acid</a></th><th><a href='user.php?sort=login$q'>$login</a></th><th><a href='user.php?sort=name$q'>$nm</a></th><th><a href='user.php?sort=level$q'>$lev</a></th><th><a href='user.php?sort=laston$q'>$lon</a></th><th><a href='user.php?sort=gentimecount$q'>$hits</a></th><th><a href='user.php?sort=lastip$q'>$lip</a></th><th><a href='user.php?sort=uniqueid$q'>$lid</a></th><th><a href='user.php?sort=emailaddress$q'>$email</a></th></tr></thead>");
+    rawoutput("<thead><tr><th>$ops</th><th><a href='user.php?sort=acctid$q'>$acid</a></th><th><a href='user.php?sort=name$q'>$nm</a></th><th><a href='user.php?sort=laston$q'>$lon</a></th><th><a href='user.php?sort=gentimecount$q'>$hits</a></th><th><a href='user.php?sort=lastip$q'>$lip</a></th><th><a href='user.php?sort=emailaddress$q'>$email</a></th></tr></thead>");
     addnav('', "user.php?sort=acctid$q");
-    addnav('', "user.php?sort=login$q");
     addnav('', "user.php?sort=name$q");
-    addnav('', "user.php?sort=level$q");
     addnav('', "user.php?sort=laston$q");
     addnav('', "user.php?sort=gentimecount$q");
     addnav('', "user.php?sort=lastip$q");
-    addnav('', "user.php?sort=uniqueid$q");
 
     while ($row = DB::fetch_assoc($searchresult))
     {
@@ -47,7 +41,7 @@ if (1 == $display)
 
         rawoutput('<tr>');
         rawoutput('<td nowrap>');
-        rawoutput("[ <a href='user.php?op=edit&userid={$row['acctid']}$m'>$ed</a> | <a href='user.php?op=del&userid={$row['acctid']}' onClick=\"return confirm('$conf');\">$del</a> | <a href='bans.php?op=setupban&userid={$row['acctid']}'>$ban</a> | <a href='user.php?op=debuglog&userid={$row['acctid']}'>$log</a> ]");
+        rawoutput("[ <a href='user.php?op=edit&userid={$row['acctid']}$m' class='ui tooltip' data-content='$ed'><i class='icon edit'></i></a> | <a href='user.php?op=del&userid={$row['acctid']}' onClick=\"return confirm('$conf');\" class='ui tooltip' data-content='$del'><i class='icon trash'></i></a> | <a href='bans.php?op=setupban&userid={$row['acctid']}' class='ui tooltip' data-content='$ban'><i class='icon ban'></i></a> | <a href='user.php?op=debuglog&userid={$row['acctid']}' class='ui tooltip' data-content='$log'><i class='icon file outline'></i></a>]");
         addnav('', "user.php?op=edit&userid={$row['acctid']}$m");
         addnav('', "user.php?op=del&userid={$row['acctid']}");
         addnav('', "bans.php?op=setupban&userid={$row['acctid']}");
@@ -55,19 +49,13 @@ if (1 == $display)
         rawoutput('</td><td>');
         output_notl('%s', $row['acctid']);
         rawoutput('</td><td>');
-        output_notl('%s', $row['login']);
-        rawoutput('</td><td>');
-        output_notl('`&%s`0', $row['name']);
-        rawoutput('</td><td>');
-        output_notl('`^%s`0', $row['level']);
+        output_notl('(`^%s`0) `&%s`0', $row['level'], $row['name']);
         rawoutput('</td><td>');
         output_notl($row['laston']);
         rawoutput('</td><td>');
         output_notl('%s', $row['gentimecount']);
         rawoutput('</td><td>');
         output_notl('%s', $row['lastip']);
-        rawoutput('</td><td>');
-        output_notl('%s', $row['uniqueid']);
         rawoutput('</td><td>');
         output_notl('%s', $row['emailaddress']);
         rawoutput('</td></tr>');
