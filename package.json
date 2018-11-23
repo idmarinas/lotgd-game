@@ -34,7 +34,7 @@
     "dependencies": {
         "jquery": "^3.3.1",
         "semantic-ui": "2.4.2",
-        "sweetalert2": "^7.29.0",
+        "sweetalert2": "^7.29.1",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
@@ -82,7 +82,7 @@
         "gulp-uglify": "^3.0.1",
         "html-loader": "^0.5.5",
         "merge-stream": "^1.0.1",
-        "mini-css-extract-plugin": "^0.4.4",
+        "mini-css-extract-plugin": "^0.4.5",
         "minimist": "^1.2.0",
         "node-sass": "^4.10.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -92,7 +92,7 @@
         "sass-loader": "^7.1.0",
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
-        "webpack": "^4.25.1",
+        "webpack": "^4.26.0",
         "webpack-bundle-analyzer": "^3.0.3",
         "webpack-merge": "^4.1.4"
     },
