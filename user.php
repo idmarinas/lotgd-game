@@ -89,12 +89,6 @@ addnav('Add a ban', 'bans.php?op=setupban');
 addnav('List/Remove bans', 'bans.php?op=removeban');
 addnav('Search for banned user', 'bans.php?op=searchban');
 
-// This doesn't seem to be used, so I'm going to comment it out now
-//$msg = httpget('msg');
-//if ($msg>"") {
-//	output("Message: %s`n", $msg);
-//}
-
 // Collect a list of the mounts
 $mounts = '0,'.translate_inline('None');
 $sql = 'SELECT mountid,mountname,mountcategory FROM '.DB::prefix('mounts').' ORDER BY mountcategory';
@@ -149,12 +143,7 @@ if ('edit' == $op || 'save' == $op)
 
     if (! in_array($row['race'], $races))
     {
-        /*	if ($row['race']=='') {
-                //ok, we have a resetted race here
-                $racesenum.=$row['race'].",".translate_inline("Undecided","race").",";
-            } else {*/
         $racesenum .= $row['race'].','.$row['race'].',';
-        //		}
     }
     $racesenum = substr($racesenum, 0, strlen($racesenum) - 1);
 //later on: enumpretrans, because races are already translated in a way...
@@ -172,7 +161,8 @@ while ($row = DB::fetch_assoc($result))
     $userinfo['clanid'] .= ",{$row['clanid']},".str_replace(',', ';', "<{$row['clanshort']}> {$row['clanname']}");
 }
 
-switch ($op) {
+switch ($op)
+{
     case 'lasthit':
         require 'lib/user/user_lasthit.php';
         break;
@@ -187,7 +177,8 @@ switch ($op) {
         break;
 }
 
-switch ($op) {
+switch ($op)
+{
     case 'edit':
         require 'lib/user/user_edit.php';
         break;
