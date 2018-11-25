@@ -743,22 +743,22 @@
         },
         {
             "name": "hellogerard/jobby",
-            "version": "v3.4.1",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jobbyphp/jobby.git",
-                "reference": "c2d25d9b6e7954534a291e3fb22e165822a3b69e"
+                "reference": "ab84c840fcf4640b161e8cf6d955259be56286cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jobbyphp/jobby/zipball/c2d25d9b6e7954534a291e3fb22e165822a3b69e",
-                "reference": "c2d25d9b6e7954534a291e3fb22e165822a3b69e",
+                "url": "https://api.github.com/repos/jobbyphp/jobby/zipball/ab84c840fcf4640b161e8cf6d955259be56286cf",
+                "reference": "ab84c840fcf4640b161e8cf6d955259be56286cf",
                 "shasum": ""
             },
             "require": {
                 "jeremeamia/superclosure": "^2.2",
                 "mtdowling/cron-expression": "^1.0",
-                "php": ">=5.4",
+                "php": ">=5.6",
                 "swiftmailer/swiftmailer": "^5.4|^6.0",
                 "symfony/process": "^2.7|^3.0|^4.0"
             },
@@ -789,7 +789,7 @@
             ],
             "description": "Manage all your cron jobs without modifying crontab. Handles locking, logging, error emails, and more.",
             "homepage": "https://github.com/jobbyphp/jobby",
-            "time": "2018-06-01T01:41:27+00:00"
+            "time": "2018-11-19T14:55:17+00:00"
         },
         {
             "name": "jaxon-php/jaxon-core",
