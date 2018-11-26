@@ -31,7 +31,7 @@ define([
             {
                 if (form === false)
                 {
-                    window.location = element.href
+                    window.location = element.attr('href')
 
                     return window.location
                 }
