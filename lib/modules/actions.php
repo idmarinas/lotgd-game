@@ -14,7 +14,7 @@ function activate_module($module)
     $update->set(['active' => 1])
         ->where->equalTo('modulename', $module)
     ;
-    DB::execute($select);
+    DB::execute($update);
     invalidatedatacache("injections-inject-$module");
     massinvalidate('moduleprepare');
 
@@ -46,7 +46,7 @@ function deactivate_module($module)
     $update->set(['active' => 0])
         ->where->equalTo('modulename', $module)
     ;
-    DB::execute($select);
+    DB::execute($update);
     invalidatedatacache("injections-inject-$module");
     massinvalidate('moduleprepare');
 
@@ -170,7 +170,7 @@ function install_module($module, $force = true)
                     'download' => $info['download'],
                     'description' => $info['description']
                 ]);
-                DB::query($sql);
+                DB::execute($insert);
                 $fname = $mostrecentmodule.'_install';
 
                 if (isset($info['settings']) && count($info['settings']) > 0)
