@@ -18,9 +18,8 @@ page_header("Healer's Hut");
 output("`#`b`cHealer's Hut`c`b`n");
 
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
-$result = modulehook('healmultiply', ['alterpct' => 1.0]);
-$cost *= $result['alterpct'];
-$cost = round($cost, 0);
+$result = modulehook('healmultiply', ['alterpct' => 1.0, 'cost' => $cost]);
+$cost = round($result['alterpct'] * $result['cost'], 0);
 
 $op = httpget('op');
 
