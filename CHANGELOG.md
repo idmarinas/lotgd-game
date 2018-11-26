@@ -25,6 +25,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     * Factories can be remplaced for your own
     * `ob_start()` not use anymore `ob_gzhandler`
 * **lib/pageparts.php** Updating the JavaScript function name to the new name (Jaxon)
+    * Stat "Spirits" and "Gold" always show (not only when alive)
+    * Spirits "DEAD" only translate when show
 * *Using Service Manager* in this files
     * **lib/nav.php** Blockednavs are in Service Manager
     * **lib/http.php**
@@ -135,6 +137,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 * **lib/nav.php** Created function `add_accesskey()` to generate a keys for navs
 * **lib/http.php** Now use a Class `Zend\Http\PhpEnvironment\Request` store in var `$lotgd_request`. More info in: https://docs.zendframework.com/zend-http/
 * **viewpetition.php** Changed `each` loop for `foreach` loop. `each` are DEPRECATED IN PHP 7.2
+* **healer.php** Now with hook `healmultiply` you can change the multiplier and the cost of the healer's services.
 * **IMPORTANT**
     * *Creatures system*
         * Creatures in data base now not have:
