@@ -8,12 +8,14 @@
  */
 function module_delete_objprefs($objtype, $objid)
 {
+    global $mostrecentmodule;
+
     $delete = DB::delete('module_objprefs');
     $delete->where->equalTo('objtype', $objtype)
         ->equalTo('objid', $objid)
     ;
     DB::execute($delete);
-    massinvalidate("module-objpref-$objtype-$objid-$module");
+    massinvalidate("module-objpref-$objtype-$objid-$mostrecentmodule");
 }
 
 /**
