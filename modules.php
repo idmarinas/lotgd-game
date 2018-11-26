@@ -221,7 +221,7 @@ if ('' == $op)
                 addnav('', "modules.php?op=activate&module={$row['modulename']}&cat=$cat");
             }
             $options = json_encode(['html' => $uninstallconfirm]);
-            rawoutput(" <a data-tooltip='$uninstall' href='modules.php?op=uninstall&module={$row['modulename']}&cat=$cat' data-options='$options' onclick='Lotgd.confirm(this, event)'>");
+            rawoutput(" <a id='{$row['modulename']}' data-tooltip='$uninstall' href='modules.php?op=uninstall&module={$row['modulename']}&cat=$cat' data-options='$options' onclick='Lotgd.confirm(this, event)'>");
 
             output_notl('<i class="red corner remove icon"></i>', true);
             rawoutput('</a>');
