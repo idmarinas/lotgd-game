@@ -34,7 +34,7 @@
     "dependencies": {
         "jquery": "^3.3.1",
         "semantic-ui": "2.4.2",
-        "sweetalert2": "^7.29.1",
+        "sweetalert2": "^7.29.2",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
@@ -87,12 +87,12 @@
         "node-sass": "^4.10.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "ora": "^3.0.0",
-        "require-dir": "^1.1.0",
+        "require-dir": "^1.2.0",
         "run-sequence": "^2.2.1",
         "sass-loader": "^7.1.0",
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
-        "webpack": "^4.26.0",
+        "webpack": "^4.26.1",
         "webpack-bundle-analyzer": "^3.0.3",
         "webpack-merge": "^4.1.4"
     },
