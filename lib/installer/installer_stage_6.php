@@ -12,8 +12,8 @@ if (file_exists('config/autoload/local/dbconnect.php'))
 else
 {
     $initial = true;
-    output('`@`c`bWriting your dbconnect.php file`b`c');
-    output("`2I'm attempting to write a file named 'dbconnect.php' to your site root.");
+    output('`@`c`bWriting your "config/autoload/local/dbconnect.php" file`b`c');
+    output("`2I'm attempting to write a file named 'config/autoload/local/dbconnect.php' to your site root.");
     output('This file tells LoGD how to connect to the database, and is necessary to continue installation.`n');
 
     $configuration = [

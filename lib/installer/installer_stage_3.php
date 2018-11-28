@@ -8,9 +8,9 @@ output('In order to run Legend of the Green Dragon, your server must have access
 output("If you are not sure if you meet this need, talk to server's Internet Service Provider (ISP), and make sure they offer MySQL databases.");
 output("If you are running on your own machine or a server under your control, you can download and install MySQL from <a href='http://www.mysql.com/' target='_blank' rel='noopener noreferrer'>the MySQL website</a> for free.`n", true);
 
-if (file_exists('dbconnect.php'))
+if (file_exists('config/autoload/local/dbconnect.php'))
 {
-    output('There appears to already be a database setup file (dbconnect.php) in your site root, you can proceed to the next step.');
+    output('There appears to already be a database setup file (config/autoload/local/dbconnect.php) in your site, you can proceed to the next step.');
 }
 else
 {
