@@ -1,7 +1,11 @@
+---
+version: "2"
 
 plugins:
     sonar-php:
         enabled: true
+        config:
+            file_extensions: "php"
     phpmd:
         enabled: true
         file_extensions:
@@ -19,5 +23,18 @@ plugins:
             backward-compatibility-checks: true
             dead-code-detection: true
 exclude_patterns:
+    - "config/"
+    - "db/"
+    - "dist/"
+    - "features/"
+    - "**/node_modules/"
+    - "script/"
+    - "**/spec/"
+    - "**/test/"
+    - "**/tests/"
+    - "Tests/"
+    - "**/vendor/"
+    - "**/*_test.go"
+    - "**/*.d.ts"
     - "**/semantic/src/definitions/"
     - "**/semantic/task/"
