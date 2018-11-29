@@ -24,61 +24,61 @@ checks:
 plugins:
     sonar-php:
         enabled: true
+        exclude_patterns:
+            - "**/assets/"
+            - "**/error_docs/"
+            - "**/gulp/"
+            - "**/images/"
+            - "**/resources/"
+            - "**/semantic/"
+            - "**/templates/"
+            - "**/themes/"
         config:
             file_extensions: "php"
-            exclude_patterns:
-                - "**/assets/"
-                - "**/error_docs/"
-                - "**/gulp/"
-                - "**/images/"
-                - "**/resources/"
-                - "**/semantic/"
-                - "**/templates/"
-                - "**/themes/"
     phpmd:
         enabled: true
+        exclude_patterns:
+            - "**/assets/"
+            - "**/error_docs/"
+            - "**/gulp/"
+            - "**/images/"
+            - "**/resources/"
+            - "**/semantic/"
+            - "**/templates/"
+            - "**/themes/"
         config:
             file_extensions:
                 - php
-            exclude_patterns:
-                - "**/assets/"
-                - "**/error_docs/"
-                - "**/gulp/"
-                - "**/images/"
-                - "**/resources/"
-                - "**/semantic/"
-                - "**/templates/"
-                - "**/themes/"
     nodesecurity:
         enabled: true
     phpcodesniffer:
         enabled: true
+        exclude_patterns:
+            - "**/assets/"
+            - "**/error_docs/"
+            - "**/gulp/"
+            - "**/images/"
+            - "**/resources/"
+            - "**/semantic/"
+            - "**/templates/"
+            - "**/themes/"
         config:
             file_extensions: "php"
-            exclude_patterns:
-                - "**/assets/"
-                - "**/error_docs/"
-                - "**/gulp/"
-                - "**/images/"
-                - "**/resources/"
-                - "**/semantic/"
-                - "**/templates/"
-                - "**/themes/"
     phan:
         enabled: true
+        exclude_patterns:
+            - "**/assets/"
+            - "**/error_docs/"
+            - "**/gulp/"
+            - "**/images/"
+            - "**/resources/"
+            - "**/semantic/"
+            - "**/templates/"
+            - "**/themes/"
         config:
             file_extensions: "php"
             backward-compatibility-checks: true
             dead-code-detection: true
-            exclude_patterns:
-                - "**/assets/"
-                - "**/error_docs/"
-                - "**/gulp/"
-                - "**/images/"
-                - "**/resources/"
-                - "**/semantic/"
-                - "**/templates/"
-                - "**/themes/"
 exclude_patterns:
     - "config/"
     - "db/"
