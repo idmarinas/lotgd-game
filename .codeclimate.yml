@@ -64,6 +64,8 @@ plugins:
             - "**/themes/"
         config:
             file_extensions: "php"
+            standard: "PSR2"
+            file: "phpcs.xml"
     phan:
         enabled: false
         exclude_patterns:
