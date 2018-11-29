@@ -33,6 +33,8 @@ plugins:
             - "**/semantic/"
             - "**/templates/"
             - "**/themes/"
+            - "**/*.ico"
+            - "**/*.png"
         config:
             file_extensions: "php"
     phpmd:
@@ -65,7 +67,7 @@ plugins:
         config:
             file_extensions: "php"
     phan:
-        enabled: true
+        enabled: false
         exclude_patterns:
             - "**/assets/"
             - "**/error_docs/"
