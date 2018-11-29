@@ -32,7 +32,6 @@ plugins:
             - "**/gulp/"
             - "**/images/"
             - "**/resources/"
-            - "**/semantic/"
             - "**/templates/"
             - "**/themes/"
             - "**/*.ico"
@@ -47,7 +46,6 @@ plugins:
             - "**/gulp/"
             - "**/images/"
             - "**/resources/"
-            - "**/semantic/"
             - "**/templates/"
             - "**/themes/"
         config:
@@ -62,7 +60,6 @@ plugins:
             - "**/gulp/"
             - "**/images/"
             - "**/resources/"
-            - "**/semantic/"
             - "**/templates/"
             - "**/themes/"
         config:
@@ -75,7 +72,6 @@ plugins:
             - "**/gulp/"
             - "**/images/"
             - "**/resources/"
-            - "**/semantic/"
             - "**/templates/"
             - "**/themes/"
         config:
@@ -96,5 +92,4 @@ exclude_patterns:
     - "**/vendor/"
     - "**/*_test.go"
     - "**/*.d.ts"
-    - "**/semantic/src/definitions/"
-    - "**/semantic/task/"
+    - "**/semantic/"
