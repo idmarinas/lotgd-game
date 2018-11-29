@@ -1,0 +1,23 @@
+
+plugins:
+    sonar-php:
+        enabled: true
+    phpmd:
+        enabled: true
+        file_extensions:
+            - php
+    nodesecurity:
+        enabled: true
+    phpcodesniffer:
+        enabled: true
+        config:
+            file_extensions: "php"
+    phan:
+        enabled: true
+        config:
+            file_extensions: "php"
+            backward-compatibility-checks: true
+            dead-code-detection: true
+exclude_patterns:
+    - "**/semantic/src/definitions/"
+    - "**/semantic/task/"
