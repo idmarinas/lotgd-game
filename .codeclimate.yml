@@ -22,6 +22,8 @@ checks:
     identical-code:
         enabled: true
 plugins:
+    nodesecurity:
+        enabled: true
     sonar-php:
         enabled: true
         exclude_patterns:
@@ -51,8 +53,7 @@ plugins:
         config:
             file_extensions:
                 - php
-    nodesecurity:
-        enabled: true
+            rulesets: "cleancode,codesize,controversial,design,naming,unusedcode,phpmd-ruleset.xml"
     phpcodesniffer:
         enabled: true
         exclude_patterns:
