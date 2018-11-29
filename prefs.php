@@ -333,7 +333,7 @@ else
 
         'Display Preferences,title',
         'template' => 'Skin,theme',
-        'language' => 'Language,enum,'.getsetting('serverlanguages', 'en,English,de,Deutsch,fr,Fran�ais,dk,Danish,es,Espa�ol,it,Italian'),
+        'language' => 'Language,enum,'.getsetting('serverlanguages', 'en,English,de,Deutsch,fr,Français,dk,Danish,es,Español,it,Italian'),
         'tabconfig' => 'Show config sections in tabs,bool',
         'forestcreaturebar' => 'Forest Creatures show health ...,enum,0,Only Text,1,Only Healthbar,2,Healthbar AND Text',
         'ajax' => 'Turn AJAX on?,bool',
