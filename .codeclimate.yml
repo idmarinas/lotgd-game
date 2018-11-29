@@ -53,7 +53,7 @@ plugins:
                 - php
             rulesets: "cleancode,codesize,controversial,design,naming,unusedcode,phpmd-ruleset.xml"
     phpcodesniffer:
-        enabled: true
+        enabled: false
         exclude_patterns:
             - "**/assets/"
             - "**/error_docs/"
