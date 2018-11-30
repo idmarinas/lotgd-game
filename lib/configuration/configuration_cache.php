@@ -1,23 +1,21 @@
 <?php
 
-global $DB_DATACACHEPATH, $DB_USEDATACACHE, $gz_handler_on;
-
 $setup_cache = include_once 'lib/data/configuration_cache.php';
 
-$adapter = DB::getAdapter();
+$wrapper = LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
+$adapter = $wrapper->getAdapter();
 $platform = $adapter->getPlatform();
+$options = LotgdLocator::get('GameConfig');
+
 $vals = [
-    'datacachepath' => $DB_DATACACHEPATH,
-    'usedatacache' => (int) $DB_USEDATACACHE,
-    'gziphandler' => $gz_handler_on,
+    'datacachepath' => $options['cache']['config']['cache_dir'] ?? 'cache',
+    'usedatacache' => (int) ($options['cache']['active'] ?? 0),
     'databasetype' => $platform->getName(),
 ];
 
 output_notl(LotgdTheme::renderLotgdTemplate('configuration/cache.twig', []), true);
 output_notl('`n`n');
-output('`^Legend`0:`n');
-output('(D) This has been moved to the dbconnect.php`n');
-output('(S) This is in settings.php`n`n');
+output('High Load Optimization:`n`n');
 rawoutput("<form action='configuration.php?settings=cache&op=save' method='POST'>");
 lotgd_showform($setup_cache, $vals, true);
 rawoutput('</form>');
