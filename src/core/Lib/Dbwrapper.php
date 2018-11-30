@@ -14,6 +14,7 @@ use Zend\Paginator\{
 
 class Dbwrapper
 {
+    use \Lotgd\Core\Pattern\Container;
     use Pattern\Prefix;
     use Pattern\Zend;
 
@@ -34,7 +35,7 @@ class Dbwrapper
      *
      * @return $this
      */
-    public function __construct(array $options, $force = false)
+    public function __construct(array $options, $force = null)
     {
         if (! isset($options['driver']) || '' == $options['driver'])
         {
@@ -66,15 +67,15 @@ class Dbwrapper
      *
      * @return ResultSet
      */
-    public function query($sql)
+    public function query(string $sql)
     {
-        $adapter = $this->getAdapter();
+        $adapterNew = $this->getAdapter();
 
         try
         {
-            $adapter->getProfiler()->profilerStart($sql);
-            $statement = $adapter->query($sql);
-            $adapter->getProfiler()->profilerFinish();
+            $adapterNew->getProfiler()->profilerStart($sql);
+            $statement = $adapterNew->query($sql);
+            $adapterNew->getProfiler()->profilerFinish();
 
             $result = $statement->execute();
         }
@@ -86,7 +87,7 @@ class Dbwrapper
             return $resultSet->initialize([]);
         }
 
-        $profiler = $adapter->getProfiler()->getLastProfile();
+        $profiler = $adapterNew->getProfiler()->getLastProfile();
 
         if ($profiler['elapse'] >= 0.5)
         {
@@ -110,7 +111,7 @@ class Dbwrapper
 
     public function getAffectedRows($result = null): int
     {
-        if ('object' == gettype($result))
+        if (is_object($result))
         {
             return $result->getAffectedRows();
         }
@@ -127,7 +128,7 @@ class Dbwrapper
 
             return $val;
         }
-        elseif ('object' == gettype($result))
+        elseif (is_object($result))
         {
             return $result->next();
         }
@@ -141,7 +142,7 @@ class Dbwrapper
         {
             return count($result);
         }
-        elseif ('object' == gettype($result))
+        elseif (is_object($result))
         {
             return $result->count();
         }
@@ -198,6 +199,7 @@ class Dbwrapper
     {
         if (! $this->adapter)
         {
+            $request = $this->getContainer(\Lotgd\Core\Http::class);
             page_header('Database Connection Error');
             output('`c`$Database Connection Error`0`c`n`n');
             output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
@@ -205,7 +207,7 @@ class Dbwrapper
             //the admin did not want to notify him with a script
             output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
             output('Sorry for the inconvenience,`n');
-            output('Staff of %s', $_SERVER['SERVER_NAME']);
+            output('Staff of %s', $request->getServer('SERVER_NAME'));
             addnav('Home', 'index.php');
             page_footer();
         }
