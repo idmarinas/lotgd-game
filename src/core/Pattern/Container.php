@@ -37,9 +37,7 @@ trait Container
         {
             return $this->serviceManager;
         }
-        else
-        {
-            return $this->serviceManager->get($name);
-        }
+
+        return $this->serviceManager->get($name);
     }
 }
