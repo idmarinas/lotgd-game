@@ -301,6 +301,7 @@ function page_footer($saveuser = true)
     //output petition count
     $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';
 
+    $html['petitiondisplay'] = '';
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
         $sql = 'SELECT count(1) AS c, status FROM '.DB::prefix('petitions').' GROUP BY status';
