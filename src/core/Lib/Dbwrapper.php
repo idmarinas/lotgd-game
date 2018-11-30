@@ -1,29 +1,23 @@
 <?php
 
-// addnews ready
-// translator ready
-// mail ready
-
 namespace Lotgd\Core\Lib;
 
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\Profiler\Profiler;
+use Zend\Db\Adapter\{
+    Adapter,
+    Profiler\Profiler
+};
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Delete;
-use Zend\Db\Sql\Insert;
-use Zend\Db\Sql\Predicate\Expression;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Sql;
-// use Zend\Db\Metadata\Metadata;
-use Zend\Db\Sql\Update;
-use Zend\Paginator\Adapter\DbSelect as DbSelectPaginator;
-use Zend\Paginator\Paginator;
+use Zend\Paginator\{
+    Adapter\DbSelect as DbSelectPaginator,
+    Paginator
+};
 
 class Dbwrapper
 {
+    use Pattern\Prefix;
+    use Pattern\Zend;
+
     protected $adapter;
-    protected $prefix = '';
-    protected $sql = null;
     protected $generatedValue = null;
     protected $affectedRows = 0;
     protected $errorInfo = null;
@@ -47,7 +41,7 @@ class Dbwrapper
             $options['driver'] = 'Pdo_Mysql';
         }
 
-        if ('Pdo_Mysql' == $options['driver'])
+        if ('pdo_mysql' == strtolower($options['driver']))
         {
             $options['driver_options'] = [
                 \PDO::MYSQL_ATTR_FOUND_ROWS => true
@@ -74,8 +68,6 @@ class Dbwrapper
      */
     public function query($sql)
     {
-        // global $dbinfo;
-
         $adapter = $this->getAdapter();
 
         try
@@ -89,7 +81,6 @@ class Dbwrapper
         catch (\Throwable $ex)
         {
             $this->errorInfo = $ex->getMessage();
-
             $resultSet = new ResultSet();
 
             return $resultSet->initialize([]);
@@ -117,16 +108,14 @@ class Dbwrapper
         return $result;
     }
 
-    public function getAffectedRows($result = false): int
+    public function getAffectedRows($result = null): int
     {
         if ('object' == gettype($result))
         {
             return $result->getAffectedRows();
         }
-        else
-        {
-            return $this->affectedRows;
-        }
+
+        return $this->affectedRows;
     }
 
     public static function current(&$result)
@@ -142,10 +131,8 @@ class Dbwrapper
         {
             return $result->next();
         }
-        else
-        {
-            $result;
-        }
+
+        return $result;
     }
 
     public static function count($result): int
@@ -158,239 +145,8 @@ class Dbwrapper
         {
             return $result->count();
         }
-        else
-        {
-            return (int) $result;
-        }
-    }
 
-    /**
-     * Select API.
-     *
-     * @param null|string|array|TableIdentifier $table
-     * @param bool                              $prefixed
-     *
-     * @return object
-     */
-    public function select($table = null, bool $prefixed = true)
-    {
-        $table = $prefixed ? $this->prefix($table) : $table;
-
-        if ($table)
-        {
-            return new Select($table);
-        }
-        else
-        {
-            return new Select();
-        }
-    }
-
-    /**
-     * Insert API.
-     *
-     * @param null|string|TableIdentifier $table
-     * @param bool                        $prefixed
-     *
-     * @return object
-     */
-    public function insert($table = null, bool $prefixed = true)
-    {
-        $table = $prefixed ? $this->prefix($table) : $table;
-
-        if ($table)
-        {
-            return new Insert($table);
-        }
-        else
-        {
-            return new Insert();
-        }
-    }
-
-    /**
-     * Update API.
-     *
-     * @param null|string|TableIdentifier $table
-     * @param bool                        $prefixed
-     *
-     * @return object
-     */
-    public function update($table = null, bool $prefixed = true)
-    {
-        $table = $prefixed ? $this->prefix($table) : $table;
-
-        if ($table)
-        {
-            return new Update($table);
-        }
-        else
-        {
-            return new Update();
-        }
-    }
-
-    /**
-     * Delete API.
-     *
-     * @param null|string|TableIdentifier $table
-     * @param bool                        $prefixed
-     *
-     * @return object
-     */
-    public function delete($table = null, bool $prefixed = true)
-    {
-        $table = $prefixed ? $this->prefix($table) : $table;
-
-        if ($table)
-        {
-            return new Delete($table);
-        }
-        else
-        {
-            return new Delete();
-        }
-    }
-
-    /**
-     * Execute a object type SQL.
-     *
-     * @param object $object
-     *
-     * @return ResultSet
-     */
-    public function execute($object)
-    {
-        if ('object' != gettype($object))
-        {
-            return false;
-        }
-
-        return $this->query($this->sql()->buildSqlString($object));
-    }
-
-    /**
-     * Generate a paginator query.
-     *
-     * @param Select $select
-     * @param int    $page
-     * @param int    $perpage
-     *
-     * @return object|Paginator
-     */
-    public function paginator($select, int $page = 1, int $perpage = 25)
-    {
-        $page = max(1, $page);
-
-        $paginatorAdapter = new DbSelectPaginator($select, $this->getAdapter());
-        $paginator = new Paginator($paginatorAdapter);
-        // Curren page
-        $paginator->setCurrentPageNumber($page);
-        // Max number of results per pag
-        $paginator->setItemCountPerPage($perpage);
-
-        $this->sqlString = $this->sql()->buildSqlString($select);
-        $this->queriesthishit++;
-
-        return $paginator;
-    }
-
-    /**
-     * Create Zend\Db\Sql\Predicate\Expression for uses in Zend DB.
-     *
-     * @param string $expresion
-     */
-    public function expression(string $expresion = null)
-    {
-        if (is_string($expresion))
-        {
-            return new Expression($expresion);
-        }
-
-        return;
-    }
-
-    /**
-     * Quote value for safe using in DB.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-    public function quoteValue($value): string
-    {
-        return $this->getAdapter()->getPlatform()->quoteValue($value);
-    }
-
-    /**
-     * Prefix for tables.
-     *
-     * @param string|array $tablename Name of table
-     * @param false|string $force     If you want to force a prefix
-     *
-     * @return string|array
-     */
-    public function prefix($tablename, $force = false)
-    {
-        if (false === $force)
-        {
-            // The following file should be used to override or modify the
-            // special_prefixes array to be correct for your site.  Do NOT
-            // do this unles you know EXACTLY what this means to you, your
-            // game, your county, your state, your nation, your planet and
-            // your universe!
-            // Example: you change name of a table
-            if (file_exists('prefixes.php'))
-            {
-                $special_prefixes = include_once 'prefixes.php';
-            }
-
-            $prefix = $this->getPrefix();
-
-            if (isset($special_prefixes[$tablename]))
-            {
-                $prefix = $special_prefixes[$tablename];
-            }
-        }
-        else
-        {
-            return $prefix = $force;
-        }
-
-        if (is_array($tablename))
-        {
-            list($key, $value) = each($tablename);
-
-            return [$key => $prefix.$value];
-        }
-        else
-        {
-            return $prefix.$tablename;
-        }
-    }
-
-    /**
-     * Get the value of prefix.
-     *
-     * @return string
-     */
-    public function getPrefix(): string
-    {
-        return $this->prefix;
-    }
-
-    /**
-     * Set the value of prefix.
-     *
-     * @param string $prefix
-     *
-     * @return self
-     */
-    public function setPrefix(string $prefix)
-    {
-        $this->prefix = $prefix;
-
-        return $this;
+        return (int) $result;
     }
 
     public function getQueriesThisHit(): int
@@ -401,16 +157,6 @@ class Dbwrapper
     public function getQueryTime(): float
     {
         return (float) $this->querytime;
-    }
-
-    public function sql()
-    {
-        if (! $this->sql)
-        {
-            $this->sql = new Sql($this->getAdapter());
-        }
-
-        return $this->sql;
     }
 
     /**
@@ -431,20 +177,16 @@ class Dbwrapper
     /**
      * Get error of connection.
      *
-     * @param object|false $result
+     * @param object $result
      */
-    public function errorInfo($result = false)
+    public function errorInfo($result = null)
     {
-        if (false !== $result)
+        if (null !== $result && is_object($result))
         {
-            $r = $result->getResource()->errorInfo()[2];
-        }
-        else
-        {
-            $r = $this->errorInfo;
+            return $result->getResource()->errorInfo()[2];
         }
 
-        return $r;
+        return $this->errorInfo;
     }
 
     /**
