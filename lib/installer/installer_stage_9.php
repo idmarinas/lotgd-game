@@ -20,15 +20,21 @@ $adapter = LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
 $descriptors = descriptors($adapter->getPrefix());
 reset($descriptors);
 
-foreach ($descriptors as $tablename => $descriptor)
+//-- This is for avoid error when sync tables and last versions of core.
+//-- This can overwrite changes made by previous versions
+if (false == $session['dbinfo']['upgrade'])
 {
-    output("`3Synchronizing table `#$tablename`3..`n");
-    synctable($tablename, $descriptor, true);
-
-    if (false == $session['dbinfo']['upgrade'])
+    //-- Only do it when clean install
+    foreach ($descriptors as $tablename => $descriptor)
     {
-        //on a clean install, destroy all old data.
-        DB::query("TRUNCATE TABLE $tablename");
+        output("`3Synchronizing table `#$tablename`3.`n");
+        synctable($tablename, $descriptor, true);
+
+        if (false == $session['dbinfo']['upgrade'])
+        {
+            //on a clean install, destroy all old data.
+            DB::query("TRUNCATE TABLE $tablename");
+        }
     }
 }
 rawoutput('</div>');
