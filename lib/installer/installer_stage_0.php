@@ -20,7 +20,8 @@ if (DB_CHOSEN)
 
     if (httppost('username') > '')
     {
-        $sql = 'SELECT * FROM '.DB::prefix('accounts')." WHERE login='".httppost('username')."' AND password='".md5(md5(stripslashes(httppost('password'))))."' AND superuser & ".SU_MEGAUSER;
+        $password = stripslashes((string) httppost('password'));
+        $sql = 'SELECT * FROM '.DB::prefix('accounts')." WHERE login='".httppost('username')."' AND password='".md5(md5($password))."' AND superuser & ".SU_MEGAUSER;
         $result = DB::query($sql);
 
         if ($result->count() > 0)
@@ -29,8 +30,7 @@ if (DB_CHOSEN)
             // Okay, we have a username with megauser, now we need to do
             // some hackery with the password.
             $needsauthentication = true;
-            $p = stripslashes(httppost('password'));
-            $p1 = md5($p);
+            $p1 = md5($password);
             $p2 = md5($p1);
 
             if ('-1' == getsetting('installer_version', '-1'))
@@ -43,7 +43,7 @@ if (DB_CHOSEN)
                 {
                     $needsauthentication = false;
                 }
-                elseif ($row['password'] == $p)
+                elseif ($row['password'] == $password)
                 {
                     $needsauthentication = false;
                 }
@@ -64,6 +64,8 @@ if (DB_CHOSEN)
             $needsauthentication = true;
             output('`$That username / password was not found, or is not an account with sufficient privileges to perform the upgrade.`n');
         }
+
+        unset($password);
     }
     else
     {
