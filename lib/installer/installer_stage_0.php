@@ -20,7 +20,6 @@ if (DB_CHOSEN)
 
     if (httppost('username') > '')
     {
-        debug(md5(md5(stripslashes(httppost('password')))), true);
         $sql = 'SELECT * FROM '.DB::prefix('accounts')." WHERE login='".httppost('username')."' AND password='".md5(md5(stripslashes(httppost('password'))))."' AND superuser & ".SU_MEGAUSER;
         $result = DB::query($sql);
 
@@ -33,11 +32,9 @@ if (DB_CHOSEN)
             $p = stripslashes(httppost('password'));
             $p1 = md5($p);
             $p2 = md5($p1);
-            debug($p2, true);
 
             if ('-1' == getsetting('installer_version', '-1'))
             {
-                debug('HERE I AM', true);
                 // Okay, they are upgrading from 0.9.7  they will have
                 // either a non-encrypted password, or an encrypted singly
                 // password.
