@@ -10,7 +10,7 @@ namespace Lotgd\Core\Output;
 
 class Collector
 {
-    use \Lotgd\Core\Patern\Container;
+    use \Lotgd\Core\Pattern\Container;
 
     protected $colors;
     protected $output = ''; //!< the output to the template body
