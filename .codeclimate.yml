@@ -95,3 +95,4 @@ exclude_patterns:
     - "**/*_test.go"
     - "**/*.d.ts"
     - "**/semantic/"
+    - "resources/jqueryCookieGuard.1.1.0.js"
