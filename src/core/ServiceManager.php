@@ -42,31 +42,16 @@ class ServiceManager extends ZendServiceManager
      */
     private function processConfig(Config $configuration): array
     {
-        global $session;
-
         //-- Cache configuration for performance
         if ($configuration->lotgd_core->cache_config)
         {
             if (! file_exists('cache/service-manager.config.php'))
             {
                 $configuration = $this->processGlobPathsConfig($configuration);
-
-                if (false === $this->genererateFileCache($configuration->toArray()))
-                {
-                    $session['service-manager']['config']['cache'] = false;
-                    $session['service-manager']['config']['date'] = time();
-                }
-                else
-                {
-                    $session['service-manager']['config']['cache'] = true;
-                    $session['service-manager']['config']['date'] = time();
-                }
+                $this->genererateFileCache($configuration->toArray());
             }
 
-            if (($session['service-manager']['config']['cache'] ?? false))
-            {
-                return require 'cache/service-manager.config.php';
-            }
+            return require 'cache/service-manager.config.php';
         }
         else
         {
