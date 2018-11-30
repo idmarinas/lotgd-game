@@ -6,7 +6,7 @@
  * @author IDMarinas
  */
 
-namespace Lotgd\Core\Patern;
+namespace Lotgd\Core\Pattern;
 
 use Interop\Container\ContainerInterface;
 
