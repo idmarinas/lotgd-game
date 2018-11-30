@@ -25,26 +25,21 @@ class Doctrine implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $container->get('GameConfig');
-        $adapter = $options['lotgd_core']['db']['adapter'] ?? [];
+        $options = $container->get('GameConfig')['lotgd_core'];
+        $adapter = $options['db']['adapter'] ?? [];
         $adapter = is_array($adapter) ? $adapter : [];
-        $isDevelopment = (bool) ($options['lotgd_core']['development'] ?? false);
-        $doctrine = $options['lotgd_core']['doctrine'] ?? [];
+        $isDevelopment = (bool) ($options['development'] ?? false);
+        $doctrine = $options['doctrine'] ?? [];
 
-        if ($isDevelopment)
+        $doctrineCache = new DoctrineCache\ArrayCache();
+        if (! $isDevelopment)
         {
-            $doctrineCache = new DoctrineCache\ArrayCache();
-        }
-        else
-        {
+            $cacheDir = $options['cache']['config']['cache_dir'] ?? 'cache';
+            $doctrineCache = new DoctrineCache\FilesystemCache(trim($cacheDir, '/').'/doctrine');
+
             if (isset($doctrine['cache_class']) && class_exists($doctrine['cache_class']))
             {
                 $doctrineCache = new $doctrine['cache_class']();
-            }
-            else
-            {
-                $cacheDir = $options['lotgd_core']['cache']['config']['cache_dir'] ?? 'cache';
-                $doctrineCache = new DoctrineCache\FilesystemCache(trim($cacheDir, '/').'/doctrine');
             }
         }
 
@@ -68,7 +63,7 @@ class Doctrine implements FactoryInterface
         $config->setQuoteStrategy(new DoctrineQuoteStrategy());
 
         $evm = new DoctrineEventManager();
-        $tablePrefix = new DoctrineTablePrefix(($options['lotgd_core']['db']['prefix'] ?? ''));
+        $tablePrefix = new DoctrineTablePrefix(($options['db']['prefix'] ?? ''));
         $evm->addEventListener(DoctrineEvents::loadClassMetadata, $tablePrefix);
 
         return DoctrineEntityManager::create($dbParams, $config, $evm);

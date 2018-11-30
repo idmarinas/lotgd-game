@@ -19,6 +19,8 @@ use Zend\Stdlib\Glob;
 
 class ServiceManager extends ZendServiceManager
 {
+    const CACHE_FILE = 'cache/service-manager.config.php';
+
     public function __construct(array $configuration)
     {
         $configuration = $this->processConfig(new Config($configuration, true));
@@ -47,12 +49,12 @@ class ServiceManager extends ZendServiceManager
         //-- Cache configuration for performance
         if ($configuration->lotgd_core->cache_config)
         {
-            if (! file_exists('cache/service-manager.config.php'))
+            if (! file_exists(self::CACHE_FILE))
             {
                 $this->genererateFileCache($configuration->toArray());
             }
 
-            return require 'cache/service-manager.config.php';
+            return require self::CACHE_FILE;
         }
 
         return $configuration->toArray();
@@ -67,14 +69,16 @@ class ServiceManager extends ZendServiceManager
      */
     private function processGlobPathsConfig(Config $configuration): Config
     {
-        if ($configuration->config_glob_paths)
+        if (! $configuration->config_glob_paths)
         {
-            foreach ($configuration->config_glob_paths as $path)
+            return $configuration;
+        }
+
+        foreach ($configuration->config_glob_paths as $path)
+        {
+            foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file)
             {
-                foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file)
-                {
-                    $configuration->merge(ConfigFactory::fromFile($file, true));
-                }
+                $configuration->merge(ConfigFactory::fromFile($file, true));
             }
         }
 
@@ -102,6 +106,6 @@ class ServiceManager extends ZendServiceManager
             'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';'
         ]);
 
-        return file_put_contents('cache/service-manager.config.php', $file->generate());
+        return file_put_contents(self::CACHE_FILE, $file->generate());
     }
 }
