@@ -24,6 +24,7 @@ class Dbwrapper implements FactoryInterface
 
         $wrapper = new LibDbwrapper($adapter);
         $wrapper->setPrefix($options['prefix'] ?? '');
+        $wrapper->setContainer($container);
 
         return $wrapper;
     }
