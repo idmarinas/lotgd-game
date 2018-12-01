@@ -326,20 +326,6 @@ class DB
     {
         self::$wrapper = $wrapper;
     }
-
-    /**
-     * @deprecated
-     */
-    public static function query_cached($sql, $name, $duration = 900)
-    {
-        trigger_error(sprintf(
-            'Usage of %s is obsolete since 3.0.0; and delete in version 3.1.0 please ovoid use "%s", use cache system to cache results',
-            __METHOD__,
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        return self::query($sql);
-    }
 }
 
 //-- Configure DB
