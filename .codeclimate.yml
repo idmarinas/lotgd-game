@@ -51,7 +51,7 @@ plugins:
         config:
             file_extensions:
                 - php
-            rulesets: "cleancode,codesize,controversial,design,naming,unusedcode,phpmd-ruleset.xml"
+            rulesets: "cleancode,codesize,controversial,design,naming,phpmd-ruleset.xml"
     phpcodesniffer:
         enabled: false
         exclude_patterns:
