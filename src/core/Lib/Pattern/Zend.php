@@ -33,7 +33,7 @@ trait Zend
      *
      * @return object
      */
-    public function select($table = null, bool $prefixed = true)
+    public function select($table = null, $prefixed = null)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -53,7 +53,7 @@ trait Zend
      *
      * @return object
      */
-    public function insert($table = null, bool $prefixed = true)
+    public function insert($table = null, $prefixed = null)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -73,7 +73,7 @@ trait Zend
      *
      * @return object
      */
-    public function update($table = null, bool $prefixed = true)
+    public function update($table = null, $prefixed = null)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
@@ -93,7 +93,7 @@ trait Zend
      *
      * @return object
      */
-    public function delete($table = null, bool $prefixed = true)
+    public function delete($table = null, $prefixed = null)
     {
         $table = $prefixed ? $this->prefix($table) : $table;
 
