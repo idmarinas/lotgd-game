@@ -7,10 +7,6 @@ use Zend\Db\Adapter\{
     Profiler\Profiler
 };
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Paginator\{
-    Adapter\DbSelect as DbSelectPaginator,
-    Paginator
-};
 
 class Dbwrapper
 {

@@ -16,6 +16,10 @@ use Zend\Db\Sql\{
     Sql,
     Update
 };
+use Zend\Paginator\{
+    Adapter\DbSelect as DbSelectPaginator,
+    Paginator
+};
 
 trait Zend
 {
