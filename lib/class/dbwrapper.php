@@ -55,14 +55,14 @@ class DB
      *
      * @return object
      */
-    public static function select($table = null, bool $prefixed = true)
+    public static function select($table = null, $prefixed = null)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
             return false;
         }
 
-        return self::$wrapper->select($table);
+        return self::$wrapper->select($table, $prefixed);
     }
 
     /**
@@ -73,14 +73,14 @@ class DB
      *
      * @return object
      */
-    public static function insert($table = null, bool $prefixed = true)
+    public static function insert($table = null, $prefixed = null)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
             return false;
         }
 
-        return self::$wrapper->insert($table);
+        return self::$wrapper->insert($table, $prefixed);
     }
 
     /**
@@ -91,14 +91,14 @@ class DB
      *
      * @return object
      */
-    public static function update($table = null, bool $prefixed = true)
+    public static function update($table = null, $prefixed = null)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
             return false;
         }
 
-        return self::$wrapper->update($table);
+        return self::$wrapper->update($table, $prefixed);
     }
 
     /**
@@ -109,14 +109,14 @@ class DB
      *
      * @return object
      */
-    public static function delete($table = null, bool $prefixed = true)
+    public static function delete($table = null, bool $prefixed = null)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
             return false;
         }
 
-        return self::$wrapper->delete($table);
+        return self::$wrapper->delete($table, $prefixed);
     }
 
     /**
