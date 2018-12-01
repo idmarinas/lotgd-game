@@ -7,17 +7,11 @@
 use Lotgd\Core\Lib\Dbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Paginator\Paginator;
 
 class DB
 {
     private static $wrapper;
-
-    private static $generatedValue = null;
-    private static $affectedRows = 0;
     private static $errorInfo = null;
-    private static $sqlString = null;
-    private static $sql = null;
 
     /**
      * Execute a query.
@@ -144,7 +138,7 @@ class DB
      * @param int    $page
      * @param int    $perpage
      *
-     * @return object|Paginator
+     * @return Zend\Paginator\Paginator
      */
     public static function paginator($select, int $page = 1, int $perpage = 25)
     {
