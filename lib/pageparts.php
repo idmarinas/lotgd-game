@@ -99,8 +99,7 @@ function page_footer($saveuser = true)
 
     //page footer module hooks
     $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
-    $replacementbits = [];
-    $replacementbits = modulehook("footer-$script", $replacementbits);
+    $replacementbits = modulehook("footer-$script", []);
 
     if ('runmodule' == $script && (($module = httpget('module'))) > '')
     {
@@ -128,11 +127,11 @@ function page_footer($saveuser = true)
         if (! isset($html[$key]))
         {
             $html[$key] = $val;
+
+            continue;
         }
-        else
-        {
-            $html[$key] .= $val;
-        }
+
+        $html[$key] .= $val;
     }
 
     $builtnavs = buildnavs();
@@ -151,16 +150,13 @@ function page_footer($saveuser = true)
     DB::free_result($result);
     $headscript = '';
 
+    $session['needtoviewmotd'] = false;
     if (isset($session['user']['lastmotd'])
         && ($row['motddate'] > $session['user']['lastmotd'])
         && (! isset($nopopup[$SCRIPT_NAME]) || 1 != $nopopups[$SCRIPT_NAME])
         && $session['user']['loggedin']
     ) {
         $session['needtoviewmotd'] = true;
-    }
-    else
-    {
-        $session['needtoviewmotd'] = false;
     }
 
     $html['scripthead'] = '';
@@ -186,20 +182,20 @@ function page_footer($saveuser = true)
 
     $paypalData = ['site' => ['currency' => getsetting('paypalcurrency', 'USD')]];
 
-    $already_registered_logdnet = true;
-    if (! isset($_SESSION['logdnet'][''])
-        || '' == $_SESSION['logdnet']['']
+    $alreadyRegisteredLogdnet = true;
+    if (! isset($request->getServer('logdnet')[''])
+        || '' == $request->getServer('logdnet')['']
         || ! isset($session['user']['laston'])
         || date('Y-m-d H:i:s', strtotime('-1 hour')) > $session['user']['laston']
     ) {
-        $already_registered_logdnet = false;
+        $alreadyRegisteredLogdnet = false;
     }
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
     $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI');
 
-    if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $already_registered_logdnet)
+    if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
         $sql = 'SELECT count(acctid) AS c FROM '.DB::prefix('accounts');
@@ -272,7 +268,6 @@ function page_footer($saveuser = true)
     //NOTICE |
 
     //output the nav
-    // $html[$z] = $[$z];
     $html['nav'] = LotgdTheme::renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
 
     //output the motd
@@ -282,14 +277,11 @@ function page_footer($saveuser = true)
     $html['mail'] = translate_inline('Log in to see your Ye Olde Mail');
     if (isset($session['user']['acctid']) && $session['user']['acctid'] > 0 && $session['user']['loggedin'])
     {
+        $html['mail'] = maillink();
         if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
         {
             $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Core.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Core.Timeout.status()", 10000);</script>';
             $html['mail'] = '<span id="maillink">'.maillink().'</span>';
-        }
-        else
-        {
-            $html['mail'] = maillink();
         }
     }
 
@@ -369,9 +361,9 @@ function page_footer($saveuser = true)
     unset($html['session']['user'], $html['user']['password']);
 
     $html['content'] .= $output->get_output();
-    $browser_output = LotgdTheme::renderTheme($html);
-    $session['user']['gensize'] += strlen($browser_output);
-    $session['output'] = $browser_output;
+    $browserOutput = LotgdTheme::renderTheme($html);
+    $session['user']['gensize'] += strlen($browserOutput);
+    $session['output'] = $browserOutput;
 
     if (true === $saveuser)
     {
@@ -381,7 +373,7 @@ function page_footer($saveuser = true)
     unset($session['output']);
     //this somehow allows some frames to load before the user's navs say it can
     session_write_close();
-    echo $browser_output;
+    echo $browserOutput;
 
     exit();
 }
@@ -437,11 +429,11 @@ function popup_footer()
         if (! isset($html[$key]))
         {
             $html[$key] = $val;
+
+            continue;
         }
-        else
-        {
-            $html[$key] .= $val;
-        }
+
+        $html[$key] .= $val;
     }
 
     $z = $y2 ^ $z2;
@@ -467,10 +459,6 @@ function popup_footer()
     exit();
 }
 
-$charstat_info = [];
-$charstat_info_copy = [];
-$last_charstat_label = '';
-
 /**
  * Resets the character stats array.
  */
@@ -479,10 +467,6 @@ function wipe_charstats()
     $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->wipeStats();
-
-    $charstat_info = [];
-    $charstat_info_copy = [];
-    $last_charstat_label = '';
 }
 
 /**
@@ -553,19 +537,17 @@ $statbuff = '';
 function getcharstats($buffs)
 {
     //returns output formatted character statistics.
-    global $charstat_info_copy, $statbuff;
+    global $statbuff;
 
     $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
-    $charstat_info = $stats->getStats();
-    $charstat_info_copy = $charstat_info;
+    $charstatInfo = $stats->getStats();
     $charstattpl = [];
 
-    foreach ($charstat_info as $label => $section)
+    foreach ($charstatInfo as $label => $section)
     {
         if (count($section))
         {
-            // $arr = array("title"=>translate_inline($label));
             $arr = translate_inline($label);
             $charstattpl[$arr] = [];
             reset($section);
@@ -620,8 +602,8 @@ function charstats($return = true)
         reset($session['bufflist']);
 
         require_once 'lib/playerfunctions.php';
-        $o_atk = $atk = get_player_attack(); //Original Attack
-        $o_def = $def = get_player_defense(); //Original Defense
+        $oAtk = $atk = get_player_attack(); //Original Attack
+        $oDef = $def = get_player_defense(); //Original Defense
         $spd = get_player_speed();
         $hitpoints = get_player_hitpoints(); //Health of character
         $u['maxhitpoints'] = $hitpoints;
@@ -687,23 +669,23 @@ function charstats($return = true)
         // $atk = $atk;
         // $def = $def;
         $atk = round($atk, 2);
-        if ($atk < $o_atk)
+        if ($atk < $oAtk)
         {
-            $atk = round($atk, 2).'(`$'.round($atk - $o_atk, 2).'`0)';
+            $atk = round($atk, 2).'(`$'.round($atk - $oAtk, 2).'`0)';
         }
-        elseif ($atk > $o_atk)
+        elseif ($atk > $oAtk)
         {
-            $atk = round($atk, 2).'(`@+'.round($atk - $o_atk, 2).'`0)';
+            $atk = round($atk, 2).'(`@+'.round($atk - $oAtk, 2).'`0)';
         }
 
         $def = round($def, 2);
-        if ($def < $o_def)
+        if ($def < $oDef)
         {
-            $def = round($def, 2).'(`$'.round($def - $o_def, 2).'`0)';
+            $def = round($def, 2).'(`$'.round($def - $oDef, 2).'`0)';
         }
-        elseif ($def > $o_def)
+        elseif ($def > $oDef)
         {
-            $def = round($def, 2).'(`@+'.round($def - $o_def, 2).'`0)';
+            $def = round($def, 2).'(`@+'.round($def - $oDef, 2).'`0)';
         }
 
         addcharstat('Character Info');
