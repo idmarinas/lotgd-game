@@ -34,9 +34,12 @@ plugins:
         enabled: false
         exclude_patterns:
             - "**/assets/"
+            - "**/cache/"
+            - "**/crawl/"
             - "**/error_docs/"
             - "**/gulp/"
             - "**/images/"
+            - "**/logd_snapshots/"
             - "**/resources/"
             - "**/templates/"
             - "**/themes/"
@@ -48,9 +51,12 @@ plugins:
         enabled: true
         exclude_patterns:
             - "**/assets/"
+            - "**/cache/"
+            - "**/crawl/"
             - "**/error_docs/"
             - "**/gulp/"
             - "**/images/"
+            - "**/logd_snapshots/"
             - "**/resources/"
             - "**/templates/"
             - "**/themes/"
@@ -62,9 +68,12 @@ plugins:
         enabled: false
         exclude_patterns:
             - "**/assets/"
+            - "**/cache/"
+            - "**/crawl/"
             - "**/error_docs/"
             - "**/gulp/"
             - "**/images/"
+            - "**/logd_snapshots/"
             - "**/resources/"
             - "**/templates/"
             - "**/themes/"
@@ -73,12 +82,15 @@ plugins:
             standard: "PSR2"
             file: "phpcs.xml"
     phan:
-        enabled: false
+        enabled: true
         exclude_patterns:
             - "**/assets/"
+            - "**/cache/"
+            - "**/crawl/"
             - "**/error_docs/"
             - "**/gulp/"
             - "**/images/"
+            - "**/logd_snapshots/"
             - "**/resources/"
             - "**/templates/"
             - "**/themes/"
