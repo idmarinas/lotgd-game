@@ -40,7 +40,7 @@ return [
     // then Phan assumes the PHP version which is closest to the minor version
     // of the php executable used to execute Phan.
     // Automatically inferred from composer.json requirement for "php" of "^7.0"
-    'target_php_version' => '7.1',
+    'target_php_version' => '7.2',
 
     // If enabled, missing properties will be created when
     // they are first seen. If false, we'll report an
@@ -377,7 +377,6 @@ return [
     // with a path relative to the root directory of the
     // project.
     'file_list' => [
-        '/',
         '*.php',
         'about.php',
         'account.php',
