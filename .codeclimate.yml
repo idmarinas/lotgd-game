@@ -94,6 +94,7 @@ plugins:
             - "resources/"
             - "templates/"
             - "themes/"
+            - "vendor/**/*"
         config:
             file_extensions: "php"
             backward-compatibility-checks: true
