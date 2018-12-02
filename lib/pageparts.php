@@ -91,10 +91,11 @@ function page_header()
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $REMOTE_ADDR, $REQUEST_URI, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
+    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
+    $request = LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
     $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
@@ -185,6 +186,7 @@ function page_footer($saveuser = true)
 
     $paypalData = ['site' => ['currency' => getsetting('paypalcurrency', 'USD')]];
 
+    $already_registered_logdnet = true;
     if (! isset($_SESSION['logdnet'][''])
         || '' == $_SESSION['logdnet']['']
         || ! isset($session['user']['laston'])
@@ -192,14 +194,10 @@ function page_footer($saveuser = true)
     ) {
         $already_registered_logdnet = false;
     }
-    else
-    {
-        $already_registered_logdnet = true;
-    }
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
-    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $already_registered_logdnet)
     {
@@ -208,7 +206,7 @@ function page_footer($saveuser = true)
         $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
         $c = $row['c'];
-        $a = getsetting('serverurl', 'http://'.$_SERVER['SERVER_NAME'].(80 == $_SERVER['SERVER_PORT'] ? '' : ':'.$_SERVER['SERVER_PORT']).dirname($_SERVER['REQUEST_URI']));
+        $a = getsetting('serverurl', 'http://'.$request->getServer('SERVER_NAME').(80 == $request->getServer('SERVER_PORT') ? '' : ':'.$request->getServer('SERVER_PORT')).dirname($request->getServer('REQUEST_URI')));
 
         if (! preg_match("/\/$/", $a))
         {
@@ -243,11 +241,11 @@ function page_footer($saveuser = true)
     {
         $paypalData['site']['paysite'] = $paysite;
         $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
-        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI');
 
         if (file_exists('payment.php'))
         {
-            $paypalData['site']['notify_url'] = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/payment.php';
+            $paypalData['site']['notify_url'] = 'http://'.$request->getServer('HTTP_HOST').dirname($request->getServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
@@ -255,7 +253,7 @@ function page_footer($saveuser = true)
 
     //-- Dragon Prime
     $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     if (isset($html['paypal']))
     {
@@ -281,6 +279,7 @@ function page_footer($saveuser = true)
     $html['motd'] = motdlink();
 
     //output the mail link
+    $html['mail'] = translate_inline('Log in to see your Ye Olde Mail');
     if (isset($session['user']['acctid']) && $session['user']['acctid'] > 0 && $session['user']['loggedin'])
     {
         if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
@@ -292,10 +291,6 @@ function page_footer($saveuser = true)
         {
             $html['mail'] = maillink();
         }
-    }
-    else
-    {
-        $html['mail'] = translate_inline('Log in to see your Ye Olde Mail');
     }
 
     //output petition count
@@ -331,7 +326,7 @@ function page_footer($saveuser = true)
     //Add all script in page
     $html['script'] = $script;
     //output view PHP source link
-    $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', ($_SERVER['REQUEST_URI']));
+    $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', ($request->getServer('REQUEST_URI')));
     $html['source'] = "<a href='$sourcelink' id='source' onclick='Lotgd.embed(this)' data-size='fullscreen' target='_blank'>".translate_inline('View PHP Source').'</a>';
     //output version
     $html['version'] = "Version: $logd_version";
@@ -691,6 +686,7 @@ function charstats($return = true)
 
         // $atk = $atk;
         // $def = $def;
+        $atk = round($atk, 2);
         if ($atk < $o_atk)
         {
             $atk = round($atk, 2).'(`$'.round($atk - $o_atk, 2).'`0)';
@@ -699,12 +695,8 @@ function charstats($return = true)
         {
             $atk = round($atk, 2).'(`@+'.round($atk - $o_atk, 2).'`0)';
         }
-        // They are equal, display in the 2 signifigant digit format.
-        else
-        {
-            $atk = round($atk, 2);
-        }
 
+        $def = round($def, 2);
         if ($def < $o_def)
         {
             $def = round($def, 2).'(`$'.round($def - $o_def, 2).'`0)';
@@ -712,11 +704,6 @@ function charstats($return = true)
         elseif ($def > $o_def)
         {
             $def = round($def, 2).'(`@+'.round($def - $o_def, 2).'`0)';
-        }
-        // They are equal, display in the 2 signifigant digit format.
-        else
-        {
-            $def = round($def, 2);
         }
 
         addcharstat('Character Info');
@@ -788,22 +775,16 @@ function charstats($return = true)
                         $companion['hitpoints'] = 0;
                     }
 
+                    $color = '`@';
                     if ($companion['hitpoints'] < $companion['maxhitpoints'])
                     {
                         $color = '`$';
                     }
-                    else
-                    {
-                        $color = '`@';
-                    }
 
+                    $suspcode = '';
                     if (isset($companion['suspended']) && true == $companion['suspended'])
                     {
                         $suspcode = '`7 *';
-                    }
-                    else
-                    {
-                        $suspcode = '';
                     }
 
                     addcharstat($companion['name'], $color.($companion['hitpoints']).'`7/`&'.($companion['maxhitpoints'])."$suspcode`0");
@@ -920,10 +901,8 @@ function maillink(): string
     {
         return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)"><b>'.$text.'</b></a>';
     }
-    else
-    {
-        return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)">'.$text.'</a>';
-    }
+
+    return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)">'.$text.'</a>';
 }
 
 /**
@@ -939,57 +918,6 @@ function motdlink()
     {
         return '<a href="motd.php" target="_blank" id="motd-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)"><i class="certificate icon"></i> <b>'.translate_inline('MoTD').'</b></a>';
     }
-    else
-    {
-        return '<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">'.translate_inline('MoTD').'</a>';
-    }
-}
 
-/**
- * Returns an output formatted popup link based on JavaScript.
- *
- * @param string $page The URL to open
- * @param string $size The size of the popup window (Default: 728x400)
- *
- * @return string
- *
- * @deprecated 3.0.0 delete in 3.1.0
- */
-function popup($page, $size = '728x400')
-{
-    // user prefs
-    global $session;
-
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.0.0; and delete in version 3.1.0 please ovoid use "%s", use "Lotgd.embed()" JavaScript function',
-        __METHOD__,
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    if ('728x400' === $size && isset($session['loggedin']) && $session['loggedin'])
-    {
-        if (! isset($session['user']['prefs']))
-        {
-            $usersize = '728x400';
-        }
-        else
-        {
-            $usersize = &$session['user']['prefs']['popupsize'];
-
-            if (! $usersize)
-            {
-                $usersize = '728x400';
-            }
-        }
-        $s = explode('x', $usersize);
-        $s[0] = (int) max(50, $s[0]);
-        $s[1] = (int) max(50, $s[1]);
-    }
-    else
-    {
-        $s = explode('x', $size);
-    }
-
-    //user prefs
-    return "window.open('$page','".preg_replace('([^[:alnum:]])', '', $page)."','scrollbars=yes,resizable=yes,width={$s[0]},height={$s[1]}').focus()";
+    return '<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">'.translate_inline('MoTD').'</a>';
 }
