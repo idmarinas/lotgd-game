@@ -290,7 +290,10 @@ return [
     //       should be added to the `directory_list` as well as
     //       to `exclude_analysis_directory_list`.
     'exclude_analysis_directory_list' => [
-        'vendor/',
+        'assets/',
+        'error_docs/',
+        'gulp/',
+        'vendor/'
     ],
 
     // Enable this to enable checks of require/include statements referring to valid paths.
@@ -341,12 +344,10 @@ return [
     // Thus, both first-party and third-party code being used by
     // your application should be included in this list.
     'directory_list' => [
-        'config',
-        'cronjob',
-        'lib',
-        'src/ajax',
-        'src/core',
-        'src/local',
+        'config/',
+        'cronjob/',
+        'lib/',
+        'src/',
         // 'vendor/doctrine/orm/lib',
         // 'vendor/etsy/phan/src/Phan',
         // 'vendor/ezyang/htmlpurifier/library',
@@ -376,6 +377,7 @@ return [
     // with a path relative to the root directory of the
     // project.
     'file_list' => [
+        '*.php',
         'about.php',
         'account.php',
         'ajaxcommentary.php',
