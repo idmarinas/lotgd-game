@@ -326,8 +326,11 @@ return [
     // Alternately, you can pass in the full path to a PHP file with the plugin's implementation (e.g. `'vendor/phan/phan/.phan/plugins/AlwaysReturnPlugin.php'`)
     'plugins' => [
         'AlwaysReturnPlugin',
-        'PregRegexCheckerPlugin',
         'UnreachableCodePlugin',
+        'DollarDollarPlugin',
+        'DuplicateArrayKeyPlugin',
+        'PregRegexCheckerPlugin',
+        'PrintfCheckerPlugin',
     ],
 
     // A list of directories that should be parsed for class and
