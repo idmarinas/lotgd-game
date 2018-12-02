@@ -11,9 +11,9 @@ return [
     'analyze_signature_compatibility' => true,
     'dead_code_detection' => true,
     'minimum_severity' => Issue::SEVERITY_CRITICAL,
-    'directory_list' => [
-        'module',
-        'public',
-        'config'
-    ]
+    // 'directory_list' => [
+    //     'module',
+    //     'public',
+    //     'config'
+    // ]
 ];
