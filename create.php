@@ -314,14 +314,12 @@ else
                 $blockaccount = true;
             }
 
-            if (1 == getsetting('requireemail', 0) && is_email($email) || 0 == getsetting('requireemail', 0))
-            {
-            }
-            else
+            if (1 == (int) getsetting('requireemail', 0) && ! is_email($email))
             {
                 $msg .= translate_inline('You must enter a valid email address.`n');
                 $blockaccount = true;
             }
+
             $args = modulehook('check-create', httpallpost());
 
             if (isset($args['blockaccount']) && $args['blockaccount'])
