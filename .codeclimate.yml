@@ -7,6 +7,8 @@ checks:
         enabled: true
     file-lines:
         enabled: true
+        config:
+            threshold: 350
     method-complexity:
         enabled: true
         config:
@@ -15,6 +17,8 @@ checks:
         enabled: true
     method-lines:
         enabled: true
+        config:
+            threshold: 35
     nested-control-flow:
         enabled: true
     return-statements:
