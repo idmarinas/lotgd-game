@@ -9,6 +9,8 @@ checks:
         enabled: true
     method-complexity:
         enabled: true
+        config:
+            threshold: 10
     method-count:
         enabled: true
     method-lines:
@@ -25,7 +27,7 @@ plugins:
     nodesecurity:
         enabled: true
     sonar-php:
-        enabled: true
+        enabled: false
         exclude_patterns:
             - "**/assets/"
             - "**/error_docs/"
@@ -39,7 +41,7 @@ plugins:
         config:
             file_extensions: "php"
     phpmd:
-        enabled: true
+        enabled: false
         exclude_patterns:
             - "**/assets/"
             - "**/error_docs/"
