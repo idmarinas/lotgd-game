@@ -24,17 +24,14 @@ $old = getsetting('expireoldacct', 45);
 
 $op = httpget('op');
 
-if ('val' == $op || 'forgotval' == $op)
+if (('val' == $op || 'forgotval' == $op) && true == ServerFunctions::isTheServerFull())
 {
-    if (true == ServerFunctions::isTheServerFull())
-    {
-        //server is full, your "cheat" does not work here buddy ;) you can't bypass this!
-        page_header('Account Validation');
-        output('Sorry, there are too many people online. Click at the link you used to get here later on. Thank you.');
-        addnav('Login', 'index.php');
+    //server is full, your "cheat" does not work here buddy ;) you can't bypass this!
+    page_header('Account Validation');
+    output('Sorry, there are too many people online. Click at the link you used to get here later on. Thank you.');
+    addnav('Login', 'index.php');
 
-        page_footer();
-    }
+    page_footer();
 }
 
 if ('forgotval' == $op)
