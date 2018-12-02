@@ -260,23 +260,13 @@ class DB
     }
 
     /**
-     * Check name of data base.
-     *
-     * @return string
-     */
-    public static function get_server_version()
-    {
-        return self::$wrapper->getAdapter()->getPlatform()->getName();
-    }
-
-    /**
      * Quote value for safe using in DB.
      *
      * @param string $value
      *
      * @return string
      */
-    public static function quoteValue(string $value): string
+    public static function quoteValue($value): string
     {
         return self::$wrapper->quoteValue($value);
     }
