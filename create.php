@@ -267,9 +267,9 @@ else
         {
             $blockaccount = false;
             $msg = '';
-            $email = httppost('email');
-            $pass1 = httppost('pass1');
-            $pass2 = httppost('pass2');
+            $email = (string) httppost('email');
+            $pass1 = (string) httppost('pass1');
+            $pass2 = (string) httppost('pass2');
 
             if (1 == getsetting('blockdupeemail', 0) && 1 == getsetting('requireemail', 0))
             {
