@@ -11,6 +11,7 @@ use Zend\Db\ResultSet\ResultSet;
 class Dbwrapper
 {
     use \Lotgd\Core\Pattern\Container;
+    use Pattern\DbTool;
     use Pattern\Prefix;
     use Pattern\Zend;
 
