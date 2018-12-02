@@ -45,7 +45,7 @@ plugins:
         config:
             file_extensions: "php"
     phpmd:
-        enabled: false
+        enabled: true
         exclude_patterns:
             - "**/assets/"
             - "**/error_docs/"
@@ -57,7 +57,7 @@ plugins:
         config:
             file_extensions:
                 - php
-            rulesets: "cleancode,codesize,controversial,design,naming,phpmd-ruleset.xml"
+            rulesets: "cleancode,controversial,design,naming,unusedcode"
     phpcodesniffer:
         enabled: false
         exclude_patterns:
