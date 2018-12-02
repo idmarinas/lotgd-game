@@ -33,7 +33,6 @@ if ('' != $name)
     }
     elseif ('!md52!' == substr($password, 0, 6) && 38 == strlen($password))
     {
-        $password = '';
         if ($force)
         {
             $password = substr($password, 6);
