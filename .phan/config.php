@@ -377,6 +377,7 @@ return [
     // with a path relative to the root directory of the
     // project.
     'file_list' => [
+        '/',
         '*.php',
         'about.php',
         'account.php',
