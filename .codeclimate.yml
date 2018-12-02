@@ -33,16 +33,16 @@ plugins:
     sonar-php:
         enabled: false
         exclude_patterns:
-            - "**/assets/"
-            - "**/cache/"
-            - "**/crawl/"
-            - "**/error_docs/"
-            - "**/gulp/"
-            - "**/images/"
-            - "**/logd_snapshots/"
-            - "**/resources/"
-            - "**/templates/"
-            - "**/themes/"
+            - "assets/"
+            - "cache/"
+            - "crawl/"
+            - "error_docs/"
+            - "gulp/"
+            - "images/"
+            - "logd_snapshots/"
+            - "resources/"
+            - "templates/"
+            - "themes/"
             - "**/*.ico"
             - "**/*.png"
         config:
@@ -50,16 +50,16 @@ plugins:
     phpmd:
         enabled: true
         exclude_patterns:
-            - "**/assets/"
-            - "**/cache/"
-            - "**/crawl/"
-            - "**/error_docs/"
-            - "**/gulp/"
-            - "**/images/"
-            - "**/logd_snapshots/"
-            - "**/resources/"
-            - "**/templates/"
-            - "**/themes/"
+            - "assets/"
+            - "cache/"
+            - "crawl/"
+            - "error_docs/"
+            - "gulp/"
+            - "images/"
+            - "logd_snapshots/"
+            - "resources/"
+            - "templates/"
+            - "themes/"
         config:
             file_extensions:
                 - php
@@ -67,16 +67,16 @@ plugins:
     phpcodesniffer:
         enabled: false
         exclude_patterns:
-            - "**/assets/"
-            - "**/cache/"
-            - "**/crawl/"
-            - "**/error_docs/"
-            - "**/gulp/"
-            - "**/images/"
-            - "**/logd_snapshots/"
-            - "**/resources/"
-            - "**/templates/"
-            - "**/themes/"
+            - "assets/"
+            - "cache/"
+            - "crawl/"
+            - "error_docs/"
+            - "gulp/"
+            - "images/"
+            - "logd_snapshots/"
+            - "resources/"
+            - "templates/"
+            - "themes/"
         config:
             file_extensions: "php"
             standard: "PSR2"
@@ -84,16 +84,16 @@ plugins:
     phan:
         enabled: true
         exclude_patterns:
-            - "**/assets/"
-            - "**/cache/"
-            - "**/crawl/"
-            - "**/error_docs/"
-            - "**/gulp/"
-            - "**/images/"
-            - "**/logd_snapshots/"
-            - "**/resources/"
-            - "**/templates/"
-            - "**/themes/"
+            - "assets/"
+            - "cache/"
+            - "crawl/"
+            - "error_docs/"
+            - "gulp/"
+            - "images/"
+            - "logd_snapshots/"
+            - "resources/"
+            - "templates/"
+            - "themes/"
         config:
             file_extensions: "php"
             backward-compatibility-checks: true
@@ -109,8 +109,8 @@ exclude_patterns:
     - "**/test/"
     - "**/tests/"
     - "Tests/"
-    - "**/vendor/"
+    - "vendor/"
     - "**/*_test.go"
     - "**/*.d.ts"
-    - "**/semantic/"
+    - "semantic/"
     - "resources/jqueryCookieGuard.1.1.0.js"
