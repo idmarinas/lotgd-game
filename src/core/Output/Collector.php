@@ -16,7 +16,6 @@ class Collector
 
     protected $output = ''; //!< the output to the template body
     protected $block_new_output = false; //!< is current output blocked? boolean
-    protected $color_map;
     protected $colormap_esc; //!< the letters of color codes only, escaped and not escaped
     protected $nestedtags = [
         'font' => false,
