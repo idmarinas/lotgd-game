@@ -5,6 +5,41 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 3.1.0
+
+### :cyclone: CHANGES
+
+-   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder
+-   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
+    -   Now for close color code have 2 methods
+        -   Use it's own code with ´ before code. Example `\`6Hi there´6`
+        -   Use `\`0`, this method work with all
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **lib/class/dbwrapper.php** Fixed error, not passed param $prefixed
+-   **lib/configuration/configuration_data.php** Fixed error with data
+-   **lib/data/configuration_data.php** Deleted unused data
+
+### :x: REMOVES
+
+-   **common.php** Code removed for upgrade from version 2.7.0 to 3.0.0 IDMarinas edition
+-   **lib/dbwrapper.php** Removed deprecated method `query_cached`
+    -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\\Core\\Lib\\Dbwrapper` to get this info
+-   **lib/pageparts.php** Removed deprecated function `popup`
+
+### :notebook: NOTES
+
+-   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
+
 # Version: 3.0.0
 
 ### :cyclone: CHANGES
@@ -733,7 +768,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### FEATURES
 
 -   Now LOTGD use a **_composer_** for manage external dependencies.
-    		_ Only add a dependence in a _composer.json\* file.
+    		\_ Only add a dependence in a \_composer.json\* file.
 -   Now LOTGD use **_Twig_** as template system. The goal is to customize certain parts of the game to fit almost any customized version of the game.
     		_ Like login form or register form.
     		_ With successive updates will increase the customization options.
