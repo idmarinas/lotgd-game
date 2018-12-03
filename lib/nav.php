@@ -743,8 +743,8 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
     {
         $pattern1 = '/^'.preg_quote($key, '/').'/';
         $pattern2 = '/([^`])'.preg_quote($key, '/').'/';
-        $rep1 = "`H$key`H";
-        $rep2 = "\$1`H$key`H";
+        $rep1 = "`H{$key}´H";
+        $rep2 = "\$1`H{$key}´H";
         $text = preg_replace($pattern1, $rep1, $text, 1);
 
         if (false === strpos($text, '`H'))
