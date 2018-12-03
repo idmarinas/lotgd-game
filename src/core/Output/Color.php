@@ -10,7 +10,11 @@ namespace Lotgd\Core\Output;
 
 class Color
 {
-    //!< the color codes=>CSS tags
+    /**
+     * Array of codes format code => css tag
+     *
+     * @var array
+     */
     protected $colors = [
         '1' => 'colDkBlue',
         '2' => 'colDkGreen',

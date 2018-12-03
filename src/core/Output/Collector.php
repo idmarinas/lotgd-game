@@ -11,8 +11,9 @@ namespace Lotgd\Core\Output;
 class Collector
 {
     use \Lotgd\Core\Pattern\Container;
+    use Pattern\Color;
+    use Pattern\Code;
 
-    protected $colors;
     protected $output = ''; //!< the output to the template body
     protected $block_new_output = false; //!< is current output blocked? boolean
     protected $color_map;
@@ -71,8 +72,6 @@ class Collector
             unset($args[$length - 1]);
             $priv = true;
         }
-        // $out = $indata;
-        // $args[0]=&$out;
         //apply variables
         $out = &$args[0];
         $out = $this->sustitute($out);
@@ -194,11 +193,11 @@ class Collector
     /**
      * If you want to block new output, this is your function.
      *
-     * @param $block boolean or 0,1 or similar
+     * @param bool $block
      */
     public function set_block_new_output($block)
     {
-        $this->block_new_output = ($block ? true : false);
+        $this->block_new_output = (bool) $block;
     }
 
     /**
@@ -234,186 +233,35 @@ class Collector
      * This function puts the lotgd formatting `whatever into HTML tags. It will automatically close previous tags before opening new ones for the same class.
      *
      * @param string $data the logd formatted string
-     * @param $priv If true, it uses no htmlentites before outputting to the browser, means it will parse HTML code through. Default is false
+     * @param bool $priv If true, it uses no htmlentites before outputting to the browser, means it will parse HTML code through. Default is false
      */
     public function appoencode(string $data, $priv = false)
     {
-        $start = 0;
-        $out = '';
-        $colors = $this->get_colors();
+        $patternOpen = $this->getColorPatternOpen();
+        $patternClose = $this->getColorPatternClose();
+        $replacementOpen = $this->getColorReplacementOpen();
 
-        if (false !== ($pos = strpos($data, '`')))
-        {
-            do
-            {
-                $pos++;
+        $data = str_replace($patternOpen, $replacementOpen, $data);
+        $data = str_replace($patternClose, '</span>', $data);
 
-                if (false === $priv)
-                {
-                    $out .= htmlentities(substr($data, $start, $pos - $start - 1), ENT_COMPAT, getsetting('charset', 'UTF-8'));
-                }
-                else
-                {
-                    $out .= substr($data, $start, $pos - $start - 1);
-                }
-                $start = $pos + 1;
+        //-- Replace codes of string
+        $patternOpen = $this->getCodePatternOpen();
+        $patternClose = $this->getCodePatternClose();
+        $replacementOpen = $this->getCodeReplacementOpen();
+        $replacementClose = $this->getCodeReplacementClose();
 
-                if (isset($colors[$data[$pos]]))
-                {
-                    if ($this->nestedtags['font'])
-                    {
-                        $out .= '</span>';
-                    }
-                    else
-                    {
-                        $this->nestedtags['font'] = true;
-                    }
-                    $out .= "<span class='".$colors[$data[$pos]]."'>";
-                }
-                else
-                {
-                    switch ($data[$pos])
-                    {
-                        case 'n':
-                            $out .= "<br>\n";
-                            break;
-                        case '0':
-                            if (isset($this->nestedtags['font']) && $this->nestedtags['font'])
-                            {
-                                $out .= '</span>';
-                            }
-                            $this->nestedtags['font'] = false;
-                            break;
-                        case 'b':
-                            if (isset($this->nestedtags['b']) && $this->nestedtags['b'])
-                            {
-                                $out .= '</b>';
-                                $this->nestedtags['b'] = false;
-                            }
-                            else
-                            {
-                                $this->nestedtags['b'] = true;
-                                $out .= '<b>';
-                            }
-                            break;
-                        case 'i':
-                            if (isset($this->nestedtags['em']) && $this->nestedtags['em'])
-                            {
-                                $out .= '</em>';
-                                $this->nestedtags['em'] = false;
-                            }
-                            else
-                            {
-                                $this->nestedtags['em'] = true;
-                                $out .= '<em>';
-                            }
-                            break;
-                        case 'c':
-                            if (isset($this->nestedtags['div']) && $this->nestedtags['div'])
-                            {
-                                $out .= '</div>';
-                                $this->nestedtags['div'] = false;
-                            }
-                            else
-                            {
-                                $this->nestedtags['div'] = true;
-                                $out .= "<div class='center aligned'>";
-                            }
-                            break;
-                        case 'B':
-                            if (isset($this->nestedtags['B']) && $this->nestedtags['B'])
-                            {
-                                $out .= '</em>';
-                                $this->nestedtags['B'] = false;
-                            }
-                            else
-                            {
-                                $this->nestedtags['B'] = true;
-                                $out .= '<em>';
-                            }
-                            break;
-                        case '>':
-                            if (isset($this->nestedtags['>']) && $this->nestedtags['>'])
-                            {
-                                $this->nestedtags['>'] = false;
-                                $out .= '</div>';
-                            }
-                            else
-                            {
-                                $this->nestedtags['>'] = true;
-                                $out .= "<div style='float: right; clear: right;'>";
-                            }
-                            break;
-                        case '<':
-                            if (isset($this->nestedtags['<']) && $this->nestedtags['<'])
-                            {
-                                $this->nestedtags['<'] = false;
-                                $out .= '</div>';
-                            }
-                            else
-                            {
-                                $this->nestedtags['<'] = true;
-                                $out .= "<div style='float: left; clear: left;'>";
-                            }
-                            break;
-                        case 'H':
-                            if (isset($this->nestedtags['span']) && $this->nestedtags['span'])
-                            {
-                                $out .= '</span>';
-                                $this->nestedtags['span'] = false;
-                            }
-                            else
-                            {
-                                $this->nestedtags['span'] = true;
-                                $out .= "<span class='navhi'>";
-                            }
-                            break;
-                        case 'w':
-                            global $session;
+        $data = str_replace($patternOpen, $replacementOpen, $data);
+        $data = str_replace($patternClose, $replacementClose, $data);
 
-                            if (! isset($session['user']['weapon']))
-                            {
-                                $session['user']['weapon'] = '';
-                            }
-                            $out .= sanitize($session['user']['weapon']);
-                            break;
-                        case '`':
-                            $out .= '`';
-                            $pos++;
-                            break;
-                        default:
-                            $out .= '`'.$data[$pos];
-                    }
-                }
-            } while (false !== ($pos = strpos($data, '`', $pos)));
-        }
+        //-- Special codes
+        $patternOpen = $this->getCodeSpecialPatternOpen();
+        $patternClose = $this->getCodeSpecialPatternClose();
+        $replacementOpen = $this->getCodeSpecialReplacementOpen();
+        $replacementClose = $this->getCodeSpecialReplacementClose();
+        $data = str_replace($patternOpen, $replacementOpen, $data);
+        $data = str_replace($patternClose, $replacementClose, $data);
 
-        if (false === $priv)
-        {
-            $out .= htmlentities(substr($data, $start), ENT_COMPAT, getsetting('charset', 'UTF-8'));
-        }
-        else
-        {
-            $out .= substr($data, $start);
-        }
-
-        return $out;
-    }
-
-    /**
-     * Returns the complete color array.
-     *
-     * @return an array with $colorcode=>$csstag format
-     */
-    public function get_colors()
-    {
-        if (! $this->colors)
-        {
-            $colors = $this->getContainer(\Lotgd\Core\Output\Color::class);
-            $this->colors = $colors;
-        }
-
-        return $this->colors->getColors();
+        return $data;
     }
 
     /**
@@ -423,7 +271,7 @@ class Collector
      */
     public function get_colormap()
     {
-        return implode('', array_keys($this->get_colors()));
+        return implode('', array_keys($this->getColors()));
     }
 
     /**
@@ -443,7 +291,7 @@ class Collector
      */
     public function get_colormap_escaped_array()
     {
-        $cols = $this->get_colors();
+        $cols = $this->getColors();
         //*cough* if you choose color codes like \ or whatnot... SENSITIVE codes like special programmer chars... then escape them. Sadly we have % (breaks sprintf i.e.) AND ) in it... (breaks regular expressions)
         $escape = [')', '$', '(', '[', ']', '{', '}'];
 
