@@ -87,10 +87,10 @@ plugins:
             file_extensions: "php"
             target_php_version: "7.1"
             directory_list:
-                - "config/",
-                - "cronjob/",
-                - "lib/",
-                - "src/",
+                - "config/"
+                - "cronjob/"
+                - "lib/"
+                - "src/"
             exclude_analysis_directory_list:
                 - "assets/"
                 - "cache/"
