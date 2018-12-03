@@ -87,7 +87,8 @@ plugins:
             file_extensions: "php"
             target_php_version: "7.1"
             minimum_severity: 3
-            directory_list:
+            ignore_undeclared: true
+            directory:
                 - "config/"
                 - "cronjob/"
                 - "lib/"
