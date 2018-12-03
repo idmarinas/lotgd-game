@@ -233,9 +233,8 @@ class Collector
      * This function puts the lotgd formatting `whatever into HTML tags. It will automatically close previous tags before opening new ones for the same class.
      *
      * @param string $data the logd formatted string
-     * @param bool $priv If true, it uses no htmlentites before outputting to the browser, means it will parse HTML code through. Default is false
      */
-    public function appoencode(string $data, $priv = false)
+    public function appoencode(string $data)
     {
         $patternOpen = $this->getColorPatternOpen();
         $patternClose = $this->getColorPatternClose();
