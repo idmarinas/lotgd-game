@@ -88,6 +88,7 @@ plugins:
             target_php_version: "7.1"
             minimum_severity: 3
             ignore_undeclared: true
+            output_mode: "codeclimate"
             directory:
                 - "config/"
                 - "cronjob/"
