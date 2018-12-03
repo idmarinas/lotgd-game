@@ -293,7 +293,12 @@ return [
         'assets/',
         'error_docs/',
         'gulp/',
-        'vendor/'
+        'modules/',
+        'resources/',
+        'semantic/',
+        'templates/',
+        'themes/',
+        'vendor/',
     ],
 
     // Enable this to enable checks of require/include statements referring to valid paths.
@@ -329,11 +334,8 @@ return [
     // Alternately, you can pass in the full path to a PHP file with the plugin's implementation (e.g. `'vendor/phan/phan/.phan/plugins/AlwaysReturnPlugin.php'`)
     'plugins' => [
         'AlwaysReturnPlugin',
-        'UnreachableCodePlugin',
-        'DollarDollarPlugin',
-        'DuplicateArrayKeyPlugin',
         'PregRegexCheckerPlugin',
-        'PrintfCheckerPlugin',
+        'UnreachableCodePlugin',
     ],
 
     // A list of directories that should be parsed for class and
@@ -345,7 +347,8 @@ return [
     // your application should be included in this list.
     'directory_list' => [
         'lib',
-        'src',
+        'src/core',
+        'src/local',
         'vendor/doctrine/orm/lib',
         'vendor/ezyang/htmlpurifier/library',
         'vendor/hellogerard/jobby/src',
