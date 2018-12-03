@@ -12,7 +12,7 @@ checks:
     method-complexity:
         enabled: true
         config:
-            threshold: 10
+            threshold: 12
     method-count:
         enabled: true
     method-lines:
@@ -83,18 +83,6 @@ plugins:
             file: "phpcs.xml"
     phan:
         enabled: true
-        exclude_patterns:
-                - "assets/"
-                - "cache/"
-                - "crawl/"
-                - "error_docs/"
-                - "gulp/"
-                - "images/"
-                - "logd_snapshots/"
-                - "resources/"
-                - "templates/"
-                - "themes/"
-                - "vendor/**/*"
 exclude_patterns:
     - "config/"
     - "db/"
