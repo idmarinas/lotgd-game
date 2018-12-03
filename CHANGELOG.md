@@ -12,8 +12,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
     -   Now for close color code have 2 methods
-        -   Use it's own code with ´ before code. Example `\`6Hi there´6`
-        -   Use `\`0`, this method work with all
+        -   Use it's own code with ´ before code. Example `` `6Hi there´6 ``
+        -   Use `` `0 `` this method work with all
 
 ### :star: FEATURES
 
