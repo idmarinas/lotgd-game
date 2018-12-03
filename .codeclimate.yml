@@ -82,7 +82,7 @@ plugins:
             standard: "PSR2"
             file: "phpcs.xml"
     phan:
-        enabled: true
+        enabled: false
         config:
             file_extensions: "php"
             target_php_version: "7.1"
