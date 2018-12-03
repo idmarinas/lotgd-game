@@ -83,6 +83,26 @@ plugins:
             file: "phpcs.xml"
     phan:
         enabled: true
+        config:
+            file_extensions: "php"
+            target_php_version: "7.1"
+            directory_list:
+                - "config/",
+                - "cronjob/",
+                - "lib/",
+                - "src/",
+            exclude_analysis_directory_list:
+                - "assets/"
+                - "cache/"
+                - "crawl/"
+                - "error_docs/"
+                - "gulp/"
+                - "images/"
+                - "logd_snapshots/"
+                - "resources/"
+                - "templates/"
+                - "themes/"
+                - "vendor/"
 exclude_patterns:
     - "config/"
     - "db/"
