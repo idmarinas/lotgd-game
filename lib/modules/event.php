@@ -86,11 +86,6 @@ function module_events($eventtype, $basechance, $baseLink = false)
 
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
-    else
-    {
-        //debug("Base link was specified as $baseLink");
-        //debug(debug_backtrace());
-    }
 
     if (e_rand(1, 100) <= $basechance)
     {
@@ -137,11 +132,7 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
 
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
-    else
-    {
-        //debug("Base link was specified as $baseLink");
-        //debug(debug_backtrace());
-    }
+
     // Save off the mostrecent module since having that change can change
     // behaviour especially if a module calls modulehooks itself or calls
     // library functions which cause them to be called.
@@ -181,13 +172,10 @@ function module_display_events($eventtype, $forcescript = false)
         return;
     }
 
+    $script = $forcescript;
     if (false === $forcescript)
     {
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
-    }
-    else
-    {
-        $script = $forcescript;
     }
 
     $events = module_collect_events($eventtype, true);
