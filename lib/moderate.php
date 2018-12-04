@@ -24,6 +24,9 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     global $session,$REQUEST_URI,$doublepost, $translation_namespace;
     global $emptypost;
 
+    $request = $this->getContainer(\Lotgd\Core\Http::class);
+
+    $sectselect = '';
     if (false === $viewall)
     {
         rawoutput("<a name='$section'></a>");
@@ -36,10 +39,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
         }
         $sectselect = "section='$section' AND ";
     }
-    else
-    {
-        $sectselect = '';
-    }
+
     $excludes = getsetting('moderateexcludes', '');
     //works here with %, so we need a LIKE and explode it if not empty
     if ('' != $excludes)
@@ -61,18 +61,15 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
     $nobios = ['motd.php' => true];
 
-    if (! array_key_exists(basename($_SERVER['SCRIPT_NAME']), $nobios))
+    if (! array_key_exists(basename($request->getServer('SCRIPT_NAME')), $nobios))
     {
-        $nobios[basename($_SERVER['SCRIPT_NAME'])] = false;
+        $nobios[basename($request->getServer('SCRIPT_NAME'))] = false;
     }
 
-    if ($nobios[basename($_SERVER['SCRIPT_NAME'])])
+    $linkbios = true;
+    if ($nobios[basename($request->getServer('SCRIPT_NAME'))])
     {
         $linkbios = false;
-    }
-    else
-    {
-        $linkbios = true;
     }
 
     if ('X' == $message)
@@ -102,33 +99,27 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     }
     $cc = false;
 
+    $cid = 0;
     if (false !== httpget('comscroll') && (int) $session['lastcom'] == $com + 1)
     {
         $cid = (int) $session['lastcommentid'];
     }
-    else
-    {
-        $cid = 0;
-    }
 
     $session['lastcom'] = $com;
 
+    $newadded = 0;
     if ($com > 0 || $cid > 0)
     {
         // Find newly added comments.
         $sql = 'SELECT COUNT(commentid) AS newadded FROM '.
-            DB::prefix('commentary').' LEFT JOIN '.
-            DB::prefix('accounts').' ON '.
-            DB::prefix('accounts').'.acctid = '.
-            DB::prefix('commentary').".author WHERE $sectselect ".
+            \DB::prefix('commentary').' LEFT JOIN '.
+            \DB::prefix('accounts').' ON '.
+            \DB::prefix('accounts').'.acctid = '.
+            \DB::prefix('commentary').".author WHERE $sectselect ".
             '('.DB::prefix('accounts').'.locked=0 or '.DB::prefix('accounts').".locked is null) AND commentid > '$cid'";
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $result = \DB::query($sql);
+        $row = \DB::fetch_assoc($result);
         $newadded = $row['newadded'];
-    }
-    else
-    {
-        $newadded = 0;
     }
 
     $commentbuffer = [];
@@ -136,32 +127,32 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     if (0 == $cid)
     {
         $sql = 'SELECT '.DB::prefix('commentary').'.*, '.
-            DB::prefix('accounts').'.name, '.
-            DB::prefix('accounts').'.acctid, '.
-            DB::prefix('accounts').'.clanrank, '.
-            DB::prefix('clans').'.clanshort FROM '.
-            DB::prefix('commentary').' LEFT JOIN '.
-            DB::prefix('accounts').' ON '.
-            DB::prefix('accounts').'.acctid = '.
-            DB::prefix('commentary').'.author LEFT JOIN '.
-            DB::prefix('clans').' ON '.
-            DB::prefix('clans').'.clanid='.
-            DB::prefix('accounts').
+            \DB::prefix('accounts').'.name, '.
+            \DB::prefix('accounts').'.acctid, '.
+            \DB::prefix('accounts').'.clanrank, '.
+            \DB::prefix('clans').'.clanshort FROM '.
+            \DB::prefix('commentary').' LEFT JOIN '.
+            \DB::prefix('accounts').' ON '.
+            \DB::prefix('accounts').'.acctid = '.
+            \DB::prefix('commentary').'.author LEFT JOIN '.
+            \DB::prefix('clans').' ON '.
+            \DB::prefix('clans').'.clanid='.
+            \DB::prefix('accounts').
             ".clanid WHERE $sectselect ".
             '( '.DB::prefix('accounts').'.locked=0 OR '.DB::prefix('accounts').'.locked is null ) '.
             'ORDER BY commentid DESC LIMIT '.
             ($com * $limit).",$limit";
 
-        if (0 == $com && strstr($_SERVER['REQUEST_URI'], '/moderate.php') !== $_SERVER['REQUEST_URI'])
+        if (0 == $com && strstr($request->getServer('REQUEST_URI'), '/moderate.php') !== $request->getServer('REQUEST_URI'))
         {
-            $result = DB::query($sql);
+            $result = \DB::query($sql);
         }
         else
         {
-            $result = DB::query($sql);
+            $result = \DB::query($sql);
         }
 
-        while ($row = DB::fetch_assoc($result))
+        while ($row = \DB::fetch_assoc($result))
         {
             $commentbuffer[] = $row;
         }
@@ -169,23 +160,23 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     else
     {
         $sql = 'SELECT '.DB::prefix('commentary').'.*, '.
-            DB::prefix('accounts').'.name, '.
-            DB::prefix('accounts').'.acctid, '.
-            DB::prefix('accounts').'.clanrank, '.
-            DB::prefix('clans').'.clanshort FROM '.
-            DB::prefix('commentary').' LEFT JOIN '.
-            DB::prefix('accounts').' ON '.
-            DB::prefix('accounts').'.acctid = '.
-            DB::prefix('commentary').'.author LEFT JOIN '.
-            DB::prefix('clans').' ON '.DB::prefix('clans').'.clanid='.
-            DB::prefix('accounts').
+            \DB::prefix('accounts').'.name, '.
+            \DB::prefix('accounts').'.acctid, '.
+            \DB::prefix('accounts').'.clanrank, '.
+            \DB::prefix('clans').'.clanshort FROM '.
+            \DB::prefix('commentary').' LEFT JOIN '.
+            \DB::prefix('accounts').' ON '.
+            \DB::prefix('accounts').'.acctid = '.
+            \DB::prefix('commentary').'.author LEFT JOIN '.
+            \DB::prefix('clans').' ON '.DB::prefix('clans').'.clanid='.
+            \DB::prefix('accounts').
             ".clanid WHERE $sectselect ".
             '( '.DB::prefix('accounts').'.locked=0 OR '.DB::prefix('accounts').'.locked is null ) '.
             "AND commentid > '$cid' ".
             "ORDER BY commentid ASC LIMIT $limit";
-        $result = DB::query($sql);
+        $result = \DB::query($sql);
 
-        while ($row = DB::fetch_assoc($result))
+        while ($row = \DB::fetch_assoc($result))
         {
             $commentbuffer[] = $row;
         }
@@ -230,7 +221,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
         }
 
         $link = 'bio.php?char='.$row['acctid'].
-            '&ret='.urlencode($_SERVER['REQUEST_URI']);
+            '&ret='.urlencode($request->getServer('REQUEST_URI'));
 
         if ('::' == substr($ft, 0, 2))
         {
@@ -355,9 +346,9 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     }
 
     $del = translate_inline('Del');
-    $scriptname = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1);
-    $pos = strpos($_SERVER['REQUEST_URI'], '?');
-    $return = $scriptname.(false == $pos ? '' : substr($_SERVER['REQUEST_URI'], $pos));
+    $scriptname = substr($request->getServer('SCRIPT_NAME'), strrpos($request->getServer('SCRIPT_NAME'), '/') + 1);
+    $pos = strpos($request->getServer('REQUEST_URI'), '?');
+    $return = $scriptname.(false == $pos ? '' : substr($request->getServer('REQUEST_URI'), $pos));
     $one = (false == strstr($return, '?') ? '?' : '&');
 
     for (; $i >= 0; $i--)
@@ -413,15 +404,15 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
     if ($moderating)
     {
-        $scriptname = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1);
-        addnav('', "$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI']));
+        $scriptname = substr($request->getServer('SCRIPT_NAME'), strrpos($request->getServer('SCRIPT_NAME'), '/') + 1);
+        addnav('', "$scriptname?op=commentdelete&return=".urlencode($request->getServer('REQUEST_URI')));
         $mod_Del1 = htmlentities(translate_inline('Delete Checked Comments'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
         $mod_Del2 = htmlentities(translate_inline('Delete Checked & Ban (3 days)'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
         $mod_Del_confirm = addslashes(htmlentities(translate_inline('Are you sure you wish to ban this user and have you specified the exact reason for the ban, i.e. cut/pasted their offensive comments?'), ENT_COMPAT, getsetting('charset', 'UTF-8')));
         $mod_reason = translate_inline('Reason:');
         $mod_reason_desc = htmlentities(translate_inline('Banned for comments you posted.'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
-        output_notl("<br><form action='$scriptname?op=commentdelete&return=".urlencode($_SERVER['REQUEST_URI'])."' method='POST'>", true);
+        output_notl("<br><form action='$scriptname?op=commentdelete&return=".urlencode($request->getServer('REQUEST_URI'))."' method='POST'>", true);
         output_notl("<input type='submit' class='ui button' value=\"$mod_Del1\">", true);
         output_notl("<input type='submit' class='ui button' name='delnban' value=\"$mod_Del2\" onClick=\"return confirm('$mod_Del_confirm');\">", true);
         output_notl("`n`n$mod_reason <div class='ui input'><input name='reason0' size='40' value=\"$mod_reason_desc\" onChange=\"document.getElementById('reason').value=this.value;\"></div>", true);
@@ -524,8 +515,8 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     if ($rowcount >= $limit || $cid > 0)
     {
         $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section='$section' AND postdate > '{$session['user']['recentcomments']}'";
-        $r = DB::query($sql);
-        $val = DB::fetch_assoc($r);
+        $r = \DB::query($sql);
+        $val = \DB::fetch_assoc($r);
         $val = round($val['c'] / $limit + 0.5, 0) - 1;
 
         if ($val > 0)
@@ -615,7 +606,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
     if (! $cc)
     {
-        DB::free_result($result);
+        \DB::free_result($result);
     }
     tlschema();
 
