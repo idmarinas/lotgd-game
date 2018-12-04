@@ -3,7 +3,6 @@
 
 function module_collect_events($type, $allowinactive = false)
 {
-    global $session, $playermount;
     global $blocked_modules, $block_all_modules, $unblocked_modules;
 
     $events = [];
