@@ -15,7 +15,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 {
     global $navsection, $mostrecentmodule;
     global $blocked_modules, $block_all_modules, $unblocked_modules;
-    global $output, $session, $modulehook_queries;
+    global $session, $modulehook_queries;
     global $currenthook;
 
     $lasthook = $currenthook;
@@ -169,8 +169,6 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             if ('' == $cond || true == module_condition($cond))
             {
                 // call the module's hook code
-                // $outputbeforehook=$output;
-                // $output=new LotgdOutputCollector;
                 //before, this was just string switching, NOW we make new objects everytime Oo craaaazy load, I am removing this. if you want to collapse, put it in, it's a MODULE
 
                 /*******************************************************/
@@ -195,33 +193,18 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
                 if (getsetting('debug', 0))
                 {
                     $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'hooktime','".$hookname."','".$row['modulename']."','".($endtime - $starttime)."');";
-                    $resultdebug = DB::query($sql);
+                    DB::query($sql);
                 }
                 /*******************************************************/
-                // $outputafterhook = $output;
-                // $output=$outputbeforehook;
                 // test to see if we had any output and if the module allows
                 // us to collapse it
-                //$testout = trim(sanitize_html($outputafterhook->get_rawoutput()));
+
                 if (! is_array($res))
                 {
                     trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>$hookname</b>.", E_USER_WARNING);
                     $res = $args;
                 }
-                // if ($testout >'' &&
-                // 		$hookname!="collapse{" &&
-                // 		$hookname!="}collapse" &&
-                // 		$hookname!="collapse-nav{" &&
-                // 		$hookname!="}collapse-nav" &&
-                // 		!array_key_exists('nocollapse',$res)) {
-                // 	//restore the original output's reference
-                // 	modulehook("collapse{",
-                // 		array("name"=>'a-'.$row['modulename']));
-                // 	$output .= $outputafterhook;
-                // 	modulehook("}collapse");
-                // } else {
-                // 	$output .= $outputafterhook;
-                // }
+
                 // Clear the collapse flag
                 unset($res['nocollapse']);
                 //handle return arguments.
