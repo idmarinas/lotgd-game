@@ -95,7 +95,7 @@ function page_footer($saveuser = true)
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
-    $request = LotgdLocator::get(\Lotgd\Core\Http::class);
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
     $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
@@ -144,10 +144,10 @@ function page_footer($saveuser = true)
     $charstats = charstats();
     restore_buff_fields();
 
-    $sql = 'SELECT motddate FROM '.DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-    DB::free_result($result);
+    $sql = 'SELECT motddate FROM '.\DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
+    $result = \DB::query($sql);
+    $row = \DB::fetch_assoc($result);
+    \DB::free_result($result);
     $headscript = '';
 
     $session['needtoviewmotd'] = false;
@@ -172,7 +172,7 @@ function page_footer($saveuser = true)
 
     //output keypress script
     reset($quickkeys);
-    $script .= LotgdTheme::renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
+    $script .= \LotgdTheme::renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
 
     //NOTICE |
     //NOTICE | Although under the license, you're not required to keep this
@@ -198,9 +198,9 @@ function page_footer($saveuser = true)
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
-        $sql = 'SELECT count(acctid) AS c FROM '.DB::prefix('accounts');
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $sql = 'SELECT count(acctid) AS c FROM '.\DB::prefix('accounts');
+        $result = \DB::query($sql);
+        $row = \DB::fetch_assoc($result);
         $c = $row['c'];
         $a = getsetting('serverurl', 'http://'.$request->getServer('SERVER_NAME').(80 == $request->getServer('SERVER_PORT') ? '' : ':'.$request->getServer('SERVER_PORT')).dirname($request->getServer('REQUEST_URI')));
 
@@ -253,11 +253,11 @@ function page_footer($saveuser = true)
 
     if (isset($html['paypal']))
     {
-        $html['paypal'] .= LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
+        $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
     }
     else
     {
-        $html['paypal'] = LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
+        $html['paypal'] = \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
     }
     unset($paypalData);
 
@@ -268,7 +268,7 @@ function page_footer($saveuser = true)
     //NOTICE |
 
     //output the nav
-    $html['nav'] = LotgdTheme::renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
+    $html['nav'] = \LotgdTheme::renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
 
     //output the motd
     $html['motd'] = motdlink();
@@ -291,22 +291,22 @@ function page_footer($saveuser = true)
     $html['petitiondisplay'] = '';
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
-        $sql = 'SELECT count(1) AS c, status FROM '.DB::prefix('petitions').' GROUP BY status';
-        $result = DB::query($sql);
+        $sql = 'SELECT count(1) AS c, status FROM '.\DB::prefix('petitions').' GROUP BY status';
+        $result = \DB::query($sql);
         $petitions = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
 
-        while ($row = DB::fetch_assoc($result))
+        while ($row = \DB::fetch_assoc($result))
         {
             $petitions[(int) $row['status']] = $row['c'];
         }
 
-        DB::free_result($result);
+        \DB::free_result($result);
 
         $administrator = ($session['user']['superuser'] & SU_EDIT_USERS);
 
         $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
 
-        $html['petitiondisplay'] = LotgdTheme::renderThemeTemplate('parts/petition.twig', [
+        $html['petitiondisplay'] = \LotgdTheme::renderThemeTemplate('parts/petition.twig', [
             'administrator' => $administrator,
             'petitioncount' => $p
         ]);
@@ -327,14 +327,14 @@ function page_footer($saveuser = true)
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 
-    $wrapper = LotgdLocator::get(Lotgd\Core\Lib\Dbwrapper::class);
+    $wrapper = \LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
     if (getsetting('debug', 0))
     {
         global $SCRIPT_NAME;
-        $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
-        $resultdebug = DB::query($sql);
-        $sql = 'INSERT INTO '.DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($wrapper->getQueryTime(), 3))."');";
-        $resultdebug = DB::query($sql);
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
+        $resultdebug = \DB::query($sql);
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($wrapper->getQueryTime(), 3))."');";
+        $resultdebug = \DB::query($sql);
     }
 
     //-- Add pagegen info
@@ -361,7 +361,7 @@ function page_footer($saveuser = true)
     unset($html['session']['user'], $html['user']['password']);
 
     $html['content'] .= $output->get_output();
-    $browserOutput = LotgdTheme::renderTheme($html);
+    $browserOutput = \LotgdTheme::renderTheme($html);
     $session['user']['gensize'] += strlen($browserOutput);
     $session['output'] = $browserOutput;
 
@@ -454,7 +454,7 @@ function popup_footer()
     saveuser();
 
     session_write_close();
-    echo LotgdTheme::renderThemeTemplate('popup.twig', $html);
+    echo \LotgdTheme::renderThemeTemplate('popup.twig', $html);
 
     exit();
 }
@@ -464,7 +464,7 @@ function popup_footer()
  */
 function wipe_charstats()
 {
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->wipeStats();
 }
@@ -477,7 +477,7 @@ function wipe_charstats()
  */
 function addcharstat($label, $value = null)
 {
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->addcharstat($label, $value);
 }
@@ -492,7 +492,7 @@ function addcharstat($label, $value = null)
  */
 function getcharstat($cat, $label)
 {
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->getcharstat($cat, $label);
 }
@@ -506,7 +506,7 @@ function getcharstat($cat, $label)
  */
 function setcharstat($cat, $label, $val)
 {
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->setcharstat($cat, $label, $val);
 }
@@ -521,7 +521,7 @@ function setcharstat($cat, $label, $val)
  */
 function getcharstat_value($section, $title)
 {
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->getcharstat($cat, $label);
 }
@@ -539,7 +539,7 @@ function getcharstats($buffs)
     //returns output formatted character statistics.
     global $statbuff;
 
-    $stats = LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     $charstatInfo = $stats->getStats();
     $charstattpl = [];
@@ -560,12 +560,12 @@ function getcharstats($buffs)
         }
     }
 
-    $statbuff = LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
+    $statbuff = \LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
         'title' => translate_inline('`0Buffs'),
         'value' => $buffs
     ]);
 
-    return appoencode(LotgdTheme::renderThemeTemplate('sidebar/character/stats.twig', [
+    return appoencode(\LotgdTheme::renderThemeTemplate('sidebar/character/stats.twig', [
         'charstat' => $charstattpl,
         'statbuff' => $statbuff
     ]), true);
@@ -834,16 +834,16 @@ function charstats($return = true)
             }
             else
             {
-                $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
-                $result = DB::query($sql);
-                $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):`b`n'), DB::num_rows($result)));
+                $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.\DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
+                $result = \DB::query($sql);
+                $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):`b`n'), \DB::num_rows($result)));
 
-                while ($row = DB::fetch_assoc($result))
+                while ($row = \DB::fetch_assoc($result))
                 {
                     $ret .= appoencode("`^{$row['name']}`n");
                     $onlinecount++;
                 }
-                DB::free_result($result);
+                \DB::free_result($result);
 
                 if (0 == $onlinecount)
                 {
@@ -868,10 +868,10 @@ function maillink(): string
 {
     global $session;
 
-    $sql = 'SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM '.DB::prefix('mail')." WHERE msgto='{$session['user']['acctid']}'";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-    DB::free_result($result);
+    $sql = 'SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM '.\DB::prefix('mail')." WHERE msgto='{$session['user']['acctid']}'";
+    $result = \DB::query($sql);
+    $row = \DB::fetch_assoc($result);
+    \DB::free_result($result);
     $row['seencount'] = (int) ($row['seencount'] ?? 0);
     $row['notseen'] = (int) ($row['notseen'] ?? 0);
 
