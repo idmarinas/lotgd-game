@@ -9,11 +9,20 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :cyclone: CHANGES
 
--   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder
+-   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
-    -   Now for close color code have 2 methods
-        -   Use it's own code with ´ before code. Example `` `6Hi there´6 ``
-        -   Use `` `0 `` this method work with all
+    -   Now for close color/code code you can use:
+        -   Use it's own code with **´** before. Examples:
+            -   `` `4This text is dark red´4 ``
+            -   `` `@This text is green´@ ``
+            -   `` `cThis is a center text´c ``
+            -   `` `iThis is cursive text´i ``
+            -   `` `bThis is strong text´b ``
+            -   `` This text have a line break`n `` This code not have a close format
+        -   Use `` `0 `` this method work with all colors (only)
+            -   `` `4This text is dark red`0 ``
+            -   `` `@This text is green`0 ``
+        -   The system does not autoclose the codes, so you need to close all the codes (when necessary), otherwise the result may vary.
 
 ### :star: FEATURES
 
@@ -28,6 +37,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/class/dbwrapper.php** Fixed error, not passed param $prefixed
 -   **lib/configuration/configuration_data.php** Fixed error with data
 -   **lib/data/configuration_data.php** Deleted unused data
+-   **lib/nav.php** Fixed error with new color/code syntax
 
 ### :x: REMOVES
 
