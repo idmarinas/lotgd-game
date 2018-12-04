@@ -12,16 +12,14 @@ function blocknav(string $link, bool $partial = false)
 {
     //prevents a script from being able to generate navs on the given $link.
 
-    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
+    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
-        $block->blockPartialNav($link);
+        return $block->blockPartialNav($link);
     }
-    else
-    {
-        $block->blockFullNav($link);
-    }
+
+    return $block->blockFullNav($link);
 }
 
 /**
@@ -37,16 +35,14 @@ function unblocknav($link, $partial = false)
     //prevents a link that was otherwise blocked with blocknav() from
     //actually being blocked.
 
-    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
+    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     if ($partial)
     {
-        $block->unBlockPartialNav($link);
+        return $block->unBlockPartialNav($link);
     }
-    else
-    {
-        $block->unBlockFullNav($link);
-    }
+
+    return $block->unBlockFullNav($link);
 }
 
 function appendcount($link)
@@ -158,13 +154,10 @@ function addnav_notl($text, $link = false, $priv = false, $pop = false, $popsize
         return;
     }
 
-    if (false === $link)
+    if (false === $link && '' != $text)
     {
         // Don't do anything if text is ""
-        if ('' != $text)
-        {
-            addnavheader($text, true, false);
-        }
+        addnavheader($text, true, false);
     }
     else
     {
@@ -202,13 +195,10 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
         return;
     }
 
-    if (false === $link)
+    if (false === $link && '' != $text)
     {
         // Don't do anything if text is ""
-        if ('' != $text)
-        {
-            addnavheader($text);
-        }
+        addnavheader($text);
     }
     else
     {
@@ -251,7 +241,7 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
  */
 function is_blocked(string $link): bool
 {
-    $block = LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
+    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
 
     return $block->isBlocked($link);
 }
@@ -419,13 +409,10 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     {
         if ($text[0] && isset($session['loggedin']) && $session['loggedin'])
         {
+            $schema = $text[0];
             if (false === $link)
             {
                 $schema = '!array!'.serialize($text);
-            }
-            else
-            {
-                $schema = $text[0];
             }
 
             if ($translate)
@@ -491,13 +478,8 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     {
         if ('' != $text)
         {
-            $extra = '';
-
-            if (strpos($link, '?'))
-            {
-                $extra = "&c={$session['counter']}";
-            }
-            else
+            $extra = "&c={$session['counter']}";
+            if (false === strpos($link, '?'))
             {
                 $extra = "?c={$session['counter']}";
             }
