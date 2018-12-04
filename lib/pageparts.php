@@ -251,14 +251,8 @@ function page_footer($saveuser = true)
     $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
     $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
-    if (isset($html['paypal']))
-    {
-        $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
-    }
-    else
-    {
-        $html['paypal'] = \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
-    }
+    $html['paypal'] = $html['paypal'] ?? '';
+    $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
     unset($paypalData);
 
     //NOTICE |
@@ -612,26 +606,17 @@ function charstats($return = true)
 
         foreach ($session['bufflist'] as $val)
         {
-            if (isset($val['suspended']) && $val['suspended'])
+            if (($val['suspended'] ?? false))
             {
                 continue;
             }
+            $atk *= ($val['atkmod'] ?? 1);
+            $def *= ($val['defmod'] ?? 1);
 
-            if (isset($val['atkmod']))
-            {
-                $atk *= $val['atkmod'];
-            }
-
-            if (isset($val['defmod']))
-            {
-                $def *= $val['defmod'];
-            }
             // Short circuit if the name is blank
             if ($val['name'] > '' || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
             {
                 tlschema($val['schema']);
-                //	if ($val['name']=="")
-                //		$val['name'] = "DEBUG: {$key}";
                 //	removed due to performance reasons. foreach is better with only $val than to have $key ONLY for the short happiness of one debug. much greater performance gain here
                 if (is_array($val['name']))
                 {
@@ -648,14 +633,13 @@ function charstats($return = true)
                 {
                     // We're about to sprintf, so, let's makes sure that
                     // `% is handled.
-                    //$n = translate_inline(str_replace("`%","`%%",$val['name']));
-                    $b = translate_inline('`#%s `7(%s rounds left)`n', 'buffs');
+                    $b = translate_inline('`#%s `7(%s rounds left)`0`n', 'buffs');
                     $b = sprintf($b, $val['name'], $val['rounds']);
                     $buffs[] = appoencode($b, true);
                 }
                 else
                 {
-                    $buffs[] = appoencode("`#{$val['name']}`n", true);
+                    $buffs[] = appoencode("`#{$val['name']}`0`n", true);
                 }
                 tlschema();
             }
@@ -690,8 +674,8 @@ function charstats($return = true)
 
         addcharstat('Character Info');
         addcharstat('Name', $u['name']);
-        addcharstat('Dragonkills', '`b'.$u['dragonkills'].'`b');
-        addcharstat('Level', '`b'.$u['level'].check_temp_stat('level', 1).'`b');
+        addcharstat('Dragonkills', '`b'.$u['dragonkills'].'´b');
+        addcharstat('Level', '`b'.$u['level'].check_temp_stat('level', 1).'´b');
 
         if ($u['alive'])
         {
@@ -735,14 +719,7 @@ function charstats($return = true)
             addcharstat('Spirit', 10 + round(($u['level'] - 1) * 1.5));
         }
 
-        if (RACE_UNKNOWN != $u['race'])
-        {
-            addcharstat('Race', translate_inline($u['race'], 'race'));
-        }
-        else
-        {
-            addcharstat('Race', translate_inline(RACE_UNKNOWN, 'race'));
-        }
+        addcharstat('Race', translate_inline((RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN, 'race'));
 
         if (count($companions) > 0)
         {
@@ -752,10 +729,7 @@ function charstats($return = true)
             {
                 if ($companion['hitpoints'] > 0 || (isset($companion['cannotdie']) && true == $companion['cannotdie']))
                 {
-                    if ($companion['hitpoints'] < 0)
-                    {
-                        $companion['hitpoints'] = 0;
-                    }
+                    $companion['hitpoints'] = max(0, $companion['hitpoints']);
 
                     $color = '`@';
                     if ($companion['hitpoints'] < $companion['maxhitpoints'])
@@ -836,18 +810,18 @@ function charstats($return = true)
             {
                 $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.\DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
                 $result = \DB::query($sql);
-                $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):`b`n'), \DB::num_rows($result)));
+                $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):´b`n'), \DB::num_rows($result)));
 
                 while ($row = \DB::fetch_assoc($result))
                 {
-                    $ret .= appoencode("`^{$row['name']}`n");
+                    $ret .= appoencode("`^{$row['name']}`0`n");
                     $onlinecount++;
                 }
                 \DB::free_result($result);
 
                 if (0 == $onlinecount)
                 {
-                    $ret .= appoencode(translate_inline('`iNone`i'));
+                    $ret .= appoencode(translate_inline('`iNone´i'));
                 }
             }
             savesetting('OnlineCount', $onlinecount);
