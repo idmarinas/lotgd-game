@@ -21,7 +21,7 @@ else
 {
     $session['stagecompleted'] = $stage - 1;
 }
-output('`@`c`bManage Modules`b`c');
+output('`@`c`bManage Modules`b´c');
 output('Legend of the Green Dragon supports an extensive module system.');
 output('Modules are small self-contained files that perform a specific function or event within the game.');
 output('For the most part, modules are independant of each other, meaning that one module can be installed, uninstalled, activated, and deactivated without negative impact on the rest of the game.');

@@ -95,7 +95,7 @@ if (count($post) > 0)
 else
 {
     output('`c`b`$Before sending a petition, please make sure you have read the motd.`n');
-    output('Petitions about problems we already know about just take up time we could be using to fix those problems.`b`c`n');
+    output('Petitions about problems we already know about just take up time we could be using to fix those problems.`b´c`n');
     rawoutput("<form action='petition.php?op=submit' method='POST' class='ui form'>");
 
     if ($session['user']['loggedin'])

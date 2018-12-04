@@ -173,7 +173,7 @@ switch ($op)
             {
                 $row = DB::fetch_assoc($result);
             }
-            output('`@`c`b-=Title Editor=-`b`c');
+            output('`@`c`b-=Title Editor=-`b´c');
             $ops = translate_inline('Ops');
             $dks = translate_inline('Dragon Kills');
             // $ref is currently unused

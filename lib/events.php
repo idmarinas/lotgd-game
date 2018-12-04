@@ -55,7 +55,7 @@ function handle_event($location, $baseLink = false, $needHeader = false)
             page_header($needHeader);
         }
 
-        output('`^`c`bSomething Special!`c`b`0');
+        output('`^`c`bSomething Special!´c`b`0');
 
         if (strchr($specialinc, ':'))
         {

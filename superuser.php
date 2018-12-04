@@ -55,7 +55,7 @@ foreach ($lines as $line)
     }
     output_notl('`n`n'); //separate lines
 }
-output_notl('`c');
+output_notl('´c');
 
 output('`^You duck into a secret cave that few know about. ');
 

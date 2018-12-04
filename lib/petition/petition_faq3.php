@@ -4,7 +4,7 @@ tlschema('faq');
 popup_header('Specific and Technical Questions');
 $c = translate_inline('Return to Contents');
 rawoutput("<a href='petition.php?op=faq'>$c</a><hr>");
-output('`n`n`c`bSpecific and technical questions`b`c`n');
+output('`n`n`c`bSpecific and technical questions`b´c`n');
 output('`^1.a. How can I have been killed by another player while I was currently playing?`n');
 output('`@The biggest cause of this is someone who began attacking you while you were offline, and completed the fight while you were online.');
 output('This can even happen if you have been playing nonstop for the last hour.');

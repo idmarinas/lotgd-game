@@ -18,7 +18,7 @@ if (httppost('type') > '')
 
 if (! isset($session['fromversion']) || '' == $session['fromversion'])
 {
-    output('`@`c`bConfirmation`b`c');
+    output('`@`c`bConfirmation`b´c');
     output('`2Please confirm the following:`0`n');
     rawoutput("<form class='ui form' action='installer.php?stage=7' method='POST'>");
     rawoutput("<table class='ui very basic table'><tr><td>");

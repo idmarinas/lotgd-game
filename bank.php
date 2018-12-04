@@ -11,7 +11,7 @@ require_once 'lib/villagenav.php';
 tlschema('bank');
 
 page_header('Ye Olde Bank');
-output('`^`c`bYe Olde Bank`b`c');
+output('`^`c`bYe Olde Bank`b´c');
 $op = httpget('op');
 
 if ('' == $op)

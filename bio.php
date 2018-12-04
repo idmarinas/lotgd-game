@@ -72,7 +72,7 @@ if ($target = DB::fetch_assoc($result))
         array_push($ranks['ranks'], '`$Founder');
         $ranks = translate_inline($ranks['ranks']);
         tlschema();
-        output('`@%s`2 is a %s`2 to `%%s`2`n', $target['name'], str_replace(['`c', '`i'], '', $ranks[$target['clanrank']]), str_replace(['`c', '`i'], '', $target['clanname']));
+        output('`@%s`2 is a %s`2 to `%%s`2`n', $target['name'], str_replace(['`c', '`i'], '', $ranks[$target['clanrank']]), str_replace(['´c', '`i'], '', $target['clanname']));
     }
 
     output('`^Title: `@%s`n', $target['title']);

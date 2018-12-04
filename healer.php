@@ -15,7 +15,7 @@ $return = httpget('return');
 $returnline = $return > '' ? "&return=$return" : '';
 
 page_header("Healer's Hut");
-output("`#`b`cHealer's Hut`c`b`n");
+output("`#`b`cHealer's Hut´c`b`n");
 
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
 $result = modulehook('healmultiply', ['alterpct' => 1.0, 'cost' => $cost]);

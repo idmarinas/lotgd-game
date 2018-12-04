@@ -198,7 +198,7 @@ class Dbwrapper
         {
             $request = $this->getContainer(\Lotgd\Core\Http::class);
             page_header('Database Connection Error');
-            output('`c`$Database Connection Error`0`c`n`n');
+            output('`c`$Database Connection Error`0´c`n`n');
             output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
 
             //the admin did not want to notify him with a script

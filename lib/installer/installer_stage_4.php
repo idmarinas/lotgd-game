@@ -11,7 +11,7 @@ if (httppostisset('DB_HOST'))
     $session['dbinfo']['DB_DATACACHEPATH'] = (string) httppost('DB_DATACACHEPATH');
 }
 
-output('`@`c`bTesting the Database Connection`b`c`2');
+output('`@`c`bTesting the Database Connection`b´c`2');
 output('Trying to establish a connection with the database:`n');
 
 //-- Settings for Database Adapter

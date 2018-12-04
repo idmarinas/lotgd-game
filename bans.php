@@ -59,7 +59,7 @@ if ('search' == $op || '' == $op)
     }
 }
 
-output('`$`cWelcome to the Ban Editor`c`0`n`n');
+output('`$`cWelcome to the Ban Editor´c`0`n`n');
 
 if (! isset($m))
 {

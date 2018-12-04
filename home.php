@@ -142,7 +142,6 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
 	}
 	//-->
 	</script>");
-    output_notl('`c');
     addnav('', 'login.php');
 }
 else
@@ -165,15 +164,15 @@ else
         output('`b`$%s`b`n', $session['message'], true);
     }
     rawoutput(LotgdTheme::renderThemeTemplate('pages/home/loginfull.twig', ['text' => translate_inline('Server Full!')]));
-    output_notl('`c');
 }
+output_notl('´c');
 
 modulehook('homemiddle', []);
 
 $msg = getsetting('loginbanner', '*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*');
-output_notl('`n`c`b`&%s`0`b`c`n', $msg);
+output_notl('`n`c`b`&%s`0`b´c`n', $msg);
 $session['message'] = '';
-output('`c`2Game server running version: `@%s`0`c', $logd_version);
+output('`c`2Game server running version: `@%s`0´c', $logd_version);
 
 if (getsetting('homeskinselect', 1))
 {

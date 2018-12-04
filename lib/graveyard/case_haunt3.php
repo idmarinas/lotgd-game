@@ -1,6 +1,6 @@
 <?php
 
-output('`)`c`bThe Mausoleum`b`c');
+output('`)`c`bThe Mausoleum`b´c');
 $name = httpget('name');
 $sql = 'SELECT name,level,hauntedby,acctid FROM '.DB::prefix('accounts')." WHERE login='$name'";
 $result = DB::query($sql);

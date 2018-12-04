@@ -228,5 +228,5 @@ for ($i = 0; $i < $max; $i++)
     rawoutput('</td></tr>');
 }
 rawoutput('</table>');
-output_notl('`c');
+output_notl('´c');
 page_footer();

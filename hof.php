@@ -139,11 +139,11 @@ function display_table($title, $sql, $none = false, $foot = false,
 
     if ($totalplayers > $playersperpage)
     {
-        output('`c`b`^%s`0`b `7(Page %s: %s-%s of %s)`0`c`n', $title, $page, $from, $to, $totalplayers);
+        output('`c`b`^%s`0`b `7(Page %s: %s-%s of %s)`0´c`n', $title, $page, $from, $to, $totalplayers);
     }
     else
     {
-        output_notl('`c`b`^%s`0`b`c`n', $title);
+        output_notl('`c`b`^%s`0`b´c`n', $title);
     }
     rawoutput('<table class="ui very compact striped selectable table">');
     rawoutput('<thead><tr>');
@@ -209,7 +209,7 @@ function display_table($title, $sql, $none = false, $foot = false,
 
     if (false !== $foot)
     {
-        output_notl('`n`c%s`c', $foot);
+        output_notl('`n`c%s´c', $foot);
     }
 }
 
@@ -385,7 +385,7 @@ if (isset($table) && is_array($table))
         {
             $pct = 1;
         }
-        output('`c`7You rank within around the top `&%s`7%% in this listing.`0`c', $pct);
+        output('`c`7You rank within around the top `&%s`7%% in this listing.`0´c', $pct);
     }
 }
 

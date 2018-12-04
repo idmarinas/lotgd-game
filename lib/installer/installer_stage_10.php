@@ -1,6 +1,6 @@
 <?php
 
-output('`@`c`bSuperuser Accounts`b`c');
+output('`@`c`bSuperuser Accounts`b´c');
 $sql = 'SELECT login, password FROM '.DB::prefix('accounts').' WHERE superuser & '.SU_MEGAUSER;
 $result = DB::query($sql);
 

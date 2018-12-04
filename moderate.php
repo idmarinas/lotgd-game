@@ -207,7 +207,7 @@ elseif ('audit' == $op)
     }
     tlschema();
     addnav('Commentary');
-    output('`c`bComment Auditing`b`c');
+    output('`c`bComment Auditing`b´c');
     $ops = translate_inline('Ops');
     $mod = translate_inline('Moderator');
     $when = translate_inline('When');

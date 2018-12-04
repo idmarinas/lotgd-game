@@ -64,7 +64,7 @@ else
 }
 
 $basetext = [
-    "`@`c`b%s Square`b`cThe village of %s hustles and bustles.  No one really notices that you're standing there.  ".
+    "`@`c`b%s Square`b´cThe village of %s hustles and bustles.  No one really notices that you're standing there.  ".
     'You see various shops and businesses along main street.  There is a curious looking rock to one side.  '.
     'On every side the village is surrounded by deep dark forest.`n`n', $vname, $vname
 ];

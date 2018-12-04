@@ -148,7 +148,7 @@ else
             $submit = translate_inline('Save Translation');
             $skip = translate_inline('Skip Translation');
             rawoutput("<form action='untranslated.php?op=step2' method='post'>");
-            output('`^`cThere are `&%s`^ untranslated texts in the database.`c`n`n', $count['count']);
+            output('`^`cThere are `&%s`^ untranslated texts in the database.´c`n`n', $count['count']);
             rawoutput("<table width='80%'>");
             rawoutput("<tr><td width='30%'>");
             output('Target Language: %s', $row['language']);

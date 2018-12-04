@@ -193,7 +193,7 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 		// if the player has leveled DOWN some how from when we started
 		// attacking them, let's assume they DK'd, and these rewards are
 		// way too rich for them.
-		$lotgdBattleContent['battleend'][] = "`cThis player has leveled down!!!`c";
+		$lotgdBattleContent['battleend'][] = "`cThis player has leveled down!!!´c";
 		$msg .= "You would have received `^%s`2 experience and `^%s`2 gold, `\$however it seems you lost it all when you got back to level 1...";
     }
     elseif ($badguy['creaturelevel'] == 15) { $msg .= 'At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.  You received `^%s`2 experience and `^%s`2 gold'; }

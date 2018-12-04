@@ -2,7 +2,7 @@
     page_header('Clan Halls');
     $registrar = getsetting('clanregistrar', '`%Karissa');
     addnav('Clan Options');
-    output('`b`c`&Clan Halls`c`b');
+    output('`b`c`&Clan Halls´c`b');
 
     if ('apply' == $op)
     {

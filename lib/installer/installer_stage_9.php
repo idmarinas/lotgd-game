@@ -10,7 +10,7 @@ if (0 != ini_get('max_execution_time'))
     set_time_limit(660);
 } //-- Temporary increased limit execution time
 
-output('`@`c`bBuilding the Tables`b`c');
+output('`@`c`bBuilding the Tables`b´c');
 output("`2I'm now going to build the tables.");
 output('If this is an upgrade, your current tables will be brought in line with the current version.');
 output("If it's an install, the necessary tables will be placed in your database.`n");

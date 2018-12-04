@@ -131,7 +131,7 @@ else
             define('DB_NODB', true);
         }
         page_header('Database Connection Error');
-        output('`c`$Database Connection Error`0`c`n`n');
+        output('`c`$Database Connection Error`0´c`n`n');
         output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
 
         //the admin did not want to notify him with a script
@@ -158,7 +158,7 @@ else
             define('DB_NODB', true);
         }
         page_header('Database Connection Error');
-        output('`c`$Database Connection Error`0`c`n`n');
+        output('`c`$Database Connection Error`0´c`n`n');
         output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
         //the admin did not want to notify him with a script
         output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');

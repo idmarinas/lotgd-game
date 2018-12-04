@@ -123,7 +123,7 @@ else
 {
     page_header('It is a new day!');
     rawoutput("<font size='+1'>");
-    output('`c`b`#It is a New Day!`0`b`c');
+    output('`c`b`#It is a New Day!`0`b´c');
     rawoutput('</font>');
     $resurrection = httpget('resurrection');
 

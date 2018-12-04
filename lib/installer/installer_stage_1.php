@@ -8,7 +8,7 @@ $licenseview = str_replace("\r", '', $licenseview);
 $shortlicense = [];
 preg_match_all("'<body[^>]*>(.*)</body>'", $licenseview, $shortlicense);
 $licenseview = $shortlicense[1][0];
-output('`@`c`bLicense Agreement`b`c`0');
+output('`@`c`bLicense Agreement`b´c`0');
 output('`2Before continuing, you must read and understand the following license agreement.`0`n`n');
 
 if ('484d213db9a69e79321feafb85915ff1' == md5($licenseview))

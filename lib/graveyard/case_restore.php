@@ -1,6 +1,6 @@
 <?php
 
-output('`)`b`cThe Mausoleum`c`b');
+output('`)`b`cThe Mausoleum´c`b');
 
 if ($session['user']['soulpoints'] < $max)
 {

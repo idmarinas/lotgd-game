@@ -72,11 +72,11 @@ while ($row = DB::fetch_assoc($result2))
     }
 }
 output_notl('`n');
-output('`c`b`!News for %s %s`0`b`c', $date, $pagestr);
+output('`c`b`!News for %s %s`0`b´c', $date, $pagestr);
 
 while ($row = DB::fetch_assoc($result))
 {
-    output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0`c');
+    output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c');
 
     if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
     {
@@ -109,10 +109,10 @@ while ($row = DB::fetch_assoc($result))
 
 if (0 == DB::num_rows($result))
 {
-    output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0`c');
-    output('`1`b`c Nothing of note happened this day.  All in all a boring day. `c`b`0');
+    output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c');
+    output('`1`b`c Nothing of note happened this day.  All in all a boring day. ´c`b`0');
 }
-output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0`c');
+output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c');
 
 if (! $session['user']['loggedin'])
 {

@@ -232,7 +232,7 @@ function addcommentary()
         {
             $session['user']['chatloc'] = 'AFK';
             $afk = true;
-            output('`0`n`c`bYou are Away From the Keyboard until you load another page.`b`c`n');
+            output('`0`n`c`bYou are Away From the Keyboard until you load another page.`b´c`n');
 
             return false;
         }
@@ -242,13 +242,13 @@ function addcommentary()
             {
                 $session['user']['chatloc'] = $section;
                 $dni = false;
-                output('`0`n`c`bYou are no longer in Do Not Interrupt status.`b`c`n');
+                output('`0`n`c`bYou are no longer in Do Not Interrupt status.`b´c`n');
             }
             else
             {
                 $session['user']['chatloc'] = 'DNI';
                 $dni = true;
-                output("`0`n`c`bYou are in Do Not Interrupt status.  Type DNI again to leave.`b`nDNI status is used for whenever you're doing or saying something that means other players shouldn't try to interact with you.  For example, when two or more characters are chatting just outside of the main group of characters, and other characters shouldn't be able to hear them.`c`n");
+                output("`0`n`c`bYou are in Do Not Interrupt status.  Type DNI again to leave.`b`nDNI status is used for whenever you're doing or saying something that means other players shouldn't try to interact with you.  For example, when two or more characters are chatting just outside of the main group of characters, and other characters shouldn't be able to hear them.´c`n");
             }
 
             return false;
@@ -274,11 +274,11 @@ function addcommentary()
                 if ($ago < 120)
                 {
                     removecommentary($row['commentid'], 'Typo Gremlin', $session['user']['acctid']);
-                    output('`0`n`c`bA nearby Typo Gremlin notices the peculiar tastiness of your previous comment.  Within moments, a small horde of them have descended upon your words, and consumed them.`b`c`n');
+                    output('`0`n`c`bA nearby Typo Gremlin notices the peculiar tastiness of your previous comment.  Within moments, a small horde of them have descended upon your words, and consumed them.`b´c`n');
                 }
                 else
                 {
-                    output("`0`n`c`bThe Typo Gremlins turn up their nose at your latest comment - it's just too old.  They have no taste for stale words.`b`c`n");
+                    output("`0`n`c`bThe Typo Gremlins turn up their nose at your latest comment - it's just too old.  They have no taste for stale words.`b´c`n");
                 }
             }
 
@@ -293,7 +293,7 @@ function addcommentary()
             //if for some reason you're going to involve a command that can be a mix of upper and lower case, set $args['skipcommand'] and $args['ignore'] to true and handle it in postcomment instead.
             if (isset($returnedhook['processed']) && ! $returnedhook['processed'])
             {
-                output("`c`b`JCommand Not Recognized`b`0`nWhen you type in ALL CAPS, the game doesn't think you're talking to other players; it thinks you're trying to perform an action within the game.  For example, typing `#GREM`0 will remove the last comment you posted, as long as you posted it less than two minutes ago.  Typing `#AFK`0 or `#BRB`0 will turn your online status bar grey, so that people know you're `#A`0way `#F`0rom the `#K`0eyboard (or, if you prefer, that you'll `#B`0e `#R`0ight `#B`0ack).  Typing `#DNI`0 will let other players know that you're busy talking to one particular player - maybe somewhere off-camera - and that you don't want to be interrupted right now.`nSome areas have special hidden commands or other easter eggs that you can hunt for.  This time around, you didn't trigger anything special.`c`0`n");
+                output("`c`b`JCommand Not Recognized`b`0`nWhen you type in ALL CAPS, the game doesn't think you're talking to other players; it thinks you're trying to perform an action within the game.  For example, typing `#GREM`0 will remove the last comment you posted, as long as you posted it less than two minutes ago.  Typing `#AFK`0 or `#BRB`0 will turn your online status bar grey, so that people know you're `#A`0way `#F`0rom the `#K`0eyboard (or, if you prefer, that you'll `#B`0e `#R`0ight `#B`0ack).  Typing `#DNI`0 will let other players know that you're busy talking to one particular player - maybe somewhere off-camera - and that you don't want to be interrupted right now.`nSome areas have special hidden commands or other easter eggs that you can hunt for.  This time around, you didn't trigger anything special.´c`0`n");
             }
 
             return false;

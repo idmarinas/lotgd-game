@@ -106,7 +106,7 @@ function module_events($eventtype, $basechance, $baseLink = false)
             {
                 $_POST['i_am_a_hack'] = 'true';
                 tlschema('events');
-                output('`^`c`bSomething Special!`c`b`0');
+                output('`^`c`bSomething Special!´c`b`0');
                 tlschema();
                 $op = httpget('op');
                 httpset('op', '');

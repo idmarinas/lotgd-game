@@ -44,7 +44,7 @@ addnav('Describe Points', 'lodge.php?op=points');
 
 if ('' == $op)
 {
-    output("`b`c`!The Hunter's Lodge`0`c`b");
+    output("`b`c`!The Hunter's Lodge`0´c`b");
     output("`7You follow a narrow path away from the stables and come across a rustic Hunter's Lodge.");
     output('A guard stops you at the door and asks to see your membership card.`n`n');
 

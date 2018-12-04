@@ -291,17 +291,17 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     //-- Perfect battle
     if (! $diddamage)
     {
-        array_push($lotgdBattleContent['battleend'], '`n`c`b`&~~ Flawless Fight! ~~`0`b`c');
+        array_push($lotgdBattleContent['battleend'], '`n`c`b`&~~ Flawless Fight! ~~`0`b´c');
 
         if ($denyflawless)
         {
-            array_push($lotgdBattleContent['battleend'], "`c`\${$denyflawless}`0`c");
+            array_push($lotgdBattleContent['battleend'], "`c`\${$denyflawless}`0´c");
         }
         elseif ($session['user']['level'] <= $creaturelevel)
         {
             if (false === $forest)
             {//-- Only when is a Graveyard
-                array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0`b`c');
+                array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0`b´c');
                 $session['user']['gravefights']++;
             }
             //-- $forest === true or is other value
@@ -311,12 +311,12 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
                 {
                     require_once 'modules/staminasystem/lib/lib.php';
 
-                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b`c');
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b´c');
                     addstamina(25000);
                 }
                 else
                 {
-                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b`c');
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b´c');
                     $session['user']['turns']++;
                 }
             }
@@ -325,15 +325,15 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
         {
             if (is_module_active('staminasystem') && true === $forest)
             {
-                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded some stamina.`0`c`n');
+                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded some stamina.`0´c`n');
             }
             elseif (false === $forest)
             {
-                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra torment.`0`c`n');
+                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra torment.`0´c`n');
             }
             else
             {
-                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra turn.`0`c`n');
+                array_push($lotgdBattleContent['battleend'], '`c`$A more difficult fight would have yielded an extra turn.`0´c`n');
             }
         }
     }

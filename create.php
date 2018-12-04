@@ -51,7 +51,7 @@ if ('forgotval' == $op)
 
         $sql = 'UPDATE '.DB::prefix('accounts')." SET forgottenpassword='' WHERE forgottenpassword='$id';";
         DB::query($sql);
-        output('`#`cYour login request has been validated.  You may now log in.`c`0');
+        output('`#`cYour login request has been validated.  You may now log in.´c`0');
         rawoutput("<form action='login.php' method='POST'>");
         rawoutput("<input name='name' value=\"{$row['login']}\" type='hidden'>");
         rawoutput("<input name='password' value=\"!md52!{$row['password']}\" type='hidden'>");
@@ -110,7 +110,7 @@ elseif ('val' == $op)
             //note: remove any forgotten password request!
             $sql = 'UPDATE '.DB::prefix('accounts')." SET emailaddress='".$replaceemail."', replaceemail='',forgottenpassword='' WHERE emailvalidation='$id';";
             DB::query($sql);
-            output('`#`c Email changed successfully!`c`0`n');
+            output('`#`c Email changed successfully!´c`0`n');
             require_once 'lib/debuglog.php';
             debuglog('Email change request validated by link from '.$row['emailaddress'].' to '.$replaceemail, $row['acctid'], $row['acctid'], 'Email');
             //If a superuser changes email, we want to know about it... at least those who can ee it anyway, the user editors...
@@ -133,7 +133,7 @@ elseif ('val' == $op)
         }
         $sql = 'UPDATE '.DB::prefix('accounts')." SET emailvalidation='' WHERE emailvalidation='$id';";
         DB::query($sql);
-        output('`#`cYour email has been validated.  You may now log in.`c`0');
+        output('`#`cYour email has been validated.  You may now log in.´c`0');
         output('Your email has been validated, your login name is `^%s`0.`n`n',
                 $row['login']);
 
@@ -458,7 +458,7 @@ else
 
     if ('' == $op)
     {
-        output('`&`c`bCreate a Character`b`c`0');
+        output('`&`c`bCreate a Character`b´c`0');
         $refer = httpget('r');
 
         if ($refer)

@@ -52,7 +52,7 @@ elseif ('prologue1' == $op)
 
     if ($flawless)
     {
-        output('`b`c`&~~ Flawless Fight ~~`0`c`b`n`n');
+        output('`b`c`&~~ Flawless Fight ~~`0´c`b`n`n');
     }
     output('`@Victory!`n`n');
     output('`2Before you, the great dragon lies immobile, its heavy breathing like acid to your lungs.');

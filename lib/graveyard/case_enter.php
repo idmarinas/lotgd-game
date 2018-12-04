@@ -1,6 +1,6 @@
 <?php
 
-output('`)`b`cThe Mausoleum`c`b');
+output('`)`b`cThe Mausoleum´c`b');
 
 output('You enter the mausoleum and find yourself in a cold, stark marble chamber.');
 output('The air around you carries the chill of death itself.');

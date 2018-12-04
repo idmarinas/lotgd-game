@@ -15,7 +15,7 @@ superusernav();
 addnav('Actions');
 addnav('Reset all dragonpoints', 'globaluserfunctions.php?op=dkpointreset');
 
-output('`n`c`q~~~~~ `$Global User Functions `q~~~~~`c`n`n');
+output('`n`c`q~~~~~ `$Global User Functions `q~~~~~´c`n`n');
 
 $op = httpget('op');
 
