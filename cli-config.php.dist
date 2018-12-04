@@ -1,0 +1,36 @@
+<?php
+
+use Doctrine\Common\Cache as DoctrineCache;
+use Doctrine\Common\EventManager as DoctrineEventManager;
+use Doctrine\ORM\Configuration as DoctrineConfiguration;
+use Doctrine\ORM\EntityManager as DoctrineEntityManager;
+use Doctrine\ORM\Events as DoctrineEvents;
+use Doctrine\ORM\Mapping\UnderscoreNamingStrategy as DoctrineUnderscoreNamingStrategy;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Lotgd\Core\Doctrine\Extension\TablePrefix as DoctrineTablePrefix;
+use Lotgd\Core\Doctrine\Strategy\Quote as DoctrineQuoteStrategy;
+
+// replace with file to your own project bootstrap
+include 'vendor/autoload.php';
+
+$dbParams = [
+    'driver' => 'pdo_mysql',
+    'user' => 'user name',
+    'password' => 'password',
+    'dbname' => 'name of data base',
+    'charset' => 'utf8'
+];
+$config = new DoctrineConfiguration();
+$config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(['src/core/Entity', 'src/local/Entity'], false));
+$config->setProxyDir('doctrine/Proxy');
+$config->setProxyNamespace('Lotgd\Proxies');
+$config->setAutoGenerateProxyClasses(true);
+$config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));
+$config->setQuoteStrategy(new DoctrineQuoteStrategy());
+$evm = new DoctrineEventManager();
+$tablePrefix = new DoctrineTablePrefix('');
+$evm->addEventListener(DoctrineEvents::loadClassMetadata, $tablePrefix);
+
+$entityManager = DoctrineEntityManager::create($dbParams, $config, $evm);
+
+return ConsoleRunner::createHelperSet($entityManager);
