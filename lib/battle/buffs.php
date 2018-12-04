@@ -234,13 +234,10 @@ function activate_buffs($tag)
             // Now, take abs value just incase this was a damaging buff
             $hptoregen = abs($hptoregen);
 
+            $msg = $buff['effectmsg'];
             if (0 == $hptoregen)
             {
                 $msg = $buff['effectnodmgmsg'] ?? '';
-            }
-            else
-            {
-                $msg = $buff['effectmsg'];
             }
 
             if (is_array($msg))
@@ -288,11 +285,6 @@ function activate_buffs($tag)
                                 }
                             }
                         }
-
-                        if (! $unset)
-                        {
-                            $newcompanions[$name] = $companion;
-                        }
                     }
                 }
             }
@@ -310,8 +302,8 @@ function activate_buffs($tag)
             }
             else
             {
-                $max = isset($buff['maxgoodguydamage']) ? $buff['maxgoodguydamage'] : 0;
-                $min = isset($buff['mingoodguydamage']) ? $buff['mingoodguydamage'] : 0;
+                $max = $buff['maxgoodguydamage'] ?? 0;
+                $min = $buff['mingoodguydamage'] ?? 0;
                 $who = 1;
             }
             $minioncounter = 1;
@@ -328,7 +320,6 @@ function activate_buffs($tag)
                     {
                         $badguy['istarget'] = false;
                         $badguy['dead'] = true;
-                        $count = 1;
                     }
                 }
                 elseif (1 == $who)
@@ -413,11 +404,11 @@ function process_lifetaps($ltaps, $damage)
 
             if ($healhp > 0)
             {
-                $msg = isset($buff['effectmsg']) ? $buff['effectmsg'] : '';
+                $msg = $buff['effectmsg'] ?? '';
             }
             elseif (0 == $healhp)
             {
-                $msg = isset($buff['effectfailmsg']) ? $buff['effectfailmsg'] : '';
+                $msg = $buff['effectfailmsg'] ?? '';
             }
         }
         $session['user']['hitpoints'] += $healhp;
@@ -442,7 +433,7 @@ function process_lifetaps($ltaps, $damage)
 
 function process_dmgshield($dshield, $damage)
 {
-    global $session, $badguy, $countround, $lotgdBattleContent;
+    global $badguy, $countround, $lotgdBattleContent;
 
     foreach ($dshield as $buff)
     {
@@ -479,7 +470,6 @@ function process_dmgshield($dshield, $damage)
         {
             $badguy['istarget'] = false;
             $badguy['dead'] = true;
-            $count = 1;
         }
 
         if (is_array($msg))
@@ -497,7 +487,7 @@ function process_dmgshield($dshield, $damage)
 
 function expire_buffs()
 {
-    global $session, $badguy, $countround, $lotgdBattleContent;
+    global $session, $countround, $lotgdBattleContent;
 
     foreach ($session['bufflist'] as $key => $buff)
     {
@@ -540,7 +530,7 @@ function expire_buffs()
 
 function expire_buffs_afterbattle()
 {
-    global $session, $badguy, $countround, $lotgdBattleContent;
+    global $session, $countround, $lotgdBattleContent;
 
     //this is a copy of the expire_buffs, but only to be called at the very end of a battle to strip buffs that are only meant to last until a victory/defeat
     //redundant due to the nature of having a check at the beginning of a battle, and now one at the end.
