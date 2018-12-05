@@ -7,15 +7,17 @@ function checkban($login = false)
 {
     global $session;
 
-    if (isset($session['banoverride']) && $session['banoverride'])
+    if (($session['banoverride'] ?? false))
     {
         return false;
     }
 
     if (false === $login)
     {
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $id = isset($_COOKIE['lgi']) ? $_COOKIE['lgi'] : '';
+        $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+        $cookie = $request->getCookie();
+        $ip = $request->getServer('REMOTE_ADDR');
+        $id = $cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '';
     }
     else
     {
@@ -55,7 +57,7 @@ function checkban($login = false)
             }
             else
             {
-                $session['message'] .= sprintf_translate('  `^This ban will be removed `$after`^ %s.`0', date('M d, Y', strtotime($row['banexpire'])));
+                $session['message'] .= sprintf_translate('  `^This ban will be removed `$after`^ %s.`0', date('H:i, M d, Y', strtotime($row['banexpire'])));
             }
             $sql = 'UPDATE '.DB::prefix('bans')." SET lasthit='".date('Y-m-d H:i:s')."' WHERE ipfilter='{$row['ipfilter']}' AND uniqueid='{$row['uniqueidid']}'";
             DB::query($sql);
