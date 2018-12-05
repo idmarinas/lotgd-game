@@ -3,8 +3,6 @@ version: "2"
 checks:
     argument-count:
         enabled: true
-        config:
-            threshold: 5
     complex-logic:
         enabled: true
         config:
@@ -81,7 +79,7 @@ plugins:
             CleanCode/StaticAccess:
                 enabled: false
     phpcodesniffer:
-        enabled: false
+        enabled: true
         exclude_patterns:
             - "assets/"
             - "cache/"
@@ -96,7 +94,7 @@ plugins:
         config:
             file_extensions: "php"
             standard: "PSR2"
-            file: "phpcs.xml"
+            # file: "phpcs.xml"
     phan:
         enabled: false
         config:
