@@ -31,7 +31,7 @@ plugins:
     nodesecurity:
         enabled: true
     sonar-php:
-        enabled: false
+        enabled: true
         exclude_patterns:
             - "assets/"
             - "cache/"
@@ -64,6 +64,9 @@ plugins:
             file_extensions:
                 - php
             rulesets: "cleancode,controversial,design,naming,unusedcode"
+        checks:
+            CleanCode/StaticAccess:
+                enabled: false
     phpcodesniffer:
         enabled: false
         exclude_patterns:
