@@ -14,4 +14,15 @@
         </properties>
     </rule>
 
+    <!--
+    Warn about lines longer than 100 chars,
+    and error for lines longer than 135 chars.
+    -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="130" />
+            <property name="absoluteLineLimit" value="150" />
+        </properties>
+    </rule>
+
 </ruleset>
