@@ -3,8 +3,12 @@ version: "2"
 checks:
     argument-count:
         enabled: true
+        config:
+            threshold: 5
     complex-logic:
         enabled: true
+        config:
+            threshold: 5
     file-lines:
         enabled: true
         config:
@@ -12,7 +16,7 @@ checks:
     method-complexity:
         enabled: true
         config:
-            threshold: 12
+            threshold: 15
     method-count:
         enabled: true
     method-lines:
@@ -21,8 +25,12 @@ checks:
             threshold: 35
     nested-control-flow:
         enabled: true
+        config:
+            threshold: 5
     return-statements:
         enabled: true
+        config:
+            threshold: 5
     similar-code:
         enabled: true
     identical-code:
@@ -47,6 +55,11 @@ plugins:
             - "**/*.png"
         config:
             file_extensions: "php"
+        checks:
+            php:S3776:
+                enabled: false
+            php:S1192:
+                enabled: false
     phpmd:
         enabled: true
         exclude_patterns:
