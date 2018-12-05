@@ -24,7 +24,7 @@ if ('run' == $op)
 {
     if (0 == e_rand() % 3)
     {
-        output('`c`b`&You have successfully fled your opponent!`0`b´c`n');
+        output('`c`b`&You have successfully fled your opponent!`0´b´c`n');
         $op = '';
         httpset('op', '');
         unsuspend_buffs();
@@ -39,7 +39,7 @@ if ('run' == $op)
     }
     else
     {
-        output('`c`b`$You failed to flee your opponent!`0`b´c');
+        output('`c`b`$You failed to flee your opponent!`0´b´c');
     }
 }
 
@@ -69,7 +69,7 @@ if ('search' == $op)
 
     if ($session['user']['turns'] <= 0)
     {
-        output('`$`bYou are too tired to search the forest any longer today.  Perhaps tomorrow you will have more energy.`b`0');
+        output('`$`bYou are too tired to search the forest any longer today.  Perhaps tomorrow you will have more energy.´b`0');
         $op = '';
         httpset('op', '');
     }
@@ -362,15 +362,21 @@ if ($battle)
 
     if ($victory)
     {
+        $op = '';
         httpset('op', '');
-        forest(true);
-
-        page_footer();
+        $dontdisplayforestmessage = true;
     }
     else
     {
         fightnav();
     }
+}
+
+if ('' == $op)
+{
+    // Need to pass the variable here so that we show the forest message
+    // sometimes, but not others.
+    forest($dontdisplayforestmessage);
 }
 
 page_footer();
