@@ -93,7 +93,7 @@ plugins:
             - "themes/"
         config:
             file_extensions: "php"
-            standard: "PSR2,PHPCS,phpcs.xml"
+            standard: "PSR2,phpcs.xml"
         checks:
             Squiz Functions MultiLineFunctionDeclaration OneParamPerLine:
                 enabled: false
