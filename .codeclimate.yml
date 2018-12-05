@@ -95,6 +95,11 @@ plugins:
             file_extensions: "php"
             standard: "PSR2"
             file: "phpcs.xml"
+        checks:
+            Squiz Functions MultiLineFunctionDeclaration OneParamPerLine:
+                enabled: false
+            Squiz ControlStructures ControlSignature SpaceAfterCloseParenthesis:
+                enabled: false
     phan:
         enabled: false
         config:

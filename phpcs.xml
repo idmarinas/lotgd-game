@@ -5,13 +5,13 @@
     <arg name="basepath" value="."/>
     <arg name="colors"/>
     <arg name="parallel" value="75"/>
+    <arg name="php_version" value="70000">
     <arg value="np"/>
 
-    <!-- Don't hide tokenizer exceptions -->
-    <rule ref="Internal.Tokenizer.Exception">
-        <type>error</type>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1" />
+        </properties>
     </rule>
-    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration">
-        <exclude name="OneParamPerLine">
-    </rule>
+
 </ruleset>
