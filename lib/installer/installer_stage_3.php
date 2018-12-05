@@ -3,7 +3,7 @@
 require_once 'lib/installer/installer_functions.php';
 
 rawoutput("<form id='install-3' action='installer.php?stage=4' method='POST'>");
-output('`@`c`bDatabase Connection Information`b´c`2');
+output('`@`c`bDatabase Connection Information´b´c`2');
 output('In order to run Legend of the Green Dragon, your server must have access to a MySQL database.');
 output("If you are not sure if you meet this need, talk to server's Internet Service Provider (ISP), and make sure they offer MySQL databases.");
 output("If you are running on your own machine or a server under your control, you can download and install MySQL from <a href='http://www.mysql.com/' target='_blank' rel='noopener noreferrer'>the MySQL website</a> for free.`n", true);
@@ -17,7 +17,7 @@ else
     output('`nIt looks like this is a new install of Legend of the Green Dragon.');
     output('First, thanks for installing LoGD!');
     output("In order to connect to the database server, I'll need the following information.");
-    output("`iIf you are unsure of the answer to any of these questions, please check with your server's ISP, or read the documentation on MySQL`i`n");
+    output("`iIf you are unsure of the answer to any of these questions, please check with your server's ISP, or read the documentation on MySQL´i`n");
 
     rawoutput('<div class="ui form"><div class="inline field"><label>');
     output('`n`@What is the driver of your DataBase?`0`n');

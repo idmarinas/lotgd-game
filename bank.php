@@ -11,7 +11,7 @@ require_once 'lib/villagenav.php';
 tlschema('bank');
 
 page_header('Ye Olde Bank');
-output('`^`c`bYe Olde Bank`b´c');
+output('`^`c`bYe Olde Bank´b´c');
 $op = httpget('op');
 
 if ('' == $op)
@@ -38,7 +38,7 @@ if ('' == $op)
 }
 elseif ('transfer' == $op)
 {
-    output('`6`bTransfer Money`b:`n');
+    output('`6`bTransfer Money´b:`n');
 
     if ($session['user']['goldinbank'] >= 0)
     {
@@ -70,7 +70,7 @@ elseif ('transfer' == $op)
 }
 elseif ('transfer2' == $op)
 {
-    output('`6`bConfirm Transfer`b:`n');
+    output('`6`bConfirm Transfer´b:`n');
     $string = '%';
     $to = httppost('to');
 
@@ -128,7 +128,7 @@ elseif ('transfer3' == $op)
 {
     $amt = abs((int) httppost('amount'));
     $to = httppost('to');
-    output('`6`bTransfer Completion`b`n');
+    output('`6`bTransfer Completion´b`n');
 
     if ($session['user']['gold'] + $session['user']['goldinbank'] < $amt)
     {
@@ -204,7 +204,7 @@ elseif ('deposit' == $op)
     output_notl($session['user']['goldinbank'] >= 0 ? $dep : $pay);
     $dep = translate_inline('Deposit');
     rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$dep</button></div>");
-    output('`n`iEnter 0 or nothing to deposit it all`i');
+    output('`n`iEnter 0 or nothing to deposit it all´i');
     rawoutput('</form>');
     rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>", true);
     addnav('', 'bank.php?op=depositfinish');
@@ -257,7 +257,7 @@ elseif ('withdraw' == $op)
     output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
     output('`6"`@How much would you like to withdraw `&%s`@?`6"`n`n', $session['user']['name']);
     rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$withdraw</button></div>");
-    output('`n`iEnter 0 or nothing to withdraw it all`i');
+    output('`n`iEnter 0 or nothing to withdraw it all´i');
     rawoutput('</form>');
     rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
     addnav('', 'bank.php?op=withdrawfinish');

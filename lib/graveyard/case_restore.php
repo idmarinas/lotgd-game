@@ -1,6 +1,6 @@
 <?php
 
-output('`)`b`cThe Mausoleum´c`b');
+output('`)`b`cThe Mausoleum´c´b');
 
 if ($session['user']['soulpoints'] < $max)
 {
@@ -18,7 +18,7 @@ if ($session['user']['soulpoints'] < $max)
 else
 {
     output("`\$%s`) sighs and mumbles something about, \"`7just 'cause they're dead, does that mean they don't have to think?`)\"`n`n", $deathoverlord);
-    output("Perhaps you'd like to actually `ineed`i restoration before you ask for it.");
+    output("Perhaps you'd like to actually `ineed´i restoration before you ask for it.");
 }
 addnav('Places');
 addnav('S?Land of the Shades', 'shades.php');

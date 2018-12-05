@@ -15,7 +15,7 @@ $return = httpget('return');
 $returnline = $return > '' ? "&return=$return" : '';
 
 page_header("Healer's Hut");
-output("`#`b`cHealer's Hut´c`b`n");
+output("`#`b`cHealer's Hut´c´b`n");
 
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
 $result = modulehook('healmultiply', ['alterpct' => 1.0, 'cost' => $cost]);
@@ -36,10 +36,10 @@ if ('' == $op)
         output('"`6See you, I do.  Before you did see me, I think, hmm?`3" the old thing remarks.');
         output('"`6Know you, I do; healing you seek.  Willing to heal am I, but only if willing to pay are you.`3"`n`n');
         output('"`5Uh, um.  How much?`3" you ask, ready to be rid of the smelly old thing.`n`n');
-        output('The old being thumps your ribs with a gnarly staff.  "`6For you... `$`b%s`b`6 gold pieces for a complete heal!!`3" it says as it bends over and pulls a clay vial from behind a pile of skulls sitting in the corner.', $cost);
+        output('The old being thumps your ribs with a gnarly staff.  "`6For you... `$`b%s´b`6 gold pieces for a complete heal!!`3" it says as it bends over and pulls a clay vial from behind a pile of skulls sitting in the corner.', $cost);
         output('The view of the thing bending over to remove the vial almost does enough mental damage to require a larger potion.');
         output("\"`6I also have some, erm... 'bargain' potions available,`3\" it says as it gestures at a pile of dusty, cracked vials.");
-        output("\"`6They'll heal a certain percent of your `idamage`i.`3\"");
+        output("\"`6They'll heal a certain percent of your `idamage´i.`3\"");
     }
     elseif ($session['user']['hitpoints'] == $session['user']['maxhitpoints'])
     {
@@ -94,7 +94,7 @@ elseif ('buy' == $op)
         output('`3The old creature pierces you with a gaze hard and cruel.`n');
         output('Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n');
         output('Perhaps you should get some more money before you attempt to engage in local commerce.`n`n');
-        output('You recall that the creature had asked for `b`$%s`3`b gold.', $newcost);
+        output('You recall that the creature had asked for `b`$%s`3´b gold.', $newcost);
     }
 }
 elseif ('companion' == $op)
@@ -106,7 +106,7 @@ elseif ('companion' == $op)
         output('`3The old creature pierces you with a gaze hard and cruel.`n');
         output('Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n');
         output('Perhaps you should get some more money before you attempt to engage in local commerce.`n`n');
-        output('You recall that the creature had asked for `b`$%s`3`b gold.', $compcost);
+        output('You recall that the creature had asked for `b`$%s`3´b gold.', $compcost);
     }
     else
     {
@@ -132,7 +132,7 @@ if ($session['user']['hitpoints'] < $session['user']['maxhitpoints'])
     }
     modulehook('potion');
 }
-addnav('`bHeal Companions`b');
+addnav('`bHeal Companions´b');
 $compheal = false;
 
 foreach ($companions as $name => $companion)
@@ -153,7 +153,7 @@ foreach ($companions as $name => $companion)
     }
 }
 tlschema('nav');
-addnav('`bReturn`b');
+addnav('`bReturn´b');
 
 if ('' == $return)
 {

@@ -132,22 +132,22 @@ function report_power_move($crit, $dmg)
 
         if ($crit > $uatk * 4)
         {
-            $msg = '`&`bYou execute a `%MEGA`& power move!!!`b`n';
+            $msg = '`&`bYou execute a `%MEGA`& power move!!!´b`n';
             $power = 1;
         }
         elseif ($crit > $uatk * 3)
         {
-            $msg = '`&`bYou execute a `^DOUBLE`& power move!!!`b`n';
+            $msg = '`&`bYou execute a `^DOUBLE`& power move!!!´b`n';
             $power = 1;
         }
         elseif ($crit > $uatk * 2)
         {
-            $msg = '`&`bYou execute a power move!!!`b`0`n';
+            $msg = '`&`bYou execute a power move!!!´b`0`n';
             $power = 1;
         }
         elseif ($crit > ($uatk * 1.5))
         {
-            $msg = '`7`bYou execute a minor power move!`b`0`n';
+            $msg = '`7`bYou execute a minor power move!´b`0`n';
             $power = 1;
         }
 
@@ -338,7 +338,7 @@ function apply_skill($skill, $l)
             'atkmod' => 25,
             'defmod' => 25,
             'invulnerable' => 1,
-            'startmsg' => '`&`bYou feel godlike.`b',
+            'startmsg' => '`&`bYou feel godlike.´b',
             'schema' => 'skill'
         ]);
     }

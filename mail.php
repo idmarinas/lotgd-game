@@ -29,7 +29,7 @@ elseif ('process' == $op)
 
     if (! is_array($msg) || count($msg) < 1)
     {
-        $session['message'] = '`n`n`$`bYou cannot delete zero messages!  What does this mean?  You pressed "Delete Checked" but there are no messages checked!  What sort of world is this that people press buttons that have no meaning?!?`b`0';
+        $session['message'] = '`n`n`$`bYou cannot delete zero messages!  What does this mean?  You pressed "Delete Checked" but there are no messages checked!  What sort of world is this that people press buttons that have no meaning?!?´b`0';
         header('Location: mail.php');
 
         exit();

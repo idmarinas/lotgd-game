@@ -23,7 +23,7 @@ $defeat = false;
 $point = getsetting('moneydecimalpoint', '.');
 $sep = getsetting('moneythousandssep', ',');
 
-output("`b`cBluspring's Warrior Training´c`b");
+output("`b`cBluspring's Warrior Training´c´b");
 
 $mid = httpget('master');
 

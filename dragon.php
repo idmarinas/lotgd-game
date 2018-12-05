@@ -52,7 +52,7 @@ elseif ('prologue1' == $op)
 
     if ($flawless)
     {
-        output('`b`c`&~~ Flawless Fight ~~`0´c`b`n`n');
+        output('`b`c`&~~ Flawless Fight ~~`0´c´b`n`n');
     }
     output('`@Victory!`n`n');
     output('`2Before you, the great dragon lies immobile, its heavy breathing like acid to your lungs.');
@@ -293,7 +293,7 @@ if ($battle)
         addnav('Continue', "dragon.php?op=prologue1&flawless=$flawless");
         tlschema();
 
-        $lotgdBattleContent['battleend'][] = ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']];
+        $lotgdBattleContent['battleend'][] = ['`b`$You have slain %s!`0´b`n', $badguy['creaturename']];
         $lotgdBattleContent['battleend'][] = ['`&With a mighty final blow, `@%s`& lets out a tremendous bellow and falls at your feet, dead at last.', $badguy['creaturename']];
 
         addnews('`&%s has slain the hideous creature known as `@%s`&.  All across the land, people rejoice!`0', $session['user']['name'], $badguy['creaturename']);

@@ -1,6 +1,6 @@
 <?php
 
-output('`@`c`bWelcome to Legend of the Green Dragon`b´c`0');
+output('`@`c`bWelcome to Legend of the Green Dragon´b´c`0');
 output('`2This is the installer script for Legend of the Green Dragon, by Eric Stevens & JT Traub.`n');
 output('`nIn order to install and use Legend of the Green Dragon (LoGD), you must agree to the license under which it is deployed.`n');
 output('`n`&This game is a small project into which we have invested a tremendous amount of personal effort, and we provide this to you absolutely free of charge.`2');

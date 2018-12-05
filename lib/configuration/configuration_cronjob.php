@@ -151,7 +151,7 @@ else
 
     rawoutput('<div class="ui info message">');
     output('Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.`n');
-    output('This is de unique cronjob need create. Copy and change `b"/path/to/project"`b to where is the game installed. This cronjob execute all CronJobs in the game.`n`n`i');
+    output('This is de unique cronjob need create. Copy and change `b"/path/to/project"´b to where is the game installed. This cronjob execute all CronJobs in the game.`n`n');
     output_notl('* * * * * cd /path/to/project && php cronjob.php 1>> /dev/null 2>&1`n`n');
     rawoutput('</div><div class="ui red message">');
     output('If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: %s', '<a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>', true);
@@ -178,7 +178,7 @@ else
     DB::pagination($result, 'configuration.php?settings=cronjob');
 
     rawoutput('<a class="ui right floated button" href="configuration.php?settings=cronjob&op=newcronjob">'.$newcronjob.'</a>');
-    output('`@`bCronJobs available in the game`b`0');
+    output('`@`bCronJobs available in the game´b`0');
     addnav('', 'configuration.php?settings=cronjob&op=newcronjob');
     rawoutput('<br><br><table class="ui very compact striped selectable table">');
     rawoutput('<thead><tr><th>Name</th><th>Command</th><th>Schedule</th><th>Debug</th><th>Enabled</th><th>Opcs</th></tr></thead>');
@@ -190,7 +190,7 @@ else
         rawoutput('</td><td>');
         output_notl('php '.$value['command'].'.php');
         rawoutput('</td><td>');
-        output_notl('<a href="https://crontab.guru/#%s" target="_blank" rel="noopener noreferrer"><i class="info icon"></i> `b%s`b</a>', str_replace(' ', '_', $value['schedule']), $value['schedule'], true);
+        output_notl('<a href="https://crontab.guru/#%s" target="_blank" rel="noopener noreferrer"><i class="info icon"></i> `b%s´b</a>', str_replace(' ', '_', $value['schedule']), $value['schedule'], true);
         rawoutput('</td><td>');
         output_notl(($value['debug'] ? $yes : $no));
         rawoutput('</td><td>');

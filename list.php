@@ -87,7 +87,7 @@ for ($i = 0; $i < $totalplayers; $i += $playersperpage)
 
     if ($page == $pnum)
     {
-        addnav([' ?`b`#Page %s`0 (%s-%s)`b', $pnum, $i + 1, min($i + $playersperpage, $totalplayers)], "list.php?page=$pnum");
+        addnav([' ?`b`#Page %s`0 (%s-%s)´b', $pnum, $i + 1, min($i + $playersperpage, $totalplayers)], "list.php?page=$pnum");
     }
     else
     {
@@ -146,7 +146,7 @@ if ('' == $page && '' == $op)
 {
     $title .= sprintf_translate(' (%s warriors)', $max);
 }
-output_notl('`c`b'.$title.'`b');
+output_notl('`c`b'.$title.'´b');
 
 $alive = translate_inline('Alive');
 $level = translate_inline('Level');

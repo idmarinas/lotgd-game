@@ -81,7 +81,7 @@ while ($row = DB::fetch_assoc($result))
 
     if ($odate != $dom)
     {
-        output_notl('`n`b`@%s`0`b`n', $dom);
+        output_notl('`n`b`@%s`0´b`n', $dom);
         $odate = $dom;
     }
     $time = date('H:i:s', strtotime($row['date'])).' ('.reltime(strtotime($row['date'])).')';
@@ -98,7 +98,7 @@ while ($row = DB::fetch_assoc($result))
     if (! isset($categories[$row['category']]) && '' == $category)
     {
         addnav('Operations');
-        addnav(['View by `i%s`i', $row['category']], 'gamelog.php?cat='.$row['category']);
+        addnav(['View by `i%s´i', $row['category']], 'gamelog.php?cat='.$row['category']);
         $categories[$row['category']] = 1;
     }
     output_notl('`n');

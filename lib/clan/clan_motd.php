@@ -47,16 +47,16 @@
             $row = DB::fetch_assoc($result);
             $descauthname = $row['name'];
 
-            output('`&`bCurrent MoTD:`b `#by %s`2`n', $motdauthname);
+            output('`&`bCurrent MoTD:´b `#by %s`2`n', $motdauthname);
             output_notl(nltoappon($claninfo['clanmotd']).'`n');
-            output('`&`bCurrent Description:`b `#by %s`2`n', $descauthname);
+            output('`&`bCurrent Description:´b `#by %s`2`n', $descauthname);
             output_notl(nltoappon($claninfo['clandesc']).'`n');
 
             rawoutput("<form action='clan.php?op=motd' method='POST'>");
             addnav('', 'clan.php?op=motd');
-            output('`&`bMoTD:`b `7(4096 chars)`n');
+            output('`&`bMoTD:´b `7(4096 chars)`n');
             rawoutput("<textarea name='clanmotd' cols='50' rows='10' class='input' style='width: 66%'>".htmlentities($claninfo['clanmotd'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea><br>');
-            output('`n`&`bDescription:`b `7(4096 chars)`n');
+            output('`n`&`bDescription:´b `7(4096 chars)`n');
             $blocked = translate_inline('Your clan has been blocked from posting a description.`n');
 
             if (INT_MAX == $claninfo['descauthor'])
@@ -70,7 +70,7 @@
 
             if ($session['user']['clanrank'] >= CLAN_LEADER)
             {
-                output('`n`&`bCustom Talk Line`b `7(blank means "says" -- 15 chars max)`n');
+                output('`n`&`bCustom Talk Line´b `7(blank means "says" -- 15 chars max)`n');
                 rawoutput("<input name='customsay' value=\"".htmlentities($claninfo['customsay'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" class='input' maxlength=\"15\"><br/>");
             }
             $save = translate_inline('Save');

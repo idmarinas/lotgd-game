@@ -1,6 +1,6 @@
 <?php
 
-output('`b`iMail Box`i`b');
+output('`b`iMail Box´i´b');
 
 if (isset($session['message']))
 {
@@ -45,7 +45,7 @@ $result = DB::query($sql);
 
 if (0 < DB::num_rows($result))
 {
-    $no_subject = translate_inline('`i(No Subject)`i');
+    $no_subject = translate_inline('`i(No Subject)´i');
     $subject = translate_inline('Subject');
     $from = translate_inline('Sender');
     $date = translate_inline('Send Date');
@@ -75,8 +75,8 @@ if (0 < DB::num_rows($result))
 
     $old = translate_inline('Old');
     $new = translate_inline('New');
-    $system = translate_inline('`i`^System`0`i');
-    $deleteuser = translate_inline('`i`^Deleted User`0`i');
+    $system = translate_inline('`i`^System`0´i');
+    $deleteuser = translate_inline('`i`^Deleted User`0´i');
 
     foreach ($rows as $row)
     {
@@ -205,6 +205,6 @@ if (0 < DB::num_rows($result))
 else
 {
     rawoutput('<br><br>');
-    output('`i`4Aww, you have no mail, how sad.`0`i');
+    output('`i`4Aww, you have no mail, how sad.`0´i');
 }
-output('`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.`i', DB::num_rows($result), getsetting('inboxlimit', 50), getsetting('oldmail', 14));
+output('`n`n`i`lYou currently have %s messages in your inbox.`nYou will no longer be able to receive messages from players if you have more than %s unread messages in your inbox.  `nMessages are automatically deleted (read or unread) after %s days.´i', DB::num_rows($result), getsetting('inboxlimit', 50), getsetting('oldmail', 14));

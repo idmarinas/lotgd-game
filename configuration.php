@@ -66,13 +66,13 @@ switch ($type_setting)
                 if (1 == (int) httppost('blockdupemail') && 1 != (int) httppost('requirevalidemail'))
                 {
                     httppostset('requirevalidemail', '1');
-                    output('`brequirevalidemail has been set since blockdupemail was set.`b`n');
+                    output('`brequirevalidemail has been set since blockdupemail was set.´b`n');
                 }
 
                 if (1 == (int) httppost('requirevalidemail') && 1 != (int) httppost('requireemail'))
                 {
                     httppostset('requireemail', '1');
-                    output('`brequireemail has been set since requirevalidemail was set.`b`n');
+                    output('`brequireemail has been set since requirevalidemail was set.´b`n');
                 }
                 $defsup = httppost('defaultsuperuser');
 

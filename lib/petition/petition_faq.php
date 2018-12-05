@@ -14,10 +14,10 @@ output("\"`#So, you're a Newbie.  Welcome to the club.");
 output('Here you will find answers to the questions that plague you.');
 output('Well, actually you will find answers to the questions that plagued US.');
 output('So, here, read and learn, and leave us alone!`@"`n`n');
-output('`^`bContents:`b`0`n');
+output('`^`bContents:´b`0`n');
 
 modulehook('faq-pretoc');
-output('`^`bNew Player & FAQ`b`0`n');
+output('`^`bNew Player & FAQ´b`0`n');
 $t = translate_inline('`@New Player Primer`0');
 output_notl("&#149;<a href='petition.php?op=primer'>%s</a><br/>", $t, true);
 $t = translate_inline('`@Frequently Asked Questions on Game Play (General)`0');

@@ -99,7 +99,7 @@ else
         rawoutput("<div style='background-color: #FFFFFF; color: #000000; width: 100%'><b>$source</b><br>");
         rawoutput(highlight_string("<?php\n$php\n?>", true));
         rawoutput('</div>');
-        output('`bResults:`b`n');
+        output('`bResults:´b`n');
         modulehook('rawsql-execphp', ['php' => $php]);
 
         try

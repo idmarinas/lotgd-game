@@ -4,7 +4,7 @@
         output('`i`$Clan Rank Structure:`n');
         output('`2Rank >=Officer(20) can promote/demote people equal or lower than his rank.`n');
         output('`2Rank >=Administrative(25) can promote/demote AND remove people equal or lower than his rank.`n`n');
-        output('`$Exception: A founder can never be removed, a leader can by another leader.`i`0`n`n');
+        output('`$Exception: A founder can never be removed, a leader can by another leader.´i`0`n`n');
         output('`4This is your current clan membership:`n');
         $setrank = (int) httppost('setrank');
 

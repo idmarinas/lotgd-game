@@ -72,7 +72,7 @@ while ($row = DB::fetch_assoc($result2))
     }
 }
 output_notl('`n');
-output('`c`b`!News for %s %s`0`b´c', $date, $pagestr);
+output('`c`b`!News for %s %s`0´b´c', $date, $pagestr);
 
 while ($row = DB::fetch_assoc($result))
 {
@@ -110,7 +110,7 @@ while ($row = DB::fetch_assoc($result))
 if (0 == DB::num_rows($result))
 {
     output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c');
-    output('`1`b`c Nothing of note happened this day.  All in all a boring day. ´c`b`0');
+    output('`1`b`c Nothing of note happened this day.  All in all a boring day. ´c´b`0');
 }
 output_notl('`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c');
 
@@ -131,11 +131,11 @@ else
 
     if (1 == $session['user']['sex'])
     {
-        addnav("`!`bYou're dead, Jane!`b`0");
+        addnav("`!`bYou're dead, Jane!´b`0");
     }
     else
     {
-        addnav("`!`bYou're dead, Jim!`b`0");
+        addnav("`!`bYou're dead, Jim!´b`0");
     }
     addnav('S?Land of Shades', 'shades.php');
     addnav('G?The Graveyard', 'graveyard.php');
@@ -190,7 +190,7 @@ if ($totaltoday > $newsperpage)
 
         if ($pnum == $page)
         {
-            addnav(['`b`#Page %s`0`b', $pnum], "news.php?offset=$offset&page=$pnum");
+            addnav(['`b`#Page %s`0´b', $pnum], "news.php?offset=$offset&page=$pnum");
         }
         else
         {

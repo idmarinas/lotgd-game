@@ -14,7 +14,7 @@ if ($id > 0)
 }
 
 rawoutput("<form action='mail.php?op=write' method='post' class='ui form'>");
-output('`b`2Address:`b`n');
+output('`b`2Address:´b`n');
 rawoutput(sprintf("<div class='inline field'><label>%s</label> <div class='ui action input'>", appoencode("`2$to`0")));
 output_notl("<input autofocus name='to' id='to' value=\"".htmlentities(stripslashes(httpget('prepop')), ENT_COMPAT, getsetting('charset', 'UTF-8')).'">', true);
 output_notl("<button type='submit' class='ui button'>$search</button>", true);

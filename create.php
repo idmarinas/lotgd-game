@@ -458,7 +458,7 @@ else
 
     if ('' == $op)
     {
-        output('`&`c`bCreate a Character`b´c`0');
+        output('`&`c`bCreate a Character´b´c`0');
         $refer = httpget('r');
 
         if ($refer)

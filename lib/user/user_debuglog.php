@@ -92,7 +92,7 @@ while ($row = DB::fetch_assoc($result))
 
     if ($odate != $dom)
     {
-        output_notl('`n`b`@%s`0`b`n', $dom);
+        output_notl('`n`b`@%s`0´b`n', $dom);
         $odate = $dom;
     }
     $time = date('H:i:s', strtotime($row['date'])).' ('.reltime(strtotime($row['date'])).')';

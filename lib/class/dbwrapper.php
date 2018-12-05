@@ -173,7 +173,7 @@ class DB
             $maxpage = $paginator->itemCountPerPage * $page;
             $maxpage = ($paginator->totalItemCount >= $maxpage ? $maxpage : $paginator->totalItemCount);
 
-            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`b`#Page %s (%s-%s)`0`b');
+            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`b`#Page %s (%s-%s)`0´b');
             addnav([$text, $page, $minpage, $maxpage], "$url{$union}page=$page");
         }
     }

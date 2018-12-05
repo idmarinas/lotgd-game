@@ -42,7 +42,7 @@ if ('' != $row['name'])
     $ip = $row['lastip'];
     $name = $row['name'];
     output('`0To help locate similar users to `@%s`0, here are some other users who are close:`n', $name);
-    output('`bSame ID (%s):`b`n', $id);
+    output('`bSame ID (%s):´b`n', $id);
     $sql = 'SELECT name, lastip, uniqueid, laston, gentimecount FROM '.DB::prefix('accounts')." WHERE uniqueid='".addslashes($id)."' ORDER BY lastip";
     $result = DB::query($sql);
 
@@ -55,7 +55,7 @@ if ('' != $row['name'])
     output_notl('`n');
     $oip = '';
     $dots = 0;
-    output("`bSimilar IP's`b`n");
+    output("`bSimilar IP's´b`n");
 
     for ($x = strlen($ip); $x > 0; $x--)
     {

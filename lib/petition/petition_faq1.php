@@ -4,7 +4,7 @@ tlschema('faq');
 popup_header('General Questions');
 $c = translate_inline('Return to Contents');
 rawoutput("<a href='petition.php?op=faq'>$c</a><hr>");
-output('`n`n`c`bGeneral questions`b´c`n');
+output('`n`n`c`bGeneral questions´b´c`n');
 output('`^1. What is the purpose of this game?`n');
 output('`@To get chicks.`n');
 output('Seriously, though. The purpose is to slay the green dragon.`n`n');

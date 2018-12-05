@@ -95,7 +95,6 @@ else
         output('You realize, however, that the inn is a considerably safer place to sleep.');
         output('It is far harder for vagabonds to get you in your room while you sleep.');
         output('Also, those bodyguards sound pretty safe to you.');
-        //output("`n`bNote, bodyguard levels not yet implemented`b`n");
         addnav(['Give him %s gold', $expense], 'inn.php?op=room&pay=1');
 
         if ($session['user']['goldinbank'] >= $bankexpense)

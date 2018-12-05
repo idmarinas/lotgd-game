@@ -56,14 +56,14 @@ function soap($input, $debug = false, $skiphook = false)
 
                         if ($debug)
                         {
-                            output('This word is ok because it was caught by an exception: `b`^%s`7`b`n', $longword);
+                            output('This word is ok because it was caught by an exception: `b`^%s`7´b`n', $longword);
                         }
                     }
                     else
                     {
                         if ($debug)
                         {
-                            output('`7This word is not ok: "`%%s`7"; it blocks on the pattern `i%s`i at "`$%s`7".`n', sanitize_mb($longword), $word, $shortword);
+                            output('`7This word is not ok: "`%%s`7"; it blocks on the pattern `i%s´i at "`$%s`7".`n', sanitize_mb($longword), $word, $shortword);
                         }
                         // if the word should be filtered, drop it from the
                         // search terms ($output), and mask its bytes out of

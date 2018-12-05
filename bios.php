@@ -14,7 +14,7 @@ $userid = httpget('userid');
 
 if ('block' == $op)
 {
-    $sql = 'UPDATE '.DB::prefix('accounts')." SET bio='`iBlocked for inappropriate usage`i',biotime='9999-12-31 23:59:59' WHERE acctid='$userid'";
+    $sql = 'UPDATE '.DB::prefix('accounts')." SET bio='`iBlocked for inappropriate usage´i',biotime='9999-12-31 23:59:59' WHERE acctid='$userid'";
     $subj = ['Your bio has been blocked'];
     $msg = ['The system administrators have decided that your bio entry is inappropriate, so it has been blocked.`n`nIf you wish to appeal this decision, you may do so with the petition link.'];
     systemmail($userid, $subj, $msg);
@@ -33,7 +33,7 @@ $sql = 'SELECT name,acctid,bio,biotime FROM '.DB::prefix('accounts')." WHERE bio
 $result = DB::query($sql);
 page_header('User Bios');
 $block = translate_inline('Block');
-output('`b`&Player Bios:`0`b`n');
+output('`b`&Player Bios:`0´b`n');
 
 while ($row = DB::fetch_assoc($result))
 {
@@ -59,7 +59,7 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 addnav('Refresh', 'bios.php');
 $sql = 'SELECT name,acctid,bio,biotime FROM '.DB::prefix('accounts')." WHERE biotime>'9000-01-01' AND bio>'' ORDER BY biotime DESC LIMIT 100";
 $result = DB::query($sql);
-output('`n`n`b`&Blocked Bios:`0`b`n');
+output('`n`n`b`&Blocked Bios:`0´b`n');
 $unblock = translate_inline('Unblock');
 $number = DB::num_rows($result);
 

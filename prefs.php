@@ -267,7 +267,7 @@ else
                         $session['user']['replaceemail'] = $email.'|'.date('Y-m-d H:i:s');
                         $session['user']['emailvalidation'] = $emailverification;
                         debuglog('Email Change requested from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
-                        output('`4An email was sent to `$%s`4 to validate your change. Click the link (`bwhile being logged out!`b) in the email to activate the change. If nothing is done, your email will stay as it is.`0`n`n', translate_inline((getsetting('validationtarget', 0) ? 'your new email address' : 'your old email address')));
+                        output('`4An email was sent to `$%s`4 to validate your change. Click the link (`bwhile being logged out!´b) in the email to activate the change. If nothing is done, your email will stay as it is.`0`n`n', translate_inline((getsetting('validationtarget', 0) ? 'your new email address' : 'your old email address')));
 
                         if (getsetting('playerchangeemailauto', 0))
                         {

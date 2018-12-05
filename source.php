@@ -119,7 +119,7 @@ else
     {
         output("<a href='#source'>Click here for the source,</a> OR`n", true);
     }
-    output('`bOther files that you may wish to view the source of:`b');
+    output('`bOther files that you may wish to view the source of:´b');
     rawoutput('<ul>');
     // Gather all the legal dirs
     $legal_dirs = [];

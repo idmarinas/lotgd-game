@@ -87,7 +87,7 @@ case 'save':
 
 if ('' == $op)
 {
-    output('`i`$Note: These messages are NEWS messages the user will trigger when he/she dies in the forest or graveyard.`0`i`n`n');
+    output('`i`$Note: These messages are NEWS messages the user will trigger when he/she dies in the forest or graveyard.`0´i`n`n');
     $sql = 'SELECT * FROM '.DB::prefix('deathmessages');
     $result = DB::query($sql);
     rawoutput("<table class='ui very compact striped selectable table'>");

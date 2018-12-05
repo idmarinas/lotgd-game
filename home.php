@@ -114,12 +114,12 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
     if (! isset($_COOKIE['lgi']))
     {
         $session['message'] .= translate_inline('It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n');
-        $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
+        $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.´b`n");
     }
 
     if (isset($session['message']) && $session['message'] > '')
     {
-        output_notl('`b`$%s`b`n', $session['message'], true);
+        output_notl('`b`$%s´b`n', $session['message'], true);
     }
 
     $formLogin = LotgdTheme::renderThemeTemplate('pages/home/login.twig', [
@@ -146,7 +146,7 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
 }
 else
 {
-    output('`$`bServer full!`b`n`^Please wait until some users have logged out.`n`n`0');
+    output('`$`bServer full!´b`n`^Please wait until some users have logged out.`n`n`0');
 
     if ('timeout' == $op)
     {
@@ -156,12 +156,12 @@ else
     if (! isset($_COOKIE['lgi']))
     {
         $session['message'] .= translate_inline('It appears that you may be blocking cookies from this site. At least session cookies must be enabled in order to use this site.`n');
-        $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.`b`n");
+        $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.´b`n");
     }
 
     if (isset($session['message']) && $session['message'] > '')
     {
-        output('`b`$%s`b`n', $session['message'], true);
+        output('`b`$%s´b`n', $session['message'], true);
     }
     rawoutput(LotgdTheme::renderThemeTemplate('pages/home/loginfull.twig', ['text' => translate_inline('Server Full!')]));
 }
@@ -170,7 +170,7 @@ output_notl('´c');
 modulehook('homemiddle', []);
 
 $msg = getsetting('loginbanner', '*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*');
-output_notl('`n`c`b`&%s`0`b´c`n', $msg);
+output_notl('`n`c`b`&%s`0´b´c`n', $msg);
 $session['message'] = '';
 output('`c`2Game server running version: `@%s`0´c', $logd_version);
 

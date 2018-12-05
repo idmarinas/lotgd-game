@@ -23,7 +23,7 @@ if (DB::num_rows($result) > 0)
 
     if (0 == (int) $row['msgfrom'])
     {
-        $row['name'] = translate_inline('`i`^System`0`i');
+        $row['name'] = translate_inline('`i`^System`0´i');
         // No translation for subject if it's not an array
         $row_subject = @unserialize($row['subject']);
 
@@ -118,9 +118,9 @@ if (DB::num_rows($result) > 0)
 
     rawoutput('<div class="ui fluid card">'.$buttonsMenuTop);
     rawoutput('<div class="content">'.$label.'<div class="right floated meta">');
-    output('`b`2Sent:`b `^%s`0', $row['sent']);
+    output('`b`2Sent:´b `^%s`0', $row['sent']);
     rawoutput('</div>');
-    output('`b`2From:`b %s `^%s`0', $status_image, $row['name'], true);
+    output('`b`2From:´b %s `^%s`0', $status_image, $row['name'], true);
     rawoutput('</div><div class="content"><span class="ui header">'.appoencode($row['subject']).'</span><p>'.appoencode(sanitize_mb(str_replace("\n", '`n', $row['body']))));
     rawoutput('</p></div>'.$buttonsMenuBottom.'</div>');
 

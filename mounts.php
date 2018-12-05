@@ -314,7 +314,7 @@ elseif ('edit' == $op)
 
     if (DB::num_rows($result) <= 0)
     {
-        output('`iThis mount was not found.`i');
+        output('`iThis mount was not found.´i');
     }
     else
     {
@@ -571,7 +571,7 @@ function mountform($mount)
     output('Delta Forest Fights:');
     rawoutput("</td><td><input name='mount[mountforestfights]' value=\"".htmlentities((int) $mount['mountforestfights'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='5'></td></tr>");
     rawoutput('<tr><td nowrap>');
-    output('`bMount Messages:`b');
+    output('`bMount Messages:´b');
     rawoutput('</td><td></td></tr><tr><td nowrap>');
     output('New Day:');
     rawoutput("</td><td><input name='mount[newday]' value=\"".htmlentities($mount['newday'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='40'></td></tr>");
@@ -586,7 +586,7 @@ function mountform($mount)
     rawoutput('</td><td>');
     output('Buff name:');
     rawoutput("<input name='mount[mountbuff][name]' value=\"".htmlentities($mount['mountbuff']['name'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='50'><br/>");
-    output('`bBuff Messages:`b`n');
+    output('`bBuff Messages:´b`n');
     output('Each round:');
     rawoutput("<input name='mount[mountbuff][roundmsg]' value=\"".htmlentities($mount['mountbuff']['roundmsg'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='50'><br/>");
     output('Wear off:');
@@ -598,7 +598,7 @@ function mountform($mount)
     output('Effect Fail:');
     rawoutput("<input name='mount[mountbuff][effectfailmsg]' value=\"".htmlentities($mount['mountbuff']['effectfailmsg'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='50'><br/>");
     output('(message replacements: {badguy}, {goodguy}, {weapon}, {armor}, {creatureweapon}, and where applicable {damage}.)`n');
-    output('`n`bEffects:`b`n');
+    output('`n`bEffects:´b`n');
     output('Rounds to last (from new day):');
     rawoutput("<input name='mount[mountbuff][rounds]' value=\"".htmlentities((int) $mount['mountbuff']['rounds'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='50'><br/>");
     output('Player Atk mod:');
@@ -638,7 +638,7 @@ function mountform($mount)
     output('Badguy Def mod:');
     rawoutput("<input name='mount[mountbuff][badguydefmod]' value=\"".htmlentities($mount['mountbuff']['badguydefmod'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" size='50'>");
     output('(multiplier)`n');
-    output('`bOn Dynamic Buffs`b`n');
+    output('`bOn Dynamic Buffs´b`n');
     output("`@In the above, for most fields, you can choose to enter valid PHP code, substituting <fieldname> for fields in the user's account table.`n");
     output('Examples of code you might enter:`n');
     output('`^<charm>`n');

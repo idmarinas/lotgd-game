@@ -2,7 +2,7 @@
 
 if ($session['user']['gravefights'] <= 0)
 {
-    output('`$`bYour soul can bear no more torment in this afterlife.`b`0');
+    output('`$`bYour soul can bear no more torment in this afterlife.´b`0');
     $op = '';
     httpset('op', '');
 }

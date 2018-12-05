@@ -59,22 +59,21 @@ $sql = 'SELECT SUM(count) AS count, MAX(last) AS last,site FROM '.DB::prefix('re
 $count = translate_inline('Count');
 $last = translate_inline('Last');
 $dest = translate_inline('Destination');
-$none = translate_inline('`iNone`i');
-$notset = translate_inline('`iNot set`i');
-$skipped = translate_inline('`i%s records skipped (over a week old)`i');
+$none = translate_inline('`iNone´i');
+$notset = translate_inline('`iNot set´i');
+$skipped = translate_inline('`i%s records skipped (over a week old)´i');
 rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$count</th><th>$last</th><th>URL</th><th>$dest</th><th>IP</th></tr></thead>");
 $result = DB::query($sql);
 
 while ($row = DB::fetch_assoc($result))
 {
     rawoutput("<tr><td valign='top'>");
-    output_notl('`b'.$row['count'].'`b');
+    output_notl('`b'.$row['count'].'´b');
     rawoutput("</td><td valign='top'>");
     $diffsecs = strtotime('now') - strtotime($row['last']);
-    //output((int)($diffsecs/86400)."d ".(int)($diffsecs/3600%3600)."h ".(int)($diffsecs/60%60)."m ".(int)($diffsecs%60)."s");
-    output_notl('`b'.dhms($diffsecs).'`b');
+    output_notl('`b'.dhms($diffsecs).'´b');
     rawoutput("</td><td valign='top' colspan='3'>");
-    output_notl('`b'.('' == $row['site'] ? $none : $row['site']).'`b');
+    output_notl('`b'.('' == $row['site'] ? $none : $row['site']).'´b');
     rawoutput('</td></tr>');
 
     $sql = 'SELECT count,last,uri,dest,ip FROM '.DB::prefix('referers')." WHERE site='".addslashes($row['site'])."' ORDER BY {$order} LIMIT 25";
@@ -93,7 +92,6 @@ while ($row = DB::fetch_assoc($result))
             rawoutput('<tr><td>');
             output_notl($row1['count']);
             rawoutput("</td><td valign='top'>");
-            //output((int)($diffsecs/86400)."d".(int)($diffsecs/3600%3600)."h".(int)($diffsecs/60%60)."m".(int)($diffsecs%60)."s");
             output_notl(dhms($diffsecs));
             rawoutput("</td><td valign='top'>");
 
@@ -125,7 +123,6 @@ while ($row = DB::fetch_assoc($result))
         output_notl(sprintf($skipped, $skippedcount));
         rawoutput('</td></tr>');
     }
-    //output("</td></tr>",true);
 }
 rawoutput('</table>');
 page_footer();

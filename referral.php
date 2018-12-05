@@ -47,7 +47,7 @@ if ($session['user']['loggedin'])
     $awarded = translate_inline('Awarded?');
     $yes = translate_inline('`@Yes!`0');
     $no = translate_inline('`$No!`0');
-    $none = translate_inline('`iNone`i');
+    $none = translate_inline('`iNone´i');
     output('`n`nAccounts which you referred:`n');
     rawoutput("<table border='0' cellpadding='3' cellspacing='0'><tr class='trhead'><td>$name</td><td>$level</td><td>$awarded</td></tr>");
     $number = DB::num_rows($result);

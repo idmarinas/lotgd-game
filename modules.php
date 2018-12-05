@@ -164,7 +164,7 @@ if ('' == $op)
         }
         $order = httpget('order');
         $tcat = translate_inline($cat);
-        output('`n`b%s Modules`b`n', $tcat);
+        output('`n`b%s Modules´b`n', $tcat);
         $deactivate = translate_inline('Deactivate');
         $activate = translate_inline('Activate');
         $uninstall = translate_inline('Uninstall');
@@ -194,7 +194,7 @@ if ('' == $op)
         if (0 == $result->count())
         {
             rawoutput("<tr><td colspan='6' align='center'>");
-            output('`i-- No Modules Installed--`i');
+            output('`i-- No Modules Installed--´i');
             rawoutput('</td></tr>');
         }
 
@@ -282,7 +282,7 @@ if ('' == $op)
             $sorting = 'shortname';
         }
         $order = httpget('order');
-        output('`bUninstalled Modules`b`n');
+        output('`bUninstalled Modules´b`n');
         $install = translate_inline('Install');
         $notinstallable = translate_inline('Not installable');
         $mname = translate_inline('Module Name');
@@ -383,7 +383,7 @@ if ('' == $op)
                 {
                     rawoutput('<tr><td>&nbsp;</td>');
                     rawoutput("<td colspan='5'>");
-                    output('`bRequires:`b`n');
+                    output('`bRequires:´b`n');
                     reset($moduleinfo[$i]['requires']);
 
                     foreach ($moduleinfo[$i]['requires'] as $key => $val)
@@ -416,7 +416,7 @@ if ('' == $op)
         else
         {
             rawoutput("<tr><td colspan='6' class='center aligned'>");
-            output('`i--No uninstalled modules were found--`i');
+            output('`i--No uninstalled modules were found--´i');
             rawoutput('</td></tr>');
         }
         rawoutput('</table><br>');

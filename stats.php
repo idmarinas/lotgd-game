@@ -26,7 +26,7 @@ if ('stats' == $op || '' == $op)
     $sql = 'SELECT sum(gentimecount) AS c, sum(gentime) AS t, sum(gensize) AS s, count(acctid) AS a FROM '.DB::prefix('accounts');
     $result = DB::query($sql);
     $row = DB::fetch_assoc($result);
-    output('`b`%For existing accounts:`b`n');
+    output('`b`%For existing accounts:´b`n');
     output('`@Total Accounts: `^%s`n', LotgdFormat::numeral($row['a']));
     output('`@Total Hits: `^%s`n', LotgdFormat::numeral($row['c']));
     output('`@Total Page Gen Time: `^%s`n', dhms($row['t']));
@@ -36,7 +36,7 @@ if ('stats' == $op || '' == $op)
 }
 elseif ('referers' == $op)
 {
-    output('`n`%`bTop Referers:`b`0`n');
+    output('`n`%`bTop Referers:´b`0`n');
     rawoutput("<table class='ui very compact striped selectable table'>");
     $name = translate_inline('Name');
     $refs = translate_inline('Referrals');
@@ -74,7 +74,7 @@ elseif ('graph' == $op)
 {
     $sql = 'SELECT count(acctid) AS c, substring(laston,1,10) AS d FROM '.DB::prefix('accounts').' GROUP BY d DESC ORDER BY d DESC';
     $result = DB::query($sql);
-    output('`n`%`bDate accounts last logged on:`b');
+    output('`n`%`bDate accounts last logged on:´b');
     rawoutput("<table border='0' cellpadding='0' cellspacing='0'>");
     $class = 'trlight';
     $odate = date('Y-m-d');

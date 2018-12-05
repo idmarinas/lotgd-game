@@ -122,11 +122,11 @@ function pvplist($location = false, $link = false, $extra = false, $sql = false)
 
         if ($row['pvpflag'] > $pvptimeout)
         {
-            output('`i(Attacked too recently)`i');
+            output('`i(Attacked too recently)´i');
         }
         elseif ($location != $row['location'])
         {
-            output("`i(Can't reach them from here)`i");
+            output("`i(Can't reach them from here)´i");
         }
         elseif (isset($row['invalid']) && '' != $row['invalid'])
         {
@@ -134,7 +134,7 @@ function pvplist($location = false, $link = false, $extra = false, $sql = false)
             {
                 $row['invalid'] = translate_inline('Unable to attack');
             }
-            output_not('`i`4(%s`4)`i', $row['invalid']);
+            output_not('`i`4(%s`4)´i', $row['invalid']);
         }
         else
         {
@@ -147,7 +147,7 @@ function pvplist($location = false, $link = false, $extra = false, $sql = false)
 
     if (! isset($loc_counts[$location]) || 0 == $loc_counts[$location])
     {
-        $noone = translate_inline('`iThere are no available targets.`i');
+        $noone = translate_inline('`iThere are no available targets.´i');
         output_notl("<tr><td align='center' colspan='4'>$noone</td></tr>", true);
     }
     rawoutput('</table>', true);

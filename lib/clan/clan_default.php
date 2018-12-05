@@ -16,7 +16,7 @@
         if ('' != $claninfo['clanmotd'])
         {
             rawoutput("<div style='margin-left: 15px; padding-left: 15px;'>");
-            output('`&`bCurrent MoTD:`b `#by %s`2`n', $motdauthname);
+            output('`&`bCurrent MoTD:´b `#by %s`2`n', $motdauthname);
             output_notl(nltoappon($claninfo['clanmotd']).'`n');
             rawoutput('</div>');
             output_notl('`n');
@@ -29,7 +29,7 @@
         if ('' != $claninfo['clandesc'])
         {
             modulehook('collapse{', ['name' => 'collapsedesc']);
-            output('`n`n`&`bCurrent Description:`b `#by %s`2`n', $descauthname);
+            output('`n`n`&`bCurrent Description:´b `#by %s`2`n', $descauthname);
             output_notl(nltoappon($claninfo['clandesc']));
             modulehook('}collapse');
         }
@@ -37,7 +37,7 @@
         $result = DB::query($sql);
         // begin collapse
         modulehook('collapse{', ['name' => 'clanmemberdet']);
-        output('`n`n`bMembership Details:`b`n');
+        output('`n`n`bMembership Details:´b`n');
         $leaders = 0;
 
         while ($row = DB::fetch_assoc($result))

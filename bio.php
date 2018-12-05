@@ -72,7 +72,7 @@ if ($target = DB::fetch_assoc($result))
         array_push($ranks['ranks'], '`$Founder');
         $ranks = translate_inline($ranks['ranks']);
         tlschema();
-        output('`@%s`2 is a %s`2 to `%%s`2`n', $target['name'], str_replace(['`c', '`i'], '', $ranks[$target['clanrank']]), str_replace(['´c', '`i'], '', $target['clanname']));
+        output('`@%s`2 is a %s`2 to `%%s`2`n', $target['name'], str_replace(['`c', '´c', '`i', '´i'], '', $ranks[$target['clanrank']]), str_replace(['´c', '´c', '`i', '´i'], '', $target['clanname']));
     }
 
     output('`^Title: `@%s`n', $target['title']);
@@ -118,7 +118,7 @@ if ($target = DB::fetch_assoc($result))
 
     $mount['acctid'] = $target['acctid'];
     $mount = modulehook('bio-mount', $mount);
-    $none = translate_inline('`iNone`i');
+    $none = translate_inline('`iNone´i');
 
     if (! isset($mount['mountname']) || '' == $mount['mountname'])
     {
@@ -172,7 +172,7 @@ if ($target = DB::fetch_assoc($result))
 
         if ($odate != $row['newsdate'])
         {
-            output_notl('`n`b`@%s`0`b`n',
+            output_notl('`n`b`@%s`0´b`n',
                   date('D, M d', strtotime($row['newsdate'])));
             $odate = $row['newsdate'];
         }

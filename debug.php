@@ -66,8 +66,8 @@ switch ($debug) {
     $med_desc = translate_inline('Average per Hit');
     $hits = translate_inline('Hits');
 }
-$none = translate_inline('`iNone`i');
-$notset = translate_inline('`iNot set`i');
+$none = translate_inline('`iNone´i');
+$notset = translate_inline('`iNot set´i');
 rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$category</th><th>$subcategory</th><th>$sum_desc</th><th>$med_desc</th><th>$hits</th></tr></thead>");
 debug($sql);
 $result = DB::query($sql);
@@ -77,9 +77,9 @@ while ($row = DB::fetch_assoc($result))
 {
     $i = ! $i;
     rawoutput("<tr'><td valign='top'>");
-    output_notl('`b'.$row['category'].'`b');
+    output_notl('`b'.$row['category'].'´b');
     rawoutput("</td><td valign='top'>");
-    output_notl('`b'.$row['subcategory'].'`b');
+    output_notl('`b'.$row['subcategory'].'´b');
     rawoutput("</td><td valign='top'>");
     output_notl($row['sum']);
     rawoutput("</td><td valign='top'>");

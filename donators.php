@@ -54,7 +54,7 @@ if ('' == $reason)
     $reason = translate_inline('manual donation entry');
 }
 
-output('`bAdd Donation Points:`b`n');
+output('`bAdd Donation Points:´b`n');
 rawoutput('<div class="inline field"><label>');
 output('Character: ');
 rawoutput("</label><input name='name' value=\"".htmlentities($name, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">');
@@ -237,7 +237,7 @@ elseif ('add1' == $op)
 
     if ($reason)
     {
-        output('(Reason: `^`b`i%s`i`b`0)`n`n', $reason);
+        output('(Reason: `^`b`i%s´i´b`0)`n`n', $reason);
     }
     $number = DB::num_rows($result);
 

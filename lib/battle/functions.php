@@ -211,11 +211,11 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
         if (true === $forest)
         {
-            array_unshift($lotgdBattleContent['battleend'], ['`b`$You have slain %s!`0`b`n', $badguy['creaturename']]);
+            array_unshift($lotgdBattleContent['battleend'], ['`b`$You have slain %s!`0´b`n', $badguy['creaturename']]);
         }
         elseif (false === $forest)
         {
-            array_unshift($lotgdBattleContent['battleend'], ['`b`$You have tormented %s!`0`b`n', $badguy['creaturename']]);
+            array_unshift($lotgdBattleContent['battleend'], ['`b`$You have tormented %s!`0´b`n', $badguy['creaturename']]);
         }
 
         // If any creature did damage, we have no flawless fight. Easy as that.
@@ -291,7 +291,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     //-- Perfect battle
     if (! $diddamage)
     {
-        array_push($lotgdBattleContent['battleend'], '`n`c`b`&~~ Flawless Fight! ~~`0`b´c');
+        array_push($lotgdBattleContent['battleend'], '`n`c`b`&~~ Flawless Fight! ~~`0´b´c');
 
         if ($denyflawless)
         {
@@ -301,7 +301,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
         {
             if (false === $forest)
             {//-- Only when is a Graveyard
-                array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0`b´c');
+                array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra torment!`0´b´c');
                 $session['user']['gravefights']++;
             }
             //-- $forest === true or is other value
@@ -311,12 +311,12 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
                 {
                     require_once 'modules/staminasystem/lib/lib.php';
 
-                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0`b´c');
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive some stamina!`0´b´c');
                     addstamina(25000);
                 }
                 else
                 {
-                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0`b´c');
+                    array_push($lotgdBattleContent['battleend'], '`c`b`$You receive an extra turn!`0´b´c');
                     $session['user']['turns']++;
                 }
             }
@@ -476,13 +476,13 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 
         if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > '')
         {
-            $lotgdBattleContent['battleend'][] = substitute_array("`b`&{$badguy['creaturewin']}`0`b`n");
+            $lotgdBattleContent['battleend'][] = substitute_array("`b`&{$badguy['creaturewin']}`0´b`n");
         }
     }
 
     if ($killer)
     {
-        $lotgdBattleContent['battleend'][] = ['`&`bYou have been defeated by `%%s`&!`b`n', $killer['creaturename']];
+        $lotgdBattleContent['battleend'][] = ['`&`bYou have been defeated by `%%s`&!´b`n', $killer['creaturename']];
     }
 
     if (is_string($where))
@@ -500,7 +500,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
             $taunt = '';
         }
 
-        addnews('%s `b`i%s`i`b', $deathmessage['deathmessage'], $taunt);
+        addnews('%s `b`i%s´i´b', $deathmessage['deathmessage'], $taunt);
     }
 
     if ($lostgold)
@@ -515,7 +515,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
     {
         $session['user']['experience'] = round($session['user']['experience'] * (1 - ($percent / 100)), 0);
 
-        $lotgdBattleContent['battleend'][] = ['`4%s %% of experience has been lost!`b`n', $percent];
+        $lotgdBattleContent['battleend'][] = ['`4%s %% of experience has been lost!´b`n', $percent];
     }
 
     if ($candie)

@@ -46,24 +46,24 @@ else
 if ('' == $duration)
 {
     $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+2 weeks'))."' AND banexpire > '0000-00-00 00:00:00'";
-    output('`bShowing bans that will expire within 2 weeks.`b`n`n');
+    output('`bShowing bans that will expire within 2 weeks.´b`n`n');
 }
 else
 {
     if ('forever' == $duration)
     {
         $since = " WHERE banexpire='0000-00-00 00:00:00'";
-        output('`bShowing all permanent bans`b`n`n');
+        output('`bShowing all permanent bans´b`n`n');
     }
     elseif ('all' == $duration)
     {
         $since = '';
-        output('`bShowing all bans`b`n`n');
+        output('`bShowing all bans´b`n`n');
     }
     else
     {
         $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+'.$duration))."' AND banexpire > '0000-00-00 00:00:00'";
-        output('`bShowing bans that will expire within %s.`b`n`n', $duration);
+        output('`bShowing bans that will expire within %s.´b`n`n', $duration);
     }
 }
 addnav('Perma-Bans');

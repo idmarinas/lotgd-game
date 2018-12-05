@@ -2,7 +2,7 @@
 
 if (! $skipgraveyardtext)
 {
-    output('`)`c`bThe Graveyard`b´c');
+    output('`)`c`bThe Graveyard´b´c');
     output('Your spirit wanders into a lonely graveyard, overgrown with sickly weeds which seem to grab at your spirit as you float past them.');
     output('Around you are the remains of many broken tombstones, some lying on their faces, some shattered to pieces.');
     output('You can almost hear the wails of the souls trapped within each plot lamenting their fates.`n`n');

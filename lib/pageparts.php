@@ -298,7 +298,7 @@ function page_footer($saveuser = true)
 
         $administrator = ($session['user']['superuser'] & SU_EDIT_USERS);
 
-        $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}`b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
+        $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}´b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
 
         $html['petitiondisplay'] = \LotgdTheme::renderThemeTemplate('parts/petition.twig', [
             'administrator' => $administrator,
@@ -758,7 +758,7 @@ function charstats($return = true)
             addcharstat('Favor', $u['deathpower'].check_temp_stat('deathpower', 1));
         }
 
-        addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'`b'));
+        addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'´b'));
         addcharstat('Gold', LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
         addcharstat('Gems', LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
 

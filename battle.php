@@ -173,7 +173,7 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
     if (count($enemies) > 1)
     {
         $surprised = true;
-        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0`b`n`n';
+        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0´b`n`n';
     }
     else
     {
@@ -204,17 +204,17 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
 
             if (! $surprised)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = '`b`$Your skill allows you to get the first attack!`0`b`n`n';
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = '`b`$Your skill allows you to get the first attack!`0´b`n`n';
             }
             else
             {
                 if ('pvp' == $options['type'])
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0`b`n`n", $enemies[0]['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0´b`n`n", $enemies[0]['creaturename']];
                 }
                 else
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0`b`n`n', $enemies[0]['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0´b`n`n', $enemies[0]['creaturename']];
                 }
 
                 $op = 'run';

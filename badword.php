@@ -34,7 +34,7 @@ if ($op=="test"){
 }
 
 output_notl("<font size='+1'>", true);
-output("`7`bGood Words`b`0");
+output("`7`bGood Words´b`0");
 rawoutput("</font>");
 output("`7 (bad word exceptions)`0`n");
 
@@ -97,7 +97,7 @@ if ($op=="addgood" || $op=="removegood"){
 
 output_notl("`0`n`n");
 rawoutput("<font size='+1'>");
-output("`7`bNasty Words`b`0");
+output("`7`bNasty Words´b`0");
 rawoutput("</font>");
 output_notl("`n");
 
@@ -162,7 +162,7 @@ function show_word_list($words){
 		}else{
 			if (substr($val,0,1)!=$lastletter){
 				$lastletter = substr($val,0,1);
-				output_notl("`n`n`^`b%s`b`@`n", strtoupper($lastletter));
+				output_notl("`n`n`^`b%s´b`@`n", strtoupper($lastletter));
 			}
 			output_notl("%s ", $val);
 		}

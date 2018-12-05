@@ -100,7 +100,7 @@ function pvpvictory($badguy, $killedloc, $options=false)
     if ($session['user']['level'] == 15) $winamount = 0;
     $session['user']['gold'] += $winamount;
 
-    $lotgdBattleContent['battleend'][] = ["`b`\$You have slain %s!`0`b`n", $badguy['creaturename']];
+    $lotgdBattleContent['battleend'][] = ["`b`\$You have slain %s!`0´b`n", $badguy['creaturename']];
 	$lotgdBattleContent['battleend'][] = ["`#You receive `^%s`# gold!`n", $winamount];
 
 	$exp = round(getsetting("pvpattgain",10)*$badguy['creatureexp']/100,0);
@@ -132,9 +132,9 @@ function pvpvictory($badguy, $killedloc, $options=false)
 
 	// /\- Gunnar Kreitz
 	if ($session['user']['sex'] == SEX_MALE) {
-		$msg = "`2While you were in %s, `^%s`2 initiated an attack on you with his `^%s`2, and defeated you!`n`nYou noticed he had an initial hp of `^%s`2 and just before you died he had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:`b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
+		$msg = "`2While you were in %s, `^%s`2 initiated an attack on you with his `^%s`2, and defeated you!`n`nYou noticed he had an initial hp of `^%s`2 and just before you died he had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:´b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
 	} else {
-		$msg = "`2While you were in %s, `^%s`2 initiated an attack on you with her `^%s`2, and defeated you!`n`nYou noticed she had an initial hp of `^%s`2 and just before you died she had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:`b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
+		$msg = "`2While you were in %s, `^%s`2 initiated an attack on you with her `^%s`2, and defeated you!`n`nYou noticed she had an initial hp of `^%s`2 and just before you died she had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:´b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
 	}
 	$mailmessage = [
         $msg,
@@ -217,7 +217,7 @@ function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
 	$session['user']['gold'] = 0;
 	$session['user']['hitpoints'] = 0;
 	$session['user']['experience'] = round($session['user']['experience'] * (100-getsetting('pvpattlose', 15))/100,0);
-	$lotgdBattleContent['battleend'][] = ['`b`&You have been slain by `%%s`&!!!`n', $badguy['creaturename']];
+	$lotgdBattleContent['battleend'][] = ['`b`&You have been slain by `%%s`&!!!´b`n', $badguy['creaturename']];
 	$lotgdBattleContent['battleend'][] = '`4All gold on hand has been lost!`n';
 	$lotgdBattleContent['battleend'][] = ['`4%s%% of experience has been lost!`n', getsetting('pvpattlose', 15)];
     $lotgdBattleContent['battleend'][] = 'You may begin fighting again tomorrow.';

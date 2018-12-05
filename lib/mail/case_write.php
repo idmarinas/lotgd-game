@@ -68,7 +68,7 @@ if (is_array($row))
 
         if (0 == (int) $row['msgfrom'])
         {
-            $row['name'] = translate_inline('`i`^System`0`i');
+            $row['name'] = translate_inline('`i`^System`0´i');
             // No translation for subject if it's not an array
             $row_subject = @unserialize($row['subject']);
 
@@ -184,7 +184,7 @@ rawoutput("</script><div class='inline field'><label>");
 output('`2Subject:');
 rawoutput("</label><input name='subject' value=\"".htmlentities($subject, ENT_COMPAT, getsetting('charset', 'UTF-8')).htmlentities(stripslashes(httpget('subject')), ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></div>');
 rawoutput("<div id='warning' style='visibility: hidden; display: none;' class='ui warning message'>");
-output('`bNotice:`b %s', $superusermessage);
+output('`bNotice:´b %s', $superusermessage);
 rawoutput("</div><div class='inline field'><label>");
 output('`2Body:');
 rawoutput('</label><span id="sizemsg"></span>');

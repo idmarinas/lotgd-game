@@ -4,7 +4,7 @@ tlschema('faq');
 popup_header('Specific and Technical Questions');
 $c = translate_inline('Return to Contents');
 rawoutput("<a href='petition.php?op=faq'>$c</a><hr>");
-output('`n`n`c`bSpecific and technical questions`b´c`n');
+output('`n`n`c`bSpecific and technical questions´b´c`n');
 output('`^1.a. How can I have been killed by another player while I was currently playing?`n');
 output('`@The biggest cause of this is someone who began attacking you while you were offline, and completed the fight while you were online.');
 output('This can even happen if you have been playing nonstop for the last hour.');
@@ -22,7 +22,7 @@ output('`@Cookies are little bits of data that websites store on your computer s
 output('Sometimes if you have a firewall it will block cookies, and some web browsers will let you block cookies.');
 output('Check the documentation for your browser or firewall, or look around in its preferences for settings to modify whether or not you accept cookies.');
 output('You need to at least accept session cookies to play the game, though all cookies are better.`n`n');
-output('`^3. What do`n&nbsp;&nbsp;`iWarning: mysql_pconnect(): Lost connection to MySQL server during query in /home/lotgd/public_html/dbwrapper.php on line 82`i`nand`n&nbsp;&nbsp;`iWarning: mysql_error(): supplied argument is not a valid MySQL-Link resource in /home/lotgd/public_html/dbwrapper.php on line 54`i`nmean?`n', true);
+output('`^3. What do`n&nbsp;&nbsp;`iWarning: mysql_pconnect(): Lost connection to MySQL server during query in /home/lotgd/public_html/dbwrapper.php on line 82´i`nand`n&nbsp;&nbsp;`iWarning: mysql_error(): supplied argument is not a valid MySQL-Link resource in /home/lotgd/public_html/dbwrapper.php on line 54´i`nmean?`n', true);
 output("`@It's a secret message from your computer telling you to stop staring at a screen and to go play outside.`n");
 output("Actually, it's a common temporary error, usually having to do with server load.");
 output("Don't worry about it, just reload the page (it may take a few tries).`n`n");

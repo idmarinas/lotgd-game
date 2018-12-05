@@ -18,12 +18,12 @@ addcommentary();
 $statuses = [
     5 => '`$Top Level`0',
     4 => '`^Escalated`0',
-    0 => '`bUnhandled`b',
+    0 => '`bUnhandled´b',
     1 => 'In-Progress',
     6 => '`%Bug`0',
     7 => '`#Awaiting Points`0',
     3 => '`!Informational`0',
-    2 => '`iClosed`i',
+    2 => '`iClosed´i',
 ];
 
 $statuses = modulehook('petition-status', $statuses);
@@ -126,7 +126,7 @@ if ('' == $op)
         {
             if ($page == $x)
             {
-                addnav(['`b`#Page %s`0`b', $x], "viewpetition.php?page=$x");
+                addnav(['`b`#Page %s`0´b', $x], "viewpetition.php?page=$x");
             }
             else
             {
@@ -214,23 +214,15 @@ if ('' == $op)
         rawoutput("<a data-tooltip='$view' href='viewpetition.php?op=view&id={$row['petitionid']}'><i class='unhide icon'></i></a>", true);
         rawoutput(" | <a data-tooltip='$close' href='viewpetition.php?setstat=2&id={$row['petitionid']}'><i class='green remove icon'></i></a>");
         output_notl(' | %s: ', $mark);
-        output_notl("<a data-tooltip='".color_sanitize($statuses[0])."' href='viewpetition.php?setstat=0&id={$row['petitionid']}'>`b`&U`0`b</a>/", true);
+        output_notl("<a data-tooltip='".color_sanitize($statuses[0])."' href='viewpetition.php?setstat=0&id={$row['petitionid']}'>`b`&U`0´b</a>/", true);
         output_notl("<a data-tooltip='".color_sanitize($statuses[1])."' href='viewpetition.php?setstat=1&id={$row['petitionid']}'>`7P`0</a>/", true);
-        //output_notl("<a data-tooltip='".color_sanitize($statuses[3])."' href='viewpetition.php?setstat=3&id={$row['petitionid']}'>`!I`0</a>/",true);
         output_notl("<a data-tooltip='".color_sanitize($statuses[4])."' href='viewpetition.php?setstat=4&id={$row['petitionid']}'>`^E`0</a>", true);
-        //output_notl("<a data-tooltip='".color_sanitize($statuses[5])."' href='viewpetition.php?setstat=5&id={$row['petitionid']}'>`\$T`0</a>/",true);
-        //output_notl("<a data-tooltip='".color_sanitize($statuses[6])."' href='viewpetition.php?setstat=6&id={$row['petitionid']}'>`%B`0</a>/",true);
-        //output_notl("<a data-tooltip='".color_sanitize($statuses[7])."' href='viewpetition.php?setstat=7&id={$row['petitionid']}'>`#A`0</a>",true);
         rawoutput(' ]</td>');
         addnav('', "viewpetition.php?op=view&id={$row['petitionid']}");
         addnav('', "viewpetition.php?setstat=2&id={$row['petitionid']}");
         addnav('', "viewpetition.php?setstat=0&id={$row['petitionid']}");
         addnav('', "viewpetition.php?setstat=1&id={$row['petitionid']}");
-        //addnav("","viewpetition.php?setstat=3&id={$row['petitionid']}");
         addnav('', "viewpetition.php?setstat=4&id={$row['petitionid']}");
-        //addnav("","viewpetition.php?setstat=5&id={$row['petitionid']}");
-        //addnav("","viewpetition.php?setstat=6&id={$row['petitionid']}");
-        //addnav("","viewpetition.php?setstat=7&id={$row['petitionid']}");
         rawoutput('<td>');
 
         if ('' == $row['name'])
@@ -277,15 +269,15 @@ if ('' == $op)
         addnav(['`t%s`t(%s)', $statuses[$categorynumber], $amount], 'viewpetition.php?page='.((int) httpget('page')));
     }
 
-    output('`i(Closed petitions will automatically delete themselves when they have been closed for 7 days)`i');
-    output('`n`bKey:`b`n');
+    output('`i(Closed petitions will automatically delete themselves when they have been closed for 7 days)´i');
+    output('`n`bKey:´b`n');
     rawoutput('<ul><li>');
     output('`$T = Top Level`0 petitions are for petitions that only server operators can take care of.');
     rawoutput('</li><li>');
     output("`^E = Escalated`0 petitions deal with an issue you can't handle for yourself.");
     output('Mark it escalated so someone with more permissions than you can deal with it.');
     rawoutput('</li><li>');
-    output('`b`&U = Unhandled`0`b: No one is currently working on this problem, and it has not been dealt with yet.');
+    output('`b`&U = Unhandled`0´b: No one is currently working on this problem, and it has not been dealt with yet.');
     rawoutput('</li><li>');
     output('P = In-Progress petitions are probably being worked on by someone else, so please leave them be unless they have been around for some time.');
     rawoutput('</li><li>');
@@ -295,7 +287,7 @@ if ('' == $op)
     rawoutput('</li><li>');
     output('`!I = Informational`0 petitions are just around for others to view, either nothing needed to be done with them, or their issue has been dealt with, but you feel other admins could benefit from reading it.');
     rawoutput('</li><li>');
-    output('`iClosed`i petitions are for you have dealt with an issue, these will auto delete when they have been closed for 7 days.');
+    output('`iClosed´i petitions are for you have dealt with an issue, these will auto delete when they have been closed for 7 days.');
     modulehook('petitions-descriptions', []);
     rawoutput('</li></ul>');
 }
@@ -382,8 +374,8 @@ elseif ('view' == $op)
     {
         rawoutput('<a href="mail.php?op=write&to='.rawurlencode($row['login']).'&body='.rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"Lotgd.embed(this)\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>");
     }
-    output_notl('`^`b%s`b`n', $row['name']);
-    output('`@Date: `^`b%s`b (%s)`n', $row['date'], reltime(strtotime($row['date'])));
+    output_notl('`^`b%s´b`n', $row['name']);
+    output('`@Date: `^`b%s´b (%s)`n', $row['date'], reltime(strtotime($row['date'])));
     output('`@Status: %s`n', $statuses[$row['status']]);
 
     if ($row['closedate'])

@@ -44,7 +44,7 @@ addnav('Describe Points', 'lodge.php?op=points');
 
 if ('' == $op)
 {
-    output("`b`c`!The Hunter's Lodge`0´c`b");
+    output("`b`c`!The Hunter's Lodge`0´c´b");
     output("`7You follow a narrow path away from the stables and come across a rustic Hunter's Lodge.");
     output('A guard stops you at the door and asks to see your membership card.`n`n');
 
@@ -72,7 +72,7 @@ if ('' == $op)
 }
 elseif ('points' == $op)
 {
-    output('`b`3Points:`b`n`n');
+    output('`b`3Points:´b`n`n');
     $points_messages = modulehook(
         'donator_point_messages',
         [
@@ -102,7 +102,7 @@ elseif ('points' == $op)
     }
     output('You can also gain contributor points for contributing in other ways that the administration may specify.');
     output("So, don't despair if you cannot send cash, there will always be non-cash ways of gaining contributor points.`n`n");
-    output('`b`3Purchases that are currently available:`0`b`n');
+    output('`b`3Purchases that are currently available:`0´b`n');
     $args = modulehook('pointsdesc', ['format' => '`#&#149;`7 %s`n', 'count' => 0]);
 
     if (0 == $args['count'])

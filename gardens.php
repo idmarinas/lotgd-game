@@ -45,7 +45,7 @@ if (! $skipgardendesc)
 {
     checkday();
 
-    output('`b`c`2The Gardens`0´c`b');
+    output('`b`c`2The Gardens`0´c´b');
 
     output('`n`nYou walk through a gate and on to one of the many winding paths that makes its way through the well-tended gardens.');
     output('From the flowerbeds that bloom even in darkest winter, to the hedges whose shadows promise forbidden secrets, these gardens provide a refuge for those seeking out the Green Dragon; a place where they can forget their troubles for a while and just relax.`n`n');

@@ -87,7 +87,7 @@ if ($totalplayers > $playersperpage)
 
         if ($page == $pnum)
         {
-            addnav(['`b`#Page %s`0 (%s-%s)`b', $pnum, $min, $max], "hof.php?op=$op&subop=$subop&page=$pnum");
+            addnav(['`b`#Page %s`0 (%s-%s)´b', $pnum, $min, $max], "hof.php?op=$op&subop=$subop&page=$pnum");
         }
         else
         {
@@ -300,21 +300,21 @@ function display_table($title, $sql, $none = false, $foot = false, $data_header 
 
     if ($totalplayers > $playersperpage)
     {
-        output('`c`b`^%s`0`b `7(Page %s: %s-%s of %s)`0´c`n', $title, $page, $from, $to, $totalplayers);
+        output('`c`b`^%s`0´b `7(Page %s: %s-%s of %s)`0´c`n', $title, $page, $from, $to, $totalplayers);
     }
     else
     {
-        output_notl('`c`b`^%s`0`b´c`n', $title);
+        output_notl('`c`b`^%s`0´b´c`n', $title);
     }
     rawoutput('<table class="ui very compact striped selectable table">');
     rawoutput('<thead><tr>');
-    output_notl("<th>`b$rank`b</th><th>`b$name`b</th>", true);
+    output_notl("<th>`b{$rank}´b</th><th>`b{$name}´b</th>", true);
 
     if (false !== $data_header)
     {
         for ($i = 0; $i < count($data_header); $i++)
         {
-            output_notl("<th>`b{$data_header[$i]}`b</th>", true);
+            output_notl("<th>`b{$data_header[$i]}´b</th>", true);
         }
     }
     rawoutput('</tr></thead>');

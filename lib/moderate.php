@@ -79,12 +79,12 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
     if ($doublepost)
     {
-        output('`$`bDouble post?`b`0`n');
+        output('`$`bDouble post?´b`0`n');
     }
 
     if ($emptypost)
     {
-        output('`$`bWell, they say silence is a virtue.`b`0`n');
+        output('`$`bWell, they say silence is a virtue.´b`0`n');
     }
 
     $clanrankcolors = ['`!', '`#', '`^', '`&', '`$'];
@@ -432,7 +432,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
             {
                 modulehook('}collapse');
             }
-            output_notl("`n<hr><a href='moderate.php?area=%s'>`b`^%s`0`b</a>`n",
+            output_notl("`n<hr><a href='moderate.php?area=%s'>`b`^%s`0´b</a>`n",
                 $sec, isset($sections[$sec]) ? $sections[$sec] : "($sec)", true);
             addnav('', "moderate.php?area=$sec");
             modulehook('collapse{', ['name' => 'com-'.$sec]);

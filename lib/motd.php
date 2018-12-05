@@ -168,7 +168,7 @@ function motd_form($id)
         {
             $msg = $add;
         }
-        output_notl('`b%s`b', $msg);
+        output_notl('`b%s´b', $msg);
         rawoutput("[ <a href='motd.php'>$ret</a> ]<br>");
 
         rawoutput("<form action='motd.php?op=add&id={$row['motditem']}' method='POST' class='ui form'>");

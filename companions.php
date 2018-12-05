@@ -276,7 +276,7 @@ elseif ('edit' == $op)
 
     if (DB::num_rows($result) <= 0)
     {
-        output('`iThis companion was not found.`i');
+        output('`iThis companion was not found.´i');
     }
     else
     {
@@ -504,7 +504,7 @@ function companionform($companion)
     }
     rawoutput('</select></td></tr>');
     rawoutput("<tr><td colspan='2'>");
-    output('`iThis value determines the maximum amount of HP healed per round`i');
+    output('`iThis value determines the maximum amount of HP healed per round´i');
     rawoutput('</td></tr>');
     rawoutput('<tr><td nowrap>');
     output('Magician?:');
@@ -516,7 +516,7 @@ function companionform($companion)
     }
     rawoutput('</select></td></tr>');
     rawoutput("<tr><td colspan='2'>");
-    output('`iThis value determines the maximum amount of damage caused per round`i');
+    output('`iThis value determines the maximum amount of damage caused per round´i');
     rawoutput('</td></tr>');
 
     rawoutput('<tr><td nowrap>');

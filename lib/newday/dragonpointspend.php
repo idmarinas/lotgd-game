@@ -85,7 +85,7 @@ if ($dkills - $dp > 1)
         if (count($head) > 1)
         {
             rawoutput("<tr><td colspan='2' nowrap>");
-            output('`b`4%s`0`b`n', translate_inline($head[0])); //got a headline here
+            output('`b`4%s`0´b`n', translate_inline($head[0])); //got a headline here
             rawoutput('</td></tr>');
             continue;
         }
@@ -182,7 +182,7 @@ else
         if (count($head) > 1)
         {
             rawoutput("<tr><td colspan='2' class='center aligned'>");
-            output('`b`4%s`0`b`n', translate_inline($head[0])); //got a headline here
+            output('`b`4%s`0´b`n', translate_inline($head[0])); //got a headline here
             rawoutput('</td></tr>');
             continue;
         }

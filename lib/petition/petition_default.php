@@ -88,14 +88,14 @@ if (count($post) > 0)
     }
     else
     {
-        output('`$`bError:`b There have already been %s petitions filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.', $row['c']);
+        output('`$`bError:´b There have already been %s petitions filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.', $row['c']);
         output('If you have multiple issues to bring up with the staff of this server, you might think about consolidating those issues to reduce the overall number of petitions you file.');
     }
 }
 else
 {
     output('`c`b`$Before sending a petition, please make sure you have read the motd.`n');
-    output('Petitions about problems we already know about just take up time we could be using to fix those problems.`b´c`n');
+    output('Petitions about problems we already know about just take up time we could be using to fix those problems.´b´c`n');
     rawoutput("<form action='petition.php?op=submit' method='POST' class='ui form'>");
 
     if ($session['user']['loggedin'])
