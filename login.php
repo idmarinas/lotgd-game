@@ -25,19 +25,19 @@ if ('' != $name)
     }
 
     $password = stripslashes((string) httppost('password'));
-    $password = md5(md5($password));
 
     if ('!md5!' == substr($password, 0, 5))
     {
         $password = md5(substr($password, 5));
     }
-    elseif ('!md52!' == substr($password, 0, 6) && 38 == strlen($password))
+    elseif ('!md52!' == substr($password, 0, 6) && 38 == strlen($password) && $force)
     {
-        if ($force)
-        {
-            $password = substr($password, 6);
-            $password = preg_replace('/[^a-f0-9]/', '', $password);
-        }
+        $password = substr($password, 6);
+        $password = preg_replace('/[^a-f0-9]/', '', $password);
+    }
+    else
+    {
+        $password = md5(md5($password));
     }
 
     checkban(); //check if this computer is banned
