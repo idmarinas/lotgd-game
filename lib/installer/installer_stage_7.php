@@ -4,15 +4,12 @@ $sql_upgrade_statements = include_once 'lib/installer/installer_sqlstatements.ph
 
 if (httppost('type') > '')
 {
+    $session['fromversion'] = httppost('version');
+    $session['dbinfo']['upgrade'] = true;
     if ('install' == httppost('type'))
     {
         $session['fromversion'] = '-1';
         $session['dbinfo']['upgrade'] = false;
-    }
-    else
-    {
-        $session['fromversion'] = httppost('version');
-        $session['dbinfo']['upgrade'] = true;
     }
 }
 
@@ -26,13 +23,10 @@ if (! isset($session['fromversion']) || '' == $session['fromversion'])
     rawoutput('</td><td>');
     $version = getsetting('installer_version', '-1');
 
+    $session['dbinfo']['upgrade'] = false;
     if ('-1' != $version)
     {
         $session['dbinfo']['upgrade'] = true;
-    }
-    else
-    {
-        $session['dbinfo']['upgrade'] = false;
     }
     rawoutput("<input type='radio' value='upgrade' name='type' ".($session['dbinfo']['upgrade'] ? 'checked' : '').'>');
     output(' `2Perform an upgrade from ');

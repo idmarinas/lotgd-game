@@ -7,6 +7,7 @@ output('`n`&This game is a small project into which we have invested a tremendou
 output("Please understand that if you modify our copyright, or otherwise violate the license, you are not only breaking international copyright law (which includes penalties which are defined in whichever country you live), but you're also defeating the spirit of open source, and ruining any good faith which we have demonstrated by providing our blood, sweat, and tears to you free of charge.  You should also know that by breaking the license even one time, it is within our rights to require you to permanently cease running LoGD forever.`n");
 output('`nPlease note that in order to use the installer, you must have cookies enabled in your browser.`n');
 
+$needsauthentication = false;
 if (DB_CHOSEN)
 {
     $sql = 'SELECT count(*) AS c FROM accounts WHERE superuser & '.SU_MEGAUSER;
@@ -73,19 +74,12 @@ if (DB_CHOSEN)
         $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
 
+        $needsauthentication = false;
         if ($row['c'] > 0)
         {
             $needsauthentication = true;
         }
-        else
-        {
-            $needsauthentication = false;
-        }
     }
-}
-else
-{
-    $needsauthentication = false;
 }
 //if a user with appropriate privs is already logged in, let's let them past.
 if ($session['user']['superuser'] & SU_MEGAUSER)

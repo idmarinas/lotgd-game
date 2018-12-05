@@ -54,14 +54,11 @@ foreach ($tableNames as $key => $val)
 
 $missing = count($descriptors) - $game;
 
+$upgrade = false;
 if ($missing * 10 < $game)
 {
     $upgrade = true;
 } //looks like an upgrade
-else
-{
-    $upgrade = false;
-}
 
 if ('install' == httpget('type'))
 {
