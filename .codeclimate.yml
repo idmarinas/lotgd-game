@@ -103,6 +103,8 @@ plugins:
                 enabled: false
             Squiz ControlStructures ControlSignature SpaceAfterCloseBrace:
                 enabled: false
+            Squiz ControlStructures ControlSignature SpaceAfterKeyword:
+                enabled: false
     phan:
         enabled: false
         config:

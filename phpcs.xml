@@ -16,6 +16,13 @@
         <properties>
             <property name="lineLimit" value="130" />
             <property name="absoluteLineLimit" value="150" />
+            <property name="ignoreComments" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="Generic.ControlStructures.InlineControlStructure">
+        <properties>
+            <property name="error" value="false" />
         </properties>
     </rule>
 
