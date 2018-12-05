@@ -18,7 +18,7 @@ function previewfield($name, $startdiv = false, $talkline = 'says', $showcharsle
 
     if (! is_array($switchscript))
     {
-        $switchscript = '<script>Lotgd.set("colors", "'.addslashes(json_encode($output->get_colors())).'");</script>';
+        $switchscript = '<script>Lotgd.set("colors", "'.addslashes(json_encode($output->getColors())).'");</script>';
 
         updatedatacache('switchscript_comm'.rawurlencode($name), $switchscript);
     }
