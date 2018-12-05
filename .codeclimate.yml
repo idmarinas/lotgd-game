@@ -94,7 +94,7 @@ plugins:
         config:
             file_extensions: "php"
             standard: "PSR2"
-            # file: "phpcs.xml"
+            file: "phpcs.xml"
     phan:
         enabled: false
         config:
