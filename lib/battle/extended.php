@@ -19,38 +19,25 @@ function prepare_data_battlebars(array $enemies)
     $user = &$session['user']; //fast and better
     $data = [];
 
-    if (isset($user['prefs']['forestcreaturebar']))
-    {
-        $barDisplay = (int) $user['prefs']['forestcreaturebar'];
-    }
-    else
-    {
-        $barDisplay = (int) getsetting('forestcreaturebar', 0); //get default
-        $user['prefs']['forestcreaturebar'] = $barDisplay;
-    }
+    $barDisplay = (int) ($user['prefs']['forestcreaturebar'] ?? getsetting('forestcreaturebar', 0));
+    $user['prefs']['forestcreaturebar'] = $barDisplay;
 
+    $hitpointstext = 'Soulpoints';
+    $healthtext = '`)Soul`0';
     if ($user['alive'])
     {
         $hitpointstext = 'Hitpoints';
         $healthtext = '`^Health`0';
-    }
-    else
-    {
-        $hitpointstext = 'Soulpoints';
-        $healthtext = '`)Soul`0';
     }
 
     $data['enemies'] = [];
     //-- Prepare data for enemies
     foreach ($enemies as $index => $badguy)
     {
+        $ccode = '`2';
         if ((isset($badguy['istarget']) && true == $badguy['istarget']) && $enemycounter > 1)
         {
             $ccode = '`#';
-        }
-        else
-        {
-            $ccode = '`2';
         }
 
         if (isset($badguy['hidehitpoints']) && true == $badguy['hidehitpoints'])
@@ -179,7 +166,7 @@ function prepare_data_battlebars(array $enemies)
  *
  * @return array the complete options
  */
-function prepare_fight($options = false)
+function prepare_fight($options = [])
 {
     global $companions;
 
@@ -230,9 +217,9 @@ function prepare_companions()
  * Suspends companions on a given parameter.
  *
  * @param string $susp  The type of suspension
- * @param mixed  $nomsg The message to be displayed upon suspending. If false, no message will be displayed.
+ * @param string $nomsg The message to be displayed upon suspending. If false, no message will be displayed.
  */
-function suspend_companions($susp, $nomsg = false)
+function suspend_companions($susp, $nomsg = null)
 {
     global $companions, $countround, $lotgdBattleContent;
 
@@ -261,12 +248,12 @@ function suspend_companions($susp, $nomsg = false)
 
     if ($suspended)
     {
-        if (false === $nomsg)
+        if (false === $nomsg || null === $nomsg)
         {
             $nomsg = '`&Your companions stand back during this fight!`n';
         }
 
-        if (true !== $nomsg)
+        if ($nomsg)
         {
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg;
         }
@@ -279,9 +266,9 @@ function suspend_companions($susp, $nomsg = false)
  * Enables suspended companions.
  *
  * @param string $susp  The type of suspension
- * @param mixed  $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
+ * @param string  $nomsg The message to be displayed upon unsuspending. If false, no message will be displayed.
  */
-function unsuspend_companions($susp, $nomsg = false)
+function unsuspend_companions($susp, $nomsg = null)
 {
     global $companions, $countround, $lotgdBattleContent;
 
@@ -302,14 +289,14 @@ function unsuspend_companions($susp, $nomsg = false)
         }
     }
 
-    if ($notify)
+    if ($notify && false !== $nomsg)
     {
-        if (false === $nomsg)
+        if (null === $nomsg || false === $nomsg)
         {
             $nomsg = '`&Your companions return to stand by your side!`n';
         }
 
-        if (true !== $nomsg)
+        if ($nomsg)
         {
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $nomsg;
         }
@@ -386,7 +373,7 @@ function report_companion_move($companion, $activate = 'fight')
         return $companion;
     }
 
-    if ('fight' == $activate && isset($companion['abilities']['fight']) && true == $companion['abilities']['fight'] && false == $companion['used'])
+    if ('fight' == $activate && (bool) ($companion['abilities']['fight'] ?? false) && false == $companion['used'])
     {
         $roll = rollcompaniondamage($companion);
 
@@ -693,15 +680,14 @@ function rollcompaniondamage($companion)
     global $badguy,$creatureattack, $creatureatkmod,$adjustment,$options;
     global $creaturedefmod,$compdefmod,$compatkmod,$buffset,$atk,$def;
 
+    $creaturedmg = 0;
+    $selfdmg = 0;
     if ($badguy['creaturehealth'] > 0 && $companion['hitpoints'] > 0)
     {
+        $adjustedcreaturedefense = ($creaturedefmod * $badguy['creaturedefense'] / ($adjustment * $adjustment));
         if ('pvp' == $options['type'])
         {
             $adjustedcreaturedefense = $badguy['creaturedefense'];
-        }
-        else
-        {
-            $adjustedcreaturedefense = ($creaturedefmod * $badguy['creaturedefense'] / ($adjustment * $adjustment));
         }
 
         $creatureattack = $badguy['creatureattack'] * $creatureatkmod;
@@ -772,11 +758,6 @@ function rollcompaniondamage($companion)
                 $selfdmg = round($selfdmg * $buffset['badguydmgmod'], 0);
             }
         }
-    }
-    else
-    {
-        $creaturedmg = 0;
-        $selfdmg = 0;
     }
 
     // Handle god mode's invulnerability
