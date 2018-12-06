@@ -132,9 +132,10 @@ function pollitem($id, $subject, $body, $author, $date, $showpoll = true)
 function motd_form($id)
 {
     global $session;
-    $subject = httppost('subject');
-    $body = httppost('body');
-    $preview = httppost('preview');
+
+    $subject = (string) httppost('subject');
+    $body = (string) httppost('body');
+    $preview = (string) httppost('preview');
 
     if ('' == $subject || '' == $body || $preview > '')
     {
@@ -149,24 +150,18 @@ function motd_form($id)
             'motdbody' => '',
         ];
 
+        $msg = $add;
         if ($id > '')
         {
             $sql = 'SELECT '.DB::prefix('motd').'.*,name AS motdauthorname FROM '.DB::prefix('motd').' LEFT JOIN '.DB::prefix('accounts').' ON '.DB::prefix('accounts').'.acctid = '.DB::prefix('motd').".motdauthor WHERE motditem='$id'";
             $result = DB::query($sql);
 
+            $msg = $add;
             if (DB::num_rows($result) > 0)
             {
                 $row = DB::fetch_assoc($result);
                 $msg = $edit;
             }
-            else
-            {
-                $msg = $add;
-            }
-        }
-        else
-        {
-            $msg = $add;
         }
         output_notl('`b%s´b', $msg);
         rawoutput("[ <a href='motd.php'>$ret</a> ]<br>");
@@ -176,19 +171,11 @@ function motd_form($id)
 
         if ($row['motdauthorname'] > '')
         {
-            output('Originally by `@%s`0 on %s`n', $row['motdauthorname'],
-                    $row['motddate']);
+            output('Originally by `@%s`0 on %s`n', $row['motdauthorname'], $row['motddate']);
         }
 
-        if ($subject > '')
-        {
-            $row['motdtitle'] = stripslashes($subject);
-        }
-
-        if ($body > '')
-        {
-            $row['motdbody'] = stripslashes($body);
-        }
+        $row['motdtitle'] = stripslashes($subject);
+        $row['motdbody'] = stripslashes($body);
 
         if ($preview > '')
         {
@@ -225,69 +212,63 @@ function motd_form($id)
         $prev = translate_inline('Preview');
         $sub = translate_inline('Submit');
         rawoutput("<input type='submit' class='ui button' name='preview' value='$prev'> <input type='submit' class='ui button' value='$sub'></form>");
+
+        return;
     }
-    else
+
+    if ($id > '')
     {
+        $sql = " SET motdtitle='$subject', motdbody='$body'";
+
+        if (httppost('changeauthor'))
+        {
+            $sql .= ", motdauthor={$session['user']['acctid']}";
+        }
+
+        if (httppost('changedate'))
+        {
+            $sql .= ", motddate='".date('Y-m-d H:i:s')."'";
+        }
+        $sql = 'UPDATE '.DB::prefix('motd').$sql." WHERE motditem='$id'";
+        DB::query($sql);
+        invalidatedatacache('motd');
+        invalidatedatacache('lastmotd');
+        invalidatedatacache('motddate');
+    }
+
+    if ('' == $id || 0 == DB::affected_rows())
+    {
+        $doinsert = true;
         if ($id > '')
         {
-            $sql = " SET motdtitle='$subject', motdbody='$body'";
+            $sql = 'SELECT * FROM '.DB::prefix('motd')." WHERE motditem='$id'";
+            $result = DB::query($sql);
 
-            if (httppost('changeauthor'))
+            $doinsert = true;
+            if (DB::num_rows($result) > 0)
             {
-                $sql .= ", motdauthor={$session['user']['acctid']}";
+                $doinsert = false;
             }
+        }
 
-            if (httppost('changedate'))
-            {
-                $sql .= ", motddate='".date('Y-m-d H:i:s')."'";
-            }
-            $sql = 'UPDATE '.DB::prefix('motd').$sql." WHERE motditem='$id'";
-            DB::query($sql);
+        if ($doinsert)
+        {
+            $insert = DB::insert('motd');
+            $insert->values([
+                'motdtitle' => $subject,
+                'motdbody' => $body,
+                'motddate' => date('Y-m-d H:i:s'),
+                'motdauthor' => $session['user']['acctid']
+            ]);
+            DB::execute($insert);
             invalidatedatacache('motd');
             invalidatedatacache('lastmotd');
             invalidatedatacache('motddate');
         }
-
-        if ('' == $id || 0 == DB::affected_rows())
-        {
-            if ($id > '')
-            {
-                $sql = 'SELECT * FROM '.DB::prefix('motd')." WHERE motditem='$id'";
-                $result = DB::query($sql);
-
-                if (DB::num_rows($result) > 0)
-                {
-                    $doinsert = false;
-                }
-                else
-                {
-                    $doinsert = true;
-                }
-            }
-            else
-            {
-                $doinsert = true;
-            }
-
-            if ($doinsert)
-            {
-                $insert = DB::insert('motd');
-                $insert->values([
-                    'motdtitle' => $subject,
-                    'motdbody' => $body,
-                    'motddate' => date('Y-m-d H:i:s'),
-                    'motdauthor' => $session['user']['acctid']
-                ]);
-                DB::execute($insert);
-                invalidatedatacache('motd');
-                invalidatedatacache('lastmotd');
-                invalidatedatacache('motddate');
-            }
-        }
-        header('Location: motd.php');
-
-        exit();
     }
+    header('Location: motd.php');
+
+    exit();
 }
 
 function motd_poll_form()

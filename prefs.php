@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Http;
+
 // addnews ready
 // mail ready
 // translator ready
@@ -92,6 +94,8 @@ else
 {
     checkday();
 
+    $reqeust = \LotgdLocator::get(\Lotgd\Core\Http::class);
+
     if ($session['user']['alive'])
     {
         villagenav();
@@ -108,10 +112,7 @@ else
     unset($post['oldvalues']);
     unset($post['showFormTabIndex']);
 
-    if (0 == count($post))
-    {
-    }
-    else
+    if (count($post))
     {
         $pass1 = httppost('pass1');
         $pass2 = httppost('pass2');
@@ -220,18 +221,9 @@ else
                         $subj = translate_mail('LoGD Account Verification', 0);
                         $shortname = $session['user']['login'];
 
-                        if (443 == $_SERVER['SERVER_PORT'])
-                        {
-                            //assume SSL
-                            $serveraddress = sprintf('http://%s?op=val&id=%s', $_SERVER['SERVER_NAME'].'/create.php', $emailverification);
-                            $serverurl = sprintf('http://%s', $_SERVER['SERVER_NAME']);
-                        }
-                        else
-                        {
-                            //assume non-SSL
-                            $serveraddress = sprintf('http://%s?op=val&id=%s', $_SERVER['SERVER_NAME'].'/create.php', $emailverification);
-                            $serverurl = sprintf('http://%s', $_SERVER['SERVER_NAME']);
-                        }
+                        //-- Use "protocol-less" URLs
+                        $serveraddress = sprintf('//%s?op=val&id=%s', $request->getServer('SERVER_NAME').'/create.php', $emailverification);
+                        $serverurl = sprintf('//%s', $request->getServer('SERVER_NAME'));
 
                         $msg = translate_mail(['An email change has been requested to this email account.`n`nLogin name: %s `n`n', $shortname]);
                         $confirm = translate_mail(['In order to confirm it, you will need to click on the link below.`n`n %s`n`nNote: You need to be LOGGED OUT of the game to do so. If you are logged in while clicking, log out and try again.`n`n', $serveraddress, $emailverification], 0);
@@ -240,13 +232,10 @@ else
                         $newvalidationsent = translate_mail(['The validation will be sent to the new account.`nIf you did NOT request this, somebody with your password got in and requested the change. Go in with your password immediately and change it back. Alter your password, too.`n`n', $shortname, 0]);
                         $oldvalidationsent = translate_mail(['No validation will be sent to the new account, so if you did NOT request this, rest assured, you got this message, not them.`n`n']);
 
+                        $changetimeoutwarning = '';
                         if (getsetting('playerchangeemailauto', 0))
                         {
                             $changetimeoutwarning = translate_mail(['Note that if there is no response from this email address the request will automatically be accepted in about %s days.`n`nThis request can be cancelled anytime in your preferences in the game.`n`n', getsetting('playerchangeemaildays', 3)]);
-                        }
-                        else
-                        {
-                            $changetimeoutwarning = '';
                         }
                         $footer = $changetimeoutwarning.translate_mail(['`n`nThanks for playing!`n`n%s', $serverurl]);
 
@@ -278,12 +267,9 @@ else
                                 output('`$If you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.`n`n');
                             }
                         }
-                        else
+                        elseif (0 == getsetting('validationtarget', 0))
                         {
-                            if (0 == getsetting('validationtarget', 0))
-                            {
-                                output('`$If your old account does not exist anymore or you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.`n`n');
-                            }
+                            output('`$If your old account does not exist anymore or you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.`n`n');
                         }
                     }
                     else
@@ -385,7 +371,7 @@ else
 
     $prefs = &$session['user']['prefs'];
     $prefs['bio'] = $session['user']['bio'];
-    $prefs['template'] = isset($_COOKIE['template']) ?: '';
+    $prefs['template'] = $_COOKIE['template'] ?? '';
 
     if ('' == $prefs['template'])
     {
@@ -457,17 +443,9 @@ else
             {
                 $x[0] = call_user_func_array('sprintf', $x[0]);
             }
-            //$type = split(",", $x[0]);
-            $type = explode(',', $x[0]);
 
-            if (isset($type[1]))
-            {
-                $type = trim($type[1]);
-            }
-            else
-            {
-                $type = 'string';
-            }
+            $type = explode(',', $x[0]);
+            $type = trim($type[1] ?? 'string');
 
             // Okay, if we have a title section, let's copy over the last
             // title section
@@ -484,8 +462,7 @@ else
                 $tempdata = [];
             }
 
-            if (! $isuser && ! $ischeck && ! strstr($type, 'title') &&
-                    ! strstr($type, 'note'))
+            if (! $isuser && ! $ischeck && ! strstr($type, 'title') && ! strstr($type, 'note'))
             {
                 continue;
             }
@@ -498,9 +475,7 @@ else
             // checkuserpref  (requested by cortalUX)
             if ($ischeck)
             {
-                $args = modulehook('checkuserpref',
-                        ['name' => $key, 'pref' => $x[0], 'default' => $x[1]],
-                        false, $module);
+                $args = modulehook('checkuserpref', ['name' => $key, 'pref' => $x[0], 'default' => $x[1]], false, $module);
 
                 if (isset($args['allow']) && ! $args['allow'])
                 {
@@ -534,17 +509,25 @@ else
         }
     }
 
-    if ($foundmodules != [])
+    if (count($foundmodules))
     {
-        $sql = 'SELECT * FROM '.DB::prefix('module_userprefs')." WHERE modulename IN ('".implode("','", $foundmodules)."') AND (setting LIKE 'user_%' OR setting LIKE 'check_%') AND userid='".$session['user']['acctid']."'";
-        $result1 = DB::query($sql);
+        $select = DB::select('module_userprefs');
+        $select->where->in('modulename', $foundmodules)
+            ->nest()
+            ->like('setting', 'user_%')
+            ->or
+            ->like('setting', 'check_%')
+            ->unnest()
+            ->equalTo('userid', $session['user']['acctid'])
+        ;
+        $result1 = DB::execute($select);
 
         while ($row1 = DB::fetch_assoc($result1))
         {
             $mdata[$row1['modulename'].'___'.$row1['setting']] = $row1['value'];
         }
     }
-    addnav('View Bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode($_SERVER['REQUEST_URI']));
+    addnav('View Bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode($request->getServer('REQUEST_URI')));
 
     $form = array_merge($form, $msettings);
     $prefs = array_merge($prefs, $mdata);

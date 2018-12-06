@@ -5,6 +5,7 @@
 // mail ready
 define('ALLOW_ANONYMOUS', true);
 define('OVERRIDE_FORCED_NAV', true);
+
 require_once 'common.php';
 require_once 'lib/commentary.php';
 require_once 'lib/nltoappon.php';
@@ -92,29 +93,14 @@ if ('' == $op)
     else
     {
         $sql = 'SELECT motd.*, name AS motdauthorname FROM '.DB::prefix('motd').' AS `motd` LEFT JOIN '.DB::prefix('accounts')." AS `acct` ON acct.acctid = motd.motdauthor ORDER BY motddate DESC limit $newcount,".($newcount + $count);
-        //cache only the last x items
-        if ($newcount = 0)
-        {
-            $result = DB::query($sql);
-        }
-        else
-        {
-            $result = DB::query($sql);
-        }
+        $result = DB::query($sql);
     }
     rawoutput('<div class="ui divided items">');
 
     foreach ($result as $row)
     {
-        if (! isset($session['user']['lastmotd']))
-        {
-            $session['user']['lastmotd'] = 0;
-        }
-
-        if ('' == $row['motdauthorname'])
-        {
-            $row['motdauthorname'] = '`@Green Dragon Staff`0';
-        }
+        $session['user']['lastmotd'] = $session['user']['lastmotd'] ?? 0;
+        $row['motdauthorname'] = $row['motdauthorname'] ?: '`@Green Dragon Staff`0';
 
         if (0 == $row['motdtype'])
         {

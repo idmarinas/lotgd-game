@@ -86,40 +86,14 @@ elseif ('save' == $op)
 
         if ($companion)
         {
-            if (! isset($companion['allowinshades']))
-            {
-                $companion['allowinshades'] = 0;
-            }
+            $companion['allowinshades'] = $companion['allowinshades'] ?? 0;
+            $companion['allowinpvp'] = $companion['allowinpvp'] ?? 0;
+            $companion['allowintrain'] = $companion['allowintrain'] ?? 0;
+            $companion['abilities']['fight'] = (bool) ($companion['abilities']['fight'] ?? false);
+            $companion['abilities']['defend'] = (bool) ($companion['abilities']['defend'] ?? false);
+            $companion['cannotdie'] = (bool) ($companion['cannotdie'] ?? false);
+            $companion['cannotbehealed'] = (bool) ($companion['cannotbehealed'] ?? false);
 
-            if (! isset($companion['allowinpvp']))
-            {
-                $companion['allowinpvp'] = 0;
-            }
-
-            if (! isset($companion['allowintrain']))
-            {
-                $companion['allowintrain'] = 0;
-            }
-
-            if (! isset($companion['abilities']['fight']))
-            {
-                $companion['abilities']['fight'] = false;
-            }
-
-            if (! isset($companion['abilities']['defend']))
-            {
-                $companion['abilities']['defend'] = false;
-            }
-
-            if (! isset($companion['cannotdie']))
-            {
-                $companion['cannotdie'] = false;
-            }
-
-            if (! isset($companion['cannotbehealed']))
-            {
-                $companion['cannotbehealed'] = false;
-            }
             $sql = '';
             $keys = '';
             $vals = '';
@@ -137,15 +111,10 @@ elseif ('save' == $op)
                 $i++;
             }
 
+            $sql = 'INSERT INTO '.DB::prefix('companions')." ($keys) VALUES ($vals)";
             if ($id > '')
             {
-                $sql = 'UPDATE '.DB::prefix('companions').
-                    " SET $sql WHERE companionid='$id'";
-            }
-            else
-            {
-                $sql = 'INSERT INTO '.DB::prefix('companions').
-                    " ($keys) VALUES ($vals)";
+                $sql = 'UPDATE '.DB::prefix('companions')." SET $sql WHERE companionid='$id'";
             }
             DB::query($sql);
             invalidatedatacache("companiondata-$id");
@@ -156,7 +125,6 @@ elseif ('save' == $op)
             }
             else
             {
-                //				if (strlen($sql) > 400) $sql = substr($sql,0,200)." ... ".substr($sql,strlen($sql)-200);
                 output('`^Companion `$not`^ saved: `$%s`0`n`n', $sql);
             }
         }
@@ -175,13 +143,10 @@ elseif ('save' == $op)
         output('`^Saved!`0`n');
     }
 
+    $op = '';
     if ($id)
     {
         $op = 'edit';
-    }
-    else
-    {
-        $op = '';
     }
     httpset('op', $op);
 }
@@ -305,140 +270,33 @@ elseif ('edit' == $op)
 function companionform($companion)
 {
     // Let's sanitize the data
-    if (! isset($companion['companionactive']))
-    {
-        $companion['companionactive'] = '';
-    }
-
-    if (! isset($companion['name']))
-    {
-        $companion['name'] = '';
-    }
-
-    if (! isset($companion['companionid']))
-    {
-        $companion['companionid'] = '';
-    }
-
-    if (! isset($companion['description']))
-    {
-        $companion['description'] = '';
-    }
-
-    if (! isset($companion['dyingtext']))
-    {
-        $companion['dyingtext'] = '';
-    }
-
-    if (! isset($companion['jointext']))
-    {
-        $companion['jointext'] = '';
-    }
-
-    if (! isset($companion['category']))
-    {
-        $companion['category'] = '';
-    }
-
-    if (! isset($companion['companionlocation']))
-    {
-        $companion['companionlocation'] = 'all';
-    }
-
-    if (! isset($companion['companioncostdks']))
-    {
-        $companion['companioncostdks'] = 0;
-    }
-
-    if (! isset($companion['companioncostgems']))
-    {
-        $companion['companioncostgems'] = 0;
-    }
-
-    if (! isset($companion['companioncostgold']))
-    {
-        $companion['companioncostgold'] = 0;
-    }
-
-    if (! isset($companion['attack']))
-    {
-        $companion['attack'] = '';
-    }
-
-    if (! isset($companion['attackperlevel']))
-    {
-        $companion['attackperlevel'] = '';
-    }
-
-    if (! isset($companion['defense']))
-    {
-        $companion['defense'] = '';
-    }
-
-    if (! isset($companion['defenseperlevel']))
-    {
-        $companion['defenseperlevel'] = '';
-    }
-
-    if (! isset($companion['hitpoints']))
-    {
-        $companion['hitpoints'] = '';
-    }
-
-    if (! isset($companion['maxhitpoints']))
-    {
-        $companion['maxhitpoints'] = '';
-    }
-
-    if (! isset($companion['maxhitpointsperlevel']))
-    {
-        $companion['maxhitpointsperlevel'] = '';
-    }
-
-    if (! isset($companion['abilities']['fight']))
-    {
-        $companion['abilities']['fight'] = 0;
-    }
-
-    if (! isset($companion['abilities']['defend']))
-    {
-        $companion['abilities']['defend'] = 0;
-    }
-
-    if (! isset($companion['abilities']['heal']))
-    {
-        $companion['abilities']['heal'] = 0;
-    }
-
-    if (! isset($companion['abilities']['magic']))
-    {
-        $companion['abilities']['magic'] = 0;
-    }
-
-    if (! isset($companion['cannotdie']))
-    {
-        $companion['cannotdie'] = 0;
-    }
-
-    if (! isset($companion['cannotbehealed']))
-    {
-        $companion['cannotbehealed'] = 1;
-    }
-
-    if (! isset($companion['allowinshades']))
-    {
-        $companion['allowinshades'] = 0;
-    }
-
-    if (! isset($companion['allowinpvp']))
-    {
-        $companion['allowinpvp'] = 0;
-    }
-
-    if (! isset($companion['allowintrain']))
-    {
-        $companion['allowintrain'] = 0;
-    }
+    $companion['companionactive'] = $companion['companionactive'] ?? '';
+    $companion['name'] = $companion['name'] ?? '';
+    $companion['companionid'] = $companion['companionid'] ?? '';
+    $companion['description'] = $companion['description'] ?? '';
+    $companion['dyingtext'] = $companion['dyingtext'] ?? '';
+    $companion['jointext'] = $companion['jointext'] ?? '';
+    $companion['category'] = $companion['category'] ?? '';
+    $companion['companionlocation'] = $companion['companionlocation'] ?? 'all';
+    $companion['companioncostdks'] = $companion['companioncostdks'] ?? 0;
+    $companion['companioncostgems'] = $companion['companioncostgems'] ?? 0;
+    $companion['companioncostgold'] = $companion['companioncostgold'] ?? 0;
+    $companion['attack'] = $companion['attack'] ?? '';
+    $companion['attackperlevel'] = $companion['attackperlevel'] ?? '';
+    $companion['defense'] = $companion['defense'] ?? '';
+    $companion['defenseperlevel'] = $companion['defenseperlevel'] ?? '';
+    $companion['hitpoints'] = $companion['hitpoints'] ?? '';
+    $companion['maxhitpoints'] = $companion['maxhitpoints'] ?? '';
+    $companion['maxhitpointsperlevel'] = $companion['maxhitpointsperlevel'] ?? '';
+    $companion['abilities']['fight'] = $companion['abilities']['fight'] ?? 0;
+    $companion['abilities']['defend'] = $companion['abilities']['defend'] ?? 0;
+    $companion['abilities']['heal'] = $companion['abilities']['heal'] ?? 0;
+    $companion['abilities']['magic'] = $companion['abilities']['magic'] ?? 0;
+    $companion['cannotdie'] = $companion['cannotdie'] ?? 0;
+    $companion['cannotbehealed'] = $companion['cannotbehealed'] ?? 1;
+    $companion['allowinshades'] = $companion['allowinshades'] ?? 0;
+    $companion['allowinpvp'] = $companion['allowinpvp'] ?? 0;
+    $companion['allowintrain'] = $companion['allowintrain'] ?? 0;
 
     rawoutput("<form action='companions.php?op=save&id={$companion['companionid']}' method='POST'>");
     rawoutput("<input type='hidden' name='companion[companionactive]' value=\"".$companion['companionactive'].'">');
