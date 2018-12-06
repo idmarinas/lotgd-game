@@ -180,10 +180,7 @@ else
                 $x = explode('___', $key);
                 $module = $x[0];
                 $key = $x[1];
-                modulehook('notifyuserprefchange',
-                        ['name' => $key,
-                            'old' => $oldvalues[$module.'___'.$key],
-                            'new' => $val]);
+                modulehook('notifyuserprefchange', ['name' => $key, 'old' => $oldvalues[$module.'___'.$key], 'new' => $val]);
                 set_module_pref($key, $val, $module);
                 continue;
             }
@@ -394,10 +391,7 @@ else
     }
     $prefs['email'] = $session['user']['emailaddress'];
     // Default tabbed config to true
-    if (! isset($prefs['tabconfig']))
-    {
-        $prefs['tabconfig'] = 1;
-    }
+    $prefs['tabconfig'] = $prefs['tabconfig'] ?? 1;
 
     // Okay, allow modules to add prefs one at a time.
     // We are going to do it this way to *ensure* that modules don't conflict

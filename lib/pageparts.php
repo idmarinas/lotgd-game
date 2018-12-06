@@ -24,7 +24,7 @@ $html = ['content' => ''];
  */
 function page_header()
 {
-    global $html, $SCRIPT_NAME, $session, $template, $runheaders, $nopopups, $lotgdBattleContent;
+    global $html, $SCRIPT_NAME, $session, $template, $runheaders, $nopopups;
 
     $nopopups['login.php'] = 1;
     $nopopups['motd.php'] = 1;
@@ -61,7 +61,7 @@ function page_header()
 
     $arguments = func_get_args();
 
-    if (! $arguments || 0 == count($arguments))
+    if (0 == count($arguments))
     {
         $arguments = ['Legend of the Green Dragon'];
     }
@@ -592,7 +592,6 @@ function charstats($return = true)
         {
             $spirits[(int) $u['spirits']] = 'DEAD';
         }
-        //calculate_buff_fields();
         reset($session['bufflist']);
 
         require_once 'lib/playerfunctions.php';
@@ -650,8 +649,6 @@ function charstats($return = true)
             $buffs[] = appoencode(translate_inline('`^None`0'), true);
         }
 
-        // $atk = $atk;
-        // $def = $def;
         $atk = round($atk, 2);
         if ($atk < $oAtk)
         {
@@ -792,45 +789,42 @@ function charstats($return = true)
 
         return;
     }
-    else
+
+    if (! $ret = datacache('charlisthomepage'))
     {
-        if (! $ret = datacache('charlisthomepage'))
+        $onlinecount = 0;
+        // If a module wants to do it's own display of the online chars, let it.
+        $list = modulehook('onlinecharlist', []);
+
+        if (isset($list['handled']) && $list['handled'])
         {
-            $onlinecount = 0;
-            // If a module wants to do it's own display of the online chars,
-            // let it.
-            $list = modulehook('onlinecharlist', []);
-
-            if (isset($list['handled']) && $list['handled'])
-            {
-                $onlinecount = $list['count'];
-                $ret = $list['list'];
-            }
-            else
-            {
-                $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.\DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
-                $result = \DB::query($sql);
-                $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):´b`n'), \DB::num_rows($result)));
-
-                while ($row = \DB::fetch_assoc($result))
-                {
-                    $ret .= appoencode("`^{$row['name']}`0`n");
-                    $onlinecount++;
-                }
-                \DB::free_result($result);
-
-                if (0 == $onlinecount)
-                {
-                    $ret .= appoencode(translate_inline('`iNone´i'));
-                }
-            }
-            savesetting('OnlineCount', $onlinecount);
-            savesetting('OnlineCountLast', strtotime('now'));
-            updatedatacache('charlisthomepage', $ret);
+            $onlinecount = $list['count'];
+            $ret = $list['list'];
         }
+        else
+        {
+            $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.\DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
+            $result = \DB::query($sql);
+            $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):´b`n'), \DB::num_rows($result)));
 
-        return $ret;
+            while ($row = \DB::fetch_assoc($result))
+            {
+                $ret .= appoencode("`^{$row['name']}`0`n");
+                $onlinecount++;
+            }
+            \DB::free_result($result);
+
+            if (0 == $onlinecount)
+            {
+                $ret .= appoencode(translate_inline('`iNone´i'));
+            }
+        }
+        savesetting('OnlineCount', $onlinecount);
+        savesetting('OnlineCountLast', strtotime('now'));
+        updatedatacache('charlisthomepage', $ret);
     }
+
+    return $ret;
 }
 
 /**
