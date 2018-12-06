@@ -376,7 +376,6 @@ function injectcommentary($section, $talkline, $comment)
 
     $args = ['commentline' => $commentary, 'commenttalk' => $talkline, 'info' => $info, 'name' => $session['user']['name'], 'section' => $section];
     $args = modulehook('postcomment', $args);
-    //debug($args);
 
     //A module tells us to ignore this comment, so we will
     if (isset($args['ignore']) && 1 == $args['ignore'])
@@ -586,13 +585,10 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
         $returnlink = urlencode($REQUEST_URI);
     }
 
+    $showmodlink = false;
     if (($session['user']['superuser'] & SU_EDIT_COMMENTS) || $overridemod)
     {
         $showmodlink = true;
-    }
-    else
-    {
-        $showmodlink = false;
     }
 
     if (! $skiprecentupdate)
@@ -649,34 +645,25 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 
     $com = max((int) httpget('comscroll'), 0);
 
+    $showmodlink = false;
     if (($session['user']['superuser'] & SU_EDIT_COMMENTS) || $overridemod)
     {
         $showmodlink = true;
     }
-    else
-    {
-        $showmodlink = false;
-    }
 
     $ret = '';
 
+    $chatloc = 'AFK';
     //skip assigning chatloc if this chatloc's id ends with "_aux" - this way we can have dual chat areas
     if (! $afk && (! isset($session['user']['chatloc']) || 'DNI' != $session['user']['chatloc']))
     {
+        $chatloc = substr($section, 0, -4);
         if ('_aux' != substr($section, strlen($section) - 4, strlen($section)))
         {
             $chatloc = $section;
         }
-        else
-        {
-            $chatloc = substr($section, 0, -4);
-        }
 
         $session['user']['chatloc'] = $chatloc;
-    }
-    else
-    {
-        $chatloc = 'AFK';
     }
 
     if ($section)
@@ -736,13 +723,10 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
 
         foreach ($commentbuffer as $i => $comment)
         {
+            $new = 0;
             if ($comment['postdate'] > $session['recentcomments'] && $session['user']['prefs']['commentary_recentline'])
             {
                 $new = 1;
-            }
-            else
-            {
-                $new = 0;
             }
 
             $ret .= preparecommentaryline($comment);
@@ -791,25 +775,19 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
         $nobios[basename($_SERVER['SCRIPT_NAME'])] = false;
     }
 
+    $linkbios = true;
     if ($nobios[basename($_SERVER['SCRIPT_NAME'])])
     {
         $linkbios = false;
     }
-    else
-    {
-        $linkbios = true;
-    }
 
     // Needs to be here because scrolling through the commentary pages, entering a bio, then scrolling again forward
     // then re-entering another bio will lead to $com being smaller than 0 and this will lead to an SQL error later on.
+    $cid = 1;
     $session['lastcom'] = $session['lastcom'] ?? 0;
     if (false !== httpget('comscroll') && (int) $session['lastcom'] == $com + 1)
     {
         $cid = (int) $session['lastcommentid'];
-    }
-    else
-    {
-        $cid = 1;
     }
 
     $session['lastcom'] = $com;
@@ -868,24 +846,9 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
     }
 
     //figure out whether to handle absolute or relative time
-    if (! array_key_exists('timestamp', $session['user']['prefs']))
-    {
-        $session['user']['prefs']['timestamp'] = 0;
-    }
-
-    if (isset($session['user']['prefs']['timeoffset']))
-    {
-        $session['user']['prefs']['timeoffset'] = round($session['user']['prefs']['timeoffset'], 1);
-    }
-    else
-    {
-        $session['user']['prefs']['timeoffset'] = 0;
-    }
-
-    if (! array_key_exists('commentary_reverse', $session['user']['prefs']))
-    {
-        $session['user']['prefs']['commentary_reverse'] = 0;
-    }
+    $session['user']['prefs']['timestamp'] = $session['user']['prefs']['timestamp'] ?? 0;
+    $session['user']['prefs']['timeoffset'] = round(($session['user']['prefs']['timeoffset'] ?? 0), 1);
+    $session['user']['prefs']['commentary_reverse'] = $session['user']['prefs']['commentary_reverse'] ?? 0;
 
     //this array of userids means that with a single query we can figure out who's online and nearby
     $acctidstoquery = [];
@@ -1144,13 +1107,10 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
     //Output page jumpers
     $com = max((int) httpget('comscroll'), 0);
 
+    $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section='$section'";
     if ('all' == $section)
     {
         $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section NOT LIKE 'dwelling%' AND section NOT LIKE 'clan%' AND section NOT LIKE 'pet-%'";
-    }
-    else
-    {
-        $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section='$section'";
     }
 
     $r = DB::query($sql);
@@ -1247,7 +1207,6 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
 
     for ($i = $val; $i >= 0; $i--)
     {
-        // $nlink = buildcommentarylink("&comscroll=".$i."&refresh=1");
         $ndisp = 1 + $val - $i;
 
         if ($com != $i)
@@ -1261,8 +1220,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
         }
     }
     $end = microtime(true);
-    // $tot = $end - $start;
-    //debug("commentary footer page numbers loop: ".$tot);
+    debug("commentary footer page numbers loop: ".$tot);
     output_notl('`n');
 
     if ($moderating)
@@ -1377,13 +1335,10 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
         $jump = false;
     }
 
+    $focus = false;
     if ($jump && httpget('comment') && httppost('focus') == $section)
     {
         $focus = true;
-    }
-    else
-    {
-        $focus = false;
     }
 
     if (! isset($session['user']['prefs']['ucol']))
@@ -1391,13 +1346,10 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
         $session['user']['prefs']['ucol'] = false;
     }
 
+    $tll = 0;
     if ('says' != translate_inline($talkline, $schema))
     {
         $tll = strlen(translate_inline($talkline, $schema)) + 11;
-    }
-    else
-    {
-        $tll = 0;
     }
 
     $req = buildcommentarylink('&comment=1');
