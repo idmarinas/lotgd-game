@@ -1,9 +1,8 @@
 <?php
 
-
 function module_collect_events($type, $allowinactive = false)
 {
-    global $blocked_modules, $block_all_modules, $unblocked_modules;
+    global $session, $blocked_modules, $block_all_modules, $unblocked_modules;
 
     $events = [];
 
