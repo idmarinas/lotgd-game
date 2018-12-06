@@ -58,10 +58,8 @@ function appendlink($link, $new)
     {
         return $link.'&'.$new;
     }
-    else
-    {
-        return $link.'?'.$new;
-    }
+
+    return $link.'?'.$new;
 }
 
 $navsection = '';
@@ -653,13 +651,10 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
             {
                 //the hotkey for this link wasn't actually in the
                 //text, prepend it in parens.
+                $text = '('.strtoupper($key).') '.$text;
                 if (false !== strpos($text, '__'))
                 {
                     $text = str_replace('__', '('.$key.') ', $text);
-                }
-                else
-                {
-                    $text = '('.strtoupper($key).') '.$text;
                 }
                 $i = strpos($text, $key);
             }
@@ -709,16 +704,13 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
         $i = 0;
     }
 
+    $key = '';
+    $keyrep = '';
     if ($i < strlen($text) && ' ' != $key)
     {
         $key = substr($text, $i, 1);
         $accesskeys[strtolower($key)] = 1;
         $keyrep = " accesskey=\"$key\" ";
-    }
-    else
-    {
-        $key = '';
-        $keyrep = '';
     }
 
     if ('' != $key || ' ' != $key)
@@ -734,20 +726,14 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
             $text = preg_replace($pattern2, $rep2, $text, 1);
         }
 
+        $quickkeys[$key] = "window.location='$link$extra'";
         if ($pop)
         {
+            $quickkeys[$key] = 'onclick="Lotgd.embed(this)"';
             if ('' == $popsize)
             {
                 $quickkeys[$key] = "window.open('$link')";
             }
-            else
-            {
-                $quickkeys[$key] = 'onclick="Lotgd.embed(this)"';
-            }
-        }
-        else
-        {
-            $quickkeys[$key] = "window.location='$link$extra'";
         }
     }
 
