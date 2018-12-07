@@ -35,93 +35,93 @@
     if (typeof $.cookieguard === 'undefined') {
         $.cookieguard = function (options) {
 
-			// Defaults
+            // Defaults
             var defaults = {
                 cookieDeleteDelay: 100,
                 messageShowDelay: 1000,
                 messageHideDelay: null,
                 answeredHideDelay: 2000,
                 slideSpeed: 500,
-				cookieExpirationDays: 365,
+                cookieExpirationDays: 365,
                 cookiePrefix: 'cookieguard_',
                 alertOfUnknown: true
             };
 
-			// Language detection
-			var userLang = navigator.language || navigator.userLanguage;
-			userLang=userLang.split('-')[0];
-			if (options!=null) { if (options.userLang!=null) userLang = options.userLang; }
+            // Language detection
+            var userLang = navigator.language || navigator.userLanguage;
+            userLang=userLang.split('-')[0];
+            if (options!=null) { if (options.userLang!=null) userLang = options.userLang; }
 
-			// Default Messages (English)
-			var messages = {
-				bannerTitle: ' This website uses cookies to track usage and preferences.',
-				bannerDescription: 'You may choose to block non-essential and unknown cookies.',
-				cookiesEssential: 'Essential Cookies <span>- The site owner has indicated that these are essential to the running of the site.</span>',
-				cookiesNonEssential: 'Non-Essential Cookies <span>- The site owner has approved these cookies but you may turn them off.</span>',
-				cookiesUnknown: 'Unknown Cookies <span>- The site owner has not approved these cookies.</span>',
-				cookiesNewTitle: 'Cookie Guard has found new cookies.',
-				cookiesNewDescription: 'You may choose to block these cookies.',
-				cookiesBlocked: 'Non-essential and unknown cookies have now been blocked on this site.',
-				cookiesAllowed: 'The listed cookies have now been allowed on this site.',
-				buttonShow: 'Show',
-				buttonHide: 'Hide',
-				buttonBlock: 'Block',
-				buttonAllow: 'Allow',
-				buttonOK: 'Okay',
-				cookieGuardName: 'Cookie Guard',
-				cookieGuardDescription: 'This cookie is essential for storing the status of your cookie choices whilst using this site.'
-			};
+            // Default Messages (English)
+            var messages = {
+                bannerTitle: ' This website uses cookies to track usage and preferences.',
+                bannerDescription: 'You may choose to block non-essential and unknown cookies.',
+                cookiesEssential: 'Essential Cookies <span>- The site owner has indicated that these are essential to the running of the site.</span>',
+                cookiesNonEssential: 'Non-Essential Cookies <span>- The site owner has approved these cookies but you may turn them off.</span>',
+                cookiesUnknown: 'Unknown Cookies <span>- The site owner has not approved these cookies.</span>',
+                cookiesNewTitle: 'Cookie Guard has found new cookies.',
+                cookiesNewDescription: 'You may choose to block these cookies.',
+                cookiesBlocked: 'Non-essential and unknown cookies have now been blocked on this site.',
+                cookiesAllowed: 'The listed cookies have now been allowed on this site.',
+                buttonShow: 'Show',
+                buttonHide: 'Hide',
+                buttonBlock: 'Block',
+                buttonAllow: 'Allow',
+                buttonOK: 'Okay',
+                cookieGuardName: 'Cookie Guard',
+                cookieGuardDescription: 'This cookie is essential for storing the status of your cookie choices whilst using this site.'
+            };
 
-			// German Messages
-			if (userLang === "de") {
-				delete messages;
-				var messages = {
-					bannerTitle: 'Wir verwenden Cookies zur &Uuml;wachung von Benutzung und Pr&auml;ferenzen.',
-					bannerDescription: 'Die unwesentlichen oder unbekannten Cookies k&ouml;nnen Sie blockieren.',
-					cookiesEssential: 'Wesentliche Cookies <span>- Diese sind von entscheidender Bedeutung f&uuml;r die volle Funktionsf&auml;higkeit von der Webseite.</span>',
-					cookiesNonEssential: 'Unwesentliche Cookies <span>- Unser Webmaster hat diese Cookies zugelassen, aber Sie k&ouml;nen diese ausschalten.</span>',
-					cookiesUnknown: 'Unbekannte Cookies <span>-  unser Webmaster hat diese nicht genehmigt.</span>',
-					cookiesNewTitle: 'Cookie Guard hat neue Cookies entdeckt.',
-					cookiesNewDescription: 'Sie k&ouml;nen diese ausschalten.',
-					cookiesBlocked: 'Unwesentliche und unbekannten Cookies Jetzt auf dieser Seite blockiert werde.',
-					cookiesAllowed: 'Die aufgef&uuml;hrten Cookies sind nun auf dieser Webseite erlaubt ist.',
-					buttonShow: 'Show',
-					buttonHide: 'Hide',
-					buttonBlock: 'Block',
-					buttonAllow: 'Erlauben',
-					buttonOK: 'Okay',
-					cookieGuardName: 'Cookie Guard',
-					cookieGuardDescription: 'Diese Cookie speichert Ihre Auswahl verschiedener Cookies (blockiert/erlaubt) w&auml;hrend des Surfens von der Webseite.'
-				};
-			}
+            // German Messages
+            if (userLang === "de") {
+                delete messages;
+                var messages = {
+                    bannerTitle: 'Wir verwenden Cookies zur &Uuml;wachung von Benutzung und Pr&auml;ferenzen.',
+                    bannerDescription: 'Die unwesentlichen oder unbekannten Cookies k&ouml;nnen Sie blockieren.',
+                    cookiesEssential: 'Wesentliche Cookies <span>- Diese sind von entscheidender Bedeutung f&uuml;r die volle Funktionsf&auml;higkeit von der Webseite.</span>',
+                    cookiesNonEssential: 'Unwesentliche Cookies <span>- Unser Webmaster hat diese Cookies zugelassen, aber Sie k&ouml;nen diese ausschalten.</span>',
+                    cookiesUnknown: 'Unbekannte Cookies <span>-  unser Webmaster hat diese nicht genehmigt.</span>',
+                    cookiesNewTitle: 'Cookie Guard hat neue Cookies entdeckt.',
+                    cookiesNewDescription: 'Sie k&ouml;nen diese ausschalten.',
+                    cookiesBlocked: 'Unwesentliche und unbekannten Cookies Jetzt auf dieser Seite blockiert werde.',
+                    cookiesAllowed: 'Die aufgef&uuml;hrten Cookies sind nun auf dieser Webseite erlaubt ist.',
+                    buttonShow: 'Show',
+                    buttonHide: 'Hide',
+                    buttonBlock: 'Block',
+                    buttonAllow: 'Erlauben',
+                    buttonOK: 'Okay',
+                    cookieGuardName: 'Cookie Guard',
+                    cookieGuardDescription: 'Diese Cookie speichert Ihre Auswahl verschiedener Cookies (blockiert/erlaubt) w&auml;hrend des Surfens von der Webseite.'
+                };
+            }
 
-			// Spanish Messages
-			if (userLang === "es") {
-				delete messages;
-				var messages = {
-					bannerTitle: 'Esta web emplea cookies para el seguimiento de uso y preferencias.',
-					bannerDescription: 'Escoja entre bloquear o permitir las cookies no esenciales y las desconocidas.',
-					cookiesEssential: 'Cookies Esenciales <span>- nuestro webmaster ha indicado que las siguientes cookies son esenciales para el funcionamiento de la web.</span>',
-					cookiesNonEssential: 'Cookies No Esenciales <span>- nuestro webmaster ha aprobado las siguientes cookies, pero usted puede bloquearlas.</span>',
-					cookiesUnknown: 'Cookies Desconocidas <span>- nuestro webmaster no ha aprobado las siguientes cookies.</span>',
-					cookiesNewTitle: 'Cookie Guard ha encontrado nuevas cookies.',
-					cookiesNewDescription: 'Usted puede bloquear estas nuevas cookies.',
-					cookiesBlocked: 'Cookies no esenciales y desconocidas ahora van a ser bloquedas en nuestra web.',
-					cookiesAllowed: 'Cookies no esenciales y desconocidas han sido permitirdas por usted.',
-					buttonShow: 'Mostrar',
-					buttonHide: 'Ocultar',
-					buttonBlock: 'Bloquear',
-					buttonAllow: 'Permitir',
-					buttonOK: 'Okay',
-					cookieGuardName: 'Cookie Guard',
-					cookieGuardDescription: 'Esta cookie guarda sus preferencias respecto a las distintas cookies (bloqueada/permitida) durante su navegación por nuestra web.'
-				};
-			}
+            // Spanish Messages
+            if (userLang === "es") {
+                delete messages;
+                var messages = {
+                    bannerTitle: 'Esta web emplea cookies para el seguimiento de uso y preferencias.',
+                    bannerDescription: 'Escoja entre bloquear o permitir las cookies no esenciales y las desconocidas.',
+                    cookiesEssential: 'Cookies Esenciales <span>- nuestro webmaster ha indicado que las siguientes cookies son esenciales para el funcionamiento de la web.</span>',
+                    cookiesNonEssential: 'Cookies No Esenciales <span>- nuestro webmaster ha aprobado las siguientes cookies, pero usted puede bloquearlas.</span>',
+                    cookiesUnknown: 'Cookies Desconocidas <span>- nuestro webmaster no ha aprobado las siguientes cookies.</span>',
+                    cookiesNewTitle: 'Cookie Guard ha encontrado nuevas cookies.',
+                    cookiesNewDescription: 'Usted puede bloquear estas nuevas cookies.',
+                    cookiesBlocked: 'Cookies no esenciales y desconocidas ahora van a ser bloquedas en nuestra web.',
+                    cookiesAllowed: 'Cookies no esenciales y desconocidas han sido permitirdas por usted.',
+                    buttonShow: 'Mostrar',
+                    buttonHide: 'Ocultar',
+                    buttonBlock: 'Bloquear',
+                    buttonAllow: 'Permitir',
+                    buttonOK: 'Okay',
+                    cookieGuardName: 'Cookie Guard',
+                    cookieGuardDescription: 'Esta cookie guarda sus preferencias respecto a las distintas cookies (bloqueada/permitida) durante su navegación por nuestra web.'
+                };
+            }
 
-			var buttons = {
-				buttonsConfigDefault:  '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a>' + '<a href="#" id="authoriseCookies">' + messages.buttonAllow + '</a>' + '<a href="#" id="denyCookies">' + messages.buttonBlock + '</a></div>',
-				buttonsOK: '<div id="cookieButtons"><a href="#" id="showCookies">'+messages.buttonShow+'</a><a href="#" id="cookieGuardOkay">'+messages.buttonOK+'</a></div>'
-			};
+            var buttons = {
+                buttonsConfigDefault:  '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a>' + '<a href="#" id="authoriseCookies">' + messages.buttonAllow + '</a>' + '<a href="#" id="denyCookies">' + messages.buttonBlock + '</a></div>',
+                buttonsOK: '<div id="cookieButtons"><a href="#" id="showCookies">'+messages.buttonShow+'</a><a href="#" id="cookieGuardOkay">'+messages.buttonOK+'</a></div>'
+            };
 
             $.cookieguard.settings = $.extend(defaults, messages, buttons, options, { 'cookiesUsed': new Array(), 'messageHideTimeout': null });
         };
@@ -591,7 +591,7 @@
 
             if (init) {
                 $('#cookieList').append('<div class="cookiesHeader">'+$.cookieguard.settings.cookiesEssential+
-				'</div>');
+                '</div>');
                 $('#cookieList').append('<ul class="essentialCookies"/>');
                 $('#cookieList > ul.essentialCookies').append('<li><div class="cookieName">'+$.cookieguard.settings.cookieGuardName+'</div><div class="cookieDescription"> - '+$.cookieguard.settings.cookieGuardDescription+'</div></li>');
                 for (var i = 0; i < essentialCookies.length; i++) {
@@ -667,24 +667,24 @@
     if (typeof $.cookieguard.createCSS == 'undefined') {
         $.cookieguard.createCSS = function () {
             var style = '<style id="cookieGuardStyles" type="text/css">';
-		        style += '#cookieGuardMsg { position: absolute; text-align: left; top: 0; left: 0; width: 100%; display: none; border-bottom: 2px solid #5c5c5c; font-size: 12px; font-family: Arial, Helvetica, Sans-Serif; color: #333; background: #e2e2e2 url(http://cookieguard.eu/images/cookieguardicon.png) no-repeat 12px 12px; min-height: 50px; z-index:99999; }';
-			style += "#cookieGuardMsgInner { padding: 10px 10px 10px 60px; }";
-			style += "#cookieGuardMsg a { text-decoration: none; font-weight: normal; font-style: normal; }";
-			style += "#cookieButtons { width: 100%; text-align: right;}";
-			style += "#showCookies { border: 1px solid #999; background: #f4f4f4; color: #5b5858; padding: 5px 10px; margin: 0 1%;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
-			style += "#showCookies:hover { border-color: #666; }";
-			style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";style += "#authoriseCookies:hover { border-color: #6f8f59; }";
-			style += "#denyCookies { border: 1px solid #cc9c9c; background: #ecc1c1; color: #7e5353; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
-			style += "#denyCookies:hover { border-color: #9e6a6a;}";
-			style += "#cookieList { display: none; padding: 10px 60px 0 0; }";
-			style += "#cookieList ul { list-style: none; padding-left: 20px; }";
-			style += "#cookieGuardMsg.visible { display: block; };#cookieList li { padding: 5px 0; }";
-			style += ".cookieName { font-weight: bold; display: inline; }";
-			style += ".cookieDescription { display: inline; }";
-			style += ".cookiesHeader { font-weight: bold; border-bottom: 1px solid #222; color: #222; margin-bottom: 3px; padding-top: 10px; }";
-			style += ".cookiesHeader span { font-weight: normal; font-size: 15px; }";
-			style += "#cookieGuardMsgInner.msgAllowed, #cookieGuardMsgInner.msgDenied, #cookieGuardMsgInner.onlyEssential { padding-top: 17px; }";
-			style += "</style>";
+                style += '#cookieGuardMsg { position: absolute; text-align: left; top: 0; left: 0; width: 100%; display: none; border-bottom: 2px solid #5c5c5c; font-size: 12px; font-family: Arial, Helvetica, Sans-Serif; color: #333; background: #e2e2e2 url(http://cookieguard.eu/images/cookieguardicon.png) no-repeat 12px 12px; min-height: 50px; z-index:99999; }';
+            style += "#cookieGuardMsgInner { padding: 10px 10px 10px 60px; }";
+            style += "#cookieGuardMsg a { text-decoration: none; font-weight: normal; font-style: normal; }";
+            style += "#cookieButtons { width: 100%; text-align: right;}";
+            style += "#showCookies { border: 1px solid #999; background: #f4f4f4; color: #5b5858; padding: 5px 10px; margin: 0 1%;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
+            style += "#showCookies:hover { border-color: #666; }";
+            style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";style += "#authoriseCookies:hover { border-color: #6f8f59; }";
+            style += "#denyCookies { border: 1px solid #cc9c9c; background: #ecc1c1; color: #7e5353; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
+            style += "#denyCookies:hover { border-color: #9e6a6a;}";
+            style += "#cookieList { display: none; padding: 10px 60px 0 0; }";
+            style += "#cookieList ul { list-style: none; padding-left: 20px; }";
+            style += "#cookieGuardMsg.visible { display: block; };#cookieList li { padding: 5px 0; }";
+            style += ".cookieName { font-weight: bold; display: inline; }";
+            style += ".cookieDescription { display: inline; }";
+            style += ".cookiesHeader { font-weight: bold; border-bottom: 1px solid #222; color: #222; margin-bottom: 3px; padding-top: 10px; }";
+            style += ".cookiesHeader span { font-weight: normal; font-size: 15px; }";
+            style += "#cookieGuardMsgInner.msgAllowed, #cookieGuardMsgInner.msgDenied, #cookieGuardMsgInner.onlyEssential { padding-top: 17px; }";
+            style += "</style>";
             $('head').append(style);
         }
     }

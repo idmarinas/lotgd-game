@@ -69,16 +69,16 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
     if ($id > 0)
     {
         $sql = 'UPDATE '.DB::prefix('debuglog')."
-			SET
-				date='".date('Y-m-d H:i:s')."',
-				actor='$user',
-				target='$target',
-				message='".addslashes($message)."',
-				field='$field',
-				value='$value'
-			WHERE
-				id=$id
-				";
+            SET
+                date='".date('Y-m-d H:i:s')."',
+                actor='$user',
+                target='$target',
+                message='".addslashes($message)."',
+                field='$field',
+                value='$value'
+            WHERE
+                id=$id
+                ";
     }
     else
     {

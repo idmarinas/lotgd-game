@@ -178,25 +178,25 @@ if ('' == $op)
         $mounts[$row['hashorse']] = $row['c'];
     }
     rawoutput("<script language='JavaScript'>
-	function getUserInfo(id,divid){
-		var filename='mounts.php?op=xml&id='+id;
-		var xmldom;
-		if (document.implementation && document.implementation.createDocument){
-			// Mozilla
-			xmldom = document.implementation.createDocument('','',null);
-		} else if (window.ActiveXObject) {
-			// IE
-			xmldom = new ActiveXObject('Microsoft.XMLDOM');
-		}
-		xmldom.async=false;
-		xmldom.load(filename);
-		var output='';
-		for (var x=0; x<xmldom.documentElement.childNodes.length; x++) {
-			output = output + unescape(xmldom.documentElement.childNodes[x].getAttribute('name').replace(/\\+/g, ' ')) + '<br />';
-		}
-		document.getElementById('mountusers'+divid).innerHTML=output;
-	}
-	</script>");
+    function getUserInfo(id,divid){
+        var filename='mounts.php?op=xml&id='+id;
+        var xmldom;
+        if (document.implementation && document.implementation.createDocument){
+            // Mozilla
+            xmldom = document.implementation.createDocument('','',null);
+        } else if (window.ActiveXObject) {
+            // IE
+            xmldom = new ActiveXObject('Microsoft.XMLDOM');
+        }
+        xmldom.async=false;
+        xmldom.load(filename);
+        var output='';
+        for (var x=0; x<xmldom.documentElement.childNodes.length; x++) {
+            output = output + unescape(xmldom.documentElement.childNodes[x].getAttribute('name').replace(/\\+/g, ' ')) + '<br />';
+        }
+        document.getElementById('mountusers'+divid).innerHTML=output;
+    }
+    </script>");
 
     $sql = 'SELECT * FROM '.DB::prefix('mounts').' ORDER BY mountcategory, mountcostgems, mountcostgold';
     $ops = translate_inline('Ops');

@@ -88,21 +88,21 @@ function mass_module_prepare($hooknames)
     //collect the modules who attach to these hooks.
     $sql =
         "SELECT
-			$Pmodule_hooks.modulename,
-			$Pmodule_hooks.location,
-			$Pmodule_hooks.function,
-			$Pmodule_hooks.whenactive
-		FROM
-			$Pmodule_hooks
-		INNER JOIN
-			$Pmodules
-		ON	$Pmodules.modulename = $Pmodule_hooks.modulename
-		WHERE
-			active = 1
-		AND	location IN ('".join("', '", $hooknames)."')
-		ORDER BY
-			$Pmodule_hooks.location,
-			$Pmodule_hooks.priority,
+            $Pmodule_hooks.modulename,
+            $Pmodule_hooks.location,
+            $Pmodule_hooks.function,
+            $Pmodule_hooks.whenactive
+        FROM
+            $Pmodule_hooks
+        INNER JOIN
+            $Pmodules
+        ON	$Pmodules.modulename = $Pmodule_hooks.modulename
+        WHERE
+            active = 1
+        AND	location IN ('".join("', '", $hooknames)."')
+        ORDER BY
+            $Pmodule_hooks.location,
+            $Pmodule_hooks.priority,
             $Pmodule_hooks.modulename";
     $result = DB::query($sql);
     $modulenames = [];
@@ -128,13 +128,13 @@ function mass_module_prepare($hooknames)
     //Load the settings for the modules on these hooks.
     $sql =
         "SELECT
-			modulename,
-			setting,
-			value
-		FROM
-			$Pmodule_settings
-		WHERE
-			modulename IN ($modulelist)";
+            modulename,
+            setting,
+            value
+        FROM
+            $Pmodule_settings
+        WHERE
+            modulename IN ($modulelist)";
     $result = DB::query($sql);
 
     while ($row = DB::fetch_assoc($result))
@@ -150,15 +150,15 @@ function mass_module_prepare($hooknames)
     // nothing to do if there is no user logged in
     $sql =
         "SELECT
-			modulename,
-			setting,
-			userid,
-			value
-		FROM
-			$Pmodule_userprefs
-		WHERE
-			modulename IN ($modulelist)
-		AND	userid = ".(int) $session['user']['acctid'];
+            modulename,
+            setting,
+            userid,
+            value
+        FROM
+            $Pmodule_userprefs
+        WHERE
+            modulename IN ($modulelist)
+        AND	userid = ".(int) $session['user']['acctid'];
     $result = DB::query($sql);
 
     while ($row = DB::fetch_assoc($result))

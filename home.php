@@ -132,16 +132,16 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
 
     rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
     rawoutput("<script language='JavaScript'>
-	<!--
-	function md5pass(){
-		//encode passwords before submission to protect them even from network sniffing attacks.
-		var passbox = document.getElementById('password');
-		if (passbox.value.substring(0, 5) != '!md5!') {
-			passbox.value = '!md5!' + hex_md5(passbox.value);
-		}
-	}
-	//-->
-	</script>");
+    <!--
+    function md5pass(){
+        //encode passwords before submission to protect them even from network sniffing attacks.
+        var passbox = document.getElementById('password');
+        if (passbox.value.substring(0, 5) != '!md5!') {
+            passbox.value = '!md5!' + hex_md5(passbox.value);
+        }
+    }
+    //-->
+    </script>");
     addnav('', 'login.php');
 }
 else

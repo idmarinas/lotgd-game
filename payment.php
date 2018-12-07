@@ -161,29 +161,29 @@ function writelog($response)
         }
     }
     $sql = '
-		INSERT INTO '.DB::prefix('paylog')." (
-			info,
-			response,
-			txnid,
-			amount,
-			name,
-			acctid,
-			processed,
-			filed,
-			txfee,
-			processdate
-		)VALUES (
-			'".addslashes(serialize($post))."',
-			'".addslashes($response)."',
-			'$txn_id',
-			'$payment_amount',
-			'{$match[1]}',
-			".(int) $acctid.',
-			'.(int) $processed.",
-			0,
-			'$payment_fee',
-			'".date('Y-m-d H:i:s')."'
-		)";
+        INSERT INTO '.DB::prefix('paylog')." (
+            info,
+            response,
+            txnid,
+            amount,
+            name,
+            acctid,
+            processed,
+            filed,
+            txfee,
+            processdate
+        )VALUES (
+            '".addslashes(serialize($post))."',
+            '".addslashes($response)."',
+            '$txn_id',
+            '$payment_amount',
+            '{$match[1]}',
+            ".(int) $acctid.',
+            '.(int) $processed.",
+            0,
+            '$payment_fee',
+            '".date('Y-m-d H:i:s')."'
+        )";
     DB::query($sql);
     $err = DB::error();
 

@@ -25,12 +25,12 @@ addnav("","badword.php?op=test");
 output("`7Test a word:`0");
 rawoutput("<input name='word'><input type='submit' class='button' value='$test'></form>");
 if ($op=="test"){
-	$word = httppost("word");
-	$return = soap($word,true);
-	if ($return == $word)
-		output("`7\"%s\" does not trip any filters.`0`n`n", $word);
-	else
-		output("`7%s`0`n`n", $return);
+    $word = httppost("word");
+    $return = soap($word,true);
+    if ($return == $word)
+        output("`7\"%s\" does not trip any filters.`0`n`n", $word);
+    else
+        output("`7%s`0`n`n", $return);
 }
 
 output_notl("<font size='+1'>", true);
@@ -56,43 +56,43 @@ $row = DB::fetch_assoc($result);
 $words = explode(" ",$row['words']);
 if ($op=="addgood"){
 
-	$newregexp = stripslashes(httppost('word'));
+    $newregexp = stripslashes(httppost('word'));
 
-	// not sure if the line below should appear, as the strings in the good
-	// word list have different behaviour than those in the nasty word list,
-	// and strings with single quotes in them currently have odd and
-	// unreliable behaviour, both under the good word list and the nasty
-	// word list
-	//	$newregexp = preg_replace('/(?<!\\\\)\'/', '\\\'', $newregexp);
+    // not sure if the line below should appear, as the strings in the good
+    // word list have different behaviour than those in the nasty word list,
+    // and strings with single quotes in them currently have odd and
+    // unreliable behaviour, both under the good word list and the nasty
+    // word list
+    //	$newregexp = preg_replace('/(?<!\\\\)\'/', '\\\'', $newregexp);
 
-	// $newregexp = str_replace("\n", '', $newregexp);
-	// appears to only remove the line feed character, chr(10),
-	// but leaves the carriage return character, chr(13), intact
-	$newregexp = str_replace("\n", '', $newregexp);
-	$newregexp = str_replace("\r", '', $newregexp);
+    // $newregexp = str_replace("\n", '', $newregexp);
+    // appears to only remove the line feed character, chr(10),
+    // but leaves the carriage return character, chr(13), intact
+    $newregexp = str_replace("\n", '', $newregexp);
+    $newregexp = str_replace("\r", '', $newregexp);
 
-	if ( $newregexp !== '' )
-		array_push($words,$newregexp);
+    if ( $newregexp !== '' )
+        array_push($words,$newregexp);
 
-	//array_push($words,stripslashes(httppost('word')));
+    //array_push($words,stripslashes(httppost('word')));
 }
 if ($op=="removegood"){
 
-	// false if not found
-	$removekey = array_search(stripslashes(httppost('word')),$words);
-	// $removekey can be 0
-	if ( $removekey !== false ) unset($words[$removekey]);
+    // false if not found
+    $removekey = array_search(stripslashes(httppost('word')),$words);
+    // $removekey can be 0
+    if ( $removekey !== false ) unset($words[$removekey]);
 
-	//unset($words[array_search(stripslashes(httppost('word')),$words)]);
+    //unset($words[array_search(stripslashes(httppost('word')),$words)]);
 }
 
 show_word_list($words);
 if ($op=="addgood" || $op=="removegood"){
-	$sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='good'";
-	DB::query($sql);
-	$sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','good')";
-	DB::query($sql);
-	invalidatedatacache("goodwordlist");
+    $sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='good'";
+    DB::query($sql);
+    $sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','good')";
+    DB::query($sql);
+    invalidatedatacache("goodwordlist");
 }
 
 output_notl("`0`n`n");
@@ -118,53 +118,53 @@ reset($words);
 
 if ($op=="add"){
 
-	$newregexp = stripslashes(httppost('word'));
+    $newregexp = stripslashes(httppost('word'));
 
-	// automagically escapes all unescaped single quote characters
-	$newregexp = preg_replace('/(?<!\\\\)\'/', '\\\'', $newregexp);
+    // automagically escapes all unescaped single quote characters
+    $newregexp = preg_replace('/(?<!\\\\)\'/', '\\\'', $newregexp);
 
-	// $newregexp = str_replace("\n", '', $newregexp);
-	// appears to only remove the line feed character, chr(10),
-	// but leaves the carriage return character, chr(13), intact
-	$newregexp = str_replace("\n", '', $newregexp);
-	$newregexp = str_replace("\r", '', $newregexp);
+    // $newregexp = str_replace("\n", '', $newregexp);
+    // appears to only remove the line feed character, chr(10),
+    // but leaves the carriage return character, chr(13), intact
+    $newregexp = str_replace("\n", '', $newregexp);
+    $newregexp = str_replace("\r", '', $newregexp);
 
-	if ( $newregexp !== '' ) array_push($words,$newregexp);
+    if ( $newregexp !== '' ) array_push($words,$newregexp);
 
-	//array_push($words,stripslashes(httppost('word')));
+    //array_push($words,stripslashes(httppost('word')));
 }
 if ($op=="remove"){
-	// false if not found
-	$removekey = array_search(stripslashes(httppost('word')),$words);
-	// $removekey can be 0
-	if ( $removekey !== false ) unset($words[$removekey]);
+    // false if not found
+    $removekey = array_search(stripslashes(httppost('word')),$words);
+    // $removekey can be 0
+    if ( $removekey !== false ) unset($words[$removekey]);
 
-	//unset($words[array_search(stripslashes(httppost('word')),$words)]);
+    //unset($words[array_search(stripslashes(httppost('word')),$words)]);
 }
 show_word_list($words);
 output_notl("`0");
 
 if ($op=="add" || $op=="remove"){
-	$sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='nasty'";
-	DB::query($sql);
-	$sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','nasty')";
-	DB::query($sql);
-	invalidatedatacache("nastywordlist");
+    $sql = "DELETE FROM " . DB::prefix("nastywords") . " WHERE type='nasty'";
+    DB::query($sql);
+    $sql = "INSERT INTO " . DB::prefix("nastywords") . " (words,type) VALUES ('" . addslashes(join(" ",$words)) . "','nasty')";
+    DB::query($sql);
+    invalidatedatacache("nastywordlist");
 }
 page_footer();
 
 function show_word_list($words){
-	sort($words);
-	$lastletter="";
-	foreach ($words as $key=>$val) {
-		if (trim($val)==""){
-			unset($words[$key]);
-		}else{
-			if (substr($val,0,1)!=$lastletter){
-				$lastletter = substr($val,0,1);
-				output_notl("`n`n`^`b%s´b`@`n", strtoupper($lastletter));
-			}
-			output_notl("%s ", $val);
-		}
-	}
+    sort($words);
+    $lastletter="";
+    foreach ($words as $key=>$val) {
+        if (trim($val)==""){
+            unset($words[$key]);
+        }else{
+            if (substr($val,0,1)!=$lastletter){
+                $lastletter = substr($val,0,1);
+                output_notl("`n`n`^`b%s´b`@`n", strtoupper($lastletter));
+            }
+            output_notl("%s ", $val);
+        }
+    }
 }

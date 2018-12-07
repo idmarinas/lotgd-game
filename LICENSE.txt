@@ -44,7 +44,7 @@ versions, the developers at Dragonprime.net are hereby granted a revokable
 authority to produce new distributions which enjoy the same restrictions and
 exceptions as this entire license.  This authority may be revoked at any time,
 but such revocation will be purely proactive, and existing releases will still
-enjoy the full liberty of this license. 
+enjoy the full liberty of this license.
 Although revocation may be for any reason, the only foreseeable reason that such
 revocation would be enacted is if these distributions were discovered to contain
 module hooks designed to circumvent the spirit of this license. The intention is

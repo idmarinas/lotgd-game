@@ -69,7 +69,7 @@ modified) specials on your server, just remove this directory.
 ----------------------------------------------
 These instructions cover a new LoGD installation.
 You will need access to a MySQL database and a PHP hosting
-location to run this game. Your SQL user needs the LOCK TABLES 
+location to run this game. Your SQL user needs the LOCK TABLES
 privelege in order to run the game correct.
 
 Extract the files into the directory where you will want the code to live.
@@ -80,7 +80,7 @@ game on a publically accessible web server!
 
 MySQL Setup:
 Setup should be pretty straightforward, create the database, create
-an account to access the database on behalf of the site; this account 
+an account to access the database on behalf of the site; this account
 should have full permissions on the database.
 
 After you have the database created, point your browser at the location you

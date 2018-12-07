@@ -21,6 +21,7 @@ $execution_met = true;
 $memoryLimit = @ini_get('memory_limit');
 preg_match("#^(\d+)(\w+)$#", strtolower($memoryLimit), $match);
 
+$memoryLimit = intval($memoryLimit);
 if ('g' == $match[2])
 {
     $memoryLimit = intval($memoryLimit) * 1024 * 1024 * 1024;
@@ -33,16 +34,12 @@ elseif ('k' == $match[2])
 {
     $memoryLimit = intval($memoryLimit) * 1024;
 }
-else
-{
-    $memoryLimit = intval($memoryLimit);
-}
 
- if ($memoryLimit < 128 * 1024 * 1024)
- {
-     $requirements_met = false;
-     $memory_met = false;
- }
+if ($memoryLimit < 128 * 1024 * 1024)
+{
+    $requirements_met = false;
+    $memory_met = false;
+}
 
 $executionTime = @ini_get('max_execution_time');
 //-- For avoid error when execute xDebug or similar
@@ -207,12 +204,22 @@ page_header('LoGD Installer &#151; %s', $stages[$stage]);
 
 switch ($stage)
 {
-    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
         require_once "lib/installer/installer_stage_$stage.php";
-        break;
+    break;
     default:
         require_once 'lib/installer/installer_stage_default.php';
-        break;
+    break;
 }
 
 if (! $noinstallnavs)
