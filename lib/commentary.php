@@ -561,7 +561,9 @@ function commentdisplay($intro, $section, $message = 'Interject your own comment
  */
 function viewcommentary($section, $message = 'Interject your own commentary?', $limit = 25, $talkline = 'says', $schema = false, $skipfooter = false, $customsql = false, $skiprecentupdate = false, $overridemod = false)
 {
-    global $session, $REQUEST_URI, $doublepost, $translation_namespace, $emptypost, $chatloc, $afk, $dni, $moderating, $fiveminuteload;
+    global $session, $doublepost, $translation_namespace, $emptypost, $chatloc, $afk, $dni, $moderating, $fiveminuteload;
+
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     tlschema('commentary');
 
@@ -582,7 +584,7 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
 
     if (! isset($returnlink) || ! $returnlink)
     {
-        $returnlink = urlencode($REQUEST_URI);
+        $returnlink = urlencode($request->getServer('REQUEST_URI'));
     }
 
     $showmodlink = false;
@@ -641,7 +643,7 @@ function viewcommentary($section, $message = 'Interject your own commentary?', $
  */
 function preparecommentaryblock($section, $message = 'Interject your own commentary?', $limit = 25, $talkline = 'says', $schema = false, $skipfooter = false, $customsql = false, $skiprecentupdate = false, $overridemod = false, $returnlink = false)
 {
-    global $session, $REQUEST_URI, $doublepost, $translation_namespace, $emptypost, $chatloc, $afk, $dni, $moderating;
+    global $session, $doublepost, $translation_namespace, $emptypost, $chatloc, $afk, $dni, $moderating;
 
     $com = max((int) httpget('comscroll'), 0);
 
@@ -756,27 +758,28 @@ function preparecommentaryblock($section, $message = 'Interject your own comment
  */
 function getcommentary($section, $limit = 25, $talkline, $customsql = false, $showmodlink = false, $returnlink = false)
 {
-    global $session, $REQUEST_URI, $translation_namespace, $chatloc, $bottomcid;
+    global $session, $translation_namespace, $chatloc, $bottomcid;
 
     tlschema('commentary');
 
     $com = max((int) httpget('comscroll'), 0);
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     if (! $returnlink)
     {
-        $returnlink = urlencode($REQUEST_URI);
+        $returnlink = urlencode($request->getServer('REQUEST_URI'));
     }
 
     //stops people from clicking on Bio links in the MoTD
     $nobios = ['motd.php' => true, 'runmodule.php?module=global_banter' => true];
 
-    if (! array_key_exists(basename($_SERVER['SCRIPT_NAME']), $nobios))
+    if (! array_key_exists(basename($request->getServer('SCRIPT_NAME')), $nobios))
     {
-        $nobios[basename($_SERVER['SCRIPT_NAME'])] = false;
+        $nobios[basename($request->getServer('SCRIPT_NAME'))] = false;
     }
 
     $linkbios = true;
-    if ($nobios[basename($_SERVER['SCRIPT_NAME'])])
+    if ($nobios[basename($request->getServer('SCRIPT_NAME'))])
     {
         $linkbios = false;
     }
@@ -1100,12 +1103,13 @@ function preparecommentaryline($line)
  */
 function commentaryfooter($section, $message = 'Interject your own commentary?', $limit = 25, $talkline = 'says', $schema = false)
 {
-    global $session, $REQUEST_URI, $doublepost, $translation_namespace, $emptypost, $chatloc, $moderating, $bottomcid;
+    global $session, $doublepost, $translation_namespace, $emptypost, $chatloc, $moderating, $bottomcid;
 
     tlschema('commentary');
 
     //Output page jumpers
     $com = max((int) httpget('comscroll'), 0);
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     $sql = 'SELECT count(commentid) AS c FROM '.DB::prefix('commentary')." WHERE section='$section'";
     if ('all' == $section)
@@ -1118,7 +1122,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
     $rowcount = $val['c'];
     $val = round($val['c'] / $limit + 0.5, 0) - 1;
 
-    $returnlink = urlencode($REQUEST_URI);
+    $returnlink = urlencode($request->getServer('REQUEST_URI'));
     $returnlink = buildcommentarylink('&frombio=true', $returnlink);
 
     $hook = [
@@ -1246,9 +1250,10 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
 function buildcommentarylink($append, $returnlink = false)
 {
     //TODO: Check for removecomment and restorecomment flags, possibly via regexp
-    global $session, $REQUEST_URI;
+    global $session;
 
     $jump = false;
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     if (isset($session['user']['prefs']['nojump']) && true == $session['user']['prefs']['nojump'])
     {
@@ -1257,7 +1262,7 @@ function buildcommentarylink($append, $returnlink = false)
 
     if (! $returnlink)
     {
-        $nlink = comscroll_sanitize($REQUEST_URI);
+        $nlink = comscroll_sanitize($request->getServer('REQUEST_URI'));
     }
     else
     {
@@ -1321,7 +1326,7 @@ function talkform($section, $talkline, $limit = 10, $schema = false)
 
     tlschema('commentary');
 
-    global $REQUEST_URI, $session, $translation_namespace, $chatsonpage, $fiveminuteload;
+    global $session, $translation_namespace, $chatsonpage, $fiveminuteload;
 
     if (false === $schema)
     {
