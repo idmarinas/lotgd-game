@@ -292,19 +292,14 @@ function activate_buffs($tag)
 
         if (isset($buff['minioncount']) && 'roundstart' == $tag && ((isset($buff['areadamage']) && true == $buff['areadamage']) || true == $badguy['istarget']) && false == $badguy['dead'])
         {
-            $who = -1;
-
+            $max = $buff['maxgoodguydamage'] ?? 0;
+            $min = $buff['mingoodguydamage'] ?? 0;
+            $who = 1;
             if (isset($buff['maxbadguydamage']) && 0 != $buff['maxbadguydamage'])
             {
                 $max = $buff['maxbadguydamage'];
                 $min = isset($buff['minbadguydamage']) ? $buff['minbadguydamage'] : 0;
                 $who = 0;
-            }
-            else
-            {
-                $max = $buff['maxgoodguydamage'] ?? 0;
-                $min = $buff['mingoodguydamage'] ?? 0;
-                $who = 1;
             }
             $minioncounter = 1;
 
@@ -512,7 +507,6 @@ function expire_buffs()
                     if (is_array($buff['wearoff']))
                     {
                         $buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
-                        // $msg = sprintf_translate($buff['wearoff']);
                         $msg = substitute('`5'.$msg.'`0`n');
                     }
                     else
