@@ -36,6 +36,10 @@ checks:
 plugins:
     editorconfig:
         enabled: true
+        exclude_patterns:
+            - "images/"
+            - "**/*.ico"
+            - "**/*.png"
         config:
             editorconfig: .editorconfig
     nodesecurity:
