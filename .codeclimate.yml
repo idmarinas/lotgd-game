@@ -34,8 +34,15 @@ checks:
     identical-code:
         enabled: true
 plugins:
+    editorconfig:
+        enabled: true
+        config:
+            editorconfig: .editorconfig
     nodesecurity:
         enabled: true
+    eslint:
+        enabled: true
+        channel: "eslint-5"
     sonar-php:
         enabled: true
         exclude_patterns:
