@@ -560,10 +560,10 @@ function clearnav()
  */
 function clearoutput()
 {
-    global $output,$nestedtags,$header,$nav,$session;
+    global $output, $header, $nav, $session;
 
     clearnav();
-    $output = new LotgdOutputCollector();
+    $output = \LotgdLocator::build(Lotgd\Core\Output\Collector::class);
     $header = '';
     $nav = '';
 }
