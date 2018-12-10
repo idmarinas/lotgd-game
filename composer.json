@@ -32,7 +32,7 @@
         "zendframework/zend-servicemanager": "^3.3"
     },
     "require-dev": {
-        "etsy/phan": "^1.1",
+        "phan/phan": "^1.1",
         "psecio/iniscan": "^3.6"
     },
     "autoload": {
