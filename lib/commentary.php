@@ -1224,6 +1224,7 @@ function commentaryfooter($section, $message = 'Interject your own commentary?',
         }
     }
     $end = microtime(true);
+    $tot = $end - $start;
     debug("commentary footer page numbers loop: ".$tot);
     output_notl('`n');
 
