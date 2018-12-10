@@ -129,7 +129,7 @@ function selectSingleNode (node, name)
 function nodeText (node)
 {
     var out = ''
-    for (let y = 0; y < node.childNodes.length; y++)
+    for (var y = 0; y < node.childNodes.length; y++)
     {
         if (node.childNodes[y].nodeType === 3)
         {
