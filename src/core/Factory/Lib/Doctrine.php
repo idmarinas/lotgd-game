@@ -49,11 +49,11 @@ class Doctrine implements FactoryInterface
         }
 
         $dbParams = [
-            'driver' => strtolower($adapter['driver']),
-            'user' => $adapter['username'],
-            'password' => $adapter['password'],
-            'dbname' => $adapter['database'],
-            'charset' => $adapter['charset']
+            'driver' => strtolower($adapter['driver'] ?? 'Pdo_Mysql'), //-- By default is always mysql
+            'user' => $adapter['username'] ?? '',
+            'password' => $adapter['password'] ?? '',
+            'dbname' => $adapter['database'] ?? '',
+            'charset' => $adapter['charset'] ?? ''
         ];
 
         $config = new DoctrineConfiguration();
