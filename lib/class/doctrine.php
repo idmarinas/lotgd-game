@@ -115,7 +115,7 @@ class Doctrine
      *
      * @return int Number of queries
      */
-    public static function syncEntity(string $entity, $dumpSql = false)
+    public static function syncEntity(string $entity, $dumpSql = null)
     {
         $schemaTool = new SchemaTool(self::$wrapper);
         $metaData = self::$wrapper->getMetadataFactory()->getMetadataFor($entity);
@@ -154,7 +154,7 @@ class Doctrine
      *
      * @return int Number of queries
      */
-    public static function syncEntities(array $entities, $dumpSql = false)
+    public static function syncEntities(array $entities, $dumpSql = null)
     {
         $schemaTool = new SchemaTool(self::$wrapper);
 
