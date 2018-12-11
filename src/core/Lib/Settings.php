@@ -51,6 +51,7 @@ class Settings
                 require "lib/data/{$this->tablename}.php";
             }
 
+            $setDefault = $default;
             if (false === $default)
             {
                 if (isset($defaults[$settingname]))
@@ -62,19 +63,13 @@ class Settings
                     $setDefault = '';
                 }
             }
-            else
-            {
-                $setDefault = $default;
-            }
 
             $this->saveSetting($settingname, $setDefault);
 
             return $setDefault;
         }
-        else
-        {
-            return $this->settings[$settingname];
-        }
+
+        return $this->settings[$settingname];
     }
 
     /**
@@ -88,6 +83,12 @@ class Settings
     public function saveSetting(string $settingname, $value): bool
     {
         $settings = $this->getAllSettings();
+
+        //-- Not do nothing if not have connection to DB
+        if (false === $this->wrapper->connect())
+        {
+            return false;
+        }
 
         //-- To ensure that a new record is inserted or the existing one is updated
         $sql = sprintf(
@@ -108,10 +109,8 @@ class Settings
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     /**

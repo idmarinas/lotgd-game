@@ -172,6 +172,12 @@ trait Zend
      */
     public function quoteValue($value): string
     {
+        //-- Not do if not exist connection to DB
+        if (false === $this->connect())
+        {
+            return $value;
+        }
+
         return $this->getAdapter()->getPlatform()->quoteValue($value);
     }
 

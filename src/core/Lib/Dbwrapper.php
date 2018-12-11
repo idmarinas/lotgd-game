@@ -66,6 +66,14 @@ class Dbwrapper
      */
     public function query(string $sql)
     {
+        //-- Not do query if not exist connection to DB
+        if (false === $this->connect())
+        {
+            $resultSet = new ResultSet();
+
+            return $resultSet->initialize([]);
+        }
+
         $adapterNew = $this->getAdapter();
 
         try
