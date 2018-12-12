@@ -291,20 +291,7 @@ class DB
      */
     public static function connect(): bool
     {
-        try
-        {
-            //-- Execute a simple query for test connection
-            $metadata = new Zend\Db\Metadata\Metadata(self::$wrapper->getAdapter());
-            $metadata->getTableNames();
-
-            return true;
-        }
-        catch (\Throwable $ex)
-        {
-            self::$errorInfo = $ex->getMessage();
-
-            return false;
-        }
+        return self::$wrapper->connect();
     }
 
     /**
