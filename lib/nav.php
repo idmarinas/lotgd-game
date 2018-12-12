@@ -617,33 +617,25 @@ function add_accesskey($text, $link, $pop, $popsize , $extra)
                 {
                     $ignoreuntil = '';
                 }
-                else
+                elseif ('' != $ignoreuntil)
                 {
-                    if ('' != $ignoreuntil)
+                    if ('<' == $char)
                     {
-                        if ('<' == $char)
-                        {
-                            $ignoreuntil = '>';
-                        }
-
-                        if ('&' == $char)
-                        {
-                            $ignoreuntil = ';';
-                        }
-
-                        if ('`' == $char)
-                        {
-                            $ignoreuntil = $text[$i + 1];
-                        }
+                        $ignoreuntil = '>';
                     }
-                    else
+                    elseif ('&' == $char)
                     {
-                        if ($char == $key)
-                        {
-                            $found = true;
-                            break;
-                        }
+                        $ignoreuntil = ';';
                     }
+                    elseif ('`' == $char)
+                    {
+                        $ignoreuntil = $text[$i + 1];
+                    }
+                }
+                else if ($char == $key)
+                {
+                    $found = true;
+                    break;
                 }
             }
 
