@@ -17,7 +17,7 @@ class Stats implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new CharacterStats($config);
+        return new CharacterStats();
     }
 
     public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
