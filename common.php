@@ -118,62 +118,55 @@ $link = DB::connect();
 
 ob_start();
 
-if (false !== $link)
-{
-    define('DB_CONNECTED', true);
-}
-else
-{
-    if (! defined('IS_INSTALLER'))
-    {
-        if (! defined('DB_NODB'))
-        {
-            define('DB_NODB', true);
-        }
-        page_header('Database Connection Error');
-        output('`c`$Database Connection Error`0´c`n`n');
-        output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
-
-        //the admin did not want to notify him with a script
-        output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
-        output('Sorry for the inconvenience,`n');
-        output('Staff of %s', $_SERVER['SERVER_NAME']);
-        addnav('Home', 'index.php');
-        page_footer();
-    }
-    define('DB_CONNECTED', false);
-}
+define('DB_CONNECTED', (false !== $link));
+define('DB_CHOSEN', DB_CONNECTED);
 
 if (DB_CONNECTED)
 {
     define('LINK', $link);
-    define('DB_CHOSEN', true);
-}
-else
-{
-    if (! defined('IS_INSTALLER') && DB_CONNECTED)
-    {
-        if (! defined('DB_NODB'))
-        {
-            define('DB_NODB', true);
-        }
-        page_header('Database Connection Error');
-        output('`c`$Database Connection Error`0´c`n`n');
-        output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
-        //the admin did not want to notify him with a script
-        output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
-        //add the message as it was not enclosed and posted to the smsnotify file
-        output('Sorry for the inconvenience,`n');
-        output('Staff of %s', $_SERVER['SERVER_NAME']);
-        addnav('Home', 'index.php');
-        page_footer();
-    }
-    define('DB_CHOSEN', false);
 }
 
 if ($logd_version == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     define('IS_INSTALLER', false);
+}
+elseif ($logd_version != getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+{
+    page_header('Upgrade Needed');
+    output('`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.');
+    output('In order to perform the upgrade, an admin will have to run through the installer.');
+    output("If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n", true);
+    output("`@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the game when the upgrade is complete.");
+    rawoutput("<meta http-equiv='refresh' content='30; url={$session['user']['restorepage']}'>");
+    addnav('Installer (Admins only!)', 'installer.php');
+    define('NO_SAVE_USER', true);
+    page_footer();
+}
+elseif (file_exists('installer.php') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
+{
+    // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
+    page_header('Major Security Risk');
+    output("`\$Remove the file named 'installer.php' from your main game directory! You need to comply in order to get the game up and running.");
+    addnav('Home', 'index.php');
+    page_footer();
+}
+
+if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
+{
+    if (! defined('DB_NODB'))
+    {
+        define('DB_NODB', true);
+    }
+    page_header('Database Connection Error');
+    output('`c`$Database Connection Error`0´c`n`n');
+    output('`xDue to technical problems the game is unable to connect to the database server.`n`n');
+    //the admin did not want to notify him with a script
+    output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
+    //add the message as it was not enclosed and posted to the smsnotify file
+    output('Sorry for the inconvenience,`n');
+    output('Staff of %s', $_SERVER['SERVER_NAME']);
+    addnav('Home', 'index.php');
+    page_footer();
 }
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
@@ -213,7 +206,7 @@ $session['loggedin'] = $session['user']['loggedin'];
 
 if (true != $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
-    redirect('login.php?op=logout');
+    return redirect('login.php?op=logout');
 }
 
 $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.php' => 1, 'petition.php' => 1];
@@ -223,43 +216,16 @@ if (OVERRIDE_FORCED_NAV)
     $nokeeprestore[$SCRIPT_NAME] = 1;
 }
 
+$session['user']['restorepage'] = '';
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
     $session['user']['restorepage'] = $REQUEST_URI;
 }
-else
-{
-    $session['user']['restorepage'] = '';
-}
 
-if ($logd_version != getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
-{
-    page_header('Upgrade Needed');
-    output('`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.');
-    output('In order to perform the upgrade, an admin will have to run through the installer.');
-    output("If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n", true);
-    output("`@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the game when the upgrade is complete.");
-    rawoutput("<meta http-equiv='refresh' content='30; url={$session['user']['restorepage']}'>");
-    addnav('Installer (Admins only!)', 'installer.php');
-    define('NO_SAVE_USER', true);
-    page_footer();
-}
-elseif (file_exists('installer.php') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
-{
-    // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
-    page_header('Major Security Risk');
-    output("`\$Remove the file named 'installer.php' from your main game directory! You need to comply in order to get the game up and running.");
-    addnav('Home', 'index.php');
-    page_footer();
-}
-
+$session['user']['alive'] = false;
 if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
 {
     $session['user']['alive'] = true;
-}
-else
-{
-    $session['user']['alive'] = false;
 }
 
 $session['bufflist'] = isset($session['user']['bufflist']) ? unserialize($session['user']['bufflist']) : [];
@@ -279,21 +245,16 @@ if (! isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi']) < 32)
         $_COOKIE['lgi'] = $u;
         $session['user']['uniqueid'] = $u;
     }
-    else
+    elseif (isset($session['user']['uniqueid']))
     {
-        if (isset($session['user']['uniqueid']))
-        {
-            setcookie('lgi', $session['user']['uniqueid'], strtotime('+365 days'));
-        }
+        setcookie('lgi', $session['user']['uniqueid'], strtotime('+365 days'));
     }
 }
-else
+elseif (isset($_COOKIE['lgi']) && '' != $_COOKIE['lgi'])
 {
-    if (isset($_COOKIE['lgi']) && '' != $_COOKIE['lgi'])
-    {
-        $session['user']['uniqueid'] = $_COOKIE['lgi'];
-    }
+    $session['user']['uniqueid'] = $_COOKIE['lgi'];
 }
+
 $url = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['REQUEST_URI']);
 $url = substr($url, 0, strlen($url) - 1);
 $urlport = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['REQUEST_URI']);
@@ -375,13 +336,10 @@ $beta = getsetting('beta', 0);
 
 if (! $beta && 1 == getsetting('betaperplayer', 1))
 {
+    $beta = 0;
     if (isset($session['user']['beta']))
     {
         $beta = $session['user']['beta'];
-    }
-    else
-    {
-        $beta = 0;
     }
 }
 
