@@ -1,3 +1,9 @@
+/* eslint camelcase: ["error", { allow: [
+    "hex_sha1", "b64_sha1", "str_sha1", "hex_hmac_sha1", "b64_hmac_sha1", "str_hmac_sha1", "sha1_vm_test", "core_sha1",
+    "sha1_ft", "sha1_kt", "core_hmac_sha1", "safe_add"
+    ]
+} ] */
+
 /*!
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -11,25 +17,25 @@
  * Configurable variables. You may need to tweak these to be compatible with
  * the server-side, but the defaults work in most cases.
  */
-var hexcase = 0  /* hex output format. 0 - lowercase; 1 - uppercase        */
+var hexcase = 0 /* hex output format. 0 - lowercase; 1 - uppercase        */
 var b64pad = '' /* base-64 pad character. "=" for strict RFC compliance   */
-var chrsz = 8  /* bits per input character. 8 - ASCII; 16 - Unicode      */
+var chrsz = 8 /* bits per input character. 8 - ASCII; 16 - Unicode      */
 
 /*
  * These are the functions you'll usually want to call
  * They take string arguments and return either hex or base-64 encoded strings
  */
 function hex_sha1 (s) { return binb2hex(core_sha1(str2binb(s), s.length * chrsz)) }
-function b64_sha1 (s) { return binb2b64(core_sha1(str2binb(s), s.length * chrsz)) }
-function str_sha1 (s) { return binb2str(core_sha1(str2binb(s), s.length * chrsz)) }
-function hex_hmac_sha1 (key, data) { return binb2hex(core_hmac_sha1(key, data)) }
-function b64_hmac_sha1 (key, data) { return binb2b64(core_hmac_sha1(key, data)) }
-function str_hmac_sha1 (key, data) { return binb2str(core_hmac_sha1(key, data)) }
+function b64_sha1 (s) { return binb2b64(core_sha1(str2binb(s), s.length * chrsz)) } // eslint-disable-line no-unused-vars
+function str_sha1 (s) { return binb2str(core_sha1(str2binb(s), s.length * chrsz)) } // eslint-disable-line no-unused-vars
+function hex_hmac_sha1 (key, data) { return binb2hex(core_hmac_sha1(key, data)) } // eslint-disable-line no-unused-vars
+function b64_hmac_sha1 (key, data) { return binb2b64(core_hmac_sha1(key, data)) } // eslint-disable-line no-unused-vars
+function str_hmac_sha1 (key, data) { return binb2str(core_hmac_sha1(key, data)) } // eslint-disable-line no-unused-vars
 
 /*
  * Perform a simple self-test to see if the VM is working
  */
-function sha1_vm_test ()
+function sha1_vm_test () // eslint-disable-line no-unused-vars
 {
     return hex_sha1('abc') === 'a9993e364706816aba3e25717850c26c9cd0d89d'
 }
@@ -77,15 +83,15 @@ function core_sha1 (x, len)
         d = safe_add(d, oldd)
         e = safe_add(e, olde)
     }
-    return [a, b, c, d, e]
 
+    return [a, b, c, d, e]
 }
 
 /*
  * Perform the appropriate triplet combination function for the current
  * iteration
  */
-function sha1_ft (t, b, c, d)
+function sha1_ft (t, b, c, d) // eslint-disable-line no-unused-vars
 {
     if (t < 20) return (b & c) | ((~b) & d)
     if (t < 40) return b ^ c ^ d
@@ -96,7 +102,7 @@ function sha1_ft (t, b, c, d)
 /*
  * Determine the appropriate additive constant for the current iteration
  */
-function sha1_kt (t)
+function sha1_kt (t) // eslint-disable-line no-unused-vars
 {
     return (t < 20) ? 1518500249 : (t < 40) ? 1859775393 : (t < 60) ? -1894007588 : -899497514
 }

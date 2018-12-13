@@ -1,3 +1,9 @@
+/* eslint camelcase: ["error", { allow: [
+    "hex_md5", "b64_md5", "str_md5", "hex_hmac_md5", "b64_hmac_md5", "str_hmac_md5", "md5_vm_test", "core_md5",
+    "md5_cmn", "md5_ff", "md5_gg", "md5_hh", "md5_ii", "core_hmac_md5", "safe_add", "bit_rol"
+    ]
+} ] */
+
 /*!
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -11,25 +17,25 @@
  * Configurable variables. You may need to tweak these to be compatible with
  * the server-side, but the defaults work in most cases.
  */
-var hexcase = 0  /* hex output format. 0 - lowercase; 1 - uppercase */
+var hexcase = 0 /* hex output format. 0 - lowercase; 1 - uppercase */
 var b64pad = '' /* base-64 pad character. "=" for strict RFC compliance */
-var chrsz = 8  /* bits per input character. 8 - ASCII; 16 - Unicode */
+var chrsz = 8 /* bits per input character. 8 - ASCII; 16 - Unicode */
 
 /*
  * These are the functions you'll usually want to call
  * They take string arguments and return either hex or base-64 encoded strings
  */
 function hex_md5 (s) { return binl2hex(core_md5(str2binl(s), s.length * chrsz)) }
-function b64_md5 (s) { return binl2b64(core_md5(str2binl(s), s.length * chrsz)) }
-function str_md5 (s) { return binl2str(core_md5(str2binl(s), s.length * chrsz)) }
-function hex_hmac_md5 (key, data) { return binl2hex(core_hmac_md5(key, data)) }
-function b64_hmac_md5 (key, data) { return binl2b64(core_hmac_md5(key, data)) }
-function str_hmac_md5 (key, data) { return binl2str(core_hmac_md5(key, data)) }
+function b64_md5 (s) { return binl2b64(core_md5(str2binl(s), s.length * chrsz)) } // eslint-disable-line no-unused-vars
+function str_md5 (s) { return binl2str(core_md5(str2binl(s), s.length * chrsz)) } // eslint-disable-line no-unused-vars
+function hex_hmac_md5 (key, data) { return binl2hex(core_hmac_md5(key, data)) } // eslint-disable-line no-unused-vars
+function b64_hmac_md5 (key, data) { return binl2b64(core_hmac_md5(key, data)) } // eslint-disable-line no-unused-vars
+function str_hmac_md5 (key, data) { return binl2str(core_hmac_md5(key, data)) } // eslint-disable-line no-unused-vars
 
 /*
  * Perform a simple self-test to see if the VM is working
  */
-function md5_vm_test ()
+function md5_vm_test () // eslint-disable-line no-unused-vars
 {
     return hex_md5('abc') === '900150983cd24fb0d6963f7d28e17f72'
 }
