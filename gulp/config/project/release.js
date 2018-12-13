@@ -1,7 +1,6 @@
 /** *****************************
                  Release Config
 ***************************** **/
-var config
 var npmPackage
 var version
 
@@ -24,7 +23,7 @@ catch (error)
 // looks for version in config or package.json (whichever is available)
 version = (npmPackage && npmPackage.version !== undefined && npmPackage.name === 'idmarinas-lotgd')
     ? npmPackage.version
-    : config.version
+    : 'x.y.z'
 
 /** *****************************
                          Export
