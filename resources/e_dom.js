@@ -1,16 +1,19 @@
+/* global ActiveXObject */
+
 /*! Javascript Generic DOM
  * By Eric Stevens
  */
-function fetchDOM (filename)
+function fetchDOM (filename) // eslint-disable-line no-unused-vars
 {
-    var xmldom;
+    var xmldom
     if (document.implementation && document.implementation.createDocument)
     {
-        //Mozilla style browsers
+        // Mozilla style browsers
         xmldom = document.implementation.createDocument('', '', null)
-    } else if (window.ActiveXObject)
+    }
+    else if (window.ActiveXObject)
     {
-        //IE style browsers
+        // IE style browsers
         xmldom = new ActiveXObject('Microsoft.XMLDOM')
     }
 
@@ -23,21 +26,21 @@ function fetchDOM (filename)
     {
         xmldom.parseXML('<b>Failed to load ' + filename + '</b>')
     }
-    return xmldom;
+    return xmldom
 }
 
-var dom = ''
+var dom = '' // eslint-disable-line no-unused-vars
 
 if (document.implementation && document.implementation.createDocument)
 {
     dom = document.implementation.createDocument('', '', null)
 }
-else
+else if (window.ActiveXObject)
 {
     dom = new ActiveXObject('Microsoft.XMLDOM')
 }
 
-function fetchDOMasync (filename, args, theCode)
+function fetchDOMasync (filename, args, theCode) // eslint-disable-line no-unused-vars
 {
     var xmldom
     try
@@ -73,7 +76,7 @@ function fetchDOMasync (filename, args, theCode)
     return xmldom
 }
 
-function createXML (node)
+function createXML (node) // eslint-disable-line no-unused-vars
 {
     if (!node) { return '<b>You cannot pass null to createXML</b>' }
     if (node.xml) { return node.xml }
@@ -143,21 +146,21 @@ function nodeText (node)
     return out
 }
 
-function parseRSS (xml, htmlescape)
+function parseRSS (xml) // eslint-disable-line no-unused-vars
 {
     var rss = selectSingleNode(xml, 'rss')
     var channel = selectSingleNode(rss, 'channel')
 
     var feed = []
     // collect rss headers
-    feed['title'] = HTMLencode(nodeText(selectSingleNode(channel, 'title')), htmlescape)
-    feed['link'] = HTMLencode(nodeText(selectSingleNode(channel, 'link')), htmlescape)
-    feed['description'] = HTMLencode(nodeText(selectSingleNode(channel, 'description')), htmlescape)
-    var image = selectSingleNode(channel, 'image');
+    feed['title'] = HTMLencode(nodeText(selectSingleNode(channel, 'title')))
+    feed['link'] = HTMLencode(nodeText(selectSingleNode(channel, 'link')))
+    feed['description'] = HTMLencode(nodeText(selectSingleNode(channel, 'description')))
+    var image = selectSingleNode(channel, 'image')
     feed['image'] = []
-    feed['image']['title'] = HTMLencode(nodeText(selectSingleNode(image, 'title')), htmlescape)
-    feed['image']['url'] = HTMLencode(nodeText(selectSingleNode(image, 'url')), htmlescape)
-    feed['image']['link'] = HTMLencode(nodeText(selectSingleNode(image, 'link')), htmlescape)
+    feed['image']['title'] = HTMLencode(nodeText(selectSingleNode(image, 'title')))
+    feed['image']['url'] = HTMLencode(nodeText(selectSingleNode(image, 'url')))
+    feed['image']['link'] = HTMLencode(nodeText(selectSingleNode(image, 'link')))
     feed['items'] = []
     // collect rss items
     var node
@@ -170,10 +173,10 @@ function parseRSS (xml, htmlescape)
             if (node.nodeName === 'item')
             {
                 feed['items'][y] = []
-                feed['items'][y]['title'] = HTMLencode(nodeText(selectSingleNode(node, 'title')), htmlescape)
-                feed['items'][y]['link'] = HTMLencode(nodeText(selectSingleNode(node, 'link')), htmlescape)
-                feed['items'][y]['description'] = HTMLencode(nodeText(selectSingleNode(node, 'description')), htmlescape)
-                feed['items'][y]['pubdate'] = HTMLencode(nodeText(selectSingleNode(node, 'pubDate')), htmlescape)
+                feed['items'][y]['title'] = HTMLencode(nodeText(selectSingleNode(node, 'title')))
+                feed['items'][y]['link'] = HTMLencode(nodeText(selectSingleNode(node, 'link')))
+                feed['items'][y]['description'] = HTMLencode(nodeText(selectSingleNode(node, 'description')))
+                feed['items'][y]['pubdate'] = HTMLencode(nodeText(selectSingleNode(node, 'pubDate')))
                 y = y + 1
             }
         }
@@ -193,7 +196,7 @@ function HTMLencode (input)
     }
 }
 
-function HTMLdecode (input)
+function HTMLdecode (input) // eslint-disable-line no-unused-vars
 {
     if (input == null)
     {
