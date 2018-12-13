@@ -1,24 +1,26 @@
-![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
-![Website](https://img.shields.io/website-up-down-green-red/https/www.infommo.es.svg?label=LOTGD)
-![GitHub top language](https://img.shields.io/github/languages/top/idmarinas/lotgd-game.svg)
-![GitHub language count](https://img.shields.io/github/languages/count/idmarinas/lotgd-game.svg)
-
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
-[![Installation](https://img.shields.io/badge/install-sucess-orange.svg?maxAge=2592000)]()
-[![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)]()
-[![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)]()
+[![Website](https://img.shields.io/website-up-down-green-red/https/lotgd.infommo.es.svg?label=lotgd-demo)](https://lotgd.infommo.es)
+![Installation](https://img.shields.io/badge/install-sucess-orange.svg?maxAge=2592000)
+![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
+![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
-[![Dev](https://img.shields.io/badge/dev-3.1.0-red.svg)]()
+![Dev](https://img.shields.io/badge/dev-3.1.0-red.svg)
+![GitHub issues](https://img.shields.io/github/issues/idmarinas/lotgd-game.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/idmarinas/lotgd-game/latest.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/idmarinas/lotgd-game.svg)
 
+![GitHub top language](https://img.shields.io/github/languages/top/idmarinas/lotgd-game.svg)
+![GitHub language count](https://img.shields.io/github/languages/count/idmarinas/lotgd-game.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
-[![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC)](http://gulpjs.com/)
+[![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
+[![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
+
+[![PayPal - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CAYNPHQ8VN92C&source=url)
 
 # About
 
