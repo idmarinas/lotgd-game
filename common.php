@@ -46,19 +46,10 @@ $license = "\n<!-- Creative Commons License -->\n<a rel='license' href='http://c
 // work.  This license text may not be removed nor altered in any way.
 // Please see the file LICENSE for a full textual description of the license.
 
-$logd_version = '3.0.0 IDMarinas Edition';
-
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
-if (! defined('OVERRIDE_FORCED_NAV'))
-{
-    define('OVERRIDE_FORCED_NAV', false);
-}
-
-if (! defined('ALLOW_ANONYMOUS'))
-{
-    define('ALLOW_ANONYMOUS', false);
-}
+defined('OVERRIDE_FORCED_NAV') or define('OVERRIDE_FORCED_NAV', false);
+defined('ALLOW_ANONYMOUS') or define('ALLOW_ANONYMOUS', false);
 
 session_start();
 
@@ -73,6 +64,15 @@ $session['counter'] = $session['counter'] ?? 0;
 $session['counter']++;
 
 include 'vendor/autoload.php'; //-- Autoload class for new options of game
+
+/**
+ * LEGACY var.
+ *
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ *
+ * @uses Lotgd\Core\Application::VERSION for get version of game
+ */
+$logd_version = \Lotgd\Core\Application::VERSION;
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
@@ -217,12 +217,14 @@ if (OVERRIDE_FORCED_NAV)
 }
 
 $session['user']['restorepage'] = '';
+
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
     $session['user']['restorepage'] = $REQUEST_URI;
 }
 
 $session['user']['alive'] = false;
+
 if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
 {
     $session['user']['alive'] = true;
@@ -337,6 +339,7 @@ $beta = getsetting('beta', 0);
 if (! $beta && 1 == getsetting('betaperplayer', 1))
 {
     $beta = 0;
+
     if (isset($session['user']['beta']))
     {
         $beta = $session['user']['beta'];
