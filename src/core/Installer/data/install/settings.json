@@ -1,0 +1,367 @@
+{
+    "method": "INSERT INTO",
+	"table": "settings",
+	"rows":
+	[
+		{
+			"setting": "allowclans",
+			"value": "1"
+		},
+		{
+			"setting": "allowcreation",
+			"value": "1"
+		},
+		{
+			"setting": "allowspecialswitch",
+			"value": "1"
+		},
+		{
+			"setting": "autofight",
+			"value": "0"
+		},
+		{
+			"setting": "automaster",
+			"value": "1"
+		},
+		{
+			"setting": "bankername",
+			"value": "`@Elessa`0"
+		},
+		{
+			"setting": "bard",
+			"value": "`^Seth`0"
+		},
+		{
+			"setting": "barkeep",
+			"value": "`tCedrik`0"
+		},
+		{
+			"setting": "barmaid",
+			"value": "`%Violet`0"
+		},
+		{
+			"setting": "beta",
+			"value": "0"
+		},
+		{
+			"setting": "betaperplayer",
+			"value": "1"
+		},
+		{
+			"setting": "cachetranslations",
+			"value": "0"
+		},
+		{
+			"setting": "charset",
+			"value": "UTF-8"
+		},
+		{
+			"setting": "clanregistrar",
+			"value": "`%Karissa`0"
+		},
+		{
+			"setting": "collecttexts",
+			"value": "0"
+		},
+		{
+			"setting": "companionslevelup",
+			"value": "1"
+		},
+		{
+			"setting": "daysperday",
+			"value": "4"
+		},
+		{
+			"setting": "deathoverlord",
+			"value": "`$Ramius`0"
+		},
+		{
+			"setting": "debug",
+			"value": "0"
+		},
+		{
+			"setting": "defaultlanguage",
+			"value": "en"
+		},
+		{
+			"setting": "defaultskin",
+			"value": "jade.html"
+		},
+		{
+			"setting": "disablebonuses",
+			"value": "1"
+		},
+		{
+			"setting": "displaymasternews",
+			"value": "1"
+		},
+		{
+			"setting": "dpointspercurrencyunit",
+			"value": "100"
+		},
+		{
+			"setting": "dropmingold",
+			"value": "0"
+		},
+		{
+			"setting": "edittitles",
+			"value": "1"
+		},
+		{
+			"setting": "enablecompanions",
+			"value": "1"
+		},
+		{
+			"setting": "enabletranslation",
+			"value": "1"
+		},
+		{
+			"setting": "exp-array",
+			"value": "100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930"
+		},
+		{
+			"setting": "expirecontent",
+			"value": "180"
+		},
+		{
+			"setting": "expiredebuglog",
+			"value": "18"
+		},
+		{
+			"setting": "expirefaillog",
+			"value": "1"
+		},
+		{
+			"setting": "expiregamelog",
+			"value": "30"
+		},
+		{
+			"setting": "expirenewacct",
+			"value": "10"
+		},
+		{
+			"setting": "expireoldacct",
+			"value": "45"
+		},
+		{
+			"setting": "expiretrashacct",
+			"value": "1"
+		},
+		{
+			"setting": "fightsforinterest",
+			"value": "4"
+		},
+		{
+			"setting": "forestchance",
+			"value": "15"
+		},
+		{
+			"setting": "forestcreaturebar",
+			"value": "0"
+		},
+		{
+			"setting": "forestgemchance",
+			"value": "25"
+		},
+		{
+			"setting": "forestpowerattackchance",
+			"value": "10"
+		},
+		{
+			"setting": "forestpowerattackmulti",
+			"value": "3"
+		},
+		{
+			"setting": "gameoffsetseconds",
+			"value": "0"
+		},
+		{
+			"setting": "gametime",
+			"value": "g:i a"
+		},
+		{
+			"setting": "gravefightsperday",
+			"value": "10"
+		},
+		{
+			"setting": "homecurtime",
+			"value": "1"
+		},
+		{
+			"setting": "homenewdaytime",
+			"value": "1"
+		},
+		{
+			"setting": "homenewestplayer",
+			"value": "1"
+		},
+		{
+			"setting": "homeskinselect",
+			"value": "1"
+		},
+		{
+			"setting": "inboxlimit",
+			"value": "50"
+		},
+		{
+			"setting": "innname",
+			"value": "The Boar's Head Inn"
+		},
+		{
+			"setting": "instantexp",
+			"value": ""
+		},
+		{
+			"setting": "logdnet",
+			"value": "0"
+		},
+		{
+			"setting": "loginbanner",
+			"value": "*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*"
+		},
+		{
+			"setting": "LOGINTIMEOUT",
+			"value": "900"
+		},
+		{
+			"setting": "maxattacks",
+			"value": "4"
+		},
+		{
+			"setting": "maxinterest",
+			"value": "10"
+		},
+		{
+			"setting": "maxlevel",
+			"value": "15"
+		},
+		{
+			"setting": "maxlistsize",
+			"value": "100"
+		},
+		{
+			"setting": "mininterest",
+			"value": "1"
+		},
+		{
+			"setting": "moneydecimalpoint",
+			"value": "."
+		},
+		{
+			"setting": "moneythousandssep",
+			"value": ","
+		},
+		{
+			"setting": "motditems",
+			"value": "5"
+		},
+		{
+			"setting": "multicategory",
+			"value": "0"
+		},
+		{
+			"setting": "multifightdk",
+			"value": "10"
+		},
+		{
+			"setting": "multimaster",
+			"value": "1"
+		},
+		{
+			"setting": "newdaycron",
+			"value": "0"
+		},
+		{
+			"setting": "newestplayer",
+			"value": ""
+		},
+		{
+			"setting": "notifydaysbeforedeletion",
+			"value": "5"
+		},
+		{
+			"setting": "oldmail",
+			"value": "14"
+		},
+		{
+			"setting": "paypalcurrency",
+			"value": "USD"
+		},
+		{
+			"setting": "paypalemail",
+			"value": ""
+		},
+		{
+			"setting": "paypaltext",
+			"value": "Legend of the Green Dragon DP Donation from "
+		},
+		{
+			"setting": "permacollect",
+			"value": "0"
+		},
+		{
+			"setting": "petition_types",
+			"value": "General,Bug"
+		},
+		{
+			"setting": "pvp",
+			"value": "1"
+		},
+		{
+			"setting": "pvpday",
+			"value": "3"
+		},
+		{
+			"setting": "requireemail",
+			"value": "0"
+		},
+		{
+			"setting": "resurrectionturns",
+			"value": "-6"
+		},
+		{
+			"setting": "selfdelete",
+			"value": "0"
+		},
+		{
+			"setting": "serverlanguages",
+			"value": "en,English,fr,Français,dk,Danish,de,Deutsch,es,Español,it,Italian"
+		},
+		{
+			"setting": "specialtybonus",
+			"value": "1"
+		},
+		{
+			"setting": "suicide",
+			"value": "0"
+		},
+		{
+			"setting": "superuseryommessage",
+			"value": "Asking an admin for gems, gold, weapons, armor, or anything else which you have not earned will not be honored.  If you are experiencing problems with the game, please use the 'Petition for Help' link instead of contacting an admin directly."
+		},
+		{
+			"setting": "systemload_lastcheck",
+			"value": "0"
+		},
+		{
+			"setting": "systemload_lastload",
+			"value": "0"
+		},
+		{
+			"setting": "tl_maxallowed",
+			"value": "0"
+		},
+		{
+			"setting": "turns",
+			"value": "10"
+		},
+		{
+			"setting": "villagechance",
+			"value": "0"
+		},
+		{
+			"setting": "villagename",
+			"value": "Degolburg"
+		}
+	]
+}

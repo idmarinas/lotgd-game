@@ -1,0 +1,21 @@
+{
+    "method": "INSERT INTO",
+	"table": "deathmessages",
+	"rows":
+	[
+		{
+			"deathmessage": "`4{goodguyname}`4 has been slain {where} by `4{badguy}`4.",
+			"forest": 1,
+			"graveyard": 0,
+			"taunt": 1,
+			"editor": "Nightborn"
+		},
+		{
+			"deathmessage": "`4{goodguyname}`4 has been defeated {where} by `4{badguy}`4.",
+			"forest": 0,
+			"graveyard": 1,
+			"taunt": 1,
+			"editor": "Nightborn"
+		}
+	]
+}
