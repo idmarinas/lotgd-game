@@ -4,6 +4,7 @@ return [
     'service_manager' => [
         'factories' => [
             Lotgd\Core\Character\Stats::class => Lotgd\Core\Factory\Character\Stats::class,
+            'Lotgd\\Core\\Installer\\Install' => Lotgd\Core\Factory\Installer\Install::class,
             Lotgd\Core\Lib\Cache::class => Lotgd\Core\Factory\Lib\Cache::class,
             Lotgd\Core\Lib\Dbwrapper::class => Lotgd\Core\Factory\Lib\Dbwrapper::class,
             'Lotgd\\Core\\Lib\\Doctrine' => Lotgd\Core\Factory\Lib\Doctrine::class,
