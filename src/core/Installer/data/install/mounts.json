@@ -1,0 +1,55 @@
+{
+    "method": "INSERT INTO",
+	"table": "mounts",
+	"rows":
+	[
+		{
+			"mountname": "Pony",
+			"mountdesc": "This docile beast is young yet.",
+			"mountcategory": "Horses",
+			"mountbuff": "a:5:{s:4:\"name\";s:13:\"`&Pony Attack\";s:8:\"roundmsg\";s:26:\"Your pony fights with you!\";s:6:\"rounds\";s:2:\"20\";s:6:\"atkmod\";s:3:\"1.2\";s:8:\"activate\";s:7:\"offense\";}",
+			"mountcostgems": 6,
+			"mountcostgold": 0,
+			"mountactive": 1,
+			"mountforestfights": 1,
+			"newday": "You strap your {weapon} to your pony's saddle bags, and head out for some adventure!",
+			"recharge": "`&Remembering that is has been quite some time since you last fed your pony, you decide this is a perfect time to relax and allow it to graze the field a bit. You doze off enjoying this peaceful serenity.`0",
+			"partrecharge": "`&You dismount in the field to allow your pony to graze for a moment even though it has recently been fully fed.  As you lean back in the grass to watch the clouds, your pony whickers softly and trots off into the underbrush.  You search for a while before returning to the fields hoping that it'll return.  A short time later, your pony trots back into the clearing holding its head high, looking much more energized and with a very equine grin on its face.`0",
+			"mountfeedcost": 20,
+			"mountlocation": "all",
+			"mountdkcost": 0
+		},
+		{
+			"mountname": "Gelding",
+			"mountdesc": "This powerful beast is fiercely loyal.",
+			"mountcategory": "Horses",
+			"mountbuff": "a:5:{s:4:\"name\";s:16:\"`&Gelding Attack\";s:8:\"roundmsg\";s:29:\"Your gelding fights with you!\";s:6:\"rounds\";s:2:\"40\";s:6:\"atkmod\";s:3:\"1.2\";s:8:\"activate\";s:7:\"offense\";}",
+			"mountcostgems": 10,
+			"mountcostgold": 0,
+			"mountactive": 1,
+			"mountforestfights": 2,
+			"newday": "You strap your {weapon} to your gelding's saddle bags, and head out for some adventure!",
+			"recharge": "`&Remembering that is has been quite some time since you last fed your gelding, you decide this is a perfect time to relax and allow it to graze the field a bit. You doze off enjoying this peaceful serenity.`0",
+			"partrecharge": "`&You dismount in the field to allow your gelding to graze for a moment even though it has recently been fully fed.  As you lean back in the grass to watch the clouds, your gelding whickers softly and trots off into the underbrush.  You search for a while before returning to the fields hoping that it'll return.  A short time later, your gelding trots back into the clearing holding its head high, looking much more energized and with a very equine grin on its face.`n`nAnd here you thought geldings weren't equipped that way any longer!`0",
+			"mountfeedcost": 25,
+			"mountlocation": "all",
+			"mountdkcost": 0
+		},
+		{
+			"mountname": "Stallion",
+			"mountdesc": "This noble beast is huge and powerful!",
+			"mountcategory": "Horses",
+			"mountbuff": "a:5:{s:4:\"name\";s:17:\"`&Stallion Attack\";s:8:\"roundmsg\";s:30:\"Your stallion fights with you!\";s:6:\"rounds\";s:2:\"60\";s:6:\"atkmod\";s:3:\"1.2\";s:8:\"activate\";s:7:\"offense\";}",
+			"mountcostgems": 16,
+			"mountcostgold": 0,
+			"mountactive": 1,
+			"mountforestfights": 3,
+			"newday": "You strap your {weapon} to your stallion's saddle bags, and head out for some adventure!",
+			"recharge": "`&Remembering that is has been quite some time since you last fed your stallion, you decide this is a perfect time to relax and allow it to graze the field a bit. You doze off enjoying this peaceful serenity.`0",
+			"partrecharge": "`&You dismount in the field to allow your stallion to graze for a moment even though it has recently been fully fed.  As you lean back in the grass to watch the clouds, your stallion whickers softly and trots off into the underbrush.  You search for a while before returning to the fields hoping that it'll return.  A short time later, your stallion trots back into the clearing holding its head high, looking much more energized and with a very equine grin on its face.`0",
+			"mountfeedcost": 30,
+			"mountlocation": "all",
+			"mountdkcost": 0
+		}
+	]
+}

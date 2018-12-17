@@ -1,0 +1,14 @@
+{
+    "method": "INSERT INTO",
+	"table": "news",
+	"rows":
+	[
+		{
+			"newstext": "`^A strange awakening takes place in the world.`0",
+			"newsdate": "now()",
+			"accountid": 0,
+			"arguments": "",
+			"tlschema": ""
+		}
+	]
+}
