@@ -36,7 +36,7 @@ trait DbTool
             try
             {
                 //-- Execute a simple query for test connection
-                $metadata = new Metadata(self::$wrapper->getAdapter());
+                $metadata = new Metadata($this->getAdapter());
                 $metadata->getTableNames();
 
                 $this->connection = true;
