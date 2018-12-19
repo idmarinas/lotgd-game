@@ -116,4 +116,14 @@ trait Version
     {
         return array_search($version, $this->versions);
     }
+
+    /**
+     * Get array of versions
+     *
+     * @return array
+     */
+    public function getAllVersions(): array
+    {
+        return $this->versions;
+    }
 }
