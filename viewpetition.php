@@ -146,26 +146,26 @@ if ('' == $op)
 
     $sql =
     'SELECT
-		petitionid,
-		'.DB::prefix('accounts').'.name,
-		'.DB::prefix('petitions').'.date,
-		'.DB::prefix('petitions').'.status,
-		'.DB::prefix('petitions').'.body,
-		'.DB::prefix('petitions').".closedate,
-		accts.name AS closer,
-		CASE status $sort END AS sortorder
-	FROM
-		".DB::prefix('petitions').'
-	LEFT JOIN
-		'.DB::prefix('accounts').'
-	ON	'.DB::prefix('accounts').'.acctid='.DB::prefix('petitions').'.author
-	LEFT JOIN
-		'.DB::prefix('accounts').' AS accts
-	ON	accts.acctid='.DB::prefix('petitions').".closeuserid
-	ORDER BY
-		sortorder ASC,
-		date ASC
-	LIMIT $limit";
+        petitionid,
+        '.DB::prefix('accounts').'.name,
+        '.DB::prefix('petitions').'.date,
+        '.DB::prefix('petitions').'.status,
+        '.DB::prefix('petitions').'.body,
+        '.DB::prefix('petitions').".closedate,
+        accts.name AS closer,
+        CASE status $sort END AS sortorder
+    FROM
+        ".DB::prefix('petitions').'
+    LEFT JOIN
+        '.DB::prefix('accounts').'
+    ON	'.DB::prefix('accounts').'.acctid='.DB::prefix('petitions').'.author
+    LEFT JOIN
+        '.DB::prefix('accounts').' AS accts
+    ON	accts.acctid='.DB::prefix('petitions').".closeuserid
+    ORDER BY
+        sortorder ASC,
+        date ASC
+    LIMIT $limit";
     $result = DB::query($sql);
     addnav('Petitions');
     addnav('Refresh', 'viewpetition.php');
@@ -421,7 +421,7 @@ elseif ('view' == $op)
 if ($id && '' != $op)
 {
     $prevsql = 'SELECT p1.petitionid, p1.status FROM '.DB::prefix('petitions').' AS p1, '.DB::prefix('petitions')." AS p2
-			WHERE p1.petitionid<'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid DESC LIMIT 1";
+            WHERE p1.petitionid<'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid DESC LIMIT 1";
     $prevresult = DB::query($prevsql);
     $prevrow = DB::fetch_assoc($prevresult);
 
@@ -434,7 +434,7 @@ if ($id && '' != $op)
         addnav(['Previous %s', $status], "viewpetition.php?op=view&id=$previd");
     }
     $nextsql = 'SELECT p1.petitionid, p1.status FROM '.DB::prefix('petitions').' AS p1, '.DB::prefix('petitions')." AS p2
-			WHERE p1.petitionid>'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid ASC LIMIT 1";
+            WHERE p1.petitionid>'$id' AND p2.petitionid='$id' AND p1.status=p2.status ORDER BY p1.petitionid ASC LIMIT 1";
     $nextresult = DB::query($nextsql);
     $nextrow = DB::fetch_assoc($nextresult);
 
