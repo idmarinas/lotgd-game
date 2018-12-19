@@ -54,13 +54,10 @@ class Settings
             $setDefault = $default;
             if (false === $default)
             {
+                $setDefault = '';
                 if (isset($defaults[$settingname]))
                 {
                     $setDefault = $defaults[$settingname];
-                }
-                else
-                {
-                    $setDefault = '';
                 }
             }
 
@@ -82,8 +79,6 @@ class Settings
      */
     public function saveSetting(string $settingname, $value): bool
     {
-        $settings = $this->getAllSettings();
-
         //-- Not do nothing if not have connection to DB
         if (false === $this->wrapper->connect())
         {
@@ -99,18 +94,22 @@ class Settings
         );
         $this->wrapper->query($sql);
 
+        if (0 == $this->wrapper->getAffectedRows())
+        {
+            $this->cache->invalidateData($this->getCacheKey(), true);
+
+            return false;
+        }
+
+        $settings = $this->getAllSettings();
+
         $settings[$settingname] = $value;
 
         $this->cache->updateData($this->getCacheKey(), $settings, true);
 
         $this->settings = $settings;
 
-        if ($this->wrapper->getAffectedRows() > 0)
-        {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -120,7 +119,12 @@ class Settings
     {
         $this->settings = $this->cache->getData($this->getCacheKey(), 86400, true);
 
-        if (! is_array($this->settings) || empty($this->settings))
+        //-- Not do nothing if not have connection to DB
+        if (false === $this->wrapper->connect())
+        {
+            return;
+        }
+        elseif (! is_array($this->settings) || empty($this->settings))
         {
             try
             {
