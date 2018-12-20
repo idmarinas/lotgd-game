@@ -15,6 +15,7 @@
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
         "jaxon-php/jaxon-dialogs": "^1.2",
+        "symfony/filesystem": "^3.4",
         "twig/twig": "^2.5",
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.1",
