@@ -65,7 +65,7 @@ function uninstall_module($module)
     if (injectmodule($module, true))
     {
         $fname = $module.'_uninstall';
-        output('Running module uninstall script`n');
+        debug('Running module uninstall script`n');
         tlschema("module-{$module}");
 
         if (! $fname())
@@ -74,26 +74,26 @@ function uninstall_module($module)
         }
         tlschema();
 
-        output('Deleting module entry`n');
+        debug('Deleting module entry`n');
         $delete = DB::delete('modules');
         $delete->where->equalTo('modulename', $module);
         DB::execute($delete);
 
-        output('Deleting module hooks`n');
+        debug('Deleting module hooks`n');
         module_wipehooks();
 
-        output('Deleting module settings`n');
+        debug('Deleting module settings`n');
         $delete = DB::delete('module_settings');
         $delete->where->equalTo('modulename', $module);
         DB::execute($delete);
         invalidatedatacache("modulesettings-settings-$module");
 
-        output('Deleting module user prefs`n');
+        debug('Deleting module user prefs`n');
         $delete = DB::delete('module_userprefs');
         $delete->where->equalTo('modulename', $module);
         DB::execute($delete);
 
-        output('Deleting module object prefs`n');
+        debug('Deleting module object prefs`n');
         $delete = DB::delete('module_objprefs');
         $delete->where->equalTo('modulename', $module);
         DB::execute($delete);
@@ -122,7 +122,7 @@ function install_module($module, $force = true)
 
     if (modulename_sanitize($module) != $module)
     {
-        output("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
+        debug("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
 
         return false;
     }
@@ -149,7 +149,7 @@ function install_module($module, $force = true)
             //check installation requirements
             if (! module_check_requirements($info['requires']))
             {
-                output('`$Module could not installed -- it did not meet its prerequisites.`n');
+                debug('`$Module could not installed -- it did not meet its prerequisites.`n');
 
                 return false;
             }
@@ -199,7 +199,7 @@ function install_module($module, $force = true)
                     return false;
                 }
 
-                output('`^Module installed.  It is not yet active.`n');
+                debug('`^Module installed.  It is not yet active.`n');
                 invalidatedatacache("injections-inject-$mostrecentmodule");
                 massinvalidate('moduleprepare');
 
@@ -208,9 +208,9 @@ function install_module($module, $force = true)
         }
         else
         {
-            output('`$Module could not be injected.');
-            output('Module not installed.');
-            output('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
+            debug('`$Module could not be injected.');
+            debug('Module not installed.');
+            debug('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
 
             return false;
         }
