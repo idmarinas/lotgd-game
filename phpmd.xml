@@ -7,7 +7,7 @@
 
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
-            <property name="minimum" value="2" />
+            <property name="exceptions" value="id" />
         </properties>
     </rule>
 </ruleset>
