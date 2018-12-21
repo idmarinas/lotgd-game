@@ -1,4 +1,4 @@
-# Changes made for Iván Diaz - IDMarinas Edition
+# Changes made for IDMarinas Edition
 
 See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 
@@ -10,27 +10,36 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :cyclone: CHANGES
 
 -   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
+-   **src/core/Lib/Settings.php** It improves the management of the settings cache.
+-   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
+    -   Some files have been modified to fit this
     -   Now for close color/code code you can use:
         -   Use it's own code with **´** before. Examples:
-            -   `` `4This text is dark red´4 ``
-            -   `` `@This text is green´@ ``
-            -   `` `cThis is a center text´c ``
-            -   `` `iThis is cursive text´i ``
-            -   `` `bThis is strong text´b ``
-            -   `` This text have a line break`n `` This code not have a close format
-        -   Use `` `0 `` this method work with all colors (only)
-            -   `` `4This text is dark red`0 ``
-            -   `` `@This text is green`0 ``
+            -   `` `4This text is dark red´4``
+            -   `` `@This text is green´@``
+            -   `` `cThis is a center text´c``
+            -   `` `iThis is cursive text´i``
+            -   `` `bThis is strong text´b``
+            -   ``This text have a line break`n`` This code not have a close format
+        -   Use `` `0`` this method work with all colors (only)
+            -   `` `4This text is dark red`0``
+            -   `` `@This text is green`0``
         -   The system does not autoclose the codes, so you need to close all the codes (when necessary), otherwise the result may vary.
 
 ### :star: FEATURES
 
--   Nothing
+-   _New Installer system_ This version have a new installer of game.
+    -   The new installation system only allows upgrading from the previous version.
+-   _New Component of Game_ `Lotgd\Core\Component\Filesystem`
+    -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
+        -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **common.php** Var: `$logd_version` is now DEPRECATED, for see version of game use:
+    -   Public display version: `Lotgd\Core\Application::VERSION`
+    -   Identify numeric version: `Lotgd\Core\Application::VERSION_NUMBER`
 
 ### :wrench: FIXES
 
@@ -38,12 +47,18 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/configuration/configuration_data.php** Fixed error with data
 -   **lib/data/configuration_data.php** Deleted unused data
 -   **lib/nav.php** Fixed error with new color/code syntax
+-   Check if have connect before execute function
+    -   **src/core/Lib/Dbwrapper.php**
+    -   **src/core/Lib/Settings.php**
+    -   **src/core/Lib/Pattern/Zend.php**
+-   **common.php** Fixed error with clean installation
+-   **src/core/Factory/Character/Stats.php** Deleted var not defined (and unused)
 
 ### :x: REMOVES
 
 -   **common.php** Code removed for upgrade from version 2.7.0 to 3.0.0 IDMarinas edition
 -   **lib/dbwrapper.php** Removed deprecated method `query_cached`
-    -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\\Core\\Lib\\Dbwrapper` to get this info
+    -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\Core\Lib\Dbwrapper` to get this info
 -   **lib/pageparts.php** Removed deprecated function `popup`
 
 ### :notebook: NOTES
