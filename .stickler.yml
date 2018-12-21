@@ -1,12 +1,16 @@
 linters:
-  phpcs:
-    standard: PSR2
-    fixer: true
-  csslint: {  }
+    phpcs:
+        standard: PSR2
+        fixer: false
+    eslint:
+        config: .eslintrc.js
+        fixer: true
 files:
-  ignore:
-    - 'vendor/*'
-    - 'bower_components/*'
-    - 'node_modules/*'
+    ignore:
+        - 'vendor/*'
+        - 'bower_components/*'
+        - 'node_modules/*'
+        - 'dist/'
+        - 'semantic/*'
 fixers:
-  enable: true
+    enable: true

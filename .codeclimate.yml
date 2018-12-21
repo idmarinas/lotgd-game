@@ -45,7 +45,7 @@ plugins:
     nodesecurity:
         enabled: true
     eslint:
-        enabled: true
+        enabled: false
         channel: "eslint-5"
     sonar-php:
         enabled: true
@@ -89,8 +89,10 @@ plugins:
         checks:
             CleanCode/StaticAccess:
                 enabled: false
+            Naming/BooleanGetMethodName:
+                enabled: false
     phpcodesniffer:
-        enabled: true
+        enabled: false
         exclude_patterns:
             - "assets/"
             - "cache/"
