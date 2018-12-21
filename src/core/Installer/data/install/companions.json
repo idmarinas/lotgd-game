@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "companions",
+    "entity": "Lotgd\\Core\\Entity\\Companions",
 	"rows":
 	[
 		{

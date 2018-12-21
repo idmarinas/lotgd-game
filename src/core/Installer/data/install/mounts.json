@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "mounts",
+    "entity": "Lotgd\\Core\\Entity\\Mounts",
 	"rows":
 	[
 		{

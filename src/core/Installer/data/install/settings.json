@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "settings",
+    "entity": "Lotgd\\Core\\Entity\\Settings",
 	"rows":
 	[
 		{
@@ -209,7 +210,7 @@
 		},
 		{
 			"setting": "instantexp",
-			"value": ""
+			"value": "0"
 		},
 		{
 			"setting": "logdnet",
@@ -272,10 +273,6 @@
 			"value": "0"
 		},
 		{
-			"setting": "newestplayer",
-			"value": ""
-		},
-		{
 			"setting": "notifydaysbeforedeletion",
 			"value": "5"
 		},
@@ -286,10 +283,6 @@
 		{
 			"setting": "paypalcurrency",
 			"value": "USD"
-		},
-		{
-			"setting": "paypalemail",
-			"value": ""
 		},
 		{
 			"setting": "paypaltext",

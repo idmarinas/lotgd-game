@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "deathmessages",
+    "entity": "Lotgd\\Core\\Entity\\Deathmessages",
 	"rows":
 	[
 		{

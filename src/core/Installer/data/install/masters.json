@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "masters",
+    "entity": "Lotgd\\Core\\Entity\\Masters",
 	"rows":
 	[
 		{

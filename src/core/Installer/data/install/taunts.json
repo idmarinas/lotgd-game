@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "taunts",
+    "entity": "Lotgd\\Core\\Entity\\Taunts",
 	"rows":
 	[
 		{

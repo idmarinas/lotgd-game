@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "weapons",
+    "entity": "Lotgd\\Core\\Entity\\Weapons",
 	"rows":
 	[
 		{

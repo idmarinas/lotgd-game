@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "creatures",
+    "entity": "Lotgd\\Core\\Entity\\Creatures",
 	"rows":
 	[
 		{

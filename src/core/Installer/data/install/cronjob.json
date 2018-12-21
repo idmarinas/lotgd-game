@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "cronjob",
+    "entity": "Lotgd\\Core\\Entity\\Cronjob",
 	"rows":
 	[
 		{

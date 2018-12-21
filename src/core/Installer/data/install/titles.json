@@ -1,6 +1,7 @@
 {
     "method": "insert",
 	"table": "titles",
+    "entity": "Lotgd\\Core\\Entity\\Titles",
 	"rows":
 	[
 		{
