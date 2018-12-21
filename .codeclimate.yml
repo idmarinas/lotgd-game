@@ -85,12 +85,10 @@ plugins:
         config:
             file_extensions:
                 - php
-            rulesets: "cleancode,controversial,design,naming,unusedcode"
+            rulesets: "cleancode,controversial,design,naming,unusedcode,phpmd.xml"
         checks:
             CleanCode/StaticAccess:
                 enabled: false
-            Naming/ShortVariable:
-                minimum: 2
     phpcodesniffer:
         enabled: true
         exclude_patterns:
