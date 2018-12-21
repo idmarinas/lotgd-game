@@ -59,6 +59,7 @@ $session['user']['gentime'] = $session['user']['gentime'] ?? 0;
 $session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
 $session['user']['gensize'] = $session['user']['gensize'] ?? 0;
 $session['user']['acctid'] = $session['user']['acctid'] ?? 0;
+$session['user']['restorepage'] = $session['user']['restorepage'] ?? '';
 $session['counter'] = $session['counter'] ?? 0;
 
 $session['counter']++;
@@ -69,8 +70,6 @@ include 'vendor/autoload.php'; //-- Autoload class for new options of game
  * LEGACY var.
  *
  * @deprecated 3.1.0 Delete in version 3.2.0
- *
- * @uses Lotgd\Core\Application::VERSION for get version of game
  */
 $logd_version = \Lotgd\Core\Application::VERSION;
 
@@ -142,7 +141,8 @@ elseif ($logd_version != getsetting('installer_version', '-1') && ! defined('IS_
     define('NO_SAVE_USER', true);
     page_footer();
 }
-elseif (file_exists('installer.php') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
+
+if (file_exists('installer.php') && $logd_version == getsetting('installer_version', '-1') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
 {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     page_header('Major Security Risk');
@@ -215,8 +215,6 @@ if (OVERRIDE_FORCED_NAV)
 {
     $nokeeprestore[$SCRIPT_NAME] = 1;
 }
-
-$session['user']['restorepage'] = '';
 
 if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
 {
