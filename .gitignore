@@ -19,3 +19,5 @@ src/ajax/local
 !src/ajax/local/README.md
 src/local
 !src/local/README.md
+!src/local/Entity/.gitkeep
+cli-config.php
