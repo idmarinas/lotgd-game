@@ -41,6 +41,7 @@ class Code
         '´H' => '</span>',
         '`n' => '<br>',
         '`0' => '</span>',
+        '´0' => '</span>',//-- Prevent errors
     ];
 
     /**
