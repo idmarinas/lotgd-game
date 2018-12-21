@@ -7,7 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Creatures.
  *
- * @ORM\Table(name="creatures", indexes={@ORM\Index(name="creaturecategory", columns={"creaturecategory"}), @ORM\Index(name="creaturelevel", columns={"creaturelevel"})})
+ * @ORM\Table(name="creatures",
+ *      indexes={
+ *          @ORM\Index(name="creaturecategory", columns={"creaturecategory"}),
+ *          @ORM\Index(name="creaturelevel", columns={"creaturelevel"})
+ *      }
+ * )
  * @ORM\Entity
  */
 class Creatures
