@@ -30,12 +30,13 @@ class Doctrine implements FactoryInterface
         $adapter = is_array($adapter) ? $adapter : [];
         $isDevelopment = (bool) ($options['development'] ?? false);
         $doctrine = $options['doctrine'] ?? [];
+        $cacheDir = trim($options['cache']['config']['cache_dir'] ?? 'cache/', '/');
+        $cacheDir = "{$cacheDir}/doctrine";
 
         $doctrineCache = new DoctrineCache\ArrayCache();
         if (! $isDevelopment)
         {
-            $cacheDir = $options['cache']['config']['cache_dir'] ?? 'cache';
-            $doctrineCache = new DoctrineCache\FilesystemCache(trim($cacheDir, '/').'/doctrine');
+            $doctrineCache = new DoctrineCache\FilesystemCache("{$cacheDir}/Cache");
 
             if (isset($doctrine['cache_class']) && class_exists($doctrine['cache_class']))
             {
@@ -55,7 +56,7 @@ class Doctrine implements FactoryInterface
         $config->setMetadataCacheImpl($doctrineCache);
         $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(['src/core/Entity', 'src/local/Entity'], false));
         $config->setQueryCacheImpl($doctrineCache);
-        $config->setProxyDir($doctrine['proxy_dir'] ?? 'doctrine/Proxy');
+        $config->setProxyDir("{$cacheDir}/Proxy");
         $config->setProxyNamespace('Lotgd\Proxies');
         $config->setAutoGenerateProxyClasses(($isDevelopment ? true : AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS));
 
