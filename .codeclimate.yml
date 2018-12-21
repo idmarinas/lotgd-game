@@ -89,6 +89,8 @@ plugins:
         checks:
             CleanCode/StaticAccess:
                 enabled: false
+            Naming/ShortVariable:
+                threshold: 2
     phpcodesniffer:
         enabled: true
         exclude_patterns:
