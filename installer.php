@@ -200,7 +200,7 @@ if ($stage > $session['stagecompleted'])
     $session['stagecompleted'] = $stage;
 }
 
-page_header('LoGD Installer &#151; %s', $stages[$stage]);
+page_header('LoGD Installer &#151; %s', $stages[$stage] ?? $stages[0]);
 
 switch ($stage)
 {

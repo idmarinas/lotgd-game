@@ -1,7 +1,5 @@
 <?php
 
-$sql_upgrade_statements = include_once 'lib/installer/installer_sqlstatements.php';
-
 if (httppost('type') > '')
 {
     $session['fromversion'] = httppost('version');
@@ -21,7 +19,8 @@ if (! isset($session['fromversion']) || '' == $session['fromversion'])
     rawoutput("<table class='ui very basic table'><tr><td>");
     output('`2I should:`0');
     rawoutput('</td><td>');
-    $version = getsetting('installer_version', '-1');
+
+    $version = (string) getsetting('installer_version', '-1');
 
     $session['dbinfo']['upgrade'] = false;
     if ('-1' != $version)
@@ -30,18 +29,20 @@ if (! isset($session['fromversion']) || '' == $session['fromversion'])
     }
     rawoutput("<input type='radio' value='upgrade' name='type' ".($session['dbinfo']['upgrade'] ? 'checked' : '').'>');
     output(' `2Perform an upgrade from ');
-    // output('`$For now cant do a upgrade installation.`2`n');
-    if ('-1' == $version)
-    {
-        $version = '0.9.7';
-    }
-    reset($sql_upgrade_statements);
-    unset($sql_upgrade_statements['-1']);
+
+    $version = ('-1' == $version) ? '0.9' : $version;
+
+    $installer = new \Lotgd\Core\Installer\Install();
+    $lotgd_versions = $installer->getAllVersions();
+
+    $version = $installer->getIntVersion($version);
+    unset($installer, $lotgd_versions[-1]);
+
     rawoutput("<select name='version' class='ui search dropdown'>");
 
-    foreach ($sql_upgrade_statements as $key => $val)
+    foreach ($lotgd_versions as $name => $key)
     {
-        rawoutput("<option value='$key'".($version == $key ? ' selected' : '').">$key</option>");
+        rawoutput("<option value='$key'".($version == $key ? ' selected' : '').">$name</option>");
     }
     rawoutput('</select>');
     rawoutput("<br><input type='radio' value='install' name='type' ".($session['dbinfo']['upgrade'] ? '' : 'checked').'>');

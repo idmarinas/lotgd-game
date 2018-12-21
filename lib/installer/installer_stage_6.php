@@ -4,12 +4,9 @@ use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\ValueGenerator;
 
-if (file_exists('config/autoload/local/dbconnect.php'))
-{
-    $success = true;
-    $initial = false;
-}
-else
+$success = true;
+$initial = false;
+if (! file_exists('config/autoload/local/dbconnect.php'))
 {
     $initial = true;
     output('`@`c`bWriting your "config/autoload/local/dbconnect.php" file´b´c');
@@ -59,18 +56,16 @@ else
 
     $result = file_put_contents('config/autoload/local/dbconnect.php', $code);
 
+    $failure = true;
     if (false !== $result)
     {
         $failure = false;
         output('`n`@Success!`2  I was able to write your "config/autoload/local/dbconnect.php" file, you can continue on to the next step.');
     }
-    else
-    {
-        $failure = true;
-    }
 
     if ($failure)
     {
+        $success = false;
         output('`n`$Unfortunately, I was not able to write your "config/autoload/local/dbconnect.php" file.');
         output('`2You will have to create this file yourself, and upload it to your web server.');
         output('The contents of this file should be as follows:`3');
@@ -80,12 +75,11 @@ else
         output('You can refresh this page to see if you were successful.');
         output('`nIf have problems, you can try delete file "cache/service-manager.config.php".');
     }
-    else
-    {
-        $success = true;
-    }
+}
 
-    //-- Delete the old cache file from the Service Manager and force it to generate it again.
+//-- Delete the old cache file from the Service Manager and force it to generate it again.
+if (file_exists('cache/service-manager.config.php'))
+{
     unlink('cache/service-manager.config.php');
 }
 
@@ -96,6 +90,6 @@ if (! $success)
 
 if (! $initial)
 {
-    output('`$The file "dbconnect.php" was created before. If you want update with new data, please delete it.`n');
+    output('`$The file "config/autoload/local/dbconnect.php" was created before. If you want update with new data, please delete it.`n');
     output('For now, game cant do update installation.`0`n');
 }

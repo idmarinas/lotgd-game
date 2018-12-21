@@ -1,191 +1,110 @@
 <?php
 
-$sql_upgrade_statements = include 'lib/installer/installer_sqlstatements.php';
-require_once 'lib/installer/installer_functions.php';
-require_once 'lib/tabledescriptor.php';
-
 //-- To avoid conflicts if you have a code debugger installed such as xDebug
 if (0 != ini_get('max_execution_time'))
 {
-    set_time_limit(660);
-} //-- Temporary increased limit execution time
+    set_time_limit(660); //-- Temporary increased limit execution time
+}
 
-output('`@`c`bBuilding the Tables´b´c');
-output("`2I'm now going to build the tables.");
-output('If this is an upgrade, your current tables will be brought in line with the current version.');
-output("If it's an install, the necessary tables will be placed in your database.`n");
-output('`n`@Table Synchronization Logs:`n');
-rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-$adapter = LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
-$descriptors = descriptors($adapter->getPrefix());
-reset($descriptors);
+/**
+ * Configure de installer class.
+ */
+$installer = LotgdLocator::get(\Lotgd\Core\Installer\Install::class);
 
-//-- This is for avoid error when sync tables and last versions of core.
-//-- This can overwrite changes made by previous versions
+//-- Check if can install this version
+$installer->versionInstalled((string) getsetting('installer_version', '-1'));
+//-- Check if is an upgrade or clean install
+$installer->isUpgradeOn();
 if (false == $session['dbinfo']['upgrade'])
 {
-    //-- Only do it when clean install
-    foreach ($descriptors as $tablename => $descriptor)
-    {
-        output("`3Synchronizing table `#$tablename`3.`n");
-        synctable($tablename, $descriptor, true);
+    $installer->isUpgradeOff();
+}
 
-        if (false == $session['dbinfo']['upgrade'])
-        {
-            //on a clean install, destroy all old data.
-            DB::query("TRUNCATE TABLE $tablename");
-        }
-    }
+if (false === $installer->canInstall() && $installer->isUpgrade())
+{
+    page_header('Unable to upgrade');
+    addnav('Home', 'home.php');
+
+    output('`c`b`4Unable to upgrade to version %s`0´b´c`n', \Lotgd\Core\Application::VERSION);
+    output($installer->getFailInstallMessage());
+
+    page_footer();
+}
+
+output('`c`b`@Installing/Updating the game`0´b´c');
+
+/*
+ * Pre-Install: before update core tables execute this code of install
+ */
+output('`b`@Performing a pre-installation`0´b`n');
+output('`2The intention of this is to be able to migrate the data to the new structure of the tables, for each new version of the core.`n');
+output('This is necessary to pass data to new tables, useful when modifying tables by deleting fields and renaming them.`n');
+output('This tries to guarantee the integrity of the data and that they are not lost in the updates.`0`n');
+
+output('`n`@Pre-install Logs:`0`n');
+rawoutput('<div class="ui segment">');
+$pre = $installer->makePreInstall();
+foreach($pre as $value)
+{
+    output($value);
 }
 rawoutput('</div>');
-output("`n`2The tables now have new fields and columns added, I'm going to begin importing data now.`n");
-rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-$dosql = false;
-reset($sql_upgrade_statements);
 
-foreach ($sql_upgrade_statements as $key => $val)
+output('`@`bBuilding the Tables´b`0`n');
+output("`2I'm now going to build the tables.");
+output('If this is an upgrade, your current tables will be brought in line with the current version.');
+output("If it's an install, the necessary tables will be placed in your database.`0`n");
+
+/*
+ * Synchronization of core tables, you can found this entities in "src/core/Entity"
+ */
+output('`n`@Table Synchronization Logs:`0`n');
+output("`2It's need to keep the tables synchronized to ensure data integrity.`0`n");
+rawoutput('<div class="ui segment">');
+$sync = $installer->makeSynchronizationTables();
+foreach($sync as $value)
 {
-    if ($dosql)
-    {
-        output('`3Version `#%s`3: %s SQL statements...`n', $key, count($val));
-
-        if (count($val) > 0)
-        {
-            output('`^Doing: `6');
-            reset($val);
-            $count = 0;
-
-            while (list($id, $sql) = each($val))
-            {
-                $onlyupgrade = 0;
-
-                if ('1|' == substr($sql, 0, 2))
-                {
-                    $sql = substr($sql, 2);
-                    $onlyupgrade = 1;
-                }
-                // Skip any statements that should only be run during
-                // upgrades from previous versions.
-                if (! $session['dbinfo']['upgrade'] && $onlyupgrade)
-                {
-                    continue;
-                }
-                $count++;
-
-                if (0 == $count % 10 && $count != count($val))
-                {
-                    output_notl("`6$count...");
-                }
-
-                if (! DB::query($sql))
-                {
-                    output("`n`\$Error: `^'%s'`7 executing `#'%s'`7.`n",
-                    DB::error(), $sql);
-                }
-            }
-            output("$count.`n");
-        }
-    }
-
-    if ($key == $session['fromversion'] || false == $session['dbinfo']['upgrade'])
-    {
-        $dosql = true;
-    }
+    output($value);
 }
 rawoutput('</div>');
-    /*
-output("`n`2Now I'll install the recommended modules.");
-output("Please note that these modules will be installed, but not activated.");
-output("Once installation is complete, you should use the Module Manager found in the superuser grotto to activate those modules you wish to use.");
-reset($recommended_modules);
-rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-while (list($key,$modulename)=each($recommended_modules)){
-output("`3Installing `#$modulename`\$`n");
-install_module($modulename, false);
-}
-rawoutput("</div>");
-*/
-if (! isset($session['skipmodules']) || ! $session['skipmodules'])
+
+/**
+ * Insert data
+ */
+output('`n`@Insert data Logs:`0`n');
+output("`2The tables now have new fields and columns added, I'm going to begin importing data now.`0`n");
+rawoutput('<div class="ui segment">');
+$installer->dataInsertedOff();
+if ($session['installer']['dataInserted'] ?? false)
 {
-    output("`n`2Now I'll install and configure your modules.");
-
-    rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-
-    reset($session['moduleoperations']);
-    while (list($modulename, $val) = each($session['moduleoperations']))
-    {
-        $ops = explode(',', $val);
-        reset($ops);
-
-        while (list($trash, $op) = each($ops))
-        {
-            switch ($op)
-            {
-                case 'uninstall':
-                    output("`3Uninstalling `#$modulename`3: ");
-
-                    if (uninstall_module($modulename))
-                    {
-                        output('`@OK!`0`n');
-                    }
-                    else
-                    {
-                        output('`$Failed!`0`n');
-                    }
-                break;
-                case 'install':
-                    output("`3Installing `#$modulename`3: ");
-
-                    if (install_module($modulename))
-                    {
-                        output('`@OK!`0`n');
-                    }
-                    else
-                    {
-                        output('`$Failed!`0`n');
-                    }
-                    install_module($modulename);
-                break;
-                case 'activate':
-                    output("`3Activating `#$modulename`3: ");
-
-                    if (activate_module($modulename))
-                    {
-                        output('`@OK!`0`n');
-                    }
-                    else
-                    {
-                        output('`$Failed!`0`n');
-                    }
-                break;
-                case 'deactivate':
-                    output("`3Deactivating `#$modulename`3: ");
-
-                    if (deactivate_module($modulename))
-                    {
-                        output('`@OK!`0`n');
-                    }
-                    else
-                    {
-                        output('`$Failed!`0`n');
-                    }
-                break;
-                case 'donothing':
-                break;
-            }
-        }
-        $session['moduleoperations'][$modulename] = 'donothing';
-    }
-    rawoutput('</div>');
+    $installer->dataInsertedOn();
 }
-// output("`n`2Finally, I'll clean up old data.`n");
-// rawoutput("<div style='width: 100%; height: 150px; max-height: 150px; overflow: auto;'>");
-// reset($descriptors);
+$data = $installer->makeInsertData();
+$session['installer']['dataInserted'] = $installer->dataInserted();
+foreach($data as $value)
+{
+    output($value);
+}
+rawoutput('</div>');
 
-// while (list($tablename, $descriptor) = each($descriptors))
-// {
-//     output("`3Cleaning up `#$tablename`3...`n");
-//     synctable($tablename, $descriptor);
-// }
-// rawoutput('</div>');
+/**
+ * Installation of modules
+ */
+$installer->skipModulesOff();
+$installer->setModules($session['moduleoperations'] ?? []);
+if ($session['skipmodules'] ?? false)
+{
+    $installer->skipModulesOn();
+}
+
+output('`n`@Modules Logs:`0`n');
+output("`2Now I'll install and configure your modules.`0`n");
+rawoutput('<div class="ui segment">');
+$data = $installer->makeInstallOfModules();
+foreach($data as $value)
+{
+    output($value);
+}
+rawoutput('</div>');
+
 output("`n`n`^You're ready for the next step.");

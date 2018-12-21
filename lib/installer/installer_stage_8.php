@@ -3,8 +3,6 @@
 require_once 'lib/installer/installer_functions.php';
 require_once 'lib/sanitize.php';
 
-$session['skipmodules'] = false;
-
 if (array_key_exists('modulesok', $_POST))
 {
     $session['moduleoperations'] = $_POST['modules'] ?? [];
@@ -30,7 +28,7 @@ output('`n`n`^If you are not familiar with Legend of the Green Dragon, and how t
 output("`n`n`@There is an extensive community of users who write modules for LoGD at <a href='http://dragonprime.net/'>http://dragonprime.net/</a>.<br>", true);
 $phpram = ini_get('memory_limit');
 
-if (return_bytes($phpram) < 12582912 && -1 != $phpram && ! $session['overridememorylimit'] && ! $session['dbinfo']['upgrade'])
+if (return_bytes($phpram) < 12582912 && -1 != $phpram && ! ($session['overridememorylimit'] ?? false) && ! $session['dbinfo']['upgrade'])
 { // 12 MBytes
     // enter this ONLY if it's not an upgrade and if the limit is really too low
     output('`n`n`$Warning: Your PHP memory limit is set to a very low level.');
@@ -87,8 +85,6 @@ else
         $file = file_get_contents("modules/$modulename.php");
 
         if (false === strpos($file, $modulename.'_getmoduleinfo') ||
-            //strpos($file,$shortname."_dohook")===false ||
-            //do_hook is not a necessity
             false === strpos($file, $modulename.'_install') ||
             false === strpos($file, $modulename.'_uninstall'))
         {
@@ -127,6 +123,7 @@ else
 
     if (0 == count($all_modules))
     {
+        $session['skipmodules'] = true;
         output_notl('<tr class="center aligned"><td>`$Not modules found in folder "`b/modules´b"`0</td></tr>', true);
     }
 
@@ -167,13 +164,14 @@ else
                             $moduleinfo['installed'] = true;
                             $moduleinfo['active'] = false;
                         break;
-                        case 'donothing':
-                        break;
                     }
                 }
             }
             rawoutput('<tr>');
 
+            $uninstallop = 'donothing';
+            $installop = 'install';
+            $activateop = 'install,activate';
             if ($moduleinfo['realactive'])
             {
                 $uninstallop = 'uninstall';
@@ -186,12 +184,7 @@ else
                 $installop = 'donothing';
                 $activateop = 'activate';
             }
-            else
-            {
-                $uninstallop = 'donothing';
-                $installop = 'install';
-                $activateop = 'install,activate';
-            }
+
             $uninstallcheck = false;
             $installcheck = false;
             $activatecheck = false;
@@ -202,12 +195,10 @@ else
             }
             elseif ($moduleinfo['installed'])
             {
-                //echo "<font color='red'>$modulename is installed but not active.</font><br>";
                 $installcheck = true;
             }
             else
             {
-                //echo "$modulename is uninstalled.<br>";
                 $uninstallcheck = true;
             }
 

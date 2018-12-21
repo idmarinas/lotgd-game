@@ -36,7 +36,7 @@ if (0 == DB::num_rows($result))
             $pass = md5(md5(stripslashes(httppost('pass1'))));
             $sql = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='$name'";
             DB::query($sql);
-            $sql = 'INSERT INTO '.DB::prefix('accounts')." (login,password,superuser,name,ctitle,regdate) VALUES('$name','$pass',$su,'`%Admin `&$name`0','`%Admin', NOW())";
+            $sql = 'INSERT INTO '.DB::prefix('accounts')." (login,password,superuser,name,ctitle,regdate) VALUES('$name','$pass',$su,'`%Admin `&$name`0','`%Admin`0', NOW())";
             $result = DB::query($sql);
 
             if (0 == DB::affected_rows($result))
