@@ -83,8 +83,7 @@ plugins:
             - "templates/"
             - "themes/"
         config:
-            file_extensions:
-                - php
+            file_extensions: "php"
             rulesets: "cleancode,controversial,design,naming,unusedcode,phpmd.xml"
         checks:
             CleanCode/StaticAccess:
