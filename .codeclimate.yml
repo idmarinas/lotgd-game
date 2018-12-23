@@ -45,7 +45,7 @@ plugins:
     nodesecurity:
         enabled: true
     eslint:
-        enabled: false
+        enabled: true
         channel: "eslint-5"
     sonar-php:
         enabled: true
