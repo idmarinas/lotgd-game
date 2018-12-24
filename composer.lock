@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6f6b58ae0ee9b1a07c35632bffd2226",
+    "content-hash": "4536a77c718b769b69bfe6b46c7078a8",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -2526,44 +2526,43 @@
         },
         {
             "name": "zendframework/zend-hydrator",
-            "version": "2.4.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-hydrator.git",
-                "reference": "70b02f4d8676e64af932625751750b5ca72fff3a"
+                "reference": "baa10aaafe92559d2579d3dc8417b7b690f260bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-hydrator/zipball/70b02f4d8676e64af932625751750b5ca72fff3a",
-                "reference": "70b02f4d8676e64af932625751750b5ca72fff3a",
+                "url": "https://api.github.com/repos/zendframework/zend-hydrator/zipball/baa10aaafe92559d2579d3dc8417b7b690f260bc",
+                "reference": "baa10aaafe92559d2579d3dc8417b7b690f260bc",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-stdlib": "^3.0"
+                "php": "^7.2",
+                "zendframework/zend-stdlib": "^3.2.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+                "phpspec/prophecy": "^1.7.5",
+                "phpstan/phpstan": "^0.10.5",
+                "phpunit/phpunit": "^7.5",
                 "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-                "zendframework/zend-filter": "^2.6",
-                "zendframework/zend-inputfilter": "^2.6",
-                "zendframework/zend-serializer": "^2.6.1",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
+                "zendframework/zend-eventmanager": "^3.2.1",
+                "zendframework/zend-modulemanager": "^2.8",
+                "zendframework/zend-serializer": "^2.9",
+                "zendframework/zend-servicemanager": "^3.3.2"
             },
             "suggest": {
-                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0, to support aggregate hydrator usage",
-                "zendframework/zend-filter": "^2.6, to support naming strategy hydrator usage",
-                "zendframework/zend-serializer": "^2.6.1, to use the SerializableStrategy",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3, to support hydrator plugin manager usage"
+                "zendframework/zend-eventmanager": "^3.2, to support aggregate hydrator usage",
+                "zendframework/zend-serializer": "^2.9, to use the SerializableStrategy",
+                "zendframework/zend-servicemanager": "^3.3, to support hydrator plugin manager usage"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-release-1.0": "1.0.x-dev",
-                    "dev-release-1.1": "1.1.x-dev",
-                    "dev-master": "2.4.x-dev",
-                    "dev-develop": "2.5.x-dev"
+                    "dev-release-2.4": "2.4.x-dev",
+                    "dev-master": "3.0.x-dev",
+                    "dev-develop": "3.1.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Hydrator",
@@ -2585,7 +2584,7 @@
                 "hydrator",
                 "zf"
             ],
-            "time": "2018-11-19T19:16:10+00:00"
+            "time": "2018-12-10T17:48:39+00:00"
         },
         {
             "name": "zendframework/zend-i18n",
