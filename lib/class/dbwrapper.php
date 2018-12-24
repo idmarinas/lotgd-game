@@ -7,6 +7,7 @@
 use Lotgd\Core\Lib\Dbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Paginator\Paginator;
 
 class DB
 {
@@ -150,14 +151,11 @@ class DB
      *
      * @param Zend\Paginator\Paginator $paginator
      * @param string                   $url
-     * @param bool                     $forcePages Force to show pages if only have 1 page
+     * @param bool|null                $forcePages Force to show pages if only have 1 page
      */
-    public static function pagination($paginator, string $url, bool $forcePages = false)
+    public static function pagination(Paginator $paginator, string $url, $forcePages = null)
     {
-        if ($paginator instanceof Paginator)
-        {
-            $paginator = $paginator->getPages('all');
-        }
+        $paginator = $paginator->getPages('all');
 
         if (1 >= $paginator->pageCount && ! $forcePages)
         {
