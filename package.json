@@ -34,7 +34,7 @@
     "dependencies": {
         "jquery": "^3.3.1",
         "semantic-ui": "2.4.2",
-        "sweetalert2": "^7.32.4",
+        "sweetalert2": "^7.33.1",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
