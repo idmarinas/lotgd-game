@@ -20,7 +20,7 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="messageid", type="integer", nullable=false)
+     * @ORM\Column(name="messageid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -29,16 +29,16 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="msgfrom", type="integer", nullable=false)
+     * @ORM\Column(name="msgfrom", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $msgfrom = '0';
+    private $msgfrom = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="msgto", type="integer", nullable=false)
+     * @ORM\Column(name="msgto", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $msgto = '0';
+    private $msgto = 0;
 
     /**
      * @var string
@@ -57,21 +57,21 @@ class Mail
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="sent", type="datetime", nullable=false)
+     * @ORM\Column(name="sent", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $sent = '0000-00-00 00:00:00';
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="seen", type="boolean", nullable=false)
+     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default":"0"})
      */
     private $seen = '0';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="originator", type="integer", nullable=false)
+     * @ORM\Column(name="originator", type="integer", nullable=false, options={"unsigned":true})
      */
     private $originator = '0';
 

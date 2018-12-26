@@ -38,16 +38,16 @@ class Armor
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false)
+     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned":true, "default":"1"})
      */
-    private $defense = '1';
+    private $defense = 1;
 
     /**
      * @var int
      *
      * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned":true})
      */
-    private $level = '0';
+    private $level = 0;
 
     /**
      * Set the value of Armorid.

@@ -21,7 +21,7 @@ class Faillog
     /**
      * @var int
      *
-     * @ORM\Column(name="eventid", type="integer", nullable=false)
+     * @ORM\Column(name="eventid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -30,7 +30,7 @@ class Faillog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $date = '0000-00-00 00:00:00';
 
@@ -51,7 +51,7 @@ class Faillog
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=true)
+     * @ORM\Column(name="acctid", type="integer", nullable=true, options={"unsigned":true})
      */
     private $acctid;
 

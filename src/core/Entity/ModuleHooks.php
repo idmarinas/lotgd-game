@@ -53,7 +53,7 @@ class ModuleHooks
     /**
      * @var int
      *
-     * @ORM\Column(name="priority", type="integer", nullable=false)
+     * @ORM\Column(name="priority", type="integer", nullable=false, options={"default":"50"})
      */
     private $priority = '50';
 

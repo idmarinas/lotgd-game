@@ -57,16 +57,16 @@ class Clans
     /**
      * @var int
      *
-     * @ORM\Column(name="motdauthor", type="integer", nullable=false)
+     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"default":0, "unsigned":true})
      */
-    private $motdauthor = '0';
+    private $motdauthor = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="descauthor", type="integer", nullable=false)
+     * @ORM\Column(name="descauthor", type="integer", nullable=false, options={"default":0, "unsigned":true})
      */
-    private $descauthor = '0';
+    private $descauthor = 0;
 
     /**
      * @var string

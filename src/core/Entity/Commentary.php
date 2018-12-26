@@ -29,16 +29,16 @@ class Commentary
     /**
      * @var string
      *
-     * @ORM\Column(name="section", type="string", length=20, nullable=true)
+     * @ORM\Column(name="section", type="string", length=20, nullable=false)
      */
     private $section;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false)
+     * @ORM\Column(name="author", type="integer", nullable=false, options={"default":0, "unsigned":true})
      */
-    private $author = '0';
+    private $author = 0;
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class Commentary
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="postdate", type="datetime", nullable=false)
+     * @ORM\Column(name="postdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $postdate = '0000-00-00 00:00:00';
 

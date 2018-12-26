@@ -52,30 +52,30 @@ class Mounts
     /**
      * @var int
      *
-     * @ORM\Column(name="mountcostgems", type="integer", nullable=false)
+     * @ORM\Column(name="mountcostgems", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
      */
-    private $mountcostgems = '0';
+    private $mountcostgems = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountcostgold", type="integer", nullable=false)
+     * @ORM\Column(name="mountcostgold", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
      */
-    private $mountcostgold = '0';
+    private $mountcostgold = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountactive", type="integer", nullable=false)
+     * @ORM\Column(name="mountactive", type="integer", nullable=false, options={"unsigned":true, "default":"1"})
      */
-    private $mountactive = '1';
+    private $mountactive = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountforestfights", type="integer", nullable=false)
+     * @ORM\Column(name="mountforestfights", type="integer", nullable=false, options={"default":"0"})
      */
-    private $mountforestfights = '0';
+    private $mountforestfights = 0;
 
     /**
      * @var string
@@ -101,23 +101,23 @@ class Mounts
     /**
      * @var int
      *
-     * @ORM\Column(name="mountfeedcost", type="integer", nullable=false)
+     * @ORM\Column(name="mountfeedcost", type="integer", nullable=false, options={"unsigned":true, "default":"20"})
      */
-    private $mountfeedcost = '20';
+    private $mountfeedcost = 20;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mountlocation", type="string", length=25, nullable=false)
+     * @ORM\Column(name="mountlocation", type="string", length=25, nullable=false, options={"default":"all"})
      */
     private $mountlocation = 'all';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountdkcost", type="integer", nullable=false)
+     * @ORM\Column(name="mountdkcost", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
      */
-    private $mountdkcost = '0';
+    private $mountdkcost = 0;
 
     /**
      * Set the value of Mountid.

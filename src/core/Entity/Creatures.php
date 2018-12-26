@@ -9,8 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="creatures",
  *      indexes={
- *          @ORM\Index(name="creaturecategory", columns={"creaturecategory"}),
- *          @ORM\Index(name="creaturelevel", columns={"creaturelevel"})
+ *          @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
  *      }
  * )
  * @ORM\Entity
@@ -120,65 +119,16 @@ class Creatures
     /**
      * @var bool
      *
-     * @ORM\Column(name="forest", type="boolean", nullable=false)
+     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default":0})
      */
-    private $forest = '0';
+    private $forest = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="graveyard", type="boolean", nullable=false)
+     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default":0})
      */
-    private $graveyard = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturelevel", type="integer", nullable=true)
-     */
-    private $creaturelevel;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturegold", type="integer", nullable=true)
-     */
-    private $creaturegold;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creatureexp", type="integer", nullable=true)
-     */
-    private $creatureexp;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="oldcreatureexp", type="integer", nullable=true)
-     */
-    private $oldcreatureexp;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturehealth", type="integer", nullable=true)
-     */
-    private $creaturehealth;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creatureattack", type="integer", nullable=true)
-     */
-    private $creatureattack;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturedefense", type="integer", nullable=true)
-     */
-    private $creaturedefense;
+    private $graveyard = 0;
 
     /**
      * Set the value of Creatureid.
@@ -562,173 +512,5 @@ class Creatures
     public function getGraveyard(): bool
     {
         return $this->graveyard;
-    }
-
-    /**
-     * Set the value of Creaturelevel.
-     *
-     * @param int creaturelevel
-     *
-     * @return self
-     */
-    public function setCreaturelevel($creaturelevel)
-    {
-        $this->creaturelevel = $creaturelevel;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturelevel.
-     *
-     * @return int
-     */
-    public function getCreaturelevel(): int
-    {
-        return $this->creaturelevel;
-    }
-
-    /**
-     * Set the value of Creaturegold.
-     *
-     * @param int creaturegold
-     *
-     * @return self
-     */
-    public function setCreaturegold($creaturegold)
-    {
-        $this->creaturegold = $creaturegold;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturegold.
-     *
-     * @return int
-     */
-    public function getCreaturegold(): int
-    {
-        return $this->creaturegold;
-    }
-
-    /**
-     * Set the value of Creatureexp.
-     *
-     * @param int creatureexp
-     *
-     * @return self
-     */
-    public function setCreatureexp($creatureexp)
-    {
-        $this->creatureexp = $creatureexp;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creatureexp.
-     *
-     * @return int
-     */
-    public function getCreatureexp(): int
-    {
-        return $this->creatureexp;
-    }
-
-    /**
-     * Set the value of Oldcreatureexp.
-     *
-     * @param int oldcreatureexp
-     *
-     * @return self
-     */
-    public function setOldcreatureexp($oldcreatureexp)
-    {
-        $this->oldcreatureexp = $oldcreatureexp;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Oldcreatureexp.
-     *
-     * @return int
-     */
-    public function getOldcreatureexp(): int
-    {
-        return $this->oldcreatureexp;
-    }
-
-    /**
-     * Set the value of Creaturehealth.
-     *
-     * @param int creaturehealth
-     *
-     * @return self
-     */
-    public function setCreaturehealth($creaturehealth)
-    {
-        $this->creaturehealth = $creaturehealth;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturehealth.
-     *
-     * @return int
-     */
-    public function getCreaturehealth(): int
-    {
-        return $this->creaturehealth;
-    }
-
-    /**
-     * Set the value of Creatureattack.
-     *
-     * @param int creatureattack
-     *
-     * @return self
-     */
-    public function setCreatureattack($creatureattack)
-    {
-        $this->creatureattack = $creatureattack;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creatureattack.
-     *
-     * @return int
-     */
-    public function getCreatureattack(): int
-    {
-        return $this->creatureattack;
-    }
-
-    /**
-     * Set the value of Creaturedefense.
-     *
-     * @param int creaturedefense
-     *
-     * @return self
-     */
-    public function setCreaturedefense($creaturedefense)
-    {
-        $this->creaturedefense = $creaturedefense;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturedefense.
-     *
-     * @return int
-     */
-    public function getCreaturedefense(): int
-    {
-        return $this->creaturedefense;
     }
 }

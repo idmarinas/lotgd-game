@@ -15,7 +15,7 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="petitionid", type="integer", nullable=false)
+     * @ORM\Column(name="petitionid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,51 +24,51 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false)
+     * @ORM\Column(name="author", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $author = '0';
+    private $author = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $date = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer", nullable=false)
+     * @ORM\Column(name="status", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $status = '0';
+    private $status = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="body", type="text", length=65535, nullable=false)
      */
     private $body;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pageinfo", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="pageinfo", type="text", length=65535, nullable=false)
      */
     private $pageinfo;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="closedate", type="datetime", nullable=false)
+     * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $closedate = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="closeuserid", type="integer", nullable=false)
+     * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $closeuserid = '0';
+    private $closeuserid = 0;
 
     /**
      * @var string

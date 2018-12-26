@@ -15,7 +15,7 @@ class Logdnet
     /**
      * @var int
      *
-     * @ORM\Column(name="serverid", type="integer", nullable=false)
+     * @ORM\Column(name="serverid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -38,35 +38,35 @@ class Logdnet
     /**
      * @var float
      *
-     * @ORM\Column(name="priority", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="priority", type="float", precision=10, scale=0, nullable=false, options={"default":"100"})
      */
     private $priority = '100';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastupdate", type="datetime", nullable=false)
+     * @ORM\Column(name="lastupdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $lastupdate = '0000-00-00 00:00:00';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="version", type="string", length=255, nullable=false)
+     * @ORM\Column(name="version", type="string", length=255, nullable=false, options={"default":"Unknown"})
      */
     private $version = 'Unknown';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="admin", type="string", length=255, nullable=false)
+     * @ORM\Column(name="admin", type="string", length=255, nullable=false, options={"default":"unknown"})
      */
     private $admin = 'unknown';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastping", type="datetime", nullable=false)
+     * @ORM\Column(name="lastping", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $lastping = '0000-00-00 00:00:00';
 
@@ -80,7 +80,7 @@ class Logdnet
     /**
      * @var int
      *
-     * @ORM\Column(name="count", type="integer", nullable=false)
+     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned":true})
      */
     private $count = '0';
 

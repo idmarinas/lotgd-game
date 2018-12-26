@@ -15,7 +15,7 @@ class Masters
     /**
      * @var int
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false)
+     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,7 +31,7 @@ class Masters
     /**
      * @var int
      *
-     * @ORM\Column(name="creaturelevel", type="integer", nullable=true)
+     * @ORM\Column(name="creaturelevel", type="integer", nullable=true, options={"unsigned":true})
      */
     private $creaturelevel;
 
@@ -55,41 +55,6 @@ class Masters
      * @ORM\Column(name="creaturewin", type="string", length=120, nullable=true)
      */
     private $creaturewin;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturegold", type="integer", nullable=true)
-     */
-    private $creaturegold;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creatureexp", type="integer", nullable=true)
-     */
-    private $creatureexp;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturehealth", type="integer", nullable=true)
-     */
-    private $creaturehealth;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creatureattack", type="integer", nullable=true)
-     */
-    private $creatureattack;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="creaturedefense", type="integer", nullable=true)
-     */
-    private $creaturedefense;
 
     /**
      * Set the value of Creatureid.
@@ -233,125 +198,5 @@ class Masters
     public function getCreaturewin(): string
     {
         return $this->creaturewin;
-    }
-
-    /**
-     * Set the value of Creaturegold.
-     *
-     * @param int creaturegold
-     *
-     * @return self
-     */
-    public function setCreaturegold($creaturegold)
-    {
-        $this->creaturegold = $creaturegold;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturegold.
-     *
-     * @return int
-     */
-    public function getCreaturegold(): int
-    {
-        return $this->creaturegold;
-    }
-
-    /**
-     * Set the value of Creatureexp.
-     *
-     * @param int creatureexp
-     *
-     * @return self
-     */
-    public function setCreatureexp($creatureexp)
-    {
-        $this->creatureexp = $creatureexp;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creatureexp.
-     *
-     * @return int
-     */
-    public function getCreatureexp(): int
-    {
-        return $this->creatureexp;
-    }
-
-    /**
-     * Set the value of Creaturehealth.
-     *
-     * @param int creaturehealth
-     *
-     * @return self
-     */
-    public function setCreaturehealth($creaturehealth)
-    {
-        $this->creaturehealth = $creaturehealth;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturehealth.
-     *
-     * @return int
-     */
-    public function getCreaturehealth(): int
-    {
-        return $this->creaturehealth;
-    }
-
-    /**
-     * Set the value of Creatureattack.
-     *
-     * @param int creatureattack
-     *
-     * @return self
-     */
-    public function setCreatureattack($creatureattack)
-    {
-        $this->creatureattack = $creatureattack;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creatureattack.
-     *
-     * @return int
-     */
-    public function getCreatureattack(): int
-    {
-        return $this->creatureattack;
-    }
-
-    /**
-     * Set the value of Creaturedefense.
-     *
-     * @param int creaturedefense
-     *
-     * @return self
-     */
-    public function setCreaturedefense($creaturedefense)
-    {
-        $this->creaturedefense = $creaturedefense;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Creaturedefense.
-     *
-     * @return int
-     */
-    public function getCreaturedefense(): int
-    {
-        return $this->creaturedefense;
     }
 }

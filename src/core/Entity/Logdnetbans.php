@@ -15,7 +15,7 @@ class Logdnetbans
     /**
      * @var int
      *
-     * @ORM\Column(name="banid", type="integer", nullable=false)
+     * @ORM\Column(name="banid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

@@ -15,7 +15,7 @@ class Taunts
     /**
      * @var int
      *
-     * @ORM\Column(name="tauntid", type="integer", nullable=false)
+     * @ORM\Column(name="tauntid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,14 +24,14 @@ class Taunts
     /**
      * @var string
      *
-     * @ORM\Column(name="taunt", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="taunt", type="text", length=65535, nullable=false)
      */
     private $taunt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="editor", type="string", length=50, nullable=true)
+     * @ORM\Column(name="editor", type="string", length=50, nullable=false)
      */
     private $editor;
 

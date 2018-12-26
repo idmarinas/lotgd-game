@@ -45,7 +45,7 @@ class Cronjob
     /**
      * @var int
      *
-     * @ORM\Column(name="maxRuntime", type="integer", nullable=true)
+     * @ORM\Column(name="maxRuntime", type="integer", nullable=true, options={"unsigned":true})
      */
     private $maxruntime;
 

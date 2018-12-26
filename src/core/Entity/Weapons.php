@@ -15,7 +15,7 @@ class Weapons
     /**
      * @var int
      *
-     * @ORM\Column(name="weaponid", type="integer", nullable=false)
+     * @ORM\Column(name="weaponid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,23 +31,23 @@ class Weapons
     /**
      * @var int
      *
-     * @ORM\Column(name="value", type="integer", nullable=false)
+     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $value = '0';
+    private $value = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="damage", type="integer", nullable=false)
+     * @ORM\Column(name="damage", type="smallint", nullable=false, options={"unsigned":true, "default":"1"})
      */
-    private $damage = '1';
+    private $damage = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="level", type="integer", nullable=false)
+     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned":true})
      */
-    private $level = '0';
+    private $level = 0;
 
     /**
      * Set the value of Weaponid.

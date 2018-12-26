@@ -33,7 +33,7 @@ class ModuleSettings
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="value", type="text", length=65535, nullable=false)
      */
     private $value;
 

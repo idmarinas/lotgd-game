@@ -45,7 +45,7 @@ class Modules
     /**
      * @var bool
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false, options={"default":"0"})
      */
     private $active = '0';
 
@@ -59,7 +59,7 @@ class Modules
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="installdate", type="datetime", nullable=false)
+     * @ORM\Column(name="installdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $installdate = '0000-00-00 00:00:00';
 
@@ -73,14 +73,14 @@ class Modules
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="filemoddate", type="datetime", nullable=false)
+     * @ORM\Column(name="filemoddate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $filemoddate = '0000-00-00 00:00:00';
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="type", type="boolean", nullable=false)
+     * @ORM\Column(name="type", type="boolean", nullable=false, options={"default":"0"})
      */
     private $type = '0';
 
@@ -108,14 +108,14 @@ class Modules
     /**
      * @var string
      *
-     * @ORM\Column(name="version", type="string", length=10, nullable=true)
+     * @ORM\Column(name="version", type="string", length=10, nullable=false)
      */
     private $version;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="download", type="string", length=200, nullable=true)
+     * @ORM\Column(name="download", type="string", length=200, nullable=false)
      */
     private $download;
 

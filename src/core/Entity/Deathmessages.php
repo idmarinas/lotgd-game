@@ -37,23 +37,23 @@ class Deathmessages
     /**
      * @var bool
      *
-     * @ORM\Column(name="forest", type="boolean", nullable=false)
+     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default":1})
      */
-    private $forest = '1';
+    private $forest = 1;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="graveyard", type="boolean", nullable=false)
+     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default":0})
      */
-    private $graveyard = '0';
+    private $graveyard = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="taunt", type="boolean", nullable=false)
+     * @ORM\Column(name="taunt", type="boolean", nullable=false, options={"default":1})
      */
-    private $taunt = '1';
+    private $taunt = 1;
 
     /**
      * @var string

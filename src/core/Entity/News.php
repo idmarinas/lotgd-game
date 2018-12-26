@@ -29,7 +29,7 @@ class News
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="newsdate", type="date", nullable=false)
+     * @ORM\Column(name="newsdate", type="date", nullable=false, options={"default":"0000-00-00"})
      */
     private $newsdate = '0000-00-00';
 
@@ -43,9 +43,9 @@ class News
     /**
      * @var int
      *
-     * @ORM\Column(name="accountid", type="integer", nullable=false)
+     * @ORM\Column(name="accountid", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $accountid = '0';
+    private $accountid = 0;
 
     /**
      * @var string
@@ -57,7 +57,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="tlschema", type="string", length=255, nullable=false)
+     * @ORM\Column(name="tlschema", type="string", length=255, nullable=false, options={"default":"news"})
      */
     private $tlschema = 'news';
 

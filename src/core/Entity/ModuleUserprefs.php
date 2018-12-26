@@ -37,7 +37,7 @@ class ModuleUserprefs
     /**
      * @var int
      *
-     * @ORM\Column(name="userid", type="integer", nullable=false)
+     * @ORM\Column(name="userid", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -46,7 +46,7 @@ class ModuleUserprefs
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="value", type="text", length=65535, nullable=false)
      */
     private $value;
 

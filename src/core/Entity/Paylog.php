@@ -19,7 +19,7 @@ class Paylog
     /**
      * @var int
      *
-     * @ORM\Column(name="payid", type="integer", nullable=false)
+     * @ORM\Column(name="payid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -63,23 +63,23 @@ class Paylog
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false)
+     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $acctid = '0';
+    private $acctid = 0;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="processed", type="boolean", nullable=false)
      */
-    private $processed = '0';
+    private $processed = 0;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="filed", type="boolean", nullable=false)
      */
-    private $filed = '0';
+    private $filed = 0;
 
     /**
      * @var float
@@ -91,7 +91,7 @@ class Paylog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="processdate", type="datetime", nullable=false)
+     * @ORM\Column(name="processdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $processdate = '0000-00-00 00:00:00';
 

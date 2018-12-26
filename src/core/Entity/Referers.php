@@ -20,7 +20,7 @@ class Referers
     /**
      * @var int
      *
-     * @ORM\Column(name="refererid", type="integer", nullable=false)
+     * @ORM\Column(name="refererid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -29,21 +29,21 @@ class Referers
     /**
      * @var string
      *
-     * @ORM\Column(name="uri", type="string", length=1000, nullable=true)
+     * @ORM\Column(name="uri", type="string", length=1000, nullable=false)
      */
     private $uri;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="count", type="integer", nullable=true)
+     * @ORM\Column(name="count", type="integer", nullable=false)
      */
     private $count;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last", type="datetime", nullable=true)
+     * @ORM\Column(name="last", type="datetime", nullable=false)
      */
     private $last;
 
@@ -57,14 +57,14 @@ class Referers
     /**
      * @var string
      *
-     * @ORM\Column(name="dest", type="string", length=255, nullable=true)
+     * @ORM\Column(name="dest", type="string", length=255, nullable=false)
      */
     private $dest;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=40, nullable=true)
+     * @ORM\Column(name="ip", type="string", length=40, nullable=false)
      */
     private $ip;
 

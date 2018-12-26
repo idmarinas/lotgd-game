@@ -19,7 +19,7 @@ class Titles
     /**
      * @var int
      *
-     * @ORM\Column(name="titleid", type="integer", nullable=false)
+     * @ORM\Column(name="titleid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -28,9 +28,9 @@ class Titles
     /**
      * @var int
      *
-     * @ORM\Column(name="dk", type="integer", nullable=false)
+     * @ORM\Column(name="dk", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $dk = '0';
+    private $dk = 0;
 
     /**
      * @var string

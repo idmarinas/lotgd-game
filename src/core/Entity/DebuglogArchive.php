@@ -21,7 +21,7 @@ class DebuglogArchive
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -30,21 +30,21 @@ class DebuglogArchive
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $date = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="actor", type="integer", nullable=true)
+     * @ORM\Column(name="actor", type="integer", nullable=true, options={"unsigned":true})
      */
     private $actor;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="target", type="integer", nullable=true)
+     * @ORM\Column(name="target", type="integer", nullable=true, options={"unsigned":true})
      */
     private $target;
 
@@ -65,7 +65,7 @@ class DebuglogArchive
     /**
      * @var float
      *
-     * @ORM\Column(name="value", type="float", precision=9, scale=2, nullable=false)
+     * @ORM\Column(name="value", type="float", precision=9, scale=2, nullable=false, options={"default":"0.00"})
      */
     private $value = '0.00';
 

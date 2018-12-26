@@ -20,7 +20,7 @@ class Translations
     /**
      * @var int
      *
-     * @ORM\Column(name="tid", type="integer", nullable=false)
+     * @ORM\Column(name="tid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -57,14 +57,14 @@ class Translations
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=50, nullable=true)
+     * @ORM\Column(name="author", type="string", length=50, nullable=false)
      */
     private $author;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="version", type="string", length=50, nullable=true)
+     * @ORM\Column(name="version", type="string", length=50, nullable=false)
      */
     private $version;
 

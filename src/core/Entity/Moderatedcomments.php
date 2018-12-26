@@ -15,7 +15,7 @@ class Moderatedcomments
     /**
      * @var int
      *
-     * @ORM\Column(name="modid", type="integer", nullable=false)
+     * @ORM\Column(name="modid", type="integer", nullable=false, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,21 +24,21 @@ class Moderatedcomments
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
      */
     private $comment;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="moderator", type="integer", nullable=false)
+     * @ORM\Column(name="moderator", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
      */
-    private $moderator = '0';
+    private $moderator = 0;
 
-    /**
+    /**}
      * @var \DateTime
      *
-     * @ORM\Column(name="moddate", type="datetime", nullable=false)
+     * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $moddate = '0000-00-00 00:00:00';
 
