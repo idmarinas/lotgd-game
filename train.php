@@ -23,7 +23,7 @@ $defeat = false;
 
 output("`b`cBluspring's Warrior Training´c´b");
 
-$mid = httpget('master');
+$mid = (int) httpget('master');
 
 if ($mid)
 {
@@ -65,8 +65,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
     {
         checkday();
         output('The sound of conflict surrounds you.  The clang of weapons in grisly battle inspires your warrior heart. ');
-        output('`n`n`^%s stands ready to evaluate you.`0',
-                $master['creaturename']);
+        output('`n`n`^%s stands ready to evaluate you.`0', $master['creaturename']);
         addnav('Navigation');
         villagenav();
         addnav('Actions');
