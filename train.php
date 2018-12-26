@@ -20,8 +20,6 @@ page_header("Bluspring's Warrior Training");
 $battle = false;
 $victory = false;
 $defeat = false;
-$point = getsetting('moneydecimalpoint', '.');
-$sep = getsetting('moneythousandssep', ',');
 
 output("`b`cBluspring's Warrior Training´c´b");
 
