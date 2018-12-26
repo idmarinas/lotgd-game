@@ -55,9 +55,9 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
 # Other
 * Components used in IDMarinas Edition
     * Components of [Zend Framework](https://zendframework.github.io)
-    * User interface [Semantic UI Framework](http://semantic-ui.com/)
+    * User interface [Fomantic UI Framework](https://fomantic-ui.com) fork of [Semantic UI Framework](http://semantic-ui.com/)
     * Templates system [Twig](http://twig.sensiolabs.org)
     * A simple JavaScript popup boxes [SweetAlert2](https://limonte.github.io/sweetalert2/)
     * A simple CronJob manager [Jobby, a PHP cron job manager](https://github.com/jobbyphp/jobby)
-    * Toastr, Javascript library for non-blocking notifications. [toastr](https://codeseven.github.io/toastr/)
-    * Jaxon-PHP, Easily create Ajax applications with PHP. [Jaxon](https://www.jaxon-php.org)
+    * [Toastr](https://codeseven.github.io/toastr/), Javascript library for non-blocking notifications.
+    * [Jaxon-PHP](https://www.jaxon-php.org), Easily create Ajax applications with PHP.
