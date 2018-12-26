@@ -21,7 +21,7 @@ module.exports = function (callback)
     if (isProduction)
     {
         del([
-            config.paths.build + '/**/*.{dist,md,lock,json,.yml}',
+            config.paths.build + '/**/*.{dist,md,lock,json,.yml}{,/**}',
             config.paths.build + '/config/development/{**,*}',
             config.paths.build + '/config/{**,*}/development{,.*}.*'
         ])
