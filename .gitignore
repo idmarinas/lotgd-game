@@ -9,6 +9,7 @@ vendor/
 node_modules/
 bower_components/
 dist/
+*.dist
 composer.phar
 phpunit.xml
 /semantic/dist/
