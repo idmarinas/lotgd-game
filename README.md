@@ -14,6 +14,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/idmarinas/lotgd-game.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/idmarinas/lotgd-game.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
+[![DepShield Badge](https://depshield.sonatype.org/badges/idmarinas/lotgd-game/depshield.svg)](https://depshield.github.io)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/idmarinas/lotgd-game.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/idmarinas/lotgd-game/context:javascript)
 
