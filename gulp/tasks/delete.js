@@ -1,6 +1,6 @@
-/*******************************
-                   Delete task
-*******************************/
+/**
+ * Delete conten of dist folder
+ */
 
 //-- Dependencies
 var del = require('del')

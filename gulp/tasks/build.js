@@ -1,21 +1,8 @@
-//-- Dependencies
-var gulp = require('gulp-help')(require('gulp'))
-var runSequence = require('run-sequence')
+const { series, parallel } = require('gulp')
 
-require('./collections/build')(gulp)
-
-module.exports = function (callback)
+module.exports = function (cb)
 {
     console.info('Building application')
 
-    runSequence(
-        'delete',
-        ['main', 'theme'],
-        'assets',
-        'composer',
-        'clean',
-        'lotgd-js',
-
-        callback
-    )
+    return series('delete', parallel('main', 'theme'), 'assets', 'composer', 'clean', 'lotgd-js')(cb)
 }

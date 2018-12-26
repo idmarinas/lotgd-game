@@ -32,5 +32,7 @@ module.exports = function (callback)
             chunks: false,
             chunkModules: false
         }) + '\n')
+
+        callback()
     })
 }

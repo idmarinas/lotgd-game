@@ -19,7 +19,7 @@ module.exports = function (callback)
 
     return gulp.src('semantic/src/theme.config.default')
         .pipe(plumber())
-        .pipe(replace('default', themeName, {skipBinary: false}))
+        .pipe(replace('default', themeName, { skipBinary: false }))
         .pipe(rename('theme.config'))
         .pipe(plumber.stop())
         .pipe(gulp.dest('semantic/src'))

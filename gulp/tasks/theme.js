@@ -1,16 +1,8 @@
-//-- Dependencies
-var runSequence = require('run-sequence')
+const { series } = require('gulp')
 
-module.exports = function (callback)
+module.exports = function (cb)
 {
     console.info('Building theme for LOTGD')
 
-    runSequence(
-        'theme-pre',
-        'semantic-ui',
-        'theme-post',
-        'theme-end',
-
-        callback
-    )
+    return series('theme-pre', 'semantic-ui', 'theme-post', 'theme-end')(cb)
 }
