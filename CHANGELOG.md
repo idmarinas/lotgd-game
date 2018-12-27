@@ -26,6 +26,12 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `` `4This text is dark red`0``
             -   `` `@This text is green`0``
         -   The system does not autoclose the codes, so you need to close all the codes (when necessary), otherwise the result may vary.
+-   **DataBase** Table `accounts` are divided, now information of character are in table `characters`
+- **THEME**
+    - Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
+        - [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
+        - Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
+    - Nothing changed with this
 
 ### :star: FEATURES
 
@@ -53,6 +59,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   **src/core/Lib/Pattern/Zend.php**
 -   **common.php** Fixed error with clean installation
 -   **src/core/Factory/Character/Stats.php** Deleted var not defined (and unused)
+-   **lib/class/dbwrapper.php** Only one instance of `Zend\Paginator\Paginator` can be passed
 
 ### :x: REMOVES
 
@@ -64,6 +71,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :notebook: NOTES
 
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
+-   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
+    - All related gulp tasks are updated to this new version
 
 # Version: 3.0.0
 
