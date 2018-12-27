@@ -15,10 +15,11 @@ require_once __DIR__.'/common.php';
 $jobby = new Jobby\Jobby();
 
 //-- To avoid potential problems with other cache data and optimization/removal processes
-$lotgd_cache->getOptions()->setNamespace('cronjob');
-$lotgd_cache->getOptions()->setDirPermission(0777);
+$cronCache = LotgdLocator::get(Lotgd\Core\Lib\Cache::class);
+$cronCache->getOptions()->setNamespace('cronjob');
+$cronCache->getOptions()->setDirPermission(0777);
 
-$cronjobs = datacache('tablecronjobs', 86400, true); //-- Cache for 1 day
+$cronjobs = $cronCache->getData('tablecronjobs', 86400, true); //-- Cache for 1 day
 if (! is_array($cronjobs) || empty($cronjobs))
 {
     $select = DB::select('cronjob');
@@ -27,7 +28,7 @@ if (! is_array($cronjobs) || empty($cronjobs))
     ;
     $cronjobs = DB::toArray(DB::execute($select));
 
-    updatedatacache('tablecronjobs', $cronjobs, true);
+    $cronCache->updateData('tablecronjobs', $cronjobs, true);
 }
 
 //-- Add all cronjobs to Jobby CronJob
