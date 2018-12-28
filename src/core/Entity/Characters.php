@@ -98,7 +98,7 @@ class Characters
      *
      * @ORM\Column(name="specialty", type="string", length=20, nullable=false)
      */
-    private $specialty;
+    private $specialty = '';
 
     /**
      * @var int
@@ -245,14 +245,7 @@ class Characters
      *
      * @ORM\Column(name="title", type="string", length=50, nullable=false)
      */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=32, nullable=false)
-     */
-    private $password;
+    private $title = '';
 
     /**
      * @var string
@@ -315,21 +308,21 @@ class Characters
      *
      * @ORM\Column(name="specialinc", type="string", length=50, nullable=false)
      */
-    private $specialinc;
+    private $specialinc = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="specialmisc", type="string", length=1000, nullable=false)
      */
-    private $specialmisc;
+    private $specialmisc = '';
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $lastmotd = '0000-00-00 00:00:00';
+    private $lastmotd;
 
     /**
      * @var int
@@ -343,7 +336,7 @@ class Characters
      *
      * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $lasthit = '0000-00-00 00:00:00';
+    private $lasthit;
 
     /**
      * @var bool
@@ -364,7 +357,7 @@ class Characters
      *
      * @ORM\Column(name="restorepage", type="string", length=150, nullable=false)
      */
-    private $restorepage;
+    private $restorepage = '';
 
     /**
      * @var bool
@@ -406,7 +399,7 @@ class Characters
      *
      * @ORM\Column(name="pvpflag", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $pvpflag = '0000-00-00 00:00:00';
+    private $pvpflag;
 
     /**
      * @var int
@@ -434,7 +427,7 @@ class Characters
      *
      * @ORM\Column(name="hauntedby", type="string", length=50, nullable=false)
      */
-    private $hauntedby;
+    private $hauntedby = '';
 
     /**
      * @var int
@@ -448,14 +441,14 @@ class Characters
      *
      * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $recentcomments = '0000-00-00 00:00:00';
+    private $recentcomments;
 
     /**
      * @var string
      *
      * @ORM\Column(name="bio", type="string", length=255, nullable=false)
      */
-    private $bio;
+    private $bio = '';
 
     /**
      * @var string
@@ -469,7 +462,7 @@ class Characters
      *
      * @ORM\Column(name="biotime", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $biotime = '0000-00-00 00:00:00';
+    private $biotime;
 
     /**
      * @var int
@@ -504,7 +497,7 @@ class Characters
      *
      * @ORM\Column(name="ctitle", type="string", length=25, nullable=false)
      */
-    private $ctitle;
+    private $ctitle = '';
 
     /**
      * @var bool
@@ -539,14 +532,27 @@ class Characters
      *
      * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $clanjoindate = '0000-00-00 00:00:00';
+    private $clanjoindate;
 
     /**
      * @var string
      *
      * @ORM\Column(name="chatloc", type="string", length=255, nullable=false)
      */
-    private $chatloc;
+    private $chatloc = '';
+
+    /**
+     * Configure same default values.
+     */
+    public function __construct()
+    {
+        $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
+        $this->lasthit = new \DateTime('0000-00-00 00:00:00');
+        $this->pvpflag = new \DateTime('0000-00-00 00:00:00');
+        $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
+        $this->biotime = new \DateTime('0000-00-00 00:00:00');
+        $this->clanjoindate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Id.
@@ -1314,30 +1320,6 @@ class Characters
     public function getTitle(): string
     {
         return $this->title;
-    }
-
-    /**
-     * Set the value of Password.
-     *
-     * @param string password
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Password.
-     *
-     * @return string
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
     }
 
     /**

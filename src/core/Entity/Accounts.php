@@ -44,7 +44,7 @@ class Accounts
      *
      * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $laston = '0000-00-00 00:00:00';
+    private $laston;
 
     /**
      * @var string
@@ -79,14 +79,14 @@ class Accounts
      *
      * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $lastmotd = '0000-00-00 00:00:00';
+    private $lastmotd;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $lasthit = '0000-00-00 00:00:00';
+    private $lasthit;
 
     /**
      * @var bool
@@ -114,7 +114,7 @@ class Accounts
      *
      * @ORM\Column(name="lastip", type="string", length=40, nullable=false)
      */
-    private $lastip;
+    private $lastip = '';
 
     /**
      * @var string
@@ -135,21 +135,21 @@ class Accounts
      *
      * @ORM\Column(name="replaceemail", type="string", length=128, nullable=false)
      */
-    private $replaceemail;
+    private $replaceemail = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="emailvalidation", type="string", length=32, nullable=false)
      */
-    private $emailvalidation;
+    private $emailvalidation = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="forgottenpassword", type="string", length=32, nullable=false)
      */
-    private $forgottenpassword;
+    private $forgottenpassword = '';
 
     /**
      * @var bool
@@ -184,7 +184,7 @@ class Accounts
      *
      * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $recentcomments = '0000-00-00 00:00:00';
+    private $recentcomments;
 
     /**
      * @var int
@@ -203,7 +203,7 @@ class Accounts
     /**
      * @var string
      *
-     * @ORM\Column(name="donationconfig", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="donationconfig", type="array")
      */
     private $donationconfig;
 
@@ -254,7 +254,19 @@ class Accounts
      *
      * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $regdate = '0000-00-00 00:00:00';
+    private $regdate;
+
+    /**
+     * Configure same default values.
+     */
+    public function __construct()
+    {
+        $this->laston = new \DateTime('0000-00-00 00:00:00');
+        $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
+        $this->lasthit = new \DateTime('0000-00-00 00:00:00');
+        $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
+        $this->regdate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Acctid.
@@ -1034,6 +1046,11 @@ class Accounts
     public function setRegdate(\DateTime $regdate)
     {
         $this->regdate = $regdate;
+
+        if (! $regdate instanceof \DateTimeInterface)
+        {
+            $this->regdate = new \DateTime($regdate);
+        }
 
         return $this;
     }
