@@ -1,5 +1,6 @@
 <?php
 
+$session['dbinfo']['upgrade'] = false;
 if (httppost('type') > '')
 {
     $session['fromversion'] = httppost('version');
