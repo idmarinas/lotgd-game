@@ -82,6 +82,18 @@ class Doctrine
     }
 
     /**
+     * Merges the state of a detached entity into the persistence context
+     * of this EntityManager and returns the managed copy of the entity.
+     * The entity passed to merge will not become associated/managed with this EntityManager.
+     *
+     * @param object $entity The detached entity to merge into the persistence context.
+     */
+    public static function merge($entity)
+    {
+        self::$wrapper->merge($entity);
+    }
+
+    /**
      * Flushes all changes to objects that have been queued up to now to the database.
      * This effectively synchronizes the in-memory state of managed objects with the
      * database.
