@@ -89,7 +89,7 @@
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "ora": "^3.0.0",
         "sass-loader": "^7.1.0",
-        "uglifyjs-webpack-plugin": "^2.1.0",
+        "uglifyjs-webpack-plugin": "^2.1.1",
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
         "webpack": "^4.28.2",
