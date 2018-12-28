@@ -95,10 +95,8 @@ class Stats
         {
             return $this->stats[$section];
         }
-        else
-        {
-            return;
-        }
+
+        return;
     }
 
     /**
