@@ -116,7 +116,7 @@ class Dbwrapper
 
     public function getAffectedRows($result = null): int
     {
-        if (is_object($result))
+        if (is_object($result) && \method_exists($result, 'getAffectedRows'))
         {
             return $result->getAffectedRows();
         }
