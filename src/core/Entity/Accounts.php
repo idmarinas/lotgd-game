@@ -70,7 +70,7 @@ class Accounts
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=50, nullable=false)
+     * @ORM\Column(name="login", type="string", unique=true, length=50, nullable=false)
      */
     private $login;
 
