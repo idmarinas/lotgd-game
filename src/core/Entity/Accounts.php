@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          @ORM\Index(name="login", columns={"login"}),
  *          @ORM\Index(name="laston", columns={"laston"}),
  *          @ORM\Index(name="lasthit", columns={"lasthit"}),
+ *          @ORM\Index(name="emailaddress", columns={"emailaddress"}),
  *          @ORM\Index(name="locked", columns={"locked", "loggedin", "laston"}),
  *          @ORM\Index(name="referer", columns={"referer"}),
  *          @ORM\Index(name="uniqueid", columns={"uniqueid"}),
@@ -129,6 +130,13 @@ class Accounts
      * @ORM\Column(name="boughtroomtoday", type="boolean", nullable=false, options={"default":0})
      */
     private $boughtroomtoday = 0;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emailaddress", type="string", length=128, nullable=false)
+     */
+    private $emailaddress = '';
 
     /**
      * @var string
@@ -626,6 +634,30 @@ class Accounts
     public function getBoughtroomtoday(): bool
     {
         return $this->boughtroomtoday;
+    }
+
+    /**
+     * Set the value of Emailaddress.
+     *
+     * @param string emailaddress
+     *
+     * @return self
+     */
+    public function setEmailaddress($emailaddress)
+    {
+        $this->emailaddress = $emailaddress;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Emailaddress.
+     *
+     * @return string
+     */
+    public function getEmailaddress(): string
+    {
+        return $this->emailaddress;
     }
 
     /**
