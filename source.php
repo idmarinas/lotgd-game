@@ -89,6 +89,7 @@ else
     $select_dir = "./$select_dir";
     $illegal_files = [
         'dbconnect.php' => 'Contains sensitive information specific to this installation.',
+        \Lotgd\Core\Application::FILE_DB_CONNECT => 'Contains sensitive information specific to this installation.',
         'dragon.php' => 'If you want to read the dragon script, I suggest you do so by defeating it!',
         'output_translator.php' => 'X', // hidden
         'pavilion.php' => 'Not released at least for now.',

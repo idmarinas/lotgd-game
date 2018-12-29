@@ -79,7 +79,7 @@ if (! $requirements_met)
     exit(1);
 }
 
-if (! file_exists('config/autoload/local/dbconnect.php'))
+if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 {
     define('DB_NODB', true);
 }
@@ -188,10 +188,10 @@ if (! isset($session['dbinfo']))
     $session['dbinfo'] = ['DB_HOST' => '', 'DB_USER' => '', 'DB_PASS' => '', 'DB_NAME' => '', 'DB_USEDATACACHE' => false, 'DB_DATACACHEPATH' => 'cache', 'DB_PREFIX' => ''];
 }
 
-if (file_exists('config/autoload/local/dbconnect.php') && (3 == $stage || 4 == $stage || 5 == $stage))
+if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))
 {
     output('`%This stage was completed during a previous installation.');
-    output('`2If you wish to perform stages 4 through 6 again, please delete the file named "config/autoload/local/dbconnect.php" from your site.`n`n');
+    output('`2If you wish to perform stages 4 through 6 again, please delete the file named "%s" from your site.`n`n', \Lotgd\Core\Application::FILE_DB_CONNECT);
     $stage = 6;
 }
 

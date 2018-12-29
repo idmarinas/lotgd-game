@@ -23,4 +23,11 @@ class Application
      * @var int
      */
     const VERSION_NUMBER = 30100;
+
+    /**
+     * File where the connection data to the DB is stored.
+     *
+     * @var string
+     */
+    const FILE_DB_CONNECT = 'config/autoload/local/dbconnect.php';
 }
