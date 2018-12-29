@@ -125,11 +125,11 @@ if (DB_CONNECTED)
     define('LINK', $link);
 }
 
-if ($logd_version == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+if (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     define('IS_INSTALLER', false);
 }
-elseif ($logd_version != getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     page_header('Upgrade Needed');
     output('`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.');
@@ -142,7 +142,7 @@ elseif ($logd_version != getsetting('installer_version', '-1') && ! defined('IS_
     page_footer();
 }
 
-if (file_exists('installer.php') && $logd_version == getsetting('installer_version', '-1') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
+if (file_exists('installer.php') && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
 {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     page_header('Major Security Risk');
