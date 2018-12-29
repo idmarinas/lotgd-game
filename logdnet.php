@@ -20,7 +20,6 @@ function lotgdsort($a, $b)
 {
     // $a and $b are table rows.
 
-    global $logd_version;
     $official_prefixes = [
         '2.6.0 IDMarinas Edition',
         '2.5.0 IDMarinas Edition',

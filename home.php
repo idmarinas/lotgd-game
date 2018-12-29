@@ -172,7 +172,7 @@ modulehook('homemiddle', []);
 $msg = getsetting('loginbanner', '*BETA* This is a BETA of this website, things are likely to change now and again, as it is under active development *BETA*');
 output_notl('`n`c`b`&%s`0´b´c`n', $msg);
 $session['message'] = '';
-output('`c`2Game server running version: `@%s`0´c', $logd_version);
+output('`c`2Game server running version: `@%s`0´c', \Lotgd\Core\Application::VERSION);
 
 if (getsetting('homeskinselect', 1))
 {

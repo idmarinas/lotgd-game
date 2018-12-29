@@ -55,8 +55,7 @@ foreach ($order as $key => $val)
 		 * NOTICE
 		 */
 		output("`@Legend of the Green Dragon`nBy Eric Stevens & JT Traub`n`n");
-		output("`cLoGD version ");
-		output_notl("{$logd_version}´c");
+		output("`cLoGD version %s´c", \Lotgd\Core\Application::VERSION);
 		/*
 		 * This section may not be modified, please modify the Server
 		 * Specific section above.

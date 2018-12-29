@@ -87,7 +87,7 @@ elseif ('save' == $op)
                 'intext' => $text,
                 'outtext' => $trans,
                 'author' => $session['user']['login'],
-                'version' => $logd_version
+                'version' => \Lotgd\Core\Application::VERSION
             ]);
 
             $delete = DB::delete('untranslated');
@@ -106,7 +106,7 @@ elseif ('save' == $op)
                 $sql = DB::update('translations');
                 $sql->set([
                     'author' => $session['user']['login'],
-                    'version' => $logd_version,
+                    'version' => \Lotgd\Core\Application::VERSION,
                     'uri' => $uri,
                     'outtext' => $trans,
                 ])
@@ -122,7 +122,7 @@ elseif ('save' == $op)
                     'intext' => $text,
                     'outtext' => $trans,
                     'author' => $session['user']['login'],
-                    'version' => $logd_version
+                    'version' => \Lotgd\Core\Application::VERSION
                 ]);
 
                 $delete = DB::delete('untranslated');
@@ -148,7 +148,7 @@ elseif ('save' == $op)
             $sql = DB::update('translations');
             $sql->set([
                 'author' => $session['user']['login'],
-                'version' => $logd_version,
+                'version' => \Lotgd\Core\Application::VERSION,
                 'uri' => $page,
                 'outtext' => $trans,
             ])

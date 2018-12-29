@@ -42,7 +42,7 @@ if ('list' == $op)
         {
             $login = $session['user']['login'];
             $language = $session['user']['prefs']['language'];
-            $sql = 'INSERT INTO '.DB::prefix('translations').' (language,uri,intext,outtext,author,version) VALUES'." ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
+            $sql = 'INSERT INTO '.DB::prefix('translations').' (language,uri,intext,outtext,author,version) VALUES'." ('$language','$namespace','$intext','$outtext','$login','".\Lotgd\Core\Application::VERSION."')";
             DB::query($sql);
             $sql = 'DELETE FROM '.DB::prefix('untranslated')." WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
             DB::query($sql);
@@ -125,7 +125,7 @@ else
         if ('' != $outtext)
         {
             $login = $session['user']['login'];
-            $sql = 'INSERT INTO '.DB::prefix('translations').' (language,uri,intext,outtext,author,version) VALUES'." ('$language','$namespace','$intext','$outtext','$login','$logd_version')";
+            $sql = 'INSERT INTO '.DB::prefix('translations').' (language,uri,intext,outtext,author,version) VALUES'." ('$language','$namespace','$intext','$outtext','$login','".\Lotgd\Core\Application::VERSION."')";
             DB::query($sql);
             $sql = 'DELETE FROM '.DB::prefix('untranslated')." WHERE intext = '$intext' AND language = '$language' AND namespace = '$namespace'";
             DB::query($sql);

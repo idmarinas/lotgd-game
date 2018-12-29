@@ -91,7 +91,7 @@ function page_header()
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $logd_version, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
+    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
@@ -222,7 +222,7 @@ function page_footer($saveuser = true)
         }
 
         $paypalData['author']['register_logdnet'] = true;
-        $paypalData['author']['v'] = rawurlencode($logd_version);
+        $paypalData['author']['v'] = rawurlencode(\Lotgd\Core\Application::VERSION);
         $paypalData['author']['c'] = rawurlencode($c);
         $paypalData['author']['a'] = rawurlencode($a);
         $paypalData['author']['l'] = rawurlencode($l);
@@ -315,7 +315,7 @@ function page_footer($saveuser = true)
     $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', ($request->getServer('REQUEST_URI')));
     $html['source'] = "<a href='$sourcelink' id='source' onclick='Lotgd.embed(this)' data-size='fullscreen' target='_blank'>".translate_inline('View PHP Source').'</a>';
     //output version
-    $html['version'] = "Version: $logd_version";
+    $html['version'] = 'Version: '.\Lotgd\Core\Application::VERSION;
     //output page generation time
     $gentime = microtime(true) - $pagestarttime;
     $session['user']['gentime'] += $gentime;
