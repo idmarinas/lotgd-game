@@ -13,13 +13,12 @@ else
 {
     addnav('Login Screen', './');
 }
-savesetting('installer_version', $logd_version);
+savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 $noinstallnavs = true;
 
 //-- Delete stage of installer
 $session['stagecompleted'] = 0;
-//-- Delete data base info
-unset($session['dbinfo']);
-
+//-- Delete database info and installation
+unset($session['dbinfo'], $session['installer']);
 //-- Cache is cleared to force update
 datacache_empty();
