@@ -40,7 +40,7 @@ class Characters
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", unique=true, length=100, nullable=false)
      */
     private $name;
 
