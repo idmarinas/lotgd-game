@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Use this file to configure the CLI for Doctrine
+ */
 use Doctrine\Common\Cache as DoctrineCache;
 use Doctrine\Common\EventManager as DoctrineEventManager;
 use Doctrine\ORM\Configuration as DoctrineConfiguration;
@@ -10,9 +13,9 @@ use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Lotgd\Core\Doctrine\Extension\TablePrefix as DoctrineTablePrefix;
 use Lotgd\Core\Doctrine\Strategy\Quote as DoctrineQuoteStrategy;
 
-// replace with file to your own project bootstrap
 include 'vendor/autoload.php';
 
+//-- Configure database access
 $dbParams = [
     'driver' => 'pdo_mysql',
     'user' => 'user name',
@@ -20,6 +23,7 @@ $dbParams = [
     'dbname' => 'name of data base',
     'charset' => 'utf8'
 ];
+
 $config = new DoctrineConfiguration();
 $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(['src/core/Entity', 'src/local/Entity'], false));
 $config->setProxyDir('doctrine/Proxy');
