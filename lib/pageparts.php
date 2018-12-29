@@ -151,6 +151,7 @@ function page_footer($saveuser = true)
     $headscript = '';
 
     $session['needtoviewmotd'] = false;
+
     if (isset($session['user']['lastmotd'])
         && ($row['motddate'] > $session['user']['lastmotd'])
         && (! isset($nopopup[$SCRIPT_NAME]) || 1 != $nopopups[$SCRIPT_NAME])
@@ -160,6 +161,7 @@ function page_footer($saveuser = true)
     }
 
     $html['scripthead'] = '';
+
     if ('' != $headscript)
     {
         $html['scripthead'] = "<script language='text/javascript'>".$headscript.'</script>';
@@ -167,8 +169,8 @@ function page_footer($saveuser = true)
 
     $script = '';
 
-    $session['user']['name'] = !isset($session['user']['name']) ? '' : $session['user']['name'];
-    $session['user']['login'] = !isset($session['user']['login']) ? '' : $session['user']['login'];
+    $session['user']['name'] = $session['user']['name'] ?? '';
+    $session['user']['login'] = $session['user']['login'] ?? '';
 
     //output keypress script
     reset($quickkeys);
@@ -183,6 +185,7 @@ function page_footer($saveuser = true)
     $paypalData = ['site' => ['currency' => getsetting('paypalcurrency', 'USD')]];
 
     $alreadyRegisteredLogdnet = true;
+
     if (! isset($request->getServer('logdnet')[''])
         || '' == $request->getServer('logdnet')['']
         || ! isset($session['user']['laston'])
@@ -269,9 +272,11 @@ function page_footer($saveuser = true)
 
     //output the mail link
     $html['mail'] = translate_inline('Log in to see your Ye Olde Mail');
+
     if (isset($session['user']['acctid']) && $session['user']['acctid'] > 0 && $session['user']['loggedin'])
     {
         $html['mail'] = maillink();
+
         if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
         {
             $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Core.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Core.Timeout.status()", 10000);</script>';
@@ -283,6 +288,7 @@ function page_footer($saveuser = true)
     $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';
 
     $html['petitiondisplay'] = '';
+
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
     {
         $sql = 'SELECT count(1) AS c, status FROM '.\DB::prefix('petitions').' GROUP BY status';
@@ -322,6 +328,7 @@ function page_footer($saveuser = true)
     $session['user']['gentimecount']++;
 
     $wrapper = \LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
+
     if (getsetting('debug', 0))
     {
         global $SCRIPT_NAME;
@@ -467,7 +474,7 @@ function wipe_charstats()
  * Add a attribute and/or value to the character stats display.
  *
  * @param string $label The label to use
- * @param string  $value (optional) value to display
+ * @param string $value (optional) value to display
  */
 function addcharstat($label, $value = null)
 {
@@ -506,7 +513,7 @@ function setcharstat($cat, $label, $val)
 }
 
 /**
- * Is alias of getcharstat
+ * Is alias of getcharstat.
  *
  * @param string $section The character stat section
  * @param string $title   The stat display label
@@ -650,6 +657,7 @@ function charstats($return = true)
         }
 
         $atk = round($atk, 2);
+
         if ($atk < $oAtk)
         {
             $atk = round($atk, 2).'(`$'.round($atk - $oAtk, 2).'`0)';
@@ -660,6 +668,7 @@ function charstats($return = true)
         }
 
         $def = round($def, 2);
+
         if ($def < $oDef)
         {
             $def = round($def, 2).'(`$'.round($def - $oDef, 2).'`0)';
@@ -729,12 +738,14 @@ function charstats($return = true)
                     $companion['hitpoints'] = max(0, $companion['hitpoints']);
 
                     $color = '`@';
+
                     if ($companion['hitpoints'] < $companion['maxhitpoints'])
                     {
                         $color = '`$';
                     }
 
                     $suspcode = '';
+
                     if (isset($companion['suspended']) && true == $companion['suspended'])
                     {
                         $suspcode = '`7 *';
@@ -847,6 +858,7 @@ function maillink(): string
     $session['mail']['notseen'] = $row['notseen'];
 
     $text = sprintf(translate_inline('Ye Olde Mail: %s new, %s old', 'common'), $row['notseen'], $row['seencount']);
+
     if ($row['notseen'] > 0)
     {
         return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)"><b>'.$text.'</b></a>';
