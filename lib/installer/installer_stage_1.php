@@ -41,5 +41,5 @@ else
     output("`n`^The license file (LICENSE.txt) has been modified.  Please obtain a new copy of the game's code, this file has been tampered with.");
     output('Expected MD5 in ('.implode(array_keys($licensemd5s), ',').'), but got '.md5($licenseview));
     $stage = -1;
-    $session['stagecompleted'] = -1;
+    $session['installer']['stagecompleted'] = -1;
 }

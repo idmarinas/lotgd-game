@@ -114,7 +114,7 @@ else
 
         if (! isset($session['sure i want to overwrite the tables']) || ! $session['sure i want to overwrite the tables'])
         {
-            $session['stagecompleted'] = 4;
+            $session['installer']['stagecompleted'] = 4;
             output("`nIf you are sure that you wish to overwrite these tables, <a href='installer.php?stage=5&op=confirm_overwrite'>click here</a>.`n", true);
         }
     }

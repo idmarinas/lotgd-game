@@ -1,18 +1,17 @@
 <?php
 
-$session['dbinfo']['upgrade'] = false;
 if (httppost('type') > '')
 {
-    $session['fromversion'] = httppost('version');
+    $session['installer']['fromversion'] = httppost('version');
     $session['dbinfo']['upgrade'] = true;
     if ('install' == httppost('type'))
     {
-        $session['fromversion'] = '-1';
+        $session['installer']['fromversion'] = '-1';
         $session['dbinfo']['upgrade'] = false;
     }
 }
 
-if (! isset($session['fromversion']) || '' == $session['fromversion'])
+if (! isset($session['installer']['fromversion']) || '' == $session['installer']['fromversion'])
 {
     output('`@`c`bConfirmation´b´c');
     output('`2Please confirm the following:`0`n');
@@ -53,11 +52,11 @@ if (! isset($session['fromversion']) || '' == $session['fromversion'])
     rawoutput("<input type='submit' value='$submit' class='ui button'>");
     rawoutput('</form>');
 
-    $session['stagecompleted'] = $stage - 1;
+    $session['installer']['stagecompleted'] = $stage - 1;
 }
 else
 {
-    $session['stagecompleted'] = $stage;
+    $session['installer']['stagecompleted'] = $stage;
     header('Location: installer.php?stage='.($stage + 1));
 
     exit();

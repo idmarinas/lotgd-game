@@ -36,7 +36,7 @@ if (false === DB::connect())
     rawoutput('<blockquote>'.DB::error().'</blockquote>');
     output('If you believe you provided the correct information, make sure that the database server is running (check documentation for how to determine this).');
     output('Otherwise, you should return to the previous step, "Database Info" and double-check that the information provided there is accurate.');
-    $session['stagecompleted'] = 3;
+    $session['installer']['stagecompleted'] = 3;
 }
 else
 {
@@ -96,7 +96,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game will not be able to function with out the ability to insert rows.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {
@@ -110,7 +110,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game will not be able to function with out the ability to select rows.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {
@@ -125,7 +125,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game will not be able to function with out the ability to update rows.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {
@@ -140,7 +140,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game database will grow very large with out the ability to delete rows.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {
@@ -155,7 +155,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game will not run correctly without the ability to lock tables.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {
@@ -169,7 +169,7 @@ else
         output('`2Result: `$Fail`n');
         rawoutput("<blockquote>$error</blockquote>");
         $issues[] = '`$Critical:`2 The game will not run correctly without the ability to unlock tables.';
-        $session['stagecompleted'] = 3;
+        $session['installer']['stagecompleted'] = 3;
     }
     else
     {

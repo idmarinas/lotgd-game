@@ -85,7 +85,7 @@ if (file_exists('cache/service-manager.config.php'))
 
 if (! $success)
 {
-    $session['stagecompleted'] = 5;
+    $session['installer']['stagecompleted'] = 5;
 }
 
 if (! $initial)

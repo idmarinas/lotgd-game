@@ -91,7 +91,7 @@ rawoutput('</div>');
  * Installation of modules
  */
 $installer->skipModulesOff();
-$installer->setModules($session['moduleoperations'] ?? []);
+$installer->setModules($session['installer']['moduleoperations'] ?? []);
 if ($session['skipmodules'] ?? false)
 {
     $installer->skipModulesOn();

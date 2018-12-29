@@ -5,19 +5,19 @@ require_once 'lib/sanitize.php';
 
 if (array_key_exists('modulesok', $_POST))
 {
-    $session['moduleoperations'] = $_POST['modules'] ?? [];
-    $session['stagecompleted'] = $stage;
+    $session['installer']['moduleoperations'] = $_POST['modules'] ?? [];
+    $session['installer']['stagecompleted'] = $stage;
     header('Location: installer.php?stage='.($stage + 1));
 
     exit();
 }
-elseif (array_key_exists('moduleoperations', $session) && is_array($session['moduleoperations']))
+elseif (array_key_exists('moduleoperations', $session) && is_array($session['installer']['moduleoperations']))
 {
-    $session['stagecompleted'] = $stage;
+    $session['installer']['stagecompleted'] = $stage;
 }
 else
 {
-    $session['stagecompleted'] = $stage - 1;
+    $session['installer']['stagecompleted'] = $stage - 1;
 }
 output('`@`c`bManage Modules´b´c');
 output('Legend of the Green Dragon supports an extensive module system.');
@@ -36,7 +36,7 @@ if (return_bytes($phpram) < 12582912 && -1 != $phpram && ! ($session['overrideme
     output('For now we will skip this step, but before installing any module, make sure to increase you memory limit.');
     output('`nYou can proceed at your own risk. Be aware that a blank screen indicates you *must* increase the memory limit.');
     output('`n`nTo override click again on "Set Up Modules".');
-    $session['stagecompleted'] = 8;
+    $session['installer']['stagecompleted'] = 8;
     $session['overridememorylimit'] = true;
     $session['skipmodules'] = true;
 }
@@ -139,9 +139,9 @@ else
             $moduleinfo['realactive'] = $moduleinfo['active'];
             $moduleinfo['realinstalled'] = $moduleinfo['installed'];
 
-            if (array_key_exists('moduleoperations', $session) && is_array($session['moduleoperations']) && array_key_exists($modulename, $session['moduleoperations']))
+            if (array_key_exists('moduleoperations', $session) && is_array($session['installer']['moduleoperations']) && array_key_exists($modulename, $session['installer']['moduleoperations']))
             {
-                $ops = explode(',', $session['moduleoperations'][$modulename]);
+                $ops = explode(',', $session['installer']['moduleoperations'][$modulename]);
                 reset($ops);
 
                 while (list($trash, $op) = each($ops))

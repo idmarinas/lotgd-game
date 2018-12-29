@@ -89,7 +89,7 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 
 if ($needsauthentication)
 {
-    $session['stagecompleted'] = -1;
+    $session['installer']['stagecompleted'] = -1;
     output('`n`%In order to upgrade this LoGD installation, you will need to provide the username and password of a superuser account with the MEGAUSER privilege`0`n`n');
     rawoutput("<form action='installer.php?stage=0' method='POST' class='ui form'>");
     rawoutput('<div class="inline field"><label>');

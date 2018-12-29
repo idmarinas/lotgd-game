@@ -16,8 +16,6 @@ else
 savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 $noinstallnavs = true;
 
-//-- Delete stage of installer
-$session['stagecompleted'] = 0;
 //-- Delete database info and installation
 unset($session['dbinfo'], $session['installer']);
 //-- Cache is cleared to force update
