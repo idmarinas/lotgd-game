@@ -36,23 +36,53 @@ if (0 == DB::num_rows($result))
             $pass = md5(md5(stripslashes(httppost('pass1'))));
             $sql = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='$name'";
             DB::query($sql);
-            $sql = 'INSERT INTO '.DB::prefix('accounts')." (login,password,superuser,name,ctitle,regdate) VALUES('$name','$pass',$su,'`%Admin `&$name`0','`%Admin`0', NOW())";
-            $result = DB::query($sql);
 
-            if (0 == DB::affected_rows($result))
+            try
             {
-                print_r($sql);
+                //-- Configure account
+                $account = new \Lotgd\Core\Entity\Accounts();
+                $account->setLogin((string) $name)
+                    ->setPassword((string) $pass)
+                    ->setSuperuser($su)
+                    ->setRegdate(new \DateTime())
+                ;
 
-                die('Failed to create Admin account. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.');
+                //-- Need for get a ID of new account
+                \Doctrine::persist($account);
+                \Doctrine::flush(); //Persist objects
+
+                //-- Configure character
+                $character = new \Lotgd\Core\Entity\Characters();
+                $character->setPlayername((string) $name)
+                    ->setName("`%Admin `&{$name}`0")
+                    ->setCtitle('`%Admin`0')
+                    ->setAcct($account)
+                ;
+
+                //-- Need for get ID of new character
+                \Doctrine::persist($character);
+                \Doctrine::flush(); //-- Persist objects
+
+                //-- Set ID of character and update Account
+                $account->setCharacter($character);
+                \Doctrine::persist($account);
+                \Doctrine::flush(); //-- Persist objects
+
+                \Doctrine::clear();//-- Detaches all objects from Doctrine!
             }
+            catch (\Throwable $th)
+            {
+                die('Failed to create Admin account and character. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.');
+            }
+
             output("`^Your superuser account has been created as `%Admin `&$name`^!");
-            savesetting('installer_version', $logd_version);
+            savesetting('installer_version', \Lotgd\Core\Application::VERSION);
         }
     }
     else
     {
         $showform = true;
-        savesetting('installer_version', $logd_version);
+        savesetting('installer_version', \Lotgd\Core\Application::VERSION);
     }
 
     if ($showform)
@@ -72,5 +102,5 @@ if (0 == DB::num_rows($result))
 else
 {
     output('`#You already have a superuser account set up on this server.');
-    savesetting('installer_version', $logd_version);
+    savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 }
