@@ -64,7 +64,7 @@ $session['counter'] = $session['counter'] ?? 0;
 
 $session['counter']++;
 
-include 'vendor/autoload.php'; //-- Autoload class for new options of game
+require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 /**
  * LEGACY var.
