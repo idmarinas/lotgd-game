@@ -12,7 +12,7 @@ define('IS_INSTALLER', true);
  * Checking basic prerequisites for LOTGD.
  */
 
-//php 5.6 or better is required for this version
+//php 7.0 or better is required for this version
 $requirements_met = true;
 $php_met = true;
 $memory_met = true;
@@ -22,6 +22,7 @@ $memoryLimit = @ini_get('memory_limit');
 preg_match("#^(\d+)(\w+)$#", strtolower($memoryLimit), $match);
 
 $memoryLimit = intval($memoryLimit);
+
 if ('g' == $match[2])
 {
     $memoryLimit = intval($memoryLimit) * 1024 * 1024 * 1024;
@@ -49,7 +50,7 @@ if ($executionTime < 30 && 0 != $executionTime)
     $execution_met = false;
 }
 
-if (version_compare(PHP_VERSION, '5.6.0') < 0)
+if (version_compare(PHP_VERSION, '7.0.0') < 0)
 {
     $requirements_met = false;
     $php_met = false;
@@ -62,7 +63,7 @@ if (! $requirements_met)
 
     if (! $php_met)
     {
-        echo sprintf('You need PHP 5.6 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
+        echo sprintf('You need PHP 7.0 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
     }
 
     if (! $memory_met)
@@ -78,6 +79,9 @@ if (! $requirements_met)
 
     exit(1);
 }
+
+//-- Need because this check is before include common.php
+require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 {
@@ -169,23 +173,21 @@ $recommended_modules = [
     'waterfall',
 ];
 
-$DB_USEDATACACHE = 0; //Necessary
-
 $stage = (int) httpget('stage');
-
-if (! isset($session['stagecompleted']))
-{
-    $session['stagecompleted'] = -1;
-}
-
-if ($stage > $session['stagecompleted'] + 1)
-{
-    $stage = $session['stagecompleted'];
-}
+$session['installer']['stagecompleted'] = $session['installer']['stagecompleted'] ?? -1;
+$stage = min($session['installer']['stagecompleted'] + 1, $stage);
 
 if (! isset($session['dbinfo']))
 {
-    $session['dbinfo'] = ['DB_HOST' => '', 'DB_USER' => '', 'DB_PASS' => '', 'DB_NAME' => '', 'DB_USEDATACACHE' => false, 'DB_DATACACHEPATH' => 'cache', 'DB_PREFIX' => ''];
+    $session['dbinfo'] = [
+        'DB_HOST' => '',
+        'DB_USER' => '',
+        'DB_PASS' => '',
+        'DB_NAME' => '',
+        'DB_USEDATACACHE' => false,
+        'DB_DATACACHEPATH' => 'cache',
+        'DB_PREFIX' => ''
+    ];
 }
 
 if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))
@@ -195,9 +197,9 @@ if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 =
     $stage = 6;
 }
 
-if ($stage > $session['stagecompleted'])
+if ($stage > $session['installer']['stagecompleted'])
 {
-    $session['stagecompleted'] = $stage;
+    $session['installer']['stagecompleted'] = $stage;
 }
 
 page_header('LoGD Installer &#151; %s', $stages[$stage] ?? $stages[0]);
@@ -230,7 +232,7 @@ if (! $noinstallnavs)
     }
     addnav('Install Stages');
 
-    for ($x = 0; $x <= min(count($stages) - 1, $session['stagecompleted'] + 1); $x++)
+    for ($x = 0; $x <= min(count($stages) - 1, $session['installer']['stagecompleted'] + 1); $x++)
     {
         if ($x == $stage)
         {
