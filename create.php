@@ -377,18 +377,52 @@ else
                     {
                         $dbpass = md5(md5($pass1));
                     }
-                    $sql = 'INSERT INTO '.DB::prefix('accounts')."
-						(playername,name, superuser, title, password, sex, login, laston, uniqueid, lastip, gold, location, emailaddress, emailvalidation, referer, regdate)
-						VALUES
-						('$shortname','$title $shortname', '".getsetting('defaultsuperuser', 0)."', '$title', '$dbpass', '$sex', '$shortname', '".date('Y-m-d H:i:s', strtotime('-1 day'))."', '".$_COOKIE['lgi']."', '".$_SERVER['REMOTE_ADDR']."', ".getsetting('newplayerstartgold', 50).", '".addslashes(getsetting('villagename', LOCATION_FIELDS))."', '$email', '$emailverification', '$referer', NOW())";
-                    DB::query($sql);
 
-                    if (DB::affected_rows() <= 0)
+                    try
                     {
-                        output('`$Error`^: Your account was not created for an unknown reason, please try again. ');
-                    }
-                    else
-                    {
+                        $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+                        $cookie = $request->getCookie();
+
+                        //-- Configure account
+                        $account = new \Lotgd\Core\Entity\Accounts();
+                        $account->setLogin((string) $shortname)
+                            ->setPassword((string) $dbpass)
+                            ->setSuperuser((int) getsetting('defaultsuperuser', 0))
+                            ->setRegdate(new \DateTime())
+                            ->setUniqueid($cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '')
+                            ->setLastip($request->getServer('REMOTE_ADDR'))
+                            ->setEmailaddress($email)
+                            ->setEmailvalidation($emailverification)
+                            ->setReferer($referer)
+                        ;
+
+                        //-- Need for get a ID of new account
+                        \Doctrine::persist($account);
+                        \Doctrine::flush(); //Persist objects
+
+                        //-- Configure character
+                        $character = new \Lotgd\Core\Entity\Characters();
+                        $character->setPlayername((string) $shortname)
+                            ->setSex($sex)
+                            ->setName("{$title} {$shortname}")
+                            ->setTitle($title)
+                            ->setGold((int) getsetting('newplayerstartgold', 50))
+                            ->setLocation(getsetting('villagename', LOCATION_FIELDS))
+                            ->setAcct($account)
+
+                        ;
+
+                        //-- Need for get ID of new character
+                        \Doctrine::persist($character);
+                        \Doctrine::flush(); //-- Persist objects
+
+                        //-- Set ID of character and update Account
+                        $account->setCharacter($character);
+                        \Doctrine::persist($account);
+                        \Doctrine::flush(); //-- Persist objects
+
+                        \Doctrine::clear();//-- Detaches all objects from Doctrine!
+
                         $sql = 'SELECT acctid, emailaddress  FROM '.DB::prefix('accounts')." WHERE login='$shortname'";
                         $result = DB::query($sql);
                         $row = DB::fetch_assoc($result);
@@ -445,6 +479,10 @@ else
                         {
                             output('`^Characters that have reached level 2 at least once will be deleted after %s days of no activity.`n`0', $old);
                         }
+                    }
+                    catch (\Throwable $th)
+                    {
+                        output('`$Error`^: Your account was not created for an unknown reason, please try again. ');
                     }
                 }
             }
