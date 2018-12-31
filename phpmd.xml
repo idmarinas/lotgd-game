@@ -23,6 +23,7 @@
     </rule>
 
     <rule ref="rulesets/naming.xml/ShortVariable">
+        <priority>3</priority>
         <properties>
             <property name="exceptions" value="id,op" />
         </properties>
