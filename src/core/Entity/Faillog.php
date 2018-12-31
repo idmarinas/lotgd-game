@@ -32,12 +32,12 @@ class Faillog
      *
      * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="post", type="text", length=255, nullable=false)
+     * @ORM\Column(name="post", type="array", nullable=false)
      */
     private $post;
 
@@ -61,6 +61,14 @@ class Faillog
      * @ORM\Column(name="id", type="string", length=32, nullable=false)
      */
     private $id;
+
+    /**
+     * Configure same default values.
+     */
+    public function __construct()
+    {
+        $this->date = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Eventid.
