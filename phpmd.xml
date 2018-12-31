@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
-<ruleset name="My first PHPMD rule set"
-         xmlns="http://pmd.sf.net/ruleset/1.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
-         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+<!DOCTYPE ruleset>
+<ruleset
+    name="PHPMD rule set for LOTGD"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+>
     <description>Custom rules LOTGD</description>
 
     <rule ref="rulesets/cleancode.xml" />
@@ -17,12 +19,12 @@
     <rule ref="rulesets/unusedcode.xml" />
 
     <rule ref="rulesets/naming.xml">
-        <exclude name="ShortVariable"/>
+       <exclude name="ShortVariable" />
     </rule>
 
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
-            <property name="exceptions" value="id,op,i,e" />
+            <property name="exceptions" value="id,op" />
         </properties>
     </rule>
 </ruleset>
