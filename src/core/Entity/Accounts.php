@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *          @ORM\Index(name="emailvalidation", columns={"emailvalidation"})
  *      }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsRepository")
  */
 class Accounts
 {
@@ -319,7 +319,7 @@ class Accounts
      *
      * @return int
      */
-    public function getCharacter(): int
+    public function getCharacter()
     {
         return $this->character;
     }
@@ -773,9 +773,9 @@ class Accounts
     /**
      * Get the value of Prefs.
      *
-     * @return string
+     * @return array
      */
-    public function getPrefs(): string
+    public function getPrefs()
     {
         return $this->prefs;
     }
@@ -919,7 +919,7 @@ class Accounts
      *
      * @return string
      */
-    public function getDonationconfig(): string
+    public function getDonationconfig()
     {
         return $this->donationconfig;
     }

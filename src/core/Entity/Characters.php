@@ -597,7 +597,7 @@ class Characters
      *
      * @return int
      */
-    public function getAcct(): int
+    public function getAcct()
     {
         return $this->acct;
     }
@@ -1341,7 +1341,7 @@ class Characters
      *
      * @return string
      */
-    public function getBadguy(): string
+    public function getBadguy()
     {
         return $this->badguy;
     }
@@ -1365,7 +1365,7 @@ class Characters
      *
      * @return string
      */
-    public function getCompanions(): string
+    public function getCompanions()
     {
         return $this->companions;
     }
@@ -1389,7 +1389,7 @@ class Characters
      *
      * @return string
      */
-    public function getAllowednavs(): string
+    public function getAllowednavs()
     {
         return $this->allowednavs;
     }
@@ -1749,7 +1749,7 @@ class Characters
      *
      * @return string
      */
-    public function getBufflist(): string
+    public function getBufflist()
     {
         return $this->bufflist;
     }
@@ -1773,7 +1773,7 @@ class Characters
      *
      * @return string
      */
-    public function getDragonpoints(): string
+    public function getDragonpoints()
     {
         return $this->dragonpoints;
     }

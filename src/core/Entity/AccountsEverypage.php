@@ -24,7 +24,7 @@ class AccountsEverypage
     /**
      * @var string
      *
-     * @ORM\Column(name="allowednavs", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="allowednavs", type="array", nullable=false)
      */
     private $allowednavs;
 
@@ -38,23 +38,31 @@ class AccountsEverypage
     /**
      * @var float
      *
-     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"unsigned":true})
      */
-    private $gentime;
+    private $gentime = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gentimecount", type="integer", nullable=true, options={"unsigned":true})
+     * @ORM\Column(name="gentimecount", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $gentimecount;
+    private $gentimecount = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gensize", type="integer", nullable=true, options={"unsigned":true})
+     * @ORM\Column(name="gensize", type="integer", nullable=false, options={"unsigned":true})
      */
-    private $gensize;
+    private $gensize = 0;
+
+    /**
+     * Configure same default values.
+     */
+    public function __construct()
+    {
+        $this->laston = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Acctid.
