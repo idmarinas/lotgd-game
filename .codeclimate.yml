@@ -69,6 +69,8 @@ plugins:
                 enabled: false
             php:S1192:
                 enabled: false
+            php:S1448:
+                enabled: false
     phpmd:
         enabled: true
         exclude_patterns:
