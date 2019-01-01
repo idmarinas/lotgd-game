@@ -14,8 +14,16 @@
 //
 // There's no support for foreign keys that INNODB offers.  Sorry.
 
+/**
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ */
 function synctable($tablename, $descriptor, $nodrop = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //table names should be DB::prefix'd before they get in to
     //this function.
     if (! DB::table_exists($tablename))
@@ -160,8 +168,16 @@ function synctable($tablename, $descriptor, $nodrop = false)
     }//end if
 }//end function
 
+/**
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ */
 function table_create_from_descriptor($tablename, $descriptor)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $sql = "CREATE TABLE $tablename (\n";
     $type = 'INNODB';
     reset($descriptor);
@@ -231,8 +247,17 @@ function table_create_from_descriptor($tablename, $descriptor)
     return $sql;
 }
 
+/**
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ */
 function table_create_descriptor($tablename)
 {
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //this function assumes that $tablename is already passed
     //through DB::prefix.
     $descriptor = [];
@@ -314,8 +339,16 @@ function table_create_descriptor($tablename)
     return $descriptor;
 }
 
+/**
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ */
 function descriptor_createsql($input)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $input['type'] = descriptor_sanitize_type($input['type']);
 
     if ('key' == $input['type'] || 'unique key' == $input['type'])
@@ -379,8 +412,16 @@ function descriptor_createsql($input)
     return $return;
 }
 
+/**
+ * @deprecated 3.1.0 Delete in version 3.2.0
+ */
 function descriptor_sanitize_type($type)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $type = strtolower($type);
     $changes = [
         'primary index' => 'primary key',
