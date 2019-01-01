@@ -99,7 +99,7 @@ if ('' == $op)
 
     foreach ($result as $row)
     {
-        $session['user']['lastmotd'] = $session['user']['lastmotd'] ?? 0;
+        $session['user']['lastmotd'] = $session['user']['lastmotd'] ?? new DateTime('0000-00-00 00:00:00');
         $row['motdauthorname'] = $row['motdauthorname'] ?: '`@Green Dragon Staff`0';
 
         if (0 == $row['motdtype'])
@@ -148,6 +148,6 @@ $session['needtoviewmotd'] = false;
 $sql = 'SELECT motddate FROM '.DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
 $result = DB::query($sql);
 $row = DB::fetch_assoc($result);
-$session['user']['lastmotd'] = $row['motddate'];
+$session['user']['lastmotd'] = new \DateTime($row['motddate']);
 
 popup_footer();

@@ -356,7 +356,7 @@ else
     }
     $session['user']['boughtroomtoday'] = 0;
     $session['user']['recentcomments'] = $session['user']['lasthit'];
-    $session['user']['lasthit'] = gmdate('Y-m-d H:i:s');
+    $session['user']['lasthit'] = new \DateTime('now');
 
     if ($session['user']['hashorse'])
     {

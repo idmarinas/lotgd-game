@@ -81,7 +81,7 @@ function checkday()
 
             if (count($post) > 0)
             {
-                $session['user']['lasthit'] = '0000-00-00 00:00:00';
+                $session['user']['lasthit'] = new \DateTime('0000-00-00 00:00:00');
 
                 return;
             }
@@ -106,13 +106,13 @@ function is_new_day($now = 0)
 {
     global $session;
 
-    if ('0000-00-00 00:00:00' == $session['user']['lasthit'])
+    if (new \DateTime('0000-00-00 00:00:00') == $session['user']['lasthit'])
     {
         return true;
     }
 
     $t1 = gametime();
-    $t2 = convertgametime(strtotime($session['user']['lasthit'].' +0000'));
+    $t2 = convertgametime($session['user']['lasthit']->getTimestamp().' +0000');
     $d1 = gmdate('Y-m-d', $t1);
     $d2 = gmdate('Y-m-d', $t2);
 
