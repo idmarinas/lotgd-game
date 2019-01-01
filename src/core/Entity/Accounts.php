@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  *      indexes={
  *          @ORM\Index(name="login", columns={"login"}),
  *          @ORM\Index(name="laston", columns={"laston"}),
- *          @ORM\Index(name="lasthit", columns={"lasthit"}),
  *          @ORM\Index(name="emailaddress", columns={"emailaddress"}),
  *          @ORM\Index(name="locked", columns={"locked", "loggedin", "laston"}),
  *          @ORM\Index(name="referer", columns={"referer"}),
@@ -81,13 +80,6 @@ class Accounts
      * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
      */
     private $lastmotd;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
-     */
-    private $lasthit;
 
     /**
      * @var bool
@@ -271,7 +263,6 @@ class Accounts
     {
         $this->laston = new \DateTime('0000-00-00 00:00:00');
         $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
-        $this->lasthit = new \DateTime('0000-00-00 00:00:00');
         $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
         $this->regdate = new \DateTime('0000-00-00 00:00:00');
     }
@@ -466,30 +457,6 @@ class Accounts
     public function getLastmotd(): \DateTime
     {
         return $this->lastmotd;
-    }
-
-    /**
-     * Set the value of Lasthit.
-     *
-     * @param \DateTime lasthit
-     *
-     * @return self
-     */
-    public function setLasthit(\DateTime $lasthit)
-    {
-        $this->lasthit = $lasthit;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Lasthit.
-     *
-     * @return \DateTime
-     */
-    public function getLasthit(): \DateTime
-    {
-        return $this->lasthit;
     }
 
     /**
