@@ -33,13 +33,10 @@ function redirect($location, $reason = false)
     saveuser();
     $host = $_SERVER['HTTP_HOST'];
 
+    $http = 'http';
     if (443 == $_SERVER['SERVER_PORT'])
     {
         $http = 'https';
-    }
-    else
-    {
-        $http = 'http';
     }
 
     $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
