@@ -22,20 +22,6 @@ class AccountsEverypage
     private $acctid;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="allowednavs", type="array", nullable=false)
-     */
-    private $allowednavs;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="laston", type="datetime", nullable=false)
-     */
-    private $laston;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"unsigned":true})
@@ -55,14 +41,6 @@ class AccountsEverypage
      * @ORM\Column(name="gensize", type="integer", nullable=false, options={"unsigned":true})
      */
     private $gensize = 0;
-
-    /**
-     * Configure same default values.
-     */
-    public function __construct()
-    {
-        $this->laston = new \DateTime('0000-00-00 00:00:00');
-    }
 
     /**
      * Set the value of Acctid.
@@ -86,54 +64,6 @@ class AccountsEverypage
     public function getAcctid(): int
     {
         return $this->acctid;
-    }
-
-    /**
-     * Set the value of Allowednavs.
-     *
-     * @param string allowednavs
-     *
-     * @return self
-     */
-    public function setAllowednavs($allowednavs)
-    {
-        $this->allowednavs = $allowednavs;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Allowednavs.
-     *
-     * @return string
-     */
-    public function getAllowednavs(): string
-    {
-        return $this->allowednavs;
-    }
-
-    /**
-     * Set the value of Laston.
-     *
-     * @param \DateTime laston
-     *
-     * @return self
-     */
-    public function setLaston(\DateTime $laston)
-    {
-        $this->laston = $laston;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Laston.
-     *
-     * @return \DateTime
-     */
-    public function getLaston(): \DateTime
-    {
-        return $this->laston;
     }
 
     /**
