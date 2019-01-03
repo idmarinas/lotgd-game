@@ -40,14 +40,14 @@ class Characters
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", unique=true, length=100, nullable=false)
+     * @ORM\Column(name="name", type="string" length=100, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="playername", type="string", length=40, nullable=false)
+     * @ORM\Column(name="playername", type="string", unique=true, length=40, nullable=false)
      */
     private $playername;
 
