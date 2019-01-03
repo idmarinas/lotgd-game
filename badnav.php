@@ -17,12 +17,12 @@ if ($session['user']['loggedin'] && $session['loggedin'])
         checkday();
     }
 
-    foreach ($session['allowednavs'] as $key => $val)
+    foreach ($session['user']['allowednavs'] as $key => $val)
     {
         //hack-tastic.
         if ('' == trim($key) || 0 === $key || 'motd.php' == substr($key, 0, 8) || 'mail.php' == substr($key, 0, 8))
         {
-            unset($session['allowednavs'][$key]);
+            unset($session['user']['allowednavs'][$key]);
         }
     }
     $select = DB::select('accounts_output');
@@ -37,14 +37,14 @@ if ($session['user']['loggedin'] && $session['loggedin'])
     }
     //check if the output needs to be unzipped again
     //and make sure '' is not within gzuncompress -> error
-    if (false !== strpos('HTML', $row['output']) && '' != $row['output'])
+    if ('' != $row['output'] && false !== strpos('HTML', $row['output']))
     {
         $row['output'] = gzuncompress($row['output']);
     }
 
-    if (! is_array($session['allowednavs']) || 0 == count($session['allowednavs']) || '' == $row['output'])
+    if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $row['output'])
     {
-        $session['allowednavs'] = [];
+        $session['user']['allowednavs'] = [];
         page_header('Your Navs Are Corrupted');
 
         if ($session['user']['alive'])
@@ -70,7 +70,7 @@ if ($session['user']['loggedin'] && $session['loggedin'])
     }
 
     $session['debug'] = '';
-    $session['user']['allowednavs'] = $session['allowednavs'];
+    $session['user']['allowednavs'] = $session['user']['allowednavs'];
     saveuser();
 }
 else

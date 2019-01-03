@@ -287,7 +287,7 @@ function checknavs()
 
     // If we already have navs entered (because someone stuck raw links in)
     // just return true;
-    if (is_array($session['allowednavs']) && count($session['allowednavs']) > 0)
+    if (is_array($session['user']['allowednavs']) && count($session['user']['allowednavs']) > 0)
     {
         return true;
     }
@@ -498,14 +498,14 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
             ]);
         }
 
-        $session['allowednavs'][$link.$extra] = true;
-        $session['allowednavs'][str_replace(' ', '%20', $link).$extra] = true;
-        $session['allowednavs'][str_replace(' ', '+', $link).$extra] = true;
+        $session['user']['allowednavs'][$link.$extra] = true;
+        $session['user']['allowednavs'][str_replace(' ', '%20', $link).$extra] = true;
+        $session['user']['allowednavs'][str_replace(' ', '+', $link).$extra] = true;
 
         if (false !== ($pos = strpos($link, '#')))
         {
             $sublink = substr($link, 0, $pos);
-            $session['allowednavs'][$sublink.$extra] = true;
+            $session['user']['allowednavs'][$sublink.$extra] = true;
         }
     }
 
@@ -528,8 +528,9 @@ function navcount()
 {
     //returns count of total navs added, be it they are pending addition or
     //actually added.
-    global $session,$navbysection;
-    $c = count($session['allowednavs']);
+    global $session, $navbysection;
+
+    $c = count($session['user']['allowednavs']);
 
     if (! is_array($navbysection))
     {
@@ -552,7 +553,7 @@ function navcount()
  */
 function clearnav()
 {
-    $session['allowednavs'] = [];
+    $session['user']['allowednavs'] = [];
 }
 
 /**

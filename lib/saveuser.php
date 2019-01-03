@@ -6,66 +6,62 @@
 
 function saveuser()
 {
-    global $session, $dbqueriesthishit, $baseaccount, $companions, $chatloc;
+    global $session, $companions, $chatloc;
 
-    if (defined('NO_SAVE_USER'))
+    //-- It's defined as not save user, Not are a user logged in or not are defined acctid
+    if (defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! $session['user']['acctid'])
     {
         return false;
     }
 
-    if (isset($session['loggedin']) && $session['loggedin'] && '' != $session['user']['acctid'])
+    debug($session['user'], true);
+    // Any time we go to save a user, make SURE that any tempstat changes
+    // are undone.
+    restore_buff_fields();
+
+    if (! $chatloc)
     {
-        // Any time we go to save a user, make SURE that any tempstat changes
-        // are undone.
-        restore_buff_fields();
-
-        if (! $chatloc)
-        {
-            $session['user']['chatloc'] = 0;
-        }
-
-        $session['user']['allowednavs'] = serialize($session['allowednavs']);
-        $session['user']['bufflist'] = serialize($session['bufflist']);
-
-        if (isset($companions) && is_array($companions))
-        {
-            $session['user']['companions'] = serialize($companions);
-        }
-
-        $everyhit_sql = 'UPDATE '.DB::prefix('accounts_everypage')." SET allowednavs='".addslashes($session['user']['allowednavs'])."', laston='".date('Y-m-d H:i:s')."', gentime='".$session['user']['gentime']."', gentimecount='".$session['user']['gentimecount']."', gensize='".$session['user']['gensize']."' WHERE acctid='".$session['user']['acctid']."'";
-        //debug($everyhit_sql);
-        DB::query($everyhit_sql);
-
-        $sql = [];
-        reset($session['user']);
-
-        foreach ($session['user'] as $key => $val)
-        {
-            if (is_array($val))
-            {
-                $val = serialize($val);
-            }
-            //only update columns that have changed.
-            if (isset($baseaccount[$key]) && $baseaccount[$key] != $val)
-            {
-                $sql[] = "`$key` = '".addslashes($val)."'";
-            }
-        }
-        //due to the change in the accounts table -> moved output -> save everyhit
-        $sql[] = "`laston` = '".date('Y-m-d H:i:s')."'";
-        $sql = 'UPDATE '.DB::prefix('accounts').' SET '.implode(',', $sql).
-            ' WHERE acctid = '.$session['user']['acctid'];
-        DB::query($sql);
-
-        if (isset($session['output']) && $session['output'])
-        {
-            $sql_output = 'REPLACE INTO '.DB::prefix('accounts_output')." VALUES ({$session['user']['acctid']}, '".addslashes(gzcompress($session['output'], 1))."');";
-            $result = DB::query($sql_output);
-        }
-        unset($session['bufflist']);
-        $session['user'] = [
-            'acctid' => $session['user']['acctid'],
-            'login' => $session['user']['login']
-        ];
+        $session['user']['chatloc'] = 0;
     }
+
+    $session['user']['bufflist'] = $session['bufflist'];
+    $session['user']['laston'] = new DateTime('now');
+
+    if (isset($companions) && is_array($companions))
+    {
+        $session['user']['companions'] = $companions;
+    }
+
+    $hydrator = new \Zend\Hydrator\ClassMethods();
+
+    $everypage = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\AccountsEverypage());
+
+    $account = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Accounts());
+
+    $character = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Characters());
+
+    $account->setCharacter($character);
+    $character->setAcct($account);
+
+    \Doctrine::merge($account);
+    \Doctrine::merge($character);
+    \Doctrine::merge($everypage);
+
+    if ($session['output'] ?? false)
+    {
+        $acctOutput = new \Lotgd\Core\Entity\AccountsOutput();
+        $acctOutput->setAcctid($session['user']['acctid'])
+            ->setOutput(gzcompress($session['output'], 1))
+        ;
+
+        \Doctrine::merge($acctOutput);
+    }
+
+    \Doctrine::flush(); //Persist objects
+    \Doctrine::clear();//-- Detaches all objects from Doctrine!
+
+    $session['user'] = [
+        'acctid' => $session['user']['acctid'],
+        'login' => $session['user']['login']
+    ];
 }

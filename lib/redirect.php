@@ -17,7 +17,7 @@ function redirect($location, $reason = false)
     if (false === strpos($location, 'badnav.php'))
     {
         //deliberately html in translations so admins can personalize this, also in one schema
-        $session['allowednavs'] = [];
+        $session['user']['allowednavs'] = [];
         addnav('', $location);
         $failoutput = LotgdLocator::build(Lotgd\Core\Output\Collector::class);
         $failoutput->output_notl('`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n');
