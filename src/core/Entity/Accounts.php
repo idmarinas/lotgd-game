@@ -89,20 +89,6 @@ class Accounts
     private $locked = 0;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"default":0})
-     */
-    private $gentime = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="gentimecount", type="integer", nullable=false, options={"default":0, "unsigned":true})
-     */
-    private $gentimecount = 0;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="lastip", type="string", length=40, nullable=false)
@@ -171,13 +157,6 @@ class Accounts
      * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default":0, "unsigned":true})
      */
     private $transferredtoday = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="gensize", type="integer", nullable=false, options={"default":0, "unsigned":true})
-     */
-    private $gensize = 0;
 
     /**
      * @var \DateTime
@@ -484,54 +463,6 @@ class Accounts
     }
 
     /**
-     * Set the value of Gentime.
-     *
-     * @param float gentime
-     *
-     * @return self
-     */
-    public function setGentime($gentime)
-    {
-        $this->gentime = $gentime;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Gentime.
-     *
-     * @return float
-     */
-    public function getGentime(): float
-    {
-        return $this->gentime;
-    }
-
-    /**
-     * Set the value of Gentimecount.
-     *
-     * @param int gentimecount
-     *
-     * @return self
-     */
-    public function setGentimecount($gentimecount)
-    {
-        $this->gentimecount = $gentimecount;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Gentimecount.
-     *
-     * @return int
-     */
-    public function getGentimecount(): int
-    {
-        return $this->gentimecount;
-    }
-
-    /**
      * Set the value of Lastip.
      *
      * @param string lastip
@@ -769,30 +700,6 @@ class Accounts
     public function getTransferredtoday(): int
     {
         return $this->transferredtoday;
-    }
-
-    /**
-     * Set the value of Gensize.
-     *
-     * @param int gensize
-     *
-     * @return self
-     */
-    public function setGensize($gensize)
-    {
-        $this->gensize = $gensize;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Gensize.
-     *
-     * @return int
-     */
-    public function getGensize(): int
-    {
-        return $this->gensize;
     }
 
     /**
