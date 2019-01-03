@@ -32,7 +32,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Accounts")
+     * @ORM\OneToOne(targetEntity="Accounts")
      * @ORM\JoinColumn(referencedColumnName="acctid", nullable=false, onDelete="CASCADE")
      */
     private $acct;
