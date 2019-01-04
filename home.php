@@ -11,7 +11,7 @@ if (isset($_POST['template']))
     if ($skin > '')
     {
         setcookie('template', $skin, strtotime('+45 days'));
-        $_COOKIE['template'] = $skin;
+        httpSetCookie('template', $skin);
     }
 }
 
@@ -19,9 +19,7 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-$session['loggedin'] = $session['loggedin'] ?? false;
-
-if ($session['loggedin'])
+if ($session['loggedin'] ?? false)
 {
     return redirect('badnav.php');
 }
@@ -105,7 +103,7 @@ if ($onlinecount < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0)
         $session['message'] .= translate_inline(' Your session has timed out, you must log in again.`n');
     }
 
-    if (! isset($_COOKIE['lgi']))
+    if (! httpGetCookie('lgi'))
     {
         $session['message'] .= translate_inline('It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.`n');
         $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.´b`n");
@@ -147,7 +145,7 @@ else
         $session['message'] .= translate_inline(' Your session has timed out, you must log in again.`n');
     }
 
-    if (! isset($_COOKIE['lgi']))
+    if (! httpGetCookie('lgi'))
     {
         $session['message'] .= translate_inline('It appears that you may be blocking cookies from this site. At least session cookies must be enabled in order to use this site.`n');
         $session['message'] .= translate_inline("`b`#If you are not sure what cookies are, please <a href='http://en.wikipedia.org/wiki/WWW_browser_cookie'>read this article</a> about them, and how to enable them.´b`n");
@@ -172,7 +170,7 @@ if (getsetting('homeskinselect', 1))
 {
     require_once 'lib/showform.php';
 
-    $prefs['template'] = (isset($_COOKIE['template']) ? $_COOKIE['template'] : '');
+    $prefs['template'] = httpGetCookie('template') ?: '';
 
     if ('' == $prefs['template'])
     {
