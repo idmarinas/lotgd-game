@@ -8,13 +8,13 @@
  * Return single get parameter.
  *
  * @param string $name
- * @param string  $default
+ * @param string $default
  *
  * @return mixed
  */
 function httpget(string $name, string $default = null)
 {
-    return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery($name, $default);
+    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery($name, $default);
 }
 
 /**
@@ -26,13 +26,12 @@ function httpget(string $name, string $default = null)
  */
 function httpallget(bool $array = true)
 {
-
     if ($array)
     {
-        return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery()->toArray();
+        return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery()->toArray();
     }
 
-    return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
+    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
 }
 
 /**
@@ -44,7 +43,7 @@ function httpallget(bool $array = true)
  */
 function httpset(string $var, $val, bool $force = false)
 {
-    $get = LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
+    $get = \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
 
     if ($get->offsetExists($var) || $force)
     {
@@ -62,12 +61,12 @@ function httpset(string $var, $val, bool $force = false)
  */
 function httppost($name, $default = null)
 {
-    return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost($name, $default);
+    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost($name, $default);
 }
 
 function httppostisset($var)
 {
-    return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->offsetExists($var);
+    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->offsetExists($var);
 }
 
 /**
@@ -79,7 +78,7 @@ function httppostisset($var)
  */
 function httppostset($var, $val, $sub = false)
 {
-    $post = LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
+    $post = \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
 
     if (false === $sub && $post->offsetExists($var))
     {
@@ -89,7 +88,7 @@ function httppostset($var, $val, $sub = false)
     {
         $_POST[$var][$sub] = $val;
 
-        LotgdLocator::get(\Lotgd\Core\Http::class)->setPost($_POST);
+        \LotgdLocator::get(\Lotgd\Core\Http::class)->setPost($_POST);
     }
 }
 
@@ -104,10 +103,10 @@ function httpallpost($array = true)
 {
     if ($array)
     {
-        return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->toArray();
+        return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->toArray();
     }
 
-    return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
+    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
 }
 
 function postparse($verify = false, $subval = false)
@@ -144,6 +143,21 @@ function postparse($verify = false, $subval = false)
 }
 
 /**
+ * Get value for a server key. Access to $_SERVER var.
+ *
+ * @param string|null $name
+ * @param string|null $default
+ *
+ * @return string
+ */
+function httpGetServer($name = null, $default = null)
+{
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+
+    return $request->getServer($name, $default);
+}
+
+/**
  * Return base url of game.
  *
  * @param false|string $file
@@ -152,11 +166,11 @@ function postparse($verify = false, $subval = false)
  */
 function lotgd_base_url($file = false)
 {
-    $basename = (! $file ? basename($_SERVER['SCRIPT_NAME']) : $file);
+    $basename = (! $file ? basename(httpGetServer('SCRIPT_NAME')) : $file);
 
     if ($basename)
     {
-        $path = ($_SERVER['PHP_SELF'] ? trim($_SERVER['PHP_SELF'], '/') : '');
+        $path = (httpGetServer('PHP_SELF') ? trim(httpGetServer('PHP_SELF'), '/') : '');
         $basePos = strpos($path, $basename) ?: 0;
         $baseUrl = substr($path, 0, $basePos);
     }
