@@ -19,7 +19,7 @@ function check_su_access($level)
 
         if ($return['enabled'])
         {
-            $session['user']['laston'] = date('Y-m-d H:i:s');
+            $session['user']['laston'] = new \DateTime('now');
         }
         else
         {
