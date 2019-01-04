@@ -23,7 +23,7 @@ $session['loggedin'] = $session['loggedin'] ?? false;
 
 if ($session['loggedin'])
 {
-    redirect('badnav.php');
+    return redirect('badnav.php');
 }
 
 tlschema('home');
@@ -51,16 +51,13 @@ if (getsetting('homenewestplayer', 1))
     $name = '';
     $newplayer = getsetting('newestplayer', '');
 
+    $name = $newplayer;
     if (0 != $newplayer)
     {
         $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid='$newplayer'";
         $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
         $name = $row['name'];
-    }
-    else
-    {
-        $name = $newplayer;
     }
 
     if ('' != $name)
@@ -88,14 +85,11 @@ if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
     $sql = 'SELECT count(acctid) as onlinecount FROM '.DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."'";
     $result = DB::query($sql);
     $onlinecount = DB::fetch_assoc($result);
-    $onlinecount = $onlinecount['onlinecount'];
-    savesetting('OnlineCount', $onlinecount);
+    savesetting('OnlineCount', $onlinecount['onlinecount']);
     savesetting('OnlineCountLast', strtotime('now'));
 }
-else
-{
-    $onlinecount = getsetting('OnlineCount', 0);
-}
+
+$onlinecount = getsetting('OnlineCount', 0);
 
 modulehook('hometext', []);
 
