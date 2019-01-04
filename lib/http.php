@@ -158,6 +158,37 @@ function httpGetServer($name = null, $default = null)
 }
 
 /**
+ * Get a value of a cookie.
+ *
+ * @param mixed $name
+ *
+ * @return mixed|null
+ */
+function httpGetCookie($name)
+{
+    $cookie = \LotgdLocator::get(\Lotgd\Core\Http::class)->getCookie();
+
+    if ($cookie->offsetExists($name))
+    {
+        return $cookie->offsetGet($name);
+    }
+
+    return;
+}
+
+/**
+ * Set a value of cookie
+ *
+ * @param mixed $name
+ * @param mixed $value
+ */
+function httpSetCookie($name, $value)
+{
+    $cookie = \LotgdLocator::get(\Lotgd\Core\Http::class)->getCookie();
+
+    $cookie->offsetSet($name, $value);
+}
+/**
  * Return base url of game.
  *
  * @param false|string $file
