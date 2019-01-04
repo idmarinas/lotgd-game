@@ -186,11 +186,8 @@ function page_footer($saveuser = true)
 
     $alreadyRegisteredLogdnet = true;
 
-    if (! isset($request->getServer('logdnet')[''])
-        || '' == $request->getServer('logdnet')['']
-        || ! isset($session['user']['laston'])
-        || date('Y-m-d H:i:s', strtotime('-1 hour')) > $session['user']['laston']
-    ) {
+    if ('' == ($session['logdnet'][''] ?? '') || ! isset($session['user']['laston']) || strtotime('-1 hour') > $session['user']['laston']->getTimestamp())
+    {
         $alreadyRegisteredLogdnet = false;
     }
 
