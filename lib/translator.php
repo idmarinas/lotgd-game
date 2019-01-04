@@ -346,7 +346,7 @@ $translation_namespace = '';
 $translation_namespace_stack = [];
 function tlschema($schema = false)
 {
-    global $translation_namespace,$translation_namespace_stack,$REQUEST_URI;
+    global $translation_namespace,$translation_namespace_stack;
 
     if (false === $schema)
     {
@@ -354,7 +354,7 @@ function tlschema($schema = false)
 
         if ('' == $translation_namespace)
         {
-            $translation_namespace = translator_uri($REQUEST_URI);
+            $translation_namespace = translator_uri(httpGetServer('REQUEST_URI'));
         }
     }
     else

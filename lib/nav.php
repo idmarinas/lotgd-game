@@ -384,7 +384,7 @@ $quickkeys = [];
 function private_addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
     //don't call this directly please.  I'll break your thumbs if you do.
-    global $nav, $session, $accesskeys, $REQUEST_URI, $quickkeys, $navschema, $notranslate;
+    global $nav, $session, $accesskeys, $quickkeys, $navschema, $notranslate;
 
     if (is_blocked($link))
     {

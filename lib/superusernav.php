@@ -5,13 +5,14 @@
 // mail ready
 function superusernav()
 {
-    global $SCRIPT_NAME, $session;
+    global $session;
+
     tlschema('nav');
     addnav('Navigation');
 
     if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
     {
-        $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
+        $script = substr(httpGetServer('SCRIPT_NAME'), 0, strpos(httpGetServer('SCRIPT_NAME'), '.'));
 
         if ('superuser' != $script)
         {

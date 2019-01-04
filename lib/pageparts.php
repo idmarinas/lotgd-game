@@ -24,7 +24,7 @@ $html = ['content' => ''];
  */
 function page_header()
 {
-    global $html, $SCRIPT_NAME, $session, $template, $runheaders, $nopopups;
+    global $html, $session, $template, $runheaders, $nopopups;
 
     $nopopups['login.php'] = 1;
     $nopopups['motd.php'] = 1;
@@ -36,7 +36,7 @@ function page_header()
     //in case this didn't already get called (such as on a database error)
     translator_setup();
 
-    $script = substr($SCRIPT_NAME, 0, strrpos($SCRIPT_NAME, '.'));
+    $script = substr(httpGetServer('SCRIPT_NAME'), 0, strrpos(httpGetServer('SCRIPT_NAME'), '.'));
 
     if ($script)
     {
@@ -91,14 +91,14 @@ function page_header()
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $copyright, $license, $SCRIPT_NAME, $nopopups, $lotgdJaxon;
+    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $copyright, $license, $nopopups, $lotgdJaxon;
 
     $z = $y2 ^ $z2;
     $html[$z] = $license.${$z};
     $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
-    $script = substr($SCRIPT_NAME, 0, strpos($SCRIPT_NAME, '.'));
+    $script = substr(httpGetServer('SCRIPT_NAME'), 0, strpos(httpGetServer('SCRIPT_NAME'), '.'));
     $replacementbits = modulehook("footer-$script", []);
 
     if ('runmodule' == $script && (($module = httpget('module'))) > '')
@@ -154,7 +154,7 @@ function page_footer($saveuser = true)
 
     if (isset($session['user']['lastmotd'])
         && ($row['motddate'] > $session['user']['lastmotd'])
-        && (! isset($nopopup[$SCRIPT_NAME]) || 1 != $nopopups[$SCRIPT_NAME])
+        && (! isset($nopopup[httpGetServer('SCRIPT_NAME')]) || 1 != $nopopups[httpGetServer('SCRIPT_NAME')])
         && $session['user']['loggedin']
     ) {
         $session['needtoviewmotd'] = true;
@@ -328,10 +328,9 @@ function page_footer($saveuser = true)
 
     if (getsetting('debug', 0))
     {
-        global $SCRIPT_NAME;
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".$SCRIPT_NAME."','".($gentime)."');";
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".httpGetServer('SCRIPT_NAME')."','".($gentime)."');";
         $resultdebug = \DB::query($sql);
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".$SCRIPT_NAME."','".(round($wrapper->getQueryTime(), 3))."');";
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".httpGetServer('SCRIPT_NAME')."','".(round($wrapper->getQueryTime(), 3))."');";
         $resultdebug = \DB::query($sql);
     }
 

@@ -17,7 +17,7 @@ superusernav();
 
 addnav('Module Categories');
 
-addnav('', $REQUEST_URI);
+addnav('', httpGetServer('REQUEST_URI'));
 $op = httpget('op');
 $module = httpget('module');
 

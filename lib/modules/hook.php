@@ -39,9 +39,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
         if (! $where)
         {
-            global $SCRIPT_NAME;
-
-            $where = $SCRIPT_NAME;
+            $where = httpGetServer('SCRIPT_NAME');
         }
         debug("Args parameter to modulehook $hookname from $where is not an array.");
     }

@@ -290,7 +290,7 @@ addnav('Standard settings', 'configuration.php');
 addnav('Extended settings', 'configuration.php?settings=extended');
 addnav('Cache settings', 'configuration.php?settings=cache');
 addnav('Cronjob settings', 'configuration.php?settings=cronjob');
-addnav('', $REQUEST_URI);
+addnav('', httpGetServer('REQUEST_URI'));
 
 module_editor_navs('settings', 'configuration.php?op=modulesettings&module=');
 

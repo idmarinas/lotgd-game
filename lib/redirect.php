@@ -5,7 +5,7 @@
 // mail ready
 function redirect($location, $reason = false)
 {
-    global $session, $REQUEST_URI;
+    global $session;
 
     // This function is deliberately not localized.  It is meant as error
     // handling.
@@ -29,7 +29,7 @@ function redirect($location, $reason = false)
         $session['output'] = "<html><head><title>$title</title></head><body style='background-color: #ffffff'>$text</body></html>";
     }
     restore_buff_fields();
-    $session['debug'] .= "Redirected to $location from $REQUEST_URI.  $reason<br>";
+    $session['debug'] .= "Redirected to $location from ".httpGetServer('REQUEST_URI').".  $reason<br>";
     saveuser();
     $host = $_SERVER['HTTP_HOST'];
 
