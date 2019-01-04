@@ -1,11 +1,5 @@
 <?php
 
-// Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)))
-{
-    return false;
-}
-
 // translator ready
 // addnews ready
 // mail ready
@@ -111,6 +105,12 @@ require_once 'lib/pageparts.php';
 require_once 'lib/translator.php';
 require_once 'lib/jaxon.php';
 
+// Decline static file requests back to the PHP built-in webserver
+if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(httpGetServer('REQUEST_URI'), PHP_URL_PATH)))
+{
+    return false;
+}
+
 //-- Check connection to DB
 $link = DB::connect();
 
@@ -141,7 +141,7 @@ elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1'
     page_footer();
 }
 
-if (file_exists('installer.php') && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && 'installer.php' != substr($_SERVER['SCRIPT_NAME'], -13))
+if (file_exists('installer.php') && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && 'installer.php' != substr(httpGetServer('SCRIPT_NAME'), -13))
 {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     page_header('Major Security Risk');
@@ -163,7 +163,7 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
     output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
     //add the message as it was not enclosed and posted to the smsnotify file
     output('Sorry for the inconvenience,`n');
-    output('Staff of %s', $_SERVER['SERVER_NAME']);
+    output('Staff of %s', httpGetServer('SERVER_NAME'));
     addnav('Home', 'index.php');
     page_footer();
 }
@@ -186,10 +186,9 @@ $session['lasthit'] = strtotime('now');
 $cp = $copyright;
 $l = $license;
 
-php_generic_environment();
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
-$script = substr($SCRIPT_NAME, 0, strrpos($SCRIPT_NAME, '.'));
+$script = substr(httpGetServer('SCRIPT_NAME'), 0, strrpos(httpGetServer('SCRIPT_NAME'), '.'));
 mass_module_prepare([
     'template-header', 'template-footer', 'template-statstart', 'template-stathead', 'template-statrow', 'template-statbuff', 'template-statend',
     'template-navhead', 'template-navitem', 'template-petitioncount', 'template-adwrapper', 'template-login', 'template-loginfull', 'everyhit',
@@ -212,12 +211,12 @@ $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.p
 
 if (OVERRIDE_FORCED_NAV)
 {
-    $nokeeprestore[$SCRIPT_NAME] = 1;
+    $nokeeprestore[httpGetServer('SCRIPT_NAME')] = 1;
 }
 
-if (! isset($nokeeprestore[$SCRIPT_NAME]) || ! $nokeeprestore[$SCRIPT_NAME])
+if (! isset($nokeeprestore[httpGetServer('SCRIPT_NAME')]) || ! $nokeeprestore[httpGetServer('SCRIPT_NAME')])
 {
-    $session['user']['restorepage'] = $REQUEST_URI;
+    $session['user']['restorepage'] = httpGetServer('REQUEST_URI');
 }
 
 $session['user']['alive'] = false;
@@ -233,15 +232,15 @@ if (! is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
-$session['user']['lastip'] = $REMOTE_ADDR;
+$session['user']['lastip'] = httpGetServer('REMOTE_ADDR');
 
-if (! isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi']) < 32)
+if (! httpGetCookie('lgi') || strlen(httpGetCookie('lgi')) < 32)
 {
     if (! isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid']) < 32)
     {
         $u = md5(microtime());
         setcookie('lgi', $u, strtotime('+365 days'));
-        $_COOKIE['lgi'] = $u;
+        httpSetCookie('lgi', $u);
         $session['user']['uniqueid'] = $u;
     }
     elseif (isset($session['user']['uniqueid']))
@@ -249,52 +248,47 @@ if (! isset($_COOKIE['lgi']) || strlen($_COOKIE['lgi']) < 32)
         setcookie('lgi', $session['user']['uniqueid'], strtotime('+365 days'));
     }
 }
-elseif (isset($_COOKIE['lgi']) && '' != $_COOKIE['lgi'])
+elseif (httpGetCookie('lgi') && '' != httpGetCookie('lgi'))
 {
-    $session['user']['uniqueid'] = $_COOKIE['lgi'];
+    $session['user']['uniqueid'] = httpGetCookie('lgi');
 }
 
-$url = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['REQUEST_URI']);
+$url = 'http://'.httpGetServer('SERVER_NAME').dirname(httpGetServer('REQUEST_URI'));
 $url = substr($url, 0, strlen($url) - 1);
-$urlport = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['REQUEST_URI']);
+$urlport = 'http://'.httpGetServer('SERVER_NAME').':'.httpGetServer('SERVER_PORT').dirname(httpGetServer('REQUEST_URI'));
 $urlport = substr($urlport, 0, strlen($urlport) - 1);
 
-if (! isset($_SERVER['HTTP_REFERER']))
-{
-    $_SERVER['HTTP_REFERER'] = '';
-}
-
 if (
-    substr($_SERVER['HTTP_REFERER'], 0, strlen($url)) == $url ||
-    substr($_SERVER['HTTP_REFERER'], 0, strlen($urlport)) == $urlport ||
-    '' == $_SERVER['HTTP_REFERER'] ||
-    'http://' != strtolower(substr($_SERVER['HTTP_REFERER'], 0, 7))
+    substr(httpGetServer('HTTP_REFERER'), 0, strlen($url)) == $url ||
+    substr(httpGetServer('HTTP_REFERER'), 0, strlen($urlport)) == $urlport ||
+    '' == httpGetServer('HTTP_REFERER') ||
+    'http://' != strtolower(substr(httpGetServer('HTTP_REFERER'), 0, 7))
     ) {
 }
 else
 {
-    $site = str_replace('http://', '', $_SERVER['HTTP_REFERER']);
+    $site = str_replace('http://', '', httpGetServer('HTTP_REFERER'));
 
     if (strpos($site, '/'))
     {
         $site = substr($site, 0, strpos($site, '/'));
     }
-    $host = str_replace(':80', '', $_SERVER['HTTP_HOST']);
+    $host = str_replace(':80', '', httpGetServer('HTTP_HOST'));
 
     if ($site != $host)
     {
-        $sql = 'SELECT * FROM '.DB::prefix('referers')." WHERE uri='{$_SERVER['HTTP_REFERER']}'";
+        $sql = 'SELECT * FROM '.DB::prefix('referers')." WHERE uri='{httpGetServer('HTTP_REFERER')}'";
         $result = DB::query($sql);
         $row = DB::fetch_assoc($result);
         DB::free_result($result);
 
         if ($row['refererid'] > '')
         {
-            $sql = 'UPDATE '.DB::prefix('referers')." SET count=count+1,last='".date('Y-m-d H:i:s')."',site='".addslashes($site)."',dest='".addslashes($host).'/'.addslashes($REQUEST_URI)."',ip='{$_SERVER['REMOTE_ADDR']}' WHERE refererid='{$row['refererid']}'";
+            $sql = 'UPDATE '.DB::prefix('referers')." SET count=count+1,last='".date('Y-m-d H:i:s')."',site='".addslashes($site)."',dest='".addslashes($host).'/'.addslashes(httpGetServer('REQUEST_URI'))."',ip='".httpGetServer('REMOTE_ADDR')."' WHERE refererid='{$row['refererid']}'";
         }
         else
         {
-            $sql = 'INSERT INTO '.DB::prefix('referers')." (uri,count,last,site,dest,ip) VALUES ('{$_SERVER['HTTP_REFERER']}',1,'".date('Y-m-d H:i:s')."','".addslashes($site)."','".addslashes($host).'/'.addslashes($REQUEST_URI)."','{$_SERVER['REMOTE_ADDR']}')";
+            $sql = 'INSERT INTO '.DB::prefix('referers')." (uri,count,last,site,dest,ip) VALUES ('{httpGetServer('HTTP_REFERER')}',1,'".date('Y-m-d H:i:s')."','".addslashes($site)."','".addslashes($host).'/'.addslashes(httpGetServer('REQUEST_URI'))."','".httpGetServer('REMOTE_ADDR')."')";
         }
         DB::query($sql);
     }
@@ -336,13 +330,13 @@ if (isset($session['user']['clanid']))
     $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='{$session['user']['clanid']}'";
     $result = DB::query($sql);
 
+    $claninfo = [];
     if ($result->count() > 0)
     {
         $claninfo = $result->current();
     }
     else
     {
-        $claninfo = [];
         $session['user']['clanid'] = 0;
         $session['user']['clanrank'] = 0;
     }
@@ -362,7 +356,8 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 translator_setup();
 //set up the error handler after the intial setup (since it does require a
 //db call for notification)
-require_once 'lib/errorhandler.php';
+//-- Not is used
+// require_once 'lib/errorhandler.php';
 
 if (getsetting('debug', 0))
 {
