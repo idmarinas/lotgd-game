@@ -31,7 +31,7 @@ if ($session['user']['loggedin'] && $session['loggedin'])
     ;
     $row = DB::execute($select)->current();
 
-    if ($row['output'] > '')
+    if ('' != $row['output'])
     {
         $row['output'] = gzuncompress($row['output']);
     }
@@ -70,7 +70,6 @@ if ($session['user']['loggedin'] && $session['loggedin'])
     }
 
     $session['debug'] = '';
-    $session['user']['allowednavs'] = $session['user']['allowednavs'];
     saveuser();
 }
 else
