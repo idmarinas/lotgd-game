@@ -86,7 +86,6 @@ require_once 'lib/class/doctrine.php';
 require_once 'lib/settings.php';
 require_once 'lib/class/lotgdFormat.php';
 require_once 'lib/class/template.php';
-require_once 'lib/php_generic_environment.php';
 require_once 'lib/datacache.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/e_rand.php';
@@ -180,7 +179,7 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.g
     translator_setup();
 
     $session['message'] = $session['message'] ?? '';
-    $session['message'] .= translate_inline('`nYour session has expired!`n', 'common');
+    $session['message'] .= translate_inline('`n`$Your session has expired!`0`n', 'common');
 }
 $session['lasthit'] = strtotime('now');
 
@@ -228,7 +227,7 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
     $session['user']['alive'] = true;
 }
 
-$session['bufflist'] = isset($session['user']['bufflist']) ? unserialize($session['user']['bufflist']) : [];
+$session['bufflist'] = $session['user']['bufflist'] ?? [];
 
 if (! is_array($session['bufflist']))
 {
@@ -310,14 +309,7 @@ include_once 'lib/common.php';
 $session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
 $playermount = getmount($session['user']['hashorse']);
 
-if (isset($session['user']['companions']))
-{
-    $temp_comp = unserialize($session['user']['companions']);
-}
-else
-{
-    $temp_comp = [];
-}
+$temp_comp = $session['user']['companions'] ?? [];
 $companions = [];
 
 if (! empty($temp_comp))
@@ -336,12 +328,7 @@ $beta = getsetting('beta', 0);
 
 if (! $beta && 1 == getsetting('betaperplayer', 1))
 {
-    $beta = 0;
-
-    if (isset($session['user']['beta']))
-    {
-        $beta = $session['user']['beta'];
-    }
+    $beta = $session['user']['beta'] ?? 0;
 }
 
 if (isset($session['user']['clanid']))
