@@ -143,7 +143,7 @@ function postparse($verify = false, $subval = false)
 }
 
 /**
- * Get value for a server key. Access to $_SERVER var.
+ * Return the parameter container responsible for server parameters or a single parameter value.
  *
  * @param string|null $name
  * @param string|null $default
