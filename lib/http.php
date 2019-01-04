@@ -31,10 +31,8 @@ function httpallget(bool $array = true)
     {
         return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery()->toArray();
     }
-    else
-    {
-        return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
-    }
+
+    return LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
 }
 
 /**
@@ -83,21 +81,15 @@ function httppostset($var, $val, $sub = false)
 {
     $post = LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
 
-    if (false === $sub)
+    if (false === $sub && $post->offsetExists($var))
     {
-        if ($post->offsetExists($var))
-        {
-            $post->set($var, $val);
-        }
+        $post->set($var, $val);
     }
-    else
+    elseif (isset($_POST[$var]) && isset($_POST[$var][$sub]))
     {
-        if (isset($_POST[$var]) && isset($_POST[$var][$sub]))
-        {
-            $_POST[$var][$sub] = $val;
+        $_POST[$var][$sub] = $val;
 
-            LotgdLocator::get(\Lotgd\Core\Http::class)->setPost($_POST);
-        }
+        LotgdLocator::get(\Lotgd\Core\Http::class)->setPost($_POST);
     }
 }
 
@@ -114,21 +106,17 @@ function httpallpost($array = true)
     {
         return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->toArray();
     }
-    else
-    {
-        return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
-    }
+
+    return LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
 }
 
 function postparse($verify = false, $subval = false)
 {
+    $var = httpallpost();
+
     if ($subval)
     {
         $var = httppost($subval);
-    }
-    else
-    {
-        $var = httpallpost();
     }
 
     reset($var);
