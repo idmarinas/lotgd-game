@@ -4,104 +4,51 @@
 // addnews ready
 // mail ready
 
-$baseaccount = [];
 function do_forced_nav($anonymous, $overrideforced)
 {
-    global $baseaccount, $session,$REQUEST_URI;
+    global $session;
+
+    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+    $requestUri = $request->getRequestUri();
+
     rawoutput("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
 
-    if (isset($session['loggedin']) && $session['loggedin'])
+    if ($session['loggedin'] ?? false && $session['user']['acctid'] ?? false)
     {
-        $sql = 'SELECT *  FROM '.DB::prefix('accounts')." WHERE acctid = '".$session['user']['acctid']."'";
-        $result = DB::query($sql);
+        //-- Using Doctrine repository to process login
+        $repositoryAccounts = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+        $account = $repositoryAccounts->getUserById($session['user']['acctid']);
 
-        if (1 == DB::num_rows($result))
-        {
-            $session['user'] = DB::fetch_assoc($result);
-            $baseaccount = $session['user'];
-            $session['bufflist'] = unserialize($session['user']['bufflist']);
-
-            if (! is_array($session['bufflist']))
-            {
-                $session['bufflist'] = [];
-            }
-            $session['user']['dragonpoints'] = unserialize($session['user']['dragonpoints']);
-            $session['user']['prefs'] = unserialize($session['user']['prefs']);
-
-            if (! is_array($session['user']['dragonpoints']))
-            {
-                $session['user']['dragonpoints'] = [];
-            }
-
-            //get allowednavs
-            /*
-            accounts_everypage table includes:
-                acctid (primary key, unique)
-                allowednavs
-                laston
-                gentime
-                gentimecount
-                gensize
-            */
-            $sql = 'SELECT allowednavs,laston,gentime,gentimecount,gensize FROM '.DB::prefix('accounts_everypage')." WHERE acctid = '".$session['user']['acctid']."'";
-            $result = DB::query($sql);
-
-            if (1 == DB::num_rows($result))
-            {
-                //debug("Getting fresh info from accounts_everypage");
-                $row = DB::fetch_assoc($result);
-                $session['user']['allowednavs'] = $row['allowednavs'];
-                $session['user']['laston'] = $row['laston'];
-                $session['user']['gentime'] = $row['gentime'];
-                $session['user']['gentimecount'] = $row['gentimecount'];
-                $session['user']['gensize'] = $row['gensize'];
-            }
-            else
-            {
-                $sql = 'INSERT INTO '.DB::prefix('accounts_everypage')." (acctid,allowednavs,laston,gentime,gentimecount,gensize) VALUES ('".$session['user']['acctid']."','".$session['user']['allowednavs']."','".$session['user']['laston']."','".$session['user']['gentime']."','".$session['user']['gentimecount']."','".$session['user']['gensize']."')";
-                DB::query($sql);
-            }
-
-            if (is_array(unserialize($session['user']['allowednavs'])))
-            {
-                $session['allowednavs'] = unserialize($session['user']['allowednavs']);
-            }
-            else
-            {
-                $session['allowednavs'] = [$session['user']['allowednavs']];
-            }
-
-            if (! $session['user']['loggedin'] || ((date('U') - strtotime($session['user']['laston'])) > getsetting('LOGINTIMEOUT', 900)))
-            {
-                $session = [];
-                redirect('index.php?op=timeout', 'Account not logged in but session thinks they are.');
-            }
-        }
-        else
+        if (! $account)
         {
             $session = [];
             $session['message'] = translate_inline('`4Error, your login was incorrect`0', 'login');
-            redirect('index.php', 'Account Disappeared!');
-        }
-        DB::free_result($result);
 
-        if (isset($session['allowednavs'][$REQUEST_URI]) && $session['allowednavs'][$REQUEST_URI] && true !== $overrideforced)
-        {
-            $session['allowednavs'] = [];
+            return redirect('index.php', 'Account Disappeared!');
         }
-        else
+
+        $session['user'] = $account;
+        $session['bufflist'] = $session['user']['bufflist'] ?? [];
+        $session['user']['allowednavs'] = $session['user']['allowednavs'] ?? [];
+
+        if (! $session['user']['loggedin'] || ((time() - $session['user']['laston']->getTimestamp()) > getsetting('LOGINTIMEOUT', 900)))
         {
-            if (true !== $overrideforced)
-            {
-                redirect('badnav.php', "Navigation not allowed to $REQUEST_URI");
-            }
+            $session = [];
+
+            return redirect('index.php?op=timeout', 'Account not logged in but session thinks they are.');
+        }
+
+        if ($session['user']['allowednavs'][$requestUri] ?? false && true !== $overrideforced)
+        {
+            $session['user']['allowednavs'] = [];
+        }
+        elseif (true !== $overrideforced)
+        {
+            return redirect('badnav.php', "Navigation not allowed to $requestUri");
         }
     }
-    else
+    elseif (! $anonymous)
     {
-        if (! $anonymous)
-        {
-            redirect('index.php?op=timeout', "Not logged in: $REQUEST_URI");
-        }
+        return redirect('index.php?op=timeout', "Not logged in: $requestUri");
     }
 }

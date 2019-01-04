@@ -24,6 +24,16 @@ if ('' != $name)
         return redirect('badnav.php');
     }
 
+    //-- If server is full, not need proces any data.
+    if (true == ServerFunctions::isTheServerFull() && 1 != $force)
+    {
+        //sanity check if the server is / got full --> back to home
+        $session['message'] = translate_inline('`4Sorry, server full!');
+        $session['user'] = [];
+
+        return redirect('home.php');
+    }
+
     $password = stripslashes((string) httppost('password'));
 
     if ('!md5!' == substr($password, 0, 5))
@@ -42,147 +52,52 @@ if ('' != $name)
 
     checkban(); //check if this computer is banned
 
-    $select = DB::select('accounts');
-    $select->where->equalTo('login', $name)
-        ->equalTo('password', $password)
-        ->equalTo('locked', 0)
-    ;
-    $result = DB::execute($select);
+    //-- Using Doctrine repository to process login
+    $repositoryAccounts = Doctrine::getRepository(Lotgd\Core\Entity\Accounts::class);
+    $account = $repositoryAccounts->processLoginGetAcctData($name, $password);
 
-    if (1 == $result->count())
-    {
-        $session['user'] = $result->current();
-        $companions = @unserialize($session['user']['companions']);
-
-        if (! is_array($companions))
-        {
-            $companions = [];
-        }
-        $baseaccount = $session['user'];
-        checkban($session['user']['login']); //check if this account is banned
-
-        // If the player isn't allowed on for some reason, anything on
-        // this hook should automatically call page_footer and exit
-        // itself.
-        modulehook('check-login');
-
-        if (true == ServerFunctions::isTheServerFull() && 1 != $force)
-        {
-            //sanity check if the server is / got full --> back to home
-            $session['message'] = translate_inline('`4Sorry, server full!');
-            $session['user'] = [];
-
-            return redirect('home.php');
-        }
-
-        if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
-        {
-            $session['user'] = [];
-            $session['message'] = translate_inline('`4Error, you must validate your email address before you can log in.');
-            echo appoencode($session['message']);
-
-            exit();
-        }
-        else
-        {
-            $session['loggedin'] = true;
-            $session['laston'] = date('Y-m-d H:i:s');
-            $session['sentnotice'] = 0;
-            $session['user']['dragonpoints'] = unserialize($session['user']['dragonpoints']);
-            $session['user']['prefs'] = unserialize($session['user']['prefs']);
-            $session['bufflist'] = unserialize($session['user']['bufflist']);
-
-            if (! is_array($session['bufflist']))
-            {
-                $session['bufflist'] = [];
-            }
-
-            if (! is_array($session['user']['dragonpoints']))
-            {
-                $session['user']['dragonpoints'] = [];
-            }
-            invalidatedatacache('charlisthomepage');
-            invalidatedatacache('list.php-warsonline');
-            $session['user']['laston'] = date('Y-m-d H:i:s');
-
-            // Handle the change in number of users online
-            translator_check_collect_texts();
-
-            // Let's throw a login module hook in here so that modules
-            // like the stafflist which need to invalidate the cache
-            // when someone logs in or off can do so.
-            modulehook('player-login');
-
-            //-- Check for valid restorepage
-            if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']))
-            {
-                $session['user']['restorepage'] = 'news.php';
-            }
-
-            if ($session['user']['loggedin'])
-            {
-                $session['allowednavs'] = unserialize($session['user']['allowednavs']);
-                $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
-
-                $str = sprintf_translate('Sending you to %s, have a safe journey', $link);
-                header("Location: {$session['user']['restorepage']}");
-                saveuser();
-                echo $str;
-
-                exit();
-            }
-
-            $update = DB::update('accounts');
-            $update->set([
-                    'loggedin' => 1,
-                    'laston' => date('Y-m-d H:i:s')
-                ])
-                ->where->equalTo('acctid', $session['user']['acctid'])
-            ;
-            DB::execute($update);
-
-            $session['user']['loggedin'] = true;
-
-            if ($session['user']['location'] == $iname)
-            {
-                $session['user']['location'] = $vname;
-            }
-
-            if ($session['user']['restorepage'] > '')
-            {
-                redirect($session['user']['restorepage']);
-            }
-            else
-            {
-                if ($session['user']['location'] == $iname)
-                {
-                    return redirect('inn.php?op=strolldown');
-                }
-
-                return redirect('news.php');
-            }
-        }
-    }
-    else
+    //-- Not found account
+    if (! $account)
     {
         $session['message'] = translate_inline('`4Error, your login was incorrect`0');
         //now we'll log the failed attempt and begin to issue bans if
         //there are too many, plus notify the admins.
         checkban();
-        $sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE login='$name'";
-        $result = DB::query($sql);
 
-        if (DB::num_rows($result) > 0)
+        $result = $repositoryAccounts->createQueryBuilder('u')
+            ->select('u.acctid')
+            ->where('u.login = :login')
+            ->setParameters(['login' => $name])
+            ->getQuery()
+            ->getResult()
+        ;
+
+        if (count($result))
         {
+            $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+            $cookie = $request->getCookie();
+
             // just in case there manage to be multiple accounts on
             // this name.
-            while ($row = DB::fetch_assoc($result))
+            foreach($result as $key => $row)
             {
                 $post = httpallpost();
-                $sql = 'INSERT INTO '.DB::prefix('faillog')." VALUES (0,'".date('Y-m-d H:i:s')."','".addslashes(serialize($post))."','{$_SERVER['REMOTE_ADDR']}','{$row['acctid']}','{$_COOKIE['lgi']}')";
-                DB::query($sql);
-                $sql = 'SELECT '.DB::prefix('faillog').'.*,'.DB::prefix('accounts').'.superuser,name,login FROM '.DB::prefix('faillog').' INNER JOIN '.DB::prefix('accounts').' ON '.DB::prefix('accounts').'.acctid='.DB::prefix('faillog').".acctid WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND date>'".date('Y-m-d H:i:s', strtotime('-1 day'))."'";
+
+                $failLog = new \Lotgd\Core\Entity\Faillog();
+                $failLog->setEventid(0)
+                    ->setDate(new DateTime())
+                    ->setPost($post)
+                    ->setIp($request->getServer('REMOTE_ADDR'))
+                    ->setAcctid($row['acctid'])
+                    ->setId($cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '')
+                ;
+
+                \Doctrine::persist($failLog);
+                \Doctrine::flush(); //Persist objects
+
+                $sql = 'SELECT '.DB::prefix('faillog').'.*, '.DB::prefix('accounts').'.superuser,name,login FROM '.DB::prefix('faillog').' INNER JOIN '.DB::prefix('accounts').' ON '.DB::prefix('accounts').'.acctid='.DB::prefix('faillog').".acctid WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND date>'".date('Y-m-d H:i:s', strtotime('-1 day'))."'";
                 $result2 = DB::query($sql);
+
                 $c = 0;
                 $alert = '';
                 $su = false;
@@ -202,8 +117,17 @@ if ('' != $name)
                 {
                     // 5 failed attempts for superuser, 10 for regular user
                     $banmessage = translate_inline('Automatic System Ban: Too many failed login attempts.');
-                    $sql = 'INSERT INTO '.DB::prefix('bans')." VALUES ('{$_SERVER['REMOTE_ADDR']}','','".date('Y-m-d H:i:s', strtotime('+15 minutes'))."','$banmessage','System','0000-00-00 00:00:00')";
-                    DB::query($sql);
+                    $bans = new \Lotgd\Core\Entity\Bans();
+                    $banexpire = new \DateTime('now');
+                    $bans->setIpfilter($request->getServer('REMOTE_ADDR'))
+                        ->setBanreason($banmessage)
+                        ->setBanexpire($banexpire->add(new \DateInterval('PT15M'))) //-- Added 15 minutes
+                        ->setBanner('System')
+                        ->setLasthit(new DateTime('0000-00-00 00:00:00'))
+                    ;
+
+                    \Doctrine::persist($failLog);
+                    \Doctrine::flush(); //Persist objects
 
                     if ($su)
                     {
@@ -219,23 +143,92 @@ if ('' != $name)
                             $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgto={$row2['acctid']} AND msgfrom=0 AND subject = '".serialize($subj)."' AND seen=0";
                             DB::query($sql);
 
+                            $noemail = false;
                             if (DB::affected_rows() > 0)
                             {
                                 $noemail = true;
-                            }
-                            else
-                            {
-                                $noemail = false;
                             }
                             $msg = translate_mail(['This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert], 0);
                             systemmail($row2['acctid'], $subj, $msg, 0, $noemail);
                         }//end for
                     }//end if($su)
                 }//end if($c>=10)
-            }//end while
+            }//end foreach
         }//end if (DB::num_rows)
-        redirect('index.php');
+
+        \Doctrine::clear();//-- Detaches all objects from Doctrine!
+
+        return redirect('index.php');
     }
+
+    $session['user'] = $account;
+
+
+    checkban($session['user']['login']); //check if this account is banned
+
+    // If the player isn't allowed on for some reason, anything on
+    // this hook should automatically call page_footer and exit
+    // itself.
+    modulehook('check-login');
+
+    if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
+    {
+        $session['user'] = [];
+        $session['message'] = translate_inline('`4Error, you must validate your email address before you can log in.`0`n');
+
+        return redirect('home.php');
+    }
+
+    $session['loggedin'] = true;
+    $session['laston'] = date('Y-m-d H:i:s');
+    $session['sentnotice'] = 0;
+    $session['user']['laston'] = new \DateTime('now');
+
+    invalidatedatacache('charlisthomepage');
+    invalidatedatacache('list.php-warsonline');
+
+    // Handle the change in number of users online
+    translator_check_collect_texts();
+
+    // Let's throw a login module hook in here so that modules
+    // like the stafflist which need to invalidate the cache
+    // when someone logs in or off can do so.
+    modulehook('player-login');
+
+    //-- Check for valid restorepage
+    if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])
+    {
+        $session['user']['restorepage'] = 'news.php';
+    }
+
+    if ($session['user']['loggedin'])
+    {
+        $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
+
+        $str = sprintf_translate('Sending you to %s, have a safe journey', $link);
+        header("Location: {$session['user']['restorepage']}");
+        saveuser();
+        echo $str;
+
+        exit();
+    }
+
+    $session['user']['loggedin'] = true;
+
+    //-- Save user
+    saveuser();
+
+    if ($session['user']['location'] == $iname)
+    {
+        return redirect('inn.php?op=strolldown');
+    }
+    elseif ($session['user']['restorepage'] > '')
+    {
+        return redirect($session['user']['restorepage']);
+    }
+
+    return redirect('news.php');
+
 }
 elseif ('logout' == $op)
 {
