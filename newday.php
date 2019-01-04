@@ -186,17 +186,15 @@ else
     }
 
     //clear all standard buffs
-    $tempbuf = unserialize($session['user']['bufflist']);
-    $session['user']['bufflist'] = '';
+    $tempbuf = $session['user']['bufflist'];
+    $session['user']['bufflist'] = [];
     strip_all_buffs();
     tlschema('buffs');
 
     foreach ($tempbuf as $key => $val)
     {
-        if (array_key_exists('survivenewday', $val) &&
-                1 == $val['survivenewday'])
+        if (array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
         {
-            //$session['bufflist'][$key]=$val;
             if (array_key_exists('schema', $val) && $val['schema'])
             {
                 tlschema($val['schema']);
@@ -325,7 +323,7 @@ else
         addnav('Continue', cmd_sanitize($rp));
     }
 
-    $session['user']['laston'] = date('Y-m-d H:i:s');
+    $session['user']['laston'] = new DateTime('now');
     $bgold = $session['user']['goldinbank'];
     $session['user']['goldinbank'] = round($session['user']['goldinbank'] * $interestrate);
     $nbgold = $session['user']['goldinbank'] - $bgold;
