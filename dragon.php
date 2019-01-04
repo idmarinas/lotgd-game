@@ -223,7 +223,8 @@ elseif ('prologue1' == $op)
     $session['user']['title'] = $newtitle;
     $session['user']['name'] = $newname;
 
-    $session['user']['laston'] = date('Y-m-d H:i:s', strtotime('-1 day'));
+    $session['user']['laston'] = new \DateTime('now');
+    $session['user']['laston']->sub(new \DateInterval('P1D')); //-- remove 1 day
     $session['user']['slaydragon'] = 1;
     $companions = [];
     $session['user']['companions'] = [];

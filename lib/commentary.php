@@ -441,7 +441,7 @@ function injectcommentary($section, $talkline, $comment)
         {
             //Not a double post, inject the comment
             injectrawcomment($section, $session['user']['acctid'], $commentary, $session['user']['name'], $info);
-            $session['user']['laston'] = date('Y-m-d H:i:s');
+            $session['user']['laston'] = new \DateTime('now');
         }
     }
 }
@@ -808,7 +808,8 @@ function getcommentary($section, $limit = 25, $talkline, $customsql = false, $sh
         {
             $select = DB::select(['c' => 'commentary']);
             $select->order('c.commentid DESC')
-                ->join(['a' => 'accounts'], 'a.acctid = c.author', ['acctid', 'laston', 'loggedin', 'chatloc'], 'LEFT')
+                ->join(['a' => 'accounts'], 'a.acctid = c.author', ['acctid', 'laston', 'loggedin'], 'LEFT')
+                ->join(['ch' => 'characters'], 'ch.id = a.acctid', ['chatloc'], 'LEFT')
                 ->where->equalTo('c.section', $section)
             ;
 

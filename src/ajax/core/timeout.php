@@ -16,7 +16,7 @@ class Timeout
             return $response;
         }
 
-        $timeout = strtotime($session['user']['laston']) - strtotime(date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds')));
+        $timeout = $session['user']['laston']->getTimestamp() - strtotime(date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds')));
 
         if ($timeout <= 1)
         {

@@ -68,9 +68,9 @@ function reltime($date, $short = true)
  */
 function checkday()
 {
-    global $session, $revertsession, $REQUEST_URI;
+    global $session, $revertsession;
 
-    if ($session['user']['loggedin'])
+    if ($session['user']['loggedin'] ?? false)
     {
         output_notl('<!--CheckNewDay()-->', true);
 
@@ -87,11 +87,14 @@ function checkday()
             }
             else
             {
+                $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+
                 $session = $revertsession;
-                $session['user']['restorepage'] = $REQUEST_URI;
-                $session['allowednavs'] = [];
+                $session['user']['restorepage'] = $request->getServer('REQUEST_URI');
+                $session['user']['allowednavs'] = [];
                 addnav('', 'newday.php');
-                redirect('newday.php');
+
+                return redirect('newday.php');
             }
         }
     }
@@ -112,7 +115,7 @@ function is_new_day($now = 0)
     }
 
     $t1 = gametime();
-    $t2 = convertgametime($session['user']['lasthit']->getTimestamp().' +0000');
+    $t2 = convertgametime($session['user']['lasthit']->getTimestamp());
     $d1 = gmdate('Y-m-d', $t1);
     $d2 = gmdate('Y-m-d', $t2);
 
@@ -141,10 +144,10 @@ function gametime()
     return $time;
 }
 
-function convertgametime($intime, $debug = false)
+function convertgametime(int $intime, $debug = false)
 {
     //adjust the requested time by the game offset
-    $intime -= getsetting('gameoffsetseconds', 0);
+    $intime -= (int) getsetting('gameoffsetseconds', 0);
 
     // we know that strtotime gives us an identical timestamp for
     // everywhere in the world at the same time, if it is provided with
