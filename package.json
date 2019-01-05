@@ -94,7 +94,7 @@
         "vinyl-paths": "^2.1.0",
         "webpack": "^4.28.3",
         "webpack-bundle-analyzer": "^3.0.3",
-        "webpack-merge": "^4.1.5"
+        "webpack-merge": "^4.2.1"
     },
     "repository": {
         "type": "git",
