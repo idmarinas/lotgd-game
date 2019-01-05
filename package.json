@@ -43,7 +43,7 @@
         "@babel/preset-env": "^7.2.3",
         "ansi-colors": "^3.2.3",
         "babel-eslint": "^10.0.1",
-        "babel-loader": "^8.0.4",
+        "babel-loader": "^8.0.5",
         "babel-plugin-istanbul": "^5.1.0",
         "babel-register": "^6.26.0",
         "css-loader": "^2.1.0",
