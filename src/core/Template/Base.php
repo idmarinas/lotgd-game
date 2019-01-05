@@ -83,17 +83,15 @@ class Base extends Twig_Environment
 
                 return nltoappon($string);
             }),
-            /*
-             * Format a number
-             *
-             * @param float $number
-             * @param int $decimals
-             *
-             * @return string
-             */
+            //-- Format a number
             new Twig_SimpleFilter('numeral', function ($number, $decimals = 0)
             {
                 return \LotgdFormat::numeral($number, $decimals);
+            }),
+            //-- select the plural or singular form according to the past number
+            new Twig_SimpleFilter('pluralize', function ($number, $singular, $plural)
+            {
+                return \LotgdFormat::pluralize($number, $singular, $plural);
             }),
             //-- Translate a text in template
             new Twig_SimpleFilter('t', function ($data, $namespace = false)
@@ -105,10 +103,8 @@ class Base extends Twig_Environment
 
                     return vsprintf(translate_inline($text, $namespace), $data);
                 }
-                else
-                {
-                    return translate_inline($data, $namespace);
-                }
+
+                return translate_inline($data, $namespace);
             }),
             //-- Show a relative date from now
             new Twig_SimpleFilter('relativedate', function ($string)
