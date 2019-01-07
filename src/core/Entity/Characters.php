@@ -542,7 +542,7 @@ class Characters
     private $chatloc = '';
 
     /**
-     * Configure same default values.
+     * Configure some default values.
      */
     public function __construct()
     {

@@ -63,7 +63,7 @@ class Faillog
     private $id;
 
     /**
-     * Configure same default values.
+     * Configure some default values.
      */
     public function __construct()
     {
