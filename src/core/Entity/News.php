@@ -94,6 +94,8 @@ class News
      */
     public function setNewsdate($newsdate)
     {
+        $this->newsdate = $newsdate;
+
         if (! $newsdate instanceof \DateTimeInterface)
         {
             $this->newsdate = new \DateTime($newsdate);
