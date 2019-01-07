@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Mail.
  *
  * @ORM\Table(name="mail",
- *      indexes={
- *          @ORM\Index(name="msgto", columns={"msgto"}),
- *          @ORM\Index(name="seen", columns={"seen"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="msgto", columns={"msgto"}),
+ *         @ORM\Index(name="seen", columns={"seen"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -20,7 +20,7 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="messageid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="messageid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -29,14 +29,14 @@ class Mail
     /**
      * @var int
      *
-     * @ORM\Column(name="msgfrom", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="msgfrom", type="integer", nullable=false, options={"unsigned": true})
      */
     private $msgfrom = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="msgto", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="msgto", type="integer", nullable=false, options={"unsigned": true})
      */
     private $msgto = 0;
 
@@ -57,21 +57,21 @@ class Mail
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="sent", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="sent", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $sent = '0000-00-00 00:00:00';
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default":"0"})
+     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default": "0"})
      */
     private $seen = '0';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="originator", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="originator", type="integer", nullable=false, options={"unsigned": true})
      */
     private $originator = '0';
 

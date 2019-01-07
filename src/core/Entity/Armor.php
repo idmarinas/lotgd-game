@@ -15,7 +15,7 @@ class Armor
     /**
      * @var int
      *
-     * @ORM\Column(name="armorid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="armorid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,21 +31,21 @@ class Armor
     /**
      * @var int
      *
-     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
      */
     private $value = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned":true, "default":"1"})
+     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
      */
     private $defense = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
      */
     private $level = 0;
 

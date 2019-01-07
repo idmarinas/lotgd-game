@@ -15,7 +15,7 @@ class Motd
     /**
      * @var int
      *
-     * @ORM\Column(name="motditem", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="motditem", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -45,14 +45,14 @@ class Motd
     /**
      * @var bool
      *
-     * @ORM\Column(name="motdtype", type="boolean", nullable=false, options={"default":"0"})
+     * @ORM\Column(name="motdtype", type="boolean", nullable=false, options={"default": "0"})
      */
     private $motdtype = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
+     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      */
     private $motdauthor = 0;
 

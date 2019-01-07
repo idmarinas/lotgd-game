@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Untranslated.
  *
  * @ORM\Table(name="untranslated",
- *      indexes={
- *          @ORM\Index(name="language", columns={"language"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="language", columns={"language"})
+ *     }
  * )
  * @ORM\Entity
  */

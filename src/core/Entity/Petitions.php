@@ -15,7 +15,7 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="petitionid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="petitionid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,21 +24,21 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="author", type="integer", nullable=false, options={"unsigned": true})
      */
     private $author = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $date = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="status", type="integer", nullable=false, options={"unsigned": true})
      */
     private $status = 0;
 
@@ -59,14 +59,14 @@ class Petitions
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $closedate = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned": true})
      */
     private $closeuserid = 0;
 

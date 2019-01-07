@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Gamelog.
  *
  * @ORM\Table(name="gamelog",
- *      indexes={
- *          @ORM\Index(name="date", columns={"category", "date"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="date", columns={"category", "date"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -19,7 +19,7 @@ class Gamelog
     /**
      * @var int
      *
-     * @ORM\Column(name="logid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="logid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -49,14 +49,14 @@ class Gamelog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $date = '0000-00-00 00:00:00';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="who", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="who", type="integer", nullable=false, options={"unsigned": true})
      */
     private $who = '0';
 

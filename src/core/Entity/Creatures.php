@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Creatures.
  *
  * @ORM\Table(name="creatures",
- *      indexes={
- *          @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -119,14 +119,14 @@ class Creatures
     /**
      * @var bool
      *
-     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default": 0})
      */
     private $forest = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default": 0})
      */
     private $graveyard = 0;
 

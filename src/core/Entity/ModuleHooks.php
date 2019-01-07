@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * ModuleHooks.
  *
  * @ORM\Table(name="module_hooks",
- *      indexes={
- *          @ORM\Index(name="location", columns={"location"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="location", columns={"location"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -53,7 +53,7 @@ class ModuleHooks
     /**
      * @var int
      *
-     * @ORM\Column(name="priority", type="integer", nullable=false, options={"default":"50"})
+     * @ORM\Column(name="priority", type="integer", nullable=false, options={"default": "50"})
      */
     private $priority = '50';
 

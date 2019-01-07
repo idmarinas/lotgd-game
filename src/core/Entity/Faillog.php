@@ -8,11 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
  * Faillog.
  *
  * @ORM\Table(name="faillog",
- *      indexes={
- *          @ORM\Index(name="date", columns={"date"}),
- *          @ORM\Index(name="acctid", columns={"acctid"}),
- *          @ORM\Index(name="ip", columns={"ip"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="date", columns={"date"}),
+ *         @ORM\Index(name="acctid", columns={"acctid"}),
+ *         @ORM\Index(name="ip", columns={"ip"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -21,7 +21,7 @@ class Faillog
     /**
      * @var int
      *
-     * @ORM\Column(name="eventid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="eventid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -30,7 +30,7 @@ class Faillog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $date;
 
@@ -51,7 +51,7 @@ class Faillog
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=true, options={"unsigned":true})
+     * @ORM\Column(name="acctid", type="integer", nullable=true, options={"unsigned": true})
      */
     private $acctid;
 

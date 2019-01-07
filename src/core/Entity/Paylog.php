@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Paylog.
  *
  * @ORM\Table(name="paylog",
- *      indexes={
- *          @ORM\Index(name="txnid", columns={"txnid"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="txnid", columns={"txnid"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -19,7 +19,7 @@ class Paylog
     /**
      * @var int
      *
-     * @ORM\Column(name="payid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="payid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -63,7 +63,7 @@ class Paylog
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
      */
     private $acctid = 0;
 
@@ -91,7 +91,7 @@ class Paylog
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="processdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="processdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $processdate = '0000-00-00 00:00:00';
 

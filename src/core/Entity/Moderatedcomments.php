@@ -15,7 +15,7 @@ class Moderatedcomments
     /**
      * @var int
      *
-     * @ORM\Column(name="modid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="modid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,7 +31,7 @@ class Moderatedcomments
     /**
      * @var int
      *
-     * @ORM\Column(name="moderator", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
+     * @ORM\Column(name="moderator", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      */
     private $moderator = 0;
 

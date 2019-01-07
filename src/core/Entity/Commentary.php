@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Commentary.
  *
  * @ORM\Table(name="commentary",
- *      indexes={
- *          @ORM\Index(name="section", columns={"section"}),
- *          @ORM\Index(name="postdate", columns={"postdate"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="section", columns={"section"}),
+ *         @ORM\Index(name="postdate", columns={"postdate"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -36,7 +36,7 @@ class Commentary
     /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="author", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $author = 0;
 
@@ -50,7 +50,7 @@ class Commentary
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="postdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="postdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $postdate = '0000-00-00 00:00:00';
 

@@ -15,7 +15,7 @@ class AccountsOutput
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */

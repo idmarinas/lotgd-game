@@ -42,7 +42,7 @@ class ModuleObjprefs
     /**
      * @var int
      *
-     * @ORM\Column(name="objid", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
+     * @ORM\Column(name="objid", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */

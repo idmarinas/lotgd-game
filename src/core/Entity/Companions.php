@@ -45,42 +45,42 @@ class Companions
     /**
      * @var int
      *
-     * @ORM\Column(name="attack", type="smallint", nullable=false, options={"default":1, "unsigned":true})
+     * @ORM\Column(name="attack", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
      */
     private $attack = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="attackperlevel", type="smallint", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="attackperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $attackperlevel = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"default":1, "unsigned":true})
+     * @ORM\Column(name="defense", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
      */
     private $defense = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="defenseperlevel", type="smallint", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="defenseperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $defenseperlevel = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxhitpoints", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="maxhitpoints", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $maxhitpoints = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxhitpointsperlevel", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="maxhitpointsperlevel", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $maxhitpointsperlevel = 10;
 
@@ -94,14 +94,14 @@ class Companions
     /**
      * @var bool
      *
-     * @ORM\Column(name="cannotdie", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="cannotdie", type="boolean", nullable=false, options={"default": 0})
      */
     private $cannotdie = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="cannotbehealed", type="boolean", nullable=false, options={"default":1})
+     * @ORM\Column(name="cannotbehealed", type="boolean", nullable=false, options={"default": 1})
      */
     private $cannotbehealed = 1;
 
@@ -115,28 +115,28 @@ class Companions
     /**
      * @var bool
      *
-     * @ORM\Column(name="companionactive", type="boolean", nullable=false, options={"default":1})
+     * @ORM\Column(name="companionactive", type="boolean", nullable=false, options={"default": 1})
      */
     private $companionactive = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="companioncostdks", type="integer", nullable=false, options={"unsigned":true}, options={"default":0})
+     * @ORM\Column(name="companioncostdks", type="integer", nullable=false, options={"unsigned": true}, options={"default": 0})
      */
     private $companioncostdks = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="companioncostgems", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="companioncostgems", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $companioncostgems = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="companioncostgold", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="companioncostgold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $companioncostgold = 0;
 
@@ -157,21 +157,21 @@ class Companions
     /**
      * @var bool
      *
-     * @ORM\Column(name="allowinshades", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="allowinshades", type="boolean", nullable=false, options={"default": 0})
      */
     private $allowinshades = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="allowinpvp", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="allowinpvp", type="boolean", nullable=false, options={"default": 0})
      */
     private $allowinpvp = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="allowintrain", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="allowintrain", type="boolean", nullable=false, options={"default": 0})
      */
     private $allowintrain = 0;
 

@@ -15,7 +15,7 @@ class Masters
     /**
      * @var int
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,7 +31,7 @@ class Masters
     /**
      * @var int
      *
-     * @ORM\Column(name="creaturelevel", type="integer", nullable=true, options={"unsigned":true})
+     * @ORM\Column(name="creaturelevel", type="integer", nullable=true, options={"unsigned": true})
      */
     private $creaturelevel;
 

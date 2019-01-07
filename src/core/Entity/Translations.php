@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Translations.
  *
  * @ORM\Table(name="translations",
- *      indexes={
- *          @ORM\Index(name="language", columns={"language", "uri"}),
- *          @ORM\Index(name="uri", columns={"uri"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="language", columns={"language", "uri"}),
+ *         @ORM\Index(name="uri", columns={"uri"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -20,7 +20,7 @@ class Translations
     /**
      * @var int
      *
-     * @ORM\Column(name="tid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="tid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

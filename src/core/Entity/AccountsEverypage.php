@@ -15,7 +15,7 @@ class AccountsEverypage
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -24,21 +24,21 @@ class AccountsEverypage
     /**
      * @var float
      *
-     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="gentime", type="float", precision=10, scale=0, nullable=false, options={"unsigned": true})
      */
     private $gentime = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gentimecount", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="gentimecount", type="integer", nullable=false, options={"unsigned": true})
      */
     private $gentimecount = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gensize", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="gensize", type="integer", nullable=false, options={"unsigned": true})
      */
     private $gensize = 0;
 

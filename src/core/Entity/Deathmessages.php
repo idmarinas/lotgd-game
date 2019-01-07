@@ -8,11 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
  * Deathmessages.
  *
  * @ORM\Table(name="deathmessages",
- *      indexes={
- *          @ORM\Index(name="forest", columns={"forest"}),
- *          @ORM\Index(name="graveyard", columns={"graveyard"}),
- *          @ORM\Index(name="taunt", columns={"taunt"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="forest", columns={"forest"}),
+ *         @ORM\Index(name="graveyard", columns={"graveyard"}),
+ *         @ORM\Index(name="taunt", columns={"taunt"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -37,21 +37,21 @@ class Deathmessages
     /**
      * @var bool
      *
-     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default":1})
+     * @ORM\Column(name="forest", type="boolean", nullable=false, options={"default": 1})
      */
     private $forest = 1;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default": 0})
      */
     private $graveyard = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="taunt", type="boolean", nullable=false, options={"default":1})
+     * @ORM\Column(name="taunt", type="boolean", nullable=false, options={"default": 1})
      */
     private $taunt = 1;
 

@@ -15,7 +15,7 @@ class Taunts
     /**
      * @var int
      *
-     * @ORM\Column(name="tauntid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="tauntid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

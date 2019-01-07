@@ -8,15 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
  * Accounts.
  *
  * @ORM\Table(name="accounts",
- *      indexes={
- *          @ORM\Index(name="login", columns={"login"}),
- *          @ORM\Index(name="laston", columns={"laston"}),
- *          @ORM\Index(name="emailaddress", columns={"emailaddress"}),
- *          @ORM\Index(name="locked", columns={"locked", "loggedin", "laston"}),
- *          @ORM\Index(name="referer", columns={"referer"}),
- *          @ORM\Index(name="uniqueid", columns={"uniqueid"}),
- *          @ORM\Index(name="emailvalidation", columns={"emailvalidation"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="login", columns={"login"}),
+ *         @ORM\Index(name="laston", columns={"laston"}),
+ *         @ORM\Index(name="emailaddress", columns={"emailaddress"}),
+ *         @ORM\Index(name="locked", columns={"locked", "loggedin", "laston"}),
+ *         @ORM\Index(name="referer", columns={"referer"}),
+ *         @ORM\Index(name="uniqueid", columns={"uniqueid"}),
+ *         @ORM\Index(name="emailvalidation", columns={"emailvalidation"})
+ *     }
  * )
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsRepository")
  */
@@ -25,7 +25,7 @@ class Accounts
     /**
      * @var int
      *
-     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="acctid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -42,7 +42,7 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $laston;
 
@@ -56,14 +56,14 @@ class Accounts
     /**
      * @var bool
      *
-     * @ORM\Column(name="loggedin", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="loggedin", type="boolean", nullable=false, options={"default": 0})
      */
     private $loggedin = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="superuser", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="superuser", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $superuser = 1;
 
@@ -77,14 +77,14 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $lastmotd;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="locked", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="locked", type="boolean", nullable=false, options={"default": 0})
      */
     private $locked = 0;
 
@@ -105,7 +105,7 @@ class Accounts
     /**
      * @var bool
      *
-     * @ORM\Column(name="boughtroomtoday", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="boughtroomtoday", type="boolean", nullable=false, options={"default": 0})
      */
     private $boughtroomtoday = 0;
 
@@ -140,7 +140,7 @@ class Accounts
     /**
      * @var bool
      *
-     * @ORM\Column(name="sentnotice", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="sentnotice", type="boolean", nullable=false, options={"default": 0})
      */
     private $sentnotice = false;
 
@@ -154,28 +154,28 @@ class Accounts
     /**
      * @var int
      *
-     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $transferredtoday = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $recentcomments;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="donation", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="donation", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $donation = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="donationspent", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="donationspent", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $donationspent = 0;
 
@@ -189,49 +189,49 @@ class Accounts
     /**
      * @var int
      *
-     * @ORM\Column(name="referer", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="referer", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $referer = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="refererawarded", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="refererawarded", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $refererawarded = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="banoverride", type="boolean", nullable=true, options={"default":0})
+     * @ORM\Column(name="banoverride", type="boolean", nullable=true, options={"default": 0})
      */
     private $banoverride = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="translatorlanguages", type="string", length=128, nullable=false, options={"default":"en"})
+     * @ORM\Column(name="translatorlanguages", type="string", length=128, nullable=false, options={"default": "en"})
      */
     private $translatorlanguages = 'en';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="amountouttoday", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="amountouttoday", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $amountouttoday = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="beta", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="beta", type="boolean", nullable=false, options={"default": 0})
      */
     private $beta = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $regdate;
 

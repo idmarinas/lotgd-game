@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Titles.
  *
  * @ORM\Table(name="titles",
- *      indexes={
- *          @ORM\Index(name="dk", columns={"dk"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="dk", columns={"dk"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -19,7 +19,7 @@ class Titles
     /**
      * @var int
      *
-     * @ORM\Column(name="titleid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="titleid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -28,7 +28,7 @@ class Titles
     /**
      * @var int
      *
-     * @ORM\Column(name="dk", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="dk", type="integer", nullable=false, options={"unsigned": true})
      */
     private $dk = 0;
 

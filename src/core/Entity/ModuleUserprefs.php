@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * ModuleUserprefs.
  *
  * @ORM\Table(name="module_userprefs",
- *      indexes={
- *          @ORM\Index(name="modulename", columns={"modulename", "userid"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="modulename", columns={"modulename", "userid"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -37,7 +37,7 @@ class ModuleUserprefs
     /**
      * @var int
      *
-     * @ORM\Column(name="userid", type="integer", nullable=false, options={"unsigned":true, "default":"0"})
+     * @ORM\Column(name="userid", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */

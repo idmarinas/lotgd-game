@@ -24,7 +24,7 @@ class Whostyping
     /**
      * @var int
      *
-     * @ORM\Column(name="time", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="time", type="integer", nullable=false, options={"unsigned": true})
      */
     private $time;
 

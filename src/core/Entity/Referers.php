@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Referers.
  *
  * @ORM\Table(name="referers",
- *      indexes={
- *          @ORM\Index(name="uri", columns={"uri"}),
- *          @ORM\Index(name="site", columns={"site"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="uri", columns={"uri"}),
+ *         @ORM\Index(name="site", columns={"site"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -20,7 +20,7 @@ class Referers
     /**
      * @var int
      *
-     * @ORM\Column(name="refererid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="refererid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */

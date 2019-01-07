@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * ModuleEventHooks.
  *
  * @ORM\Table(name="module_event_hooks",
- *      indexes={
- *          @ORM\Index(name="modulename", columns={"modulename"}),
- *          @ORM\Index(name="event_type", columns={"event_type"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="modulename", columns={"modulename"}),
+ *         @ORM\Index(name="event_type", columns={"event_type"})
+ *     }
  * )
  * @ORM\Entity
  */

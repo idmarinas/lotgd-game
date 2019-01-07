@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * News.
  *
  * @ORM\Table(name="news",
- *      indexes={
- *          @ORM\Index(name="accountid", columns={"accountid"}),
- *          @ORM\Index(name="newsdate", columns={"newsdate"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="accountid", columns={"accountid"}),
+ *         @ORM\Index(name="newsdate", columns={"newsdate"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -20,7 +20,7 @@ class News
     /**
      * @var int
      *
-     * @ORM\Column(name="newsid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="newsid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -29,7 +29,7 @@ class News
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="newsdate", type="date", nullable=false, options={"default":"0000-00-00"})
+     * @ORM\Column(name="newsdate", type="date", nullable=false, options={"default": "0000-00-00"})
      */
     private $newsdate = '0000-00-00';
 
@@ -43,7 +43,7 @@ class News
     /**
      * @var int
      *
-     * @ORM\Column(name="accountid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="accountid", type="integer", nullable=false, options={"unsigned": true})
      */
     private $accountid = 0;
 
@@ -57,7 +57,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="tlschema", type="string", length=255, nullable=false, options={"default":"news"})
+     * @ORM\Column(name="tlschema", type="string", length=255, nullable=false, options={"default": "news"})
      */
     private $tlschema = 'news';
 

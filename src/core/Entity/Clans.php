@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Clans.
  *
  * @ORM\Table(name="clans",
- *      indexes={
- *          @ORM\Index(name="clanname", columns={"clanname"}),
- *          @ORM\Index(name="clanshort", columns={"clanshort"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="clanname", columns={"clanname"}),
+ *         @ORM\Index(name="clanshort", columns={"clanshort"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -20,7 +20,7 @@ class Clans
     /**
      * @var int
      *
-     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -57,14 +57,14 @@ class Clans
     /**
      * @var int
      *
-     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $motdauthor = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="descauthor", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="descauthor", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $descauthor = 0;
 
