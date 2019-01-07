@@ -8,13 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
  * Characters.
  *
  * @ORM\Table(name="characters",
- *      indexes={
- *          @ORM\Index(name="name", columns={"name"}),
- *          @ORM\Index(name="level", columns={"level"}),
- *          @ORM\Index(name="alive", columns={"alive"}),
- *          @ORM\Index(name="lasthit", columns={"lasthit"}),
- *          @ORM\Index(name="clanid", columns={"clanid"})
- *      }
+ *     indexes={
+ *         @ORM\Index(name="name", columns={"name"}),
+ *         @ORM\Index(name="level", columns={"level"}),
+ *         @ORM\Index(name="alive", columns={"alive"}),
+ *         @ORM\Index(name="lasthit", columns={"lasthit"}),
+ *         @ORM\Index(name="clanid", columns={"clanid"})
+ *     }
  * )
  * @ORM\Entity
  */
@@ -23,7 +23,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -54,42 +54,42 @@ class Characters
     /**
      * @var bool
      *
-     * @ORM\Column(name="sex", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="sex", type="boolean", nullable=false, options={"default": 0})
      */
     private $sex = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="strength", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="strength", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $strength = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dexterity", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="dexterity", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $dexterity = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="intelligence", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="intelligence", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $intelligence = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="constitution", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="constitution", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $constitution = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="wisdom", type="smallint", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="wisdom", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $wisdom = 10;
 
@@ -103,77 +103,77 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="experience", type="bigint", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="experience", type="bigint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $experience = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gold", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="gold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $gold = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="weapon", type="string", length=50, nullable=false, options={"default":"Fists"})
+     * @ORM\Column(name="weapon", type="string", length=50, nullable=false, options={"default": "Fists"})
      */
     private $weapon = 'Fists';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="armor", type="string", length=50, nullable=false, options={"default":"T-Shirt"})
+     * @ORM\Column(name="armor", type="string", length=50, nullable=false, options={"default": "T-Shirt"})
      */
     private $armor = 'T-Shirt';
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="seenmaster", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="seenmaster", type="boolean", nullable=false, options={"default": 0})
      */
     private $seenmaster = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="level", type="smallint", nullable=false, options={"default":1, "unsigned":true})
+     * @ORM\Column(name="level", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
      */
     private $level = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="defense", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="defense", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $defense = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="attack", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="attack", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $attack = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="alive", type="boolean", nullable=false, options={"default":1})
+     * @ORM\Column(name="alive", type="boolean", nullable=false, options={"default": 1})
      */
     private $alive = 1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="goldinbank", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="goldinbank", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $goldinbank = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="marriedto", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="marriedto", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $marriedto = 0;
 
@@ -187,56 +187,56 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="hitpoints", type="integer", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="hitpoints", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $hitpoints = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="maxhitpoints", type="integer", nullable=false, options={"default":10, "unsigned":true})
+     * @ORM\Column(name="maxhitpoints", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $maxhitpoints = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="permahitpoints", type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(name="permahitpoints", type="integer", nullable=false, options={"default": 0})
      */
     private $permahitpoints = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gems", type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(name="gems", type="integer", nullable=false, options={"default": 0})
      */
     private $gems = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="weaponvalue", type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(name="weaponvalue", type="integer", nullable=false, options={"default": 0})
      */
     private $weaponvalue = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="armorvalue", type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(name="armorvalue", type="integer", nullable=false, options={"default": 0})
      */
     private $armorvalue = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="location", type="string", length=50, nullable=false, options={"default":"Degolburg"})
+     * @ORM\Column(name="location", type="string", length=50, nullable=false, options={"default": "Degolburg"})
      */
     private $location = 'Degolburg';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="turns", type="integer", nullable=false, options={"default":10})
+     * @ORM\Column(name="turns", type="integer", nullable=false, options={"default": 10})
      */
     private $turns = 10;
 
@@ -271,7 +271,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="resurrections", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="resurrections", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $resurrections = 0;
 
@@ -292,14 +292,14 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="age", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="age", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $age = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="charm", type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(name="charm", type="integer", nullable=false, options={"default": 0})
      */
     private $charm = 0;
 
@@ -320,35 +320,35 @@ class Characters
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $lastmotd;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="playerfights", type="integer", nullable=false, options={"default":3})
+     * @ORM\Column(name="playerfights", type="integer", nullable=false, options={"default": 3})
      */
     private $playerfights = 3;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $lasthit;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="seendragon", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="seendragon", type="boolean", nullable=false, options={"default": 0})
      */
     private $seendragon = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dragonkills", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="dragonkills", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $dragonkills = 0;
 
@@ -362,7 +362,7 @@ class Characters
     /**
      * @var bool
      *
-     * @ORM\Column(name="hashorse", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="hashorse", type="boolean", nullable=false, options={"default": 0})
      */
     private $hashorse = 0;
 
@@ -383,42 +383,42 @@ class Characters
     /**
      * @var bool
      *
-     * @ORM\Column(name="boughtroomtoday", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="boughtroomtoday", type="boolean", nullable=false, options={"default": 0})
      */
     private $boughtroomtoday = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="sentnotice", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="sentnotice", type="boolean", nullable=false, options={"default": 0})
      */
     private $sentnotice = false;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="pvpflag", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="pvpflag", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $pvpflag;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $transferredtoday = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="soulpoints", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="soulpoints", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $soulpoints = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gravefights", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="gravefights", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $gravefights = 0;
 
@@ -432,14 +432,14 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="deathpower", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="deathpower", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $deathpower = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $recentcomments;
 
@@ -453,42 +453,42 @@ class Characters
     /**
      * @var string
      *
-     * @ORM\Column(name="race", type="string", length=50, nullable=false, options={"default":0})
+     * @ORM\Column(name="race", type="string", length=50, nullable=false, options={"default": 0})
      */
     private $race = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="biotime", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="biotime", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $biotime;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="amountouttoday", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="amountouttoday", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $amountouttoday = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="pk", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="pk", type="boolean", nullable=false, options={"default": 0})
      */
     private $pk = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dragonage", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="dragonage", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $dragonage = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="bestdragonage", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="bestdragonage", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $bestdragonage = 0;
 
@@ -502,35 +502,35 @@ class Characters
     /**
      * @var bool
      *
-     * @ORM\Column(name="slaydragon", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="slaydragon", type="boolean", nullable=false, options={"default": 0})
      */
     private $slaydragon = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="fedmount", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="fedmount", type="boolean", nullable=false, options={"default": 0})
      */
     private $fedmount = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"default":0, "unsigned":true})
+     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $clanid = 0;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="clanrank", type="boolean", nullable=false, options={"default":0})
+     * @ORM\Column(name="clanrank", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $clanrank = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="clanjoindate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $clanjoindate;
 
