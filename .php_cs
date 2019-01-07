@@ -9,6 +9,7 @@ return PhpCsFixer\Config::create()
         '@PHP71Migration' => true,
         '@PSR2' => true,
         '@Symfony' => true,
+        '@DoctrineAnnotation' => true,
         'blank_line_after_opening_tag' => true,
         'single_line_after_imports' => false,
         'array_syntax' => ['syntax' => 'short'],
