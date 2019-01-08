@@ -4,7 +4,12 @@ use Lotgd\Core\ServiceManager;
 
 class LotgdLocator
 {
-    protected static $serviceManager;
+    /**
+     * Instance of ServiceManager
+     *
+     * @var Lotgd\Core\ServiceManager
+     */
+    protected static $sm;
 
     /**
      * Get a shared instance of service
@@ -15,7 +20,7 @@ class LotgdLocator
      */
     public static function get(string $name)
     {
-        return self::$serviceManager->get($name);
+        return self::$sm->get($name);
     }
 
     /**
@@ -27,7 +32,7 @@ class LotgdLocator
      */
     public static function build(string $name)
     {
-        return self::$serviceManager->build($name);
+        return self::$sm->build($name);
     }
 
     /**
@@ -37,7 +42,7 @@ class LotgdLocator
      */
     public static function getServiceManager()
     {
-        return self::$serviceManager;
+        return self::$sm;
     }
 
     /**
@@ -49,9 +54,9 @@ class LotgdLocator
      */
     public static function setServiceManager(ServiceManager $sm)
     {
-        self::$serviceManager = $sm;
+        self::$sm = $sm;
     }
 }
 
 //-- Prepare service manager
-LotgdLocator::setServiceManager(new Lotgd\Core\ServiceManager(require 'config/config.php'));
+LotgdLocator::setServiceManager(new ServiceManager(require 'config/config.php'));
