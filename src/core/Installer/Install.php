@@ -42,7 +42,7 @@ class Install
     public function makeSynchronizationTables(): array
     {
         //-- Prepare for updating core tables
-        $doctrine = $this->getContainer(\Lotgd\Core\Lib\Doctrine::class);
+        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         $classes = $doctrine->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($doctrine);
         $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
@@ -88,7 +88,7 @@ class Install
         }
 
         $filesystem = new Filesystem();
-        $doctrine = $this->getContainer(\Lotgd\Core\Lib\Doctrine::class);
+        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         $files = array_map(function ($value) { return self::DATA_DIR.'/'.$value; }, $filesystem->listDir(self::DATA_DIR));
 
         if (0 == count($files))
