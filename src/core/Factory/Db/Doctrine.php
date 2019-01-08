@@ -6,20 +6,28 @@
  * @author IDMarinas
  */
 
-namespace Lotgd\Core\Factory\Lib;
+namespace Lotgd\Core\Factory\Db;
 
-use Doctrine\Common\Cache as DoctrineCache;
-use Doctrine\Common\EventManager as DoctrineEventManager;
-use Doctrine\Common\Proxy\AbstractProxyFactory;
-use Doctrine\ORM\Configuration as DoctrineConfiguration;
-use Doctrine\ORM\EntityManager as DoctrineEntityManager;
-use Doctrine\ORM\Events as DoctrineEvents;
-use Doctrine\ORM\Mapping\UnderscoreNamingStrategy as DoctrineUnderscoreNamingStrategy;
+use Doctrine\Common\{
+    Cache as DoctrineCache,
+    EventManager as DoctrineEventManager,
+    Proxy\AbstractProxyFactory
+};
+use Doctrine\ORM\{
+    Configuration as DoctrineConfiguration,
+    EntityManager as DoctrineEntityManager,
+    Events as DoctrineEvents,
+    Mapping\UnderscoreNamingStrategy as DoctrineUnderscoreNamingStrategy
+};
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Doctrine\Extension\TablePrefix as DoctrineTablePrefix;
-use Lotgd\Core\Doctrine\Strategy\Quote as DoctrineQuoteStrategy;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Doctrine\{
+    Extension\TablePrefix as DoctrineTablePrefix,
+    Strategy\Quote as DoctrineQuoteStrategy
+};
+use Zend\ServiceManager\{
+    FactoryInterface,
+    ServiceLocatorInterface
+};
 
 class Doctrine implements FactoryInterface
 {
@@ -34,6 +42,7 @@ class Doctrine implements FactoryInterface
         $cacheDir = "{$cacheDir}/doctrine";
 
         $doctrineCache = new DoctrineCache\ArrayCache();
+
         if (! $isDevelopment)
         {
             $doctrineCache = new DoctrineCache\FilesystemCache("{$cacheDir}/Cache");

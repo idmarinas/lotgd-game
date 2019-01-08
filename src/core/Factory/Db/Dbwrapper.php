@@ -6,13 +6,14 @@
  * @author IDMarinas
  */
 
-namespace Lotgd\Core\Factory\Lib;
+namespace Lotgd\Core\Factory\Db;
 
-use Lotgd\Core\Lib\Dbwrapper as LibDbwrapper;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-
+use Lotgd\Core\Db\Dbwrapper as LibDbwrapper;
+use Zend\ServiceManager\{
+    FactoryInterface,
+    ServiceLocatorInterface
+};
 class Dbwrapper implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)

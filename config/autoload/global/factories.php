@@ -5,9 +5,9 @@ return [
         'factories' => [
             Lotgd\Core\Character\Stats::class => Lotgd\Core\Factory\Character\Stats::class,
             'Lotgd\\Core\\Installer\\Install' => Lotgd\Core\Factory\Installer\Install::class,
+            Lotgd\Core\Db\Dbwrapper::class => Lotgd\Core\Factory\Db\Dbwrapper::class,
+            'Lotgd\\Core\\Db\\Doctrine' => Lotgd\Core\Factory\Db\Doctrine::class,
             Lotgd\Core\Lib\Cache::class => Lotgd\Core\Factory\Lib\Cache::class,
-            Lotgd\Core\Lib\Dbwrapper::class => Lotgd\Core\Factory\Lib\Dbwrapper::class,
-            'Lotgd\\Core\\Lib\\Doctrine' => Lotgd\Core\Factory\Lib\Doctrine::class,
             Lotgd\Core\Lib\Settings::class => Lotgd\Core\Factory\Lib\Settings::class,
             Lotgd\Core\Lib\SettingsExtended::class => Lotgd\Core\Factory\Lib\SettingsExtended::class,
             Lotgd\Core\Nav\Blocked::class => Lotgd\Core\Factory\Nav\Blocked::class,

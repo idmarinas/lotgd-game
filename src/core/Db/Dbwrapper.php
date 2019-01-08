@@ -1,6 +1,6 @@
 <?php
 
-namespace Lotgd\Core\Lib;
+namespace Lotgd\Core\Db;
 
 use Zend\Db\Adapter\{
     Adapter,
