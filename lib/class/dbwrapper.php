@@ -1,18 +1,31 @@
 <?php
 
-// addnews ready
-// translator ready
-// mail ready
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ *
+ * @since 2.0.0
+ */
 
 use Lotgd\Core\Lib\Dbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Paginator;
 
+/**
+ * Static class to access a basic functions of DB.
+ */
 class DB
 {
+    /**
+     * Instance of Dbwrapper
+     *
+     * @var Lotgd\Core\Lib\Dbwrapper
+     */
     private static $wrapper;
-    private static $errorInfo = null;
 
     /**
      * Execute a query.
