@@ -215,4 +215,4 @@ class Doctrine
 }
 
 //-- Configure DB
-Doctrine::wrapper(LotgdLocator::get(Lotgd\Core\Lib\Doctrine::class));
+Doctrine::wrapper(LotgdLocator::get(\Lotgd\Core\Db\Doctrine::class));
