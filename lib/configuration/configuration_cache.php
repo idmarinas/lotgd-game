@@ -2,7 +2,7 @@
 
 $setup_cache = include_once 'lib/data/configuration_cache.php';
 
-$wrapper = LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
+$wrapper = LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
 $adapter = $wrapper->getAdapter();
 $platform = $adapter->getPlatform();
 $options = LotgdLocator::get('GameConfig');

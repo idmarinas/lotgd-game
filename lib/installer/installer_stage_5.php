@@ -21,7 +21,7 @@ if ($session['dbinfo']['DB_PREFIX'] > '' && '_' != substr($session['dbinfo']['DB
 //Or we could save ourselves the dbtype stuff
 
 //-- Settings for Database Adapter
-$adapter = new Lotgd\Core\Lib\Dbwrapper([
+$adapter = new Lotgd\Core\Db\Dbwrapper([
     'driver' => $session['dbinfo']['DB_DRIVER'],
     'hostname' => $session['dbinfo']['DB_HOST'],
     'database' => $session['dbinfo']['DB_NAME'],

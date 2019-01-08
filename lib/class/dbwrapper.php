@@ -10,7 +10,7 @@
  * @since 2.0.0
  */
 
-use Lotgd\Core\Lib\Dbwrapper;
+use Lotgd\Core\Db\Dbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Paginator;
@@ -23,7 +23,7 @@ class DB
     /**
      * Instance of Dbwrapper
      *
-     * @var Lotgd\Core\Lib\Dbwrapper
+     * @var Lotgd\Core\Db\Dbwrapper
      */
     private static $wrapper;
 
@@ -308,7 +308,7 @@ class DB
     /**
      * Add wrapper to script.
      *
-     * @param Lotgd\Core\lib\Dbwrapper $wrapper
+     * @param Lotgd\Core\Db\Dbwrapper $wrapper
      */
     public static function wrapper(Dbwrapper $wrapper)
     {
@@ -317,4 +317,4 @@ class DB
 }
 
 //-- Configure DB
-DB::wrapper(LotgdLocator::get(Lotgd\Core\Lib\Dbwrapper::class));
+DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));

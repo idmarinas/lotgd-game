@@ -9,7 +9,7 @@
 namespace Lotgd\Core\Lib;
 
 use Lotgd\Core\Lib\Cache;
-use Lotgd\Core\Lib\Dbwrapper;
+use Lotgd\Core\Db\Dbwrapper;
 
 class Settings
 {

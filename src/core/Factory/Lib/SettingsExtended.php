@@ -18,7 +18,7 @@ class SettingsExtended implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $settings = new LibSettings();
-        $settings->setWrapper($container->get(\Lotgd\Core\Lib\Dbwrapper::class))
+        $settings->setWrapper($container->get(\Lotgd\Core\Db\Dbwrapper::class))
             ->setCache($container->get(\Lotgd\Core\Lib\Cache::class))
             ->setTableName('settings_extended')
             ->loadSettings()

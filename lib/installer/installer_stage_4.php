@@ -15,7 +15,7 @@ output('`@`c`bTesting the Database Connection´b´c`2');
 output('Trying to establish a connection with the database:`n');
 
 //-- Settings for Database Adapter
-$adapter = new Lotgd\Core\Lib\Dbwrapper([
+$adapter = new Lotgd\Core\Db\Dbwrapper([
     'driver' => $session['dbinfo']['DB_DRIVER'],
     'hostname' => $session['dbinfo']['DB_HOST'],
     'database' => $session['dbinfo']['DB_NAME'],

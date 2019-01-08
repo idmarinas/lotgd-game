@@ -324,7 +324,7 @@ function page_footer($saveuser = true)
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 
-    $wrapper = \LotgdLocator::get(\Lotgd\Core\Lib\Dbwrapper::class);
+    $wrapper = \LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
 
     if (getsetting('debug', 0))
     {
