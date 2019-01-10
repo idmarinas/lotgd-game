@@ -5,8 +5,6 @@
  */
 function lotgd_mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
 {
-    global $copyright;
-
     require_once 'lib/nltoappon.php';
 
     $message = full_sanitize(str_replace('`n', '<br>', nltoappon($message)));
@@ -34,7 +32,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
         $data = [
             'title' => $subject,
             'content' => $message,
-            'copyright' => $copyright,
+            'copyright' => \Lotgd\Core\Application::COPYRIGHT,
             'url' => getsetting('serverurl', '//'.$_SERVER['SERVER_NAME'])
         ];
 

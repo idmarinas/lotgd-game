@@ -91,10 +91,9 @@ function page_header()
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $y2, $z2, $copyright, $license, $nopopups, $lotgdJaxon;
+    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $nopopups, $lotgdJaxon;
 
-    $z = $y2 ^ $z2;
-    $html[$z] = $license.${$z};
+    $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
     $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
@@ -411,7 +410,7 @@ function popup_header($title = 'Legend of the Green Dragon')
  */
 function popup_footer()
 {
-    global $output, $html, $session, $y2, $z2, $copyright, $license, $lotgdJaxon;
+    global $output, $html, $session, $lotgdJaxon;
 
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
@@ -433,8 +432,7 @@ function popup_footer()
         $html[$key] .= $val;
     }
 
-    $z = $y2 ^ $z2;
-    $html[$z] = $license.${$z};
+    $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
 
     //-- Finalize output
     $lotgdJaxon->processRequest();
