@@ -1,15 +1,23 @@
 <?php
 
 /**
- * This trait contain all function to manage prefix of tables.
+ * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 3.1.0
  */
 
-namespace Lotgd\Core\Lib\Pattern;
+namespace Lotgd\Core\Db\Pattern;
 
 use Zend\Db\Metadata\Metadata;
 
+/**
+ * contain all function to manage prefix of tables.
+ */
 trait DbTool
 {
     protected $connection = null;

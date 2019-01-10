@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.0.0
+ */
+
 namespace Lotgd\Core\Db;
 
 use Zend\Db\Adapter\{
@@ -8,6 +19,9 @@ use Zend\Db\Adapter\{
 };
 use Zend\Db\ResultSet\ResultSet;
 
+/**
+ * Class for access to data base.
+ */
 class Dbwrapper
 {
     use \Lotgd\Core\Pattern\Container;

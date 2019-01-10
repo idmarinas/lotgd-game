@@ -1,12 +1,17 @@
 <?php
 
 /**
- * This trait contain all methods for zend-db component.
+ * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 3.1.0
  */
 
-namespace Lotgd\Core\Lib\Pattern;
+namespace Lotgd\Core\Db\Pattern;
 
 use Zend\Db\Sql\{
     Delete,
@@ -21,6 +26,9 @@ use Zend\Paginator\{
     Paginator
 };
 
+/**
+ * Contain all methods for zend-db component.
+ */
 trait Zend
 {
     protected $sql = null;
@@ -28,7 +36,7 @@ trait Zend
     /**
      * Select API.
      *
-     * @param null|string|array|TableIdentifier $table
+     * @param string|array|TableIdentifier|null $table
      * @param bool                              $prefixed
      *
      * @return object
@@ -48,7 +56,7 @@ trait Zend
     /**
      * Insert API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
@@ -68,7 +76,7 @@ trait Zend
     /**
      * Update API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
@@ -88,7 +96,7 @@ trait Zend
     /**
      * Delete API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
