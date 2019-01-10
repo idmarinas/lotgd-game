@@ -13,9 +13,7 @@ $op = httpget('op');
 $id = httpget('id');
 $editarray = [
     'Titles,title',
-    //"titleid"=>"Title Id,hidden",
     'dk' => 'Dragon Kills,int|0',
-    // "ref"=>"Arbitrary Tag,int",
     'male' => 'Male Title,text|',
     'female' => 'Female Title,text|',
 ];
@@ -30,8 +28,6 @@ switch ($op)
         $male = httppost('male');
         $female = httppost('female');
         $dk = httppost('dk');
-        // Ref is currently unused
-        // $ref = httppost('ref');
         $ref = '';
 
         if (0 == (int) $id)
@@ -165,27 +161,19 @@ switch ($op)
             $sql = 'SELECT * FROM '.DB::prefix('titles').' ORDER BY dk, titleid';
             $result = DB::query($sql);
 
-            if (DB::num_rows($result) < 1)
-            {
-                output('');
-            }
-            else
+            if (DB::num_rows($result) >= 1)
             {
                 $row = DB::fetch_assoc($result);
             }
             output('`@`c`b-=Title Editor=-´b´c');
             $ops = translate_inline('Ops');
             $dks = translate_inline('Dragon Kills');
-            // $ref is currently unused
-            // $reftag = translate_inline("Reference Tag");
             $mtit = translate_inline('Male Title');
             $ftit = translate_inline('Female Title');
             $edit = translate_inline('Edit');
             $del = translate_inline('Delete');
             $delconfirm = translate_inline('Are you sure you wish to delete this title?');
             rawoutput("<table class='ui very compact striped selectable table'>");
-            // reference tag is currently unused
-            // rawoutput("<tr class='trhead'><td>$ops</td><td>$dks</td><td>$reftag</td><td>$mtit</td><td>$ftit</td></tr>");
             rawoutput("<thead><tr><th>$ops</th><th>$dks</th><th>$mtit</th><th>$ftit</th></tr></thead>");
             $result = DB::query($sql);
             $i = 0;
@@ -200,9 +188,6 @@ switch ($op)
                 rawoutput('<td>');
                 output_notl('`&%s`0', $row['dk']);
                 rawoutput('</td><td>');
-                // reftag is currently unused
-                // output("`^%s`0", $row['ref']);
-                // output("</td><td>");
                 output_notl('`2%s`0', $row['male']);
                 rawoutput('</td><td>');
                 output_notl('`6%s`0', $row['female']);
@@ -210,7 +195,6 @@ switch ($op)
                 $i++;
             }
             rawoutput('</table>');
-            //modulehook("titleedit", array());
             addnav('Functions');
             addnav('Add a Title', 'titleedit.php?op=add');
             addnav('Refresh List', 'titleedit.php');
