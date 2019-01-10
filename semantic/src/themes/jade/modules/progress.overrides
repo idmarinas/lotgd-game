@@ -1,12 +1,3 @@
 /*******************************
             Progress
 *******************************/
-
-/**
- * Remove margin from progress
- * When not use label, or not want margin in bar
- */
-.ui.progress[class*="remove margin"]
-{
-    margin: 0;
-}
