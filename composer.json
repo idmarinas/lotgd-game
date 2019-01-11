@@ -37,7 +37,8 @@
     },
     "require-dev": {
         "phan/phan": "^1.1",
-        "psecio/iniscan": "^3.6"
+        "psecio/iniscan": "^3.6",
+        "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
         "psr-4": {
