@@ -3,27 +3,58 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 3.0.0
  */
 
 namespace Lotgd\Core;
 
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\FileGenerator;
-use Zend\Code\Generator\ValueGenerator;
-use Zend\Config\Config;
-use Zend\Config\Factory as ConfigFactory;
+use Zend\ConfigAggregator\ConfigAggregator;
+use Zend\ConfigAggregator\ZendConfigProvider;
 use Zend\ServiceManager\Config as ServiceConfig;
 use Zend\ServiceManager\ServiceManager as ZendServiceManager;
-use Zend\Stdlib\Glob;
 
+/**
+ * Generated a Service Manager for Game.
+ */
 class ServiceManager extends ZendServiceManager
 {
+    /**
+     * Production configuration for game.
+     *
+     * @var string
+     */
+    const LOTGD_CONFIG = 'config/lotgd.config.php';
+
+    /**
+     * Development configuration for game.
+     *
+     * @var string
+     */
+    const LOTGD_DEV_CONFIG = 'config/development.config.php';
+
+    /**
+     * Name of cache file.
+     *
+     * @var string
+     */
     const CACHE_FILE = 'cache/service-manager.config.php';
 
-    public function __construct(array $configuration)
+    public function __construct()
     {
-        $configuration = $this->processConfig(new Config($configuration, true));
+        $aggregator = new ConfigAggregator([
+            new ZendConfigProvider(static::LOTGD_CONFIG),
+            new ZendConfigProvider('config/autoload/global/{**/*,*}.php'),
+            new ZendConfigProvider('config/autoload/local/{**/*,*}.php'),
+            new ZendConfigProvider(static::LOTGD_DEV_CONFIG),
+            new ZendConfigProvider('config/development/{,*}.php'),
+        ], static::CACHE_FILE);
+
+        $configuration = $aggregator->getMergedConfig();
 
         $config = $configuration['service_manager'] ?? [];
         $config = new ServiceConfig($config);
@@ -33,79 +64,5 @@ class ServiceManager extends ZendServiceManager
         $config->configureServiceManager(parent::configure([]));
 
         $this->setService('GameConfig', $configuration);
-    }
-
-    /**
-     * Process configuration data.
-     *
-     * @param \Zend\Config\Config $configuration
-     *
-     * @return array
-     */
-    private function processConfig(Config $configuration): array
-    {
-        $configuration = $this->processGlobPathsConfig($configuration);
-
-        //-- Cache configuration for performance
-        if ($configuration->lotgd_core->cache_config)
-        {
-            if (! file_exists(self::CACHE_FILE))
-            {
-                $this->genererateFileCache($configuration->toArray());
-            }
-
-            return require self::CACHE_FILE;
-        }
-
-        return $configuration->toArray();
-    }
-
-    /**
-     * Process all Glob paths in config.
-     *
-     * @param \Zend\Config\Config $configuration
-     *
-     * @return \Zend\Config\Config
-     */
-    private function processGlobPathsConfig(Config $configuration): Config
-    {
-        if (! $configuration->config_glob_paths)
-        {
-            return $configuration;
-        }
-
-        foreach ($configuration->config_glob_paths as $path)
-        {
-            foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file)
-            {
-                $configuration->merge(ConfigFactory::fromFile($file, true));
-            }
-        }
-
-        return $configuration;
-    }
-
-    /**
-     * Generate file for cache configuration.
-     *
-     * @param array $configuration
-     */
-    private function genererateFileCache(array $configuration)
-    {
-        $file = FileGenerator::fromArray([
-            'docblock' => DocBlockGenerator::fromArray([
-                'shortDescription' => 'This file is automatically created',
-                'longDescription' => null,
-                'tags' => [
-                    [
-                        'name' => 'create',
-                        'description' => date('M d, Y h:i a'),
-                    ],
-                ]
-            ]),
-            'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';'
-        ]);
-
-        return file_put_contents(self::CACHE_FILE, $file->generate());
     }
 }

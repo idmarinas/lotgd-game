@@ -1,11 +1,8 @@
 <?php
 
 return [
+    \Zend\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => false, //-- In dev it is not recommended to activate the cache
     'lotgd_core' => [
-        'development' => true,
-        'cache_config' => false
-    ],
-    'config_glob_paths' => [
-        __DIR__ . '/development/{,*}.php'
+        'development' => true
     ]
 ];

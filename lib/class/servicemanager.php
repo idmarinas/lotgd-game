@@ -59,4 +59,4 @@ class LotgdLocator
 }
 
 //-- Prepare service manager
-LotgdLocator::setServiceManager(new ServiceManager(require 'config/config.php'));
+LotgdLocator::setServiceManager(new ServiceManager());
