@@ -17,11 +17,7 @@ class Http extends Request
      */
     public function getServer($name = null, $default = null)
     {
-        if ('REQUEST_URI' == $name)
-        {
-            return $this->sanitizeUri(parent::getServer($name, $default));
-        }
-        elseif ('SCRIPT_NAME' == $name)
+        if ('REQUEST_URI' == $name || 'SCRIPT_NAME' == $name)
         {
             return $this->sanitizeUri(parent::getServer($name, $default));
         }
