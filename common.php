@@ -242,46 +242,37 @@ elseif (httpGetCookie('lgi') && '' != httpGetCookie('lgi'))
     $session['user']['uniqueid'] = httpGetCookie('lgi');
 }
 
-$url = 'http://'.httpGetServer('SERVER_NAME').dirname(httpGetServer('REQUEST_URI'));
-$url = substr($url, 0, strlen($url) - 1);
-$urlport = 'http://'.httpGetServer('SERVER_NAME').':'.httpGetServer('SERVER_PORT').dirname(httpGetServer('REQUEST_URI'));
-$urlport = substr($urlport, 0, strlen($urlport) - 1);
-
-if (
-    substr(httpGetServer('HTTP_REFERER'), 0, strlen($url)) == $url ||
-    substr(httpGetServer('HTTP_REFERER'), 0, strlen($urlport)) == $urlport ||
-    '' == httpGetServer('HTTP_REFERER') ||
-    'http://' != strtolower(substr(httpGetServer('HTTP_REFERER'), 0, 7))
-    ) {
-}
-else
+/**
+ * Register HTTP REFERER.
+ *
+ * @TODO Add setting to configure if register or not.
+ */
+$url = httpGetServer('SERVER_NAME');
+$uri = httpGetServer('HTTP_REFERER');
+$site = $uri ? parse_url($uri, PHP_URL_HOST) : '';
+if ($url != $site)
 {
-    $site = str_replace('http://', '', httpGetServer('HTTP_REFERER'));
+    $url = sprintf('%s://%s%s', httpGetServer('REQUEST_SCHEME'), $url, httpGetServer('REQUEST_URI'));
 
-    if (strpos($site, '/'))
-    {
-        $site = substr($site, 0, strpos($site, '/'));
-    }
-    $host = str_replace(':80', '', httpGetServer('HTTP_HOST'));
+    $refererRepository = Doctrine::getRepository(Lotgd\Core\Entity\Referers::class);
+    $referers = $refererRepository->findOneByUri($uri);
+    $referers = $referers ?: new Lotgd\Core\Entity\Referers();
 
-    if ($site != $host)
-    {
-        $sql = 'SELECT * FROM '.DB::prefix('referers')." WHERE uri='{httpGetServer('HTTP_REFERER')}'";
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
-        DB::free_result($result);
+    $referers->setUri($uri)
+        ->incrementCount()
+        ->setLast(new DateTime('now'))
+        ->setSite($site)
+        ->setDest($url)
+        ->setIp(httpGetServer('REMOTE_ADDR'))
+    ;
 
-        if ($row['refererid'] > '')
-        {
-            $sql = 'UPDATE '.DB::prefix('referers')." SET count=count+1,last='".date('Y-m-d H:i:s')."',site='".addslashes($site)."',dest='".addslashes($host).'/'.addslashes(httpGetServer('REQUEST_URI'))."',ip='".httpGetServer('REMOTE_ADDR')."' WHERE refererid='{$row['refererid']}'";
-        }
-        else
-        {
-            $sql = 'INSERT INTO '.DB::prefix('referers')." (uri,count,last,site,dest,ip) VALUES ('{httpGetServer('HTTP_REFERER')}',1,'".date('Y-m-d H:i:s')."','".addslashes($site)."','".addslashes($host).'/'.addslashes(httpGetServer('REQUEST_URI'))."','".httpGetServer('REMOTE_ADDR')."')";
-        }
-        DB::query($sql);
-    }
+    \Doctrine::merge($referers);
+    \Doctrine::flush();
+    \Doctrine::clear();
+
+    unset($referers, $refererRepository);
 }
+unset($url, $site, $uri);
 
 $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 
