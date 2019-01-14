@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.1.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -38,7 +49,7 @@ class Referers
      *
      * @ORM\Column(name="count", type="integer", nullable=false)
      */
-    private $count;
+    private $count = 0;
 
     /**
      * @var \DateTime
@@ -138,6 +149,18 @@ class Referers
     public function getCount(): int
     {
         return $this->count;
+    }
+
+    /**
+     * Increment count by 1.
+     *
+     * @return self
+     */
+    public function incrementCount()
+    {
+        $this->count++;
+
+        return $this;
     }
 
     /**
