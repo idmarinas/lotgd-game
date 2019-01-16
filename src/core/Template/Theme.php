@@ -3,12 +3,15 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
- * @author IDMarinas
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ *
+ * @since 3.0.0
  */
 
 namespace Lotgd\Core\Template;
 
-use Lotgd\Core\Template\Base;
 use Zend\Filter\FilterChain;
 use Zend\Filter\StringToLower;
 use Zend\Filter\Word\SeparatorToDash;
@@ -16,14 +19,14 @@ use Zend\Filter\Word\UnderscoreToDash;
 
 class Theme extends Base
 {
-    protected $themename;
+    use \Lotgd\Core\Pattern\Container;
+
+    protected $themeName;
     protected $themefolder;
     protected $defaultSkin;
 
     public function __construct(array $loader = [], array $options = [])
     {
-        $this->prepareTheme();
-
         //-- Merge loaders
         $loader = array_merge(['themes', 'templates'], $loader);
 
@@ -84,7 +87,7 @@ class Theme extends Base
      */
     public function getTheme()
     {
-        return $this->themename;
+        return $this->themeName;
     }
 
     /**
@@ -92,71 +95,57 @@ class Theme extends Base
      *
      * @return string
      */
-    public function getDefaultSkin()
+    public function getDefaultSkin(): string
     {
+        $request = $this->getContainer(\Lotgd\Core\Http::class);
+        $cookie = $request->getCookie();
+
         if (empty($this->defaultSkin))
         {
-            $themename = $_COOKIE['template'] ?? '';
+            $settings = $this->getContainer(\Lotgd\Core\Lib\Settings::class);
 
-            if ('' == $themename || ! file_exists("themes/$themename"))
+            $theme = $cookie->offsetExists('template') ? $cookie->offsetExists('template') : '';
+
+            if ('' == $theme || ! file_exists("themes/$theme"))
             {
-                $themename = getsetting('defaultskin', 'jade.html');
+                $theme = $settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
             }
 
-            if ('' == $themename || ! file_exists("themes/$themename"))
-            {
-                $themename = 'jade.html';
-            }
+            $this->defaultSkin = $theme;
 
-            //-- Search for a valid theme in directory
-            if (! file_exists("themes/$themename"))
-            {
-                // A generic way of allowing a theme to be selected.
-                $skins = [];
-                $handle = @opendir('themes');
-
-                while (false !== ($file = @readdir($handle)))
-                {
-                    if (strpos($file, '.htm') > 0)
-                    {
-                        $skins[] = $file;
-
-                        break; //-- We have 1 theme, no need more
-                    }
-                }
-
-                if (count($skins))
-                {
-                    $themename = $skins[0];
-                }
-            }
-
-            $this->defaultSkin = $themename;
-
-            savesetting('defaultskin', $themename);
+            $settings->saveSetting('defaultskin', $theme);
         }
 
-        if (! isset($_COOKIE['template']) || '' == $_COOKIE['template'])
+        //-- This is necessary in case the theme is deleted
+        //-- Search for a valid theme in directory
+        if (! file_exists("themes/{$this->defaultSkin}"))
         {
-            $_COOKIE['template'] = $themename;
+            $this->defaultSkin = $this->getValidTheme();
+
+            $settings->saveSetting('defaultskin', $this->defaultSkin);
+        }
+
+        if ($cookie->offsetExists('template') || '' == $cookie->offsetExists('template'))
+        {
+            $cookie->offsetSet('template', $theme);
         }
 
         return $this->defaultSkin;
     }
 
     /**
-     * Preparece template for use.
+     * Prepare template for use.
      */
-    private function prepareTheme()
+    public function prepareTheme()
     {
         global $y, $z, $y2, $z2, $lc, $x;
 
-        $this->themename = $this->getDefaultSkin();
+        $this->themeName = $this->getDefaultSkin();
 
-        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themename))
+        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themeName))
         {
             //-- Prepare name folder of theme, base on filename of theme
-            $this->themefolder = pathinfo($this->themename, PATHINFO_FILENAME); //-- Delete extension
+            $this->themefolder = pathinfo($this->themeName, PATHINFO_FILENAME); //-- Delete extension
             $filterChain = new FilterChain();
             $filterChain
                 ->attach(new StringToLower())
@@ -166,10 +155,29 @@ class Theme extends Base
 
             $this->themefolder = $filterChain->filter($this->themefolder);
         }
+    }
 
-        //-- Seem to not have function
-        // $y = 0;
-        // $z = $y2^$z2;
-        // $$z = $lc . $$z . '<br>';
+    /**
+     * Search for a valid theme if removed.
+     *
+     * @return array
+     */
+    private function getValidTheme(): array
+    {
+        // A generic way of allowing a theme to be selected.
+        $skins = [];
+        $handle = @opendir('themes');
+
+        while (false !== ($file = @readdir($handle)))
+        {
+            if (strpos($file, '.htm') > 0)
+            {
+                $skins[] = $file;
+
+                break; //-- We have 1 theme, no need more
+            }
+        }
+
+        return $skins;
     }
 }

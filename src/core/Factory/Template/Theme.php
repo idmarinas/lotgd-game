@@ -19,10 +19,14 @@ class Theme implements FactoryInterface
     {
         $options = $container->get('GameConfig');
 
-        return new TemplateTheme([], [
+        $template = new TemplateTheme([], [
             //-- Used in development for reload .twig templates
             'auto_reload' => (bool) ($options['lotgd_core']['development'] ?? false)
         ]);
+        $template->setContainer($container);
+        $template->prepareTheme();
+
+        return $template;
     }
 
     public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
