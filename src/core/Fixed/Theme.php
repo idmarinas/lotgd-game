@@ -1,8 +1,21 @@
 <?php
 
-use Lotgd\Core\Template\Theme;
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.0.0
+ */
 
-class LotgdTheme
+namespace Lotgd\Core\Fixed;
+
+use Lotgd\Core\Template\Theme as CoreTheme;
+
+class Theme
 {
     protected static $wrapper;
 
@@ -54,13 +67,12 @@ class LotgdTheme
     /**
      * Set wrapper of Theme.
      *
-     * @param \Lotgd\Core\Template\Theme $wrapper
+     * @param CoreTheme $wrapper
      */
-    public static function wrapper(Theme $wrapper)
+    public static function wrapper(CoreTheme $wrapper)
     {
         self::$wrapper = $wrapper;
     }
 }
 
-//-- Configure Theme template
-LotgdTheme::wrapper(LotgdLocator::get(Theme::class));
+class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);

@@ -1,17 +1,30 @@
 <?php
 
-use Lotgd\Core\Output\Format;
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.0.0
+ */
+
+namespace Lotgd\Core\Fixed;
+
+use Lotgd\Core\Output\Format as CoreFormat;
 
 /**
  * This class is for format a string
  * For example: format a number or a date.
  */
-class LotgdFormat
+class Format
 {
     /**
      * Instance of Format
      *
-     * @var Lotgd\Core\Output\Format
+     * @var Lotgd\Core\Output\CoreFormat
      */
     protected static $instance;
 
@@ -40,15 +53,14 @@ class LotgdFormat
     }
 
     /**
-     * Set a instance of Lotgd\Core\Output\Format.
+     * Set a instance of Lotgd\Core\Output\CoreFormat.
      *
-     * @param Lotgd\Core\Output\Format $instance
+     * @param Lotgd\Core\Output\CoreFormat $instance
      */
-    public static function instance(Format $instance)
+    public static function instance(CoreFormat $instance)
     {
         self::$instance = $instance;
     }
 }
 
-//-- Configure format instance
-LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
+class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);

@@ -58,16 +58,12 @@ $license = \Lotgd\Core\Application::LICENSE;
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
-//-- Prepare the service manager
-require_once 'lib/class/servicemanager.php';
+//-- Prepare static classes
+require_once 'lib/class/static.php';
 // Include some commonly needed and useful routines
 require_once 'lib/constants.php';
 require_once 'lib/output.php';
-require_once 'lib/class/dbwrapper.php';
-require_once 'lib/class/doctrine.php';
 require_once 'lib/settings.php';
-require_once 'lib/class/lotgdFormat.php';
-require_once 'lib/class/template.php';
 require_once 'lib/gamelog.php';
 require_once 'lib/datacache.php';
 require_once 'lib/sanitize.php';
@@ -250,7 +246,7 @@ elseif (httpGetCookie('lgi') && '' != httpGetCookie('lgi'))
 $url = httpGetServer('SERVER_NAME');
 $uri = httpGetServer('HTTP_REFERER');
 $site = $uri ? parse_url($uri, PHP_URL_HOST) : '';
-if ($url != $site)
+if ($url != $site && $uri && $site)
 {
     $url = sprintf('%s://%s%s', httpGetServer('REQUEST_SCHEME'), $url, httpGetServer('REQUEST_URI'));
 

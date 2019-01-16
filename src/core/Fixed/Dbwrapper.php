@@ -10,7 +10,9 @@
  * @since 2.0.0
  */
 
-use Lotgd\Core\Db\Dbwrapper;
+namespace Lotgd\Core\Fixed;
+
+use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Paginator;
@@ -18,12 +20,12 @@ use Zend\Paginator\Paginator;
 /**
  * Static class to access a basic functions of DB.
  */
-class DB
+class Dbwrapper
 {
     /**
      * Instance of Dbwrapper
      *
-     * @var Lotgd\Core\Db\Dbwrapper
+     * @var Lotgd\Core\Db\CoreDbwrapper
      */
     private static $wrapper;
 
@@ -308,13 +310,12 @@ class DB
     /**
      * Add wrapper to script.
      *
-     * @param Lotgd\Core\Db\Dbwrapper $wrapper
+     * @param Lotgd\Core\Db\CoreDbwrapper $wrapper
      */
-    public static function wrapper(Dbwrapper $wrapper)
+    public static function wrapper(CoreDbwrapper $wrapper)
     {
         self::$wrapper = $wrapper;
     }
 }
 
-//-- Configure DB
-DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
+class_alias('Lotgd\Core\Fixed\Dbwrapper', 'DB', false);

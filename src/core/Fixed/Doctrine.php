@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.1.0
+ */
+
+namespace Lotgd\Core\Fixed;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 
@@ -214,5 +227,4 @@ class Doctrine
     }
 }
 
-//-- Configure DB
-Doctrine::wrapper(LotgdLocator::get(\Lotgd\Core\Db\Doctrine::class));
+class_alias('Lotgd\Core\Fixed\Doctrine', 'Doctrine', false);

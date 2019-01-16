@@ -1,8 +1,21 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 3.0.0
+ */
+
+namespace Lotgd\Core\Fixed;
+
 use Lotgd\Core\ServiceManager;
 
-class LotgdLocator
+class Locator
 {
     /**
      * Instance of ServiceManager
@@ -58,5 +71,4 @@ class LotgdLocator
     }
 }
 
-//-- Prepare service manager
-LotgdLocator::setServiceManager(new ServiceManager());
+class_alias('Lotgd\Core\Fixed\Locator', 'LotgdLocator', false);
