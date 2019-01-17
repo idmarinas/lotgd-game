@@ -11,7 +11,7 @@ namespace Lotgd\Core\Installer\Pattern;
 trait Version
 {
     /**
-     * Versions of game (Only versions prior to 3.1.0).
+     * Versions of game.
      *
      * @var array
      */
@@ -62,7 +62,7 @@ trait Version
         '2.6.0 IDMarinas Edition' => 20600,
         '2.7.0 IDMarinas Edition' => 20700,
         '3.0.0 IDMarinas Edition' => 30000,
-        '3.1.0 IDMarinas Edition' => 30100
+        '4.0.0 IDMarinas Edition' => 40000
     ];
 
     /**
@@ -89,17 +89,17 @@ trait Version
      */
     public function getPreviusVersion(): int
     {
-        $versions = array_values($this->versions);
+        $vers = array_values($this->versions);
 
-        $actual = array_search(\Lotgd\Core\Application::VERSION_NUMBER, $versions);
+        $actual = array_search(\Lotgd\Core\Application::VERSION_NUMBER, $vers);
 
         if (false === $actual)
         {
             return 0;
         }
-        elseif (isset($versions[$actual - 1]))
+        elseif (isset($vers[$actual - 1]))
         {
-            return $versions[$actual - 1];
+            return $vers[$actual - 1];
         }
 
         return 0;
