@@ -8,13 +8,12 @@ function saveuser()
 {
     global $session, $companions, $chatloc;
 
-    //-- It's defined as not save user, Not are a user logged in or not are defined acctid
-    if (defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! $session['user']['acctid'])
+    //-- It's defined as not save user, Not are a user logged in or not are defined id of account
+    if (defined('NO_SAVE_USER') || ! ($session['user']['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
     {
         return false;
     }
 
-    debug($session['user'], true);
     // Any time we go to save a user, make SURE that any tempstat changes
     // are undone.
     restore_buff_fields();
