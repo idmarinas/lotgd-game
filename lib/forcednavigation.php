@@ -13,9 +13,9 @@ function do_forced_nav($anonymous, $overrideforced)
 
     rawoutput("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
 
-    if ($session['loggedin'] ?? false && $session['user']['acctid'] ?? false)
+    if (($session['loggedin'] ?? false) && ($session['user']['acctid'] ?? false))
     {
-        //-- Using Doctrine repository to process login
+        //-- Using Doctrine repository to get data of account
         $repositoryAccounts = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
         $account = $repositoryAccounts->getUserById($session['user']['acctid']);
 
@@ -38,7 +38,7 @@ function do_forced_nav($anonymous, $overrideforced)
             return redirect('index.php?op=timeout', 'Account not logged in but session thinks they are.');
         }
 
-        if ($session['user']['allowednavs'][$requestUri] ?? false && true !== $overrideforced)
+        if (($session['user']['allowednavs'][$requestUri] ?? false) && true !== $overrideforced)
         {
             $session['user']['allowednavs'] = [];
         }
