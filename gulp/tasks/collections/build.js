@@ -4,7 +4,6 @@ module.exports = function (gulp)
 {
     const build = require('../build')
     const main = require('../build/main')
-    const assets = require('../build/assets')
     const lotgdJs = require('../build/lotgd-js')
     const themePre = require('../build/theme-pre')
     const themePost = require('../build/theme-post')
@@ -20,9 +19,6 @@ module.exports = function (gulp)
 
     gulp.task('lotgd-js', lotgdJs)
     gulp.task('lotgd-js').description = 'Create JS of LOTGD'
-
-    gulp.task('assets', assets)
-    gulp.task('assets').description = 'Copy sources for application'
 
     gulp.task('theme-pre', themePre)
 

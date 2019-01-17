@@ -20,19 +20,19 @@ module.exports = function (callback)
     //-- Copy files in assets
     var assets = gulp.src(config.paths.semantic + '/themes/**/assets/**/*.*')
         .pipe(rename(configTasks.settings.renameThemeAssets))
-        .pipe(gulp.dest(config.paths.build + '/themes'))
+        .pipe(gulp.dest(config.paths.build + '/public/themes'))
 
     //-- Copy CSS file
     var css = gulp.src(config.paths.semantic + (isProduction ? '/semantic.min.css' : '/semantic.css'))
         .pipe(rename(themeName + '.css'))
         .pipe(gulpif(isProduction, header(banner, settings.header)))
-        .pipe(gulp.dest(config.paths.build + '/themes'))
+        .pipe(gulp.dest(config.paths.build + '/public/themes'))
         .pipe(print(log.copied))
 
     //-- Copy JS file
     var js = gulp.src(config.paths.semantic + (isProduction ? '/semantic.min.js' : '/semantic.js'))
         .pipe(rename('semantic.js'))
-        .pipe(gulp.dest(config.paths.build + '/resources'))
+        .pipe(gulp.dest(config.paths.build + '/public/js'))
         .pipe(print(log.copied))
 
     return merge(assets, css, js)
