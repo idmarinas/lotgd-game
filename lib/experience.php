@@ -38,11 +38,6 @@ function exp_for_next_level($curlevel, $curdk)
         $exparray = explode(',', $expstring);
         $count = count($exparray);
 
-        if ($curlevel < 1)
-        {
-            return 0;
-        }
-
         foreach ($exparray as $key => $val)
         {
             $exparray[$key] = round($val + ($curdk / 4) * ($key + 1) * 100, 0);
