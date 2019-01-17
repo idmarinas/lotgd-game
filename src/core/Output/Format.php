@@ -7,7 +7,7 @@
  *
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  *
- * @since 3.1.0
+ * @since 4.0.0
  */
 
 namespace Lotgd\Core\Output;

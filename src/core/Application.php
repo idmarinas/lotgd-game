@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 3.1.0
+ * @since 4.0.0
  */
 
 namespace Lotgd\Core;
@@ -23,14 +23,14 @@ class Application
      *
      * @var string
      */
-    const VERSION = '3.1.0 IDMarinas Edition';
+    const VERSION = '4.0.0 IDMarinas Edition';
 
     /**
      * Identify version of game in numeric format.
      *
      * @var int
      */
-    const VERSION_NUMBER = 30100;
+    const VERSION_NUMBER = 40000;
 
     /**
      * File where the connection data to the DB is stored.

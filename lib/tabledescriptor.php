@@ -15,12 +15,12 @@
 // There's no support for foreign keys that INNODB offers.  Sorry.
 
 /**
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 function synctable($tablename, $descriptor, $nodrop = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use Doctrine Entities to sync table schema.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -169,12 +169,12 @@ function synctable($tablename, $descriptor, $nodrop = false)
 }//end function
 
 /**
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 function table_create_from_descriptor($tablename, $descriptor)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use Doctrine Entities to sync table schema.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -248,13 +248,13 @@ function table_create_from_descriptor($tablename, $descriptor)
 }
 
 /**
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 function table_create_descriptor($tablename)
 {
 
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use Doctrine Entities to sync table schema.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -340,12 +340,12 @@ function table_create_descriptor($tablename)
 }
 
 /**
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 function descriptor_createsql($input)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use Doctrine Entities to sync table schema.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -413,12 +413,12 @@ function descriptor_createsql($input)
 }
 
 /**
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 function descriptor_sanitize_type($type)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 3.1.0; and delete in version 3.2.0, use Doctrine Entities to sync table schema.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use Doctrine Entities to sync table schema.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
