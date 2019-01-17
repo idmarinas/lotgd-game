@@ -118,7 +118,6 @@
 
 /* For source only. Modified in gulp for dist */
 @imagePath : 'jade/images';
-@fontPath  : 'jade/fonts';
 
 
 
