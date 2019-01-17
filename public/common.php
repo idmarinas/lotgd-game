@@ -9,6 +9,8 @@
 // work.
 // Please see the file LICENSE for a full textual description of the license.txt.
 
+chdir(realpath(__DIR__ . '/..'));
+
 $pagestarttime = microtime(true);
 
 // Set some constant defaults in case they weren't set before the inclusion of
