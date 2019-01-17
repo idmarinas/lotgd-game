@@ -39,7 +39,7 @@ function redirect($location, $reason = false)
         $http = 'https';
     }
 
-    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $uri = rtrim(dirname( httpGetServer('PHP_SELF')), '/\\');
     header("Location: $http://$host$uri/$location");
 
     // we should never hit this one here. in case we do, show the debug output along with some text

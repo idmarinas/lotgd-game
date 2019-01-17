@@ -14,14 +14,9 @@ function handle_event($location, $baseLink = false, $needHeader = false)
 
     if (false === $baseLink)
     {
-        global $PHP_SELF;
+        $PHP_SELF = httpGetServer('PHP_SELF');
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
-    // else
-    // {
-    // 	debug("Base link was specified as $baseLink");
-    // 	debug(debug_backtrace());
-    // }
     $skipdesc = false;
 
     tlschema('events');

@@ -5,26 +5,24 @@
 // mail ready
 function fightnav($allowspecial = true, $allowflee = true, $script = false)
 {
-    global $PHP_SELF, $session, $newenemies, $companions;
+    global $session, $newenemies, $companions;
 
     tlschema('fightnav');
 
     if (false === $script)
     {
+        $PHP_SELF = httpGetServer('PHP_SELF');
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
-    else
+    elseif (false === strpos($script, '?'))
     {
-        if (! strpos($script, '?'))
-        {
-            $script .= '?';
-        //		}elseif (substr($script,strlen($script)-1)!="&" && !substr($script,strlen($script)-1)=="?"){
-        }
-        elseif ('&' != substr($script, strlen($script) - 1))
-        {
-            $script .= '&';
-        }
+        $script .= '?';
     }
+    elseif ('&' != substr($script, strlen($script) - 1))
+    {
+        $script .= '&';
+    }
+
     $fight = 'Fight';
     $run = 'Run';
 

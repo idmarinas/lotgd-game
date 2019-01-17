@@ -81,14 +81,13 @@ function module_events($eventtype, $basechance, $baseLink = false)
 {
     if (false === $baseLink)
     {
-        global $PHP_SELF;
+        $PHP_SELF = httpGetServer('PHP_SELF');
 
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
 
     if (e_rand(1, 100) <= $basechance)
     {
-        global $PHP_SELF;
         $events = module_collect_events($eventtype);
         $chance = r_rand(1, 100);
         reset($events);
@@ -127,7 +126,7 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
 
     if (false === $baseLink)
     {
-        global $PHP_SELF;
+        $PHP_SELF = httpGetServer('PHP_SELF');
 
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
@@ -164,7 +163,7 @@ function event_sort($a, $b)
 
 function module_display_events($eventtype, $forcescript = false)
 {
-    global $PHP_SELF, $session;
+    global $session;
 
     if (! ($session['user']['superuser'] & SU_DEVELOPER))
     {
@@ -174,6 +173,7 @@ function module_display_events($eventtype, $forcescript = false)
     $script = $forcescript;
     if (false === $forcescript)
     {
+        $PHP_SELF = httpGetServer('PHP_SELF');
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
     }
 
