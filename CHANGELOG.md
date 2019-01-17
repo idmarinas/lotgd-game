@@ -5,11 +5,25 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
-# Version: 3.1.0
+# Version: 4.0.0
 
 ### :cyclone: CHANGES
 
+-   :warning: **_NEW Structure of files for web_**
+    - Most of the Web files have been reorganized
+        - Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php` (all .php files in root) are moved to `public/` folder.
 -   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
+-   **common.php** Updated script of log http referers.
+    -   Changes the way that static classes are used:
+          **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
+          **lib/class/doctrine.php** now are in **src/core/Fixed/Doctrine.php**
+          **lib/class/lotgdFormat.php** now are in **src/core/Fixed/Format.php**
+          **lib/class/servicemanager.php** now are in **src/core/Fixed/Locator.php**
+          **lib/class/template.php** now are in **src/core/Fixed/Theme.php**
+-   **lib/http.php** Added new functions
+    -   `httpGetServer(string $name = null , string $default = null)` For get a value of a `$_SERVER['any key']`
+    -   `httpGetCookie(mixed $name)` For get value of a cookie
+    -   `httpSetCookie(mixed $name, mixed $value)` For set value of a cookie
 -   **src/core/Lib/Settings.php** It improves the management of the settings cache.
 -   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
@@ -26,30 +40,47 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `` `4This text is dark red`0``
             -   `` `@This text is green`0``
         -   The system does not autoclose the codes, so you need to close all the codes (when necessary), otherwise the result may vary.
+-   **src/core/Http.php** The original function is altered to change the value of some keys.
 -   **DataBase** Table `accounts` are divided, now information of character are in table `characters`
-- **THEME**
-    - Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
-        - [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
-        - Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
-    - Nothing changed with this
+-   **New namespaces for this**
+    -   `Lotgd\Core\Lib\Dbwrapper` changed to `Lotgd\Core\Db\Dbwrapper`
+    -   `Lotgd\Core\Lib\Doctrine` changed to `Lotgd\Core\Db\Doctrine`
+-   **THEME**
+        \- Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
+            \- [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
+            \- Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
+        \- Nothing changed with this
 
 ### :star: FEATURES
 
 -   _New Installer system_ This version have a new installer of game.
-    -   The new installation system only allows upgrading from the previous version.
+    -   :warning: The new installation system only allows upgrading from the previous version.
 -   _New Component of Game_ `Lotgd\Core\Component\Filesystem`
     -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
         -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
+-   **lib/class/lotgdFormat.php** Added new function:
+    -   `LotgdFormat::pluralize(int $number, string $singular, string $plural)` select the plural or singular form according to the past number
+-   **src/core/Template/Base.php** Added new filter:
+    -   `pluralize` select the plural or singular form according to the past number
+-   **_Migrating to Doctrine_**
+    -   In this version game are migrating to Doctrine ORM for access to data base.
+    -   You can still use Zend DB and its classes to access it, but it is recommended to use Doctrine, as this maintains the integrity of the database.
+        -   As an example, some fields in the tables are of type serialized array, Doctrine serializes and deserializes these fields automatically.
+    -   There are no plans to remove Zend DB at this time.
 
 ### :fire: DEPRECATED
 
--   **common.php** Var: `$logd_version` is now DEPRECATED, for see version of game use:
+-   **common.php** Var: `$logd_version`, `$copyright` and `$license` are now DEPRECATED:
     -   Public display version: `Lotgd\Core\Application::VERSION`
     -   Identify numeric version: `Lotgd\Core\Application::VERSION_NUMBER`
+    -   Copyright text: `Lotgd\Core\Application::COPYRIGHT`
+    -   License text: `Lotgd\Core\Application::LICENSE`
 
 ### :wrench: FIXES
 
--   **lib/class/dbwrapper.php** Fixed error, not passed param $prefixed
+-   **lib/class/dbwrapper.php**
+    -   Fixed error, not passed param $prefixed
+    -   Only one instance of `Zend\Paginator\Paginator` can be passed
 -   **lib/configuration/configuration_data.php** Fixed error with data
 -   **lib/data/configuration_data.php** Deleted unused data
 -   **lib/nav.php** Fixed error with new color/code syntax
@@ -59,7 +90,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   **src/core/Lib/Pattern/Zend.php**
 -   **common.php** Fixed error with clean installation
 -   **src/core/Factory/Character/Stats.php** Deleted var not defined (and unused)
--   **lib/class/dbwrapper.php** Only one instance of `Zend\Paginator\Paginator` can be passed
+-   **installer.php** Upgrade min version of PHP, since 2.7.0 IDMarinas Edition, min PHP version is 7.0, but installer check that min PHP version is 5.6
 
 ### :x: REMOVES
 
@@ -67,12 +98,13 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/dbwrapper.php** Removed deprecated method `query_cached`
     -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\Core\Lib\Dbwrapper` to get this info
 -   **lib/pageparts.php** Removed deprecated function `popup`
+-   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core. Not is necesary register as global all data in `$_SERVER`. Can use `Lotgd\Core\Http` or `httpGetServer(string $name = null , string $default = null)`
 
 ### :notebook: NOTES
 
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
-    - All related gulp tasks are updated to this new version
+    -   All related gulp tasks are updated to this new version
 
 # Version: 3.0.0
 
@@ -335,7 +367,6 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   New filter `lotgd_popup` generate a popup link
     -   New filter `nltoappon` convert all line breaks to LOTGD style
     -   New filter `numeral` format a number with grouped thousands
-    -   New filter `pluralize` select the plural or singular form according to the last number
     -   All theme templates now obtain the `user` variable that contains the user information as well as `$session['user']`
         -   Note: Keep in mind that the information you get is the most up to date.
     -   **Note** Now by default yout `LotgdTemplate` is this base class for templates in LOTGD and not load innecesary functions of `LotgdTheme`
