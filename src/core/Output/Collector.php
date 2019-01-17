@@ -82,7 +82,7 @@ class Collector
             $out = call_user_func_array('sprintf', $args);
         }
         //holiday text
-        if (false == $priv)
+        if (! $priv)
         {
             $out = holidayize($out, 'output');
         }
@@ -137,7 +137,7 @@ class Collector
         global $session;
 
         //-- This options are only available when user are signed in
-        if (! ($session['loggedin'] ?? false))
+        if (! ($session['user']['loggedin'] ?? false))
         {
             return $out;
         }
@@ -159,7 +159,7 @@ class Collector
      */
     public function get_output()
     {
-        $output = $this->output;
+        $text = $this->output;
         //clean up unclosed output tags.
         foreach (array_keys($this->nestedtags) as $key => $val)
         {
@@ -170,11 +170,11 @@ class Collector
 
             if (true === $val)
             {
-                $output .= '</'.$key.'>';
+                $text .= '</'.$key.'>';
             }
         }
 
-        return $output;
+        return $text;
     }
 
     /**
@@ -184,9 +184,7 @@ class Collector
      */
     public function get_rawoutput()
     {
-        $output = $this->output;
-
-        return $output;
+        return $this->output;
     }
 
     /**
@@ -256,10 +254,10 @@ class Collector
         $patternClose = $this->getCodeSpecialPatternClose();
         $replacementOpen = $this->getCodeSpecialReplacementOpen();
         $replacementClose = $this->getCodeSpecialReplacementClose();
-        $data = str_replace($patternOpen, $replacementOpen, $data);
-        $data = str_replace($patternClose, $replacementClose, $data);
 
-        return $data;
+        $data = str_replace($patternOpen, $replacementOpen, $data);
+
+        return str_replace($patternClose, $replacementClose, $data);
     }
 
     /**
