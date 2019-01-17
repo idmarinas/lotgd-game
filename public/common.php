@@ -37,7 +37,7 @@ require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
  * LEGACY var.
  *
  * @var string
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 $logd_version = \Lotgd\Core\Application::VERSION;
 
@@ -45,7 +45,7 @@ $logd_version = \Lotgd\Core\Application::VERSION;
  * LEGACY var.
  *
  * @var string
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 $copyright = \Lotgd\Core\Application::COPYRIGHT;
 
@@ -53,7 +53,7 @@ $copyright = \Lotgd\Core\Application::COPYRIGHT;
  * LEGACY var.
  *
  * @var string
- * @deprecated 3.1.0 Delete in version 3.2.0
+ * @deprecated 4.0.0 Delete in version 4.1.0
  */
 $license = \Lotgd\Core\Application::LICENSE;
 
@@ -332,20 +332,13 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 }
 
 translator_setup();
-//set up the error handler after the intial setup (since it does require a
-//db call for notification)
-//-- Not is used
-// require_once 'lib/errorhandler.php';
 
-if (getsetting('debug', 0))
-{
     //Server runs in Debug mode, tell the superuser about it
-    if (SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
-    {
-        tlschema('debug');
-        output('<center>`$<h2>SERVER RUNNING IN DEBUG MODE</h2></center>`n`n', true);
-        tlschema();
-    }
+if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
+{
+    tlschema('debug');
+    output('<center>`$<h2>SERVER RUNNING IN DEBUG MODE</h2></center>`n`n', true);
+    tlschema();
 }
 
 // WARNING:
