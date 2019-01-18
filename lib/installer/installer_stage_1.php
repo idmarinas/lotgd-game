@@ -23,7 +23,7 @@ else
     output('You should check with the game authors to ensure that the below license agrees with the license under which it was released.');
     output('The license may be referenced at %s.`n', "<a target='_blank' rel='noopener noreferrer' href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode'>the Creative Commons site</a>", true);
 }
-$licenseview = implode('', file('LICENSE.txt'));
+$licenseview = implode('', file('public/LICENSE.txt'));
 $licenseview = preg_replace("/[^\na-zA-Z0-9!?.,;:'\"\\/\\()@ -\\]\\[]/", '', $licenseview);
 $licensemd5s = [
     'e281e13a86d4418a166d2ddfcd1e8032' => true
