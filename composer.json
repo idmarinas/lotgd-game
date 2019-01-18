@@ -9,7 +9,8 @@
     "prefer-stable": true,
     "license": "CC-BY-NC-SA-2.0",
     "require": {
-        "php": "^7.1.*",
+        "php": "^7.1",
+        "ext-intl": "*",
         "doctrine/orm": "^2.5",
         "ezyang/htmlpurifier": "^4.9",
         "hellogerard/jobby": "^3.4",
