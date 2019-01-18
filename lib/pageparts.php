@@ -173,7 +173,7 @@ function page_footer($saveuser = true)
 
     //output keypress script
     reset($quickkeys);
-    $script .= \LotgdTheme::renderLotgdTemplate('key-press-script.twig', ['quickkeys' => $quickkeys]);
+    $script .= \LotgdTheme::renderLotgdTemplate('core/key-press-script.twig', ['quickkeys' => $quickkeys]);
 
     //NOTICE |
     //NOTICE | Although under the license, you're not required to keep this
@@ -251,7 +251,7 @@ function page_footer($saveuser = true)
     $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
-    $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('paypal.twig', $paypalData);
+    $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('core/paypal.twig', $paypalData);
     unset($paypalData);
 
     //NOTICE |
