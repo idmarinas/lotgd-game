@@ -15,6 +15,7 @@ return [
             Lotgd\Core\Output\Color::class => Lotgd\Core\Factory\Output\Color::class,
             Lotgd\Core\Output\Code::class => Lotgd\Core\Factory\Output\Code::class,
             Lotgd\Core\Output\Format::class => Lotgd\Core\Factory\Output\Format::class,
+            Lotgd\Core\Output\Translator::class => Lotgd\Core\Factory\Output\Translator::class,
             Lotgd\Core\Template\Theme::class => Lotgd\Core\Factory\Template\Theme::class,
             Lotgd\Core\Http::class => Lotgd\Core\Factory\Http::class,
         ]
