@@ -1,5 +1,0 @@
-{# Show only to administrators #}
-{% if administrator %}
-	<br> <a href="{{ 'user.php'|lotgd_url }}">{{ '`0`bUser Editor´b'|t|colorize }}</a> <span>|</span> <a href='{{ 'viewpetition.php'|lotgd_url }}'>{{ '`0`bPetitions:´b'|t|colorize }}</a>
-	{{ petitioncount|colorize }}
-{% endif %}
