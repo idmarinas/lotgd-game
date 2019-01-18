@@ -12,6 +12,7 @@
 
 namespace Lotgd\Core\Template;
 
+use Lotgd\Core\Exception;
 use Zend\Filter\FilterChain;
 use Zend\Filter\StringToLower;
 use Zend\Filter\Word\SeparatorToDash;
@@ -21,6 +22,8 @@ class Theme extends Base
 {
     use \Lotgd\Core\Pattern\Container;
 
+    const TEMPLATES_BASE_DIR = 'templates';
+
     protected $themeName;
     protected $themefolder;
     protected $defaultSkin;
@@ -28,7 +31,7 @@ class Theme extends Base
     public function __construct(array $loader = [], array $options = [])
     {
         //-- Merge loaders
-        $loader = array_merge(['themes', 'templates'], $loader);
+        $loader = array_merge([static::TEMPLATES_BASE_DIR], $loader);
 
         parent::__construct($loader, $options);
     }
@@ -54,8 +57,6 @@ class Theme extends Base
     {
         global $html, $session;
 
-        $folder = $this->themefolder.'/templates';
-
         $userPre = $html['userPre'] ?? [];
         $user = $session['user'] ?? [];
         unset($user['password']);
@@ -64,7 +65,7 @@ class Theme extends Base
 
         $context = array_merge(['userPre' => $userPre, 'user' => $user, 'session' => $sesion], $context);
 
-        return $this->render("{$folder}/{$name}", $context);
+        return $this->render("{$this->themefolder}/{$name}", $context);
     }
 
     /**
@@ -106,23 +107,23 @@ class Theme extends Base
 
             $theme = $cookie->offsetExists('template') ? $cookie->offsetExists('template') : '';
 
-            if ('' == $theme || ! file_exists("themes/$theme"))
+            if ('' == $theme || ! file_exists(static::TEMPLATES_BASE_DIR."/$theme"))
             {
                 $theme = $settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
             }
 
             $this->defaultSkin = $theme;
 
-            $settings->saveSetting('defaultskin', $theme);
+            $settings->saveSetting('defaultskin', (string) $theme);
         }
 
         //-- This is necessary in case the theme is deleted
         //-- Search for a valid theme in directory
-        if (! file_exists("themes/{$this->defaultSkin}"))
+        if (! file_exists(static::TEMPLATES_BASE_DIR."/{$this->defaultSkin}"))
         {
             $this->defaultSkin = $this->getValidTheme();
 
-            $settings->saveSetting('defaultskin', $this->defaultSkin);
+            $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
         }
 
         if ($cookie->offsetExists('template') || '' == $cookie->offsetExists('template'))
@@ -160,22 +161,35 @@ class Theme extends Base
     /**
      * Search for a valid theme if removed.
      *
+     * @throws RuntimeException
+     *
      * @return array
      */
     private function getValidTheme(): array
     {
         // A generic way of allowing a theme to be selected.
         $skins = [];
-        $handle = @opendir('themes');
+        $handle = @opendir(static::TEMPLATES_BASE_DIR);
 
         while (false !== ($file = @readdir($handle)))
         {
             if (strpos($file, '.htm') > 0)
             {
+                if ('base.html' == $file)
+                {
+                    continue;
+                }
+
                 $skins[] = $file;
 
                 break; //-- We have 1 theme, no need more
             }
+        }
+
+        //-- Not found any valid theme
+        if (empty($skins))
+        {
+            throw new Exception\RuntimeException(sprintf('Not found a valid "theme.html" file in "%s" folder.', static::TEMPLATES_BASE_DIR), 1);
         }
 
         return $skins;
