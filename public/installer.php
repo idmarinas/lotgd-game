@@ -4,10 +4,6 @@
 //addnews ready
 //mail ready
 
-define('ALLOW_ANONYMOUS', true);
-define('OVERRIDE_FORCED_NAV', true);
-define('IS_INSTALLER', true);
-
 /**
  * Checking basic prerequisites for LOTGD.
  */
@@ -80,8 +76,14 @@ if (! $requirements_met)
     exit(1);
 }
 
+chdir(realpath(__DIR__ . '/..'));
+
+define('ALLOW_ANONYMOUS', true);
+define('OVERRIDE_FORCED_NAV', true);
+define('IS_INSTALLER', true);
+
 //-- Need because this check is before include common.php
-require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
+require_once 'vendor/autoload.php'; //-- Autoload class
 
 if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 {
