@@ -19,12 +19,6 @@ class Cache extends Filesystem
 
     public function __construct(array $options = [])
     {
-        $default = [
-            'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di'
-        ];
-
-        $options = array_merge($default, $options);
-
         parent::__construct($options);
 
         //-- Add plugins to cache system
