@@ -40,11 +40,7 @@ if (DB_CHOSEN)
                 // either a non-encrypted password, or an encrypted singly
                 // password.
                 if (32 == strlen($row['password']) &&
-                $row['password'] == $p1)
-                {
-                    $needsauthentication = false;
-                }
-                elseif ($row['password'] == $password)
+                $row['password'] == $p1 || $row['password'] == $password)
                 {
                     $needsauthentication = false;
                 }
