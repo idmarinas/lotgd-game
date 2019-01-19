@@ -23,7 +23,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
 
 [![PayPal - The safer, easier way to pay online!](https://img.shields.io/badge/donate-help_my_project-ffaa29.svg?logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CAYNPHQ8VN92C&source=url)
-[![Liberapay - Donate](https://img.shields.io/liberapay/gives/IDMarinas.svg)](https://liberapay.com/IDMarinas/donate)
+[![Liberapay - Donate](https://img.shields.io/liberapay/gives/IDMarinas.svg?logo=liberapay)](https://liberapay.com/IDMarinas/donate)
 [![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)
 
 # About
