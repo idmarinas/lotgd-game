@@ -25,14 +25,6 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                     'password' => $session['dbinfo']['DB_PASS']
                 ],
                 'prefix' => $session['dbinfo']['DB_PREFIX']
-            ],
-            'cache' => [
-                'active' => $session['dbinfo']['DB_USEDATACACHE'],
-                'config' => [
-                    'namespace' => 'lotgd',
-                    'ttl' => 900,
-                    'cache_dir' => $session['dbinfo']['DB_DATACACHEPATH'],
-                ]
             ]
         ]
     ];
@@ -73,14 +65,14 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
         output('`2Create a new file, past the entire contents from above into it`2 ).');
         output('When you have that done, save the file as "%s" and upload this to the location you have LoGD at.', \Lotgd\Core\Application::FILE_DB_CONNECT);
         output('You can refresh this page to see if you were successful.');
-        output('`nIf have problems, you can try delete file "cache/service-manager.config.php".');
+        output('`nIf have problems, you can try delete file "%s".', \Lotgd\Core\ServiceManager::CACHE_FILE);
     }
 }
 
 //-- Delete the old cache file from the Service Manager and force it to generate it again.
-if (file_exists('cache/service-manager.config.php'))
+if (file_exists(\Lotgd\Core\ServiceManager::CACHE_FILE))
 {
-    unlink('cache/service-manager.config.php');
+    unlink(\Lotgd\Core\ServiceManager::CACHE_FILE);
 }
 
 if (! $success)

@@ -7,8 +7,6 @@ if (httppostisset('DB_HOST'))
     $session['dbinfo']['DB_USER'] = (string) httppost('DB_USER');
     $session['dbinfo']['DB_PASS'] = (string) httppost('DB_PASS');
     $session['dbinfo']['DB_NAME'] = (string) httppost('DB_NAME');
-    $session['dbinfo']['DB_USEDATACACHE'] = (int) httppost('DB_USEDATACACHE');
-    $session['dbinfo']['DB_DATACACHEPATH'] = (string) httppost('DB_DATACACHEPATH');
 }
 
 output('`@`c`bTesting the Database Connection´b´c`2');
@@ -188,38 +186,35 @@ else
     {
         output('`2Result: `@Pass`n');
     }
-    output('`n`^Test: `#Checking datacache`n');
+    output('`n`^Test: `#Checking cache directory`n');
 
-    if (! $session['dbinfo']['DB_USEDATACACHE'])
-    {
-        output('-----skipping, not selected-----`n');
-    }
-    else
-    {
-        $fp = @fopen($session['dbinfo']['DB_DATACACHEPATH'].'/dummy.php', 'w+');
+    $config = LotgdLocator::get('GameConfig');
+    $cacheDir = $options['lotgd_core']['cache']['base_cache_dir'] ?? 'cache';
 
-        if ($fp)
+    $fp = @fopen("{$cacheDir}/dummy.php", 'w+');
+
+    if ($fp)
+    {
+        if (false !== fwrite($fp, 'Dummy test'))
         {
-            if (false != fwrite($fp, 'Dummy test'))
-            {
-                output('`2Result: `@Pass`n');
-            }
-            else
-            {
-                output('`2Result: `$Fail`n');
-                rawoutput('<blockquote>');
-                $issues[] = '`^I was not able to write to your datacache directory!`n';
-                rawoutput('</blockquote>');
-            }
-            fclose($fp);
-            @unlink($session['dbinfo']['DB_DATACACHEPATH'].'/dummy.php');
+            output('`2Result: `@Pass`n');
         }
         else
         {
             output('`2Result: `$Fail`n');
-            $issues[] = '`^I was not able to write to your datacache directory! Check your permissions there!`n';
+            rawoutput('<blockquote>');
+            $issues[] = '`^I was not able to write to your datacache directory!`n';
+            rawoutput('</blockquote>');
         }
+        fclose($fp);
+        @unlink("{$cacheDir}/dummy.php");
     }
+    else
+    {
+        output('`2Result: `$Fail`n');
+        $issues[] = '`^I was not able to write to your datacache directory! Check your permissions there!`n';
+    }
+
     output('`n`^Overall results:`2`n');
 
     if (0 == count($issues))

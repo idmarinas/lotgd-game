@@ -40,7 +40,7 @@ $link = DB::connect();
  */
 $config = new DoctrineConfiguration();
 $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(['src/core/Entity'], false));
-$config->setProxyDir($session['dbinfo']['DB_DATACACHEPATH'] ?? 'cache/' . 'doctrine/Proxy');
+$config->setProxyDir('cache/doctrine/Proxy');
 $config->setProxyNamespace('Lotgd\Installer\Proxies');
 
 $config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));

@@ -186,8 +186,6 @@ if (! isset($session['dbinfo']))
         'DB_USER' => '',
         'DB_PASS' => '',
         'DB_NAME' => '',
-        'DB_USEDATACACHE' => false,
-        'DB_DATACACHEPATH' => 'cache',
         'DB_PREFIX' => ''
     ];
 }
