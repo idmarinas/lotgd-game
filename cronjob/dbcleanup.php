@@ -1,8 +1,6 @@
 <?php
 
-chdir(realpath(__DIR__ . '/..'));
-
 define('ALLOW_ANONYMOUS', true);
 
-require_once 'common.php';
+require_once 'public/common.php';
 require 'lib/newday/dbcleanup.php';
