@@ -144,7 +144,8 @@ class Collector
 
         //-- Sustitute placeholders
         $sustitute = [
-            '{playername}' => $session['user']['name'],
+            '{playername}' => $session['user']['playername'],
+            '{charactername}' => $session['user']['name'],
             '{playerweapon}' => $session['user']['weapon'],
             '{playerarmor}' => $session['user']['armor']
         ];
