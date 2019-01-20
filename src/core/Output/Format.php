@@ -103,20 +103,6 @@ class Format
     }
 
     /**
-     * Select the plural or singular form according to the past number.
-     *
-     * @param int    $qty      Quantity to determine form
-     * @param string $singular Singular word
-     * @param string $plural   Plural word
-     *
-     * @return string
-     */
-    public static function pluralize($qty, $singular, $plural)
-    {
-        return 1 == $qty ? $singular : $plural;
-    }
-
-    /**
      * Set decimal point.
      *
      * @param string $val
