@@ -20,8 +20,6 @@ use Zend\Filter\Word\UnderscoreToDash;
 
 class Theme extends Base
 {
-    use \Lotgd\Core\Pattern\Container;
-
     const TEMPLATES_BASE_DIR = 'templates';
 
     protected $themeName;
