@@ -16,6 +16,7 @@ return [
             Lotgd\Core\Output\Code::class => Lotgd\Core\Factory\Output\Code::class,
             Lotgd\Core\Output\Format::class => Lotgd\Core\Factory\Output\Format::class,
             Lotgd\Core\Translator\Translator::class => Lotgd\Core\Factory\Translator\Translator::class,
+            Zend\I18n\Translator\LoaderPluginManager::class => Lotgd\Core\Factory\Translator\LoaderPluginManager::class,
             Lotgd\Core\Template\Theme::class => Lotgd\Core\Factory\Template\Theme::class,
             Lotgd\Core\Http::class => Lotgd\Core\Factory\Http::class,
         ]
