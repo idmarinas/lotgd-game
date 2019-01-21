@@ -24,8 +24,7 @@ trait Color
     {
         if (! $this->colors)
         {
-            $colors = $this->getContainer(\Lotgd\Core\Output\Color::class);
-            $this->colors = $colors;
+            $this->colors = $this->getContainer(\Lotgd\Core\Output\Color::class);
         }
 
         return $this->colors->getColors();

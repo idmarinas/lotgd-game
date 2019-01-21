@@ -31,8 +31,7 @@ trait Code
     {
         if (! $this->codes)
         {
-            $codes = $this->getContainer(\Lotgd\Core\Output\Code::class);
-            $this->codes = $codes;
+            $this->codes = $this->getContainer(\Lotgd\Core\Output\Code::class);
         }
 
         return $this->codes->getCodes();
