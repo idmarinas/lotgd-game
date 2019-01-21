@@ -14,12 +14,20 @@ return [
             ],
         ],
         'translation' => [
-            'locale' => 'en',
+            'locale' => ['en', 'en'],
+            'translator_plugins' => [
+                'aliases' => [
+                    'Yaml' => \Lotgd\Core\Translator\Loader\Yaml::class,
+                ],
+                'factories' => [
+                    \Lotgd\Core\Translator\Loader\Yaml::class => \Zend\ServiceManager\Factory\InvokableFactory::class
+                ]
+            ],
             'translation_file_patterns' => [
                 [
-                    'type' => 'php',
+                    'type' => 'Yaml',
                     'base_dir' => 'translations',
-                    'pattern' => '%s/pages/home.php',
+                    'pattern' => '%s/pages/home.yaml',
                     'text_domain' => 'home'
                 ]
             ],
