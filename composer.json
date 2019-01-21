@@ -16,7 +16,8 @@
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
         "jaxon-php/jaxon-dialogs": "^1.2",
-        "symfony/filesystem": "^3.4",
+        "symfony/filesystem": "^4.2",
+        "symfony/yaml": "^4.2",
         "twig/twig": "^2.5",
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.1",
@@ -38,8 +39,7 @@
         "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
-        "phan/phan": "^1.1",
-        "psecio/iniscan": "^3.6"
+        "phan/phan": "^1.1"
     },
     "autoload": {
         "psr-4": {
