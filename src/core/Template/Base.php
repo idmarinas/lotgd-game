@@ -8,25 +8,24 @@
 
 namespace Lotgd\Core\Template;
 
+use Lotgd\Core\Translator\Translator;
 use Twig_Environment;
+use Twig_Filter;
+use Twig_Function;
 use Twig_Loader_Filesystem;
-use Twig_SimpleFilter;
-use Twig_SimpleFunction;
 
 class Base extends Twig_Environment
 {
-    protected $twig;
-    protected $themename;
-    protected $themefolder;
-    protected $defaultSkin;
+    use \Lotgd\Core\Pattern\Container;
+
+    protected $translator;
 
     public function __construct(array $loader = [], array $options = [])
     {
         //-- Merge options
         $default = [
             'cache' => 'cache/templates',
-            'autoescape' => false,
-            // 'auto_reload' => true
+            'autoescape' => false
         ];
         $options = array_merge($default, $options);
 
@@ -48,71 +47,68 @@ class Base extends Twig_Environment
     }
 
     /**
-     * Filters create for LOTGD.
+     * Get translator instance.
+     *
+     * @return Lotgd\Core\Output\Translator
+     */
+    public function getTranslator(): Translator
+    {
+        if (! $this->translator instanceof Translator)
+        {
+            $this->translator = $this->getContainer(Translator::class);
+        }
+
+        return $this->translator;
+    }
+
+    /**
+     * Filters created for LotGD.
      *
      * @return array
      */
-    private function lotgdFilters()
+    private function lotgdFilters(): array
     {
         return [
             //-- Access to appoencode function in template
-            new Twig_SimpleFilter('colorize', function (string $string)
+            new Twig_Filter('colorize', function (string $string)
             {
                 return appoencode($string, true);
             }),
             //-- Access to color_sanitize function in template
-            new Twig_SimpleFilter('uncolorize', function (string $string)
+            new Twig_Filter('uncolorize', function (string $string)
             {
                 return color_sanitize($string);
             }),
             //-- Add a link, but not nav
-            new Twig_SimpleFilter('lotgd_url', function ($url)
+            new Twig_Filter('lotgd_url', function ($url)
             {
                 addnav('', $url);
 
                 return $url;
             }),
-            //-- Create a link popup
-            new Twig_SimpleFilter('lotgd_popup', function ($url)
-            {
-                return popup($url);
-            }),
-            new Twig_SimpleFilter('nltoappon', function ($string)
+            new Twig_Filter('nltoappon', function ($string)
             {
                 require_once 'lib/nltoappon.php';
 
                 return nltoappon($string);
             }),
             //-- Format a number
-            new Twig_SimpleFilter('numeral', function ($number, $decimals = 0)
+            new Twig_Filter('numeral', function ($number, $decimals = 0)
             {
                 return \LotgdFormat::numeral($number, $decimals);
             }),
-            //-- select the plural or singular form according to the past number
-            new Twig_SimpleFilter('pluralize', function ($number, $singular, $plural)
-            {
-                return \LotgdFormat::pluralize($number, $singular, $plural);
-            }),
             //-- Translate a text in template
-            new Twig_SimpleFilter('t', function ($data, $namespace = false)
+            new Twig_Filter('t', function (string $message, array $parameters = [], string $textDomain = 'default', string $locale = null)
             {
-                if (is_array($data))
-                {
-                    $text = str_replace('`%', '`%%', $data[0]);
-                    unset($data[0]);
-
-                    return vsprintf(translate_inline($text, $namespace), $data);
-                }
-
-                return translate_inline($data, $namespace);
+                return $this->getTranslator()->trans($message, $parameters, $textDomain, $locale);
             }),
             //-- Show a relative date from now
-            new Twig_SimpleFilter('relativedate', function ($string)
+            new Twig_Filter('relativedate', function ($string)
             {
                 return \LotgdFormat::relativedate($string);
             }),
             //-- Search and replace keywords
-            new Twig_SimpleFilter('sustitute', function ($string)
+            new Twig_Filter('sustitute', function ($string)
             {
                 global $output;
 
@@ -121,14 +117,19 @@ class Base extends Twig_Environment
         ];
     }
 
-    private function lotgdFunctions()
+    /**
+     * Functions created for LotGD.
+     *
+     * @return array
+     */
+    private function lotgdFunctions(): array
     {
         return [
-            new Twig_SimpleFunction('modulehook', function ($name, $data)
+            new Twig_Function('modulehook', function ($name, $data)
             {
                 return modulehook($name, $data);
             }),
-            new Twig_SimpleFunction('isValidProtocol', function ($url)
+            new Twig_Function('isValidProtocol', function ($url)
             {
                 // We should check all legeal protocols
                 $protocols = ['http', 'https', 'ftp', 'ftps'];
@@ -139,17 +140,17 @@ class Base extends Twig_Environment
                 return in_array($protocol, $protocols);
             }),
             //-- Get value of setting
-            new Twig_SimpleFunction('getsetting', function ($name, $default)
+            new Twig_Function('getsetting', function ($name, $default)
             {
                 return getsetting($name, $default);
             }),
             //-- Time in the game
-            new Twig_SimpleFunction('gametime', function ()
+            new Twig_Function('gametime', function ()
             {
                 return getgametime();
             }),
             //-- Seconds to next game day
-            new Twig_SimpleFunction('secondstonextgameday', function ()
+            new Twig_Function('secondstonextgameday', function ()
             {
                 return secondstonextgameday();
             }),
