@@ -24,5 +24,9 @@ define([
         })
         jQuery('.ui.tooltip').popup()
         jQuery('.ui.progress').progress({ precision: 10 })
+        jQuery('.ui.message i.close').on('click', (event) =>
+        {
+            jQuery(event.target).closest(jQuery(event.target).parent('.message')).transition('fade')
+        })
     })
 })
