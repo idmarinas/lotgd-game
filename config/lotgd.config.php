@@ -23,14 +23,6 @@ return [
                     \Lotgd\Core\Translator\Loader\Yaml::class => \Zend\ServiceManager\Factory\InvokableFactory::class
                 ]
             ],
-            'translation_file_patterns' => [
-                [
-                    'type' => 'Yaml',
-                    'base_dir' => 'translations',
-                    'pattern' => '%s/pages/home.yaml',
-                    'text_domain' => 'home'
-                ]
-            ],
             'cache' => [
                 'adapter' => 'filesystem',
                 'ttl' => 86400,
