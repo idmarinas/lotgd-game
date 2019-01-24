@@ -7,7 +7,6 @@ module.exports = function (gulp)
     const lotgdJs = require('../build/lotgd-js')
     const themePre = require('../build/theme-pre')
     const themePost = require('../build/theme-post')
-    const themeEnd = require('../build/theme-end')
     require('../../../semantic/tasks/collections/build')(gulp)
     const semantic = require('../../../semantic/tasks/build')
 
@@ -23,8 +22,6 @@ module.exports = function (gulp)
     gulp.task('theme-pre', themePre)
 
     gulp.task('theme-post', themePost)
-
-    gulp.task('theme-end', themeEnd)
 
     gulp.task('semantic-ui', semantic)
     gulp.task('semantic-ui').description = 'Build Semantic UI'
