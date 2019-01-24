@@ -19,7 +19,7 @@ define([
     Lotgd.md5PassLogin = function ()
     {
         //-- Load script
-        jQuery.getScript('resources/md5.js', function ()
+        jQuery.getScript('js/md5.js', function ()
         {
             // encode passwords before submission to protect them even from network sniffing attacks.
             var passbox = document.getElementById('password')

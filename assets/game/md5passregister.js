@@ -19,7 +19,7 @@ define([
     Lotgd.md5PassRegister = function ()
     {
         //-- Load script
-        jQuery.getScript('resources/md5.js', function ()
+        jQuery.getScript('js/md5.js', function ()
         {
             // encode passwords
             let plen = document.getElementById('passlen')
