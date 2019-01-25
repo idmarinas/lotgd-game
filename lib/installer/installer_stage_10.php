@@ -54,7 +54,7 @@ if (0 == DB::num_rows($result))
                 //-- Configure character
                 $character = new \Lotgd\Core\Entity\Characters();
                 $character->setPlayername((string) $name)
-                    ->setName("`%Admin `&{$name}`0")
+                    ->setName("`%Admin`0 `&{$name}`0")
                     ->setCtitle('`%Admin`0')
                     ->setAcct($account)
                 ;
