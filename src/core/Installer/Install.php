@@ -3,7 +3,12 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 4.0.0
  */
 
 namespace Lotgd\Core\Installer;
@@ -13,6 +18,9 @@ use Lotgd\Core\Component\Filesystem;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Hydrator\ClassMethods;
 
+/**
+ * Script to install and update game.
+ */
 class Install
 {
     use \Lotgd\Core\Pattern\Container;
