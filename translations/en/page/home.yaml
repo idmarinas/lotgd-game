@@ -1,0 +1,26 @@
+'title': 'Legend of the Green Dragon'
+'welcome': "Welcome to Legend of the Green Dragon, a browser based role playing game, based on Seth Able's Legend of the Red Dragon.`n"
+'clock': '`@The current time in {villagename} is `%{gameclock}`0.`0`n'
+'newdaytimer': '`@Next new game day in: `${n,time,HH:mm:ss} (real time)`0.`0`n`n'
+'newestplayer': '`QThe newest resident of the realm is: `&{newestplayer}`0.`0`n`n'
+
+# Text related to server
+'server':
+    'version': '`2Game server running version: `@{version}`0`0'
+
+# Text show in skin select form
+'skin':
+    'submit': 'Choose'
+
+# Text that show in login form
+'login':
+    'message': 'Enter your name and password to enter the realm.'
+    'username': 'Username'
+    'password': 'Password'
+    'login': 'Log in'
+    'forgot': 'Did you forget your password? Go <a href="create.php?op=forgot">here</a> to retrieve a new one!'
+
+# Texts that show when server is full
+'serverfull':
+    'message': '`$Server Full!`0'
+    'wait': '`^Please wait until some users have logged out.`0'
