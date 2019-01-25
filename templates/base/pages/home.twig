@@ -1,0 +1,56 @@
+{% translate_default_domain 'page-home' %}
+
+<div class="center aligned">
+
+    {{ 'welcome'|t|colorize }}
+
+    {# Show LotGD clock #}
+    {% if gameclock %}
+        {{ 'clock'|t({'villagename': villagename, 'gameclock': gameclock})|colorize }}
+    {% endif %}
+
+    {# Show how long it takes for the next new day #}
+    {% if newdaytimer %}
+        {{ 'newdaytimer'|t({'n': newdaytimer})|colorize }}
+    {% endif %}
+
+    {# Show the last registered player #}
+    {% if newestplayer %}
+        {{ 'newestplayer'|t({'newestplayer': newestplayer})|colorize }}
+    {% endif %}
+
+    {# Results messages of hook "index" #}
+    {% for message in hookIndex %}
+        {{ message|colorize }}
+    {% endfor %}
+
+    {# Results messages of hook "hometext" #}
+    {% for message in hookHomeText %}
+        {{ message|colorize }}
+    {% endfor %}
+
+    {# Show the login form or a full server message #}
+    {% if not serverFull %}
+        {% include 'base/pages/home/login.twig' %}
+    {% else %}
+        {% include 'base/pages/home/serverfull.twig' %}
+    {% endif %}
+
+    {# Results messages of hook "homemiddle" #}
+    {% for message in hookMomeMiddle %}
+        {{ message|colorize }}
+    {% endfor %}
+
+    {# Login banner text if exist #}
+    {% if loginBanner %}
+        {{ '`n`c`b`&%s`0´b´c`n'|format(loginBanner)|colorize }}
+    {% endif %}
+
+    {# Version of the game the server is running #}
+    {{ 'server.version'|t({ 'version': serverVersion })|colorize }}
+
+    {% if selectSkin %}
+        {% include 'base/pages/home/selectskin.twig' with { 'select': selectSkin } %}
+    {% endif %}
+</div>
+
