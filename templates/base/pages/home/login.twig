@@ -1,0 +1,30 @@
+{% translate_default_domain 'page-home' %}
+
+<form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassLogin();">
+    {{ 'login.message'|t }}
+    <br>
+    <table class="ui centered center aligned very basic collapsing table">
+        <tr>
+            <td><img src='images/logindragon.gif' class='noborder'></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ui form">
+                    <div class="inline fields">
+                        <div class="field">
+                            <input name='name' id='name' accesskey='u' placeholder="{{ 'login.username'|t }}">
+                        </div>
+                        <div class="field">
+                            <input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'login.password'|t }}">
+                        </div>
+                        <div class="field">
+                            <input class="ui button" type='submit' value='{{ 'login.login'|t }}'>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <p>{{ 'login.forgot'|t }}</p>
+</form>
