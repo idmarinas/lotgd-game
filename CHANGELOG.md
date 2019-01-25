@@ -10,9 +10,25 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :cyclone: CHANGES
 
 -   :warning: **_NEW Structure of files for web_**
-    - Most of the Web files have been reorganized
-        - Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php` (all .php files in root) are moved to `public/` folder.
+    -   Most of the Web files have been reorganized.
+        -   Some files are moved to `public/` folder
+            -   Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php`... (all .php files in root).
+            -   Folder `cronjob/`
+            -   Folder `images/`
+            -   Folder `resources/` and renamed to `js/` and `ccs/`
+            -   Folder `themes`
 -   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
+-   **_New Translation system_**
+    -   Remplaced old system of translation for new system. About this new system:
+        -   Used a custom _Translator_ based in `Zend\I18n\Translator\Translator`
+        -   This new system not used Data Base to store translations.
+        -   Used `.yaml` files to store translations.
+            -   Files are in `translations/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
+                - By default have two main scopes:
+                    - `pages` This is where the translation files from the main pages are stored.
+                    - `modules` This is where the translation files are stored in the modules.
+            -   The translations are automatically loaded by the translation factory.
+                -   It is possible to have more scopes besides `pages` and `modules` but remember the structure of the folder `translations`.
 -   **common.php** Updated script of log http referers.
     -   Changes the way that static classes are used:
           **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
@@ -28,6 +44,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
     -   Some files have been modified to fit this
+    -   UpdatedFor keywords of `sustitute()` function:
+        -   `{playername}` Replaced by player's name (**Without** the title included)
+        -   `{charactername}` Replaced by player's name (**With** the title included)
+        -   `{playerweapon}` Replaced by the name of the player's weapon
+        -   `{playerarmor}` Replaced by the name of the player's armor
     -   Now for close color/code code you can use:
         -   Use it's own code with **´** before. Examples:
             -   `` `4This text is dark red´4``
@@ -45,23 +66,35 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **New namespaces for this**
     -   `Lotgd\Core\Lib\Dbwrapper` changed to `Lotgd\Core\Db\Dbwrapper`
     -   `Lotgd\Core\Lib\Doctrine` changed to `Lotgd\Core\Db\Doctrine`
+-   **Twig template**
+    -   The translation filter is added as an extension
+        -   The new translation filter allows you to set a target language per template
+            -   Syntax: `{% translate_default_domain 'scope-domain' %}`
+                -   `scope` is "page" or "module". You can add more. Is a folder where is domain file.
+                -   `domain` is a name of `.yaml` file. (Avoid extension)
 -   **THEME**
-        \- Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
-            \- [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
-            \- Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
-        \- Nothing changed with this
+    -   Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
+        -   [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
+        -   Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
+        -   Nothing changed with this.
+    -   :warning: **_New structure for theme templates and changed how created new themes_**
+        -   All theme templates are moved to `templates/` folder
+        -   File `jade.html` moved too.
+        -   To create new themes now you can extend original theme, and them customize templates.
 
 ### :star: FEATURES
 
 -   _New Installer system_ This version have a new installer of game.
     -   :warning: The new installation system only allows upgrading from the previous version.
+    -   You can no longer choose whether to use the cache and the cache directory during installation.
+        -   To change this you need to do it from a local configuration file in the directory "config/autoload/local/cache.php"
+            > An example of how to configure the cache can be found in the file "config/lotgd.config.php".
+    -   Now check if you can write to the cache directory.
 -   _New Component of Game_ `Lotgd\Core\Component\Filesystem`
     -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
         -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
 -   **lib/class/lotgdFormat.php** Added new function:
     -   `LotgdFormat::pluralize(int $number, string $singular, string $plural)` select the plural or singular form according to the past number
--   **src/core/Template/Base.php** Added new filter:
-    -   `pluralize` select the plural or singular form according to the past number
 -   **_Migrating to Doctrine_**
     -   In this version game are migrating to Doctrine ORM for access to data base.
     -   You can still use Zend DB and its classes to access it, but it is recommended to use Doctrine, as this maintains the integrity of the database.
