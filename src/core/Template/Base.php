@@ -8,7 +8,6 @@
 
 namespace Lotgd\Core\Template;
 
-use Lotgd\Core\Translator\Translator;
 use Twig_Environment;
 use Twig_Filter;
 use Twig_Function;
@@ -17,8 +16,6 @@ use Twig_Loader_Filesystem;
 class Base extends Twig_Environment
 {
     use \Lotgd\Core\Pattern\Container;
-
-    protected $translator;
 
     public function __construct(array $loader = [], array $options = [])
     {
@@ -44,21 +41,6 @@ class Base extends Twig_Environment
         {
             $this->addFunction($function);
         }
-    }
-
-    /**
-     * Get translator instance.
-     *
-     * @return Lotgd\Core\Output\Translator
-     */
-    public function getTranslator(): Translator
-    {
-        if (! $this->translator instanceof Translator)
-        {
-            $this->translator = $this->getContainer(Translator::class);
-        }
-
-        return $this->translator;
     }
 
     /**
@@ -96,11 +78,6 @@ class Base extends Twig_Environment
             new Twig_Filter('numeral', function ($number, $decimals = 0)
             {
                 return \LotgdFormat::numeral($number, $decimals);
-            }),
-            //-- Translate a text in template
-            new Twig_Filter('t', function (string $message, array $parameters = [], string $textDomain = 'default', string $locale = null)
-            {
-                return $this->getTranslator()->trans($message, $parameters, $textDomain, $locale);
             }),
             //-- Show a relative date from now
             new Twig_Filter('relativedate', function ($string)
