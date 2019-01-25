@@ -202,9 +202,9 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 break;
             }
 
-            while (false != ($file = @readdir($handle)))
+            while (false !== ($file = @readdir($handle)))
             {
-                if (strpos($file, '.htm') > 0)
+                if ('html' == pathinfo($file, PATHINFO_EXTENSION))
                 {
                     $skins[] = $file;
                 }
