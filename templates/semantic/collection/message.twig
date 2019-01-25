@@ -1,0 +1,12 @@
+<div class="ui {{ class }} message">
+    {% if close %}
+        <i class="close icon"></i>
+    {% endif %}
+
+    {% if header %}
+        <div class="header">{{ header }}</div>
+    {% else %}
+
+    {% endif %}
+    <p>{{ message }}</p>
+</div>
