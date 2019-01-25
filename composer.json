@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.1",
         "ext-intl": "*",
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "^2.6",
         "ezyang/htmlpurifier": "^4.9",
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
