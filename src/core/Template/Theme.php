@@ -171,13 +171,8 @@ class Theme extends Base
 
         while (false !== ($file = @readdir($handle)))
         {
-            if (strpos($file, '.htm') > 0)
+            if ('html' == pathinfo($file, PATHINFO_EXTENSION))
             {
-                if ('base.html' == $file)
-                {
-                    continue;
-                }
-
                 $skins[] = $file;
 
                 break; //-- We have 1 theme, no need more
