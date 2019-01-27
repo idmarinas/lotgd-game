@@ -3,7 +3,12 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 2.7.0
  */
 
 namespace Lotgd\Core\Factory\Template;
@@ -17,11 +22,14 @@ class Theme implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $container->get('GameConfig');
+        $options = $container->get('GameConfig')['lotgd_core'] ?? [];
+        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'cache/', '/');
 
         $template = new TemplateTheme([], [
+            //-- Used dir of cache
+            'cache' => "{$cacheDir}/templates",
             //-- Used in development for reload .twig templates
-            'auto_reload' => (bool) ($options['lotgd_core']['development'] ?? false)
+            'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
         $template->setContainer($container);
         $template->prepareTheme();
