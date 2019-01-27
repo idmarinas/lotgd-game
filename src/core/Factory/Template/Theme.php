@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Factory\Template;
 
+use Lotgd\Core\Component;
+use Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Template\Theme as TemplateTheme;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\FactoryInterface;
@@ -32,6 +34,7 @@ class Theme implements FactoryInterface
             'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
         $template->setContainer($container);
+        $template->addExtension(new Extension\FlashMessages($container->get(Component\FlashMessages::class)));
         $template->prepareTheme();
 
         return $template;
