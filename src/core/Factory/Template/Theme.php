@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Factory\Template;
 
+use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Component;
 use Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Template\Theme as TemplateTheme;
@@ -34,6 +35,7 @@ class Theme implements FactoryInterface
             'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
         $template->setContainer($container);
+        $template->addExtension(new Extension\Translator($container->get(Translator::class)));
         $template->addExtension(new Extension\FlashMessages($container->get(Component\FlashMessages::class)));
         $template->prepareTheme();
 
