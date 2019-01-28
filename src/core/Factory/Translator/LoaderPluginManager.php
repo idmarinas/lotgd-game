@@ -13,13 +13,13 @@
 namespace Lotgd\Core\Factory\Translator;
 
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Exception;
 use Zend\I18n\Translator\LoaderPluginManager as ZendLoaderPluginManager;
 use Zend\ServiceManager\{
     Config,
     FactoryInterface,
     ServiceLocatorInterface
 };
-
 class LoaderPluginManager implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $name, array $options = null)
@@ -35,13 +35,14 @@ class LoaderPluginManager implements FactoryInterface
 
         $config = $container->get('GameConfig')['lotgd_core'] ?? [];
 
-        // If we do not have translator_plugins configuration, nothing more to do
-        if (! isset($config['translation']['translator_plugins']) || ! is_array($config['translation']['translator_plugins']))
+        $translatorPlugins = $config['translation']['translator_plugins'] ?? [];
+        //-- If not find config for plugins throw exception
+        if (empty($translatorPlugins))
         {
-            return $pluginManager;
+            throw new Exception\ConfigNotFound('The "translator_plugins" configuration is missing in the "translation" configuration matrix.');
         }
 
-        (new Config($config['translation']['translator_plugins']))->configureServiceManager($pluginManager);
+        (new Config($translatorPlugins))->configureServiceManager($pluginManager);
 
         return $pluginManager;
     }
