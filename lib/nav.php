@@ -62,11 +62,31 @@ function appendlink($link, $new)
     return $link.'?'.$new;
 }
 
+$navtldomain = 'app';
 $navsection = '';
 $navbysection = [];
 $navschema = [];
 $navnocollapse = [];
 $block_new_navs = false;
+
+/**
+ * Add a text domain to translator for navigation.
+ *
+ * @param string $domain
+ */
+function tlnavdomain(?string $domain = null)
+{
+    global $navtldomain;
+
+    if ($domain)
+    {
+        $navtldomain = $domain;
+
+        return;
+    }
+
+    $navtldomain = 'app'; //-- Default value
+}
 
 /**
  * Allow header/footer code to block/unblock additional navs.
@@ -384,7 +404,7 @@ $quickkeys = [];
 function private_addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
     //don't call this directly please.  I'll break your thumbs if you do.
-    global $nav, $session, $accesskeys, $quickkeys, $navschema, $notranslate;
+    global $nav, $session, $accesskeys, $quickkeys, $navschema, $notranslate, $navtldomain;
 
     if (is_blocked($link))
     {
@@ -424,11 +444,17 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
         if ('!!!addraw!!!' != $link)
         {
+            $params = $text;
+            $text = array_shift($params);
+
             if ($translate)
             {
-                $text[0] = $translator->trans($text[0], [], 'navigation-app');
+                $text = $translator->trans($text, $params, "navigation-{$navtldomain}");
             }
-            $text = call_user_func_array('sprintf', $text);
+            else
+            {
+                $text = sprintf($text, $params);
+            }
         }
         else
         {
@@ -448,7 +474,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
         if ('!!!addraw!!!' != $link && $text > '' && $translate)
         {
-            $text = $translator->trans($text, [], 'navigation-app');
+            $text = $translator->trans($text, [], "navigation-{$navtldomain}");
         } //leave the hack in here for now, use addnav_notl please
     }
 
