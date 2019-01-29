@@ -7,23 +7,23 @@ $settings = LotgdLocator::get(Lotgd\Core\Lib\Settings::class);
 
 function savesetting(string $settingname, $value)
 {
-	global $settings;
+    global $settings;
 
-	return $settings->saveSetting($settingname, $value);
+    return $settings->saveSetting($settingname, $value);
 }
 
 function clearsettings()
 {
-	global $settings;
+    global $settings;
 
-	return $settings->clearSettings();
+    return $settings->clearSettings();
 }
 
 function getsetting(string $settingname, $default = false)
 {
-	global $settings;
+    global $settings;
 
-	return $settings->getSetting($settingname, $default);
+    return $settings->getSetting($settingname, $default);
 }
 
 
@@ -31,5 +31,5 @@ function getAllSettings()
 {
     global $settings;
 
-	return $settings->getAllSettings();
+    return $settings->getAllSettings();
 }

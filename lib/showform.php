@@ -131,29 +131,29 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     unset($text);
 
     if (! empty($tabMenu))
-	{
-		$tabMenu = array_chunk($tabMenu , ceil(count($tabMenu)/4));
+    {
+        $tabMenu = array_chunk($tabMenu , ceil(count($tabMenu)/4));
 
-		$popupMenu = '<div class="ui flowing popup transition hidden lotgd form">';
-		$popupMenu .= '<div class="ui stackable equal width divided grid">';
-		foreach($tabMenu as $menu)
-		{
-			$popupMenu .= '<div class="column"><div class="ui list">';
-			$popupMenu .= implode('', $menu);
-			$popupMenu .= '</div></div>';
-		}
-		$popupMenu .= '</div></div>';
+        $popupMenu = '<div class="ui flowing popup transition hidden lotgd form">';
+        $popupMenu .= '<div class="ui stackable equal width divided grid">';
+        foreach($tabMenu as $menu)
+        {
+            $popupMenu .= '<div class="column"><div class="ui list">';
+            $popupMenu .= implode('', $menu);
+            $popupMenu .= '</div></div>';
+        }
+        $popupMenu .= '</div></div>';
 
-		$menu = sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
-			translate_inline('Browse'),
-			$popupMenu,
-		    $tabActive
-		);
+        $menu = sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
+            translate_inline('Browse'),
+            $popupMenu,
+            $tabActive
+        );
 
         $content = $menu . $content;
 
-		unset($popupMenu, $menu);
-	}
+        unset($popupMenu, $menu);
+    }
 
     if ($print)
     {

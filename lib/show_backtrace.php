@@ -21,17 +21,17 @@ function show_backtrace()
     if (! $sent_css)
     {
         $return .= "<style type='text/css'>
-		.stacktrace { background-color: #FFFFFF; color: #000000; }
-		.stacktrace .function { color: #0000FF; }
-		.stacktrace .number { color: #FF0000; }
-		.stacktrace .string { color: #009900; }
-		.stacktrace .bool { color: #000099; font-weight: bold; }
-		.stacktrace .null { color: #999999; font-weight: bold; }
-		.stacktrace .object { color: #009999; font-weight: bold; }
-		.stacktrace .array { color: #990099; }
-		.stacktrace .unknown { color: #669900; font-weight: bold; }
-		.stacktrace blockquote { padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }
-		</style>";
+        .stacktrace { background-color: #FFFFFF; color: #000000; }
+        .stacktrace .function { color: #0000FF; }
+        .stacktrace .number { color: #FF0000; }
+        .stacktrace .string { color: #009900; }
+        .stacktrace .bool { color: #000099; font-weight: bold; }
+        .stacktrace .null { color: #999999; font-weight: bold; }
+        .stacktrace .object { color: #009999; font-weight: bold; }
+        .stacktrace .array { color: #990099; }
+        .stacktrace .unknown { color: #669900; font-weight: bold; }
+        .stacktrace blockquote { padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }
+        </style>";
     }
     $return .= "<div class='stacktrace'><b>Call Stack:</b><br>";
     reset($bt);

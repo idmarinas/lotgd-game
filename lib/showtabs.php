@@ -17,17 +17,17 @@
  */
 function lotgd_showtabs($tabs, callable $callback = null, $browse = false )
 {
-	static $showtab_id = 0;
+    static $showtab_id = 0;
 
-	$showtab_id++;
+    $showtab_id++;
     $tab_id = 0;
 
-	$ulMenu = [];
-	$ulContent = '';
-	$tabActive = '';
+    $ulMenu = [];
+    $ulContent = '';
+    $tabActive = '';
 
-	foreach($tabs as $title => $content)
-	{
+    foreach($tabs as $title => $content)
+    {
         $tab_id++;
         if (1 < $tab_id)
         {
@@ -42,13 +42,13 @@ function lotgd_showtabs($tabs, callable $callback = null, $browse = false )
         {
             $class = 'bottom attached ' . $class;
         }
-		//-- Title of tab
-		$ulMenu[] = sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
+        //-- Title of tab
+        $ulMenu[] = sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
 
-		//-- Content of tab
-		if (! $callback) $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
-		else $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $callback($content, $title));
-	}
+        //-- Content of tab
+        if (! $callback) $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
+        else $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $callback($content, $title));
+    }
 
     if (! $browse)
     {
@@ -76,8 +76,8 @@ function lotgd_showtabs($tabs, callable $callback = null, $browse = false )
         );
     }
 
-	rawoutput($ulContent);
-	unset($ulContent, $ulMenu);
+    rawoutput($ulContent);
+    unset($ulContent, $ulMenu);
 }
 
 // {
