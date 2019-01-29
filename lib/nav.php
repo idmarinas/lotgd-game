@@ -395,12 +395,14 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
     $unschema = 0;
     $translate = true;
 
-    if (isset($notranslate))
+    if (isset($notranslate) && in_array([$text, $link], $notranslate))
     {
-        if (in_array([$text, $link], $notranslate))
-        {
-            $translate = false;
-        }
+        $translate = false;
+    }
+
+    if ($translate)
+    {
+        $translator = LotgdLocator::get(\Lotgd\Core\Translator\Translator::class);
     }
 
     if (is_array($text))
@@ -424,7 +426,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
         {
             if ($translate)
             {
-                $text[0] = translate($text[0]);
+                $text[0] = $translator->trans($text[0], [], 'navigation-app');
             }
             $text = call_user_func_array('sprintf', $text);
         }
@@ -446,7 +448,7 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 
         if ('!!!addraw!!!' != $link && $text > '' && $translate)
         {
-            $text = translate($text);
+            $text = $translator->trans($text, [], 'navigation-app');
         } //leave the hack in here for now, use addnav_notl please
     }
 
