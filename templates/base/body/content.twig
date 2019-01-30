@@ -1,0 +1,92 @@
+<tr>
+    <td>
+        <table class="lotgd table">
+            <tr>
+                <td class="top aligned navigation">
+                    <table class="lotgd table">
+                        <tr>
+                            <td class="border tlc"></td>
+                            <td class="border tm"></td>
+                            <td class="border trc"></td>
+                        </tr>
+                        <tr>
+                            <td class="border tlt"></td>
+                            <td class="lotgd top aligned nav">
+                                <div class="left aligned">{{ nav }}</div>
+                            </td>
+                            <td class="border trt"></td>
+                        </tr>
+                        <tr>
+                            <td class="border blc"></td>
+                            <td class="border btm"></td>
+                            <td class="border brc"></td>
+                        </tr>
+                    </table>
+                    {# Start advertising module #}
+                    {{ navad }}
+                    {# End advertising module #}
+                </td>
+                <td class="top aligned">
+                    <table class="lotgd table">
+                        <tr>
+                            <td class="border tlc"></td>
+                            <td class="border tm"></td>
+                            <td class="border trc"></td>
+                        </tr>
+                        <tr>
+                            <td class="border tlt"></td>
+                            <td class="top aligned headrow">
+                                <table class="lotgd table">
+                                    <tr>
+                                        <td class="top aligned left aligned">
+                                            {# Start advertising module #}
+                                            <div style="float: right">{{ verticalad }}</div>
+                                            {{ bodyad }}
+                                            {# End advertising module #}
+
+                                            {# Show all alert messages #}
+                                            {{ show_flash_messages() }}
+
+                                            {# This is all content of game #}
+                                            {{ content }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="border trt"></td>
+                        </tr>
+                        <tr>
+                            <td class="border blc"></td>
+                            <td class="border btm"></td>
+                            <td class="border brc"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="top aligned characterstats">
+                    <table class="lotgd table">
+                        <tr>
+                            <td class="border tlc"></td>
+                            <td class="border tm"></td>
+                            <td class="border trc"></td>
+                        </tr>
+                        <tr>
+                            <td class="border tlt"></td>
+                            <td class="top aligned nav left aligned lotgd-text-nowrap">
+                                {{ stats }}
+                                <p>&nbsp;</p>
+                                {{ paypal }}
+                            </td>
+                            <td class="border trt"></td>
+                        </tr>
+                        <tr>
+                            <td class="border blc"></td>
+                            <td class="border btm"></td>
+                            <td class="border brc"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td>
+
+</tr>
