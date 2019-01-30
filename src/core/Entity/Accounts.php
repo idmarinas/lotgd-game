@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Accounts.
+ * Structure of table "accounts" in data base.
+ *
+ * This table store accounts of users, only data related to account.
  *
  * @ORM\Table(name="accounts",
  *     indexes={
@@ -98,9 +111,9 @@ class Accounts
     /**
      * @var string
      *
-     * @ORM\Column(name="uniqueid", type="string", length=32, nullable=true)
+     * @ORM\Column(name="uniqueid", type="string", length=32, nullable=false)
      */
-    private $uniqueid;
+    private $uniqueid = '';
 
     /**
      * @var bool
@@ -236,7 +249,7 @@ class Accounts
     private $regdate;
 
     /**
-     * Configure same default values.
+     * Configure some default values.
      */
     public function __construct()
     {
