@@ -32,7 +32,7 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "fomantic-ui": "^2.7.1",
+        "fomantic-ui": "2.7.1",
         "jquery": "^3.3.1",
         "sweetalert2": "^7.33.1",
         "toastr": "^2.1.4"
