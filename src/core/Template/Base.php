@@ -21,7 +21,7 @@ class Base extends Twig_Environment
     {
         //-- Merge options
         $default = [
-            'cache' => 'cache/templates',
+            'cache' => 'data/cache/templates',
             'autoescape' => false
         ];
         $options = array_merge($default, $options);

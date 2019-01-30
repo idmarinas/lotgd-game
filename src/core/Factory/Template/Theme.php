@@ -26,7 +26,7 @@ class Theme implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $options = $container->get('GameConfig')['lotgd_core'] ?? [];
-        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'cache/', '/');
+        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'data/cache/', '/');
 
         $template = new TemplateTheme([], [
             //-- Used dir of cache

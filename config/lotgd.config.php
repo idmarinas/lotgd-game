@@ -5,12 +5,12 @@ return [
     'lotgd_core' => [
         'cache' => [
             'active' => false,
-            'base_cache_dir' => 'cache',
+            'base_cache_dir' => 'data/cache',
             'config' => [
                 'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di',
                 'namespace' => 'core',
                 'ttl' => 900,
-                'cache_dir' => 'cache/lotgd',
+                'cache_dir' => 'data/cache/lotgd',
             ],
         ],
         'translation' => [
@@ -27,7 +27,7 @@ return [
                 'adapter' => 'filesystem',
                 'ttl' => 86400,
                 'options' => [
-                    'cache_dir' => 'cache/translations'
+                    'cache_dir' => 'data/cache/translations'
                 ],
                 'plugins' => [
                     [
