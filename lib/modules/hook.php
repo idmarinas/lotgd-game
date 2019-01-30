@@ -90,21 +90,21 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     {
         $sql =
             'SELECT
-				'.DB::prefix('module_hooks').'.modulename,
-				'.DB::prefix('module_hooks').'.location,
-				'.DB::prefix('module_hooks').'.function,
-				'.DB::prefix('module_hooks').'.whenactive
-			FROM
-				'.DB::prefix('module_hooks').'
-			INNER JOIN
-				'.DB::prefix('modules').'
-			ON	'.DB::prefix('modules').'.modulename = '.DB::prefix('module_hooks').".modulename
-			WHERE
-				$active
-				".DB::prefix('module_hooks').".location='$hookname'
-			ORDER BY
-				".DB::prefix('module_hooks').'.priority,
-				'.DB::prefix('module_hooks').'.modulename';
+                '.DB::prefix('module_hooks').'.modulename,
+                '.DB::prefix('module_hooks').'.location,
+                '.DB::prefix('module_hooks').'.function,
+                '.DB::prefix('module_hooks').'.whenactive
+            FROM
+                '.DB::prefix('module_hooks').'
+            INNER JOIN
+                '.DB::prefix('modules').'
+            ON	'.DB::prefix('modules').'.modulename = '.DB::prefix('module_hooks').".modulename
+            WHERE
+                $active
+                ".DB::prefix('module_hooks').".location='$hookname'
+            ORDER BY
+                ".DB::prefix('module_hooks').'.priority,
+                '.DB::prefix('module_hooks').'.modulename';
         $result = DB::query($sql);
     }
     // $args is an array passed by value and we take the output and pass it

@@ -1,15 +1,15 @@
 {
     "method": "insert",
-	"table": "news",
+    "table": "news",
     "entity": "Lotgd\\Core\\Entity\\News",
-	"rows":
-	[
-		{
-			"newstext": "`^A strange awakening takes place in the world.`0",
-			"newsdate": "now",
-			"accountid": 0,
-			"arguments": "",
-			"tlschema": ""
-		}
-	]
+    "rows":
+    [
+        {
+            "newstext": "`^A strange awakening takes place in the world.`0",
+            "newsdate": "now",
+            "accountid": 0,
+            "arguments": "",
+            "tlschema": ""
+        }
+    ]
 }

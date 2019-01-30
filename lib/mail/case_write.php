@@ -220,29 +220,29 @@ $osize1 = addslashes('<span>'.appoencode($sizemsgover[0]).'</span>');
 $osize2 = addslashes('<span>'.appoencode($sizemsgover[1]).'</span>');
 rawoutput("
 <script type='text/javascript'>
-	var maxlen = ".getsetting('mailsizelimit', 1024).";
-	function sizeCount(box){
-		if (box==null) return;
-		var len = box.value.length;
-		var msg = '';
-		if (len <= maxlen){
-			msg = '$usize1'+(maxlen-len)+'$usize2';
-		}else{
-			msg = '$osize1'+(len-maxlen)+'$osize2';
-		}
-		document.getElementById('sizemsg').innerHTML = msg;
-	}
-	sizeCount(document.getElementById('textarea'));
-	function check_su_warning(){
-		var to = document.getElementById('to');
-		var warning = document.getElementById('warning');
-		if (superusers[to.value]){
-			warning.style.visibility = 'visible';
-			warning.style.display = 'block';
-		}else{
-			warning.style.visibility = 'hidden';
-			warning.style.display = 'none';
-		}
-	}
-	check_su_warning();
+    var maxlen = ".getsetting('mailsizelimit', 1024).";
+    function sizeCount(box){
+        if (box==null) return;
+        var len = box.value.length;
+        var msg = '';
+        if (len <= maxlen){
+            msg = '$usize1'+(maxlen-len)+'$usize2';
+        }else{
+            msg = '$osize1'+(len-maxlen)+'$osize2';
+        }
+        document.getElementById('sizemsg').innerHTML = msg;
+    }
+    sizeCount(document.getElementById('textarea'));
+    function check_su_warning(){
+        var to = document.getElementById('to');
+        var warning = document.getElementById('warning');
+        if (superusers[to.value]){
+            warning.style.visibility = 'visible';
+            warning.style.display = 'block';
+        }else{
+            warning.style.visibility = 'hidden';
+            warning.style.display = 'none';
+        }
+    }
+    check_su_warning();
 </script>");

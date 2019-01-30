@@ -1,1178 +1,1178 @@
 {
     "method": "insert",
-	"table": "weapons",
+    "table": "weapons",
     "entity": "Lotgd\\Core\\Entity\\Weapons",
-	"rows":
-	[
-		{
-			"weaponname": "Rake",
-			"value": 48,
-			"damage": 1,
-			"level": 0
-		},
-		{
-			"weaponname": "Trowel",
-			"value": 225,
-			"damage": 2,
-			"level": 0
-		},
-		{
-			"weaponname": "Spade",
-			"value": 585,
-			"damage": 3,
-			"level": 0
-		},
-		{
-			"weaponname": "Adze",
-			"value": 990,
-			"damage": 4,
-			"level": 0
-		},
-		{
-			"weaponname": "Gardening Hoe",
-			"value": 1575,
-			"damage": 5,
-			"level": 0
-		},
-		{
-			"weaponname": "Torch",
-			"value": 2250,
-			"damage": 6,
-			"level": 0
-		},
-		{
-			"weaponname": "Pitchfork",
-			"value": 2790,
-			"damage": 7,
-			"level": 0
-		},
-		{
-			"weaponname": "Shovel",
-			"value": 3420,
-			"damage": 8,
-			"level": 0
-		},
-		{
-			"weaponname": "Hedge Trimmers",
-			"value": 4230,
-			"damage": 9,
-			"level": 0
-		},
-		{
-			"weaponname": "Hatchet",
-			"value": 5040,
-			"damage": 10,
-			"level": 0
-		},
-		{
-			"weaponname": "Carving Knife",
-			"value": 5850,
-			"damage": 11,
-			"level": 0
-		},
-		{
-			"weaponname": "Rusty Iron Wood-Chopping Axe",
-			"value": 6840,
-			"damage": 12,
-			"level": 0
-		},
-		{
-			"weaponname": "Dull Steel Wood-chopping Axe",
-			"value": 8010,
-			"damage": 13,
-			"level": 0
-		},
-		{
-			"weaponname": "Sharp Steel Wood-chopping Axe",
-			"value": 9000,
-			"damage": 14,
-			"level": 0
-		},
-		{
-			"weaponname": "Woodsman's Axe",
-			"value": 10350,
-			"damage": 15,
-			"level": 0
-		},
-		{
-			"weaponname": "Pebbles",
-			"value": 48,
-			"damage": 1,
-			"level": 1
-		},
-		{
-			"weaponname": "Stones",
-			"value": 225,
-			"damage": 2,
-			"level": 1
-		},
-		{
-			"weaponname": "Rocks",
-			"value": 585,
-			"damage": 3,
-			"level": 1
-		},
-		{
-			"weaponname": "Small Treebranch",
-			"value": 990,
-			"damage": 4,
-			"level": 1
-		},
-		{
-			"weaponname": "Large Treebranch",
-			"value": 1575,
-			"damage": 5,
-			"level": 1
-		},
-		{
-			"weaponname": "Thickly Padded Sparring Pole",
-			"value": 2250,
-			"damage": 6,
-			"level": 1
-		},
-		{
-			"weaponname": "Thinly Padded Sparring Pole",
-			"value": 2790,
-			"damage": 7,
-			"level": 1
-		},
-		{
-			"weaponname": "Wooden Stave",
-			"value": 3420,
-			"damage": 8,
-			"level": 1
-		},
-		{
-			"weaponname": "Wooden Practice Sword",
-			"value": 4230,
-			"damage": 9,
-			"level": 1
-		},
-		{
-			"weaponname": "Blunt Bronze Short Sword",
-			"value": 5040,
-			"damage": 10,
-			"level": 1
-		},
-		{
-			"weaponname": "Well Crafted Bronze Short Sword",
-			"value": 5850,
-			"damage": 11,
-			"level": 1
-		},
-		{
-			"weaponname": "Rusty Steel Short Sword",
-			"value": 6840,
-			"damage": 12,
-			"level": 1
-		},
-		{
-			"weaponname": "Dull Steel Short Sword",
-			"value": 8010,
-			"damage": 13,
-			"level": 1
-		},
-		{
-			"weaponname": "Sharp Steel Short Sword",
-			"value": 9000,
-			"damage": 14,
-			"level": 1
-		},
-		{
-			"weaponname": "Pages's Short Sword",
-			"value": 10350,
-			"damage": 15,
-			"level": 1
-		},
-		{
-			"weaponname": "Dull Bronze Sword",
-			"value": 48,
-			"damage": 1,
-			"level": 2
-		},
-		{
-			"weaponname": "Bronze Sword",
-			"value": 225,
-			"damage": 2,
-			"level": 2
-		},
-		{
-			"weaponname": "Well Crafted Bronze Sword",
-			"value": 585,
-			"damage": 3,
-			"level": 2
-		},
-		{
-			"weaponname": "Dull Iron Sword",
-			"value": 990,
-			"damage": 4,
-			"level": 2
-		},
-		{
-			"weaponname": "Iron Sword",
-			"value": 1575,
-			"damage": 5,
-			"level": 2
-		},
-		{
-			"weaponname": "Enchanted Sword",
-			"value": 9000,
-			"damage": 14,
-			"level": 2
-		},
-		{
-			"weaponname": "Well Crafted Iron Sword",
-			"value": 2250,
-			"damage": 6,
-			"level": 2
-		},
-		{
-			"weaponname": "Rusty Steel Sword",
-			"value": 2790,
-			"damage": 7,
-			"level": 2
-		},
-		{
-			"weaponname": "Dull Steel Sword",
-			"value": 3420,
-			"damage": 8,
-			"level": 2
-		},
-		{
-			"weaponname": "Well Crafted Steel Sword",
-			"value": 4230,
-			"damage": 9,
-			"level": 2
-		},
-		{
-			"weaponname": "Engraved Steel Sword",
-			"value": 5040,
-			"damage": 10,
-			"level": 2
-		},
-		{
-			"weaponname": "Steel Sword with Jeweled Hilt",
-			"value": 5850,
-			"damage": 11,
-			"level": 2
-		},
-		{
-			"weaponname": "Golden Hilted Sword",
-			"value": 6840,
-			"damage": 12,
-			"level": 2
-		},
-		{
-			"weaponname": "Platinum Hilted Sword",
-			"value": 8010,
-			"damage": 13,
-			"level": 2
-		},
-		{
-			"weaponname": "Adept's Sword",
-			"value": 10350,
-			"damage": 15,
-			"level": 2
-		},
-		{
-			"weaponname": "Steel Longsword",
-			"value": 48,
-			"damage": 1,
-			"level": 3
-		},
-		{
-			"weaponname": "Etched Steel Longsword",
-			"value": 585,
-			"damage": 3,
-			"level": 3
-		},
-		{
-			"weaponname": "Polished Steel Longsword",
-			"value": 225,
-			"damage": 2,
-			"level": 3
-		},
-		{
-			"weaponname": "Well Balanced Steel Longsword",
-			"value": 990,
-			"damage": 4,
-			"level": 3
-		},
-		{
-			"weaponname": "Perfectly Balanced Steel Longsword",
-			"value": 1575,
-			"damage": 5,
-			"level": 3
-		},
-		{
-			"weaponname": "Engraved Steel Longsword",
-			"value": 2250,
-			"damage": 6,
-			"level": 3
-		},
-		{
-			"weaponname": "Longsword with Silver-plated Hilt",
-			"value": 2790,
-			"damage": 7,
-			"level": 3
-		},
-		{
-			"weaponname": "Longsword with Gold-plated Hilt",
-			"value": 3420,
-			"damage": 8,
-			"level": 3
-		},
-		{
-			"weaponname": "Longsword with Solid Gold Hilt",
-			"value": 4230,
-			"damage": 9,
-			"level": 3
-		},
-		{
-			"weaponname": "Longsword with Solid Platinum Hilt",
-			"value": 5040,
-			"damage": 10,
-			"level": 3
-		},
-		{
-			"weaponname": "Moonsilver Longsword",
-			"value": 5850,
-			"damage": 11,
-			"level": 3
-		},
-		{
-			"weaponname": "Autumngold Longsword",
-			"value": 6840,
-			"damage": 12,
-			"level": 3
-		},
-		{
-			"weaponname": "Elfsilver Longsword",
-			"value": 8010,
-			"damage": 13,
-			"level": 3
-		},
-		{
-			"weaponname": "Enchanted Longsword",
-			"value": 9000,
-			"damage": 14,
-			"level": 3
-		},
-		{
-			"weaponname": "Wolfmaster's Longsword",
-			"value": 10350,
-			"damage": 15,
-			"level": 3
-		},
-		{
-			"weaponname": "Poorly Balanced Bastard Sword",
-			"value": 48,
-			"damage": 1,
-			"level": 4
-		},
-		{
-			"weaponname": "Tarnished Bastard Sword",
-			"value": 225,
-			"damage": 2,
-			"level": 4
-		},
-		{
-			"weaponname": "Iron Bastard Sword",
-			"value": 585,
-			"damage": 3,
-			"level": 4
-		},
-		{
-			"weaponname": "Steel Bastard Sword",
-			"value": 990,
-			"damage": 4,
-			"level": 4
-		},
-		{
-			"weaponname": "Well Balanced Steel Bastard Sword",
-			"value": 1575,
-			"damage": 5,
-			"level": 4
-		},
-		{
-			"weaponname": "Perfectly Balanced Bastard Sword",
-			"value": 2250,
-			"damage": 6,
-			"level": 4
-		},
-		{
-			"weaponname": "Rune-etched Bastard Sword",
-			"value": 2790,
-			"damage": 7,
-			"level": 4
-		},
-		{
-			"weaponname": "Bronze-inlay Bastard Sword",
-			"value": 3420,
-			"damage": 8,
-			"level": 4
-		},
-		{
-			"weaponname": "Silver-inlay Bastard Sword",
-			"value": 4230,
-			"damage": 9,
-			"level": 4
-		},
-		{
-			"weaponname": "Gold-inlay Bastard Sword",
-			"value": 5040,
-			"damage": 10,
-			"level": 4
-		},
-		{
-			"weaponname": "Nightsilver Bastard Sword",
-			"value": 5850,
-			"damage": 11,
-			"level": 4
-		},
-		{
-			"weaponname": "Morning-gold Bastard Sword",
-			"value": 6840,
-			"damage": 12,
-			"level": 4
-		},
-		{
-			"weaponname": "Truesplendor Bastard Sword",
-			"value": 8010,
-			"damage": 13,
-			"level": 4
-		},
-		{
-			"weaponname": "Enchanted Elfgold Bastard Sword",
-			"value": 9000,
-			"damage": 14,
-			"level": 4
-		},
-		{
-			"weaponname": "Noble's Bastard Sword",
-			"value": 10350,
-			"damage": 15,
-			"level": 4
-		},
-		{
-			"weaponname": "Tarnished Iron Claymore",
-			"value": 48,
-			"damage": 1,
-			"level": 5
-		},
-		{
-			"weaponname": "Polished Iron Claymore",
-			"value": 225,
-			"damage": 2,
-			"level": 5
-		},
-		{
-			"weaponname": "Rusty Steel Claymore",
-			"value": 585,
-			"damage": 3,
-			"level": 5
-		},
-		{
-			"weaponname": "Steel Claymore",
-			"value": 990,
-			"damage": 4,
-			"level": 5
-		},
-		{
-			"weaponname": "Finely Crafted Steel Claymore",
-			"value": 1575,
-			"damage": 5,
-			"level": 5
-		},
-		{
-			"weaponname": "Scottish Broadsword",
-			"value": 2250,
-			"damage": 6,
-			"level": 5
-		},
-		{
-			"weaponname": "Viking War Sword",
-			"value": 2790,
-			"damage": 7,
-			"level": 5
-		},
-		{
-			"weaponname": "Barbarian's Sword",
-			"value": 3420,
-			"damage": 8,
-			"level": 5
-		},
-		{
-			"weaponname": "Scottish Basket-Hilt Claymore",
-			"value": 4230,
-			"damage": 9,
-			"level": 5
-		},
-		{
-			"weaponname": "Agincourt Steel Sword",
-			"value": 5040,
-			"damage": 10,
-			"level": 5
-		},
-		{
-			"weaponname": "Celtic Combat Sword",
-			"value": 5850,
-			"damage": 11,
-			"level": 5
-		},
-		{
-			"weaponname": "Norseman's Sword",
-			"value": 6840,
-			"damage": 12,
-			"level": 5
-		},
-		{
-			"weaponname": "Knight's Sword",
-			"value": 8010,
-			"damage": 13,
-			"level": 5
-		},
-		{
-			"weaponname": "Heraldic Lion Claymore",
-			"value": 9000,
-			"damage": 14,
-			"level": 5
-		},
-		{
-			"weaponname": "Dragon Soldier's Claymore",
-			"value": 10350,
-			"damage": 15,
-			"level": 5
-		},
-		{
-			"weaponname": "Two Broken Short Swords",
-			"value": 48,
-			"damage": 1,
-			"level": 6
-		},
-		{
-			"weaponname": "Two Short Swords",
-			"value": 225,
-			"damage": 2,
-			"level": 6
-		},
-		{
-			"weaponname": "Iron Scimitars",
-			"value": 585,
-			"damage": 3,
-			"level": 6
-		},
-		{
-			"weaponname": "Balanced Scimitars",
-			"value": 990,
-			"damage": 4,
-			"level": 6
-		},
-		{
-			"weaponname": "Tarnished Steel Scimitars",
-			"value": 1575,
-			"damage": 5,
-			"level": 6
-		},
-		{
-			"weaponname": "Rusty Steel Scimitars",
-			"value": 2250,
-			"damage": 6,
-			"level": 6
-		},
-		{
-			"weaponname": "Steel Scimitars",
-			"value": 2790,
-			"damage": 7,
-			"level": 6
-		},
-		{
-			"weaponname": "Bronze Hilted Steel Scimitars",
-			"value": 3420,
-			"damage": 8,
-			"level": 6
-		},
-		{
-			"weaponname": "Gold Hilted Steel Scimitars",
-			"value": 4230,
-			"damage": 9,
-			"level": 6
-		},
-		{
-			"weaponname": "Platinum Hilted Steel Scimitars",
-			"value": 5040,
-			"damage": 10,
-			"level": 6
-		},
-		{
-			"weaponname": "Well Crafted Adamantite Scimitars",
-			"value": 5850,
-			"damage": 11,
-			"level": 6
-		},
-		{
-			"weaponname": "Perfectly Crafted Adamantite Scimitars",
-			"value": 6840,
-			"damage": 12,
-			"level": 6
-		},
-		{
-			"weaponname": "Enchanted Scimitars",
-			"value": 8010,
-			"damage": 13,
-			"level": 6
-		},
-		{
-			"weaponname": "Drow Crafted Scimitars",
-			"value": 9000,
-			"damage": 14,
-			"level": 6
-		},
-		{
-			"weaponname": "Unicorn Blood-Forged Scimitars",
-			"value": 10350,
-			"damage": 15,
-			"level": 6
-		},
-		{
-			"weaponname": "Chipped Iron Axe",
-			"value": 48,
-			"damage": 1,
-			"level": 7
-		},
-		{
-			"weaponname": "Iron Axe",
-			"value": 225,
-			"damage": 2,
-			"level": 7
-		},
-		{
-			"weaponname": "Rusty Steel Axe",
-			"value": 585,
-			"damage": 3,
-			"level": 7
-		},
-		{
-			"weaponname": "Fine Steel Axe",
-			"value": 990,
-			"damage": 4,
-			"level": 7
-		},
-		{
-			"weaponname": "Lumberjack's Axe",
-			"value": 1575,
-			"damage": 5,
-			"level": 7
-		},
-		{
-			"weaponname": "Low Quality Battle Axe",
-			"value": 2250,
-			"damage": 6,
-			"level": 7
-		},
-		{
-			"weaponname": "Medium Quality Battle Axe",
-			"value": 2790,
-			"damage": 7,
-			"level": 7
-		},
-		{
-			"weaponname": "High Quality Battle Axe",
-			"value": 3420,
-			"damage": 8,
-			"level": 7
-		},
-		{
-			"weaponname": "Double Bladed Axe",
-			"value": 4230,
-			"damage": 9,
-			"level": 7
-		},
-		{
-			"weaponname": "Double Bladed Battle Axe",
-			"value": 5040,
-			"damage": 10,
-			"level": 7
-		},
-		{
-			"weaponname": "Gold Plated Battle Axe",
-			"value": 5850,
-			"damage": 11,
-			"level": 7
-		},
-		{
-			"weaponname": "Platinum Hilted Battle Axe",
-			"value": 6840,
-			"damage": 12,
-			"level": 7
-		},
-		{
-			"weaponname": "Enchanted Battle Axe",
-			"value": 8010,
-			"damage": 13,
-			"level": 7
-		},
-		{
-			"weaponname": "Dwarf Smith's Battle Axe",
-			"value": 9000,
-			"damage": 14,
-			"level": 7
-		},
-		{
-			"weaponname": "Dwarf Warrior's Battle Axe",
-			"value": 10350,
-			"damage": 15,
-			"level": 7
-		},
-		{
-			"weaponname": "Broken Iron Mace",
-			"value": 48,
-			"damage": 1,
-			"level": 8
-		},
-		{
-			"weaponname": "Tarnished Iron Mace",
-			"value": 225,
-			"damage": 2,
-			"level": 8
-		},
-		{
-			"weaponname": "Polished Iron Mace",
-			"value": 585,
-			"damage": 3,
-			"level": 8
-		},
-		{
-			"weaponname": "Well Crafted Iron Mace",
-			"value": 990,
-			"damage": 4,
-			"level": 8
-		},
-		{
-			"weaponname": "Polished Steel Mace",
-			"value": 1575,
-			"damage": 5,
-			"level": 8
-		},
-		{
-			"weaponname": "Well Crafted Steel Mace",
-			"value": 2250,
-			"damage": 6,
-			"level": 8
-		},
-		{
-			"weaponname": "Poorly Balanced Double Mace",
-			"value": 2790,
-			"damage": 7,
-			"level": 8
-		},
-		{
-			"weaponname": "Well Balanced Double Mace",
-			"value": 3420,
-			"damage": 8,
-			"level": 8
-		},
-		{
-			"weaponname": "Battle Mace",
-			"value": 4230,
-			"damage": 9,
-			"level": 8
-		},
-		{
-			"weaponname": "War Chieftain's Battle Mace",
-			"value": 5040,
-			"damage": 10,
-			"level": 8
-		},
-		{
-			"weaponname": "War Chieftain's Morning Star",
-			"value": 5850,
-			"damage": 11,
-			"level": 8
-		},
-		{
-			"weaponname": "Adamantite Morning Star",
-			"value": 6840,
-			"damage": 12,
-			"level": 8
-		},
-		{
-			"weaponname": "Dwarf Crafted Morning Star",
-			"value": 8010,
-			"damage": 13,
-			"level": 8
-		},
-		{
-			"weaponname": "Dwarf Warlord's Morning Star",
-			"value": 9000,
-			"damage": 14,
-			"level": 8
-		},
-		{
-			"weaponname": "Enchanted Morning Star",
-			"value": 10350,
-			"damage": 15,
-			"level": 8
-		},
-		{
-			"weaponname": "Boot Knife",
-			"value": 48,
-			"damage": 1,
-			"level": 9
-		},
-		{
-			"weaponname": "Target Knife",
-			"value": 225,
-			"damage": 2,
-			"level": 9
-		},
-		{
-			"weaponname": "Blackjack",
-			"value": 585,
-			"damage": 3,
-			"level": 9
-		},
-		{
-			"weaponname": "Throwing Star",
-			"value": 990,
-			"damage": 4,
-			"level": 9
-		},
-		{
-			"weaponname": "Hira-Shuriken",
-			"value": 1575,
-			"damage": 5,
-			"level": 9
-		},
-		{
-			"weaponname": "Throwing Spike",
-			"value": 2250,
-			"damage": 6,
-			"level": 9
-		},
-		{
-			"weaponname": "Atlatl",
-			"value": 2790,
-			"damage": 7,
-			"level": 9
-		},
-		{
-			"weaponname": "Qilamitautit Bolo",
-			"value": 3420,
-			"damage": 8,
-			"level": 9
-		},
-		{
-			"weaponname": "War Quoait",
-			"value": 4230,
-			"damage": 9,
-			"level": 9
-		},
-		{
-			"weaponname": "Cha Kran",
-			"value": 5040,
-			"damage": 10,
-			"level": 9
-		},
-		{
-			"weaponname": "Fei Piau",
-			"value": 5850,
-			"damage": 11,
-			"level": 9
-		},
-		{
-			"weaponname": "Jen Piau",
-			"value": 6840,
-			"damage": 12,
-			"level": 9
-		},
-		{
-			"weaponname": "Gau dim Piau",
-			"value": 8010,
-			"damage": 13,
-			"level": 9
-		},
-		{
-			"weaponname": "Enchanted Throwing Axe",
-			"value": 9000,
-			"damage": 14,
-			"level": 9
-		},
-		{
-			"weaponname": "Teksolo's Ninja Stars",
-			"value": 10350,
-			"damage": 15,
-			"level": 9
-		},
-		{
-			"weaponname": "Farmer's Bow & Wooden Arrows",
-			"value": 48,
-			"damage": 1,
-			"level": 10
-		},
-		{
-			"weaponname": "Farmer's Bow & Stone Tipped Arrows",
-			"value": 225,
-			"damage": 2,
-			"level": 10
-		},
-		{
-			"weaponname": "Farmer's Bow & Steel Tipped Arrows",
-			"value": 585,
-			"damage": 3,
-			"level": 10
-		},
-		{
-			"weaponname": "Hunter's Bow & Wooden Arrows",
-			"value": 990,
-			"damage": 4,
-			"level": 10
-		},
-		{
-			"weaponname": "Hunter's Bow & Stone Tipped Arrows",
-			"value": 1575,
-			"damage": 5,
-			"level": 10
-		},
-		{
-			"weaponname": "Hunter's Bow & Steel Tipped Arrows",
-			"value": 2250,
-			"damage": 6,
-			"level": 10
-		},
-		{
-			"weaponname": "Ranger's Bow & Wooden Arrows",
-			"value": 2790,
-			"damage": 7,
-			"level": 10
-		},
-		{
-			"weaponname": "Ranger's Bow & Stone Tipped Arrows",
-			"value": 3420,
-			"damage": 8,
-			"level": 10
-		},
-		{
-			"weaponname": "Ranger's Bow & Steel Tipped Arrows",
-			"value": 4230,
-			"damage": 9,
-			"level": 10
-		},
-		{
-			"weaponname": "Longbow",
-			"value": 5040,
-			"damage": 10,
-			"level": 10
-		},
-		{
-			"weaponname": "Crossbow",
-			"value": 5850,
-			"damage": 11,
-			"level": 10
-		},
-		{
-			"weaponname": "Elvish Longbow",
-			"value": 6840,
-			"damage": 12,
-			"level": 10
-		},
-		{
-			"weaponname": "Elvish Longbow & Flame Tipped Arrows",
-			"value": 8010,
-			"damage": 13,
-			"level": 10
-		},
-		{
-			"weaponname": "Elvish Longbow & Enchanted Arrows",
-			"value": 9000,
-			"damage": 14,
-			"level": 10
-		},
-		{
-			"weaponname": "Longbow of the Elf King",
-			"value": 10350,
-			"damage": 15,
-			"level": 10
-		},
-		{
-			"weaponname": "MightyE's Long Sword",
-			"value": 225,
-			"damage": 2,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Short Sword",
-			"value": 48,
-			"damage": 1,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Bastard Sword",
-			"value": 585,
-			"damage": 3,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Scimitars",
-			"value": 990,
-			"damage": 4,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Battle Axe",
-			"value": 1575,
-			"damage": 5,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Throwing Hammer",
-			"value": 2250,
-			"damage": 6,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Morning Star",
-			"value": 2790,
-			"damage": 7,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Compound Bow",
-			"value": 3420,
-			"damage": 8,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Rapier",
-			"value": 4230,
-			"damage": 9,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Sabre",
-			"value": 5040,
-			"damage": 10,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Light Sabre",
-			"value": 5850,
-			"damage": 11,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Wakizashi",
-			"value": 6840,
-			"damage": 12,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's 2-Handed War Sword",
-			"value": 8010,
-			"damage": 13,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's 2-handed War Axe",
-			"value": 9000,
-			"damage": 14,
-			"level": 11
-		},
-		{
-			"weaponname": "MightyE's Claymore",
-			"value": 10350,
-			"damage": 15,
-			"level": 11
-		},
-		{
-			"weaponname": "Spell of Fire",
-			"value": 48,
-			"damage": 1,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Earthquake",
-			"value": 225,
-			"damage": 2,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Flood",
-			"value": 585,
-			"damage": 3,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Hurricane",
-			"value": 990,
-			"damage": 4,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Mind Control",
-			"value": 1575,
-			"damage": 5,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Lightning",
-			"value": 2250,
-			"damage": 6,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Weakness",
-			"value": 2790,
-			"damage": 7,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Fear",
-			"value": 3420,
-			"damage": 8,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Poison",
-			"value": 4230,
-			"damage": 9,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Spirit Possession",
-			"value": 5040,
-			"damage": 10,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Despair",
-			"value": 5850,
-			"damage": 11,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Bat Summoning",
-			"value": 6840,
-			"damage": 12,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Wolf Summoning",
-			"value": 8010,
-			"damage": 13,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Unicorn Summoning",
-			"value": 9000,
-			"damage": 14,
-			"level": 12
-		},
-		{
-			"weaponname": "Spell of Dragon Summoning",
-			"value": 10350,
-			"damage": 15,
-			"level": 12
-		}
-	]
+    "rows":
+    [
+        {
+            "weaponname": "Rake",
+            "value": 48,
+            "damage": 1,
+            "level": 0
+        },
+        {
+            "weaponname": "Trowel",
+            "value": 225,
+            "damage": 2,
+            "level": 0
+        },
+        {
+            "weaponname": "Spade",
+            "value": 585,
+            "damage": 3,
+            "level": 0
+        },
+        {
+            "weaponname": "Adze",
+            "value": 990,
+            "damage": 4,
+            "level": 0
+        },
+        {
+            "weaponname": "Gardening Hoe",
+            "value": 1575,
+            "damage": 5,
+            "level": 0
+        },
+        {
+            "weaponname": "Torch",
+            "value": 2250,
+            "damage": 6,
+            "level": 0
+        },
+        {
+            "weaponname": "Pitchfork",
+            "value": 2790,
+            "damage": 7,
+            "level": 0
+        },
+        {
+            "weaponname": "Shovel",
+            "value": 3420,
+            "damage": 8,
+            "level": 0
+        },
+        {
+            "weaponname": "Hedge Trimmers",
+            "value": 4230,
+            "damage": 9,
+            "level": 0
+        },
+        {
+            "weaponname": "Hatchet",
+            "value": 5040,
+            "damage": 10,
+            "level": 0
+        },
+        {
+            "weaponname": "Carving Knife",
+            "value": 5850,
+            "damage": 11,
+            "level": 0
+        },
+        {
+            "weaponname": "Rusty Iron Wood-Chopping Axe",
+            "value": 6840,
+            "damage": 12,
+            "level": 0
+        },
+        {
+            "weaponname": "Dull Steel Wood-chopping Axe",
+            "value": 8010,
+            "damage": 13,
+            "level": 0
+        },
+        {
+            "weaponname": "Sharp Steel Wood-chopping Axe",
+            "value": 9000,
+            "damage": 14,
+            "level": 0
+        },
+        {
+            "weaponname": "Woodsman's Axe",
+            "value": 10350,
+            "damage": 15,
+            "level": 0
+        },
+        {
+            "weaponname": "Pebbles",
+            "value": 48,
+            "damage": 1,
+            "level": 1
+        },
+        {
+            "weaponname": "Stones",
+            "value": 225,
+            "damage": 2,
+            "level": 1
+        },
+        {
+            "weaponname": "Rocks",
+            "value": 585,
+            "damage": 3,
+            "level": 1
+        },
+        {
+            "weaponname": "Small Treebranch",
+            "value": 990,
+            "damage": 4,
+            "level": 1
+        },
+        {
+            "weaponname": "Large Treebranch",
+            "value": 1575,
+            "damage": 5,
+            "level": 1
+        },
+        {
+            "weaponname": "Thickly Padded Sparring Pole",
+            "value": 2250,
+            "damage": 6,
+            "level": 1
+        },
+        {
+            "weaponname": "Thinly Padded Sparring Pole",
+            "value": 2790,
+            "damage": 7,
+            "level": 1
+        },
+        {
+            "weaponname": "Wooden Stave",
+            "value": 3420,
+            "damage": 8,
+            "level": 1
+        },
+        {
+            "weaponname": "Wooden Practice Sword",
+            "value": 4230,
+            "damage": 9,
+            "level": 1
+        },
+        {
+            "weaponname": "Blunt Bronze Short Sword",
+            "value": 5040,
+            "damage": 10,
+            "level": 1
+        },
+        {
+            "weaponname": "Well Crafted Bronze Short Sword",
+            "value": 5850,
+            "damage": 11,
+            "level": 1
+        },
+        {
+            "weaponname": "Rusty Steel Short Sword",
+            "value": 6840,
+            "damage": 12,
+            "level": 1
+        },
+        {
+            "weaponname": "Dull Steel Short Sword",
+            "value": 8010,
+            "damage": 13,
+            "level": 1
+        },
+        {
+            "weaponname": "Sharp Steel Short Sword",
+            "value": 9000,
+            "damage": 14,
+            "level": 1
+        },
+        {
+            "weaponname": "Pages's Short Sword",
+            "value": 10350,
+            "damage": 15,
+            "level": 1
+        },
+        {
+            "weaponname": "Dull Bronze Sword",
+            "value": 48,
+            "damage": 1,
+            "level": 2
+        },
+        {
+            "weaponname": "Bronze Sword",
+            "value": 225,
+            "damage": 2,
+            "level": 2
+        },
+        {
+            "weaponname": "Well Crafted Bronze Sword",
+            "value": 585,
+            "damage": 3,
+            "level": 2
+        },
+        {
+            "weaponname": "Dull Iron Sword",
+            "value": 990,
+            "damage": 4,
+            "level": 2
+        },
+        {
+            "weaponname": "Iron Sword",
+            "value": 1575,
+            "damage": 5,
+            "level": 2
+        },
+        {
+            "weaponname": "Enchanted Sword",
+            "value": 9000,
+            "damage": 14,
+            "level": 2
+        },
+        {
+            "weaponname": "Well Crafted Iron Sword",
+            "value": 2250,
+            "damage": 6,
+            "level": 2
+        },
+        {
+            "weaponname": "Rusty Steel Sword",
+            "value": 2790,
+            "damage": 7,
+            "level": 2
+        },
+        {
+            "weaponname": "Dull Steel Sword",
+            "value": 3420,
+            "damage": 8,
+            "level": 2
+        },
+        {
+            "weaponname": "Well Crafted Steel Sword",
+            "value": 4230,
+            "damage": 9,
+            "level": 2
+        },
+        {
+            "weaponname": "Engraved Steel Sword",
+            "value": 5040,
+            "damage": 10,
+            "level": 2
+        },
+        {
+            "weaponname": "Steel Sword with Jeweled Hilt",
+            "value": 5850,
+            "damage": 11,
+            "level": 2
+        },
+        {
+            "weaponname": "Golden Hilted Sword",
+            "value": 6840,
+            "damage": 12,
+            "level": 2
+        },
+        {
+            "weaponname": "Platinum Hilted Sword",
+            "value": 8010,
+            "damage": 13,
+            "level": 2
+        },
+        {
+            "weaponname": "Adept's Sword",
+            "value": 10350,
+            "damage": 15,
+            "level": 2
+        },
+        {
+            "weaponname": "Steel Longsword",
+            "value": 48,
+            "damage": 1,
+            "level": 3
+        },
+        {
+            "weaponname": "Etched Steel Longsword",
+            "value": 585,
+            "damage": 3,
+            "level": 3
+        },
+        {
+            "weaponname": "Polished Steel Longsword",
+            "value": 225,
+            "damage": 2,
+            "level": 3
+        },
+        {
+            "weaponname": "Well Balanced Steel Longsword",
+            "value": 990,
+            "damage": 4,
+            "level": 3
+        },
+        {
+            "weaponname": "Perfectly Balanced Steel Longsword",
+            "value": 1575,
+            "damage": 5,
+            "level": 3
+        },
+        {
+            "weaponname": "Engraved Steel Longsword",
+            "value": 2250,
+            "damage": 6,
+            "level": 3
+        },
+        {
+            "weaponname": "Longsword with Silver-plated Hilt",
+            "value": 2790,
+            "damage": 7,
+            "level": 3
+        },
+        {
+            "weaponname": "Longsword with Gold-plated Hilt",
+            "value": 3420,
+            "damage": 8,
+            "level": 3
+        },
+        {
+            "weaponname": "Longsword with Solid Gold Hilt",
+            "value": 4230,
+            "damage": 9,
+            "level": 3
+        },
+        {
+            "weaponname": "Longsword with Solid Platinum Hilt",
+            "value": 5040,
+            "damage": 10,
+            "level": 3
+        },
+        {
+            "weaponname": "Moonsilver Longsword",
+            "value": 5850,
+            "damage": 11,
+            "level": 3
+        },
+        {
+            "weaponname": "Autumngold Longsword",
+            "value": 6840,
+            "damage": 12,
+            "level": 3
+        },
+        {
+            "weaponname": "Elfsilver Longsword",
+            "value": 8010,
+            "damage": 13,
+            "level": 3
+        },
+        {
+            "weaponname": "Enchanted Longsword",
+            "value": 9000,
+            "damage": 14,
+            "level": 3
+        },
+        {
+            "weaponname": "Wolfmaster's Longsword",
+            "value": 10350,
+            "damage": 15,
+            "level": 3
+        },
+        {
+            "weaponname": "Poorly Balanced Bastard Sword",
+            "value": 48,
+            "damage": 1,
+            "level": 4
+        },
+        {
+            "weaponname": "Tarnished Bastard Sword",
+            "value": 225,
+            "damage": 2,
+            "level": 4
+        },
+        {
+            "weaponname": "Iron Bastard Sword",
+            "value": 585,
+            "damage": 3,
+            "level": 4
+        },
+        {
+            "weaponname": "Steel Bastard Sword",
+            "value": 990,
+            "damage": 4,
+            "level": 4
+        },
+        {
+            "weaponname": "Well Balanced Steel Bastard Sword",
+            "value": 1575,
+            "damage": 5,
+            "level": 4
+        },
+        {
+            "weaponname": "Perfectly Balanced Bastard Sword",
+            "value": 2250,
+            "damage": 6,
+            "level": 4
+        },
+        {
+            "weaponname": "Rune-etched Bastard Sword",
+            "value": 2790,
+            "damage": 7,
+            "level": 4
+        },
+        {
+            "weaponname": "Bronze-inlay Bastard Sword",
+            "value": 3420,
+            "damage": 8,
+            "level": 4
+        },
+        {
+            "weaponname": "Silver-inlay Bastard Sword",
+            "value": 4230,
+            "damage": 9,
+            "level": 4
+        },
+        {
+            "weaponname": "Gold-inlay Bastard Sword",
+            "value": 5040,
+            "damage": 10,
+            "level": 4
+        },
+        {
+            "weaponname": "Nightsilver Bastard Sword",
+            "value": 5850,
+            "damage": 11,
+            "level": 4
+        },
+        {
+            "weaponname": "Morning-gold Bastard Sword",
+            "value": 6840,
+            "damage": 12,
+            "level": 4
+        },
+        {
+            "weaponname": "Truesplendor Bastard Sword",
+            "value": 8010,
+            "damage": 13,
+            "level": 4
+        },
+        {
+            "weaponname": "Enchanted Elfgold Bastard Sword",
+            "value": 9000,
+            "damage": 14,
+            "level": 4
+        },
+        {
+            "weaponname": "Noble's Bastard Sword",
+            "value": 10350,
+            "damage": 15,
+            "level": 4
+        },
+        {
+            "weaponname": "Tarnished Iron Claymore",
+            "value": 48,
+            "damage": 1,
+            "level": 5
+        },
+        {
+            "weaponname": "Polished Iron Claymore",
+            "value": 225,
+            "damage": 2,
+            "level": 5
+        },
+        {
+            "weaponname": "Rusty Steel Claymore",
+            "value": 585,
+            "damage": 3,
+            "level": 5
+        },
+        {
+            "weaponname": "Steel Claymore",
+            "value": 990,
+            "damage": 4,
+            "level": 5
+        },
+        {
+            "weaponname": "Finely Crafted Steel Claymore",
+            "value": 1575,
+            "damage": 5,
+            "level": 5
+        },
+        {
+            "weaponname": "Scottish Broadsword",
+            "value": 2250,
+            "damage": 6,
+            "level": 5
+        },
+        {
+            "weaponname": "Viking War Sword",
+            "value": 2790,
+            "damage": 7,
+            "level": 5
+        },
+        {
+            "weaponname": "Barbarian's Sword",
+            "value": 3420,
+            "damage": 8,
+            "level": 5
+        },
+        {
+            "weaponname": "Scottish Basket-Hilt Claymore",
+            "value": 4230,
+            "damage": 9,
+            "level": 5
+        },
+        {
+            "weaponname": "Agincourt Steel Sword",
+            "value": 5040,
+            "damage": 10,
+            "level": 5
+        },
+        {
+            "weaponname": "Celtic Combat Sword",
+            "value": 5850,
+            "damage": 11,
+            "level": 5
+        },
+        {
+            "weaponname": "Norseman's Sword",
+            "value": 6840,
+            "damage": 12,
+            "level": 5
+        },
+        {
+            "weaponname": "Knight's Sword",
+            "value": 8010,
+            "damage": 13,
+            "level": 5
+        },
+        {
+            "weaponname": "Heraldic Lion Claymore",
+            "value": 9000,
+            "damage": 14,
+            "level": 5
+        },
+        {
+            "weaponname": "Dragon Soldier's Claymore",
+            "value": 10350,
+            "damage": 15,
+            "level": 5
+        },
+        {
+            "weaponname": "Two Broken Short Swords",
+            "value": 48,
+            "damage": 1,
+            "level": 6
+        },
+        {
+            "weaponname": "Two Short Swords",
+            "value": 225,
+            "damage": 2,
+            "level": 6
+        },
+        {
+            "weaponname": "Iron Scimitars",
+            "value": 585,
+            "damage": 3,
+            "level": 6
+        },
+        {
+            "weaponname": "Balanced Scimitars",
+            "value": 990,
+            "damage": 4,
+            "level": 6
+        },
+        {
+            "weaponname": "Tarnished Steel Scimitars",
+            "value": 1575,
+            "damage": 5,
+            "level": 6
+        },
+        {
+            "weaponname": "Rusty Steel Scimitars",
+            "value": 2250,
+            "damage": 6,
+            "level": 6
+        },
+        {
+            "weaponname": "Steel Scimitars",
+            "value": 2790,
+            "damage": 7,
+            "level": 6
+        },
+        {
+            "weaponname": "Bronze Hilted Steel Scimitars",
+            "value": 3420,
+            "damage": 8,
+            "level": 6
+        },
+        {
+            "weaponname": "Gold Hilted Steel Scimitars",
+            "value": 4230,
+            "damage": 9,
+            "level": 6
+        },
+        {
+            "weaponname": "Platinum Hilted Steel Scimitars",
+            "value": 5040,
+            "damage": 10,
+            "level": 6
+        },
+        {
+            "weaponname": "Well Crafted Adamantite Scimitars",
+            "value": 5850,
+            "damage": 11,
+            "level": 6
+        },
+        {
+            "weaponname": "Perfectly Crafted Adamantite Scimitars",
+            "value": 6840,
+            "damage": 12,
+            "level": 6
+        },
+        {
+            "weaponname": "Enchanted Scimitars",
+            "value": 8010,
+            "damage": 13,
+            "level": 6
+        },
+        {
+            "weaponname": "Drow Crafted Scimitars",
+            "value": 9000,
+            "damage": 14,
+            "level": 6
+        },
+        {
+            "weaponname": "Unicorn Blood-Forged Scimitars",
+            "value": 10350,
+            "damage": 15,
+            "level": 6
+        },
+        {
+            "weaponname": "Chipped Iron Axe",
+            "value": 48,
+            "damage": 1,
+            "level": 7
+        },
+        {
+            "weaponname": "Iron Axe",
+            "value": 225,
+            "damage": 2,
+            "level": 7
+        },
+        {
+            "weaponname": "Rusty Steel Axe",
+            "value": 585,
+            "damage": 3,
+            "level": 7
+        },
+        {
+            "weaponname": "Fine Steel Axe",
+            "value": 990,
+            "damage": 4,
+            "level": 7
+        },
+        {
+            "weaponname": "Lumberjack's Axe",
+            "value": 1575,
+            "damage": 5,
+            "level": 7
+        },
+        {
+            "weaponname": "Low Quality Battle Axe",
+            "value": 2250,
+            "damage": 6,
+            "level": 7
+        },
+        {
+            "weaponname": "Medium Quality Battle Axe",
+            "value": 2790,
+            "damage": 7,
+            "level": 7
+        },
+        {
+            "weaponname": "High Quality Battle Axe",
+            "value": 3420,
+            "damage": 8,
+            "level": 7
+        },
+        {
+            "weaponname": "Double Bladed Axe",
+            "value": 4230,
+            "damage": 9,
+            "level": 7
+        },
+        {
+            "weaponname": "Double Bladed Battle Axe",
+            "value": 5040,
+            "damage": 10,
+            "level": 7
+        },
+        {
+            "weaponname": "Gold Plated Battle Axe",
+            "value": 5850,
+            "damage": 11,
+            "level": 7
+        },
+        {
+            "weaponname": "Platinum Hilted Battle Axe",
+            "value": 6840,
+            "damage": 12,
+            "level": 7
+        },
+        {
+            "weaponname": "Enchanted Battle Axe",
+            "value": 8010,
+            "damage": 13,
+            "level": 7
+        },
+        {
+            "weaponname": "Dwarf Smith's Battle Axe",
+            "value": 9000,
+            "damage": 14,
+            "level": 7
+        },
+        {
+            "weaponname": "Dwarf Warrior's Battle Axe",
+            "value": 10350,
+            "damage": 15,
+            "level": 7
+        },
+        {
+            "weaponname": "Broken Iron Mace",
+            "value": 48,
+            "damage": 1,
+            "level": 8
+        },
+        {
+            "weaponname": "Tarnished Iron Mace",
+            "value": 225,
+            "damage": 2,
+            "level": 8
+        },
+        {
+            "weaponname": "Polished Iron Mace",
+            "value": 585,
+            "damage": 3,
+            "level": 8
+        },
+        {
+            "weaponname": "Well Crafted Iron Mace",
+            "value": 990,
+            "damage": 4,
+            "level": 8
+        },
+        {
+            "weaponname": "Polished Steel Mace",
+            "value": 1575,
+            "damage": 5,
+            "level": 8
+        },
+        {
+            "weaponname": "Well Crafted Steel Mace",
+            "value": 2250,
+            "damage": 6,
+            "level": 8
+        },
+        {
+            "weaponname": "Poorly Balanced Double Mace",
+            "value": 2790,
+            "damage": 7,
+            "level": 8
+        },
+        {
+            "weaponname": "Well Balanced Double Mace",
+            "value": 3420,
+            "damage": 8,
+            "level": 8
+        },
+        {
+            "weaponname": "Battle Mace",
+            "value": 4230,
+            "damage": 9,
+            "level": 8
+        },
+        {
+            "weaponname": "War Chieftain's Battle Mace",
+            "value": 5040,
+            "damage": 10,
+            "level": 8
+        },
+        {
+            "weaponname": "War Chieftain's Morning Star",
+            "value": 5850,
+            "damage": 11,
+            "level": 8
+        },
+        {
+            "weaponname": "Adamantite Morning Star",
+            "value": 6840,
+            "damage": 12,
+            "level": 8
+        },
+        {
+            "weaponname": "Dwarf Crafted Morning Star",
+            "value": 8010,
+            "damage": 13,
+            "level": 8
+        },
+        {
+            "weaponname": "Dwarf Warlord's Morning Star",
+            "value": 9000,
+            "damage": 14,
+            "level": 8
+        },
+        {
+            "weaponname": "Enchanted Morning Star",
+            "value": 10350,
+            "damage": 15,
+            "level": 8
+        },
+        {
+            "weaponname": "Boot Knife",
+            "value": 48,
+            "damage": 1,
+            "level": 9
+        },
+        {
+            "weaponname": "Target Knife",
+            "value": 225,
+            "damage": 2,
+            "level": 9
+        },
+        {
+            "weaponname": "Blackjack",
+            "value": 585,
+            "damage": 3,
+            "level": 9
+        },
+        {
+            "weaponname": "Throwing Star",
+            "value": 990,
+            "damage": 4,
+            "level": 9
+        },
+        {
+            "weaponname": "Hira-Shuriken",
+            "value": 1575,
+            "damage": 5,
+            "level": 9
+        },
+        {
+            "weaponname": "Throwing Spike",
+            "value": 2250,
+            "damage": 6,
+            "level": 9
+        },
+        {
+            "weaponname": "Atlatl",
+            "value": 2790,
+            "damage": 7,
+            "level": 9
+        },
+        {
+            "weaponname": "Qilamitautit Bolo",
+            "value": 3420,
+            "damage": 8,
+            "level": 9
+        },
+        {
+            "weaponname": "War Quoait",
+            "value": 4230,
+            "damage": 9,
+            "level": 9
+        },
+        {
+            "weaponname": "Cha Kran",
+            "value": 5040,
+            "damage": 10,
+            "level": 9
+        },
+        {
+            "weaponname": "Fei Piau",
+            "value": 5850,
+            "damage": 11,
+            "level": 9
+        },
+        {
+            "weaponname": "Jen Piau",
+            "value": 6840,
+            "damage": 12,
+            "level": 9
+        },
+        {
+            "weaponname": "Gau dim Piau",
+            "value": 8010,
+            "damage": 13,
+            "level": 9
+        },
+        {
+            "weaponname": "Enchanted Throwing Axe",
+            "value": 9000,
+            "damage": 14,
+            "level": 9
+        },
+        {
+            "weaponname": "Teksolo's Ninja Stars",
+            "value": 10350,
+            "damage": 15,
+            "level": 9
+        },
+        {
+            "weaponname": "Farmer's Bow & Wooden Arrows",
+            "value": 48,
+            "damage": 1,
+            "level": 10
+        },
+        {
+            "weaponname": "Farmer's Bow & Stone Tipped Arrows",
+            "value": 225,
+            "damage": 2,
+            "level": 10
+        },
+        {
+            "weaponname": "Farmer's Bow & Steel Tipped Arrows",
+            "value": 585,
+            "damage": 3,
+            "level": 10
+        },
+        {
+            "weaponname": "Hunter's Bow & Wooden Arrows",
+            "value": 990,
+            "damage": 4,
+            "level": 10
+        },
+        {
+            "weaponname": "Hunter's Bow & Stone Tipped Arrows",
+            "value": 1575,
+            "damage": 5,
+            "level": 10
+        },
+        {
+            "weaponname": "Hunter's Bow & Steel Tipped Arrows",
+            "value": 2250,
+            "damage": 6,
+            "level": 10
+        },
+        {
+            "weaponname": "Ranger's Bow & Wooden Arrows",
+            "value": 2790,
+            "damage": 7,
+            "level": 10
+        },
+        {
+            "weaponname": "Ranger's Bow & Stone Tipped Arrows",
+            "value": 3420,
+            "damage": 8,
+            "level": 10
+        },
+        {
+            "weaponname": "Ranger's Bow & Steel Tipped Arrows",
+            "value": 4230,
+            "damage": 9,
+            "level": 10
+        },
+        {
+            "weaponname": "Longbow",
+            "value": 5040,
+            "damage": 10,
+            "level": 10
+        },
+        {
+            "weaponname": "Crossbow",
+            "value": 5850,
+            "damage": 11,
+            "level": 10
+        },
+        {
+            "weaponname": "Elvish Longbow",
+            "value": 6840,
+            "damage": 12,
+            "level": 10
+        },
+        {
+            "weaponname": "Elvish Longbow & Flame Tipped Arrows",
+            "value": 8010,
+            "damage": 13,
+            "level": 10
+        },
+        {
+            "weaponname": "Elvish Longbow & Enchanted Arrows",
+            "value": 9000,
+            "damage": 14,
+            "level": 10
+        },
+        {
+            "weaponname": "Longbow of the Elf King",
+            "value": 10350,
+            "damage": 15,
+            "level": 10
+        },
+        {
+            "weaponname": "MightyE's Long Sword",
+            "value": 225,
+            "damage": 2,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Short Sword",
+            "value": 48,
+            "damage": 1,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Bastard Sword",
+            "value": 585,
+            "damage": 3,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Scimitars",
+            "value": 990,
+            "damage": 4,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Battle Axe",
+            "value": 1575,
+            "damage": 5,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Throwing Hammer",
+            "value": 2250,
+            "damage": 6,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Morning Star",
+            "value": 2790,
+            "damage": 7,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Compound Bow",
+            "value": 3420,
+            "damage": 8,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Rapier",
+            "value": 4230,
+            "damage": 9,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Sabre",
+            "value": 5040,
+            "damage": 10,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Light Sabre",
+            "value": 5850,
+            "damage": 11,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Wakizashi",
+            "value": 6840,
+            "damage": 12,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's 2-Handed War Sword",
+            "value": 8010,
+            "damage": 13,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's 2-handed War Axe",
+            "value": 9000,
+            "damage": 14,
+            "level": 11
+        },
+        {
+            "weaponname": "MightyE's Claymore",
+            "value": 10350,
+            "damage": 15,
+            "level": 11
+        },
+        {
+            "weaponname": "Spell of Fire",
+            "value": 48,
+            "damage": 1,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Earthquake",
+            "value": 225,
+            "damage": 2,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Flood",
+            "value": 585,
+            "damage": 3,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Hurricane",
+            "value": 990,
+            "damage": 4,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Mind Control",
+            "value": 1575,
+            "damage": 5,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Lightning",
+            "value": 2250,
+            "damage": 6,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Weakness",
+            "value": 2790,
+            "damage": 7,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Fear",
+            "value": 3420,
+            "damage": 8,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Poison",
+            "value": 4230,
+            "damage": 9,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Spirit Possession",
+            "value": 5040,
+            "damage": 10,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Despair",
+            "value": 5850,
+            "damage": 11,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Bat Summoning",
+            "value": 6840,
+            "damage": 12,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Wolf Summoning",
+            "value": 8010,
+            "damage": 13,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Unicorn Summoning",
+            "value": 9000,
+            "damage": 14,
+            "level": 12
+        },
+        {
+            "weaponname": "Spell of Dragon Summoning",
+            "value": 10350,
+            "damage": 15,
+            "level": 12
+        }
+    ]
 }

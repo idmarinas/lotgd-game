@@ -132,35 +132,35 @@ if (0 < DB::num_rows($result))
     }
     rawoutput('</table>');
     $script = "<script language='Javascript'>
-					function check_all() {
-						var elements = document.getElementsByName(\"msg[]\");
-						var max = elements.length;
-						var Zaehler=0;
-						var checktext='".translate_inline('Check all')."';
-						var unchecktext='".translate_inline('Uncheck all')."';
-						var check = false;
-						for (Zaehler=0;Zaehler<max;Zaehler++) {
-							if (elements[Zaehler].checked==true) {
-								check=true;
-								break;
-							}
-						}
-						if (check==false) {
-							for (Zaehler=0;Zaehler<max;Zaehler++) {
-								elements[Zaehler].checked=true;
-								document.getElementById('button_check').value=unchecktext;
-							}
-						} else {
-							for (Zaehler=0;Zaehler<max;Zaehler++) {
-								elements[Zaehler].checked=false;
-								document.getElementById('button_check').value=checktext;
-								document.getElementById('check_name_select').value = '';
-							}
-						}
-					}
-					function check_name(who) {
-						if (who=='') return;
-					";
+                    function check_all() {
+                        var elements = document.getElementsByName(\"msg[]\");
+                        var max = elements.length;
+                        var Zaehler=0;
+                        var checktext='".translate_inline('Check all')."';
+                        var unchecktext='".translate_inline('Uncheck all')."';
+                        var check = false;
+                        for (Zaehler=0;Zaehler<max;Zaehler++) {
+                            if (elements[Zaehler].checked==true) {
+                                check=true;
+                                break;
+                            }
+                        }
+                        if (check==false) {
+                            for (Zaehler=0;Zaehler<max;Zaehler++) {
+                                elements[Zaehler].checked=true;
+                                document.getElementById('button_check').value=unchecktext;
+                            }
+                        } else {
+                            for (Zaehler=0;Zaehler<max;Zaehler++) {
+                                elements[Zaehler].checked=false;
+                                document.getElementById('button_check').value=checktext;
+                                document.getElementById('check_name_select').value = '';
+                            }
+                        }
+                    }
+                    function check_name(who) {
+                        if (who=='') return;
+                    ";
     $add = '';
     $i = 0;
     $option = '<option>---</option>';
@@ -176,20 +176,20 @@ if (0 < DB::num_rows($result))
             $add .= ',new Array('.$ids.')';
         }
         $option .= "<option value='$i'>".$key.'</option>
-			';
+            ';
         $i++;
     }
     $script .= "var container = new Array($add);
-			var who = document.getElementById('check_name_select').value;
-			var unchecktext='".translate_inline('Uncheck all')."';
-			if (undefined === container[who]) return;
-			for (var i=0; i < container[who].length; i++)
-			{
-				document.getElementById(container[who][i]).checked=true;
-			}
-			document.getElementById('button_check').value=unchecktext;
-		}
-	</script>";
+            var who = document.getElementById('check_name_select').value;
+            var unchecktext='".translate_inline('Uncheck all')."';
+            if (undefined === container[who]) return;
+            for (var i=0; i < container[who].length; i++)
+            {
+                document.getElementById(container[who][i]).checked=true;
+            }
+            document.getElementById('button_check').value=unchecktext;
+        }
+    </script>";
     rawoutput($script);
     $checkall = htmlentities(translate_inline('Check All'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
     $delchecked = htmlentities(translate_inline('Delete Checked'), ENT_COMPAT, getsetting('charset', 'UTF-8'));

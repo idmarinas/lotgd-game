@@ -1,200 +1,200 @@
 {
     "method": "insert",
-	"table": "titles",
+    "table": "titles",
     "entity": "Lotgd\\Core\\Entity\\Titles",
-	"rows":
-	[
-		{
-			"dk": 0,
-			"ref": "",
-			"male": "Farmboy",
-			"female": "Farmgirl"
-		},
-		{
-			"dk": 1,
-			"ref": "",
-			"male": "Page",
-			"female": "Page"
-		},
-		{
-			"dk": 2,
-			"ref": "",
-			"male": "Squire",
-			"female": "Squire"
-		},
-		{
-			"dk": 3,
-			"ref": "",
-			"male": "Gladiator",
-			"female": "Gladiatrix"
-		},
-		{
-			"dk": 4,
-			"ref": "",
-			"male": "Legionnaire",
-			"female": "Legioness"
-		},
-		{
-			"dk": 5,
-			"ref": "",
-			"male": "Centurion",
-			"female": "Centurioness"
-		},
-		{
-			"dk": 6,
-			"ref": "",
-			"male": "Sir",
-			"female": "Madam"
-		},
-		{
-			"dk": 7,
-			"ref": "",
-			"male": "Reeve",
-			"female": "Reeve"
-		},
-		{
-			"dk": 8,
-			"ref": "",
-			"male": "Steward",
-			"female": "Steward"
-		},
-		{
-			"dk": 9,
-			"ref": "",
-			"male": "Mayor",
-			"female": "Mayoress"
-		},
-		{
-			"dk": 10,
-			"ref": "",
-			"male": "Baron",
-			"female": "Baroness"
-		},
-		{
-			"dk": 11,
-			"ref": "",
-			"male": "Count",
-			"female": "Countess"
-		},
-		{
-			"dk": 12,
-			"ref": "",
-			"male": "Viscount",
-			"female": "Viscountess"
-		},
-		{
-			"dk": 13,
-			"ref": "",
-			"male": "Marquis",
-			"female": "Marchioness"
-		},
-		{
-			"dk": 14,
-			"ref": "",
-			"male": "Chancellor",
-			"female": "Chancelloress"
-		},
-		{
-			"dk": 15,
-			"ref": "",
-			"male": "Prince",
-			"female": "Princess"
-		},
-		{
-			"dk": 16,
-			"ref": "",
-			"male": "King",
-			"female": "Queen"
-		},
-		{
-			"dk": 17,
-			"ref": "",
-			"male": "Emperor",
-			"female": "Empress"
-		},
-		{
-			"dk": 18,
-			"ref": "",
-			"male": "Angel",
-			"female": "Angel"
-		},
-		{
-			"dk": 19,
-			"ref": "",
-			"male": "Archangel",
-			"female": "Archangel"
-		},
-		{
-			"dk": 20,
-			"ref": "",
-			"male": "Principality",
-			"female": "Principality"
-		},
-		{
-			"dk": 21,
-			"ref": "",
-			"male": "Power",
-			"female": "Power"
-		},
-		{
-			"dk": 22,
-			"ref": "",
-			"male": "Virtue",
-			"female": "Virtue"
-		},
-		{
-			"dk": 23,
-			"ref": "",
-			"male": "Dominion",
-			"female": "Dominion"
-		},
-		{
-			"dk": 24,
-			"ref": "",
-			"male": "Throne",
-			"female": "Throne"
-		},
-		{
-			"dk": 25,
-			"ref": "",
-			"male": "Cherub",
-			"female": "Cherub"
-		},
-		{
-			"dk": 26,
-			"ref": "",
-			"male": "Seraph",
-			"female": "Seraph"
-		},
-		{
-			"dk": 27,
-			"ref": "",
-			"male": "Demigod",
-			"female": "Demigoddess"
-		},
-		{
-			"dk": 28,
-			"ref": "",
-			"male": "Titan",
-			"female": "Titaness"
-		},
-		{
-			"dk": 29,
-			"ref": "",
-			"male": "Archtitan",
-			"female": "Archtitaness"
-		},
-		{
-			"dk": 30,
-			"ref": "",
-			"male": "Undergod",
-			"female": "Undergoddess"
-		},
-		{
-			"dk": 31,
-			"ref": "",
-			"male": "God",
-			"female": "Goddess"
-		}
-	]
+    "rows":
+    [
+        {
+            "dk": 0,
+            "ref": "",
+            "male": "Farmboy",
+            "female": "Farmgirl"
+        },
+        {
+            "dk": 1,
+            "ref": "",
+            "male": "Page",
+            "female": "Page"
+        },
+        {
+            "dk": 2,
+            "ref": "",
+            "male": "Squire",
+            "female": "Squire"
+        },
+        {
+            "dk": 3,
+            "ref": "",
+            "male": "Gladiator",
+            "female": "Gladiatrix"
+        },
+        {
+            "dk": 4,
+            "ref": "",
+            "male": "Legionnaire",
+            "female": "Legioness"
+        },
+        {
+            "dk": 5,
+            "ref": "",
+            "male": "Centurion",
+            "female": "Centurioness"
+        },
+        {
+            "dk": 6,
+            "ref": "",
+            "male": "Sir",
+            "female": "Madam"
+        },
+        {
+            "dk": 7,
+            "ref": "",
+            "male": "Reeve",
+            "female": "Reeve"
+        },
+        {
+            "dk": 8,
+            "ref": "",
+            "male": "Steward",
+            "female": "Steward"
+        },
+        {
+            "dk": 9,
+            "ref": "",
+            "male": "Mayor",
+            "female": "Mayoress"
+        },
+        {
+            "dk": 10,
+            "ref": "",
+            "male": "Baron",
+            "female": "Baroness"
+        },
+        {
+            "dk": 11,
+            "ref": "",
+            "male": "Count",
+            "female": "Countess"
+        },
+        {
+            "dk": 12,
+            "ref": "",
+            "male": "Viscount",
+            "female": "Viscountess"
+        },
+        {
+            "dk": 13,
+            "ref": "",
+            "male": "Marquis",
+            "female": "Marchioness"
+        },
+        {
+            "dk": 14,
+            "ref": "",
+            "male": "Chancellor",
+            "female": "Chancelloress"
+        },
+        {
+            "dk": 15,
+            "ref": "",
+            "male": "Prince",
+            "female": "Princess"
+        },
+        {
+            "dk": 16,
+            "ref": "",
+            "male": "King",
+            "female": "Queen"
+        },
+        {
+            "dk": 17,
+            "ref": "",
+            "male": "Emperor",
+            "female": "Empress"
+        },
+        {
+            "dk": 18,
+            "ref": "",
+            "male": "Angel",
+            "female": "Angel"
+        },
+        {
+            "dk": 19,
+            "ref": "",
+            "male": "Archangel",
+            "female": "Archangel"
+        },
+        {
+            "dk": 20,
+            "ref": "",
+            "male": "Principality",
+            "female": "Principality"
+        },
+        {
+            "dk": 21,
+            "ref": "",
+            "male": "Power",
+            "female": "Power"
+        },
+        {
+            "dk": 22,
+            "ref": "",
+            "male": "Virtue",
+            "female": "Virtue"
+        },
+        {
+            "dk": 23,
+            "ref": "",
+            "male": "Dominion",
+            "female": "Dominion"
+        },
+        {
+            "dk": 24,
+            "ref": "",
+            "male": "Throne",
+            "female": "Throne"
+        },
+        {
+            "dk": 25,
+            "ref": "",
+            "male": "Cherub",
+            "female": "Cherub"
+        },
+        {
+            "dk": 26,
+            "ref": "",
+            "male": "Seraph",
+            "female": "Seraph"
+        },
+        {
+            "dk": 27,
+            "ref": "",
+            "male": "Demigod",
+            "female": "Demigoddess"
+        },
+        {
+            "dk": 28,
+            "ref": "",
+            "male": "Titan",
+            "female": "Titaness"
+        },
+        {
+            "dk": 29,
+            "ref": "",
+            "male": "Archtitan",
+            "female": "Archtitaness"
+        },
+        {
+            "dk": 30,
+            "ref": "",
+            "male": "Undergod",
+            "female": "Undergoddess"
+        },
+        {
+            "dk": 31,
+            "ref": "",
+            "male": "God",
+            "female": "Goddess"
+        }
+    ]
 }

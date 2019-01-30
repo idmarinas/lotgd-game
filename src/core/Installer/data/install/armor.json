@@ -2,1177 +2,1177 @@
     "method": "insert",
     "table": "armor",
     "entity": "Lotgd\\Core\\Entity\\Armor",
-	"rows":
-	[
-		{
-			"armorname": "Fuzzy Slippers",
-			"value": 48,
-			"defense": 1,
-			"level": 0
-		},
-		{
-			"armorname": "Flannel Pajamas",
-			"value": 225,
-			"defense": 2,
-			"level": 0
-		},
-		{
-			"armorname": "Homespun Longjohns",
-			"value": 585,
-			"defense": 3,
-			"level": 0
-		},
-		{
-			"armorname": "Homespun Undershirt",
-			"value": 990,
-			"defense": 4,
-			"level": 0
-		},
-		{
-			"armorname": "Knitted Socks",
-			"value": 1575,
-			"defense": 5,
-			"level": 0
-		},
-		{
-			"armorname": "Knitted Gloves",
-			"value": 2250,
-			"defense": 6,
-			"level": 0
-		},
-		{
-			"armorname": "Old Leather Boots",
-			"value": 2790,
-			"defense": 7,
-			"level": 0
-		},
-		{
-			"armorname": "Homespun Pants",
-			"value": 3420,
-			"defense": 8,
-			"level": 0
-		},
-		{
-			"armorname": "Homespun Tunic",
-			"value": 4230,
-			"defense": 9,
-			"level": 0
-		},
-		{
-			"armorname": "Gypsy Cape",
-			"value": 5040,
-			"defense": 10,
-			"level": 0
-		},
-		{
-			"armorname": "Old Leather Cap",
-			"value": 5850,
-			"defense": 11,
-			"level": 0
-		},
-		{
-			"armorname": "Old Leather Bracers",
-			"value": 6840,
-			"defense": 12,
-			"level": 0
-		},
-		{
-			"armorname": "Traveller's Shield",
-			"value": 8010,
-			"defense": 13,
-			"level": 0
-		},
-		{
-			"armorname": "Old Leather Pants",
-			"value": 9000,
-			"defense": 14,
-			"level": 0
-		},
-		{
-			"armorname": "Old Leather Tunic",
-			"value": 10350,
-			"defense": 15,
-			"level": 0
-		},
-		{
-			"armorname": "Flip-Flops",
-			"value": 48,
-			"defense": 1,
-			"level": 1
-		},
-		{
-			"armorname": "Swimsuit and Towel",
-			"value": 225,
-			"defense": 2,
-			"level": 1
-		},
-		{
-			"armorname": "Cotton Undershirt",
-			"value": 585,
-			"defense": 3,
-			"level": 1
-		},
-		{
-			"armorname": "Wool Socks",
-			"value": 990,
-			"defense": 4,
-			"level": 1
-		},
-		{
-			"armorname": "Wool Gloves",
-			"value": 1575,
-			"defense": 5,
-			"level": 1
-		},
-		{
-			"armorname": "Leather Boots",
-			"value": 2250,
-			"defense": 6,
-			"level": 1
-		},
-		{
-			"armorname": "Leather Cap",
-			"value": 2790,
-			"defense": 7,
-			"level": 1
-		},
-		{
-			"armorname": "Leather Bracers",
-			"value": 3420,
-			"defense": 8,
-			"level": 1
-		},
-		{
-			"armorname": "Leather Leggings",
-			"value": 4230,
-			"defense": 9,
-			"level": 1
-		},
-		{
-			"armorname": "Leather Tunic",
-			"value": 5040,
-			"defense": 10,
-			"level": 1
-		},
-		{
-			"armorname": "Hooded Leather Cape",
-			"value": 5850,
-			"defense": 11,
-			"level": 1
-		},
-		{
-			"armorname": "Deerskin Leggings",
-			"value": 6840,
-			"defense": 12,
-			"level": 1
-		},
-		{
-			"armorname": "Deerskin Belt",
-			"value": 8010,
-			"defense": 13,
-			"level": 1
-		},
-		{
-			"armorname": "Deerskin Tunic",
-			"value": 9000,
-			"defense": 14,
-			"level": 1
-		},
-		{
-			"armorname": "Small Rawhide Shield",
-			"value": 10350,
-			"defense": 15,
-			"level": 1
-		},
-		{
-			"armorname": "Workboots",
-			"value": 48,
-			"defense": 1,
-			"level": 2
-		},
-		{
-			"armorname": "Overalls",
-			"value": 225,
-			"defense": 2,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Gloves",
-			"value": 585,
-			"defense": 3,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Bracers",
-			"value": 990,
-			"defense": 4,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Boots",
-			"value": 1575,
-			"defense": 5,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Helm",
-			"value": 2250,
-			"defense": 6,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Pants",
-			"value": 2790,
-			"defense": 7,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Tunic",
-			"value": 3420,
-			"defense": 8,
-			"level": 2
-		},
-		{
-			"armorname": "Sturdy Leather Cloak",
-			"value": 4230,
-			"defense": 9,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Helm",
-			"value": 5040,
-			"defense": 10,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Gauntlets",
-			"value": 5850,
-			"defense": 11,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Bracers",
-			"value": 6840,
-			"defense": 12,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Greaves",
-			"value": 8010,
-			"defense": 13,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Tunic",
-			"value": 9000,
-			"defense": 14,
-			"level": 2
-		},
-		{
-			"armorname": "Woodsman's Kite Shield",
-			"value": 10350,
-			"defense": 15,
-			"level": 2
-		},
-		{
-			"armorname": "Showercap and Towel",
-			"value": 48,
-			"defense": 1,
-			"level": 3
-		},
-		{
-			"armorname": "Bathrobe",
-			"value": 225,
-			"defense": 2,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfskin Gloves",
-			"value": 585,
-			"defense": 3,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfskin-lined Boots",
-			"value": 990,
-			"defense": 4,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfskin Bracers",
-			"value": 1575,
-			"defense": 5,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfskin Pants",
-			"value": 2250,
-			"defense": 6,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfskin Tunic",
-			"value": 2790,
-			"defense": 7,
-			"level": 3
-		},
-		{
-			"armorname": "Hooded Wolfskin Cape",
-			"value": 3420,
-			"defense": 8,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfmaster's Bracers",
-			"value": 4230,
-			"defense": 9,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfmaster's Gauntlets",
-			"value": 5040,
-			"defense": 10,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfmasters Helm",
-			"value": 5850,
-			"defense": 11,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfmaster's Leggings",
-			"value": 6840,
-			"defense": 12,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfmaster's Belted Jerkin",
-			"value": 8010,
-			"defense": 13,
-			"level": 3
-		},
-		{
-			"armorname": "Wolfhide Cape",
-			"value": 9000,
-			"defense": 14,
-			"level": 3
-		},
-		{
-			"armorname": "Shield of the Wolf Master",
-			"value": 10350,
-			"defense": 15,
-			"level": 3
-		},
-		{
-			"armorname": "Sweat Pants",
-			"value": 48,
-			"defense": 1,
-			"level": 4
-		},
-		{
-			"armorname": "Sweat Shirt",
-			"value": 225,
-			"defense": 2,
-			"level": 4
-		},
-		{
-			"armorname": "Studded Leather Helm",
-			"value": 585,
-			"defense": 3,
-			"level": 4
-		},
-		{
-			"armorname": "Studded Leather Gauntlets",
-			"value": 990,
-			"defense": 4,
-			"level": 4
-		},
-		{
-			"armorname": "Hardened Leather Boots",
-			"value": 1575,
-			"defense": 5,
-			"level": 4
-		},
-		{
-			"armorname": "Studded Leather Leggings",
-			"value": 2250,
-			"defense": 6,
-			"level": 4
-		},
-		{
-			"armorname": "Studded Leather Tunic",
-			"value": 2790,
-			"defense": 7,
-			"level": 4
-		},
-		{
-			"armorname": "Tanner's Cape",
-			"value": 3420,
-			"defense": 8,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Helm",
-			"value": 4230,
-			"defense": 9,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Gauntlets",
-			"value": 5040,
-			"defense": 10,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Bracers",
-			"value": 5850,
-			"defense": 11,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Boots",
-			"value": 6840,
-			"defense": 12,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Greaves",
-			"value": 8010,
-			"defense": 13,
-			"level": 4
-		},
-		{
-			"armorname": "Rusty Chainmail Tunic",
-			"value": 9000,
-			"defense": 14,
-			"level": 4
-		},
-		{
-			"armorname": "Large Iron Buckler",
-			"value": 10350,
-			"defense": 15,
-			"level": 4
-		},
-		{
-			"armorname": "Bunny Slippers",
-			"value": 48,
-			"defense": 1,
-			"level": 5
-		},
-		{
-			"armorname": "Feety Pajamas",
-			"value": 225,
-			"defense": 2,
-			"level": 5
-		},
-		{
-			"armorname": "Comfortable Leather Undergarments",
-			"value": 585,
-			"defense": 3,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Helm",
-			"value": 990,
-			"defense": 4,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Gauntlets",
-			"value": 1575,
-			"defense": 5,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Bracers",
-			"value": 2250,
-			"defense": 6,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Boots",
-			"value": 2790,
-			"defense": 7,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Greaves",
-			"value": 3420,
-			"defense": 8,
-			"level": 5
-		},
-		{
-			"armorname": "Heavy Chainmail Tunic",
-			"value": 4230,
-			"defense": 9,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Bracers",
-			"value": 5040,
-			"defense": 10,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Gauntlets",
-			"value": 5850,
-			"defense": 11,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Boots",
-			"value": 6840,
-			"defense": 12,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Greaves",
-			"value": 8010,
-			"defense": 13,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Chestplate",
-			"value": 9000,
-			"defense": 14,
-			"level": 5
-		},
-		{
-			"armorname": "Dragon Soldier's Shield",
-			"value": 10350,
-			"defense": 15,
-			"level": 5
-		},
-		{
-			"armorname": "Bluejeans",
-			"value": 48,
-			"defense": 1,
-			"level": 6
-		},
-		{
-			"armorname": "Flannel Shirt",
-			"value": 225,
-			"defense": 2,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Helm",
-			"value": 585,
-			"defense": 3,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Gauntlets",
-			"value": 990,
-			"defense": 4,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Bracers",
-			"value": 1575,
-			"defense": 5,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Boots",
-			"value": 2250,
-			"defense": 6,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Greaves",
-			"value": 2790,
-			"defense": 7,
-			"level": 6
-		},
-		{
-			"armorname": "Well Crafted Bronze Chestplate",
-			"value": 3420,
-			"defense": 8,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Helm",
-			"value": 4230,
-			"defense": 9,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Gauntlets",
-			"value": 5040,
-			"defense": 10,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Bracers",
-			"value": 5850,
-			"defense": 11,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Boots",
-			"value": 6840,
-			"defense": 12,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Greaves",
-			"value": 8010,
-			"defense": 13,
-			"level": 6
-		},
-		{
-			"armorname": "Enchanted Bronze Chestplate",
-			"value": 9000,
-			"defense": 14,
-			"level": 6
-		},
-		{
-			"armorname": "Hooded Unicorn Skin Cloak",
-			"value": 10350,
-			"defense": 15,
-			"level": 6
-		},
-		{
-			"armorname": "Barrel",
-			"value": 48,
-			"defense": 1,
-			"level": 7
-		},
-		{
-			"armorname": "Lampshade",
-			"value": 225,
-			"defense": 2,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Helm",
-			"value": 585,
-			"defense": 3,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Gauntlets",
-			"value": 990,
-			"defense": 4,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Boots",
-			"value": 1575,
-			"defense": 5,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Bracers",
-			"value": 2250,
-			"defense": 6,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Greaves",
-			"value": 2790,
-			"defense": 7,
-			"level": 7
-		},
-		{
-			"armorname": "Perfectly Crafted Steel Chestplate",
-			"value": 3420,
-			"defense": 8,
-			"level": 7
-		},
-		{
-			"armorname": "Griffon-Feather Cloak",
-			"value": 4230,
-			"defense": 9,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Helm",
-			"value": 5040,
-			"defense": 10,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Gauntlets",
-			"value": 5850,
-			"defense": 11,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Boots",
-			"value": 6840,
-			"defense": 12,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Bracers",
-			"value": 8010,
-			"defense": 13,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Greaves",
-			"value": 9000,
-			"defense": 14,
-			"level": 7
-		},
-		{
-			"armorname": "Dwarven Chainmail Chestplate",
-			"value": 10350,
-			"defense": 15,
-			"level": 7
-		},
-		{
-			"armorname": "Fig Leaf",
-			"value": 48,
-			"defense": 1,
-			"level": 8
-		},
-		{
-			"armorname": "Kilt",
-			"value": 225,
-			"defense": 2,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Helm",
-			"value": 585,
-			"defense": 3,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Gauntlets",
-			"value": 990,
-			"defense": 4,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Boots",
-			"value": 1575,
-			"defense": 5,
-			"level": 8
-		},
-		{
-			"armorname": "Bracers",
-			"value": 2250,
-			"defense": 6,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Greaves",
-			"value": 2790,
-			"defense": 7,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Chestplate",
-			"value": 3420,
-			"defense": 8,
-			"level": 8
-		},
-		{
-			"armorname": "Majestic Gold Shield",
-			"value": 4230,
-			"defense": 9,
-			"level": 8
-		},
-		{
-			"armorname": "Gold-Threaded Cloak",
-			"value": 5040,
-			"defense": 10,
-			"level": 8
-		},
-		{
-			"armorname": "Enchanted Ruby Ring",
-			"value": 5850,
-			"defense": 11,
-			"level": 8
-		},
-		{
-			"armorname": "Enchanted Sapphire Ring",
-			"value": 6840,
-			"defense": 12,
-			"level": 8
-		},
-		{
-			"armorname": "Enchanted Jade Ring",
-			"value": 8010,
-			"defense": 13,
-			"level": 8
-		},
-		{
-			"armorname": "Enchanted Amethyst Ring",
-			"value": 9000,
-			"defense": 14,
-			"level": 8
-		},
-		{
-			"armorname": "Enchanted Diamond Ring",
-			"value": 10350,
-			"defense": 15,
-			"level": 8
-		},
-		{
-			"armorname": "Button",
-			"value": 48,
-			"defense": 1,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Nightclothes",
-			"value": 225,
-			"defense": 2,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Gloves",
-			"value": 585,
-			"defense": 3,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Slippers",
-			"value": 990,
-			"defense": 4,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Wristband",
-			"value": 1575,
-			"defense": 5,
-			"level": 9
-		},
-		{
-			"armorname": "Leggings",
-			"value": 2250,
-			"defense": 6,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Tunic",
-			"value": 2790,
-			"defense": 7,
-			"level": 9
-		},
-		{
-			"armorname": "Elven Silk Cloak",
-			"value": 3420,
-			"defense": 8,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Night",
-			"value": 4230,
-			"defense": 9,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Day",
-			"value": 5040,
-			"defense": 10,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Solitude",
-			"value": 5850,
-			"defense": 11,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Peace",
-			"value": 6840,
-			"defense": 12,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Courage",
-			"value": 8010,
-			"defense": 13,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Virtue",
-			"value": 9000,
-			"defense": 14,
-			"level": 9
-		},
-		{
-			"armorname": "Ring of Life",
-			"value": 10350,
-			"defense": 15,
-			"level": 9
-		},
-		{
-			"armorname": "Pegasus' Hooded Cloak",
-			"value": 5040,
-			"defense": 10,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Chestplate",
-			"value": 4230,
-			"defense": 9,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Greaves",
-			"value": 3420,
-			"defense": 8,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Boots",
-			"value": 2790,
-			"defense": 7,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Gorget",
-			"value": 2250,
-			"defense": 6,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Bracers",
-			"value": 1575,
-			"defense": 5,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Gauntlets",
-			"value": 990,
-			"defense": 4,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Helm",
-			"value": 585,
-			"defense": 3,
-			"level": 10
-		},
-		{
-			"armorname": "Platform Shoes",
-			"value": 225,
-			"defense": 2,
-			"level": 10
-		},
-		{
-			"armorname": "Leisure Suit",
-			"value": 48,
-			"defense": 1,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus Feather Pendant",
-			"value": 5850,
-			"defense": 11,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus Feather Belt",
-			"value": 6840,
-			"defense": 12,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Emblazoned Shield",
-			"value": 8010,
-			"defense": 13,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Emblazoned Ring",
-			"value": 9000,
-			"defense": 14,
-			"level": 10
-		},
-		{
-			"armorname": "Pegasus' Emblazoned Crown",
-			"value": 10350,
-			"defense": 15,
-			"level": 10
-		},
-		{
-			"armorname": "New Clothes",
-			"value": 48,
-			"defense": 1,
-			"level": 11
-		},
-		{
-			"armorname": "Chicken Suit",
-			"value": 225,
-			"defense": 2,
-			"level": 11
-		},
-		{
-			"armorname": "Gauntlets of Grace",
-			"value": 585,
-			"defense": 3,
-			"level": 11
-		},
-		{
-			"armorname": "Bracer of Beauty",
-			"value": 990,
-			"defense": 4,
-			"level": 11
-		},
-		{
-			"armorname": "Helm of Health",
-			"value": 1575,
-			"defense": 5,
-			"level": 11
-		},
-		{
-			"armorname": "Greaves of Good Fortune",
-			"value": 2250,
-			"defense": 6,
-			"level": 11
-		},
-		{
-			"armorname": "Boots of Bravery",
-			"value": 2790,
-			"defense": 7,
-			"level": 11
-		},
-		{
-			"armorname": "Tunic of Tolerance",
-			"value": 3420,
-			"defense": 8,
-			"level": 11
-		},
-		{
-			"armorname": "Cloak of Confidence",
-			"value": 4230,
-			"defense": 9,
-			"level": 11
-		},
-		{
-			"armorname": "Ring of Righteousness",
-			"value": 5040,
-			"defense": 10,
-			"level": 11
-		},
-		{
-			"armorname": "Necklace of Narcissism",
-			"value": 5850,
-			"defense": 11,
-			"level": 11
-		},
-		{
-			"armorname": "Pendant of Power",
-			"value": 6840,
-			"defense": 12,
-			"level": 11
-		},
-		{
-			"armorname": "Breastplate of Benevolence",
-			"value": 8010,
-			"defense": 13,
-			"level": 11
-		},
-		{
-			"armorname": "Shield of Superiority",
-			"value": 9000,
-			"defense": 14,
-			"level": 11
-		},
-		{
-			"armorname": "Scepter of Strength",
-			"value": 10350,
-			"defense": 15,
-			"level": 11
-		},
-		{
-			"armorname": "Dragon Skin Leather Helm",
-			"value": 48,
-			"defense": 1,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Gauntlets",
-			"value": 225,
-			"defense": 2,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Boots",
-			"value": 585,
-			"defense": 3,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Bracers",
-			"value": 990,
-			"defense": 4,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Leggings",
-			"value": 1575,
-			"defense": 5,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Tunic",
-			"value": 2250,
-			"defense": 6,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Skin Leather Cloak",
-			"value": 2790,
-			"defense": 7,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Helm",
-			"value": 3420,
-			"defense": 8,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Gauntlets",
-			"value": 4230,
-			"defense": 9,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Boots",
-			"value": 5040,
-			"defense": 10,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Bracers",
-			"value": 5850,
-			"defense": 11,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Greaves",
-			"value": 6840,
-			"defense": 12,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Chestplate",
-			"value": 8010,
-			"defense": 13,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Scale Cloak",
-			"value": 9000,
-			"defense": 14,
-			"level": 12
-		},
-		{
-			"armorname": "Dragon Talon Shield",
-			"value": 10350,
-			"defense": 15,
-			"level": 12
-		}
-	]
+    "rows":
+    [
+        {
+            "armorname": "Fuzzy Slippers",
+            "value": 48,
+            "defense": 1,
+            "level": 0
+        },
+        {
+            "armorname": "Flannel Pajamas",
+            "value": 225,
+            "defense": 2,
+            "level": 0
+        },
+        {
+            "armorname": "Homespun Longjohns",
+            "value": 585,
+            "defense": 3,
+            "level": 0
+        },
+        {
+            "armorname": "Homespun Undershirt",
+            "value": 990,
+            "defense": 4,
+            "level": 0
+        },
+        {
+            "armorname": "Knitted Socks",
+            "value": 1575,
+            "defense": 5,
+            "level": 0
+        },
+        {
+            "armorname": "Knitted Gloves",
+            "value": 2250,
+            "defense": 6,
+            "level": 0
+        },
+        {
+            "armorname": "Old Leather Boots",
+            "value": 2790,
+            "defense": 7,
+            "level": 0
+        },
+        {
+            "armorname": "Homespun Pants",
+            "value": 3420,
+            "defense": 8,
+            "level": 0
+        },
+        {
+            "armorname": "Homespun Tunic",
+            "value": 4230,
+            "defense": 9,
+            "level": 0
+        },
+        {
+            "armorname": "Gypsy Cape",
+            "value": 5040,
+            "defense": 10,
+            "level": 0
+        },
+        {
+            "armorname": "Old Leather Cap",
+            "value": 5850,
+            "defense": 11,
+            "level": 0
+        },
+        {
+            "armorname": "Old Leather Bracers",
+            "value": 6840,
+            "defense": 12,
+            "level": 0
+        },
+        {
+            "armorname": "Traveller's Shield",
+            "value": 8010,
+            "defense": 13,
+            "level": 0
+        },
+        {
+            "armorname": "Old Leather Pants",
+            "value": 9000,
+            "defense": 14,
+            "level": 0
+        },
+        {
+            "armorname": "Old Leather Tunic",
+            "value": 10350,
+            "defense": 15,
+            "level": 0
+        },
+        {
+            "armorname": "Flip-Flops",
+            "value": 48,
+            "defense": 1,
+            "level": 1
+        },
+        {
+            "armorname": "Swimsuit and Towel",
+            "value": 225,
+            "defense": 2,
+            "level": 1
+        },
+        {
+            "armorname": "Cotton Undershirt",
+            "value": 585,
+            "defense": 3,
+            "level": 1
+        },
+        {
+            "armorname": "Wool Socks",
+            "value": 990,
+            "defense": 4,
+            "level": 1
+        },
+        {
+            "armorname": "Wool Gloves",
+            "value": 1575,
+            "defense": 5,
+            "level": 1
+        },
+        {
+            "armorname": "Leather Boots",
+            "value": 2250,
+            "defense": 6,
+            "level": 1
+        },
+        {
+            "armorname": "Leather Cap",
+            "value": 2790,
+            "defense": 7,
+            "level": 1
+        },
+        {
+            "armorname": "Leather Bracers",
+            "value": 3420,
+            "defense": 8,
+            "level": 1
+        },
+        {
+            "armorname": "Leather Leggings",
+            "value": 4230,
+            "defense": 9,
+            "level": 1
+        },
+        {
+            "armorname": "Leather Tunic",
+            "value": 5040,
+            "defense": 10,
+            "level": 1
+        },
+        {
+            "armorname": "Hooded Leather Cape",
+            "value": 5850,
+            "defense": 11,
+            "level": 1
+        },
+        {
+            "armorname": "Deerskin Leggings",
+            "value": 6840,
+            "defense": 12,
+            "level": 1
+        },
+        {
+            "armorname": "Deerskin Belt",
+            "value": 8010,
+            "defense": 13,
+            "level": 1
+        },
+        {
+            "armorname": "Deerskin Tunic",
+            "value": 9000,
+            "defense": 14,
+            "level": 1
+        },
+        {
+            "armorname": "Small Rawhide Shield",
+            "value": 10350,
+            "defense": 15,
+            "level": 1
+        },
+        {
+            "armorname": "Workboots",
+            "value": 48,
+            "defense": 1,
+            "level": 2
+        },
+        {
+            "armorname": "Overalls",
+            "value": 225,
+            "defense": 2,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Gloves",
+            "value": 585,
+            "defense": 3,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Bracers",
+            "value": 990,
+            "defense": 4,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Boots",
+            "value": 1575,
+            "defense": 5,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Helm",
+            "value": 2250,
+            "defense": 6,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Pants",
+            "value": 2790,
+            "defense": 7,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Tunic",
+            "value": 3420,
+            "defense": 8,
+            "level": 2
+        },
+        {
+            "armorname": "Sturdy Leather Cloak",
+            "value": 4230,
+            "defense": 9,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Helm",
+            "value": 5040,
+            "defense": 10,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Gauntlets",
+            "value": 5850,
+            "defense": 11,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Bracers",
+            "value": 6840,
+            "defense": 12,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Greaves",
+            "value": 8010,
+            "defense": 13,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Tunic",
+            "value": 9000,
+            "defense": 14,
+            "level": 2
+        },
+        {
+            "armorname": "Woodsman's Kite Shield",
+            "value": 10350,
+            "defense": 15,
+            "level": 2
+        },
+        {
+            "armorname": "Showercap and Towel",
+            "value": 48,
+            "defense": 1,
+            "level": 3
+        },
+        {
+            "armorname": "Bathrobe",
+            "value": 225,
+            "defense": 2,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfskin Gloves",
+            "value": 585,
+            "defense": 3,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfskin-lined Boots",
+            "value": 990,
+            "defense": 4,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfskin Bracers",
+            "value": 1575,
+            "defense": 5,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfskin Pants",
+            "value": 2250,
+            "defense": 6,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfskin Tunic",
+            "value": 2790,
+            "defense": 7,
+            "level": 3
+        },
+        {
+            "armorname": "Hooded Wolfskin Cape",
+            "value": 3420,
+            "defense": 8,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfmaster's Bracers",
+            "value": 4230,
+            "defense": 9,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfmaster's Gauntlets",
+            "value": 5040,
+            "defense": 10,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfmasters Helm",
+            "value": 5850,
+            "defense": 11,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfmaster's Leggings",
+            "value": 6840,
+            "defense": 12,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfmaster's Belted Jerkin",
+            "value": 8010,
+            "defense": 13,
+            "level": 3
+        },
+        {
+            "armorname": "Wolfhide Cape",
+            "value": 9000,
+            "defense": 14,
+            "level": 3
+        },
+        {
+            "armorname": "Shield of the Wolf Master",
+            "value": 10350,
+            "defense": 15,
+            "level": 3
+        },
+        {
+            "armorname": "Sweat Pants",
+            "value": 48,
+            "defense": 1,
+            "level": 4
+        },
+        {
+            "armorname": "Sweat Shirt",
+            "value": 225,
+            "defense": 2,
+            "level": 4
+        },
+        {
+            "armorname": "Studded Leather Helm",
+            "value": 585,
+            "defense": 3,
+            "level": 4
+        },
+        {
+            "armorname": "Studded Leather Gauntlets",
+            "value": 990,
+            "defense": 4,
+            "level": 4
+        },
+        {
+            "armorname": "Hardened Leather Boots",
+            "value": 1575,
+            "defense": 5,
+            "level": 4
+        },
+        {
+            "armorname": "Studded Leather Leggings",
+            "value": 2250,
+            "defense": 6,
+            "level": 4
+        },
+        {
+            "armorname": "Studded Leather Tunic",
+            "value": 2790,
+            "defense": 7,
+            "level": 4
+        },
+        {
+            "armorname": "Tanner's Cape",
+            "value": 3420,
+            "defense": 8,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Helm",
+            "value": 4230,
+            "defense": 9,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Gauntlets",
+            "value": 5040,
+            "defense": 10,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Bracers",
+            "value": 5850,
+            "defense": 11,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Boots",
+            "value": 6840,
+            "defense": 12,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Greaves",
+            "value": 8010,
+            "defense": 13,
+            "level": 4
+        },
+        {
+            "armorname": "Rusty Chainmail Tunic",
+            "value": 9000,
+            "defense": 14,
+            "level": 4
+        },
+        {
+            "armorname": "Large Iron Buckler",
+            "value": 10350,
+            "defense": 15,
+            "level": 4
+        },
+        {
+            "armorname": "Bunny Slippers",
+            "value": 48,
+            "defense": 1,
+            "level": 5
+        },
+        {
+            "armorname": "Feety Pajamas",
+            "value": 225,
+            "defense": 2,
+            "level": 5
+        },
+        {
+            "armorname": "Comfortable Leather Undergarments",
+            "value": 585,
+            "defense": 3,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Helm",
+            "value": 990,
+            "defense": 4,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Gauntlets",
+            "value": 1575,
+            "defense": 5,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Bracers",
+            "value": 2250,
+            "defense": 6,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Boots",
+            "value": 2790,
+            "defense": 7,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Greaves",
+            "value": 3420,
+            "defense": 8,
+            "level": 5
+        },
+        {
+            "armorname": "Heavy Chainmail Tunic",
+            "value": 4230,
+            "defense": 9,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Bracers",
+            "value": 5040,
+            "defense": 10,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Gauntlets",
+            "value": 5850,
+            "defense": 11,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Boots",
+            "value": 6840,
+            "defense": 12,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Greaves",
+            "value": 8010,
+            "defense": 13,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Chestplate",
+            "value": 9000,
+            "defense": 14,
+            "level": 5
+        },
+        {
+            "armorname": "Dragon Soldier's Shield",
+            "value": 10350,
+            "defense": 15,
+            "level": 5
+        },
+        {
+            "armorname": "Bluejeans",
+            "value": 48,
+            "defense": 1,
+            "level": 6
+        },
+        {
+            "armorname": "Flannel Shirt",
+            "value": 225,
+            "defense": 2,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Helm",
+            "value": 585,
+            "defense": 3,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Gauntlets",
+            "value": 990,
+            "defense": 4,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Bracers",
+            "value": 1575,
+            "defense": 5,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Boots",
+            "value": 2250,
+            "defense": 6,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Greaves",
+            "value": 2790,
+            "defense": 7,
+            "level": 6
+        },
+        {
+            "armorname": "Well Crafted Bronze Chestplate",
+            "value": 3420,
+            "defense": 8,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Helm",
+            "value": 4230,
+            "defense": 9,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Gauntlets",
+            "value": 5040,
+            "defense": 10,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Bracers",
+            "value": 5850,
+            "defense": 11,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Boots",
+            "value": 6840,
+            "defense": 12,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Greaves",
+            "value": 8010,
+            "defense": 13,
+            "level": 6
+        },
+        {
+            "armorname": "Enchanted Bronze Chestplate",
+            "value": 9000,
+            "defense": 14,
+            "level": 6
+        },
+        {
+            "armorname": "Hooded Unicorn Skin Cloak",
+            "value": 10350,
+            "defense": 15,
+            "level": 6
+        },
+        {
+            "armorname": "Barrel",
+            "value": 48,
+            "defense": 1,
+            "level": 7
+        },
+        {
+            "armorname": "Lampshade",
+            "value": 225,
+            "defense": 2,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Helm",
+            "value": 585,
+            "defense": 3,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Gauntlets",
+            "value": 990,
+            "defense": 4,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Boots",
+            "value": 1575,
+            "defense": 5,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Bracers",
+            "value": 2250,
+            "defense": 6,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Greaves",
+            "value": 2790,
+            "defense": 7,
+            "level": 7
+        },
+        {
+            "armorname": "Perfectly Crafted Steel Chestplate",
+            "value": 3420,
+            "defense": 8,
+            "level": 7
+        },
+        {
+            "armorname": "Griffon-Feather Cloak",
+            "value": 4230,
+            "defense": 9,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Helm",
+            "value": 5040,
+            "defense": 10,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Gauntlets",
+            "value": 5850,
+            "defense": 11,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Boots",
+            "value": 6840,
+            "defense": 12,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Bracers",
+            "value": 8010,
+            "defense": 13,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Greaves",
+            "value": 9000,
+            "defense": 14,
+            "level": 7
+        },
+        {
+            "armorname": "Dwarven Chainmail Chestplate",
+            "value": 10350,
+            "defense": 15,
+            "level": 7
+        },
+        {
+            "armorname": "Fig Leaf",
+            "value": 48,
+            "defense": 1,
+            "level": 8
+        },
+        {
+            "armorname": "Kilt",
+            "value": 225,
+            "defense": 2,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Helm",
+            "value": 585,
+            "defense": 3,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Gauntlets",
+            "value": 990,
+            "defense": 4,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Boots",
+            "value": 1575,
+            "defense": 5,
+            "level": 8
+        },
+        {
+            "armorname": "Bracers",
+            "value": 2250,
+            "defense": 6,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Greaves",
+            "value": 2790,
+            "defense": 7,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Chestplate",
+            "value": 3420,
+            "defense": 8,
+            "level": 8
+        },
+        {
+            "armorname": "Majestic Gold Shield",
+            "value": 4230,
+            "defense": 9,
+            "level": 8
+        },
+        {
+            "armorname": "Gold-Threaded Cloak",
+            "value": 5040,
+            "defense": 10,
+            "level": 8
+        },
+        {
+            "armorname": "Enchanted Ruby Ring",
+            "value": 5850,
+            "defense": 11,
+            "level": 8
+        },
+        {
+            "armorname": "Enchanted Sapphire Ring",
+            "value": 6840,
+            "defense": 12,
+            "level": 8
+        },
+        {
+            "armorname": "Enchanted Jade Ring",
+            "value": 8010,
+            "defense": 13,
+            "level": 8
+        },
+        {
+            "armorname": "Enchanted Amethyst Ring",
+            "value": 9000,
+            "defense": 14,
+            "level": 8
+        },
+        {
+            "armorname": "Enchanted Diamond Ring",
+            "value": 10350,
+            "defense": 15,
+            "level": 8
+        },
+        {
+            "armorname": "Button",
+            "value": 48,
+            "defense": 1,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Nightclothes",
+            "value": 225,
+            "defense": 2,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Gloves",
+            "value": 585,
+            "defense": 3,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Slippers",
+            "value": 990,
+            "defense": 4,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Wristband",
+            "value": 1575,
+            "defense": 5,
+            "level": 9
+        },
+        {
+            "armorname": "Leggings",
+            "value": 2250,
+            "defense": 6,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Tunic",
+            "value": 2790,
+            "defense": 7,
+            "level": 9
+        },
+        {
+            "armorname": "Elven Silk Cloak",
+            "value": 3420,
+            "defense": 8,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Night",
+            "value": 4230,
+            "defense": 9,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Day",
+            "value": 5040,
+            "defense": 10,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Solitude",
+            "value": 5850,
+            "defense": 11,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Peace",
+            "value": 6840,
+            "defense": 12,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Courage",
+            "value": 8010,
+            "defense": 13,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Virtue",
+            "value": 9000,
+            "defense": 14,
+            "level": 9
+        },
+        {
+            "armorname": "Ring of Life",
+            "value": 10350,
+            "defense": 15,
+            "level": 9
+        },
+        {
+            "armorname": "Pegasus' Hooded Cloak",
+            "value": 5040,
+            "defense": 10,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Chestplate",
+            "value": 4230,
+            "defense": 9,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Greaves",
+            "value": 3420,
+            "defense": 8,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Boots",
+            "value": 2790,
+            "defense": 7,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Gorget",
+            "value": 2250,
+            "defense": 6,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Bracers",
+            "value": 1575,
+            "defense": 5,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Gauntlets",
+            "value": 990,
+            "defense": 4,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Helm",
+            "value": 585,
+            "defense": 3,
+            "level": 10
+        },
+        {
+            "armorname": "Platform Shoes",
+            "value": 225,
+            "defense": 2,
+            "level": 10
+        },
+        {
+            "armorname": "Leisure Suit",
+            "value": 48,
+            "defense": 1,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus Feather Pendant",
+            "value": 5850,
+            "defense": 11,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus Feather Belt",
+            "value": 6840,
+            "defense": 12,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Emblazoned Shield",
+            "value": 8010,
+            "defense": 13,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Emblazoned Ring",
+            "value": 9000,
+            "defense": 14,
+            "level": 10
+        },
+        {
+            "armorname": "Pegasus' Emblazoned Crown",
+            "value": 10350,
+            "defense": 15,
+            "level": 10
+        },
+        {
+            "armorname": "New Clothes",
+            "value": 48,
+            "defense": 1,
+            "level": 11
+        },
+        {
+            "armorname": "Chicken Suit",
+            "value": 225,
+            "defense": 2,
+            "level": 11
+        },
+        {
+            "armorname": "Gauntlets of Grace",
+            "value": 585,
+            "defense": 3,
+            "level": 11
+        },
+        {
+            "armorname": "Bracer of Beauty",
+            "value": 990,
+            "defense": 4,
+            "level": 11
+        },
+        {
+            "armorname": "Helm of Health",
+            "value": 1575,
+            "defense": 5,
+            "level": 11
+        },
+        {
+            "armorname": "Greaves of Good Fortune",
+            "value": 2250,
+            "defense": 6,
+            "level": 11
+        },
+        {
+            "armorname": "Boots of Bravery",
+            "value": 2790,
+            "defense": 7,
+            "level": 11
+        },
+        {
+            "armorname": "Tunic of Tolerance",
+            "value": 3420,
+            "defense": 8,
+            "level": 11
+        },
+        {
+            "armorname": "Cloak of Confidence",
+            "value": 4230,
+            "defense": 9,
+            "level": 11
+        },
+        {
+            "armorname": "Ring of Righteousness",
+            "value": 5040,
+            "defense": 10,
+            "level": 11
+        },
+        {
+            "armorname": "Necklace of Narcissism",
+            "value": 5850,
+            "defense": 11,
+            "level": 11
+        },
+        {
+            "armorname": "Pendant of Power",
+            "value": 6840,
+            "defense": 12,
+            "level": 11
+        },
+        {
+            "armorname": "Breastplate of Benevolence",
+            "value": 8010,
+            "defense": 13,
+            "level": 11
+        },
+        {
+            "armorname": "Shield of Superiority",
+            "value": 9000,
+            "defense": 14,
+            "level": 11
+        },
+        {
+            "armorname": "Scepter of Strength",
+            "value": 10350,
+            "defense": 15,
+            "level": 11
+        },
+        {
+            "armorname": "Dragon Skin Leather Helm",
+            "value": 48,
+            "defense": 1,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Gauntlets",
+            "value": 225,
+            "defense": 2,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Boots",
+            "value": 585,
+            "defense": 3,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Bracers",
+            "value": 990,
+            "defense": 4,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Leggings",
+            "value": 1575,
+            "defense": 5,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Tunic",
+            "value": 2250,
+            "defense": 6,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Skin Leather Cloak",
+            "value": 2790,
+            "defense": 7,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Helm",
+            "value": 3420,
+            "defense": 8,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Gauntlets",
+            "value": 4230,
+            "defense": 9,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Boots",
+            "value": 5040,
+            "defense": 10,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Bracers",
+            "value": 5850,
+            "defense": 11,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Greaves",
+            "value": 6840,
+            "defense": 12,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Chestplate",
+            "value": 8010,
+            "defense": 13,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Scale Cloak",
+            "value": 9000,
+            "defense": 14,
+            "level": 12
+        },
+        {
+            "armorname": "Dragon Talon Shield",
+            "value": 10350,
+            "defense": 15,
+            "level": 12
+        }
+    ]
 }

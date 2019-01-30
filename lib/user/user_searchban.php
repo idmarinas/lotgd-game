@@ -78,24 +78,24 @@ $sql = 'SELECT * FROM '.DB::prefix('bans')." $since ORDER BY banexpire ASC";
 $result = DB::query($sql);
 rawoutput("<script language='JavaScript'>
 function getUserInfo(ip,id,divid){
-	var filename='user.php?op=removeban&subop=xml&ip='+ip+'&id='+id;
-	//set up the DOM object
-	var xmldom;
-	if (document.implementation &&
-			document.implementation.createDocument){
-		//Mozilla style browsers
-		xmldom = document.implementation.createDocument('', '', null);
-	} else if (window.ActiveXObject) {
-		//IE style browsers
-		xmldom = new ActiveXObject('Microsoft.XMLDOM');
-	}
-		xmldom.async=false;
-	xmldom.load(filename);
-	var output='';
-	for (var x=0; x<xmldom.documentElement.childNodes.length; x++){
-		output = output + unescape(xmldom.documentElement.childNodes[x].getAttribute('name').replace(/\\+/g,' ')) +'<br>';
-	}
-	document.getElementById('user'+divid).innerHTML=output;
+    var filename='user.php?op=removeban&subop=xml&ip='+ip+'&id='+id;
+    //set up the DOM object
+    var xmldom;
+    if (document.implementation &&
+            document.implementation.createDocument){
+        //Mozilla style browsers
+        xmldom = document.implementation.createDocument('', '', null);
+    } else if (window.ActiveXObject) {
+        //IE style browsers
+        xmldom = new ActiveXObject('Microsoft.XMLDOM');
+    }
+        xmldom.async=false;
+    xmldom.load(filename);
+    var output='';
+    for (var x=0; x<xmldom.documentElement.childNodes.length; x++){
+        output = output + unescape(xmldom.documentElement.childNodes[x].getAttribute('name').replace(/\\+/g,' ')) +'<br>';
+    }
+    document.getElementById('user'+divid).innerHTML=output;
 }
 </script>
 ");

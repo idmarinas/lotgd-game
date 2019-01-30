@@ -106,13 +106,13 @@ $setup = [
     'paypalemail' => "Email address of Admin's paypal account",
     'paypalcurrency' => 'Currency type',
     'paypalcountry-code' => "What country's predominant language do you wish to have displayed in your PayPal screen?,enum
-	,US,United States,DE,Germany,AI,Anguilla,AR,Argentina,AU,Australia,AT,Austria,BE,Belgium,BR,Brazil,CA,Canada
-	,CL,Chile,C2,China,CR,Costa Rica,CY,Cyprus,CZ,Czech Republic,DK,Denmark,DO,Dominican Republic
-	,EC,Ecuador,EE,Estonia,FI,Finland,FR,France,GR,Greece,HK,Hong Kong,HU,Hungary,IS,Iceland,IN,India
-	,IE,Ireland,IL,Israel,IT,Italy,JM,Jamaica,JP,Japan,LV,Latvia,LT,Lithuania,LU,Luxembourg,MY,Malaysia
-	,MT,Malta,MX,Mexico,NL,Netherlands,NZ,New Zealand,NO,Norway,PL,Poland,PT,Portugal,SG,Singapore,SK,Slovakia
-	,SI,Slovenia,ZA,South Africa,KR,South Korea,ES,Spain,SE,Sweden,CH,Switzerland,TW,Taiwan,TH,Thailand,TR,Turkey
-	,GB,United Kingdom,UY,Uruguay,VE,Venezuela",
+    ,US,United States,DE,Germany,AI,Anguilla,AR,Argentina,AU,Australia,AT,Austria,BE,Belgium,BR,Brazil,CA,Canada
+    ,CL,Chile,C2,China,CR,Costa Rica,CY,Cyprus,CZ,Czech Republic,DK,Denmark,DO,Dominican Republic
+    ,EC,Ecuador,EE,Estonia,FI,Finland,FR,France,GR,Greece,HK,Hong Kong,HU,Hungary,IS,Iceland,IN,India
+    ,IE,Ireland,IL,Israel,IT,Italy,JM,Jamaica,JP,Japan,LV,Latvia,LT,Lithuania,LU,Luxembourg,MY,Malaysia
+    ,MT,Malta,MX,Mexico,NL,Netherlands,NZ,New Zealand,NO,Norway,PL,Poland,PT,Portugal,SG,Singapore,SK,Slovakia
+    ,SI,Slovenia,ZA,South Africa,KR,South Korea,ES,Spain,SE,Sweden,CH,Switzerland,TW,Taiwan,TH,Thailand,TR,Turkey
+    ,GB,United Kingdom,UY,Uruguay,VE,Venezuela",
     'paypaltext' => 'What text should be displayed as item name in the donations screen(player name will be added after it)?',
     "(standard: 'Legend of the Green Dragon Site Donation from',note",
 
