@@ -35,8 +35,13 @@ class Theme implements FactoryInterface
             'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
         $template->setContainer($container);
+
+        //-- This extensions are important
+        $template->addExtension(new Extension\GameCore());
         $template->addExtension(new Extension\Translator($container->get(Translator::class)));
         $template->addExtension(new Extension\FlashMessages($container->get(Component\FlashMessages::class)));
+
+        //-- Important
         $template->prepareTheme();
 
         return $template;
