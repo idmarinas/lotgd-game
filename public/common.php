@@ -33,6 +33,10 @@ $session['counter']++;
 
 require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
+use Tracy\Debugger;
+
+Debugger::enable(Debugger::DETECT, __DIR__ . '/../data/log');
+
 /**
  * LEGACY var.
  *
