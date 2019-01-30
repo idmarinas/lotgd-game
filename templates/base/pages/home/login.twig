@@ -1,7 +1,7 @@
 {% translate_default_domain 'page-home' %}
 
 <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassLogin();">
-    {{ 'login.message'|t }}
+    {{ 'login.message'|t|colorize }}
     <br>
     <table class="ui centered center aligned very basic collapsing table">
         <tr>
@@ -12,10 +12,10 @@
                 <div class="ui form">
                     <div class="inline fields">
                         <div class="field">
-                            <input name='name' id='name' accesskey='u' placeholder="{{ 'login.username'|t }}">
+                            <input name='name' id='name' accesskey='u' placeholder="{{ 'login.username'|t|uncolorize }}">
                         </div>
                         <div class="field">
-                            <input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'login.password'|t }}">
+                            <input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'login.password'|t|uncolorize }}">
                         </div>
                         <div class="field">
                             <input class="ui button" type='submit' value='{{ 'login.login'|t }}'>
@@ -26,5 +26,5 @@
         </tr>
     </table>
 
-    <p>{{ 'login.forgot'|t }}</p>
+    <p>{{ 'login.forgot'|t|colorize }}</p>
 </form>
