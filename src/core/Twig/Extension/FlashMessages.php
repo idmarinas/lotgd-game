@@ -14,11 +14,8 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
-use Lotgd\Core\Twig\TokenParser\TranslatorDefaultDomainTokenParser;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorNodeVisitor;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
 
 class FlashMessages extends AbstractExtension
 {
@@ -33,7 +30,7 @@ class FlashMessages extends AbstractExtension
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -43,7 +40,7 @@ class FlashMessages extends AbstractExtension
     }
 
     /**
-     * Show all messages
+     * Show all messages.
      *
      * @return string
      */
@@ -52,9 +49,9 @@ class FlashMessages extends AbstractExtension
         $container = $this->flashMessages->getMessages();
         $output = '';
 
-        foreach($container as $type => $messages)
+        foreach ($container as $type => $messages)
         {
-            foreach($messages as $id => $message)
+            foreach ($messages as $id => $message)
             {
                 $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', [
                     'message' => $message,
