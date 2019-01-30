@@ -51,43 +51,15 @@ class Base extends Twig_Environment
     private function lotgdFilters(): array
     {
         return [
-            //-- Access to appoencode function in template
-            new Twig_Filter('colorize', function (string $string)
-            {
-                return appoencode($string, true);
-            }),
-            //-- Access to color_sanitize function in template
-            new Twig_Filter('uncolorize', function (string $string)
-            {
-                return color_sanitize($string);
-            }),
-            //-- Add a link, but not nav
-            new Twig_Filter('lotgd_url', function ($url)
-            {
-                addnav('', $url);
-
-                return $url;
-            }),
-            new Twig_Filter('nltoappon', function ($string)
-            {
-                require_once 'lib/nltoappon.php';
-
-                return nltoappon($string);
-            }),
-            //-- Format a number
-            new Twig_Filter('numeral', function ($number, $decimals = 0)
-            {
-                return \LotgdFormat::numeral($number, $decimals);
-            }),
-            //-- Show a relative date from now
-            new Twig_Filter('relativedate', function ($string)
-            {
-                return \LotgdFormat::relativedate($string);
-            }),
             //-- Search and replace keywords
             new Twig_Filter('sustitute', function ($string)
             {
                 global $output;
+
+                trigger_error(sprintf(
+                    'Usage of %s filter is obsolete since 4.0.0; and delete in version 4.1.0, use new template system to simulate this.',
+                    __METHOD__
+                ), E_USER_DEPRECATED);
 
                 return $output->sustitute((string) $string);
             })
@@ -101,36 +73,6 @@ class Base extends Twig_Environment
      */
     private function lotgdFunctions(): array
     {
-        return [
-            new Twig_Function('modulehook', function ($name, $data)
-            {
-                return modulehook($name, $data);
-            }),
-            new Twig_Function('isValidProtocol', function ($url)
-            {
-                // We should check all legeal protocols
-                $protocols = ['http', 'https', 'ftp', 'ftps'];
-                $protocol = explode(':', $url, 2);
-                $protocol = $protocol[0];
-
-                // This will take care of download strings such as: not publically released or contact admin
-                return in_array($protocol, $protocols);
-            }),
-            //-- Get value of setting
-            new Twig_Function('getsetting', function ($name, $default)
-            {
-                return getsetting($name, $default);
-            }),
-            //-- Time in the game
-            new Twig_Function('gametime', function ()
-            {
-                return getgametime();
-            }),
-            //-- Seconds to next game day
-            new Twig_Function('secondstonextgameday', function ()
-            {
-                return secondstonextgameday();
-            }),
-        ];
+        return [];
     }
 }
