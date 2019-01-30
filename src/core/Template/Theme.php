@@ -20,7 +20,7 @@ use Zend\Filter\Word\UnderscoreToDash;
 
 class Theme extends Base
 {
-    const TEMPLATES_BASE_DIR = 'templates';
+    const TEMPLATES_BASE_DIR = 'data/templates';
 
     protected $themeName;
     protected $themefolder;
