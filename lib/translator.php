@@ -4,8 +4,16 @@
 // addnews ready
 // mail ready
 
+/**
+ * @deprecated 4.0.0
+ */
 function translator_setup()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //Determine what language to use
     if (defined('TRANSLATOR_IS_SET_UP'))
     {
@@ -34,8 +42,16 @@ function translator_setup()
 }
 
 $translation_table = [];
+/**
+ * @deprecated 4.0.0
+ */
 function translate($indata, $namespace = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     if (false == getsetting('enabletranslation', true))
     {
         return $indata;
@@ -111,8 +127,16 @@ function translate($indata, $namespace = false)
     return $outdata;
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function sprintf_translate()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $args = func_get_args();
     $setschema = false;
     // Handle if an array is passed in as the first arg
@@ -161,16 +185,32 @@ function sprintf_translate()
     return $return;
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function translate_inline($in, $namespace = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $out = translate($in, $namespace);
     rawoutput(tlbutton_clear());
 
     return $out;
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function translate_mail($in, $to = 0)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $session;
     tlschema('mail'); // should be same schema like systemmails!
     if (! is_array($in))
@@ -199,15 +239,31 @@ function translate_mail($in, $to = 0)
     return $out;
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function tl($in)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $out = translate($in);
 
     return tlbutton_clear().$out;
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function translate_loadnamespace($namespace, $language = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     if (false === $language)
     {
         translator_setup();
@@ -227,10 +283,10 @@ function translate_loadnamespace($namespace, $language = false)
         $where = "(uri='$page' OR uri='$uri')";
     }
     $sql = '
-		SELECT intext,outtext
-		FROM '.DB::prefix('translations')."
-		WHERE language='$language'
-			AND $where";
+        SELECT intext,outtext
+        FROM '.DB::prefix('translations')."
+        WHERE language='$language'
+            AND $where";
     /*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
     if (! getsetting('cachetranslations', 0))
     {
@@ -253,8 +309,17 @@ function translate_loadnamespace($namespace, $language = false)
 
 $translatorbuttons = [];
 $seentlbuttons = [];
+
+/**
+ * @deprecated 4.0.0
+ */
 function tlbutton_push($indata, $hot = false, $namespace = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $translatorbuttons, $translation_is_enabled, $seentlbuttons, $session, $language;
 
     if (! $translation_is_enabled)
@@ -304,8 +369,16 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
     }
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function tlbutton_pop()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $translatorbuttons,$session;
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR)
@@ -318,8 +391,16 @@ function tlbutton_pop()
     }
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function tlbutton_clear()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $translatorbuttons,$session;
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR)
@@ -336,16 +417,34 @@ function tlbutton_clear()
 }
 
 $translation_is_enabled = true;
+
+/**
+ * @deprecated 4.0.0
+ */
 function enable_translation($enable = true)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $translation_is_enabled;
     $translation_is_enabled = $enable;
 }
 
 $translation_namespace = '';
 $translation_namespace_stack = [];
+
+/**
+ * @deprecated 4.0.0
+ */
 function tlschema($schema = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $translation_namespace,$translation_namespace_stack;
 
     if (false === $schema)
@@ -364,8 +463,16 @@ function tlschema($schema = false)
     }
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function translator_check_collect_texts()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $tlmax = getsetting('tl_maxallowed', 0);
 
     if (getsetting('permacollect', 0))
