@@ -42,13 +42,13 @@ trait CoreFunction
     }
 
     /**
-     * Validating a protocol
+     * Validating a protocol.
      *
      * @param string $protocol
      *
      * @return bool
      */
-    public function isValidProtocol($protocol)
+    public function isValidProtocol($url)
     {
         // We should check all legeal protocols
         $protocols = ['http', 'https', 'ftp', 'ftps'];
@@ -70,7 +70,7 @@ trait CoreFunction
     }
 
     /**
-     * Seconds to next game day
+     * Seconds to next game day.
      *
      * @return int
      */

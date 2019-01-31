@@ -44,7 +44,6 @@ class GameCore extends AbstractExtension
         return [
             new TwigFunction('getsetting', [$this, 'getsetting']),
             new TwigFunction('modulehook', [$this, 'modulehook']),
-            new TwigFunction('isValidProtocol', [$this, 'isValidProtocol']),
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
             new TwigFunction('gametime', [$this, 'gametime']),
             new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
