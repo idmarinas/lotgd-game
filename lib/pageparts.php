@@ -192,7 +192,7 @@ function page_footer($saveuser = true)
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
-    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI');
+    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
@@ -201,7 +201,7 @@ function page_footer($saveuser = true)
         $result = \DB::query($sql);
         $row = \DB::fetch_assoc($result);
         $c = $row['c'];
-        $a = getsetting('serverurl', 'http://'.$request->getServer('SERVER_NAME').(80 == $request->getServer('SERVER_PORT') ? '' : ':'.$request->getServer('SERVER_PORT')).dirname($request->getServer('REQUEST_URI')));
+        $a = getsetting('serverurl', 'http://'.httpGetServer('SERVER_NAME').(80 == httpGetServer('SERVER_PORT') ? '' : ':'.httpGetServer('SERVER_PORT')).dirname(httpGetServer('REQUEST_URI')));
 
         if (! preg_match("/\/$/", $a))
         {
@@ -236,11 +236,11 @@ function page_footer($saveuser = true)
     {
         $paypalData['site']['paysite'] = $paysite;
         $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
-        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI');
+        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI');
 
         if (file_exists('payment.php'))
         {
-            $paypalData['site']['notify_url'] = 'http://'.$request->getServer('HTTP_HOST').dirname($request->getServer('REQUEST_URI')).'/payment.php';
+            $paypalData['site']['notify_url'] = 'http://'.httpGetServer('HTTP_HOST').dirname(httpGetServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
@@ -248,7 +248,7 @@ function page_footer($saveuser = true)
 
     //-- Dragon Prime
     $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.$request->getServer('HTTP_HOST').$request->getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
     $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('core/paypal.twig', $paypalData);
@@ -381,7 +381,7 @@ function page_footer($saveuser = true)
  */
 function popup_header($title = 'Legend of the Green Dragon')
 {
-    global $html;
+    global $html, $session;
 
     translator_setup();
 
@@ -516,9 +516,7 @@ function setcharstat($cat, $label, $val)
  */
 function getcharstat_value($section, $title)
 {
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
-
-    return $stats->getcharstat($cat, $label);
+    return getcharstat($section, $title);
 }
 
 $statbuff = '';
