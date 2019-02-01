@@ -11,6 +11,10 @@
 
 chdir(realpath(__DIR__ . '/..'));
 
+require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
+
+\Tracy\Debugger::enable(\Tracy\Debugger::DETECT, __DIR__ . '/../data/log');
+
 $pagestarttime = microtime(true);
 
 // Set some constant defaults in case they weren't set before the inclusion of
@@ -30,12 +34,6 @@ $session['user']['restorepage'] = $session['user']['restorepage'] ?? '';
 $session['counter'] = $session['counter'] ?? 0;
 
 $session['counter']++;
-
-require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
-
-use Tracy\Debugger;
-
-Debugger::enable(Debugger::DETECT, __DIR__ . '/../data/log');
 
 /**
  * LEGACY var.
