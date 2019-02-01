@@ -6,6 +6,7 @@ use Lotgd\Core\Fixed\{
     FlashMessages as LotgdFlashMessages,
     Format as LotgdFormat,
     Locator as LotgdLocator,
+    Navigation as LotgdNavigation,
     Theme as LotgdTheme,
     Translator as LotgdTranslator
 };
@@ -24,6 +25,9 @@ LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMe
 
 //-- Configure format instance
 LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
+
+//-- Configure Theme template
+LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
 
 //-- Configure Theme template
 LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
