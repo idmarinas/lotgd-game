@@ -18,7 +18,7 @@ trait CoreFilter
     /**
      * Colorize a string.
      *
-     * @param string|null $string
+     * @param string $string
      *
      * @return string
      */
@@ -30,7 +30,7 @@ trait CoreFilter
     /**
      * Uncolorize a string.
      *
-     * @param string|null $string
+     * @param string $string
      *
      * @return string
      */
@@ -42,7 +42,7 @@ trait CoreFilter
     /**
      * nltoappon a string.
      *
-     * @param string|null $string
+     * @param string $string
      *
      * @return string
      */
@@ -56,7 +56,7 @@ trait CoreFilter
     /**
      * Add a link, but not nav.
      *
-     * @param string|null $string
+     * @param string $string
      *
      * @return string
      */
