@@ -79,7 +79,7 @@ class Translator extends AbstractExtension
      *
      * @return string
      */
-    public function translate($message, array $parameters = [], $domain = null, $locale = null): string
+    public function translate($message, $parameters = [], $domain = null, $locale = null): string
     {
         return $this->translator->trans($message, $parameters, $domain, $locale);
     }
