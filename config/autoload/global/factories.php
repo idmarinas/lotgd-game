@@ -12,6 +12,7 @@ return [
             Lotgd\Core\Lib\Settings::class => Lotgd\Core\Factory\Lib\Settings::class,
             Lotgd\Core\Lib\SettingsExtended::class => Lotgd\Core\Factory\Lib\SettingsExtended::class,
             Lotgd\Core\Nav\Blocked::class => Lotgd\Core\Factory\Nav\Blocked::class,
+            Lotgd\Core\Navigation\Navigation::class => Lotgd\Core\Factory\Navigation\Navigation::class,
             Lotgd\Core\Output\Color::class => Lotgd\Core\Factory\Output\Color::class,
             Lotgd\Core\Output\Collector::class => Lotgd\Core\Factory\Output\Collector::class,
             Lotgd\Core\Output\Code::class => Lotgd\Core\Factory\Output\Code::class,
