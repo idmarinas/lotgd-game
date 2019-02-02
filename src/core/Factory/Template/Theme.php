@@ -16,6 +16,7 @@ namespace Lotgd\Core\Factory\Template;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Component;
 use Lotgd\Core\Navigation\Navigation;
+use Lotgd\Core\Navigation\AccessKeys;
 use Lotgd\Core\Template\Theme as TemplateTheme;
 use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Twig\Extension;
@@ -41,7 +42,11 @@ class Theme implements FactoryInterface
         $template->addExtension(new Extension\GameCore());
         $template->addExtension(new Extension\Translator($container->get(Translator::class)));
         $template->addExtension(new Extension\FlashMessages($container->get(Component\FlashMessages::class)));
-        $template->addExtension(new Extension\Navigation($container->get(Navigation::class)));
+        $template->addExtension(new Extension\Navigation(
+            $container->get(Navigation::class),
+            $container->get(Translator::class),
+            $container->get(AccessKeys::class)
+        ));
 
         //-- Important
         $template->prepareTheme();
