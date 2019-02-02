@@ -37,7 +37,8 @@
         "zendframework/zend-paginator": "^2.8",
         "zendframework/zend-serializer": "^2.9",
         "zendframework/zend-servicemanager": "^3.3",
-        "zendframework/zend-stdlib": "^3.2"
+        "zendframework/zend-stdlib": "^3.2",
+        "zendframework/zend-view": "^2.11"
     },
     "require-dev": {
         "phan/phan": "^1.1"
