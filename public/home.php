@@ -26,22 +26,20 @@ if ($session['loggedin'] ?? false)
 
 $op = httpget('op');
 
-tlnavdomain('app'); //-- Only need for navs
 page_header(LotgdTranslator::t('title', [], 'page-home'));
 
-clearnav();
-addnav('home.category.new');
-addnav('home.nav.create', 'create.php');
+LotgdNavigation::addHeader('home.category.new');
+LotgdNavigation::addNav('home.nav.create', 'create.php');
 
-addnav('home.category.func');
-addnav('home.nav.forgot', 'create.php?op=forgot');
-addnav('home.nav.list', 'list.php');
-addnav('home.nav.news', 'news.php');
+LotgdNavigation::addHeader('home.category.func');
+LotgdNavigation::addNav('home.nav.forgot', 'create.php?op=forgot');
+LotgdNavigation::addNav('home.nav.list', 'list.php');
+LotgdNavigation::addNav('home.nav.news', 'news.php');
 
-addnav('home.category.other');
-addnav('home.nav.about', 'about.php');
-addnav('home.nav.setup', 'about.php?op=setup');
-addnav('home.nav.net', 'logdnet.php?op=list');
+LotgdNavigation::addHeader('home.category.other');
+LotgdNavigation::addNav('home.nav.about', 'about.php');
+LotgdNavigation::addNav('home.nav.setup', 'about.php?op=setup');
+LotgdNavigation::addNav('home.nav.net', 'logdnet.php?op=list');
 
 //-- Parameters to be passed to the template
 $params = [
