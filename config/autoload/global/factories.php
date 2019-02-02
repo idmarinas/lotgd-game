@@ -14,7 +14,6 @@ return [
             Lotgd\Core\Lib\Cache::class => Factory\Lib\Cache::class,
             Lotgd\Core\Lib\Settings::class => Factory\Lib\Settings::class,
             Lotgd\Core\Lib\SettingsExtended::class => Factory\Lib\SettingsExtended::class,
-            Lotgd\Core\Nav\Blocked::class => InvokableFactory::class,
             Lotgd\Core\Navigation\Navigation::class => InvokableFactory::class,
             Lotgd\Core\Navigation\AccessKeys::class => InvokableFactory::class,
             Lotgd\Core\Output\Color::class => InvokableFactory::class,
