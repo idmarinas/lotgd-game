@@ -142,6 +142,4 @@ if (getsetting('homeskinselect', 1))
 $params = modulehook('page-home-tpl-params', $params);
 rawoutput(LotgdTheme::renderThemeTemplate('pages/home.twig', $params));
 
-tlnavdomain();
-
 page_footer();
