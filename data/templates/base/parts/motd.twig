@@ -1,0 +1,10 @@
+{% translate_default_domain 'app-default' %}
+
+<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">
+    {% if newMotd %}
+        <i class="certificate icon"></i>
+        {{ 'parts.motd.title'|t }}
+    {% else %}
+        {{ 'parts.motd.title'|t }}
+    {% endif %}
+</a>
