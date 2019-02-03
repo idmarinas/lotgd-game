@@ -60,11 +60,11 @@ trait CoreFilter
      *
      * @return string
      */
-    public function lotgdUrl(string $string): string
+    public function lotgdUrl(string $link): string
     {
-        addnav('', $string);
+        \LotgdNavigation::addNavAllow($link);
 
-        return $string;
+        return $link;
     }
 
     /**
