@@ -33,9 +33,9 @@ class Translator extends ZendTranslator
      *
      * @return string
      */
-    public function trans(string $message, ?array $parameters = [], string $textDomain = 'page-default', ?string $locale = null): string
+    public function trans(string $message, ?array $parameters = [], ?string $textDomain = 'page-default', ?string $locale = null): string
     {
-        $message = parent::translate($message, $textDomain, $locale);
+        $message = parent::translate($message, $textDomain ?? 'page-default', $locale);
 
         $formatter = new \MessageFormatter($this->getLocale(), $message);
 
