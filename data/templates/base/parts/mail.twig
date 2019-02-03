@@ -1,0 +1,18 @@
+{% translate_default_domain 'app-default' %}
+
+{% if session.user.login %}
+    {% if notSeenCount %}
+        <i class="green mail icon"></i>
+        <script>
+            $('.green.mail.icon').transition('set looping').transition('pulse', 1000)
+        </script>
+    {% endif %}
+    <a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)">
+        <span id="ye-olde-mail-count-text">{{ 'parts.mail.title'|t({'new': notSeenCount, 'old': seenCount}) }}</span>
+    </a>
+    <script>
+        window.setInterval("JaxonLotgd.Ajax.Core.Mail.status()", 15000)
+    </script>
+{% else %}
+    {{ 'parts.mail.anonymous'|t|colorize }}
+{% endif %}
