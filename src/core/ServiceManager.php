@@ -64,5 +64,8 @@ class ServiceManager extends ZendServiceManager
         $config->configureServiceManager(parent::configure([]));
 
         $this->setService('GameConfig', $configuration);
+        $this->setService('gameconfig', $configuration);
+        $this->setService('Config', $configuration);
+        $this->setService('config', $configuration);
     }
 }
