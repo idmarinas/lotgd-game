@@ -8,12 +8,13 @@
 
 namespace Lotgd\Core;
 
+use Zend\Http\Header\Cookie;
 use Zend\Http\PhpEnvironment\Request;
 
 class Http extends Request
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getServer($name = null, $default = null)
     {
@@ -26,7 +27,17 @@ class Http extends Request
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
+     */
+    public function getCookie()
+    {
+        $cookie = parent::getCookie();
+
+        return $cookie ?: new Cookie();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getRequestUri(): string
     {
@@ -34,7 +45,7 @@ class Http extends Request
     }
 
     /**
-     * Sanitize uri for usage
+     * Sanitize uri for usage.
      *
      * @return string
      */
