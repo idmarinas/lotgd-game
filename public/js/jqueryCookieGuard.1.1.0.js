@@ -49,8 +49,8 @@
 
             // Language detection
             var userLang = navigator.language || navigator.userLanguage;
-            userLang=userLang.split('-')[0];
-            if (options!=null) { if (options.userLang!=null) userLang = options.userLang; }
+            userLang = userLang.split('-')[0];
+            if (options != null) { if (options.userLang != null) userLang = options.userLang; }
 
             // Default Messages (English)
             var messages = {
@@ -119,8 +119,8 @@
             }
 
             var buttons = {
-                buttonsConfigDefault:  '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a>' + '<a href="#" id="authoriseCookies">' + messages.buttonAllow + '</a>' + '<a href="#" id="denyCookies">' + messages.buttonBlock + '</a></div>',
-                buttonsOK: '<div id="cookieButtons"><a href="#" id="showCookies">'+messages.buttonShow+'</a><a href="#" id="cookieGuardOkay">'+messages.buttonOK+'</a></div>'
+                buttonsConfigDefault: '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a>' + '<a href="#" id="authoriseCookies">' + messages.buttonAllow + '</a>' + '<a href="#" id="denyCookies">' + messages.buttonBlock + '</a></div>',
+                buttonsOK: '<div id="cookieButtons"><a href="#" id="showCookies">' + messages.buttonShow + '</a><a href="#" id="cookieGuardOkay">' + messages.buttonOK + '</a></div>'
             };
 
             $.cookieguard.settings = $.extend(defaults, messages, buttons, options, { 'cookiesUsed': new Array(), 'messageHideTimeout': null });
@@ -491,7 +491,7 @@
                 if (unknownCookies.length == 0 && $.cookieguard.hasOnlyEssential())
                     $('#cookieGuardMsgInner').addClass('onlyEssential').append($.cookieguard.settings.buttonsOk);
                 else
-                    $('#cookieGuardMsgInner').append( $.cookieguard.settings.bannerDescription + $.cookieguard.settings.buttonsConfigDefault);
+                    $('#cookieGuardMsgInner').append($.cookieguard.settings.bannerDescription + $.cookieguard.settings.buttonsConfigDefault);
             }
             else {
                 $('#cookieGuardMsgInner').append($.cookieguard.settings.cookieNewTitle + '<br/>');
@@ -590,17 +590,17 @@
             $('#cookieGuardMsgInner').append('<div id="cookieList"/>');
 
             if (init) {
-                $('#cookieList').append('<div class="cookiesHeader">'+$.cookieguard.settings.cookiesEssential+
-                '</div>');
+                $('#cookieList').append('<div class="cookiesHeader">' + $.cookieguard.settings.cookiesEssential +
+                    '</div>');
                 $('#cookieList').append('<ul class="essentialCookies"/>');
-                $('#cookieList > ul.essentialCookies').append('<li><div class="cookieName">'+$.cookieguard.settings.cookieGuardName+'</div><div class="cookieDescription"> - '+$.cookieguard.settings.cookieGuardDescription+'</div></li>');
+                $('#cookieList > ul.essentialCookies').append('<li><div class="cookieName">' + $.cookieguard.settings.cookieGuardName + '</div><div class="cookieDescription"> - ' + $.cookieguard.settings.cookieGuardDescription + '</div></li>');
                 for (var i = 0; i < essentialCookies.length; i++) {
                     $('#cookieList > ul.essentialCookies').append('<li><div class="cookieName">' + essentialCookies[i].name + '</div><div class="cookieDescription"> - ' + essentialCookies[i].description + '</div></li>');
                 }
             }
 
             if (unessentialCookies.length > 0) {
-                $('#cookieList').append('<div class="cookiesHeader">'+$.cookieguard.settings.cookiesNonEssential+'</div>');
+                $('#cookieList').append('<div class="cookiesHeader">' + $.cookieguard.settings.cookiesNonEssential + '</div>');
                 $('#cookieList').append('<ul class="knownCookies" />');
                 for (var i = 0; i < unessentialCookies.length; i++) {
                     $('#cookieList > ul.knownCookies').append('<li><div class="cookieName">' + unessentialCookies[i].name + '</div><div class="cookieDescription"> - ' + unessentialCookies[i].description + '</div></li>');
@@ -608,7 +608,7 @@
             }
 
             if (unknownCookies != null && unknownCookies.length > 0) {
-                $('#cookieList').append('<div class="cookiesHeader">'+$.cookieguard.settings.cookiesUnknown+'</div>');
+                $('#cookieList').append('<div class="cookiesHeader">' + $.cookieguard.settings.cookiesUnknown + '</div>');
                 $('#cookieList').append('<ul class="unknownCookies" />');
                 for (var i = 0; i < unknownCookies.length; i++) {
                     $('#cookieList > ul.unknownCookies').append('<li><div class="cookieName">' + unknownCookies[i] + '</div></li>');
@@ -667,13 +667,13 @@
     if (typeof $.cookieguard.createCSS == 'undefined') {
         $.cookieguard.createCSS = function () {
             var style = '<style id="cookieGuardStyles" type="text/css">';
-                style += '#cookieGuardMsg { position: absolute; text-align: left; top: 0; left: 0; width: 100%; display: none; border-bottom: 2px solid #5c5c5c; font-size: 12px; font-family: Arial, Helvetica, Sans-Serif; color: #333; background: #e2e2e2 url(http://cookieguard.eu/images/cookieguardicon.png) no-repeat 12px 12px; min-height: 50px; z-index:99999; }';
+            style += '#cookieGuardMsg { position: absolute; text-align: left; top: 0; left: 0; width: 100%; display: none; border-bottom: 2px solid #5c5c5c; font-size: 12px; font-family: Arial, Helvetica, Sans-Serif; color: #333; background: #e2e2e2 url(images/cookieguardicon.png) no-repeat 12px 12px; min-height: 50px; z-index:99999; }';
             style += "#cookieGuardMsgInner { padding: 10px 10px 10px 60px; }";
             style += "#cookieGuardMsg a { text-decoration: none; font-weight: normal; font-style: normal; }";
             style += "#cookieButtons { width: 100%; text-align: right;}";
             style += "#showCookies { border: 1px solid #999; background: #f4f4f4; color: #5b5858; padding: 5px 10px; margin: 0 1%;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
             style += "#showCookies:hover { border-color: #666; }";
-            style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";style += "#authoriseCookies:hover { border-color: #6f8f59; }";
+            style += "#authoriseCookies, #cookieGuardOkay { border: 1px solid #a2bf8e; background: #d1ecbe; color: #384c2a; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }"; style += "#authoriseCookies:hover { border-color: #6f8f59; }";
             style += "#denyCookies { border: 1px solid #cc9c9c; background: #ecc1c1; color: #7e5353; padding: 5px 10px; margin: 0 1%; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }";
             style += "#denyCookies:hover { border-color: #9e6a6a;}";
             style += "#cookieList { display: none; padding: 10px 60px 0 0; }";
