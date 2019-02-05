@@ -2,6 +2,8 @@
 
 return [
     'service_manager' => [
-        'aliases' => []
+        'aliases' => [
+            Zend\Session\SessionManager::class => Zend\Session\ManagerInterface::class,
+        ]
     ]
 ];
