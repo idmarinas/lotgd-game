@@ -96,14 +96,15 @@ if(count($results['messages']))
     $params['hookHomeText'] = $results['messages'];
 }
 
+bdump(lotgd_base_url());
 if ('timeout' == $op)
 {
-    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.timeout', [], 'page-default'));
+    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.timeout', [], 'app-default'));
 }
-if (! httpGetCookie('lgi'))
+if (! LotgdHttp::getCookie('lgi'))
 {
-    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'page-default'));
-    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('session.cookies.info', [], 'page-default'));
+    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'app-default'));
+    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('session.cookies.info', [], 'app-default'));
 }
 
 $params['serverFull'] = true;
@@ -128,7 +129,7 @@ if (getsetting('homeskinselect', 1))
 {
     require_once 'lib/showform.php';
 
-    $prefs['template'] = httpGetCookie('template') ?: '';
+    $prefs['template'] = LotgdHttp::getCookie('template') ?: '';
 
     if ('' == $prefs['template'])
     {
