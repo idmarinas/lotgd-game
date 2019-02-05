@@ -21,6 +21,11 @@ class GameCore extends AbstractExtension
 {
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
+    use Pattern\Mail;
+    use Pattern\Motd;
+    use Pattern\Petition;
+    use Pattern\Source;
+
     /**
      * {@inheritdoc}
      */
@@ -47,6 +52,15 @@ class GameCore extends AbstractExtension
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
             new TwigFunction('gametime', [$this, 'gametime']),
             new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
+
+            new TwigFunction('game_version', [$this, 'gameVersion']),
+            new TwigFunction('game_copyright', [$this, 'gameCopyright']),
+            new TwigFunction('game_source', [$this, 'gameSource']),
+
+            new TwigFunction('message_of_the_day', [$this, 'messageOfTheDay']),
+            new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail']),
+            new TwigFunction('user_petition', [$this, 'userPetition']),
+            new TwigFunction('admin_petition', [$this, 'adminPetition']),
         ];
     }
 

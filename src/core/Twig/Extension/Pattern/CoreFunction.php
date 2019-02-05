@@ -16,6 +16,26 @@ namespace Lotgd\Core\Twig\Extension\Pattern;
 trait CoreFunction
 {
     /**
+     * Get version of game.
+     *
+     * @return string
+     */
+    public function gameVersion(): string
+    {
+        return \Lotgd\Core\Application::VERSION;
+    }
+
+    /**
+     * Get copyright of game.
+     *
+     * @return string
+     */
+    public function gameCopyright(): string
+    {
+        return \Lotgd\Core\Application::COPYRIGHT;
+    }
+
+    /**
      * Get value of setting.
      *
      * @param string $name
