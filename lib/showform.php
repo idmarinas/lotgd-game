@@ -194,12 +194,11 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
         case 'theme':
             // A generic way of allowing a theme to be selected.
             $skins = [];
-            $handle = @opendir('templates');
+            $handle = @opendir('data/templates');
             // Template directory open failed
             if (! $handle)
             {
                 return 'None available';
-                break;
             }
 
             while (false !== ($file = @readdir($handle)))
@@ -213,7 +212,6 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             if (0 == count($skins))
             {
                 return 'None available';
-                break;
             }
             natcasesort($skins); //sort them in natural order
             $select = "<select class='ui dropdown' name='$keyout'>";
