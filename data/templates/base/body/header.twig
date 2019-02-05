@@ -31,7 +31,9 @@
                             <td class="collapsing">{{ headerad }}</td>
                             {# End advertising module #}
 
-                            <td class="right aligned bottom aligned">{{ motd }} | {{ mail }} | {{ petition }} {{ petitiondisplay }}</td>
+                            <td class="right aligned bottom aligned">
+                                {{ message_of_the_day() }} | {{ ye_olde_mail() }} | {{ petition }} {{ petitiondisplay }}
+                            </td>
                         </tr>
                     </table>
                 </td>
