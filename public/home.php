@@ -96,7 +96,6 @@ if(count($results['messages']))
     $params['hookHomeText'] = $results['messages'];
 }
 
-bdump(lotgd_base_url());
 if ('timeout' == $op)
 {
     LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.timeout', [], 'app-default'));
