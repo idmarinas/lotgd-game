@@ -6,6 +6,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'service_manager' => [
         'factories' => [
+            //-- LotGD factories
             Lotgd\Core\Character\Stats::class => Factory\Character\Stats::class,
             Lotgd\Core\Component\FlashMessages::class => InvokableFactory::class,
             'Lotgd\\Core\\Db\\Doctrine' => Factory\Db\Doctrine::class,
@@ -24,6 +25,13 @@ return [
             Lotgd\Core\Translator\Translator::class => Factory\Translator\Translator::class,
             Lotgd\Core\Http::class => InvokableFactory::class,
             Zend\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
+
+            Lotgd\Core\Session::class => Factory\Session::class,
+
+            //-- Other factories
+            Zend\Session\Config\ConfigInterface::class => Zend\Session\Service\SessionConfigFactory::class,
+            Zend\Session\ManagerInterface::class => Zend\Session\Service\SessionManagerFactory::class,
+            Zend\Session\Storage\StorageInterface::class => Zend\Session\Service\StorageFactory::class,
         ]
     ]
 ];
