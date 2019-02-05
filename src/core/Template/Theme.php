@@ -96,14 +96,11 @@ class Theme extends Base
      */
     public function getDefaultSkin(): string
     {
-        $request = $this->getContainer(\Lotgd\Core\Http::class);
-        $cookie = $request->getCookie();
-
         if (empty($this->defaultSkin))
         {
             $settings = $this->getContainer(\Lotgd\Core\Lib\Settings::class);
 
-            $theme = $cookie->offsetExists('template') ? $cookie->offsetExists('template') : '';
+            $theme = \LotgdHttp::getCookie('template');
 
             if ('' == $theme || ! file_exists(static::TEMPLATES_BASE_DIR."/$theme"))
             {
@@ -124,9 +121,9 @@ class Theme extends Base
             $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
         }
 
-        if ($cookie->offsetExists('template') || '' == $cookie->offsetExists('template'))
+        if ('' == \LotgdHttp::getCookie('template'))
         {
-            $cookie->offsetSet('template', $theme);
+            \LotgdHttp::setCookie('template', $theme);
         }
 
         return $this->defaultSkin;
