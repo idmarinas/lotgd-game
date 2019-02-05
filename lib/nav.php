@@ -10,16 +10,17 @@
  */
 function blocknav(string $link, bool $partial = false)
 {
-    //prevents a script from being able to generate navs on the given $link.
-
-    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::blockLink() or LotgdNavigation::blockPartialLink() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     if ($partial)
     {
-        return $block->blockPartialNav($link);
+        return \LotgdNavigation::blockPartialLink($link);
     }
 
-    return $block->blockFullNav($link);
+    return \LotgdNavigation::blockLink($link);
 }
 
 /**
@@ -32,17 +33,17 @@ function blocknav(string $link, bool $partial = false)
  */
 function unblocknav($link, $partial = false)
 {
-    //prevents a link that was otherwise blocked with blocknav() from
-    //actually being blocked.
-
-    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::unBlockLink() or LotgdNavigation::unBlockPartialLink() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     if ($partial)
     {
-        return $block->unBlockPartialNav($link);
+        return \LotgdNavigation::unBlockPartialLink($link);
     }
 
-    return $block->unBlockFullNav($link);
+    return \LotgdNavigation::unBlockLink($link);
 }
 
 function appendcount($link)
@@ -70,25 +71,6 @@ $navnocollapse = [];
 $block_new_navs = false;
 
 /**
- * Add a text domain to translator for navigation.
- *
- * @param string $domain
- */
-function tlnavdomain(?string $domain = null)
-{
-    global $navtldomain;
-
-    if ($domain)
-    {
-        $navtldomain = $domain;
-
-        return;
-    }
-
-    $navtldomain = 'app'; //-- Default value
-}
-
-/**
  * Allow header/footer code to block/unblock additional navs.
  *
  * @param bool $block should new navs be blocked
@@ -108,45 +90,12 @@ function set_block_new_navs($block)
  */
 function addnavheader($text, $collapse = true, $translate = true)
 {
-    global $navsection,$navbysection,$translation_namespace, $navschema, $navnocollapse, $block_new_navs, $notranslate;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::addHeader() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($block_new_navs)
-    {
-        return;
-    }
-
-    if (is_array($text))
-    {
-        $text = '!array!'.serialize($text);
-    }
-
-    $navsection = $text;
-
-    if (! array_key_exists($text, $navschema))
-    {
-        $navschema[$text] = $translation_namespace;
-    }
-
-    //So we can place sections with out adding navs to them.
-    if (! isset($navbysection[$navsection]))
-    {
-        $navbysection[$navsection] = [];
-    }
-
-    if (false === $collapse)
-    {
-        $navnocollapse[$text] = true;
-    }
-
-    if (false === $translate)
-    {
-        if (! isset($notranslate))
-        {
-            $notranslate = [];
-        }
-
-        array_push($notranslate, [$text, '']);
-    }
+    \LotgdNavigation::addHeader($text, ['translate' => $translate]);
 }
 
 /**
@@ -165,89 +114,22 @@ function addnavheader($text, $collapse = true, $translate = true)
  */
 function addnav_notl($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
-    global $navsection, $navbysection, $navschema, $notranslate, $block_new_navs;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::addNavNotl() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($block_new_navs)
-    {
-        return;
-    }
-
-    if (false === $link && '' != $text)
-    {
-        // Don't do anything if text is ""
-        addnavheader($text, true, false);
-    }
-    else
-    {
-        $args = func_get_args();
-
-        if ('' == $text)
-        {
-            //if there's no text to display, may as well just stick this on
-            //the nav stack now.
-            call_user_func_array('private_addnav', $args);
-        }
-        else
-        {
-            if (! isset($navbysection[$navsection]))
-            {
-                $navbysection[$navsection] = [];
-            }
-
-            if (! isset($notranslate))
-            {
-                $notranslate = [];
-            }
-            array_push($navbysection[$navsection], $args);
-            array_push($notranslate, $args);
-        }
-    }
+    \LotgdNavigation::addNavNotl($text, $link);
 }
 
-function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
+function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300', $namespace = 'navigation-app')
 {
-    global $navsection, $navbysection, $translation_namespace, $navschema, $block_new_navs;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::addNav() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($block_new_navs)
-    {
-        return;
-    }
-
-    if (false === $link && '' != $text)
-    {
-        // Don't do anything if text is ""
-        addnavheader($text);
-    }
-    else
-    {
-        $args = func_get_args();
-
-        if ('' == $text)
-        {
-            //if there's no text to display, may as well just stick this on
-            //the nav stack now.
-            call_user_func_array('private_addnav', $args);
-        }
-        else
-        {
-            if (! isset($navbysection[$navsection]))
-            {
-                $navbysection[$navsection] = [];
-            }
-            $t = $args[0];
-
-            if (is_array($t))
-            {
-                $t = $t[0];
-            }
-
-            if (! array_key_exists($t, $navschema))
-            {
-                $navschema[$t] = $translation_namespace;
-            }
-            array_push($navbysection[$navsection], array_merge($args, ['translate' => false]));
-        }
-    }
+    \LotgdNavigation::addNav($text, $link);
 }
 
 /**
@@ -259,9 +141,7 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
  */
 function is_blocked(string $link): bool
 {
-    $block = \LotgdLocator::get(\Lotgd\Core\Nav\Blocked::class);
-
-    return $block->isBlocked($link);
+    return \LotgdNavigation::isBlocked($link);
 }
 
 /**
@@ -338,53 +218,10 @@ function checknavs()
  */
 function buildnavs()
 {
-    global $navbysection, $navschema, $session, $navnocollapse;
-
-    $builtnavs = [];
-
-    foreach ($navbysection as $key => $val)
-    {
-        $tkey = $key;
-        $navbanner = '';
-
-        if (count_viable_navs($key) > 0)
-        {
-            if ($key > '')
-            {
-                if (isset($session['loggedin']) && $session['loggedin'])
-                {
-                    tlschema($navschema[$key]);
-                }
-
-                if ('!array!' == substr($key, 0, 7))
-                {
-                    $key = unserialize(substr($key, 7));
-                }
-
-                $navbanner = private_addnav($key);
-
-                if (isset($session['loggedin']) && $session['loggedin'])
-                {
-                    tlschema();
-                }
-            }
-
-            $sublinks = [];
-
-            foreach ($val as $v)
-            {
-                if (is_array($v) && count($v) > 0)
-                {
-                    $sublinks[] = call_user_func_array('private_addnav', $v);
-                }
-            }
-
-            $builtnavs[$navbanner] = $sublinks;
-        }//end if
-    }//end foreach
-    $navbysection = [];
-
-    return $builtnavs;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use {{ navigation_menu() }} in template.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 }
 
 $accesskeys = [];
@@ -403,148 +240,10 @@ $quickkeys = [];
  */
 function private_addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
-    //don't call this directly please.  I'll break your thumbs if you do.
-    global $nav, $session, $accesskeys, $quickkeys, $navschema, $notranslate, $navtldomain;
-
-    if (is_blocked($link))
-    {
-        return false;
-    }
-
-    $thisnav = '';
-    $unschema = 0;
-    $translate = true;
-
-    if (isset($notranslate) && in_array([$text, $link], $notranslate))
-    {
-        $translate = false;
-    }
-
-    if ($translate)
-    {
-        $translator = LotgdLocator::get(\Lotgd\Core\Translator\Translator::class);
-    }
-
-    if (is_array($text))
-    {
-        if ($text[0] && isset($session['loggedin']) && $session['loggedin'])
-        {
-            $schema = $text[0];
-            if (false === $link)
-            {
-                $schema = '!array!'.serialize($text);
-            }
-
-            if ($translate)
-            {
-                tlschema($navschema[$schema]);
-                $unschema = 1;
-            }
-        }
-
-        if ('!!!addraw!!!' != $link)
-        {
-            $params = $text;
-            $text = array_shift($params);
-
-            if ($translate)
-            {
-                $text = $translator->trans($text, $params, "navigation-{$navtldomain}");
-            }
-            else
-            {
-                $text = sprintf($text, $params);
-            }
-        }
-        else
-        {
-            $text = call_user_func_array('sprintf', $text);
-        }
-    }
-    else
-    {
-        if ($text && isset($session['loggedin']) && $session['loggedin'] && $translate)
-        {
-            if (isset($navschema[$text]))
-            {
-                tlschema($navschema[$text]);
-            }
-            $unschema = 1;
-        }
-
-        if ('!!!addraw!!!' != $link && $text > '' && $translate)
-        {
-            $text = $translator->trans($text, [], "navigation-{$navtldomain}");
-        } //leave the hack in here for now, use addnav_notl please
-    }
-
-    $extra = '';
-
-    if (false === $link)
-    {
-        $text = holidayize($text, 'nav');
-        $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/head.twig', [
-            'title' => appoencode($text, $priv),
-            'tlbutton' => tlbutton_pop()
-        ]);
-    }
-    elseif ('' === $link)
-    {
-        $text = holidayize($text, 'nav');
-        $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/help.twig', [
-            'text' => appoencode($text, $priv),
-            'tlbutton' => tlbutton_pop()
-        ]);
-    }
-    elseif ('!!!addraw!!!' == $link)
-    {
-        $thisnav .= $text;
-    }
-    else
-    {
-        if ('' != $text)
-        {
-            $extra = "&c={$session['counter']}";
-            if (false === strpos($link, '?'))
-            {
-                $extra = "?c={$session['counter']}";
-            }
-
-            $extra .= '-'.date('His');
-            //hotkey for the link.
-            $hotkey = add_accesskey($text, $link, $pop, $popsize, $extra);
-            $key = $hotkey['key'];
-            $keyrep = $hotkey['keyrep'];
-            $text = $hotkey['text'];
-
-            $thisnav .= LotgdTheme::renderThemeTemplate('sidebar/navigation/item.twig', [
-                'text' => appoencode($text, $priv),
-                'link' => htmlentities($link.(true != $pop ? $extra : ''), ENT_COMPAT, getsetting('charset', 'utf-8')),
-                'accesskey' => $keyrep,
-                'popup' => (true == $pop ? "target='_blank' rel='noopener noreferrer' " . ($popsize ? "onClick='Lotgd.embed(this)' data-force='true'": '') : ''),
-                'tlbutton' => tlbutton_pop()
-            ]);
-        }
-
-        $session['user']['allowednavs'][$link.$extra] = true;
-        $session['user']['allowednavs'][str_replace(' ', '%20', $link).$extra] = true;
-        $session['user']['allowednavs'][str_replace(' ', '+', $link).$extra] = true;
-
-        if (false !== ($pos = strpos($link, '#')))
-        {
-            $sublink = substr($link, 0, $pos);
-            $session['user']['allowednavs'][$sublink.$extra] = true;
-        }
-    }
-
-    if ($unschema)
-    {
-        tlschema();
-    }
-
-    $nav .= $thisnav;
-
-    return $thisnav;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::addNav() instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 }
 
 /**
@@ -554,26 +253,10 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
  */
 function navcount()
 {
-    //returns count of total navs added, be it they are pending addition or
-    //actually added.
-    global $session, $navbysection;
-
-    $c = count($session['user']['allowednavs']);
-
-    if (! is_array($navbysection))
-    {
-        return $c;
-    }
-
-    foreach ($navbysection as $val)
-    {
-        if (is_array($val))
-        {
-            $c += count($val);
-        }
-    }
-
-    return $c;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, not have usage.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 }
 
 /**
@@ -612,6 +295,11 @@ function clearoutput()
 function add_accesskey($text, $link, $pop, $popsize , $extra)
 {
     global $accesskeys, $quickkeys;
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, this not have remplace.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     $key = '';
     $ignoreuntil = '';
