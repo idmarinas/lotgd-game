@@ -36,7 +36,7 @@ function page_header()
     //in case this didn't already get called (such as on a database error)
     translator_setup();
 
-    $script = substr(httpGetServer('SCRIPT_NAME'), 0, strrpos(httpGetServer('SCRIPT_NAME'), '.'));
+    $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
 
     if ($script)
     {
@@ -97,7 +97,7 @@ function page_footer($saveuser = true)
     $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
-    $script = substr(httpGetServer('SCRIPT_NAME'), 0, strpos(httpGetServer('SCRIPT_NAME'), '.'));
+    $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
     $replacementbits = modulehook("footer-$script", []);
 
     if ('runmodule' == $script && (($module = httpget('module'))) > '')
@@ -133,8 +133,6 @@ function page_footer($saveuser = true)
         $html[$key] .= $val;
     }
 
-    $builtnavs = buildnavs();
-
     restore_buff_fields();
     calculate_buff_fields();
 
@@ -153,7 +151,7 @@ function page_footer($saveuser = true)
 
     if (isset($session['user']['lastmotd'])
         && ($row['motddate'] > $session['user']['lastmotd'])
-        && (! isset($nopopup[httpGetServer('SCRIPT_NAME')]) || 1 != $nopopups[httpGetServer('SCRIPT_NAME')])
+        && (! isset($nopopup[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
         && $session['user']['loggedin']
     ) {
         $session['needtoviewmotd'] = true;
@@ -192,7 +190,7 @@ function page_footer($saveuser = true)
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
-    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI');
+    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
@@ -201,7 +199,7 @@ function page_footer($saveuser = true)
         $result = \DB::query($sql);
         $row = \DB::fetch_assoc($result);
         $c = $row['c'];
-        $a = getsetting('serverurl', 'http://'.httpGetServer('SERVER_NAME').(80 == httpGetServer('SERVER_PORT') ? '' : ':'.httpGetServer('SERVER_PORT')).dirname(httpGetServer('REQUEST_URI')));
+        $a = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).dirname(LotgdHttp::getServer('REQUEST_URI')));
 
         if (! preg_match("/\/$/", $a))
         {
@@ -236,11 +234,11 @@ function page_footer($saveuser = true)
     {
         $paypalData['site']['paysite'] = $paysite;
         $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
-        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI');
+        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
         if (file_exists('payment.php'))
         {
-            $paypalData['site']['notify_url'] = 'http://'.httpGetServer('HTTP_HOST').dirname(httpGetServer('REQUEST_URI')).'/payment.php';
+            $paypalData['site']['notify_url'] = 'http://'.LotgdHttp::getServer('HTTP_HOST').dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
@@ -248,7 +246,7 @@ function page_footer($saveuser = true)
 
     //-- Dragon Prime
     $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.httpGetServer('HTTP_HOST').httpGetServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
     $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('core/paypal.twig', $paypalData);
@@ -259,26 +257,6 @@ function page_footer($saveuser = true)
     //NOTICE | paypal link, I do request, as the author of this software
     //NOTICE | which I made available for free to you that you leave it in.
     //NOTICE |
-
-    //output the nav
-    $html['nav'] = \LotgdTheme::renderThemeTemplate('sidebar/navigation/menu.twig', ['menu' => $builtnavs]);
-
-    //output the motd
-    $html['motd'] = motdlink();
-
-    //output the mail link
-    $html['mail'] = translate_inline('Log in to see your Ye Olde Mail');
-
-    if (isset($session['user']['acctid']) && $session['user']['acctid'] > 0 && $session['user']['loggedin'])
-    {
-        $html['mail'] = maillink();
-
-        if (isset($session['user']['prefs']['ajax']) && $session['user']['prefs']['ajax'])
-        {
-            $script .= '<script>window.setInterval("JaxonLotgd.Ajax.Core.Mail.status()", 15000); window.setInterval("JaxonLotgd.Ajax.Core.Timeout.status()", 10000);</script>';
-            $html['mail'] = '<span id="maillink">'.maillink().'</span>';
-        }
-    }
 
     //output petition count
     $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';
@@ -327,9 +305,9 @@ function page_footer($saveuser = true)
 
     if (getsetting('debug', 0))
     {
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".httpGetServer('SCRIPT_NAME')."','".($gentime)."');";
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".($gentime)."');";
         $resultdebug = \DB::query($sql);
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".httpGetServer('SCRIPT_NAME')."','".(round($wrapper->getQueryTime(), 3))."');";
+        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".(round($wrapper->getQueryTime(), 3))."');";
         $resultdebug = \DB::query($sql);
     }
 
@@ -857,21 +835,4 @@ function maillink(): string
     }
 
     return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)">'.$text.'</a>';
-}
-
-/**
- * Returns a display formatted (and popup enabled) MOTD link - determines if unread MOTD items exist and highlights the link if needed.
- *
- * @return string The formatted MOTD link
- */
-function motdlink()
-{
-    global $session;
-
-    if ($session['needtoviewmotd'])
-    {
-        return '<a href="motd.php" target="_blank" id="motd-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)"><i class="certificate icon"></i> <b>'.translate_inline('MoTD').'</b></a>';
-    }
-
-    return '<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">'.translate_inline('MoTD').'</a>';
 }
