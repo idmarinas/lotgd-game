@@ -2,6 +2,8 @@
 
 return [
     'service_manager' => [
-        'abstract_factories' => []
+        'abstract_factories' => [
+            Zend\Session\Service\ContainerAbstractServiceFactory::class,
+        ]
     ]
 ];
