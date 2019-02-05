@@ -14,7 +14,7 @@ function handle_event($location, $baseLink = false, $needHeader = false)
 
     if (false === $baseLink)
     {
-        $PHP_SELF = httpGetServer('PHP_SELF');
+        $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
     $skipdesc = false;

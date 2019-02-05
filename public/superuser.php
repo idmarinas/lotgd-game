@@ -22,7 +22,7 @@ if ('keepalive' == $op)
     $sql = 'UPDATE '.DB::prefix('accounts')." SET laston='".date('Y-m-d H:i:s')."' WHERE acctid='{$session['user']['acctid']}'";
     DB::query($sql);
 
-    echo '<html><meta http-equiv="Refresh" content="30;url='.httpGetServer('REQUEST_URI').'"></html><body>'.date('Y-m-d H:i:s').'</body></html>';
+    echo '<html><meta http-equiv="Refresh" content="30;url='.LotgdHttp::getServer('REQUEST_URI').'"></html><body>'.date('Y-m-d H:i:s').'</body></html>';
 
     exit();
 }

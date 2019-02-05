@@ -29,7 +29,7 @@ function redirect($location, $reason = false)
         $session['output'] = "<html><head><title>$title</title></head><body style='background-color: #ffffff'>$text</body></html>";
     }
     restore_buff_fields();
-    $session['debug'] .= "Redirected to $location from ".httpGetServer('REQUEST_URI').".  $reason<br>";
+    $session['debug'] .= "Redirected to $location from ".LotgdHttp::getServer('REQUEST_URI').".  $reason<br>";
     saveuser();
     $host = $_SERVER['HTTP_HOST'];
 
@@ -39,7 +39,7 @@ function redirect($location, $reason = false)
         $http = 'https';
     }
 
-    $uri = rtrim(dirname( httpGetServer('PHP_SELF')), '/\\');
+    $uri = rtrim(dirname( LotgdHttp::getServer('PHP_SELF')), '/\\');
     header("Location: $http://$host$uri/$location");
 
     // we should never hit this one here. in case we do, show the debug output along with some text

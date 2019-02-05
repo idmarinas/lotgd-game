@@ -17,7 +17,7 @@ superusernav();
 
 addnav('Module Categories');
 
-addnav('', httpGetServer('REQUEST_URI'));
+addnav('', LotgdHttp::getServer('REQUEST_URI'));
 $op = httpget('op');
 $module = httpget('module');
 

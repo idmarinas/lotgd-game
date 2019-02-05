@@ -521,7 +521,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
         if ($val > 0)
         {
-            $first = comscroll_sanitize(httpGetServer('REQUEST_URI')).'&comscroll='.($val);
+            $first = comscroll_sanitize(LotgdHttp::getServer('REQUEST_URI')).'&comscroll='.($val);
             $first = str_replace('?&', '?', $first);
 
             if (! strpos($first, '?'))
@@ -541,7 +541,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
         {
             output_notl($firstu, true);
         }
-        $req = comscroll_sanitize(httpGetServer('REQUEST_URI')).'&comscroll='.($com + 1);
+        $req = comscroll_sanitize(LotgdHttp::getServer('REQUEST_URI')).'&comscroll='.($com + 1);
         $req = str_replace('?&', '?', $req);
 
         if (! strpos($req, '?'))
@@ -561,7 +561,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
     {
         output_notl("$firstu $prev", true);
     }
-    $last = appendlink(comscroll_sanitize(httpGetServer('REQUEST_URI')), 'refresh=1');
+    $last = appendlink(comscroll_sanitize(LotgdHttp::getServer('REQUEST_URI')), 'refresh=1');
 
     // Okay.. we have some smart-ass (or stupidass, you guess) players
     // who think that the auto-reload firefox plugin is a good way to
@@ -582,7 +582,7 @@ function viewmoderatedcommentary($section, $message = 'Interject your own commen
 
     if ($com > 0 || ($cid > 0 && $newadded > $limit))
     {
-        $req = comscroll_sanitize(httpGetServer('REQUEST_URI')).'&comscroll='.($com - 1);
+        $req = comscroll_sanitize(LotgdHttp::getServer('REQUEST_URI')).'&comscroll='.($com - 1);
         $req = str_replace('?&', '?', $req);
 
         if (! strpos($req, '?'))

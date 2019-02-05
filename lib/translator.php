@@ -453,7 +453,7 @@ function tlschema($schema = false)
 
         if ('' == $translation_namespace)
         {
-            $translation_namespace = translator_uri(httpGetServer('REQUEST_URI'));
+            $translation_namespace = translator_uri(LotgdHttp::getServer('REQUEST_URI'));
         }
     }
     else

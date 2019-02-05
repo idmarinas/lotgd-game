@@ -135,7 +135,7 @@ elseif ('colors' == $act)
     output_notl('`n`1&#0096;1 `2&#0096;2 `3&#0096;3 `4&#0096;4 `5&#0096;5 `6&#0096;6 `7&#0096;7 ', true);
     output_notl('`n`!&#0096;! `@&#0096;@ `#&#0096;# `$&#0096;$ `%&#0096;% `^&#0096;^ `&&#0096;& `n', true);
     output('`% Got it?`0"  You can practice below:');
-    rawoutput('<form action="'.httpGetServer('REQUEST_URI').'" method="POST">');
+    rawoutput('<form action="'.LotgdHttp::getServer('REQUEST_URI').'" method="POST">');
     $testtext = httppost('testtext');
     output('You entered %s`n', prevent_colors(htmlentities($testtext, ENT_COMPAT, getsetting('charset', 'UTF-8'))), true);
     output('It looks like %s`n', $testtext);
@@ -145,7 +145,7 @@ elseif ('colors' == $act)
     rawoutput('</form>');
     rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
     output('`0`n`nThese colors can be used in your name, and in any conversations you have.');
-    addnav('', httpGetServer('REQUEST_URI'));
+    addnav('', LotgdHttp::getServer('REQUEST_URI'));
 }
 elseif ('specialty' == $act)
 {
@@ -163,7 +163,7 @@ elseif ('specialty' == $act)
 
         foreach ($specialities as $key => $name)
         {
-            addnav($name, cmd_sanitize(httpGetServer('REQUEST_URI'))."&specialty=$key");
+            addnav($name, cmd_sanitize(LotgdHttp::getServer('REQUEST_URI'))."&specialty=$key");
         }
     }
     else

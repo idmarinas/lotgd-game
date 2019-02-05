@@ -39,7 +39,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
         if (! $where)
         {
-            $where = httpGetServer('SCRIPT_NAME');
+            $where = LotgdHttp::getServer('SCRIPT_NAME');
         }
         debug("Args parameter to modulehook $hookname from $where is not an array.");
     }

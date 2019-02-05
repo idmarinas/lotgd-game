@@ -12,7 +12,7 @@ function superusernav()
 
     if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
     {
-        $script = substr(httpGetServer('SCRIPT_NAME'), 0, strpos(httpGetServer('SCRIPT_NAME'), '.'));
+        $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
 
         if ('superuser' != $script)
         {

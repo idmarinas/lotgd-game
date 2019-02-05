@@ -11,7 +11,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
 
     if (false === $script)
     {
-        $PHP_SELF = httpGetServer('PHP_SELF');
+        $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
     elseif (false === strpos($script, '?'))
