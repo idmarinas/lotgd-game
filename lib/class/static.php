@@ -5,14 +5,12 @@ use Lotgd\Core\Fixed\{
     Doctrine,
     FlashMessages as LotgdFlashMessages,
     Format as LotgdFormat,
+    Http as LotgdHttp,
     Locator as LotgdLocator,
     Navigation as LotgdNavigation,
     Theme as LotgdTheme,
     Translator as LotgdTranslator
 };
-
-//-- Prepare service manager
-LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
 
 //-- Configure DB
 DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
@@ -25,6 +23,9 @@ LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMe
 
 //-- Configure format instance
 LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
+
+//-- Configure Http instance
+LotgdHttp::instance(LotgdLocator::get(\Lotgd\Core\Http::class));
 
 //-- Configure Theme template
 LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
