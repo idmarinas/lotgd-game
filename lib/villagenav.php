@@ -22,7 +22,7 @@ function villagenav($extra = false)
 
     if ($session['user']['alive'])
     {
-        addnav(['V?Return to %s', $loc], "village.php$extra");
+        LotgdNavigation::addNav('V?Return to %s', "village.php$extra", ['params' => ['location' => $loc]]);
     }
     else
     {
