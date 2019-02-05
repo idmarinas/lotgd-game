@@ -5,112 +5,103 @@
 // mail ready
 
 /**
- * Return single get parameter.
- *
- * @param string $name
- * @param string $default
- *
- * @return mixed
+ * @see Lotgd\Core\Fixed\Http
  */
 function httpget(string $name, string $default = null)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getQuery($name, $default)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery($name, $default);
 }
 
 /**
- * Return all get parameters.
- *
- * @param bool $array For get or not data in array format
- *
- * @return array|object
+ * @see Lotgd\Core\Fixed\Http
  */
-function httpallget(bool $array = true)
+function httpallget()
 {
-    if ($array)
-    {
-        return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery()->toArray();
-    }
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getAllQuery()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
+    return \LotgdHttp::getAllQuery();
 }
 
 /**
- * Set single get parameter.
- *
- * @param string $var
- * @param mixed  $val
- * @param bool   $force
+ * @see Lotgd\Core\Fixed\Http
  */
 function httpset(string $var, $val, bool $force = false)
 {
-    $get = \LotgdLocator::get(\Lotgd\Core\Http::class)->getQuery();
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::setQuery($var, $val, $force)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($get->offsetExists($var) || $force)
-    {
-        $get->set($var, $val);
-    }
+    return \LotgdHttp::setQuery($var, $val, $force);
 }
 
 /**
- * Return single post parameter.
- *
- * @param string $name
- * @param mixed  $default
- *
- * @return mixed
+ * @see Lotgd\Core\Fixed\Http
  */
 function httppost($name, $default = null)
 {
-    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost($name, $default);
-}
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getPost($name, $default)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-function httppostisset($var)
-{
-    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->offsetExists($var);
+    return \LotgdHttp::getPost($name, $default);
 }
 
 /**
- * Set single post parameter.
- *
- * @param string $var
- * @param mixed  $val
- * @param bool   $sub
+ * @see Lotgd\Core\Fixed\Http
+ */
+function httppostisset($var)
+{
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::existInPost($var)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    return \LotgdHttp::existInPost($var);
+}
+
+/**
+ * @see Lotgd\Core\Fixed\Http
  */
 function httppostset($var, $val, $sub = false)
 {
-    $post = \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::setPost($var, $val, $sub)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if (false === $sub && $post->offsetExists($var))
-    {
-        $post->set($var, $val);
-    }
-    elseif (isset($_POST[$var]) && isset($_POST[$var][$sub]))
-    {
-        $_POST[$var][$sub] = $val;
-
-        \LotgdLocator::get(\Lotgd\Core\Http::class)->setPost($_POST);
-    }
+    return \LotgdHttp::setPost($var, $val, $sub);
 }
 
 /**
- * Get all post data.
- *
- * @param bool $array For get or not data in array format
- *
- * @return array|object
+ * @see Lotgd\Core\Fixed\Http
  */
-function httpallpost($array = true)
+function httpallpost()
 {
-    if ($array)
-    {
-        return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost()->toArray();
-    }
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getPost()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return \LotgdLocator::get(\Lotgd\Core\Http::class)->getPost();
+    return \LotgdHttp::getPost();
 }
 
 function postparse($verify = false, $subval = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and deleted in future version.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $var = httpallpost();
 
     if ($subval)
@@ -143,52 +134,6 @@ function postparse($verify = false, $subval = false)
 }
 
 /**
- * Return the parameter container responsible for server parameters or a single parameter value.
- *
- * @param string|null $name
- * @param string|null $default
- *
- * @return string
- */
-function httpGetServer($name = null, $default = null)
-{
-    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
-
-    return $request->getServer($name, $default);
-}
-
-/**
- * Get a value of a cookie.
- *
- * @param mixed $name
- *
- * @return mixed|null
- */
-function httpGetCookie($name)
-{
-    $cookie = \LotgdLocator::get(\Lotgd\Core\Http::class)->getCookie();
-
-    if ($cookie->offsetExists($name))
-    {
-        return $cookie->offsetGet($name);
-    }
-
-    return;
-}
-
-/**
- * Set a value of cookie
- *
- * @param mixed $name
- * @param mixed $value
- */
-function httpSetCookie($name, $value)
-{
-    $cookie = \LotgdLocator::get(\Lotgd\Core\Http::class)->getCookie();
-
-    $cookie->offsetSet($name, $value);
-}
-/**
  * Return base url of game.
  *
  * @param false|string $file
@@ -197,14 +142,14 @@ function httpSetCookie($name, $value)
  */
 function lotgd_base_url($file = false)
 {
-    $basename = (! $file ? basename(httpGetServer('SCRIPT_NAME')) : $file);
+    $basename = (! $file ? basename(LotgdHttp::getServer('SCRIPT_NAME')) : $file);
 
     if ($basename)
     {
-        $path = (httpGetServer('PHP_SELF') ? trim(httpGetServer('PHP_SELF'), '/') : '');
+        $path = (LotgdHttp::getServer('PHP_SELF') ? trim(LotgdHttp::getServer('PHP_SELF'), '/') : '');
         $basePos = strpos($path, $basename) ?: 0;
         $baseUrl = substr($path, 0, $basePos);
     }
 
-    return  $baseUrl;
+    return $baseUrl ?? '';
 }
