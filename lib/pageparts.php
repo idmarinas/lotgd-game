@@ -291,9 +291,6 @@ function page_footer($saveuser = true)
     unset($charstats);
     //Add all script in page
     $html['script'] = $script;
-    //output view PHP source link
-    $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', ($request->getServer('REQUEST_URI')));
-    $html['source'] = "<a href='$sourcelink' id='source' onclick='Lotgd.embed(this)' data-size='fullscreen' target='_blank'>".translate_inline('View PHP Source').'</a>';
     //output page generation time
     $gentime = microtime(true) - $pagestarttime;
     $session['user']['gentime'] += $gentime;
