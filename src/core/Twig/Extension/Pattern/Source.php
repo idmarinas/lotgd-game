@@ -23,7 +23,7 @@ trait Source
      *
      * @return string
      */
-    function gameSource(): string
+    public function gameSource(): string
     {
         $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', (\LotgdHttp::getServer('REQUEST_URI')));
 

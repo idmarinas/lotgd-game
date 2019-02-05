@@ -23,7 +23,7 @@ trait Motd
      *
      * @return string
      */
-    function messageOfTheDay(): string
+    public function messageOfTheDay(): string
     {
         global $session;
 
