@@ -258,31 +258,6 @@ function page_footer($saveuser = true)
     //NOTICE | which I made available for free to you that you leave it in.
     //NOTICE |
 
-    $html['petitiondisplay'] = '';
-
-    if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
-    {
-        $sql = 'SELECT count(1) AS c, status FROM '.\DB::prefix('petitions').' GROUP BY status';
-        $result = \DB::query($sql);
-        $petitions = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
-
-        while ($row = \DB::fetch_assoc($result))
-        {
-            $petitions[(int) $row['status']] = $row['c'];
-        }
-
-        \DB::free_result($result);
-
-        $administrator = ($session['user']['superuser'] & SU_EDIT_USERS);
-
-        $p = "`\${$petitions[5]}`0|`^{$petitions[4]}`0|`b{$petitions[0]}´b|{$petitions[1]}|`!{$petitions[3]}`0|`#{$petitions[7]}`0|`%{$petitions[6]}`0|{$petitions[2]}";
-
-        $html['petitiondisplay'] = \LotgdTheme::renderThemeTemplate('parts/petition.twig', [
-            'administrator' => $administrator,
-            'petitioncount' => $p
-        ]);
-    }
-
     //output character stats
     $html['stats'] = $charstats;
     unset($charstats);
