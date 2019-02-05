@@ -258,9 +258,6 @@ function page_footer($saveuser = true)
     //NOTICE | which I made available for free to you that you leave it in.
     //NOTICE |
 
-    //output petition count
-    $html['petition'] = '<a href="petition.php" target="_blank" id="petition-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)"><b>'.translate_inline('Petition for Help').'</b></a>';
-
     $html['petitiondisplay'] = '';
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_EDIT_PETITIONS)
