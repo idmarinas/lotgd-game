@@ -65,6 +65,14 @@ class Theme
     }
 
     /**
+     * @inheritDoc
+     */
+    public static function setDefaultSkin($theme)
+    {
+        return self::$wrapper->setDefaultSkin($theme);
+    }
+
+    /**
      * Set wrapper of Theme.
      *
      * @param CoreTheme $wrapper

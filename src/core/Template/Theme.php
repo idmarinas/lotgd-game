@@ -130,15 +130,32 @@ class Theme extends Base
     }
 
     /**
+     * Change default theme
+     * Need if change theme with form.
+     *
+     * @param string $theme
+     *
+     * @return $this
+     */
+    public function setDefaultSkin(string $theme)
+    {
+        $this->defaultSkin = $theme;
+
+        bdump($theme, 'Set default theme');
+
+        $this->prepareTheme();
+
+        return $this;
+    }
+
+    /**
      * Prepare template for use.
      */
     public function prepareTheme()
     {
-        global $y, $z, $y2, $z2, $lc, $x;
-
         $this->themeName = $this->getDefaultSkin();
 
-        if (empty($this->themefolder) && false === strpos($this->themefolder, $this->themeName))
+        if (empty($this->themefolder) || false === strpos($this->themeName, $this->themefolder))
         {
             //-- Prepare name folder of theme, base on filename of theme
             $this->themefolder = pathinfo($this->themeName, PATHINFO_FILENAME); //-- Delete extension
