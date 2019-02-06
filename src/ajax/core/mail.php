@@ -16,7 +16,13 @@ class Mail
             return $response;
         }
 
-        $response->html('maillink', maillink());
+        $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
+        $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
+
+        $response->html('ye-olde-mail-count-text', \LotgdTranslator::t('parts.mail.title', [
+            'new' => $result['notSeenCount'],
+            'old' => $result['seenCount']
+        ]));
 
         return $response;
     }
