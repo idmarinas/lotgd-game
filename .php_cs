@@ -7,6 +7,7 @@ return PhpCsFixer\Config::create()
         '@PHP56Migration' => true,
         '@PHP70Migration' => true,
         '@PHP71Migration' => true,
+        '@PHP72Migration' => true,
         '@PSR2' => true,
         '@Symfony' => true,
         '@DoctrineAnnotation' => true,
