@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mail.
+ * Structure of table "mail" in data base.
+ *
+ * This table stores emails between users.
  *
  * @ORM\Table(name="mail",
  *     indexes={
@@ -13,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="seen", columns={"seen"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\MailRepository")
  */
 class Mail
 {
@@ -64,7 +77,7 @@ class Mail
     /**
      * @var bool
      *
-     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default": "0"})
+     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default": "0", "unsigned": true})
      */
     private $seen = '0';
 
