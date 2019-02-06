@@ -240,7 +240,7 @@ class Navigation
         //-- Add nav header if not have link.
         if (! $link && $label)
         {
-            return $this->addHeader($header, $options);
+            return $this->addHeader($label, $options);
         }
 
         //-- Add link to allowed navs
