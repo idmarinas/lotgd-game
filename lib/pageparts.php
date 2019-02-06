@@ -273,20 +273,10 @@ function page_footer($saveuser = true)
     if (getsetting('debug', 0))
     {
         $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".($gentime)."');";
-        $resultdebug = \DB::query($sql);
+        \DB::query($sql);
         $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".(round($wrapper->getQueryTime(), 3))."');";
-        $resultdebug = \DB::query($sql);
+        \DB::query($sql);
     }
-
-    //-- Add pagegen info
-    $html['pagegen'] = sprintf('Page gen: %ss / %s queries (%ss Ave: %ss - %s/%s',
-        round($gentime, 3),
-        $wrapper->getQueriesThisHit(),
-        round($wrapper->getQueryTime(), 3),
-        round($session['user']['gentime'] / $session['user']['gentimecount'], 3),
-        round($session['user']['gentime'], 3),
-        round($session['user']['gentimecount'], 3)
-    );
 
     tlschema();
 
