@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Characters.
+ * Structure of table "characters" in data base.
+ *
+ * This table store character info of users, only data related to character.
  *
  * @ORM\Table(name="characters",
  *     indexes={
@@ -16,7 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="clanid", columns={"clanid"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CharactersRepository")
  */
 class Characters
 {
@@ -378,7 +391,7 @@ class Characters
      *
      * @ORM\Column(name="dragonpoints", type="array", nullable=false)
      */
-    private $dragonpoints;
+    private $dragonpoints = [];
 
     /**
      * @var bool
