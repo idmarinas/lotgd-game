@@ -764,32 +764,3 @@ function charstats($return = true)
 
     return $ret;
 }
-
-/**
- * Returns a display formatted (and popup enabled) mail link - determines if unread mail exists and highlights the link if needed.
- *
- * @return string The formatted mail link
- */
-function maillink(): string
-{
-    global $session;
-
-    $sql = 'SELECT sum(if(seen=1,1,0)) AS seencount, sum(if(seen=0,1,0)) AS notseen FROM '.\DB::prefix('mail')." WHERE msgto='{$session['user']['acctid']}'";
-    $result = \DB::query($sql);
-    $row = \DB::fetch_assoc($result);
-    \DB::free_result($result);
-    $row['seencount'] = (int) ($row['seencount'] ?? 0);
-    $row['notseen'] = (int) ($row['notseen'] ?? 0);
-
-    $session['mail']['seencount'] = $row['seencount'];
-    $session['mail']['notseen'] = $row['notseen'];
-
-    $text = sprintf(translate_inline('Ye Olde Mail: %s new, %s old', 'common'), $row['notseen'], $row['seencount']);
-
-    if ($row['notseen'] > 0)
-    {
-        return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)"><b>'.$text.'</b></a>';
-    }
-
-    return '<a href="mail.php" target="_blank" id="mail-embed" class="hotmotd" data-force="true" onclick="Lotgd.embed(this)">'.$text.'</a>';
-}
