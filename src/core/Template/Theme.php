@@ -121,9 +121,9 @@ class Theme extends Base
             $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
         }
 
-        if ('' == \LotgdHttp::getCookie('template'))
+        if (! \LotgdHttp::getCookie('template') || $this->defaultSkin != \LotgdHttp::getCookie('template'))
         {
-            \LotgdHttp::setCookie('template', $theme);
+            \LotgdHttp::setCookie('template', $this->defaultSkin);
         }
 
         return $this->defaultSkin;
@@ -175,9 +175,9 @@ class Theme extends Base
      *
      * @throws RuntimeException
      *
-     * @return array
+     * @return string
      */
-    private function getValidTheme(): array
+    private function getValidTheme(): string
     {
         // A generic way of allowing a theme to be selected.
         $skins = [];
@@ -199,6 +199,6 @@ class Theme extends Base
             throw new Exception\RuntimeException(sprintf('Not found a valid "theme.html" file in "%s" folder.', static::TEMPLATES_BASE_DIR), 1);
         }
 
-        return $skins;
+        return $skins[0];
     }
 }
