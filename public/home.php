@@ -115,7 +115,7 @@ if ($params['OnlineCount'] < getsetting('maxonline', 0) || 0 == getsetting('maxo
 $results = modulehook('homemiddle', ['messages' => []]);
 if(count($results['messages']))
 {
-    $params['hookMomeMiddle'] = $results['messages'];
+    $params['hookHomeMiddle'] = $results['messages'];
 }
 
 //-- By default not have banner are
