@@ -4,20 +4,20 @@
 // addnews ready
 // mail ready
 
-if (isset($_POST['template']))
-{
-    $skin = $_POST['template'];
-
-    if ($skin > '')
-    {
-        setcookie('template', $skin, strtotime('+45 days'));
-        httpSetCookie('template', $skin);
-    }
-}
-
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
+
+if (LotgdHttp::existInPost('template'))
+{
+    $skin = LotgdHttp::getPost('template');
+
+    if ($skin > '')
+    {
+        LotgdHttp::setCookie('template', $skin, strtotime('+45 days'));
+        LotgdTheme::setDefaultSkin($skin);
+    }
+}
 
 if ($session['loggedin'] ?? false)
 {
