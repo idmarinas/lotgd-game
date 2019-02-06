@@ -1,5 +1,5 @@
 //-- Dependencies
-var gulp = require('gulp-help')(require('gulp'))
+var gulp = require('gulp')
 
 //-- Tasks
 require('./gulp/tasks/collections/build')(gulp)
