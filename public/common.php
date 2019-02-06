@@ -22,6 +22,7 @@ require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 //-- Init Debugger
 \Tracy\Debugger::enable(\Tracy\Debugger::DETECT, __DIR__ . '/../data/log');
+\Tracy\Debugger::timer('page-generating');
 
 use Lotgd\Core\Fixed\{
     Locator as LotgdLocator,
