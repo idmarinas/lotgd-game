@@ -24,11 +24,29 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   This new system not used Data Base to store translations.
         -   Used `.yaml` files to store translations.
             -   Files are in `translations/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
-                - By default have two main scopes:
-                    - `pages` This is where the translation files from the main pages are stored.
-                    - `modules` This is where the translation files are stored in the modules.
+                -   By default have two main scopes:
+                    -   `pages` This is where the translation files from the main pages are stored.
+                    -   `modules` This is where the translation files are stored in the modules.
             -   The translations are automatically loaded by the translation factory.
                 -   It is possible to have more scopes besides `pages` and `modules` but remember the structure of the folder `translations`.
+-   :warning: **_LotGD use Twig template system_**
+    -   It's a system similar to MVC.
+    -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
+    -   All pages have a hook called `page-[NAMEPAGE]-tpl-params` with this hook you can change/add new parameters for the templates you can use in your theme.
+        -   Example: `modulehook('page-home-tpl-params', [array $params])`
+        -   Some pages can have this structure for hook `page-[NAMEPAGE]-[SUBNAME]-tpl-params` are pages that have a params in route. Like page "about".
+            -   Example: `modulehook('page-about-license-tpl-params', [array $params])`
+-   :warning: **_New navigation menu system_**
+    -   The old `addnav` and other similar functions are remplaced with new Navigation menu system.
+        -   You can add/block new navs with this functions:
+            -   `LotgdNavigation::addHeader(string $header, array $options = [])`
+            -   `LotgdNavigation::addHeaderNotl(string $header, array $options = [])`
+            -   `LotgdNavigation::addNav(?string $label, ?string $link = null, array $options = [])`
+            -   `LotgdNavigation::addNavNotl(?string $label, ?string $link = null, array $options = [])`
+            -   `LotgdNavigation::addNavAllow(string $link)`
+        -   With this function you can change the translation domain for the affected menus
+            -   `LotgdNavigation::setTextDomain(?string $domain = null)`
+            -   If you use `LotgdNavigation::setTextDomain(null)` or `LotgdNavigation::setTextDomain()` reset the translation domain to the previous value.
 -   **common.php** Updated script of log http referers.
     -   Changes the way that static classes are used:
           **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
@@ -36,10 +54,6 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
           **lib/class/lotgdFormat.php** now are in **src/core/Fixed/Format.php**
           **lib/class/servicemanager.php** now are in **src/core/Fixed/Locator.php**
           **lib/class/template.php** now are in **src/core/Fixed/Theme.php**
--   **lib/http.php** Added new functions
-    -   `httpGetServer(string $name = null , string $default = null)` For get a value of a `$_SERVER['any key']`
-    -   `httpGetCookie(mixed $name)` For get value of a cookie
-    -   `httpSetCookie(mixed $name, mixed $value)` For set value of a cookie
 -   **src/core/Lib/Settings.php** It improves the management of the settings cache.
 -   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
@@ -100,6 +114,12 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   You can still use Zend DB and its classes to access it, but it is recommended to use Doctrine, as this maintains the integrity of the database.
         -   As an example, some fields in the tables are of type serialized array, Doctrine serializes and deserializes these fields automatically.
     -   There are no plans to remove Zend DB at this time.
+-   **Debugger** Added a debugger (Tracy library) to LotGD
+    -   Can use `Debbugger::log($string)` to log a string
+    -   You can dump a var with this options:
+        -   `Debugger::barDump($var, string $title)` or `barDump($var, string $title)` dump var to Debugger bar. To this option you can add a title to the dump
+        -   `Debugger::dump($var)` or `dump($var)` dump var in output.
+    -   With  can dump a var, and in production Debugger ignore this.
 
 ### :fire: DEPRECATED
 
@@ -131,13 +151,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/dbwrapper.php** Removed deprecated method `query_cached`
     -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\Core\Lib\Dbwrapper` to get this info
 -   **lib/pageparts.php** Removed deprecated function `popup`
--   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core. Not is necesary register as global all data in `$_SERVER`. Can use `Lotgd\Core\Http` or `httpGetServer(string $name = null , string $default = null)`
+-   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core. Not is necesary register as global all data in `$_SERVER`. Can use `LotgdHttp::getServer(string $name = null , string $default = null)`
 
 ### :notebook: NOTES
 
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
     -   All related gulp tasks are updated to this new version
+    -   Removed `gulp-help` dependency (sse `gulp --tasks` to list tasks)
 
 # Version: 3.0.0
 

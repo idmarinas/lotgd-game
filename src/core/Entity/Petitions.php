@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Petitions.
  *
  * @ORM\Table(name="petitions")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\PetitionsRepository")
  */
 class Petitions
 {

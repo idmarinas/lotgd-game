@@ -53,13 +53,7 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
     * It may be necessary to adapt the modules to work in *IDMarinas Edition*
 	* In *IDMarinas Edition 3.0.0*, most modules will not work
 * From the 2.7.0 IDMarinas Edition you need PHP 7.0 or better
+* From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
 
 # Other
-* Components used in IDMarinas Edition
-    * Components of [Zend Framework](https://zendframework.github.io)
-    * User interface [Fomantic UI Framework](https://fomantic-ui.com) fork of [Semantic UI Framework](http://semantic-ui.com/)
-    * Templates system [Twig](http://twig.sensiolabs.org)
-    * A simple JavaScript popup boxes [SweetAlert2](https://limonte.github.io/sweetalert2/)
-    * A simple CronJob manager [Jobby, a PHP cron job manager](https://github.com/jobbyphp/jobby)
-    * [Toastr](https://codeseven.github.io/toastr/), Javascript library for non-blocking notifications.
-    * [Jaxon-PHP](https://www.jaxon-php.org), Easily create Ajax applications with PHP.
+Read [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more information.
