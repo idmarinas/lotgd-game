@@ -291,13 +291,14 @@ return [
     //       to `exclude_analysis_directory_list`.
     'exclude_analysis_directory_list' => [
         'assets/',
+        'data/',
         'error_docs/',
         'gulp/',
         'modules/',
-        'resources/',
+        'public/images/',
+        'public/js/',
+        'public/themes/',
         'semantic/',
-        'templates/',
-        'themes/',
         'vendor/',
     ],
 
@@ -347,6 +348,9 @@ return [
     // your application should be included in this list.
     'directory_list' => [
         'lib',
+        'public',
+        'src/ajax/core',
+        'src/ajax/local',
         'src/core',
         'src/local',
         'vendor/doctrine/orm/lib',
