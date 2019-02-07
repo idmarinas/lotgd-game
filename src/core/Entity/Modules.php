@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Modules.
+ * Structure of table "modules" in data base.
+ *
+ * This table stores modules instaled in game.
  *
  * @ORM\Table(name="modules")
  * @ORM\Entity
@@ -61,7 +74,7 @@ class Modules
      *
      * @ORM\Column(name="installdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $installdate = '0000-00-00 00:00:00';
+    private $installdate;
 
     /**
      * @var string
@@ -75,7 +88,16 @@ class Modules
      *
      * @ORM\Column(name="filemoddate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $filemoddate = '0000-00-00 00:00:00';
+    private $filemoddate;
+
+    /**
+     * Configure some default values.
+     */
+    public function __construct()
+    {
+        $this->installdate = new \DateTime('0000-00-00 00:00:00');
+        $this->filemoddate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * @var bool
