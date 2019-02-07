@@ -74,10 +74,10 @@ if (getsetting('homenewestplayer', 1))
     $params['newestplayer'] = $name;
 }
 
-$results = modulehook('index', ['messages' => []]);
-if(count($results['messages']))
+$results = modulehook('index', []);
+if(is_array($result) && count($results))
 {
-    $params['hookIndex'] = $results['messages'];
+    $params['hookIndex'] = $results;
 }
 
 if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
@@ -90,10 +90,10 @@ if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
 
 $params['OnlineCount'] = getsetting('OnlineCount', 0);
 
-$results = modulehook('hometext', ['messages' => []]);
-if(count($results['messages']))
+$results = modulehook('hometext', []);
+if(is_array($result) && count($results))
 {
-    $params['hookHomeText'] = $results['messages'];
+    $params['hookHomeText'] = $results;
 }
 
 if ('timeout' == $op)
@@ -112,10 +112,10 @@ if ($params['OnlineCount'] < getsetting('maxonline', 0) || 0 == getsetting('maxo
     $params['serverFull'] = false;
 }
 
-$results = modulehook('homemiddle', ['messages' => []]);
-if(count($results['messages']))
+$results = modulehook('homemiddle', []);
+if(is_array($result) && count($results))
 {
-    $params['hookHomeMiddle'] = $results['messages'];
+    $params['hookHomeMiddle'] = $results;
 }
 
 //-- By default not have banner are
