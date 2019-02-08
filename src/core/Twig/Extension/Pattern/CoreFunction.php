@@ -32,7 +32,7 @@ trait CoreFunction
      */
     public function gameCopyright(): string
     {
-        return \Lotgd\Core\Application::COPYRIGHT;
+        return \Lotgd\Core\Application::LICENSE . \Lotgd\Core\Application::COPYRIGHT;
     }
 
     /**
