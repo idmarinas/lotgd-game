@@ -14,34 +14,16 @@ if (! isset($_GET['op']) || 'list' != $_GET['op'])
 require_once 'common.php';
 require_once 'lib/sanitize.php';
 
-tlschema('logdnet');
+use Zend\Filter;
 
 function lotgdsort($a, $b)
 {
     // $a and $b are table rows.
 
-    $official_prefixes = [
-        '2.6.0 IDMarinas Edition',
-        '2.5.0 IDMarinas Edition',
-        '2.4.0 IDMarinas Edition',
-        '2.3.0 IDMarinas Edition',
-        '2.2.0 IDMarinas Edition',
-        '2.1.0 IDMarinas Edition',
-        '2.0.1 IDMarinas Edition',
-        '2.0.0 IDMarinas Edition',
-        '1.1.2 Dragonprime Edition',
-        '1.1.1 Dragonprime Edition',
-        '1.1.0 Dragonprime Edition',
-        '1.0.6',
-        '1.0.5',
-        '1.0.4',
-        '1.0.3',
-        '1.0.2',
-        '1.0.1',
-        '1.0.0',
-        // MUST REMEMBER TO PUT NEW PRE-RELEASES HERE
-        '0.9.7'
-    ];
+    $versions = new \Lotgd\Core\Installer\Install();
+    $official_prefixes = $versions->getAllVersions();
+    unset($official_prefixes['-1']);
+    $official_prefixes = array_keys($official_prefixes);
 
     $aver = strtolower(str_replace(' ', '', $a['version']));
     $bver = strtolower(str_replace(' ', '', $b['version']));
@@ -76,20 +58,14 @@ function lotgdsort($a, $b)
 
     foreach ($official_prefixes as $index => $value)
     {
-        if (0 == strncmp($aver, $value, strlen($value)))
+        if (0 == strncmp($aver, $value, strlen($value)) && 10000 == $costa)
         {
-            if (10000 == $costa)
-            {
-                $costa = $index;
-            }
+            $costa = $index;
         }
 
-        if (0 == strncmp($bver, $value, strlen($value)))
+        if (0 == strncmp($bver, $value, strlen($value)) && 10000 == $costb)
         {
-            if (10000 == $costb)
-            {
-                $costb = $index;
-            }
+            $costb = $index;
         }
     }
 
@@ -113,10 +89,7 @@ if ('' == $op)
     $count = httpget('c') * 1;
     $lang = httpget('l');
 
-    if ('' == $vers)
-    {
-        $vers = 'Unknown';
-    }
+    $vers = $vers ?: 'Unknown';
 
     if ('' == $admin || 'postmaster@localhost.com' == $admin)
     {
@@ -143,21 +116,6 @@ if ('' == $op)
     {
         // This is an already known server.
 
-        // Eric, this below code does NOT work and causes a server to NEVER
-        // get updated.. I'm commenting it out until you rethink it!
-        // the server addy doesn't *change* so by checking this we never
-        // update
-        // It seems as if you thought this was the IP of the user logging in.
-        // Also, nothing ever expires the IP from this list.
-        //$ips = array_flip(explode(",",$row['recentips']));
-        //if (isset($ips[$_SERVER['REMOTE_ADDR']])){
-        //	//we've seen this user too recently.
-        //}else{
-        //	$ips = array_keys($ips);
-        //	if (!isset($ips[$_SERVER['REMOTE_ADDR']]))
-        //		array_push($ips,$_SERVER['REMOTE_ADDR']);
-        //	$ips = addslashes(join(',',$ips));
-
         // TEMP hack for IPs
         $ips = $_SERVER['REMOTE_ADDR'];
         // Only one update per minute allowed.
@@ -167,7 +125,6 @@ if ('' == $op)
             $sql = 'UPDATE '.DB::prefix('logdnet')." SET lang='$lang',count='$count',recentips='$ips',priority=priority+1,description='$desc',version='$vers',admin='$admin',lastupdate='$date',lastping='$date' WHERE serverid={$row['serverid']}";
             DB::query($sql);
         }
-        //	}
     }
     else
     {
@@ -198,19 +155,19 @@ if ('' == $op)
         $currency = getsetting('paypalcurrency', 'USD');
         $info = [];
         $info[''] = '<!--data from '.$_SERVER['HTTP_HOST'].'-->
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-<input type="hidden" name="cmd" value="_xclick">
-<input type="hidden" name="business" value="logd@mightye.org">
-<input type="hidden" name="item_name" value="Legend of the Green Dragon Author Donation from %s">
-<input type="hidden" name="item_number" value="%s">
-<input type="hidden" name="no_shipping" value="1">
-<input type="hidden" name="notify_url" value="http://lotgd.net/payment.php">
-<input type="hidden" name="cn" value="Your Character Name">
-<input type="hidden" name="cs" value="1">
-<input type="hidden" name="currency_code" value="'.$currency.'">
-<input type="hidden" name="tax" value="0">
-<input type="image" src="images/logdnet.php" border="0" width="62" height="57" name="submit" alt="Donate!">
-</form>';
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="logd@mightye.org">
+        <input type="hidden" name="item_name" value="Legend of the Green Dragon Author Donation from %s">
+        <input type="hidden" name="item_number" value="%s">
+        <input type="hidden" name="no_shipping" value="1">
+        <input type="hidden" name="notify_url" value="http://lotgd.net/payment.php">
+        <input type="hidden" name="cn" value="Your Character Name">
+        <input type="hidden" name="cs" value="1">
+        <input type="hidden" name="currency_code" value="'.$currency.'">
+        <input type="hidden" name="tax" value="0">
+        <input type="image" src="images/logdnet.php" border="0" width="62" height="57" name="submit" alt="Donate!">
+        </form>';
         $info['image'] = join('', file('images/paypal1.gif'));
         $info['content-type'] = 'image/gif';
 
@@ -244,29 +201,15 @@ elseif ('net' == $op)
 }
 else
 {
-    page_header('LoGD Net');
-    addnav('Login page');
-    addnav('Login page', 'index.php');
-    output('`@Below are a list of other LoGD servers that have registered with the LoGD Net.`n');
-    output('`2It should be noted that this list is subject to editing and culling by the administrators of logdnet.logd.com. ');
-    output("Normally this list is a comprehensive list of all servers that have elected to register with LoGDnet, but I'm making changes to that. ");
-    output("Because this list is a free service provided by logdnet.logd.com, we reserve the right to remove those who we don't want in the list.`n");
-    output('Reasons we might remove a server:`n');
-    output('&#149; Altering our copyright statement outside of the provisions we have provided within the code,`n', true);
-    output('&#149; Removing our PayPal link,`n', true);
-    output('&#149; Providing deceptive, inappropriate, or false information in the server listing,`n', true);
-    output('&#149; Not linking back to LoGDnet`n', true);
-    output('Or really, any other reason that we want.`n');
-    output("If you've been banned already, chances are you know why, and chances are we've got no interest in removing the ban.");
-    output("We provide this free of charge, at the expense of considerable bandwidth and server load, so if you've had the gall to abuse our charity, don't expect it to be won back very easily.`n`n");
-    output("If you are well behaved, we don't have an interest in blocking you from this listing. `0`n");
-    rawoutput("<table  class='ui very compact striped selected table'>");
-    rawoutput('<thead><tr><th>');
-    output('Server');
-    rawoutput('</th><th>');
-    output('Version');
-    rawoutput('</th></tr></thead>');
     require_once 'lib/pullurl.php';
+
+    page_header(LotgdTranslator::t('title', [], 'page-logdnet'));
+
+    LotgdNavigation::addHeader('common.category.login');
+    LotgdNavigation::addNav('common.nav.login', 'index.php');
+
+    $params = ['servers' => []];
+
     $u = getsetting('logdnetserver', 'http://logdnet.logd.com/');
 
     if (! preg_match('/\\/$/', $u))
@@ -274,63 +217,51 @@ else
         $u = $u.'/';
         savesetting('logdnetserver', $u);
     }
-    $servers = pullurl($u.'logdnet.php?op=net');
+    $servers = pullurl("${u}logdnet.php?op=net") ?: [];
 
-    if (! $servers)
-    {
-        $servers = [];
-    }
-    $i = 0;
+    bdump($servers);
+
+    $filterChain = new Filter\FilterChain();
+    $filterChain
+        ->attach(new Filter\StringTrim())
+        ->attach(new Filter\StripTags())
+        ->attach(new Filter\StripNewlines())
+        // ->attach(new Filter\HtmlEntities())
+    ;
 
     while (list($key, $val) = each($servers))
     {
         $row = unserialize($val);
 
         // If we aren't given an address, continue on.
-        if ('http://' != substr($row['address'], 0, 7) &&
-                'https://' != substr($row['address'], 0, 8))
+        if ('http://' != substr($row['address'], 0, 7) && 'https://' != substr($row['address'], 0, 8))
         {
             continue;
         }
 
-        // Give undescribed servers a boring descriptionn
-        if ('' == trim($row['description']))
-        {
-            $row['description'] = 'Another boring and undescribed LotGD server';
-        }
+        $row['address'] = htmlentities($row['address'], ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
-        // Strip out any embedded html.
-        $row['description'] =
-            preg_replace('|<[a-zA-Z0-9/ =]+>|', '', $row['description']);
+        // Give undescribed servers a boring descriptionn
+        $row['description'] = $filterChain->filter(stripslashes($row['description']));
 
         // Clean up the desc
-        $row['description'] = logdnet_sanitize($row['description']);
-        $row['description'] = soap($row['description']);
+        $row['description'] = soap(logdnet_sanitize($row['description']));
         // Limit descs to 75 characters.
         if (strlen($row['description']) > 75)
         {
             $row['description'] = substr($row['description'], 0, 75);
         }
 
-        $row['description'] = htmlentities(stripslashes($row['description']), ENT_COMPAT, getsetting('charset', 'UTF-8'));
         $row['description'] = str_replace('`&amp;', '`&', $row['description']);
 
         // Correct for old logdnet servers
-        if ('' == $row['version'])
-        {
-            $row['version'] = translate_inline('Unknown');
-        }
+        $row['version'] = $row['version'] ?: 'Unknown';
 
-        // Output the information we have.
-        rawoutput('<tr>');
-        rawoutput("<td class='collapsing'><a href=\"".htmlentities($row['address'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" target='_blank' rel='noopener noreferrer'>");
-        output_notl('`&%s`0', $row['description'], true);
-        rawoutput('</a></td><td>');
-        output_notl('`^%s`0', $row['version']); // so we are able to translate "`^Unknown`0"
-        rawoutput('</td></tr>');
-        $i++;
+        $params['servers'][] = $row;
     }
-    rawoutput('</table>');
+
+    rawoutput(LotgdTheme::renderThemeTemplate('pages/logdnet.twig', $params));
+
     page_footer();
 }
 
