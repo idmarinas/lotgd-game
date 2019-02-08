@@ -7,6 +7,8 @@
  *
  * @param string $link    The URL to block
  * @param bool   $partial
+ *
+ * @deprecated 4.0.0
  */
 function blocknav(string $link, bool $partial = false)
 {
@@ -30,6 +32,8 @@ function blocknav(string $link, bool $partial = false)
  *
  * @param string $link    The nav to unblock
  * @param bool   $partial If the passed nav is partial or not
+ *
+ * @deprecated 4.0.0
  */
 function unblocknav($link, $partial = false)
 {
@@ -45,7 +49,9 @@ function unblocknav($link, $partial = false)
 
     return \LotgdNavigation::unBlockLink($link);
 }
-
+/**
+ * @deprecated 4.0.0
+ */
 function appendcount($link)
 {
     global $session;
@@ -53,6 +59,9 @@ function appendcount($link)
     return appendlink($link, 'c='.$session['counter'].'-'.date('His'));
 }
 
+/**
+ * @deprecated 4.0.0
+ */
 function appendlink($link, $new)
 {
     if (false !== strpos($link, '?'))
@@ -74,6 +83,8 @@ $block_new_navs = false;
  * Allow header/footer code to block/unblock additional navs.
  *
  * @param bool $block should new navs be blocked
+ *
+ * @deprecated 4.0.0
  */
 function set_block_new_navs($block)
 {
@@ -87,6 +98,8 @@ function set_block_new_navs($block)
  *
  * @param string   $text     the display string for the nav banner
  * @param collapse $collapse (default true) can the nav section collapse
+ *
+ * @deprecated 4.0.0
  */
 function addnavheader($text, $collapse = true, $translate = true)
 {
@@ -111,6 +124,8 @@ function addnavheader($text, $collapse = true, $translate = true)
  * @param string $popsize If a popup - the size of the popup window
  *
  * @see badnav, apponencode
+ *
+ * @deprecated 4.0.0
  */
 function addnav_notl($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
 {
@@ -137,6 +152,8 @@ function addnav($text, $link = false, $priv = false, $pop = false, $popsize = '5
  *
  * @param string $link The nav to check
  *
+ * @deprecated 4.0.0
+ *
  * @return bool
  */
 function is_blocked(string $link): bool
@@ -148,6 +165,8 @@ function is_blocked(string $link): bool
  * Determine how many navs are available.
  *
  * @param string $section The nav section to check
+ *
+ * @deprecated 4.0.0
  *
  * @return int
  */
@@ -179,6 +198,8 @@ function count_viable_navs($section)
 /**
  * Determins if there are any navs for the player.
  *
+ * @deprecated 4.0.0
+ *
  * @return bool
  */
 function checknavs()
@@ -186,7 +207,6 @@ function checknavs()
     global $navbysection, $session;
 
     // If we already have navs entered (because someone stuck raw links in)
-    // just return true;
     if (is_array($session['user']['allowednavs']) && count($session['user']['allowednavs']) > 0)
     {
         return true;
@@ -214,6 +234,8 @@ function checknavs()
 /**
  * Builds navs for display.
  *
+ * @deprecated 4.0.0
+ *
  * @return string Output formatted navs
  */
 function buildnavs()
@@ -236,6 +258,8 @@ $quickkeys = [];
  * @param bool   $pop
  * @param string   $popsize
  *
+ * @deprecated 4.0.0
+ *
  * @return mixed
  */
 function private_addnav($text, $link = false, $priv = false, $pop = false, $popsize = '500x300')
@@ -249,6 +273,8 @@ function private_addnav($text, $link = false, $priv = false, $pop = false, $pops
 /**
  * Determine how many navs are available.
  *
+ * @deprecated 4.0.0
+ *
  * @return int The number of legal navs
  */
 function navcount()
@@ -261,6 +287,8 @@ function navcount()
 
 /**
  * Reset and wipe the navs.
+ *
+ * @deprecated 4.0.0
  */
 function clearnav()
 {
@@ -269,6 +297,8 @@ function clearnav()
 
 /**
  * Reset the output and wipe the navs.
+ *
+ * @deprecated 4.0.0
  */
 function clearoutput()
 {
@@ -289,6 +319,8 @@ function clearoutput()
  * @param boolean $pop
  * @param string $popsize
  * @param string $extra
+ *
+ * @deprecated 4.0.0
  *
  * @return string A string that contain a key
  */
