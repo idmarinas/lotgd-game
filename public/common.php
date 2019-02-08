@@ -214,7 +214,7 @@ $revertsession = $session;
 $session['user']['loggedin'] = (bool) ($session['user']['loggedin'] ?? false);
 $session['loggedin'] = $session['user']['loggedin'];
 
-if (true != $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
+if (! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
     return redirect('login.php?op=logout');
 }
