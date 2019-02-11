@@ -54,6 +54,7 @@ class GameCore extends AbstractExtension
             new TwigFunction('gametime', [$this, 'gametime']),
             new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
 
+            new TwigFunction('page_title', [$this, 'pageTitle']),
             new TwigFunction('game_version', [$this, 'gameVersion']),
             new TwigFunction('game_copyright', [$this, 'gameCopyright']),
             new TwigFunction('game_source', [$this, 'gameSource']),

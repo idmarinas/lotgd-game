@@ -16,6 +16,18 @@ namespace Lotgd\Core\Twig\Extension\Pattern;
 trait CoreFunction
 {
     /**
+     * Undocumented function
+     *
+     * @param array $title
+     *
+     * @return string
+     */
+    public function pageTitle(array $title)
+    {
+        return \LotgdTranslator::t($title['title'], $title['options']);
+    }
+
+    /**
      * Get version of game.
      *
      * @return string
