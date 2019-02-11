@@ -19,14 +19,13 @@ $html = ['content' => ''];
  *
  * @param string|null $title
  * @param array       $params
- * @param array       $options
  * @param string|null $textDomain
  *
  * Hooks provided:
  *      everyheader
  *      header-{scriptname}
  */
-function page_header(?string $title = null, array $params = [], array $options = [], ?string $textDomain = null)
+function page_header(?string $title = null, array $params = [], ?string $textDomain = null)
 {
     global $html, $session, $template, $runheaders, $nopopups;
 
@@ -40,22 +39,16 @@ function page_header(?string $title = null, array $params = [], array $options =
     //in case this didn't already get called (such as on a database error)
     translator_setup();
 
-    $options = array_merge(['translate' => true], $options);
-    if ($textDomain)
-    {
-        $options['textDomain'] = $textDomain;
-    }
-
     if (! $title)
     {
         $title = 'title';
-        $options = array_merge(['translate' => true, 'textDomain' => 'app-default'], $options);
+        $textDomain = 'app-default';
     }
 
     $html['title'] = [
         'title' => $title,
         'params' => $params,
-        'options' => $options
+        'textDomain' => $textDomain
     ];
 
     $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
@@ -321,10 +314,9 @@ function page_footer($saveuser = true)
  *
  * @param string|null $title
  * @param array       $params
- * @param array       $options
  * @param string|null $textDomain
  */
-function popup_header(?string $title = null, array $params = [], array $options = [], ?string $textDomain = null)
+function popup_header(?string $title = null, array $params = [], ?string $textDomain = null)
 {
     global $html, $session;
 
@@ -332,22 +324,16 @@ function popup_header(?string $title = null, array $params = [], array $options 
 
     modulehook('header-popup');
 
-    $options = array_merge(['translate' => true], $options);
-    if ($textDomain)
-    {
-        $options['textDomain'] = $textDomain;
-    }
-
     if (! $title)
     {
         $title = 'title';
-        $options = array_merge(['translate' => true, 'textDomain' => 'app-default'], $options);
+        $textDomain = 'app-default';
     }
 
     $html['title'] = [
         'title' => $title,
         'params' => $params,
-        'options' => $options
+        'textDomain' => $textDomain
     ];
 
     $html['userPre'] = $session['user'] ?? [];

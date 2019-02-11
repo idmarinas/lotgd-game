@@ -26,7 +26,7 @@ if ($session['loggedin'] ?? false)
 
 $op = httpget('op');
 
-page_header('title', [], ['textDomain' => 'page-home']);
+page_header('title', [], 'page-home');
 
 LotgdNavigation::addHeader('home.category.new');
 LotgdNavigation::addNav('home.nav.create', 'create.php');
