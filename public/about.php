@@ -9,7 +9,7 @@ require_once 'lib/showform.php';
 
 tlschema('about');
 
-page_header(LotgdTranslator::t('title', [], 'page-about'));
+page_header('title', [], ['textDomain' => 'page-about']);
 
 checkday();
 $op = LotgdHttp::getQuery('op');

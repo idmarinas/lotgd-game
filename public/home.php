@@ -26,7 +26,7 @@ if ($session['loggedin'] ?? false)
 
 $op = httpget('op');
 
-page_header(LotgdTranslator::t('title', [], 'page-home'));
+page_header('title', [], ['textDomain' => 'page-home']);
 
 LotgdNavigation::addHeader('home.category.new');
 LotgdNavigation::addNav('home.nav.create', 'create.php');
@@ -75,7 +75,7 @@ if (getsetting('homenewestplayer', 1))
 }
 
 $results = modulehook('index', []);
-if(is_array($result) && count($results))
+if(is_array($results) && count($results))
 {
     $params['hookIndex'] = $results;
 }

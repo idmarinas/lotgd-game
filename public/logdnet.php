@@ -203,7 +203,7 @@ else
 {
     require_once 'lib/pullurl.php';
 
-    page_header(LotgdTranslator::t('title', [], 'page-logdnet'));
+    page_header('title', [], ['textDomain' => 'page-logdnet']);
 
     LotgdNavigation::addHeader('common.category.login');
     LotgdNavigation::addNav('common.nav.login', 'index.php');
