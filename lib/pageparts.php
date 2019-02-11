@@ -94,7 +94,6 @@ function page_footer($saveuser = true)
     global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $nopopups, $lotgdJaxon;
 
     $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
-    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
 
     //page footer module hooks
     $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
@@ -151,7 +150,7 @@ function page_footer($saveuser = true)
 
     if (isset($session['user']['lastmotd'])
         && ($row['motddate'] > $session['user']['lastmotd'])
-        && (! isset($nopopup[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
+        && (! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
         && $session['user']['loggedin']
     ) {
         $session['needtoviewmotd'] = true;
