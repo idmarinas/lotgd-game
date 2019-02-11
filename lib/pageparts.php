@@ -17,12 +17,16 @@ $html = ['content' => ''];
 /**
  * Starts page output.  Inits the template and translator modules.
  *
- * @param array|string $title
- *                            Hooks provided:
- *                            everyheader
- *                            header-{scriptname}
+ * @param string|null $title
+ * @param array       $params
+ * @param array       $options
+ * @param string|null $textDomain
+ *
+ * Hooks provided:
+ *      everyheader
+ *      header-{scriptname}
  */
-function page_header()
+function page_header(?string $title = null, array $params = [], array $options = [], ?string $textDomain = null)
 {
     global $html, $session, $template, $runheaders, $nopopups;
 
@@ -35,6 +39,24 @@ function page_header()
 
     //in case this didn't already get called (such as on a database error)
     translator_setup();
+
+    $options = array_merge(['translate' => true], $options);
+    if ($textDomain)
+    {
+        $options['textDomain'] = $textDomain;
+    }
+
+    if (! $title)
+    {
+        $title = 'title';
+        $options = array_merge(['translate' => true, 'textDomain' => 'app-default'], $options);
+    }
+
+    $html['title'] = [
+        'title' => $title,
+        'params' => $params,
+        'options' => $options
+    ];
 
     $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
 
@@ -59,19 +81,9 @@ function page_header()
         }
     }
 
-    $arguments = func_get_args();
-
-    if (0 == count($arguments))
-    {
-        $arguments = ['Legend of the Green Dragon'];
-    }
-
-    $title = call_user_func_array('sprintf_translate', $arguments);
-    $title = sanitize(holidayize($title, 'title'));
     calculate_buff_fields();
 
     //-- Add to html
-    $html['title'] = $title;
     $html['content'] .= tlbutton_pop();
 
     $html['userPre'] = $session['user'] ?? [];
