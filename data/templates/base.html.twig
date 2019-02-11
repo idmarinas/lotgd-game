@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="imagetoolbar" content="false" />
+		<meta http-equiv="Window-target" content="_top" />
+		<meta name="robots" content="index, follow" />
+		{{ metahead }}
+
+        <title>{{ page_title(title) }}</title>
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link href="css/vendor.css" rel="stylesheet" type="text/css" />
+        {% block head_theme_css %}{% endblock %}
+		{{ csshead }}
+
+		<script src="js/manifest.js"></script>
+		<script src="js/vendor.js"></script>
+		<script src="js/lotgd.js"></script>
+        <script src="js/semantic.js"></script>
+        {% block head_theme_js %}{% endblock %}
+		{{ scripthead }}
+		{{ script }}
+
+		<!-- START Cookies Consent -->
+		<script src="js/jqueryCookieGuard.1.1.0.js"></script>
+		<script>
+			$(document).ready(function(){
+				$.cookieguard();
+				$.cookieguard.cookies.add('PHP Session', 'LegendOfTheGreenDragon', 'This cookie is used to track important logical information for the smooth operation of the site', true);
+				$.cookieguard.run();
+		   });
+		</script>
+		<!-- END Cookies Consent -->
+    </head>
+    <body>
+        {% block body %}
+            <table class="lotgd table">
+                {% include 'base/body/header.twig' %}
+                {% include 'base/body/content.twig' %}
+                {% include 'base/body/footer.twig' %}
+            </table>
+        {% endblock %}
+    </body>
+</html>
