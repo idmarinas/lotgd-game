@@ -319,9 +319,12 @@ function page_footer($saveuser = true)
 /**
  * Page header for popup windows.
  *
- * @param string $title The title of the popup window
+ * @param string|null $title
+ * @param array       $params
+ * @param array       $options
+ * @param string|null $textDomain
  */
-function popup_header($title = 'Legend of the Green Dragon')
+function popup_header(?string $title = null, array $params = [], array $options = [], ?string $textDomain = null)
 {
     global $html, $session;
 
@@ -329,21 +332,28 @@ function popup_header($title = 'Legend of the Green Dragon')
 
     modulehook('header-popup');
 
-    $arguments = func_get_args();
-
-    if (! $arguments || 0 == count($arguments))
+    $options = array_merge(['translate' => true], $options);
+    if ($textDomain)
     {
-        $arguments = ['Legend of the Green Dragon'];
+        $options['textDomain'] = $textDomain;
     }
 
-    $title = call_user_func_array('sprintf_translate', $arguments);
-    $title = sanitize(holidayize($title, 'title'));
+    if (! $title)
+    {
+        $title = 'title';
+        $options = array_merge(['translate' => true, 'textDomain' => 'app-default'], $options);
+    }
+
+    $html['title'] = [
+        'title' => $title,
+        'params' => $params,
+        'options' => $options
+    ];
 
     $html['userPre'] = $session['user'] ?? [];
     unset($html['userPre']['password']);
 
     //-- Add to html
-    $html['title'] = $title;
     $html['content'] .= tlbutton_pop();
 }
 
