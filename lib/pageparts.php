@@ -91,7 +91,7 @@ function page_header()
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $pagestarttime, $quickkeys, $nopopups, $lotgdJaxon;
+    global $output, $html, $nav, $session, $pagestarttime, $nopopups, $lotgdJaxon;
 
     $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
 
@@ -167,10 +167,6 @@ function page_footer($saveuser = true)
 
     $session['user']['name'] = $session['user']['name'] ?? '';
     $session['user']['login'] = $session['user']['login'] ?? '';
-
-    //output keypress script
-    reset($quickkeys);
-    $script .= \LotgdTheme::renderLotgdTemplate('core/key-press-script.twig', ['quickkeys' => $quickkeys]);
 
     //NOTICE |
     //NOTICE | Although under the license, you're not required to keep this
