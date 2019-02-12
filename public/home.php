@@ -91,7 +91,7 @@ if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
 $params['OnlineCount'] = getsetting('OnlineCount', 0);
 
 $results = modulehook('hometext', []);
-if(is_array($result) && count($results))
+if(is_array($results) && count($results))
 {
     $params['hookHomeText'] = $results;
 }
@@ -113,7 +113,7 @@ if ($params['OnlineCount'] < getsetting('maxonline', 0) || 0 == getsetting('maxo
 }
 
 $results = modulehook('homemiddle', []);
-if(is_array($result) && count($results))
+if(is_array($results) && count($results))
 {
     $params['hookHomeMiddle'] = $results;
 }
