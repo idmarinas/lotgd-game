@@ -2048,7 +2048,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -4297,16 +4297,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "ef46ee68afecf9e0188e9329dd922b346876a00a"
+                "reference": "532c43562af1206f68b504a89cc71737063b3972"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/ef46ee68afecf9e0188e9329dd922b346876a00a",
-                "reference": "ef46ee68afecf9e0188e9329dd922b346876a00a",
+                "url": "https://api.github.com/repos/phan/phan/zipball/532c43562af1206f68b504a89cc71737063b3972",
+                "reference": "532c43562af1206f68b504a89cc71737063b3972",
                 "shasum": ""
             },
             "require": {
@@ -4359,7 +4359,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-02-02T15:02:21+00:00"
+            "time": "2019-02-10T23:34:07+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
