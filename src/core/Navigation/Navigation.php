@@ -263,8 +263,10 @@ class Navigation
             return $this;
         }
 
-        $this->navigation[$this->getLastHeader()][] = $label;
-        $this->navs[$label] = array_merge_recursive($options, [
+        $key = count($this->navigation[$this->getLastHeader()]);
+
+        $this->navigation[$this->getLastHeader()][$key] = $label;
+        $this->navs[$key] = array_merge_recursive($options, [
             'link' => $link,
             'attributes' => [
                 'href' => $link.$extra
