@@ -35,6 +35,63 @@ class AccessKeys
      */
     public function create(string $label, array &$attributes): string
     {
+        $key = $this->checkAccessKey($label) ?: '';
+
+        $this->accesskeys[strtolower($key)] = 1;
+
+        if ('' != $key || ' ' != $key)
+        {
+            $attributes['accesskey'] = $key;
+
+            if(false === \strpos($label, $key))
+            {
+                $label = '('.strtoupper($key).') '.$label;
+            }
+
+            $label = \preg_replace("/^$key/", "`H{$key}´H", $label, 1);
+
+            if (false === strpos($label, '`H'))
+            {
+                $label = preg_replace("/([^`´])$key/", "\$1`H{$key}´H", $label, 1);
+            }
+        }
+
+        return $label;
+    }
+
+    /**
+     * Check for new access key.
+     *
+     * @param string $label
+     *
+     * @return string
+     */
+    protected function checkAccessKey(&$label): string
+    {
+        //-- Check explicit access Example: "G?The Graveyard"
+        if ('?' == $label[1])
+        {
+            $char = substr($label, $i, 1);
+
+            if (1 != ($this->accesskeys[strtolower($char)] ?? 0))
+            {
+                $i = \strpos($label, $char, 2);
+
+                $key = substr($label, 0, 1);
+                if (false !== $i)
+                {
+                    $key = substr($label, ($i - 2), 1);
+                }
+
+                $label = \substr($label, 2);
+
+                return $key;
+            }
+
+            //-- Delete "G?" from the label because the access key has been repeated
+            $label = \substr($label, 2);
+        }
+
         $strlen = strlen($label);
 
         $ignoreuntil = '';
@@ -59,31 +116,6 @@ class AccessKeys
             }
         }
 
-        $i = $i ?? 0;
-
-        $key = '';
-        if ($i < strlen($label))
-        {
-            $key = substr($label, $i, 1);
-            $this->accesskeys[strtolower($key)] = 1;
-        }
-
-        if ('' != $key || ' ' != $key)
-        {
-            $attributes['accesskey'] = $key;
-
-            $pattern1 = '/^'.preg_quote($key, '/').'/';
-            $pattern2 = '/([^`])'.preg_quote($key, '/').'/';
-            $rep1 = "`H{$key}´H";
-            $rep2 = "\$1`H{$key}´H";
-            $label = preg_replace($pattern1, $rep1, $label, 1);
-
-            if (false === strpos($label, '`H'))
-            {
-                $label = preg_replace($pattern2, $rep2, $label, 1);
-            }
-        }
-
-        return $label;
+        return substr($label, $i, 1);
     }
 }
