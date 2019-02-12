@@ -177,17 +177,23 @@ class Dbwrapper
             return;
         }
 
-        addnav('Pages');
+        \LotgdNavigation::addHeader('common.pagination.title');
         $union = false === strpos($url, '?') ? '?' : '&';
 
-        foreach ($paginator->pagesInRange as $key => $page)
+        foreach ($paginator->pagesInRange as $page)
         {
             $minpage = (($page - 1) * $paginator->itemCountPerPage) + 1;
             $maxpage = $paginator->itemCountPerPage * $page;
             $maxpage = ($paginator->totalItemCount >= $maxpage ? $maxpage : $paginator->totalItemCount);
 
-            $text = ($page != $paginator->current ? 'Page %s (%s-%s)' : '`b`#Page %s (%s-%s)`0´b');
-            addnav([$text, $page, $minpage, $maxpage], "$url{$union}page=$page");
+            $text = ($page != $paginator->current ? 'common.pagination.page' : 'common.pagination.current');
+            \LotgdNavigation::addNav($text, "$url{$union}page=$page", [
+                'params' => [
+                    'page' => $page,
+                    'item' => $minpage,
+                    'total' => $maxpage
+                ]
+            ]);
         }
     }
 
