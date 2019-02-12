@@ -26,10 +26,10 @@ class Translator extends ZendTranslator
     /**
      * Translate a message.
      *
-     * @param string $message
-     * @param array  $parameters
-     * @param string $textDomain
-     * @param string $locale
+     * @param string      $message
+     * @param array|null  $parameters
+     * @param string|null $textDomain
+     * @param string|null $locale
      *
      * @return string
      */
