@@ -39,6 +39,8 @@ class GameCore extends AbstractExtension
             new TwigFilter('lotgd_url', [$this, 'lotgdUrl']),
             new TwigFilter('numeral', [$this, 'numeral']),
             new TwigFilter('relativedate', [$this, 'relativedate']),
+            new TwigFilter('unserialize', 'unserialize'),
+            new TwigFilter('sprintf', [$this, 'sprintf']),
         ];
     }
 

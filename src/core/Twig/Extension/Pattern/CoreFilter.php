@@ -91,4 +91,19 @@ trait CoreFilter
     {
         return \LotgdFormat::relativedate($string);
     }
+
+    /**
+     * Similar to filter "format" but second argument is an array
+     *
+     * @param string $string
+     * @param array $arguments
+     *
+     * @return string
+     */
+    public function sprintf($string, array $arguments)
+    {
+        \array_unshift($arguments, $string);
+
+        return call_user_func_array('sprintf', $arguments);
+    }
 }
