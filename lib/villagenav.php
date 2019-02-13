@@ -6,7 +6,6 @@
 function villagenav($extra = false)
 {
     global $session;
-    $loc = $session['user']['location'];
 
     if (false === $extra)
     {
@@ -14,20 +13,18 @@ function villagenav($extra = false)
     }
     $args = modulehook('villagenav');
 
-    if (array_key_exists('handled', $args) && $args['handled'])
+    if (($args['handled'] ?? false) && $args['handled'])
     {
         return;
     }
-    tlschema('nav');
 
     if ($session['user']['alive'])
     {
-        LotgdNavigation::addNav('V?Return to %s', "village.php$extra", ['params' => ['location' => $loc]]);
+        LotgdNavigation::addNav('V?Return to {location}', "village.php$extra", ['params' => ['location' => $session['user']['location']]]);
+
+        return;
     }
-    else
-    {
-        // user is dead
-        addnav('S?Return to the Shades', 'shades.php');
-    }
-    tlschema();
+
+    // user is dead
+    LotgdNavigation::addNav('S?Return to the Shades', 'shades.php');
 }
