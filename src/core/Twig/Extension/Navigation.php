@@ -110,11 +110,6 @@ class Navigation extends AbstractExtension
         {
             $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
         }
-        // {% if header.translate %}
-        //     &#151;{{ section|t(header.params ?: {}, header.textDomain)|colorize }}&#151;
-        // {% else %}
-        //     &#151;{{ section|colorize }}&#151;
-        // {% endif %}
 
         $attributes = $options['attributes'] ?? [];
         $attributes = $this->createAttributesString($attributes);
