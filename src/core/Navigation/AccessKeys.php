@@ -71,7 +71,7 @@ class AccessKeys
         //-- Check explicit access Example: "G?The Graveyard"
         if ('?' == $label[1])
         {
-            $char = substr($label, $i, 1);
+            $char = substr($label, 0, 1);
 
             if (1 != ($this->accesskeys[strtolower($char)] ?? 0))
             {
