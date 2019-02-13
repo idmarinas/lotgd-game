@@ -1,6 +1,5 @@
 {% for section, nav in navigation %}
-    {% set header = headers[section] %}
-    <span class="navhead">&#151;{{ section|t(header.params ?: {}, header.textDomain) }}&#151;</span>
+    {{ navigation_create_header(section, headers[section]) }}
     <br clear="all">
     {% for key, label in nav %}
         {{ navigation_create_link(label, navs[section][key]) }}
