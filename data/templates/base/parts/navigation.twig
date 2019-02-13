@@ -1,4 +1,4 @@
-{% for section, nav in navigation %}
+{% for section, nav in navigation if nav|length > 0 %}
     {{ navigation_create_header(section, headers[section]) }}
     <br clear="all">
     {% for key, label in nav %}
