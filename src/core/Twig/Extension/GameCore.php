@@ -40,7 +40,7 @@ class GameCore extends AbstractExtension
             new TwigFilter('numeral', [$this, 'numeral']),
             new TwigFilter('relativedate', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
-            new TwigFilter('sprintf', [$this, 'sprintf']),
+            new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
         ];
     }
 
