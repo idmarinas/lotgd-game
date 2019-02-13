@@ -48,7 +48,7 @@ class Navigation
      *
      * @var string
      */
-    protected $lastHeader = 'Navigation';
+    protected $lastHeader;
 
     /**
      * Text domain for translator.
@@ -91,7 +91,7 @@ class Navigation
             $this->navigation[$header] = [];
         }
 
-        $this->headers[$header] = \array_merge([
+        $this->headers[$header] = \array_merge_recursive([
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
             'attributes' => [
@@ -112,7 +112,7 @@ class Navigation
      */
     public function addHeaderNotl(string $header, array $options = [])
     {
-        return $this->addHeader($header, array_merge([
+        return $this->addHeader($header, \array_merge_recursive([
             'translate' => false,
             'attributes' => [
                 'class' => 'navhead'
@@ -129,7 +129,7 @@ class Navigation
      */
     public function addNav(?string $label, ?string $link = null, array $options = [])
     {
-        return $this->addItem($label, $link, array_merge([
+        return $this->addItem($label, $link, \array_merge_recursive([
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
             'attributes' => [
@@ -147,7 +147,7 @@ class Navigation
      */
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
-        return $this->addItem($label, $link, array_merge([
+        return $this->addItem($label, $link, \array_merge_recursive([
             'translate' => false,
             'attributes' => [
                 'class' => 'nav'
@@ -207,6 +207,11 @@ class Navigation
      */
     public function getLastHeader(): string
     {
+        if (! $this->lastHeader)
+        {
+            $this->addHeader('common.category.navigation');
+        }
+
         return $this->lastHeader;
     }
 
@@ -277,7 +282,7 @@ class Navigation
             return $this;
         }
 
-        $key = count($this->navigation[$this->getLastHeader()]);
+        $key = count($this->navigation[$this->getLastHeader()] ?? []);
 
         $this->navigation[$this->getLastHeader()][$key] = $label;
         $this->navs[$this->getLastHeader()][$key] = array_merge_recursive($options, [
