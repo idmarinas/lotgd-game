@@ -117,7 +117,7 @@ class Navigation
             'attributes' => [
                 'class' => 'navhead'
             ]
-    ], $options));
+        ], $options));
     }
 
     /**
