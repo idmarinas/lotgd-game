@@ -207,6 +207,8 @@ class Navigation
      */
     public function getNavigation()
     {
+        bdump($this->navigation, 'Navigation menu');
+
         return $this->navigation;
     }
 
@@ -215,6 +217,8 @@ class Navigation
      */
     public function getHeaders()
     {
+        bdump($this->headers, 'Info of headers');
+
         return $this->headers;
     }
 
@@ -223,6 +227,8 @@ class Navigation
      */
     public function getNavs()
     {
+        bdump($this->navs, 'Info of navs');
+
         return $this->navs;
     }
 
@@ -266,7 +272,7 @@ class Navigation
         $key = count($this->navigation[$this->getLastHeader()]);
 
         $this->navigation[$this->getLastHeader()][$key] = $label;
-        $this->navs[$key] = array_merge_recursive($options, [
+        $this->navs[$this->getLastHeader()][$key] = array_merge_recursive($options, [
             'link' => $link,
             'attributes' => [
                 'href' => $link.$extra
