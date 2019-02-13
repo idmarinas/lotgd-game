@@ -16,7 +16,17 @@
 	color: #FFFFFF;
 	cursor: default;
 	text-align: center;
-	font-variant: small-caps;
+    font-variant: small-caps;
+
+    &::before
+    {
+        content: '\2014';
+    }
+
+    &::after
+    {
+        content: '\2014';
+    }
 }
 
 .navigation a.nav
