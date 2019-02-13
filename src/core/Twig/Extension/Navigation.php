@@ -45,6 +45,7 @@ class Navigation extends AbstractExtension
         return [
             new TwigFunction('navigation_menu', [$this, 'display']),
             new TwigFunction('navigation_create_link', [$this, 'createLink']),
+            new TwigFunction('navigation_create_header', [$this, 'createHeader']),
         ];
     }
 
@@ -90,6 +91,36 @@ class Navigation extends AbstractExtension
 
         return \sprintf('<%1$s %2$s>%3$s</%1$s>',
             (! $blocked ? 'a' : 'span'),
+            $attributes,
+            appoencode($label, true)
+        );
+    }
+
+    /**
+     * Create a header section.
+     *
+     * @param string $label
+     * @param array $options
+     *
+     * @return void
+     */
+    public function createHeader($label, $options): string
+    {
+        if ($options['translate'] ?? false)
+        {
+            $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+        }
+        // {% if header.translate %}
+        //     &#151;{{ section|t(header.params ?: {}, header.textDomain)|colorize }}&#151;
+        // {% else %}
+        //     &#151;{{ section|colorize }}&#151;
+        // {% endif %}
+
+        $attributes = $options['attributes'] ?? [];
+        $attributes = $this->createAttributesString($attributes);
+
+        return \sprintf('<%1$s %2$s>%3$s</%1$s>',
+            (string) ($options['tag'] ?? 'span'),
             $attributes,
             appoencode($label, true)
         );
