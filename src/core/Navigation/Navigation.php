@@ -94,6 +94,9 @@ class Navigation
         $this->headers[$header] = \array_merge([
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
+            'attributes' => [
+                'class' => 'navhead'
+            ]
         ], $options);
         $this->lastHeader = $header;
 
@@ -109,7 +112,12 @@ class Navigation
      */
     public function addHeaderNotl(string $header, array $options = [])
     {
-        return $this->addHeader($header, array_merge(['translate' => false], $options));
+        return $this->addHeader($header, array_merge([
+            'translate' => false,
+            'attributes' => [
+                'class' => 'navhead'
+            ]
+    ], $options));
     }
 
     /**
