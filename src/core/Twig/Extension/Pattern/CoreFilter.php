@@ -100,8 +100,25 @@ trait CoreFilter
      *
      * @return string
      */
-    public function sprintf($string, array $arguments)
+    public function sprintfnews($string, array $arguments)
     {
+
+        if (is_array($arguments[0]) && is_array($arguments[1]))
+        {
+            array_shift($arguments[0]);
+            $domain1 = array_shift($arguments[0]);
+            $text1 = array_shift($arguments[0]);
+
+            array_shift($arguments[1]);
+            $domain2 = array_shift($arguments[1]);
+            $text2 = array_shift($arguments[1]);
+
+            $arg1 = vsprintf(\LotgdTranslator::t($text1, [], $domain1), $arguments[0]);
+            $arg2 = vsprintf(\LotgdTranslator::t($text2, [], $domain2), $arguments[1]);
+
+            return sprintf($string, $arg1, $arg2);
+        }
+
         \array_unshift($arguments, $string);
 
         return call_user_func_array('sprintf', $arguments);
