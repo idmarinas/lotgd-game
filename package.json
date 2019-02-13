@@ -91,7 +91,7 @@
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
         "webpack": "^4.29.3",
-        "webpack-bundle-analyzer": "^3.0.3",
+        "webpack-bundle-analyzer": "^3.0.4",
         "webpack-merge": "^4.2.1"
     },
     "repository": {
