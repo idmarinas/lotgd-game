@@ -3,7 +3,7 @@
     <span class="navhead">&#151;{{ section|t(header.params ?: {}, header.textDomain) }}&#151;</span>
     <br clear="all">
     {% for key, label in nav %}
-        {{ navigation_create_link(label, navs[key]) }}
+        {{ navigation_create_link(label, navs[section][key]) }}
         <br clear="all">
     {% endfor %}
 {% endfor %}
