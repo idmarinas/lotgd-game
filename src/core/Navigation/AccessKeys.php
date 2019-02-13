@@ -13,17 +13,26 @@
 
 namespace Lotgd\Core\Navigation;
 
+use Zend\Filter;
+
 /**
  * Generate a unique access key for a nav.
  */
 class AccessKeys
 {
     /**
-     * Array of accesskeys
+     * Array of accesskeys.
      *
      * @var array
      */
     protected $accesskeys = [];
+
+    /**
+     * Filter chain
+     *
+     * @var Filter\FilterChain
+     */
+    protected $filterChain;
 
     /**
      * Create access key.
@@ -35,28 +44,30 @@ class AccessKeys
      */
     public function create(string $label, array &$attributes): string
     {
+        $label = $this->filter($label);
         $key = $this->checkAccessKey($label) ?: '';
 
-        $this->accesskeys[strtolower($key)] = 1;
+        $this->accesskeys[strtolower($key)] = true;
 
         if ('' != $key || ' ' != $key)
         {
             $attributes['accesskey'] = $key;
 
-            if(false === \strpos($label, $key))
+            if (false === \strpos($label, $key))
             {
                 $label = '('.strtoupper($key).') '.$label;
             }
 
-            $label = \preg_replace("/^$key/", "`H{$key}´H", $label, 1);
+            $pregKey = preg_quote($key, '/');
+            $label = \preg_replace("/^$pregKey/", "`H{$key}´H", $label, 1);
 
             if (false === strpos($label, '`H'))
             {
-                $label = preg_replace("/([^`´])$key/", "\$1`H{$key}´H", $label, 1);
+                $label = preg_replace("/([^`´])$pregKey/", "\$1`H{$key}´H", $label, 1);
             }
         }
 
-        return $label;
+        return $label ?? '';
     }
 
     /**
@@ -73,14 +84,15 @@ class AccessKeys
         {
             $char = substr($label, 0, 1);
 
-            if (1 != ($this->accesskeys[strtolower($char)] ?? 0))
+            if (! ($this->accesskeys[strtolower($char)] ?? false))
             {
                 $i = \strpos($label, $char, 2);
 
-                $key = substr($label, 0, 1);
+                $key = \substr($label, $i, 1);
+
                 if (false !== $i)
                 {
-                    $key = substr($label, ($i - 2), 1);
+                    $key = \substr($label, $i, 1);
                 }
 
                 $label = \substr($label, 2);
@@ -95,27 +107,52 @@ class AccessKeys
         $strlen = strlen($label);
 
         $ignoreuntil = '';
-        for($i = 0; $i < $strlen; $i++)
+
+        for ($i = 0; $i < $strlen; $i++)
         {
             $char = substr($label, $i, 1);
+
+            if ('&' == $char)
+            {
+                $ignoreuntil = ';';
+            }
+            elseif ('`' == $char || '´' == $char || "'" == $char)
+            {
+                $ignoreuntil = substr($label, $i + 1, 1);
+            }
 
             if ($ignoreuntil == $char)
             {
                 $ignoreuntil = '';
-
-                continue;
             }
-            elseif (1 != ($this->accesskeys[strtolower($char)] ?? 0) && (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) && '' == $ignoreuntil)
+            elseif (! ($this->accesskeys[strtolower($char)] ?? false) && (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) && '' == $ignoreuntil)
             {
                 break;
             }
-
-            if ('`' == $char || '´' == $char)
-            {
-                $ignoreuntil = substr($label, $i + 1, 1);
-            }
         }
 
-        return substr($label, $i, 1);
+        return $char;
+    }
+
+    /**
+     * Filter label.
+     *
+     * @param string $label
+     *
+     * @return string
+     */
+    private function filter(string $label): string
+    {
+        if (! $this->filterChain)
+        {
+            $this->filterChain = new Filter\FilterChain();
+            $this->filterChain->attach(new Filter\StringTrim())
+                ->attach(new Filter\StripTags())
+                ->attach(new Filter\StripNewlines())
+                // ->attach(new Filter\HtmlEntities())
+            ;
+        }
+
+        return $this->filterChain->filter($label);
     }
 }
