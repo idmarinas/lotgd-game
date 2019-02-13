@@ -91,12 +91,13 @@ class Navigation
             $this->navigation[$header] = [];
         }
 
-        $this->headers[$header] = \array_merge_recursive([
+        $attributes = $options['attributes'] ?? [];
+        $attributes = array_merge($attributes, ['class' => 'navhead']);
+        $options['attributes'] = $attributes;
+
+        $this->headers[$header] = \array_merge([
             'translate' => true,
-            'textDomain' => $this->getTextDomain(),
-            'attributes' => [
-                'class' => 'navhead'
-            ]
+            'textDomain' => $this->getTextDomain()
         ], $options);
         $this->lastHeader = $header;
 
@@ -112,11 +113,8 @@ class Navigation
      */
     public function addHeaderNotl(string $header, array $options = [])
     {
-        return $this->addHeader($header, \array_merge_recursive([
+        return $this->addHeader($header, \array_merge([
             'translate' => false,
-            'attributes' => [
-                'class' => 'navhead'
-            ]
         ], $options));
     }
 
@@ -129,12 +127,13 @@ class Navigation
      */
     public function addNav(?string $label, ?string $link = null, array $options = [])
     {
-        return $this->addItem($label, $link, \array_merge_recursive([
+        $attributes = $options['attributes'] ?? [];
+        $attributes = array_merge($attributes, ['class' => 'nav']);
+        $options['attributes'] = $attributes;
+
+        return $this->addItem($label, $link, \array_merge([
             'translate' => true,
-            'textDomain' => $this->getTextDomain(),
-            'attributes' => [
-                'class' => 'nav'
-            ]
+            'textDomain' => $this->getTextDomain()
         ], $options));
     }
 
@@ -147,11 +146,8 @@ class Navigation
      */
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
-        return $this->addItem($label, $link, \array_merge_recursive([
-            'translate' => false,
-            'attributes' => [
-                'class' => 'nav'
-            ]
+        return $this->addItem($label, $link, \array_merge([
+            'translate' => false
         ], $options));
     }
 
@@ -256,6 +252,8 @@ class Navigation
      */
     protected function addItem(?string $label, ?string $link = null, array $options = [])
     {
+        global $session;
+
         //-- Add nav header if not have link.
         if (! $link && $label)
         {
@@ -268,10 +266,10 @@ class Navigation
         if (false !== ($pos = strpos($link, '#')))
         {
             $sublink = substr($link, 0, $pos);
-            $session['user']['allowednavs'][rawurlencode($sublink.$extra)] = true;
+            $session['user']['allowednavs'][$sublink.$extra] = true;
         }
 
-        $session['user']['allowednavs'][rawurlencode($link.$extra)] = true;
+        $session['user']['allowednavs'][$link.$extra] = true;
 
         $this->addLink($link);
         $this->addLink($link.$extra);
@@ -284,12 +282,14 @@ class Navigation
 
         $key = count($this->navigation[$this->getLastHeader()] ?? []);
 
+
+        $attributes = $options['attributes'] ?? [];
+        $attributes = array_merge($attributes, ['href' => $link.$extra]);
+        $options['attributes'] = $attributes;
+
         $this->navigation[$this->getLastHeader()][$key] = $label;
         $this->navs[$this->getLastHeader()][$key] = array_merge_recursive($options, [
-            'link' => $link,
-            'attributes' => [
-                'href' => $link.$extra
-            ]
+            'link' => $link
         ]);
 
         return $this;
