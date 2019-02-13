@@ -8,12 +8,11 @@ function do_forced_nav($anonymous, $overrideforced)
 {
     global $session;
 
-    $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
-    $requestUri = $request->getRequestUri();
+    $requestUri = \LotgdHttp::getServer('REQUEST_URI');
 
     rawoutput("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
 
-    if (($session['loggedin'] ?? false) && ($session['user']['acctid'] ?? false))
+    if ($session['user']['acctid'] ?? false)
     {
         //-- Using Doctrine repository to get data of account
         $repositoryAccounts = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
@@ -22,9 +21,9 @@ function do_forced_nav($anonymous, $overrideforced)
         if (! $account)
         {
             $session = [];
-            $session['message'] = translate_inline('`4Error, your login was incorrect`0', 'login');
+            $session['message'] = \LotgdTranslation::t('session.login.incorrect', [], 'app-default');
 
-            return redirect('index.php', 'Account Disappeared!');
+            return redirect('index.php', \LotgdTranslation::t('session.login.account.disappeared', [], 'app-default'));
         }
 
         $session['user'] = $account;
@@ -35,7 +34,7 @@ function do_forced_nav($anonymous, $overrideforced)
         {
             $session = [];
 
-            return redirect('index.php?op=timeout', 'Account not logged in but session thinks they are.');
+            return redirect('index.php?op=timeout', \LotgdTranslation::t('session.login.account.notLogged', [], 'app-default'));
         }
 
         if (($session['user']['allowednavs'][$requestUri] ?? false) && true !== $overrideforced)
@@ -44,11 +43,11 @@ function do_forced_nav($anonymous, $overrideforced)
         }
         elseif (true !== $overrideforced)
         {
-            return redirect('badnav.php', "Navigation not allowed to $requestUri");
+            return redirect('badnav.php', \LotgdTranslation::t('session.login.account.notAllowed', ['uri' => $requestUri], 'app-default'));
         }
     }
     elseif (! $anonymous)
     {
-        return redirect('index.php?op=timeout', "Not logged in: $requestUri");
+        return redirect('index.php?op=timeout', \LotgdTranslation::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
     }
 }
