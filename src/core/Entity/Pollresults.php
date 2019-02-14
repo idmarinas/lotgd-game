@@ -18,7 +18,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pollresults.
  *
- * @ORM\Table(name="pollresults")
+ * @ORM\Table(name="pollresults",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="vote", columns={"account", "motditem"})
+ *     }
+ * )
  * @ORM\Entity
  */
 class Pollresults
