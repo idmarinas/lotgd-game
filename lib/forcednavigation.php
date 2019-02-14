@@ -21,9 +21,9 @@ function do_forced_nav($anonymous, $overrideforced)
         if (! $account)
         {
             $session = [];
-            $session['message'] = \LotgdTranslation::t('session.login.incorrect', [], 'app-default');
+            $session['message'] = \LotgdTranslator::t('session.login.incorrect', [], 'app-default');
 
-            return redirect('index.php', \LotgdTranslation::t('session.login.account.disappeared', [], 'app-default'));
+            return redirect('index.php', \LotgdTranslator::t('session.login.account.disappeared', [], 'app-default'));
         }
 
         $session['user'] = $account;
@@ -34,7 +34,7 @@ function do_forced_nav($anonymous, $overrideforced)
         {
             $session = [];
 
-            return redirect('index.php?op=timeout', \LotgdTranslation::t('session.login.account.notLogged', [], 'app-default'));
+            return redirect('index.php?op=timeout', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
         }
 
         if (($session['user']['allowednavs'][$requestUri] ?? false) && true !== $overrideforced)
@@ -43,11 +43,11 @@ function do_forced_nav($anonymous, $overrideforced)
         }
         elseif (true !== $overrideforced)
         {
-            return redirect('badnav.php', \LotgdTranslation::t('session.login.account.notAllowed', ['uri' => $requestUri], 'app-default'));
+            return redirect('badnav.php', \LotgdTranslator::t('session.login.account.notAllowed', ['uri' => $requestUri], 'app-default'));
         }
     }
     elseif (! $anonymous)
     {
-        return redirect('index.php?op=timeout', \LotgdTranslation::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
+        return redirect('index.php?op=timeout', \LotgdTranslator::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
     }
 }
