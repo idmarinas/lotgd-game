@@ -42,12 +42,17 @@ trait CoreFilter
     /**
      * nltoappon a string.
      *
-     * @param string $string
+     * @param string|null $string
      *
      * @return string
      */
-    public function nltoappon(string $string): string
+    public function nltoappon(?string $string): string
     {
+        if (! $string)
+        {
+            return '';
+        }
+
         require_once 'lib/nltoappon.php';
 
         return nltoappon($string);
@@ -93,16 +98,15 @@ trait CoreFilter
     }
 
     /**
-     * Similar to filter "format" but second argument is an array
+     * Similar to filter "format" but second argument is an array.
      *
      * @param string $string
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @return string
      */
     public function sprintfnews($string, array $arguments)
     {
-
         if (is_array($arguments[0]) && is_array($arguments[1]))
         {
             array_shift($arguments[0]);
