@@ -74,21 +74,19 @@ if ($session['user']['loggedin'])
 }
 LotgdNavigation::addNav('news.nav.about', 'about.php');
 
+\LotgdNavigation::addHeader('common.category.superuser');
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
-    \LotgdNavigation::addHeader('common.category.superuser');
     \LotgdNavigation::addNav('common.nav.moderation', 'moderate.php');
 }
 
 if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
 {
-    \LotgdNavigation::addHeader('common.category.superuser');
     \LotgdNavigation::addNav('common.nav.grotto', 'superuser.php');
 }
 
 if ($session['user']['superuser'] & SU_INFINITE_DAYS)
 {
-    \LotgdNavigation::addHeader('common.category.superuser');
     \LotgdNavigation::addNav('common.nav.newday', 'newday.php');
 }
 
