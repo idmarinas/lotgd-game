@@ -370,8 +370,6 @@ function popup_footer()
         $html[$key] .= $val;
     }
 
-    $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
-
     //-- Finalize output
     $lotgdJaxon->processRequest();
 
