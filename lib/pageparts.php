@@ -375,7 +375,7 @@ function popup_footer()
 
     $html['userPost'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
-    unset($html['session']['user'], $html['user']['password']);
+    unset($html['session']['user'], $html['userPost']['password']);
 
     $html['csshead'] = $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
