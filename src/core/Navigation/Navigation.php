@@ -266,9 +266,11 @@ class Navigation
         if (false !== ($pos = strpos($link, '#')))
         {
             $sublink = substr($link, 0, $pos);
+            $session['user']['allowednavs'][$sublink] = true;
             $session['user']['allowednavs'][$sublink.$extra] = true;
         }
 
+        $session['user']['allowednavs'][$link] = true;
         $session['user']['allowednavs'][$link.$extra] = true;
 
         $this->addLink($link);
