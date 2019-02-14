@@ -1,0 +1,37 @@
+{% translate_default_domain 'page-news' %}
+
+{% block lastMotd %}
+    {% include 'base/pages/news/last-motd.twig' with { 'motd': lastMotd } %}
+{% endblock lastMotd %}
+
+{% if result.count() <= 1 %}
+    {{ 'list.title'|t({'d': date})|colorize }}
+{% else %}
+    {{ 'list.title'|t({'d': date, 'n': result.count()})|colorize }}
+{% endif %}
+
+{% set del = 'list.del'|t %}
+{% for news in result %}
+    {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
+
+    <div class="center aligned">
+        {% if SU_EDIT_COMMENTS %}
+            [ <a href="{{ ('superuser.php?op=newsdelete&newsid=' ~ news.newsid ~ '&return=' ~ REQUEST_URI|url_encode )|lotgd_url }}">{{ del }}</a> ]&nbsp;
+        {% endif %}
+
+        {% if news.arguments %}
+            {% if news.newformat %}
+                {{ news.newstext|tl(news.arguments|unserialize, news.tlschema)|colorize }}
+            {% else %}
+                {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments|unserialize)|colorize }}
+            {% endif %}
+        {% else %}
+            {{ news.newstext|tl(null, news.tlschema)|colorize }}
+        {% endif %}
+    </div>
+{% else %}
+    {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
+    {{ 'list.notFound'|t|colorize }}
+{% endfor %}
+
+{{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
