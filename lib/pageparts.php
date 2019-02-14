@@ -80,7 +80,8 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
     $html['content'] .= tlbutton_pop();
 
     $html['userPre'] = $session['user'] ?? [];
-    unset($html['userPre']['password']);
+    $html['session'] = $session ?? [];
+    unset($html['session']['user'], $html['userPre']['password']);
 
     if (getsetting('debug', 0))
     {
@@ -288,8 +289,7 @@ function page_footer($saveuser = true)
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
     $html['userPost'] = $session['user'] ?? [];
-    $html['session'] = $session ?? [];
-    unset($html['session']['user'], $html['user']['password']);
+    unset($html['userPost']['password']);
 
     $html['content'] .= $output->get_output();
     $browserOutput = \LotgdTheme::renderTheme($html);
@@ -337,7 +337,8 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
     ];
 
     $html['userPre'] = $session['user'] ?? [];
-    unset($html['userPre']['password']);
+    $html['session'] = $session ?? [];
+    unset($html['session']['user'], $html['userPre']['password']);
 
     //-- Add to html
     $html['content'] .= tlbutton_pop();
