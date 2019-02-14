@@ -61,7 +61,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="arguments", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="arguments", type="array")
      */
     private $arguments;
 
