@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Navigation;
 
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * Class for construct a navigation menu in LotGD.
  *
@@ -91,13 +93,12 @@ class Navigation
             $this->navigation[$header] = [];
         }
 
-        $attributes = $options['attributes'] ?? [];
-        $attributes = array_merge($attributes, ['class' => 'navhead']);
-        $options['attributes'] = $attributes;
-
-        $this->headers[$header] = \array_merge([
+        $this->headers[$header] = ArrayUtils::merge([
             'translate' => true,
-            'textDomain' => $this->getTextDomain()
+            'textDomain' => $this->getTextDomain(),
+            'attributes' => [
+                'class' => 'navhead'
+            ]
         ], $options);
         $this->lastHeader = $header;
 
@@ -113,7 +114,7 @@ class Navigation
      */
     public function addHeaderNotl(string $header, array $options = [])
     {
-        return $this->addHeader($header, \array_merge([
+        return $this->addHeader($header, ArrayUtils::merge([
             'translate' => false,
         ], $options));
     }
@@ -127,13 +128,12 @@ class Navigation
      */
     public function addNav(?string $label, ?string $link = null, array $options = [])
     {
-        $attributes = $options['attributes'] ?? [];
-        $attributes = array_merge($attributes, ['class' => 'nav']);
-        $options['attributes'] = $attributes;
-
-        return $this->addItem($label, $link, \array_merge([
+        return $this->addItem($label, $link, ArrayUtils::merge([
             'translate' => true,
-            'textDomain' => $this->getTextDomain()
+            'textDomain' => $this->getTextDomain(),
+            'attributes'=> [
+                'class' => 'nav'
+            ]
         ], $options));
     }
 
@@ -146,7 +146,7 @@ class Navigation
      */
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
-        return $this->addItem($label, $link, \array_merge([
+        return $this->addItem($label, $link, ArrayUtils::merge([
             'translate' => false
         ], $options));
     }
@@ -284,14 +284,12 @@ class Navigation
 
         $key = count($this->navigation[$this->getLastHeader()] ?? []);
 
-
-        $attributes = $options['attributes'] ?? [];
-        $attributes = array_merge($attributes, ['href' => $link.$extra]);
-        $options['attributes'] = $attributes;
-
         $this->navigation[$this->getLastHeader()][$key] = $label;
-        $this->navs[$this->getLastHeader()][$key] = array_merge_recursive($options, [
-            'link' => $link
+        $this->navs[$this->getLastHeader()][$key] = ArrayUtils::merge($options, [
+            'link' => $link,
+            'attributes' => [
+                'href' => $link.$extra
+            ]
         ]);
 
         return $this;
