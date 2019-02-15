@@ -38,7 +38,7 @@ class Doctrine implements FactoryInterface
         $adapter = is_array($adapter) ? $adapter : [];
         $isDevelopment = (bool) ($options['development'] ?? false);
         $doctrine = $options['doctrine'] ?? [];
-        $cacheDir = trim($options['cache']['config']['cache_dir'] ?? 'cache/', '/');
+        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'cache/', '/');
         $cacheDir = "{$cacheDir}/doctrine";
 
         $doctrineCache = new DoctrineCache\ArrayCache();
