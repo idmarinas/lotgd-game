@@ -11,6 +11,7 @@
     "require": {
         "php": "^7.1",
         "ext-intl": "*",
+        "beberlei/DoctrineExtensions": "^1.2",
         "doctrine/orm": "^2.6",
         "ezyang/htmlpurifier": "^4.9",
         "hellogerard/jobby": "^3.4",
