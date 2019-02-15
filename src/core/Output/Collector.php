@@ -48,10 +48,17 @@ class Collector
     /**
      * Handles color and style encoding, and appends to the output buffer ($output).  It is usually called with output_notl($indata,...). If an array is passed then the format for sprintf is assumed otherwise a simple string is assumed.
      *
+     * @deprecated 4.0.0
+     *
      * @see appoencode
      */
     public function output_notl()
     {
+        trigger_error(sprintf(
+            'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new template system.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         if ($this->block_new_output)
         {
             return;
@@ -97,10 +104,17 @@ class Collector
      *
      * Argument in: What to output. If an array is passed then the format used by sprintf is assumed
      *
+     * @deprecated 4.0.0
+     *
      * @see output_notl
      */
     public function output()
     {
+        trigger_error(sprintf(
+            'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system and template system.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         if ($this->block_new_output)
         {
             return;
