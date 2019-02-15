@@ -67,7 +67,7 @@ class Doctrine implements FactoryInterface
         $config->setQueryCacheImpl($doctrineCache);
         $config->setProxyDir("{$cacheDir}/Proxy");
         $config->setProxyNamespace('Lotgd\Proxies');
-        $config->setAutoGenerateProxyClasses(($isDevelopment ? true : AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS));
+        $config->setAutoGenerateProxyClasses(($isDevelopment ?: AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS));
 
         $config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));
         $config->setQuoteStrategy(new DoctrineQuoteStrategy());
