@@ -1,4 +1,4 @@
-[Attribution-NonCommercial-ShareAlike 2.0](Attribution-NonCommercial-ShareAlike 2.0)
+[Attribution-NonCommercial-ShareAlike 2.0](http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode)
 
 License
 
