@@ -29,6 +29,8 @@ class Navigation extends AbstractExtension
 
     /**
      * @param CoreNavigation $navigation
+     * @param CoreTranslator $translator
+     * @param CoreAccessKeys $accesskeys
      */
     public function __construct(CoreNavigation $navigation, CoreTranslator $translator, CoreAccessKeys $accesskeys)
     {
