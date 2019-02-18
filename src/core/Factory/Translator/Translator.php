@@ -24,8 +24,10 @@ class Translator implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $options = $container->get('GameConfig');
+        $translation = $options['lotgd_core']['translation'] ?? [];
 
-        $translator = LotgdTranslator::factory($options['lotgd_core']['translation'] ?? []);
+        \Locale::setDefault($translation['locale'][0] ?? 'en');
+        $translator = LotgdTranslator::factory($translation ?? []);
         $translator->setPluginManager($container->get(LoaderPluginManager::class));
 
         return $translator;
