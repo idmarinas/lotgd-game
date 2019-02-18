@@ -168,4 +168,6 @@ exclude_patterns:
     - "**/*_test.go"
     - "**/*.d.ts"
     - "semantic/"
+    - "composer.lock"
+    - "package-lock.json"
     - "public/js/jqueryCookieGuard.1.1.0.js"
