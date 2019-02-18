@@ -69,8 +69,15 @@ class Doctrine implements FactoryInterface
         $config->setProxyNamespace('Lotgd\Proxies');
         $config->setAutoGenerateProxyClasses(($isDevelopment ?: AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS));
 
+        //-- Strategy
         $config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));
         $config->setQuoteStrategy(new DoctrineQuoteStrategy());
+
+        //-- DQL DateTime Functions
+        $config->setCustomDatetimeFunctions([
+            'month' => \DoctrineExtensions\Query\Mysql\Month::class,
+            'year' => \DoctrineExtensions\Query\Mysql\Year::class
+        ]);
 
         $evm = new DoctrineEventManager();
         $tablePrefix = new DoctrineTablePrefix(($options['db']['prefix'] ?? ''));
