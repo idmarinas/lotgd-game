@@ -24,7 +24,7 @@ use Zend\I18n\Translator\Translator as ZendTranslator;
 class Translator extends ZendTranslator
 {
     /**
-     * Translate a message.
+     * Translate a message of LoTGD.
      *
      * @param string      $message
      * @param array|null  $parameters
@@ -35,11 +35,29 @@ class Translator extends ZendTranslator
      */
     public function trans(string $message, ?array $parameters = [], ?string $textDomain = 'page-default', ?string $locale = null): string
     {
+        $locale = ($locale ?: $this->getLocale());
+        $parameters = ($parameters ?: []);
+
         $message = parent::translate($message, $textDomain ?? 'page-default', $locale);
 
-        $formatter = new \MessageFormatter($this->getLocale(), $message);
+        return $this->mf($message, $parameters, $locale);
+    }
 
-        return $formatter->format($parameters ?: []);
+    /**
+     * Only format a message with MessageFormatter.
+     *
+     * @param string      $message
+     * @param array|null  $parameters
+     * @param string|null $locale
+     */
+    public function mf(string $message, ?array $parameters = [], ?string $locale = null)
+    {
+        $locale = ($locale ?: $this->getLocale());
+        $parameters = ($parameters ?: []);
+
+        $formatter = new \MessageFormatter($locale, $message);
+
+        return $formatter->format($parameters);
     }
 
     /**

@@ -52,7 +52,7 @@ class Translator extends AbstractExtension
     public function getTokenParsers()
     {
         return [
-            /**
+            /*
              * {% translate_default_domain 'foobar' %}
              */
             new TranslatorDefaultDomainTokenParser(),
@@ -71,6 +71,10 @@ class Translator extends AbstractExtension
              * Only need if you use "translate_default_domain" in template.
              */
             new TwigFilter('tl', [$this, 'translate']),
+            /*
+             * Use MessageFormatter to formater message.
+             */
+            new TwigFilter('tmf', [$this, 'translateMf']),
         ];
     }
 
@@ -87,6 +91,20 @@ class Translator extends AbstractExtension
     public function translate($message, $parameters = [], $domain = null, $locale = null): string
     {
         return $this->translator->trans($message, $parameters, $domain, $locale);
+    }
+
+    /**
+     * Format a message with MessageFormatter.
+     *
+     * @param string $message
+     * @param array  $parameters
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function translateMf($message, $parameters = [], $locale = null): string
+    {
+        return $this->translator->mf($message, $parameters, $locale);
     }
 
     /**
