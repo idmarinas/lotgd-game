@@ -1,8 +1,10 @@
-{% for section, nav in navigation if nav|length > 0 %}
-    {{ navigation_create_header(section, headers[section]) }}
-    <br clear="all">
-    {% for key, label in nav %}
-        {{ navigation_create_link(label, navs[section][key]) }}
+<div role="navigation">
+    {% for section, nav in navigation if nav|length > 0 %}
+        {{ navigation_create_header(section, headers[section]) }}
         <br clear="all">
+        {% for key, label in nav %}
+            {{ navigation_create_link(label, navs[section][key]) }}
+            <br clear="all">
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+</div>
