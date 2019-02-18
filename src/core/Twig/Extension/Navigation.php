@@ -13,11 +13,12 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Translator\Translator as CoreTranslator;
-use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
+use Lotgd\Core\Navigation\Navigation as CoreNavigation;
+use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Zend\Paginator\Paginator;
 
 class Navigation extends AbstractExtension
 {
@@ -48,6 +49,7 @@ class Navigation extends AbstractExtension
             new TwigFunction('navigation_menu', [$this, 'display']),
             new TwigFunction('navigation_create_link', [$this, 'createLink']),
             new TwigFunction('navigation_create_header', [$this, 'createHeader']),
+            new TwigFunction('navigation_pagination', [$this, 'showPagination']),
         ];
     }
 
@@ -66,10 +68,10 @@ class Navigation extends AbstractExtension
     }
 
     /**
-     * Create a link for menu
+     * Create a link for menu.
      *
      * @param string $label
-     * @param array $options
+     * @param array  $options
      *
      * @return string
      */
@@ -85,6 +87,7 @@ class Navigation extends AbstractExtension
         {
             $label = $this->accesskeys->create($label, $attributes);
         }
+
         if ($blocked)
         {
             unset($attributes['href']);
@@ -102,9 +105,9 @@ class Navigation extends AbstractExtension
      * Create a header section.
      *
      * @param string $label
-     * @param array $options
+     * @param array  $options
      *
-     * @return void
+     * @return string
      */
     public function createHeader($label, $options): string
     {
@@ -121,6 +124,34 @@ class Navigation extends AbstractExtension
             $attributes,
             appoencode($label, true)
         );
+    }
+
+    /**
+     * Show pagination for a instance of Paginator.
+     *
+     * @param Paginator   $paginator
+     * @param string      $link           Url to use in href atribute in links
+     * @param string|null $template       You can change the template for your own if you need it at a specific time
+     * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
+     * @param array|null  $params
+     *
+     * @return string
+     */
+    public function showPagination(Paginator $paginator, string $link, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
+    {
+        $template = $template ?: 'parts/pagination.twig';
+        $scrollingStyle = $scrollingStyle ?: 'Sliding';
+
+        $pages = get_object_vars($paginator->getPages($scrollingStyle));
+        $link = $link.(false === \strpos($link, '#') ? '?' : '&');
+        $pages['href'] = $link;
+
+        if (null !== $params)
+        {
+            $pages = array_merge($pages, (array) $params);
+        }
+
+        return \LotgdTheme::renderThemeTemplate($template, $pages);
     }
 
     /**
