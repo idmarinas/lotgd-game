@@ -22,6 +22,10 @@
 @activeHoverItemBackground: @veryStrongTransparentBlack;
 @activeHoverItemColor: @invertedSelectedTextColor;
 
+@disabledTextColor: @invertedDisabledTextColor;
+
+/* Pagination */
+@paginationActiveTextColor: @invertedSelectedTextColor;
 
 /**
  * LOTGD Styles
