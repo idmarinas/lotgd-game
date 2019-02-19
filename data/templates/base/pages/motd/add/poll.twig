@@ -1,0 +1,56 @@
+{% translate_default_domain 'page-motd' %}
+
+{% if preview %}
+    {% include 'base/pages/motd/parts/item.twig' with {'SU_POST_MOTD': 0} %}
+    <hr>
+{% endif %}
+
+{{ 'item.add.poll.form.note'|t|colorize }}
+<h4 class="header">{{ 'item.add.poll.form.title'|t|colorize }}</h4>
+<form action="{{ 'motd.php?op=addpoll'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="subject">{{ 'item.edit.form.subject'|t|colorize }}</label>
+        <input type="text" id="subject" size="50" name="subject">
+    </div>
+    <div class="field">
+        <label for="body">{{ 'item.edit.form.body'|t|colorize }}</label>
+        <textarea id="body" align='right' class='input' name='body' cols='37' rows='5'></textarea>
+    </div>
+    <div class="field">
+        {{ 'item.add.poll.form.choice'|t|colorize }}
+    </div>
+    <div class="field">
+        <div class="ui three column grid" id="poll-opt">
+            <div class='field column'>
+                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
+                <input name='opt[]'>
+            </div>
+            <div class='field column'>
+                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
+                <input name='opt[]'>
+            </div>
+            <div class='field column'>
+                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
+                <input name='opt[]'>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <a href class="ui secondary button" onclick="addPollItem(); return false;">{{ 'item.add.poll.form.button.opt'|t|uncolorize }}</a>
+    </div>
+    <hr>
+    <div class="field">
+        <div class="ui buttons">
+            <button type="submit" class="ui button">{{ 'item.add.poll.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </div>
+</form>
+
+<script language='JavaScript'>
+    document.getElementById('hidepolls').innerHTML = '';
+
+    function addPollItem()
+    {
+        document.getElementById('poll-opt').innerHTML += '<div class="field column"><label>{{ "item.add.poll.form.opt"|t|colorize }}</label><input name="opt[]""></div>';
+    }
+</script>

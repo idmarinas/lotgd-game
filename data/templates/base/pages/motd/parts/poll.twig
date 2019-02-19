@@ -1,0 +1,56 @@
+{% translate_default_domain 'page-motd' %}
+
+<div class="item">
+    <div class="content">
+        <div class="header">{{ 'item.poll.poll'|t|colorize }}: {{ motd.motdtitle }}</div>
+        <div class="meta">
+            {% if SU_POST_MOTD %}
+                {% set options = {'text': 'item.del.confirm'|t|uncolorize } %}
+                [ <a href="{{ ('motd.php?op=del&id=' ~ motd.motditem)|lotgd_url }}" data-options="{{ options|json_encode()|escape('html_attr') }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ 'item.del.label'|t|uncolorize}}" aria-label="{{ 'item.del.label'|t|uncolorize}}"><i class="red link trash icon" aria-hidden="true"></i></a> ]
+            {% endif %}
+            <span class="author"><i class="large poll icon"></i> {{ (motd.motdauthorname ?: 'item.author'|t)|colorize }}</span>
+            <small class="date colLtCyan">{{ '{date,date,medium} {date,time}'|tmf({'date': motd.motddate }) }}</small>
+        </div>
+        <div class="description colDkGreen">
+            <p>{{ motd.motdbody.body|nltoappon|colorize }}</p>
+        </div>
+        <div class="content">
+            <form class="ui items" action="{{ 'motd.php?op=vote'|lotgd_url }}" method="POST">
+                <input type="hidden" name="motditem" value="{{ motd.motditem }}">
+                {% for id, option in motd.motdbody.opt %}
+                    <div class="item">
+                        <div class="ui mini image center aligned">
+                            {% if userPre.loggedin %}
+                                <div class="ui toggle checkbox">
+                                    <input type="radio" value="{{ id }}" name="choice" {{ (motd.pollResult.userVote is defined and motd.pollResult.userVote is not null and motd.pollResult.userVote == id) ? 'checked' : '' }} {{ motd.pollResult.userVote is defined and motd.pollResult.userVote is not null ? 'disabled' : '' }}>
+                                </div>
+                            {% else %}
+                                <i class="huge dragon icon"></i>
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                            <div class="header">{{ option|colorize }}</div>
+                            {% set percent = motd.pollResult.totalVotes ? (motd.pollResult.opt[id] / motd.pollResult.totalVotes) : 0 %}
+                            {% set params = {'votes': motd.pollResult.opt[id], 'percent': percent} %}
+                            <spam class="meta">{{ 'item.poll.result.opt'|t(params)|colorize }}</spam>
+                            <div class="description">
+                                <div class="ui remove margin tiny green progress" data-value="{{ motd.pollResult.opt[id] }}" data-total="{{ motd.pollResult.totalVotes }}">
+                                    <div class="bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if userPre.loggedin %}
+                    {% if motd.pollResult.userVote is defined and motd.pollResult.userVote is not null %}
+                        {{ 'item.poll.result.warning'|t|colorize }}
+                    {% else %}
+                        <button type="submit" class="ui button">{{ 'item.poll.vote'|t|uncolorize }}</button>
+                        {{ 'item.poll.warning'|t|colorize }}
+                    {% endif %}
+                {% else %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>

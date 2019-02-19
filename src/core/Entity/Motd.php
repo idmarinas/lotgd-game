@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Motd.
  *
  * @ORM\Table(name="motd")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\MotdRepository")
  */
 class Motd
 {
@@ -49,7 +49,7 @@ class Motd
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="motddate", type="datetime", nullable=true)
+     * @ORM\Column(name="motddate", type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      */
     private $motddate;
 
@@ -66,6 +66,11 @@ class Motd
      * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
      */
     private $motdauthor = 0;
+
+    public function __construct()
+    {
+        $this->motddate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Motditem.

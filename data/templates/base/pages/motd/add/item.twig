@@ -1,0 +1,25 @@
+{% translate_default_domain 'page-motd' %}
+
+{% if preview %}
+    {% include 'base/pages/motd/parts/item.twig' with {'SU_POST_MOTD': 0} %}
+    <hr>
+{% endif %}
+
+<h4 class="header">{{ 'item.add.form.title'|t|colorize }}</h4>
+<form action="{{ 'motd.php?op=add'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="subject">{{ 'item.edit.form.subject'|t|colorize }}</label>
+        <input type="text" id="subject" size="50" name="subject" value="{{ motd.motdtitle }}">
+    </div>
+    <div class="field">
+        <label for="body">{{ 'item.edit.form.body'|t|colorize }}</label>
+        <textarea id="body" align='right' class='input' name='body' cols='37' rows='5'>{{ motd.motdbody }}</textarea>
+    </div>
+    <hr>
+    <div class="field">
+        <div class="ui buttons">
+            <button type="submit" name="preview" class="ui button" value="1">{{ 'item.edit.form.button.preview'|t|uncolorize }}</button>
+            <button type="submit" class="ui button">{{ 'item.edit.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </div>
+</form>

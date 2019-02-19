@@ -1,0 +1,19 @@
+{% translate_default_domain 'page-motd' %}
+
+<div class="item">
+    <div class="content">
+        <div class="header">{{ motd.motdtitle }}</div>
+        <div class="meta">
+            {% if SU_POST_MOTD %}
+                {% set options = {'text': 'item.del.confirm'|t|uncolorize } %}
+                [ <a href="{{ ('motd.php?op=edit&id=' ~ motd.motditem)|lotgd_url }}" data-tooltip="{{ 'item.edit.label'|t|uncolorize }}" aria-label="{{ 'item.edit.label'|t|uncolorize }}"><i class="green link edit icon"></i></a> |
+                <a href="{{ ('motd.php?op=del&id=' ~ motd.motditem)|lotgd_url }}" data-options="{{ options|json_encode()|escape('html_attr') }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ 'item.del.label'|t|uncolorize}}" aria-label="{{ 'item.del.label'|t|uncolorize}}"><i class="red link trash icon" aria-hidden="true"></i></a> ]
+            {% endif %}
+            <span class="author">{{ (motd.motdauthorname ?: 'item.author'|t)|colorize }}</span>
+            <small class="date colLtCyan">{{ '{date,date,medium} {date,time}'|tmf({'date': motd.motddate }) }}</small>
+        </div>
+        <div class="description">
+            <p class="colDkGreen">{{ motd.motdbody|nltoappon|colorize }}</p>
+        </div>
+    </div>
+</div>
