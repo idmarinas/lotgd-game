@@ -8,8 +8,8 @@ return [
         'factories' => [
             //-- LotGD factories
             Lotgd\Core\Character\Stats::class => Factory\Character\Stats::class,
-            Lotgd\Core\Component\FlashMessages::class => InvokableFactory::class,
-            'Lotgd\\Core\\Db\\Doctrine' => Factory\Db\Doctrine::class,
+            Lotgd\Core\Component\FlashMessages::class => Factory\Component\FlashMessages::class,
+            Lotgd\Core\Db\Doctrine::class => Factory\Db\Doctrine::class,
             Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class,
             Lotgd\Core\Installer\Install::class => Factory\Installer\Install::class,
             Lotgd\Core\Lib\Cache::class => Factory\Lib\Cache::class,
