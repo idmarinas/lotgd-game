@@ -83,3 +83,32 @@ function check_su_access($level)
         page_footer();
     }
 }
+
+/**
+ * Check Superuser premission.
+ * Just check and redirect if denied you have permission.
+ *
+ * @param int    $permission
+ * @param string $return
+ */
+function checkSuPermission($permission, string $return)
+{
+    global $session;
+
+    if ($session['user']['superuser'] & $permission)
+    {
+        $result = modulehook('check-su-permission', ['enabled' => true, 'permission' => $permission]);
+
+        if ($result['enabled'])
+        {
+            $session['user']['laston'] = new \DateTime('now');
+
+            return;
+        }
+
+        //-- Module preventing doing
+        return redirect($return);
+    }
+
+    return redirect($return);
+}
