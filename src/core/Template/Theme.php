@@ -57,11 +57,15 @@ class Theme extends Base
 
         $userPre = $html['userPre'] ?? [];
         $user = $session['user'] ?? [];
-        unset($user['password']);
         $sesion = $session ?? [];
-        unset($user['user']);
+        unset($sesion['user'], $user['password']);
 
-        $context = array_merge(['userPre' => $userPre, 'user' => $user, 'session' => $sesion], $context);
+        $context = array_merge([
+            'userPre' => $userPre,
+            'user' => $user, //-- Actual user data for this template
+            'session' => $sesion //-- Actual session data for this template
+        ],
+        $context);
 
         return $this->render("{$this->themefolder}/{$name}", $context);
     }
