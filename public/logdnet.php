@@ -78,6 +78,8 @@ function lotgdsort($a, $b)
     return ($costa < $costb) ? -1 : 1;
 }
 
+tlschema('logdnet');
+
 $op = httpget('op');
 
 if ('' == $op)

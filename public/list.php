@@ -8,6 +8,8 @@ define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/villagenav.php';
 
+tlschema('list');
+
 page_header('title', [], 'page-list');
 
 if ($session['user']['loggedin'])

@@ -14,6 +14,8 @@ use Doctrine\ORM\Query\Expr\Join;
 
 addcommentary();
 
+tlschema('motd');
+
 popup_header('title', [], 'page-motd');
 
 $op = (string) \LotgdHttp::getQuery('op', '');
@@ -245,5 +247,7 @@ $session['user']['lastmotd'] = new \DateTime($row['motddate']);
 
 $params = modulehook('page-motd-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd.twig', $params));
+
+tlschema();
 
 popup_footer();

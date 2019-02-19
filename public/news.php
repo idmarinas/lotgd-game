@@ -13,6 +13,8 @@ if ($session['user']['loggedin'] ?? false)
     checkday();
 }
 
+tlschema('news');
+
 page_header('title', [], 'page-news');
 
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
