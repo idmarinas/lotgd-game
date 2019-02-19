@@ -99,8 +99,6 @@ function page_footer($saveuser = true)
 {
     global $output, $html, $nav, $session, $pagestarttime, $nopopups, $lotgdJaxon;
 
-    $html['copyright'] = \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
-
     //page footer module hooks
     $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
     $replacementbits = modulehook("footer-$script", []);
