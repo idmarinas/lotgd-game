@@ -13,8 +13,12 @@
 
 namespace Lotgd\Core\Component;
 
+use Zend\Session\Container;
+use Zend\Session\ManagerInterface;
+use Zend\Stdlib\SplQueue;
+
 /**
- * Flash Messages - implement messages based on sension.
+ * Flash Messages - implement messages based on session.
  */
 class FlashMessages
 {
@@ -44,11 +48,69 @@ class FlashMessages
     const TYPE_INFO = 'info';
 
     /**
+     * Whether a message has been added during this request.
+     *
+     * @var bool
+     */
+    protected $messageAdded = false;
+
+    /**
+     * @var ManagerInterface
+     */
+    protected $session;
+
+    /**
      * Messages of request.
      *
      * @var array
      */
     protected $messages = [];
+
+    /**
+     * Set the session manager.
+     *
+     * @param ManagerInterface $manager
+     *
+     * @return FlashMessages
+     */
+    public function setSessionManager(ManagerInterface $manager)
+    {
+        $this->session = $manager;
+
+        return $this;
+    }
+
+    /**
+     * Get the session manager.
+     *
+     * @return ManagerInterface
+     */
+    public function getSessionManager()
+    {
+        if (! $this->session instanceof ManagerInterface)
+        {
+            $this->setSessionManager(Container::getDefaultManager());
+        }
+
+        return $this->session;
+    }
+
+    /**
+     * Get container for flash messages.
+     *
+     * @return Container
+     */
+    public function getContainer()
+    {
+        if ($this->container instanceof Container)
+        {
+            return $this->container;
+        }
+
+        $this->container = new Container('FlashMessages', $this->getSessionManager());
+
+        return $this->container;
+    }
 
     /**
      * Add message.
@@ -60,9 +122,24 @@ class FlashMessages
      */
     public function addMessage(string $message, $type = null)
     {
+        $container = $this->getContainer();
         $type = $type ?: self::TYPE_INFO;
 
-        $this->messages[$type][] = $message;
+        if (! $this->messageAdded)
+        {
+            $this->getMessagesFromContainer();
+            $container->setExpirationHops(1);
+            $container->setExpirationSeconds(1);//-- Added this because in popups pages can fail
+        }
+
+        if (! isset($container->{$type}) || ! $container->{$type} instanceof SplQueue)
+        {
+            $container->{$type} = new SplQueue();
+        }
+
+        $container->{$type}->push($message);
+
+        $this->messageAdded = true;
 
         return $this;
     }
@@ -126,17 +203,59 @@ class FlashMessages
     /**
      * Get all messages.
      *
-     * @param string $type
-     *
      * @return array
      */
-    public function getMessages($type = null): array
+    public function getMessages(): array
     {
-        if (isset($this->messages[$type]))
-        {
-            return $this->messages[$type];
-        }
+        $this->getMessagesFromContainer();
 
         return $this->messages;
+    }
+
+    /**
+     * Clear all messages from the container.
+     *
+     * @return bool True if messages were cleared, false if none existed
+     */
+    public function clearMessagesFromContainer()
+    {
+        $this->getMessagesFromContainer();
+
+        if (empty($this->messages))
+        {
+            return false;
+        }
+
+        unset($this->messages);
+        $this->messages = [];
+
+        return true;
+    }
+
+    /**
+     * Pull messages from the session container.
+     *
+     * Iterates through the session container, removing messages into the local scope.
+     */
+    protected function getMessagesFromContainer()
+    {
+        if (! empty($this->messages) || $this->messageAdded)
+        {
+            return;
+        }
+
+        $container = $this->getContainer();
+
+        $namespaces = [];
+        foreach ($container as $type => $messages)
+        {
+            $this->messages[$type] = $messages;
+            $namespaces[] = $type;
+        }
+
+        foreach ($namespaces as $type)
+        {
+            unset($container->{$type});
+        }
     }
 }
