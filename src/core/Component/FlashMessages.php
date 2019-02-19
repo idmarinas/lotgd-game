@@ -129,7 +129,6 @@ class FlashMessages
         {
             $this->getMessagesFromContainer();
             $container->setExpirationHops(1);
-            $container->setExpirationSeconds(1);//-- Added this because in popups pages can fail
         }
 
         if (! isset($container->{$type}) || ! $container->{$type} instanceof SplQueue)
