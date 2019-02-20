@@ -1172,20 +1172,20 @@
         },
         {
             "name": "jaxon-php/jaxon-dialogs",
-            "version": "v1.2.2",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaxon-php/jaxon-dialogs.git",
-                "reference": "efdab726a234c2153e1be632a0613390457546e7"
+                "reference": "830c5bff764e1a9aafb0c2d6a8aeb7be4c2b06d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaxon-php/jaxon-dialogs/zipball/efdab726a234c2153e1be632a0613390457546e7",
-                "reference": "efdab726a234c2153e1be632a0613390457546e7",
+                "url": "https://api.github.com/repos/jaxon-php/jaxon-dialogs/zipball/830c5bff764e1a9aafb0c2d6a8aeb7be4c2b06d7",
+                "reference": "830c5bff764e1a9aafb0c2d6a8aeb7be4c2b06d7",
                 "shasum": ""
             },
             "require": {
-                "jaxon-php/jaxon-core": "~2.0"
+                "jaxon-php/jaxon-core": "~2.0|~3.0"
             },
             "type": "library",
             "autoload": {
@@ -1218,7 +1218,7 @@
                 "php",
                 "xajax"
             ],
-            "time": "2018-04-24T16:29:49+00:00"
+            "time": "2019-02-20T01:56:44+00:00"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -2102,7 +2102,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
