@@ -60,6 +60,11 @@ class FlashMessages
     protected $session;
 
     /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
      * Messages of request.
      *
      * @var array
