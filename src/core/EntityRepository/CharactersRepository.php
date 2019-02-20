@@ -39,6 +39,8 @@ class CharactersRepository extends EntityRepository
         }
         catch (\Throwable $th)
         {
+            \Tracy\Debugger::log($th);
+
             return null;
         }
     }
