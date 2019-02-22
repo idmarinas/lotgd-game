@@ -92,7 +92,7 @@ function httpallpost()
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    return \LotgdHttp::getPost();
+    return \LotgdHttp::getPostAll();
 }
 
 function postparse($verify = false, $subval = false)
