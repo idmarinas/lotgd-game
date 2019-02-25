@@ -4,17 +4,20 @@
 // addnews ready
 // translator ready
 define('ALLOW_ANONYMOUS', true);
+
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
 tlschema('login');
+
 translator_setup();
-$op = httpget('op');
+
+$op = (string) httpget('op');
 $name = (string) httppost('name');
-$iname = getsetting('innname', LOCATION_INN);
-$vname = getsetting('villagename', LOCATION_FIELDS);
+$iname = (string) getsetting('innname', LOCATION_INN);
+$vname = (string) getsetting('villagename', LOCATION_FIELDS);
 $force = httppost('force');
 
 if ('' != $name)
@@ -25,11 +28,11 @@ if ('' != $name)
     }
 
     //-- If server is full, not need proces any data.
-    if (true == ServerFunctions::isTheServerFull() && 1 != $force)
+    if (ServerFunctions::isTheServerFull() && 1 != $force)
     {
         //sanity check if the server is / got full --> back to home
-        $session['message'] = translate_inline('`4Sorry, server full!');
         $session['user'] = [];
+        \LotgdFlashMessaged::addWarningMessage(\LotgdTranslator::t('login.full', [], 'page-login'));
 
         return redirect('home.php');
     }
@@ -59,7 +62,8 @@ if ('' != $name)
     //-- Not found account
     if (! $account)
     {
-        $session['message'] = translate_inline('`4Error, your login was incorrect`0');
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page-login'));
+
         //now we'll log the failed attempt and begin to issue bans if
         //there are too many, plus notify the admins.
         checkban();
@@ -74,12 +78,9 @@ if ('' != $name)
 
         if (count($result))
         {
-            $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
-            $cookie = $request->getCookie();
-
             // just in case there manage to be multiple accounts on
             // this name.
-            foreach($result as $key => $row)
+            foreach ($result as $key => $row)
             {
                 $post = httpallpost();
 
@@ -87,9 +88,9 @@ if ('' != $name)
                 $failLog->setEventid(0)
                     ->setDate(new DateTime())
                     ->setPost($post)
-                    ->setIp($request->getServer('REMOTE_ADDR'))
+                    ->setIp(\LotgdHttp::getServer('REMOTE_ADDR'))
                     ->setAcctid($row['acctid'])
-                    ->setId($cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '')
+                    ->setId(\LotgdHttp::getCookie('lgi') ?: '')
                 ;
 
                 \Doctrine::persist($failLog);
@@ -116,14 +117,13 @@ if ('' != $name)
                 if ($c >= 10)
                 {
                     // 5 failed attempts for superuser, 10 for regular user
-                    $banmessage = translate_inline('Automatic System Ban: Too many failed login attempts.');
                     $bans = new \Lotgd\Core\Entity\Bans();
                     $banexpire = new \DateTime('now');
-                    $bans->setIpfilter($request->getServer('REMOTE_ADDR'))
-                        ->setBanreason($banmessage)
+                    $bans->setIpfilter(\LotgdHttp::getServer('REMOTE_ADDR'))
+                        ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page-login'))
                         ->setBanexpire($banexpire->add(new \DateInterval('PT15M'))) //-- Added 15 minutes
                         ->setBanner('System')
-                        ->setLasthit(new DateTime('0000-00-00 00:00:00'))
+                        ->setLasthit(new \DateTime('0000-00-00 00:00:00'))
                     ;
 
                     \Doctrine::persist($failLog);
@@ -135,7 +135,7 @@ if ('' != $name)
                         // this failed attempt if it includes superusers.
                         $sql = 'SELECT acctid FROM '.DB::prefix('accounts').' WHERE (superuser&'.SU_EDIT_USERS.')';
                         $result2 = DB::query($sql);
-                        $subj = translate_mail(['`#%s failed to log in too many times!', $_SERVER['REMOTE_ADDR']], 0);
+                        $subj = translate_mail(['`#%s failed to log in too many times!', \LotgdHttp::getServer('REMOTE_ADDR')], 0);
 
                         while ($row2 = DB::fetch_assoc($result2))
                         {
@@ -144,6 +144,7 @@ if ('' != $name)
                             DB::query($sql);
 
                             $noemail = false;
+
                             if (DB::affected_rows() > 0)
                             {
                                 $noemail = true;
@@ -156,13 +157,12 @@ if ('' != $name)
             }//end foreach
         }//end if (DB::num_rows)
 
-        \Doctrine::clear();//-- Detaches all objects from Doctrine!
+        \Doctrine::clear(); //-- Detaches all objects from Doctrine!
 
         return redirect('index.php');
     }
 
     $session['user'] = $account;
-
 
     checkban($session['user']['login']); //check if this account is banned
 
@@ -174,7 +174,7 @@ if ('' != $name)
     if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
     {
         $session['user'] = [];
-        $session['message'] = translate_inline('`4Error, you must validate your email address before you can log in.`0`n');
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page-login'));
 
         return redirect('home.php');
     }
@@ -205,7 +205,7 @@ if ('' != $name)
     {
         $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
 
-        $str = sprintf_translate('Sending you to %s, have a safe journey', $link);
+        $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page-login');
         header("Location: {$session['user']['restorepage']}");
         saveuser();
         echo $str;
@@ -228,45 +228,41 @@ if ('' != $name)
     }
 
     return redirect('news.php');
-
 }
 elseif ('logout' == $op)
 {
     if ($session['user']['loggedin'])
     {
-        $location = $session['user']['location'];
-
-        if ($location == $iname)
-        {
-            $session['user']['restorepage'] = 'inn.php?op=strolldown';
-        }
-        elseif ($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO))
+        $session['user']['restorepage'] = 'news.php';
+        if ($session['user']['superuser'] & (0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO))
         {
             $session['user']['restorepage'] = 'superuser.php';
         }
-        else
+        elseif ($session['user']['location'] == $iname)
         {
-            $session['user']['restorepage'] = 'news.php';
+            $session['user']['restorepage'] = 'inn.php?op=strolldown';
         }
-        $sql = 'UPDATE '.DB::prefix('accounts')." SET loggedin=0, restorepage='{$session['user']['restorepage']}' WHERE acctid = ".$session['user']['acctid'];
-        DB::query($sql);
+
         invalidatedatacache('charlisthomepage');
         invalidatedatacache('list.php-warsonline');
-
-        // Handle the change in number of users online
-        translator_check_collect_texts();
 
         // Let's throw a logout module hook in here so that modules
         // like the stafflist which need to invalidate the cache
         // when someone logs in or off can do so.
         modulehook('player-logout');
         saveuser();
+
+        \LotgdSession::sessionLogOut();
+
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page-login'));
     }
     $session = [];
-    redirect('index.php');
-}
-// If you enter an empty username, don't just say oops.. do something useful.
-$session = [];
-$session['message'] = translate_inline('`4Error, your login was incorrect`0');
 
-redirect('index.php');
+    return redirect('index.php');
+}
+
+//- If you enter an empty username, don't just say oops.. do something useful.
+\LotgdSession::sessionLogOut();
+\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page-login'));
+
+return redirect('index.php');
