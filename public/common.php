@@ -21,7 +21,7 @@ defined('ALLOW_ANONYMOUS') or define('ALLOW_ANONYMOUS', false);
 require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 //-- Init Debugger
-\Tracy\Debugger::enable(\Tracy\Debugger::DETECT, __DIR__ . '/../data/log');
+\Tracy\Debugger::enable(\Tracy\Debugger::DETECT, __DIR__ . '/../data/log/exception');
 \Tracy\Debugger::timer('page-generating');
 \Tracy\Debugger::$maxDepth = 5; // default: 3
 
