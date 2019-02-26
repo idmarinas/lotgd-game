@@ -38,9 +38,9 @@
         "toastr": "^2.1.4"
     },
     "devDependencies": {
-        "@babel/core": "^7.3.3",
+        "@babel/core": "^7.3.4",
         "@babel/plugin-transform-runtime": "^7.2.0",
-        "@babel/preset-env": "^7.3.1",
+        "@babel/preset-env": "^7.3.4",
         "ansi-colors": "^3.2.3",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.5",
@@ -87,7 +87,7 @@
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "ora": "^3.1.0",
         "sass-loader": "^7.1.0",
-        "uglifyjs-webpack-plugin": "^2.1.1",
+        "uglifyjs-webpack-plugin": "^2.1.2",
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
         "webpack": "^4.29.5",
