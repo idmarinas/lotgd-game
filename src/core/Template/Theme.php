@@ -71,6 +71,33 @@ class Theme extends Base
     }
 
     /**
+     * Renders a template of module.
+     *
+     * @param string $name    The template name
+     * @param array  $context An array of parameters to pass to the template
+     *
+     * @return string The rendered template
+     */
+    public function renderModuleTemplate($name, $context)
+    {
+        global $html, $session;
+
+        $userPre = $html['userPre'] ?? [];
+        $user = $session['user'] ?? [];
+        $sesion = $session ?? [];
+        unset($sesion['user'], $user['password']);
+
+        $context = array_merge([
+            'userPre' => $userPre,
+            'user' => $user, //-- Actual user data for this template
+            'session' => $sesion //-- Actual session data for this template
+        ],
+        $context);
+
+        return $this->render($name, $context);
+    }
+
+    /**
      * Renders a template of LOTGD.
      *
      * @param string $name    The template name

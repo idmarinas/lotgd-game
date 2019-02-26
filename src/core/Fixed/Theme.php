@@ -42,6 +42,14 @@ class Theme
     }
 
     /**
+     * @see Lotgd\Core\Template\Theme
+     */
+    public static function renderModuleTemplate($template, $params)
+    {
+        return self::$wrapper->renderModuleTemplate($template, $params);
+    }
+
+    /**
      * Renders a template of LOTGD.
      *
      * @param string $name    The template name
