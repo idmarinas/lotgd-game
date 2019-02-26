@@ -78,4 +78,30 @@ class Session
             $chain->attach('session.validate', [$validator, 'isValid']);
         }
     }
+
+    /**
+     * Logout of app.
+     */
+    public function sessionLogOut()
+    {
+        try
+        {
+            $session = $this->getContainer(SessionManager::class);
+            $container = new Container('initialized');
+
+            $session->forgetMe();
+
+            session_destroy();
+
+            $session->regenerateId(true);
+            $session->getStorage()->clear();
+            $container->init = 1;
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            return redirect('home.php');
+        }
+    }
 }

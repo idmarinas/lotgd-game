@@ -32,6 +32,11 @@ class Session
         return self::$instance->bootstrapSession($force);
     }
 
+    public static function sessionLogOut()
+    {
+        return self::$instance->sessionLogOut();
+    }
+
     /**
      * Set instance of Navigation.
      *
