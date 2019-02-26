@@ -238,10 +238,8 @@ $params['paginator'] = $repository->getPaginator($qb, $page, $motdPerPage);
 $params['motdMothCountPerYear'] = $repository->getMonthCountPerYear();
 $session['needtoviewmotd'] = false;
 
-$sql = 'SELECT motddate FROM '.DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
-$result = DB::query($sql);
-$row = DB::fetch_assoc($result);
-$session['user']['lastmotd'] = new \DateTime($row['motddate']);
+$row = $repository->getLastMotd();
+$session['user']['lastmotd'] = $row['motddate'];
 
 $params = modulehook('page-motd-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd.twig', $params));
