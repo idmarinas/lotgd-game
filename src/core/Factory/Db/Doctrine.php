@@ -79,6 +79,9 @@ class Doctrine implements FactoryInterface
             'year' => \DoctrineExtensions\Query\Mysql\Year::class
         ]);
 
+        //-- Default EntityRepository for all Entities
+        $config->setDefaultRepositoryClassName(\Lotgd\Core\Doctrine\ORM\EntityRepository::class);
+
         $evm = new DoctrineEventManager();
         $tablePrefix = new DoctrineTablePrefix(($options['db']['prefix'] ?? ''));
         $evm->addEventListener(DoctrineEvents::loadClassMetadata, $tablePrefix);
