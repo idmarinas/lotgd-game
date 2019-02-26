@@ -7,8 +7,7 @@ function superusernav()
 {
     global $session;
 
-    tlschema('nav');
-    addnav('Navigation');
+    \LotgdNavigation::addHeader('Navigation');
 
     if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
     {
@@ -20,7 +19,7 @@ function superusernav()
 
             if (! array_key_exists('handled', $args) || ! $args['handled'])
             {
-                addnav('G?Return to the Grotto', 'superuser.php');
+                \LotgdNavigation::addNav('G?Return to the Grotto', 'superuser.php');
             }
         }
     }
@@ -28,7 +27,6 @@ function superusernav()
 
     if (! array_key_exists('handled', $args) || ! $args['handled'])
     {
-        addnav('M?Return to the Mundane', 'village.php');
+        \LotgdNavigation::addNav('M?Return to the Mundane', 'village.php');
     }
-    tlschema();
 }
