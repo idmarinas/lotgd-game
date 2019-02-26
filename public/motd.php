@@ -225,9 +225,7 @@ $qb->select('u', 'c.name as motdauthorname')
 if ($month)
 {
     $params['monthSelected'] = $month;
-    bdump($month);
     $month = \explode('-', $month);
-    bdump($month);
     $qb->where('MONTH(u.motddate) = :month AND YEAR(u.motddate) = :year')
         ->setParameters([
             'month' => $month[1],
