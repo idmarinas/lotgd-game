@@ -1,0 +1,76 @@
+{#
+    this is the first thing a new player will se, so let's make it look better
+#}
+{% translate_default_domain 'page-create' %}
+
+{{ 'create.title'|t|colorize }}
+
+<br>
+<form action="{{ ('create.php?op=create' ~ refer)|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassRegister();">
+    <input type="hidden" name="passlen" id="passlen" value="0">
+    <div class="ui form">
+        <div class="field">
+            <label for="character">{{ 'create.form.input.name'|t|colorize }}</label>
+            <input type="text" name="name" id="character" />
+        </div>
+        <div class="required field">
+            <label for="pass1">{{ 'create.form.input.password'|t|colorize }}</label>
+            <input type='password' name='pass1' id='pass1'>
+        </div>
+        <div class="required field">
+            <label for="pass2">{{ 'create.form.input.rePassword'|t|colorize }}</label>
+            <input type='password' name='pass2' id='pass2'>
+        </div>
+        <div class="{{ requireEmail ? 'required' }} field">
+            <label>{{ 'create.form.input.email.label'|t|colorize }}</label>
+            <input type="email" name='email'>
+            <div class="ui info message">
+                    {% if not requireEmail %}
+                        {{ 'create.form.input.email.message.optional'|t|uncolorize }}
+                    {% elseif requireValideMail %}
+                        {{ 'create.form.input.email.message.validate'|t|uncolorize }}
+                    {% endif %}
+            </div>
+
+            {% if reqemailtext %}
+                <div class="ui info message">{{ reqemailtext|t|uncolorize }}</div>
+            {% endif %}
+        </div>
+        <div class="inline fields">
+            <label id="sex">{{ 'create.form.input.checkbox.label'|t }}</label>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <label id="maleL" for="male">{{ 'create.form.input.checkbox.male'|t|colorize }}</label>
+                    <input type="radio" name="sex" value="0" checked id="male" aria-describedby="sex maleL" />
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <label id="femaleL" for="female">{{ 'create.form.input.checkbox.female'|t|colorize }}</label>
+                    <input type="radio" name="sex" value="1" id="female" aria-describedby="sex femaleL" />
+                </div>
+            </div>
+        </div>
+
+        {% for tpl, params in templates %}
+            {% include tpl with params %}
+        {% endfor %}
+
+        <div class="center aligned field">
+            <input class="ui big primary button" type="submit" value="{{ 'create.form.button'|t|uncolorize }}">
+        </div>
+    </div>
+</form>
+
+<br><br>
+{% if acctTrash %}
+    {{ 'create.inactivity.acctTrash'|t({'n': acctTrash})|colorize }}
+{% endif %}
+
+{% if acctNew %}
+    {{ 'create.inactivity.acctNew'|t({'n': acctNew})|colorize }}
+{% endif %}
+
+{% if acctOld %}
+    {{ 'create.inactivity.acctOld'|t({'n': acctOld})|colorize }}
+{% endif %}

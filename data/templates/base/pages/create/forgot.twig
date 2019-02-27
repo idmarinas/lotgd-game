@@ -1,0 +1,11 @@
+{% translate_default_domain 'page-create' %}
+
+<form action="{{ 'create.php?op=forgot'|lotgd_url }}" method="POST">
+    <div class="ui form">
+        <div class="inline field">
+            <label>{{ 'forgot.label'|t|colorize }}</label>
+            <input type="text" name="charname">
+        </div>
+        <input type="submit" class="ui button" value="{{ 'forgot.button'|t|uncolorize }}">
+    </div>
+</form>

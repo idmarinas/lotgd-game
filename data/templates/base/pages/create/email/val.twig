@@ -1,0 +1,18 @@
+{% translate_default_domain 'page-create' %}
+
+{{ 'validating.email.title'|t|colorize }}
+
+{{ 'validating.email.paragraph.success.0'|t|colorize }}
+{{ 'validating.email.paragraph.success.1'|t({'login': account.login})|colorize }}
+
+{% if showLoginButton %}
+    {# no auto-login for email changers #}
+    <form action="login.php" method="POST">
+        <input name="name" value="{{ account.login }}" type="hidden">
+        <input name="password" value="!md52!{{ account.password }}" type="hidden">
+        <input name="force" value="1" type="hidden">
+        <div class="field">
+            <button class="ui button" type="submit">{{ 'validating.email.button.login'|t|uncolorize }}</button>
+        </div>
+    </form>
+{% endif %}

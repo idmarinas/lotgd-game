@@ -1,0 +1,23 @@
+{% translate_default_domain 'page-create' %}
+
+{{ 'validating.pass.success'|t|colorize }}
+<form action="{{ 'login.php'|lotgd_url }}" method="POST">
+    <input name="name" value="{{ account.login }}" type="hidden">
+    <input name="password" value="!md52!{{ account.password }}" type="hidden">
+    <input name="force" value="1" type="hidden">
+    <div class="field">
+        <button class="ui button" type="submit">{{ 'validating.pass.button.login'|t|uncolorize }}</button>
+    </div>
+</form>
+<br><br>
+{% if acctTrash %}
+    {{ 'create.inactivity.acctTrash'|t({'n': acctTrash})|colorize }}
+{% endif %}
+
+{% if acctNew %}
+    {{ 'create.inactivity.acctNew'|t({'n': acctNew})|colorize }}
+{% endif %}
+
+{% if acctOld %}
+    {{ 'create.inactivity.acctOld'|t({'n': acctOld})|colorize }}
+{% endif %}

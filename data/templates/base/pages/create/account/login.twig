@@ -1,0 +1,23 @@
+{% translate_default_domain 'page-create' %}
+
+{{ 'create.account.login.text'|t({'name': login})|colorize }}
+<form action="{{ 'login.php'|lotgd_url }}" method="POST">
+    <input name="name" value="{{ login }}" type="hidden">
+    <input name="password" value="{{ password }}" type="hidden">
+    <input name="force" value="1" type="hidden">
+    <div class="field">
+        <button class="ui button" type="submit">{{ 'create.account.login.button'|t|uncolorize }}</button>
+    </div>
+</form>
+<br><br>
+{% if acctTrash %}
+    {{ 'create.inactivity.acctTrash'|t({'n': acctTrash})|colorize }}
+{% endif %}
+
+{% if acctNew %}
+    {{ 'create.inactivity.acctNew'|t({'n': acctNew})|colorize }}
+{% endif %}
+
+{% if acctOld %}
+    {{ 'create.inactivity.acctOld'|t({'n': acctOld})|colorize }}
+{% endif %}
