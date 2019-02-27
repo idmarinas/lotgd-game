@@ -14,11 +14,11 @@ tlschema('login');
 
 translator_setup();
 
-$op = (string) httpget('op');
-$name = (string) httppost('name');
+$op = (string) \LotgdHttp::getQuery('op');
+$name = (string) \LotgdHttp::getPost('name');
 $iname = (string) getsetting('innname', LOCATION_INN);
 $vname = (string) getsetting('villagename', LOCATION_FIELDS);
-$force = httppost('force');
+$force = \LotgdHttp::getPost('force');
 
 if ('' != $name)
 {
