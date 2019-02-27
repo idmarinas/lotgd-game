@@ -20,45 +20,9 @@ use Zend\Hydrator\ClassMethods;
 
 class AccountsRepository extends EntityRepository
 {
-    /**
-     * Process login and get data.
-     *
-     * @param string $login
-     * @param string $password
-     *
-     * @return array
-     */
-    public function processLoginGetAcctData(string $login, string $password)
-    {
-        $qb = $this->createQueryBuilder('u');
-
-        try
-        {
-            $data = $qb->addSelect('ep')
-                ->where('u.login = :login AND u.password = :password AND u.locked = :locked')
-                ->setParameters([
-                    'login' => $login,
-                    'password' => $password,
-                    'locked' => false
-                ])
-                ->leftJoin(LotgdEntity\AccountsEverypage::class, 'ep', Join::WITH, $qb->expr()->eq('ep.acctid', 'u.acctid'))
-                ->getQuery()
-                ->getResult()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            return;
-        }
-
-        //-- Fail if not found
-        if (0 == count($data))
-        {
-            return;
-        }
-
-        return $this->processUserData($data);
-    }
+    use Account\Login;
+    use Account\Superuser;
+    use Account\User;
 
     /**
      * Get data of user by ID of account.
@@ -83,13 +47,15 @@ class AccountsRepository extends EntityRepository
         }
         catch (\Throwable $th)
         {
-            return;
+            return null;
         }
 
         //-- Fail if not found
         if (0 == count($data))
         {
-            return;
+            \Tracy\Debugger::log($th);
+
+            return null;
         }
 
         return $this->processUserData($data);
@@ -120,6 +86,8 @@ class AccountsRepository extends EntityRepository
         }
         catch (\Throwable $th)
         {
+            \Tracy\Debugger::log($th);
+
             return 0;
         }
     }
