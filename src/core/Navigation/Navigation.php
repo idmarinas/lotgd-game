@@ -255,9 +255,17 @@ class Navigation
         global $session;
 
         //-- Add nav header if not have link.
+        //-- It's for compatibility, the best way to add a header is with the addHeader function
         if (! $link && $label)
         {
-            return $this->addHeader($label, $options);
+            //-- Is better use addHeader function for add header.
+            return $this->addHeader($label, ArrayUtils::merge($options,
+                [
+                    'attributes'=> [ //-- To prevent a header from having the class of a navigation menu.
+                        'class' => 'navhead' //-- This will overwrite the custom class.
+                    ]
+                ]
+            ));
         }
 
         //-- Add link to allowed navs
