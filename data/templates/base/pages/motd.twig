@@ -1,0 +1,50 @@
+{% translate_default_domain 'page-motd' %}
+
+{% if SU_POST_MOTD %}
+    <div class="ui buttons">
+        <a class="ui button" href="{{ 'motd.php?op=add'|lotgd_url }}">{{ 'item.button.add.motd'|t|uncolorize }}</a>
+        <a class="ui button" href="{{ 'motd.php?op=addpoll'|lotgd_url }}">{{ 'item.button.add.poll'|t|uncolorize }}</a>
+    </div>
+{% endif %}
+
+<div class="ui divided items">
+    {% for motd in paginator %}
+        {{ motd_show_item(motd, {'SU_POST_MOTD': SU_POST_MOTD}) }}
+    {% else %}
+        <div class="item">
+            <div class="content">
+                <div class="ui error message">
+                    {{ 'list.empty'|t|uncolorize }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<form action="{{ 'motd.php'|lotgd_url }}" method="POST" class="ui form">
+    <div class="inline field">
+        <label for="month-archive">{{ 'list.form.label'|t }}</label>
+        <div class="ui action input" id="month-archive">
+            <select class="ui compact selection dropdown" name="month">
+                {% if motdMothCountPerYear %}
+                    <option value="">{{ 'list.form.select.select'|t|uncolorize }}</option>
+                    {% for row in motdMothCountPerYear %}
+                        {% set month = row.year ~ '-' ~ row.month %}
+                        <option {{ month == monthSelected ? 'selected' : '' }} value="{{ month }}" aria-label="{{ 'list.form.select.option.descriptive'|t({'date': row.date, 'count': row.count})|uncolorize }}">
+                            {{ '{date,date,YYY, LLLL} ({count,number})'|tmf({'date': row.date, 'count': row.count}) }}
+                        </option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">{{ 'list.form.select.empty'|t|uncolorize }}</option>
+                {% endif %}
+            </select>
+            <button type="submit" class="ui button" aria-label="{{ 'list.form.button.descriptive.submit'|t|uncolorize }}">
+                {{ 'list.form.button.label.submit'|t|uncolorize }}
+            </button>
+            <a role="button" href="motd.php" aria-label="{{ 'list.form.button.descriptive.current'|t|uncolorize }}" class="ui secondary button">
+                {{ 'list.form.button.label.current'|t|uncolorize }}
+            </a>
+        </div>
+    </div>
+</form>
+<br>
+{{ navigation_pagination(paginator, 'motd.php' ) }}
