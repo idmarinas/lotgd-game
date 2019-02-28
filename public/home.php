@@ -24,7 +24,7 @@ if ($session['loggedin'] ?? false)
     return redirect('badnav.php');
 }
 
-$op = httpget('op');
+$op = \LotgdHttp::getQuery('op');
 
 tlschema('home');
 
