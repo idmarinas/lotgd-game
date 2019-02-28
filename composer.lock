@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d327f7fe4351ea72f01334d00b2fbae1",
+    "content-hash": "b6e7508516178fae8b0c5d70bf4366f7",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -2164,7 +2164,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -4352,16 +4352,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "bf1fc09b21e6bb64dca56d0e99a0f3099c00280a"
+                "reference": "c987c6621a8b7595320c851bd8553115e49436b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/bf1fc09b21e6bb64dca56d0e99a0f3099c00280a",
-                "reference": "bf1fc09b21e6bb64dca56d0e99a0f3099c00280a",
+                "url": "https://api.github.com/repos/phan/phan/zipball/c987c6621a8b7595320c851bd8553115e49436b1",
+                "reference": "c987c6621a8b7595320c851bd8553115e49436b1",
                 "shasum": ""
             },
             "require": {
@@ -4380,6 +4380,7 @@
             },
             "suggest": {
                 "ext-ast": "Needed for parsing ASTs (unless --use-fallback-parser is used). 1.0.1+ is recommended, php-ast ^0.1.5|^1.0.0 is needed.",
+                "ext-igbinary": "Improves performance of polyfill when ext-ast is unavailable",
                 "ext-tokenizer": "Needed for non-AST support and file/line-based suppressions."
             },
             "bin": [
@@ -4414,7 +4415,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-02-18T21:01:26+00:00"
+            "time": "2019-02-27T14:10:48+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
