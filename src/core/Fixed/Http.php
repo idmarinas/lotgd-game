@@ -158,7 +158,7 @@ class Http
             return $cookie->offsetGet($name);
         }
 
-        return;
+        return null;
     }
 
     /**
