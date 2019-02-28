@@ -242,6 +242,32 @@ class Navigation
     }
 
     /**
+     * Add navs for actions of superuser
+     */
+    public function superuser(): void
+    {
+        global $session;
+
+        $superuser = $session['user']['superuser'];
+
+        $this->addHeader('common.superuser.category');
+
+        if ($superuser & SU_EDIT_COMMENTS)
+        {
+            $this->addNav('common.superuser.moderate', 'moderate.php');
+        }
+
+        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
+        {
+            $this->addNav('common.superuser.superuser', 'superuser.php');
+        }
+
+        if ($superuser & SU_INFINITE_DAYS)
+        {
+            $this->addNav('common.superuser.newday', 'newday.php');
+        }
+    }
+    /**
      * Private function to add a nav in navigation menu.
      *
      * @param string|null $label

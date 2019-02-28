@@ -105,6 +105,14 @@ class Navigation
     }
 
     /**
+     * @see Lotgd\Core\Navigation\Navigation
+     */
+    public static function superuser()
+    {
+        return self::$instance->superuser();
+    }
+
+    /**
      * Set instance of Navigation
      *
      * @param CoreNavigation $container
