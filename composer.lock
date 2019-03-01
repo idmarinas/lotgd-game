@@ -2454,16 +2454,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "28c54772200b5fefd8c9a421b36019cda2b2f9f4"
+                "reference": "e179856e5dcc3ced99df1596cd299246fb1c3ac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/28c54772200b5fefd8c9a421b36019cda2b2f9f4",
-                "reference": "28c54772200b5fefd8c9a421b36019cda2b2f9f4",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/e179856e5dcc3ced99df1596cd299246fb1c3ac2",
+                "reference": "e179856e5dcc3ced99df1596cd299246fb1c3ac2",
                 "shasum": ""
             },
             "require": {
@@ -2517,7 +2517,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2019-02-20T06:26:57+00:00"
+            "time": "2019-03-01T02:12:13+00:00"
         },
         {
             "name": "true/punycode",
