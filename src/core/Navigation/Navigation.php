@@ -212,7 +212,7 @@ class Navigation
     }
 
     /**
-     * Undocumented function.
+     * Get structure of navigation.
      */
     public function getNavigation()
     {
@@ -222,7 +222,7 @@ class Navigation
     }
 
     /**
-     * Undocumented function.
+     * Get information of headers.
      */
     public function getHeaders()
     {
@@ -232,7 +232,7 @@ class Navigation
     }
 
     /**
-     * Undocumented function.
+     * Get information of navs.
      */
     public function getNavs()
     {
