@@ -145,7 +145,8 @@ elseif ('val' == $op)
 
     $params['account'] = $account;
 
-    savesetting('newestplayer', $account->getAacctid());
+    savesetting('newestplayer', $account->getAcctid());
+    savesetting('newestplayername', $account->getCharacter()->getName());
 
     $params = modulehook('page-create-val-tpl-params', $params);
     rawoutput(LotgdTheme::renderThemeTemplate('pages/create/email/val.twig', $params));
@@ -398,6 +399,7 @@ elseif ('create' == $op)
         }
 
         savesetting('newestplayer', $accountEntity->getAcctid());
+        savesetting('newestplayername', $characterEntity->getName());
 
         $params['login'] = $shortname;
         $params['password'] = $pass1;
