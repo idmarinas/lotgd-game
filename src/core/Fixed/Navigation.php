@@ -113,6 +113,14 @@ class Navigation
     }
 
     /**
+     * @see Lotgd\Core\Navigation\Navigation
+     */
+    public static function checkNavs()
+    {
+        return self::$instance->checkNavs();
+    }
+
+    /**
      * Set instance of Navigation
      *
      * @param CoreNavigation $container

@@ -267,6 +267,34 @@ class Navigation
             $this->addNav('common.superuser.newday', 'newday.php');
         }
     }
+
+    /**
+     * Determines if there are any navs for the player.
+     *
+     * @return bool
+     */
+    public function checkNavs(): bool
+    {
+        foreach($this->navs as $navs)
+        {
+            if (! is_array($navs) || ! count($navs))
+            {
+                continue;
+            }
+
+            foreach($navs as $nav)
+            {
+                //-- If have 1 allowed nav, return true
+                if (! $this->isBlocked($nav['link']))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Private function to add a nav in navigation menu.
      *
