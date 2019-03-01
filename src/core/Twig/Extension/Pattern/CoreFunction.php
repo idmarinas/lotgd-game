@@ -68,7 +68,7 @@ trait CoreFunction
      *
      * @return mixed
      */
-    public function modulehook($name, $data)
+    public function modulehook($name, $data = [])
     {
         return modulehook($name, $data);
     }
