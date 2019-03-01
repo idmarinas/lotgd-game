@@ -139,14 +139,14 @@ class Accounts
     /**
      * @var string
      *
-     * @ORM\Column(name="emailvalidation", type="string", unique=true, length=32, nullable=false)
+     * @ORM\Column(name="emailvalidation", type="string", length=32, nullable=true)
      */
     private $emailvalidation = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="forgottenpassword", type="string", unique=true, length=32, nullable=false)
+     * @ORM\Column(name="forgottenpassword", type="string", length=32, nullable=true)
      */
     private $forgottenpassword = '';
 
