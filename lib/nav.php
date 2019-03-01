@@ -174,25 +174,17 @@ function count_viable_navs($section)
 {
     global $navbysection;
 
-    $count = 0;
-    $val = $navbysection[$section];
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::checkNavs() to determine if have any navs for the player. No need to know the quantity available. This function only return 1 if have navs, and 0 if not have navs.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if (count($val) > 0)
+    if (\LotgdNavigation::checkNavs())
     {
-        foreach ($val as $nav)
-        {
-            if (is_array($nav) && count($nav) > 0)
-            {
-                $link = $nav[1]; // [0] is the text, [1] is the link
-                if (! is_blocked($link))
-                {
-                    $count++;
-                }
-            }
-        }
+        return 1;
     }
 
-    return $count;
+    return 0;
 }
 
 /**
@@ -206,29 +198,12 @@ function checknavs()
 {
     global $navbysection, $session;
 
-    // If we already have navs entered (because someone stuck raw links in)
-    if (is_array($session['user']['allowednavs']) && count($session['user']['allowednavs']) > 0)
-    {
-        return true;
-    }
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use LotgdNavigation::checkNavs().',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    // If we have any links which are going to be stuck in, return true
-    foreach ($navbysection as $key => $val)
-    {
-        if (count_viable_navs($key) > 0)
-        {
-            foreach ($val as $v)
-            {
-                if (is_array($v) && count($v) > 0)
-                {
-                    return true;
-                }
-            }
-        }
-    }
-
-    // We have no navs.
-    return false;
+    return \LotgdNavigation::checkNavs();
 }
 
 /**
