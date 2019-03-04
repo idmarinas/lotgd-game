@@ -14,8 +14,7 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Entity as LotgdEntity;
+use Tracy\Debugger;
 
 class PetitionsRepository extends EntityRepository
 {
@@ -37,7 +36,7 @@ class PetitionsRepository extends EntityRepository
                 ->getResult()
             ;
 
-            foreach($result as $row)
+            foreach ($result as $row)
             {
                 $petitions[(int) $row['status']] = (int) $row['c'];
             }
@@ -46,7 +45,7 @@ class PetitionsRepository extends EntityRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return $petitions;
         }

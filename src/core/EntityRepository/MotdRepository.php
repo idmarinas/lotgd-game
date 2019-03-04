@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Lotgd\Core\Doctrine\ORM\EntityRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 
 class MotdRepository extends EntityRepository

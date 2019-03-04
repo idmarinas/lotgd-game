@@ -14,8 +14,6 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Entity as LotgdEntity;
 
 class MailRepository extends EntityRepository
 {
