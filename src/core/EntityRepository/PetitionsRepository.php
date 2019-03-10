@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
-class PetitionsRepository extends EntityRepository
+class PetitionsRepository extends DoctrineRepository
 {
     /**
      * Get a list count of petitions.

@@ -13,12 +13,12 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
 use Zend\Hydrator\ClassMethods;
 
-class AccountsRepository extends EntityRepository
+class AccountsRepository extends DoctrineRepository
 {
     use Account\Login;
     use Account\Superuser;

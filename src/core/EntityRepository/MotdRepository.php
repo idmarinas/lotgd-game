@@ -14,10 +14,10 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Doctrine\ORM\EntityRepository;
+use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 
-class MotdRepository extends EntityRepository
+class MotdRepository extends DoctrineRepository
 {
     /**
      * Get last MOTD.

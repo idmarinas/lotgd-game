@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository as DoctrineRepository;
 
-class MailRepository extends EntityRepository
+class MailRepository extends DoctrineRepository
 {
     /**
      * Get a count of see and unsee mail.

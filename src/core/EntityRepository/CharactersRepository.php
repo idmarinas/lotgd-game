@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityRepository as DoctrineRepository;
 
-class CharactersRepository extends EntityRepository
+class CharactersRepository extends DoctrineRepository
 {
     /**
      * Get character's name from an account ID.
