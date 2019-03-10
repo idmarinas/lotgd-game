@@ -26,14 +26,14 @@ class EntityRepository extends DoctrineEntityRepository
      * Get a pagination for a result.
      *
      * @param QueryBuilder $query
-     * @param int|null     $page
-     * @param int|null     $perPage
+     * @param int          $page
+     * @param int          $perPage
      *
      * @return Paginator
      */
-    public function getPaginator(QueryBuilder $query, ?int $page = 1, int $perPage = 25): Paginator
+    public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25): Paginator
     {
-        $page = max(1, (int) $page);
+        $page = max(1, $page);
 
         $paginator = new Paginator(new DoctrineAdapter($query));
         //- Set current page
