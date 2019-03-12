@@ -98,10 +98,6 @@ if(is_array($results) && count($results))
     $params['hookHomeText'] = $results;
 }
 
-if ('timeout' == $op)
-{
-    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.timeout', [], 'app-default'));
-}
 if (! LotgdHttp::getCookie('lgi'))
 {
     LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'app-default'));

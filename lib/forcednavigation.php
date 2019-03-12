@@ -23,7 +23,7 @@ function do_forced_nav($anonymous, $overrideforced)
             $session = [];
             $session['message'] = \LotgdTranslator::t('session.login.incorrect', [], 'app-default');
 
-            return redirect('index.php', \LotgdTranslator::t('session.login.account.disappeared', [], 'app-default'));
+            return redirect('home.php', \LotgdTranslator::t('session.login.account.disappeared', [], 'app-default'));
         }
 
         $session['user'] = $account;
@@ -34,7 +34,9 @@ function do_forced_nav($anonymous, $overrideforced)
         {
             $session = [];
 
-            return redirect('index.php?op=timeout', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+
+            return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
         }
 
         if (($session['user']['allowednavs'][$requestUri] ?? false) && true !== $overrideforced)
@@ -48,6 +50,8 @@ function do_forced_nav($anonymous, $overrideforced)
     }
     elseif (! $anonymous)
     {
-        return redirect('index.php?op=timeout', \LotgdTranslator::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+
+        return redirect('home.php', \LotgdTranslator::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
     }
 }
