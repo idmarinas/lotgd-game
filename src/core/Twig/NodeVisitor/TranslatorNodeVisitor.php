@@ -21,8 +21,6 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
 
 /**
  * TranslateNodeVisitor extracts translation messages.
- *
- * @author Fabien Potencier <fabien@symfony.com>
  */
 class TranslatorNodeVisitor extends AbstractNodeVisitor
 {
@@ -66,10 +64,7 @@ class TranslatorNodeVisitor extends AbstractNodeVisitor
             return $node;
         }
 
-        if ($node instanceof FilterExpression &&
-            $node->getNode('node') instanceof ConstantExpression &&
-            't' === $node->getNode('filter')->getAttribute('value')
-        )
+        if ($node instanceof FilterExpression && $node->getNode('node') instanceof ConstantExpression && 't' === $node->getNode('filter')->getAttribute('value'))
         {
             // extract constant nodes with a trans filter
             $this->messages[] = [
