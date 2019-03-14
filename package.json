@@ -73,7 +73,7 @@
         "gulp-inline-css": "^3.3.1",
         "gulp-licenser": "^1.0.2",
         "gulp-plumber": "^1.2.1",
-        "gulp-print": "^5.0.0",
+        "gulp-print": "^5.0.2",
         "gulp-regex-rename": "^0.1.0",
         "gulp-remove-code": "^3.0.4",
         "gulp-rename": "^1.4.0",
