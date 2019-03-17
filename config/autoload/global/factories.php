@@ -19,6 +19,7 @@ return [
             Lotgd\Core\Navigation\AccessKeys::class => InvokableFactory::class,
             Lotgd\Core\Output\Color::class => InvokableFactory::class,
             Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class,
+            Lotgd\Core\Output\Commentary::class => Factory\Output\Commentary::class,
             Lotgd\Core\Output\Code::class => InvokableFactory::class,
             Lotgd\Core\Output\Format::class => Factory\Output\Format::class,
             Lotgd\Core\Template\Theme::class => Factory\Template\Theme::class,
