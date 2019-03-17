@@ -8,12 +8,13 @@
 
 namespace Lotgd\Core\Factory\Output;
 
-use Lotgd\Core\Output\Format as OutputFormat;
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Output\Format as OutputFormat;
 use Zend\ServiceManager\{
     FactoryInterface,
     ServiceLocatorInterface
 };
+use Tracy\Debugger;
 
 class Format implements FactoryInterface
 {
@@ -21,19 +22,31 @@ class Format implements FactoryInterface
     {
         $doctrine = $container->get(\Lotgd\Core\Db\Doctrine::class);
         $repository = $doctrine->getRepository(\Lotgd\Core\Entity\Settings::class);
-        $config = $repository->findBySetting(['moneydecimalpoint', 'moneythousandssep']);
-
         $format = new OutputFormat();
+
+        try
+        {
+            $config = $repository->findBySetting(['moneydecimalpoint', 'moneythousandssep']);
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            $format->setDecPoint('.');
+            $format->setThousandsSep(',');
+
+            return $format;
+        }
 
         if (! empty($config) && is_array($config))
         {
-            foreach($config as $setting)
+            foreach ($config as $setting)
             {
                 if ('moneydecimalpoint' == $setting->getSetting())
                 {
                     $format->setDecPoint($setting->getValue());
                 }
-                elseif('moneythousandssep' == $setting->getSetting())
+                elseif ('moneythousandssep' == $setting->getSetting())
                 {
                     $format->setThousandsSep($setting->getValue());
                 }
