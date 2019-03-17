@@ -54,7 +54,7 @@ if ($session['user']['loggedin'] && $session['loggedin'])
         }
         else
         {
-            addnav('Return to Shades', 'shades.php');
+            \LotgdNavigation::addNav('Return to Shades', 'shades.php');
             output('Your navs are corrupted, please return to the Shades.');
         }
         page_footer();
@@ -64,7 +64,7 @@ if ($session['user']['loggedin'] && $session['loggedin'])
 
     if ($session['user']['superuser'] & SU_MEGAUSER)
     {
-        addnav('', "user.php?op=special&userid={$session['user']['acctid']}");
+        \LotgdNavigation::addNavAllow("user.php?op=special&userid={$session['user']['acctid']}");
         echo '<br><br>';
         echo sprintf('<a href="%s">Fix your own broken navs</a>', "user.php?op=special&userid={$session['user']['acctid']}", true);
     }
