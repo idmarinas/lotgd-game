@@ -16,7 +16,6 @@ namespace Lotgd\Core\Twig\Extension\Pattern;
 /**
  * Trait to created ye olde mail link.
  */
-
 trait Mail
 {
     /**
@@ -28,8 +27,18 @@ trait Mail
     {
         global $session;
 
-        $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
-        $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
+        try
+        {
+            $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
+            $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
+        }
+        catch (\Throwable $th)
+        {
+            $result = [
+                'seenCount' => 0,
+                'notSeenCount' => 0
+            ];
+        }
 
         return \LotgdTheme::renderThemeTemplate('parts/mail.twig', $result);
     }
