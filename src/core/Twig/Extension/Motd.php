@@ -13,12 +13,11 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Interop\Container\ContainerInterface;
 use Lotgd\Core\EntityRepository\MotdRepository;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
 use Lotgd\Core\Pattern\Container;
 use Lotgd\Core\Pattern\Repository;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class Motd extends AbstractExtension
 {
@@ -44,9 +43,8 @@ class Motd extends AbstractExtension
         ];
     }
 
-
     /**
-     * Get repository of MotdRepository
+     * Get repository of MotdRepository.
      *
      * @return MotdRepository
      */
