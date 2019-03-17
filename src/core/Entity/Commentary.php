@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
+use Lotgd\Core\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,86 +22,162 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="commentary",
  *     indexes={
  *         @ORM\Index(name="section", columns={"section"}),
- *         @ORM\Index(name="postdate", columns={"postdate"})
+ *         @ORM\Index(name="postdate", columns={"postdate"}),
+ *         @ORM\Index(name="hidden", columns={"hidden"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CommentaryRepository")
  */
-class Commentary
+class Commentary implements EntityInterface
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="commentid", type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $commentid;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="section", type="string", length=20, nullable=false)
+     * @ORM\Column(type="string", length=20, nullable=false)
      */
     private $section;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=1000, nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250, nullable=false)
+     */
+    private $schema;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     */
+    private $postdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="array", nullable=false)
+     */
+    private $extra;
+
+    /**
      * @var int
      *
-     * @ORM\Column(name="author", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $author = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=600, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
-    private $comment;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="postdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
-     */
-    private $postdate = '0000-00-00 00:00:00';
+    private $authorName = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="info", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=25, nullable=false)
      */
-    private $info;
+    private $talkLine;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     */
+    private $clanId = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     */
+    private $clanRank = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $name;
+    private $clanName = '';
 
     /**
-     * Set the value of Commentid.
+     * @var string
      *
-     * @param int commentid
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $clanNameShort = '';
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=false, options={"default": 0})
+     */
+    private $hidden = 0;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=500, nullable=false)
+     */
+    private $hiddenComment = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     */
+    private $hiddenBy = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    private $hiddenByName = '';
+
+    public function __construct()
+    {
+        $this->postdate = new \DateTime('now');
+    }
+
+    /**
+     * Set the value of id.
+     *
+     * @param int id
      *
      * @return self
      */
-    public function setCommentid($commentid)
+    public function setId($id)
     {
-        $this->commentid = $commentid;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get the value of Commentid.
+     * Get the value of id.
      *
      * @return int
      */
-    public function getCommentid(): int
+    public function getId(): int
     {
-        return $this->commentid;
+        return $this->id;
     }
 
     /**
@@ -200,50 +277,290 @@ class Commentary
     }
 
     /**
-     * Set the value of Info.
+     * Set the value of Extra.
      *
-     * @param string info
+     * @param string extra
      *
      * @return self
      */
-    public function setInfo($info)
+    public function setExtra($extra)
     {
-        $this->info = $info;
+        $this->extra = $extra;
 
         return $this;
     }
 
     /**
-     * Get the value of Info.
+     * Get the value of Extra.
      *
      * @return string
      */
-    public function getInfo(): string
+    public function getExtra(): string
     {
-        return $this->info;
+        return $this->extra;
     }
 
     /**
-     * Set the value of Name.
+     * Set the value of AuthorName.
      *
-     * @param string name
+     * @param string authorName
      *
      * @return self
      */
-    public function setName($name)
+    public function setAuthorName($authorName)
     {
-        $this->name = $name;
+        $this->authorName = $authorName;
 
         return $this;
     }
 
     /**
-     * Get the value of Name.
+     * Get the value of AuthorName.
      *
      * @return string
      */
-    public function getName(): string
+    public function getAuthorName(): string
     {
-        return $this->name;
+        return $this->authorName;
+    }
+
+    /**
+     * Get the value of hidden.
+     *
+     * @return bool
+     */
+    public function getHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * Set the value of hidden.
+     *
+     * @param bool $hidden
+     *
+     * @return self
+     */
+    public function setHidden(bool $hidden)
+    {
+        $this->hidden = $hidden;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hiddenComment.
+     *
+     * @return string
+     */
+    public function getHiddenComment()
+    {
+        return $this->hiddenComment;
+    }
+
+    /**
+     * Set the value of hiddenComment.
+     *
+     * @param string $hiddenComment
+     *
+     * @return self
+     */
+    public function setHiddenComment(string $hiddenComment)
+    {
+        $this->hiddenComment = $hiddenComment;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hiddenBy.
+     *
+     * @return string
+     */
+    public function getHiddenBy()
+    {
+        return $this->hiddenBy;
+    }
+
+    /**
+     * Set the value of hiddenBy.
+     *
+     * @param string $hiddenBy
+     *
+     * @return self
+     */
+    public function setHiddenBy(string $hiddenBy)
+    {
+        $this->hiddenBy = $hiddenBy;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hiddenByName.
+     *
+     * @return string
+     */
+    public function getHiddenByName()
+    {
+        return $this->hiddenByName;
+    }
+
+    /**
+     * Set the value of hiddenByName.
+     *
+     * @param string $hiddenByName
+     *
+     * @return self
+     */
+    public function setHiddenByName(string $hiddenByName)
+    {
+        $this->hiddenByName = $hiddenByName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of talkLine.
+     *
+     * @return string
+     */
+    public function getTalkLine()
+    {
+        return $this->talkLine;
+    }
+
+    /**
+     * Set the value of talkLine.
+     *
+     * @param string $talkLine
+     *
+     * @return self
+     */
+    public function setTalkLine(string $talkLine)
+    {
+        $this->talkLine = $talkLine;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of clanId.
+     *
+     * @return int
+     */
+    public function getClanId()
+    {
+        return $this->clanId;
+    }
+
+    /**
+     * Set the value of clanId.
+     *
+     * @param int $clanId
+     *
+     * @return self
+     */
+    public function setClanId(int $clanId)
+    {
+        $this->clanId = $clanId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of clanRank.
+     *
+     * @return int
+     */
+    public function getClanRank()
+    {
+        return $this->clanRank;
+    }
+
+    /**
+     * Set the value of clanRank.
+     *
+     * @param int $clanRank
+     *
+     * @return self
+     */
+    public function setClanRank(int $clanRank)
+    {
+        $this->clanRank = $clanRank;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of clanName.
+     *
+     * @return string
+     */
+    public function getClanName()
+    {
+        return $this->clanName;
+    }
+
+    /**
+     * Set the value of clanName.
+     *
+     * @param string $clanName
+     *
+     * @return self
+     */
+    public function setClanName(string $clanName)
+    {
+        $this->clanName = $clanName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of clanNameShort.
+     *
+     * @return string
+     */
+    public function getClanNameShort()
+    {
+        return $this->clanNameShort;
+    }
+
+    /**
+     * Set the value of clanNameShort.
+     *
+     * @param string $clanNameShort
+     *
+     * @return self
+     */
+    public function setClanNameShort(string $clanNameShort)
+    {
+        $this->clanNameShort = $clanNameShort;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of schema
+     *
+     * @return  string
+     */
+    public function getSchema()
+    {
+        return $this->schema;
+    }
+
+    /**
+     * Set the value of schema
+     *
+     * @param  string  $schema
+     *
+     * @return  self
+     */
+    public function setSchema(string $schema)
+    {
+        $this->schema = $schema;
+
+        return $this;
     }
 }
