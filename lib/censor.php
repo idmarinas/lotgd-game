@@ -101,8 +101,7 @@ function soap($input, $debug = false, $skiphook = false)
             $y++;
         }
 
-        if ($session['user']['superuser'] & SU_EDIT_COMMENTS &&
-                $changed_content)
+        if ($session['user']['superuser'] & SU_EDIT_COMMENTS && $changed_content)
         {
             output("`0The filter would have tripped on \"`#%s`0\" but since you're a moderator, I'm going to be lenient on you.  The text would have read, \"`#%s`0\"`n`n", $input, $final_output);
 
