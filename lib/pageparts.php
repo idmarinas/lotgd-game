@@ -64,7 +64,7 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
         {
             modulehook('everyheader', ['script' => $script]);
 
-            if ($session['user']['loggedin'])
+            if ($session['user']['loggedin'] ?? false)
             {
                 modulehook('everyheader-loggedin', ['script' => $script]);
             }
