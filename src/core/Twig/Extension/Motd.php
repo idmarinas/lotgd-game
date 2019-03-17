@@ -13,12 +13,19 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Interop\Container\ContainerInterface;
 use Lotgd\Core\EntityRepository\MotdRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\Pattern\Repository;
 
 class Motd extends AbstractExtension
 {
+    use Container;
+    use Repository;
+    use Pattern\Motd;
+
     /**
      * Instance of MotdRepository.
      *
@@ -27,49 +34,30 @@ class Motd extends AbstractExtension
     protected $repository;
 
     /**
-     * @param MotdRepository $repository
-     */
-    public function __construct(MotdRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
             new TwigFunction('motd_show_item', [$this, 'display']),
+            new TwigFunction('message_of_the_day', [$this, 'messageOfTheDay']),
         ];
     }
 
+
     /**
-     * Display MoTD item or poll.
+     * Get repository of MotdRepository
      *
-     * @param array $motd
-     * @param array $params Extra params
-     *
-     * @return string
+     * @return MotdRepository
      */
-    public function display(array $motd, array $params = []): string
+    public function getMotdRepository()
     {
-        global $session;
-
-        //-- Merge data
-        $sub = $motd[0];
-        unset($motd[0]);
-        $motd = array_merge($sub, $motd);
-        $params = array_merge(['motd' => $motd], $params);
-
-        if ($motd['motdtype'])
+        if (! $this->repository instanceof MotdRepository)
         {
-            $params['motd'] = $this->repository->appendPollResults($motd, $session['user']['acctid'] ?? null);
-
-            return \LotgdTheme::renderThemeTemplate('pages/motd/parts/poll.twig', $params);
+            $this->repository = $this->getDoctrineRepository(\Lotgd\Core\Entity\Motd::class);
         }
 
-        return \LotgdTheme::renderThemeTemplate('pages/motd/parts/item.twig', $params);
+        return $this->repository;
     }
 
     /**
