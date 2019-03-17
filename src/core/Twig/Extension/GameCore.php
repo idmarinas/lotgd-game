@@ -22,7 +22,6 @@ class GameCore extends AbstractExtension
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\Mail;
-    use Pattern\Motd;
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
@@ -62,7 +61,6 @@ class GameCore extends AbstractExtension
             new TwigFunction('game_source', [$this, 'gameSource']),
             new TwigFunction('game_page_gen', [$this, 'gamePageGen']),
 
-            new TwigFunction('message_of_the_day', [$this, 'messageOfTheDay']),
             new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail']),
             new TwigFunction('user_petition', [$this, 'userPetition']),
             new TwigFunction('admin_petition', [$this, 'adminPetition']),
