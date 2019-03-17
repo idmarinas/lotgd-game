@@ -58,7 +58,7 @@ class Doctrine implements FactoryInterface
             'user' => $adapter['username'] ?? '',
             'password' => $adapter['password'] ?? '',
             'dbname' => $adapter['database'] ?? '',
-            'charset' => $adapter['charset'] ?? ''
+            'charset' => $adapter['charset'] ?? 'utf8'
         ];
 
         $config = new DoctrineConfiguration();
