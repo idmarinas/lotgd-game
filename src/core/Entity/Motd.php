@@ -69,7 +69,7 @@ class Motd
 
     public function __construct()
     {
-        $this->motddate = new \DateTime('0000-00-00 00:00:00');
+        $this->motddate = new \DateTime('now');
     }
 
     /**
