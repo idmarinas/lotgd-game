@@ -94,11 +94,13 @@ class Navigation extends AbstractExtension
         }
         $attributes = $this->createAttributesString($attributes);
 
-        return \sprintf('<%1$s %2$s>%3$s</%1$s>',
+        return \appoencode(sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
             (! $blocked ? 'a' : 'span'),
             $attributes,
-            appoencode($label, true)
-        );
+            $label,
+            $options['current']['open'] ?? '', //-- Open style to nav if is current
+            $options['current']['close'] ?? '' //-- Close style to nav if is current
+        ), true);
     }
 
     /**
