@@ -33,7 +33,7 @@ class Application
     const VERSION_NUMBER = 40000;
 
     /**
-     * File where the connection data to the DB is stored.
+     * The file where the database connection data is stored.
      *
      * @var string
      */
