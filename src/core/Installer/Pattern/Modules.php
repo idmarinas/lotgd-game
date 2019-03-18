@@ -12,6 +12,67 @@ trait Modules
 {
     protected $skipModules = false;
     protected $modules = [];
+    protected $recommendedModules = [
+        'abigail',
+        'breakin',
+        'calendar',
+        'cedrikspotions',
+        'collapse',
+        'crazyaudrey',
+        'crying',
+        'dag',
+        'darkhorse',
+        'distress',
+        'dragonattack',
+        'drinks',
+        'drunkard',
+        'expbar',
+        'fairy',
+        'findgem',
+        'findgold',
+        'foilwench',
+        'forestturn',
+        'game_dice',
+        'game_stones',
+        'gardenparty',
+        'ghosttown',
+        'glowingstream',
+        'goldmine',
+        'grassyfield',
+        'haberdasher',
+        'healthbar',
+        'innchat',
+        'kitchen',
+        'klutz',
+        'lottery',
+        'lovers',
+        'newbieisland',
+        'oldman',
+        'outhouse',
+        'peerpressure',
+        'petra',
+        'racedwarf',
+        'raceelf',
+        'racehuman',
+        'racetroll',
+        'riddles',
+        'salesman',
+        'sethsong',
+        'smith',
+        'soulgem',
+        'spa',
+        'specialtydarkarts',
+        'specialtymysticpower',
+        'specialtythiefskills',
+        'statue',
+        'stocks',
+        'stonehenge',
+        'strategyhut',
+        'thieves',
+        'tutor',
+        'tynan',
+        'waterfall',
+    ];
 
     /**
      * No install modules
@@ -69,5 +130,15 @@ trait Modules
     public function getModules(): array
     {
         return $this->modules;
+    }
+
+    /**
+     * Get all recommended modules.
+     *
+     * @return array
+     */
+    public function getRecommendedModules(): array
+    {
+        return $this->recommendedModules;
     }
 }
