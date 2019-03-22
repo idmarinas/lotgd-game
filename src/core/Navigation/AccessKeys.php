@@ -45,7 +45,7 @@ class AccessKeys
     public function create(string $label, array &$attributes): string
     {
         $label = $this->filter($label);
-        $key = $this->checkAccessKey($label) ?: '';
+        $key = $this->checkAccessKey($label);
 
         $this->accesskeys[strtolower($key)] = true;
 
@@ -67,7 +67,7 @@ class AccessKeys
             }
         }
 
-        return $label ?? '';
+        return $label;
     }
 
     /**
