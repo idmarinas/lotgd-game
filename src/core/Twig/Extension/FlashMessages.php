@@ -62,7 +62,7 @@ class FlashMessages extends AbstractExtension
             }
         }
 
-        $this->flashMessages->clearMessagesFromContainer(true);
+        $this->flashMessages->clearMessagesFromContainer();
 
         return $output;
     }
