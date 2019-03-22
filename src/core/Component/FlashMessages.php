@@ -48,6 +48,17 @@ class FlashMessages
     const TYPE_INFO = 'info';
 
     /**
+     * Array of all types of messages.
+     */
+    const TYPES = [
+        self::TYPE_DEFAULT,
+        self::TYPE_SUCCESS,
+        self::TYPE_WARNING,
+        self::TYPE_ERROR,
+        self::TYPE_INFO
+    ];
+
+    /**
      * Whether a message has been added during this request.
      *
      * @var bool
@@ -62,7 +73,7 @@ class FlashMessages
     /**
      * @var Container
      */
-    protected $container;
+    protected $sessionContainer;
 
     /**
      * Messages of request.
@@ -107,14 +118,14 @@ class FlashMessages
      */
     public function getContainer()
     {
-        if ($this->container instanceof Container)
+        if ($this->sessionContainer instanceof Container)
         {
-            return $this->container;
+            return $this->sessionContainer;
         }
 
-        $this->container = new Container('FlashMessages', $this->getSessionManager());
+        $this->sessionContainer = new Container('FlashMessages', $this->getSessionManager());
 
-        return $this->container;
+        return $this->sessionContainer;
     }
 
     /**
@@ -205,15 +216,47 @@ class FlashMessages
     }
 
     /**
-     * Get all messages.
+     * Get all current messages.
+     *
+     * @param string|null $type
      *
      * @return array
      */
-    public function getMessages(): array
+    public function getMessages($type = null): array
+    {
+        $container = $this->getContainer();
+
+        if ($type && $this->hasMessages($type))
+        {
+            return $this->messages[$type]->toArray();
+        }
+
+        $alerts = [];
+
+        foreach (self::TYPES as $type)
+        {
+            if (isset($container->{$type}))
+            {
+                $alerts[$type] = $container->{$type}->toArray();
+                unset($container->{$type});
+            }
+        }
+
+        return $alerts;
+    }
+
+    /**
+     * Whether a specific namespace has messages.
+     *
+     * @param string $type
+     *
+     * @return bool
+     */
+    public function hasMessages($type)
     {
         $this->getMessagesFromContainer();
 
-        return $this->messages;
+        return isset($this->messages[$type]);
     }
 
     /**
@@ -251,6 +294,7 @@ class FlashMessages
         $container = $this->getContainer();
 
         $namespaces = [];
+
         foreach ($container as $type => $messages)
         {
             $this->messages[$type] = $messages;
