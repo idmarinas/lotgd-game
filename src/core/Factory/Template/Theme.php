@@ -33,6 +33,7 @@ class Theme implements FactoryInterface
         $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'data/cache/', '/');
 
         $template = new TemplateTheme([], [
+            'debug' => (bool) ($options['development'] ?? false),
             //-- Used dir of cache
             'cache' => "{$cacheDir}/templates",
             //-- Used in development for reload .twig templates
