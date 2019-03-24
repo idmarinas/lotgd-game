@@ -43,6 +43,21 @@ function module_check_requirements($reqs, $forceinject = false)
     {
         $info = explode('|', $val);
 
+        //-- It's need a specific version of LoTGD
+        if ('lotgd' == $key)
+        {
+            $version = explode(' ', \Lotgd\Core\Application::VERSION);
+
+            $comparison = Composer\Semver\Semver::satisfies($version[0], $info[0]);
+
+            if (! $comparison)
+            {
+                return false;
+            }
+
+            continue;
+        }
+
         if (! is_module_installed($key, $info[0]))
         {
             return false;
@@ -178,75 +193,57 @@ function get_module_info($shortname)
     // Save off the mostrecent module.
     $mod = $mostrecentmodule;
 
-    if (injectmodule($shortname, true))
+    // This module couldn't be injected at all.
+    if (! injectmodule($shortname, true))
     {
-        $fname = "{$shortname}_getmoduleinfo";
-
-        if (function_exists($fname))
-        {
-            tlschema("module-$shortname");
-            $moduleinfo = $fname();
-            tlschema();
-            // Don't pick up this text unless we need it.
-            if (! isset($moduleinfo['name']) || ! isset($moduleinfo['category']) || ! isset($moduleinfo['author']) || ! isset($moduleinfo['version']))
-            {
-                $ns = translate_inline('Not specified', 'common');
-            }
-
-            if (! isset($moduleinfo['name']))
-            {
-                $moduleinfo['name'] = "$ns ($shortname)";
-            }
-
-            if (! isset($moduleinfo['category']))
-            {
-                $moduleinfo['category'] = "$ns ($shortname)";
-            }
-
-            if (! isset($moduleinfo['author']))
-            {
-                $moduleinfo['author'] = "$ns ($shortname)";
-            }
-
-            if (! isset($moduleinfo['version']))
-            {
-                $moduleinfo['version'] = '0.0';
-            }
-
-            if (! isset($moduleinfo['download']))
-            {
-                $moduleinfo['download'] = '';
-            }
-
-            if (! isset($moduleinfo['description']))
-            {
-                $moduleinfo['description'] = '';
-            }
-        }
-
-        if (! is_array($moduleinfo) || count($moduleinfo) < 2)
-        {
-            $mf = translate_inline('Missing function', 'common');
-            $moduleinfo = [
-                'name' => "$mf ({$shortname}_getmoduleinfo)",
-                'version' => '0.0',
-                'author' => "$mf ({$shortname}_getmoduleinfo)",
-                'category' => "$mf ({$shortname}_getmoduleinfo)",
-                'download' => '',
-            ];
-        }
-    }
-    else
-    {
-        // This module couldn't be injected at all.
         return [];
     }
+
+    $missingFunctions = [];
+
+    if (! function_exists("{$shortname}_getmoduleinfo"))
+    {
+        $missingFunctions[] = "{$shortname}_getmoduleinfo";
+    }
+
+    if (! function_exists("{$shortname}_install"))
+    {
+        $missingFunctions[] = "{$shortname}_install";
+    }
+
+    if (! function_exists("{$shortname}_uninstall"))
+    {
+        $missingFunctions[] = "{$shortname}_uninstall";
+    }
+
     $mostrecentmodule = $mod;
 
-    if (! isset($moduleinfo['requires']))
+    if (count($missingFunctions))
     {
-        $moduleinfo['requires'] = [];
+        return [
+            'name' => appoencode('`$Invalid Module! Contact Author or check file!`0'),
+            'version' => '0.0.0',
+            'author' => 'Missing functions ('.implode(', ', $missingFunctions).')',
+            'category' => 'Invalid Modules',
+            'download' => '',
+            'requires' => [],
+            'invalid' => true
+        ];
     }
+
+    $fname = "{$shortname}_getmoduleinfo";
+    tlschema("module-$shortname");
+    $moduleinfo = $fname();
+    tlschema();
+
+    $moduleinfo['name'] = $moduleinfo['name'] ?? "Not specified ($shortname)";
+    $moduleinfo['category'] = $moduleinfo['category'] ?? "Not specified ($shortname)";
+    $moduleinfo['author'] = $moduleinfo['author'] ?? "Not specified ($shortname)";
+    $moduleinfo['version'] = $moduleinfo['version'] ?? '0.0.0';
+    $moduleinfo['download'] = $moduleinfo['download'] ?? '';
+    $moduleinfo['description'] = $moduleinfo['description'] ?? '';
+
+    $moduleinfo['requires'] = $moduleinfo['requires'] ?? [];
 
     return $moduleinfo;
 }
@@ -291,7 +288,7 @@ function module_editor_navs($like, $linkprefix)
         if ($curcat != $row['category'])
         {
             $curcat = $row['category'];
-            addnav(['%s Modules', $curcat]);
+            addnav($curcat.'%s Modules');
         }
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
