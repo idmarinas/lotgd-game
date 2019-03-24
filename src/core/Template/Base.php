@@ -8,12 +8,11 @@
 
 namespace Lotgd\Core\Template;
 
-use Twig_Environment;
+use Twig\Environment;
 use Twig_Filter;
-use Twig_Function;
-use Twig_Loader_Filesystem;
+use Twig\Loader\FilesystemLoader;
 
-class Base extends Twig_Environment
+class Base extends Environment
 {
     use \Lotgd\Core\Pattern\Container;
 
@@ -26,7 +25,7 @@ class Base extends Twig_Environment
         ];
         $options = array_merge($default, $options);
 
-        $loader = new Twig_Loader_Filesystem($loader);
+        $loader = new FilesystemLoader($loader);
 
         parent::__construct($loader, $options);
 
