@@ -83,15 +83,15 @@ trait Version
     }
 
     /**
-     * Get the previous version that you intend to install.
+     * Get the previous version of the given version.
      *
      * @return int
      */
-    public function getPreviusVersion(): int
+    public function getPreviusVersion(int $version): int
     {
         $vers = array_values($this->versions);
 
-        $actual = array_search(\Lotgd\Core\Application::VERSION_NUMBER, $vers);
+        $actual = array_search($version, $vers);
 
         if (false === $actual)
         {
@@ -100,6 +100,31 @@ trait Version
         elseif (isset($vers[$actual - 1]))
         {
             return $vers[$actual - 1];
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get the next version of the given version.
+     *
+     * @param int $version
+     *
+     * @return int
+     */
+    public function getNextVersion(int $version): int
+    {
+        $vers = array_values($this->versions);
+
+        $actual = array_search($version, $vers);
+
+        if (false === $actual)
+        {
+            return 0;
+        }
+        elseif (isset($vers[$actual + 1]))
+        {
+            return $vers[$actual + 1];
         }
 
         return 0;
