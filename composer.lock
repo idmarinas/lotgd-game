@@ -2567,16 +2567,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "52b9a5bd41c8c53a1d784f90ca25e33bf558a6b3"
+                "reference": "ed9c49220e09bfaeb1ba4d48077c08a7b09908dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/52b9a5bd41c8c53a1d784f90ca25e33bf558a6b3",
-                "reference": "52b9a5bd41c8c53a1d784f90ca25e33bf558a6b3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ed9c49220e09bfaeb1ba4d48077c08a7b09908dd",
+                "reference": "ed9c49220e09bfaeb1ba4d48077c08a7b09908dd",
                 "shasum": ""
             },
             "require": {
@@ -2630,7 +2630,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-03-21T14:53:02+00:00"
+            "time": "2019-03-23T14:28:58+00:00"
         },
         {
             "name": "zendframework/zend-cache",
