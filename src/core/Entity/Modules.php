@@ -60,7 +60,7 @@ class Modules
      *
      * @ORM\Column(name="active", type="boolean", nullable=false, options={"default": "0"})
      */
-    private $active = '0';
+    private $active = false;
 
     /**
      * @var string
