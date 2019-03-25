@@ -25,14 +25,7 @@ trait CanInstall
         //-- Can't install it: is the same version
         if (\Lotgd\Core\Application::VERSION_NUMBER == $version)
         {
-            $this->cantInstallMessage = "`4You cannot install, you try to install the same version that is already installed.´4";
-
-            return false;
-        }
-        //-- Can only be installed from the previous version
-        elseif ($this->getPreviusVersion() != $version)
-        {
-            $this->cantInstallMessage = ['`4Can only be installed from the previous version: %s´4', $this->getNameVersion($this->getPreviusVersion())];
+            $this->cantInstallMessage = \LotgdTranslator::t('canInstall.sameVersion', [], 'app-installer');
 
             return false;
         }
