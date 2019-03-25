@@ -1,63 +1,46 @@
 <?php
 
-if (httppost('type') > '')
+$type = (string) \LotgdHttp::getPost('type');
+
+if ($type > '')
 {
-    $session['installer']['fromversion'] = httppost('version');
-    $session['dbinfo']['upgrade'] = true;
-    if ('install' == httppost('type'))
+    $session['installer']['fromversion'] = \LotgdHttp::getPost('version');
+    if ('install' == $type)
     {
         $session['installer']['fromversion'] = '-1';
-        $session['dbinfo']['upgrade'] = false;
+        $session['installer']['dbinfo']['upgrade'] = false;
     }
 }
 
 if (! isset($session['installer']['fromversion']) || '' == $session['installer']['fromversion'])
 {
-    output('`@`c`bConfirmation´b´c');
-    output('`2Please confirm the following:`0`n');
-    rawoutput("<form class='ui form' action='installer.php?stage=7' method='POST'>");
-    rawoutput("<table class='ui very basic table'><tr><td>");
-    output('`2I should:`0');
-    rawoutput('</td><td>');
-
+    clearsettings();//-- To avoid possible problems with the cache
     $version = (string) getsetting('installer_version', '-1');
-
-    $session['dbinfo']['upgrade'] = false;
-    if ('-1' != $version)
-    {
-        $session['dbinfo']['upgrade'] = true;
-    }
-    rawoutput("<input type='radio' value='upgrade' name='type' ".($session['dbinfo']['upgrade'] ? 'checked' : '').'>');
-    output(' `2Perform an upgrade from ');
-
-    $version = ('-1' == $version) ? '0.9' : $version;
-
     $installer = new \Lotgd\Core\Installer\Install();
     $lotgd_versions = $installer->getAllVersions();
 
-    $version = $installer->getIntVersion($version);
-    unset($installer, $lotgd_versions[-1]);
-
-    rawoutput("<select name='version' class='ui search dropdown'>");
-
-    foreach ($lotgd_versions as $name => $key)
+    $session['installer']['dbinfo']['upgrade'] = false;
+    if ('-1' != $version)
     {
-        rawoutput("<option value='$key'".($version == $key ? ' selected' : '').">$name</option>");
+        $session['installer']['dbinfo']['upgrade'] = true;
     }
-    rawoutput('</select>');
-    rawoutput("<br><input type='radio' value='install' name='type' ".($session['dbinfo']['upgrade'] ? '' : 'checked').'>');
-    output(' `2Perform a clean install.');
-    rawoutput('</td></tr></table>');
-    $submit = translate_inline('Submit');
-    rawoutput("<input type='submit' value='$submit' class='ui button'>");
-    rawoutput('</form>');
+
+    $version = ('-1' == $version) ? '0.9' : $version;
+    $version = $installer->getIntVersion($version);
 
     $session['installer']['stagecompleted'] = $stage - 1;
+
+    $params = [
+        'upgrade' => $session['installer']['dbinfo']['upgrade'],
+        'lotgdVersions' => $lotgd_versions,
+        'actualVersion' => $version
+    ];
+
+    rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-7.twig', $params));
 }
 else
 {
     $session['installer']['stagecompleted'] = $stage;
-    header('Location: installer.php?stage='.($stage + 1));
 
-    exit();
+    return redirect('installer.php?stage='.($stage + 1));
 }
