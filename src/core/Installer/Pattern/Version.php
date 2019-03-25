@@ -74,12 +74,7 @@ trait Version
      */
     public function getIntVersion(string $version): int
     {
-        if (isset($this->versions[$version]))
-        {
-            return $this->versions[$version];
-        }
-
-        return 0;
+        return $this->versions[$version] ?? 0;
     }
 
     /**
