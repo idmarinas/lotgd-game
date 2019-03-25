@@ -1,44 +1,24 @@
 <?php
 
-//translator ready
-//addnews ready
-//mail ready
+require_once '../lib/installer/installer_functions.php';
 
 /**
  * Checking basic prerequisites for LOTGD.
  */
 
-//php 7.0 or better is required for this version
 $requirements_met = true;
 $php_met = true;
 $memory_met = true;
 $execution_met = true;
 
-$memoryLimit = @ini_get('memory_limit');
-preg_match("#^(\d+)(\w+)$#", strtolower($memoryLimit), $match);
-
-$memoryLimit = intval($memoryLimit);
-
-if ('g' == $match[2])
-{
-    $memoryLimit = intval($memoryLimit) * 1024 * 1024 * 1024;
-}
-elseif ('m' == $match[2])
-{
-    $memoryLimit = intval($memoryLimit) * 1024 * 1024;
-}
-elseif ('k' == $match[2])
-{
-    $memoryLimit = intval($memoryLimit) * 1024;
-}
-
-if ($memoryLimit < 128 * 1024 * 1024)
+//-- Need 128M
+if (return_bytes(ini_get('memory_limit')) < 128 * 1024 * 1024)
 {
     $requirements_met = false;
     $memory_met = false;
 }
 
-$executionTime = @ini_get('max_execution_time');
+$executionTime = ini_get('max_execution_time');
 //-- For avoid error when execute xDebug or similar
 if ($executionTime < 30 && 0 != $executionTime)
 {
@@ -46,7 +26,8 @@ if ($executionTime < 30 && 0 != $executionTime)
     $execution_met = false;
 }
 
-if (version_compare(PHP_VERSION, '7.0.0') < 0)
+//-- PHP 7.1 or better is required for this version
+if (version_compare(PHP_VERSION, '7.1.0', '<'))
 {
     $requirements_met = false;
     $php_met = false;
@@ -92,6 +73,16 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 
 require_once 'common.php';
 
+//-- Initialice install session data
+$session['installer'] = $session['installer'] ?? [];
+$session['installer']['dbinfo'] = $session['installer']['dbinfo'] ?? [
+    'DB_HOST' => '',
+    'DB_USER' => '',
+    'DB_PASS' => '',
+    'DB_NAME' => '',
+    'DB_PREFIX' => ''
+];
+
 $noinstallnavs = false;
 
 invalidatedatacache('gamesettings');
@@ -99,110 +90,37 @@ invalidatedatacache('gamesettings');
 tlschema('installer');
 
 $stages = [
-    '1. Introduction',
-    '2. License Agreement',
-    '3. I Agree',
-    '4. Database Info',
-    '5. Test Database',
-    '6. Examine Database',
-    '7. Write dbconnect file',
-    '8. Install Type',
-    '9. Set Up Modules',
-    '10. Build Tables',
-    '11. Admin Accounts',
-    '12. Done!',
+    'stages.0',
+    'stages.1',
+    'stages.2',
+    'stages.3',
+    'stages.4',
+    'stages.5',
+    'stages.6',
+    'stages.7',
+    'stages.8',
+    'stages.9',
+    'stages.10',
+    'stages.11',
 ];
 
-$recommended_modules = [
-    'abigail',
-    'breakin',
-    'calendar',
-    'cedrikspotions',
-    'collapse',
-    'crazyaudrey',
-    'crying',
-    'dag',
-    'darkhorse',
-    'distress',
-    'dragonattack',
-    'drinks',
-    'drunkard',
-    'expbar',
-    'fairy',
-    'findgem',
-    'findgold',
-    'foilwench',
-    'forestturn',
-    'game_dice',
-    'game_stones',
-    'gardenparty',
-    'ghosttown',
-    'glowingstream',
-    'goldmine',
-    'grassyfield',
-    'haberdasher',
-    'healthbar',
-    'innchat',
-    'kitchen',
-    'klutz',
-    'lottery',
-    'lovers',
-    'newbieisland',
-    'oldman',
-    'outhouse',
-    'peerpressure',
-    'petra',
-    'racedwarf',
-    'raceelf',
-    'racehuman',
-    'racetroll',
-    'riddles',
-    'salesman',
-    'sethsong',
-    'smith',
-    'soulgem',
-    'spa',
-    'specialtydarkarts',
-    'specialtymysticpower',
-    'specialtythiefskills',
-    'statue',
-    'stocks',
-    'stonehenge',
-    'strategyhut',
-    'thieves',
-    'tutor',
-    'tynan',
-    'waterfall',
-];
-
-$stage = (int) httpget('stage');
+$stage = (int) \LotgdHttp::getQuery('stage', 0);
 $session['installer']['stagecompleted'] = $session['installer']['stagecompleted'] ?? -1;
-$stage = min($session['installer']['stagecompleted'] + 1, $stage);
+$stage = min($session['installer']['stagecompleted'] + 1, $stage, 11);
+$session['installer']['stagecompleted'] = max($stage, $session['installer']['stagecompleted']);
 
-if (! isset($session['dbinfo']))
-{
-    $session['dbinfo'] = [
-        'DB_HOST' => '',
-        'DB_USER' => '',
-        'DB_PASS' => '',
-        'DB_NAME' => '',
-        'DB_PREFIX' => ''
-    ];
-}
+page_header('title', [
+    'stage' => \LotgdTranslator::t("stages.{$stage}", [], 'navigation-installer')
+], 'page-installer');
 
 if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))
 {
-    output('`%This stage was completed during a previous installation.');
-    output('`2If you wish to perform stages 4 through 6 again, please delete the file named "%s" from your site.`n`n', \Lotgd\Core\Application::FILE_DB_CONNECT);
-    $stage = 6;
-}
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage8.fileDbConnect.exists', [], 'page-installer'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.fileDbConnect.info', ['file' => \Lotgd\Core\Application::FILE_DB_CONNECT], 'page-installer'));
 
-if ($stage > $session['installer']['stagecompleted'])
-{
+    $stage = 6;
     $session['installer']['stagecompleted'] = $stage;
 }
-
-page_header('LoGD Installer &#151; %s', $stages[$stage] ?? $stages[0]);
 
 switch ($stage)
 {
@@ -226,19 +144,23 @@ switch ($stage)
 
 if (! $noinstallnavs)
 {
-    if ($session['user']['loggedin'])
+    \LotgdNavigation::setTextDomain('navigation-installer');
+    if ($session['user']['loggedin'] ?? false)
     {
-        addnav('Back to the game', $session['user']['restorepage']);
+        \LotgdNavigation::addNav('backToGame', $session['user']['restorepage']);
     }
-    addnav('Install Stages');
+    \LotgdNavigation::addNav('Install Stages');
 
-    for ($x = 0; $x <= min(count($stages) - 1, $session['installer']['stagecompleted'] + 1); $x++)
+    $current = min(count($stages) - 1, $session['installer']['stagecompleted'] + 1);
+    for ($x = 0; $x <= $current; $x++)
     {
+        $options = [];
         if ($x == $stage)
         {
-            $stages[$x] = "`^{$stages[$x]} <----";
+            $options = ['current' => ['open' => '`^', 'close' => '`0']];
         }
-        addnav($stages[$x], "installer.php?stage=$x");
+        \LotgdNavigation::addNav($stages[$x], "installer.php?stage=$x", $options);
     }
+    \LotgdNavigation::setTextDomain();
 }
 page_footer(false);
