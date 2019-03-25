@@ -1,0 +1,53 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage9.subtitle'|t|colorize }}
+
+{# Pre-Install: before update core tables execute this code of install #}
+{{ 'stage9.preInstall.title'|t|colorize }}
+{{ 'stage9.preInstall.paragraph.0'|t|colorize }}
+{{ 'stage9.preInstall.paragraph.1'|t|colorize }}
+{{ 'stage9.preInstall.paragraph.2'|t|colorize }}
+{{ 'stage9.preInstall.log'|t|colorize }}
+
+<div class="ui segment">
+    {% for message in preInstall %}
+        {{ message|colorize }}
+    {% endfor %}
+</div>
+
+{{ 'stage9.building.title'|t|colorize }}
+{{ 'stage9.building.paragraph.0'|t|colorize }}
+{{ 'stage9.building.paragraph.1'|t|colorize }}
+{{ 'stage9.building.paragraph.2'|t|colorize }}
+
+{# Synchronization of core tables, you can found this entities in "src/core/Entity" #}
+{{ 'stage9.sync.title'|t|colorize }}
+{{ 'stage9.sync.paragraph.0'|t|colorize }}
+
+<div class="ui segment">
+    {% for message in synchronizationTables %}
+        {{ message|colorize }}
+    {% endfor %}
+</div>
+
+{# Insert data #}
+{{ 'stage9.data.title'|t|colorize }}
+{{ 'stage9.data.paragraph.0'|t|colorize }}
+
+<div class="ui segment">
+    {% for message in insertData %}
+        {{ message|colorize }}
+    {% endfor %}
+</div>
+
+{# Installation of modules #}
+{{ 'stage9.modules.title'|t|colorize }}
+{{ 'stage9.modules.paragraph.0'|t|colorize }}
+
+<div class="ui segment">
+    {% for message in installOfModules %}
+        {{ message|colorize }}
+    {% endfor %}
+</div>
+
+{{ 'stage9.ready'|t|colorize }}
