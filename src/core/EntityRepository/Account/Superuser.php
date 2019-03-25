@@ -45,4 +45,69 @@ trait Superuser
             return null;
         }
     }
+
+    /**
+     * Get all superusers who have the given permission.
+     *
+     * @param int $permit
+     *
+     * @return int
+     */
+    public function getSuperuserCountWithPermit(int $permit): int
+    {
+        try
+        {
+            $qb = $this->createQueryBuilder('u');
+
+            return $qb->select('COUNT(1)')
+                ->where('BIT_AND(u.superuser, :permit) > 0')
+                ->setParameter('permit', $permit)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            return 0;
+        }
+    }
+
+    /**
+     * Get all superusers who have the given permission.
+     *
+     * @param string $name
+     * @param string $password
+     * @param int    $permit
+     *
+     * @return array|null
+     */
+    public function getLoginSuperuserWithPermit(string $name, string $password, int $permit): ?array
+    {
+        $sql = 'SELECT * FROM '.DB::prefix('accounts')." WHERE login='".$name."' AND password='".md5(md5($password))."' AND superuser & ".SU_MEGAUSER;
+
+        try
+        {
+            $qb = $this->createQueryBuilder('u');
+
+            return $qb
+                ->where('u.login = :name AND u.password = :password AND BIT_AND(u.superuser, :permit) > 0')
+                ->setParameters([
+                    'name' => $name,
+                    'password' => $password,
+                    'permit' => $permit
+                ])
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getArrayResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            return null;
+        }
+    }
 }
