@@ -1,0 +1,27 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage0.subtitle'|t|colorize }}
+{{ 'stage0.paragraph.0'|t|colorize }}
+{{ 'stage0.paragraph.1'|t|colorize }}
+{{ 'stage0.paragraph.2'|t|colorize }}
+{{ 'stage0.paragraph.3'|t|colorize }}
+{{ 'stage0.paragraph.4'|t|colorize }}
+
+{% if needsauthentication %}
+    {{ 'stage0.authentication.paragraph'|t|colorize }}
+    <form action="installer.php?stage=0" method="POST" class="ui form">
+        <div class="field">
+            <label for="username">{{ 'stage0.authentication.form.username'|t|colorize }}</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="field">
+            <label for="password">{{ 'stage0.authentication.form.password'|t|colorize }}</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class='field'>
+            <button type="submit" class="ui button">{{ 'stage0.authentication.form.button'|t|colorize }}</button>
+        </div>
+    </form>
+{% else %}
+    {{ 'stage0.nextStage'|t|colorize }}
+{% endif %}

@@ -1,0 +1,138 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage4.subtitle'|t|colorize }}
+{{ 'stage4.paragraph'|t|colorize }}
+
+{% if connected %}
+    {{ 'stage4.connected.success.0'|t|colorize }}
+    {{ 'stage4.connected.success.1'|t|colorize }}
+    {{ 'stage4.connected.success.2'|t|colorize }}
+    {{ 'stage4.connected.success.3'|t|colorize }}
+
+    {# Test create table #}
+    {{ 'stage4.connected.test.create.title'|t|colorize }}
+    {% if test.create is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.create }}</blockquote>
+        {{ 'stage4.connected.test.create.error'|t|colorize }}
+    {% endif %}
+
+    {# Test alter table #}
+    {{ 'stage4.connected.test.alter.title'|t|colorize }}
+    {% if test.alter is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.alter }}</blockquote>
+        {{ 'stage4.connected.test.alter.error'|t|colorize }}
+    {% endif %}
+
+    {# Test index table #}
+    {{ 'stage4.connected.test.index.title'|t|colorize }}
+    {% if test.index is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.index }}</blockquote>
+        {{ 'stage4.connected.test.index.error'|t|colorize }}
+    {% endif %}
+
+    {# Test insert table #}
+    {{ 'stage4.connected.test.insert.title'|t|colorize }}
+    {% if test.insert is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.insert }}</blockquote>
+        {{ 'stage4.connected.test.insert.error'|t|colorize }}
+    {% endif %}
+
+    {# Test select table #}
+    {{ 'stage4.connected.test.select.title'|t|colorize }}
+    {% if test.select is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.select }}</blockquote>
+        {{ 'stage4.connected.test.select.error'|t|colorize }}
+    {% endif %}
+
+    {# Test update table #}
+    {{ 'stage4.connected.test.update.title'|t|colorize }}
+    {% if test.update is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.update }}</blockquote>
+        {{ 'stage4.connected.test.update.error'|t|colorize }}
+    {% endif %}
+
+    {# Test delete table #}
+    {{ 'stage4.connected.test.delete.title'|t|colorize }}
+    {% if test.delete is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.delete }}</blockquote>
+        {{ 'stage4.connected.test.delete.error'|t|colorize }}
+    {% endif %}
+
+    {# Test lock table #}
+    {{ 'stage4.connected.test.lock.title'|t|colorize }}
+    {% if test.lock is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.lock }}</blockquote>
+        {{ 'stage4.connected.test.lock.error'|t|colorize }}
+    {% endif %}
+
+    {# Test unlock table #}
+    {{ 'stage4.connected.test.unlock.title'|t|colorize }}
+    {% if test.unlock is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.unlock }}</blockquote>
+        {{ 'stage4.connected.test.unlock.error'|t|colorize }}
+    {% endif %}
+
+    {# Test drop table #}
+    {{ 'stage4.connected.test.drop.title'|t|colorize }}
+    {% if test.drop is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        <blockquote>{{ test.drop }}</blockquote>
+        {{ 'stage4.connected.test.drop.error'|t|colorize }}
+    {% endif %}
+
+    {# Test cache table #}
+    {{ 'stage4.connected.test.cache.title'|t|colorize }}
+    {% if test.cache is same as(true) %}
+        {{ 'stage4.connected.test.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.fail'|t|colorize }}
+        {{ 'stage4.connected.test.cache.error'|t|colorize }}
+    {% endif %}
+
+    {{ 'stage4.connected.test.results.title'|t|colorize }}
+    {% if not issues %}
+        {{ 'stage4.connected.test.results.success'|t|colorize }}
+    {% else %}
+        {{ 'stage4.connected.test.results.fail.0'|t({'issues': issues})|colorize }}
+        {{ 'stage4.connected.test.results.fail.1'|t|colorize }}
+        {{ 'stage4.connected.test.results.fail.2'|t|colorize }}
+        {{ 'stage4.connected.test.results.fail.3'|t|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'stage4.connected.fail.0'|t|colorize }}
+    {{ 'stage4.connected.fail.1'|t|colorize }}
+    {{ 'stage4.connected.fail.2'|t|colorize }}
+    {{ 'stage4.connected.fail.3'|t|colorize }}
+    {{ 'stage4.connected.fail.4'|t|colorize }}
+    <div class="ui red message">{{ dberror }}</div>
+    {{ 'stage4.connected.fail.5'|t|colorize }}
+{% endif %}

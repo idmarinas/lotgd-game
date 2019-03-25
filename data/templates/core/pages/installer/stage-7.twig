@@ -1,0 +1,34 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage7.subtitle'|t|colorize }}
+{{ 'stage7.paragraph'|t|colorize }}
+
+<form action="installer.php?stage=7" method="POST" class="ui form">
+    <div class="ui grid">
+        <div class="middle aligned two wide column">
+            <label id="labelText">{{ 'stage7.form.label.label'|t|colorize }}</label>
+        </div>
+        <div class="fourteen wide column">
+            <div class="grouped fields">
+                <div class="inline field">
+                    <div class="ui toggle radio checkbox">
+                        <input id="upgrade" type="radio" value="upgrade" name="type" {{ upgrade ? 'checked' : '' }}>
+                        <label for="upgrade">{{ 'stage7.form.label.upgrade'|t|colorize }}</label>
+                    </div>
+                    <select name="version" id="version" class="ui search dropdown">
+                        {% for name, key in lotgdVersions %}
+                            <option value="{{ key }}" {{ actualVersion == key ? 'selected' : '' }} >{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <div class="ui toggle radio checkbox">
+                        <label for="install">{{ 'stage7.form.label.install'|t|colorize }}</label>
+                        <input id="install" type='radio' value='install' name='type'  {{ upgrade ? '' : 'checked' }}>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field"><button type="submit" class="ui button">{{ 'stage7.form.submit'|t|uncolorize }}</button></div>
+</form>

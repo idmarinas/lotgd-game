@@ -1,0 +1,100 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage8.subtitle'|t|colorize }}
+
+{{ 'stage8.paragraph.0'|t|colorize }}
+{{ 'stage8.paragraph.1'|t|colorize }}
+{{ 'stage8.paragraph.2'|t|colorize }}
+{{ 'stage8.paragraph.3'|t|colorize }}
+{{ 'stage8.paragraph.4'|t|colorize }}
+{{ 'stage8.paragraph.5'|t|colorize }}
+{{ 'stage8.paragraph.6'|t|colorize }}
+
+<form action="installer.php?stage={{ stage }}" method="POST">
+    <div class="ui top attached buttons">
+        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|t|uncolorize }}</button>
+        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|t|uncolorize }}</button>
+        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|t|uncolorize }}</button>
+    </div>
+    <div class="field">
+        <table class="ui attached compact selectable striped table">
+            {% for category, list in modules %}
+                <thead>
+                    <tr>
+                        <th colspan="6">{{ category }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ 'stage8.form.table.head.install'|t|colorize }}</th>
+                        <th>{{ 'stage8.form.table.head.recommended'|t|colorize }}</th>
+                        <th>{{ 'stage8.form.table.head.name'|t|colorize }}</th>
+                        <th>{{ 'stage8.form.table.head.author'|t|colorize }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for modulename, module in list %}
+                        {% set uninstallop = 'donothing' %}
+                        {% set installop = 'install' %}
+                        {% set activateop = 'install,activate' %}
+                        {% set uninstallcheck = false %}
+                        {% set installcheck = false %}
+                        {% set activatecheck = false %}
+
+                        {% if module.active %}
+                            {% set uninstallop = 'uninstall' %}
+                            {% set uninstallop = 'deactivate' %}
+                            {% set activateop = 'donothing' %}
+                            {% set activatecheck = true %}
+                        {% elseif module.installed %}
+                            {% set uninstallop = 'uninstall' %}
+                            {% set uninstallop = 'activate' %}
+                            {% set activateop = 'activate' %}
+                            {% set installcheck = true %}
+                        {% else %}
+                            {% set uninstallcheck = true %}
+                        {% endif %}
+
+                        {% set isRecommended = modulename in recommendedModules  %}
+
+                        <tr>
+                            <td class="collapsing">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="modules[{{ modulename }}]" id="uninstall-{{ modulename }}" value="{{ uninstallop }}" {{ uninstallcheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
+                                    <label>{{ 'stage8.form.table.body.opts.uninstalled'|t|colorize }}</label>
+                                </div>
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="modules[{{ modulename }}]" id="install-{{ modulename }}" value="{{ installop }}" {{ installcheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
+                                    <label>{{ 'stage8.form.table.body.opts.installed'|t|colorize }}</label>
+                                </div>
+                                <div class="ui radio checkbox">
+                                    <input type="radio" {{ not module.invalid and isRecommended ? 'data-recommended' : '' }} name="modules[{{ modulename }}]" id="activate-{{ modulename }}" value="{{ activateop }}" {{ activatecheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
+                                    <label>{{ 'stage8.form.table.body.opts.activated'|t|colorize }}</label>
+                                </div>
+                            </td>
+                            <td class="collapsing">{{ isRecommended ? 'stage8.form.table.body.recommended.yes'|t|colorize : 'stage8.form.table.body.recommended.no'|t|colorize }}</td>
+                            <td>
+                                <span title="{{ module.description }}">{{ module.formalname|colorize }}</span>
+                                [{{ '`%%%s`0'|format(modulename)|colorize }}]
+                            </td>
+                            <td>{{ '`#%s`0'|format(module.author)|colorize }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tr class="center aligned">
+                    <td>`$Not modules found in folder "`b/modules´b"`0</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="ui bottom attached buttons">
+        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|t|uncolorize }}</button>
+        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|t|uncolorize }}</button>
+        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|t|uncolorize }}</button>
+    </div>
+</form>
+
+{% if not isUpgrade %}
+    <script>
+        Lotgd.recommendedModules();
+    </script>
+{% endif %}

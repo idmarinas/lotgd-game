@@ -1,0 +1,22 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage1.subtitle'|t|colorize }}
+{{ 'stage1.paragraph'|t|colorize }}
+
+{% if cclicense %}
+    <div style='height: 350px; max-height: 350px; overflow: auto; color: #FFFFFF; background-color: #000000; padding: 10px;'>
+        {{ cclicense }}
+    </div>
+{% else %}
+    {{ 'stage1.cclicense.paragraph.0'|t|colorize }}
+    {{ 'stage1.cclicense.paragraph.1'|t|colorize }}
+    {{ 'stage1.cclicense.paragraph.2'|t({'link': '<a target="_blank" rel="noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode">Creative Commons</a>'})|colorize }}
+{% endif %}
+
+{% if lotgdlicense %}
+    {{ 'stage1.lotgdlicense.paragraph.plainText'|t|colorize }}
+    {{ lotgdlicense|nl2br }}
+{% else %}
+    {{ 'stage1.lotgdlicense.paragraph.0'|t|colorize }}
+    {{ 'stage1.lotgdlicense.paragraph.1'|t({'expected': lotgdlicenseExpected, 'got': lotgdlicenseGot})|colorize }}
+{% endif %}
