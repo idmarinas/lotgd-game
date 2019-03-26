@@ -6,8 +6,6 @@ if (0 != ini_get('max_execution_time'))
     set_time_limit(666); //-- Temporary increased limit execution time
 }
 
-bdump($session['installer']['moduleoperations']);
-
 /**
  * Configure de installer class.
  */
@@ -34,7 +32,7 @@ if (false === $installer->canInstall() && $installer->isUpgrade())
 /*
  * Pre-Install: before sync core tables execute this code of install
  */
-$params['preInstall'] = $installer->makePreInstall($installer->getIntVersion($actualVersion));
+$params['upgradeInstall'] = $installer->makeUpgradeInstall($installer->getIntVersion($actualVersion));
 
 /*
  * Synchronization of core tables, you can found this entities in "src/core/Entity"
