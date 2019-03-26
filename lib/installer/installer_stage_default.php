@@ -1,22 +1,20 @@
 <?php
 
-output('`@`c`bAll Done!´b´c');
-output('Your install of Legend of the Green Dragon has been completed!`n');
-output('`nRemember us when you have hundreds of users on your server, enjoying the game.');
-output("Eric, JT, and a lot of others put a lot of work into this world, so please don't disrespect that by violating the license.");
-
-if ($session['user']['loggedin'])
+if ($session['user']['loggedin'] ?? false)
 {
-    addnav('Continue', $session['user']['restorepage']);
+    \LotgdNavigation::addNav('common.nav.continue', $session['user']['restorepage']);
 }
 else
 {
-    addnav('Login Screen', './');
+    \LotgdNavigation::addNav('common.nav.loginScreen', 'home.php');
 }
 savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 $noinstallnavs = true;
 
-//-- Delete database info and installation
-unset($session['dbinfo'], $session['installer']);
+//-- Delete info of installation
+unset($session['installer']);
+
 //-- Cache is cleared to force update
 datacache_empty();
+
+rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/default.twig', []));
