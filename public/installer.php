@@ -149,7 +149,7 @@ if (! $noinstallnavs)
     {
         \LotgdNavigation::addNav('backToGame', $session['user']['restorepage']);
     }
-    \LotgdNavigation::addNav('Install Stages');
+    \LotgdNavigation::addHeader('stagesCategory');
 
     $current = min(count($stages) - 1, $session['installer']['stagecompleted'] + 1);
     for ($x = 0; $x <= $current; $x++)
