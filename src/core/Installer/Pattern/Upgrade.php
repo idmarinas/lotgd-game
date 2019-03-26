@@ -11,13 +11,14 @@ namespace Lotgd\Core\Installer\Pattern;
 trait Upgrade
 {
     protected $upgrade = false;
+    protected $upgradeVersion = [];
 
     /**
      * Set that the installation is an upgrade.
      *
      * @return $this
      */
-    public function isUpgradeOn()
+    public function isUpgradeOn(): self
     {
         $this->upgrade = true;
 
@@ -29,7 +30,7 @@ trait Upgrade
      *
      * @return $this
      */
-    public function isUpgradeOff()
+    public function isUpgradeOff(): self
     {
         $this->upgrade = false;
 
@@ -44,5 +45,31 @@ trait Upgrade
     public function isUpgrade(): bool
     {
         return $this->upgrade;
+    }
+
+    /**
+     * Set that version is upgraded.
+     *
+     * @param int $version
+     *
+     * @return self
+     */
+    public function upgradedVersionOn(int $version): self
+    {
+        $this->upgradeVersion[$version] = true;
+
+        return $this;
+    }
+
+    /**
+     * Get if version is upgraded.
+     *
+     * @param int $version
+     *
+     * @return bool
+     */
+    public function isUpgradedVersion(int $version): bool
+    {
+        return $this->upgradeVersion[$version] ?? false;
     }
 }
