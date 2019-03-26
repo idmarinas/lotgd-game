@@ -24,20 +24,23 @@ use Zend\Hydrator\ClassMethods;
 class Install
 {
     use \Lotgd\Core\Pattern\Container;
-    use Pattern\Version;
+    use Pattern\CanInstall;
     use Pattern\IsUpgrade;
     use Pattern\Modules;
     use Pattern\Progress;
-    use Pattern\CanInstall;
+    use Pattern\Version;
 
-    const DATA_DIR = __DIR__.'/data/install';
+    const DATA_DIR_INSTALL = __DIR__.'/data/install';
+    const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
     /**
      * Make a pre-instal, This prepare database for new structure of tables.
      *
-     * Not used for now.
+     * @param int $version Is the actual version installed
+     *
+     * @return array
      */
-    public function makePreInstall()
+    public function makePreInstall(int $version): array
     {
         return ['`QNothing to do.`0`n'];
     }
@@ -55,7 +58,7 @@ class Install
         $schemaTool = new SchemaTool($doctrine);
         $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
 
-        $messages = ['`@Nothing to update - your database is already in sync with the current entities metadata.`0`n'];
+        $messages = \LotgdTranslator::t('synchronizationTables.nothing', [], 'app-installer');
 
         if (count($sqls))
         {
@@ -64,52 +67,47 @@ class Install
 
             $schemaTool->updateSchema($classes, true);
 
-            $pluralization = (1 === count($sqls)) ? 'query was' : 'queries were';
-
-            $messages[] = ['`@Database schema updated successfully! "`b`2%s`0`b" %s executed.`0`n', count($sqls), $pluralization];
-            $messages[] = ['`@Proxy classes generated "`b`2%s`0´b".`0`n', $doctrine->getProxyFactory()->generateProxyClasses($classes)];
+            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => count($sqls)], 'app-installer');
+            $messages[] = \LotgdTranslator::t('synchronizationTables.proxy', ['classes' => $doctrine->getProxyFactory()->generateProxyClasses($classes)], 'app-installer');
         }
 
         return $messages;
     }
 
     /**
-     * Insert data in tables.
+     * Insert data of a clean install.
      *
      * @return array
      */
     public function makeInsertData(): array
     {
         $messages = [];
-
-        if ($this->dataInserted())
+        //-- It is a clean or upgrade installation and the data has already been inserted
+        if ($this->dataInserted() || $this->isUpgrade())
         {
-            $messages[] = '`QIt is not necessary to re-insert the data`0`n';
+            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], 'app-installer');
 
             return $messages;
         }
 
-        //-- Is a upgrade
-        if ($this->isUpgrade())
-        {
-            return $this->makeUpgradeInsertData();
-        }
-
         $filesystem = new Filesystem();
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
-        $files = array_map(function ($value) { return self::DATA_DIR.'/'.$value; }, $filesystem->listDir(self::DATA_DIR));
+        $files = array_map(
+            function ($value) { return self::DATA_DIR_INSTALL.'/'.$value; },
+            $filesystem->listDir(self::DATA_DIR_INSTALL)
+        );
 
         if (0 == count($files))
         {
             $this->dataInsertedOff();
-            $messages[] = "`2No data files were found, game data cannot be inserted. Please check this out and report.`0`n";
+            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], 'app-installer');
 
             return $messages;
         }
 
         try
         {
-            foreach ($files as $key => $file)
+            foreach ($files as $file)
             {
                 $data = \json_decode(\file_get_contents($file), true);
                 $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
@@ -122,45 +120,30 @@ class Install
 
                 if ('insert' == $data['method'])
                 {
-                    $messages[] = ['`@`iInserted´i a total of `2`b%s´b`0 row/s in table "`2`b%s´b`0".`0`n', count($data['rows']), $data['table']];
+                    $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
                 }
                 elseif ('update' == $data['method'])
                 {
-                    $messages[] = ['`@`iUpdated´i a total of `2`b%s´b`0 row/s in table "`2`b%s´b`0".`0`n', count($data['rows']), $data['table']];
+                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
                 }
                 elseif ('replace' == $data['method'])
                 {
-                    $messages[] = ['`@`iReplaced´i a total of `2`b%s´b`0 row/s in table "`2`b%s´b`0".`0`n', count($data['rows']), $data['table']];
+                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
                 }
 
                 $doctrine->flush();
-                $doctrine->clear();
             }
 
+            $doctrine->clear();
             $this->dataInsertedOn();
         }
         catch (\Throwable $th)
         {
+            \Tracy\Debugger::log($th);
             $this->dataInsertedOff();
-            $messages[] = '`$A problem has been encountered and an error occurred while inserting the data into the database.`0`n';
+            $messages[] = \LotgdTranslator::t('insertData.error', [], 'app-installer');
             $messages[] = $th->getMessage();
-
-            return $messages;
         }
-
-        return $messages;
-    }
-
-    /**
-     * In an upgrade install use this for insert new data.
-     *
-     * @return array
-     */
-    public function makeUpgradeInsertData(): array
-    {
-        $messages = [];
-
-        $messages[] = '`QNothing to upgrade.`0`n';
 
         return $messages;
     }
@@ -176,7 +159,7 @@ class Install
 
         if ($this->skipModules())
         {
-            $messages[] = '`QThe installation of the modules has been skipped.`0`n';
+            $messages[] = \LotgdTranslator::t('installOfModules.skipped', [], 'app-installer');
 
             return $messages;
         }
@@ -198,31 +181,44 @@ class Install
 
             foreach ($ops as $op)
             {
-                switch ($op)
-                {
-                    case 'uninstall':
-                        $result = uninstall_module($modulename);
-                        $messages[] = ['`3Uninstalling `#%s`0: %s`n', $modulename, $result ? '`@OK!`0' : '`$Failed!`0'];
-                    break;
-                    case 'install':
-                        $result = install_module($modulename);
-                        $messages[] = ['`3Installing `#%s`0: %s`n', $modulename, $result ? '`@OK!`0' : '`$Failed!`0'];
-                    break;
-                    case 'activate':
-                        $result = activate_module($modulename);
-                        $messages[] = ['`3Activating `#%s`0: %s`n', $modulename, $result ? '`@OK!`0' : '`$Failed!`0'];
-                    break;
-                    case 'deactivate':
-                        $result = deactivate_module($modulename);
-                        $messages[] = ['`3Deactivating `#%s`0: %s`n', $modulename, $result ? '`@OK!`0' : '`$Failed!`0'];
-                    break;
-                    case 'donothing':
-                        $messages[] = ['`$Ignoring `#%s`0`n', $modulename];
-                    break;
-                }
+                $this->moduleProcess($op, $modulename, $messages);
             }
         }
 
         return $messages;
+    }
+
+    /**
+     * Process with the module.
+     *
+     * @param string $type
+     * @param string $modulename
+     * @param array  $messages
+     */
+    protected function moduleProcess($type, $modulename, &$messages)
+    {
+        switch ($type)
+        {
+            case 'uninstall':
+                $result = uninstall_module($modulename);
+                $messages[] = \LotgdTranslator::t('installOfModules.process.uninstall', ['module' => $modulename, 'result' => $result], 'app-installer');
+            break;
+            case 'install':
+                $result = install_module($modulename);
+                $messages[] = \LotgdTranslator::t('installOfModules.process.install', ['module' => $modulename, 'result' => $result], 'app-installer');
+            break;
+            case 'activate':
+                $result = activate_module($modulename);
+                $messages[] = \LotgdTranslator::t('installOfModules.process.activate', ['module' => $modulename, 'result' => $result], 'app-installer');
+            break;
+            case 'deactivate':
+                $result = deactivate_module($modulename);
+                $messages[] = \LotgdTranslator::t('installOfModules.process.deactivate', ['module' => $modulename, 'result' => $result], 'app-installer');
+            break;
+            case 'donothing':
+                $messages[] = \LotgdTranslator::t('installOfModules.process.donothing', ['module' => $modulename], 'app-installer');
+            break;
+            default: break;
+        }
     }
 }
