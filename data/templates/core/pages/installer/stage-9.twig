@@ -3,14 +3,14 @@
 {{ 'stage9.subtitle'|t|colorize }}
 
 {# Pre-Install: before update core tables execute this code of install #}
-{{ 'stage9.preInstall.title'|t|colorize }}
-{{ 'stage9.preInstall.paragraph.0'|t|colorize }}
-{{ 'stage9.preInstall.paragraph.1'|t|colorize }}
-{{ 'stage9.preInstall.paragraph.2'|t|colorize }}
-{{ 'stage9.preInstall.log'|t|colorize }}
+{{ 'stage9.upgradeInstall.title'|t|colorize }}
+{{ 'stage9.upgradeInstall.paragraph.0'|t|colorize }}
+{{ 'stage9.upgradeInstall.paragraph.1'|t|colorize }}
+{{ 'stage9.upgradeInstall.paragraph.2'|t|colorize }}
+{{ 'stage9.upgradeInstall.log'|t|colorize }}
 
 <div class="ui segment">
-    {% for message in preInstall %}
+    {% for message in upgradeInstall %}
         {{ message|colorize }}
     {% endfor %}
 </div>
