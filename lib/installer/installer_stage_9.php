@@ -30,7 +30,7 @@ if (false === $installer->canInstall() && $installer->isUpgrade())
 }
 
 /*
- * Pre-Install: before sync core tables execute this code of install
+ * Make a upgrade install, avoid in clean install.
  */
 $params['upgradeInstall'] = $installer->makeUpgradeInstall($installer->getIntVersion($actualVersion));
 
