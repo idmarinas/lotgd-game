@@ -8,7 +8,7 @@
 
 namespace Lotgd\Core\Installer\Pattern;
 
-trait IsUpgrade
+trait Upgrade
 {
     protected $upgrade = false;
 
