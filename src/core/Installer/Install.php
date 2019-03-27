@@ -25,24 +25,78 @@ class Install
 {
     use \Lotgd\Core\Pattern\Container;
     use Pattern\CanInstall;
-    use Pattern\IsUpgrade;
     use Pattern\Modules;
     use Pattern\Progress;
+    use Pattern\Upgrade;
     use Pattern\Version;
 
+    const TRANSLATOR_DOMAIN = 'app-installer';
     const DATA_DIR_INSTALL = __DIR__.'/data/install';
     const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
     /**
-     * Make a pre-instal, This prepare database for new structure of tables.
+     * Make a upgrade install, avoid in clean install.
      *
      * @param int $version Is the actual version installed
      *
      * @return array
      */
-    public function makePreInstall(int $version): array
+    public function makeUpgradeInstall(int $version): array
     {
-        return ['`QNothing to do.`0`n'];
+        $messages = [];
+        $version = $this->getNextVersion($version); //-- Start with the next version
+
+        //-- It is a clean installation not do nothing
+        if (! $this->isUpgrade())
+        {
+            $messages[] = \LotgdTranslator::t('upgrade.nothing', [], self::TRANSLATOR_DOMAIN);
+
+            return $messages;
+        }
+
+        try
+        {
+            do
+            {
+                $class = "Lotgd\Core\Installer\Upgrade\Version_{$version}\Upgrade";
+
+                //-- Check all version to actual version
+                if (! \class_exists($class))
+                {
+                    $version = $this->getNextVersion($version);
+
+                    continue;
+                }
+
+                $upgrade = new $class();
+
+                $upgrade->setDoctrine($this->getContainer(\Lotgd\Core\Db\Doctrine::class));
+
+                $step = 1;
+                $result = true;
+
+                do
+                {
+                    $result = $upgrade->{"step{$step}"}();
+
+                    $step++;
+                } while ($result && \method_exists($upgrade, "step{$step}"));
+
+                //-- Get all messages for this upgrade
+                $messages = array_merge($messages, $upgrade->getMessages());
+
+                $this->upgradedVersionOn($version);
+                $version = $this->getNextVersion($version);
+            } while ($version > 0 && ! $this->isUpgradedVersion($version));
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+            $messages[] = \LotgdTranslator::t('upgrade.error', [], self::TRANSLATOR_DOMAIN);
+            $messages[] = $th->getMessage();
+        }
+
+        return $messages;
     }
 
     /**
@@ -52,13 +106,14 @@ class Install
      */
     public function makeSynchronizationTables(): array
     {
+        // return [];
         //-- Prepare for updating core tables
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         $classes = $doctrine->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($doctrine);
         $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
 
-        $messages = \LotgdTranslator::t('synchronizationTables.nothing', [], 'app-installer');
+        $messages = \LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN);
 
         if (count($sqls))
         {
@@ -67,8 +122,8 @@ class Install
 
             $schemaTool->updateSchema($classes, true);
 
-            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => count($sqls)], 'app-installer');
-            $messages[] = \LotgdTranslator::t('synchronizationTables.proxy', ['classes' => $doctrine->getProxyFactory()->generateProxyClasses($classes)], 'app-installer');
+            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => count($sqls)], self::TRANSLATOR_DOMAIN);
+            $messages[] = \LotgdTranslator::t('synchronizationTables.proxy', ['classes' => $doctrine->getProxyFactory()->generateProxyClasses($classes)], self::TRANSLATOR_DOMAIN);
         }
 
         return $messages;
@@ -85,7 +140,7 @@ class Install
         //-- It is a clean or upgrade installation and the data has already been inserted
         if ($this->dataInserted() || $this->isUpgrade())
         {
-            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], 'app-installer');
+            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], self::TRANSLATOR_DOMAIN);
 
             return $messages;
         }
@@ -100,7 +155,7 @@ class Install
         if (0 == count($files))
         {
             $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], 'app-installer');
+            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
 
             return $messages;
         }
@@ -120,15 +175,15 @@ class Install
 
                 if ('insert' == $data['method'])
                 {
-                    $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
+                    $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
                 elseif ('update' == $data['method'])
                 {
-                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
+                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
                 elseif ('replace' == $data['method'])
                 {
-                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], 'app-installer');
+                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
 
                 $doctrine->flush();
@@ -141,7 +196,7 @@ class Install
         {
             \Tracy\Debugger::log($th);
             $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.error', [], 'app-installer');
+            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
             $messages[] = $th->getMessage();
         }
 
@@ -159,7 +214,7 @@ class Install
 
         if ($this->skipModules())
         {
-            $messages[] = \LotgdTranslator::t('installOfModules.skipped', [], 'app-installer');
+            $messages[] = \LotgdTranslator::t('installOfModules.skipped', [], self::TRANSLATOR_DOMAIN);
 
             return $messages;
         }
@@ -201,22 +256,22 @@ class Install
         {
             case 'uninstall':
                 $result = uninstall_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.uninstall', ['module' => $modulename, 'result' => $result], 'app-installer');
+                $messages[] = \LotgdTranslator::t('installOfModules.process.uninstall', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'install':
                 $result = install_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.install', ['module' => $modulename, 'result' => $result], 'app-installer');
+                $messages[] = \LotgdTranslator::t('installOfModules.process.install', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'activate':
                 $result = activate_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.activate', ['module' => $modulename, 'result' => $result], 'app-installer');
+                $messages[] = \LotgdTranslator::t('installOfModules.process.activate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'deactivate':
                 $result = deactivate_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.deactivate', ['module' => $modulename, 'result' => $result], 'app-installer');
+                $messages[] = \LotgdTranslator::t('installOfModules.process.deactivate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'donothing':
-                $messages[] = \LotgdTranslator::t('installOfModules.process.donothing', ['module' => $modulename], 'app-installer');
+                $messages[] = \LotgdTranslator::t('installOfModules.process.donothing', ['module' => $modulename], self::TRANSLATOR_DOMAIN);
             break;
             default: break;
         }
