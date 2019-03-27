@@ -85,8 +85,6 @@ trait Superuser
      */
     public function getLoginSuperuserWithPermit(string $name, string $password, int $permit): ?array
     {
-        $sql = 'SELECT * FROM '.DB::prefix('accounts')." WHERE login='".$name."' AND password='".md5(md5($password))."' AND superuser & ".SU_MEGAUSER;
-
         try
         {
             $qb = $this->createQueryBuilder('u');
