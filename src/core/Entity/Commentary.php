@@ -58,7 +58,7 @@ class Commentary implements EntityInterface
      *
      * @ORM\Column(type="string", length=250, nullable=false)
      */
-    private $schema;
+    private $schema = '';
 
     /**
      * @var \DateTime
@@ -93,7 +93,7 @@ class Commentary implements EntityInterface
      *
      * @ORM\Column(type="string", length=25, nullable=false)
      */
-    private $talkLine;
+    private $talkLine = 'says';
 
     /**
      * @var int
