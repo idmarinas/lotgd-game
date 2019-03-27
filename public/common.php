@@ -166,7 +166,7 @@ if (file_exists('public/installer.php')
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/upgrade.twig', []));
+    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/security.twig', []));
 
     page_footer();
 }
