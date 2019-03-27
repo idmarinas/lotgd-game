@@ -1,0 +1,42 @@
+canInstall:
+    sameVersion: '`4You cannot install, you try to install the same version that is already installed.´4`n'
+
+upgrade:
+    nothing: '`QNothing to do.`0`n'
+    error: '`$A problem has been encountered and an error occurred while do a pre-install.`0`n'
+    version:
+        to: '`c`bUpgrading to version `i{version}´i´b´c`n'
+        nothing: 'Nothing to update - your database is already in sync with the current entity metadata.`n'
+        schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
+        proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
+        table:
+            import: '`2Imported {count,plural, =1{`b1´b row} other{`b#´b rows}} into new table `@`b`i{table}´i´b`.`0`n'
+            rename: '`QRename the old table `2`b`i{old}´i´b`0 to `2`b`i{new}´i´b`0.`0`n'
+            create: '`@Create table `2`b`i{table}´i´b`0 with new structure.`0`n'
+            delete: '`$Delete table `4`b`i{table}´i´b`0 from database.`0`n'
+
+insertData:
+    dataInserted: '`QIt is not necessary to re-insert the data`0`n'
+    noFiles: '`2No data files were found, game data cannot be inserted. Please check this out and report.`0`n'
+    data:
+        insert: '`@`iInserted´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
+        update: '`@`iUpdated´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
+        replace: '`@`iReplaced´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
+    error: '`$A problem has been encountered and an error occurred while inserting the data into the database.`0`n'
+
+synchronizationTables:
+    nothing: '`@Nothing to update - your database is already in sync with the current entities metadata.`0`n'
+    schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
+    proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
+
+upgradeInsertData:
+    nothing: '`QNothing to upgrade.`0`n'
+
+installOfModules:
+    skipped: '`QThe installation of the modules has been skipped.`0`n'
+    process:
+        uninstall: '`3Uninstalling`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
+        install: '`3Installing`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
+        activate: '`3Activating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
+        deactivate: '`3Deactivating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
+        donothing: '`$Ignoring`0 `#{module}`0`n'
