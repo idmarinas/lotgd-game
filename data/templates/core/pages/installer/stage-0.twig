@@ -7,7 +7,7 @@
 {{ 'stage0.paragraph.3'|t|colorize }}
 {{ 'stage0.paragraph.4'|t|colorize }}
 
-{% if needsauthentication %}
+{% if authentication %}
     {{ 'stage0.authentication.paragraph'|t|colorize }}
     <form action="installer.php?stage=0" method="POST" class="ui form">
         <div class="field">

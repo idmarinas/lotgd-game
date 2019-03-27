@@ -19,7 +19,7 @@ if (DB_CHOSEN)
     if ($name > '')
     {
         $password = stripslashes((string) \LotgdHttp::getPost('password', ''));
-        $result = $acctRepository->getLoginSuperuserWithPermit($name, $password, SU_MEGAUSER);
+        $result = $acctRepository->getLoginSuperuserWithPermit($name, md5(md5($password)), SU_MEGAUSER);
 
         if (count($result) > 0)
         {
@@ -47,8 +47,6 @@ if (DB_CHOSEN)
 
             if (false === $needsauthentication)
             {
-                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('stage0.authentication.login.fail', [], 'page-installer'));
-
                 return redirect('installer.php?stage=1');
             }
         }
