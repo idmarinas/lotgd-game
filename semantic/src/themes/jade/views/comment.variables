@@ -3,3 +3,5 @@
 *******************************/
 
 @maxWidth: none;
+
+@commentPadding: 0;
