@@ -54,13 +54,6 @@ class Commentary implements EntityInterface
     private $comment;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=250, nullable=false)
-     */
-    private $schema = '';
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
@@ -87,13 +80,6 @@ class Commentary implements EntityInterface
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $authorName = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=25, nullable=false)
-     */
-    private $talkLine = 'says';
 
     /**
      * @var int
@@ -421,30 +407,6 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Get the value of talkLine.
-     *
-     * @return string
-     */
-    public function getTalkLine()
-    {
-        return $this->talkLine;
-    }
-
-    /**
-     * Set the value of talkLine.
-     *
-     * @param string $talkLine
-     *
-     * @return self
-     */
-    public function setTalkLine(string $talkLine)
-    {
-        $this->talkLine = $talkLine;
-
-        return $this;
-    }
-
-    /**
      * Get the value of clanId.
      *
      * @return int
@@ -536,30 +498,6 @@ class Commentary implements EntityInterface
     public function setClanNameShort(string $clanNameShort)
     {
         $this->clanNameShort = $clanNameShort;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of schema
-     *
-     * @return  string
-     */
-    public function getSchema()
-    {
-        return $this->schema;
-    }
-
-    /**
-     * Set the value of schema
-     *
-     * @param  string  $schema
-     *
-     * @return  self
-     */
-    public function setSchema(string $schema)
-    {
-        $this->schema = $schema;
 
         return $this;
     }
