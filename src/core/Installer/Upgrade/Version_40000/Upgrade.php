@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40000;
 
+use Lotgd\Core\Output\Commentary;
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Tracy\Debugger;
 use Zend\Hydrator\ClassMethods;
@@ -57,6 +58,7 @@ class Upgrade extends UpgradeAbstract
         try
         {
             $hydrator = new ClassMethods();
+            $commentary = new Commentary();
             $page = 1;
             $select = \DB::select('commentary_old');
             $paginator = \DB::paginator($select, $page, 100);
@@ -82,6 +84,8 @@ class Upgrade extends UpgradeAbstract
                     $row['hidden'] = (int) ($row['hidecomment'] ?? '');
                     $row['hiddenComment'] = (string) ($row['hidereason'] ?? '');
                     $row['hiddenBy'] = (string) ($row['hiddenby'] ?? '');
+
+                    $commentary->processSpecialCommands($row);
 
                     $entity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Commentary());
 
