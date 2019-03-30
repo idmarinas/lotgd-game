@@ -14,13 +14,7 @@
 namespace Lotgd\Core\Factory\Template;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Component;
-use Lotgd\Core\Entity;
-use Lotgd\Core\Navigation\AccessKeys;
-use Lotgd\Core\Navigation\Navigation;
-use Lotgd\Core\Output\Commentary;
 use Lotgd\Core\Template\Theme as TemplateTheme;
-use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Twig\Extension;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -41,21 +35,13 @@ class Theme implements FactoryInterface
         ]);
         $template->setContainer($container);
 
-        //-- Configure extensions
-        $motd = new Extension\Motd();
-        $motd->setContainer($container);
-
         //-- This extensions are important
         $template->addExtension(new Extension\GameCore());
-        $template->addExtension(new Extension\FlashMessages($container->get(Component\FlashMessages::class)));
-        $template->addExtension($motd);
-        $template->addExtension(new Extension\Navigation(
-            $container->get(Navigation::class),
-            $container->get(Translator::class),
-            $container->get(AccessKeys::class)
-        ));
-        $template->addExtension(new Extension\Translator($container->get(Translator::class)));
-        $template->addExtension(new Extension\Commentary($container->get(Commentary::class)));
+        $template->addExtension(new Extension\FlashMessages($container));
+        $template->addExtension(new Extension\Motd($container));
+        $template->addExtension(new Extension\Navigation($container));
+        $template->addExtension(new Extension\Translator($container));
+        $template->addExtension(new Extension\Commentary($container));
 
         //-- Important
         $template->prepareTheme();
