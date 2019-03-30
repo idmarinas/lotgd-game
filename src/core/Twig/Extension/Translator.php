@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
 use Lotgd\Core\Twig\NodeVisitor\TranslatorNodeVisitor;
@@ -22,15 +24,18 @@ use Twig\TwigFilter;
 
 class Translator extends AbstractExtension
 {
+    use Container;
+    use Pattern\Translator;
+
     protected $translator;
     protected $translatorNodeVisitor;
 
     /**
-     * @param CoreTranslator $translator
+     * @param ServiceManager $serviceManager
      */
-    public function __construct(CoreTranslator $translator)
+    public function __construct(ServiceManager $serviceManager)
     {
-        $this->translator = $translator;
+        $this->setContainer($serviceManager);
     }
 
     /**
@@ -79,33 +84,20 @@ class Translator extends AbstractExtension
     }
 
     /**
-     * Translate a string using translator.
+     * Get Translator instance.
      *
-     * @param string $message
-     * @param array  $arguments
-     * @param string $domain
-     * @param string $locale
-     *
-     * @return string
+     * @return CoreTranslator
      */
-    public function translate($message, $parameters = [], $domain = null, $locale = null): string
+    public function getTranslator(): CoreTranslator
     {
-        return $this->translator->trans($message, $parameters, $domain, $locale);
+        if (! $this->translator instanceof CoreTranslator)
+        {
+            $this->translator = $this->getContainer(CoreTranslator::class);
+        }
+
+        return $this->translator;
     }
 
-    /**
-     * Format a message with MessageFormatter.
-     *
-     * @param string $message
-     * @param array  $parameters
-     * @param string $locale
-     *
-     * @return string
-     */
-    public function translateMf($message, $parameters = [], $locale = null): string
-    {
-        return $this->translator->mf($message, $parameters, $locale);
-    }
 
     /**
      * {@inheritdoc}
