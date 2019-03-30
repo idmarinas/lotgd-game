@@ -15,29 +15,28 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
 use Lotgd\Core\Navigation\Navigation as CoreNavigation;
+use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Zend\Paginator\Paginator;
 
 class Navigation extends AbstractExtension
 {
+    use Container;
     use Pattern\AttributesString;
+    use Pattern\Navigation;
 
     protected $navigation;
     protected $translator;
     protected $accesskeys;
 
     /**
-     * @param CoreNavigation $navigation
-     * @param CoreTranslator $translator
-     * @param CoreAccessKeys $accesskeys
+     * @param ServiceManager $serviceManager
      */
-    public function __construct(CoreNavigation $navigation, CoreTranslator $translator, CoreAccessKeys $accesskeys)
+    public function __construct(ServiceManager $serviceManager)
     {
-        $this->navigation = $navigation;
-        $this->translator = $translator;
-        $this->accesskeys = $accesskeys;
+        $this->setContainer($serviceManager);
     }
 
     /**
@@ -54,106 +53,48 @@ class Navigation extends AbstractExtension
     }
 
     /**
-     * Display navigation menu.
+     * Get Navigation instance.
      *
-     * @return string
+     * @return CoreNavigation
      */
-    public function display()
+    public function getNavigation(): CoreNavigation
     {
-        return \LotgdTheme::renderThemeTemplate('parts/navigation.twig', [
-            'navigation' => $this->navigation->getNavigation(),
-            'headers' => $this->navigation->getHeaders(),
-            'navs' => $this->navigation->getNavs()
-        ]);
+        if (! $this->navigation instanceof CoreNavigation)
+        {
+            $this->navigation = $this->getContainer(CoreNavigation::class);
+        }
+
+        return $this->navigation;
     }
 
     /**
-     * Create a link for menu.
+     * Get Navigation instance.
      *
-     * @param string $label
-     * @param array  $options
-     *
-     * @return string
+     * @return CoreAccessKeys
      */
-    public function createLink($label, $options)
+    public function getAccesskeys(): CoreAccessKeys
     {
-        if ($options['translate'] ?? false)
+        if (! $this->accesskeys instanceof CoreAccessKeys)
         {
-            $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $this->accesskeys = $this->getContainer(CoreAccessKeys::class);
         }
 
-        $attributes = $options['attributes'] ?? [];
-        if (! $blocked = $this->navigation->isBlocked($options['link']))
-        {
-            $label = $this->accesskeys->create($label, $attributes);
-        }
-
-        if ($blocked)
-        {
-            unset($attributes['href']);
-        }
-        $attributes = $this->createAttributesString($attributes);
-
-        return \appoencode(sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
-            (! $blocked ? 'a' : 'span'),
-            $attributes,
-            $label,
-            $options['current']['open'] ?? '', //-- Open style to nav if is current
-            $options['current']['close'] ?? '' //-- Close style to nav if is current
-        ), true);
+        return $this->accesskeys;
     }
 
     /**
-     * Create a header section.
+     * Get Translator instance.
      *
-     * @param string $label
-     * @param array  $options
-     *
-     * @return string
+     * @return CoreTranslator
      */
-    public function createHeader($label, $options): string
+    public function getTranslator(): CoreTranslator
     {
-        if ($options['translate'] ?? false)
+        if (! $this->translator instanceof CoreTranslator)
         {
-            $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $this->translator = $this->getContainer(CoreTranslator::class);
         }
 
-        $attributes = $options['attributes'] ?? [];
-        $attributes = $this->createAttributesString($attributes);
-
-        return \sprintf('<%1$s %2$s>%3$s</%1$s>',
-            (string) ($options['tag'] ?? 'span'),
-            $attributes,
-            appoencode($label, true)
-        );
-    }
-
-    /**
-     * Show pagination for a instance of Paginator.
-     *
-     * @param Paginator   $paginator
-     * @param string      $link           Url to use in href atribute in links
-     * @param string|null $template       You can change the template for your own if you need it at a specific time
-     * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
-     * @param array|null  $params
-     *
-     * @return string
-     */
-    public function showPagination(Paginator $paginator, string $link, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
-    {
-        $template = $template ?: 'parts/pagination.twig';
-        $scrollingStyle = $scrollingStyle ?: 'Sliding';
-
-        $pages = get_object_vars($paginator->getPages($scrollingStyle));
-        $link = $link.(false === \strpos($link, '#') ? '?' : '&');
-        $pages['href'] = $link;
-
-        if (null !== $params)
-        {
-            $pages = array_merge($pages, (array) $params);
-        }
-
-        return \LotgdTheme::renderThemeTemplate($template, $pages);
+        return $this->translator;
     }
 
     /**
