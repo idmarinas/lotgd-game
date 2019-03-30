@@ -49,6 +49,13 @@ class Commentary implements EntityInterface
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=20, nullable=false)
+     */
+    private $command = '';
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=1000, nullable=false)
      */
     private $comment;
@@ -498,6 +505,30 @@ class Commentary implements EntityInterface
     public function setClanNameShort(string $clanNameShort)
     {
         $this->clanNameShort = $clanNameShort;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of command
+     *
+     * @return  string
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    /**
+     * Set the value of command
+     *
+     * @param  string  $command
+     *
+     * @return  self
+     */
+    public function setCommand(string $command)
+    {
+        $this->command = $command;
 
         return $this;
     }
