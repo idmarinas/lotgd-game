@@ -14,19 +14,23 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
+use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\ServiceManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
+    use Container;
+
     protected $flashMessages;
 
     /**
-     * @param CoreFlashMessages $flashMessages
+     * @param ServiceManager $serviceManager
      */
-    public function __construct(CoreFlashMessages $flashMessages)
+    public function __construct(ServiceManager $serviceManager)
     {
-        $this->flashMessages = $flashMessages;
+        $this->setContainer($serviceManager);
     }
 
     /**
@@ -46,7 +50,7 @@ class FlashMessages extends AbstractExtension
      */
     public function display()
     {
-        $container = $this->flashMessages->getMessages();
+        $container = $this->getFlashMessages()->getMessages();
         $output = '';
 
         foreach ($container as $type => $messages)
@@ -62,9 +66,24 @@ class FlashMessages extends AbstractExtension
             }
         }
 
-        $this->flashMessages->clearMessagesFromContainer();
+        $this->getFlashMessages()->clearMessagesFromContainer();
 
         return $output;
+    }
+
+    /**
+     * Get instance of FlashMessages instance.
+     *
+     * @return CoreFlashMessages
+     */
+    public function getFlashMessages(): CoreFlashMessages
+    {
+        if (! $this->flashMessages instanceof CoreFlashMessages)
+        {
+            $this->flashMessages = $this->getContainer(CoreFlashMessages::class);
+        }
+
+        return $this->flashMessages;
     }
 
     /**
