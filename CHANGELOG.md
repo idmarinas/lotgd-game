@@ -11,14 +11,17 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 -   :warning: **_NEW Structure of files for web_**
     -   Most of the Web files have been reorganized.
-        -   Some files are moved to `public/` folder
+        -   Some files/folders are moved to `public/` folder
             -   Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php`... (all .php files in root).
-            -   Folder `cronjob/`
             -   Folder `images/`
             -   Folder `resources/` and renamed to `js/` and `ccs/`
-            -   Folder `themes`
+            -   Folder `themes/`
+        -   Moved folder `cache` to `data/cache`
+        -   Moved folder `templates` to `data/templates`
+        -   Moved folder `crawl` to `data/cache/crawl` This folder is where the advertising system keeps a cached copy.
+        -   Moved folder `logd_snapshots` to `data/logd_snapshots` This folder is where the copies of the deleted files are stored, so that they can be restored.
 -   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
--   **_New Translation system_**
+-   :warning: **_New Translation system_**
     -   Remplaced old system of translation for new system. About this new system:
         -   Used a custom _Translator_ based in `Zend\I18n\Translator\Translator`
         -   This new system not used Data Base to store translations.
@@ -34,6 +37,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
     -   All pages have a hook called `page-[NAMEPAGE]-tpl-params` with this hook you can change/add new parameters for the templates you can use in your theme.
         -   Example: `modulehook('page-home-tpl-params', [array $params])`
+            -   _Note_: This _modulehook_ is executed just before displaying the template.
         -   Some pages can have this structure for hook `page-[NAMEPAGE]-[SUBNAME]-tpl-params` are pages that have a params in route. Like page "about".
             -   Example: `modulehook('page-about-license-tpl-params', [array $params])`
 -   :warning: **_New navigation menu system_**
@@ -43,10 +47,39 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `LotgdNavigation::addHeaderNotl(string $header, array $options = [])`
             -   `LotgdNavigation::addNav(?string $label, ?string $link = null, array $options = [])`
             -   `LotgdNavigation::addNavNotl(?string $label, ?string $link = null, array $options = [])`
-            -   `LotgdNavigation::addNavAllow(string $link)`
-        -   With this function you can change the translation domain for the affected menus
+            -   `LotgdNavigation::addNavAllow(string $link)` This not add new nav, only allow link.
+            -   `LotgdNavigation::blockLink(string $link)`
+        -   With this function you can change the translation domain for the affected menus (Like `tlschema($schema = false)`)
             -   `LotgdNavigation::setTextDomain(?string $domain = null)`
             -   If you use `LotgdNavigation::setTextDomain(null)` or `LotgdNavigation::setTextDomain()` reset the translation domain to the previous value.
+    -   _Note:_ New system not allow html tags in navs name. All labels of navs are filtered to strip this.
+-   :warning: **_New commentary system_**
+    -   The old comment system has been replaced by a new one.
+    -   The new system have new structure of table in data base.
+    -   All old comments with are imported to new system. (May be failed)
+        -   Before upgrade to 4.0.0 version, make a optimimization and clean your data base. Deleting very old comments.
+    -   For show and add comments, you need this Twig functions: (Example in _village.twig_)
+        -   `save_comment()` With this function you can save comments to DB
+        -   `display_list_comments(array $commentary, string $textDomain, int $limit)` This function show comments
+            -   `$commentary` Is an array with options for commentary:
+                -   Array example of village:
+                ```
+                    [
+                        'section' => 'village', //-- This is name of section for comentaries
+                        'talk' => 'commentary.talk', //-- Key for translation talk
+                        'sayLine' => 'commentary.sayLine', //-- Key for translation say line
+                        'button' => 'commentary.button' //-- Key for translation for button add
+                    ]
+                ```
+            -   `$textDomain` Is the text domain for translator. In case of village is `page-village`.
+            -   `$limit` Is the limit per page of comments.
+        -   `add_comment(array $commentary, string $textDomain)`
+            -   `$commentary` Is an array with options for commentary. Is same of previous function.
+            -   `$textDomain` Is the text domain for translator. In case of village is `page-village`.
+-   **lib/pageparts.php** Alter `page_header` and `popup_header` function. New format to add title to page.
+    -   `page_header(?string $title = null, array $params = [], ?string $textDomain = null)`
+    -   `popup_header(?string $title = null, array $params = [], ?string $textDomain = null)`
+    -   _Notes_: You need to change all `page_header` and `popup_header` functions that content an array as the first argument. The first argument must be only a string or null.
 -   **common.php** Updated script of log http referers.
     -   Changes the way that static classes are used:
           **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
@@ -58,7 +91,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
     -   Some files have been modified to fit this
-    -   UpdatedFor keywords of `sustitute()` function:
+    -   _Updated_ For keywords of `sustitute()` function:
+        -   _Note_: This function is not recommended. Because you can use the translator to do the same.
         -   `{playername}` Replaced by player's name (**Without** the title included)
         -   `{charactername}` Replaced by player's name (**With** the title included)
         -   `{playerweapon}` Replaced by the name of the player's weapon
@@ -107,6 +141,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   _New Component of Game_ `Lotgd\Core\Component\Filesystem`
     -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
         -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
+-   **src/core/Template/Theme.php** and **src/core/Fixed/Theme.php**
+    -   Added new function `renderModuleTemplate(string $template, array $params)` With this function you can render a template of a module that does not depend on the current theme.
 -   **lib/class/lotgdFormat.php** Added new function:
     -   `LotgdFormat::pluralize(int $number, string $singular, string $plural)` select the plural or singular form according to the past number
 -   **_Migrating to Doctrine_**
@@ -120,6 +156,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   `Debugger::barDump($var, string $title)` or `barDump($var, string $title)` dump var to Debugger bar. To this option you can add a title to the dump
         -   `Debugger::dump($var)` or `dump($var)` dump var in output.
     -   With  can dump a var, and in production Debugger ignore this.
+-   **Since 4.0.0 IDMarinas Edition** When a module is installed, the game checks if the module requires a specific version of LoTGD.
 
 ### :fire: DEPRECATED
 
@@ -128,6 +165,29 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Identify numeric version: `Lotgd\Core\Application::VERSION_NUMBER`
     -   Copyright text: `Lotgd\Core\Application::COPYRIGHT`
     -   License text: `Lotgd\Core\Application::LICENSE`
+    -   Functions:
+        -   `output()`
+        -   `output_notl()`
+-   **lib/nav.php** All functions:
+    -   `blocknav()`
+    -   `unblocknav()`
+    -   `appendcount()`
+    -   `appendlink()`
+    -   `set_block_new_navs()`
+    -   `addnavheader()`
+    -   `addnav_notl()`
+    -   `addnav()`
+    -   `is_blocked()`
+    -   `count_viable_navs()`
+    -   `checknavs()`
+    -   `buildnavs()`
+    -   `private_addnav()`
+    -   `navcount()`
+    -   `clearnav()`
+    -   `clearoutput()`
+    -   `add_accesskey()`
+    -   _Note_: This file will be deleted in version 4.1.0
+-   **settings_extension** Some of these settings (soon all) have been transferred to the translation file `data/translations/en/app/mail.yaml` They don't need to be in the database.
 
 ### :wrench: FIXES
 
@@ -155,10 +215,12 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :notebook: NOTES
 
+-   :warning: _Important_ This is a very large update, which is going to require a lot of changes.
+    -   All the old translation functions are present, but they may not work as expected. These functions issue an obsolete function warning message.
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
     -   All related gulp tasks are updated to this new version
-    -   Removed `gulp-help` dependency (sse `gulp --tasks` to list tasks)
+    -   Removed `gulp-help` dependency (use `gulp --tasks` to list tasks)
 
 # Version: 3.0.0
 
