@@ -98,7 +98,6 @@ class Translator extends AbstractExtension
         return $this->translator;
     }
 
-
     /**
      * {@inheritdoc}
      */
