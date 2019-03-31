@@ -23,9 +23,6 @@ use Twig\Node\ModuleNode;
 use Twig\Node\Node;
 use Twig\NodeVisitor\AbstractNodeVisitor;
 
-/**
- * @author Fabien Potencier <fabien@symfony.com>
- */
 class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 {
     private $domain;
