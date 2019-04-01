@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\NodeVisitor;
 
-class Domain
+class Param
 {
     private $parent;
     private $data = [];
@@ -25,7 +25,7 @@ class Domain
     }
 
     /**
-     * Opens a new child domain.
+     * Opens a new child param.
      *
      * @return self
      */
@@ -35,7 +35,7 @@ class Domain
     }
 
     /**
-     * Closes current domain and returns parent one.
+     * Closes current param and returns parent one.
      *
      * @return self|null
      */
@@ -47,7 +47,7 @@ class Domain
     }
 
     /**
-     * Stores data into current domain.
+     * Stores data into current param.
      *
      * @param string $key
      * @param mixed  $value
@@ -60,7 +60,7 @@ class Domain
     {
         if ($this->left)
         {
-            throw new \LogicException('Left domain.');
+            throw new \LogicException('Left param.');
         }
 
         $this->data[$key] = $value;
@@ -69,7 +69,7 @@ class Domain
     }
 
     /**
-     * Tests if a data is visible from current domain.
+     * Tests if a data is visible from current param.
      *
      * @param string $key
      *
@@ -91,7 +91,7 @@ class Domain
     }
 
     /**
-     * Returns data visible from current domain.
+     * Returns data visible from current param.
      *
      * @param string $key
      * @param mixed  $default

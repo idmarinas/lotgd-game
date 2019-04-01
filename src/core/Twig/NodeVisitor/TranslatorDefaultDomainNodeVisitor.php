@@ -29,7 +29,7 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 
     public function __construct()
     {
-        $this->domain = new Domain();
+        $this->domain = new Param();
     }
 
     /**
