@@ -284,7 +284,7 @@ $site = $uri ? parse_url($uri, PHP_URL_HOST) : '';
 
 if ($url != $site && $uri && $site)
 {
-    $url = sprintf('%s://%s%s', LotgdHttp::getServer('REQUEST_SCHEME'), $url, LotgdHttp::getServer('REQUEST_URI'));
+    $url = sprintf('%s://%s/%s', LotgdHttp::getServer('REQUEST_SCHEME'), $url, LotgdHttp::getServer('REQUEST_URI'));
 
     $refererRepository = Doctrine::getRepository(\Lotgd\Core\Entity\Referers::class);
     $referers = $refererRepository->findOneByUri($uri);
