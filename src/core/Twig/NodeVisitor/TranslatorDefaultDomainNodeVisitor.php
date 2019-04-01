@@ -53,7 +53,6 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
         if ($node instanceof TranslatorDefaultDomainNode
             && ($node->getNode('expr') instanceof ConstantExpression || $node->getNode('expr') instanceof NameExpression)
         ) {
-            bdump($node);
             $this->scope->set('domain', $node->getNode('expr'));
 
             return $node;
