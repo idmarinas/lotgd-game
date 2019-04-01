@@ -17,8 +17,8 @@ use Lotgd\Core\Twig\Node\DefaultDomainNode as TranslatorDefaultDomainNode;
 use Twig\Environment;
 use Twig\Node\BlockNode;
 use Twig\Node\Expression\ConstantExpression;
-use Twig\Node\Expression\NameExpression;
 use Twig\Node\Expression\FilterExpression;
+use Twig\Node\Expression\NameExpression;
 use Twig\Node\ModuleNode;
 use Twig\Node\Node;
 use Twig\NodeVisitor\AbstractNodeVisitor;
@@ -52,8 +52,7 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 
         if ($node instanceof TranslatorDefaultDomainNode
             && ($node->getNode('expr') instanceof ConstantExpression || $node->getNode('expr') instanceof NameExpression)
-        )
-        {
+        ) {
             $this->domain->set('domain', $node->getNode('expr'));
 
             return $node;

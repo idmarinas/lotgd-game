@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\NodeVisitor;
 
 use Twig\Environment;
 use Twig\Node\Expression\ConstantExpression;
-use Twig\Node\Expression\NameExpression;
 use Twig\Node\Expression\FilterExpression;
 use Twig\Node\Node;
 use Twig\NodeVisitor\AbstractNodeVisitor;
@@ -67,7 +66,6 @@ class TranslatorNodeVisitor extends AbstractNodeVisitor
 
         if ($node instanceof FilterExpression && $node->getNode('node') instanceof ConstantExpression && 't' === $node->getNode('filter')->getAttribute('value'))
         {
-            bdump($node->getNode('node')->getAttribute('value'));
             // extract constant nodes with a trans filter
             $this->messages[] = [
                 $node->getNode('node')->getAttribute('value'),
