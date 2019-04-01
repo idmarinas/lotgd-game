@@ -35,25 +35,34 @@ define([
 
         jQuery('#charsleft-commentary-form').html(charsLeftText)
 
+        let commandMe1 = message.substr(0, 2)
+        let commandMe2 = message.substr(0, 1)
+        let commandMe3 = message.substr(0, 3)
+        let commandGame = message.substr(0, 5)
+
         let text = '<i class="eye icon"></i>'
 
-        if (message.substr(0, 2) === '::')
+        if (commandMe1 === '::' || commandMe2 === ':' || commandMe3 === '/me')
         {
             text += '<span class="colLtWhite">' + playerName + '</span> '
-            text += '<span class="colLtBlack">' + Lotgd.appoencode(message.replace(message.substr(0, 2), '')) + '</span>'
-        }
-        else if (message.substr(0, 1) === ':')
-        {
-            text += '<span class="colLtWhite">' + playerName + '</span> '
-            text += '<span class="colLtBlack">' + Lotgd.appoencode(message.replace(message.substr(0, 1), '')) + '</span>'
-        }
+            let colorizeMenssage = ''
 
-        else if (message.substr(0, 3) === '/me')
-        {
-            text += '<span class="colLtWhite">' + playerName + '</span> '
-            text += '<span class="colLtBlack">' + Lotgd.appoencode(message.replace(message.substr(0, 3), '')) + '</span>'
+            if (commandMe1 === '::')
+            {
+                colorizeMenssage = Lotgd.appoencode(message.replace(commandMe1, ''))
+            }
+            else if (commandMe2 === ':')
+            {
+                colorizeMenssage = Lotgd.appoencode(message.replace(commandMe2, ''))
+            }
+            else
+            {
+                colorizeMenssage = Lotgd.appoencode(message.replace(commandMe3, ''))
+            }
+
+            text += '<span class="colLtBlack">' + colorizeMenssage + '</span>'
         }
-        else if (message.substr(0, 5) === '/game') { text += '<span class="colDkMagenta">' + Lotgd.appoencode(message.replace(message.substr(0, 5), '')) + '</span>' }
+        else if (commandGame === '/game') { text += '<span class="colDkMagenta">' + Lotgd.appoencode(message.replace(commandGame, '')) + '</span>' }
         else
         {
             text += '<span class="colLtWhite">' + playerName + '</span> '
