@@ -57,7 +57,8 @@ class Translator extends AbstractExtension
     public function getTokenParsers()
     {
         return [
-            /*
+            /**
+             * @param string
              * {% translate_default_domain 'foobar' %}
              */
             new TranslatorDefaultDomainTokenParser(),
