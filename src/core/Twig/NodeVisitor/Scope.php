@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\NodeVisitor;
 
-class Param
+class Scope
 {
     private $parent;
     private $data = [];
@@ -25,7 +25,7 @@ class Param
     }
 
     /**
-     * Opens a new child param.
+     * Opens a new child scope.
      *
      * @return self
      */
@@ -35,7 +35,7 @@ class Param
     }
 
     /**
-     * Closes current param and returns parent one.
+     * Closes current scope and returns parent one.
      *
      * @return self|null
      */
@@ -47,10 +47,10 @@ class Param
     }
 
     /**
-     * Stores data into current param.
+     * Stores data into current scope.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @scope string $key
+     * @scope mixed  $value
      *
      * @return $this
      *
@@ -60,7 +60,7 @@ class Param
     {
         if ($this->left)
         {
-            throw new \LogicException('Left param.');
+            throw new \LogicException('Left scope.');
         }
 
         $this->data[$key] = $value;
@@ -69,9 +69,9 @@ class Param
     }
 
     /**
-     * Tests if a data is visible from current param.
+     * Tests if a data is visible from current scope.
      *
-     * @param string $key
+     * @scope string $key
      *
      * @return bool
      */
@@ -91,10 +91,10 @@ class Param
     }
 
     /**
-     * Returns data visible from current param.
+     * Returns data visible from current scope.
      *
-     * @param string $key
-     * @param mixed  $default
+     * @scope string $key
+     * @scope mixed  $default
      *
      * @return mixed
      */

@@ -17,7 +17,7 @@ use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Node;
 
-class DefaultParamNode extends Node
+class TranslatorDefaultDomainNode extends Node
 {
     public function __construct(AbstractExpression $expr, int $lineno = 0, string $tag = null)
     {

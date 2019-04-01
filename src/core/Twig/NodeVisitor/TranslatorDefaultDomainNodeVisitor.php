@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\NodeVisitor;
 
-use Lotgd\Core\Twig\Node\DefaultParamNode as TranslatorDefaultDomainNode;
+use Lotgd\Core\Twig\Node\TranslatorDefaultDomainNode;
 use Twig\Environment;
 use Twig\Node\BlockNode;
 use Twig\Node\Expression\ConstantExpression;
@@ -25,11 +25,11 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
 
 class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 {
-    private $domain;
+    private $scope;
 
     public function __construct()
     {
-        $this->domain = new Param();
+        $this->scope = new Scope();
     }
 
     /**
@@ -47,18 +47,19 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
     {
         if ($node instanceof BlockNode || $node instanceof ModuleNode)
         {
-            $this->domain = $this->domain->enter();
+            $this->scope = $this->scope->enter();
         }
 
         if ($node instanceof TranslatorDefaultDomainNode
             && ($node->getNode('expr') instanceof ConstantExpression || $node->getNode('expr') instanceof NameExpression)
         ) {
-            $this->domain->set('domain', $node->getNode('expr'));
+            bdump($node);
+            $this->scope->set('domain', $node->getNode('expr'));
 
             return $node;
         }
 
-        if (! $this->domain->has('domain'))
+        if (! $this->scope->has('domain'))
         {
             return $node;
         }
@@ -69,14 +70,7 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 
             if (! $arguments->hasNode('domain'))
             {
-                $arguments->setNode('domain', $this->domain->get('domain'));
-            }
-        }
-        elseif ($node instanceof TranslatorNode)
-        {
-            if (! $node->hasNode('domain'))
-            {
-                $node->setNode('domain', $this->domain->get('domain'));
+                $arguments->setNode('domain', $this->scope->get('domain'));
             }
         }
 
@@ -95,7 +89,7 @@ class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
 
         if ($node instanceof BlockNode || $node instanceof ModuleNode)
         {
-            $this->domain = $this->domain->leave();
+            $this->scope = $this->scope->leave();
         }
 
         return $node;
