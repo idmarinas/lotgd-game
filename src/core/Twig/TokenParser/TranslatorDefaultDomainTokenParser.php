@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\TokenParser;
 
-use Lotgd\Core\Twig\Node\DefaultDomainNode as TranslatorDefaultDomainNode;
+use Lotgd\Core\Twig\Node\DefaultParamNode as TranslatorDefaultDomainNode;
 use Twig\Node\Node;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
