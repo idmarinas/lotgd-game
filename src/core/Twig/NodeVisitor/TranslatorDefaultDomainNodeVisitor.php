@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\NodeVisitor;
 
-use Lotgd\Core\Twig\Node\TranslatorDefaultDomainNode;
+use Lotgd\Core\Twig\Node\DefaultDomainNode as TranslatorDefaultDomainNode;
 use Twig\Environment;
 use Twig\Node\BlockNode;
 use Twig\Node\Expression\ConstantExpression;
