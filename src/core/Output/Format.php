@@ -73,7 +73,12 @@ class Format
      */
     public function relativedate($indate)
     {
-        $lastoncheck = is_numeric($indate) ? $indate : strtotime($indate);
+        if ($indate instanceof \DateTime)
+        {
+            $indate = $indate->getTimestamp();
+        }
+
+        $indate = is_numeric($indate) ? $indate : strtotime($indate);
         $lastoncheck = round((time() - strtotime($indate)) / 86400, 0).' days';
 
         $laston = ['%s days', round((time() - strtotime($indate)) / 86400, 0)];
