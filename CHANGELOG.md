@@ -59,9 +59,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   All old comments with are imported to new system. (May be failed)
         -   Before upgrade to 4.0.0 version, make a optimimization and clean your data base. Deleting very old comments.
     -   For show and add comments, you need this Twig functions: (Example in _village.twig_)
-        -   `save_comment()` With this function you can save comments to DB
-        -   `display_list_comments(array $commentary, string $textDomain, int $limit)` This function show comments
-            -   `$commentary` Is an array with options for commentary:
+        -   `{{ commentary_block(commentary, textDomain) }}` Show comment block
+            -   `commentary` Is an array with options for commentary:
                 -   Array example of village:
                 ```
                     [
@@ -71,11 +70,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                         'button' => 'commentary.button' //-- Key for translation for button add
                     ]
                 ```
-            -   `$textDomain` Is the text domain for translator. In case of village is `page-village`.
-            -   `$limit` Is the limit per page of comments.
-        -   `add_comment(array $commentary, string $textDomain)`
-            -   `$commentary` Is an array with options for commentary. Is same of previous function.
-            -   `$textDomain` Is the text domain for translator. In case of village is `page-village`.
+            -   `textDomain` Is the text domain for translator. In case of village is `page-village`.
+        -   This are optional, use if need change default value:
+            -   `{% commentary_limit_comments 10 %}`, Set a limits of comments per page. Default is 25
+            -   `{% commentary_show_pagination true %}`, Set if show pagination of comments. Default is true
+            -   `{% commentary_pagination_link_url 'village.php' %}`, Set the url for links of pagination. Default is `$_SERVER['SCRIPT_NAME']`
+                -   This is mandatory defined when used in module.
+            -   `{% commentary_can_add_comments true %}`, Set if can add new comments. Default is true
+
 -   **lib/pageparts.php** Alter `page_header` and `popup_header` function. New format to add title to page.
     -   `page_header(?string $title = null, array $params = [], ?string $textDomain = null)`
     -   `popup_header(?string $title = null, array $params = [], ?string $textDomain = null)`
