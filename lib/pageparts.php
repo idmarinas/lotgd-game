@@ -36,6 +36,8 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
     $nopopups['about.php'] = 1;
     $nopopups['mail.php'] = 1;
 
+    $session['user']['chatloc'] = '';
+
     //in case this didn't already get called (such as on a database error)
     translator_setup();
 
@@ -317,6 +319,8 @@ function page_footer($saveuser = true)
 function popup_header(?string $title = null, array $params = [], ?string $textDomain = null)
 {
     global $html, $session;
+
+    $session['user']['chatloc'] = '';
 
     translator_setup();
 
