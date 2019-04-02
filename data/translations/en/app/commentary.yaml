@@ -1,0 +1,13 @@
+form:
+    button:
+        bio: 'See bio of {name}'
+        mail: 'Write a message to {name}'
+        hide: 'Hide marked messagess'
+    toggle:
+        hide: 'Hide this comment'
+comment:
+    recent: 'Recent comment'
+    toggle: 'Hide '
+    moderation:
+        hide: 'Moderated by {name}'
+        unhide: 'Restored by {name}'

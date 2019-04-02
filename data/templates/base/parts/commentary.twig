@@ -1,0 +1,35 @@
+{% if canAddComment %}
+    {# First the comment is saved in the database (if post method) otherwise the new comment will not be shown. #}
+    {{ save_comment() }}
+{% endif %}
+
+{# Show comments (new comment included) #}
+<div class="ui minimal small comments">
+    <h5 class="ui dividing header">{{ commentary.talk|t(null, textDomain)|colorize }}</h5>
+
+    {% if not SU_EDIT_COMMENTS %}
+        {% for comment in comments|reverse %}
+            {% if not comment.hidden %}
+                {{ display_one_comment(comment, textDomain, commentary.sayLine) }}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <form action="{{ formUrl }}" method="POST" autocomplete="off">
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+            {% for comment in comments|reverse %}
+                {{ display_one_comment(comment, textDomain, commentary.sayLine, SU_EDIT_COMMENTS) }}
+            {% endfor %}
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+        </form>
+    {% endif %}
+</div>
+
+{% if canAddComment %}
+    {# Add new comment #}
+    {{ add_comment(commentary, textDomain) }}
+{% endif %}
+
+{% if showPagination %}
+    {# Show pagination for comments #}
+    {{ navigation_pagination(comments, paginationLinkUrl, 'parts/commentary/pagination.twig' ) }}
+{% endif %}

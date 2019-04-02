@@ -1,0 +1,44 @@
+{% set recent = 'comment.recent'|tl(null, 'app-commentary') %}
+<div class="comment {{ comment.hidden ? 'del' : '' }}">
+    <div class="content">
+        <div class="text">
+            {% if SU_EDIT_COMMENTS %}
+                <div class="ui toggle checkbox tooltip" data-content="{{ 'form.toggle.hide'|tl(null, 'app-commentary')|uncolorize }}">
+                    <input type="hidden" name="hideComment[{{ comment.id }}]" value="0">
+                    <input type="checkbox" name="hideComment[{{ comment.id }}]" {{ comment.hidden ? 'checked' : '' }} value="1">
+                </div>
+            {% endif %}
+            {{ display_status_online_player(comment, textDomain) }}
+            {{ comment.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+            <span class="{{ comment.hidden ? 'ui tooltip' : '' }}" data-content="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
+                {% if comment.command == 'game' %}
+                    {# It's a message from the game, no associated author #}
+                    <span class="colDkMagenta"><em><strong>{{ comment.comment|uncolorize|trim|capitalize }}</strong></em></span>
+                {% else %}
+                    {# It's a normal comment #}
+                    <span class="author">{{ comment.authorName|colorize }}</span>
+                    {# Represent a special action of player or not #}
+                    {% if comment.command == 'me' %}
+                        <span class="colLtBlack">{{ comment.comment|uncolorize }}</span>
+                    {% else %}
+                        <em class="colDkCyan">{{ sayLine|t(null, textDomain)|colorize|lower }}</em>,
+                        <span class="colDkCyan">"<span class="colLtCyan">{{ comment.comment|colorize }}</span>"</span>
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+        {# Actions for see bio and send mail to the author of comment #}
+        {% if comment.command != 'game' %}
+            {% set bioLink = ('bio.php?char=' ~ comment.author)|lotgd_url %}
+            {% set mailLink = ('mail.php?op=write&to=' ~ comment.author)|lotgd_url %}
+            <div class="actions">
+                <a class="ui mini blue icon button" aria-label="{{ 'form.button.bio'|t({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ bioLink }}">
+                    <i class="user icon"></i>
+                </a>
+                <a class="ui mini blue icon button" aria-label="{{ 'form.button.mail'|t({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ mailLink }}" onclick="Lotgd.embed(this)">
+                    <i class="mail icon"></i>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
