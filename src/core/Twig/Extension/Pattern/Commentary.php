@@ -49,7 +49,7 @@ trait Commentary
             'showPagination' => $showPagination,
             'canAddComment' => $canAddComment,
             'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdHttp::getServer('SCRIPT_NAME'),
-            'formUrl' => \LotgdHttp::getServer('REQUEST_URI'),
+            'formUrl' => $this->commentaryFormUrl(),
             'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
         ];
 
@@ -178,7 +178,7 @@ trait Commentary
         global $output;
 
         $params = [
-            'formUrl' => \LotgdHttp::getServer('REQUEST_URI'),
+            'formUrl' => $this->commentaryFormUrl(),
             'textDomain' => $textDomain,
             'commentary' => $commentary,
             'colors' => $output->getColors(),
@@ -235,5 +235,35 @@ trait Commentary
         }
 
         return $this->onlineStatus;
+    }
+
+    /**
+     * Get a valid url to use in commentary form.
+     *
+     * @return string
+     */
+    protected function commentaryFormUrl(): string
+    {
+        $script = \LotgdHttp::getServer('SCRIPT_NAME');
+        $query = \LotgdHttp::getAllQuery();
+
+        $deleteQuery = [
+            'c', //-- Generate new one
+            'commentPage', //-- Reset pagination
+            'frombio'
+        ];
+
+        foreach ($deleteQuery as $del)
+        {
+            if (isset($query[$del]))
+            {
+                unset($query[$del]);
+            }
+        }
+
+        $query = http_build_query($query);
+        $query = preg_replace('/op=fight/i', 'op=continue', $query);
+
+        return $script.($query ? '?' : '').$query;
     }
 }
