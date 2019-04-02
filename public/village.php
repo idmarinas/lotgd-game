@@ -4,12 +4,11 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/commentary.php';
 require_once 'lib/events.php';
 require_once 'lib/experience.php';
 
 tlschema('village');
-//mass_module_prepare(array("village","validlocation","villagetext","village-desc"));
+
 // See if the user is in a valid location and if not, put them back to
 // a place which is valid
 $valid_loc = [];
@@ -17,122 +16,167 @@ $vname = getsetting('villagename', LOCATION_FIELDS);
 $iname = getsetting('innname', LOCATION_INN);
 $valid_loc[$vname] = 'village';
 $valid_loc = modulehook('validlocation', $valid_loc);
+$params = [];
 
 if (! isset($valid_loc[$session['user']['location']]))
 {
     $session['user']['location'] = $vname;
 }
 
+//-- Newest player in realm
 $newestname = '';
-$newestplayer = getsetting('newestplayer', '');
+$newestplayer = (int) getsetting('newestplayer', 0);
+$newestname = (string) getsetting('newestplayername', '');
 
+$newtext = 'newestOther';
 if ($newestplayer == $session['user']['acctid'])
 {
-    $newtext = "`nYou're the newest member of the village.  As such, you wander around, gaping at the sights, and generally looking lost.";
+    $newtext = 'newestPlayer';
     $newestname = $session['user']['name'];
 }
-else
+elseif (! $newestname && $newestplayer)
 {
-    $newtext = '`n`2Wandering near the inn is `&%s`2, looking completely lost.';
-
-    if (0 != (int) $newestplayer)
-    {
-        $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid='$newestplayer'";
-        $result = DB::query($sql);
-
-        if (1 == DB::num_rows($result))
-        {
-            $row = DB::fetch_assoc($result);
-            $newestname = $row['name'];
-        }
-        else
-        {
-            $newestplayer = '';
-        }
-    }
-    else
-    {
-        if ($newestplayer > '')
-        {
-            $newestname = $newestplayer;
-        }
-        else
-        {
-            $newestname = '';
-        }
-    }
+    $characterRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $newestname = $characterRepository->getCharacterNameFromAcctId($newestplayer) ?: 'Unknown';
+    savesetting('newestplayername', $newestname);
 }
 
-$basetext = [
-    "`c`@`b%s Square´b´cThe village of %s hustles and bustles.  No one really notices that you're standing there.  ".
-    'You see various shops and businesses along main street.  There is a curious looking rock to one side.  '.
-    'On every side the village is surrounded by deep dark forest.´c`n`n', $vname, $vname
-];
 $origtexts = [
-    'text' => $basetext,
-    'clock' => 'The clock on the inn reads `^%s`@.`n',
-    'title' => ['%s Square', $vname],
-    'talk' => '`n`%`@Nearby some villagers talk:`n',
-    'sayline' => 'says',
+    //-- Comentary
+    'section' => 'village',//-- Deprecated only for legacy removed in 4.1.0
+    'talk' => 'talk',//-- Deprecated only for legacy removed in 4.1.0
+    'sayline' => 'says',//-- Deprecated only for legacy removed in 4.1.0
+    'commentary' => [
+        'section' => 'village', //-- This is name of section for comentaries
+        'talk' => 'commentary.talk', //-- Key for translation talk
+        'sayLine' => 'commentary.sayLine', //-- Key for translation say line
+        'button' => 'commentary.button' //-- Key for translation for button add
+    ],
+
+    //-- Newest player
     'newest' => $newtext,
     'newestplayer' => $newestname,
     'newestid' => $newestplayer,
-    'gatenav' => 'City Gates',
-    'fightnav' => 'Blades Boulevard',
-    'marketnav' => 'Market Street',
-    'tavernnav' => 'Tavern Street',
-    'industrialnav' => 'Industrial Street',
-    'infonav' => 'Info',
-    'othernav' => 'Other',
-    'section' => 'village',
-    'innname' => $iname,
-    'stablename' => "Merick's Stables",
-    'mercenarycamp' => 'Mercenary Camp',
-    'armorshop' => 'Pegasus Armor',
-    'weaponshop' => "MightyE's Weaponry",
-    'fields' => 'The Fields'
+
+    //-- Village text
+    'text' => [
+        [//-- Paragraph
+            'text', //-- Translation key
+            ['village' => $vname] //-- Params for translation
+        ]
+    ],
+    'clock' => 'clock',
+    'title' => [
+        'title', //-- Translation key
+        ['village' => $vname] //-- Params for translation
+    ],
+
+    //-- Navigation headers
+    'gatenav' => 'headers.gate',
+    'fields' => 'headers.fields',
+    'fightnav' => 'headers.fight',
+    'marketnav' => 'headers.market',
+    'tavernnav' => 'headers.tavern',
+    'industrialnav' => 'headers.industrial',
+    'infonav' => 'headers.info',
+    'othernav' => 'headers.other',
+
+    //-- Navigation menus
+    'forest' => 'navs.forest',
+    'pvp' => 'navs.pvp',
+    'logout' => 'navs.logout',
+    'innname' => 'navs.innname',
+    'stablename' => 'navs.stablename',
+    'mercenarycamp' => 'navs.mercenarycamp',
+    'train' => 'navs.train',
+    'lodge' => 'navs.lodge',
+    'armorshop' => 'navs.armorshop',
+    'weaponshop' => 'navs.weaponshop',
+    'bank' => 'navs.bank',
+    'gypsy' => 'navs.gypsy',
+    'pavilion' => 'navs.pavilion',
+    'gardens' => 'navs.gardens',
+    'rock' => 'navs.rock',
+    'clan' => 'navs.clan',
+    'faq' => 'navs.faq',
+    'news' => 'navs.news',
+    'list' => 'navs.list',
+    'hof' => 'navs.hof',
+    'account' => 'navs.account',
+    'prefs' => 'navs.prefs',
+    'referral' => 'navs.referral',
 ];
 $schemas = [
-    'text' => 'village',
-    'clock' => 'village',
-    'title' => 'village',
-    'talk' => 'village',
-    'sayline' => 'village',
-    'newest' => 'village',
-    'newestplayer' => 'village',
-    'newestid' => 'village',
-    'gatenav' => 'village',
-    'fightnav' => 'village',
-    'marketnav' => 'village',
-    'tavernnav' => 'village',
-    'industrialnav' => 'village',
-    'infonav' => 'village',
-    'othernav' => 'village',
-    'section' => 'village',
-    'innname' => 'village',
-    'stablename' => 'village',
-    'mercenarycamp' => 'village',
-    'armorshop' => 'village',
-    'weaponshop' => 'village',
-    'fields' => 'village'
+    //-- Comentary
+    'section' => 'page-village',//-- Deprecated only for legacy removed in 4.1.0
+    'talk' => 'page-village',//-- Deprecated only for legacy removed in 4.1.0
+    'sayline' => 'page-village',//-- Deprecated only for legacy removed in 4.1.0
+    //-- All comentary options have the same text domain
+    'commentary' => 'page-village',
+
+    //-- Newest player
+    'newest' => 'page-village',
+    'newestplayer' => 'page-village',
+    'newestid' => 'page-village',
+
+    //- Village text
+    'text' => 'page-village',
+    'clock' => 'page-village',
+    'title' => 'page-village',
+
+    //-- Navigation headers
+    'gatenav' => 'navigation-village',
+    'fields' => 'navigation-village',
+    'fightnav' => 'navigation-village',
+    'marketnav' => 'navigation-village',
+    'tavernnav' => 'navigation-village',
+    'industrialnav' => 'navigation-village',
+    'infonav' => 'navigation-village',
+    'othernav' => 'navigation-village',
+
+    //-- Navigation menus
+    'forest' => 'navigation-village',
+    'pvp' => 'navigation-village',
+    'logout' => 'navigation-village',
+    'innname' => 'navigation-village',
+    'stablename' => 'navigation-village',
+    'mercenarycamp' => 'navigation-village',
+    'train' => 'navigation-village',
+    'lodge' => 'navigation-village',
+    'armorshop' => 'navigation-village',
+    'weaponshop' => 'navigation-village',
+    'bank' => 'navigation-village',
+    'gypsy' => 'navigation-village',
+    'pavilion' => 'navigation-village',
+    'gardens' => 'navigation-village',
+    'rock' => 'navigation-village',
+    'clan' => 'navigation-village',
+    'faq' => 'navigation-village',
+    'news' => 'navigation-village',
+    'list' => 'navigation-village',
+    'hof' => 'navigation-village',
+    'account' => 'navigation-village',
+    'prefs' => 'navigation-village',
+    'referral' => 'navigation-village',
 ];
 // Now store the schemas
 $origtexts['schemas'] = $schemas;
 
-// don't hook on to this text for your standard modules please, use "village"
-// instead.
-// This hook is specifically to allow modules that do other villages to create
-// ambience.
+// Don't hook on to this text for your standard modules please, use "village" instead.
+// This hook is specifically to allow modules that do other villages to create ambience.
 $texts = modulehook('villagetext', $origtexts);
 //and now a special hook for the village
 $texts = modulehook("villagetext-{$session['user']['location']}", $texts);
 $schemas = $texts['schemas'];
+unset($texts['schemas']);
 
-tlschema($schemas['title']);
-page_header($texts['title']);
-tlschema();
+$params['texts'] = $texts;
+$params['schemas'] = $schemas;
 
-addcommentary();
+$title = $texts['title'];
+$title[] = $schemas['title'];
+call_user_func_array('page_header', $title);
+
 $skipvillagedesc = handle_event('village');
 checkday();
 
@@ -143,7 +187,7 @@ if (1 == $session['user']['slaydragon'])
 
 if (! $session['user']['alive'])
 {
-    redirect('shades.php');
+    return redirect('shades.php');
 }
 
 if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
@@ -155,217 +199,126 @@ if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 
     if ($session['user']['experience'] > $expreqd && $session['user']['level'] < getsetting('maxlevel', 15))
     {
-        redirect('train.php?op=autochallenge');
+        return redirect('train.php?op=autochallenge');
     }
 }
 
-$op = httpget('op');
-$com = httpget('comscroll');
-$refresh = httpget('refresh');
-$commenting = httpget('commenting');
-$comment = httppost('insertcommentary');
+$op = \LotgdHttp::getQuery('op');
+$com = \LotgdHttp::getQuery('commentPage');
+$commenting = \LotgdHttp::getQuery('commenting');
+$comment = \LotgdHttp::getPost('comment');
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
-if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting)
+// The '1' should really be sysadmin customizable.
+if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('village', getsetting('villagechance', 0)))
 {
-    // The '1' should really be sysadmin customizable.
-    if (0 != module_events('village', getsetting('villagechance', 0)))
+    if (\LotgdNavigation::checkNavs())
     {
-        if (checknavs())
-        {
-            page_footer();
-        }
-        else
-        {
-            // Reset the special for good.
-            $session['user']['specialinc'] = '';
-            $session['user']['specialmisc'] = '';
-            $skipvillagedesc = true;
-            $op = '';
-            httpset('op', '');
-        }
+        page_footer();
+    }
+    else
+    {
+        // Reset the special for good.
+        $session['user']['specialinc'] = '';
+        $session['user']['specialmisc'] = '';
+        $skipvillagedesc = true;
+        $op = '';
+        \LotgdHttp::setQuery('op', '');
     }
 }
 
-tlschema($schemas['gatenav']);
-addnav($texts['gatenav']);
-tlschema();
-
-addnav('F?Forest', 'forest.php');
+//-- City gates
+\LotgdNavigation::addHeader($texts['gatenav'], ['textDomain' => $schemas['gatenav']]);
+\LotgdNavigation::addNav($texts['forest'], 'forest.php', ['textDomain' => $schemas['forest']]);
 
 if (getsetting('pvp', 1))
 {
-    addnav('S?Slay Other Players', 'pvp.php');
+    \LotgdNavigation::addNav($texts['pvp'], 'pvp.php', ['textDomain' => $schemas['pvp']]);
 }
-tlschema($schemas['fields']);
-addnav($texts['fields']);
-addnav('Q?`%Quit`0 to the fields', 'login.php?op=logout', true);
-tlschema();
+
+//-- Fields
+\LotgdNavigation::addHeader($texts['fields'], ['textDomain' => $schemas['fields']]);
+\LotgdNavigation::addNav($texts['logout'], 'login.php?op=logout', ['textDomain' => $schemas['logout']]);
 
 if (getsetting('enablecompanions', true))
 {
-    tlschema($schemas['mercenarycamp']);
-    addnav($texts['mercenarycamp'], 'mercenarycamp.php');
-    tlschema();
+    \LotgdNavigation::addNav($texts['mercenarycamp'], 'mercenarycamp.php', ['textDomain' => $schemas['mercenarycamp']]);
 }
 
-tlschema($schemas['fightnav']);
-addnav($texts['fightnav']);
-tlschema();
-addnav("u?Bluspring's Warrior Training", 'train.php');
+//-- Fight street
+\LotgdNavigation::addHeader($texts['fightnav'], ['textDomain' => $schemas['fightnav']]);
+\LotgdNavigation::addNav($texts['train'], 'train.php', ['textDomain' => $schemas['train']]);
 
-if (@file_exists('lodge.php'))
+if (file_exists('lodge.php'))
 {
-    addnav("J?JCP's Hunter Lodge", 'lodge.php');
+    \LotgdNavigation::addNav($texts['lodge'], 'lodge.php', ['textDomain' => $schemas['lodge']]);
 }
 
-tlschema($schemas['marketnav']);
-addnav($texts['marketnav']);
-tlschema();
-tlschema($schemas['weaponshop']);
-addnav('W?'.$texts['weaponshop'], 'weapons.php');
-tlschema();
-tlschema($schemas['armorshop']);
-addnav('A?'.$texts['armorshop'], 'armor.php');
-tlschema();
-addnav('B?Ye Olde Bank', 'bank.php');
-addnav('Z?Ze Gypsy Tent', 'gypsy.php');
+//-- Market street
+\LotgdNavigation::addHeader($texts['marketnav'], ['textDomain' => $schemas['marketnav']]);
+\LotgdNavigation::addNav($texts['weaponshop'], 'weapons.php', ['textDomain' => $schemas['weaponshop']]);
+\LotgdNavigation::addNav($texts['armorshop'], 'armor.php', ['textDomain' => $schemas['armorshop']]);
+\LotgdNavigation::addNav($texts['bank'], 'bank.php', ['textDomain' => $schemas['bank']]);
+\LotgdNavigation::addNav($texts['gypsy'], 'gypsy.php', ['textDomain' => $schemas['gypsy']]);
 
-if (1 == getsetting('betaperplayer', 1) && @file_exists('pavilion.php'))
+if (1 == getsetting('betaperplayer', 1) && file_exists('pavilion.php'))
 {
-    addnav('E?Eye-catching Pavilion', 'pavilion.php');
+    \LotgdNavigation::addNav($texts['pavilion'], 'pavilion.php', ['textDomain' => $schemas['pavilion']]);
 }
 
-tlschema($schemas['industrialnav']);
-addnav($texts['industrialnav']);
-tlschema();
+//-- Industrial street
+\LotgdNavigation::addHeader($texts['industrialnav'], ['textDomain' => $schemas['industrialnav']]);
 
-tlschema($schemas['tavernnav']);
-addnav($texts['tavernnav']);
-tlschema();
-tlschema($schemas['innname']);
-addnav('I?'.$texts['innname'].'`0', 'inn.php', true);
-tlschema();
-tlschema($schemas['stablename']);
-addnav('M?'.$texts['stablename'].'`0', 'stables.php');
-tlschema();
-
-addnav('G?The Gardens', 'gardens.php');
-addnav('R?Curious Looking Rock', 'rock.php');
+//-- Tavern street
+\LotgdNavigation::addHeader($texts['tavernnav'], ['textDomain' => $schemas['tavernnav']]);
+\LotgdNavigation::addNav($texts['innname'], 'inn.php', ['textDomain' => $schemas['innname'], 'params' => ['inn' => $iname]]);
+\LotgdNavigation::addNav($texts['stablename'], 'stables.php', ['textDomain' => $schemas['stablename']]);
+\LotgdNavigation::addNav($texts['gardens'], 'gardens.php', ['textDomain' => $schemas['gardens']]);
+\LotgdNavigation::addNav($texts['rock'], 'rock.php', ['textDomain' => $schemas['rock']]);
 
 if (getsetting('allowclans', 1))
 {
-    addnav('C?Clan Halls', 'clan.php');
+    \LotgdNavigation::addnav($texts['clan'], 'rock.php', ['textDomain' => $schemas['clan']]);
 }
 
-tlschema($schemas['infonav']);
-addnav($texts['infonav']);
-tlschema();
-addnav('??F.A.Q. (newbies start here)', 'petition.php?op=faq', false, true, '728x400');
-addnav('N?Daily News', 'news.php');
-addnav('L?List Warriors', 'list.php');
-addnav("o?Hall o' Fame", 'hof.php');
+//-- Info street
+\LotgdNavigation::addHeader($texts['infonav'], ['textDomain' => $schemas['infonav']]);
+\LotgdNavigation::addNav($texts['faq'], 'petition.php?op=faq', [
+    'textDomain' => $schemas['faq'],
+    'attributes' => [
+        'data-force' => 'true',
+        'onclick' => 'Lotgd.embed(this)'
+    ]
+]);
+\LotgdNavigation::addNav($texts['news'], 'news.php', ['textDomain' => $schemas['news']]);
+\LotgdNavigation::addNav($texts['list'], 'list.php', ['textDomain' => $schemas['list']]);
+\LotgdNavigation::addNav($texts['hof'], 'hof.php', ['textDomain' => $schemas['hof']]);
 
-tlschema($schemas['othernav']);
-addnav($texts['othernav']);
-tlschema();
-addnav('A?Account Info', 'account.php');
-addnav('P?Preferences', 'prefs.php');
+//-- Other navs
+\LotgdNavigation::addHeader($texts['othernav'], ['textDomain' => $schemas['othernav']]);
+\LotgdNavigation::addNav($texts['account'], 'account.php', ['textDomain' => $schemas['account']]);
+\LotgdNavigation::addNav($texts['prefs'], 'prefs.php', ['textDomain' => $schemas['prefs']]);
 
 if (! file_exists('lodge.php'))
 {
-    addnav('Refer a Friend', 'referral.php');
+    \LotgdNavigation::addNav($texts['referral'], 'referral.php', ['textDomain' => $schemas['referral']]);
 }
 
-tlschema('nav');
-addnav('Superuser');
+//-- Superuser menu
+\LotgdNavigation::superuser();
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-{
-    addnav(',?Comment Moderation', 'moderate.php');
-}
-
-if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
-{
-    addnav('X?`bSuperuser Grotto´b', 'superuser.php');
-}
-
-if ($session['user']['superuser'] & SU_INFINITE_DAYS)
-{
-    addnav('/?New Day', 'newday.php');
-}
-tlschema();
-//let users try to cheat, we protect against this and will know if they try.
-addnav('', 'superuser.php');
-addnav('', 'user.php');
-addnav('', 'taunt.php');
-addnav('', 'creatures.php');
-addnav('', 'configuration.php');
-addnav('', 'badword.php');
-addnav('', 'armoreditor.php');
-addnav('', 'bios.php');
-addnav('', 'badword.php');
-addnav('', 'donators.php');
-addnav('', 'referers.php');
-addnav('', 'retitle.php');
-addnav('', 'stats.php');
-addnav('', 'viewpetition.php');
-addnav('', 'weaponeditor.php');
-
-modulehook('village-header');
-
-if (! $skipvillagedesc)
-{
-    modulehook('collapse{', ['name' => 'villagedesc-'.$session['user']['location']]);
-    tlschema($schemas['text']);
-    output($texts['text']);
-    tlschema();
-    modulehook('}collapse');
-    modulehook('collapse{', ['name' => 'villageclock-'.$session['user']['location']]);
-    tlschema($schemas['clock']);
-    output($texts['clock'], getgametime());
-    tlschema();
-    modulehook('}collapse');
-    modulehook('village-desc', $texts);
-    //support for a special village-only hook
-    modulehook("village-desc-{$session['user']['location']}", $texts);
-
-    if ($texts['newestplayer'] > '' && $texts['newest'])
-    {
-        modulehook('collapse{', ['name' => 'villagenewest-'.$session['user']['location']]);
-        tlschema($schemas['newest']);
-        output($texts['newest'], $texts['newestplayer']);
-        tlschema();
-        $id = $texts['newestid'];
-
-        if ($session['user']['superuser'] & SU_EDIT_USERS && $id)
-        {
-            $edit = translate_inline('Edit');
-            rawoutput(" [<a href='user.php?op=edit&userid=$id'>$edit</a>]");
-            addnav('', "user.php?op=edit&userid=$id");
-        }
-        output_notl('`n');
-        modulehook('}collapse');
-    }
-}
-modulehook('village', $texts);
 //special hook for all villages... saves queries...
-modulehook("village-{$session['user']['location']}", $texts);
+modulehook('village');
+modulehook("village-{$session['user']['location']}");
 
-if ($skipvillagedesc)
-{
-    output_notl('`n');
-}
+$params['showVillageDesc'] = ! $skipvillagedesc; //-- Show or not village description
+$params['SU_EDIT_USERS'] = $session['user']['superuser'] & SU_EDIT_USERS;
+$params['blockCommentArea'] = false; //-- Show or not comment area
 
-$args = modulehook('blockcommentarea', ['section' => $texts['section']]);
-
-if (! isset($args['block']) || 'yes' != $args['block'])
-{
-    tlschema($schemas['talk']);
-    output($texts['talk']);
-    tlschema();
-    commentdisplay('', $texts['section'], 'Speak', 25, translate_inline($texts['sayline']), $schemas['sayline']);
-}
+//-- This is only for params not use for other purpose
+$params = modulehook('page-village-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('pages/village.twig', $params));
 
 module_display_events('village', 'village.php');
+
 page_footer();
