@@ -146,7 +146,7 @@ class Translator extends ZendTranslator
             $domains[0] = 'page';
         }
 
-        $filename = sprintf('data/translations/%s/%s/%s.yaml', $locale, $domains[0], $domains[1]);
+        $filename = sprintf('data/translation/%s/%s/%s.yaml', $locale, $domains[0], $domains[1]);
 
         if (is_file($filename))
         {

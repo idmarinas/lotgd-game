@@ -27,7 +27,7 @@ return [
                 'adapter' => 'filesystem',
                 'ttl' => 86400,
                 'options' => [
-                    'cache_dir' => 'data/cache/translations'
+                    'cache_dir' => 'data/cache/translation'
                 ],
                 'plugins' => [
                     [

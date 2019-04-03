@@ -20,7 +20,7 @@ use Zend\Filter\Word\UnderscoreToDash;
 
 class Theme extends Base
 {
-    const TEMPLATES_BASE_DIR = 'data/templates';
+    const TEMPLATES_BASE_DIR = 'data/template';
 
     protected $themeName;
     protected $themefolder;
@@ -53,17 +53,17 @@ class Theme extends Base
      */
     public function renderThemeTemplate($name, $context)
     {
-        global $html, $session;
+        global $html;
 
         $userPre = $html['userPre'] ?? [];
         $user = $session['user'] ?? [];
-        $sesion = $session ?? [];
-        unset($sesion['user'], $user['password']);
+        $session = $html['session'] ?? [];
+        unset($user['password']);
 
         $context = array_merge([
             'userPre' => $userPre,
             'user' => $user, //-- Actual user data for this template
-            'session' => $sesion //-- Actual session data for this template
+            'session' => $session //-- Session data declared in page_header or popup_header
         ],
         $context);
 
@@ -94,7 +94,7 @@ class Theme extends Base
         ],
         $context);
 
-        return $this->render("module/$name", $context);
+        return $this->render("module/{$name}", $context);
     }
 
     /**

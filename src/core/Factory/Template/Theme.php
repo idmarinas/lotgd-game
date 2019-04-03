@@ -29,7 +29,7 @@ class Theme implements FactoryInterface
         $template = new TemplateTheme([], [
             'debug' => (bool) ($options['development'] ?? false),
             //-- Used dir of cache
-            'cache' => "{$cacheDir}/templates",
+            'cache' => "{$cacheDir}/template",
             //-- Used in development for reload .twig templates
             'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
