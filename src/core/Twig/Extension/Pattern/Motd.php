@@ -52,9 +52,9 @@ trait Motd
         {
             $params['motd'] = $this->repository->appendPollResults($motd, $session['user']['acctid'] ?? null);
 
-            return \LotgdTheme::renderThemeTemplate('pages/motd/parts/poll.twig', $params);
+            return \LotgdTheme::renderThemeTemplate('page/motd/parts/poll.twig', $params);
         }
 
-        return \LotgdTheme::renderThemeTemplate('pages/motd/parts/item.twig', $params);
+        return \LotgdTheme::renderThemeTemplate('page/motd/parts/item.twig', $params);
     }
 }

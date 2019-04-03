@@ -166,4 +166,4 @@ else
     $params['issues'] = $issues;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-4.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-4.twig', $params));

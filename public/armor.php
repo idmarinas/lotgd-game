@@ -91,7 +91,7 @@ if ('' == $op)
         'user' => $session['user'],
         'tradeinvalue' => $tradeinvalue
     ];
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/armor/list.twig', $data));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/armor/list.twig', $data));
 
     villagenav();
 }

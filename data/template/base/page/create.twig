@@ -1,9 +1,9 @@
 {% translate_default_domain 'page-create' %}
 
 {% if not allowCreation %}
-    {% include 'base/pages/create/account/disabled.twig' %}
+    {% include 'base/page/create/account/disabled.twig' %}
 {% elseif serverFull %}
-    {% include 'base/pages/create/serverfull.twig' %}
+    {% include 'base/page/create/serverfull.twig' %}
 {% else %}
-    {% include 'base/pages/create/account/create.twig' %}
+    {% include 'base/page/create/account/create.twig' %}
 {% endif %}

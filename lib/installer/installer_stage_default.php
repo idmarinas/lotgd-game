@@ -17,4 +17,4 @@ unset($session['installer']);
 //-- Cache is cleared to force update
 datacache_empty();
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/default.twig', []));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/default.twig', []));

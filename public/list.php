@@ -117,6 +117,6 @@ $params['result'] = $result;
 DB::pagination($result, 'list.php');
 
 $params = modulehook('page-list-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('pages/list.twig', $params));
+rawoutput(LotgdTheme::renderThemeTemplate('page/list.twig', $params));
 
 page_footer();

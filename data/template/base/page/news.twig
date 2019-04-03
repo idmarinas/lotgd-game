@@ -1,7 +1,7 @@
 {% translate_default_domain 'page-news' %}
 
 {% block lastMotd %}
-    {% include 'base/pages/news/last-motd.twig' with { 'motd': lastMotd } %}
+    {% include 'base/page/news/last-motd.twig' with { 'motd': lastMotd } %}
 {% endblock lastMotd %}
 
 {% if result.count() <= 1 %}

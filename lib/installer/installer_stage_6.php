@@ -70,4 +70,4 @@ $params['FILE_DB_CONNECT'] = \Lotgd\Core\Application::FILE_DB_CONNECT;
 $params['CACHE_FILE'] = \Lotgd\Core\ServiceManager::CACHE_FILE;
 $params['code'] = $code ?? null;
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-6.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-6.twig', $params));

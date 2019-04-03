@@ -317,7 +317,7 @@ $params['blockCommentArea'] = false; //-- Show or not comment area
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('pages/village.twig', $params));
+rawoutput(\LotgdTheme::renderThemeTemplate('page/village.twig', $params));
 
 module_display_events('village', 'village.php');
 

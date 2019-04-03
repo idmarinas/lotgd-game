@@ -1,3 +1,3 @@
 <?php
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-2.twig', []));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-2.twig', []));

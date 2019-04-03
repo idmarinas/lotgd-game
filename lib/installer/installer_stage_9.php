@@ -62,4 +62,4 @@ if ($session['installer']['skipmodules'] ?? false)
 
 $params['installOfModules'] = $installer->makeInstallOfModules();
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-9.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-9.twig', $params));

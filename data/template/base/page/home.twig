@@ -31,9 +31,9 @@
 
     {# Show the login form or a full server message #}
     {% if not serverFull %}
-        {% include 'base/pages/home/login.twig' %}
+        {% include 'base/page/home/login.twig' %}
     {% else %}
-        {% include 'base/pages/home/serverfull.twig' %}
+        {% include 'base/page/home/serverfull.twig' %}
     {% endif %}
 
     {# Results messages of hook "homemiddle" #}
@@ -50,7 +50,7 @@
     {{ 'server.version'|t({ 'version': serverVersion })|colorize }}
 
     {% if selectSkin %}
-        {% include 'base/pages/home/selectskin.twig' with { 'select': selectSkin } %}
+        {% include 'base/page/home/selectskin.twig' with { 'select': selectSkin } %}
     {% endif %}
 </div>
 

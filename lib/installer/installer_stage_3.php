@@ -13,4 +13,4 @@ if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
     $params['showForm'] = false;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-3.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-3.twig', $params));

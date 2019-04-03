@@ -60,5 +60,5 @@ function clanform()
         'clanshort' => htmlentities(stripslashes(httppost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
     ];
 
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/clan/new.twig', $data));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/clan/new.twig', $data));
 }

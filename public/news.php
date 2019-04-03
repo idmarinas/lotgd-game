@@ -85,6 +85,6 @@ $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 $params['REQUEST_URI'] = \LotgdHttp::getServer('REQUEST_URI');
 
 $params = modulehook('page-news-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('pages/news.twig', $params));
+rawoutput(\LotgdTheme::renderThemeTemplate('page/news.twig', $params));
 
 page_footer();

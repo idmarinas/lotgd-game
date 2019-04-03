@@ -76,4 +76,4 @@ $params = [
     'authentication' => $needsauthentication
 ];
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/pages/installer/stage-0.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-0.twig', $params));

@@ -106,7 +106,7 @@ elseif ('edit' == $op)
     }
 
     $params = modulehook('page-motd-edit-tpl-params', $params);
-    rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd/edit/item.twig', $params));
+    rawoutput(\LotgdTheme::renderThemeTemplate('page/motd/edit/item.twig', $params));
 
     popup_footer();
 }
@@ -149,7 +149,7 @@ elseif('add' == $op)
     }
 
     $params = modulehook('page-motd-add-tpl-params', $params);
-    rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd/add/item.twig', $params));
+    rawoutput(\LotgdTheme::renderThemeTemplate('page/motd/add/item.twig', $params));
 
     popup_footer();
 }
@@ -190,7 +190,7 @@ elseif ('addpoll' == $op)
     }
 
     $params = modulehook('page-motd-addpoll-tpl-params', $params);
-    rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd/add/poll.twig', $params));
+    rawoutput(\LotgdTheme::renderThemeTemplate('page/motd/add/poll.twig', $params));
 
     popup_footer();
 }
@@ -242,7 +242,7 @@ $row = $repository->getLastMotd();
 $session['user']['lastmotd'] = $row['motddate'];
 
 $params = modulehook('page-motd-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('pages/motd.twig', $params));
+rawoutput(\LotgdTheme::renderThemeTemplate('page/motd.twig', $params));
 
 tlschema();
 
