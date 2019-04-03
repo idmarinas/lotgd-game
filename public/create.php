@@ -73,7 +73,7 @@ if ('forgotval' == $op)
     $params['account'] = $account;
 
     $params = modulehook('page-create-forgotval-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/create/forgot/val.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/create/forgot/val.twig', $params));
 
     page_footer();
 }
@@ -149,7 +149,7 @@ elseif ('val' == $op)
     savesetting('newestplayername', $account->getCharacter()->getName());
 
     $params = modulehook('page-create-val-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/create/email/val.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/create/email/val.twig', $params));
 
     page_footer();
 }
@@ -206,7 +206,7 @@ elseif ('forgot' == $op)
     }
 
     $params = modulehook('page-create-forgot-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/create/forgot.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/create/forgot.twig', $params));
 
     page_footer();
 }
@@ -404,7 +404,7 @@ elseif ('create' == $op)
         $params['login'] = $shortname;
         $params['password'] = $pass1;
 
-        rawoutput(LotgdTheme::renderThemeTemplate('pages/create/account/login.twig', $params));
+        rawoutput(LotgdTheme::renderThemeTemplate('page/create/account/login.twig', $params));
 
         \Doctrine::clear(); //-- Detaches all objects from Doctrine!
 
@@ -443,6 +443,6 @@ $params['templates'] = $result['templates'];
 \Doctrine::clear(); //-- Detaches all objects from Doctrine!
 
 $params = modulehook('page-create-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('pages/create.twig', $params));
+rawoutput(LotgdTheme::renderThemeTemplate('page/create.twig', $params));
 
 page_footer();

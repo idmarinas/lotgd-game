@@ -262,7 +262,7 @@ else
         $params['servers'][] = $row;
     }
 
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/logdnet.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/logdnet.twig', $params));
 
     page_footer();
 }

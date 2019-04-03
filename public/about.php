@@ -39,7 +39,7 @@ if ('listmodules' == $op)
     $params['result'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'formalname' => 'ASC']);
 
     $params = modulehook('page-about-modules-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/about/modules.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/about/modules.twig', $params));
 }
 elseif ('setup' == $op)
 {
@@ -114,14 +114,14 @@ elseif ('setup' == $op)
     $params['form'] = lotgd_showform($form, $vals, true, false, false);
 
     $params = modulehook('page-about-setup-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/about/setup.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/about/setup.twig', $params));
 }
 elseif ('license' == $op)
 {
     LotgdNavigation::blockLink('about.php?op=license');
 
     $params = modulehook('page-about-license-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/about/license.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/about/license.twig', $params));
 }
 else
 {
@@ -134,7 +134,7 @@ else
     }
 
     $params = modulehook('page-about-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('pages/about.twig', $params));
+    rawoutput(LotgdTheme::renderThemeTemplate('page/about.twig', $params));
 }
 
 page_footer();
