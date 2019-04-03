@@ -94,7 +94,7 @@ class Theme extends Base
         ],
         $context);
 
-        return $this->render($name, $context);
+        return $this->render("module/$name", $context);
     }
 
     /**
