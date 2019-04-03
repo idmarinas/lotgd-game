@@ -13,18 +13,6 @@
 
 namespace Lotgd\Core\Twig\Node;
 
-use Twig\Compiler;
-use Twig\Node\Expression\AbstractExpression;
-use Twig\Node\Node;
-
 class TranslatorDefaultDomainNode extends Node
 {
-    public function __construct(AbstractExpression $expr, int $lineno = 0, string $tag = null)
-    {
-        parent::__construct(['expr' => $expr], [], $lineno, $tag);
-    }
-
-    public function compile(Compiler $compiler)
-    {
-    }
 }
