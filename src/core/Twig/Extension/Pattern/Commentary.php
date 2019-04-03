@@ -18,6 +18,13 @@ trait Commentary
     protected $onlineStatus;
 
     /**
+     * Default text domain for translator.
+     *
+     * @var string
+     */
+    protected $textDomain;
+
+    /**
      * Display de commentary block.
      *
      * @param array  $commentary
@@ -36,6 +43,7 @@ trait Commentary
     ) {
         global $session;
 
+        $this->textDomain = $textDomain; //-- Default text domain for commentary block
         $session['user']['chatloc'] = $commentary['section'];
 
         $page = (int) \LotgdHttp::getQuery('commentPage', 1);
@@ -61,18 +69,19 @@ trait Commentary
      *
      * @param array  $comment
      * @param string $textDomain
-     * @param string $sayLine
+     * @param array $$commentary
      *
      * @return string
      */
-    public function displayOneComment(array $comment, $textDomain, $sayLine): string
+    public function displayOneComment(array $comment, $textDomain, array $commentary): string
     {
         global $session;
 
         $params = [
             'comment' => $comment,
             'textDomain' => $textDomain,
-            'sayLine' => $sayLine,
+            'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
+            'sayLine' => $commentary['sayLine'],
             'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
         ];
 
@@ -87,9 +96,14 @@ trait Commentary
      *
      * @return string
      */
-    public function displayStatusOnlinePlayer(array $comment, $textDomain): string
+    public function displayStatusOnlinePlayer(array $comment, ?string $textDomain = null): string
     {
         global $session;
+
+        bdump($textDomain);
+        $textDomain = ($textDomain ?? $this->textDomain) ?: $this->textDomain;
+
+        bdump($textDomain);
 
         $logout = (int) getsetting('LOGINTIMEOUT', 900);
         $offline = new \DateTime('now');

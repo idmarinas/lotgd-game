@@ -18,17 +18,19 @@ use Lotgd\Core\Pattern\Container;
 use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Twig\NodeVisitor\{
+    CommentaryDefaultAddCommentNodeVisitor,
+    CommentaryDefaultDomainStatusNodeVisitor,
     CommentaryDefaultLimitNodeVisitor,
     CommentaryDefaultPaginationNodeVisitor,
     CommentaryDefaultPaginationUrlNodeVisitor,
-    CommentaryDefaultAddCommentNodeVisitor,
     CommentaryNodeVisitor
 };
 use Lotgd\Core\Twig\TokenParser\{
+    CommentaryDefaultAddCommentTokenParser,
+    CommentaryDefaultDomainStatusTokenParser,
     CommentaryDefaultLimitTokenParser,
     CommentaryDefaultPaginationTokenParser,
-    CommentaryDefaultPaginationUrlTokenParser,
-    CommentaryDefaultAddCommentTokenParser
+    CommentaryDefaultPaginationUrlTokenParser
 };
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -78,10 +80,11 @@ class Commentary extends AbstractExtension
     {
         return [
             $this->getCommentaryNodeVisitor(),
+            new CommentaryDefaultAddCommentNodeVisitor(),
+            new CommentaryDefaultDomainStatusNodeVisitor(),
             new CommentaryDefaultLimitNodeVisitor(),
             new CommentaryDefaultPaginationNodeVisitor(),
-            new CommentaryDefaultPaginationUrlNodeVisitor(),
-            new CommentaryDefaultAddCommentNodeVisitor()
+            new CommentaryDefaultPaginationUrlNodeVisitor()
         ];
     }
 
@@ -116,6 +119,11 @@ class Commentary extends AbstractExtension
              * {% commentary_can_add_comments true %}
              */
             new CommentaryDefaultAddCommentTokenParser(),
+            /**
+             * @param string
+             * {% commentary_domain_status 'foobar' %}
+             */
+            new CommentaryDefaultDomainStatusTokenParser(),
         ];
     }
 

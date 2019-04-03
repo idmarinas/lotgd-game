@@ -71,6 +71,13 @@ class CommentaryNodeVisitor extends AbstractNodeVisitor
                 $this->getReadFromArguments('canAddComment', $node->getNode('arguments'), 1),
             ];
         }
+        elseif ($node instanceof FunctionExpression && $node->getNode('node') instanceof ConstantExpression && 'display_status_online_player' === $node->getAttribute('name'))
+        {
+            $this->messages[] = [
+                $node->getNode('node')->getAttribute('value'),
+                $this->getReadFromArguments('textDomain', $node->getNode('arguments'), 1),
+            ];
+        }
 
         return $node;
     }

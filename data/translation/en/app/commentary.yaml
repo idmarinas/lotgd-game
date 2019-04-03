@@ -11,3 +11,12 @@ comment:
     moderation:
         hide: 'Moderated by {name}'
         unhide: 'Restored by {name}'
+commentary:
+    status:
+        game: 'Message of the Game Master'
+        you: "It's a comment from you."
+        afk: 'Away from Keyboard'
+        nearby: 'Nearby'
+        offline: 'Offline'
+        dni: "DNI (please don't try to talk to this player right now!)"
+        online: 'Online'

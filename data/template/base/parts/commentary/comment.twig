@@ -1,3 +1,8 @@
+{% if defaultTextDomainStatus %}
+    {# Set a default text domain for comentary status #}
+    {% commentary_domain_status defaultTextDomainStatus %}
+{% endif %}
+
 {% set recent = 'comment.recent'|tl(null, 'app-commentary') %}
 <div class="comment {{ comment.hidden ? 'del' : '' }}">
     <div class="content">
@@ -8,7 +13,7 @@
                     <input type="checkbox" name="hideComment[{{ comment.id }}]" {{ comment.hidden ? 'checked' : '' }} value="1">
                 </div>
             {% endif %}
-            {{ display_status_online_player(comment, textDomain) }}
+            {{ display_status_online_player(comment) }}
             {{ comment.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
             <span class="{{ comment.hidden ? 'ui tooltip' : '' }}" data-content="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
                 {% if comment.command == 'game' %}
