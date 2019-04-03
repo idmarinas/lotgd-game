@@ -8,22 +8,20 @@
 // license must be used on the distribution of any works derived from this
 // work.
 // Please see the file LICENSE for a full textual description of the license.txt.
-
-$pagestarttime = microtime(true);
-
 chdir(realpath(__DIR__.'/..'));
+
+require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
+
+//-- Init Debugger
+$debuggerMode = file_exists('config/development.config.php') ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
+\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../data/log/exception');
+\Tracy\Debugger::timer('page-generating');
+\Tracy\Debugger::$maxDepth = 5; // default: 3
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 defined('OVERRIDE_FORCED_NAV') or define('OVERRIDE_FORCED_NAV', false);
 defined('ALLOW_ANONYMOUS') or define('ALLOW_ANONYMOUS', false);
-
-require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
-
-//-- Init Debugger
-\Tracy\Debugger::enable(\Tracy\Debugger::DETECT, __DIR__.'/../data/log/exception');
-\Tracy\Debugger::timer('page-generating');
-\Tracy\Debugger::$maxDepth = 5; // default: 3
 
 use Lotgd\Core\Fixed\{
     Locator as LotgdLocator,
