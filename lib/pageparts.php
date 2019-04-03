@@ -265,7 +265,7 @@ function page_footer($saveuser = true)
     //Add all script in page
     $html['script'] = $script;
     //output page generation time
-    $gentime = microtime(true) - $pagestarttime;
+    $gentime = \Tracy\Debugger::timer('page-footer');
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 

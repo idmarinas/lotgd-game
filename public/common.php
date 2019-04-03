@@ -16,6 +16,7 @@ require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 $debuggerMode = file_exists('config/development.config.php') ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
 \Tracy\Debugger::enable($debuggerMode, __DIR__.'/../data/log/exception');
 \Tracy\Debugger::timer('page-generating');
+\Tracy\Debugger::timer('page-footer');
 \Tracy\Debugger::$maxDepth = 5; // default: 3
 
 // Set some constant defaults in case they weren't set before the inclusion of
