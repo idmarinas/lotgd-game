@@ -115,6 +115,14 @@ class Navigation
     /**
      * @see Lotgd\Core\Navigation\Navigation
      */
+    public static function superuserGrottoNav()
+    {
+        return self::$instance->superuserGrottoNav();
+    }
+
+    /**
+     * @see Lotgd\Core\Navigation\Navigation
+     */
     public static function checkNavs()
     {
         return self::$instance->checkNavs();

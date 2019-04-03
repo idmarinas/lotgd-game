@@ -250,6 +250,7 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
+        $this->setTextDomain($this->textDomain);
         $this->addHeader('common.superuser.category');
 
         if ($superuser & SU_EDIT_COMMENTS)
@@ -266,6 +267,34 @@ class Navigation
         {
             $this->addNav('common.superuser.newday', 'newday.php');
         }
+        $this->setTextDomain();
+    }
+
+    /**
+     * Add navs for action of superuser in Grotto page.
+     */
+    public function superuserGrottoNav(): void
+    {
+        global $session;
+
+        $superuser = $session['user']['superuser'];
+
+        $this->setTextDomain($this->textDomain);
+        $this->addHeader('common.category.navigation');
+
+        if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
+        {
+            $script = \LotgdHttp::getServer('SCRIPT_NAME');
+
+            if ('superuser.php' != $script)
+            {
+                $this->addNav('common.superuser.rsuperuser', 'superuser.php');
+            }
+        }
+
+        $this->addNav('common.superuser.mundane', 'village.php');
+
+        $this->setTextDomain();
     }
 
     /**
