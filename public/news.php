@@ -20,8 +20,8 @@ page_header('title', [], 'page-news');
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 
 $newsperpage = 50;
-$page = (int) httpget('page');
-$day = (int) httpget('day');
+$page = (int) \LotgdHttp::getQuery('page');
+$day = (int) \LotgdHttp::getQuery('day');
 $timestamp = strtotime("-{$day} days");
 $params = ['date' => $timestamp];
 
