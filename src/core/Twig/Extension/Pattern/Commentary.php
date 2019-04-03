@@ -100,10 +100,7 @@ trait Commentary
     {
         global $session;
 
-        bdump($textDomain);
         $textDomain = ($textDomain ?? $this->textDomain) ?: $this->textDomain;
-
-        bdump($textDomain);
 
         $logout = (int) getsetting('LOGINTIMEOUT', 900);
         $offline = new \DateTime('now');
