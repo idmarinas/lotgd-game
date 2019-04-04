@@ -8,14 +8,13 @@ require_once 'lib/commentary.php';
 require_once 'lib/sanitize.php';
 
 check_su_access(0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO);
-addcommentary();
+
 tlschema('superuser');
 
-require_once 'lib/superusernav.php';
-superusernav();
-addnav('Q?`%Quit`0 to the heavens', 'login.php?op=logout', true);
 
-$op = httpget('op');
+$textDomain = 'page-superuser';
+
+$op = \LotgdHttp::getQuery('op');
 
 if ('keepalive' == $op)
 {
@@ -26,196 +25,84 @@ if ('keepalive' == $op)
 
     exit();
 }
-elseif ('newsdelete' == $op)
-{
-    $sql = 'DELETE FROM '.DB::prefix('news')." WHERE newsid='".httpget('newsid')."'";
-    DB::query($sql);
-    $return = httpget('return');
-    $return = cmd_sanitize($return);
-    $return = substr($return, strrpos($return, '/') + 1);
-    redirect($return);
-}
 
-page_header('Superuser Grotto');
+page_header('title', [], $textDomain);
 
-$lines = modulehook('superuser-headlines', []);
-output_notl('`c');
+\LotgdNavigation::superuserGrottoNav();
+\LotgdNavigation::addNav('superuser.nav.logout', 'login.php?op=logout');
 
-foreach ($lines as $line)
-{
-    //output it like an announcement, if any argument is given, automatically(!) centered
-    //ATTENTION! pre-translate your stuff in your own schema with translate_inline or sprintf_translate!
-    if (is_array($line))
-    {
-        call_user_func_array('output_notl', $line);
-    }
-    else
-    {
-        output_notl($line);
-    }
-    output_notl('`n`n'); //separate lines
-}
-output_notl('´c');
+\LotgdNavigation::addHeader('superuser.category.actions');
 
-output('`^You duck into a secret cave that few know about. ');
-
-if (SEX_FEMALE == $session['user']['sex'])
-{
-    output('Inside you are greeted by the sight of numerous muscular bare-chested men who wave palm fronds at you and offer to feed you grapes as you lounge on Greco-Roman couches draped with silk.`n`n');
-}
-else
-{
-    output('Inside you are greeted by the sight of numerous scantily clad buxom women who wave palm fronds at you and offer to feed you grapes as you lounge on Greco-Roman couches draped with silk.`n`n');
-}
-//comment visible only for those who are MORE than translators
-if (SU_IS_TRANSLATOR != $session['user']['superuser'])
-{
-    commentdisplay('', 'superuser', 'Engage in idle conversation with other gods:', 25);
-}
-
-addnav('Actions');
-
-if ($session['user']['superuser'] & SU_EDIT_PETITIONS)
-{
-    addnav('Petition Viewer', 'viewpetition.php');
-}
+($session['user']['superuser'] & SU_EDIT_PETITIONS) and \LotgdNavigation::addNav('superuser.nav.petition', 'viewpetition.php');
 
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
-    addnav('C?Comment Moderation', 'moderate.php');
+    \LotgdNavigation::addNav('superuser.nav.moderation', 'moderate.php');
+    \LotgdNavigation::addNav('superuser.nav.bios', 'bios.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-{
-    addnav('B?Player Bios', 'bios.php');
-}
+($session['user']['superuser'] & SU_EDIT_DONATIONS) and \LotgdNavigation::addNav('superuser.nav.donation', 'donators.php');
 
-if ($session['user']['superuser'] & SU_EDIT_DONATIONS)
-{
-    addnav('Donator Page', 'donators.php');
-}
+(file_exists('paylog.php') && $session['user']['superuser'] & SU_EDIT_PAYLOG) and \LotgdNavigation::addNav('superuser.nav.paylog', 'paylog.php');
 
-if (file_exists('paylog.php') &&
-        ($session['user']['superuser'] & SU_EDIT_PAYLOG))
-{
-    addnav('Payment Log', 'paylog.php');
-}
+($session['user']['superuser'] & SU_RAW_SQL) and \LotgdNavigation::addNav('superuser.nav.rawsql', 'rawsql.php');
 
-if ($session['user']['superuser'] & SU_RAW_SQL)
-{
-    addnav('Q?Run Raw SQL', 'rawsql.php');
-}
+($session['user']['superuser'] & SU_IS_TRANSLATOR) and \LotgdNavigation::addNav('superuser.nav.untranslated', 'untranslated.php');
 
-if ($session['user']['superuser'] & SU_IS_TRANSLATOR)
-{
-    addnav('U?Untranslated Texts', 'untranslated.php');
-}
 
-addnav('Editors');
+\LotgdNavigation::addHeader('superuser.category.editors');
 
 if ($session['user']['superuser'] & SU_EDIT_USERS)
 {
-    addnav('User Editor', 'user.php');
+    \LotgdNavigation::addNav('superuser.nav.user', 'user.php');
+    \LotgdNavigation::addNav('superuser.nav.titleedit', 'titleedit.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_BANS)
-{
-    addnav('Ban Editor', 'bans.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_USERS)
-{
-    addnav('Title Editor', 'titleedit.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CREATURES)
-{
-    addnav('E?Creature Editor', 'creatures.php');
-}
+($session['user']['superuser'] & SU_EDIT_BANS) and \LotgdNavigation::addNav('superuser.nav.bans', 'bans.php');
 
 if ($session['user']['superuser'] & SU_EDIT_MOUNTS)
 {
-    addnav('Mount Editor', 'mounts.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_MOUNTS)
-{
-    addnav('Companion Editor', 'companions.php');
+    \LotgdNavigation::addNav('superuser.nav.mounts', 'mounts.php');
+    \LotgdNavigation::addNav('superuser.nav.companions', 'companions.php');
 }
 
 if ($session['user']['superuser'] & SU_EDIT_CREATURES)
 {
-    addnav('Taunt Editor', 'taunt.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CREATURES)
-{
-    addnav('Deathmessage Editor', 'deathmessages.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CREATURES)
-{
-    addnav('Master Editor', 'masters.php');
+    \LotgdNavigation::addNav('superuser.nav.creatures', 'creatures.php');
+    \LotgdNavigation::addNav('superuser.nav.taunt', 'taunt.php');
+    \LotgdNavigation::addNav('superuser.nav.deathmessages', 'deathmessages.php');
+    \LotgdNavigation::addNav('superuser.nav.masters', 'masters.php');
 }
 
 if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
 {
-    addnav('Weapon Editor', 'weaponeditor.php');
+    \LotgdNavigation::addNav('superuser.nav.weaponeditor', 'weaponeditor.php');
+    \LotgdNavigation::addNav('superuser.nav.armoreditor', 'armoreditor.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
-{
-    addnav('Armor Editor', 'armoreditor.php');
-}
+($session['user']['superuser'] & SU_EDIT_COMMENTS) and \LotgdNavigation::addNav('superuser.nav.badword', 'badword.php');
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-{
-    addnav('Nasty Word Editor', 'badword.php');
-}
+($session['user']['superuser'] & SU_MANAGE_MODULES) and \LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
 
-if ($session['user']['superuser'] & SU_MANAGE_MODULES)
-{
-    addnav('Manage Modules', 'modules.php');
-}
+
+\LotgdNavigation::addHeader('superuser.category.mechanics');
+
+($session['user']['superuser'] & SU_MEGAUSER) and \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
 
 if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 {
-    addnav('Mechanics');
+    \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
+    \LotgdNavigation::addNav('superuser.nav.debug', 'debug.php');
+    \LotgdNavigation::addNav('superuser.nav.stats', 'stats.php');
+    file_exists('gamelog.php') and \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
 }
 
-if ($session['user']['superuser'] & SU_EDIT_CONFIG)
-{
-    addnav('Game Settings', 'configuration.php');
-}
-
-if ($session['user']['superuser'] & SU_MEGAUSER)
-{
-    addnav('Global User Functions', 'globaluserfunctions.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CONFIG)
-{
-    addnav('Debug Analysis', 'debug.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CONFIG)
-{
-    addnav('Referring URLs', 'referers.php');
-}
-
-if ($session['user']['superuser'] & SU_EDIT_CONFIG)
-{
-    addnav('Stats', 'stats.php');
-}
-/*//*/if (file_exists('gamelog.php') &&
-/*//*/		$session['user']['superuser'] & SU_EDIT_CONFIG)
-{
-    /*//*/	addnav('Gamelog Viewer', 'gamelog.php');
-    /*//*/
-}
-
-addnav('Module Configurations');
+\LotgdNavigation::addHeader('superuser.category.module');
 
 modulehook('superuser', [], true);
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-superuser-tpl-params', []);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/superuser.twig', $params));
 
 page_footer();

@@ -1,0 +1,22 @@
+{% translate_default_domain 'page-superuser' %}
+
+{% set result = modulehook('superuser-headlines', []) %}
+<div class="center aligned">
+    {% for message in result %}
+        {{ message[0]|tl(message[1], message[2])|colorize }}
+    {% endfor %}
+</div>
+
+{{ 'paragraph.0'|t|colorize }}
+{{ 'paragraph.1'|t({'sex': user.sex})|colorize }}
+
+{# Set the url for links of pagination. Default is $_SERVER['SCRIPT_NAME'] #}
+{% commentary_pagination_link_url 'superuser.php' %}
+
+{{ commentary_block({
+    'section': 'superuser',
+    'talk': 'commentary.talk',
+    'sayLine': 'commentary.sayLine',
+    'button': 'commentary.button',
+    'textDomainStatus': 'app-commentary'
+}, 'page-superuser') }}
