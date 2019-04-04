@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="newsdate", columns={"newsdate"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\NewsRepository")
  */
 class News
 {
