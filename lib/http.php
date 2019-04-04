@@ -88,7 +88,7 @@ function httppostset($var, $val, $sub = false)
 function httpallpost()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getPost()" instead.',
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdHttp::getPostAll()" instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
