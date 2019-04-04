@@ -55,12 +55,12 @@ else
 
     suspend_companions('allowinshades', true);
 
-    \LotgdNavigation::addHeader('Log Out');
-    \LotgdNavigation::addNav('Log out', 'login.php?op=logout');
+    \LotgdNavigation::addHeader('news.category.logout');
+    \LotgdNavigation::addNav('news.nav.logout', 'login.php?op=logout');
 
-    \LotgdNavigation::addHeader('news.dead', ['sex' => (int) $session['user']['sex']]);
-    \LotgdNavigation::addNav('S?Land of Shades', 'shades.php');
-    \LotgdNavigation::addNav('G?The Graveyard', 'graveyard.php');
+    \LotgdNavigation::addHeader('news.category.dead', ['sex' => (int) $session['user']['sex']]);
+    \LotgdNavigation::addNav('news.nav.shades', 'shades.php');
+    \LotgdNavigation::addNav('news.nav.graveyard', 'graveyard.php');
 }
 \LotgdNavigation::addHeader('news.category.news');
 \LotgdNavigation::addNav('news.nav.previous', 'news.php?day='.($day + 1));
@@ -74,15 +74,14 @@ if ($session['user']['loggedin'])
 {
     \LotgdNavigation::addNav('common.nav.preferences', 'prefs.php');
 }
-LotgdNavigation::addNav('news.nav.about', 'about.php');
+\LotgdNavigation::addNav('news.nav.about', 'about.php');
 
 //-- Superuser menu
 \LotgdNavigation::superuser();
 
-DB::pagination($params['result'], 'news.php');
+\DB::pagination($params['result'], 'news.php');
 
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
-$params['REQUEST_URI'] = \LotgdHttp::getServer('REQUEST_URI');
 
 $params = modulehook('page-news-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('page/news.twig', $params));
