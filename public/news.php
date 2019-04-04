@@ -22,6 +22,7 @@ $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 $newsperpage = 50;
 $page = (int) \LotgdHttp::getQuery('page');
 $day = (int) \LotgdHttp::getQuery('day');
+$op = (string) \LotgdHttp::getQuery('op');
 $timestamp = strtotime("-{$day} days");
 $params = ['date' => $timestamp];
 
@@ -29,6 +30,16 @@ if ($hookIntercept['showLastMotd'] ?? false)
 {
     $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Motd::class);
     $params['lastMotd'] = $repository->getLastMotd($session['user']['acctid'] ?? null);
+}
+
+$newsRepo = \Doctrine::getRepository(\Lotgd\Core\Entity\News::class);
+
+if ('delete' == $op)
+{
+    checkSuPermission(SU_EDIT_COMMENTS, 'news.php');
+
+    $newsId = (int) \LotgdHttp::getQuery('newsid');
+    $newsRepo->deleteNewsId($newsId);
 }
 
 //-- Select
