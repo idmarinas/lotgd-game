@@ -194,7 +194,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
         case 'theme':
             // A generic way of allowing a theme to be selected.
             $skins = [];
-            $handle = @opendir('data/templates');
+            $handle = @opendir('data/template');
             // Template directory open failed
             if (! $handle)
             {
