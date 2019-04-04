@@ -19,7 +19,7 @@ page_header('title', [], 'page-news');
 
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 
-$newsperpage = 50;
+$newsPerPage = 50;
 $page = (int) \LotgdHttp::getQuery('page');
 $day = (int) \LotgdHttp::getQuery('day');
 $op = (string) \LotgdHttp::getQuery('op');
@@ -42,14 +42,13 @@ if ('delete' == $op)
     $newsRepo->deleteNewsId($newsId);
 }
 
-//-- Select
-$select = \DB::select('news');
-$select->order('newsid DESC')
-    ->where->equalTo('newsdate', date('Y-m-d', $timestamp))
+$query = $newsRepo->createQueryBuilder('u');
+$query->orderBy('u.newsid', 'DESC')
+    ->where('u.newsdate = :date')
+    ->setParameter('date', date('Y-m-d', $timestamp))
 ;
 
-$result = \DB::paginator($select, $page, $newsperpage);
-$params['result'] = $result;
+$params['result'] = $newsRepo->getPaginator($query, $page, $newsPerPage);
 
 if (! $session['user']['loggedin'])
 {
