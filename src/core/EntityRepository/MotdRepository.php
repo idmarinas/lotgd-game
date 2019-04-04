@@ -41,6 +41,11 @@ class MotdRepository extends DoctrineRepository
                 ->getArrayResult()
             ;
 
+            if (! $result)
+            {
+                return null;
+            }
+
             $motd = $result[0][0];
             unset($result[0][0]);
             $motd = array_merge($motd, $result[0]);
