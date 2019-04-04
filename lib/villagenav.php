@@ -5,26 +5,10 @@
 // mail ready
 function villagenav($extra = false)
 {
-    global $session;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use "LotgdNavigation::villageNav()".',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if (false === $extra)
-    {
-        $extra = '';
-    }
-    $args = modulehook('villagenav');
-
-    if (($args['handled'] ?? false) && $args['handled'])
-    {
-        return;
-    }
-
-    if ($session['user']['alive'])
-    {
-        LotgdNavigation::addNav('V?Return to {location}', "village.php$extra", ['params' => ['location' => $session['user']['location']]]);
-
-        return;
-    }
-
-    // user is dead
-    LotgdNavigation::addNav('S?Return to the Shades', 'shades.php');
+    \LotgdNavigation::villageNav();
 }
