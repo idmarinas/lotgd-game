@@ -14,8 +14,7 @@ function check_su_access($level)
     {
         //they have appropriate levels, let's see if there's a module that
         // restricts access beyond this point.
-        $return = modulehook('check_su_access',
-                ['enabled' => true, 'level' => $level]);
+        $return = modulehook('check_su_access', ['enabled' => true, 'level' => $level]);
 
         if ($return['enabled'])
         {
@@ -103,7 +102,7 @@ function checkSuPermission($permission, string $return)
         {
             $session['user']['laston'] = new \DateTime('now');
 
-            return;
+            return null;
         }
 
         //-- Module preventing doing
