@@ -7,8 +7,10 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-if (! $session['user']['loggedin']) return;
-
+if (! $session['user']['loggedin'])
+{
+    return;
+}
 
 $op = httpget('op');
 
@@ -18,19 +20,19 @@ if ('optimize' == $op)
 
     echo 'ok';
 }
-elseif('clearexpire' == $op)
+elseif ('clearexpire' == $op)
 {
     datacache_clearExpired();
 
     echo 'ok';
 }
-elseif('clearall' == $op)
+elseif ('clearall' == $op)
 {
     datacache_empty();
 
     echo 'ok';
 }
-elseif('clearbyprefix' == $op)
+elseif ('clearbyprefix' == $op)
 {
     $prefix = httpget('prefix');
 
