@@ -123,6 +123,14 @@ class Navigation
     /**
      * @see Lotgd\Core\Navigation\Navigation
      */
+    public static function villageNav()
+    {
+        return self::$instance->villageNav();
+    }
+
+    /**
+     * @see Lotgd\Core\Navigation\Navigation
+     */
     public static function checkNavs()
     {
         return self::$instance->checkNavs();

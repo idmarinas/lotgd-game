@@ -298,6 +298,34 @@ class Navigation
     }
 
     /**
+     * Add nav to village/shades.
+     *
+     * @param string $extra
+     */
+    function villageNav($extra = ''): void
+    {
+        global $session;
+
+        $extra = (false === strpos($extra, '?') ? '?' : '');
+
+        $args = modulehook('villagenav');
+
+        if ($args['handled'] ?? false)
+        {
+            return;
+        }
+        elseif ($session['user']['alive'])
+        {
+            $this->addNav('common.villagenav.village', "village.php{$extra}", ['params' => ['location' => $session['user']['location']]]);
+
+            return;
+        }
+
+        //-- User is dead
+        $this->addNav('common.villagenav.shades', 'shades.php');
+    }
+
+    /**
      * Determines if there are any navs for the player.
      *
      * @return bool
