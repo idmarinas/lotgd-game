@@ -68,10 +68,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                         'talk' => 'commentary.talk', //-- Key for translation talk
                         'sayLine' => 'commentary.sayLine', //-- Key for translation say line
                         'button' => 'commentary.button' //-- Key for translation for button add
+                        'textDomainStatus' => 'app-commentary' //-- This is optional, and only is necesary if you want change de domain for translate text of player status. Default is texDomain defined in _commentary_block_
                     ]
                 ```
             -   `textDomain` Is the text domain for translator. In case of village is `page-village`.
-        -   This are optional, use if need change default value:
+        -   This are optional, use if need change default values:
             -   `{% commentary_limit_comments 10 %}`, Set a limits of comments per page. Default is 25
             -   `{% commentary_show_pagination true %}`, Set if show pagination of comments. Default is true
             -   `{% commentary_pagination_link_url 'village.php' %}`, Set the url for links of pagination. Default is `$_SERVER['SCRIPT_NAME']`
@@ -123,7 +124,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                 -   `scope` is "page" or "module". You can add more. Is a folder where is domain file.
                 -   `domain` is a name of `.yaml` file. (Avoid extension)
 -   **THEME**
-    -   Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.1`
+    -   Semantic UI `2.4.2` is remplace with Fomantic UI `2.7.4`
         -   [Fomantic UI](https://github.com/fomantic/Fomantic-UI) is a fork of [Semantic UI](https://github.com/Semantic-Org/Semantic-UI).
         -   Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
         -   Nothing changed with this.
@@ -190,6 +191,63 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `add_accesskey()`
     -   _Note_: This file will be deleted in version 4.1.0
 -   **settings_extension** Some of these settings (soon all) have been transferred to the translation file `data/translations/en/app/mail.yaml` They don't need to be in the database.
+-   **lib/villagenav.php**
+    -   `villagenav()` use `LotgdNavigation::villageNav()`
+    -   _Note_: This file will be deleted in version 4.1.0
+-   **lib/superusernav.php**
+    -   `superusernav()` use `LotgdNavigation::superuserGrottoNav()`
+    -   _Note_: This file will be deleted in version 4.1.0
+-   **lib/http.php**:
+    -   `httpget()` use `LotgdHttp::getQuery()`
+    -   `httpallget()` use `LotgdHttp::getAllQuery()`
+    -   `httpset()` use `LotgdHttp::setQuery()`
+    -   `httppost()` use `LotgdHttp::getPost()`
+    -   `httppostisset()` use `LotgdHttp::existInPost()`
+    -   `httppostset()` use `LotgdHttp::setPost()`
+    -   `httpallpost()` use `LotgdHttp::getPostAll()`
+    -   `postparse()`
+-   **lib/commentary**: All functions, use new commentary system.
+    -   `commentarylocs()`
+    -   `removecommentary()`
+    -   `restorecommentary()`
+    -   `commentcleanup()`
+    -   `addcommentary()`
+    -   `injectcommentary()`
+    -   `injectsystemcomment()`
+    -   `injectrawcomment()`
+    -   `commentdisplay()`
+    -   `viewcommentary()`
+    -   `preparecommentaryblock()`
+    -   `getcommentary()`
+    -   `preparecommentaryline()`
+    -   `commentaryfooter()`
+    -   `buildcommentarylink()`
+    -   `talkform()`
+-   **lib/tabledescriptor.php**: All functions, use Doctrine Entities to sync table schema.
+    -   `synctable()`
+    -   `table_create_from_descriptor()`
+    -   `table_create_descriptor()`
+    -   `descriptor_createsql()`
+    -   `descriptor_sanitize_type()`
+-   **lib/translator.php**: All functions, use new translation system.
+    -   `translator_setup()`
+    -   `translate()`
+    -   `sprintf_translate()`
+    -   `translate_inline()`
+    -   `translate_mail()`
+    -   `tl()`
+    -   `translate_loadnamespace()`
+    -   `tlbutton_push()`
+    -   `tlbutton_pop()`
+    -   `tlbutton_clear()`
+    -   `enable_translation()`
+    -   `tlschema()`
+    -   `translator_check_collect_texts()`
+-   **src/core/Output/Collector.php**: Use new translations system and template system.
+    -   `output_notl()`
+    -   `output_notl()`
+-   **src/core/Template/Base.php**: Filter
+    -   `sustitute` use new template system to simulate this.
 
 ### :wrench: FIXES
 
