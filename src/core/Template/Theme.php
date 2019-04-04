@@ -53,17 +53,16 @@ class Theme extends Base
      */
     public function renderThemeTemplate($name, $context)
     {
-        global $html;
+        global $html, $session;
 
         $userPre = $html['userPre'] ?? [];
         $user = $session['user'] ?? [];
-        $session = $html['session'] ?? [];
         unset($user['password']);
 
         $context = array_merge([
             'userPre' => $userPre,
             'user' => $user, //-- Actual user data for this template
-            'session' => $session //-- Session data declared in page_header or popup_header
+            'session' => $html['session'] ?? [] //-- Session data declared in page_header or popup_header
         ],
         $context);
 
@@ -84,13 +83,12 @@ class Theme extends Base
 
         $userPre = $html['userPre'] ?? [];
         $user = $session['user'] ?? [];
-        $sesion = $session ?? [];
-        unset($sesion['user'], $user['password']);
+        unset($user['password']);
 
         $context = array_merge([
             'userPre' => $userPre,
             'user' => $user, //-- Actual user data for this template
-            'session' => $sesion //-- Actual session data for this template
+            'session' => $html['session'] ?? [] //-- Actual session data for this template
         ],
         $context);
 
