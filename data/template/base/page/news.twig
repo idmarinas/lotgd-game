@@ -23,9 +23,9 @@
 
         {% if news.arguments %}
             {% if news.newformat %}
-                {{ news.newstext|tl(news.arguments|unserialize, news.tlschema)|colorize }}
+                {{ news.newstext|tl(news.arguments, news.tlschema)|colorize }}
             {% else %}
-                {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments|unserialize)|colorize }}
+                {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments)|colorize }}
             {% endif %}
         {% else %}
             {{ news.newstext|tl(null, news.tlschema)|colorize }}
