@@ -1,7 +1,9 @@
 {% translate_default_domain 'page-news' %}
 
 {% block lastMotd %}
-    {% include 'base/page/news/last-motd.twig' with { 'motd': lastMotd } %}
+    {% if lastMotd %}
+        {% include 'base/page/news/last-motd.twig' with { 'motd': lastMotd } %}
+    {% endif %}
 {% endblock lastMotd %}
 
 {% if result.count() <= 1 %}
@@ -16,7 +18,7 @@
 
     <div class="center aligned">
         {% if SU_EDIT_COMMENTS %}
-            [ <a href="{{ ('superuser.php?op=newsdelete&newsid=' ~ news.newsid ~ '&return=' ~ REQUEST_URI|url_encode )|lotgd_url }}">{{ del }}</a> ]&nbsp;
+            [ <a href="{{ ('news.php?op=delete&newsid=' ~ news.newsid)|lotgd_url }}">{{ del }}</a> ]&nbsp;
         {% endif %}
 
         {% if news.arguments %}
