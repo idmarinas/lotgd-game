@@ -65,9 +65,9 @@ class Characters
     private $playername;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="sex", type="boolean", nullable=false, options={"default": 0})
+     * @ORM\Column(name="sex", type="smallint", nullable=false, options={"default": 0})
      */
     private $sex = 0;
 
@@ -666,7 +666,7 @@ class Characters
     /**
      * Set the value of Sex.
      *
-     * @param bool sex
+     * @param int sex
      *
      * @return self
      */
@@ -680,9 +680,9 @@ class Characters
     /**
      * Get the value of Sex.
      *
-     * @return bool
+     * @return int
      */
-    public function getSex(): bool
+    public function getSex(): int
     {
         return $this->sex;
     }
