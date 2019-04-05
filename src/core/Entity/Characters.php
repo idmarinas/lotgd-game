@@ -74,35 +74,35 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="strength", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="strength", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $strength = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dexterity", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="dexterity", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $dexterity = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="intelligence", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="intelligence", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $intelligence = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="constitution", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="constitution", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $constitution = 10;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="wisdom", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     * @ORM\Column(name="wisdom", type="integer", nullable=false, options={"default": 10, "unsigned": true})
      */
     private $wisdom = 10;
 
