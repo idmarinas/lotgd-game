@@ -40,6 +40,17 @@ class Translator extends ZendTranslator
 
         $message = parent::translate($message, $textDomain ?? 'page-default', $locale);
 
+        if (is_array($message))
+        {
+            $string = '';
+            foreach($message as $msg)
+            {
+                $string .= ' '. $this->mf($msg, $parameters, $locale);
+            }
+
+            return $string;
+        }
+
         return $this->mf($message, $parameters, $locale);
     }
 
