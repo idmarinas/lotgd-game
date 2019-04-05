@@ -164,5 +164,4 @@ if (! $noinstallnavs)
     \LotgdNavigation::setTextDomain();
 }
 
-bdump($session['installer']);
 page_footer(false);
