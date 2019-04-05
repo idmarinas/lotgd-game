@@ -3,19 +3,19 @@
 {# Show only to administrator that have user edit permits #}
 {% if canEditUsers %}
     <span> | </span>
-    <a href="{{ 'user.php'|lotgd_url }}"><b>{{ 'parts.petition.editUser'|t|colorize }}</b></a>
+    <a href="{{ 'user.php'|lotgd_url }}"><strong>{{ 'parts.petition.editUser'|t|colorize }}</strong></a>
 {% endif %}
 
 {# Show only to administrators that have petitions edit permits #}
 {% if canEditPetitions %}
     <br>
-    <a href='{{ 'viewpetition.php'|lotgd_url }}'><b>{{ 'parts.petition.admin'|t|colorize }}:</b></a>
-    {{ 'parts.petition.status.5'|t({'n': petitions.5 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.4'|t({'n': petitions.4 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.0'|t({'n': petitions.0 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.1'|t({'n': petitions.1 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.3'|t({'n': petitions.3 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.7'|t({'n': petitions.7 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.6'|t({'n': petitions.6 })|colorize }} <span>|</span>
-    {{ 'parts.petition.status.2'|t({'n': petitions.2 })|colorize }}
+    <a href='{{ 'viewpetition.php'|lotgd_url }}'><strong>{{ 'parts.petition.admin'|t|colorize }}:</strong></a>
+    {{ 'parts.petition.status.05'|t({'n': petitions.5 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.04'|t({'n': petitions.4 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.00'|t({'n': petitions.0 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.01'|t({'n': petitions.1 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.03'|t({'n': petitions.3 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.07'|t({'n': petitions.7 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.06'|t({'n': petitions.6 })|colorize }} <span>|</span>
+    {{ 'parts.petition.status.02'|t({'n': petitions.2 })|colorize }}
 {% endif %}
