@@ -50,8 +50,7 @@ if ('forgotval' == $op)
 
     if (! $account)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph.0', [], $translatorNamespace));
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('validating.pass.paragraph.1', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph', [], $translatorNamespace));
 
         return redirect('home.php');
     }
@@ -85,8 +84,7 @@ elseif ('val' == $op)
 
     if (! $result)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail.0', [], $translatorNamespace));
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('validating.email.paragraph.fail.1', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $translatorNamespace));
 
         return redirect('home.php');
     }
@@ -166,16 +164,14 @@ elseif ('forgot' == $op)
 
         if (! $account)
         {
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound.0', [], $translatorNamespace));
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound.1', [], $translatorNamespace));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound', [], $translatorNamespace));
 
             return redirect('create.php?op=forgot');
         }
 
         if (! trim($account->getEmailaddress()))
         {
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail.0', [], $translatorNamespace));
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notEmail.1', [], $translatorNamespace));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail', [], $translatorNamespace));
 
             return redirect('create.php?op=forgot');
         }
@@ -199,8 +195,7 @@ elseif ('forgot' == $op)
 
         lotgd_mail($account->getEmailaddress(), $subj, appoencode($msg, true));
 
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent.0', [], $translatorNamespace));
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent.1', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent', [], $translatorNamespace));
 
         return redirect('create.php?op=forgot');
     }
