@@ -4,10 +4,7 @@
 {{ 'stage4.paragraph'|t|colorize }}
 
 {% if connected %}
-    {{ 'stage4.connected.success.0'|t|colorize }}
-    {{ 'stage4.connected.success.1'|t|colorize }}
-    {{ 'stage4.connected.success.2'|t|colorize }}
-    {{ 'stage4.connected.success.3'|t|colorize }}
+    {{ 'stage4.connected.success'|t|colorize }}
 
     {# Test create table #}
     {{ 'stage4.connected.test.create.title'|t|colorize }}
@@ -122,17 +119,9 @@
     {% if not issues %}
         {{ 'stage4.connected.test.results.success'|t|colorize }}
     {% else %}
-        {{ 'stage4.connected.test.results.fail.0'|t({'issues': issues})|colorize }}
-        {{ 'stage4.connected.test.results.fail.1'|t|colorize }}
-        {{ 'stage4.connected.test.results.fail.2'|t|colorize }}
-        {{ 'stage4.connected.test.results.fail.3'|t|colorize }}
+        {{ 'stage4.connected.test.results.fail'|t({'issues': issues})|colorize }}
     {% endif %}
 {% else %}
-    {{ 'stage4.connected.fail.0'|t|colorize }}
-    {{ 'stage4.connected.fail.1'|t|colorize }}
-    {{ 'stage4.connected.fail.2'|t|colorize }}
-    {{ 'stage4.connected.fail.3'|t|colorize }}
-    {{ 'stage4.connected.fail.4'|t|colorize }}
+    {{ 'stage4.connected.fail'|t|colorize }}
     <div class="ui red message">{{ dberror }}</div>
-    {{ 'stage4.connected.fail.5'|t|colorize }}
 {% endif %}

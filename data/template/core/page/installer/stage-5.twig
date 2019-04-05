@@ -2,29 +2,24 @@
 
 {% if update %}
     {{ 'stage5.update.subtitle'|t|colorize }}
-    {{ 'stage5.update.paragraph.0'|t|colorize }}
-    {{ 'stage5.update.paragraph.1'|t|colorize }}
+    {{ 'stage5.update.paragraph'|t|colorize }}
 {% else %}
     {# Looks like a clean install #}
     {{ 'stage5.clean.subtitle'|t|colorize }}
-    {{ 'stage5.clean.paragraph.0'|t|colorize }}
+    {{ 'stage5.clean.paragraph0'|t|colorize }}
 
     {% if conflict|length %}
-        {{ 'stage5.clean.conflict.0'|t|colorize }}
-        {{ 'stage5.clean.conflict.1'|t|colorize }}
-        {{ 'stage5.clean.conflict.2'|t({'tables': conflict|join(', ')})|colorize }}
+        {{ 'stage5.clean.conflict'|t({'tables': conflict|join(', ')})|colorize }}
 
         {% if increasedStage %}
             {{ 'stage5.clean.conflict.3'|t|colorize }}
         {% endif %}
     {% endif %}
 
-    {{ 'stage5.clean.paragraph.1'|t|colorize }}
-    {{ 'stage5.clean.paragraph.2'|t|colorize }}
+    {{ 'stage5.clean.paragraph'|t|colorize }}
 {% endif %}
 
-{{ 'stage5.paragraph.0'|t|colorize }}
-{{ 'stage5.paragraph.1'|t|colorize }}
+{{ 'stage5.paragraph0'|t|colorize }}
 
 <form action="installer.php?stage=5" class="ui form" method="POST">
     <div class="ui action input">
@@ -34,8 +29,7 @@
 </form>
 
 {% if conflict|length == 0 %}
-    {{ 'stage5.paragraph.conflict'|t|colorize }}
+    {{ 'stage5.conflict'|t|colorize }}
 {% endif %}
 
-{{ 'stage5.paragraph.2'|t|colorize }}
-{{ 'stage5.paragraph.3'|t|colorize }}
+{{ 'stage5.paragraph1'|t|colorize }}

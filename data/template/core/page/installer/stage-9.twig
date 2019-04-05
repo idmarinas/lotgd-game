@@ -4,9 +4,7 @@
 
 {# Pre-Install: before update core tables execute this code of install #}
 {{ 'stage9.upgradeInstall.title'|t|colorize }}
-{{ 'stage9.upgradeInstall.paragraph.0'|t|colorize }}
-{{ 'stage9.upgradeInstall.paragraph.1'|t|colorize }}
-{{ 'stage9.upgradeInstall.paragraph.2'|t|colorize }}
+{{ 'stage9.upgradeInstall.paragraph'|t|colorize }}
 {{ 'stage9.upgradeInstall.log'|t|colorize }}
 
 <div class="ui segment">
@@ -16,13 +14,11 @@
 </div>
 
 {{ 'stage9.building.title'|t|colorize }}
-{{ 'stage9.building.paragraph.0'|t|colorize }}
-{{ 'stage9.building.paragraph.1'|t|colorize }}
-{{ 'stage9.building.paragraph.2'|t|colorize }}
+{{ 'stage9.building.paragraph'|t|colorize }}
 
 {# Synchronization of core tables, you can found this entities in "src/core/Entity" #}
 {{ 'stage9.sync.title'|t|colorize }}
-{{ 'stage9.sync.paragraph.0'|t|colorize }}
+{{ 'stage9.sync.paragraph'|t|colorize }}
 
 <div class="ui segment">
     {% for message in synchronizationTables %}
@@ -32,7 +28,7 @@
 
 {# Insert data #}
 {{ 'stage9.data.title'|t|colorize }}
-{{ 'stage9.data.paragraph.0'|t|colorize }}
+{{ 'stage9.data.paragraph'|t|colorize }}
 
 <div class="ui segment">
     {% for message in insertData %}
@@ -42,7 +38,7 @@
 
 {# Installation of modules #}
 {{ 'stage9.modules.title'|t|colorize }}
-{{ 'stage9.modules.paragraph.0'|t|colorize }}
+{{ 'stage9.modules.paragraph'|t|colorize }}
 
 <div class="ui segment">
     {% for message in installOfModules %}

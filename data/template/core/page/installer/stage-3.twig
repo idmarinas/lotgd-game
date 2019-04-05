@@ -2,15 +2,10 @@
 
 {{ 'stage3.subtitle'|t|colorize }}
 
-{{ 'stage3.paragraph.0'|t|colorize }}
-{{ 'stage3.paragraph.1'|t|colorize }}
-{{ 'stage3.paragraph.2'|t({'link': '<a href="http://www.mysql.com/" target="_blank" rel="noopener noreferrer">MySQL</a>'})|colorize }}
+{{ 'stage3.paragraph'|t({'link': '<a href="http://www.mysql.com/" target="_blank" rel="noopener noreferrer">MySQL</a>'})|colorize }}
 
 {% if showForm %}
-    {{ 'stage3.form.paragraph.0'|t|colorize }}
-    {{ 'stage3.form.paragraph.1'|t|colorize }}
-    {{ 'stage3.form.paragraph.2'|t|colorize }}
-    {{ 'stage3.form.paragraph.3'|t|colorize }}
+    {{ 'stage3.form.paragraph'|t|colorize }}
 
     <form id="install-3" action="installer.php?stage=4" class="ui form" method="POST">
         <div class="field">

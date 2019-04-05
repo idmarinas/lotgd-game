@@ -1,25 +1,16 @@
 {% translate_default_domain 'page-installer' %}
 
 {% if initial %}
-    {{ 'stage6.initial.0'|t({'file': FILE_DB_CONNECT})|colorize }}
-    {{ 'stage6.initial.1'|t({'file': FILE_DB_CONNECT})|colorize }}
-    {{ 'stage6.initial.2'|t|colorize }}
+    {{ 'stage6.initial.paragraph'|t({'file': FILE_DB_CONNECT, 'file': FILE_DB_CONNECT})|colorize }}
 
     {% if failure is same as(false) %}
         {{ 'stage6.initial.success'|t({'file': FILE_DB_CONNECT})|colorize }}
     {% elseif failure is same as(true) %}
-        {{ 'stage6.initial.failure.0'|t({'file': FILE_DB_CONNECT})|colorize }}
-        {{ 'stage6.initial.failure.1'|t|colorize }}
-        {{ 'stage6.initial.failure.2'|t|colorize }}
+        {{ 'stage6.initial.failure'|t({'file': FILE_DB_CONNECT, 'cache': CACHE_FILE})|colorize }}
         <blockquote>
             <pre>{{ code|e }}</pre>
         </blockquote>
-        {{ 'stage6.initial.failure.3'|t|colorize }}
-        {{ 'stage6.initial.failure.4'|t({'file': FILE_DB_CONNECT})|colorize }}
-        {{ 'stage6.initial.failure.5'|t|colorize }}
-        {{ 'stage6.initial.failure.6'|t({'cache': CACHE_FILE})|colorize }}
     {% endif %}
 {% else %}
-    {{ 'stage6.paragraph.0'|t({'file': FILE_DB_CONNECT})|colorize }}
-    {{ 'stage6.paragraph.1'|t|colorize }}
+    {{ 'stage6.paragraph'|t({'file': FILE_DB_CONNECT})|colorize }}
 {% endif %}

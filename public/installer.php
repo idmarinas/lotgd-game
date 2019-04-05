@@ -90,18 +90,18 @@ invalidatedatacache('gamesettings');
 tlschema('installer');
 
 $stages = [
-    'stages.0',
-    'stages.1',
-    'stages.2',
-    'stages.3',
-    'stages.4',
-    'stages.5',
-    'stages.6',
-    'stages.7',
-    'stages.8',
-    'stages.9',
-    'stages.10',
-    'stages.11',
+    'stages.00',
+    'stages.01',
+    'stages.02',
+    'stages.03',
+    'stages.04',
+    'stages.05',
+    'stages.06',
+    'stages.07',
+    'stages.08',
+    'stages.09',
+    'stages.010',
+    'stages.011',
 ];
 
 $session['installer']['stagecompleted'] = $session['installer']['stagecompleted'] ?? -1;
@@ -110,7 +110,7 @@ $stage = min($session['installer']['stagecompleted'] + 1, $stage, 11);
 $session['installer']['stagecompleted'] = max($stage, $session['installer']['stagecompleted']);
 
 page_header('title', [
-    'stage' => \LotgdTranslator::t("stages.{$stage}", [], 'navigation-installer')
+    'stage' => \LotgdTranslator::t("stages.0{$stage}", [], 'navigation-installer')
 ], 'page-installer');
 
 if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))

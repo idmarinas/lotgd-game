@@ -4,11 +4,11 @@ title: 'LoGD Installer &#151; {stage}'
 stage0:
     subtitle: '`c`@`bWelcome to Legend of the Green Dragon´b`0´c'
     paragraph:
-        0: '`2This is the installer script for Legend of the Green Dragon, by Eric Stevens & JT Traub.`0`n'
-        1: '`n`2In order to install and use Legend of the Green Dragon (LoGD), you must agree to the license under which it is deployed.`0`n'
-        2: '`n`&This game is a small project into which we have invested a tremendous amount of personal effort, and we provide this to you absolutely free of charge.`0'
-        3: "`2Please understand that if you modify our copyright, or otherwise violate the license, you are not only breaking international copyright law (which includes penalties which are defined in whichever country you live), but you're also defeating the spirit of open source, and ruining any good faith which we have demonstrated by providing our blood, sweat, and tears to you free of charge.  You should also know that by breaking the license even one time, it is within our rights to require you to permanently cease running LoGD forever.`0`n"
-        4: '`n`2Please note that in order to use the installer, you must have cookies enabled in your browser.`0`n'
+        - '`2This is the installer script for Legend of the Green Dragon, by Eric Stevens & JT Traub.`0`n'
+        - '`n`2In order to install and use Legend of the Green Dragon (LoGD), you must agree to the license under which it is deployed.`0`n'
+        - '`n`&This game is a small project into which we have invested a tremendous amount of personal effort, and we provide this to you absolutely free of charge.`0'
+        - "`2Please understand that if you modify our copyright, or otherwise violate the license, you are not only breaking international copyright law (which includes penalties which are defined in whichever country you live), but you're also defeating the spirit of open source, and ruining any good faith which we have demonstrated by providing our blood, sweat, and tears to you free of charge.  You should also know that by breaking the license even one time, it is within our rights to require you to permanently cease running LoGD forever.`0`n"
+        - '`n`2Please note that in order to use the installer, you must have cookies enabled in your browser.`0`n'
     authentication:
         paragraph: '`n`%In order to upgrade this LoGD installation, you will need to provide the username and password of a superuser account with the MEGAUSER privilege`0`n`n'
         form:
@@ -25,14 +25,14 @@ stage1:
     paragraph: '`2Before continuing, you must read and understand the following license agreement.`0`n`n'
     cclicense:
         paragraph:
-            0: '`^Warning, the Creative Commons license has changed, or could not be retrieved from the Creative Commons server.'
-            1: 'You should check with the game authors to ensure that the below license agrees with the license under which it was released.'
-            2: 'The license may be referenced at the {link} site.`n'
+            - '`^Warning, the Creative Commons license has changed, or could not be retrieved from the Creative Commons server.'
+            - 'You should check with the game authors to ensure that the below license agrees with the license under which it was released.'
+            - 'The license may be referenced at the {link} site.`n'
     lotgdlicense:
+        plainText: '`n`n`b`@Plain Text:´b`n`7'
         paragraph:
-            plainText: '`n`n`b`@Plain Text:´b`n`7'
-            0: "`n`^The license file (LICENSE.txt) has been modified. Please obtain a new copy of the game's code, this file has been tampered with.`0"
-            1: '`^Expected MD5 in ({expected}), but got {got}`0'
+            - "`n`^The license file (LICENSE.txt) has been modified. Please obtain a new copy of the game's code, this file has been tampered with.`0"
+            - '`^Expected MD5 in ({expected}), but got {got}`0'
 
 # Installation Stage 2
 stage2:
@@ -42,17 +42,17 @@ stage2:
 stage3:
     subtitle: '`c`@`bDatabase Connection Information´b`0´c'
     paragraph:
-        0: '`2In order to run Legend of the Green Dragon, your server must have access to a MySQL database.'
-        1: "If you are not sure if you meet this need, talk to server's Internet Service Provider (ISP), and make sure they offer MySQL databases."
-        2: "If you are running on your own machine or a server under your control, you can download and install MySQL from the {link} website for free.`0`n"
+        - '`2In order to run Legend of the Green Dragon, your server must have access to a MySQL database.'
+        - "If you are not sure if you meet this need, talk to server's Internet Service Provider (ISP), and make sure they offer MySQL databases."
+        - "If you are running on your own machine or a server under your control, you can download and install MySQL from the {link} website for free.`0`n"
     db:
         fileExist: 'There appears to already be a database setup file (%s) in your site, you can proceed to the next step.'
     form:
         paragraph:
-            0: '`n`2It looks like this is a new install of Legend of the Green Dragon.'
-            1: 'First, thanks for installing LoGD!'
-            2: "In order to connect to the database server, I'll need the following information."
-            3: "`iIf you are unsure of the answer to any of these questions, please check with your server's ISP, or read the documentation on MySQL´i`0`n"
+            - '`n`2It looks like this is a new install of Legend of the Green Dragon.'
+            - 'First, thanks for installing LoGD!'
+            - "In order to connect to the database server, I'll need the following information."
+            - "`iIf you are unsure of the answer to any of these questions, please check with your server's ISP, or read the documentation on MySQL´i`0`n"
         dbDriver:
             label: '`@What is the driver of your DataBase?`0'
             description: 'Select the driver to connect to your Database. Default is PDO Mysql.'
@@ -117,47 +117,48 @@ stage4:
                 title: '`n`^Overall results:`2`n'
                 success: "`2You've passed all the tests, you're ready for the next stage.`0"
                 error:
-                    0: '`2Find {issues,plural, =1{1 problem} other{# problems}}. Even if all of the above issues are merely warnings, you will probably periodically see database errors as a result of them.`0'
-                    1: '`2It would be a good idea to resolve these permissions issues before attempting to run this game.`0'
-                    2: '`2For you technical folk, the specific permissions suggested are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER and LOCK TABLES.`0'
-                    3: "`2I'm sorry, this is not something I can do for you.`0"
+                    - '`2Find {issues,plural, =1{1 problem} other{# problems}}. Even if all of the above issues are merely warnings, you will probably periodically see database errors as a result of them.`0'
+                    - '`2It would be a good idea to resolve these permissions issues before attempting to run this game.`0'
+                    - '`2For you technical folk, the specific permissions suggested are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER and LOCK TABLES.`0'
+                    - "`2I'm sorry, this is not something I can do for you.`0"
         success:
-            0: '`^Yahoo, I was able to connect to the database server!`0'
-            1: '`2This means that the database server address, database username, and database password you provided were probably accurate, and that yourdatabase server is running and accepting connections.`0`n'
-            2: '`n`@Tests`0`n'
-            3: "`2I'm now going to run a series of tests to determine what the permissions of this account are.`0`n"
+            - '`^Yahoo, I was able to connect to the database server!`0'
+            - '`2This means that the database server address, database username, and database password you provided were probably accurate, and that yourdatabase server is running and accepting connections.`0`n'
+            - '`n`@Tests`0`n'
+            - "`2I'm now going to run a series of tests to determine what the permissions of this account are.`0`n"
         fail:
-            0: "`$Blast! I wasn't able to connect to the database server with the information you provided!`0"
-            1: "`2This means that either the database server address, database username, database password or database name you provided were wrong, or else the database server isn't running.`0`n"
-            2: '`$Remember create database before try connect.`0`n'
-            3: '`2The specific error the database returned was:`0'
-            4: '`2If you believe you provided the correct information, make sure that the database server is running (check documentation for how to determine this).`0'
-            5: '`2Otherwise, you should return to the previous step, "Database Info" and double-check that the information provided there is accurate.`0'
+            - "`$Blast! I wasn't able to connect to the database server with the information you provided!`0"
+            - "`2This means that either the database server address, database username, database password or database name you provided were wrong, or else the database server isn't running.`0`n"
+            - '`$Remember create database before try connect.`0`n'
+            - '`2The specific error the database returned was:`0'
+            - '`2If you believe you provided the correct information, make sure that the database server is running (check documentation for how to determine this).`0'
+            - '`2Otherwise, you should return to the previous step, "Database Info" and double-check that the information provided there is accurate.`0'
 
 # Installation Stage 5
 stage5:
     update:
         subtitle: '`c`@This looks like a game upgrade.`0´c`n'
         paragraph:
-            0: "`^If this is not an upgrade from a previous version of LoGD, <a href='installer.php?stage=5&type=install'>click here</a>.`0"
-            1: '`2Otherwise, continue on to the next step.`0'
+            - "`^If this is not an upgrade from a previous version of LoGD, <a href='installer.php?stage=5&type=install'>click here</a>.`0"
+            - '`2Otherwise, continue on to the next step.`0'
     clean:
         subtitle: '`c`@This looks like a fresh install.`0´c`n'
-        paragraph:
-            0: "`2If this is not a fresh install, but rather an upgrade from a previous version of LoGD, chances are that you installed LoGD with a table prefix.  If that's the case, enter the prefix below.  If you are still getting this message, it's possible that I'm just spooked by how few tables are common to the current version, and in which case, I can try an upgrade if you <a href='installer.php?stage=5&type=upgrade'>click here</a>.`n"
-            1: '`n`2You can avoid table conflicts with other applications in the same database by providing a table name prefix.`0'
-            2: '`2This prefix will get put on the name of every table in the database.`0'
+        paragraph0: "`2If this is not a fresh install, but rather an upgrade from a previous version of LoGD, chances are that you installed LoGD with a table prefix.  If that's the case, enter the prefix below.  If you are still getting this message, it's possible that I'm just spooked by how few tables are common to the current version, and in which case, I can try an upgrade if you <a href='installer.php?stage=5&type=upgrade'>click here</a>.`n"
+        paragraph1:
+            - '`n`2You can avoid table conflicts with other applications in the same database by providing a table name prefix.`0'
+            - '`2This prefix will get put on the name of every table in the database.`0'
         conflict:
-            0: '`n`n`$There are table conflicts.`0'
-            1: "`2If you continue with an install, the following tables will be overwritten with the game's tables. If the listed tables belong to LoGD, they will be upgraded, otherwise all existing data in those tables will be destroyed. Once this is done, this cannot be undone unless you have a backup!`2`n"
-            2: '`n`2These tables conflict: `0 `^{tables}`0`n'
-            3: "`nIf you are sure that you wish to overwrite these tables, <a href='installer.php?stage=5&op=confirm_overwrite'>click here</a>.`n"
-    paragraph:
-        0: '`n`2To provide a table prefix, enter it here.`0'
-        1: "`2If you don't know what this means, you should either leave it blank, or enter an intuitive value such as \"logd\".`0`n"
-        2: '`n`n`@Once you have submitted your prefix, you will be returned to this page to select the next step.`0'
-        3: "`@If you don't need a prefix, just select the next step now.`0"
-        conflict: "`^It looks like you can probably safely skip this step if you don't know what it means.`0"
+            - '`n`n`$There are table conflicts.`0'
+            - "`2If you continue with an install, the following tables will be overwritten with the game's tables. If the listed tables belong to LoGD, they will be upgraded, otherwise all existing data in those tables will be destroyed. Once this is done, this cannot be undone unless you have a backup!`2`n"
+            - '`n`2These tables conflict: `0 `^{tables}`0`n'
+            - "`nIf you are sure that you wish to overwrite these tables, <a href='installer.php?stage=5&op=confirm_overwrite'>click here</a>.`n"
+    paragraph0:
+        - '`n`2To provide a table prefix, enter it here.`0'
+        - "`2If you don't know what this means, you should either leave it blank, or enter an intuitive value such as \"logd\".`0`n"
+    paragraph1:
+        - '`n`n`@Once you have submitted your prefix, you will be returned to this page to select the next step.`0'
+        - "`@If you don't need a prefix, just select the next step now.`0"
+    conflict: "`^It looks like you can probably safely skip this step if you don't know what it means.`0"
     form:
         input: 'Table prefix'
         button: 'Submit your prefix'
@@ -165,21 +166,22 @@ stage5:
 # Installation Stage 6
 stage6:
     initial:
-        0: '`c`b`@Writing your "{file}" file`0´b´c'
-        1: "`2I'm attempting to write a file named \"{file}\" to your site root.`0"
-        2: '`2This file tells LoGD how to connect to the database, and is necessary to continue installation.`0`n'
+        paragraph:
+            - '`c`b`@Writing your "{file}" file`0´b´c'
+            - "`2I'm attempting to write a file named \"{file}\" to your site root.`0"
+            - '`2This file tells LoGD how to connect to the database, and is necessary to continue installation.`0`n'
         success: '`n`@Success!`0`2  I was able to write your "{file}" file, you can continue on to the next step.`0'
         failure:
-            0: '`n`$Unfortunately, I was not able to write your "{file}" file.`0'
-            1: '`2You will have to create this file yourself, and upload it to your web server.`0'
-            2: '`2The contents of this file should be as follows:`0'
-            3: '`2Create a new file, past the entire contents from above into it`2 ).'
-            4: 'When you have that done, save the file as "{file}" and upload this to the location you have LoGD at.'
-            5: 'You can refresh this page to see if you were successful.'
-            6: '`nIf have problems, you can try delete file "{cache}".'
+            - '`n`$Unfortunately, I was not able to write your "{file}" file.`0'
+            - '`2You will have to create this file yourself, and upload it to your web server.`0'
+            - '`2The contents of this file should be as follows:`0'
+            - '`2Create a new file, past the entire contents from above into it`2 ).'
+            - 'When you have that done, save the file as "{file}" and upload this to the location you have LoGD at.'
+            - 'You can refresh this page to see if you were successful.'
+            - '`nIf have problems, you can try delete file "{cache}".'
     paragraph:
-        0: '`$The file "{file}" was created before. If you want update with new data, please delete it.`0`n'
-        1: '`$For now, game cant do update installation.`0`n'
+        - '`$The file "{file}" was created before. If you want update with new data, please delete it.`0`n'
+        - '`$For now, game cant do update installation.`0`n'
 
 # Installation Stage 7
 stage7:
@@ -199,13 +201,13 @@ stage8:
         exists: 'This stage was completed during a previous installation.'
         info: 'If you wish to perform stages 4 through 6 again, please delete the file named "file" from your site.'
     paragraph:
-        0: '`@Legend of the Green Dragon supports an extensive module system.`0'
-        1: '`@Modules are small self-contained files that perform a specific function or event within the game.`0'
-        2: '`@For the most part, modules are independant of each other, meaning that one module can be installed, uninstalled, activated, and deactivated without negative impact on the rest of the game.`0'
-        3: "`@Not all modules are ideal for all sites, for example, there's a module called 'Multiple Cities,' which is intended only for large sites with many users online at the same time.`0"
-        4: '`n`n`^If you are not familiar with Legend of the Green Dragon, and how the game is played, it is probably wisest to choose the default set of modules to be installed.`0'
-        5: "`n`n`@There is an extensive community of users who write modules for LoGD at <a href='http://dragonprime.net/'>http://dragonprime.net/</a>.`0"
-        6: '`^You can find modules adapted for IDMarinas Editions at <a href="https://github.com/idmarinas/lotgd-modules">https://github.com/idmarinas/lotgd-modules</a>.`0`n'
+        - '`@Legend of the Green Dragon supports an extensive module system.`0'
+        - '`@Modules are small self-contained files that perform a specific function or event within the game.`0'
+        - '`@For the most part, modules are independant of each other, meaning that one module can be installed, uninstalled, activated, and deactivated without negative impact on the rest of the game.`0'
+        - "`@Not all modules are ideal for all sites, for example, there's a module called 'Multiple Cities,' which is intended only for large sites with many users online at the same time.`0"
+        - '`n`n`^If you are not familiar with Legend of the Green Dragon, and how the game is played, it is probably wisest to choose the default set of modules to be installed.`0'
+        - "`n`n`@There is an extensive community of users who write modules for LoGD at <a href='http://dragonprime.net/'>http://dragonprime.net/</a>.`0"
+        - '`^You can find modules adapted for IDMarinas Editions at <a href="https://github.com/idmarinas/lotgd-modules">https://github.com/idmarinas/lotgd-modules</a>.`0`n'
     memory:
         warning: 'Warning: Your PHP memory limit is set to a very low level.'
         message: 'Smaller servers should not be affected by this during normal gameplay but for this installation step you should assign at least 12 Megabytes (128 Megabytes recomended) of RAM for your PHP process. For now we will skip this step, but before installing any module, make sure to increase you memory limit. <br> You can proceed at your own risk. Be aware that a blank screen indicates you *must* increase the memory limit.'
@@ -238,28 +240,25 @@ stage9:
     upgradeInstall:
         title: '`b`@Performing a pre-installation`0´b`n'
         paragraph:
-            0: '`2The intention of this is to be able to migrate the data to the new structure of the tables, for each new version of the core.`n'
-            1: 'This is necessary to pass data to new tables, useful when modifying tables by deleting fields and renaming them.`n'
-            2: 'This tries to guarantee the integrity of the data and that they are not lost in the updates.`0`n'
+            - '`2The intention of this is to be able to migrate the data to the new structure of the tables, for each new version of the core.`n'
+            - 'This is necessary to pass data to new tables, useful when modifying tables by deleting fields and renaming them.`n'
+            - 'This tries to guarantee the integrity of the data and that they are not lost in the updates.`0`n'
         log: '`n`@Pre-install Logs:`0`n'
     building:
         title: '`@`bBuilding the Tables´b`0`n'
         paragraph:
-            0: "`2I'm now going to build the tables."
-            1: 'If this is an upgrade, your current tables will be brought in line with the current version.'
-            2: "If it's an install, the necessary tables will be placed in your database.`0`n"
+            - "`2I'm now going to build the tables."
+            - 'If this is an upgrade, your current tables will be brought in line with the current version.'
+            - "If it's an install, the necessary tables will be placed in your database.`0`n"
     sync:
         title: '`n`@Table Synchronization Logs:`0`n'
-        paragraph:
-            0: "`2It's need to keep the tables synchronized to ensure data integrity.`0`n"
+        paragraph: "`2It's need to keep the tables synchronized to ensure data integrity.`0`n"
     data:
         title: '`n`@Insert data Logs:`0`n'
-        paragraph:
-            0: "`2The tables now have new fields and columns added, I'm going to begin importing data now.`0`n"
+        paragraph: "`2The tables now have new fields and columns added, I'm going to begin importing data now.`0`n"
     modules:
         title: '`n`@Modules Logs:`0`n'
-        paragraph:
-            0: "`2Now I'll install and configure your modules.`0`n"
+        paragraph: "`2Now I'll install and configure your modules.`0`n"
 
 # Installation Stage 10
 stage10:
@@ -280,6 +279,6 @@ stage10:
 stageDefault:
     subtitle: '`c`@`bAll Done!´b`0´c'
     paragraph:
-        0: '`@Your install of Legend of the Green Dragon has been completed!`0`n'
-        1: '`n`@Remember us when you have hundreds of users on your server, enjoying the game.`0'
-        2: "`@Eric, JT, and a lot of others put a lot of work into this world, so please don't disrespect that by violating the license.`0"
+        - '`@Your install of Legend of the Green Dragon has been completed!`0`n'
+        - '`n`@Remember us when you have hundreds of users on your server, enjoying the game.`0'
+        - "`@Eric, JT, and a lot of others put a lot of work into this world, so please don't disrespect that by violating the license.`0"
