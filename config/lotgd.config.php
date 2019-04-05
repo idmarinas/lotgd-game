@@ -30,13 +30,12 @@ return [
                     'cache_dir' => 'data/cache/translation'
                 ],
                 'plugins' => [
-                    [
-                        'name' => 'serializer',
-                        'options' => []
-                    ],
+                    'serializer',
+                    'optimize_by_factor',
+                    'clear_expired_by_factor',
                     'exception_handler' => [
                         'throw_exceptions' => false
-                    ],
+                    ]
                 ]
             ]
         ]
