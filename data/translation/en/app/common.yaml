@@ -5,19 +5,19 @@ title:
 
 upgrade:
     paragraph:
-        0: '`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.'
-        1: 'In order to perform the upgrade, an admin will have to run through the installer.'
-        2: "If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n"
-        3: "`@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the game when the upgrade is complete."
+        - '`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.'
+        - 'In order to perform the upgrade, an admin will have to run through the installer.'
+        - "If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n"
+        - "`@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the game when the upgrade is complete."
 
 security:
     paragraph:
-        0: "`$Remove the file named 'public/installer.php' from your main game directory! You need to comply in order to get the game up and running."
+        - "`$Remove the file named 'public/installer.php' from your main game directory! You need to comply in order to get the game up and running."
 
 database:
     title: '`c`$Database Connection Error`0´c`n`n'
     paragraph:
-        0: '`xDue to technical problems the game is unable to connect to the database server.`n`n'
-        1: 'Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'
-        2: 'Sorry for the inconvenience,`n'
-        3: 'Staff of {server}'
+        - '`xDue to technical problems the game is unable to connect to the database server.`n`n'
+        - 'Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'
+        - 'Sorry for the inconvenience,`n'
+        - 'Staff of {server}'

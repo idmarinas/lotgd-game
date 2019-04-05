@@ -2,8 +2,7 @@
 
 {{ 'validating.email.title'|t|colorize }}
 
-{{ 'validating.email.paragraph.success.0'|t|colorize }}
-{{ 'validating.email.paragraph.success.1'|t({'login': account.login})|colorize }}
+{{ 'validating.email.paragraph.success'|t({'login': account.login})|colorize }}
 
 {% if showLoginButton %}
     {# no auto-login for email changers #}

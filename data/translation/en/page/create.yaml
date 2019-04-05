@@ -46,8 +46,8 @@ create:
 validating:
     pass:
         paragraph:
-            0: 'Your request could not be verified. This may be because the link you used is invalid.'
-            1: "Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail. In case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got."
+            - 'Your request could not be verified. This may be because the link you used is invalid.'
+            - "Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail. In case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got."
         success: '`#`cYour login request has been validated. You may now log in.´c`0'
         button:
             login: 'Click here to log in'
@@ -55,11 +55,11 @@ validating:
         title: '`#`cEmail changed successfully!´c`0`n'
         paragraph:
             fail:
-                0: 'Your email could not be verified. This may be because you already validated your email.'
-                1: "Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail. In case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got."
+                - 'Your email could not be verified. This may be because you already validated your email.'
+                - "Try to log in, and if that doesn't help, use the 'Forgotten Password' option to retrieve a new mail. In case of all hope lost, use the petition link at the bottom of the page and provide ALL details with what you did and what info you got."
             success:
-                0: '`#`cYour email has been validated. You may now log in.´c`0'
-                1: 'Your email has been validated, your login name is `^{login}`0.`n`n'
+                - '`#`cYour email has been validated. You may now log in.´c`0'
+                - 'Your email has been validated, your login name is `^{login}`0.`n`n'
         button:
             login: 'Click here to log in'
 forgot:
@@ -67,14 +67,14 @@ forgot:
     button: 'Email me my password'
     account:
         notFound:
-            0: 'Could not locate a character with that name.'
-            1: "Look at the List Warriors page off the login page to make sure that the character hasn't expired and been deleted."
+            - 'Could not locate a character with that name.'
+            - "Look at the List Warriors page off the login page to make sure that the character hasn't expired and been deleted."
         noEmail:
-            0: "We're sorry, but that account does not have an email address associated with it, and so we cannot help you with your forgotten password."
-            1: 'Use the Petition for Help link at the bottom of the page to request help with resolving your problem.'
+            - "We're sorry, but that account does not have an email address associated with it, and so we cannot help you with your forgotten password."
+            - 'Use the Petition for Help link at the bottom of the page to request help with resolving your problem.'
         sent:
-            0: 'Sent a new validation email to the address on file for that account.'
-            1: 'You may use the validation email to log in and change your password.'
+            - 'Sent a new validation email to the address on file for that account.'
+            - 'You may use the validation email to log in and change your password.'
 yeoldemail:
     subject: '`#{name}`0 `jhas changed the email address`0'
     alert: 'Email change request validated by link to {newEmail} from {oldEmail} originally for login "login"'
