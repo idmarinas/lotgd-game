@@ -13,10 +13,14 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Extension\SandboxExtension;
+
 trait CoreFunction
 {
     /**
-     * Undocumented function
+     * Translate a title of page.
      *
      * @param array $title
      *
@@ -44,7 +48,7 @@ trait CoreFunction
      */
     public function gameCopyright(): string
     {
-        return \Lotgd\Core\Application::LICENSE . \Lotgd\Core\Application::COPYRIGHT;
+        return \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
     }
 
     /**
@@ -109,5 +113,109 @@ trait CoreFunction
     public function secondstonextgameday()
     {
         return secondstonextgameday();
+    }
+
+    /**
+     * Renders a module template.
+     *
+     * @param array        $context
+     * @param string|array $template      The template to render or an array of templates to try consecutively
+     * @param array        $variables     The variables to pass to the template
+     * @param bool         $withContext
+     * @param bool         $ignoreMissing Whether to ignore missing templates or not
+     * @param bool         $sandboxed     Whether to sandbox the template or not
+     *
+     * @return string The rendered template
+     */
+    public function includeModuleTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
+    {
+        $alreadySandboxed = false;
+        $sandbox = null;
+
+        if ($withContext)
+        {
+            $variables = array_merge($context, $variables);
+        }
+
+        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
+        {
+            $sandbox = $env->getExtension(SandboxExtension::class);
+
+            if (! $alreadySandboxed = $sandbox->isSandboxed())
+            {
+                $sandbox->enableSandbox();
+            }
+        }
+
+        try
+        {
+            return $env->resolveTemplate("module/{$template}")->render($variables);
+        }
+        catch (LoaderError $e)
+        {
+            if (! $ignoreMissing)
+            {
+                throw $e;
+            }
+        }
+        finally
+        {
+            if ($isSandboxed && ! $alreadySandboxed)
+            {
+                $sandbox->disableSandbox();
+            }
+        }
+    }
+
+    /**
+     * Renders a theme template.
+     *
+     * @param array        $context
+     * @param string|array $template      The template to render or an array of templates to try consecutively
+     * @param array        $variables     The variables to pass to the template
+     * @param bool         $withContext
+     * @param bool         $ignoreMissing Whether to ignore missing templates or not
+     * @param bool         $sandboxed     Whether to sandbox the template or not
+     *
+     * @return string The rendered template
+     */
+    public function includeThemeTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
+    {
+        $alreadySandboxed = false;
+        $sandbox = null;
+
+        if ($withContext)
+        {
+            $variables = array_merge($context, $variables);
+        }
+
+        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
+        {
+            $sandbox = $env->getExtension(SandboxExtension::class);
+
+            if (! $alreadySandboxed = $sandbox->isSandboxed())
+            {
+                $sandbox->enableSandbox();
+            }
+        }
+
+        try
+        {
+            return $env->resolveTemplate("{$env->getThemefolder()}/{$template}")->render($variables);
+        }
+        catch (LoaderError $e)
+        {
+            if (! $ignoreMissing)
+            {
+                throw $e;
+            }
+        }
+        finally
+        {
+            if ($isSandboxed && ! $alreadySandboxed)
+            {
+                $sandbox->disableSandbox();
+            }
+        }
     }
 }

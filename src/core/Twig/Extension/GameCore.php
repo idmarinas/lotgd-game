@@ -64,6 +64,10 @@ class GameCore extends AbstractExtension
             new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail']),
             new TwigFunction('user_petition', [$this, 'userPetition']),
             new TwigFunction('admin_petition', [$this, 'adminPetition']),
+
+            //-- Include a template from theme or module
+            new TwigFunction('include_theme', [$this, 'includeThemeTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
+            new TwigFunction('include_module', [$this, 'includeModuleTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
         ];
     }
 
