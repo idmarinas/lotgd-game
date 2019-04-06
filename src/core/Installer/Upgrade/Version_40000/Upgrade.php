@@ -21,7 +21,7 @@ use Zend\Hydrator\ClassMethods;
 class Upgrade extends UpgradeAbstract
 {
     /**
-     * Step 1 rename old table "commentary" and create new.
+     * Step 1: Rename tables "accounts" and "commentary" and create new tables.
      *
      * @return bool
      */
@@ -32,11 +32,19 @@ class Upgrade extends UpgradeAbstract
             $this->messages[] = \LotgdTranslator::t('upgrade.version.to', ['version' => '4.0.0 IDMarinas Edition'], self::TRANSLATOR_DOMAIN);
 
             $this->connection->exec('RENAME TABLE `commentary` TO `commentary_old`;');
+            $this->connection->exec('RENAME TABLE `accounts` TO `accounts_old`;');
+
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_RENAME, ['old' => 'commentary', 'new' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_RENAME, ['old' => 'accounts', 'new' => 'accounts_old'], self::TRANSLATOR_DOMAIN);
 
             $this->syncEntity(\Lotgd\Core\Entity\Commentary::class);
+            $this->syncEntity(\Lotgd\Core\Entity\Accounts::class);
+            $this->syncEntity(\Lotgd\Core\Entity\Characters::class);
 
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.table.rename', ['old' => 'commentary', 'new' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.table.create', ['table' => 'commentary'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'commentary'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'accounts'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'characters'], self::TRANSLATOR_DOMAIN);
+
 
             return true;
         }
@@ -49,7 +57,7 @@ class Upgrade extends UpgradeAbstract
     }
 
     /**
-     * Import data of old table.
+     * Import data of old "commentary" table.
      *
      * @return bool
      */
@@ -98,7 +106,89 @@ class Upgrade extends UpgradeAbstract
                 $paginator = \DB::paginator($select, $page, 100);
             } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
 
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.table.import', ['count' => $importCount, 'table' => 'commentary'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'commentary'], self::TRANSLATOR_DOMAIN);
+
+            return true;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            $this->messages[] = $th->getMessage();
+
+            return false;
+        }
+    }
+
+    /**
+     * Import data of old "accounts" table.
+     * This table are splited in two tables: "accounts" and "characters".
+     *
+     * @return bool
+     */
+    public function step3(): bool
+    {
+        try
+        {
+            $hydrator = new ClassMethods();
+            $page = 1;
+            $select = \DB::select('accounts_old');
+            $paginator = \DB::paginator($select, $page, 100);
+
+            $pageCount = $paginator->count();
+            $importCount = $paginator->getTotalItemCount();
+
+            do
+            {
+                foreach ($paginator as $row)
+                {
+                    $row = (array) $row;
+                    unset($row['acctid']);
+                    $row['laston'] = new \DateTime($row['laston']);
+                    $row['lastmotd'] = new \DateTime($row['lastmotd']);
+                    $row['lasthit'] = new \DateTime($row['lasthit']);
+                    $row['pvpflag'] = new \DateTime($row['pvpflag']);
+                    $row['recentcomments'] = new \DateTime($row['recentcomments']);
+                    $row['biotime'] = new \DateTime($row['biotime']);
+                    $row['regdate'] = new \DateTime($row['regdate']);
+                    $row['clanjoindate'] = new \DateTime($row['clanjoindate']);
+                    $row['badguy'] = unserialize($row['badguy']);
+                    $row['companions'] = unserialize($row['companions']);
+                    $row['allowednavs'] = unserialize($row['allowednavs']);
+                    $row['bufflist'] = unserialize($row['bufflist']);
+                    $row['dragonpoints'] = unserialize($row['dragonpoints']);
+                    $row['prefs'] = unserialize($row['prefs']);
+
+                    //-- Configure account
+                    $acctEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Accounts());
+
+                    //-- Need for get a ID of new account
+                    $this->doctrine->persist($acctEntity);
+                    $this->doctrine->flush(); //Persist objects
+
+                    //-- Configure character
+                    $charEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Characters());
+                    $charEntity->setAcct($acctEntity);
+
+                    //-- Need for get ID of new character
+                    $this->doctrine->persist($charEntity);
+                    $this->doctrine->flush(); //-- Persist objects
+
+                    //-- Set ID of character and update Account
+                    $acctEntity->setCharacter($charEntity);
+
+                    $this->doctrine->persist($acctEntity);
+                    // $this->doctrine->flush(); //-- Persist objects
+                }
+
+                $this->doctrine->flush();
+
+                $page++;
+                $paginator = \DB::paginator($select, $page, 100);
+            } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
+
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'accounts'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'characters'], self::TRANSLATOR_DOMAIN);
 
             return true;
         }
@@ -117,13 +207,15 @@ class Upgrade extends UpgradeAbstract
      *
      * @return bool
      */
-    public function step3(): bool
+    public function step4(): bool
     {
         try
         {
             $this->connection->exec('DROP TABLE IF EXISTS `commentary_old`;');
+            $this->connection->exec('DROP TABLE IF EXISTS `accounts_old`;');
 
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.table.delete', ['table' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_DELETE, ['table' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_DELETE, ['table' => 'accounts_old'], self::TRANSLATOR_DOMAIN);
 
             return true;
         }
