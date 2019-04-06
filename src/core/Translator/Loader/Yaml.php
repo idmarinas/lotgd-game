@@ -100,21 +100,25 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
      *          '01': 'value8'
      *
      * Becomes:
-     *   'key.key2.key3' => 'value',
-     *   'key.key4' => [
-     *      0 => 'value1',
-     *      1 => 'value2'
-     *   ],
-     *   'key.key5' => [
-     *      0 => 'value3',
-     *      1 => 'value4'
-     *   ],
-     *   'key.key6' => [
-     *      0 => 'value5',
-     *      1 => 'value6'
-     *   ],
-     *   'key.key7.00' => 'value7',
-     *   'key.key7.01' => 'value8',
+     * [
+     *    'key.key2.key3' => 'value',
+     *    'key.key4' => [
+     *       0 => 'value1',
+     *       1 => 'value2'
+     *    ],
+     *    'key.key5' => [
+     *       0 => 'value3',
+     *       1 => 'value4'
+     *    ],
+     *    'key.key6' => [
+     *       0 => 'value5',
+     *       1 => 'value6'
+     *    ],
+     *    'key.key7.00' => 'value7',
+     *    'key.key7.01' => 'value8',
+     * ]
+     *
+     * @TODO In PHP 7.3.0 Use array_key_first() to avoid use of reset() and key()
      *
      * @param array  $messages
      * @param array  $node     Internal use
@@ -129,7 +133,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         foreach ($node as $key => $value)
         {
-            reset($value);
+            reset(\is_array($value) ? $value : []);
             if (\is_array($value) && ! is_int(\key($value)))
             {
                 $nodePath = $path ? $path.'.'.$key : $key;
