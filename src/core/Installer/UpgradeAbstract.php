@@ -24,6 +24,10 @@ use Tracy\Debugger;
 abstract class UpgradeAbstract
 {
     const TRANSLATOR_DOMAIN = 'app-installer';
+    const TRANSLATOR_KEY_TABLE_RENAME = 'upgrade.version.table.rename';
+    const TRANSLATOR_KEY_TABLE_CREATE = 'upgrade.version.table.create';
+    const TRANSLATOR_KEY_TABLE_IMPORT = 'upgrade.version.table.import';
+    const TRANSLATOR_KEY_TABLE_DELETE = 'upgrade.version.table.delete';
     protected $doctrine;
     protected $connection;
     protected $messages = [];
