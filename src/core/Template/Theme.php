@@ -200,6 +200,16 @@ class Theme extends Base
     }
 
     /**
+     * Get name of theme folder.
+     *
+     * @return string
+     */
+    public function getThemeFolder(): string
+    {
+        return $this->themefolder;
+    }
+
+    /**
      * Search for a valid theme if removed.
      *
      * @throws RuntimeException
