@@ -1,0 +1,10 @@
+{% if result %}
+    {% if buyIt %}
+        {{ texts.payarmor|t({'playerarmor': userPre.armor, 'armorname': result.armorname}, schemas.payarmor)|colorize }}
+    {% else %}
+        {{ texts.notenoughgold|t({'armorname': result.armorname}, schemas.notenoughgold)|colorize }}
+    {% endif %}
+{% else %}
+    {{ texts.nosuchweapon|t(null, schemas.nosuchweapon)|colorize }}
+    {{ texts.tryagain|t(null, schemas.tryagain)|colorize }}
+{% endif %}

@@ -1,0 +1,45 @@
+{{ texts.description|t(null, schemas.description)|colorize }}
+
+{{ texts.tradein|t({'armorname': user.armor, 'value': tradeinvalue}, schemas.tradein)|colorize }}
+
+<table class='ui very compact striped selectable table'>
+    <thead>
+        <tr>
+            <th>{{ texts.table.header.name|t(null, schemas.table) }}</th>
+            <th>{{ texts.table.header.defense|t(null, schemas.table) }}</th>
+            <th>{{ texts.table.header.cost|t(null, schemas.table) }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in stuff %}
+            <tr>
+                <td class="collapsing">
+                    {% set color = '`)' %}
+                    {% if row.value <= (user.gold + tradeinvalue) %}
+                        {% if not unavailable %}
+                            {% set color = '`&' %}
+                            <a href='{{ ('armor.php?op=buy&id=' ~ row.armorid)|lotgd_url }}'>{{ (color ~ row.armorname ~ '`0')|colorize }}</a>
+                        {% else %}
+                            {% set color = '`7' %}
+                            {{ (color ~ row.armorname ~ '`0')|colorize }}
+                        {% endif %}
+                    {% else %}
+                        {{ (color ~ row.armorname ~ '`0')|colorize }}
+                    {% endif %}
+                </td>
+                <td>{{ (color ~ row.defense)|colorize }}</td>
+                <td>
+                    {% if row.alternatetext %}
+                        {{ (color ~ row.alternatetext)|colorize }}
+                    {% else %}
+                        {{ (color ~ row.value)|colorize }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{{ texts.table.notFound|t(null, schemas.table)|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
