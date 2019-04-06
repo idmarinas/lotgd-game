@@ -106,7 +106,6 @@ class Install
      */
     public function makeSynchronizationTables(): array
     {
-        // return [];
         //-- Prepare for updating core tables
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         $classes = $doctrine->getMetadataFactory()->getAllMetadata();
