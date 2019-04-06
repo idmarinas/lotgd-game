@@ -133,7 +133,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         foreach ($node as $key => $value)
         {
-            reset(\is_array($value) ? $value : []);
+            \is_array($value) ? reset($value) : null;
             if (\is_array($value) && ! is_int(\key($value)))
             {
                 $nodePath = $path ? $path.'.'.$key : $key;
