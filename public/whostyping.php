@@ -47,7 +47,7 @@ if ($fiveminuteload >= 8)
 
 $section = $_REQUEST['section'];
 $updateplayer = $_REQUEST['updateplayer'];
-$name = addslashes((isset($session['user']['name']) ? $session['user']['name'] : ''));
+$name = addslashes(($session['user']['name'] ?? ''));
 $now = time();
 
 if (! isset($session['iterations']))
