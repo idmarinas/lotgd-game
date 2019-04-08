@@ -54,16 +54,16 @@ class Clans
     /**
      * @var string
      *
-     * @ORM\Column(name="clanmotd", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="clanmotd", type="text", nullable=false, length=65535, nullable=true)
      */
-    private $clanmotd;
+    private $clanmotd = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="clandesc", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="clandesc", type="text", nullable=false, length=65535, nullable=true)
      */
-    private $clandesc;
+    private $clandesc = '';
 
     /**
      * @var int
