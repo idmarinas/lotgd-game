@@ -20,8 +20,13 @@
                     {# It's a message from the game, no associated author #}
                     <span class="colDkMagenta"><em><strong>{{ comment.comment|uncolorize|trim|capitalize }}</strong></em></span>
                 {% else %}
+                    {% if comment.clanName %}
+                        <span data-tooltip="{{ comment.clanName|uncolorize }}">&#60;{{ comment.clanNameShort|colorize }}&#62;</span>
+                    {% endif %}
                     {# It's a normal comment #}
-                    <span class="author">{{ comment.authorName|colorize }}</span>
+                    <span class="author">
+                        {{ comment.authorName|colorize }}
+                    </span>
                     {# Represent a special action of player or not #}
                     {% if comment.command == 'me' %}
                         <span class="colLtBlack">{{ comment.comment|uncolorize }}</span>
