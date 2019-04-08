@@ -17,6 +17,7 @@ return [
             Lotgd\Core\Lib\SettingsExtended::class => Factory\Lib\SettingsExtended::class,
             Lotgd\Core\Navigation\Navigation::class => InvokableFactory::class,
             Lotgd\Core\Navigation\AccessKeys::class => InvokableFactory::class,
+            Lotgd\Core\Output\Censor::class => Factory\Output\Censor::class,
             Lotgd\Core\Output\Color::class => InvokableFactory::class,
             Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class,
             Lotgd\Core\Output\Commentary::class => Factory\Output\Commentary::class,
