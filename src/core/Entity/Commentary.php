@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Entity;
 
-use Lotgd\Core\EntityInterface;
+use Lotgd\Core\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

@@ -22,7 +22,7 @@ use Tracy\Debugger;
 
 class Commentary
 {
-    use Pattern\EntityHydrator;
+    use Pattern\LotgdCore;
 
     /**
      * Repository of commentary.
@@ -30,13 +30,6 @@ class Commentary
      * @var CommentaryRepository
      */
     protected $repository;
-
-    /**
-     * Instance of Doctrine.
-     *
-     * @var Doctrine
-     */
-    protected $doctrine;
 
     /**
      * Get comments in the section.
@@ -125,6 +118,12 @@ class Commentary
         $post['author'] = $session['user']['acctid'];
         $post['authorName'] = $session['user']['name'];
 
+        //-- Apply profanity filter
+        $censor = $this->getCensor();
+        $post['comment'] = $censor->filter($args['data']['comment']);
+        $post['commentOri'] = $censor->getOrigString();
+        $post['commentMatch'] = $censor->getMatchWords();
+
         $args = modulehook('postcomment', ['data' => $post]);
 
         //-- A module tells us to ignore this comment, so we will
@@ -139,15 +138,6 @@ class Commentary
     }
 
     /**
-     * Prepare comment to insert in data base.
-     *
-     * @param array $data
-     */
-    public function prepareComment(): array
-    {
-    }
-
-    /**
      * Set instance of Doctrine.
      *
      * @return Lotgd\Core\Entity\Commentary
@@ -156,24 +146,10 @@ class Commentary
     {
         if (! $this->repository instanceof CommentaryRepository)
         {
-            $this->repository = $this->doctrine->getRepository(LotgdEntity\Commentary::class);
+            $this->repository = $this->getDoctrineRepository(LotgdEntity\Commentary::class);
         }
 
         return $this->repository;
-    }
-
-    /**
-     * Set instance of Doctrine.
-     *
-     * @param EntityManager $doctrine
-     *
-     * @return $this
-     */
-    public function setDoctrine(EntityManager $doctrine)
-    {
-        $this->doctrine = $doctrine;
-
-        return $this;
     }
 
     /**
@@ -197,30 +173,30 @@ class Commentary
         $command = strtoupper($data['comment']);
 
         //-- Deletes the user's last written comment, only if no more than 24 hours have passed.
-        if ('GREM' == $command || '::GREM' == $command || '/GREM' == $command)
-        {
-            // $last = $this->getRepository()->createQueryBuilder('u');
+        // if ('GREM' == $command || '::GREM' == $command || '/GREM' == $command)
+        // {
+        //     $last = $this->getRepository()->createQueryBuilder('u');
 
-            // $date = new \DateTime('now');
-            // $date->sub(new \DateInterval("P1D"));
+        //     $date = new \DateTime('now');
+        //     $date->sub(new \DateInterval("P1D"));
 
-            // $last->where('u.author = :id AND u.postdate >= :date')
-            // ->setParameters([
-            //         'id' => $session['user']['acctid'],
-            //         'date' => $date
-            //     ])
-            //     ->setMaxResults(1)
-            //     ->getQuery()
-            //     ->getResult()
-            // ;
+        //     $last->where('u.author = :id AND u.postdate >= :date')
+        //     ->setParameters([
+        //             'id' => $session['user']['acctid'],
+        //             'date' => $date
+        //         ])
+        //         ->setMaxResults(1)
+        //         ->getQuery()
+        //         ->getResult()
+        //     ;
 
-            // $last = $this->getRepository()->findBy([
-            //     'author' => $session['user']['acctid'],
-            //     'postdate' => '',
-            // ], ['postdate' => 'DESC'], 1);
+        //     $last = $this->getRepository()->findBy([
+        //         'author' => $session['user']['acctid'],
+        //         'postdate' => '',
+        //     ], ['postdate' => 'DESC'], 1);
 
-            return false;
-        }
+        //     return false;
+        // }
 
         //-- Process additional commands
         $returnedHook = modulehook('commentary-command', ['command' => $command, 'section' => $data['section']]);
