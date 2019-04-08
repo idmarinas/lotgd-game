@@ -5,181 +5,32 @@
 // mail ready
 function soap($input, $debug = false, $skiphook = false)
 {
-    global $session;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and not do nothing; and delete in version 4.1.0, use new censor system.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    require_once 'lib/sanitize.php';
+    $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
 
-    $final_output = $input;
-    // $output is the color code-less (fully sanitized) input against which
-    // we search.
-    $output = full_sanitize($input);
-    // the mask of displayable chars that should be masked out;
-    // X displays, _ masks.
-    $mix_mask = str_pad('', strlen($output), 'X');
-
-    if (getsetting('soap', 1))
-    {
-        $search = nasty_word_list();
-        $exceptions = array_flip(good_word_list());
-        $changed_content = false;
-
-        foreach ($search as $word)
-        {
-            do
-            {
-                if ($word > '')
-                {
-                    $times = preg_match_all($word, $output, $matches);
-                }
-                else
-                {
-                    $times = 0;
-                }
-
-                for ($x = 0; $x < $times; $x++)
-                {
-                    if (strlen($matches[0][$x]) < strlen($matches[1][$x]))
-                    {
-                        $shortword = $matches[0][$x];
-                        $longword = $matches[1][$x];
-                    }
-                    else
-                    {
-                        $shortword = $matches[1][$x];
-                        $longword = $matches[0][$x];
-                    }
-
-                    if (isset($exceptions[strtolower($longword)]))
-                    {
-                        $x--;
-                        $times--;
-
-                        if ($debug)
-                        {
-                            output('This word is ok because it was caught by an exception: `b`^%s`7´b`n', $longword);
-                        }
-                    }
-                    else
-                    {
-                        if ($debug)
-                        {
-                            output('`7This word is not ok: "`%%s`7"; it blocks on the pattern `i%s´i at "`$%s`7".`n', sanitize_mb($longword), $word, $shortword);
-                        }
-                        // if the word should be filtered, drop it from the
-                        // search terms ($output), and mask its bytes out of
-                        // the output mask.
-                        $len = strlen($shortword);
-                        $pad = str_pad('', $len, '_');
-                        //while (($p = strpos($output,$shortword))!==false){
-                        $p = strpos($output, $shortword);
-                        $output = substr($output, 0, $p).$pad.
-                                substr($output, $p + $len);
-                        $mix_mask = substr($mix_mask, 0, $p).$pad.
-                                substr($mix_mask, $p + $len);
-                        //}
-                        $changed_content = true;
-                    }//end if
-                }//end for
-            } while ($times > 0);
-        }
-        $y = 0; //position within final output
-        $pad = '#@%$!';
-
-        for ($x = 0; $x < strlen($mix_mask); $x++)
-        {
-            while ('`' == substr($final_output, $y, 1))
-            {
-                $y += 2; //when encountering appo encoding, skip over it.
-            }
-            //this character should be masked out.
-            if ('_' == substr($mix_mask, $x, 1))
-            {
-                $final_output = substr($final_output, 0, $y).
-                    substr($pad, $x % strlen($pad), 1).
-                    substr($final_output, $y + 1);
-            }
-            $y++;
-        }
-
-        if ($session['user']['superuser'] & SU_EDIT_COMMENTS && $changed_content)
-        {
-            output("`0The filter would have tripped on \"`#%s`0\" but since you're a moderator, I'm going to be lenient on you.  The text would have read, \"`#%s`0\"`n`n", $input, $final_output);
-
-            return $input;
-        }
-        else
-        {
-            if ($changed_content && ! $skiphook)
-            {
-                modulehook('censor', ['input' => $input]);
-            }
-
-            return $final_output;
-        }
-    }
-    else
-    {
-        return $final_output;
-    }
+    return $censor->filter($input);
 }
 
 function good_word_list()
 {
-    $sql = 'SELECT * FROM '.DB::prefix('nastywords')." WHERE type='good'";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and not do nothing; and delete in version 4.1.0. Not do nothing.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return explode(' ', $row['words']);
+    return '';
 }
 
 function nasty_word_list()
 {
-    $search = datacache('nastywordlist', 600);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and not do nothing; and delete in version 4.1.0. Not do nothing.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if (false !== $search && is_array($search))
-    {
-        return $search;
-    }
-
-    $sql = 'SELECT * FROM '.DB::prefix('nastywords')." WHERE type='nasty'";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-    $search = ' '.$row['words'].' ';
-    $search = preg_replace('/(?<=.)(?<!\\\\)\'(?=.)/', '\\\'', $search);
-    $search = str_replace('a', '[a4@�������������]', $search);
-    $search = str_replace('b', '[b�]', $search);
-    $search = str_replace('d', '[d���]', $search);
-    $search = str_replace('e', '[e3��������]', $search);
-    $search = str_replace('n', '[n��]', $search);
-    $search = str_replace('o', '[o��0��������������]', $search);
-    $search = str_replace('p', '[p���]', $search);
-    $search = str_replace('r', '[r�]', $search);
-    //	$search = str_replace("s",'[sz$�]',$search);
-    $search = preg_replace('/(?<!\\\\)s/', '[sz$�]', $search);
-    $search = str_replace('t', '[t7+]', $search);
-    $search = str_replace('u', '[u���������]', $search);
-    $search = str_replace('x', '[xפ]', $search);
-    $search = str_replace('y', '[yݥ��]', $search);
-    //these must happen in exactly this order:
-    $search = str_replace('l', '[l1!�]', $search);
-    $search = str_replace('i', '[li1!���������]', $search);
-    $search = str_replace('k', 'c', $search);
-    $search = str_replace('c', '[c\\(k穢]', $search);
-    $start = "'\\b";
-    $end = "\\b'iU";
-    $ws = '[^[:space:]\\t]*'; //whitespace (\w is not hungry enough)
-    //space not preceeded by a star
-    $search = preg_replace("'(?<!\\*) '", ")+$end ", $search);
-    //space not anteceeded by a star
-    $search = preg_replace("' (?!\\*)'", " $start(", $search);
-    //space preceeded by a star
-    $search = str_replace('* ', ")+$ws$end ", $search);
-    //space anteceeded by a star
-    $search = str_replace(' *', " $start$ws(", $search);
-    $search = "$start(".trim($search).")+$end";
-    $search = str_replace("$start()+$end", '', $search);
-    $search = explode(' ', $search);
-    updatedatacache('nastywordlist', $search);
-
-    return $search;
+    return '';
 }
