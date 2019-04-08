@@ -10,9 +10,9 @@ require_once 'lib/villagenav.php';
 
 tlschema('badnav');
 
-if ($session['user']['loggedin'] && $session['loggedin'])
+if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 {
-    if (isset($session['output']) && strpos($session['output'], '<!--CheckNewDay()-->'))
+    if (isset($session['output']) && false !== strpos($session['output'], '<!--CheckNewDay()-->'))
     {
         checkday();
     }
@@ -25,42 +25,41 @@ if ($session['user']['loggedin'] && $session['loggedin'])
             unset($session['user']['allowednavs'][$key]);
         }
     }
-    $select = DB::select('accounts_output');
-    $select->columns(['output'])
-        ->where->equalto('acctid', $session['user']['acctid'])
-    ;
-    $row = DB::execute($select)->current();
 
-    if ('' != $row['output'])
+    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\AccountsOutput::class);
+    $output = $repository->getOutput($session['user']['acctid']);
+
+    if ('' != $output)
     {
-        $row['output'] = gzuncompress($row['output']);
+        $output = gzuncompress($output);
     }
     //check if the output needs to be unzipped again
     //and make sure '' is not within gzuncompress -> error
-    if ('' != $row['output'] && false !== strpos('HTML', $row['output']))
+    if ('' != $output && false !== strpos('HTML', $output))
     {
-        $row['output'] = gzuncompress($row['output']);
+        $output = gzuncompress($output);
     }
 
-    if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $row['output'])
+    if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $output)
     {
         $session['user']['allowednavs'] = [];
-        page_header('Your Navs Are Corrupted');
+        page_header('title', [], 'page-badnav');
 
         if ($session['user']['alive'])
         {
-            villagenav();
-            output('Your navs are corrupted, please return to %s.', $session['user']['location']);
+            \LotgdNavigation::villageNav();
         }
         else
         {
-            \LotgdNavigation::addNav('Return to Shades', 'shades.php');
-            output('Your navs are corrupted, please return to the Shades.');
+            \LotgdNavigation::addNav('badnav.shades', 'shades.php');
         }
+
+        rawoutput(LotgdTheme::renderThemeTemplate('page/badnav.twig', []));
+
         page_footer();
     }
 
-    echo $row['output'];
+    echo $output;
 
     if ($session['user']['superuser'] & SU_MEGAUSER)
     {
@@ -77,5 +76,5 @@ else
     $session = [];
     translator_setup();
 
-    redirect('index.php');
+    return redirect('index.php');
 }

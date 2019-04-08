@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AccountsOutput.
  *
  * @ORM\Table(name="accounts_output")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsOutputRepository")
  */
 class AccountsOutput
 {
