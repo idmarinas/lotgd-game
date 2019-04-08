@@ -11,7 +11,7 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core;
+namespace Lotgd\Core\Entity;
 
 interface EntityInterface
 {
