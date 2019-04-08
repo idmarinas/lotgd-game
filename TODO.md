@@ -16,23 +16,35 @@
     -   Se hace uso de la cache para reducir las consultas a la base de datos
     -   Aplicar este concepto a los módulos también
 
+# Para la verisón 4.1.0
+
+-   Adaptar los formularios a zend-form
+-   Los formularios usan también el sistema de traducción y es necesario actualizarlo
+-   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
+    -   Login
+    -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
+    -   Esto obligaría a los usuarios a generar una nueva contraseña.
+
+# Para la versión 4.2.0
+-   Usar el zend-http component, para generar la respuesta del servidor (sustituir page_header y page_footer) y revisar también popup_header y popup_footer
+
+
+
 ## Temas
+
 Los hook admiten incluir plantillas de forma dinamica en los archivos twig.
 La forma de hacerlo es incluir en los parametros una key con el nombre del hook en formate kamelCaseTpl donde se incluya la templates a incluir. Es un array para poder incluir más.
 Ejemplo:
-``` php
+
+```php
 $params = modulehook('create-form', $params);
-$params['createFormTpl'] = ['../modules/MyModule/templates/template.twig'];
 
 //-- Alternativa para las plantilas de los módulos
-$params['createFormTpl'] = ['../modules/templates/MyModule/template.twig'];
+$params['createFormTpl'] = ['MyModule/template.twig'];
 
-//-- Alternativa para las plantilas de los módulos
-$params['createFormTpl'] = ['templates/modules/MyModule/template.twig'];
 ```
 
 Esta plantilla hereda todas las variables de la plantilla padre.
-
 
 ## Actualmente haciendo esto
 
@@ -54,26 +66,16 @@ Explicar la estructura de los archivos yaml y que admiten el sistema de anidaci�
 
 ## Menu de navegación
 
-hacer que la traducción se haga en la template
-Hacer que genere un array con todos los menus
-Crear una clase para los menus
-    Permitir añadir al principio o al final de una categoria, añadir una categoría al final o al inicio
-
--   Revisar las plantillas, los menus no están divididos en varias plantillas, sino es una plantilla donde se organiza todo. Complicado, para una versión X (\*.X.\*)
-
-## Comentarios
-
-Modificar el script de los comentarios, para hacerlos de una forma más sencilla y mejorar el sistema.
+Permitir añadir al principio o al final de una categoria, añadir una categoría al final o al inicio
 
 
-## Instalación
-Instalación (cuando se implemente el sistema de plantillas en las páginas)
+## Doctrine
 
-Mejorar la apariencia usando segmentos y el grid
-archivos
-stage 9 y stage 7
+Hacer que se pueda personalizar la configuración de Doctrine añadiendo más opciones, ejemplo: DoctrineORMModule para Zend
 
 ./vendor/bin/doctrine orm:convert:mapping annotation "src/core/entity" --namespace "Lotgd\\Core\\Entity\\" --no-ansi --from-database --force
+
+./vendor/bin/doctrine orm:schema-tool:update --force
 
 vendor/bin/iniscan scan --format=html --output="D:\\Users\\idmar\\Documents\\Proyectos Web"
 
@@ -82,3 +84,5 @@ vendor/bin/iniscan scan --format=html --output="D:\\Users\\idmar\\Documents\\Pro
 Analizar los archivos para buscar incompatibilidades
 ./vendor/bin/phan -p -m="checkstyle" -o="phan.xml"
 ./vendor/bin/phan -p -m="codeclimate" -o="phan.xml"
+
+${extensionPath}\\php-cs-fixer.phar
