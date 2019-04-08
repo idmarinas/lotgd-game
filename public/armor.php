@@ -95,6 +95,8 @@ elseif ('buy' == $op)
 }
 \LotgdNavigation::villageNav();
 
+//-- This is only for params not use for other purpose
+$params = modulehook('page-armor-tpl-params', $params);
 rawoutput(LotgdTheme::renderThemeTemplate('page/armor.twig', $params));
 
 page_footer();
