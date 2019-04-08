@@ -80,8 +80,6 @@ if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
     \LotgdNavigation::addNav('superuser.nav.armoreditor', 'armoreditor.php');
 }
 
-($session['user']['superuser'] & SU_EDIT_COMMENTS) and \LotgdNavigation::addNav('superuser.nav.badword', 'badword.php');
-
 ($session['user']['superuser'] & SU_MANAGE_MODULES) and \LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
 
 
