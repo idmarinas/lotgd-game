@@ -21,25 +21,9 @@ use Twig\Node\Expression\FilterExpression;
 use Twig\Node\Expression\NameExpression;
 use Twig\Node\ModuleNode;
 use Twig\Node\Node;
-use Twig\NodeVisitor\AbstractNodeVisitor;
 
-class TranslatorDefaultDomainNodeVisitor extends AbstractNodeVisitor
+class TranslatorDefaultDomainNodeVisitor extends NodeVisitorAbstract
 {
-    private $scope;
-
-    public function __construct()
-    {
-        $this->scope = new Scope();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return -10;
-    }
-
     /**
      * {@inheritdoc}
      */
