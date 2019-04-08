@@ -102,7 +102,9 @@ class Commentary
             if (! is_array($clanInfo) || empty($clanInfo))
             {
                 $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
-                $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']])->toArray();
+                $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
+                $hydrator = new \Zend\Hydrator\ClassMethods();
+                $clanInfo = $hydrator->extract($clanInfo);
 
                 $clanInfo['clanrank'] = $session['user']['clanrank'];
 
@@ -120,7 +122,7 @@ class Commentary
 
         //-- Apply profanity filter
         $censor = $this->getCensor();
-        $post['comment'] = $censor->filter($args['data']['comment']);
+        $post['comment'] = $censor->filter($post['comment']);
         $post['commentOri'] = $censor->getOrigString();
         $post['commentMatch'] = $censor->getMatchWords();
 
