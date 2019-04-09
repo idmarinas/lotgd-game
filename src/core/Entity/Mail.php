@@ -77,9 +77,9 @@ class Mail
     /**
      * @var bool
      *
-     * @ORM\Column(name="seen", type="boolean", nullable=false, options={"default": "0", "unsigned": true})
+     * @ORM\Column(type="boolean", nullable=false, options={"default": "0"})
      */
-    private $seen = '0';
+    private $seen = 0;
 
     /**
      * @var int
