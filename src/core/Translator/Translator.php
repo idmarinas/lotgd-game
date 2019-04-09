@@ -42,13 +42,7 @@ class Translator extends ZendTranslator
 
         if (is_array($message))
         {
-            $string = '';
-            foreach($message as $msg)
-            {
-                $string .= ' '. $this->mf($msg, $parameters, $locale);
-            }
-
-            return $string;
+            return $this->mf(\implode(' ', $message), $parameters, $locale);
         }
 
         return $this->mf($message, $parameters, $locale);
