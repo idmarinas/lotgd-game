@@ -1,7 +1,7 @@
 {% translate_default_domain 'app-default' %}
 
 <span> | </span>
-{% if session.user.login %}
+{% if user.login %}
     {% if notSeenCount %}
         <i class="green mail icon"></i>
         <script>
