@@ -17,7 +17,7 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
 
 abstract class NodeVisitorAbstract extends AbstractNodeVisitor
 {
-    private $scope;
+    protected $scope;
 
     public function __construct()
     {
