@@ -179,7 +179,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="goldinbank", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="goldinbank", type="integer", nullable=false, options={"default": 0})
      */
     private $goldinbank = 0;
 
@@ -417,7 +417,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="transferredtoday", type="smallint", nullable=false, options={"default": 0})
      */
     private $transferredtoday = 0;
 
