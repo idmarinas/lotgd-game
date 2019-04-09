@@ -138,12 +138,16 @@ class Upgrade extends UpgradeAbstract
             $pageCount = $paginator->count();
             $importCount = $paginator->getTotalItemCount();
 
+            //-- Overrides the automatic generation of IDs in this query to avoid changing IDs of accounts.
+            $metadataAcct = $this->doctrine->getClassMetadata(\Lotgd\Core\Entity\Accounts::class);
+            $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+            $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+
             do
             {
                 foreach ($paginator as $row)
                 {
                     $row = (array) $row;
-                    unset($row['acctid']);
                     $row['laston'] = new \DateTime($row['laston']);
                     $row['lastmotd'] = new \DateTime($row['lastmotd']);
                     $row['lasthit'] = new \DateTime($row['lasthit']);
@@ -162,9 +166,7 @@ class Upgrade extends UpgradeAbstract
                     //-- Configure account
                     $acctEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Accounts());
 
-                    //-- Need for get a ID of new account
                     $this->doctrine->persist($acctEntity);
-                    $this->doctrine->flush(); //Persist objects
 
                     //-- Configure character
                     $charEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Characters());
