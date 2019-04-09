@@ -6,168 +6,87 @@
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/sanitize.php';
-require_once 'lib/villagenav.php';
 
 tlschema('bank');
 
-page_header('Ye Olde Bank');
-output('`^`c`bYe Olde Bank´b´c');
-$op = httpget('op');
+$result = modulehook('bank-text-domain', ['textDomain' => 'page-bank']);
+$textDomain = $result['textDomain'];
 
-if ('' == $op)
+page_header('title', [], $textDomain);
+
+$op = \LotgdHttp::getQuery('op');
+
+\LotgdNavigation::addNav('act', 'bank.php');
+$params = [
+    'textDomain' => $textDomain
+];
+
+if ('transfer' == $op)
 {
-    checkday();
-    output('`6As you approach the pair of impressive carved rock crystal doors, they part to allow you entrance into the bank.');
-    output('You find yourself standing in a room of exquisitely vaulted ceilings of carved stone.');
-    output('Light filters through tall windows in shafts of soft radiance.');
-    output('About you, clerks are bustling back and forth.');
-    output('The sounds of gold being counted can be heard, though the treasure is nowhere to be seen.`n`n');
-    output('You walk up to a counter of jet black marble.`n`n');
-    output('`@Elessa`6, a petite woman in an immaculately tailored business dress, greets you from behind reading spectacles with polished silver frames.`n`n');
-    output('`6"`5Greetings, my good lady,`6" you greet her, "`5Might I inquire as to my balance this fine day?`6"`n`n');
-    output("`@Elessa`6 blinks for a moment and then smiles, \"`@Hmm, `&%s`@, let's see.....`6\" she mutters as she scans down a page in her ledger.", $session['user']['name']);
-
-    if ($session['user']['goldinbank'] >= 0)
-    {
-        output('`6"`@Aah, yes, here we are.  You have `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', LotgdFormat::numeral($session['user']['goldinbank']));
-    }
-    else
-    {
-        output('`6"`@Aah, yes, here we are.  You have a `&debt`@ of `^%s gold`@ in our prestigious bank.  Is there anything else I can do for you?`6"', LotgdFormat::numeral(abs($session['user']['goldinbank'])));
-    }
-}
-elseif ('transfer' == $op)
-{
-    output('`6`bTransfer Money´b:`n');
-
-    if ($session['user']['goldinbank'] >= 0)
-    {
-        output("`@Elessa`6 tells you, \"`@Just so that you are fully aware of our policies, you may only transfer `^%s`@ gold per the recipient's level.", getsetting('transferperlevel', 25));
-        $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
-        output('Similarly, you may transfer no more than `^%s`@ gold total during the day.`6"`n', $maxout);
-
-        if ($session['user']['amountouttoday'] > 0)
-        {
-            output('`6She scans her ledgers briefly, "`@For your knowledge, you have already transferred `^%s`@ gold today.`6"`n', $session['user']['amountouttoday']);
-        }
-        output_notl('`n');
-        $preview = translate_inline('Preview Transfer');
-        rawoutput("<form action='bank.php?op=transfer2' method='POST' class='ui form'>");
-        output('Transfer how much: ');
-        rawoutput("<input name='amount' id='amount' width='5'>");
-        output_notl('`n');
-        output('To: ');
-        rawoutput("<input name='to'>");
-        output(' (partial names are ok, you will be asked to confirm the transaction before it occurs).`n');
-        rawoutput("<input type='submit' class='ui button' value='$preview'></form>");
-        rawoutput("<script language='javascript'>document.getElementById('amount').focus();</script>");
-        addnav('', 'bank.php?op=transfer2');
-    }
-    else
-    {
-        output('`@Elessa`6 tells you that she refuses to transfer money for someone who is in debt.');
-    }
+    $params['opt'] = 'transfer';
+    $params['transferPerLevel'] = getsetting('transferperlevel', 25);
+    $params['maxTransfer'] = $session['user']['level'] * getsetting('maxtransferout', 25);
 }
 elseif ('transfer2' == $op)
 {
-    output('`6`bConfirm Transfer´b:`n');
-    $string = '%';
-    $to = httppost('to');
+    $to = \LotgdHttp::getPost('to');
+    $amt = abs((int) \LotgdHttp::getPost('amount', 0));
+    $params['opt'] = 'transfer2';
+    $params['amount'] = $amt;
+    $params['to'] = $to;
 
-    for ($x = 0; $x < strlen($to); $x++)
-    {
-        $string .= substr($to, $x, 1).'%';
-    }
-    $sql = 'SELECT name,login FROM '.DB::prefix('accounts')." WHERE name LIKE '".addslashes($string)."' AND locked=0 ORDER by login='$to' DESC, name='$to' DESC, login";
-    $result = DB::query($sql);
-    $amt = abs((int) httppost('amount'));
+    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $characters = $repository->findLikeName("%{$to}%", 100);
 
-    if (1 == DB::num_rows($result))
-    {
-        $row = DB::fetch_assoc($result);
-        $msg = translate_inline('Complete Transfer');
-        rawoutput("<form action='bank.php?op=transfer3' method='POST' class='ui form'>");
-        output('`6Transfer `^%s`6 to `&%s`6.', $amt, $row['name']);
-        rawoutput("<input type='hidden' name='to' value='".htmlentities($row['login'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."'><input type='hidden' name='amount' value='$amt'><input type='submit' class='ui button' value='$msg'></form>", true);
-        addnav('', 'bank.php?op=transfer3');
-    }
-    elseif (DB::num_rows($result) > 100)
-    {
-        output('`@Elessa`6 looks at you disdainfully and coldly, but politely, suggests you try narrowing down the field of who you want to send money to just a little bit!`n`n');
-        $msg = translate_inline('Preview Transfer');
-        rawoutput("<form action='bank.php?op=transfer2' method='POST'>");
-        output('Transfer how much: ');
-        rawoutput("<input name='amount' id='amount' width='5' value='$amt'><br>");
-        output('To: ');
-        rawoutput("<input name='to' value='$to'>");
-        output(' (partial names are ok, you will be asked to confirm the transaction before it occurs).`n');
-        rawoutput("<input type='submit' class='ui button' value='$msg'></form>");
-        rawoutput("<script language='javascript'>document.getElementById('amount').focus();</script>", true);
-        addnav('', 'bank.php?op=transfer2');
-    }
-    elseif (DB::num_rows($result) > 1)
-    {
-        rawoutput("<form action='bank.php?op=transfer3' method='POST' class='ui form'>");
-        output('`6Transfer `^%s`6 to ', $amt);
-        rawoutput("<select name='to' class='input'>");
-
-        while ($row = DB::fetch_assoc($result))
-        {
-            rawoutput('<option value="'.htmlentities($row['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'">'.full_sanitize($row['name']).'</option>');
-        }
-        $msg = translate_inline('Complete Transfer');
-        rawoutput("</select><div class='ui action input'><input type='hidden' name='amount' value='$amt'> <button type='submit' class='ui button'>$msg</button></div>");
-        addnav('', 'bank.php?op=transfer3');
-    }
-    else
-    {
-        output("`@Elessa`6 blinks at you from behind her spectacles, \"`@I'm sorry, but I can find no one matching that name who does business with our bank!  Please try again.`6\"");
-    }
+    $params['characters'] = $characters;
 }
 elseif ('transfer3' == $op)
 {
-    $amt = abs((int) httppost('amount'));
-    $to = httppost('to');
-    output('`6`bTransfer Completion´b`n');
+    $amt = abs((int) \LotgdHttp::getPost('amount'));
+    $to = (int) \LotgdHttp::getPost('to');
+    $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
+    $params['opt'] = 'transfer3';
+    $params['maxOut'] = $maxout;
+    $params['amount'] = $amt;
 
-    if ($session['user']['gold'] + $session['user']['goldinbank'] < $amt)
+    $params['transferred'] = false;
+
+    if ($to == $session['user']['acctid'])
     {
-        output('`@Elessa`6 stands up to her full, but still diminutive height and glares at you, "`@How can you transfer `^%s`@ gold when you only possess `^%s`@?`6"', LotgdFormat::numeral($amt), LotgdFormat::numeral($session['user']['gold'] + $session['user']['goldinbank']));
+        $params['transferred'] = 'sameAct';
     }
-    else
+    elseif (($session['user']['amountouttoday'] + $amt) > $maxout)
     {
-        $sql = 'SELECT name,acctid,level,transferredtoday FROM '.DB::prefix('accounts')." WHERE login='$to'";
-        $result = DB::query($sql);
+        $params['transferred'] = 'maxOut';
+    }
+    elseif ($amt < (int) $session['user']['level'])
+    {
+        $params['transferred'] = 'level';
+    }
+    elseif (($session['user']['gold'] + $session['user']['goldinbank']) >= $amt)
+    {
+        $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+        $result = $repository->find($to);
 
-        if (1 == DB::num_rows($result))
+        $params['transferred'] = 0;
+        if ($result)
         {
-            $row = DB::fetch_assoc($result);
-            $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
-            $maxtfer = $row['level'] * getsetting('transferperlevel', 25);
+            $maxtfer = $result->getLevel() * getsetting('transferperlevel', 25);
 
-            if ($session['user']['amountouttoday'] + $amt > $maxout)
+            if ($result->getTransferredtoday() >= getsetting('transferreceive', 3))
             {
-                output("`@Elessa`6 shakes her head, \"`@I'm sorry, but I cannot complete that transfer; you are not allowed to transfer more than `^%s`@ gold total per day.`6\"", $maxout);
+                $params['transferred'] = 'tomanytfer';
+                $params['name'] = $result->getName();
             }
             elseif ($maxtfer < $amt)
             {
-                output("`@Elessa`6 shakes her head, \"`@I'm sorry, but I cannot complete that transfer; `&%s`@ may only receive up to `^%s`@ gold per day.`6\"", $row['name'], $maxtfer);
-            }
-            elseif ($row['transferredtoday'] >= getsetting('transferreceive', 3))
-            {
-                output("`@Elessa`6 shakes her head, \"`@I'm sorry, but I cannot complete that transfer; `&%s`@ has received too many transfers today, you will have to wait until tomorrow.`6\"", $row['name']);
-            }
-            elseif ($amt < (int) $session['user']['level'])
-            {
-                output("`@Elessa`6 shakes her head, \"`@I'm sorry, but I cannot complete that transfer; you might want to send a worthwhile transfer, at least as much as your level.`6\"");
-            }
-            elseif ($row['acctid'] == $session['user']['acctid'])
-            {
-                output('`@Elessa`6 glares at you, her eyes flashing dangerously, "`@You may not transfer money to yourself!  That makes no sense!`6"');
+                $params['transferred'] = 'maxtfer';
+                $params['maxtfer'] = $maxtfer;
+                $params['name'] = $result->getName();
             }
             else
             {
-                debuglog("transferred $amt gold to", $row['acctid']);
+                $params['transferred'] = true;
                 $session['user']['gold'] -= $amt;
 
                 if ($session['user']['gold'] < 0)
@@ -177,194 +96,141 @@ elseif ('transfer3' == $op)
                     $session['user']['gold'] = 0;
                 }
                 $session['user']['amountouttoday'] += $amt;
-                $sql = 'UPDATE '.DB::prefix('accounts')." SET goldinbank=goldinbank+$amt,transferredtoday=transferredtoday+1 WHERE acctid='{$row['acctid']}'";
-                DB::query($sql);
-                output('`@Elessa`6 smiles, "`@The transfer has been completed!`6"');
-                $subj = ['`^You have received a money transfer!`0'];
-                $body = ['`&%s`6 has transferred `^%s`6 gold to your bank account!', $session['user']['name'], $amt];
-                systemmail($row['acctid'], $subj, $body);
+
+                $result->setGoldinbank($result->getGoldinbank() + $amt);
+                $result->setTransferredtoday($result->getTransferredtoday() + 1);
+
+                \Doctrine::persist($result);
+                \Doctrine::flush();
+
+                debuglog("transferred $amt gold to", $result->getAcct()->getAcctid());
+
+                $subj = ['transfer3.success.mail.subject', [], $textDomain];
+                $body = ['transfer3.success.mail.message', ['name' => $session['user']['name'], 'amount' => $amt], $textDomain];
+
+                systemmail($result->getAcct()->getAcctid(), $subj, $body);
             }
-        }
-        else
-        {
-            output("`@Elessa`6 looks up from her ledger with a bit of surprise on her face, \"`@I'm terribly sorry, but I seem to have run into an accounting error, would you please try telling me what you wish to transfer again?`6\"");
         }
     }
 }
 elseif ('deposit' == $op)
 {
-    output_notl('`0');
-    rawoutput("<form action='bank.php?op=depositfinish' method='POST'>");
-    $balance = translate_inline('`@Elessa`6 says, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
-    $debt = translate_inline('`@Elessa`6 says, "`@You have a `$debt`@ of `^%s`@ gold to the bank.`6"`n');
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
-    output('`6Searching through all your pockets and pouches, you calculate that you currently have `^%s`6 gold on hand.`n`n', LotgdFormat::numeral($session['user']['gold']));
-    $dep = translate_inline('`^Deposit how much?');
-    $pay = translate_inline('`^Pay off how much?');
-    output_notl($session['user']['goldinbank'] >= 0 ? $dep : $pay);
-    $dep = translate_inline('Deposit');
-    rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$dep</button></div>");
-    output('`n`iEnter 0 or nothing to deposit it all´i');
-    rawoutput('</form>');
-    rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>", true);
-    addnav('', 'bank.php?op=depositfinish');
+    $params['opt'] = 'deposit';
 }
 elseif ('depositfinish' == $op)
 {
-    $amount = abs((int) httppost('amount'));
+    $amount = abs((int) \LotgdHttp::getPost('amount'));
+    $amount = (0 == $amount) ? $session['user']['gold'] : $amount;
 
-    if (0 == $amount)
-    {
-        $amount = $session['user']['gold'];
-    }
-    $notenough = translate_inline('`$ERROR: Not enough gold in hand to deposit.`n`n`^You plunk your `&%s`^ gold on the counter and declare that you would like to deposit all `&%s`^ gold of it.`n`n`@Elessa`6 stares blandly at you for a few seconds until you become self conscious and recount your money, realizing your mistake.');
-    $depositdebt = translate_inline('`@Elessa`6 records your deposit of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a debt of `$%s`@ gold to the bank and `^%s`@ gold in hand.`6"');
-    $depositbalance = translate_inline('`@Elessa`6 records your deposit of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a balance of `^%s`@ gold in the bank and `^%s`@ gold in hand.`6"');
+    $params['amount'] = $amount;
+    $params['deposited'] = false;
+    $params['opt'] = 'depositend';
 
-    if ($amount > $session['user']['gold'])
+    if ($amount <= $session['user']['gold'])
     {
-        output_notl($notenough, LotgdFormat::numeral($session['user']['gold']), LotgdFormat::numeral($amount));
-    }
-    else
-    {
+        $params['deposited'] = true;
         debuglog('deposited '.$amount.' gold in the bank');
         $session['user']['goldinbank'] += $amount;
         $session['user']['gold'] -= $amount;
-        output_notl($session['user']['goldinbank'] >= 0 ? $depositbalance : $depositdebt, LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
     }
 }
 elseif ('borrow' == $op)
 {
     $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);
-    $borrow = translate_inline('Borrow');
-    $balance = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
-    $debt = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a `$debt`@ of `^%s`@ gold to the bank.`6"`n');
-    rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
-    output('`6"`@How much would you like to borrow `&%s`@?  At your level, you may borrow up to a total of `^%s`@ from the bank.`6"`n`n', $session['user']['name'], $maxborrow);
-    rawoutput("<input type='hidden' name='borrow' value='x'> <div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$borrow</button></div>");
-    output('`n(Money will be withdrawn until you have none left, the remainder will be borrowed)');
-    rawoutput('</form>');
-    rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
-    addnav('', 'bank.php?op=withdrawfinish');
+
+    $params['opt'] = 'borrow';
+    $params['maxborrow'] = $maxborrow;
 }
 elseif ('withdraw' == $op)
 {
-    $withdraw = translate_inline('Withdraw');
-    $balance = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a balance of `^%s`@ gold in the bank.`6"`n');
-    $debt = translate_inline('`@Elessa`6 scans through her ledger, "`@You have a `$debt`@ of `^%s`@ gold in the bank.`6"`n');
-    rawoutput("<form action='bank.php?op=withdrawfinish' method='POST'>");
-    output_notl($session['user']['goldinbank'] >= 0 ? $balance : $debt, LotgdFormat::numeral(abs($session['user']['goldinbank'])));
-    output('`6"`@How much would you like to withdraw `&%s`@?`6"`n`n', $session['user']['name']);
-    rawoutput("<div class='ui action input'><input id='input' name='amount' width=5 > <button type='submit' class='ui button'>$withdraw</button></div>");
-    output('`n`iEnter 0 or nothing to withdraw it all´i');
-    rawoutput('</form>');
-    rawoutput("<script language='javascript'>document.getElementById('input').focus();</script>");
-    addnav('', 'bank.php?op=withdrawfinish');
+    $params['opt'] = 'withdraw';
 }
 elseif ('withdrawfinish' == $op)
 {
-    $amount = abs((int) httppost('amount'));
+    $amount = abs((int) \LotgdHttp::getPost('amount'));
+    $amount = (0 == $amount) ? $session['user']['goldinbank'] : $amount;
 
-    if (0 == $amount)
-    {
-        $amount = abs($session['user']['goldinbank']);
-    }
+    $params['opt'] = 'withdrawend';
+    $params['amount'] = $amount;
+    $params['withdrawal'] = false;
 
-    if ($amount > $session['user']['goldinbank'] && '' == httppost('borrow'))
-    {
-        output('`$ERROR: Not enough gold in the bank to withdraw.`^`n`n');
-        output('`6Having been informed that you have `^%s`6 gold in your account, you declare that you would like to withdraw all `^%s`6 of it.`n`n', LotgdFormat::numeral($session['user']['goldinbank']), LotgdFormat::numeral($amount));
-        output('`@Elessa`6 looks at you for a few moments without blinking, then advises you to take basic arithmetic.  You realize your folly and think you should try again.');
-    }
-    elseif ($amount > $session['user']['goldinbank'])
+    if ($amount > $session['user']['goldinbank'] && '' != \LotgdHttp::getPost('borrow'))
     {
         $lefttoborrow = $amount;
-        $didwithdraw = 0;
         $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);
+        $params['withdrawal'] = 1;
+        $params['lefttoborrow'] = $lefttoborrow;
+        $params['maxborrow'] = $maxborrow;
+        $params['borrowed'] = false;
+        $params['didwithdraw'] = false;
 
-        if ($lefttoborrow <= $session['user']['goldinbank'] + $maxborrow)
+        if ($lefttoborrow <= ($session['user']['goldinbank'] + $maxborrow))
         {
+            $params['withdrawal'] = 2;
+
             if ($session['user']['goldinbank'] > 0)
             {
-                output('`6You withdraw your remaining `^%s`6 gold.', LotgdFormat::numeral($session['user']['goldinbank']));
+                $params['goldInBank'] = $session['user']['goldinbank'];
+                $params['didwithdraw'] = true;
                 $lefttoborrow -= $session['user']['goldinbank'];
                 $session['user']['gold'] += $session['user']['goldinbank'];
                 $session['user']['goldinbank'] = 0;
+
                 debuglog("withdrew $amount gold from the bank");
-                $didwithdraw = 1;
             }
 
-            if ($lefttoborrow - $session['user']['goldinbank'] > $maxborrow)
+            $params['lefttoborrow'] = $lefttoborrow;
+            if (($lefttoborrow - $session['user']['goldinbank']) <= $maxborrow)
             {
-                if ($didwithdraw)
-                {
-                    output('`6Additionally, you ask to borrow `^%s`6 gold.', LotgdFormat::numeral($leftoborrow));
-                }
-                else
-                {
-                    output('`6You ask to borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
-                }
-                output('`@Elessa`6 looks up your account and informs you that you may only borrow up to `^%s`6 gold.', LotgdFormat::numeral($maxborrow));
-            }
-            else
-            {
-                if ($didwithdraw)
-                {
-                    output('`6Additionally, you borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
-                }
-                else
-                {
-                    output('`6You borrow `^%s`6 gold.', LotgdFormat::numeral($lefttoborrow));
-                }
+                $params['borrowed'] = true;
                 $session['user']['goldinbank'] -= $lefttoborrow;
                 $session['user']['gold'] += $lefttoborrow;
+
                 debuglog("borrows $lefttoborrow gold from the bank");
-                output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a debt of `$%s`@ gold to the bank and `^%s`@ gold in hand.`6"', LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
             }
         }
-        else
-        {
-            output('`6Considering the `^%s`6 gold in your account, you ask to borrow `^%s`6. `@Elessa`6 peers through her ledger, runs a few calculations and then informs you that, at your level, you may only borrow up to a total of `^%s`6 gold.', LotgdFormat::numeral($session['user']['goldinbank']), LotgdFormat::numeral($lefttoborrow - $session['user']['goldinbank']), LotgdFormat::numeral($maxborrow));
-        }
     }
-    else
+    elseif ($amount <= $session['user']['goldinbank'])
     {
+        $params['withdrawal'] = true;
         $session['user']['goldinbank'] -= $amount;
         $session['user']['gold'] += $amount;
+
         debuglog("withdrew $amount gold from the bank");
-        output('`@Elessa`6 records your withdrawal of `^%s `6gold in her ledger. "`@Thank you, `&%s`@.  You now have a balance of `^%s`@ gold in the bank and `^%s`@ gold in hand.`6"', LotgdFormat::numeral($amount), $session['user']['name'], LotgdFormat::numeral(abs($session['user']['goldinbank'])), LotgdFormat::numeral($session['user']['gold']));
     }
 }
-villagenav();
-addnav('Money');
+
+\LotgdNavigation::villageNav();
+\LotgdNavigation::addHeader('bank.category.money');
 
 if ($session['user']['goldinbank'] >= 0)
 {
-    addnav('W?Withdraw', 'bank.php?op=withdraw');
-    addnav('D?Deposit', 'bank.php?op=deposit');
+    \LotgdNavigation::addNav('bank.nav.withdraw', 'bank.php?op=withdraw');
+    \LotgdNavigation::addNav('bank.nav.deposit.label', 'bank.php?op=deposit');
 
     if (getsetting('borrowperlevel', 20))
     {
-        addnav('L?Take out a Loan', 'bank.php?op=borrow');
+        \LotgdNavigation::addNav('bank.nav.borrow.label', 'bank.php?op=borrow');
     }
 }
 else
 {
-    addnav('D?Pay off Debt', 'bank.php?op=deposit');
+    \LotgdNavigation::addNav('bank.nav.deposit.pay', 'bank.php?op=deposit');
 
     if (getsetting('borrowperlevel', 20))
     {
-        addnav('L?Borrow More', 'bank.php?op=borrow');
+        \LotgdNavigation::addNav('bank.nav.borrow.more', 'bank.php?op=borrow');
     }
 }
 
-if (getsetting('allowgoldtransfer', 1))
+\LotgdNavigation::addNav('bank.nav.transfer', 'bank.php?op=transfer');
+if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0))
 {
-    if ($session['user']['level'] >= getsetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0)
-    {
-        addnav('M?Transfer Money', 'bank.php?op=transfer');
-    }
+    \LotgdNavigation::addNav('bank.nav.transfer', 'bank.php?op=transfer');
 }
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-bank-tpl-params', $params);
+rawoutput(LotgdTheme::renderThemeTemplate('page/bank.twig', $params));
 
 page_footer();

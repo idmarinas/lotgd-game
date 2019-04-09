@@ -1,0 +1,31 @@
+{% translate_default_domain textDomain %}
+
+{% if withdrawal is same as(false) %}
+    {{ 'withdraw.finish.fail'|t({ 'bank': user.goldinbank, 'amount': amount })|colorize }}
+{% elseif withdrawal is same as(true) %}
+    {{ 'withdraw.finish.withdraw.success'|t({ 'name': user.name, 'gold': user.gold, 'bank': user.goldinbank, 'amount': amount })|colorize }}
+{% elseif withdrawal == 1 %}
+    {{ 'withdraw.finish.borrow.fail'|t({ 'borrow': (lefttoborrow - user.goldinbank), 'maxborrow': maxborrow, 'bank': user.goldinbank })|colorize }}
+{% elseif withdrawal == 2 %}
+    {% if didwithdraw %}
+        {{ 'withdraw.finish.borrow.withdraw.success'|t({'bank': goldInBank })|colorize }}
+    {% endif %}
+
+    {% if borrowed %}
+        {% if didwithdraw %}
+            {{ 'withdraw.finish.borrow.withdraw.can.additional'|t({ 'gold': lefttoborrow })|colorize }}
+        {% else %}
+            {{ 'withdraw.finish.borrow.withdraw.can.ask'|t({ 'gold': lefttoborrow })|colorize }}
+        {% endif %}
+
+        {{ 'withdraw.finish.borrow.withdraw.can.description'|t({ 'name': user.name, 'amount': amount, 'bank': user.goldinbank|abs, 'gold': user.gold })|colorize }}
+    {% else %}
+        {% if didwithdraw %}
+            {{ 'withdraw.finish.borrow.withdraw.cant.additional'|t({ 'gold': lefttoborrow })|colorize }}
+        {% else %}
+            {{ 'withdraw.finish.borrow.withdraw.cant.ask'|t({ 'gold': lefttoborrow })|colorize }}
+        {% endif %}
+
+        {{ 'withdraw.finish.borrow.withdraw.cant.description'|t({ 'gold': maxborrow })|colorize }}
+    {% endif %}
+{% endif %}

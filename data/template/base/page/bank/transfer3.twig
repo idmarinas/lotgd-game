@@ -1,0 +1,22 @@
+{% translate_default_domain textDomain %}
+
+{{ 'transfer2.subtitle'|t|colorize }}
+
+{% if transferred is same as(true) %}
+    {{ 'transfer3.success.paragraph'|t|colorize }}
+{% elseif transferred is same as(false) %}
+    {{ 'transfer3.error.noGold'|t({ 'amount': amount, 'gold': (user.gold + user.goldinbank) })|colorize }}
+{% elseif transferred is same as(0) %}
+    {{ 'transfer3.error.notFound'|t|colorize }}
+{% elseif transferred == 'sameAct' %}
+    {{ 'transfer3.error.sameAct'|t|colorize }}
+{% elseif transferred == 'maxOut' %}
+    {{ 'transfer3.error.maxOut'|t({ 'n': maxOut })|colorize }}
+{% elseif transferred == 'level' %}
+    {{ 'transfer3.error.level'|t|colorize }}
+{% elseif transferred == 'maxtfer' %}
+    {{ 'transfer3.error.maxtfer'|t({'n': maxtfer, 'name': name})|colorize }}
+{% elseif condition %}
+{% elseif transferred == 'tomanytfer' %}
+    {{ 'transfer3.error.tomanytfer'|t({'name': name})|colorize }}
+{% endif %}
