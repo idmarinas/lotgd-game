@@ -44,4 +44,33 @@ class CharactersRepository extends DoctrineRepository
             return null;
         }
     }
+
+    /**
+     * Get a list of characters with similar name.
+     *
+     * @param string $name
+     * @param int    $limit
+     *
+     * @return array
+     */
+    public function findLikeName(string $name, int $limit = 100): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $qb->where('u.name LIKE :name')
+                ->setParameter('name', $name)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            return [];
+        }
+    }
 }
