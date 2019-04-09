@@ -16,7 +16,6 @@ page_header('title', [], $textDomain);
 
 $op = \LotgdHttp::getQuery('op');
 
-\LotgdNavigation::addNav('act', 'bank.php');
 $params = [
     'textDomain' => $textDomain
 ];
