@@ -116,7 +116,7 @@ class Http
             $post[$var][$sub] = $val;
         }
 
-        self::$instance->setPost($post);
+        self::$instance->setPost(new \Zend\Stdlib\Parameters($post));
     }
 
     /**
