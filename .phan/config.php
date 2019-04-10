@@ -40,7 +40,7 @@ return [
     // then Phan assumes the PHP version which is closest to the minor version
     // of the php executable used to execute Phan.
     // Automatically inferred from composer.json requirement for "php" of "^7.0"
-    'target_php_version' => '7.1',
+    'target_php_version' => '7.2',
 
     // If enabled, missing properties will be created when
     // they are first seen. If false, we'll report an
@@ -128,12 +128,12 @@ return [
     // [php7cc (no longer maintained)](https://github.com/sstalle/php7cc)
     // and [php7mar](https://github.com/Alexia/php7mar),
     // which have different backwards compatibility checks.
-    'backward_compatibility_checks' => false,
+    'backward_compatibility_checks' => true,
 
     // If true, check to make sure the return type declared
     // in the doc-block (if any) matches the return type
     // declared in the method signature.
-    'check_docblock_signature_return_type_match' => false,
+    'check_docblock_signature_return_type_match' => true,
 
     // If true, make narrowed types from phpdoc params override
     // the real types from the signature, when real types exist.
@@ -358,22 +358,29 @@ return [
         'vendor/hellogerard/jobby/src',
         'vendor/jaxon-php/jaxon-core/src',
         'vendor/jaxon-php/jaxon-dialogs/src',
+        'vendor/symfony/filesystem',
+        'vendor/symfony/yaml',
+        'vendor/tracy/tracy/src',
         'vendor/twig/twig/lib',
         'vendor/twig/twig/src',
         'vendor/zendframework/zend-cache/src',
         'vendor/zendframework/zend-code/src',
         'vendor/zendframework/zend-config/src',
+        'vendor/zendframework/zend-config-aggregator/src',
         'vendor/zendframework/zend-db/src',
         'vendor/zendframework/zend-debug/src',
         'vendor/zendframework/zend-escaper/src',
         'vendor/zendframework/zend-filter/src',
         'vendor/zendframework/zend-http/src',
+        'vendor/zendframework/zend-hydrator/src',
         'vendor/zendframework/zend-i18n/src',
         'vendor/zendframework/zend-mail/src',
         'vendor/zendframework/zend-math/src',
         'vendor/zendframework/zend-paginator/src',
         'vendor/zendframework/zend-serializer/src',
         'vendor/zendframework/zend-servicemanager/src',
+        'vendor/zendframework/zend-session/src',
+        'vendor/zendframework/zend-stdlib/src',
     ],
 
     // A list of individual files to include in analysis
