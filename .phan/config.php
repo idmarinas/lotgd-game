@@ -307,7 +307,7 @@ return [
 
     // The number of processes to fork off during the analysis
     // phase.
-    'processes' => 3,
+    'processes' => 1,
 
     // List of case-insensitive file extensions supported by Phan.
     // (e.g. `['php', 'html', 'htm']`)
