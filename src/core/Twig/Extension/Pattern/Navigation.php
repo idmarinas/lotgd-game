@@ -112,7 +112,10 @@ trait Navigation
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));
-        $link = $link.(false === \strpos($link, '#') ? '?' : '&');
+
+        //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
+        $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
+        $link = $link.(false === \strpos($link, '?') ? '?' : '&');
         $pages['href'] = $link;
 
         if (null !== $params)
