@@ -56,7 +56,7 @@ trait Commentary
             'comments' => $comments,
             'showPagination' => $showPagination,
             'canAddComment' => $canAddComment,
-            'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdHttp::getServer('SCRIPT_NAME'),
+            'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdHttp::getServer('REQUEST_URI'),
             'formUrl' => $this->commentaryFormUrl(),
             'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
         ];
