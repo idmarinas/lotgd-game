@@ -18,7 +18,6 @@ use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
 use Lotgd\Core\Pattern;
 use Zend\Filter;
-use Tracy\Debugger;
 
 class Commentary
 {

@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Tracy\Debugger;
 use Zend\Escaper\Exception\RuntimeException as EscaperException;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;
