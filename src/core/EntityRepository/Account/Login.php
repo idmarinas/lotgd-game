@@ -13,11 +13,12 @@
 
 namespace Lotgd\Core\EntityRepository\Account;
 
-use Lotgd\Core\Entity as LotgdEntity;
 use Doctrine\ORM\Query\Expr\Join;
+use Lotgd\Core\Entity as LotgdEntity;
+use Tracy\Debugger;
 
 /**
- * Functions for login user.
+ * Functions for login/logout user.
  */
 trait Login
 {
@@ -46,21 +47,52 @@ trait Login
                 ->getQuery()
                 ->getResult()
             ;
+
+            //-- Fail if not found
+            if (0 == count($data))
+            {
+                return null;
+            }
+
+            return $this->processUserData($data);
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
-
-        //-- Fail if not found
-        if (0 == count($data))
-        {
-            return null;
-        }
-
-        return $this->processUserData($data);
     }
 
+    /**
+     * Logout inactive accounts.
+     *
+     * @param int $timeout
+     *
+     * @return bool
+     */
+    public function logoutInactiveAccounts(int $timeout): bool
+    {
+        try
+        {
+            $date = new \DateTime('now');
+            $date->sub(new \DateInterval("PT{$timeout}S"));
+
+            $query = $this->_em->createQueryBuilder();
+
+            return $query->update($this->_entityName, 'u')
+                ->set('u.loggedin', 0)
+                ->where('u.laston <= :date')
+                ->setParameter('date', $date)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return false;
+        }
+    }
 }
