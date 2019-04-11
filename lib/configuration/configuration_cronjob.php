@@ -83,7 +83,14 @@ if ('newcronjob' == $op)
 
     $cronid = (string) httpget('cronid');
 
-    $data = ['enabled' => 1];
+    $data = [
+        'mailer' => 'sendmail',
+        'smtpSender' => 'jobby@localhost',
+        'smtpSenderName' => 'Jobby',
+        'dateFormat' => 'Y-m-d H:i:s',
+        'debut' => 0,
+        'enabled' => 1
+    ];
 
     if ($cronid)
     {
