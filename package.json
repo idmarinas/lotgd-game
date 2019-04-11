@@ -33,7 +33,7 @@
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
         "fomantic-ui": "2.7.4",
-        "jquery": "^3.3.1",
+        "jquery": "^3.4.0",
         "sweetalert2": "^7.33.1",
         "toastr": "^2.1.4"
     },
