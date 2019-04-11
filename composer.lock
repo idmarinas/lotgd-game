@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63bfb04968f69716612c312661640b2a",
+    "content-hash": "5b4e2ddcac60c56e9aef0107e1537f45",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1124,6 +1124,58 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
+            "name": "gabrielelana/byte-units",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabrielelana/byte-units.git",
+                "reference": "eaf7b998535578c7160be30b39904a8326bb9bb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabrielelana/byte-units/zipball/eaf7b998535578c7160be30b39904a8326bb9bb8",
+                "reference": "eaf7b998535578c7160be30b39904a8326bb9bb8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.0,<6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ByteUnits\\": "src/ByteUnits"
+                },
+                "files": [
+                    "src/ByteUnits/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriele Lana",
+                    "email": "gabriele.lana@gmail.com"
+                }
+            ],
+            "description": "Library to parse, format and convert byte units",
+            "homepage": "https://github.com/gabrielelana/byte-units",
+            "keywords": [
+                "byte",
+                "convert",
+                "format",
+                "parse",
+                "size",
+                "units"
+            ],
+            "time": "2018-01-11T10:40:03+00:00"
+        },
+        {
             "name": "hellogerard/jobby",
             "version": "v3.4.5",
             "source": {
@@ -1389,6 +1441,62 @@
                 "event-dispatcher"
             ],
             "time": "2016-08-10T16:12:53+00:00"
+        },
+        {
+            "name": "marioblazek/twig-byte-units-extension",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MarioBlazek/twig-byte-units-extension.git",
+                "reference": "cc2a2fc3b6cb37d0aee78f526b4491da56006672"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MarioBlazek/twig-byte-units-extension/zipball/cc2a2fc3b6cb37d0aee78f526b4491da56006672",
+                "reference": "cc2a2fc3b6cb37d0aee78f526b4491da56006672",
+                "shasum": ""
+            },
+            "require": {
+                "gabrielelana/byte-units": "^0.5",
+                "php": "^7.1",
+                "twig/twig": "^1.35.2 || ^2.4.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Marek\\Twig\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mario Blažek",
+                    "email": "blazek.mario@gmail.com",
+                    "homepage": "https://marioblazek.github.io/"
+                }
+            ],
+            "description": "Twig filters that format output of units of information by using ByteUnits library by Gabriele Lana",
+            "homepage": "https://github.com/marioblazek/twig-byte-units-extension",
+            "keywords": [
+                "byte",
+                "package",
+                "symfony",
+                "templating",
+                "twig",
+                "units of information"
+            ],
+            "time": "2018-06-08T08:09:28+00:00"
         },
         {
             "name": "matthiasmullie/minify",

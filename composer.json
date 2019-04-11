@@ -18,6 +18,7 @@
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
         "jaxon-php/jaxon-dialogs": "^1.2",
+        "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
         "symfony/filesystem": "^4.2",
         "symfony/yaml": "^4.2",
