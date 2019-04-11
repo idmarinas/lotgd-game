@@ -33,7 +33,7 @@
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
         "fomantic-ui": "2.7.4",
-        "jquery": "^3.3.1",
+        "jquery": "^3.4.0",
         "sweetalert2": "^7.33.1",
         "toastr": "^2.1.4"
     },
@@ -81,7 +81,7 @@
         "gulp-uglify": "^3.0.2",
         "html-loader": "^0.5.5",
         "merge-stream": "^1.0.1",
-        "mini-css-extract-plugin": "^0.5.0",
+        "mini-css-extract-plugin": "^0.6.0",
         "minimist": "^1.2.0",
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -91,7 +91,7 @@
         "url-loader": "^1.1.2",
         "vinyl-paths": "^2.1.0",
         "webpack": "^4.29.6",
-        "webpack-bundle-analyzer": "^3.2.0",
+        "webpack-bundle-analyzer": "^3.3.0",
         "webpack-merge": "^4.2.1"
     },
     "repository": {
