@@ -86,7 +86,16 @@ class Doctrine implements FactoryInterface
         $tablePrefix = new DoctrineTablePrefix(($options['db']['prefix'] ?? ''));
         $evm->addEventListener(DoctrineEvents::loadClassMetadata, $tablePrefix);
 
-        return DoctrineEntityManager::create($dbParams, $config, $evm);
+        //-- Entity Manager of Doctrine
+        $entityManager = DoctrineEntityManager::create($dbParams, $config, $evm);
+
+        //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+        if ($isDevelopment)
+        {
+            \MacFJA\Tracy\DoctrineSql::init($entityManager);
+        }
+
+        return $entityManager;
     }
 
     public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
