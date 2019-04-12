@@ -20,13 +20,13 @@ class Format implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $doctrine = $container->get(\Lotgd\Core\Db\Doctrine::class);
-        $repository = $doctrine->getRepository(\Lotgd\Core\Entity\Settings::class);
+        $settings = $container->get(\Lotgd\Core\Lib\Settings::class);
         $format = new OutputFormat();
 
         try
         {
-            $config = $repository->findBySetting(['moneydecimalpoint', 'moneythousandssep']);
+            $format->setDecPoint($settings->getSetting('moneydecimalpoint', '.'));
+            $format->setThousandsSep($settings->getSetting('moneythousandssep', ','));
         }
         catch (\Throwable $th)
         {
@@ -36,21 +36,6 @@ class Format implements FactoryInterface
             $format->setThousandsSep(',');
 
             return $format;
-        }
-
-        if (! empty($config) && is_array($config))
-        {
-            foreach ($config as $setting)
-            {
-                if ('moneydecimalpoint' == $setting->getSetting())
-                {
-                    $format->setDecPoint($setting->getValue());
-                }
-                elseif ('moneythousandssep' == $setting->getSetting())
-                {
-                    $format->setThousandsSep($setting->getValue());
-                }
-            }
         }
 
         return $format;
