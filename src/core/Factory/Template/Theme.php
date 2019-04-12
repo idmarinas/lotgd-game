@@ -35,13 +35,16 @@ class Theme implements FactoryInterface
         ]);
         $template->setContainer($container);
 
-        //-- This extensions are important
+        //-- Extension of LoTGD Core
         $template->addExtension(new Extension\GameCore());
         $template->addExtension(new Extension\FlashMessages($container));
         $template->addExtension(new Extension\Motd($container));
         $template->addExtension(new Extension\Navigation($container));
         $template->addExtension(new Extension\Translator($container));
         $template->addExtension(new Extension\Commentary($container));
+
+        //-- Extension of a third party
+        $template->addExtension(new \Marek\Twig\ByteUnitsExtension());
 
         //-- Important
         $template->prepareTheme();
