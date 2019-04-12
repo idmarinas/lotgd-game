@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b4e2ddcac60c56e9aef0107e1537f45",
+    "content-hash": "5b52a059ffa0cff479b0a50be8d16f22",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1441,6 +1441,51 @@
                 "event-dispatcher"
             ],
             "time": "2016-08-10T16:12:53+00:00"
+        },
+        {
+            "name": "macfja/tracy-doctrine-sql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MacFJA/tracy-doctrine-sql.git",
+                "reference": "17ba9a5249a6dde5f4f5c9079a19c5bf0960be36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MacFJA/tracy-doctrine-sql/zipball/17ba9a5249a6dde5f4f5c9079a19c5bf0960be36",
+                "reference": "17ba9a5249a6dde5f4f5c9079a19c5bf0960be36",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2",
+                "doctrine/orm": "~2",
+                "tracy/tracy": "~2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MacFJA\\Tracy\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MacFJA"
+                }
+            ],
+            "description": "A Tracy panel for Doctrine SQL queries",
+            "keywords": [
+                "bar",
+                "debugger",
+                "doctrine",
+                "panel",
+                "sql",
+                "tracy"
+            ],
+            "time": "2016-02-01T17:34:54+00:00"
         },
         {
             "name": "marioblazek/twig-byte-units-extension",
@@ -5024,7 +5069,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "macfja/tracy-doctrine-sql": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
