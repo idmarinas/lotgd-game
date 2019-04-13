@@ -37,7 +37,7 @@ define([
                 }
                 else
                 {
-                    element.parent('form').submit()
+                    return element.parents('form').submit()
                 }
             }
         })
