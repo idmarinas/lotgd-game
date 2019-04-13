@@ -69,7 +69,12 @@ class Bans
      *
      * @ORM\Column(name="lasthit", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $lasthit = '0000-00-00 00:00:00';
+    private $lasthit;
+
+    public function __construct()
+    {
+        $this->lasthit = new \DateTime('0000-00-00 00:00:0');
+    }
 
     /**
      * Set the value of Banexpire.
