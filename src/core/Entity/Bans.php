@@ -73,7 +73,7 @@ class Bans
 
     public function __construct()
     {
-        $this->lasthit = new \DateTime('0000-00-00 00:00:0');
+        $this->lasthit = new \DateTime('now');
     }
 
     /**
