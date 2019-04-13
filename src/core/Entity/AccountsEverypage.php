@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  *
  * @ORM\Table(name="accounts_everypage")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsEverypageRepository")
  */
 class AccountsEverypage
 {
