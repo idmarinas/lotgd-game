@@ -22,6 +22,7 @@ class Format implements FactoryInterface
     {
         $settings = $container->get(\Lotgd\Core\Lib\Settings::class);
         $format = new OutputFormat();
+        $format->setContainer($container);
 
         try
         {
