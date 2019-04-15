@@ -12,11 +12,16 @@
 
 namespace Lotgd\Core\Output;
 
+use Lotgd\Core\Pattern as PatternCore;
+
 /**
  * Format a string.
  */
 class Format
 {
+    use PatternCore\Container;
+    use PatternCore\Translator;
+
     /**
      * Style of decimal point.
      *
@@ -67,44 +72,56 @@ class Format
     /**
      * Show a relative date.
      *
-     * @param string|int $indate
+     * @param mixed $indate
      *
      * @return string
      */
     public function relativedate($indate)
     {
-        if ($indate instanceof \DateTime)
+        if (! $indate instanceof \DateTime)
         {
-            $indate = $indate->getTimestamp();
+            $indate = new \DateTime($indate);
         }
 
-        $indate = is_numeric($indate) ? $indate : strtotime($indate);
-        $lastoncheck = round((time() - strtotime($indate)) / 86400, 0).' days';
+        $now = new \DateTime('now');
+        $diff = $now->diff($indate);
 
-        $laston = ['%s days', round((time() - strtotime($indate)) / 86400, 0)];
+        $params = [];
+        $sufix = $diff->invert ? 'ago' : 'left';
+        $message = "{$sufix}.now";
 
-        if ('1 ' == substr($lastoncheck, 0, 2))
+        if ($diff->y > 0)
         {
-            $laston = '1 day';
+            $params['year'] = $diff->y;
+            $message = "{$sufix}.year";
         }
-        elseif (date('Y-m-d', strtotime($lastoncheck)) == date('Y-m-d'))
+        elseif ($diff->m > 0)
         {
-            $laston = 'Today';
+            $params['month'] = $diff->m;
+            $message = "{$sufix}.month";
         }
-        elseif (date('Y-m-d', strtotime($lastoncheck)) == date('Y-m-d', strtotime('-1 day')))
+        elseif ($diff->d > 0)
         {
-            $laston = 'Yesterday';
+            $params['day'] = $diff->d;
+            $message = "{$sufix}.day.other";
+
+            if (1 == $diff->d)
+            {
+                $message = "{$sufix}.day.day";
+            }
         }
-        elseif (false !== strpos($lastoncheck, '0000-00-00'))
+        elseif ($diff->h > 0)
         {
-            $laston = 'Never';
+            $params['hour'] = $diff->h;
+            $message = "{$sufix}.hour";
+        }
+        elseif ($diff->i > 0)
+        {
+            $params['min'] = $diff->i;
+            $message = "{$sufix}.min";
         }
 
-        tlschema('datetime');
-        $laston = sprintf_translate($laston);
-        tlschema();
-
-        return $laston;
+        return $this->getTranslator()->trans($message, $params, 'app-date');
     }
 
     /**
