@@ -20,3 +20,8 @@ left:
     hour: 'in {hour,plural, =1{1 hour} other{# hours}}'
     min: 'in {min,plural, =1{1 min} other{# mins}}'
     now: 'in a few seconds'
+
+# Additional translations for any words
+perma: 'Permanent'
+forever: 'Forever'
+never: 'Never'
