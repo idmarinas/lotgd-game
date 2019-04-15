@@ -16,6 +16,7 @@ namespace Lotgd\Core\Twig\Extension;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Twig\TwigTest;
 
 class GameCore extends AbstractExtension
 {
@@ -37,7 +38,7 @@ class GameCore extends AbstractExtension
             new TwigFilter('nltoappon', [$this, 'nltoappon']),
             new TwigFilter('lotgd_url', [$this, 'lotgdUrl']),
             new TwigFilter('numeral', [$this, 'numeral']),
-            new TwigFilter('relativedate', [$this, 'relativedate']),
+            new TwigFilter('relative_date', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
         ];
@@ -68,6 +69,16 @@ class GameCore extends AbstractExtension
             //-- Include a template from theme or module
             new TwigFunction('include_theme', [$this, 'includeThemeTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
             new TwigFunction('include_module', [$this, 'includeModuleTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public  function getTests()
+    {
+        return [
+            new TwigTest('array', function ($value) { return is_array($value); }),
         ];
     }
 
