@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
@@ -24,7 +24,8 @@ use Twig\TwigFilter;
 
 class Translator extends AbstractExtension
 {
-    use Container;
+    use PatternCore\Container;
+    use PatternCore\Translator;
     use Pattern\Translator;
 
     protected $translator;
@@ -82,21 +83,6 @@ class Translator extends AbstractExtension
              */
             new TwigFilter('tmf', [$this, 'translateMf']),
         ];
-    }
-
-    /**
-     * Get Translator instance.
-     *
-     * @return CoreTranslator
-     */
-    public function getTranslator(): CoreTranslator
-    {
-        if (! $this->translator instanceof CoreTranslator)
-        {
-            $this->translator = $this->getContainer(CoreTranslator::class);
-        }
-
-        return $this->translator;
     }
 
     /**

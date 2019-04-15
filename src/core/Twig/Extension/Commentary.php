@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Output\Commentary as CommentaryCore;
-use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Twig\NodeVisitor\{
@@ -37,7 +37,8 @@ use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension
 {
-    use Container;
+    use PatternCore\Container;
+    use PatternCore\Translator;
     use Pattern\Commentary;
 
     protected $commentary;
@@ -140,21 +141,6 @@ class Commentary extends AbstractExtension
         }
 
         return $this->commentary;
-    }
-
-    /**
-     * Get Translator instance.
-     *
-     * @return Translator
-     */
-    public function getTranslator(): Translator
-    {
-        if (! $this->translator instanceof Translator)
-        {
-            $this->translator = $this->getContainer(Translator::class);
-        }
-
-        return $this->translator;
     }
 
     /**
