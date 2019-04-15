@@ -42,7 +42,11 @@ class Translator extends ZendTranslator
 
         if (is_array($message))
         {
-            return $this->mf(\implode(' ', $message), $parameters, $locale);
+            //-- Can change union of array with this
+            $union = $message['union'] ?? ' ';
+            unset($message['union']);
+
+            return $this->mf(\implode($union, $message), $parameters, $locale);
         }
 
         return $this->mf($message, $parameters, $locale);
