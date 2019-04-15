@@ -18,4 +18,5 @@ trait LotgdCore
     use Container;
     use EntityHydrator;
     use Repository;
+    use Translator;
 }
