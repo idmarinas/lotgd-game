@@ -25,7 +25,8 @@ $adapter = new Lotgd\Core\Db\Dbwrapper([
     'driver' => $session['installer']['dbinfo']['DB_DRIVER'],
     'hostname' => $session['installer']['dbinfo']['DB_HOST'],
     'database' => $session['installer']['dbinfo']['DB_NAME'],
-    'charset' => 'utf8',
+    'charset' => 'utf8mb4',
+    'collate' => 'utf8mb4_general_ci',
     'username' => $session['installer']['dbinfo']['DB_USER'],
     'password' => $session['installer']['dbinfo']['DB_PASS']
 ]);
@@ -56,7 +57,8 @@ $doctrineManager = DoctrineEntityManager::create([
     'user' => $session['installer']['dbinfo']['DB_USER'],
     'password' => $session['installer']['dbinfo']['DB_PASS'],
     'dbname' => $session['installer']['dbinfo']['DB_NAME'],
-    'charset' => 'utf8'
+    'charset' => 'utf8mb4',
+    'collate' => 'utf8mb4_general_ci',
 ], $config, $evm);
 
 $schemaManager = $doctrineManager->getConnection()->getSchemaManager();

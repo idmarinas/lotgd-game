@@ -20,7 +20,8 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                     'driver' => $session['installer']['dbinfo']['DB_DRIVER'],
                     'hostname' => $session['installer']['dbinfo']['DB_HOST'],
                     'database' => $session['installer']['dbinfo']['DB_NAME'],
-                    'charset' => 'utf8',
+                    'charset' => 'utf8mb4',
+                    'collate' => 'utf8mb4_general_ci',
                     'username' => $session['installer']['dbinfo']['DB_USER'],
                     'password' => $session['installer']['dbinfo']['DB_PASS']
                 ],
