@@ -11,7 +11,11 @@ $lotgdJaxon->setOptions([
     ],
     'dialogs' => [
         'default' => [
-            'alert' => 'toastr'
+            'alert' => 'toastr',
+            'modal' => 'semantic'
+        ],
+        'classes' => [
+            'semantic' => \Lotgd\Core\Jaxon\Library\Semantic\Modal::class,
         ],
         'toastr' => [
             'options' => [
@@ -33,3 +37,5 @@ $lotgdJaxon->registerClasses();
 //-- Register all custom class (Available globally)
 $lotgdJaxon->addClassDir(realpath(__DIR__) . '/../lotgd/ajax', 'Lotgd\\Ajax\\Local\\');
 $lotgdJaxon->registerClasses();
+
+$lotgdJaxon->plugin('dialog')->registerClasses();
