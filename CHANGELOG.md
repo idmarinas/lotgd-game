@@ -14,24 +14,23 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Some files/folders are moved to `public/` folder
             -   Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php`... (all .php files in root).
             -   Folder `images/`
-            -   Folder `resources/` and renamed to `js/` and `ccs/`
+            -   Folder `resources/` is renamed to `js/` and `ccs/`
             -   Folder `themes/`
         -   Moved folder `cache` to `data/cache`
-        -   Moved folder `templates` to `data/templates`
+        -   Moved folder `templates` to `data/template`
         -   Moved folder `crawl` to `data/cache/crawl` This folder is where the advertising system keeps a cached copy.
         -   Moved folder `logd_snapshots` to `data/logd_snapshots` This folder is where the copies of the deleted files are stored, so that they can be restored.
--   **Moved** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
 -   :warning: **_New Translation system_**
     -   Remplaced old system of translation for new system. About this new system:
         -   Used a custom _Translator_ based in `Zend\I18n\Translator\Translator`
         -   This new system not used Data Base to store translations.
         -   Used `.yaml` files to store translations.
-            -   Files are in `translations/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
+            -   Files are in `data/translation/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
                 -   By default have two main scopes:
-                    -   `pages` This is where the translation files from the main pages are stored.
-                    -   `modules` This is where the translation files are stored in the modules.
+                    -   `page` This is where the translation files from the main pages are stored.
+                    -   `module` This is where the translation files are stored in the modules.
             -   The translations are automatically loaded by the translation factory.
-                -   It is possible to have more scopes besides `pages` and `modules` but remember the structure of the folder `translations`.
+                -   It is possible to have more scopes besides `page` and `module` but remember the structure of the folder `translation`.
 -   :warning: **_LotGD use Twig template system_**
     -   It's a system similar to MVC.
     -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
@@ -74,22 +73,20 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `textDomain` Is the text domain for translator. In case of village is `page-village`.
         -   This are optional, use if need change default values:
             -   `{% commentary_limit_comments 10 %}`, Set a limits of comments per page. Default is 25
-            -   `{% commentary_show_pagination true %}`, Set if show pagination of comments. Default is true
-            -   `{% commentary_pagination_link_url 'village.php' %}`, Set the url for links of pagination. Default is `$_SERVER['SCRIPT_NAME']`
-                -   This is mandatory defined when used in module.
-            -   `{% commentary_can_add_comments true %}`, Set if can add new comments. Default is true
-
+            -   `{% commentary_show_pagination false %}`, Set if show pagination of comments. Default is true
+            -   `{% commentary_pagination_link_url 'village.php' %}`, Set the url for links of pagination. Default is `$_SERVER['REQUEST_URI']`
+            -   `{% commentary_can_add_comments false %}`, Set if can add new comments. Default is true
 -   **lib/pageparts.php** Alter `page_header` and `popup_header` function. New format to add title to page.
     -   `page_header(?string $title = null, array $params = [], ?string $textDomain = null)`
     -   `popup_header(?string $title = null, array $params = [], ?string $textDomain = null)`
     -   _Notes_: You need to change all `page_header` and `popup_header` functions that content an array as the first argument. The first argument must be only a string or null.
 -   **common.php** Updated script of log http referers.
     -   Changes the way that static classes are used:
-          **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
-          **lib/class/doctrine.php** now are in **src/core/Fixed/Doctrine.php**
-          **lib/class/lotgdFormat.php** now are in **src/core/Fixed/Format.php**
-          **lib/class/servicemanager.php** now are in **src/core/Fixed/Locator.php**
-          **lib/class/template.php** now are in **src/core/Fixed/Theme.php**
+        -   **lib/class/dbwrapper.php** now are in **src/core/Fixed/Dbwrapper.php**
+        -   **lib/class/doctrine.php** now are in **src/core/Fixed/Doctrine.php**
+        -   **lib/class/lotgdFormat.php** now are in **src/core/Fixed/Format.php**
+        -   **lib/class/servicemanager.php** now are in **src/core/Fixed/Locator.php**
+        -   **lib/class/template.php** now are in **src/core/Fixed/Theme.php**
 -   **src/core/Lib/Settings.php** It improves the management of the settings cache.
 -   **src/core/Factory/Lib/Doctrine.php** Proxy and cache of Doctrine are located in cache dir of game
 -   **src/core/Output/Collector.php** Method `appopencode` changed and improved.
@@ -129,21 +126,33 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Why? Because Semantic UI have a low activity, community forked the project with intention in merge with Semantic UI when project back to active again.
         -   Nothing changed with this.
     -   :warning: **_New structure for theme templates and changed how created new themes_**
-        -   All theme templates are moved to `templates/` folder
+        -   All theme templates are moved to `data/template/` folder
         -   File `jade.html` moved too.
         -   To create new themes now you can extend original theme, and them customize templates.
 
 ### :star: FEATURES
 
--   _New Installer system_ This version have a new installer of game.
+-   _**New Installer system**_ This version have a new installer of game.
     -   :warning: The new installation system only allows upgrading from the previous version.
     -   You can no longer choose whether to use the cache and the cache directory during installation.
         -   To change this you need to do it from a local configuration file in the directory "config/autoload/local/cache.php"
             > An example of how to configure the cache can be found in the file "config/lotgd.config.php".
     -   Now check if you can write to the cache directory.
--   _New Component of Game_ `Lotgd\Core\Component\Filesystem`
+-   _**New Component of Game**_ `Lotgd\Core\Component\Filesystem`
     -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
         -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
+-   _**New profanity filtering for comments and other**_
+    -   Now you avoid saving the data in the database and use PHP files, in the folder "data/dictionary/{LANGUAGE_CODE}.php".
+-   _**New way to customize and create atmosphere in the city, forest and elsewhere**_
+    -   Before, the best way to create an environment (I take the village as an example) was with a hook that received all the texts and could be customized.
+    -   Now you can, with the new translation system, it is simpler, since you only have to change the "textDomain" for the page.
+        -   Example:
+            - _**Bank**_ page:
+                -   It has a new hook called `modulehook('bank-text-domain', ['textDomain' => 'page-bank'])` where you can change the "textDomain" to your own. Just copy the corresponding `.yaml` file, make the necessary modifications and you're done.
+        -   Note: This new way, makes it easier to create atmosphere in cities (creating your own) in a simple customization, where only the text is changed and little is changed.
+        - List of pages that use this system:
+            -   **public/bank.php** -> hookname `bank-text-domain`
+-   _**New CronJob**_ This CronJob searches all long inactive accounts and logout them.
 -   **src/core/Template/Theme.php** and **src/core/Fixed/Theme.php**
     -   Added new function `renderModuleTemplate(string $template, array $params)` With this function you can render a template of a module that does not depend on the current theme.
 -   **lib/class/lotgdFormat.php** Added new function:
@@ -154,11 +163,13 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   As an example, some fields in the tables are of type serialized array, Doctrine serializes and deserializes these fields automatically.
     -   There are no plans to remove Zend DB at this time.
 -   **Debugger** Added a debugger (Tracy library) to LotGD
-    -   Can use `Debbugger::log($string)` to log a string
+    -   Can use `Debbugger::log($string)` to log a string.
+        -   Can use to log a `Throwable` instance too.
     -   You can dump a var with this options:
         -   `Debugger::barDump($var, string $title)` or `barDump($var, string $title)` dump var to Debugger bar. To this option you can add a title to the dump
         -   `Debugger::dump($var)` or `dump($var)` dump var in output.
     -   With  can dump a var, and in production Debugger ignore this.
+    -   Doctrine: can see the number and SQL queries in Tracy debugger bar.
 -   **Since 4.0.0 IDMarinas Edition** When a module is installed, the game checks if the module requires a specific version of LoTGD.
 
 ### :fire: DEPRECATED
@@ -206,6 +217,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `httppostset()` use `LotgdHttp::setPost()`
     -   `httpallpost()` use `LotgdHttp::getPostAll()`
     -   `postparse()`
+-   **lib/censor.php**:
+    -   `soap()`
+    -   `good_word_list()`
+    -   `nasty_word_list()`
 -   **lib/commentary**: All functions, use new commentary system.
     -   `commentarylocs()`
     -   `removecommentary()`
@@ -251,6 +266,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :wrench: FIXES
 
+-   **Folder name** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
 -   **lib/class/dbwrapper.php**
     -   Fixed error, not passed param $prefixed
     -   Only one instance of `Zend\Paginator\Paginator` can be passed
@@ -268,6 +284,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :x: REMOVES
 
 -   **common.php** Code removed for upgrade from version 2.7.0 to 3.0.0 IDMarinas edition
+-   **public/badword.php** Remplaced for new censor _BanBuilder_
 -   **lib/dbwrapper.php** Removed deprecated method `query_cached`
     -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\Core\Lib\Dbwrapper` to get this info
 -   **lib/pageparts.php** Removed deprecated function `popup`
@@ -281,6 +298,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
     -   All related gulp tasks are updated to this new version
     -   Removed `gulp-help` dependency (use `gulp --tasks` to list tasks)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
 
 # Version: 3.0.0
 
