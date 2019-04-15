@@ -72,15 +72,23 @@ class Format
     /**
      * Show a relative date.
      *
-     * @param mixed $indate
+     * @param mixed  $indate
+     * @param string $default
      *
      * @return string
      */
-    public function relativedate($indate)
+    public function relativedate($indate, $default = 'never'): string
     {
         if (! $indate instanceof \DateTime)
         {
             $indate = new \DateTime($indate);
+        }
+        $nullDate = new \DateTime('0000-00-00 00:00:00');
+        $default = $default ?: 'never';
+
+        if ($nullDate == $indate)
+        {
+            return $this->getTranslator()->trans($default, [], 'app-date');
         }
 
         $now = new \DateTime('now');

@@ -39,9 +39,9 @@ class Format
     /**
      * @inheritDoc
      */
-    public static function relativedate($indate)
+    public static function relativedate($indate, $default = null)
     {
-        return self::$instance->relativedate($indate);
+        return self::$instance->relativedate($indate, $default);
     }
 
     /**
