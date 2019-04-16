@@ -1,7 +1,5 @@
 <?php
 
-//addnews ready
-// mail ready
 require_once 'common.php';
 require_once 'lib/showform.php';
 require_once 'lib/datetime.php';
@@ -9,96 +7,74 @@ require_once 'lib/sanitize.php';
 require_once 'lib/names.php';
 
 tlschema('bans');
+
 check_su_access(SU_EDIT_BANS);
 
-$op = httpget('op');
-$userid = httpget('userid');
+$textDomain = 'page-bans';
+$params = [ 'textDomain' => $textDomain ];
 
-page_header('Ban Editor');
+$op = \LotgdHttp::getQuery('op');
+$userId = (int) \LotgdHttp::getQuery('userid');
 
-$sort = httpget('sort');
+page_header('title', [], $textDomain);
 
-$gentime = 0;
-$gentimecount = 0;
+\LotgdNavigation::superuserGrottoNav();
+\LotgdNavigation::addHeader('bans.category.bans');
+\LotgdNavigation::addNav('bans.nav.default', 'bans.php');
+\LotgdNavigation::addNav('bans.nav.add', 'bans.php?op=setupban');
+\LotgdNavigation::addNav('bans.nav.list', 'bans.php?op=removeban');
+\LotgdNavigation::addNav('bans.nav.search', 'bans.php?op=searchban');
 
-$order = 'acctid';
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 
-if ('' != $sort)
+switch ($op)
 {
-    $order = "$sort";
-}
-$display = 0;
-$query = httppost('q');
-
-if (false === $query)
-{
-    $query = httpget('q');
-}
-
-if (! $query && $sort)
-{
-    $query = '%';
-}
-
-if ('search' == $op || '' == $op)
-{
-    require_once 'lib/lookup_user.php';
-    list($searchresult, $err) = lookup_user($query, $order);
-    $op = '';
-
-    if ($err)
-    {
-        output($err);
-    }
-    else
-    {
-        if ($searchresult)
-        {
-            $display = 1;
-        }
-    }
-}
-
-output('`$`cWelcome to the Ban Editor´c`0`n`n');
-
-if (! isset($m))
-{
-    $m = '';
-}
-$se = translate_inline('Search');
-rawoutput("<form action='bans.php?op=search$m' method='POST' clas='ui form'><div class='inline field'>");
-output('Search users by any field: ');
-rawoutput("<div class='ui action input'><input name='q' id='q'>");
-rawoutput("<button type='submit' class='ui button'>$se</button>");
-rawoutput('</div></div></form>');
-rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>");
-addnav('', "bans.php?op=search$m");
-
-require_once 'lib/superusernav.php';
-superusernav();
-addnav('Bans');
-addnav('Add a ban', 'bans.php?op=setupban');
-addnav('List/Remove bans', 'bans.php?op=removeban');
-addnav('Search for banned user', 'bans.php?op=searchban');
-
-switch ($op) {
     case 'setupban':
-        require 'lib/bans/case_setupban.php';
-        break;
+        $params['opt'] = 'setupban';
+
+        $params['account'] = $repository->getBasicInfoOfAccount($userId);
+
+        $params['equalId'] = $repository->getAccountsWithEqualId($params['account']['uniqueid']);
+        $params['similarIp'] = $repository->getAccountsWithSimilarIp($params['account']['lastip'], $params['account']['acctid']);
+    break;
     case 'saveban':
-        require 'lib/bans/case_saveban.php';
-        break;
-    case 'delban':
-        require 'lib/bans/case_delban.php';
-        break;
-    case 'removeban':
-        require 'lib/bans/case_removeban.php';
-        break;
+        $params['opt'] = 'saveban';
+
+        require_once 'lib/bans/case_saveban.php';
+    break;
     case 'searchban':
-        require 'lib/bans/case_searchban.php';
-        break;
+        $params['searchBan'] = true;
+
+        $target = (string) \LotgdHttp::getPost('target');
+
+    case 'removeban':
+    case 'delban':
+        $params['opt'] = 'removeban';
+
+        require_once 'lib/bans/case_removeban.php';
+    break;
+    case 'search':
     default:
-        output('From here, you can issue bans for players from being able to play.`n`nBased on the ID = cookie on the machine AND/OR on the IP they accessed the char last the ban takes effect.`n`nNote: Locked chars stay locked, even after they delete their cookie / change their IP.`n`nHowever, they can make new chars and login in that case. You cannot control this.');
-        require 'lib/bans/case_.php';
+        $params['opt'] = 'default';
+
+        $repoAcctEveryPage = \Doctrine::getRepository(\Lotgd\Core\Entity\AccountsEverypage::class);
+        $page = (int) \LotgdHttp::getQuery('page');
+        $sort = (string) \LotgdHttp::getQuery('sort');
+        $order = (string) ($sort ?: 'acctid');
+
+        $query = (string) \LotgdHttp::getPost('q');
+        $query = (string) ($query ?: \LotgdHttp::getQuery('q'));
+
+        bdump($query);
+
+        $params['query'] = $query ? "q={$query}" : '';
+        $params['paginator'] = $repository->bansSearchAccts($query, $order, $page);
+        $params['stats'] = $repoAcctEveryPage->getStatsPageGen();
+
+        $params['paginatorLink'] = \LotgdHttp::getServer('REQUEST_URI');
+    break;
 }
+
+rawoutput(LotgdTheme::renderThemeTemplate('page/bans.twig', $params));
+
 page_footer();

@@ -1,189 +1,122 @@
 <?php
 
-$subop = httpget('subop');
-$none = translate_inline('NONE');
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
 
-if ('xml' == $subop)
+if ('delban' == $op)
 {
-    header('Content-Type: text/xml');
-    $sql = 'SELECT DISTINCT '.DB::prefix('accounts').'.name FROM '.DB::prefix('bans').', '.DB::prefix('accounts')." WHERE (ipfilter='".addslashes(httpget('ip'))."' AND ".
-        DB::prefix('bans').".uniqueid='".
-        addslashes(httpget('id'))."') AND ((substring(".
-        DB::prefix('accounts').'.lastip,1,length(ipfilter))=ipfilter '.
-        "AND ipfilter<>'') OR (".DB::prefix('bans').'.uniqueid='.
-        DB::prefix('accounts').'.uniqueid AND '.
-        DB::prefix('bans').".uniqueid<>''))";
-    $r = DB::query($sql);
-    echo '<xml>';
+    $ip = \LotgdHttp::getQuery('ipfilter');
+    $id = \LotgdHttp::getQuery('uniqueid');
 
-    while ($ro = DB::fetch_assoc($r))
+    if ($repository->deleteBan($ip, $id))
     {
-        echo '<name name="';
-        echo urlencode(appoencode("`0{$ro['name']}"));
-        echo '"/>';
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.delban', ['ip' => $ip, 'id' => $id], $textDomain));
     }
-
-    if (0 == DB::num_rows($r))
-    {
-        echo "<name name=\"$none\"/>";
-    }
-    echo '</xml>';
-
-    exit();
 }
-DB::query('DELETE FROM '.DB::prefix('bans').' WHERE banexpire < "'.date('Y-m-d H:m:s')."\" AND banexpire>'0000-00-00 00:00:00'");
-$duration = httpget('duration');
 
-if (httpget('notbefore'))
+//-- Delete expire bans
+$removed = $repository->removeExpireBans();
+if ($removed)
 {
-    $operator = '>=';
+    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.expired', ['count' => $removed], $textDomain));
 }
-else
+
+$page = (int) \LotgdHttp::getQuery('page');
+$duration = (string) \LotgdHttp::getQuery('duration');
+$duration = $duration ?: 'P14D';
+$notBefore = (int) \LotgdHttp::getQuery('notbefore');
+$operator = $notBefore ? '>=' : '<=';
+
+$date = new \DateTime('now');
+$query = $repository->createQueryBuilder('u');
+$query->orderBy('u.banexpire', 'ASC');
+
+if ('searchban' == $op && $target)
 {
-    $operator = '<=';
-}
+    $params['showing'] = ['removeban.showing.search', ['name' => $target]];
 
-if ('' == $duration)
+    $repositoryChar = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+    $query = $repositoryChar->createQueryBuilder('u');
+    $expr = $query->expr();
+
+    $query->select('b')
+        ->join(
+            \Lotgd\Core\Entity\Accounts::class,
+            'a',
+            \Doctrine\ORM\Query\Expr\Join::WITH,
+            $expr->eq('a.acctid', 'u.acct')
+        )
+        ->join(\Lotgd\Core\Entity\Bans::class,
+            'b',
+            \Doctrine\ORM\Query\Expr\Join::WITH,
+            $expr->orX($expr->like('b.ipfilter', 'a.lastip'), $expr->like('b.uniqueid', 'a.uniqueid'))
+        )
+        ->where('u.name LIKE :name')
+        ->setParameter('name', "%{$target}%")
+        ->orderBy('b.banexpire', 'ASC')
+    ;
+}
+elseif ('forever' != $duration && 'all' != $duration)
 {
-    $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+2 weeks'))."' AND banexpire > '0000-00-00 00:00:00'";
-    output('`bShowing bans that will expire within 2 weeks.´b`n`n');
+    $type = substr($duration, -1);
+    $matchs = [];
+    preg_match('/[[:digit:]]+/', $duration, $matchs);
+    $count = $matchs[0];
+
+    if ('D' == $type)
+    {
+        $count = $count / 7 ;
+    }
+    $params['showing'] = ["removeban.showing.{$type}", ['notBefore' => $notBefore, 'n' => $count]];
+
+    $query->where("u.banexpire $operator :date AND u.banexpire > '0000-00-00 00:00:00'")
+        ->setParameter('date', $date->add(new DateInterval($duration)))
+    ;
 }
-else
+elseif ('forever' == $duration)
 {
-    if ('forever' == $duration)
-    {
-        $since = " WHERE banexpire='0000-00-00 00:00:00'";
-        output('`bShowing all permanent bans´b`n`n');
-    }
-    elseif ('all' == $duration)
-    {
-        $since = '';
-        output('`bShowing all bans´b`n`n');
-    }
-    else
-    {
-        $since = " WHERE banexpire $operator '".date('Y-m-d H:i:s', strtotime('+'.$duration))."' AND banexpire > '0000-00-00 00:00:00'";
-        output('`bShowing bans that will expire within %s.´b`n`n', $duration);
-    }
+    $query->where("u.banexpire = '0000-00-00 00:00:00'");
+    $params['showing'] = 'removeban.showing.perma';
 }
-addnav('Perma-Bans');
-addnav('Show', 'bans.php?op=removeban&duration=forever');
-addnav('Will Expire Within');
-addnav('1 week', 'bans.php?op=removeban&duration=1+week');
-addnav(['%s weeks', 2], 'bans.php?op=removeban&duration=2+weeks');
-addnav(['%s weeks', 3], 'bans.php?op=removeban&duration=3+weeks');
-addnav(['%s weeks', 4], 'bans.php?op=removeban&duration=4+weeks');
-addnav(['%s months', 2], 'bans.php?op=removeban&duration=2+months');
-addnav(['%s months', 3], 'bans.php?op=removeban&duration=3+months');
-addnav(['%s months', 4], 'bans.php?op=removeban&duration=4+months');
-addnav(['%s months', 5], 'bans.php?op=removeban&duration=5+months');
-addnav(['%s months', 6], 'bans.php?op=removeban&duration=6+months');
-addnav('1 year', 'bans.php?op=removeban&duration=1+year');
-addnav(['%s years', 2], 'bans.php?op=removeban&duration=2+years');
-addnav(['%s years', 4], 'bans.php?op=removeban&duration=4+years');
-addnav('Show all', 'bans.php?op=removeban&duration=all');
-addnav('Will Expire not before');
-addnav('1 week', 'bans.php?op=removeban&duration=1+week&notbefore=1');
-addnav(['%s weeks', 2], 'bans.php?op=removeban&duration=2+weeks&notbefore=1');
-addnav(['%s weeks', 3], 'bans.php?op=removeban&duration=3+weeks&notbefore=1');
-addnav(['%s weeks', 4], 'bans.php?op=removeban&duration=4+weeks&notbefore=1');
-addnav(['%s months', 2], 'bans.php?op=removeban&duration=2+months&notbefore=1');
-addnav(['%s months', 3], 'bans.php?op=removeban&duration=3+months&notbefore=1');
-addnav(['%s months', 4], 'bans.php?op=removeban&duration=4+months&notbefore=1');
-addnav(['%s months', 5], 'bans.php?op=removeban&duration=5+months&notbefore=1');
-addnav(['%s months', 6], 'bans.php?op=removeban&duration=6+months&notbefore=1');
-addnav('1 year', 'bans.php?op=removeban&duration=1+year&notbefore=1');
-addnav(['%s years', 2], 'bans.php?op=removeban&duration=2+years&notbefore=1');
-addnav(['%s years', 4], 'bans.php?op=removeban&duration=4+years&notbefore=1');
-
-$sql = 'SELECT * FROM '.DB::prefix('bans')." $since ORDER BY banexpire ASC";
-$result = DB::query($sql);
-rawoutput("<script language='JavaScript'>
-function getUserInfo(ip,id,divid){
-    var filename='bans.php?op=removeban&subop=xml&ip='+ip+'&id='+id;
-    //set up the DOM object
-    var xmldom;
-    if (document.implementation &&
-            document.implementation.createDocument){
-        //Mozilla style browsers
-        xmldom = document.implementation.createDocument('', '', null);
-    } else if (window.ActiveXObject) {
-        //IE style browsers
-        xmldom = new ActiveXObject('Microsoft.XMLDOM');
-    }
-        xmldom.async=false;
-    xmldom.load(filename);
-    var output='';
-    for (var x=0; x<xmldom.documentElement.childNodes.length; x++){
-        output = output + unescape(xmldom.documentElement.childNodes[x].getAttribute('name').replace(/\\+/g,' ')) +'<br>';
-    }
-    document.getElementById('user'+divid).innerHTML=output;
-}
-</script>
-");
-rawoutput("<table class='ui very compact striped selectable table'>");
-$ops = translate_inline('Ops');
-$bauth = translate_inline('Ban Author');
-$ipd = translate_inline('IP/ID');
-$dur = translate_inline('Duration');
-$mssg = translate_inline('Message');
-$aff = translate_inline('Affects');
-$l = translate_inline('Last');
-    rawoutput("<thead><tr><th>$ops</th><th>$bauth</th><th>$ipd</th><th>$dur</th><th>$mssg</th><th>$aff</th><th>$l</th></tr></thead>");
-$i = 0;
-
-while ($row = DB::fetch_assoc($result))
+elseif ('all' == $duration)
 {
-    $liftban = translate_inline('Lift&nbsp;ban');
-    $showuser = translate_inline('Click&nbsp;to&nbsp;show&nbsp;users');
-    rawoutput('<tr>');
-    rawoutput("<td><a href='bans.php?op=delban&ipfilter=".urlencode($row['ipfilter']).'&uniqueid='.urlencode($row['uniqueid'])."'>");
-    output_notl('%s', $liftban, true);
-    rawoutput('</a>');
-    addnav('', 'bans.php?op=delban&ipfilter='.urlencode($row['ipfilter']).'&uniqueid='.urlencode($row['uniqueid']));
-    rawoutput('</td><td>');
-    output_notl('`&%s`0', $row['banner']);
-    rawoutput('</td><td>');
-    output_notl('%s', $row['ipfilter']);
-    output_notl('%s', $row['uniqueid']);
-    rawoutput('</td><td>');
-    // "43200" used so will basically round to nearest day rather than floor number of days
-
-    $expire = sprintf_translate('%s days',
-            round((strtotime($row['banexpire']) + 43200 - strtotime('now')) / 86400, 0));
-
-    if ('1 ' == substr($expire, 0, 2))
-    {
-        $expire = translate_inline('1 day');
-    }
-
-    if (date('Y-m-d', strtotime($row['banexpire'])) == date('Y-m-d'))
-    {
-        $expire = translate_inline('Today');
-    }
-
-    if (date('Y-m-d', strtotime($row['banexpire'])) ==
-            date('Y-m-d', strtotime('1 day')))
-    {
-        $expire = translate_inline('Tomorrow');
-    }
-
-    if ('0000-00-00 00:00:00' == $row['banexpire'])
-    {
-        $expire = translate_inline('Never');
-    }
-    output_notl('%s', $expire);
-    rawoutput('</td><td>');
-    output_notl('%s', $row['banreason']);
-    rawoutput('</td><td>');
-    $file = "bans.php?op=removeban&subop=xml&ip={$row['ipfilter']}&id={$row['uniqueid']}";
-    rawoutput("<div id='user$i'><a href='$file' target='_blank' onClick=\"getUserInfo('{$row['ipfilter']}','{$row['uniqueid']}',$i); return false;\">");
-    output_notl('%s', $showuser, true);
-    rawoutput('</a></div>');
-    addnav('', $file);
-    rawoutput('</td><td>');
-    output_notl(LotgdFormat::relativedate($row['lasthit']));
-    rawoutput('</td></tr>');
-    $i++;
+    $params['showing'] = 'removeban.showing.all';
 }
-rawoutput('</table>');
+
+$params['paginator'] = $repository->getPaginator($query, $page, 35);
+
+\LotgdNavigation::addHeader('bans.category.perma');
+\LotgdNavigation::addNav('bans.nav.show', 'bans.php?op=removeban&duration=forever');
+
+\LotgdNavigation::addHeader('bans.category.expire.within');
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D', ['params' => ['n' => 1]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D', ['params' => ['n' => 3]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D', ['params' => ['n' => 4]]);
+
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M', ['params' => ['n' => 3]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M', ['params' => ['n' => 4]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M', ['params' => ['n' => 5]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M', ['params' => ['n' => 6]]);
+
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y', ['params' => ['n' => 1]]);
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y', ['params' => ['n' => 4]]);
+
+\LotgdNavigation::addNav('bans.nav.all', 'bans.php?op=removeban&duration=all');
+
+\LotgdNavigation::addHeader('bans.category.expire.notBefore');
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P7D&notbefore=1', ['params' => ['n' => 1]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P14D&notbefore=1', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P21D&notbefore=1', ['params' => ['n' => 3]]);
+\LotgdNavigation::addNav('bans.nav.week', 'bans.php?op=removeban&duration=P28D&notbefore=1', ['params' => ['n' => 4]]);
+
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P2M&notbefore=1', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P3M&notbefore=1', ['params' => ['n' => 3]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P4M&notbefore=1', ['params' => ['n' => 4]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P5M&notbefore=1', ['params' => ['n' => 5]]);
+\LotgdNavigation::addNav('bans.nav.month', 'bans.php?op=removeban&duration=P6M&notbefore=1', ['params' => ['n' => 6]]);
+
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P1Y&notbefore=1', ['params' => ['n' => 1]]);
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P2Y&notbefore=1', ['params' => ['n' => 2]]);
+\LotgdNavigation::addNav('bans.nav.year', 'bans.php?op=removeban&duration=P4Y&notbefore=1', ['params' => ['n' => 4]]);

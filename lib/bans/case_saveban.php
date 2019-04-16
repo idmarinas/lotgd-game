@@ -1,95 +1,66 @@
 <?php
 
-$sql = 'INSERT INTO '.DB::prefix('bans').' (banner,';
-$type = httppost('type');
+$type = (string) \LotgdHttp::getPost('type');
+$valueIp = (string) \LotgdHttp::getPost('ip');
+$valueId = (string) \LotgdHttp::getPost('id');
+$durationDays = (int) \LotgdHttp::getPost('duration');
+$durationDays = max(0, $durationDays); //-- Min value is 0
+$reason = (string) \LotgdHttp::getPost('reason');
 
-if ('ip' == $type)
+$duration = new \DateTime('0000-00-00');
+if ($durationDays)
 {
-    $sql .= 'ipfilter';
-    $key = 'lastip';
-    $key_value = httppost('ip');
+    $duration = new \DateTime('now');
+    $duration->add(new \DateInterval("P{$durationDays}D"));
 }
-else
-{
-    $sql .= 'uniqueid';
-    $key = 'uniqueid';
-    $key_value = httppost('id');
-}
-$sql .= ",banexpire,banreason) VALUES ('".addslashes($session['user']['name'])."',";
 
-if ('ip' == $type)
+$process = true;
+if ('ip' == $type && substr(\LotgdHttp::getServer('REMOTE_ADDR'), 0, strlen($valueIp)) == $valueIp)
 {
-    $sql .= '"'.httppost('ip').'"';
-}
-else
-{
-    $sql .= '"'.httppost('id').'"';
-}
-$duration = (int) httppost('duration');
+    $process = false;
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('saveban.yourself.ip', [], $textDomain));
 
-if (0 == $duration)
-{
-    $duration = '0000-00-00';
 }
-else
+elseif ('id' == $type && \LotgdHttp::getCookie('lgi') == $valueId)
 {
-    $duration = date('Y-m-d', strtotime("+$duration days"));
+    $process = false;
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('saveban.yourself.id', [], $textDomain));
 }
-    $sql .= ",\"$duration\",";
-$sql .= '"'.httppost('reason').'")';
 
-if ('ip' == $type)
+if ($process)
 {
-    if (substr($_SERVER['REMOTE_ADDR'], 0, strlen(httppost('ip'))) ==
-            httppost('ip'))
+    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
+    $repositoryAcct = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+    $entity = new \Lotgd\Core\Entity\Bans();
+
+    $entity->setBanner($session['user']['name'])
+        ->setBanreason($reason)
+        ->setBanexpire($duration)
+    ;
+
+    (('ip' == $type) ? $entity->setIpfilter($valueIp) : $entity->setUniqueid($valueId));
+
+    try
     {
-        $sql = '';
-        output("You don't really want to ban yourself now do you??");
-        output("That's your own IP address!");
+        \Doctrine::merge($entity);
+        \Doctrine::flush();
+
+        debuglog(sprintf('entered a ban: %s. Ends after: %s, Reason: %s.',
+            ('ip' == $type ? "IP: {$valueIp}" : "ID: {$valueId}"),
+            $duration->format('Y-m-d'),
+            $reason
+        ));
+
+        $params['savedBan'] = true;
     }
-}
-else
-{
-    if ($_COOKIE['lgi'] == httppost('id'))
+    catch (\Throwable $th)
     {
-        $sql = '';
-        output("You don't really want to ban yourself now do you??");
-        output("That's your own ID!");
-    }
-}
+        \Tracy\Debugger::log($th);
 
-if ('' != $sql)
-{
-    $result = DB::query($sql);
-    output('%s ban rows entered.`n`n', DB::affected_rows()); //Eliminado el LINK, ya no es necesario para saber las filas afectadas
-    output_notl('%s', DB::error(LINK));
-    debuglog('entered a ban: '.('ip' == $type ? 'IP: '.httppost('ip') : 'ID: '.httppost('id'))." Ends after: $duration  Reason: \"".httppost('reason').'"');
-    /* log out affected players */
-    $sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE $key='$key_value'";
-    $result = DB::query($sql);
-    $acctids = [];
+        \LotgdFlashMessages::addErrorMessage($th->getMessage());
 
-    while ($row = DB::fetch_assoc($result))
-    {
-        $acctids[] = $row['acctid'];
+        $params['savedBan'] = false;
     }
 
-    if ($acctids != [])
-    {
-        $sql = ' UPDATE '.DB::prefix('accounts').' SET loggedin=0 WHERE acctid IN ('.implode(',', $acctids).')';
-        $result = DB::query($sql);
-
-        if ($result)
-        {
-            output('`$%s people have been logged out!`n`n`0', DB::affected_rows($result));
-        }
-        else
-        {
-            output('`$Nobody was logged out. Acctids (%s) did not return rows!`n`n`0', implode(',', $acctids));
-        }
-    }
-    else
-    {
-        output('`$No account-ids found for that IP/ID!`n`n`0');
-    }
+    $params['logoutCount'] = $repositoryAcct->logoutAffectedAccounts($valueIp, $valueId, $type);
 }

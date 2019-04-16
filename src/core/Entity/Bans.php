@@ -19,16 +19,14 @@ use Doctrine\ORM\Mapping as ORM;
  * Bans.
  *
  * @ORM\Table(name="bans")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\BansRepository")
  */
 class Bans
 {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="banexpire", type="datetime", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="banexpire", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $banexpire;
 
@@ -39,16 +37,16 @@ class Bans
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $uniqueid;
+    private $uniqueid = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ipfilter", type="string", length=15, nullable=false)
+     * @ORM\Column(name="ipfilter", type="string", length=40, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $ipfilter;
+    private $ipfilter = '';
 
     /**
      * @var string
