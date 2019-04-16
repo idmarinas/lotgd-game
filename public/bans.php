@@ -65,8 +65,6 @@ switch ($op)
         $query = (string) \LotgdHttp::getPost('q');
         $query = (string) ($query ?: \LotgdHttp::getQuery('q'));
 
-        bdump($query);
-
         $params['query'] = $query ? "q={$query}" : '';
         $params['paginator'] = $repository->bansSearchAccts($query, $order, $page);
         $params['stats'] = $repoAcctEveryPage->getStatsPageGen();

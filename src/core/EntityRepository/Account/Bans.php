@@ -56,7 +56,6 @@ trait Bans
         }
         $query->orderBy($sort, 'ASC');
 
-        bdump($search);
         if ($search)
         {
             $query->where("u.login LIKE :search OR c.name LIKE :search OR u.acctid = :search OR u.emailaddress LIKE :search OR u.lastip LIKE :search OR u.uniqueid LIKE :search")
