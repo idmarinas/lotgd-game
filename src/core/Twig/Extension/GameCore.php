@@ -75,7 +75,7 @@ class GameCore extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public  function getTests()
+    public function getTests()
     {
         return [
             new TwigTest('array', function ($value) { return is_array($value); }),
