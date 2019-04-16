@@ -67,7 +67,7 @@ $roundcounter = 0;
 $adjustment = 1;
 
 $count = 1;
-$auto = httpget('auto');
+$auto = \LotgdHttp::getQuery('auto');
 
 if ('full' == $auto)
 {
@@ -85,16 +85,15 @@ elseif ('ten' == $auto)
 $enemycounter = count($enemies);
 $enemies = autosettarget($enemies);
 
-$op = httpget('op');
-$skill = httpget('skill');
-$l = httpget('l');
-$newtarget = httpget('newtarget');
+$op = \LotgdHttp::getQuery('op');
+$skill = \LotgdHttp::getQuery('skill');
+$l = \LotgdHttp::getQuery('l');
+$newtarget = \LotgdHttp::getQuery('newtarget');
 
 if ('' != $newtarget)
 {
     $op = 'newtarget';
 }
-//if (!$targetted) $op = "newtarget";
 
 if ('fight' == $op)
 {
@@ -158,7 +157,7 @@ suspend_buffs((('pvp' == $options['type']) ? 'allowinpvp' : false));
 suspend_companions((('pvp' == $options['type']) ? 'allowinpvp' : false));
 
 // Now that the bufflist is sane, see if we should add in the bodyguard.
-$inn = (int) httpget('inn');
+$inn = (int) \LotgdHttp::getQuery('inn');
 
 if ('pvp' == $options['type'] && 1 == $inn)
 {
@@ -184,7 +183,7 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
             // By default, surprise is 50/50
             $surprised = e_rand(0, 1) ? true : false;
             // Now, adjust for slum/thrill
-            $type = httpget('type');
+            $type = \LotgdHttp::getQuery('type');
 
             if ('slum' == $type || 'thrill' == $type)
             {
@@ -797,7 +796,7 @@ if ($victory || $defeat)
 
         if ($battleProcessVictoryDefeat)
         {
-            battlevictory($newenemies, (isset($options['denyflawless']) ? $options['denyflawless'] : $battleDenyFlawless), $battleInForest);
+            battlevictory($newenemies, ($options['denyflawless'] ?? $battleDenyFlawless), $battleInForest);
         }
     }
     elseif ($defeat)
