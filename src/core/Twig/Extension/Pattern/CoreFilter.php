@@ -22,8 +22,13 @@ trait CoreFilter
      *
      * @return string
      */
-    public function colorize(string $string): string
+    public function colorize(?string $string): string
     {
+        if (! $string)
+        {
+            return '';
+        }
+
         return appoencode($string, true);
     }
 
@@ -88,13 +93,14 @@ trait CoreFilter
     /**
      * Show a relative date from now.
      *
-     * @param mixed $string
+     * @param mixed  $string
+     * @param string $default
      *
      * @return string
      */
-    public function relativedate($string)
+    public function relativedate($string, $default = null)
     {
-        return \LotgdFormat::relativedate($string);
+        return \LotgdFormat::relativedate($string, $default);
     }
 
     /**
