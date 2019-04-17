@@ -1,0 +1,152 @@
+# Title for page
+title: '`$`c`b~ ~ ~ Fight ~ ~ ~´b´c`0'
+
+# text when you encounter a creature
+encounter: '`@You have encountered `^{name}`0 which lunges at you with `%{weapon}`0!`0`n'
+
+# Category of creature
+category: '`#Category: {name}`0'
+
+# Text for battle
+battle:
+    result: '`2Result of the `i{n,number}´i rounds`0'
+    end: '`2End of Battle`0'
+    untarget: '`5{creatureName} cannot be selected as target.`0`n'
+    flee:
+        one: '`5{creatureName} flees in panic.`0`n'
+        multi: '`5All other other enemies flee in panic as `^{creatureName}`0 falls to the ground.`0`n'
+
+# Text for combat
+combat:
+    ally:
+        miss: '`4You try to hit `^{creatureName}`0 but `$MISS`0!`0`n'
+        riposted: '`4You try to hit `^{creatureName}`0 but are `$RIPOSTED`0 for `${damage,number}`0 points of damage!`0`n'
+        damage: '`4You hit `^{creatureName}`0 for `^{damage,number}`0 points of damage!`0`n'
+    enemy:
+        miss: '`4`^{creatureName}`0 tries to hit you but `^MISSES`0!`0`n'
+        riposted: '`4`^{creatureName}`0 tries to hit you but you `^RIPOSTE`0 for `^{damage,number}`0 points of damage!`0`n'
+        damage: '`4`^{creatureName}`0 hits you for `${damage,number}`0 points of damage!`0`n'
+        spawn: '`2`^{creatureName}`0 summons `^{summonName}`0 for help!`0`n'
+        heal:
+            self: '`2`^{creatureName}`0 heals itself for `^{damage,number}`0 hitpoints.`0'
+            other: '`2`^{creatureName}`0 heal `^{target}`0 for `^{damage,number}`0 hitpoints.`0'
+    companion:
+        die: '`5Your companion catches his last breath before it dies.`0'
+        fight:
+            attack:
+                miss: '`4`^{companionName}`0 tries to hit `${creatureName}`0 but `^MISSES`0!`0`n'
+                riposted: '`4`^{companionName}`0 tries to hit `${creatureName}`0 but {creatureName} `^RIPOSTES`0 for `^{damage,number}`0 points of damage!`0`n'
+                damage: '`4`^{companionName}`0 hits `${creatureName}`0 for `${damage,number}`0 points of damage!`0`n'
+            defend:
+                miss: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but `^MISSES`0!`0`n'
+                riposted: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but {companionName} `^RIPOSTES`0 for `^{damage,number}`0 points of damage!`0`n'
+                damage: '`4`${creatureName}`0 hits `^{companionName}`0 for `${damage,number}`0 points of damage!`0`n'
+        heal:
+            player: '`){companionName} heals your wounds. You regenerate {damage,number} hitpoints.`0`n'
+            companion: "`){companionName} heals {target}'s wounds. {target} regenerates {damage,number} hitpoints.`0`n"
+            defend:
+                miss: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but `^MISSES`0!`0`n'
+                riposted: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but {companionName} `^RIPOSTES`0 for `^{damage,number}`0 points of damage!`0`n'
+                damage: '`4`${creatureName}`0 hits `^{companionName}`0 for `${damage,number}`0 points of damage!`0`n'
+        defend:
+            attack:
+                miss: '`4`^{companionName}`0 tries to hit `${creatureName}`0 but `^MISSES`0!`0`n'
+                riposted: '`4`^{companionName}`0 tries to hit `${creatureName}`0 but {creatureName} `^RIPOSTES`0 for `^{damage,number}`0 points of damage!`0`n'
+                damage: '`4`^{companionName}`0 hits `${creatureName}`0 for `${damage,number}`0 points of damage!`0`n'
+            defend:
+                miss: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but `^MISSES`0!`0`n'
+                riposted: '`4`${creatureName}`0 tries to hit `^{companionName}`0 but {companionName} `^RIPOSTES`0 for `^{damage,number}`0 points of damage!`0`n'
+                damage: '`4`${creatureName}`0 hits `^{companionName}`0 for `${damage,number}`0 points of damage!`0`n'
+        magic:
+            miss: '`){companionName} shoots a magical arrow at {creatureName} but misses.`0`n'
+            damage: '`){companionName} shoots a magical arrow at {creatureName} and deals {damage,number} damage.`0`n'
+    start:
+        surprised:
+            no: '`b`$Your skill allows you to get the first attack!`0´b`n`n'
+            pvp: "`b`$`^{player}`0's skill allows them to get the first round of attack!`0´b`n`n"
+            pve: '`b`$`^{creatureName}`0 surprises you and gets the first round of attack!`0´b`n`n'
+            multiple: '`b`$`^YOUR ENEMIES`0 surprise you and get the first round of attack!`0´b`n`n'
+    end:
+        slain: '`b`$You have slain {creatureName}!`0´b`n'
+        tormented: '`b`$You have tormented {creatureName}!`0´b`n'
+        flawless: '`n`c`b`&~~ Flawless Fight! ~~`0´b´c'
+        defeated:
+            die: '`&`bYou have been defeated by `%{creatureName}`0!`0´b`n'
+            lost:
+                exp: '`4{percent,percent} of experience has been lost!`0´b`n'
+                gold: '`4All gold on hand has been lost!`0`n'
+            tomorrow:
+                forest: 'You may begin fighting again tomorrow.'
+                graveyard: 'You may not torment any more souls today.'
+        negative.hitpoints:
+            - 'With your dying breath you spy a small stand of mushrooms off to the side.'
+            - 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.'
+            - 'Even raw they have some restorative properties.`n'
+        get:
+            gem: '`&You find A GEM!`0`n'
+            gold: '`#You receive `^{gold.number}`0 gold!`0`n'
+            torment: '`c`b`$You receive an extra torment!`0´b´c'
+            stamina: '`c`b`$You receive some stamina!`0´b´c'
+            turn: '`c`b`$You receive an extra turn!`0´b´c'
+        forget:
+            stamina: '`c`$A more difficult fight would have yielded some stamina.`0´c`n'
+            torment: '`c`$A more difficult fight would have yielded an extra torment.`0´c`n'
+            turn: '`c`$A more difficult fight would have yielded an extra turn.`0´c`n'
+        experience:
+            forest:
+                bonus:
+                    - '`#***Because of the difficult nature of this fight, you are awarded an additional `^{bonus,number}`0 experience!`0`n'
+                    - '{calculate,select,
+                            true{`#({exp,number} + {bonus,number} = {totalExp, number})`0}
+                            other{}
+                        }'
+                penalize:
+                    - '`#***Because of the simplistic nature of this fight, you are penalized `^{bonus,number}`0 experience!`0`n'
+                    - '{calculate,select,
+                            true{`#({exp,number} - {bonus,number} = {totalExp, number})`0}
+                            other{}
+                        }'
+                instant.exp: '`#During this fight you received `^{experience}`0 total experience!`0`n`0'
+                total.exp: '`#You receive `^{experience,number}`0 total experience!`0`n'
+            graveyard:
+                bonus: '`#***Because of the difficult nature of this fight, you are awarded an additional `^{bonus,number}`0 favor!`n ({exp,number} + {bonus,number} = {totalExp,number})`0'
+                penalize: '`#***Because of the simplistic nature of this fight, you are penalized `^%s`# favor! `n(%s - %s = %s)'
+                total.favor: '`#You receive `^{favor,number}`0 favor with `${overlord}`0!`0`n'
+
+# Text for skills
+skills:
+    power.move:
+        mega: '`&`bYou execute a `%MEGA`0 power move!!!´b`0`n'
+        double: '`&`bYou execute a `^DOUBLE`0 power move!!!´b`0`n'
+        power: '`&`bYou execute a power move!!!´b`0`n'
+        minor: '`7`bYou execute a minor power move!´b`0`n'
+    buffs:
+        gods:
+            suspended: '`&The gods have suspended some of your enhancements!`0`n'
+            restored: '`&The gods have restored all suspended enhancements.`0`n`n'
+    bodyguard:
+        name: '`&Bodyguard`0'
+        startmsg: "`${badguy}'s bodyguard protects them!`0"
+        wearoff: 'The bodyguard seems to have fallen asleep.'
+    godmode:
+        name: '`&GOD MODE`0'
+        wearoff: 'You feel mortal again.'
+        startmsg: '`&`bYou feel godlike.´b`0'
+    companion:
+        suspended: '`&Your companions stand back during this fight!`0`n'
+        restored: '`&Your companions return to stand by your side!`0`n'
+
+# Text for battle bars
+battlebars:
+    unknownhp: '???'
+    alive:
+        hitpoints: 'Hitpoints'
+        health: '`^Health`0'
+    death:
+        hitpoints: 'Soulpoints'
+        health: '`)Soul`0'
+        player: 'Soul of {name}'
+    who:
+        enemy: '`$Enemy`0'
+        player: '`!You`0'
+        companion: '`^Companion`0'
