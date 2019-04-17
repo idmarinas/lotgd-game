@@ -21,6 +21,7 @@ use Zend\Hydrator\ClassMethods;
 class AccountsRepository extends DoctrineRepository
 {
     use Account\Bans;
+    use Account\Character;
     use Account\Login;
     use Account\Superuser;
     use Account\User;
