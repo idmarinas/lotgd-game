@@ -14,6 +14,7 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Tracy\Debugger;
 
 class CharactersRepository extends DoctrineRepository
 {
@@ -39,7 +40,7 @@ class CharactersRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
@@ -68,7 +69,7 @@ class CharactersRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return [];
         }
