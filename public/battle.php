@@ -121,10 +121,15 @@ elseif ('newtarget' == $op)
 
                     if (true === $badguy['cannotbetarget'])
                     {
-                        $msg = '{badguy} cannot be selected as target.';
+                        $msg = 'battle.untarget';
                     }
 
-                    $lotgdBattleContent['msg'][] = substitute_array("`5{$msg}`0`n");
+                    $lotgdBattleContent['msg'][] = [
+                        $msg,
+                        [
+                            'creatureName' => $badguy['creaturename']
+                        ]
+                    ];
                 }
             }
         }
@@ -172,7 +177,7 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
     if (count($enemies) > 1)
     {
         $surprised = true;
-        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = '`b`^YOUR ENEMIES`$ surprise you and get the first round of attack!`0´b`n`n';
+        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = 'battle.combat.start.surprised.multiple';
     }
     else
     {
@@ -203,17 +208,27 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
 
             if (! $surprised)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = '`b`$Your skill allows you to get the first attack!`0´b`n`n';
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = 'battle.combat.start.surprised.no';
             }
             else
             {
                 if ('pvp' == $options['type'])
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ["`b`^%s`\$'s skill allows them to get the first round of attack!`0´b`n`n", $enemies[0]['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                        'battle.combat.start.surprised.pvp',
+                        [
+                            'player' => $enemies[0]['creaturename']
+                        ]
+                    ];
                 }
                 else
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`b`^%s`$ surprises you and gets the first round of attack!`0´b`n`n', $enemies[0]['creaturename']];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                        'battle.combat.start.surprised.pve',
+                        [
+                            'creatureName' => $enemies[0]['creaturename']
+                        ]
+                    ];
                 }
 
                 $op = 'run';
@@ -658,14 +673,19 @@ if ('newtarget' != $op)
                     {
                         if (true === $badguy['fleesifalone'])
                         {
-                            $msg = '{badguy} flees in panic.';
+                            $msg = 'battle.flee.one';
                         }
                         else
                         {
                             $msg = $badguy['fleesifalone'];
                         }
 
-                        $msg = substitute_array("`5{$msg}`0`n");
+                        $msg = [
+                            $msg,
+                            [
+                                'creatureName' => $badguy['creaturename']
+                            ]
+                        ];
                     }
 
                     $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
@@ -687,13 +707,18 @@ if ('newtarget' != $op)
             {
                 if (true === $badguy['essentialleader'])
                 {
-                    $msg = 'All other other enemies flee in panic as `^{badguy}`5 falls to the ground.';
+                    $msg = 'battle.flee.multi';
                 }
                 else
                 {
                     $msg = $badguy['essentialleader'];
                 }
-                $msg = substitute_array("`5{$msg}`0`n");
+                $msg = [
+                    $msg,
+                    [
+                        'creatureName' => $badguy['creaturename']
+                    ]
+                ];
                 $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = $msg;
             }
         }

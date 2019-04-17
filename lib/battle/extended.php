@@ -22,12 +22,12 @@ function prepare_data_battlebars(array $enemies)
     $barDisplay = (int) ($user['prefs']['forestcreaturebar'] ?? getsetting('forestcreaturebar', 0));
     $user['prefs']['forestcreaturebar'] = $barDisplay;
 
-    $hitpointstext = 'Soulpoints';
-    $healthtext = '`)Soul`0';
+    $hitpointstext = 'battlebars.death.hitpoints';
+    $healthtext = 'battlebars.death.health';
     if ($user['alive'])
     {
-        $hitpointstext = 'Hitpoints';
-        $healthtext = '`^Health`0';
+        $hitpointstext = 'battlebars.alive.hitpoints';
+        $healthtext = 'battlebars.alive.hitpoints';
     }
 
     $data['enemies'] = [];
@@ -42,7 +42,7 @@ function prepare_data_battlebars(array $enemies)
 
         if (isset($badguy['hidehitpoints']) && true == $badguy['hidehitpoints'])
         {
-            $maxhealth = $health = '???';
+            $maxhealth = $health = 'battlebars.unknownhp';
         }
         else
         {
@@ -53,7 +53,7 @@ function prepare_data_battlebars(array $enemies)
         $data['enemies'][$index] = [
             'showbar' => false,
             'showhptext' => true,
-            'who' => '`$Enemy`0',
+            'who' => 'battlebars.who.enemy',
             'isTarget' => (isset($badguy['istarget']) && $badguy['istarget'] && $enemycounter > 1),
             'name' => $ccode.$badguy['creaturename'].$ccode,
             'level' => $badguy['creaturelevel'],
@@ -84,7 +84,7 @@ function prepare_data_battlebars(array $enemies)
     }
     else
     {
-        $hitpointstext = ['Soul of %s', $user['name']];
+        $hitpointstext = ['battlebars.death.player', ['name' => $user['name']]];
         $dead = true;
         $maxsoul = 50 + 10 * $user['level'] + $user['dragonkills'] * 2;
     }
@@ -92,7 +92,7 @@ function prepare_data_battlebars(array $enemies)
     $data['user'] = [
         'showbar' => false,
         'showhptext' => true,
-        'who' => translate_inline('`!You`0'),
+        'who' => 'battlebars.who.player',
         'isTarget' => false,
         'name' => $hitpointstext,
         'level' => $user['level'],
@@ -122,7 +122,7 @@ function prepare_data_battlebars(array $enemies)
 
         if (isset($companion['hidehitpoints']) && true == $companion['hidehitpoints'])
         {
-            $maxhealth = $health = '???';
+            $maxhealth = $health = 'battlebars.unknownhp';
         }
         else
         {
@@ -133,7 +133,7 @@ function prepare_data_battlebars(array $enemies)
         $data['companions'][$index] = [
             'showbar' => false,
             'showhptext' => true,
-            'who' => translate_inline('`^Companion`0'),
+            'who' => 'battlebars.who.companion',
             'isTarget' => (isset($companion['istarget']) && $companion['istarget'] && $enemycounter > 1),
             'name' => $ccode.$companion['name'].$ccode,
             'level' => $session['user']['level'],
@@ -250,7 +250,7 @@ function suspend_companions($susp, $nomsg = null)
     {
         if (false === $nomsg || null === $nomsg)
         {
-            $nomsg = '`&Your companions stand back during this fight!`n';
+            $nomsg = 'skills.companion.suspended';
         }
 
         if ($nomsg)
@@ -293,7 +293,7 @@ function unsuspend_companions($susp, $nomsg = null)
     {
         if (null === $nomsg || false === $nomsg)
         {
-            $nomsg = '`&Your companions return to stand by your side!`n';
+            $nomsg = 'skills.companion.restored';
         }
 
         if ($nomsg)
@@ -366,7 +366,7 @@ function autosettarget($localenemies)
 function report_companion_move($companion, $activate = 'fight')
 {
     global $badguy, $session, $creatureattack, $creatureatkmod, $adjustment;
-    global $creaturedefmod, $defmod, $atkmod, $atk, $def, $countround, $defended, $needtosstopfighting, $lotgdBattleContent;
+    global $creaturedefmod, $defmod, $atkmod, $atk, $def, $count, $countround, $defended, $needtosstopfighting, $lotgdBattleContent;
 
     if (isset($companion['suspended']) && true == $companion['suspended'])
     {
@@ -382,16 +382,36 @@ function report_companion_move($companion, $activate = 'fight')
 
         if (0 == $damage_done)
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 tries to hit %s but `$MISSES!`n', $companion['name'], $badguy['creaturename']];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'combat.companion.fight.attack.miss',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename']
+                ]
+            ];
         }
         elseif ($damage_done < 0)
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 tries to hit %s but %s `$RIPOSTES`4 for `^%s`4 points of damage!`n', $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'combat.companion.fight.attack.riposted',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => abs($damage_done)
+                ]
+            ];
             $companion['hitpoints'] += $damage_done;
         }
         else
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 hits %s for `^%s`4 points of damage!`n', $companion['name'], $badguy['creaturename'], $damage_done];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'combat.companion.fight.attack.damage',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => $damage_done
+                ]
+            ];
             $badguy['creaturehealth'] -= $damage_done;
         }
 
@@ -399,16 +419,36 @@ function report_companion_move($companion, $activate = 'fight')
         {
             if (0 == $damage_received)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but `^MISSES!`n', $badguy['creaturename'], $companion['name']];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.fight.defend.miss',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name']
+                    ]
+                ];
             }
             elseif ($damage_received < 0)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.fight.defend.riposted',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => abs($damage_received)
+                    ]
+                ];
                 $badguy['creaturehealth'] += $damage_received;
             }
             else
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 hits `$%s`4 for `$%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $damage_received];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.fight.defend.damage',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => $damage_received
+                    ]
+                ];
                 $companion['hitpoints'] -= $damage_received;
             }
         }
@@ -426,13 +466,15 @@ function report_companion_move($companion, $activate = 'fight')
             $hptoheal = min($companion['abilities']['heal'], $session['user']['maxhitpoints'] - $session['user']['hitpoints']);
             $session['user']['hitpoints'] += $hptoheal;
             $companion['used'] = true;
-            $msg = isset($companion['healmsg']) ? $companion['healmsg'] : '';
+            $msg = $companion['healmsg'] ?? '';
 
-            if ('' == $msg)
-            {
-                $msg = '{companion} heals your wounds. You regenerate {damage} hitpoints.';
-            }
-            $msg = substitute_array('`)'.$msg.'`0`n', ['{companion}', '{damage}'], [$companion['name'], $hptoheal]);
+            $msg = [
+                $msg ?: 'combat.companion.heal.player',
+                [
+                    'companionName' => $companion['name'],
+                    'damage' => $hptoheal
+                ]
+            ];
 
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
@@ -462,11 +504,14 @@ function report_companion_move($companion, $activate = 'fight')
                     $companion['used'] = true;
                     $msg = $companion['healcompanionmsg'] ?? '';
 
-                    if ('' == $msg)
-                    {
-                        $msg = "{companion} heals {target}'s wounds. {target} regenerates {damage} hitpoints.";
-                    }
-                    $msg = substitute_array('`)'.$msg.'`0`n', ['{companion}', '{damage}', '{target}'], [$companion['name'], $hptoheal, $mycompanion['name']]);
+                    $msg = [
+                        $msg ?: 'combat.companion.heal.companion',
+                        [
+                            'companionName' => $companion['name'],
+                            'damage' => $hptoheal,
+                            'target' => $mycompanion['name']
+                        ]
+                    ];
 
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     $healed = true;
@@ -508,11 +553,14 @@ function report_companion_move($companion, $activate = 'fight')
                                 $companion['used'] = true;
                                 $msg = $companion['healcompanionmsg'] ?? '';
 
-                                if ('' == $msg)
-                                {
-                                    $msg = "{companion} heals {target}'s wounds. {target} regenerates {damage} hitpoints.";
-                                }
-                                $msg = substitute_array('`)'.$msg.'`0`n', ['{companion}', '{damage}', '{target}'], [$companion['name'], $hptoheal, $mycompanion['name']]);
+                                $msg = [
+                                    $msg ?: 'combat.companion.heal.companion',
+                                    [
+                                        'companionName' => $companion['name'],
+                                        'damage' => $hptoheal,
+                                        'target' => $mycompanion['name']
+                                    ]
+                                ];
 
                                 $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
@@ -527,24 +575,43 @@ function report_companion_move($companion, $activate = 'fight')
         unset($mynewcompanions, $mycompanions);
 
         $roll = rollcompaniondamage($companion);
-        $damage_done = $roll['creaturedmg'];
         $damage_received = $roll['selfdmg'];
 
         if ($badguy['creaturehealth'] >= 0)
         {
             if (0 == $damage_received)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but `^MISSES!`n', $badguy['creaturename'], $companion['name']];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.heal.defend.miss',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name']
+                    ]
+                ];
             }
             elseif ($damage_received < 0)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'creature.companion.heal.defend.reposted',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => abs($damage_received)
+                    ]
+                ];
 
                 $badguy['creaturehealth'] += $damage_received;
             }
             else
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 hits `$%s`4 for `$%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $damage_received];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'creature.companion.heal.defend.damage',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => $damage_received
+                    ]
+                ];
 
                 $companion['hitpoints'] -= $damage_received;
             }
@@ -560,17 +627,37 @@ function report_companion_move($companion, $activate = 'fight')
 
         if (0 == $damage_done)
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 tries to hit %s but `^MISSES!`n', $companion['name'], $badguy['creaturename']];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'comabat.companion.defend.attack.miss',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename']
+                ]
+            ];
         }
         elseif ($damage_done < 0)
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 tries to hit %s but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n', $companion['name'], $badguy['creaturename'], $badguy['creaturename'], abs($damage_done)];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'combat.companion.defend.attack.riposted',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => abs($damage_done)
+                ]
+            ];
 
             $companion['hitpoints'] += $damage_done;
         }
         else
         {
-            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`^%s`4 hits %s for `$%s`4 points of damage!`n', $companion['name'], $badguy['creaturename'], $damage_done];
+            $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                'combat.companion.defend.attack.damage',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => $damage_done
+                ]
+            ];
 
             $badguy['creaturehealth'] -= $damage_done;
         }
@@ -579,17 +666,37 @@ function report_companion_move($companion, $activate = 'fight')
         {
             if (0 == $damage_received)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but `^MISSES!`n', $badguy['creaturename'], $companion['name']];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.defend.defend.miss',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name']
+                    ]
+                ];
             }
             elseif ($damage_received < 0)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 tries to hit `$%s`4 but %s `^RIPOSTES`4 for `^%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $companion['name'], abs($damage_received)];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.defend.defend.riposted',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => abs($damage_received)
+                    ]
+                ];
 
                 $badguy['creaturehealth'] += $damage_received;
             }
             else
             {
-                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`4 hits `$%s`4 for `$%s`4 points of damage!`n', $badguy['creaturename'], $companion['name'], $damage_received];
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.companion.defend.defend.damage',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'companionName' => $companion['name'],
+                        'damage' => $damage_received
+                    ]
+                ];
                 $companion['hitpoints'] -= $damage_received;
             }
         }
@@ -603,27 +710,30 @@ function report_companion_move($companion, $activate = 'fight')
 
         if (0 == $damage_done)
         {
-            $msg = $companion['magicfailmsg'];
+            $msg = $companion['magicfailmsg'] ?? '';
 
-            if ('' == $msg)
-            {
-                $msg = '{companion} shoots a magical arrow at {badguy} but misses.';
-            }
-            $msg = substitute_array('`)'.$msg.'`0`n', ['{companion}'], [$companion['name']]);
+            $msg = [
+                $msg ?: 'combat.companion.magic.miss',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename']
+                ]
+            ];
 
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
         else
         {
-            if (isset($companion['magicmsg']))
-            {
-                $msg = $companion['magicmsg'];
-            }
-            else
-            {
-                $msg = '{companion} shoots a magical arrow at {badguy} and deals {damage} damage.';
-            }
-            $msg = substitute_array('`)'.$msg.'`0`n', ['{companion}', '{damage}'], [$companion['name'], $damage_done]);
+            $msg = $companion['magicmsg'] ?? '';
+
+            $msg = [
+                $msg ?: 'combat.companion.magic.damage',
+                [
+                    'companionName' => $companion['name'],
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => $damage_done
+                ]
+            ];
 
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
@@ -644,13 +754,10 @@ function report_companion_move($companion, $activate = 'fight')
 
     if ($companion['hitpoints'] <= 0)
     {
+        $msg = 'combat.companion.die';
         if (isset($companion['dyingtext']) && $companion['dyingtext'] > '')
         {
             $msg = $companion['dyingtext'];
-        }
-        else
-        {
-            $msg = '`5Your companion catches his last breath before it dies.';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`){$msg}`0`n", ['{companion}'], [$companion['name']]);
@@ -801,7 +908,13 @@ function battle_spawn($creature)
         if ($row = DB::fetch_assoc($result))
         {
             $newenemies[$nextindex] = $row;
-            $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`2 summons `^%s`2 for help!`n', $badguy['creaturename'], $row['creaturename']];
+            $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                'combat.enemy.spawn',
+                [
+                    'creatureName' => $badguy['creaturename'],
+                    'summonName' => $row['creaturename']
+                ]
+            ];
         }
     }
     elseif (is_array($creature))
@@ -827,7 +940,13 @@ function battle_heal($amount, $target = false)
         if (false === $target)
         {
             $badguy['creaturehealth'] += $amount;
-            $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`2 heals itself for `^%s`2 hitpoints.', $badguy['creaturename'], $amount];
+            $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                'combat.enemy.heal.self',
+                [
+                    'creatureName' => $badguy['creaturename'],
+                    'damage' => $amount
+                ]
+            ];
         }
         else
         {
@@ -837,16 +956,27 @@ function battle_heal($amount, $target = false)
                 if (false == $newenemies[$target]['dead'])
                 {
                     $newenemies[$target]['creaturehealth'] += $amount;
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.', $badguy['creaturename'], $newenemies[$target]['creaturename'], $amount];
+                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                        'combat.enemy.heal.other',
+                        [
+                            'cretureName' => $badguy['creaturename'],
+                            'target' => $newenemies[$target]['creaturename'],
+                            'damage' => $amount
+                        ]
+                    ];
                 }
             }
-            else
+            elseif (false == $enemies[$target]['dead'])
             {
-                if (false == $enemies[$target]['dead'])
-                {
-                    $enemies[$target]['creaturehealth'] += $amount;
-                    $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = ['`^%s`2 heal `^%s`2 for `^%s`2 hitpoints.', $badguy['creaturename'], $enemies[$target]['creaturename'], $amount];
-                }
+                $enemies[$target]['creaturehealth'] += $amount;
+                $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
+                    'combat.enemy.heal.other',
+                    [
+                        'creatureName' => $badguy['creaturename'],
+                        'target' => $enemies[$target]['creaturename'],
+                        'damage' => $amount
+                    ]
+                ];
             }
         }
     }

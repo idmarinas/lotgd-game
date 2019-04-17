@@ -1,0 +1,97 @@
+{% translate_default_domain 'page-battle' %}
+
+{{ 'title'|t|colorize }}
+
+{# Information of criature/s #}
+<div class="ui items">
+    {% for badguy in enemies %}
+        <div class="item">
+            {% if badguy.creatureimage %}
+                <div class="ui tiny image">
+                    <img src="{{ badguy.creatureimage }}" alt="{{ badguy.creaturename }}">
+                </div>
+            {% endif %}
+            <div class="content">
+                <div>{{ 'encounter'|t({ 'name': badguy.creaturename, 'weapon': badguy.creatureweapon})|colorize }}</div>
+                {% if badguy.creaturecategory %}
+                    <div class="meta">{{ 'category'|t({'name': badguy.creaturecategory})|colorize }}</div>
+                {% endif %}
+                {% if badguy.creaturedescription %}
+                    <div class="description">
+                        <p>{{ badguy.creaturedescription|t|colorize }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{# Show HP of combatants #}
+{% for enemy in battlebars.start.enemies %}
+    {{ include_theme('page/battle/combathealthbar.twig', enemy) }}
+{% endfor %}
+{{ include_theme('page/battle/combathealthbar.twig', battlebars.start.player) }}
+{% for companion in battlebars.start.companions %}
+    {{ include_theme('page/battle/combathealthbar.twig', companion) }}
+{% endfor %}
+
+{# Information when battle start #}
+{% for msg in battlestart %}
+    {{ msg|t|colorize }}
+{% endfor %}
+
+{# Rounds results #}
+{% if battlerounds|length %}
+    <h5 class="ui top attached header">{{ 'battle.result'|t({'n': battlerounds|length})|colorize }}</h5>
+    <div class="ui {{ battleend ? '' : 'bottom' }} attached divided segment">
+        <div class="ui divided list">
+            {% for rounds in battlerounds %}
+                <div class="item">
+                    <div class="ui divided stackable two column grid">
+                        <div class="column">
+                            {% for allied in rounds.allied %}
+                                {% if allied is array %}
+                                    {{ allied[0]|t(allied[1])|colorize }}
+                                {% else %}
+                                    {{ allied|t|colorize }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="column">
+                            {% for enemy in rounds.enemy %}
+                                {% if enemy is array %}
+                                    {{ enemy[0]|t(enemy[1])|colorize }}
+                                {% else %}
+                                    {{ enemy|t|colorize }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{# Information of end of battle #}
+{% if battleend %}
+    <h5 class="ui attached header">{{ 'battle.end'|t|colorize }}</h5>
+    <div class="ui bottom attached divided segment">
+        {% for msg in battleend %}
+            {% if msg is array %}
+                {{ msg[0]|t(msg[1])|colorize }}
+            {% else %}
+                {{ msg|t|colorize }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{# Show HP of combatants #}
+{% for enemy in battlebars.end.enemies %}
+    {{ include_theme('page/battle/combathealthbar.twig', enemy) }}
+{% endfor %}
+{{ include_theme('page/battle/combathealthbar.twig', battlebars.end.player) }}
+{% for companion in battlebars.end.companions %}
+    {{ include_theme('page/battle/combathealthbar.twig', companion) }}
+{% endfor %}

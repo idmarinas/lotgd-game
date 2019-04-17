@@ -117,7 +117,7 @@ function rolldamage()
         $selfdmg = -abs($selfdmg);
     }
 
-    return ['creaturedmg' => (isset($creaturedmg) ? $creaturedmg : 0), 'selfdmg' => (isset($selfdmg) ? $selfdmg : 0)];
+    return ['creaturedmg' => ($creaturedmg ?? 0), 'selfdmg' => ($selfdmg ?? 0)];
 }
 
 function report_power_move($crit, $dmg)
@@ -132,22 +132,22 @@ function report_power_move($crit, $dmg)
 
         if ($crit > $uatk * 4)
         {
-            $msg = '`&`bYou execute a `%MEGA`& power move!!!´b`n';
+            $msg = 'skills.power.move.mega';
             $power = 1;
         }
         elseif ($crit > $uatk * 3)
         {
-            $msg = '`&`bYou execute a `^DOUBLE`& power move!!!´b`n';
+            $msg = 'skills.power.move.double';
             $power = 1;
         }
         elseif ($crit > $uatk * 2)
         {
-            $msg = '`&`bYou execute a power move!!!´b`0`n';
+            $msg = 'skills.power.move.power';
             $power = 1;
         }
         elseif ($crit > ($uatk * 1.5))
         {
-            $msg = '`7`bYou execute a minor power move!´b`0`n';
+            $msg = 'skills.power.move.minor';
             $power = 1;
         }
 
@@ -192,7 +192,7 @@ function suspend_buffs($susp = false, $msg = false)
     {
         if (false === $msg)
         {
-            $msg = '`&The gods have suspended some of your enhancements!`n';
+            $msg = 'skills.buffs.gods.suspended';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = sanitize_mb($msg);
@@ -211,7 +211,7 @@ function suspend_buff_by_name($name, $msg = false)
         // And notify.
         if (false === $msg)
         {
-            $msg = '`&The gods have suspended some of your enhancements!`n';
+            $msg = 'skills.buffs.gods.suspended';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -230,7 +230,7 @@ function unsuspend_buff_by_name($name, $msg = false)
         // And notify.
         if (false === $msg)
         {
-            $msg = '`&The gods have restored all suspended enhancements.`n`n';
+            $msg = 'skills.buffs.gods.restored';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -268,7 +268,7 @@ function unsuspend_buffs($susp = false, $msg = false)
     {
         if (false === $msg)
         {
-            $msg = '`&The gods have restored all suspended enhancements.`n`n';
+            $msg = 'skills.buffs.gods.restored';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -311,17 +311,16 @@ function apply_bodyguard($level)
         }
 
         apply_buff('bodyguard', [
-            'startmsg' => "`\${badguy}'s bodyguard protects them!`0",
-            'name' => '`&Bodyguard`0',
-            'wearoff' => 'The bodyguard seems to have fallen asleep.',
+            'startmsg' => 'skills.bodyguard.startmsg',
+            'name' => 'skills.bodyguard.name',
+            'wearoff' => 'skills.bodyguard.wearoff',
             'badguyatkmod' => $badguyatkmod,
             'defmod' => $defmod,
             'rounds' => $rounds,
             'allowinpvp' => 1,
             'expireafterfight' => 1,
             'schema' => 'pvp'
-        ]
-        );
+        ]);
     }
 }
 
@@ -332,13 +331,13 @@ function apply_skill($skill, $l)
     if ('godmode' == $skill)
     {
         apply_buff('godmode', [
-            'name' => '`&GOD MODE`0',
+            'name' => 'skills.godmode.name',
             'rounds' => 1,
-            'wearoff' => 'You feel mortal again.',
+            'wearoff' => 'skills.godmode.wearoff',
             'atkmod' => 25,
             'defmod' => 25,
             'invulnerable' => 1,
-            'startmsg' => '`&`bYou feel godlike.´b',
+            'startmsg' => 'skill.godmode.startmsg',
             'schema' => 'skill'
         ]);
     }
