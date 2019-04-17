@@ -63,7 +63,7 @@
                 </td>
                 <td>{{ (warrior.race ?: constant('RACE_UNKNOWN'))|t }}</td>
                 <td>{{ 'table.warriors.sex'|t({'sex': warrior.sex})|colorize }}</td>
-                <td>{{ warrior.laston|relativedate }}</td>
+                <td>{{ warrior.laston|relative_date }}</td>
             </tr>
         {% else %}
             <tr>
