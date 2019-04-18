@@ -40,9 +40,9 @@ try
 {
     LotgdSession::bootstrapSession();
 }
-catch (\Exception $ex)
+catch (\Throwable $th)
 {
-    \Tracy\Debugger::log($ex);
+    \Tracy\Debugger::log($th);
 
     LotgdSession::bootstrapSession(true);
 }
