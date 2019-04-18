@@ -177,13 +177,8 @@ trait Bans
                 ->setParameter('acct', $accountId)
             ;
 
-            $cosa = $query->getQuery();
-
-            bdump($cosa);
-            bdump($cosa->getSql());
-
-            return $cosa
-            ->getResult()
+            return $query->getQuery()
+                ->getResult()
             ;
         }
         catch (\Throwable $th)
