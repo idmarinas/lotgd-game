@@ -35,11 +35,14 @@ use Phan\Issue;
  */
 return [
 
-    // Supported values: `'7.0'`, `'7.1'`, `'7.2'`, `'7.3'`, `null`.
+    // Supported values: `'5.6'`, `'7.0'`, `'7.1'`, `'7.2'`, `'7.3'`, `'7.4'`, `null`.
     // If this is set to `null`,
     // then Phan assumes the PHP version which is closest to the minor version
     // of the php executable used to execute Phan.
-    // Automatically inferred from composer.json requirement for "php" of "^7.0"
+    //
+    // Note that the **only** effect of choosing `'5.6'` is to infer that functions removed in php 7.0 exist.
+    // (See `backward_compatibility_checks` for additional options)
+    // Automatically inferred from composer.json requirement for "php" of "^7.1"
     'target_php_version' => '7.2',
 
     // If enabled, missing properties will be created when
@@ -84,24 +87,30 @@ return [
     // (subset of `scalar_implicit_cast`)
     'scalar_implicit_partial' => [],
 
-    // If enabled, Phan will warn if **any** type in a method's object expression
+    // If enabled, Phan will warn if **any** type in a method invocation's object
     // is definitely not an object,
     // or if **any** type in an invoked expression is not a callable.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
     'strict_method_checking' => false,
 
-    // If enabled, Phan will warn if **any** type in the argument's type
-    // cannot be cast to a type in the parameter's expected type.
+    // If enabled, Phan will warn if **any** type in the argument's union type
+    // cannot be cast to a type in the parameter's expected union type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
     'strict_param_checking' => false,
 
-    // If enabled, Phan will warn if **any** type in the return value's type
-    // cannot be cast to a type in the declared return type.
+    // If enabled, Phan will warn if **any** type in a returned value's union type
+    // cannot be cast to the declared return type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
     'strict_return_checking' => false,
+
+    // If enabled, Phan will warn if **any** type in a property assignment's union type
+    // cannot be cast to a type in the property's declared union type.
+    // Setting this to true will introduce numerous false positives
+    // (and reveal some bugs).
+    'strict_property_checking' => false,
 
     // If true, seemingly undeclared variables in the global
     // scope will be ignored.
@@ -200,9 +209,9 @@ return [
     // This has a few known false positives, e.g. for loops or branches.
     'unused_variable_detection' => false,
 
-    // If true, this run a quick version of checks that takes less
+    // If true, this runs a quick version of checks that takes less
     // time at the cost of not running as thorough
-    // an analysis. You should consider setting this
+    // of an analysis. You should consider setting this
     // to true only when you wish you had more **undiagnosed** issues
     // to fix in your code base.
     //
@@ -240,6 +249,14 @@ return [
     // E.g. rewrites `if ($a = value() && $a > 0) {...}`
     // into `$a = value(); if ($a) { if ($a > 0) {...}}`
     'simplify_ast' => true,
+
+    // If true, Phan will read `class_alias` calls in the global scope,
+    // then (1) create aliases from the *parsed* files if no class definition was found,
+    // and (2) emit issues in the global scope if the source or target class is invalid.
+    // (If there are multiple possible valid original classes for an aliased class name,
+    //  the one which will be created is unspecified.)
+    // NOTE: THIS IS EXPERIMENTAL, and the implementation may change.
+    'enable_class_alias_support' => true,
 
     // Enable or disable support for generic templated
     // class types.
@@ -353,11 +370,17 @@ return [
         'src/ajax/local',
         'src/core',
         'src/local',
-        'vendor/doctrine/orm/lib',
+        'vendor/beberlei/doctrineextensions/src',
+        'vendor/composer/semver/src',
+        'vendor/doctrine/orm/lib/Doctrine/ORM',
         'vendor/ezyang/htmlpurifier/library',
         'vendor/hellogerard/jobby/src',
         'vendor/jaxon-php/jaxon-core/src',
         'vendor/jaxon-php/jaxon-dialogs/src',
+        'vendor/macfja/tracy-doctrine-sql/lib',
+        'vendor/marioblazek/twig-byte-units-extension/src',
+        'vendor/phan/phan/src/Phan',
+        'vendor/snipe/banbuilder/src',
         'vendor/symfony/filesystem',
         'vendor/symfony/yaml',
         'vendor/tracy/tracy/src',
@@ -365,8 +388,8 @@ return [
         'vendor/twig/twig/src',
         'vendor/zendframework/zend-cache/src',
         'vendor/zendframework/zend-code/src',
-        'vendor/zendframework/zend-config/src',
         'vendor/zendframework/zend-config-aggregator/src',
+        'vendor/zendframework/zend-config/src',
         'vendor/zendframework/zend-db/src',
         'vendor/zendframework/zend-debug/src',
         'vendor/zendframework/zend-escaper/src',
@@ -374,6 +397,7 @@ return [
         'vendor/zendframework/zend-http/src',
         'vendor/zendframework/zend-hydrator/src',
         'vendor/zendframework/zend-i18n/src',
+        'vendor/zendframework/zend-log/src',
         'vendor/zendframework/zend-mail/src',
         'vendor/zendframework/zend-math/src',
         'vendor/zendframework/zend-paginator/src',
@@ -381,6 +405,7 @@ return [
         'vendor/zendframework/zend-servicemanager/src',
         'vendor/zendframework/zend-session/src',
         'vendor/zendframework/zend-stdlib/src',
+        'vendor/zendframework/zend-view/src',
     ],
 
     // A list of individual files to include in analysis
