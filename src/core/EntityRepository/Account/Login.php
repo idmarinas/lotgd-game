@@ -95,4 +95,33 @@ trait Login
             return false;
         }
     }
+
+    /**
+     * Get acctid from login.
+     *
+     * @param string $login
+     *
+     * @return void
+     */
+    public function getAcctIdFromLogin(string $login): int
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query->select('u.acctid')
+                ->where('u.login = :login')
+                ->setParameter('login', $login)
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
