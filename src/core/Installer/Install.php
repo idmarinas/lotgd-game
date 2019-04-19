@@ -32,7 +32,6 @@ class Install
 
     const TRANSLATOR_DOMAIN = 'app-installer';
     const DATA_DIR_INSTALL = __DIR__.'/data/install';
-    const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
     /**
      * Make a upgrade install, avoid in clean install.
@@ -69,7 +68,6 @@ class Install
                 }
 
                 $upgrade = new $class();
-
                 $upgrade->setDoctrine($this->getContainer(\Lotgd\Core\Db\Doctrine::class));
 
                 $step = 1;
@@ -147,7 +145,7 @@ class Install
         $filesystem = new Filesystem();
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         $files = array_map(
-            function ($value) { return self::DATA_DIR_INSTALL.'/'.$value; },
+            function ($value) { return self::DATA_DIR_INSTALL."/{$value}"; },
             $filesystem->listDir(self::DATA_DIR_INSTALL)
         );
 
