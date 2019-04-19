@@ -18,9 +18,10 @@ module.exports = {
             '!gulpfile.js',
             '!assets{,/**}',
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
+            'public/docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
+            '!semantic{,/**}',
             '!node_modules{,/**}',
             '!bower_components{,/**}',
-            '!semantic{,/**}',
             //-- Ignore because using composer to update all packages
             '!vendor{,/**}'
         ]
