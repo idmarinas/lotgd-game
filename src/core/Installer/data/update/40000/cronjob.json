@@ -1,0 +1,30 @@
+{
+    "method": "insert",
+	"table": "cronjob",
+    "entity": "Lotgd\\Core\\Entity\\Cronjob",
+	"rows":
+	[
+		{
+			"name": "lotgdLogoutAccounts",
+			"command": "cronjob/logout-accts",
+			"schedule": "*/15 * * * *",
+			"mailer": "sendmail",
+			"maxRuntime": null,
+			"smtpHost": null,
+			"smtpPort": null,
+			"smtpUsername": null,
+			"smtpPassword": null,
+			"smtpSender": "jobby@localhost",
+			"smtpSenderName": "Jobby",
+			"smtpSecurity": null,
+			"runAs": null,
+			"environment": null,
+			"runOnHost": null,
+			"output": null,
+			"dateFormat": "Y-m-d H:i:s",
+			"enabled": 1,
+			"haltDir": null,
+			"debug": 0
+		}
+	]
+}

@@ -72,4 +72,28 @@ trait Upgrade
     {
         return $this->upgradeVersion[$version] ?? false;
     }
+
+    /**
+     * Get all upgraded versions in actual install.
+     *
+     * @return array
+     */
+    public function getUpgradedVersion(): array
+    {
+        return $this->upgradeVersion;
+    }
+
+    /**
+     * Set all upgraded version in actual install.
+     *
+     * @param array $data
+     *
+     * @return self
+     */
+    public function setUpgradedVersion(array $data): self
+    {
+        $this->upgradeVersion = $data;
+
+        return $this;
+    }
 }

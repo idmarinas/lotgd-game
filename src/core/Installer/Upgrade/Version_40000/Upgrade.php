@@ -13,13 +13,15 @@
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40000;
 
-use Lotgd\Core\Output\Commentary;
 use Lotgd\Core\Installer\UpgradeAbstract;
+use Lotgd\Core\Output\Commentary;
 use Tracy\Debugger;
 use Zend\Hydrator\ClassMethods;
 
 class Upgrade extends UpgradeAbstract
 {
+    const VERSION_NUMBER = 40000;
+
     /**
      * Step 1: Rename tables "accounts" and "commentary" and create new tables.
      *
@@ -44,7 +46,6 @@ class Upgrade extends UpgradeAbstract
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'commentary'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'accounts'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'characters'], self::TRANSLATOR_DOMAIN);
-
 
             return true;
         }
@@ -79,7 +80,7 @@ class Upgrade extends UpgradeAbstract
                 foreach ($paginator as $row)
                 {
                     $row['info'] = unserialize($row['info']);
-                    $row = array_merge((array)$row, (array) $row['info']);
+                    $row = array_merge((array) $row, (array) $row['info']);
                     $row['postdate'] = new \DateTime($row['postdate']);
 
                     $row['id'] = (int) $row['commentid'];
@@ -189,6 +190,9 @@ class Upgrade extends UpgradeAbstract
                 $paginator = \DB::paginator($select, $page, 100);
             } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
 
+            $metadataAcct->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
+            $metadataAcct->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
+
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'accounts'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'characters'], self::TRANSLATOR_DOMAIN);
 
@@ -205,11 +209,30 @@ class Upgrade extends UpgradeAbstract
     }
 
     /**
-     * Delete old table if all rows are imported.
+     * Insert new data for this upgrade.
      *
      * @return bool
      */
     public function step4(): bool
+    {
+        try
+        {
+            return $this->insertData(self::VERSION_NUMBER);
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return false;
+        }
+    }
+
+    /**
+     * Delete old table when all rows are imported.
+     *
+     * @return bool
+     */
+    public function step5(): bool
     {
         try
         {

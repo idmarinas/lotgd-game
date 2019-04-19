@@ -44,6 +44,7 @@ class Install
     {
         $messages = [];
         $version = $this->getNextVersion($version); //-- Start with the next version
+        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
 
         //-- It is a clean installation not do nothing
         if (! $this->isUpgrade())
@@ -59,8 +60,8 @@ class Install
             {
                 $class = "Lotgd\Core\Installer\Upgrade\Version_{$version}\Upgrade";
 
-                //-- Check all version to actual version
-                if (! \class_exists($class))
+                //-- Check all versions of the current version and make sure that it has not already been updated.
+                if (! \class_exists($class) || $this->isUpgradedVersion($version))
                 {
                     $version = $this->getNextVersion($version);
 
@@ -68,7 +69,7 @@ class Install
                 }
 
                 $upgrade = new $class();
-                $upgrade->setDoctrine($this->getContainer(\Lotgd\Core\Db\Doctrine::class));
+                $upgrade->setDoctrine($doctrine);
 
                 $step = 1;
                 $result = true;
@@ -110,12 +111,12 @@ class Install
         $schemaTool = new SchemaTool($doctrine);
         $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
 
-        $messages = \LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN);
+        $messages = [ \LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN) ];
 
         if (count($sqls))
         {
             $messages = [];
-            $messages[] = '`@Updating database schema...`0`n';
+            $messages[] = \LotgdTranslator::t('synchronizationTables.title', [], self::TRANSLATOR_DOMAIN);
 
             $schemaTool->updateSchema($classes, true);
 

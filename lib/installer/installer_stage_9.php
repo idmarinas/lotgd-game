@@ -32,7 +32,9 @@ if (false === $installer->canInstall() && $installer->isUpgrade())
 /*
  * Make a upgrade install, avoid in clean install.
  */
+$installer->setUpgradedVersion($session['installer']['upgradedVersion'] ?? []);
 $params['upgradeInstall'] = $installer->makeUpgradeInstall($installer->getIntVersion($actualVersion));
+$session['installer']['upgradedVersion'] = $installer->getUpgradedVersion();
 
 /*
  * Synchronization of core tables, you can found this entities in "src/core/Entity"
