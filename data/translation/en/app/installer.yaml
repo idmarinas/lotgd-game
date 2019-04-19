@@ -1,9 +1,16 @@
 canInstall:
-    sameVersion: '`4You cannot install, you try to install the same version that is already installed.´4`n'
+    version:
+        same: '`4You cannot install, you try to install the same version that is already installed.`0`n'
+        less:
+            - '`4Cannot upgrade from a previous version to 3.0.0 IDMarinas Edition.'
+            - 'Please upgrade to version 3.0.0 IDMarinas Edition and then try a higher version.`0`n'
 
 upgrade:
     nothing: '`QNothing to do.`0`n'
     error: '`$A problem has been encountered and an error occurred while do a pre-install.`0`n'
+    insertData:
+        noFiles: '`$Not new data to insert for version {version}.`0`n'
+        error: '`$A problem has been encountered and an error occurred while inserting the data of upgrade into the database.`0`n'
     version:
         to: '`c`bUpgrading to version `i{version}´i´b´c`n'
         nothing: 'Nothing to update - your database is already in sync with the current entity metadata.`n'
@@ -25,6 +32,7 @@ insertData:
     error: '`$A problem has been encountered and an error occurred while inserting the data into the database.`0`n'
 
 synchronizationTables:
+    title: '`@Updating database schema...`0`n'
     nothing: '`@Nothing to update - your database is already in sync with the current entities metadata.`0`n'
     schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
     proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
