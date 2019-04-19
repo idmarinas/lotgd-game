@@ -12,6 +12,9 @@ chdir(realpath(__DIR__.'/..'));
 
 require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
+//-- Include constants
+require_once 'lib/constants.php';
+
 //-- Init Debugger
 $debuggerMode = file_exists('config/development.config.php') ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
 \Tracy\Debugger::enable($debuggerMode, __DIR__.'/../data/log/exception');
@@ -21,8 +24,8 @@ $debuggerMode = file_exists('config/development.config.php') ? \Tracy\Debugger::
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
-defined('OVERRIDE_FORCED_NAV') or define('OVERRIDE_FORCED_NAV', false);
-defined('ALLOW_ANONYMOUS') or define('ALLOW_ANONYMOUS', false);
+defined('OVERRIDE_FORCED_NAV') || define('OVERRIDE_FORCED_NAV', false);
+defined('ALLOW_ANONYMOUS') || define('ALLOW_ANONYMOUS', false);
 
 use Lotgd\Core\Fixed\{
     Locator as LotgdLocator,
@@ -91,7 +94,6 @@ $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 //-- Prepare static classes
 require_once 'lib/class/static.php';
 // Include some commonly needed and useful routines
-require_once 'lib/constants.php';
 require_once 'lib/output.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
@@ -172,7 +174,7 @@ if (file_exists('public/installer.php')
 
 if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
-    defined('DB_NODB') or define('DB_NODB', true);
+    defined('DB_NODB') || define('DB_NODB', true);
 
     page_header('title.database', [], 'app-common');
 
