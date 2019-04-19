@@ -116,6 +116,19 @@ trait CoreFunction
     }
 
     /**
+     * Function to use bdump of Tracy debugger
+     *
+     * @param mixed $param
+     * @param string $name
+     *
+     * @return void
+     */
+    public function bdump($param, $name = null): void
+    {
+        bdump($param, $name);
+    }
+
+    /**
      * Renders a module template.
      *
      * @param array        $context
