@@ -1,3 +1,5 @@
+{% translate_default_domain textDomain %}
+
 {% if defaultTextDomainStatus %}
     {# Set a default text domain for comentary status #}
     {% commentary_domain_status defaultTextDomainStatus %}
@@ -31,7 +33,7 @@
                     {% if comment.command == 'me' %}
                         <span class="colLtBlack">{{ comment.comment|uncolorize }}</span>
                     {% else %}
-                        <em class="colDkCyan">{{ sayLine|t(null, textDomain)|colorize|lower }}</em>,
+                        <em class="colDkCyan">{{ 'commentary.sayLine'|t|colorize|lower }}</em>,
                         <span class="colDkCyan">"<span class="colLtCyan">{{ comment.comment|colorize }}</span>"</span>
                     {% endif %}
                 {% endif %}
@@ -42,10 +44,10 @@
             {% set bioLink = ('bio.php?char=' ~ comment.author)|lotgd_url %}
             {% set mailLink = ('mail.php?op=write&to=' ~ comment.author)|lotgd_url %}
             <div class="actions">
-                <a class="ui mini blue icon button" aria-label="{{ 'form.button.bio'|t({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ bioLink }}">
+                <a class="ui mini blue icon button" aria-label="{{ 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ bioLink }}">
                     <i class="user icon"></i>
                 </a>
-                <a class="ui mini blue icon button" aria-label="{{ 'form.button.mail'|t({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ mailLink }}" onclick="Lotgd.embed(this)">
+                <a class="ui mini blue icon button" aria-label="{{ 'form.button.mail'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ mailLink }}" onclick="Lotgd.embed(this)">
                     <i class="mail icon"></i>
                 </a>
             </div>

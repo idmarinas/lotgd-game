@@ -4,8 +4,10 @@
     <input type="hidden" name="section" value="{{ commentary.section }}">
 
     <div class="ui fluid action input">
-        <input type="text" name="comment" id="comment" autocomplete="off" onkeyup="Lotgd.previewfield(this, '{{ user.name }}', '{{ maxChars }}', '{{ commentary.sayLine|t }}', 'You have %s characters left.')"/>
-        <button class="ui button" type="submit">{{ commentary.button|t|uncolorize }}</button>
+        <input type="text" name="comment" id="comment"
+            autocomplete="off"
+            onkeyup="Lotgd.previewfield(this, '{{ user.name }}', '{{ maxChars }}', '{{ "commentary.sayLine"|t }}', '{{ "commentary.charsLeft"|t }}')" />
+        <button class="ui button" type="submit">{{ 'commentary.button'|t|uncolorize }}</button>
     </div>
 
     <div class="ui hidden bottom attached inverted message">

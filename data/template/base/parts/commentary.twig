@@ -1,3 +1,5 @@
+{% translate_default_domain textDomain %}
+
 {% if canAddComment %}
     {# First the comment is saved in the database (if post method) otherwise the new comment will not be shown. #}
     {{ save_comment() }}
@@ -5,7 +7,7 @@
 
 {# Show comments (new comment included) #}
 <div class="ui minimal small comments">
-    <h5 class="ui dividing header">{{ commentary.talk|t(null, textDomain)|colorize }}</h5>
+    <h5 class="ui dividing header">{{ 'commentary.talk'|t|colorize }}</h5>
 
     {% if not SU_EDIT_COMMENTS %}
         {% for comment in comments|reverse %}

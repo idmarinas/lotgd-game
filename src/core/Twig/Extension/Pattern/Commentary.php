@@ -83,7 +83,6 @@ trait Commentary
             'comment' => $comment,
             'textDomain' => $textDomain,
             'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
-            'sayLine' => $commentary['sayLine'],
             'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
         ];
 
