@@ -32,6 +32,8 @@ trait Commentary
      * @param bool   $showPagination
      * @param bool   $canAddComment
      * @param int    $limit
+     *
+     * @return string
      */
     public function commentaryBlock(
         array $commentary,
@@ -40,7 +42,7 @@ trait Commentary
         bool $showPagination = true,
         bool $canAddComment = true,
         int $limit = 25
-    ) {
+    ): string {
         global $session;
 
         $this->textDomain = $textDomain; //-- Default text domain for commentary block
@@ -69,7 +71,7 @@ trait Commentary
      *
      * @param array  $comment
      * @param string $textDomain
-     * @param array $$commentary
+     * @param array  $commentary
      *
      * @return string
      */
@@ -255,26 +257,12 @@ trait Commentary
      */
     protected function commentaryFormUrl(): string
     {
-        $script = \LotgdHttp::getServer('SCRIPT_NAME');
-        $query = \LotgdHttp::getAllQuery();
+        $url = \LotgdHttp::getServer('REQUEST_URI');
 
-        $deleteQuery = [
-            'c', //-- Generate new one
-            'commentPage', //-- Reset pagination
-            'frombio'
-        ];
+        //-- Sanitize link: Delete previous queries of: "page", "c", "commentPage" and "frombio"
+        $url = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);
+        $url = preg_replace('/op=fight/i', 'op=continue', $url);
 
-        foreach ($deleteQuery as $del)
-        {
-            if (isset($query[$del]))
-            {
-                unset($query[$del]);
-            }
-        }
-
-        $query = http_build_query($query);
-        $query = preg_replace('/op=fight/i', 'op=continue', $query);
-
-        return $script.($query ? '?' : '').$query;
+        return $script.($url ? '?' : '').$url;
     }
 }
