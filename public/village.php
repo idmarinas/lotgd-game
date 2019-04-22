@@ -198,7 +198,6 @@ $params['showVillageDesc'] = ! $skipvillagedesc; //-- Show or not village descri
 $params['SU_EDIT_USERS'] = $session['user']['superuser'] & SU_EDIT_USERS;
 $params['blockCommentArea'] = false; //-- Show or not comment area
 
-bdump($params);
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('page/village.twig', $params));
