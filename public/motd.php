@@ -26,7 +26,6 @@ $month = (string) \LotgdHttp::getPost('month', '');
 $loggedin = $session['user']['loggedin'] ?? false;
 $params = [];
 $params['SU_POST_MOTD'] = ($session['user']['superuser'] & SU_POST_MOTD);
-bdump($op);
 
 if ('vote' == $op)
 {
