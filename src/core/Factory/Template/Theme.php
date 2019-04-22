@@ -36,7 +36,7 @@ class Theme implements FactoryInterface
         $template->setContainer($container);
 
         //-- Extension of LoTGD Core
-        $template->addExtension(new Extension\GameCore());
+        $template->addExtension(new Extension\GameCore($container));
         $template->addExtension(new Extension\FlashMessages($container));
         $template->addExtension(new Extension\Motd($container));
         $template->addExtension(new Extension\Navigation($container));

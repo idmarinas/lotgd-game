@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\ServiceManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -20,12 +22,22 @@ use Twig\TwigTest;
 
 class GameCore extends AbstractExtension
 {
+    use PatternCore\Censor;
+    use PatternCore\Container;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\Mail;
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
+
+    /**
+     * @param ServiceManager $serviceManager
+     */
+    public function __construct(ServiceManager $serviceManager)
+    {
+        $this->setContainer($serviceManager);
+    }
 
     /**
      * {@inheritdoc}
@@ -41,6 +53,7 @@ class GameCore extends AbstractExtension
             new TwigFilter('relative_date', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
+            new TwigFilter('censor', [$this, 'censor'])
         ];
     }
 

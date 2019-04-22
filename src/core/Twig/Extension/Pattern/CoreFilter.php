@@ -133,4 +133,18 @@ trait CoreFilter
 
         return call_user_func_array('sprintf', $arguments);
     }
+
+    /**
+     * Filter string with censor.
+     *
+     * @param string|null $string
+     *
+     * @return string
+     */
+    public function censor(?string $string): string
+    {
+        $censor = $this->getCensor();
+
+        return $censor->filter($string);
+    }
 }
