@@ -1,0 +1,63 @@
+{% translate_default_domain textDomain %}
+
+{% set result = modulehook('biotop', { 'target': character, 'messages': {} }) %}
+{% for message in result.messages %}
+    {{ message[0]|tl(message[1], message[2])|colorize }}
+{% endfor %}
+
+{{ 'subtitle'|t({ 'name': character.name })|colorize }}
+
+{% if user.loggedin %}
+    <a href="{{ ('mail.php?op=write&to=' ~ character.acctid)|lotgd_url }}" target="_blank" onClick="Lotgd.embed(this)" data-tooltip="{{ 'writeMail'|t|uncolorize }}">
+        <img src="images/newscroll.GIF" width="16" height="16" alt="{{ 'writeMail'|t|uncolorize }}" border="0">
+    </a>
+{% endif %}
+<br><br>
+{% if character.clanname and getsetting('allowclans', false) %}
+    {{ 'bio.clan'|t({ 'player': character.name, 'rankName': ranks[character.clanrank]|default('ranks.00')|tl(null, 'page-clan'), 'clanName': character.clanname })|colorize }}
+{% endif %}
+
+{{ 'bio.title'|t({ 'title': character.title })|colorize }}
+{{ 'bio.level'|t({ 'level': character.level })|colorize }}
+{{ 'bio.dragonkills'|t({ 'dragonkills': character.dragonkills })|colorize }}
+{{ 'bio.status'|t({ 'status': character.loggedin })|colorize }}
+{{ 'bio.resurrections'|t({ 'resurrections': character.resurrections  })|colorize }}
+{{ 'bio.race'|t({ 'race': 'character.racename'|tl(null, character.race|default(RACE_UNKNOWN)) })|colorize }}
+{{ 'bio.gender'|t({ 'sex': character.sex })|colorize }}
+{{ 'bio.specialty'|t({ 'specialty': specialties[character.specialty] })|colorize }}
+{{ 'bio.creature'|t({ 'mount': character.mountname|default('character.mount'|tl(null, 'app-default')) })|colorize }}
+
+{% set result = modulehook('biostat', { 'target': character, 'messages': {} }) %}
+{% for message in result.messages %}
+    {{ message[0]|tl(message[1], message[2])|colorize }}
+{% endfor %}
+
+{{ 'bio.bio'|t({ 'bio': character.bio|default('character.bio'|tl(null, 'app-default'))|censor|colorize })|colorize }}
+
+{{ 'bio.news'|t({'character': character.name})|colorize }}
+
+{% set odate = '' %}
+{% for news in recentNews %}
+    {% if odate != news.newsdate %}
+        {{ '`n`b`@{d,date,medium}`0´b`n'|tmf({'d': news.newsdate})|colorize }}
+        {% set odate = news.newsdate %}
+    {% endif %}
+
+    {# if ($odate != $row['newsdate'])
+    {
+        output_notl('`n`b`@%s`0´b`n', date('D, M d', strtotime($row['newsdate'])));
+        $odate = $row['newsdate'];
+    } #}
+    {% if news.arguments %}
+        {% if news.newformat %}
+            {{ news.newstext|tl(news.arguments, news.tlschema)|colorize }}
+        {% else %}
+            {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments)|colorize }}
+        {% endif %}
+    {% else %}
+        {{ news.newstext|tl(null, news.tlschema)|colorize }}
+    {% endif %}
+    <br>
+{% else %}
+    {{ 'list.notFound'|t|colorize }}
+{% endfor %}
