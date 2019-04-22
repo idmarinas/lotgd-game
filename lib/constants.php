@@ -75,7 +75,7 @@ defined('SEX_FEMALE') || define('SEX_FEMALE', 1);
 //Miscellaneous
 defined('INT_MAX') || define('INT_MAX', 4294967295);
 
-defined('RACE_UNKNOWN') || define('RACE_UNKNOWN', 'Horrible Gelatinous Blob');
+defined('RACE_UNKNOWN') || define('RACE_UNKNOWN', 'app-default');
 
 //Character Deletion Types
 defined('CHAR_DELETE_AUTO') || define('CHAR_DELETE_AUTO', 1);
