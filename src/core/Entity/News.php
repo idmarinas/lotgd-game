@@ -176,7 +176,7 @@ class News
     /**
      * Set the value of Arguments.
      *
-     * @param string arguments
+     * @param array arguments
      *
      * @return self
      */
@@ -190,9 +190,9 @@ class News
     /**
      * Get the value of Arguments.
      *
-     * @return string
+     * @return array
      */
-    public function getArguments(): string
+    public function getArguments(): array
     {
         return $this->arguments;
     }
