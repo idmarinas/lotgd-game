@@ -262,6 +262,11 @@ trait Commentary
         $url = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);
         $url = preg_replace('/op=fight/i', 'op=continue', $url);
 
-        return $script.($url ? '?' : '').$url;
+        if (false === \strpos($url, '?') && false !== \strpos($url, '&'))
+        {
+            $url = \preg_replace('/[&]/', '?', 1);
+        }
+
+        return $url;
     }
 }

@@ -115,7 +115,11 @@ trait Navigation
 
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
         $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
-        $link = $link.(false === \strpos($link, '?') ? '?' : '&');
+        if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
+        {
+            $link = \preg_replace('/[&]/', '?', 1);
+        }
+
         $pages['href'] = $link;
 
         if (null !== $params)
