@@ -63,7 +63,7 @@
         "file-loader": "^3.0.1",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "gulp": "^4.0.0",
-        "gulp-autoprefixer": "^6.0.0",
+        "gulp-autoprefixer": "^6.1.0",
         "gulp-clean-css": "^4.0.0",
         "gulp-composer": "^0.4.5",
         "gulp-concat": "^2.6.1",
