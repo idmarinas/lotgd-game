@@ -41,7 +41,7 @@
         </div>
         {# Actions for see bio and send mail to the author of comment #}
         {% if comment.command != 'game' %}
-            {% set bioLink = ('bio.php?char=' ~ comment.author)|lotgd_url %}
+            {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
             {% set mailLink = ('mail.php?op=write&to=' ~ comment.author)|lotgd_url %}
             <div class="actions">
                 <a class="ui mini blue icon button" aria-label="{{ 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ bioLink }}">

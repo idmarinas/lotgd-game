@@ -83,6 +83,7 @@ trait Commentary
             'comment' => $comment,
             'textDomain' => $textDomain,
             'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
+            'returnLink' => \LotgdHttp::getServer('REQUEST_URI'),
             'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
         ];
 
