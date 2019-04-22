@@ -250,7 +250,7 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain($this->textDomain);
+        $this->setTextDomain('navigation-app');
         $this->addHeader('common.superuser.category');
 
         if ($superuser & SU_EDIT_COMMENTS)
@@ -279,7 +279,7 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain($this->textDomain);
+        $this->setTextDomain('navigation-app');
         $this->addHeader('common.category.navigation');
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
@@ -308,6 +308,8 @@ class Navigation
 
         $extra = (false === strpos($extra, '?') ? '?' : '');
 
+        $this->setTextDomain('navigation-app');
+
         $args = modulehook('villagenav');
 
         if ($args['handled'] ?? false)
@@ -323,6 +325,8 @@ class Navigation
 
         //-- User is dead
         $this->addNav('common.villagenav.shades', 'shades.php');
+
+        $this->setTextDomain();
     }
 
     /**
