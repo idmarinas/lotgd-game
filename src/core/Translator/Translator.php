@@ -37,6 +37,8 @@ class Translator extends ZendTranslator
     {
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
+        //-- Delete all values that are arrays (when use \MessageFormatter::format($params) fail and return false)
+        $parameters = array_filter($parameters, function ($var) { return ! (\is_array($var)); });
 
         $message = parent::translate($message, $textDomain ?? 'page-default', $locale);
 
