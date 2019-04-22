@@ -14,34 +14,28 @@
             ]
         ]
 #}
+{% translate_default_domain textDomain %}
+
 {% set result = modulehook('village-header') %}
 {% for message in result %}
-    {{ message[0]|t(message[1], message[2])|colorize }}
+    {{ message[0]|tl(message[1], message[2])|colorize }}
 {% endfor %}
 
 {% if showVillageDesc %}
-    {% for text in texts.text %}
-        {{ text[0]|t(text[1], schemas.text)|colorize }}
-    {% endfor %}
+    {{ 'description'|t(_context)|colorize }}
 
-    {{ texts.clock|t({'clock': gametime()}, schemas.clock)|colorize }}
+    {{ 'clock'|t({'clock': gametime()})|colorize }}
 
     {% set result = modulehook('village-desc') %}
     {% for message in result %}
-        {{ message[0]|t(message[1], message[2])|colorize }}
+        {{ message[0]|tl(message[1], message[2])|colorize }}
     {% endfor %}
 
-    {# Support for a special village-only hook #}
-    {% set result = modulehook('village-desc-' ~ user.location) %}
-    {% for message in result %}
-        {{ message[0]|t(message[1], message[2])|colorize }}
-    {% endfor %}
+    {% if newestplayer and newtext %}
+        {{ newtext|t({'name': newestname })|colorize }}
 
-    {% if texts.newestplayer and texts.newest %}
-        {{ texts.newest|t({'name': texts.newestplayer }, schemas.newest)|colorize }}
-
-        {% if SU_EDIT_USERS and texts.newestid %}
-            [<a href="{{ ('user.php?op=edit&userid=' ~ texts.newestid)|lotgd_url }}">{{ 'opt.edit'|t({}, 'app-default') }}</a>]
+        {% if SU_EDIT_USERS and newestplayer %}
+            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer)|lotgd_url }}">{{ 'opt.edit'|tl({}, 'app-default') }}</a>]
         {% endif %}
     {% endif %}
     <br>
@@ -61,5 +55,7 @@
     {# Set if can add new comments. Default is true #}
     {% commentary_can_add_comments true %}
 
-    {{ commentary_block(texts.commentary, schemas.commentary) }}
+    {{ commentary_block({
+        'section': 'village'
+    }, textDomain) }}
 {% endif %}

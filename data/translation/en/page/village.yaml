@@ -2,13 +2,18 @@
 title: '{village} Square'
 
 # Description of village
-text: "`@`c`b{village} Square´b´cThe village of {village} hustles and bustles. No one really notices that you're standing there. You see various shops and businesses along main street. There is a curious looking rock to one side. On every side the village is surrounded by deep dark forest.`0`n`n"
+description:
+    - '`@`c`b{village} Square´b´c'
+    - 'The village of {village} hustles and bustles.'
+    - "No one really notices that you're standing there. You see various shops and businesses along main street."
+    - 'There is a curious looking rock to one side. On every side the village is surrounded by deep dark forest.`0`n`n'
 
 # Commentary
 commentary:
     talk: '`n`@Nearby some villagers talk:`0`n' # Talk
     sayLine: 'says' # Sayline
     button: 'Add' # Add button
+    charsLeft: 'You have %s characters left.'
     status:
         game: 'Message of the Game Master'
         you: "It's a comment from you."
