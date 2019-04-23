@@ -15,12 +15,20 @@ require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 //-- Include constants
 require_once 'lib/constants.php';
 
+$isDevelopment = file_exists('config/development.config.php');
 //-- Init Debugger
-$debuggerMode = file_exists('config/development.config.php') ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
+$debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
 \Tracy\Debugger::enable($debuggerMode, __DIR__.'/../data/log/exception');
 \Tracy\Debugger::timer('page-generating');
 \Tracy\Debugger::timer('page-footer');
 \Tracy\Debugger::$maxDepth = 5; // default: 3
+//-- Extensions for Tracy
+if ($isDevelopment)
+{
+    \Tracy\Debugger::getBar()->addPanel(
+        new \Milo\VendorVersions\Panel
+    );
+}
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
