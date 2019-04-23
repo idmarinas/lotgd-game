@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b52a059ffa0cff479b0a50be8d16f22",
+    "content-hash": "cc0fba8f4630a3e713811a717f468eef",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -864,16 +864,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "v1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38"
+                "reference": "3da7c9d125591ca83944f477e65ed3d7b4617c48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38",
-                "reference": "c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/3da7c9d125591ca83944f477e65ed3d7b4617c48",
+                "reference": "3da7c9d125591ca83944f477e65ed3d7b4617c48",
                 "shasum": ""
             },
             "require": {
@@ -942,7 +942,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2018-11-21T00:33:13+00:00"
+            "time": "2019-04-23T08:28:24+00:00"
         },
         {
             "name": "doctrine/reflection",
@@ -2078,16 +2078,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.0",
+            "version": "v6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707"
+                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
-                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
+                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
                 "shasum": ""
             },
             "require": {
@@ -2136,7 +2136,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2019-03-10T07:52:41+00:00"
+            "time": "2019-04-21T09:21:45+00:00"
         },
         {
             "name": "symfony/console",
@@ -2731,16 +2731,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.2.4",
+            "version": "v4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "6c05edb11fbeff9e2b324b4270ecb17911a8b7ad"
+                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/6c05edb11fbeff9e2b324b4270ecb17911a8b7ad",
-                "reference": "6c05edb11fbeff9e2b324b4270ecb17911a8b7ad",
+                "url": "https://api.github.com/repos/symfony/process/zipball/8cf39fb4ccff793340c258ee7760fd40bfe745fe",
+                "reference": "8cf39fb4ccff793340c258ee7760fd40bfe745fe",
                 "shasum": ""
             },
             "require": {
@@ -2776,7 +2776,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2019-01-24T22:05:03+00:00"
+            "time": "2019-04-10T16:20:36+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -4692,6 +4692,54 @@
             ],
             "description": "Tolerant PHP-to-AST parser designed for IDE usage scenarios",
             "time": "2019-03-09T19:24:59+00:00"
+        },
+        {
+            "name": "milo/vendor-versions",
+            "version": "v1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milo/vendor-versions.git",
+                "reference": "1cf090cfb4389e34c84d88d16e066e6ffb6b3d5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milo/vendor-versions/zipball/1cf090cfb4389e34c84d88d16e066e6ffb6b3d5d",
+                "reference": "1cf090cfb4389e34c84d88d16e066e6ffb6b3d5d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "tracy/tracy": "^2.3.0"
+            },
+            "suggest": {
+                "nette/di": "For automatic panel loading"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Milo\\VendorVersions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miloslav Hůla",
+                    "email": "miloslav.hula@gmail.com",
+                    "homepage": "https://github.com/milo"
+                }
+            ],
+            "description": "Bar with versions list of vendor libraries for Tracy",
+            "keywords": [
+                "bar",
+                "composer",
+                "composer.lock",
+                "tracy",
+                "vendor"
+            ],
+            "time": "2019-03-19T07:39:49+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
