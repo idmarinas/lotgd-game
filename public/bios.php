@@ -6,70 +6,77 @@
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
-tlschema('bio');
 check_su_access(SU_EDIT_COMMENTS);
 
-$op = httpget('op');
-$userid = httpget('userid');
+tlschema('bio');
+
+$textDomain = 'page-bios';
+
+page_header('title', [], $textDomain);
+
+$op = (string) \LotgdHttp::getQuery('op');
+$userid = (int) \LotgdHttp::getQuery('charid');
+
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+
+$params = [
+    'textDomain' => $textDomain
+];
 
 if ('block' == $op)
 {
-    $sql = 'UPDATE '.DB::prefix('accounts')." SET bio='`iBlocked for inappropriate usage´i',biotime='9999-12-31 23:59:59' WHERE acctid='$userid'";
-    $subj = ['Your bio has been blocked'];
-    $msg = ['The system administrators have decided that your bio entry is inappropriate, so it has been blocked.`n`nIf you wish to appeal this decision, you may do so with the petition link.'];
-    systemmail($userid, $subj, $msg);
-    DB::query($sql);
-}
+    $message = 'player.block.fail';
+    $flashMessage = 'addErrorMessage';
 
-if ('unblock' == $op)
-{
-    $sql = 'UPDATE '.DB::prefix('accounts')." SET bio='',biotime='0000-00-00 00:00:00' WHERE acctid='$userid'";
-    $subj = ['Your bio has been unblocked'];
-    $msg = ['The system administrators have decided to unblock your bio.  You can once again enter a bio entry.'];
-    systemmail($userid, $subj, $msg);
-    DB::query($sql);
-}
-$sql = 'SELECT name,acctid,bio,biotime FROM '.DB::prefix('accounts')." WHERE biotime<'9999-12-31' AND bio>'' ORDER BY biotime DESC LIMIT 100";
-$result = DB::query($sql);
-page_header('User Bios');
-$block = translate_inline('Block');
-output('`b`&Player Bios:`0´b`n');
-
-while ($row = DB::fetch_assoc($result))
-{
-    if ($row['biotime'] > $session['user']['recentcomments'])
+    if ($repository->blockCharacterBio($userid))
     {
-        rawoutput("<img src='images/new.gif' alt='&gt;' width='3' height='5' align='absmiddle'> ");
-    }
-    output_notl("`![<a href='bios.php?op=block&userid={$row['acctid']}'>$block</a>]", true);
-    addnav('', "bios.php?op=block&userid={$row['acctid']}");
-    output_notl('`&%s`0: `^%s`0`n', $row['name'], soap($row['bio']));
-}
-DB::free_result($result);
-require_once 'lib/superusernav.php';
-superusernav();
+        $message = 'player.block.success';
+        $flashMessage = 'addSuccessMessage';
 
-addnav('Moderation');
+        $subj = ['mail.block.subject', [], $textDomain];
+        $msg = ['mail.block.message', [], $textDomain];
+
+        systemmail($userid, $subj, $msg);
+    }
+
+    \LotgdFlashMessages::{$flashMessage}(\LotgdTranslator::t($message, [], $textDomain));
+}
+elseif ('unblock' == $op)
+{
+    $message = 'player.unblock.fail';
+    $flashMessage = 'addErrorMessage';
+
+    if ($repository->unblockCharacterBio($userid))
+    {
+        $message = 'player.unblock.success';
+        $flashMessage = 'addSuccessMessage';
+
+        $subj = ['mail.unblock.subject', [], $textDomain];
+        $msg = ['mail.unblock.message', [], $textDomain];
+
+        systemmail($userid, $subj, $msg);
+    }
+
+    \LotgdFlashMessages::{$flashMessage}(\LotgdTranslator::t($message, [], $textDomain));
+}
+
+$params['unblocked'] = $repository->getCharactersUnblockedBio();
+$params['blocked'] = $repository->getCharactersBlockedBio();
+
+\LotgdNavigation::superuserGrottoNav();
+
+\LotgdNavigation::addNav('bios.category.moderation');
 
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
-    addnav('Return to Comment Moderation', 'moderate.php');
+    \LotgdNavigation::addNav('bios.nav.moderation', 'moderate.php');
 }
 
-addnav('Refresh', 'bios.php');
-$sql = 'SELECT name,acctid,bio,biotime FROM '.DB::prefix('accounts')." WHERE biotime>'9000-01-01' AND bio>'' ORDER BY biotime DESC LIMIT 100";
-$result = DB::query($sql);
-output('`n`n`b`&Blocked Bios:`0´b`n');
-$unblock = translate_inline('Unblock');
-$number = DB::num_rows($result);
+\LotgdNavigation::addNav('bios.nav.refresh', 'bios.php');
 
-for ($i = 0; $i < $number; $i++)
-{
-    $row = DB::fetch_assoc($result);
+//-- This is only for params not use for other purpose
+$params = modulehook('page-bios-tpl-params', $params);
+rawoutput(LotgdTheme::renderThemeTemplate('page/bios.twig', $params));
 
-    output_notl("`![<a href='bios.php?op=unblock&userid={$row['acctid']}'>$unblock</a>]", true);
-    addnav('', "bios.php?op=unblock&userid={$row['acctid']}");
-    output_notl('`&%s`0: `^%s`0`n', $row['name'], soap($row['bio']));
-}
 DB::free_result($result);
 page_footer();
