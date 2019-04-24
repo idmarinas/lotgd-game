@@ -18,7 +18,7 @@ trait CoreFilter
     /**
      * Colorize a string.
      *
-     * @param string $string
+     * @param string|null $string
      *
      * @return string
      */
@@ -35,12 +35,17 @@ trait CoreFilter
     /**
      * Uncolorize a string.
      *
-     * @param string $string
+     * @param string|null $string
      *
      * @return string
      */
-    public function uncolorize(string $string): string
+    public function uncolorize(?string $string): string
     {
+        if (! $string)
+        {
+            return '';
+        }
+
         return color_sanitize($string);
     }
 
