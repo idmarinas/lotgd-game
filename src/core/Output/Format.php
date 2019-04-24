@@ -41,8 +41,8 @@ class Format
      *
      * @param float|int $number
      * @param int       $decimals
-     * @param string    $point
-     * @param string    $sep
+     * @param string    $dec_point
+     * @param string    $thousands_sep
      *
      * @return string
      */
