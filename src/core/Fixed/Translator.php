@@ -25,27 +25,28 @@ class Translator
     protected static $container;
 
     /**
-     * @see Lotgd\Core\Component\Translator
+     * Add support for magic static method calls.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed the returned value from the resolved method
      */
-    public static function trans($message, array $parameters, $textDomain = 'page-default', $locale = null)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$container->trans($message, $parameters, $textDomain, $locale);
-    }
+        if (\method_exists(self::$container, $method))
+        {
+            return self::$container->{$method}(...$arguments);
+        }
+        //-- Is an alias of trans()
+        elseif ('translate' == $method || 't' == $method)
+        {
+            return self::$container->trans(...$arguments);
+        }
 
-    /**
-     * Is an alias of trans()
-     */
-    public static function translate($message, array $parameters, $textDomain = 'page-default', $locale = null)
-    {
-        return self::$container->trans($message, $parameters, $textDomain, $locale);
-    }
+        $methods = implode(', ', get_class_methods(self::$container));
 
-    /**
-     * Is an alias of trans()
-     */
-    public static function t($message, array $parameters, $textDomain = 'page-default', $locale = null)
-    {
-        return self::$container->trans($message, $parameters, $textDomain, $locale);
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

@@ -25,16 +25,23 @@ class Session
     protected static $instance;
 
     /**
-     * @see Lotgd\Core\Session
+     * Add support for magic static method calls.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed the returned value from the resolved method
      */
-    public static function bootstrapSession($force = null)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$instance->bootstrapSession($force);
-    }
+        if (\method_exists(self::$instance, $method))
+        {
+            return self::$instance->{$method}(...$arguments);
+        }
 
-    public static function sessionLogOut()
-    {
-        return self::$instance->sessionLogOut();
+        $methods = implode(', ', get_class_methods(self::$instance));
+
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

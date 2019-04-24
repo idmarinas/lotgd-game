@@ -20,64 +20,23 @@ class Theme
     protected static $wrapper;
 
     /**
-     * Render a theme
-     * Used in pageparts.php for render a page.
-     */
-    public static function renderTheme($context)
-    {
-        return self::$wrapper->renderTheme($context);
-    }
-
-    /**
-     * Renders a template of the theme.
+     * Add support for magic static method calls.
      *
-     * @param string $name    The template name
-     * @param array  $context An array of parameters to pass to the template
+     * @param string $name
+     * @param array  $arguments
      *
-     * @return string The rendered template
+     * @return mixed the returned value from the resolved method
      */
-    public static function renderThemeTemplate($name, $context)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$wrapper->renderThemeTemplate($name, $context);
-    }
+        if (\method_exists(self::$wrapper, $method))
+        {
+            return self::$wrapper->{$method}(...$arguments);
+        }
 
-    /**
-     * @see Lotgd\Core\Template\Theme
-     */
-    public static function renderModuleTemplate($template, $params)
-    {
-        return self::$wrapper->renderModuleTemplate($template, $params);
-    }
+        $methods = implode(', ', get_class_methods(self::$wrapper));
 
-    /**
-     * Renders a template of LOTGD.
-     *
-     * @param string $name    The template name
-     * @param array  $context An array of parameters to pass to the template
-     *
-     * @return string The rendered template
-     */
-    public static function renderLotgdTemplate($name, $context)
-    {
-        return self::$wrapper->renderLotgdTemplate($name, $context);
-    }
-
-    /**
-     * Get active theme.
-     *
-     * @return string
-     */
-    public static function getTheme()
-    {
-        return self::$wrapper->getTheme();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function setDefaultSkin($theme)
-    {
-        return self::$wrapper->setDefaultSkin($theme);
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

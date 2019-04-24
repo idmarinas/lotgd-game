@@ -22,34 +22,30 @@ use Lotgd\Core\Output\Format as CoreFormat;
 class Format
 {
     /**
-     * Instance of Format
+     * Instance of Format.
      *
      * @var Lotgd\Core\Output\CoreFormat
      */
     protected static $instance;
 
     /**
-     * @inheritDoc
+     * Add support for magic static method calls.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed the returned value from the resolved method
      */
-    public static function numeral($number, int $decimals = 0, $dec_point = null, $thousands_sep = null)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$instance->numeral($number, $decimals, $dec_point, $thousands_sep);
-    }
+        if (\method_exists(self::$instance, $method))
+        {
+            return self::$instance->{$method}(...$arguments);
+        }
 
-    /**
-     * @inheritDoc
-     */
-    public static function relativedate($indate, $default = null)
-    {
-        return self::$instance->relativedate($indate, $default);
-    }
+        $methods = implode(', ', get_class_methods(self::$instance));
 
-    /**
-     * @inheritDoc
-     */
-    public static function pluralize($qty, $singular, $plural)
-    {
-        return self::$instance->pluralize($qty, $singular, $plural);
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

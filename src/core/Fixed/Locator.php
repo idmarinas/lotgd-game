@@ -18,38 +18,34 @@ use Lotgd\Core\ServiceManager;
 class Locator
 {
     /**
-     * Instance of ServiceManager
+     * Instance of ServiceManager.
      *
      * @var Lotgd\Core\ServiceManager
      */
     protected static $sm;
 
     /**
-     * Get a shared instance of service
+     * Add support for magic static method calls.
      *
      * @param string $name
+     * @param array  $arguments
      *
-     * @return void
+     * @return mixed the returned value from the resolved method
      */
-    public static function get(string $name)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$sm->get($name);
+        if (\method_exists(self::$sm, $method))
+        {
+            return self::$sm->{$method}(...$arguments);
+        }
+
+        $methods = implode(', ', get_class_methods(self::$sm));
+
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**
-     * Get a discrete instance of service
-     *
-     * @param string $name
-     *
-     * @return void
-     */
-    public static function build(string $name)
-    {
-        return self::$sm->build($name);
-    }
-
-    /**
-     * Get service manager
+     * Get service manager.
      *
      * @return \Lotgd\Core\ServiceManager
      */
@@ -59,11 +55,9 @@ class Locator
     }
 
     /**
-     * Set service manager for the game
+     * Set service manager for the game.
      *
      * @param \Lotgd\Core\ServiceManager $sm
-     *
-     * @return void
      */
     public static function setServiceManager(ServiceManager $sm)
     {

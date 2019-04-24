@@ -21,115 +21,23 @@ class Doctrine
     protected static $wrapper;
 
     /**
-     * Get a repository of Doctrine.
+     * Add support for magic static method calls.
      *
-     * @param string $class
+     * @param string $name
+     * @param array  $arguments
      *
-     * @return object
+     * @return mixed the returned value from the resolved method
      */
-    public static function getRepository(string $class)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$wrapper->getRepository($class);
-    }
+        if (\method_exists(self::$wrapper, $method))
+        {
+            return self::$wrapper->{$method}(...$arguments);
+        }
 
-    /**
-     * Creates a new Query object.
-     *
-     * @param string $dql the DQL string
-     *
-     * @return Query
-     */
-    public static function createQuery($dql = '')
-    {
-        return self::$wrapper->createQuery($dql);
-    }
+        $methods = implode(', ', get_class_methods(self::$wrapper));
 
-    /**
-     * Creates a native SQL query.
-     *
-     * @param string           $sql
-     * @param ResultSetMapping $rsm the ResultSetMapping to use
-     *
-     * @return NativeQuery
-     */
-    public static function createNativeQuery($dql = '')
-    {
-        return self::$wrapper->createNativeQuery($dql);
-    }
-
-    /**
-     * Tells the EntityManager to make an instance managed and persistent.
-     *
-     * The entity will be entered into the database at or before transaction
-     * commit or as a result of the flush operation.
-     *
-     * @param object $entity the instance to make managed and persistent
-     */
-    public static function persist($entity)
-    {
-        self::$wrapper->persist($entity);
-    }
-
-    /**
-     * Removes an entity instance.
-     *
-     * A removed entity will be removed from the database at or before transaction commit
-     * or as a result of the flush operation.
-     *
-     * @param object $entity the entity instance to remove
-     */
-    public static function remove($entity)
-    {
-        self::$wrapper->remove($entity);
-    }
-
-    /**
-     * Refreshes the persistent state of an entity from the database,
-     * overriding any local changes that have not yet been persisted.
-     *
-     * @param object $entity the entity to refresh
-     */
-    public static function refresh($entity)
-    {
-        self::$wrapper->refresh($entity);
-    }
-
-    /**
-     * Merges the state of a detached entity into the persistence context
-     * of this EntityManager and returns the managed copy of the entity.
-     * The entity passed to merge will not become associated/managed with this EntityManager.
-     *
-     * @param object $entity The detached entity to merge into the persistence context.
-     */
-    public static function merge($entity)
-    {
-        self::$wrapper->merge($entity);
-    }
-
-    /**
-     * Flushes all changes to objects that have been queued up to now to the database.
-     * This effectively synchronizes the in-memory state of managed objects with the
-     * database.
-     *
-     * If an entity is explicitly passed to this method only this entity and
-     * the cascade-persist semantics + scheduled inserts/removals are synchronized.
-     *
-     * @param null|object|array $entity
-     */
-    public static function flush($entity = null)
-    {
-        self::$wrapper->flush($entity);
-    }
-
-    /**
-     * Clears the EntityManager. All entities that are currently managed
-     * by this EntityManager become detached.
-     *
-     * @param string|null $entityName if given, only entities of this type will get detached
-     */
-    public static function clear($entityName = null)
-    {
-        self::$wrapper->clear($entityName);
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**

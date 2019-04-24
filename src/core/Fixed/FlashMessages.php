@@ -18,54 +18,34 @@ use Lotgd\Core\Component\FlashMessages as ComponentFlashMessages;
 class FlashMessages
 {
     /**
-     * Instance of FlashMessages
+     * Instance of FlashMessages.
      *
      * @var Lotgd\Core\Component\FlashMessages
      */
     protected static $container;
 
     /**
-     * @see Lotgd\Core\Component\FlashMessages
+     * Add support for magic static method calls.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed the returned value from the resolved method
      */
-    public static function addMessage(string $message, $type = null)
+    public static function __callStatic($method, $arguments)
     {
-        return self::$container->addMessage($message, $type);
+        if (\method_exists(self::$container, $method))
+        {
+            return self::$container->{$method}(...$arguments);
+        }
+
+        $methods = implode(', ', get_class_methods(self::$container));
+
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**
-     * @see Lotgd\Core\Component\FlashMessages
-     */
-    public static function addInfoMessage(string $message)
-    {
-        return self::$container->addInfoMessage($message);
-    }
-
-    /**
-     * @see Lotgd\Core\Component\FlashMessages
-     */
-    public static function addSuccessMessage(string $message)
-    {
-        return self::$container->addSuccessMessage($message);
-    }
-
-    /**
-     * @see Lotgd\Core\Component\FlashMessages
-     */
-    public static function addErrorMessage(string $message)
-    {
-        return self::$container->addErrorMessage($message);
-    }
-
-    /**
-     * @see Lotgd\Core\Component\FlashMessages
-     */
-    public static function addWarningMessage(string $message)
-    {
-        return self::$container->addWarningMessage($message);
-    }
-
-    /**
-     * Set container of FlashMessages
+     * Set container of FlashMessages.
      *
      * @param ComponentFlashMessages $container
      */

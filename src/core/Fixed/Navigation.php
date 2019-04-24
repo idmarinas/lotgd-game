@@ -25,121 +25,29 @@ class Navigation
     protected static $instance;
 
     /**
-     * @see Lotgd\Core\Navigation\Navigation
+     * Add support for magic static method calls.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed the returned value from the resolved method
      */
-    public static function addHeader($header, $options = [])
+    public static function __callStatic($method, $arguments)
     {
-        return self::$instance->addHeader($header, $options);
-    }
+        if (\method_exists(self::$instance, $method))
+        {
+            return self::$instance->{$method}(...$arguments);
+        }
 
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function addHeaderNotl($header, $options = [])
-    {
-        return self::$instance->addHeaderNotl($header, $options);
-    }
+        $methods = implode(', ', get_class_methods(self::$instance));
 
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function addNav($label, $link = null, $options = [])
-    {
-        return self::$instance->addNav($label, $link, $options);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function addNavNotl($label, $link = null, $options = [])
-    {
-        return self::$instance->addNavNotl($label, $link, $options);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function addNavAllow($link)
-    {
-        return self::$instance->addNavAllow($link);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function setTextDomain($domain = null)
-    {
-        return self::$instance->setTextDomain($domain);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function blockLink($link)
-    {
-        return self::$instance->blockLink($link);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function unBlockLink($link)
-    {
-        return self::$instance->unBlockLink($link);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function blockPartialLink($link)
-    {
-        return self::$instance->blockPartialLink($link);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function unBlockPartialLink($link)
-    {
-        return self::$instance->unBlockPartialLink($link);
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function superuser()
-    {
-        return self::$instance->superuser();
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function superuserGrottoNav()
-    {
-        return self::$instance->superuserGrottoNav();
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function villageNav()
-    {
-        return self::$instance->villageNav();
-    }
-
-    /**
-     * @see Lotgd\Core\Navigation\Navigation
-     */
-    public static function checkNavs()
-    {
-        return self::$instance->checkNavs();
+        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
     }
 
     /**
      * Set instance of Navigation
      *
-     * @param CoreNavigation $container
+     * @param CoreNavigation $instance
      */
     public static function instance(CoreNavigation $instance)
     {
