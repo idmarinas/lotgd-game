@@ -14,7 +14,6 @@ checkday();
 $ret = \LotgdHttp::getQuery('ret');
 $char = \LotgdHttp::getQuery('char');
 
-bdump($ret);
 $return = 'list.php';
 if ($ret)
 {
@@ -22,7 +21,6 @@ if ($ret)
     $return = trim($return, '/');
 }
 
-bdump($return);
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 
 //-- Legacy support
