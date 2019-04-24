@@ -160,7 +160,7 @@ if (1 == getsetting('betaperplayer', 1) && file_exists('pavilion.php'))
 
 if (getsetting('allowclans', 1))
 {
-    \LotgdNavigation::addnav('navs.clan', 'rock.php');
+    \LotgdNavigation::addnav('navs.clan', 'clan.php');
 }
 
 //-- Info street
