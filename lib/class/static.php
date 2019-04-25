@@ -35,7 +35,7 @@ LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::c
 LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
 
 //-- Configure Sanitize instance
-LotgdSanitize::wrapper(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
+LotgdSanitize::instance(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
 
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
