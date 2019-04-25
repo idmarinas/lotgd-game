@@ -33,7 +33,7 @@
                     {% if comment.command == 'me' %}
                         <span class="colLtBlack">{{ comment.comment|uncolorize }}</span>
                     {% else %}
-                        <em class="colDkCyan">{{ 'commentary.sayLine'|t|colorize|lower }}</em>,
+                        <em class="colDkCyan">{{ (commentary.customSay ? commentary.customSay : 'commentary.sayLine'|t)|colorize|lower }}</em>,
                         <span class="colDkCyan">"<span class="colLtCyan">{{ comment.comment|colorize }}</span>"</span>
                     {% endif %}
                 {% endif %}

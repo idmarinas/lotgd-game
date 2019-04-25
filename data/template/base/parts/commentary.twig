@@ -19,7 +19,7 @@
         <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
             <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
             {% for comment in comments|reverse %}
-                {{ display_one_comment(comment, textDomain, commentary, SU_EDIT_COMMENTS) }}
+                {{ display_one_comment(comment, textDomain, commentary) }}
             {% endfor %}
             <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
         </form>
