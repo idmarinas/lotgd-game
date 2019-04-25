@@ -267,7 +267,8 @@ class Commentary
             ->attach(new Filter\StripTags())
             ->attach(new Filter\StripNewlines())
             ->attach(new Filter\PregReplace(['pattern' => '/`n/', 'replacement' => '']))
-            ->attach(new Filter\PregReplace(['pattern' => "'([^[:space:]]{45,45})([^[:space:]])'", 'replacement' => '\\1 \\2']))
+            ->attach(new Filter\PregReplace(['pattern' => "/([^[:space:]]{45,45})([^[:space:]])/", 'replacement' => '\\1 \\2']))
+            ->attach(new Filter\Callback([new \HTMLPurifier(), 'purify']), -1) //-- Executed last in query
         ;
 
         //-- Only accept correct format, all italic open tag need close tag.
@@ -284,7 +285,12 @@ class Commentary
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
         }
 
-        $filterChain->attach(new Filter\Callback([new \HTMLPurifier(), 'purify']));
+        //-- Only accept correct format, all center open tag need close tag.
+        //-- Other wise, center format is removed.
+        if (substr_count($comment, '`c') != substr_count($comment, '´c'))
+        {
+            $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
+        }
 
         $comment = $filterChain->filter($comment);
 
