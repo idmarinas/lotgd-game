@@ -242,7 +242,7 @@ class Collector
     }
 
     /**
-     * This function puts the lotgd formatting `whatever into HTML tags. It will automatically close previous tags before opening new ones for the same class.
+     * This function puts the lotgd formatting `whatever into HTML tags.
      *
      * @param string $data the logd formatted string
      */
