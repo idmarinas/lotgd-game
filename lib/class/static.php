@@ -8,6 +8,7 @@ use Lotgd\Core\Fixed\{
     Http as LotgdHttp,
     Locator as LotgdLocator,
     Navigation as LotgdNavigation,
+    Sanitize as LotgdSanitize,
     Theme as LotgdTheme,
     Translator as LotgdTranslator
 };
@@ -27,11 +28,14 @@ LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
 //-- Configure Http instance
 LotgdHttp::instance(LotgdLocator::get(\Lotgd\Core\Http::class));
 
-//-- Configure Theme template
+//-- Configure Navigation instance
 LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
 
 //-- Configure Theme template
 LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
+
+//-- Configure Sanitize instance
+LotgdSanitize::wrapper(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
 
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
