@@ -24,6 +24,7 @@ class GameCore extends AbstractExtension
 {
     use PatternCore\Censor;
     use PatternCore\Container;
+    use PatternCore\Sanitize;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\Mail;
