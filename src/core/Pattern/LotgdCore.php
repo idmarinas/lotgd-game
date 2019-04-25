@@ -17,6 +17,8 @@ trait LotgdCore
     use Censor;
     use Container;
     use EntityHydrator;
+    use Output;
     use Repository;
+    use Sanitize;
     use Translator;
 }
