@@ -27,7 +27,7 @@ return [
             Lotgd\Core\Output\Commentary::class => Factory\Output\Commentary::class,
             Lotgd\Core\Output\Code::class => InvokableFactory::class,
             Lotgd\Core\Output\Format::class => Factory\Output\Format::class,
-            Lotgd\Core\Tool\Sanitize::class => InvokableFactory::class,
+            Lotgd\Core\Tool\Sanitize::class => Factory\Tool\Sanitize::class,
             Lotgd\Core\Translator\Translator::class => Factory\Translator\Translator::class,
             Lotgd\Core\Session::class => Factory\Session::class,
             Zend\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,

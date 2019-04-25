@@ -6,29 +6,41 @@
 
 function sanitize($in)
 {
-    global $output;
-    $out = preg_replace('/[`][0'.$output->get_colormap_escaped().'bicnHw]/', '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::fullSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::fullSanitize($in);
 }
 
 function newline_sanitize($in)
 {
-    $out = preg_replace('/`n/', '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::newLineSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::newLineSanitize($in);
 }
 
 function color_sanitize($in)
 {
-    global $output;
-    $out = preg_replace('/[`][0'.$output->get_colormap_escaped().'cbi]/', '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::fullSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::fullSanitize($in);
 }
 
 function comment_sanitize($in)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, has no replacement, new commentary system, sanitize comments by default.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     global $output;
     // to keep the regexp from boinging this, we need to make sure
     // that we're not replacing in with the ` mark.
@@ -41,31 +53,41 @@ function comment_sanitize($in)
 
 function logdnet_sanitize($in)
 {
-    // to keep the regexp from boinging this, we need to make sure
-    // that we're not replacing in with the ` mark.
-    global $output;
-    $out = preg_replace('/[`](?=[^0'.$output->get_colormap_escaped().'bicn])/', chr(1).chr(1), $in);
-    $out = str_replace(chr(1), '`', $out);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::logdnetSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::logdnetSanitize($in);
 }
 
 function full_sanitize($in)
 {
-    $out = preg_replace('/[`]./', '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::fullSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::fullSanitize($in);
 }
 
 function cmd_sanitize($in)
 {
-    $out = preg_replace("'[&?]c=[[:digit:]-]+'", '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::cmdSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::cmdSanitize($in);
 }
 
 function comscroll_sanitize($in)
 {
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $out = preg_replace("'&c(omscroll)?=([[:digit:]]|-)*'", '', $in);
     $out = preg_replace("'\\?c(omscroll)?=([[:digit:]]|-)*'", '?', $out);
     $out = preg_replace("'&(refresh|comment)=1'", '', $out);
@@ -76,13 +98,21 @@ function comscroll_sanitize($in)
 
 function prevent_colors($in)
 {
-    $out = str_replace('`', '&#0096;', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::preventLotgdCodes($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $out;
+    return \LotgdSanitize::preventLotgdCodes($in);
 }
 
 function translator_uri($in)
 {
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $uri = comscroll_sanitize($in);
     $uri = cmd_sanitize($uri);
 
@@ -96,6 +126,11 @@ function translator_uri($in)
 
 function translator_page($in)
 {
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $page = $in;
 
     if (false !== strpos($page, '?'))
@@ -113,7 +148,12 @@ function translator_page($in)
 
 function modulename_sanitize($in)
 {
-    return preg_replace("'[^0-9A-Za-z_]'", '', $in);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::moduleNameSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    return \LotgdSanitize::moduleNameSanitize($in);
 }
 
 // the following function borrowed from mike-php at emerge2 dot com's post
@@ -121,6 +161,11 @@ function modulename_sanitize($in)
 //Original post is available here: http://us3.php.net/stripslashes
 function stripslashes_array($given)
 {
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     return is_array($given) ?
        array_map('stripslashes_array', $given) : stripslashes($given);
 }
@@ -128,38 +173,23 @@ function stripslashes_array($given)
 // Handle spaces in character names
 function sanitize_name($spaceallowed, $inname)
 {
-    if ($spaceallowed)
-    {
-        $expr = '([^[:alpha:] _-])';
-    }
-    else
-    {
-        $expr = '([^[:alpha:]])';
-    }
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::nameSanitize($spaceallowed, $inname) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return preg_replace($expr, '', $inname);
+    return \LotgdSanitize::nameSanitize($spaceallowed, $inname);
 }
 
 // Handle spaces and color in character names
 function sanitize_colorname($spaceallowed, $inname, $admin = false)
 {
-    global $output;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::colorNameSanitize($spaceallowed, $inname, $admin) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    if ($admin && getsetting('allowoddadminrenames', 0))
-    {
-        return $inname;
-    }
-
-    if ($spaceallowed)
-    {
-        $expr = '([^[:alpha:]`0'.$output->get_colormap_escaped().' _-])';
-    }
-    else
-    {
-        $expr = '([^[:alpha:]`0'.$output->get_colormap_escaped().'])';
-    }
-
-    return preg_replace($expr, '', $inname);
+    return \LotgdSanitize::colorNameSanitize($spaceallowed, $inname, $admin);
 }
 
 // Strip out <script>...</script> blocks and other HTML tags to try and
@@ -169,23 +199,20 @@ function sanitize_colorname($spaceallowed, $inname, $admin = false)
 // insert.. Bah
 function sanitize_html($str)
 {
-    //take out script blocks
-    $str = preg_replace("/<script[^>]*>.+<\/script[^>]*>/", '', $str);
-    //take out css blocks
-    $str = preg_replace("/<style[^>]*>.+<\/style[^>]*>/", '', $str);
-    //take out comments
-    $str = preg_replace('/<!--.*-->/', '', $str);
-    $str = strip_tags($str);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::htmlSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $str;
+    return \LotgdSanitize::htmlSanitize($str);
 }
 
 function sanitize_mb($str)
 {
-    while (! mb_check_encoding($str, getsetting('charset', 'UTF-8')) && strlen($str) > 0)
-    {
-        $str = substr($str, 0, strlen($str) - 1);
-    }
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new "LotgdSanitize::mbSanitize($string) instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $str;
+    return \LotgdSanitize::mbSanitize($str);
 }
