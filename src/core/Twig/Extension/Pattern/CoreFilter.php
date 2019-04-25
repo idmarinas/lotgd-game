@@ -34,6 +34,7 @@ trait CoreFilter
 
     /**
      * Uncolorize a string.
+     * Remove all LoTGD codes.
      *
      * @param string|null $string
      *
@@ -46,7 +47,7 @@ trait CoreFilter
             return '';
         }
 
-        return color_sanitize($string);
+        return \LotgdSanitize::fullSanitize($string);
     }
 
     /**
