@@ -314,11 +314,15 @@ class Navigation
 
         if ($args['handled'] ?? false)
         {
+            $this->setTextDomain();
+
             return;
         }
         elseif ($session['user']['alive'])
         {
             $this->addNav('common.villagenav.village', "village.php{$extra}", ['params' => ['location' => $session['user']['location']]]);
+
+            $this->setTextDomain();
 
             return;
         }
