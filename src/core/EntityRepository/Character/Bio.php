@@ -83,27 +83,7 @@ trait Bio
      */
     public function blockCharacterBio(int $char): bool
     {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->update($this->_entityName, 'u')
-                ->set('u.bio', '?1')
-                ->set('u.biotime', '?2')
-                ->where('u.id = :char')
-                ->setParameter('char', $char)
-                ->setParameter(1, '`iBlocked for inappropriate usage´i')
-                ->setParameter(2, new \DateTime('9999-12-31 23:59:59'))
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return false;
-        }
+        return $this->blockUnblockCharacterBio($char, '`iBlocked for inappropriate usage´i', new \DateTime('9999-12-31 23:59:59'));
     }
 
     /**
@@ -115,6 +95,11 @@ trait Bio
      */
     public function unblockCharacterBio(int $char): bool
     {
+        return $this->blockUnblockCharacterBio($char, '', new \DateTime('0000-00-00 00:00:00'));
+    }
+
+    private function blockUnblockCharacterBio(int $char, string $block, $date): bool
+    {
         $query = $this->_em->createQueryBuilder();
 
         try
@@ -124,8 +109,8 @@ trait Bio
                 ->set('u.biotime', '?2')
                 ->where('u.id = :char')
                 ->setParameter('char', $char)
-                ->setParameter(1, '')
-                ->setParameter(2, new \DateTime('0000-00-00 00:00:00'))
+                ->setParameter(1, $block)
+                ->setParameter(2, $date)
                 ->getQuery()
                 ->execute()
             ;
