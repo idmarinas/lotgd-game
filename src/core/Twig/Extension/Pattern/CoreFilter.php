@@ -64,9 +64,12 @@ trait CoreFilter
             return '';
         }
 
-        require_once 'lib/nltoappon.php';
+        trigger_error(sprintf(
+            'Usage of "%s" filter is obsolete since 4.0.0; and delete in version 4.1.0, use filter of Twig "nl2br" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
 
-        return nltoappon($string);
+        return \preg_replace('/[\r\n]/', '`n', $string);
     }
 
     /**
