@@ -22,6 +22,7 @@ class AccountsRepository extends DoctrineRepository
 {
     use Account\Bans;
     use Account\Character;
+    use Account\Clan;
     use Account\Login;
     use Account\Superuser;
     use Account\User;

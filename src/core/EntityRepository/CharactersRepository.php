@@ -19,6 +19,7 @@ use Tracy\Debugger;
 class CharactersRepository extends DoctrineRepository
 {
     use Character\Bio;
+    use Character\Clan;
 
     /**
      * Get character's name from an account ID.
