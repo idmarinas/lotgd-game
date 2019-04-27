@@ -23,36 +23,18 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-if ('block' == $op)
+if ('block' == $op || 'unblock' == $op)
 {
-    $message = 'player.block.fail';
+    $message = "player.{$op}.fail";
     $flashMessage = 'addErrorMessage';
 
     if ($repository->blockCharacterBio($userid))
     {
-        $message = 'player.block.success';
+        $message = "player.{$op}.success";
         $flashMessage = 'addSuccessMessage';
 
-        $subj = ['mail.block.subject', [], $textDomain];
-        $msg = ['mail.block.message', [], $textDomain];
-
-        systemmail($userid, $subj, $msg);
-    }
-
-    \LotgdFlashMessages::{$flashMessage}(\LotgdTranslator::t($message, [], $textDomain));
-}
-elseif ('unblock' == $op)
-{
-    $message = 'player.unblock.fail';
-    $flashMessage = 'addErrorMessage';
-
-    if ($repository->unblockCharacterBio($userid))
-    {
-        $message = 'player.unblock.success';
-        $flashMessage = 'addSuccessMessage';
-
-        $subj = ['mail.unblock.subject', [], $textDomain];
-        $msg = ['mail.unblock.message', [], $textDomain];
+        $subj = ["mail.{$op}.subject", [], $textDomain];
+        $msg = ["mail.{$op}.message", [], $textDomain];
 
         systemmail($userid, $subj, $msg);
     }
