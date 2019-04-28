@@ -104,8 +104,6 @@ class Sanitize
      */
     public function colorNameSanitize($spaceallowed, string $string, $admin = null): string
     {
-        global $output;
-
         $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
 
         if ($admin && getsetting('allowoddadminrenames', 0))
@@ -113,7 +111,7 @@ class Sanitize
             return $string;
         }
 
-        $expr = "/([^[:alpha:]`´0{$color}])/";
+        $expr = "/([^[:alpha:]`´0{$colors}])/";
 
         if ($spaceallowed)
         {
