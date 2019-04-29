@@ -21,7 +21,8 @@ $dbParams = [
     'user' => 'user name',
     'password' => 'password',
     'dbname' => 'name of data base',
-    'charset' => 'utf8'
+    'charset' => 'utf8mb4',
+    'collate' => 'utf8mb4_general_ci',
 ];
 
 $config = new DoctrineConfiguration();
