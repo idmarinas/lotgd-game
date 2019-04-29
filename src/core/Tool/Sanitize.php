@@ -196,7 +196,7 @@ class Sanitize
         $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
         // to keep the regexp from boinging this, we need to make sure
         // that we're not replacing in with the ` mark.
-        $string = preg_replace("/[`](?=[^0{$colors}bicn])/", chr(1).chr(1), $string);
+        $string = preg_replace("/[`´](?=[^0{$colors}bicn])/", chr(1).chr(1), $string);
 
         return str_replace(chr(1), '`', $string);
     }
