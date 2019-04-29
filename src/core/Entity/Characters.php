@@ -2274,7 +2274,7 @@ class Characters
     /**
      * Set the value of Clanrank.
      *
-     * @param bool clanrank
+     * @param int clanrank
      *
      * @return self
      */
@@ -2288,9 +2288,9 @@ class Characters
     /**
      * Get the value of Clanrank.
      *
-     * @return bool
+     * @return int
      */
-    public function getClanrank(): bool
+    public function getClanrank(): int
     {
         return $this->clanrank;
     }
