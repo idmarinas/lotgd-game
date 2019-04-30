@@ -50,7 +50,7 @@ trait Motd
 
         if ($motd['motdtype'])
         {
-            $params['motd'] = $this->repository->appendPollResults($motd, $session['user']['acctid'] ?? null);
+            $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
 
             return \LotgdTheme::renderThemeTemplate('page/motd/parts/poll.twig', $params);
         }
