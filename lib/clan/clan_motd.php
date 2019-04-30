@@ -1,84 +1,70 @@
 <?php
-        page_header('Update Clan Description / MoTD');
-        addnav('Clan Options');
 
-        if ($session['user']['clanrank'] >= CLAN_OFFICER)
-        {
-            $clanmotd = sanitize_mb(mb_substr(httppost('clanmotd'), 0, 4096));
+\LotgdNavigation::addHeader('category.options');
 
-            if (httppostisset('clanmotd') && stripslashes($clanmotd) != $claninfo['clanmotd'])
-            {
-                $sql = 'UPDATE '.DB::prefix('clans')." SET clanmotd='$clanmotd',motdauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
-                DB::query($sql);
-                invalidatedatacache("clandata-{$claninfo['clanid']}");
-                $claninfo['clanmotd'] = stripslashes($clanmotd);
-                output('Updating MoTD`n');
-                $claninfo['motdauthor'] = $session['user']['acctid'];
-            }
-            $clandesc = httppost('clandesc');
+if ($session['user']['clanrank'] < CLAN_OFFICER)
+{
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('secction.motd.messagess.error', [], $textDomain));
 
-            if (httppostisset('clandesc') && stripslashes($clandesc) != $claninfo['clandesc'] && 4294967295 != $claninfo['descauthor'])
-            {
-                $sql = 'UPDATE '.DB::prefix('clans')." SET clandesc='".addslashes(substr(stripslashes($clandesc), 0, 4096))."',descauthor={$session['user']['acctid']} WHERE clanid={$claninfo['clanid']}";
-                DB::query($sql);
-                invalidatedatacache("clandata-{$claninfo['clanid']}");
-                output('Updating description`n');
-                $claninfo['clandesc'] = stripslashes($clandesc);
-                $claninfo['descauthor'] = $session['user']['acctid'];
-            }
+    return redirect('clan.php');
+}
 
-            $customsay = httppost('customsay');
+$acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
+$clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
 
-            if (httppostisset('customsay') && $customsay != $claninfo['customsay'] && $session['user']['clanrank'] >= CLAN_LEADER)
-            {
-                $sql = 'UPDATE '.DB::prefix('clans')." SET customsay='$customsay' WHERE clanid={$claninfo['clanid']}";
-                DB::query($sql);
-                invalidatedatacache("clandata-{$claninfo['clanid']}");
-                output('Updating custom say line`n');
-                $claninfo['customsay'] = stripslashes($customsay);
-            }
-            $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid={$claninfo['motdauthor']}";
-            $result = DB::query($sql);
-            $row = DB::fetch_assoc($result);
-            $motdauthname = $row['name'];
+$result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
+$params['motdAuthorName'] = $result['motdauthname'];
+$params['descAuthorName'] = $result['descauthname'];
+unset($result);
 
-            $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid={$claninfo['descauthor']}";
-            $result = DB::query($sql);
-            $row = DB::fetch_assoc($result);
-            $descauthname = $row['name'];
+$clanmotd = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clanmotd'), 0, 4096));
+$clandesc = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clandesc'), 0, 4096));
+$customsay = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('customsay'), 0, 15));
 
-            output('`&`bCurrent MoTD:´b `#by %s`2`n', $motdauthname);
-            output_notl(nltoappon($claninfo['clanmotd']).'`n');
-            output('`&`bCurrent Description:´b `#by %s`2`n', $descauthname);
-            output_notl(nltoappon($claninfo['clandesc']).'`n');
+$clanEntity = $clanRepository->find($claninfo['clanid']);
 
-            rawoutput("<form action='clan.php?op=motd' method='POST'>");
-            addnav('', 'clan.php?op=motd');
-            output('`&`bMoTD:´b `7(4096 chars)`n');
-            rawoutput("<textarea name='clanmotd' cols='50' rows='10' class='input' style='width: 66%'>".htmlentities($claninfo['clanmotd'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea><br>');
-            output('`n`&`bDescription:´b `7(4096 chars)`n');
-            $blocked = translate_inline('Your clan has been blocked from posting a description.`n');
+$invalidateCache = false;
+if ($clanmotd && $claninfo['clanmotd'] != $clanmotd)
+{
+    $invalidateCache = true;
+    $clanEntity->setMotdauthor($session['user']['acctid'])
+        ->setClanmotd($clanmotd)
+    ;
+    $claninfo['motdauthor'] = $session['user']['acctid'];
+    $claninfo['clanmotd'] = $clanmotd;
 
-            if (INT_MAX == $claninfo['descauthor'])
-            {
-                output_notl($blocked);
-            }
-            else
-            {
-                rawoutput("<textarea name='clandesc' cols='50' rows='10' class='input' style='width: 66%'>".htmlentities($claninfo['clandesc'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea><br>');
-            }
+    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.motd', [], $textDomain));
+}
 
-            if ($session['user']['clanrank'] >= CLAN_LEADER)
-            {
-                output('`n`&`bCustom Talk Line´b `7(blank means "says" -- 15 chars max)`n');
-                rawoutput("<input name='customsay' value=\"".htmlentities($claninfo['customsay'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" class='input' maxlength=\"15\"><br/>");
-            }
-            $save = translate_inline('Save');
-            rawoutput("<input type='submit' class='button' value='$save'>");
-            rawoutput('</form>');
-        }
-        else
-        {
-            output("You do not have authority to change your clan's motd or description.");
-        }
-        addnav('Return to your clan hall', 'clan.php');
+if ($clandesc && $claninfo['clandesc'] != $clandesc)
+{
+    $invalidateCache = true;
+    $clanEntity->setDescauthor($session['user']['acctid'])
+        ->setClandesc($clandesc)
+    ;
+    $claninfo['descauthor'] = $session['user']['acctid'];
+    $claninfo['clandesc'] = $clandesc;
+
+    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.desc', [], $textDomain));
+}
+
+if ($customsay && $claninfo['customsay'] != $customsay)
+{
+    $invalidateCache = true;
+    $clanEntity->setCustomsay($customsay);
+    $claninfo['customsay'] = $customsay;
+
+    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.say', [], $textDomain));
+}
+
+if ($invalidateCache)
+{
+    invalidatedatacache("clandata-{$claninfo['clanid']}");
+}
+
+\Doctrine::persist($clanEntity);
+\Doctrine::flush();
+
+$params['clanInfo'] = $claninfo;
+
+\LotgdNavigation::addNav('nav.motd.return', 'clan.php');

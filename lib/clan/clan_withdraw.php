@@ -1,72 +1,84 @@
 <?php
-        modulehook('clan-withdraw', ['clanid' => $session['user']['clanid'], 'clanrank' => $session['user']['clanrank'], 'acctid' => $session['user']['acctid']]);
 
-        if ($session['user']['clanrank'] >= CLAN_LEADER)
+require_once 'lib/gamelog.php';
+
+modulehook('clan-withdraw', [
+    'clanid' => $session['user']['clanid'],
+    'clanrank' => $session['user']['clanrank'],
+    'acctid' => $session['user']['acctid']
+]);
+
+$charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
+
+if ($session['user']['clanrank'] >= CLAN_LEADER)
+{
+    //-- Check if clan have more leaders
+    $leadersCount = $charRepository->getClanLeadersCount($session['user']['clanid']);
+
+    if (1 == $leadersCount || 0 == $leadersCount)
+    {
+        $result = $charRepository->getViableLeaderForClan($session['user']['clanid'], $session['user']['acctid']);
+
+        if ($result)
         {
-            //first test to see if we were the leader.
-            $sql = 'SELECT count(1) AS c FROM '.DB::prefix('accounts')." WHERE clanid={$session['user']['clanid']} AND clanrank>=".CLAN_LEADER." AND acctid<>{$session['user']['acctid']}";
-            $result = DB::query($sql);
-            $row = DB::fetch_assoc($result);
+            //-- there is no alternate leader, let's promote the
+            //-- highest ranking member (or oldest member in the
+            //-- event of a tie).  This will capture even people
+            //-- who applied for membership.
+            $charRepository->setNewClanLeader($result['id']);
 
-            if (0 == $row['c'])
-            {
-                //we were the solitary leader.
-                $sql = 'SELECT name,acctid,clanrank FROM '.DB::prefix('accounts')." WHERE clanid={$session['user']['clanid']} AND clanrank > ".CLAN_APPLICANT." AND acctid<>{$session['user']['acctid']} ORDER BY clanrank DESC, clanjoindate LIMIT 1";
-                $result = DB::query($sql);
-
-                if ($row = DB::fetch_assoc($result))
-                {
-                    //there is no alternate leader, let's promote the
-                    //highest ranking member (or oldest member in the
-                    //event of a tie).  This will capture even people
-                    //who applied for membership.
-                    $sql = 'UPDATE '.DB::prefix('accounts').' SET clanrank='.CLAN_LEADER." WHERE acctid={$row['acctid']}";
-                    DB::query($sql);
-                    output('`^Promoting %s`^ to leader as they are the highest ranking member (or oldest member in the event of a tie).`n`n', $row['name']);
-                }
-                else
-                {
-                    //There are no other members, we need to delete the clan.
-                    modulehook('clan-delete', ['clanid' => $session['user']['clanid']]);
-                    $sql = 'DELETE FROM '.DB::prefix('clans')." WHERE clanid={$session['user']['clanid']}";
-                    DB::query($sql);
-                    //just in case we goofed, we don't want to have to worry
-                    //about people being associated with a deleted clan.
-                    $sql = 'UPDATE '.DB::prefix('accounts').' SET clanid=0,clanrank='.CLAN_APPLICANT.",clanjoindate='0000-00-00 00:00:00' WHERE clanid={$session['user']['clanid']}";
-                    DB::query($sql);
-                    output('`^As you were the last member of this clan, it has been deleted.');
-                    require_once 'lib/gamelog.php';
-                    gamelog('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
-                }
-            }
-            else
-            {
-                //we don't have to do anything special with this clan as
-                //although we were leader, there is another leader already
-                //to take our place.
-            }
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.withdraw.message.promoting.leader', [
+                'name' => $result['name'],
+                'sex' => $result['sex']
+            ], $textDomain));
         }
         else
         {
-            //we don't have to do anything special with this clan as we were
-            //not the leader, and so there should still be other members.
-        }
-        $sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE clanid='{$session['user']['clanid']}' AND clanrank>=".CLAN_OFFICER." AND acctid<>'{$session['user']['acctid']}'";
-        $result = DB::query($sql);
-        $withdraw_subj = ['`$Clan Withdraw: `&%s`0', $session['user']['name']];
-        $msg = ['`^One of your clan members has resigned their membership.  `&%s`^ has surrendered their position within your clan!', $session['user']['name']];
-        $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgfrom=0 AND seen=0 AND subject='".addslashes(serialize($withdraw_subj))."'";
-        DB::query($sql);
+            $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
+            $clanEntity = $clanRepository->find($session['user']['clanid']);
 
-        while ($row = DB::fetch_assoc($result))
-        {
-            systemmail($row['acctid'], $withdraw_subj, $msg);
-        }
+            //-- There are no other members, we need to delete the clan.
+            modulehook('clan-delete', ['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity]);
 
-        debuglog($session['user']['login'].' has withdrawn from his/her clan no. '.$session['user']['clanid']);
-        $session['user']['clanid'] = 0;
-        $session['user']['clanrank'] = CLAN_APPLICANT;
-        $session['user']['clanjoindate'] = '0000-00-00 00:00:00';
-        output('`&You have withdrawn from your clan.');
-        addnav('Clan Options');
-        addnav('Return to the Lobby', 'clan.php');
+            \Doctrine::remove($clanEntity);
+            \Doctrine::flush();
+
+            //just in case we goofed, we don't want to have to worry
+            //about people being associated with a deleted clan.
+            $charRepository->expelPlayersFromDeletedClan($session['user']['clanid']);
+
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('section.withdraw.message.deleting.clan', [], $textDomain));
+
+            gamelog('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
+
+            unset($clanEntity);
+        }
+    }
+}
+
+$mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
+
+$sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE clanid='{$session['user']['clanid']}' AND clanrank>=".CLAN_OFFICER." AND acctid<>'{$sessi['user']['acctid']}'";
+$result = DB::query($sql);
+
+$subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
+$msg = ['section.withdraw.mail.message', ['name' => $session['user']['name']], $textDomain];
+
+$mailRepository->deleteMailFromClanBySubj(serialize($subj));
+
+$leaders = $charRepository->getLeadersFromClan($session['user']['clanid'], $session['user']['acctid']);
+
+foreach($leaders as $leader)
+{
+    systemmail($leader['acctid'], $subj, $msg);
+}
+
+debuglog($session['user']['login'].' has withdrawn from his/her clan nº. '.$session['user']['clanid']);
+
+$session['user']['clanid'] = 0;
+$session['user']['clanrank'] = CLAN_APPLICANT;
+$session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
+
+\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.withdraw.message.withdraw', [], $textDomain));
+
+return redirect('clan.php');
