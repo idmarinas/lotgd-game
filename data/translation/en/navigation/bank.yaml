@@ -1,0 +1,16 @@
+# Navs for bank page
+
+# Headers of navigations
+category:
+    money: 'Money'
+
+# Menu navs
+nav:
+    withdraw: 'W?Withdraw'
+    deposit:
+        label: 'D?Deposit'
+        pay: 'D?Pay off Debt'
+    borrow:
+        label: 'L?Take out a Loan'
+        more: 'L?Borrow More'
+    transfer: 'M?Transfer Money'

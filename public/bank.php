@@ -9,8 +9,9 @@ require_once 'lib/sanitize.php';
 
 tlschema('bank');
 
-$result = modulehook('bank-text-domain', ['textDomain' => 'page-bank']);
+$result = modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDomainNavigation' => 'navigation-bank']);
 $textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
 
 page_header('title', [], $textDomain);
 
@@ -199,37 +200,43 @@ elseif ('withdrawfinish' == $op)
     }
 }
 
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
+
 \LotgdNavigation::villageNav();
-\LotgdNavigation::addHeader('bank.category.money');
+\LotgdNavigation::addHeader('category.money');
 
 if ($session['user']['goldinbank'] >= 0)
 {
-    \LotgdNavigation::addNav('bank.nav.withdraw', 'bank.php?op=withdraw');
-    \LotgdNavigation::addNav('bank.nav.deposit.label', 'bank.php?op=deposit');
+    \LotgdNavigation::addNav('nav.withdraw', 'bank.php?op=withdraw');
+    \LotgdNavigation::addNav('nav.deposit.label', 'bank.php?op=deposit');
 
     if (getsetting('borrowperlevel', 20))
     {
-        \LotgdNavigation::addNav('bank.nav.borrow.label', 'bank.php?op=borrow');
+        \LotgdNavigation::addNav('nav.borrow.label', 'bank.php?op=borrow');
     }
 }
 else
 {
-    \LotgdNavigation::addNav('bank.nav.deposit.pay', 'bank.php?op=deposit');
+    \LotgdNavigation::addNav('nav.deposit.pay', 'bank.php?op=deposit');
 
     if (getsetting('borrowperlevel', 20))
     {
-        \LotgdNavigation::addNav('bank.nav.borrow.more', 'bank.php?op=borrow');
+        \LotgdNavigation::addNav('nav.borrow.more', 'bank.php?op=borrow');
     }
 }
 
-\LotgdNavigation::addNav('bank.nav.transfer', 'bank.php?op=transfer');
+\LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
 if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetting('mintransferlev', 3) || $session['user']['dragonkills'] > 0))
 {
-    \LotgdNavigation::addNav('bank.nav.transfer', 'bank.php?op=transfer');
+    \LotgdNavigation::addNav('nav.transfer', 'bank.php?op=transfer');
 }
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-bank-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/bank.twig', $params));
+rawoutput(\LotgdTheme::renderThemeTemplate('page/bank.twig', $params));
 
 page_footer();
