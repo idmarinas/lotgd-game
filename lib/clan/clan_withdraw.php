@@ -58,9 +58,6 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
 
 $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
 
-$sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE clanid='{$session['user']['clanid']}' AND clanrank>=".CLAN_OFFICER." AND acctid<>'{$sessi['user']['acctid']}'";
-$result = DB::query($sql);
-
 $subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
 $msg = ['section.withdraw.mail.message', ['name' => $session['user']['name']], $textDomain];
 
