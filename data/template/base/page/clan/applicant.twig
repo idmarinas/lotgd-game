@@ -1,0 +1,11 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.applicant.subtitle'|t|colorize }}
+
+{{ 'section.applicant.enter'|t({ 'clanOwnerName': clanOwnerName })|colorize }}
+
+{% if clanInfo.clanid > 0 %}
+    {{ 'section.applicant.waiting'|t({ 'clanOwnerName': clanOwnerName, 'clanName': clanInfo.clanname })|colorize }}
+{% else %}
+    {{ 'section.applicant.no.membership'|t|colorize }}
+{% endif %}
