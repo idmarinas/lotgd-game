@@ -35,7 +35,7 @@ if ($remove)
     //delete unread application emails from this user.
     //breaks if the applicant has had their name changed via
     //dragon kill, superuser edit, or lodge color change
-    $subj = serialize(['section.apply.mail.subject', ['name' => $character->getName()], $textDomain]);
+    $subj = serialize(['mail.apply.subject', ['name' => $character->getName()], $textDomain]);
 
     $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
     $mailRepository->deleteMailFromSystemBySubj($subj);

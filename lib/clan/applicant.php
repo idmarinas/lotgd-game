@@ -14,7 +14,7 @@ if ('withdraw' == $op)
     $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
     $claninfo = [];
 
-    $subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
+    $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $textDomain];
 
     $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 }

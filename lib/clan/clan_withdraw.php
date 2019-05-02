@@ -58,8 +58,8 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
 
 $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
 
-$subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
-$msg = ['section.withdraw.mail.message', ['name' => $session['user']['name']], $textDomain];
+$subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $textDomain];
+$msg = ['mail.withdraw.message', ['name' => $session['user']['name']], $textDomain];
 
 $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 
