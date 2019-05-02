@@ -1,13 +1,15 @@
-{{ texts.description|t(null, schemas.description)|colorize }}
+{% translate_default_domain textDomain %}
 
-{{ texts.tradein|t({'armorname': user.armor, 'value': tradeinvalue}, schemas.tradein)|colorize }}
+{{ 'description'|t|colorize }}
+
+{{ 'tradein'|t({'armorname': user.armor, 'value': tradeinvalue})|colorize }}
 
 <table class='ui very compact striped selectable table'>
     <thead>
         <tr>
-            <th>{{ texts.table.header.name|t(null, schemas.table) }}</th>
-            <th>{{ texts.table.header.defense|t(null, schemas.table) }}</th>
-            <th>{{ texts.table.header.cost|t(null, schemas.table) }}</th>
+            <th>{{ 'table.header.name'|t|uncolorize }}</th>
+            <th>{{ 'table.header.defense'|t|uncolorize }}</th>
+            <th>{{ 'table.header.cost'|t|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +40,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">{{ texts.table.notFound|t(null, schemas.table)|colorize }}</td>
+                <td colspan="3">{{ 'table.notFound'|t|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

@@ -1,10 +1,10 @@
 {% if result %}
     {% if buyIt %}
-        {{ texts.payarmor|t({'playerarmor': userPre.armor, 'armorname': result.armorname}, schemas.payarmor)|colorize }}
+        {{ 'payarmor'|t({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}
     {% else %}
-        {{ texts.notenoughgold|t({'armorname': result.armorname}, schemas.notenoughgold)|colorize }}
+        {{ 'notenoughgold'|t({'armorname': result.armorname})|colorize }}
     {% endif %}
 {% else %}
-    {{ texts.nosuchweapon|t(null, schemas.nosuchweapon)|colorize }}
-    {{ texts.tryagain|t(null, schemas.tryagain)|colorize }}
+    {{ 'nosuchweapon'|t|colorize }}
+    {{ 'tryagain'|t|colorize }}
 {% endif %}

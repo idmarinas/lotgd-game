@@ -1,5 +1,6 @@
+{% translate_default_domain textDomain %}
 
-{{ ('`c`b`%' ~ texts.title|t(null, schemas.title) ~'`0´b´c')|colorize }}
+{{ ('`c`b`%' ~ 'title'|t ~ '`0´b´c')|colorize }}
 
 {{ include_theme('page/armor/' ~ opt ~ '.twig') }}
 

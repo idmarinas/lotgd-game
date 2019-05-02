@@ -8,50 +8,25 @@ require_once 'common.php';
 tlschema('armor');
 
 checkday();
+
+// Don't hook on to this text for your standard modules please, use "armor" instead.
+// This hook is specifically to allow modules that do other armors to create ambience.
+$result = modulehook('armor-text-domain', ['textDomain' => 'page-armor', 'textDomainNavigation' => 'navigation-armor']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
+
 $tradeinvalue = round(($session['user']['armorvalue'] * .75), 0);
-$basetext = [
-    'title' => 'title',
-    'description' => 'description',
-    'tradein' => 'tradein',
-    'nosuchweapon' => 'nosuchweapon',
-    'tryagain' => 'tryagain',
-    'notenoughgold' => 'notenoughgold',
-    'payarmor' => 'payarmor',
-    'table' => [
-        'header' => [
-            'name' => 'table.header.name',
-            'defense' => 'table.header.defense',
-            'cost' => 'table.header.cost',
-        ],
-        'notFound' => 'table.notFound'
-    ]
-];
-
-$schemas = [
-    'title' => 'page-armor',
-    'description' => 'page-armor',
-    'tradein' => 'page-armor',
-    'nosuchweapon' => 'page-armor',
-    'tryagain' => 'page-armor',
-    'notenoughgold' => 'page-armor',
-    'payarmor' => 'page-armor',
-    //-- For list of armors (table)
-    'table' => 'page-armor',
-];
-
-$basetext['schemas'] = $schemas;
-
-// This hook is specifically to allow modules that do other armor to create ambience.
-$texts = modulehook('armortext', $basetext);
-$schemas = $texts['schemas'];
-unset($texts['schemas']);
 
 $params = [
-    'texts' => $texts,
-    'schemas' => $schemas
+    'textDomain' => $textDomain,
+    'tradeinvalue' => $tradeinvalue,
 ];
 
-page_header($texts['title'], [], $schemas['title']);
+page_header('title', [], $textDomain);
+
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
 $op = \LotgdHttp::getQuery('op');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
@@ -65,11 +40,11 @@ if ('' == $op)
 
     $params['opt'] = 'list';
     $params['stuff'] = $result;
-    $params['tradeinvalue'] = $tradeinvalue;
 }
 elseif ('buy' == $op)
 {
     $id = (int) \LotgdHttp::getQuery('id');
+
     $params['opt'] = 'buy';
     $params['result'] = $repository->findOneByArmorid($id);
 
@@ -95,8 +70,11 @@ elseif ('buy' == $op)
 }
 \LotgdNavigation::villageNav();
 
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
+
 //-- This is only for params not use for other purpose
 $params = modulehook('page-armor-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/armor.twig', $params));
+rawoutput(\LotgdTheme::renderThemeTemplate('page/armor.twig', $params));
 
 page_footer();
