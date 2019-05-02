@@ -16,7 +16,7 @@ if ('withdraw' == $op)
 
     $subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
 
-    $mailRepository->deleteMailFromClanBySubj(serialize($subj));
+    $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 }
 
 if (($claninfo['clanid'] ?? 0) > 0)

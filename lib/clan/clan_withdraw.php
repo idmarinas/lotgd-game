@@ -61,7 +61,7 @@ $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
 $subj = ['section.withdraw.mail.subject', ['name' => $session['user']['name']], $textDomain];
 $msg = ['section.withdraw.mail.message', ['name' => $session['user']['name']], $textDomain];
 
-$mailRepository->deleteMailFromClanBySubj(serialize($subj));
+$mailRepository->deleteMailFromSystemBySubj(serialize($subj));
 
 $leaders = $charRepository->getLeadersFromClan($session['user']['clanid'], $session['user']['acctid']);
 

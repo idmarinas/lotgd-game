@@ -38,7 +38,7 @@ if ($remove)
     $subj = serialize(['section.apply.mail.subject', ['name' => $character->getName()], $textDomain]);
 
     $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
-    $mailRepository->deleteMailFromClanBySubj($subj);
+    $mailRepository->deleteMailFromSystemBySubj($subj);
 
     unset($character);
 }
