@@ -379,6 +379,7 @@ return [
         'vendor/jaxon-php/jaxon-dialogs/src',
         'vendor/macfja/tracy-doctrine-sql/lib',
         'vendor/marioblazek/twig-byte-units-extension/src',
+        'vendor/milo/vendor-versions/src',
         'vendor/phan/phan/src/Phan',
         'vendor/snipe/banbuilder/src',
         'vendor/symfony/filesystem',
