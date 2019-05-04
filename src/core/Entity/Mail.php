@@ -56,7 +56,7 @@ class Mail
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="string", length=255, nullable=false)
+     * @ORM\Column(name="subject", type="string", length=500, nullable=false)
      */
     private $subject;
 
