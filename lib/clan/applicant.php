@@ -7,16 +7,24 @@ modulehook('clan-enter');
 if ('withdraw' == $op)
 {
     $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
-    \LotgdFlashMessages::addInfoMessage('flash.message.applicant.withdraw', [], $textDomain);
+
+    \LotgdFlashMessages::addInfoMessage(\LotgdSanitize::fullSanitize(\LotgdTranslator::t('flash.message.applicant.withdraw', [
+        'clanOwnerName' => $params['clanOwnerName'],
+        'clanName' => $claninfo['clanname']
+    ], $textDomain)));
 
     $session['user']['clanid'] = 0;
     $session['user']['clanrank'] = CLAN_APPLICANT;
     $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
     $claninfo = [];
 
-    $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $textDomain];
+    $subj = ['mail.apply.subject', ['name' => $session['user']['name']], $textDomain];
 
-    $mailRepository->deleteMailFromSystemBySubj(serialize($subj));
+    $mailRepository->deleteMailFromSystemBySubj(serialize($subj), $session['user']['acctid']);
+
+    $subj = ['mail.desc.reminder.subject', [], $textDomain];
+
+    $mailRepository->deleteMailFromSystemBySubj(serialize($subj), $session['user']['acctid']);
 }
 
 if (($claninfo['clanid'] ?? 0) > 0)
