@@ -7,7 +7,7 @@ modulehook('clan-enter');
 if ('withdraw' == $op)
 {
     $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
-    \LotgdFlashMessages::addInfoMessage('section.applicant.message.withdraw', [], $textDomain);
+    \LotgdFlashMessages::addInfoMessage('flash.message.applicant.withdraw', [], $textDomain);
 
     $session['user']['clanid'] = 0;
     $session['user']['clanrank'] = CLAN_APPLICANT;
