@@ -27,7 +27,7 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
             //-- who applied for membership.
             $charRepository->setNewClanLeader($result['id']);
 
-            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.withdraw.message.promoting.leader', [
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.withdraw.promoting.leader', [
                 'name' => $result['name'],
                 'sex' => $result['sex']
             ], $textDomain));
@@ -47,7 +47,7 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
             //about people being associated with a deleted clan.
             $charRepository->expelPlayersFromDeletedClan($session['user']['clanid']);
 
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('section.withdraw.message.deleting.clan', [], $textDomain));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.withdraw.deleting.clan', [], $textDomain));
 
             gamelog('Clan '.$session['user']['clanid'].' has been deleted, last member gone', 'Clan');
 
@@ -76,6 +76,6 @@ $session['user']['clanid'] = 0;
 $session['user']['clanrank'] = CLAN_APPLICANT;
 $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
 
-\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.withdraw.message.withdraw', [], $textDomain));
+\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.withdraw.withdraw', [], $textDomain));
 
 return redirect('clan.php');
