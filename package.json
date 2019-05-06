@@ -34,7 +34,7 @@
     "dependencies": {
         "fomantic-ui": "2.7.4",
         "jquery": "^3.4.1",
-        "sweetalert2": "^8.9.0",
+        "sweetalert2": "^8.10.0",
         "toastr": "^2.1.4",
         "snyk": "^1.161.1"
     },
