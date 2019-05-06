@@ -18,10 +18,13 @@ use Doctrine\ORM\{
     QueryBuilder
 };
 use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
+use Zend\Hydrator\ClassMethods;
 use Zend\Paginator\Paginator;
 
 class EntityRepository extends DoctrineEntityRepository
 {
+    protected $repositoryHydrator;
+
     /**
      * Get a pagination for a result.
      *
@@ -42,5 +45,46 @@ class EntityRepository extends DoctrineEntityRepository
         $paginator->setItemCountPerPage($perPage);
 
         return $paginator;
+    }
+
+    /**
+     * Hydrate an object by populating getter/setter methods.
+     *
+     * @param array $data
+     *
+     * @return object
+     */
+    public function hydrateEntity(array $data)
+    {
+        $entity = $this->_entityName;
+
+        return $this->getHydrator()->hydrate($data, new $entity());
+    }
+
+    /**
+     * Extract values from an object with class methods.
+     *
+     * @param object $object
+     *
+     * @return array
+     */
+    public function extractEntity($object): array
+    {
+        return $this->getHydrator()->extract($object);
+    }
+
+    /**
+     * Get Hydrator instance.
+     *
+     * @return ClassMethods
+     */
+    protected function getHydrator(): ClassMethods
+    {
+        if (! $this->repositoryHydrator)
+        {
+            $this->repositoryHydrator = new ClassMethods();
+        }
+
+        return $this->repositoryHydrator;
     }
 }
