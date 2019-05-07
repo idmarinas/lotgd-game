@@ -14,14 +14,15 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
-use Lotgd\Core\Pattern\Container;
+use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
-    use Container;
+    use PatternCore\Container;
+    use PatternCore\Sanitize;
 
     protected $flashMessages;
 
@@ -58,7 +59,7 @@ class FlashMessages extends AbstractExtension
             foreach ($messages as $id => $message)
             {
                 $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', [
-                    'message' => $message,
+                    'message' => $this->getSanitize()->fullSanitize($message),
                     'class' => $type,
                     'close' => true,
                     'id' => $id
