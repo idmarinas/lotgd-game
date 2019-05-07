@@ -17,6 +17,8 @@ use Doctrine\ORM\EntityRepository as DoctrineRepository;
 
 class MailRepository extends DoctrineRepository
 {
+    use Mail\Clan;
+
     /**
      * Get a count of see and unsee mail.
      *
