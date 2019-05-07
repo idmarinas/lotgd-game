@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="clanshort", columns={"clanshort"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ClansRepository")
  */
 class Clans
 {
@@ -84,7 +84,7 @@ class Clans
      *
      * @ORM\Column(name="customsay", type="string", length=15, nullable=false)
      */
-    private $customsay;
+    private $customsay = '';
 
     /**
      * Set the value of Clanid.
