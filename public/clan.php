@@ -139,7 +139,6 @@ elseif ('withdraw' == $op)
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
 
-bdump($params);
 //-- This is only for params not use for other purpose
 $params = modulehook('page-clan-tpl-params', $params);
 rawoutput(LotgdTheme::renderThemeTemplate('page/clan.twig', $params));
