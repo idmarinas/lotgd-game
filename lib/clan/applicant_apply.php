@@ -49,7 +49,7 @@ if ($clanId > 0)
 
 $order = (int) \LotgdHttp::getQuery('order');
 
-$params['clanList'] = $clanRepository->getClanListForApplicant($order);
+$params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
 
 if (count($params['clanList']))
 {
