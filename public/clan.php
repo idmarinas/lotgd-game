@@ -40,8 +40,6 @@ $params = [
 \LotgdNavigation::addHeader('category.options');
 \LotgdNavigation::addNav('nav.list.list', 'clan.php?op=list');
 
-addnav('acut', 'clan.php');
-
 $ranks = [
     CLAN_APPLICANT => 'ranks.00',
     CLAN_MEMBER => 'ranks.010',
