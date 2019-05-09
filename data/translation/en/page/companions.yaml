@@ -1,0 +1,62 @@
+title: 'Companion Editor'
+
+section:
+    default:
+        note: '`nIf you wish to delete a companion, you have to deactivate it first.'
+        table:
+            thead:
+                ops: 'Ops'
+                name: 'Name'
+                cost: 'Cost'
+                category: 'Category: {category}'
+            tbody:
+                cost: '`%{gems,number} gems`0, `^{gold,number} gold`0'
+                not.found: '`$Not found companions`0'
+            options:
+                edit: 'Edit'
+                del: 'Del'
+                take: 'Take'
+                deac: 'Deactivate'
+                act: 'Activate'
+    edit:
+        subtitle: ' Edit/Add Companion'
+        form:
+            table:
+                tbody:
+                    name: 'Companion Name'
+                    dying.text: 'Companion Dyingtext'
+                    description: 'Companion Description'
+                    join.text: 'Companion join text'
+                    category: 'Companion Category'
+                    location: 'Companion Availability'
+                    max.hp: 'Maxhitpoints'
+                    hp.bonus: 'Hitpoints bonus per level'
+                    attack: 'Attack'
+                    attack.bonus: 'Attack bonus per level'
+                    defense: Defense
+                    defense.bonus: 'Defense bonus per level'
+                    figther: 'Fighter?'
+                    defender: 'Defender?'
+                    healer: 'Healer level'
+                    healer.note: '`iThis value determines the maximum amount of HP healed per round`i'
+                    magician: 'Magician?'
+                    magician.note: '`iThis value determines the maximum amount of damage caused per round`i'
+                    can.die: 'Companion cannot die'
+                    can.healed: 'Companion cannot be healed'
+                    cost:
+                        dk: 'Companion Cost (DKs)'
+                        gems: 'Companion Cost (Gems)'
+                        gold: 'Companion Cost (Gold)'
+                    allow:
+                        shades: 'Allow in shades'
+                        pvp: 'Allow in PvP'
+                        train: 'Allow in train'
+            button:
+                submit: 'Save'
+flash.message:
+    actions:
+        take:
+            success: 'Successfully taken "{name}" as companion.'
+            fail: 'Companion not taken due to global limit.'
+        save.success: 'Saved!'
+    not.found: 'Not found companion'

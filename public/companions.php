@@ -7,82 +7,121 @@
 // hilarious copy of mounts.php
 require_once 'common.php';
 require_once 'lib/showform.php';
-require_once 'lib/superusernav.php';
 
 check_su_access(SU_EDIT_MOUNTS);
 
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Companions::class);
+
+$textDomain = 'page-companions';
+$hydrator = new \Zend\Hydrator\ClassMethods();
+
+$params = [];
+
 tlschema('companions');
 
-page_header('Companion Editor');
+page_header('title', [], $textDomain);
 
-superusernav();
+\LotgdNavigation::superuserGrottoNav();
 
-addnav('Companion Editor');
-addnav('Add a companion', 'companions.php?op=add');
+\LotgdNavigation::addHeader('companions.category.editor');
+\LotgdNavigation::addNav('companions.nav.add', 'companions.php?op=add');
 
-$op = httpget('op');
-$id = httpget('id');
+$op = (string) \LotgdHttp::getQuery('op');
+$id = (int) \LotgdHttp::getQuery('id');
+
+$vname = getsetting('villagename', LOCATION_FIELDS);
+$locs = [
+    $vname => [
+        'location.village.of',
+        ['name' => $vname],
+        'app-default'
+    ]
+];
+$locs = modulehook('camplocs', $locs);
+$locs['all'] = [
+    'location.everywhere',
+    [],
+    'app-default'
+];
+ksort($locs);
+reset($locs);
+
+$params['locations'] = $locs;
 
 if ('deactivate' == $op)
 {
-    $sql = 'UPDATE '.DB::prefix('companions')." SET companionactive=0 WHERE companionid='$id'";
-    DB::query($sql);
+    $companionEntity = $repository->find($id);
+    $companionEntity->setCompanionactive(0);
+
+    \Doctrine::persist($companionEntity);
+
     $op = '';
-    httpset('op', '');
-    invalidatedatacache("companionsdata-$id");
+    \LotgdHttp::setQuery('op', '');
+
+    invalidatedatacache("companionsdata-{$id}");
 }
 elseif ('activate' == $op)
 {
-    $sql = 'UPDATE '.DB::prefix('companions')." SET companionactive=1 WHERE companionid='$id'";
-    DB::query($sql);
+    $companionEntity = $repository->find($id);
+    $companionEntity->setCompanionactive(1);
+
+    \Doctrine::persist($companionEntity);
+
     $op = '';
-    httpset('op', '');
-    invalidatedatacache("companiondata-$id");
+    \LotgdHttp::setQuery('op', '');
+
+    invalidatedatacache("companiondata-{$id}");
 }
 elseif ('del' == $op)
 {
-    //drop the companion.
-    $sql = 'DELETE FROM '.DB::prefix('companions')." WHERE companionid='$id'";
-    DB::query($sql);
-    module_delete_objprefs('companions', $id);
+    $companionEntity = $repository->find($id);
+
+    \Doctrine::remove($companionEntity);
+
     $op = '';
-    httpset('op', '');
+    \LotgdHttp::setQuery('op', '');
+
+    module_delete_objprefs('companions', $id);
     invalidatedatacache("companiondata-$id");
 }
 elseif ('take' == $op)
 {
-    $sql = 'SELECT * FROM '.DB::prefix('companions')." WHERE companionid='$id'";
-    $result = DB::query($sql);
+    $companionEntity = $repository->find($id);
 
-    if ($row = DB::fetch_assoc($result))
+    $row = $hydrator->extract($companionEntity);
+
+    if ($row)
     {
         $row['attack'] = $row['attack'] + $row['attackperlevel'] * $session['user']['level'];
         $row['defense'] = $row['defense'] + $row['defenseperlevel'] * $session['user']['level'];
         $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
         $row['hitpoints'] = $row['maxhitpoints'];
+
         $row = modulehook('alter-companion', $row);
-        $row['abilities'] = @unserialize($row['abilities']);
+
         require_once 'lib/buffs.php';
 
+        $message = 'flash.message.take.fail';
+        $paramsMessage = [];
         if (apply_companion($row['name'], $row))
         {
-            output('`$Successfully taken `^%s`$ as companion.', $row['name']);
+            $message = 'flash.message.take.success';
+            $paramsMessage = ['name' => $row['name']];
         }
-        else
-        {
-            output('`$Companion not taken due to global limit.`0');
-        }
+
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, $paramsMessage, $textDomain));
     }
+
     $op = '';
-    httpset('op', '');
+    \LotgdHttp::setQuery('op', '');
 }
 elseif ('save' == $op)
 {
-    $subop = httpget('subop');
+    $subop = (string) \LotgdHttp::getQuery('subop');
 
     if ('' == $subop)
     {
-        $companion = httppost('companion');
+        $companion = \LotgdHttp::getPost('companion');
 
         if ($companion)
         {
@@ -94,317 +133,95 @@ elseif ('save' == $op)
             $companion['cannotdie'] = (bool) ($companion['cannotdie'] ?? false);
             $companion['cannotbehealed'] = (bool) ($companion['cannotbehealed'] ?? false);
 
-            $sql = '';
-            $keys = '';
-            $vals = '';
-            $i = 0;
+            $companionEntity = $repository->find($id);
 
-            foreach ($companion as $key => $val)
+            if (! $companionEntity)
             {
-                if (is_array($val))
-                {
-                    $val = addslashes(serialize($val));
-                }
-                $sql .= (($i > 0) ? ', ' : '')."$key='$val'";
-                $keys .= (($i > 0) ? ', ' : '')."$key";
-                $vals .= (($i > 0) ? ', ' : '')."'$val'";
-                $i++;
+                $companionEntity = new \Lotgd\Core\Entity\Companions();
             }
 
-            $sql = 'INSERT INTO '.DB::prefix('companions')." ($keys) VALUES ($vals)";
-            if ($id > '')
-            {
-                $sql = 'UPDATE '.DB::prefix('companions')." SET $sql WHERE companionid='$id'";
-            }
-            DB::query($sql);
-            invalidatedatacache("companiondata-$id");
+            $companionEntity = $hydrator->hydrate($companion, $companionEntity);
 
-            if (DB::affected_rows() > 0)
-            {
-                output('`^Companion saved!`0`n`n');
-            }
-            else
-            {
-                output('`^Companion `$not`^ saved: `$%s`0`n`n', $sql);
-            }
+            \Doctrine::persist($companionEntity);
+
+            invalidatedatacache("companiondata-{$id}");
+
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
         }
     }
     elseif ('module' == $subop)
     {
         // Save modules settings
-        $module = httpget('module');
-        $post = httpallpost();
+        $module = (string) \LotgdHttp::getQuery('module');
+        $post = \LotgdHttp::getPostAll();
         reset($post);
 
         foreach ($post as $key => $val)
         {
             set_module_objpref('companions', $id, $key, $val, $module);
         }
-        output('`^Saved!`0`n');
+
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
     }
 
-    $op = '';
-    if ($id)
-    {
-        $op = 'edit';
-    }
-    httpset('op', $op);
+    $op =  $id ? 'edit' : '';
+    \LotgdHttp::setQuery('op', $op);
 }
+
+unset($companionEntity);
+\Doctrine::flush();
 
 if ('' == $op)
 {
-    $sql = 'SELECT * FROM '.DB::prefix('companions').' ORDER BY category, name';
-    $result = DB::query($sql);
+    $params['tpl'] = 'default';
 
-    $ops = translate_inline('Ops');
-    $name = translate_inline('Name');
-    $cost = translate_inline('Cost');
-
-    $edit = translate_inline('Edit');
-    $del = translate_inline('Del');
-    $take = translate_inline('Take');
-    $deac = translate_inline('Deactivate');
-    $act = translate_inline('Activate');
-
-    rawoutput("<table class='ui very compact striped selectable table'>");
-    rawoutput("<thead><tr><th>$ops</th><th>$name</th><th>$cost</th></tr></thead>");
-    $cat = '';
-    $count = 0;
-
-    while ($row = DB::fetch_assoc($result))
-    {
-        if ($cat != $row['category'])
-        {
-            rawoutput("<thead><tr><td colspan='5'>");
-            output('Category: %s', $row['category']);
-            rawoutput('</td></tr></thead>');
-            $cat = $row['category'];
-            $count = 0;
-        }
-
-        if (isset($companions[$row['companionid']]))
-        {
-            $companions[$row['companionid']] = (int) $companions[$row['companionid']];
-        }
-        else
-        {
-            $companions[$row['companionid']] = 0;
-        }
-        rawoutput("<tr class='".($count % 2 ? 'trlight' : 'trdark')."'>");
-        rawoutput("<td nowrap>[ <a href='companions.php?op=edit&id={$row['companionid']}'>$edit</a> |");
-        addnav('', "companions.php?op=edit&id={$row['companionid']}");
-
-        if ($row['companionactive'])
-        {
-            rawoutput("$del |");
-        }
-        else
-        {
-            $mconf = sprintf($conf, $companions[$row['companionid']]);
-            rawoutput("<a href='companions.php?op=del&id={$row['companionid']}'>$del</a> |");
-            addnav('', "companions.php?op=del&id={$row['companionid']}");
-        }
-
-        if ($row['companionactive'])
-        {
-            rawoutput("<a href='companions.php?op=deactivate&id={$row['companionid']}'>$deac</a> | ");
-            addnav('', "companions.php?op=deactivate&id={$row['companionid']}");
-        }
-        else
-        {
-            rawoutput("<a href='companions.php?op=activate&id={$row['companionid']}'>$act</a> | ");
-            addnav('', "companions.php?op=activate&id={$row['companionid']}");
-        }
-        rawoutput("<a href='companions.php?op=take&id={$row['companionid']}'>$take</a> ]</td>");
-        addnav('', "companions.php?op=take&id={$row['companionid']}");
-        rawoutput('<td>');
-        output_notl('`&%s`0', $row['name']);
-        rawoutput('</td><td>');
-        output('`%%s gems`0, `^%s gold`0', $row['companioncostgems'], $row['companioncostgold']);
-        rawoutput('</td></tr>');
-        $count++;
-    }
-    rawoutput('</table>');
-    output('`nIf you wish to delete a companion, you have to deactivate it first.');
+    $params['companionsList'] = $repository->findBy([], ['category' => 'DESC', 'name' => 'DESC']);
 }
 elseif ('add' == $op)
 {
-    output('Add a companion:`n');
-    addnav('Companion Editor Home', 'companions.php');
-    companionform([]);
+    $params['tpl'] = 'edit';
+    $params['companion'] = [];
+
+    \LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
 }
 elseif ('edit' == $op)
 {
-    addnav('Companion Editor Home', 'companions.php');
-    $sql = 'SELECT * FROM '.DB::prefix('companions')." WHERE companionid='$id'";
-    $result = DB::query($sql);
+    \LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
 
-    if (DB::num_rows($result) <= 0)
+    $companionEntity = $repository->find($id);
+
+    if (! $companionEntity)
     {
-        output('`iThis companion was not found.´i');
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('', [], $textDomain));
+
+        return redirect('companions.php');
+    }
+
+    \LotgdNavigation::addNav('companions.nav.properties', "companions.php?op=edit&id={$id}");
+
+    module_editor_navs('prefs-companions', "companions.php?op=edit&subop=module&id={$id}&module=");
+
+    $subop = (string) \LotgdHttp::getQuery('subop');
+
+    if ('module' == $subop)
+    {
+        $module = (string) \LotgdHttp::getQuery('module');
+
+        rawoutput("<form action='companions.php?op=save&subop=module&id={$id}&module={$module}' method='POST'>");
+        module_objpref_edit('companions', $module, $id);
+        rawoutput('</form>');
+
+        \LotgdNavigation::addNavAllow("companions.php?op=save&subop=module&id={$id}&module={$module}");
+
+        page_footer();
     }
     else
     {
-        addnav('Companion properties', "companions.php?op=edit&id=$id");
-        module_editor_navs('prefs-companions', "companions.php?op=edit&subop=module&id=$id&module=");
-        $subop = httpget('subop');
-
-        if ('module' == $subop)
-        {
-            $module = httpget('module');
-            rawoutput("<form action='companions.php?op=save&subop=module&id=$id&module=$module' method='POST'>");
-            module_objpref_edit('companions', $module, $id);
-            rawoutput('</form>');
-            addnav('', "companions.php?op=save&subop=module&id=$id&module=$module");
-        }
-        else
-        {
-            output('Companion Editor:`n');
-            $row = DB::fetch_assoc($result);
-            $row['abilities'] = @unserialize($row['abilities']);
-            companionform($row);
-        }
+        $params['tpl'] = 'edit';
+        $params['companion'] = $companionEntity;
     }
 }
 
-function companionform($companion)
-{
-    // Let's sanitize the data
-    $companion['companionactive'] = $companion['companionactive'] ?? '';
-    $companion['name'] = $companion['name'] ?? '';
-    $companion['companionid'] = $companion['companionid'] ?? '';
-    $companion['description'] = $companion['description'] ?? '';
-    $companion['dyingtext'] = $companion['dyingtext'] ?? '';
-    $companion['jointext'] = $companion['jointext'] ?? '';
-    $companion['category'] = $companion['category'] ?? '';
-    $companion['companionlocation'] = $companion['companionlocation'] ?? 'all';
-    $companion['companioncostdks'] = $companion['companioncostdks'] ?? 0;
-    $companion['companioncostgems'] = $companion['companioncostgems'] ?? 0;
-    $companion['companioncostgold'] = $companion['companioncostgold'] ?? 0;
-    $companion['attack'] = $companion['attack'] ?? '';
-    $companion['attackperlevel'] = $companion['attackperlevel'] ?? '';
-    $companion['defense'] = $companion['defense'] ?? '';
-    $companion['defenseperlevel'] = $companion['defenseperlevel'] ?? '';
-    $companion['hitpoints'] = $companion['hitpoints'] ?? '';
-    $companion['maxhitpoints'] = $companion['maxhitpoints'] ?? '';
-    $companion['maxhitpointsperlevel'] = $companion['maxhitpointsperlevel'] ?? '';
-    $companion['abilities']['fight'] = $companion['abilities']['fight'] ?? 0;
-    $companion['abilities']['defend'] = $companion['abilities']['defend'] ?? 0;
-    $companion['abilities']['heal'] = $companion['abilities']['heal'] ?? 0;
-    $companion['abilities']['magic'] = $companion['abilities']['magic'] ?? 0;
-    $companion['cannotdie'] = $companion['cannotdie'] ?? 0;
-    $companion['cannotbehealed'] = $companion['cannotbehealed'] ?? 1;
-    $companion['allowinshades'] = $companion['allowinshades'] ?? 0;
-    $companion['allowinpvp'] = $companion['allowinpvp'] ?? 0;
-    $companion['allowintrain'] = $companion['allowintrain'] ?? 0;
-
-    rawoutput("<form action='companions.php?op=save&id={$companion['companionid']}' method='POST'>");
-    rawoutput("<input type='hidden' name='companion[companionactive]' value=\"".$companion['companionactive'].'">');
-    addnav('', "companions.php?op=save&id={$companion['companionid']}");
-    rawoutput("<table width='100%'>");
-    rawoutput('<tr><td nowrap>');
-    output('Companion Name:');
-    rawoutput("</td><td><input name='companion[name]' value=\"".htmlentities($companion['name'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" maxlength='50'></td></tr>");
-    rawoutput('<tr><td nowrap>');
-    output('Companion Dyingtext:');
-    rawoutput("</td><td><input name='companion[dyingtext]' value=\"".htmlentities($companion['dyingtext'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion Description:');
-    rawoutput("</td><td><textarea cols='25' rows='5' name='companion[description]'>".htmlentities($companion['description'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion join text:');
-    rawoutput("</td><td><textarea cols='25' rows='5' name='companion[jointext]'>".htmlentities($companion['jointext'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion Category:');
-    rawoutput("</td><td><input name='companion[category]' value=\"".htmlentities($companion['category'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" maxlength='50'></td></tr>");
-    rawoutput('<tr><td nowrap>');
-    output('Companion Availability:');
-    rawoutput('</td><td nowrap>');
-    // Run a modulehook to find out where camps are located.  By default
-    // they are located in 'Degolburg' (ie, getgamesetting('villagename'));
-    // Some later module can remove them however.
-    $vname = getsetting('villagename', LOCATION_FIELDS);
-    $locs = [$vname => sprintf_translate('The Village of %s', $vname)];
-    $locs = modulehook('camplocs', $locs);
-    $locs['all'] = translate_inline('Everywhere');
-    ksort($locs);
-    reset($locs);
-    rawoutput("<select name='companion[companionlocation]'>");
-
-    foreach ($locs as $loc => $name)
-    {
-        rawoutput("<option value='$loc'".($companion['companionlocation'] == $loc ? ' selected' : '').">$name</option>");
-    }
-
-    rawoutput('<tr><td nowrap>');
-    output('Maxhitpoints / Bonus per level:');
-    rawoutput("</td><td><input name='companion[maxhitpoints]' value=\"".htmlentities($companion['maxhitpoints'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\"> / <input name='companion[maxhitpointsperlevel]' value=\"".htmlentities($companion['maxhitpointsperlevel'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Attack / Bonus per level:');
-    rawoutput("</td><td><input name='companion[attack]' value=\"".htmlentities($companion['attack'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\"> / <input name='companion[attackperlevel]' value=\"".htmlentities($companion['attackperlevel'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Defense / Bonus per level:');
-    rawoutput("</td><td><input name='companion[defense]' value=\"".htmlentities($companion['defense'], ENT_COMPAT, getsetting('charset', 'UTF-8'))."\"> / <input name='companion[defenseperlevel]' value=\"".htmlentities($companion['defenseperlevel'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-
-    rawoutput('<tr><td nowrap>');
-    output('Fighter?:');
-    rawoutput("</td><td><input id='fighter' type='checkbox' name='companion[abilities][fight]' value='1'".(true == $companion['abilities']['fight'] ? ' checked' : '')." onClick='document.getElementById(\"defender\").disabled=document.getElementById(\"fighter\").checked; if(document.getElementById(\"defender\").disabled==true) document.getElementById(\"defender\").checked=false;'></td></tr>");
-    rawoutput('<tr><td nowrap>');
-    output('Defender?:');
-    rawoutput("</td><td><input id='defender' type='checkbox' name='companion[abilities][defend]' value='1'".(true == $companion['abilities']['defend'] ? ' checked' : '')." onClick='document.getElementById(\"fighter\").disabled=document.getElementById(\"defender\").checked; if(document.getElementById(\"fighter\").disabled==true) document.getElementById(\"fighter\").checked=false;'></td></tr>");
-    rawoutput('<tr><td nowrap>');
-    output('Healer level:');
-    rawoutput("</td><td valign='top'><select name='companion[abilities][heal]'>");
-
-    for ($i = 0; $i <= 30; $i++)
-    {
-        rawoutput("<option value='$i'".($companion['abilities']['heal'] == $i ? ' selected' : '').">$i</option>");
-    }
-    rawoutput('</select></td></tr>');
-    rawoutput("<tr><td colspan='2'>");
-    output('`iThis value determines the maximum amount of HP healed per round´i');
-    rawoutput('</td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Magician?:');
-    rawoutput("</td><td valign='top'><select name='companion[abilities][magic]'>");
-
-    for ($i = 0; $i <= 30; $i++)
-    {
-        rawoutput("<option value='$i'".($companion['abilities']['magic'] == $i ? ' selected' : '').">$i</option>");
-    }
-    rawoutput('</select></td></tr>');
-    rawoutput("<tr><td colspan='2'>");
-    output('`iThis value determines the maximum amount of damage caused per round´i');
-    rawoutput('</td></tr>');
-
-    rawoutput('<tr><td nowrap>');
-    output('Companion cannot die:');
-    rawoutput("</td><td><input type='checkbox' name='companion[cannotdie]' value='1'".(true == $companion['cannotdie'] ? ' checked' : '').'></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion cannot be healed:');
-    rawoutput("</td><td><input type='checkbox' name='companion[cannotbehealed]' value='1'".(true == $companion['cannotbehealed'] ? ' checked' : '').'></td></tr>');
-    rawoutput('<tr><td nowrap>');
-
-    output('Companion Cost (DKs):');
-    rawoutput("</td><td><input name='companion[companioncostdks]' value=\"".htmlentities((int) $companion['companioncostdks'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion Cost (Gems):');
-    rawoutput("</td><td><input name='companion[companioncostgems]' value=\"".htmlentities((int) $companion['companioncostgems'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Companion Cost (Gold):');
-    rawoutput("</td><td><input name='companion[companioncostgold]' value=\"".htmlentities((int) $companion['companioncostgold'], ENT_COMPAT, getsetting('charset', 'UTF-8')).'"></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Allow in shades:');
-    rawoutput("</td><td><input type='checkbox' name='companion[allowinshades]' value='1'".(true == $companion['allowinshades'] ? ' checked' : '').'></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Allow in PvP:');
-    rawoutput("</td><td><input type='checkbox' name='companion[allowinpvp]' value='1'".(true == $companion['allowinpvp'] ? ' checked' : '').'></td></tr>');
-    rawoutput('<tr><td nowrap>');
-    output('Allow in train:');
-    rawoutput("</td><td><input type='checkbox' name='companion[allowintrain]' value='1'".(true == $companion['allowintrain'] ? ' checked' : '').'></td></tr>');
-    rawoutput('</table>');
-    $save = translate_inline('Save');
-    rawoutput("<input type='submit' class='button' value='$save'></form>");
-}
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/companions.twig', $params));
 
 page_footer();

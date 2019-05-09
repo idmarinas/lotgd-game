@@ -1,0 +1,42 @@
+{% translate_default_domain 'page-companions' %}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
+            <th>{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
+            <th>{{ 'section.default.table.thead.cost'|t|uncolorize }}</th>
+        </tr>
+    </thead>
+    {% set cat = '' %}
+    {% for companion in companionsList %}
+        {% if cat != companion.category %}
+            {% set cat = companion.category %}
+            <thead>
+                <td colspan="3">{{ 'section.default.table.thead.category'|t({ 'category': companion.category })|colorize }}</td>
+            </thead>
+        {% endif %}
+        <tr>
+            <td class="collapsing">
+                <div class="ui mini buttons">
+                    <a href="{{ ('companions.php?op=edit&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.edit'|t|colorize }}</a>
+                    {% if companion.companionactive %}
+                        {{ delText }} |
+                        <a href="{{ ('companions.php?op=deactivate&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.deac'|t|colorize }}</a> |
+                    {% else %}
+                        <a href="{{ ('companions.php?op=del&id=' ~ companion.companionid)|lotgd_url }}" class="ui red button">{{ 'section.default.table.options.del'|t|colorize }}</a> |
+                        <a href="{{ ('companions.php?op=activate&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.act'|t|colorize }}</a> |
+                    {% endif %}
+                    <a href="{{ ('companions.php?op=take&id=' ~ companion.companionid)|lotgd_url }}" class="ui button">{{ 'section.default.table.options.take'|t|colorize }}</a>
+                </div>
+            </td>
+            <td>{{ '`&%s`0'|format(companion.name)|colorize }}</td>
+            <td>{{ 'section.default.table.tbody.cost'|t({ 'gems': companion.companioncostgems, 'gold': companion.companioncostgold })|colorize }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">{{ 'section.default.table.tbody.not.found'|t|colorize }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{{ 'section.default.note'|t|colorize}}

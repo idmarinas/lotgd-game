@@ -1,0 +1,245 @@
+{% translate_default_domain 'page-companions' %}
+
+{{ 'section.edit.subtitle'|t|colorize }}
+
+<form class="ui form" action="{{ ('companions.php?op=save&id=' ~ companion.companionid)|lotgd_url }}" method="POST">
+    <input type="hidden" name="companion[companionactive]" value="{{ companion.companionactive }}">
+    <table class="ui very compact table">
+        <tbody>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.name'|t|colorize }}</td>
+                <td><input name="companion[name]" value="{{ companion.name }}" maxlength="50"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.dying.text'|t|colorize }}</td>
+                <td><input name="companion[dyingtext]" value="{{ companion.dyingtext }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.description'|t|colorize }}</td>
+                <td><textarea name="companion[description]">{{ companion.description }}</textarea></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.join.text'|t|colorize }}</td>
+                <td><textarea name="companion[jointext]">{{ companion.jointext }}</textarea></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.category'|t|colorize }}</td>
+                <td><input name="companion[category]" value="{{ companion.category }}" maxlength="50"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.location'|t|colorize }}</td>
+                <td>
+                    <select name="companion[companionlocation]" class="ui fluid dropdown">
+                        {% for loc, name in locations %}
+                            <option value="{{ loc }}" {{ companion.companionlocation == loc ? 'selected' : '' }}>{{ name[0]|tl(name[1], name[2])|uncolorize }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'section.edit.form.table.tbody.max.hp'|t|colorize }}</div>
+                                <input name="companion[maxhitpoints]" value="{{ companion.maxhitpoints }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'section.edit.form.table.tbody.hp.bonus'|t|colorize }}</div>
+                                <input name="companion[maxhitpointsperlevel]" value="{{ companion.maxhitpointsperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'section.edit.form.table.tbody.attack'|t|colorize }}</div>
+                                <input name="companion[attack]" value="{{ companion.attack }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'section.edit.form.table.tbody.attack.bonus'|t|colorize }}</div>
+                                <input name="companion[attackperlevel]" value="{{ companion.attackperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="ui two column grid">
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                <div class="ui label">{{ 'section.edit.form.table.tbody.defense'|t|colorize }}</div>
+                                <input name="companion[defense]" value="{{ companion.defense }}">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid labeled input">
+                                    <div class="ui label">{{ 'section.edit.form.table.tbody.defense.bonus'|t|colorize }}</div>
+                                <input name="companion[defenseperlevel]" value="{{ companion.defenseperlevel }}">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.figther'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[abilities][fight]" value="0">
+                        <input id="fighter" type="checkbox" name="companion[abilities][fight]" value="1" {% if true == companion.abilities.fight %}checked{% endif %} >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.defender'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[abilities][defend]" value="0">
+                        <input id="defender" type="checkbox" name="companion[abilities][defend]" value="1" {{ true == companion.abilities.defend ? 'checked' : '' }} >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.healer'|t|colorize }}</td>
+                <td>
+                    <select class="ui dropdown" name='companion[abilities][heal]'>
+                        {% for i in 0..30 %}
+                            <option value="{{ i }}" {{ companion.abilities.heal == i ? ' selected' : '' }}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ 'section.edit.form.table.tbody.healer.note'|t|colorize }}
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.magician'|t|colorize }}</td>
+                <td>
+                    <select class="ui dropdown" name='companion[abilities][magic]'>
+                        {% for i in 0..30 %}
+                            <option value="{{ i }}" {{ companion.abilities.magic == i ? ' selected' : '' }}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    {{ 'section.edit.form.table.tbody.magician.note'|t|colorize }}
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.can.die'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[cannotdie]" value="0">
+                        <input type="checkbox" name="companion[cannotdie]" value="1" {{ true == companion.cannotdie ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.can.healed'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[cannotbehealed]" value="0">
+                        <input type="checkbox" name="companion[cannotbehealed]" value="1" {{ true == companion.cannotbehealed ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.cost.dk'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostdks]" value="{{ companion.companioncostdks }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.cost.gems'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostgems]" value="{{ companion.companioncostgems }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.cost.gold'|t|colorize }}</td>
+                <td><input type="number" name="companion[companioncostgold]" value="{{ companion.companioncostgold }}"></td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.allow.shades'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowinshades]" value="0">
+                        <input type="checkbox" name="companion[allowinshades]" value="1" {{ true == companion.allowinshades ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.allow.pvp'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowinpvp]" value="0">
+                        <input type="checkbox" name="companion[allowinpvp]" value="1" {{ true == companion.allowinpvp ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="collapsing">{{ 'section.edit.form.table.tbody.allow.train'|t|colorize }}</td>
+                <td>
+                    <div class="ui toggle checkbox">
+                        <input type="hidden" name="companion[allowintrain]" value="0">
+                        <input type="checkbox" name="companion[allowintrain]" value="1" {{ true == companion.allowintrain ? 'checked' : '' }}>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="field">
+        <button type="submit" class="ui button">{{ 'section.edit.form.button.submit'|t }}</button>
+    </div>
+</form>
+<script>
+    $(document).ready(function ()
+    {
+        if ($('#defender').prop('checked'))
+        {
+            $('#fighter').prop('disabled', true)
+            $('#fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#fighter').prop('disabled', false)
+        }
+
+        if ($('#fighter').prop('checked'))
+        {
+            $('#defender').prop('disabled', true)
+            $('#defender').prop('checked', false)
+        }
+        else
+        {
+            $('#defender').prop('disabled', false)
+        }
+    })
+
+    $('#defender').on('change', function ()
+    {
+        if ($('#defender').prop('checked'))
+        {
+            $('#fighter').prop('disabled', true)
+            $('#fighter').prop('checked', false)
+        }
+        else
+        {
+            $('#fighter').prop('disabled', false)
+        }
+    })
+
+    $('#fighter').on('change', function ()
+    {
+        if ($('#fighter').prop('checked'))
+        {
+            $('#defender').prop('disabled', true)
+            $('#defender').prop('checked', false)
+        }
+        else
+        {
+            $('#defender').prop('disabled', false)
+        }
+    })
+</script>
