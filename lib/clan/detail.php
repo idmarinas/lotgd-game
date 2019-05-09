@@ -8,7 +8,7 @@ $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
 $params['clanDetail'] = $clanRepository->find($clanId);
 $params['SU_AUDIT_MODERATION'] = $session['user']['superuser'] & SU_AUDIT_MODERATION;
 
-page_header('title.detail', ['clanName' => \LotgdSanitize::fullSanitize($clan->getClanname()), 'clanShortName' => $clan->getClanshort()]);
+page_header('title.detail', ['clanName' => \LotgdSanitize::fullSanitize($params['clanDetail']->getClanname()), 'clanShortName' => $params['clanDetail']->getClanshort()]);
 
 if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost())
 {
