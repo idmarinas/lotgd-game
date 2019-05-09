@@ -272,7 +272,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Extra.
      *
-     * @param string extra
+     * @param array extra
      *
      * @return self
      */
@@ -286,9 +286,9 @@ class Commentary implements EntityInterface
     /**
      * Get the value of Extra.
      *
-     * @return string
+     * @return array
      */
-    public function getExtra(): string
+    public function getExtra(): array
     {
         return $this->extra;
     }

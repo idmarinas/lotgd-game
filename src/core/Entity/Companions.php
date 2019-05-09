@@ -429,7 +429,7 @@ class Companions
     /**
      * Set the value of Abilities.
      *
-     * @param string abilities
+     * @param array abilities
      *
      * @return self
      */
@@ -443,9 +443,9 @@ class Companions
     /**
      * Get the value of Abilities.
      *
-     * @return string
+     * @return array
      */
-    public function getAbilities(): string
+    public function getAbilities(): array
     {
         return $this->abilities;
     }
