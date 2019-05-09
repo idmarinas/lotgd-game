@@ -9,7 +9,7 @@
 {
 	border: none;
 	width: 210px;
-	padding-left: 5px;
+	// padding-left: 5px;
 }
 
 .lotgd.table .characterstats .charinfo
