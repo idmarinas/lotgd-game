@@ -2,17 +2,12 @@
 
 global $session, $fiveminuteload;
 
-define('ALLOW_ANONYMOUS', true);
+define('ALLOW_ANONYMOUS', false);
 define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-if (! $session['user']['loggedin'])
-{
-    return;
-}
-
-$op = httpget('op');
+$op = \LotgdHttp::getQuery('op');
 
 if ('optimize' == $op)
 {
@@ -34,7 +29,7 @@ elseif ('clearall' == $op)
 }
 elseif ('clearbyprefix' == $op)
 {
-    $prefix = httpget('prefix');
+    $prefix = \LotgdHttp::getQuery('prefix');
 
     massinvalidate($prefix, true);
 
