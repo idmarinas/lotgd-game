@@ -4,7 +4,7 @@ return [
     \Zend\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => true, //-- This cache config of service manager recomended in production
     'lotgd_core' => [
         'cache' => [
-            'active' => false,
+            'active' => false, //-- Change to TRUE for activate cache in core
             'base_cache_dir' => 'data/cache',
             'config' => [
                 'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di',
