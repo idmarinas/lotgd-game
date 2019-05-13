@@ -51,14 +51,19 @@ class EntityRepository extends DoctrineEntityRepository
      * Hydrate an object by populating getter/setter methods.
      *
      * @param array $data
+     * @param object|null $entity
      *
      * @return object
      */
-    public function hydrateEntity(array $data)
+    public function hydrateEntity(array $data, $entity = null)
     {
-        $entity = $this->_entityName;
+        if (gettype($entity) != 'object')
+        {
+            $entity = $this->_entityName;
+            $entity = new $entity();
+        }
 
-        return $this->getHydrator()->hydrate($data, new $entity());
+        return $this->getHydrator()->hydrate($data, $entity);
     }
 
     /**
