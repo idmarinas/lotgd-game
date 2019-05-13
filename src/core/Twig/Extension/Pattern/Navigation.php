@@ -117,7 +117,15 @@ trait Navigation
         $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
         if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
         {
-            $link = \preg_replace('/[&]/', '?', 1);
+            $link = \preg_replace('/[&]/', '?', $link, 1);
+        }
+        elseif (false === \strpos($link, '?'))
+        {
+            $link = "{$link}?";
+        }
+        elseif (false !== \strpos($link, '?'))
+        {
+            $link = "{$link}&";
         }
 
         $pages['href'] = $link;
