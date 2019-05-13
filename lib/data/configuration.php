@@ -1,6 +1,6 @@
 <?php
 
-$setup = [
+return [
     'Game Setup,title',
     'servername' => 'Name for the server,text|The Legend of the Green Dragon',
     'loginbanner' => 'Login Banner (under login prompt: 255 chars)',
