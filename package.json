@@ -36,7 +36,7 @@
         "jquery": "^3.4.1",
         "sweetalert2": "^8.10.7",
         "toastr": "^2.1.4",
-        "snyk": "^1.163.1"
+        "snyk": "^1.163.3"
     },
     "devDependencies": {
         "@babel/core": "^7.4.4",
