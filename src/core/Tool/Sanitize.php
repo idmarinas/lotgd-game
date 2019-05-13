@@ -32,7 +32,7 @@ class Sanitize
     {
         $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
 
-        return \preg_replace("/[`´][0{$colors}]/", '', $string);
+        return \preg_replace("/[`´][0{$colors}]/u", '', $string);
     }
 
     /**
@@ -45,7 +45,7 @@ class Sanitize
      */
     public function fullSanitize(string $string): string
     {
-        return \preg_replace('/[`´]./', '', $string);
+        return \preg_replace('/[`´]./u', '', $string);
     }
 
     /**
@@ -82,11 +82,11 @@ class Sanitize
      */
     public function nameSanitize($spaceAllowed, string $name): string
     {
-        $expr = '[^[:alpha:]]';
+        $expr = '/[^[:alpha:]]/';
 
         if ($spaceAllowed)
         {
-            $expr = '[^[:alpha:] _-]';
+            $expr = '/[^[:alpha:] _-]/';
         }
 
         return preg_replace($expr, '', $name);
@@ -111,11 +111,11 @@ class Sanitize
             return $string;
         }
 
-        $expr = "/([^[:alpha:]`´0{$colors}])/";
+        $expr = "/([^[:alpha:]`´0{$colors}])/u";
 
         if ($spaceallowed)
         {
-            $expr = "/([^[:alpha:]`´0{$colors} _-])/";
+            $expr = "/([^[:alpha:]`´0{$colors} _-])/u";
         }
 
         return preg_replace($expr, '', $string);
@@ -162,7 +162,7 @@ class Sanitize
      */
     public function newLineSanitize(string $string): string
     {
-        return preg_replace('/`n/', '', $string);
+        return preg_replace('/[`´]n/u', '', $string);
     }
 
     /**
@@ -196,7 +196,7 @@ class Sanitize
         $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
         // to keep the regexp from boinging this, we need to make sure
         // that we're not replacing in with the ` mark.
-        $string = preg_replace("/[`´](?=[^0{$colors}bicn])/", chr(1).chr(1), $string);
+        $string = preg_replace("/[`´](?=[^0{$colors}bicn])/u", chr(1).chr(1), $string);
 
         return str_replace(chr(1), '`', $string);
     }
