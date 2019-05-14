@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * This table stores modules instaled in game.
  *
  * @ORM\Table(name="modules")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ModulesRepository")
  */
 class Modules
 {
@@ -91,15 +91,6 @@ class Modules
     private $filemoddate;
 
     /**
-     * Configure some default values.
-     */
-    public function __construct()
-    {
-        $this->installdate = new \DateTime('0000-00-00 00:00:00');
-        $this->filemoddate = new \DateTime('0000-00-00 00:00:00');
-    }
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="type", type="boolean", nullable=false, options={"default": "0"})
@@ -140,6 +131,15 @@ class Modules
      * @ORM\Column(name="download", type="string", length=200, nullable=false)
      */
     private $download;
+
+    /**
+     * Configure some default values.
+     */
+    public function __construct()
+    {
+        $this->installdate = new \DateTime('0000-00-00 00:00:00');
+        $this->filemoddate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Modulename.

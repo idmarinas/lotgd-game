@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Cronjob.
  *
  * @ORM\Table(name="cronjob")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CronjobRepository")
  */
 class Cronjob
 {
@@ -163,7 +163,7 @@ class Cronjob
      *
      * @ORM\Column(name="debug", type="boolean", nullable=true)
      */
-    private $debug;
+    private $debug = 0;
 
     /**
      * Set the value of Name.
