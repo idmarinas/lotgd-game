@@ -30,7 +30,6 @@ trait Setting
     public function findModulesEditorNav(string $like): array
     {
         $query = $this->createQueryBuilder('u');
-        // $sql = 'SELECT formalname,modulename,active,category FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|$like|%' ORDER BY category,formalname";
 
         try
         {
