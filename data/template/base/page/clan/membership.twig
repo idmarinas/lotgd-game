@@ -41,7 +41,7 @@
                             <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
                                 <input type="hidden" name="setrank" value="30">
                                 <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
-                                <button type="submit" class="ui orange button" data-options="{{ optionsFounder|e('html') }}" onclick="Lotgd.confirm(this, event)">{{ stepdown }}</button>
+                                <button type="submit" class="ui orange button" data-options="{{ optionsFounder|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ stepdown }}</button>
 
                                 {{ deleteButton }}
                             </form>
