@@ -20,6 +20,7 @@ class CharactersRepository extends DoctrineRepository
 {
     use Character\Bio;
     use Character\Clan;
+    use Character\Setting;
 
     /**
      * Get character's name from an account ID.
