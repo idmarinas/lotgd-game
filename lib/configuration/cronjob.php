@@ -1,87 +1,110 @@
 <?php
 
-include_once 'lib/gamelog.php';
+require_once 'lib/configuration/save.php';
+
+$op = (string) \LotgdHttp::getQuery('op');
+$cronId = (string) \LotgdHttp::getQuery('cronid');
+
+$params['cronId'] = $cronId;
+
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
 
 if ('savecronjob' == $op)
 {
-    $cronid = (string) httpget('cronid');
-    $post = httpallpost();
+    $post = \LotgdHttp::getPostAll();
     $post = array_filter($post);
 
     //-- NAME - only accept alphabetic characters and digits in the unicode "letter" and "number" categories, respectively
-    $filter = new Zend\I18n\Filter\Alnum();
+    $filter = new \Zend\I18n\Filter\Alnum();
     $post['name'] = $filter->filter($post['name']);
     //-- SCHELUDE - modifies to remove whitespaces from the beginning and end.
-    $filter = new Zend\Filter\StringTrim();
-    $post['schedule'] = $filter->filter($post['schedule']);
+    $post['schedule'] = trim($post['schedule']);
 
-    if ($cronid)
+    $cronEntity = $repository->hydrateEntity($post);
+    $gameLogMessage = "`@Create CronJob`0 `^{$post['name']}`0`$ by admin {$session['user']['playername']}`0";
+    $message = 'flash.message.cronjob.created';
+    $messageType = 'addSuccessMessage';
+
+    $paramsFlashMessages = [];
+
+    if ($cronId)
     {
-        $update = DB::update('cronjob');
-        $update->set($post)
-            ->where->equalTo('name', $cronid);
-        DB::execute($update);
+        $cronEntity = $repository->find($cronId);
+        $cronEntity = $repository->hydrateEntity($post, $cronEntity);
 
-        output('`@CronJob update successful.`0');
-
-        gamelog("`qUpdate CronJob `^{$post['name']}`$ by admin {$session['user']['playername']}", 'cronjob');
+        $message = 'flash.message.cronjob.updated';
+        $gameLogMessage = "`qUpdate CronJob`0 `^{$post['name']}`0`$ by admin {$session['user']['playername']}`0";
     }
+    //-- If is a new cron check if name exist
     else
     {
-        $insert = DB::insert('cronjob');
-        $insert->values($post);
-        DB::execute($insert);
+        //-- Check if clan name is taken
+        $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists ([
+            'object_repository' => $repository,
+            'fields'   => 'name',
+        ]);
 
-        output('`@CronJob created successful.`0');
+        if (! $noExistValidator->isValid($post['name']))
+        {
+            $paramsFlashMessages['name'] = $post['name'];
+            $message = 'flash.message.cronjob.name.exist';
+            $messageType = 'addWarningMessage';
+            $cronEntity = null;
 
-        gamelog("`@Create CronJob `^{$post['name']}`$ by admin {$session['user']['playername']}", 'cronjob');
+            $op = 'newcronjob';
+        }
     }
 
-    $op = '';
-    httpset($op, '');
+    \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
+
+    if ($cronEntity)
+    {
+        gamelog($gameLogMessage, 'cronjob');
+
+        \Doctrine::persist($cronEntity);
+        \Doctrine::flush();
+
+        $op = '';
+    }
 
     invalidatedatacache('cronjobstable', true);
 }
 elseif ('delcronjob' == $op)
 {
-    $cronid = (string) httpget('cronid');
+    $cronEntity = $repository->find($cronId);
 
-    if ($cronid)
+    if ($cronEntity)
     {
-        $delete = DB::delete('cronjob');
-        $delete->where(['name' => $cronid]);
-        DB::execute($delete);
+        gamelog("`4Delete CronJob `^$cronId`4 by admin {$session['user']['playername']}", 'cronjob');
 
-        output('`$CronJob deleted successful.`0');
-        gamelog("`4Delete CronJob `^$cronid`4 by admin {$session['user']['playername']}", 'cronjob');
+        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
         invalidatedatacache('cronjobstable', true);
-    }
-}
 
-if ('savecron' == $op)
-{
-    $old = (int) getsetting('newdaycron', 0);
-    $new = (int) httppost('newdaycron');
-
-    if ($old != $new)
-    {
-        savesetting('newdaycron', $new);
-        output('Setting %s to %s`n', 'newdaycron', $new);
-        gamelog("`@Changed core setting `^newdaycron`@ from `#{$old}`@ to `&$new`0", 'settings');
-        // Notify every module
-        modulehook('changesetting', ['module' => 'core', 'setting' => 'newdaycron', 'old' => $old, 'new' => $new], true);
+        \Doctrine::remove($cronEntity);
+        \Doctrine::flush();
     }
-    output('`^Settings saved.`0');
+
     $op = '';
-    httpset($op, '');
 }
 
-if ('newcronjob' == $op)
+if ('' == $op)
 {
-    require_once 'lib/listfiles.php';
+    $setup_cronjob = include_once 'lib/data/configuration_cronjob.php';
 
-    $cronid = (string) httpget('cronid');
+    $page = (int) \LotgdHttp::getQuery('page', 1);
+
+    $query = $repository->createQueryBuilder('u');
+
+    $params['paginator'] = $repository->getPaginator($query, $page);
+
+    $params['form'] = lotgd_showform($setup_cronjob, ['newdaycron' => getsetting('newdaycron', 0)], false, false, false);
+}
+elseif ('newcronjob' == $op)
+{
+    $params['tpl'] = 'cronjob-new';
+
+    require_once 'lib/listfiles.php';
 
     $data = [
         'mailer' => 'sendmail',
@@ -94,13 +117,8 @@ if ('newcronjob' == $op)
 
     if ($cronid)
     {
-        $select = DB::select('cronjob');
-        $select->columns(['*'])
-            ->limit(1)
-            ->where->equalTo('name', $cronid)
-        ;
-
-        $result = DB::execute($select)->current();
+        $cronEntity = $repository->find($cronId);
+        $result = $repository->extractEntity($cronEntity);
 
         if ($result)
         {
@@ -144,74 +162,5 @@ if ('newcronjob' == $op)
         'smtpSenderName' => 'Jobby	The name used in the from field for SMTP messages',
     ];
 
-    addnav('', "configuration.php?settings=cronjob&op=savecronjob&cronid=$cronid");
-    rawoutput("<form action='configuration.php?settings=cronjob&op=savecronjob&cronid=$cronid' method='POST'>");
-    lotgd_showform($form, $data);
-    rawoutput('</form>');
-
-    $op = '';
-    httpset($op, '');
-}
-else
-{
-    $setup_cronjob = include_once 'lib/data/configuration_cronjob.php';
-
-    rawoutput('<div class="ui info message">');
-    output('Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.`n');
-    output('This is de unique cronjob need create. Copy and change `b"/path/to/project"´b to where is the game installed. This cronjob execute all CronJobs in the game.`n`n');
-    output_notl('* * * * * cd /path/to/project && php cronjob.php 1>> /dev/null 2>&1`n`n');
-    rawoutput('</div><div class="ui red message">');
-    output('If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: %s', '<a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>', true);
-    rawoutput('</div>');
-    output_notl('`n`n');
-    addnav('', 'configuration.php?settings=cronjob&op=savecron');
-    rawoutput("<form action='configuration.php?settings=cronjob&op=savecron' method='POST'>");
-    lotgd_showform($setup_cronjob, ['newdaycron' => getsetting('newdaycron', 0)]);
-    rawoutput('</form>');
-    output_notl('`n`n');
-
-    $yes = translate_inline('`@Yes`0');
-    $no = translate_inline('`$No`0');
-    $newcronjob = translate_inline('New CronJob');
-    $edit = translate_inline('Edit');
-    $delete = translate_inline('Delete');
-    $confirm = translate_inline('Are you sure you wish to delete this CronJob?');
-
-    $page = (int) httpget('page');
-
-    $select = DB::select('cronjob');
-    $select->columns(['*']);
-    $result = DB::paginator($select, $page);
-    DB::pagination($result, 'configuration.php?settings=cronjob');
-
-    rawoutput('<a class="ui right floated button" href="configuration.php?settings=cronjob&op=newcronjob">'.$newcronjob.'</a>');
-    output('`@`bCronJobs available in the game´b`0');
-    addnav('', 'configuration.php?settings=cronjob&op=newcronjob');
-    rawoutput('<br><br><table class="ui very compact striped selectable table">');
-    rawoutput('<thead><tr><th>Name</th><th>Command</th><th>Schedule</th><th>Debug</th><th>Enabled</th><th>Opcs</th></tr></thead>');
-
-    foreach ($result as $key => $value)
-    {
-        rawoutput('<tr><td>');
-        output_notl($value['name']);
-        rawoutput('</td><td>');
-        output_notl('php '.$value['command'].'.php');
-        rawoutput('</td><td>');
-        output_notl('<a href="https://crontab.guru/#%s" target="_blank" rel="noopener noreferrer"><i class="info icon"></i> `b%s´b</a>', str_replace(' ', '_', $value['schedule']), $value['schedule'], true);
-        rawoutput('</td><td>');
-        output_notl(($value['debug'] ? $yes : $no));
-        rawoutput('</td><td>');
-        output_notl(($value['enabled'] ? $yes : $no));
-        rawoutput('</td><td>');
-        $editlink = "configuration.php?settings=cronjob&op=newcronjob&cronid={$value['name']}";
-        $deletelink = "configuration.php?settings=cronjob&op=delcronjob&cronid={$value['name']}";
-        addnav('', $editlink);
-        addnav('', $deletelink);
-        output_notl("<a href='{$editlink}'>{$edit}</a> | <a href='{$deletelink}' onClick='return confirm(\"$confirm\");'>`4{$delete}`0</a>", true);
-        rawoutput('</tr>');
-    }
-    rawoutput('</table>');
-
-    $op = '';
-    httpset($op, '');
+    $params['form'] = lotgd_showform($form, $data, false, false, false);
 }

@@ -1,0 +1,19 @@
+{% translate_default_domain 'page-configuration' %}
+
+{% if moduleSettings %}
+    <p>
+        {% if isModuleActive %}
+            {{ 'section.module.is.actived'|t|colorize }}
+            <a href="{{ ('modules.php?op=deactivate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui red mini button">{{ 'section.module.button.deactivate'|t|uncolorize }}</a>
+        {% else %}
+            {{ 'section.module.is.deactived'|t|colorize }}
+            <a href="{{ ('modules.php?op=activate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui green mini button">{{ 'section.module.button.activate'|t|uncolorize }}</a>
+        {% endif %}
+    </p>
+
+    <form action="{{ ('configuration.php?setting=module&module=' ~ moduleName ~ '&save=save')|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        {{ form }}
+    </form>
+{% else %}
+    {{ 'section.module.no.settings'|t({ 'name': moduleInfo.name })|colorize }}
+{% endif %}
