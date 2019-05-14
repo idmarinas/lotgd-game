@@ -14,7 +14,7 @@ require_once 'lib/serverfunctions.class.php';
 checkban();
 
 tlschema('create');
-$translatorNamespace = 'page-create';//-- Namespace, textDomain for page
+$textDomain = 'page-create'; //-- Namespace, textDomain for page
 
 $trash = (int) getsetting('expiretrashacct', 1);
 $new = (int) getsetting('expirenewacct', 10);
@@ -31,10 +31,11 @@ $params = [
 
 $op = (string) \LotgdHttp::getQuery('op');
 
-page_header('title.create', [], $translatorNamespace);
+page_header('title.create', [], $textDomain);
+
 if ('val' == $op || 'forgotval' == $op)
 {
-    page_header('title.validate', [], $translatorNamespace);
+    page_header('title.validate', [], $textDomain);
 }
 
 \LotgdNavigation::addHeader('Login page');
@@ -50,7 +51,7 @@ if ('forgotval' == $op)
 
     if (! $account)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph', [], $textDomain));
 
         return redirect('home.php');
     }
@@ -84,7 +85,7 @@ elseif ('val' == $op)
 
     if (! $result)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $textDomain));
 
         return redirect('home.php');
     }
@@ -117,15 +118,15 @@ elseif ('val' == $op)
 
             if (count($acctSuper))
             {
-                $subj = \LotgdTranslator::t('yeoldemail.subject', ['name' => $account->getName()], $translatorNamespace);
+                $subj = \LotgdTranslator::t('yeoldemail.subject', ['name' => $account->getName()], $textDomain);
                 $alert = \LotgdTranslator::t('yeoldemail.alert', [
                     'newEmail' => $replaceemail,
                     'oldMail' => $oldEmail,
                     'login' => $account->getLogin()
-                ], $translatorNamespace);
-                $msg = \LotgdTranslator::t('yeoldemail.message', ['alert' => $alert],$translatorNamespace);
+                ], $textDomain);
+                $msg = \LotgdTranslator::t('yeoldemail.message', ['alert' => $alert], $textDomain);
 
-                foreach($acctSuper as $user)
+                foreach ($acctSuper as $user)
                 {
                     systemmail($user['acctid'], $subj, $msg, 0, $noemail);
                 }
@@ -164,14 +165,14 @@ elseif ('forgot' == $op)
 
         if (! $account)
         {
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound', [], $translatorNamespace));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound', [], $textDomain));
 
             return redirect('create.php?op=forgot');
         }
 
         if (! trim($account->getEmailaddress()))
         {
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail', [], $translatorNamespace));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail', [], $textDomain));
 
             return redirect('create.php?op=forgot');
         }
@@ -195,7 +196,7 @@ elseif ('forgot' == $op)
 
         lotgd_mail($account->getEmailaddress(), $subj, appoencode($msg, true));
 
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent', [], $translatorNamespace));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent', [], $textDomain));
 
         return redirect('create.php?op=forgot');
     }
@@ -213,7 +214,7 @@ elseif ('create' == $op)
 
     if (soap($shortname) != $shortname)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.badLanguage', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.badLanguage', [], $textDomain));
 
         return redirect('create.php');
     }
@@ -229,7 +230,7 @@ elseif ('create' == $op)
 
         if ($result)
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.email.duplicate', [], $translatorNamespace));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.email.duplicate', [], $textDomain));
 
             return redirect('create.php');
         }
@@ -244,31 +245,31 @@ elseif ('create' == $op)
 
     if ($passlen <= 3)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.password.length', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.password.length', [], $textDomain));
         $blockaccount = true;
     }
 
     if ($pass1 != $pass2)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.password.notIdentical', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.password.notIdentical', [], $textDomain));
         $blockaccount = true;
     }
 
     if (strlen($shortname) < 3)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.minLength', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.minLength', [], $textDomain));
         $blockaccount = true;
     }
 
     if (strlen($shortname) > 25)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.maxLength', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.maxLength', [], $textDomain));
         $blockaccount = true;
     }
 
     if (1 == (int) getsetting('requireemail', 0) && ! is_email($email))
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.email.incorrect', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.email.incorrect', [], $textDomain));
         $blockaccount = true;
     }
 
@@ -289,7 +290,7 @@ elseif ('create' == $op)
 
     if ($result)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.duplicate', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.duplicate', [], $textDomain));
 
         return redirect('create.php');
     }
@@ -313,6 +314,7 @@ elseif ('create' == $op)
     $refer = \LotgdHttp::getQuery('r');
 
     $referer = 0;
+
     if ($refer > '')
     {
         $result = $accountRepo->findOneBy(['login' => $refer]);
@@ -320,6 +322,7 @@ elseif ('create' == $op)
     }
 
     $dbpass = '';
+
     if ('!md5!' == substr($pass1, 0, 5))
     {
         $dbpass = md5(substr($pass1, 5));
@@ -388,7 +391,7 @@ elseif ('create' == $op)
 
             \Doctrine::clear(); //-- Detaches all objects from Doctrine!
 
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $translatorNamespace));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
 
             return redirect('index.php');
         }
@@ -409,7 +412,7 @@ elseif ('create' == $op)
     {
         \Tracy\Debugger::log($th);
 
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.error', [], $translatorNamespace));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.error', [], $textDomain));
 
         return redirect('create.php');
     }
@@ -418,6 +421,7 @@ elseif ('create' == $op)
 $refer = (string) \LotgdHttp::getQuery('r');
 
 $params['refer'] = '';
+
 if ($refer)
 {
     $params['refer'] = '&r='.htmlentities($refer, ENT_COMPAT, getsetting('charset', 'UTF-8'));
@@ -428,9 +432,8 @@ if ($refer)
  * Example: [
  *      // (string) tplName => array []
  *      'tpl-tame' => ['key' => 'value']
- * ]
+ * ].
  */
-
 $result = modulehook('create-form', ['templates' => []]);
 $params['templates'] = $result['templates'];
 
