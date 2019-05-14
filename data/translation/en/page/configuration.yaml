@@ -1,0 +1,68 @@
+title: 'Game Settings'
+
+section:
+    cache:
+        description: 'High Load Optimization`n'
+        note:
+            - For now this options only work with core cache "lotgd". It will soon work with the cache of doctrine, translations and templates.
+        for:
+            core: 'Options for CORE cache "{coreCacheFolder}"'
+        active:
+            'true': '`2Cache for core are `@Activated`0`0'
+            'false': '`4Cache for core are `$Desactivated`0`0'
+            note:
+                0: 'Cache for "translations" are ALWAYS activated, for performance.'
+                1: 'Cache for "doctrine" are ALWAYS activated, for performance.'
+                2: 'Cache for "templates" are ALWAYS activated, for performance.'
+                3:  'Some parts of the game have forced caching, for performance reasons, such as configuration.'
+                union: '<br>'
+            activate: 'For activate core cache, you need modified value of "active" from "false" to "true" in file "config/lotgd.config.php" on key "cache".'
+    cronjob:
+        table:
+            description: '`@`bCronJobs available in the game´b`0'
+            thead:
+                name: 'Name'
+                command: 'Command'
+                schedule: 'Schedule'
+                debug: 'Debug'
+                enabled: 'Enabled'
+                opcs: 'Opcs'
+            tbody:
+                yes: '`@Yes`0'
+                no: '`$No`0'
+                edit: 'Edit'
+                delete: '`$Delete`0'
+                confirm: 'Are you sure you wish to delete this CronJob?'
+        note:
+            info:
+                0: 'Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.'
+                1: 'This is de unique cronjob need create. Copy and change <strong>"/path/to/project"</strong> to where is the game installed. This cronjob execute all CronJobs in the game.<br>'
+                2: '* * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1'
+                union: '<br>'
+            red: 'If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: <a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>'
+        form:
+            button:
+                new: 'New CronJob'
+    module:
+        no.settings: '`$The <em>{name}</em> module does not appear to define any module settings.`0'
+        is.actived: '`@This module is currently active`0'
+        is.deactived: '`$This module is currently deactivated`0'
+        button:
+            activate: Activate
+            deactivate: Deactivate
+flash.message:
+    default.save:
+        requirevalidemail: '<em>requirevalidemail</em> has been set since <em>blockdupeemail</em> was set.<br>'
+        requireemail: '<em>requireemail</em> has been set since <em>requirevalidemail</em> was set.<br>'
+        change.setting: 'Setting <em>{key}</em> changed from <strong><em>{oldValue}</em></strong> to <strong>{newValue}</strong><br>'
+        saved: '<br><strong>Settings saved.</strong><br>'
+    module:
+        fail.inject: "I was not able to inject the module <em>{module}</em>. Sorry it didn't work out.<br>"
+        save:
+            change: 'Module setting <em>{key}</em> changed from <strong><em>{oldValue}</em></strong> to <strong>{newValue}</strong><br>'
+            saved: '<br><strong>Module settings saved.</strong><br>'
+    cronjob:
+        deleted: 'CronJob deleted successful.'
+        updated: '`@CronJob update successful.`0'
+        created: '`@CronJob created successful.`0'
+        name.exist: "There's already another cronjob with the name <em>{name}</em>."
