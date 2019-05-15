@@ -24,7 +24,7 @@ use Zend\I18n\Translator\Translator as ZendTranslator;
 class Translator extends ZendTranslator
 {
     /**
-     * Translate a message of LoTGD.
+     * Translate a message of LoTGD WITH MessageFormatter.
      *
      * @param string      $message
      * @param array|null  $parameters
@@ -38,7 +38,7 @@ class Translator extends ZendTranslator
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
 
-        $message = parent::translate($message, $textDomain ?? 'page-default', $locale);
+        $message = $this->st($message, $textDomain, $locale);
 
         if (is_array($message))
         {
@@ -58,8 +58,10 @@ class Translator extends ZendTranslator
      * @param string      $message
      * @param array|null  $parameters
      * @param string|null $locale
+     *
+     * @return string
      */
-    public function mf(string $message, ?array $parameters = [], ?string $locale = null)
+    public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
     {
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
@@ -69,6 +71,22 @@ class Translator extends ZendTranslator
         $formatter = new \MessageFormatter($locale, $message);
 
         return $formatter->format($parameters);
+    }
+
+    /**
+     * Only select a translation WITHOUT MessageFormatter.
+     *
+     * @param string      $message
+     * @param string|null $textDomain
+     * @param string|null $locale
+     *
+     * @return array|string
+     */
+    public function st(string $message, ?string $textDomain = 'page-default', ?string $locale = null)
+    {
+        $locale = ($locale ?: $this->getLocale());
+
+        return parent::translate($message, $textDomain ?? 'page-default', $locale);
     }
 
     /**
