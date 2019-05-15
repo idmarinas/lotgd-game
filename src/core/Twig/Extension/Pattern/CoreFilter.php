@@ -156,4 +156,16 @@ trait CoreFilter
 
         return $censor->filter($string);
     }
+
+    /**
+     * Syntax highlighting of a file.
+     *
+     * @param string $file
+     *
+     * @return string|null
+     */
+    public function highlightFile($file)
+    {
+        return highlight_file($file, true);
+    }
 }
