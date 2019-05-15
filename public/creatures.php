@@ -93,7 +93,6 @@ if ('' == $op || 'search' == $op)
 {
     $params['tpl'] = 'default';
 
-    \LotgdNavigation::addNav('creatures.nav.addss', 'creatures.php');
     \LotgdNavigation::addHeader('creatures.category.edit');
     \LotgdNavigation::addNav('creatures.nav.add', 'creatures.php?op=add');
 
