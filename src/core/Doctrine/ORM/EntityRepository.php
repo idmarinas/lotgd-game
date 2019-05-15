@@ -50,14 +50,14 @@ class EntityRepository extends DoctrineEntityRepository
     /**
      * Hydrate an object by populating getter/setter methods.
      *
-     * @param array $data
+     * @param array       $data
      * @param object|null $entity
      *
      * @return object
      */
     public function hydrateEntity(array $data, $entity = null)
     {
-        if (gettype($entity) != 'object')
+        if ('object' != gettype($entity))
         {
             $entity = $this->_entityName;
             $entity = new $entity();
@@ -69,12 +69,24 @@ class EntityRepository extends DoctrineEntityRepository
     /**
      * Extract values from an object with class methods.
      *
-     * @param object $object
+     * @param object|array $object
      *
      * @return array
      */
     public function extractEntity($object): array
     {
+        if (is_array($object))
+        {
+            $set = [];
+
+            foreach ($object as $key => $value)
+            {
+                $set[$key] = $this->getHydrator()->extract($value);
+            }
+
+            return $set;
+        }
+
         return $this->getHydrator()->extract($object);
     }
 
