@@ -1,0 +1,11 @@
+{% translate_default_domain 'page-creatures' %}
+
+<form action="{{ 'creatures.php?op=save'|lotgd_url }}" method="POST" autocomplete="off">
+    {{ form }}
+</form>
+
+{% if creature.creatureaiscript %}
+    <br> <br>
+    <div class="ui top attached header">{{ 'section.edit.highlight'|t|colorize }}</div>
+    <div class="ui bottom attached message">{{ (creature.creatureaiscript ~ '.php')|highlight_file }}</div>
+{% endif %}

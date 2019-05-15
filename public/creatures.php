@@ -4,253 +4,150 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/http.php';
 require_once 'lib/listfiles.php';
 require_once 'lib/creaturefunctions.php';
-require_once 'lib/superusernav.php';
+require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
+$textDomain = 'page-creatures';
+
 tlschema('creatures');
 
-page_header('Creature Editor');
+page_header('title', [], $textDomain);
 
-superusernav();
+\LotgdNavigation::superuserGrottoNav();
 
-$op = httpget('op');
-$subop = httpget('subop');
-$page = (int) (httpget('page') ?: 1);
-$creaturesperpage = 25;
+$op = (string) \LotgdHttp::getQuery('op');
+$subop = (string) \LotgdHttp::getQuery('subop');
+$page = (int) \LotgdHttp::getQuery('page');
+$module = (string) \LotgdHttp::getQuery('module');
+$creatureId =  ((int) \LotgdHttp::getPost('creatureid') ?: (int) \LotgdHttp::getQuery('creatureid'));
+
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Creatures::class);
+$params = [];
 
 if ('save' == $op)
 {
-    $id = (int) (httppost('creatureid') ?: httpget('creatureid'));
+    $post = \LotgdHttp::getPostAll();
 
-    if ('' == $subop)
+    $message = '';
+    $paramsFlashMessage = [];
+    if ('module' == $subop)
     {
-        $post = httpallpost();
-
-        if ($id)
-        {
-            $post['createdby'] = $session['user']['login'];
-            $update = DB::update('creatures');
-            $update->set($post)
-                ->where->equalTo('creatureid', $id)
-            ;
-            $result = DB::execute($update) or output('`$'. DB::error()."`0`n");
-        }
-        else
-        {
-            $post['createdby'] = $session['user']['login'];
-            $insert = DB::insert('creatures');
-            $insert->values($post);
-
-            DB::execute($insert);
-
-            $id = DB::insert_id();
-        }
-
-        if (DB::affected_rows())
-        {
-            output('`^Creature saved!`0`n');
-        }
-        else
-        {
-            output('`^Creature `$not`^ saved!`0`n');
-        }
-    }
-    elseif ('module' == $subop)
-    {
+        $message = 'flash.message.save.module';
+        $paramsFlashMessages = ['name' => $module];
         // Save module settings
-        $module = httpget('module');
-        $post = httpallpost();
         reset($post);
 
-        while (list($key, $val) = each($post))
+        foreach ($post as $key => $val)
         {
-            set_module_objpref('creatures', $id, $key, $val, $module);
+            set_module_objpref('creatures', $creatureId, $key, $val, $module);
         }
-        output('`^Saved!`0`n');
-    }
-    // Set the httpget id so that we can do the editor once we save
-    httpset('creatureid', $id, true);
-    // Set the httpget op so we drop back into the editor
-    httpset('op', 'edit');
-}
-
-$op = httpget('op');
-$id = httpget('creatureid');
-
-if ('del' == $op)
-{
-    $sql = 'DELETE FROM '.DB::prefix('creatures')." WHERE creatureid = '$id'";
-    DB::query($sql);
-
-    if (DB::affected_rows() > 0)
-    {
-        output('Creature deleted`n`n');
-        module_delete_objprefs('creatures', $id);
     }
     else
     {
-        output('Creature not deleted: %s', DB::error());
+        $message = 'flash.message.save.saved';
+        $post['createdby'] = $session['user']['login'];
+
+        $creatureEntity = $repository->find($creatureId);
+        $creatureEntity = $repository->hydrateEntity($post, $creatureEntity);
+
+        \Doctrine::persist($creatureEntity);
+        \Doctrine::flush();
+
+        $creatureId = $creatureEntity->getCreatureid();
     }
+
+    if ($message)
+    {
+        \LotgdFlashMessages::addInfoMessage($message, $paramsFlashMessage, $textDomain);
+    }
+
+    $op = 'edit';
+    unset($message, $creatureEntity, $post);
+}
+elseif ('del' == $op)
+{
+    $creatureEntity = $repository->find($creatureId);
+
+    $message = 'flash.message.del.error';
+    $messageType = 'addErrorMessage';
+    if ($creatureEntity)
+    {
+        \Doctrine::remove($creatureEntity);
+        \Doctrine::flush();
+
+        $message = 'flash.message.del.success';
+        $messageType = 'addSuccessMessage';
+        module_delete_objprefs('creatures', $creatureId);
+    }
+
+    \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, ['name' => $creatureEntity->getCreaturename()], $textDomain));
+
+    unset($creatureEntity);
     $op = '';
-    httpset('op', '');
 }
 
 if ('' == $op || 'search' == $op)
 {
-    $q = (string) httppost('q');
+    $params['tpl'] = 'default';
 
-    $select = DB::select('creatures');
-    $select->order('creaturename');
+    \LotgdNavigation::addNav('creatures.nav.addss', 'creatures.php');
+    \LotgdNavigation::addHeader('creatures.category.edit');
+    \LotgdNavigation::addNav('creatures.nav.add', 'creatures.php?op=add');
+
+    $q = (string) trim(\LotgdHttp::getPost('q'));
+
+    $query = $repository->createQueryBuilder('u');
 
     if ($q)
     {
-        $select->where->like('creaturename', "%$q%")
-            ->or->like('creaturecategory', "%$q%")
-            ->or->like('creatureweapon', "%$q%")
-            ->or->like('creaturelose', "%$q%")
-            ->or->like('createdby', "%$q%")
+        $query->where('u.creaturename LIKE :q')
+            ->orWhere('u.creaturecategory LIKE :q')
+            ->orWhere('u.creatureweapon LIKE :q')
+            ->orWhere('u.creaturelose LIKE :q')
+            ->orWhere('u.createdby LIKE :q')
+            ->setParameter('q', "%$q%")
         ;
     }
 
-    $paginator = DB::paginator($select, $page, $creaturesperpage);
-
-    DB::pagination($paginator, 'creatures.php');
-
-    // Search form
-    $search = translate_inline('Search');
-    rawoutput("<form action='creatures.php?op=search' method='POST'>");
-    output('Search by field: ');
-    rawoutput("<div class='ui action input'><input name='q' id='q'>");
-    rawoutput("<button type='submit' class='ui button'>$search</button>");
-    rawoutput('</div></form>');
-    rawoutput("<script language='JavaScript'>document.getElementById('q').focus();</script>", true);
-    addnav('', 'creatures.php?op=search');
-
-    addnav('Edit');
-    addnav('Add a creature', 'creatures.php?op=add');
-    $opshead = translate_inline('Ops');
-    $idhead = translate_inline('ID');
-    $name = translate_inline('Name');
-    $lev = translate_inline('Level');
-    $weapon = translate_inline('Weapon');
-    $winmsg = translate_inline('Win');
-    $diemsg = translate_inline('Die');
-    $cat = translate_inline('Category');
-    $script = translate_inline('Script?');
-    $author = translate_inline('Author');
-    $edit = translate_inline('Edit');
-    $yes = translate_inline('Yes');
-    $no = translate_inline('No');
-    $confirm = translate_inline('Are you sure you wish to delete this creature?');
-    $del = translate_inline('Del');
-
-    rawoutput("<table class='ui very compact striped selectable table'><thead>");
-    rawoutput("<tr><th>$opshead</th><th>$name</th><th>$cat</th><th>$weapon</th><th>$script</th><th>$winmsg</th><th>$diemsg</th><th>$author</th></tr></thead>");
-    addnav('', 'creatures.php');
-
-    if ($paginator->getCurrentItemCount())
-    {
-        foreach ($paginator as $key => $row)
-        {
-            rawoutput('<tr>');
-            rawoutput("<td class='collapsing'>[ <a data-tooltip='$edit' href='creatures.php?op=edit&creatureid={$row['creatureid']}'><i class='write icon'></i></a>");
-            rawoutput(" | <a data-tooltip='$del' href='creatures.php?op=del&creatureid={$row['creatureid']}' onClick='return confirm(\"$confirm\");'>");
-            rawoutput("<i class='trash icon'></i></a> ]</td><td>");
-            addnav('', "creatures.php?op=edit&creatureid={$row['creatureid']}");
-            addnav('', "creatures.php?op=del&creatureid={$row['creatureid']}");
-            output_notl('(%s) %s', $row['creatureid'], $row['creaturename']);
-            rawoutput('</td><td>');
-            output_notl('%s', $row['creaturecategory']);
-            rawoutput('</td><td>');
-            output_notl('%s', $row['creatureweapon']);
-            rawoutput('</td><td>');
-
-            if ('' != $row['creatureaiscript'])
-            {
-                output_notl($yes);
-            }
-            else
-            {
-                output_notl($no);
-            }
-            rawoutput('</td><td>');
-            output_notl('%s', $row['creaturewin']);
-            rawoutput('</td><td>');
-            output_notl('%s', $row['creaturelose']);
-            rawoutput('</td><td>');
-            output_notl('%s', $row['createdby']);
-            rawoutput('</td></tr>');
-        }
-    }
-    else
-    {
-        rawoutput('<tr><td class="center aligned" colspan="8">');
-        output('No creatures found');
-        rawoutput('</td><Ttr>');
-    }
-    rawoutput('</table>');
+    $params['paginator'] = $repository->getPaginator($query, $page);
 }
 elseif ('edit' == $op || 'add' == $op)
 {
-    require_once 'lib/showform.php';
+    $params['tpl'] = 'edit';
 
-    addnav('Edit');
-    addnav('Creature properties', "creatures.php?op=edit&creatureid=$id");
-    addnav('Add');
-    addnav('Add Another Creature', "creatures.php?op=add");
-    module_editor_navs('prefs-creatures', "creatures.php?op=edit&subop=module&creatureid=$id&module=");
+    \LotgdNavigation::addHeader('creatures.category.edit');
+    \LotgdNavigation::addNav('creatures.nav.properties', "creatures.php?op=edit&creatureid=$creatureId");
+    \LotgdNavigation::addHeader('creatures.category.add');
+    \LotgdNavigation::addNav('creatures.nav.add.other', 'creatures.php?op=add');
+
+    module_editor_navs('prefs-creatures', "creatures.php?op=edit&subop=module&creatureid=$creatureId&module=");
+
+    \LotgdNavigation::addNav('common.category.navigation');
+    \LotgdNavigation::addNav('creatures.nav.home', "creatures.php");
 
     if ('module' == $subop)
     {
-        $module = httpget('module');
-        rawoutput("<form action='creatures.php?op=save&subop=module&creatureid=$id&module=$module' method='POST'>");
-        module_objpref_edit('creatures', $module, $id);
+        rawoutput("<form action='creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module' method='POST'>");
+        module_objpref_edit('creatures', $module, $creatureId);
         rawoutput('</form>');
-        addnav('', "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
+        addnav('', "creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module");
+
+        page_footer();
     }
     else
     {
-        if ('edit' == $op && '' != $id)
-        {
-            $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE creatureid=$id";
-            $result = DB::query($sql);
+        $creatureEntity = $repository->find($creatureId);
+        $creatureArray = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
 
-            if (1 != DB::num_rows($result))
-            {
-                output('`4Error`0, that creature was not found!');
-            }
-            else
-            {
-                $row = DB::fetch_assoc($result);
-            }
-        }
-        else
-        {
-            $posted = ['category', 'weapon', 'name', 'win', 'lose', 'aiscript', 'id'];
-
-            foreach ($posted as $field)
-            {
-                $row['creature'.$field] = stripslashes(httppost('creature'.$field));
-            }
-
-            if (! $row['creatureid'])
-            {
-                $row['creatureid'] = 0;
-            }
-
-            $row['forest'] = (int) httppost('forest');
-            $row['graveyard'] = (int) httppost('graveyard');
-        }
         //get available scripts
-        //(uncached, won't hit there very often
         $sort = list_files('creatureai', []);
         sort($sort);
         $scriptenum = implode('', $sort);
         $scriptenum = ',,none'.$scriptenum;
+
         $form = [
             'Creature Properties,title',
             'creatureid' => 'Creature id,hidden',
@@ -259,13 +156,13 @@ elseif ('edit' == $op || 'add' == $op)
             'creatureimage' => 'Creature image',
             'creaturedescription' => 'Creature description,textarea',
             'creatureweapon' => 'Weapon',
-            'creaturegoldbonus' => 'Gold multiplier,float',
+            'creaturegoldbonus' => 'Gold multiplier,float|0',
             'It is a multiplier that affects the basis of the attribute for the gold that the creature carries; between 0 and 99.99,note',
-            'creaturedefensebonus' => 'Defense multiplier,float',
+            'creaturedefensebonus' => 'Defense multiplier,float|1',
             'It is a multiplier that affects the basis of the attribute for the defense that the creature has; between 0 and 99.99,note',
-            'creatureattackbonus' => 'Attack multiplier,float',
+            'creatureattackbonus' => 'Attack multiplier,float|1',
             'It is a multiplier that affects the basis of the attribute for the attack that the creature has; between 0 and 99.99,note',
-            'creaturehealthbonus' => 'Health multiplier,float',
+            'creaturehealthbonus' => 'Health multiplier,float|1',
             'It is a multiplier that affects the basis of the attribute for the health that the creature has; between 0 and 99.99,note',
             'creaturewin' => 'Win Message',
             'creaturelose' => 'Death Message',
@@ -273,33 +170,12 @@ elseif ('edit' == $op || 'add' == $op)
             'graveyard' => 'Creature is in graveyard?,bool',
             'creatureaiscript' => "Creature's A.I.,enum".$scriptenum,
         ];
-        rawoutput("<form action='creatures.php?op=save' method='POST'>");
-        lotgd_showform($form, $row);
-        rawoutput('</form>');
-        addnav('', 'creatures.php?op=save');
 
-        if ('' != $row['creatureaiscript'])
-        {
-            $scriptfile = 'scripts/'.$row['creatureaiscript'].'.php';
-
-            if (file_exists($scriptfile))
-            {
-                output('Current Script File Content:`n`n');
-                output_notl(implode('`n', str_replace(['`n'], ['``n'], color_sanitize(file($scriptfile)))));
-            }
-        }
+        $params['form'] = lotgd_showform($form, $creatureArray, false, false, false);
+        $params['creature'] = $creatureArray;
     }
-    addnav('Navigation');
-    addnav('Return to the creature editor', "creatures.php");
 }
-else
-{
-    $module = httpget('module');
-    rawoutput("<form action='mounts.php?op=save&subop=module&creatureid=$id&module=$module' method='POST'>");
-    module_objpref_edit('creatures', $module, $id);
-    rawoutput('</form>');
-    addnav('', "creatures.php?op=save&subop=module&creatureid=$id&module=$module");
-    addnav('Navigation');
-    addnav('Return to the creature editor', "creatures.php");
-}
+
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/creatures.twig', $params));
+
 page_footer();
