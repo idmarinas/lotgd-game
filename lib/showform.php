@@ -90,14 +90,8 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         }
         else
         {
-            if (! $callback)
-            {
-                $result = lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions);
-            }
-            else
-            {
-                $result = $callback($info, $row, $key, $keyout, $val, $extensions);
-            }
+            $callback = $callback ?: 'lotgd_show_form_field';
+            $result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
             $tabContent[$title_id][] = sprintf('<div class="inline field"><label>%s</label>%s</div>',
                 appoencode($info[0]),
@@ -186,7 +180,10 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
 function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 {
-    switch ($info[1])
+    $default = explode('|', $info[1]);
+    $title = $default[0];
+    $default = $default[1] ?? null;
+    switch ($title)
     {
         case 'title':
         case 'note':
@@ -526,19 +523,15 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             return "<input type='password' name='$keyout' value='".htmlentities($out, ENT_COMPAT, getsetting('charset', 'UTF-8'))."'>";
         break;
         case 'bool':
-            tlschema('showform');
-            $yes = translate_inline('Yes');
-            $no = translate_inline('No');
-            tlschema();
+            $value = $row[$key] ?? $default ?: 0;
 
             $select = '<div class="ui toggle checkbox">';
             $select .= '<input type="hidden" name="'.$keyout.'" value="0">';
-            $select .= '<input type="checkbox" value="1" name="'.$keyout.'" '.(isset($row[$key]) && 1 == $row[$key] ? ' checked' : '').'>';
+            $select .= '<input type="checkbox" value="1" name="'.$keyout.'" '.(1 == $value ? ' checked' : '').'>';
             $select .= '</div>';
 
             return $select;
 
-        break;
         case 'hidden':
             if (array_key_exists($key, $row))
             {
@@ -578,7 +571,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
         case 'rawtextarearesizeable':
         case 'textarearesizeable':
         case 'textarea':
-            $text = '';
+            $text = $default ?: '';
 
             if (isset($row[$key]))
             {
@@ -590,15 +583,17 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 $text = str_replace('`n', "\n", $text);
             }
 
+            $text = $text ?: '';
+
             return "<textarea class='input' name='$keyout'>".htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8')).'</textarea>';
 
         case 'int':
-            $out = $row[$key] ?? 0;
+            $out = $row[$key] ?? $default ?: 0;
 
             return "<input type='number' name='$keyout' value=\"".htmlentities($out, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
 
         case 'float':
-            $text = $row[$key] ?? '';
+            $text = $row[$key] ?? $default ?: 0;
 
             return "<input type='number' name='$keyout' value=\"".htmlentities($text, ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" step='any'>";
 
