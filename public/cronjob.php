@@ -22,11 +22,9 @@ $cronCache->getOptions()->setDirPermission(0777);
 $cronjobs = $cronCache->getData('tablecronjobs', 86400, true); //-- Cache for 1 day
 if (! is_array($cronjobs) || empty($cronjobs))
 {
-    $select = DB::select('cronjob');
-    $select->columns(['*'])
-        ->where->equalTo('enabled', 1)
-    ;
-    $cronjobs = DB::toArray(DB::execute($select));
+    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
+    $entities = $repository->findBy(['enabled' => 1]);
+    $cronjobs = $repository->extractEntity($entities);
 
     $cronCache->updateData('tablecronjobs', $cronjobs, true);
 }
