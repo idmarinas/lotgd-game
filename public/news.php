@@ -43,8 +43,8 @@ if ('delete' == $op)
 }
 
 $query = $newsRepo->createQueryBuilder('u');
-$query->orderBy('u.newsid', 'DESC')
-    ->where('u.newsdate = :date')
+$query->orderBy('u.id', 'DESC')
+    ->where('u.date = :date')
     ->setParameter('date', date('Y-m-d', $timestamp))
 ;
 
