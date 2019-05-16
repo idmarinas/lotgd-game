@@ -5,11 +5,10 @@
     "rows":
     [
         {
-            "newstext": "`^A strange awakening takes place in the world.`0",
-            "newsdate": "now",
-            "accountid": 0,
+            "text": "default",
+            "account_id": 0,
             "arguments": "",
-            "tlschema": ""
+            "text_domain": "partial-news"
         }
     ]
 }
