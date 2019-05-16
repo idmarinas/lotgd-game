@@ -280,7 +280,7 @@ class Cronjob
      *
      * @return int
      */
-    public function getMaxruntime(): int
+    public function getMaxruntime(): ?int
     {
         return $this->maxruntime;
     }
@@ -304,7 +304,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getSmtphost(): string
+    public function getSmtphost(): ?string
     {
         return $this->smtphost;
     }
@@ -328,7 +328,7 @@ class Cronjob
      *
      * @return int
      */
-    public function getSmtpport(): int
+    public function getSmtpport(): ?int
     {
         return $this->smtpport;
     }
@@ -352,7 +352,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getSmtpusername(): string
+    public function getSmtpusername(): ?string
     {
         return $this->smtpusername;
     }
@@ -376,7 +376,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getSmtppassword(): string
+    public function getSmtppassword(): ?string
     {
         return $this->smtppassword;
     }
@@ -448,7 +448,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getSmtpsecurity(): string
+    public function getSmtpsecurity(): ?string
     {
         return $this->smtpsecurity;
     }
@@ -472,7 +472,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getRunas(): string
+    public function getRunas(): ?string
     {
         return $this->runas;
     }
@@ -496,7 +496,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getEnvironment(): string
+    public function getEnvironment(): ?string
     {
         return $this->environment;
     }
@@ -520,7 +520,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getRunonhost(): string
+    public function getRunonhost(): ?string
     {
         return $this->runonhost;
     }
@@ -544,7 +544,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getOutput(): string
+    public function getOutput(): ?string
     {
         return $this->output;
     }
@@ -616,7 +616,7 @@ class Cronjob
      *
      * @return string
      */
-    public function getHaltdir(): string
+    public function getHaltdir(): ?string
     {
         return $this->haltdir;
     }
