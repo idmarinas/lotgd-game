@@ -51,7 +51,7 @@
                         <div class="column">
                             {% for allied in rounds.allied %}
                                 {% if allied is array %}
-                                    {{ allied[0]|t(allied[1])|colorize }}
+                                    {{ allied[0]|tl(allied[1], (allied[2] ?: 'page-battle'))|colorize }}
                                 {% else %}
                                     {{ allied|t|colorize }}
                                 {% endif %}
@@ -60,7 +60,7 @@
                         <div class="column">
                             {% for enemy in rounds.enemy %}
                                 {% if enemy is array %}
-                                    {{ enemy[0]|t(enemy[1])|colorize }}
+                                    {{ enemy[0]|tl(enemy[1], (enemy[2] ?: 'page-battle'))|colorize }}
                                 {% else %}
                                     {{ enemy|t|colorize }}
                                 {% endif %}
@@ -79,7 +79,7 @@
     <div class="ui bottom attached divided segment">
         {% for msg in battleend %}
             {% if msg is array %}
-                {{ msg[0]|t(msg[1])|colorize }}
+                {{ msg[0]|tl(msg[1], (msg[2] ?: 'page-battle'))|colorize }}
             {% else %}
                 {{ msg|t|colorize }}
             {% endif %}
