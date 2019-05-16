@@ -84,7 +84,7 @@ combat:
             - 'Even raw they have some restorative properties.`n'
         get:
             gem: '`&You find A GEM!`0`n'
-            gold: '`#You receive `^{gold.number}`0 gold!`0`n'
+            gold: '`#You receive `^{gold,number}`0 gold!`0`n'
             torment: '`c`b`$You receive an extra torment!`0´b´c'
             stamina: '`c`b`$You receive some stamina!`0´b´c'
             turn: '`c`b`$You receive an extra turn!`0´b´c'
