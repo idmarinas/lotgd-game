@@ -23,6 +23,8 @@ use Zend\I18n\Translator\Translator as ZendTranslator;
  */
 class Translator extends ZendTranslator
 {
+    const TEXT_DOMAIN_DEFAULT = 'page-default';
+
     /**
      * Translate a message of LoTGD WITH MessageFormatter.
      *
@@ -33,7 +35,7 @@ class Translator extends ZendTranslator
      *
      * @return string
      */
-    public function trans(string $message, ?array $parameters = [], ?string $textDomain = 'page-default', ?string $locale = null): string
+    public function trans(string $message, ?array $parameters = [], ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null): string
     {
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
@@ -82,11 +84,11 @@ class Translator extends ZendTranslator
      *
      * @return array|string
      */
-    public function st(string $message, ?string $textDomain = 'page-default', ?string $locale = null)
+    public function st(string $message, ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null)
     {
         $locale = ($locale ?: $this->getLocale());
 
-        return parent::translate($message, $textDomain ?? 'page-default', $locale);
+        return parent::translate($message, $textDomain ?? self::TEXT_DOMAIN_DEFAULT, $locale);
     }
 
     /**
