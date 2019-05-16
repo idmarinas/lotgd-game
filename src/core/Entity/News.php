@@ -18,10 +18,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * News.
  *
- * @ORM\Table(name="news",
+ * @ORM\Table(
  *     indexes={
- *         @ORM\Index(name="accountid", columns={"accountid"}),
- *         @ORM\Index(name="newsdate", columns={"newsdate"})
+ *         @ORM\Index(name="account_id", columns={"account_id"}),
+ *         @ORM\Index(name="date", columns={"date"})
  *     }
  * )
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\NewsRepository")
@@ -31,146 +31,154 @@ class News
     /**
      * @var int
      *
-     * @ORM\Column(name="newsid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $newsid;
+    private $id;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="newsdate", type="date", nullable=false, options={"default": "0000-00-00"})
+     * @ORM\Column(type="date", nullable=false, options={"default": "0000-00-00"})
      */
-    private $newsdate = '0000-00-00';
+    private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="newstext", type="text", length=65535, nullable=false)
+     * @ORM\Column(type="text", length=65535, nullable=false)
      */
-    private $newstext;
+    private $text;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="accountid", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
      */
-    private $accountid = 0;
+    private $accountId = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="arguments", type="array")
+     * @ORM\Column(type="array")
      */
     private $arguments;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @ORM\Column(name="tlschema", type="string", length=255, nullable=false, options={"default": "news"})
+     * @ORM\Column(type="boolean", nullable=false, options={"default": 1})
      */
-    private $tlschema = 'news';
+    private $newFormat = true;
 
     /**
-     * Set the value of Newsid.
+     * @var string
      *
-     * @param int newsid
+     * @ORM\Column(type="string", length=255, nullable=false, options={"default": "partial-news"})
+     */
+    private $textDomain = '';
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+
+    }
+
+    /**
+     * Set the value of id.
+     *
+     * @param int id
      *
      * @return self
      */
-    public function setNewsid($newsid)
+    public function setId($id)
     {
-        $this->newsid = $newsid;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get the value of Newsid.
+     * Get the value of id.
      *
      * @return int
      */
-    public function getNewsid(): int
+    public function getId(): int
     {
-        return $this->newsid;
+        return $this->id;
     }
 
     /**
-     * Set the value of Newsdate.
+     * Set the value of date.
      *
-     * @param \DateTime newsdate
+     * @param \DateTime date
      *
      * @return self
      */
-    public function setNewsdate($newsdate)
+    public function setDate($date)
     {
-        $this->newsdate = $newsdate;
-
-        if (! $newsdate instanceof \DateTimeInterface)
-        {
-            $this->newsdate = new \DateTime($newsdate);
-        }
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-     * Get the value of Newsdate.
+     * Get the value of date.
      *
      * @return \DateTime
      */
-    public function getNewsdate(): \DateTime
+    public function getDate(): \DateTime
     {
-        return $this->newsdate;
+        return $this->date;
     }
 
     /**
-     * Set the value of Newstext.
+     * Set the value of text.
      *
-     * @param string newstext
+     * @param string text
      *
      * @return self
      */
-    public function setNewstext($newstext)
+    public function setText($text)
     {
-        $this->newstext = $newstext;
+        $this->text = $text;
 
         return $this;
     }
 
     /**
-     * Get the value of Newstext.
+     * Get the value of text.
      *
      * @return string
      */
-    public function getNewstext(): string
+    public function getText(): string
     {
-        return $this->newstext;
+        return $this->text;
     }
 
     /**
-     * Set the value of Accountid.
+     * Set the value of AccountId.
      *
-     * @param int accountid
+     * @param int accountId
      *
      * @return self
      */
-    public function setAccountid($accountid)
+    public function setAccountd($accountId)
     {
-        $this->accountid = $accountid;
+        $this->accountId = $accountId;
 
         return $this;
     }
 
     /**
-     * Get the value of Accountid.
+     * Get the value of AccountId.
      *
      * @return int
      */
-    public function getAccountid(): int
+    public function getAccountId(): int
     {
-        return $this->accountid;
+        return $this->accountId;
     }
 
     /**
@@ -198,26 +206,50 @@ class News
     }
 
     /**
-     * Set the value of Tlschema.
+     * Set the value of TextDomain.
      *
-     * @param string tlschema
+     * @param string textDomain
      *
      * @return self
      */
-    public function setTlschema($tlschema)
+    public function setTextDomain($textDomain)
     {
-        $this->tlschema = $tlschema;
+        $this->textDomain = $textDomain;
 
         return $this;
     }
 
     /**
-     * Get the value of Tlschema.
+     * Get the value of TextDomain.
      *
      * @return string
      */
-    public function getTlschema(): string
+    public function getTextDomain(): string
     {
-        return $this->tlschema;
+        return $this->textDomain;
+    }
+
+    /**
+     * Set the value of newFormat
+     *
+     * @param  bool  $newFormat
+     *
+     * @return  self
+     */
+    public function setNewFormat($newFormat)
+    {
+        $this->newFormat = $newFormat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newFormat
+     *
+     * @return  bool
+     */
+    public function getNewFormat(): bool
+    {
+        return $this->newFormat;
     }
 }
