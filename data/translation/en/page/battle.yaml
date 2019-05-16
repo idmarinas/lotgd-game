@@ -73,7 +73,7 @@ combat:
         defeated:
             die: '`&`bYou have been defeated by `%{creatureName}`0!`0´b`n'
             lost:
-                exp: '`4{percent,percent} of experience has been lost!`0´b`n'
+                exp: '`4{percent,number,percent} of experience has been lost!`0´b`n'
                 gold: '`4All gold on hand has been lost!`0`n'
             tomorrow:
                 forest: 'You may begin fighting again tomorrow.'
