@@ -23,7 +23,7 @@ class Upgrade extends UpgradeAbstract
     const VERSION_NUMBER = 40000;
 
     /**
-     * Step 1: Rename tables "accounts" and "commentary" and create new tables.
+     * Step 1: Rename tables old tables and create new tables.
      *
      * @return bool
      */
@@ -35,17 +35,21 @@ class Upgrade extends UpgradeAbstract
 
             $this->connection->exec('RENAME TABLE `commentary` TO `commentary_old`;');
             $this->connection->exec('RENAME TABLE `accounts` TO `accounts_old`;');
+            $this->connection->exec('RENAME TABLE `news` TO `news_old`;');
 
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_RENAME, ['old' => 'commentary', 'new' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_RENAME, ['old' => 'accounts', 'new' => 'accounts_old'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_RENAME, ['old' => 'news', 'new' => 'news_old'], self::TRANSLATOR_DOMAIN);
 
             $this->syncEntity(\Lotgd\Core\Entity\Commentary::class);
             $this->syncEntity(\Lotgd\Core\Entity\Accounts::class);
             $this->syncEntity(\Lotgd\Core\Entity\Characters::class);
+            $this->syncEntity(\Lotgd\Core\Entity\News::class);
 
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'commentary'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'accounts'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'characters'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_CREATE, ['table' => 'news'], self::TRANSLATOR_DOMAIN);
 
             return true;
         }
@@ -209,11 +213,66 @@ class Upgrade extends UpgradeAbstract
     }
 
     /**
-     * Insert new data for this upgrade.
+     * Import data of old "news" table.
      *
      * @return bool
      */
     public function step4(): bool
+    {
+        try
+        {
+            $hydrator = new ClassMethods();
+            $page = 1;
+            $select = \DB::select('news_old');
+            $paginator = \DB::paginator($select, $page, 100);
+
+            $pageCount = $paginator->count();
+            $importCount = $paginator->getTotalItemCount();
+
+            do
+            {
+                foreach($paginator as $row)
+                {
+                    $row = (array) $row;
+
+                    $row['arguments'] = unserialize($row['arguments']);
+                    $row['text'] = $row['newstext'];
+                    $row['date'] = new \DateTime($row['newsdate']);
+                    $row['textDomain'] = $row['tlschema'];
+                    $row['accountId'] = $row['accountid'];
+                    $row['newFormat'] = false; //-- This news have an old format for the news
+
+                    $entity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\News());
+
+                    $this->doctrine->persist($entity);
+                }
+
+                $this->doctrine->flush();
+
+                $page++;
+                $paginator = \DB::paginator($select, $page, 100);
+            } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
+
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_IMPORT, ['count' => $importCount, 'table' => 'news'], self::TRANSLATOR_DOMAIN);
+
+            return true;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            $this->messages[] = $th->getMessage();
+
+            return false;
+        }
+    }
+
+    /**
+     * Insert new data for this upgrade.
+     *
+     * @return bool
+     */
+    public function step5(): bool
     {
         try
         {
@@ -232,15 +291,17 @@ class Upgrade extends UpgradeAbstract
      *
      * @return bool
      */
-    public function step5(): bool
+    public function step6(): bool
     {
         try
         {
             $this->connection->exec('DROP TABLE IF EXISTS `commentary_old`;');
             $this->connection->exec('DROP TABLE IF EXISTS `accounts_old`;');
+            $this->connection->exec('DROP TABLE IF EXISTS `news_old`;');
 
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_DELETE, ['table' => 'commentary_old'], self::TRANSLATOR_DOMAIN);
             $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_DELETE, ['table' => 'accounts_old'], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t(self::TRANSLATOR_KEY_TABLE_DELETE, ['table' => 'news_old'], self::TRANSLATOR_DOMAIN);
 
             return true;
         }
