@@ -25,9 +25,11 @@ class GameCore extends AbstractExtension
     use PatternCore\Censor;
     use PatternCore\Container;
     use PatternCore\Sanitize;
+    use PatternCore\Translator;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\Mail;
+    use Pattern\News;
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
@@ -80,6 +82,8 @@ class GameCore extends AbstractExtension
             new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail']),
             new TwigFunction('user_petition', [$this, 'userPetition']),
             new TwigFunction('admin_petition', [$this, 'adminPetition']),
+
+            new TwigFunction('show_news_item', [$this, 'showNewsItem']),
 
             new TwigFunction('bdump', [$this, 'bdump']),
 
