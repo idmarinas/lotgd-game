@@ -21,15 +21,7 @@
             [ <a href="{{ ('news.php?op=delete&newsid=' ~ news.newsid)|lotgd_url }}">{{ del }}</a> ]&nbsp;
         {% endif %}
 
-        {% if news.arguments %}
-            {% if news.newformat %}
-                {{ news.newstext|tl(news.arguments, news.tlschema)|colorize }}
-            {% else %}
-                {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments)|colorize }}
-            {% endif %}
-        {% else %}
-            {{ news.newstext|tl(null, news.tlschema)|colorize }}
-        {% endif %}
+        {{ show_news_item(news)|colorize }}
     </div>
 {% else %}
     {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
