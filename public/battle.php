@@ -177,7 +177,7 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
     if (count($enemies) > 1)
     {
         $surprised = true;
-        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = 'battle.combat.start.surprised.multiple';
+        $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = 'combat.start.surprised.multiple';
     }
     else
     {
@@ -208,14 +208,14 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
 
             if (! $surprised)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = 'battle.combat.start.surprised.no';
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [ 'combat.start.surprised.no' ];
             }
             else
             {
                 if ('pvp' == $options['type'])
                 {
                     $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                        'battle.combat.start.surprised.pvp',
+                        'combat.start.surprised.pvp',
                         [
                             'player' => $enemies[0]['creaturename']
                         ]
@@ -224,7 +224,7 @@ if ('run' != $op && 'fight' != $op && 'newtarget' != $op)
                 else
                 {
                     $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                        'battle.combat.start.surprised.pve',
+                        'combat.start.surprised.pve',
                         [
                             'creatureName' => $enemies[0]['creaturename']
                         ]
@@ -751,7 +751,7 @@ if ($session['user']['hitpoints'] <= 0)
 }
 
 //-- Any data for personalize results
-$battleDefeatWhere = $battleDefeatWhere ?? 'in the forest';
+$battleDefeatWhere = $battleDefeatWhere ?? 'forest';
 //-- Use for create a news, set to false for not create news
 $battleInForest = $battleInForest ?? true;
 //-- Indicating if is a Forest (true) or Graveyard (false)
@@ -833,7 +833,7 @@ if ($victory || $defeat)
 
         if ($battleProcessVictoryDefeat)
         {
-            battledefeat($newenemies, $battleDefeatWhere, $battleInForest, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
+            battledefeat($newenemies, $battleDefeatWhere, $battleDefeatCanDie, $battleDefeatLostExp, $battleDefeatLostGold);
         }
     }
 }
