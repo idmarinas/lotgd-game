@@ -68,7 +68,11 @@ else
     \LotgdNavigation::addHeader('news.category.logout');
     \LotgdNavigation::addNav('news.nav.logout', 'login.php?op=logout');
 
-    \LotgdNavigation::addHeader('news.category.dead', ['sex' => (int) $session['user']['sex']]);
+    \LotgdNavigation::addHeader('news.category.dead', [
+        'params' => [
+            'sex' => (int) $session['user']['sex']
+        ]
+    ]);
     \LotgdNavigation::addNav('news.nav.shades', 'shades.php');
     \LotgdNavigation::addNav('news.nav.graveyard', 'graveyard.php');
 }
