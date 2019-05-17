@@ -18,7 +18,7 @@
 
     <div class="center aligned">
         {% if SU_EDIT_COMMENTS %}
-            [ <a href="{{ ('news.php?op=delete&newsid=' ~ news.newsid)|lotgd_url }}">{{ del }}</a> ]&nbsp;
+            [ <a href="{{ ('news.php?op=delete&newsid=' ~ news.id)|lotgd_url }}">{{ del }}</a> ]&nbsp;
         {% endif %}
 
         {{ show_news_item(news)|colorize }}
