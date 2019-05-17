@@ -81,8 +81,8 @@ class Doctrine implements AdapterInterface
 
         try
         {
-            return $qb->select('COUNT(1) AS c')
-                ->orderBy('c')
+            return $qb->select('COUNT(1) AS doctrinePaginatorCount')
+                ->orderBy('doctrinePaginatorCount')
                 ->setFirstResult(null)
                 ->setMaxResults(null)
                 ->getQuery()
