@@ -750,7 +750,7 @@ if ($session['user']['hitpoints'] <= 0)
     $defeat = true;
 }
 
-//-- Any data for personalize results
+//-- Zone of battle, use for death messages
 $battleDefeatWhere = $battleDefeatWhere ?? 'forest';
 //-- Use for create a news, set to false for not create news
 $battleInForest = $battleInForest ?? true;
