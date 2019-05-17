@@ -131,12 +131,12 @@ class FlashMessages
     /**
      * Add message.
      *
-     * @param string $message
+     * @param mixed $message
      * @param string $type
      *
      * @return FlashMessages
      */
-    public function addMessage(string $message, $type = null)
+    public function addMessage($message, $type = null)
     {
         $container = $this->getContainer();
         $type = $type ?: self::TYPE_INFO;
@@ -162,11 +162,11 @@ class FlashMessages
     /**
      * Add a "info" message.
      *
-     * @param string $message
+     * @param mixed $message
      *
      * @return FlashMessages
      */
-    public function addInfoMessage(string $message)
+    public function addInfoMessage($message)
     {
         $this->addMessage($message, self::TYPE_INFO);
 
@@ -176,11 +176,11 @@ class FlashMessages
     /**
      * Add a "success" message.
      *
-     * @param string $message
+     * @param mixed $message
      *
      * @return FlashMessages
      */
-    public function addSuccessMessage(string $message)
+    public function addSuccessMessage($message)
     {
         $this->addMessage($message, self::TYPE_SUCCESS);
 
@@ -190,11 +190,11 @@ class FlashMessages
     /**
      * Add a "error" message.
      *
-     * @param string $message
+     * @param mixed $message
      *
      * @return FlashMessages
      */
-    public function addErrorMessage(string $message)
+    public function addErrorMessage($message)
     {
         $this->addMessage($message, self::TYPE_ERROR);
 
@@ -204,11 +204,11 @@ class FlashMessages
     /**
      * Add a "warning" message.
      *
-     * @param string $message
+     * @param mixed $message
      *
      * @return FlashMessages
      */
-    public function addWarningMessage(string $message)
+    public function addWarningMessage($message)
     {
         $this->addMessage($message, self::TYPE_WARNING);
 

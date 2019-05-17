@@ -58,6 +58,18 @@ class FlashMessages extends AbstractExtension
         {
             foreach ($messages as $id => $message)
             {
+                if (is_array($message))
+                {
+                    $message['message'] = $this->getSanitize()->fullSanitize($message['message']);
+                    $message['id'] = $message['id'] ?? $id;
+                    $message['class'] = $message['class'] ?? $type;
+                    $message['close'] = $message['close'] ?? true;
+
+                    $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', $message);
+
+                    continue;
+                }
+
                 $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', [
                     'message' => $this->getSanitize()->fullSanitize($message),
                     'class' => $type,
