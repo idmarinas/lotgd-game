@@ -81,7 +81,8 @@ class Doctrine implements AdapterInterface
 
         try
         {
-            return $qb->select('COUNT(1) AS C')
+            return $qb->select('COUNT(1) AS c')
+                ->orderBy('c')
                 ->setFirstResult(null)
                 ->setMaxResults(null)
                 ->getQuery()
