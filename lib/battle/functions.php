@@ -511,6 +511,7 @@ function battlegainexperiencegraveyard()
     }
 
     $count = count($enemies);
+
     if ($expbonus > 0)
     {
         $expbonus = round($expbonus * pow(1 + (getsetting('addexp', 5) / 100), $count - 1), 0);
@@ -555,12 +556,11 @@ function battlegainexperiencegraveyard()
  *
  * @param array        $enemies
  * @param string|false $where
- * @param bool         $forest
  * @param bool         $candie   Can die in battle?
  * @param bool         $lostexp  Lost exp when die in battle?
  * @param bool         $lostgold Lost gold when die in battle?
  */
-function battledefeat($enemies, $where = 'in the forest', $forest = true, $candie = true, $lostexp = true, $lostgold = true)
+function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = true, $lostgold = true)
 {
     global $session, $lotgdBattleContent;
 
@@ -593,22 +593,16 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
         ];
     }
 
-    if (is_string($where))
+    //-- If not want add a news when defeat set $where in null|''|false
+    if ($where)
     {
-        $where = translate_inline($where);
+        $deathmessage = select_deathmessage($where);
+        $taunt = select_taunt();
 
-        $deathmessage = select_deathmessage($forest, ['{where}'], [$where]);
-
-        if (1 == $deathmessage['taunt'])
-        {
-            $taunt = '`n'.select_taunt();
-        }
-        else
-        {
-            $taunt = '';
-        }
-
-        addnews('%s `b`i%s´i´b', $deathmessage['deathmessage'], $taunt);
+        addnews('deathmessage', [
+            'deathmessage' => $deathmessage,
+            'taunt' => $taunt
+        ], '');
     }
 
     if ($lostgold)
@@ -625,7 +619,9 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 
         $lotgdBattleContent['battleend'][] = [
             'combat.end.defeated.lost.exp',
-            ($percent / 100)
+            [
+                'percent' => ($percent / 100)
+            ]
         ];
     }
 
@@ -647,7 +643,7 @@ function battledefeat($enemies, $where = 'in the forest', $forest = true, $candi
 }
 
 /**
- * Show result of
+ * Show result of.
  *
  * @param array $lotgdBattleContent
  */
