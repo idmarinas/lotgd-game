@@ -1,0 +1,24 @@
+{% translate_default_domain 'page-debug' %}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'table.thead.category'|t|colorize }}</th>
+            <th>{{ 'table.thead.subCategory'|t|colorize }}</th>
+            <th>{{ 'table.thead.sum'|t|colorize }}</th>
+            <th>{{ 'table.thead.med'|t|colorize }}</th>
+            <th>{{ 'table.thead.hits'|t|colorize }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for debug in paginator %}
+            <tr>
+                <td>{{ debug.category }}</td>
+                <td>{{ debug.subcategory }}</td>
+                <td>{{ debug.sum }}</td>
+                <td>{{ debug.medium }}</td>
+                <td>{{ debug.counter }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

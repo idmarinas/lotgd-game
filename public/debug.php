@@ -10,83 +10,48 @@ tlschema('debug');
 
 check_su_access(SU_EDIT_CONFIG);
 
-require_once 'lib/superusernav.php';
-superusernav();
-addnav('Debug Options');
-addnav('', $_SERVER['REQUEST_URI']);
-$sort = httpget('sort');
-addnav('Get Pageruntimes', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
-addnav('Get Modulehooktimes', 'debug.php?debug=hooksort&sort='.urlencode($sort));
+$textDomain = 'page-debug';
 
-page_header('Debug Analysis');
-$order = 'sum';
+page_header('title', [], $textDomain);
 
-if ('' != $sort)
+$page = (int) \LotgdHttp::getQuery('page');
+$sort = (string) \LotgdHttp::getQuery('sort');
+$debug = (string) \LotgdHttp::getQuery('debug');
+$ascDescRaw = (int) \LotgdHttp::getQuery('direction');
+
+$order = $sort ?: 'sum';
+$ascDesc = $ascDescRaw ? 'ASC' : 'DESC';
+$debug = $debug ?: 'pageruntime';
+
+\LotgdNavigation::superuserGrottoNav();
+\LotgdNavigation::addNav('debug.nav.refresh', 'debug.php');
+\LotgdNavigation::addHeader('debug.category.option');
+\LotgdNavigation::addNav('debug.nav.page', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
+\LotgdNavigation::addNav('debug.nav.module', 'debug.php?debug=hooksort&sort='.urlencode($sort));
+
+\LotgdNavigation::addHeader('debug.category.sorting');
+\LotgdNavigation::addNav('debug.nav.total', 'debug.php?debug='.$debug.'&sort=sum&direction='.$ascDescRaw);
+\LotgdNavigation::addNav('debug.nav.avg', 'debug.php?debug='.$debug.'&sort=medium&direction='.$ascDescRaw);
+\LotgdNavigation::addNav('debug.nav.switch', 'debug.php?debug='.$debug.'&sort='.urlencode($sort).'&direction='.(! $ascDescRaw));
+
+$repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
+
+$query = $repository->createQueryBuilder('u');
+
+$query->select('u.category', 'u.subcategory', 'sum(u.value) AS sum', 'sum(u.value)/count(u.id) AS medium', 'COUNT(u.id) AS counter')
+    ->orderBy($order, $ascDesc)
+    ->groupBy('u.type', 'u.category', 'u.subcategory')
+    ->where('u.type = :type')
+    ->setParameter('type', 'pagegentime')
+;
+
+if ('hooksort' == $debug)
 {
-    $order = $sort;
+    $query->setParameter('type', 'hooktime');
 }
-$debug = httpget('debug');
 
-if ('' == $debug)
-{
-    $debug = 'pageruntime';
-}
-$ascdesc_raw = (int) httpget('direction');
+$params['paginator'] = $repository->getPaginator($query, $page, 50);
 
-if ($ascdesc_raw)
-{
-    $ascdesc = 'ASC';
-}
-    else
-    {
-        $ascdesc = 'DESC';
-    }
-addnav('Sorting');
-addnav('By Total', 'debug.php?debug='.$debug.'&sort=sum&direction='.$ascdesc_raw);
-addnav('By Average', 'debug.php?debug='.$debug.'&sort=medium&direction='.$ascdesc_raw);
-addnav('Switch ASC/DESC', 'debug.php?debug='.$debug.'&sort='.urlencode($sort).'&direction='.(! $ascdesc_raw));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/debug.twig', $params));
 
-switch ($debug) {
-    case 'hooksort':
-        $sql = 'Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM '.DB::prefix('debug')." WHERE type='hooktime' group by type,category,subcategory order by $order $ascdesc limit 30";
-        $category = translate_inline('Setting');
-        $subcategory = translate_inline('Module Name');
-        $sum_desc = translate_inline('Total Seconds');
-        $med_desc = translate_inline('Average per Hit');
-        $hits = translate_inline('Hits');
-        break;
-
-    case 'pageruntime':
-
-    default:
-    $sql = 'Select category,subcategory, value+0 as sum, (value+0)/count(id) as medium,count(id) AS counter FROM '.DB::prefix('debug')." WHERE type='pagegentime' group by type,category,subcategory order by $order $ascdesc limit 30";
-    $category = translate_inline('Setting');
-    $subcategory = translate_inline('Module Name');
-    $sum_desc = translate_inline('Total Seconds');
-    $med_desc = translate_inline('Average per Hit');
-    $hits = translate_inline('Hits');
-}
-$none = translate_inline('`iNone´i');
-$notset = translate_inline('`iNot set´i');
-rawoutput("<table class='ui very compact striped selectable table'><thead><tr><th>$category</th><th>$subcategory</th><th>$sum_desc</th><th>$med_desc</th><th>$hits</th></tr></thead>");
-debug($sql);
-$result = DB::query($sql);
-$i = true;
-
-while ($row = DB::fetch_assoc($result))
-{
-    $i = ! $i;
-    rawoutput("<tr'><td valign='top'>");
-    output_notl('`b'.$row['category'].'´b');
-    rawoutput("</td><td valign='top'>");
-    output_notl('`b'.$row['subcategory'].'´b');
-    rawoutput("</td><td valign='top'>");
-    output_notl($row['sum']);
-    rawoutput("</td><td valign='top'>");
-    output_notl($row['medium']);
-    rawoutput("</td><td valign='top'>");
-    output_notl($row['counter']);
-    rawoutput('</td></tr>');
-}
-rawoutput('</table>');
 page_footer();
