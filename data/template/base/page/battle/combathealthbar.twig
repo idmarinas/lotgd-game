@@ -18,7 +18,7 @@
 <table class="ui collapsing very basic very compact table">
 	<tr>
 		<td colspan="3">
-            {% set nametext = (name is iterable ? name|t : name) %}
+            {% set nametext = (name is iterable ? name[0]|tl(name[1], name[2] ?: 'page-battle') : name) %}
 			{% if isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
 			{{ '(%s) %s (Level `b%s´b)`0'|t|format(who|t, nametext, level)|colorize }}
 			{% if not showbar %}
