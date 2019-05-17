@@ -119,7 +119,7 @@ class AccountsRepository extends DoctrineRepository
 
         $character['character_id'] = $character['id'];
 
-        unset($account['character']);
+        unset($account['character'], $character['acct']);
 
         return array_merge($account, $character, $everypage);
     }
