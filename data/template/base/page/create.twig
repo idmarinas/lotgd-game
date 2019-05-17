@@ -1,6 +1,16 @@
 {% translate_default_domain 'page-create' %}
 
-{% if not allowCreation %}
+{% if maintenanceMode %}
+    <div class="ui centered horizontal card">
+        <div class="image">
+            <img src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|tl(null, 'app-default')|uncolorize }}">
+        </div>
+        <div class="content">
+            <a class="header">{{ 'maintenance.server.creation.title'|tl(null, 'app-default') }}</a>
+            <div class="description">{{ 'maintenance.server.creation.message'|tl(null, 'app-default') }}</div>
+        </div>
+    </div>
+{% elseif not allowCreation %}
     {% include 'base/page/create/account/disabled.twig' %}
 {% elseif serverFull %}
     {% include 'base/page/create/serverfull.twig' %}

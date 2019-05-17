@@ -43,6 +43,12 @@ if ('val' == $op || 'forgotval' == $op)
 
 $accountRepo = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 
+//-- Check server are in maintenance
+if (getsetting('fullmaintenance', 0) || getsetting('maintenance', 0))
+{
+    $params['maintenanceMode'] = true;
+}
+
 if ('forgotval' == $op)
 {
     $forgottenCode = \LotgdHttp::getQuery('id', 0);
