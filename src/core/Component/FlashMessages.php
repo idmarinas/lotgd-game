@@ -131,8 +131,8 @@ class FlashMessages
     /**
      * Add message.
      *
-     * @param mixed $message
-     * @param string $type
+     * @param array|string $message
+     * @param string       $type
      *
      * @return FlashMessages
      */
@@ -162,7 +162,7 @@ class FlashMessages
     /**
      * Add a "info" message.
      *
-     * @param mixed $message
+     * @param array|string $message
      *
      * @return FlashMessages
      */
@@ -176,7 +176,7 @@ class FlashMessages
     /**
      * Add a "success" message.
      *
-     * @param mixed $message
+     * @param array|string $message
      *
      * @return FlashMessages
      */
@@ -190,7 +190,7 @@ class FlashMessages
     /**
      * Add a "error" message.
      *
-     * @param mixed $message
+     * @param array|string $message
      *
      * @return FlashMessages
      */
@@ -204,7 +204,7 @@ class FlashMessages
     /**
      * Add a "warning" message.
      *
-     * @param mixed $message
+     * @param array|string $message
      *
      * @return FlashMessages
      */
