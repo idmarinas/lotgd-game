@@ -69,8 +69,6 @@ if ($session['user']['superuser'] & SU_EDIT_MOUNTS)
 if ($session['user']['superuser'] & SU_EDIT_CREATURES)
 {
     \LotgdNavigation::addNav('superuser.nav.creatures', 'creatures.php');
-    \LotgdNavigation::addNav('superuser.nav.taunt', 'taunt.php');
-    \LotgdNavigation::addNav('superuser.nav.deathmessages', 'deathmessages.php');
     \LotgdNavigation::addNav('superuser.nav.masters', 'masters.php');
 }
 
