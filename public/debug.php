@@ -24,7 +24,6 @@ $ascDesc = $ascDescRaw ? 'ASC' : 'DESC';
 $debug = $debug ?: 'pageruntime';
 
 \LotgdNavigation::superuserGrottoNav();
-\LotgdNavigation::addNav('debug.nav.refresh', 'debug.php');
 \LotgdNavigation::addHeader('debug.category.option');
 \LotgdNavigation::addNav('debug.nav.page', 'debug.php?debug=pageruntime&sort='.urlencode($sort));
 \LotgdNavigation::addNav('debug.nav.module', 'debug.php?debug=hooksort&sort='.urlencode($sort));
