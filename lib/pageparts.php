@@ -84,11 +84,6 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
     $html['userPre'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
     unset($html['session']['user'], $html['userPre']['password']);
-
-    if (getsetting('debug', 0))
-    {
-        $session['debugstart'] = microtime();
-    }
 }
 
 /**
@@ -105,7 +100,7 @@ function page_footer($saveuser = true)
     $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
     $replacementbits = modulehook("footer-$script", []);
 
-    if ('runmodule' == $script && (($module = httpget('module'))) > '')
+    if ('runmodule' == $script && ($module = httpget('module')) > '')
     {
         // This modulehook allows you to hook directly into any module without
         // the need to hook into footer-runmodule and then checking for the
@@ -271,12 +266,25 @@ function page_footer($saveuser = true)
 
     $wrapper = \LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
 
-    if (getsetting('debug', 0))
+    //-- Register data in debug server
     {
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','runtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".($gentime)."');";
-        \DB::query($sql);
-        $sql = 'INSERT INTO '.\DB::prefix('debug')." VALUES (0,'pagegentime','dbtime','".LotgdHttp::getServer('SCRIPT_NAME')."','".(round($wrapper->getQueryTime(), 3))."');";
-        \DB::query($sql);
+        $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
+
+        $runtimeEntity = $repository->hydrateEntity([
+            'type' => 'pagegentime',
+            'category' => 'runtime',
+            'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
+            'value' => $gentime
+        ]);
+        $dbtimeEntity = $repository->hydrateEntity([
+            'type' => 'pagegentime',
+            'category' => 'dbtime',
+            'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
+            'value' => round($wrapper->getQueryTime(), 5)
+        ]);
+
+        \Doctrine::persist($runtimeEntity);
+        \Doctrine::persist($dbtimeEntity);
     }
 
     tlschema();
@@ -305,6 +313,9 @@ function page_footer($saveuser = true)
     //this somehow allows some frames to load before the user's navs say it can
     session_write_close();
     echo $browserOutput;
+
+    \Doctrine::flush();
+    \Doctrine::clear();
 
     exit();
 }
