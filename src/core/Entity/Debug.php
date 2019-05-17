@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Debug.
  *
- * @ORM\Table(name="debug")
- * @ORM\Entity
+ * @ORM\Table
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\DebugRepository")
  */
 class Debug
 {
