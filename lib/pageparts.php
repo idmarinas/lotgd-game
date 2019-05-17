@@ -267,6 +267,7 @@ function page_footer($saveuser = true)
     $wrapper = \LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
 
     //-- Register data in debug server
+    if (getsetting('debug', 0))
     {
         $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
 
