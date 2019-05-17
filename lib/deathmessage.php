@@ -7,61 +7,61 @@ require_once 'lib/class/static.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/substitute.php';
 
-function select_deathmessage($forest = true, $extra = [], $extrarep = [])
+/**
+ * Select 1 death message.
+ *
+ * @param string $zone
+ * @param array  $extraParams
+ * @param array  $extrarep
+ *
+ * @return array
+ */
+function select_deathmessage($zone = 'forest', $extraParams = []): array
 {
     global $session, $badguy;
 
-    $where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
+    $count = \LotgdTranslator::st("{$zone}.count", 'partial-deathmessage');
 
-    $sql = 'SELECT deathmessage,taunt FROM '.DB::prefix('deathmessages')." $where ORDER BY rand(".e_rand().') LIMIT 1';
-
-    $result = DB::query($sql);
-
-    if ($result)
+    //-- Default message, if fail in count
+    //-- Always shows the default message if the key is not found in the specified language when translating.
+    $deathmessage = 'default';
+    //-- Check if found count for zone
+    if ("{$zone}.count" != $count)
     {
-        $row = DB::fetch_assoc($result);
-        $deathmessage = $row['deathmessage'];
-        $taunt = $row['taunt'];
-    }
-    else
-    {
-        $taunt = 1;
-        $deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
+        $rand = mt_rand(0, max(0, $count - 1));
+
+        $deathmessage = "{$zone}.0{$rand}";
     }
 
-    $deathmessage = substitute($deathmessage, $extra, $extrarep);
+    $params = [
+        //-- The player's name (also can be specified as goodGuy
+        'goodGuyName' => $session['user']['name'],
+        'goodGuy' => $session['user']['name'],
+        //-- The player's weapon (also can be specified as weapon
+        'goodGuyWeapon' => $session['user']['weapon'],
+        'weapon' => $session['user']['weapon'],
+        //-- The player's armor (also can be specified as armor
+        'armorName' => $session['user']['armor'],
+        'armor' => $session['user']['armor'],
+        //-- Subjective pronoun for the player (him her)
+        'himHer' => $session['user']['sex'] ? 'her' : 'him',
+        //-- Possessive pronoun for the player (his her)
+        'hisHer' => $session['user']['sex'] ? 'her' : 'his',
+        //-- Objective pronoun for the player (he she)
+        'heShe' => $session['user']['sex'] ? 'she' : 'he',
+        //-- The monster's name (also can be specified as badGuy
+        'badGuyName' => $badguy['creaturename'],
+        'badGuy' => $badguy['creaturename'],
+        //-- The monster's weapon (also can be specified as creatureWeapon
+        'badGuyWeapon' => $badguy['creatureweapon'],
+        'creatureWeapon' => $badguy['creatureweapon']
+    ];
 
-    return ['deathmessage' => $deathmessage, 'taunt' => $taunt];
-}
+    $params = \array_merge($params, $extraParams);
 
-function select_deathmessage_array($forest = true, $extra = [], $extrarep = [])
-{
-    global $session, $badguy;
-
-    $where = ($forest ? 'WHERE forest=1' : 'WHERE graveyard=1');
-
-    $sql = 'SELECT deathmessage, taunt FROM '.DB::prefix('deathmessages')." $where ORDER BY rand(".e_rand().') LIMIT 1';
-
-    $result = DB::query($sql);
-
-    if ($result)
-    {
-        $row = DB::fetch_assoc($result);
-        $deathmessage = $row['deathmessage'];
-        $taunt = $row['taunt'];
-    }
-    else
-    {
-        $taunt = 1;
-        $deathmessage = "`5\"`6{goodguyname}'s mother wears combat boots`5\", screams {badguyname}.";
-    }
-
-    if ('{where}' == $extra[0])
-    {
-        $deathmessage = str_replace($extra[0], $extrarep[0], $deathmessage);
-    }
-    $deathmessage = substitute_array($deathmessage, $extra, $extrarep);
-    array_unshift($deathmessage, true, 'deathmessages');
-
-    return ['deathmessage' => $deathmessage, 'taunt' => $taunt];
+    return [
+        'deathmessage' => $deathmessage,
+        'params' => $params,
+        'textDomain' => 'partial-deathmessage'
+    ];
 }
