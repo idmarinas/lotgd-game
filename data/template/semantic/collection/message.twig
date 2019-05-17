@@ -1,10 +1,16 @@
-<div class="ui {{ class }} message">
+<div class="ui {{ addClass ~ ' ' ~ class }} message">
     {% if close %}
         <i class="close icon"></i>
     {% endif %}
 
-    {% if header %}
-        <div class="header">{{ header }}</div>
+    {% if icon %}
+        <i class="{{ icon }} icon"></i>
     {% endif %}
-    <p>{{ message }}</p>
+
+    <div class="content">
+        {% if header %}
+            <div class="header">{{ header }}</div>
+        {% endif %}
+        <p>{{ message }}</p>
+    </div>
 </div>
