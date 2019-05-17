@@ -380,9 +380,7 @@ translator_setup();
     //Server runs in Debug mode, tell the superuser about it
 if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
 {
-    tlschema('debug');
-    output('<center>`$<h2>SERVER RUNNING IN DEBUG MODE</h2></center>`n`n', true);
-    tlschema();
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('debug.mode', [], 'app-default'));
 }
 
 // WARNING:
