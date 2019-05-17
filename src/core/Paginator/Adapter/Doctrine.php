@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Paginator\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
+use Tracy\Debugger;
 use Zend\Paginator\Adapter\AdapterInterface;
 
 class Doctrine implements AdapterInterface
@@ -78,11 +79,20 @@ class Doctrine implements AdapterInterface
     {
         $qb = clone $this->doctrine;
 
-        return $qb->select('COUNT(1) AS C')
-            ->setFirstResult(null)
-            ->setMaxResults(null)
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
+        try
+        {
+            return $qb->select('COUNT(1) AS C')
+                ->setFirstResult(null)
+                ->setMaxResults(null)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
     }
 }
