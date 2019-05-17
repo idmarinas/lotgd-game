@@ -218,6 +218,61 @@ $l = $license;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
+//-- Check if have a full maintenance mode activate force to log out all players
+if (getsetting('fullmaintenance', 0))
+{
+    $title = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app-default');
+    $message = getsetting('maintenancenote', '');
+    $message = $message ?: \LotgdTranslator::t('maintenance.server.closed.message', [], 'app-default');
+
+    \LotgdFlashMessages::addErrorMessage([
+        'header' => $title,
+        'message' => $message,
+        'addClass' => 'icon',
+        'icon' => 'cog loading',
+        'close' => false
+    ]);
+
+    if (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER))
+    {
+        $session['user']['restorepage'] = 'news.php';
+
+        if ($session['user']['location'] == $iname)
+        {
+            $session['user']['restorepage'] = 'inn.php?op=strolldown';
+        }
+
+        invalidatedatacache('charlisthomepage');
+        invalidatedatacache('list.php-warsonline');
+
+        saveuser();
+
+        \LotgdSession::sessionLogOut();
+
+        $session = [];
+
+        return redirect('index.php');
+    }
+}
+//-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
+elseif(getsetting('maintenance', 0))
+{
+    $title = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app-default');
+    $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app-default');
+    if ($session['user']['loggedin'])
+    {
+        $message .= \LotgdTranslator::t('maintenance.server.warning.loggedin', [], 'app-default');
+    }
+
+    \LotgdFlashMessages::addWarningMessage([
+        'header' => $title,
+        'message' => $message,
+        'addClass' => 'icon',
+        'icon' => 'cog loading',
+        'close' => false
+    ]);
+}
+
 $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
 mass_module_prepare([
     'template-header', 'template-footer', 'template-statstart', 'template-stathead', 'template-statrow', 'template-statbuff', 'template-statend',
@@ -380,7 +435,7 @@ translator_setup();
     //Server runs in Debug mode, tell the superuser about it
 if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('debug.mode', [], 'app-default'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('maintenance.debug.mode', [], 'app-default'));
 }
 
 // WARNING:
