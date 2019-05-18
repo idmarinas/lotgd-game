@@ -12,5 +12,14 @@
             <div class="header">{{ header }}</div>
         {% endif %}
         <p>{{ message }}</p>
+
+        {% if blockquote %}
+            <blockquote>
+                <p>{{ blockquote }}</p>
+                {% if author %}
+                    <span class="author"><i class="address book outline icon"></i> {{ author }}</span>
+                {% endif %}
+            </blockquote>
+        {% endif %}
     </div>
 </div>
