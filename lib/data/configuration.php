@@ -24,9 +24,10 @@ return [
     '`$WARNING!`0 This will create A LOT of load as many sql queries log stuff! Only do so with few players online. It is enough to get the standard behaviour of a few to see where the most execution time is consumed,note',
     'maintenance' => 'Server is suspended for maintenance?,bool',
     'Note: This means users cannot login anymore; logged in people STAY; but will be given a big red text who tells them to log out immediateley at a safe location.,note',
-    'maintenancenote' => 'Text to be displayed as reason for maintenance,textarearesizeable',
     'fullmaintenance' => 'Server is fully suspended for maintenance?,bool',
     'If you have updates so severe that nobody should cause a query to vital tables then activate this. Best approach is to activate first the normal maintenance and after a few minutes activate the full maintenance.,note',
+    'maintenancenote' => 'Text to be displayed as reason for maintenance (Extra text),textarearesizeable',
+    'maintenanceauthor' => 'Text to show who activate maintenance,text',
 
     'Main Page Display,title',
     'homeskinselect' => 'Should the skin selection widget be shown?,bool',
