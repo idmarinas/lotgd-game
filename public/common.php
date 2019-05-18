@@ -222,12 +222,13 @@ do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 if (getsetting('fullmaintenance', 0))
 {
     $title = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app-default');
-    $message = getsetting('maintenancenote', '');
-    $message = $message ?: \LotgdTranslator::t('maintenance.server.closed.message', [], 'app-default');
+    $message = \LotgdTranslator::t('maintenance.server.closed.message', [], 'app-default');
 
     \LotgdFlashMessages::addErrorMessage([
         'header' => $title,
         'message' => $message,
+        'blockquote' => getsetting('maintenancenote', ''),
+        'author' => getsetting('maintenanceauthor', ''),
         'addClass' => 'icon',
         'icon' => 'cog loading',
         'close' => false
@@ -267,6 +268,8 @@ elseif(getsetting('maintenance', 0))
     \LotgdFlashMessages::addWarningMessage([
         'header' => $title,
         'message' => $message,
+        'blockquote' => getsetting('maintenancenote', ''),
+        'author' => getsetting('maintenanceauthor', ''),
         'addClass' => 'icon',
         'icon' => 'cog loading',
         'close' => false
