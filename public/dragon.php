@@ -206,7 +206,9 @@ elseif ('prologue' == $op)
 
     invalidatedatacache('list.php-warsonline');
 
-    rawoutput(LotgdTheme::renderLotgdTemplate('core/page/dragon.twig', $params));
+    //-- This is only for params not use for other purpose
+    $params = modulehook('page-dragon-tpl-params', $params);
+    rawoutput(\LotgdTheme::renderThemeTemplate('page/dragon.twig', $params));
 
     page_footer();
 }
