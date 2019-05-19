@@ -9,15 +9,12 @@ require_once 'lib/creaturefunctions.php';
 
 tlschema('dragon');
 
-
-
 // Don't hook on to this text for your standard modules please, use "dragon" instead.
 // This hook is specifically to allow modules that do other dragons to create ambience.
 $result = modulehook('dragon-text-domain', ['textDomain' => 'page-dragon', 'textDomainNavigation' => 'navigation-app']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
-
 
 $params = [
     'textDomain' => $textDomain
@@ -129,7 +126,7 @@ elseif ('prologue' == $op)
         $session['user']['bestdragonage'] = $session['user']['dragonage'];
     }
 
-    foreach($characterEntity as $field => $value)
+    foreach ($characterEntity as $field => $value)
     {
         if ($nochange[$field] ?? 0)
         {
