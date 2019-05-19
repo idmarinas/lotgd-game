@@ -243,6 +243,8 @@ elseif ('logout' == $op)
             $session['user']['restorepage'] = 'inn.php?op=strolldown';
         }
 
+        $session['user']['loggedin'] = false;
+
         invalidatedatacache('charlisthomepage');
         invalidatedatacache('list.php-warsonline');
 
