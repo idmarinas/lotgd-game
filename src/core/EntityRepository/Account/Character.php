@@ -71,7 +71,7 @@ trait Character
         try
         {
             return $query->select('n')
-                ->leftJoin(EntityCore\News::class, 'n', Join::WITH, $query->expr()->eq('n.accountid', 'u.acctid'))
+                ->leftJoin(EntityCore\News::class, 'n', Join::WITH, $query->expr()->eq('n.accountId', 'u.acctid'))
                 ->where('u.acctid = :acct')
                 ->setParameter('acct', $account)
                 ->setMaxResults(100)
