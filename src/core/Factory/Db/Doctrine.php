@@ -70,6 +70,10 @@ class Doctrine implements FactoryInterface
         $config->setProxyNamespace('Lotgd\Proxies');
         $config->setAutoGenerateProxyClasses(($isDevelopment ?: AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS));
 
+        //-- Alias for entities Core and Local
+        $config->addEntityNamespace('LotgdCore', 'Lotgd\Core\Entity');
+        $config->addEntityNamespace('LotgdLocal', 'Lotgd\Local\Entity');
+
         //-- Strategy
         $config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));
         $config->setQuoteStrategy(new DoctrineQuoteStrategy());
