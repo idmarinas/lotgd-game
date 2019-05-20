@@ -50,6 +50,7 @@ trait Navigation
         }
 
         $attributes = $options['attributes'] ?? [];
+
         if (! $blocked = $this->getNavigation()->isBlocked($options['link']))
         {
             $label = $this->getAccesskeys()->create($label, $attributes);
@@ -99,27 +100,32 @@ trait Navigation
      * Show pagination for a instance of Paginator.
      *
      * @param Paginator   $paginator
-     * @param string      $link           Url to use in href atribute in links
+     * @param string|null $link           Url to use in href atribute in links
      * @param string|null $template       You can change the template for your own if you need it at a specific time
      * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
      * @param array|null  $params
      *
      * @return string
      */
-    public function showPagination(Paginator $paginator, string $link, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
+    public function showPagination(Paginator $paginator, ?string $link = null, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
     {
         $template = $template ?: 'parts/pagination.twig';
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));
 
+        //-- Use request uri if not set link
+        $link = $link ?: \LotgdHttp::getServer('REQUEST_URI');
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
         $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
+
         if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
         {
             $link = \preg_replace('/[&]/', '?', $link, 1);
         }
-        elseif (false === \strpos($link, '?'))
+
+        //-- Check if have a ?
+        if (false === \strpos($link, '?'))
         {
             $link = "{$link}?";
         }
