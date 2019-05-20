@@ -12,101 +12,71 @@ check_su_access(SU_EDIT_CONFIG);
 
 tlschema('gamelog');
 
-page_header('Game Log');
-addnav('Navigation');
-require_once 'lib/superusernav.php';
-superusernav();
+$textDomain = 'page-gamelog';
 
-$step = 500; // hardcoded stepping
-$category = httpget('cat');
-$start = (int) httpget('start'); //starting
-$sortorder = (int) httpget('sortorder'); // 0 = DESC 1= ASC
-$sortby = httpget('sortby');
+page_header('title', [], $textDomain);
 
-if ($category > '')
-{
-    $cat = "&cat=$category";
-    $sqlcat = 'AND '.DB::prefix('gamelog').".category = '$category'";
-}
-else
-{
-    $cat = '';
-    $sqlcat = '';
-}
+\LotgdNavigation::addHeader('common.nav.navigation');
+\LotgdNavigation::superuserGrottoNav();
 
+$category = (string) \LotgdHttp::getQuery('cat');
+$sortorder = (int) \LotgdHttp::getQuery('sortorder'); // 0 = DESC 1= ASC
+$sortby = (string) \LotgdHttp::getQuery('sortby');
 $asc_desc = (0 == $sortorder ? 'DESC' : 'ASC');
+$page = (int) \LotgdHttp::getQuery('page');
 
-$sqlsort = '';
+$params = [];
+$repository = \Doctrine::getRepository('LotgdCore:Gamelog');
+$query = $repository->createQueryBuilder('u');
 
-if ('' != $sortby)
+$query
+    ->select('u.logid', 'u.message', 'u.category', 'u.filed', 'u.date', 'u.who')
+    ->addSelect('c.name')
+    ->leftJoin(
+        'LotgdCore:Characters',
+        'c',
+        \Doctrine\ORM\Query\Expr\Join::WITH,
+        $query->expr()->eq('u.who', 'c.acct')
+    )
+;
+
+if ($category)
 {
-    $sqlsort = ' ORDER BY '.$sortby.' '.$asc_desc;
+    $query->where('u.category = :cat')
+        ->setParameter('cat', $category)
+    ;
 }
 
-$sql = 'SELECT count(logid) AS c FROM '.DB::prefix('gamelog')." WHERE 1 $sqlcat";
-$result = DB::query($sql);
-$row = DB::fetch_assoc($result);
-$max = $row['c'];
-
-$sql = 'SELECT '.DB::prefix('gamelog').'.*, '.DB::prefix('accounts').'.name AS name FROM '.DB::prefix('gamelog').' LEFT JOIN '.DB::prefix('accounts').' ON '.DB::prefix('gamelog').'.who = '.DB::prefix('accounts').".acctid WHERE 1 $sqlcat $sqlsort LIMIT $start,$step";
-$next = $start + $step;
-$prev = $start - $step;
-addnav('Operations');
-addnav('Refresh', "gamelog.php?start=$start$cat&sortorder=$sortorder&sortby=$sortby");
-
-if ($category > '')
+if ($sortby)
 {
-    addnav('View all', 'gamelog.php');
-}
-addnav('Game Log');
-
-if ($next < $max)
-{
-    addnav('Next page', "gamelog.php?start=$next$cat&sortorder=$sortorder&sortby=$sortby");
+    $query->orderBy("u.{$sortby}", $asc_desc);
 }
 
-if ($start > 0)
+\LotgdNavigation::addHeader('gamelog.category.operations');
+\LotgdNavigation::addNav('gamelog.nav.refresh', "gamelog.php?page={$page}&cat={$category}&sortorder={$sortorder}&sortby={$sortby}");
+($category) && \LotgdNavigation::addNav('gamelog.nav.all', 'gamelog.php');
+
+\LotgdNavigation::addHeader('gamelog.category.sorting');
+\LotgdNavigation::addNav('gamelog.nav.sort.date.asc', "gamelog.php?page={$page}&cat={$category}&sortorder=1&sortby=date");
+\LotgdNavigation::addNav('gamelog.nav.sort.date.desc', "gamelog.php?page={$page}&cat={$category}&sortorder=0&sortby=date");
+\LotgdNavigation::addNav('gamelog.nav.sort.category.asc', "gamelog.php?page={$page}&cat={$category}&sortorder=1&sortby=category");
+\LotgdNavigation::addNav('gamelog.nav.sort.category.desc', "gamelog.php?page={$page}&cat={$category}&sortorder=0&sortby=category");
+
+$params['paginator'] = $repository->getPaginator($query, $page, 200);
+
+$category = clone $query;
+$categories = $category->groupBy('u.category')->getQuery()->getResult();
+
+\LotgdNavigation::addHeader('gamelog.category.operations');
+
+foreach ($categories as $value)
 {
-    addnav('Previous page', "gamelog.php?start=$prev$cat&sortorder=$sortorder&sortby=$sortby");
+    \LotgdNavigation::addNav('gamelog.nav.view.by', "gamelog.php?cat={$value['category']}", [
+        'params' => [
+            'category' => $value['category']
+        ]
+    ]);
 }
-$result = DB::query($sql);
-$odate = '';
-$categories = [];
-
-$i = 0;
-
-while ($row = DB::fetch_assoc($result))
-{
-    $dom = date('D, M d', strtotime($row['date']));
-
-    if ($odate != $dom)
-    {
-        output_notl('`n`b`@%s`0´b`n', $dom);
-        $odate = $dom;
-    }
-    $time = date('H:i:s', strtotime($row['date'])).' ('.reltime(strtotime($row['date'])).')';
-
-    if ('' != $row['name'])
-    {
-        output_notl('`7(`$%s`7) %s `7(`&%s`7) (`v%s`7)', $row['category'], $row['message'], $row['name'], $time);
-    }
-    else
-    {
-        output_notl('`7(`$%s`7) %s `7(`v%s`7)', $row['category'], $row['message'], $time);
-    }
-
-    if (! isset($categories[$row['category']]) && '' == $category)
-    {
-        addnav('Operations');
-        addnav(['View by `i%s´i', $row['category']], 'gamelog.php?cat='.$row['category']);
-        $categories[$row['category']] = 1;
-    }
-    output_notl('`n');
-}
-addnav('Sorting');
-addnav('Sort by date ascending', "gamelog.php?start=$start$cat&sortorder=1&sortby=date");
-addnav('Sort by date descending', "gamelog.php?start=$start$cat&sortorder=0&sortby=date");
-addnav('Sort by category ascending', "gamelog.php?start=$start$cat&sortorder=1&sortby=category");
-addnav('Sort by category descending', "gamelog.php?start=$start$cat&sortorder=0&sortby=category");
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/gamelog.twig', $params));
 
 page_footer();
