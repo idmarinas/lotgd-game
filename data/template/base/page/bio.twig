@@ -43,20 +43,7 @@
         {% set odate = news.newsdate %}
     {% endif %}
 
-    {# if ($odate != $row['newsdate'])
-    {
-        output_notl('`n`b`@%s`0´b`n', date('D, M d', strtotime($row['newsdate'])));
-        $odate = $row['newsdate'];
-    } #}
-    {% if news.arguments %}
-        {% if news.newformat %}
-            {{ news.newstext|tl(news.arguments, news.tlschema)|colorize }}
-        {% else %}
-            {{ news.newstext|tl(null, news.tlschema)|replace({'`%': '`%%'})|sprintfnews(news.arguments)|colorize }}
-        {% endif %}
-    {% else %}
-        {{ news.newstext|tl(null, news.tlschema)|colorize }}
-    {% endif %}
+    {{ show_news_item(news)|colorize }}
     <br>
 {% else %}
     {{ 'list.notFound'|t|colorize }}
