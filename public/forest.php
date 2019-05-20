@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/forest.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/taunt.php';
 require_once 'lib/events.php';
@@ -12,56 +11,38 @@ require_once 'lib/battle/skills.php';
 
 tlschema('forest');
 
-$fight = false;
-page_header('The Forest');
-$dontdisplayforestmessage = handle_event('forest');
+// Don't hook on to this text for your standard modules please, use "forest" instead.
+// This hook is specifically to allow modules that do other forests to create ambience.
+$result = modulehook('forest-text-domain', ['textDomain' => 'page-forest', 'textDomainNavigation' => 'navigation-forest']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-$op = httpget('op');
+page_header('title', [], $textDomain);
+
+$dontDisplayForestMessage = handle_event('forest');
+
+$params = [
+    'textDomain' => $textDomain,
+    'showForestMessage' => ! $dontDisplayForestMessage
+];
+
+$op = (string) \LotgdHttp::getQuery('op');
 
 $battle = false;
-
-if ('run' == $op)
-{
-    if (0 == e_rand() % 3)
-    {
-        output('`c`b`&You have successfully fled your opponent!`0´b´c`n');
-        $op = '';
-        httpset('op', '');
-        unsuspend_buffs();
-
-        foreach ($companions as $index => $companion)
-        {
-            if (isset($companion['expireafterfight']) && $companion['expireafterfight'])
-            {
-                unset($companions[$index]);
-            }
-        }
-    }
-    else
-    {
-        output('`c`b`$You failed to flee your opponent!`0´b´c');
-    }
-}
 
 if ('dragon' == $op)
 {
     require_once 'lib/partner.php';
 
-    addnav('Enter the cave', 'dragon.php');
-    addnav('Run away like a baby', 'inn.php?op=fleedragon');
-    output('`$You approach the blackened entrance of a cave deep in the forest, though the trees are scorched to stumps for a hundred yards all around.');
-    output("A thin tendril of smoke escapes the roof of the cave's entrance, and is whisked away by a suddenly cold and brisk wind.");
-    output('The mouth of the cave lies up a dozen feet from the forest floor, set in the side of a cliff, with debris making a conical ramp to the opening.');
-    output('Stalactites and stalagmites near the entrance trigger your imagination to inspire thoughts that the opening is really the mouth of a great leech.`n`n');
-    output('You cautiously approach the entrance of the cave, and as you do, you hear, or perhaps feel a deep rumble that lasts thirty seconds or so, before silencing to a breeze of sulfur-air which wafts out of the cave.');
-    output('The sound starts again, and stops again in a regular rhythm.`n`n');
-    output("You clamber up the debris pile leading to the mouth of the cave, your feet crunching on the apparent remains of previous heroes, or perhaps hors d'oeuvres.`n`n");
-    output('Every instinct in your body wants to run, and run quickly, back to the warm inn, and the even warmer %s`$.', get_partner());
-    output('What do you do?`0');
+    $params['partner'] = get_partner();
+
+    \LotgdNavigation::addNav('nav.cave', 'dragon.php');
+    \LotgdNavigation::addNav('nav.baby', 'inn.php?op=fleedragon');
+
     $session['user']['seendragon'] = 1;
 }
-
-if ('search' == $op)
+elseif ('search' == $op)
 {
     checkday();
 
@@ -69,16 +50,17 @@ if ('search' == $op)
 
     if ($session['user']['turns'] <= 0)
     {
-        output('`$`bYou are too tired to search the forest any longer today.  Perhaps tomorrow you will have more energy.´b`0');
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.tired', [], $textDomain));
+
         $op = '';
-        httpset('op', '');
+        \LotgdHttp::setQuery('op', '');
     }
     else
     {
         modulehook('forestsearch', []);
         $args = [
             'soberval' => 0.9,
-            'sobermsg' => '`&Faced with the prospect of death, you sober up a little.`n',
+            'sobermsg' => \LotgdTranslator::t('sober.message', [], $textDomain),
             'schema' => 'forest'
         ];
         modulehook('soberup', $args);
@@ -91,9 +73,11 @@ if ('search' == $op)
                 // and the specialmisc
                 $session['user']['specialinc'] = '';
                 $session['user']['specialmisc'] = '';
-                $dontdisplayforestmessage = true;
+                $dontDisplayForestMessage = true;
+                $params['showForestMessage'] = ! $dontDisplayForestMessage;
+
                 $op = '';
-                httpset('op', '');
+                \LotgdHttp::setQuery('op', '');
             }
             else
             {
@@ -105,33 +89,29 @@ if ('search' == $op)
             $session['user']['turns']--;
             $battle = true;
 
+            $plev = 0;
+            $nlev = 0;
+
             if (1 == e_rand(0, 2))
             {
                 $plev = (1 == e_rand(1, 5) ? 1 : 0);
                 $nlev = (1 == e_rand(1, 3) ? 1 : 0);
             }
-            else
-            {
-                $plev = 0;
-                $nlev = 0;
-            }
 
-            $type = httpget('type');
+            $type = (string) \LotgdHttp::getQuery('type');
+
+            $extrabuff = 0;
 
             if ('slum' == $type)
             {
                 $nlev++;
-                output("`\$You head for the section of forest you know to contain foes that you're a bit more comfortable with.`0`n");
             }
-
-            if ('thrill' == $type)
+            elseif ('thrill' == $type)
             {
                 $plev++;
-                output('`$You head for the section of forest which contains creatures of your nightmares, hoping to find one of them injured.`0`n');
+                \LotgdFlashMessages::addWarningMessage('flash.message.thrill', [], $textDomain);
             }
-            $extrabuff = 0;
-
-            if ('suicide' == $type)
+            elseif ('suicide' == $type)
             {
                 if ($session['user']['level'] <= 7)
                 {
@@ -148,8 +128,9 @@ if ('search' == $op)
                     $plev++;
                     $extrabuff = .4;
                 }
-                output('`$You head for the section of forest which contains creatures of your nightmares, looking for the biggest and baddest ones there.`0`n');
+                \LotgdFlashMessages::addErrorMessage('flash.message.suicide', [], $textDomain);
             }
+
             $multi = 1;
             $targetlevel = ($session['user']['level'] + $plev - $nlev);
             $mintargetlevel = $targetlevel;
@@ -164,26 +145,22 @@ if ('search' == $op)
                     {
                         $multi -= e_rand(getsetting('multislummin', 0), getsetting('multislummax', 1));
 
+                        $mintargetlevel = $targetlevel - 2;
+
                         if (mt_rand(0, 1))
                         {
                             $mintargetlevel = $targetlevel - 1;
-                        }
-                        else
-                        {
-                            $mintargetlevel = $targetlevel - 2;
                         }
                     }
                     elseif ('thrill' == $type)
                     {
                         $multi += e_rand(getsetting('multithrillmin', 1), getsetting('multithrillmax', 2));
 
+                        $mintargetlevel = $targetlevel - 1;
+
                         if (mt_rand(0, 1))
                         {
                             $targetlevel++;
-                            $mintargetlevel = $targetlevel - 1;
-                        }
-                        else
-                        {
                             $mintargetlevel = $targetlevel - 1;
                         }
                     }
@@ -215,7 +192,7 @@ if ('search' == $op)
 
             if ($targetlevel > 17)
             {
-                $multi += $targetlevel - 17;//-- More dificult if have more level than 15
+                $multi += $targetlevel - 17; //-- More dificult if have more level than 15
                 // $targetlevel = 17; //-- Not avoid level range setting
             }
             debug("Creatures: $multi Targetlevel: $targetlevel Mintargetlevel: $mintargetlevel");
@@ -225,7 +202,6 @@ if ('search' == $op)
 
             $result = lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters, true);
 
-            // var_dump($result);
             restore_buff_fields();
 
             if (0 == count($result))
@@ -241,7 +217,7 @@ if ('search' == $op)
             }
             else
             {
-                if (true == $packofmonsters)
+                if ($packofmonsters)
                 {
                     $initialbadguy = DB::fetch_assoc($result);
                     $prefixs = ['Elite', 'Dangerous', 'Lethal', 'Savage', 'Deadly', 'Malevolent', 'Malignant'];
@@ -285,7 +261,10 @@ if ('search' == $op)
 
                     if ($multi > 1)
                     {
-                        output('`2You encounter a group of `^%i`2 %s`2.`n`n', $multi, $badguy['creaturename']);
+                        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.group', [
+                            'multi' => $multi,
+                            'creatureName' => $badguy['creaturename']
+                        ], $textDomain));
                     }
                 }
                 else
@@ -305,7 +284,7 @@ if ('search' == $op)
                             // 10% more gold
                             $badguy['creaturegold'] = round($badguy['creaturegold'] * 1.1, 0);
                         }
-                        else if ('suicide' == $type)
+                        elseif ('suicide' == $type)
                         {
                             // Okay, suicide fights give even more rewards, but
                             // are much harder
@@ -342,16 +321,42 @@ if ('search' == $op)
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
             // because they are already set in the nav itself, we need this here.
             // It will not break anything else. I hope.
-            if ('' != httpget('auto'))
+            if ('' != \LotgdHttp::getQuery('auto'))
             {
-                httpset('op', 'fight');
+                \LotgdHttp::setQuery('op', 'fight');
                 $op = 'fight';
             }
         }
     }
 }
+elseif ('run' == $op)
+{
+    if (0 == e_rand() % 3)
+    {
+        $battle = false;
+        $params['tpl'] = 'default';
 
-if ('fight' == $op || 'run' == $op || 'newtarget' == $op)
+        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.run.success', [], $textDomain));
+
+        $op = '';
+        \LotgdHttp::setQuery('op', '');
+        unsuspend_buffs();
+
+        foreach ($companions as $index => $companion)
+        {
+            if (isset($companion['expireafterfight']) && $companion['expireafterfight'])
+            {
+                unset($companions[$index]);
+            }
+        }
+    }
+    else
+    {
+        $battle = true;
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.run.fail', [], $textDomain));
+    }
+}
+elseif ('fight' == $op || 'newtarget' == $op)
 {
     $battle = true;
 }
@@ -362,9 +367,12 @@ if ($battle)
 
     if ($victory)
     {
+        $dontDisplayForestMessage = true;
+        $params['tpl'] = 'default';
+        $params['showForestMessage'] = ! $dontDisplayForestMessage;
+
         $op = '';
-        httpset('op', '');
-        $dontdisplayforestmessage = true;
+        \LotgdHttp::setQuery('op', '');
     }
     else
     {
@@ -374,9 +382,71 @@ if ($battle)
 
 if ('' == $op)
 {
-    // Need to pass the variable here so that we show the forest message
-    // sometimes, but not others.
-    forest($dontdisplayforestmessage);
+    $params['tpl'] = 'default';
+    $params['showForestMessage'] = ! $dontDisplayForestMessage;
+
+    tlschema('forest');
+
+    //-- Change text domain for navigation
+    \LotgdNavigation::setTextDomain($textDomainNavigation);
+
+    \LotgdNavigation::addHeader('category.navigation');
+    \LotgdNavigation::villageNav();
+
+    \LotgdNavigation::addHeader('category.heal');
+    \LotgdNavigation::addNav('nav.healer', 'healer.php');
+
+    \LotgdNavigation::addHeader('category.fight');
+    \LotgdNavigation::addNav('nav.search', 'forest.php?op=search');
+
+    ($session['user']['level'] > 1) && \LotgdNavigation::addNav('nav.slum', 'forest.php?op=search&type=slum');
+
+    \LotgdNavigation::addNav('nav.thrill', 'forest.php?op=search&type=thrill');
+
+    (getsetting('suicide', 0) && getsetting('suicidedk', 10) <= $session['user']['dragonkills']) && \LotgdNavigation::addNav('nav.suicide', 'forest.php?op=search&type=suicide');
+
+    \LotgdNavigation::addHeader('other');
+
+    modulehook('forest-header');
+
+    if ($session['user']['level'] >= getsetting('maxlevel', 15) && 0 == $session['user']['seendragon'])
+    {
+        // Only put the green dragon link if we are a location which
+        // should have a forest.   Don't even ask how we got into a forest()
+        // call if we shouldn't have one.   There is at least one way via
+        // a superuser link, but it shouldn't happen otherwise.. We just
+        // want to make sure however.
+        $isforest = 0;
+        $vloc = modulehook('validforestloc', []);
+
+        foreach ($vloc as $i => $l)
+        {
+            if ($session['user']['location'] == $i)
+            {
+                $isforest = 1;
+                break;
+            }
+        }
+
+        if ($isforest || 0 == count($vloc))
+        {
+            \LotgdNavigation::addNav('nav.dragon', 'forest.php?op=dragon');
+        }
+    }
+
+    modulehook('forest', []);
+
+    //-- Restore text domain for navigation
+    \LotgdNavigation::setTextDomain();
+
+    tlschema();
 }
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-forest-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/forest.twig', $params));
+
+//-- Display events
+('' == $op) && module_display_events('forest', 'forest.php');
 
 page_footer();
