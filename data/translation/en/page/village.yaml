@@ -14,7 +14,7 @@ commentary:
     sayLine: 'says' # Sayline
     button: 'Add' # Add button
     charsLeft: 'You have %s characters left.'
-    status:
+    status: # This is optional
         game: 'Message of the Game Master'
         you: "It's a comment from you."
         afk: 'Away from Keyboard'
