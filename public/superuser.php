@@ -33,7 +33,7 @@ page_header('title', [], $textDomain);
 
 \LotgdNavigation::addHeader('superuser.category.actions');
 
-($session['user']['superuser'] & SU_EDIT_PETITIONS) and \LotgdNavigation::addNav('superuser.nav.petition', 'viewpetition.php');
+($session['user']['superuser'] & SU_EDIT_PETITIONS) && \LotgdNavigation::addNav('superuser.nav.petition', 'viewpetition.php');
 
 if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 {
@@ -41,13 +41,13 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
     \LotgdNavigation::addNav('superuser.nav.bios', 'bios.php');
 }
 
-($session['user']['superuser'] & SU_EDIT_DONATIONS) and \LotgdNavigation::addNav('superuser.nav.donation', 'donators.php');
+($session['user']['superuser'] & SU_EDIT_DONATIONS) && \LotgdNavigation::addNav('superuser.nav.donation', 'donators.php');
 
-(file_exists('paylog.php') && $session['user']['superuser'] & SU_EDIT_PAYLOG) and \LotgdNavigation::addNav('superuser.nav.paylog', 'paylog.php');
+(file_exists('public/paylog.php') && $session['user']['superuser'] & SU_EDIT_PAYLOG) && \LotgdNavigation::addNav('superuser.nav.paylog', 'paylog.php');
 
-($session['user']['superuser'] & SU_RAW_SQL) and \LotgdNavigation::addNav('superuser.nav.rawsql', 'rawsql.php');
+($session['user']['superuser'] & SU_RAW_SQL) && \LotgdNavigation::addNav('superuser.nav.rawsql', 'rawsql.php');
 
-($session['user']['superuser'] & SU_IS_TRANSLATOR) and \LotgdNavigation::addNav('superuser.nav.untranslated', 'untranslated.php');
+($session['user']['superuser'] & SU_IS_TRANSLATOR) && \LotgdNavigation::addNav('superuser.nav.untranslated', 'untranslated.php');
 
 
 \LotgdNavigation::addHeader('superuser.category.editors');
@@ -58,7 +58,7 @@ if ($session['user']['superuser'] & SU_EDIT_USERS)
     \LotgdNavigation::addNav('superuser.nav.titleedit', 'titleedit.php');
 }
 
-($session['user']['superuser'] & SU_EDIT_BANS) and \LotgdNavigation::addNav('superuser.nav.bans', 'bans.php');
+($session['user']['superuser'] & SU_EDIT_BANS) && \LotgdNavigation::addNav('superuser.nav.bans', 'bans.php');
 
 if ($session['user']['superuser'] & SU_EDIT_MOUNTS)
 {
@@ -78,19 +78,19 @@ if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
     \LotgdNavigation::addNav('superuser.nav.armoreditor', 'armoreditor.php');
 }
 
-($session['user']['superuser'] & SU_MANAGE_MODULES) and \LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
+($session['user']['superuser'] & SU_MANAGE_MODULES) && \LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
 
 
 \LotgdNavigation::addHeader('superuser.category.mechanics');
 
-($session['user']['superuser'] & SU_MEGAUSER) and \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
+($session['user']['superuser'] & SU_MEGAUSER) && \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
 
 if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 {
     \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
     \LotgdNavigation::addNav('superuser.nav.debug', 'debug.php');
     \LotgdNavigation::addNav('superuser.nav.stats', 'stats.php');
-    file_exists('gamelog.php') and \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
+    file_exists('public/gamelog.php') && \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
 }
 
 \LotgdNavigation::addHeader('superuser.category.module');
