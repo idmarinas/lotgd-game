@@ -7,6 +7,14 @@ define('OVERRIDE_FORCED_NAV', true);
 require_once 'common.php';
 tlschema('translatortool');
 
+/**
+ * @deprecated This is a deprecated way to translated game
+ *
+ * This file will be deleted in a future version.
+ *
+ * Maybe in version 4.1.0
+ */
+
 check_su_access(SU_IS_TRANSLATOR);
 $op = httpget('op');
 

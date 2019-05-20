@@ -4,6 +4,14 @@
 // addnews ready
 // mail ready
 
+/**
+ * @deprecated This is a deprecated way to translated game
+ *
+ * This file will be deleted in a future version.
+ *
+ * Maybe in version 4.1.0
+ */
+
 // Okay, someone wants to use this outside of normal game flow.. no real harm
 define('OVERRIDE_FORCED_NAV', true);
 
