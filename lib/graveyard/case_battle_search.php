@@ -2,9 +2,9 @@
 
 if ($session['user']['gravefights'] <= 0)
 {
-    output('`$`bYour soul can bear no more torment in this afterlife.´b`0');
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.no.torments', [], $textDomain));
     $op = '';
-    httpset('op', '');
+    \LotgdHttp::setQuery('op', '');
 }
 else
 {
@@ -15,20 +15,18 @@ else
 
     if (0 != module_events('graveyard', getsetting('gravechance', 0)))
     {
-        if (! checknavs())
-        {
-            // If we're going back to the graveyard, make sure to reset
-            // the special and the specialmisc
-            $session['user']['specialinc'] = '';
-            $session['user']['specialmisc'] = '';
-            $skipgraveyardtext = true;
-            $op = '';
-            httpset('op', '');
-        }
-        else
+        if (\LotgdNavigation::checkNavs())
         {
             page_footer();
         }
+
+        // If we're going back to the graveyard, make sure to reset
+        // the special and the specialmisc
+        $session['user']['specialinc'] = '';
+        $session['user']['specialmisc'] = '';
+        $skipgraveyardtext = true;
+        $op = '';
+        \LotgdHttp::setQuery('op', '');
     }
     else
     {
@@ -52,6 +50,6 @@ else
         //no multifights currently, so this hook passes the badguy to modify
         $attackstack = modulehook('graveyardfight-start', $attackstack);
 
-        $session['user']['badguy'] = createstring($attackstack);
+        $session['user']['badguy'] = $attackstack;
     }
 }

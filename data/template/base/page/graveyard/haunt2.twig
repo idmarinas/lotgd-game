@@ -1,0 +1,26 @@
+{% translate_default_domain textDomain %}
+
+{% set count = characters|length %}
+
+{% if count %}
+    {{ 'section.haunt2.found'|t|colorize }}
+
+    <table class="ui very compact table">
+        <thead>
+            <tr>
+                <th>{{ 'section.haunt2.table.thead.name'|t|uncolorize }}</th>
+                <th>{{ 'section.haunt2.table.thead.level'|t|uncolorize }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for char in characters %}
+                <tr>
+                    <td><a href="{{ ('graveyard.php?op=haunt3&charid=' ~ char.id)|lorgd_url }}">{{ char.name|colorize }}</a></td>
+                    <td>{{ char.level }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ 'section.haunt2.no.result'|t({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
+{% endif %}
