@@ -1,39 +1,40 @@
 <?php
 
 require_once 'common.php';
-require_once 'lib/dhms.php';
-require_once 'lib/superusernav.php';
 require_once 'lib/serverfunctions.class.php';
 
 tlschema('globaluserfunctions');
 
 check_su_access(SU_MEGAUSER);
 
-page_header('Global User Functions');
-superusernav();
-//addnav("Refresh the stats","stats.php");
-addnav('Actions');
-addnav('Reset all dragonpoints', 'globaluserfunctions.php?op=dkpointreset');
+$textDomain = 'globaluserfunctions';
 
-output('`n`c`q~~~~~ `$Global User Functions `q~~~~~´c`n`n');
+page_header('title', [], $textDomain);
 
-$op = httpget('op');
+\LotgdNavigation::superuserGrottoNav();
+
+\LotgdHttp::addHeader('globaluserfunctions.category.actions');
+\LotgdHttp::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
+
+$op = (string) \LotgdHttp::getQuery('op');
+$params = [];
 
 switch ($op)
 {
     case 'dkpointreset':
-        output('`qThis lets you reset all the dragonpoints for all users on your server.`n`n`$Handle with care!`q`n`nIf you hit `l"Reset!"`q there is no turning back!`n`nAlso note that the hitpoints will be recalculated and the players can respend their points.`n`nThere is also a hook in there allowing modules to reset any things they did.');
-        addnav('Dragonpoints');
-        addnav('Reset!', 'globaluserfunctions.php?op=dkpointresetnow');
-        break;
+        \LotgdHttp::addHeader('globaluserfunctions.category.dragonpoints');
+        \LotgdHttp::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
+    break;
     case 'dkpointresetnow':
-        output('`qExecuting...');
-        ServerFunctions::resetAllDragonkillPoints();
-        output('... `$done!`n`n`qIf you need to do a MOTD, you should so so now!');
-        break;
+        \ServerFunctions::resetAllDragonkillPoints();
+
+        $params['tpl'] = 'reset-now';
+    break;
     default:
-        output('`QWelcome to the Global User Functions.`n`nPlease select your action.');
-        break;
+        $params['tpl'] = 'default';
+    break;
 }
+
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/globaluserfunctions.twig', $params));
 
 page_footer();
