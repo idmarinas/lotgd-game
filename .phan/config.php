@@ -137,12 +137,12 @@ return [
     // [php7cc (no longer maintained)](https://github.com/sstalle/php7cc)
     // and [php7mar](https://github.com/Alexia/php7mar),
     // which have different backwards compatibility checks.
-    'backward_compatibility_checks' => true,
+    'backward_compatibility_checks' => false,
 
     // If true, check to make sure the return type declared
     // in the doc-block (if any) matches the return type
     // declared in the method signature.
-    'check_docblock_signature_return_type_match' => true,
+    'check_docblock_signature_return_type_match' => false,
 
     // If true, make narrowed types from phpdoc params override
     // the real types from the signature, when real types exist.
@@ -286,7 +286,7 @@ return [
     // directories/files, unanalyzable files, or files that
     // can't be removed for whatever reason.
     // (e.g. `'@Test\.php$@'`, or `'@vendor/.*/(tests|Tests)/@'`)
-    'exclude_file_regex' => '@^vendor/.*/(tests?|Tests?)/@',
+    'exclude_file_regex' => '@^vendor/.*/(tests?|Tests?|doc|examples)/@',
 
     // A file list that defines files that will be excluded
     // from parsing and analysis and will not be read at all.
@@ -312,6 +312,7 @@ return [
         'error_docs/',
         'gulp/',
         'modules/',
+        'node_modules/',
         'public/images/',
         'public/js/',
         'public/themes/',
