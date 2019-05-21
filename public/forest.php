@@ -67,22 +67,20 @@ elseif ('search' == $op)
 
         if (0 != module_events('forest', getsetting('forestchance', 15)))
         {
-            if (! \LotgdNavigation::checkNavs()())
-            {
-                // If we're showing the forest, make sure to reset the special
-                // and the specialmisc
-                $session['user']['specialinc'] = '';
-                $session['user']['specialmisc'] = '';
-                $dontDisplayForestMessage = true;
-                $params['showForestMessage'] = ! $dontDisplayForestMessage;
-
-                $op = '';
-                \LotgdHttp::setQuery('op', '');
-            }
-            else
+            if (\LotgdNavigation::checkNavs())
             {
                 page_footer();
             }
+
+            // If we're showing the forest, make sure to reset the special
+            // and the specialmisc
+            $session['user']['specialinc'] = '';
+            $session['user']['specialmisc'] = '';
+            $dontDisplayForestMessage = true;
+            $params['showForestMessage'] = ! $dontDisplayForestMessage;
+
+            $op = '';
+            \LotgdHttp::setQuery('op', '');
         }
         else
         {
