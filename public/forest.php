@@ -67,7 +67,7 @@ elseif ('search' == $op)
 
         if (0 != module_events('forest', getsetting('forestchance', 15)))
         {
-            if (! checknavs())
+            if (! \LotgdNavigation::checkNavs()())
             {
                 // If we're showing the forest, make sure to reset the special
                 // and the specialmisc
