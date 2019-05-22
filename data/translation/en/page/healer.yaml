@@ -11,13 +11,13 @@ section:
             - 'Nope, definitely not.`0`n`n'
         heal:
             damaged:
-                - '"`6See you, I do.  Before you did see me, I think, hmm?`3" the old thing remarks.`0'
-                - '"Know you, I do; healing you seek.  Willing to heal am I, but only if willing to pay are you.`3"`n`n'
-                - '"`0Uh, um.  How much?`3" you ask, ready to be rid of the smelly old thing.`n`n'
-                - 'The old being thumps your ribs with a gnarly staff. "`0For you... `$`b{healCost,number}´b`0 gold pieces for a complete heal!!`3" it says as it bends over and pulls a clay vial from behind a pile of skulls sitting in the corner.'
+                - '`3"`6See you, I do.  Before you did see me, I think, hmm?`0" the old thing remarks.'
+                - '"`6Know you, I do; healing you seek.  Willing to heal am I, but only if willing to pay are you.`0"`n`n'
+                - '"`5Uh, um.  How much?`0" you ask, ready to be rid of the smelly old thing.`n`n'
+                - 'The old being thumps your ribs with a gnarly staff. "`6For you... `$`b{healCost,number}´b`0 gold pieces for a complete heal!!`0" it says as it bends over and pulls a clay vial from behind a pile of skulls sitting in the corner.'
                 - 'The view of the thing bending over to remove the vial almost does enough mental damage to require a larger potion.'
-                - "&quot;`0I also have some, erm... 'bargain' potions available,`3&quot; it says as it gestures at a pile of dusty, cracked vials."
-                - "&quot;`0They'll heal a certain percent of your `idamage´i.`0`3&quot;`0"
+                - "&quot;`6I also have some, erm... 'bargain' potions available,`0&quot; it says as it gestures at a pile of dusty, cracked vials."
+                - "&quot;`6They'll heal a certain percent of your `idamage´i.`0&quot;`0"
             overheal:
                 - '`3The old creature glances at you, then in a `^whirlwind of movement`0 that catches you completely off guard, brings its gnarled staff squarely in contact with the back of your head.'
                 - 'You gasp as you collapse to the ground.`n`n'
