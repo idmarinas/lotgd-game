@@ -4,9 +4,6 @@
     {{ 'description'|t|colorize }}
 {% endif %}
 
-{# Show or not comment area #}
-{% if not blockCommentArea %}
-    {{ commentary_block({
-        'section': 'gardens'
-    }, textDomain) }}
-{% endif %}
+{{ commentary_block({
+    'section': 'gardens'
+}, textDomain) }}
