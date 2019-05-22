@@ -9,52 +9,78 @@ require_once 'lib/villagenav.php';
 
 tlschema('gypsy');
 
-addcommentary();
+// Don't hook on to this text for your standard modules please, use "gypsy" instead.
+// This hook is specifically to allow modules that do other gypsys to create ambience.
+$result = modulehook('gypsy-text-domain', ['textDomain' => 'page-gypsy', 'textDomainNavigation' => 'navigation-gypsy']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-$cost = $session['user']['level'] * 20;
-$op = httpget('op');
+page_header('title.default', [], $textDomain);
+
+$params = [
+    'textDomain' => $textDomain,
+    'cost' =>  $session['user']['level'] * 20
+];
+
+$op = (string) \LotgdHttp::getQuery('op');
+
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
 if ('pay' == $op)
 {
-    if ($session['user']['gold'] >= $cost)
+    $params['tpl'] = 'pay';
+
+    if ($session['user']['gold'] >= $params['cost'])
     { // Gunnar Kreitz
-        $session['user']['gold'] -= $cost;
-        debuglog("spent $cost gold to speak to the dead");
-        redirect('gypsy.php?op=talk');
+        $session['user']['gold'] -= $params['cost'];
+
+        debuglog("spent {$params['cost']} gold to speak to the dead");
+
+        return redirect('gypsy.php?op=talk');
     }
-    else
-    {
-        page_header("Gypsy Seer's tent");
-        villagenav();
-        output("`5You offer the old gypsy woman your `^%s`5 gold for your gen-u-wine say-ance, however she informs you that the dead may be dead, but they ain't cheap.", $session['user']['gold']);
-    }
+
+    \LotgdNavigation::villageNav();
 }
 elseif ('talk' == $op)
 {
-    page_header('In a deep trance, you talk with the shades');
-    commentdisplay('`5While in a deep trance, you are able to talk with the dead:`n', 'shade', 'Project', 25, translate_inline('projects'));
-    addnav('Snap out of your trance', 'gypsy.php');
+    page_header('title.talk', [], $textDomain);
+
+    $params['tpl'] = 'talk';
+
+    \LotgdNavigation::addNav('nav.snap', 'gypsy.php');
 }
 else
 {
     checkday();
-    page_header("Gypsy Seer's tent");
-    output('`5You duck into a gypsy tent like many you have seen throughout the realm.');
-    output('All of them promise to let you talk with the deceased, and most of them surprisingly seem to work.');
-    output('There are also rumors that the gypsy have the power to speak over distances other than just those of the afterlife.');
-    output('In typical gypsy style, the old woman sitting behind a somewhat smudgy crystal ball informs you that the dead only speak with the paying.');
-    output('"`!For you, %s, the price is a trifling `^%s`! gold.`5", she rasps.', translate_inline($session['user']['sex'] ? 'my pretty' : 'my handsome'), $cost);
 
-    addnav('Seance');
-    addnav(['Pay to talk to the dead (%s gold)', $cost], 'gypsy.php?op=pay');
+    $params['tpl'] = 'default';
+
+    \LotgdNavigation::addHeader('category.seance');
+    \LotgdNavigation::addNav('nav.pay', 'gypsy.php?op=pay', [
+            'params', [
+                'cost' => $params['cost']
+            ]
+        ]
+    );
 
     if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
     {
-        addnav('Superuser Entry', 'gypsy.php?op=talk');
+        \LotgdNavigation::addNav('nav.superuser', 'gypsy.php?op=talk');
     }
 
-    addnav('Other');
-    addnav('Forget it', 'village.php');
+    \LotgdNavigation::addHeader('category.other');
+    \LotgdNavigation::addNav('nav.forget', 'village.php');
+
     modulehook('gypsy');
 }
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-gypsy-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/gypsy.twig', $params));
+
 page_footer();

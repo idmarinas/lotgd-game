@@ -1,0 +1,13 @@
+# Navigation menu for Gypsy
+
+# Headers of navigations
+category:
+    seance: Seance
+    other: Other
+
+# Menu navs
+nav:
+    snap: 'Snap out of your trance'
+    pay: 'Pay to talk to the dead ({cost,number} gold)'
+    forget: 'Forget it'
+    superuser: 'Superuser Entry'
