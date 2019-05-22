@@ -17,13 +17,15 @@ unset($result);
 
 page_header('title', [], $textDomain);
 
-$config = unserialize($session['user']['donationconfig']);
-
 //-- Calculate cost for healing
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
 $result = modulehook('healmultiply', ['alterpct' => 1.0, 'cost' => $cost]);
 $cost = round($result['alterpct'] * $result['cost'], 0);
-$params['healCost'] = $cost;
+
+$params = [
+    'textDomain' => $textDomain,
+    'healCost' => $cost
+];
 
 $op = (string) \LotgdHttp::getQuery('op');
 $return = (string) \LotgdHttp::getQuery('return');
