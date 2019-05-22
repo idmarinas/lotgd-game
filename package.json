@@ -36,12 +36,12 @@
         "jquery": "^3.4.1",
         "sweetalert2": "^8.11.1",
         "toastr": "^2.1.4",
-        "snyk": "^1.165.1"
+        "snyk": "^1.166.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.4.4",
+        "@babel/core": "^7.4.5",
         "@babel/plugin-transform-runtime": "^7.4.4",
-        "@babel/preset-env": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
         "ansi-colors": "^3.2.4",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.6",
