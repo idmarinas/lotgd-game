@@ -78,10 +78,13 @@ class Doctrine implements FactoryInterface
         $config->setNamingStrategy(new DoctrineUnderscoreNamingStrategy(CASE_LOWER));
         $config->setQuoteStrategy(new DoctrineQuoteStrategy());
 
-        //-- DQL DateTime Functions
+        //-- DQL Functions
         $config->setCustomDatetimeFunctions([
             'month' => \DoctrineExtensions\Query\Mysql\Month::class,
             'year' => \DoctrineExtensions\Query\Mysql\Year::class
+        ]);
+        $config->setCustomNumericFunctions([
+            'round' => \DoctrineExtensions\Query\Mysql\Round::class
         ]);
 
         //-- Default EntityRepository for all Entities
