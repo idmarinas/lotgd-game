@@ -1,0 +1,20 @@
+# Navigation menu for Hall of fame
+
+# Headers of navigations
+category:
+    navigation: Navigation
+    ranking: 'Warrior Rankings'
+    sort: Sorting
+    other: 'Other Stats'
+
+# Menu navs
+nav:
+    dragonkill: 'Dragon Kills'
+    gold: Gold
+    gem: Gems
+    charm: Charm
+    tough: Toughness
+    resurrect: Resurrections
+    dragonspeed: 'Dragon Kill Speed'
+    best: Best
+    worst: Worst

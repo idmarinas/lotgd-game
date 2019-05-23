@@ -1,0 +1,29 @@
+{% translate_default_domain textDomain %}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <th>{{ 'section.tough.table.thead.rank'|t|uncolorize }}</th>
+        <th>{{ 'section.tough.table.thead.name'|t|uncolorize }}</th>
+        <th>{{ 'section.tough.table.thead.gender'|t|uncolorize }}</th>
+        <th>{{ 'section.tough.table.thead.race'|t|uncolorize }}</th>
+    </thead>
+    <tbody>
+        {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+        {% for character in paginator %}
+            <tr>
+                <td>{{ loop.index + rank }}</td>
+                <td>{{ character.name|colorize }}</td>
+                <td>{{ 'section.tough.table.tbody.gender'|t({ 'sex': character.sex })|colorize }}</td>
+                <td>{{ 'character.racename'|tl(null, character.race)|colorize }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">{{ 'section.tough.table.tbody.none'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ footerTitle[0]|t(footerTitle[1])|colorize }}
+
+{{ navigation_pagination(paginator) }}

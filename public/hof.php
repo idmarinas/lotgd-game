@@ -8,370 +8,323 @@
 // http://www.anpera.net/forum/viewforum.php?f=27
 
 require_once 'common.php';
-require_once 'lib/villagenav.php';
 
 tlschema('hof');
 
-$superusermask = SU_HIDE_FROM_LEADERBOARD;
-$standardwhere = "(locked=0 AND (superuser & $superusermask) = 0)";
-
-page_header('Hall of Fame');
 checkday();
 
-addnav('Navigation');
-villagenav();
+// Don't hook on to this text for your standard modules please, use "hof" instead.
+// This hook is specifically to allow modules that do other hofs to create ambience.
+$result = modulehook('hof-text-domain', ['textDomain' => 'page-hof', 'textDomainNavigation' => 'navigation-hof']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-$playersperpage = 50;
+page_header('title', [], $textDomain);
 
-$op = httpget('op');
+$params = [
+    'textDomain' => $textDomain
+];
 
+$op = (string) \LotgdHttp::getQuery('op');
+$subop = (string) \LotgdHttp::getQuery('subop');
+$page = (int) \LotgdHttp::getQuery('page');
+$subop = $subop ?: 'best';
 $op = $op ?: 'kills';
-$subop = (string) httpget('subop');
-$subop = $subop ?: 'most';
+$order = ('worst' == $subop) ? 'ASC' : 'DESC';
 
-$sql = 'SELECT count(acctid) AS c FROM '.DB::prefix('accounts')." WHERE $standardwhere";
-$extra = '';
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
-if ('kills' == $op)
-{
-    $extra = ' AND dragonkills > 0';
-}
-elseif ('days' == $op)
-{
-    $extra = ' AND dragonkills > 0 AND bestdragonage > 0';
-}
-$result = DB::query($sql.$extra);
-$row = DB::fetch_assoc($result);
-$totalplayers = $row['c'];
+\LotgdNavigation::addHeader('category.navigation');
+\LotgdNavigation::villageNav();
 
-$page = (int) httpget('page');
+\LotgdNavigation::addHeader('category.ranking');
+\LotgdNavigation::addNav('nav.dragonkill', "hof.php?op=kills&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.gold', "hof.php?op=money&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.gem', "hof.php?op=gems&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.charm', "hof.php?op=charm&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.tough', "hof.php?op=tough&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.resurrect', "hof.php?op=resurrects&subop={$subop}&page=1");
+\LotgdNavigation::addNav('nav.dragonspeed', "hof.php?op=days&subop={$subop}&page=1");
 
-if (0 == $page)
-{
-    $page = 1;
-}
-$pageoffset = $page;
+\LotgdNavigation::addHeader('category.sort');
+\LotgdNavigation::addNav('nav.best', "hof.php?op={$op}&subop=best&page={$page}");
+\LotgdNavigation::addNav('nav.worst', "hof.php?op={$op}&subop=worst&page={$page}");
 
-if ($pageoffset > 0)
-{
-    $pageoffset--;
-}
-$pageoffset *= $playersperpage;
-$from = $pageoffset + 1;
-$to = min($pageoffset + $playersperpage, $totalplayers);
-$limit = "$pageoffset,$playersperpage";
+\LotgdNavigation::addHeader('category.other');
 
-addnav('Warrior Rankings');
-addnav('Dragon Kills', "hof.php?op=kills&subop=$subop&page=1");
-addnav('Gold', "hof.php?op=money&subop=$subop&page=1");
-addnav('Gems', "hof.php?op=gems&subop=$subop&page=1");
-addnav('Charm', "hof.php?op=charm&subop=$subop&page=1");
-addnav('Toughness', "hof.php?op=tough&subop=$subop&page=1");
-addnav('Resurrections', "hof.php?op=resurrects&subop=$subop&page=1");
-addnav('Dragon Kill Speed', "hof.php?op=days&subop=$subop&page=1");
-addnav('Sorting');
-addnav('Best', "hof.php?op=$op&subop=most&page=$page");
-addnav('Worst', "hof.php?op=$op&subop=least&page=$page");
-addnav('Other Stats');
 modulehook('hof-add', []);
 
-if ($totalplayers > $playersperpage)
-{
-    addnav('Pages');
+$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$query = $repository->createQueryBuilder('u');
 
-    for ($i = 0; $i < $totalplayers; $i += $playersperpage)
-    {
-        $pnum = ($i / $playersperpage + 1);
-        $min = ($i + 1);
-        $max = min($i + $playersperpage, $totalplayers);
-
-        if ($page == $pnum)
-        {
-            addnav(['`b`#Page %s`0 (%s-%s)´b', $pnum, $min, $max], "hof.php?op=$op&subop=$subop&page=$pnum");
-        }
-        else
-        {
-            addnav(['Page %s (%s-%s)', $pnum, $min, $max], "hof.php?op=$op&subop=$subop&page=$pnum");
-        }
-    }
-}
-
-$order = 'DESC';
-$meop = '>=';
-
-if ('least' == $subop)
-{
-    $order = 'ASC';
-    $meop = '<=';
-}
-
-if ('days' == $op)
-{
-    $order = 'ASC';
-    $meop = '<=';
-
-    if ('least' == $subop)
-    {
-        $order = 'DESC';
-        $meop = '>=';
-    }
-}
-
-$sexsel = "IF(sex,'`%Female`0','`!Male`0')";
-$racesel = "IF(race!='0' and race!='',race,'".RACE_UNKNOWN."')";
-
-$round_money = '-2';
+$query
+    ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.acct', 'u.acctid'))
+    ->where('u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0')
+    ->setParameter('permit', SU_HIDE_FROM_LEADERBOARD)
+;
 
 if ('money' == $op)
 {
-    // works only in mysql 5+ due to the derived table stuff
-    $sql = "SELECT name,(round(
-						(CAST(goldinbank as signed)+cast(gold as signed))
-						*(1+0.05*(rand())),$round_money
-						)) as sort1
-		FROM ".DB::prefix('accounts')." WHERE $standardwhere ORDER BY sort1 $order, level $order, experience $order, acctid $order LIMIT $limit";
-    // for formatting, we need another query...
-    $sql = "SELECT name,format(sort1,0) as data1 FROM ($sql) t";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere
-		AND round((CAST(goldinbank as signed)+cast(gold as signed))*(1+0.05*(rand())),$round_money)
-		$meop ".($session['user']['goldinbank'] + $session['user']['gold']);
-    //edward pointed out that a cast is necessary as signed+unsigned=boffo
+    $params['tpl'] = 'money';
 
-    $adverb = 'richest';
+    $query->select('c.name', 'round((0.95 * (c.gold + c.goldinbank)), 2) AS gold')
+        ->orderBy('gold', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
 
-    if ('least' == $subop)
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND round((0.95 * (c.gold + c.goldinbank)), 2) >= ?0')
+        ->orderBy('round((0.95 * (c.gold + c.goldinbank)), 2)', $order)
+        ->setParameters([
+            0 => ($session['user']['gold'] + $session['user']['goldinbank']),
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+        ->setMaxResults(1)
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'poorest';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND gold <= ?0');
     }
-    $title = "The $adverb warriors in the land";
-    $foot = '(Gold Amount is accurate to +/- 5%)';
-    $headers = ['Estimated Gold'];
-    $tags = ['gold'];
-    $table = [$title, $sql, false, $foot, $headers, $tags];
+
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.gems.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 elseif ('gems' == $op)
 {
-    $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE $standardwhere ORDER BY gems $order, level $order, experience $order, acctid $order LIMIT $limit";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere AND gems $meop {$session['user']['gems']}";
+    $params['tpl'] = 'gems';
 
-    $adverb = 'most';
+    $query->select('c.name')
+        ->orderBy('c.gems', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
 
-    if ('least' == $subop)
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.gems >= ?0')
+        ->setParameters([
+            0 => $session['user']['gems'],
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'least';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.gems <= ?0');
     }
 
-    $title = "The warriors with the $adverb gems in the land";
-    $table = [$title, $sql];
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.gems.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 elseif ('charm' == $op)
 {
-    $sql = "SELECT name,$sexsel AS data1, $racesel AS data2 FROM ".DB::prefix('accounts')." WHERE $standardwhere ORDER BY charm $order, level $order, experience $order, acctid $order LIMIT $limit";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere AND charm $meop {$session['user']['charm']}";
+    $params['tpl'] = 'charm';
 
-    $adverb = 'most beautiful';
+    $query->select('c.name', 'c.sex', 'c.race')
+        ->orderBy('c.charm', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
 
-    if ('least' == $subop)
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.charm >= ?0')
+        ->setParameters([
+            0 => $session['user']['charm'],
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'ugliest';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.charm <= ?0');
     }
-    $title = "The $adverb warriors in the land.";
-    $headers = ['Gender', 'Race'];
-    $translate = ['data1' => 1, 'data2' => 1];
-    $table = [$title, $sql, false, false, $headers, false, $translate];
+
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.charm.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 elseif ('tough' == $op)
 {
-    $sql = "SELECT name,level AS data2 , $racesel as data1 FROM ".DB::prefix('accounts')." WHERE $standardwhere ORDER BY maxhitpoints $order, level $order, experience $order, acctid $order LIMIT $limit";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere AND maxhitpoints $meop {$session['user']['maxhitpoints']}";
+    $params['tpl'] = 'tough';
 
-    $adverb = 'toughest';
+    $query->select('c.name', 'c.sex', 'c.race')
+        ->orderBy('c.maxhitpoints', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
 
-    if ('least' == $subop)
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.maxhitpoints >= ?0')
+        ->setParameters([
+            0 => $session['user']['maxhitpoints'],
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'wimpiest';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.maxhitpoints <= ?0');
     }
 
-    $title = "The $adverb warriors in the land";
-    $headers = ['Race', 'Level'];
-    $translate = ['data1' => 1];
-    $table = [$title, $sql, false, false, $headers, false, $translate];
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.tough.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 elseif ('resurrects' == $op)
 {
-    $sql = 'SELECT name,level AS data1 FROM '.DB::prefix('accounts')." WHERE $standardwhere ORDER BY resurrections $order, level $order, experience $order, acctid $order LIMIT $limit";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere AND resurrections $meop {$session['user']['resurrections']}";
+    $params['tpl'] = 'resurrects';
 
-    $adverb = 'most suicidal';
+    $query->select('c.name', 'c.level')
+        ->orderBy('c.resurrections', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
 
-    if ('least' == $subop)
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.resurrections >= ?0')
+        ->setParameters([
+            0 => $session['user']['resurrections'],
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'least suicidal';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.resurrections <= ?0');
     }
 
-    $title = "The $adverb warriors in the land";
-    $headers = ['Level'];
-    $table = [$title, $sql, false, false, $headers, false];
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.gems.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 elseif ('days' == $op)
 {
-    $unk = translate_inline('Unknown');
-    $sql = "SELECT name, IF(bestdragonage,bestdragonage,'$unk') AS data1 FROM ".DB::prefix('accounts')." WHERE $standardwhere $extra ORDER BY bestdragonage $order, level $order, experience $order, acctid $order LIMIT $limit";
-    $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere $extra AND bestdragonage $meop {$session['user']['bestdragonage']}";
+    $params['tpl'] = 'days';
 
-    $adverb = 'fastest';
+    $order = ('worst' == $subop) ? 'DESC' : 'ASC';
 
-    if ('least' == $subop)
+    $query->select('c.name', 'c.bestdragonage')
+        ->andWhere('c.dragonkills > 0')
+        ->andWhere('c.bestdragonage > 0')
+        ->orderBy('c.bestdragonage', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
+
+    $me = clone $query;
+    $me->select('count(1) AS count')
+        ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills > 0 AND c.bestdragonage <= ?0')
+        ->setParameters([
+            0 => $session['user']['bestdragonage'],
+            'permit' => SU_HIDE_FROM_LEADERBOARD
+        ])
+    ;
+
+    if ('worst' == $subop)
     {
-        $adverb = 'slowest';
+        $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills > 0 AND c.bestdragonage >= ?0');
     }
 
-    $title = "Heroes with the $adverb dragon kills in the land";
-    $headers = ['Best Days'];
-    $none = 'There are no heroes in the land.';
-    $table = [$title, $sql, $none, false, $headers, false];
+    $myRank = $me->getQuery()->getSingleScalarResult();
+
+    $params['subTitle'] = [
+        'section.days.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
+//-- Default is kills
 else
 {
-    $unk = translate_inline('Unknown');
-    $sql = "SELECT name,dragonkills AS data1,level AS data2, IF(dragonage,dragonage,'$unk') AS data3, IF(bestdragonage,bestdragonage,'$unk') AS data4 FROM ".DB::prefix('accounts')." WHERE $standardwhere $extra ORDER BY dragonkills $order,level $order,experience $order, acctid $order LIMIT $limit";
+    $params['tpl'] = 'default';
 
+    $query->select('c.name', 'c.level', 'c.dragonkills', 'c.dragonage', 'c.bestdragonage')
+        ->andWhere('c.dragonkills > 0')
+        ->orderBy('c.dragonkills', $order)
+        ->addOrderBy('c.level', $order)
+        ->addOrderBy('c.experience', $order)
+    ;
+
+    $myRank = 0;
     if ($session['user']['dragonkills'] > 0)
     {
-        $me = 'SELECT count(acctid) AS count FROM '.DB::prefix('accounts')." WHERE $standardwhere $extra AND dragonkills $meop {$session['user']['dragonkills']}";
+        $me = clone $query;
+
+        $me->select('count(1) AS count')
+            ->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills >= :kills')
+            ->setParameters([
+                'kills' => $session['user']['dragonkills'],
+                'permit' => SU_HIDE_FROM_LEADERBOARD
+            ])
+            ->setMaxResults(1)
+        ;
+
+        if ('worst' == $subop)
+        {
+            $em->where('(u.locked = 0 AND BIT_AND(u.superuser, :permit) = 0) AND c.dragonkills <= :kills');
+        }
+
+        $myRank = $me->getQuery()->getSingleScalarResult();
     }
 
-    $adverb = 'most';
-
-    if ('least' == $subop)
-    {
-        $adverb = 'least';
-    }
-
-    $title = "Heroes with the $adverb dragon kills in the land";
-    $headers = ['Kills', 'Level', 'Days', 'Best Days'];
-    $none = 'There are no heroes in the land.';
-    $table = [$title, $sql, $none, false, $headers, false];
+    $params['subTitle'] = [
+        'section.default.subtitle',
+        [
+            'adverb' => $subop
+        ]
+    ];
 }
 
-if (isset($table) && is_array($table))
-{
-    call_user_func_array('display_table', $table);
+$params['paginator'] = $repository->getPaginator($query, $page, 25);
 
-    if (isset($me) && $me > '' && $totalplayers)
-    {
-        $meresult = DB::query($me);
-        $row = DB::fetch_assoc($meresult);
-        $pct = round(100 * $row['count'] / $totalplayers, 0);
+$params['footerTitle'] = [
+    'section.footertitle',
+    [
+        'percent' => round($myRank / $params['paginator']->getTotalItemCount(), 2)
+    ]
+];
 
-        if ($pct < 1)
-        {
-            $pct = 1;
-        }
-        output('`c`7You rank within around the top `&%s`7%% in this listing.`0´c', $pct);
-    }
-}
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
 
-function display_table($title, $sql, $none = false, $foot = false, $data_header = false, $tag = false, $translate = false)
-{
-    global $session, $from, $to, $page, $playersperpage, $totalplayers;
-
-    $title = translate_inline($title);
-
-    if (false !== $foot)
-    {
-        $foot = translate_inline($foot);
-    }
-
-    $none = translate_inline(($none ?: 'No players found.'));
-
-    if (false !== $data_header)
-    {
-        $data_header = translate_inline($data_header);
-        reset($data_header);
-    }
-
-    if (false !== $tag)
-    {
-        $tag = translate_inline($tag);
-    }
-    $rank = translate_inline('Rank');
-    $name = translate_inline('Name');
-
-    if ($totalplayers > $playersperpage)
-    {
-        output('`c`b`^%s`0´b `7(Page %s: %s-%s of %s)`0´c`n', $title, $page, $from, $to, $totalplayers);
-    }
-    else
-    {
-        output_notl('`c`b`^%s`0´b´c`n', $title);
-    }
-    rawoutput('<table class="ui very compact striped selectable table">');
-    rawoutput('<thead><tr>');
-    output_notl("<th>`b{$rank}´b</th><th>`b{$name}´b</th>", true);
-
-    if (false !== $data_header)
-    {
-        for ($i = 0; $i < count($data_header); $i++)
-        {
-            output_notl("<th>`b{$data_header[$i]}´b</th>", true);
-        }
-    }
-    rawoutput('</tr></thead>');
-    debug($sql);
-    $result = DB::query($sql);
-
-    if (0 == DB::num_rows($result))
-    {
-        $size = (false === $data_header) ? 2 : 2 + count($data_header);
-        output_notl("<tr class='trlight'><td colspan='$size'>`&$none`0</td></tr>", true);
-    }
-    else
-    {
-        $i = -1;
-
-        while ($row = DB::fetch_assoc($result))
-        {
-            $i++;
-
-            if ($row['name'] == $session['user']['name'])
-            {
-                rawoutput("<tr class='hilight'>");
-            }
-            else
-            {
-                rawoutput("<tr class='".($i % 2 ? 'trlight' : 'trdark')."'>");
-            }
-            output_notl('<td>%s</td><td>`&%s`0</td>', ($i + $from), $row['name'], true);
-
-            if (false !== $data_header)
-            {
-                for ($j = 0; $j < count($data_header); $j++)
-                {
-                    $id = 'data'.($j + 1);
-                    $val = $row[$id];
-
-                    if (isset($translate[$id]) && 1 == $translate[$id] && ! is_numeric($val))
-                    {
-                        $val = translate_inline($val);
-                    }
-
-                    if (false !== $tag)
-                    {
-                        $val = $val.' '.$tag[$j];
-                    }
-                    output_notl('<td>%s</td>', $val, true);
-                }
-            }
-            rawoutput('</tr>');
-        }
-    }
-    rawoutput('</table>');
-
-    if (false !== $foot)
-    {
-        output_notl('`n`c%s´c', $foot);
-    }
-}
+//-- This is only for params not use for other purpose
+$params = modulehook('page-hof-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/hof.twig', $params));
 
 page_footer();
