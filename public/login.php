@@ -252,7 +252,9 @@ elseif ('logout' == $op)
         // like the stafflist which need to invalidate the cache
         // when someone logs in or off can do so.
         modulehook('player-logout');
-        saveuser();
+        saveuser(true);
+
+        exit;
 
         \LotgdSession::sessionLogOut();
 
