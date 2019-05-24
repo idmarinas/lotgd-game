@@ -4,6 +4,7 @@
 category:
     seance: Seance
     other: Other
+    navigation: Navigation
 
 # Menu navs
 nav:
