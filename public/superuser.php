@@ -97,8 +97,5 @@ if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 
 modulehook('superuser', [], true);
 
-//-- This is only for params not use for other purpose
-$params = modulehook('page-superuser-tpl-params', []);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/superuser.twig', $params));
-
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/superuser.twig', $params));
 page_footer();
