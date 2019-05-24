@@ -52,7 +52,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
             throw new Exception\InvalidArgumentException(sprintf('Error parsing YAML, invalid file "%s"', $fromIncludePath), 0, $e);
         }
 
-        $messages = $this->flatten($messages);
+        $messages = $this->flatten($messages ?: []);
 
         if (! is_array($messages))
         {
