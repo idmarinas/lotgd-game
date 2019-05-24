@@ -9,7 +9,7 @@ function saveuser()
     global $session, $companions;
 
     //-- It's defined as not save user, Not are a user logged in or not are defined id of account
-    if (defined('NO_SAVE_USER') || ! ($session['user']['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
+    if (defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
     {
         return false;
     }
@@ -56,6 +56,6 @@ function saveuser()
 
     $session['user'] = [
         'acctid' => $session['user']['acctid'],
-        'login' => $session['user']['login']
+        'loggedin' => $session['user']['loggedin']
     ];
 }
