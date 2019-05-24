@@ -6,7 +6,6 @@
 define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
-require_once 'lib/villagenav.php';
 
 tlschema('badnav');
 
@@ -26,21 +25,21 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
         }
     }
 
-    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\AccountsOutput::class);
-    $output = $repository->getOutput($session['user']['acctid']);
+    $repository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
+    $outputHtml = $repository->getOutput($session['user']['acctid']);
 
-    if ('' != $output)
+    if ('' != $outputHtml)
     {
-        $output = gzuncompress($output);
+        $outputHtml = gzuncompress($outputHtml);
     }
     //check if the output needs to be unzipped again
     //and make sure '' is not within gzuncompress -> error
-    if ('' != $output && false !== strpos('HTML', $output))
+    if ('' != $outputHtml && false !== strpos('HTML', $outputHtml))
     {
-        $output = gzuncompress($output);
+        $outputHtml = gzuncompress($outputHtml);
     }
 
-    if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $output)
+    if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $outputHtml)
     {
         $session['user']['allowednavs'] = [];
         page_header('title', [], 'page-badnav');
@@ -59,7 +58,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
         page_footer();
     }
 
-    echo $output;
+    echo $outputHtml;
 
     if ($session['user']['superuser'] & SU_MEGAUSER)
     {
@@ -70,6 +69,8 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 
     $session['debug'] = '';
     saveuser();
+
+    exit;
 }
 else
 {
