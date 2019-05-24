@@ -60,7 +60,7 @@ $params = [
     'RACE_UNKNOWN' => RACE_UNKNOWN
 ];
 
-page_header('title', [ 'name' => full_sanitize($target['name']) ], $textDomain);
+page_header('title', [ 'name' => \LotgdSanitize::fullSanitize($target['name']) ], $textDomain);
 
 \LotgdNavigation::addHeader('common.category.return');
 
