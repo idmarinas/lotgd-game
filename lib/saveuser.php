@@ -29,9 +29,7 @@ function saveuser()
     $hydrator = new \Zend\Hydrator\ClassMethods();
 
     $everypage = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\AccountsEverypage());
-
     $account = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Accounts());
-
     $character = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Characters());
 
     $account->setCharacter($character);
