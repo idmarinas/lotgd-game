@@ -75,7 +75,7 @@
         "gulp-rename": "^1.4.0",
         "gulp-replace": "^1.0.0",
         "gulp-uglify": "^3.0.2",
-        "merge-stream": "^1.0.1",
+        "merge-stream": "^2.0.0",
         "mini-css-extract-plugin": "^0.6.0",
         "minimist": "^1.2.0",
         "node-sass": "^4.12.0",
