@@ -24,7 +24,7 @@
         "symfony/filesystem": "^4.2",
         "symfony/yaml": "^4.2",
         "tracy/tracy": "^2.6",
-        "twig/twig": "^2.8",
+        "twig/twig": "^2.10",
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.3",
         "zendframework/zend-config": "^3.2",
