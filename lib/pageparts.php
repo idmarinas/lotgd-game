@@ -185,7 +185,7 @@ function page_footer($saveuser = true)
     }
 
     $paypalData['author']['register_logdnet'] = false;
-    $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.full_sanitize($session['user']['name']);
+    $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
     $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
@@ -229,7 +229,7 @@ function page_footer($saveuser = true)
     if ('' != $paysite)
     {
         $paypalData['site']['paysite'] = $paysite;
-        $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.full_sanitize($session['user']['name']);
+        $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
         $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
         if (file_exists('payment.php'))
@@ -241,7 +241,7 @@ function page_footer($saveuser = true)
     }
 
     //-- Dragon Prime
-    $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.full_sanitize($session['user']['name']);
+    $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
     $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
