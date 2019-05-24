@@ -28,6 +28,7 @@ $op = (string) \LotgdHttp::getQuery('op');
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
+\LotgdNavigation::addHeader('category.navigation');
 if ('pay' == $op)
 {
     $params['tpl'] = 'pay';
@@ -59,7 +60,7 @@ else
 
     \LotgdNavigation::addHeader('category.seance');
     \LotgdNavigation::addNav('nav.pay', 'gypsy.php?op=pay', [
-            'params', [
+            'params' => [
                 'cost' => $params['cost']
             ]
         ]
