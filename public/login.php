@@ -37,7 +37,7 @@ if ('' != $name)
         return redirect('home.php');
     }
 
-    $password = stripslashes((string) httppost('password'));
+    $password = stripslashes((string) \LotgdHttp::getPost('password'));
 
     if ('!md5!' == substr($password, 0, 5))
     {
@@ -215,9 +215,6 @@ if ('' != $name)
 
     $session['user']['loggedin'] = true;
 
-    //-- Save user
-    saveuser();
-
     if ($session['user']['location'] == $iname)
     {
         return redirect('inn.php?op=strolldown');
@@ -252,9 +249,7 @@ elseif ('logout' == $op)
         // like the stafflist which need to invalidate the cache
         // when someone logs in or off can do so.
         modulehook('player-logout');
-        saveuser(true);
-
-        exit;
+        saveuser();
 
         \LotgdSession::sessionLogOut();
 
