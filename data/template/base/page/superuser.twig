@@ -9,9 +9,6 @@
 
 {{ 'paragraph'|t({'sex': user.sex})|colorize }}
 
-{# Set the url for links of pagination. Default is $_SERVER['SCRIPT_NAME'] #}
-{% commentary_pagination_link_url 'superuser.php' %}
-
 {{ commentary_block({
     'section': 'superuser',
     'textDomainStatus': 'app-commentary'
