@@ -22,7 +22,7 @@ class AccountsOutputRepository extends DoctrineRepository
      *
      * @param int $acctId
      *
-     * @return int
+     * @return string
      */
     public function getOutput(int $acctId): string
     {
@@ -31,6 +31,8 @@ class AccountsOutputRepository extends DoctrineRepository
         try
         {
             return $query->select('u.output')
+                ->where('u.acctid = :acct')
+                ->setParameter('acct', $acctId)
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getSingleScalarResult()
