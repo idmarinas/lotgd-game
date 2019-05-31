@@ -25,6 +25,11 @@ class Navigation
     use Pattern\Links;
 
     /**
+     * Default text domain for navigation menu
+     */
+    const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation-app';
+
+    /**
      * Headers for navigation menu with options.
      *
      * @var array
@@ -57,7 +62,7 @@ class Navigation
      *
      * @var string
      */
-    protected $textDomain = 'navigation-app';
+    protected $textDomain = self::DEFAULT_NAVIGATION_TEXT_DOMAIN;
 
     /**
      * Previous text domain.
@@ -250,7 +255,7 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain('navigation-app');
+        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
         $this->addHeader('common.superuser.category');
 
         if ($superuser & SU_EDIT_COMMENTS)
@@ -279,7 +284,7 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain('navigation-app');
+        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
         $this->addHeader('common.category.navigation');
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
@@ -308,7 +313,7 @@ class Navigation
 
         $extra = (false === strpos($extra, '?') ? '?' : '');
 
-        $this->setTextDomain('navigation-app');
+        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
 
         $args = modulehook('villagenav');
 
