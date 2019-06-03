@@ -266,7 +266,7 @@ trait Commentary
 
         if (false === \strpos($url, '?') && false !== \strpos($url, '&'))
         {
-            $url = \preg_replace('/[&]/', '?', 1);
+            $url = \preg_replace('/[&]/', '?', $url, 1);
         }
 
         return $url;
