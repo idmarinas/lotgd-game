@@ -443,6 +443,12 @@ class Navigation
             return '';
         }
 
+        //-- Replace first & for ?
+        if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
+        {
+            $link = \preg_replace('/[&]/', '?', $link, 1);
+        }
+
         return sprintf('%sc=%s',
             (false === strpos($link, '?') ? '?' : '&'),
             $session['counter']
