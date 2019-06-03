@@ -150,7 +150,15 @@ class Sanitize
      */
     public function cmdSanitize($string): string
     {
-        return preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
+        $string =  preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
+
+        //-- Replace first & for ?
+        if (false === \strpos($string, '?') && false !== \strpos($string, '&'))
+        {
+            $string = \preg_replace('/[&]/', '?', $string, 1);
+        }
+
+        return $string;
     }
 
     /**
