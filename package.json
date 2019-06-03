@@ -35,7 +35,7 @@
         "fomantic-ui": "2.7.5",
         "jquery": "^3.4.1",
         "snyk": "^1.171.0",
-        "sweetalert2": "^8.11.6",
+        "sweetalert2": "^8.11.7",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
