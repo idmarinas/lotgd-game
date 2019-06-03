@@ -51,6 +51,23 @@ trait CoreFilter
     }
 
     /**
+     * Preven to format a LotGD code.
+     *
+     * @param string|null $string
+     *
+     * @return string
+     */
+    public function preventCodes(?string $string): string
+    {
+        if (! $string)
+        {
+            return '';
+        }
+
+        return \LotgdSanitize::preventLotgdCodes($string);
+    }
+
+    /**
      * nltoappon a string.
      *
      * @param string|null $string

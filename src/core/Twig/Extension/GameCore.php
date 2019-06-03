@@ -50,6 +50,7 @@ class GameCore extends AbstractExtension
         return [
             new TwigFilter('colorize', [$this, 'colorize']),
             new TwigFilter('uncolorize', [$this, 'uncolorize']),
+            new TwigFilter('prevent_codes', [$this, 'preventCodes']),
             new TwigFilter('nltoappon', [$this, 'nltoappon']),
             new TwigFilter('lotgd_url', [$this, 'lotgdUrl']),
             new TwigFilter('numeral', [$this, 'numeral']),
