@@ -1,0 +1,22 @@
+{% translate_default_domain textDomain %}
+
+{% if showInnDescription %}
+    {% if 'strolldown' == op %}
+        {{ 'section.default.op.stroll'|t|colorize }}
+    {% elseif 'fleedragon' == op %}
+        {{ 'section.default.op.flee.dragon'|t({ 'partner': partner })|colorize }}
+    {% else %}
+        {{ 'section.default.op.default'|t|colorize }}
+    {% endif %}
+
+    {{ 'section.default.paragraph'|t({ 'sex': user.sex, 'barkeep': barkeep, 'partner': partner })|colorize }}
+
+    {{ 'section.default.talk'|t({ 'talk': talk[0]|tl(talk[1], talk[2]) })|colorize }}
+
+    {{ 'section.default.clock'|t({ 'gameclock': gameclock })|colorize }}
+
+    {% set result = modulehook('inn-desc') %}
+    {% for message in result %}
+        {{ message[0]|tl(message[1], message[2])|colorize }}
+    {% endfor %}
+{% endif %}
