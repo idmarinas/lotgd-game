@@ -116,6 +116,30 @@ trait CoreFunction
     }
 
     /**
+     * Render a PvP table list.
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    public function pvpListTable(array $params): string
+    {
+        return $this->getTheme()->renderThemeTemplate('parts/pvp-list.twig', $params);
+    }
+
+    /**
+     * Render a count of sleepers for zone.
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    public function pvpListSleepers(array $params): string
+    {
+        return $this->getTheme()->renderThemeTemplate('parts/pvp-sleepers.twig', $params);
+    }
+
+    /**
      * Function to use bdump of Tracy debugger
      *
      * @param mixed $param

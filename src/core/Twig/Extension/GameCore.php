@@ -25,6 +25,7 @@ class GameCore extends AbstractExtension
     use PatternCore\Censor;
     use PatternCore\Container;
     use PatternCore\Sanitize;
+    use PatternCore\Theme;
     use PatternCore\Translator;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
@@ -85,6 +86,9 @@ class GameCore extends AbstractExtension
             new TwigFunction('admin_petition', [$this, 'adminPetition']),
 
             new TwigFunction('show_news_item', [$this, 'showNewsItem']),
+
+            new TwigFunction('pvp_list_table', [$this, 'pvpListTable']),
+            new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers']),
 
             new TwigFunction('bdump', [$this, 'bdump']),
 
