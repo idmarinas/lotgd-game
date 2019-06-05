@@ -14,6 +14,7 @@ if ('bribe' == $action)
 
     if ('' == $type)
     {
+        \LotgdNavigation::addHeader($params['barkeep'], [ 'translate' => false ]);
         \LotgdNavigation::addNav('nav.bribe.gem', 'inn.php?op=bartender&act=bribe&type=gem&amt=1', [
             'params' => [
                 'gem' => 1
