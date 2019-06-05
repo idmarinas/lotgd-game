@@ -1,0 +1,9 @@
+{% translate_default_domain 'partial-pvp' %}
+
+{% if sleepers|length %}
+    {{ 'sleepers.paragraph'|t|colorize }}
+
+    {% for zone in sleepers %}
+        {{ 'sleepers.count'|t({ 'count': zone.sleepers, 'location': zone.location })|colorize }}
+    {% endfor %}
+{% endif %}
