@@ -131,7 +131,7 @@ if (getsetting('enablecompanions', true))
 \LotgdNavigation::addHeader('headers.fight');
 \LotgdNavigation::addNav('navs.train', 'train.php');
 
-if (file_exists('lodge.php'))
+if (file_exists('public/lodge.php'))
 {
     \LotgdNavigation::addNav('navs.lodge', 'lodge.php');
 }
@@ -143,7 +143,7 @@ if (file_exists('lodge.php'))
 \LotgdNavigation::addNav('navs.bank', 'bank.php');
 \LotgdNavigation::addNav('navs.gypsy', 'gypsy.php');
 
-if (1 == getsetting('betaperplayer', 1) && file_exists('pavilion.php'))
+if (1 == getsetting('betaperplayer', 1) && file_exists('public/pavilion.php'))
 {
     \LotgdNavigation::addNav('navs.pavilion', 'pavilion.php');
 }
@@ -180,7 +180,7 @@ if (getsetting('allowclans', 1))
 \LotgdNavigation::addNav('navs.account', 'account.php');
 \LotgdNavigation::addNav('navs.prefs', 'prefs.php');
 
-if (! file_exists('lodge.php'))
+if (! file_exists('public/lodge.php'))
 {
     \LotgdNavigation::addNav('navs.referral', 'referral.php');
 }
