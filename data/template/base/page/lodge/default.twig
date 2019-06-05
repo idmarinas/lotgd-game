@@ -1,0 +1,19 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.default.paragraph'|t|colorize }}
+
+{% if canEntry %}
+    {% set result = modulehook('lodge-desc') %}
+    {% for message in result %}
+        {{ message[0]|tl(message[1], message[2])|colorize }}
+    {% endfor %}
+
+    {{ 'section.default.can.entry.yes'|t({ 'donationPoints': user.donation, 'donationPointsAvailable': pointsAvailable, 'sex': user.sex })|colorize }}
+
+    {{ commentary_block({
+        'section': 'hunterlodge',
+        'textDomainStatus': 'app-commentary'
+    }, textDomain) }}
+{% else %}
+    {{ 'section.default.can.entry.no'|t({ 'barkeep': barkeep, 'innName': innName })|colorize }}
+{% endif %}

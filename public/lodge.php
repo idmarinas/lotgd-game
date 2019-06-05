@@ -4,111 +4,89 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/commentary.php';
-require_once 'lib/sanitize.php';
-require_once 'lib/villagenav.php';
 require_once 'lib/names.php';
 
 tlschema('lodge');
 
-addcommentary();
+// Don't hook on to this text for your standard modules please, use "lodge" instead.
+// This hook is specifically to allow modules that do other lodges to create ambience.
+$result = modulehook('lodge-text-domain', ['textDomain' => 'page-lodge', 'textDomainNavigation' => 'navigation-lodge']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-$op = httpget('op');
+$op = (string) \LotgdHttp::getQuery('op');
 
 if ('' == $op)
 {
     checkday();
 }
 
-$pointsavailable =
-    $session['user']['donation'] - $session['user']['donationspent'];
+$pointsavailable = max(0, $session['user']['donation'] - $session['user']['donationspent']);
+//-- Have access to Lodge
 $entry = ($session['user']['donation'] > 0) || ($session['user']['superuser'] & SU_EDIT_COMMENTS);
 
-if ($pointsavailable < 0)
-{
-    $pointsavailable = 0;
-} // something weird.
+page_header('title', [], $textDomain);
 
-page_header("Hunter's Lodge");
-addnav('Navigation');
-villagenav();
-addnav('General');
+$params = [
+    'textDomain' => $textDomain,
+    'pointsAvailable' => $pointsavailable,
+    'innName' => getsetting('innname', LOCATION_INN),
+    'barkeep' => getsetting('barkeep', '`tCedrik`0'),
+    'canEntry' => $entry
+];
 
-addnav('Referrals', 'referral.php');
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
+\LotgdNavigation::addHeader('category.navigation');
+\LotgdNavigation::villageNav();
+
+\LotgdNavigation::addHeader('category.general');
 if ('' != $op && $entry)
 {
-    addnav('L?Back to the Lodge', 'lodge.php');
+    \LotgdNavigation::addnav('navs.return', 'lodge.php');
 }
-addnav('Describe Points', 'lodge.php?op=points');
+
+\LotgdNavigation::addnav('navs.referral', 'referral.php');
+\LotgdNavigation::addnav('navs.desc', 'lodge.php?op=points');
 
 if ('' == $op)
 {
-    output("`b`c`!The Hunter's Lodge`0´c´b");
-    output("`7You follow a narrow path away from the stables and come across a rustic Hunter's Lodge.");
-    output('A guard stops you at the door and asks to see your membership card.`n`n');
+    $params['tpl'] = 'default';
 
     if ($entry)
     {
-        modulehook('lodge-desc');
-        output('Upon showing it to him, he says, `3"Very good %s, welcome to the J. C. Petersen Hunting Lodge.', translate_inline($session['user']['sex'] ? "ma'am" : 'sir'));
-        output('You have earned `^%s`3 points and have `^%s`3 points available to spend,"`7 and admits you in.`n`n', $session['user']['donation'], $pointsavailable);
-        output('You enter a room dominated by a large fireplace at the far end.');
-        output('The wood-panelled walls are covered with weapons, shields, and mounted hunting trophies, including the heads of several dragons that seem to move in the flickering light.`n`n');
-        output('Many high-backed leather chairs fill the room.');
-        output('In the chair closest to the fire sits J. C. Petersen, reading a heavy tome entitled "Alchemy Today."`n`n');
-        output('As you approach, a large hunting dog at his feet raises her head and looks at you.');
-        output('Sensing that you belong, she lays down and goes back to sleep.`n`n');
-        commentdisplay('Nearby some other rugged hunters talk:`n', 'hunterlodge', 'Talk quietly', 25);
-        addnav('Use Points');
+        \LotgdNavigation::addHeader('category.use.points');
         modulehook('lodge');
-    }
-    else
-    {
-        $iname = getsetting('innname', LOCATION_INN);
-        output("You pull out your Frequent Boozer Card from %s, with 9 out of the 10 slots punched out with a small profile of %s`7's Head.`0`n`n", $iname, getsetting('barkeep', '`tCedrik`0'));
-        output('The guard glances at it, advises you not to drink so much, and directs you down the path.');
     }
 }
 elseif ('points' == $op)
 {
-    output('`b`3Points:´b`n`n');
-    $points_messages = modulehook(
-        'donator_point_messages',
+    $params['tpl'] = 'points';
+
+    $params['currencySymbol'] = getsetting('paypalcurrency', 'USD');
+    $params['currencyUnits'] = getsetting('dpointspercurrencyunit', 100);
+    $params['refererAward'] = getsetting('refereraward', 25);
+    $params['referMinLevel'] = getsetting('referminlevel', 25);
+
+    $params['donatorPointMessages'] = [
         [
-            'messages' => [
-                'default' => sprintf_translate("`7For each %s 1 donated, the account which makes the donation will receive %s contributor points in the game (Fractions don't count).", getsetting('paypalcurrency', 'USD'), getsetting('dpointspercurrencyunit', 'USD'))
-            ]
+            'section.points.messages.default', //-- Translator keys
+            [ //-- Params for translator
+                'currencySymbol' => $params['currencySymbol'],
+                'currencyUnits' => $params['currencyUnits']
+            ],
+            $textDomain //-- Translator text domain
         ]
-    );
-
-    foreach ($points_messages['messages'] as $id => $message)
-    {
-        output_notl($message.'`n', true);
-    }
-    output('`n"`&But what are points,`7" you ask?');
-    output('Points can be redeemed for various advantages in the game.');
-    output("You'll find access to these advantages in the Hunter's Lodge.");
-    output('As time goes on, more advantages will likely be added, which can be purchased when they are made available.`n`n');
-    output("Donating even one %s will gain you a membership card to the Hunter's Lodge, an area reserved exclusively for contributors.", getsetting('paypalcurrency', 'USD'));
-    output('Donations are accepted in whole %s increments only.`n`n', getsetting('paypalcurrency', 'USD'));
-    output("\"`&But I don't have access to a PayPal account, or I otherwise can't donate to your very wonderful project!`7\"`n");
-    // yes, "referer" is misspelt here, but the game setting was also misspelt
-    if (getsetting('refereraward', 25))
-    {
-        output('Well, there is another way that you can obtain points: by referring other people to our site!');
-        output("You'll get %s points for each person whom you've referred who makes it to level %s.", getsetting('refereraward', 25), getsetting('referminlevel', 4));
-        output("Even one person making it to level %s will gain you access to the Hunter's Lodge.`n`n", getsetting('referminlevel', 4));
-    }
-    output('You can also gain contributor points for contributing in other ways that the administration may specify.');
-    output("So, don't despair if you cannot send cash, there will always be non-cash ways of gaining contributor points.`n`n");
-    output('`b`3Purchases that are currently available:`0´b`n');
-    $args = modulehook('pointsdesc', ['format' => '`#&#149;`7 %s`n', 'count' => 0]);
-
-    if (0 == $args['count'])
-    {
-        output('`#&#149;`7None -- Please talk to your admin about creating some.`n', true);
-    }
+    ];
 }
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-lodge-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/lodge.twig', $params));
 
 page_footer();
