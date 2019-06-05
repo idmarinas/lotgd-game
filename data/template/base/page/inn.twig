@@ -1,0 +1,10 @@
+{% translate_default_domain textDomain %}
+
+<span class="ui inverted purple text">
+    {% if showInnDescription %}
+        <div class="center aligned"><strong>{{ innName|colorize }}</strong></div>
+    {% endif %}
+
+    {{ include_theme('page/inn/' ~ tpl|default('default') ~ '.twig') }}
+</span>
+
