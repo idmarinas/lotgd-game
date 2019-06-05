@@ -5,46 +5,62 @@
 // mail ready
 function redirect($location, $reason = false)
 {
-    global $session;
+    global $session, $lotgdJaxon;
 
-    // This function is deliberately not localized.  It is meant as error
-    // handling.
-    if (! isset($session['debug']))
-    {
-        $session['debug'] = '';
-    }
+    // This function is deliberately not localized.  It is meant as error handling.
+    $session['debug'] = $session['debug'] ?? '';
 
     if (false === strpos($location, 'badnav.php'))
     {
         //deliberately html in translations so admins can personalize this, also in one schema
         $session['user']['allowednavs'] = [];
-        addnav('', $location);
-        $failoutput = LotgdLocator::build(Lotgd\Core\Output\Collector::class);
-        $failoutput->output_notl('`lWhoops, your navigation is broken. Hopefully we can restore it.`n`n');
-        $failoutput->output_notl('`$');
-        $failoutput->rawoutput('<a href="'.htmlentities($location, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">'.translate_inline('Click here to continue.', 'badnav').'</a>');
-        $failoutput->output_notl(translate_inline("`n`n`\$If you cannot leave this page, notify the staff via <a href='petition.php'>petition</a> `\$and tell them where this happened and what you did. Thanks.", 'badnav'), true);
-        $text = $failoutput->get_output();
-        $title = translate_inline('Your navigation is broken');
-        $session['output'] = "<html><head><title>$title</title></head><body style='background-color: #ffffff'>$text</body></html>";
+
+        \LotgdNavigation::addNavAllow($location);
+
+        $content = \LotgdTranslator::t('redirect.badnav.content', [
+            'locationUrl' => htmlentities($location, ENT_COMPAT, getsetting('charset', 'UTF-8')),
+            'petitionUrl' => 'petition.php'
+        ], 'app-default');
+
+        //-- Finalize output
+        $lotgdJaxon->processRequest();
+
+        $failOutput = [
+            'title' => [
+                'title' => 'redirect.badnav.title',
+                'params' => [],
+                'textDomain' => 'app-default'
+            ],
+            'content' => appoencode($content, true),
+            'csshead' => $lotgdJaxon->getCss(),
+            'scripthead' => $lotgdJaxon->getJs(),
+            'scripthead' => $lotgdJaxon->getScript()
+        ];
+        $session['output'] =  \LotgdTheme::renderThemeTemplate('popup.twig', $failOutput);
     }
+
     restore_buff_fields();
-    $session['debug'] .= "Redirected to $location from ".LotgdHttp::getServer('REQUEST_URI').".  $reason<br>";
+    $session['debug'] .= \LotgdTranslator::t('redirect.redirection', [
+        'locationTo' => $location,
+        'locationFrom' => \LotgdHttp::getServer('REQUEST_URI'),
+        'reason' => $reason
+    ], 'app-default');
     saveuser();
-    $host = $_SERVER['HTTP_HOST'];
 
-    $http = 'http';
-    if (443 == $_SERVER['SERVER_PORT'])
-    {
-        $http = 'https';
-    }
+    $host = \LotgdHttp::getServer('HTTP_HOST');
+    $http = (443 == \LotgdHttp::getServer('SERVER_PORT')) ? 'https' : 'http';
+    $uri = rtrim(dirname(\LotgdHttp::getServer('PHP_SELF')), '/\\');
 
-    $uri = rtrim(dirname( LotgdHttp::getServer('PHP_SELF')), '/\\');
-    header("Location: $http://$host$uri/$location");
+    header(sprintf("Location: %s://%s%s/%s",
+        $http,
+        $host,
+        $uri,
+        $location
+    ));
 
     // we should never hit this one here. in case we do, show the debug output along with some text
     // this might be the case if your php session handling is messed up or something.
-    echo translate_inline("Whoops. There has been an error concering redirecting your to your new page. Please inform the admins about this. More Information for your petition down below:\n\n");
+    echo \LotgdTranslator::t('redirect.whoops', [], 'app-default');
     echo $session['debug'];
 
     exit();
