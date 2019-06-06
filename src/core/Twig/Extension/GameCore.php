@@ -57,6 +57,7 @@ class GameCore extends AbstractExtension
             new TwigFilter('numeral', [$this, 'numeral']),
             new TwigFilter('relative_date', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
+            new TwigFilter('stripslashes', 'stripslashes'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
             new TwigFilter('censor', [$this, 'censor']),
             new TwigFilter('highlight_file', [$this, 'highlightFile'])
