@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Logdnet.
  *
  * @ORM\Table(name="logdnet")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\LogdnetRepository")
  */
 class Logdnet
 {
@@ -58,7 +58,7 @@ class Logdnet
      *
      * @ORM\Column(name="lastupdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $lastupdate = '0000-00-00 00:00:00';
+    private $lastupdate;
 
     /**
      * @var string
@@ -101,6 +101,11 @@ class Logdnet
      * @ORM\Column(name="lang", type="string", length=20, nullable=false)
      */
     private $lang;
+
+    public function __construct()
+    {
+        $this->lastupdate = new \DateTime('now');
+    }
 
     /**
      * Set the value of Serverid.
