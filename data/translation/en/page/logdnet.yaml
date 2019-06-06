@@ -8,10 +8,10 @@ description:
     ban:
         title: 'Reasons we might remove a server:`n'
         reason:
-            '01': 'Altering our copyright statement outside of the provisions we have provided within the code,`n'
-            '02': 'Removing our PayPal link,`n'
-            '03': 'Providing deceptive, inappropriate, or false information in the server listing,`n'
-            '04': 'Not linking back to LoGDnet`n'
+            '00': 'Altering our copyright statement outside of the provisions we have provided within the code,`n'
+            '01': 'Removing our PayPal link,`n'
+            '02': 'Providing deceptive, inappropriate, or false information in the server listing,`n'
+            '03': 'Not linking back to LoGDnet`n'
         other: 'Or really, any other reason that we want.`n'
         paragraph:
             - "If you've been banned already, chances are you know why, and chances are we've got no interest in removing the ban."
@@ -20,5 +20,5 @@ description:
 servers:
     server: 'Server'
     version: 'Version'
-    noDescription: 'Another boring and undescribed LotGD server'
+    noDescription: '`)Another boring and undescribed LotGD server`0'
     notFound: '`$Not found servers`0'

@@ -23,16 +23,12 @@
         {% for server in servers %}
             <tr>
                 <td>
-                    <a class="colDkWhite" href="{{ server.address|escape('html_attr') }}" target="_blank" rel="noopener noreferrer">
-                        {% if server.description %}
-                            {{ server.description|escape('html')|colorize }}
-                        {% else %}
-                            {{ 'servers.noDescription'|t|colorize }}
-                        {% endif %}
+                    <a href="{{ server.address|escape('html_attr') }}" target="_blank" rel="noopener noreferrer">
+                        {{ server.description|default('servers.noDescription'|t)|e('html')|replace({'`&amp;' : '`&'})|colorize }}
                     </a>
                 </td>
                 <td class="collapsing">
-                    <span class="colLtYellow">{{ server.version|colorize }}</span>
+                    {{ '`^%s`0'|format(server.version|default('??'))|colorize }}
                 </td>
             </tr>
         {% else %}
