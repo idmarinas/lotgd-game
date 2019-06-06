@@ -11,8 +11,8 @@ if (! isset($_GET['op']) || 'list' != $_GET['op'])
     //don't want people to be able to visit the list while logged in -- breaks their navs.
     define('OVERRIDE_FORCED_NAV', true);
 }
+
 require_once 'common.php';
-require_once 'lib/sanitize.php';
 
 use Zend\Filter;
 
@@ -46,8 +46,7 @@ function lotgdsort($a, $b)
     {
         return 1;
     }
-
-    if (0 == strcmp($bver, 'unknown') && 0 != strcmp($aver, 'unknown'))
+    elseif (0 == strcmp($bver, 'unknown') && 0 != strcmp($aver, 'unknown'))
     {
         return -1;
     }
@@ -80,16 +79,18 @@ function lotgdsort($a, $b)
 
 tlschema('logdnet');
 
-$op = httpget('op');
+$op = \LotgdHttp::getQuery('op');
 
 if ('' == $op)
 {
-    $addy = httpget('addy');
-    $desc = httpget('desc');
-    $vers = httpget('version');
-    $admin = httpget('admin');
-    $count = httpget('c') * 1;
-    $lang = httpget('l');
+    $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
+
+    $addy = (string) \LotgdHttp::getQuery('addy');
+    $desc = (string) \LotgdHttp::getQuery('desc');
+    $vers = (string) \LotgdHttp::getQuery('version');
+    $admin = (string) \LotgdHttp::getQuery('admin');
+    $count = (int) \LotgdHttp::getQuery('c') * 1;
+    $lang = (string) \LotgdHttp::getQuery('l');
 
     $vers = $vers ?: 'Unknown';
 
@@ -98,59 +99,47 @@ if ('' == $op)
         $admin = 'unknown';
     }
 
-    // See if we know this server.
-    $sql = 'SELECT lastupdate,serverid,lastping,recentips FROM '.DB::prefix('logdnet')." WHERE address='".DB::quoteValue($addy)."'";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-
     // Clean up the desc
-    $desc = logdnet_sanitize($desc);
-    $desc = soap($desc);
-    // Limit descs to 75 characters.
-    if (strlen($desc) > 75)
+    $desc = \LotgdSanitize::logdnetSanitize($desc ?: '');
+    $desc = $censor->filter($desc);
+
+    $data = [
+        'address' => $addy,
+        'lang' => $lang,
+        'count' => $count,
+        'recentips' => \LotgdHttp::getServer('REMOTE_ADDR'),
+        'description' => $desc,
+        'version' => $vers,
+        'admin' => $admin,
+        'lastupdate' => new \DateTime('now'),
+        'lastping' => new \DateTime('now')
+    ];
+
+    $repository = \Doctrine::getRepository('LotgdCore:Logdnet');
+    $entity = $repository->findOneByAddress($addy);
+    $newRow = (! $entity);
+    $entity = $repository->hydrateEntity($data, $entity);
+
+    $dateUpdate = new \DateTime('now');
+    $dateUpdate->sub(new \DateInterval('PT1M'));
+
+    // Only one update per minute allowed.
+    if (! $newRow && $entity->getLastping() < $dateUpdate)
     {
-        $desc = substr($desc, 0, 75);
+        $entity->setPriority($entity->getPriority() + 1);
     }
 
-    $date = date('Y-m-d H:i:s');
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
 
-    if (DB::num_rows($result) > 0)
-    {
-        // This is an already known server.
+    //-- Deleted older server
+    $repository->deletedOlderServer();
 
-        // TEMP hack for IPs
-        $ips = $_SERVER['REMOTE_ADDR'];
-        // Only one update per minute allowed.
-        if (strtotime($row['lastping']) < strtotime('-1 minutes'))
-        {
-            // Increase the popularity of this server
-            $sql = 'UPDATE '.DB::prefix('logdnet')." SET lang='$lang',count='$count',recentips='$ips',priority=priority+1,description='$desc',version='$vers',admin='$admin',lastupdate='$date',lastping='$date' WHERE serverid={$row['serverid']}";
-            DB::query($sql);
-        }
-    }
-    else
-    {
-        // This is a new server, so add it and give it a small priority boost.
-        $sql = 'INSERT INTO '.DB::prefix('logdnet')." (address,description,version,admin,priority,lastupdate,lastping,count,recentips,lang) VALUES ('$addy','$desc','$vers','$admin',10,'$date','$date','$count','{$_SERVER['REMOTE_ADDR']}','$lang')";
-        $result = DB::query($sql);
-    }
-
-    // Do these next two things whether we've added a new server or
-    // updated an old one
-
-    // Delete servers older than a week
-    $sql = 'DELETE FROM '.DB::prefix('logdnet')." WHERE lastping < '".date('Y-m-d H:i:s', strtotime('-2 weeks'))."'";
-    DB::query($sql);
-
-    // Degrade the popularity of any server which hasn't been updated in the
-    // past 5 minutes by 1%.  This means that unpopular servers will fall
-    // toward the bottom of the list.
-    $since = date('Y-m-d H:i:s', strtotime('-5 minutes'));
-    $sql = 'UPDATE '.DB::prefix('logdnet')." SET priority=priority*0.99,lastupdate='".date('Y-m-d H:i:s')."' WHERE lastupdate < '$since'";
-    DB::query($sql);
+    //-- Degrade the popularity of any server which hasn't been updated in the past 5 minutes by 1%.
+    $repository->degradePopularity();
 
     //Now, if we're using version 2 of LoGDnet, we'll return the appropriate code.
-    $v = httpget('v');
+    $v = \LotgdHttp::getQuery('v');
 
     if ((int) $v >= 2)
     {
@@ -182,33 +171,26 @@ elseif ('net' == $op)
 
     // I'm going to do a slightly niftier sort manually in a bit which always
     // pops the most recent 'official' versions to the top of the list.
-    $sql = 'SELECT address,description,version,admin,priority FROM '.DB::prefix('logdnet')." WHERE lastping > '".date('Y-m-d H:i:s', strtotime('-7 days'))."'";
-    $result = DB::query($sql);
-    $rows = [];
-    $number = DB::num_rows($result);
+    $repository = \Doctrine::getRepository('LotgdCore:Logdnet');
+    $entities = $repository->getNetServerList();
 
-    for ($i = 0; $i < $number; $i++)
-    {
-        $rows[] = DB::fetch_assoc($result);
-    }
-    $rows = apply_logdnet_bans($rows);
-    usort($rows, 'lotgdsort');
+    $entities = apply_logdnet_bans($entities);
+    usort($entities, 'lotgdsort');
 
+    bdump($entities);
     // Okay, they are now sorted, so output them
-    for ($i = 0; $i < count($rows); $i++)
+    foreach ($entities as $value)
     {
-        $row = serialize($rows[$i]);
-        echo $row."\n";
+        $entity = serialize($value);
+        echo $entity."\n";
     }
 }
 else
 {
-    require_once 'lib/pullurl.php';
-
     page_header('title', [], 'page-logdnet');
 
-    LotgdNavigation::addHeader('common.category.login');
-    LotgdNavigation::addNav('common.nav.login', 'index.php');
+    \LotgdNavigation::addHeader('common.category.login');
+    \LotgdNavigation::addNav('common.nav.login', 'index.php');
 
     $params = ['servers' => []];
 
@@ -219,68 +201,59 @@ else
         $u = $u.'/';
         savesetting('logdnetserver', $u);
     }
-    $servers = pullurl("${u}logdnet.php?op=net") ?: [];
-
-    bdump($servers);
+    $servers = file("${u}logdnet.php?op=net") ?: [];
 
     $filterChain = new Filter\FilterChain();
     $filterChain
         ->attach(new Filter\StringTrim())
         ->attach(new Filter\StripTags())
         ->attach(new Filter\StripNewlines())
-        // ->attach(new Filter\HtmlEntities())
     ;
 
-    while (list($key, $val) = each($servers))
+    foreach ($servers as $key => $val)
     {
         $row = unserialize($val);
 
         // If we aren't given an address, continue on.
         if ('http://' != substr($row['address'], 0, 7) && 'https://' != substr($row['address'], 0, 8))
         {
+            unset($servers[$key]);
+
             continue;
         }
 
-        $row['address'] = htmlentities($row['address'], ENT_COMPAT, getsetting('charset', 'UTF-8'));
+        $row['description'] = iconv(mb_detect_encoding($row['description'], 'auto'), 'UTF-8//IGNORE', $row['description']);
 
-        // Give undescribed servers a boring descriptionn
+        //-- Filter description
         $row['description'] = $filterChain->filter(stripslashes($row['description']));
 
         // Clean up the desc
-        $row['description'] = soap(logdnet_sanitize($row['description']));
-        // Limit descs to 75 characters.
-        if (strlen($row['description']) > 75)
-        {
-            $row['description'] = substr($row['description'], 0, 75);
-        }
+        $row['description'] = \LotgdSanitize::logdnetSanitize($row['description'] ?: '');
 
-        $row['description'] = str_replace('`&amp;', '`&', $row['description']);
-
-        // Correct for old logdnet servers
-        $row['version'] = $row['version'] ?: 'Unknown';
-
-        $params['servers'][] = $row;
+        $servers[$key] = $row;
     }
 
-    rawoutput(LotgdTheme::renderThemeTemplate('page/logdnet.twig', $params));
+    bdump($servers, 'Server list found');
+    $params['servers'] = $servers;
+
+    rawoutput(\LotgdTheme::renderThemeTemplate('page/logdnet.twig', $params));
 
     page_footer();
 }
 
 function apply_logdnet_bans($logdnet)
 {
-    $sql = 'SELECT * FROM '.DB::prefix('logdnetbans');
-    $result = DB::query($sql, 'logdnetbans');
+    $repository = \Doctrine::getRepository('LotgdCore:Logdnetbans');
+    $entities = $repository->findAll();
+    $entities = $repository->extractEntity($entities);
 
-    while ($row = DB::fetch_assoc($result))
+    foreach ($entities as $value)
     {
-        reset($logdnet);
-
-        while (list($i, $net) = each($logdnet))
+        foreach($logdnet as $key => $net)
         {
-            if (preg_match("/{$row['banvalue']}/i", $net[$row['bantype']]))
+            if (preg_match("/{$value['banvalue']}/i", $net[$value['bantype']]))
             {
-                unset($logdnet[$i]);
+                unset($logdnet[$key]);
             }
         }
     }
