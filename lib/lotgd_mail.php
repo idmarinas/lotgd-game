@@ -7,7 +7,7 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
 {
     require_once 'lib/nltoappon.php';
 
-    $message = full_sanitize(str_replace('`n', '<br>', nltoappon($message)));
+    $message = \LotgdSanitize::fullSanitize(str_replace('`n', '<br>', nltoappon($message)));
     $headers = [];
 
     //-- Add a "From" header if not added
