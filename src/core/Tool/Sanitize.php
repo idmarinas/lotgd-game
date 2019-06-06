@@ -206,6 +206,6 @@ class Sanitize
         // that we're not replacing in with the ` mark.
         $string = preg_replace("/[`´](?=[^0{$colors}bicn])/u", chr(1).chr(1), $string);
 
-        return str_replace(chr(1), '`', $string);
+        return str_replace(chr(1).chr(1), '`', $string);
     }
 }
