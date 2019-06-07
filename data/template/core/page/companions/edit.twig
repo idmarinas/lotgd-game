@@ -29,7 +29,7 @@
             <tr>
                 <td class="collapsing">{{ 'section.edit.form.table.tbody.location'|t|colorize }}</td>
                 <td>
-                    <select name="companion[companionlocation]" class="ui fluid dropdown">
+                    <select name="companion[companionlocation]" class="ui fluid lotgd dropdown">
                         {% for loc, name in locations %}
                             <option value="{{ loc }}" {{ companion.companionlocation == loc ? 'selected' : '' }}>{{ name[0]|tl(name[1], name[2])|uncolorize }}</option>
                         {% endfor %}
@@ -111,7 +111,7 @@
             <tr>
                 <td class="collapsing">{{ 'section.edit.form.table.tbody.healer'|t|colorize }}</td>
                 <td>
-                    <select class="ui dropdown" name='companion[abilities][heal]'>
+                    <select class="ui lotgd dropdown" name='companion[abilities][heal]'>
                         {% for i in 0..30 %}
                             <option value="{{ i }}" {{ companion.abilities.heal == i ? ' selected' : '' }}>{{ i }}</option>
                         {% endfor %}
@@ -122,7 +122,7 @@
             <tr>
                 <td class="collapsing">{{ 'section.edit.form.table.tbody.magician'|t|colorize }}</td>
                 <td>
-                    <select class="ui dropdown" name='companion[abilities][magic]'>
+                    <select class="ui lotgd dropdown" name='companion[abilities][magic]'>
                         {% for i in 0..30 %}
                             <option value="{{ i }}" {{ companion.abilities.magic == i ? ' selected' : '' }}>{{ i }}</option>
                         {% endfor %}

@@ -15,7 +15,7 @@
                         <input id="upgrade" type="radio" value="upgrade" name="type" {{ upgrade ? 'checked' : '' }}>
                         <label for="upgrade">{{ 'stage7.form.label.upgrade'|t|colorize }}</label>
                     </div>
-                    <select name="version" id="version" class="ui search dropdown">
+                    <select name="version" id="version" class="ui search lotgd dropdown">
                         {% for name, key in lotgdVersions %}
                             <option value="{{ key }}" {{ actualVersion == key ? 'selected' : '' }} >{{ name }}</option>
                         {% endfor %}

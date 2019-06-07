@@ -23,7 +23,7 @@
         <input type="hidden" name="amount" value="{{ amount }}">
         <div class="field">
             <label for="to">{{ 'transfer2.form.results'|t({ 'amount': amount })|colorize }}</label>
-            <select name="to" id="to" class="ui search selection dropdown">
+            <select name="to" id="to" class="ui search selection lotgd dropdown">
                 {% for char in characters %}
                     <option value="{{ char.id }}">{{ char.name|uncolorize }}</option>
                 {% endfor %}

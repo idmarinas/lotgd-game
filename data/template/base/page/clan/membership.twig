@@ -48,7 +48,7 @@
                         {% elseif constant('CLAN_FOUNDER') != member.clanrank %}
                             <form action="{{ 'clan.php?op=membership'|lotgd_url }}" method="POST">
                                 <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
-                                <select class='ui combo dropdown' name='setrank'>
+                                <select class='ui combo lotgd dropdown' name='setrank'>
                                     {% for key, rank in validRanks if key <= user.clanrank and constant('CLAN_FOUNDER') != key %}
                                         <option value="{{ key }}" {{ member.clanrank == key ? 'selected' : '' }}>{{ rank|t|uncolorize }}</option>
                                     {% endfor %}
