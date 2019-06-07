@@ -1,3 +1,6 @@
+/**
+ * All auto-initialize method of Semantic Ui have a class tab "lotgd"
+ */
 define([
     '../external/jquery'
 ], function (jQuery)
@@ -6,7 +9,7 @@ define([
 
     jQuery(function ()
     {
-        jQuery('.ui.dropdown').dropdown()
+        jQuery('.ui.lotgd.dropdown').dropdown()
         jQuery('.ui.popup.lotgd.form .item').tab({
             onVisible: function (tabPath)
             {
@@ -15,16 +18,16 @@ define([
             }
         })
         jQuery('.ui.lotgd.tabular.menu .item').tab()
-        jQuery('.ui.checkbox').checkbox()
+        jQuery('.ui.lotgd.checkbox').checkbox()
         jQuery('.ui.menu.form.lotgd .browse').popup({
             inline: true,
             on: 'click',
             hoverable: true,
             position: 'bottom left'
         })
-        jQuery('.ui.tooltip').popup()
-        jQuery('.ui.progress').progress({ precision: 10 })
-        jQuery('.ui.message i.close').on('click', (event) =>
+        jQuery('.ui.lotgd.tooltip').popup()
+        jQuery('.ui.lotgd.progress').progress({ precision: 10 })
+        jQuery('.ui.lotgd.message i.close').on('click', (event) =>
         {
             jQuery(event.target).closest(jQuery(event.target).parent('.message')).transition('fade')
         })
