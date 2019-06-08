@@ -122,13 +122,13 @@ trait Commentary
         //-- Is a message of the game
         if ('GAME' == strtoupper($comment['command']))
         {
-            return \sprintf('<span class="ui tooltip" data-content="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
+            return \sprintf('<span data-tooltip="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
                 $status['game']
             );
         }
         elseif ($session['user']['acctid'] == $comment['author'])
         {
-            return \sprintf('<span class="ui tooltip" data-content="%1$s"><i class="user icon" aria-label="%1$s"></i></span>',
+            return \sprintf('<span data-tooltip="%1$s"><i class="user icon" aria-label="%1$s"></i></span>',
                 $status['you']
             );
         }
@@ -169,7 +169,7 @@ trait Commentary
             ];
         }
 
-        return \sprintf('<span class="ui tooltip" data-content="%3$s"><i class="icons" aria-label="%3$s">
+        return \sprintf('<span data-tooltip="%3$s"><i class="icons" aria-label="%3$s">
                 <i class="%1$s icon" aria-hidden="true"></i>
                 <i class="%2$s icon" aria-hidden="true"></i>
             </i></span>',

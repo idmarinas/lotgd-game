@@ -10,14 +10,14 @@
     <div class="content">
         <div class="text">
             {% if SU_EDIT_COMMENTS %}
-                <div class="ui toggle checkbox tooltip" data-content="{{ 'form.toggle.hide'|tl(null, 'app-commentary')|uncolorize }}">
+                <div class="ui toggle lotgd checkbox" data-tooltip="{{ 'form.toggle.hide'|tl(null, 'app-commentary')|uncolorize }}">
                     <input type="hidden" name="hideComment[{{ comment.id }}]" value="0">
                     <input type="checkbox" name="hideComment[{{ comment.id }}]" {{ comment.hidden ? 'checked' : '' }} value="1">
                 </div>
             {% endif %}
             {{ display_status_online_player(comment) }}
-            {{ comment.postdate > user.recentcomments ? '<span class="ui tooltip" data-content="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
-            <span class="{{ comment.hidden ? 'ui tooltip' : '' }}" data-content="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
+            {{ comment.postdate > user.recentcomments ? '<span data-tooltip="%1$s"><i class="caret right icon" aria-label="%1$s"></i></span>'|format(recent) : '' }}
+            <span {{ comment.hidden ? 'data-tooltip' : '' }}="{{ comment.hidden ? comment.hiddenComment|uncolorize : '' }}">
                 {% if comment.command == 'game' %}
                     {# It's a message from the game, no associated author #}
                     <span class="colDkMagenta"><em><strong>{{ comment.comment|uncolorize|trim|capitalize }}</strong></em></span>
