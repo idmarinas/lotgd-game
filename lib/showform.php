@@ -211,7 +211,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 return 'None available';
             }
             natcasesort($skins); //sort them in natural order
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             foreach ($skins as $skin)
             {
@@ -330,7 +330,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             // we should really try to avoid an infinite loop here if
             // they define a time string which equates to 0 :/
             $cur = $row[$key];
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             if ($cur && $cur < date('Y-m-d H:i:s', $start))
             {
@@ -361,7 +361,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             {
                 $step = 1;
             }
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             if ($min < $max && ($max - $min) / $step > 300)
             {
@@ -385,7 +385,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             {
                 $step = 1;
             }
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
             $val = round((float) ($row[$key] ?? 0), 2);
 
             for ($j = $min; $j <= $max; $j = round($j + $step, 2))
@@ -465,7 +465,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 rawoutput(tlbutton_pop());
             }
             tlschema();
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             foreach ($vals as $k => $v)
             {
@@ -484,7 +484,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             list($k, $v) = each($info);
             list($k, $v) = each($info);
 
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             while (list($k, $v) = each($info))
             {
