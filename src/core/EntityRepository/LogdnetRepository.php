@@ -21,9 +21,9 @@ class LogdnetRepository extends DoctrineRepository
     /**
      * Delete servers older than two weeks.
      *
-     * @return bool
+     * @return int
      */
-    public function deletedOlderServer(): bool
+    public function deletedOlderServer(): int
     {
         $date = new \DateTime('now');
         $date->sub(new \DateInterval('P2W'));
@@ -43,7 +43,7 @@ class LogdnetRepository extends DoctrineRepository
         {
             Debugger::log($th);
 
-            return false;
+            return 0;
         }
     }
 
