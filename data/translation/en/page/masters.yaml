@@ -1,0 +1,48 @@
+title: 'Masters Editor'
+
+section:
+    default:
+        table:
+            thead:
+                ops: Ops
+                level: Level
+                name: Name
+                weapon: Weapon
+                win: 'Win against Master'
+                lose: 'Lose to Master'
+            tbody:
+                no.found: '`$Not found masters.`0'
+                confirm.del: 'Are you sure you wish to delete this master. '
+                del: 'Delete master'
+                edit: 'Edit master'
+        paragraph:
+            - '`n`#You can change the names, weapons and messages of all of the Training Masters.'
+            - '`n`3You can add masters up to the maximum level where the dragon appears in the forest and which can be set in your game settings -> game setup.'
+            - 'You cannot assign higher masters, but if you choose not to make one master for each level, the earlier master will appear again to the player to test him.`0`n'
+            - 'It is suggested, that you do not toy around with this, unless you know what you are doing.`0`n'
+    edit:
+        form:
+            level: "`^Master's level`0"
+            name: "`^Master's name`0"
+            weapon: "`^Master's weapon`0"
+            lose: "`^Master's speech when player wins`0"
+            win: "`^Master's speech when player loses`0"
+            button:
+                submit: Submit
+        paragraph:
+            - '`#The following codes are supported in both the win and lose speeches (case matters):`n'
+            - 'The following codes are supported (case matters):`n'
+            - "{goodguyname}	= The player's name (also can be specified as {goodguy}`n"
+            - "{weaponname}	    = The player's weapon (also can be specified as {weapon}`n"
+            - "{armorname}	    = The player's armor (also can be specified as {armor}`n"
+            - '{himher}	        = Subjective pronoun for the player (him her)`n'
+            - '{hisher}	        = Possessive pronoun for the player (his her)`n'
+            - '{heshe}		    = Objective pronoun for the player (he she)`n'
+            - "{badguyname}	    = The monster's name (also can be specified as {badguy}`n"
+            - "{badguyweapon}	= The monster's weapon (also can be specified as {creatureweapon}`n"
+
+flash.message:
+    del:
+        success: 'Master deleted.'
+        fail: "The master couldn't be erased."
+    save.success: '`^Master "{name}" updated.`0'

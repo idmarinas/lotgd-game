@@ -1,0 +1,34 @@
+{% translate_default_domain textDomain %}
+
+<form action="{{ ('masters.php?op=save&master_id=' ~ masterId)|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="creaturelevel">{{ 'section.edit.form.level'|t|colorize }}</label>
+        <select class="ui lotgd dropdown" name="creaturelevel" id="creaturelevel">
+            {% for level in 1..maxLevel %}
+                <option value="{{ level }}" {{ level == master.creaturelevel ? 'selected' : '' }}>{{ level }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="field">
+        <label for="creaturename">{{ 'section.edit.form.name'|t|colorize }}</label>
+        <input type="text" name="creaturename" id="creaturename" value="{{ master.creaturename }}">
+    </div>
+    <div class="field">
+        <label for="creatureweapon">{{ 'section.edit.form.weapon'|t|colorize }}</label>
+        <input type="text" name="creatureweapon" id="creatureweapon" value="{{ master.creatureweapon }}">
+    </div>
+    <div class="field">
+        <label for="creaturelose">{{ 'section.edit.form.lose'|t|colorize }}</label>
+        <textarea name="creaturelose" id="creaturelose" cols="30" rows="10">{{ master.creaturelose }}</textarea>
+    </div>
+    <div class="field">
+        <label for="creaturewin">{{ 'section.edit.form.win'|t|colorize }}</label>
+        <textarea name="creaturewin" id="creaturewin" cols="30" rows="10">{{ master.creaturewin }}</textarea>
+    </div>
+    <div class="field">
+        <button type="submit" class="ui button">{{ 'section.edit.form.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>
+<br>
+<br>
+{{ 'section.edit.paragraph'|t|colorize }}
