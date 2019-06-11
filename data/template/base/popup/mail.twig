@@ -1,0 +1,15 @@
+{% translate_default_domain textDomain %}
+
+{% set result = modulehook('mailfunctions', mailButtons) %}
+
+<div class="center aligned">
+    <div class="ui buttons">
+        {% for message in result %}
+            <a class="ui {{ message[1].attributes.class }} button" href="{{ message[1].attributes.href }}">{{ message[0]|tl(message[1], message[2])|colorize }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<br>
+
+{{ include_theme('popup/mail/' ~ tpl|default('default') ~ '.twig') }}

@@ -1,0 +1,159 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.default.subtitle'|t|colorize }}
+
+{% for msg in message %}
+{{ msg[0]|t(msg[1])|colorize }}
+{% endfor %}
+<br>
+<br>
+{% if mails|length %}
+    {% set statusAltText = {
+        'online': 'section.default.table.tbody.status.online'|t|uncolorize,
+        'offline': 'section.default.table.tbody.status.offline'|t|uncolorize
+    } %}
+    {% set newMsg = 'section.default.table.tbody.msg.new'|t|uncolorize %}
+    {% set oldMsg = 'section.default.table.tbody.msg.old'|t|uncolorize %}
+
+    {% set arrow = sortDirection ? '<i class="sort descending icon"></i>' : '<i class="sort ascending icon"></i>' %}
+
+    <form action="mail.php?op=process" method="POST">
+        <table class="ui very compact unstackable table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        <a href="{{ 'mail.php?sortorder=subject&direction=' ~ ('subject' == sortOrder ? newDirection : sortDirection) }}">
+                            {{ 'subject' == sortOrder ? arrow : '' }}
+                            {{ 'section.default.table.thead.subject'|t|uncolorize }}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ 'mail.php?sortorder=name&direction=' ~ ('name' ==sortOrder ? newDirection : sortDirection) }}">
+                                {{ 'name' == sortOrder ? arrow : '' }}
+                            {{ 'section.default.table.thead.from'|t|uncolorize }}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="{{ 'mail.php?sortorder=date&direction=' ~ ('date' ==sortOrder ? newDirection : sortDirection) }}">
+                                {{ 'date' == sortOrder ? arrow : '' }}
+                            {{ 'section.default.table.thead.date'|t|uncolorize }}
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mail in mails %}
+                    <tr id="mail-row-{{ mail.messageid }}">
+                        <td class="collapsing">
+                            <div class="ui toggle lotgd checkbox">
+                                <input type="checkbox" data-sender="{{ mail.msgfrom }}" name="msg[]" value="{{ mail.messageid }}">
+                            </div>
+                            <button type="button" class="ui mini red icon delete button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ mail.messageid }}', '{{ textDomain }}'); $(this).addClass('loading disabled');">
+                                <i class="trash icon"></i>
+                            </button>
+                        </td>
+                        <td>
+                            {% if 0 == mail.msgfrom %}
+                                {% set subject = mail.subject|stripslashes|unserialize %}
+                            {% else %}
+                                {% set subject = mail.subject %}
+                            {% endif %}
+
+                            <a href="{{ ('mail.php?op=read&mail_id=' ~ mail.messageid) }}">
+                                <img src="images/{{ mail.seen ? 'old' : 'new' }}scroll.GIF" width="16px" height="16px" alt="{{ mail.seen ? oldMsg : newMsg }}">
+                                {% if subject is array %}
+                                    {{ subject[0]|tl(subject[1], subject[2])|colorize }}
+                                {% elseif not subject %}
+                                    {{ mail.subject|default('section.default.table.tbody.no.subject'|t)|e('html')|colorize }}
+                                {% else %}
+                                    {{ subject|e('html')|colorize }}
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td class="collapsing">
+                            {% if 0 == mail.msgfrom %}
+                                {{ 'section.default.table.tbody.from.system'|t|colorize }}
+                            {% elseif mail.name %}
+                                {% set statusImage = mail.loggedin ? 'online' : 'offline' %}
+
+                                <img src="images/{{ statusImage }}.gif" alt="{{ statusAltText[statusImage] }}">
+                                {{ mail.name|e('html')|colorize }}
+                            {% else %}
+                                {{ 'section.default.table.tbody.from.deleted.user'|t|colorize }}
+                            {% endif %}
+                        </td>
+                        <td class="collapsing">{{ '{date,date} {date,time}'|tmf({ 'date': mail.sent }) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="field">
+            <div class="ui centered grid">
+                <div class="five wide column">
+                    <div class="ui fluid floating labeled icon dropdown button" id="check_name_select">
+                        <i class="user icon"></i>
+                        <span class="text">{{ 'section.default.form.dropdown.senders.name'|t|colorize }}</span>
+                        <div class="menu">
+                            <div class="header">{{ 'section.default.form.dropdown.senders.label'|t|colorize }}</div>
+                            <div class="divider"></div>
+                            {% for sender in senders %}
+                                <div class="item" data-value="{{ sender.msgfrom }}">
+                                    <span class="description">{{ sender.count }}</span>
+                                    <span class="text">
+                                        {% if 0 == sender.msgfrom %}
+                                            {{ 'section.default.table.tbody.from.system'|t|uncolorize }}
+                                        {% elseif sender.name %}
+                                            {{ sender.name|e('html')|uncolorize }}
+                                        {% else %}
+                                            ({{ sender.msgfrom }}) {{ 'section.default.table.tbody.from.deleted.user'|t|uncolorize }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <button type="button" class="ui toggle check fluid button">{{ 'section.default.form.button.check.all'|t|uncolorize }}</button>
+                </div>
+                <div class="four wide column">
+                    <button class="ui red fluid delbulk button" type="button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteBulkMail($('form').form().serialize(), '{{ textDomain }}'); $(this).addClass('loading disabled'); $('.ui.delete.button, .toggle.lotgd.checkbox, #check_name_select, .ui.check.toggle.button').addClass('disabled');">{{ 'section.default.form.button.submit'|t|uncolorize }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% else %}
+    {{ 'section.default.no.mail'|t|colorize }}
+{% endif %}
+
+{{ 'section.default.note'|t({ 'inboxCount': inboxCount , 'inboxLimit': inboxLimit, 'oldMail': oldMail })|colorize }}
+
+<script>
+    $('#check_name_select')
+    .dropdown({
+        onChange: function (value)
+        {
+            let elem = $(`[data-sender="${value}"]`)
+
+            elem.prop('checked', ! elem.prop('checked'))
+        }
+    })
+
+    $('.ui.toggle.button.check').state({
+        text: {
+            inactive : '{{ "section.default.form.button.check.all"|t|uncolorize }}',
+            active   : '{{ "section.default.form.button.check.none"|t|uncolorize }}'
+        }
+    })
+    .on('click', function () {
+        if ($('.ui.toggle.button.check').state('is active'))
+        {
+            $('input[type="checkbox"]').prop('checked', true)
+        }
+        else
+        {
+            $('input[type="checkbox"]').prop('checked', false)
+        }
+    })
+</script>

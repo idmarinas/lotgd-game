@@ -1,0 +1,15 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.address.paragraph'|t|colorize }}
+<form action="mail.php?op=write" method="POST" class="ui form">
+    <div class="inline field">
+        <label for="to">{{ ('section.address.form.' ~ (mailId ? 'forward' : 'to') ~ '.label')|t|colorize }}</label>
+        <div class="ui action input">
+            <input type="text" name="to" id="to" value="">
+            <button class="ui button" type="submit">{{ 'section.address.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </div>
+    {% if mailId %}
+        <input type="hidden" name="forward_to" value="{{ mailId }}">
+    {% endif %}
+</form>

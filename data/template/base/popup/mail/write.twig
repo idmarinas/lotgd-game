@@ -1,0 +1,93 @@
+{% translate_default_domain textDomain %}
+
+{% if row.acctid or characters|length %}
+    <form action="mail.php?op=send" method="POST" class="ui form">
+        <input type="hidden" name="return_to" value="{{ msgId }}">
+        <div class="inline field">
+            <label for="to">{{ 'section.write.form.to'|t|colorize }}</label>
+            {% if characters|length %}
+                <select name="to" id="to" class="ui lotgd dropdown" onchange="check_su_warning()">
+                    {% for char in characters %}
+                        <option value="{{ char.acctid }}">{{ char.name|uncolorize }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <input type="hidden" name="to" id="to" value="{{ row.acctid }}">
+                <div class="input">{{ row.name|colorize }}</div>
+            {% endif %}
+        </div>
+        <div class="field">
+            <label for="subject">{{ 'section.write.form.subject'|t|colorize }}</label>
+            <input type="text" name="subject" id="subject" value="{{ row.subject|stripslashes|e('html') }}">
+        </div>
+        <div class="ui warning message" id="warning" style="visibility: hidden; display: none;">
+            {{ 'section.write.mail.notice'|t|uncolorize }}
+        </div>
+        <div class="field">
+            <label for="body">{{ 'section.write.form.body'|t|colorize }}</label>
+            <span id="sizemsg"></span>
+            <textarea name="body" id="body" cols="30" rows="10" onkeyup="sizeCount(this)">
+                {{ row.body|stripslashes|replace({ '`n': '\n' })|e('html') }}
+            </textarea>
+        </div>
+        <div class="field">
+            <button class="ui button" type="submit">{{ 'section.write.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </form>
+{% else %}
+    {{ 'section.write.mail.no.recipents'|t|colorize }}
+
+    {{ include_theme('popup/mail/address.twig') }}
+{% endif %}
+
+<script type='text/javascript'>
+    var charactersLeft = '{{ "section.write.form.characters.left"|t|colorize|e("js") }}'
+    var charactersOver = '{{ "section.write.form.characters.over"|t|colorize|e("js") }}'
+    var superusers = new Array()
+
+    {% for val in superusers %}
+        superusers[{{ val }}] = true
+    {% endfor %}
+
+    var maxlen = '{{ mailSizeLimit }}'
+
+    function sizeCount(box)
+    {
+        if (box == null)
+        {
+            return
+        }
+
+        var len = box.value.length;
+        var msg = '';
+        msg = charactersOver.replace('{size}', maxlen).replace('{over}', (len-maxlen))
+
+        $('button[type="submit"]').attr('disabled', true)
+
+        if (len <= maxlen)
+        {
+            msg = charactersLeft.replace('{size}', maxlen).replace('{left}', (maxlen-len))
+            $('button[type="submit"]').attr('disabled', false)
+        }
+
+        document.getElementById('sizemsg').innerHTML = msg
+    }
+    sizeCount(document.getElementById('body'))
+
+    function check_su_warning()
+    {
+        var to = document.getElementById('to')
+        var warning = document.getElementById('warning')
+        if (superusers[to.value])
+        {
+            warning.style.visibility = 'visible'
+            warning.style.display = 'block'
+        }
+        else
+        {
+            warning.style.visibility = 'hidden'
+            warning.style.display = 'none'
+        }
+    }
+    check_su_warning()
+</script>

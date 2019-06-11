@@ -1,0 +1,78 @@
+{% translate_default_domain textDomain %}
+
+{% set statusAltText = {
+    'online': 'section.read.card.user.status.online'|t|uncolorize,
+    'offline': 'section.read.card.user.status.offline'|t|uncolorize
+} %}
+
+<div class="ui fluid card">
+    <div id="mail-read-buttons" class="ui top attached primary buttons">
+        <a class="ui {{ message.messageid and message.msgfrom ? '' : 'disabled' }} button" href="{{ message.messageid ? 'mail.php?op=write&reply_to=' ~ message.messageid : '' }}">
+            {{ 'section.read.button.top.reply'|t|uncolorize }}
+        </a>
+        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}', '{{ textDomain }}'); $(this).addClass('loading disabled');">
+            {{ 'section.read.button.top.del'|t|uncolorize }}
+        </a>
+        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" href="{{ message.messageid ? 'mail.php?op=unread&mail_id=' ~ message.messageid : '' }}">
+            {{ 'section.read.button.top.unread'|t|uncolorize }}
+        </a>
+        <a class="ui {{ message.msgfrom ? '' : 'disabled' }} button" href="{{ message.msgfrom ? 'petition.php?problem=' ~ problem|e('url') ~ '&abuse=yes&abuseplayer=' ~ message.msgfrom : '' }}">
+            {{ 'section.read.button.top.report'|t|uncolorize }}
+        </a>
+    </div>
+    <div class="content">
+        {% if not message.seen and message %}
+            <span class="ui teal ribbon label">{{ 'section.read.card.new'|t|uncolorize }}</span>
+        {% endif %}
+        <div class="right floated meta">{{ 'section.read.card.sent'|t({ 'date': message.sent })|colorize }}</div>
+
+        {% if 0 == message.msgfrom %}
+            {% set senderName = 'section.read.card.from.user.system'|t|colorize %}
+        {% elseif sender.name %}
+            {% set statusImage = sender.acct.loggedin ? 'online' : 'offline' %}
+
+            {% set senderName = '<img src="images/' ~ statusImage ~ '.gif" alt="' ~ statusAltText[statusImage] ~ '">' ~ sender.name|e('html')|colorize %}
+        {% else %}
+            {% set senderName = 'section.read.card.from.user.deleted.user'|t|colorize %}
+        {% endif %}
+
+        {{ 'section.read.card.from.label'|t({ 'name': senderName })|colorize }}
+    </div>
+    <div class="content">
+        {% if 0 == message.msgfrom %}
+            {% set subject = message.subject|stripslashes|unserialize %}
+            {% set body = message.body|stripslashes|unserialize %}
+        {% else %}
+            {% set subject = message.subject %}
+        {% endif %}
+
+        <span class="ui header">
+            {% if not message %}
+                {{'section.read.card.no.message.header'|t|colorize }}
+            {% elseif subject is array %}
+                {{ subject[0]|tl(subject[1], subject[2])|colorize }}
+            {% elseif not subject %}
+                {{ message.subject|default('section.read.card.no.subject'|t)|e('html')|colorize }}
+            {% else %}
+                {{ subject|e('html')|colorize }}
+            {% endif %}
+        </span>
+        <p>
+            {% if not message %}
+                {{'section.read.card.no.message.body'|t|colorize }}
+            {% elseif body is array %}
+                {{ body[0]|tl(body[1], body[2])|colorize }}
+            {% else %}
+                {{ message.body|e('html')|colorize }}
+            {% endif %}
+        </p>
+    </div>
+    <div class="ui bottom attached primary buttons">
+        <a class="ui {{ paginator.previous ? '' : 'disabled' }} button" href="{{ paginator.previous ? 'mail.php?op=read&mail_id=' ~ paginator.previous : '' }}">
+            {{ 'section.read.card.paginator.prev'|t|uncolorize }}
+        </a>
+        <a class="ui {{ paginator.next ? '' : 'disabled' }} button" href="{{ paginator.next ? 'mail.php?op=read&mail_id=' ~ paginator.next : '' }}">
+            {{ 'section.read.card.paginator.next'|t|uncolorize }}
+        </a>
+    </div>
+</div>

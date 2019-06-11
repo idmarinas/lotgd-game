@@ -1,110 +1,243 @@
 <?php
 
-// translator ready
-// addnews ready
-// mail ready
 define('OVERRIDE_FORCED_NAV', true);
+
 require_once 'common.php';
 
 tlschema('mail');
+
+// Don't hook on to this text for your standard modules please, use "mail" instead.
+// This hook is specifically to allow modules that do other mails to create ambience.
+$result = modulehook('mail-text-domain', ['textDomain' => 'popup-mail']);
+$textDomain = $result['textDomain'];
+//-- Note: this page not have nav menu
+unset($result);
+
 $args = modulehook('header-mail', []);
 
-$superusermessage = getsetting('superuseryommessage', "Asking an admin for gems, gold, weapons, armor, or anything else which you have not earned will not be honored.  If you are experiencing problems with the game, please use the 'Petition for Help' link instead of contacting an admin directly.");
+$op = (string) \LotgdHttp::getQuery('op');
+$mailId = (int) \LotgdHttp::getQuery('mail_id');
 
-$op = httpget('op');
-$id = (int) httpget('id');
+$repository = \Doctrine::getRepository('LotgdCore:Mail');
 
-if ('del' == $op)
+if ('unread' == $op)
 {
-    $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
-    DB::query($sql);
-    invalidatedatacache("mail-{$session['user']['acctid']}");
-    header('Location: mail.php');
+    $unread = $repository->findOneBy([
+        'messageid' => $mailId,
+        'msgto' => $session['user']['acctid']
+    ]);
 
-    exit();
-}
-elseif ('process' == $op)
-{
-    $msg = httppost('msg');
-
-    if (! is_array($msg) || count($msg) < 1)
+    if ($unread)
     {
-        $session['message'] = '`n`n`$`bYou cannot delete zero messages!  What does this mean?  You pressed "Delete Checked" but there are no messages checked!  What sort of world is this that people press buttons that have no meaning?!?´b`0';
-        header('Location: mail.php');
+        //-- Mark as unread
+        $unread->setSeen(false);
 
-        exit();
-    }
-    else
-    {
-        $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgto='".$session['user']['acctid']."' AND messageid IN ('".join("','", $msg)."')";
-        DB::query($sql);
+        \Doctrine::persist($unread);
+        \Doctrine::flush();
+
         invalidatedatacache("mail-{$session['user']['acctid']}");
-        header('Location: mail.php');
-
-        exit();
     }
-}
-elseif ('unread' == $op)
-{
-    $sql = 'UPDATE '.DB::prefix('mail')." SET seen=0 WHERE msgto='".$session['user']['acctid']."' AND messageid='$id'";
-    DB::query($sql);
-    invalidatedatacache("mail-{$session['user']['acctid']}");
-    header('Location: mail.php');
 
-    exit();
+    $op = '';
+    \LotgdHttp::setQuery('op', null);
 }
 
-popup_header('Ye Olde Poste Office');
-$inbox = translate_inline('Inbox');
-$write = translate_inline('Write');
+popup_header('title', [], $textDomain);
 
-// Build the initial args array
-$args = [];
-array_push($args, ['mail.php', $inbox]);
-array_push($args, ['mail.php?op=address', $write]);
-// to use this hook,
-// just call array_push($args, array("pagename", "functionname"));,
-// where "pagename" is the name of the page to forward the user to,
-// and "functionname" is the name of the mail function to add
-$mailfunctions = modulehook('mailfunctions', $args);
-
-rawoutput('<div class="ui buttons">');
-$count_mailfunctions = count($mailfunctions);
-
-for ($i = 0; $i < $count_mailfunctions; $i++)
-{
-    if (is_array($mailfunctions[$i]))
-    {
-        if (2 == count($mailfunctions[$i]))
-        {
-            $page = $mailfunctions[$i][0];
-            $name = $mailfunctions[$i][1]; // already translated
-            rawoutput("<a href='$page' class='ui button'>$name</a>");
-            // No need for addnav since mail function pages are (or should be) outside the page nav system.
-        }
-    }
-}
-rawoutput('</div>');
-output_notl('`n`n');
-
-if ('send' == $op)
-{
-    require_once 'lib/mail/case_send.php';
-}
+$params = [
+    'textDomain' => $textDomain,
+    'mailButtons' => [
+        [
+            'button.inbox', //-- Translator key
+            [
+                'attributes' => [
+                    'class' => '', //-- Additional class names
+                    'href' => 'mail.php' //-- Link url
+                ]
+            ], //-- Params
+            $textDomain //-- Text domain
+        ],
+        [
+            'button.write',
+            [
+                'attributes' => [
+                    'class' => 'primary',
+                    'href' => 'mail.php?op=address'
+                ]
+            ],
+            $textDomain
+        ]
+    ]
+];
 
 switch ($op)
 {
-    case 'read':
-        require_once 'lib/mail/case_read.php';
-    break;
     case 'address':
-        require_once 'lib/mail/case_address.php';
+        $params['tpl'] = 'address';
+        $params['mailId'] = $mailId;
+    break;
+    case 'read':
+        $params['tpl'] = 'read';
+        $params['message'] = null;
+
+        $message = $repository->findOneBy([
+            'messageid' => $mailId,
+            'msgto' => $session['user']['acctid']
+        ]);
+
+        if ($message)
+        {
+            $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+
+            $params['message'] = clone $message;
+            $params['sender'] = $charRepository->findOneByAcct($message->getMsgfrom());
+
+            $params['paginator'] = $repository->getNextPreviousMail($message->getMessageid(), $session['user']['acctid']);
+
+            //-- Mark as read
+            $message->setSeen(true);
+
+            \Doctrine::persist($message);
+            \Doctrine::flush();
+        }
     break;
     case 'write':
-        require_once 'lib/mail/case_write.php';
+        $params['tpl'] = 'write';
+
+        $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+        $replyTo = (int) \LotgdHttp::getQuery('reply_to');
+        $forwardto = (int) (string) \LotgdHttp::getPost('forwardto');
+        $to = (int) \LotgdHttp::getQuery('to');
+
+        $subject = (string) \LotgdHttp::getPost('subject');
+
+        $msgId = $replyTo ?: $forwardTo;
+
+        //-- Get message to reply
+        if ($msgId)
+        {
+            $row = $repository->replyToMessage($replyTo, $session['user']['acctid']);
+        }
+
+        //-- Get a list of recipents
+        $countRecipents = null;
+
+        if ($to)
+        {
+            $row = $charRepository->findOne($to);
+
+            $countRecipents = count($row);
+        }
+
+        if (is_array($row) && ! $countRecipents)
+        {
+            $subj = \LotgdTranslator::t('section.write.reply.subject', [
+                'subject' => ''
+            ], $textDomain);
+
+            if (0 !== strncmp($row['subject'], $subj, strlen($subj)))
+            {
+                $row['subject'] = \LotgdTranslator::t('section.write.reply.subject', [
+                    'subject' => $row['subject']
+                ], $textDomain);
+            }
+            $row['body'] = sprintf("\n\n---%s---\n%s",
+                \LotgdTranslator::t('section.write.reply.body', [
+                    'name' => trim(\LotgdSanitize::fullSanitize($row['name'])),
+                    'date' => $row['sent']
+                ], $textDomain),
+                $row['body']
+            );
+        }
+
+        $params['superusers'] = [];
+
+        if (($row['acctid'] ?? false) && $countRecipents <= 1 && ($row['superuser'] & SU_GIVES_YOM_WARNING) && ! ($row['superuser'] & SU_OVERRIDE_YOM_WARNING))
+        {
+            array_push($params['superusers'], $row['acctid']);
+        }
+        else
+        {
+            $to = (string) \LotgdHttp::getPost('to');
+
+            $characters = $charRepository->findLikeName($to);
+
+            if (count($characters))
+            {
+                $params['superusers'] = [];
+
+                foreach ($characters as $char)
+                {
+                    if (($char['superuser'] & SU_GIVES_YOM_WARNING) && ! ($char['superuser'] & SU_OVERRIDE_YOM_WARNING))
+                    {
+                        array_push($params['superusers'], $char['acctid']);
+                    }
+                }
+            }
+
+            $params['characters'] = $characters;
+        }
+
+        $params['row'] = $row;
+        $params['msgId'] = $msgId;
+        $params['mailSizeLimit'] = getsetting('mailsizelimit', 1024);
     break;
+    case 'send':
+        $to = (int) \LotgdHttp::getPost('to');
+        $from = $session['user']['acctid'];
+        $acctRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+
+        $account = $acctRepository->find($to);
+
+        $params['message'][] = ['section.send.not.found'];
+
+        if ($account)
+        {
+            $count = $repository->countInboxOfCharacter($account->getAcctid(), (bool) getsetting('onlyunreadmails', true));
+
+            $params['message'] = [
+                ['section.send.inbox.full']
+            ];
+
+            if ($count < getsetting('inboxlimit', 50))
+            {
+                require_once 'lib/systemmail.php';
+
+                $params['message'] = [
+                    ['section.send.mail.sent']
+                ];
+
+                $subject = str_replace('`n', '', (string) \LotgdHttp::getPost('subject'));
+                $body = substr(stripslashes((string) \LotgdHttp::getPost('body')), 0, (int) getsetting('mailsizelimit', 1024));
+                $body = str_replace(['`n', "\r\n", "\r"], "\n", $body);
+
+                systemmail($account->getAcctid(), $subject, $body, $from);
+
+                invalidatedatacache("mail-{$account->getAcctid()}");
+            }
+        }
     default:
-        require_once 'lib/mail/case_default.php';
+        $params['tpl'] = 'default';
+
+        $params['inboxLimit'] = getsetting('inboxlimit', 50);
+        $params['oldMail'] = getsetting('oldmail', 14);
+
+        $sortOrder = (string) \LotgdHttp::getQuery('sortorder') ?: 'date';
+        $sortDirection = (int) \LotgdHttp::getQuery('direction');
+
+        $params['newDirection'] = (int) ! $sortDirection;
+        $params['sortDirection'] = $sortDirection;
+        $params['sortOrder'] = $sortOrder;
+
+        $params['mails'] = $repository->getCharacterMail($session['user']['acctid'], $sortOrder, $sortDirection);
+        $params['senders'] = $repository->getMailSenderNames($session['user']['acctid']);
+
+        $params['inboxCount'] = count($params['mails']);
     break;
 }
+
+//-- This is only for params not use for other purpose
+$params = modulehook('popup-mail-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('popup/mail.twig', $params));
+
 popup_footer();
