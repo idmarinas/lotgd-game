@@ -4,13 +4,10 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/commentary.php';
-require_once 'lib/sanitize.php';
 
 check_su_access(0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO);
 
 tlschema('superuser');
-
 
 $textDomain = 'page-superuser';
 
