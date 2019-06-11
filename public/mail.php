@@ -209,7 +209,7 @@ switch ($op)
 
                 $subject = str_replace('`n', '', (string) \LotgdHttp::getPost('subject'));
                 $body = substr(stripslashes((string) \LotgdHttp::getPost('body')), 0, (int) getsetting('mailsizelimit', 1024));
-                $body = str_replace(['`n', "\r\n", "\r"], "\n", $body);
+                $body = str_replace(["\r\n", "\r"], '`n', $body);
 
                 systemmail($account->getAcctid(), $subject, $body, $from);
 
