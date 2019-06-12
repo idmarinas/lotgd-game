@@ -592,7 +592,7 @@ function report_companion_move($companion, $activate = 'fight')
             elseif ($damage_received < 0)
             {
                 $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                    'creature.companion.heal.defend.reposted',
+                    'combat.companion.heal.defend.riposted',
                     [
                         'creatureName' => $badguy['creaturename'],
                         'companionName' => $companion['name'],
@@ -605,7 +605,7 @@ function report_companion_move($companion, $activate = 'fight')
             else
             {
                 $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
-                    'creature.companion.heal.defend.damage',
+                    'combat.companion.heal.defend.damage',
                     [
                         'creatureName' => $badguy['creaturename'],
                         'companionName' => $companion['name'],
