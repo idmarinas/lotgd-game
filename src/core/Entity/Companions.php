@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Companions.
  *
  * @ORM\Table(name="companions")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CompanionsRepository")
  */
 class Companions
 {
