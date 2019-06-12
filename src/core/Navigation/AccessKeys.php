@@ -77,7 +77,7 @@ class AccessKeys
      *
      * @return string
      */
-    protected function checkAccessKey(&$label): string
+    protected function checkAccessKey(&$label): ?string
     {
         //-- Check explicit access Example: "G?The Graveyard"
         if ('?' == $label[1])
