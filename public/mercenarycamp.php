@@ -22,7 +22,6 @@ unset($result);
 $repository = \Doctrine::getRepository('LotgdCore:Companions');
 
 \LotgdNavigation::addHeader('category.navigation');
-\LotgdNavigation::addNav('actualizar', 'mercenarycamp.php');
 
 page_header('title', [], $textDomain);
 
