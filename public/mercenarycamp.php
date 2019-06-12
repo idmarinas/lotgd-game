@@ -4,369 +4,191 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/villagenav.php';
+
+checkday();
 
 tlschema('mercenarycamp');
 
-checkday();
-$name = stripslashes(rawurldecode(httpget('name')));
+// Don't hook on to this text for your standard modules please, use "inn" instead.
+// This hook is specifically to allow modules that do other inns to create ambience.
+$result = modulehook('mercenarycamp-text-domain', ['textDomain' => 'page-mercenarycamp', 'textDomainNavigation' => 'navigation-mercenarycamp']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-if (isset($companions[$name]))
-{
-    $displayname = $companions[$name]['name'];
-}
-else
-{
-    $displayname = translate_inline('your companion');
-}
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
-$basetext = [
-    'title' => 'A Mercenary Camp',
-    'desc' => [
-        '`n`QYou step out of the gates of the village and stand for a moment to take a look around.',
-        'A slight breeze in the air stirs the pennants mounted above your head before it touches your skin.',
-        'Sounds of dogs barking draw your attention to the makeshift camp which is set slightly apart from the village.',
-        'You walk towards the encampment trying to avoid muddy puddles left from the rainfall the prior night.',
-        'The odor of cooking fires permeates the air.`n`n',
+$repository = \Doctrine::getRepository('LotgdCore:Companions');
 
-        'As you approach you notice two men seated on rough hewn logs in front of a tent.',
-        'Propped against one of the logs are a pair of long handled battle axes and a bastard sword.',
-        'One of the men turns his weatherbeaten face towards you.',
-        'You try to suppress a shudder as you recoil from the sight of his face.',
-        'A ragged scar marks his face from forehead to jaw, crossing an empty hole where his eye should be.',
-        'He spits into the campfire before him.`n`n',
+\LotgdNavigation::addHeader('category.navigation');
+\LotgdNavigation::addNav('actualizar', 'mercenarycamp.php');
 
-        '"`4Are you looking for someone?`Q", he asks in a gravelly voice that comes from deep within.`n`n',
+page_header('title', [], $textDomain);
 
-        "At that moment a slender elfin woman with her golden hair pulled back in a warrior's braid brushes past you.",
-        'Strapped across her back is a long bow and a leather quiver full of arrows fletched with turkey feathers.',
-        'She gives you a smirk as she passes.'.
-
-        'You turn as the elfin archer continues on her way.',
-        'That is when you notice a large mangy dog in a tug-of-war with a troll.',
-        "Clenched in the dog's teeth is a very large bone with bits of flesh still clinging to it.",
-        "You can't tell if the troll is growling louder than the dog as it tries to wrest the bone from its jaw.",
-        "Hanging from the troll's wide belt a gnarled club hangs against filthy breeches of animal skins.",
-
-        "The sound of the man's voice brings your attention back to the matter at hand.`n`n",
-        '"`PYes. As a matter of fact I am looking for someone,`Q"  you reply.',
-        '"`PI have gold in my purse to pay for the best fighter willing to join me in ridding this realm of vermin.`Q"`n`n',
-        'You look around to see if somebody is willing to join you.`n`n'
-    ],
-    'buynav' => 'Hire a mercenary',
-    'healnav' => 'Heal a companion',
-    'healtext' => [
-        '`QA surgeon takes a careful look at the many wounds of your companion.',
-        'After murmuring to himself as he makes the evaluation, he turns to you to name the price to care for the wounds.',
-    ],
-    'healnotenough' => [
-        '`QThe surgeon shakes his head then shrugs before turning away.',
-        'You are left standing with your empty purse.',
-        'No healing for someone who cannot pay.',
-    ],
-    'healpaid' => [
-        ['`QA surgeon is caring for the wounds of %s`Q and bandages them with learned skill.', $displayname],
-        'You gladly hand him the money owed for healing your companion and start heading back to the village.',
-    ],
-    'toomanycompanions' => [
-        'It seems no one is willing to follow you.',
-        'You simply lead too many companions at the moment.'
-    ],
-    'manycompanions' => 'Several mercenaries offer to join you:`n`n',
-    'onecompanion' => 'One mercenary offers to join you:`n`n',
-    'nocompanions' => 'No mercenaries off to join you.',
+$params = [
+    'textDomain' => $textDomain,
 ];
 
-$schemas = [
-    'title' => 'mercenarycamp',
-    'desc' => 'mercenarycamp',
-    'buynav' => 'mercenarycamp',
-    'healnav' => 'mercenarycamp',
-    'healtext' => 'mercenarycamp',
-    'healnotenough' => 'mercenarycamp',
-    'healpaid' => 'mercenarycamp',
-    'toomanycompanions' => 'mercenarycamp',
-    'manycompanions' => 'mercenarycamp',
-    'onecompanion' => 'mercenarycamp',
-    'nocompanions' => 'mercenarycamp',
-];
-
-$basetext['schemas'] = $schemas;
-$texts = modulehook('mercenarycamptext', $basetext);
-$schemas = $texts['schemas'];
-
-tlschema($schemas['title']);
-page_header($texts['title']);
-output('`c`b`&'.$texts['title'].'`0´b´c');
-tlschema();
-
-$op = httpget('op');
+$op = (string) \LotgdHttp::getQuery('op');
+$skip = (int) \LotgdHttp::getQuery('skip');
 
 if ('' == $op)
 {
-    if (1 != httpget('skip'))
+    $params['tpl'] = 'default';
+    $params['showDescription'] = ! $skip;
+    $params['companions'] = $repository->getMercenaryList($session['user']['location'], $session['user']['dragonkills']);
+
+    \LotgdNavigation::addHeader('category.buynav');
+
+    foreach ($params['companions'] as $row)
     {
-        tlschema($schemas['desc']);
+        if ($row->getCompanioncostgold() || $row->getCompanioncostgems())
+        {
+            $link = '';
+            $navParams = [
+                'params' => [
+                    'name' => $row->getName(),
+                    'costGold' => $row->getCompanioncostgold(),
+                    'costGems' => $row->getCompanioncostgems()
+                ]
+            ];
 
-        if (is_array($texts['desc']))
-        {
-            foreach ($texts['desc'] as $description)
+            if ($session['user']['gold'] >= $row->getCompanioncostgold() && $session['user']['gems'] >= $row->getCompanioncostgems() && ! isset($companions[$row->getName()]))
             {
-                output_notl(sprintf_translate($description));
+                $link = "mercenarycamp.php?op=buy&id={$row->getCompanionid()}";
             }
+
+            \LotgdNavigation::addNav('nav.companion.cost', $link, $navParams);
         }
-        else
+        elseif (! isset($companions[$row->getName()]))
         {
-            output($texts['desc']);
+            \LotgdNavigation::addNav($row->getName(), "mercenarycamp.php?op=buy&id={$row['companionid']}", ['translate' => false]);
         }
-        tlschema();
     }
 
-    $sql = 'SELECT * FROM '.DB::prefix('companions')."
-				WHERE companioncostdks<={$session['user']['dragonkills']}
-				AND (companionlocation = '{$session['user']['location']}' OR companionlocation = 'all')
-				AND companionactive = 1";
-    $result = DB::query($sql);
-    tlschema($schemas['buynav']);
-    addnav($texts['buynav']);
-    tlschema();
-
-    switch (DB::num_rows($result)) {
-        case 0:
-            if (is_array($texts['nocompanions']))
-            {
-                foreach ($texts['nocompanions'] as $description)
-                {
-                    output_notl(sprintf_translate($description));
-                }
-            }
-            else
-            {
-                output($texts['nocompanions']);
-            }
-            break;
-        case 1:
-            if (is_array($texts['onecompanion']))
-            {
-                foreach ($texts['onecompanion'] as $description)
-                {
-                    output_notl(sprintf_translate($description));
-                }
-            }
-            else
-            {
-                output($texts['onecompanion']);
-            }
-            break;
-        default:
-            if (is_array($texts['manycompanions']))
-            {
-                foreach ($texts['manycompanions'] as $description)
-                {
-                    output_notl(sprintf_translate($description));
-                }
-            }
-            else
-            {
-                output($texts['manycompanions']);
-            }
-            break;
-    }
-
-    while ($row = DB::fetch_assoc($result))
-    {
-        $row = modulehook('alter-companion', $row);
-
-        if ($row['companioncostgold'] && $row['companioncostgems'])
-        {
-            if ($session['user']['gold'] >= $row['companioncostgold'] && $session['user']['gems'] >= $row['companioncostgems'] && ! isset($companions[$row['name']]))
-            {
-                addnav(['%s`n`^%s Gold, `%%%s Gems`0', $row['name'], $row['companioncostgold'], $row['companioncostgems']], "mercenarycamp.php?op=buy&id={$row['companionid']}");
-            }
-            else
-            {
-                addnav(['%s`n`^%s Gold, `%%%s Gems`0', $row['name'], $row['companioncostgold'], $row['companioncostgems']], '');
-            }
-        }
-        elseif ($row['companioncostgold'])
-        {
-            if ($session['user']['gold'] >= $row['companioncostgold'] && ! isset($companions[$row['name']]))
-            {
-                addnav(['%s`n`^%s Gold`0', $row['name'], $row['companioncostgold']], "mercenarycamp.php?op=buy&id={$row['companionid']}");
-            }
-            else
-            {
-                addnav(['%s`n`^%s Gold`0', $row['name'], $row['companioncostgold']], '');
-            }
-        }
-        elseif ($row['companioncostgems'])
-        {
-            if ($session['user']['gems'] >= $row['companioncostgems'] && ! isset($companions[$row['name']]))
-            {
-                addnav(['%s`n`%%%s Gems`0', $row['name'], $row['companioncostgems']], "mercenarycamp.php?op=buy&id={$row['companionid']}");
-            }
-            else
-            {
-                addnav(['%s`n`%%%s Gems`0', $row['name'], $row['companioncostgems']], '');
-            }
-        }
-        elseif (! isset($companions[$row['name']]))
-        {
-            addnav(['%s', $row['name']], "mercenarycamp.php?op=buy&id={$row['companionid']}");
-        }
-        output('`#%s`n`7%s`n`n', $row['name'], $row['description']);
-    }
-    healnav($companions, $texts, $schemas);
+    $params['companionWounds'] = healnav();
 }
 elseif ('heal' == $op)
 {
-    $cost = httpget('cost');
+    $params['tpl'] = 'heal';
 
-    if ('notenough' == $cost)
-    {
-        tlschema($schemas['healpaid']);
+    $name = stripslashes(rawurldecode(\LotgdHttp::getQuery('name')));
 
-        if (is_array($texts['healnotenough']))
-        {
-            foreach ($texts['healnotenough'] as $healnotenough)
-            {
-                output_notl(sprintf_translate($healnotenough));
-            }
-        }
-        else
-        {
-            output($texts['healnotenough']);
-        }
-        tlschema();
-    }
-    else
+    $pointsToHeal = $companions[$name]['maxhitpoints'] - $companions[$name]['hitpoints'];
+    $costToHeal = round(log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
+
+    $params['companionHealed'] = false;
+    if ($session['user']['gold'] >= $costToHeal)
     {
+        $params['companionHealed'] = true;
+
         $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];
-        $session['user']['companions'] = serialize($companions);
-        $session['user']['gold'] -= $cost;
-        debuglog("spent $cost gold on healing a companion", false, false, 'healcompanion', $cost);
-        tlschema($schemas['healpaid']);
+        $session['user']['companions'] = $companions;
+        $session['user']['gold'] -= $costToHeal;
 
-        if (is_array($texts['healpaid']))
-        {
-            foreach ($texts['healpaid'] as $healpaid)
-            {
-                output_notl(sprintf_translate($healpaid));
-            }
-        }
-        else
-        {
-            output($texts['healpaid']);
-        }
-        tlschema();
+        debuglog("spent {$costToHeal} gold on healing a companion", false, false, 'healcompanion', $costToHeal);
     }
-    healnav($companions, $texts, $schemas);
-    addnav('Navigation');
-    addnav('Return to the camp', 'mercenarycamp.php?skip=1');
+
+    $params['companionName'] = $companions[$name]['name'];
+
+    $params['companionWounds'] = healnav();
+
+    \LotgdNavigation::addHeader('category.navigation');
+    \LotgdNavigation::addNav('nav.return', 'mercenarycamp.php?skip=1');
 }
 elseif ('buy' == $op)
 {
-    $id = httpget('id');
-    $sql = 'SELECT * FROM '.DB::prefix('companions')." WHERE companionid = $id";
-    $result = DB::query($sql);
+    require_once 'lib/buffs.php';
 
-    if ($row = DB::fetch_assoc($result))
+    $params['tpl'] = 'buy';
+
+    $companionId = (int) \LotgdHttp::getQuery('id');
+
+    $entity = $repository->find($companionId);
+
+    $params['companionHire'] = 'not.found';
+
+    if ($entity)
     {
+        $row = $repository->extractEntity($entity);
+
         $row['attack'] = $row['attack'] + $row['attackperlevel'] * $session['user']['level'];
         $row['defense'] = $row['defense'] + $row['defenseperlevel'] * $session['user']['level'];
         $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
         $row['hitpoints'] = $row['maxhitpoints'];
-        $row = modulehook('alter-companion', $row);
-        $row['abilities'] = @unserialize($row['abilities']);
-        require_once 'lib/buffs.php';
 
-        if (apply_companion($row['name'], $row))
+        $params['companionHire'] = apply_companion($row['name'], $row);
+
+        if ($params['companionHire'])
         {
-            output('`QYou hand over `^%s gold`Q and `%%s %s`Q.`n`n', (int) $row['companioncostgold'], (int) $row['companioncostgems'], translate_inline(1 == $row['companioncostgems'] ? 'gem' : 'gems'));
-
-            if (isset($row['jointext']) && $row['jointext'] > '')
-            {
-                output($row['jointext']);
-            }
             $session['user']['gold'] -= $row['companioncostgold'];
             $session['user']['gems'] -= $row['companioncostgems'];
+
             debuglog("has spent {$row['companioncostgold']} gold and {$row['companioncostgems']} gems on hiring a mercenary ({$row['name']}).");
         }
-        else
-        {
-            // applying the companion failed. Most likely they already have more than enough companions...
-            tlschema($schemas['toomanycompanions']);
-
-            if (is_array($texts['toomanycompanions']))
-            {
-                foreach ($texts['toomanycompanions'] as $toomanycompanions)
-                {
-                    output_notl(sprintf_translate($toomanycompanions));
-                }
-            }
-            else
-            {
-                output($texts['toomanycompanions']);
-            }
-            tlschema();
-        }
     }
-    addnav('Navigation');
-    addnav('Return to the camp', 'mercenarycamp.php?skip=1');
+
+    \LotgdNavigation::addHeader('category.navigation');
+    \LotgdNavigation::addNav('nav.return', 'mercenarycamp.php?skip=1');
 }
-addnav('Navigation');
-villagenav();
+
+\LotgdNavigation::addHeader('category.navigation');
+\LotgdNavigation::villageNav();
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-mercenarycamp-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/mercenarycamp.twig', $params));
+
 page_footer();
 
-function healnav($companions, $texts, $schemas)
+/**
+ * Undocumented function.
+ *
+ * @return bool
+ */
+function healnav(): bool
 {
-    global $session;
-    tlschema($schemas['healnav']);
-    addnav($texts['healnav']);
-    tlschema();
+    global $session, $companions;
+
+    \LotgdNavigation::addHeader('category.companion.heal');
+
     $healable = false;
 
     foreach ($companions as $name => $companion)
     {
-        if (isset($companion['cannotbehealed']) && true == $companion['cannotbehealed'])
+        if ($companion['cannotbehealed'] ?? false)
         {
+            continue;
         }
-        else
+
+        $pointsToHeal = $companion['maxhitpoints'] - $companion['hitpoints'];
+
+        if ($pointsToHeal > 0)
         {
-            $pointstoheal = $companion['maxhitpoints'] - $companion['hitpoints'];
+            $healable = true;
+            $costToHeal = round(log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
 
-            if ($pointstoheal > 0)
+            $nav = 'nav.companion.heal.not.have';
+            $link = '';
+
+            if ($session['user']['gold'] >= $costToHeal)
             {
-                $healable = true;
-                $costtoheal = round(log($session['user']['level'] + 1) * ($pointstoheal + 10) * 1.33);
-
-                if ($session['user']['gold'] >= $costtoheal)
-                {
-                    addnav(['%s`0 (`^%s Gold`0)', $companion['name'], $costtoheal], 'mercenarycamp.php?op=heal&name='.rawurlencode($name)."&cost=$costtoheal");
-                }
-                else
-                {
-                    addnav(['%s`0 (`$Not enough gold`0)', $companion['name']], 'mercenarycamp.php?op=heal&name='.rawurlencode($name).'&cost=notenough');
-                }
+                $nav = 'nav.companion.heal.have';
+                $link = 'mercenarycamp.php?op=heal&name='.rawurlencode($name);
             }
+
+            \LotgdNavigation::addNav($nav, $link, [
+                'params' => [
+                    'name' => $companion['name'],
+                    'costGold' => $costToHeal
+                ]
+            ]);
         }
     }
 
-    if (true == $healable)
-    {
-        tlschema($schemas['healtext']);
-
-        if (is_array($texts['healtext']))
-        {
-            foreach ($texts['healtext'] as $healtext)
-            {
-                output_notl(sprintf_translate($healtext));
-            }
-        }
-        else
-        {
-            output($texts['healtext']);
-        }
-        tlschema();
-    }
+    return $healable;
 }

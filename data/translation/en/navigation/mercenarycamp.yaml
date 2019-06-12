@@ -1,0 +1,19 @@
+# Navigation menu for Lodge
+
+# Headers of navigations
+category:
+    buynav: 'Hire a mercenary'
+    navigation: Navigation
+    companion:
+        heal: 'Heal a companion'
+
+# Menu navs
+nav:
+    return: 'Return to the camp'
+    companion:
+        cost: '{name}`n`^{costGold,number} Gold`0, `%{costGems,number} Gems`0'
+        heal:
+            have: '{name} (`^{costGold,number} Gold`0)'
+            not.have: '{name} (`$Not enough gold`0)'
+
+
