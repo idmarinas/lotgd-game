@@ -1,0 +1,20 @@
+{% translate_default_domain textDomain %}
+
+{# Show comments (new comment included) #}
+<div class="ui minimal small comments">
+    <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
+        <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+        {% for section, comment in comments|reverse %}
+            <h5 class="ui dividing header">{{ sections[section]|default(section)  }}</h5>
+            {% for com in comment %}
+                {{ display_one_comment(com, textDomain, commentary) }}
+            {% endfor %}
+        {% endfor %}
+        <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+    </form>
+</div>
+
+{% if showPagination %}
+    {# Show pagination for comments #}
+    {{ navigation_pagination(comments, paginationLinkUrl, 'parts/commentary/pagination.twig' ) }}
+{% endif %}
