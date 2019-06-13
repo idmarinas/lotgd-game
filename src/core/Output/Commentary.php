@@ -12,7 +12,6 @@
 
 namespace Lotgd\Core\Output;
 
-use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
 use Lotgd\Core\Pattern;
@@ -51,38 +50,6 @@ class Commentary
     public function getCommentsModerate()
     {
         return $this->getList(null, 1, 100);
-    }
-
-    /**
-     * Get list of comments.
-     *
-     * @param string|null $section
-     * @param int    $page
-     * @param int    $limit
-     *
-     * @return Paginator
-     */
-    protected function getList(?string $section, int $page = 1, int $limit = 25)
-    {
-        $query = $this->getRepository()->createQueryBuilder('u');
-
-        $query->select('u.id', 'u.section', 'u.command', 'u.comment', 'u.postdate', 'u.extra', 'u.author', 'u.authorName', 'u.clanId', 'u.clanRank', 'u.clanName', 'u.clanNameShort', 'u.hidden', 'u.hiddenComment', 'u.hiddenBy', 'u.hiddenByName')
-            ->addSelect('a.loggedin', 'a.laston')
-            ->addSelect('c.chatloc')
-            ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
-            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'a.character'))
-            ->orderBy('u.postdate', 'DESC')
-            ->orderBy('u.section', 'ASC')
-        ;
-
-        if ($section)
-        {
-            $query->where('u.section = :section')
-                ->setParameter('section', $section)
-            ;
-        }
-
-        return $this->getRepository()->getPaginator($query, $page, $limit);
     }
 
     /**
@@ -326,6 +293,77 @@ class Commentary
         $comment = modulehook('commentary-comment', ['comment' => $comment]);
 
         return $comment['comment'];
+    }
+
+    /**
+     * All comentary sections.
+     *
+     * @return array
+     */
+    public function commentaryLocs(): array
+    {
+        global $session;
+
+        $comsecs = datacache('commentary-comsecs', 1800, true);
+
+        if (is_array($comsecs) && count($comsecs))
+        {
+            return $comsecs;
+        }
+
+        $domain = 'app-commentary';
+
+        $comsecs = [];
+        $comsecs['village'] = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
+        $comsecs['superuser'] = \LotgdTranslator::t('section.superuser', [], $domain);
+        $comsecs['shade'] = \LotgdTranslator::t('section.shade', [], $domain);
+        $comsecs['grassyfield'] = \LotgdTranslator::t('section.grassyfield', [], $domain);
+        $comsecs['inn'] = getsetting('innname', LOCATION_INN);
+        $comsecs['motd'] = \LotgdTranslator::t('section.motd', [], $domain);
+        $comsecs['veterans'] = \LotgdTranslator::t('section.veterans', [], $domain);
+        $comsecs['hunterlodge'] = \LotgdTranslator::t('section.hunterlodge', [], $domain);
+        $comsecs['gardens'] = \LotgdTranslator::t('section.gardens', [], $domain);
+        $comsecs['waiting'] = \LotgdTranslator::t('section.waiting', [], $domain);
+        $comsecs['beta'] = \LotgdTranslator::t('section.beta', [], $domain);
+
+        // All of the ones after this will be translated in the modules.
+        $comsecs = modulehook('moderate-comment-sections', $comsecs);
+
+        updatedatacache('commentary-comsecs', $comsecs, true);
+
+        return $comsecs;
+    }
+
+    /**
+     * Get list of comments.
+     *
+     * @param string|null $section
+     * @param int         $page
+     * @param int         $limit
+     *
+     * @return Paginator
+     */
+    protected function getList(?string $section, int $page = 1, int $limit = 25)
+    {
+        $query = $this->getRepository()->createQueryBuilder('u');
+
+        $query->select('u.id', 'u.section', 'u.command', 'u.comment', 'u.postdate', 'u.extra', 'u.author', 'u.authorName', 'u.clanId', 'u.clanRank', 'u.clanName', 'u.clanNameShort', 'u.hidden', 'u.hiddenComment', 'u.hiddenBy', 'u.hiddenByName')
+            ->addSelect('a.loggedin', 'a.laston')
+            ->addSelect('c.chatloc')
+            ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
+            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'a.character'))
+            ->orderBy('u.postdate', 'DESC')
+            ->orderBy('u.section', 'ASC')
+        ;
+
+        if ($section)
+        {
+            $query->where('u.section = :section')
+                ->setParameter('section', $section)
+            ;
+        }
+
+        return $this->getRepository()->getPaginator($query, $page, $limit);
     }
 
     /**
