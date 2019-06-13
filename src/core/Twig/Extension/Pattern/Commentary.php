@@ -269,6 +269,16 @@ trait Commentary
             $url = \preg_replace('/[&]/', '?', $url, 1);
         }
 
+        //-- Check if have a ?
+        if (false === \strpos($url, '?'))
+        {
+            $url = "{$url}?";
+        }
+        elseif (false !== \strpos($url, '?'))
+        {
+            $url = "{$url}&";
+        }
+
         return $url;
     }
 }
