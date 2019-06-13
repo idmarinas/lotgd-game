@@ -12,7 +12,6 @@
 
 namespace Lotgd\Core\Output;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
@@ -37,21 +36,51 @@ class Commentary
      * @param int    $page
      * @param int    $limit
      *
-     * @return LotgdEntity\Commentary
+     * @return Paginator
      */
     public function getComments(string $section, int $page = 1, int $limit = 25)
+    {
+        return $this->getList($section, $page, $limit);
+    }
+
+    /**
+     * Get comments for moderate.
+     *
+     * @return Paginator
+     */
+    public function getCommentsModerate()
+    {
+        return $this->getList(null, 1, 100);
+    }
+
+    /**
+     * Get list of comments.
+     *
+     * @param string|null $section
+     * @param int    $page
+     * @param int    $limit
+     *
+     * @return Paginator
+     */
+    protected function getList(?string $section, int $page = 1, int $limit = 25)
     {
         $query = $this->getRepository()->createQueryBuilder('u');
 
         $query->select('u.id', 'u.section', 'u.command', 'u.comment', 'u.postdate', 'u.extra', 'u.author', 'u.authorName', 'u.clanId', 'u.clanRank', 'u.clanName', 'u.clanNameShort', 'u.hidden', 'u.hiddenComment', 'u.hiddenBy', 'u.hiddenByName')
             ->addSelect('a.loggedin', 'a.laston')
             ->addSelect('c.chatloc')
-            ->leftJoin(LotgdEntity\Accounts::class, 'a', Join::WITH, $query->expr()->eq('a.acctid', 'u.author'))
-            ->leftJoin(LotgdEntity\Characters::class, 'c', Join::WITH, $query->expr()->eq('c.id', 'a.character'))
-            ->where('u.section = :section')
+            ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
+            ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'a.character'))
             ->orderBy('u.postdate', 'DESC')
-            ->setParameter('section', $section)
+            ->orderBy('u.section', 'ASC')
         ;
+
+        if ($section)
+        {
+            $query->where('u.section = :section')
+                ->setParameter('section', $section)
+            ;
+        }
 
         return $this->getRepository()->getPaginator($query, $page, $limit);
     }
@@ -102,8 +131,7 @@ class Commentary
             {
                 $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
-                $hydrator = new \Zend\Hydrator\ClassMethods();
-                $clanInfo = $hydrator->extract($clanInfo);
+                $clanInfo = $clanRep->extractEntity($clanInfo);
 
                 $clanInfo['clanrank'] = $session['user']['clanrank'];
 
@@ -267,7 +295,7 @@ class Commentary
             ->attach(new Filter\StripTags())
             ->attach(new Filter\StripNewlines())
             ->attach(new Filter\PregReplace(['pattern' => '/`n/', 'replacement' => '']))
-            ->attach(new Filter\PregReplace(['pattern' => "/([^[:space:]]{45,45})([^[:space:]])/", 'replacement' => '\\1 \\2']))
+            ->attach(new Filter\PregReplace(['pattern' => '/([^[:space:]]{45,45})([^[:space:]])/', 'replacement' => '\\1 \\2']))
             ->attach(new Filter\Callback([new \HTMLPurifier(), 'purify']), -1) //-- Executed last in query
         ;
 
