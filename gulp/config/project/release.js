@@ -45,10 +45,11 @@ module.exports = {
             ' /*' + '\n' +
             ' * This file is part of the web "<%= title %>"' + '\n' +
             ' *' + '\n' +
-            ' * @copyright Game Design and Code: Copyright © 2002-2005, Eric Stevens & JT Traub,' + '\n' +
-            '				 © 2006-2007 Dragonprime Development Team,' + '\n' +
-            '				 © 2007-2014 Oliver Brendel remodelling and enhancing,' + '\n' +
-            '				 © 2015-<%= year %> IDMarinas remodelling and enhancing ' + '\n' +
+            ' * @copyright Game Design and Code:' + '\n' +
+            '       Copyright' + '\n' +
+            '           © 2002-2005, Eric Stevens & JT Traub,' + '\n' +
+            '		    © 2006-2007 Dragonprime Development Team,' + '\n' +
+            '		    © 2015-<%= year %> IDMarinas remodelling and enhancing ' + '\n' +
             ' * @version   <%= version %>' + '\n' +
             ' * ' + '\n' +
             ' */' + '\n',
@@ -57,10 +58,11 @@ module.exports = {
             ' /*' + '\n' +
             ' * This file was created for the web "<%= title %>"' + '\n' +
             ' *' + '\n' +
-            ' * @copyright Game Design and Code: Copyright © 2002-2005, Eric Stevens & JT Traub,' + '\n' +
-            '				 © 2006-2007 Dragonprime Development Team,' + '\n' +
-            '				 © 2007-2014 Oliver Brendel remodelling and enhancing,' + '\n' +
-            '				 © 2015-<%= year %> IDMarinas remodelling and enhancing ' + '\n' +
+            ' * @copyright Game Design and Code:' + '\n' +
+            '       Copyright' + '\n' +
+            '           © 2002-2005, Eric Stevens & JT Traub,' + '\n' +
+            '		    © 2006-2007 Dragonprime Development Team,' + '\n' +
+            '		    © 2015-<%= year %> IDMarinas remodelling and enhancing ' + '\n' +
             ' * @version   <%= version %>' + '\n' +
             ' * ' + '\n' +
             ' */' + '\n'
