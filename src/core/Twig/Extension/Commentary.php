@@ -40,6 +40,7 @@ class Commentary extends AbstractExtension
     use PatternCore\Container;
     use PatternCore\Translator;
     use Pattern\Commentary;
+    use Pattern\CommentaryModerate;
 
     protected $commentary;
     protected $translator;
@@ -67,6 +68,7 @@ class Commentary extends AbstractExtension
     {
         return [
             new TwigFunction('commentary_block', [$this, 'commentaryBlock']),
+            new TwigFunction('commentary_moderate_block', [$this, 'commentaryModerateBlock']),
             new TwigFunction('display_one_comment', [$this, 'displayOneComment']),
             new TwigFunction('display_status_online_player', [$this, 'displayStatusOnlinePlayer']),
             new TwigFunction('add_comment', [$this, 'addComment']),
