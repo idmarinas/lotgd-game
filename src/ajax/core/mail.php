@@ -76,6 +76,7 @@ class Mail
 
         $response->dialog->{$type}($message);
         $response->jQuery('#mail-read-buttons')->addClass('red')->children('.ui.button')->addClass('disabled')->removeClass('loading');
+        $response->jQuery('#mail-row-'.$mailId)->remove();
 
         return $response;
     }
