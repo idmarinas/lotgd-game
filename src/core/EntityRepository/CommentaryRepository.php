@@ -44,7 +44,7 @@ class CommentaryRepository extends DoctrineRepository
     }
 
     /**
-     * Hide/Unhide comments
+     * Hide/Unhide comments.
      *
      * @return bool
      */
@@ -58,7 +58,7 @@ class CommentaryRepository extends DoctrineRepository
 
             $result = $this->findBy(['id' => $keys]);
 
-            foreach($result as $comment)
+            foreach ($result as $comment)
             {
                 $commentId = $comment->getId();
                 $hiddenOld = $comment->getHidden();
@@ -79,7 +79,7 @@ class CommentaryRepository extends DoctrineRepository
                 //--  Unhide message
                 if ($hiddenOld && ! $hiddenNew)
                 {
-                    $message = \LotgdTranslator::t('comment.moderation.unhide',  ['name' => $session['user']['name']], 'app-commentary');
+                    $message = \LotgdTranslator::t('comment.moderation.unhide', ['name' => $session['user']['name']], 'app-commentary');
                 }
 
                 $comment->setHiddenComment($message);
@@ -94,6 +94,45 @@ class CommentaryRepository extends DoctrineRepository
             Debugger::log($th);
 
             return false;
+        }
+    }
+
+    /**
+     * Get all sections in comentary.
+     *
+     * @return array
+     */
+    public function getPublishedSections(): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            $result = $query->select('u.section')
+                ->where('u.section NOT LIKE :section')
+                ->groupBy('u.section')
+                ->orderBy('u.section', 'ASC')
+
+                ->setParameter('section', 'clan-%')
+
+                ->getQuery()
+                ->getResult()
+            ;
+
+            $sections = [];
+
+            foreach ($result as $section)
+            {
+                $sections[] = $section['section'];
+            }
+
+            return $sections;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return [];
         }
     }
 }
