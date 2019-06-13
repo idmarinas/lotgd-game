@@ -121,6 +121,9 @@ class Navigation
     {
         return $this->addHeader($header, ArrayUtils::merge([
             'translate' => false,
+            'attributes' => [
+                'class' => 'navhead'
+            ]
         ], $options));
     }
 
@@ -152,7 +155,10 @@ class Navigation
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
-            'translate' => false
+            'translate' => false,
+            'attributes'=> [
+                'class' => 'nav'
+            ]
         ], $options));
     }
 
