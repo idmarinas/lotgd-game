@@ -20,3 +20,16 @@ commentary:
         offline: 'Offline'
         dni: "DNI (please don't try to talk to this player right now!)"
         online: 'Online'
+
+# Sections for comment moderation
+section:
+    village: '{village} Square'
+    superuser: Grotto
+    shade: 'Land of the Shades'
+    grassyfield: 'Grassy Field'
+    motd: 'MotD'
+    veterans: 'Veterans Club'
+    hunterlodge: "Hunter's Lodge"
+    gardens: 'Gardens'
+    waiting: 'Clan Hall Waiting Area'
+    beta: 'Pavilion'
