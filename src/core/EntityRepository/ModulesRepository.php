@@ -34,13 +34,13 @@ class ModulesRepository extends DoctrineRepository
         try
         {
             return $query->update($this->_entityName, 'u')
-                ->set('u.filemoddate', '0000-00-00 00:00:00')
+                ->set('u.filemoddate', (new \DateTime('0000-00-00 00:00:00'))->format(\DateTime::ISO8601))
 
                 ->where('u.modulename = :module')
                 ->setParameter('module', $module)
 
                 ->getQuery()
-                ->execute();
+                ->execute()
             ;
         }
         catch (\Throwable $th)
