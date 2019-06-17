@@ -2140,16 +2140,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "707b619d2c3bedf0224d56f95f77dabc60102305"
+                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/707b619d2c3bedf0224d56f95f77dabc60102305",
-                "reference": "707b619d2c3bedf0224d56f95f77dabc60102305",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d50bbeeb0e17e6dd4124ea391eff235e932cbf64",
+                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64",
                 "shasum": ""
             },
             "require": {
@@ -2211,7 +2211,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-27T08:16:38+00:00"
+            "time": "2019-06-05T13:25:51+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -4836,16 +4836,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "f5c8f8665f252161de3b39f32cb231eb6517dc70"
+                "reference": "d176c5f3ae43c61f9f04cfda6d561ca5781dd67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/f5c8f8665f252161de3b39f32cb231eb6517dc70",
-                "reference": "f5c8f8665f252161de3b39f32cb231eb6517dc70",
+                "url": "https://api.github.com/repos/phan/phan/zipball/d176c5f3ae43c61f9f04cfda6d561ca5781dd67f",
+                "reference": "d176c5f3ae43c61f9f04cfda6d561ca5781dd67f",
                 "shasum": ""
             },
             "require": {
@@ -4901,7 +4901,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-06-01T18:12:12+00:00"
+            "time": "2019-06-16T20:02:33+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
