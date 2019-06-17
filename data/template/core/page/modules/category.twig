@@ -1,0 +1,61 @@
+{% translate_default_domain textDomain %}
+
+<h4>{{ 'subtitle.category'|t({ 'cat': cat })|colorize }}</h4>
+
+<form action="{{ ('modules.php?op=mass&cat=' ~ cat)|lotgd_url }}" method="POST" class="ui form">
+    <table class="ui small very compact striped table">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{{ 'table.thead.ops'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.status'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.mname'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.mauth'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.inon'|t|uncolorize }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set options = {'html': 'table.tbody.uninstall.confirm'|t|uncolorize }|json_encode %}
+            {% for module in modules %}
+                <tr>
+                    <td class="collapsing"><div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div></td>
+                    <td class="collapsing">
+                        {% set activate = module.active ? 'deactivate' : 'activate' %}
+                        {% set active = module.active ? 'active' : 'inactive' %}
+                        <div class="ui mini icon buttons">
+                            <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|t|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}">
+                                <i class="power icon"></i>
+                            </a>
+                            <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|t|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
+                                <i class="remove icon"></i>
+                            </a>
+                            <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|t|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}">
+                                <i class="undo icon"></i>
+                            </a>
+                            {% if SU_EDIT_CONFIG %}
+                                {% if '|settings|' in module.infokeys %}
+                                    <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|t|uncolorize }}" href="{{ ('configuration.php?op=modulesettings&module=' ~ module.modulename)|lotgd_url }}">
+                                        <i class="settings icon"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="ui disabled button" data-tooltip="{{ 'table.tbody.strnosettings'|t|uncolorize }}"><i class="settings icon"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>{{ ('table.tbody.' ~ active)|t|colorize }}</td>
+                    <td>
+                        <span data-tooltip="{{ module.description|default(module.formalname|uncolorize) }}"><i class="info icon"></i></span>
+                        {{ module.formalname|colorize }}<br>
+                        ({{ module.modulename|colorize }}) V{{ module.version }}
+                    </td>
+                    <td>{{ '`#%s`0'|format(module.moduleauthor)|colorize }}</td>
+                    <td>
+                        {{ '{date,date} {date,time}'|tmf({ 'date': module.installdate }) }}<br>
+                        {{ 'table.tbody.install.by'|t({ 'author': module.installedby })|colorize }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>

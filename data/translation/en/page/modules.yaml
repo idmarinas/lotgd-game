@@ -1,0 +1,47 @@
+title: 'Module Manager'
+
+subtitle:
+    uninstall: 'Uninstalled Modules'
+    category: '{cat} Modules'
+
+table:
+    thead:
+        ops: Ops
+        status: Status
+        mname: 'Module Name'
+        mauth: 'Module Author'
+        categ: Category
+        fname: Filename
+        inon: 'Installed On'
+    tbody:
+        active: '`@Active`0'
+        inactive: '`$Inactive`0'
+        deactivate: 'Deactivate'
+        activate: 'Activate'
+        uninstall: 'Uninstall'
+        reinstall: 'Reinstall'
+        strsettings: 'Settings'
+        strnosettings: 'No Settings'
+        not.modules: '`i--No uninstalled modules were found--´i'
+        invalid: '(`$Invalid Module! Contact Author or check file!`0)'
+        uninstallable: 'Not installable'
+        install: Install
+        require: '`bRequires:´b`n'
+        uninstall.confirm: 'Are you sure you wish to uninstall this module?  All user preferences and module settings will be lost. If you wish to temporarily remove access to the module, you may simply deactivate it.'
+        install.by: 'by {author}'
+        button:
+            submit: Install
+
+module:
+    performing:
+        install: '`2Performing `^install`0 on `%{module}`0`n'
+        uninstall: '`2Performing `^uninstall`0 on `%{module}`0`n'
+        activate: '`2Performing `^activate`0 on `%{module}`0`n'
+        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`n'
+        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`n'
+    fail:
+        install: '`$Error, module could not be installed!`n`n'
+        uninstall: 'Unable to inject module. Module not uninstalled.`n'
+        activate: '`2Performing `^activate`0 on `%{module}`0`n'
+        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`n'
+        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`n'

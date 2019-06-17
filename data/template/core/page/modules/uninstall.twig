@@ -1,0 +1,68 @@
+{% translate_default_domain textDomain %}
+
+<h4>{{ 'subtitle.uninstall'|t|colorize }}</h4>
+
+<form action="{{ ('modules.php?op=mass')|lotgd_url }}" method="POST" class="ui form">
+    <table class="ui small very compact striped table">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{{ 'table.thead.ops'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.mname'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.mauth'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.categ'|t|uncolorize }}</th>
+                <th>{{ 'table.thead.fname'|t|uncolorize }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for module in modules %}
+                <tr>
+                    {% if not module.invalid %}
+                    <td class="collapsing">
+                        <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.shortname }}"></div>
+                    </td>
+                    <td class="collapsing">
+                        <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category)|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
+                            <i class="configure icon"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <span title="{{ module.description|default(module.name|uncolorize) }}">
+                            {{ module.name|colorize }} <em>{{ module.version|colorize }}</em>
+                        </span>
+                    </td>
+                    <td>{{ '`#%s`0'|format(module.author)|colorize }}</td>
+                    <td>{{ module.category|colorize }}</td>
+                    <td>{{ '%s.php'|format(module.shortname) }}</td>
+                    {% else %}
+                        <th></th>
+                        <td><a class="ui red disabled mini icon button" data-tooltip="{{ 'table.tbody.uninstallable'|t|uncolorize }}"><i class="configure icon"></i></a></td>
+                        <td colspan="4">
+                            <span title="{{ module.description|default(module.name|uncolorize) }}">
+                                {{ module.name|colorize }} {{ 'table.tbody.invalid'|t|colorize }} <em>{{ module.version|colorize }}</em>
+                            </span>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% if module.requires %}
+                    <tr>
+                        <td colspan="7">
+                            {{ 'table.tbody.require'|t|colorize }}
+                            {% for require in module.requiresCheck %}
+                                <p>{{ '%s%s`0'|format(require.check ? '`@' : '`$', require.name)|colorize }}</p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td colspan="6">{{ 'table.tbody.not.modules'|t|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="field">
+        <button type="submit" name="install" class="ui primary button">{{ 'table.tbody.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>

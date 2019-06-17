@@ -1,0 +1,11 @@
+{% translate_default_domain textDomain %}
+
+{% for message in messages %}
+    {{ message[0]|t(message[1])|colorize }}
+{% endfor %}
+
+{% if cat %}
+    {% include "core/page/modules/category.twig" %}
+{% else %}
+    {% include "core/page/modules/uninstall.twig" %}
+{% endif %}
