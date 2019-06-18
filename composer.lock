@@ -4836,16 +4836,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "2.2.1",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "d176c5f3ae43c61f9f04cfda6d561ca5781dd67f"
+                "reference": "afbb614393221a9caf0eb9b3e0c1b085e3a5855c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/d176c5f3ae43c61f9f04cfda6d561ca5781dd67f",
-                "reference": "d176c5f3ae43c61f9f04cfda6d561ca5781dd67f",
+                "url": "https://api.github.com/repos/phan/phan/zipball/afbb614393221a9caf0eb9b3e0c1b085e3a5855c",
+                "reference": "afbb614393221a9caf0eb9b3e0c1b085e3a5855c",
                 "shasum": ""
             },
             "require": {
@@ -4901,7 +4901,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-06-16T20:02:33+00:00"
+            "time": "2019-06-17T18:22:36+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
