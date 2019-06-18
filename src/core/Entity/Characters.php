@@ -375,7 +375,7 @@ class Characters
     /**
      * @var bool
      *
-     * @ORM\Column(name="hashorse", type="boolean", nullable=false, options={"default": 0})
+     * @ORM\Column(name="hashorse", type="smallint", nullable=false, options={"default": 0})
      */
     private $hashorse = 0;
 
