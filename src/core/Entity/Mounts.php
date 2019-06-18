@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Mounts.
  *
  * @ORM\Table(name="mounts")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\MountsRepository")
  */
 class Mounts
 {
@@ -56,7 +56,7 @@ class Mounts
     /**
      * @var string
      *
-     * @ORM\Column(name="mountbuff", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="mountbuff", type="array", nullable=false)
      */
     private $mountbuff;
 
@@ -229,7 +229,7 @@ class Mounts
     /**
      * Set the value of Mountbuff.
      *
-     * @param string mountbuff
+     * @param array mountbuff
      *
      * @return self
      */
@@ -243,9 +243,9 @@ class Mounts
     /**
      * Get the value of Mountbuff.
      *
-     * @return string
+     * @return array
      */
-    public function getMountbuff(): string
+    public function getMountbuff(): array
     {
         return $this->mountbuff;
     }

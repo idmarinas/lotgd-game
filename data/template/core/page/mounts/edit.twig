@@ -1,0 +1,162 @@
+{% translate_default_domain textDomain %}
+
+<form action="{{ ('mounts.php?op=save&id=' ~ mount.mountid)|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="mountactive">{{ 'section.edit.form.label.mountactive'|t|colorize }}</label>
+        <div class="ui lotgd toggle checkbox">
+            <input type="checkbox" name="mount[mountactive]" id="mountactive" value="1" {{ mount.mountactive ? 'checked' : '' }}>
+        </div>
+    </div>
+    <div class="field">
+        <label for="mountname">{{ 'section.edit.form.label.mountname'|t|colorize }}</label>
+        <input type="text" name="mount[mountname]" id="mountname" value="{{ mount.mountname }}">
+    </div>
+    <div class="field">
+        <label for="mountdesc">{{ 'section.edit.form.label.mountdesc'|t|colorize }}</label>
+        <input type="text" name="mount[mountdesc]" id="mountdesc" value="{{ mount.mountdesc }}">
+    </div>
+    <div class="field">
+        <label for="mountcategory">{{ 'section.edit.form.label.mountcategory'|t|colorize }}</label>
+        <input type="text" name="mount[mountcategory]" id="mountcategory" value="{{ mount.mountcategory }}">
+    </div>
+    <div class="field">
+        <label for="mountlocation">{{ 'section.edit.form.label.mountlocation'|t|colorize }}</label>
+        <select class="ui lotgd dropdown" name="mount[mountlocation]" id="mountlocation">
+            {% for loc, name in stableLocs %}
+                <option value="{{ loc }}" {{ loc == mount.mountlocation ? 'selected' : '' }} >{{ name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="field">
+        <label for="mountdkcost">{{ 'section.edit.form.label.mountdkcost'|t|colorize }}</label>
+        <input type="number" name="mount[mountdkcost]" id="mountdkcost" value="{{ mount.mountdkcost }}">
+    </div>
+    <div class="field">
+        <label for="mountcostgems">{{ 'section.edit.form.label.mountcostgems'|t|colorize }}</label>
+        <input type="number" name="mount[mountcostgems]" id="mountcostgems" value="{{ mount.mountcostgems }}">
+    </div>
+    <div class="field">
+        <label for="mountcostgold">{{ 'section.edit.form.label.mountcostgold'|t|colorize }}</label>
+        <input type="number" name="mount[mountcostgold]" id="mountcostgold" value="{{ mount.mountcostgold }}">
+    </div>
+    <div class="field">
+        <label for="mountfeedcost">{{ 'section.edit.form.label.mountfeedcost'|t|colorize }}</label>
+        <input type="number" name="mount[mountfeedcost]" id="mountfeedcost" value="{{ mount.mountfeedcost }}">
+    </div>
+    <div class="field">
+        <label for="mountforestfights">{{ 'section.edit.form.label.mountforestfights'|t|colorize }}</label>
+        <input type="number" name="mount[mountforestfights]" id="mountforestfights" value="{{ mount.mountforestfights }}">
+    </div>
+    <div class="ui small header">{{ 'section.edit.form.header.messages'|t|colorize }}</div>
+    <div class="field">
+        <label for="newday">{{ 'section.edit.form.label.newday'|t|colorize }}</label>
+        <input type="text" name="mount[newday]" id="newday" value="{{ mount.newday }}">
+    </div>
+    <div class="field">
+        <label for="recharge">{{ 'section.edit.form.label.recharge'|t|colorize }}</label>
+        <input type="text" name="mount[recharge]" id="recharge" value="{{ mount.recharge }}">
+    </div>
+    <div class="field">
+        <label for="partrecharge">{{ 'section.edit.form.label.partrecharge'|t|colorize }}</label>
+        <input type="text" name="mount[partrecharge]" id="partrecharge" value="{{ mount.partrecharge }}">
+    </div>
+    <div class="ui header">{{ 'section.edit.form.header.buff.label'|t|colorize }}</div>
+    <div class="field">
+        <label for="mountbuff-name">{{ 'section.edit.form.label.buff.name'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][name]" id="mountbuff-name" value="{{ mount.mountbuff.name }}">
+    </div>
+    <div class="ui small header">{{ 'section.edit.form.header.buff.messages'|t|colorize }}</div>
+    <div class="field">
+        <label for="mountbuff-wearoff">{{ 'section.edit.form.label.buff.wearoff'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][wearoff]" id="mountbuff-wearoff" value="{{ mount.mountbuff.wearoff }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-effectmsg">{{ 'section.edit.form.label.buff.effectmsg'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][effectmsg]" id="mountbuff-effectmsg" value="{{ mount.mountbuff.effectmsg }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-effectnodmgmsg">{{ 'section.edit.form.label.buff.effectnodmgmsg'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][effectnodmgmsg]" id="mountbuff-effectnodmgmsg" value="{{ mount.mountbuff.effectnodmgmsg }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-effectfailmsg">{{ 'section.edit.form.label.buff.effectfailmsg'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][effectfailmsg]" id="mountbuff-effectfailmsg" value="{{ mount.mountbuff.effectfailmsg }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-effectfailmsg">{{ 'section.edit.form.label.buff.effectfailmsg'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][effectfailmsg]" id="mountbuff-effectfailmsg" value="{{ mount.mountbuff.effectfailmsg }}">
+    </div>
+    <div class="ui small message">{{ 'section.edit.form.note.replacements'|t|uncolorize }}</div>
+    <div class="field">
+        <label for="mountbuff-effectfailmsg">{{ 'section.edit.form.label.buff.effectfailmsg'|t|colorize }}</label>
+        <input type="text" name="mount[mountbuff][effectfailmsg]" id="mountbuff-effectfailmsg" value="{{ mount.mountbuff.effectfailmsg }}">
+    </div>
+    <div class="ui small header">{{ 'section.edit.form.header.buff.effects'|t|colorize }}</div>
+    <div class="field">
+        <label for="mountbuff-rounds">{{ 'section.edit.form.label.buff.rounds'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][rounds]" id="mountbuff-rounds" value="{{ mount.mountbuff.rounds }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-atkmod">{{ 'section.edit.form.label.buff.atkmod'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][atkmod]" id="mountbuff-atkmod" value="{{ mount.mountbuff.atkmod }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-defmod">{{ 'section.edit.form.label.buff.defmod'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][defmod]" id="mountbuff-defmod" value="{{ mount.mountbuff.defmod }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-invulnerable">{{ 'section.edit.form.label.buff.invulnerable'|t|colorize }}</label>
+        <div class="ui lotgd toggle checkbox">
+            <input type="checkbox" name="mount[mountactive]" id="mountactive" value="1" {{ mount.mountbuff.invulnerable ? 'checked' : '' }}>
+        </div>
+    </div>
+    <div class="field">
+        <label for="mountbuff-regen">{{ 'section.edit.form.label.buff.regen'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][regen]" id="mountbuff-regen" value="{{ mount.mountbuff.regen }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-minioncount">{{ 'section.edit.form.label.buff.minioncount'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][minioncount]" id="mountbuff-minioncount" value="{{ mount.mountbuff.minioncount }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-minbadguydamage">{{ 'section.edit.form.label.buff.minbadguydamage'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][minbadguydamage]" id="mountbuff-minbadguydamage" value="{{ mount.mountbuff.minbadguydamage }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-maxbadguydamage">{{ 'section.edit.form.label.buff.maxbadguydamage'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][maxbadguydamage]" id="mountbuff-maxbadguydamage" value="{{ mount.mountbuff.maxbadguydamage }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-mingoodguydamage">{{ 'section.edit.form.label.buff.mingoodguydamage'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][mingoodguydamage]" id="mountbuff-mingoodguydamage" value="{{ mount.mountbuff.mingoodguydamage }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-maxgoodguydamage">{{ 'section.edit.form.label.buff.maxgoodguydamage'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][maxgoodguydamage]" id="mountbuff-maxgoodguydamage" value="{{ mount.mountbuff.maxgoodguydamage }}">
+    </div>
+    <div class="field">
+        <label for="mountbuff-lifetap">{{ 'section.edit.form.label.buff.lifetap'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][lifetap]" id="mountbuff-lifetap" value="{{ mount.mountbuff.lifetap }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-damageshield">{{ 'section.edit.form.label.buff.damageshield'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][damageshield]" id="mountbuff-damageshield" value="{{ mount.mountbuff.damageshield }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-badguydmgmod">{{ 'section.edit.form.label.buff.badguydmgmod'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][badguydmgmod]" id="mountbuff-badguydmgmod" value="{{ mount.mountbuff.badguydmgmod }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-badguyatkmod">{{ 'section.edit.form.label.buff.badguyatkmod'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][badguyatkmod]" id="mountbuff-badguyatkmod" value="{{ mount.mountbuff.badguyatkmod }}" step="any">
+    </div>
+    <div class="field">
+        <label for="mountbuff-badguydefmod">{{ 'section.edit.form.label.buff.badguydefmod'|t|colorize }}</label>
+        <input type="number" name="mount[mountbuff][badguydefmod]" id="mountbuff-badguydefmod" value="{{ mount.mountbuff.badguydefmod }}" step="any">
+    </div>
+    <div class="field">
+        <button class="ui button" type="submit">{{ 'section.edit.form.button.submit'|t|colorize }}</button>
+    </div>
+</form>
+<br>
+{{ 'section.edit.paragraph'|t|colorize }}
