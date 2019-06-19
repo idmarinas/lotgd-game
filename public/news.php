@@ -6,7 +6,6 @@
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
-require_once 'lib/villagenav.php';
 
 if ($session['user']['loggedin'] ?? false)
 {
@@ -57,7 +56,7 @@ if (! $session['user']['loggedin'])
 }
 elseif ($session['user']['alive'])
 {
-    villagenav();
+    \LotgdNavigation::villageNav();
 }
 else
 {
