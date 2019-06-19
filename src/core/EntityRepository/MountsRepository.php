@@ -78,8 +78,5 @@ class MountsRepository extends DoctrineRepository
 
             return false;
         }
-
-        $sql = 'UPDATE '.DB::prefix('accounts')." SET gems=gems+{$row['mountcostgems']}, goldinbank=goldinbank+{$row['mountcostgold']}, hashorse=0 WHERE hashorse={$row['mountid']}";
-        DB::query($sql);
     }
 }
