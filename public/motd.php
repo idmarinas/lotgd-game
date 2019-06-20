@@ -12,8 +12,6 @@ require_once 'lib/nltoappon.php';
 
 use Doctrine\ORM\Query\Expr\Join;
 
-addcommentary();
-
 tlschema('motd');
 
 popup_header('title', [], 'page-motd');
