@@ -4,8 +4,10 @@
 // addnews ready
 // translator ready
 ob_start();
+
 set_error_handler('payment_error');
 define('ALLOW_ANONYMOUS', true);
+
 require_once 'common.php';
 
 tlschema('payment');
@@ -13,7 +15,7 @@ tlschema('payment');
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
 
-$post = httpallpost();
+$post = \LotgdHttp::getPostAll();
 reset($post);
 
 foreach ($post as $key => $value)
@@ -29,18 +31,19 @@ $header .= 'Content-Length: '.strlen($req)."\r\n";
 $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
 $header .= "Host: www.paypal.com\r\n";
 $header .= "Connection: close\r\n\r\n";
+
 $fp = fsockopen('ssl://www.paypal.com', 443, $errno, $errstr, 30);
 
 // assign posted variables to local variables
-$item_name = httppost('item_name');
-$item_number = httppost('item_number');
-$payment_status = httppost('payment_status');
-$payment_amount = httppost('mc_gross');
-$payment_currency = httppost('mc_currency');
-$txn_id = httppost('txn_id');
-$receiver_email = httppost('business');
-$payer_email = httppost('payer_email');
-$payment_fee = httppost('mc_fee');
+$item_name = \LotgdHttp::getPost('item_name');
+$item_number = \LotgdHttp::getPost('item_number');
+$payment_status = \LotgdHttp::getPost('payment_status');
+$payment_amount = \LotgdHttp::getPost('mc_gross');
+$payment_currency = \LotgdHttp::getPost('mc_currency');
+$txn_id = \LotgdHttp::getPost('txn_id');
+$receiver_email = \LotgdHttp::getPost('business');
+$payer_email = \LotgdHttp::getPost('payer_email');
+$payment_fee = \LotgdHttp::getPost('mc_fee');
 
 $response = '';
 
@@ -52,6 +55,8 @@ if (! $fp)
 else
 {
     fputs($fp, $header.$req);
+
+    $repository = \Doctrine::getRepository('LotgdCore:Paylog');
 
     while (! feof($fp))
     {
@@ -74,10 +79,10 @@ else
                     $payment_fee = 0;
                     $txn_type = 'refund';
                 }
-                $sql = 'SELECT * FROM '.DB::prefix('paylog')." WHERE txnid='{$txn_id}'";
-                $result = DB::query($sql);
 
-                if (1 == DB::num_rows($result))
+                $result = $repository->findOneBy([ 'txnid' => $txn_id ]);
+
+                if ($result)
                 {
                     $emsg .= "Already logged this transaction ID ($txn_id)\n";
                     payment_error(E_ERROR, $emsg, __FILE__, __LINE__);
@@ -111,21 +116,24 @@ function writelog($response)
     global $post;
     global $item_name, $item_number, $payment_status, $payment_amount;
     global $payment_currency, $txn_id, $receiver_email, $payer_email;
-    global $payment_fee,$txn_type;
+    global $payment_fee, $txn_type;
+
     $match = [];
     preg_match("'([^:]*):([^/])*'", $item_number, $match);
 
     if ($match[1] > '')
     {
         $match[1] = addslashes($match[1]);
-        $sql = 'SELECT acctid FROM '.DB::prefix('accounts')." WHERE login='{$match[1]}'";
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
-        $acctid = $row['acctid'];
 
-        if ($acctid > 0)
+        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+        $account = $repository->findOneBy([ 'login' => $match[1] ]);
+        $acctId = 0;
+
+        if ($account)
         {
+            $acctId = $account->getAcctid();
             $donation = $payment_amount;
+
             // if it's a reversal, it'll only post back to us the amount
             // we received back, with out counting the fees, which we
             // receive under a different transaction, but get no
@@ -135,13 +143,18 @@ function writelog($response)
                 $donation -= $payment_fee;
             }
 
-            $hookresult = modulehook('donation_adjustments', ['points' => $donation * getsetting('dpointspercurrencyunit', 100), 'amount' => $donation, 'acctid' => $acctid, 'messages' => []]);
+            $hookresult = modulehook('donation_adjustments', [
+                'points' => $donation * (int) getsetting('dpointspercurrencyunit', 100),
+                'amount' => $donation,
+                'acctid' => $acctId,
+                'messages' => []
+            ]);
             $hookresult['points'] = round($hookresult['points']);
 
-            $sql = 'UPDATE '.DB::prefix('accounts')." SET donation = donation + '{$hookresult['points']}' WHERE acctid=$acctid";
+            $account->setDonation($account->getDonation() + $hookresult['points']);
+            \Doctrine::persist($account);
 
-            $result = DB::query($sql);
-            debuglog('Received donator points for donating -- Credited Automatically', false, $acctid, 'donation', $hookresult['points'], false);
+            debuglog('Received donator points for donating -- Credited Automatically', false, $acctId, 'donation', $hookresult['points'], false);
 
             if (! is_array($hookresult['messages']))
             {
@@ -150,47 +163,33 @@ function writelog($response)
 
             foreach ($hookresult['messages'] as $id => $message)
             {
-                debuglog($message, false, $acctid, 'donation', 0, false);
+                debuglog($message, false, $acctId, 'donation', 0, false);
             }
 
             if (DB::affected_rows() > 0)
             {
                 $processed = 1;
             }
-            modulehook('donation', ['id' => $acctid, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
+            modulehook('donation', ['id' => $acctId, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
         }
     }
-    $sql = '
-        INSERT INTO '.DB::prefix('paylog')." (
-            info,
-            response,
-            txnid,
-            amount,
-            name,
-            acctid,
-            processed,
-            filed,
-            txfee,
-            processdate
-        )VALUES (
-            '".addslashes(serialize($post))."',
-            '".addslashes($response)."',
-            '$txn_id',
-            '$payment_amount',
-            '{$match[1]}',
-            ".(int) $acctid.',
-            '.(int) $processed.",
-            0,
-            '$payment_fee',
-            '".date('Y-m-d H:i:s')."'
-        )";
-    DB::query($sql);
-    $err = DB::error();
 
-    if ($err)
-    {
-        payment_error(E_ERROR, "SQL: $sql\nERR: $err", __FILE__, __LINE__);
-    }
+    $paylogRepository = \Doctrine::getRepository('LotgdCore:Paylog');
+    $paylogEntity = $paylogRepository->hydrateEntity([
+        'info' => $post,
+        'response' => $response,
+        'txnid' => $txn_id,
+        'amount' => $payment_amount,
+        'name' => $match[1],
+        'acctid' => $acctId,
+        'processed' => $processed ?? 0,
+        'filed' => 0,
+        'txfee' => $payment_fee,
+        'processdate' => new \DateTime('now')
+
+    ]);
+    \Doctrine::persist($paylogEntity);
+    \Doctrine::flush();
 }
 
 function payment_error($errno, $errstr, $errfile, $errline)
@@ -203,11 +202,10 @@ function payment_error($errno, $errstr, $errfile, $errline)
     }
 }
 
-$adminEmail = getsetting('gameadminemail', 'postmaster@localhost.com');
+$adminEmail = getsetting('gameadminemail', 'postmaster@localhost.com') ?: 'trash@mightye.org';
 
 if ($payment_errors > '')
 {
-    $subj = translate_mail('Payment Error', 0);
     // $payment_errors not translated
     ob_start();
     echo '<b>GET:</b><pre>';
@@ -224,16 +222,12 @@ if ($payment_errors > '')
     ob_end_clean();
     $payment_errors .= '<hr>'.$contents;
 
-    mail($adminEmail, $subj, $payment_errors.'<hr>', 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
+    mail($adminEmail, 'Payment Error', $payment_errors.'<hr>', 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
 }
 $output = ob_get_contents();
 
 if ($output > '')
 {
-    if ('' == $adminEmail)
-    {
-        $adminEmail = 'trash@mightye.org';
-    }
     echo '<b>GET:</b><pre>';
     reset($_GET);
     var_dump($_GET);
@@ -246,4 +240,5 @@ if ($output > '')
     echo '</pre>';
     mail($adminEmail, "Serious LoGD Payment Problems on {$_SERVER['HTTP_HOST']}", ob_get_contents(), 'Content-Type: text/html');
 }
+
 ob_end_clean();
