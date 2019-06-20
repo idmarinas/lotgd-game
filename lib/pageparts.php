@@ -232,9 +232,9 @@ function page_footer($saveuser = true)
         $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
         $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
-        if (file_exists('payment.php'))
+        if (file_exists('public/payment.php'))
         {
-            $paypalData['site']['notify_url'] = 'http://'.LotgdHttp::getServer('HTTP_HOST').dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
+            $paypalData['site']['notify_url'] = '//'.LotgdHttp::getServer('HTTP_HOST').dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
