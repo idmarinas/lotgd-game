@@ -209,6 +209,12 @@ return [
     // This has a few known false positives, e.g. for loops or branches.
     'unused_variable_detection' => false,
 
+    // Set to true in order to attempt to detect redundant and impossible conditions.
+    //
+    // This has some false positives involving loops,
+    // variables set in branches of loops, and global variables.
+    'redundant_condition_detection' => false,
+
     // If true, this runs a quick version of checks that takes less
     // time at the cost of not running as thorough
     // of an analysis. You should consider setting this
@@ -248,7 +254,7 @@ return [
     //
     // E.g. rewrites `if ($a = value() && $a > 0) {...}`
     // into `$a = value(); if ($a) { if ($a > 0) {...}}`
-    'simplify_ast' => true,
+    'simplify_ast' => false,
 
     // If true, Phan will read `class_alias` calls in the global scope,
     // then (1) create aliases from the *parsed* files if no class definition was found,
