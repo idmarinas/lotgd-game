@@ -1,0 +1,40 @@
+{% translate_default_domain textDomain %}
+
+<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
+<hr>
+
+<button id="show-spoiler" type="button" class="ui orange button">{{ 'section.faq2.show.content'|t|uncolorize }}</button>
+
+<div id="spoiler" class="ui hidden message">
+    <br>
+    {{ 'section.faq2.content.one'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.two'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.three'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.four'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.five'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.six'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.seven'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.eight'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.nine'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.ten'|t(_context)|colorize }}
+
+    {{ 'section.faq2.content.eleven'|t(_context)|colorize }}
+
+</div>
+<hr>
+<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
+
+<script>
+    $('#show-spoiler').on('click', function () {
+        $('#spoiler').toggleClass('hidden message')
+    })
+</script>

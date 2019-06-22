@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
 class PetitionsRepository extends DoctrineRepository
@@ -48,6 +48,42 @@ class PetitionsRepository extends DoctrineRepository
             Debugger::log($th);
 
             return $petitions;
+        }
+    }
+
+    /**
+     * Get count of petitions for network.
+     *
+     * @param string $ip
+     * @param string $lgi
+     *
+     * @return int
+     */
+    public function getCountPetitionsForNetwork(string $ip, string $lgi): int
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            $date = new \DateTime('now');
+            $date->sub(new \DateInterval('P1D'));
+
+            return $query->select('count(u.petitionid)')
+                ->where('inet_aton(u.ip) LIKE inet_aton(:ip) OR u.id = :lgi')
+                ->andWhere('u.date > :date')
+                ->setParameter('date', $date)
+                ->setParameter('ip', $ip)
+                ->setParameter('lgi', $lgi)
+
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
         }
     }
 }

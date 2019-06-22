@@ -1,0 +1,34 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.default.paragraph'|t|colorize }}
+
+<form action="{{ 'petition.php?op=submit'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="charname">{{ 'section.default.form.label.charname'|t|colorize }}</label>
+        {{ user.loggedin ? user.name|colorize : ''}}
+        <input type="{{ user.loggedin ? 'hidden' : 'text' }}" name="charname" id="charname" value="{{ user.name }}">
+    </div>
+    <div class="field">
+        <label for="email">{{ 'section.default.form.label.email'|t|colorize }}</label>
+        {{ user.loggedin ? user.emailaddress|colorize : ''}}
+        <input type="{{ user.loggedin ? 'hidden' : 'text' }}" name="email" id="email" value="{{ user.emailaddress }}">
+    </div>
+    <div class="field">
+        <label for="problem_type">{{ 'section.default.form.label.type'|t|colorize }}</label>
+        <select name="problem_type" id="problem_type" class="ui lotgd dropdown">
+            {% for type in petition_types %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="field">
+        <label for="description">{{ 'section.default.form.label.description'|t|colorize }}</label>
+        <textarea name='description'></textarea>
+    </div>
+    <div class="field">
+        <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>
+
+<br>
+{{ 'section.default.note'|t|colorize }}

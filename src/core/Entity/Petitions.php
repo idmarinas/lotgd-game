@@ -56,14 +56,14 @@ class Petitions
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="body", type="array", nullable=false)
      */
     private $body;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pageinfo", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="pageinfo", type="array", nullable=false)
      */
     private $pageinfo;
 

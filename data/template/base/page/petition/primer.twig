@@ -1,0 +1,33 @@
+{% translate_default_domain textDomain %}
+
+<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
+<hr>
+
+{{ 'section.primer.title'|t|colorize }}
+
+{{ 'section.primer.section.village.title'|t|colorize }}
+{{ 'section.primer.section.village.paragraph'|t(_context)|colorize }}
+
+{{ 'section.primer.section.noob.title'|t|colorize }}
+{{ 'section.primer.section.noob.paragraph'|t(_context)|colorize }}
+{% if multimaster == 0 %}
+    {{ 'section.primer.section.noob.multimaster'|t|colorize }}
+{% endif %}
+
+{{ 'section.primer.section.death.title'|t|colorize }}
+{{ 'section.primer.section.death.paragraph'|t(_context)|colorize }}
+
+{{ 'section.primer.section.day.title'|t|colorize }}
+{{ 'section.primer.section.day.paragraph'|t(_context)|colorize }}
+
+{% if pvp %}
+    {{ 'section.primer.section.pvp.title'|t|colorize }}
+    {{ 'section.primer.section.pvp.paragraph'|t(_context)|colorize }}
+{% endif %}
+
+{{ 'section.primer.section.ready.title'|t|colorize }}
+{{ 'section.primer.section.ready.paragraph'|t(_context)|colorize }}
+
+<br>
+<hr>
+<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
