@@ -9,7 +9,7 @@ define([
 
     /**
      * @lotgdDoc function
-     * @name Lotgd.md5PassRegister
+     * @name Lotgd.md5PassLogin
      * @kind function
      *
      * @description Function for encode pass in register form
