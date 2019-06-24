@@ -314,7 +314,7 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
     $session['user']['alive'] = true;
 }
 
-$session['bufflist'] = $session['user']['bufflist'] ?? [];
+$session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
 
 if (! is_array($session['bufflist']))
 {
