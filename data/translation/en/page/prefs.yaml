@@ -1,0 +1,49 @@
+title: 'Preferences'
+
+section:
+    default:
+        form:
+            confirm:
+                delete: 'Are you sure you wish to PERMANENTLY delete your character?'
+            button:
+                submit:
+                    delete.character: 'Delete Character'
+    forcechangeemail: '`$The email change request to the address "`q{email}`0" has been forced. Links sent will not work anymore.`0`n`n'
+    cancelemail: '`$The email change request to the address "`q{email}`0" has been cancelled. Links sent will not work anymore.`0`n`n'
+
+flash.messages:
+    form:
+        password:
+            not.match: 'Your passwords do not match.'
+            changed: 'Your password has been changed.'
+            short:
+                - 'Your password is too short.'
+                - 'It must be at least 4 characters.'
+        bio:
+            - 'You cannot modify your bio.'
+            - 'It has been blocked by the administrators!'
+        email:
+            changed: 'Your email address has been changed.'
+            prohibit:
+                - 'Your email cannot be changed, system settings prohibit it.'
+                - 'Use the Petition link to ask the  server administrator to change your email address if this one is no longer valid.'
+            invalid: 'That is not a valid email address.'
+    settings:
+        saved: 'Settings saved!'
+    validate: 'An email was sent to {target,select, 0{your old email address} other{your new email address}} to validate your change. Click the link (<strong>while being logged out!</strong>) in the email to activate the change. If nothing is done, your email will stay as it is.'
+    auto: '`qNote that if there is no response from this email address the request will automatically be accepted in about {days,number} days.`n`n`$This request can be cancelled anytime here.`4`n`n'
+    trouble: 'If you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.'
+    account: 'If your old account does not exist anymore or you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.'
+    delete.character: 'Your character has been deleted!'
+
+mail:
+    subject: 'LoGD Account Verification'
+    message: 'An email change has been requested to this email account.`n`nLogin name: {name} `n`n'
+    confirm: 'In order to confirm it, you will need to click on the link below.`n`n {serverAddress}`n`nNote: You need to be LOGGED OUT of the game to do so. If you are logged in while clicking, log out and try again.`n`n'
+    confirm.old: 'The validation link has been sent, along with this email address, to the old account to verify your change.`n`n'
+    owner: 'An email change has been requested to the email account {email}.`n`nLogin name: {name} `n`n'
+    validation:
+        new: 'The validation will be sent to the new account.`nIf you did NOT request this, somebody with your password got in and requested the change. Go in with your password immediately and change it back. Alter your password, too.`n`n'
+        old: 'No validation will be sent to the new account, so if you did NOT request this, rest assured, you got this message, not them.`n`n'
+    timeout: 'Note that if there is no response from this email address the request will automatically be accepted in about %s days.`n`nThis request can be cancelled anytime in your preferences in the game.`n`n'
+    footer: '`n`nThanks for playing!`n`n{server}'

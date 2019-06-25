@@ -18,36 +18,47 @@ if (isset($_POST['template']))
 }
 
 require_once 'common.php';
-require_once 'lib/villagenav.php';
+require_once 'lib/is_email.php';
+require_once 'lib/showform.php';
 
 tlschema('prefs');
 
-require_once 'lib/is_email.php';
-require_once 'lib/showform.php';
-require_once 'lib/sanitize.php';
+$textDomain = 'page-prefs';
 
-page_header('Preferences');
+$params = [
+    'textDomain' => $textDomain,
+    'selfDelete' => (int) getsetting('selfdelete', 0)
+];
 
-$op = httpget('op');
+page_header('title', [], $textDomain);
 
-addnav('Navigation');
+$op = (string) \LotgdHttp::getQuery('op');
 
-if ('suicide' == $op && 0 != getsetting('selfdelete', 0))
+\LotgdNavigation::addHeader('common.category.navigation');
+\LotgdNavigation::addNav('common.category.navigation', 'prefs.php');
+
+if ('suicide' == $op && $params['selfDelete'])
 {
-    $userid = httpget('userid');
+    $userId = $session['user']['acctid'];
+
     require_once 'lib/charcleanup.php';
-    char_cleanup($userid, CHAR_DELETE_SUICIDE);
-    $sql = 'DELETE FROM '.DB::prefix('accounts')." WHERE acctid='$userid'";
-    DB::query($sql);
-    output('Your character has been deleted!');
-    addnews('`#%s quietly passed from this world.', $session['user']['name']);
-    addnav('Login Page', 'index.php');
-    $session = [];
-    $session['user'] = [];
-    $session['loggedin'] = false;
-    $session['user']['loggedin'] = false;
-    invalidatedatacache('charlisthomepage');
-    invalidatedatacache('list.php-warsonline');
+
+    if (char_cleanup($userId, CHAR_DELETE_SUICIDE))
+    {
+        addnews('delete.character', [ 'name' => $session['user']['name'] ], 'partial-news', true);
+
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.delete.character', [], $textDomain));
+
+        $session = [];
+        $session['user'] = [];
+        $session['loggedin'] = false;
+        $session['user']['loggedin'] = false;
+
+        invalidatedatacache('charlisthomepage');
+        invalidatedatacache('list.php-warsonline');
+
+        return redirect('home.php');
+    }
 }
 elseif ('forcechangeemail' == $op)
 {
@@ -55,20 +66,26 @@ elseif ('forcechangeemail' == $op)
 
     if ($session['user']['alive'])
     {
-        villagenav();
+        \LotgdNavigation::villageNav();
     }
     else
     {
-        addnav('Return to the news', 'news.php');
+        \LotgdNavigation::addNav('common.nav.news', 'news.php');
     }
-    addnav('Return to the Prefs', 'prefs.php');
+
+    \LotgdNavigation::addNav('common.nav.prefs', 'prefs.php');
+
     $replacearray = explode('|', $session['user']['replaceemail']);
     $email = $replacearray[0];
-    output('`$The email change request to the address `q"%s`$" has been forced. Links sent will not work anymore.`n`n', $email);
+
+    $params['tpl'] = 'forcechangeemail';
+    $params['email'] = $email;
+
+    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been forced after the wait period', $session['user']['acctid'], $session['user']['acctid'], 'Email');
+
     $session['user']['emailaddress'] = $replacearray[0];
     $session['user']['replaceemail'] = '';
     $session['user']['emailvalidation'] = '';
-    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been forced after the wait period', $session['user']['acctid'], $session['user']['acctid'], 'Email');
 }
 elseif ('cancelemail' == $op)
 {
@@ -76,75 +93,74 @@ elseif ('cancelemail' == $op)
 
     if ($session['user']['alive'])
     {
-        villagenav();
+        \LotgdNavigation::villageNav();
     }
     else
     {
-        addnav('Return to the news', 'news.php');
+        \LotgdNavigation::addNav('common.nav.news', 'news.php');
     }
-    addnav('Return to the Prefs', 'prefs.php');
+
+    \LotgdNavigation::addNav('common.nav.prefs', 'prefs.php');
+
     $replacearray = explode('|', $session['user']['replaceemail']);
     $email = $replacearray[0];
-    output('`$The email change request to the address `q"%s`$" has been cancelled. Links sent will not work anymore.`n`n', $email);
+
+    $params['tpl'] = 'cancelemail';
+    $params['email'] = $email;
+
+    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been cancelled', $session['user']['acctid'], $session['user']['acctid'], 'Email');
+
     $session['user']['replaceemail'] = '';
     $session['user']['emailvalidation'] = '';
-    debuglog('Email Change Request from '.$session['user']['emailaddress'].' to '.$email.' has been cancelled', $session['user']['acctid'], $session['user']['acctid'], 'Email');
 }
 else
 {
     checkday();
 
-    $reqeust = \LotgdLocator::get(\Lotgd\Core\Http::class);
-
+    \LotgdNavigation::addNav('common.nav.bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode(\LotgdHttp::getServer('REQUEST_URI')));
     if ($session['user']['alive'])
     {
-        villagenav();
+        \LotgdNavigation::villageNav();
     }
     else
     {
-        addnav('Return to the news', 'news.php');
+        \LotgdNavigation::addNav('common.nav.news', 'news.php');
     }
 
-    $oldvalues = stripslashes(httppost('oldvalues'));
-    $oldvalues = unserialize($oldvalues);
-
-    $post = httpallpost();
-    unset($post['oldvalues']);
+    $post = \LotgdHttp::getPostAll();
     unset($post['showFormTabIndex']);
 
-    if (count($post))
+    if (\LotgdHttp::isPost())
     {
-        $pass1 = httppost('pass1');
-        $pass2 = httppost('pass2');
+        $pass1 = $post['pass1'];
+        $pass2 = $post['pass2'];
 
         if ($pass1 != $pass2)
         {
-            output('`#Your passwords do not match.`n');
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.post.password.not.match', [], $textDomain));
         }
-        else
+        elseif ('' != $pass1)
         {
-            if ('' != $pass1)
+            if (strlen($pass1) > 3)
             {
-                if (strlen($pass1) > 3)
+                if ('!md5!' != substr($pass1, 0, 5))
                 {
-                    if ('!md5!' != substr($pass1, 0, 5))
-                    {
-                        $pass1 = md5(md5($pass1));
-                    }
-                    else
-                    {
-                        $pass1 = md5(substr($pass1, 5));
-                    }
-                    $session['user']['password'] = $pass1;
-                    output('`#Your password has been changed.`n');
+                    $pass1 = md5(md5($pass1));
                 }
                 else
                 {
-                    output('`#Your password is too short.');
-                    output('It must be at least 4 characters.`n');
+                    $pass1 = md5(substr($pass1, 5));
                 }
+                $session['user']['password'] = $pass1;
+
+                \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.post.password.changed', [], $textDomain));
+            }
+            else
+            {
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.post.password.short', [], $textDomain));
             }
         }
+
         reset($post);
         $nonsettings = [
             'pass1' => 1,
@@ -157,16 +173,11 @@ else
         foreach ($post as $key => $val)
         {
             // If this is one we don't save, skip
-            if (isset($nonsettings[$key]) && $nonsettings[$key])
+            if ($nonsettings[$key] ?? true)
             {
                 continue;
             }
 
-            if (isset($oldvalues[$key]) &&
-                    stripslashes($val) == $oldvalues[$key])
-            {
-                continue;
-            }
             // If this is a module userpref handle and skip
             debug("Setting $key to $val");
 
@@ -180,29 +191,33 @@ else
                 $x = explode('___', $key);
                 $module = $x[0];
                 $key = $x[1];
-                modulehook('notifyuserprefchange', ['name' => $key, 'old' => $oldvalues[$module.'___'.$key], 'new' => $val]);
+
+                modulehook('notifyuserprefchange', ['name' => $key, 'new' => $val]);
+
                 set_module_pref($key, $val, $module);
+
                 continue;
             }
-            $session['user']['prefs'][$key] = httppost($key);
-        }
-        $bio = stripslashes(httppost('bio'));
-        $bio = comment_sanitize($bio);
 
-        if ($bio != comment_sanitize($session['user']['bio']))
+            $session['user']['prefs'][$key] = $val;
+        }
+
+        $bio = stripslashes($post['bio']);
+
+        if ($bio != $session['user']['bio'])
         {
             if ($session['user']['biotime'] > '9000-01-01')
             {
-                output('`$You cannot modify your bio.');
-                output('It has been blocked by the administrators!`0`n');
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.post.bio.error', [], $textDomain));
             }
             else
             {
                 $session['user']['bio'] = $bio;
-                $session['user']['biotime'] = date('Y-m-d H:i:s');
+                $session['user']['biotime'] = new \DateTime('now');
             }
         }
-        $email = httppost('email');
+
+        $email = $post['email'];
 
         if ($email != $session['user']['emailaddress'])
         {
@@ -215,26 +230,27 @@ else
                         $emailverification = 'x'.md5(date('Y-m-d H:i:s').$email);
                         $emailverification = substr($emailverification, 0, strlen($emailverification) - 2);
                         //cut last char, won't be salved in the DB else!
-                        $subj = translate_mail('LoGD Account Verification', 0);
                         $shortname = $session['user']['login'];
 
                         //-- Use "protocol-less" URLs
-                        $serveraddress = sprintf('//%s?op=val&id=%s', $request->getServer('SERVER_NAME').'/create.php', $emailverification);
-                        $serverurl = sprintf('//%s', $request->getServer('SERVER_NAME'));
+                        $serveraddress = sprintf('//%s?op=val&id=%s', \LotgdHttp::getServer('SERVER_NAME').'/create.php', $emailverification);
+                        $serverurl = sprintf('//%s', \LotgdHttp::getServer('SERVER_NAME'));
 
-                        $msg = translate_mail(['An email change has been requested to this email account.`n`nLogin name: %s `n`n', $shortname]);
-                        $confirm = translate_mail(['In order to confirm it, you will need to click on the link below.`n`n %s`n`nNote: You need to be LOGGED OUT of the game to do so. If you are logged in while clicking, log out and try again.`n`n', $serveraddress, $emailverification], 0);
-                        $oldconfirm = translate_mail(['The validation link has been sent, along with this email address, to the old account to verify your change.`n`n']);
-                        $ownermsg = translate_mail(['An email change has been requested to the email account %s.`n`nLogin name: %s `n`n', $email, $shortname]);
-                        $newvalidationsent = translate_mail(['The validation will be sent to the new account.`nIf you did NOT request this, somebody with your password got in and requested the change. Go in with your password immediately and change it back. Alter your password, too.`n`n', $shortname, 0]);
-                        $oldvalidationsent = translate_mail(['No validation will be sent to the new account, so if you did NOT request this, rest assured, you got this message, not them.`n`n']);
+                        $subj = \LotgdTranslator::t('mail.subject', [], $textDomain);
+
+                        $msg = \LotgdTranslator::t('mail.message', [ 'name' => $shortname ], $textDomain);
+                        $confirm = \LotgdTranslator::t('mail.confirm', [ 'serverAddress' => $serveraddress ], $textDomain);
+                        $oldconfirm = \LotgdTranslator::t('mail.confirm.old', [], $textDomain);
+                        $ownermsg = \LotgdTranslator::t('mail.owner', [ 'email' => $email, 'name' => $shortname ], $textDomain);
+                        $newvalidationsent = \LotgdTranslator::t('mail.validation.new', [], $textDomain);
+                        $oldvalidationsent = \LotgdTranslator::t('mail.validation.old', [], $textDomain);
 
                         $changetimeoutwarning = '';
                         if (getsetting('playerchangeemailauto', 0))
                         {
-                            $changetimeoutwarning = translate_mail(['Note that if there is no response from this email address the request will automatically be accepted in about %s days.`n`nThis request can be cancelled anytime in your preferences in the game.`n`n', getsetting('playerchangeemaildays', 3)]);
+                            $changetimeoutwarning = \LotgdTranslator::t('mail.timeout', [ 'days' => getsetting('playerchangeemaildays', 3)], $textDomain);
                         }
-                        $footer = $changetimeoutwarning.translate_mail(['`n`nThanks for playing!`n`n%s', $serverurl]);
+                        $footer = $changetimeoutwarning.\LotgdTranslator::t('mail.footer', [ 'server' => $serverurl], $textDomain);
 
                         if (0 == getsetting('validationtarget', 0))
                         {
@@ -250,58 +266,49 @@ else
 
                         mail($email, $subj, str_replace('`n', "\n", $msg), 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
                         mail($session['user']['emailaddress'], $subj, str_replace('`n', "\n", $ownermsg), 'From: '.getsetting('gameadminemail', 'postmaster@localhost.com'));
+
                         $session['user']['replaceemail'] = $email.'|'.date('Y-m-d H:i:s');
                         $session['user']['emailvalidation'] = $emailverification;
+
                         debuglog('Email Change requested from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
-                        output('`4An email was sent to `$%s`4 to validate your change. Click the link (`bwhile being logged out!´b) in the email to activate the change. If nothing is done, your email will stay as it is.`0`n`n', translate_inline((getsetting('validationtarget', 0) ? 'your new email address' : 'your old email address')));
+
+                        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.validate', [ 'target' => getsetting('validationtarget', 0) ], $textDomain));
 
                         if (getsetting('playerchangeemailauto', 0))
                         {
-                            output('`qNote that if there is no response from this email address the request will automatically be accepted in about %s days.`n`n`$This request can be cancelled anytime here.`4`n`n', getsetting('playerchangeemaildays', 3));
+                            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.auto', [ 'days' => getsetting('playerchangeemaildays', 3) ], $textDomain));
 
                             if (0 == getsetting('validationtarget', 0))
                             {
-                                output('`$If you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.`n`n');
+                                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.trouble', [], $textDomain));
                             }
                         }
                         elseif (0 == getsetting('validationtarget', 0))
                         {
-                            output('`$If your old account does not exist anymore or you have trouble, please petition. Depending on the policy, we may act to avoid potential abuse.`n`n');
+                            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.account', [], $textDomain));
                         }
                     }
                     else
                     {
-                        output('`#Your email address has been changed.`n');
-                        debuglog('Email changed from '.$email.' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
+                        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.form.email.changed', [], $textDomain));
+
+                        debuglog('Email changed from '.$session['user']['emailaddress'].' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
+
                         $session['user']['emailaddress'] = $email;
                     }
                 }
                 else
                 {
-                    if (1 == getsetting('requireemail', 0))
-                    {
-                        output('`#That is not a valid email address.`n');
-                    }
-                    else
-                    {
-                        output('`#Your email address has been changed.`n');
-                        debuglog('Email changed from '.$email.' to '.$email, $session['user']['acctid'], $session['user']['acctid'], 'Email');
-                        $session['user']['emailaddress'] = $email;
-                    }
+                    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.form.email.invalid', [], $textDomain));
                 }
             }
             else
             {
-                output('`#Your email cannot be changed, system settings prohibit it.`n');
-                output('Use the Petition link to ask the  server administrator to change your email address if this one is no longer valid.`n');
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.form.email.prohibit', [], $textDomain));
             }
         }
-        output('`$Settings saved!`n`n');
-    }
 
-    if (! isset($session['user']['prefs']['timeformat']))
-    {
-        $session['user']['prefs']['timeformat'] = '[m/d h:ia]';
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.settings.saved', [], $textDomain));
     }
 
     $form = [
@@ -319,12 +326,6 @@ else
         'language' => 'Language,enum,'.getsetting('serverlanguages', 'en,English,de,Deutsch,fr,Français,dk,Danish,es,Español,it,Italian'),
         'tabconfig' => 'Show config sections in tabs,bool',
         'forestcreaturebar' => 'Forest Creatures show health ...,enum,0,Only Text,1,Only Healthbar,2,Healthbar AND Text',
-        'ajax' => 'Turn AJAX on?,bool',
-        'Note: AJAX refreshes i.e. mail notifications (You have X new mails...) without needing you to reload the page. Turn on and see if it gives your computer a headache or not,note',
-        'mailwidth' => 'Width of your standard mail reply textbox,int',
-        'mailheight' => 'Height of your standard mail reply textbox,int',
-        'popupsize' => 'Size of the mailwindow when it opens,text',
-        'Note: i.e. 150x120 equals 150 pixels times 120 pixels - keep that format.,note',
 
         'Game Behavior Preferences,title',
         'emailonmail' => 'Send email when you get new Ye Olde Mail?,bool',
@@ -340,70 +341,31 @@ else
                 strtotime('now') + ($session['user']['prefs']['timeoffset'] * 60 * 60))],
         'ihavenocheer' => '`0Always disable all holiday related text replacements (such as a`1`0l`1`0e => e`1`0g`1`0g n`1`0o`1`0g for December),bool',
         'bio' => 'Short Character Biography (255 chars max),string,255',
-        'nojump' => "Don't jump to comment areas after refreshing or posting a comment?,bool",
     ];
-    rawoutput("<script language='JavaScript' src='resources/md5.js'></script>");
+
     $warn = translate_inline('Your password is too short.  It must be at least 4 characters long.');
-    rawoutput("<script language='JavaScript'>
-	<!--
-	function md5pass(){
-		//encode passwords before submission to protect them even from network sniffing attacks.
-		var passbox = document.getElementById('pass1');
-		if (passbox.value.len < 4 && passbox.value.len > 0){
-			alert('$warn');
-			return false;
-		}else{
-			var passbox2 = document.getElementById('pass2');
-			if (passbox2.value.substring(0, 5) != '!md5!') {
-				passbox2.value = '!md5!' + hex_md5(passbox2.value);
-			}
-			if (passbox.value.substring(0, 5) != '!md5!') {
-				passbox.value = '!md5!' + hex_md5(passbox.value);
-			}
-			return true;
-		}
-	}
-	//-->
-	</script>");
 
     $prefs = &$session['user']['prefs'];
     $prefs['bio'] = $session['user']['bio'];
-    $prefs['template'] = $_COOKIE['template'] ?? '';
-
-    if ('' == $prefs['template'])
-    {
-        $prefs['template'] = getsetting('defaultskin', 'jade.htm');
-    }
-
-    if (! isset($prefs['sexuality']) || '' == $prefs['sexuality'])
-    {
-        $prefs['sexuality'] = ! $session['user']['sex'];
-    }
-
-    if (! isset($prefs['mailwidth']) || '' == $prefs['mailwidth'])
-    {
-        $prefs['mailwidth'] = 60;
-    }
-
-    if (! isset($prefs['mailheight']) || '' == $prefs['mailheight'])
-    {
-        $prefs['mailheight'] = 9;
-    }
+    $prefs['template'] = \LotgdHttp::getCookie('template') ?: getsetting('defaultskin', 'jade.htm');
+    $prefs['sexuality'] = $prefs['sexuality'] ?? ! $session['user']['sex'] ?: ! $session['user']['sex'];
     $prefs['email'] = $session['user']['emailaddress'];
+    $prefs['timeformat'] = $prefs['timeformat'] ?? '[m/d h:ia]';
     // Default tabbed config to true
     $prefs['tabconfig'] = $prefs['tabconfig'] ?? 1;
 
     // Okay, allow modules to add prefs one at a time.
     // We are going to do it this way to *ensure* that modules don't conflict
     // in namespace.
-    $sql = 'SELECT modulename FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|prefs|%' AND active=1 ORDER BY modulename";
-    $result = DB::query($sql);
+    $moduleRepository = \Doctrine::getRepository('LotgdCore:Modules');
+    $result = $moduleRepository->findInfoKeyLike('prefs');
+
     $everfound = 0;
     $foundmodules = [];
     $msettings = [];
     $mdata = [];
 
-    while ($row = DB::fetch_assoc($result))
+    foreach ($result as $row)
     {
         $module = $row['modulename'];
         $info = get_module_info($module);
@@ -416,7 +378,7 @@ else
         $tempdata = [];
         $found = 0;
 
-        while (list($key, $val) = each($info['prefs']))
+        foreach ($info['prefs'] as $key => $val)
         {
             $isuser = preg_match('/^user_/', $key);
             $ischeck = preg_match('/^check_/', $key);
@@ -505,23 +467,15 @@ else
 
     if (count($foundmodules))
     {
-        $select = DB::select('module_userprefs');
-        $select->where->in('modulename', $foundmodules)
-            ->nest()
-            ->like('setting', 'user_%')
-            ->or
-            ->like('setting', 'check_%')
-            ->unnest()
-            ->equalTo('userid', $session['user']['acctid'])
-        ;
-        $result1 = DB::execute($select);
+        $modulePrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+        $result = $modulePrefsRepository->findModulesPrefs($foundmodules);
+        $result = $modulePrefsRepository->extractEntity($result);
 
-        while ($row1 = DB::fetch_assoc($result1))
+        foreach ($result as $row)
         {
-            $mdata[$row1['modulename'].'___'.$row1['setting']] = $row1['value'];
+            $mdata[$row['modulename'].'___'.$row['setting']] = $row['value'];
         }
     }
-    addnav('View Bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode($request->getServer('REQUEST_URI')));
 
     $form = array_merge($form, $msettings);
     $prefs = array_merge($prefs, $mdata);
@@ -561,24 +515,10 @@ else
         addnav('', 'prefs.php?op=cancelemail');
     }
 
-    rawoutput("<form action='prefs.php?op=save' method='POST' onSubmit='return(md5pass)'>");
-    $info = lotgd_showform($form, $prefs);
-    rawoutput("<input type='hidden' value=\"".
-            htmlentities(serialize($info), ENT_COMPAT, getsetting('charset', 'UTF-8'))."\" name='oldvalues'>");
-
-    rawoutput('</form><br>');
-    addnav('', 'prefs.php?op=save');
-
-    // Stop clueless lusers from deleting their character just because a
-    // monster killed them.
-    if ($session['user']['alive'] && 0 != getsetting('selfdelete', 0))
-    {
-        rawoutput("<form action='prefs.php?op=suicide&userid={$session['user']['acctid']}' method='POST'>");
-        $deltext = translate_inline('Delete Character');
-        $conf = translate_inline('Are you sure you wish to PERMANENTLY delete your character?');
-        rawoutput("<input type='submit' class='ui right floated red button' value='$deltext' onClick='return confirm(\"$conf\");'>");
-        rawoutput('</form><br>');
-        addnav('', "prefs.php?op=suicide&userid={$session['user']['acctid']}");
-    }
+    $params['form'] = lotgd_showform($form, $prefs, false, false, false);
 }
+
+$params = modulehook('page-prefs-tpl-params', $params);
+rawoutput(LotgdTheme::renderThemeTemplate('page/prefs.twig', $params));
+
 page_footer();
