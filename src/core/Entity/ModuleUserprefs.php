@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="modulename", columns={"modulename", "userid"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ModuleUserprefsRepository")
  */
 class ModuleUserprefs
 {
