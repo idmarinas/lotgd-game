@@ -75,7 +75,11 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function extractEntity($object): array
     {
-        if (is_array($object))
+        if ('object' != gettype($object))
+        {
+            return (array) $object;
+        }
+        elseif (is_array($object))
         {
             $set = [];
 
