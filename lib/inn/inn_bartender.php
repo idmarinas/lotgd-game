@@ -122,6 +122,7 @@ elseif ('listupstairs' == $action)
     $params['sleepers'] = $pvp->getLocationSleepersCount($params['innName']);
     $params['returnLink'] = \LotgdHttp::getServer('REQUEST_URI');
     $params['pvpTimeOut'] = new \DateTime(date('Y-m-d H:i:s', strtotime("-$pvptime seconds")));
+    $params['isInn'] = true;
 
     \LotgdNavigation::addNav('Refresh the list', 'inn.php?op=bartender&act=listupstairs');
 }
