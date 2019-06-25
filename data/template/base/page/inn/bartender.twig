@@ -13,7 +13,7 @@
 {% elseif 'listupstairs' == action %}
     {{ 'section.bartender.listupstairs.paragraph'|t({ 'barkeep': barkeep })|colorize }}
 
-    {{ pvp_list_table({ 'paginator': paginator, 'returnUrl': returnUrl, 'pvpTimeOut': pvpTimeOut }) }}
+    {{ pvp_list_table({ 'paginator': paginator, 'returnLink': returnLink, 'pvpTimeOut': pvpTimeOut }) }}
 
     {{ pvp_list_sleepers({ 'sleepers': sleepers }) }}
 {% elseif 'colors' == action %}
