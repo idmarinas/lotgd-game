@@ -336,4 +336,32 @@ class MailRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Delete mail of account.
+     *
+     * @param int $accountId
+     *
+     * @return int
+     */
+    public function deleteMailOfAccount(int $accountId): int
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.msgto = :acct')
+                ->setParameter('acct', $accountId)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
