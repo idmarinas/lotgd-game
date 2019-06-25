@@ -19,7 +19,7 @@
 {% set dead = 'table.opcs.dead'|t|colorize %}
 {% set unconscious = 'table.opcs.unconscious'|t|colorize %}
 
-<table class="ui very compact striped selectable table">
+<table class="ui very compact striped table">
     <thead>
         <tr>
             <th>{{ 'table.header.alive'|t }}</th>
@@ -62,12 +62,12 @@
                     {% endif %}
                 </td>
                 <td>{{ (warrior.race ?: constant('RACE_UNKNOWN'))|t }}</td>
-                <td>{{ 'table.warriors.sex'|t({'sex': warrior.sex})|colorize }}</td>
+                <td>{{ 'table.warrior.sex'|t({'sex': warrior.sex})|colorize }}</td>
                 <td>{{ warrior.laston|relative_date }}</td>
             </tr>
         {% else %}
             <tr>
-                <td class="center aligned" colspan="7">{{ 'table.warriors.notfound'|t|colorize }}</td>
+                <td class="center aligned" colspan="7">{{ 'table.warrior.notfound'|t|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>
