@@ -135,4 +135,32 @@ class CommentaryRepository extends DoctrineRepository
             return [];
         }
     }
+
+    /**
+     * Delete comments of account.
+     *
+     * @param int $accountId
+     *
+     * @return int
+     */
+    public function deleteCommentsOfAccount(int $accountId): int
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.author = :acct')
+                ->setParameter('acct', $accountId)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
