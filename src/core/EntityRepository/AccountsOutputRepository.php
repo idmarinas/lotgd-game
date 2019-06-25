@@ -45,4 +45,32 @@ class AccountsOutputRepository extends DoctrineRepository
             return '';
         }
     }
+
+    /**
+     * Delete output of account.
+     *
+     * @param int $accountId
+     *
+     * @return int
+     */
+    public function deleteOutputOfAccount(int $accountId): int
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.acctid = :acct')
+                ->setParameter('acct', $accountId)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
