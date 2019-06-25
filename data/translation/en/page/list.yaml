@@ -16,7 +16,7 @@
         'race': 'Race'
         'sex': 'Sex'
         'last': 'Last on'
-    'warriors':
+    'warrior':
         'notfound': '`$No warriors found in realm`0'
         'isOnline': '`#(Online)`0'
         'sex': '{sex,select, 0{`!Male`0} 1{`%Female`0} other{`&Unknown`0}}'
