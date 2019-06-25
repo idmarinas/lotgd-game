@@ -44,4 +44,30 @@ class NewsRepository extends DoctrineRepository
             return false;
         }
     }
+
+    /**
+     * Delete all news of user.
+     *
+     * @param int $accountId
+     */
+    public function deleteNewsOfAccount(int $accountId): bool
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.accountid = :acct')
+                ->setParameter('acct', $accountId)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            return false;
+        }
+    }
 }
