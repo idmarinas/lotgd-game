@@ -50,4 +50,36 @@ class ModulesRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Find modules with this info key.
+     *
+     * @param string $key
+     *
+     * @return array
+     */
+    public function findInfoKeyLike(string $key): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query->select('u.modulename')
+                ->where('u.infokeys LIKE :key AND u.active = 1')
+
+                ->setParameter('key', "%|${key}|%")
+
+                ->orderBy('u.modulename', 'DESC')
+
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return [];
+        }
+    }
 }
