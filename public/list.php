@@ -45,9 +45,9 @@ else
     LotgdNavigation::addNav('list.nav.full', 'list.php?page=1');
 }
 
-$op = httpget('op');
-$page = (int) httpget('page');
-$search = (string) httppost('name');
+$op = \LotgdHttp::getQuery('op');
+$page = (int) \LotgdHttp::getQuery('page');
+$search = (string) \LotgdHttp::getPost('name');
 $playersperpage = 50;
 $params = [];
 
