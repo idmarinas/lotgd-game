@@ -85,7 +85,7 @@ class EntityRepository extends DoctrineEntityRepository
 
             foreach ($object as $key => $value)
             {
-                $set[$key] = $this->getHydrator()->extract($value);
+                $set[$key] = $this->extractEntity($value);
             }
 
             return $set;
