@@ -31,7 +31,7 @@ $lotgdBattleContent = [
 ];
 $content = &$lotgdBattleContent;
 
-$attackstack = @unserialize($session['user']['badguy']);
+$attackstack = $session['user']['badguy'];
 
 if (isset($attackstack['enemies']))
 {
@@ -854,8 +854,8 @@ if ($enemycounter > 0)
 }
 
 $attackstack = ['enemies' => $newenemies, 'options' => $options];
-$session['user']['badguy'] = createstring($attackstack);
-$session['user']['companions'] = createstring($companions);
+$session['user']['badguy'] = $attackstack;
+$session['user']['companions'] = $companions;
 $session['user']['battle']['options'] = $options;
 
 if ($battleShowResult)

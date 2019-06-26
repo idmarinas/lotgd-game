@@ -112,7 +112,7 @@ if (DB::num_rows($result) > 0 && $session['user']['level'] < getsetting('maxleve
 
                 $attackstack['enemies'][0] = $master;
                 $attackstack['options']['type'] = 'train';
-                $session['user']['badguy'] = createstring($attackstack);
+                $session['user']['badguy'] = $attackstack;
 
                 $battle = true;
 
