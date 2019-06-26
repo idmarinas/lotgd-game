@@ -90,7 +90,7 @@ class Listing
             $this->query = $this->repository->createQueryBuilder('u');
             $expr = $this->query->expr();
 
-            $this->query->select('u.name', 'u.race', 'u.alive', 'u.location', 'u.sex', 'u.level', 'u.dragonkills', 'u.pvpflag', 'u.clanrank')
+            $this->query->select('u.id AS character_id', 'u.name', 'u.race', 'u.alive', 'u.location', 'u.sex', 'u.level', 'u.dragonkills', 'u.pvpflag', 'u.clanrank')
                 ->addSelect('a.acctid', 'a.loggedin', 'a.login', 'a.laston')
                 ->addSelect('c.clanshort', 'c.clanname')
 
