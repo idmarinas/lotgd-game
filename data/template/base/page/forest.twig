@@ -1,3 +1,6 @@
 {% translate_default_domain textDomain %}
 
-{{ include_theme('page/forest/' ~ tpl|default('default') ~ '.twig') }}
+<!-- Avoid displaying forest text when in battle -->
+{% if not battle %}
+    {{ include_theme('page/forest/' ~ tpl|default('default') ~ '.twig') }}
+{% endif %}
