@@ -106,4 +106,35 @@ class CharactersRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Get info of character for PvP.
+     *
+     * @param int $characterId
+     *
+     * @return array|null
+     */
+    public function getCharacterForPvp(int $characterId): ?array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query->select('u.name AS creaturename', 'u.level AS creaturelevel', 'u.weapon AS creatureweapon', 'u.dragonkills', 'u.gold AS creaturegold', 'u.experience AS creatureexp', 'u.maxhitpoints AS creaturemaxhealth', 'u.hitpoints AS creaturehealth', 'u.attack AS creatureattack', 'u.defense AS creaturedefense', 'u.location', 'u.alive', 'u.pvpflag', 'u.boughtroomtoday', 'u.race')
+                ->addSelect('a.loggedin', 'a.laston', 'a.acctid')
+                ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.acct'))
+                ->where('u.id = :char')
+                ->setParameter('char', $characterId)
+
+                ->getQuery()
+                ->getSingleResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
 }
