@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -9,218 +10,320 @@ require_once 'lib/substitute.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/datetime.php';
 
-// This contains functions to support pvp
-function setup_target($name)
+/**
+ * This contains functions to support pvp.
+ *
+ * @param int $characterId
+ *
+ * @return bool|array
+ */
+function setup_pvp_target(int $characterId)
 {
-    global $pvptimeout, $session;
+    global $session, $textDomain;
 
-    $select = DB::select('accounts');
-    $select->columns([
-        'creaturename' => 'name',
-        'creaturelevel' => 'level',
-        'creatureweapon' => 'weapon',
-        'dragonkills',
-        'creaturegold' => 'gold',
-        'creatureexp' => 'experience',
-        'creaturemaxhealth' => 'maxhitpoints',
-        'creaturehealth' => 'hitpoints',
-        'creatureattack' => 'attack',
-        'creaturedefense' => 'defense',
-        'loggedin',
-        'location',
-        'laston',
-        'alive',
-        'acctid',
-        'pvpflag',
-        'boughtroomtoday',
-        'race'
-    ]);
+    $pvptime = getsetting('pvptimeout', 600);
+    $pvptimeout = date('Y-m-d H:i:s', strtotime("-$pvptime seconds"));
 
-    //Legacy support
-    if (is_numeric($name)) { $select->where->equalTo('acctid', $name); }
-    else { $select->where->equalTo('login', $name); }
+    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $entity = $repository->extractEntity($repository->getCharacterForPvp($characterId));
 
-    $result = DB::execute($select);
-    if (DB::num_rows($result)>0)
+    $message = 'flash.message.pvp.start.not.found';
+
+    if ($entity)
     {
-        $row = DB::fetch_assoc($result);
-        if (abs($session['user']['level']-$row['creaturelevel'])>getsetting('pvprange',2)){
-            output("`\$Error:`4 That user is out of your level range!");
-            return false;
-        }elseif ($row['pvpflag'] > $pvptimeout){
-            output("`\$Oops:`4 That user is currently engaged by someone else, you'll have to wait your turn!");
-            return false;
-        }elseif (strtotime($row['laston']) > strtotime("-".getsetting("LOGINTIMEOUT",900)." sec") && $row['loggedin']){
-            output("`\$Error:`4 That user is now online, and cannot be attacked until they log off again.");
-            return false;
-        } elseif((int)$row['alive']!=1){
-            output("`\$Error:`4 That user is not alive.");
-            return false;
-        }elseif ($session['user']['playerfights']>0){
-            $sql = "UPDATE " . DB::prefix("accounts") . " SET pvpflag='".date("Y-m-d H:i:s")."' WHERE acctid={$row['acctid']}";
-            DB::query($sql);
-            $row['creatureexp'] = round($row['creatureexp'],0);
-            $row['playerstarthp'] = $session['user']['hitpoints'];
-            $row['fightstartdate'] = strtotime("now");
-            $row = modulehook("pvpadjust", $row);
-            pvpwarning(true);
-            return $row;
-        }else{
-            output("`4Judging by how tired you are, you think you had best not engage in battle against other players right now.");
-            return false;
+        $message = 'flash.message.pvp.start.tired';
+
+        if (abs($session['user']['level'] - $entity['creaturelevel']) > getsetting('pvprange', 2))
+        {
+            $message = 'flash.message.pvp.start.out.range';
         }
-    } else {
-        output("`\$Error:`4 That user was not found!  It's likely that their account expired just now.");
-        return false;
+        elseif ($entity['pvpflag'] > $pvptimeout)
+        {
+            $message = 'flash.message.pvp.start.pvp.timeout';
+        }
+        elseif ($entity['loggedin'])
+        {
+            $message = 'flash.message.pvp.start.online';
+        }
+        elseif (1 != (int) $entity['alive'])
+        {
+            $message = 'flash.message.pvp.start.death';
+        }
+        elseif ($session['user']['playerfights'] > 0)
+        {
+            $entityCharacter = $repository->find($characterId);
+            $entityCharacter->setPvpflag(new \DateTime('now'));
+
+            \Doctrine::persist($entityCharacter);
+            \Doctrine::flust();
+
+            $entity['creatureexp'] = round($entity['creatureexp'], 0);
+            $entity['playerstarthp'] = $session['user']['hitpoints'];
+            $entity['fightstartdate'] = new \DateTime('now');
+            $entity = modulehook('pvpadjust', $entity);
+
+            pvpwarning(true);
+
+            return $entity;
+        }
     }
-    return false;
+
+    return $message;
 }
 
-function pvpvictory($badguy, $killedloc, $options=false)
+function pvpvictory($badguy, $killedloc)
 {
-    global $session, $lotgdBattleContent;
+    global $session, $lotgdBattleContent, $textDomain;
 
-    // If the victim has logged on and banked some, give the lessor of
-    // the gold amounts.
-    $sql = "SELECT gold FROM " . DB::prefix("accounts") . " WHERE acctid='".(int)$badguy['acctid']."'";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-    $badguy['creaturegold'] = ((int)$row['gold'] > (int)$badguy['creaturegold'] ? (int)$badguy['creaturegold'] : (int)$row['gold']);
+    // If the victim has logged on and banked some, give the lessor of the gold amounts.
+    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $character = $repository->find($badguy['character_id']);
 
-    if ($session['user']['level'] == 15)
+    $badguy['creaturegold'] = ($character->getGold() > (int) $badguy['creaturegold'] ? (int) $badguy['creaturegold'] : $character->getGold());
+
+    if (15 == $session['user']['level'])
     {
-        $lotgdBattleContent['battleend'][] = '`#***At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.`n';
+        $lotgdBattleContent['battleend'][] = [
+            'battle.max.level',
+            [],
+            $textDomain
+        ];
     }
 
     // Winner of fight gets altered amount of gold based on badguy's level
     // and amount of gold they were carrying this can some times work to
     // their advantage, sometimes against.  The basic idea is to prevent
     // exhorbitant amounts of money from being transferred this way.
-    $winamount = round(10 * $badguy['creaturelevel'] * log(max(1,$badguy['creaturegold'])),0);
-    if ($session['user']['level'] == 15) $winamount = 0;
+    $winamount = round(10 * $badguy['creaturelevel'] * log(max(1, $badguy['creaturegold'])), 0);
+
+    if (15 == $session['user']['level'])
+    {
+        $winamount = 0;
+    }
     $session['user']['gold'] += $winamount;
 
-    $lotgdBattleContent['battleend'][] = ["`b`\$You have slain %s!`0´b`n", $badguy['creaturename']];
-    $lotgdBattleContent['battleend'][] = ["`#You receive `^%s`# gold!`n", $winamount];
-
-    $exp = round(getsetting("pvpattgain",10)*$badguy['creatureexp']/100,0);
-    if (getsetting('pvphardlimit',0)) { $max = min(getsetting('pvphardlimitamount', 15000), $exp); }
-    if ($session['user']['level'] == 15) { $exp = 0; }
-
-    $expbonus = round(($exp * (1+.1*($badguy['creaturelevel'] - $session['user']['level']))) - $exp,0);
-    if ($expbonus>0)
-    {
-        $lotgdBattleContent['battleend'][] = ["`#***Because of the difficult nature of this fight, you are awarded an additional `^%s`# experience!`n", $expbonus];
-    }
-    else if ($expbonus<0)
-    {
-        $lotgdBattleContent['battleend'][] = ["`#***Because of the simplistic nature of this fight, you are penalized `^%s`# experience!`n", abs($expbonus)];
-    }
-    $wonexp = $exp + $expbonus;
-    $lotgdBattleContent['battleend'][] = ["You receive `^%s`# experience!`n`0", $wonexp];
-    $session['user']['experience']+=$wonexp;
-
-    $lostexp = round($badguy['creatureexp']*getsetting("pvpdeflose",5)/100,0);
-
-    //	debuglog("gained $winamount ({$badguy['creaturegold']} base) gold and $wonexp exp (loser lost $lostexp) for killing ", $badguy['acctid']);
-    //player wins gold and exp from badguy
-    debuglog("started the fight and defeated {$badguy['creaturename']} in $killedloc (earned $winamount of {$badguy['creaturegold']} gold and $wonexp of $lostexp exp)",false,$session['user']['acctid']);
-    debuglog("was victim and has been defeated by {$session['user']['name']} in $killedloc (lost {$badguy['creaturegold']} gold and $lostexp exp, actor tooks $winamount gold and $wonexp exp)",false,$badguy['acctid']);
-
-    $args = array('pvpmessageadd'=>"", 'handled'=>false, 'badguy'=>$badguy, 'options'=>$options);
-    $args = modulehook("pvpwin", $args);
-
-    // /\- Gunnar Kreitz
-    if ($session['user']['sex'] == SEX_MALE) {
-        $msg = "`2While you were in %s, `^%s`2 initiated an attack on you with his `^%s`2, and defeated you!`n`nYou noticed he had an initial hp of `^%s`2 and just before you died he had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:´b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
-    } else {
-        $msg = "`2While you were in %s, `^%s`2 initiated an attack on you with her `^%s`2, and defeated you!`n`nYou noticed she had an initial hp of `^%s`2 and just before you died she had `^%s`2 remaining.`n`nAs a result, you lost `\$%s%%`2 of your experience (approximately %s points), and `^%s`2 gold.`n%s`nDon't you think it's time for some revenge?`n`n`b`7Technical Notes:´b`nAlthough you might not have been in %s`7 when you got this message, you were in %s`7 when the fight was started, which was at %s according to the server (the fight lasted about %s).";
-    }
-    $mailmessage = [
-        $msg,
-        $killedloc, $session['user']['name'],
-        $session['user']['weapon'], $badguy['playerstarthp'],
-        $session['user']['hitpoints'], getsetting("pvpdeflose", 5),
-        $lostexp, $badguy['creaturegold'], $args['pvpmessageadd'],
-        $killedloc, $killedloc,
-        date("D, M d h:i a", (int)$badguy['fightstartdate']),
-        reltime((int)$badguy['fightstartdate'])
+    $lotgdBattleContent['battleend'][] = [
+        'battle.victory.creature',
+        [ 'creatureName' => $badguy['creaturename'] ],
+        $textDomain
+    ];
+    $lotgdBattleContent['battleend'][] = [
+        'battle.victory.gold',
+        [ 'gold' => $winamount ],
+        $textDomain
     ];
 
-    systemmail($badguy['acctid'], ["`2You were killed while in %s`2", $killedloc], $mailmessage);
+    $exp = round(getsetting('pvpattgain', 10) * $badguy['creatureexp'] / 100, 0);
+
+    if (getsetting('pvphardlimit', 0))
+    {
+        $exp = min(getsetting('pvphardlimitamount', 15000), $exp);
+    }
+
+    if (15 == $session['user']['level'])
+    {
+        $exp = 0;
+    }
+
+    $expbonus = round(($exp * (1 + .1 * ($badguy['creaturelevel'] - $session['user']['level']))) - $exp, 0);
+
+    if ($expbonus > 0)
+    {
+        $lotgdBattleContent['battleend'][] = [
+            'battle.victory.difficult',
+            [ 'experience' =>  $expbonus ],
+            $textDomain
+        ];
+    }
+    elseif ($expbonus < 0)
+    {
+        $lotgdBattleContent['battleend'][] = [
+            'battle.victory.simplistic',
+            [ 'experience' =>  abs($expbonus) ],
+            $textDomain
+        ];
+    }
+    $wonexp = $exp + $expbonus;
+    $lotgdBattleContent['battleend'][] = [
+        'battle.victory.experience',
+        [ 'experience' => $wonexp ],
+        $textDomain
+    ];
+    $session['user']['experience'] += $wonexp;
+
+    $lostexp = round($badguy['creatureexp'] * getsetting('pvpdeflose', 5) / 100, 0);
+
+    //player wins gold and exp from badguy
+    debuglog("started the fight and defeated {$badguy['creaturename']} in $killedloc (earned $winamount of {$badguy['creaturegold']} gold and $wonexp of $lostexp exp)", false, $session['user']['acctid']);
+    debuglog("was victim and has been defeated by {$session['user']['name']} in $killedloc (lost {$badguy['creaturegold']} gold and $lostexp exp, actor tooks $winamount gold and $wonexp exp)", false, $badguy['acctid']);
+
+    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
+    $args = modulehook('pvpwin', $args);
+
+
+    $subject = [ 'mail.victory.subject', [ 'location' => $killedloc ], $textDomain ];
+
+    $message = [
+        'mail.victory.message',
+        [
+            'location' => $killedloc,
+            'playerName' => $session['user']['name'],
+            'playerWeapon' => $session['user']['weapon'],
+            'creatureStartHp' => $badguy['playerstarthp'],
+            'playerHitpoints' => $session['user']['hitpoints'],
+            'expLose' => $lostexp,
+            'goldLost' => $badguy['creaturegold'],
+            'pvpDefLose' => ((int) getsetting('pvpdeflose', 5) / 100),
+            'pvpMessageAdded' => $args['pvpmessageadd'],
+            'date' => $badguy['fightstartdate'],
+            'dateRelative' => \LotgdFormat::relativedate($badguy['fightstartdate']),
+            //-- Subjective pronoun for the player (him her)
+            'himHer' => $session['user']['sex'] ? 'her' : 'him',
+            //-- Possessive pronoun for the player (his her)
+            'hisHer' => $session['user']['sex'] ? 'her' : 'his',
+            //-- Objective pronoun for the player (he she)
+            'heShe' => $session['user']['sex'] ? 'she' : 'he',
+        ],
+        $textDomain,
+    ];
+
+    // /\- Gunnar Kreitz
+    systemmail($badguy['acctid'], $subject, $message);
     // /\- Gunnar Kreitz
 
-    $sql = "UPDATE " . DB::prefix("accounts") . " SET alive=0, goldinbank=(goldinbank+IF(gold<{$badguy['creaturegold']},gold-{$badguy['creaturegold']},0)),gold=IF(gold<{$badguy['creaturegold']},0,gold-{$badguy['creaturegold']}), experience=IF(experience>=$lostexp,experience-$lostexp,0) WHERE acctid=".(int)$badguy['acctid']."";
+    $character->setAlive(false);
 
-    debuglog($sql,(int)$badguy['acctid'],$session['user']['acctid']);
-    DB::query($sql);
+    $goldLost = $character->getGold() - $badguy['creaturegold'];
+    $character->setGold($goldLost);
+    if ($goldLost < 0)
+    {
+        $character->setGold(0);
+        //-- Avoid debs in bank of looser
+        $character->setGoldinbank(max($character->getGoldinbank() - abs($goldLost), 0));
+    }
+
+    $character->setExperience(max($character->getExperience() - $lostexp), 0);
+
+    \Doctrine::persist($character);
+    \Doctrine::flush();
 
     return $args['handled'];
 }
 
-function pvpdefeat($badguy, $killedloc, $taunt, $options=false)
+function pvpdefeat($badguy, $killedloc)
 {
-    global $session, $lotgdBattleContent;
+    global $session, $lotgdBattleContent, $textDomain;
 
-    addnav('Daily news', 'news.php');
-    $killedin = $badguy['location'];
-    $badguy['acctid'] = (int)$badguy['acctid'];
-    $badguy['creaturegold'] = (int)$badguy['creaturegold'];
+    \LotgdNavigation::addNav('battle.nav.news', 'news.php');
+
+    $badguy['acctid'] = (int) $badguy['acctid'];
+    $badguy['creaturegold'] = (int) $badguy['creaturegold'];
 
     // Winner of fight gets altered amount of gold based on badguy's level
     // and amount of gold they were carrying this can some times work to
     // their advantage, sometimes against.  The basic idea is to prevent
     // exhorbitant amounts of money from being transferred this way.
-    $winamount = round(10 * $session['user']['level'] * log(max(1,$session['user']['gold'])),0);
-    if ($badguy['creaturelevel'] == 15)	$wonamount = 0;
+    $winamount = round(10 * $session['user']['level'] * log(max(1, $session['user']['gold'])), 0);
 
-    $sql = "SELECT level FROM " . DB::prefix("accounts") . " WHERE acctid={$badguy['acctid']}";
-    $result = DB::query($sql);
-    $row = DB::fetch_assoc($result);
-
-    $wonexp = round($session['user']['experience']*getsetting("pvpdefgain",10)/100,0);
-    if (getsetting('pvphardlimit',0)) { $max = min(getsetting('pvphardlimitamount',15000), $wonexp); }
-    if ($badguy['creaturelevel'] == 15)	$wonexp = 0;
-
-    $lostexp = round($session['user']['experience'] * getsetting("pvpattlose",15) / 100,0);
-
-    $args = array('pvpmessageadd'=>"", 'taunt'=>$taunt, 'handled'=>false, 'badguy'=>$badguy, 'options'=>$options);
-    $args = modulehook("pvploss", $args);
-
-    $msg = '`^%s`2 attacked you while you were in %s`2, but you were victorious!`n`n';
-    if ($row['level'] < $badguy['creaturelevel'])
+    if (15 == $badguy['creaturelevel'])
     {
+        $winamount = 0;
+    }
+
+    $repository = \Doctrine::getRepository('LotgdCore:Characters');
+    $character = $repository->find($badguy['character_id']);
+
+    $wonexp = round($session['user']['experience'] * getsetting('pvpdefgain', 10) / 100, 0);
+
+    if (getsetting('pvphardlimit', 0))
+    {
+        $wonexp = min(getsetting('pvphardlimitamount', 15000), $wonexp);
+    }
+
+    if (15 == $badguy['creaturelevel'])
+    {
+        $wonexp = 0;
+    }
+
+    $lostexp = round($session['user']['experience'] * getsetting('pvpattlose', 15) / 100, 0);
+
+    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
+    $args = modulehook('pvploss', $args);
+
+    if ($character->getLevel() < $badguy['creaturelevel'])
+    {
+        $msg = 0;
         // if the player has leveled DOWN some how from when we started
         // attacking them, let's assume they DK'd, and these rewards are
         // way too rich for them.
-        $lotgdBattleContent['battleend'][] = "`cThis player has leveled down!!!´c";
-        $msg .= "You would have received `^%s`2 experience and `^%s`2 gold, `\$however it seems you lost it all when you got back to level 1...";
+        $lotgdBattleContent['battleend'][] = [
+            'battle.defeated.level.down',
+            [],
+            $textDomain
+        ];
     }
-    elseif ($badguy['creaturelevel'] == 15) { $msg .= 'At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.  You received `^%s`2 experience and `^%s`2 gold'; }
-    else { $msg .= 'You received `^%s`2 experience and `^%s`2 gold'; }
-    $msg .= "!`n%s`n`0";
-    systemmail($badguy['acctid'], ["`2You were successful while you were in %s`2", $killedloc], [$msg, $session['user']['name'], $killedloc, $wonexp, $winamount, $args['pvpmsgadd']]);
-
-    if ($row['level'] >= $badguy['creaturelevel'])
+    elseif (15 == $badguy['creaturelevel'])
     {
-        // Only give the reward if the person didn't level down
-        $sql = "UPDATE " . DB::prefix("accounts") . " SET gold=gold+".$winamount.", experience=experience+".$wonexp." WHERE acctid=".(int)$badguy['acctid']."";
-        DB::query($sql);
+        $msg = 1;
     }
+    else
+    {
+        $msg = 2;
+        // Only give the reward if the person didn't level down
+        $character->setGold($character->getGold() + $winamount)
+            ->setExperience($character->getExperience() + $wonexp)
+        ;
+
+        \Doctrine::persist($character);
+        \Doctrine::flush();
+    }
+
+    $subject = ['mail.defeated.subject', [ 'location' => $killedloc ], $textDomain];
+    $message = [
+        'mail.defeated.message',
+        [
+            'levelOpt' => $msg,
+            'location' => $killedloc,
+            'playerName' => $session['user']['name'],
+            'expWon' => $wonexp,
+            'goldWon' => $winamount,
+            'pvpMessageAdded' => $args['pvpmessageadd'],
+            'date' => $badguy['fightstartdate'],
+            'dateRelative' => \LotgdFormat::relativedate($badguy['fightstartdate'])
+        ],
+        $textDomain,
+    ];
+
+    systemmail($badguy['acctid'], $subject, $message);
 
     $session['user']['alive'] = false;
-    //debuglog("lost {$session['user']['gold']} ($winamount to winner) gold and $lostexp exp ($wonexp to winner) being slain by ", $badguy['acctid']);
 
     debuglog("started the fight and has been defeated by {$badguy['creaturename']} in $killedloc (lost {$session['user']['gold']} gold and $lostexp exp, victim tooks $winamount gold and $wonexp exp)", false, $session['user']['acctid']);
-    debuglog("was the victim and won aginst {$session['user']['name']} in $killedloc (earned $winamount gold and $wonexp exp)",false,$badguy['acctid']);
+    debuglog("was the victim and won aginst {$session['user']['name']} in $killedloc (earned $winamount gold and $wonexp exp)", false, $badguy['acctid']);
 
     $session['user']['gold'] = 0;
     $session['user']['hitpoints'] = 0;
-    $session['user']['experience'] = round($session['user']['experience'] * (100-getsetting('pvpattlose', 15))/100,0);
-    $lotgdBattleContent['battleend'][] = ['`b`&You have been slain by `%%s`&!!!´b`n', $badguy['creaturename']];
-    $lotgdBattleContent['battleend'][] = '`4All gold on hand has been lost!`n';
-    $lotgdBattleContent['battleend'][] = ['`4%s%% of experience has been lost!`n', getsetting('pvpattlose', 15)];
-    $lotgdBattleContent['battleend'][] = 'You may begin fighting again tomorrow.';
+    $session['user']['experience'] = round($session['user']['experience'] * (100 - getsetting('pvpattlose', 15)) / 100, 0);
+    $lotgdBattleContent['battleend'][] = [
+        'battle.defeated.death',
+        [ 'creatureName' => $badguy['creaturename'] ],
+        $textDomain
+    ];
+    $lotgdBattleContent['battleend'][] = [
+        'battle.defeated.gold',
+        [],
+        $textDomain
+    ];
+    $lotgdBattleContent['battleend'][] = [
+        'battle.defeated.experience',
+        [ 'experience' => getsetting('pvpattlose', 15) / 100 ],
+        $textDomain
+    ];
+    $lotgdBattleContent['battleend'][] = [
+        'battle.defeated.tomorrow',
+        [],
+        $textDomain
+    ];
 
     return $args['handled'];
 }
