@@ -29,6 +29,8 @@ if ('' == $op && 'attack' != $act)
 {
     checkday();
 
+    pvpwarning();
+
     $pvp = \LotgdLocator::get(\Lotgd\Core\Pvp\Listing::class);
     $pvptime = getsetting('pvptimeout', 600);
 
