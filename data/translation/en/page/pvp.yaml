@@ -1,0 +1,60 @@
+title: 'PvP Combat!'
+
+section:
+    default:
+        paragraph: '`4You head out to the fields, where you know some unwitting warriors are sleeping.`n`nYou have `^{count,number}`4 PvP fights left for today.`n`n'
+
+battle:
+    end: '`n`n`&Using a bit of cloth nearby, you manage to staunch your wounds so that you do not die as well.`0'
+    max.level: '`#***At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.`0`n'
+    victory:
+        creature: '`b`$You have slain {creatureName}!`0´b`n'
+        gold: '`#You receive `^{gold,number}`0 gold!`0`n'
+        difficult: '`#***Because of the difficult nature of this fight, you are awarded an additional `^{experience}`0 experience!`0`n'
+        simplistic: '`#***Because of the simplistic nature of this fight, you are penalized `^{experience,number}`0 experience!`0`n'
+        experience: 'You receive `^{experience,number}`0 experience!`0`n'
+    defeated:
+        level.down: '`cThis player has leveled down!!!´c'
+        death: '`b`&You have been slain by `%{creatureName}`0!!!`0´b`n'
+        gold: '`4All gold on hand has been lost!`n'
+        experience: '`4{experience,number,percent} of experience has been lost!`n'
+        tomorrow: 'You may begin fighting again tomorrow.'
+
+mail:
+    victory:
+        subject: '`2You were killed while in {location}`0'
+        message:
+            - '`2While you were in {location}, `^{playerName}`0 initiated an attack on you with {hisHer} `^{playerWeapon}`0, and defeated you!`n`n'
+            - 'You noticed {heShe} had an initial hp of `^{playerStartHp,number}`0 and just before you died he had `^{playerHitpoints}`0 remaining.`n`n'
+            - 'As a result, you lost `${pvpDefLose,number,percent}`0 of your experience (approximately {expLose,plural, =1{1 point} other{# points}}), and `^{goldLost,number}`0 gold.`n'
+            - "{pvpMessageAdded}`n" # Custom message added
+            - "Don't you think it's time for some revenge?`0`n`n"
+            - '`7`bTechnical Notes:´b`n'
+            - 'Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0'
+    defeated:
+        subject: '`2You were successful while you were in {location}`0'
+        message:
+            - '`2`^{playerName}`0 attacked you while you were in {location}, but you were victorious!`n`n'
+            - '{levelOpt,select,
+                    0{You would have received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold, `$however it seems you lost it all when you got back to level 1...}
+                    1{At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.}
+                    other{You received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold}
+                }`0'
+            - '`n`!{pvpMessageAdded}`0`n'
+            - '`7`bTechnical Notes:´b`n'
+            - 'Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0'
+
+flash.message:
+    pvp:
+        start:
+            tired: 'Judging by how tired you are, you think you had best not engage in battle against other players right now.'
+            not.found: "That user was not found! It's likely that their account expired just now."
+            out.range: 'That user is out of your level range!'
+            timeout: "Oops.. That user is currently engaged by someone else, you'll have to wait your turn!"
+            online: 'That user is now online, and cannot be attacked until they log off again.'
+            death: 'That user is not alive.'
+        run: 'Your pride prevents you from running'
+    warning:
+        pk: 'Since you were still under PvP immunity, but have chosen to attack another player, you have lost this immunity!!'
+        msg: 'Players are immune from Player vs Player (PvP) combat for their first {days,plural, =1{1 day} other{# days}} in the game or until they have earned {exp,number} experience, or until they attack another player.  If you choose to attack another player, you will lose this immunity!`n`n'
+
