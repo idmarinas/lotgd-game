@@ -147,7 +147,11 @@ if ($battle)
 
         if ($session['user']['hitpoints'] <= 0)
         {
-            $lotgdBattleContent['battleend'][] = '`n`n`&Using a bit of cloth nearby, you manage to staunch your wounds so that you do not die as well.';
+            $lotgdBattleContent['battleend'][] = [
+                'battle.end',
+                [],
+                $textDomain
+            ];
             $session['user']['hitpoints'] = 1;
         }
     }
