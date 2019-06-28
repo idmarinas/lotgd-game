@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="site", columns={"site"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ReferersRepository")
  */
 class Referers
 {
