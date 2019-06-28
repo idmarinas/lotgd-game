@@ -19,16 +19,17 @@ page_header('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
-addnav('Execution');
-addnav('SQL', 'rawsql.php');
-addnav('PHP', 'rawsql.php?op=php');
+\LotgdNavigation::addHeader('rawsql.category.execution');
+\LotgdNavigation::addNav('rawsql.nav.sql', 'rawsql.php');
+\LotgdNavigation::addNav('rawsql.nav.php', 'rawsql.php?op=php');
 
 $op = (string) \LotgdHttp::getQuery('op');
-$sql = (string) \LotgdHttp::getPost('sql');
 
 if ('' == $op || 'sql' == $op)
 {
     $params['tpl'] = 'default';
+
+    $sql = (string) \LotgdHttp::getPost('sql');
 
     if ('' != $sql)
     {
