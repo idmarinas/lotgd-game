@@ -1,0 +1,11 @@
+{% translate_default_domain textDomain %}
+
+<form action="{{ 'rawsql.php'|lotgd_url }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="sql">{{ 'section.default.form.textarea.sql.label'|t|uncolorize }}</label>
+        <textarea name="sql" id="sql">{{ sql }}</textarea>
+    </div>
+    <div class="field">
+        <button type="submit">{{ 'form.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>
