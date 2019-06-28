@@ -8,6 +8,7 @@
  * @deprecated This is a deprecated way to translated game
  *
  * This file will be deleted in a future version.
+ * This file will not be modified as it will be deleted in the next version.
  *
  * Maybe in version 4.1.0
  */
