@@ -46,7 +46,6 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 ($session['user']['superuser'] & SU_IS_TRANSLATOR) && \LotgdNavigation::addNav('superuser.nav.untranslated', 'untranslated.php');
 
-
 \LotgdNavigation::addHeader('superuser.category.editors');
 
 if ($session['user']['superuser'] & SU_EDIT_USERS)
@@ -77,7 +76,6 @@ if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
 
 ($session['user']['superuser'] & SU_MANAGE_MODULES) && \LotgdNavigation::addNav('superuser.nav.modules', 'modules.php');
 
-
 \LotgdNavigation::addHeader('superuser.category.mechanics');
 
 ($session['user']['superuser'] & SU_MEGAUSER) && \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
@@ -86,6 +84,7 @@ if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 {
     \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
     \LotgdNavigation::addNav('superuser.nav.debug', 'debug.php');
+    \LotgdNavigation::addNav('superuser.nav.referers', 'referers.php');
     \LotgdNavigation::addNav('superuser.nav.stats', 'stats.php');
     file_exists('public/gamelog.php') && \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
 }
