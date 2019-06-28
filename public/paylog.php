@@ -59,8 +59,6 @@ foreach($months as $val)
 
 $params['paylog'] = $repository->getList($month);
 
-bdump($params['paylog']);
-
 rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/paylog.twig', $params));
 
 page_footer();
