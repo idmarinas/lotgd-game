@@ -1,0 +1,14 @@
+title: Referers
+
+table:
+    thead:
+        count: Count
+        last: Last
+        dest: Destination
+        url: URL
+        ip: IP
+    tbody:
+        none: '`iNone´i'
+        no.set: '`iNot set´i'
+
+message.warning: 'Only a maximum of 250 rows are shown.'

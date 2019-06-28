@@ -1,0 +1,38 @@
+{% translate_default_domain textDomain %}
+
+<table class="ui structured very compact striped table">
+    <thead>
+        <tr>
+            <th>{{ 'table.thead.count'|t|uncolorize }}</th>
+            <th>{{ 'table.thead.last'|t|uncolorize }}</th>
+            <th>{{ 'table.thead.url'|t|uncolorize }}</th>
+            <th>{{ 'table.thead.dest'|t|uncolorize }}</th>
+            <th>{{ 'table.thead.ip'|t|uncolorize }}</th>
+        </tr>
+    </thead>
+    {% for site, row in paginator %}
+        <thead>
+            <tr>
+                <th>{{ row.data.total|numeral }}</th>
+                <th>{{ row.data.recent|relative_date }}</th>
+                <th>{{ site|default('table.tbody.none'|t)|colorize }}</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in row.rows %}
+                <tr>
+                    <td>{{ data.count|numeral }}</td>
+                    <td>{{ data.last|relative_date }}</td>
+                    <td>{{ data.uri }}</td>
+                    <td>{{ data.dest|default('table.tbody.no.set'|t)|colorize }}</td>
+                    <td>{{ data.ip|default('table.tbody.no.set'|t)|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    {% endfor %}
+</table>
+
+<div class="ui message warning">
+    {{ 'message.warning'|t|colorize }}
+</div>
