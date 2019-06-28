@@ -4,81 +4,63 @@
 // addnews ready
 // mail ready
 define('ALLOW_ANONYMOUS', true);
+
 require_once 'common.php';
 
 tlschema('referral');
 
-if ($session['user']['loggedin'])
+$textDomain = 'page-referral';
+
+if (! $session['user']['loggedin'])
 {
-    page_header('Referral Page');
+    $referral = (string) \LotgdHttp::getQuery('r');
 
-    if (file_exists('lodge.php'))
-    {
-        addnav('L?Return to the Lodge', 'lodge.php');
-    }
-    else
-    {
-        require_once 'lib/villagenav.php';
-        villagenav();
-    }
-    output('You will automatically receive %s points for each person that you refer to this website who makes it to level %s.`n`n', getsetting('refereraward', 25), getsetting('referminlevel', 4));
+    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.referral.create', [ 'referral' => $referral ], $textDomain));
 
-    $url = getsetting('serverurl',
-            'http://'.$_SERVER['SERVER_NAME'].
-            (80 == $_SERVER['SERVER_PORT'] ? '' : ':'.$_SERVER['SERVER_PORT']).
-            dirname($_SERVER['REQUEST_URI']));
+    return redirect('create.php?r='.rawurlencode($referral));
+}
 
-    if (! preg_match('/\\/$/', $url))
-    {
-        $url = $url.'/';
-        savesetting('serverurl', $url);
-    }
+page_header('title', [], $textDomain);
 
-    output('How does the site know that I referred a person?`n');
-    output('Easy!  When you tell your friends about this site, give out the following link:`n`n');
-    output_notl('%sreferral.php?r=%s`n`n', $url, rawurlencode($session['user']['login']));
-    output('If you do, the site will know that you were the one who sent them here.');
-    output("When they reach level %s for the first time, you'll get your points!", getsetting('referminlevel', 4));
+$params = [
+    'textDomain' => $textDomain
+];
 
-    $sql = 'SELECT name,level,refererawarded FROM '.DB::prefix('accounts')." WHERE referer={$session['user']['acctid']} ORDER BY dragonkills,level";
-    $result = DB::query($sql);
-    $name = translate_inline('Name');
-    $level = translate_inline('Level');
-    $awarded = translate_inline('Awarded?');
-    $yes = translate_inline('`@Yes!`0');
-    $no = translate_inline('`$No!`0');
-    $none = translate_inline('`iNone´i');
-    output('`n`nAccounts which you referred:`n');
-    rawoutput("<table border='0' cellpadding='3' cellspacing='0'><tr class='trhead'><td>$name</td><td>$level</td><td>$awarded</td></tr>");
-    $number = DB::num_rows($result);
-
-    for ($i = 0; $i < $number; $i++)
-    {
-        $row = DB::fetch_assoc($result);
-        rawoutput("<tr class='".($i % 2 ? 'trlight' : 'trdark')."'><td>");
-        output_notl($row['name']);
-        rawoutput('</td><td>');
-        output_notl($row['level']);
-        rawoutput('</td><td>');
-        output_notl($row['refererawarded'] ? $yes : $no);
-        rawoutput('</td></tr>');
-    }
-
-    if (0 == DB::num_rows($result))
-    {
-        rawoutput("<tr class='trlight'><td colspan='3' align='center'>");
-        output_notl($none);
-        rawoutput('</td></tr>');
-    }
-    rawoutput('</table>', true);
-    page_footer();
+if (file_exists('public/lodge.php'))
+{
+    \LotgdNavigation::addNav('common.nav.lodge', 'lodge.php');
 }
 else
 {
-    page_header('Welcome to Legend of the Green Dragon');
-    output('`@Legend of the Green Dragon is a remake of the classic BBS Door Game Legend of the Red Dragon.');
-    output("Adventure into the classic realm that was one of the world's very first multiplayer roleplaying games!");
-    addnav('Create a character', 'create.php?r='.htmlentities(httpget('r'), ENT_COMPAT, getsetting('charset', 'UTF-8')));
-    addnav('Login Page', 'index.php');
-    page_footer();
+    \LotgdNavigation::villageNav();
 }
+
+$url = getsetting('serverurl', sprintf('%s://%s', \LotgdHttp::getServer('REQUEST_SCHEME'), \LotgdHttp::getServer('HTTP_HOST')));
+
+if (! preg_match('/\\/$/', $url))
+{
+    $url = $url.'/';
+    savesetting('serverurl', $url);
+}
+
+$params['serverUrl'] = $url;
+$params['refererAward'] = getsetting('refereraward', 25);
+$params['referMinLevel'] = getsetting('referminlevel', 4);
+
+$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$query = $repository->createQueryBuilder('u');
+
+$params['referrers'] = $query->select('u.refererawarded')
+    ->addSelect('c.name', 'c.level', 'c.dragonkills')
+    ->where('u.referer = :acct')
+    ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'u.character'))
+    ->setParameter('acct', $session['user']['acctid'])
+
+    ->getQuery()
+    ->getResult()
+;
+
+$params = modulehook('page-referral-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/referral.twig', $params));
+
+page_footer();
