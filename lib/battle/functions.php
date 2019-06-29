@@ -288,7 +288,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     // We now have the total experience which should have been gained during the fight.
     // Now we will calculate the average exp per enemy.
     $exp = round($totalexp / $count);
-    $gold = e_rand(round($gold / $count), round($gold / $count) * round(($count + 1) * pow(1.2, $count - 1), 0));
+    $gold = e_rand(round($gold / $count), round(($gold / $count) * (($count + 1) * pow(1.2, $count - 1)), 0));
     $expbonus = round($expbonus / $count, 0);
 
     //-- No gem hunters allowed!
