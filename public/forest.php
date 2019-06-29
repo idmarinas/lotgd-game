@@ -107,7 +107,7 @@ elseif ('search' == $op)
             elseif ('thrill' == $type)
             {
                 $plev++;
-                \LotgdFlashMessages::addWarningMessage('flash.message.thrill', [], $textDomain);
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.thrill', [], $textDomain));
             }
             elseif ('suicide' == $type)
             {
@@ -126,7 +126,7 @@ elseif ('search' == $op)
                     $plev++;
                     $extrabuff = .4;
                 }
-                \LotgdFlashMessages::addErrorMessage('flash.message.suicide', [], $textDomain);
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.suicide', [], $textDomain));
             }
 
             $multi = 1;
@@ -152,7 +152,7 @@ elseif ('search' == $op)
                     }
                     elseif ('thrill' == $type)
                     {
-                        $multi += e_rand(getsetting('multithrillmin', 1), getsetting('multithrillmax', 2));
+                        $multi += e_rand((int) getsetting('multithrillmin', 1), (int) getsetting('multithrillmax', 2));
 
                         $mintargetlevel = $targetlevel - 1;
 
