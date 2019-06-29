@@ -49,7 +49,7 @@ trait News
                     $msg = $this->getTranslator()->trans($taunt['taunt'], $taunt['params'] ?? [], $taunt['textDomain']);
 
                     //-- Use default taunt if translator not find translation.
-                    if ($msg == $deathmessage['taunt'])
+                    if ($msg == $taunt['taunt'])
                     {
                         $msg = $this->getTranslator()->trans('default', $taunt['params'] ?? [], $taunt['textDomain']);
                     }
