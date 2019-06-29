@@ -1,0 +1,14 @@
+# Navigation menu for Shades page
+
+# Headers of navigations
+category:
+    logout: 'Log Out'
+    places: 'Places'
+    other: Other
+
+# Menu navs
+nav:
+    logout: '`$Log Out`0'
+    graveyard: 'The Graveyard'
+    faq: '??F.A.Q. (Frequently Asked Questions)'
+    news: 'Return to the news'

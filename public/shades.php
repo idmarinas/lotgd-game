@@ -1,67 +1,61 @@
 <?php
 
-// translator ready
-// addnews ready
-// mail ready
 require_once 'common.php';
-require_once 'lib/commentary.php';
 
 checkday();
 
 tlschema('shades');
 
-page_header('Land of the Shades');
-
-addcommentary();
-
+//-- You can only stay in the shades if you're dead.
 if ($session['user']['alive'])
 {
-    redirect('village.php');
+    return redirect('village.php');
 }
 
-output('`$You walk among the dead now, you are a shade. ');
-output('Everywhere around you are the souls of those who have fallen in battle, in old age, and in grievous accidents. ');
-output('Each bears telltale signs of the means by which they met their end.`n`n');
-output('Their souls whisper their torments, haunting your mind with their despair:`n');
+// Don't hook on to this text for your standard modules please, use "shades" instead.
+// This hook is specifically to allow modules that do other shades to create ambience.
+$result = modulehook('shades-text-domain', ['textDomain' => 'page-shades', 'textDomainNavigation' => 'navigation-shades']);
+$textDomain = $result['textDomain'];
+$textDomainNavigation = $result['textDomainNavigation'];
+unset($result);
 
-output('`nA sepulchral voice intones, "`QIt is now %s in the world above.`$"`n`n', getgametime());
+$params = [
+    'textDomain' => $textDomain
+];
 
-modulehook('shades', []);
-commentdisplay('`n`QNearby, some lost souls lament:`n', 'shade', 'Despair', 25, translate_inline('despairs'));
+page_header('title', [], $textDomain);
 
-addnav('Log Out');
-addnav('Log out', 'login.php?op=logout');
-addnav('Places');
-addnav('The Graveyard', 'graveyard.php');
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
 
-addnav('Return to the news', 'news.php');
+\LotgdNavigation::addHeader('category.logout');
+\LotgdNavigation::addNav('nav.logout', 'login.php?op=logout');
 
-tlschema('nav');
+\LotgdNavigation::addHeader('category.places');
+\LotgdNavigation::addNav('nav.graveyard', 'graveyard.php');
+\LotgdNavigation::addNav('nav.news', 'news.php');
 
 // the mute module blocks players from speaking until they
 // read the FAQs, and if they first try to speak when dead
 // there is no way for them to unmute themselves without this link.
-addnav('Other');
-addnav('??F.A.Q. (Frequently Asked Questions)', 'petition.php?op=faq', false, true);
+\LotgdNavigation::addHeader('category.other');
+\LotgdNavigation::addNav('nav.faq', 'petition.php?op=faq', [
+    'attributes' => [
+        'data-force' => 'true',
+        'onclick' => 'Lotgd.embed(this)'
+    ]
+]);
 
-if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
-{
-    addnav('Superuser');
-    addnav(',?Comment Moderation', 'moderate.php');
-}
-
-if ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO)
-{
-    addnav('Superuser');
-    addnav('X?Superuser Grotto', 'superuser.php');
-}
-
-if ($session['user']['superuser'] & SU_INFINITE_DAYS)
-{
-    addnav('Superuser');
-    addnav('/?New Day', 'newday.php');
-}
+//-- Superuser menu
+\LotgdNavigation::superuser();
 
 tlschema();
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
+
+//-- This is only for params not use for other purpose
+$params = modulehook('page-shades-tpl-params', $params);
+rawoutput(\LotgdTheme::renderThemeTemplate('page/shades.twig', $params));
 
 page_footer();
