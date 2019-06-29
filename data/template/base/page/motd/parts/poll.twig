@@ -12,7 +12,7 @@
             <small class="date colLtCyan">{{ '{date,date,medium} {date,time}'|tmf({'date': motd.motddate }) }}</small>
         </div>
         <div class="description colDkGreen">
-            <p>{{ motd.motdbody.body|nltoappon|colorize }}</p>
+            <p>{{ motd.motdbody.body|nl2br|colorize }}</p>
         </div>
         <div class="content">
             <form class="ui items" action="{{ 'motd.php?op=vote'|lotgd_url }}" method="POST">

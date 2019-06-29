@@ -13,7 +13,7 @@
             <small class="date colLtCyan">{{ '{date,date,medium} {date,time}'|tmf({'date': motd.motddate }) }}</small>
         </div>
         <div class="description">
-            <p class="colDkGreen">{{ motd.motdbody|nltoappon|colorize }}</p>
+            <p class="colDkGreen">{{ motd.motdbody|nl2br|colorize }}</p>
         </div>
     </div>
 </div>

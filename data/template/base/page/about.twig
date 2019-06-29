@@ -61,7 +61,7 @@ Users of the source are bound to the terms therein.
     {% if impressum %}
         <hr>
         <div class="ui segment">
-            {{ impressum|nltoappon|colorize }}
+            {{ impressum|nl2br|colorize }}
         </div>
     {% endif %}
 {% endblock %}
