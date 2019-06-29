@@ -6,6 +6,8 @@ category:
     souls: 'Souls'
     question.favor: '{graveyardOwnerName} Favors'
     other: 'Other'
+    torment: Torment
+    navigation: Navigation
 
 # Menu navs
 nav:
@@ -14,6 +16,7 @@ nav:
     graveyard: 'G?The Graveyard'
     mausoleum: 'M?Enter the Mausoleum'
     warriors: 'W?List Warriors'
+    torment: 'Look for Something to Torment'
     return:
         graveyard: 'G?Return to the Graveyard'
         mausoleum: 'M?Return to the Mausoleum'

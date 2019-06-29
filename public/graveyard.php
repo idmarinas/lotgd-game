@@ -50,6 +50,8 @@ $favortoheal = (int) $favortoheal['favor'];
 
 $params['favorToHeal'] = $favortoheal;
 
+\LotgdNavigation::addHeader('category.navigation');
+
 if ('search' == $op)
 {
     require_once 'lib/graveyard/case_battle_search.php';
@@ -269,8 +271,8 @@ else
 
     if ($session['user']['gravefights'])
     {
-        addnav('Torment');
-        addnav('Look for Something to Torment', 'graveyard.php?op=search');
+        \LotgdNavigation::addHeader('category.torment');
+        \LotgdNavigation::addNav('nav.torment', 'graveyard.php?op=search');
     }
 
     \LotgdNavigation::addHeader('category.places');
