@@ -21,13 +21,13 @@
         "macfja/tracy-doctrine-sql": "dev-master",
         "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
-        "symfony/filesystem": "^4.2",
-        "symfony/yaml": "^4.2",
+        "symfony/filesystem": "^4.3",
+        "symfony/yaml": "^4.3",
         "tracy/tracy": "^2.6",
-        "twig/twig": "^2.10",
+        "twig/twig": "^2.11",
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.3",
-        "zendframework/zend-config": "^3.2",
+        "zendframework/zend-config": "^3.3",
         "zendframework/zend-config-aggregator": "^1.1",
         "zendframework/zend-db": "^2.10",
         "zendframework/zend-debug": "^2.6",
@@ -48,7 +48,7 @@
     },
     "require-dev": {
         "milo/vendor-versions": "^1.1",
-        "phan/phan": "^2.0"
+        "phan/phan": "^2.2"
     },
     "autoload": {
         "psr-4": {
