@@ -37,8 +37,6 @@ $repaygold = 0;
 $repaygems = 0;
 $grubprice = 0;
 
-addnav('actu', 'stables.php');
-
 if (! empty($playermount))
 {
     $repaygold = round($playermount['mountcostgold'] * 2 / 3, 0);
