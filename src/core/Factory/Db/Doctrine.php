@@ -81,7 +81,8 @@ class Doctrine implements FactoryInterface
         //-- DQL Functions
         $config->setCustomDatetimeFunctions([
             'month' => \DoctrineExtensions\Query\Mysql\Month::class,
-            'year' => \DoctrineExtensions\Query\Mysql\Year::class
+            'year' => \DoctrineExtensions\Query\Mysql\Year::class,
+            'date' => \DoctrineExtensions\Query\Mysql\Date::class
         ]);
         $config->setCustomNumericFunctions([
             'round' => \DoctrineExtensions\Query\Mysql\Round::class
