@@ -1,0 +1,19 @@
+{% translate_default_domain textDomain %}
+
+{% if allowFeed == 0 %}
+    {{ 'section.feed.forbidden'|t(_context)|colorize }}
+{% elseif haveGold %}
+    {% if mountHungry %}
+        {% if halfHungry %}
+            {{ 'section.feed.hungry.half'|t(_context)|colorize }}
+        {% else %}
+            {{ 'section.feed.hungry.hungry'|t(_context)|colorize }}
+        {% endif %}
+
+        {{ 'section.feed.hungry.full'|t(_context)|colorize }}
+    {% else %}
+        {{ 'section.feed.not.hungry'|t(_context)|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'section.feed.not.gold'|t(_context)|colorize }}
+{% endif %}

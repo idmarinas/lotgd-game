@@ -1,0 +1,16 @@
+# Navigation menu for Shades page
+
+# Headers of navigations
+category:
+    other: Other
+    confirm:
+        trade: 'Confirm trade'
+        sale: 'Confirm sale'
+
+# Menu navs
+nav:
+    examine: 'Examine {name}'
+    sell: 'Sell your {name}'
+    feed: 'Feed your {name} (`^{grubPrice,number}`0 gold)'
+    yes: '`@Yes`0'
+    no: '`$No`0'
