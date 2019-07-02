@@ -1,0 +1,37 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.referers.title'|t|colorize }}
+
+<table class="ui very simple very compact striped table">
+    <thead>
+        <tr>
+            <th>{{ 'section.referers.table.thead.name'|t|colorize }}</th>
+            <th>{{ 'section.referers.table.thead.email'|t|colorize }}</th>
+            <th>{{ 'section.referers.table.thead.register'|t|colorize }}</th>
+            <th>{{ 'section.referers.table.thead.awarded'|t|colorize }}</th>
+        </tr>
+    </thead>
+    {% for refererId, data in paginator %}
+        <thead>
+            <tr>
+                <th colspan="4">{{ ('`^' ~ referers[refererId].login ~ '`0')|colorize }} ({{ data|length|numeral }})</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.login }}</td>
+                    <td>{{ row.emailaddress }}</td>
+                    <td>{{ '{date,date} {date,time}'|tmf({ 'date': row.regdate }) }}</td>
+                    <td>{{ row.refererawarded ? 'section.referers.table.tbody.yes'|t|colorize : 'section.referers.table.tbody.no'|t|colorize }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    {% else %}
+        <tbody>
+            <tr>
+                <td colspan="4">{{ 'section.referers.table.tbody.not.found'|t|colorize }}</td>
+            </tr>
+        </tbody>
+    {% endfor %}
+</table>

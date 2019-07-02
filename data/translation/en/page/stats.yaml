@@ -1,0 +1,27 @@
+title: 'Stats'
+
+section:
+    default:
+        title: '`b`%For existing accounts:`0´b`n'
+        stat:
+            accounts: '`@Total Accounts: `^{n,number}`0`0`n'
+            hits: '`@Total Hits: `^{n,number}`0`0`n'
+            time: '`@Total Page Gen Time: `^{n,duration,%with-words}`0`0`n'
+            size: '`@Total Page Gen Size: `^{size}`0`0`n'
+            avg:
+                time: '`@Average Page Gen Time: `^{n,duration,%with-words}`n'
+                size: '`@Average Page Gen Size: `^{size}`n'
+    referers:
+        title: '`n`%`bTop Referers:`0´b`n'
+        table:
+            thead:
+                name: Name
+                email: Email
+                register: Register
+                awarded: Awarded
+            tbody:
+                not.found: 'Not found rows'
+                yes: '`@Yes`0'
+                no: '`$No`0'
+    graph:
+        title: '`%`bDate accounts last logged on:´b`0`n'
