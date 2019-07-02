@@ -8,60 +8,52 @@ check_su_access(SU_EDIT_USERS);
 
 tlschema('retitle');
 
-page_header('Title Editor');
-$op = httpget('op');
-$id = httpget('id');
+$textDomain = 'titleedit';
+
+page_header('title', [], $textDomain);
+
+$params = [
+    'textDomain' => $textDomain
+];
+
+$op = (string) \LotgdHttp::getQuery('op');
+$id = (int) \LotgdHttp::getQuery('id');
+
 $editarray = [
     'Titles,title',
     'dk' => 'Dragon Kills,int|0',
     'male' => 'Male Title,text|',
     'female' => 'Female Title,text|',
 ];
+
 addnav('Other');
-require_once 'lib/superusernav.php';
-superusernav();
-addnav('Functions');
 
-switch ($op)
+\LotgdNavigation::superuserGrottoNav();
+
+$repository = \Doctrine::getRepository('LotgdCore:Titles');
+
+\LotgdNavigation::addHeader('titleedit.category.functions');
+
+if ('save' == $op)
 {
-    case 'save':
-        $male = httppost('male');
-        $female = httppost('female');
-        $dk = httppost('dk');
-        $ref = '';
+    $post = \LotgdHttp::getPostAll();
+    $entity = $repository->find($id);
+    $entity = $repository->hydrateEntity($post, $entity);
 
-        if (0 == (int) $id)
-        {
-            $sql = 'INSERT INTO '.DB::prefix('titles')." (titleid,dk,ref,male,female) VALUES ($id,$dk,'$ref','$male','$female')";
-            $note = '`^New title added.`0';
-            $errnote = '`$Unable to add title.`0';
-        }
-        else
-        {
-            $sql = 'UPDATE '.DB::prefix('titles')." SET dk=$dk,ref='$ref',male='$male',female='$female' WHERE titleid=$id";
-            $note = '`^Title modified.`0';
-            $errnote = '`$Unable to modify title.`0';
-        }
-        DB::query($sql);
+    \Doctrine::persist($entity);
 
-        if (0 == DB::affected_rows())
-        {
-            output($errnote);
-            rawoutput(DB::error());
-        }
-        else
-        {
-            output($note);
-        }
-        $op = '';
-        break;
-    case 'delete':
-        $sql = 'DELETE FROM '.DB::prefix('titles')." WHERE titleid='$id'";
-        DB::query($sql);
-        output('`^Title deleted.`0');
-        $op = '';
-        break;
+    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.edit.save.success', [], $textDomain));
 }
+elseif ('delete' == $op)
+{
+    $entity = $repository->find($id);
+
+    \Doctrine::remove($entity);
+
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('section.edit.delete.success', [], $textDomain));
+}
+
+\Doctrine::flush();
 
 switch ($op)
 {
@@ -70,145 +62,107 @@ switch ($op)
         require_once 'lib/titles.php';
         require_once 'lib/names.php';
 
-        output('`^Rebuilding all titles for all players.`0`n`n');
-        $sql = 'SELECT name,title,dragonkills,acctid,sex,ctitle,playername FROM '.DB::prefix('accounts');
-        $result = DB::query($sql);
-        $number = DB::num_rows($result);
+        $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+        $characters = $charRepository->findAll();
 
-        for ($i = 0; $i < $number; $i++)
+        foreach ($characters as $row)
         {
-            $row = DB::fetch_assoc($result);
-            $oname = $row['name'];
-            $dk = $row['dragonkills'];
-            $otitle = $row['title'];
-            $dk = (int) ($row['dragonkills']);
+            $oname = $row->getName();
+            $dk = $row->getDragonkills();
+            $otitle = $row->getTitle();
+            $dk = $row->getDragonkills();
 
-            if (! valid_dk_title($otitle, $dk, $row['sex']))
+            if (! valid_dk_title($otitle, $dk, $row->getSex()))
             {
-                $sex = translate_inline($row['sex'] ? 'female' : 'male');
-                $newtitle = get_dk_title($dk, (int) $row['sex']);
+                $sex = translate_inline($row->getSex() ? 'female' : 'male');
+                $newtitle = get_dk_title($dk, $row->getSex());
                 $newname = change_player_title($newtitle, $row);
-                $id = $row['acctid'];
+                $id = $row->getAcctid();
 
                 if ($oname != $newname)
                 {
-                    output('`@Changing `^%s`@ to `^%s `@(%s`@ [%s,%s])`n',
-                            $oname, $newname, $newtitle, $dk, $sex);
+                    $params['messages'][] = [
+                        'section.reset.change.name',
+                        [
+                            'oldName' => $oname,
+                            'newName' => $newname,
+                            'newTitle' => $newtitle,
+                            'dk' => $dk,
+                            'sex' => $row->getSex()
+                        ],
+                        $textDomain
+                    ];
 
-                    if ($session['user']['acctid'] == $row['acctid'])
+                    if ($session['user']['acctid'] == $row->getAcctid())
                     {
                         $session['user']['title'] = $newtitle;
                         $session['user']['name'] = $newname;
                     }
-                    else
-                    {
-                        $sql = 'UPDATE '.DB::prefix('accounts')." SET name='".
-                            addslashes($newname)."', title='".
-                            addslashes($newtitle)."' WHERE acctid='$id'";
-                        DB::query($sql);
-                    }
                 }
                 elseif ($otitle != $newtitle)
                 {
-                    output('`@Changing only the title (not the name) of `^%s`@ `@(%s`@ [%s,%s])`n',
-                            $oname, $newtitle, $dk, $sex);
+                    $params['messages'][] = [
+                        'section.reset.change.title',
+                        [
+                            'oldName' => $oname,
+                            'newTitle' => $newtitle,
+                            'dk' => $dk,
+                            'sex' => $row->getSex()
+                        ],
+                        $textDomain
+                    ];
 
-                    if ($session['user']['acctid'] == $row['acctid'])
+                    if ($session['user']['acctid'] == $row->getAcctid())
                     {
                         $session['user']['title'] = $newtitle;
                     }
-                    else
-                    {
-                        $sql = 'UPDATE '.DB::prefix('accounts').
-                            " SET title='".addslashes($newtitle).
-                            "' WHERE acctid='$id'";
-                        DB::query($sql);
-                    }
                 }
+
+                $row->setTitle($newtitle)
+                    ->setName($newname)
+                ;
+
+                \Doctrine::persist($row);
             }
         }
-        output('`n`n`^Done.`0');
-        addnav('Main Title Editor', 'titleedit.php');
-        break;
+
+        \Doctrine::flush();
+
+        \LotgdNavigation::addHeader('titleedit.category.functions');
+        \LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
+    break;
 
     case 'edit': case 'add':
+        $params['tpl'] = 'edit';
+        $params['id'] = $id;
+
         require_once 'lib/showform.php';
+
+        \LotgdNavigation::addHeader('titleedit.category.functions');
+        \LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
+
+        $row = ['titleid' => 0, 'male' => '', 'female' => '', 'dk' => 0];
 
         if ('edit' == $op)
         {
-            output('`$Editing an existing title`n`n');
-            $sql = 'SELECT * FROM '.DB::prefix('titles')." WHERE titleid='$id'";
-            $result = DB::query($sql);
-            $row = DB::fetch_assoc($result);
+            $result = $repository->extractEntity($repository->find($id));
+
+            $row = array_merge($row, $result);
         }
-        elseif ('add' == $op)
-        {
-            output('`$Adding a new title`n`n');
-            $row = ['titleid' => 0, 'male' => '', 'female' => '', 'dk' => 0];
-            $id = 0;
-        }
-        rawoutput("<form action='titleedit.php?op=save&id=$id' method='POST' class='ui form'>");
-        addnav('', "titleedit.php?op=save&id=$id");
-        lotgd_showform($editarray, $row);
-        rawoutput('</form>');
-        addnav('Functions');
-        addnav('Main Title Editor', 'titleedit.php');
-        title_help();
-        //fallthrough
 
-        // no break
-        default:
-            $sql = 'SELECT * FROM '.DB::prefix('titles').' ORDER BY dk, titleid';
-            $result = DB::query($sql);
+        $params['form'] = lotgd_showform($editarray, $row, false, false, false);
+    break;
 
-            if (DB::num_rows($result) >= 1)
-            {
-                $row = DB::fetch_assoc($result);
-            }
-            output('`@`c`b-=Title Editor=-´b´c');
-            $ops = translate_inline('Ops');
-            $dks = translate_inline('Dragon Kills');
-            $mtit = translate_inline('Male Title');
-            $ftit = translate_inline('Female Title');
-            $edit = translate_inline('Edit');
-            $del = translate_inline('Delete');
-            $delconfirm = translate_inline('Are you sure you wish to delete this title?');
-            rawoutput("<table class='ui very compact striped selectable table'>");
-            rawoutput("<thead><tr><th>$ops</th><th>$dks</th><th>$mtit</th><th>$ftit</th></tr></thead>");
-            $result = DB::query($sql);
-            $i = 0;
+    default:
+        $params['paginator'] = $repository->findBy([], ['dk' => 'ASC']);
 
-            while ($row = DB::fetch_assoc($result))
-            {
-                $id = $row['titleid'];
-                rawoutput('<tr>');
-                rawoutput("<td class='collapsing'>[<a data-tooltip='$edit' href='titleedit.php?op=edit&id=$id'><i class='write icon'></i></a>|<a href='titleedit.php?op=delete&id=$id' onClick='return confirm(\"$delconfirm\");' data-tooltip='$del'><i class='trash icon'></i></a>]</td>");
-                addnav('', "titleedit.php?op=edit&id=$id");
-                addnav('', "titleedit.php?op=delete&id=$id");
-                rawoutput('<td>');
-                output_notl('`&%s`0', $row['dk']);
-                rawoutput('</td><td>');
-                output_notl('`2%s`0', $row['male']);
-                rawoutput('</td><td>');
-                output_notl('`6%s`0', $row['female']);
-                rawoutput('</td></tr>');
-                $i++;
-            }
-            rawoutput('</table>');
-            addnav('Functions');
-            addnav('Add a Title', 'titleedit.php?op=add');
-            addnav('Refresh List', 'titleedit.php');
-            addnav('Reset Users Titles', 'titleedit.php?op=reset');
-            title_help();
-        break;
+        \LotgdNavigation::addHeader('titleedit.category.functions');
+        \LotgdNavigation::addNav('titleedit.nav.add', 'titleedit.php?op=add');
+        \LotgdNavigation::addNav('titleedit.nav.refresh', 'titleedit.php');
+        \LotgdNavigation::addNav('titleedit.nav.reset', 'titleedit.php?op=reset');
+    break;
 }
 
-function title_help()
-{
-    output('`#You can have multiple titles for a given dragon kill rank.');
-    output('If you do, one of those titles will be chosen at random to give to the player when a title is assigned.`n`n');
-    output('You can have gaps in the title order.');
-    output('If you have a gap, the title given will be for the DK rank less than or equal to the players current number of DKs.`n');
-}
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/titleedit.twig', $params));
 
 page_footer();
