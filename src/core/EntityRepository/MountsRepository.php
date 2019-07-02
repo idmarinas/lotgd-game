@@ -18,7 +18,6 @@ use Tracy\Debugger;
 
 class MountsRepository extends DoctrineRepository
 {
-
     /**
      * Get list of mounts with owners.
      *
@@ -77,6 +76,39 @@ class MountsRepository extends DoctrineRepository
             Debugger::log($th);
 
             return false;
+        }
+    }
+
+    /**
+     * Get mounts by location (include all).
+     *
+     * @param string $location
+     */
+    public function getMountsByLocation(string $location): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query
+                ->where('u.mountactive = 1')
+                ->andWhere('u.mountlocation = :all OR u.mountlocation = :loc')
+
+                ->orderBy('u.mountcategory', 'ASC')
+                ->addOrderBy('u.mountcostgems', 'ASC')
+                ->addOrderBy('u.mountcostgold', 'ASC')
+
+                ->setParameter('all', 'all')
+                ->setParameter('loc', $location)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return [];
         }
     }
 }
