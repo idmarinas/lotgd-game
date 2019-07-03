@@ -72,7 +72,16 @@ class Translator extends ZendTranslator
 
         $formatter = new \MessageFormatter($locale, $message);
 
-        return $formatter->format($parameters);
+        $msg = $formatter->format($parameters);
+
+        //-- Dump error to debug
+        if ($formatter->getErrorCode())
+        {
+            bdump($formatter->getPattern());
+            bdump($formatter->getErrorMessage());
+        }
+
+        return $msg;
     }
 
     /**
