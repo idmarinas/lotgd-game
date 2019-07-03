@@ -73,6 +73,6 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderThemeTemplate('page/bans.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/bans.twig', $params));
 
 page_footer();

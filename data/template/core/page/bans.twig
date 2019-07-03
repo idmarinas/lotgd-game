@@ -12,4 +12,4 @@
 
 <br>
 
-{{ include_theme('page/bans/' ~ opt|default('default') ~ '.twig') }}
+{% include 'core/page/bans/' ~ tpl|default('default') ~ '.twig' %}
