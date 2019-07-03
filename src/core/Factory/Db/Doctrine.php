@@ -85,7 +85,8 @@ class Doctrine implements FactoryInterface
             'date' => \DoctrineExtensions\Query\Mysql\Date::class
         ]);
         $config->setCustomNumericFunctions([
-            'round' => \DoctrineExtensions\Query\Mysql\Round::class
+            'round' => \DoctrineExtensions\Query\Mysql\Round::class,
+            'rand' => \DoctrineExtensions\Query\Mysql\Rand::class,
         ]);
 
         //-- Default EntityRepository for all Entities
