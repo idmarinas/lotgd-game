@@ -1,0 +1,13 @@
+# Navigation menu for Train page
+
+# Headers of navigations
+category:
+    navigation: Navigation
+    actions: Actions
+
+# Menu navs
+nav:
+    question: 'Question Master'
+    challenge: 'M?Challenge Master'
+    superuser: 'Superuser Gain level'
+    fight: 'Fight Your Master'
