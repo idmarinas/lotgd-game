@@ -56,9 +56,7 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 \LotgdNavigation::addNav('bios.nav.refresh', 'bios.php');
 
-//-- This is only for params not use for other purpose
-$params = modulehook('page-bios-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/bios.twig', $params));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/bios.twig', $params));
 
 DB::free_result($result);
 page_footer();
