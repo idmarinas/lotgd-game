@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Delete an account and create a backup.
+ *
+ * @param int $accountId
+ * @param int $type
+ *
+ * @return bool
+ */
 function char_cleanup($accountId, $type): bool
 {
     require_once 'lib/gamelog.php';
@@ -7,7 +15,7 @@ function char_cleanup($accountId, $type): bool
     // this function handles the grunt work of character cleanup.
 
     // Run any modules hooks who want to deal with character deletion, or stop it
-    $return = modulehook('delete_character', ['acctid' => $accountId, 'deltype' => $type, 'dodel' => true]);
+    $return = modulehook('delete_character', ['acctid' => $accountId, 'deltype' => $type, 'dodel' => true, 'backupAccount' => true]);
 
     if (! $return['dodel'])
     {
@@ -26,6 +34,12 @@ function char_cleanup($accountId, $type): bool
     if (! $accountEntity)
     {
         return false;
+    }
+
+    //-- Generate a backup.
+    if ($return['backupAccount'] && createBackupAccount($accountId))
+    {
+        gamelog("A backup has been created for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}", 'backup');
     }
 
     // Clean up any clan positions held by this character
@@ -91,6 +105,71 @@ function char_cleanup($accountId, $type): bool
     \Doctrine::remove($accountEntity);
 
     \Doctrine::flush();
+
+    return true;
+}
+
+/**
+ * Create backup of account in "logd_snapshots".
+ *
+ * @param int $accountId
+ *
+ * @return bool
+ */
+function createBackupAccount(int $accountId): bool
+{
+    $path = "data/logd_snapshots/account-{$accountId}";
+
+    if (! \file_exists($path))
+    {
+        mkdir($path, 0777);
+    }
+
+    $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+    $mailRepository = \Doctrine::getRepository('LotgdCore:Mail');
+    $newsRepository = \Doctrine::getRepository('LotgdCore:News');
+    $commentaryRepository = \Doctrine::getRepository('LotgdCore:Commentary');
+    $modulePrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+
+    try
+    {
+        $account = $accountRepository->extractEntity($accountRepository->find($accountId));
+        $character = $charRepository->extractEntity($charRepository->find($account['character']));
+        $mail = $mailRepository->extractEntity($mailRepository->findBy(['msgto' => $accountId]));
+        $news = $newsRepository->extractEntity($newsRepository->findBy(['accountId' => $accountId]));
+        $commentary = $commentaryRepository->extractEntity($commentaryRepository->findBy(['author' => $accountId]));
+        $modulePrefs = $modulePrefsRepository->extractEntity($modulePrefsRepository->findBy(['userid' => $accountId]));
+        $account['character'] = $character['id'];
+        $character['acct'] = $accountId;
+
+        $basicInfo = [
+            'accountId' => $accountId,
+            'characterId' => $character['id'],
+            'name' => $character['name'],
+            'login' => $account['login'],
+            'email' => $account['emailaddress'],
+            'lastIp' => $account['lastip']
+        ];
+
+        //-- Save data of Tables
+        //-----------------------
+        file_put_contents("{$path}/account.json", json_encode($account), LOCK_EX);
+        file_put_contents("{$path}/character.json", json_encode($character), LOCK_EX);
+        file_put_contents("{$path}/mail.json", json_encode($mail), LOCK_EX);
+        file_put_contents("{$path}/news.json", json_encode($news), LOCK_EX);
+        file_put_contents("{$path}/commentary.json", json_encode($commentary), LOCK_EX);
+        file_put_contents("{$path}/module_prefs.json", json_encode($modulePrefs), LOCK_EX);
+
+        //-- Basic info of account
+        file_put_contents("{$path}/basic_info.json", json_encode($basicInfo), LOCK_EX);
+    }
+    catch (\Throwable $th)
+    {
+        \Tracy\Debugger::log($th);
+
+        return false;
+    }
 
     return true;
 }
