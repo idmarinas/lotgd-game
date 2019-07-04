@@ -290,7 +290,7 @@ class Commentary implements EntityInterface
      */
     public function getExtra(): array
     {
-        return $this->extra;
+        return (array) $this->extra;
     }
 
     /**
