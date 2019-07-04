@@ -164,7 +164,7 @@ class News
      *
      * @return self
      */
-    public function setAccountd($accountId)
+    public function setAccountId($accountId)
     {
         $this->accountId = $accountId;
 
