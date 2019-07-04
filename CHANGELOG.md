@@ -9,7 +9,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :cyclone: CHANGES
 
--   :warning: **_NEW Structure of files for web_**
+-   :warning: **_Changed Structure of files for web_**
     -   Most of the Web files have been reorganized.
         -   Some files/folders are moved to `public/` folder
             -   Primary files like: `about.php`, `accounts.php`, `armor.php`, `create.php`... (all .php files in root).
@@ -20,7 +20,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Moved folder `templates` to `data/template`
         -   Moved folder `crawl` to `data/cache/crawl` This folder is where the advertising system keeps a cached copy.
         -   Moved folder `logd_snapshots` to `data/logd_snapshots` This folder is where the copies of the deleted files are stored, so that they can be restored.
--   :warning: **_New Translation system_**
+-   :warning: **_Changed Translation system_**
     -   Remplaced old system of translation for new system. About this new system:
         -   Used a custom _Translator_ based in `Zend\I18n\Translator\Translator`
         -   This new system not used Data Base to store translations.
@@ -31,15 +31,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                     -   `module` This is where the translation files are stored in the modules.
             -   The translations are automatically loaded by the translation factory.
                 -   It is possible to have more scopes besides `page` and `module` but remember the structure of the folder `translation`.
--   :warning: **_LotGD use Twig template system_**
-    -   It's a system similar to MVC.
-    -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
-    -   All pages have a hook called `page-[NAMEPAGE]-tpl-params` with this hook you can change/add new parameters for the templates you can use in your theme.
-        -   Example: `modulehook('page-home-tpl-params', [array $params])`
-            -   _Note_: This _modulehook_ is executed just before displaying the template.
-        -   Some pages can have this structure for hook `page-[NAMEPAGE]-[SUBNAME]-tpl-params` are pages that have a params in route. Like page "about".
-            -   Example: `modulehook('page-about-license-tpl-params', [array $params])`
--   :warning: **_New navigation menu system_**
+-   :warning: **_Changed navigation menu system_**
     -   The old `addnav` and other similar functions are remplaced with new Navigation menu system.
         -   You can add/block new navs with this functions:
             -   `LotgdNavigation::addHeader(string $header, array $options = [])`
@@ -52,7 +44,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `LotgdNavigation::setTextDomain(?string $domain = null)`
             -   If you use `LotgdNavigation::setTextDomain(null)` or `LotgdNavigation::setTextDomain()` reset the translation domain to the previous value.
     -   _Note:_ New system not allow html tags in navs name. All labels of navs are filtered to strip this.
--   :warning: **_New commentary system_**
+-   :warning: **_Changed commentary system_**
     -   The old comment system has been replaced by a new one.
     -   The new system have new structure of table in data base.
     -   All old comments with are imported to new system. (May be failed)
@@ -64,9 +56,6 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                 ```
                     [
                         'section' => 'village', //-- This is name of section for comentaries
-                        'talk' => 'commentary.talk', //-- Key for translation talk
-                        'sayLine' => 'commentary.sayLine', //-- Key for translation say line
-                        'button' => 'commentary.button' //-- Key for translation for button add
                         'textDomainStatus' => 'app-commentary' //-- This is optional, and only is necesary if you want change de domain for translate text of player status. Default is texDomain defined in _commentary_block_
                     ]
                 ```
@@ -76,6 +65,21 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `{% commentary_show_pagination false %}`, Set if show pagination of comments. Default is true
             -   `{% commentary_pagination_link_url 'village.php' %}`, Set the url for links of pagination. Default is `$_SERVER['REQUEST_URI']`
             -   `{% commentary_can_add_comments false %}`, Set if can add new comments. Default is true
+-   :warning: **_Changed death message and taunts_**
+    -   Removed `public/deathmessages.php` and `public/taunts.php`. Can't edit this in data base. Now use translation system.
+    -   Can found all death and taunts messages in `translation/en/partial/deathmessage.yaml` and `translation/en/partial/taunt.yaml`
+    -   **DeathMessages**
+        -   Can separate messages by zones and can add more messages for each zone.
+            -   All zones (except default) have a key `count` with count of messages for zone.
+            -   All languages must have the same number of messages in each zone.
+                -   This is because when the game selects a random message, it may not exist in another language, and the translation fails.
+        -   Default zone have only 1 message.
+    -   **Taunts**
+        -   Have a `count` key with a count of all taunts messages.
+        -   All languages must have the same number of taunts messages
+            -   This is because when the game selects a random message, it may not exist in another language, and the translation fails.
+-   **lib/jaxon.php** Now use Semantic Modal instead of the default modal.
+-   **public/source.php** Source page not show source of file. No need when all code are public in repository in Github.
 -   **lib/pageparts.php** Alter `page_header` and `popup_header` function. New format to add title to page.
     -   `page_header(?string $title = null, array $params = [], ?string $textDomain = null)`
     -   `popup_header(?string $title = null, array $params = [], ?string $textDomain = null)`
@@ -138,20 +142,60 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   To change this you need to do it from a local configuration file in the directory "config/autoload/local/cache.php"
             > An example of how to configure the cache can be found in the file "config/lotgd.config.php".
     -   Now check if you can write to the cache directory.
--   _**New Component of Game**_ `Lotgd\Core\Component\Filesystem`
+-   _**New maintenance mode**_
+    -   Core game now have a way to active a maintenance mode.
+    -   It has two modes:
+        -   One is a warning to users that they have to disconnect
+        -   Other mode forces the disconnection of anyone who does not have developer permission.
+    -   In both modes it only allows those with developer permission to connect to the game.
+    -   No problem if both modes are active.
+    -   Are in standar configuration.
+-   _**New Component for Game**_ `Lotgd\Core\Component\Filesystem`
     -   This component extend component of `Symfony\Component\Filesystem\Filesystem` and add a new method:
         -   `$filesystem->listDir(string $dir)` List files in directory (not recursive)
 -   _**New profanity filtering for comments and other**_
-    -   Now you avoid saving the data in the database and use PHP files, in the folder "data/dictionary/{LANGUAGE_CODE}.php".
--   _**New way to customize and create atmosphere in the city, forest and elsewhere**_
-    -   Before, the best way to create an environment (I take the village as an example) was with a hook that received all the texts and could be customized.
-    -   Now you can, with the new translation system, it is simpler, since you only have to change the "textDomain" for the page.
-        -   Example:
-            - _**Bank**_ page:
-                -   It has a new hook called `modulehook('bank-text-domain', ['textDomain' => 'page-bank'])` where you can change the "textDomain" to your own. Just copy the corresponding `.yaml` file, make the necessary modifications and you're done.
-        -   Note: This new way, makes it easier to create atmosphere in cities (creating your own) in a simple customization, where only the text is changed and little is changed.
-        - List of pages that use this system:
-            -   **public/bank.php** -> hookname `bank-text-domain`
+    -   Now you avoid saving the data in the database and use PHP files, in the folder `data/dictionary/{LANGUAGE_CODE}.php`.
+-   _**New Account Backup**_ When delete an account now game generate a backup for this account.
+    -   Data are saved in `data/logd_snapshots/account-[account_id]/`
+    -   Data saved are:
+        -   All information of _account_
+        -   Information of _character_
+        -   All _mails_ to account
+        -   All _news_ of account
+        -   All _comments_ of account
+        -   All _module_userprefs_ of account
+-   :warning: **_LotGD use Twig template system_**
+    -   It's a system similar to MVC.
+    -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
+    -   All pages have a hook called `page-[NAMEPAGE]-tpl-params` with this hook you can change/add new parameters for the templates you can use in your theme.
+        -   Example: `modulehook('page-home-tpl-params', [array $params])`
+            -   _Note_: This _modulehook_ is executed just before displaying the template.
+        -   Some pages can have this structure for hook `page-[NAMEPAGE]-[SUBNAME]-tpl-params` are pages that have a params in route. Like page "about".
+            -   Example: `modulehook('page-about-license-tpl-params', [array $params])`
+-   :city_sunset: _**New ambience system**_ This version have a new way for create ambience in villages and other zones.
+    -   Before, the best way to create an ambience (I take the village as an example) was with a hook that received all the texts and could be customized.
+    -   Now you can, with the new translation system, it is simpler, since you only have to change the `textDomain` and/or `textDomainNavigation` for the page.
+        -   New hook that allows to change the domain of the text in certain zones to create ambience.
+            -   This is the hook of village `modulehook('village-text-domain', ['textDomain' => 'page-village', 'textDomainNavigation' => 'navigation-village'])`
+                -   With this you can change text in all village and navigation, for create ambience.
+                -   You just need to copy the corresponding files and do the translation/adaptation you need.
+                -   This files are in `data/translation/en/page/village.yaml` and `data/translation/en/navigation/village.yaml`
+                -   _Example of custom translation files for the village_: `data/translation/en/page/village_elf.yaml` and `data/translation/en/navigation/village_elf.yaml`
+                    -   Hook return: `['textDomain' => 'page-village_elf', 'textDomainNavigation' => 'navigation-village_elf']`
+    -   Zones that have this new hook are:
+        -   `public/armor.php` hook is `modulehook('armor-text-domain', ['textDomain' => 'page-armor', 'textDomainNavigation' => 'navigation-armor'])`
+        -   `public/bank.php` hook is `modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDomainNavigation' => 'navigation-bank'])`
+        -   `public/dragon.php` hook is `modulehook('dragon-text-domain', ['textDomain' => 'page-dragon', 'textDomainNavigation' => 'navigation-app'])`
+        -   `public/forest.php` hook is `modulehook('forest-text-domain', ['textDomain' => 'page-forest', 'textDomainNavigation' => 'navigation-forest'])`
+        -   `public/gardens.php` hook is `modulehook('gardens-text-domain', ['textDomain' => 'page-gardens', 'textDomainNavigation' => 'navigation-gardens'])`
+        -   `public/graveyard.php` hook is `modulehook('graveyard-text-domain', ['textDomain' => 'page-graveyard', 'textDomainNavigation' => 'navigation-graveyard'])`
+        -   `public/gypsy.php` hook is `modulehook('gypsy-text-domain', ['textDomain' => 'page-gypsy', 'textDomainNavigation' => 'navigation-gypsy'])`
+        -   `public/healer.php` hook is `modulehook('healer-text-domain', ['textDomain' => 'page-healer', 'textDomainNavigation' => 'navigation-healer'])`
+        -   `public/hof.php` hook is `modulehook('hof-text-domain', ['textDomain' => 'page-hof', 'textDomainNavigation' => 'navigation-hof'])`
+        -   `public/inn.php` hook is `modulehook('inn-text-domain', ['textDomain' => 'page-inn', 'textDomainNavigation' => 'navigation-inn'])`
+        -   `public/lodge.php` hook is `modulehook('lodge-text-domain', ['textDomain' => 'page-lodge', 'textDomainNavigation' => 'navigation-lodge'])`
+        -
+        -   `public/village.php` hook is `modulehook('village-text-domain', ['textDomain' => 'page-village', 'textDomainNavigation' => 'navigation-village'])`
 -   _**New CronJob**_ This CronJob searches all long inactive accounts and logout them.
 -   **src/core/Template/Theme.php** and **src/core/Fixed/Theme.php**
     -   Added new function `renderModuleTemplate(string $template, array $params)` With this function you can render a template of a module that does not depend on the current theme.
@@ -258,13 +302,33 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `enable_translation()`
     -   `tlschema()`
     -   `translator_check_collect_texts()`
+-   **lib/sanitize.php**: All functions.
+    -   `sanitize($in)` use `LotgdSanitize::fullSanitize($string)`
+    -   `newline_sanitize($in)` use `LotgdSanitize::newLineSanitize($string)`
+    -   `color_sanitize($in)` use `LotgdSanitize::fullSanitize($string)`
+    -   `comment_sanitize($in)` New commentary system sanitize comments by default
+    -   `logdnet_sanitize($in)` use `LotgdSanitize::logdnetSanitize($string)`
+    -   `full_sanitize($in)` use `LotgdSanitize::fullSanitize($string)`
+    -   `cmd_sanitize($in)` use `LotgdSanitize::cmdSanitize($string)`
+    -   `comscroll_sanitize($in)`
+    -   `prevent_colors($in)` use `LotgdSanitize::preventLotgdCodes($string)`
+    -   `translator_uri($in)`
+    -   `translator_page($in)`
+    -   `modulename_sanitize($in)` use `LotgdSanitize::moduleNameSanitize($string)`
+    -   `stripslashes_array($in)`
+    -   `sanitize_name($spaceallowed, $inname)` use `LotgdSanitize::nameSanitize($spaceallowed, $inname)`
+    -   `sanitize_colorname($spaceallowed, $inname, $admin = false)` use `LotgdSanitize::colorNameSanitize($spaceallowed, $inname, $admin = false)`
+    -   `sanitize_html($in)` use `LotgdSanitize::htmlSanitize($string)`
+    -   `sanitize_mb($in)` use `LotgdSanitize::mbSanitize($string)`
 -   **src/core/Output/Collector.php**: Use new translations system and template system.
     -   `output_notl()`
     -   `output_notl()`
--   **src/core/Template/Base.php**: Filter
-    -   `sustitute` use new template system to simulate this.
+-   **Twig Template System**
+    -   Filters
+        -   `sustitute` use new template system to simulate this.
+        -   `nltoappon` use Twig filter `nl2br`
 
-### :wrench: FIXES
+### :bug: FIXES
 
 -   **Folder name** `Lotgd\Core\Patern\Container` to `Lotgd\Core\Pattern\Container` I found a error in name of folder :laughing:
 -   **lib/class/dbwrapper.php**
@@ -288,12 +352,15 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/dbwrapper.php** Removed deprecated method `query_cached`
     -   Delete method `get_server_version` this is a special info, can use factory `Lotgd\Core\Lib\Dbwrapper` to get this info
 -   **lib/pageparts.php** Removed deprecated function `popup`
--   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core. Not is necesary register as global all data in `$_SERVER`. Can use `LotgdHttp::getServer(string $name = null , string $default = null)`
+-   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core.
+    -   Not is necesary register as global all data in `$_SERVER`. Can use `LotgdHttp::getServer(string $name = null , string $default = null)`
+-   **lib/clan/func.php** Deleted from the core, it wasn't being used.
 
 ### :notebook: NOTES
 
 -   :warning: _Important_ This is a very large update, which is going to require a lot of changes.
     -   All the old translation functions are present, but they may not work as expected. These functions issue an obsolete function warning message.
+    -   All pages are changed to use new Translation and Template system.
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
     -   All related gulp tasks are updated to this new version
