@@ -75,11 +75,7 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function extractEntity($object): array
     {
-        if ('object' != gettype($object))
-        {
-            return (array) $object;
-        }
-        elseif (is_array($object))
+        if (is_array($object))
         {
             $set = [];
 
@@ -89,6 +85,10 @@ class EntityRepository extends DoctrineEntityRepository
             }
 
             return $set;
+        }
+        elseif ('object' != gettype($object))
+        {
+            return (array) $object;
         }
 
         return $this->getHydrator()->extract($object);
