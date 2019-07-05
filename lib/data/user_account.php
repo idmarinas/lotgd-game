@@ -81,7 +81,7 @@ return [
 
     'Clan Info,title',
     'clanid' => 'Clan,enumpretrans,0,'.translate_inline('None'),
-    'clanrank' => 'Clan Rank,floatrange,0,31,1',
+    'clanrank' => 'Clan Rank,enumpretrans,'.$rankstring,
     'clanjoindate' => 'Clan Join Date',
 
     'Superuser Flags,title',
