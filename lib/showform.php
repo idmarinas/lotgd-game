@@ -658,6 +658,11 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                     $val = '';
                 }
 
+                if ($val instanceof \DateTime)
+                {
+                    $val = $val->format(\DateTime::ISO8601);
+                }
+
                 return "<input type='text' name='$keyout' value=\"".htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
             }
         break;

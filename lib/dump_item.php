@@ -26,6 +26,10 @@ function dump_item($item)
         }
         $out .= '</div>}';
     }
+    elseif ($item instanceof \DateTime)
+    {
+        $out .= $item->format(\DateTime::ISO8601);
+    }
     else
     {
         $out .= $item;
