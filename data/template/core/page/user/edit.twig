@@ -1,0 +1,30 @@
+{% translate_default_domain textDomain %}
+
+<form action="{{ ('user.php?op=special&userid=' ~ userId ~ returnPetition)|lotgd_url }}" method="POST" class="ui form">
+    <button type="submit" class="ui button" name="newday">{{ 'section.edit.form.button.submit.newday'|t|uncolorize }}</button>
+    <button type="submit" class="ui button" name="fixnavs">{{ 'section.edit.form.button.submit.fixnavs'|t|uncolorize }}</button>
+    <button type="submit" class="ui button" name="clearvalidation">{{ 'section.edit.form.button.submit.clearvalidation'|t|uncolorize }}</button>
+</form>
+
+<br>
+
+<form action="{{ ('user.php?op=save&userid=' ~ userId ~ returnPetition)|lotgd_url }}" method="post" class="ui form">
+    <div class="field">
+        <button type="submit" class="ui {{ userLoggedIn ? 'red' : '' }} button">{{ 'section.edit.form.button.submit.save'|t|uncolorize }}</button>
+        {% if userLoggedIn %}
+            {{ 'section.edit.form.note.user.online'|t|colorize }}
+        {% endif %}
+    </div>
+    {{ form }}
+    <div class="field">
+        <button type="submit" class="ui {{ userLoggedIn ? 'red' : '' }} button">{{ 'section.edit.form.button.submit.save'|t|uncolorize }}</button>
+        {% if userLoggedIn %}
+            {{ 'section.edit.form.note.user.online'|t|colorize }}
+        {% endif %}
+    </div>
+</form>
+
+{{ 'section.edit.last.page'|t|colorize }}
+<iframe src="{{ ('user.php?op=lasthit&userid=' ~ userId)|lotgd_url }}" title="{{ 'section.edit.last.page'|t|uncolorize }}" width="100%" height="400">
+    {{ 'section.edit.iframe'|t|uncolorize }}
+</iframe>

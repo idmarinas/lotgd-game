@@ -1,0 +1,68 @@
+{% translate_default_domain textDomain %}
+
+<div class="ui info message">
+    <h4 class="header">{{ 'section.default.message.title'|t|colorize }}</h4>
+    {{ 'section.default.message.gentimecount'|t({'n' : stats.gentimecount})|colorize }}
+    {{ 'section.default.message.gentime'|t({'n' : stats.gentime})|colorize }}
+    {{ 'section.default.message.genavg'|t({'n' : (stats.gentime / max(stats.gentimecount, 1))})|colorize }}
+    {{ 'section.default.message.gensize'|t({'bytes' : stats.gensize|default(0)|byte_units_format_binary})|colorize }}
+</div>
+
+<table class="ui very compact striped table">
+    <thead>
+        <tr>
+            <th>{{ 'section.default.table.headers.ops'|t|uncolorize }}</th>
+            <th><a href="{{ ('user.php?sort=acctid' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.acid'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('user.php?sort=name' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.nm'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('user.php?sort=laston' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.lon'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('user.php?sort=gentimecount' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.hits'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('user.php?sort=lastip' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.lip'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('user.php?sort=emailaddress' ~ query)|lotgd_url }}">{{ 'section.default.table.headers.email'|t|uncolorize }}</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set options = { 'text': 'section.default.table.tbody.del.confirm'|t }|json_encode|e('html_attr') %}
+        {% set buttonDel = 'section.default.table.tbody.del.label'|t|uncolorize %}
+        {% set buttonEdit = 'section.default.table.tbody.edit'|t|uncolorize %}
+        {% set buttonBan = 'section.default.table.tbody.ban'|t|uncolorize %}
+        {% set buttonLog = 'section.default.table.tbody.log'|t|uncolorize %}
+
+        {% for row in paginator %}
+            <tr>
+                <td class="collapsing">
+                    <div class="ui mini icon buttons">
+                        <a href="{{ ('user.php?op=edit&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonEdit }}">
+                            <i class='icon edit'></i>
+                        </a>
+                        <a href="{{ ('user.php?op=del&userid=' ~ row.acctid)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" class="ui red button" data-tooltip="{{ buttonDel }}" data-options="{{ options }}">
+                            <i class='icon trash'></i>
+                        </a>
+                        <a href="{{ ('bans.php?op=setupban&userid=' ~ row.acctid)|lotgd_url }}" class="ui orange button" data-tooltip="{{ buttonBan }}">
+                            <i class="ban icon"></i>
+                        </a>
+                        <a href="{{ ('user.php?op=debuglog&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonLog }}">
+                            <i class='icon file outline'></i>
+                        </a>
+                    </div>
+                </td>
+                <td class="collapsing">{{ row.acctid|numeral }}</td>
+                <td class="collapsing">
+                    {{ '(`^%s`0) `&%s`0'|format(row.level, row.name)|colorize }}
+                    {% if row.loggedin %}
+                        {{ 'section.default.table.tbody.online'|t|colorize }}
+                    {% endif %}
+                </td>
+                <td class="collapsing">{{ '{date,date}'|tmf({'date': row.laston}) }}</td>
+                <td class="collapsing">{{ row.gentimecount|numeral }}</td>
+                <td class="collapsing">{{ row.lastip }}</td>
+                <td class="collapsing">{{ row.emailaddress }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">{{ 'section.default.table.empty'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ navigation_pagination(paginator, paginatorLink) }}
