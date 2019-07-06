@@ -80,34 +80,6 @@ class CharactersRepository extends DoctrineRepository
     }
 
     /**
-     * Delete charracter.
-     *
-     * @param int $characterId
-     *
-     * @return int
-     */
-    public function deleteCharacter(int $characterId): int
-    {
-        $query = $this->_em->createQueryBuilder();
-
-        try
-        {
-            return $query->delete($this->_entityName, 'u')
-                ->where('u.id = :char')
-                ->setParameter('char', $characterId)
-                ->getQuery()
-                ->execute()
-            ;
-        }
-        catch (\Throwable $th)
-        {
-            Debugger::log($th);
-
-            return 0;
-        }
-    }
-
-    /**
      * Get info of character for PvP.
      *
      * @param int $characterId
