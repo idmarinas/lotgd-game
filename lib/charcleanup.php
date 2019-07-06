@@ -23,11 +23,6 @@ function char_cleanup($accountId, $type): bool
     }
 
     $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
-    $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
-    $mailRepository = \Doctrine::getRepository('LotgdCore:Mail');
-    $newsRepository = \Doctrine::getRepository('LotgdCore:News');
-    $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
-    $commentaryRepository = \Doctrine::getRepository('LotgdCore:Commentary');
 
     $accountEntity = $accountRepository->find($accountId);
 
@@ -36,6 +31,12 @@ function char_cleanup($accountId, $type): bool
         return false;
     }
 
+    $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
+    $mailRepository = \Doctrine::getRepository('LotgdCore:Mail');
+    $newsRepository = \Doctrine::getRepository('LotgdCore:News');
+    $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
+    $commentaryRepository = \Doctrine::getRepository('LotgdCore:Commentary');
+
     //-- Generate a backup.
     if ($return['backupAccount'] && createBackupAccount($accountId))
     {
@@ -43,14 +44,14 @@ function char_cleanup($accountId, $type): bool
     }
 
     // Clean up any clan positions held by this character
-    if ($accountEntity->getClanid() && (CLAN_LEADER == $accountEntity->getClanrank() || CLAN_FOUNDER == $accountEntity->getClanrank()))
+    if ($accountEntity->getCharacter()->getClanid() && (CLAN_LEADER == $accountEntity->getCharacter()->getClanrank() || CLAN_FOUNDER == $accountEntity->getCharacter()->getClanrank()))
     {
         //-- Check if clan have more leaders
-        $leadersCount = $charRepository->getClanLeadersCount($accountEntity->getClanid());
+        $leadersCount = $charRepository->getCharacter()->getClanLeadersCount($accountEntity->getCharacter()->getClanid());
 
         if (1 == $leadersCount || 0 == $leadersCount)
         {
-            $result = $charRepository->getViableLeaderForClan($accountEntity->getClanid(), $accountId);
+            $result = $charRepository->getViableLeaderForClan($accountEntity->getCharacter()->getClanid(), $accountId);
 
             if ($result)
             {
@@ -60,15 +61,15 @@ function char_cleanup($accountId, $type): bool
                 //-- who applied for membership.
                 $charRepository->setNewClanLeader($result['id']);
 
-                gamelog("Clan {$accountEntity->getClanid()} has a new leader {$result['id']} as there were no others left", 'clan');
+                gamelog("Clan {$accountEntity->getCharacter()->getClanid()} has a new leader {$result['id']} as there were no others left", 'clan');
             }
             else
             {
                 $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
-                $clanEntity = $clanRepository->find($accountEntity->getClanid());
+                $clanEntity = $clanRepository->find($accountEntity->getCharacter()->getClanid());
 
                 //-- There are no other members, we need to delete the clan.
-                modulehook('clan-delete', ['clanid' => $accountEntity->getClanid(), 'clanEntity' => $clanEntity]);
+                modulehook('clan-delete', ['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity]);
 
                 \Doctrine::remove($clanEntity);
 
@@ -83,25 +84,25 @@ function char_cleanup($accountId, $type): bool
         }
     }
 
-    // Delete any module user prefs
+    //-- Delete any module user prefs
     module_delete_userprefs($accountId);
 
-    // Delete any mail to or from the user
+    //-- Delete any mail to or from the user
     $mailRepository->deleteMailOfAccount($accountId);
 
-    // Delete any news from the user
+    //-- Delete any news from the user
     $newsRepository->deleteNewsOfAccount($accountId);
 
-    // delete the output field from the accounts_output table introduced in 1.1.1
+    //-- Delete the output field from the accounts_output table introduced in 1.1.1
     $outputRepository->deleteOutputOfAccount($accountId);
 
-    // delete the comments the user posted, necessary to have the systemcomments with acctid 0 working
+    //-- Delete the comments the user posted, necessary to have the systemcomments with acctid 0 working
     $commentaryRepository->deleteCommentsOfAccount($accountId);
 
-    // delete character of account
-    $charRepository->deleteCharacter($accountEntity->getCharacter()->getId());
+    //-- Delete character of account
+    \Doctrine::remove($accountEntity->getCharacter());
 
-    // Delete account
+    //-- Delete account
     \Doctrine::remove($accountEntity);
 
     \Doctrine::flush();
