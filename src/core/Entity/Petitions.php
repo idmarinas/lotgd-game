@@ -44,7 +44,7 @@ class Petitions
      *
      * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
      * @var int
@@ -72,7 +72,7 @@ class Petitions
      *
      * @ORM\Column(name="closedate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
-    private $closedate = '0000-00-00 00:00:00';
+    private $closedate;
 
     /**
      * @var int
@@ -94,6 +94,12 @@ class Petitions
      * @ORM\Column(name="id", type="string", length=32, nullable=false)
      */
     private $id;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('0000-00-00 00:00:00');
+        $this->closedate = new \DateTime('0000-00-00 00:00:00');
+    }
 
     /**
      * Set the value of Petitionid.
