@@ -20,7 +20,7 @@ if (\LotgdHttp::isPost())
     unset($session['user']['password']);
 
     $post['cancelpetition'] = $post['cancelpetition'] ?? false;
-    $post['cancelreason'] = $post['cancelreason'] ?? $post['cancelreason'] ?: \LotgdTranslator::t('section.default.post.cancel', [], $textDomain);
+    $post['cancelreason'] = $post['cancelreason'] ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], $textDomain);
 
     $post = modulehook('addpetition', $post);
 
@@ -39,6 +39,8 @@ if (\LotgdHttp::isPost())
         'ip' => \LotgdHttp::getServer('REMOTE_ADDR'),
         'id' => \LotgdHttp::getCookie('lgi')
     ]);
+
+    bdump($entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
@@ -78,8 +80,6 @@ if (\LotgdHttp::isPost())
     $session['user']['password'] = $p;
 
     \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.section.default.success.send', [], $textDomain));
-
-    return redirect('petition.php');
 }
 
 $types = getsetting('petition_types', 'General');

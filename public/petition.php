@@ -20,11 +20,11 @@ $params = [
     'daysPerDay' => getsetting('daysperday', 2)
 ];
 
-if ('' == $op)
+popup_header('title.default', [], $textDomain);
+
+if ('' == $op || 'submit' == $op)
 {
     $params['tpl'] = 'default';
-
-    popup_header('title.default', [], $textDomain);
 
     $params['multimaster'] = (int) getsetting('multimaster', 1);
 
