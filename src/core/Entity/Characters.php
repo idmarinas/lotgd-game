@@ -46,7 +46,7 @@ class Characters
      * @var int
      *
      * @ORM\OneToOne(targetEntity="Accounts")
-     * @ORM\JoinColumn(referencedColumnName="acctid", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(referencedColumnName="acctid", nullable=true, onDelete="SET NULL")
      */
     private $acct;
 
