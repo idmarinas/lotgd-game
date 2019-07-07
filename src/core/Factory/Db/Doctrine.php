@@ -88,6 +88,9 @@ class Doctrine implements FactoryInterface
             'round' => \DoctrineExtensions\Query\Mysql\Round::class,
             'rand' => \DoctrineExtensions\Query\Mysql\Rand::class,
         ]);
+        $config->setCustomStringFunctions([
+            'inet_aton' => \DoctrineExtensions\Query\Mysql\InetAton::class
+        ]);
 
         //-- Default EntityRepository for all Entities
         $config->setDefaultRepositoryClassName(\Lotgd\Core\Doctrine\ORM\EntityRepository::class);
