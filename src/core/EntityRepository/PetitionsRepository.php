@@ -86,4 +86,34 @@ class PetitionsRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Delete old petitions.
+     *
+     * @return bool
+     */
+    public function deleteOldPetitions(int $timeout): bool
+    {
+        try
+        {
+            $date = new \DateTime('now');
+            $date->sub(new \DateInterval('P7D'));
+
+            $query = $this->_em->createQueryBuilder();
+
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.status = :status AND u.closedate <= :date')
+                ->setParameter('date', $date)
+                ->setParameter('status', 2)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return false;
+        }
+    }
 }
