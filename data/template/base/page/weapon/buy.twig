@@ -1,0 +1,12 @@
+{% translate_default_domain textDomain %}
+
+{% if result %}
+    {% if buyIt %}
+        {{ 'payweapon'|t({'playerWeapon': userPre.weapon, 'weaponName': result.weaponname})|colorize }}
+    {% else %}
+        {{ 'notenoughgold'|t({'weaponName': result.weaponname})|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'nosuchweapon'|t|colorize }}
+    {{ 'tryagain'|t|colorize }}
+{% endif %}
