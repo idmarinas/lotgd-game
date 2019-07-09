@@ -12,6 +12,9 @@ comment:
         hide: 'Moderated by {name}'
         unhide: 'Restored by {name}'
 commentary:
+    talk: '`n`@Commentary:`0`n'
+    sayLine: 'says'
+    button: 'Add'
     status:
         game: 'Message of the Game Master'
         you: "It's a comment from you."
