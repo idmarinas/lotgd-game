@@ -10,14 +10,16 @@ define('OVERRIDE_FORCED_NAV', true);
 require_once 'common.php';
 require_once 'lib/dump_item.php';
 require_once 'lib/modules.php';
-require_once 'lib/villagenav.php';
 
-if (injectmodule(httpget('module'), (httpget('admin') ? true : false)))
+$module =  (string) \LotgdHttp::getQuery('module');
+$admin = (bool) \LotgdHttp::getQuery('admin');
+
+if (injectmodule($module, $admin))
 {
-    $info = get_module_info(httpget('module'));
+    $info = get_module_info($module);
 
-    $allowanonymous = $info['allowanonymous'] ?? false;
-    $override_forced_nav = $info['override_forced_nav'] ?? false;
+    $allowanonymous = (bool) ($info['allowanonymous'] ?? false);
+    $override_forced_nav = (bool) ($info['override_forced_nav'] ?? false);
 
     do_forced_nav($allowanonymous, $override_forced_nav);
 
@@ -29,7 +31,7 @@ if (injectmodule(httpget('module'), (httpget('admin') ? true : false)))
     $endtime = microtime(true);
     $time = $endtime - $starttime;
 
-    if (($time >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT)))
+    if ($time >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
     {
         debug('Slow Module ('.round($time, 2)."s): $mostrecentmodule`n");
     }
@@ -39,20 +41,12 @@ else
 {
     do_forced_nav(false, false);
 
-    tlschema('badnav');
-
-    page_header('Error');
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('redirect.module.unactive', [], 'app-default'));
 
     if ($session['user']['loggedin'])
     {
-        villagenav();
-    }
-    else
-    {
-        addnav('L?Return to the Login', 'index.php');
+        return redirect('village.php');
     }
 
-    output('You are attempting to use a module which is no longer active, or has been uninstalled.');
-
-    page_footer();
+    return redirect('index.php');
 }
