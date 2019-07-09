@@ -1,0 +1,8 @@
+{% translate_default_domain textDomain %}
+
+<form action="{{ ('weaponeditor.php?op=save&level=' ~ armorLevel)|lotgd_url }}" method="POST" autocomplete="off">
+    {{ form }}
+    <div class="field">
+        <button class="ui button" type="submit">{{ 'weapon.form.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>

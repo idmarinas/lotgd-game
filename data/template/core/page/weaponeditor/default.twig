@@ -1,0 +1,34 @@
+{% translate_default_domain textDomain %}
+
+<h3>{{ 'title'|t({'level': weaponLevel})|colorize }}</h3>
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <th>{{ 'table.header.ops'|t|uncolorize }}</th>
+        <th>{{ 'table.header.name'|t|uncolorize }}</th>
+        <th>{{ 'table.header.cost'|t|uncolorize }}</th>
+        <th>{{ 'table.header.damage'|t|uncolorize }}</th>
+        <th>{{ 'table.header.level'|t|uncolorize }}</th>
+    </thead>
+    <tbody>
+        {% for weapon in weapons %}
+            {% set options = {'text': 'table.body.del.confirm'|t|uncolorize } %}
+            <tr>
+                <td class="collapsing">
+                    <div class="ui buttons">
+                        <a data-tooltip="{{ 'table.body.edit'|t|uncolorize }}" class="ui orange icon button" href="{{ ('weaponeditor.php?op=edit&id=' ~ weapon.weaponid ~ '&level=' ~ weaponLevel)|lotgd_url }}">
+                            <i class="edit icon"></i>
+                        </a>
+                        <a data-tooltip="{{ 'table.body.del.label'|t|colorize }}" class="ui red icon button" href="{{ ('weaponeditor.php?op=del&id=' ~ weapon.weaponid ~ '&level=' ~ weaponLevel)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" data-options="{{ options|json_encode()|escape('html_attr') }}">
+                            <i class="trash icon"></i>
+                        </a>
+                    </div>
+                </td>
+                <td>{{ weapon.weaponname }}</td>
+                <td>{{ weapon.value|numeral }}</td>
+                <td>{{ weapon.damage }}</td>
+                <td>{{ weapon.level }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
