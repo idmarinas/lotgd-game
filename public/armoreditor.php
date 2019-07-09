@@ -13,6 +13,7 @@ tlschema('armor');
 $armorarray = [
     'Armor,title',
     'armorid' => 'Armor ID,hidden',
+    'level' => 'DK Level,int',
     'armorname' => 'Armor Name',
     'defense' => 'Defense,range,1,15,1'
 ];
@@ -25,6 +26,7 @@ $id = (int) \LotgdHttp::getQuery('id');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
 
 $params = [
+    'textDomain' => $textDomain,
     'armorLevel' => $armorlevel
 ];
 
@@ -37,19 +39,14 @@ page_header('title', ['level' => $armorlevel], $textDomain);
 
 if ('edit' == $op || 'add' == $op)
 {
+    $params['tpl'] = 'edit';
+
     $armor = ['defense' => $repository->getNextDefenseLevel($armorlevel)];
-    if ('edit' == $op)
-    {
-        $armor = $repository->find($id);
-        $hydrator = new \Zend\Hydrator\ClassMethods();
-        $armor = $hydrator->extract($armor);
-    }
+    $armor = $repository->find($id);
+    $armor = $repository->extractEntity($armor);
+    $armor['level'] = ($armor['level'] >= 0) ? $armor['level'] : $armorlevel;
 
     $params['form'] = lotgd_showform($armorarray, $armor, true, false, false);
-
-    rawoutput(LotgdTheme::renderLotgdTemplate('core/page/armoreditor/add-edit.twig', $params));
-
-    page_footer();
 }
 elseif ('del' == $op)
 {
@@ -61,25 +58,17 @@ elseif ('del' == $op)
 }
 elseif ('save' == $op)
 {
-    $armorId = (int) \LotgdHttp::getPost('armorid');
-    $armorname = \LotgdHttp::getPost('armorname');
-    $defense = \LotgdHttp::getPost('defense');
+    $post = \LotgdHttp::getPostAll();
+    $post['value'] = $values[$post['defense']];
+    $post['level'] = ($post['level'] >= 0) ? $post['level'] : $armorlevel;
 
-    $armor = $repository->find($armorId);
+    $armor = $repository->find($post['armorid']);
 
-    $message = 'armor.form.edit';
-    if (! $armor)
-    {
-        $armor = new \Lotgd\Core\Entity\Armor();
-        $message = 'armor.form.new';
-    }
-    $armor->setLevel($armorlevel)
-        ->setDefense($defense)
-        ->setArmorname($armorname)
-        ->setValue($values[$defense])
-    ;
+    $message = ($armor) ? 'armor.form.edit' : 'armor.form.new';
 
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $armorname], $textDomain));
+    $armor = $repository->hydrateEntity($post, $armor);
+
+    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $post['armorname']], $textDomain));
 
     \Doctrine::persist($armor);
     \Doctrine::flush();
