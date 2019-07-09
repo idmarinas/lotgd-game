@@ -57,7 +57,7 @@ elseif ('buy' == $op)
         {
             $params['buyIt'] = true;
 
-            debuglog(sprintf('spent "%s" gold on the "%s" armor'), ($row->getValue() - $tradeinvalue), $row->getArmorname());
+            debuglog(sprintf('spent "%s" gold on the "%s" armor', ($row->getValue() - $tradeinvalue), $row->getArmorname()));
             $session['user']['gold'] -= $row->getValue();
             $session['user']['armor'] = $row->getArmorname();
             $session['user']['gold'] += $tradeinvalue;
