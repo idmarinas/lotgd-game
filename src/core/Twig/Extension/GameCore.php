@@ -60,7 +60,8 @@ class GameCore extends AbstractExtension
             new TwigFilter('stripslashes', 'stripslashes'),
             new TwigFilter('sprintfnews', [$this, 'sprintfnews']),
             new TwigFilter('censor', [$this, 'censor']),
-            new TwigFilter('highlight_file', [$this, 'highlightFile'])
+            new TwigFilter('highlight_file', [$this, 'highlightFile']),
+            new TwigFilter('highlight_string', [$this, 'highlightString'])
         ];
     }
 
@@ -91,6 +92,7 @@ class GameCore extends AbstractExtension
             new TwigFunction('pvp_list_table', [$this, 'pvpListTable']),
             new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers']),
 
+            new TwigFunction('var_dump', [$this, 'varDump']),
             new TwigFunction('bdump', [$this, 'bdump']),
 
             //-- Include a template from theme or module

@@ -185,4 +185,16 @@ trait CoreFilter
     {
         return highlight_file($file, true);
     }
+
+    /**
+     * Syntax highlighting of a string.
+     *
+     * @param string $string
+     *
+     * @return string|null
+     */
+    public function highlightString($string)
+    {
+        return highlight_string("<?php \n\r".$string, true);
+    }
 }

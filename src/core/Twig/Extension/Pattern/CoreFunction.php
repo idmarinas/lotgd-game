@@ -153,6 +153,18 @@ trait CoreFunction
     }
 
     /**
+     * Dump var and return a string.
+     *
+     * @param mixed $var
+     *
+     * @return string
+     */
+    public function varDump($var): string
+    {
+        return var_export($var, true);
+    }
+
+    /**
      * Renders a module template.
      *
      * @param array        $context
