@@ -1,0 +1,49 @@
+{% translate_default_domain textDomain %}
+
+<div class="ui buttons">
+    <a href="{{ ('mail.php?op=write&to=' ~ petition.login|e('url'))|lotgd_url }}" target="_blank" onclick="Lotgd.embed(this)" class="ui button">
+        {{ 'section.view.write'|t|uncolorize }}
+    </a>
+</div>
+{# rawoutput('<a href="mail.php?op=write&to='.rawurlencode($row['login']).'&body='.rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"Lotgd.embed(this)\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>"); #}
+
+<h2>{{ 'section.view.category'|t({ 'category': petition.body.problem_type })|colorize }}</h2>
+
+{{ 'section.view.from'|t({ 'name': petition.authorName })|colorize }}
+
+{{ 'section.view.date'|t({ 'date': petition.date, 'relative': petition.date|relative_date })|colorize }}
+
+{{ 'section.view.status'|t({ 'status': statuses[petition.status]|t })|colorize }}
+
+{% if petition.closedate.getTimestamp %}
+    {{ 'section.view.close.date'|t({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
+{% endif %}
+
+{{ 'section.view.body'|t|colorize }}
+<table class="ui very compact very basic table">
+    <tr>
+        <td class="collapsing right aligned">{{ '`$[ipaddress]`0'|colorize }}</td>
+        <td class="collapsing">{{ '`^=`0'|colorize }}</td>
+        <td>{{ '`#%s`0'|format(petition.ip)|colorize }}</td>
+    </tr>
+    {% for key, val in petition.body %}
+        <tr>
+            <td class="collapsing right aligned">{{ '`$[%s]`0'|format(key)|colorize }}</td>
+            <td class="collapsing">{{ '`^=`0'|colorize }}</td>
+            <td>{{ '`^%s`0'|format(val|prevent_codes)|colorize }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{# Set a limits of comments per page. Default is 25 #}
+{% commentary_limit_comments 200 %}
+
+{{ commentary_block({
+    'section': 'pet-' ~ petition.petitionid,
+    'textDomainStatus': 'app-commentary'
+}, textDomain) }}
+
+{% if viewPageInfo %}
+    {{ 'section.view.page.info'|t|colorize }}
+    <pre style="background-color: white;">{{ var_dump(petition.pageinfo)|highlight_string }}</pre>
+{% endif %}
