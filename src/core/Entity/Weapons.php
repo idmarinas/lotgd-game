@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Weapons.
  *
  * @ORM\Table(name="weapons")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\WeaponsRepository")
  */
 class Weapons
 {
