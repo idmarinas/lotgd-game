@@ -555,7 +555,7 @@ function charstats($return = true)
 
         foreach ($session['bufflist'] as $val)
         {
-            if (($val['suspended'] ?? false))
+            if ($val['suspended'] ?? false)
             {
                 continue;
             }
