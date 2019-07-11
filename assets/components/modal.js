@@ -37,7 +37,7 @@ define([
 
         if (!jQuery('#' + modalId).length)
         {
-            var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '">' +
+            const template = '<div id="' + modalId + '" class="ui modal ' + options.size + '">' +
             (options.closeIcon ? '<i class="close icon"></i>' : '') +
             (title !== undefined && title !== '' ? '<div class="header">' + title + '</div>' : '') +
             '<div class="scrolling ' + options.contentClass + ' content">' + message + '</div>' +

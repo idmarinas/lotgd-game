@@ -16,12 +16,12 @@ define([
      */
     Lotgd.appoencode = function (message)
     {
-        let colors = jQuery.parseJSON(Lotgd.get('colors'))
+        const colors = jQuery.parseJSON(Lotgd.get('colors'))
 
-        for (let x in colors)
+        for (const x in colors)
         {
-            let re = '`' + x
-            let pattern = new RegExp(Lotgd.escapeRegex(re), 'g')
+            const re = '`' + x
+            const pattern = new RegExp(Lotgd.escapeRegex(re), 'g')
             message = message.replace(pattern, '</span><span class="' + colors[x] + '">')
         }
         message = message.replace(/`0/g, '</span>')

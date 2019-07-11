@@ -15,7 +15,7 @@ define([
     {
         parameters = (typeof parameters === 'undefined') ? {} : parameters
 
-        var form = document.createElement('form')
+        const form = document.createElement('form')
 
         jQuery(form).attr('id', 'reg-form')
             .attr('name', 'reg-form')

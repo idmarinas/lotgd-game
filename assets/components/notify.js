@@ -16,9 +16,9 @@ define([
      */
     Lotgd.notify = function (options)
     {
-        let type = options.type
-        let message = options.message
-        let title = options.title
+        const type = options.type
+        const message = options.message
+        const title = options.title
 
         delete options.type
         delete options.message

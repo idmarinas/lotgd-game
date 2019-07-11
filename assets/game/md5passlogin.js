@@ -22,7 +22,7 @@ define([
         jQuery.getScript('js/md5.js', function ()
         {
             // encode passwords before submission to protect them even from network sniffing attacks.
-            var passbox = document.getElementById('password')
+            const passbox = document.getElementById('password')
             if (passbox.value.substring(0, 5) !== '!md5!')
             {
                 passbox.value = '!md5!' + hex_md5(passbox.value)

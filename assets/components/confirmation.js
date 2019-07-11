@@ -22,7 +22,7 @@ define([
         event.preventDefault()
 
         element = jQuery(element)
-        var options = element.data('options')
+        let options = element.data('options')
         options = jQuery.extend({ type: 'question', showCancelButton: true }, options)
 
         Lotgd.swal(options).then(result =>

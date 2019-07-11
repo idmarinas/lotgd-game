@@ -8,7 +8,7 @@ define([
 {
     'use strict'
 
-    var modal = {
+    const modal = {
         //-- Full default configuration
         defaultParams: {
             title: '',

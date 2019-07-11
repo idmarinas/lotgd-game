@@ -7,10 +7,10 @@ define([
 
     /**
      * @lotgdDoc function
-     * @name Lotgd.confirm
+     * @name Lotgd.embed
      * @kind function
      *
-     * @description Show a confirmation dialog
+     * @description Show a embed dialog
      *
      * @param {Object} element
      */
@@ -19,14 +19,14 @@ define([
         event.preventDefault()
 
         element = jQuery(element)
-        let elementId = element.attr('id')
-        let url = element.attr('href')
-        let force = Boolean(element.data('force'))
-        let size = String(element.data('size'))
+        const elementId = element.attr('id')
+        const url = element.attr('href')
+        const force = Boolean(element.data('force'))
+        const size = String(element.data('size'))
         let options = {}
         options = jQuery.extend({ size: size, denyButton: true, approveButton: false, force: force, closeIcon: false, contentClass: 'embed' }, options)
 
-        let template = '<iframe id="iframe-' + elementId + '" src="' + url + '" width="100%" height="100%" frameborder="0" style="height: calc(70vh);"></iframe>'
+        const template = '<iframe id="iframe-' + elementId + '" src="' + url + '" width="100%" height="100%" frameborder="0" style="height: calc(70vh);"></iframe>'
 
         Lotgd.modal(template, undefined, elementId, options)
     }

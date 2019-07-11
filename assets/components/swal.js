@@ -22,7 +22,7 @@ define([
         }
         else options = {}
 
-        var modal = swal.get().fire(options)
+        const modal = swal.get().fire(options)
 
         swal.configRestart()
 

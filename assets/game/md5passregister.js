@@ -22,8 +22,8 @@ define([
         jQuery.getScript('js/md5.js', function ()
         {
             // encode passwords
-            let plen = document.getElementById('passlen')
-            let pass1 = document.getElementById('pass1')
+            const plen = document.getElementById('passlen')
+            const pass1 = document.getElementById('pass1')
             plen.value = pass1.value.length
 
             if (pass1.value.substring(0, 5) !== '!md5!')
@@ -31,7 +31,7 @@ define([
                 pass1.value = '!md5!' + hex_md5(pass1.value)
             }
 
-            let pass2 = document.getElementById('pass2')
+            const pass2 = document.getElementById('pass2')
             if (pass2.value.substring(0, 5) !== '!md5!')
             {
                 pass2.value = '!md5!' + hex_md5(pass2.value)

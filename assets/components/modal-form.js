@@ -9,7 +9,7 @@ define([
 
     /**
      * @lotgd function
-     * @name Lotgd.modal
+     * @name Lotgd.modalForm
      * @kind function
      *
      * @description Same as the modal, but this assumes that it has a form inside with its own buttons
@@ -31,7 +31,7 @@ define([
         modalId = 'modal-' + modalId
         if (!jQuery('#' + modalId).length)
         {
-            var template = '<div id="' + modalId + '" class="ui modal ' + options.size + '"><i class="close icon"></i>' +
+            const template = '<div id="' + modalId + '" class="ui modal ' + options.size + '"><i class="close icon"></i>' +
             (title !== undefined && title !== '' ? '<div class="header">' + title + '</div>' : '') +
             '<div class="content">' + message + '</div>' +
             '</div>'

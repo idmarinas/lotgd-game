@@ -8,7 +8,7 @@ define([
 {
     'use strict'
 
-    var notify = {
+    const notify = {
         optionsCustom:
         {
             closeButton: true,

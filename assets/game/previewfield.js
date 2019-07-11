@@ -17,12 +17,12 @@ define([
     Lotgd.previewfield = function (target, player, maxchars, talkline, youhave)
     {
         target = jQuery(target)
-        let message = target.val()
-        let length = message.length
-        let charsleft = maxchars - length
-        let color = (charsleft > 0) ? 'green' : (charsleft === 0) ? 'orange' : 'red'
-        let charsLeftText = youhave.replace('%s', charsleft)
-        let playerName = Lotgd.appoencode(player)
+        const message = target.val()
+        const length = message.length
+        const charsleft = maxchars - length
+        const color = (charsleft > 0) ? 'green' : (charsleft === 0) ? 'orange' : 'red'
+        const charsLeftText = youhave.replace('%s', charsleft)
+        const playerName = Lotgd.appoencode(player)
 
         if (length === 0)
         {
@@ -35,10 +35,10 @@ define([
 
         jQuery('#charsleft-commentary-form').html(charsLeftText)
 
-        let commandMe1 = message.substr(0, 2)
-        let commandMe2 = message.substr(0, 1)
-        let commandMe3 = message.substr(0, 3)
-        let commandGame = message.substr(0, 5)
+        const commandMe1 = message.substr(0, 2)
+        const commandMe2 = message.substr(0, 1)
+        const commandMe3 = message.substr(0, 3)
+        const commandGame = message.substr(0, 5)
 
         let text = '<i class="eye icon"></i>'
 

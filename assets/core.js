@@ -41,7 +41,7 @@ define([
      */
     Lotgd.set = function (param, value)
     {
-        var name = Lotgd.toCamelCase(param)
+        const name = Lotgd.toCamelCase(param)
 
         if (name in arr && typeof arr[name].set === 'function')
         {
@@ -82,7 +82,7 @@ define([
      */
     Lotgd.get = function (param, string)
     {
-        var name = Lotgd.toCamelCase(param)
+        const name = Lotgd.toCamelCase(param)
 
         if (name in arr && typeof arr[name].get === 'function')
         {
