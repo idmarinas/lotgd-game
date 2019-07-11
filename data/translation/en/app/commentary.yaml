@@ -15,6 +15,7 @@ commentary:
     talk: '`n`@Commentary:`0`n'
     sayLine: 'says'
     button: 'Add'
+    charsLeft: 'You have %s characters left.'
     status:
         game: 'Message of the Game Master'
         you: "It's a comment from you."
