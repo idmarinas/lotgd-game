@@ -18,7 +18,7 @@ function redirect($location, $reason = false)
         \LotgdNavigation::addNavAllow($location);
 
         $content = \LotgdTranslator::t('redirect.badnav.content', [
-            'locationUrl' => htmlentities($location, ENT_COMPAT, getsetting('charset', 'UTF-8')),
+            'locationUrl' => $location,
             'petitionUrl' => 'petition.php'
         ], 'app-default');
 
@@ -40,7 +40,7 @@ function redirect($location, $reason = false)
     }
 
     restore_buff_fields();
-    $session['debug'] .= \LotgdTranslator::t('redirect.redirection', [
+    $session['debug'] = \LotgdTranslator::t('redirect.redirection', [
         'locationTo' => $location,
         'locationFrom' => \LotgdHttp::getServer('REQUEST_URI'),
         'reason' => $reason
@@ -60,8 +60,9 @@ function redirect($location, $reason = false)
 
     // we should never hit this one here. in case we do, show the debug output along with some text
     // this might be the case if your php session handling is messed up or something.
-    echo \LotgdTranslator::t('redirect.whoops', [], 'app-default');
-    echo $session['debug'];
+    // echo \LotgdTranslator::t('redirect.whoops', [], 'app-default');
+    // echo $session['debug'];
+
 
     exit();
 }
