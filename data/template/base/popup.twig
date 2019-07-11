@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="imagetoolbar" content="false" />
+		<meta http-equiv="Window-target" content="_top" />
+		<meta name="robots" content="index, follow" />
+		{{ metahead }}
+
+		<title>{{ page_title(title) }}</title>
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link href="css/vendor.css" rel="stylesheet" type="text/css" />
+        {% block head_theme_css %}{% endblock %}
+		{{ csshead }}
+
+		<script src="js/manifest.js"></script>
+		<script src="js/vendor.js"></script>
+		<script src="js/lotgd.js"></script>
+        <script src="js/semantic.js"></script>
+        {% block head_theme_js %}{% endblock %}
+		{{ scripthead }}
+        {{ script }}
+	</head>
+	<body>
+		<table class="lotgd table">
+			<tr>
+				<td>
+					<table  class="lotgd table">
+						<tr>
+							<td class="border tlc"></td>
+							<td class="border tm"></td>
+							<td class="border trc"></td>
+						</tr>
+						<tr>
+							<td class="border tlt"></td>
+							<td class="top aligned"><span class='pagetitle'>&#149; {{ page_title(title) }}</span></td>
+							<td class="border trt"></td>
+						</tr>
+						<tr>
+							<td class="border blc"></td>
+							<td class="border btm"></td>
+							<td class="border brc"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="lotgd table">
+						<tr>
+							<td class="border tlc"></td>
+							<td class="border tm"></td>
+							<td class="border trc"></td>
+						</tr>
+						<tr>
+							<td class="border tlt"></td>
+							<td class="top aligned headrow">
+                                {# Show all alert messages #}
+                                {{ show_flash_messages() }}
+
+                                {# Content of popup #}
+								{{ content }}
+							</td>
+							<td class="border trt"></td>
+						</tr>
+						<tr>
+							<td class="border blc"></td>
+							<td class="border btm"></td>
+							<td class="border brc"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="lotgd table">
+						<tr>
+							<td class="border tlc"></td>
+							<td class="border tm"></td>
+							<td class="border trc"></td>
+						</tr>
+						<tr>
+							<td class="border tlt"></td>
+							<td class="top aligned">
+								<table class="lotgd table">
+									<tr>
+										<td class="top aligned">{{ game_copyright() }} <br> Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target='_blank'>HFS</a></td>
+									</tr>
+								</table>
+							</td>
+							<td class="border trt"></td>
+						</tr>
+						<tr>
+							<td class="border blc"></td>
+							<td class="border btm"></td>
+							<td class="border brc"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
