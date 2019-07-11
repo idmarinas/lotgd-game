@@ -1,6 +1,6 @@
 <?php
 
-$setrace = httpget('setrace');
+$setrace = \LotgdHttp::getQuery('setrace');
 
 if ('' != $setrace)
 {
@@ -10,35 +10,29 @@ if ('' != $setrace)
     // Set the person to the main village/capital by default
     $session['user']['location'] = $vname;
     modulehook('setrace');
-    addnav('Continue', "newday.php?continue=1$resline");
+    \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
 }
 else
 {
-    output('Where do you recall growing up?`n`n');
+    \LotgdFlashMessage::addInfoMessage(\LotgdTranslator::t('flash.message.choose.race', [], $textDomain));
     modulehook('chooserace');
 }
 
-if (0 == navcount())
+//-- Have navs
+if (\LotgdNavigation::checkNavs())
 {
-    clearoutput();
-    page_header('No Races Installed');
-    output('No races were installed in this game.');
-    output("So we'll call you a 'human' and get on with it.");
+    page_header('title.race.choose', [], $textDomain);
+    page_footer();
+}
 
-    if ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES))
-    {
-        output('You should go into the module manager off of the super user grotto, install and activate some races.');
-    }
-    else
-    {
-        output("You might want to ask your admin to install some races, they're really quite fun.");
-    }
-    $session['user']['race'] = 'Human';
-    addnav('Continue', "newday.php?continue=1$resline");
-    page_footer();
-}
-else
-{
-    page_header('A little history about yourself');
-    page_footer();
-}
+clearoutput();
+
+page_header('title.race.not', [], $textDomain);
+
+$params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
+
+$session['user']['race'] = 'Human';
+
+\LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
+
+page_footer();

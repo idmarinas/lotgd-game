@@ -27,4 +27,5 @@ if (! getsetting('newdaycron', 0))
     require 'lib/newday/commentcleanup.php';
     require 'lib/newday/charcleanup.php';
     require 'lib/newday/logoutaccts.php';
+    require 'lib/newday/petition_cleanup.php';
 }

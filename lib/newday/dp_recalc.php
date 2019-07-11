@@ -11,7 +11,7 @@ foreach ($labels as $type => $label)
     {
         continue;
     } //got a headline here
-    $pdks[$type] = (int) httppost($type);
+    $pdks[$type] = (int) \LotgdHttp::getPost($type);
     $pdktotal += (int) $pdks[$type];
 
     if ((int) $pdks[$type] < 0)
@@ -75,5 +75,5 @@ if ($pdktotal == $dkills - $dp && ! $pdkneg)
 }
 else
 {
-    output('`$Error: Please spend the correct total amount of dragon points.`n`n');
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.dragon.point.error', [], $textDomain));
 }

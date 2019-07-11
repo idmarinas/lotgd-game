@@ -1,0 +1,9 @@
+# Navigation menu for New day page
+
+# Headers of navigations
+category:
+
+# Menu navs
+nav:
+    continue: Continue
+    reset: Reset
