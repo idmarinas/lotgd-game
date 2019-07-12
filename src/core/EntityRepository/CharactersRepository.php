@@ -81,7 +81,7 @@ class CharactersRepository extends DoctrineRepository
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
                 ->setParameter('acct', \array_map(function ($val) { return $val['acctid']; }, $character))
-                ->setMaxResults($limit)
+                ->setMaxResults($limit - count($character))
                 ->getQuery()
                 ->getArrayResult()
             ;
