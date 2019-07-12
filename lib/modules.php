@@ -86,13 +86,9 @@ $module_preload = [];
  *
  * @return bool Success
  */
-function mass_module_prepare($hooknames)
+function mass_module_prepare(array $hooknames)
 {
     sort($hooknames);
-    $Pmodules = DB::prefix('modules');
-    $Pmodule_hooks = DB::prefix('module_hooks');
-    $Pmodule_settings = DB::prefix('module_settings');
-    $Pmodule_userprefs = DB::prefix('module_userprefs');
 
     global $modulehook_queries;
     global $module_preload;
@@ -100,61 +96,50 @@ function mass_module_prepare($hooknames)
     global $module_prefs;
     global $session;
 
-    //collect the modules who attach to these hooks.
-    $sql =
-        "SELECT
-            $Pmodule_hooks.modulename,
-            $Pmodule_hooks.location,
-            $Pmodule_hooks.function,
-            $Pmodule_hooks.whenactive
-        FROM
-            $Pmodule_hooks
-        INNER JOIN
-            $Pmodules
-        ON	$Pmodules.modulename = $Pmodule_hooks.modulename
-        WHERE
-            active = 1
-        AND	location IN ('".join("', '", $hooknames)."')
-        ORDER BY
-            $Pmodule_hooks.location,
-            $Pmodule_hooks.priority,
-            $Pmodule_hooks.modulename";
-    $result = DB::query($sql);
-    $modulenames = [];
+    $hookRepository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+    $settingRepository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $userRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
-    while ($row = DB::fetch_assoc($result))
+    $query = $hookRepository->createQueryBuilder('u');
+    $result = $query
+        // ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
+        ->where('u.active = 1 AND u.location IN (:names)')
+        ->setParameter('names', $hooknames)
+        ->orderBy('u.location')
+        ->addOrderBy('u.priority')
+        ->addOrderBy('u.modulename')
+        ->getQuery()
+        ->getResult()
+    ;
+
+    foreach ($result as $row)
     {
-        $modulenames[$row['modulename']] = $row['modulename'];
+        $modulenames[$row->getModulename()] = $row->getModulename();
 
-        if (! isset($module_preload[$row['location']]))
+        if (! isset($module_preload[$row->getLocation()]))
         {
-            $module_preload[$row['location']] = [];
-            $modulehook_queries[$row['location']] = [];
+            $module_preload[$row->getLocation()] = [];
+            $modulehook_queries[$row->getLocation()] = [];
         }
         //a little black magic trickery: formatting entries in
         //$modulehook_queries the same way that DB::query_cached
         //returns query results.
-        array_push($modulehook_queries[$row['location']], $row);
-        $module_preload[$row['location']][$row['modulename']] = $row['function'];
+        array_push($modulehook_queries[$row->getLocation()], $row);
+        $module_preload[$row->getLocation()][$row->getModulename()] = $row->getFunction();
     }
-    //SQL IN() syntax for the modules involved here.
-    $modulelist = "'".join("', '", $modulenames)."'";
 
-    //Load the settings for the modules on these hooks.
-    $sql =
-        "SELECT
-            modulename,
-            setting,
-            value
-        FROM
-            $Pmodule_settings
-        WHERE
-            modulename IN ($modulelist)";
-    $result = DB::query($sql);
+    $query = $settingRepository->createQueryBuilder('u');
 
-    while ($row = DB::fetch_assoc($result))
+    $result = $query
+        ->where('u.modulename IN (:names)')
+        ->setParameter('names', $modulelist)
+        ->getQuery()
+        ->getResult()
+    ;
+
+    foreach ($result as $row)
     {
-        $module_settings[$row['modulename']][$row['setting']] = $row['value'];
+        $module_settings[$row->getModulename()][$row->getSetting()] = $row->getValue();
     }
 
     //Load the current user's prefs for the modules on these hooks.
@@ -162,23 +147,20 @@ function mass_module_prepare($hooknames)
     {
         return true;
     }
-    // nothing to do if there is no user logged in
-    $sql =
-        "SELECT
-            modulename,
-            setting,
-            userid,
-            value
-        FROM
-            $Pmodule_userprefs
-        WHERE
-            modulename IN ($modulelist)
-        AND	userid = ".(int) $session['user']['acctid'];
-    $result = DB::query($sql);
 
-    while ($row = DB::fetch_assoc($result))
+    $query = $userRepository->createQueryBuilder('u');
+
+    $result = $query
+        ->where('u.modulename IN (:names) AND u.userid = :user')
+        ->setParameter('names', $modulelist)
+        ->setParameter('user', $session['user']['acctid'])
+        ->getQuery()
+        ->getResult()
+    ;
+
+    foreach ($result as $row)
     {
-        $module_prefs[$row['userid']][$row['modulename']][$row['setting']] = $row['value'];
+        $module_prefs[$row->getUserid()][$row->getModulename()][$row->getSetting()] = $row->getValue();
     }
 
     return true;
@@ -265,12 +247,23 @@ function module_sem_acquire()
     //If someone is feeling industrious, a smart function that uses the PHP
     //semaphore when available, and otherwise call the MySQL LOCK TABLES
     //code would be sincerely appreciated.
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and delete in future version. With Doctrine this is not necesary.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $sql = 'LOCK TABLES '.DB::prefix('module_settings').' WRITE';
     DB::query($sql);
 }
 
 function module_sem_release()
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0 and delete in future version. With Doctrine this is not necesary.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //please see warnings in module_sem_acquire()
     $sql = 'UNLOCK TABLES';
 
@@ -279,21 +272,32 @@ function module_sem_release()
 
 function module_editor_navs($like, $linkprefix)
 {
-    $sql = 'SELECT formalname,modulename,active,category FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|$like|%' ORDER BY category,formalname";
-    $result = DB::query($sql);
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+
+    $result = $repository->findModulesEditorNav($like);
+
     $curcat = '';
 
-    while ($row = DB::fetch_assoc($result))
+    foreach ($result as $row)
     {
-        if ($curcat != $row['category'])
+        if ($curcat != $row->getCategory())
         {
-            $curcat = $row['category'];
-            addnav($curcat.'%s Modules');
+            $curcat = $row->getCategory();
+            \LotgdNavigation::addHeader('modules.nav.category', [
+                'textDomain' => 'navigation-app',
+                'params' => [
+                    'category' => $curcat
+                ]
+            ]);
         }
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
         //modules around).  This annoys me every single time I come in to this page.
-        addnav_notl(($row['active'] ? '' : '`)').$row['formalname'].'`0', $linkprefix.$row['modulename']);
+        \LotgdNavigation::addNavNotl(sprintf('%s%s%s',
+                $row->getActive() ? '' : '`)',
+                $row->getFormalname(),
+                $row->getActive() ? '' : '`0'
+        ), $linkprefix.$row->getModulename() );
     }
 }
 
@@ -327,12 +331,12 @@ function module_objpref_edit($type, $module, $id)
                 $data[$key] = $x[1];
             }
         }
-        $sql = 'SELECT setting, value FROM '.DB::prefix('module_objprefs')." WHERE modulename='$module' AND objtype='$type' AND objid='$id'";
-        $result = DB::query($sql);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+        $result = $repository->findBy([ 'modulename' => $module,  'objtype' => $type, 'objid' => $id ]);
 
-        while ($row = DB::fetch_assoc($result))
+        foreach ($result as $row)
         {
-            $data[$row['setting']] = $row['value'];
+            $data[$row->getSetting()] = $row->getValue();
         }
         tlschema("module-$module");
         lotgd_showform($msettings, $data);
