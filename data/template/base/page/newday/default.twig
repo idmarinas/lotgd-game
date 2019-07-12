@@ -28,7 +28,7 @@
     {% endif %}
 {% endif %}
 
-{{ 'section.default.healed'|t({ 'maxHitpoints': user.maxhitpoints })|colorize }}
+{{ 'section.default.hitpoints'|t({ 'maxHitpoints': user.maxhitpoints })|colorize }}
 
 {# Buffs messages #}
 {% for message in buffMessages %}
@@ -43,16 +43,20 @@
 {{ 'section.default.spirit.level'|t({ 'spirit': spirits[spirit]|t })|colorize }}
 
 {% if spirit|abs %}
-    {% set balance = resurrectionTurns > 0 'gain' : 'lost' %}
+    {% set balance = (resurrectionTurns > 0 ? 'gain' : 'lost') %}
     {% if moduleStaminaSystem %}
-        {{ 'section.default.spirit.stamina'|t({ 'balance': balance })||colorize }}
+        {{ 'section.default.spirit.stamina'|t({ 'balance': balance })|colorize }}
     {% else %}
-        {{ 'section.default.spirit.turns'|t({ 'balance': balance, 'turns': resurrectionTurns|abs })||colorize }}
+        {{ 'section.default.spirit.turns'|t({ 'balance': balance, 'turns': resurrectionTurns|abs })|colorize }}
     {% endif %}
 {% endif %}
 
 {% if user.hashorse %}
-    {{ mountMessage|colorize }}
+    {% if mountMessage is array %}
+        {{ mountMessage[0]|format(mountMessage[1])|colorize }}
+    {% else %}
+        {{ mountMessage|colorize }}
+    {% endif %}
 
     {% if mountTurns != 0 %}
         {% set state = mountTurns > 0 ? 'gain' : 'lost' %}

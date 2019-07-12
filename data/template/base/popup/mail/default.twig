@@ -1,11 +1,10 @@
 {% translate_default_domain textDomain %}
 
 {{ 'section.default.subtitle'|t|colorize }}
-
-{% for msg in message %}
-{{ msg[0]|t(msg[1])|colorize }}
-{% endfor %}
 <br>
+{% for msg in message %}
+    <br>{{ msg[0]|t(msg[1])|colorize }}
+{% endfor %}
 <br>
 {% if mails|length %}
     {% set statusAltText = {

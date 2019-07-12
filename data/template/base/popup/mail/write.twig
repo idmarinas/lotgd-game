@@ -18,7 +18,7 @@
         </div>
         <div class="field">
             <label for="subject">{{ 'section.write.form.subject'|t|colorize }}</label>
-            <input type="text" name="subject" id="subject" value="{{ row.subject|stripslashes|e('html') }}">
+            <input type="text" name="subject" id="subject" value="{{ row.subject|stripslashes|e('html')|trim }}">
         </div>
         <div class="ui warning message" id="warning" style="visibility: hidden; display: none;">
             {{ 'section.write.mail.notice'|t|uncolorize }}
@@ -26,9 +26,7 @@
         <div class="field">
             <label for="body">{{ 'section.write.form.body'|t|colorize }}</label>
             <span id="sizemsg"></span>
-            <textarea name="body" id="body" cols="30" rows="10" onkeyup="sizeCount(this)">
-                {{ row.body|stripslashes|replace({ '`n': '\n' })|e('html') }}
-            </textarea>
+            <textarea name="body" id="body" cols="30" rows="10" onkeyup="sizeCount(this)">{{ row.body|stripslashes|replace({ '`n': '\n' })|e('html')|trim }}</textarea>
         </div>
         <div class="field">
             <button class="ui button" type="submit">{{ 'section.write.form.button.submit'|t|uncolorize }}</button>
