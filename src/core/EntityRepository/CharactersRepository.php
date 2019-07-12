@@ -52,6 +52,7 @@ class CharactersRepository extends DoctrineRepository
 
     /**
      * Get a list of characters with similar name.
+     * Search by character name and account login.
      *
      * @param string $name
      * @param int    $limit
@@ -61,15 +62,31 @@ class CharactersRepository extends DoctrineRepository
     public function findLikeName(string $name, int $limit = 100): array
     {
         $qb = $this->createQueryBuilder('u');
+        $query = $this->_em->createQueryBuilder();
 
         try
         {
-            return $qb->where('u.name LIKE :name')
-                ->setParameter('name', $name)
+            $character = $qb
+                ->select('u.name', 'IDENTITY(u.acct) AS acctid')
+                ->where('u.name LIKE :name')
+                ->setParameter('name', "%{$name}%")
                 ->setMaxResults($limit)
                 ->getQuery()
-                ->getResult()
+                ->getArrayResult()
             ;
+
+            $account = $query->from('LotgdCore:Accounts', 'u')
+                ->select('c.name', 'IDENTITY(c.acct) AS acctid')
+                ->leftJoin('LotgdCore:Characters', 'c', 'with', $qb->expr()->eq('c.id', 'u.character'))
+                ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
+                ->setParameter('name', "%{$name}%")
+                ->setParameter('acct', \array_map(function ($val) { return $val['acctid']; }, $character))
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getArrayResult()
+            ;
+
+            return array_merge($character, $account);
         }
         catch (\Throwable $th)
         {
