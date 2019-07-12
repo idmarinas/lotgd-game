@@ -203,7 +203,7 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
         $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
     }
 
-    $entity->setValue($entity->getValue() + $value);
+    $entity->setValue((float) ($entity->getValue()) + $value);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
