@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/sanitize.php';
 
 check_su_access(SU_MANAGE_MODULES);
 
@@ -228,8 +227,6 @@ if ('' == $op)
                 }
 
                 $temp['canInstall'] = $canInstall;
-
-                bdump($temp);
 
                 array_push($moduleinfo, $temp);
             }
