@@ -133,7 +133,7 @@ function set_module_pref($name, $value, $module = false, $user = false)
     $module_prefs = load_module_prefs($module, $user);
 
     //don't write to the DB if the user isn't logged in.
-    if (! $session['user']['loggedin'] && ! $user)
+    if (! ($session['user']['loggedin'] ?? false) && ! $user)
     {
         // We do need to save to the loaded copy here however
         $module_prefs[$name] = $value;
@@ -141,27 +141,17 @@ function set_module_pref($name, $value, $module = false, $user = false)
         return;
     }
 
-    if (isset($module_prefs[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'userid' => $user ]);
+    if (! $entity)
     {
-        $update = DB::update('module_userprefs');
-        $update->set(['value' => $value])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-                ->equalTo('userid', $user)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
     }
-    else
-    {
-        $insert = DB::insert('module_userprefs');
-        $insert->values([
-            'modulename' => $module,
-            'setting' => $name,
-            'userid' => $user,
-            'value' => $value
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue($value);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
 }
 
 /**
@@ -191,7 +181,7 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
     $module_prefs = load_module_prefs($module, $user);
 
     //don't write to the DB if the user isn't logged in.
-    if (! $session['user']['loggedin'] && ! $user)
+    if (! ($session['user']['loggedin'] ?? false) && ! $user)
     {
         // We do need to save to the loaded copy here however
         if (isset($module_prefs[$name]))
@@ -206,27 +196,17 @@ function increment_module_pref($name, $value = 1, $module = false, $user = false
         return;
     }
 
-    if (isset($module_prefs[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'userid' => $user ]);
+    if (! $entity)
     {
-        $update = DB::update('module_userprefs');
-        $update->set(['value' => DB::expression("value+$value")])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-                ->equalTo('userid', $user)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
     }
-    else
-    {
-        $insert = DB::insert('module_userprefs');
-        $insert->values([
-            'modulename' => $module,
-            'setting' => $name,
-            'userid' => $user,
-            'value' => $value
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue($entity->getValue() + $value);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
 }
 
 /**
@@ -253,7 +233,7 @@ function clear_module_pref($name, $module = false, $user = false)
     $module_prefs = load_module_prefs($module, $user);
 
     //don't write to the DB if the user isn't logged in.
-    if (! $session['user']['loggedin'] && ! $user)
+    if (! ($session['user']['loggedin'] ?? false) && ! $user)
     {
         // We do need to trash the loaded copy here however
         unset($module_prefs[$name]);
@@ -263,14 +243,13 @@ function clear_module_pref($name, $module = false, $user = false)
         return;
     }
 
-    if (isset($module_prefs[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'userid' => $user ]);
+
+    if ($entity)
     {
-        $delete = DB::delete('module_userprefs');
-        $delete->where->equalTo('modulename', $module)
-            ->equalTo('setting', $name)
-            ->equalTo('userid', $user)
-        ;
-        DB::execute($delete);
+        \Doctrine::remove($entity);
+        \Doctrine::flush();
     }
 }
 
@@ -291,17 +270,14 @@ function load_module_prefs($module, $user = false): array
         $user = $session['user']['acctid'];
     }
 
-    $module_prefs = [];
-    $select = DB::select('module_userprefs');
-    $select->columns(['setting', 'value'])
-        ->where->equalTo('modulename', $module)
-            ->equalTo('userid', $user)
-    ;
-    $result = DB::execute($select);
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
-    while ($row = DB::fetch_assoc($result))
+    $result = $repository->findBy([ 'modulename' => $module, 'userid' => $user ]);
+
+    $module_prefs = [];
+    foreach($result as $val)
     {
-        $module_prefs[$row['setting']] = $row['value'];
+        $module_prefs[$val->getSetting()] = $val->getValue();
     }
 
     return $module_prefs;
