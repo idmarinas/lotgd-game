@@ -39,6 +39,8 @@ $params = [
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
+\LotgdNavigation::addHeader('category.continue');
+
 $dk = \LotgdHttp::getQuery('dk');
 
 if ((count($session['user']['dragonpoints']) < $session['user']['dragonkills']) && '' != $dk)
@@ -124,6 +126,8 @@ else
 {
     require_once 'lib/newday/newday.php';
 }
+
+$params['turnsPerDay'] = $turnsperday;
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();

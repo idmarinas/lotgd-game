@@ -2,6 +2,7 @@
 
 # Headers of navigations
 category:
+    continue: Continue
 
 # Menu navs
 nav:
