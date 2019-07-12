@@ -119,16 +119,6 @@ switch ($op)
             $row = $repository->replyToMessage($replyTo, $session['user']['acctid']);
         }
 
-        //-- Get a list of recipents
-        $countRecipents = null;
-
-        if ($to)
-        {
-            $row = $charRepository->findOne($to);
-
-            $countRecipents = count($row);
-        }
-
         if (is_array($row) && ! $countRecipents)
         {
             $subj = \LotgdTranslator::t('section.write.reply.subject', [
@@ -158,7 +148,7 @@ switch ($op)
         }
         else
         {
-            $to = (string) \LotgdHttp::getPost('to');
+            $to = (string) (\LotgdHttp::getPost('to') ?: \LotgdHttp::getQuery('to'));
 
             $characters = $charRepository->findLikeName($to);
 
