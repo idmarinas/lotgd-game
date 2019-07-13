@@ -102,8 +102,8 @@ function mass_module_prepare(array $hooknames)
 
     $query = $hookRepository->createQueryBuilder('u');
     $result = $query
-        // ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
-        ->where('u.active = 1 AND u.location IN (:names)')
+        ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
+        ->where('m.active = 1 AND u.location IN (:names)')
         ->setParameter('names', $hooknames)
         ->orderBy('u.location')
         ->addOrderBy('u.priority')
@@ -112,6 +112,7 @@ function mass_module_prepare(array $hooknames)
         ->getResult()
     ;
 
+    $modulenames = [];
     foreach ($result as $row)
     {
         $modulenames[$row->getModulename()] = $row->getModulename();
@@ -132,7 +133,7 @@ function mass_module_prepare(array $hooknames)
 
     $result = $query
         ->where('u.modulename IN (:names)')
-        ->setParameter('names', $modulelist)
+        ->setParameter('names', $modulenames)
         ->getQuery()
         ->getResult()
     ;
@@ -152,7 +153,7 @@ function mass_module_prepare(array $hooknames)
 
     $result = $query
         ->where('u.modulename IN (:names) AND u.userid = :user')
-        ->setParameter('names', $modulelist)
+        ->setParameter('names', $modulenames)
         ->setParameter('user', $session['user']['acctid'])
         ->getQuery()
         ->getResult()
