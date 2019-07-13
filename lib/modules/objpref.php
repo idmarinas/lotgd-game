@@ -88,31 +88,18 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
         $module = $mostrecentmodule;
     }
 
-    $module_objpref = load_module_objpref($objtype, $objid, $module);
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
 
-    if (isset($module_objpref[$name]))
+    if (! $entity)
     {
-        $update = DB::update('module_objprefs');
-        $update->set(['value' => $value])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-                ->equalTo('objtype', $objtype)
-                ->equalTo('objid', $objid)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleObjprefs();
     }
-    else
-    {
-        $insert = DB::insert('module_objprefs');
-        $insert->values([
-            'value' => $value,
-            'modulename' => $module,
-            'setting' => $name,
-            'objtype' => $objtype,
-            'objid' => $objid
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue($value);
+
+    \Doctrine::entity($entity);
+    \Doctrine::flush();
 
     invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
 }
@@ -137,29 +124,18 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
         $module = $mostrecentmodule;
     }
 
-    if (isset($module_objpref[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
+
+    if (! $entity)
     {
-        $update = DB::update('module_objprefs');
-        $update->set(['value' => DB::expression("value+$value")])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-                ->equalTo('objtype', $objtype)
-                ->equalTo('objid', $objid)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleObjprefs();
     }
-    else
-    {
-        $insert = DB::insert('module_objprefs');
-        $insert->values([
-            'value' => $value,
-            'modulename' => $module,
-            'setting' => $name,
-            'objtype' => $objtype,
-            'objid' => $objid
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue((float) ($entity->getValue()) + $value);
+
+    \Doctrine::entity($entity);
+    \Doctrine::flush();
 
     invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
 }
@@ -186,18 +162,13 @@ function load_module_objpref($objtype, $objid, $module = false): array
 
     if (! is_array($module_objpref))
     {
-        $module_objpref = [];
-        $select = DB::select('module_objprefs');
-        $select->columns(['setting', 'value'])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('objtype', $objtype)
-                ->equalTo('objid', $objid)
-        ;
-        $result = DB::execute($select);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+        $result = $repository->findBy([ 'modulename' => $module, 'objtype' => $objtype, 'objid' => $objid ]);
 
-        while ($row = DB::fetch_assoc($result))
+        $module_objpref = [];
+        foreach($result as $val)
         {
-            $module_objpref[$row['setting']] = $row['value'];
+            $module_objpref[$val->getSetting()] = $val->getValue();
         }
 
         updatedatacache("module-objpref-$objtype-$objid-$module", $module_objpref, true);

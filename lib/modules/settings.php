@@ -86,27 +86,20 @@ function set_module_setting($name, $value, $module = false)
     {
         $module = $mostrecentmodule;
     }
-    $module_settings = load_module_settings($module);
 
-    if (isset($module_settings[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name ]);
+
+    if (! $entity)
     {
-        $update = DB::update('module_settings');
-        $update->set(['value' => $value])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleSettings();
     }
-    else
-    {
-        $insert = DB::insert('module_settings');
-        $insert->values([
-            'modulename' => $module,
-            'setting' => $name,
-            'value' => $value
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue($value);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
+
     invalidatedatacache("module-settings-$module", true);
 }
 
@@ -127,27 +120,20 @@ function increment_module_setting($name, $value = 1, $module = false)
     {
         $module = $mostrecentmodule;
     }
-    $module_settings = load_module_settings($module);
 
-    if (isset($module_settings[$name]))
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name ]);
+
+    if (! $entity)
     {
-        $update = DB::update('module_settings');
-        $update->set(['value' => DB::expression("value+$value")])
-            ->where->equalTo('modulename', $module)
-                ->equalTo('setting', $name)
-        ;
-        DB::execute($update);
+        $entity = new \Lotgd\Core\Entity\ModuleSettings();
     }
-    else
-    {
-        $insert = DB::insert('module_settings');
-        $insert->values([
-            'modulename' => $module,
-            'setting' => $name,
-            'value' => $value
-        ]);
-        DB::execute($insert);
-    }
+
+    $entity->setValue((float) ($entity->getValue()) + $value);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
+
     invalidatedatacache("module-settings-$module", true);
 }
 
@@ -182,15 +168,14 @@ function load_module_settings($module): array
 
     if (! is_array($module_settings))
     {
-        $module_settings = [];
-        $select = DB::select('module_settings');
-        $select->where->equalTo('modulename', $module);
-        $result = DB::execute($select);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+        $result = $repository->findBy([ 'modulename' => $module ]);
 
-        while ($row = DB::fetch_assoc($result))
+        $module_settings = [];
+        foreach($result as $val)
         {
-            $module_settings[$row['setting']] = $row['value'];
-        }//end while
+            $module_settings[$val->getSetting()] = $val->getValue();
+        }
 
         updatedatacache("module-settings-$module", $module_settings, true);
     }//end if

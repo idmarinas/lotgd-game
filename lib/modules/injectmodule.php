@@ -18,36 +18,36 @@ function injectmodule($modulename, $force = false)
         return $injected_modules[$force][$modulename];
     }
 
-    $modulename = modulename_sanitize($modulename);
+    $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
     if (file_exists($modulefilename))
     {
         tlschema("module-{$modulename}");
-        $select = DB::select('modules');
-        $select->columns(['active', 'filemoddate', 'infokeys', 'version'])
-            ->where->equalTo('modulename', $modulename)
-        ;
-        $result = DB::execute($select);
+
+        $repository = \Doctrine::getRepository('LotgdCore:Modules');
+        $row = $repository->find($modulename);
 
         if (! $force)
         {
             //our chance to abort if this module isn't currently installed
             //or doesn't meet the prerequisites.
-            if (0 == $result->count())
+            if (! $row)
             {
                 tlschema();
-                output_notl('`n`3Module `#%s`3 is not installed, but was attempted to be injected.`n', $modulename);
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', [ 'module' => $modulename ], 'app-default'));
+
                 $injected_modules[$force][$modulename] = false;
 
                 return false;
             }
             $row = $result->current();
 
-            if (! $row['active'])
+            if (! $row->getActive())
             {
                 tlschema();
-                output('`n`3Module `#%s`3 is not active, but was attempted to be injected.`n', $modulename);
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', [ 'module' => $modulename ], 'app-default'));
+
                 $injected_modules[$force][$modulename] = false;
 
                 return false;
@@ -78,85 +78,48 @@ function injectmodule($modulename, $force = false)
             {
                 $injected_modules[$force][$modulename] = false;
                 tlschema();
-                output('`n`3Module `#%s`3 does not meet its prerequisites.`n', $modulename);
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', [ 'module' => $modulename ], 'app-default'));
 
                 return false;
             }
         }
 
         //check to see if the module needs to be upgraded.
-        if ($result->count() > 0)
+        if ($row)
         {
-            $row = $row ?? $result->current();
             $filemoddate = date('Y-m-d H:i:s', filemtime($modulefilename));
 
-            if ($row['filemoddate'] != $filemoddate || '' == $row['infokeys'] || '|' != $row['infokeys'][0] || '' == $row['version'])
+            if ($row->getFilemoddate() != $filemoddate || '' == $row->getInfokeys() || '|' != $row->getInfokeys()[0] || '' == $row->getVersion())
             {
-                //The file has recently been modified, lock tables and
-                //check again (knowing we're the only one who can do this
-                //at one shot)
-                $sql = sprintf('LOCK TABLES %s WRITE', DB::prefix('modules'));
-                DB::query($sql);
-                //check again after the table has been locked.
-                $select = DB::select('modules');
-                $select->columns(['filemoddate'])
-                    ->where->equalTo('modulename', $modulename)
-                ;
-                $row = $result->current();
+                //the file mod time is still different from that
+                //recorded in the database, time to update the database
+                //and upgrade the module.
+                debug("The module $modulename was found to have updated, upgrading the module now.");
 
-                if ($row['filemoddate'] != $filemoddate || ! isset($row['infokeys']) || '' == $row['infokeys'] || '|' != $row['infokeys'][0] || '' == $row['version'])
+                if (! is_array($info))
                 {
-                    //the file mod time is still different from that
-                    //recorded in the database, time to update the database
-                    //and upgrade the module.
-                    debug("The module $modulename was found to have updated, upgrading the module now.");
+                    //we might have gotten this info above, if not,
+                    //we need it now.
+                    $fname = "{$modulename}_getmoduleinfo";
+                    $info = $fname();
 
-                    if (! is_array($info))
-                    {
-                        //we might have gotten this info above, if not,
-                        //we need it now.
-                        $fname = "{$modulename}_getmoduleinfo";
-                        $info = $fname();
-
-                        $info['download'] = $info['download'] ?? '';
-                        $info['version'] = $info['version'] ?? '0.0';
-                        $info['description'] = $info['description'] ?? '';
-                    }
-                    //Everyone else will block at the initial lock tables,
-                    //we'll update, and on their second check, they'll fail.
-                    //Only we will update the table.
-
-                    $update = DB::update('modules');
-                    $update->set([
-                            'moduleauthor' => $info['author'],
-                            'category' => $info['category'],
-                            'formalname' => $info['name'],
-                            'description' => $info['description'],
-                            'filemoddate' => $filemoddate,
-                            'infokeys' => sprintf('|%s|', implode(array_keys($info), '|')),
-                            'version' => $info['version'],
-                            'download' => $info['download']
-                        ])
-                        ->where->equalTo('modulename', $modulename)
-                    ;
-                    DB::execute($update);
-                    debug(DB::sqlString());
-
-                    DB::query('UNLOCK TABLES');
-                    // Remove any old hooks (install will reset them)
-                    module_wipehooks();
-                    $fname = "{$modulename}_install";
-
-                    if (false === $fname())
-                    {
-                        return false;
-                    }
-                    invalidatedatacache("injections-inject-$modulename");
+                    $info['download'] = $info['download'] ?? '';
+                    $info['version'] = $info['version'] ?? '0.0';
+                    $info['description'] = $info['description'] ?? '';
                 }
-                else
+
+                \Doctrine::persist($row);
+                \Doctrine::flush();
+
+                // Remove any old hooks (install will reset them)
+                module_wipehooks();
+                $fname = "{$modulename}_install";
+
+                if (false === $fname())
                 {
-                    DB::query('UNLOCK TABLES');
+                    return false;
                 }
+                invalidatedatacache("injections-inject-$modulename");
             }
         }
         tlschema();
@@ -164,11 +127,9 @@ function injectmodule($modulename, $force = false)
 
         return true;
     }
-    else
-    {
-        output('`n`$Module `^%s`$ was not found in the modules directory.`n', $modulename);
-        $injected_modules[$force][$modulename] = false;
 
-        return false;
-    }
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.unfound', [ 'module' => $modulename ], 'app-default'));
+    $injected_modules[$force][$modulename] = false;
+
+    return false;
 }

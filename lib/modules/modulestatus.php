@@ -12,25 +12,26 @@ function module_status($modulename, $version = false)
 {
     global $injected_modules;
 
-    $modulename = modulename_sanitize($modulename);
+    $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
-    $status = MODULE_NO_INFO;
+
+    // The module file doesn't exist.
+    $status = MODULE_FILE_NOT_PRESENT;
 
     if (file_exists($modulefilename))
     {
-        $select = DB::select('modules');
-        $select->columns(['active', 'filemoddate', 'infokeys', 'version'])
-            ->where->equalTo('modulename', $modulename)
-        ;
-        $result = DB::execute($select);
+        // The module isn't installed
+        $status = MODULE_NOT_INSTALLED;
 
-        if ($result->count() > 0)
+        $repository = \Doctrine::getRepository('LotgdCore:Modules');
+        $row = $repository->findOneBy([ 'modulename' => $modulename ]);
+
+        if ($row)
         {
             // The module is installed
             $status = MODULE_INSTALLED;
-            $row = $result->current();
 
-            if ($row['active'])
+            if ($row->getActive())
             {
                 // Module is here and active
                 $status |= MODULE_ACTIVE;
@@ -46,41 +47,26 @@ function module_status($modulename, $version = false)
                     $status |= MODULE_INJECTED;
                 }
             }
-            else
+            // Force-injected modules can be injected but not active.
+            elseif (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
             {
-                // Force-injected modules can be injected but not active.
-                if (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
-                {
-                    $status |= MODULE_INJECTED;
-                }
+                $status |= MODULE_INJECTED;
             }
+
             // Check the version number
             if (false === $version)
             {
                 $status |= MODULE_VERSION_OK;
             }
+            elseif (module_compare_versions($row->getVersion(), $version) < 0)
+            {
+                $status |= MODULE_VERSION_TOO_LOW;
+            }
             else
             {
-                if (module_compare_versions($row['version'], $version) < 0)
-                {
-                    $status |= MODULE_VERSION_TOO_LOW;
-                }
-                else
-                {
-                    $status |= MODULE_VERSION_OK;
-                }
+                $status |= MODULE_VERSION_OK;
             }
         }
-        else
-        {
-            // The module isn't installed
-            $status = MODULE_NOT_INSTALLED;
-        }
-    }
-    else
-    {
-        // The module file doesn't exist.
-        $status = MODULE_FILE_NOT_PRESENT;
     }
 
     return $status;
@@ -113,37 +99,36 @@ function is_module_installed($modulename, $version = false)
     return module_status($modulename, $version) & (MODULE_INSTALLED | MODULE_VERSION_OK);
 }
 
-
-function get_module_install_status()
+/**
+ * Get status of module.
+ *
+ * @return array
+ */
+function get_module_install_status(): array
 {
     // Collect the names of all installed modules.
-    $seenmodules = [];
-    $seencats = [];
-    $sql = 'SELECT modulename,category FROM '.DB::prefix('modules');
-    $result = @DB::query($sql);
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $result = $repository->findAll();
 
-    if (false !== $result)
+    $installedModules = [];
+    $installedCategories = [];
+
+    if ($result)
     {
-        while ($row = DB::fetch_assoc($result))
+        foreach ($result as $row)
         {
-            $seenmodules["{$row['modulename']}.php"] = true;
+            $installedModules["{$row->getModulename()}.php"] = true;
 
-            if (! array_key_exists($row['category'], $seencats))
-            {
-                $seencats[$row['category']] = 1;
-            }
-            else
-            {
-                $seencats[$row['category']]++;
-            }
+            $installedCategories[$row->getCategory()] = ($installedCategories[$row->getCategory()] ?? 0) + 1;
         }
+        unset($row);
     }
 
-    $uninstmodules = [];
+    $uninstalledModules = [];
 
     if ($handle = opendir('modules'))
     {
-        $ucount = 0;
+        $uninstalled = 0;
 
         while (false !== ($file = readdir($handle)))
         {
@@ -152,15 +137,20 @@ function get_module_install_status()
                 continue;
             }
 
-            if (preg_match('/\\.php$/', $file) && ! isset($seenmodules[$file]))
+            if (preg_match('/\\.php$/', $file) && ! isset($installedModules[$file]))
             {
-                $ucount++;
-                $uninstmodules[] = substr($file, 0, strlen($file) - 4);
+                $uninstalled++;
+                $uninstalledModules[] = substr($file, 0, strlen($file) - 4);
             }
         }
     }
     closedir($handle);
-    sort($uninstmodules);
+    sort($uninstalledModules);
 
-    return ['installedcategories' => $seencats, 'installedmodules' => $seenmodules, 'uninstalledmodules' => $uninstmodules, 'uninstcount' => $ucount];
+    return [
+        'installedcategories' => $installedCategories,
+        'installedmodules' => $installedModules,
+        'uninstalledmodules' => $uninstalledModules,
+        'uninstcount' => $uninstalled
+    ];
 }
