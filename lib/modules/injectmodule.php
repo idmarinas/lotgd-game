@@ -115,7 +115,7 @@ function injectmodule($modulename, $force = false)
                 \Doctrine::flush();
 
                 // Remove any old hooks (install will reset them)
-                module_wipehooks();
+                module_wipehooks($modulename);
                 $fname = "{$modulename}_install";
 
                 if (false === $fname())
