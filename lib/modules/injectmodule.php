@@ -86,7 +86,7 @@ function injectmodule($modulename, $force = false)
         //check to see if the module needs to be upgraded.
         if ($row)
         {
-            $filemoddate = date('Y-m-d H:i:s', filemtime($modulefilename));
+            $filemoddate = new \DateTime(date('Y-m-d H:i:s', filemtime($modulefilename)));
 
             if ($row->getFilemoddate() != $filemoddate || '' == $row->getInfokeys() || '|' != $row->getInfokeys()[0] || '' == $row->getVersion())
             {
@@ -106,6 +106,10 @@ function injectmodule($modulename, $force = false)
                     $info['version'] = $info['version'] ?? '0.0';
                     $info['description'] = $info['description'] ?? '';
                 }
+
+                $row = $repository->hydrateEntity($info, $row);
+
+                $row->setFilemoddate($filemoddate);
 
                 \Doctrine::persist($row);
                 \Doctrine::flush();
