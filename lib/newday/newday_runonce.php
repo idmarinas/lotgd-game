@@ -23,7 +23,6 @@ if (! getsetting('newdaycron', 0))
         gamelog('Cache data has been optimized', 'maintenance');
     }
 
-    require_once 'lib/newday/dbcleanup.php';
     require 'lib/newday/commentcleanup.php';
     require 'lib/newday/charcleanup.php';
     require 'lib/newday/logoutaccts.php';
