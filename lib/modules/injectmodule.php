@@ -41,7 +41,6 @@ function injectmodule($modulename, $force = false)
 
                 return false;
             }
-            $row = $result->current();
 
             if (! $row->getActive())
             {
