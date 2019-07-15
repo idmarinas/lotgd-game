@@ -163,30 +163,30 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
 {
     $limit = ($multi > 1 ? (false === $packofmonsters ? $multi : 1) : 1);
 
-    $select = DB::select('creatures');
-    $select
-        ->limit($limit)
-        ->order(DB::expression('RAND('.e_rand().')'))
+    $repository = \Doctrine::getRepository('LotgdCore:Creatures');
+    $query = $repository->createQueryBuilder('u');
+
+    $query->setMaxResults($limit)
+        ->orderBy('rand()')
     ;
 
     if (true === $forest)
     {
-        $select->where->equalTo('forest', 1);
+        $query->where('u.forest = 1');
     }
     elseif (false === $forest)
     {
-        $select->where->equalTo('graveyard', 1);
+        $query->where('u.graveyard = 1');
     }
 
     //-- Select creatures of diferent categories
     if (getsetting('multicategory', 0) && $limit > 1)
     {
-        $select->group('creaturecategory');
+        $query->groupBy('u.creaturecategory');
     }
 
-    $result = DB::execute($select);
+    $creatures = $query->getQuery()->getArrayResult();
 
-    $creatures = DB::toArray($result);
     if (count($creatures))
     {
         foreach($creatures as $key => $creature)

@@ -166,10 +166,7 @@ function writelog($response)
                 debuglog($message, false, $acctId, 'donation', 0, false);
             }
 
-            if (DB::affected_rows() > 0)
-            {
-                $processed = 1;
-            }
+            $processed = 1;
             modulehook('donation', ['id' => $acctId, 'amt' => $donation * getsetting('dpointspercurrencyunit', 100), 'manual' => false]);
         }
     }

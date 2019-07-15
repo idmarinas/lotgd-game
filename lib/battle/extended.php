@@ -902,17 +902,17 @@ function battle_spawn($creature)
 
     if (is_numeric($creature))
     {
-        $sql = 'SELECT * FROM '.DB::prefix('creatures')." WHERE creatureid = $creature LIMIT 1";
-        $result = DB::query($sql);
+        $repository = \Doctrine::getRepository('LotgdCore:Creatures');
+        $entity = $repository->find($creature);
 
-        if ($row = DB::fetch_assoc($result))
+        if ($entity)
         {
-            $newenemies[$nextindex] = $row;
+            $newenemies[$nextindex] = $repository->extractEntity($entity);
             $lotgdBattleContent['battlerounds'][$countround]['enemy'][] = [
                 'combat.enemy.spawn',
                 [
                     'creatureName' => $badguy['creaturename'],
-                    'summonName' => $row['creaturename']
+                    'summonName' => $entity->getCreaturename()
                 ]
             ];
         }

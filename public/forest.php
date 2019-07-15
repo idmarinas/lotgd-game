@@ -217,7 +217,7 @@ elseif ('search' == $op)
             {
                 if ($packofmonsters)
                 {
-                    $initialbadguy = DB::fetch_assoc($result);
+                    $initialbadguy = $result[0];
                     $prefixs = ['Elite', 'Dangerous', 'Lethal', 'Savage', 'Deadly', 'Malevolent', 'Malignant'];
 
                     for ($i = 0; $i < $multi; $i++)

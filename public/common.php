@@ -404,16 +404,15 @@ if (! $beta && 1 == getsetting('betaperplayer', 1))
     $beta = $session['user']['beta'] ?? 0;
 }
 
-if (isset($session['user']['clanid']))
+$claninfo = [];
+if ($session['user']['clanid'] ?? false)
 {
-    $sql = 'SELECT * FROM '.DB::prefix('clans')." WHERE clanid='{$session['user']['clanid']}'";
-    $result = DB::query($sql);
+    $repository = \Doctrine::getRepository('LotgdCore:Clans');
+    $entity = $repository->find($session['user']['clanid']);
 
-    $claninfo = [];
-
-    if ($result->count() > 0)
+    if ($entity)
     {
-        $claninfo = $result->current();
+        $claninfo = $repository->extractEntity($entity);
     }
     else
     {
@@ -423,7 +422,6 @@ if (isset($session['user']['clanid']))
 }
 else
 {
-    $claninfo = [];
     $session['user']['clanid'] = 0;
     $session['user']['clanrank'] = 0;
 }

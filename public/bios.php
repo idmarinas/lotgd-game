@@ -58,5 +58,4 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/bios.twig', $params));
 
-DB::free_result($result);
 page_footer();
