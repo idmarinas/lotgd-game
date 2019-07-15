@@ -94,8 +94,11 @@ function set_module_setting($name, $value, $module = false)
     {
         $entity = new \Lotgd\Core\Entity\ModuleSettings();
     }
-
-    $entity->setValue($value);
+    $entity = $repository->hydrateEntity([
+        'modulename' => $module,
+        'setting' => $name,
+        'value' => $value
+    ], $entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
