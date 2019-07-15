@@ -92,7 +92,7 @@ class PetitionsRepository extends DoctrineRepository
      *
      * @return bool
      */
-    public function deleteOldPetitions(int $timeout): bool
+    public function deleteOldPetitions(): bool
     {
         try
         {
