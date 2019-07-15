@@ -23,13 +23,13 @@
                         {% set activate = module.active ? 'deactivate' : 'activate' %}
                         {% set active = module.active ? 'active' : 'inactive' %}
                         <div class="ui mini icon buttons">
-                            <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|t|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}">
+                            <a class="ui {{ module.active ? 'green' : 'orange' }} button" data-tooltip="{{ ('table.tbody.' ~ activate)|t|uncolorize }}" href="{{ ('modules.php?op=' ~ activate ~ '&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
                                 <i class="power icon"></i>
                             </a>
-                            <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|t|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
+                            <a class="ui red button" id="{{ module.modulename }}" data-tooltip="{{ 'table.tbody.uninstall'|t|uncolorize }}" href="{{ ('modules.php?op=uninstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">
                                 <i class="remove icon"></i>
                             </a>
-                            <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|t|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat)|lotgd_url }}">
+                            <a class="ui button" data-tooltip="{{ 'table.tbody.reinstall'|t|uncolorize }}" href="{{ ('modules.php?op=reinstall&module=' ~ module.modulename ~ '&cat=' ~ cat|e('url'))|lotgd_url }}">
                                 <i class="undo icon"></i>
                             </a>
                             {% if SU_EDIT_CONFIG %}
