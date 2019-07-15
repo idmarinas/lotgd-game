@@ -49,16 +49,20 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
     $query = $repository->createQueryBuilder('u');
 
-    $result = $query
+    $query
         ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
-        ->where('u.location = :loc AND m.active = :active')
+        ->where('u.location = :loc')
         ->setParameter('loc', $hookname)
-        ->setParameter('active', (! $allowinactive) ? 1 : 0)
         ->orderBy('u.priority')
         ->addOrderBy('u.modulename')
-        ->getQuery()
-        ->getArrayResult()
     ;
+
+    if (! $allowinactive)
+    {
+        $query->andWhere('m.active = 1');
+    }
+
+    $result = $query->getQuery()->getArrayResult();
 
     // $args is an array passed by value and we take the output and pass it
     // back through
