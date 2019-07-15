@@ -158,7 +158,7 @@ reset($seencats);
 
 foreach ($seencats as $category => $count)
 {
-    \LotgdNavigation::addNav('modules.nav.modules', "modules.php?cat={$category}", [
+    \LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='. rawurlencode($category), [
         'params' => [
             'cat' => $category,
             'count' => $count
