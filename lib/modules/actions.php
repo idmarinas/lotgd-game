@@ -2,30 +2,23 @@
 
 function activate_module($module)
 {
-    if (! is_module_installed($module))
-    {
-        if (! install_module($module))
-        {
-            return false;
-        }
-    }
-
-    $update = DB::update('modules');
-    $update->set(['active' => 1])
-        ->where->equalTo('modulename', $module)
-    ;
-    DB::execute($update);
-    invalidatedatacache("injections-inject-$module");
-    massinvalidate('moduleprepare');
-
-    if (DB::affected_rows() <= 0)
+    if (! is_module_installed($module) && ! install_module($module))
     {
         return false;
     }
-    else
-    {
-        return true;
-    }
+
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $entity = $repository->find($module);
+
+    $entity->setActive(1);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
+
+    invalidatedatacache("injections-inject-$module");
+    massinvalidate('moduleprepare');
+
+    return true;
 }
 
 function deactivate_module($module)
@@ -42,22 +35,19 @@ function deactivate_module($module)
             return true;
         }
     }
-    $update = DB::update('modules');
-    $update->set(['active' => 0])
-        ->where->equalTo('modulename', $module)
-    ;
-    DB::execute($update);
+
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $entity = $repository->find($module);
+
+    $entity->setActive(0);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
+
     invalidatedatacache("injections-inject-$module");
     massinvalidate('moduleprepare');
 
-    if (DB::affected_rows() <= 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    return true;
 }
 
 function uninstall_module($module)
@@ -74,53 +64,57 @@ function uninstall_module($module)
         }
         tlschema();
 
+        $repository = \Doctrine::getRepository('LotgdCore:Modules');
+        $entity = $repository->find($module);
+
         debug('Deleting module entry`n');
-        $delete = DB::delete('modules');
-        $delete->where->equalTo('modulename', $module);
-        DB::execute($delete);
+        \Doctrine::remove($entity);
 
         debug('Deleting module hooks`n');
-        module_wipehooks();
+        module_wipehooks($module);
 
         debug('Deleting module settings`n');
-        $delete = DB::delete('module_settings');
-        $delete->where->equalTo('modulename', $module);
-        DB::execute($delete);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
+        $entities = $repository->findBy([ 'modulename' => $module ]);
+        foreach ($entities as $entity)
+        {
+            \Doctrine::remove($entity);
+        }
         invalidatedatacache("modulesettings-settings-$module");
 
         debug('Deleting module user prefs`n');
-        $delete = DB::delete('module_userprefs');
-        $delete->where->equalTo('modulename', $module);
-        DB::execute($delete);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+        $entities = $repository->findBy([ 'modulename' => $module ]);
+        foreach ($entities as $entity)
+        {
+            \Doctrine::remove($entity);
+        }
 
         debug('Deleting module object prefs`n');
-        $delete = DB::delete('module_objprefs');
-        $delete->where->equalTo('modulename', $module);
-        DB::execute($delete);
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+        $entities = $repository->findBy([ 'modulename' => $module ]);
+        foreach ($entities as $entity)
+        {
+            \Doctrine::remove($entity);
+        }
         invalidatedatacache("injections-inject-$module");
         massinvalidate('moduleprepare');
 
+        \Doctrine::flush();
+
         return true;
     }
-    else
-    {
-        return false;
-    }
+
+    return false;
 }
 
 function install_module($module, $force = true)
 {
     global $mostrecentmodule, $session;
-    $name = $session['user']['name'];
 
-    if (! $name)
-    {
-        $name = '`@System`0';
-    }
+    $name = $session['user']['name'] ?: '`@System`0';
 
-    require_once 'lib/sanitize.php';
-
-    if (modulename_sanitize($module) != $module)
+    if (LotgdSanitize::moduleNameSanitize($module) != $module)
     {
         debug("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
 
@@ -128,13 +122,15 @@ function install_module($module, $force = true)
     }
     else
     {
+        $repository = \Doctrine::getRepository('LotgdCore:Modules');
         // If we are forcing an install, then whack the old version.
         if ($force)
         {
-            $delete = DB::delete('modules');
-            $delete->where->equalTo('modulename', $module);
-            DB::execute($delete);
+            $entity = $repository->find($module);
+            \Doctrine::remove($entity);
+            \Doctrine::flush();
         }
+
         // We want to do the inject so that it auto-upgrades any installed
         // version correctly.
         if (injectmodule($module, true))
@@ -155,8 +151,7 @@ function install_module($module, $force = true)
             }
             else
             {
-                $insert = DB::insert('modules');
-                $insert->values([
+                $entity = $repository->hydrateEntity([
                     'modulename' => $mostrecentmodule,
                     'formalname' => $info['name'],
                     'moduleauthor' => $info['author'],
@@ -170,7 +165,9 @@ function install_module($module, $force = true)
                     'download' => $info['download'],
                     'description' => $info['description']
                 ]);
-                DB::execute($insert);
+                \Doctrine::persist($entity);
+                \Doctrine::flush();
+
                 $fname = $mostrecentmodule.'_install';
 
                 if (isset($info['settings']) && count($info['settings']) > 0)
