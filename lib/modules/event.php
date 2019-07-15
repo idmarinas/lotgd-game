@@ -6,34 +6,40 @@ function module_collect_events($type, $allowinactive = false)
 
     $events = [];
 
-    $select = DB::select(['e' => 'module_event_hooks']);
-    $select->columns(['*'])
-        ->join(['m' => DB::prefix('modules')], 'm.modulename = e.modulename')
-        ->order(DB::expression('RAND('.e_rand().')'))
-        ->where->equalTo('event_type', $type)
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
+    $query = $repository->createQueryBuilder('u');
+
+    $query
+        ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
+        ->where('u.eventType = :type')
+        ->setParameter('type', $type)
+        ->orderBy('rand()')
     ;
 
     if (! $allowinactive)
     {
-        $select->where->equalTo('active', 1);
+        $query->andWhere('m.active = 1');
     }
 
-    $result = DB::execute($select);
+    $result = $query->getQuery()->getArrayResult();
 
-    while ($row = DB::fetch_assoc($result))
+    // Normalize all of the event chances
+    $sum = 0;
+
+    foreach ($result as $row)
     {
-        // The event_chance bit needs to return a value, but it can do that
+        // The eventChance bit needs to return a value, but it can do that
         // in any way it wants, and can have if/then or other logical
         // structures, so we cannot just force the 'return' syntax unlike
         // with buffs.
         ob_start();
-        $chance = eval($row['event_chance'].';');
+        $chance = eval($row['eventChance'].';');
         $err = ob_get_contents();
         ob_end_clean();
 
         if ($err > '')
         {
-            debug(['error' => $err, 'Eval code' => $row['event_chance']]);
+            debug(['error' => $err, 'Eval code' => $row['eventChance']]);
         }
 
         $chance = max(0, min(100, $chance));
@@ -44,26 +50,20 @@ function module_collect_events($type, $allowinactive = false)
         {
             $chance = 0;
         }
-        $events[] = ['modulename' => $row['modulename'], 'rawchance' => $chance];
-    }
 
-    // Now, normalize all of the event chances
-    $sum = 0;
-    reset($events);
+        $events[] = [
+            'modulename' => $row['modulename'],
+            'rawchance' => $chance
+        ];
 
-    foreach ($events as $event)
-    {
-        $sum += $event['rawchance'];
+        $sum += $chance;
     }
-    reset($events);
 
     foreach ($events as $index => $event)
     {
-        if (0 == $sum)
-        {
-            $events[$index]['normchance'] = 0;
-        }
-        else
+        $events[$index]['normchance'] = 0;
+
+        if ($sum)
         {
             $events[$index]['normchance'] = round($event['rawchance'] / $sum * 100, 3);
             // If an event requests 1% chance, don't give them more!
@@ -79,9 +79,11 @@ function module_collect_events($type, $allowinactive = false)
 
 function module_events($eventtype, $basechance, $baseLink = false)
 {
-    if (false === $baseLink)
+    global $html;
+
+    if (! $baseLink)
     {
-        $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
 
         $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
     }
@@ -90,7 +92,7 @@ function module_events($eventtype, $basechance, $baseLink = false)
     {
         $events = module_collect_events($eventtype);
         $chance = r_rand(1, 100);
-        reset($events);
+
         $sum = 0;
 
         foreach ($events as $event)
@@ -103,13 +105,15 @@ function module_events($eventtype, $basechance, $baseLink = false)
             if ($chance > $sum && $chance <= $sum + $event['normchance'])
             {
                 $_POST['i_am_a_hack'] = 'true';
-                tlschema('events');
-                output('`^`c`bSomething Special!´c´b`0');
-                tlschema();
-                $op = httpget('op');
-                httpset('op', '');
+                $html['event'] = [
+                    'event.title',
+                    [],
+                    'partial-event'
+                ];
+                $op = \LotgdHttp::getQuery('op');
+                \LotgdHttp::setQuery('op', '');
                 module_do_event($eventtype, $event['modulename'], false, $baseLink);
-                httpset('op', $op);
+                \LotgdHttp::setQuery('op', $op);
 
                 return 1;
             }
@@ -134,10 +138,8 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
     // Save off the mostrecent module since having that change can change
     // behaviour especially if a module calls modulehooks itself or calls
     // library functions which cause them to be called.
-    if (! isset($mostrecentmodule))
-    {
-        $mostrecentmodule = '';
-    }
+    $mostrecentmodule = $mostrecentmodule ?? '';
+
     $mod = $mostrecentmodule;
     $_POST['i_am_a_hack'] = 'true';
 
@@ -149,10 +151,11 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
         $fname($type, $baseLink);
         tlschema();
         //hook into the running event, but only in *this* running event, not in all
-        modulehook("runevent_$module", ['type' => $type, 'baselink' => $baseLink, 'get' => httpallget(), 'post' => httpallpost()]);
+        modulehook("runevent_$module", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdHttp::getQueryAll(), 'post' => \LotgdHttp::getPostAll()]);
         //revert nav section after we're done here.
         $navsection = $oldnavsection;
     }
+
     $mostrecentmodule = $mod;
 }
 
@@ -171,15 +174,15 @@ function module_display_events($eventtype, $forcescript = false)
     }
 
     $script = $forcescript;
-    if (false === $forcescript)
+    if (! $forcescript)
     {
-        $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
     }
 
     $events = module_collect_events($eventtype, true);
 
-    if (! is_array($events) || 0 == count($events))
+    if (! is_array($events) || ! count($events))
     {
         return;
     }
@@ -187,39 +190,12 @@ function module_display_events($eventtype, $forcescript = false)
     usort($events, 'event_sort');
 
     tlschema('events');
-    output('`n`nSpecial event triggers:`n');
-    $name = translate_inline('Name');
-    $rchance = translate_inline('Raw Chance');
-    $nchance = translate_inline('Normalized Chance');
-    rawoutput("<table class='ui small very compact striped selectable table'>");
-    rawoutput('<thead><tr>');
-    rawoutput("<th>$name</th><th>$rchance</th><th>$nchance</th>");
-    rawoutput('</tr></thead>');
-    $i = 0;
 
-    foreach ($events as $event)
-    {
-        // Each event is an associative array of 'modulename',
-        // 'rawchance' and 'normchance'
-        $i++;
+    $params = [
+        'textDomain' => 'partial-event',
+        'events' => $events,
+        'script' => $script
+    ];
 
-        if ($event['modulename'])
-        {
-            $link = "module-{$event['modulename']}";
-            $name = $event['modulename'];
-        }
-        $rlink = "$script?eventhandler=$link";
-        $rlink = str_replace('?&', '?', $rlink);
-        $first = strpos($rlink, '?');
-        $rl1 = substr($rlink, 0, $first + 1);
-        $rl2 = substr($rlink, $first + 1);
-        $rl2 = str_replace('?', '&', $rl2);
-        $rlink = $rl1.$rl2;
-        rawoutput("<tr><td><a href='$rlink'>$name</a></td>");
-        addnav('', "$rlink");
-        rawoutput("<td>{$event['rawchance']}</td>");
-        rawoutput("<td>{$event['normchance']}</td>");
-        rawoutput('</tr>');
-    }
-    rawoutput('</table>');
+    rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/event-trigger.twig', $params));
 }
