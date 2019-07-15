@@ -22,7 +22,7 @@
                         <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.shortname }}"></div>
                     </td>
                     <td class="collapsing">
-                        <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category)|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
+                        <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
                             <i class="configure icon"></i>
                         </a>
                     </td>
