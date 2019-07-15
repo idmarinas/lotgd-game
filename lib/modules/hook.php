@@ -203,21 +203,21 @@ function module_wipehooks(string $module)
     global $mostrecentmodule;
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $result = $repository->findBy([' modulename' => $module ]);
+    $result = $repository->findBy(['modulename' => $module ]);
 
     debug("Removing all hooks for $module");
     foreach($result as $row)
     {
-        \Doctrime::remove($row);
+        \Doctrine::remove($row);
         invalidatedatacache('hooks-hook-'.$row['location']);
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $result = $repository->findBy([' modulename' => $module ]);
+    $result = $repository->findBy(['modulename' => $module ]);
 
     foreach($result as $row)
     {
-        \Doctrime::remove($row);
+        \Doctrine::remove($row);
     }
 
     \Doctrine::flush();
@@ -230,7 +230,7 @@ function module_addeventhook($type, $chance)
     debug("Adding an event hook on $type events for $mostrecentmodule");
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $entity = $repository->findOneBy([' modulename' => $mostrecentmodule, 'event_type' => $type ]);
+    $entity = $repository->findOneBy(['modulename' => $mostrecentmodule, 'eventType' => $type ]);
 
     $entity = $repository->hydrateEntity([
         'eventType' => $type,
@@ -238,7 +238,7 @@ function module_addeventhook($type, $chance)
         'eventChance' => $chance
     ], $entity);
 
-    \Doctrime::persist($entity);
+    \Doctrine::persist($entity);
 
     \Doctrine::flush();
 
@@ -255,11 +255,11 @@ function module_drophook($hookname, $functioncall = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $result = $repository->findBy([' modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall ]);
+    $result = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall ]);
 
     foreach($result as $row)
     {
-        \Doctrime::remove($row);
+        \Doctrine::remove($row);
     }
 
     \Doctrine::flush();
@@ -312,7 +312,7 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
     //we want to do a replace in case there's any garbage left in this table which might block new clean data from going in.
     //normally that won't be the case, and so this doesn't have any performance implications.
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $entity = $repository->findBy([' modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall ]);
+    $entity = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall ]);
 
     $entity = $repository->hydrateEntity([
         'modulename' => $mostrecentmodule,
