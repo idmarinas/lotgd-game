@@ -86,4 +86,36 @@ trait Character
             return [];
         }
     }
+
+    /**
+     * Get character name from account ID.
+     *
+     * @param int $account
+     *
+     * @return string
+     */
+    public function getCharacterNameFromAcctId(int $account): string
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query
+                ->select('c.name')
+                ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.acct', 'u.acctid'))
+                ->where('u.acctid = :acct')
+
+                ->setParameter('acct', $account)
+
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return '';
+        }
+    }
 }
