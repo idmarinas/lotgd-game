@@ -16,6 +16,7 @@ namespace Lotgd\Core\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
+use Tracy\Debugger;
 use Zend\Hydrator\ClassMethods;
 
 class AccountsRepository extends DoctrineRepository
@@ -56,7 +57,7 @@ class AccountsRepository extends DoctrineRepository
         //-- Fail if not found
         if (0 == count($data))
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
@@ -89,9 +90,39 @@ class AccountsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
+        }
+    }
+
+    /**
+     * Get list of accounts online.
+     *
+     * @return array
+     */
+    public function getListAccountsOnline(): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query
+                ->select('u.login')
+                ->select('c.name')
+                ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.acct', 'u.acctid'))
+                ->where('u.loggedin = 1 AND u.locked = 0')
+                ->orderBy('c.level', 'DESC')
+
+                ->getQuery()
+                ->getArrayResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debbuger::log($th);
+
+            return [];
         }
     }
 
