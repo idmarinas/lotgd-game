@@ -141,16 +141,15 @@ function page_footer($saveuser = true)
     $charstats = charstats();
     restore_buff_fields();
 
-    $sql = 'SELECT motddate FROM '.\DB::prefix('motd').' ORDER BY motditem DESC LIMIT 1';
-    $result = \DB::query($sql);
-    $row = \DB::fetch_assoc($result);
-    \DB::free_result($result);
+    $repository = \Doctrine::getRepository('LotgdCore:Motd');
+    $lastMotd = $repository->getLastMotdDate();
+
     $headscript = '';
 
-    $session['needtoviewmotd'] = false;
+    $session['needtoviewmotd'] = $session['needtoviewmotd'] ?? false;
 
     if (isset($session['user']['lastmotd'])
-        && ($row['motddate'] > $session['user']['lastmotd'])
+        && ($lastMotd > $session['user']['lastmotd'])
         && (! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
         && $session['user']['loggedin']
     ) {
@@ -191,10 +190,8 @@ function page_footer($saveuser = true)
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
-        $sql = 'SELECT count(acctid) AS c FROM '.\DB::prefix('accounts');
-        $result = \DB::query($sql);
-        $row = \DB::fetch_assoc($result);
-        $c = $row['c'];
+        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+        $c = $repository->count([]);
         $a = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).dirname(LotgdHttp::getServer('REQUEST_URI')));
 
         if (! preg_match("/\/$/", $a))
@@ -553,6 +550,7 @@ function charstats($return = true)
 
         $buffs = [];
 
+        $session['bufflist'] = array_map('array_filter', $session['bufflist'] ?? []);
         foreach ($session['bufflist'] as $val)
         {
             if ($val['suspended'] ?? false)
@@ -757,22 +755,17 @@ function charstats($return = true)
         }
         else
         {
-            $sql = 'SELECT name,alive,location,sex,level,laston,loggedin,lastip,uniqueid FROM '.\DB::prefix('accounts')." WHERE locked=0 AND loggedin=1 AND laston>'".date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds'))."' ORDER BY level DESC";
-            $result = \DB::query($sql);
-            $ret .= appoencode(sprintf(translate_inline('`bOnline Characters (%s players):´b`n'), \DB::num_rows($result)));
+            $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+            $result = $repository->getListAccountsOnline();
+            $onlinecount = count($result);
 
-            while ($row = \DB::fetch_assoc($result))
-            {
-                $ret .= appoencode("`^{$row['name']}`0`n");
-                $onlinecount++;
-            }
-            \DB::free_result($result);
-
-            if (0 == $onlinecount)
-            {
-                $ret .= appoencode(translate_inline('`iNone´i'));
-            }
+            $ret = \LotgdTheme::renderThemeTemplate('parts/online-list.twig', [
+                'list' => $result,
+                'onlineCount' => $onlinecount,
+                'textDomain' => 'page-home'
+            ]);
         }
+
         savesetting('OnlineCount', $onlinecount);
         savesetting('OnlineCountLast', strtotime('now'));
         updatedatacache('charlisthomepage', $ret);
