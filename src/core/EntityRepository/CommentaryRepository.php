@@ -163,4 +163,35 @@ class CommentaryRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Delte old comments in data base.
+     *
+     * @param int $expire
+     *
+     * @return int
+     */
+    public function deleteExpireComments(int $expire): int
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            $date = new \DateTime('now');
+            $date->sub(new \DateInterval("P{$expire}D"));
+
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.postdate < :date')
+                ->setParameter('date', $date)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
