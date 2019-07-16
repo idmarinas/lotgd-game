@@ -1,0 +1,9 @@
+{% translate_default_domain textDomain %}
+
+{{ 'online.list.title'|t({ 'n': onlineCount })|colorize }}
+
+{% for row in list %}
+    {{ '`^%s`0`n'|format(row.name)|colorize }}
+{% else %}
+    {{ 'online.list.none'|t|colorize }}
+{% endfor %}
