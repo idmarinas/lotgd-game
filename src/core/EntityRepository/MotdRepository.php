@@ -16,6 +16,7 @@ namespace Lotgd\Core\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
+use Tracy\Debugger;
 
 class MotdRepository extends DoctrineRepository
 {
@@ -60,7 +61,7 @@ class MotdRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
@@ -101,7 +102,7 @@ class MotdRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return null;
         }
@@ -170,5 +171,32 @@ class MotdRepository extends DoctrineRepository
         ');
 
         return $q->getArrayResult();
+    }
+
+    /**
+     * Get last Motd date.
+     *
+     * @return \DateTime|null
+     */
+    public function getLastMotdDate(): ?\DateTime
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            return $query
+                ->select('u.motddate')
+                ->orderBy('u.motddate', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
     }
 }
