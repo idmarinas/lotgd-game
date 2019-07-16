@@ -364,4 +364,35 @@ class MailRepository extends DoctrineRepository
             return 0;
         }
     }
+
+    /**
+     * Delte old mails in data base.
+     *
+     * @param int $expire
+     *
+     * @return int
+     */
+    public function deleteExpireMail(int $expire): int
+    {
+        $query = $this->_em->createQueryBuilder();
+
+        try
+        {
+            $date = new \DateTime('now');
+            $date->sub(new \DateInterval("P{$expire}D"));
+
+            return $query->delete($this->_entityName, 'u')
+                ->where('u.sent < :date')
+                ->setParameter('date', $date)
+                ->getQuery()
+                ->execute()
+            ;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return 0;
+        }
+    }
 }
