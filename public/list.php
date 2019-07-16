@@ -6,7 +6,6 @@
 define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
-require_once 'lib/villagenav.php';
 
 tlschema('list');
 
@@ -18,7 +17,7 @@ if ($session['user']['loggedin'])
 
     if ($session['user']['alive'])
     {
-        villagenav();
+        \LotgdNavigation::villageNav();
     }
     else
     {
@@ -51,16 +50,24 @@ $search = (string) \LotgdHttp::getPost('name');
 $playersperpage = 50;
 $params = [];
 
-$select = DB::select(['a' => 'accounts']);
-$select->columns(['acctid', 'login', 'laston', 'loggedin', 'lastip', 'uniqueid'])
-    ->join(['c' => 'characters'], DB::expression('c.acct_id = a.acctid AND c.id = a.character_id'), ['name', 'hitpoints', 'alive', 'location', 'race', 'sex', 'level'])
-    ->order('c.level DESC, c.dragonkills DESC, a.login ASC')
-    ->where->equalTo('locked', 0)
+$repository = \Doctrine::getRepository('LotgdCore:Accounts');
+$query = $repository->createQueryBuilder('u');
+
+$query
+    ->select('u.acctid', 'u.login', 'u.laston', 'u.loggedin', 'u.lastip', 'u.uniqueid')
+    ->addSelect('c.name', 'c.hitpoints', 'c.alive', 'c.location', 'c.race', 'c.sex', 'c.level')
+    ->where('u.locked = 0')
+    ->leftJoin('LotgdCore:Characters', 'c', 'with', $query->expr()->eq('c.id', 'u.character'))
+    ->orderBy('c.level', 'DESC')
+    ->addOrderBy('c.dragonkills', 'DESC')
+    ->addOrderBy('u.login', 'ASC')
 ;
 
 if ('search' == $op)
 {
-    $select->where->like('name', "%$search%");
+    $query->andWhere('c.name LIKE :name')
+        ->setParameter('name', "%{$search}%")
+    ;
 }
 
 // Order the list by level, dragonkills, name so that the ordering is total!
@@ -68,27 +75,25 @@ if ('search' == $op)
 // wouldn't show up
 if (! $page && '' == $op)
 {
-    $select->where->equalTo('loggedin', 1)
-        ->greaterThan('laston', date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds')))
-    ;
+    $query->andWhere('u.loggedin = 1');
 
-    $result = DB::paginator($select, $page, $playersperpage);
+    $result = $repository->getPaginator($query, $page, $playersperpage);
 
     $params['title'] = ['title' => 'list.warriors.online', 'params' => ['n' => $result->getTotalItemCount()]];
 }
 elseif ('clan' == $op)
 {
-    $select->where->equalTo('loggedin', 1)
-        ->greaterThan('laston', date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds')))
-        ->equalTo('clanid', $session['user']['clanid'])
+    $query->andWhere('u.loggedin = 1 AND c.clanid = :clan')
+        ->setParameter('clan', $session['user']['clanid'])
     ;
-    $result = DB::paginator($select, $page, $playersperpage);
+
+    $result = $repository->getPaginator($query, $page, $playersperpage);
 
     $params['title'] = ['title' => 'list.clan.online', 'params' => ['n' => $result->getTotalItemCount()]];
 }
 else
 {
-    $result = DB::paginator($select, $page, $playersperpage);
+    $result = $repository->getPaginator($query, $page, $playersperpage);
 
     $params['title'] = ['title' => 'list.warriors.singlepage'];
 

@@ -4,24 +4,19 @@ function get_player_hitpoints($player = false)
 {
     global $session;
 
-    if (false != $player)
+    $user = &$session['user'];
+
+    if (! $player)
     {
-        $select = DB::select('accounts');
-        $select->columns(['constitution', 'wisdom', 'strength', 'permahitpoints', 'level'])
-               ->where->equalTo('acctid', $player);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        $result = DB::execute($select)->current();
-
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
 
-        $user = $row;
-    }
-    else
-    {
-        $user = &$session['user'];
+        $user = $result;
     }
 
     $conbonus = $user['constitution'] * .5;
@@ -39,24 +34,19 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 {
     global $session;
 
-    if (false != $player)
+    $user = &$session['user'];
+
+    if (! $player)
     {
-        $select = DB::select('accounts');
-        $select->columns(['constitution', 'wisdom', 'strength', 'permahitpoints', 'level'])
-               ->where->equalTo('acctid', $player);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        $result = DB::execute($select)->current();
-
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
 
-        $user = $row;
-    }
-    else
-    {
-        $user = &$session['user'];
+        $user = $result;
     }
 
     $conbonus = $user['constitution'] * .5;
@@ -67,45 +57,36 @@ function explained_get_player_hitpoints($player = false, $colored = false)
     if ($colored)
     {
         return sprintf_translate('%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC',
-        ($conbonus >= 0 ? '`8+' : '`$-'), abs($conbonus),
-        ($wisbonus >= 0 ? '`8+' : '`$-'), abs($wisbonus),
-        ($strbonus >= 0 ? '`8+' : '`$-'), abs($strbonus),
-        ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
-        ($user['permahitpoints'] >= 0 ? '`8+' : '`$-'), abs($user['permahitpoints'])
-    );
+            ($conbonus >= 0 ? '`8+' : '`$-'), abs($conbonus),
+            ($wisbonus >= 0 ? '`8+' : '`$-'), abs($wisbonus),
+            ($strbonus >= 0 ? '`8+' : '`$-'), abs($strbonus),
+            ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
+            ($user['permahitpoints'] >= 0 ? '`8+' : '`$-'), abs($user['permahitpoints'])
+        );
     }
-    else
-    {
-        return sprintf_translate('%s CON %s WIS %s STR %s Train %s MISC', $conbonus, $wisbonus, $strbonus, $levelbonus, $user['permahitpoints']);
-    }
+
+    return sprintf_translate('%s CON %s WIS %s STR %s Train %s MISC', $conbonus, $wisbonus, $strbonus, $levelbonus, $user['permahitpoints']);
 }
 
 function get_player_attack($player = false)
 {
     global $session;
 
+    $user = &$session['user'];
+
     if (false !== $player)
     {
-        $sql = 'SELECT strength,wisdom,intelligence,attack FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
-        $user = $row;
+
+        $user = $result;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
-    // $strbonus=round((1/3)*$user['strength'],1);
-    // $speedbonus=round((1/3)*get_player_speed($player),1);
-    // $wisdombonus=round((1/6)*$user['wisdom'],1);
-    // $intbonus=round((1/6)*$user['intelligence'],1);
-    // $miscbonus=round($user['attack']-9,1);
-    //## Modificación no se redondea
+
     $strbonus = (1 / 3) * $user['strength'];
     $speedbonus = (1 / 3) * get_player_speed($player);
     $wisdombonus = (1 / 6) * $user['wisdom'];
@@ -121,26 +102,30 @@ function explained_row_get_player_attack($player = false)
 {
     global $session;
 
-    if ($player !== false)
+    $user = &$session['user'];
+
+    if (false !== $player)
     {
-        $sql = "SELECT strength,wisdom,intelligence,attack,weapondmg,level FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
-        $result = DB::query($sql);
-        $row = $result->current();
-        if (! $row) return '';
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        $user = $row;
+        if (! $result)
+        {
+            return 0;
+        }
+
+        $user = $result;
     }
-    else { $user =& $session['user']; }
 
-    $strbonus = round((1/3)*$user['strength'],2);
-    $speedbonus = round((1/3)*get_player_speed($player),2);
-    $wisdombonus = round((1/6)*$user['wisdom'],2);
-    $intbonus = round((1/6)*$user['intelligence'],2);
-    $miscbonus = round($user['attack']-9,2);
+    $strbonus = round((1 / 3) * $user['strength'], 2);
+    $speedbonus = round((1 / 3) * get_player_speed($player), 2);
+    $wisdombonus = round((1 / 6) * $user['wisdom'], 2);
+    $intbonus = round((1 / 6) * $user['intelligence'], 2);
+    $miscbonus = round($user['attack'] - 9, 2);
     // $atk = $strbonus+$speedbonus+$wisdombonus+$intbonus+$miscbonus;
     $weapondmg = (int) $user['weapondmg'];
-    $levelbonus = (int) $user['level']-1;
-    $miscbonus -= $weapondmg+$levelbonus;
+    $levelbonus = (int) $user['level'] - 1;
+    $miscbonus -= $weapondmg + $levelbonus;
 
     return [
         'strbonus' => $strbonus,
@@ -165,50 +150,41 @@ function explained_get_player_attack($player = false, $colored = false)
     $levelbonus = $result['levelbonus'];
     $miscbonus = $result['miscbonus'];
 
-    //## Mejorado el detalle de como se explica, se puede usar el antiguo
     if ($colored)
     {
         return sprintf_translate('%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ',
-        ($strbonus >= 0 ? '`8+' : '`$-'), abs($strbonus),
-        ($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
-        ($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
-        ($intbonus >= 0 ? '`8+' : '`$-'), abs($intbonus),
-        ($weapondmg >= 0 ? '`8+' : '`$-'), abs($weapondmg),
-        ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
-        ($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
-    );
+            ($strbonus >= 0 ? '`8+' : '`$-'), abs($strbonus),
+            ($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
+            ($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
+            ($intbonus >= 0 ? '`8+' : '`$-'), abs($intbonus),
+            ($weapondmg >= 0 ? '`8+' : '`$-'), abs($weapondmg),
+            ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
+            ($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
+        );
     }
-    else
-    {
-        return sprintf_translate('%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ', $strbonus, $speedbonus, $wisdombonus, $intbonus, $weapondmg, $levelbonus, $miscbonus);
-    }
+
+    return sprintf_translate('%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ', $strbonus, $speedbonus, $wisdombonus, $intbonus, $weapondmg, $levelbonus, $miscbonus);
 }
 
 function get_player_defense($player = false)
 {
     global $session;
 
+    $user = &$session['user'];
+
     if (false !== $player)
     {
-        $sql = 'SELECT constitution,wisdom,defense FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
-        $user = $row;
+
+        $user = $result;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
-    // $wisdombonus = round((1/4)*$user['wisdom'],1);
-    // $constbonus = round((3/8)*$user['constitution'],1);
-    // $speedbonus = round((3/8)*get_player_speed($player),1);
-    // $miscbonus = round($user['defense']-9,1);
-    //## Modificación no se redondea
+
     $wisdombonus = (1 / 4) * $user['wisdom'];
     $constbonus = (3 / 8) * $user['constitution'];
     $speedbonus = (3 / 8) * get_player_speed($player);
@@ -222,21 +198,25 @@ function explained_row_get_player_defense($player = false)
 {
     global $session;
 
-    if ($player !== false)
+    $user = &$session['user'];
+
+    if (false !== $player)
     {
-        $sql = "SELECT constitution,wisdom,defense,armordef,level FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
-        $result = DB::query($sql);
-        $row = $result->current();
-        if (! $row) return '';
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
 
-        $user = $row;
+        if (! $result)
+        {
+            return 0;
+        }
+
+        $user = $result;
     }
-    else { $user =& $session['user']; }
 
-    $wisdombonus = round((1/4)*$user['wisdom'],2);
-    $constbonus = round((3/8)*$user['constitution'],2);
-    $speedbonus = round((3/8)*get_player_speed($player),2);
-    $miscbonus = round($user['defense']-9,2);
+    $wisdombonus = round((1 / 4) * $user['wisdom'], 2);
+    $constbonus = round((3 / 8) * $user['constitution'], 2);
+    $speedbonus = round((3 / 8) * get_player_speed($player), 2);
+    $miscbonus = round($user['defense'] - 9, 2);
     // $defense = $wisdombonus+$speedbonus+$constbonus+$miscbonus;
     $armordef = (int) $user['armordef'];
     $levelbonus = (int) $user['level'] - 1;
@@ -263,44 +243,40 @@ function explained_get_player_defense($player = false, $colored = false)
     $levelbonus = $result['levelbonus'];
     $miscbonus = $result['miscbonus'];
 
-    //## Mejorado el detalle de como se explica, se puede usar el antiguo
     if ($colored)
     {
         return sprintf_translate('%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC',
-        ($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
-        ($constbonus >= 0 ? '`8+' : '`$-'), abs($constbonus),
-        ($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
-        ($armordef >= 0 ? '`8+' : '`$-'), abs($armordef),
-        ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
-        ($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
-    );
+            ($wisdombonus >= 0 ? '`8+' : '`$-'), abs($wisdombonus),
+            ($constbonus >= 0 ? '`8+' : '`$-'), abs($constbonus),
+            ($speedbonus >= 0 ? '`8+' : '`$-'), abs($speedbonus),
+            ($armordef >= 0 ? '`8+' : '`$-'), abs($armordef),
+            ($levelbonus >= 0 ? '`8+' : '`$-'), abs($levelbonus),
+            ($miscbonus >= 0 ? '`8+' : '`$-'), abs($miscbonus)
+        );
     }
-    else
-    {
-        return sprintf_translate('%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ', $wisdombonus, $constbonus, $speedbonus, $armordef, $levelbonus, $miscbonus);
-    }
+
+    return sprintf_translate('%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ', $wisdombonus, $constbonus, $speedbonus, $armordef, $levelbonus, $miscbonus);
 }
 
 function get_player_speed($player = false)
 {
     global $session;
 
+    $user = &$session['user'];
+
     if (false !== $player)
     {
-        $sql = 'SELECT dexterity,intelligence FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
 
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
-        $user = $row;
+
+        $user = $result;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
+
     // $speed = round((1/2)*$user['dexterity']+(1/4)*$user['intelligence']+(5/2),1);
     //## Modificación no se redondea
     $speed = (1 / 2) * $user['dexterity'] + (1 / 4) * $user['intelligence'] + (5 / 2);
@@ -312,24 +288,21 @@ function get_player_physical_resistance($player = false)
 {
     global $session;
 
+    $user = &$session['user'];
+
     if (false !== $player)
     {
-        $sql = 'SELECT constitution,wisdom,defense FROM '.DB::prefix('accounts').' WHERE acctid='.((int) $player).';';
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
 
-        if (! $row)
+        if (! $result)
         {
             return 0;
         }
-        $user = $row;
+
+        $user = $result;
     }
-    else
-    {
-        $user = &$session['user'];
-    }
-    // $defense = round(log($user['wisdom'])+$user['constitution']*0.08+log($user['defense']),1);
-    //## Modificación no se redondea
+
     $defense = log($user['wisdom']) + $user['constitution'] * 0.08 + log($user['defense']);
 
     return max($defense, 0);
@@ -337,6 +310,11 @@ function get_player_physical_resistance($player = false)
 
 function is_player_online($player = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //don't call this with like 100 people on a screen, it's pretty high load, 1 query each call
     //do mass_is_player_online($array_of_ids) instead
     static $checked_users = []; //remember for later, I am sucker for doing unnecessary stuff, and adding and checkin an array is better than one sql query more than necessary ;)
@@ -384,6 +362,11 @@ function is_player_online($player = false)
 
 function mass_is_player_online($players = false)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     //don't call this with like 100 people on a screen, it's pretty high load, 1 query each call
     //do mass_is_player_online($array_of_ids) instead
     $users = [];
@@ -424,29 +407,6 @@ function mass_is_player_online($players = false)
     return $users;
 }
 
-//-- Se sustituye por una función propia
-// function get_player_dragonkillmod($withhitpoints=false) {
-// 	global $session;
-// 	$dragonpoints=array_count_values($session['user']['dragonpoints']);
-// 	$dk=0;
-// 	foreach ($dragonpoints as $key=>$val) {
-// 		switch ($key) {
-// 			//not for wisdom on full scale
-// 			case "wis":
-// 				$dk+=0.2*$val;
-// 				break;
-// 			case "con":case "str": case "int": case "dex":
-// 				$dk+=0.3*$val;
-// 				break;
-// 			case "at": case "de":
-// 				$dk+=$val;
-// 				break;
-// 		}
-// 	}
-// 	if ($withhitpoints) $dk += (int)(($session['user']['maxhitpoints']-($session['user']['level']*10))/5);
-// 	return $dk;
-// }
-
 /*
  * Lo único que hace es devolver los DK que tiene el jugador
  *
@@ -456,6 +416,11 @@ function get_player_dragonkillmod()
 {
     global $session;
 
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0. Only return dragonkills of user',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     return $session['user']['dragonkills'];
 }
 
@@ -463,26 +428,42 @@ function get_player_info($player = false)
 {
     global $session;
 
-    if ($player !== false)
-    {
-        // $sql="SELECT strength,wisdom,intelligence,attack FROM ".DB::prefix('accounts')." WHERE acctid=".((int)$player).";";
-        // $result=DB::query($sql);
-        // $row=DB::fetch_assoc($result);
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
+    if (false !== $player)
+    {
         $select = DB::select('accounts');
         $select->where->equalTo('acctid', (int) $player);
         $user = DB::execute($select)->current();
-        if (! $user) return [];
+
+        if (! $user)
+        {
+            return [];
+        }
 
         unset($user['password']);
 
         $user['dragonpoints'] = unserialize($user['dragonpoints']);
         $user['prefs'] = unserialize($user['prefs']);
         $user['bufflist'] = unserialize($user['bufflist']);
-        if (! is_array($user['bufflist'])) $user['bufflist'] = [];
-        if (! is_array($user['dragonpoints'])) $user['dragonpoints'] = [];
+
+        if (! is_array($user['bufflist']))
+        {
+            $user['bufflist'] = [];
+        }
+
+        if (! is_array($user['dragonpoints']))
+        {
+            $user['dragonpoints'] = [];
+        }
     }
-    else { $user =& $session['user']; }
+    else
+    {
+        $user = &$session['user'];
+    }
 
     return $user;
 }

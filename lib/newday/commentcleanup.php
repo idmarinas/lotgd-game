@@ -1,93 +1,55 @@
 <?php
     require_once 'lib/gamelog.php';
 
-    // Clean up referer entries
-    $timestamp = date('Y-m-d H:i:s', strtotime('-2 month'));
-    DB::query('DELETE FROM '.DB::prefix('referers')." WHERE last < '$timestamp'");
-    gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('referers')." older than $timestamp.", 'maintenance');
+    //- Clean up referer entries
+    $repository = \Doctrine::getRepository('LotgdCore:Referers');
+    $result = $repository->deleteExpireReferers(60);
 
-    // shift old entries from the debuglog to the archive, clean up the archive if necessary
-    //Clean up debug log arhive, moved from there
-    $timestamp = date('Y-m-d H:i:s', strtotime('now'));
-    $sql = 'INSERT IGNORE INTO '.DB::prefix('debuglog_archive').' SELECT * FROM '.DB::prefix('debuglog')." WHERE date <'$timestamp'";
-
-    $ok = DB::query($sql);
-
-    if ($ok)
-    {
-        $sql = 'DELETE FROM '.DB::prefix('debuglog')." WHERE date <'$timestamp'";
-        DB::query($sql);
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expiredebuglog', 18), 0).' days'));
-        $sql = 'DELETE FROM '.DB::prefix('debuglog_archive')." WHERE date <'$timestamp'";
-
-        if (getsetting('expiredebuglog', 18) > 0)
-        {
-            DB::query($sql);
-        }
-        gamelog('Moved '.DB::affected_rows().' from '.DB::prefix('debuglog').' to '.DB::prefix('debuglog_archive')." older than $timestamp.", 'maintenance');
-    }
-    else
-    {
-        gamelog('ERROR, problems with moving the debuglog to the archive', 'maintenance');
-    }
+    gamelog("Deleted {$result} records from referers older than 60 days.", 'maintenance');
 
     //Clean up old mails
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('oldmail', 14), 0).' days'));
-    $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE sent<'$timestamp'";
-    DB::query($sql);
-    gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('mails')." older than $timestamp.", 'maintenance');
+
+    $repository = \Doctrine::getRepository('LotgdCore:Mail');
+    $time = (int) getsetting('oldmail', 14);
+    $result = $repository->deleteExpireMail($time);
+
+    gamelog("Deleted {$result} records from mail older than {$time} days.", 'maintenance');
     massinvalidate('mail');
 
     //CONTENT
 
-    //Clean up news
-    if ((int) getsetting('expirecontent', 180) > 0)
+    $time = (int) getsetting('expirecontent', 180);
+    if ($time)
     {
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expirecontent', 180), 0).' days'));
-        $sql = 'DELETE FROM '.DB::prefix('news')." WHERE newsdate<'$timestamp'";
-        gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('news')." older than $timestamp.", 'comment expiration');
-        DB::query($sql);
+        //-- Clean up news
+        $repository = \Doctrine::getRepository('LotgdCore:News');
+        $result = $repository->deleteExpireNews($time);
+
+        gamelog("Deleted {$result} records from news older than {$time} days.", 'maintenance');
+
+        //-- Clean up old comments
+        $repository = \Doctrine::getRepository('LotgdCore:Commentary');
+        $result = $repository->deleteExpireComments($time);
+
+        gamelog("Deleted {$result} records from commentary older than {$time} days.", 'comment expiration');
+
+        //-- Expire the faillog entries
+        $time = (int) getsetting('expirefaillog', 1);
+        if ($time)
+        {
+            $repository = \Doctrine::getRepository('LotgdCore:Faillog');
+            $result = $repository->deleteExpireFaillogs($time);
+
+            gamelog("Deleted {$result} records from faillog older than {$time} days.", 'maintenance');
+        }
     }
 
-    //Clean up game log
-    $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expiregamelog', 30), 0).' days'));
-    $sql = 'DELETE FROM '.DB::prefix('gamelog')." WHERE date < '$timestamp' ";
-
-    if (getsetting('expiregamelog', 30) > 0)
+    //-- Clean up game log
+    $time = (int) getsetting('expiregamelog', 30);
+    if ($time)
     {
-        DB::query($sql);
-        gamelog('Cleaned up '.DB::prefix('gamelog').' table removing '.DB::affected_rows()." older than $timestamp.", 'maintenance');
-    }
+        $repository = \Doctrine::getRepository('LotgdCore:Gamelog');
+        $result = $repository->deleteExpireGamelogs($time);
 
-    //Clean up old comments
-
-    $sql = 'DELETE FROM '.DB::prefix('commentary')." WHERE postdate<'".date('Y-m-d H:i:s', strtotime('-'.getsetting('expirecontent', 180).' days'))."'";
-
-    if (getsetting('expirecontent', 180) > 0)
-    {
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expirecontent', 180), 0).' days'));
-        DB::query($sql);
-        gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('commentary')." older than $timestamp.", 'comment expiration');
-    }
-
-    //Clean up old moderated comments
-
-    $sql = 'DELETE FROM '.DB::prefix('moderatedcomments')." WHERE moddate<'".date('Y-m-d H:i:s', strtotime('-'.getsetting('expirecontent', 180).' days'))."'";
-
-    if (getsetting('expirecontent', 180) > 0)
-    {
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expirecontent', 180), 0).' days'));
-        DB::query($sql);
-        gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('moderatedcomments')." older than $timestamp.", 'comment expiration');
-    }
-
-    //Expire the faillog entries
-
-    $sql = 'DELETE FROM '.DB::prefix('faillog')." WHERE date<'".date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expirefaillog', 1), 0).' days'))."'";
-
-    if (getsetting('expirefaillog', 1) > 0)
-    {
-        DB::query($sql);
-        $timestamp = date('Y-m-d H:i:s', strtotime('-'.round(getsetting('expirecontent', 180), 0).' days'));
-        gamelog('Deleted '.DB::affected_rows().' records from '.DB::prefix('faillog')." older than $timestamp.", 'maintenance');
+        gamelog("Deleted {$result} records from gamelog older than {$time} days.", 'maintenance');
     }
