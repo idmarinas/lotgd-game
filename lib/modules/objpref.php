@@ -10,11 +10,16 @@ function module_delete_objprefs($objtype, $objid)
 {
     global $mostrecentmodule;
 
-    $delete = DB::delete('module_objprefs');
-    $delete->where->equalTo('objtype', $objtype)
-        ->equalTo('objid', $objid)
-    ;
-    DB::execute($delete);
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $entities = $repository->findBy([ 'objtype' => $objtype, 'objid' => $objid ]);
+
+    foreach($entities as $entity)
+    {
+        \Doctrine::remove($entity);
+    }
+
+    \Doctrine::flush();
+
     massinvalidate("module-objpref-$objtype-$objid-$mostrecentmodule");
 }
 

@@ -15,8 +15,13 @@ $op = \LotgdHttp::getQuery('op');
 
 if ('keepalive' == $op)
 {
-    $sql = 'UPDATE '.DB::prefix('accounts')." SET laston='".date('Y-m-d H:i:s')."' WHERE acctid='{$session['user']['acctid']}'";
-    DB::query($sql);
+    $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $entity = $repository->find($session['user']['acctid']);
+
+    $entity->setLaston(new \DateTime('now'));
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
 
     echo '<html><meta http-equiv="Refresh" content="30;url='.LotgdHttp::getServer('REQUEST_URI').'"></html><body>'.date('Y-m-d H:i:s').'</body></html>';
 

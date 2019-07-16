@@ -7,80 +7,106 @@ $thispage_superuser_level = 0;
 function check_su_access($level)
 {
     global $session,$thispage_superuser_level;
+
     $thispage_superuser_level = $thispage_superuser_level | $level;
+
+    $textDomain = 'partial-access';
+
     rawoutput('<!--Su_Restricted-->');
 
     if ($session['user']['superuser'] & $level)
     {
-        //they have appropriate levels, let's see if there's a module that
-        // restricts access beyond this point.
+        //-- They have appropriate levels, let's see if there's a module that restricts access beyond this point.
         $return = modulehook('check_su_access', ['enabled' => true, 'level' => $level]);
 
         if ($return['enabled'])
         {
             $session['user']['laston'] = new \DateTime('now');
-        }
-        else
-        {
-            page_header('Oops.');
-            output("Looks like you're probably an admin with appropriate permissions to perform this action, but a module is preventing you from doing so.");
-            output('Sorry about that!');
-            tlschema('nav');
-            addnav('M?Return to the Mundane', 'village.php');
-            tlschema();
-            page_footer();
-        }
-    }
-    else
-    {
-        clearnav();
-        $session['output'] = '';
-        page_header('INFIDEL!');
-        // This buff is useless because the graveyard (rightly, really)
-        // wipes all buffs when you enter it.  This means that you never really
-        // have this effect unless you log out without going to the graveyard
-        // for some odd reason.
-        //		apply_buff('angrygods',
-        //			array(
-        //				"name"=>"`^The gods are angry!",
-        //				"rounds"=>10,
-        //				"wearoff"=>"`^The gods have grown bored with teasing you.",
-        //				"minioncount"=>$session['user']['level'],
-        //				"maxgoodguydamage"=> 2,
-        //				"effectmsg"=>"`7The gods curse you, causing `\${damage}`7 damage!",
-        //				"effectnodmgmsg"=>"`7The gods have elected not to tease you just now.",
-        //				"allowinpvp"=>1,
-        //				"survivenewday"=>1,
-        //				"newdaymessage"=>"`6The gods are still angry with you!",
-        //				"schema"=>"superuser",
-        //				)
-        //		);
-        output('For attempting to defile the gods, you have been smitten down!`n`n');
-        output('%s`$, Overlord of Death`) appears before you in a vision, seizing your mind with his, and wordlessly telling you that he finds no favor with you.`n`n', getsetting('deathoverlord', '`$Ramius'));
-        addnews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
-        debuglog("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
-        $session['user']['hitpoints'] = 0;
-        $session['user']['alive'] = 0;
-        $session['user']['soulpoints'] = 0;
-        $session['user']['gravefights'] = 0;
-        $session['user']['deathpower'] = 0;
-        $session['user']['gold'] = 0;
-        $session['user']['experience'] *= 0.75;
-        addnav('Daily News', 'news.php');
-        $sql = 'SELECT acctid FROM '.DB::prefix('accounts').' WHERE (superuser&'.SU_EDIT_USERS.')';
-        $result = DB::query($sql);
-        require_once 'lib/systemmail.php';
 
-        while ($row = DB::fetch_assoc($result))
-        {
-            $subj = '`#%s`# tried to hack the superuser pages!';
-            $subj = sprintf($subj, $session['user']['name']);
-            $body = 'Bad, bad, bad %s, they are a hacker!`n`nTried to access %s from %s.';
-            $body = sprintf($body, $session['user']['name'], $_SERVER['REQUEST_URI'], $_SERVER['HTTP_REFERER']);
-            systemmail($row['acctid'], $subj, $body);
+            return;
         }
+
+        page_header('title.ops', [], $textDomain);
+
+        rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/ops.twig', [ 'textDomain' => $textDomain ]));
+
+        \LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
+
         page_footer();
     }
+
+    clearnav();
+
+    // This buff is useless because the graveyard (rightly, really)
+    // wipes all buffs when you enter it.  This means that you never really
+    // have this effect unless you log out without going to the graveyard
+    // for some odd reason.
+    //		apply_buff('angrygods',
+    //			array(
+    //				"name"=>"`^The gods are angry!",
+    //				"rounds"=>10,
+    //				"wearoff"=>"`^The gods have grown bored with teasing you.",
+    //				"minioncount"=>$session['user']['level'],
+    //				"maxgoodguydamage"=> 2,
+    //				"effectmsg"=>"`7The gods curse you, causing `\${damage}`7 damage!",
+    //				"effectnodmgmsg"=>"`7The gods have elected not to tease you just now.",
+    //				"allowinpvp"=>1,
+    //				"survivenewday"=>1,
+    //				"newdaymessage"=>"`6The gods are still angry with you!",
+    //				"schema"=>"superuser",
+    //				)
+    //		);
+
+
+    $session['output'] = '';
+
+    page_header('title.infidel', [], $textDomain);
+
+    addnews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
+
+    debuglog("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
+
+    $session['user']['hitpoints'] = 0;
+    $session['user']['alive'] = 0;
+    $session['user']['soulpoints'] = 0;
+    $session['user']['gravefights'] = 0;
+    $session['user']['deathpower'] = 0;
+    $session['user']['gold'] = 0;
+    $session['user']['experience'] *= 0.75;
+
+    \LotgdNavigation::addNav('home.nav.news', 'news.php');
+
+    $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $result = $repository->getSuperuserWithPermit(SU_EDIT_USERS);
+
+    require_once 'lib/systemmail.php';
+
+    foreach ($result as $row)
+    {
+        $subj = [
+            'mail.subject',
+            [ 'name' => $session['user']['name'] ],
+            $textDomain
+        ];
+        $body = [
+            'mail.message',
+            [
+                'name' => $session['user']['name'],
+                'uri' => \LotgdHttp::getServer('REQUEST_URI'),
+                'referer' => \LotgdHttp::getServer('HTTP_REFERER')
+            ],
+            $textDomain
+        ];
+
+        systemmail($row['acctid'], $subj, $body);
+    }
+
+    rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/infidel.twig', [
+        'textDomain' => $textDomain,
+        'deathOverlord' => getsetting('deathoverlord', '`$Ramius')
+    ]));
+
+    page_footer();
 }
 
 /**

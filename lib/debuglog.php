@@ -21,7 +21,7 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
 {
     global $session;
 
-    static $needsdebuglogdelete = true;
+    $repository = \Doctrine::getRepository('LotgdCore:Debuglog');
 
     if (false === $target)
     {
@@ -39,15 +39,23 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
 
     if (false !== $field && false !== $value && $consolidate)
     {
-        $sql = 'SELECT * FROM '.DB::prefix('debuglog')." WHERE actor=$user AND field='$field' AND date>'".date('Y-m-d 00:00:00')."'";
-        $result = DB::query($sql);
+        $query = $repository->createQueryBuilder('u');
+        $result = $query
+            ->where('u.actor = :user AND u.field = :field AND u.date > :date')
 
-        if (DB::num_rows($result) > 0)
+            ->setParameter('user', $user)
+            ->setParameter('field', $field)
+            ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
+
+            ->getQuery()
+            ->getSingleArrayResult()
+        ;
+
+        if (count($result))
         {
-            $row = DB::fetch_assoc($result);
-            $value = $row['value'] + $value;
-            $message = $row['message'];
-            $id = $row['id'];
+            $value = $result['value'] + $value;
+            $message = $result['message'];
+            $id = $result['id'];
         }
     }
 
@@ -66,23 +74,16 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
         $value = 0;
     }
 
-    if ($id > 0)
-    {
-        $sql = 'UPDATE '.DB::prefix('debuglog')."
-            SET
-                date='".date('Y-m-d H:i:s')."',
-                actor='$user',
-                target='$target',
-                message='".addslashes($message)."',
-                field='$field',
-                value='$value'
-            WHERE
-                id=$id
-                ";
-    }
-    else
-    {
-        $sql = 'INSERT INTO '.DB::prefix('debuglog')." (id,date,actor,target,message,field,value) VALUES($id,'".date('Y-m-d H:i:s')."',$user,$target,'".addslashes($message)."','$field','$value')";
-    }
-    DB::query($sql);
+    $entity = $repository->find($id);
+    $entity = $repository->hydrateEntity([
+        'date' => new \DateTime('now'),
+        'actor' => $user,
+        'target' => $target,
+        'message' => $message,
+        'field' => $field,
+        'value' => $value
+    ], $entity);
+
+    \Doctrine::persist($entity);
+    \Doctrine::flush();
 }

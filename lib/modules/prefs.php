@@ -7,9 +7,14 @@
  */
 function module_delete_userprefs(int $user)
 {
-    $delete = DB::delete('module_userprefs');
-    $delete->where->equalTo('userid', $user);
-    DB::execute($delete);
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $entities = $repository->findBy([ 'userid' => $user ]);
+    foreach($entities as $entity)
+    {
+        \Doctrine::remove($entity);
+    }
+
+    \Doctrine::flush();
 
     massInvalidate("module-prefs-$user", true);
 }

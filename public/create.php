@@ -164,9 +164,6 @@ elseif ('forgot' == $op)
 
     if ($charname)
     {
-        $sql = 'SELECT acctid,login,emailaddress,forgottenpassword,password FROM '.DB::prefix('accounts')." WHERE login='$charname'";
-        $result = DB::query($sql);
-
         $account = $accountRepo->findOneBy(['login' => $charname]);
 
         if (! $account)

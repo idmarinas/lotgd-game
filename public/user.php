@@ -45,13 +45,13 @@ $params = [
 \LotgdNavigation::addNav('user.nav.ban.search', 'bans.php?op=searchban');
 
 // Collect a list of the mounts
-$mounts = '0,'.translate_inline('None');
-$sql = 'SELECT mountid,mountname,mountcategory FROM '.DB::prefix('mounts').' ORDER BY mountcategory';
-$result = DB::query($sql);
+$mounts = '0,None';
+$mountRepository = \Doctrine::getRepository('LotgdCore:Mounts');
+$result = $mountRepository->findBy([], [ 'mountcategory' => 'ASC']);
 
-while ($row = DB::fetch_assoc($result))
+foreach ($result as $row)
 {
-    $mounts .= ",{$row['mountid']},{$row['mountcategory']}: ".color_sanitize($row['mountname']);
+    $mounts .= ",{$row->getMountid()},{$row->getMountcategory()}: ".\LotgdSanitize::fullSanitize($row->getMountname());
 }
 
 $specialties = ['' => 'Undecided'];
@@ -107,11 +107,11 @@ if ('edit' == $op || 'save' == $op)
 
 $userinfo = include_once 'lib/data/user_account.php';
 $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
-$result = $clanRepository->extractEntity($clanRepository->findAll());
+$result = $clanRepository->findAll();
 
-while ($row = DB::fetch_assoc($result))
+foreach ($result as $row)
 {
-    $userinfo['clanid'] .= ",{$row['clanid']},".str_replace(',', ';', "<{$row['clanshort']}> {$row['clanname']}");
+    $userinfo['clanid'] .= ",{$row->getClanid()},".str_replace(',', ';', "<{$row->getClanshort()}> {$row->getClanname()}");
 }
 
 if ('del' == $op)
