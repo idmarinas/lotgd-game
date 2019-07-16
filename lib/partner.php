@@ -31,12 +31,12 @@ function get_partner($player = false)
         }
         else
         {
-            $sql = 'SELECT name FROM '.DB::prefix('accounts')." WHERE acctid = {$session['user']['marriedto']}";
-            $result = DB::query($sql);
+            $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+            $name = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 
-            if ($row = DB::fetch_assoc($result))
+            if ($name)
             {
-                $partner = $row['name'];
+                $partner = $name;
             }
             else
             {
@@ -50,9 +50,6 @@ function get_partner($player = false)
             }
         }
     }
-    //	No need to translate names...
-    //	tlschema("partner");
-    //	$partner = translate_inline($partner);
-    //	tlschema();
+
     return $partner;
 }
