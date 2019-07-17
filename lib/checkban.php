@@ -7,7 +7,7 @@ function checkban($login = false)
 {
     global $session;
 
-    if (($session['banoverride'] ?? false))
+    if ($session['banoverride'] ?? false)
     {
         return false;
     }
@@ -21,22 +21,22 @@ function checkban($login = false)
     }
     else
     {
-        $sql = 'SELECT lastip,uniqueid,banoverride,superuser FROM '.DB::prefix('accounts')." WHERE login='$login'";
-        $result = DB::query($sql);
-        $row = DB::fetch_assoc($result);
+        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+        $result = $repository->findBy([ 'login' => $login ]);
 
-        if ($row['banoverride'] || ($row['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
+        if ($result->getBanoverride() || ($result->getSuperuser() & ~SU_DOESNT_GIVE_GROTTO))
         {
             $session['banoverride'] = true;
 
             return false;
         }
-        DB::free_result($result);
-        $ip = $row['lastip'];
-        $id = $row['uniqueid'];
+
+        $ip = $result->getLastip();
+        $id = $result->getUniqueid();
     }
-    //first, remove bans, then select them.
-    DB::query('DELETE FROM '.DB::prefix('bans')." WHERE banexpire < NOW() AND banexpire>'0000-00-00 00:00:00'");
+
+    $repository = \Doctrine::getRepository('LotgdCore:Bans');
+    $repository->removeExpireBans();
 
     $sql = 'SELECT * FROM '.DB::prefix('bans')." where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00' OR banexpire>=NOW())";
     $result = DB::query($sql);
