@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
 class SettingsRepository extends DoctrineRepository
