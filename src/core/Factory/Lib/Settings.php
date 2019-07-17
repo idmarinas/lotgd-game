@@ -18,9 +18,8 @@ class Settings implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $settings = new LibSettings();
-        $settings->setWrapper($container->get(\Lotgd\Core\Db\Dbwrapper::class))
+        $settings->setDoctrine($container->get(\Lotgd\Core\Db\Doctrine::class))
             ->setCache($container->get(\Lotgd\Core\Lib\Cache::class))
-            ->setTableName('settings')
             ->loadSettings()
         ;
 

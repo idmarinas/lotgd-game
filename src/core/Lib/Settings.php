@@ -9,12 +9,13 @@
 namespace Lotgd\Core\Lib;
 
 use Lotgd\Core\Lib\Cache;
-use Lotgd\Core\Db\Dbwrapper;
+use Doctrine\ORM\EntityManager;
 
 class Settings
 {
     protected $tablename;
-    protected $wrapper;
+    protected $doctrine;
+    protected $repository;
     protected $cache;
     protected $settings = [];
     protected $settingsKey = 'game-settings-';
@@ -80,34 +81,23 @@ class Settings
     public function saveSetting(string $settingname, $value): bool
     {
         //-- Not do nothing if not have connection to DB
-        if (false === $this->wrapper->connect())
+        if (false === $this->isConnected())
         {
             return false;
         }
 
-        //-- To ensure that a new record is inserted or the existing one is updated
-        $sql = sprintf(
-            'REPLACE INTO `%s` (`setting`, `value`) VALUES (%s, %s)',
-            $this->tablename,
-            $this->wrapper->quoteValue($settingname),
-            $this->wrapper->quoteValue($value)
-        );
-        $this->wrapper->query($sql);
+        $entity = $this->repository()->find($settingname);
+        $entity = $this->repository()->hydrateEntity([
+            'setting' => $settingname,
+            'value' => $value
+        ], $entity);
 
-        if (0 == $this->wrapper->getAffectedRows())
-        {
-            $this->cache->invalidateData($this->getCacheKey(), true);
+        $this->repository()->persist($entity);
+        $this->repository()->flush();
 
-            return false;
-        }
+        $this->settings[$settingname] = $value;
 
-        $settings = $this->getAllSettings();
-
-        $settings[$settingname] = $value;
-
-        $this->cache->updateData($this->getCacheKey(), $settings, true);
-
-        $this->settings = $settings;
+        $this->cache->updateData($this->getCacheKey(), $this->settings, true);
 
         return true;
     }
@@ -120,7 +110,7 @@ class Settings
         $this->settings = $this->cache->getData($this->getCacheKey(), 86400, true);
 
         //-- Not do nothing if not have connection to DB
-        if (false === $this->wrapper->connect())
+        if (false === $this->isConnected())
         {
             return;
         }
@@ -129,16 +119,16 @@ class Settings
             try
             {
                 $this->settings = [];
-                $select = $this->wrapper->select($this->tablename);
-                $result = $this->wrapper->execute($select);
+                $result = $this->repository()->findAll();
 
-                if (! $result->count())
+                if (! count($result))
                 {
                     return;
                 }
 
                 foreach ($result as $row)
                 {
+                    $row = $this->repository()->extractEntity($row);
                     $this->settings[$row['setting']] = $row['value'];
                 }
 
@@ -188,39 +178,42 @@ class Settings
     }
 
     /**
-     * Set table name
+     * Set doctrine to use.
      *
-     * @param string $tablename
+     * @param Doctrine\ORM\EntityManager
      *
      * @return $this
      */
-    public function setTableName(string $tablename = '')
+    public function setDoctrine(EntityManager $doctrine)
     {
-
-        if ($tablename)
-        {
-            $tablename = $this->wrapper->prefix($tablename);
-        }
-        else
-        {
-            $tablename = $this->wrapper->prefix('settings');
-        }
-
-        $this->tablename = $tablename;
+        $this->doctrine = $doctrine;
 
         return $this;
     }
 
     /**
-     * Set wrapper to use
+     * Get repository.
      *
-     * @return $this
+     * @return object|null
      */
-    public function setWrapper(Dbwrapper $wrapper)
+    public function repository()
     {
-        $this->wrapper = $wrapper;
+        if (! $this->repository)
+        {
+            $this->repository = $this->doctrine->getRepository('LotgdCore:Settings');
+        }
 
-        return $this;
+        return $this->repository;
+    }
+
+    /**
+     * Check if have a connection to DB.
+     *
+     * @return bool
+     */
+    public function isConnected(): bool
+    {
+        return $this->doctrine->getConnection()->isConnected();
     }
 
     /**
