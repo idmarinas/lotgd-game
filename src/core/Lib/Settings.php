@@ -92,8 +92,8 @@ class Settings
             'value' => $value
         ], $entity);
 
-        $this->repository()->persist($entity);
-        $this->repository()->flush();
+        $this->doctrine->persist($entity);
+        $this->doctrine->flush();
 
         $this->settings[$settingname] = $value;
 
