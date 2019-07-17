@@ -6,7 +6,7 @@ function get_player_hitpoints($player = false)
 
     $user = &$session['user'];
 
-    if (! $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -36,7 +36,7 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 
     $user = &$session['user'];
 
-    if (! $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -74,7 +74,7 @@ function get_player_attack($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -104,7 +104,7 @@ function explained_row_get_player_attack($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -172,7 +172,7 @@ function get_player_defense($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -200,7 +200,7 @@ function explained_row_get_player_defense($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
@@ -264,7 +264,7 @@ function get_player_speed($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
@@ -290,7 +290,7 @@ function get_player_physical_resistance($player = false)
 
     $user = &$session['user'];
 
-    if (false !== $player)
+    if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
         $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
