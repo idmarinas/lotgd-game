@@ -1,0 +1,65 @@
+# Forgot password mail
+#
+# Replacements:
+#     {login}        = login name
+#     {acctid}       = account id
+#     {gameurl}      = URL extracted from the site
+#     {requester_IP} = IP of the requester
+#     {forgottenid}  = ID generated (!!! important !!!)
+forgotpassword:
+    subject: 'Forgotten Password requested'
+    body:
+        - 'Login: {login}`n`n'
+        - 'Someone from {requester_ip} requested a forgotten password link for your account. If this was you, then here is your link, you may click it to log into your account and change your password from your preferences page in the village square.`n`n'
+        - "If you didn't request this email, then don't sweat it, you're the one who is receiving this email, not them.`n`n"
+        - '{gameurl}?op=forgotval&id={forgottenid} `n`n'
+        - 'Thanks for playing!'
+
+# Verification mail
+#
+# Replacements:
+#     {login}        = login name
+#     {acctid}       = account id
+#     {emailaddress} = Emailaddress of the char
+#     {gameurl}      = URL extracted from the site
+#     {validationid} = ID generated (!!! important !!!)
+verificationmail:
+    subject: 'LoGD Account Verification'
+    body:
+        - 'Login name: {login} `n`n'
+        - 'In order to verify your account, you will need to click on the link below.`n`n'
+        - '{gameurl}?op=val&id={validationid}`n`n'
+        - 'Thanks for playing!'
+
+# Expiration notice mail
+#
+# Replacements:
+#     {charname} = login name
+#     {server}   = Your servers URL
+expirationnotice:
+    subject: 'LoGD Character Expiration'
+    body:
+        - 'One or more ({charname}) of your characters in Legend of the Green Dragon at {server} is about to expire.`n`n'
+        - 'If you wish to keep this character, you should log on to him or her soon!'
+
+# Notification mail
+#
+# Replacements:
+#     {gameurl}      = Your servers URL
+#     {subject}      = Subject in the YOM
+#     {body}         = Body of the YOM
+#     {sendername}   = Name of the Sender
+#     {receivername} = Name of the Receiver
+notificationmail:
+    subject: 'New LoGD Mail ({subject})'
+    body:
+        - 'You have received new mail on LoGD at {gameurl}`n`n'
+        - '-=-=-=-=-=-=-=-=-=-=-=-=-=-`n'
+        - 'From: {sendername}`n'
+        - 'To: {receivername}`n'
+        - 'Subject: {subject}`n'
+        - 'Body: `n'
+        - '{body}`n'
+        - '-=-=-=-=-=-=-=-=-=-=-=-=-=-`n`n'
+        - 'Do not respond directly to this email, it was sent from the game email address, and not the email address of the person who sent you the message. If you wish to respond, log into Legend of the Green Dragon at {gameurl} .`n`n'
+        - 'You may turn off these alerts in your preferences page, available from the village square.'

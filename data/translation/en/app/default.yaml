@@ -1,0 +1,117 @@
+# Default title for pages
+title: 'Legend of the Green Dragon'
+
+# Text related to session
+session:
+    timeout: 'Your session has timed out, you must log in again.'
+    cookies:
+        unactive: 'It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.'
+        info: 'If you are not sure what cookies are, please <a rel="noopener" target="_blank" href="http://en.wikipedia.org/wiki/WWW_browser_cookie">read this article</a> about them, and how to enable them.'
+    login:
+        incorrect: '`4Error, your login was incorrect`0'
+        account:
+            disappeared: Account Disappeared!'
+            notLogged: 'Account not logged in but session thinks they are.'
+            notAllowed: 'Navigation not allowed to {uri}'
+        anonymous:
+            notLogged: 'Not logged in: {uri}'
+opt:
+    edit: 'Edit'
+
+# Other parts
+parts:
+    motd:
+        title: 'MoTD'
+    mail:
+        anonymous: 'Log in to see your Ye Olde Mail'
+        title: 'Ye Olde Mail: {new,number} new, {old,number} old'
+    source:
+        title: 'View PHP Source'
+    petition:
+        help: 'Petition for Help'
+        editUser: 'User Editor'
+        admin: 'Petitions'
+        status:
+            '00': '`b{n,number} Unhandled ´b'
+            '01': '{n,number} In-Progress '
+            '02': '`i{n,number} Closed ´i'
+            '03': '`!{n,number} Informational `0'
+            '04': '`^{n,number} Escalated `0'
+            '05': '`${n,number} Top Level `0'
+            '06': '`%{n,number} Bug `0'
+            '07': '`#{n,number} Awaiting Points `0'
+    pageGen: 'Page gen: {genTime,number}s (Ave: {avg,number}s - {userGenTime,number}/{userGenTimeCount,number})'
+    pagination:
+        description: 'Pagination results {firstItemNumber,number} to {lastItemNumber,number} out of {totalItemCount,number}'
+        menu:
+            first: 'First page'
+            previous: 'Previous page'
+            current: '{firstItemNumber,number} - {lastItemNumber,number} of {totalItemCount,number}'
+            page: 'Page {page,number}'
+            next: 'Next page'
+            last: 'Last page'
+
+# Modal dialogs
+modal:
+    buttons:
+        cancel: 'Cancel'
+        ok: 'Ok'
+
+# Character info
+character:
+    # Name for default race
+    racename: 'Horrible Gelatinous Blob'
+    # Name for specialty
+    specialtyname: 'Unspecified'
+    mount: '`iNone´i'
+    bio: '`iNo biography provided`i'
+
+# Location
+location:
+    village.of: 'The Village of {name}'
+    everywhere: 'Everywhere'
+
+# Server running in maintenance
+maintenance:
+    debug.mode: 'SERVER RUNNING IN DEBUG MODE' # Server running in debug mode
+    server:
+        # Warning users to log out
+        warning:
+            title: 'The server is currently preparing for maintenance'
+            message: 'Only superusers will be able to log in and perform any actions.'
+            loggedin: '<br>Please, log out immediately in a safe place or the administrators will force you to log out with the possible loss of data, that you will not be able to recover.'
+        # Default message for maintenance (Server are closed and all user log out)
+        closed:
+            title: 'The server is currently suspended for maintenance'
+            message:
+                0: 'We apologise for any inconvenience, but for the moment, this server is undergoing maintenance.'
+                1: 'It should be accessible again soon.<br>'
+                2: "Since we're working on maintenance, maintenance will go quicker if you don't refresh or click that link as quick as you can, as this'll use fewer system resources."
+                3: "So check once a minute or so, but don't kill us with checking every 2 seconds please."
+                union: '<br>'
+        # Can't create new characters
+        creation:
+            title: 'The server is currently in maintenance'
+            message:
+                - 'While the server is in maintenance it is not possible to create new characters.<br><br>'
+                - 'Please wait a moment while we make the necessary changes.'
+
+# Redirect message
+redirect:
+    whoops: 'Whoops. There has been an error concering redirecting your to your new page. Please inform the admins about this. More Information for your petition down below:\n\n'
+    redirection: 'Redirected to {locationTo} from {locationFrom} {reason}<br>'
+    module:
+        unactive: 'You are attempting to use a module which is no longer active, or has been uninstalled.'
+    badnav:
+        title: 'Your navigation is broken'
+        content:
+            - '`lWhoops, your navigation is broken. Hopefully we can restore it.`0`n`n'
+            - '<a href="{locationUrl}">Click here to continue</a>'
+            - "`n`n`$If you cannot leave this page, notify the staff via <a href='{petitionUrl}'>petition</a> and tell them where this happened and what you did. Thanks.`0"
+
+flash.messages:
+    module:
+        uninstalled: 'Module {module} is not installed, but was attempted to be injected.'
+        unactived: 'Module {module} is not active, but was attempted to be injected.'
+        requisites: 'Module {module} does not meet its prerequisites.'
+        unfound: 'Module {module} was not found in the modules directory.'
