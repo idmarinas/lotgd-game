@@ -4,34 +4,41 @@
 // addnews ready
 // mail ready
 
-require_once 'lib/class/static.php';
-require_once 'lib/e_rand.php';
-
 function valid_dk_title($title, $dks, $gender)
 {
-    $sql = 'SELECT dk,male,female FROM '.DB::prefix('titles').
-        " WHERE dk <= $dks ORDER by dk DESC";
-    $res = DB::query($sql);
+    $repository = \Doctrine::getRepository('LotgdCore:Titles');
+    $query = $repository->createQueryBuilder('u');
+
+    $result = $query
+        ->where('u.dk <= :dk')
+        ->orderBy('u.dk', 'DESC')
+
+        ->setParameter('dk', $dks)
+
+        ->getQuery()
+        ->getResult()
+    ;
+
     $d = -1;
 
-    while ($row = DB::fetch_assoc($res))
+    foreach ($result as $row)
     {
         if (-1 == $d)
         {
             $d = $row['dk'];
         }
         // Only care about best dk rank for this person
-        if ($row['dk'] != $d)
+        if ($row->getDk() != $d)
         {
             break;
         }
 
-        if ($gender && ($row['female'] == $title))
+        if ($gender && ($row->getFemale() == $title))
         {
             return true;
         }
 
-        if (! $gender && ($row['male'] == $title))
+        if (! $gender && ($row->getMale() == $title))
         {
             return true;
         }
@@ -50,50 +57,74 @@ function get_dk_title($dks, $gender, $ref = false)
     // is the closest one below or equal to the players dk number.
     // We will prefer the dk level from the same $ref if we can, but if there
     // is a closer 'any' match, we will use that!
+
+    $repository = \Doctrine::getRepository('LotgdCore:Titles');
+
     $refdk = -1;
 
     if (false !== $ref)
     {
-        $sql = 'SELECT max(dk) as dk FROM '.DB::prefix('titles').
-            " WHERE dk<='$dks' and ref='$ref'";
-        $res = DB::query($sql);
-        $row = DB::fetch_assoc($res);
-        $refdk = $row['dk'];
+        $query = $repository->createQueryBuilder('u');
+        $refdk = $query
+            ->select('max(u.dk)')
+            ->where('u.dk = :dk AND u.ref = :ref')
+
+            ->setParameter('dk', $dks)
+            ->setParameter('ref', $ref)
+
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
-    $sql = 'SELECT max(dk) as dk FROM '.DB::prefix('titles').
-        " WHERE dk<='$dks'";
-    $res = DB::query($sql);
-    $row = DB::fetch_assoc($res);
-    $anydk = $row['dk'];
+    $query = $repository->createQueryBuilder('u');
+    $anydk = $query
+        ->select('max(u.dk)')
+        ->where('u.dk <= :dk')
 
-    $useref = '';
+        ->setParameter('dk', $dks)
+
+        ->getQuery()
+        ->getSingleScalarResult()
+    ;
+
     $targetdk = $anydk;
 
     if ($refdk >= $anydk)
     {
-        $useref = "AND ref='$ref'";
         $targetdk = $refdk;
     }
 
     // Okay, we now have the right dk target to use, so select a title from
     // any titles available at that level.  We will prefer titles that
     // match the ref if possible.
-    $sql = 'SELECT male,female FROM '.DB::prefix('titles').
-        " WHERE dk='$targetdk' $useref ORDER BY RAND(".
-        e_rand().') LIMIT 1';
-    $res = DB::query($sql);
-    $row = ['male' => 'God', 'female' => 'Goddess'];
+    $query = $repository->createQueryBuilder('u');
+    $query
+        ->select('max(u.dk)')
+        ->where('u.dk = :dk')
+        ->orderBy('rand()')
 
-    if (0 != DB::num_rows($res))
+        ->setParameter('dk', $targetdk)
+    ;
+
+    if ($refdk >= $anydk)
     {
-        $row = DB::fetch_assoc($res);
+        $query->andWhere('u.ref = :ref')
+            ->setParameter('dk', $ref)
+        ;
     }
 
-    if (SEX_MALE == $gender)
+    $row = $query->getQuery()->getResult();
+
+    if (! $row)
     {
-        return $row['male'];
+        $row = ['male' => 'God', 'female' => 'Goddess'];
     }
 
-    return $row['female'];
+    if (SEX_FEMALE == $gender)
+    {
+        return $row['female'];
+    }
+
+    return $row['male'];
 }
