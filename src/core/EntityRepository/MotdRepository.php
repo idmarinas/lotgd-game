@@ -184,13 +184,15 @@ class MotdRepository extends DoctrineRepository
 
         try
         {
-            return $query
+            $date =  $query
                 ->select('u.motddate')
                 ->orderBy('u.motddate', 'DESC')
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getSingleScalarResult()
             ;
+
+            return new \DateTime($date);
         }
         catch (\Throwable $th)
         {
