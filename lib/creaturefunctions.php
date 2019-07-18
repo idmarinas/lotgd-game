@@ -69,12 +69,14 @@ function lotgd_generate_creature_levels($level = false)
  */
 function lotgd_transform_creature(array $badguy, $debug = true)
 {
+    global $session;
+
     // This will save us a lot of trouble when going through
     static $dk = false;	// this function more than once...
 
     if (false === $dk)
     {
-        $dk = get_player_dragonkillmod();
+        $dk = $session['user']['dragonkills'];
     }
 
     $badguy = array_merge(lotgd_generate_creature_levels($badguy['creaturelevel']), $badguy);
