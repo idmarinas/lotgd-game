@@ -11,7 +11,7 @@ tlschema('stables');
 
 // Don't hook on to this text for your standard modules please, use "stable" instead.
 // This hook is specifically to allow modules that do other stables to create ambience.
-$result = modulehook('stable-text-domain', ['textDomain' => 'page-stables', 'textDomainNavigation' => 'navigation-stables']);
+$result = modulehook('stables-text-domain', ['textDomain' => 'page-stables', 'textDomainNavigation' => 'navigation-stables']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
