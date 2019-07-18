@@ -48,14 +48,15 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
             ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
 
             ->getQuery()
-            ->getSingleArrayResult()
+            ->getResult()
         ;
 
         if (count($result))
         {
-            $value = $result['value'] + $value;
-            $message = $result['message'];
-            $id = $result['id'];
+            $result = $result[0];
+            $value = $result->getValue() + $value;
+            $message = $result->getMessage();
+            $id = $result->getId();
         }
     }
 
