@@ -282,6 +282,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `commentaryfooter()`
     -   `buildcommentarylink()`
     -   `talkform()`
+-   **lib/playerfunctions.php**
+    -   `is_player_online()`
+    -   `mass_is_player_online()`
+    -   `get_player_dragonkillmod()`
+    -   `get_player_info()`
 -   **lib/tabledescriptor.php**: All functions, use Doctrine Entities to sync table schema.
     -   `synctable()`
     -   `table_create_from_descriptor()`
@@ -355,12 +360,17 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/php_generic_environment.php** and **lib/register_global.php** Removed from core.
     -   Not is necesary register as global all data in `$_SERVER`. Can use `LotgdHttp::getServer(string $name = null , string $default = null)`
 -   **lib/clan/func.php** Deleted from the core, it wasn't being used.
+-   **newday.php** Deleted support for Dragon Points for legacy options::
+    -   Max Hitpoints + 5
+    -   Attack + 1
+    -   Defense + 1
 
 ### :notebook: NOTES
 
 -   :warning: _Important_ This is a very large update, which is going to require a lot of changes.
     -   All the old translation functions are present, but they may not work as expected. These functions issue an obsolete function warning message.
     -   All pages are changed to use new Translation and Template system.
+-   **DB::** Now Lotgd Core use Doctrine to access DB. 98% (or so) of code that use this class, now use Doctrine.
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
     -   All related gulp tasks are updated to this new version
