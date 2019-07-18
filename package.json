@@ -67,7 +67,7 @@
         "gulp-concat": "^2.6.1",
         "gulp-flatten": "^0.4.0",
         "gulp-header": "^2.0.9",
-        "gulp-if": "^2.0.2",
+        "gulp-if": "^3.0.0",
         "gulp-plumber": "^1.2.1",
         "gulp-print": "^5.0.2",
         "gulp-remove-code": "^3.0.4",
