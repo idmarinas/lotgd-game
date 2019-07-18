@@ -21,7 +21,7 @@ function addnews($text, array $params = [], $textDomain = 'partial-news', bool $
         'text' => $text,
         'arguments' => $params,
         'textDomain' => $textDomain,
-        'accountId' => $user
+        'accountId' => $user ?? 0
     ]);
 
     \Doctrine::persist($newsEntity);
