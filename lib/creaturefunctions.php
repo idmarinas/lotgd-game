@@ -259,7 +259,7 @@ function get_creature_defense($attrs)
 {
     $wisdombonus = (1 / 4) * $attrs['wis'];
     $constbonus = (3 / 8) * $attrs['con'];
-    $speedbonus = (3 / 8) * get_player_speed($attrs);
+    $speedbonus = (3 / 8) * get_creature_speed($attrs);
 
     $defense = $wisdombonus + $constbonus;
 
