@@ -4,7 +4,7 @@ function get_player_hitpoints($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -34,7 +34,7 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -72,7 +72,7 @@ function get_player_attack($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -102,7 +102,7 @@ function explained_row_get_player_attack($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -170,7 +170,7 @@ function get_player_defense($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -198,7 +198,7 @@ function explained_row_get_player_defense($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -262,12 +262,12 @@ function get_player_speed($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
+        $result = $repository->extractEntity($repository->findOneBy([ 'acct' => $player ]));
 
         if (! $result)
         {
@@ -288,7 +288,7 @@ function get_player_physical_resistance($player = false)
 {
     global $session;
 
-    $user = &$session['user'];
+    $user = $session['user'];
 
     if ($player)
     {
@@ -321,7 +321,7 @@ function is_player_online($player = false)
     if (false === $player)
     {
         global $session;
-        $user = &$session['user'];
+        $user = $session['user'];
     }
     elseif (isset($checked_users[$player]))
     {
@@ -462,7 +462,7 @@ function get_player_info($player = false)
     }
     else
     {
-        $user = &$session['user'];
+        $user = $session['user'];
     }
 
     return $user;
