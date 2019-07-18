@@ -95,6 +95,16 @@ class EntityRepository extends DoctrineEntityRepository
     }
 
     /**
+     * Get a instance of query builder.
+     *
+     * @return QueryBuilder
+     */
+    public function getQueryBuilder(): QueryBuilder
+    {
+        return $this->_em->createQueryBuilder();
+    }
+
+    /**
      * Get Hydrator instance.
      *
      * @return ClassMethods
