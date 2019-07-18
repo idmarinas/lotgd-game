@@ -209,10 +209,6 @@ function apply_companion($name, $companion, $ignorelimit = false)
 {
     global $session, $companions;
 
-    if (! is_array($companions))
-    {
-        $companions = @unserialize($session['user']['companions']);
-    }
     $companionsallowed = getsetting('companionsallowed', 1);
     $args = modulehook('companionsallowed', ['maxallowed' => $companionsallowed]);
     $companionsallowed = $args['maxallowed'];
@@ -247,7 +243,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
             $companion['ignorelimit'] = true;
         }
         $companions[$name] = $companion;
-        $session['user']['companions'] = createstring($companions);
+        $session['user']['companions'] = $companions;
 
         return true; // success!
     }
