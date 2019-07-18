@@ -14,6 +14,7 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Tracy\Debugger;
 
 class GamelogRepository extends DoctrineRepository
 {
