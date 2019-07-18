@@ -194,8 +194,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   `public/hof.php` hook is `modulehook('hof-text-domain', ['textDomain' => 'page-hof', 'textDomainNavigation' => 'navigation-hof'])`
         -   `public/inn.php` hook is `modulehook('inn-text-domain', ['textDomain' => 'page-inn', 'textDomainNavigation' => 'navigation-inn'])`
         -   `public/lodge.php` hook is `modulehook('lodge-text-domain', ['textDomain' => 'page-lodge', 'textDomainNavigation' => 'navigation-lodge'])`
-        -
+        -   `public/mercenarycamp.php` hook is `modulehook('mercenarycamp-text-domain', ['textDomain' => 'page-mercenarycamp', 'textDomainNavigation' => 'navigation-mercenarycamp'])`
+        -   `public/newday.php` hook is `modulehook('newday-text-domain', ['textDomain' => 'page-newday', 'textDomainNavigation' => 'navigation-newday'])`
+        -   `public/rock.php` hook is `modulehook('rock-text-domain', ['textDomain' => 'page-rock', 'textDomainNavigation' => 'navigation-rock'])`
+        -   `public/shades.php` hook is `modulehook('shades-text-domain', ['textDomain' => 'page-shades', 'textDomainNavigation' => 'navigation-shades'])`
+        -   `public/stables.php` hook is `modulehook('stables-text-domain', ['textDomain' => 'page-stables', 'textDomainNavigation' => 'navigation-stables'])`
+        -   `public/train.php` hook is `modulehook('train-text-domain', ['textDomain' => 'page-train', 'textDomainNavigation' => 'navigation-train'])`
         -   `public/village.php` hook is `modulehook('village-text-domain', ['textDomain' => 'page-village', 'textDomainNavigation' => 'navigation-village'])`
+        -   `public/weapon.php` hook is `modulehook('weapon-text-domain', ['textDomain' => 'page-weapon', 'textDomainNavigation' => 'navigation-weapon'])`
 -   _**New CronJob**_ This CronJob searches all long inactive accounts and logout them.
 -   **src/core/Template/Theme.php** and **src/core/Fixed/Theme.php**
     -   Added new function `renderModuleTemplate(string $template, array $params)` With this function you can render a template of a module that does not depend on the current theme.
