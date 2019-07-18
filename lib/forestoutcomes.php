@@ -3,9 +3,6 @@
 // addnews ready
 // translator ready
 // mail ready
-require_once 'lib/pageparts.php';
-require_once 'lib/output.php';
-require_once 'lib/nav.php';
 require_once 'lib/creaturefunctions.php';
 
 /**
