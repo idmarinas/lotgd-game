@@ -24,15 +24,15 @@ function checkban($login = false)
         $repository = \Doctrine::getRepository('LotgdCore:Accounts');
         $result = $repository->findBy([ 'login' => $login ]);
 
-        if ($result->getBanoverride() || ($result->getSuperuser() & ~SU_DOESNT_GIVE_GROTTO))
+        if ($result['banoverride'] || ($result['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
         {
             $session['banoverride'] = true;
 
             return false;
         }
 
-        $ip = $result->getLastip();
-        $id = $result->getUniqueid();
+        $ip = $result['lastip'];
+        $id = $result['uniqueid'];
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:Bans');
