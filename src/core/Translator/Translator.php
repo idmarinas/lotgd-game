@@ -65,6 +65,13 @@ class Translator extends ZendTranslator
      */
     public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
     {
+        //-- Not do nothing if message is empty
+        //-- MessageFormatter fail if message is empty
+        if ('' ==$message)
+        {
+            return '';
+        }
+
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
         //-- Delete all values that are arrays (when use \MessageFormatter::format($params) fail and return false)
