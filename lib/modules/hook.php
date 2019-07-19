@@ -209,7 +209,7 @@ function module_wipehooks(string $module)
     foreach($result as $row)
     {
         \Doctrine::remove($row);
-        invalidatedatacache('hooks-hook-'.$row['location']);
+        invalidatedatacache('hooks-hook-'.$row->getLocation());
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
