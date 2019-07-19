@@ -45,7 +45,7 @@ $query
     ))
     ->leftJoin('LotgdCore:Accounts', 'a', 'with', $expr->eq('a.acctid', 'u.acct'))
 
-    ->setParameter('limit', NO_ACCOUNT_EXPIRATION)
+    ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
 ;
 
 ($old) ? $query->setParameter('dateOld', $dateOld) : null;
