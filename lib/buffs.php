@@ -99,7 +99,7 @@ function calculate_buff_fields()
                     }
                     else
                     {
-                        $val = eval("return $value;");
+                        $val = ${'return '.$value};
                     }
                 }
                 else
@@ -114,10 +114,7 @@ function calculate_buff_fields()
                     $val = $value;
                 }
 
-                if (! isset($output))
-                {
-                    $output = '';
-                }
+                $output = $output ?? '';
 
                 if ('' == $output && (string) $val != (string) $origstring)
                 {
