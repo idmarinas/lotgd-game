@@ -41,12 +41,12 @@ battle:
         victory:
             end: 'With a flurry of blows you dispatch your master.`n`n'
             level: '`#You advance to level `^{level,number}`0!`0`n'
-            hitpoints: 'Your maximum hitpoints are now `^{hitpoints,number}`0!`0`n'
-            attack: 'You gain an attack point!`n'
-            defense: 'You gain a defense point!`n'
+            hitpoints: '`#Your maximum hitpoints are now `^{hitpoints,number}`0!`0`n'
+            attack: '`#You gain an attack point!`0`n'
+            defense: '`#You gain a defense point!`0`n'
             master:
-                new: 'You have a new master.`n'
-                none: 'None in the land are mightier than you!`n'
+                new: '`#You have a new master.`0`n'
+                none: '`#None in the land are mightier than you!`0`n'
         defeat:
             end: '`%{masterName}`0 `$halts just before delivering the final blow, and instead extends a hand to help you to your feet, and hands you a complementary healing potion.`0`n'
 
