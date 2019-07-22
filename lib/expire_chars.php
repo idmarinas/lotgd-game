@@ -105,13 +105,14 @@ $query
             $old ? $expr->lt('a.laston', ':dateOld') : null
         ),
         $expr->andX(
-            $expr->neq('a.emailaddress', ''),
+            $expr->neq('a.emailaddress', ':empty'),
             $expr->eq('a.sentnotice', 0)
         )
     )
-    ->leftJoin('LotgdCore:Characters', 'u', 'with', $expr->eq('a.id', 'u.character'))
+    ->leftJoin('LotgdCore:Characters', 'u', 'with', $expr->eq('u.id', 'a.character'))
 
-    ->setParameter('limit', NO_ACCOUNT_EXPIRATION)
+    ->setParameter('permit', NO_ACCOUNT_EXPIRATION)
+    ->setParameter('empty', '')
 ;
 
 ($old) ? $query->setParameter('dateOld', $dateOld) : null;
