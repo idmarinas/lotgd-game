@@ -99,7 +99,7 @@ function calculate_buff_fields()
                     }
                     else
                     {
-                        $val = ${'return '.$value};
+                        $val = eval('return '.$value.';');
                     }
                 }
                 else
