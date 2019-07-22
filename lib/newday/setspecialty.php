@@ -11,7 +11,7 @@ if ('' != $setspecialty)
 else
 {
     page_header('title.specialty.choose', [], $textDomain);
-    \LotgdFlashMessage::addInfoMessage(\LotgdTranslator::t('flash.message.choose.specialty', [], $textDomain));
+    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.choose.specialty', [], $textDomain));
     modulehook('choose-specialty');
 }
 
