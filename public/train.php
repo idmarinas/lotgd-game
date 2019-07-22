@@ -14,7 +14,6 @@ require_once 'lib/forestoutcomes.php';
 
 tlschema('train');
 
-addnav('actu', 'train.php');
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.
 $result = modulehook('train-text-domain', ['textDomain' => 'page-train', 'textDomainNavigation' => 'navigation-train']);
