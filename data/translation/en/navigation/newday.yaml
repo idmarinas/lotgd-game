@@ -3,6 +3,7 @@
 # Headers of navigations
 category:
     continue: Continue
+    basic: Basic
 
 # Menu navs
 nav:
