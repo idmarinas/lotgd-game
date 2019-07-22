@@ -619,58 +619,58 @@ function charstats($return = true)
             $def = round($def, 2).'(`@+'.round($def - $oDef, 2).'`0)';
         }
 
-        addcharstat('Character Info');
-        addcharstat('Name', $u['name']);
-        addcharstat('Dragonkills', '`b'.$u['dragonkills'].'´b');
-        addcharstat('Level', '`b'.$u['level'].check_temp_stat('level', 1).'´b');
+        addcharstat(\LotgdTranslator::t('statistic.category.character.info', [], 'app-default'));
+        addcharstat(\LotgdTranslator::t('statistic.stat.name', [], 'app-default'), $u['name']);
+        addcharstat(\LotgdTranslator::t('statistic.stat.dragonkills', [], 'app-default'), '`b'.$u['dragonkills'].'´b');
+        addcharstat(\LotgdTranslator::t('statistic.stat.level', [], 'app-default'), '`b'.$u['level'].check_temp_stat('level', 1).'´b');
 
         if ($u['alive'])
         {
             //-- HitPoints are calculated in base to attributes
-            addcharstat('Hitpoints', sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
+            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app-default'), sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
 
             if (is_module_active('staminasystem'))
             {
-                addcharstat('Stamina', '');
+                addcharstat(\LotgdTranslator::t('statistic.stat.stamina', [], 'app-default'), '');
             }
             else
             {
-                addcharstat('Turns', $u['turns'].check_temp_stat('turns', 1));
+                addcharstat(\LotgdTranslator::t('statistic.stat.turns', [], 'app-default'), $u['turns'].check_temp_stat('turns', 1));
             }
 
             if (is_module_active('displaycp'))
             {
-                addcharstat('Drunkeness', '');
+                addcharstat(\LotgdTranslator::t('statistic.stat.drunkeness', [], 'app-default'), '');
             }
-            addcharstat('Experience', LotgdFormat::numeral($u['experience'].check_temp_stat('experience', 1)));
-            addcharstat('Attack', sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
-            addcharstat('Defense', sprintf("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
-            addcharstat('Speed', $spd.check_temp_stat('speed', 1));
-            addcharstat('Strength', $u['strength'].check_temp_stat('strength', 1));
-            addcharstat('Dexterity', $u['dexterity'].check_temp_stat('dexterity', 1));
-            addcharstat('Intelligence', $u['intelligence'].check_temp_stat('intelligence', 1));
-            addcharstat('Constitution', $u['constitution'].check_temp_stat('constitution', 1));
-            addcharstat('Wisdom', $u['wisdom'].check_temp_stat('wisdom', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.experience', [], 'app-default'), LotgdFormat::numeral($u['experience'].check_temp_stat('experience', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app-default'), sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app-default'), sprintf("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.speed', [], 'app-default'), $spd.check_temp_stat('speed', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.strength', [], 'app-default'), $u['strength'].check_temp_stat('strength', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.dexterity', [], 'app-default'), $u['dexterity'].check_temp_stat('dexterity', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.intelligence', [], 'app-default'), $u['intelligence'].check_temp_stat('intelligence', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.constitution', [], 'app-default'), $u['constitution'].check_temp_stat('constitution', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.wisdom', [], 'app-default'), $u['wisdom'].check_temp_stat('wisdom', 1));
         }
         else
         {
             $maxsoul = 50 + 10 * $u['level'] + $u['dragonkills'] * 2;
-            addcharstat('Soulpoints', $u['soulpoints'].check_temp_stat('soulpoints', 1).'`0/'.$maxsoul);
+            addcharstat(\LotgdTranslator::t('statistic.stat.soulpoints', [], 'app-default'), $u['soulpoints'].check_temp_stat('soulpoints', 1).'`0/'.$maxsoul);
 
             if (is_module_active('staminasystem'))
             {
-                addcharstat('Stamina', '');
+                addcharstat(\LotgdTranslator::t('statistic.stat.stamina', [], 'app-default'), '');
             }
-            addcharstat('Torments', $u['gravefights'].check_temp_stat('gravefights', 1));
-            addcharstat('Psyche', 10 + round(($u['level'] - 1) * 1.5));
-            addcharstat('Spirit', 10 + round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.torments', [], 'app-default'), $u['gravefights'].check_temp_stat('gravefights', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app-default'), 10 + round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app-default'), 10 + round(($u['level'] - 1) * 1.5));
         }
 
-        addcharstat('Race', translate_inline((RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN, 'race'));
+        addcharstat(\LotgdTranslator::t('statistic.stat.race', [], 'app-default'), \LotgdTranslator::t('character.racename', [], (RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN, 'race'));
 
         if (count($companions) > 0)
         {
-            addcharstat('Companions');
+            addcharstat(\LotgdTranslator::t('statistic.category.companions', [], 'app-default'));
 
             foreach ($companions as $name => $companion)
             {
@@ -696,33 +696,33 @@ function charstats($return = true)
                 }
             }
         }
-        addcharstat('Personal Info');
+        addcharstat(\LotgdTranslator::t('statistic.category.character.personal', [], 'app-default'));
 
         if ($u['alive'])
         {
-            addcharstat('PvP', $u['playerfights']);
+            addcharstat(\LotgdTranslator::t('statistic.stat.pvp', [], 'app-default'), $u['playerfights']);
         }
         else
         {
-            addcharstat('Favor', $u['deathpower'].check_temp_stat('deathpower', 1));
+            addcharstat(\LotgdTranslator::t('statistic.stat.favor', [], 'app-default'), $u['deathpower'].check_temp_stat('deathpower', 1));
         }
 
-        addcharstat('Spirits', translate_inline('`b'.$spirits[(int) $u['spirits']].'´b'));
-        addcharstat('Gold', LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
-        addcharstat('Gems', LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.spirits', [], 'app-default'), translate_inline('`b'.$spirits[(int) $u['spirits']].'´b'));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app-default'), LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
+        addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app-default'), LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
 
-        addcharstat('Equipment Info');
+        addcharstat(\LotgdTranslator::t('statistic.category.character.equip', [], 'app-default'));
 
         if (is_module_active('inventorypopup'))
         {
-            addcharstat('Inventory', '');
+            addcharstat(\LotgdTranslator::t('statistic.stat.inventory', [], 'app-default'), '');
         }
-        addcharstat('Weapon', $u['weapon']);
-        addcharstat('Armor', $u['armor']);
+        addcharstat(\LotgdTranslator::t('statistic.stat.weapon', [], 'app-default'), $u['weapon']);
+        addcharstat(\LotgdTranslator::t('statistic.stat.armor', [], 'app-default'), $u['armor']);
 
         if ($u['hashorse'])
         {
-            addcharstat('Creature', $playermount['mountname'].'`0');
+            addcharstat(\LotgdTranslator::t('statistic.stat.creature', [], 'app-default'), $playermount['mountname'].'`0');
         }
 
         modulehook('charstats');

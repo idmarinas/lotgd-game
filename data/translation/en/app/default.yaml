@@ -66,6 +66,46 @@ character:
     mount: '`iNone´i'
     bio: '`iNo biography provided`i'
 
+# Statistics of character (right navegation bar)
+statistic:
+    category:
+        character:
+            info: 'Character Info'
+            personal: 'Personal Info'
+            equip: 'Equipment Info'
+        companions: Companions
+    stat:
+        name: Name
+        dragonkills: DragonKills
+        level: Level
+        hitpoints: Hitpoints
+        stamina: Stamina
+        turns: Turns
+        drunkeness: Drunkeness
+        experience: Experience
+        attack: Attack
+        defense: Defense
+        speed: Speed
+        strength: Strength
+        dexterity: Dexterity
+        intelligence: Intelligence
+        constitution: Constitution
+        wisdom: Wisdom
+        soulpoints: Soulpoints
+        torments: Torments
+        psyche: Psyche
+        spirit: Spirit
+        race: Race
+        pvp: PvP
+        favor: Favor
+        spirits: Spirits
+        gold: Gold
+        gems: Gems
+        inventory: Inventory
+        weapon: Weapon
+        armor: Armor
+        creature: Creature
+
 # Location
 location:
     village.of: 'The Village of {name}'
