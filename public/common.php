@@ -192,7 +192,7 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
         'server' => \LotgdHttp::getServer('SERVER_NAME')
     ];
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/upgrade.twig', $params));
+    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/database.twig', $params));
 
     page_footer();
 }
