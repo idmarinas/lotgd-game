@@ -48,7 +48,7 @@ function activate_buffs($tag)
             }
             else
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`5{$buff['startmsg']}`0`n");
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['startmsg']}`0`n");
             }
 
             unset($session['bufflist'][$key]['startmsg']);
@@ -150,7 +150,7 @@ function activate_buffs($tag)
                 }
                 else
                 {
-                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`5{$buff['roundmsg']}`0`n");
+                    $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['roundmsg']}`0`n");
                 }
             }
         }
@@ -246,7 +246,7 @@ function activate_buffs($tag)
             }
             elseif ('' != $msg)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute_array("`)$msg`0`n", ['{damage}'], [$hptoregen]);
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`)$msg`0`n", ['{damage}'], [$hptoregen]);
             }
 
             if (isset($buff['aura']) && true == $buff['aura'])
@@ -265,7 +265,7 @@ function activate_buffs($tag)
                         {
                             $hptoregen = min($auraeffect, $companion['maxhitpoints'] - $companion['hitpoints']);
                             $companions[$name]['hitpoints'] += $hptoregen;
-                            $msg = substitute_array("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
+                            $msg = substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
                             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
                             if ($hptoregen < 0 && $companion['hitpoints'] <= 0)
@@ -342,7 +342,7 @@ function activate_buffs($tag)
                 }
                 elseif ($msg > '')
                 {
-                    $msg = substitute_array("`)$msg`0`n", ['{damage}'], [abs($damage)]);
+                    $msg = substitute("`)$msg`0`n", ['{damage}'], [abs($damage)]);
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                 }
 
@@ -415,7 +415,7 @@ function process_lifetaps($ltaps, $damage)
         }
         elseif ($msg > '')
         {
-            $msg = substitute_array("`){$msg}`0`n", ['{damage}'], [$healhp]);
+            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
 
@@ -474,7 +474,7 @@ function process_dmgshield($dshield, $damage)
         }
         elseif ($msg > '')
         {
-            $msg = substitute_array("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
     }
@@ -511,7 +511,7 @@ function expire_buffs()
                     }
                     else
                     {
-                        $msg = substitute_array('`5'.$buff['wearoff'].'`0`n');
+                        $msg = substitute('`5'.$buff['wearoff'].'`0`n');
                     }
 
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -553,7 +553,7 @@ function expire_buffs_afterbattle()
                     }
                     else
                     {
-                        $msg = substitute_array("`5{$buff['wearoff']}`0`n");
+                        $msg = substitute("`5{$buff['wearoff']}`0`n");
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                 }
