@@ -8,12 +8,11 @@
 
 namespace Lotgd\Core\Lib;
 
-use Lotgd\Core\Lib\Cache;
 use Doctrine\ORM\EntityManager;
 
 class Settings
 {
-    protected $tablename;
+    protected $tablename = 'settings';
     protected $doctrine;
     protected $repository;
     protected $cache;
@@ -53,9 +52,11 @@ class Settings
             }
 
             $setDefault = $default;
+
             if (false === $default)
             {
                 $setDefault = '';
+
                 if (isset($defaults[$settingname]))
                 {
                     $setDefault = $defaults[$settingname];
@@ -112,7 +113,7 @@ class Settings
         //-- Not do nothing if not have connection to DB
         if (false === $this->isConnected())
         {
-            return;
+            return null;
         }
         elseif (! is_array($this->settings) || empty($this->settings))
         {
@@ -123,7 +124,9 @@ class Settings
 
                 if (! count($result))
                 {
-                    return;
+                    $this->cache->invalidateData($this->getCacheKey(), true);
+
+                    return null;
                 }
 
                 foreach ($result as $row)
@@ -178,6 +181,21 @@ class Settings
     }
 
     /**
+     * Set a table name for settings.
+     * This table must have a repository.
+     *
+     * @param string $table
+     *
+     * @return self
+     */
+    public function setTableName(string $table): self
+    {
+        $this->tablename = $table;
+
+        return $this;
+    }
+
+    /**
      * Set doctrine to use.
      *
      * @param Doctrine\ORM\EntityManager
@@ -200,7 +218,7 @@ class Settings
     {
         if (! $this->repository)
         {
-            $this->repository = $this->doctrine->getRepository('LotgdCore:Settings');
+            $this->repository = $this->doctrine->getRepository('LotgdCore:'.ucfirst($this->tablename));
         }
 
         return $this->repository;
@@ -213,11 +231,18 @@ class Settings
      */
     public function isConnected(): bool
     {
+        if ($this->doctrine->getConnection()->isConnected())
+        {
+            return true;
+        }
+
+        $this->doctrine->getConnection()->connect();
+
         return $this->doctrine->getConnection()->isConnected();
     }
 
     /**
-     * Set cache system
+     * Set cache system.
      *
      * @return $this
      */
