@@ -273,8 +273,16 @@ if (! getsetting('newdaycron', 0))
     }
 }
 
-$args = modulehook('newday', ['resurrection' => $resurrection, 'turnstoday' => $turnstoday]);
+$args = modulehook('newday', [
+    'resurrection' => $resurrection,
+    'turnstoday' => $turnstoday,
+    'includeTemplatesPre' => $params['includeTemplatesPre'],
+    'includeTemplatesPost' => $params['includeTemplatesPost']
+]);
 $turnstoday = $args['turnstoday'];
+$params['includeTemplatesPre'] = $args['includeTemplatesPre'];
+$params['includeTemplatesPost'] = $args['includeTemplatesPost'];
+
 //## Process stamina for spirit
 modulehook('stamina-newday', ['spirits' => $spirits]);
 

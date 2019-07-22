@@ -33,7 +33,9 @@ $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
+    'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
+    'includeTemplatesPost' => [] //-- Templates that are in bottom of content
 ];
 
 //-- Change text domain for navigation
