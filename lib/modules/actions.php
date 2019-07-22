@@ -127,8 +127,11 @@ function install_module($module, $force = true)
         if ($force)
         {
             $entity = $repository->find($module);
-            \Doctrine::remove($entity);
-            \Doctrine::flush();
+            if ($entity)
+            {
+                \Doctrine::remove($entity);
+                \Doctrine::flush();
+            }
         }
 
         // We want to do the inject so that it auto-upgrades any installed
