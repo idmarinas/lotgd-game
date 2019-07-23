@@ -115,7 +115,7 @@ function mass_module_prepare(array $hooknames)
     $modulenames = [];
     foreach ($result as $row)
     {
-        $modulenames[$row->getModulename()] = $row->getModulename();
+        $modulenames[] = $row->getModulename();
 
         if (! isset($module_preload[$row->getLocation()]))
         {
