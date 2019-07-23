@@ -1,5 +1,5 @@
 <div role="navigation">
-    {% for section, nav in navigation if nav|length > 0 %}
+    {% for section, nav in navigation if nav|length > 0 or headers[section]['hideEmpty'] == false %}
         {% set sectionText = navigation_create_header(section, headers[section]) %}
         {% if sectionText %}
             {{ sectionText }}
