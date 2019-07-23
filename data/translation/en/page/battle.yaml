@@ -97,13 +97,13 @@ combat:
                 bonus:
                     - '`#***Because of the difficult nature of this fight, you are awarded an additional `^{bonus,number}`0 experience!`0`n'
                     - '{calculate,select,
-                            true{`#({exp,number} + {bonus,number} = {totalExp, number})`0}
+                            1{`#({exp,number} + {bonus,number} = {totalExp, number})`0}
                             other{}
                         }'
                 penalize:
                     - '`#***Because of the simplistic nature of this fight, you are penalized `^{bonus,number}`0 experience!`0`n'
                     - '{calculate,select,
-                            true{`#({exp,number} - {bonus,number} = {totalExp, number})`0}
+                            1{`#({exp,number} - {bonus,number} = {totalExp, number})`0}
                             other{}
                         }'
                 instant.exp: '`#During this fight you received `^{experience}`0 total experience!`0`n`0'

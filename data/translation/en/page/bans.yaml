@@ -79,7 +79,7 @@ saveban:
         id:
             - "You don't really want to ban yourself now do you??"
             - "That's your own ID!"
-    savedBan: '{saved,select, false{0 ban rows} other{1 ban row}} entered.`n`n'
+    savedBan: '{saved,select, 0{0 ban rows} other{1 ban row}} entered.`n`n'
     logoutCount: '`${count,plural, =0{Nobody} =1{1 person} other{# people}} have been logged out!`0`n`n'
 
 # Remove/Listbans
