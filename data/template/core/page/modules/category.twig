@@ -34,7 +34,7 @@
                             </a>
                             {% if SU_EDIT_CONFIG %}
                                 {% if '|settings|' in module.infokeys %}
-                                    <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|t|uncolorize }}" href="{{ ('configuration.php?op=modulesettings&module=' ~ module.modulename)|lotgd_url }}">
+                                    <a class="ui blue button" data-tooltip="{{ 'table.tbody.strsettings'|t|uncolorize }}" href="{{ ('configuration.php?setting=module&module=' ~ module.modulename)|lotgd_url }}">
                                         <i class="settings icon"></i>
                                     </a>
                                 {% else %}
