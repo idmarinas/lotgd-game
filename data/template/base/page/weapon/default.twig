@@ -1,8 +1,8 @@
 {% translate_default_domain textDomain %}
 
-{{ 'description'|t({ 'sex': user.sex })|colorize }}
+{{ 'description'|t(_context|merge({'sex': user.sex }))|colorize }}
 
-{{ 'trade.in'|t({'weaponName': user.weapon, 'value': tradeinvalue})|colorize }}
+{{ 'trade.in'|t(_context|merge({'weaponName': user.weapon, 'value': tradeinvalue}))|colorize }}
 
 <table class='ui very compact striped selectable table'>
     <thead>
