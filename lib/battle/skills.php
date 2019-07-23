@@ -311,9 +311,9 @@ function apply_bodyguard($level)
         }
 
         apply_buff('bodyguard', [
-            'startmsg' => 'skill.bodyguard.startmsg',
-            'name' => 'skill.bodyguard.name',
-            'wearoff' => 'skill.bodyguard.wearoff',
+            'startmsg' => \LotgdTranslator::t('skill.bodyguard.startmsg', [], 'page-battle'),
+            'name' => \LotgdTranslator::t('skill.bodyguard.name', [], 'page-battle'),
+            'wearoff' => \LotgdTranslator::t('skill.bodyguard.wearoff', [], 'page-battle'),
             'badguyatkmod' => $badguyatkmod,
             'defmod' => $defmod,
             'rounds' => $rounds,
@@ -331,13 +331,13 @@ function apply_skill($skill, $l)
     if ('godmode' == $skill)
     {
         apply_buff('godmode', [
-            'name' => 'skill.godmode.name',
+            'name' => \LotgdTranslator::t('skill.godmode.name', [], 'page-battle'),
             'rounds' => 1,
-            'wearoff' => 'skill.godmode.wearoff',
+            'wearoff' => \LotgdTranslator::t('skill.godmode.wearoff', [], 'page-battle'),
             'atkmod' => 25,
             'defmod' => 25,
             'invulnerable' => 1,
-            'startmsg' => 'skill.godmode.startmsg',
+            'startmsg' => \LotgdTranslator::t('skill.godmode.startmsg', [], 'page-battle'),
             'schema' => 'skill'
         ]);
     }
