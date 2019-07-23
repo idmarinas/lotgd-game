@@ -148,12 +148,12 @@ function set_module_pref($name, $value, $module = false, $user = false)
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
     $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'userid' => $user ]);
-    if (! $entity)
-    {
-        $entity = new \Lotgd\Core\Entity\ModuleUserprefs();
-    }
-
-    $entity->setValue($value);
+    $entity = $repository->hydrateEntity([
+        'modulename' => $module,
+        'setting' => $name,
+        'userid' => $user,
+        'value' => $value
+    ], $entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();

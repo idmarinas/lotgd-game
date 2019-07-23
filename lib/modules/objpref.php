@@ -95,15 +95,15 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
+    $entity = $repository->hydrateEntity([
+        'modulename' => $module,
+        'setting' => $name,
+        'objtype' => $objtype,
+        'objid' => $objid,
+        'value' => $value
+    ], $entity);
 
-    if (! $entity)
-    {
-        $entity = new \Lotgd\Core\Entity\ModuleObjprefs();
-    }
-
-    $entity->setValue($value);
-
-    \Doctrine::entity($entity);
+    \Doctrine::persist($entity);
     \Doctrine::flush();
 
     invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
@@ -131,15 +131,17 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
     $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
-
-    if (! $entity)
-    {
-        $entity = new \Lotgd\Core\Entity\ModuleObjprefs();
-    }
+    $entity = $repository->hydrateEntity([
+        'modulename' => $module,
+        'setting' => $name,
+        'objtype' => $objtype,
+        'objid' => $objid,
+        'value' => $value
+    ], $entity);
 
     $entity->setValue((float) ($entity->getValue()) + $value);
 
-    \Doctrine::entity($entity);
+    \Doctrine::persist($entity);
     \Doctrine::flush();
 
     invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
