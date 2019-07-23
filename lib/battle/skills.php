@@ -132,22 +132,22 @@ function report_power_move($crit, $dmg)
 
         if ($crit > $uatk * 4)
         {
-            $msg = 'skills.power.move.mega';
+            $msg = 'skill.power.move.mega';
             $power = 1;
         }
         elseif ($crit > $uatk * 3)
         {
-            $msg = 'skills.power.move.double';
+            $msg = 'skill.power.move.double';
             $power = 1;
         }
         elseif ($crit > $uatk * 2)
         {
-            $msg = 'skills.power.move.power';
+            $msg = 'skill.power.move.power';
             $power = 1;
         }
         elseif ($crit > ($uatk * 1.5))
         {
-            $msg = 'skills.power.move.minor';
+            $msg = 'skill.power.move.minor';
             $power = 1;
         }
 
@@ -192,7 +192,7 @@ function suspend_buffs($susp = false, $msg = false)
     {
         if (false === $msg)
         {
-            $msg = 'skills.buffs.gods.suspended';
+            $msg = 'skill.buffs.gods.suspended';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = sanitize_mb($msg);
@@ -211,7 +211,7 @@ function suspend_buff_by_name($name, $msg = false)
         // And notify.
         if (false === $msg)
         {
-            $msg = 'skills.buffs.gods.suspended';
+            $msg = 'skill.buffs.gods.suspended';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -230,7 +230,7 @@ function unsuspend_buff_by_name($name, $msg = false)
         // And notify.
         if (false === $msg)
         {
-            $msg = 'skills.buffs.gods.restored';
+            $msg = 'skill.buffs.gods.restored';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -268,7 +268,7 @@ function unsuspend_buffs($susp = false, $msg = false)
     {
         if (false === $msg)
         {
-            $msg = 'skills.buffs.gods.restored';
+            $msg = 'skill.buffs.gods.restored';
         }
 
         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
@@ -311,9 +311,9 @@ function apply_bodyguard($level)
         }
 
         apply_buff('bodyguard', [
-            'startmsg' => 'skills.bodyguard.startmsg',
-            'name' => 'skills.bodyguard.name',
-            'wearoff' => 'skills.bodyguard.wearoff',
+            'startmsg' => 'skill.bodyguard.startmsg',
+            'name' => 'skill.bodyguard.name',
+            'wearoff' => 'skill.bodyguard.wearoff',
             'badguyatkmod' => $badguyatkmod,
             'defmod' => $defmod,
             'rounds' => $rounds,
@@ -331,9 +331,9 @@ function apply_skill($skill, $l)
     if ('godmode' == $skill)
     {
         apply_buff('godmode', [
-            'name' => 'skills.godmode.name',
+            'name' => 'skill.godmode.name',
             'rounds' => 1,
-            'wearoff' => 'skills.godmode.wearoff',
+            'wearoff' => 'skill.godmode.wearoff',
             'atkmod' => 25,
             'defmod' => 25,
             'invulnerable' => 1,

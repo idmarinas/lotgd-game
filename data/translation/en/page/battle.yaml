@@ -114,7 +114,7 @@ combat:
                 total.favor: '`#You receive `^{favor,number}`0 favor with `${overlord}`0!`0`n'
 
 # Text for skills
-skills:
+skill:
     power.move:
         mega: '`&`bYou execute a `%MEGA`0 power move!!!´b`0`n'
         double: '`&`bYou execute a `^DOUBLE`0 power move!!!´b`0`n'

@@ -250,7 +250,7 @@ function suspend_companions($susp, $nomsg = null)
     {
         if (false === $nomsg || null === $nomsg)
         {
-            $nomsg = 'skills.companion.suspended';
+            $nomsg = 'skill.companion.suspended';
         }
 
         if ($nomsg)
@@ -293,7 +293,7 @@ function unsuspend_companions($susp, $nomsg = null)
     {
         if (null === $nomsg || false === $nomsg)
         {
-            $nomsg = 'skills.companion.restored';
+            $nomsg = 'skill.companion.restored';
         }
 
         if ($nomsg)
