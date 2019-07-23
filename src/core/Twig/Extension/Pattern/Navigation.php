@@ -42,16 +42,22 @@ trait Navigation
      *
      * @return string
      */
-    public function createLink($label, $options)
+    public function createLink($label, $options): ?string
     {
+        if ($this->getNavigation()->isHided($options['link']))
+        {
+            return null;
+        }
+
         if ($options['translate'] ?? false)
         {
             $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
+        $blocked = $this->getNavigation()->isBlocked($options['link']);
 
-        if (! $blocked = $this->getNavigation()->isBlocked($options['link']))
+        if (! $blocked)
         {
             $label = $this->getAccesskeys()->create($label, $attributes);
         }

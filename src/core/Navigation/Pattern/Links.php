@@ -50,16 +50,19 @@ trait Links
      */
     public function blockLink(string $link)
     {
-        if (isset($this->links[$link]))
-        {
-            $this->links[$link] = array_merge($this->links[$link], ['blocked' => true]);
+        return $this->block($link, []);
+    }
 
-            return $this;
-        }
-
-        $this->links[$link] = ['blocked' => true];
-
-        return $this;
+    /**
+     * Block and hide a link.
+     *
+     * @param string $link
+     *
+     * @return $this
+     */
+    public function blockHideLink(string $link)
+    {
+        return $this->block($link, ['hide' => true]);
     }
 
     /**
@@ -140,7 +143,7 @@ trait Links
         }
 
         //-- Check if are blocked by partial link
-        foreach($this->partialLinks as $partial => $options)
+        foreach ($this->partialLinks as $partial => $options)
         {
             if (substr($link, 0, strlen($partial)) == $partial && ($options['blocked'] ?? false))
             {
@@ -149,5 +152,58 @@ trait Links
         }
 
         return false;
+    }
+
+    /**
+     * Check if link is hide.
+     *
+     * @param string $link
+     *
+     * @return bool
+     */
+    public function isHided(string $link): bool
+    {
+        if ($this->links[$link]['hide'] ?? false)
+        {
+            return true;
+        }
+
+        //-- Check if are blocked by partial link
+        foreach ($this->partialLinks as $partial => $options)
+        {
+            if (substr($link, 0, strlen($partial)) == $partial && ($options['hide'] ?? false))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Block a link.
+     *
+     * @param string $link
+     * @param array  $options
+     *
+     * @return self
+     */
+    protected function block(string $link, array $options): self
+    {
+        $options = array_merge([
+            'blocked' => true,
+            'hide' => false
+        ], $options);
+
+        if (isset($this->links[$link]))
+        {
+            $this->links[$link] = array_merge($this->links[$link], $options);
+
+            return $this;
+        }
+
+        $this->links[$link] = $options;
+
+        return $this;
     }
 }
