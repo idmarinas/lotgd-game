@@ -205,11 +205,8 @@ elseif ('search' == $op)
             if (0 == count($result))
             {
                 // There is nothing in the database to challenge you, let's
-                // give you a doppleganger.
-                $badguy = lotgd_generate_creature_levels($session['user']['level']);
-                $badguy['creaturename'] = "An evil doppleganger of {$session['user']['name']}";
-                $badguy['creatureweapon'] = $session['user']['weapon'];
-                $badguy['creaturegold'] = 0;
+                // give you a doppelganger.
+                $badguy = lotgd_generate_doppelganger($session['user']['level']);
 
                 $stack[] = $badguy;
             }

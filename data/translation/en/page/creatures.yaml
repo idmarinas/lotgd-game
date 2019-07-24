@@ -1,5 +1,7 @@
 title: 'Creature Editor'
 
+doppelganger: 'An evil doppelganger of {name}'
+
 section:
     default:
         table:

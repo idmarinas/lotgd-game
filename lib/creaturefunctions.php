@@ -8,10 +8,10 @@
  *
  * @return array
  */
-function lotgd_generate_creature_levels($level = false)
+function lotgd_generate_creature_levels($level = null)
 {
     $maxlvl = getsetting('maxlevel', 15) + 5;
-    $stats = datacache("lotgd-generate-creature-levels-$maxlvl", 83000, true);
+    $stats = datacache("lotgd-generate-creature-levels-{$maxlvl}", 83000, true);
 
     if (empty($stats))
     {
@@ -45,18 +45,27 @@ function lotgd_generate_creature_levels($level = false)
         updatedatacache("lotgd-generate-creature-levels-$maxlvl", $stats, true);
     }
 
-    if (false === $level)
-    {
-        return $stats;
-    }
-    elseif (isset($stats[$level]))
-    {
-        return $stats[$level];
-    }
-    else
-    {
-        $stats;
-    }
+    return ($stats[$level] ?? $stats);
+}
+
+/**
+ * Generate a dummy creature Doppelganger.
+ *
+ * @param int $level
+ *
+ * @return array
+ */
+function lotgd_generate_doppelganger(int $level): array
+{
+    global $session;
+
+    //-- There is nothing in the database to challenge you, let's give you a doppelganger.
+    $badguy = lotgd_generate_creature_levels($level);
+    $badguy['creaturename'] = \LotgdTranslator::t('doppelganger', [ 'name' => $session['user']['name'] ], 'page-creatures');
+    $badguy['creatureweapon'] = $session['user']['weapon'];
+    $badguy['creaturegold'] = 0;
+
+    return $badguy;
 }
 
 /**
