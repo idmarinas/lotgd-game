@@ -35,12 +35,12 @@
 {{ 'bio.bio'|t({ 'bio': character.bio|default('character.bio'|tl(null, 'app-default'))|censor|colorize })|colorize }}
 
 {{ 'bio.news'|t({'character': character.name})|colorize }}
-
+<br>
 {% set odate = '' %}
 {% for news in recentNews %}
-    {% if odate != news.newsdate %}
-        {{ '`n`b`@{d,date,medium}`0´b`n'|tmf({'d': news.newsdate})|colorize }}
-        {% set odate = news.newsdate %}
+    {% if odate != news.date %}
+        {{ '`n`b`@{d,date,medium}`0´b`n'|tmf({'d': news.date})|colorize }}
+        {% set odate = news.date %}
     {% endif %}
 
     {{ show_news_item(news)|colorize }}
