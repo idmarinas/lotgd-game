@@ -25,12 +25,19 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Used a custom _Translator_ based in `Zend\I18n\Translator\Translator`
         -   This new system not used Data Base to store translations.
         -   Used `.yaml` files to store translations.
-            -   Files are in `data/translation/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
-                -   By default have two main scopes:
-                    -   `page` This is where the translation files from the main pages are stored.
+            -   Files are in `data/translation/[LOCALE]/[SCOPE]/[DOMAIN].yaml` This is de main structure.
+                -   By default have six scopes:
+                    -   `app` This is where the translation files from main of game.
                     -   `module` This is where the translation files are stored in the modules.
+                    -   `navigation` This is where the translation files from the navigation menu are stored.
+                    -   `page` This is where the translation files from the main pages are stored.
+                    -   `partial` This is where the translation files from partials (other text).
+                    -   `popup` This is where the translation files from popup text.
             -   The translations are automatically loaded by the translation factory.
-                -   It is possible to have more scopes besides `page` and `module` but remember the structure of the folder `translation`.
+                -   It is possible to have more scopes besides `page`, `module` ... but remember the structure of the folder `translation`.
+            -   In addition, scopes can be nested to better organize translation files. Example:
+                -   You can use this text domain in your module: `module-village-navigation`, which would be equivalent to the file `data/translation/[LOCALE]/module/village/navigation.yaml`
+                    -   `[LOCALE]` is the code of the language to be translated, according to the default language and the language chosen by the user.
 -   :warning: **_Changed navigation menu system_**
     -   The old `addnav` and other similar functions are remplaced with new Navigation menu system.
         -   You can add/block new navs with this functions:

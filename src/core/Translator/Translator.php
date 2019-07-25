@@ -67,7 +67,7 @@ class Translator extends ZendTranslator
     {
         //-- Not do nothing if message is empty
         //-- MessageFormatter fail if message is empty
-        if ('' ==$message)
+        if ('' == $message)
         {
             return '';
         }
@@ -185,15 +185,18 @@ class Translator extends ZendTranslator
     {
         $messagesLoaded = false;
 
+        //-- Use - as delimiter for folders.
+        //-- Base structure is scope-domain
         $domains = \explode('-', $namespace);
 
-        if (! ($domains[1] ?? false))
+        //-- Base scope is page
+        if (2 < count($domains))
         {
             $domains[1] = $domains[0];
             $domains[0] = 'page';
         }
 
-        $filename = sprintf('data/translation/%s/%s/%s.yaml', $locale, $domains[0], $domains[1]);
+        $filename = sprintf('data/translation/%s/%s.yaml', $locale, \implode('/', $domains));
 
         if (is_file($filename))
         {
