@@ -76,7 +76,7 @@ trait Character
                 ->setParameter('acct', $account)
                 ->setMaxResults(100)
                 ->getQuery()
-                ->getResult()
+                ->getArrayResult()
             ;
         }
         catch (\Throwable $th)
