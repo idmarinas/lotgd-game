@@ -195,10 +195,7 @@ class Commentary
         // }
 
         //-- Process additional commands
-        $returnedHook = modulehook('commentary-command', ['command' => $command, 'section' => $data['section']]);
-
-        $data['command'] = $returnedHook['command'];
-        $data['section'] = $returnedHook['section'];
+        $returnedHook = modulehook('commentary-command', ['command' => $command, 'section' => $data['section'], 'data' => &$data]);
 
         $processed = true;
 
