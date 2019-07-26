@@ -41,59 +41,37 @@ class Doctrine
     }
 
     /**
-     * Synchronize a Entity with database.
-     *
-     * @param string $entity
-     * @param bool   $dumpSql Dumps the generated SQL statements to the screen
-     *
-     * @return int Number of queries
+     * Alias of updateSchema.
      */
     public static function syncEntity(string $entity, $dumpSql = null)
     {
-        $schemaTool = new SchemaTool(self::$wrapper);
-        $metaData = self::$wrapper->getMetadataFactory()->getMetadataFor($entity);
-        $sqls = $schemaTool->getUpdateSchemaSql([$metaData], true);
-
-        if (0 === count($sqls))
-        {
-            debug('Nothing to update - your database is already in sync with the current entity metadata.');
-
-            return 0;
-        }
-
-        if ($dumpSql)
-        {
-            debug(implode(';'.PHP_EOL, $sqls).';');
-        }
-
-        debug('Updating database schema...');
-        $schemaTool->updateSchema([$metaData], true);
-
-        $pluralization = (1 === count($sqls)) ? 'query was' : 'queries were';
-
-        debug(sprintf('Database schema updated successfully! "%s" %s executed', count($sqls), $pluralization));
-
-        $proxyFactory = self::$wrapper->getProxyFactory();
-        debug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses([$metaData])));
-
-        return count($sqls);
+        return self::updateSchema([$entity], $dumpSql);
     }
 
     /**
-     * Synchronizes an array of Entities with database.
+     * Alias of updateSchema.
+     */
+    public static function syncEntities(array $entities, $dumpSql = null)
+    {
+        return self::updateSchema($entities, $dumpSql);
+    }
+
+    /**
+     * Updates the database schema of the given classes by comparing the ClassMetadata
+     * instances to the current database schema that is inspected.
      *
      * @param array $entities
      * @param bool  $dumpSql  Dumps the generated SQL statements to the screen
      *
      * @return int Number of queries
      */
-    public static function syncEntities(array $entities, $dumpSql = null)
+    public static function updateSchema(array $entities, $dumpSql = null)
     {
         $schemaTool = new SchemaTool(self::$wrapper);
 
         $metaData = [];
 
-        foreach ($entities as $key => $className)
+        foreach ($entities as $className)
         {
             $metaData[] = self::$wrapper->getMetadataFactory()->getMetadataFor($className);
         }
@@ -125,9 +103,17 @@ class Doctrine
     }
 
     /**
+     * Alias of updateSchema.
+     */
+    public static function createSchema(array $entities, $dumpSql = null)
+    {
+        return self::updateSchema($entities, $dumpSql);
+    }
+
+    /**
      * Drops the database schema for the given classes.
      */
-    public function dropSchema(array $entities)
+    public static function dropSchema(array $entities)
     {
         $schemaTool = new SchemaTool(self::$wrapper);
 
