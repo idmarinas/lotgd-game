@@ -42,7 +42,7 @@ class Commentary implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=20, nullable=false)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $section;
 
