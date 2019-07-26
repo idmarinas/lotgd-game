@@ -197,6 +197,9 @@ class Commentary
         //-- Process additional commands
         $returnedHook = modulehook('commentary-command', ['command' => $command, 'section' => $data['section']]);
 
+        $data['command'] = $returnedHook['command'];
+        $data['section'] = $returnedHook['section'];
+
         $processed = true;
 
         if (isset($returnedHook['skipCommand']) && ! $returnedHook['skipCommand'])
