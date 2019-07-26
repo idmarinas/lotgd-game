@@ -197,6 +197,7 @@ modulehook('village');
 $params['showVillageDesc'] = ! $skipvillagedesc; //-- Show or not village description
 $params['SU_EDIT_USERS'] = $session['user']['superuser'] & SU_EDIT_USERS;
 $params['blockCommentArea'] = false; //-- Show or not comment area
+$params['commentarySection'] = 'village'; //-- Commentary section
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
