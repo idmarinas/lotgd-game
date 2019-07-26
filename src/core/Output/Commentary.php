@@ -353,7 +353,7 @@ class Commentary
             ->leftJoin('LotgdCore:Accounts', 'a', 'WITH', $query->expr()->eq('a.acctid', 'u.author'))
             ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.id', 'a.character'))
             ->orderBy('u.postdate', 'DESC')
-            ->orderBy('u.section', 'ASC')
+            ->addOrderBy('u.section', 'ASC')
         ;
 
         if ($section)
