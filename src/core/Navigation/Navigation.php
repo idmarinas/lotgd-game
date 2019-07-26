@@ -320,6 +320,7 @@ class Navigation
         global $session;
 
         $extra = (false === strpos($extra, '?') ? '?' : '');
+        $extra = ($extra == '?' ? '' : $extra);
 
         $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
 
