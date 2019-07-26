@@ -125,6 +125,25 @@ class Doctrine
     }
 
     /**
+     * Drops the database schema for the given classes.
+     */
+    public function dropSchema(array $entities)
+    {
+        $schemaTool = new SchemaTool(self::$wrapper);
+
+        $classes = [];
+
+        foreach ($entities as $className)
+        {
+            $classes[] = self::$wrapper->getMetadataFactory()->getMetadataFor($className);
+        }
+
+        $schemaTool->dropSchema($classes);
+
+        debug(sprintf('Drop schemas for %s classes: "%s"', count($entities), implode('", "', $entities)));
+    }
+
+    /**
      * Add wrapper to script.
      *
      * @param Doctrine\ORM\EntityManager $wrapper
