@@ -26,7 +26,7 @@ trait Translator
      * Translate a string using translator.
      *
      * @param string $message
-     * @param array  $arguments
+     * @param array  $parameters
      * @param string $domain
      * @param string $locale
      *
