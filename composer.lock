@@ -2068,8 +2068,8 @@
             "authors": [
                 {
                     "name": "snipe",
-                    "email": "snipe@snipe.net",
-                    "role": "Creator & Developer"
+                    "role": "Creator & Developer",
+                    "email": "snipe@snipe.net"
                 }
             ],
             "description": "Library to easily handle profanity filtering in PHP projects.",
@@ -2147,16 +2147,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/b592b26a24265a35172d8a2094d8b10f22b7cc39",
-                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9",
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2218,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-13T11:03:18+00:00"
+            "time": "2019-07-24T17:13:59+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -4843,16 +4843,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "2.2.6",
+            "version": "2.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "a4e6b2f139429786a936df67dacc55876a33c772"
+                "reference": "bc684dd38bc9b78120777d74849392bff0f76356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/a4e6b2f139429786a936df67dacc55876a33c772",
-                "reference": "a4e6b2f139429786a936df67dacc55876a33c772",
+                "url": "https://api.github.com/repos/phan/phan/zipball/bc684dd38bc9b78120777d74849392bff0f76356",
+                "reference": "bc684dd38bc9b78120777d74849392bff0f76356",
                 "shasum": ""
             },
             "require": {
@@ -4893,13 +4893,13 @@
             ],
             "authors": [
                 {
+                    "name": "Tyson Andre"
+                },
+                {
                     "name": "Rasmus Lerdorf"
                 },
                 {
                     "name": "Andrew S. Morrison"
-                },
-                {
-                    "name": "Tyson Andre"
                 }
             ],
             "description": "A static analyzer for PHP",
@@ -4908,7 +4908,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-07-17T23:20:53+00:00"
+            "time": "2019-07-27T18:23:27+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -5101,9 +5101,9 @@
             "authors": [
                 {
                     "name": "Evert Pot",
+                    "role": "Developer",
                     "email": "me@evertpot.com",
-                    "homepage": "http://evertpot.com/",
-                    "role": "Developer"
+                    "homepage": "http://evertpot.com/"
                 }
             ],
             "description": "sabre/event is a library for lightweight event-based programming",
