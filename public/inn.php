@@ -31,7 +31,9 @@ $params = [
     'villageName' => getsetting('villagename', LOCATION_FIELDS),
     'barkeep' => getsetting('barkeep', '`tCedrik`0'),
     'partner' => get_partner(),
-    'showInnDescription' => ! $skipinndesc
+    'showInnDescription' => ! $skipinndesc,
+    'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
+    'includeTemplatesPost' => [] //-- Templates that are in bottom of content
 ];
 
 page_header('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);

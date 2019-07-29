@@ -171,5 +171,8 @@ else
     \LotgdNavigation::addNav('Bribe', 'inn.php?op=bartender&act=bribe');
     \LotgdNavigation::addHeader('Drinks');
 
-    modulehook('ale', []);
+    $result = modulehook('ale', [ 'includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost'] ]);
+
+    $params['includeTemplatesPre'] = $result['includeTemplatesPre'];
+    $params['includeTemplatesPost'] = $result['includeTemplatesPost'];
 }
