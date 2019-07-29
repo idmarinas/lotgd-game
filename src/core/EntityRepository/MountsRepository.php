@@ -21,8 +21,6 @@ class MountsRepository extends DoctrineRepository
     /**
      * Get list of mounts with owners.
      *
-     * @param string $module
-     *
      * @return array
      */
     public function getList(): array
@@ -83,6 +81,8 @@ class MountsRepository extends DoctrineRepository
      * Get mounts by location (include all).
      *
      * @param string $location
+     *
+     * @return array
      */
     public function getMountsByLocation(string $location): array
     {
