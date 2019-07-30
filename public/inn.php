@@ -39,7 +39,6 @@ $params = [
 page_header('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
 
 $op = (string) \LotgdHttp::getQuery('op');
-$op = 'bartender';
 $subop = (string) \LotgdHttp::getQuery('subop');
 $com = \LotgdHttp::getQuery('commentPage');
 $commenting = \LotgdHttp::getQuery('commenting');
