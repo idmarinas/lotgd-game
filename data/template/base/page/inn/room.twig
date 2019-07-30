@@ -3,12 +3,12 @@
 {% if boughtRoomToday %}
     {{ 'section.room.bought'|t|colorize }}
 {% else %}
-    {{ 'section.room.buy.paragraph0'|t|colorize }}
+    {{ 'section.room.buy.paragraph0'|t(_context)|colorize }}
 
     {% if user.goldinbank >= bankExpense and bankExpense != expense %}
-        {{ 'section.room.buy.fee.paragraph'|t|colorize }}
-        {{ ('section.room.buy.fee.' ~ (feePercent ? 'percent' : 'amount'))|t({ 'fee': fee, 'percent': feePercent })|colorize }}
+        {{ 'section.room.buy.fee.paragraph'|t(_context)|colorize }}
+        {{ ('section.room.buy.fee.' ~ (feePercent ? 'percent' : 'amount'))|t((_context)|merge({ 'fee': fee, 'percent': feePercent }))|colorize }}
     {% endif %}
 
-    {{ 'section.room.buy.paragraph1'|t|colorize }}
+    {{ 'section.room.buy.paragraph1'|t(_context)|colorize }}
 {% endif %}
