@@ -63,6 +63,9 @@ switch ($op)
 {
     case 'converse':
         $params['tpl'] = 'converse';
+
+        \LotgdNavigation::addHeader('category.other');
+        \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
     break;
     case 'bartender':
         $action = (string) \LotgdHttp::getQuery('act');
@@ -76,6 +79,9 @@ switch ($op)
         $params['tpl'] = 'room';
 
         $pay = (int) \LotgdHttp::getQuery('pay');
+
+        \LotgdNavigation::addHeader('category.other');
+        \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
 
         $expense = round(($session['user']['level'] * (10 + log($session['user']['level']))), 0);
         $fee = getsetting('innfee', '5%');
@@ -134,6 +140,7 @@ switch ($op)
 
         modulehook('innrooms');
 
+        \LotgdNavigation::addHeader('category.buy.room');
         \LotgdNavigation::addNav('nav.room.buy.hand', 'inn.php?op=room&pay=1', [
             'params' => [
                 'expense' => $expense

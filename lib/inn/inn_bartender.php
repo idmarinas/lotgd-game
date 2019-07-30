@@ -165,10 +165,14 @@ elseif ('specialty' == $action)
 }
 else
 {
+    \LotgdNavigation::addHeader('category.other');
+    \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
+
     \LotgdNavigation::addHeader(\LotgdSanitize::fullSanitize($params['barkeep']), [
         'translation' => false
     ]);
     \LotgdNavigation::addNav('Bribe', 'inn.php?op=bartender&act=bribe');
+
     \LotgdNavigation::addHeader('Drinks');
 
     $result = modulehook('ale', [ 'includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost'] ]);
