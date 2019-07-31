@@ -190,7 +190,7 @@ class Translator extends ZendTranslator
         $domains = \explode('-', $namespace);
 
         //-- Base scope is page
-        if (2 < count($domains))
+        if (count($domains) < 2)
         {
             $domains[1] = $domains[0];
             $domains[0] = 'page';
