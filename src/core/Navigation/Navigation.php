@@ -148,6 +148,28 @@ class Navigation
     }
 
     /**
+     * Add an external link to navigation menu.
+     * Use this for add a extra security (rel="noopener noreferrer") and open in new tab.
+     *
+     * @param string|null $label
+     * @param string|null $link
+     * @param array       $options
+     */
+    public function addNavExternal(?string $label, ?string $link = null, array $options = [])
+    {
+        return $this->addItem($label, $link, ArrayUtils::merge([
+            'translate' => true,
+            'extraParamLink' => false,
+            'textDomain' => $this->getTextDomain(),
+            'attributes'=> [
+                'class' => 'nav',
+                'target' => '_blank',
+                'rel' => 'noopener noreferrer'
+            ]
+        ], $options));
+    }
+
+    /**
      * Add a nav to navigation menu but not translate.
      *
      * @param string|null $label
@@ -401,21 +423,25 @@ class Navigation
             ));
         }
 
-        //-- Add link to allowed navs
-        $extra = $this->getExtraParamLink($link);
-
-        if (false !== ($pos = strpos($link, '#')))
+        $extra = '';
+        if ($options['extraParamLink'] ?? true)
         {
-            $sublink = substr($link, 0, $pos);
-            $session['user']['allowednavs'][$sublink] = true;
-            $session['user']['allowednavs'][$sublink.$extra] = true;
+            //-- Add link to allowed navs
+            $extra = $this->getExtraParamLink($link);
+
+            if (false !== ($pos = strpos($link, '#')))
+            {
+                $sublink = substr($link, 0, $pos);
+                $session['user']['allowednavs'][$sublink] = true;
+                $session['user']['allowednavs'][$sublink.$extra] = true;
+            }
+
+            $session['user']['allowednavs'][$link] = true;
+            $session['user']['allowednavs'][$link.$extra] = true;
+
+            $this->addLink($link);
+            $this->addLink($link.$extra);
         }
-
-        $session['user']['allowednavs'][$link] = true;
-        $session['user']['allowednavs'][$link.$extra] = true;
-
-        $this->addLink($link);
-        $this->addLink($link.$extra);
 
         //-- There is no label to add to the menu
         if (! $label)
