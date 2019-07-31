@@ -94,7 +94,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
     $entity = $repository->hydrateEntity([
         'modulename' => $module,
         'setting' => $name,
@@ -130,7 +130,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $entity = $repository->findBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
+    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
     $entity = $repository->hydrateEntity([
         'modulename' => $module,
         'setting' => $name,
