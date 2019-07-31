@@ -292,7 +292,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                     debug('You must pass an array as the value when using a checklist.');
                     $checked = false;
                 }
-                $select .= "<div class='ui checkbox'><input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked == $optval ? ' checked' : '').'><label>'.("$optdis").'</label></div>';
+                $select .= "<div class='ui lotgd checkbox'><input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked == $optval ? ' checked' : '').'><label>'.("$optdis").'</label></div>';
             }
 
             return $select;
@@ -416,7 +416,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             {
                 if ('title' != $v)
                 {
-                    $input .= "<div class='ui toggle checkbox'><input type='checkbox' name='$keyout"."[$v]'"
+                    $input .= "<div class='ui toggle lotgd checkbox'><input type='checkbox' name='$keyout"."[$v]'"
                                     .(isset($row[$key]) && (int) $row[$key] & (int) $v ? ' checked' : '')
                                     .($disablemask & (int) $v ? '' : ' disabled')." value='1'> ";
                     list($k, $v) = each($info);
@@ -525,7 +525,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
         case 'bool':
             $value = $row[$key] ?? $default ?: 0;
 
-            $select = '<div class="ui toggle checkbox">';
+            $select = '<div class="ui lotgd toggle checkbox">';
             $select .= '<input type="hidden" name="'.$keyout.'" value="0">';
             $select .= '<input type="checkbox" value="1" name="'.$keyout.'" '.(1 == $value ? ' checked' : '').'>';
             $select .= '</div>';
