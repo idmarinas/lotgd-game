@@ -114,6 +114,8 @@ class EntityRepository extends DoctrineEntityRepository
         if (! $this->repositoryHydrator)
         {
             $this->repositoryHydrator = new ClassMethods();
+            //-- With this keyValue is keyValue. Otherwise it would be key_value
+            $this->repositoryHydrator->removeNamingStrategy();
         }
 
         return $this->repositoryHydrator;
