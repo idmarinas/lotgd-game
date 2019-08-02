@@ -14,7 +14,10 @@
     'customSay': clanInfo.customsay
 }, textDomain) }}
 
-{% set result = modulehook('clanhall', { 'messages': {} }) %}
+{% set result = modulehook('clanhall', { 'messages': {}, 'templates': {} }) %}
+{% for tpl, params in result.templates %}
+    {% include tpl with params %}
+{% endfor %}
 {% for message in result.messages %}
     {{ message[0]|tl(message[1], message[2])|colorize }}
 {% endfor %}
