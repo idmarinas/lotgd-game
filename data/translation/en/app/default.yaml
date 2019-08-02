@@ -73,6 +73,7 @@ statistic:
             info: 'Character Info'
             personal: 'Personal Info'
             equip: 'Equipment Info'
+            extra: 'Extra Info'
         companions: Companions
     stat:
         name: Name
