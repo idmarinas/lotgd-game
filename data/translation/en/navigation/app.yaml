@@ -229,6 +229,7 @@ moderate:
         audit: 'Audit Moderation'
         overview: 'Commentary Overview'
         reset: 'Reset Seen Comments'
+        bio: Player Bios
 
 # Modules page
 modules:
