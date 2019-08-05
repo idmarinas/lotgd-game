@@ -413,6 +413,7 @@ return [
         'vendor/zendframework/zend-servicemanager/src',
         'vendor/zendframework/zend-session/src',
         'vendor/zendframework/zend-stdlib/src',
+        'vendor/zendframework/zend-validator/src',
         'vendor/zendframework/zend-view/src',
     ],
 
