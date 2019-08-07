@@ -153,7 +153,7 @@ redirect:
             - '<a href="{locationUrl}">Click here to continue</a>'
             - "`n`n`$If you cannot leave this page, notify the staff via <a href='{petitionUrl}'>petition</a> and tell them where this happened and what you did. Thanks.`0"
 
-flash.messages:
+flash.message:
     module:
         uninstalled: 'Module {module} is not installed, but was attempted to be injected.'
         unactived: 'Module {module} is not active, but was attempted to be injected.'
