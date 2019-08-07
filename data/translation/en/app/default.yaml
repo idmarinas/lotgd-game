@@ -75,6 +75,9 @@ statistic:
             equip: 'Equipment Info'
             extra: 'Extra Info'
         companions: Companions
+        action:
+            recent: Recent Actions
+            rank: Action Rankings
     stat:
         name: Name
         dragonkills: DragonKills
