@@ -61,7 +61,7 @@
                         {{ 'table.warrior.isOnline'|t|colorize }}
                     {% endif %}
                 </td>
-                <td>{{ (warrior.race ?: constant('RACE_UNKNOWN'))|t }}</td>
+                <td>{{ ('character.racename'|tl(null, warrior.race ?: constant('RACE_UNKNOWN')))|colorize }}</td>
                 <td>{{ 'table.warrior.sex'|t({'sex': warrior.sex})|colorize }}</td>
                 <td>{{ warrior.laston|relative_date }}</td>
             </tr>
