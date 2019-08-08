@@ -244,7 +244,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $vloc = modulehook('validlocation', $vloc);
             unset($vloc['all']);
             reset($vloc);
-            $select = "<select class='ui dropdown' name='$keyout'>";
+            $select = "<select class='ui lotgd dropdown' name='$keyout'>";
 
             foreach ($vloc as $loc => $val)
             {
