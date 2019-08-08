@@ -449,7 +449,7 @@ class Navigation
             return $this;
         }
 
-        $key = count($this->navigation[$this->getLastHeader()] ?? []);
+        $key = $this->getKeyForNav($this->navigation[$this->getLastHeader()] ?? [], $options['remplace'] ?? false, $label);
 
         $this->navigation[$this->getLastHeader()][$key] = $label;
         $this->navs[$this->getLastHeader()][$key] = ArrayUtils::merge($options, [
@@ -460,6 +460,28 @@ class Navigation
         ]);
 
         return $this;
+    }
+
+    /**
+     * Get key for nav.
+     *
+     * @return void
+     */
+    protected function getKeyForNav(array $navs, bool $remplace, string $label): int
+    {
+        if (! $remplace)
+        {
+            return count($navs);
+        }
+
+        $key = array_search($label, $navs);
+
+        if (false === $key)
+        {
+            $key = count($navs);
+        }
+
+        return $key;
     }
 
     /**
