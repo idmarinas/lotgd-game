@@ -145,7 +145,7 @@ if ('' == $op)
     {
         $currency = getsetting('paypalcurrency', 'USD');
         $info = [];
-        $info[''] = '<!--data from '.$_SERVER['HTTP_HOST'].'-->
+        $info[''] = '<!--data from '.\LotgdHttp::getServer('HTTP_HOST').'-->
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="business" value="logd@mightye.org">
