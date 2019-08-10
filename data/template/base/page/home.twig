@@ -4,6 +4,10 @@
 
     {{ 'welcome'|t|colorize }}
 
+    {% for tpl, params in includeTemplatesPre %}
+        {% include tpl with params %}
+    {% endfor %}
+
     {# Show LotGD clock #}
     {% if gameclock %}
         {{ 'clock'|t({'villagename': villagename, 'gameclock': gameclock})|colorize }}
@@ -19,9 +23,9 @@
         {{ 'newestplayer'|t({'newestplayer': newestplayer})|colorize }}
     {% endif %}
 
-    {# Results messages of hook "index" #}
-    {% for message in hookIndex %}
-        {{ message|colorize }}
+    {# Templates old hook "index" #}
+    {% for tpl, params in includeTemplatesIndex %}
+        {% include tpl with params %}
     {% endfor %}
 
     {# Results messages of hook "hometext" #}
@@ -48,6 +52,10 @@
 
     {# Version of the game the server is running #}
     {{ 'server.version'|t({ 'version': serverVersion })|colorize }}
+
+    {% for tpl, params in includeTemplatesPost %}
+        {% include tpl with params %}
+    {% endfor %}
 
     {% if selectSkin %}
         {% include 'base/page/home/selectskin.twig' with { 'select': selectSkin } %}

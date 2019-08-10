@@ -46,6 +46,9 @@ LotgdNavigation::addNav('home.nav.net', 'logdnet.php?op=list');
 //-- Parameters to be passed to the template
 $params = [
     'villagename' => getsetting('villagename', LOCATION_FIELDS),
+    'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
+    'includeTemplatesIndex' => [], //-- Templates that are in index below of new player
+    'includeTemplatesPost' => [] //-- Templates that are in bottom of content
 ];
 
 if (getsetting('homecurtime', 1))
@@ -74,12 +77,6 @@ if (getsetting('homenewestplayer', 1))
     }
 
     $params['newestplayer'] = $name;
-}
-
-$results = modulehook('index', []);
-if(is_array($results) && count($results))
-{
-    $params['hookIndex'] = $results;
 }
 
 if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
