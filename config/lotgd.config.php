@@ -14,7 +14,7 @@ return [
             ],
         ],
         'translation' => [
-            'locale' => ['en', 'en'], //-- language, fallback language
+            'locale' => [ 'en', 'en' ], //-- [ 'language', 'fallback language' ]
             'translator_plugins' => [
                 'aliases' => [
                     'Yaml' => \Lotgd\Core\Translator\Loader\Yaml::class,
