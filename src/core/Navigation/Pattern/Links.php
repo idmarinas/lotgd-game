@@ -181,6 +181,26 @@ trait Links
     }
 
     /**
+     * Check if header has navs to show.
+     *
+     * @param string $label
+     *
+     * @return bool
+     */
+    public function headerHasNavs($label): bool
+    {
+        foreach($this->navs[$label] as $nav)
+        {
+            if (! $this->isBlocked($nav['link']) || ! $this->isHided($nav['link']))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Block a link.
      *
      * @param string $link
