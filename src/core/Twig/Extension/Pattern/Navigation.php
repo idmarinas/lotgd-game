@@ -40,7 +40,7 @@ trait Navigation
      * @param string $label
      * @param array  $options
      *
-     * @return string
+     * @return string|null
      */
     public function createLink($label, $options): ?string
     {
@@ -83,10 +83,15 @@ trait Navigation
      * @param string $label
      * @param array  $options
      *
-     * @return string
+     * @return string|null
      */
-    public function createHeader($label, $options): string
+    public function createHeader($label, $options): ?string
     {
+        if (! $this->getNavigation()->headerHasNavs($label))
+        {
+            return null;
+        }
+
         if ($options['translate'] ?? false)
         {
             $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
