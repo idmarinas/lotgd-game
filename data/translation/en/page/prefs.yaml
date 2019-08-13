@@ -11,7 +11,7 @@ section:
     forcechangeemail: '`$The email change request to the address "`q{email}`0" has been forced. Links sent will not work anymore.`0`n`n'
     cancelemail: '`$The email change request to the address "`q{email}`0" has been cancelled. Links sent will not work anymore.`0`n`n'
 
-flash.messages:
+flash.message:
     form:
         password:
             not.match: 'Your passwords do not match.'
