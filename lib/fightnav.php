@@ -10,7 +10,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     tlschema('fightnav');
 
     //-- Change text domain for navigation
-    \LotgdNavigation::setTextDomain($textDomainNavigation);
+    \LotgdNavigation::setTextDomain('navigation-fightnav');
 
     if (false === $script)
     {
@@ -47,17 +47,17 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     if (getsetting('autofight', 0))
     {
         \LotgdNavigation::addHeader('category.automatic');
-        \LotgdNavigation::addNav('nav.auto.rounds.5', "{$script}op=fight&auto=five");
-        \LotgdNavigation::addNav('nav.auto.rounds.10', "{$script}op=fight&auto=ten");
+        \LotgdNavigation::addNav('nav.auto.05', "{$script}op=fight&auto=five");
+        \LotgdNavigation::addNav('nav.auto.010', "{$script}op=fight&auto=ten");
         $auto = getsetting('autofightfull', 0);
 
         if ((1 == $auto || (2 == $auto && ! $allowflee)) && 1 == count($newenemies))
         {
-            \LotgdNavigation::addNav('nav.auto.rounds.end', "{$script}op=fight&auto=full");
+            \LotgdNavigation::addNav('nav.auto.end', "{$script}op=fight&auto=full");
         }
         elseif (1 == $auto || (2 == $auto && ! $allowflee))
         {
-            \LotgdNavigation::addNav('nav.auto.rounds.current', "{$script}op=fight&auto=full");
+            \LotgdNavigation::addNav('nav.auto.current', "{$script}op=fight&auto=full");
         }
     }
 
