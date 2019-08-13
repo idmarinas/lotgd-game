@@ -32,16 +32,16 @@ class ModuleUserprefsRepository extends DoctrineRepository
         try
         {
             return $query
-                ->where('u.infokeys IN (:modules) AND u.userid = :acct')
+                ->where('u.modulename IN (:modules) AND u.userid = :acct')
                 ->andWhere("u.setting LIKE 'user_%' OR u.setting LIKE 'check_%'")
 
-                ->setParameter('modules', $foundmodules)
+                ->setParameter('modules', $modules)
                 ->setParameter('acct', $acctId)
 
                 ->orderBy('u.modulename', 'DESC')
 
                 ->getQuery()
-                ->getResult()
+                ->getArrayResult()
             ;
         }
         catch (\Throwable $th)
