@@ -18,8 +18,8 @@ nav:
         death: 'R?Flee'
     abort: Abort
     auto:
-        5: '5?For 5 Rounds'
-        10: '1?For 10 Rounds'
+        '05': '5?For 5 Rounds'
+        '010': '1?For 10 Rounds'
         end: 'U?Until End'
         current: 'U?Until current enemy dies'
     god: '!?`&&#149; __GOD MODE`0'
