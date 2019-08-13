@@ -173,7 +173,7 @@ else
         foreach ($post as $key => $val)
         {
             // If this is one we don't save, skip
-            if ($nonsettings[$key] ?? true)
+            if ($nonsettings[$key] ?? false)
             {
                 continue;
             }
@@ -187,7 +187,7 @@ else
                 {
                     continue;
                 }
-                $val = httppost($key);
+                $val = \LotgdHttp::getPost($key);
                 $x = explode('___', $key);
                 $module = $x[0];
                 $key = $x[1];
@@ -468,8 +468,7 @@ else
     if (count($foundmodules))
     {
         $modulePrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
-        $result = $modulePrefsRepository->findModulesPrefs($foundmodules);
-        $result = $modulePrefsRepository->extractEntity($result);
+        $result = $modulePrefsRepository->findModulesPrefs($foundmodules, $session['user']['acctid']);
 
         foreach ($result as $row)
         {
