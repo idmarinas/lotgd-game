@@ -22,5 +22,5 @@ src/local
 !src/local/README.md
 !src/local/Entity/.gitkeep
 cli-config.php
-
+phan.csv
 docs/
