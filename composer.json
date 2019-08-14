@@ -11,8 +11,8 @@
     "require": {
         "php": ">=7.1",
         "ext-curl": "*",
-        "ext-exif": "*",
         "ext-intl": "*",
+        "ext-gd": "*",
         "ext-mbstring": "*",
         "ext-session": "*",
         "beberlei/doctrineextensions": "^1.2",
