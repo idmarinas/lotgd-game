@@ -9,8 +9,12 @@
     "prefer-stable": true,
     "license": "CC-BY-NC-SA-2.0",
     "require": {
-        "php": "^7.1",
+        "php": ">=7.1",
+        "ext-curl": "*",
+        "ext-exif": "*",
         "ext-intl": "*",
+        "ext-mbstring": "*",
+        "ext-session": "*",
         "beberlei/doctrineextensions": "^1.2",
         "composer/semver": "^1.5",
         "doctrine/orm": "^2.6",
