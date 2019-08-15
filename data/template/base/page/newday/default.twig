@@ -16,9 +16,9 @@
 {% endif %}
 
 {% if canGetInterest %}
-    {{ 'section.default.interest.worker'|t|colorize }}
+    {{ 'section.default.interest.worker'|t(_context)|colorize }}
 {% elseif maxInterest %}
-    {{ 'section.default.interest.max'|t|colorize }}
+    {{ 'section.default.interest.max'|t(_context)|colorize }}
 {% else %}
     {{ 'section.default.interest.rate'|t({ 'rate': interestRate - 1 })|colorize }}
     {% if userPre.goldinbank >= 0 %}
