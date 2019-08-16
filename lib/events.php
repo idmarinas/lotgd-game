@@ -43,7 +43,7 @@ function handle_event($location, $baseLink = false)
         $session['user']['specialinc'] = '';
 
         $html['event'] = [
-            'event.title',
+            'title.special',
             [],
             'partial-event'
         ];

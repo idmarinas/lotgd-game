@@ -106,7 +106,7 @@ function module_events($eventtype, $basechance, $baseLink = false)
             {
                 $_POST['i_am_a_hack'] = 'true';
                 $html['event'] = [
-                    'event.title',
+                    'title.special',
                     [],
                     'partial-event'
                 ];
