@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/forest.php';
 
 tlschema('healer');
 
@@ -143,15 +142,6 @@ if ('' == $return)
 {
     \LotgdNavigation::addNav('nav.return.forest', 'forest.php');
     \LotgdNavigation::villageNav();
-
-    if ($session['user']['hitpoints'] >= $session['user']['maxhitpoints'])
-    {
-        \LotgdNavigation::addHeader('category.fight');
-        \LotgdNavigation::addNav('nav.fight.search', 'forest.php?op=search');
-        ($session['user']['level'] > 1) && \LotgdNavigation::addNav('nav.slum', 'forest.php?op=search&type=slum');
-        \LotgdNavigation::addNav('nav.fight.thrill', 'forest.php?op=search&type=thrill');
-        (getsetting('suicide', 0) && getsetting('suicidedk', 10) <= $session['user']['dragonkills']) && \LotgdNavigation::addNav('nav.fight.suicide', 'forest.php?op=search&type=suicide');
-    }
 }
 elseif ('village.php' == $return)
 {
