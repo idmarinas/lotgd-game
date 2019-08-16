@@ -69,7 +69,7 @@ class Http
      *
      * @return array
      */
-    public static function getAllQuery(): array
+    public static function getQueryAll(): array
     {
         return self::$instance->getQuery()->toArray();
     }
