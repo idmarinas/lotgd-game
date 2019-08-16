@@ -72,7 +72,7 @@ function checkday()
 
     if ($session['user']['loggedin'] ?? false)
     {
-        output_notl('<!--CheckNewDay()-->', true);
+        rawoutput('<!--CheckNewDay()-->');
 
         if (is_new_day())
         {
