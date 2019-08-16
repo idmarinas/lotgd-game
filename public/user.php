@@ -89,15 +89,15 @@ if ('edit' == $op || 'save' == $op)
 {
     //add the race
     $row = $repository->extractEntity($repository->find($userId));
-    $row = $repository->extractEntity($row['character']);
+    $row = array_merge($row, $repository->extractEntity($row['character']));
     $racesenum = ','.translate_inline('Undecided', 'race').',';
 
-    foreach ($races as $race)
+    foreach ($races as $key => $race)
     {
-        $racesenum .= $race.','.$race.',';
+        $racesenum .= $key.','.$race.',';
     }
 
-    if (! in_array($row['race'], $races))
+    if (! \array_key_exists($row['race'], $races))
     {
         $racesenum .= $row['race'].','.$row['race'].',';
     }
@@ -109,9 +109,9 @@ $userinfo = include_once 'lib/data/user_account.php';
 $clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
 $result = $clanRepository->findAll();
 
-foreach ($result as $row)
+foreach ($result as $clan)
 {
-    $userinfo['clanid'] .= ",{$row->getClanid()},".str_replace(',', ';', "<{$row->getClanshort()}> {$row->getClanname()}");
+    $userinfo['clanid'] .= ",{$clan->getClanid()},".str_replace(',', ';', "<{$clan->getClanshort()}> {$clan->getClanname()}");
 }
 
 if ('del' == $op)
@@ -310,15 +310,15 @@ switch ($op)
         \LotgdNavigation::addHeader('user.category.operations');
         \LotgdNavigation::addNav('user.nav.last.hit', "user.php?op=lasthit&userid={$userId}");
         \LotgdNavigation::addNav('user.nav.debuglog', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
-        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$row['acctid']}&ret=".urlencode($_SERVER['REQUEST_URI']));
+        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".urlencode(\LotgdHttp::getServer('REQUEST_URI')));
 
         if ($session['user']['superuser'] & SU_EDIT_DONATIONS)
         {
-            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode($_SERVER['REQUEST_URI']));
+            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.rawurlencode($row['login']).'&ret='.urlencode(\LotgdHttp::getServer('REQUEST_URI')));
         }
 
         \LotgdNavigation::addHeader('user.category.bans');
-        \LotgdNavigation::addNav('user.nav.ban.setup', "bans.php?op=setupban&userid={$row['acctid']}");
+        \LotgdNavigation::addNav('user.nav.ban.setup', "bans.php?op=setupban&userid={$userId}");
 
         module_editor_navs('prefs', "user.php?op=edit&subop=module&userid={$userId}{$returnpetition}&module=");
 
