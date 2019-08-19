@@ -21,7 +21,9 @@ $skipgardendesc = handle_event('gardens');
 
 $params = [
     'textDomain' => $textDomain,
-    'showGardenDesc' => ! $skipgardendesc
+    'showGardenDesc' => ! $skipgardendesc,
+    'includeTemplatesPre' => [],
+    'includeTemplatesPost' => []
 ];
 
 $op = (string) \LotgdHttp::getQuery('op');
