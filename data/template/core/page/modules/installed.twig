@@ -1,8 +1,8 @@
 {% translate_default_domain textDomain %}
 
-<h4>{{ 'subtitle.category'|t({ 'cat': cat })|colorize }}</h4>
+<h4>{{ 'subtitle.installed'|t(_context)|colorize }}</h4>
 
-<form action="{{ ('modules.php?op=mass&cat=' ~ cat)|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ 'modules.php?op=mass'|lotgd_url }}" method="POST" class="ui form">
     <table class="ui small very compact striped table">
         <thead>
             <tr>

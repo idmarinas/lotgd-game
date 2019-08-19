@@ -67,9 +67,10 @@ elseif (! is_array($module) && ! $module)
 reset($modules);
 
 $params['messages'] = null;
+
 foreach ($modules as $key => $module)
 {
-    $params['messages'][] = [ 'module.performing.'.$theOp, [ 'module' => $module ] ];
+    $params['messages'][] = ['module.performing.'.$theOp, ['module' => $module]];
 
     if ('install' == $theOp)
     {
@@ -77,7 +78,7 @@ foreach ($modules as $key => $module)
         {
             \LotgdHttp::setQuery('cat', '');
             $cat = '';
-            $params['messages'][] = [ 'module.fail.install' ];
+            $params['messages'][] = ['module.fail.install'];
         }
 
         $op = '';
@@ -92,7 +93,7 @@ foreach ($modules as $key => $module)
         {
             \LotgdHttp::setQuery('cat', '');
             $cat = '';
-            $params['messages'][] = [ 'module.fail.uninstall' ];
+            $params['messages'][] = ['module.fail.uninstall'];
         }
 
         $op = '';
@@ -154,11 +155,16 @@ ksort($seencats);
         'count' => $ucount
     ]
 ]);
+\LotgdNavigation::addNav('modules.nav.installed', 'modules.php?op=installed', [
+    'params' => [
+        'count' => count($install_status['installedmodules'])
+    ]
+]);
 reset($seencats);
 
 foreach ($seencats as $category => $count)
 {
-    \LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='. rawurlencode($category), [
+    \LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='.rawurlencode($category), [
         'params' => [
             'cat' => $category,
             'count' => $count
@@ -166,13 +172,13 @@ foreach ($seencats as $category => $count)
     ]);
 }
 
-if ('' == $op)
+if ('' == $op && 'installed' != $cat)
 {
     $params['cat'] = $cat;
 
     if ($cat)
     {
-        $params['modules'] = $repository->findBy([ 'category' => $cat ], [ 'installdate' => 'DESC' ]);
+        $params['modules'] = $repository->findBy(['category' => $cat], ['installdate' => 'DESC']);
     }
     else
     {
@@ -209,6 +215,7 @@ if ('' == $op)
                 $temp['shortname'] = $shortname;
 
                 $canInstall = true;
+
                 if (isset($temp['requires']) && count($temp['requires']))
                 {
                     reset($temp['requires']);
@@ -234,6 +241,12 @@ if ('' == $op)
 
         $params['modules'] = $moduleinfo;
     }
+}
+elseif ('installed' == $op || 'installed' == $cat)
+{
+    $params['cat'] = 'installed';
+
+    $params['modules'] = $repository->findBy([], ['active' => 'ASC', 'category' => 'ASC', 'installdate' => 'DESC']);
 }
 
 rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/modules.twig', $params));

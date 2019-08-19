@@ -4,7 +4,9 @@
     {{ message[0]|t(message[1])|colorize }}
 {% endfor %}
 
-{% if cat %}
+{% if cat == 'installed' %}
+    {% include "core/page/modules/installed.twig" %}
+{% elseif cat %}
     {% include "core/page/modules/category.twig" %}
 {% else %}
     {% include "core/page/modules/uninstall.twig" %}

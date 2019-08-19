@@ -237,8 +237,9 @@ modules:
         modules: 'Module Categories'
     nav:
         category: '{category} Modules'
-        uninstalled: 'Uninstalled - ({count,plural, =1{1 module} other{# modules}})'
-        modules: '{cat} - ({count,plural, =1{1 module} other{# modules}})'
+        uninstalled: 'Uninstalled - (`${count,plural, =1{1 module} other{# modules}}`0)'
+        installed: 'Installed - (`@{count,plural, =1{1 module} other{# modules}}`0)'
+        modules: '{cat} - (`2{count,plural, =1{1 module} other{# modules}}`0)'
 
 # Mounts page
 mounts:
