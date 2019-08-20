@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify')
 var fancyLog = require('fancy-log')
 var colors = require('ansi-colors')
 var del = require('del')
+const normalize = require('normalize-path')
 
 //-- Configuration
 var config = require('../config/default')
@@ -19,12 +20,19 @@ module.exports = function (callback)
     //-- This files not is necesary in production
     if (isProduction)
     {
-        del([
-            config.paths.build + '/cli-config.php',
-            config.paths.build + '/**/*.{dist,md,lock,json,yml,xml}{,/**}',
-            config.paths.build + '/config/development/{**,*}',
-            config.paths.build + '/config/{**,*}/development{,.*}.*'
-        ])
+        (async () =>
+        {
+            const deletedPaths = await del([
+                normalize(config.paths.build + '/cli-config.php'),
+                normalize(config.paths.build + '/**/*.{dist,md,lock}{,/**}'),
+                normalize(config.paths.build + '/*.{json,yml,yaml,xml,txt,TXT,csv}{,/**}'),
+                normalize(config.paths.build + '/config/development/{**,*}'),
+                normalize(config.paths.build + '/config{,/**}/development{,.*}.*'),
+                normalize('!' + config.paths.build + '/vendor/**')
+            ])
+
+            fancyLog.info('Deleted files and directories:\n', deletedPaths.join('\n'))
+        })()
     }
 
     //-- Resources folder - Only JS
