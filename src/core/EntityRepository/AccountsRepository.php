@@ -120,7 +120,7 @@ class AccountsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debbuger::log($th);
+            Debugger::log($th);
 
             return [];
         }
