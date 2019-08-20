@@ -4,7 +4,7 @@ define([
 {
     'use strict'
 
-    arr['version'] = {
+    arr.version = {
 
         version: '0.1.0',
 
