@@ -240,7 +240,7 @@ class Navigation
     {
         if (! $this->lastHeader)
         {
-            $this->addHeader('common.category.navigation');
+            $this->addHeader('common.category.navigation', [ 'textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN ]);
         }
 
         return $this->lastHeader;
