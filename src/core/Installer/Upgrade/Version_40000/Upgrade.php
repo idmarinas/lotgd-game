@@ -167,6 +167,7 @@ class Upgrade extends UpgradeAbstract
                     $row['bufflist'] = unserialize($row['bufflist']);
                     $row['dragonpoints'] = unserialize($row['dragonpoints']);
                     $row['prefs'] = unserialize($row['prefs']);
+                    $row['uniqueid'] = $row['uniqueid'] ?? '';
 
                     //-- Configure account
                     $acctEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Accounts());
