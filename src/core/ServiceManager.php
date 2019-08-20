@@ -42,7 +42,7 @@ class ServiceManager extends ZendServiceManager
      *
      * @var string
      */
-    const CACHE_FILE = 'cache/service-manager.config.php';
+    const CACHE_FILE = 'data/cache/service-manager.config.php';
 
     public function __construct()
     {
