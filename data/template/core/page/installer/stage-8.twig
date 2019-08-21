@@ -35,12 +35,12 @@
 
                         {% if module.active %}
                             {% set uninstallop = 'uninstall' %}
-                            {% set uninstallop = 'deactivate' %}
+                            {% set installop = 'deactivate' %}
                             {% set activateop = 'donothing' %}
                             {% set activatecheck = true %}
                         {% elseif module.installed %}
                             {% set uninstallop = 'uninstall' %}
-                            {% set uninstallop = 'activate' %}
+                            {% set installop = 'donothing' %}
                             {% set activateop = 'activate' %}
                             {% set installcheck = true %}
                         {% else %}
