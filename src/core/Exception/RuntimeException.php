@@ -17,6 +17,6 @@ use RuntimeException as SplRuntimeException;
 /**
  * RuntimeException for Legend of the Green dragon.
  */
-class RuntimeException extends SplException
+class RuntimeException extends SplRuntimeException
 {
 }
