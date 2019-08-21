@@ -2,7 +2,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
 [![Website](https://img.shields.io/website-up-down-green-red/https/lotgd.infommo.es.svg?label=lotgd-demo)](https://lotgd.infommo.es)
 [![Build in PHP](https://img.shields.io/badge/PHP-^7.1-8892BF.svg?logo=php)](http://php.net/)
-![Installation](https://img.shields.io/badge/install-sucess-orange.svg?maxAge=2592000)
+![Installation](https://img.shields.io/badge/install-sucess-green.svg?maxAge=2592000)
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
 
