@@ -236,7 +236,7 @@ class Upgrade extends UpgradeAbstract
                 {
                     $row = (array) $row;
 
-                    $row['arguments'] = unserialize($row['arguments']);
+                    $row['arguments'] = @unserialize($row['arguments']);
                     $row['text'] = $row['newstext'];
                     $row['date'] = new \DateTime($row['newsdate']);
                     $row['textDomain'] = $row['tlschema'];
