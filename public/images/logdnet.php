@@ -1,15 +1,11 @@
 <?php
 
-// addnews ready
-// mail ready
-// translator ready
+
 session_start();
-//unset($_SESSION['logdnet']);
-//session_register("session");
+
 if (isset($_GET['op']) && 'register' == $_GET['op'])
 {
-    if (! isset($_SESSION['logdnet']) || ! isset($_SESSION['logdnet']['']) ||
-            '' == $_SESSION['logdnet'][''])
+    if (! isset($_SESSION['logdnet']) || ! isset($_SESSION['logdnet']['']) || '' == $_SESSION['logdnet'][''])
     {
         //register with LoGDnet
         $a = $_GET['a'];
@@ -31,7 +27,8 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
             '&l='.$l. // primary language of this server -- you may change
                       // this if it turns out to be inaccurate.
             '';
-        require_once '../lib/pullurl.php';
+        require_once '../../lib/pullurl.php';
+
         $info = @pullurl($url);
 
         if (false !== $info)
@@ -56,7 +53,6 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
 
     if (false !== $info)
     {
-        require_once '../lib/sanitize.php';
         $o = addslashes($_SESSION['logdnet']['']);
         $o = str_replace("\n\r", "\n", $o);
         $o = str_replace("\r", "\n", $o);
@@ -72,9 +68,8 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
         {
             echo $_SESSION['logdnet']['note']."\n";
             echo "// At {$_SESSION['logdnet']['when']}\n";
-            //require_once("../lib/dbwrapper.php");
-            //require_once("../lib/settings.php");
-            echo 'document.write("'.sprintf($o,\LotgdSanitize::fullSanitize($_SESSION['session']['user']['login']),
+
+            echo 'document.write("'.sprintf($o,\preg_replace('/[`´]./u', '', $_SESSION['session']['user']['login']),
                         htmlentities($_SESSION['session']['user']['login']).':'.$_SERVER['HTTP_HOST'].$refer, ENT_COMPAT, 'ISO-8859-1').'");';
         }
         else
