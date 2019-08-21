@@ -3,7 +3,8 @@
 //-- To avoid conflicts if you have a code debugger installed such as xDebug
 if (0 != ini_get('max_execution_time'))
 {
-    set_time_limit(666); //-- Temporary increased limit execution time
+    $time = ini_get('max_execution_time') * 10;
+    set_time_limit(max($time, 666)); //-- Temporary increased limit execution time
 }
 
 /**
