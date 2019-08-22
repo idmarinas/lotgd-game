@@ -11,58 +11,59 @@
  * @since 4.0.0
  */
 
-namespace Lotgd\Core\EntityRepository;
+namespace Lotgd\Core\EntityRepository\Commentary;
 
-use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
+use Tracy\Debugger;
 
-class AccountsOutputRepository extends DoctrineRepository
+/**
+ * Functions for backup data.
+ */
+trait Backup
 {
-    use AccountsOutput\Backup;
-
     /**
-     * Get output code for account.
+     * Get all mail to account.
      *
-     * @param int $acctId
+     * @param int $accountId
      *
-     * @return string
+     * @return array
      */
-    public function getOutput(int $acctId): string
+    public function backupGetDataFromAccount(int $accountId): array
     {
         $query = $this->createQueryBuilder('u');
 
         try
         {
-            return $query->select('u.output')
-                ->where('u.acctid = :acct')
-                ->setParameter('acct', $acctId)
-                ->setMaxResults(1)
+            return $query->where('u.author = :acct')
+
+                ->setParameter('acct', $accountId)
+
                 ->getQuery()
-                ->getSingleScalarResult()
+                ->getResult()
             ;
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
-            return '';
+            return [];
         }
     }
 
     /**
-     * Delete output of account.
+     * Delete comments of account.
      *
      * @param int $accountId
      *
      * @return int
      */
-    public function deleteOutputOfAccount(int $accountId): int
+    public function backupDeleteDataFromAccount(int $accountId): int
     {
         $query = $this->_em->createQueryBuilder();
 
         try
         {
             return $query->delete($this->_entityName, 'u')
-                ->where('u.acctid = :acct')
+                ->where('u.author = :acct')
                 ->setParameter('acct', $accountId)
                 ->getQuery()
                 ->execute()

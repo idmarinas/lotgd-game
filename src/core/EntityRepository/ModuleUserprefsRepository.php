@@ -18,6 +18,8 @@ use Tracy\Debugger;
 
 class ModuleUserprefsRepository extends DoctrineRepository
 {
+    use ModuleUserprefs\Backup;
+
     /**
      * Find modules prefs for modules.
      *
