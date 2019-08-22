@@ -19,7 +19,7 @@
                 <tr>
                     {% if not module.invalid %}
                     <td class="collapsing">
-                        <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.shortname }}"></div>
+                        <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div>
                     </td>
                     <td class="collapsing">
                         <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
@@ -63,6 +63,7 @@
     </table>
 
     <div class="field">
-        <button type="submit" name="install" class="ui primary button">{{ 'table.tbody.button.submit'|t|uncolorize }}</button>
+        <button type="submit" name="install" value="1" class="ui primary button">{{ 'table.tbody.button.install'|t|uncolorize }}</button>
+        <button type="submit" name="activate" value="1" class="ui button">{{ 'table.tbody.button.activate'|t|uncolorize }}</button>
     </div>
 </form>

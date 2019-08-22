@@ -31,7 +31,11 @@ table:
         uninstall.confirm: 'Are you sure you wish to uninstall this module?  All user preferences and module settings will be lost. If you wish to temporarily remove access to the module, you may simply deactivate it.'
         install.by: 'by {author}'
         button:
-            submit: Install
+            install: Install
+            uninstall: Uninstall
+            activate: Activate
+            deactivate: Deactivate
+            reinstall: Reinstall
 
 module:
     performing:

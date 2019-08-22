@@ -2,10 +2,11 @@
 
 <h4>{{ 'subtitle.category'|t({ 'cat': cat })|colorize }}</h4>
 
-<form action="{{ ('modules.php?op=mass&cat=' ~ cat)|lotgd_url }}" method="POST" class="ui form">
+<form action="{{ ('modules.php?op=mass&cat=' ~ cat|e('url'))|lotgd_url }}" method="POST" class="ui form">
     <table class="ui small very compact striped table">
         <thead>
             <tr>
+                <th>&nbsp;</th>
                 <th>{{ 'table.thead.ops'|t|uncolorize }}</th>
                 <th>{{ 'table.thead.status'|t|uncolorize }}</th>
                 <th>{{ 'table.thead.mname'|t|uncolorize }}</th>
@@ -17,6 +18,9 @@
             {% set options = {'html': 'table.tbody.uninstall.confirm'|t|uncolorize }|json_encode %}
             {% for module in modules %}
                 <tr>
+                    <td class="collapsing">
+                        <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div>
+                    </td>
                     <td class="collapsing">
                         {% set activate = module.active ? 'deactivate' : 'activate' %}
                         {% set active = module.active ? 'active' : 'inactive' %}
@@ -56,4 +60,11 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="field">
+        <button type="submit" name="activate" value="1" class="ui button">{{ 'table.tbody.button.activate'|t|uncolorize }}</button>
+        <button type="submit" name="deactivate" value="1" class="ui secondary button">{{ 'table.tbody.button.deactivate'|t|uncolorize }}</button>
+        <button type="submit" name="reinstall" value="1" class="ui yellow button">{{ 'table.tbody.button.reinstall'|t|uncolorize }}</button>
+        <button type="submit" name="uninstall" value="1" class="ui red button">{{ 'table.tbody.button.uninstall'|t|uncolorize }}</button>
+    </div>
 </form>

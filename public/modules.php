@@ -56,6 +56,7 @@ if ('mass' == $op)
 
 $theOp = $op;
 
+$modules = $module;
 if (! is_array($module) && $module)
 {
     $modules = [$module];
