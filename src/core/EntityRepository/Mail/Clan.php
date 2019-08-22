@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\EntityRepository\Mail;
 
-use Doctrine\ORM\Query\Expr\Join;
-use Lotgd\Core\Entity as EntityCore;
 use Tracy\Debugger;
 
 /**
@@ -26,13 +24,14 @@ trait Clan
      * Delete mail from system by subject.
      *
      * @param string $subject
-     * @param int $toId
+     * @param int    $toId
      *
      * @return int
      */
     public function deleteMailFromSystemBySubj(string $subject, int $toId = 0): int
     {
         $query = $this->_em->createQueryBuilder();
+
         try
         {
             $query->delete($this->_entityName, 'u')
@@ -53,7 +52,7 @@ trait Clan
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
+            Debugger::log($th);
 
             return 0;
         }
