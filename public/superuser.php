@@ -83,16 +83,18 @@ if ($session['user']['superuser'] & SU_EDIT_EQUIPMENT)
 
 \LotgdNavigation::addHeader('superuser.category.mechanics');
 
-($session['user']['superuser'] & SU_MEGAUSER) && \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
+($session['user']['superuser'] & SU_EDIT_CONFIG) && \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
+($session['user']['superuser'] & SU_EDIT_USERS) && \LotgdNavigation::addNav('superuser.nav.backup', 'characterbackup.php');
 
 if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 {
-    \LotgdNavigation::addNav('superuser.nav.configuration', 'configuration.php');
     \LotgdNavigation::addNav('superuser.nav.debug', 'debug.php');
     \LotgdNavigation::addNav('superuser.nav.referers', 'referers.php');
     \LotgdNavigation::addNav('superuser.nav.stats', 'stats.php');
-    file_exists('public/gamelog.php') && \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
+    \LotgdNavigation::addNav('superuser.nav.gamelog', 'gamelog.php');
 }
+
+($session['user']['superuser'] & SU_MEGAUSER) && \LotgdNavigation::addNav('superuser.nav.globaluserfunctions', 'globaluserfunctions.php');
 
 \LotgdNavigation::addHeader('superuser.category.module');
 
