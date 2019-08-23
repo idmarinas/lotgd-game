@@ -14,7 +14,7 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
-use Lotgd\Core\Entity\Commentary;
+use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Tracy\Debugger;
 
 class CommentaryRepository extends DoctrineRepository
@@ -28,7 +28,7 @@ class CommentaryRepository extends DoctrineRepository
      *
      * @return bool
      */
-    public function saveComment(Commentary $commentary): bool
+    public function saveComment(EntityCommentary $commentary): bool
     {
         try
         {
