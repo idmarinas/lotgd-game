@@ -164,13 +164,39 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Now you avoid saving the data in the database and use PHP files, in the folder `data/dictionary/{LANGUAGE_CODE}.php`.
 -   _**New Account Backup**_ When delete an account now game generate a backup for this account.
     -   Data are saved in `data/logd_snapshots/account-[account_id]/`
-    -   Data saved are:
+    -   Data saved by default are:
         -   All information of _account_
         -   Information of _character_
         -   All _mails_ to account
         -   All _news_ of account
         -   All _comments_ of account
         -   All _module_userprefs_ of account
+    -   Can see Backups in Grotto -> Mechanics -> Character Backup
+        -   Here can:
+            -   View the list of backups
+            -   View backup detail
+            -   Restore a backup
+            -   Delete a backup
+    -   In order to create a backup and delete the data, is necesary that the EntityRepository of each table needs to have the following two methods:
+        -   `public function backupDeleteDataFromAccount(int $accountId): array {}`
+        -   `public function backupGetDataFromAccount(int $accountId): int {}`
+    -   Can use hook `character-cleanup` to add new content to backup
+        ```
+        modulehook('character-cleanup', [
+                'entities' => [
+                    //-- Delete data from DataBase of all entities here
+                    // 'Entity:Name' => Backup: true|false,
+                    'LotgdCore:Mail' => true,
+                    'LotgdCore:News' => true,
+                    'LotgdCore:AccountsOutput' => false, //-- The data is not backed up, but it is deleted.
+                    'LotgdCore:Commentary' => true,
+                    'LotgdCore:ModuleUserprefs' => true
+                ],
+                'acctid' => $accountId,
+                'deltype' => $type
+            ])
+        ```
+        > Can use short name of Entity `LotgdCore:Mail` or full name `Lotgd\Core\Entity\Mail`
 -   :warning: **_LotGD use Twig template system_**
     -   It's a system similar to MVC.
     -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
