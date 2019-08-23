@@ -3,6 +3,10 @@
 /**
  * Delete an account and create a backup.
  *
+ * In order to create a backup and delete the data, the EntityRepository of each table needs to have the following two methods:
+ *  - public function backupDeleteDataFromAccount(int $accountId): array {}
+ *  - public function backupGetDataFromAccount(int $accountId): int {}
+ *
  * @param int $accountId
  * @param int $type
  *
@@ -13,41 +17,77 @@ function char_cleanup($accountId, $type): bool
     require_once 'lib/gamelog.php';
 
     // this function handles the grunt work of character cleanup.
+    // Run any modules hooks who want to deal with character deletion
+    $return = modulehook('character-cleanup', [
+        'entities' => [
+            //-- Delete data from DataBase of all entities here
+            // 'Entity:Name' => Backup: true|false,
+            'LotgdCore:Mail' => true,
+            'LotgdCore:News' => true,
+            'LotgdCore:AccountsOutput' => false, //-- The data is not backed up, but it is deleted.
+            'LotgdCore:Commentary' => true,
+            'LotgdCore:ModuleUserprefs' => true
+        ],
+        'acctid' => $accountId,
+        'deltype' => $type
+    ]);
 
-    // Run any modules hooks who want to deal with character deletion, or stop it
-    $return = modulehook('delete_character', ['acctid' => $accountId, 'deltype' => $type, 'dodel' => true, 'backupAccount' => true]);
+    $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $accountEntity = $accountRepository->find($accountId);
 
-    if (! $return['dodel'])
+    //-- Not do nothing if not find account or fail in create basic backup
+    if (! $accountEntity || ! createBackupBasicInfo($accountId, $accountEntity))
     {
+        gamelog("Could not create basic info backup for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}, canceled", 'backup');
+
         return false;
     }
 
-    $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
+    $backupEntities = $return['entities'];
+    unset($backupEntities['LotgdCore:Accounts'], $backupEntities['LotgdCore:Characters']); //-- Always backup Account and Character
 
-    $accountEntity = $accountRepository->find($accountId);
-
-    if (! $accountEntity)
+    $accountLogin = $accountEntity->getLogin();
+    //-- Backup and delete data from DataBase
+    foreach ($backupEntities as $entity => $backup)
     {
-        return false;
+        try
+        {
+            $repository = \Doctrine::getRepository($entity);
+
+            //-- Skip if method for deleting data are not found
+            if (! \method_exists($repository, 'backupDeleteDataFromAccount'))
+            {
+                continue;
+            }
+
+            if ($backup)
+            {
+                $message = 'Could not create a backup for Entity %s, Account ID: %s, Login %s';
+
+                if (createBackupOfEntity($accountId, $repository, $entity))
+                {
+                    $message = 'A backup has been created for the Entity %s, account ID: %s, Login %s';
+                }
+
+                gamelog(sprintf($message, $entity, $accountId, $accountLogin), 'backup');
+            }
+
+            $repository->backupDeleteDataFromAccount($accountId);
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            continue;
+        }
     }
 
     $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
-    $mailRepository = \Doctrine::getRepository('LotgdCore:Mail');
-    $newsRepository = \Doctrine::getRepository('LotgdCore:News');
-    $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
-    $commentaryRepository = \Doctrine::getRepository('LotgdCore:Commentary');
-
-    //-- Generate a backup.
-    if ($return['backupAccount'] && createBackupAccount($accountId))
-    {
-        gamelog("A backup has been created for the account ID:{$accountEntity->getAcctid()}, Login {$accountEntity->getLogin()}", 'backup');
-    }
-
     // Clean up any clan positions held by this character
     if ($accountEntity->getCharacter()->getClanid() && (CLAN_LEADER == $accountEntity->getCharacter()->getClanrank() || CLAN_FOUNDER == $accountEntity->getCharacter()->getClanrank()))
     {
         //-- Check if clan have more leaders
-        $leadersCount = $charRepository->getCharacter()->getClanLeadersCount($accountEntity->getCharacter()->getClanid());
+        $leadersCount = $charRepository->getClanLeadersCount($accountEntity->getCharacter()->getClanid());
 
         if (1 == $leadersCount || 0 == $leadersCount)
         {
@@ -84,21 +124,6 @@ function char_cleanup($accountId, $type): bool
         }
     }
 
-    //-- Delete any module user prefs
-    module_delete_userprefs($accountId);
-
-    //-- Delete any mail to or from the user
-    $mailRepository->deleteMailOfAccount($accountId);
-
-    //-- Delete any news from the user
-    $newsRepository->deleteNewsOfAccount($accountId);
-
-    //-- Delete the output field from the accounts_output table introduced in 1.1.1
-    $outputRepository->deleteOutputOfAccount($accountId);
-
-    //-- Delete the comments the user posted, necessary to have the systemcomments with acctid 0 working
-    $commentaryRepository->deleteCommentsOfAccount($accountId);
-
     //-- Delete character of account
     \Doctrine::remove($accountEntity->getCharacter());
 
@@ -111,59 +136,88 @@ function char_cleanup($accountId, $type): bool
 }
 
 /**
- * Create backup of account in "logd_snapshots".
+ * Create backup of Entity in "logd_snapshots".
  *
- * @param int $accountId
+ * @param int    $accountId
+ * @param object $repository
+ * @param string $entityName
  *
  * @return bool
  */
-function createBackupAccount(int $accountId): bool
+function createBackupOfEntity(int $accountId, $repository, string $entityName): bool
 {
-    $path = "data/logd_snapshots/account-{$accountId}";
-
-    if (! \file_exists($path))
+    //-- Skip if method for getting data are not found
+    if (! \method_exists($repository, 'backupGetDataFromAccount'))
     {
-        mkdir($path, 0777);
+        return false;
     }
 
-    $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
-    $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
-    $mailRepository = \Doctrine::getRepository('LotgdCore:Mail');
-    $newsRepository = \Doctrine::getRepository('LotgdCore:News');
-    $commentaryRepository = \Doctrine::getRepository('LotgdCore:Commentary');
-    $modulePrefsRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $fileSystem = new \Lotgd\Core\Component\Filesystem();
+    $serializer = new Zend\Serializer\Adapter\PhpSerialize();
 
     try
     {
-        $account = $accountRepository->extractEntity($accountRepository->find($accountId));
-        $character = $charRepository->extractEntity($charRepository->find($account['character']));
-        $mail = $mailRepository->extractEntity($mailRepository->findBy(['msgto' => $accountId]));
-        $news = $newsRepository->extractEntity($newsRepository->findBy(['accountId' => $accountId]));
-        $commentary = $commentaryRepository->extractEntity($commentaryRepository->findBy(['author' => $accountId]));
-        $modulePrefs = $modulePrefsRepository->extractEntity($modulePrefsRepository->findBy(['userid' => $accountId]));
-        $account['character'] = $character['id'];
-        $character['acct'] = $accountId;
+        $data = [
+            'table' => \Doctrine::getClassMetadata($entityName)->getTableName(),
+            'entity' => $repository->getClassName(),
+            'rows' => $repository->extractEntity($repository->backupGetDataFromAccount($accountId))
+        ];
+        $entityName = str_replace([':', '\\', '/'], '_', $entityName);
+        $fileSystem->dumpFile("data/logd_snapshots/account-{$accountId}/{$entityName}.data", $serializer->serialize($data), LOCK_EX);
+    }
+    catch (\Throwable $th)
+    {
+        \Tracy\Debugger::log($th);
 
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Create a basic info backup of account.
+ *
+ * @return bool
+ */
+function createBackupBasicInfo(int $accountId, $account): bool
+{
+    $fileSystem = new \Lotgd\Core\Component\Filesystem();
+    $serializer = new Zend\Serializer\Adapter\PhpSerialize();
+    $hydrator = new \Zend\Hydrator\ClassMethods();
+    $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
+    $path = "data/logd_snapshots/account-{$accountId}";
+
+    try
+    {
         $basicInfo = [
             'accountId' => $accountId,
-            'characterId' => $character['id'],
-            'name' => $character['name'],
-            'login' => $account['login'],
-            'email' => $account['emailaddress'],
-            'lastIp' => $account['lastip']
+            'characterId' => $account->getCharacter()->getId(),
+            'name' => $account->getCharacter()->getName(),
+            'login' => $account->getLogin(),
+            'email' => $account->getEmailaddress(),
+            'lastIp' => $account->getLastip()
         ];
 
-        //-- Save data of Tables
-        //-----------------------
-        file_put_contents("{$path}/account.json", json_encode($account), LOCK_EX);
-        file_put_contents("{$path}/character.json", json_encode($character), LOCK_EX);
-        file_put_contents("{$path}/mail.json", json_encode($mail), LOCK_EX);
-        file_put_contents("{$path}/news.json", json_encode($news), LOCK_EX);
-        file_put_contents("{$path}/commentary.json", json_encode($commentary), LOCK_EX);
-        file_put_contents("{$path}/module_prefs.json", json_encode($modulePrefs), LOCK_EX);
+        $accountRow = $hydrator->extract($account);
+        $characterRow = $hydrator->extract($account->getCharacter());
+
+        $accountArray = [
+            'table' => 'accounts',
+            'entity' => \Lotgd\Core\Entity\Accounts::class,
+            'rows' => [$accountRow]
+        ];
+        $characterArray = [
+            'table' => 'characters',
+            'entity' => \Lotgd\Core\Entity\Characters::class,
+            'rows' => [$characterRow]
+        ];
+
+        $fileSystem->dumpFile("{$path}/LotgdCore_Accounts.data", $serializer->serialize($accountArray));
+        $fileSystem->dumpFile("{$path}/LotgdCore_Characters.data", $serializer->serialize($characterArray));
 
         //-- Basic info of account
-        file_put_contents("{$path}/basic_info.json", json_encode($basicInfo), LOCK_EX);
+        $fileSystem->dumpFile("{$path}/basic_info.data", $serializer->serialize($basicInfo));
     }
     catch (\Throwable $th)
     {
