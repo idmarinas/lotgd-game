@@ -397,3 +397,4 @@ superuser:
         referers: 'Referring URLs'
         stats: 'Stats'
         gamelog: 'Gamelog Viewer'
+        backup: 'Character Backup'
