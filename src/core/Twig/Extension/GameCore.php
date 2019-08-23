@@ -108,6 +108,7 @@ class GameCore extends AbstractExtension
     {
         return [
             new TwigTest('array', function ($value) { return is_array($value); }),
+            new TwigTest('object', function ($value) { return is_object($value); }),
         ];
     }
 
