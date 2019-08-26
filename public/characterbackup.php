@@ -88,7 +88,7 @@ elseif ('restore' == $op)
     //-- First restore account and character
     foreach($files as $file)
     {
-        //-- Not do nothing if now have rows.
+        //-- Not do nothing if not have rows.
         if (isset($file['rows']) && empty($file['rows']))
         {
             continue;
