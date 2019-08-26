@@ -153,7 +153,6 @@ elseif ('view' == $op)
     {
         return $serializer->unserialize(file_get_contents($path));
     }, $files);
-    $array = array(0 => 'azul', 1 => 'rojo', 2 => 'verde', 3 => 'rojo');
 }
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/characterbackup.twig', $params));
