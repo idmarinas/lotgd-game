@@ -94,12 +94,22 @@ elseif ('restore' == $op)
             continue;
         }
 
+        //-- Overrides the automatic generation of IDs
+        $metadata = \Doctrine::getClassMetadata($file['entity']);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+
         $repository = \Doctrine::getRepository($file['entity']);
 
         foreach($file['rows'] as $row)
         {
             \Doctrine::persist($repository->hydrateEntity($row));
         }
+
+        //-- Restore automatic generation of IDs
+        $metadata = \Doctrine::getClassMetadata($file['entity']);
+        $metadata->setIdGenerator(new \Doctrine\ORM\Id\IdentityGenerator());
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY);
 
         \Doctrine::flush();
     }
