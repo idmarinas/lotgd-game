@@ -27,3 +27,5 @@ flash.message:
     del:
         error: 'The directory "{path}" could not be deleted'
         success: 'The directory "{path}" has been successfully deleted'
+    restore.miss.mandatory: 'The file for the entity "Accounts" and/or the entity "Characters" is not found'
+
