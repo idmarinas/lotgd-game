@@ -117,7 +117,7 @@ Hacer que se pueda personalizar la configuración de Doctrine añadiendo más op
 
 
 ### Comandos
-./vendor/bin/doctrine orm:convert:mapping annotation "entity" --namespace "Lotgd\\Core\\Entity\\" --no-ansi --from-database --force
+./vendor/bin/doctrine orm:convert:mapping annotation "entity" --namespace "Lotgd\Core\Entity\" --no-ansi --from-database --force
 
 ./vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
 
