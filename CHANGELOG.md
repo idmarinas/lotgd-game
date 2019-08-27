@@ -197,6 +197,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             ])
         ```
         > Can use short name of Entity `LotgdCore:Mail` or full name `Lotgd\Core\Entity\Mail`
+    -   Can use hook `character-restore` to customize how restore data of entity
+        ```
+        modulehook('character-restore', [
+                'entity' => $file['shortNameEntity'],
+                'proccessed' => false,
+            ])
+        ```
+        > `$file['shortNameEntity']` is the name you use in hook `character-cleanup`
 -   :warning: **_LotGD use Twig template system_**
     -   It's a system similar to MVC.
     -   This means that all LotGD pages use the Twig template system to show all the text, no more `output()` or `output_notl()` functions are used to show text.
