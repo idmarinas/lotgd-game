@@ -107,6 +107,8 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
 
         $result = modulehook('character-restore', [
             'entity' => $file['shortNameEntity'],
+            'accountId' => $accountId,
+            'data' => $file,
             'proccessed' => false
         ]);
 
