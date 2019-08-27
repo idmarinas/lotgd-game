@@ -69,7 +69,7 @@ class Sanitize
      */
     public function moduleNameSanitize(string $string): string
     {
-        return preg_replace('/[^[:alnum:]]/', '', $string);
+        return preg_replace('/[^[:alnum:]_]/', '', $string);
     }
 
     /**
