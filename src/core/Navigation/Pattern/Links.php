@@ -189,6 +189,11 @@ trait Links
      */
     public function headerHasNavs($label): bool
     {
+        if (! isset($this->navs[$label]))
+        {
+            return false;
+        }
+
         foreach($this->navs[$label] as $nav)
         {
             if (! $this->isBlocked($nav['link']) || ! $this->isHided($nav['link']))
