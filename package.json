@@ -50,7 +50,7 @@
         "css-loader": "^3.2.0",
         "del": "^5.1.0",
         "eslint": "^6.2.2",
-        "eslint-config-standard": "^14.0.1",
+        "eslint-config-standard": "^14.1.0",
         "eslint-friendly-formatter": "^4.0.1",
         "eslint-loader": "^3.0.0",
         "eslint-plugin-html": "^6.0.0",
@@ -85,9 +85,9 @@
         "sass-loader": "^7.3.1",
         "uglifyjs-webpack-plugin": "^2.2.0",
         "url-loader": "^2.1.0",
-        "webpack": "^4.39.2",
+        "webpack": "^4.39.3",
         "webpack-bundle-analyzer": "^3.4.1",
-        "webpack-merge": "^4.2.1"
+        "webpack-merge": "^4.2.2"
     },
     "repository": {
         "type": "git",
