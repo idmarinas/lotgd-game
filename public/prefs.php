@@ -35,7 +35,7 @@ page_header('title', [], $textDomain);
 $op = (string) \LotgdHttp::getQuery('op');
 
 \LotgdNavigation::addHeader('common.category.navigation');
-\LotgdNavigation::addNav('common.category.navigation', 'prefs.php');
+\LotgdNavigation::addNav('common.nav.update', 'prefs.php');
 
 if ('suicide' == $op && $params['selfDelete'])
 {
