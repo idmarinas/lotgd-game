@@ -24,6 +24,7 @@ common:
         listing: 'Return to Listing'
         inn: 'Return to the inn'
         lodge: 'L?Return to the Lodge'
+        update: Update page
     superuser:
         category: 'Superuser'
         superuser: 'X?`bSuperuser Grotto´b'
