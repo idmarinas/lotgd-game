@@ -93,7 +93,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
             $callback = $callback ?: 'lotgd_show_form_field';
             $result = $callback($info, $row, $key, $keyout, $val, $extensions);
 
-            $tabContent[$title_id][] = sprintf('<div class="inline field"><label>%s</label>%s</div>',
+            $tabContent[$title_id][] = sprintf('<div class="inline field"><label class="left floated">%s</label>%s</div>',
                 appoencode($info[0]),
                 $result
             );
@@ -439,7 +439,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 }
             }
 
-            return '<div class="right floated">'.$input.'</div>';
+            return '<div class="left floated">'.$input.'</div><br clear="all">';
         break;
         case 'datelength':
             // However, there was a bug with your translation code wiping
