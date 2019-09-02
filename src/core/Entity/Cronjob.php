@@ -26,7 +26,7 @@ class Cronjob
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false, options={"collation": "utf8_general_ci"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
@@ -270,7 +270,7 @@ class Cronjob
      */
     public function setMaxruntime($maxruntime)
     {
-        $this->maxruntime = $maxruntime;
+        $this->maxruntime = '' == $maxruntime ? null : $maxruntime;
 
         return $this;
     }
@@ -294,7 +294,7 @@ class Cronjob
      */
     public function setSmtphost($smtphost)
     {
-        $this->smtphost = $smtphost;
+        $this->smtphost = '' == $smtphost ? null : $smtphost;
 
         return $this;
     }
@@ -318,7 +318,7 @@ class Cronjob
      */
     public function setSmtpport($smtpport)
     {
-        $this->smtpport = $smtpport;
+        $this->smtpport = '' == $smtpport ? null : $smtpport;
 
         return $this;
     }
@@ -342,7 +342,7 @@ class Cronjob
      */
     public function setSmtpusername($smtpusername)
     {
-        $this->smtpusername = $smtpusername;
+        $this->smtpusername = '' == $smtpusername ? null : $smtpusername;
 
         return $this;
     }
@@ -366,7 +366,7 @@ class Cronjob
      */
     public function setSmtppassword($smtppassword)
     {
-        $this->smtppassword = $smtppassword;
+        $this->smtppassword = '' == $smtppassword ? null : $smtppassword;
 
         return $this;
     }
@@ -438,7 +438,7 @@ class Cronjob
      */
     public function setSmtpsecurity($smtpsecurity)
     {
-        $this->smtpsecurity = $smtpsecurity;
+        $this->smtpsecurity = '' == $smtpsecurity ? null : $smtpsecurity;
 
         return $this;
     }
@@ -462,7 +462,7 @@ class Cronjob
      */
     public function setRunas($runas)
     {
-        $this->runas = $runas;
+        $this->runas = '' == $runas ? null : $runas;
 
         return $this;
     }
@@ -486,7 +486,7 @@ class Cronjob
      */
     public function setEnvironment($environment)
     {
-        $this->environment = $environment;
+        $this->environment = '' == $environment ? null : $environment;
 
         return $this;
     }
@@ -510,7 +510,7 @@ class Cronjob
      */
     public function setRunonhost($runonhost)
     {
-        $this->runonhost = $runonhost;
+        $this->runonhost = '' == $runonhost ? null : $runonhost;
 
         return $this;
     }
@@ -534,7 +534,7 @@ class Cronjob
      */
     public function setOutput($output)
     {
-        $this->output = $output;
+        $this->output = '' == $output ? null : $output;
 
         return $this;
     }
@@ -606,7 +606,7 @@ class Cronjob
      */
     public function setHaltdir($haltdir)
     {
-        $this->haltdir = $haltdir;
+        $this->haltdir = '' == $haltdir ? null : $haltdir;
 
         return $this;
     }

@@ -12,7 +12,6 @@ $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
 if ('savecronjob' == $op)
 {
     $post = \LotgdHttp::getPostAll();
-    $post = array_filter($post);
 
     //-- NAME - only accept alphabetic characters and digits in the unicode "letter" and "number" categories, respectively
     $filter = new \Zend\I18n\Filter\Alnum();
