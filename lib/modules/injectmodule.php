@@ -110,6 +110,7 @@ function injectmodule($modulename, $force = false)
                 $row = $repository->hydrateEntity($info, $row);
                 $row->setFilemoddate($filemoddate);
                 $row->setModuleauthor($info['author']);
+                $row->setFormalname($info['name']);
 
                 \Doctrine::persist($row);
                 \Doctrine::flush();
