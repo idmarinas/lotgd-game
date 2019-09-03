@@ -16,6 +16,7 @@
         "ext-mbstring": "*",
         "ext-session": "*",
         "beberlei/doctrineextensions": "^1.2",
+        "cocur/slugify": "^3.2",
         "composer/semver": "^1.5",
         "doctrine/orm": "^2.6",
         "ezyang/htmlpurifier": "^4.10",
