@@ -208,4 +208,18 @@ class Sanitize
 
         return str_replace(chr(1).chr(1), '`', $string);
     }
+
+    /**
+     * Converts a string into a slug.
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    public function slugify(string $string): string
+    {
+        $slugify = new \Cocur\Slugify\Slugify();
+
+        return $slugify->slugify($string);
+    }
 }
