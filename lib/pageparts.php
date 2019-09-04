@@ -290,7 +290,8 @@ function page_footer($saveuser = true)
     //-- Finalize output
     $lotgdJaxon->processRequest();
 
-    $html['csshead'] = $lotgdJaxon->getCss();
+    $html['csshead'] = $html['csshead'] ?? '';
+    $html['csshead'] .= $lotgdJaxon->getCss();
     $html['scripthead'] .= $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
