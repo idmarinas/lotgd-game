@@ -43,11 +43,14 @@
         {% if comment.command != 'game' %}
             {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
             {% set mailLink = ('mail.php?op=write&to=' ~ comment.author)|lotgd_url %}
+            {% set bioLabel = 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') %}
+            {% set mailLabel = 'form.button.mail'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') %}
+
             <div class="actions">
-                <a class="ui mini blue icon button" aria-label="{{ 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ bioLink }}">
+                <a class="ui mini blue icon button" aria-label="{{ bioLabel }}" data-tooltip="{{ bioLabel }}" href="{{ bioLink }}">
                     <i class="user icon"></i>
                 </a>
-                <a class="ui mini blue icon button" aria-label="{{ 'form.button.mail'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') }}" href="{{ mailLink }}" onclick="Lotgd.embed(this)">
+                <a class="ui mini blue icon button" aria-label="{{ mailLabel }}" data-tooltip="{{ mailLabel }}" href="{{ mailLink }}" onclick="Lotgd.embed(this)">
                     <i class="mail icon"></i>
                 </a>
             </div>
