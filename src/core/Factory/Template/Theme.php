@@ -23,7 +23,8 @@ class Theme implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $container->get('GameConfig')['lotgd_core'] ?? [];
+        $config = $container->get('GameConfig');
+        $options = $config['lotgd_core'] ?? [];
         $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'data/cache/', '/');
 
         $template = new TemplateTheme([], [
@@ -45,6 +46,22 @@ class Theme implements FactoryInterface
 
         //-- Extension of a third party
         $template->addExtension(new \Marek\Twig\ByteUnitsExtension());
+
+        //-- Custom extensions
+        if (isset($config['twig_extensions']) && is_array($config['twig_extensions']))
+        {
+            foreach ($config['twig_extensions'] as $className => $needContainer)
+            {
+                if ($needContainer)
+                {
+                    $template->addExtension(new $className($container));
+                }
+                else
+                {
+                    $template->addExtension(new $className());
+                }
+            }
+        }
 
         //-- Important
         $template->prepareTheme();
