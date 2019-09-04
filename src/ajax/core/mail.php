@@ -18,7 +18,7 @@ class Mail
         $response = new Response();
 
         //-- Do nothing if there is no active session
-        if (! $session['user']['loggedin'])
+        if (! ($session['user']['loggedin'] ?? false))
         {
             return $response;
         }
