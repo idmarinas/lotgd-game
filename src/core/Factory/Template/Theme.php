@@ -48,9 +48,11 @@ class Theme implements FactoryInterface
         $template->addExtension(new \Marek\Twig\ByteUnitsExtension());
 
         //-- Custom extensions
-        if (isset($config['twig_extensions']) && is_array($config['twig_extensions']))
+        $extensions = $config['twig_extensions'] ?? [];
+
+        if (is_array($extensions) && ! empty($extensions))
         {
-            foreach ($config['twig_extensions'] as $className => $needContainer)
+            foreach ($extensions as $className => $needContainer)
             {
                 if ($needContainer)
                 {
