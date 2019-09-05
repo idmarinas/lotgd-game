@@ -53,7 +53,8 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
         'textDomain' => $textDomain
     ];
 
-    $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
+    $script = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script = substr($script, 0, strpos($script, '.'));
 
     if ($script)
     {
@@ -72,7 +73,16 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
             }
 
             $runheaders[$script] = true;
-            modulehook("header-$script");
+
+            modulehook("header-{$script}");
+
+            //-- If the script is runmodule use name of module to module hook
+            if ('runmodule' == $script && ($module = (string) \LotgdHttp::getQuery('module')))
+            {
+                // This modulehook allows you to hook directly into any module without
+                // the need to hook into header-runmodule and then checking for the required module.
+                modulehook("header-{$module}");
+            }
         }
     }
 
@@ -97,15 +107,15 @@ function page_footer($saveuser = true)
     global $output, $html, $nav, $session, $pagestarttime, $nopopups, $lotgdJaxon;
 
     //page footer module hooks
-    $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
+    $script = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script = substr($script, 0, strpos($script, '.'));
     $replacementbits = modulehook("footer-$script", []);
 
-    if ('runmodule' == $script && ($module = httpget('module')) > '')
+    if ('runmodule' == $script && ($module = (string) \LotgdHttp::getQuery('module')))
     {
         // This modulehook allows you to hook directly into any module without
-        // the need to hook into footer-runmodule and then checking for the
-        // required module.
-        modulehook("footer-$module", $replacementbits);
+        // the need to hook into footer-runmodule and then checking for the required module.
+        $replacementbits = modulehook("footer-{$module}", $replacementbits);
     }
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
@@ -390,7 +400,8 @@ function popup_footer()
     $html['session'] = $session ?? [];
     unset($html['session']['user'], $html['userPost']['password']);
 
-    $html['csshead'] = $lotgdJaxon->getCss();
+    $html['csshead'] = $html['csshead'] ?: '';
+    $html['csshead'] .= $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
