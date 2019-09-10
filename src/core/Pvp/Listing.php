@@ -30,19 +30,22 @@ class Listing
      *
      * @return Paginator
      */
-    public function getPvpList(string $location)
+    public function getPvpList(?string $location = null)
     {
         $qr = clone $this->getQuery();
 
-        $qr->andWhere('u.location = :loc')
-
-            ->orderBy('u.location', 'DESC')
+        $qr->orderBy('u.location', 'DESC')
             ->addOrderBy('u.level', 'DESC')
             ->addOrderBy('u.experience', 'DESC')
             ->addOrderBy('u.dragonkills', 'DESC')
-
-            ->setParameter('loc', $location)
         ;
+
+        if ($location)
+        {
+            $qr->andWhere('u.location = :loc')
+                ->setParameter('loc', $location)
+            ;
+        }
 
         return $this->repository->getPaginator($qr);
     }
@@ -54,19 +57,23 @@ class Listing
      *
      * @return array
      */
-    public function getLocationSleepersCount(string $location)
+    public function getLocationSleepersCount(?string $location = null)
     {
         $qr = clone $this->getQuery();
 
         $qr->select('count(u.location) AS sleepers', 'u.location')
-            ->andWhere('u.location != :loc')
 
             ->groupBy('u.location')
 
             ->orderBy('u.location', 'DESC')
-
-            ->setParameter('loc', $location)
         ;
+
+        if ($location)
+        {
+            $qr->andWhere('u.location != :loc')
+                ->setParameter('loc', $location)
+            ;
+        }
 
         return $qr->getQuery()->getResult();
     }
