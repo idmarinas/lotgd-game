@@ -69,7 +69,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
 
     if ($allowspecial)
     {
-        \LotgdNavigation::addHeader('category.special', [ 'hideEmpty' => false ]);
+        \LotgdNavigation::addHeader('category.special', [ 'hiddeEmpty' => false ]);
 
         modulehook('fightnav-specialties', ['script' => $script]);
 

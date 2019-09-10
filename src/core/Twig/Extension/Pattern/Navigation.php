@@ -87,7 +87,7 @@ trait Navigation
      */
     public function createHeader($label, $options): ?string
     {
-        if (! $this->getNavigation()->headerHasNavs($label) && $options['hideEmpty'])
+        if (! $this->getNavigation()->headerHasNavs($label) && $options['hiddeEmpty'])
         {
             return null;
         }

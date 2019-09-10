@@ -101,7 +101,7 @@ class Navigation
         $this->headers[$header] = ArrayUtils::merge([
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
-            'hideEmpty' => true,
+            'hiddeEmpty' => true,
             'attributes' => [
                 'class' => 'navhead'
             ]
@@ -122,7 +122,7 @@ class Navigation
     {
         return $this->addHeader($header, ArrayUtils::merge([
             'translate' => false,
-            'hideEmpty' => true,
+            'hiddeEmpty' => true,
             'attributes' => [
                 'class' => 'navhead'
             ]
