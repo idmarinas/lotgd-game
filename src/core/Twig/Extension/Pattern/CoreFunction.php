@@ -124,6 +124,12 @@ trait CoreFunction
      */
     public function pvpListTable(array $params): string
     {
+        $params['linkBase'] = ($params['linkBase'] ?? 'pvp.php') ?: 'pvp.php';
+        $params['linkExtra'] = ($params['linkExtra'] ?? '?act=attack') ?: '?act=attack';
+
+        $params['linkAttack'] = "{$params['linkBase']}{$params['linkExtra']}";
+        $params['linkAttack'] .= ($params['isInn'] ?? false) ? '&inn=1' : '';
+
         return $this->getTheme()->renderThemeTemplate('parts/pvp-list.twig', $params);
     }
 
