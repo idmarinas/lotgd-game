@@ -28,7 +28,9 @@ trait CoreFunction
      */
     public function pageTitle(array $title)
     {
-        return \LotgdTranslator::t($title['title'], $title['params'], $title['textDomain']);
+        $title = \LotgdTranslator::t($title['title'], $title['params'], $title['textDomain']);
+
+        return \LotgdSanitize::fullSanitize($title);
     }
 
     /**
