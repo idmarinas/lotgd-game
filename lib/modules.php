@@ -225,6 +225,7 @@ function get_module_info($shortname)
     $moduleinfo['version'] = $moduleinfo['version'] ?? '0.0.0';
     $moduleinfo['download'] = $moduleinfo['download'] ?? '';
     $moduleinfo['description'] = $moduleinfo['description'] ?? '';
+    $moduleinfo['modulename'] = $shortname;
 
     $moduleinfo['requires'] = $moduleinfo['requires'] ?? [];
 
