@@ -36,6 +36,21 @@ class Sanitize
     }
 
     /**
+     * Remove all codes that not are suported.
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    public function noLotgdCodes(string $string): string
+    {
+        $codes = \array_merge($this->getOutput()->getColors(), $this->getOutput()->getCodes());
+        $codes = \preg_quote(\implode('', $codes));
+
+        return \preg_replace("/[`´][{$colors}{$codes}]/u", '', $string);
+    }
+
+    /**
      * Full sanitize a string, removed color and codes.
      * All LoTGD codes included (`i `b `c) and others.
      *
