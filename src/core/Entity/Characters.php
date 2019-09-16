@@ -1386,7 +1386,7 @@ class Characters
     /**
      * Set the value of Allowednavs.
      *
-     * @param string allowednavs
+     * @param array allowednavs
      *
      * @return self
      */
@@ -1400,7 +1400,7 @@ class Characters
     /**
      * Get the value of Allowednavs.
      *
-     * @return string
+     * @return array
      */
     public function getAllowednavs()
     {
