@@ -20,6 +20,17 @@ use Twig\Extension\SandboxExtension;
 trait CoreFunction
 {
     /**
+     * Add server name to url query.
+     *
+     * @param string $query
+     *
+     * @return string
+     */
+    public function baseUrl(string $query): string
+    {
+        return \sprintf('//%s/%s', \LotgdHttp::getServer('SERVER_NAME'), $query);
+    }
+    /**
      * Translate a title of page.
      *
      * @param array $title

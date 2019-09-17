@@ -71,6 +71,8 @@ class GameCore extends AbstractExtension
     public function getFunctions()
     {
         return [
+            new TwigFunction('url', [$this, 'baseUrl']),
+
             new TwigFunction('getsetting', [$this, 'getsetting']),
             new TwigFunction('modulehook', [$this, 'modulehook']),
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
