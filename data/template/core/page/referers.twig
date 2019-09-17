@@ -3,20 +3,20 @@
 <table class="ui structured very compact striped table">
     <thead>
         <tr>
-            <th>{{ 'table.thead.count'|t|uncolorize }}</th>
-            <th>{{ 'table.thead.last'|t|uncolorize }}</th>
-            <th>{{ 'table.thead.url'|t|uncolorize }}</th>
-            <th>{{ 'table.thead.dest'|t|uncolorize }}</th>
-            <th>{{ 'table.thead.ip'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.count'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.last'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.url'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.dest'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.ip'|t|uncolorize }}</th>
         </tr>
     </thead>
     {% for site, row in paginator %}
         <thead>
             <tr>
-                <th>{{ row.data.total|numeral }}</th>
-                <th>{{ row.data.recent|relative_date }}</th>
-                <th>{{ site|default('table.tbody.none'|t)|colorize }}</th>
-                <th colspan="2"></th>
+                <th scope="col">{{ row.data.total|numeral }}</th>
+                <th scope="col" class="collapsing">{{ row.data.recent|relative_date }}</th>
+                <th scope="col">{{ site|default('table.tbody.none'|t)|colorize }}</th>
+                <th scope="col" colspan="2"></th>
             </tr>
         </thead>
         <tbody>
