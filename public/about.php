@@ -128,7 +128,7 @@ else
     LotgdNavigation::blockLink('about.php');
 
     $results = modulehook('about', []);
-    if(is_array($result) && count($results))
+    if(is_array($results) && count($results))
     {
         $params['hookAbout'] = $results;
     }
