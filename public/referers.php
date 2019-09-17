@@ -73,7 +73,7 @@ page_header('title', [], $textDomain);
 $query = $repository->createQueryBuilder('u');
 
 $result = $query->select('u')
-    ->addSelect('(SELECT sum(c.count) FROM LotgdCore:Referers c GROUP BY c.site) AS total', '(SELECT max(a.last) FROM LotgdCore:Referers a GROUP BY a.site) as recent')
+    ->addSelect('(SELECT sum(c.count) FROM LotgdCore:Referers c GROUP BY u.site) AS total', '(SELECT max(a.last) FROM LotgdCore:Referers a GROUP BY u.site) as recent')
     ->orderBy('u.site', 'ASC')
     ->addOrderBy("u.{$sort}", $ascDesc)
     ->setMaxResults(250)
