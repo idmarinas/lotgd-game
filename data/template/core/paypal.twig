@@ -10,7 +10,7 @@
     <tr>
         <td class="center aligned">
             {% if author.register_logdnet %}
-                <script language="JavaScript" src="{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(author.c, author.l, author.v, author.a, author.d, author.e, author.u) }}"></script>
+                <img src="{{ 'images/logdnet.php?op=register&c=%s&l=%s&v=%s&a=%s&d=%s&e=%s&u=%s'|format(author.c, author.l, author.v, author.a, author.d, author.e, author.u) }}" alt="Donate to Eric Stevens">
             {% else %}
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
                     <input type="hidden" name="cmd" value="_xclick">
