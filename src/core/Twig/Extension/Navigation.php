@@ -15,9 +15,9 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
 use Lotgd\Core\Navigation\Navigation as CoreNavigation;
+use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\Pattern\Container;
 use Lotgd\Core\ServiceManager;
-use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
