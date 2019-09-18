@@ -180,7 +180,7 @@ function module_display_events($eventtype, $forcescript = false)
         $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
     }
 
-    $events = module_collect_events($eventtype, true);
+    $events = module_collect_events($eventtype, false); //-- To avoid conflicts not allow inactive modules
 
     if (! is_array($events) || ! count($events))
     {
