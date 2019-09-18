@@ -417,6 +417,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   :warning: _Important_ This is a very large update, which is going to require a lot of changes.
     -   All the old translation functions are present, but they may not work as expected. These functions issue an obsolete function warning message.
     -   All pages are changed to use new Translation and Template system.
+    -   **TIP:** Before upgrading to version 4.0.0, deactivate all modules, then on the installation screen mark modules to install modules that are upgraded for this version.
 -   **DB::** Now Lotgd Core use Doctrine to access DB. 98% (or so) of code that use this class, now use Doctrine.
 -   **Optimization** Some files are optimized for maintainability using sugestions of _Code Climate_
 -   **Gulp** GulpJs is updated from version `3.9.1` to `4.0.0`
