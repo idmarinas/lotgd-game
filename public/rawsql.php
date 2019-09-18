@@ -47,7 +47,7 @@ if ('' == $op || 'sql' == $op)
         {
             DB::query($sql, false);
 
-            $error = DB::errorInfo();
+            $error = DB::error();
 
             if ($error)
             {
@@ -56,7 +56,7 @@ if ('' == $op || 'sql' == $op)
         }
         catch (\Throwable $th)
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.sql.error.th', [ 'error' => $ex->getMessage() ], $textDomain));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.sql.error.th', [ 'error' => $th->getMessage() ], $textDomain));
         }
     }
 }
