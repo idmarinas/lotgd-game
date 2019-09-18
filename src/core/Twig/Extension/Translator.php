@@ -58,7 +58,7 @@ class Translator extends AbstractExtension
     public function getTokenParsers()
     {
         return [
-            /*
+            /**
              * @param string
              * {% translate_default_domain 'foobar' %}
              */
@@ -73,7 +73,7 @@ class Translator extends AbstractExtension
     {
         return [
             new TwigFilter('t', [$this, 'translate']),
-            /*
+            /**
              * Use "tl" when you want to change domain to translate a text.
              * Only need if you use "translate_default_domain" in template.
              */
