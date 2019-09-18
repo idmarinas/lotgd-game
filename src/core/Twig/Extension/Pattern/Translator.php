@@ -50,4 +50,14 @@ trait Translator
     {
         return $this->getTranslator()->mf($message, $parameters, $locale);
     }
+
+    /**
+     * Get locale for translator.
+     *
+     * @return string
+     */
+    public function translatorDefaultLocale(): string
+    {
+        return $this->getTranslator()->getLocale();
+    }
 }

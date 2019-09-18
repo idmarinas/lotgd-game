@@ -15,12 +15,12 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
-use Lotgd\Core\Translator\Translator as CoreTranslator;
 use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
 use Lotgd\Core\Twig\NodeVisitor\TranslatorNodeVisitor;
 use Lotgd\Core\Twig\TokenParser\TranslatorDefaultDomainTokenParser;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class Translator extends AbstractExtension
 {
@@ -58,7 +58,7 @@ class Translator extends AbstractExtension
     public function getTokenParsers()
     {
         return [
-            /**
+            /*
              * @param string
              * {% translate_default_domain 'foobar' %}
              */
@@ -82,6 +82,16 @@ class Translator extends AbstractExtension
              * Use MessageFormatter to formater message.
              */
             new TwigFilter('tmf', [$this, 'translateMf']),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('translator_locale', [$this, 'translatorDefaultLocale'])
         ];
     }
 
