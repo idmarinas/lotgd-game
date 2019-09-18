@@ -26,6 +26,7 @@ class Navigation extends AbstractExtension
     use Container;
     use Pattern\AttributesString;
     use Pattern\Navigation;
+    use PatternCore\Translator;
 
     protected $navigation;
     protected $translator;
@@ -80,21 +81,6 @@ class Navigation extends AbstractExtension
         }
 
         return $this->accesskeys;
-    }
-
-    /**
-     * Get Translator instance.
-     *
-     * @return CoreTranslator
-     */
-    public function getTranslator(): CoreTranslator
-    {
-        if (! $this->translator instanceof CoreTranslator)
-        {
-            $this->translator = $this->getContainer(CoreTranslator::class);
-        }
-
-        return $this->translator;
     }
 
     /**
