@@ -17,9 +17,9 @@ use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Twig\NodeVisitor\{
     TranslatorDefaultDomainNodeVisitor,
-    TranslatorNodeVisitor,
-    TranslatorDefaultDomainTokenParser
+    TranslatorNodeVisitor
 };
+use Lotgd\Core\Twig\TokenParser\TranslatorDefaultDomainTokenParser;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
