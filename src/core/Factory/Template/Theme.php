@@ -50,18 +50,11 @@ class Theme implements FactoryInterface
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
 
-        if (is_array($extensions) && ! empty($extensions))
+        if (! empty($extensions) && is_array($extensions))
         {
-            foreach ($extensions as $className => $needContainer)
+            foreach ($extensions as $className)
             {
-                if ($needContainer)
-                {
-                    $template->addExtension(new $className($container));
-                }
-                else
-                {
-                    $template->addExtension(new $className());
-                }
+                $template->addExtension(new $className($container));
             }
         }
 
