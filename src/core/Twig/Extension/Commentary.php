@@ -32,7 +32,6 @@ use Lotgd\Core\Twig\TokenParser\{
     CommentaryDefaultPaginationTokenParser,
     CommentaryDefaultPaginationUrlTokenParser
 };
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension

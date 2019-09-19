@@ -18,7 +18,6 @@ use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\Pattern\Container;
 use Lotgd\Core\ServiceManager;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension

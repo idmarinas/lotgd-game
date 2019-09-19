@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\TwigTest;

@@ -17,7 +17,6 @@ use Lotgd\Core\EntityRepository\MotdRepository;
 use Lotgd\Core\Pattern\Container;
 use Lotgd\Core\Pattern\Repository;
 use Lotgd\Core\ServiceManager;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Motd extends AbstractExtension

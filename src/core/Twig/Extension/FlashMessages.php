@@ -16,7 +16,6 @@ namespace Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension

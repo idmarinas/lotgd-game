@@ -15,10 +15,11 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorNodeVisitor;
-use Lotgd\Core\Twig\TokenParser\TranslatorDefaultDomainTokenParser;
-use Twig\Extension\AbstractExtension;
+use Lotgd\Core\Twig\NodeVisitor\{
+    TranslatorDefaultDomainNodeVisitor,
+    TranslatorNodeVisitor,
+    TranslatorDefaultDomainTokenParser
+};
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
