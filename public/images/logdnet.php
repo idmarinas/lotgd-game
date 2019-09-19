@@ -36,23 +36,20 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
             $info = base64_decode(join('', $info));
             $_SESSION['logdnet'] = unserialize($info);
             $_SESSION['logdnet']['when'] = date('Y-m-d H:i:s');
-            $_SESSION['logdnet']['note'] = "\n// registered with logdnet successfully";
-            $_SESSION['logdnet']['note'] .= "\n// ".$url;
+            $_SESSION['logdnet']['note'] = "\n<!-- registered with logdnet successfully -->";
+            $_SESSION['logdnet']['note'] .= "\n<!-- {$url} -->";
         }
         else
         {
             $_SESSION['logdnet']['when'] = date('Y-m-d H:i:s');
-            $_SESSION['logdnet']['note'] = "\n// There was trouble registering on logdnet.";
-            $_SESSION['logdnet']['note'] .= "\n// ".$url;
+            $_SESSION['logdnet']['note'] = "\n<!-- There was trouble registering on logdnet. -->";
+            $_SESSION['logdnet']['note'] .= "\n<!-- {$url} -->";
         }
     }
 
     if (false !== $info)
     {
-        $o = addslashes($_SESSION['logdnet']['']);
-        $o = str_replace("\n\r", "\n", $o);
-        $o = str_replace("\r", "\n", $o);
-        $o = str_replace("\n", '\\n', $o);
+        $o = $_SESSION['logdnet'][''];
         $refer = '';
 
         if (isset($_SERVER['HTTP_REFERER']))
@@ -63,7 +60,7 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
         if (isset($_SESSION['session']['user']))
         {
             echo $_SESSION['logdnet']['note']."\n";
-            echo "// At {$_SESSION['logdnet']['when']}\n";
+            echo "<!-- At {$_SESSION['logdnet']['when']} -->\n";
 
             echo sprintf($o,\preg_replace('/[`´]./u', '', $_SESSION['session']['user']['login']), htmlentities($_SESSION['session']['user']['login']).':'.$_SERVER['HTTP_HOST'].$refer, ENT_COMPAT, 'ISO-8859-1');
 
