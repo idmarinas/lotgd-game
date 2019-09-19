@@ -32,12 +32,7 @@ function e_rand($min = null, $max = null): int
     }
     $max = round($max);
 
-    if ($min > $max)
-    {
-        return mt_rand($max, $min);
-    }
-
-    return mt_rand($min, $max);
+    return mt_rand(min($min, $max), max($min, $max));
 }
 
 /**
