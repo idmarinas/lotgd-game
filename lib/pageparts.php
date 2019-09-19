@@ -195,7 +195,7 @@ function page_footer($saveuser = true)
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
-    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
+    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').'/'.LotgdHttp::getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
@@ -213,7 +213,7 @@ function page_footer($saveuser = true)
         $l = getsetting('defaultlanguage', 'en');
         $d = getsetting('serverdesc', 'Another LoGD Server');
         $e = getsetting('gameadminemail', 'postmaster@localhost.com');
-        $u = getsetting('logdnetserver', 'http://logdnet.logd.com/');
+        $u = getsetting('logdnetserver', 'http://lotgd.net');
 
         if (! preg_match("/\/$/", $u))
         {
