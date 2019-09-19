@@ -627,7 +627,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
     if ($candie)
     {
-        \LotgdNavigation::addNav('nav.news', 'news.php');
+        \LotgdNavigation::addNav('battle.nav.news', 'news.php');
 
         $session['user']['alive'] = false;
         $session['user']['hitpoints'] = 0;
@@ -635,7 +635,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
     }
     elseif (false === $forest)
     {
-        \LotgdNavigation::addNav('nav.graveyard', 'graveyard.php');
+        \LotgdNavigation::addNav('battle.nav.graveyard', 'graveyard.php');
 
         $session['user']['gravefights'] = 0;
         $lotgdBattleContent['battleend'][] = 'combat.end.defeated.tomorrow.graveyard';
