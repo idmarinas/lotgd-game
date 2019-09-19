@@ -1,10 +1,11 @@
 <?php
 
-
 session_start();
 
 if (isset($_GET['op']) && 'register' == $_GET['op'])
 {
+    $info = true;
+
     if (! isset($_SESSION['logdnet']) || ! isset($_SESSION['logdnet']['']) || '' == $_SESSION['logdnet'][''])
     {
         //register with LoGDnet
@@ -27,9 +28,8 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
             '&l='.$l. // primary language of this server -- you may change
                       // this if it turns out to be inaccurate.
             '';
-        require_once '../../lib/pullurl.php';
 
-        $info = @pullurl($url);
+        $info = @file($url);
 
         if (false !== $info)
         {
@@ -45,10 +45,6 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
             $_SESSION['logdnet']['note'] = "\n// There was trouble registering on logdnet.";
             $_SESSION['logdnet']['note'] .= "\n// ".$url;
         }
-    }
-    else
-    {
-        $info = true;
     }
 
     if (false !== $info)
@@ -69,36 +65,23 @@ if (isset($_GET['op']) && 'register' == $_GET['op'])
             echo $_SESSION['logdnet']['note']."\n";
             echo "// At {$_SESSION['logdnet']['when']}\n";
 
-            echo 'document.write("'.sprintf($o,\preg_replace('/[`´]./u', '', $_SESSION['session']['user']['login']),
-                        htmlentities($_SESSION['session']['user']['login']).':'.$_SERVER['HTTP_HOST'].$refer, ENT_COMPAT, 'ISO-8859-1').'");';
+            echo sprintf($o,\preg_replace('/[`´]./u', '', $_SESSION['session']['user']['login']), htmlentities($_SESSION['session']['user']['login']).':'.$_SERVER['HTTP_HOST'].$refer, ENT_COMPAT, 'ISO-8859-1');
+
+            exit;
         }
-        else
-        {
-            $image = join('', file('paypal1.gif'));
-            header('Content-Type: image/gif');
-            header('Content-Length: '.strlen($image));
-            echo $image;
-        }
-    }
-    else
-    {
-        // We failed to connect to central, just use our local image!
-        $image = join('', file('paypal1.gif'));
-        header('Content-Type: image/gif');
-        header('Content-Length: '.strlen($image));
-        echo $image;
     }
 }
 elseif (isset($_SESSION['logdnet']))
 {
+    var_export($_SESSION['logdnet']);
     header('Content-Type: '.$_SESSION['logdnet']['content-type']);
     header('Content-Length: '.strlen($_SESSION['logdnet']['image']));
     echo $_SESSION['logdnet']['image'];
+
+    exit;
 }
-else
-{
-    $image = join('', file('paypal1.gif'));
-    header('Content-Type: image/gif');
-    header('Content-Length: '.strlen($image));
-    echo $image;
-}
+
+$image = join('', file('paypal1.gif'));
+header('Content-Type: image/gif');
+header('Content-Length: '.strlen($image));
+echo $image;
