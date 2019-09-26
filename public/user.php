@@ -180,8 +180,7 @@ elseif ('special' == $op)
     \Doctrine::persist($accountEntity);
     \Doctrine::flush();
 
-    $op = 'edit';
-    \LotgdHttp::setQuery('op', 'edit');
+    return redirect("user.php?op=edit&userid={$userId}");
 }
 elseif ('save' == $op)
 {
