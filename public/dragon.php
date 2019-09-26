@@ -246,13 +246,15 @@ if ($battle)
             'battle.end.victory.slain',
             [
                 'creatureName' => $badguy['creaturename']
-            ]
+            ],
+            $textDomain
         ];
         $lotgdBattleContent['battleend'][] = [
-            'battle.end.victory.blow.',
+            'battle.end.victory.blow',
             [
                 'creatureName' => $badguy['creaturename']
-            ]
+            ],
+            $textDomain
         ];
 
         addnews('battle.victory.news.slain', [
