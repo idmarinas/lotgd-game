@@ -22,7 +22,7 @@ function checkban($login = false)
     else
     {
         $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-        $result = $repository->findBy([ 'login' => $login ]);
+        $result = $repository->extractEntity($repository->findOneBy([ 'login' => $login ]));
 
         if ($result['banoverride'] || ($result['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
         {
