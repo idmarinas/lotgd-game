@@ -39,6 +39,10 @@ function lotgd_mail($to, $subject, $message, $additional_headers = '', $addition
         $message = LotgdTheme::renderThemeTemplate('mail.twig', $data);
         unset($data);
     }
+    else
+    {
+        $message = str_replace('<br>', "\r\n", $message);
+    }
 
     return mail($to, $subject, $message, $additional_headers.implode("\r\n", $headers), $additional_parameters);
 }
