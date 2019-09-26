@@ -28,6 +28,7 @@ class GameCore extends AbstractExtension
     use PatternCore\Translator;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
+    use Pattern\CharacterFunction;
     use Pattern\Mail;
     use Pattern\News;
     use Pattern\PageGen;
@@ -93,6 +94,11 @@ class GameCore extends AbstractExtension
             new TwigFunction('pvp_list_table', [$this, 'pvpListTable']),
             new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers']),
 
+
+            //-- Character functions
+            new TwigFunction('character_race', [$this, 'characterRace']),
+
+            //-- Other functions
             new TwigFunction('var_dump', [$this, 'varDump']),
             new TwigFunction('bdump', [$this, 'bdump']),
 
