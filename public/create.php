@@ -87,9 +87,9 @@ elseif ('val' == $op)
 {
     $code = \LotgdHttp::getQuery('id', 0);
 
-    $account = $accountRepo->findOneBy(['forgottenpassword' => $forgottenCode]);
+    $account = $accountRepo->findOneBy(['emailvalidation' => $code]);
 
-    if (! $result)
+    if (! $account)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $textDomain));
 
@@ -143,10 +143,10 @@ elseif ('val' == $op)
     //-- Delete code of email validation
     $account->setEmailvalidation('');
 
-    \Doctrine::flush(); //-- Persist objects
-
     //-- Save
     \Doctrine::merge($account);
+
+    \Doctrine::flush(); //-- Persist objects
 
     $params['account'] = $account;
 
@@ -383,11 +383,11 @@ elseif ('create' == $op)
         {
             $subj = \LotgdTranslator::t('verificationmail.subject', [], 'app-mail');
             $msg = \LotgdTranslator::t('verificationmail.body', [
-                '{login}' => $shortname,
-                '{acctid}' => $accountEntity->getAcctid(),
-                '{emailaddress}' => $accountEntity->getEmailaddress(),
-                '{gameurl}' => '//'.(\LotgdHttp::getServer('SERVER_NAME').\LotgdHttp::getServer('SCRIPT_NAME')),
-                '{validationid}' => $emailverification,
+                'login' => $shortname,
+                'acctid' => $accountEntity->getAcctid(),
+                'emailaddress' => $accountEntity->getEmailaddress(),
+                'gameurl' => 'https://'.(\LotgdHttp::getServer('SERVER_NAME').'/'.\LotgdHttp::getServer('SCRIPT_NAME')),
+                'validationid' => $emailverification,
             ], 'app-mail');
 
             lotgd_mail($email, $subj, appoencode($msg, true));
