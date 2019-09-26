@@ -1,9 +1,9 @@
 {% translate_default_domain textDomain %}
 
 <form action="{{ ('user.php?op=special&userid=' ~ userId ~ returnPetition)|lotgd_url }}" method="POST" class="ui form">
-    <button type="submit" class="ui button" name="newday">{{ 'section.edit.form.button.submit.newday'|t|uncolorize }}</button>
-    <button type="submit" class="ui button" name="fixnavs">{{ 'section.edit.form.button.submit.fixnavs'|t|uncolorize }}</button>
-    <button type="submit" class="ui button" name="clearvalidation">{{ 'section.edit.form.button.submit.clearvalidation'|t|uncolorize }}</button>
+    <button type="submit" class="ui button" name="newday" value="1">{{ 'section.edit.form.button.submit.newday'|t|uncolorize }}</button>
+    <button type="submit" class="ui button" name="fixnavs" value="1">{{ 'section.edit.form.button.submit.fixnavs'|t|uncolorize }}</button>
+    <button type="submit" class="ui button" name="clearvalidation" value="1">{{ 'section.edit.form.button.submit.clearvalidation'|t|uncolorize }}</button>
 </form>
 
 <br>
