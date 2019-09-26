@@ -166,9 +166,13 @@ elseif ('special' == $op)
     }
     elseif ('' != \LotgdHttp::getPost('fixnavs'))
     {
-        $accountEntity->setAllowednavs([])
+        $character = $accountEntity->getCharacter();
+        $character->setAllowednavs([])
             ->setSpecialinc('')
         ;
+        $accountEntity->setCharacter($character);
+
+        \Doctrine::persist($character);
         $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
         $outputRepository->deleteOutputOfAccount($userId);
     }
