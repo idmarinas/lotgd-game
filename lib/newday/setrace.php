@@ -14,7 +14,7 @@ if ('' != $setrace)
 }
 else
 {
-    \LotgdFlashMessage::addInfoMessage(\LotgdTranslator::t('flash.message.choose.race', [], $textDomain));
+    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.choose.race', [], $textDomain));
     modulehook('chooserace');
 }
 
