@@ -99,9 +99,7 @@ function get_dk_title($dks, $gender, $ref = false)
     // any titles available at that level.  We will prefer titles that
     // match the ref if possible.
     $query = $repository->createQueryBuilder('u');
-    $query
-        ->select('max(u.dk)')
-        ->where('u.dk = :dk')
+    $query->where('u.dk = :dk')
         ->orderBy('rand()')
 
         ->setParameter('dk', $targetdk)
@@ -114,17 +112,20 @@ function get_dk_title($dks, $gender, $ref = false)
         ;
     }
 
-    $row = $query->getQuery()->getResult();
+    $row = $query->getQuery()->getSingleResult();
 
     if (! $row)
     {
-        $row = ['male' => 'God', 'female' => 'Goddess'];
+        $row = new \Lotgd\Core\Entity\Titles();
+        $row->setFemale('Goddess')
+            ->setMale('God')
+        ;
     }
 
     if (SEX_FEMALE == $gender)
     {
-        return $row['female'];
+        return (string) $row->getFemale();
     }
 
-    return $row['male'];
+    return (string) $row->getMale();
 }
