@@ -29,6 +29,8 @@ $params = [
     'clanOwnerName' => getsetting('clanregistrar', '`%Karissa`0'),
     'costGold' => $costGold,
     'costGems' => $costGems,
+    'includeTemplatesPre' => [],
+    'includeTemplatesPost' => [],
 ];
 
 //-- Change text domain for navigation
