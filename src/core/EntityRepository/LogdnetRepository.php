@@ -65,7 +65,7 @@ class LogdnetRepository extends DoctrineRepository
             return $query->update($this->_entityName, 'u')
 
                 ->set('u.priority', 'u.priority * 0.99')
-                ->set('u.lastupdate', (new \DateTime('now'))->format(\DateTime::ISO8601))
+                ->set('u.lastupdate', $query->expr()->literal((new \DateTime('now'))->format(\DateTime::ISO8601)))
 
                 ->where('u.lastupdate < :date')
                 ->setParameter('date', $date)
