@@ -13,11 +13,14 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
 use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 
 class AbstractExtension extends AbstractExtensionCore
 {
+    use PatternCore\Container;
+
     /**
      * @param ServiceManager $serviceManager
      */
