@@ -5,7 +5,6 @@
         {{ 'section.view.write'|t|uncolorize }}
     </a>
 </div>
-{# rawoutput('<a href="mail.php?op=write&to='.rawurlencode($row['login']).'&body='.rawurlencode("\n\n----- $yourpeti -----\n$reppet")."&subject=RE:+$peti\" target=\"_blank\" onClick=\"Lotgd.embed(this)\"><img src='images/newscroll.GIF' width='16' height='16' alt='$write' border='0'></a>"); #}
 
 <h2>{{ 'section.view.category'|t({ 'category': petition.body.problem_type })|colorize }}</h2>
 
