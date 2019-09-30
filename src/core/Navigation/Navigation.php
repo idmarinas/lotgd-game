@@ -22,6 +22,7 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Navigation
 {
+    use Pattern\CustomClass;
     use Pattern\Links;
 
     /**
@@ -103,7 +104,7 @@ class Navigation
             'textDomain' => $this->getTextDomain(),
             'hiddeEmpty' => true,
             'attributes' => [
-                'class' => 'navhead'
+                'class' => $this->getClassHeader()
             ]
         ], $options);
         $this->lastHeader = $header;
@@ -124,7 +125,7 @@ class Navigation
             'translate' => false,
             'hiddeEmpty' => true,
             'attributes' => [
-                'class' => 'navhead'
+                'class' => $this->getClassHeader()
             ]
         ], $options));
     }
@@ -142,7 +143,7 @@ class Navigation
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
             'attributes'=> [
-                'class' => 'nav'
+                'class' => $this->getClassNav()
             ]
         ], $options));
     }
@@ -162,7 +163,7 @@ class Navigation
             'extraParamLink' => false,
             'textDomain' => $this->getTextDomain(),
             'attributes'=> [
-                'class' => 'nav',
+                'class' => $this->getClassNav(),
                 'target' => '_blank',
                 'rel' => 'noopener noreferrer'
             ]
@@ -181,7 +182,7 @@ class Navigation
         return $this->addItem($label, $link, ArrayUtils::merge([
             'translate' => false,
             'attributes'=> [
-                'class' => 'nav'
+                'class' => $this->getClassNav()
             ]
         ], $options));
     }
@@ -417,7 +418,7 @@ class Navigation
             return $this->addHeader($label, ArrayUtils::merge($options,
                 [
                     'attributes'=> [ //-- To prevent a header from having the class of a navigation menu.
-                        'class' => 'navhead' //-- This will overwrite the custom class.
+                        'class' => $this->getClassHeader() //-- This will overwrite the custom class.
                     ]
                 ]
             ));

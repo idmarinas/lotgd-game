@@ -21,7 +21,7 @@ return [
             //-- Added in version 4.0.0
             Lotgd\Core\Component\FlashMessages::class => Factory\Component\FlashMessages::class,
             Lotgd\Core\Installer\Install::class => Factory\Installer\Install::class,
-            Lotgd\Core\Navigation\Navigation::class => InvokableFactory::class,
+            Lotgd\Core\Navigation\Navigation::class => Factory\Navigation\Navigation::class,
             Lotgd\Core\Navigation\AccessKeys::class => InvokableFactory::class,
             Lotgd\Core\Output\Censor::class => Factory\Output\Censor::class,
             Lotgd\Core\Output\Commentary::class => Factory\Output\Commentary::class,
