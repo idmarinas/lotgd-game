@@ -6,7 +6,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="imagetoolbar" content="false" />
 		<meta http-equiv="Window-target" content="_top" />
-		<meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow" />
+        {% block head_theme_meta %}{% endblock %}
 		{{ metahead }}
 
         <title>{{ page_title(title) }}</title>
