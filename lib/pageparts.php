@@ -572,6 +572,8 @@ function charstats($return = true)
             $atk *= ($val['atkmod'] ?? 1);
             $def *= ($val['defmod'] ?? 1);
 
+            $val['name'] = $val['name'] ?? '';
+
             // Short circuit if the name is blank
             if ($val['name'] > '' || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
             {
@@ -596,9 +598,13 @@ function charstats($return = true)
                     $b = sprintf($b, $val['name'], $val['rounds']);
                     $buffs[] = appoencode($b, true);
                 }
-                else
+                elseif ($val['name'])
                 {
                     $buffs[] = appoencode("`#{$val['name']}`0`n", true);
+                }
+                else
+                {
+                    $buffs[] = appoencode("<code>`7{$val['schema']}`0</code>`n", true);
                 }
                 tlschema();
             }
