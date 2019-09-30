@@ -48,6 +48,8 @@ function handle_event($location, $baseLink = false)
             'partial-event'
         ];
 
+        page_header('title.special', [], 'partial-event');
+
         if (strchr($specialinc, ':'))
         {
             $array = explode(':', $specialinc);
