@@ -10,7 +10,7 @@
         {% block head_theme_meta %}{% endblock %}
 		{{ metahead }}
 
-        <title>{{ page_title(title) }}</title>
+        <title>{% block head_theme_title %}{{ page_title(title) }}{% endblock %}</title>
 
 		<link rel="shortcut icon" href="favicon.png" type="image/png" />
         <link href="css/vendor.css" rel="stylesheet" type="text/css" />
