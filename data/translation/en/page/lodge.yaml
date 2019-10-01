@@ -39,7 +39,7 @@ section:
             - '`b`3Purchases that are currently available:`0´b`n'
         messages:
             default: "`7For each {currencySymbol} 1 donated, the account which makes the donation will receive {currencyUnits,number} contributor points in the game (Fractions don't count).`0"
-            desc: '`#&#149;`0`7None -- Please talk to your admin about creating some.`0`n'
+            desc: 'None -- Please talk to your admin about creating some.'
 
 # Commentary
 commentary:

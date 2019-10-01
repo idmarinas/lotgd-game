@@ -18,8 +18,11 @@
 {{ 'section.points.paragraph'|t|colorize }}
 
 {% set result = modulehook('pointsdesc', {}) %}
-{% for message in result %}
-    {{ message[0]|tl(message[1], message[2])|colorize }}
-{% else %}
-    {{ 'section.points.messages.desc'|t|colorize }}
-{% endfor %}
+<ul class="ui ordered list">
+    {% for message in result %}
+        <div class="item">{{ message[0]|tl(message[1], message[2])|colorize }}</div>
+    {% else %}
+        <div class="item">{{ 'section.points.messages.desc'|t|colorize }}</div>
+    {% endfor %}
+</ul>
+
