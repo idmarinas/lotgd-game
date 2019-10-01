@@ -92,6 +92,8 @@ class Listing
             $days = getsetting('pvpimmunity', 5);
             $exp = getsetting('pvpminexp', 1500);
             $levdiff = getsetting('pvprange', 2);
+            $pvpSameId = (bool) getsetting('pvpsameid', 0);
+            $pvpSameIp = (bool) getsetting('pvpsameip', 0);
 
             $this->repository = $this->getDoctrineRepository('LotgdCore:Characters');
             $this->query = $this->repository->createQueryBuilder('u');
@@ -123,6 +125,22 @@ class Listing
                 $this->query->andWhere('u.level >= :lev1 AND u.level <= :lev2')
                     ->setParameter('lev1', $session['user']['level'] - 1)
                     ->setParameter('lev2', $session['user']['level'] + 2)
+                ;
+            }
+
+            //-- Not allow same ID
+            if (! $pvpSameId)
+            {
+                $this->query->andWhere('a.uniqueid != :sameid')
+                    ->setParameter('sameid', $session['user']['uniqueid'])
+                ;
+            }
+
+            //-- Not allow same IP
+            if (! $pvpSameIp)
+            {
+                $this->query->andWhere('a.lastip != :sameip')
+                    ->setParameter('sameip', $session['user']['lastip'])
                 ;
             }
         }

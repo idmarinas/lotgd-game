@@ -227,6 +227,9 @@ return [
     'pvpdeflose' => 'Percent of experience defender loses on loss,floatrange,.25,20,.25',
     'pvphardlimit' => 'Is the maximum amount a successful attacker or defender can gain limited?,bool',
     'pvphardlimitamount' => 'If yes - What is the maximum amount of EXP he can get?,int',
+    'PVP no cheat,note',
+    'pvpsameid' => 'Can players attack others with same ID?,bool|0',
+    'pvpsameip' => 'Can players attack others with same IP?,bool|0',
 
     'Content Expiration,title',
     'expirecontent' => 'Days to keep comments and news?  (0 = infinite),int',
