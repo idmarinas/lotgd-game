@@ -159,6 +159,18 @@ trait CoreFunction
     }
 
     /**
+     * Get cookie name.
+     *
+     * @return string
+     */
+    public function sessionCookieName(): string
+    {
+        $config = $this->getContainer('GameConfig');
+
+        return $config['session_config']['name'] ?? 'PHPSESSID';
+    }
+
+    /**
      * Function to use bdump of Tracy debugger
      *
      * @param mixed $param

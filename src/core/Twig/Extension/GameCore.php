@@ -99,6 +99,7 @@ class GameCore extends AbstractExtension
             new TwigFunction('character_race', [$this, 'characterRace']),
 
             //-- Other functions
+            new TwigFunction('session_cookie_name', [$this, 'sessionCookieName']),
             new TwigFunction('var_dump', [$this, 'varDump']),
             new TwigFunction('bdump', [$this, 'bdump']),
 

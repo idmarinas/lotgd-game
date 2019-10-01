@@ -30,7 +30,7 @@
 		<script>
 			$(document).ready(function(){
 				$.cookieguard();
-				$.cookieguard.cookies.add('PHP Session', 'LegendOfTheGreenDragon', 'This cookie is used to track important logical information for the smooth operation of the site', true);
+				$.cookieguard.cookies.add('PHP Session', '{{ session_cookie_name() }}', 'This cookie is used to track important logical information for the smooth operation of the site', true);
 				$.cookieguard.run();
 		   });
 		</script>
