@@ -56,7 +56,7 @@ function get_player_basename($old = false)
         }
     }
 
-    return str_replace('`0', '', $name);
+    return $name;
 }
 
 function change_player_name($newname, $old = false)
@@ -65,8 +65,6 @@ function change_player_name($newname, $old = false)
     {
         $newname = get_player_basename($old);
     }
-
-    $newname = str_replace('`0', '', $newname);
 
     $title = get_player_title($old);
 
@@ -78,7 +76,7 @@ function change_player_name($newname, $old = false)
         {
             $newname = trim(substr($newname, $x + strlen($title)));
         }
-        $newname = $title.' '.$newname.'`0';
+        $newname = $title.' '.$newname;
     }
 
     return $newname;
