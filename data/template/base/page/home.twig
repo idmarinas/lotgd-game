@@ -35,9 +35,9 @@
 
     {# Show the login form or a full server message #}
     {% if not serverFull %}
-        {% include 'base/page/home/login.twig' %}
+        {{ include_theme('page/home/login.twig') }}
     {% else %}
-        {% include 'base/page/home/serverfull.twig' %}
+        {{ include_theme('page/home/serverfull.twig') }}
     {% endif %}
 
     {# Results messages of hook "homemiddle" #}
@@ -58,7 +58,7 @@
     {% endfor %}
 
     {% if selectSkin %}
-        {% include 'base/page/home/selectskin.twig' with { 'select': selectSkin } %}
+        {{ include_theme('page/home/selectskin.twig', { 'select': selectSkin }) }}
     {% endif %}
 </div>
 
