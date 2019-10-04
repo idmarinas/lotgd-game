@@ -19,6 +19,7 @@ module.exports = {
             '!assets{,/**}',
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
             '!public/docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
+            '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
             '!semantic{,/**}',
             '!node_modules{,/**}',
             '!bower_components{,/**}',
