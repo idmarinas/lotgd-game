@@ -11,9 +11,9 @@
         </div>
     </div>
 {% elseif not allowCreation %}
-    {% include 'base/page/create/account/disabled.twig' %}
+    {{ include_theme('page/create/account/disabled.twig') }}
 {% elseif serverFull %}
-    {% include 'base/page/create/serverfull.twig' %}
+    {{ include_theme('page/create/serverfull.twig') }}
 {% else %}
-    {% include 'base/page/create/account/create.twig' %}
+    {{ include_theme('page/create/account/create.twig') }}
 {% endif %}
