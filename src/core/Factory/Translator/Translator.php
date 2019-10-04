@@ -29,11 +29,12 @@ class Translator implements FactoryInterface
         $translation = $options['lotgd_core']['translation'] ?? [];
 
         //-- Default language is en
-        $language = $translation['locale'][0] ?? 'en';
+        $language = $translation['locale']['language'] ?? 'en';
         //-- Check if the player has set a language.
-        if ($session['user']['prefs']['language'] ?? false)
+        if (($session['user']['loggedin'] ?? false) && ($session['user']['prefs']['language'] ?? false))
         {
             $language = $session['user']['prefs']['language'] ?: 'en';
+            $session['user']['prefs']['language'] = $language;
         }
 
         \Locale::setDefault($language);
