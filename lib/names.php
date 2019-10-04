@@ -97,7 +97,7 @@ function change_player_ctitle($nctitle, $old = false)
             $nctitle = $old['title'];
         }
     }
-    $newname = get_player_basename($old).'`0';
+    $newname = get_player_basename($old);
 
     if ($nctitle)
     {
@@ -120,7 +120,7 @@ function change_player_title($ntitle, $old = false)
         $ctitle = $old['ctitle'];
     }
 
-    $newname = get_player_basename($old).'`0';
+    $newname = get_player_basename($old);
 
     if ('' == $ctitle)
     {
