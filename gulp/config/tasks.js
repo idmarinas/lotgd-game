@@ -9,6 +9,7 @@ var options = Object.assign(env, envOptions, themeOptions)
 
 module.exports = {
     banner: release.banner,
+    version: release.version,
     log: {
         created: function (file)
         {
@@ -34,6 +35,11 @@ module.exports = {
         if (options.env === 'production') return true
         else if (options.env === 'prod') return true
         else return false
+    },
+
+    createRelease: function ()
+    {
+        return Boolean(options.zip)
     },
 
     theme: function ()
