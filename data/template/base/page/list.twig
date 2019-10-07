@@ -1,6 +1,6 @@
 {% translate_default_domain 'page-list' %}
 
-{% if not userPost.loggedin %}
+{% if userPost.loggedin %}
     <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
         <div class="field inline">
             <label for="">{{ 'form.search.label'|t }}</label>
@@ -12,7 +12,7 @@
     </form>
     <br>
 {% endif %}
-<b>{{ title.title|t(title.params)|colorize }}</b>
+<strong>{{ title.title|t(title.params)|colorize }}</strong>
 <br>
 {% set writemail = 'table.opcs.writemail'|t|uncolorize %}
 {% set alive = 'table.opcs.alive'|t|colorize %}
