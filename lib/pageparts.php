@@ -8,7 +8,7 @@
  * @author core_module
  * @author rewritten + adapted by IDMarinas
  */
-global $html;
+global $html, $statbuff;
 
 $nopopups = [];
 $runheaders = [];
