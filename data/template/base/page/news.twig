@@ -2,7 +2,7 @@
 
 {% block lastMotd %}
     {% if lastMotd %}
-        {% include 'base/page/news/last-motd.twig' with { 'motd': lastMotd } %}
+        {{ include_theme('page/news/last-motd.twig', { 'motd': lastMotd }) }}
     {% endif %}
 {% endblock lastMotd %}
 

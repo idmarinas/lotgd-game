@@ -1,11 +1,11 @@
 <div class="ui items segment news-last-motd">
     {% if motd.motdtype %}{# Is a poll #}
         {% block pollItemTpl %}
-            {% include 'base/page/motd/parts/poll.twig' with { 'motd': motd } %}
+            {{ include_theme('base/page/motd/parts/poll.twig', { 'motd': motd }) }}
         {% endblock pollItemTpl %}
     {% else %}
         {% block itemTpl %}
-            {% include 'base/page/motd/parts/item.twig' with { 'motd': motd } %}
+            {{ include_theme('base/page/motd/parts/item.twig', { 'motd': motd }) }}
         {% endblock itemTpl %}
     {% endif %}
 </div>
