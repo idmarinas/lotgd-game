@@ -53,14 +53,17 @@ define([
                 value: '',
                 set (value)
                 {
-                    this.value = String(value)
+                    this.value = value
                 },
 
                 get (param)
                 {
-                    if (param === undefined) param = ''
+                    if (this.value)
+                    {
+                        return this.value
+                    }
 
-                    return String(this.value + param)
+                    return param
                 }
             }
 
