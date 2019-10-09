@@ -34,8 +34,8 @@ $lotgdJaxon->useComposerAutoloader();
 $lotgdJaxon->addClassDir(realpath(__DIR__) . '/../src/ajax/core', 'Lotgd\\Ajax\\Core\\');
 $lotgdJaxon->registerClasses();
 
-//-- Register all custom class (Available globally)
-$lotgdJaxon->addClassDir(realpath(__DIR__) . '/../lotgd/ajax', 'Lotgd\\Ajax\\Local\\');
+//-- Register all custom class (Available globally) in dir "src/ajax/local"
+$lotgdJaxon->addClassDir(realpath(__DIR__) . '/../src/ajax/local', 'Lotgd\\Ajax\\Local\\');
 $lotgdJaxon->registerClasses();
 
 $lotgdJaxon->plugin('dialog')->registerClasses();
