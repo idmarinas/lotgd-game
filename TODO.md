@@ -43,6 +43,7 @@ $session['user']['race'] = 'module-elf';
 
 ## Para la versión 4.1.0
 
+-   Mover las carpetas cache, log, y logd_snapshots a la carpeta storage
 -   Mover archivos de traducción relacionados con la configuración a una carpeta distinta:
     -   de la carpeta `page` la carpeta `configuration` para diferenciar las traducciones.
         -   Igual se puede hacer algo similar con los archivos de navegación. Crear solo uno para la configuración.
