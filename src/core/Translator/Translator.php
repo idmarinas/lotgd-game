@@ -74,8 +74,8 @@ class Translator extends ZendTranslator
 
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
-        //-- Delete all values that are arrays and objects (when use \MessageFormatter::format($params) fail and return false)
-        $parameters = array_filter($parameters, function ($var) { return ! (\is_array($var) || \is_object($var)); });
+        //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
+        $parameters = array_filter($parameters, [$this, 'cleanParameters']);
 
         $formatter = new \MessageFormatter($locale, $message);
 
@@ -105,6 +105,30 @@ class Translator extends ZendTranslator
         $locale = ($locale ?: $this->getLocale());
 
         return parent::translate($message, $textDomain ?? self::TEXT_DOMAIN_DEFAULT, $locale);
+    }
+
+    /**
+     * Clean param of .
+     *
+     * @param mixed $param
+     *
+     * @return bool
+     */
+    protected function cleanParameters($param): bool
+    {
+        $return = false;
+
+        if (
+            \is_string($param) //-- Allow string values
+            || \is_numeric($param) //-- Allow numeric values
+            || \is_bool($param) //-- Allow bool values
+            || \is_null($param) //-- Allow null value (Formatter can handle this value)
+            || $param instanceof \DateTime //-- Allow DateTime object
+        ) {
+            $return = true;
+        }
+
+        return $return;
     }
 
     /**
