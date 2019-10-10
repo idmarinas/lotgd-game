@@ -30,6 +30,7 @@ section:
                 view: 'View'
                 close: 'Close'
                 mark: 'Mark'
+                not.found: 'No one needs assistance, no pettitions have been found.'
         paragraph:
             - '`i(Closed petitions will automatically delete themselves when they have been closed for 7 days)´i'
             - '`n`bKey:´b`n'
