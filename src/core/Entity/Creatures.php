@@ -30,7 +30,7 @@ class Creatures
     /**
      * @var int
      *
-     * @ORM\Column(name="creatureid", type="integer", nullable=false)
+     * @ORM\Column(name="creatureid", type="integer", nullable=false, options={"unsigned": true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
