@@ -2,19 +2,22 @@
 
 namespace Lotgd\Ajax\Core;
 
-class Timeout
+use Lotgd\Core\AjaxAbstract;
+
+class Timeout extends AjaxAbstract
 {
     public function status()
     {
         global $session;
 
-        $response = new \Jaxon\Response\Response();
+        $check = $this->checkLoggedIn();
 
-        //-- Do nothing if there is no active session
-        if (! $session['user']['loggedin'])
+        if (true !== $check)
         {
-            return $response;
+            return $check;
         }
+
+        $response = new \Jaxon\Response\Response();
 
         $timeout = $session['user']['laston']->getTimestamp() - strtotime(date('Y-m-d H:i:s', strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds')));
 

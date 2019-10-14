@@ -2,9 +2,10 @@
 
 namespace Lotgd\Ajax\Core;
 
+use Lotgd\Core\AjaxAbstract;
 use Jaxon\Response\Response;
 
-class Mail
+class Mail extends AjaxAbstract
 {
     /**
      * Check status of inbox.
@@ -15,13 +16,14 @@ class Mail
     {
         global $session;
 
-        $response = new Response();
+        $check = $this->checkLoggedInRedirect();
 
-        //-- Do nothing if there is no active session
-        if (! ($session['user']['loggedin'] ?? false))
+        if (true !== $check)
         {
-            return $response;
+            return $check;
         }
+
+        $response = new Response();
 
         $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
@@ -51,13 +53,14 @@ class Mail
     {
         global $session;
 
-        $response = new Response();
+        $check = $this->checkLoggedInRedirect();
 
-        //-- Do nothing if there is no active session
-        if (! $session['user']['loggedin'])
+        if (true !== $check)
         {
-            return $response;
+            return $check;
         }
+
+        $response = new Response();
 
         $repository = \Doctrine::getRepository('LotgdCore:Mail');
         $delete = $repository->findOneBy([
@@ -96,15 +99,14 @@ class Mail
      */
     public function deleteBulkMail(string $string, string $textDomain): Response
     {
-        global $session;
+        $check = $this->checkLoggedInRedirect();
+
+        if (true !== $check)
+        {
+            return $check;
+        }
 
         $response = new Response();
-
-        //-- Do nothing if there is no active session
-        if (! $session['user']['loggedin'])
-        {
-            return $response;
-        }
 
         $post = [];
         parse_str($string, $post);

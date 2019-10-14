@@ -2,7 +2,9 @@
 
 namespace Lotgd\Ajax\Core;
 
-class Bans
+use Lotgd\Core\AjaxAbstract;
+
+class Bans extends AjaxAbstract
 {
     public function showAffected($ip, $id)
     {

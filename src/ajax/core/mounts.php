@@ -2,18 +2,18 @@
 
 namespace Lotgd\Ajax\Core;
 
+use Lotgd\Core\AjaxAbstract;
 use Jaxon\Response\Response;
 
-class Mounts
+class Mounts extends AjaxAbstract
 {
     public function getListOfOwners(int $mountId)
     {
-        global $session;
+        $check = $this->checkLoggedInRedirect();
 
-        //-- Do nothing if there is no active session
-        if (! $session['user']['loggedin'])
+        if (true !== $check)
         {
-            return $response;
+            return $check;
         }
 
         $response = new Response();
