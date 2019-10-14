@@ -76,12 +76,12 @@ trait Links
     {
         if (isset($this->links[$link]))
         {
-            $this->links[$link] = array_merge($this->links[$link], ['blocked' => false]);
+            $this->links[$link] = array_merge($this->links[$link], ['blocked' => false, 'hide' => false]);
 
             return $this;
         }
 
-        $this->links[$link] = ['blocked' => false];
+        $this->links[$link] = ['blocked' => false, 'hide' => false];
 
         return $this;
     }
@@ -97,12 +97,12 @@ trait Links
     {
         if (isset($this->partialLinks[$link]))
         {
-            $this->partialLinks[$link] = array_merge($this->partialLinks[$link], ['blocked' => true]);
+            $this->partialLinks[$link] = array_merge($this->partialLinks[$link], ['blocked' => true, 'hide' => false]);
 
             return $this;
         }
 
-        $this->partialLinks[$link] = ['blocked' => true];
+        $this->partialLinks[$link] = ['blocked' => true, 'hide' => false];
 
         return $this;
     }
