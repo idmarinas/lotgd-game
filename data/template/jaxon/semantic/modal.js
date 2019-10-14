@@ -16,12 +16,12 @@ jaxon.command.handler.register('semantic.show', function (args)
     }
     jaxon.dialogs.semantic.modalId = modalId
 
-    let options = args.data.options || {}
-    let funcs = ['onApprove', 'onDeny']
+    const options = args.data.options || {}
+    const funcs = ['onApprove', 'onDeny']
 
-    for (let funcId in funcs)
+    for (const funcId in funcs)
     {
-        let func = funcs[funcId]
+        const func = funcs[funcId]
 
         if (options[func])
         {
@@ -31,6 +31,9 @@ jaxon.command.handler.register('semantic.show', function (args)
 
     //-- Create new modal
     jaxon.dialogs.semantic.id++
+
+    //-- Remove old modal if exist
+    $('#modal-' + modalId).remove()
 
     let modal = '<div id="modal-' + modalId + '" class="ui modal"><i class="close icon"></i>'
 
@@ -45,9 +48,9 @@ jaxon.command.handler.register('semantic.show', function (args)
     {
         modal = modal + '<div class="actions">'
 
-        for (let buttonId in args.data.buttons)
+        for (const buttonId in args.data.buttons)
         {
-            let button = args.data.buttons[buttonId]
+            const button = args.data.buttons[buttonId]
 
             modal = modal + '<a class="' + button.class + '">' + button.title + '</a>'
         }
@@ -69,6 +72,7 @@ jaxon.command.handler.register('semantic.hide', function (args)
         // Close an destroy modal
         $(jaxon.dialogs.semantic.modal).modal('hide')
         $('#modal-' + jaxon.dialogs.semantic.id).remove()
+        $('#modal-' + jaxon.dialogs.semantic.modalId).remove()
         delete (jaxon.dialogs.semantic.modal)
     }
 })
