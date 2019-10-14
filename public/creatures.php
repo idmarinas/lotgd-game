@@ -53,6 +53,11 @@ if ('save' == $op)
         $creatureEntity = $repository->find($creatureId);
         $creatureEntity = $repository->hydrateEntity($post, $creatureEntity);
 
+        if ($post['notes'] ?? false)
+        {
+            \LotgdFlashMessages::addInfoMessage($post['notes']);
+        }
+
         \Doctrine::persist($creatureEntity);
         \Doctrine::flush();
 
