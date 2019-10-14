@@ -188,9 +188,6 @@ if (! file_exists('public/lodge.php'))
 //-- Superuser menu
 \LotgdNavigation::superuser();
 
-//-- Restore text domain for navigation
-\LotgdNavigation::setTextDomain();
-
 //special hook for all villages... saves queries...
 modulehook('village');
 
@@ -202,6 +199,9 @@ $params['commentarySection'] = 'village'; //-- Commentary section
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('page/village.twig', $params));
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
 
 module_display_events('village', 'village.php');
 
