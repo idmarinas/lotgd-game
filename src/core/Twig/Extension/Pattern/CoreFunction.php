@@ -192,7 +192,7 @@ trait CoreFunction
      */
     public function varDump($var): string
     {
-        return var_export($var, true);
+        return '<pre>' . var_export($var, true) . '</pre>';
     }
 
     /**
