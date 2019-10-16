@@ -39,7 +39,7 @@ jaxon.command.handler.register('semantic.show', function (args)
 
     if (args.data.title)
     {
-        modal = modal + '<div class="header">' + args.data.title + '</div>'
+        modal = modal + '<div class="ui header">' + args.data.title + '</div>'
     }
 
     modal = modal + '<div class="content">' + args.data.content + '</div>'
