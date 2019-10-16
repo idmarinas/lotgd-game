@@ -35,7 +35,7 @@ jaxon.command.handler.register('semantic.show', function (args)
     //-- Remove old modal if exist
     $('#modal-' + modalId).remove()
 
-    let modal = '<div id="modal-' + modalId + '" class="ui modal"><i class="close icon"></i>'
+    let modal = '<div id="modal-' + modalId + '" class="ui ' + options.classModal + ' modal"><i class="close icon"></i>'
 
     if (args.data.title)
     {
