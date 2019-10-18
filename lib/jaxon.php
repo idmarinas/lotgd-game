@@ -7,6 +7,9 @@ $lotgdJaxon->setOptions([
     'core' => [
         'request' => [
             'uri' => 'jaxon.php'
+        ],
+        'process' => [
+            'exit' => false
         ]
     ],
     'dialogs' => [
@@ -20,9 +23,11 @@ $lotgdJaxon->setOptions([
         'toastr' => [
             'options' => [
                 'progressBar' => true,
-                'newestOnTop' => true,
+                'newestOnTop' => false,
                 'closeButton' => true,
-                'preventDuplicates' => true
+                'preventDuplicates' => true,
+                'timeOut' => 30000,
+                'extendedTimeOut' => 15000
             ]
         ]
     ]
