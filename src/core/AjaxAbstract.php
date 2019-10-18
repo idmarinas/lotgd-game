@@ -17,7 +17,7 @@ use Jaxon\Response\Response;
 
 /**
  * Use this class to add a basic function to your Jaxon request.
- * Check if user have a session
+ * Check if user have a session.
  */
 abstract class AjaxAbstract
 {
@@ -26,7 +26,7 @@ abstract class AjaxAbstract
      *
      * @return true|Response
      */
-    public function checkLoggedIn()
+    protected function checkLoggedIn()
     {
         global $session;
 
@@ -44,7 +44,7 @@ abstract class AjaxAbstract
      *
      * @return true|Redirect
      */
-    public function checkLoggedInRedirect()
+    protected function checkLoggedInRedirect()
     {
         global $session;
 
@@ -59,4 +59,3 @@ abstract class AjaxAbstract
         return true;
     }
 }
-
