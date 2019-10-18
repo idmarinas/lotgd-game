@@ -30,7 +30,7 @@ class Sanitize
      */
     public function unColorize(string $string): string
     {
-        $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
+        $colors = \preg_quote(\implode('', array_keys($this->getOutput()->getColors())));
 
         return \preg_replace("/[`´][0{$colors}]/u", '', $string);
     }
@@ -45,9 +45,9 @@ class Sanitize
     public function noLotgdCodes(string $string): string
     {
         $codes = \array_merge($this->getOutput()->getColors(), $this->getOutput()->getCodes());
-        $codes = \preg_quote(\implode('', $codes));
+        $codes = \preg_quote(\implode('', array_keys($codes)));
 
-        return \preg_replace("/[`´][{$colors}{$codes}]/u", '', $string);
+        return \preg_replace("/[`´][{$codes}]/u", '', $string);
     }
 
     /**
