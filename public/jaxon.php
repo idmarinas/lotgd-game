@@ -6,6 +6,11 @@ require_once 'common.php';
 
 if($lotgdJaxon->canProcessRequest())
 {
-    saveuser();
     $lotgdJaxon->processRequest();
+
+    saveuser();
+
+    $lotgdJaxon->sendResponse();
+
+    exit;
 }
