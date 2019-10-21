@@ -36,7 +36,7 @@ section:
             partial:
                 - '`3With a grimace, you up-end the potion the creature hands you, and despite the foul flavor, you feel a warmth spreading through your veins.'
                 - 'Staggering some you are ready to be out of here.`0'
-            heal: '`n`n`#You have been healed for {heal,plural =1{1 point} other{# points}}!'
+            heal: '`n`n`#You have been healed for {healed,plural, =1{1 point} other{# points}}!'
         unheal:
             - '`3The old creature pierces you with a gaze hard and cruel.`n'
             - 'Your lightning quick reflexes enable you to dodge the blow from its gnarled staff.`n'
