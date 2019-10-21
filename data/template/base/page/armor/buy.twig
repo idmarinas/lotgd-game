@@ -1,3 +1,5 @@
+{% translate_default_domain textDomain %}
+
 {% if result %}
     {% if buyIt %}
         {{ 'payarmor'|t({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}
