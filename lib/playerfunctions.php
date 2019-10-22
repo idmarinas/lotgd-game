@@ -9,7 +9,7 @@ function get_player_hitpoints($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy([ 'acct' => $player ]));
 
         if (! $result)
         {
@@ -39,7 +39,7 @@ function explained_get_player_hitpoints($player = false, $colored = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy([ 'acct' => $player ]));
 
         if (! $result)
         {
@@ -77,7 +77,7 @@ function get_player_attack($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy(['acct' => $player]));
 
         if (! $result)
         {
@@ -107,7 +107,7 @@ function explained_row_get_player_attack($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy([ 'acct' => $player ]));
 
         if (! $result)
         {
@@ -175,7 +175,7 @@ function get_player_defense($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy(['acct' => $player]));
 
         if (! $result)
         {
@@ -203,7 +203,7 @@ function explained_row_get_player_defense($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy(['acct' => $player]));
+        $result = $repository->extractEntity($repository->findOneBy(['acct' => $player]));
 
         if (! $result)
         {
@@ -293,7 +293,7 @@ function get_player_physical_resistance($player = false)
     if ($player)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $result = $repository->extractEntity($repository->findBy([ 'acct' => $player ]));
+        $result = $repository->extractEntity($repository->findOneBy([ 'acct' => $player ]));
 
         if (! $result)
         {
@@ -435,20 +435,15 @@ function get_player_info($player = false)
 
     if (false !== $player)
     {
-        $select = DB::select('accounts');
-        $select->where->equalTo('acctid', (int) $player);
-        $user = DB::execute($select)->current();
+        $repository = \Doctrine::getRepository('LotgdCore:Characters');
+        $user = $repository->extractEntity($repository->findOneBy(['acct' => $player]));
 
         if (! $user)
         {
             return [];
         }
 
-        unset($user['password']);
-
-        $user['dragonpoints'] = unserialize($user['dragonpoints']);
-        $user['prefs'] = unserialize($user['prefs']);
-        $user['bufflist'] = unserialize($user['bufflist']);
+        unset($user['acct']);
 
         if (! is_array($user['bufflist']))
         {
