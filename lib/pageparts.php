@@ -400,7 +400,7 @@ function popup_footer()
     $html['session'] = $session ?? [];
     unset($html['session']['user'], $html['userPost']['password']);
 
-    $html['csshead'] = $html['csshead'] ?: '';
+    $html['csshead'] = $html['csshead'] ?? '';
     $html['csshead'] .= $lotgdJaxon->getCss();
     $html['scripthead'] = $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
