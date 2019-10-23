@@ -7,6 +7,8 @@ category:
     fight: 'Fight'
     other: 'Other'
     action: 'Other actions'
+    location: Locations
+    working: Working zones
 
 # Menu navs
 nav:
