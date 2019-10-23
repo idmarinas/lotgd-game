@@ -590,6 +590,7 @@ function charstats($return = true)
                     $val['name'] = translate_inline($val['name']);
                 }
 
+                $val['rounds'] = $val['rounds'] ?? 0;
                 if ($val['rounds'] >= 0)
                 {
                     // We're about to sprintf, so, let's makes sure that
