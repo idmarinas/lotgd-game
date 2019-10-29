@@ -21,6 +21,7 @@ module.exports = {
             '!public/docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
             '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
             '!semantic{,/**}',
+            '!entity{,/**}', //-- Autogenerate entities from BD
             '!node_modules{,/**}',
             '!bower_components{,/**}',
             //-- Ignore because using composer to update all packages
