@@ -24,3 +24,4 @@ src/local
 cli-config.php
 phan.csv
 docs/
+/entity
