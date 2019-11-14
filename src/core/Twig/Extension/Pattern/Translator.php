@@ -34,6 +34,11 @@ trait Translator
      */
     public function translate($message, $parameters = [], $domain = null, $locale = null): string
     {
+        if (! $message)
+        {
+            return '';
+        }
+
         return $this->getTranslator()->trans($message, $parameters, $domain, $locale);
     }
 
@@ -48,6 +53,11 @@ trait Translator
      */
     public function translateMf($message, $parameters = [], $locale = null): string
     {
+        if (! $message)
+        {
+            return '';
+        }
+
         return $this->getTranslator()->mf($message, $parameters, $locale);
     }
 
