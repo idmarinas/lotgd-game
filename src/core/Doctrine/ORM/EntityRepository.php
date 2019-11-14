@@ -34,12 +34,12 @@ class EntityRepository extends DoctrineEntityRepository
      *
      * @return Paginator
      */
-    public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25): Paginator
+    public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25, int $resultType = DoctrineAdapter::RESULT_ARRAY): Paginator
     {
         $page = max(1, $page);
         $perPage = max(10, $perPage); //-- Min items per page is 10
 
-        $paginator = new Paginator(new DoctrineAdapter($query));
+        $paginator = new Paginator(new DoctrineAdapter($query, $resultType));
         //- Set current page
         $paginator->setCurrentPageNumber($page);
         //-- Max number of results per page

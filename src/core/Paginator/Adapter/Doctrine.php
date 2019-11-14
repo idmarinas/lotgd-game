@@ -20,6 +20,16 @@ use Zend\Paginator\Adapter\AdapterInterface;
 class Doctrine implements AdapterInterface
 {
     /**
+     * Use getScalarResult to get results.
+     */
+    const RESULT_SCALAR = 1;
+
+    /**
+     * Use getArrayResult to get results.
+     */
+    const RESULT_ARRAY = 2;
+
+    /**
      * Doctrine instance of QueryBuilder.
      *
      * @var QueryBuilder
@@ -33,9 +43,17 @@ class Doctrine implements AdapterInterface
      */
     protected $rowCount;
 
-    public function __construct(QueryBuilder $query)
+    /**
+     * Result type to use.
+     *
+     * @var int
+     */
+    protected $resultType;
+
+    public function __construct(QueryBuilder $query, int $resultType = self::RESULT_ARRAY)
     {
         $this->doctrine = $query;
+        $this->resultType = $resultType;
     }
 
     /**
@@ -45,12 +63,17 @@ class Doctrine implements AdapterInterface
     {
         $qb = clone $this->doctrine;
 
-        return $qb
+        $qb
             ->setFirstResult($offset)
             ->setMaxResults($itemCountPerPage)
-            ->getQuery()
-            ->getArrayResult()
         ;
+
+        if ($this->resultType == self::RESULT_SCALAR)
+        {
+            return $qb->getQuery()->getScalarResult();
+        }
+
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
