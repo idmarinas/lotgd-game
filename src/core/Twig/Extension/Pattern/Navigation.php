@@ -53,6 +53,10 @@ trait Navigation
         {
             $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
         }
+        else
+        {
+            $label = $this->getTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
+        }
 
         $attributes = $options['attributes'] ?? [];
         $blocked = $this->getNavigation()->isBlocked($options['link']);
@@ -95,6 +99,10 @@ trait Navigation
         if ($options['translate'] ?? false)
         {
             $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+        }
+        else
+        {
+            $label = $this->getTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
