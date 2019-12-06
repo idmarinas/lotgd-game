@@ -76,11 +76,14 @@ class Translator extends ZendTranslator
         }
 
         //-- Added same default values
-        $parameters = array_merge([
-            'playerName' => $session['user']['name'],
-            'playerSex' => $session['user']['sex'],
-            'location' => $session['user']['location']
-        ], $parameters);
+        if ($session['user']['loggedin'] ?? false)
+        {
+            $parameters = array_merge([
+                'playerName' => $session['user']['name'],
+                'playerSex' => $session['user']['sex'],
+                'location' => $session['user']['location']
+            ], $parameters);
+        }
 
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
