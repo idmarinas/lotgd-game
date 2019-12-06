@@ -109,8 +109,6 @@ function get_module_pref($name, $module = false, $user = false)
             return $x[1];
         }
     }
-
-    return;
 }
 
 /**
