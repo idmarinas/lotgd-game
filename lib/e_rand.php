@@ -57,10 +57,5 @@ function r_rand($min = null, $max = null)
     }
     $max *= 1000;
 
-    if ($min > $max)
-    {
-        return mt_rand($max, $min) / 1000;
-    }
-
-    return mt_rand($min, $max) / 1000;
+    return mt_rand(min($min, $max), max($min, $max)) / 1000;
 }
