@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Translator;
 
 use Zend\I18n\Exception;
+use Zend\EventManager\Event;
 use Zend\I18n\Translator\Loader\FileLoaderInterface;
 use Zend\I18n\Translator\Translator as ZendTranslator;
 
@@ -65,12 +66,21 @@ class Translator extends ZendTranslator
      */
     public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
     {
+        global $session;
+
         //-- Not do nothing if message is empty
         //-- MessageFormatter fail if message is empty
         if ('' == $message)
         {
             return '';
         }
+
+        //-- Added same default values
+        $parameters = array_merge([
+            'playerName' => $session['user']['name'],
+            'playerSex' => $session['user']['sex'],
+            'location' => $session['user']['location']
+        ], $parameters);
 
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
@@ -108,7 +118,7 @@ class Translator extends ZendTranslator
     }
 
     /**
-     * Clean param of .
+     * Clean param of a value.
      *
      * @param mixed $param
      *
@@ -116,8 +126,6 @@ class Translator extends ZendTranslator
      */
     protected function cleanParameters($param): bool
     {
-        $return = false;
-
         if (
             \is_string($param) //-- Allow string values
             || \is_numeric($param) //-- Allow numeric values
@@ -125,10 +133,10 @@ class Translator extends ZendTranslator
             || \is_null($param) //-- Allow null value (Formatter can handle this value)
             || $param instanceof \DateTime //-- Allow DateTime object
         ) {
-            $return = true;
+            return true;
         }
 
-        return $return;
+        return false;
     }
 
     /**
