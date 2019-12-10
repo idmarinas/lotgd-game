@@ -239,7 +239,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
 
         if (isset($badguy['creaturelose']))
         {
-            array_unshift($lotgdBattleContent['battleend'], substitute_array($badguy['creaturelose'].'`n'));
+            array_unshift($lotgdBattleContent['battleend'], substitute($badguy['creaturelose'].'`n'));
         }
 
         if (true === $forest)
