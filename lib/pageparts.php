@@ -27,7 +27,7 @@ $html = ['content' => ''];
  */
 function page_header(?string $title = null, array $params = [], ?string $textDomain = null)
 {
-    global $html, $session, $template, $runheaders, $nopopups;
+    global $html, $session, $runheaders, $nopopups;
 
     $nopopups['login.php'] = 1;
     $nopopups['motd.php'] = 1;
@@ -104,7 +104,7 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
  */
 function page_footer($saveuser = true)
 {
-    global $output, $html, $nav, $session, $pagestarttime, $nopopups, $lotgdJaxon;
+    global $output, $html, $session, $nopopups, $lotgdJaxon;
 
     //page footer module hooks
     $script = \LotgdHttp::getServer('SCRIPT_NAME');
