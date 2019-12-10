@@ -185,7 +185,7 @@ elseif ('forgot' == $op)
             $account->setForgottenpassword(substr('x'.md5(date('Y-m-d H:i:s').$account->getPassword()), 0, 32));
         }
 
-        $language = ($cosa->getPrefs()['language'] ?? '') ?: getsetting('defaultlanguage', 'en');
+        $language = ($account->getPrefs()['language'] ?? '') ?: getsetting('defaultlanguage', 'en');
 
         $subj = \LotgdTranslator::t('forgotpassword.subject', [], 'app-mail', $language);
         $msg = \LotgdTranslator::t('forgotpassword.body', [
