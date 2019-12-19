@@ -79,9 +79,9 @@ class Translator extends ZendTranslator
         if ($session['user']['loggedin'] ?? false)
         {
             $parameters = array_merge([
-                'playerName' => $session['user']['name'],
-                'playerSex' => $session['user']['sex'],
-                'location' => $session['user']['location']
+                'playerName' => $session['user']['name'] ?? '',
+                'playerSex' => $session['user']['sex'] ?? '',
+                'location' => $session['user']['location'] ?? ''
             ], $parameters);
         }
 
