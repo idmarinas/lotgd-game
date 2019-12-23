@@ -2,7 +2,7 @@
  * Import Default Overrides
  **/
 
- @import '../../default/elements/flag.overrides';
+ @import '../../default/elements/step.overrides';
 
 /*******************************
          Theme Overrides
