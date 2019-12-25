@@ -38,6 +38,7 @@
         "zendframework/zend-debug": "^2.6",
         "zendframework/zend-escaper": "^2.6",
         "zendframework/zend-filter": "^2.9",
+        "zendframework/zend-form": "^2.14",
         "zendframework/zend-http": "^2.10",
         "zendframework/zend-hydrator": "^2.4",
         "zendframework/zend-i18n": "^2.9",
