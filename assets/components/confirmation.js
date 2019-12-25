@@ -23,7 +23,7 @@ define([
 
         element = jQuery(element)
         let options = element.data('options')
-        options = jQuery.extend({ type: 'question', showCancelButton: true }, options)
+        options = jQuery.extend({ icon: 'question', showCancelButton: true }, options)
 
         Lotgd.swal(options).then(result =>
         {
