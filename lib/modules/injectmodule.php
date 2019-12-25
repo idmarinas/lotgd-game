@@ -23,8 +23,6 @@ function injectmodule($modulename, $force = false)
 
     if (file_exists($modulefilename))
     {
-        tlschema("module-{$modulename}");
-
         $repository = \Doctrine::getRepository('LotgdCore:Modules');
         $row = $repository->find($modulename);
 
@@ -34,7 +32,6 @@ function injectmodule($modulename, $force = false)
             //or doesn't meet the prerequisites.
             if (! $row)
             {
-                tlschema();
                 \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', [ 'module' => $modulename ], 'app-default'));
 
                 $injected_modules[$force][$modulename] = false;
@@ -44,7 +41,6 @@ function injectmodule($modulename, $force = false)
 
             if (! $row->getActive())
             {
-                tlschema();
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', [ 'module' => $modulename ], 'app-default'));
 
                 $injected_modules[$force][$modulename] = false;
@@ -76,7 +72,6 @@ function injectmodule($modulename, $force = false)
             if (! module_check_requirements($info['requires']))
             {
                 $injected_modules[$force][$modulename] = false;
-                tlschema();
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', [ 'module' => $modulename ], 'app-default'));
 
                 return false;
@@ -126,7 +121,6 @@ function injectmodule($modulename, $force = false)
                 invalidatedatacache("injections-inject-$modulename");
             }
         }
-        tlschema();
         $injected_modules[$force][$modulename] = true;
 
         return true;

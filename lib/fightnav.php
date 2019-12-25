@@ -7,8 +7,6 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
 {
     global $session, $newenemies, $companions;
 
-    tlschema('fightnav');
-
     //-- Change text domain for navigation
     \LotgdNavigation::setTextDomain('navigation-fightnav');
 
@@ -101,6 +99,4 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
 
     //-- Restore text domain for navigation
     \LotgdNavigation::setTextDomain();
-
-    tlschema();
 }

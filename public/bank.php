@@ -7,8 +7,6 @@ require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/sanitize.php';
 
-tlschema('bank');
-
 $result = modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDomainNavigation' => 'navigation-bank']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];

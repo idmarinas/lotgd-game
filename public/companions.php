@@ -17,8 +17,6 @@ $hydrator = new \Zend\Hydrator\ClassMethods();
 
 $params = [];
 
-tlschema('companions');
-
 page_header('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();

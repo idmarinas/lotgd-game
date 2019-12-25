@@ -56,13 +56,11 @@ function uninstall_module($module)
     {
         $fname = $module.'_uninstall';
         debug('Running module uninstall script`n');
-        tlschema("module-{$module}");
 
         if (! $fname())
         {
             return false;
         }
-        tlschema();
 
         $repository = \Doctrine::getRepository('LotgdCore:Modules');
         $entity = $repository->find($module);

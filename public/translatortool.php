@@ -5,7 +5,6 @@
 // mail ready
 define('OVERRIDE_FORCED_NAV', true);
 require_once 'common.php';
-tlschema('translatortool');
 
 /**
  * @deprecated This is a deprecated way to translated game

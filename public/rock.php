@@ -2,8 +2,6 @@
 
 require_once 'common.php';
 
-tlschema('rock');
-
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "rock" instead.

@@ -215,9 +215,7 @@ function get_module_info($shortname)
     }
 
     $fname = "{$shortname}_getmoduleinfo";
-    tlschema("module-$shortname");
     $moduleinfo = $fname();
-    tlschema();
 
     $moduleinfo['name'] = $moduleinfo['name'] ?? "Not specified ($shortname)";
     $moduleinfo['category'] = $moduleinfo['category'] ?? "Not specified ($shortname)";
@@ -340,9 +338,7 @@ function module_objpref_edit($type, $module, $id)
         {
             $data[$row->getSetting()] = $row->getValue();
         }
-        tlschema("module-$module");
         lotgd_showform($msettings, $data);
-        tlschema();
     }
 }
 

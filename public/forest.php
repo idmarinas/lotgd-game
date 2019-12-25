@@ -9,8 +9,6 @@ require_once 'lib/taunt.php';
 require_once 'lib/events.php';
 require_once 'lib/battle/skills.php';
 
-tlschema('forest');
-
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
 $result = modulehook('forest-text-domain', ['textDomain' => 'page-forest', 'textDomainNavigation' => 'navigation-forest']);
@@ -380,8 +378,6 @@ if ('' == $op)
     $params['tpl'] = 'default';
     $params['showForestMessage'] = ! $dontDisplayForestMessage;
 
-    tlschema('forest');
-
     //-- Change text domain for navigation
     \LotgdNavigation::setTextDomain($textDomainNavigation);
 
@@ -433,8 +429,6 @@ if ('' == $op)
 
     //-- Restore text domain for navigation
     \LotgdNavigation::setTextDomain();
-
-    tlschema();
 }
 
 $params['battle'] = $battle;

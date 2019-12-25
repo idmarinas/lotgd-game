@@ -7,8 +7,6 @@ define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/showform.php';
 
-tlschema('about');
-
 page_header('title', [], 'page-about');
 
 checkday();

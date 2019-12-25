@@ -38,9 +38,6 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
     $session['user']['chatloc'] = '';
 
-    //in case this didn't already get called (such as on a database error)
-    translator_setup();
-
     if (! $title)
     {
         $title = 'title';
@@ -145,8 +142,6 @@ function page_footer($saveuser = true)
 
     restore_buff_fields();
     calculate_buff_fields();
-
-    tlschema('common');
 
     $charstats = charstats();
     restore_buff_fields();
@@ -295,8 +290,6 @@ function page_footer($saveuser = true)
         \Doctrine::persist($dbtimeEntity);
     }
 
-    tlschema();
-
     //-- Finalize output
     $lotgdJaxon->processRequest();
 
@@ -341,8 +334,6 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
     global $html, $session;
 
     $session['user']['chatloc'] = '';
-
-    translator_setup();
 
     modulehook('header-popup');
 
@@ -577,7 +568,6 @@ function charstats($return = true)
             // Short circuit if the name is blank
             if ($val['name'] > '' || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
             {
-                tlschema($val['schema']);
                 //	removed due to performance reasons. foreach is better with only $val than to have $key ONLY for the short happiness of one debug. much greater performance gain here
                 if (is_array($val['name']))
                 {
@@ -607,7 +597,6 @@ function charstats($return = true)
                 {
                     $buffs[] = appoencode("<code>`7{$val['schema']}`0</code>`n", true);
                 }
-                tlschema();
             }
         }
 

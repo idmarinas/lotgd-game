@@ -5,8 +5,6 @@
 // translator ready
 require_once 'common.php';
 
-tlschema('paylog');
-
 check_su_access(SU_EDIT_PAYLOG);
 /*
 +-----------+---------------------+------+-----+---------+----------------+

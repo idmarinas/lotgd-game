@@ -8,8 +8,6 @@ require_once 'lib/systemmail.php';
 
 check_su_access(SU_EDIT_COMMENTS);
 
-tlschema('bio');
-
 $textDomain = 'page-bios';
 
 page_header('title', [], $textDomain);

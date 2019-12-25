@@ -5,8 +5,6 @@
 // mail ready
 require_once 'common.php';
 
-tlschema('armor');
-
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "armor" instead.

@@ -370,10 +370,6 @@ function process_lifetaps($ltaps, $damage)
             continue;
         }
 
-        if ($buff['schema'])
-        {
-            tlschema($buff['schema']);
-        }
         $healhp = $session['user']['maxhitpoints'] - $session['user']['hitpoints'];
 
         if ($healhp < 0)
@@ -417,11 +413,6 @@ function process_lifetaps($ltaps, $damage)
         {
             $msg = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
-        }
-
-        if ($buff['schema'])
-        {
-            tlschema();
         }
     }
 }

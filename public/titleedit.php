@@ -6,8 +6,6 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-tlschema('retitle');
-
 $textDomain = 'titleedit';
 
 page_header('title', [], $textDomain);

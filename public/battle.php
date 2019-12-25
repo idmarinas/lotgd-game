@@ -17,8 +17,6 @@ global $badguy, $enemies, $newenemies, $session, $creatureattack, $creatureatkmo
 global $creaturedefmod, $adjustment, $defmod, $atkmod, $compdefmod, $compatkmod, $buffset, $atk, $def, $options;
 global $companions, $companion, $newcompanions, $countround, $defended, $needtostopfighting, $roll, $lotgdBattleContent, $content;
 
-tlschema('battle');
-
 $newcompanions = [];
 $lotgdBattleContent = [
     'battlestatus' => true,
@@ -862,8 +860,6 @@ if ($battleShowResult)
 {
     battleshowresults($lotgdBattleContent);
 }
-
-tlschema();
 
 //-- If battle end in defeat, break page after show content
 if ($defeat && $battleShowResult)

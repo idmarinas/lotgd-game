@@ -56,31 +56,20 @@ $params['interestRate'] = $interestrate;
 $tempbuf = $session['user']['bufflist'];
 $session['user']['bufflist'] = [];
 strip_all_buffs();
-tlschema('buffs');
 
 $params['buffMessages'] = [];
 foreach ($tempbuf as $key => $val)
 {
     if (array_key_exists('survivenewday', $val) && 1 == $val['survivenewday'])
     {
-        if (array_key_exists('schema', $val) && $val['schema'])
-        {
-            tlschema($val['schema']);
-        }
         apply_buff($key, $val);
 
         if (array_key_exists('newdaymessage', $val) && $val['newdaymessage'])
         {
             $params['buffMessages'][] = $val['newdaymessage'];
         }
-
-        if (array_key_exists('schema', $val) && $val['schema'])
-        {
-            tlschema();
-        }
     }
 }
-tlschema();
 
 reset($session['user']['dragonpoints']);
 $dkff = 0;

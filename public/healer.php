@@ -5,8 +5,6 @@
 // mail ready
 require_once 'common.php';
 
-tlschema('healer');
-
 // Don't hook on to this text for your standard modules please, use "healer" instead.
 // This hook is specifically to allow modules that do other healers to create ambience.
 $result = modulehook('healer-text-domain', ['textDomain' => 'page-healer', 'textDomainNavigation' => 'navigation-healer']);

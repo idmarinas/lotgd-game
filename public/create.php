@@ -13,7 +13,6 @@ require_once 'lib/serverfunctions.class.php';
 
 checkban();
 
-tlschema('create');
 $textDomain = 'page-create'; //-- Namespace, textDomain for page
 
 $trash = (int) getsetting('expiretrashacct', 1);

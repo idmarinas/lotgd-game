@@ -77,8 +77,6 @@ function lotgdsort($a, $b)
     return ($costa < $costb) ? -1 : 1;
 }
 
-tlschema('logdnet');
-
 $op = \LotgdHttp::getQuery('op');
 
 if ('' == $op)

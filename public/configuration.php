@@ -10,8 +10,6 @@ require_once 'lib/gamelog.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-tlschema('configuration');
-
 $textDomain = 'page-configuration';
 
 page_header('title', [], $textDomain);

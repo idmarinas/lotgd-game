@@ -9,8 +9,6 @@ require_once 'lib/pvpwarning.php';
 require_once 'lib/pvpsupport.php';
 require_once 'lib/taunt.php';
 
-tlschema('pvp');
-
 $iname = getsetting('innname', LOCATION_INN);
 $battle = false;
 

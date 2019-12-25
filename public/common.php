@@ -18,7 +18,7 @@ require_once 'lib/constants.php';
 $isDevelopment = file_exists('config/development.config.php');
 //-- Init Debugger
 $debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
-\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../data/log/exception');
+\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/exception');
 \Tracy\Debugger::timer('page-generating');
 \Tracy\Debugger::timer('page-footer');
 \Tracy\Debugger::$maxDepth = 5; // default: 3
@@ -202,10 +202,6 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.g
     // force the abandoning of the session when the user should have been
     // sent to the fields.
     $session = [];
-    // technically we should be able to translate this, but for now,
-    // ignore it.
-    // 1.1.1 now should be a good time to get it on with it, added tl-inline
-    translator_setup();
 
     \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
 
@@ -431,9 +427,7 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
     $session['user']['superuser'] = $session['user']['superuser'] | SU_EDIT_USERS;
 }
 
-translator_setup();
-
-    //Server runs in Debug mode, tell the superuser about it
+//Server runs in Debug mode, tell the superuser about it
 if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('maintenance.debug.mode', [], 'app-default'));

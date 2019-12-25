@@ -6,8 +6,6 @@
 require_once 'common.php';
 require_once 'lib/dhms.php';
 
-tlschema('referers');
-
 check_su_access(SU_EDIT_CONFIG);
 
 $repository = \Doctrine::getRepository('LotgdCore:Referers');

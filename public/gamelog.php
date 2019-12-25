@@ -10,8 +10,6 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-tlschema('gamelog');
-
 $textDomain = 'page-gamelog';
 
 page_header('title', [], $textDomain);

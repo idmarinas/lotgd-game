@@ -6,8 +6,6 @@
 require_once 'common.php';
 require_once 'lib/villagenav.php';
 
-tlschema('weapon');
-
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "weapon" instead.

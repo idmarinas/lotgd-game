@@ -4,8 +4,6 @@ require_once 'common.php';
 
 checkday();
 
-tlschema('shades');
-
 //-- You can only stay in the shades if you're dead.
 if ($session['user']['alive'])
 {
@@ -50,8 +48,6 @@ page_header('title', [], $textDomain);
 
 //-- Superuser menu
 \LotgdNavigation::superuser();
-
-tlschema();
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();

@@ -19,7 +19,6 @@ function handle_event($location, $baseLink = false)
     }
     $skipdesc = false;
 
-    tlschema('events');
     $allowinactive = false;
     $eventhandler = (string) \LotgdHttp::getQuery('eventhandler');
 
@@ -75,8 +74,6 @@ function handle_event($location, $baseLink = false)
         $session['user']['specialmisc'] = '';
         \LotgdHttp::setQuery('op', '');
     }
-
-    tlschema();
 
     return $skipdesc;
 }

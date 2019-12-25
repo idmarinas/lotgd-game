@@ -87,8 +87,6 @@ $noinstallnavs = false;
 
 invalidatedatacache('gamesettings');
 
-tlschema('installer');
-
 $stages = [
     'stages.00',
     'stages.01',

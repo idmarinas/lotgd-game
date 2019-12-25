@@ -6,8 +6,6 @@
 require_once 'common.php';
 require_once 'lib/sanitize.php';
 
-tlschema('bio');
-
 $textDomain = 'page-bio';
 checkday();
 

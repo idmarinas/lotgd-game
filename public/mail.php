@@ -4,8 +4,6 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-tlschema('mail');
-
 // Don't hook on to this text for your standard modules please, use "mail" instead.
 // This hook is specifically to allow modules that do other mails to create ambience.
 $result = modulehook('mail-text-domain', ['textDomain' => 'popup-mail']);

@@ -12,8 +12,6 @@ check_su_access(SU_EDIT_CREATURES);
 
 $textDomain = 'page-creatures';
 
-tlschema('creatures');
-
 page_header('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();

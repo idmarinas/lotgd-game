@@ -26,8 +26,6 @@ if ($session['loggedin'] ?? false)
 
 $op = \LotgdHttp::getQuery('op');
 
-tlschema('home');
-
 page_header('title', [], 'page-home');
 
 LotgdNavigation::addHeader('home.category.new');

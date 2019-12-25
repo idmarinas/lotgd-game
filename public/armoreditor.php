@@ -8,8 +8,6 @@ require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_EQUIPMENT);
 
-tlschema('armor');
-
 $armorarray = [
     'Armor,title',
     'armorid' => 'Armor ID,hidden',

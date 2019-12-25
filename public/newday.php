@@ -7,8 +7,6 @@ require_once 'common.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/buffs.php';
 
-tlschema('newday');
-
 modulehook('newday-intercept', []);
 
 $resurrection = (string) \LotgdHttp::getQuery('resurrection');

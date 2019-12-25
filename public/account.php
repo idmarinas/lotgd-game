@@ -5,8 +5,6 @@
 require_once 'common.php';
 require_once 'lib/datetime.php';
 
-tlschema('account');
-
 $textDomain = 'page-account';
 
 page_header('title', [], $textDomain);
@@ -38,7 +36,5 @@ $params = [
 
 $params = modulehook('page-account-tpl-params', $params);
 rawoutput(LotgdTheme::renderThemeTemplate('page/account.twig', $params));
-
-tlschema();
 
 page_footer();

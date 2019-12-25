@@ -4,8 +4,6 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_COMMENTS);
 
-tlschema('moderate');
-
 $op = (string) \LotgdHttp::getQuery('op');
 $area = (string) \LotgdHttp::getQuery('area');
 $subop = (string) \LotgdHttp::getQuery('subop');

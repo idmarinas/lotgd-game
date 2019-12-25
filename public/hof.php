@@ -9,8 +9,6 @@
 
 require_once 'common.php';
 
-tlschema('hof');
-
 checkday();
 
 // Don't hook on to this text for your standard modules please, use "hof" instead.

@@ -10,10 +10,6 @@ require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
-tlschema('login');
-
-translator_setup();
-
 $op = (string) \LotgdHttp::getQuery('op');
 $name = (string) \LotgdHttp::getPost('name');
 $iname = (string) getsetting('innname', LOCATION_INN);

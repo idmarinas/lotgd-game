@@ -3,8 +3,6 @@
 require_once 'common.php';
 require_once 'lib/serverfunctions.class.php';
 
-tlschema('globaluserfunctions');
-
 check_su_access(SU_MEGAUSER);
 
 $textDomain = 'globaluserfunctions';

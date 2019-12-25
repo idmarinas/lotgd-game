@@ -7,8 +7,6 @@ require_once 'common.php';
 require_once 'lib/buffs.php';
 require_once 'lib/events.php';
 
-tlschema('graveyard');
-
 // Don't hook on to this text for your standard modules please, use "graveyard" instead.
 // This hook is specifically to allow modules that do other graveyards to create ambience.
 $result = modulehook('graveyard-text-domain', ['textDomain' => 'page-graveyard', 'textDomainNavigation' => 'navigation-graveyard']);

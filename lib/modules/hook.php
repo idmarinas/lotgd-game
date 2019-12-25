@@ -109,7 +109,6 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         }
 
         $oldnavsection = $navsection;
-        tlschema("module-{$row['modulename']}");
         // Pass the args into the function and reassign them to the
         // result of the function.
         // Note: each module gets the previous module's modified return
@@ -180,8 +179,6 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             }
         }
 
-        //revert the translation namespace
-        tlschema();
         //revert nav section after we're done here.
         $navsection = $oldnavsection;
     }

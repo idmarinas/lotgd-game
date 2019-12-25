@@ -7,8 +7,6 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-tlschema('badnav');
-
 if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 {
     if (isset($session['output']) && false !== strpos($session['output'], '<!--CheckNewDay()-->'))
@@ -75,7 +73,6 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 else
 {
     $session = [];
-    translator_setup();
 
     return redirect('index.php');
 }

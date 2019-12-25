@@ -7,8 +7,6 @@ require_once 'common.php';
 
 check_su_access(SU_MANAGE_MODULES);
 
-tlschema('modulemanage');
-
 $textDomain = 'page-modules';
 
 page_header('title', [], $textDomain);

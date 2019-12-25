@@ -8,7 +8,6 @@ require_once 'lib/datetime.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/names.php';
 
-tlschema('user');
 check_su_access(SU_EDIT_USERS);
 
 $op = (string) \LotgdHttp::getQuery('op');
@@ -393,9 +392,7 @@ switch ($op)
 
                 rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userid$returnpetition' method='POST'>");
                 addnav('', "user.php?op=savemodule&module=$module&userid=$userid$returnpetition");
-                tlschema("module-$module");
                 lotgd_showform($msettings, $data);
-                tlschema();
                 rawoutput('</form>');
 
                 page_footer();

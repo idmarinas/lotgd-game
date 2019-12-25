@@ -8,8 +8,6 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-tlschema('petition');
-
 $op = (string) \LotgdHttp::getQuery('op');
 
 $textDomain = 'page-petition';

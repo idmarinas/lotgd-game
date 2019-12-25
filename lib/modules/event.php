@@ -146,10 +146,8 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
     if (injectmodule($module, $allowinactive))
     {
         $oldnavsection = $navsection;
-        tlschema("module-$module");
         $fname = $module.'_runevent';
         $fname($type, $baseLink);
-        tlschema();
         //hook into the running event, but only in *this* running event, not in all
         modulehook("runevent_$module", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdHttp::getQueryAll(), 'post' => \LotgdHttp::getPostAll()]);
         //revert nav section after we're done here.
@@ -188,8 +186,6 @@ function module_display_events($eventtype, $forcescript = false)
     }
 
     usort($events, 'event_sort');
-
-    tlschema('events');
 
     $params = [
         'textDomain' => 'partial-event',

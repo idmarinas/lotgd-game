@@ -26,7 +26,6 @@ if (injectmodule($module, $admin))
     $starttime = microtime(true);
     $fname = $mostrecentmodule.'_run';
 
-    tlschema("module-$mostrecentmodule");
     $fname();
     $endtime = microtime(true);
     $time = $endtime - $starttime;
@@ -35,7 +34,6 @@ if (injectmodule($module, $admin))
     {
         debug('Slow Module ('.round($time, 2)."s): $mostrecentmodule`n");
     }
-    tlschema();
 }
 else
 {

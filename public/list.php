@@ -7,8 +7,6 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-tlschema('list');
-
 page_header('title', [], 'page-list');
 
 if ($session['user']['loggedin'])

@@ -6,8 +6,6 @@
 require_once 'common.php';
 require_once 'lib/events.php';
 
-tlschema('gardens');
-
 // Don't hook on to this text for your standard modules please, use "gardens" instead.
 // This hook is specifically to allow modules that do other gardenss to create ambience.
 $result = modulehook('gardens-text-domain', ['textDomain' => 'page-gardens', 'textDomainNavigation' => 'navigation-gardens']);

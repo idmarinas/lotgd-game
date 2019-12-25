@@ -7,8 +7,6 @@ require_once 'common.php';
 require_once 'lib/events.php';
 require_once 'lib/experience.php';
 
-tlschema('village');
-
 //-- First check for autochallengeç
 if (getsetting('automaster', 1) && 1 != $session['user']['seenmaster'])
 {

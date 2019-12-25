@@ -12,8 +12,6 @@ require_once 'lib/nltoappon.php';
 
 use Doctrine\ORM\Query\Expr\Join;
 
-tlschema('motd');
-
 popup_header('title', [], 'page-motd');
 
 $op = (string) \LotgdHttp::getQuery('op', '');
@@ -240,7 +238,5 @@ $session['user']['lastmotd'] = $row['motddate'];
 
 $params = modulehook('page-motd-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('page/motd.twig', $params));
-
-tlschema();
 
 popup_footer();

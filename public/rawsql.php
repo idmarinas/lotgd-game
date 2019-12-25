@@ -5,8 +5,6 @@
 // mail ready
 require_once 'common.php';
 
-tlschema('rawsql');
-
 check_su_access(SU_RAW_SQL);
 
 $textDomain = 'page-rawsql';

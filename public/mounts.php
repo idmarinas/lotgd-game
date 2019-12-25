@@ -12,8 +12,6 @@ check_su_access(SU_EDIT_MOUNTS);
 
 $textDomain = 'page-mounts';
 
-tlschema('mounts');
-
 $params = [
     'textDomain' => $textDomain
 ];

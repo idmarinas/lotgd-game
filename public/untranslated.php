@@ -24,8 +24,6 @@ require_once 'lib/superusernav.php';
 
 check_su_access(SU_IS_TRANSLATOR);
 
-tlschema('untranslated');
-
 $op = httpget('op');
 page_header('Untranslated Texts');
 

@@ -6,8 +6,6 @@
 
 require_once 'common.php';
 
-tlschema('petition');
-
 check_su_access(SU_EDIT_PETITIONS);
 
 $statuses = [
