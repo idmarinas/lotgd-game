@@ -14,7 +14,7 @@ namespace Lotgd\Core\Factory\Output;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Output\Censor as OutputCensor;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Censor implements FactoryInterface

@@ -10,7 +10,7 @@ namespace Lotgd\Core\Factory\Output;
 
 use Lotgd\Core\Output\Collector as OutputCollector;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Collector implements FactoryInterface

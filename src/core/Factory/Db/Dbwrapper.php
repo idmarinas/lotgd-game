@@ -11,7 +11,7 @@ namespace Lotgd\Core\Factory\Db;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Db\Dbwrapper as LibDbwrapper;
 use Zend\ServiceManager\{
-    FactoryInterface,
+    Factory\FactoryInterface,
     ServiceLocatorInterface
 };
 class Dbwrapper implements FactoryInterface

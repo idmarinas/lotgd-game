@@ -16,7 +16,7 @@ namespace Lotgd\Core\Factory\Template;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Template\Theme as TemplateTheme;
 use Lotgd\Core\Twig\Extension;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Theme implements FactoryInterface

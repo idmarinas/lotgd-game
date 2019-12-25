@@ -14,7 +14,7 @@ namespace Lotgd\Core\Factory\Tool;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Tool\Sanitize as ToolSanitize;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Sanitize implements FactoryInterface

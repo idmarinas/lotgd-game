@@ -10,7 +10,7 @@ namespace Lotgd\Core\Factory\Lib;
 
 use Lotgd\Core\Lib\Cache as LibCache;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Cache implements FactoryInterface

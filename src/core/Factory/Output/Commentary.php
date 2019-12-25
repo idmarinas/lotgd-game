@@ -15,7 +15,7 @@ namespace Lotgd\Core\Factory\Output;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Entity\Commentary as CommentaryEntity;
 use Lotgd\Core\Output\Commentary as OutputCommentary;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Commentary implements FactoryInterface

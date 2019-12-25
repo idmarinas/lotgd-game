@@ -10,7 +10,7 @@ namespace Lotgd\Core\Factory\Installer;
 
 use Lotgd\Core\Installer\Install as Installer;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Install implements FactoryInterface

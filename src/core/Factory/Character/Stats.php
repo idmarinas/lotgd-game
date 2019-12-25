@@ -10,7 +10,7 @@ namespace Lotgd\Core\Factory\Character;
 
 use Lotgd\Core\Character\Stats as CharacterStats;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Stats implements FactoryInterface

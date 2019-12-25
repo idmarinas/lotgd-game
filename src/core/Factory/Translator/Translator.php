@@ -16,7 +16,7 @@ use Interop\Container\ContainerInterface;
 use Lotgd\Core\Translator\Translator as LotgdTranslator;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\{
-    FactoryInterface,
+    Factory\FactoryInterface,
     ServiceLocatorInterface
 };
 class Translator implements FactoryInterface

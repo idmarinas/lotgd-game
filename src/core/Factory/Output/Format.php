@@ -11,7 +11,7 @@ namespace Lotgd\Core\Factory\Output;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Output\Format as OutputFormat;
 use Zend\ServiceManager\{
-    FactoryInterface,
+    Factory\FactoryInterface,
     ServiceLocatorInterface
 };
 use Tracy\Debugger;

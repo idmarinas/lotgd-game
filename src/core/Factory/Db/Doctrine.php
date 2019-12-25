@@ -25,7 +25,7 @@ use Lotgd\Core\Doctrine\{
     Strategy\Quote as DoctrineQuoteStrategy
 };
 use Zend\ServiceManager\{
-    FactoryInterface,
+    Factory\FactoryInterface,
     ServiceLocatorInterface
 };
 

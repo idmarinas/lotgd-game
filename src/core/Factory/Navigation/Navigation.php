@@ -14,7 +14,7 @@ namespace Lotgd\Core\Factory\Navigation;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Navigation\Navigation as NavigationCore;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Navigation implements FactoryInterface

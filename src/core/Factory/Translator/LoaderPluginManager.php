@@ -17,7 +17,7 @@ use Lotgd\Core\Exception;
 use Zend\I18n\Translator\LoaderPluginManager as ZendLoaderPluginManager;
 use Zend\ServiceManager\{
     Config,
-    FactoryInterface,
+    Factory\FactoryInterface,
     ServiceLocatorInterface
 };
 class LoaderPluginManager implements FactoryInterface
