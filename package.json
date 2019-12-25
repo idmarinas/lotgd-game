@@ -1,8 +1,8 @@
 {
     "name": "idmarinas-lotgd",
     "title": "The Legend of the Green Dragon",
-    "version": "4.0.0",
-    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.0.",
+    "version": "4.1.0",
+    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.1.",
     "time": "2017-04-21",
     "engines": {
         "node": ">= 0.10.0"
@@ -32,10 +32,10 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "fomantic-ui": "2.7.8",
+        "fomantic-ui": "2.8.3",
         "jquery": "^3.4.1",
         "numeral": "^2.0.6",
-        "sweetalert2": "^8.18.0",
+        "sweetalert2": "^9.5.3",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
