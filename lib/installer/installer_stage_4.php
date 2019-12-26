@@ -143,7 +143,7 @@ else
 
     //-- Test cache
     $config = LotgdLocator::get('GameConfig');
-    $cacheDir = $options['lotgd_core']['cache']['base_cache_dir'] ?? 'data/cache';
+    $cacheDir = $options['lotgd_core']['cache']['base_cache_dir'] ?? 'storage/cache';
 
     $params['test']['cache'] = true;
     $fp = @fopen("{$cacheDir}/dummy.php", 'w+');

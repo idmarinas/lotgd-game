@@ -20,7 +20,7 @@ class Base extends Environment
     {
         //-- Merge options
         $default = [
-            'cache' => 'data/cache/templates',
+            'cache' => 'storage/cache/templates',
             'autoescape' => false
         ];
         $options = array_merge($default, $options);

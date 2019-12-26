@@ -25,7 +25,7 @@ class Theme implements FactoryInterface
     {
         $config = $container->get('GameConfig');
         $options = $config['lotgd_core'] ?? [];
-        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'data/cache/', '/');
+        $cacheDir = trim($options['cache']['base_cache_dir'] ?? 'storage/cache/', '/');
 
         $template = new TemplateTheme([], [
             'debug' => (bool) ($options['development'] ?? false),
