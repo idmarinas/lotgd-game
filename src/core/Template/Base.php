@@ -9,7 +9,6 @@
 namespace Lotgd\Core\Template;
 
 use Twig\Environment;
-use Twig_Filter;
 use Twig\Loader\FilesystemLoader;
 
 class Base extends Environment
@@ -28,50 +27,5 @@ class Base extends Environment
         $loader = new FilesystemLoader($loader);
 
         parent::__construct($loader, $options);
-
-        //-- Add filters to Twig
-        foreach ($this->lotgdFilters() as $filter)
-        {
-            $this->addFilter($filter);
-        }
-
-        //-- Add functions to Twig
-        foreach ($this->lotgdFunctions() as $function)
-        {
-            $this->addFunction($function);
-        }
-    }
-
-    /**
-     * Filters created for LotGD.
-     *
-     * @return array
-     */
-    private function lotgdFilters(): array
-    {
-        return [
-            //-- Search and replace keywords
-            new Twig_Filter('sustitute', function ($string)
-            {
-                global $output;
-
-                trigger_error(sprintf(
-                    'Usage of %s filter is obsolete since 4.0.0; and delete in version 4.1.0, use new template system to simulate this.',
-                    __METHOD__
-                ), E_USER_DEPRECATED);
-
-                return $output->sustitute((string) $string);
-            })
-        ];
-    }
-
-    /**
-     * Functions created for LotGD.
-     *
-     * @return array
-     */
-    private function lotgdFunctions(): array
-    {
-        return [];
     }
 }
