@@ -44,26 +44,26 @@ function checkban($login = false)
     if (DB::num_rows($result) > 0)
     {
         $session = [];
-        $session['message'] .= translate_inline('`n`4You fall under a ban currently in place on this website:`n');
+        $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page-bans');
 
         while ($row = DB::fetch_assoc($result))
         {
             $session['message'] .= $row['banreason'].'`n';
 
-            if ('0000-00-00' == $row['banexpire'] || '0000-00-00 00:00:00' == $row['banexpire'])
+            if (new \DateTime('0000-00-00') == $row['banexpire'] || new \DateTime('0000-00-00 00:00:00') == $row['banexpire'])
             {
-                $session['message'] .= translate_inline('  `$This ban is permanent!`0');
+                $session['message'] .= \LotgdTranslator::t('checkban.expire.permanent', [], 'page-bans');
             }
             else
             {
-                $session['message'] .= sprintf_translate('  `^This ban will be removed `$after`^ %s.`0', date('H:i, M d, Y', strtotime($row['banexpire'])));
+                $session['message'] .= \LotgdTranslator::t('checkban.expire.time', ['date' => $row['banexpire']], 'page-bans');
             }
             $sql = 'UPDATE '.DB::prefix('bans')." SET lasthit='".date('Y-m-d H:i:s')."' WHERE ipfilter='{$row['ipfilter']}' AND uniqueid='{$row['uniqueidid']}'";
             DB::query($sql);
             $session['message'] .= '`n';
-            $session['message'] .= sprintf_translate('`n`4The ban was issued by %s`^.`n', $row['banner']);
+            $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page-bans');
         }
-        $session['message'] .= translate_inline('`4If you wish, you may appeal your ban with the petition link.');
+        $session['message'] .= \LotgdTranslator::t('checkban.note', [], 'page-bans');
         header('Location: index.php');
 
         exit();

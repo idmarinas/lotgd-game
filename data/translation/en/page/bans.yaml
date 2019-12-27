@@ -115,3 +115,12 @@ searchban:
             label: 'Search banned user by name'
             button:
                 submit: 'Search'
+
+# Check bans of account
+checkban:
+    banned: '`n`4You fall under a ban currently in place on this website:`n'
+    expire:
+        permanent: '  `$This ban is permanent!`0'
+        time: '  `^This ban will be removed `$after`0 {date,date} {date,time}.`0'
+    by: '`n`4The ban was issued by {by}`0.`n'
+    note: '`4If you wish, you may appeal your ban with the petition link.`0'
