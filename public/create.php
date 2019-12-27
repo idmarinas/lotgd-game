@@ -213,8 +213,9 @@ elseif ('create' == $op)
     $emailverification = '';
     $shortname = trim((string) \LotgdHttp::getPost('name'));
     $shortname = sanitize_name(getsetting('spaceinname', 0), $shortname);
+    $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
 
-    if (soap($shortname) != $shortname)
+    if ($censor->filter($shortname) != $shortname)
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.badLanguage', [], $textDomain));
 
