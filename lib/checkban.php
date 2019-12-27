@@ -11,8 +11,7 @@ function checkban($login = false)
     {
         return false;
     }
-
-    if (false === $login)
+    elseif (false === $login)
     {
         $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
         $cookie = $request->getCookie();
@@ -38,28 +37,38 @@ function checkban($login = false)
     $repository = \Doctrine::getRepository('LotgdCore:Bans');
     $repository->removeExpireBans();
 
-    $sql = 'SELECT * FROM '.DB::prefix('bans')." where ((substring('$ip',1,length(ipfilter))=ipfilter AND ipfilter<>'') OR (uniqueid='$id' AND uniqueid<>'')) AND (banexpire='0000-00-00' OR banexpire>=NOW())";
-    $result = DB::query($sql);
+    $query = $repository->createQueryBuilder('u');
+    $result = $query->where("((substring(:ip ,1 , length(u.ipfilter)) = u.ipfilter AND u.ipfilter != '') OR (u.uniqueid = :id AND u.uniqueid != '')) AND (u.banexpire = '0000-00-00' OR u.banexpire >= :date)")
 
-    if (DB::num_rows($result) > 0)
+        ->setParameter('ip', $ip)
+        ->setParameter('id', $id)
+        ->setParameter('date', new \DateTime('now'))
+
+        ->getQuery()
+        ->getResult()
+    ;
+
+    if (count($result))
     {
         $session = [];
         $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page-bans');
 
-        while ($row = DB::fetch_assoc($result))
+        foreach ($result as $row)
         {
-            $session['message'] .= $row['banreason'].'`n';
+            $session['message'] .= $row->getBanreason().'`n';
 
-            if (new \DateTime('0000-00-00') == $row['banexpire'] || new \DateTime('0000-00-00 00:00:00') == $row['banexpire'])
+            $message = \LotgdTranslator::t('checkban.expire.time', ['date' => $row->getBanexpire()], 'page-bans');
+            if (new \DateTime('0000-00-00') == $row->getBanexpire() || new \DateTime('0000-00-00 00:00:00') == $row->getBanexpire())
             {
-                $session['message'] .= \LotgdTranslator::t('checkban.expire.permanent', [], 'page-bans');
+                $message = \LotgdTranslator::t('checkban.expire.permanent', [], 'page-bans');
             }
-            else
-            {
-                $session['message'] .= \LotgdTranslator::t('checkban.expire.time', ['date' => $row['banexpire']], 'page-bans');
-            }
-            $sql = 'UPDATE '.DB::prefix('bans')." SET lasthit='".date('Y-m-d H:i:s')."' WHERE ipfilter='{$row['ipfilter']}' AND uniqueid='{$row['uniqueidid']}'";
-            DB::query($sql);
+
+            $session['message'] .= $message;
+
+            $row->setLasthit(new \DateTime('now'));
+            \Doctrine::persist($row);
+            \Doctrine::flush();
+
             $session['message'] .= '`n';
             $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page-bans');
         }
@@ -68,5 +77,4 @@ function checkban($login = false)
 
         exit();
     }
-    DB::free_result($result);
 }
