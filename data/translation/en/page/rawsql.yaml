@@ -8,6 +8,8 @@ section:
                     label: 'Type your query'
             button:
                 submit: Execute SQL
+        result:
+            count: '`&{n,number} rows affected.`0`n`n'
     php:
         form:
             textarea:

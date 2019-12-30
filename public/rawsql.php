@@ -31,30 +31,29 @@ if ('' == $op || 'sql' == $op)
 
     if ('' != $sql)
     {
-        /**
-         * For now use zend-db
-         *
-         * @TODO Script to create SQL in Doctrine
-         */
-        $sql = stripslashes($sql);
+        $params['isResult'] = true;
+
         $params['sql'] = $sql;
 
-        debuglog('Ran Raw SQL: '.$sql);
+        debug('Ran Raw SQL: '.$sql);
 
         try
         {
-            DB::query($sql, false);
+            $q = \Doctrine::getConnection()->prepare($sql);
+            $q->execute();
 
-            $error = DB::error();
+            $params['rowCount'] = $q->rowCount(); //-- Count affected rows
 
-            if ($error)
+            if ($q->columnCount())
             {
-                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.sql.error.db', [ 'error' => $error ], $textDomain));
+                $params['resultSql'] = $q->fetchAll(); //-- Select results if have columns
             }
         }
         catch (\Throwable $th)
         {
+            $params['resultSql'] = null;
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.sql.error.th', [ 'error' => $th->getMessage() ], $textDomain));
+            \Tracy\Debugger::log($th);
         }
     }
 }
