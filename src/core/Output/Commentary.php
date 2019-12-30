@@ -82,6 +82,7 @@ class Commentary
 
         //-- Clean comment
         $post['comment'] = $this->cleanComment($post['comment']);
+        $post['commentRaw'] = $post['comment']; //-- Only filter for save safe in DB
 
         //-- Check if have comment and them process commands in comment
         if (! $post['comment'] || ! $this->processCommands($post))
@@ -302,8 +303,6 @@ class Commentary
      */
     public function commentaryLocs(): array
     {
-        global $session;
-
         $comsecs = datacache('commentary-comsecs', 1800, true);
 
         if (is_array($comsecs) && count($comsecs))

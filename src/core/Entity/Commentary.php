@@ -61,6 +61,13 @@ class Commentary implements EntityInterface
     private $comment;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=1000, nullable=false)
+     */
+    private $commentRaw;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
@@ -243,6 +250,30 @@ class Commentary implements EntityInterface
     public function getComment(): string
     {
         return $this->comment;
+    }
+
+    /**
+     * Get the value of commentRaw
+     *
+     * @return  string
+     */
+    public function getCommentRaw()
+    {
+        return $this->commentRaw;
+    }
+
+    /**
+     * Set the value of commentRaw
+     *
+     * @param  string  $commentRaw
+     *
+     * @return  self
+     */
+    public function setCommentRaw(string $commentRaw)
+    {
+        $this->commentRaw = $commentRaw;
+
+        return $this;
     }
 
     /**
