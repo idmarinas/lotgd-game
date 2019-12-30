@@ -82,7 +82,6 @@ require_once 'lib/datacache.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/holiday_texts.php';
-require_once 'lib/nav.php';
 require_once 'lib/arrayutil.php';
 require_once 'lib/redirect.php';
 require_once 'lib/debuglog.php';

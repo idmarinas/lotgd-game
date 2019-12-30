@@ -68,28 +68,6 @@ trait CoreFilter
     }
 
     /**
-     * nltoappon a string.
-     *
-     * @param string|null $string
-     *
-     * @return string
-     */
-    public function nltoappon(?string $string): string
-    {
-        if (! $string)
-        {
-            return '';
-        }
-
-        trigger_error(sprintf(
-            'Usage of "%s" filter is obsolete since 4.0.0; and delete in version 4.1.0, use filter of Twig "nl2br" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        return \preg_replace('/[\r\n]/', '`n', $string);
-    }
-
-    /**
      * Add a link, but not nav.
      *
      * @param string $string
