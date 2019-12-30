@@ -69,33 +69,6 @@ $session['counter'] = $session['counter'] ?? 0;
 
 $session['counter']++;
 
-/**
- * LEGACY var.
- *
- * @var string
- *
- * @deprecated 4.0.0 Delete in version 4.1.0
- */
-$logd_version = \Lotgd\Core\Application::VERSION;
-
-/**
- * LEGACY var.
- *
- * @var string
- *
- * @deprecated 4.0.0 Delete in version 4.1.0
- */
-$copyright = \Lotgd\Core\Application::COPYRIGHT;
-
-/**
- * LEGACY var.
- *
- * @var string
- *
- * @deprecated 4.0.0 Delete in version 4.1.0
- */
-$license = \Lotgd\Core\Application::LICENSE;
-
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
 
@@ -207,8 +180,8 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.g
 }
 $session['lasthit'] = strtotime('now');
 
-$cp = $copyright;
-$l = $license;
+$cp = \Lotgd\Core\Application::COPYRIGHT;
+$l = \Lotgd\Core\Application::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
