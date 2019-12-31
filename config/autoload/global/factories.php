@@ -7,7 +7,7 @@ return [
     'service_manager' => [
         'factories' => [
             //-- Added in version 3.0.0
-            Lotgd\Core\Character\Stats::class => Factory\Character\Stats::class,
+            Lotgd\Core\Character\Stats::class => InvokableFactory::class,
             Lotgd\Core\Lib\Cache::class => Factory\Lib\Cache::class,
             Lotgd\Core\Db\Doctrine::class => Factory\Db\Doctrine::class,
             Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class,
