@@ -7,7 +7,7 @@ require_once 'common.php';
 
 check_su_access(SU_RAW_SQL);
 
-$textDomain = 'page-rawsql';
+$textDomain = 'grotto-rawsql';
 
 $params = [
     'textDomain' => $textDomain

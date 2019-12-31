@@ -6,7 +6,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$textDomain = 'titleedit';
+$textDomain = 'grotto-titleedit';
 
 page_header('title', [], $textDomain);
 

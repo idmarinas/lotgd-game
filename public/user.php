@@ -23,7 +23,7 @@ if ('lasthit' == $op)
     $_POST['i_am_a_hack'] = 'true';
 }
 
-$textDomain = 'page-user';
+$textDomain = 'grotto-user';
 
 page_header('title', [], $textDomain);
 

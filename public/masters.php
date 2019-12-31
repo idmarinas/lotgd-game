@@ -7,7 +7,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
-$textDomain = 'page-masters';
+$textDomain = 'grotto-masters';
 
 $op = (string) \LotgdHttp::getQuery('op');
 $masterId = (int) (string) \LotgdHttp::getQuery('master_id');

@@ -10,7 +10,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'page-gamelog';
+$textDomain = 'grotto-gamelog';
 
 page_header('title', [], $textDomain);
 

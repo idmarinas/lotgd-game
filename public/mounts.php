@@ -10,7 +10,7 @@ $mountId = \LotgdHttp::getQuery('id');
 
 check_su_access(SU_EDIT_MOUNTS);
 
-$textDomain = 'page-mounts';
+$textDomain = 'grotto-mounts';
 
 $params = [
     'textDomain' => $textDomain

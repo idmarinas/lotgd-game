@@ -8,7 +8,7 @@ require_once 'lib/dhms.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'page-debug';
+$textDomain = 'grotto-debug';
 
 page_header('title', [], $textDomain);
 

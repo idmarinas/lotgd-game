@@ -7,7 +7,7 @@ require_once 'common.php';
 
 check_su_access(SU_MANAGE_MODULES);
 
-$textDomain = 'page-modules';
+$textDomain = 'grotto-modules';
 
 page_header('title', [], $textDomain);
 

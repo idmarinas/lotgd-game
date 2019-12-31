@@ -12,7 +12,7 @@ check_su_access(SU_EDIT_MOUNTS);
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Companions::class);
 
-$textDomain = 'page-companions';
+$textDomain = 'grotto-companions';
 $hydrator = new \Zend\Hydrator\ClassMethods();
 
 $params = [];

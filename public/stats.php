@@ -8,7 +8,7 @@ require_once 'lib/dhms.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'page-stats';
+$textDomain = 'grotto-stats';
 
 $params = [
     'textDomain' => $textDomain

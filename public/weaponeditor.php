@@ -22,7 +22,7 @@ $id = (int) \LotgdHttp::getQuery('id');
 $weaponlevel = (int) \LotgdHttp::getQuery('level');
 $repository = \Doctrine::getRepository('LotgdCore:Weapons');
 
-$textDomain = 'page-weaponeditor';
+$textDomain = 'grotto-weaponeditor';
 
 page_header('title', ['level' => $weaponlevel], $textDomain);
 

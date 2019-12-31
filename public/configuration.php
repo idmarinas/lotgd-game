@@ -10,7 +10,7 @@ require_once 'lib/gamelog.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'page-configuration';
+$textDomain = 'grotto-configuration';
 
 page_header('title', [], $textDomain);
 

@@ -10,7 +10,7 @@ require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
-$textDomain = 'page-creatures';
+$textDomain = 'grotto-creatures';
 
 page_header('title', [], $textDomain);
 

@@ -5,7 +5,7 @@ require_once 'lib/serverfunctions.class.php';
 
 check_su_access(SU_MEGAUSER);
 
-$textDomain = 'globaluserfunctions';
+$textDomain = 'grotto-globaluserfunctions';
 
 page_header('title', [], $textDomain);
 
