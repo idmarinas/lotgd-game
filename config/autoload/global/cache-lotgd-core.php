@@ -8,6 +8,8 @@ return [
     'caches' => [
         //-- Please not detele this Data Cache
         'Cache\Core\Lotgd' => [
+            'title' => 'LoTGD Core', //-- This is a title of cache
+            'description' => 'Cache of LoTGD Core, this is the main cache of game.', //-- This describe purpose of cache
             'adapter' => 'filesystem',
 			'options' => [
                 'ttl' => 900,
@@ -27,6 +29,8 @@ return [
         ],
         //-- This cache is exclusive to the cronjob
         'Cache\Core\Cronjob' => [
+            'title' => 'LoTGD CronjJob',
+            'description' => 'Cache of CronJob, this is exclusive of cronjob, is use to cache all available cronjobs.',
             'adapter' => 'filesystem',
 			'options' => [
                 'ttl' => 900,
