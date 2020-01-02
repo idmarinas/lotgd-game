@@ -51,7 +51,6 @@ class Cache
      */
     public static function instance(StorageInterface $instance)
     {
-        bdump($instance);
         self::$instance = $instance;
     }
 }
