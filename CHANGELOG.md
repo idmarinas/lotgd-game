@@ -5,6 +5,101 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 4.1.0
+
+### :cyclone: CHANGES
+
+-   Moved some folders of `data/` to `storage/`
+    -   `data/cache/*` => `storage/cache/*`
+    -   `data/log/*` => `storage/log/*`
+    -   `data/logd_snapshots/*` => `storage/logd_snapshots/*`
+-   Commentary table new field:
+    -   `comment_raw` Save raw comment without filters
+-   Translation domain for same  pages:
+    -   Armor editor: `page-armoreditor` to `grotto-armoreditor`
+    -   Character backup: `page-characterbackup` to `grotto-characterbackup`
+    -   Companions: `page-companions` to `grotto-companions`
+    -   Configuration: `page-configuration` to `grotto-configuration`
+    -   Creatures: `page-creatures` to `grotto-creatures`
+    -   Debug: `page-debug` to `grotto-debug`
+    -   Game log: `page-gamelog` to `grotto-gamelog`
+    -   Global user functions: `globaluserfunctions` to `grotto-globaluserfunctions`
+    -   Masters: `page-masters` to `grotto-masters`
+    -   Moderate: `page-moderate` to `grotto-moderate`
+    -   Modules: `page-modules` to `grotto-modules`
+    -   Mounts: `page-mounts` to `grotto-mounts`
+    -   Paylog: `page-paylog` to `grotto-paylog`
+    -   Rawsql: `page-rawsql` to `grotto-rawsql`
+    -   Referers: `page-referers` to `grotto-referers`
+    -   Stats: `page-stats` to `grotto-stats`
+    -   Superuser: `page-superuser` to `grotto-superuser`
+    -   Title edit: `page-titleedit` to `grotto-titleedit`
+    -   User: `page-user` to `grotto-user`
+    -   View petition: `page-viewpetition` to `grotto-viewpetition`
+    -   Weapon editor: `page-weaponeditor` to `grotto-weaponeditor`
+    -   Note: all this pages is a Grotto section.
+-   Change in core **cache** system:
+    -   Now use Cache Abstract Factory (Zend-Cache) to load all caches (you can create your own chaches)
+    -   Delete Lotgd Cache class `Lotgd\Core\Lib\Cache` and `Lotgd\Core\Factory\Lib\Cache`
+    -   Cache not is optional, always use when invoke functions of cache.
+    -   Added a static class for cache `LotgdCache`
+-   **THEME**
+    -   Updated Fomantic UI version: 2.7.8 => 2.8.3
+    -   Updated SweetAlert 2 version: ^8.18.0 => ^9.5.3
+
+### :star: FEATURES
+
+-   **lib/datacache.php** all functions. Use `LotgdCache` static class for cache functions
+
+### :fire: DEPRECATED
+
+-   None
+
+### :wrench: FIXES
+
+-   `lib/checkban.php` Fixed "error" now use Doctrine to access DB
+-   `public/rawsql.php` Fixed error, now show results of SQL query.
+-   Global user functions, fixed error with domain for translation `globaluserfunctions` => `grotto-globaluserfunctions`
+
+### :x: REMOVES
+
+-   Removed obsoleted functions from files that used it.
+-   Removed files:
+    -   `lib/censor.php` use new censor system `$censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class); $censor->filter(string)`
+    -   `lib/commentary.php` use new commentary system
+    -   `lib/http.php`
+    -   `lib/nav.php`
+    -   `lib/superusernav.php`
+    -   `lib/tabledescriptor.php`
+    -   `lib/villagenav.php`
+-   Removed vars from **common.php**: `$logd_version`, `$copyright` and `$license` use:
+    -   Public display version: `Lotgd\Core\Application::VERSION`
+    -   Identify numeric version: `Lotgd\Core\Application::VERSION_NUMBER`
+    -   Copyright text: `Lotgd\Core\Application::COPYRIGHT`
+    -   License text: `Lotgd\Core\Application::LICENSE`
+-   Removed functions from:
+    -   File: `lib/playerfunctions.php`
+        -   `is_player_online()`
+        -   `mass_is_player_online()`
+        -   `get_player_dragonkillmod()`
+        -   `get_player_info()`
+-   Removed obsoleted functions from `src/core/Output/Collector.php`:
+    -   `output()`
+    -   `output_notl()`
+    -   Note: Use new translations system and template system.
+-   Removed Settings extended from core:
+    -   Files/Classes `Lotgd\Entity\SettingsExtended` and `Lotgd\Core\Factory\Lib\SettingsExtended`
+    -   Note: This configuration was not being used
+-   Twig template:
+    -   Removed obsolete filter `sustitute`
+    -   Removed obsolete filter `nltoappon` use Twig filter `nl2br`
+
+### :notebook: NOTES
+
+-   Optimization Many files `.php` have had a slight optimization of code using CS Fixer.
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.0.0
 
 ### :cyclone: CHANGES
@@ -373,7 +468,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `sanitize_html($in)` use `LotgdSanitize::htmlSanitize($string)`
     -   `sanitize_mb($in)` use `LotgdSanitize::mbSanitize($string)`
 -   **src/core/Output/Collector.php**: Use new translations system and template system.
-    -   `output_notl()`
+    -   `output()`
     -   `output_notl()`
 -   **Twig Template System**
     -   Filters
