@@ -15,9 +15,7 @@ require_once __DIR__.'/common.php';
 $jobby = new Jobby\Jobby();
 
 //-- To avoid potential problems with other cache data and optimization/removal processes
-$cronCache = LotgdLocator::get(Lotgd\Core\Lib\Cache::class);
-$cronCache->getOptions()->setNamespace('cronjob');
-$cronCache->getOptions()->setDirPermission(0777);
+$cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
 
 $cronjobs = $cronCache->getData('tablecronjobs', 86400, true); //-- Cache for 1 day
 if (! is_array($cronjobs) || empty($cronjobs))
