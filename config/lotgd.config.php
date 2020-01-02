@@ -3,16 +3,6 @@
 return [
     \Zend\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => true, //-- This cache config of service manager recomended in production
     'lotgd_core' => [
-        'cache' => [
-            'active' => false, //-- Change to TRUE for activate cache in core
-            'base_cache_dir' => 'storage/cache',
-            'config' => [
-                'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di',
-                'namespace' => 'core',
-                'ttl' => 900,
-                'cache_dir' => 'storage/cache/lotgd',
-            ],
-        ],
         'translation' => [
             'locale' => [ 'language' => 'en', 'fallbackLanguage' => 'en' ],
             'translator_plugins' => [

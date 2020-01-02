@@ -1,6 +1,7 @@
 <?php
 
 use Lotgd\Core\Fixed\{
+    Cache as LotgdCache,
     Dbwrapper as DB,
     Doctrine,
     FlashMessages as LotgdFlashMessages,
@@ -39,3 +40,6 @@ LotgdSanitize::instance(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
 
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
+
+//-- Configure Navigation instance
+LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));

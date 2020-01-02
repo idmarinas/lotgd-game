@@ -19,7 +19,7 @@ class Settings implements FactoryInterface
     {
         $settings = new LibSettings();
         $settings->setDoctrine($container->get(\Lotgd\Core\Db\Doctrine::class))
-            ->setCache($container->get(\Lotgd\Core\Lib\Cache::class))
+            ->setCache($container->get('Cache\Core\Lotgd'))
             ->loadSettings()
         ;
 

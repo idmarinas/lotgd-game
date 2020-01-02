@@ -8,11 +8,9 @@ return [
         'factories' => [
             //-- Added in version 3.0.0
             Lotgd\Core\Character\Stats::class => InvokableFactory::class,
-            Lotgd\Core\Lib\Cache::class => Factory\Lib\Cache::class,
             Lotgd\Core\Db\Doctrine::class => Factory\Db\Doctrine::class,
             Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class,
             Lotgd\Core\Lib\Settings::class => Factory\Lib\Settings::class,
-            Lotgd\Core\Lib\SettingsExtended::class => Factory\Lib\SettingsExtended::class,
             Lotgd\Core\Output\Color::class => InvokableFactory::class,
             Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class,
             Lotgd\Core\Template\Theme::class => Factory\Template\Theme::class,

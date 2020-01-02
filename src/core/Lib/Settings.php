@@ -9,6 +9,7 @@
 namespace Lotgd\Core\Lib;
 
 use Doctrine\ORM\EntityManager;
+use Zend\Cache\Storage\StorageInterface;
 
 class Settings
 {
@@ -31,7 +32,7 @@ class Settings
     {
         if ('usedatacache' == $settingname)
         {
-            return $this->cache->isActive();
+            return true;
         }
         elseif ('datacachepath' == $settingname)
         {
@@ -98,7 +99,7 @@ class Settings
 
         $this->settings[$settingname] = $value;
 
-        $this->cache->updateData($this->getCacheKey(), $this->settings, true);
+        $this->cache->setItem($this->getCacheKey(), $this->settings);
 
         return true;
     }
@@ -108,7 +109,7 @@ class Settings
      */
     public function loadSettings()
     {
-        $this->settings = $this->cache->getData($this->getCacheKey(), 86400, true);
+        $this->settings = $this->cache->getItem($this->getCacheKey());
 
         //-- Not do nothing if not have connection to DB
         if (false === $this->isConnected())
@@ -124,7 +125,7 @@ class Settings
 
                 if (! count($result))
                 {
-                    $this->cache->invalidateData($this->getCacheKey(), true);
+                    $this->cache->removeItem($this->getCacheKey());
 
                     return null;
                 }
@@ -135,7 +136,7 @@ class Settings
                     $this->settings[$row['setting']] = $row['value'];
                 }
 
-                $this->cache->updateData($this->getCacheKey(), $this->settings, true);
+                $this->cache->setItem($this->getCacheKey(), $this->settings);
             }
             catch (\Exception $ex)
             {
@@ -150,7 +151,7 @@ class Settings
     public function clearSettings()
     {
         //scraps the $this->loadSettings() data to force it to reload.
-        $this->cache->invalidateData($this->getCacheKey(), true);
+        $this->cache->removeItem($this->getCacheKey());
         $this->settings = [];
         $this->loadSettings();
     }
@@ -246,7 +247,7 @@ class Settings
      *
      * @return $this
      */
-    public function setCache(Cache $cache)
+    public function setCache(StorageInterface $cache)
     {
         $this->cache = $cache;
 
