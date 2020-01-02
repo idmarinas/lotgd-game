@@ -13,9 +13,8 @@
 //storage mechanism for non-critical data.
 
 /**
- * Reworked by IDMarinas.
+ * @deprecated 4.1.0
  */
-$lotgdCache = LotgdLocator::get(Lotgd\Core\Lib\Cache::class);
 
 /**
  * Get data cache.
@@ -24,13 +23,18 @@ $lotgdCache = LotgdLocator::get(Lotgd\Core\Lib\Cache::class);
  * @param int    $duration Duration of the cache
  * @param bool   $force    Force to use cache
  *
+ * @deprecated 4.1.0
+ *
  * @return mixed Data on success, null on failure
  */
 function datacache(string $name, int $duration = 120, bool $force = false)
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::getItem($string)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->getData($name, $duration, $force);
+    return \LotgdCache::getItem($name);
 }
 
 /**
@@ -40,13 +44,19 @@ function datacache(string $name, int $duration = 120, bool $force = false)
  * @param mixed  $data  Data to cache
  * @param bool   $force Force to update cache
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
 function updatedatacache(string $name, $data, bool $force = false)
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::setItem($string, $data)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->updateData($name, $data, $force);
+
+    return \LotgdCache::setItem($name, $data);
 }
 
 /**
@@ -56,13 +66,18 @@ function updatedatacache(string $name, $data, bool $force = false)
  * @param string $name  Key for a data storage
  * @param bool   $force Force to invalidate cache
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
 function invalidatedatacache($name, $force = false)
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::removeItem($string)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->invalidateData($name, $force);
+    return \LotgdCache::removeItem($name);
 }
 
 /**
@@ -71,47 +86,67 @@ function invalidatedatacache($name, $force = false)
  * @param string $prefix Prefix to invalidate
  * @param bool   $force  Force to remove cache
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
-function massinvalidate($prefix, $force = false)
+function massinvalidate($prefix)
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::clearByPrefix($string)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->massInvalidate($prefix);
+    return \LotgdCache::clearByPrefix($prefix);
 }
 
 /**
  * Flush the whole storage.
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
 function datacache_empty()
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::flush()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->dataEmpty();
+    return \LotgdCache::flush();
 }
 
 /**
  * Remove expired data cache.
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
 function datacache_clearExpired()
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::clearExpired()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->dataClearExpired();
+    return \LotgdCache::clearExpired();
 }
 
 /**
  * Optimize the storage.
  *
+ * @deprecated 4.1.0
+ *
  * @return bool
  */
 function datacache_optimize()
 {
-    global $lotgdCache;
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new "LotgdCache::optimize()" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
-    return $lotgdCache->dataOptimize();
+    return \LotgdCache::optimize();
 }
