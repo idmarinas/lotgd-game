@@ -4,7 +4,7 @@
 #     {login}        = login name
 #     {acctid}       = account id
 #     {gameurl}      = URL extracted from the site
-#     {requester_IP} = IP of the requester
+#     {requester_ip} = IP of the requester
 #     {forgottenid}  = ID generated (!!! important !!!)
 forgotpassword:
     subject: 'Forgotten Password requested'
