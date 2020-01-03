@@ -42,7 +42,7 @@
 '022': "`5&quot;`6Next time, eat your Wheaties,`0&quot; {badGuy} suggests.`0"
 '023': "`5 &quot;`6You are dishonorable, `4{badGuy}`0!`0&quot; {goodGuy} cries.`0"
 '024': "`5&quot;`4{goodGuy}`0`6, your lack of posture is a disgrace,`0&quot; {badGuy} states. `0"
-'025': "`5&quot;`6You know, `4{goodGuy}`0 really had it coming to {himHer} after all those things `bI´b said about `b{hisGHer}´b mom`0,&quot; commented {badGuy}.`0"
+'025': "`5&quot;`6You know, `4{goodGuy}`0 really had it coming to {himHer} after all those things `bI´b said about `b{hisHer}´b mom`0,&quot; commented {badGuy}.`0"
 
 # Default taunt if not found (NO delete this taunt)
 default: "`5&quot;`6{badgyuname}'s mother wears combat boots`0&quot;, screams {goodguyname}.`0"
