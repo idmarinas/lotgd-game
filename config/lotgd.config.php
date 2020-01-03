@@ -13,21 +13,6 @@ return [
                     \Lotgd\Core\Translator\Loader\Yaml::class => \Zend\ServiceManager\Factory\InvokableFactory::class
                 ]
             ],
-            'cache' => [
-                'adapter' => 'filesystem',
-                'options' => [
-                    'ttl' => 86400,
-                    'cache_dir' => 'storage/cache/translation'
-                ],
-                'plugins' => [
-                    'serializer',
-                    'optimize_by_factor',
-                    'clear_expired_by_factor',
-                    'exception_handler' => [
-                        'throw_exceptions' => false
-                    ]
-                ]
-            ]
         ]
     ]
 ];

@@ -39,6 +39,7 @@ class Translator implements FactoryInterface
 
         \Locale::setDefault($language);
         $translator = LotgdTranslator::factory($translation ?? []);
+        $translator->setCache($container->get('Cache\Core\Translator'));
         $translator->setPluginManager($container->get(LoaderPluginManager::class));
 
         return $translator;
