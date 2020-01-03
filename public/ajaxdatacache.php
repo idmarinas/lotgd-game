@@ -7,35 +7,58 @@ define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-$op = \LotgdHttp::getQuery('op');
+$op = (string) \LotgdHttp::getQuery('op');
+$class = (string) \LotgdHttp::getQuery('cache');
 
-if ('optimize' == $op)
+$textDomain = 'ajax-datacache';
+
+if (\LotgdLocator::has($class))
 {
-    datacache_optimize();
+    $cache = \LotgdLocator::get($class);
 
-    echo 'ok';
-}
-elseif ('clearexpire' == $op)
-{
-    datacache_clearExpired();
+    if ('optimize' == $op)
+    {
+        $cache->optimize();
 
-    echo 'ok';
-}
-elseif ('clearall' == $op)
-{
-    datacache_empty();
+        echo 'ok';
+    }
+    elseif ('clearexpire' == $op)
+    {
+        $cache->clearExpired();
 
-    echo 'ok';
-}
-elseif ('clearbyprefix' == $op)
-{
-    $prefix = \LotgdHttp::getQuery('prefix');
+        echo 'ok';
+    }
+    elseif ('clearall' == $op)
+    {
+        $result = 'ok';
 
-    massinvalidate($prefix, true);
+        try
+        {
+            $cache->flush();
+        }
+        catch (\Exception $ex)
+        {
+            //-- With this avoid a 500 server error
+            //-- In some cases it may not be possible to delete certain files and directories because it not have permissions.
+            $result = \LotgdTranslator::t('clear.all', [], $textDomain);
+        }
 
-    echo 'ok';
+        echo $result;
+    }
+    elseif ('clearbyprefix' == $op)
+    {
+        $prefix = \LotgdHttp::getQuery('prefix');
+
+        $cache->clearByPrefix($prefix);
+
+        echo 'ok';
+    }
+    else
+    {
+        echo \LotgdTranslator::t('not.found', [], $textDomain);
+    }
 }
 else
 {
-    echo 'error';
+    echo \LotgdTranslator::t('factory', ['name' => $class], $textDomain);
 }

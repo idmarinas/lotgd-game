@@ -1,7 +1,8 @@
 define([
     '../core',
-    '../external/jquery'
-], function (Lotgd, jQuery)
+    '../external/jquery',
+    '../external/swal'
+], function (Lotgd, jQuery, Swal)
 {
     'use strict'
 
@@ -12,84 +13,135 @@ define([
      *
      * @description Function of storage cache
      *
-     * @param {Object} type optimize|clearexpire|clearall|clearbyprefix
+     * @param {string} cache Name of cache
+     * @param {string} type optimize|clearexpire|clearall|clearbyprefix
      */
-    Lotgd.datacache = function (type)
+    Lotgd.datacache = function (cache, type)
     {
         let options = {}
         if (type === 'optimize')
         {
-            options = optimize()
+            options = optimize(cache)
         }
         else if (type === 'clearexpire')
         {
-            options = clearexpire()
+            options = clearexpire(cache)
         }
         else if (type === 'clearall')
         {
-            options = clearall()
+            options = clearall(cache)
         }
         else if (type === 'clearbyprefix')
         {
-            options = clearbyprefix()
+            options = clearbyprefix(cache)
         }
         else
         {
             return
         }
 
-        Lotgd.swal(jQuery.extend({ type: 'question', showLoaderOnConfirm: true, showCancelButton: true }, options))
+        options = jQuery.extend({ icon: 'question', showLoaderOnConfirm: true, showCancelButton: true }, options)
+        Swal.configChange(options)
+        Swal.get().fire(options)
     }
 
-    function optimize ()
+    function optimize (cache)
     {
         return {
             title: 'Optimize data cache',
             confirmButtonText: 'Yes, optimize',
-            text: 'Want optimize data cache of game?',
+            text: `Want optimize data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jQuery.get('ajaxdatacache.php?op=optimize')
+                return jQuery.get(`ajaxdatacache.php?op=optimize&cache=${cache}`).then(response =>
+                {
+                    if (!response.ok)
+                    {
+                        throw new Error(response.statusText)
+                    }
+
+                    return response
+                })
+                    .catch(error =>
+                    {
+                        Swal.get().showValidationMessage(error)
+                    })
             }
         }
     }
 
-    function clearexpire ()
+    function clearexpire (cache)
     {
         return {
             title: 'Clear expire data cache',
             confirmButtonText: 'Yes, clear expire',
-            text: 'Want clear expire data cache of game?',
+            text: `Want clear expire data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jQuery.get('ajaxdatacache.php?op=clearexpire')
+                return jQuery.get(`ajaxdatacache.php?op=clearexpire&cache=${cache}`).then(response =>
+                {
+                    if (!response.ok)
+                    {
+                        throw new Error(response.statusText)
+                    }
+
+                    return response
+                })
+                    .catch(error =>
+                    {
+                        Swal.get().showValidationMessage(error)
+                    })
             }
         }
     }
 
-    function clearall ()
+    function clearall (cache)
     {
         return {
             title: 'Clear all data cache',
             confirmButtonText: 'Yes, clear all',
-            text: 'This action empty the cache directory including the template directory, Want clear all data cache of game?',
+            text: `This action empty the cache directory of "${cache}", Want clear all data cache?`,
             preConfirm: () =>
             {
-                return jQuery.get('ajaxdatacache.php?op=clearall')
+                return jQuery.get(`ajaxdatacache.php?op=clearall&cache=${cache}`).then(response =>
+                {
+                    if (!response.ok)
+                    {
+                        throw new Error(response.statusText)
+                    }
+
+                    return response
+                })
+                    .catch(error =>
+                    {
+                        Swal.get().showValidationMessage(error)
+                    })
             }
         }
     }
 
-    function clearbyprefix ()
+    function clearbyprefix (cache)
     {
         return {
             title: 'Clear data cache by prefix',
             confirmButtonText: 'Yes, clear this',
-            text: 'Type the prefix of the cache data to be deleted',
+            text: `Type the prefix of the cache data to be deleted for "${cache}"`,
             input: 'text',
             preConfirm: (prefix) =>
             {
-                return jQuery.get('ajaxdatacache.php?op=clearbyprefix&prefix=' + prefix)
+                return jQuery.get(`ajaxdatacache.php?op=clearbyprefix&prefix=${prefix}&cache=${cache}`).then(response =>
+                {
+                    if (!response.ok)
+                    {
+                        throw new Error(response.statusText)
+                    }
+
+                    return response
+                })
+                    .catch(error =>
+                    {
+                        Swal.get().showValidationMessage(error)
+                    })
             }
         }
     }
