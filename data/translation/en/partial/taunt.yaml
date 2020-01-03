@@ -47,6 +47,6 @@
 # Default taunt if not found (NO delete this taunt)
 default: "`5&quot;`6{badgyuname}'s mother wears combat boots`0&quot;, screams {goodguyname}.`0"
 # Please update this with the real count of taunts
-count: 25 # This is total count of taunts messages
+count: 26 # This is total count of taunts messages
 
 # You can add new taunt, add it after the last taunt '025' and follow the sequence.
