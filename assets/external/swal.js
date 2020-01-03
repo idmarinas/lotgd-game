@@ -17,7 +17,16 @@ define([
             html: '',
             icon: null,
             target: 'body',
-            animation: true,
+            showClass: {
+                popup: 'swal2-show',
+                backdrop: 'swal2-backdrop-show',
+                icon: 'swal2-icon-show'
+            },
+            hideClass: {
+                popup: 'swal2-hide',
+                backdrop: 'swal2-backdrop-hide',
+                icon: 'swal2-icon-hide'
+            },
             allowOutsideClick: true,
             allowEscapeKey: true,
             allowEnterKey: true,
