@@ -5,7 +5,6 @@
 // mail ready
 require_once 'common.php';
 require_once 'lib/nltoappon.php';
-require_once 'lib/commentary.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/sanitize.php';
 

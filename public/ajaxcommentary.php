@@ -40,8 +40,6 @@ if ($now > $expiresin || (isset($session['user']['chatloc']) && 'global_banter' 
 }
 else
 {
-    require_once 'lib/commentary.php';
-
     $message = $_REQUEST['message'];
     $limit = $_REQUEST['limit'];
     $talkline = $_REQUEST['talkline'];

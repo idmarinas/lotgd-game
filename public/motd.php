@@ -7,7 +7,6 @@ define('ALLOW_ANONYMOUS', true);
 define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
-require_once 'lib/commentary.php';
 require_once 'lib/nltoappon.php';
 
 use Doctrine\ORM\Query\Expr\Join;

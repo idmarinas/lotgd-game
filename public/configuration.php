@@ -17,7 +17,9 @@ page_header('title', [], $textDomain);
 $save = (string) \LotgdHttp::getQuery('save');
 $type_setting = (string) \LotgdHttp::getQuery('setting');
 
-$params = [];
+$params = [
+    'textDomain' => $textDomain
+];
 
 \LotgdNavigation::superuserGrottoNav();
 \LotgdNavigation::addNav('Module Manager', 'modules.php');

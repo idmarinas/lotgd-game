@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/commentary.php';
 
 // Don't hook on to this text for your standard modules please, use "gypsy" instead.
 // This hook is specifically to allow modules that do other gypsys to create ambience.
