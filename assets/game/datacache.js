@@ -53,19 +53,7 @@ define([
             text: `Want optimize data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jQuery.get(`ajaxdatacache.php?op=optimize&cache=${cache}`).then(response =>
-                {
-                    if (!response.ok)
-                    {
-                        throw new Error(response.statusText)
-                    }
-
-                    return response
-                })
-                    .catch(error =>
-                    {
-                        Swal.get().showValidationMessage(error)
-                    })
+                return jqueryGet(`ajaxdatacache.php?op=optimize&cache=${cache}`)
             }
         }
     }
@@ -78,19 +66,7 @@ define([
             text: `Want clear expire data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jQuery.get(`ajaxdatacache.php?op=clearexpire&cache=${cache}`).then(response =>
-                {
-                    if (!response.ok)
-                    {
-                        throw new Error(response.statusText)
-                    }
-
-                    return response
-                })
-                    .catch(error =>
-                    {
-                        Swal.get().showValidationMessage(error)
-                    })
+                return jqueryGet(`ajaxdatacache.php?op=clearexpire&cache=${cache}`)
             }
         }
     }
@@ -103,19 +79,7 @@ define([
             text: `This action empty the cache directory of "${cache}", Want clear all data cache?`,
             preConfirm: () =>
             {
-                return jQuery.get(`ajaxdatacache.php?op=clearall&cache=${cache}`).then(response =>
-                {
-                    if (!response.ok)
-                    {
-                        throw new Error(response.statusText)
-                    }
-
-                    return response
-                })
-                    .catch(error =>
-                    {
-                        Swal.get().showValidationMessage(error)
-                    })
+                return jqueryGet(`ajaxdatacache.php?op=clearall&cache=${cache}`)
             }
         }
     }
@@ -129,21 +93,31 @@ define([
             input: 'text',
             preConfirm: (prefix) =>
             {
-                return jQuery.get(`ajaxdatacache.php?op=clearbyprefix&prefix=${prefix}&cache=${cache}`).then(response =>
-                {
-                    if (!response.ok)
-                    {
-                        throw new Error(response.statusText)
-                    }
-
-                    return response
-                })
-                    .catch(error =>
-                    {
-                        Swal.get().showValidationMessage(error)
-                    })
+                return jqueryGet(`ajaxdatacache.php?op=clearbyprefix&cache=${cache}&prefix=${prefix}`)
             }
         }
+    }
+
+    /**
+     * Pattern function to execute a url
+     *
+     * @param {string} url Url to execute
+     */
+    function jqueryGet (url)
+    {
+        return jQuery.get(url).then(response =>
+        {
+            if (response !== 'ok')
+            {
+                throw new Error(response.statusText)
+            }
+
+            return response
+        })
+            .catch(error =>
+            {
+                Swal.get().showValidationMessage(error)
+            })
     }
 
     return Lotgd
