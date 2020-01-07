@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\ServiceManager;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\TwigTest;
@@ -34,14 +33,6 @@ class GameCore extends AbstractExtension
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
-
-    /**
-     * @param ServiceManager $serviceManager
-     */
-    public function __construct(ServiceManager $serviceManager)
-    {
-        $this->setContainer($serviceManager);
-    }
 
     /**
      * {@inheritdoc}

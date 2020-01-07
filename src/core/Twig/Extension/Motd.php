@@ -14,26 +14,16 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\EntityRepository\MotdRepository;
-use Lotgd\Core\Pattern\Container;
-use Lotgd\Core\Pattern\Repository;
-use Lotgd\Core\ServiceManager;
+use Lotgd\Core\Pattern as PatternCore;
 use Twig\TwigFunction;
 
 class Motd extends AbstractExtension
 {
-    use Container;
-    use Repository;
+    use PatternCore\Container;
+    use PatternCore\Repository;
     use Pattern\Motd;
 
     protected $repository;
-
-    /**
-     * @param ServiceManager $serviceManager
-     */
-    public function __construct(ServiceManager $serviceManager)
-    {
-        $this->setContainer($serviceManager);
-    }
 
     /**
      * {@inheritdoc}

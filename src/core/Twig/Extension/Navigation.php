@@ -16,28 +16,18 @@ namespace Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
 use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\Pattern\Container;
-use Lotgd\Core\ServiceManager;
 use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension
 {
-    use Container;
+    use PatternCore\Container;
+    use PatternCore\Translator;
     use Pattern\AttributesString;
     use Pattern\Navigation;
-    use PatternCore\Translator;
 
     protected $navigation;
     protected $translator;
     protected $accesskeys;
-
-    /**
-     * @param ServiceManager $serviceManager
-     */
-    public function __construct(ServiceManager $serviceManager)
-    {
-        $this->setContainer($serviceManager);
-    }
 
     /**
      * {@inheritdoc}

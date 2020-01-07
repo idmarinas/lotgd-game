@@ -16,7 +16,6 @@ namespace Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Output\Commentary as CommentaryCore;
 use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\ServiceManager;
-use Lotgd\Core\Translator\Translator;
 use Lotgd\Core\Twig\NodeVisitor\{
     CommentaryDefaultAddCommentNodeVisitor,
     CommentaryDefaultDomainStatusNodeVisitor,
@@ -51,14 +50,6 @@ class Commentary extends AbstractExtension
      * @var array
      */
     protected $onlineStatus;
-
-    /**
-     * @param ServiceManager $serviceManager
-     */
-    public function __construct(ServiceManager $serviceManager)
-    {
-        $this->setContainer($serviceManager);
-    }
 
     /**
      * {@inheritdoc}

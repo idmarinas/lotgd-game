@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Twig\NodeVisitor\{
     TranslatorDefaultDomainNodeVisitor,
     TranslatorNodeVisitor
@@ -31,14 +30,6 @@ class Translator extends AbstractExtension
 
     protected $translator;
     protected $translatorNodeVisitor;
-
-    /**
-     * @param ServiceManager $serviceManager
-     */
-    public function __construct(ServiceManager $serviceManager)
-    {
-        $this->setContainer($serviceManager);
-    }
 
     /**
      * {@inheritdoc}
