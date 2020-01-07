@@ -16,7 +16,8 @@ page_header('title', [], $textDomain);
 $op = \LotgdHttp::getQuery('op');
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
+    'ownerName' => getsetting('bankername', '`@Elessa`0')
 ];
 
 if ('transfer' == $op)
