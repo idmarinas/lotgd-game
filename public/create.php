@@ -276,7 +276,7 @@ elseif ('create' == $op)
         $blockaccount = true;
     }
 
-    $args = modulehook('check-create', httpallpost());
+    $args = modulehook('check-create', \LotgdHttp::getPostAll());
 
     if (isset($args['blockaccount']) && $args['blockaccount'])
     {

@@ -78,7 +78,7 @@ if ('' != $name)
             // this name.
             foreach ($result as $key => $row)
             {
-                $post = httpallpost();
+                $post = \LotgdHttp::getPostAll();
 
                 $failLog = new \Lotgd\Core\Entity\Faillog();
                 $failLog->setEventid(0)
