@@ -17,14 +17,14 @@ $jobby = new Jobby\Jobby();
 //-- To avoid potential problems with other cache data and optimization/removal processes
 $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
 
-$cronjobs = $cronCache->getData('tablecronjobs', 86400, true); //-- Cache for 1 day
+$cronjobs = $cronCache->getItem('tablecronjobs'); //-- Cache for 1 day
 if (! is_array($cronjobs) || empty($cronjobs))
 {
     $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
     $entities = $repository->findBy(['enabled' => 1]);
     $cronjobs = $repository->extractEntity($entities);
 
-    $cronCache->updateData('tablecronjobs', $cronjobs, true);
+    $cronCache->setItem('tablecronjobs', $cronjobs);
 }
 
 //-- Add all cronjobs to Jobby CronJob
