@@ -66,7 +66,8 @@ if ('savecronjob' == $op)
         $op = '';
     }
 
-    invalidatedatacache('cronjobstable', true);
+    $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
+    $cronId->removeItem('cronjobstable');
 }
 elseif ('delcronjob' == $op)
 {
@@ -78,7 +79,8 @@ elseif ('delcronjob' == $op)
 
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
-        invalidatedatacache('cronjobstable', true);
+        $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
+        $cronId->removeItem('cronjobstable');
 
         \Doctrine::remove($cronEntity);
         \Doctrine::flush();

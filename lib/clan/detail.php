@@ -26,7 +26,7 @@ if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost(
 
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.detail.superuser.update.clan.names', [], $textDomain));
 
-        invalidatedatacache("clandata-{$clanId}");
+        LotgdCache::removeItem("clandata-{$clanId}");
     }
 
     if ($blockDesc)
@@ -37,7 +37,7 @@ if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost(
 
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.detail.superuser.update.clan.description.block', [], $textDomain));
 
-        invalidatedatacache("clandata-{$clanId}");
+        LotgdCache::removeItem("clandata-{$clanId}");
     }
     elseif ($unblockDesc)
     {
@@ -47,7 +47,7 @@ if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost(
 
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('section.detail.superuser.update.clan.description.unblock', [], $textDomain));
 
-        invalidatedatacache("clandata-{$clanId}");
+        LotgdCache::removeItem("clandata-{$clanId}");
     }
 
     \Doctrine::persist($params['clanDetail']);

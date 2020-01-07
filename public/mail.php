@@ -33,7 +33,7 @@ if ('unread' == $op)
         \Doctrine::persist($unread);
         \Doctrine::flush();
 
-        invalidatedatacache("mail-{$session['user']['acctid']}");
+        LotgdCache::removeItem("mail-{$session['user']['acctid']}");
     }
 
     $op = '';
@@ -201,7 +201,7 @@ switch ($op)
 
                 systemmail($account->getAcctid(), $subject, $body, $from);
 
-                invalidatedatacache("mail-{$account->getAcctid()}");
+                LotgdCache::removeItem("mail-{$account->getAcctid()}");
             }
         }
     default:

@@ -303,7 +303,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
                 $companions = $newcompanions;
             }
 
-            invalidatedatacache('list.php-warsonline');
+            LotgdCache::removeItem('list.php-warsonline');
 
             if (getsetting('displaymasternews', 1))
             {

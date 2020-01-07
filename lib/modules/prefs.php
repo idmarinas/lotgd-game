@@ -16,7 +16,7 @@ function module_delete_userprefs(int $user)
 
     \Doctrine::flush();
 
-    massInvalidate("module-prefs-$user", true);
+    LotgdCache::clearByPrefix("module-prefs-$user", true);
 }
 
 /**
@@ -241,7 +241,7 @@ function clear_module_pref($name, $module = false, $user = false)
         // We do need to trash the loaded copy here however
         unset($module_prefs[$name]);
 
-        updatedatacache("module-prefs-$user-$module", $module_prefs, true);
+        \LotgdCache::setItem("module-prefs-$user-$module", $module_prefs);
 
         return;
     }

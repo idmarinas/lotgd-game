@@ -11,7 +11,7 @@
 function lotgd_generate_creature_levels($level = null)
 {
     $maxlvl = getsetting('maxlevel', 15) + 5;
-    $stats = datacache("lotgd-generate-creature-levels-{$maxlvl}", 83000, true);
+    $stats = \LotgdCache::getItem("lotgd-generate-creature-levels-{$maxlvl}");
 
     if (empty($stats))
     {
@@ -42,7 +42,7 @@ function lotgd_generate_creature_levels($level = null)
             ];
         }
 
-        updatedatacache("lotgd-generate-creature-levels-$maxlvl", $stats, true);
+        \LotgdCache::setItem("lotgd-generate-creature-levels-$maxlvl", $stats);
     }
 
     return ($stats[$level] ?? $stats);

@@ -103,7 +103,7 @@ function set_module_setting($name, $value, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("module-settings-$module", true);
+    LotgdCache::removeItem("module-settings-$module");
 }
 
 /**
@@ -137,7 +137,7 @@ function increment_module_setting($name, $value = 1, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("module-settings-$module", true);
+    LotgdCache::removeItem("module-settings-$module");
 }
 
 /**
@@ -155,7 +155,7 @@ function clear_module_settings($module = false)
     }
 
     debug("Deleted module settings cache for $module.");
-    invalidatedatacache("module-settings-$module");
+    LotgdCache::removeItem("module-settings-$module");
 }
 
 /**
@@ -167,7 +167,7 @@ function clear_module_settings($module = false)
  */
 function load_module_settings($module): array
 {
-    $module_settings = datacache("module-settings-$module", 86400, true);
+    $module_settings = \LotgdCache::getItem("module-settings-$module");
 
     if (! is_array($module_settings))
     {
@@ -180,7 +180,7 @@ function load_module_settings($module): array
             $module_settings[$val->getSetting()] = $val->getValue();
         }
 
-        updatedatacache("module-settings-$module", $module_settings, true);
+        \LotgdCache::setItem("module-settings-$module", $module_settings);
     }//end if
 
     return $module_settings;

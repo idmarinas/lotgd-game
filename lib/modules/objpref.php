@@ -20,7 +20,7 @@ function module_delete_objprefs($objtype, $objid)
 
     \Doctrine::flush();
 
-    massinvalidate("module-objpref-$objtype-$objid-$mostrecentmodule");
+    LotgdCache::clearByPrefix("module-objpref-$objtype-$objid-$mostrecentmodule");
 }
 
 /**
@@ -106,7 +106,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
+    LotgdCache::removeItem("module-objpref-$objtype-$objid-$module", true);
 }
 
 /**
@@ -144,7 +144,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("module-objpref-$objtype-$objid-$module", true);
+    LotgdCache::removeItem("module-objpref-$objtype-$objid-$module", true);
 }
 
 /**
@@ -165,7 +165,7 @@ function load_module_objpref($objtype, $objid, $module = false): array
         $module = $mostrecentmodule;
     }
 
-    $module_objpref = datacache("module-objpref-$objtype-$objid-$module", 900, true);
+    $module_objpref = \LotgdCache::getItem("module-objpref-$objtype-$objid-$module");
 
     if (! is_array($module_objpref))
     {
@@ -178,7 +178,7 @@ function load_module_objpref($objtype, $objid, $module = false): array
             $module_objpref[$val->getSetting()] = $val->getValue();
         }
 
-        updatedatacache("module-objpref-$objtype-$objid-$module", $module_objpref, true);
+        \LotgdCache::setItem("module-objpref-$objtype-$objid-$module", $module_objpref);
     }
 
     return $module_objpref;

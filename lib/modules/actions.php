@@ -15,8 +15,8 @@ function activate_module($module)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("injections-inject-$module");
-    massinvalidate('moduleprepare');
+    LotgdCache::removeItem("injections-inject-$module");
+    LotgdCache::clearByPrefix('moduleprepare');
 
     return true;
 }
@@ -44,8 +44,8 @@ function deactivate_module($module)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("injections-inject-$module");
-    massinvalidate('moduleprepare');
+    LotgdCache::removeItem("injections-inject-$module");
+    LotgdCache::clearByPrefix('moduleprepare');
 
     return true;
 }
@@ -78,7 +78,7 @@ function uninstall_module($module)
         {
             \Doctrine::remove($entity);
         }
-        invalidatedatacache("modulesettings-settings-$module");
+        LotgdCache::removeItem("modulesettings-settings-$module");
 
         debug('Deleting module user prefs`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
@@ -95,8 +95,8 @@ function uninstall_module($module)
         {
             \Doctrine::remove($entity);
         }
-        invalidatedatacache("injections-inject-$module");
-        massinvalidate('moduleprepare');
+        LotgdCache::removeItem("injections-inject-$module");
+        LotgdCache::clearByPrefix('moduleprepare');
 
         \Doctrine::flush();
 
@@ -198,8 +198,8 @@ function install_module($module, $force = true)
                 }
 
                 debug('`^Module installed.  It is not yet active.`n');
-                invalidatedatacache("injections-inject-$mostrecentmodule");
-                massinvalidate('moduleprepare');
+                LotgdCache::removeItem("injections-inject-$mostrecentmodule");
+                LotgdCache::clearByPrefix('moduleprepare');
 
                 return true;
             }

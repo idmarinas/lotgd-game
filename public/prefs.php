@@ -52,8 +52,8 @@ if ('suicide' == $op && $params['selfDelete'])
         $session['loggedin'] = false;
         $session['user']['loggedin'] = false;
 
-        invalidatedatacache('charlisthomepage');
-        invalidatedatacache('list.php-warsonline');
+        LotgdCache::removeItem('charlisthomepage');
+        LotgdCache::removeItem('list.php-warsonline');
 
         return redirect('home.php');
     }

@@ -23,7 +23,7 @@ function exp_for_next_level($curlevel, $curdk)
 
     $dataCacheKey = 'exp-for-next-level-array-'.md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}-";
 
-    $exparray = datacache($dataCacheKey, 86400, true); //fetch all for that DK if already calculated!
+    $exparray = \LotgdCache::getItem($dataCacheKey); //fetch all for that DK if already calculated!
     //check if datacache is here
     if (! is_array($exparray))
     {
@@ -54,7 +54,7 @@ function exp_for_next_level($curlevel, $curdk)
             }
         }
 
-        updatedatacache($dataCacheKey, $exparray, true);
+        \LotgdCache::setItem($dataCacheKey, $exparray);
     }
     //-- Avoid level less than 0 and more than max lvl
     $curlevel = min(max($curlevel - 1, 0), $maxlevel);
@@ -62,7 +62,7 @@ function exp_for_next_level($curlevel, $curdk)
     //-- If not find level invalidate cache and redo it
     if (! isset($exparray[$curlevel]))
     {
-        invalidatedatacache($dataCacheKey, true);
+        LotgdCache::removeItem($dataCacheKey, true);
 
         return exp_for_next_level($curlevel, $curdk);
     }

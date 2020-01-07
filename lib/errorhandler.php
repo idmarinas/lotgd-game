@@ -75,7 +75,7 @@ function logd_error_notify($errno, $errstr, $errfile, $errline, $backtrace)
     $sendto = explode(';', getsetting('notify_address', ''));
     $howoften = getsetting('notify_every', 30);
     reset($sendto);
-    $data = datacache('error_notify', 86400);
+    $data = \LotgdCache::getItem('error_notify');
 
     if (! is_array($data))
     {
@@ -158,7 +158,7 @@ $html_text
             debug("Not notifying users for this error, it's only been ".round((strtotime('now') - $data['errors'][$errstr]) / 60, 2).' minutes.');
         }
     }
-    updatedatacache('error_notify', $data);
+    \LotgdCache::setItem('error_notify', $data);
     debug($data);
 }
 // set_error_handler("logd_error_handler");

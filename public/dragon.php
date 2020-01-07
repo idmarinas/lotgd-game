@@ -198,7 +198,7 @@ elseif ('prologue' == $op)
     // Moved this hear to make some things easier.
     modulehook('dragonkill', []);
 
-    invalidatedatacache('list.php-warsonline');
+    LotgdCache::removeItem('list.php-warsonline');
 
     //-- This is only for params not use for other purpose
     $params = modulehook('page-dragon-tpl-params', $params);

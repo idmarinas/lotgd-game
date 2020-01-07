@@ -34,7 +34,7 @@ if ('deactivate' == $op)
 
     $op = '';
     \LotgdHttp::setQuery('op', '');
-    invalidatedatacache("mountdata-$mountId");
+    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('activate' == $op)
 {
@@ -45,7 +45,7 @@ elseif ('activate' == $op)
 
     $op = '';
     \LotgdHttp::setQuery('op', '');
-    invalidatedatacache("mountdata-$mountId");
+    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('del' == $op)
 {
@@ -60,7 +60,7 @@ elseif ('del' == $op)
 
     $op = '';
     \LotgdHttp::setQuery('op', '');
-    invalidatedatacache("mountdata-$mountId");
+    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('give' == $op)
 {
@@ -94,7 +94,7 @@ elseif ('save' == $op)
 
             \Doctrine::persist($mountEntity);
 
-            invalidatedatacache("mountdata-$mountId");
+            LotgdCache::removeItem("mountdata-$mountId");
 
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
         }

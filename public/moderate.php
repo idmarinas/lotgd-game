@@ -36,13 +36,13 @@ if ($seen)
 
 $commentary = new \Lotgd\Core\Output\Commentary();
 $params['sectionName'] = $commentary->commentaryLocs();
-$sections = datacache('commentary-published-sections', 1800, true);
+$sections = \LotgdCache::getItem('commentary-published-sections');
 
 if (! is_array($sections) || ! count($sections))
 {
     $sections = $repository->getPublishedSections();
 
-    updatedatacache('commentary-published-sections', $sections, true);
+    \LotgdCache::setItem('commentary-published-sections', $sections);
 }
 
 \LotgdNavigation::addHeader('moderate.category.sections');

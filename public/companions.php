@@ -56,7 +56,7 @@ if ('deactivate' == $op)
     $op = '';
     \LotgdHttp::setQuery('op', '');
 
-    invalidatedatacache("companionsdata-{$id}");
+    LotgdCache::removeItem("companionsdata-{$id}");
 }
 elseif ('activate' == $op)
 {
@@ -68,7 +68,7 @@ elseif ('activate' == $op)
     $op = '';
     \LotgdHttp::setQuery('op', '');
 
-    invalidatedatacache("companiondata-{$id}");
+    LotgdCache::removeItem("companiondata-{$id}");
 }
 elseif ('del' == $op)
 {
@@ -80,7 +80,7 @@ elseif ('del' == $op)
     \LotgdHttp::setQuery('op', '');
 
     module_delete_objprefs('companions', $id);
-    invalidatedatacache("companiondata-$id");
+    LotgdCache::removeItem("companiondata-$id");
 }
 elseif ('take' == $op)
 {
@@ -142,7 +142,7 @@ elseif ('save' == $op)
 
             \Doctrine::persist($companionEntity);
 
-            invalidatedatacache("companiondata-{$id}");
+            LotgdCache::removeItem("companiondata-{$id}");
 
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
         }

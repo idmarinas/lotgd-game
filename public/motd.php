@@ -44,7 +44,7 @@ if ('vote' == $op)
     \Doctrine::flush();
     \Doctrine::clear();
 
-    invalidatedatacache("poll-$motditem");
+    LotgdCache::removeItem("poll-$motditem");
 
     return redirect('motd.php');
 }
@@ -201,9 +201,9 @@ elseif ('del' == $op)
     $q->setParameter('id', $id);
     $deleted = $q->execute();
 
-    invalidatedatacache('motd');
-    invalidatedatacache('lastmotd');
-    invalidatedatacache('motddate');
+    LotgdCache::removeItem('motd');
+    LotgdCache::removeItem('lastmotd');
+    LotgdCache::removeItem('motddate');
 
     return redirect('motd.php');
 }

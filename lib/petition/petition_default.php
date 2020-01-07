@@ -46,7 +46,7 @@ if (\LotgdHttp::isPost())
     \Doctrine::flush();
 
     // Fix the counter
-    invalidatedatacache('petitioncounts');
+    LotgdCache::removeItem('petitioncounts');
     // If the admin wants it, email the petitions to them.
     if (getsetting('emailpetitions', 0))
     {

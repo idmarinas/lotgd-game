@@ -118,7 +118,7 @@ function injectmodule($modulename, $force = false)
                 {
                     return false;
                 }
-                invalidatedatacache("injections-inject-$modulename");
+                LotgdCache::removeItem("injections-inject-$modulename");
             }
         }
         $injected_modules[$force][$modulename] = true;

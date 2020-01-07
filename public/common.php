@@ -209,8 +209,8 @@ if (getsetting('fullmaintenance', 0))
             $session['user']['restorepage'] = 'inn.php?op=strolldown';
         }
 
-        invalidatedatacache('charlisthomepage');
-        invalidatedatacache('list.php-warsonline');
+        LotgdCache::removeItem('charlisthomepage');
+        LotgdCache::removeItem('list.php-warsonline');
 
         saveuser();
 

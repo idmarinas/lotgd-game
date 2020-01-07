@@ -206,7 +206,7 @@ function module_wipehooks(string $module)
     foreach($result as $row)
     {
         \Doctrine::remove($row);
-        invalidatedatacache('hooks-hook-'.$row->getLocation());
+        LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
@@ -239,7 +239,7 @@ function module_addeventhook($type, $chance)
 
     \Doctrine::flush();
 
-    invalidatedatacache("event-$type");
+    LotgdCache::removeItem("event-$type");
 }
 
 function module_drophook($hookname, $functioncall = false)
@@ -261,8 +261,8 @@ function module_drophook($hookname, $functioncall = false)
 
     \Doctrine::flush();
 
-    invalidatedatacache("hooks-hook-$hookname");
-    invalidatedatacache('moduleprepare');
+    LotgdCache::removeItem("hooks-hook-$hookname");
+    LotgdCache::removeItem('moduleprepare');
 }
 
 /**
@@ -322,6 +322,6 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    invalidatedatacache("hooks-hook-$hookname");
-    invalidatedatacache('moduleprepare');
+    LotgdCache::removeItem("hooks-hook-$hookname");
+    LotgdCache::removeItem('moduleprepare');
 }

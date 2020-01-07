@@ -59,7 +59,7 @@ if ($customsay && $claninfo['customsay'] != $customsay)
 
 if ($invalidateCache)
 {
-    invalidatedatacache("clandata-{$claninfo['clanid']}");
+    LotgdCache::removeItem("clandata-{$claninfo['clanid']}");
 }
 
 \Doctrine::persist($clanEntity);

@@ -58,7 +58,7 @@ if ('' == $op)
             \Doctrine::persist($result);
             \Doctrine::flush();
 
-            invalidatedatacache('petition_counts');
+            LotgdCache::removeItem('petition_counts');
         }
     }
 

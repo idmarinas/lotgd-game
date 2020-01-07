@@ -180,8 +180,8 @@ if ('' != $name)
     $session['sentnotice'] = 0;
     $session['user']['laston'] = new \DateTime('now');
 
-    invalidatedatacache('charlisthomepage');
-    invalidatedatacache('list.php-warsonline');
+    LotgdCache::removeItem('charlisthomepage');
+    LotgdCache::removeItem('list.php-warsonline');
 
     // Handle the change in number of users online
     translator_check_collect_texts();
@@ -238,8 +238,8 @@ elseif ('logout' == $op)
 
         $session['user']['loggedin'] = false;
 
-        invalidatedatacache('charlisthomepage');
-        invalidatedatacache('list.php-warsonline');
+        LotgdCache::removeItem('charlisthomepage');
+        LotgdCache::removeItem('list.php-warsonline');
 
         // Let's throw a logout module hook in here so that modules
         // like the stafflist which need to invalidate the cache

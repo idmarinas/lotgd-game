@@ -750,7 +750,7 @@ function charstats($return = true)
         return;
     }
 
-    if (! $ret = datacache('charlisthomepage'))
+    if (! $ret = \LotgdCache::getItem('charlisthomepage'))
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
@@ -776,7 +776,7 @@ function charstats($return = true)
 
         savesetting('OnlineCount', $onlinecount);
         savesetting('OnlineCountLast', strtotime('now'));
-        updatedatacache('charlisthomepage', $ret);
+        \LotgdCache::setItem('charlisthomepage', $ret);
     }
 
     return $ret;

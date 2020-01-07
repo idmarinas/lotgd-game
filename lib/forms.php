@@ -14,13 +14,13 @@ function previewfield($name, $startdiv = false, $talkline = 'says', $showcharsle
         $startdiv = '';
     }
 
-    $switchscript = datacache('switchscript_comm'.rawurlencode($name));
+    $switchscript = \LotgdCache::getItem('switchscript_comm'.rawurlencode($name));
 
     if (! is_array($switchscript))
     {
         $switchscript = '<script>Lotgd.set("colors", "'.addslashes(json_encode($output->getColors())).'");</script>';
 
-        updatedatacache('switchscript_comm'.rawurlencode($name), $switchscript);
+        \LotgdCache::setItem('switchscript_comm'.rawurlencode($name), $switchscript);
     }
 
     $script .= $switchscript;

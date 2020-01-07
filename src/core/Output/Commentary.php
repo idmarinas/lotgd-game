@@ -93,7 +93,7 @@ class Commentary
         //-- Add data of clan
         if ($session['user']['clanid'] && $session['user']['clanrank'])
         {
-            $clanInfo = datacache("commentary-claninfo-{$session['user']['clanid']}", 86400, true);
+            $clanInfo = \LotgdCache::getItem("commentary-claninfo-{$session['user']['clanid']}");
 
             if (! is_array($clanInfo) || empty($clanInfo))
             {
@@ -103,7 +103,7 @@ class Commentary
 
                 $clanInfo['clanrank'] = $session['user']['clanrank'];
 
-                updatedatacache("commentary-claninfo-{$session['user']['clanid']}", $clanInfo, true);
+                \LotgdCache::setItem("commentary-claninfo-{$session['user']['clanid']}", $clanInfo);
             }
 
             $post['clanId'] = $session['user']['clanid'];
@@ -303,7 +303,7 @@ class Commentary
      */
     public function commentaryLocs(): array
     {
-        $comsecs = datacache('commentary-comsecs', 1800, true);
+        $comsecs = \LotgdCache::getItem('commentary-comsecs');
 
         if (is_array($comsecs) && count($comsecs))
         {
@@ -328,7 +328,7 @@ class Commentary
         // All of the ones after this will be translated in the modules.
         $comsecs = modulehook('moderate-comment-sections', $comsecs);
 
-        updatedatacache('commentary-comsecs', $comsecs, true);
+        \LotgdCache::setItem('commentary-comsecs', $comsecs);
 
         return $comsecs;
     }
