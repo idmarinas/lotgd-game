@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Output\Commentary as CommentaryCore;
 use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\ServiceManager;
 use Lotgd\Core\Twig\NodeVisitor\{
     CommentaryDefaultAddCommentNodeVisitor,
     CommentaryDefaultDomainStatusNodeVisitor,
