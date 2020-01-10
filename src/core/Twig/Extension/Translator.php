@@ -70,10 +70,14 @@ class Translator extends AbstractExtension
              * Only need if you use "translate_default_domain" in template.
              */
             new TwigFilter('tl', [$this, 'translate']),
-            /*
+            /**
              * Use MessageFormatter to formater message.
              */
             new TwigFilter('tmf', [$this, 'translateMf']),
+            /**
+             * Only select a translation WITHOUT MessageFormatter.
+             */
+            new TwigFilter('tst', [$this, 'translateSt']),
         ];
     }
 

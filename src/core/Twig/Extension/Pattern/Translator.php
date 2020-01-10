@@ -62,6 +62,24 @@ trait Translator
     }
 
     /**
+     * Format a message without MessageFormatter.
+     *
+     * @param string $message
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function translateSt($message, $locale = null): string
+    {
+        if (! $message)
+        {
+            return '';
+        }
+
+        return $this->getTranslator()->sf($message, $locale);
+    }
+
+    /**
      * Get locale for translator.
      *
      * @return string
