@@ -41,7 +41,7 @@ class Translator extends ZendTranslator
         $locale = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
 
-        $message = $this->st($message, $textDomain, $locale);
+        $message = parent::translate($message, $textDomain, $locale);
 
         if (is_array($message))
         {
@@ -102,22 +102,6 @@ class Translator extends ZendTranslator
         }
 
         return $msg;
-    }
-
-    /**
-     * Only select a translation WITHOUT MessageFormatter.
-     *
-     * @param string      $message
-     * @param string|null $textDomain
-     * @param string|null $locale
-     *
-     * @return array|string
-     */
-    public function st(string $message, ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null)
-    {
-        $locale = ($locale ?: $this->getLocale());
-
-        return parent::translate($message, $textDomain ?? self::TEXT_DOMAIN_DEFAULT, $locale);
     }
 
     /**

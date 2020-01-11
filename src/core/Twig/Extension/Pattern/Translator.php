@@ -76,7 +76,7 @@ trait Translator
             return '';
         }
 
-        return $this->getTranslator()->sf($message, $locale);
+        return $this->getTranslator()->translate($message, $locale);
     }
 
     /**
