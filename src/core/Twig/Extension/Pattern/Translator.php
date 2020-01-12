@@ -13,10 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Zend\Escaper\Exception\RuntimeException as EscaperException;
-use Zend\View\Helper\EscapeHtml;
-use Zend\View\Helper\EscapeHtmlAttr;
-
 /**
  * Trait to translator.
  */
@@ -29,8 +25,6 @@ trait Translator
      * @param array  $parameters
      * @param string $domain
      * @param string $locale
-     *
-     * @return string
      */
     public function translate($message, $parameters = [], $domain = null, $locale = null): string
     {
@@ -48,8 +42,6 @@ trait Translator
      * @param string $message
      * @param array  $parameters
      * @param string $locale
-     *
-     * @return string
      */
     public function translateMf($message, $parameters = [], $locale = null): string
     {
@@ -64,25 +56,22 @@ trait Translator
     /**
      * Format a message without MessageFormatter.
      *
-     * @param string $message
-     * @param string $locale
-     *
-     * @return string
+     * @param string      $message
+     * @param string|null $domain
+     * @param string|null $locale
      */
-    public function translateSt($message, $locale = null): string
+    public function translateSt($message, $domain = null, $locale = null): string
     {
         if (! $message)
         {
             return '';
         }
 
-        return $this->getTranslator()->translate($message, $locale);
+        return $this->getTranslator()->translate($message, $domain, $locale);
     }
 
     /**
      * Get locale for translator.
-     *
-     * @return string
      */
     public function translatorDefaultLocale(): string
     {
