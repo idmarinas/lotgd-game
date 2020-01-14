@@ -9,6 +9,7 @@ common:
         login: 'Login page'
         return: 'Return'
         basic: Basic
+        browse: Browse
     nav:
         continue: 'Continue'
         home: 'Home'
@@ -25,6 +26,7 @@ common:
         inn: 'Return to the inn'
         lodge: 'L?Return to the Lodge'
         update: Update page
+        browse: Browse
     superuser:
         category: 'Superuser'
         superuser: 'X?`bSuperuser Grotto´b'
