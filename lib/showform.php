@@ -8,19 +8,33 @@ require_once 'lib/dump_item.php';
 /**
  * Construct FORM LOTGD style.
  *
- * @var array
- * @var array         $row
- * @var bool          $nosave
- * @var false|pattern $keypref
- * @var bool          $print
- * @var callable      $callback This can use for personalize the form used to show all inputs or for more process.
+ * @param array
+ * @param array         $row
+ * @param bool          $nosave
+ * @param false|pattern $keypref
+ * @param bool          $print
+ * @param callable      $callback This can use for personalize the form used to show all inputs or for more process.
  *                    Can still use lotgd_show_form_field in your callable
  *                    Both functions get same parameters function($info, $row, $key, $keyout, $val, $extensions)
+ * @deprecated 4.10
  */
 function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print = true, callable $callback = null)
 {
     static $showform_id = 0;
     static $title_id = 0;
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.1.0; and delete in version 4.2.0, use new form system. \LotgdLocator::get("Lotgd\Core\Form\Creature\Add")',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    /**
+     * If $layout is an string use new form system
+     */
+    if (is_string($layout))
+    {
+        return \LotgdLocator::get($layout);
+    }
 
     $showform_id++;
     $extensions = modulehook('showformextensions', []);
