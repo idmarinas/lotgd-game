@@ -92,7 +92,7 @@ function checkday()
                 $session = $revertsession;
                 $session['user']['restorepage'] = $request->getServer('REQUEST_URI');
                 $session['user']['allowednavs'] = [];
-                addnav('', 'newday.php');
+                \LotgdNavigation::addNavAllow('newday.php');
 
                 return redirect('newday.php');
             }

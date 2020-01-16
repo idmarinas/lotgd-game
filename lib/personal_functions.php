@@ -44,6 +44,6 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
     $session['user']['hitpoints'] = 0;
     $session['user']['alive'] = false;
 
-    addnav('Daily news', 'news.php');
+    \LotgdNavigation::addNav('Daily news', 'news.php');
     page_footer();
 }

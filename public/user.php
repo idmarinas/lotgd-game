@@ -391,7 +391,7 @@ switch ($op)
                 }
 
                 rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userid$returnpetition' method='POST'>");
-                addnav('', "user.php?op=savemodule&module=$module&userid=$userid$returnpetition");
+                \LotgdNavigation::addNavAllow("user.php?op=savemodule&module=$module&userid=$userid$returnpetition");
                 lotgd_showform($msettings, $data);
                 rawoutput('</form>');
 

@@ -135,7 +135,7 @@ elseif ('edit' == $op || 'add' == $op)
         rawoutput("<form action='creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module' method='POST'>");
         module_objpref_edit('creatures', $module, $creatureId);
         rawoutput('</form>');
-        addnav('', "creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module");
+        \LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module");
 
         page_footer();
     }

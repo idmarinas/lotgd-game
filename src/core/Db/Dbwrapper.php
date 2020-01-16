@@ -227,7 +227,7 @@ class Dbwrapper
             output('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n');
             output('Sorry for the inconvenience,`n');
             output('Staff of %s', $request->getServer('SERVER_NAME'));
-            addnav('Home', 'index.php');
+            \LotgdNavigation::addNav('Home', 'index.php');
             page_footer();
         }
 

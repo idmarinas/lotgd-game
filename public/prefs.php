@@ -499,7 +499,7 @@ else
                 $changeemail = translate_inline('Force your email address NOW');
                 output('`n`qTime is up, you can now accept the change via this button:`n`n');
                 rawoutput("<form action='prefs.php?op=forcechangeemail' method='POST'><input type='submit' class='ui button' value='$changeemail'></form><br>");
-                addnav('', 'prefs.php?op=forcechangeemail');
+                \LotgdNavigation::addNavAllow('prefs.php?op=forcechangeemail');
             }
         }
         else
@@ -509,7 +509,7 @@ else
         $cancelemail = translate_inline('Cancel email change request');
         output('`$Cancel the request with the following button:`n`n');
         rawoutput("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='ui button' value='$cancelemail'></form><br>");
-        addnav('', 'prefs.php?op=cancelemail');
+        \LotgdNavigation::addNavAllow('prefs.php?op=cancelemail');
     }
 
     $params['form'] = lotgd_showform($form, $prefs, false, false, false);
