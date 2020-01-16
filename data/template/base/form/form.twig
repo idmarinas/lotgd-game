@@ -1,0 +1,32 @@
+{{ form_open_tag(form) }}
+    {#
+        Csrf element (to prevent Cross Site Request Forgery attacks)
+        It is extremely recommended to add this element in all forms
+    #}
+    {% if security is instanceof('\\Zend\\Form\\ElementInterface') %}
+        {{ form_element(security) }}
+    {% endif %}
+
+    {# Label for form #}
+    {% set label = form.label %}
+    {% if label %}
+        {% set label = label|tst(translatorTextDomain) %}
+
+        {% if form is not instanceof('\\Zend\\Form\\LabelAwareInterface') or not form.getLabelOption('disable_html_escape') %}
+            {% set label = label|e('html') %}
+        {% endif %}
+
+        <h3 class="ui header">{{ label }}</h3>
+    {% endif %}
+
+    {# Render all elements #}
+    {% for element in form %}
+        {% if element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
+            {{ form_fieldset(element, translatorTextDomain) }}
+        {% else %}
+            {{ form_row(element, translatorTextDomain) }}
+        {% endif %}
+    {% endfor %}
+
+    {{ form_action_row(buttons) }}
+{{ form_close_tag() }}

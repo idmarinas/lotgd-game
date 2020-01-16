@@ -1,0 +1,11 @@
+{% if submit %}
+    {{ form_button(submit) }}
+{% endif %}
+
+{% if reset %}
+    {{ form_button(reset) }}
+{% endif %}
+
+{% for button in buttons %}
+    {{ form_button(button) }}
+{% endfor %}

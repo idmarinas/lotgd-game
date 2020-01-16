@@ -1,0 +1,36 @@
+{% set markup = '' %}
+
+{% for element in collection %}
+    {% if element is instanceof('\\Lotgd\\Core\\Form\\TabFieldsetInterface') %}
+        {% set markup = markup ~ form_fieldset_tab(element, translatorTextDomain) %}
+    {% elseif element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
+        {% set markup = markup ~ form_fieldset(element, translatorTextDomain) %}
+    {% elseif element is instanceof('\\Zend\\Form\\ElementInterface') %}
+        {% set markup = markup ~ form_row(element, translatorTextDomain) %}
+    {% endif %}
+{% endfor %}
+
+{% if shouldWrap %}
+    <fieldset {{ attributesString }}>
+        {% set label = collection.label %}
+
+        {% if label %}
+            {% set label = label|tst(translatorTextDomain) %}
+
+            {# Escape label #}
+            {% if collection is not instanceof('\\Zend\\Form\\LabelAwareInterface') or not element.getLabelOption('disable_html_escape') %}
+                {% set label = label|e('html') %}
+            {% endif %}
+            <legend>{{ label }}</legend>
+        {% endif %}
+
+        {{ markup }}
+
+        {{ templateMarkup }}
+    </fieldset>
+{% else %}
+    {{ markup }}
+
+    {{ templateMarkup }}
+{% endif %}
+

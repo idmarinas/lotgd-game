@@ -1,0 +1,35 @@
+{# Check if element have errors #}
+{% if element.messages %}
+    {% set classAttributes = element.getAttribute('class') ?: '' %}
+
+    {% do element.setAttribute('class', classAttributes) %}
+{% endif %}
+
+{% set elementString =  form_element(element, translatorTextDomain) %}
+{% set elementString = elementString ~ form_note(element) %}
+
+{# Get type of element, some elements no need a label #}
+{% set type = element.getAttribute('type') %}
+
+<div class="{{ 'hidden' != type ? 'field' : '' }}">
+    {% if element.label and 'hidden' != type %}
+        {# Check the element type, some elements are rendered differently #}
+        {% if 'checkbox' == type %}
+            {{ elementString }}
+        {% else %}
+            {% if element is not instanceof('\\Zend\\Form\\Element\\Button')  %}
+                {# Render label #}
+                {{ form_label(element, translatorTextDomain)}}
+            {% endif %}
+
+            {# Render element #}
+            {{ elementString }}
+        {% endif %}
+    {% else %}
+        {{ elementString }}
+    {% endif %}
+
+    {% if renderErrors %}
+
+    {% endif %}
+</div>

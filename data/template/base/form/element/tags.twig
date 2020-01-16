@@ -1,0 +1,22 @@
+
+<button class="tags-select" id="button-{{ element.getAttribute('id') }}" type="button">+</button>
+{{ form_input(element) }}
+
+<script>
+    var input = document.getElementById('{{ element.getAttribute("id") }}')
+
+    var tagify = Lotgd.tagify(input, {
+        autocomplete: {
+            enabled: false
+        }
+    }).on('invalid', (e) =>
+    {
+
+    })
+    var button = document.getElementById('button-{{ element.getAttribute("id") }}')
+
+    button.addEventListener('click', () =>
+    {
+        tagify.addEmptyTag()
+    })
+</script>

@@ -1,0 +1,10 @@
+{{ form_label_open_tag(element) }}
+    {% set label = element.label|tst(translatorTextDomain) %}
+
+    {% if escapeLabel %}
+        {% set label = label|e('html') %}
+    {% endif %}
+
+    {# Render text #}
+    {{ label }}
+{{ form_label_close_tag() }}
