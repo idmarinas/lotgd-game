@@ -45,5 +45,5 @@ mail:
     validation:
         new: 'The validation will be sent to the new account.`nIf you did NOT request this, somebody with your password got in and requested the change. Go in with your password immediately and change it back. Alter your password, too.`n`n'
         old: 'No validation will be sent to the new account, so if you did NOT request this, rest assured, you got this message, not them.`n`n'
-    timeout: 'Note that if there is no response from this email address the request will automatically be accepted in about %s days.`n`nThis request can be cancelled anytime in your preferences in the game.`n`n'
+    timeout: 'Note that if there is no response from this email address the request will automatically be accepted in about {days,number} days.`n`nThis request can be cancelled anytime in your preferences in the game.`n`n'
     footer: '`n`nThanks for playing!`n`n{server}'
