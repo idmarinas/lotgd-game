@@ -18,6 +18,7 @@ define([
     './components/numeral',
     './components/redirect-post',
     './components/swal',
+    './components/tagify',
 
     //-- Modules
     // ...
@@ -33,7 +34,9 @@ define([
     './exports/global',
 
     //-- Extra
-    'sweetalert2.css'
+    'sweetalert2.css',
+    'tagify.scss',
+    './css/tagify.css'
     // 'toastr.css'
 ], function (Lotgd)
 {
