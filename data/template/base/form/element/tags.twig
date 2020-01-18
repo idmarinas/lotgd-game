@@ -8,10 +8,10 @@
     var tagify = Lotgd.tagify(input, {
         autocomplete: {
             enabled: false
+        },
+        dropdown: {
+            enabled: false
         }
-    }).on('invalid', (e) =>
-    {
-
     })
     var button = document.getElementById('button-{{ element.getAttribute("id") }}')
 
