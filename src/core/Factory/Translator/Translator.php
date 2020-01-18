@@ -19,6 +19,8 @@ use Zend\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };
+use Zend\Validator\AbstractValidator;
+
 class Translator implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
@@ -41,6 +43,10 @@ class Translator implements FactoryInterface
         $translator = LotgdTranslator::factory($translation ?? []);
         $translator->setCache($container->get('Cache\Core\Translator'));
         $translator->setPluginManager($container->get(LoaderPluginManager::class));
+
+        //-- Set translator for validators
+        AbstractValidator::setDefaultTranslator($translator);
+        AbstractValidator::setDefaultTranslatorTextDomain('form-core-validator');
 
         return $translator;
     }

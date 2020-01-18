@@ -17,12 +17,13 @@ use Zend\I18n\Exception;
 use Zend\EventManager\Event;
 use Zend\I18n\Translator\Loader\FileLoaderInterface;
 use Zend\I18n\Translator\Translator as ZendTranslator;
+use Zend\Validator\Translator\TranslatorInterface;
 
 /**
  * Class translator for Legend of the Green Dragon.
  * Extends class Zend\I18n\Translator\Translator.
  */
-class Translator extends ZendTranslator
+class Translator extends ZendTranslator implements TranslatorInterface
 {
     const TEXT_DOMAIN_DEFAULT = 'page-default';
 
