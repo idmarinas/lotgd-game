@@ -58,7 +58,7 @@ abstract class UpgradeAbstract
 
         if (0 == count($files))
         {
-            $this->messages[] = \LotgdTranslator::t('upgrade.insertData.noFiles', ['version' => $this->getNamedVersion($version)], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t('upgrade.insertData.noFiles', ['version' => $this->getNameVersion($version)], self::TRANSLATOR_DOMAIN);
 
             return true;
         }
