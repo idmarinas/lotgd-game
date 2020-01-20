@@ -16,6 +16,7 @@ upgrade:
         nothing: 'Nothing to update - your database is already in sync with the current entity metadata.`n'
         schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
         proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
+        data: '`@Update data for "{name}"`0'
         table:
             import: '`2Imported {count,plural, =1{`b1´b row} other{`b#´b rows}} into new table `@`b`i{table}´i´b`.`0`n'
             rename: '`QRename the old table `2`b`i{old}´i´b`0 to `2`b`i{new}´i´b`0.`0`n'
