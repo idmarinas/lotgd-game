@@ -38,7 +38,9 @@ switch ($type_setting)
     case 'cache':
         $params['tpl'] = 'cache';
 
-        require_once 'lib/configuration/cache.php';
+        $options = LotgdLocator::get('GameConfig');
+
+        $params['gameCaches'] = $options['caches'];
     break;
     case 'cronjob':
         $params['tpl'] = 'cronjob';
