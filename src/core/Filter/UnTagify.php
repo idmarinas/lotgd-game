@@ -34,6 +34,11 @@ class UnTagify implements FilterInterface
      */
     public function filter($value)
     {
+        if (! $value)
+        {
+            return null;
+        }
+
         return implode(',', array_column(json_decode($value), 'value'));
     }
 }
