@@ -7,11 +7,12 @@
 
 {% set elementString =  form_element(element, translatorTextDomain) %}
 {% set elementString = elementString ~ form_note(element) %}
+{% set elementError = form_element_error(element) %}
 
 {# Get type of element, some elements no need a label #}
 {% set type = element.getAttribute('type') %}
 
-<div class="{{ 'hidden' != type ? 'field' : '' }}">
+<div class="{{ elementError ? 'error ' : '' }}{{ element.getAttribute('required') ? 'required ' : '' }}{{ 'hidden' != type ? 'field' : '' }}">
     {% if element.label and 'hidden' != type %}
         {# Check the element type, some elements are rendered differently #}
         {% if 'checkbox' == type %}
@@ -30,6 +31,6 @@
     {% endif %}
 
     {% if renderErrors %}
-
+        {{ elementError }}
     {% endif %}
 </div>
