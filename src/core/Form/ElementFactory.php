@@ -99,7 +99,12 @@ final class ElementFactory implements FactoryInterface
         }
 
         $instance = new $requestedName($name, $options);
-        $instance->setContainer($container);
+
+        if (method_exists($instance, 'setContainer'))
+        {
+            $instance->setContainer($container);
+        }
+
         $instance->prepare();
 
         return $instance;
