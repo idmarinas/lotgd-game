@@ -51,7 +51,7 @@ class ServerLanguage extends Select implements InputProviderInterface
             'name' => $this->getName(),
             'required' => true,
             'filters' => [
-                ['name' => LotgdFilter\ArrayComaSeparator::class]
+                ['name' => LotgdFilter\ArrayToComaSeparator::class]
             ],
             'validators' => [
                 ['name' => Validator\NotEmpty::class],
