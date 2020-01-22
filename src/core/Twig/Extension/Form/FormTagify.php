@@ -17,7 +17,7 @@ use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
 use Zend\Form\ElementInterface;
 
-class FormTags extends FormInput
+class FormTagify extends FormInput
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class FormTags extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_tags', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('form_tagify', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 
@@ -38,7 +38,7 @@ class FormTags extends FormInput
      */
     public function render(Environment $env, ElementInterface $element): string
     {
-        return $env->renderThemeTemplate('form/element/tags.twig', [
+        return $env->renderThemeTemplate('form/element/tagify.twig', [
             'element' => $element,
         ]);
     }
@@ -59,6 +59,6 @@ class FormTags extends FormInput
      */
     public function getName()
     {
-        return 'form-tags';
+        return 'form-tagify';
     }
 }
