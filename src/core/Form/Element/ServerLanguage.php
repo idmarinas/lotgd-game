@@ -13,15 +13,14 @@
 
 namespace Lotgd\Core\Form\Element;
 
-use Lotgd\Core\Form\LotgdElementFactoryInterface;
-use Lotgd\Core\Lib\Settings;
-use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\Filter as LotgdFilter;
+use Lotgd\Core\Validator as LotgdValidator;
 use Zend\Form\Element\Select;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator;
 
-class ServerLanguage extends Select implements LotgdElementFactoryInterface
+class ServerLanguage extends Select implements InputProviderInterface
 {
-    use PatternCore\Container;
-
     /**
      * Valid languages for server.
      *
@@ -30,38 +29,40 @@ class ServerLanguage extends Select implements LotgdElementFactoryInterface
     protected $validLanguages = [];
 
     /**
-     * Added languages.
-     *
-     * @param string $name
-     * @param array $options
+     * @inheritDoc
      */
     public function __construct($name = null, $options = [])
     {
         parent::__construct($name, $options);
 
         $this->validLanguages = include 'data/form/core/grotto/configuration/languages.php';
+
+        $this->setValueOptions($this->validLanguages);
     }
 
     /**
-     * Prepare element
+     * Provide default input rules for this element.
      *
-     * @return $this
+     * @return array
      */
-    public function prepare()
+    public function getInputSpecification()
     {
-        //-- Get languages available in server.
-        $settings = $this->getContainer(Settings::class);
-        $server = explode(',', $settings->getSetting('serverlanguages'));
-
-        $languages = [];
-
-        foreach($server as $lng)
-        {
-            $languages[$lng] = $this->validLanguages[$lng];
-        }
-
-        $this->setValueOptions($languages);
-
-        return $this;
+        return [
+            'name' => $this->getName(),
+            'required' => true,
+            'filters' => [
+                ['name' => LotgdFilter\ArrayComaSeparator::class]
+            ],
+            'validators' => [
+                ['name' => Validator\NotEmpty::class],
+                [
+                    'name' => LotgdValidator\DelimiterIsCountable::class,
+                    'options' => [
+                        'delimiter' => ',', //-- Default value is ","
+                        'max' => 85
+                    ]
+                ]
+            ],
+        ];
     }
 }
