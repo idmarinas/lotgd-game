@@ -46,9 +46,9 @@ class FormButton extends FormInput
      * @var array
      */
     protected $validTypes = [
-        'button' => true,
-        'reset' => true,
-        'submit' => true,
+        'button' => 'button',
+        'reset' => 'reset',
+        'submit' => 'submit',
     ];
 
     /**
@@ -167,20 +167,9 @@ class FormButton extends FormInput
      */
     protected function getType(ElementInterface $element)
     {
-        $type = $element->getAttribute('type');
-
-        if (empty($type))
-        {
-            return 'submit';
-        }
-
+        $type = (string) $element->getAttribute('type');
         $type = strtolower($type);
 
-        if (! isset($this->validTypes[$type]))
-        {
-            return 'submit';
-        }
-
-        return $type;
+        return $this->validTypes[$type] ?? 'submit';
     }
 }
