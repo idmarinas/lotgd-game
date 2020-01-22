@@ -13,14 +13,17 @@
 
 namespace Lotgd\Core\Form\Element;
 
+use Lotgd\Core\Filter as LotgdFilter;
 use Zend\Form\Element\Select;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator;
 
-class BitField extends Select
+class BitField extends Select implements InputProviderInterface
 {
     protected $disabledMask = [];
 
     /**
-     * Seed attributes
+     * Seed attributes.
      *
      * @var array
      */
@@ -31,9 +34,9 @@ class BitField extends Select
 
     /**
      * Set options for an element. Accepted options are:
-     * - disabled_mask: a list of disabled mask for element
+     * - disabled_mask: a list of disabled mask for element.
      *
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function setOptions($options)
     {
@@ -50,7 +53,6 @@ class BitField extends Select
     /**
      * Set disabled mask for bitfield.
      *
-     * @param array $mask
      * @return $this
      */
     public function setDisabledMask(array $mask)
@@ -72,11 +74,28 @@ class BitField extends Select
 
     /**
      * Get disabled mask for bitfield.
-     *
-     * @return array
      */
     public function getDisabledMask(): array
     {
         return $this->disabledMask;
+    }
+
+    /**
+     * Provide default input rules for this element.
+     *
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        return [
+            'name' => $this->getName(),
+            'filters' => [
+                //-- Transform array into BitField (int)
+                ['name' => LotgdFilter\BitField::class],
+            ],
+            'validators' => [
+                ['name' => Validator\Digits::class]
+            ],
+        ];
     }
 }
