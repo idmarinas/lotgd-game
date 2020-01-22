@@ -1,6 +1,11 @@
 <?php
 
-require_once 'lib/configuration/save.php';
+if (\LotgdHttp::isPost())
+{
+    $postSettings = \LotgdHttp::getPostAll();
+
+    require_once 'lib/configuration/save.php';
+}
 
 $op = (string) \LotgdHttp::getQuery('op');
 $cronId = (string) \LotgdHttp::getQuery('cronid');
