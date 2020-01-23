@@ -291,7 +291,11 @@ class FormSelect extends AbstractElement
             return [];
         }
 
-        if (! is_array($value))
+        if (is_string($value))
+        {
+            return explode(',', $value);
+        }
+        elseif (! is_array($value))
         {
             return [$value];
         }
