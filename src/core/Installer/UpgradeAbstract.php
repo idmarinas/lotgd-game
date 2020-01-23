@@ -80,11 +80,7 @@ abstract class UpgradeAbstract
                 {
                     $this->messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
-                elseif ('update' == $data['method'])
-                {
-                    $this->messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-                }
-                elseif ('replace' == $data['method'])
+                elseif ('update' == $data['method'] || 'replace' == $data['method'])
                 {
                     $this->messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
