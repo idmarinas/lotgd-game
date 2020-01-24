@@ -46,7 +46,7 @@ class FormBitField extends FormSelect
             throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Lotgd\Core\Form\Element\BitField', __METHOD__));
         }
 
-        $element->setAttribute('class', 'ui lotgd search selection dropdown '.$element->getAttribute('class'));
+        $element->setAttribute('class', 'search selection '.$element->getAttribute('class'));
         $element->setAttribute('multiple', true); //-- BitField is always multiple
 
         $element->setValue($this->bitFieldValues($element->getValue(), $element->getDisabledMask()));

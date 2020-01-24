@@ -120,6 +120,7 @@ class FormSelect extends AbstractElement
             $options = ['' => $translator->translate($emptyOption, $this->getTranslatorTextDomain())] + $options;
         }
 
+        $element->setAttribute('class', 'ui lotgd dropdown '.$element->getAttribute('class'));
         $attributes = $element->getAttributes();
         $value = $this->validateMultiValue($element->getValue(), $attributes);
 
