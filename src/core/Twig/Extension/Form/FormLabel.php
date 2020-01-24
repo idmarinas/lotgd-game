@@ -55,7 +55,7 @@ class FormLabel extends AbstractElement
      *
      * @return string|FormLabel
      */
-    public function render(Environment $env, ElementInterface $element = null, $translatorTextDomain = null)
+    public function render(Environment $env, ElementInterface $element = null, ?string $translatorTextDomain = null)
     {
         if (! $element || empty($element->getLabel()))
         {
