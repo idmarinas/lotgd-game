@@ -31,7 +31,7 @@ class FormNote extends AbstractElement
     /**
      * Render note for element.
      */
-    public function render(ElementInterface $element): string
+    public function render(ElementInterface $element, ?string $translatorTextDomain = null): string
     {
         $note = $element->getOption('note');
 
@@ -40,7 +40,9 @@ class FormNote extends AbstractElement
             return '';
         }
 
-        $note = $this->getTranslator()->translate($note, $element->getOption('note_translator_domain'));
+        $translatorTextDomain = $element->getOption('note_translator_domain') ?: $translatorTextDomain;
+
+        $note = $this->getTranslator()->translate($note, $translatorTextDomain);
 
         return sprintf('<div class="ui tiny info message">%s</div>', $note);
     }
