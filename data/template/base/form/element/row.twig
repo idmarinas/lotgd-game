@@ -6,7 +6,7 @@
 {% endif %}
 
 {% set elementString =  form_element(element, translatorTextDomain) %}
-{% set elementString = elementString ~ form_note(element) %}
+{% set elementString = elementString ~ form_note(element, translatorTextDomain) %}
 {% set elementError = form_element_error(element) %}
 
 {# Get type of element, some elements no need a label #}
