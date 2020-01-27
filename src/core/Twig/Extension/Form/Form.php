@@ -47,13 +47,14 @@ class Form extends AbstractElement
         return [
             new TwigFunction('form', [$this, 'formRender'], ['needs_environment' => true]),
             new TwigFunction('form_tabed', [$this, 'formRenderTab'], ['needs_environment' => true]),
+            new TwigFunction('form_menu', [$this, 'formRenderMenu'], ['needs_environment' => true]),
             new TwigFunction('form_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
             new TwigFunction('form_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
         ];
     }
 
     /**
-     * Render a form from.
+     * Render a form.
      */
     public function formRender(Environment $env, FormInterface $form): string
     {
@@ -63,15 +64,27 @@ class Form extends AbstractElement
     }
 
     /**
-     * Render a tabed form, this option not prepare form.
-     * Not append the name of the fieldsets to every elements.
-     * NOTICE: This method not avoid name clashes if the same fieldset is used multiple times.
+     * Render a form with tabs.
+     * Elements in popup are divided in columns if needed. (max 4 columns)
+     *
+     * Same as Menu but without triger of popup.
      */
     public function formRenderTab(Environment $env, FormInterface $form): string
     {
         $params = $this->getFormParams($form);
 
         return $env->renderThemeTemplate('form/tabed.twig', $params);
+    }
+
+    /**
+     * Rendener form with a menu with popup.
+     * Elements in popup are divided in columns if needed. (max 4 columns)
+     */
+    public function formRenderMenu(Environment $env, FormInterface $form): string
+    {
+        $params = $this->getFormParams($form);
+
+        return $env->renderThemeTemplate('form/menu.twig', $params);
     }
 
     /**
