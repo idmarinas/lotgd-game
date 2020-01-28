@@ -15,7 +15,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `data/logd_snapshots/*` => `storage/logd_snapshots/*`
 -   Commentary table new field:
     -   `comment_raw` Save raw comment without filters
--   Translation domain for same  pages:
+-   Translation domain for some  pages:
     -   Armor editor: `page-armoreditor` to `grotto-armoreditor`
     -   Character backup: `page-characterbackup` to `grotto-characterbackup`
     -   Companions: `page-companions` to `grotto-companions`
@@ -43,27 +43,42 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Delete Lotgd Cache class `Lotgd\Core\Lib\Cache` and `Lotgd\Core\Factory\Lib\Cache`
     -   Cache not is optional, always use when invoke functions of cache.
     -   Added a static class for cache `LotgdCache`
+-   **public/bank.php** Use `{ownerName}` for name of Banker name
+-   :warning: **_Changed Form system_**
+    -   This new version brings a new way of displaying forms.
+    -   The Zend\Form and Twig templates components are now used to display the forms.
+    -   *The old system will continue to work for the time being. Until the migration of all forms to the new system is completed.*
+    -   The new system uses the arrays to generate the forms, similar to the old form but using the Zend\Form structure.
+    -   An example can be found in the basic game configuration form. It has the file with all the elements of the form and another one with the filters.
+    -   The filters for all the inputs is a new feature. To know more you can see the Zend\Form documentation.
+    -   Game use a zend (form/input-filter) abstract factory to load all forms and input-filters.
+    -   You just need to follow the example in the following files. But remember to create a different file to add your forms and input-filter in the folder `config/autoload/local`
+        -   `config/autoload/global/form-lotgd-core.php` This file contains the forms
+        -   `config/autoload/global/input-filter-lotgd-core.php` In this file are saved the input-filters
 -   **THEME**
     -   Updated Fomantic UI version: 2.7.8 => 2.8.3
-    -   Updated SweetAlert 2 version: ^8.18.0 => ^9.5.3
+    -   Updated SweetAlert 2 version: ^8.18.0 => ^9.*
 
 ### :star: FEATURES
 
--   **lib/datacache.php** all functions. Use `LotgdCache` static class for cache functions
+-   **lib/configuration/cache.php** Added compatibility with multi-cache. Can optimize multiple caches.
+-   *
 
 ### :fire: DEPRECATED
 
--   None
+-   **lib/datacache.php** deprecated all functions. Use `LotgdCache` static class for cache functions
 
 ### :wrench: FIXES
 
 -   `lib/checkban.php` Fixed "error" now use Doctrine to access DB
 -   `public/rawsql.php` Fixed error, now show results of SQL query.
 -   Global user functions, fixed error with domain for translation `globaluserfunctions` => `grotto-globaluserfunctions`
+-   `data/translation/en/partial/taunt.yaml` Fixed error with name of var in taunt number 25 and fixed error in count.
+-   `data/translation/en/app/mail.yaml` Fixed error with name of var.
 
 ### :x: REMOVES
 
--   Removed obsoleted functions from files that used it.
+-   Removed obsoleted functions from files that used it, including the datacache functions.
 -   Removed files:
     -   `lib/censor.php` use new censor system `$censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class); $censor->filter(string)`
     -   `lib/commentary.php` use new commentary system
