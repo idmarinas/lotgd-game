@@ -2,21 +2,21 @@ title: 'Game Settings'
 
 section:
     cache:
-        description: 'High Load Optimization`n'
-        note:
-            - For now this options only work with core cache "lotgd". It will soon work with the cache of doctrine, translations and templates.
-        for:
-            core: 'Options for CORE cache "{coreCacheFolder}"'
-        active:
-            'true': '`2Cache for core are `@Activated`0`0'
-            'false': '`4Cache for core are `$Desactivated`0`0'
-            note:
-                0: 'Cache for "translations" are ALWAYS activated, for performance.'
-                1: 'Cache for "doctrine" are ALWAYS activated, for performance.'
-                2: 'Cache for "templates" are ALWAYS activated, for performance.'
-                3:  'Some parts of the game have forced caching, for performance reasons, such as configuration.'
-                union: '<br>'
-            activate: 'For activate core cache, you need modified value of "active" from "false" to "true" in file "config/lotgd.config.php" on key "cache".'
+        description: 'Here are all the caches configured in the game.`n'
+        for.core: 'Options for CORE cache "{coreCacheFolder}"'
+        cached:
+            0: 'Cache for "translations" are ALWAYS activated, for performance.'
+            1: 'Cache for "doctrine" are ALWAYS activated, for performance.'
+            2: 'Cache for "templates" are ALWAYS activated, for performance.'
+            3:  'Some parts of the game are cached, for performance reasons, such as configuration.'
+            union: '<br>'
+        button:
+            optimize: Optimize cache
+            expire: Clear expire cache
+            all: Clear all cache
+            prefix: Clear by prefix cache
+        note: 'It is not possible to activate or deactivate the cache of the game "Cache\Core\Lotgd", "Cache\Core\Cronjob" and "Cache\Core\Translator" it is not possible remove them, the game expects them to be configured.'
+        unmanage: 'It is not possible to administer Doctrine and Twig templates caches, they are self-managing.'
     cronjob:
         table:
             description: '`@`bCronJobs available in the game´b`0'
