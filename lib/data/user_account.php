@@ -88,8 +88,7 @@ return [
         '<br><i>For the most part you can only set flags that you yourself possess;'.
         "<br>if you try to set one that you don't have; it won't stick.</i>,".
         'bitfield,'.
-        ($session['user']['superuser'] | SU_ANYONE_CAN_SET |
-          ($session['user']['superuser'] & SU_MEGAUSER ? 0xFFFFFFFF : 0)).','.
+        ($session['user']['superuser'] | SU_ANYONE_CAN_SET | ($session['user']['superuser'] & SU_MEGAUSER ? 0xFFFFFFFF : 0)).','.
         SU_MEGAUSER.',MEGA USER (enable all permissions)* <i>(this applies to any future flags as well)</i>,'.
         'title,<br><br><b>Editors</b><br>,'.
         SU_EDIT_CONFIG.',Edit Game Configurations*,'.
