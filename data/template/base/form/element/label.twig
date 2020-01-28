@@ -7,4 +7,13 @@
 
     {# Render text #}
     {{ label }}
+
+    {% set note = element.getOption('note') %}
+
+    {% if note %}
+        {% set noteLabel = 'element.has.note'|tst('app-form') %}
+        <span aria-label="{{ noteLabel }}" data-tooltip="{{ noteLabel }}">
+            <i aria-hidden="true" class="blue info icon"></i>
+        </span>
+    {% endif %}
 {{ form_label_close_tag() }}
