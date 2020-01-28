@@ -46,7 +46,7 @@ class Form extends AbstractElement
     {
         return [
             new TwigFunction('form', [$this, 'formRender'], ['needs_environment' => true]),
-            new TwigFunction('form_tabed', [$this, 'formRenderTab'], ['needs_environment' => true]),
+            new TwigFunction('form_tab', [$this, 'formRenderTab'], ['needs_environment' => true]),
             new TwigFunction('form_menu', [$this, 'formRenderMenu'], ['needs_environment' => true]),
             new TwigFunction('form_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
             new TwigFunction('form_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
@@ -73,7 +73,7 @@ class Form extends AbstractElement
     {
         $params = $this->getFormParams($form);
 
-        return $env->renderThemeTemplate('form/tabed.twig', $params);
+        return $env->renderThemeTemplate('form/tab.twig', $params);
     }
 
     /**
