@@ -33,6 +33,11 @@ return [
             Zend\Session\Config\ConfigInterface::class => Zend\Session\Service\SessionConfigFactory::class,
             Zend\Session\ManagerInterface::class => Zend\Session\Service\SessionManagerFactory::class,
             Zend\Session\Storage\StorageInterface::class => Zend\Session\Service\StorageFactory::class,
+
+            //-- Added in version 4.1.0
+            'InputFilterManager' => Zend\InputFilter\InputFilterPluginManagerFactory::class,
+            'FormAnnotationBuilder' => Zend\Form\Annotation\AnnotationBuilderFactory::class,
+            'FormElementManager' => Zend\Form\FormElementManagerFactory::class,
         ]
     ]
 ];
