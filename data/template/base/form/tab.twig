@@ -1,0 +1,105 @@
+{% set formId = form.getAttribute('id') %}
+
+{% set segment = '' %}
+{% set menu = [] %}
+
+{% set activeTab = '' %}
+{% for element in form %}
+    {% if element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
+        {% if not activeTab %}
+            {% set activeTab = element.getAttribute('id') %}
+        {% endif %}
+        {% if element.label %}
+            {% set menu = menu|merge({ (element.getAttribute('id')) : {
+                'id': element.getAttribute('id'),
+                'label': element.label,
+                'has_error': element.getMessages() ? true : false
+            } }) %}
+        {% endif %}
+        {% set segment = segment ~ form_fieldset_tab(element, translatorTextDomain, activeTab) %}
+    {% else %}
+        {% set segment = segment ~ form_row(element, translatorTextDomain) %}
+    {% endif %}
+{% endfor %}
+
+{# Label for form #}
+{% set label = form.label %}
+{% if label %}
+    {% set label = label|tst(translatorTextDomain) %}
+
+    {% if form is not instanceof('\\Zend\\Form\\LabelAwareInterface') or not form.getLabelOption('disable_html_escape') %}
+        {% set label = label|e('html') %}
+    {% endif %}
+{% endif %}
+
+{% if label %}
+    <div class="ui top attached header">
+        {{ label }}
+        <div class="right floated sub header">
+            <span class="ui red text" id="show-hidde-info-note-form-{{ formId }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+        </div>
+    </div>
+{% endif %}
+{# Render a menu tabs #}
+<div class="ui {{ label ? 'bottom attached' : '' }} segment">
+    <div class="ui stackable equal width divided grid">
+        {# Max are 4 sections in menu #}
+        {% set batch = (menu|length / 4)|round(0, 'ceil') %}
+
+        {% for items in menu|batch(batch) %}
+            <div class="column">
+                <div class="ui list">
+                    {% for tab in items %}
+                        {% set label = tab.label|tst(translatorTextDomain) %}
+
+                        <a class="{{ loop.index == 1 ? 'active' : '' }} item" data-tab="{{ tab.id }}">
+                            {{ label|e('html') }}
+
+                            {% if tab.has_error %}
+                                {% set errorText = 'fieldset.has.error'|tst('app-form') %}
+                                <span data-tooltip="{{ errorText }}" aria-label="{{ errorText }}">
+                                    <i aria-hidden="true" class="red times icon"></i>
+                                </span>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{# Render form #}
+{{ form_open_tag(form) }}
+    {#
+        Csrf element (to prevent Cross Site Request Forgery attacks)
+        It is extremely recommended to add this element in all forms
+    #}
+    {% if security is instanceof('\\Zend\\Form\\ElementInterface') %}
+        {{ form_element(security) }}
+    {% endif %}
+
+    {{ segment }}
+
+    {{ form_action_row(buttons) }}
+{{ form_close_tag() }}
+
+{# Scripts for control #}
+<script>
+    $('.ui.grid .item').tab()
+    $('#show-hidde-info-note-form-{{ formId }}').on('click', function ()
+    {
+        let form = $('#{{ formId }}')
+
+        if (form.hasClass('info'))
+        {
+            form.removeClass('info')
+            $(this).removeClass('green').addClass('red')
+
+            return
+        }
+
+        form.addClass('info')
+        $(this).removeClass('red').addClass('green')
+    })
+</script>

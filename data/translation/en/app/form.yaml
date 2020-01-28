@@ -1,0 +1,13 @@
+button:
+    save: Save
+    submit: Submit
+    reset: Reset
+
+show.hide.note.info: Show/Hide information notes of inputs
+
+element.has.note: This element has a information note
+
+fieldset.has.error: This collection has a element or elements with errors
+
+flash.message:
+    error: 'The form contains errors, please review the form and correct the errors.'
