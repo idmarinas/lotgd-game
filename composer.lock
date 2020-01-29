@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c533bfa77758c1295467bc9293e53938",
+    "content-hash": "d1768dfc3e4f7ac76ac5a2014d2f7d79",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1693,16 +1693,16 @@
         },
         {
             "name": "matthiasmullie/path-converter",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/path-converter.git",
-                "reference": "5e4b121c8b9f97c80835c1d878b0812ba1d607c9"
+                "reference": "e7d13b2c7e2f2268e1424aaed02085518afa02d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasmullie/path-converter/zipball/5e4b121c8b9f97c80835c1d878b0812ba1d607c9",
-                "reference": "5e4b121c8b9f97c80835c1d878b0812ba1d607c9",
+                "url": "https://api.github.com/repos/matthiasmullie/path-converter/zipball/e7d13b2c7e2f2268e1424aaed02085518afa02d9",
+                "reference": "e7d13b2c7e2f2268e1424aaed02085518afa02d9",
                 "shasum": ""
             },
             "require": {
@@ -1738,7 +1738,7 @@
                 "paths",
                 "relative"
             ],
-            "time": "2018-10-25T15:19:41+00:00"
+            "time": "2019-02-05T23:41:09+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -3366,16 +3366,16 @@
         },
         {
             "name": "zendframework/zend-config-aggregator",
-            "version": "1.2.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-config-aggregator.git",
-                "reference": "8f8568e8a618684c3bd778df75f5bc757b76decd"
+                "reference": "2a08547b64119a73b6700bde3301d978258dfcb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-config-aggregator/zipball/8f8568e8a618684c3bd778df75f5bc757b76decd",
-                "reference": "8f8568e8a618684c3bd778df75f5bc757b76decd",
+                "url": "https://api.github.com/repos/zendframework/zend-config-aggregator/zipball/2a08547b64119a73b6700bde3301d978258dfcb5",
+                "reference": "2a08547b64119a73b6700bde3301d978258dfcb5",
                 "shasum": ""
             },
             "require": {
@@ -3384,6 +3384,7 @@
             },
             "require-dev": {
                 "malukenho/docheader": "^0.1.5",
+                "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^5.7.21 || ^6.3",
                 "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-config": "^2.6 || ^3.0",
@@ -3397,8 +3398,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev",
-                    "dev-develop": "1.3.x-dev"
+                    "dev-master": "1.1.x-dev",
+                    "dev-develop": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -3417,7 +3418,7 @@
                 "zf"
             ],
             "abandoned": "laminas/laminas-config-aggregator",
-            "time": "2019-12-27T22:57:49+00:00"
+            "time": "2018-04-04T20:37:31+00:00"
         },
         {
             "name": "zendframework/zend-db",
@@ -5049,16 +5050,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "2.4.7",
+            "version": "2.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "a300b0331269bbdc77ba03f36176740579dbb457"
+                "reference": "dc94f53f651bfb32766902e5d4198780245d8382"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/a300b0331269bbdc77ba03f36176740579dbb457",
-                "reference": "a300b0331269bbdc77ba03f36176740579dbb457",
+                "url": "https://api.github.com/repos/phan/phan/zipball/dc94f53f651bfb32766902e5d4198780245d8382",
+                "reference": "dc94f53f651bfb32766902e5d4198780245d8382",
                 "shasum": ""
             },
             "require": {
@@ -5118,7 +5119,7 @@
                 "php",
                 "static"
             ],
-            "time": "2020-01-23T00:57:08+00:00"
+            "time": "2020-01-25T17:22:42+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
