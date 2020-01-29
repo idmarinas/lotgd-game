@@ -243,11 +243,7 @@ elseif(getsetting('maintenance', 0))
 }
 
 $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare([
-    'template-header', 'template-footer', 'template-statstart', 'template-stathead', 'template-statrow', 'template-statbuff', 'template-statend',
-    'template-navhead', 'template-navitem', 'template-petitioncount', 'template-adwrapper', 'template-login', 'template-loginfull', 'everyhit',
-    "header-$script", "footer-$script", 'holiday', 'collapse{', 'collapse-nav{', '}collapse-nav', '}collapse', 'charstats'
-]);
+mass_module_prepare([ 'everyhit', "header-$script", "footer-$script", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
