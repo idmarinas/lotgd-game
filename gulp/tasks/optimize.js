@@ -25,7 +25,7 @@ module.exports = function (callback)
             const deletedPaths = await del([
                 normalize(config.paths.build + '/cli-config.php'),
                 normalize(config.paths.build + '/**/*.{dist,md,lock}{,/**}'),
-                normalize(config.paths.build + '/*.{json,yml,yaml,xml,txt,TXT,csv}{,/**}'),
+                normalize(config.paths.build + '/*.{json,yml,yaml,xml,txt,TXT,csv,phar}{,/**}'),
                 normalize(config.paths.build + '/config/development{,/**}'),
                 normalize(config.paths.build + '/config{,/**}/development{,.*}.*'),
                 normalize('!' + config.paths.build + '/vendor/**')
