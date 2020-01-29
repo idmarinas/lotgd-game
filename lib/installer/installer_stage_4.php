@@ -30,6 +30,9 @@ $params = [
     'test' => []
 ];
 
+/**
+ * @TODO use SHOW GRANTS FOR CURRENT_USER; to check privilages of DATABASE for current USER
+ */
 if (false === DB::connect())
 {
     $params['dberror'] = DB::error();
