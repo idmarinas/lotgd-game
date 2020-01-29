@@ -232,14 +232,14 @@ class Settings
      */
     public function isConnected(): bool
     {
-        if ($this->doctrine->getConnection()->isConnected())
+        try
         {
-            return true;
+            return $this->doctrine->getConnection()->ping();
         }
-
-        $this->doctrine->getConnection()->connect();
-
-        return $this->doctrine->getConnection()->isConnected();
+        catch (\Throwable $th)
+        {
+            return false;
+        }
     }
 
     /**
