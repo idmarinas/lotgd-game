@@ -18,7 +18,7 @@ module.exports = {
             '!gulpfile.js',
             '!assets{,/**}',
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
-            '!public/docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
+            '!docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
             '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
             '!semantic{,/**}',
             '!entity{,/**}', //-- Autogenerate entities from BD
