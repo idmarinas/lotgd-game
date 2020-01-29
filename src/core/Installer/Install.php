@@ -335,7 +335,5 @@ class Install
 
             $doctrine->flush();
         }
-
-        $doctrine->clear();
     }
 }
