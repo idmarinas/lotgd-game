@@ -12,44 +12,21 @@
 
 # Actualmente haciendo esto
 
-REVISAR: badnav.php
+- ....
 
+# Para la versión 4.1.0
 
-ACTULIZAR LA FUNCION addnews EN TODOS LOS ARCHIVOS, SE HA CAMBIADO SU ESTRUCTURA
+## Tener en cuenta a la hora de instalar esta versión (crear el proceso) para modificar
+-   Algunos campos en el formulario "Configuration" han cambiado
+    -   Estos campos son ahora un select (una variante), que guardan un array serializado
+        -   `petition_types`
+        -   `serverlanguages`
 
-soap() Eliminar toda referencia esta función (es el antiguo censor)
-
-Estructura para los modulos y el nuevo sistema de traducción:
-
-Estructura para los módulos:
-
-<!-- For single module file translation -->
-
-    -   `translations/[LOCALE]/modules/[MODULENAME].yaml`
-
-<!-- For a multiple module files translation -->
-
-    -   `translations/[LOCALE]/[MODULENAME]/[FILENAME].yaml
-
-Explicar la estructura de los archivos yaml y que admiten el sistema de anidación. que se accede a esa clave como: `key.key2.key3`
-
----------------------------------------------------------------------
-IDEA para la traducción del nombre de la raza.
-Se usa el text domain como nombre para luego traducirlo. Ejemplo
-$session['user']['race'] = 'module-elf';
-
-{{ 'racename'|t(null, 'module-elf')|colorize }}
----------------------------------------------------------------------
-
-## Para la versión 4.1.0
-
--   Mover las carpetas cache, log, y logd_snapshots a la carpeta storage
--   Mover archivos de traducción relacionados con la configuración a una carpeta distinta:
-    -   de la carpeta `page` la carpeta `configuration` para diferenciar las traducciones.
-        -   Igual se puede hacer algo similar con los archivos de navegación. Crear solo uno para la configuración.
-        -   De esta forma se mantiene la traducción más organizada, así como el poder diferenciar que va a ver el usuario normal de un adiministrador.
+## Cosas pendientes
 -   Adaptar los formularios a zend-form
     -   Los formularios usan también el sistema de traducción y es necesario actualizarlo
+    -   Se ha adaptado el formulario de configuración básica del juego (settings)
+    -   Se irán adaptando el resto de formularios con cada actualización
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Login
     -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
@@ -87,7 +64,11 @@ $session['user']['race'] = 'module-elf';
 -   Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente cono el sistema de combate nuevo.
     -   Se simplifica la forma en la que se calcula las estadísticas del perosnaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
 -   Pasar jaxon-php a una factoria, y eliminar el lib/jaxon.php
+
+## Puede ser complicado
 -   Usar el zend-http component, para generar la respuesta del servidor (sustituir page_header y page_footer) y revisar también popup_header y popup_footer
+
+## Complicado
 -   Módulos, usar un sistema similar al que usa zenframework con sus módulos. pasar los módulos actuales a un sistema similar al manejado por zenframework.
 
 * * *
@@ -139,3 +120,7 @@ vendor/bin/iniscan scan --format=html --output="D:\\Users\\idmar\\Documents\\Pro
 #### Otro
 
 ${extensionPath}\\php-cs-fixer.phar
+
+##### Generar los docs
+php phpDocumentor.phar -c phpdoc.dist.xml
+
