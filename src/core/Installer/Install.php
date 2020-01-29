@@ -37,8 +37,6 @@ class Install
      * Make a upgrade install, avoid in clean install.
      *
      * @param int $version Is the actual version installed
-     *
-     * @return array
      */
     public function makeUpgradeInstall(int $version): array
     {
@@ -100,8 +98,6 @@ class Install
 
     /**
      * Synchronize the tables in the database.
-     *
-     * @return array
      */
     public function makeSynchronizationTables(): array
     {
@@ -111,7 +107,7 @@ class Install
         $schemaTool = new SchemaTool($doctrine);
         $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
 
-        $messages = [ \LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN) ];
+        $messages = [\LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN)];
 
         if (count($sqls))
         {
@@ -128,83 +124,30 @@ class Install
     }
 
     /**
-     * Insert data of a clean install.
-     *
-     * @return array
+     * Insert data of a clean/upgrade install.
      */
     public function makeInsertData(): array
     {
         $messages = [];
-        //-- It is a clean or upgrade installation and the data has already been inserted
-        if ($this->dataInserted() || $this->isUpgrade())
+
+        //-- It is a upgrade installation not insert data
+        if ($this->isUpgrade())
         {
             $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], self::TRANSLATOR_DOMAIN);
 
             return $messages;
         }
 
-        $filesystem = new Filesystem();
-        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
-        $files = array_map(
-            function ($value) { return self::DATA_DIR_INSTALL."/{$value}"; },
-            $filesystem->listDir(self::DATA_DIR_INSTALL)
-        );
+        //-- Insert data of clean install
+        $messages = $this->makeInsertDataOfClean();
+        //-- Insert data of upgrade installs
+        $messagesUpgrade = $this->makeInsertDataOfUpdates();
 
-        if (0 == count($files))
-        {
-            $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
-        try
-        {
-            foreach ($files as $file)
-            {
-                $data = \json_decode(\file_get_contents($file), true);
-                $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
-                $entities->initialize($data['rows']);
-
-                foreach ($entities as $entity)
-                {
-                    $doctrine->merge($entity);
-                }
-
-                if ('insert' == $data['method'])
-                {
-                    $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-                }
-                elseif ('update' == $data['method'])
-                {
-                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-                }
-                elseif ('replace' == $data['method'])
-                {
-                    $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-                }
-
-                $doctrine->flush();
-            }
-
-            $doctrine->clear();
-            $this->dataInsertedOn();
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-            $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
-            $messages[] = $th->getMessage();
-        }
-
-        return $messages;
+        return array_merge($messages, $messagesUpgrade);
     }
 
     /**
      * Install the selected modules.
-     *
-     * @return array
      */
     public function makeInstallOfModules(): array
     {
@@ -273,5 +216,126 @@ class Install
             break;
             default: break;
         }
+    }
+
+    /**
+     * Insert data of clean install.
+     */
+    protected function makeInsertDataOfClean(): array
+    {
+        //-- Data inserted, not need inserted other time
+        if ($this->dataInserted())
+        {
+            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], self::TRANSLATOR_DOMAIN);
+
+            return $messages;
+        }
+
+        $messages = [];
+
+        $filesystem = new Filesystem();
+        $files = array_map(
+            function ($value) { return self::DATA_DIR_INSTALL."/{$value}"; },
+            $filesystem->listDir(self::DATA_DIR_INSTALL)
+        );
+
+        if (0 == count($files))
+        {
+            $this->dataInsertedOff();
+            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
+
+            return $messages;
+        }
+
+        try
+        {
+            $this->insertDataByFiles($files, $messages);
+            $this->dataInsertedOn();
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+            $this->dataInsertedOff();
+            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
+            $messages[] = $th->getMessage();
+        }
+
+        return $messages;
+    }
+
+    /**
+     * Insert data of updates.
+     */
+    protected function makeInsertDataOfUpdates(): array
+    {
+        //-- Data inserted not need inserted other time
+        if ($this->dataUpgradesInserted())
+        {
+            $messages[] = \LotgdTranslator::t('insertData.dataInsertedUpgrade', [], self::TRANSLATOR_DOMAIN);
+
+            return $messages;
+        }
+
+        $messages = [];
+
+        $files = glob(UpgradeAbstract::DATA_DIR_UPDATE.'/**/*.json');
+
+        if (0 == count($files))
+        {
+            $this->dataUpgradesInsertedOff();
+            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
+
+            return $messages;
+        }
+
+        try
+        {
+            $this->insertDataByFiles($files, $messages);
+            $this->dataUpgradesInsertedOn();
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+            $this->dataUpgradesInsertedOff();
+            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
+            $messages[] = $th->getMessage();
+        }
+
+        return $messages;
+    }
+
+    /**
+     * Proccess files.
+     *
+     * @return void
+     */
+    private function insertDataByFiles(array $files, array &$messages)
+    {
+        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+
+        foreach ($files as $file)
+        {
+            $data = \json_decode(\file_get_contents($file), true);
+            $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
+            $entities->initialize($data['rows']);
+
+            foreach ($entities as $entity)
+            {
+                $doctrine->merge($entity);
+            }
+
+            if ('insert' == $data['method'])
+            {
+                $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+            }
+            elseif ('update' == $data['method'] || 'replace' == $data['method'])
+            {
+                $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+            }
+
+            $doctrine->flush();
+        }
+
+        $doctrine->clear();
     }
 }

@@ -11,6 +11,7 @@ namespace Lotgd\Core\Installer\Pattern;
 trait Progress
 {
     protected $dataInserted = false;
+    protected $dataUpgradesInserted = false;
 
     /**
      * Data are inserted in database.
@@ -44,5 +45,39 @@ trait Progress
     public function dataInserted(): bool
     {
         return $this->dataInserted;
+    }
+
+    /**
+     * Data of upgrades are inserted in database.
+     *
+     * @return self
+     */
+    public function dataUpgradesInsertedOn(): self
+    {
+        $this->dataUpgradesInserted = true;
+
+        return $this;
+    }
+
+    /**
+     * Data of upgrades NOT are inserted in database.
+     *
+     * @return self
+     */
+    public function dataUpgradesInsertedOff(): self
+    {
+        $this->dataUpgradesInserted = false;
+
+        return $this;
+    }
+
+    /**
+     * Get if data of upgrades are inserted in database.
+     *
+     * @return bool
+     */
+    public function dataUpgradesInserted(): bool
+    {
+        return $this->dataUpgradesInserted;
     }
 }
