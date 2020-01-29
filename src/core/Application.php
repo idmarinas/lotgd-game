@@ -23,14 +23,14 @@ class Application
      *
      * @var string
      */
-    const VERSION = '4.0.0 IDMarinas Edition';
+    const VERSION = '4.1.0 IDMarinas Edition';
 
     /**
      * Identify version of game in numeric format.
      *
      * @var int
      */
-    const VERSION_NUMBER = 40000;
+    const VERSION_NUMBER = 40100;
 
     /**
      * The file where the database connection data is stored.
