@@ -1,0 +1,16 @@
+{
+    "method": "update",
+    "table": "settings",
+    "entity": "Lotgd\\Core\\Entity\\Settings",
+    "rows":
+    [
+        {
+            "setting": "petition_types",
+            "value": "petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other"
+        },
+        {
+            "setting": "serverlanguages",
+            "value": "en,fr,dk,de,es,it"
+        },
+    ]
+}
