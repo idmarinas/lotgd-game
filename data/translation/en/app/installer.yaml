@@ -25,6 +25,7 @@ upgrade:
 
 insertData:
     dataInserted: '`QIt is not necessary to re-insert the data`0`n'
+    dataInsertedUpgrade: '`QIt is not necessary to re-insert the data for upgrades`0`n'
     noFiles: '`2No data files were found, game data cannot be inserted. Please check this out and report.`0`n'
     data:
         insert: '`@`iInserted´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
