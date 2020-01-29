@@ -28,7 +28,6 @@ return [
         Lotgd\Core\Twig\Extension\Form\FormHidden::class,
         Lotgd\Core\Twig\Extension\Form\FormInput::class,
         Lotgd\Core\Twig\Extension\Form\FormLabel::class,
-        Lotgd\Core\Twig\Extension\Form\FormMultiCheckbox::class,
         Lotgd\Core\Twig\Extension\Form\FormNote::class,
         Lotgd\Core\Twig\Extension\Form\FormNumber::class,
         Lotgd\Core\Twig\Extension\Form\FormRange::class,
