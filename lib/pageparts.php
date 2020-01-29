@@ -17,8 +17,6 @@ $html = ['content' => ''];
 /**
  * Starts page output.  Inits the template and translator modules.
  *
- * @param string|null $title
- * @param array       $params
  * @param string|null $textDomain
  *
  * Hooks provided:
@@ -146,8 +144,15 @@ function page_footer($saveuser = true)
     $charstats = charstats();
     restore_buff_fields();
 
-    $repository = \Doctrine::getRepository('LotgdCore:Motd');
-    $lastMotd = $repository->getLastMotdDate();
+    try
+    {
+        $repository = \Doctrine::getRepository('LotgdCore:Motd');
+        $lastMotd = $repository->getLastMotdDate();
+    }
+    catch (\Throwable $th)
+    {
+        $lastMotd = new \DateTime('0000-00-00 00:00:00');
+    }
 
     $headscript = '';
 
@@ -324,10 +329,6 @@ function page_footer($saveuser = true)
 
 /**
  * Page header for popup windows.
- *
- * @param string|null $title
- * @param array       $params
- * @param string|null $textDomain
  */
 function popup_header(?string $title = null, array $params = [], ?string $textDomain = null)
 {
@@ -554,6 +555,7 @@ function charstats($return = true)
         $buffs = [];
 
         $session['bufflist'] = array_map('array_filter', $session['bufflist'] ?? []);
+
         foreach ($session['bufflist'] as $val)
         {
             if ($val['suspended'] ?? false)
@@ -581,6 +583,7 @@ function charstats($return = true)
                 }
 
                 $val['rounds'] = $val['rounds'] ?? 0;
+
                 if ($val['rounds'] >= 0)
                 {
                     // We're about to sprintf, so, let's makes sure that
@@ -763,9 +766,16 @@ function charstats($return = true)
         }
         else
         {
-            $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-            $result = $repository->getListAccountsOnline();
-            $onlinecount = count($result);
+            try
+            {
+                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
+                $result = $repository->getListAccountsOnline();
+                $onlinecount = count($result);
+            }
+            catch (\Throwable $th)
+            {
+                $onlinecount = 0;
+            }
 
             $ret = \LotgdTheme::renderThemeTemplate('parts/online-list.twig', [
                 'list' => $result,
