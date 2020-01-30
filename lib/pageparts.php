@@ -158,7 +158,7 @@ function page_footer($saveuser = true)
     if (isset($session['user']['lastmotd'])
         && ($lastMotd > $session['user']['lastmotd'])
         && (! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
-        && $session['user']['loggedin']
+        && (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     ) {
         $session['needtoviewmotd'] = true;
     }
@@ -268,11 +268,11 @@ function page_footer($saveuser = true)
     $session['user']['gentime'] += $gentime;
     $session['user']['gentimecount']++;
 
-    $wrapper = \LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
-
     //-- Register data in debug server
     if (getsetting('debug', 0))
     {
+        $wrapper = \LotgdLocator::get(\Lotgd\Core\Db\Dbwrapper::class);
+
         $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
 
         $runtimeEntity = $repository->hydrateEntity([
@@ -313,13 +313,13 @@ function page_footer($saveuser = true)
         saveuser();
     }
 
+    \Doctrine::flush();
+    \Doctrine::clear();
+
     unset($session['output']);
     //this somehow allows some frames to load before the user's navs say it can
     session_write_close();
     echo $browserOutput;
-
-    \Doctrine::flush();
-    \Doctrine::clear();
 
     exit();
 }
