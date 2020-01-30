@@ -774,6 +774,7 @@ function charstats($return = true)
             }
             catch (\Throwable $th)
             {
+                $result = [];
                 $onlinecount = 0;
             }
 
