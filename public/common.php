@@ -161,7 +161,7 @@ elseif (defined('IS_INSTALLER'))
     }
 }
 
-if (file_exists('public/installer.php')
+if (! defined('IS_INSTALLER') && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
     && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
 ) {
