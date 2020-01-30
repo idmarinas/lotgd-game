@@ -46,29 +46,26 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         $hookcomment[$hookname] = true;
     }
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $query = $repository->createQueryBuilder('u');
-
-    $query
-        ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
-        ->where('u.location = :loc')
-        ->setParameter('loc', $hookname)
-        ->orderBy('u.priority')
-        ->addOrderBy('u.modulename')
-    ;
-
-    if (! $allowinactive)
+    $result = [];
+    if (\Doctrine::isConnected())
     {
-        $query->andWhere('m.active = 1');
-    }
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+        $query = $repository->createQueryBuilder('u');
 
-    try
-    {
+        $query
+            ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
+            ->where('u.location = :loc')
+            ->setParameter('loc', $hookname)
+            ->orderBy('u.priority')
+            ->addOrderBy('u.modulename')
+        ;
+
+        if (! $allowinactive)
+        {
+            $query->andWhere('m.active = 1');
+        }
+
         $result = $query->getQuery()->getArrayResult();
-    }
-    catch (\Throwable $th)
-    {
-        $result = [];
     }
 
     // $args is an array passed by value and we take the output and pass it
