@@ -26,7 +26,7 @@ class Whostyping
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, options={"collation": "utf8_general_ci"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
