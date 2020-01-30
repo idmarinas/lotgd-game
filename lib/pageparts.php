@@ -528,10 +528,10 @@ function charstats($return = true)
 
     wipe_charstats();
 
-    $u = &$session['user'];
-
     if (isset($session['loggedin']) && $session['loggedin'])
     {
+        $u = &$session['user'];
+
         $u['hitpoints'] = round($u['hitpoints'], 0);
         $u['experience'] = round($u['experience'], 0);
         $spirits = [-6 => 'Resurrected', -2 => 'Very Low', -1 => 'Low', '0' => 'Normal', 1 => 'High', 2 => 'Very High'];
