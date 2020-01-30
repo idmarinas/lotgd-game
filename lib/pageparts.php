@@ -83,9 +83,6 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
     calculate_buff_fields();
 
-    //-- Add to html
-    $html['content'] .= tlbutton_pop();
-
     $html['userPre'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
     unset($html['session']['user'], $html['userPre']['password']);
