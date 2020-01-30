@@ -75,10 +75,7 @@ class Settings
     /**
      * Save setting in to Data Base.
      *
-     * @param string $settingname
-     * @param mixed  $value
-     *
-     * @return bool
+     * @param mixed $value
      */
     public function saveSetting(string $settingname, $value): bool
     {
@@ -88,14 +85,21 @@ class Settings
             return false;
         }
 
-        $entity = $this->repository()->find($settingname);
-        $entity = $this->repository()->hydrateEntity([
-            'setting' => $settingname,
-            'value' => $value
-        ], $entity);
+        try
+        {
+            $entity = $this->repository()->find($settingname);
+            $entity = $this->repository()->hydrateEntity([
+                'setting' => $settingname,
+                'value' => $value
+            ], $entity);
 
-        $this->doctrine->persist($entity);
-        $this->doctrine->flush();
+            $this->doctrine->persist($entity);
+            $this->doctrine->flush();
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
 
         $this->settings[$settingname] = $value;
 
@@ -140,7 +144,9 @@ class Settings
             }
             catch (\Exception $ex)
             {
-                debug('Cant get Settings.');
+                \bdump('Cant get Settings.');
+
+                $this->settings = [];
             }
         }
     }
@@ -184,10 +190,6 @@ class Settings
     /**
      * Set a table name for settings.
      * This table must have a repository.
-     *
-     * @param string $table
-     *
-     * @return self
      */
     public function setTableName(string $table): self
     {
@@ -227,8 +229,6 @@ class Settings
 
     /**
      * Check if have a connection to DB.
-     *
-     * @return bool
      */
     public function isConnected(): bool
     {
@@ -249,8 +249,6 @@ class Settings
 
     /**
      * Get key of cache.
-     *
-     * @return string
      */
     protected function getCacheKey(): string
     {
