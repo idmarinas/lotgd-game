@@ -109,8 +109,6 @@ if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdHttp::get
 //-- Check connection to DB
 $link = DB::connect();
 
-ob_start();
-
 define('DB_CONNECTED', (false !== $link));
 define('DB_CHOSEN', DB_CONNECTED);
 
@@ -119,7 +117,24 @@ if (DB_CONNECTED)
     define('LINK', $link);
 }
 
-if (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
+{
+    define('NO_SAVE_USER', true);
+
+    if (! defined('DB_NODB'))
+    {
+        define('DB_NODB', true);
+    }
+
+    page_header('title.install', [], 'app-common');
+
+    \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
+
+    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/install.twig', ['fileName' => \Lotgd\Core\Application::FILE_DB_CONNECT]));
+
+    page_footer(false);
+}
+else if (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     define('IS_INSTALLER', false);
 }
@@ -133,7 +148,7 @@ elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1'
 
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/upgrade.twig', []));
 
-    page_footer();
+    page_footer(false);
 }
 
 if (file_exists('public/installer.php')
