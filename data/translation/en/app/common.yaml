@@ -1,7 +1,18 @@
 title:
+    install:
     upgrade: 'Upgrade Needed'
     security: 'Major Security Risk'
     database: 'Database Connection Error'
+    install: 'The game has not yet been installed'
+
+install:
+    paragraph:
+        - '`#Welcome to `@Legend of the Green Dragon`0, a game by Eric Stevens & JT Traub.`n`n'
+        - "You must run the game's installer, and follow its instructions in order to set up LoGD."
+        - "You can go to the installer <a href='installer.php'>here</a>."
+        - "`n`nIf you're not sure why you're seeing this message, it's because this game is not properly configured right now."
+        - "If you've previously been running the game here, chances are that you lost a file called '`%{fileName}`0' from your site."
+        - "If that's the case, no worries, we can get you back up and running in no time, and the installer can help!"
 
 upgrade:
     paragraph:
