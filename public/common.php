@@ -121,10 +121,7 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INS
 {
     define('NO_SAVE_USER', true);
 
-    if (! defined('DB_NODB'))
-    {
-        define('DB_NODB', true);
-    }
+    defined('DB_NODB') || define('DB_NODB', true);
 
     page_header('title.install', [], 'app-common');
 
@@ -149,6 +146,19 @@ elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1'
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/upgrade.twig', []));
 
     page_footer(false);
+}
+// If is installer check if tables are created
+elseif (defined('IS_INSTALLER'))
+{
+    try
+    {
+        $repository = \Doctrine::getRepository('LotgdCore:Settings');
+        $repository->findOneBy(['setting' => 'installer_version']);
+    }
+    catch (\Throwable $th)
+    {
+        defined('DB_NODB') || define('DB_NODB', true);
+    }
 }
 
 if (file_exists('public/installer.php')
