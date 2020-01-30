@@ -141,14 +141,11 @@ function page_footer($saveuser = true)
     $charstats = charstats();
     restore_buff_fields();
 
-    try
+    $lastMotd = new \DateTime('0000-00-00 00:00:00');
+    if (\Doctrine::isConnected())
     {
         $repository = \Doctrine::getRepository('LotgdCore:Motd');
         $lastMotd = $repository->getLastMotdDate();
-    }
-    catch (\Throwable $th)
-    {
-        $lastMotd = new \DateTime('0000-00-00 00:00:00');
     }
 
     $headscript = '';
@@ -763,16 +760,14 @@ function charstats($return = true)
         }
         else
         {
-            try
+            $result = [];
+            $onlinecount = 0;
+
+            if (\Doctrine::isConnected())
             {
                 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
                 $result = $repository->getListAccountsOnline();
                 $onlinecount = count($result);
-            }
-            catch (\Throwable $th)
-            {
-                $result = [];
-                $onlinecount = 0;
             }
 
             $ret = \LotgdTheme::renderThemeTemplate('parts/online-list.twig', [
