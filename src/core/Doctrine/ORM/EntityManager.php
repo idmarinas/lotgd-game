@@ -42,7 +42,8 @@ class EntityManager extends DoctrineEntityManager
     public function isConnected(): bool
     {
         if (
-            (null === $this->isConnected && ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
+            defined('DB_NODB')
+            || (null === $this->isConnected && ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
             || false === $this->isConnected
         ) {
             $this->isConnected = false;
