@@ -106,6 +106,16 @@ function is_module_installed($modulename, $version = false)
  */
 function get_module_install_status(): array
 {
+    if (! \Doctrine::isConnected())
+    {
+        return [
+            'installedcategories' => 0,
+            'installedmodules' => 0,
+            'uninstalledmodules' => 0,
+            'uninstcount' => 0
+        ];
+    }
+
     // Collect the names of all installed modules.
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
     $result = $repository->findAll();
