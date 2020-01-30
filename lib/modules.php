@@ -96,6 +96,16 @@ function mass_module_prepare(array $hooknames)
     global $module_prefs;
     global $session;
 
+    try
+    {
+        //-- Check if exist connection
+        \Doctrine::getConnection()->ping();
+    }
+    catch (\Throwable $th)
+    {
+        return false;
+    }
+
     $hookRepository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
     $settingRepository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
     $userRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
