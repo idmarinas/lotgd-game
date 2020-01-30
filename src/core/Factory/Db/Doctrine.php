@@ -15,13 +15,13 @@ use Doctrine\Common\{
 };
 use Doctrine\ORM\{
     Configuration as DoctrineConfiguration,
-    EntityManager as DoctrineEntityManager,
     Events as DoctrineEvents,
     Mapping\UnderscoreNamingStrategy as DoctrineUnderscoreNamingStrategy
 };
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\{
     Extension\TablePrefix as DoctrineTablePrefix,
+    ORM\EntityManager as DoctrineEntityManager,
     Strategy\Quote as DoctrineQuoteStrategy
 };
 use Zend\ServiceManager\{
@@ -38,7 +38,7 @@ class Doctrine implements FactoryInterface
         $adapter = is_array($adapter) ? $adapter : [];
         $isDevelopment = (bool) ($options['development'] ?? false);
         $doctrine = $options['doctrine'] ?? [];
-        $cacheDir = "storage/cache/doctrine";
+        $cacheDir = 'storage/cache/doctrine';
 
         $doctrineCache = new DoctrineCache\ArrayCache();
 

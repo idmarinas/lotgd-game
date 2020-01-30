@@ -8,7 +8,7 @@
 
 namespace Lotgd\Core\Lib;
 
-use Doctrine\ORM\EntityManager;
+use Lotgd\Core\Doctrine\ORM\EntityManager;
 use Zend\Cache\Storage\StorageInterface;
 
 class Settings
@@ -232,14 +232,7 @@ class Settings
      */
     public function isConnected(): bool
     {
-        try
-        {
-            return $this->doctrine->getConnection()->ping();
-        }
-        catch (\Throwable $th)
-        {
-            return false;
-        }
+        return $this->doctrine->isConnected();
     }
 
     /**
