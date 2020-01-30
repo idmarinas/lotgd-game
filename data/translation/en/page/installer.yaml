@@ -212,6 +212,7 @@ stage8:
         warning: 'Warning: Your PHP memory limit is set to a very low level.'
         message: 'Smaller servers should not be affected by this during normal gameplay but for this installation step you should assign at least 12 Megabytes (128 Megabytes recomended) of RAM for your PHP process. For now we will skip this step, but before installing any module, make sure to increase you memory limit. <br> You can proceed at your own risk. Be aware that a blank screen indicates you *must* increase the memory limit.'
         error: "You have been warned... You can install modules or skip to the next step. It's up to you."
+    no.modules: '`$Not modules found in folder "`b/modules´b"`0'
     form:
         button:
             submit: 'Save Module Settings'
