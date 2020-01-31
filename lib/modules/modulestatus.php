@@ -109,10 +109,10 @@ function get_module_install_status(): array
     if (! \Doctrine::isConnected())
     {
         return [
-            'installedcategories' => 0,
-            'installedmodules' => 0,
-            'uninstalledmodules' => 0,
-            'uninstcount' => 0
+            'installedcategories' => [],
+            'installedmodules' => [],
+            'uninstalledmodules' => [],
+            'uninstcount' => []
         ];
     }
 
