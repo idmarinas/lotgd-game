@@ -161,7 +161,11 @@ elseif ('special' == $op)
 
     if ('' != \LotgdHttp::getPost('newday'))
     {
-        $accountEntity->setLasthit(new \DateTime('0000-00-00 00:00:00'));
+        $character = $accountEntity->getCharacter();
+        $character->setLasthit(new \DateTime('0000-00-00 00:00:00'));
+        $accountEntity->setCharacter($character);
+
+        \Doctrine::persist($character);
     }
     elseif ('' != \LotgdHttp::getPost('fixnavs'))
     {
