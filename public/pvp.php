@@ -45,7 +45,7 @@ elseif ('attack' == $act)
 {
     $characterId = (int) \LotgdHttp::getQuery('character_id');
 
-    $badguy = setup_pvp_target($name);
+    $badguy = setup_pvp_target($characterId);
     $options['type'] = 'pvp';
     $failedattack = true;
 
