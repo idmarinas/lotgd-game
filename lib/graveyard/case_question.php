@@ -13,7 +13,7 @@ $default_actions = [
         'text' => '', //-- Translator key for output in body
         'highest' => 'section.question.highest', //-- Translator key, text that represent highest possible buy
         'params' => [
-            'graveyardOwnerName' => $graveyardOwnerName
+            'graveyardOwnerName' => $params['graveyardOwnerName']
         ]
     ]
 ];
@@ -51,7 +51,7 @@ $params['highest'] = [
 
 \LotgdNavigation::addHeader('category.question.favor', [
     'params' => [
-        'graveyardOwnerName' => $graveyardOwnerName
+        'graveyardOwnerName' => $params['graveyardOwnerName']
     ]
 ]);
 
@@ -61,7 +61,7 @@ foreach($actions as $key => $value)
     \LotgdNavigation::addNav('nav.question.favor', $value['link'], [
         'params' => [
             'favor' => $value['favor'],
-            'text' => \LotgdTranslator::t($value['textLink'], $value['params'], $value['textDomainNavigation'])
+            'text' => \LotgdTranslator::t($value['linkText'], $value['params'], $value['textDomainNavigation'])
         ]
     ]);
 
