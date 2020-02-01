@@ -15,6 +15,7 @@ battle:
     flee:
         one: '`5{creatureName} flees in panic.`0`n'
         multi: '`5All other other enemies flee in panic as `^{creatureName}`0 falls to the ground.`0`n'
+    run: '`4You are too busy trying to run away like a cowardly dog to try to fight `^{creatureName}`0.`0`n'
 
 # Text for combat
 combat:

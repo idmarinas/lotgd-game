@@ -440,7 +440,12 @@ if ('newtarget' != $op)
                             }
                             elseif ('run' == $op && ! $surprised)
                             {
-                                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = ['`4You are too busy trying to run away like a cowardly dog to try to fight `^%s`4.`n', $badguy['creaturename']];
+                                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = [
+                                    'battle.run',
+                                    [
+                                        'creatureName' => $badguy['creaturename']
+                                    ]
+                                ];
                             }
 
                             //Need to insert this here because of auto-fighting!
