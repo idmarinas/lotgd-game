@@ -4,7 +4,6 @@
 // addnews ready
 // mail ready
 
-require_once 'lib/pvplist.php';
 require_once 'lib/pvpwarning.php';
 require_once 'lib/substitute.php';
 require_once 'lib/systemmail.php';
