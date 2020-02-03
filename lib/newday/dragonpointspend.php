@@ -14,7 +14,7 @@ if ($params['points'] > 1)
 {
     \LotgdNavigation::addNav('nav.reset', "newday.php?pdk=0$resline");
 
-    $params['formUrl'] = appendcount("newday.php?pdk=1$resline");
+    $params['formUrl'] = "newday.php?pdk=1{$resline}";
 }
 //-- 1 unallocated point
 else
