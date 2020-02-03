@@ -32,7 +32,7 @@ if ('' == $op && 'attack' != $act)
     $pvp = \LotgdLocator::get(\Lotgd\Core\Pvp\Listing::class);
     $pvptime = getsetting('pvptimeout', 600);
 
-    $params['tpl'] = 'default';
+    $params['tpl'] = 'list';
     $params['paginator'] = $pvp->getPvpList($session['user']['location']);
     $params['sleepers'] = $pvp->getLocationSleepersCount($session['user']['location']);
     $params['returnLink'] = \LotgdHttp::getServer('REQUEST_URI');
