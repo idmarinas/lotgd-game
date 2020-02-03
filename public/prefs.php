@@ -151,7 +151,7 @@ else
                 }
                 $session['user']['password'] = $pass1;
 
-                \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.post.password.changed', [], $textDomain));
+                \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.form.password.changed', [], $textDomain));
             }
             else
             {
