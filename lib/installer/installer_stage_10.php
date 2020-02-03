@@ -31,7 +31,7 @@ if (0 == $superusers)
             SU_EDIT_USERS | SU_EDIT_CONFIG | SU_INFINITE_DAYS | SU_EDIT_EQUIPMENT | SU_EDIT_PAYLOG | SU_DEVELOPER |
             SU_POST_MOTD | SU_MODERATE_CLANS | SU_EDIT_RIDDLES | SU_MANAGE_MODULES | SU_AUDIT_MODERATION | SU_RAW_SQL |
             SU_VIEW_SOURCE | SU_NEVER_EXPIRE;
-            $pass = md5(md5(stripslashes(httppost('pass1'))));
+            $pass = md5(md5(stripslashes(\LotgdHttp::getPost('pass1'))));
             $sql = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='$name'";
             DB::query($sql);
 

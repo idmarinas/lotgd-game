@@ -145,8 +145,8 @@ page_footer();
 function clanform()
 {
     $data = [
-        'clanname' => htmlentities(stripslashes(httppost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
-        'clanshort' => htmlentities(stripslashes(httppost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
+        'clanname' => htmlentities(stripslashes(\LotgdHttp::getPost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
+        'clanshort' => htmlentities(stripslashes(\LotgdHttp::getPost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
     ];
 
     rawoutput(LotgdTheme::renderThemeTemplate('page/clan/new.twig', $data));
