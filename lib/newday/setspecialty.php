@@ -23,7 +23,6 @@ if (\LotgdNavigation::checkNavs())
 
 $params['tpl'] = 'specialty';
 
-clearoutput();
 page_header('title.specialty.not', [], $textDomain);
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
