@@ -918,7 +918,6 @@ return [
                             'name' => 'chat_tag_megauser',
                             'attributes' => [
                                 'id' => 'chat_tag_megauser',
-                                'required' => true
                             ],
                             'options' => [
                                 'label' => 'su.title.chat_tag_megauser',
@@ -932,7 +931,6 @@ return [
                             'name' => 'chat_tag_gm',
                             'attributes' => [
                                 'id' => 'chat_tag_gm',
-                                'required' => true
                             ],
                             'options' => [
                                 'label' => 'su.title.chat_tag_gm',
@@ -945,8 +943,7 @@ return [
                             'type' => 'text',
                             'name' => 'chat_tag_mod',
                             'attributes' => [
-                                'id' => 'chat_tag_mod',
-                                'required' => true
+                                'id' => 'chat_tag_mod'
                             ],
                             'options' => [
                                 'label' => 'su.title.chat_tag_mod',

@@ -640,7 +640,7 @@ return [
         ],
         [
             'name' => 'chat_tag_megauser',
-            'required' => true,
+            'required' => false,
             'filters' => [
                 ['name' => Filter\StringTrim::class],
             ],
@@ -657,7 +657,7 @@ return [
         ],
         [
             'name' => 'chat_tag_gm',
-            'required' => true,
+            'required' => false,
             'filters' => [
                 ['name' => Filter\StringTrim::class],
             ],
@@ -674,7 +674,7 @@ return [
         ],
         [
             'name' => 'chat_tag_mod',
-            'required' => true,
+            'required' => false,
             'filters' => [
                 ['name' => Filter\StringTrim::class],
             ],
