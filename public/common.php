@@ -53,7 +53,7 @@ try
 }
 catch (\Throwable $th)
 {
-    \Tracy\Debugger::log($th);
+    // \Tracy\Debugger::log($th); //-- Not is necesary log, only regenerate session
 
     LotgdSession::bootstrapSession(true);
 }
