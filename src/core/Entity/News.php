@@ -63,7 +63,7 @@ class News
      *
      * @ORM\Column(type="array")
      */
-    private $arguments;
+    private $arguments = [];
 
     /**
      * @var bool
