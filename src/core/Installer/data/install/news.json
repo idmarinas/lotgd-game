@@ -7,7 +7,7 @@
         {
             "text": "default",
             "account_id": 0,
-            "arguments": "",
+            "arguments": [],
             "text_domain": "partial-news"
         }
     ]
