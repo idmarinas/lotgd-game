@@ -29,7 +29,7 @@ page_header('title.race.not', [], $textDomain);
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
 
-$session['user']['race'] = 'Human';
+$session['user']['race'] = 'app-default'; // Horrible Gelatinous Blob
 
 \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
 
