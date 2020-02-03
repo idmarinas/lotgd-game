@@ -1634,7 +1634,8 @@ return [
                                 'id' => 'suicidedk',
                             ],
                             'options' => [
-                                'label' => 'forest.suicidedk',
+                                'label' => 'forest.suicidedk.label',
+                                'note' => 'forest.suicidedk.note',
                             ]
                         ]
                     ],
@@ -1992,7 +1993,8 @@ return [
                                 'id' => 'companionsallowed',
                             ],
                             'options' => [
-                                'label' => 'companion.companionsallowed',
+                                'label' => 'companion.companionsallowed.label',
+                                'note' => 'companion.companionsallowed.note',
                             ]
                         ]
                     ],
@@ -2361,7 +2363,8 @@ return [
                                 'value' => 1
                             ],
                             'options' => [
-                                'label' => 'pvp.pvprange',
+                                'label' => 'pvp.pvprange.label',
+                                'note' => 'pvp.pvprange.note'
                             ]
                         ]
                     ],
@@ -2623,7 +2626,8 @@ return [
                                 'id' => 'expirenotificationdays',
                             ],
                             'options' => [
-                                'label' => 'content.expirenotificationdays',
+                                'label' => 'content.expirenotificationdays.label',
+                                'note' => 'content.expirenotificationdays',
                             ]
                         ]
                     ],

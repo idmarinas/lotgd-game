@@ -111,7 +111,7 @@ places:
 su.title:
     title: SU titles
     enable_chat_tags:
-        label: 'Enable chat tags in general,bool'
+        label: 'Enable chat tags in general'
         note: 'This will display tags to the name in chats'
     chat_tag_megauser: 'Title for the mega user'
     chat_tag_gm: 'Name for a GM'
@@ -229,7 +229,7 @@ enemies:
 # Companions/Mercenaries
 companion:
     title: Companions/Mercenaries
-    enablecompanions: 'Enable the usage of companions,bool'
+    enablecompanions: 'Enable the usage of companions'
     companionsallowed:
         label: 'How many companions are allowed per player'
         note: 'Modules may alter this value on a per player basis!'
@@ -276,9 +276,7 @@ pvp:
     pvpdefgain: 'Percent of attacker experience defender gains on win'
     pvpdeflose: 'Percent of experience defender loses on loss'
     pvphardlimit: 'Is the maximum amount a successful attacker or defender can gain limited?'
-    pvphardlimitamount:
-        label: 'If yes - What is the maximum amount of EXP he can get?'
-        note: 'PVP no cheat'
+    pvphardlimitamount: 'If yes - What is the maximum amount of EXP he can get?'
     pvpsameid: 'Can players attack others with same ID?'
     pvpsameip: 'Can players attack others with same IP?'
 
