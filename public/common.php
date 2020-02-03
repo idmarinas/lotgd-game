@@ -161,7 +161,7 @@ elseif (defined('IS_INSTALLER'))
     }
 }
 
-if (! defined('IS_INSTALLER') && file_exists('public/installer.php')
+if (! IS_INSTALLER && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
     && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
 ) {
@@ -172,7 +172,7 @@ if (! defined('IS_INSTALLER') && file_exists('public/installer.php')
 
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/security.twig', []));
 
-    page_footer();
+    page_footer(false);
 }
 
 if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
@@ -189,7 +189,7 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
 
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/database.twig', $params));
 
-    page_footer();
+    page_footer(false);
 }
 
 if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
