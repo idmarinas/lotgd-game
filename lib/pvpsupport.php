@@ -32,7 +32,8 @@ function setup_pvp_target(int $characterId)
     {
         $message = 'flash.message.pvp.start.tired';
 
-        if (abs($session['user']['level'] - $entity['creaturelevel']) > getsetting('pvprange', 2))
+        $pvprange = (int) getsetting('pvprange', 2);
+        if (abs((int) $session['user']['level'] - (int) $entity['creaturelevel']) > $pvprange)
         {
             $message = 'flash.message.pvp.start.out.range';
         }
