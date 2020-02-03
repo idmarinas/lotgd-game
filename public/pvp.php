@@ -68,7 +68,7 @@ elseif ('attack' == $act)
     }
     elseif (is_string($badguy))
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslate::t($badguy, [], $textDomain));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t($badguy, [], $textDomain));
     }
 
     if ($failedattack)
