@@ -59,7 +59,10 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
 
         foreach ($server as $lng)
         {
-            $languages[$lng] = $this->validLanguages[$lng];
+            if (isset($this->validLanguages[$lng]))
+            {
+                $languages[$lng] = $this->validLanguages[$lng];
+            }
         }
 
         $this->setValueOptions($languages);
