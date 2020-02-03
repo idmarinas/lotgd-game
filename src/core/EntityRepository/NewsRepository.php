@@ -72,7 +72,7 @@ class NewsRepository extends DoctrineRepository
         }
         catch (\Throwable $th)
         {
-            Debugger::log($th);
+            \Tracy\Debugger::log($th);
 
             return 0;
         }
