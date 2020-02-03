@@ -73,7 +73,7 @@ $invalidmodule = [
 ];
 
 //-- Add uninstalled modules
-while (list($key, $modulename) = each($uninstalled))
+foreach ($uninstalled as $key => $modulename)
 {
     $row = [];
 
