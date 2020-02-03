@@ -98,5 +98,7 @@ if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 
 modulehook('superuser', []);
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/superuser.twig', []));
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/superuser.twig', [
+    'textDomain' => $textDomain
+]));
 page_footer();

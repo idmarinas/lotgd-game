@@ -1,4 +1,4 @@
-{% translate_default_domain 'page-superuser' %}
+{% translate_default_domain textDomain %}
 
 {% set result = modulehook('superuser-headlines', []) %}
 <div class="center aligned">
@@ -12,4 +12,4 @@
 {{ commentary_block({
     'section': 'superuser',
     'textDomainStatus': 'app-commentary'
-}, 'page-superuser') }}
+}, textDomain) }}
