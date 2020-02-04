@@ -2,6 +2,11 @@
 
 require_once 'lib/gamelog.php';
 
+/**
+ * This optimization not is necesary in InnoDB table
+ * CronJob are deactivate by default
+ */
+
 //db cleanup
 savesetting('lastdboptimize', date('Y-m-d H:i:s'));
 
@@ -12,9 +17,11 @@ $start = microtime(true);
 
 foreach ($result as $key => $value)
 {
-    list($clave, $valor) = each($value);
-    DB::query("OPTIMIZE TABLE $valor");
-    array_push($tables, $valor);
+    foreach($value as $clave => $valor)
+    {
+        DB::query("OPTIMIZE TABLE $valor");
+        array_push($tables, $valor);
+    }
 }
 
 $time = round(microtime(true) - $start, 2);
