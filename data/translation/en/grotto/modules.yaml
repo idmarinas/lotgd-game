@@ -3,6 +3,8 @@ title: 'Module Manager'
 subtitle:
     uninstall: 'Uninstalled Modules'
     installed: 'Installed Modules'
+    desactivated: 'Deactivated Modules'
+    activated: 'Activated Modules'
     category: '{cat} Modules'
 
 table:

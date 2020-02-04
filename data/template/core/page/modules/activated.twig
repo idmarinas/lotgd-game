@@ -1,6 +1,6 @@
 {% translate_default_domain textDomain %}
 
-<h4>{{ 'subtitle.installed'|t(_context)|colorize }}</h4>
+<h4>{{ 'subtitle.activated'|t(_context)|colorize }}</h4>
 
 <form action="{{ ('modules.php?op=mass&cat=installed')|lotgd_url }}" method="POST" class="ui form">
     <table class="ui small very compact striped table">
@@ -8,7 +8,6 @@
             <tr>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">{{ 'table.thead.ops'|t|uncolorize }}</th>
-                <th scope="col">{{ 'table.thead.status'|t|uncolorize }}</th>
                 <th scope="col">{{ 'table.thead.mname'|t|uncolorize }}</th>
                 <th scope="col">{{ 'table.thead.mauth'|t|uncolorize }}</th>
                 <th scope="col">{{ 'table.thead.inon'|t|uncolorize }}</th>
@@ -45,7 +44,6 @@
                             {% endif %}
                         </div>
                     </td>
-                    <td>{{ ('table.tbody.' ~ active)|t|colorize }}</td>
                     <td>
                         <span data-tooltip="{{ module.description|default(module.formalname|uncolorize) }}"><i class="info icon"></i></span>
                         {{ module.formalname|colorize }}<br>
@@ -62,7 +60,6 @@
     </table>
 
     <div class="field">
-        <button type="submit" name="activate" value="1" class="ui button">{{ 'table.tbody.button.activate'|t|uncolorize }}</button>
         <button type="submit" name="deactivate" value="1" class="ui secondary button">{{ 'table.tbody.button.deactivate'|t|uncolorize }}</button>
         <button type="submit" name="reinstall" value="1" class="ui yellow button">{{ 'table.tbody.button.reinstall'|t|uncolorize }}</button>
         <button type="submit" name="uninstall" value="1" class="ui red button">{{ 'table.tbody.button.uninstall'|t|uncolorize }}</button>

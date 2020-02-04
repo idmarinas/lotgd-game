@@ -6,37 +6,37 @@
     <table class="ui small very compact striped table">
         <thead>
             <tr>
-                <th>&nbsp;</th>
-                <th>{{ 'table.thead.ops'|t|uncolorize }}</th>
-                <th>{{ 'table.thead.mname'|t|uncolorize }}</th>
-                <th>{{ 'table.thead.mauth'|t|uncolorize }}</th>
-                <th>{{ 'table.thead.categ'|t|uncolorize }}</th>
-                <th>{{ 'table.thead.fname'|t|uncolorize }}</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">{{ 'table.thead.ops'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.mname'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.mauth'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.categ'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.fname'|t|uncolorize }}</th>
             </tr>
         </thead>
         <tbody>
             {% for module in modules %}
                 <tr>
                     {% if not module.invalid %}
-                    <td class="collapsing">
-                        <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div>
-                    </td>
-                    <td class="collapsing">
-                        <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
-                            <i class="configure icon"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <span title="{{ module.description|default(module.name|uncolorize) }}">
-                            {{ module.name|colorize }} <em>{{ module.version|colorize }}</em>
-                        </span>
-                    </td>
-                    <td>{{ '`#%s`0'|format(module.author)|colorize }}</td>
-                    <td>{{ module.category|colorize }}</td>
-                    <td>{{ '%s.php'|format(module.shortname) }}</td>
+                        <td class="collapsing">
+                            <div class="ui lotgd checkbox"><input type="checkbox" name="module[]" value="{{ module.modulename }}"></div>
+                        </td>
+                        <td class="collapsing">
+                            <a class="ui mini icon {{ module.canInstall ? '' : 'red disabled' }} button" href="{{ ('modules.php?op=install&module=' ~ module.shortname ~ '&cat=' ~ module.category|e('url'))|lotgd_url }}" data-tooltip="{{ 'table.tbody.install'|t|uncolorize }}">
+                                <i aria-hidden="true" class="configure icon"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <span title="{{ module.description|default(module.name|uncolorize) }}">
+                                {{ module.name|colorize }} <em>{{ module.version|colorize }}</em>
+                            </span>
+                        </td>
+                        <td>{{ '`#%s`0'|format(module.author)|colorize }}</td>
+                        <td>{{ module.category|colorize }}</td>
+                        <td>{{ '%s.php'|format(module.shortname) }}</td>
                     {% else %}
-                        <th></th>
-                        <td><a class="ui red disabled mini icon button" data-tooltip="{{ 'table.tbody.uninstallable'|t|uncolorize }}"><i class="configure icon"></i></a></td>
+                        <td></td>
+                        <td><a class="ui red disabled mini icon button" data-tooltip="{{ 'table.tbody.uninstallable'|t|uncolorize }}"><i aria-hidden="true" class="configure icon"></i></a></td>
                         <td colspan="4">
                             <span title="{{ module.description|default(module.name|uncolorize) }}">
                                 {{ module.name|colorize }} {{ 'table.tbody.invalid'|t|colorize }} <em>{{ module.version|colorize }}</em>

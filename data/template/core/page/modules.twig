@@ -6,6 +6,10 @@
 
 {% if cat == 'installed' %}
     {% include "core/page/modules/installed.twig" %}
+{% elseif cat == 'activated' %}
+    {% include "core/page/modules/activated.twig" %}
+{% elseif cat == 'deactivated' %}
+    {% include "core/page/modules/deactivated.twig" %}
 {% elseif cat %}
     {% include "core/page/modules/category.twig" %}
 {% else %}

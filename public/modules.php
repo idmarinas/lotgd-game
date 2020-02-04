@@ -159,6 +159,16 @@ ksort($seencats);
         'count' => count($install_status['installedmodules'])
     ]
 ]);
+\LotgdNavigation::addNav('modules.nav.deactivated', 'modules.php?op=deactivated', [
+    'params' => [
+        'count' => count($install_status['deactivedmodules'])
+    ]
+]);
+\LotgdNavigation::addNav('modules.nav.activated', 'modules.php?op=activated', [
+    'params' => [
+        'count' => count($install_status['activedmodules'])
+    ]
+]);
 reset($seencats);
 
 foreach ($seencats as $category => $count)
@@ -171,7 +181,7 @@ foreach ($seencats as $category => $count)
     ]);
 }
 
-if ('' == $op && 'installed' != $cat)
+if ('' == $op && 'installed' != $cat && 'deactivated' != $cat && 'activated' != $cat)
 {
     $params['cat'] = $cat;
 
@@ -246,6 +256,18 @@ elseif ('installed' == $op || 'installed' == $cat)
     $params['cat'] = 'installed';
 
     $params['modules'] = $repository->findBy([], ['active' => 'ASC', 'category' => 'ASC', 'installdate' => 'DESC']);
+}
+elseif ('deactivated' == $op || 'deactivated' == $cat)
+{
+    $params['cat'] = 'deactivated';
+
+    $params['modules'] = $repository->findBy(['active' => 0], ['category' => 'ASC', 'installdate' => 'DESC']);
+}
+elseif ('activated' == $op || 'activated' == $cat)
+{
+    $params['cat'] = 'activated';
+
+    $params['modules'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'installdate' => 'DESC']);
 }
 
 rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/modules.twig', $params));

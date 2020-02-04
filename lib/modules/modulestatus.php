@@ -111,6 +111,8 @@ function get_module_install_status(): array
         return [
             'installedcategories' => [],
             'installedmodules' => [],
+            'deactivedmodules' => [],
+            'activedmodules' => [],
             'uninstalledmodules' => [],
             'uninstcount' => []
         ];
@@ -122,12 +124,22 @@ function get_module_install_status(): array
 
     $installedModules = [];
     $installedCategories = [];
+    $deactivedModules = [];
+    $activedModules = [];
 
     if ($result)
     {
         foreach ($result as $row)
         {
             $installedModules["{$row->getModulename()}.php"] = true;
+            if ($row->getActive())
+            {
+                $activedModules["{$row->getModulename()}.php"] = true;
+            }
+            else
+            {
+                $deactivedModules["{$row->getModulename()}.php"] = true;
+            }
 
             $installedCategories[$row->getCategory()] = ($installedCategories[$row->getCategory()] ?? 0) + 1;
         }
@@ -161,6 +173,8 @@ function get_module_install_status(): array
         'installedcategories' => $installedCategories,
         'installedmodules' => $installedModules,
         'uninstalledmodules' => $uninstalledModules,
+        'deactivedmodules' => $deactivedModules,
+        'activedmodules' => $activedModules,
         'uninstcount' => $uninstalled
     ];
 }
