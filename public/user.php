@@ -15,7 +15,7 @@ $userId = (int) \LotgdHttp::getQuery('userid');
 $page = (int) \LotgdHttp::getQuery('page');
 $sort = \LotgdHttp::getQuery('sort');
 $petition = \LotgdHttp::getQuery('returnpetition');
-$m = (string) \LotgdHttp::getQuery('module');
+$module = (string) \LotgdHttp::getQuery('module');
 
 if ('lasthit' == $op)
 {
@@ -394,8 +394,8 @@ switch ($op)
                     $data[$row->getSetting()] = $row->getValue();
                 }
 
-                rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userid$returnpetition' method='POST'>");
-                \LotgdNavigation::addNavAllow("user.php?op=savemodule&module=$module&userid=$userid$returnpetition");
+                rawoutput("<form action='user.php?op=savemodule&module=$module&userid=$userId$returnpetition' method='POST'>");
+                \LotgdNavigation::addNavAllow("user.php?op=savemodule&module=$module&userid=$userId$returnpetition");
                 lotgd_showform($msettings, $data);
                 rawoutput('</form>');
 
