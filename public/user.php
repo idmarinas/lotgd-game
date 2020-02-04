@@ -88,6 +88,7 @@ if ('edit' == $op || 'save' == $op)
 {
     //add the race
     $row = $repository->extractEntity($repository->find($userId));
+    $characterInfo = $row;
     $row = array_merge($row, $repository->extractEntity($row['character']));
     $racesenum = ','.translate_inline('Undecided', 'race').',';
 
@@ -299,6 +300,8 @@ elseif ('savemodule' == $op)
     \LotgdHttp::setQuery('op', 'edit');
     \LotgdHttp::setQuery('subop', 'module');
 }
+
+$row = $characterInfo;
 
 switch ($op)
 {
