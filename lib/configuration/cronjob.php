@@ -72,7 +72,7 @@ if ('savecronjob' == $op)
     }
 
     $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-    $cronId->removeItem('cronjobstable');
+    $cronCache->removeItem('cronjobstable');
 }
 elseif ('delcronjob' == $op)
 {
@@ -121,7 +121,7 @@ elseif ('newcronjob' == $op)
         'enabled' => 1
     ];
 
-    if ($cronid)
+    if ($cronId)
     {
         $cronEntity = $repository->find($cronId);
         $result = $repository->extractEntity($cronEntity);
