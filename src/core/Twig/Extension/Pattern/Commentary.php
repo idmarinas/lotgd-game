@@ -116,7 +116,7 @@ trait Commentary
             // 'icon' => 'images/icons/onlinestatus/online.png',
             'outIcon' => ' olive circle outline pulse transition looping',
             'insideIcon' => 'green small circle',
-            'label' => translate_inline('Online'),
+            'label' => $status['online'],
         ];
 
         //-- Is a message of the game
