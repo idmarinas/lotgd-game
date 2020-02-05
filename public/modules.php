@@ -24,7 +24,7 @@ $cat = (string) \LotgdHttp::getQuery('cat');
 
 $repository = \Doctrine::getRepository('LotgdCore:Modules');
 
-\LotgdNavigation::addHeader('modules.category.modules');
+\LotgdNavigation::addHeader('modules.category.status');
 
 if ('mass' == $op)
 {
@@ -171,6 +171,7 @@ ksort($seencats);
 ]);
 reset($seencats);
 
+\LotgdNavigation::addHeader('modules.category.modules');
 foreach ($seencats as $category => $count)
 {
     \LotgdNavigation::addNav('modules.nav.modules', 'modules.php?cat='.rawurlencode($category), [
