@@ -162,7 +162,7 @@ function install_module($module, $force = true)
                     'installedby' => $name,
                     'category' => $info['category'],
                     'infokeys' => sprintf('|%s|', implode(array_keys($info), '|')),
-                    'version' => $info['category'],
+                    'version' => $info['version'],
                     'download' => $info['download'],
                     'description' => $info['description']
                 ]);
