@@ -77,8 +77,9 @@ $dkff = 0;
 $params['forestTurnDragonKill'] = $dkff;
 if (! $params['moduleStaminaSystem'])
 {
-    while (list($key, $val) = each($session['user']['dragonpoints']))
+    foreach($session['user']['dragonpoints'] as $key => $val)
     {
+
         if ('ff' == $val)
         {
             $dkff++;

@@ -60,9 +60,9 @@ trait Prefix
 
         if (is_array($tablename))
         {
-            list($key, $value) = each($tablename);
+            $key = key($tablename);
 
-            return [$key => $prefixNew.$value];
+            return [$key => $prefixNew.$tablename[$key]];
         }
 
         return $prefixNew.$tablename;
