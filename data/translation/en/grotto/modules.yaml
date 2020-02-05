@@ -25,7 +25,7 @@ table:
         reinstall: 'Reinstall'
         strsettings: 'Settings'
         strnosettings: 'No Settings'
-        not.modules: '`i--No uninstalled modules were found--´i'
+        not.modules: '`i--No modules were found--´i'
         invalid: '(`$Invalid Module! Contact Author or check file!`0)'
         uninstallable: 'Not installable'
         install: Install

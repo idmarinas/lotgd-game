@@ -237,6 +237,7 @@ moderate:
 # Modules page
 modules:
     category:
+        status: 'Module Status'
         modules: 'Module Categories'
     nav:
         category: '{category} Modules'
