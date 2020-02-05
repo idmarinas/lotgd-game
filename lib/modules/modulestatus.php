@@ -4,68 +4,61 @@
  * Returns the status of a module as a bitfield.
  *
  * @param string $modulename The module name
- * @param string $version    The version to check for (false for don't care)
+ * @param string $version    The version to check for (null for don't care)
  *
  * @return int The status codes for the module
  */
-function module_status($modulename, $version = false)
+function module_status($modulename, ?string $version = null)
 {
     global $injected_modules;
 
     $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
-    // The module file doesn't exist.
-    $status = MODULE_FILE_NOT_PRESENT;
-
     if (file_exists($modulefilename))
     {
-        // The module isn't installed
-        $status = MODULE_NOT_INSTALLED;
+        // The module file doesn't exist.
+        return MODULE_FILE_NOT_PRESENT;
+    }
 
-        $repository = \Doctrine::getRepository('LotgdCore:Modules');
-        $row = $repository->findOneBy([ 'modulename' => $modulename ]);
+    // The module isn't installed
+    $status = MODULE_NOT_INSTALLED;
 
-        if ($row)
+    $repository = \Doctrine::getRepository('LotgdCore:Modules');
+    $row = $repository->findOneBy([ 'modulename' => $modulename ]);
+
+    if ($row)
+    {
+        // The module is installed
+        $status = MODULE_INSTALLED;
+
+        if ($row->getActive())
         {
-            // The module is installed
-            $status = MODULE_INSTALLED;
-
-            if ($row->getActive())
-            {
-                // Module is here and active
-                $status |= MODULE_ACTIVE;
-                // In this case, the module could have been force injected or
-                // not.  We still want to mark it either way.
-                if (array_key_exists($modulename, $injected_modules[0]) && $injected_modules[0][$modulename])
-                {
-                    $status |= MODULE_INJECTED;
-                }
-
-                if (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
-                {
-                    $status |= MODULE_INJECTED;
-                }
-            }
-            // Force-injected modules can be injected but not active.
-            elseif (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
-            {
+            // Module is here and active
+            $status |= MODULE_ACTIVE;
+            // In this case, the module could have been force injected or
+            // not.  We still want to mark it either way.
+            if (
+                (array_key_exists($modulename, $injected_modules[0]) && $injected_modules[0][$modulename])
+                || (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
+            ) {
                 $status |= MODULE_INJECTED;
             }
+        }
+        // Force-injected modules can be injected but not active.
+        elseif (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
+        {
+            $status |= MODULE_INJECTED;
+        }
 
-            // Check the version number
-            if (false === $version)
-            {
-                $status |= MODULE_VERSION_OK;
-            }
-            elseif (module_compare_versions($row->getVersion(), $version) < 0)
-            {
-                $status |= MODULE_VERSION_TOO_LOW;
-            }
-            else
-            {
-                $status |= MODULE_VERSION_OK;
-            }
+        // Check the version number
+        if (! $version)
+        {
+            $status |= MODULE_VERSION_OK;
+        }
+        elseif (module_compare_versions($row->getVersion(), $version) < 0)
+        {
+            $status |= MODULE_VERSION_TOO_LOW;
         }
     }
 
@@ -132,14 +125,7 @@ function get_module_install_status(): array
         foreach ($result as $row)
         {
             $installedModules["{$row->getModulename()}.php"] = true;
-            if ($row->getActive())
-            {
-                $activedModules["{$row->getModulename()}.php"] = true;
-            }
-            else
-            {
-                $deactivedModules["{$row->getModulename()}.php"] = true;
-            }
+            ${$row->getActive() ? 'activedModules' : 'deactivedModules'}["{$row->getModulename()}.php"] = true;
 
             $installedCategories[$row->getCategory()] = ($installedCategories[$row->getCategory()] ?? 0) + 1;
         }
@@ -147,27 +133,22 @@ function get_module_install_status(): array
     }
 
     $uninstalledModules = [];
-
-    if ($handle = opendir('modules'))
-    {
-        $uninstalled = 0;
-
-        while (false !== ($file = readdir($handle)))
+    $files = array_map(function ($val) use ($installedModules) {
+        if (! isset($installedModules[basename($val)]))
         {
-            if ('.' == $file[0])
-            {
-                continue;
-            }
+            return $val;
+        }
+    }, glob('modules/*.php'));
+    $files = array_filter($files);
 
-            if (preg_match('/\\.php$/', $file) && ! isset($installedModules[$file]))
-            {
-                $uninstalled++;
-                $uninstalledModules[] = substr($file, 0, strlen($file) - 4);
-            }
+    $uninstalled = count($files);
+    if (count($files))
+    {
+        foreach($files as $file)
+        {
+            $uninstalledModules[] = basename($file, '.php');
         }
     }
-    closedir($handle);
-    sort($uninstalledModules);
 
     return [
         'installedcategories' => $installedCategories,
