@@ -87,6 +87,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   `lib/superusernav.php`
     -   `lib/tabledescriptor.php`
     -   `lib/villagenav.php`
+    -   `lib/errorhandler.php` Now LoTGD have a new way to register errors and exceptions with Tracy Debugger
+    -   `lib/show_backtrace.php`
+    -   `lib/output_array.php` This file was not being used
+    -   `lib/stripslashes_deep.php` This file was not being used
 -   Removed vars from **common.php**: `$logd_version`, `$copyright` and `$license` use:
     -   Public display version: `Lotgd\Core\Application::VERSION`
     -   Identify numeric version: `Lotgd\Core\Application::VERSION_NUMBER`
@@ -105,6 +109,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   Removed Settings extended from core:
     -   Files/Classes `Lotgd\Entity\SettingsExtended` and `Lotgd\Core\Factory\Lib\SettingsExtended`
     -   Note: This configuration was not being used
+-   Removed obsolete function `each()` PHP 7.2.0 from some files.
+    -   `lib/translator.php` and `lib/showform.php` For now these files retain the function as they will be deleted in a future version
 -   Twig template:
     -   Removed obsolete filter `sustitute`
     -   Removed obsolete filter `nltoappon` use Twig filter `nl2br`
