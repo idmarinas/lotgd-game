@@ -2,7 +2,7 @@
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 //-- Configuration
 var baseWebpackConfig = require('./webpack.base.conf')
@@ -18,16 +18,12 @@ module.exports = merge(baseWebpackConfig, {
         new OptimizeCSSPlugin()
     ],
     optimization: {
+        minimize: true,
         minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                uglifyOptions: {
-                    compress: false,
-                    ecma: 6,
-                    mangle: true
-                },
-                sourceMap: false
+            new TerserPlugin({
+                terserOptions: {
+                    ecma: 2016
+                }
             })
         ]
     }
