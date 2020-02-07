@@ -55,10 +55,8 @@ class Upgrade extends UpgradeAbstract
             $this->messages[] = \LotgdTranslator::t('upgrade.version.data', ['name' => 'settings -> serverlanguages'], self::TRANSLATOR_DOMAIN);
 
             //-- Update petition types to new format (Deleted old types)
-            $petitions = new \Lotgd\Core\Entity\Settings();
-            $petitions->setSetting('petition_types')
-                ->setValue('petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other')
-            ;
+            $petitions = $settings->findOneBy(['setting' => 'petition_types']);
+            $petitions->setValue('petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other');
 
             $this->doctrine->persist($petitions);
 
