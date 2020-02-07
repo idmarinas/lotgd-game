@@ -56,7 +56,7 @@ $form->setData([
 //-- Not set default values if is post request
 if(! \LotgdHttp::isPost())
 {
-    $vals = $settings->getArray() + $useful_vals;
+    $vals = array_merge($settings->getArray(), $useful_vals);
 
     $data = [
         'game_setup' => $vals,
