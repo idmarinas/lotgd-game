@@ -34,7 +34,7 @@ class FaillogRepository extends DoctrineRepository
             $date->sub(new \DateInterval("P{$expire}D"));
 
             return $query->delete($this->_entityName, 'u')
-                ->where('u.sent < :date')
+                ->where('u.date < :date')
                 ->setParameter('date', $date)
                 ->getQuery()
                 ->execute()
