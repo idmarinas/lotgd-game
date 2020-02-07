@@ -12,7 +12,7 @@ return [
     'session_config' => [
         'name' => 'LegendOfTheGreenDragon',
         'gc_maxlifetime' => 4320,
-        'cookie_lifetime' => 86400, //-- Cookie life is 1 day
+        'cookie_lifetime' => 3600, //-- Cookie life is 1 hour
         'cookie_httponly' => true,
         'cookie_secure' => true,
         'remember_me_seconds' => 172800,
