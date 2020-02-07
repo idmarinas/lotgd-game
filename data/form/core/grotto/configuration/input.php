@@ -485,7 +485,8 @@ return [
                             'type' => 'number',
                             'name' => 'newplayerstartgold',
                             'attributes' => [
-                                'id' => 'newplayerstartgold'
+                                'id' => 'newplayerstartgold',
+                                'value' => 50
                             ],
                             'options' => [
                                 'label' => 'account.newplayerstartgold'
@@ -497,7 +498,8 @@ return [
                             'type' => 'number',
                             'name' => 'maxrestartgold',
                             'attributes' => [
-                                'id' => 'maxrestartgold'
+                                'id' => 'maxrestartgold',
+                                'value' => 50
                             ],
                             'options' => [
                                 'label' => 'account.maxrestartgold'
@@ -509,7 +511,8 @@ return [
                             'type' => 'number',
                             'name' => 'maxrestartgems',
                             'attributes' => [
-                                'id' => 'maxrestartgems'
+                                'id' => 'maxrestartgems',
+                                'value' => 10
                             ],
                             'options' => [
                                 'label' => 'account.maxrestartgems'
@@ -568,8 +571,8 @@ return [
                             'options' => [
                                 'label' => 'account.validationtarget.label',
                                 'value_options' => [
-                                    0 => 'account.validationtarget.options.infinite.old',
-                                    1 => 'account.validationtarget.options.view.new',
+                                    0 => 'account.validationtarget.options.old',
+                                    1 => 'account.validationtarget.options.new',
                                 ],
                                 'note' => 'account.validationtarget.note'
                             ]
@@ -674,7 +677,8 @@ return [
                             'name' => 'soap',
                             'attributes' => [
                                 'id' => 'soap',
-                                'class' => 'lotgd toggle'
+                                'class' => 'lotgd toggle',
+                                'value' => 1
                             ],
                             'options' => [
                                 'label' => 'commentary.soap'
@@ -724,6 +728,7 @@ return [
                             ],
                             'options' => [
                                 'label' => 'commentary.chatlinelength',
+                                'disable_slider_labels' => true,
                             ]
                         ]
                     ],
@@ -740,6 +745,7 @@ return [
                             ],
                             'options' => [
                                 'label' => 'commentary.maxchars',
+                                'disable_slider_labels' => true,
                             ]
                         ]
                     ],
@@ -969,7 +975,8 @@ return [
                             'type' => 'number',
                             'name' => 'refereraward',
                             'attributes' => [
-                                'id' => 'refereraward'
+                                'id' => 'refereraward',
+                                'value' => 25
                             ],
                             'options' => [
                                 'label' => 'referral.refereraward',
@@ -981,7 +988,8 @@ return [
                             'type' => 'number',
                             'name' => 'referminlevel',
                             'attributes' => [
-                                'id' => 'referminlevel'
+                                'id' => 'referminlevel',
+                                'value' => 10
                             ],
                             'options' => [
                                 'label' => 'referral.referminlevel',
@@ -1011,7 +1019,7 @@ return [
                                 'id' => 'forestchance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 0
+                                'value' => 10
                             ],
                             'options' => [
                                 'label' => 'events.forestchance',
@@ -1028,7 +1036,7 @@ return [
                                 'id' => 'villagechance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 0
+                                'value' => 5
                             ],
                             'options' => [
                                 'label' => 'events.villagechance',
@@ -1045,7 +1053,7 @@ return [
                                 'id' => 'innchance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 0
+                                'value' => 5
                             ],
                             'options' => [
                                 'label' => 'events.innchance',
@@ -1062,7 +1070,7 @@ return [
                                 'id' => 'gravechance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 0
+                                'value' => 10
                             ],
                             'options' => [
                                 'label' => 'events.gravechance',
@@ -1079,7 +1087,7 @@ return [
                                 'id' => 'gardenchance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 0
+                                'value' => 5
                             ],
                             'options' => [
                                 'label' => 'events.gardenchance',
@@ -1390,6 +1398,7 @@ return [
                             'name' => 'goldtostartclan',
                             'attributes' => [
                                 'id' => 'goldtostartclan',
+                                'value' => 10000
                             ],
                             'options' => [
                                 'label' => 'clans.goldtostartclan',
@@ -1403,6 +1412,7 @@ return [
                             'name' => 'gemstostartclan',
                             'attributes' => [
                                 'id' => 'gemstostartclan',
+                                'value' => 15
                             ],
                             'options' => [
                                 'label' => 'clans.gemstostartclan',
@@ -1458,6 +1468,7 @@ return [
                             'name' => 'clanshortnamelength',
                             'attributes' => [
                                 'id' => 'clanshortnamelength',
+                                'value' => 3
                             ],
                             'options' => [
                                 'label' => 'clans.clanshortnamelength',
@@ -1588,11 +1599,12 @@ return [
                                 'id' => 'forestcreaturebar'
                             ],
                             'options' => [
-                                'label' => 'forest.forestcreaturebar',
+                                'label' => 'forest.forestcreaturebar.label',
+                                'note' => 'forest.forestcreaturebar.note',
                                 'value_options' => [
-                                    0 => 'forest.forestcreaturebar.text',
-                                    1 => 'forest.forestcreaturebar.bar',
-                                    2 => 'forest.forestcreaturebar.textbar',
+                                    0 => 'forest.forestcreaturebar.option.text',
+                                    1 => 'forest.forestcreaturebar.option.bar',
+                                    2 => 'forest.forestcreaturebar.option.textbar',
                                 ]
                             ]
                         ]
@@ -1632,6 +1644,7 @@ return [
                             'name' => 'suicidedk',
                             'attributes' => [
                                 'id' => 'suicidedk',
+                                'value' => 1
                             ],
                             'options' => [
                                 'label' => 'forest.suicidedk.label',
@@ -1665,7 +1678,7 @@ return [
                                 'id' => 'forestpowerattackmulti',
                                 'min' => 1,
                                 'max' => 10,
-                                'value' => 1,
+                                'value' => 1.5,
                                 'step' => 0.1
                             ],
                             'options' => [
@@ -1761,7 +1774,7 @@ return [
                                 'id' => 'multichance',
                                 'min' => 0,
                                 'max' => 100,
-                                'value' => 1
+                                'value' => 30
                             ],
                             'options' => [
                                 'label' => 'enemies.multichance',
@@ -1837,7 +1850,7 @@ return [
                                 'id' => 'multibasemin',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 2
                             ],
                             'options' => [
                                 'label' => 'enemies.multibasemin',
@@ -1853,7 +1866,7 @@ return [
                                 'id' => 'multibasemax',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 3
                             ],
                             'options' => [
                                 'label' => 'enemies.multibasemax',
@@ -1869,7 +1882,7 @@ return [
                                 'id' => 'multislummin',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 1
                             ],
                             'options' => [
                                 'label' => 'enemies.multislummin',
@@ -1885,7 +1898,7 @@ return [
                                 'id' => 'multislummax',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 2
                             ],
                             'options' => [
                                 'label' => 'enemies.multislummax',
@@ -1901,7 +1914,7 @@ return [
                                 'id' => 'multithrillmin',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 3
                             ],
                             'options' => [
                                 'label' => 'enemies.multithrillmin',
@@ -1917,7 +1930,7 @@ return [
                                 'id' => 'multithrillmax',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 4
                             ],
                             'options' => [
                                 'label' => 'enemies.multithrillmax',
@@ -1933,7 +1946,7 @@ return [
                                 'id' => 'multisuimin',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 4
                             ],
                             'options' => [
                                 'label' => 'enemies.multisuimin',
@@ -1949,7 +1962,7 @@ return [
                                 'id' => 'multisuimax',
                                 'min' => 0,
                                 'max' => 50,
-                                'value' => 0
+                                'value' => 5
                             ],
                             'options' => [
                                 'label' => 'enemies.multisuimax',
@@ -1991,6 +2004,7 @@ return [
                             'name' => 'companionsallowed',
                             'attributes' => [
                                 'id' => 'companionsallowed',
+                                'value' => 1
                             ],
                             'options' => [
                                 'label' => 'companion.companionsallowed.label',
@@ -2222,6 +2236,7 @@ return [
                             'name' => 'mailsizelimit',
                             'attributes' => [
                                 'id' => 'mailsizelimit',
+                                'value' => 1024
                             ],
                             'options' => [
                                 'label' => 'mail.mailsizelimit',
@@ -2235,6 +2250,7 @@ return [
                             'name' => 'inboxlimit',
                             'attributes' => [
                                 'id' => 'inboxlimit',
+                                'value' => 50
                             ],
                             'options' => [
                                 'label' => 'mail.inboxlimit',
@@ -2248,6 +2264,7 @@ return [
                             'name' => 'oldmail',
                             'attributes' => [
                                 'id' => 'oldmail',
+                                'value' => 30
                             ],
                             'options' => [
                                 'label' => 'mail.oldmail',
@@ -2316,6 +2333,7 @@ return [
                             'name' => 'pvptimeout',
                             'attributes' => [
                                 'id' => 'pvptimeout',
+                                'value' => 900
                             ],
                             'options' => [
                                 'label' => 'pvp.pvptimeout',
@@ -2624,10 +2642,11 @@ return [
                             'name' => 'expirenotificationdays',
                             'attributes' => [
                                 'id' => 'expirenotificationdays',
+                                'value' => 3
                             ],
                             'options' => [
                                 'label' => 'content.expirenotificationdays.label',
-                                'note' => 'content.expirenotificationdays',
+                                'note' => 'content.expirenotificationdays.note',
                             ]
                         ]
                     ],
