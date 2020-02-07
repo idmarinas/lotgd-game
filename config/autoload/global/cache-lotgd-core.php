@@ -40,7 +40,8 @@ return [
                 'ttl' => 900,
                 'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di',
                 'cache_dir' => 'storage/cache/cronjob',
-                'dir_permission' => 0777, //-- For avoid problems when optimize cache
+                //-- Not is necesary, this dir is only for cronjobs
+                // 'dir_permission' => 0777, //-- For avoid problems when optimize cache
                 'namespace' => 'cronjob'
 			],
             'plugins' => [
