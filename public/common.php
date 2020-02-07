@@ -18,7 +18,7 @@ require_once 'lib/constants.php';
 $isDevelopment = file_exists('config/development.config.php');
 //-- Init Debugger
 $debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
-\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/exception');
+\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
 \Tracy\Debugger::timer('page-generating');
 \Tracy\Debugger::timer('page-footer');
 \Tracy\Debugger::$maxDepth = 5; // default: 3
