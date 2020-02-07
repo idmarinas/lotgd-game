@@ -1823,7 +1823,23 @@ return [
                             ],
                             'options' => [
                                 'label' => 'enemies.addexp',
-                                'disable_slider_labels' => true,
+                            ]
+                        ]
+                    ],
+                    // How many enemies will attack per round (max. value)
+                    [
+                        'spec' => [
+                            'type' => 'range',
+                            'name' => 'maxattacks',
+                            'attributes' => [
+                                'id' => 'maxattacks',
+                                'min' => 1,
+                                'max' => 15,
+                                'value' => 1
+                            ],
+                            'options' => [
+                                'label' => 'enemies.maxattacks.label',
+                                'note' => 'enemies.maxattacks.note',
                             ]
                         ]
                     ],
