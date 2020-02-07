@@ -68,7 +68,7 @@ account:
     maxrestartgold: 'Maximum amount of gold a player will get after a dragonkill'
     maxrestartgems: 'Maximum number of gems a player will get after a dragonkill'
     playerchangeemail: 'Let players change their email?'
-    playerchangeemailauto':
+    playerchangeemailauto:
         label: 'If yes - Do you want a wait period after which non-responsive email change requests will get autoaccepted?'
         note: "Note: If you don't want this then leave it off. People will then have to petition to get their mail changed if they have no access to their old email account anymore. If you use autoaccept it will be a lot less work for your petitioners but more risk for players who will not log in for a long time. Use this in conjunction with the next setting"
     playerchangeemaildays: 'If yes - after how many days will the auto-accept be executed?'
@@ -192,8 +192,12 @@ forest:
     title: Forest
     turns: 'Forest Fights per day'
     forestcreaturebar:
-        label: 'Forest Creatures show health ...,enum,0,Only Text,1,Only Healthbar,2,Healthbar AND Text'
+        label: 'Forest Creatures show health ...'
         note: 'Note: The player can choose a different setting to his liking for the healthbars'
+        options:
+            text: Only Text
+            bar: Only Healthbar
+            textbar: Healthbar AND Text
     dropmingold: 'Forest Creatures drop at least 1/4 of max gold'
     suicide: 'Allow players to Seek Suicidally?'
     suicidedk:
