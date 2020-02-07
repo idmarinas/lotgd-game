@@ -20,7 +20,7 @@ page_header('title.default', [], $params['textDomain']);
 
 $fileSystem = new \Lotgd\Core\Component\Filesystem();
 $serializer = new Zend\Serializer\Adapter\PhpSerialize();
-$path = 'data/logd_snapshots';
+$path = 'storage/logd_snapshots';
 $pathAccountData = "{$path}/account-{$accountId}/LotgdCore_Accounts.data";
 $pathCharacterData = "{$path}/account-{$accountId}/LotgdCore_Characters.data";
 
