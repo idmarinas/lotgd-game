@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Core\Doctrine\Extension;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events as DoctrineEvents;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-class TablePrefix
+class TablePrefix implements EventSubscriber
 {
     protected $prefix = '';
 
@@ -33,5 +46,13 @@ class TablePrefix
                 $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix.$mappedTableName;
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubscribedEvents()
+    {
+        return [DoctrineEvents::loadClassMetadata];
     }
 }
