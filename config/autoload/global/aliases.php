@@ -10,6 +10,9 @@ return [
             Zend\Form\Annotation\AnnotationBuilder::class => 'FormAnnotationBuilder',
             Zend\Form\FormElementManager::class => 'FormElementManager',
             Zend\InputFilter\InputFilterPluginManager::class => 'InputFilterManager',
+
+            //-- Added in version 4.2.0
+            'Lotgd\Core\Db\Doctrine' => 'Doctrine\ORM\EntityManager'
         ]
     ]
 ];

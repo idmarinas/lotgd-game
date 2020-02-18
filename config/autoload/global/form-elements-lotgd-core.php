@@ -1,9 +1,10 @@
 <?php
 
-use Zend\Form\Element as ZendElement;
+use DoctrineModule\Form\Element as DoctrineElement;
+use DoctrineORMModule\Service as DoctrineService;
 use Lotgd\Core\Form\Element;
-use Zend\Form\ElementFactory;
 use Lotgd\Core\Form\ElementFactory as LotgdElementFactory;
+use Zend\Form\ElementFactory;
 
 return [
     'form_elements' => [
@@ -33,6 +34,19 @@ return [
             'bitfield' => Element\BitField::class,
             'bitField' => Element\BitField::class,
             'BitField' => Element\BitField::class,
+
+            //-- Added in version 4.2.0
+            //-- Doctrine elements
+            'objectselect' => DoctrineElement\ObjectSelect::class,
+            'objectSelect' => DoctrineElement\ObjectSelect::class,
+            'ObjectSelect' => DoctrineElement\ObjectSelect::class,
+            'objectradio' => DoctrineElement\ObjectRadio::class,
+            'objectRadio' => DoctrineElement\ObjectRadio::class,
+            'ObjectRadio' => DoctrineElement\ObjectRadio::class,
+            'objectmulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
+            'objectMulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
+            'objectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
+            'ObjectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
         ],
         'factories' => [
             Element\GameLanguage::class => LotgdElementFactory::class,
@@ -40,6 +54,11 @@ return [
             Element\Tagify::class => ElementFactory::class,
             Element\LotgdTheme::class => LotgdElementFactory::class,
             Element\BitField::class => ElementFactory::class,
+
+            //-- Added in version 4.2.0
+            DoctrineElement\ObjectSelect::class => DoctrineService\ObjectSelectFactory::class,
+            DoctrineElement\ObjectRadio::class => DoctrineService\ObjectRadioFactory::class,
+            DoctrineElement\ObjectMultiCheckbox::class => DoctrineService\ObjectMultiCheckboxFactory::class,
         ]
     ]
 ];

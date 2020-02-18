@@ -8,6 +8,9 @@ return [
 
             //-- Added in version 4.1.0
             \Zend\Form\FormAbstractServiceFactory::class,
+
+            //-- Added in version 4.2.0
+            'DoctrineModule' => 'DoctrineModule\ServiceFactory\AbstractDoctrineServiceFactory',
         ]
     ],
     'input_filters' => [

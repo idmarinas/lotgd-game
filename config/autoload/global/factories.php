@@ -1,5 +1,7 @@
 <?php
 
+use DoctrineORMModule\CliConfigurator;
+use DoctrineORMModule\Service;
 use Lotgd\Core\Factory;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -8,7 +10,6 @@ return [
         'factories' => [
             //-- Added in version 3.0.0
             Lotgd\Core\Character\Stats::class => InvokableFactory::class,
-            Lotgd\Core\Db\Doctrine::class => Factory\Db\Doctrine::class,
             Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class,
             Lotgd\Core\Lib\Settings::class => Factory\Lib\Settings::class,
             Lotgd\Core\Output\Color::class => InvokableFactory::class,
@@ -38,6 +39,12 @@ return [
             'InputFilterManager' => Zend\InputFilter\InputFilterPluginManagerFactory::class,
             'FormAnnotationBuilder' => Zend\Form\Annotation\AnnotationBuilderFactory::class,
             'FormElementManager' => Zend\Form\FormElementManagerFactory::class,
+
+            //-- Added in version 4.2.0
+            'doctrine.cli' => 'DoctrineModule\Service\CliFactory',
+            CliConfigurator::class => Service\CliConfiguratorFactory::class,
+            'Doctrine\ORM\EntityManager' => Service\EntityManagerAliasCompatFactory::class,
+            Lotgd\Core\Doctrine\Extension\TablePrefix::class => Factory\Doctrine\Extension\TablePrefix::class,
         ]
     ]
 ];
