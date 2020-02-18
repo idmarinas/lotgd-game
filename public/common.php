@@ -25,10 +25,16 @@ $debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger:
 //-- Extensions for Tracy
 if ($isDevelopment)
 {
-    \Tracy\Debugger::getBar()->addPanel(
-        new \Milo\VendorVersions\Panel
-    );
+    \Tracy\Debugger::getBar()->addPanel(new \Milo\VendorVersions\Panel());
 }
+
+//-- Autoload annotations
+\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
+    function ($className)
+    {
+        return class_exists($className);
+    }
+);
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
@@ -131,7 +137,7 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INS
 
     page_footer(false);
 }
-else if (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
     define('IS_INSTALLER', false);
 }
@@ -247,10 +253,11 @@ if (getsetting('fullmaintenance', 0))
     }
 }
 //-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
-elseif(getsetting('maintenance', 0))
+elseif (getsetting('maintenance', 0))
 {
     $title = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app-default');
     $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app-default');
+
     if ($session['user']['loggedin'])
     {
         $message .= \LotgdTranslator::t('maintenance.server.warning.loggedin', [], 'app-default');
@@ -268,7 +275,7 @@ elseif(getsetting('maintenance', 0))
 }
 
 $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare([ 'everyhit', "header-$script", "footer-$script", 'holiday', 'charstats']);
+mass_module_prepare(['everyhit', "header-$script", "footer-$script", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
@@ -392,6 +399,7 @@ if (! $beta && 1 == getsetting('betaperplayer', 1))
 }
 
 $claninfo = [];
+
 if ($session['user']['clanid'] ?? false)
 {
     $repository = \Doctrine::getRepository('LotgdCore:Clans');
