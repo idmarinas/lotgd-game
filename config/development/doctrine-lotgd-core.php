@@ -11,6 +11,8 @@ return [
                 'result_cache' => 'array',
 
                 'hydration_cache' => 'array',
+
+                'generate_proxies' => true,
             ],
         ],
 
