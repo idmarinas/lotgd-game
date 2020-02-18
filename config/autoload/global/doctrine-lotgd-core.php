@@ -150,7 +150,8 @@ return [
                     'Gedmo\Timestampable\TimestampableListener',
                     'Gedmo\Sluggable\SluggableListener',
                     'Gedmo\Loggable\LoggableListener',
-                    'Gedmo\Sortable\SortableListener'
+                    'Gedmo\Sortable\SortableListener',
+                    'Lotgd\Core\Doctrine\Extension\TablePrefix'
                 ],
             ],
         ],
