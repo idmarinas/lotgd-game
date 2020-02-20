@@ -165,6 +165,7 @@ return [
                                 'id' => 'serverlanguages',
                                 'multiple' => true,
                                 'value' => ['en', 'fr', 'da', 'de', 'es', 'it'], // Default
+                                'class' => 'fluid three column'
 
                             ],
                             'options' => [
