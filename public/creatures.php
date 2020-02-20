@@ -23,7 +23,9 @@ $module = (string) \LotgdHttp::getQuery('module');
 $creatureId =  ((int) \LotgdHttp::getPost('creatureid') ?: (int) \LotgdHttp::getQuery('creatureid'));
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Creatures::class);
-$params = [];
+$params = [
+    'textDomain' => $textDomain
+];
 
 if ('save' == $op)
 {
