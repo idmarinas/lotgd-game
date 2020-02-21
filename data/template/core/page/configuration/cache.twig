@@ -6,7 +6,7 @@
     {% set menu = menu ~ '<a class="%s item" data-tab="%s">%s</a>'|format(
         loop.index == 1 ? 'active' : '',
         name,
-        config.title
+        config.title is defined ? name : config.title
     ) %}
 
     {% set segment = segment ~ '<div class="ui %s tab segment" data-tab="%s">'|format(
