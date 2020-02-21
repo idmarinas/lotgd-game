@@ -45,6 +45,7 @@ return [
             CliConfigurator::class => Service\CliConfiguratorFactory::class,
             'Doctrine\ORM\EntityManager' => Service\EntityManagerAliasCompatFactory::class,
             Lotgd\Core\Doctrine\Extension\TablePrefix::class => Factory\Doctrine\Extension\TablePrefix::class,
+            Lotgd\Core\Jaxon::class => Factory\Component\Jaxon::class,
         ]
     ]
 ];
