@@ -5,6 +5,36 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 4.2.0
+
+### :cyclone: CHANGES
+
+-   :warning: **Doctrine** Now used DoctrineModule and DoctrineORMModule to configure Doctrine
+        -   Check `config/autoload/global/doctrine-lotgd-core.php` to see possible configuration
+
+### :star: FEATURES
+
+-   **Jaxon-PHP** are now in a factory, so you can customize with a config file in `config/autoload/local/*`
+    -   Can get it's factory with `\LotgdLocator::get(Lotgd\Core\Jaxon::class);`
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **lib/modules/modules/modulestatus.php** Fixed error, now when file exist continue with script.
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+    -  Replace plugin  `uglifyjs-webpack-plugin` for `terser-webpack-plugin`
+
 # Version: 4.1.0
 
 ### :cyclone: CHANGES
