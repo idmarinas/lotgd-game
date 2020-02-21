@@ -3,8 +3,6 @@
 use Zend\Filter;
 use Zend\Validator;
 
-use function PHPSTORM_META\map;
-
 return [
     'game_setup' => [
         'type' => \Zend\InputFilter\InputFilter::class, //-- Need this when is a Field set
