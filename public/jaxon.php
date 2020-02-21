@@ -6,15 +6,17 @@ define('OVERRIDE_FORCED_NAV', true);
 //-- This avoid some errors and allow to use with not registers users.
 define('ALLOW_ANONYMOUS', true);
 
-require_once 'common.php';
+require_once 'common_jaxon.php';
 
-if($lotgdJaxon->canProcessRequest())
+$jaxon = \LotgdLocator::get(Lotgd\Core\Jaxon::class);
+
+if($jaxon->canProcessRequest())
 {
-    $lotgdJaxon->processRequest();
+    $jaxon->processRequest();
 
     saveuser();
 
-    $lotgdJaxon->sendResponse();
+    $jaxon->sendResponse();
 
     exit;
 }
