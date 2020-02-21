@@ -1,9 +1,3 @@
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/elements/divider.overrides';
-
 /*******************************
          Theme Overrides
 *******************************/

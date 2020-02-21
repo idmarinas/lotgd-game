@@ -1,9 +1,3 @@
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/modules/dropdown.overrides';
-
 /*******************************
          Theme Overrides
 *******************************/

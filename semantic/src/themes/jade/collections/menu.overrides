@@ -1,12 +1,3 @@
-/*******************************
-         Theme Overrides
-*******************************/
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/collections/menu.overrides';
-
 /**
  * LOTGD Styles
  *

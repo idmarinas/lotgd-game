@@ -1,11 +1,5 @@
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/globals/reset.overrides';
-
- /* Tables
-   ========================================================================== */
+/* Tables
+=========== */
 
 /**
  * Remove most spacing between table cells.

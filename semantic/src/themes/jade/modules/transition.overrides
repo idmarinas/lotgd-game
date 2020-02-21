@@ -1,9 +1,3 @@
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/modules/transition.overrides';
-
 /*******************************
          Theme Overrides
 *******************************/

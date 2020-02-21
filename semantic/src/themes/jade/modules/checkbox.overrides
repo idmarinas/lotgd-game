@@ -1,14 +1,6 @@
-/**
- * Import Default Overrides
- **/
-
- @import '../../default/modules/checkbox.overrides';
-
 /*******************************
          Theme Overrides
 *******************************/
-
-
 
 /* Active hover */
 .ui.toggle.checkbox input:checked ~ .box:hover::before,
