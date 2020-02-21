@@ -28,6 +28,7 @@ module.exports = function (callback)
                 normalize(config.paths.build + '/*.{json,yml,yaml,xml,txt,TXT,csv,phar}{,/**}'),
                 normalize(config.paths.build + '/config/development{,/**}'),
                 normalize(config.paths.build + '/config{,/**}/development{,.*}.*'),
+                normalize('!' + config.paths.build + '/{composer.{json,lock}}'), //-- Can use in prod server to optimize-autoloader
                 normalize('!' + config.paths.build + '/vendor/**')
             ])
 
