@@ -15,7 +15,7 @@ function module_status($modulename, ?string $version = null)
     $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
-    if (file_exists($modulefilename))
+    if (! file_exists($modulefilename))
     {
         // The module file doesn't exist.
         return MODULE_FILE_NOT_PRESENT;
@@ -56,7 +56,7 @@ function module_status($modulename, ?string $version = null)
         {
             $status |= MODULE_VERSION_OK;
         }
-        elseif (module_compare_versions($row->getVersion(), $version) < 0)
+        elseif (! Composer\Semver\Semver::satisfies($row->getVersion(), $version))
         {
             $status |= MODULE_VERSION_TOO_LOW;
         }
