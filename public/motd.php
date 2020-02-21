@@ -232,8 +232,11 @@ $params['paginator'] = $repository->getPaginator($qb, $page, $motdPerPage);
 $params['motdMothCountPerYear'] = $repository->getMonthCountPerYear();
 $session['needtoviewmotd'] = false;
 
-$row = $repository->getLastMotd();
-$session['user']['lastmotd'] = $row['motddate'];
+$lastMotd = $repository->getLastMotdDate();
+if ($lastMotd)
+{
+    $session['user']['lastmotd'] = $lastMotd;
+}
 
 $params = modulehook('page-motd-tpl-params', $params);
 rawoutput(\LotgdTheme::renderThemeTemplate('page/motd.twig', $params));
