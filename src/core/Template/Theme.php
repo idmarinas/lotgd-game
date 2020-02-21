@@ -40,7 +40,7 @@ class Theme extends Base
      */
     public function renderTheme($context)
     {
-        return $this->render($this->getTheme(), $context);
+        return $this->render($this->getTheme(), (array) $context);
     }
 
     /**
@@ -66,7 +66,7 @@ class Theme extends Base
         ],
         $context);
 
-        return $this->render("{$this->themefolder}/{$name}", $context);
+        return $this->render("{$this->themefolder}/{$name}", (array) $context);
     }
 
     /**
@@ -92,7 +92,7 @@ class Theme extends Base
         ],
         $context);
 
-        return $this->render("module/{$name}", $context);
+        return $this->render("module/{$name}", (array) $context);
     }
 
     /**
@@ -105,7 +105,7 @@ class Theme extends Base
      */
     public function renderLotgdTemplate($name, $context)
     {
-        return $this->render($name, $context);
+        return $this->render($name, (array) $context);
     }
 
     /**
