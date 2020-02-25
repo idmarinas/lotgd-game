@@ -80,7 +80,7 @@ return [
         ],
         [
             // Referral Settings
-            'spec' => include 'data/form/core/grotto/configuration/input/referrañ.php'
+            'spec' => include 'data/form/core/grotto/configuration/input/referral.php'
         ],
         [
             // Random events
