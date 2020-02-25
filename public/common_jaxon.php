@@ -222,8 +222,6 @@ if (getsetting('fullmaintenance', 0))
         \LotgdSession::sessionLogOut();
 
         $session = [];
-
-        return redirect('index.php');
     }
 
     exit;
