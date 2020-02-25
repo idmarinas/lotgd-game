@@ -36,6 +36,9 @@
         "@yaireo/tagify": "^3.5.0",
 =======
         "@yaireo/tagify": "^3.3.1",
+<<<<<<< HEAD
+>>>>>>> 02c34b68e2a16519eeb81b57644bca249ff83673
+=======
 >>>>>>> 02c34b68e2a16519eeb81b57644bca249ff83673
         "fomantic-ui": "2.8.4",
         "jquery": "^3.4.1",
