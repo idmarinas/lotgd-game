@@ -21,7 +21,7 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                     'hostname' => $session['installer']['dbinfo']['DB_HOST'],
                     'database' => $session['installer']['dbinfo']['DB_NAME'],
                     'charset' => 'utf8mb4',
-                    'collate' => 'utf8mb4_general_ci',
+                    'collate' => 'utf8mb4_unicode_ci',
                     'username' => $session['installer']['dbinfo']['DB_USER'],
                     'password' => $session['installer']['dbinfo']['DB_PASS']
                 ],
