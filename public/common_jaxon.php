@@ -267,25 +267,6 @@ if (! is_array($session['bufflist']))
     $session['bufflist'] = [];
 }
 $session['user']['lastip'] = LotgdHttp::getServer('REMOTE_ADDR');
-
-if (! LotgdHttp::getCookie('lgi') || strlen(LotgdHttp::getCookie('lgi')) < 32)
-{
-    if (! isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid']) < 32)
-    {
-        $u = md5(microtime());
-        LotgdHttp::setCookie('lgi', $u);
-        $session['user']['uniqueid'] = $u;
-    }
-    elseif (isset($session['user']['uniqueid']))
-    {
-        LotgdHttp::setCookie('lgi', $session['user']['uniqueid']);
-    }
-}
-elseif (LotgdHttp::getCookie('lgi') && '' != LotgdHttp::getCookie('lgi'))
-{
-    $session['user']['uniqueid'] = LotgdHttp::getCookie('lgi');
-}
-
 $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 
 //check the account's hash to detect player cheats which
