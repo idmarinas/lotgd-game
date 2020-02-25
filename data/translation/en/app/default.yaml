@@ -4,6 +4,7 @@ title: 'Legend of the Green Dragon'
 # Text related to session
 session:
     timeout: 'Your session has timed out, you must log in again.'
+    time_out_in: 'TIMEOUT in {n,number} seconds!'
     cookies:
         unactive: 'It appears that you may be blocking cookies from this site.  At least session cookies must be enabled in order to use this site.'
         info: 'If you are not sure what cookies are, please <a rel="noopener" target="_blank" href="http://en.wikipedia.org/wiki/WWW_browser_cookie">read this article</a> about them, and how to enable them.'
