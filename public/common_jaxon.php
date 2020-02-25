@@ -184,16 +184,15 @@ if (
 ) {
     // force the abandoning of the session when the user should have been
     // sent to the fields.
+    \LotgdSession::sessionLogOut();
+
     $session = [];
 
-    /**
-     *
-     * REPUSTA JAXON
-     */
+    $response = new \Jaxon\Response\Response();
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+    $response->dialog->warning(\LotgdTranslator::t('session.timeout', [], 'app-default'));
 
-    return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
+    return $response;
 }
 $session['lasthit'] = strtotime('now');
 
