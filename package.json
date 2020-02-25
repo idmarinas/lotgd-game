@@ -32,7 +32,11 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
+<<<<<<< HEAD
         "@yaireo/tagify": "^3.5.0",
+=======
+        "@yaireo/tagify": "^3.3.1",
+>>>>>>> 02c34b68e2a16519eeb81b57644bca249ff83673
         "fomantic-ui": "2.8.4",
         "jquery": "^3.4.1",
         "numeral": "^2.0.6",
