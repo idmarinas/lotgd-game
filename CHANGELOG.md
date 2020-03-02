@@ -12,27 +12,27 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   :warning: **Doctrine** Now used DoctrineModule and DoctrineORMModule to configure Doctrine
         -   Check `config/autoload/global/doctrine-lotgd-core.php` to see possible configuration
         -   Need create configuration in `config/autoload/local/dbconnect.php` like this:
-            ```php
-                //-- DB conection
-                //...
-                return [
-                    'doctrine' => [
-                        'connection' => [
-                            'orm_default' => [
-                                'params' => [
-                                    'driver' => 'pdo_mysql', //-- In lowercase
-                                    'user' => 'user name',
-                                    'password' => ' password',
-                                    'host' => '127.0.0.1', //-- localhost
-                                    'dbname' => 'data base name',
-                                    'charset' => 'utf8mb4',
-                                    'collate' => 'utf8mb4_unicode_ci'
-                                ]
-                            ]
-                        ]
+```php
+    //-- DB conection
+    //...
+    return [
+        'doctrine' => [
+            'connection' => [
+                'orm_default' => [
+                    'params' => [
+                        'driver' => 'pdo_mysql', //-- In lowercase
+                        'user' => 'user name',
+                        'password' => ' password',
+                        'host' => '127.0.0.1', //-- localhost
+                        'dbname' => 'data base name',
+                        'charset' => 'utf8mb4',
+                        'collate' => 'utf8mb4_unicode_ci'
                     ]
-                ];
-            ```
+                ]
+            ]
+        ]
+    ];
+```
 -   **THEME**
     -   Updated Fomantic UI version: 2.8.3 => 2.8.4
 
