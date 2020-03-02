@@ -10,8 +10,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :cyclone: CHANGES
 
 -   :warning: **Doctrine** Now used DoctrineModule and DoctrineORMModule to configure Doctrine
-        -   Check `config/autoload/global/doctrine-lotgd-core.php` to see possible configuration
-        -   Need create configuration in `config/autoload/local/dbconnect.php` like this:
+    -   Check `config/autoload/global/doctrine-lotgd-core.php` to see possible configuration
+    -   Need create configuration in `config/autoload/local/dbconnect.php` like this:
 ```php
     //-- DB conection
     //...
