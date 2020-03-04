@@ -12,21 +12,23 @@
 
 # Actualmente haciendo esto
 
-- ....
+-
 
-# Para la versión 4.1.0
+# Para la versión 4.2.0
 
-## Tener en cuenta a la hora de instalar esta versión (crear el proceso) para modificar
--   Algunos campos en el formulario "Configuration" han cambiado
-    -   Estos campos son ahora un select (una variante), que guardan un array serializado
-        -   `petition_types`
-        -   `serverlanguages`
+-   Usar la extensión de Doctrine para hacer traducibles campos de la base de datos, como en las criaturas, armas, armaduras, items..
+    -   Esto parece que no funcionará con valores guardados en la base de datos como puede ser en settings
+    -   Se debe buscar una forma de agregar a los fomularios la opción de que un campo es traducible
+
+# Para la versión 5.0.0
+-   Migrar los componentes Zend a Laminas
+-   Versión mínima de PHP 7.2.0
 
 ## Cosas pendientes
 -   Adaptar los formularios a zend-form
     -   Los formularios usan también el sistema de traducción y es necesario actualizarlo
-    -   Se ha adaptado el formulario de configuración básica del juego (settings)
-    -   Se irán adaptando el resto de formularios con cada actualización
+        -   Se ha adaptado el formulario de configuración básica del juego (settings)
+        -   Se irán adaptando el resto de formularios con cada actualización
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Login
     -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
