@@ -10,8 +10,10 @@ $params = [
     'initial' => $initial,
     'success' => $success
 ];
+
 if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 {
+    $session['installer']['dbinfo']['DB_HOST'] = 'localhost' == $session['installer']['dbinfo']['DB_HOST'] ? '127.0.0.1' : $session['installer']['dbinfo']['DB_HOST'];
     $initial = true;
     $configuration = [
         'lotgd_core' => [
@@ -22,10 +24,25 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                     'database' => $session['installer']['dbinfo']['DB_NAME'],
                     'charset' => 'utf8mb4',
                     'collate' => 'utf8mb4_unicode_ci',
-                    'username' => $session['installer']['dbinfo']['DB_USER'],
+                    'username' => $session['installer']['dbinfo']['DB_HOST'],
                     'password' => $session['installer']['dbinfo']['DB_PASS']
                 ],
                 'prefix' => $session['installer']['dbinfo']['DB_PREFIX']
+            ]
+        ],
+        'doctrine' => [
+            'connection' => [
+                'orm_default' => [
+                    'params' => [
+                        'driver' => strtolower($session['installer']['dbinfo']['DB_DRIVER']),
+                        'user' => $session['installer']['dbinfo']['DB_HOST'],
+                        'password' => $session['installer']['dbinfo']['DB_PASS'],
+                        'dbname' => $session['installer']['dbinfo']['DB_NAME'],
+                        'host' => $session['installer']['dbinfo']['DB_HOST'],
+                        'charset' => 'utf8mb4',
+                        'collate' => 'utf8mb4_unicode_ci'
+                    ]
+                ]
             ]
         ]
     ];
