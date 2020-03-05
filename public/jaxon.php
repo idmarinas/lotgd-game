@@ -14,7 +14,7 @@ if($jaxon->canProcessRequest())
 {
     $jaxon->processRequest();
 
-    saveuser();
+    saveuser(false); //-- Not updated laston (to avoid perma loggedin)
 
     $jaxon->sendResponse();
 

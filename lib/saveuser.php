@@ -4,7 +4,7 @@
 // addnews ready
 // mail ready
 
-function saveuser()
+function saveuser($update_last_on = true)
 {
     global $session, $companions;
 
@@ -19,7 +19,11 @@ function saveuser()
     restore_buff_fields();
 
     $session['user']['bufflist'] = $session['bufflist'];
-    $session['user']['laston'] = new DateTime('now');
+
+    if ($update_last_on)
+    {
+        $session['user']['laston'] = new DateTime('now');
+    }
 
     if (isset($companions) && is_array($companions))
     {
