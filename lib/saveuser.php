@@ -50,7 +50,6 @@ function saveuser()
     }
 
     \Doctrine::flush(); //Persist objects
-    \Doctrine::clear();//-- Detaches all objects from Doctrine!
 
     $session['user'] = [
         'acctid' => $session['user']['acctid'],
