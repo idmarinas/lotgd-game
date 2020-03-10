@@ -32,7 +32,7 @@ class Jaxon implements FactoryInterface
         $jaxon->useComposerAutoloader();
 
         //-- Register all class of Lotgd in dir "src/ajax/core"
-        $jaxon->addClassDir('/src/ajax/core', 'Lotgd\\Ajax\\Core\\');
+        $jaxon->addClassDir('./src/ajax/core', 'Lotgd\\Ajax\\Core\\');
         $jaxon->registerClasses();
 
         //-- Register all custom class (Available globally) in dir "src/ajax/local"
