@@ -18,6 +18,7 @@ define([
             }
         })
         jQuery('.ui.lotgd.tabular.menu .item').tab()
+        jQuery('.ui.translatable.tabular.menu .item').tab({ context: 'parent' })
         jQuery('.ui.lotgd.checkbox').checkbox()
         jQuery('.ui.menu.form.lotgd .browse').popup({
             inline: true,
