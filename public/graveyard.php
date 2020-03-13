@@ -85,7 +85,47 @@ elseif ('fight' == $op)
 {
     $battle = true;
 }
-elseif ('enter' == $op)
+
+if ($battle)
+{
+    //-- Any data for personalize results
+    $battleDefeatWhere = 'graveyard';
+    $battleInForest = false;
+    $battleDefeatLostGold = false;
+    $battleDefeatLostExp = false;
+    $battleDefeatCanDie = false;
+
+    //make some adjustments to the user to put them on mostly even ground
+    //with the undead guy.
+    $originalhitpoints = $session['user']['hitpoints'];
+    $session['user']['hitpoints'] = $session['user']['soulpoints'];
+    $originalattack = $session['user']['attack'];
+    $originaldefense = $session['user']['defense'];
+
+    require_once 'battle.php';
+
+    //reverse those adjustments, battle calculations are over.
+    $session['user']['attack'] = $originalattack;
+    $session['user']['defense'] = $originaldefense;
+    $session['user']['soulpoints'] = $session['user']['hitpoints'];
+    $session['user']['hitpoints'] = $originalhitpoints;
+
+    if ($victory)
+    {
+        $op = '';
+        \LotgdHttp::setQuery('op', '');
+        $skipgraveyardtext = true;
+        $params['showGraveyardDesc'] = ! $skipgraveyardtext;
+    }
+    else
+    {
+        require_once 'lib/fightnav.php';
+
+        fightnav(false, true, 'graveyard.php');
+    }
+}
+
+if ('enter' == $op)
 {
     $params['tpl'] = 'enter';
 
@@ -276,45 +316,6 @@ else
     \LotgdNavigation::addHeader('category.places');
     \LotgdNavigation::addNav('nav.warriors', 'list.php');
     \LotgdNavigation::addNav('nav.mausoleum', 'graveyard.php?op=enter');
-}
-
-if ($battle)
-{
-    //-- Any data for personalize results
-    $battleDefeatWhere = 'graveyard';
-    $battleInForest = false;
-    $battleDefeatLostGold = false;
-    $battleDefeatLostExp = false;
-    $battleDefeatCanDie = false;
-
-    //make some adjustments to the user to put them on mostly even ground
-    //with the undead guy.
-    $originalhitpoints = $session['user']['hitpoints'];
-    $session['user']['hitpoints'] = $session['user']['soulpoints'];
-    $originalattack = $session['user']['attack'];
-    $originaldefense = $session['user']['defense'];
-
-    require_once 'battle.php';
-
-    //reverse those adjustments, battle calculations are over.
-    $session['user']['attack'] = $originalattack;
-    $session['user']['defense'] = $originaldefense;
-    $session['user']['soulpoints'] = $session['user']['hitpoints'];
-    $session['user']['hitpoints'] = $originalhitpoints;
-
-    if ($victory)
-    {
-        $op = '';
-        \LotgdHttp::setQuery('op', '');
-        $skipgraveyardtext = true;
-        $params['showGraveyardDesc'] = ! $skipgraveyardtext;
-    }
-    else
-    {
-        require_once 'lib/fightnav.php';
-
-        fightnav(false, true, 'graveyard.php');
-    }
 }
 
 modulehook('deathoverlord', []);
