@@ -22,8 +22,8 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                     'driver' => $session['installer']['dbinfo']['DB_DRIVER'],
                     'hostname' => $session['installer']['dbinfo']['DB_HOST'],
                     'database' => $session['installer']['dbinfo']['DB_NAME'],
-                    'charset' => 'utf8mb4',
-                    'collate' => 'utf8mb4_unicode_ci',
+                    'charset' => 'utf8',
+                    'collate' => 'utf8_unicode_ci',
                     'username' => $session['installer']['dbinfo']['DB_HOST'],
                     'password' => $session['installer']['dbinfo']['DB_PASS']
                 ],
@@ -39,8 +39,8 @@ if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
                         'password' => $session['installer']['dbinfo']['DB_PASS'],
                         'dbname' => $session['installer']['dbinfo']['DB_NAME'],
                         'host' => $session['installer']['dbinfo']['DB_HOST'],
-                        'charset' => 'utf8mb4',
-                        'collate' => 'utf8mb4_unicode_ci'
+                        'charset' => 'utf8',
+                        'collate' => 'utf8_unicode_ci'
                     ]
                 ]
             ]
