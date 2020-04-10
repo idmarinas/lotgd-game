@@ -64,7 +64,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         $textDomain = new TextDomain($messages);
 
-        if (array_key_exists('', $textDomain))
+        if ($textDomain->offsetExists(''))
         {
             if (isset($textDomain['']['plural_forms']))
             {
