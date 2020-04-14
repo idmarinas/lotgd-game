@@ -54,11 +54,11 @@ class Mounts
     private $mountcategory;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="mountbuff", type="array", nullable=false)
      */
-    private $mountbuff;
+    private $mountbuff = [];
 
     /**
      * @var int
