@@ -1,97 +1,103 @@
 {
-    "name": "idmarinas-lotgd",
-    "title": "The Legend of the Green Dragon",
-    "version": "4.2.0",
-    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.1.",
-    "time": "2017-04-21",
-    "engines": {
-        "node": ">= 0.10.0"
+  "name": "idmarinas-lotgd",
+  "title": "The Legend of the Green Dragon",
+  "version": "4.2.0",
+  "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.1.",
+  "time": "2017-04-21",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "support": {
+    "email": "contacto@infommo.es",
+    "issues": "https://github.com/idmarinas/lotgd-game/issues"
+  },
+  "authors": [
+    {
+      "name": "Iván Diaz Marinas",
+      "email": "contacto@infommo.es",
+      "homepage": "https://github.com/idmarinas/lotgd-game",
+      "role": "Contributor, Maintainer"
     },
-    "support": {
-        "email": "contacto@infommo.es",
-        "issues": "https://github.com/idmarinas/lotgd-game/issues"
+    {
+      "name": "Oliver Brendel",
+      "homepage": "http://nb-core.org",
+      "role": "Contributor"
     },
-    "authors": [
-        {
-            "name": "Iván Diaz Marinas",
-            "email": "contacto@infommo.es",
-            "homepage": "https://github.com/idmarinas/lotgd-game",
-            "role": "Contributor, Maintainer"
-        },
-        {
-            "name": "Oliver Brendel",
-            "homepage": "http://nb-core.org",
-            "role": "Contributor"
-        },
-        {
-            "name": "DragonPrime",
-            "homepage": "http://www.dragonprime.net",
-            "role": "Developer, Maintainer"
-        }
-    ],
-    "homepage": "http://lotgd.infommo.es",
-    "license": "SEE LICENSE IN <LICENSE.txt>",
-    "dependencies": {
-        "@yaireo/tagify": "^3.6.3",
-        "fomantic-ui": "2.8.4",
-        "jquery": "^3.4.1",
-        "numeral": "^2.0.6",
-        "sweetalert2": "^9.10.8",
-        "toastr": "^2.1.4"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.9.0",
-        "@babel/plugin-transform-runtime": "^7.9.0",
-        "@babel/preset-env": "^7.9.0",
-        "ansi-colors": "^4.1.1",
-        "babel-eslint": "^10.1.0",
-        "babel-loader": "^8.1.0",
-        "babel-plugin-istanbul": "^6.0.0",
-        "babel-register": "^6.26.0",
-        "css-loader": "^3.4.2",
-        "del": "^5.1.0",
-        "eslint": "^6.8.0",
-        "eslint-config-standard": "^14.1.1",
-        "eslint-friendly-formatter": "^4.0.1",
-        "eslint-loader": "^4.0.0",
-        "eslint-plugin-html": "^6.0.0",
-        "eslint-plugin-import": "^2.20.2",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.1",
-        "fancy-log": "^1.3.3",
-        "file-loader": "^6.0.0",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "gulp": "^4.0.2",
-        "gulp-autoprefixer": "^7.0.1",
-        "gulp-clean-css": "^4.3.0",
-        "gulp-composer": "^0.4.5",
-        "gulp-concat": "^2.6.1",
-        "gulp-flatten": "^0.4.0",
-        "gulp-header": "^2.0.9",
-        "gulp-if": "^3.0.0",
-        "gulp-plumber": "^1.2.1",
-        "gulp-print": "^5.0.2",
-        "gulp-remove-code": "^3.0.4",
-        "gulp-rename": "^2.0.0",
-        "gulp-replace": "^1.0.0",
-        "gulp-uglify": "^3.0.2",
-        "gulp-zip": "^5.0.1",
-        "merge-stream": "^2.0.0",
-        "mini-css-extract-plugin": "^0.9.0",
-        "minimist": "^1.2.5",
-        "node-sass": "^4.13.1",
-        "normalize-path": "^3.0.0",
-        "optimize-css-assets-webpack-plugin": "^5.0.3",
-        "sass-loader": "^8.0.2",
-        "terser-webpack-plugin": "^2.3.5",
-        "url-loader": "^4.0.0",
-        "webpack": "^4.42.1",
-        "webpack-bundle-analyzer": "^3.6.1",
-        "webpack-merge": "^4.2.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/idmarinas/lotgd-game.git"
+    {
+      "name": "DragonPrime",
+      "homepage": "http://www.dragonprime.net",
+      "role": "Developer, Maintainer"
     }
+  ],
+  "homepage": "http://lotgd.infommo.es",
+  "license": "SEE LICENSE IN <LICENSE.txt>",
+  "dependencies": {
+    "@yaireo/tagify": "^3.6.3",
+    "fomantic-ui": "2.8.4",
+    "jquery": "^3.4.1",
+    "numeral": "^2.0.6",
+    "sweetalert2": "^9.10.8",
+    "toastr": "^2.1.4",
+    "snyk": "^1.319.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "ansi-colors": "^4.1.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-register": "^6.26.0",
+    "css-loader": "^3.4.2",
+    "del": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^4.0.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "fancy-log": "^1.3.3",
+    "file-loader": "^6.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-composer": "^0.4.5",
+    "gulp-concat": "^2.6.1",
+    "gulp-flatten": "^0.4.0",
+    "gulp-header": "^2.0.9",
+    "gulp-if": "^3.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-print": "^5.0.2",
+    "gulp-remove-code": "^3.0.4",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.0.1",
+    "merge-stream": "^2.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "minimist": "^1.2.5",
+    "node-sass": "^4.13.1",
+    "normalize-path": "^3.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^8.0.2",
+    "terser-webpack-plugin": "^2.3.5",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.42.1",
+    "webpack-bundle-analyzer": "^3.6.1",
+    "webpack-merge": "^4.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idmarinas/lotgd-game.git"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
