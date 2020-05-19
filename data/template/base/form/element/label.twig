@@ -1,4 +1,4 @@
-{{ form_label_open_tag(element) }}
+{{ laminas_form_label_open_tag(element) }}
     {% set label = element.label|tst(translatorTextDomain) %}
 
     {% if escapeLabel %}
@@ -16,4 +16,4 @@
             <i aria-hidden="true" class="blue info icon"></i>
         </span>
     {% endif %}
-{{ form_label_close_tag() }}
+{{ laminas_form_label_close_tag() }}

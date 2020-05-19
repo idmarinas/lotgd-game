@@ -1,14 +1,14 @@
 <div class="field">
     {% if submit %}
-        {{ form_button(submit) }}
+        {{ laminas_form_button(submit) }}
     {% endif %}
 
     {% if reset %}
-        {{ form_button(reset) }}
+        {{ laminas_form_button(reset) }}
     {% endif %}
 
     {% for button in buttons %}
-        {{ form_button(button) }}
+        {{ laminas_form_button(button) }}
     {% endfor %}
 
 </div>

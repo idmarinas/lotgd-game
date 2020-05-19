@@ -2,11 +2,11 @@
 
 {% for element in collection %}
     {% if element is instanceof('\\Lotgd\\Core\\Form\\TabFieldsetInterface') %}
-        {% set markup = markup ~ form_fieldset_tab(element, translatorTextDomain) %}
+        {% set markup = markup ~ laminas_form_fieldset_tab(element, translatorTextDomain) %}
     {% elseif element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
-        {% set markup = markup ~ form_fieldset(element, translatorTextDomain) %}
+        {% set markup = markup ~ laminas_form_fieldset(element, translatorTextDomain) %}
     {% elseif element is instanceof('\\Zend\\Form\\ElementInterface') %}
-        {% set markup = markup ~ form_row(element, translatorTextDomain) %}
+        {% set markup = markup ~ laminas_form_row(element, translatorTextDomain) %}
     {% endif %}
 {% endfor %}
 

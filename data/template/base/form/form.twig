@@ -1,10 +1,10 @@
-{{ form_open_tag(form) }}
+{{ laminas_form_open_tag(form) }}
     {#
         Csrf element (to prevent Cross Site Request Forgery attacks)
         It is extremely recommended to add this element in all forms
     #}
     {% if security is instanceof('\\Zend\\Form\\ElementInterface') %}
-        {{ form_element(security) }}
+        {{ laminas_form_element(security) }}
     {% endif %}
 
     {# Label for form #}
@@ -22,11 +22,11 @@
     {# Render all elements #}
     {% for element in form %}
         {% if element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
-            {{ form_fieldset(element, translatorTextDomain) }}
+            {{ laminas_form_fieldset(element, translatorTextDomain) }}
         {% else %}
-            {{ form_row(element, translatorTextDomain) }}
+            {{ laminas_form_row(element, translatorTextDomain) }}
         {% endif %}
     {% endfor %}
 
-    {{ form_action_row(buttons) }}
-{{ form_close_tag() }}
+    {{ laminas_form_action_row(buttons) }}
+{{ laminas_form_close_tag() }}

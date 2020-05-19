@@ -5,9 +5,9 @@
     {% do element.setAttribute('class', classAttributes) %}
 {% endif %}
 
-{% set elementString =  form_element(element, translatorTextDomain) %}
-{% set elementString = elementString ~ form_note(element, translatorTextDomain) %}
-{% set elementError = form_element_error(element) %}
+{% set elementString =  laminas_form_element(element, translatorTextDomain) %}
+{% set elementString = elementString ~ laminas_form_note(element, translatorTextDomain) %}
+{% set elementError = laminas_form_element_error(element) %}
 
 {# Get type of element, some elements no need a label #}
 {% set type = element.getAttribute('type') %}
@@ -20,7 +20,7 @@
         {% else %}
             {% if element is not instanceof('\\Zend\\Form\\Element\\Button')  %}
                 {# Render label #}
-                {{ form_label(element, translatorTextDomain)}}
+                {{ laminas_form_label(element, translatorTextDomain)}}
             {% endif %}
 
             {# Render element #}

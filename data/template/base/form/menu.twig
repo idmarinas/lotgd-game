@@ -16,9 +16,9 @@
                 'has_error': element.getMessages() ? true : false
             } }) %}
         {% endif %}
-        {% set segment = segment ~ form_fieldset_tab(element, translatorTextDomain, activeTab) %}
+        {% set segment = segment ~ laminas_form_fieldset_tab(element, translatorTextDomain, activeTab) %}
     {% else %}
-        {% set segment = segment ~ form_row(element, translatorTextDomain) %}
+        {% set segment = segment ~ laminas_form_row(element, translatorTextDomain) %}
     {% endif %}
 {% endfor %}
 
@@ -76,19 +76,19 @@
 </div>
 
 {# Render form #}
-{{ form_open_tag(form) }}
+{{ laminas_form_open_tag(form) }}
     {#
         Csrf element (to prevent Cross Site Request Forgery attacks)
         It is extremely recommended to add this element in all forms
     #}
     {% if security is instanceof('\\Zend\\Form\\ElementInterface') %}
-        {{ form_element(security) }}
+        {{ laminas_form_element(security) }}
     {% endif %}
 
     {{ segment }}
 
-    {{ form_action_row(buttons) }}
-{{ form_close_tag() }}
+    {{ laminas_form_action_row(buttons) }}
+{{ laminas_form_close_tag() }}
 
 {# Scripts for control #}
 <script>
