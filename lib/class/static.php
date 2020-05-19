@@ -10,6 +10,7 @@ use Lotgd\Core\Fixed\{
     Locator as LotgdLocator,
     Navigation as LotgdNavigation,
     Sanitize as LotgdSanitize,
+    SymfonyForm as LotgdForm,
     Theme as LotgdTheme,
     Translator as LotgdTranslator
 };
@@ -41,5 +42,8 @@ LotgdSanitize::instance(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
 
-//-- Configure Navigation instance
+//-- Configure Cache instance
 LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
+
+//-- Configure Symfony Form instance
+LotgdForm::instance(LotgdLocator::get('Lotgd\Core\SymfonyForm'));
