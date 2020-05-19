@@ -65,6 +65,7 @@ class Translator extends AbstractExtension
     {
         return [
             new TwigFilter('t', [$this, 'translate']),
+            new TwigFilter('trans', [$this, 'translate']),
             /**
              * Use "tl" when you want to change domain to translate a text.
              * Only need if you use "translate_default_domain" in template.
