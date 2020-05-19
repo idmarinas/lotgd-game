@@ -1,6 +1,6 @@
 {
     "name": "idmarinas/lotgd",
-    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.1",
+    "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.2",
     "config": {
         "process-timeout": 5000,
         "sort-packages": true
@@ -9,11 +9,14 @@
     "prefer-stable": true,
     "license": "CC-BY-NC-SA-2.0",
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
+        "ext-bcmath": "*",
         "ext-curl": "*",
+        "ext-exif": "*",
         "ext-gd": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "ext-pdo_mysql": "*",
         "ext-session": "*",
         "beberlei/doctrineextensions": "^1.2",
         "cocur/slugify": "^3.2",
@@ -29,6 +32,11 @@
         "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
         "symfony/filesystem": "^4.3",
+        "symfony/form": "^4.4",
+        "symfony/options-resolver": "^4.4",
+        "symfony/security-csrf": "^4.4",
+        "symfony/twig-bridge": "^4.4",
+        "symfony/validator": "^4.4",
         "symfony/yaml": "^4.3",
         "tracy/tracy": "^2.6",
         "twig/twig": "^2.11",
@@ -59,7 +67,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Lotgd\\": "src/"
+            "Lotgd\\": "src/",
+            "Lotgd\\Core\\": "src/core/",
+            "Lotgd\\Local\\": "src/local/",
+            "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
+            "Lotgd\\Ajax\\Local\\": "src/ajax/local/"
         }
     }
 }
