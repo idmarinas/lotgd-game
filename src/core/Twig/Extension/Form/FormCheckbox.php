@@ -22,6 +22,16 @@ use Zend\Form\Exception;
 class FormCheckbox extends FormInput
 {
     /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('laminas_form_checkbox', [$this, 'render'], ['needs_environment' => true]),
+        ];
+    }
+
+    /**
      * Render a form <input> element from the provided $element.
      *
      * @throws Exception\InvalidArgumentException
@@ -80,16 +90,6 @@ class FormCheckbox extends FormInput
             $rendered,
             $labelHelper->render($env, $element)
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
-    {
-        return [
-            new TwigFunction('form_checkbox', [$this, 'render'], ['needs_environment' => true]),
-        ];
     }
 
     /**

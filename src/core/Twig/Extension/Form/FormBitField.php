@@ -27,7 +27,7 @@ class FormBitField extends FormSelect
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_bitfield', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_bitfield', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

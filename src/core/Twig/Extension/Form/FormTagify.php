@@ -25,7 +25,7 @@ class FormTagify extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_tagify', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_tagify', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

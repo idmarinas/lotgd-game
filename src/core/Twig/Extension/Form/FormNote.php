@@ -24,7 +24,7 @@ class FormNote extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_note', [$this, 'render']),
+            new TwigFunction('laminas_form_note', [$this, 'render']),
         ];
     }
 

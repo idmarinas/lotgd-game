@@ -45,11 +45,11 @@ class Form extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form', [$this, 'formRender'], ['needs_environment' => true]),
-            new TwigFunction('form_tab', [$this, 'formRenderTab'], ['needs_environment' => true]),
-            new TwigFunction('form_menu', [$this, 'formRenderMenu'], ['needs_environment' => true]),
-            new TwigFunction('form_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
-            new TwigFunction('form_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form', [$this, 'formRender'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_tab', [$this, 'formRenderTab'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_menu', [$this, 'formRenderMenu'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
         ];
     }
 

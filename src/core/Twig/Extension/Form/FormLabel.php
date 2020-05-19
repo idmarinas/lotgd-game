@@ -40,9 +40,9 @@ class FormLabel extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_label', [$this, 'render'], ['needs_environment' => true]),
-            new TwigFunction('form_label_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
-            new TwigFunction('form_label_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_label', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_label_open_tag', [$this, 'openTag'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_label_close_tag', [$this, 'closeTag'], ['needs_environment' => true]),
         ];
     }
 

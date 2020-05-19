@@ -48,7 +48,7 @@ class FormEmail extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_email', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_email', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

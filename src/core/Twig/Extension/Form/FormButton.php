@@ -57,7 +57,7 @@ class FormButton extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_button', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_button', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

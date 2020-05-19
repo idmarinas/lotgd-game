@@ -48,7 +48,7 @@ class FormText extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_text', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_text', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

@@ -45,7 +45,7 @@ class FormRange extends FormInput
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_range', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_range', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

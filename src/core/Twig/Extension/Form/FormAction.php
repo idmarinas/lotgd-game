@@ -24,8 +24,8 @@ class FormAction extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_action', [$this, 'render'], ['needs_environment' => true]),
-            new TwigFunction('form_action_row', [$this, 'renderRow'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_action', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_action_row', [$this, 'renderRow'], ['needs_environment' => true]),
         ];
     }
 

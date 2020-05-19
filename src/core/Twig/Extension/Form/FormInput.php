@@ -96,7 +96,7 @@ class FormInput extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_input', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_input', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

@@ -86,7 +86,7 @@ class FormSelect extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_select', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_select', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

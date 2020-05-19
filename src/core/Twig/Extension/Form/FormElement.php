@@ -86,7 +86,7 @@ class FormElement extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_element', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_element', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 

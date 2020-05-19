@@ -63,8 +63,8 @@ class FormCollection extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_fieldset', [$this, 'fieldsetRender'], ['needs_environment' => true]),
-            new TwigFunction('form_fieldset_tab', [$this, 'tabRender'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_fieldset', [$this, 'fieldsetRender'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_fieldset_tab', [$this, 'tabRender'], ['needs_environment' => true]),
         ];
     }
 

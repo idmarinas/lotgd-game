@@ -47,7 +47,7 @@ class FormTextarea extends AbstractElement
     public function getFunctions()
     {
         return [
-            new TwigFunction('form_textarea', [$this, 'render'], ['needs_environment' => true]),
+            new TwigFunction('laminas_form_textarea', [$this, 'render'], ['needs_environment' => true]),
         ];
     }
 
