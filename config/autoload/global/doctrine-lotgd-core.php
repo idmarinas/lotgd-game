@@ -3,6 +3,7 @@
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use DoctrineORMModule\Service;
 
+//-- Added in version 4.2.0
 return [
     'doctrine' => [
         'connection' => [

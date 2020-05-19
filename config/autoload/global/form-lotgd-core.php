@@ -6,6 +6,7 @@
 
 return [
     'forms' => [
-        'Lotgd\Core\Form\Configuration' => include 'data/form/core/grotto/configuration/input.php'
+        //-- Added in version 4.1.0
+        'Lotgd\Core\Form\Configuration' => include 'data/form/core/grotto/configuration/input.php',
     ]
 ];
