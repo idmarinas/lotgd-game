@@ -25,14 +25,16 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                         'password' => ' password',
                         'host' => '127.0.0.1', //-- localhost
                         'dbname' => 'data base name',
-                        'charset' => 'utf8mb4',
-                        'collate' => 'utf8mb4_unicode_ci'
+                        'charset' => 'utf8',
+                        'collate' => 'utf8_unicode_ci'
                     ]
                 ]
             ]
         ]
     ];
 ```
+-   **lib/saveuser.php** Added option to avoid save laston when save user (used in jaxon request)
+
 -   **THEME**
     -   Updated Fomantic UI version: 2.8.3 => 2.8.4
 
@@ -40,15 +42,26 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 -   **Jaxon-PHP** are now in a factory, so you can customize with a config file in `config/autoload/local/*`
     -   Can get it's factory with `\LotgdLocator::get(Lotgd\Core\Jaxon::class);`
+-   **Form System** improved:
+    -   Now can use Symfony Form and Zend Form (Laminas Form in 4.3.0 IDMarinas Edition)
+    -   Lotgd Core use Symfony Forms only for Update/Created entities
+    -   Zend Form use for configuration of game, and for free forms.
+    -   Note: Zend forms may be removed in the future and only Symfony Forms used, but it is not planned for now.
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **Translations** Deprecated used arrays as multiline text. Can use folded style with `>` or `|`
+    -   Can find examples in file translation
+    -   In next version `4.3.0` all arrays are formated with this format `key1.key1.0`, `key1.key1.1`, `key1.key1.2`
+    -   More info in https://symfony.com/doc/5.0/components/yaml/yaml_format.html#strings
 
 ### :wrench: FIXES
 
 -   **lib/modules/modules/modulestatus.php** Fixed error, now when file exist continue with script.
 -   **public/motd.php** Fixed error when there is no motd in the database
+-   **public/graveyard.php** Fixed errors
+    -   Now show navs when finish battle
+    -   Hide menu of search when not have soulpoints/hitpoints
 
 ### :x: REMOVES
 
@@ -56,6 +69,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :notebook: NOTES
 
+-   :warning: **PHP** LoTGD Core now need min PHP version 7.2
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
     -  Replace plugin  `uglifyjs-webpack-plugin` for `terser-webpack-plugin`
@@ -117,7 +131,6 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :star: FEATURES
 
 -   **lib/configuration/cache.php** Added compatibility with multi-cache. Can optimize multiple caches.
--   *
 
 ### :fire: DEPRECATED
 
