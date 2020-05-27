@@ -1,8 +1,6 @@
 {% translate_default_domain textDomain %}
 
-<form action="{{ 'creatures.php?op=save'|lotgd_url }}" method="POST" autocomplete="off">
-    {{ form }}
-</form>
+{{ form(form) }}
 
 {% if creature.creatureaiscript %}
     <br> <br>
