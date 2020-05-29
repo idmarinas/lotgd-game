@@ -46,6 +46,8 @@ return [
             'Doctrine\ORM\EntityManager' => Service\EntityManagerAliasCompatFactory::class,
             Lotgd\Core\Doctrine\Extension\TablePrefix::class => Factory\Doctrine\Extension\TablePrefix::class,
             Lotgd\Core\Jaxon::class => Factory\Component\Jaxon::class,
+            Gedmo\Translatable\TranslatableListener::class => Factory\Translator\TranslatableListener::class,
+            'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class,
         ]
     ]
 ];

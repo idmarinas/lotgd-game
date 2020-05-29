@@ -37,6 +37,9 @@ return [
         Lotgd\Core\Twig\Extension\Form\FormText::class,
         Lotgd\Core\Twig\Extension\Form\FormTextarea::class,
 
+        //-- Added in version 4.2.0
+        Symfony\Bridge\Twig\Extension\FormExtension::class,
+
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
     ]
