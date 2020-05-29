@@ -59,10 +59,6 @@ return [
             'spec' =>  include 'data/form/core/grotto/configuration/input/home.php',
         ],
         [
-            // Beta
-            'spec' => include 'data/form/core/grotto/configuration/input/beta.php'
-        ],
-        [
             // Account Creation
             'spec' => include 'data/form/core/grotto/configuration/input/account.php'
         ],

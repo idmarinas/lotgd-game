@@ -4,7 +4,6 @@ return [
     'game_setup' =>  include 'data/form/core/grotto/configuration/filter/game_setup.php',
     'maintenance' => include 'data/form/core/grotto/configuration/filter/maintenance.php',
     'home' => include 'data/form/core/grotto/configuration/filter/home.php',
-    'beta' => include 'data/form/core/grotto/configuration/filter/beta.php',
     'account' => include 'data/form/core/grotto/configuration/filter/account.php',
     'commentary' => include 'data/form/core/grotto/configuration/filter/commentary.php',
     'places' => include 'data/form/core/grotto/configuration/filter/places.php',

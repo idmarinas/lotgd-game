@@ -65,7 +65,12 @@ return [
         'filters' => [],
         'validators' => [
             ['name' => Validator\NotEmpty::class],
-            ['name' => \Zend\I18n\Validator\IsFloat::class]
+            [
+                'name' => \Zend\I18n\Validator\IsFloat::class,
+                'options' => [
+                    'locale' => 'en'
+                ]
+            ]
         ]
     ],
     [
