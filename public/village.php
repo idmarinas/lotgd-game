@@ -141,11 +141,6 @@ if (file_exists('public/lodge.php'))
 \LotgdNavigation::addNav('navs.bank', 'bank.php');
 \LotgdNavigation::addNav('navs.gypsy', 'gypsy.php');
 
-if (1 == getsetting('betaperplayer', 1) && file_exists('public/pavilion.php'))
-{
-    \LotgdNavigation::addNav('navs.pavilion', 'pavilion.php');
-}
-
 //-- Industrial street
 \LotgdNavigation::addHeader('headers.industrial');
 

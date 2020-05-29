@@ -391,13 +391,6 @@ if (! empty($temp_comp))
 }
 unset($temp_comp);
 
-$beta = getsetting('beta', 0);
-
-if (! $beta && 1 == getsetting('betaperplayer', 1))
-{
-    $beta = $session['user']['beta'] ?? 0;
-}
-
 $claninfo = [];
 
 if ($session['user']['clanid'] ?? false)

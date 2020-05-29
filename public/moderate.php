@@ -46,7 +46,6 @@ if (! is_array($sections) || ! count($sections))
 }
 
 \LotgdNavigation::addHeader('moderate.category.sections');
-(getsetting('betaperplayer', 1) && file_exists('public/pavilion.php')) && \LotgdNavigation::addNavNotl($params['sectionName']['beta'], 'moderate.php?area=beta');
 ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) && \LotgdNavigation::addNavNotl($params['sectionName']['superuser'], 'moderate.php?area=superuser');
 
 foreach($sections as $section)
