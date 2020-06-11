@@ -36,7 +36,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/saveuser.php** Added option to avoid save laston when save user (used in jaxon request)
 
 -   **THEME**
-    -   Updated Fomantic UI version: 2.8.3 => 2.8.4
+    -   Updated Fomantic UI version: 2.8.3 => 2.8.5
 
 ### :star: FEATURES
 
@@ -53,7 +53,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **Translations** Deprecated used arrays as multiline text. Can use folded style with `>` or `|`
     -   Can find examples in file translation
     -   In next version `4.3.0` all arrays are formated with this format `key1.key1.0`, `key1.key1.1`, `key1.key1.2`
-    -   More info in https://symfony.com/doc/5.0/components/yaml/yaml_format.html#strings
+    -   More info in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
 
 ### :wrench: FIXES
 
@@ -135,6 +135,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :fire: DEPRECATED
 
 -   **lib/datacache.php** deprecated all functions. Use `LotgdCache` static class for cache functions
+-   **lib/showform.php** deprecated all functions. Use new form system Zend Form or Symfony Form
 
 ### :wrench: FIXES
 
