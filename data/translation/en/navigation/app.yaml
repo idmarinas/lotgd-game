@@ -141,6 +141,7 @@ creatures:
         add: 'Add a Creature'
         add.other: 'Add Another Creature'
         properties: 'Creature properties'
+        home: 'Creatures list'
 
 # Home page
 home:
