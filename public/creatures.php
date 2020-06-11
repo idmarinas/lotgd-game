@@ -33,6 +33,7 @@ if ('save' == $op)
 
     $message = '';
     $paramsFlashMessage = [];
+
     if ('module' == $subop)
     {
         $message = 'flash.message.save.module';
@@ -60,6 +61,7 @@ elseif ('del' == $op)
 
     $message = 'flash.message.del.error';
     $messageType = 'addErrorMessage';
+
     if ($creatureEntity)
     {
         \Doctrine::remove($creatureEntity);
@@ -110,7 +112,7 @@ elseif ('edit' == $op || 'add' == $op)
     module_editor_navs('prefs-creatures', "creatures.php?op=edit&subop=module&creatureid=$creatureId&module=");
 
     \LotgdNavigation::addNav('common.category.navigation');
-    \LotgdNavigation::addNav('creatures.nav.home', "creatures.php");
+    \LotgdNavigation::addNav('creatures.nav.home', 'creatures.php');
 
     if ('module' == $subop)
     {
@@ -137,7 +139,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         $form->handleRequest();
 
-        if($form->isSubmitted() && $form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
             $method = $entity->getCreatureid() ? 'merge' : 'persist';
