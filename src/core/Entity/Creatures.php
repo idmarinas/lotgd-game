@@ -13,7 +13,11 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Creatures.
@@ -23,9 +27,10 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="creaturecategory", columns={"creaturecategory"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CreaturesRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\CreaturesTranslation")
  */
-class Creatures
+class Creatures implements Translatable
 {
     /**
      * @var int
@@ -39,42 +44,77 @@ class Creatures
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturename", type="string", length=50, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50
+     * )
      */
     private $creaturename;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturecategory", type="string", length=50, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 50,
+     *      allowEmptyString = true
+     * )
      */
-    private $creaturecategory;
+    private $creaturecategory = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="creatureimage", type="string", length=250, nullable=false)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 250,
+     *      allowEmptyString = true
+     * )
      */
-    private $creatureimage;
+    private $creatureimage = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturedescription", type="text", length=65535, nullable=false)
+     *
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 65535,
+     *      allowEmptyString = true
+     * )
      */
-    private $creaturedescription;
+    private $creaturedescription = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creatureweapon", type="string", length=50, nullable=true)
+     *
      */
-    private $creatureweapon;
+    private $creatureweapon = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="creaturegoldbonus", type="decimal", precision=4, scale=2, nullable=false)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99.99
+     * )
+     * @Assert\DivisibleBy(0.01)
      */
     private $creaturegoldbonus = '1.00';
 
@@ -82,6 +122,12 @@ class Creatures
      * @var string
      *
      * @ORM\Column(name="creatureattackbonus", type="decimal", precision=4, scale=2, nullable=false)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99.99
+     * )
+     * @Assert\DivisibleBy(0.01)
      */
     private $creatureattackbonus = '1.00';
 
@@ -89,6 +135,12 @@ class Creatures
      * @var string
      *
      * @ORM\Column(name="creaturedefensebonus", type="decimal", precision=4, scale=2, nullable=false)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99.99
+     * )
+     * @Assert\DivisibleBy(0.01)
      */
     private $creaturedefensebonus = '1.00';
 
@@ -96,36 +148,67 @@ class Creatures
      * @var string
      *
      * @ORM\Column(name="creaturehealthbonus", type="decimal", precision=4, scale=2, nullable=false)
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 99.99
+     * )
+     * @Assert\DivisibleBy(0.01)
      */
     private $creaturehealthbonus = '1.00';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturelose", type="string", length=120, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 120,
+     *      allowEmptyString = true
+     * )
      */
-    private $creaturelose;
+    private $creaturelose = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturewin", type="string", length=120, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 120,
+     *      allowEmptyString = true
+     * )
      */
-    private $creaturewin;
+    private $creaturewin = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="creatureaiscript", type="text", length=65535, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 65535,
+     *      allowEmptyString = true
+     * )
      */
-    private $creatureaiscript;
+    private $creatureaiscript = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="createdby", type="string", length=50, nullable=true)
+     *
+     * @Assert\Length(
+     *      min = 0,
+     *      max = 50
+     * )
      */
-    private $createdby;
+    private $createdby = '';
 
     /**
      * @var bool
@@ -140,6 +223,35 @@ class Creatures
      * @ORM\Column(name="graveyard", type="boolean", nullable=false, options={"default": 0})
      */
     private $graveyard = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CreaturesTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __toString()
+    {
+        return (string) $this->getCreatureid();
+    }
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(CreaturesTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Creatureid.
@@ -157,12 +269,21 @@ class Creatures
 
     /**
      * Get the value of Creatureid.
+     */
+    public function getCreatureid(): ?int
+    {
+        return $this->creatureid;
+    }
+
+    /**
+     * Temporal alias.
+     * In future updates all table IDs will have the field name as `id`.
      *
      * @return int
      */
-    public function getCreatureid(): int
+    public function getId()
     {
-        return $this->creatureid;
+        return $this->getCreatureid();
     }
 
     /**
@@ -181,8 +302,6 @@ class Creatures
 
     /**
      * Get the value of Creaturename.
-     *
-     * @return string
      */
     public function getCreaturename(): string
     {
@@ -205,10 +324,8 @@ class Creatures
 
     /**
      * Get the value of Creaturecategory.
-     *
-     * @return string
      */
-    public function getCreaturecategory(): string
+    public function getCreaturecategory(): ?string
     {
         return $this->creaturecategory;
     }
@@ -222,19 +339,17 @@ class Creatures
      */
     public function setCreatureimage($creatureimage)
     {
-        $this->creatureimage = $creatureimage;
+        $this->creatureimage = (string) $creatureimage;
 
         return $this;
     }
 
     /**
      * Get the value of Creatureimage.
-     *
-     * @return string
      */
     public function getCreatureimage(): string
     {
-        return $this->creatureimage;
+        return (string) $this->creatureimage;
     }
 
     /**
@@ -253,8 +368,6 @@ class Creatures
 
     /**
      * Get the value of Creaturedescription.
-     *
-     * @return string
      */
     public function getCreaturedescription(): string
     {
@@ -277,8 +390,6 @@ class Creatures
 
     /**
      * Get the value of Creatureweapon.
-     *
-     * @return string
      */
     public function getCreatureweapon(): string
     {
@@ -301,8 +412,6 @@ class Creatures
 
     /**
      * Get the value of Creaturegoldbonus.
-     *
-     * @return string
      */
     public function getCreaturegoldbonus(): string
     {
@@ -325,8 +434,6 @@ class Creatures
 
     /**
      * Get the value of Creatureattackbonus.
-     *
-     * @return string
      */
     public function getCreatureattackbonus(): string
     {
@@ -349,8 +456,6 @@ class Creatures
 
     /**
      * Get the value of Creaturedefensebonus.
-     *
-     * @return string
      */
     public function getCreaturedefensebonus(): string
     {
@@ -373,8 +478,6 @@ class Creatures
 
     /**
      * Get the value of Creaturehealthbonus.
-     *
-     * @return string
      */
     public function getCreaturehealthbonus(): string
     {
@@ -397,8 +500,6 @@ class Creatures
 
     /**
      * Get the value of Creaturelose.
-     *
-     * @return string
      */
     public function getCreaturelose(): string
     {
@@ -421,10 +522,8 @@ class Creatures
 
     /**
      * Get the value of Creaturewin.
-     *
-     * @return string
      */
-    public function getCreaturewin(): string
+    public function getCreaturewin(): ?string
     {
         return $this->creaturewin;
     }
@@ -445,10 +544,8 @@ class Creatures
 
     /**
      * Get the value of Creatureaiscript.
-     *
-     * @return string
      */
-    public function getCreatureaiscript(): string
+    public function getCreatureaiscript(): ?string
     {
         return $this->creatureaiscript;
     }
@@ -469,10 +566,8 @@ class Creatures
 
     /**
      * Get the value of Createdby.
-     *
-     * @return string
      */
-    public function getCreatedby(): string
+    public function getCreatedby(): ?string
     {
         return $this->createdby;
     }
@@ -493,8 +588,6 @@ class Creatures
 
     /**
      * Get the value of Forest.
-     *
-     * @return bool
      */
     public function getForest(): bool
     {
@@ -517,8 +610,6 @@ class Creatures
 
     /**
      * Get the value of Graveyard.
-     *
-     * @return bool
      */
     public function getGraveyard(): bool
     {
