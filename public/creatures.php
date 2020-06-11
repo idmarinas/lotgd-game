@@ -20,7 +20,7 @@ $op = (string) \LotgdHttp::getQuery('op');
 $subop = (string) \LotgdHttp::getQuery('subop');
 $page = (int) \LotgdHttp::getQuery('page');
 $module = (string) \LotgdHttp::getQuery('module');
-$creatureId =  ((int) \LotgdHttp::getPost('creatureid') ?: (int) \LotgdHttp::getQuery('creatureid'));
+$creatureId = ((int) \LotgdHttp::getPost('creatureid') ?: (int) \LotgdHttp::getQuery('creatureid'));
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Creatures::class);
 $params = [
@@ -45,28 +45,10 @@ if ('save' == $op)
             set_module_objpref('creatures', $creatureId, $key, $val, $module);
         }
     }
-    else
-    {
-        $message = 'flash.message.save.saved';
-        $post['createdby'] = $session['user']['login'];
-
-        $creatureEntity = $repository->find($creatureId);
-        $creatureEntity = $repository->hydrateEntity($post, $creatureEntity);
-
-        if ($post['notes'] ?? false)
-        {
-            \LotgdFlashMessages::addInfoMessage($post['notes']);
-        }
-
-        \Doctrine::persist($creatureEntity);
-        \Doctrine::flush();
-
-        $creatureId = $creatureEntity->getCreatureid();
-    }
 
     if ($message)
     {
-        \LotgdFlashMessages::addInfoMessage($message, $paramsFlashMessage, $textDomain);
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, $paramsFlashMessage, $textDomain));
     }
 
     $op = 'edit';
@@ -123,9 +105,7 @@ elseif ('edit' == $op || 'add' == $op)
     $params['tpl'] = 'edit';
 
     \LotgdNavigation::addHeader('creatures.category.edit');
-    \LotgdNavigation::addNav('creatures.nav.properties', "creatures.php?op=edit&creatureid=$creatureId");
     \LotgdNavigation::addHeader('creatures.category.add');
-    \LotgdNavigation::addNav('creatures.nav.add.other', 'creatures.php?op=add');
 
     module_editor_navs('prefs-creatures', "creatures.php?op=edit&subop=module&creatureid=$creatureId&module=");
 
@@ -145,37 +125,47 @@ elseif ('edit' == $op || 'add' == $op)
     {
         $creatureEntity = $repository->find($creatureId);
         $creatureArray = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
+        $creatureEntity = $creatureEntit ?: new \Lotgd\Core\Entity\Creatures();
+        \Doctrine::detach($creatureEntity);
 
-        //get available scripts
-        $sort = list_files('creatureai', []);
-        sort($sort);
-        $scriptenum = implode('', $sort);
-        $scriptenum = ',,none'.$scriptenum;
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\CreaturesType::class, $creatureEntity, [
+            'action' => "creatures.php?op=edit&creatureid={$creatureId}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
 
-        $form = [
-            'Creature Properties,title',
-            'creatureid' => 'Creature id,hidden',
-            'creaturename' => 'Creature Name',
-            'creaturecategory' => 'Creature Category',
-            'creatureimage' => 'Creature image',
-            'creaturedescription' => 'Creature description,textarea',
-            'creatureweapon' => 'Weapon',
-            'creaturegoldbonus' => 'Gold multiplier,float|0',
-            'It is a multiplier that affects the basis of the attribute for the gold that the creature carries; between 0 and 99.99,note',
-            'creaturedefensebonus' => 'Defense multiplier,float|1',
-            'It is a multiplier that affects the basis of the attribute for the defense that the creature has; between 0 and 99.99,note',
-            'creatureattackbonus' => 'Attack multiplier,float|1',
-            'It is a multiplier that affects the basis of the attribute for the attack that the creature has; between 0 and 99.99,note',
-            'creaturehealthbonus' => 'Health multiplier,float|1',
-            'It is a multiplier that affects the basis of the attribute for the health that the creature has; between 0 and 99.99,note',
-            'creaturewin' => 'Win Message',
-            'creaturelose' => 'Death Message',
-            'forest' => 'Creature is in forest?,bool',
-            'graveyard' => 'Creature is in graveyard?,bool',
-            'creatureaiscript' => "Creature's A.I.,enum".$scriptenum,
-        ];
+        $form->handleRequest();
 
-        $params['form'] = lotgd_showform($form, $creatureArray, false, false, false);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entity = $form->getData();
+            $method = $entity->getCreatureid() ? 'merge' : 'persist';
+
+            \Doctrine::{$method}($entity);
+            \Doctrine::flush();
+
+            $creatureId = $entity->getCreatureid();
+
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.saved', [], $textDomain));
+
+            //-- Redo form for change $creatureId and set new data (generated IDs)
+            $form = LotgdForm::create(Lotgd\Core\EntityForm\CreaturesType::class, $entity, [
+                'action' => "creatures.php?op=edit&creatureid={$creatureId}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
+        }
+
+        //-- In this position can updated $creatureId var
+        \LotgdNavigation::addHeader('creatures.category.edit');
+        \LotgdNavigation::addNav('creatures.nav.properties', "creatures.php?op=edit&creatureid=$creatureId");
+        \LotgdNavigation::addHeader('creatures.category.add');
+        \LotgdNavigation::addNav('creatures.nav.add.other', 'creatures.php?op=add');
+        \LotgdNavigation::addNavAllow("creatures.php?op=edit&creatureid={$creatureId}");
+
+        $params['form'] = $form->createView();
         $params['creature'] = $creatureArray;
     }
 }
