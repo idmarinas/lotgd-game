@@ -15,6 +15,9 @@ namespace Lotgd\Core\Factory\Template;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Template\Theme as TemplateTheme;
+use Symfony\Bridge\Twig\Form\TwigRendererEngine;
+use Symfony\Component\Form\FormRenderer;
+use Twig\RuntimeLoader\FactoryRuntimeLoader;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -25,7 +28,7 @@ class Theme implements FactoryInterface
         $config = $container->get('GameConfig');
         $options = $config['lotgd_core'] ?? [];
 
-        $template = new TemplateTheme([], [
+        $template = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
             'debug' => (bool) ($options['development'] ?? false),
             //-- Used dir of cache
             'cache' => 'storage/cache/template',
@@ -33,6 +36,17 @@ class Theme implements FactoryInterface
             'auto_reload' => (bool) ($options['development'] ?? false)
         ]);
         $template->setContainer($container);
+
+        // the Twig file that holds all the default markup for rendering forms
+        // this file comes with TwigBridge
+        $defaultFormTheme = 'semantic-ui-form-theme.html.twig';
+        $formEngine = new TwigRendererEngine([$defaultFormTheme], $template);
+        $template->addRuntimeLoader(new FactoryRuntimeLoader([
+            FormRenderer::class => function () use ($formEngine)
+            {
+                return new FormRenderer($formEngine);
+            },
+        ]));
 
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
