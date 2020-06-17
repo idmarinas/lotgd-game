@@ -172,14 +172,12 @@ function lotgd_transform_creature(array $badguy, $debug = true)
  */
 function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters = false, $forest = true): array
 {
-    $limit = ($multi > 1 ? (false === $packofmonsters ? $multi : 1) : 1);
+    $multi = false === $packofmonsters ? $multi : 1;
+    $limit = ($multi > 1 ? $multi : 1);
 
     $repository = \Doctrine::getRepository('LotgdCore:Creatures');
     $query = $repository->createQueryBuilder('u');
-
-    $query->setMaxResults($limit)
-        ->orderBy('rand()')
-    ;
+    $query->orderBy('RAND()');
 
     if (true === $forest)
     {
@@ -193,16 +191,19 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
     //-- Select creatures of diferent categories
     if (getsetting('multicategory', 0) && $limit > 1)
     {
-        $query->groupBy('u.creaturecategory');
+        $query->groupBy('u.creaturecategory')->addGroupBy('u.creatureid');
     }
 
-    $creatures = $query->getQuery()->getArrayResult();
+    $query = $repository->createTranslateCreatureQuery($query);
+    $query->setMaxResults($limit);
+
+    $creatures = $query->getArrayResult();
 
     if (count($creatures))
     {
         foreach($creatures as $key => $creature)
         {
-            $creatures[$key]['creaturelevel'] = mt_rand($mintargetlevel, $targetlevel);
+            $creatures[$key]['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
         }
     }
 
@@ -255,7 +256,7 @@ function get_creature_hitpoints($attrs)
 function get_creature_attack($attrs)
 {
     $strbonus = (1 / 3) * $attrs['str'];
-    $speedbonus = (1 / 3) * get_creature_speed($attrs);
+    // $speedbonus = (1 / 3) * get_creature_speed($attrs);
     $wisdombonus = (1 / 6) * $attrs['wis'];
     $intbonus = (1 / 6) * $attrs['int'];
 
@@ -268,7 +269,7 @@ function get_creature_defense($attrs)
 {
     $wisdombonus = (1 / 4) * $attrs['wis'];
     $constbonus = (3 / 8) * $attrs['con'];
-    $speedbonus = (3 / 8) * get_creature_speed($attrs);
+    // $speedbonus = (3 / 8) * get_creature_speed($attrs);
 
     $defense = $wisdombonus + $constbonus;
 
