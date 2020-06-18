@@ -34,7 +34,7 @@ class CreaturesRepository extends DoctrineRepository
                 WHERE a.creatureid = :id
             ';
 
-            $query = $this->createTranslateCreatureQuery($dql);
+            $query = $this->createTranslatebleCreatureQuery($dql);
             $query->setParameter('id', $id);
 
             return $query->getArrayResult()[0];
@@ -62,7 +62,7 @@ class CreaturesRepository extends DoctrineRepository
                 WHERE a.creatureid IN (:id)
             ';
 
-            $query = $this->createTranslateCreatureQuery($dql);
+            $query = $this->createTranslatebleCreatureQuery($dql);
             $query->setParameter('id', $ids);
 
             return $query->getArrayResult();
@@ -83,7 +83,7 @@ class CreaturesRepository extends DoctrineRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    public function createTranslateCreatureQuery(string $dql)
+    public function createTranslatebleCreatureQuery(string $dql)
     {
         $query = $this->_em->createQuery($dql);
 
