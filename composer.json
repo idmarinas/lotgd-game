@@ -31,6 +31,7 @@
         "macfja/tracy-doctrine-sql": "dev-master",
         "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
+        "symfony/console": "^4.4",
         "symfony/filesystem": "^4.4",
         "symfony/form": "^4.4",
         "symfony/options-resolver": "^4.4",
