@@ -32,13 +32,13 @@ $battle = false;
 $victory = false;
 $defeat = false;
 
-$mid = (int) \LotgdHttp::getQuery('master');
+$masterId = (int) \LotgdHttp::getQuery('master');
 
 $repository = \Doctrine::getRepository('LotgdCore:Masters');
 
-if ($mid)
+if ($masterId)
 {
-    $master = $repository->extractEntity($repository->find($mid));
+    $master = $repository->findOneMasterById($masterId);
 }
 else
 {
@@ -47,12 +47,14 @@ else
     $master = $query
         ->where('u.creaturelevel = :level')
         ->orderBy('rand()')
-        ->setParameter('level', $session['user']['level'])
-        ->setMaxResults(1)
-        ->getQuery()
-        ->getSingleResult()
     ;
-    $master = $repository->extractEntity($master);
+    $query = $repository->createTranslatebleMasterQuery($master);
+    $query
+        ->setMaxResults(1)
+        ->setParameter('level', $session['user']['level'])
+    ;
+
+    $master = $query->getArrayResult()[0];
 }
 
 $params['masterName'] = $master['creaturename'];
@@ -61,7 +63,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
 {
     $params['master'] = $master;
 
-    $mid = $master['creatureid'];
+    $masterId = $master['creatureid'];
 
     $level = $session['user']['level'];
     $dks = $session['user']['dragonkills'];
@@ -79,12 +81,12 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         \LotgdNavigation::villageNav();
 
         \LotgdNavigation::addHeader('category.actions');
-        \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$mid");
-        \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$mid");
+        \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
+        \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
         if ($session['user']['superuser'] & SU_DEVELOPER)
         {
-            \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$mid");
+            \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
         }
     }
     elseif ('challenge' == $op)
@@ -154,12 +156,12 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         \LotgdNavigation::villageNav();
 
         \LotgdNavigation::addHeader('category.actions');
-        \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$mid");
-        \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$mid");
+        \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
+        \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
         if ($session['user']['superuser'] & SU_DEVELOPER)
         {
-            \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$mid");
+            \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
         }
 
         $params['expRequired'] = $exprequired;
@@ -169,7 +171,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
     {
         $params['tpl'] = 'autochallenge';
 
-        \LotgdNavigation::addNav('nav.fight', "train.php?op=challenge&master=$mid");
+        \LotgdNavigation::addNav('nav.fight', "train.php?op=challenge&master=$masterId");
 
         $params['playerHealed'] = false;
 
@@ -368,17 +370,17 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
             \LotgdNavigation::villageNav();
 
             \LotgdNavigation::addHeader('category.actions');
-            \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$mid");
-            \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$mid");
+            \LotgdNavigation::addNav('nav.question', "train.php?op=question&master=$masterId");
+            \LotgdNavigation::addNav('nav.challenge', "train.php?op=challenge&master=$masterId");
 
             if ($session['user']['superuser'] & SU_DEVELOPER)
             {
-                \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$mid");
+                \LotgdNavigation::addNav('nav.superuser', "train.php?op=challenge&victory=1&master=$masterId");
             }
         }
         else
         {
-            fightnav(false, false, "train.php?master=$mid");
+            fightnav(false, false, "train.php?master=$masterId");
         }
 
         battleshowresults($lotgdBattleContent);
