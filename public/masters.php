@@ -42,37 +42,50 @@ if ('del' == $op)
 
     return redirect('masters.php');
 }
-elseif ('save' == $op)
-{
-    $form = \LotgdHttp::getPostAll();
-
-    $master = $repository->find($masterId);
-    $master = $repository->hydrateEntity($form, $master);
-
-    \Doctrine::persist($master);
-    \Doctrine::flush();
-
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.save.success', [ 'name' => $master->getCreaturename()], $textDomain));
-
-    return redirect('masters.php');
-}
 elseif ('edit' == $op)
 {
     $params['tpl'] = 'edit';
-    $params['maxLevel'] = getsetting('maxlevel');
 
     \Lotgdnavigation::addHeader('masters.category.functions');
     \Lotgdnavigation::addNav('masters.nav.return', 'masters.php');
 
-    $master = $repository->find($masterId);
+    $masterEntity = $repository->find($masterId);
+    $masterEntity = $masterEntity ?: new \Lotgd\Core\Entity\Masters();
+    \Doctrine::detach($masterEntity);
 
-    $params['master'] = $master ? $repository->extractEntity($master) : [
-        'creaturelevel' => 1,
-        'creaturename' => '',
-        'creatureweapon' => '',
-        'creaturewin' => '',
-        'creaturelose' => ''
-    ] ;
+    $form = LotgdForm::create(Lotgd\Core\EntityForm\MastersType::class, $masterEntity, [
+        'action' => "masters.php?op=edit&master_id={$masterId}",
+        'attr' => [
+            'autocomplete' => 'off'
+        ]
+    ]);
+
+    $form->handleRequest();
+
+    if ($form->isSubmitted() && $form->isValid())
+    {
+        $entity = $form->getData();
+        $method = $entity->getCreatureid() ? 'merge' : 'persist';
+
+        \Doctrine::{$method}($entity);
+        \Doctrine::flush();
+
+        $masterId = $entity->getCreatureid();
+
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.success', [ 'name' => $entity->getCreaturename()], $textDomain));
+
+        //-- Redo form for change $masterId and set new data (generated IDs)
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\MastersType::class, $entity, [
+            'action' => "masters.php?op=edit&master_id={$masterId}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+    }
+
+    \LotgdNavigation::addNavAllow("masters.php?op=edit&master_id={$masterId}");
+
+    $params['form'] = $form->createView();
 }
 
 if ('' == $op)

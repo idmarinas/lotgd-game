@@ -13,15 +13,20 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Masters.
  *
  * @ORM\Table(name="masters")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\MastersRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\MastersTranslation")
  */
-class Masters
+class Masters implements Translatable
 {
     /**
      * @var int
@@ -35,7 +40,13 @@ class Masters
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturename", type="string", length=50, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=50
+     * )
      */
     private $creaturename;
 
@@ -43,12 +54,15 @@ class Masters
      * @var int
      *
      * @ORM\Column(name="creaturelevel", type="integer", nullable=true, options={"unsigned": true})
+     *
+     * @Assert\DivisibleBy(1)
      */
-    private $creaturelevel;
+    private $creaturelevel = 1;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creatureweapon", type="string", length=50, nullable=true)
      */
     private $creatureweapon;
@@ -56,6 +70,7 @@ class Masters
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturelose", type="string", length=120, nullable=true)
      */
     private $creaturelose;
@@ -63,9 +78,34 @@ class Masters
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="creaturewin", type="string", length=120, nullable=true)
      */
     private $creaturewin;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MastersTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(MastersTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Creatureid.
@@ -83,10 +123,8 @@ class Masters
 
     /**
      * Get the value of Creatureid.
-     *
-     * @return int
      */
-    public function getCreatureid(): int
+    public function getCreatureid(): ?int
     {
         return $this->creatureid;
     }
@@ -107,8 +145,6 @@ class Masters
 
     /**
      * Get the value of Creaturename.
-     *
-     * @return string
      */
     public function getCreaturename(): string
     {
@@ -131,8 +167,6 @@ class Masters
 
     /**
      * Get the value of Creaturelevel.
-     *
-     * @return int
      */
     public function getCreaturelevel(): int
     {
@@ -155,8 +189,6 @@ class Masters
 
     /**
      * Get the value of Creatureweapon.
-     *
-     * @return string
      */
     public function getCreatureweapon(): string
     {
@@ -179,8 +211,6 @@ class Masters
 
     /**
      * Get the value of Creaturelose.
-     *
-     * @return string
      */
     public function getCreaturelose(): string
     {
@@ -203,8 +233,6 @@ class Masters
 
     /**
      * Get the value of Creaturewin.
-     *
-     * @return string
      */
     public function getCreaturewin(): string
     {
