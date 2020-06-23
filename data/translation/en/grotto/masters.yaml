@@ -21,14 +21,6 @@ section:
             - 'You cannot assign higher masters, but if you choose not to make one master for each level, the earlier master will appear again to the player to test him.`0`n'
             - 'It is suggested, that you do not toy around with this, unless you know what you are doing.`0`n'
     edit:
-        form:
-            level: "`^Master's level`0"
-            name: "`^Master's name`0"
-            weapon: "`^Master's weapon`0"
-            lose: "`^Master's speech when player wins`0"
-            win: "`^Master's speech when player loses`0"
-            button:
-                submit: Submit
         paragraph:
             - '`#The following codes are supported in both the win and lose speeches (case matters):`n'
             - 'The following codes are supported (case matters):`n'
