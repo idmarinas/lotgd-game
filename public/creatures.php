@@ -127,7 +127,7 @@ elseif ('edit' == $op || 'add' == $op)
     {
         $creatureEntity = $repository->find($creatureId);
         $creatureArray = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
-        $creatureEntity = $creatureEntit ?: new \Lotgd\Core\Entity\Creatures();
+        $creatureEntity = $creatureEntity ?: new \Lotgd\Core\Entity\Creatures();
         \Doctrine::detach($creatureEntity);
 
         $form = LotgdForm::create(Lotgd\Core\EntityForm\CreaturesType::class, $creatureEntity, [
