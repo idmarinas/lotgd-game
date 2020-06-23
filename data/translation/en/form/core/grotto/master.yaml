@@ -1,0 +1,7 @@
+creaturelevel: Master's level
+creaturename: Master's name
+creatureweapon: Master's weapon
+creaturelose: Master's speech when player wins
+creaturewin: Master's speech when player loses
+
+save.button: Save Master
