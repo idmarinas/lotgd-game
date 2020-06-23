@@ -32,6 +32,29 @@
 
 {# Widgets #}
 
+{%- block range_widget -%}
+    {% set type = 'hidden' %}
+
+    <div class="ui grid">
+        <div class="two wide column"><span class="ui right pointing fluid right aligned label" id="value-{{ id }}">{{ value }}</span></div>
+        <div class="fourteen wide column"><div class="ui {{ attr.disable_slider_labels ? '' : 'labeled' }} slider" id="{{ id }}-range"></div></div>
+    </div>
+    {{- block('form_widget_simple') -}}
+    <script>
+        $('#{{ id }}-range').slider({
+            min: {{ attr.min }},
+            max: {{ attr.max }},
+            start: {{ value }},
+            step: {{ attr.step|default('1') }},
+            onMove: function (value)
+            {
+                $('#{{ id }}').val(value)
+                $('#value-{{ id }}').text(value)
+            }
+        })
+    </script>
+{%- endblock range_widget %}
+
 {%- block button_widget -%}
     {%- set attr = attr|merge({class: ('ui ' ~ attr.class|default(''))|trim}) -%}
     {%- set attr = attr|merge({class: attr.class ~ ' button'}) -%}
