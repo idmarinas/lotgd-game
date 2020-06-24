@@ -15,6 +15,8 @@ namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Creatures translations.
@@ -28,6 +30,15 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
  */
 class CreaturesTranslation extends AbstractPersonalTranslation
 {
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(type="integer", options={"unsigned": true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="Creatures", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="creatureid", onDelete="CASCADE")

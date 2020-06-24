@@ -29,6 +29,15 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 class MastersTranslation extends AbstractPersonalTranslation
 {
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(type="integer", options={"unsigned": true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Masters", inversedBy="translations", cascade={"all"})
      * @ORM\JoinColumn(name="object_id", referencedColumnName="creatureid", onDelete="CASCADE")
      */
