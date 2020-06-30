@@ -34,9 +34,31 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     ];
 ```
 -   **lib/saveuser.php** Added option to avoid save laston when save user (used in jaxon request)
+-   :warning: **Translation in entities** Some database tables that have fields that are susceptible to translation can now be translated using Symfony form.
+    -   **src/core/Entity/Creatures.php**
+        -   The following fields can now be translated
+            -   `creaturecategory`
+            -   `creaturename`
+            -   `creaturedescription`
+            -   `creatureweapon`
+            -   `creaturelose`
+            -   `creaturewin`
+    -   **src/core/Entity/Masters.php**
+        -   The following fields can now be translated
+            -   `creaturename`
+            -   `creatureweapon`
+            -   `creaturelose`
+            -   `creaturewin`
+    -   **src/core/Entity/Companions.php**
+        -   The following fields can now be translated
+            -   `name`
+            -   `category`
+            -   `description`
+            -   `jointext`
+            -   `dyingtext`
 
 -   **THEME**
-    -   Updated Fomantic UI version: 2.8.3 => 2.8.5
+    -   Updated Fomantic UI version: 2.8.3 => 2.8.6
 
 ### :star: FEATURES
 
