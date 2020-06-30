@@ -1,11 +1,11 @@
-{% translate_default_domain 'page-companions' %}
+{% translate_default_domain textDomain %}
 
-<table class="ui very compact striped selectable table">
+<table class="ui very compact striped table">
     <thead>
         <tr>
-            <th>{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
-            <th>{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
-            <th>{{ 'section.default.table.thead.cost'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.cost'|t|uncolorize }}</th>
         </tr>
     </thead>
     {% set cat = '' %}
@@ -13,7 +13,7 @@
         {% if cat != companion.category %}
             {% set cat = companion.category %}
             <thead>
-                <td colspan="3">{{ 'section.default.table.thead.category'|t({ 'category': companion.category })|colorize }}</td>
+                <th scope="col" colspan="3">{{ 'section.default.table.thead.category'|t({ 'category': companion.category })|colorize }}</th>
             </thead>
         {% endif %}
         <tr>
