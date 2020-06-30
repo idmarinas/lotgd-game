@@ -1,0 +1,30 @@
+companion_active: Is companion active?
+name: 'Companion Name'
+category: 'Companion Category'
+description: 'Companion Description'
+join_text: 'Companion join text'
+dying_text: 'Companion Dyingtext'
+companion_location: 'Companion Availability'
+max_hitpoints: 'Maxhitpoints'
+max_hitpoints_per_level: 'Hitpoints bonus per level'
+attack: 'Attack'
+attack_per_level: 'Attack bonus per level'
+defense: Defense
+defense_per_level: 'Defense bonus per level'
+figther: 'Fighter?'
+defend: 'Defender?'
+healer: 'Healer level'
+healer.note: 'This value determines the maximum amount of HP healed per round'
+magician: 'Magician?'
+magician.note: 'This value determines the maximum amount of damage caused per round'
+cannot_die: 'Companion cannot die'
+cannot_be_healed: 'Companion cannot be healed'
+cost_dk: 'Companion Cost (DKs)'
+cost_gems: 'Companion Cost (Gems)'
+cost_gold: 'Companion Cost (Gold)'
+allow_in_shades: 'Allow in shades'
+allow_in_pvp: 'Allow in PvP'
+allow_in_train: 'Allow in train'
+abilities: Abilities of companion
+
+save.button: Save Companion
