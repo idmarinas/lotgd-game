@@ -13,15 +13,20 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Companions.
  *
  * @ORM\Table(name="companions")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CompanionsRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\CompanionsTranslation")
  */
-class Companions
+class Companions implements Translatable
 {
     /**
      * @var int
@@ -35,28 +40,37 @@ class Companions
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="category", type="string", length=50, nullable=false)
      */
-    private $category;
+    private $category = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
-    private $description;
+    private $description = '';
 
     /**
      * @var int
      *
      * @ORM\Column(name="attack", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $attack = 1;
 
@@ -64,6 +78,12 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="attackperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $attackperlevel = 0;
 
@@ -71,6 +91,12 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="defense", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $defense = 1;
 
@@ -78,6 +104,12 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="defenseperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $defenseperlevel = 0;
 
@@ -85,6 +117,13 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="maxhitpoints", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     *
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $maxhitpoints = 10;
 
@@ -92,15 +131,21 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="maxhitpointsperlevel", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $maxhitpointsperlevel = 10;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="abilities", type="array", nullable=false)
+     * @ORM\Column(name="abilities", type="array")
      */
-    private $abilities;
+    private $abilities = [];
 
     /**
      * @var bool
@@ -128,12 +173,18 @@ class Companions
      *
      * @ORM\Column(name="companionactive", type="boolean", nullable=false, options={"default": 1})
      */
-    private $companionactive = 1;
+    private $companionactive = true;
 
     /**
      * @var int
      *
      * @ORM\Column(name="companioncostdks", type="integer", nullable=false, options={"unsigned": true}, options={"default": 0})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $companioncostdks = 0;
 
@@ -141,6 +192,12 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="companioncostgems", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $companioncostgems = 0;
 
@@ -148,22 +205,30 @@ class Companions
      * @var int
      *
      * @ORM\Column(name="companioncostgold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $companioncostgold = 0;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="jointext", type="text", length=65535, nullable=false)
      */
-    private $jointext;
+    private $jointext = '';
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="dyingtext", type="string", length=255, nullable=false)
      */
-    private $dyingtext;
+    private $dyingtext = '';
 
     /**
      * @var bool
@@ -187,6 +252,35 @@ class Companions
     private $allowintrain = 0;
 
     /**
+     * @ORM\OneToMany(targetEntity="CompanionsTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __toString()
+    {
+        return (string) $this->getCompanionid();
+    }
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(CompanionsTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
+
+    /**
      * Set the value of Companionid.
      *
      * @param int companionid
@@ -205,7 +299,7 @@ class Companions
      *
      * @return int
      */
-    public function getCompanionid(): int
+    public function getCompanionid(): ?int
     {
         return $this->companionid;
     }
@@ -433,7 +527,7 @@ class Companions
      *
      * @return self
      */
-    public function setAbilities($abilities)
+    public function setAbilities(array $abilities)
     {
         $this->abilities = $abilities;
 
@@ -445,8 +539,13 @@ class Companions
      *
      * @return array
      */
-    public function getAbilities(): array
+    public function getAbilities()
     {
+        if (is_string($this->abilities))
+        {
+            $this->abilities = unserialize($this->abilities);
+        }
+
         return $this->abilities;
     }
 

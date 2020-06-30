@@ -15,8 +15,6 @@ namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
-use Gedmo\Translatable\Translatable;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Creatures translations.

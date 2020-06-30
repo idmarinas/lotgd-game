@@ -15,7 +15,9 @@ $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Companions::class);
 $textDomain = 'grotto-companions';
 $hydrator = new \Zend\Hydrator\ClassMethods();
 
-$params = [];
+$params = [
+    'textDomain' => $textDomain
+];
 
 page_header('title', [], $textDomain);
 
@@ -26,25 +28,6 @@ page_header('title', [], $textDomain);
 
 $op = (string) \LotgdHttp::getQuery('op');
 $id = (int) \LotgdHttp::getQuery('id');
-
-$vname = getsetting('villagename', LOCATION_FIELDS);
-$locs = [
-    $vname => [
-        'location.village.of',
-        ['name' => $vname],
-        'app-default'
-    ]
-];
-$locs = modulehook('camplocs', $locs);
-$locs['all'] = [
-    'location.everywhere',
-    [],
-    'app-default'
-];
-ksort($locs);
-reset($locs);
-
-$params['locations'] = $locs;
 
 if ('deactivate' == $op)
 {
@@ -117,37 +100,7 @@ elseif ('save' == $op)
 {
     $subop = (string) \LotgdHttp::getQuery('subop');
 
-    if ('' == $subop)
-    {
-        $companion = \LotgdHttp::getPost('companion');
-
-        if ($companion)
-        {
-            $companion['allowinshades'] = $companion['allowinshades'] ?? 0;
-            $companion['allowinpvp'] = $companion['allowinpvp'] ?? 0;
-            $companion['allowintrain'] = $companion['allowintrain'] ?? 0;
-            $companion['abilities']['fight'] = (bool) ($companion['abilities']['fight'] ?? false);
-            $companion['abilities']['defend'] = (bool) ($companion['abilities']['defend'] ?? false);
-            $companion['cannotdie'] = (bool) ($companion['cannotdie'] ?? false);
-            $companion['cannotbehealed'] = (bool) ($companion['cannotbehealed'] ?? false);
-
-            $companionEntity = $repository->find($id);
-
-            if (! $companionEntity)
-            {
-                $companionEntity = new \Lotgd\Core\Entity\Companions();
-            }
-
-            $companionEntity = $hydrator->hydrate($companion, $companionEntity);
-
-            \Doctrine::persist($companionEntity);
-
-            LotgdCache::removeItem("companiondata-{$id}");
-
-            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-        }
-    }
-    elseif ('module' == $subop)
+    if ('module' == $subop)
     {
         // Save modules settings
         $module = (string) \LotgdHttp::getQuery('module');
@@ -175,26 +128,11 @@ if ('' == $op)
 
     $params['companionsList'] = $repository->findBy([], ['category' => 'DESC', 'name' => 'DESC']);
 }
-elseif ('add' == $op)
+elseif ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
-    $params['companion'] = [];
 
     \LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
-}
-elseif ('edit' == $op)
-{
-    \LotgdNavigation::addNav('companions.nav.editor', 'companions.php');
-
-    $companionEntity = $repository->find($id);
-
-    if (! $companionEntity)
-    {
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('', [], $textDomain));
-
-        return redirect('companions.php');
-    }
-
     \LotgdNavigation::addNav('companions.nav.properties', "companions.php?op=edit&id={$id}");
 
     module_editor_navs('prefs-companions', "companions.php?op=edit&subop=module&id={$id}&module=");
@@ -215,8 +153,46 @@ elseif ('edit' == $op)
     }
     else
     {
-        $params['tpl'] = 'edit';
-        $params['companion'] = $companionEntity;
+        $companionEntity = $repository->find($id);
+        $creatureArray = $companionEntity ? $repository->extractEntity($companionEntity) : [];
+        $companionEntity = $companionEntity ?: new \Lotgd\Core\Entity\Companions();
+        \Doctrine::detach($companionEntity);
+
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\CompanionsType::class, $companionEntity, [
+            'action' => "companions.php?op=edit&id={$id}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+
+        $form->handleRequest();
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entity = $form->getData();
+            $method = $entity->getCompanionid() ? 'merge' : 'persist';
+
+            \Doctrine::{$method}($entity);
+            \Doctrine::flush();
+
+            $id = $entity->getCompanionid();
+
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+
+            LotgdCache::removeItem("companiondata-{$id}");
+
+            //-- Redo form for change $id and set new data (generated IDs)
+            $form = LotgdForm::create(Lotgd\Core\EntityForm\CompanionsType::class, $entity, [
+                'action' => "companions.php?op=edit&id={$id}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
+        }
+
+        \LotgdNavigation::addNavAllow("companions.php?op=edit&id={$id}");
+
+        $params['form'] = $form->createView();
     }
 }
 
