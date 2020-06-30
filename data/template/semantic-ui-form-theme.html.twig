@@ -284,7 +284,6 @@
                 <div class="ui list">
                 {% for error in errors %}
                     <div class="item">
-                        ({{ error.cause.propertyPath }})
                         <i aria-hidden="true" class="warning sign icon"></i> {{ error.message }}
                     </div>
                 {% endfor %}
