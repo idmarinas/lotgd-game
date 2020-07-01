@@ -32,7 +32,7 @@ class ArmorRepository extends DoctrineRepository
         {
             $query->select('MAX(u.level)');
 
-            if ($dragonKills)
+            if (is_int($dragonKills))
             {
                 $query->where('u.level <= :lvl')
                     ->setParameters(['lvl' => $dragonKills])
@@ -78,6 +78,63 @@ class ArmorRepository extends DoctrineRepository
             \Tracy\Debugger::log($th);
 
             return 1;
+        }
+    }
+
+
+    /**
+     * Find one by id.
+     * Entity is translated.
+     *
+     * @return array|null
+     */
+    public function findOneArmorById(int $id)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Armor a
+                WHERE a.armorid = :id
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $id);
+
+            return $query->getArrayResult()[0];
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
+
+    /**
+     * Get an array by ids.
+     * Entities is translated.
+     *
+     * @return array|null
+     */
+    public function findArmorsById(array $ids)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Armor a
+                WHERE a.armorid IN (:id)
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $ids);
+
+            return $query->getArrayResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
         }
     }
 }
