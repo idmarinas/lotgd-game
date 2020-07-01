@@ -13,15 +13,20 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Armor.
  *
  * @ORM\Table(name="armor")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ArmorRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\ArmorTranslation")
  */
-class Armor
+class Armor implements Translatable
 {
     /**
      * @var int
@@ -35,6 +40,7 @@ class Armor
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="armorname", type="string", length=128, nullable=true)
      */
     private $armorname;
@@ -43,6 +49,12 @@ class Armor
      * @var int
      *
      * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $value = 0;
 
@@ -50,6 +62,12 @@ class Armor
      * @var int
      *
      * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     *
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $defense = 1;
 
@@ -57,8 +75,43 @@ class Armor
      * @var int
      *
      * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $level = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ArmorTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __toString()
+    {
+        return (string) $this->getArmorid();
+    }
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(ArmorTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Armorid.
@@ -79,7 +132,7 @@ class Armor
      *
      * @return int
      */
-    public function getArmorid(): int
+    public function getArmorid(): ?int
     {
         return $this->armorid;
     }

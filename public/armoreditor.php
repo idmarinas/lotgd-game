@@ -4,17 +4,9 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_EQUIPMENT);
 
-$armorarray = [
-    'Armor,title',
-    'armorid' => 'Armor ID,hidden',
-    'level' => 'DK Level,int',
-    'armorname' => 'Armor Name',
-    'defense' => 'Defense,range,1,15,1'
-];
 $values = [1 => 48, 225, 585, 990, 1575, 2250, 2790, 3420, 4230, 5040, 5850, 6840, 8010, 9000, 10350];
 
 $textDomain = 'grotto-armoreditor';
@@ -39,12 +31,54 @@ if ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
-    $armor = ['defense' => $repository->getNextDefenseLevel($armorlevel)];
-    $armor = $repository->find($id);
-    $armor = $repository->extractEntity($armor);
-    $armor['level'] = ($armor['level'] >= 0) ? $armor['level'] : $armorlevel;
+    $armorEntity = $repository->find($id);
+    $armorEntity = $armorEntity ?: new \Lotgd\Core\Entity\Armor();
+    \Doctrine::detach($armorEntity);
 
-    $params['form'] = lotgd_showform($armorarray, $armor, true, false, false);
+    if (!$id)
+    {
+        $armorEntity->setLevel($armorEntity->getLevel() ?: $armorlevel);
+        $armorEntity->setDefense($repository->getNextDefenseLevel($armorEntity->getLevel()));
+    }
+
+    $form = LotgdForm::create(Lotgd\Core\EntityForm\ArmorType::class, $armorEntity, [
+        'action' => "armoreditor.php?op=edit&id={$id}&level={$armorlevel}",
+        'attr' => [
+            'autocomplete' => 'off'
+        ]
+    ]);
+
+    $form->handleRequest();
+
+    if ($form->isSubmitted() && $form->isValid())
+    {
+        $entity = $form->getData();
+        $entity->setValue($values[$entity->getDefense()]);
+
+        $method = $entity->getArmorId() ? 'merge' : 'persist';
+
+        \Doctrine::{$method}($entity);
+        \Doctrine::flush();
+
+        $message = ($id) ? 'armor.form.edit' : 'armor.form.new';
+
+        $id = $entity->getArmorId();
+        $armorlevel = $entity->getLevel();
+
+        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->getArmorName()], $textDomain));
+
+        //-- Redo form for change $level and set new data (generated IDs)
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\ArmorType::class, $entity, [
+            'action' => "armoreditor.php?op=edit&id={$id}&level={$armorlevel}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+    }
+
+    \LotgdNavigation::addNavAllow("armoreditor.php?op=edit&id={$id}&level={$armorlevel}");
+
+    $params['form'] = $form->createView();
 }
 elseif ('del' == $op)
 {
@@ -52,23 +86,6 @@ elseif ('del' == $op)
 
     \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('armor.form.del.success', ['id' => $id], $textDomain));
     \Doctrine::remove($armor);
-    \Doctrine::flush();
-}
-elseif ('save' == $op)
-{
-    $post = \LotgdHttp::getPostAll();
-    $post['value'] = $values[$post['defense']];
-    $post['level'] = ($post['level'] >= 0) ? $post['level'] : $armorlevel;
-
-    $armor = $repository->find($post['armorid']);
-
-    $message = ($armor) ? 'armor.form.edit' : 'armor.form.new';
-
-    $armor = $repository->hydrateEntity($post, $armor);
-
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $post['armorname']], $textDomain));
-
-    \Doctrine::persist($armor);
     \Doctrine::flush();
 }
 
