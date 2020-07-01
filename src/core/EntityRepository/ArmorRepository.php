@@ -81,6 +81,34 @@ class ArmorRepository extends DoctrineRepository
         }
     }
 
+    /**
+     * Get a translated list for a level.,
+     *
+     * @param int $level
+     *
+     * @return array
+     */
+    public function findByLevel(int $level)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Armor a
+                WHERE a.level = :lvl
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('lvl', $level);
+
+            return $query->getArrayResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
 
     /**
      * Find one by id.
