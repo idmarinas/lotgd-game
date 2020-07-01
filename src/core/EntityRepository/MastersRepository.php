@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\EntityRepository;
 
-use Gedmo\Translatable\TranslatableListener;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Tracy\Debugger;
 
@@ -34,7 +33,7 @@ class MastersRepository extends DoctrineRepository
                 WHERE a.creatureid = :id
             ";
 
-            $query = $this->createTranslatebleMasterQuery($dql);
+            $query = $this->createTranslatebleQuery($dql);
             $query->setParameter('id', $id);
 
             return $query->getArrayResult()[0];
@@ -62,7 +61,7 @@ class MastersRepository extends DoctrineRepository
                 WHERE a.creatureid IN (:id)
             ";
 
-            $query = $this->createTranslatebleMasterQuery($dql);
+            $query = $this->createTranslatebleQuery($dql);
             $query->setParameter('id', $ids);
 
             return $query->getArrayResult();
@@ -73,36 +72,5 @@ class MastersRepository extends DoctrineRepository
 
             return null;
         }
-    }
-
-    /**
-     * Create query for translate master.
-     *
-     * @param string $dql
-     * Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string.
-     *
-     * @return \Doctrine\ORM\Query
-     */
-    public function createTranslatebleMasterQuery(string $dql)
-    {
-        $query = $this->_em->createQuery($dql);
-
-        $query->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
-        // take locale from session or request etc.
-        $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, \Locale::getDefault());
-        // fallback to default values in case if record is not translated
-        $query->setHint(TranslatableListener::HINT_FALLBACK, 1);
-
-        return $query;
-    }
-
-    /**
-     * Alias for createTranslatebleMasterQuery.
-     *
-     * @param string $dql
-     */
-    public function createTranslatebleQuery(string $dql)
-    {
-        return $this->createTranslatebleMasterQuery($dql);
     }
 }

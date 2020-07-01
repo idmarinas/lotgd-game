@@ -17,6 +17,7 @@ use Doctrine\ORM\{
     EntityRepository as DoctrineEntityRepository,
     QueryBuilder
 };
+use Gedmo\Translatable\TranslatableListener;
 use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
 use Zend\Hydrator\ClassMethods;
 use Zend\Paginator\Paginator;
@@ -27,12 +28,6 @@ class EntityRepository extends DoctrineEntityRepository
 
     /**
      * Get a pagination for a result.
-     *
-     * @param QueryBuilder $query
-     * @param int          $page
-     * @param int          $perPage
-     *
-     * @return Paginator
      */
     public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25, int $resultType = DoctrineAdapter::RESULT_ARRAY): Paginator
     {
@@ -51,7 +46,6 @@ class EntityRepository extends DoctrineEntityRepository
     /**
      * Hydrate an object by populating getter/setter methods.
      *
-     * @param array       $data
      * @param object|null $entity
      *
      * @return object
@@ -71,8 +65,6 @@ class EntityRepository extends DoctrineEntityRepository
      * Extract values from an object with class methods.
      *
      * @param object|array $object
-     *
-     * @return array
      */
     public function extractEntity($object): array
     {
@@ -97,8 +89,6 @@ class EntityRepository extends DoctrineEntityRepository
 
     /**
      * Get a instance of query builder.
-     *
-     * @return QueryBuilder
      */
     public function getQueryBuilder(): QueryBuilder
     {
@@ -106,9 +96,28 @@ class EntityRepository extends DoctrineEntityRepository
     }
 
     /**
-     * Get Hydrator instance.
+     * Create query for translate entity.
      *
-     * @return ClassMethods
+     * @param string $dql
+     * Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function createTranslatebleQuery(string $dql)
+    {
+        $query = $this->_em->createQuery($dql);
+
+        $query->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
+        // take locale from session or request etc.
+        $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, \Locale::getDefault());
+        // fallback to default values in case if record is not translated
+        $query->setHint(TranslatableListener::HINT_FALLBACK, 1);
+
+        return $query;
+    }
+
+    /**
+     * Get Hydrator instance.
      */
     protected function getHydrator(): ClassMethods
     {

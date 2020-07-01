@@ -38,7 +38,7 @@ class CompanionsRepository extends DoctrineRepository
                 ->andWhere('u.companionactive = 1')
             ;
 
-            $query = $this->createTranslatebleCompanionQuery($query);
+            $query = $this->createTranslatebleQuery($query);
             $query
                 ->setParameter('dk', $dragonKills)
                 ->setParameter('loc', $location)
@@ -69,7 +69,7 @@ class CompanionsRepository extends DoctrineRepository
                 WHERE a.creatureid = :id
             ';
 
-            $query = $this->createTranslatebleCompanionQuery($dql);
+            $query = $this->createTranslatebleQuery($dql);
             $query->setParameter('id', $id);
 
             return $query->getArrayResult()[0];
@@ -97,7 +97,7 @@ class CompanionsRepository extends DoctrineRepository
                 WHERE a.creatureid IN (:id)
             ';
 
-            $query = $this->createTranslatebleCompanionQuery($dql);
+            $query = $this->createTranslatebleQuery($dql);
             $query->setParameter('id', $ids);
 
             return $query->getArrayResult();
@@ -108,26 +108,5 @@ class CompanionsRepository extends DoctrineRepository
 
             return null;
         }
-    }
-
-    /**
-     * Create query for translate entity.
-     *
-     * @param string $dql
-     * Note: If pass a "Doctrine\ORM\QueryBuilder" auto-get a DQL string.
-     *
-     * @return \Doctrine\ORM\Query
-     */
-    public function createTranslatebleCompanionQuery(string $dql)
-    {
-        $query = $this->_em->createQuery($dql);
-
-        $query->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker');
-        // take locale from session or request etc.
-        $query->setHint(TranslatableListener::HINT_TRANSLATABLE_LOCALE, \Locale::getDefault());
-        // fallback to default values in case if record is not translated
-        $query->setHint(TranslatableListener::HINT_FALLBACK, 1);
-
-        return $query;
     }
 }
