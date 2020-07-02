@@ -13,15 +13,20 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Weapons.
  *
  * @ORM\Table(name="weapons")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\WeaponsRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\WeaponsTranslation")
  */
-class Weapons
+class Weapons implements Translatable
 {
     /**
      * @var int
@@ -35,6 +40,7 @@ class Weapons
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="weaponname", type="string", length=128, nullable=true)
      */
     private $weaponname;
@@ -43,6 +49,12 @@ class Weapons
      * @var int
      *
      * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $value = 0;
 
@@ -50,6 +62,12 @@ class Weapons
      * @var int
      *
      * @ORM\Column(name="damage", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
+     *
+     * @Assert\Range(
+     *     min=1,
+     *     max=65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $damage = 1;
 
@@ -57,8 +75,43 @@ class Weapons
      * @var int
      *
      * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $level = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WeaponsTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getWeaponid();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(WeaponsTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Weaponid.
@@ -76,10 +129,8 @@ class Weapons
 
     /**
      * Get the value of Weaponid.
-     *
-     * @return int
      */
-    public function getWeaponid(): int
+    public function getWeaponid(): ?int
     {
         return $this->weaponid;
     }
@@ -100,8 +151,6 @@ class Weapons
 
     /**
      * Get the value of Weaponname.
-     *
-     * @return string
      */
     public function getWeaponname(): string
     {
@@ -124,8 +173,6 @@ class Weapons
 
     /**
      * Get the value of Value.
-     *
-     * @return int
      */
     public function getValue(): int
     {
@@ -148,8 +195,6 @@ class Weapons
 
     /**
      * Get the value of Damage.
-     *
-     * @return int
      */
     public function getDamage(): int
     {
@@ -172,8 +217,6 @@ class Weapons
 
     /**
      * Get the value of Level.
-     *
-     * @return int
      */
     public function getLevel(): int
     {

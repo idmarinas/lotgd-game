@@ -33,7 +33,7 @@ class WeaponsRepository extends DoctrineRepository
         {
             $query->select('MAX(u.level)');
 
-            if ($dragonKills)
+            if (is_int($dragonKills))
             {
                 $query->where('u.level <= :lvl')
                     ->setParameters(['lvl' => $dragonKills])
@@ -79,6 +79,92 @@ class WeaponsRepository extends DoctrineRepository
             Debugger::log($th);
 
             return 1;
+        }
+    }
+
+    /**
+     * Get a translated list for a level.
+     *
+     * @param int $level
+     *
+     * @return array
+     */
+    public function findByLevel(int $level)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Weapons a
+                WHERE a.level = :lvl
+                ORDER BY a.damage ASC
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('lvl', $level);
+
+            return $query->getArrayResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
+
+    /**
+     * Find one by id.
+     * Entity is translated.
+     *
+     * @return array|null
+     */
+    public function findOneWeaponById(int $id)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Weapons a
+                WHERE a.weaponid = :id
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $id);
+
+            return $query->getArrayResult()[0];
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
+
+    /**
+     * Get an array by ids.
+     * Entities is translated.
+     *
+     * @return array|null
+     */
+    public function findWeaponsById(array $ids)
+    {
+        try
+        {
+            $dql = 'SELECT a
+                FROM LotgdCore:Weapons a
+                WHERE a.weaponid IN (:id)
+            ';
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $ids);
+
+            return $query->getArrayResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
         }
     }
 }

@@ -15,6 +15,7 @@ table:
 weapon:
     form:
         edit: 'Weapon "{name}" edited.'
+        new: 'Weapon "{name}" added.'
         button:
             submit: 'Save'
 

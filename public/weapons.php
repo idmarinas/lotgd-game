@@ -43,25 +43,25 @@ elseif ('buy' == $op)
     $id = (int) \LotgdHttp::getQuery('id');
 
     $params['opt'] = 'buy';
-    $params['result'] = $repository->findOneByWeaponid($id);
+    $params['result'] = $repository->findOneWeaponById($id);
 
     if ($params['result'])
     {
         $row = $params['result'];
         $params['buyIt'] = false;
 
-        if ($row->getValue() <= ($session['user']['gold'] + $tradeinvalue))
+        if ($row['value'] <= ($session['user']['gold'] + $tradeinvalue))
         {
             $params['buyIt'] = true;
 
-            debuglog(sprintf('spent "%s" gold on the "%s" weapon', ($row->getValue() - $tradeinvalue), $row->getWeaponname()));
-            $session['user']['gold'] -= $row->getValue();
-            $session['user']['weapon'] = $row->getWeaponname();
+            debuglog(sprintf('spent "%s" gold on the "%s" weapon', ($row['value'] - $tradeinvalue), $row['weaponname']));
+            $session['user']['gold'] -= $row['value'];
+            $session['user']['weapon'] = $row['weaponname'];
             $session['user']['gold'] += $tradeinvalue;
             $session['user']['attack'] -= $session['user']['weapondmg'];
-            $session['user']['weapondmg'] = $row->getDamage();
+            $session['user']['weapondmg'] = $row['damage'];
             $session['user']['attack'] += $session['user']['weapondmg'];
-            $session['user']['weaponvalue'] = $row->getValue();
+            $session['user']['weaponvalue'] = $row['value'];
         }
     }
 }

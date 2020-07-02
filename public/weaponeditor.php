@@ -4,17 +4,9 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_EQUIPMENT);
 
-$weaponarray = [
-    'Weapon,title',
-    'weaponid' => 'Weapon ID,hidden',
-    'level' => 'DK Level,int',
-    'weaponname' => 'Weapon Name',
-    'damage' => 'Damage,range,1,15,1'
-];
 $values = [1 => 48, 225, 585, 990, 1575, 2250, 2790, 3420, 4230, 5040, 5850, 6840, 8010, 9000, 10350];
 
 $op = (string) \LotgdHttp::getQuery('op');
@@ -42,12 +34,54 @@ if ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
-    $weapon = ['damage' => $repository->getNextDamageLevel($weaponlevel)];
-    $weapon = $repository->find($id);
-    $weapon = $repository->extractEntity($weapon);
-    $weapon['level'] = ($weapon['level'] >= 0) ? $weapon['level'] : $weaponlevel;
+    $weaponEntity = $repository->find($id);
+    $weaponEntity = $weaponEntity ?: new \Lotgd\Core\Entity\Weapons();
+    \Doctrine::detach($weaponEntity);
 
-    $params['form'] = lotgd_showform($weaponarray, $weapon, true, false, false);
+    if (!$id)
+    {
+        $weaponEntity->setLevel($weaponEntity->getLevel() ?: $weaponlevel);
+        $weaponEntity->setDamage($repository->getNextDamageLevel($weaponEntity->getLevel()));
+    }
+
+    $form = LotgdForm::create(Lotgd\Core\EntityForm\WeaponsType::class, $weaponEntity, [
+        'action' => "weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}",
+        'attr' => [
+            'autocomplete' => 'off'
+        ]
+    ]);
+
+    $form->handleRequest();
+
+    if ($form->isSubmitted() && $form->isValid())
+    {
+        $entity = $form->getData();
+        $entity->setValue($values[$entity->getDamage()]);
+
+        $method = $entity->getWeaponid() ? 'merge' : 'persist';
+
+        \Doctrine::{$method}($entity);
+        \Doctrine::flush();
+
+        $message = ($id) ? 'weapon.form.edit' : 'weapon.form.new';
+
+        $id = $entity->getWeaponid();
+        $weaponlevel = $entity->getLevel();
+
+        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->getWeaponname()], $textDomain));
+
+        //-- Redo form for change $level and set new data (generated IDs)
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\WeaponsType::class, $entity, [
+            'action' => "weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+    }
+
+    \LotgdNavigation::addNavAllow("weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}");
+
+    $params['form'] = $form->createView();
 }
 elseif ('del' == $op)
 {
@@ -58,22 +92,6 @@ elseif ('del' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.del.success', ['id' => $id], $textDomain));
         \Doctrine::remove($armor);
     }
-
-    $op = '';
-    \LotgdHttp::setQuery('op', $op);
-}
-elseif ('save' == $op)
-{
-    $post = \LotgdHttp::getPostAll();
-    $post['value'] = $values[$post['damage']];
-    $post['level'] = ($post['level'] >= 0) ? $post['level'] : $weaponlevel;
-
-    $weapon = $repository->find($post['weaponid']);
-    $weapon = $repository->hydrateEntity($post, $weapon);
-
-    \Doctrine::persist($weapon);
-
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('weapon.form.edit', ['name' => $post['weaponname']], $textDomain));
 
     $op = '';
     \LotgdHttp::setQuery('op', $op);

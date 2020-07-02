@@ -4,11 +4,11 @@
 
 <table class="ui very compact striped selectable table">
     <thead>
-        <th>{{ 'table.header.ops'|t|uncolorize }}</th>
-        <th>{{ 'table.header.name'|t|uncolorize }}</th>
-        <th>{{ 'table.header.cost'|t|uncolorize }}</th>
-        <th>{{ 'table.header.damage'|t|uncolorize }}</th>
-        <th>{{ 'table.header.level'|t|uncolorize }}</th>
+        <th scope="col">{{ 'table.header.ops'|t|uncolorize }}</th>
+        <th scope="col">{{ 'table.header.name'|t|uncolorize }}</th>
+        <th scope="col">{{ 'table.header.cost'|t|uncolorize }}</th>
+        <th scope="col">{{ 'table.header.damage'|t|uncolorize }}</th>
+        <th scope="col">{{ 'table.header.level'|t|uncolorize }}</th>
     </thead>
     <tbody>
         {% for weapon in weapons %}
