@@ -82,7 +82,7 @@ class ArmorRepository extends DoctrineRepository
     }
 
     /**
-     * Get a translated list for a level.,
+     * Get a translated list for a level.
      *
      * @param int $level
      *
@@ -95,6 +95,7 @@ class ArmorRepository extends DoctrineRepository
             $dql = 'SELECT a
                 FROM LotgdCore:Armor a
                 WHERE a.level = :lvl
+                ORDER BY a.defense ASC
             ';
 
             $query = $this->createTranslatebleQuery($dql);
