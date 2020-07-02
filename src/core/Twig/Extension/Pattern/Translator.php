@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Lotgd\Core\Template\Theme as Environment;
+
 /**
  * Trait to translator.
  */
@@ -26,14 +28,16 @@ trait Translator
      * @param string $domain
      * @param string $locale
      */
-    public function translate($message, $parameters = [], $domain = null, $locale = null): string
+    public function translate(Environment $env, $message, $parameters = [], $domain = null, $locale = null): string
     {
         if (! $message)
         {
             return '';
         }
 
-        return $this->getTranslator()->trans($message, $parameters, $domain, $locale);
+        $nl2br = $env->getFilter('nl2br')->getCallable();
+
+        return $nl2br($this->getTranslator()->trans($message, $parameters, $domain, $locale));
     }
 
     /**
@@ -43,14 +47,16 @@ trait Translator
      * @param array  $parameters
      * @param string $locale
      */
-    public function translateMf($message, $parameters = [], $locale = null): string
+    public function translateMf(Environment $env, $message, $parameters = [], $locale = null): string
     {
         if (! $message)
         {
             return '';
         }
 
-        return $this->getTranslator()->mf($message, $parameters, $locale);
+        $nl2br = $env->getFilter('nl2br')->getCallable();
+
+        return $nl2br($this->getTranslator()->mf($message, $parameters, $locale));
     }
 
     /**
@@ -60,14 +66,16 @@ trait Translator
      * @param string|null $domain
      * @param string|null $locale
      */
-    public function translateSt($message, $domain = null, $locale = null): string
+    public function translateSt(Environment $env, $message, $domain = null, $locale = null): string
     {
         if (! $message)
         {
             return '';
         }
 
-        return $this->getTranslator()->translate($message, $domain, $locale);
+        $nl2br = $env->getFilter('nl2br')->getCallable();
+
+        return $nl2br($this->getTranslator()->translate($message, $domain, $locale));
     }
 
     /**

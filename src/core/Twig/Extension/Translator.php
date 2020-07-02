@@ -64,21 +64,21 @@ class Translator extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('t', [$this, 'translate']),
-            new TwigFilter('trans', [$this, 'translate']),
+            new TwigFilter('t', [$this, 'translate'], ['needs_environment' => true]),
+            new TwigFilter('trans', [$this, 'translate'], ['needs_environment' => true]),
             /**
              * Use "tl" when you want to change domain to translate a text.
              * Only need if you use "translate_default_domain" in template.
              */
-            new TwigFilter('tl', [$this, 'translate']),
+            new TwigFilter('tl', [$this, 'translate'], ['needs_environment' => true]),
             /**
              * Use MessageFormatter to formater message.
              */
-            new TwigFilter('tmf', [$this, 'translateMf']),
+            new TwigFilter('tmf', [$this, 'translateMf'], ['needs_environment' => true]),
             /**
              * Only select a translation WITHOUT MessageFormatter.
              */
-            new TwigFilter('tst', [$this, 'translateSt']),
+            new TwigFilter('tst', [$this, 'translateSt'], ['needs_environment' => true]),
         ];
     }
 
