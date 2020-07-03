@@ -3,7 +3,10 @@
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.2",
     "config": {
         "process-timeout": 5000,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.2"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -23,7 +26,7 @@
         "composer/semver": "^1.5",
         "doctrine/doctrine-orm-module": "^2.1",
         "doctrine/orm": "^2.6",
-        "ezyang/htmlpurifier": "^4.10",
+        "ezyang/htmlpurifier": "^4.13",
         "gedmo/doctrine-extensions": "^2.4",
         "hellogerard/jobby": "^3.4",
         "jaxon-php/jaxon-core": "^2.2",
@@ -44,27 +47,27 @@
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-code": "^3.3",
         "zendframework/zend-config": "^3.3",
-        "zendframework/zend-config-aggregator": "1.1.*",
+        "zendframework/zend-config-aggregator": "^1.2",
         "zendframework/zend-db": "^2.10",
         "zendframework/zend-escaper": "^2.6",
         "zendframework/zend-filter": "^2.9",
         "zendframework/zend-form": "^2.14",
         "zendframework/zend-http": "^2.10",
         "zendframework/zend-hydrator": "^2.4",
-        "zendframework/zend-i18n": "^2.9",
-        "zendframework/zend-log": "^2.10",
+        "zendframework/zend-i18n": "^2.10",
+        "zendframework/zend-log": "^2.12",
         "zendframework/zend-mail": "^2.10",
         "zendframework/zend-math": "^3.2",
         "zendframework/zend-paginator": "^2.8",
         "zendframework/zend-serializer": "^2.9",
         "zendframework/zend-servicemanager": "^3.4",
-        "zendframework/zend-session": "^2.8",
+        "zendframework/zend-session": "^2.9",
         "zendframework/zend-stdlib": "^3.2",
         "zendframework/zend-view": "^2.11"
     },
     "require-dev": {
         "milo/vendor-versions": "^1.1",
-        "phan/phan": "^2.2"
+        "phan/phan": "^3.0"
     },
     "autoload": {
         "psr-4": {
