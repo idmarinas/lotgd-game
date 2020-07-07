@@ -13,7 +13,11 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Titles.
@@ -23,9 +27,10 @@ use Doctrine\ORM\Mapping as ORM;
  *         @ORM\Index(name="dk", columns={"dk"})
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\TitlesRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\TitlesTranslation")
  */
-class Titles
+class Titles implements Translatable
 {
     /**
      * @var int
@@ -53,16 +58,59 @@ class Titles
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="male", type="string", length=25, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=25,
+     *     allowEmptyString=false
+     * )
      */
     private $male;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="female", type="string", length=25, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=25,
+     *     allowEmptyString=false
+     * )
      */
     private $female;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TitlesTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getTitleid();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(TitlesTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Titleid.

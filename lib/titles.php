@@ -9,15 +9,14 @@ function valid_dk_title($title, $dks, $gender)
     $repository = \Doctrine::getRepository('LotgdCore:Titles');
     $query = $repository->createQueryBuilder('u');
 
-    $result = $query
+    $query
         ->where('u.dk <= :dk')
         ->orderBy('u.dk', 'DESC')
-
-        ->setParameter('dk', $dks)
-
-        ->getQuery()
-        ->getResult()
     ;
+
+    $query = $repository->createTranslatebleQuery($query);
+    $query->setParameter('dk', $dks);
+    $result = $query->getResult();
 
     $d = -1;
 
@@ -101,25 +100,26 @@ function get_dk_title($dks, $gender, $ref = false)
     $query = $repository->createQueryBuilder('u');
     $query->where('u.dk = :dk')
         ->orderBy('rand()')
-
-        ->setParameter('dk', $targetdk)
     ;
 
     if ($refdk >= $anydk)
     {
-        $query->andWhere('u.ref = :ref')
-            ->setParameter('dk', $ref)
-        ;
+        $query->andWhere('u.ref = :ref');
     }
 
-    $row = $query->getQuery()->getSingleResult();
+    $query = $repository->createTranslatebleQuery($query);
+    $query->setParameter('dk', $targetdk);
+
+    if ($refdk >= $anydk)
+    {
+        $query->setParameter('ref', $ref);
+    }
+
+    $row = $query->getResult()[0];
 
     if (! $row)
     {
-        $row = new \Lotgd\Core\Entity\Titles();
-        $row->setFemale('Goddess')
-            ->setMale('God')
-        ;
+        return '';
     }
 
     if (SEX_FEMALE == $gender)

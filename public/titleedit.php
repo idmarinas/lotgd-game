@@ -24,7 +24,7 @@ $editarray = [
     'female' => 'Female Title,text|',
 ];
 
-addnav('Other');
+\LotgdNavigation::addNav('titleedit.category.other');
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -32,17 +32,7 @@ $repository = \Doctrine::getRepository('LotgdCore:Titles');
 
 \LotgdNavigation::addHeader('titleedit.category.functions');
 
-if ('save' == $op)
-{
-    $post = \LotgdHttp::getPostAll();
-    $entity = $repository->find($id);
-    $entity = $repository->hydrateEntity($post, $entity);
-
-    \Doctrine::persist($entity);
-
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.edit.save.success', [], $textDomain));
-}
-elseif ('delete' == $op)
+if ('delete' == $op)
 {
     $entity = $repository->find($id);
 
@@ -134,21 +124,47 @@ switch ($op)
         $params['tpl'] = 'edit';
         $params['id'] = $id;
 
-        require_once 'lib/showform.php';
+        $entity = $repository->find($id);
+        $entity = $entity ?: new \Lotgd\Core\Entity\Titles();
+        \Doctrine::detach($entity);
+
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+            'action' => "titleedit.php?op=edit&id={$id}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+
+        $form->handleRequest();
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entity = $form->getData();
+            $method = $entity->getTitleid() ? 'merge' : 'persist';
+
+            \Doctrine::{$method}($entity);
+            \Doctrine::flush();
+
+            $id = $entity->getTitleid();
+
+            \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.edit.save.success', [], $textDomain));
+
+            //-- Redo form for change $id and set new data (generated IDs)
+            $form = LotgdForm::create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+                'action' => "titleedit.php?op=edit&id={$id}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
+        }
+
+        //-- In this position can updated $id var
+        \LotgdNavigation::addNavAllow("titleedit.php?op=edit&id={$id}");
 
         \LotgdNavigation::addHeader('titleedit.category.functions');
         \LotgdNavigation::addNav('titleedit.nav.main', 'titleedit.php');
 
-        $row = ['titleid' => 0, 'male' => '', 'female' => '', 'dk' => 0];
-
-        if ('edit' == $op)
-        {
-            $result = $repository->extractEntity($repository->find($id));
-
-            $row = array_merge($row, $result);
-        }
-
-        $params['form'] = lotgd_showform($editarray, $row, false, false, false);
+        $params['form'] = $form->createView();
     break;
 
     default:
@@ -161,6 +177,6 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/titleedit.twig', $params));
+require_once 'lib/titles.php';
 
 page_footer();

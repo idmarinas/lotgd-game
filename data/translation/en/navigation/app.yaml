@@ -315,6 +315,7 @@ stats:
 titleedit:
     category:
         functions: Functions
+        other: Other
     nav:
         add: 'Add a Title'
         refresh: 'Refresh List'
