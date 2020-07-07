@@ -80,26 +80,7 @@ elseif ('save' == $op)
 {
     $subop = (string) \LotgdHttp::getQuery('subop');
 
-    if ('' == $subop)
-    {
-        $buff = [];
-        $mount = LotgdHttp::getPost('mount');
-
-        if ($mount)
-        {
-            $mount['mountbuff']['schema'] = 'mounts';
-
-            $mountEntity = $repository->find($mountId);
-            $mountEntity = $repository->hydrateEntity($mount, $mountEntity);
-
-            \Doctrine::persist($mountEntity);
-
-            LotgdCache::removeItem("mountdata-$mountId");
-
-            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-        }
-    }
-    elseif ('module' == $subop)
+    if ('module' == $subop)
     {
         // Save modules settings
         $module = (string) \LotgdHttp::getQuery('module');
@@ -127,28 +108,7 @@ if ('' == $op)
 
     $params['mounts'] = $repository->getList();
 }
-elseif ('add' == $op)
-{
-    \LotgdNavigation::addNav('mounts.nav.editor', 'mounts.php');
-
-    $params['tpl'] = 'edit';
-    $params['mount'] = [];
-
-    // Run a modulehook to find out where stables are located.  By default
-    // they are located in 'Degolburg' (ie, getgamesetting('villagename'));
-    // Some later module can remove them however.
-    $vname = getsetting('villagename', LOCATION_FIELDS);
-    $locs = modulehook('stablelocs', [
-        $vname => \LotgdTranslator::t('section.edit.form.select.option.village', [ 'village' => $vname ], $textDomain)
-    ]);
-    $locs['all'] = \LotgdTranslator::t('section.edit.form.select.option.all', [], $textDomain);
-
-    ksort($locs);
-    reset($locs);
-
-    $params['stableLocs'] = $locs;
-}
-elseif ('edit' == $op)
+elseif ('edit' == $op || 'add' == $op)
 {
     \LotgdNavigation::addNav('mounts.nav.editor', 'mounts.php');
 
@@ -161,7 +121,7 @@ elseif ('edit' == $op)
         return redirect('mount.php');
     }
 
-    \LotgdNavigation::addNav('mounts.nav.mount.properties', "mounts.php?op=edit&id=$mountId");
+    \LotgdNavigation::addNav('mounts.nav.properties', "mounts.php?op=edit&id=$mountId");
     module_editor_navs('prefs-mounts', "mounts.php?op=edit&subop=module&id=$mountId&module=");
     $subop = \LotgdHttp::getQuery('subop');
 
@@ -178,7 +138,46 @@ elseif ('edit' == $op)
     else
     {
         $params['tpl'] = 'edit';
-        $params['mount'] = $repository->extractEntity($entity);
+
+        $entity = $entity ?: new \Lotgd\Core\Entity\Mounts();
+        \Doctrine::detach($entity);
+
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
+            'action' => "mounts.php?op=edit&id={$mountId}",
+            'attr' => [
+                'autocomplete' => 'off'
+            ]
+        ]);
+
+        $form->handleRequest();
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entity = $form->getData();
+            $method = $entity->getMountid() ? 'merge' : 'persist';
+
+            \Doctrine::{$method}($entity);
+            \Doctrine::flush();
+
+            $mountId = $entity->getMountid();
+
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+
+            //-- Redo form for change $mountId and set new data (generated IDs)
+            $form = LotgdForm::create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
+                'action' => "mounts.php?op=edit&id={$mountId}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
+
+            LotgdCache::removeItem("mountdata-$mountId");
+        }
+
+        //-- In this position can updated $mountId var
+        \LotgdNavigation::addNavAllow("mounts.php?op=edit&id={$mountId}");
+
+        $params['form'] = $form->createView();
     }
 }
 

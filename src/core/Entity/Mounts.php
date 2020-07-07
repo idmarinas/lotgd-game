@@ -13,15 +13,20 @@
 
 namespace Lotgd\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mounts.
  *
  * @ORM\Table(name="mounts")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\MountsRepository")
+ * @Gedmo\TranslationEntity(class="Lotgd\Core\Entity\MountsTranslation")
  */
-class Mounts
+class Mounts implements Translatable
 {
     /**
      * @var int
@@ -35,21 +40,42 @@ class Mounts
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="mountname", type="string", length=50, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=50,
+     *     allowEmptyString=false
+     * )
      */
     private $mountname;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="mountdesc", type="text", length=65535, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535,
+     *     allowEmptyString=false
+     * )
      */
     private $mountdesc;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="mountcategory", type="string", length=50, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=50,
+     *     allowEmptyString=false
+     * )
      */
     private $mountcategory;
 
@@ -64,6 +90,12 @@ class Mounts
      * @var int
      *
      * @ORM\Column(name="mountcostgems", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $mountcostgems = 0;
 
@@ -71,41 +103,74 @@ class Mounts
      * @var int
      *
      * @ORM\Column(name="mountcostgold", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $mountcostgold = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="mountactive", type="integer", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="mountactive", type="boolean", nullable=false, options={"unsigned": true, "default": "1"})
      */
-    private $mountactive = 1;
+    private $mountactive = true;
 
     /**
      * @var int
      *
      * @ORM\Column(name="mountforestfights", type="integer", nullable=false, options={"default": "0"})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $mountforestfights = 0;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="newday", type="text", length=65535, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535,
+     *     allowEmptyString=false
+     * )
      */
     private $newday;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="recharge", type="text", length=65535, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535,
+     *     allowEmptyString=false
+     * )
      */
     private $recharge;
 
     /**
      * @var string
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="partrecharge", type="text", length=65535, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535,
+     *     allowEmptyString=false
+     * )
      */
     private $partrecharge;
 
@@ -113,6 +178,12 @@ class Mounts
      * @var int
      *
      * @ORM\Column(name="mountfeedcost", type="integer", nullable=false, options={"unsigned": true, "default": "20"})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $mountfeedcost = 20;
 
@@ -127,8 +198,43 @@ class Mounts
      * @var int
      *
      * @ORM\Column(name="mountdkcost", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $mountdkcost = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MountsTranslation", mappedBy="object", cascade={"all"})
+     */
+    private $translations;
+
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getMountid();
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    public function addTranslation(MountsTranslation $t)
+    {
+        if (! $this->translations->contains($t))
+        {
+            $t->setObject($this);
+            $this->translations->add($t);
+        }
+    }
 
     /**
      * Set the value of Mountid.
@@ -146,8 +252,6 @@ class Mounts
 
     /**
      * Get the value of Mountid.
-     *
-     * @return int
      */
     public function getMountid(): int
     {
@@ -170,8 +274,6 @@ class Mounts
 
     /**
      * Get the value of Mountname.
-     *
-     * @return string
      */
     public function getMountname(): string
     {
@@ -194,8 +296,6 @@ class Mounts
 
     /**
      * Get the value of Mountdesc.
-     *
-     * @return string
      */
     public function getMountdesc(): string
     {
@@ -218,8 +318,6 @@ class Mounts
 
     /**
      * Get the value of Mountcategory.
-     *
-     * @return string
      */
     public function getMountcategory(): string
     {
@@ -242,11 +340,14 @@ class Mounts
 
     /**
      * Get the value of Mountbuff.
-     *
-     * @return array
      */
     public function getMountbuff(): array
     {
+        if (is_string($this->mountbuff))
+        {
+            $this->mountbuff = unserialize($this->mountbuff);
+        }
+
         return $this->mountbuff;
     }
 
@@ -266,8 +367,6 @@ class Mounts
 
     /**
      * Get the value of Mountcostgems.
-     *
-     * @return int
      */
     public function getMountcostgems(): int
     {
@@ -290,8 +389,6 @@ class Mounts
 
     /**
      * Get the value of Mountcostgold.
-     *
-     * @return int
      */
     public function getMountcostgold(): int
     {
@@ -301,11 +398,11 @@ class Mounts
     /**
      * Set the value of Mountactive.
      *
-     * @param int mountactive
+     * @param bool mountactive
      *
      * @return self
      */
-    public function setMountactive($mountactive)
+    public function setMountactive(bool $mountactive)
     {
         $this->mountactive = $mountactive;
 
@@ -314,10 +411,8 @@ class Mounts
 
     /**
      * Get the value of Mountactive.
-     *
-     * @return int
      */
-    public function getMountactive(): int
+    public function getMountactive(): bool
     {
         return $this->mountactive;
     }
@@ -338,8 +433,6 @@ class Mounts
 
     /**
      * Get the value of Mountforestfights.
-     *
-     * @return int
      */
     public function getMountforestfights(): int
     {
@@ -362,8 +455,6 @@ class Mounts
 
     /**
      * Get the value of Newday.
-     *
-     * @return string
      */
     public function getNewday(): string
     {
@@ -386,8 +477,6 @@ class Mounts
 
     /**
      * Get the value of Recharge.
-     *
-     * @return string
      */
     public function getRecharge(): string
     {
@@ -410,8 +499,6 @@ class Mounts
 
     /**
      * Get the value of Partrecharge.
-     *
-     * @return string
      */
     public function getPartrecharge(): string
     {
@@ -434,8 +521,6 @@ class Mounts
 
     /**
      * Get the value of Mountfeedcost.
-     *
-     * @return int
      */
     public function getMountfeedcost(): int
     {
@@ -458,8 +543,6 @@ class Mounts
 
     /**
      * Get the value of Mountlocation.
-     *
-     * @return string
      */
     public function getMountlocation(): string
     {
@@ -482,8 +565,6 @@ class Mounts
 
     /**
      * Get the value of Mountdkcost.
-     *
-     * @return int
      */
     public function getMountdkcost(): int
     {

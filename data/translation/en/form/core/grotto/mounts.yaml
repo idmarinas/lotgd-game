@@ -1,0 +1,16 @@
+mountactive: Is mount active?
+mountname: Mount Name
+mountdesc: Mount Description
+mountcategory: Mount Category
+mountlocation: Mount Availability
+mountdkcost: Mount Cost (DKs)
+mountcostgems: Mount Cost (Gems)
+mountcostgold: Mount Cost (Gold)
+mountfeedcost: Mount Feed Cost (Gold per level)
+mountforestfights: Delta Forest Fights
+newday: New Day
+recharge: Full Recharge
+partrecharge: Partial Recharge
+mountbuff: Mount Buff
+
+save.button: Save Mount
