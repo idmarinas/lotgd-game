@@ -36,7 +36,8 @@
     -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
 -   Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente cono el sistema de combate nuevo.
     -   Se simplifica la forma en la que se calcula las estadísticas del perosnaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
--   Pasar jaxon-php a una factoria, y eliminar el lib/jaxon.php
+-   Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
+    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 
 ## Puede ser complicado
 -   Usar el zend-http component, para generar la respuesta del servidor (sustituir page_header y page_footer) y revisar también popup_header y popup_footer
