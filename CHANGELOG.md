@@ -56,6 +56,24 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   `description`
             -   `jointext`
             -   `dyingtext`
+    -   **src/core/Entity/Armors.php**
+        -   The following fields can now be translated
+            -   `name`
+    -   **src/core/Entity/Weapons.php**
+        -   The following fields can now be translated
+            -   `name`
+    -   **src/core/Entity/Mounts.php**
+        -   The following fields can now be translated
+            -   `mountname`
+            -   `mountdesc`
+            -   `mountcategory`
+            -   `newday`
+            -   `reacharge`
+            -   `partrecharge`
+    -   **src/core/Entity/Titles.php**
+        -   The following fields can now be translated
+            -   `male`
+            -   `female`
 
 -   **THEME**
     -   Updated Fomantic UI version: 2.8.3 => 2.8.6
@@ -84,6 +102,9 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **public/graveyard.php** Fixed errors
     -   Now show navs when finish battle
     -   Hide menu of search when not have soulpoints/hitpoints
+-   **src/core/EntityRepository/ArmorRepository.php** and **src/core/EntityRepository/WeaponsRepository.php**
+    -   Fixed error with get max level of armor/weapon to show (Always get it max level) according to DragonKills of character.
+        -   This is in shop of armor and weapons
 
 ### :x: REMOVES
 
