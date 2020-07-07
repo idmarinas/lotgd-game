@@ -29,16 +29,17 @@ class MountsRepository extends DoctrineRepository
 
         try
         {
-            return $query->select('u.mountid', 'u.mountname', 'u.mountactive', 'u.mountcategory', 'u.mountforestfights', 'u.mountdkcost', 'u.mountcostgems', 'u.mountcostgold')
+            $query->select('u.mountid', 'u.mountname', 'u.mountactive', 'u.mountcategory', 'u.mountforestfights', 'u.mountdkcost', 'u.mountcostgems', 'u.mountcostgold')
                 ->addSelect('count(c.hashorse) AS owners')
 
                 ->leftJoin('LotgdCore:Characters', 'c', 'WITH', $query->expr()->eq('c.hashorse', 'u.mountid'))
 
                 ->groupBy('u.mountid')
-
-                ->getQuery()
-                ->getResult()
             ;
+
+            $query = $this->createTranslatebleQuery($query);
+
+            return $query->getResult();
         }
         catch (\Throwable $th)
         {
@@ -90,25 +91,82 @@ class MountsRepository extends DoctrineRepository
 
         try
         {
-            return $query
+            $query
                 ->where('u.mountactive = 1')
                 ->andWhere('u.mountlocation = :all OR u.mountlocation = :loc')
 
                 ->orderBy('u.mountcategory', 'ASC')
                 ->addOrderBy('u.mountcostgems', 'ASC')
                 ->addOrderBy('u.mountcostgold', 'ASC')
-
-                ->setParameter('all', 'all')
-                ->setParameter('loc', $location)
-                ->getQuery()
-                ->getResult()
             ;
+
+            $query = $this->createTranslatebleQuery($query);
+            $query->setParameter('all', 'all')
+                ->setParameter('loc', $location);
+
+            return $query->getResult();
         }
         catch (\Throwable $th)
         {
             Debugger::log($th);
 
             return [];
+        }
+    }
+
+    /**
+     * Find one mount by id.
+     * Mount is translated.
+     *
+     * @return array|null
+     */
+    public function findOneMountById(int $id)
+    {
+        try
+        {
+            $dql = "SELECT a
+                FROM {$this->_entityName} a
+                WHERE a.mountid = :id
+            ";
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $id);
+
+            return $query->getArrayResult()[0];
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
+        }
+    }
+
+    /**
+     * Get an array of mounts by ids.
+     * Mounts is translated.
+     *
+     * @return array|null
+     */
+    public function findMountsById(array $ids)
+    {
+        try
+        {
+            $dql = "SELECT a
+                FROM {$this->_entityName} a
+                WHERE a.mountid IN (:id)
+            ";
+
+            $query = $this->createTranslatebleQuery($dql);
+            $query->setParameter('id', $ids);
+
+            return $query->getArrayResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return null;
         }
     }
 }
