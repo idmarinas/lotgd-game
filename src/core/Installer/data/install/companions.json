@@ -14,7 +14,12 @@
             "defenseperlevel": 2,
             "maxhitpoints": 20,
             "maxhitpointsperlevel": 20,
-            "abilities": "a:4:{s:5:\"fight\";s:1:\"1\";s:4:\"heal\";s:1:\"0\";s:5:\"magic\";s:1:\"0\";s:6:\"defend\";b:0;}",
+            "abilities": {
+                "fight": 1,
+                "heal": 0,
+                "magic": 0,
+                "defend": 0
+            },
             "cannotdie": 0,
             "cannotbehealed": 0,
             "companionlocation": "Degolburg",
@@ -38,7 +43,12 @@
             "defenseperlevel": 5,
             "maxhitpoints": 15,
             "maxhitpointsperlevel": 10,
-            "abilities": "a:4:{s:4:\"heal\";s:1:\"2\";s:5:\"magic\";s:1:\"0\";s:5:\"fight\";b:0;s:6:\"defend\";b:0;}",
+            "abilities": {
+                "heal": 2,
+                "magic": 0,
+                "fight": 0,
+                "defend": 0
+            },
             "cannotdie": 0,
             "cannotbehealed": 0,
             "companionlocation": "Degolburg",
@@ -62,7 +72,12 @@
             "defenseperlevel": 2,
             "maxhitpoints": 25,
             "maxhitpointsperlevel": 25,
-            "abilities": "a:4:{s:5:\"fight\";s:1:\"0\";s:4:\"heal\";s:1:\"0\";s:5:\"magic\";s:1:\"0\";s:6:\"defend\";s:1:\"1\";}",
+            "abilities": {
+                "fight": 0,
+                "heal": 0,
+                "magic": 0,
+                "defend": 1
+            },
             "cannotdie": 0,
             "cannotbehealed": 0,
             "companionlocation": "Qexelcrag",
