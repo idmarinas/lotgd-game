@@ -26,6 +26,9 @@
         <ignore>.phan/*</ignore>
         <ignore>.vscore/*</ignore>
         <ignore>assets/*</ignore>
+        <ignore>data/template/*</ignore>
+        <ignore>data/translation/*</ignore>
+        <ignore>dist/*</ignore>
         <ignore>docs/*</ignore>
         <ignore>error_docs/*</ignore>
         <ignore>gulp/*</ignore>
