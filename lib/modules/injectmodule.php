@@ -23,8 +23,15 @@ function injectmodule($modulename, $force = false)
 
     if (file_exists($modulefilename))
     {
-        $repository = \Doctrine::getRepository('LotgdCore:Modules');
-        $row = $repository->find($modulename);
+        try
+        {
+            $repository = \Doctrine::getRepository('LotgdCore:Modules');
+            $row = $repository->find($modulename);
+        }
+        catch (\Exception $ex)
+        {
+            $row = null;
+        }
 
         if (! $force)
         {
@@ -39,7 +46,7 @@ function injectmodule($modulename, $force = false)
                 return false;
             }
 
-            if (! $row->getActive())
+            if ($row && ! $row->getActive())
             {
                 \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', [ 'module' => $modulename ], 'app-default'));
 

@@ -99,21 +99,14 @@ function is_module_installed($modulename, $version = false)
  */
 function get_module_install_status(): array
 {
-    if (! \Doctrine::isConnected())
-    {
-        return [
-            'installedcategories' => [],
-            'installedmodules' => [],
-            'deactivedmodules' => [],
-            'activedmodules' => [],
-            'uninstalledmodules' => [],
-            'uninstcount' => []
-        ];
-    }
+    $result = null;
 
-    // Collect the names of all installed modules.
-    $repository = \Doctrine::getRepository('LotgdCore:Modules');
-    $result = $repository->findAll();
+    if (\Doctrine::isConnected())
+    {
+        // Collect the names of all installed modules.
+        $repository = \Doctrine::getRepository('LotgdCore:Modules');
+        $result = $repository->findAll();
+    }
 
     $installedModules = [];
     $installedCategories = [];
