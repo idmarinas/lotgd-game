@@ -106,9 +106,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Fixed error with get max level of armor/weapon to show (Always get it max level) according to DragonKills of character.
         -   This is in shop of armor and weapons
 -   **Fixed error in new installation**
-    -   **src/core/Installer/data/install/companions.json**
-    -   **src/core/Installer/data/install/mounts.json**
     -   Now save correct data when data is an array.
+        -   **src/core/Installer/data/install/companions.json**
+        -   **src/core/Installer/data/install/mounts.json**
+    -   Now show all modules that are uninstalled in clean install.
+-   Fixed error when need set race and not are races installed.
 
 ### :x: REMOVES
 
