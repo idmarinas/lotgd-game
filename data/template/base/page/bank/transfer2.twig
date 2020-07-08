@@ -17,7 +17,7 @@
     </form>
 {% elseif count > 1 %}
     {% if count == 100 %}
-        {{ 'transfer2.results.toMuch'|t|colorize }}
+        {{ 'transfer2.results.toMuch'|t({'ownerName': ownerName})|colorize }}
     {% endif %}
     <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
         <input type="hidden" name="amount" value="{{ amount }}">

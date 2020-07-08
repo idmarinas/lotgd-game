@@ -2,7 +2,7 @@
 
 {% if user.goldinbank >= 0 %}
     {{ 'transfer.subtitle'|t|colorize }}
-    {{ 'transfer.paragraph'|t({'transferPerLevel': transferPerLevel, 'maxTransfer': maxTransfer})|colorize }}
+    {{ 'transfer.paragraph'|t({'transferPerLevel': transferPerLevel, 'maxTransfer': maxTransfer, 'ownerName': ownerName})|colorize }}
 
     {% if user.amountouttoday > 0 %}
         {{ 'transfer.transferred'|t({'transferred': user.amountouttoday})|colorize }}

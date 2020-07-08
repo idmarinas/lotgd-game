@@ -1,9 +1,9 @@
 {% translate_default_domain textDomain %}
 
 {% if user.goldinbank >= 0 %}
-    {{ 'withdraw.balance.positive'|t({ 'gold': user.goldinbank })|colorize }}
+    {{ 'withdraw.balance.positive'|t({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
 {% else %}
-    {{ 'withdraw.balance.negative'|t({ 'gold': user.goldinbank|abs })|colorize }}
+    {{ 'withdraw.balance.negative'|t({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
 {% endif %}
 
 {{ 'withdraw.paragraph'|t({ 'name': user.name })|colorize }}

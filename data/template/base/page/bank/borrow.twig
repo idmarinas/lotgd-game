@@ -1,9 +1,9 @@
 {% translate_default_domain textDomain %}
 
 {% if user.goldinbank >= 0 %}
-    {{ 'borrow.balance.positive'|t({ 'gold': user.goldinbank })|colorize }}
+    {{ 'borrow.balance.positive'|t({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
 {% else %}
-    {{ 'borrow.balance.negative'|t({ 'gold': user.goldinbank|abs })|colorize }}
+    {{ 'borrow.balance.negative'|t({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
 {% endif %}
 
 {{ 'borrow.paragraph'|t({ 'name': user.name, 'n': maxborrow })|colorize }}
