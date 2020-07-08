@@ -105,6 +105,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **src/core/EntityRepository/ArmorRepository.php** and **src/core/EntityRepository/WeaponsRepository.php**
     -   Fixed error with get max level of armor/weapon to show (Always get it max level) according to DragonKills of character.
         -   This is in shop of armor and weapons
+-   **Fixed error in new installation**
+    -   **src/core/Installer/data/install/companions.json**
+    -   **src/core/Installer/data/install/mounts.json**
+    -   Now save correct data when data is an array.
 
 ### :x: REMOVES
 
