@@ -199,8 +199,6 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
  */
 function module_wipehooks(string $module)
 {
-    global $mostrecentmodule;
-
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
     $result = $repository->findBy(['modulename' => $module]);
 
@@ -209,7 +207,7 @@ function module_wipehooks(string $module)
     foreach ($result as $row)
     {
         \Doctrine::remove($row);
-        LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
+        \LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
