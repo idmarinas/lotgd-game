@@ -115,7 +115,7 @@ class Mounts implements Translatable
     /**
      * @var int
      *
-     * @ORM\Column(name="mountactive", type="boolean", nullable=false, options={"unsigned": true, "default": "1"})
+     * @ORM\Column(name="mountactive", type="boolean", nullable=false, options={"default": "1"})
      */
     private $mountactive = true;
 
