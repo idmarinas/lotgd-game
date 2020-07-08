@@ -61,7 +61,7 @@ modal:
 # Character info
 character:
     # Name for default race
-    racename: 'Horrible Gelatinous Blob'
+    racename: 'Humanoid'
     # Name for specialty
     specialtyname: 'Unspecified'
     mount: '`iNone´i'
