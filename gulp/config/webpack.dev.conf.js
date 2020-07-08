@@ -1,10 +1,10 @@
 //-- Dependencies
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var FriendlyErrors = require('friendly-errors-webpack-plugin')
+const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const FriendlyErrors = require('friendly-errors-webpack-plugin')
 
 //-- Configuration
-var baseWebpackConfig = require('./webpack.base.conf')
+const baseWebpackConfig = require('./webpack.base.conf')
 
 module.exports = merge(baseWebpackConfig, {
     mode: 'development',
