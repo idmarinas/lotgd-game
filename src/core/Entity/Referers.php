@@ -95,8 +95,6 @@ class Referers
 
     /**
      * Get the value of Refererid.
-     *
-     * @return int
      */
     public function getRefererid(): int
     {
@@ -119,8 +117,6 @@ class Referers
 
     /**
      * Get the value of Uri.
-     *
-     * @return string
      */
     public function getUri(): string
     {
@@ -143,8 +139,6 @@ class Referers
 
     /**
      * Get the value of Count.
-     *
-     * @return int
      */
     public function getCount(): int
     {
@@ -179,8 +173,6 @@ class Referers
 
     /**
      * Get the value of Last.
-     *
-     * @return \DateTime
      */
     public function getLast(): \DateTime
     {
@@ -203,8 +195,6 @@ class Referers
 
     /**
      * Get the value of Site.
-     *
-     * @return string
      */
     public function getSite(): string
     {
@@ -227,8 +217,6 @@ class Referers
 
     /**
      * Get the value of Dest.
-     *
-     * @return string
      */
     public function getDest(): string
     {
@@ -251,8 +239,6 @@ class Referers
 
     /**
      * Get the value of Ip.
-     *
-     * @return string
      */
     public function getIp(): string
     {
