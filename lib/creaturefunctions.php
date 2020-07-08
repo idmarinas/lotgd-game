@@ -194,7 +194,7 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
         $query->groupBy('u.creaturecategory')->addGroupBy('u.creatureid');
     }
 
-    $query = $repository->createTranslatebleCreatureQuery($query);
+    $query = $repository->createTranslatebleQuery($query);
     $query->setMaxResults($limit);
 
     $creatures = $query->getArrayResult();
