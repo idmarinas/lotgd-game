@@ -31,7 +31,7 @@ class ModuleEventHooks
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=20, nullable=false)
+     * @ORM\Column(name="event_type", type="string", length=20, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
