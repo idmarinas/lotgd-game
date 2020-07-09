@@ -32,6 +32,11 @@ class Doctrine
     {
         if (\method_exists(self::$wrapper, $method))
         {
+            if (!self::$wrapper->isOpen())
+            {
+                self::$wrapper = self::$wrapper->create(self::$wrapper->getConnection(), self::$wrapper->getConfiguration());
+            }
+
             return self::$wrapper->{$method}(...$arguments);
         }
 
