@@ -32,7 +32,7 @@
         {% for creature in paginator %}
             <tr>
                 <td class="collapsing">
-                    <div class="ui mini buttons">
+                    <div class="ui mini icon buttons">
                         <a data-tooltip="{{ edit|uncolorize }}" aria-label="{{ edit|uncolorize }}" href="{{ ('creatures.php?op=edit&creatureid=' ~ creature.creatureid)|lotgd_url }}" class="ui icon button">
                             <i class='write icon'></i>
                         </a>
