@@ -48,7 +48,7 @@ else
         ->where('u.creaturelevel = :level')
         ->orderBy('rand()')
     ;
-    $query = $repository->createTranslatebleMasterQuery($master);
+    $query = $repository->createTranslatebleQuery($master);
     $query
         ->setMaxResults(1)
         ->setParameter('level', $session['user']['level'])
