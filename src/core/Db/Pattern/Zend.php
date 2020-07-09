@@ -134,8 +134,6 @@ trait Zend
      * Generate a paginator query.
      *
      * @param Select $select
-     * @param int    $page
-     * @param int    $perpage
      *
      * @return object|Paginator
      */
@@ -175,8 +173,6 @@ trait Zend
      * Quote value for safe using in DB.
      *
      * @param string $value
-     *
-     * @return string
      */
     public function quoteValue($value): string
     {

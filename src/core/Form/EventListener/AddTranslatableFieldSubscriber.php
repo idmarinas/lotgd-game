@@ -75,7 +75,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             $translation->setObject($entity);
 
             //Delete the Personal Translation if its empty
-            if (!$translation->getContent() && $this->options['remove_empty'])
+            if (! $translation->getContent() && $this->options['remove_empty'])
             {
                 $data->removeElement($translation);
 
@@ -120,6 +120,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             $content = $binded['translation']->getContent() ?: $original;
 
             $binded['translation']->setContent($content);
+
             if (method_exists($data, 'getOwner'))
             {
                 $binded['translation']->setObject($data->getOwner());

@@ -73,8 +73,6 @@ class Pollresults
 
     /**
      * Get the value of Resultid.
-     *
-     * @return int
      */
     public function getResultid(): int
     {
@@ -97,8 +95,6 @@ class Pollresults
 
     /**
      * Get the value of Choice.
-     *
-     * @return int
      */
     public function getChoice(): int
     {
@@ -121,8 +117,6 @@ class Pollresults
 
     /**
      * Get the value of Account.
-     *
-     * @return int
      */
     public function getAccount(): int
     {
@@ -145,8 +139,6 @@ class Pollresults
 
     /**
      * Get the value of Motditem.
-     *
-     * @return int
      */
     public function getMotditem(): int
     {

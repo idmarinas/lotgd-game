@@ -87,8 +87,6 @@ class Gamelog
 
     /**
      * Get the value of Logid.
-     *
-     * @return int
      */
     public function getLogid(): int
     {
@@ -111,8 +109,6 @@ class Gamelog
 
     /**
      * Get the value of Message.
-     *
-     * @return string
      */
     public function getMessage(): string
     {
@@ -135,8 +131,6 @@ class Gamelog
 
     /**
      * Get the value of Category.
-     *
-     * @return string
      */
     public function getCategory(): string
     {
@@ -159,8 +153,6 @@ class Gamelog
 
     /**
      * Get the value of Filed.
-     *
-     * @return bool
      */
     public function getFiled(): bool
     {
@@ -183,8 +175,6 @@ class Gamelog
 
     /**
      * Get the value of Date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {
@@ -207,8 +197,6 @@ class Gamelog
 
     /**
      * Get the value of Who.
-     *
-     * @return int
      */
     public function getWho(): int
     {

@@ -8,8 +8,8 @@
 
 namespace Lotgd\Core\Factory\Lib;
 
-use Lotgd\Core\Lib\Settings as LibSettings;
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Lib\Settings as LibSettings;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

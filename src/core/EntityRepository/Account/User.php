@@ -24,8 +24,6 @@ trait User
     /**
      * Get prefs of account.
      *
-     * @param int $acctId
-     *
      * @return array
      */
     public function getAcctPrefs(int $acctId)
@@ -54,10 +52,6 @@ trait User
 
     /**
      * Search users.
-     *
-     * @param string $search
-     * @param string $order
-     * @param int    $page
      *
      * @return Paginator|null
      */

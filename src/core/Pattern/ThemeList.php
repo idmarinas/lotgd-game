@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\Template\Theme as ThemeCore;
-
 trait ThemeList
 {
     use Cache;
@@ -22,8 +20,6 @@ trait ThemeList
 
     /**
      * Get list array.
-     *
-     * @return array
      */
     public function getThemeList(): array
     {
@@ -31,9 +27,9 @@ trait ThemeList
         $cache = $this->getCache();
 
         $skins = $cache->getItem($cacheKey);
+
         if (! is_array($skins))
         {
-
             // A generic way of allowing a theme to be selected.
             $handle = @opendir('data/template');
 
@@ -44,6 +40,7 @@ trait ThemeList
             }
 
             $skins = [];
+
             while (false !== ($file = @readdir($handle)))
             {
                 if ('html' == pathinfo($file, PATHINFO_EXTENSION))

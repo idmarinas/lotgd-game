@@ -34,8 +34,6 @@ trait DbTool
 
     /**
      * Check connection to DB.
-     *
-     * @return bool
      */
     public function connect(): bool
     {

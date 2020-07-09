@@ -23,8 +23,6 @@ trait Backup
     /**
      * Get all news of account.
      *
-     * @param int $accountId
-     *
      * @return array
      */
     public function backupGetDataFromAccount(int $accountId): array
@@ -51,8 +49,6 @@ trait Backup
 
     /**
      * Delete news of account.
-     *
-     * @param int $accountId
      *
      * @return int
      */

@@ -275,8 +275,6 @@ class Accounts
 
     /**
      * Get the value of Acctid.
-     *
-     * @return int
      */
     public function getAcctid(): int
     {
@@ -323,8 +321,6 @@ class Accounts
 
     /**
      * Get the value of Laston.
-     *
-     * @return \DateTime
      */
     public function getLaston(): \DateTime
     {
@@ -347,8 +343,6 @@ class Accounts
 
     /**
      * Get the value of Password.
-     *
-     * @return string
      */
     public function getPassword(): string
     {
@@ -371,8 +365,6 @@ class Accounts
 
     /**
      * Get the value of Loggedin.
-     *
-     * @return bool
      */
     public function getLoggedin(): bool
     {
@@ -395,8 +387,6 @@ class Accounts
 
     /**
      * Get the value of Superuser.
-     *
-     * @return int
      */
     public function getSuperuser(): int
     {
@@ -419,8 +409,6 @@ class Accounts
 
     /**
      * Get the value of Login.
-     *
-     * @return string
      */
     public function getLogin(): string
     {
@@ -443,8 +431,6 @@ class Accounts
 
     /**
      * Get the value of Lastmotd.
-     *
-     * @return \DateTime
      */
     public function getLastmotd(): \DateTime
     {
@@ -467,8 +453,6 @@ class Accounts
 
     /**
      * Get the value of Locked.
-     *
-     * @return bool
      */
     public function getLocked(): bool
     {
@@ -491,8 +475,6 @@ class Accounts
 
     /**
      * Get the value of Lastip.
-     *
-     * @return string
      */
     public function getLastip(): string
     {
@@ -515,8 +497,6 @@ class Accounts
 
     /**
      * Get the value of Uniqueid.
-     *
-     * @return string
      */
     public function getUniqueid(): string
     {
@@ -539,8 +519,6 @@ class Accounts
 
     /**
      * Get the value of Boughtroomtoday.
-     *
-     * @return bool
      */
     public function getBoughtroomtoday(): bool
     {
@@ -563,8 +541,6 @@ class Accounts
 
     /**
      * Get the value of Emailaddress.
-     *
-     * @return string
      */
     public function getEmailaddress(): string
     {
@@ -587,8 +563,6 @@ class Accounts
 
     /**
      * Get the value of Replaceemail.
-     *
-     * @return string
      */
     public function getReplaceemail(): string
     {
@@ -611,8 +585,6 @@ class Accounts
 
     /**
      * Get the value of Emailvalidation.
-     *
-     * @return string
      */
     public function getEmailvalidation(): string
     {
@@ -635,8 +607,6 @@ class Accounts
 
     /**
      * Get the value of Forgottenpassword.
-     *
-     * @return string
      */
     public function getForgottenpassword(): string
     {
@@ -659,8 +629,6 @@ class Accounts
 
     /**
      * Get the value of Sentnotice.
-     *
-     * @return bool
      */
     public function getSentnotice(): bool
     {
@@ -707,8 +675,6 @@ class Accounts
 
     /**
      * Get the value of Transferredtoday.
-     *
-     * @return int
      */
     public function getTransferredtoday(): int
     {
@@ -731,8 +697,6 @@ class Accounts
 
     /**
      * Get the value of Recentcomments.
-     *
-     * @return \DateTime
      */
     public function getRecentcomments(): \DateTime
     {
@@ -755,8 +719,6 @@ class Accounts
 
     /**
      * Get the value of Donation.
-     *
-     * @return int
      */
     public function getDonation(): int
     {
@@ -779,8 +741,6 @@ class Accounts
 
     /**
      * Get the value of Donationspent.
-     *
-     * @return int
      */
     public function getDonationspent(): int
     {
@@ -827,8 +787,6 @@ class Accounts
 
     /**
      * Get the value of Referer.
-     *
-     * @return int
      */
     public function getReferer(): int
     {
@@ -851,8 +809,6 @@ class Accounts
 
     /**
      * Get the value of Refererawarded.
-     *
-     * @return int
      */
     public function getRefererawarded(): int
     {
@@ -875,8 +831,6 @@ class Accounts
 
     /**
      * Get the value of Banoverride.
-     *
-     * @return bool
      */
     public function getBanoverride(): bool
     {
@@ -899,8 +853,6 @@ class Accounts
 
     /**
      * Get the value of Translatorlanguages.
-     *
-     * @return string
      */
     public function getTranslatorlanguages(): string
     {
@@ -923,8 +875,6 @@ class Accounts
 
     /**
      * Get the value of Amountouttoday.
-     *
-     * @return int
      */
     public function getAmountouttoday(): int
     {
@@ -947,8 +897,6 @@ class Accounts
 
     /**
      * Get the value of Beta.
-     *
-     * @return bool
      */
     public function getBeta(): bool
     {
@@ -976,8 +924,6 @@ class Accounts
 
     /**
      * Get the value of Regdate.
-     *
-     * @return \DateTime
      */
     public function getRegdate(): \DateTime
     {

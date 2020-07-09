@@ -93,6 +93,14 @@ class FormCheckbox extends FormInput
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'form-checkbox';
+    }
+
+    /**
      * Return input type.
      *
      * @return string
@@ -100,13 +108,5 @@ class FormCheckbox extends FormInput
     protected function getInputType()
     {
         return 'checkbox';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'form-checkbox';
     }
 }

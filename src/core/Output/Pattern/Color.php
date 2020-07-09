@@ -31,7 +31,7 @@ trait Color
     }
 
     /**
-     * Get patterns for open color code
+     * Get patterns for open color code.
      *
      * @return array
      */
@@ -39,14 +39,14 @@ trait Color
     {
         if (! $this->colorPatternOpen)
         {
-            $this->colorPatternOpen = array_map(function($k){ return "`{$k}"; }, array_keys($this->getColors()));
+            $this->colorPatternOpen = array_map(function ($k) { return "`{$k}"; }, array_keys($this->getColors()));
         }
 
         return $this->colorPatternOpen;
     }
 
     /**
-     * Get patterns for close color code
+     * Get patterns for close color code.
      *
      * @return array
      */
@@ -54,14 +54,14 @@ trait Color
     {
         if (! $this->colorPatternClose)
         {
-            $this->colorPatternClose = array_map(function($k){ return "´{$k}"; }, array_keys($this->getColors()));
+            $this->colorPatternClose = array_map(function ($k) { return "´{$k}"; }, array_keys($this->getColors()));
         }
 
         return $this->colorPatternClose;
     }
 
     /**
-     * Get replacement for code open code colors
+     * Get replacement for code open code colors.
      *
      * @return void
      */
@@ -69,7 +69,7 @@ trait Color
     {
         if (! $this->colorReplacement)
         {
-            $this->colorReplacement = array_map(function($k){ return "<span class='$k'>"; }, array_values($this->getColors()));
+            $this->colorReplacement = array_map(function ($k) { return "<span class='$k'>"; }, array_values($this->getColors()));
         }
 
         return $this->colorReplacement;

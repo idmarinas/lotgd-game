@@ -88,8 +88,6 @@ class Motd
 
     /**
      * Get the value of Motditem.
-     *
-     * @return int
      */
     public function getMotditem(): int
     {
@@ -112,8 +110,6 @@ class Motd
 
     /**
      * Get the value of Motdtitle.
-     *
-     * @return string
      */
     public function getMotdtitle(): string
     {
@@ -136,8 +132,6 @@ class Motd
 
     /**
      * Get the value of Motdbody.
-     *
-     * @return string
      */
     public function getMotdbody(): string
     {
@@ -160,8 +154,6 @@ class Motd
 
     /**
      * Get the value of Motddate.
-     *
-     * @return \DateTime
      */
     public function getMotddate(): \DateTime
     {
@@ -184,8 +176,6 @@ class Motd
 
     /**
      * Get the value of Motdtype.
-     *
-     * @return bool
      */
     public function getMotdtype(): bool
     {
@@ -208,8 +198,6 @@ class Motd
 
     /**
      * Get the value of Motdauthor.
-     *
-     * @return int
      */
     public function getMotdauthor(): int
     {

@@ -77,8 +77,6 @@ class ModuleUserprefs
 
     /**
      * Get the value of Modulename.
-     *
-     * @return string
      */
     public function getModulename(): string
     {
@@ -101,8 +99,6 @@ class ModuleUserprefs
 
     /**
      * Get the value of Setting.
-     *
-     * @return string
      */
     public function getSetting(): string
     {
@@ -125,8 +121,6 @@ class ModuleUserprefs
 
     /**
      * Get the value of Userid.
-     *
-     * @return int
      */
     public function getUserid(): int
     {
@@ -149,8 +143,6 @@ class ModuleUserprefs
 
     /**
      * Get the value of Value.
-     *
-     * @return string
      */
     public function getValue(): string
     {

@@ -50,8 +50,6 @@ trait Upgrade
     /**
      * Set that version is upgraded.
      *
-     * @param int $version
-     *
      * @return self
      */
     public function upgradedVersionOn(int $version): self
@@ -63,8 +61,6 @@ trait Upgrade
 
     /**
      * Get if version is upgraded.
-     *
-     * @param int $version
      *
      * @return bool
      */
@@ -85,8 +81,6 @@ trait Upgrade
 
     /**
      * Set all upgraded version in actual install.
-     *
-     * @param array $data
      *
      * @return self
      */

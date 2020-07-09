@@ -31,8 +31,6 @@ class AccountsRepository extends DoctrineRepository
     /**
      * Get data of user by ID of account.
      *
-     * @param int $acctId
-     *
      * @return array
      */
     public function getUserById(int $acctId)
@@ -67,8 +65,6 @@ class AccountsRepository extends DoctrineRepository
 
     /**
      * Get total accounts that are online.
-     *
-     * @param int $timeout
      *
      * @return string
      */
@@ -128,8 +124,6 @@ class AccountsRepository extends DoctrineRepository
 
     /**
      * Private function to process data of user.
-     *
-     * @param array $data
      *
      * @return array
      */

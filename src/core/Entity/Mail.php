@@ -104,8 +104,6 @@ class Mail
 
     /**
      * Get the value of Messageid.
-     *
-     * @return int
      */
     public function getMessageid(): int
     {
@@ -128,8 +126,6 @@ class Mail
 
     /**
      * Get the value of Msgfrom.
-     *
-     * @return int
      */
     public function getMsgfrom(): int
     {
@@ -152,8 +148,6 @@ class Mail
 
     /**
      * Get the value of Msgto.
-     *
-     * @return int
      */
     public function getMsgto(): int
     {
@@ -176,8 +170,6 @@ class Mail
 
     /**
      * Get the value of Subject.
-     *
-     * @return string
      */
     public function getSubject(): string
     {
@@ -200,8 +192,6 @@ class Mail
 
     /**
      * Get the value of Body.
-     *
-     * @return string
      */
     public function getBody(): string
     {
@@ -224,8 +214,6 @@ class Mail
 
     /**
      * Get the value of Sent.
-     *
-     * @return \DateTime
      */
     public function getSent(): \DateTime
     {
@@ -248,8 +236,6 @@ class Mail
 
     /**
      * Get the value of Seen.
-     *
-     * @return bool
      */
     public function getSeen(): bool
     {
@@ -272,8 +258,6 @@ class Mail
 
     /**
      * Get the value of Originator.
-     *
-     * @return int
      */
     public function getOriginator(): int
     {

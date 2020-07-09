@@ -44,8 +44,6 @@ class Navigation extends AbstractExtension
 
     /**
      * Get Navigation instance.
-     *
-     * @return CoreNavigation
      */
     public function getNavigation(): CoreNavigation
     {
@@ -59,8 +57,6 @@ class Navigation extends AbstractExtension
 
     /**
      * Get Navigation instance.
-     *
-     * @return CoreAccessKeys
      */
     public function getAccesskeys(): CoreAccessKeys
     {

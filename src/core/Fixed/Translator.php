@@ -18,7 +18,7 @@ use Lotgd\Core\Translator\Translator as CoreTranslator;
 class Translator
 {
     /**
-     * Instance of Translator
+     * Instance of Translator.
      *
      * @var Lotgd\Core\Translator\Translator
      */
@@ -50,9 +50,7 @@ class Translator
     }
 
     /**
-     * Set container of Translator
-     *
-     * @param CoreTranslator $container
+     * Set container of Translator.
      */
     public static function setContainer(CoreTranslator $container)
     {

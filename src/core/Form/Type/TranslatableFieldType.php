@@ -16,9 +16,9 @@ namespace Lotgd\Core\Form\Type;
 use Lotgd\Core\Form\EventListener\AddTranslatableFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslatableFieldType extends AbstractType
 {

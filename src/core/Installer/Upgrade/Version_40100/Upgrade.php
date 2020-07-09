@@ -22,8 +22,6 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Step 1: Update settings.
-     *
-     * @return bool
      */
     public function step1(): bool
     {
@@ -42,9 +40,10 @@ class Upgrade extends UpgradeAbstract
 
             $lang = [];
             $count = count($languages);
+
             for ($i = 0; $i < $count; $i++)
             {
-                $lang[] = $languages[$i];//-- Only need code
+                $lang[] = $languages[$i]; //-- Only need code
                 $i++; //-- Avoid name of language
             }
 

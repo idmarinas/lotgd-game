@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Translator;
 
-use Zend\I18n\Exception;
 use Zend\EventManager\Event;
+use Zend\I18n\Exception;
 use Zend\I18n\Translator\Loader\FileLoaderInterface;
 use Zend\I18n\Translator\Translator as ZendTranslator;
 use Zend\Validator\Translator\TranslatorInterface;
@@ -29,13 +29,6 @@ class Translator extends ZendTranslator implements TranslatorInterface
 
     /**
      * Translate a message of LoTGD WITH MessageFormatter.
-     *
-     * @param string      $message
-     * @param array|null  $parameters
-     * @param string|null $textDomain
-     * @param string|null $locale
-     *
-     * @return string
      */
     public function trans(string $message, ?array $parameters = [], ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null): string
     {
@@ -58,12 +51,6 @@ class Translator extends ZendTranslator implements TranslatorInterface
 
     /**
      * Only format a message with MessageFormatter.
-     *
-     * @param string      $message
-     * @param array|null  $parameters
-     * @param string|null $locale
-     *
-     * @return string
      */
     public function mf(string $message, ?array $parameters = [], ?string $locale = null): string
     {
@@ -109,8 +96,6 @@ class Translator extends ZendTranslator implements TranslatorInterface
      * Clean param of a value.
      *
      * @param mixed $param
-     *
-     * @return bool
      */
     protected function cleanParameters($param): bool
     {

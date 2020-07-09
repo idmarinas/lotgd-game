@@ -85,8 +85,6 @@ class FlashMessages
     /**
      * Set the session manager.
      *
-     * @param ManagerInterface $manager
-     *
      * @return FlashMessages
      */
     public function setSessionManager(ManagerInterface $manager)
@@ -219,8 +217,6 @@ class FlashMessages
      * Get all current messages.
      *
      * @param string|null $type
-     *
-     * @return array
      */
     public function getMessages($type = null): array
     {

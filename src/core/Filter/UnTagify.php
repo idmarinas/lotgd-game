@@ -28,7 +28,7 @@ use Zend\Filter\FilterInterface;
 class UnTagify implements FilterInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function filter($value)
     {

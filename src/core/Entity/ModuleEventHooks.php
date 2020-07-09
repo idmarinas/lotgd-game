@@ -69,8 +69,6 @@ class ModuleEventHooks
 
     /**
      * Get the value of Event Type.
-     *
-     * @return string
      */
     public function getEventType(): string
     {
@@ -93,8 +91,6 @@ class ModuleEventHooks
 
     /**
      * Get the value of Modulename.
-     *
-     * @return string
      */
     public function getModulename(): string
     {
@@ -117,8 +113,6 @@ class ModuleEventHooks
 
     /**
      * Get the value of Event Chance.
-     *
-     * @return string
      */
     public function getEventChance(): string
     {

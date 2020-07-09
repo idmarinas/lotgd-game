@@ -22,8 +22,6 @@ class WeaponsRepository extends DoctrineRepository
      * Get de max level of weapons.
      *
      * @param int $dragonKills
-     *
-     * @return int
      */
     public function getMaxWeaponLevel(int $dragonKills = null): int
     {
@@ -55,10 +53,6 @@ class WeaponsRepository extends DoctrineRepository
 
     /**
      * Get next damage in level of weapons.
-     *
-     * @param int $level
-     *
-     * @return int
      */
     public function getNextDamageLevel(int $level): int
     {
@@ -84,8 +78,6 @@ class WeaponsRepository extends DoctrineRepository
 
     /**
      * Get a translated list for a level.
-     *
-     * @param int $level
      *
      * @return array
      */

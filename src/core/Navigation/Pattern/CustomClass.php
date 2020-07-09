@@ -1,15 +1,15 @@
 <?php
 
 /**
-* This file is part of Legend of the Green Dragon.
-*
-* @see https://github.com/idmarinas/lotgd-game
-*
-* @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
-* @author IDMarinas
-*
-* @since 4.0.0
-*/
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
 
 namespace Lotgd\Core\Navigation\Pattern;
 
@@ -32,7 +32,7 @@ trait CustomClass
     /**
      * Get class name for header.
      *
-     * @return  string
+     * @return string
      */
     public function getClassHeader()
     {
@@ -42,9 +42,9 @@ trait CustomClass
     /**
      * Set class name for header.
      *
-     * @param  string  $classHeader  Class name for header.
+     * @param string $classHeader Class name for header.
      *
-     * @return  self
+     * @return self
      */
     public function setClassHeader(string $classHeader)
     {
@@ -56,7 +56,7 @@ trait CustomClass
     /**
      * Get class name for nav.
      *
-     * @return  string
+     * @return string
      */
     public function getClassNav()
     {
@@ -66,9 +66,9 @@ trait CustomClass
     /**
      * Set class name for nav.
      *
-     * @param  string  $classNav  Class name for nav.
+     * @param string $classNav Class name for nav.
      *
-     * @return  self
+     * @return self
      */
     public function setClassNav(string $classNav)
     {

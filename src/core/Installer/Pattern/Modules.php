@@ -75,7 +75,7 @@ trait Modules
     ];
 
     /**
-     * No install modules
+     * No install modules.
      *
      * @return $this
      */
@@ -87,7 +87,7 @@ trait Modules
     }
 
     /**
-     * No install modules
+     * No install modules.
      *
      * @return $this
      */
@@ -99,7 +99,7 @@ trait Modules
     }
 
     /**
-     * Get if installation of modules is ignored
+     * Get if installation of modules is ignored.
      *
      * @return bool
      */
@@ -109,9 +109,7 @@ trait Modules
     }
 
     /**
-     * Set list of modules to process
-     *
-     * @param array $modules
+     * Set list of modules to process.
      *
      * @return self
      */
@@ -123,7 +121,7 @@ trait Modules
     }
 
     /**
-     * Get list of modules to process
+     * Get list of modules to process.
      *
      * @return array
      */

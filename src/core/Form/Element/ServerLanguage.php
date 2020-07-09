@@ -29,7 +29,7 @@ class ServerLanguage extends Select implements InputProviderInterface
     protected $validLanguages = [];
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __construct($name = null, $options = [])
     {

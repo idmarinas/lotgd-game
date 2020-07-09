@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Entity;
 
-use Lotgd\Core\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -172,8 +171,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -196,8 +193,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Section.
-     *
-     * @return string
      */
     public function getSection(): string
     {
@@ -220,8 +215,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Author.
-     *
-     * @return int
      */
     public function getAuthor(): int
     {
@@ -244,8 +237,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Comment.
-     *
-     * @return string
      */
     public function getComment(): string
     {
@@ -253,9 +244,9 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Get the value of commentRaw
+     * Get the value of commentRaw.
      *
-     * @return  string
+     * @return string
      */
     public function getCommentRaw()
     {
@@ -263,11 +254,9 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Set the value of commentRaw
+     * Set the value of commentRaw.
      *
-     * @param  string  $commentRaw
-     *
-     * @return  self
+     * @return self
      */
     public function setCommentRaw(string $commentRaw)
     {
@@ -292,8 +281,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Postdate.
-     *
-     * @return \DateTime
      */
     public function getPostdate(): \DateTime
     {
@@ -316,8 +303,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of Extra.
-     *
-     * @return array
      */
     public function getExtra(): array
     {
@@ -340,8 +325,6 @@ class Commentary implements EntityInterface
 
     /**
      * Get the value of AuthorName.
-     *
-     * @return string
      */
     public function getAuthorName(): string
     {
@@ -360,8 +343,6 @@ class Commentary implements EntityInterface
 
     /**
      * Set the value of hidden.
-     *
-     * @param bool $hidden
      *
      * @return self
      */
@@ -385,8 +366,6 @@ class Commentary implements EntityInterface
     /**
      * Set the value of hiddenComment.
      *
-     * @param string $hiddenComment
-     *
      * @return self
      */
     public function setHiddenComment(string $hiddenComment)
@@ -408,8 +387,6 @@ class Commentary implements EntityInterface
 
     /**
      * Set the value of hiddenBy.
-     *
-     * @param string $hiddenBy
      *
      * @return self
      */
@@ -433,8 +410,6 @@ class Commentary implements EntityInterface
     /**
      * Set the value of hiddenByName.
      *
-     * @param string $hiddenByName
-     *
      * @return self
      */
     public function setHiddenByName(string $hiddenByName)
@@ -456,8 +431,6 @@ class Commentary implements EntityInterface
 
     /**
      * Set the value of clanId.
-     *
-     * @param int $clanId
      *
      * @return self
      */
@@ -481,8 +454,6 @@ class Commentary implements EntityInterface
     /**
      * Set the value of clanRank.
      *
-     * @param int $clanRank
-     *
      * @return self
      */
     public function setClanRank(int $clanRank)
@@ -504,8 +475,6 @@ class Commentary implements EntityInterface
 
     /**
      * Set the value of clanName.
-     *
-     * @param string $clanName
      *
      * @return self
      */
@@ -529,8 +498,6 @@ class Commentary implements EntityInterface
     /**
      * Set the value of clanNameShort.
      *
-     * @param string $clanNameShort
-     *
      * @return self
      */
     public function setClanNameShort(string $clanNameShort)
@@ -541,9 +508,9 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Get the value of command
+     * Get the value of command.
      *
-     * @return  string
+     * @return string
      */
     public function getCommand()
     {
@@ -551,11 +518,9 @@ class Commentary implements EntityInterface
     }
 
     /**
-     * Set the value of command
+     * Set the value of command.
      *
-     * @param  string  $command
-     *
-     * @return  self
+     * @return self
      */
     public function setCommand(string $command)
     {

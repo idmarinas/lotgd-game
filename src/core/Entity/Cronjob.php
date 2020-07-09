@@ -181,8 +181,6 @@ class Cronjob
 
     /**
      * Get the value of Name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -205,8 +203,6 @@ class Cronjob
 
     /**
      * Get the value of Command.
-     *
-     * @return string
      */
     public function getCommand(): string
     {
@@ -229,8 +225,6 @@ class Cronjob
 
     /**
      * Get the value of Schedule.
-     *
-     * @return string
      */
     public function getSchedule(): string
     {
@@ -253,8 +247,6 @@ class Cronjob
 
     /**
      * Get the value of Mailer.
-     *
-     * @return string
      */
     public function getMailer(): string
     {
@@ -397,8 +389,6 @@ class Cronjob
 
     /**
      * Get the value of Smtpsender.
-     *
-     * @return string
      */
     public function getSmtpsender(): string
     {
@@ -421,8 +411,6 @@ class Cronjob
 
     /**
      * Get the value of Smtpsendername.
-     *
-     * @return string
      */
     public function getSmtpsendername(): string
     {
@@ -565,8 +553,6 @@ class Cronjob
 
     /**
      * Get the value of Dateformat.
-     *
-     * @return string
      */
     public function getDateformat(): string
     {
@@ -589,8 +575,6 @@ class Cronjob
 
     /**
      * Get the value of Enabled.
-     *
-     * @return bool
      */
     public function getEnabled(): bool
     {
@@ -637,8 +621,6 @@ class Cronjob
 
     /**
      * Get the value of Debug.
-     *
-     * @return bool
      */
     public function getDebug(): bool
     {

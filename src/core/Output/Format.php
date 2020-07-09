@@ -40,7 +40,6 @@ class Format
      * Format a number.
      *
      * @param float|int $number
-     * @param int       $decimals
      * @param string    $dec_point
      * @param string    $thousands_sep
      *
@@ -134,8 +133,6 @@ class Format
 
     /**
      * Set decimal point.
-     *
-     * @param string $val
      */
     public function setDecPoint(string $val)
     {
@@ -144,8 +141,6 @@ class Format
 
     /**
      * Set thousands separation.
-     *
-     * @param string $val
      */
     public function setThousandsSep(string $val)
     {

@@ -101,4 +101,3 @@ class MountsType extends AbstractType
         ]);
     }
 }
-

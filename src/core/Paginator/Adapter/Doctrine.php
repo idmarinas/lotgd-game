@@ -68,7 +68,7 @@ class Doctrine implements AdapterInterface
             ->setMaxResults($itemCountPerPage)
         ;
 
-        if ($this->resultType == self::RESULT_SCALAR)
+        if (self::RESULT_SCALAR == $this->resultType)
         {
             return $qb->getQuery()->getScalarResult();
         }

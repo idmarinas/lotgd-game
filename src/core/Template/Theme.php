@@ -120,8 +120,6 @@ class Theme extends Base
 
     /**
      * Get default skin of game.
-     *
-     * @return string
      */
     public function getDefaultSkin(): string
     {
@@ -162,8 +160,6 @@ class Theme extends Base
      * Change default theme
      * Need if change theme with form.
      *
-     * @param string $theme
-     *
      * @return $this
      */
     public function setDefaultSkin(string $theme)
@@ -201,8 +197,6 @@ class Theme extends Base
 
     /**
      * Get name of theme folder.
-     *
-     * @return string
      */
     public function getThemeFolder(): string
     {
@@ -213,8 +207,6 @@ class Theme extends Base
      * Search for a valid theme if removed.
      *
      * @throws RuntimeException
-     *
-     * @return string
      */
     private function getValidTheme(): string
     {

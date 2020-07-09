@@ -73,22 +73,13 @@ class ObjectExists extends AbstractValidator
                 }
             }
 
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'Option "object_repository" is required and must be an instance of'
-                    .' Doctrine\Common\Persistence\ObjectRepository, %s given',
-                    $provided
-                )
-            );
+            throw new Exception\InvalidArgumentException(sprintf('Option "object_repository" is required and must be an instance of  Doctrine\Common\Persistence\ObjectRepository, %s given', $provided));
         }
         $this->objectRepository = $options['object_repository'];
 
         if (! isset($options['fields']))
         {
-            throw new Exception\InvalidArgumentException(
-                'Key `fields` must be provided and be a field or a list of fields to be used when searching for'
-                .' existing instances'
-            );
+            throw new Exception\InvalidArgumentException('Key `fields` must be provided and be a field or a list of fields to be used when searching for  existing instances');
         }
 
         $this->fields = $options['fields'];
@@ -133,13 +124,7 @@ class ObjectExists extends AbstractValidator
             {
                 if (! array_key_exists($field, $value))
                 {
-                    throw new Exception\RuntimeException(
-                        sprintf(
-                            'Field "%s" was not provided, but was expected since the configured field lists needs'
-                            .' it for validation',
-                            $field
-                        )
-                    );
+                    throw new Exception\RuntimeException(sprintf('Field "%s" was not provided, but was expected since the configured field lists needs'.' it for validation', $field));
                 }
                 $matchedFieldsValues[$field] = $value[$field];
             }
@@ -150,13 +135,7 @@ class ObjectExists extends AbstractValidator
 
             if (false === $matchedFieldsValues)
             {
-                throw new Exception\RuntimeException(
-                    sprintf(
-                        'Provided values count is %s, while expected number of fields to be matched is %s',
-                        count($value),
-                        count($this->fields)
-                    )
-                );
+                throw new Exception\RuntimeException(sprintf('Provided values count is %s, while expected number of fields to be matched is %s', count($value), count($this->fields)));
             }
         }
 
@@ -183,9 +162,7 @@ class ObjectExists extends AbstractValidator
         {
             if (! is_string($field))
             {
-                throw new Exception\InvalidArgumentException(
-                    sprintf('Provided fields must be strings, %s provided for key %s', gettype($field), $key)
-                );
+                throw new Exception\InvalidArgumentException(sprintf('Provided fields must be strings, %s provided for key %s', gettype($field), $key));
             }
         }
         $this->fields = array_values($fields);

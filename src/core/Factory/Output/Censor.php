@@ -25,12 +25,13 @@ class Censor implements FactoryInterface
     {
         $language = \Locale::getDefault();
         $profanity = new OutputCensor();
-        $profanity->addDictionary(self::LOTGD_DICTIONARY_PATH . '/en.php');//-- Custom dictionary
+        $profanity->addDictionary(self::LOTGD_DICTIONARY_PATH.'/en.php'); //-- Custom dictionary
 
         if ('en' != $language)
         {
             $profanity->addDictionary($language);
-            $customLanguage = self::LOTGD_DICTIONARY_PATH . "/{$language}.php";
+            $customLanguage = self::LOTGD_DICTIONARY_PATH."/{$language}.php";
+
             if (file_exists($customLanguage))
             {
                 $profanity->addDictionary($customLanguage);

@@ -118,11 +118,9 @@ trait Navigation
     /**
      * Show pagination for a instance of Paginator.
      *
-     * @param Paginator   $paginator
      * @param string|null $link           Url to use in href atribute in links
      * @param string|null $template       You can change the template for your own if you need it at a specific time
      * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
-     * @param array|null  $params
      *
      * @return string
      */

@@ -84,8 +84,6 @@ class ModuleHooks
 
     /**
      * Get the value of Modulename.
-     *
-     * @return string
      */
     public function getModulename(): string
     {
@@ -108,8 +106,6 @@ class ModuleHooks
 
     /**
      * Get the value of Location.
-     *
-     * @return string
      */
     public function getLocation(): string
     {
@@ -132,8 +128,6 @@ class ModuleHooks
 
     /**
      * Get the value of Function.
-     *
-     * @return string
      */
     public function getFunction(): string
     {
@@ -156,8 +150,6 @@ class ModuleHooks
 
     /**
      * Get the value of Whenactive.
-     *
-     * @return string
      */
     public function getWhenactive(): string
     {
@@ -180,8 +172,6 @@ class ModuleHooks
 
     /**
      * Get the value of Priority.
-     *
-     * @return int
      */
     public function getPriority(): int
     {

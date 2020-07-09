@@ -60,4 +60,3 @@ class ArmorType extends AbstractType
         ]);
     }
 }
-

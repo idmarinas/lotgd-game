@@ -67,8 +67,8 @@ class Companions implements Translatable
      * @ORM\Column(name="attack", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 1,
-     *      max = 65535
+     *     min=1,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -80,8 +80,8 @@ class Companions implements Translatable
      * @ORM\Column(name="attackperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 65535
+     *     min=0,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -93,8 +93,8 @@ class Companions implements Translatable
      * @ORM\Column(name="defense", type="smallint", nullable=false, options={"default": 1, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 1,
-     *      max = 65535
+     *     min=1,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -106,8 +106,8 @@ class Companions implements Translatable
      * @ORM\Column(name="defenseperlevel", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 65535
+     *     min=0,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -118,10 +118,9 @@ class Companions implements Translatable
      *
      * @ORM\Column(name="maxhitpoints", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      *
-     *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 65535
+     *     min=0,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -133,8 +132,8 @@ class Companions implements Translatable
      * @ORM\Column(name="maxhitpointsperlevel", type="smallint", nullable=false, options={"default": 10, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 65535
+     *     min=0,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -181,8 +180,8 @@ class Companions implements Translatable
      * @ORM\Column(name="companioncostdks", type="integer", nullable=false, options={"unsigned": true}, options={"default": 0})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 42949672295
+     *     min=0,
+     *     max=42949672295
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -194,8 +193,8 @@ class Companions implements Translatable
      * @ORM\Column(name="companioncostgems", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 42949672295
+     *     min=0,
+     *     max=42949672295
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -207,8 +206,8 @@ class Companions implements Translatable
      * @ORM\Column(name="companioncostgold", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 42949672295
+     *     min=0,
+     *     max=42949672295
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -256,14 +255,14 @@ class Companions implements Translatable
      */
     private $translations;
 
-    public function __toString()
-    {
-        return (string) $this->getCompanionid();
-    }
-
     public function __construct()
     {
         $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getCompanionid();
     }
 
     public function getTranslations()
@@ -320,8 +319,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -344,8 +341,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Category.
-     *
-     * @return string
      */
     public function getCategory(): string
     {
@@ -368,8 +363,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Description.
-     *
-     * @return string
      */
     public function getDescription(): string
     {
@@ -392,8 +385,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Attack.
-     *
-     * @return int
      */
     public function getAttack(): int
     {
@@ -416,8 +407,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Attackperlevel.
-     *
-     * @return int
      */
     public function getAttackperlevel(): int
     {
@@ -440,8 +429,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Defense.
-     *
-     * @return int
      */
     public function getDefense(): int
     {
@@ -464,8 +451,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Defenseperlevel.
-     *
-     * @return int
      */
     public function getDefenseperlevel(): int
     {
@@ -488,8 +473,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Maxhitpoints.
-     *
-     * @return int
      */
     public function getMaxhitpoints(): int
     {
@@ -512,8 +495,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Maxhitpointsperlevel.
-     *
-     * @return int
      */
     public function getMaxhitpointsperlevel(): int
     {
@@ -565,8 +546,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Cannotdie.
-     *
-     * @return bool
      */
     public function getCannotdie(): bool
     {
@@ -589,8 +568,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Cannotbehealed.
-     *
-     * @return bool
      */
     public function getCannotbehealed(): bool
     {
@@ -613,8 +590,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Companionlocation.
-     *
-     * @return string
      */
     public function getCompanionlocation(): string
     {
@@ -637,8 +612,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Companionactive.
-     *
-     * @return bool
      */
     public function getCompanionactive(): bool
     {
@@ -661,8 +634,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Companioncostdks.
-     *
-     * @return int
      */
     public function getCompanioncostdks(): int
     {
@@ -685,8 +656,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Companioncostgems.
-     *
-     * @return int
      */
     public function getCompanioncostgems(): int
     {
@@ -709,8 +678,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Companioncostgold.
-     *
-     * @return int
      */
     public function getCompanioncostgold(): int
     {
@@ -733,8 +700,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Jointext.
-     *
-     * @return string
      */
     public function getJointext(): string
     {
@@ -757,8 +722,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Dyingtext.
-     *
-     * @return string
      */
     public function getDyingtext(): string
     {
@@ -781,8 +744,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Allowinshades.
-     *
-     * @return bool
      */
     public function getAllowinshades(): bool
     {
@@ -805,8 +766,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Allowinpvp.
-     *
-     * @return bool
      */
     public function getAllowinpvp(): bool
     {
@@ -829,8 +788,6 @@ class Companions implements Translatable
 
     /**
      * Get the value of Allowintrain.
-     *
-     * @return bool
      */
     public function getAllowintrain(): bool
     {

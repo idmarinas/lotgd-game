@@ -25,9 +25,6 @@ trait Clan
     /**
      * Get author name for description and motd.
      *
-     * @param int $motdAuthor
-     * @param int $descAuthor
-     *
      * @return array|null
      */
     public function getClanAuthorNameOfMotdDescFromAcctId(int $motdAuthor, int $descAuthor): ?array

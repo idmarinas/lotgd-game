@@ -19,10 +19,6 @@ class FaillogRepository extends DoctrineRepository
 {
     /**
      * Delte old fail logs in data base.
-     *
-     * @param int $expire
-     *
-     * @return int
      */
     public function deleteExpireFaillogs(int $expire): int
     {

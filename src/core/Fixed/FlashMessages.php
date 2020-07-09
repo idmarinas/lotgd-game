@@ -46,8 +46,6 @@ class FlashMessages
 
     /**
      * Set container of FlashMessages.
-     *
-     * @param ComponentFlashMessages $container
      */
     public static function setContainer(ComponentFlashMessages $container)
     {

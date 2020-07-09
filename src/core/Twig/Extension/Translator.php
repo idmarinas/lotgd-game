@@ -66,16 +66,16 @@ class Translator extends AbstractExtension
         return [
             new TwigFilter('t', [$this, 'translate'], ['needs_environment' => true]),
             new TwigFilter('trans', [$this, 'translate'], ['needs_environment' => true]),
-            /**
+            /*
              * Use "tl" when you want to change domain to translate a text.
              * Only need if you use "translate_default_domain" in template.
              */
             new TwigFilter('tl', [$this, 'translate'], ['needs_environment' => true]),
-            /**
+            /*
              * Use MessageFormatter to formater message.
              */
             new TwigFilter('tmf', [$this, 'translateMf'], ['needs_environment' => true]),
-            /**
+            /*
              * Only select a translation WITHOUT MessageFormatter.
              */
             new TwigFilter('tst', [$this, 'translateSt'], ['needs_environment' => true]),

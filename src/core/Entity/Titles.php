@@ -128,8 +128,6 @@ class Titles implements Translatable
 
     /**
      * Get the value of Titleid.
-     *
-     * @return int
      */
     public function getTitleid(): int
     {
@@ -152,8 +150,6 @@ class Titles implements Translatable
 
     /**
      * Get the value of Dk.
-     *
-     * @return int
      */
     public function getDk(): int
     {
@@ -176,8 +172,6 @@ class Titles implements Translatable
 
     /**
      * Get the value of Ref.
-     *
-     * @return string
      */
     public function getRef(): string
     {
@@ -200,8 +194,6 @@ class Titles implements Translatable
 
     /**
      * Get the value of Male.
-     *
-     * @return string
      */
     public function getMale(): string
     {
@@ -224,8 +216,6 @@ class Titles implements Translatable
 
     /**
      * Get the value of Female.
-     *
-     * @return string
      */
     public function getFemale(): string
     {

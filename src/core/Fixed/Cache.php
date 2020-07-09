@@ -18,7 +18,7 @@ use Zend\Cache\Storage\StorageInterface;
 class Cache
 {
     /**
-     * Instance of Cache
+     * Instance of Cache.
      *
      * @var Zend\Cache\Storage\StorageInterface
      */
@@ -45,7 +45,7 @@ class Cache
     }
 
     /**
-     * Set instance of Cache
+     * Set instance of Cache.
      *
      * @param Zend\Cache\Storage $instance
      */

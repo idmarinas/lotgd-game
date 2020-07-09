@@ -23,8 +23,6 @@ class Session
 
     /**
      * Init session of app.
-     *
-     * @param bool|null $force
      */
     public function bootstrapSession(?bool $force = null)
     {

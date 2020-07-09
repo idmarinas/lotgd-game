@@ -69,10 +69,6 @@ trait Version
 
     /**
      * Get int value for a string version.
-     *
-     * @param string $version
-     *
-     * @return int
      */
     public function getIntVersion(string $version): int
     {
@@ -81,8 +77,6 @@ trait Version
 
     /**
      * Get the previous version of the given version.
-     *
-     * @return int
      */
     public function getPreviusVersion(int $version): int
     {
@@ -104,10 +98,6 @@ trait Version
 
     /**
      * Get the next version of the given version.
-     *
-     * @param int $version
-     *
-     * @return int
      */
     public function getNextVersion(int $version): int
     {
@@ -129,10 +119,6 @@ trait Version
 
     /**
      * Get name for a numeric version.
-     *
-     * @param int $version
-     *
-     * @return string
      */
     public function getNameVersion(int $version): string
     {
@@ -140,9 +126,7 @@ trait Version
     }
 
     /**
-     * Get array of versions
-     *
-     * @return array
+     * Get array of versions.
      */
     public function getAllVersions(): array
     {

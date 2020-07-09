@@ -21,7 +21,7 @@ use Zend\Filter\FilterInterface;
 class BitField implements FilterInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      *
      * @return int
      */

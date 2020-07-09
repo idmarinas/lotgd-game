@@ -10,16 +10,15 @@
  * @since 4.0.0
  */
 
-
 namespace Lotgd\Core\Factory\Component;
 
-use Zend\Session\SessionManager;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
 use Zend\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };
+use Zend\Session\SessionManager;
 
 class FlashMessages implements FactoryInterface
 {

@@ -25,9 +25,6 @@ trait Login
     /**
      * Process login and get data.
      *
-     * @param string $login
-     * @param string $password
-     *
      * @return array
      */
     public function processLoginGetAcctData(string $login, string $password)
@@ -67,8 +64,6 @@ trait Login
     /**
      * Logout inactive accounts.
      *
-     * @param int $timeout
-     *
      * @return bool
      */
     public function logoutInactiveAccounts(int $timeout): bool
@@ -98,8 +93,6 @@ trait Login
 
     /**
      * Get acctid from login.
-     *
-     * @param string $login
      *
      * @return void
      */

@@ -22,8 +22,6 @@ class AccountsOutputRepository extends DoctrineRepository
     /**
      * Get output code for account.
      *
-     * @param int $acctId
-     *
      * @return string
      */
     public function getOutput(int $acctId): string
@@ -50,8 +48,6 @@ class AccountsOutputRepository extends DoctrineRepository
 
     /**
      * Delete output of account.
-     *
-     * @param int $accountId
      *
      * @return int
      */

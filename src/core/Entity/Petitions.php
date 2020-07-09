@@ -117,8 +117,6 @@ class Petitions
 
     /**
      * Get the value of Petitionid.
-     *
-     * @return int
      */
     public function getPetitionid(): int
     {
@@ -141,8 +139,6 @@ class Petitions
 
     /**
      * Get the value of Author.
-     *
-     * @return int
      */
     public function getAuthor(): int
     {
@@ -165,8 +161,6 @@ class Petitions
 
     /**
      * Get the value of Date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {
@@ -189,8 +183,6 @@ class Petitions
 
     /**
      * Get the value of Status.
-     *
-     * @return int
      */
     public function getStatus(): int
     {
@@ -213,8 +205,6 @@ class Petitions
 
     /**
      * Get the value of Body.
-     *
-     * @return string
      */
     public function getBody(): string
     {
@@ -237,8 +227,6 @@ class Petitions
 
     /**
      * Get the value of Pageinfo.
-     *
-     * @return string
      */
     public function getPageinfo(): string
     {
@@ -261,8 +249,6 @@ class Petitions
 
     /**
      * Get the value of Closedate.
-     *
-     * @return \DateTime
      */
     public function getClosedate(): \DateTime
     {
@@ -285,8 +271,6 @@ class Petitions
 
     /**
      * Get the value of Closeuserid.
-     *
-     * @return int
      */
     public function getCloseuserid(): int
     {
@@ -309,8 +293,6 @@ class Petitions
 
     /**
      * Get the value of Ip.
-     *
-     * @return string
      */
     public function getIp(): string
     {
@@ -333,8 +315,6 @@ class Petitions
 
     /**
      * Get the value of Id.
-     *
-     * @return string
      */
     public function getId(): string
     {

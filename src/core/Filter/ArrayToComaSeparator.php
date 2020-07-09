@@ -24,7 +24,7 @@ use Zend\Filter\FilterInterface;
 class ArrayToComaSeparator implements FilterInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function filter($value)
     {

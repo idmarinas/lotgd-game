@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Form\Type;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocationType extends ChoiceType
 {
@@ -39,7 +39,8 @@ class LocationType extends ChoiceType
         ksort($locs);
 
         $defaultChoice = [];
-        foreach($locs as $loc => $params)
+
+        foreach ($locs as $loc => $params)
         {
             $value = \LotgdTranslator::t($params[0], $params[1], $params[2]);
 
@@ -50,7 +51,7 @@ class LocationType extends ChoiceType
             'attr' => [
                 'class' => 'search selection lotgd'
             ],
-            'choices'  => $defaultChoice,
+            'choices' => $defaultChoice,
         ]);
 
         return $resolver;

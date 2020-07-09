@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 class SymfonyForm
 {
     /**
-     * Instance of Form
+     * Instance of Form.
      *
      * @var Symfony\Component\Form\FormFactoryInterface
      */
@@ -45,9 +45,7 @@ class SymfonyForm
     }
 
     /**
-     * Set instance of Form
-     *
-     * @param FormFactoryInterface $instance
+     * Set instance of Form.
      */
     public static function instance(FormFactoryInterface $instance)
     {

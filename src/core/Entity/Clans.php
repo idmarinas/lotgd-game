@@ -102,8 +102,6 @@ class Clans
 
     /**
      * Get the value of Clanid.
-     *
-     * @return int
      */
     public function getClanid(): int
     {
@@ -126,8 +124,6 @@ class Clans
 
     /**
      * Get the value of Clanname.
-     *
-     * @return string
      */
     public function getClanname(): string
     {
@@ -150,8 +146,6 @@ class Clans
 
     /**
      * Get the value of Clanshort.
-     *
-     * @return string
      */
     public function getClanshort(): string
     {
@@ -174,8 +168,6 @@ class Clans
 
     /**
      * Get the value of Clanmotd.
-     *
-     * @return string
      */
     public function getClanmotd(): string
     {
@@ -198,8 +190,6 @@ class Clans
 
     /**
      * Get the value of Clandesc.
-     *
-     * @return string
      */
     public function getClandesc(): string
     {
@@ -222,8 +212,6 @@ class Clans
 
     /**
      * Get the value of Motdauthor.
-     *
-     * @return int
      */
     public function getMotdauthor(): int
     {
@@ -246,8 +234,6 @@ class Clans
 
     /**
      * Get the value of Descauthor.
-     *
-     * @return int
      */
     public function getDescauthor(): int
     {
@@ -270,8 +256,6 @@ class Clans
 
     /**
      * Get the value of Customsay.
-     *
-     * @return string
      */
     public function getCustomsay(): string
     {

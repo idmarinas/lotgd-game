@@ -24,8 +24,6 @@ class Sanitize
      * Remove all colors code from string.
      * ONLY colors, not include italic, bold... (`i `b).
      *
-     * @param string $string
-     *
      * @return string
      */
     public function unColorize(string $string): string
@@ -37,8 +35,6 @@ class Sanitize
 
     /**
      * Remove all codes that not are suported.
-     *
-     * @param string $string
      *
      * @return string
      */
@@ -54,8 +50,6 @@ class Sanitize
      * Full sanitize a string, removed color and codes.
      * All LoTGD codes included (`i `b `c) and others.
      *
-     * @param string $string
-     *
      * @return string
      */
     public function fullSanitize(string $string): string
@@ -65,8 +59,6 @@ class Sanitize
 
     /**
      * Prevent for use LoTGD codes like colors and italic, bold...
-     *
-     * @param string $string
      *
      * @return string
      */
@@ -78,8 +70,6 @@ class Sanitize
     /**
      * Module file names can only contain alpha numeric characters and underscores.
      *
-     * @param string $string
-     *
      * @return string
      */
     public function moduleNameSanitize(string $string): string
@@ -90,8 +80,7 @@ class Sanitize
     /**
      * Sanitize name of player.
      *
-     * @param int    $spaceAllowed
-     * @param string $name
+     * @param int $spaceAllowed
      *
      * @return string
      */
@@ -111,9 +100,8 @@ class Sanitize
      * Sanitize color name of player.
      * Handle spaces and color in character names.
      *
-     * @param int    $spaceallowed
-     * @param string $string
-     * @param bool   $admin
+     * @param int  $spaceallowed
+     * @param bool $admin
      *
      * @return string
      */
@@ -139,8 +127,6 @@ class Sanitize
     /**
      * Sanitize html.
      *
-     * @param string $string
-     *
      * @return string
      */
     public function htmlSanitize(string $string): string
@@ -165,7 +151,7 @@ class Sanitize
      */
     public function cmdSanitize($string): string
     {
-        $string =  preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
+        $string = preg_replace('/[&?]c=[[:digit:]-]+/', '', $string);
 
         //-- Replace first & for ?
         if (false === \strpos($string, '?') && false !== \strpos($string, '&'))
@@ -179,8 +165,6 @@ class Sanitize
     /**
      * Remove new line code from string.
      *
-     * @param string $string
-     *
      * @return string
      */
     public function newLineSanitize(string $string): string
@@ -190,8 +174,6 @@ class Sanitize
 
     /**
      * Sanitize a string to ve valid mb encoding.
-     *
-     * @param string $string
      *
      * @return string
      */
@@ -208,7 +190,7 @@ class Sanitize
     }
 
     /**
-     * Sanitize description of server in LoGDNet
+     * Sanitize description of server in LoGDNet.
      *
      * @param string $in
      *
@@ -226,8 +208,6 @@ class Sanitize
 
     /**
      * Converts a string into a slug.
-     *
-     * @param string $string
      *
      * @return string
      */

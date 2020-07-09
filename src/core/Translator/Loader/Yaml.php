@@ -35,10 +35,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         if (! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath))
         {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Could not find or open file %s for reading',
-                $filename
-            ));
+            throw new Exception\InvalidArgumentException(sprintf('Could not find or open file %s for reading', $filename));
         }
 
         $yamlParser = new YamlParser();
@@ -56,10 +53,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         if (! is_array($messages))
         {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array, but received %s',
-                gettype($messages)
-            ));
+            throw new Exception\InvalidArgumentException(sprintf('Expected an array, but received %s', gettype($messages)));
         }
 
         $textDomain = new TextDomain($messages);
@@ -120,9 +114,8 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
      *
      * @TODO In PHP 7.3.0 Use array_key_first() to avoid use of reset() and key()
      *
-     * @param array  $messages
-     * @param array  $node     Internal use
-     * @param string $path     Internal use
+     * @param array  $node Internal use
+     * @param string $path Internal use
      */
     private function flatten(array $messages, array $node = null, $path = null)
     {
@@ -134,6 +127,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
         foreach ($node as $key => $value)
         {
             \is_array($value) ? reset($value) : null;
+
             if (\is_array($value) && ! is_int(\key($value)))
             {
                 $nodePath = $path ? $path.'.'.$key : $key;

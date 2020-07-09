@@ -56,8 +56,6 @@ class Locator
 
     /**
      * Set service manager for the game.
-     *
-     * @param \Lotgd\Core\ServiceManager $sm
      */
     public static function setServiceManager(ServiceManager $sm)
     {

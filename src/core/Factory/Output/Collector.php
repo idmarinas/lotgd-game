@@ -8,8 +8,8 @@
 
 namespace Lotgd\Core\Factory\Output;
 
-use Lotgd\Core\Output\Collector as OutputCollector;
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Output\Collector as OutputCollector;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

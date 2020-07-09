@@ -82,8 +82,6 @@ class ModuleObjprefs
 
     /**
      * Get the value of Modulename.
-     *
-     * @return string
      */
     public function getModulename(): string
     {
@@ -106,8 +104,6 @@ class ModuleObjprefs
 
     /**
      * Get the value of Objtype.
-     *
-     * @return string
      */
     public function getObjtype(): string
     {
@@ -130,8 +126,6 @@ class ModuleObjprefs
 
     /**
      * Get the value of Setting.
-     *
-     * @return string
      */
     public function getSetting(): string
     {
@@ -154,8 +148,6 @@ class ModuleObjprefs
 
     /**
      * Get the value of Objid.
-     *
-     * @return int
      */
     public function getObjid(): int
     {
@@ -178,8 +170,6 @@ class ModuleObjprefs
 
     /**
      * Get the value of Value.
-     *
-     * @return string
      */
     public function getValue(): string
     {

@@ -76,8 +76,6 @@ class Debug
 
     /**
      * Get the value of Id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -100,8 +98,6 @@ class Debug
 
     /**
      * Get the value of Type.
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -124,8 +120,6 @@ class Debug
 
     /**
      * Get the value of Category.
-     *
-     * @return string
      */
     public function getCategory(): string
     {
@@ -148,8 +142,6 @@ class Debug
 
     /**
      * Get the value of Subcategory.
-     *
-     * @return string
      */
     public function getSubcategory(): string
     {
@@ -172,8 +164,6 @@ class Debug
 
     /**
      * Get the value of Value.
-     *
-     * @return string
      */
     public function getValue(): string
     {

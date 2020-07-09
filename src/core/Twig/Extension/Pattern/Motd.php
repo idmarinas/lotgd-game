@@ -33,7 +33,6 @@ trait Motd
     /**
      * Display MoTD item or poll.
      *
-     * @param array $motd
      * @param array $params Extra params
      *
      * @return string

@@ -26,10 +26,6 @@ trait Bans
     /**
      * Search accounts.
      *
-     * @param string $search
-     * @param string $order
-     * @param int    $page
-     *
      * @return Paginator|null
      */
     public function bansSearchAccts(string $search, string $order, int $page): ?Paginator
@@ -58,7 +54,7 @@ trait Bans
 
         if ($search)
         {
-            $query->where("u.login LIKE :search OR c.name LIKE :search OR u.acctid = :search OR u.emailaddress LIKE :search OR u.lastip LIKE :search OR u.uniqueid LIKE :search")
+            $query->where('u.login LIKE :search OR c.name LIKE :search OR u.acctid = :search OR u.emailaddress LIKE :search OR u.lastip LIKE :search OR u.uniqueid LIKE :search')
                 ->setParameter('search', "%{$search}%")
             ;
         }
@@ -68,8 +64,6 @@ trait Bans
 
     /**
      * Get a basic information of account for ban.
-     *
-     * @param int $acctId
      *
      * @return array
      */
@@ -99,8 +93,6 @@ trait Bans
 
     /**
      * Get accounts with identical ID.
-     *
-     * @param string $uniqueId
      *
      * @return array
      */
@@ -132,9 +124,6 @@ trait Bans
 
     /**
      * Get accounts with similar IP.
-     *
-     * @param string $ip
-     * @param int    $accountId
      *
      * @return array
      */
@@ -191,10 +180,6 @@ trait Bans
 
     /**
      * Log out affected players for a ban.
-     *
-     * @param string $ip
-     * @param string $id
-     * @param string $type
      *
      * @return int
      */

@@ -121,8 +121,6 @@ class Commentary extends AbstractExtension
 
     /**
      * Get the Commentary instance.
-     *
-     * @return CommentaryCore
      */
     public function getCommentary(): CommentaryCore
     {

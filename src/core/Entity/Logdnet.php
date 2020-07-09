@@ -123,8 +123,6 @@ class Logdnet
 
     /**
      * Get the value of Serverid.
-     *
-     * @return int
      */
     public function getServerid(): int
     {
@@ -147,8 +145,6 @@ class Logdnet
 
     /**
      * Get the value of Address.
-     *
-     * @return string
      */
     public function getAddress(): string
     {
@@ -171,8 +167,6 @@ class Logdnet
 
     /**
      * Get the value of Description.
-     *
-     * @return string
      */
     public function getDescription(): string
     {
@@ -195,8 +189,6 @@ class Logdnet
 
     /**
      * Get the value of Priority.
-     *
-     * @return float
      */
     public function getPriority(): float
     {
@@ -219,8 +211,6 @@ class Logdnet
 
     /**
      * Get the value of Lastupdate.
-     *
-     * @return \DateTime
      */
     public function getLastupdate(): \DateTime
     {
@@ -243,8 +233,6 @@ class Logdnet
 
     /**
      * Get the value of Version.
-     *
-     * @return string
      */
     public function getVersion(): string
     {
@@ -267,8 +255,6 @@ class Logdnet
 
     /**
      * Get the value of Admin.
-     *
-     * @return string
      */
     public function getAdmin(): string
     {
@@ -291,8 +277,6 @@ class Logdnet
 
     /**
      * Get the value of Lastping.
-     *
-     * @return \DateTime
      */
     public function getLastping(): \DateTime
     {
@@ -315,8 +299,6 @@ class Logdnet
 
     /**
      * Get the value of Recentips.
-     *
-     * @return string
      */
     public function getRecentips(): string
     {
@@ -339,8 +321,6 @@ class Logdnet
 
     /**
      * Get the value of Count.
-     *
-     * @return int
      */
     public function getCount(): int
     {
@@ -363,8 +343,6 @@ class Logdnet
 
     /**
      * Get the value of Lang.
-     *
-     * @return string
      */
     public function getLang(): string
     {

@@ -23,8 +23,6 @@ trait EntityHydrator
     /**
      * Hydrate an object by populating getter/setter methods.
      *
-     * @param array $data
-     *
      * @return object
      */
     public function hydrateEntity(array $data)

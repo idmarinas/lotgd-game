@@ -11,7 +11,7 @@ namespace Lotgd\Core\Output;
 class Code
 {
     /**
-     * Array with codes format code => html
+     * Array with codes format code => html.
      *
      * @var array
      */
@@ -22,7 +22,7 @@ class Code
     ];
 
     /**
-     * Array with codes format code => html
+     * Array with codes format code => html.
      *
      * @var array
      */
@@ -32,7 +32,7 @@ class Code
     ];
 
     /**
-     * Array with codes format code => html
+     * Array with codes format code => html.
      *
      * @var array
      */
@@ -41,13 +41,11 @@ class Code
         '´H' => '</span>',
         '`n' => '<br>',
         '`0' => '</span>',
-        '´0' => '</span>',//-- Prevent errors
+        '´0' => '</span>', //-- Prevent errors
     ];
 
     /**
      * Remplace original game codes.
-     *
-     * @param array $codes
      *
      * @return $this
      */
@@ -59,9 +57,7 @@ class Code
     }
 
     /**
-     * Add more codes to game
-     *
-     * @param array $codes
+     * Add more codes to game.
      *
      * @return $this
      */
@@ -73,7 +69,7 @@ class Code
     }
 
     /**
-     * Get array of codes
+     * Get array of codes.
      *
      * @return array
      */
@@ -85,8 +81,6 @@ class Code
     /**
      * Remplace original game special codes.
      *
-     * @param array $codes
-     *
      * @return $this
      */
     public function setCodesSpecialOpen(array $codes)
@@ -97,9 +91,7 @@ class Code
     }
 
     /**
-     * Add more special codes to game
-     *
-     * @param array $codes
+     * Add more special codes to game.
      *
      * @return $this
      */
@@ -111,7 +103,7 @@ class Code
     }
 
     /**
-     * Get array of codes
+     * Get array of codes.
      *
      * @return array
      */
@@ -123,8 +115,6 @@ class Code
     /**
      * Remplace original game special codes.
      *
-     * @param array $codes
-     *
      * @return $this
      */
     public function setCodesSpecialClose(array $codes)
@@ -135,9 +125,7 @@ class Code
     }
 
     /**
-     * Add more special codes to game
-     *
-     * @param array $codes
+     * Add more special codes to game.
      *
      * @return $this
      */
@@ -149,7 +137,7 @@ class Code
     }
 
     /**
-     * Get array of codes
+     * Get array of codes.
      *
      * @return array
      */

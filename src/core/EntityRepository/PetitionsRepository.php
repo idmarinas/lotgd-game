@@ -54,9 +54,6 @@ class PetitionsRepository extends DoctrineRepository
     /**
      * Get count of petitions for network.
      *
-     * @param string $ip
-     * @param string $lgi
-     *
      * @return int
      */
     public function getCountPetitionsForNetwork(string $ip, string $lgi): int

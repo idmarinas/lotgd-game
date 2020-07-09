@@ -28,8 +28,6 @@ trait AttributesString
      *
      * Escapes all attribute keys and values
      *
-     * @param array $attributes
-     *
      * @return string
      */
     public function createAttributesString(array $attributes)

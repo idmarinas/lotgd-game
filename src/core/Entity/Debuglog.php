@@ -96,8 +96,6 @@ class Debuglog
 
     /**
      * Get the value of Id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -120,8 +118,6 @@ class Debuglog
 
     /**
      * Get the value of Date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {
@@ -144,8 +140,6 @@ class Debuglog
 
     /**
      * Get the value of Actor.
-     *
-     * @return int
      */
     public function getActor(): int
     {
@@ -168,8 +162,6 @@ class Debuglog
 
     /**
      * Get the value of Target.
-     *
-     * @return int
      */
     public function getTarget(): int
     {
@@ -192,8 +184,6 @@ class Debuglog
 
     /**
      * Get the value of Message.
-     *
-     * @return string
      */
     public function getMessage(): string
     {
@@ -216,8 +206,6 @@ class Debuglog
 
     /**
      * Get the value of Field.
-     *
-     * @return string
      */
     public function getField(): string
     {
@@ -240,8 +228,6 @@ class Debuglog
 
     /**
      * Get the value of Value.
-     *
-     * @return float
      */
     public function getValue(): float
     {

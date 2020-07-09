@@ -90,8 +90,6 @@ class Bans
 
     /**
      * Get the value of Banexpire.
-     *
-     * @return \DateTime
      */
     public function getBanexpire(): \DateTime
     {
@@ -114,8 +112,6 @@ class Bans
 
     /**
      * Get the value of Uniqueid.
-     *
-     * @return string
      */
     public function getUniqueid(): string
     {
@@ -138,8 +134,6 @@ class Bans
 
     /**
      * Get the value of Ipfilter.
-     *
-     * @return string
      */
     public function getIpfilter(): string
     {
@@ -162,8 +156,6 @@ class Bans
 
     /**
      * Get the value of Banreason.
-     *
-     * @return string
      */
     public function getBanreason(): string
     {
@@ -186,8 +178,6 @@ class Bans
 
     /**
      * Get the value of Banner.
-     *
-     * @return string
      */
     public function getBanner(): string
     {
@@ -210,8 +200,6 @@ class Bans
 
     /**
      * Get the value of Lasthit.
-     *
-     * @return \DateTime
      */
     public function getLasthit(): \DateTime
     {

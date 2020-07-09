@@ -97,8 +97,6 @@ class Faillog
 
     /**
      * Get the value of Eventid.
-     *
-     * @return int
      */
     public function getEventid(): int
     {
@@ -121,8 +119,6 @@ class Faillog
 
     /**
      * Get the value of Date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {
@@ -145,8 +141,6 @@ class Faillog
 
     /**
      * Get the value of Post.
-     *
-     * @return string
      */
     public function getPost(): string
     {
@@ -169,8 +163,6 @@ class Faillog
 
     /**
      * Get the value of Ip.
-     *
-     * @return string
      */
     public function getIp(): string
     {
@@ -193,8 +185,6 @@ class Faillog
 
     /**
      * Get the value of Acctid.
-     *
-     * @return int
      */
     public function getAcctid(): int
     {
@@ -217,8 +207,6 @@ class Faillog
 
     /**
      * Get the value of Id.
-     *
-     * @return string
      */
     public function getId(): string
     {

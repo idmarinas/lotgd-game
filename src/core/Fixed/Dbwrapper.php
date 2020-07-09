@@ -23,7 +23,7 @@ use Zend\Paginator\Paginator;
 class Dbwrapper
 {
     /**
-     * Instance of Dbwrapper
+     * Instance of Dbwrapper.
      *
      * @var Lotgd\Core\Db\CoreDbwrapper
      */
@@ -66,7 +66,7 @@ class Dbwrapper
     /**
      * Select API.
      *
-     * @param null|string|array|TableIdentifier $table
+     * @param string|array|TableIdentifier|null $table
      * @param bool                              $prefixed
      *
      * @return object
@@ -84,7 +84,7 @@ class Dbwrapper
     /**
      * Insert API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
@@ -102,7 +102,7 @@ class Dbwrapper
     /**
      * Update API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
@@ -120,7 +120,7 @@ class Dbwrapper
     /**
      * Delete API.
      *
-     * @param null|string|TableIdentifier $table
+     * @param string|TableIdentifier|null $table
      * @param bool                        $prefixed
      *
      * @return object
@@ -151,8 +151,6 @@ class Dbwrapper
      * Generate a paginator query.
      *
      * @param Select $select
-     * @param int    $page
-     * @param int    $perpage
      *
      * @return Zend\Paginator\Paginator
      */
@@ -165,7 +163,6 @@ class Dbwrapper
      * Navigation menu used with Paginator.
      *
      * @param Zend\Paginator\Paginator $paginator
-     * @param string                   $url
      * @param bool|null                $forcePages Force to show pages if only have 1 page
      */
     public static function pagination(Paginator $paginator, string $url, $forcePages = null)
@@ -252,8 +249,6 @@ class Dbwrapper
 
     /**
      * Check if table exist.
-     *
-     * @param string $tablename
      *
      * @return bool
      */

@@ -14,9 +14,7 @@
 namespace Lotgd\Core\EntityForm\Common;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BuffType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -133,27 +130,7 @@ class BuffType extends AbstractType
             ])
         ;
     }
-    // name: Buff name
-    // roundmsg: Each round
-    // wearoff: Wear off
-    // effectmsg: Effect
-    // effectnodmgmsg: Effect No Damage
-    // effectfailmsg: Effect Fail
-    // rounds: Rounds to last (from new day)
-    // atkmod: Player Atk mod (multiplier)
-    // defmod: Player Def mod (multiplier)
-    // invulnerable: Player is invulnerable
-    // regen: Regen
-    // minioncount: Minion Count
-    // minbadguydamage: Min Badguy Damage
-    // maxbadguydamage: Max Badguy Damage
-    // mingoodguydamage: Min Goodguy Damage
-    // maxgoodguydamage: Max Goodguy Damage
-    // lifetap: Lifetap (multiplier)
-    // damageshield: Damage shield (multiplier)
-    // badguydmgmod: Badguy Damage mod (multiplier)
-    // badguyatkmod: Badguy Atk mod (multiplier)
-    // badguydefmod: Badguy Def mod (multiplier)
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -65,7 +65,7 @@ class Form extends AbstractElement
 
     /**
      * Render a form with tabs.
-     * Elements in popup are divided in columns if needed. (max 4 columns)
+     * Elements in popup are divided in columns if needed. (max 4 columns).
      *
      * Same as Menu but without triger of popup.
      */
@@ -78,7 +78,7 @@ class Form extends AbstractElement
 
     /**
      * Rendener form with a menu with popup.
-     * Elements in popup are divided in columns if needed. (max 4 columns)
+     * Elements in popup are divided in columns if needed. (max 4 columns).
      */
     public function formRenderMenu(Environment $env, FormInterface $form): string
     {

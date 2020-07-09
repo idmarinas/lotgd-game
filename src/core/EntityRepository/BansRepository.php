@@ -54,6 +54,7 @@ class BansRepository extends DoctrineRepository
     public function deleteBan($ip, $id): int
     {
         $query = $this->_em->createQueryBuilder();
+
         try
         {
             return $query->delete($this->_entityName, 'u')

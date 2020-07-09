@@ -12,8 +12,8 @@
 
 namespace Lotgd\Core\Factory;
 
-use Lotgd\Core\Session as CoreSession;
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Session as CoreSession;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

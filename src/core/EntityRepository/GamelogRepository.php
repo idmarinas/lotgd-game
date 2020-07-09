@@ -21,8 +21,6 @@ class GamelogRepository extends DoctrineRepository
     /**
      * Delte old fail logs in data base.
      *
-     * @param int $expire
-     *
      * @return int
      */
     public function deleteExpireGamelogs(int $expire): int

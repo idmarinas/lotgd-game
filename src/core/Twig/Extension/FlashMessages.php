@@ -76,8 +76,6 @@ class FlashMessages extends AbstractExtension
 
     /**
      * Get instance of FlashMessages instance.
-     *
-     * @return CoreFlashMessages
      */
     public function getFlashMessages(): CoreFlashMessages
     {

@@ -44,8 +44,6 @@ abstract class UpgradeAbstract
      * Insert data of an update install.
      *
      * @param int $version Version to upgrade
-     *
-     * @return bool
      */
     public function insertData(int $version): bool
     {
@@ -104,8 +102,6 @@ abstract class UpgradeAbstract
 
     /**
      * Get all generated messages.
-     *
-     * @return array
      */
     public function getMessages(): array
     {
@@ -114,10 +110,6 @@ abstract class UpgradeAbstract
 
     /**
      * Set Doctrine Entity Manager.
-     *
-     * @param EntityManager $doctrine
-     *
-     * @return self
      */
     public function setDoctrine(EntityManager $doctrine): self
     {
@@ -130,10 +122,6 @@ abstract class UpgradeAbstract
 
     /**
      * Set connection.
-     *
-     * @param Connection $connection
-     *
-     * @return self
      */
     public function setConnection(Connection $connection): self
     {
@@ -144,10 +132,6 @@ abstract class UpgradeAbstract
 
     /**
      * Sync a single entity.
-     *
-     * @param string $entity
-     *
-     * @return bool
      */
     public function syncEntity(string $entity): bool
     {

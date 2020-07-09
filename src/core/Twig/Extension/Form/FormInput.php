@@ -134,6 +134,14 @@ class FormInput extends AbstractElement
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'form-input';
+    }
+
+    /**
      * Determine input type to use.
      *
      * @return string
@@ -145,13 +153,5 @@ class FormInput extends AbstractElement
         $type = strtolower($type);
 
         return $this->validTypes[$type] ?? 'text';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'form-input';
     }
 }

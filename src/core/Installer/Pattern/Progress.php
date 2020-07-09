@@ -15,8 +15,6 @@ trait Progress
 
     /**
      * Data are inserted in database.
-     *
-     * @return self
      */
     public function dataInsertedOn(): self
     {
@@ -27,8 +25,6 @@ trait Progress
 
     /**
      * Data NOT are inserted in database.
-     *
-     * @return self
      */
     public function dataInsertedOff(): self
     {
@@ -39,8 +35,6 @@ trait Progress
 
     /**
      * Get if data are inserted in database.
-     *
-     * @return bool
      */
     public function dataInserted(): bool
     {
@@ -49,8 +43,6 @@ trait Progress
 
     /**
      * Data of upgrades are inserted in database.
-     *
-     * @return self
      */
     public function dataUpgradesInsertedOn(): self
     {
@@ -61,8 +53,6 @@ trait Progress
 
     /**
      * Data of upgrades NOT are inserted in database.
-     *
-     * @return self
      */
     public function dataUpgradesInsertedOff(): self
     {
@@ -73,8 +63,6 @@ trait Progress
 
     /**
      * Get if data of upgrades are inserted in database.
-     *
-     * @return bool
      */
     public function dataUpgradesInserted(): bool
     {

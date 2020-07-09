@@ -25,8 +25,6 @@ class CronjobRepository extends DoctrineRepository
     /**
      * Get character's name from an account ID.
      *
-     * @param int $acctId
-     *
      * @return string
      */
     public function getCharacterNameFromAcctId(int $acctId): ?string

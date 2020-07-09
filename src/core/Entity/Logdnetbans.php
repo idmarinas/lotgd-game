@@ -62,8 +62,6 @@ class Logdnetbans
 
     /**
      * Get the value of Banid.
-     *
-     * @return int
      */
     public function getBanid(): int
     {
@@ -86,8 +84,6 @@ class Logdnetbans
 
     /**
      * Get the value of Bantype.
-     *
-     * @return string
      */
     public function getBantype(): string
     {
@@ -110,8 +106,6 @@ class Logdnetbans
 
     /**
      * Get the value of Banvalue.
-     *
-     * @return string
      */
     public function getBanvalue(): string
     {

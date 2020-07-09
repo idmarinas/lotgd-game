@@ -13,7 +13,7 @@
 namespace Lotgd\Core\Exception;
 
 /**
- * Core invalid argument exception
+ * Core invalid argument exception.
  */
 class InvalidArgumentException extends \InvalidArgumentException
 {

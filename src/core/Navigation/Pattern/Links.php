@@ -27,8 +27,6 @@ trait Links
     /**
      * Add a link to navigation menu.
      *
-     * @param string $link
-     *
      * @return $this
      */
     public function addLink(string $link)
@@ -44,8 +42,6 @@ trait Links
     /**
      * Block a link.
      *
-     * @param string $link
-     *
      * @return $this
      */
     public function blockLink(string $link)
@@ -56,8 +52,6 @@ trait Links
     /**
      * Block and hide a link.
      *
-     * @param string $link
-     *
      * @return $this
      */
     public function blockHideLink(string $link)
@@ -67,8 +61,6 @@ trait Links
 
     /**
      * Unblock a link.
-     *
-     * @param string $link
      *
      * @return $this
      */
@@ -89,8 +81,6 @@ trait Links
     /**
      * Block a partial link.
      *
-     * @param string $link
-     *
      * @return $this
      */
     public function blockPartialLink(string $link)
@@ -110,8 +100,6 @@ trait Links
     /**
      * Unblock a partial link.
      *
-     * @param string $link
-     *
      * @return $this
      */
     public function unBlockPartialLink(string $link)
@@ -130,8 +118,6 @@ trait Links
 
     /**
      * Check if link is blocked.
-     *
-     * @param string $link
      *
      * @return bool
      */
@@ -156,8 +142,6 @@ trait Links
 
     /**
      * Check if link is hide.
-     *
-     * @param string $link
      *
      * @return bool
      */
@@ -194,7 +178,7 @@ trait Links
             return false;
         }
 
-        foreach($this->navs[$label] as $nav)
+        foreach ($this->navs[$label] as $nav)
         {
             if (! $this->isBlocked($nav['link']) || ! $this->isHided($nav['link']))
             {
@@ -207,9 +191,6 @@ trait Links
 
     /**
      * Block a link.
-     *
-     * @param string $link
-     * @param array  $options
      *
      * @return self
      */

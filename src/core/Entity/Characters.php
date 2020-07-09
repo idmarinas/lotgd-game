@@ -583,8 +583,6 @@ class Characters
 
     /**
      * Get the value of Id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -631,8 +629,6 @@ class Characters
 
     /**
      * Get the value of Name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -655,8 +651,6 @@ class Characters
 
     /**
      * Get the value of Playername.
-     *
-     * @return string
      */
     public function getPlayername(): string
     {
@@ -679,8 +673,6 @@ class Characters
 
     /**
      * Get the value of Sex.
-     *
-     * @return int
      */
     public function getSex(): int
     {
@@ -703,8 +695,6 @@ class Characters
 
     /**
      * Get the value of Strength.
-     *
-     * @return int
      */
     public function getStrength(): int
     {
@@ -727,8 +717,6 @@ class Characters
 
     /**
      * Get the value of Dexterity.
-     *
-     * @return int
      */
     public function getDexterity(): int
     {
@@ -751,8 +739,6 @@ class Characters
 
     /**
      * Get the value of Intelligence.
-     *
-     * @return int
      */
     public function getIntelligence(): int
     {
@@ -775,8 +761,6 @@ class Characters
 
     /**
      * Get the value of Constitution.
-     *
-     * @return int
      */
     public function getConstitution(): int
     {
@@ -799,8 +783,6 @@ class Characters
 
     /**
      * Get the value of Wisdom.
-     *
-     * @return int
      */
     public function getWisdom(): int
     {
@@ -823,8 +805,6 @@ class Characters
 
     /**
      * Get the value of Specialty.
-     *
-     * @return string
      */
     public function getSpecialty(): string
     {
@@ -847,8 +827,6 @@ class Characters
 
     /**
      * Get the value of Experience.
-     *
-     * @return int
      */
     public function getExperience(): int
     {
@@ -871,8 +849,6 @@ class Characters
 
     /**
      * Get the value of Gold.
-     *
-     * @return int
      */
     public function getGold(): int
     {
@@ -895,8 +871,6 @@ class Characters
 
     /**
      * Get the value of Weapon.
-     *
-     * @return string
      */
     public function getWeapon(): string
     {
@@ -919,8 +893,6 @@ class Characters
 
     /**
      * Get the value of Armor.
-     *
-     * @return string
      */
     public function getArmor(): string
     {
@@ -943,8 +915,6 @@ class Characters
 
     /**
      * Get the value of Seenmaster.
-     *
-     * @return bool
      */
     public function getSeenmaster(): bool
     {
@@ -967,8 +937,6 @@ class Characters
 
     /**
      * Get the value of Level.
-     *
-     * @return int
      */
     public function getLevel(): int
     {
@@ -991,8 +959,6 @@ class Characters
 
     /**
      * Get the value of Defense.
-     *
-     * @return int
      */
     public function getDefense(): int
     {
@@ -1015,8 +981,6 @@ class Characters
 
     /**
      * Get the value of Attack.
-     *
-     * @return int
      */
     public function getAttack(): int
     {
@@ -1039,8 +1003,6 @@ class Characters
 
     /**
      * Get the value of Alive.
-     *
-     * @return bool
      */
     public function getAlive(): bool
     {
@@ -1063,8 +1025,6 @@ class Characters
 
     /**
      * Get the value of Goldinbank.
-     *
-     * @return int
      */
     public function getGoldinbank(): int
     {
@@ -1087,8 +1047,6 @@ class Characters
 
     /**
      * Get the value of Marriedto.
-     *
-     * @return int
      */
     public function getMarriedto(): int
     {
@@ -1111,8 +1069,6 @@ class Characters
 
     /**
      * Get the value of Spirits.
-     *
-     * @return int
      */
     public function getSpirits(): int
     {
@@ -1135,8 +1091,6 @@ class Characters
 
     /**
      * Get the value of Hitpoints.
-     *
-     * @return int
      */
     public function getHitpoints(): int
     {
@@ -1159,8 +1113,6 @@ class Characters
 
     /**
      * Get the value of Maxhitpoints.
-     *
-     * @return int
      */
     public function getMaxhitpoints(): int
     {
@@ -1183,8 +1135,6 @@ class Characters
 
     /**
      * Get the value of Permahitpoints.
-     *
-     * @return int
      */
     public function getPermahitpoints(): int
     {
@@ -1207,8 +1157,6 @@ class Characters
 
     /**
      * Get the value of Gems.
-     *
-     * @return int
      */
     public function getGems(): int
     {
@@ -1231,8 +1179,6 @@ class Characters
 
     /**
      * Get the value of Weaponvalue.
-     *
-     * @return int
      */
     public function getWeaponvalue(): int
     {
@@ -1255,8 +1201,6 @@ class Characters
 
     /**
      * Get the value of Armorvalue.
-     *
-     * @return int
      */
     public function getArmorvalue(): int
     {
@@ -1279,8 +1223,6 @@ class Characters
 
     /**
      * Get the value of Location.
-     *
-     * @return string
      */
     public function getLocation(): string
     {
@@ -1303,8 +1245,6 @@ class Characters
 
     /**
      * Get the value of Turns.
-     *
-     * @return int
      */
     public function getTurns(): int
     {
@@ -1327,8 +1267,6 @@ class Characters
 
     /**
      * Get the value of Title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -1423,8 +1361,6 @@ class Characters
 
     /**
      * Get the value of Resurrections.
-     *
-     * @return int
      */
     public function getResurrections(): int
     {
@@ -1447,8 +1383,6 @@ class Characters
 
     /**
      * Get the value of Weapondmg.
-     *
-     * @return int
      */
     public function getWeapondmg(): int
     {
@@ -1471,8 +1405,6 @@ class Characters
 
     /**
      * Get the value of Armordef.
-     *
-     * @return int
      */
     public function getArmordef(): int
     {
@@ -1495,8 +1427,6 @@ class Characters
 
     /**
      * Get the value of Age.
-     *
-     * @return int
      */
     public function getAge(): int
     {
@@ -1519,8 +1449,6 @@ class Characters
 
     /**
      * Get the value of Charm.
-     *
-     * @return int
      */
     public function getCharm(): int
     {
@@ -1543,8 +1471,6 @@ class Characters
 
     /**
      * Get the value of Specialinc.
-     *
-     * @return string
      */
     public function getSpecialinc(): string
     {
@@ -1567,8 +1493,6 @@ class Characters
 
     /**
      * Get the value of Specialmisc.
-     *
-     * @return string
      */
     public function getSpecialmisc(): string
     {
@@ -1591,8 +1515,6 @@ class Characters
 
     /**
      * Get the value of Lastmotd.
-     *
-     * @return \DateTime
      */
     public function getLastmotd(): \DateTime
     {
@@ -1615,8 +1537,6 @@ class Characters
 
     /**
      * Get the value of Playerfights.
-     *
-     * @return int
      */
     public function getPlayerfights(): int
     {
@@ -1639,8 +1559,6 @@ class Characters
 
     /**
      * Get the value of Lasthit.
-     *
-     * @return \DateTime
      */
     public function getLasthit(): \DateTime
     {
@@ -1663,8 +1581,6 @@ class Characters
 
     /**
      * Get the value of Seendragon.
-     *
-     * @return bool
      */
     public function getSeendragon(): bool
     {
@@ -1687,8 +1603,6 @@ class Characters
 
     /**
      * Get the value of Dragonkills.
-     *
-     * @return int
      */
     public function getDragonkills(): int
     {
@@ -1711,8 +1625,6 @@ class Characters
 
     /**
      * Get the value of Restorepage.
-     *
-     * @return string
      */
     public function getRestorepage(): string
     {
@@ -1735,8 +1647,6 @@ class Characters
 
     /**
      * Get the value of Hashorse.
-     *
-     * @return bool
      */
     public function getHashorse(): bool
     {
@@ -1807,8 +1717,6 @@ class Characters
 
     /**
      * Get the value of Boughtroomtoday.
-     *
-     * @return bool
      */
     public function getBoughtroomtoday(): bool
     {
@@ -1831,8 +1739,6 @@ class Characters
 
     /**
      * Get the value of Sentnotice.
-     *
-     * @return bool
      */
     public function getSentnotice(): bool
     {
@@ -1855,8 +1761,6 @@ class Characters
 
     /**
      * Get the value of Pvpflag.
-     *
-     * @return \DateTime
      */
     public function getPvpflag(): \DateTime
     {
@@ -1879,8 +1783,6 @@ class Characters
 
     /**
      * Get the value of Transferredtoday.
-     *
-     * @return int
      */
     public function getTransferredtoday(): int
     {
@@ -1903,8 +1805,6 @@ class Characters
 
     /**
      * Get the value of Soulpoints.
-     *
-     * @return int
      */
     public function getSoulpoints(): int
     {
@@ -1927,8 +1827,6 @@ class Characters
 
     /**
      * Get the value of Gravefights.
-     *
-     * @return int
      */
     public function getGravefights(): int
     {
@@ -1951,8 +1849,6 @@ class Characters
 
     /**
      * Get the value of Hauntedby.
-     *
-     * @return string
      */
     public function getHauntedby(): string
     {
@@ -1975,8 +1871,6 @@ class Characters
 
     /**
      * Get the value of Deathpower.
-     *
-     * @return int
      */
     public function getDeathpower(): int
     {
@@ -1999,8 +1893,6 @@ class Characters
 
     /**
      * Get the value of Recentcomments.
-     *
-     * @return \DateTime
      */
     public function getRecentcomments(): \DateTime
     {
@@ -2023,8 +1915,6 @@ class Characters
 
     /**
      * Get the value of Bio.
-     *
-     * @return string
      */
     public function getBio(): string
     {
@@ -2047,8 +1937,6 @@ class Characters
 
     /**
      * Get the value of Race.
-     *
-     * @return string
      */
     public function getRace(): string
     {
@@ -2071,8 +1959,6 @@ class Characters
 
     /**
      * Get the value of Biotime.
-     *
-     * @return \DateTime
      */
     public function getBiotime(): \DateTime
     {
@@ -2095,8 +1981,6 @@ class Characters
 
     /**
      * Get the value of Amountouttoday.
-     *
-     * @return int
      */
     public function getAmountouttoday(): int
     {
@@ -2119,8 +2003,6 @@ class Characters
 
     /**
      * Get the value of Pk.
-     *
-     * @return bool
      */
     public function getPk(): bool
     {
@@ -2143,8 +2025,6 @@ class Characters
 
     /**
      * Get the value of Dragonage.
-     *
-     * @return int
      */
     public function getDragonage(): int
     {
@@ -2167,8 +2047,6 @@ class Characters
 
     /**
      * Get the value of Bestdragonage.
-     *
-     * @return int
      */
     public function getBestdragonage(): int
     {
@@ -2191,8 +2069,6 @@ class Characters
 
     /**
      * Get the value of Ctitle.
-     *
-     * @return string
      */
     public function getCtitle(): string
     {
@@ -2215,8 +2091,6 @@ class Characters
 
     /**
      * Get the value of Slaydragon.
-     *
-     * @return bool
      */
     public function getSlaydragon(): bool
     {
@@ -2239,8 +2113,6 @@ class Characters
 
     /**
      * Get the value of Fedmount.
-     *
-     * @return bool
      */
     public function getFedmount(): bool
     {
@@ -2263,8 +2135,6 @@ class Characters
 
     /**
      * Get the value of Clanid.
-     *
-     * @return int
      */
     public function getClanid(): int
     {
@@ -2287,8 +2157,6 @@ class Characters
 
     /**
      * Get the value of Clanrank.
-     *
-     * @return int
      */
     public function getClanrank(): int
     {
@@ -2311,8 +2179,6 @@ class Characters
 
     /**
      * Get the value of Clanjoindate.
-     *
-     * @return \DateTime
      */
     public function getClanjoindate(): \DateTime
     {
@@ -2335,8 +2201,6 @@ class Characters
 
     /**
      * Get the value of Chatloc.
-     *
-     * @return string
      */
     public function getChatloc(): string
     {

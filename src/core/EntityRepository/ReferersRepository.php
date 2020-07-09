@@ -21,8 +21,6 @@ class ReferersRepository extends DoctrineRepository
     /**
      * Delte old referers in data base.
      *
-     * @param int $expire
-     *
      * @return int
      */
     public function deleteExpireReferers(int $expire): int

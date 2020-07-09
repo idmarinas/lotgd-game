@@ -18,7 +18,7 @@ use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 class Navigation
 {
     /**
-     * Instance of Navigation
+     * Instance of Navigation.
      *
      * @var Lotgd\Core\Navigation\Navigation
      */
@@ -45,9 +45,7 @@ class Navigation
     }
 
     /**
-     * Set instance of Navigation
-     *
-     * @param CoreNavigation $instance
+     * Set instance of Navigation.
      */
     public static function instance(CoreNavigation $instance)
     {

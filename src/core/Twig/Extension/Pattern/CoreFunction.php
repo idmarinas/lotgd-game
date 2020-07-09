@@ -21,19 +21,14 @@ trait CoreFunction
 {
     /**
      * Add server name to url query.
-     *
-     * @param string $query
-     *
-     * @return string
      */
     public function baseUrl(string $query): string
     {
         return \sprintf('//%s/%s', \LotgdHttp::getServer('SERVER_NAME'), $query);
     }
+
     /**
      * Translate a title of page.
-     *
-     * @param array $title
      *
      * @return string
      */
@@ -46,8 +41,6 @@ trait CoreFunction
 
     /**
      * Get version of game.
-     *
-     * @return string
      */
     public function gameVersion(): string
     {
@@ -56,8 +49,6 @@ trait CoreFunction
 
     /**
      * Get copyright of game.
-     *
-     * @return string
      */
     public function gameCopyright(): string
     {
@@ -130,10 +121,6 @@ trait CoreFunction
 
     /**
      * Render a PvP table list.
-     *
-     * @param array $params
-     *
-     * @return string
      */
     public function pvpListTable(array $params): string
     {
@@ -148,10 +135,6 @@ trait CoreFunction
 
     /**
      * Render a count of sleepers for zone.
-     *
-     * @param array $params
-     *
-     * @return string
      */
     public function pvpListSleepers(array $params): string
     {
@@ -160,8 +143,6 @@ trait CoreFunction
 
     /**
      * Get cookie name.
-     *
-     * @return string
      */
     public function sessionCookieName(): string
     {
@@ -171,12 +152,10 @@ trait CoreFunction
     }
 
     /**
-     * Function to use bdump of Tracy debugger
+     * Function to use bdump of Tracy debugger.
      *
-     * @param mixed $param
+     * @param mixed  $param
      * @param string $name
-     *
-     * @return void
      */
     public function bdump($param, $name = null): void
     {
@@ -187,12 +166,10 @@ trait CoreFunction
      * Dump var and return a string.
      *
      * @param mixed $var
-     *
-     * @return string
      */
     public function varDump($var): string
     {
-        return '<pre>' . var_export($var, true) . '</pre>';
+        return '<pre>'.var_export($var, true).'</pre>';
     }
 
     /**

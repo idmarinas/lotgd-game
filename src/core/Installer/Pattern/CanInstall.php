@@ -43,8 +43,6 @@ trait CanInstall
     /**
      * Set currently installed version.
      *
-     * @param string $version
-     *
      * @return $this
      */
     public function versionInstalled(string $version)

@@ -62,8 +62,6 @@ class Whostyping
 
     /**
      * Get the value of Name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -86,8 +84,6 @@ class Whostyping
 
     /**
      * Get the value of Time.
-     *
-     * @return int
      */
     public function getTime(): int
     {
@@ -110,8 +106,6 @@ class Whostyping
 
     /**
      * Get the value of Section.
-     *
-     * @return string
      */
     public function getSection(): string
     {

@@ -21,8 +21,6 @@ trait Superuser
     /**
      * Get all superusers who have the given permission.
      *
-     * @param int $permit
-     *
      * @return array
      */
     public function getSuperuserWithPermit(int $permit): ?array
@@ -49,8 +47,6 @@ trait Superuser
     /**
      * Get all superusers who have the given permission.
      *
-     * @param int $permit
-     *
      * @return int
      */
     public function getSuperuserCountWithPermit(int $permit): int
@@ -76,10 +72,6 @@ trait Superuser
 
     /**
      * Get all superusers who have the given permission.
-     *
-     * @param string $name
-     * @param string $password
-     * @param int    $permit
      *
      * @return array|null
      */

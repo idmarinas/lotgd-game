@@ -157,8 +157,6 @@ class Modules
 
     /**
      * Get the value of Modulename.
-     *
-     * @return string
      */
     public function getModulename(): string
     {
@@ -181,8 +179,6 @@ class Modules
 
     /**
      * Get the value of Formalname.
-     *
-     * @return string
      */
     public function getFormalname(): string
     {
@@ -205,8 +201,6 @@ class Modules
 
     /**
      * Get the value of Description.
-     *
-     * @return string
      */
     public function getDescription(): string
     {
@@ -229,8 +223,6 @@ class Modules
 
     /**
      * Get the value of Moduleauthor.
-     *
-     * @return string
      */
     public function getModuleauthor(): string
     {
@@ -253,8 +245,6 @@ class Modules
 
     /**
      * Get the value of Active.
-     *
-     * @return bool
      */
     public function getActive(): bool
     {
@@ -277,8 +267,6 @@ class Modules
 
     /**
      * Get the value of Filename.
-     *
-     * @return string
      */
     public function getFilename(): string
     {
@@ -301,8 +289,6 @@ class Modules
 
     /**
      * Get the value of Installdate.
-     *
-     * @return \DateTime
      */
     public function getInstalldate(): \DateTime
     {
@@ -325,8 +311,6 @@ class Modules
 
     /**
      * Get the value of Installedby.
-     *
-     * @return string
      */
     public function getInstalledby(): string
     {
@@ -349,8 +333,6 @@ class Modules
 
     /**
      * Get the value of Filemoddate.
-     *
-     * @return \DateTime
      */
     public function getFilemoddate(): \DateTime
     {
@@ -373,8 +355,6 @@ class Modules
 
     /**
      * Get the value of Type.
-     *
-     * @return bool
      */
     public function getType(): bool
     {
@@ -397,8 +377,6 @@ class Modules
 
     /**
      * Get the value of Extras.
-     *
-     * @return string
      */
     public function getExtras(): string
     {
@@ -421,8 +399,6 @@ class Modules
 
     /**
      * Get the value of Category.
-     *
-     * @return string
      */
     public function getCategory(): string
     {
@@ -445,8 +421,6 @@ class Modules
 
     /**
      * Get the value of Infokeys.
-     *
-     * @return string
      */
     public function getInfokeys(): string
     {
@@ -469,8 +443,6 @@ class Modules
 
     /**
      * Get the value of Version.
-     *
-     * @return string
      */
     public function getVersion(): string
     {
@@ -493,8 +465,6 @@ class Modules
 
     /**
      * Get the value of Download.
-     *
-     * @return string
      */
     public function getDownload(): string
     {

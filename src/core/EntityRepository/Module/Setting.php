@@ -21,9 +21,7 @@ use Tracy\Debugger;
 trait Setting
 {
     /**
-     * Find all modules that have
-     *
-     * @param string $like
+     * Find all modules that have.
      *
      * @return array
      */
@@ -50,6 +48,3 @@ trait Setting
         }
     }
 }
-
-
-

@@ -11,7 +11,7 @@ namespace Lotgd\Core\Output;
 class Color
 {
     /**
-     * Array of codes format code => css tag
+     * Array of codes format code => css tag.
      *
      * @var array
      */
@@ -63,8 +63,6 @@ class Color
     /**
      * Remplace original game colors.
      *
-     * @param array $colors
-     *
      * @return $this
      */
     public function setColors(array $colors)
@@ -75,9 +73,7 @@ class Color
     }
 
     /**
-     * Add more colors to game
-     *
-     * @param array $colors
+     * Add more colors to game.
      *
      * @return $this
      */
@@ -89,7 +85,7 @@ class Color
     }
 
     /**
-     * Get array of colors
+     * Get array of colors.
      *
      * @return array
      */

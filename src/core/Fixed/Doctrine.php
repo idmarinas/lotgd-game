@@ -60,8 +60,7 @@ class Doctrine
      * Updates the database schema of the given classes by comparing the ClassMetadata
      * instances to the current database schema that is inspected.
      *
-     * @param array $entities
-     * @param bool  $dumpSql  Dumps the generated SQL statements to the screen
+     * @param bool $dumpSql Dumps the generated SQL statements to the screen
      *
      * @return int Number of queries
      */

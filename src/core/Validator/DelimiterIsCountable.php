@@ -18,7 +18,7 @@ use Zend\Validator\IsCountable;
 class DelimiterIsCountable extends IsCountable
 {
     /**
-     * Options for the between validator
+     * Options for the between validator.
      *
      * @var array
      */
@@ -30,7 +30,7 @@ class DelimiterIsCountable extends IsCountable
     ];
 
     /**
-     * Get delimiter option
+     * Get delimiter option.
      *
      * @return mixed
      */
@@ -40,7 +40,7 @@ class DelimiterIsCountable extends IsCountable
     }
 
     /**
-     * Set delimiter option
+     * Set delimiter option.
      *
      * @param string $value
      *
@@ -52,7 +52,7 @@ class DelimiterIsCountable extends IsCountable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function isValid($value)
     {

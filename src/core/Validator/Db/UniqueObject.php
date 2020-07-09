@@ -66,13 +66,7 @@ class UniqueObject extends ObjectExists
                 $provided = gettype($options['object_manager']);
             }
 
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'Option "object_manager" is required and must be an instance of'
-                    .' Doctrine\Common\Persistence\ObjectManager, %s given',
-                    $provided
-                )
-            );
+            throw new Exception\InvalidArgumentException(sprintf('Option "object_manager" is required and must be an instance of  Doctrine\Common\Persistence\ObjectManager, %s given', $provided));
         }
 
         $this->objectManager = $options['object_manager'];
@@ -145,9 +139,7 @@ class UniqueObject extends ObjectExists
     {
         if (null === $context)
         {
-            throw new Exception\RuntimeException(
-                'Expected context to be an array but is null'
-            );
+            throw new Exception\RuntimeException('Expected context to be an array but is null');
         }
         $className = $this->objectRepository->getClassName();
 

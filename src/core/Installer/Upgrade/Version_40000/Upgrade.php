@@ -232,7 +232,7 @@ class Upgrade extends UpgradeAbstract
 
             do
             {
-                foreach($paginator as $row)
+                foreach ($paginator as $row)
                 {
                     $row = (array) $row;
 

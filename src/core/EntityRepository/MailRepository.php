@@ -24,8 +24,6 @@ class MailRepository extends DoctrineRepository
     /**
      * Get a count of see and unsee mail.
      *
-     * @param int $acctId
-     *
      * @return array
      */
     public function getCountMailOfCharacter(int $acctId): array
@@ -65,8 +63,6 @@ class MailRepository extends DoctrineRepository
     /**
      * Get character's name from an account ID.
      *
-     * @param int $acctId
-     *
      * @return string
      */
     public function getCharacterNameFromAcctId(int $acctId): ?string
@@ -92,10 +88,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get list of messages for a character.
-     *
-     * @param int    $acctId
-     * @param string $order
-     * @param int    $direction
      *
      * @return array
      */
@@ -148,8 +140,6 @@ class MailRepository extends DoctrineRepository
     /**
      * Get a names of senders and count msgs.
      *
-     * @param int $acctId
-     *
      * @return array
      */
     public function getMailSenderNames(int $acctId): array
@@ -183,9 +173,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get next and previous IDs of current mail.
-     *
-     * @param int $mailId
-     * @param int $acctId
      *
      * @return array
      */
@@ -235,8 +222,6 @@ class MailRepository extends DoctrineRepository
     /**
      * Delete mail in bulk by ID.
      *
-     * @param array $ids
-     *
      * @return int
      */
     public function deleteBulkMail(array $ids)
@@ -262,9 +247,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get info of the reply message.
-     *
-     * @param int $msgId
-     * @param int $acct
      *
      * @return array
      */
@@ -303,9 +285,6 @@ class MailRepository extends DoctrineRepository
     /**
      * Count messages in inbox of character.
      *
-     * @param int $acctId
-     * @param int $onlyUnseen
-     *
      * @return int
      */
     public function countInboxOfCharacter(int $acctId, int $onlyUnseen): int
@@ -340,8 +319,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Delte old mails in data base.
-     *
-     * @param int $expire
      *
      * @return int
      */

@@ -70,8 +70,6 @@ trait Prefix
 
     /**
      * Get the value of prefix.
-     *
-     * @return string
      */
     public function getPrefix(): string
     {
@@ -80,8 +78,6 @@ trait Prefix
 
     /**
      * Set the value of prefix.
-     *
-     * @param string $prefix
      *
      * @return self
      */

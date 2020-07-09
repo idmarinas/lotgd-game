@@ -14,7 +14,7 @@
 namespace Lotgd\Core;
 
 /**
- * Contain information about application/game
+ * Contain information about application/game.
  */
 class Application
 {
@@ -45,7 +45,7 @@ class Application
      *      if you have added functionality to the code, you may append your
      *      name at the end indicating which parts are copyright by you.
      *  Eg:
-     *  Copyright 2002-2004, Game: Eric Stevens & JT Traub, modified by Your Name
+     *  Copyright 2002-2004, Game: Eric Stevens & JT Traub, modified by Your Name.
      *
      * @var string
      */

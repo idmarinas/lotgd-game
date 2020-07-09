@@ -51,8 +51,8 @@ class Armor implements Translatable
      * @ORM\Column(name="value", type="integer", nullable=false, options={"unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 42949672295
+     *     min=0,
+     *     max=42949672295
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -64,8 +64,8 @@ class Armor implements Translatable
      * @ORM\Column(name="defense", type="smallint", nullable=false, options={"unsigned": true, "default": "1"})
      *
      * @Assert\Range(
-     *      min = 1,
-     *      max = 65535
+     *     min=1,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -77,8 +77,8 @@ class Armor implements Translatable
      * @ORM\Column(name="level", type="smallint", nullable=false, options={"unsigned": true})
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 65535
+     *     min=0,
+     *     max=65535
      * )
      * @Assert\DivisibleBy(1)
      */
@@ -89,14 +89,14 @@ class Armor implements Translatable
      */
     private $translations;
 
-    public function __toString()
-    {
-        return (string) $this->getArmorid();
-    }
-
     public function __construct()
     {
         $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getArmorid();
     }
 
     public function getTranslations()
@@ -153,8 +153,6 @@ class Armor implements Translatable
 
     /**
      * Get the value of Armorname.
-     *
-     * @return string
      */
     public function getArmorname(): string
     {
@@ -177,8 +175,6 @@ class Armor implements Translatable
 
     /**
      * Get the value of Value.
-     *
-     * @return int
      */
     public function getValue(): int
     {
@@ -201,8 +197,6 @@ class Armor implements Translatable
 
     /**
      * Get the value of Defense.
-     *
-     * @return int
      */
     public function getDefense(): int
     {
@@ -225,8 +219,6 @@ class Armor implements Translatable
 
     /**
      * Get the value of Level.
-     *
-     * @return int
      */
     public function getLevel(): int
     {

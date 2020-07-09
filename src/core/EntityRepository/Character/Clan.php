@@ -25,8 +25,6 @@ trait Clan
     /**
      * Get list of membership of clan.
      *
-     * @param int $clanId
-     *
      * @return array
      */
     public function getClanMembershipList(int $clanId): array
@@ -59,8 +57,6 @@ trait Clan
     /**
      * Get details of membership of clan.
      *
-     * @param int $clanId
-     *
      * @return array|null
      */
     public function getClanMembershipDetails(int $clanId): ?array
@@ -89,8 +85,6 @@ trait Clan
     /**
      * Count leaders of a clan.
      *
-     * @param int $clanId
-     *
      * @return int
      */
     public function getClanLeadersCount(int $clanId): int
@@ -117,9 +111,6 @@ trait Clan
 
     /**
      * Get one member of clan that can be promote to leader.
-     *
-     * @param int $clanId
-     * @param int $acctId
      *
      * @return array|null
      */
@@ -160,7 +151,6 @@ trait Clan
     /**
      * Get leaders of clan exclude select acctId.
      *
-     * @param int $clanId
      * @param int $acctId Exclude this acctId
      *
      * @return array
@@ -199,8 +189,6 @@ trait Clan
     /**
      * Set new leader for a clan.
      *
-     * @param int $characterId
-     *
      * @return int
      */
     public function setNewClanLeader(int $characterId): int
@@ -229,9 +217,6 @@ trait Clan
     /**
      * Get information of character with acctId and rank less or equal to.
      *
-     * @param int $acctId
-     * @param int $rank
-     *
      * @return object|null
      */
     public function getCharacterFromAcctidAndRank(int $acctId, int $rank)
@@ -259,8 +244,6 @@ trait Clan
 
     /**
      * Expel characters from a deleted clan.
-     *
-     * @param int $clanId
      *
      * @return int
      */

@@ -41,8 +41,7 @@ class Dbwrapper
     /**
      * Configure adapter for DB.
      *
-     * @param array $options
-     * @param bool  $force
+     * @param bool $force
      *
      * @return $this
      */
@@ -73,8 +72,6 @@ class Dbwrapper
 
     /**
      * Execute a query.
-     *
-     * @param string $sql
      *
      * @return ResultSet
      */

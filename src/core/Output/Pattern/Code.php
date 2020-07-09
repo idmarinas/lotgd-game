@@ -38,7 +38,7 @@ trait Code
     }
 
     /**
-     * Get patterns for open code tag
+     * Get patterns for open code tag.
      *
      * @return array
      */
@@ -46,14 +46,14 @@ trait Code
     {
         if (! $this->codePatternOpen)
         {
-            $this->codePatternOpen = array_map(function($k){ return "`{$k}"; }, array_keys($this->getCodes()));
+            $this->codePatternOpen = array_map(function ($k) { return "`{$k}"; }, array_keys($this->getCodes()));
         }
 
         return $this->codePatternOpen;
     }
 
     /**
-     * Get patterns for close code tag
+     * Get patterns for close code tag.
      *
      * @return array
      */
@@ -61,14 +61,14 @@ trait Code
     {
         if (! $this->codePatternClose)
         {
-            $this->codePatternClose = array_map(function($k){ return "´{$k}"; }, array_keys($this->getCodes()));
+            $this->codePatternClose = array_map(function ($k) { return "´{$k}"; }, array_keys($this->getCodes()));
         }
 
         return $this->codePatternClose;
     }
 
     /**
-     * Get replacement  for code open code colors
+     * Get replacement  for code open code colors.
      *
      * @return void
      */
@@ -76,14 +76,14 @@ trait Code
     {
         if (! $this->codeReplacementOpen)
         {
-            $this->codeReplacementOpen = array_map(function($k){ return "<{$k}>"; }, array_values($this->getCodes()));
+            $this->codeReplacementOpen = array_map(function ($k) { return "<{$k}>"; }, array_values($this->getCodes()));
         }
 
         return $this->codeReplacementOpen;
     }
 
     /**
-     * Get replacement for code close code colors
+     * Get replacement for code close code colors.
      *
      * @return void
      */
@@ -91,14 +91,14 @@ trait Code
     {
         if (! $this->codeReplacementClose)
         {
-            $this->codeReplacementClose = array_map(function($k){ return "</{$k}>"; }, array_values($this->getCodes()));
+            $this->codeReplacementClose = array_map(function ($k) { return "</{$k}>"; }, array_values($this->getCodes()));
         }
 
         return $this->codeReplacementClose;
     }
 
     /**
-     * Get Special  for code open code colors
+     * Get Special  for code open code colors.
      *
      * @return void
      */
@@ -113,7 +113,7 @@ trait Code
     }
 
     /**
-     * Get Specials for close code tag
+     * Get Specials for close code tag.
      *
      * @return array
      */
@@ -127,8 +127,8 @@ trait Code
         return $this->codeSpecialClose;
     }
 
-     /**
-     * Get patterns for open code tag
+    /**
+     * Get patterns for open code tag.
      *
      * @return array
      */
@@ -143,7 +143,7 @@ trait Code
     }
 
     /**
-     * Get patterns for close code tag
+     * Get patterns for close code tag.
      *
      * @return array
      */
@@ -158,7 +158,7 @@ trait Code
     }
 
     /**
-     * Get replacement  for code open code colors
+     * Get replacement  for code open code colors.
      *
      * @return void
      */
@@ -173,7 +173,7 @@ trait Code
     }
 
     /**
-     * Get replacement for code close code colors
+     * Get replacement for code close code colors.
      *
      * @return void
      */

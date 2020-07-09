@@ -28,7 +28,7 @@ class AccessKeys
     protected $accesskeys = [];
 
     /**
-     * Filter chain
+     * Filter chain.
      *
      * @var Filter\FilterChain
      */
@@ -36,9 +36,6 @@ class AccessKeys
 
     /**
      * Create access key.
-     *
-     * @param string $label
-     * @param array  $attributes
      *
      * @return string
      */
@@ -136,8 +133,6 @@ class AccessKeys
 
     /**
      * Filter label.
-     *
-     * @param string $label
      *
      * @return string
      */

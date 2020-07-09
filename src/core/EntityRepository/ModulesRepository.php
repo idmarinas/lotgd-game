@@ -23,8 +23,6 @@ class ModulesRepository extends DoctrineRepository
     /**
      * Restart filemoddate to default value.
      *
-     * @param string $module
-     *
      * @return int
      */
     public function reinstallModule(string $module): int
@@ -54,8 +52,6 @@ class ModulesRepository extends DoctrineRepository
 
     /**
      * Find modules with this info key.
-     *
-     * @param string $key
      *
      * @return array
      */

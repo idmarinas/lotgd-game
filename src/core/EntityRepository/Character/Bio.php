@@ -77,8 +77,6 @@ trait Bio
     /**
      * Block a bio of user.
      *
-     * @param int $char
-     *
      * @return bool
      */
     public function blockCharacterBio(int $char): bool
@@ -88,8 +86,6 @@ trait Bio
 
     /**
      * Unblock a bio of user.
-     *
-     * @param int $char
      *
      * @return bool
      */

@@ -17,10 +17,6 @@ trait CoreFilter
 {
     /**
      * Colorize a string.
-     *
-     * @param string|null $string
-     *
-     * @return string
      */
     public function colorize(?string $string): string
     {
@@ -35,10 +31,6 @@ trait CoreFilter
     /**
      * Uncolorize a string.
      * Remove all LoTGD codes.
-     *
-     * @param string|null $string
-     *
-     * @return string
      */
     public function uncolorize(?string $string): string
     {
@@ -52,10 +44,6 @@ trait CoreFilter
 
     /**
      * Preven to format a LotGD code.
-     *
-     * @param string|null $string
-     *
-     * @return string
      */
     public function preventCodes(?string $string): string
     {
@@ -71,8 +59,6 @@ trait CoreFilter
      * Add a link, but not nav.
      *
      * @param string $string
-     *
-     * @return string
      */
     public function lotgdUrl(string $link): string
     {
@@ -85,7 +71,6 @@ trait CoreFilter
      * Format a number.
      *
      * @param int|float $nuemral
-     * @param int|null  $decimals
      *
      * @return string
      */
@@ -111,7 +96,6 @@ trait CoreFilter
      * Similar to filter "format" but second argument is an array.
      *
      * @param string $string
-     * @param array  $arguments
      *
      * @return string
      */
@@ -140,10 +124,6 @@ trait CoreFilter
 
     /**
      * Filter string with censor.
-     *
-     * @param string|null $string
-     *
-     * @return string
      */
     public function censor(?string $string): string
     {

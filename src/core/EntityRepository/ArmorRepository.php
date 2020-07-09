@@ -21,8 +21,6 @@ class ArmorRepository extends DoctrineRepository
      * Get de max level of armors.
      *
      * @param int $dragonKills
-     *
-     * @return int
      */
     public function getMaxArmorLevel(int $dragonKills = null): int
     {
@@ -54,10 +52,6 @@ class ArmorRepository extends DoctrineRepository
 
     /**
      * Get next defense in level of armors.
-     *
-     * @param int $level
-     *
-     * @return int
      */
     public function getNextDefenseLevel(int $level): int
     {
@@ -83,8 +77,6 @@ class ArmorRepository extends DoctrineRepository
 
     /**
      * Get a translated list for a level.
-     *
-     * @param int $level
      *
      * @return array
      */
@@ -167,5 +159,3 @@ class ArmorRepository extends DoctrineRepository
         }
     }
 }
-
-

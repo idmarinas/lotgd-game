@@ -82,7 +82,6 @@ class News
     public function __construct()
     {
         $this->date = new \DateTime('now');
-
     }
 
     /**
@@ -101,8 +100,6 @@ class News
 
     /**
      * Get the value of id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -125,8 +122,6 @@ class News
 
     /**
      * Get the value of date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {
@@ -149,8 +144,6 @@ class News
 
     /**
      * Get the value of text.
-     *
-     * @return string
      */
     public function getText(): string
     {
@@ -173,8 +166,6 @@ class News
 
     /**
      * Get the value of AccountId.
-     *
-     * @return int
      */
     public function getAccountId(): int
     {
@@ -197,8 +188,6 @@ class News
 
     /**
      * Get the value of Arguments.
-     *
-     * @return array
      */
     public function getArguments(): array
     {
@@ -221,8 +210,6 @@ class News
 
     /**
      * Get the value of TextDomain.
-     *
-     * @return string
      */
     public function getTextDomain(): string
     {
@@ -230,11 +217,11 @@ class News
     }
 
     /**
-     * Set the value of newFormat
+     * Set the value of newFormat.
      *
-     * @param  bool  $newFormat
+     * @param bool $newFormat
      *
-     * @return  self
+     * @return self
      */
     public function setNewFormat($newFormat)
     {
@@ -244,9 +231,7 @@ class News
     }
 
     /**
-     * Get the value of newFormat
-     *
-     * @return  bool
+     * Get the value of newFormat.
      */
     public function getNewFormat(): bool
     {

@@ -18,11 +18,9 @@ trait CommentaryModerate
     /**
      * Display the commentary moderation block.
      *
-     * @param array  $commentary
-     * @param string $textDomain
-     * @param bool   $showPagination
-     * @param bool   $canAddComment
-     * @param int    $limit
+     * @param bool $showPagination
+     * @param bool $canAddComment
+     * @param int  $limit
      *
      * @return string
      */

@@ -141,8 +141,6 @@ class CommentaryRepository extends DoctrineRepository
     /**
      * Delte old comments in data base.
      *
-     * @param int $expire
-     *
      * @return int
      */
     public function deleteExpireComments(int $expire): int

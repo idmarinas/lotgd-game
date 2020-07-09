@@ -69,8 +69,6 @@ class Moderatedcomments
 
     /**
      * Get the value of Modid.
-     *
-     * @return int
      */
     public function getModid(): int
     {
@@ -93,8 +91,6 @@ class Moderatedcomments
 
     /**
      * Get the value of Comment.
-     *
-     * @return string
      */
     public function getComment(): string
     {
@@ -117,8 +113,6 @@ class Moderatedcomments
 
     /**
      * Get the value of Moderator.
-     *
-     * @return int
      */
     public function getModerator(): int
     {
@@ -141,8 +135,6 @@ class Moderatedcomments
 
     /**
      * Get the value of Moddate.
-     *
-     * @return \DateTime
      */
     public function getModdate(): \DateTime
     {

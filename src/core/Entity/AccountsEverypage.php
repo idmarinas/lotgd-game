@@ -18,7 +18,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Structure of table "accounts_everypage" in data base.
  *
- *
  * @ORM\Table(name="accounts_everypage")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\AccountsEverypageRepository")
  */
@@ -70,8 +69,6 @@ class AccountsEverypage
 
     /**
      * Get the value of Acctid.
-     *
-     * @return int
      */
     public function getAcctid(): int
     {
@@ -94,8 +91,6 @@ class AccountsEverypage
 
     /**
      * Get the value of Gentime.
-     *
-     * @return float
      */
     public function getGentime(): float
     {
@@ -118,8 +113,6 @@ class AccountsEverypage
 
     /**
      * Get the value of Gentimecount.
-     *
-     * @return int
      */
     public function getGentimecount(): int
     {
@@ -142,8 +135,6 @@ class AccountsEverypage
 
     /**
      * Get the value of Gensize.
-     *
-     * @return int
      */
     public function getGensize(): int
     {

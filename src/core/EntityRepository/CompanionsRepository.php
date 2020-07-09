@@ -20,11 +20,6 @@ class CompanionsRepository extends DoctrineRepository
 {
     /**
      * Get a list of available mecenaries.
-     *
-     * @param string $location
-     * @param int    $dragonKills
-     *
-     * @return array
      */
     public function getMercenaryList(string $location, int $dragonKills): array
     {

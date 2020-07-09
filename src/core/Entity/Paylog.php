@@ -122,8 +122,6 @@ class Paylog
 
     /**
      * Get the value of Payid.
-     *
-     * @return int
      */
     public function getPayid(): int
     {
@@ -146,8 +144,6 @@ class Paylog
 
     /**
      * Get the value of Info.
-     *
-     * @return string
      */
     public function getInfo(): string
     {
@@ -170,8 +166,6 @@ class Paylog
 
     /**
      * Get the value of Response.
-     *
-     * @return string
      */
     public function getResponse(): string
     {
@@ -194,8 +188,6 @@ class Paylog
 
     /**
      * Get the value of Txnid.
-     *
-     * @return string
      */
     public function getTxnid(): string
     {
@@ -218,8 +210,6 @@ class Paylog
 
     /**
      * Get the value of Amount.
-     *
-     * @return float
      */
     public function getAmount(): float
     {
@@ -242,8 +232,6 @@ class Paylog
 
     /**
      * Get the value of Name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -266,8 +254,6 @@ class Paylog
 
     /**
      * Get the value of Acctid.
-     *
-     * @return int
      */
     public function getAcctid(): int
     {
@@ -290,8 +276,6 @@ class Paylog
 
     /**
      * Get the value of Processed.
-     *
-     * @return bool
      */
     public function getProcessed(): bool
     {
@@ -314,8 +298,6 @@ class Paylog
 
     /**
      * Get the value of Filed.
-     *
-     * @return bool
      */
     public function getFiled(): bool
     {
@@ -338,8 +320,6 @@ class Paylog
 
     /**
      * Get the value of Txfee.
-     *
-     * @return float
      */
     public function getTxfee(): float
     {
@@ -362,8 +342,6 @@ class Paylog
 
     /**
      * Get the value of Processdate.
-     *
-     * @return \DateTime
      */
     public function getProcessdate(): \DateTime
     {

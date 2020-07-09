@@ -26,7 +26,7 @@ class Navigation
     use Pattern\Links;
 
     /**
-     * Default text domain for navigation menu
+     * Default text domain for navigation menu.
      */
     const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation-app';
 
@@ -115,8 +115,6 @@ class Navigation
     /**
      * Add header but not translate.
      *
-     * @param string $header
-     * @param array  $options
      * @return void
      */
     public function addHeaderNotl(string $header, array $options = [])
@@ -132,17 +130,13 @@ class Navigation
 
     /**
      * Add nav to navigation menu.
-     *
-     * @param string|null $label
-     * @param string|null $link
-     * @param array       $options
      */
     public function addNav(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
             'translate' => true,
             'textDomain' => $this->getTextDomain(),
-            'attributes'=> [
+            'attributes' => [
                 'class' => $this->getClassNav()
             ]
         ], $options));
@@ -151,10 +145,6 @@ class Navigation
     /**
      * Add an external link to navigation menu.
      * Use this for add a extra security (rel="noopener noreferrer") and open in new tab.
-     *
-     * @param string|null $label
-     * @param string|null $link
-     * @param array       $options
      */
     public function addNavExternal(?string $label, ?string $link = null, array $options = [])
     {
@@ -162,7 +152,7 @@ class Navigation
             'translate' => true,
             'extraParamLink' => false,
             'textDomain' => $this->getTextDomain(),
-            'attributes'=> [
+            'attributes' => [
                 'class' => $this->getClassNav(),
                 'target' => '_blank',
                 'rel' => 'noopener noreferrer'
@@ -172,16 +162,12 @@ class Navigation
 
     /**
      * Add a nav to navigation menu but not translate.
-     *
-     * @param string|null $label
-     * @param string|null $link
-     * @param array       $options
      */
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
             'translate' => false,
-            'attributes'=> [
+            'attributes' => [
                 'class' => $this->getClassNav()
             ]
         ], $options));
@@ -189,8 +175,6 @@ class Navigation
 
     /**
      * Add a allowed nav for user.
-     *
-     * @param string $link
      *
      * @return $this
      */
@@ -224,8 +208,6 @@ class Navigation
 
     /**
      * Get text domain for translator.
-     *
-     * @return string
      */
     public function getTextDomain(): string
     {
@@ -234,14 +216,12 @@ class Navigation
 
     /**
      * Get the last header created.
-     *
-     * @return string
      */
     public function getLastHeader(): string
     {
         if (! $this->lastHeader)
         {
-            $this->addHeader('common.category.navigation', [ 'textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN ]);
+            $this->addHeader('common.category.navigation', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
 
         return $this->lastHeader;
@@ -278,7 +258,7 @@ class Navigation
     }
 
     /**
-     * Add navs for actions of superuser
+     * Add navs for actions of superuser.
      */
     public function superuser(): void
     {
@@ -338,12 +318,12 @@ class Navigation
      *
      * @param string $extra
      */
-    function villageNav($extra = ''): void
+    public function villageNav($extra = ''): void
     {
         global $session;
 
         $extra = (false === strpos($extra, '?') ? '?' : '');
-        $extra = ($extra == '?' ? '' : $extra);
+        $extra = ('?' == $extra ? '' : $extra);
 
         $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
 
@@ -372,19 +352,17 @@ class Navigation
 
     /**
      * Determines if there are any navs for the player.
-     *
-     * @return bool
      */
     public function checkNavs(): bool
     {
-        foreach($this->navs as $navs)
+        foreach ($this->navs as $navs)
         {
             if (! is_array($navs) || ! count($navs))
             {
                 continue;
             }
 
-            foreach($navs as $nav)
+            foreach ($navs as $nav)
             {
                 //-- If have 1 allowed nav, return true
                 if (! $this->isBlocked($nav['link']))
@@ -400,10 +378,6 @@ class Navigation
     /**
      * Private function to add a nav in navigation menu.
      *
-     * @param string|null $label
-     * @param string|null $link
-     * @param array       $options
-     *
      * @return $this
      */
     protected function addItem(?string $label, ?string $link = null, array $options = [])
@@ -417,7 +391,7 @@ class Navigation
             //-- Is better use addHeader function for add header.
             return $this->addHeader($label, ArrayUtils::merge($options,
                 [
-                    'attributes'=> [ //-- To prevent a header from having the class of a navigation menu.
+                    'attributes' => [ //-- To prevent a header from having the class of a navigation menu.
                         'class' => $this->getClassHeader() //-- This will overwrite the custom class.
                     ]
                 ]
@@ -425,6 +399,7 @@ class Navigation
         }
 
         $extra = '';
+
         if ($options['extraParamLink'] ?? true)
         {
             //-- Add link to allowed navs
@@ -487,10 +462,6 @@ class Navigation
 
     /**
      * Get a extra param for link.
-     *
-     * @param string|null $link
-     *
-     * @return string
      */
     protected function getExtraParamLink(?string $link): string
     {

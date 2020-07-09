@@ -10,6 +10,7 @@
  *
  * @since 4.0.0
  */
+
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -54,8 +55,6 @@ class AccountsOutput
 
     /**
      * Get the value of Acctid.
-     *
-     * @return int
      */
     public function getAcctid(): int
     {
@@ -78,8 +77,6 @@ class AccountsOutput
 
     /**
      * Get the value of Output.
-     *
-     * @return string
      */
     public function getOutput(): string
     {

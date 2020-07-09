@@ -8,8 +8,8 @@
 
 namespace Lotgd\Core\Factory\Installer;
 
-use Lotgd\Core\Installer\Install as Installer;
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Installer\Install as Installer;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

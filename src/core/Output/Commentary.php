@@ -31,10 +31,6 @@ class Commentary
     /**
      * Get comments in the section.
      *
-     * @param string $section
-     * @param int    $page
-     * @param int    $limit
-     *
      * @return Paginator
      */
     public function getComments(string $section, int $page = 1, int $limit = 25)
@@ -54,10 +50,6 @@ class Commentary
 
     /**
      * Moderate comments, Hide/Unhide.
-     *
-     * @param array|null $post
-     *
-     * @return bool
      */
     public function moderateComments(?array $post): bool
     {
@@ -71,10 +63,6 @@ class Commentary
 
     /**
      * Process save comment.
-     *
-     * @param array $post
-     *
-     * @return bool
      */
     public function saveComment(array $post): bool
     {
@@ -152,8 +140,6 @@ class Commentary
     /**
      * Process commands for comentary.
      *
-     * @param array $data
-     *
      * @return array
      */
     public function processCommands(array &$data): bool
@@ -216,10 +202,6 @@ class Commentary
 
     /**
      * Process special commands that save to data base.
-     *
-     * @param array $data
-     *
-     * @return bool
      */
     public function processSpecialCommands(array &$data): bool
     {
@@ -245,10 +227,6 @@ class Commentary
 
     /**
      * Clean comment for safety insert in DB.
-     *
-     * @param string|null $comment
-     *
-     * @return string
      */
     public function cleanComment(?string $comment): string
     {
@@ -298,8 +276,6 @@ class Commentary
 
     /**
      * All comentary sections.
-     *
-     * @return array
      */
     public function commentaryLocs(): array
     {
@@ -336,10 +312,6 @@ class Commentary
     /**
      * Get list of comments.
      *
-     * @param string|null $section
-     * @param int         $page
-     * @param int         $limit
-     *
      * @return Paginator
      */
     protected function getList(?string $section, int $page = 1, int $limit = 25)
@@ -367,10 +339,6 @@ class Commentary
 
     /**
      * Save data in data base.
-     *
-     * @param array $data
-     *
-     * @return bool
      */
     protected function injectComment(array $data): bool
     {

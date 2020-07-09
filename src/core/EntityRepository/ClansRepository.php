@@ -22,8 +22,6 @@ class ClansRepository extends DoctrineRepository
     /**
      * Get list of clans for apply to enter.
      *
-     * @param int $order
-     *
      * @return array
      */
     public function getClanListWithMembersCount(int $order): array
@@ -68,8 +66,6 @@ class ClansRepository extends DoctrineRepository
 
     /**
      * Create a new clan.
-     *
-     * @param array $data
      *
      * @return int|null
      */

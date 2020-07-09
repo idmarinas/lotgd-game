@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Form\Type;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreatureAiType extends ChoiceType
 {
@@ -25,7 +25,8 @@ class CreatureAiType extends ChoiceType
         $files = glob('creatureai/{*/,}*.php', GLOB_BRACE);
 
         $defaultChoice = ['none' => null];
-        foreach($files as $file)
+
+        foreach ($files as $file)
         {
             $defaultChoice[$file] = rtrim($file, '.php');
         }
@@ -34,7 +35,7 @@ class CreatureAiType extends ChoiceType
             'attr' => [
                 'class' => 'search selection lotgd'
             ],
-            'choices'  => $defaultChoice,
+            'choices' => $defaultChoice,
         ]);
 
         return $resolver;

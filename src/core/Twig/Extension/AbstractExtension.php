@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 use Lotgd\Core\Pattern as PatternCore;
+use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 
 class AbstractExtension extends AbstractExtensionCore
 {

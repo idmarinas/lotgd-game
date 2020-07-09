@@ -27,7 +27,7 @@ class Navigation implements FactoryInterface
 
         $navigation = new NavigationCore();
 
-        if (!empty($classes) && is_array($classes))
+        if (! empty($classes) && is_array($classes))
         {
             $navigation->setClassHeader($classes['header'] ?: 'navhead')
                 ->setClassNav($classes['nav'] ?: 'nav')

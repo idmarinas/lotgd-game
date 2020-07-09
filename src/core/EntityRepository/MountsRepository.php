@@ -20,8 +20,6 @@ class MountsRepository extends DoctrineRepository
 {
     /**
      * Get list of mounts with owners.
-     *
-     * @return array
      */
     public function getList(): array
     {
@@ -53,8 +51,6 @@ class MountsRepository extends DoctrineRepository
      * Refund cost of mount to players.
      *
      * @param object $entity
-     *
-     * @return bool
      */
     public function refundMount($entity): bool
     {
@@ -80,10 +76,6 @@ class MountsRepository extends DoctrineRepository
 
     /**
      * Get mounts by location (include all).
-     *
-     * @param string $location
-     *
-     * @return array
      */
     public function getMountsByLocation(string $location): array
     {
@@ -102,7 +94,8 @@ class MountsRepository extends DoctrineRepository
 
             $query = $this->createTranslatebleQuery($query);
             $query->setParameter('all', 'all')
-                ->setParameter('loc', $location);
+                ->setParameter('loc', $location)
+            ;
 
             return $query->getResult();
         }

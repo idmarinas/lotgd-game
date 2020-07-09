@@ -54,9 +54,6 @@ class Http
     /**
      * Return single get parameter.
      *
-     * @param string      $name
-     * @param string|null $default
-     *
      * @return mixed
      */
     public static function getQuery(string $name, ?string $default = null)
@@ -77,9 +74,8 @@ class Http
     /**
      * Set single get parameter.
      *
-     * @param string $name
-     * @param mixed  $value
-     * @param bool   $force
+     * @param mixed $value
+     * @param bool  $force
      */
     public static function setQuery(string $name, $value, ?bool $force = null)
     {

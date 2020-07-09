@@ -25,8 +25,6 @@ trait Character
     /**
      * Get information of character for bio page.
      *
-     * @param int $account
-     *
      * @return array
      */
     public function getCharacterInfoFromAcctId(int $account): array
@@ -60,8 +58,6 @@ trait Character
     /**
      * Get recent news from account and character.
      *
-     * @param int $account
-     *
      * @return array
      */
     public function getCharacterNewsFromAcctId(int $account): array
@@ -89,8 +85,6 @@ trait Character
 
     /**
      * Get character name from account ID.
-     *
-     * @param int $account
      *
      * @return string
      */

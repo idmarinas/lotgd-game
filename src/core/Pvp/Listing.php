@@ -12,8 +12,8 @@
 
 namespace Lotgd\Core\Pvp;
 
-use Lotgd\Core\Pattern as PatternCore;
 use Doctrine\ORM\QueryBuilder;
+use Lotgd\Core\Pattern as PatternCore;
 
 class Listing
 {
@@ -25,8 +25,6 @@ class Listing
 
     /**
      * Get a list of players available for pvp.
-     *
-     * @param string|null $location
      *
      * @return Paginator
      */
@@ -52,8 +50,6 @@ class Listing
 
     /**
      * Get a list of sleepers in each location.
-     *
-     * @param string|null $location
      *
      * @return array
      */
@@ -150,8 +146,6 @@ class Listing
 
     /**
      * Set query for list of PvP.
-     *
-     * @param QueryBuilder $query
      *
      * @return self
      */

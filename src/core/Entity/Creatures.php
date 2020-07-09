@@ -48,8 +48,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturename", type="string", length=50, nullable=true)
      *
      * @Assert\Length(
-     *      min = 1,
-     *      max = 50
+     *     min=1,
+     *     max=50
      * )
      */
     private $creaturename;
@@ -61,9 +61,9 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturecategory", type="string", length=50, nullable=true)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 50,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=50,
+     *     allowEmptyString=true
      * )
      */
     private $creaturecategory = '';
@@ -74,9 +74,9 @@ class Creatures implements Translatable
      * @ORM\Column(name="creatureimage", type="string", length=250, nullable=false)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 250,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=250,
+     *     allowEmptyString=true
      * )
      */
     private $creatureimage = '';
@@ -87,11 +87,10 @@ class Creatures implements Translatable
      * @Gedmo\Translatable
      * @ORM\Column(name="creaturedescription", type="text", length=65535, nullable=false)
      *
-     *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 65535,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=65535,
+     *     allowEmptyString=true
      * )
      */
     private $creaturedescription = '';
@@ -101,7 +100,6 @@ class Creatures implements Translatable
      *
      * @Gedmo\Translatable
      * @ORM\Column(name="creatureweapon", type="string", length=50, nullable=true)
-     *
      */
     private $creatureweapon = '';
 
@@ -111,8 +109,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturegoldbonus", type="decimal", precision=4, scale=2, nullable=false)
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 99.99
+     *     min=0,
+     *     max=99.99
      * )
      * @Assert\DivisibleBy(0.01)
      */
@@ -124,8 +122,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="creatureattackbonus", type="decimal", precision=4, scale=2, nullable=false)
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 99.99
+     *     min=0,
+     *     max=99.99
      * )
      * @Assert\DivisibleBy(0.01)
      */
@@ -137,8 +135,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturedefensebonus", type="decimal", precision=4, scale=2, nullable=false)
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 99.99
+     *     min=0,
+     *     max=99.99
      * )
      * @Assert\DivisibleBy(0.01)
      */
@@ -150,8 +148,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturehealthbonus", type="decimal", precision=4, scale=2, nullable=false)
      *
      * @Assert\Range(
-     *      min = 0,
-     *      max = 99.99
+     *     min=0,
+     *     max=99.99
      * )
      * @Assert\DivisibleBy(0.01)
      */
@@ -164,9 +162,9 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturelose", type="string", length=120, nullable=true)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 120,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=120,
+     *     allowEmptyString=true
      * )
      */
     private $creaturelose = '';
@@ -178,9 +176,9 @@ class Creatures implements Translatable
      * @ORM\Column(name="creaturewin", type="string", length=120, nullable=true)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 120,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=120,
+     *     allowEmptyString=true
      * )
      */
     private $creaturewin = '';
@@ -191,9 +189,9 @@ class Creatures implements Translatable
      * @ORM\Column(name="creatureaiscript", type="text", length=65535, nullable=true)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 65535,
-     *      allowEmptyString = true
+     *     min=0,
+     *     max=65535,
+     *     allowEmptyString=true
      * )
      */
     private $creatureaiscript = '';
@@ -204,8 +202,8 @@ class Creatures implements Translatable
      * @ORM\Column(name="createdby", type="string", length=50, nullable=true)
      *
      * @Assert\Length(
-     *      min = 0,
-     *      max = 50
+     *     min=0,
+     *     max=50
      * )
      */
     private $createdby = '';
@@ -229,14 +227,14 @@ class Creatures implements Translatable
      */
     private $translations;
 
-    public function __toString()
-    {
-        return (string) $this->getCreatureid();
-    }
-
     public function __construct()
     {
         $this->translations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getCreatureid();
     }
 
     public function getTranslations()

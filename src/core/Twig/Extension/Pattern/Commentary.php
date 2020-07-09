@@ -26,14 +26,6 @@ trait Commentary
 
     /**
      * Display de commentary block.
-     *
-     * @param array  $commentary
-     * @param string $textDomain
-     * @param bool   $showPagination
-     * @param bool   $canAddComment
-     * @param int    $limit
-     *
-     * @return string
      */
     public function commentaryBlock(
         array $commentary,
@@ -69,11 +61,7 @@ trait Commentary
     /**
      * Display a comment.
      *
-     * @param array  $comment
      * @param string $textDomain
-     * @param array  $commentary
-     *
-     * @return string
      */
     public function displayOneComment(array $comment, $textDomain, array $commentary): string
     {
@@ -94,10 +82,7 @@ trait Commentary
     /**
      * Show if status of player (Online, Offline, Nearby).
      *
-     * @param array  $comment
      * @param string $textDomain
-     *
-     * @return string
      */
     public function displayStatusOnlinePlayer(array $comment, ?string $textDomain = null): string
     {
@@ -184,8 +169,6 @@ trait Commentary
      *
      * @param array  $commentary Array with commentary data
      * @param string $textDomain Text domain for translator
-     *
-     * @return string
      */
     public function addComment(array $commentary, string $textDomain): string
     {
@@ -230,8 +213,6 @@ trait Commentary
      * Get status messages of player.
      *
      * @param string $textDomain
-     *
-     * @return array
      */
     protected function getStatusMessages($textDomain): array
     {
@@ -253,8 +234,6 @@ trait Commentary
 
     /**
      * Get a valid url to use in commentary form.
-     *
-     * @return string
      */
     protected function commentaryFormUrl(): string
     {

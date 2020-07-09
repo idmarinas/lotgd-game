@@ -19,8 +19,6 @@ class Filesystem extends SymfonyFilesystem
      * @param string $dir Directory to scan in search of files
      *
      * @throws IOException When not found directory
-     *
-     * @return array
      */
     public function listDir(string $dir): array
     {

@@ -112,8 +112,6 @@ class Stats
 
     /**
      * Get last category used.
-     *
-     * @return string
      */
     public function getLastCat(): string
     {
@@ -136,8 +134,6 @@ class Stats
 
     /**
      * Get array stats of character.
-     *
-     * @return array
      */
     public function getStats(): array
     {
@@ -146,7 +142,7 @@ class Stats
 
     /**
      * Set array stats of character. (THIS ACTION REMPLACE ALL STATS)
-     * Use for alter original stats (getStats())
+     * Use for alter original stats (getStats()).
      *
      * @return array
      */

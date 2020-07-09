@@ -31,10 +31,6 @@ class FormTagify extends FormInput
 
     /**
      * Render the tag element.
-     *
-     * @param Environment $env
-     * @param ElementInterface $element
-     * @return string
      */
     public function render(Environment $env, ElementInterface $element): string
     {
@@ -44,21 +40,20 @@ class FormTagify extends FormInput
     }
 
     /**
-     * Determine input type to use
-     *
-     * @param  ElementInterface $element
-     * @return string
-     */
-    protected function getType(ElementInterface $element)
-    {
-        return '';
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'form-tagify';
+    }
+
+    /**
+     * Determine input type to use.
+     *
+     * @return string
+     */
+    protected function getType(ElementInterface $element)
+    {
+        return '';
     }
 }

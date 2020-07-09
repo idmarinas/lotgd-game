@@ -55,8 +55,6 @@ class Nastywords
 
     /**
      * Get the value of Type.
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -79,8 +77,6 @@ class Nastywords
 
     /**
      * Get the value of Words.
-     *
-     * @return string
      */
     public function getWords(): string
     {

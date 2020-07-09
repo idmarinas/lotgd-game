@@ -23,8 +23,6 @@ class MotdRepository extends DoctrineRepository
     /**
      * Get last MOTD.
      *
-     * @param int|null $userId
-     *
      * @return array|null
      */
     public function getLastMotd(?int $userId = null): ?array
@@ -184,7 +182,7 @@ class MotdRepository extends DoctrineRepository
 
         try
         {
-            $date =  $query
+            $date = $query
                 ->select('u.motddate')
                 ->orderBy('u.motddate', 'DESC')
                 ->setMaxResults(1)

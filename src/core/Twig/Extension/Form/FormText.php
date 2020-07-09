@@ -19,27 +19,27 @@ use Zend\Form\ElementInterface;
 class FormText extends FormInput
 {
     /**
-     * Attributes valid for the input tag type="text"
+     * Attributes valid for the input tag type="text".
      *
      * @var array
      */
     protected $validTagAttributes = [
-        'name'           => true,
-        'autocomplete'   => true,
-        'autofocus'      => true,
-        'dirname'        => true,
-        'disabled'       => true,
-        'form'           => true,
-        'list'           => true,
-        'maxlength'      => true,
-        'minlength'      => true,
-        'pattern'        => true,
-        'placeholder'    => true,
-        'readonly'       => true,
-        'required'       => true,
-        'size'           => true,
-        'type'           => true,
-        'value'          => true,
+        'name' => true,
+        'autocomplete' => true,
+        'autofocus' => true,
+        'dirname' => true,
+        'disabled' => true,
+        'form' => true,
+        'list' => true,
+        'maxlength' => true,
+        'minlength' => true,
+        'pattern' => true,
+        'placeholder' => true,
+        'readonly' => true,
+        'required' => true,
+        'size' => true,
+        'type' => true,
+        'value' => true,
     ];
 
     /**
@@ -53,21 +53,20 @@ class FormText extends FormInput
     }
 
     /**
-     * Determine input type to use
-     *
-     * @param  ElementInterface $element
-     * @return string
-     */
-    protected function getType(ElementInterface $element)
-    {
-        return 'text';
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'form-text';
+    }
+
+    /**
+     * Determine input type to use.
+     *
+     * @return string
+     */
+    protected function getType(ElementInterface $element)
+    {
+        return 'text';
     }
 }

@@ -25,8 +25,6 @@ class CharactersRepository extends DoctrineRepository
     /**
      * Get character's name from an account ID.
      *
-     * @param int $acctId
-     *
      * @return string
      */
     public function getCharacterNameFromAcctId(int $acctId): ?string
@@ -53,9 +51,6 @@ class CharactersRepository extends DoctrineRepository
     /**
      * Get a list of characters with similar name.
      * Search by character name and account login.
-     *
-     * @param string $name
-     * @param int    $limit
      *
      * @return array
      */
@@ -99,8 +94,6 @@ class CharactersRepository extends DoctrineRepository
 
     /**
      * Get info of character for PvP.
-     *
-     * @param int $characterId
      *
      * @return array|null
      */

@@ -19,25 +19,25 @@ use Zend\Form\ElementInterface;
 class FormNumber extends FormInput
 {
     /**
-     * Attributes valid for the input tag type="number"
+     * Attributes valid for the input tag type="number".
      *
      * @var array
      */
     protected $validTagAttributes = [
-        'name'           => true,
-        'autocomplete'   => true,
-        'autofocus'      => true,
-        'disabled'       => true,
-        'form'           => true,
-        'list'           => true,
-        'max'            => true,
-        'min'            => true,
-        'step'           => true,
-        'placeholder'    => true,
-        'readonly'       => true,
-        'required'       => true,
-        'type'           => true,
-        'value'          => true
+        'name' => true,
+        'autocomplete' => true,
+        'autofocus' => true,
+        'disabled' => true,
+        'form' => true,
+        'list' => true,
+        'max' => true,
+        'min' => true,
+        'step' => true,
+        'placeholder' => true,
+        'readonly' => true,
+        'required' => true,
+        'type' => true,
+        'value' => true
     ];
 
     /**
@@ -51,21 +51,20 @@ class FormNumber extends FormInput
     }
 
     /**
-     * Determine input type to use
-     *
-     * @param  ElementInterface $element
-     * @return string
-     */
-    protected function getType(ElementInterface $element)
-    {
-        return 'number';
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'form-number';
+    }
+
+    /**
+     * Determine input type to use.
+     *
+     * @return string
+     */
+    protected function getType(ElementInterface $element)
+    {
+        return 'number';
     }
 }

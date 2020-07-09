@@ -41,8 +41,6 @@ class Theme
 
     /**
      * Set wrapper of Theme.
-     *
-     * @param CoreTheme $wrapper
      */
     public static function wrapper(CoreTheme $wrapper)
     {

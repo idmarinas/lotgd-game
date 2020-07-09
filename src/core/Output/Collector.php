@@ -47,10 +47,6 @@ class Collector
 
     /**
      * Search and replace keywords.
-     *
-     * @param string $out
-     *
-     * @return string
      */
     public function sustitute(string $out): string
     {

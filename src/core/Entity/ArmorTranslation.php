@@ -29,7 +29,7 @@ use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 class ArmorTranslation extends AbstractPersonalTranslation
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(type="integer", options={"unsigned": true})
      * @ORM\Id
@@ -44,14 +44,14 @@ class ArmorTranslation extends AbstractPersonalTranslation
     protected $object;
 
     /**
-     * @var string $content
+     * @var string
      *
      * @ORM\Column(type="text", nullable=true,  options={"collation": "utf8mb4_unicode_ci"})
      */
     protected $content;
 
     /**
-     * Convenient constructor
+     * Convenient constructor.
      *
      * @param string $locale
      * @param string $field

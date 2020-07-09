@@ -21,24 +21,24 @@ use Zend\Form\Exception;
 class FormTextarea extends AbstractElement
 {
     /**
-     * Attributes valid for the input tag
+     * Attributes valid for the input tag.
      *
      * @var array
      */
     protected $validTagAttributes = [
         'autocomplete' => true,
-        'autofocus'    => true,
-        'cols'         => true,
-        'dirname'      => true,
-        'disabled'     => true,
-        'form'         => true,
-        'maxlength'    => true,
-        'name'         => true,
-        'placeholder'  => true,
-        'readonly'     => true,
-        'required'     => true,
-        'rows'         => true,
-        'wrap'         => true,
+        'autofocus' => true,
+        'cols' => true,
+        'dirname' => true,
+        'disabled' => true,
+        'form' => true,
+        'maxlength' => true,
+        'name' => true,
+        'placeholder' => true,
+        'readonly' => true,
+        'required' => true,
+        'rows' => true,
+        'wrap' => true,
     ];
 
     /**
@@ -52,20 +52,19 @@ class FormTextarea extends AbstractElement
     }
 
     /**
-     * Render a form <textarea> element from the provided $element
+     * Render a form <textarea> element from the provided $element.
      *
-     * @param  ElementInterface $element
      * @throws Exception\DomainException
+     *
      * @return string
      */
     public function render(Environment $env, ElementInterface $element)
     {
-        $name   = $element->getName();
-        if (empty($name) && $name !== 0) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an assigned name; none discovered',
-                __METHOD__
-            ));
+        $name = $element->getName();
+
+        if (empty($name) && 0 !== $name)
+        {
+            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $attributes = $element->getAttributes();
@@ -81,9 +80,8 @@ class FormTextarea extends AbstractElement
     }
 
     /**
-     * Determine input type to use
+     * Determine input type to use.
      *
-     * @param  ElementInterface $element
      * @return string
      */
     protected function getType(ElementInterface $element)

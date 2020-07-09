@@ -85,7 +85,6 @@ class GameCore extends AbstractExtension
             new TwigFunction('pvp_list_table', [$this, 'pvpListTable']),
             new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers']),
 
-
             //-- Character functions
             new TwigFunction('character_race', [$this, 'characterRace']),
 

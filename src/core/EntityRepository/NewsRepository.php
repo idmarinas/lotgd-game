@@ -21,10 +21,6 @@ class NewsRepository extends DoctrineRepository
 
     /**
      * Delete a news by ID.
-     *
-     * @param int $newsId
-     *
-     * @return bool
      */
     public function deleteNewsId(int $newsId): bool
     {
@@ -49,10 +45,6 @@ class NewsRepository extends DoctrineRepository
 
     /**
      * Delte old news in data base.
-     *
-     * @param int $expire
-     *
-     * @return int
      */
     public function deleteExpireNews(int $expire): int
     {

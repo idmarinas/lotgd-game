@@ -12,6 +12,7 @@
  *
  * @since 4.0.0
  */
+
 namespace Lotgd\Core\Jaxon\Library\Semantic;
 
 use Jaxon\Dialogs\Interfaces\Modal as JaxonModal;

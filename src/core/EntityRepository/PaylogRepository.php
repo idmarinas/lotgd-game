@@ -80,8 +80,6 @@ class PaylogRepository extends DoctrineRepository
     /**
      * Get list paylog.
      *
-     * @param int $month
-     *
      * @return array
      */
     public function getList(int $month): array
@@ -91,7 +89,7 @@ class PaylogRepository extends DoctrineRepository
         try
         {
             $month = $month ?: date('n');
-            $month = date('Y') . '-' . $month;
+            $month = date('Y').'-'.$month;
             $startDate = $month.'-01 00:00:00';
             $endDate = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($startDate)));
 
