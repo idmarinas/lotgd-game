@@ -17,13 +17,6 @@ $params = [
 $op = (string) \LotgdHttp::getQuery('op');
 $id = (int) \LotgdHttp::getQuery('id');
 
-$editarray = [
-    'Titles,title',
-    'dk' => 'Dragon Kills,int|0',
-    'male' => 'Male Title,text|',
-    'female' => 'Female Title,text|',
-];
-
 \LotgdNavigation::addNav('titleedit.category.other');
 
 \LotgdNavigation::superuserGrottoNav();
@@ -62,7 +55,6 @@ switch ($op)
 
             if (! valid_dk_title($otitle, $dk, $row->getSex()))
             {
-                $sex = translate_inline($row->getSex() ? 'female' : 'male');
                 $newtitle = get_dk_title($dk, $row->getSex());
                 $newname = change_player_title($newtitle, $row);
                 $id = $row->getAcctid();
@@ -168,7 +160,7 @@ switch ($op)
     break;
 
     default:
-        $params['paginator'] = $repository->findBy([], ['dk' => 'ASC']);
+        $params['paginator'] = $repository->getList();
 
         \LotgdNavigation::addHeader('titleedit.category.functions');
         \LotgdNavigation::addNav('titleedit.nav.add', 'titleedit.php?op=add');
@@ -177,6 +169,6 @@ switch ($op)
     break;
 }
 
-require_once 'lib/titles.php';
+rawoutput(LotgdTheme::renderLotgdTemplate('core/page/titleedit.twig', $params));
 
 page_footer();

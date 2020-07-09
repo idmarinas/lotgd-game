@@ -73,4 +73,27 @@ class TitlesRepository extends DoctrineRepository
             return null;
         }
     }
+
+    /**
+     * Get list of titles.
+     */
+    public function getList(): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            $query->orderBy('u.dk', 'asc');
+
+            $query = $this->createTranslatebleQuery($query);
+
+            return $query->getResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return [];
+        }
+    }
 }
