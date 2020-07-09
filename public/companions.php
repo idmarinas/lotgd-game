@@ -126,7 +126,7 @@ if ('' == $op)
 {
     $params['tpl'] = 'default';
 
-    $params['companionsList'] = $repository->findBy([], ['category' => 'DESC', 'name' => 'DESC']);
+    $params['companionsList'] = $repository->getList();
 }
 elseif ('edit' == $op || 'add' == $op)
 {

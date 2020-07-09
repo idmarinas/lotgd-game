@@ -104,4 +104,28 @@ class CompanionsRepository extends DoctrineRepository
             return null;
         }
     }
+
+    /**
+     * Get list of companions.
+     */
+    public function getList(): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        try
+        {
+            $query->orderBy('u.category', 'DESC');
+            $query->addOrderBy('u.name', 'DESC');
+
+            $query = $this->createTranslatebleQuery($query);
+
+            return $query->getResult();
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return [];
+        }
+    }
 }
