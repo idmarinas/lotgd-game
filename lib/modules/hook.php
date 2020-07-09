@@ -204,21 +204,28 @@ function module_wipehooks(string $module)
 
     debug("Removing all hooks for $module");
 
-    foreach ($result as $row)
+    try
     {
-        \Doctrine::remove($row);
-        \LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
+        foreach ($result as $row)
+        {
+            \Doctrine::remove($row);
+            \LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
+        }
+
+        $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
+        $result = $repository->findBy(['modulename' => $module]);
+
+        foreach ($result as $row)
+        {
+            \Doctrine::remove($row);
+        }
+
+        \Doctrine::flush();
     }
-
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $result = $repository->findBy(['modulename' => $module]);
-
-    foreach ($result as $row)
+    catch (\Throwable $ex)
     {
-        \Doctrine::remove($row);
+        \Tracy\Debugger::log($ex);
     }
-
-    \Doctrine::flush();
 }
 
 function module_addeventhook($type, $chance)
