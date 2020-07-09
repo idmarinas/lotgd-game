@@ -86,8 +86,6 @@ abstract class UpgradeAbstract
                 $this->doctrine->flush();
             }
 
-            $this->doctrine->clear();
-
             return true;
         }
         catch (\Throwable $th)
