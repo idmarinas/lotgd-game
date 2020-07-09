@@ -90,7 +90,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :fire: DEPRECATED
 
--   **Translations** Deprecated used arrays as multiline text. Can use folded style with `>` or `|`
+-   **Translations** *yaml files* Deprecated used arrays as multiline text. Can use folded style with `>` or `|`
     -   Can find examples in file translation
     -   In next version `4.3.0` all arrays are formated with this format `key1.key1.0`, `key1.key1.1`, `key1.key1.2`
     -   More info in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
@@ -157,7 +157,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Weapon editor: `page-weaponeditor` to `grotto-weaponeditor`
     -   Note: all this pages is a Grotto section.
 -   Change in core **cache** system:
-    -   Now use Cache Abstract Factory (Zend-Cache) to load all caches (you can create your own chaches)
+    -   Now use Cache Abstract Factory (Zend-Cache) to load all caches (you can create your own caches)
     -   Delete Lotgd Cache class `Lotgd\Core\Lib\Cache` and `Lotgd\Core\Factory\Lib\Cache`
     -   Cache not is optional, always use when invoke functions of cache.
     -   Added a static class for cache `LotgdCache`
