@@ -468,7 +468,7 @@ class Characters
      *
      * @ORM\Column(name="race", type="string", length=50, nullable=false, options={"default": 0})
      */
-    private $race = 0;
+    private $race = 'app-unknown';
 
     /**
      * @var \DateTime
