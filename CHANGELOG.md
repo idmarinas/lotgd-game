@@ -111,6 +111,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   **src/core/Installer/data/install/mounts.json**
     -   Now show all modules that are uninstalled in clean install.
 -   Fixed error when need set race and not are races installed.
+-   **src/core/Entity/Characters.php** Fixed error, with data returned
+-   **public/forest.php** Fixed: use correct text domain for navigation
+-   **lib/newday/dragonpointspend.php**, **lib/newday/setrace.php**
+    -   Fixed correct templates and now show correct info.
+-   **public/dragon.php** Fixed error, now can progress when kill the Dragon.
 
 ### :x: REMOVES
 
