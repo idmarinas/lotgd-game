@@ -71,7 +71,7 @@
                 <tr>
                     <td>{{ label|colorize }}</td>
                     <td>&nbsp;&nbsp;</td>
-                    <td>{{ '`@%s`0'|format(distribution[type]|numeral) }}</td>
+                    <td>{{ '`@%s`0'|format(distribution[type]|numeral)|colorize }}</td>
                 </tr>
             {% endif %}
         {% endfor %}
