@@ -27,6 +27,9 @@ $params = [
 
 $op = (string) \LotgdHttp::getQuery('op');
 
+//-- Change text domain for navigation
+\LotgdNavigation::setTextDomain($textDomainNavigation);
+
 $battle = false;
 
 if ('dragon' == $op)
@@ -378,9 +381,6 @@ if ('' == $op)
     $params['tpl'] = 'default';
     $params['showForestMessage'] = ! $dontDisplayForestMessage;
 
-    //-- Change text domain for navigation
-    \LotgdNavigation::setTextDomain($textDomainNavigation);
-
     \LotgdNavigation::addHeader('category.navigation');
     \LotgdNavigation::villageNav();
 
@@ -426,10 +426,10 @@ if ('' == $op)
     }
 
     modulehook('forest', []);
-
-    //-- Restore text domain for navigation
-    \LotgdNavigation::setTextDomain();
 }
+
+//-- Restore text domain for navigation
+\LotgdNavigation::setTextDomain();
 
 $params['battle'] = $battle;
 
