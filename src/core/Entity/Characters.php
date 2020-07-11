@@ -55,14 +55,14 @@ class Characters
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="playername", type="string", unique=true, length=40, nullable=false)
      */
-    private $playername;
+    private $playername = '';
 
     /**
      * @var int
@@ -584,7 +584,7 @@ class Characters
     /**
      * Get the value of Id.
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
