@@ -1,5 +1,7 @@
 <?php
 
+use function Sabre\Event\Loop\instance;
+
 require_once 'common.php';
 require_once 'lib/fightnav.php';
 require_once 'lib/titles.php';
@@ -59,8 +61,6 @@ elseif ('prologue' == $op)
 
     $params['flawless'] = $flawless;
     $params['creatureName'] = $badguy['creaturename'];
-
-    \LotgdNavigation::addNav('common.nav.newday', 'news.php');
 
     strip_all_buffs();
     $hydrator = new \Zend\Hydrator\ClassMethods();
@@ -126,7 +126,7 @@ elseif ('prologue' == $op)
 
     foreach ($characterEntity as $field => $value)
     {
-        if ($nochange[$field] ?? 0)
+        if ('id' == $field || 'acct' == $field || $nochange[$field] ?? 0 || $value instanceof \DateTime )
         {
             continue;
         }
@@ -203,6 +203,8 @@ elseif ('prologue' == $op)
     //-- This is only for params not use for other purpose
     $params = modulehook('page-dragon-tpl-params', $params);
     rawoutput(\LotgdTheme::renderThemeTemplate('page/dragon.twig', $params));
+
+    \LotgdNavigation::addNav('common.nav.newday', 'news.php');
 
     page_footer();
 }
