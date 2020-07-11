@@ -25,6 +25,8 @@ if (\LotgdNavigation::checkNavs())
     page_footer();
 }
 
+$params['tpl'] = 'race';
+
 page_header('title.race.not', [], $textDomain);
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));

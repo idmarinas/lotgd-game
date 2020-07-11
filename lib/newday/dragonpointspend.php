@@ -4,6 +4,7 @@ page_header('Dragon Points');
 
 reset($labels);
 
+$params['tpl'] = 'dragonpoints';
 $params['points'] = $dkills - $dp;
 $params['labels'] = $labels;
 $params['canBuy'] = $canbuy;
