@@ -51,9 +51,10 @@ battle:
         victory:
             slain: '`b`$You have slain {creatureName}!`0´b`n'
             blow: '`&With a mighty final blow, `@{creatureName}`0 lets out a tremendous bellow and falls at your feet, dead at last.`0'
-            news:
-                slain: '`&{playerName} has slain the hideous creature known as `@{creatureName}`0. All across the land, people rejoice!`0'
-                title: '`#{playerName}`0 `#has earned the title `&{title}`0 for having slain `@{creatureName}`0 {times,plural, =1{`^1`0 time} other{`^#`0 times}} !`0'
+    victory:
+        news:
+            slain: '`&{playerName} has slain the hideous creature known as `@{creatureName}`0. All across the land, people rejoice!`0'
+            title: '`#{playerName}`0 `#has earned the title `&{title}`0 for having slain `@{creatureName}`0 {times,plural, =1{`^1`0 time} other{`^#`0 times}} !`0'
 
 creature:
     name: '`@The Green Dragon`0'
