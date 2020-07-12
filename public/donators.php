@@ -12,7 +12,10 @@ $textDomain = 'grotto-donators';
 
 page_header('title', [], $textDomain);
 
-$params = [];
+$params = [
+    'textDomain' => $textDomain
+];
+
 $op = (string) \LotgdHttp::getQuery('op');
 $page = (int) \LotgdHttp::getQuery('page');
 $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
