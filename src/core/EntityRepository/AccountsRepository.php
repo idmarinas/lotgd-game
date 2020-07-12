@@ -17,7 +17,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethods;
 
 class AccountsRepository extends DoctrineRepository
 {

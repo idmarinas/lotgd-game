@@ -13,10 +13,10 @@
 namespace Lotgd\Core\Template;
 
 use Lotgd\Core\Exception;
-use Zend\Filter\FilterChain;
-use Zend\Filter\StringToLower;
-use Zend\Filter\Word\SeparatorToDash;
-use Zend\Filter\Word\UnderscoreToDash;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringToLower;
+use Laminas\Filter\Word\SeparatorToDash;
+use Laminas\Filter\Word\UnderscoreToDash;
 
 class Theme extends Base
 {

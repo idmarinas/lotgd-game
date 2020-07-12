@@ -16,7 +16,7 @@ namespace Lotgd\Core\EntityRepository\Account;
 use Doctrine\ORM\Query\Expr\Join;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 /**
  * Functions for bans account.

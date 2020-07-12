@@ -10,8 +10,8 @@ namespace Lotgd\Core\Factory\Lib;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Lib\Settings as LibSettings;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Settings implements FactoryInterface
 {

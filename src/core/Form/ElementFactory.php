@@ -26,9 +26,9 @@ namespace Lotgd\Core\Form;
 
 use Interop\Container\ContainerInterface;
 use Traversable;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Factory for instantiating form elements.
@@ -88,7 +88,7 @@ final class ElementFactory implements FactoryInterface
         }
         else
         {
-            // 'Zend\Form\Element' -> 'element'
+            // 'Laminas\Form\Element' -> 'element'
             $parts = explode('\\', $requestedName);
             $name = strtolower(array_pop($parts));
         }

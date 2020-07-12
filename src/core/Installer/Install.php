@@ -15,8 +15,8 @@ namespace Lotgd\Core\Installer;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use Lotgd\Core\Component\Filesystem;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Hydrator\ClassMethods;
 
 /**
  * Script to install and update game.

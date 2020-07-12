@@ -19,7 +19,7 @@ if ('savecronjob' == $op)
     $post = \LotgdHttp::getPostAll();
 
     //-- NAME - only accept alphabetic characters and digits in the unicode "letter" and "number" categories, respectively
-    $filter = new \Zend\I18n\Filter\Alnum();
+    $filter = new \Laminas\I18n\Filter\Alnum();
     $post['name'] = $filter->filter($post['name']);
     //-- SCHELUDE - modifies to remove whitespaces from the beginning and end.
     $post['schedule'] = trim($post['schedule']);
@@ -85,7 +85,7 @@ elseif ('delcronjob' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
         $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-        $cronId->removeItem('cronjobstable');
+        $cronCache->removeItem('cronjobstable');
 
         \Doctrine::remove($cronEntity);
         \Doctrine::flush();

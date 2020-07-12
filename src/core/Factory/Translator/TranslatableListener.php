@@ -14,7 +14,7 @@ namespace Lotgd\Core\Factory\Translator;
 
 use Gedmo\Translatable\TranslatableListener as TranslatorListener;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\{
+use Laminas\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };

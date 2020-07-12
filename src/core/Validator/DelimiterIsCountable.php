@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Validator;
 
-use Zend\Validator\IsCountable;
+use Laminas\Validator\IsCountable;
 
 class DelimiterIsCountable extends IsCountable
 {

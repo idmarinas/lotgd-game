@@ -18,8 +18,8 @@ use Lotgd\Core\Template\Theme as TemplateTheme;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Theme implements FactoryInterface
 {

@@ -14,12 +14,12 @@ namespace Lotgd\Core\Factory\Translator;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Translator\Translator as LotgdTranslator;
-use Zend\I18n\Translator\LoaderPluginManager;
-use Zend\ServiceManager\{
+use Laminas\I18n\Translator\LoaderPluginManager;
+use Laminas\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 class Translator implements FactoryInterface
 {

@@ -19,7 +19,7 @@ page_header('title.default', [], $params['textDomain']);
 \LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
 $fileSystem = new \Lotgd\Core\Component\Filesystem();
-$serializer = new Zend\Serializer\Adapter\PhpSerialize();
+$serializer = new Laminas\Serializer\Adapter\PhpSerialize();
 $path = 'storage/logd_snapshots';
 $pathAccountData = "{$path}/account-{$accountId}/LotgdCore_Accounts.data";
 $pathCharacterData = "{$path}/account-{$accountId}/LotgdCore_Characters.data";
@@ -56,7 +56,7 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
         return $file;
     }, $files);
 
-    $hydrator = new \Zend\Hydrator\ClassMethods();
+    $hydrator = new \Laminas\Hydrator\ClassMethods();
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
 
     //-- Overrides the automatic generation of IDs (avoid to change id of account and character)

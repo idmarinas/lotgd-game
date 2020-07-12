@@ -15,9 +15,9 @@ namespace Lotgd\Core\Form\Element;
 
 use Lotgd\Core\Filter as LotgdFilter;
 use Lotgd\Core\Validator as LotgdValidator;
-use Zend\Form\Element\Select;
-use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator;
+use Laminas\Form\Element\Select;
+use Laminas\InputFilter\InputProviderInterface;
+use Laminas\Validator;
 
 class ServerLanguage extends Select implements InputProviderInterface
 {

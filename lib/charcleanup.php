@@ -153,7 +153,7 @@ function createBackupOfEntity(int $accountId, $repository, string $entityName): 
     }
 
     $fileSystem = new \Lotgd\Core\Component\Filesystem();
-    $serializer = new Zend\Serializer\Adapter\PhpSerialize();
+    $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
 
     try
     {
@@ -183,8 +183,8 @@ function createBackupOfEntity(int $accountId, $repository, string $entityName): 
 function createBackupBasicInfo(int $accountId, $account): bool
 {
     $fileSystem = new \Lotgd\Core\Component\Filesystem();
-    $serializer = new Zend\Serializer\Adapter\PhpSerialize();
-    $hydrator = new \Zend\Hydrator\ClassMethods();
+    $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
+    $hydrator = new \Laminas\Hydrator\ClassMethods();
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
     $path = "data/logd_snapshots/account-{$accountId}";
 

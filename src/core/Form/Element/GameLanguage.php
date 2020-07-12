@@ -16,9 +16,9 @@ namespace Lotgd\Core\Form\Element;
 use Lotgd\Core\Form\LotgdElementFactoryInterface;
 use Lotgd\Core\Lib\Settings;
 use Lotgd\Core\Pattern as PatternCore;
-use Zend\Form\Element\Select;
-use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator;
+use Laminas\Form\Element\Select;
+use Laminas\InputFilter\InputProviderInterface;
+use Laminas\Validator;
 
 class GameLanguage extends Select implements LotgdElementFactoryInterface, InputProviderInterface
 {

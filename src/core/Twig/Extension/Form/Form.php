@@ -15,9 +15,9 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\Element\Csrf;
-use Zend\Form\Factory;
-use Zend\Form\FormInterface;
+use Laminas\Form\Element\Csrf;
+use Laminas\Form\Factory;
+use Laminas\Form\FormInterface;
 
 class Form extends AbstractElement
 {

@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Db\Pattern;
 
-use Zend\Db\Metadata\Metadata;
+use Laminas\Db\Metadata\Metadata;
 
 /**
  * contain all function to manage prefix of tables.

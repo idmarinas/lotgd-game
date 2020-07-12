@@ -13,9 +13,9 @@
 namespace Lotgd\Core\Fixed;
 
 use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
-use Zend\Db\Metadata\Metadata;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Paginator\Paginator;
+use Laminas\Db\Metadata\Metadata;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Paginator\Paginator;
 
 /**
  * Static class to access a basic functions of DB.
@@ -152,7 +152,7 @@ class Dbwrapper
      *
      * @param Select $select
      *
-     * @return Zend\Paginator\Paginator
+     * @return Laminas\Paginator\Paginator
      */
     public static function paginator($select, int $page = 1, int $perpage = 25)
     {
@@ -162,7 +162,7 @@ class Dbwrapper
     /**
      * Navigation menu used with Paginator.
      *
-     * @param Zend\Paginator\Paginator $paginator
+     * @param Laminas\Paginator\Paginator $paginator
      * @param bool|null                $forcePages Force to show pages if only have 1 page
      */
     public static function pagination(Paginator $paginator, string $url, $forcePages = null)
@@ -194,7 +194,7 @@ class Dbwrapper
     }
 
     /**
-     * Create Zend\Db\Sql\Predicate\Expression for uses in Zend DB.
+     * Create Laminas\Db\Sql\Predicate\Expression for uses in Zend DB.
      *
      * @param string $expresion
      *

@@ -13,7 +13,7 @@
 namespace Lotgd\Core\Tool;
 
 use Lotgd\Core\Pattern as PatternCore;
-use Zend\Filter;
+use Laminas\Filter;
 
 class Sanitize
 {

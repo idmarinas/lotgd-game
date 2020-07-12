@@ -5,8 +5,8 @@ return [
     'session_manager' => [
         'enable_default_container_manager' => true,
         'validators' => [
-            Zend\Session\Validator\RemoteAddr::class,
-            Zend\Session\Validator\HttpUserAgent::class,
+            Laminas\Session\Validator\RemoteAddr::class,
+            Laminas\Session\Validator\HttpUserAgent::class,
 		]
     ],
     'session_config' => [

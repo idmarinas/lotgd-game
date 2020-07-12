@@ -3,11 +3,11 @@
 return [
     'service_manager' => [
         'abstract_factories' => [
-            \Zend\Session\Service\ContainerAbstractServiceFactory::class,
-            \Zend\Cache\Service\StorageCacheAbstractServiceFactory::class,
+            \Laminas\Session\Service\ContainerAbstractServiceFactory::class,
+            \Laminas\Cache\Service\StorageCacheAbstractServiceFactory::class,
 
             //-- Added in version 4.1.0
-            \Zend\Form\FormAbstractServiceFactory::class,
+            \Laminas\Form\FormAbstractServiceFactory::class,
 
             //-- Added in version 4.2.0
             'DoctrineModule' => 'DoctrineModule\ServiceFactory\AbstractDoctrineServiceFactory',
@@ -16,7 +16,7 @@ return [
     'input_filters' => [
         'abstract_factories' => [
             //-- Added in version 4.1.0
-            \Zend\InputFilter\InputFilterAbstractServiceFactory::class,
+            \Laminas\InputFilter\InputFilterAbstractServiceFactory::class,
         ],
     ],
 ];

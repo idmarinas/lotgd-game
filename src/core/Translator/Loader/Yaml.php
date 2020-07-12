@@ -15,10 +15,10 @@ namespace Lotgd\Core\Translator\Loader;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser as YamlParser;
 use Symfony\Component\Yaml\Yaml as SymfonyYaml;
-use Zend\I18n\Exception;
-use Zend\I18n\Translator\Loader\AbstractFileLoader;
-use Zend\I18n\Translator\Loader\FileLoaderInterface;
-use Zend\I18n\Translator\TextDomain;
+use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\Loader\AbstractFileLoader;
+use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\TextDomain;
 
 /**
  * Load a Yaml file.

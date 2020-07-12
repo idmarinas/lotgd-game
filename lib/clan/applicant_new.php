@@ -10,7 +10,7 @@ if (1 == $apply)
     $clanShortOriginal = (string) \LotgdHttp::getPost('clanshort');
 
     //-- Validate clan name
-    $chainNameValidator = new \Zend\Validator\ValidatorChain();
+    $chainNameValidator = new \Laminas\Validator\ValidatorChain();
 
     //-- Check if clan name is taken
     $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists ([
@@ -23,10 +23,10 @@ if (1 == $apply)
     );
 
     //-- Check length of clan name
-    $nameLength = new \Zend\Validator\StringLength(['min' => 2, 'max' => 250]);
+    $nameLength = new \Laminas\Validator\StringLength(['min' => 2, 'max' => 250]);
     $nameLength->setMessages([
-        \Zend\Validator\StringLength::TOO_SHORT => \LotgdTranslator::t('section.applicant.new.form.validator.clan.name.length.short', $params, $textDomain),
-        \Zend\Validator\StringLength::TOO_LONG => \LotgdTranslator::t('section.applicant.new.form.validator.clan.name.length.long', $params, $textDomain)
+        \Laminas\Validator\StringLength::TOO_SHORT => \LotgdTranslator::t('section.applicant.new.form.validator.clan.name.length.short', $params, $textDomain),
+        \Laminas\Validator\StringLength::TOO_LONG => \LotgdTranslator::t('section.applicant.new.form.validator.clan.name.length.long', $params, $textDomain)
     ]);
 
     $chainNameValidator->attach($nameLength)
@@ -34,7 +34,7 @@ if (1 == $apply)
     ;
 
     //-- Validate clan short name
-    $chainShortValidator = new \Zend\Validator\ValidatorChain();
+    $chainShortValidator = new \Laminas\Validator\ValidatorChain();
 
     //-- Check if clan short name is taken
     $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists ([
@@ -47,13 +47,13 @@ if (1 == $apply)
     );
 
     //-- Check length of clan short name
-    $nameLength = new \Zend\Validator\StringLength(['min' => 2, 'max' => $params['clanShortNameLength']]);
+    $nameLength = new \Laminas\Validator\StringLength(['min' => 2, 'max' => $params['clanShortNameLength']]);
     $nameLength->setMessages([
-        \Zend\Validator\StringLength::TOO_SHORT => \LotgdTranslator::t('section.applicant.new.form.validator.clan.short.length.short', $params, $textDomain),
-        \Zend\Validator\StringLength::TOO_LONG => \LotgdTranslator::t('section.applicant.new.form.validator.clan.short.length.long', $params, $textDomain)
+        \Laminas\Validator\StringLength::TOO_SHORT => \LotgdTranslator::t('section.applicant.new.form.validator.clan.short.length.short', $params, $textDomain),
+        \Laminas\Validator\StringLength::TOO_LONG => \LotgdTranslator::t('section.applicant.new.form.validator.clan.short.length.long', $params, $textDomain)
     ]);
 
-    $chainShortValidator->attach(new \Zend\Validator\StringLength(['min' => 2, 'max' => $params['clanShortNameLength']]))
+    $chainShortValidator->attach(new \Laminas\Validator\StringLength(['min' => 2, 'max' => $params['clanShortNameLength']]))
         ->attach($noExistValidator)
     ;
 

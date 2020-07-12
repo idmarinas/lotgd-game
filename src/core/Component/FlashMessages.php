@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Component;
 
-use Zend\Session\Container;
-use Zend\Session\ManagerInterface;
-use Zend\Stdlib\SplQueue;
+use Laminas\Session\Container;
+use Laminas\Session\ManagerInterface;
+use Laminas\Stdlib\SplQueue;
 
 /**
  * Flash Messages - implement messages based on session.

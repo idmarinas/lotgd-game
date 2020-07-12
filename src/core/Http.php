@@ -8,8 +8,8 @@
 
 namespace Lotgd\Core;
 
-use Zend\Http\Header\Cookie;
-use Zend\Http\PhpEnvironment\Request;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\PhpEnvironment\Request;
 
 class Http extends Request
 {

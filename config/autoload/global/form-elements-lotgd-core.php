@@ -4,7 +4,7 @@ use DoctrineModule\Form\Element as DoctrineElement;
 use DoctrineORMModule\Service as DoctrineService;
 use Lotgd\Core\Form\Element;
 use Lotgd\Core\Form\ElementFactory as LotgdElementFactory;
-use Zend\Form\ElementFactory;
+use Laminas\Form\ElementFactory;
 
 return [
     'form_elements' => [

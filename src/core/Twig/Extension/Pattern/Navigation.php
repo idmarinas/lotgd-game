@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 /**
  * Trait to navigation display.

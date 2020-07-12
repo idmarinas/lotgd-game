@@ -1,7 +1,7 @@
 <?php
 
 return [
-    \Zend\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => true, //-- This cache config of service manager recomended in production
+    \Laminas\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => true, //-- This cache config of service manager recomended in production
     'lotgd_core' => [
         'translation' => [
             'locale' => [ 'language' => 'en', 'fallbackLanguage' => 'en' ],
@@ -10,7 +10,7 @@ return [
                     'Yaml' => \Lotgd\Core\Translator\Loader\Yaml::class,
                 ],
                 'factories' => [
-                    \Lotgd\Core\Translator\Loader\Yaml::class => \Zend\ServiceManager\Factory\InvokableFactory::class
+                    \Lotgd\Core\Translator\Loader\Yaml::class => \Laminas\ServiceManager\Factory\InvokableFactory::class
                 ]
             ],
         ]

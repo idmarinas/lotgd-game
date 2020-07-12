@@ -11,7 +11,7 @@ namespace Lotgd\Core\Factory\Db;
 use DoctrineORMModule\Service\EntityManagerFactory;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\ORM\EntityManager as DoctrineEntityManager;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Doctrine extends EntityManagerFactory
 {

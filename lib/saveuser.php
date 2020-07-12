@@ -30,7 +30,7 @@ function saveuser($update_last_on = true)
         $session['user']['companions'] = $companions;
     }
 
-    $hydrator = new \Zend\Hydrator\ClassMethods();
+    $hydrator = new \Laminas\Hydrator\ClassMethods();
 
     $everypage = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\AccountsEverypage());
     $account = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Accounts());

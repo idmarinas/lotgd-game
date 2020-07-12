@@ -19,8 +19,8 @@ use Doctrine\ORM\{
 };
 use Gedmo\Translatable\TranslatableListener;
 use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
-use Zend\Hydrator\ClassMethods;
-use Zend\Paginator\Paginator;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\Paginator\Paginator;
 
 class EntityRepository extends DoctrineEntityRepository
 {

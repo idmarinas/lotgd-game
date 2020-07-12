@@ -13,14 +13,14 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Zend\Cache\Storage\StorageInterface;
+use Laminas\Cache\Storage\StorageInterface;
 
 class Cache
 {
     /**
      * Instance of Cache.
      *
-     * @var Zend\Cache\Storage\StorageInterface
+     * @var Laminas\Cache\Storage\StorageInterface
      */
     protected static $instance;
 
@@ -47,7 +47,7 @@ class Cache
     /**
      * Set instance of Cache.
      *
-     * @param Zend\Cache\Storage $instance
+     * @param Laminas\Cache\Storage $instance
      */
     public static function instance(StorageInterface $instance)
     {

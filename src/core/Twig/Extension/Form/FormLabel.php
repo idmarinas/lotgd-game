@@ -15,9 +15,9 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
-use Zend\Form\LabelAwareInterface;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
+use Laminas\Form\LabelAwareInterface;
 
 class FormLabel extends AbstractElement
 {
@@ -95,7 +95,7 @@ class FormLabel extends AbstractElement
 
         if (! $attributesOrElement instanceof ElementInterface)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Zend\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
+            throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
         }
 
         $id = $this->getId($attributesOrElement);

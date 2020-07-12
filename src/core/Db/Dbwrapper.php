@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Db;
 
-use Zend\Db\Adapter\{
+use Laminas\Db\Adapter\{
     Adapter,
     Profiler\Profiler
 };
-use Zend\Db\ResultSet\ResultSet;
+use Laminas\Db\ResultSet\ResultSet;
 
 /**
  * Class for access to data base.
@@ -209,7 +209,7 @@ class Dbwrapper
     /**
      * Get adapter for DB.
      *
-     * @return \Zend\Db\Adapter\Adapter
+     * @return \Laminas\Db\Adapter\Adapter
      */
     public function getAdapter(): Adapter
     {

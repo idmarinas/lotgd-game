@@ -14,9 +14,9 @@
 namespace Lotgd\Core\Form\Element;
 
 use Lotgd\Core\Filter as LotgdFilter;
-use Zend\Form\Element\Select;
-use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator;
+use Laminas\Form\Element\Select;
+use Laminas\InputFilter\InputProviderInterface;
+use Laminas\Validator;
 
 class BitField extends Select implements InputProviderInterface
 {

@@ -14,7 +14,7 @@ namespace Lotgd\Core\Factory\Component;
 
 use Interop\Container\ContainerInterface;
 use Jaxon\Jaxon as JaxonCore;
-use Zend\ServiceManager\{
+use Laminas\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };

@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core;
 
-use Zend\Session\Container;
-use Zend\Session\SessionManager;
-use Zend\Session\Validator;
+use Laminas\Session\Container;
+use Laminas\Session\SessionManager;
+use Laminas\Session\Validator;
 
 class Session
 {

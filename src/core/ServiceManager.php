@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core;
 
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\ZendConfigProvider;
-use Zend\ServiceManager\Config as ServiceConfig;
-use Zend\ServiceManager\ServiceManager as ZendServiceManager;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\LaminasConfigProvider;
+use Laminas\ServiceManager\Config as ServiceConfig;
+use Laminas\ServiceManager\ServiceManager as ZendServiceManager;
 
 /**
  * Generated a Service Manager for Game.
@@ -47,11 +47,11 @@ class ServiceManager extends ZendServiceManager
     public function __construct()
     {
         $aggregator = new ConfigAggregator([
-            new ZendConfigProvider(static::LOTGD_CONFIG),
-            new ZendConfigProvider('config/autoload/global/{**/*,*}.php'),
-            new ZendConfigProvider('config/autoload/local/{**/*,*}.php'),
-            new ZendConfigProvider(static::LOTGD_DEV_CONFIG),
-            new ZendConfigProvider('config/development/{,*}.php'),
+            new LaminasConfigProvider(static::LOTGD_CONFIG),
+            new LaminasConfigProvider('config/autoload/global/{**/*,*}.php'),
+            new LaminasConfigProvider('config/autoload/local/{**/*,*}.php'),
+            new LaminasConfigProvider(static::LOTGD_DEV_CONFIG),
+            new LaminasConfigProvider('config/development/{,*}.php'),
         ], static::CACHE_FILE);
 
         $configuration = $aggregator->getMergedConfig();

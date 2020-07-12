@@ -15,9 +15,9 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\Element\Checkbox as CheckboxElement;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
+use Laminas\Form\Element\Checkbox as CheckboxElement;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
 
 class FormCheckbox extends FormInput
 {
@@ -43,7 +43,7 @@ class FormCheckbox extends FormInput
     {
         if (! $element instanceof CheckboxElement)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Zend\Form\Element\Checkbox', __METHOD__));
+            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Checkbox', __METHOD__));
         }
 
         $name = $element->getName();

@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Filter;
 
-use Zend\Filter\FilterInterface;
+use Laminas\Filter\FilterInterface;
 
 /**
  * Convert to int value an array of BitField.

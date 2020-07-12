@@ -14,8 +14,8 @@ namespace Lotgd\Core\Factory\Doctrine\Extension;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\Extension\TablePrefix as LotgdTablePrefix;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class TablePrefix implements FactoryInterface
 {

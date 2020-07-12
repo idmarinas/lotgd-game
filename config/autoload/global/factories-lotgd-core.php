@@ -3,7 +3,7 @@
 use DoctrineORMModule\CliConfigurator;
 use DoctrineORMModule\Service;
 use Lotgd\Core\Factory;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'service_manager' => [
@@ -30,15 +30,15 @@ return [
             Lotgd\Core\Tool\Sanitize::class => Factory\Tool\Sanitize::class,
             Lotgd\Core\Translator\Translator::class => Factory\Translator\Translator::class,
             Lotgd\Core\Session::class => Factory\Session::class,
-            Zend\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
-            Zend\Session\Config\ConfigInterface::class => Zend\Session\Service\SessionConfigFactory::class,
-            Zend\Session\ManagerInterface::class => Zend\Session\Service\SessionManagerFactory::class,
-            Zend\Session\Storage\StorageInterface::class => Zend\Session\Service\StorageFactory::class,
+            Laminas\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
+            Laminas\Session\Config\ConfigInterface::class => Laminas\Session\Service\SessionConfigFactory::class,
+            Laminas\Session\ManagerInterface::class => Laminas\Session\Service\SessionManagerFactory::class,
+            Laminas\Session\Storage\StorageInterface::class => Laminas\Session\Service\StorageFactory::class,
 
             //-- Added in version 4.1.0
-            'InputFilterManager' => Zend\InputFilter\InputFilterPluginManagerFactory::class,
-            'FormAnnotationBuilder' => Zend\Form\Annotation\AnnotationBuilderFactory::class,
-            'FormElementManager' => Zend\Form\FormElementManagerFactory::class,
+            'InputFilterManager' => Laminas\InputFilter\InputFilterPluginManagerFactory::class,
+            'FormAnnotationBuilder' => Laminas\Form\Annotation\AnnotationBuilderFactory::class,
+            'FormElementManager' => Laminas\Form\FormElementManagerFactory::class,
 
             //-- Added in version 4.2.0
             'doctrine.cli' => 'DoctrineModule\Service\CliFactory',

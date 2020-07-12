@@ -8,7 +8,7 @@ return [
         'invokables' => [
             //-- Added in version 4.2.0
             'Doctrine\ORM\Mapping\AnsiQuoteStrategy' => 'Doctrine\ORM\Mapping\AnsiQuoteStrategy',
-            'DoctrineModule\Authentication\Storage\Session' => 'Zend\Authentication\Storage\Session',
+            'DoctrineModule\Authentication\Storage\Session' => 'Laminas\Authentication\Storage\Session',
             'Doctrine\ORM\Mapping\UnderscoreNamingStrategy' => 'Doctrine\ORM\Mapping\UnderscoreNamingStrategy',
             // DBAL commands
             'doctrine.dbal_cmd.runsql' => Console\Command\RunSqlCommand::class,

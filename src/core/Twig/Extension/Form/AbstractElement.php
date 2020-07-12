@@ -18,10 +18,10 @@ namespace Lotgd\Core\Twig\Extension\Form;
 use Lotgd\Core\Pattern as PatternCore;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension as AbstractExtensionCore;
-use Zend\Escaper\Exception\RuntimeException as EscaperException;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception\InvalidArgumentException;
-use Zend\View\Helper\EscapeHtmlAttr;
+use Laminas\Escaper\Exception\RuntimeException as EscaperException;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception\InvalidArgumentException;
+use Laminas\View\Helper\EscapeHtmlAttr;
 
 /**
  * Base functionality for all form view helpers.

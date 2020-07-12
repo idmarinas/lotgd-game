@@ -15,8 +15,8 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
 
 class FormRow extends AbstractElement
 {
@@ -64,7 +64,7 @@ class FormRow extends AbstractElement
     /**
      * Utility form helper that renders a label (if it exists), an element and errors.
      *
-     * @throws \Zend\Form\Exception\DomainException
+     * @throws \Laminas\Form\Exception\DomainException
      */
     public function render(Environment $env, ElementInterface $element, ?string $translatorTextDomain = null): string
     {
@@ -129,7 +129,7 @@ class FormRow extends AbstractElement
      *
      * @param string $labelPosition
      *
-     * @throws \Zend\Form\Exception\InvalidArgumentException
+     * @throws \Laminas\Form\Exception\InvalidArgumentException
      *
      * @return FormRow
      */

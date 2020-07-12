@@ -9,7 +9,7 @@
 namespace Lotgd\Core\Lib;
 
 use Lotgd\Core\Doctrine\ORM\EntityManager;
-use Zend\Cache\Storage\StorageInterface;
+use Laminas\Cache\Storage\StorageInterface;
 
 class Settings
 {

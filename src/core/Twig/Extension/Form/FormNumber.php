@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Twig\Extension\Form;
 
 use Twig\TwigFunction;
-use Zend\Form\ElementInterface;
+use Laminas\Form\ElementInterface;
 
 class FormNumber extends FormInput
 {

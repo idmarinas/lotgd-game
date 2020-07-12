@@ -16,8 +16,8 @@ namespace Lotgd\Core\Twig\Extension\Form;
 use Lotgd\Core\Form\Element\BitField;
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
 
 class FormBitField extends FormSelect
 {

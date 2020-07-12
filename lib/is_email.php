@@ -13,7 +13,7 @@
  */
 function is_email($email)
 {
-    $validator = new Zend\Validator\EmailAddress();
+    $validator = new Laminas\Validator\EmailAddress();
 
     return $validator->isValid($email);
 }

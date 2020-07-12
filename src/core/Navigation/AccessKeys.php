@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Navigation;
 
-use Zend\Filter;
+use Laminas\Filter;
 
 /**
  * Generate a unique access key for a nav.

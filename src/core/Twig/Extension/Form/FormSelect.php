@@ -15,12 +15,12 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\Element\Hidden;
-use Zend\Form\Element\Select as SelectElement;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
-use Zend\Form\View\Helper\FormHidden;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\Select as SelectElement;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
+use Laminas\Form\View\Helper\FormHidden;
+use Laminas\Stdlib\ArrayUtils;
 
 class FormSelect extends AbstractElement
 {
@@ -102,7 +102,7 @@ class FormSelect extends AbstractElement
     {
         if (! $element instanceof SelectElement)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Zend\Form\Element\Select', __METHOD__));
+            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Select', __METHOD__));
         }
 
         $name = $element->getName();

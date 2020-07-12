@@ -1,10 +1,10 @@
 <?php
 
-use Zend\Filter;
-use Zend\Validator;
+use Laminas\Filter;
+use Laminas\Validator;
 
 return [
-    'type' => \Zend\InputFilter\InputFilter::class,
+    'type' => \Laminas\InputFilter\InputFilter::class,
     [
         'name' => 'resurrectioncost',
         'required' => false,

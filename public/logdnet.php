@@ -14,7 +14,7 @@ if (! isset($_GET['op']) || 'list' != $_GET['op'])
 
 require_once 'common.php';
 
-use Zend\Filter;
+use Laminas\Filter;
 
 function lotgdsort($a, $b)
 {

@@ -13,7 +13,7 @@
 namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Entity\EntityInterface;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethods;
 
 trait EntityHydrator
 {

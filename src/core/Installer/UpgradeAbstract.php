@@ -18,8 +18,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Lotgd\Core\Component\Filesystem;
 use Tracy\Debugger;
-use Zend\Db\ResultSet\HydratingResultSet;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Hydrator\ClassMethods;
 
 /**
  * Script to upgrade a version.

@@ -13,15 +13,15 @@
 
 namespace Lotgd\Core\Translator;
 
-use Zend\EventManager\Event;
-use Zend\I18n\Exception;
-use Zend\I18n\Translator\Loader\FileLoaderInterface;
-use Zend\I18n\Translator\Translator as ZendTranslator;
-use Zend\Validator\Translator\TranslatorInterface;
+use Laminas\EventManager\Event;
+use Laminas\I18n\Exception;
+use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\Translator as ZendTranslator;
+use Laminas\Validator\Translator\TranslatorInterface;
 
 /**
  * Class translator for Legend of the Green Dragon.
- * Extends class Zend\I18n\Translator\Translator.
+ * Extends class Laminas\I18n\Translator\Translator.
  */
 class Translator extends ZendTranslator implements TranslatorInterface
 {

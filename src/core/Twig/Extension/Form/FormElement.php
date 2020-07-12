@@ -15,7 +15,7 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\ElementInterface;
+use Laminas\Form\ElementInterface;
 
 class FormElement extends AbstractElement
 {
@@ -27,13 +27,13 @@ class FormElement extends AbstractElement
      * @var array
      */
     protected $classMap = [
-        'Zend\Form\Element\Button' => FormButton::class,
-        // 'Zend\Form\Element\Captcha' => FormCaptcha::class,
-        'Zend\Form\Element\Csrf' => FormHidden::class,
-        'Zend\Form\Element\Collection' => FormCollection::class,
-        // 'Zend\Form\Element\DateTimeSelect' => FormDateTimeSelect::class,
-        // 'Zend\Form\Element\DateSelect' => FormDateSelect::class,
-        // 'Zend\Form\Element\MonthSelect' => FormMonthSelect::class,
+        'Laminas\Form\Element\Button' => FormButton::class,
+        // 'Laminas\Form\Element\Captcha' => FormCaptcha::class,
+        'Laminas\Form\Element\Csrf' => FormHidden::class,
+        'Laminas\Form\Element\Collection' => FormCollection::class,
+        // 'Laminas\Form\Element\DateTimeSelect' => FormDateTimeSelect::class,
+        // 'Laminas\Form\Element\DateSelect' => FormDateSelect::class,
+        // 'Laminas\Form\Element\MonthSelect' => FormMonthSelect::class,
 
         //-- Custom elements of LoTGD
         'Lotgd\Core\Form\Element\Tagify' => FormTagify::class,

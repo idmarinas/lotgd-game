@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Navigation;
 
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * Class for construct a navigation menu in LotGD.

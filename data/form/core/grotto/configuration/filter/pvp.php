@@ -1,10 +1,10 @@
 <?php
 
-use Zend\Filter;
-use Zend\Validator;
+use Laminas\Filter;
+use Laminas\Validator;
 
 return [
-    'type' => \Zend\InputFilter\InputFilter::class,
+    'type' => \Laminas\InputFilter\InputFilter::class,
     [
         'name' => 'pvp',
         'required' => false,
@@ -66,7 +66,7 @@ return [
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
-                'name' => Zend\I18n\Validator\IsFloat::class,
+                'name' => Laminas\I18n\Validator\IsFloat::class,
                 'options' => [
                     'locale' => 'en'
                 ]
@@ -80,7 +80,7 @@ return [
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
-                'name' => Zend\I18n\Validator\IsFloat::class,
+                'name' => Laminas\I18n\Validator\IsFloat::class,
                 'options' => [
                     'locale' => 'en'
                 ]
@@ -94,7 +94,7 @@ return [
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
-                'name' => Zend\I18n\Validator\IsFloat::class,
+                'name' => Laminas\I18n\Validator\IsFloat::class,
                 'options' => [
                     'locale' => 'en'
                 ]
@@ -108,7 +108,7 @@ return [
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
-                'name' => Zend\I18n\Validator\IsFloat::class,
+                'name' => Laminas\I18n\Validator\IsFloat::class,
                 'options' => [
                     'locale' => 'en'
                 ]
@@ -122,7 +122,7 @@ return [
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
-                'name' => Zend\I18n\Validator\IsFloat::class,
+                'name' => Laminas\I18n\Validator\IsFloat::class,
                 'options' => [
                     'locale' => 'en'
                 ]

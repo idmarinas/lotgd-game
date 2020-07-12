@@ -15,7 +15,7 @@ namespace Lotgd\Core\Form\Element;
 
 use Lotgd\Core\Form\LotgdElementFactoryInterface;
 use Lotgd\Core\Pattern as PatternCore;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class LotgdTheme extends Select implements LotgdElementFactoryInterface
 {

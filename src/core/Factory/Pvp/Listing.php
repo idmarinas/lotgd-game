@@ -14,8 +14,8 @@ namespace Lotgd\Core\Factory\Pvp;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Pvp\Listing as PvpListing;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Listing implements FactoryInterface
 {

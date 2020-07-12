@@ -14,9 +14,9 @@
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
 use Tracy\Debugger;
-use Zend\Escaper\Exception\RuntimeException as EscaperException;
-use Zend\View\Helper\EscapeHtml;
-use Zend\View\Helper\EscapeHtmlAttr;
+use Laminas\Escaper\Exception\RuntimeException as EscaperException;
+use Laminas\View\Helper\EscapeHtml;
+use Laminas\View\Helper\EscapeHtmlAttr;
 
 /**
  * Create a string of attributes for a html tag.

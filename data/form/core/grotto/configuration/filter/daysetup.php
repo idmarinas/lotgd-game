@@ -1,10 +1,10 @@
 <?php
 
-use Zend\Filter;
-use Zend\Validator;
+use Laminas\Filter;
+use Laminas\Validator;
 
 return [
-    'type' => \Zend\InputFilter\InputFilter::class,
+    'type' => \Laminas\InputFilter\InputFilter::class,
     [
         'name' => 'gametime',
         'required' => false,
@@ -26,7 +26,7 @@ return [
         'filters' => [],
         'validators' => [
             ['name' => Validator\NotEmpty::class],
-            ['name' => Zend\I18n\Validator\IsInt::class]
+            ['name' => Laminas\I18n\Validator\IsInt::class]
         ]
     ],
 ];

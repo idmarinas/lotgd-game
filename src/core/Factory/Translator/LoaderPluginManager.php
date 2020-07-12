@@ -14,8 +14,8 @@ namespace Lotgd\Core\Factory\Translator;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Exception;
-use Zend\I18n\Translator\LoaderPluginManager as ZendLoaderPluginManager;
-use Zend\ServiceManager\{
+use Laminas\I18n\Translator\LoaderPluginManager as ZendLoaderPluginManager;
+use Laminas\ServiceManager\{
     Config,
     Factory\FactoryInterface,
     ServiceLocatorInterface

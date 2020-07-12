@@ -3,9 +3,9 @@
 namespace Lotgd\Core\Validator\Db;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\Exception;
 
 /**
  * Class that validates if objects exist in a given repository with a given list of matched fields.
@@ -51,7 +51,7 @@ class ObjectExists extends AbstractValidator
      *                       Doctrine\Common\Persistence\ObjectRepository, and `fields`, with either
      *                       a string or an array of strings representing the fields to be matched by the validator
      *
-     * @throws \Zend\Validator\Exception\InvalidArgumentException
+     * @throws \Laminas\Validator\Exception\InvalidArgumentException
      */
     public function __construct(array $options)
     {
@@ -110,7 +110,7 @@ class ObjectExists extends AbstractValidator
      *
      * @return array
      *
-     * @throws \Zend\Validator\Exception\RuntimeException
+     * @throws \Laminas\Validator\Exception\RuntimeException
      */
     protected function cleanSearchValue($value)
     {
@@ -145,7 +145,7 @@ class ObjectExists extends AbstractValidator
     /**
      * Filters and validates the fields passed to the constructor.
      *
-     * @throws \Zend\Validator\Exception\InvalidArgumentException
+     * @throws \Laminas\Validator\Exception\InvalidArgumentException
      *
      * @return array
      */

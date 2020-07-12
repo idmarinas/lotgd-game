@@ -14,8 +14,8 @@
 namespace Lotgd\Core\Form\Element;
 
 use Lotgd\Core\Filter as LotgdFilter;
-use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
+use Laminas\Form\Element;
+use Laminas\InputFilter\InputProviderInterface;
 
 class Tagify extends Element implements InputProviderInterface
 {

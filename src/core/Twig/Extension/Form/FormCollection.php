@@ -15,10 +15,10 @@ namespace Lotgd\Core\Twig\Extension\Form;
 
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Zend\Form\Element\Collection as CollectionElement;
-use Zend\Form\ElementInterface;
-use Zend\Form\FieldsetInterface;
-use Zend\View\Helper\HelperInterface;
+use Laminas\Form\Element\Collection as CollectionElement;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\FieldsetInterface;
+use Laminas\View\Helper\HelperInterface;
 
 class FormCollection extends AbstractElement
 {

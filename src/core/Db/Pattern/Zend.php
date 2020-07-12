@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Db\Pattern;
 
-use Zend\Db\Sql\{
+use Laminas\Db\Sql\{
     Delete,
     Insert,
     Predicate\Expression,
@@ -21,7 +21,7 @@ use Zend\Db\Sql\{
     Sql,
     Update
 };
-use Zend\Paginator\{
+use Laminas\Paginator\{
     Adapter\DbSelect as DbSelectPaginator,
     Paginator
 };
@@ -155,7 +155,7 @@ trait Zend
     }
 
     /**
-     * Create Zend\Db\Sql\Predicate\Expression for uses in Zend DB.
+     * Create Laminas\Db\Sql\Predicate\Expression for uses in Zend DB.
      *
      * @param string $expresion
      */

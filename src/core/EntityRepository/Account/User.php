@@ -14,7 +14,7 @@
 namespace Lotgd\Core\EntityRepository\Account;
 
 use Tracy\Debugger;
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 /**
  * Functions for user account.

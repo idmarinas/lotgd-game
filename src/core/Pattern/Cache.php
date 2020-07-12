@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Zend\Cache\Storage\StorageInterface;
+use Laminas\Cache\Storage\StorageInterface;
 
 /**
  * Return instance of cache of game "Cache\Core\Lotgd".

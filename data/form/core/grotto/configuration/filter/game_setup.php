@@ -1,10 +1,10 @@
 <?php
 
-use Zend\Filter;
-use Zend\Validator;
+use Laminas\Filter;
+use Laminas\Validator;
 
 return [
-    'type' => \Zend\InputFilter\InputFilter::class, //-- Need this when is a Field set
+    'type' => \Laminas\InputFilter\InputFilter::class, //-- Need this when is a Field set
     [
         'name' => 'allowcreation',
         'required' => false,

@@ -16,7 +16,7 @@ namespace Lotgd\Core\Installer\Upgrade\Version_40000;
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Lotgd\Core\Output\Commentary;
 use Tracy\Debugger;
-use Zend\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethods;
 
 class Upgrade extends UpgradeAbstract
 {

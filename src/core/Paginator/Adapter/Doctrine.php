@@ -15,7 +15,7 @@ namespace Lotgd\Core\Paginator\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
 use Tracy\Debugger;
-use Zend\Paginator\Adapter\AdapterInterface;
+use Laminas\Paginator\Adapter\AdapterInterface;
 
 class Doctrine implements AdapterInterface
 {

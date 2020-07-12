@@ -10,7 +10,7 @@ namespace Lotgd\Core\Factory\Db;
 
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Db\Dbwrapper as LibDbwrapper;
-use Zend\ServiceManager\{
+use Laminas\ServiceManager\{
     Factory\FactoryInterface,
     ServiceLocatorInterface
 };

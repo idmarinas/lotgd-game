@@ -157,13 +157,13 @@ return [
             ],
         ],
 
-        // SQL logger collector, used when ZendDeveloperTools and its toolbar are active
+        // SQL logger collector, used when Laminas\DeveloperTools and its toolbar are active
         'sql_logger_collector' => [
             // configuration for the `doctrine.sql_logger_collector.orm_default` service
             'orm_default' => [],
         ],
 
-        // mappings collector, used when ZendDeveloperTools and its toolbar are active
+        // mappings collector, used when Laminas\DeveloperTools and its toolbar are active
         'mapping_collector' => [
             // configuration for the `doctrine.sql_logger_collector.orm_default` service
             'orm_default' => [],

@@ -27,7 +27,7 @@ class Http
     /**
      * Cookies added in request.
      *
-     * @var Zend\Http\Header\Cookie
+     * @var Laminas\Http\Header\Cookie
      */
     protected static $cookies;
 
@@ -132,7 +132,7 @@ class Http
             $post[$var][$sub] = $val;
         }
 
-        self::$instance->setPost(new \Zend\Stdlib\Parameters($post));
+        self::$instance->setPost(new \Laminas\Stdlib\Parameters($post));
     }
 
     /**
