@@ -1,0 +1,2 @@
+form.label: Run newday as cronjob?
+newdaycron: Let the newday-runonce run via a cronjob

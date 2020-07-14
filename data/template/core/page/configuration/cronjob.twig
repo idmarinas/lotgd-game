@@ -4,9 +4,7 @@
 
 <div class="ui red message">{{ 'section.cronjob.note.red'|t|uncolorize }}</div>
 
-<form action="{{ 'configuration.php?setting=cronjob&save=save'|lotgd_url }}" method="POST" autocomplete="off">
-    {{ form }}
-</form>
+{{ laminas_form(form) }}
 <a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob'|lotgd_url }}">{{ 'section.cronjob.form.button.new'|t|uncolorize }}</a>
 <br>
 <br>
@@ -22,12 +20,12 @@
 <table class="ui very compact striped selectable table">
     <thead>
         <tr>
-            <th>{{ 'section.cronjob.table.thead.name'|t|uncolorize }}</th>
-            <th>{{ 'section.cronjob.table.thead.command'|t|uncolorize }}</th>
-            <th>{{ 'section.cronjob.table.thead.schedule'|t|uncolorize }}</th>
-            <th>{{ 'section.cronjob.table.thead.debug'|t|uncolorize }}</th>
-            <th>{{ 'section.cronjob.table.thead.enabled'|t|uncolorize }}</th>
-            <th>{{ 'section.cronjob.table.thead.opcs'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.name'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.command'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.schedule'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.debug'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.enabled'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.opcs'|t|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>

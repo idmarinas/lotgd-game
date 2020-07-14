@@ -1,14 +1,8 @@
 <?php
 
-if (\LotgdHttp::isPost())
-{
-    $postSettings = \LotgdHttp::getPostAll();
-
-    require_once 'lib/configuration/save.php';
-}
-
 $op = (string) \LotgdHttp::getQuery('op');
 $cronId = (string) \LotgdHttp::getQuery('cronid');
+$page = (int) \LotgdHttp::getQuery('page', 1);
 
 $params['cronId'] = $cronId;
 
@@ -96,15 +90,38 @@ elseif ('delcronjob' == $op)
 
 if ('' == $op)
 {
-    $setup_cronjob = include_once 'lib/data/configuration_cronjob.php';
+    $form = \LotgdLocator::get('Lotgd\Core\Form\Cronjob');
 
-    $page = (int) \LotgdHttp::getQuery('page', 1);
+    if (\LotgdHttp::isPost())
+    {
+        $postSettings = \LotgdHttp::getPostAll();
+        $form->setData($postSettings);
+
+        $messageType = 'addErrorMessage';
+        $message = 'flash.message.error';
+        if ($form->isValid())
+        {
+            $messageType = null;
+            $postSettings = $form->getData();
+
+            require_once 'lib/configuration/save.php';
+        }
+
+        if ($messageType)
+        {
+            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'app-form'));
+        }
+    }
 
     $query = $repository->createQueryBuilder('u');
 
-    $params['paginator'] = $repository->getPaginator($query, $page);
+    if (!\LotgdHttp::isPost())
+    {
+        $form->setData(['newdaycron' => getsetting('newdaycron', 0)]);
+    }
 
-    $params['form'] = lotgd_showform($setup_cronjob, ['newdaycron' => getsetting('newdaycron', 0)], false, false, false);
+    $params['paginator'] = $repository->getPaginator($query, $page);
+    $params['form'] = $form;
 }
 elseif ('newcronjob' == $op)
 {
