@@ -119,17 +119,17 @@ $params['serverVersion'] = \Lotgd\Core\Application::VERSION;
 $params['selectSkin'] = false;
 if (getsetting('homeskinselect', 1))
 {
-    require_once 'lib/showform.php';
-
     $prefs['template'] = LotgdHttp::getCookie('template') ?: '';
 
     if ('' == $prefs['template'])
     {
         $prefs['template'] = getsetting('defaultskin', 'jade.htm');
     }
-    $form = ['template' => 'Choose a different display skin:,theme'];
 
-    $params['selectSkin'] = lotgd_showform($form, $prefs, true, false, false);
+    $form = \LotgdLocator::get('Lotgd\Core\Form\HomeSkin');
+    $form->setData(['template' => $prefs['template']]);
+
+    $params['selectSkin'] = $form;
 }
 
 $params = modulehook('page-home-tpl-params', $params);

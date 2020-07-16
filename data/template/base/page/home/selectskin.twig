@@ -4,14 +4,7 @@
 <table class="ui very basic collapsing centered table">
     <tr>
         <td>
-            <form action="home.php" method="POST"class="ui form">
-                <div class="inline fields">
-                    <div class="field">{{ select }}</div>
-                    <div class='field'>
-                        <button type="submit" class="ui button">{{ 'skin.submit'|t }}</button>
-                    </div>
-                </div>
-            </form>
+            {{ laminas_form(form) }}
         </td>
     </tr>
 </table>
