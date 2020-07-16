@@ -107,7 +107,7 @@ define([
     {
         return jQuery.get(url).then(response =>
         {
-            if (response !== 'ok')
+            if (response.trim() !== 'ok')
             {
                 throw new Error(response.statusText)
             }
