@@ -11,7 +11,6 @@ namespace Lotgd\Core\Factory\Db;
 use DoctrineORMModule\Service\EntityManagerFactory;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\ORM\EntityManager as DoctrineEntityManager;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Doctrine extends EntityManagerFactory
 {
@@ -40,10 +39,5 @@ class Doctrine extends EntityManagerFactory
         }
 
         return $entityManager;
-    }
-
-    public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
-    {
-        return $this($services, $requestedName);
     }
 }
