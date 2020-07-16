@@ -1,5 +1,5 @@
 {% translate_default_domain textDomain %}
 
-<form action="{{ ('configuration.php?setting=cronjob&op=savecronjob&cronid=' ~ cronId)|lotgd_url }}" method="POST" autocomplete="off">
-    {{ form}}
-</form>
+{{ 'cronjob.details'|t|colorize }}
+
+{{ form(form) }}

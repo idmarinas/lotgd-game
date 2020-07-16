@@ -1,74 +1,14 @@
 <?php
 
 $op = (string) \LotgdHttp::getQuery('op');
-$cronId = (string) \LotgdHttp::getQuery('cronid');
+$cronId = (int) \LotgdHttp::getQuery('cronid');
 $page = (int) \LotgdHttp::getQuery('page', 1);
 
 $params['cronId'] = $cronId;
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
 
-if ('savecronjob' == $op)
-{
-    $post = \LotgdHttp::getPostAll();
-
-    //-- NAME - only accept alphabetic characters and digits in the unicode "letter" and "number" categories, respectively
-    $filter = new \Laminas\I18n\Filter\Alnum();
-    $post['name'] = $filter->filter($post['name']);
-    //-- SCHELUDE - modifies to remove whitespaces from the beginning and end.
-    $post['schedule'] = trim($post['schedule']);
-
-    $cronEntity = $repository->hydrateEntity($post);
-    $gameLogMessage = "`@Create CronJob`0 `^{$post['name']}`0`$ by admin {$session['user']['playername']}`0";
-    $message = 'flash.message.cronjob.created';
-    $messageType = 'addSuccessMessage';
-
-    $paramsFlashMessages = [];
-
-    if ($cronId)
-    {
-        $cronEntity = $repository->find($cronId);
-        $cronEntity = $repository->hydrateEntity($post, $cronEntity);
-
-        $message = 'flash.message.cronjob.updated';
-        $gameLogMessage = "`qUpdate CronJob`0 `^{$post['name']}`0`$ by admin {$session['user']['playername']}`0";
-    }
-    //-- If is a new cron check if name exist
-    else
-    {
-        //-- Check if clan name is taken
-        $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists ([
-            'object_repository' => $repository,
-            'fields'   => 'name',
-        ]);
-
-        if (! $noExistValidator->isValid($post['name']))
-        {
-            $paramsFlashMessages['name'] = $post['name'];
-            $message = 'flash.message.cronjob.name.exist';
-            $messageType = 'addWarningMessage';
-            $cronEntity = null;
-
-            $op = 'newcronjob';
-        }
-    }
-
-    \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
-
-    if ($cronEntity)
-    {
-        gamelog($gameLogMessage, 'cronjob');
-
-        \Doctrine::persist($cronEntity);
-        \Doctrine::flush();
-
-        $op = '';
-    }
-
-    $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-    $cronCache->removeItem('cronjobstable');
-}
-elseif ('delcronjob' == $op)
+if ('delcronjob' == $op)
 {
     $cronEntity = $repository->find($cronId);
 
@@ -99,6 +39,7 @@ if ('' == $op)
 
         $messageType = 'addErrorMessage';
         $message = 'flash.message.error';
+
         if ($form->isValid())
         {
             $messageType = null;
@@ -115,7 +56,7 @@ if ('' == $op)
 
     $query = $repository->createQueryBuilder('u');
 
-    if (!\LotgdHttp::isPost())
+    if (! \LotgdHttp::isPost())
     {
         $form->setData(['newdaycron' => getsetting('newdaycron', 0)]);
     }
@@ -127,63 +68,70 @@ elseif ('newcronjob' == $op)
 {
     $params['tpl'] = 'cronjob-new';
 
-    require_once 'lib/listfiles.php';
+    $entity = $repository->find($cronId);
+    $entity = $entity ?: new \Lotgd\Core\Entity\Cronjob();
+    \Doctrine::detach($entity);
 
-    $data = [
-        'mailer' => 'sendmail',
-        'smtpSender' => 'jobby@localhost',
-        'smtpSenderName' => 'Jobby',
-        'dateFormat' => 'Y-m-d H:i:s',
-        'debut' => 0,
-        'enabled' => 1
-    ];
+    $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
+        'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
+        'attr' => [
+            'autocomplete' => 'off'
+        ]
+    ]);
 
-    if ($cronId)
+    $form->handleRequest();
+
+    $paramsFlashMessages = [];
+    $message = null;
+    $messageType = 'addSuccessMessage';
+
+    if ($form->isSubmitted() && $form->isValid())
     {
-        $cronEntity = $repository->find($cronId);
-        $result = $repository->extractEntity($cronEntity);
+        $entity = $form->getData();
+        $method = $cronId ? 'merge' : 'persist';
+        $message = $cronId ? 'flash.message.cronjob.updated' : 'flash.message.cronjob.created';
 
-        if ($result)
+        //-- Check if clan name is taken
+        $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists([
+            'object_repository' => $repository,
+            'fields' => 'name',
+        ]);
+
+        if ('persist' == $method && ! $noExistValidator->isValid($entity->getName()))
         {
-            $data = $result;
+            $paramsFlashMessages['name'] = $entity->getName();
+            $message = 'flash.message.cronjob.name.exist';
+            $messageType = 'addWarningMessage';
+        }
+        else
+        {
+            \Doctrine::{$method}($entity);
+            \Doctrine::flush();
+
+            $cronId = $entity->getId();
+
+            gamelog('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
+
+            $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
+            $cronCache->removeItem('cronjobstable');
+
+            //-- Redo form for change $cronId and set new data (generated IDs)
+            $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
+                'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
+        }
+
+        if ($message)
+        {
+            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
         }
     }
 
-    $sort = list_files('cronjob', []);
-    sort($sort);
-    $scriptenum = implode('', $sort);
-    $scriptenum = ',,none'.$scriptenum;
+    //-- In this position can updated $cronId var
+    \LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");
 
-    $form = [
-        'Job requires these,title',
-        'Note: This three options are mandatory,note',
-        'name' => 'Name for CronJob. There can not be another with the same name',
-        'schedule' => 'Crontab schedule format (man -s 5 crontab) or DateTime format (Y-m-d H:i:s) (https://crontab.guru)',
-        'command' => 'The shell command to run,enum'.$scriptenum,
-        'Note: if you want add new CronJob add your Cron PHP file in "cronjob/" folder,note',
-        'Other,title',
-        'runAs' => 'Run as this user, if crontab user has sudo privileges',
-        'debug' => 'Send jobby internal messages to "debug.log",bool',
-        'Filtering,title',
-        'environment' => 'Development environment for this job,textarea',
-        'runOnHost' => 'Run jobs only on this hostname',
-        'maxRuntime' => 'Maximum execution time for this job (in seconds),number',
-        'enabled' => 'Run this job at scheduled times (enable or disabled),bool',
-        'haltDir' => 'A job will not run if this directory contains a file bearing the job\'s name',
-        'Logging,title',
-        'output' => 'Redirect stdout and stderr to this file',
-        'dateFormat' => 'Format for dates on jobby log messages',
-        'Mailing,title',
-        'recipients' => 'Comma-separated string of email addresses',
-        'mailer' => 'Email method: sendmail or smtp or mail',
-        'smtpHost' => 'SMTP host; if mailer is smtp',
-        'smtpPort' => 'SMTP port; if mailer is smtp,number',
-        'smtpUsername' => 'SMTP user; if mailer is smtp',
-        'smtpPassword' => 'SMTP password; if mailer is smtp',
-        'smtpSecurity' => 'SMTP security option: ssl or tls, if mailer is smtp',
-        'smtpSender' => 'The sender and from addresses used in SMTP notices',
-        'smtpSenderName' => 'Jobby	The name used in the from field for SMTP messages',
-    ];
-
-    $params['form'] = lotgd_showform($form, $data, false, false, false);
+    $params['form'] = $form->createView();
 }

@@ -41,8 +41,8 @@
                 <td>{{ cronjob.debug ? yes : no  }}</td>
                 <td>{{ cronjob.enabled ? yes : no  }}</td>
                 <td>
-                    <a href="{{ ('configuration.php?setting=cronjob&op=newcronjob&cronid=' ~ cronjob.name)|lotgd_url }}">{{ edit }}</a> |
-                    <a href="{{ ('configuration.php?setting=cronjob&op=delcronjob&cronid=' ~ cronjob.name)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ delete }}</a>
+                    <a href="{{ ('configuration.php?setting=cronjob&op=newcronjob&cronid=' ~ cronjob.id)|lotgd_url }}">{{ edit }}</a> |
+                    <a href="{{ ('configuration.php?setting=cronjob&op=delcronjob&cronid=' ~ cronjob.id)|lotgd_url }}" data-options="{{ options|e('html_attr') }}" onclick="Lotgd.confirm(this, event)">{{ delete }}</a>
                 </td>
             </tr>
         {% endfor %}
