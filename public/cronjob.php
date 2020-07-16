@@ -34,7 +34,7 @@ foreach ($cronjobs as $key => $job)
 
     $jobName = $job['name'];
     $job['command'] = "php {$job['command']}.php";
-    unset($job['name']);
+    unset($job['name'], $job['id']);
     $jobby->add($jobName, $job);
 }
 
