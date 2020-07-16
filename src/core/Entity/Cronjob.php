@@ -13,22 +13,36 @@
 
 namespace Lotgd\Core\Entity;
 
+use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Cronjob.
  *
  * @ORM\Table(name="cronjob")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CronjobRepository")
+ *
+ * @UniqueEntity("name")
  */
 class Cronjob
 {
+    use Common\IdTrait;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false, options={"collation": "utf8_general_ci"})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=true, options={"collation": "utf8_general_ci"})
+     *
+     * @Filter("StripTags")
+     * @Filter(filter="Laminas\I18n\Filter\Alnum", options={"allowWhiteSpace": false, "locale": "en_US"})
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=false
+     * )
      */
     private $name;
 
@@ -36,20 +50,42 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="command", type="text", length=65535, nullable=false)
+     *
+     * @Filter("StringTrim")
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535,
+     *     allowEmptyString=false
+     * )
      */
-    private $command;
+    private $command = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="schedule", type="string", length=255, nullable=false)
+     *
+     * @Filter("StringTrim")
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=false
+     * )
      */
-    private $schedule;
+    private $schedule = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="mailer", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $mailer = 'sendmail';
 
@@ -57,6 +93,12 @@ class Cronjob
      * @var int
      *
      * @ORM\Column(name="maxRuntime", type="integer", nullable=true, options={"unsigned": true})
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=42949672295
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $maxruntime;
 
@@ -64,6 +106,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpHost", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtphost;
 
@@ -71,6 +119,12 @@ class Cronjob
      * @var int
      *
      * @ORM\Column(name="smtpPort", type="smallint", nullable=true)
+     *
+     * @Assert\Range(
+     *     min=0,
+     *     max=65535
+     * )
+     * @Assert\DivisibleBy(1)
      */
     private $smtpport;
 
@@ -78,6 +132,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpUsername", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtpusername;
 
@@ -85,6 +145,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpPassword", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtppassword;
 
@@ -92,6 +158,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpSender", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtpsender = 'jobby@localhost';
 
@@ -99,6 +171,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpSenderName", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtpsendername = 'Jobby';
 
@@ -106,6 +184,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="smtpSecurity", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $smtpsecurity;
 
@@ -113,6 +197,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="runAs", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $runas;
 
@@ -120,6 +210,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="environment", type="text", length=65535, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $environment;
 
@@ -127,6 +223,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="runOnHost", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $runonhost;
 
@@ -134,6 +236,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="output", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $output;
 
@@ -141,6 +249,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="dateFormat", type="string", length=100, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $dateformat = 'Y-m-d H:i:s';
 
@@ -148,6 +262,12 @@ class Cronjob
      * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $enabled = '1';
 
@@ -155,6 +275,12 @@ class Cronjob
      * @var string
      *
      * @ORM\Column(name="haltDir", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=1,
+     *     max=255,
+     *     allowEmptyString=true
+     * )
      */
     private $haltdir;
 
@@ -163,7 +289,7 @@ class Cronjob
      *
      * @ORM\Column(name="debug", type="boolean", nullable=true)
      */
-    private $debug = 0;
+    private $debug = false;
 
     /**
      * Set the value of Name.
@@ -182,7 +308,7 @@ class Cronjob
     /**
      * Get the value of Name.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
