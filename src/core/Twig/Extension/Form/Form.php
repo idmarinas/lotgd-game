@@ -209,7 +209,7 @@ class Form extends AbstractElement
         }
 
         //-- Default is not added reset button
-        if (($buttonsRaw['reset'] ?? false) || $buttonsRaw['reset'])
+        if ($buttonsRaw['reset'] ?? false)
         {
             $options = is_array($buttonsRaw['reset']) ? $buttonsRaw['reset'] : [];
             $options = array_merge([
