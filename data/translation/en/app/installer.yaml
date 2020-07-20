@@ -1,9 +1,9 @@
 canInstall:
     version:
         same: '`4You cannot install, you try to install the same version that is already installed.`0`n'
-        less:
-            - '`4Cannot upgrade from a previous version to 3.0.0 IDMarinas Edition.'
-            - 'Please upgrade to version 3.0.0 IDMarinas Edition and then try a higher version.`0`n'
+        less: >
+            `4Cannot upgrade from a previous version to 3.0.0 IDMarinas Edition.
+            Please upgrade to version 3.0.0 IDMarinas Edition and then try a higher version.`0`n
 
 upgrade:
     nothing: '`QNothing to do.`0`n'

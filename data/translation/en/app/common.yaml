@@ -5,29 +5,30 @@ title:
     install: 'The game has not yet been installed'
 
 install:
-    paragraph:
-        - '`#Welcome to `@Legend of the Green Dragon`0, a game by Eric Stevens & JT Traub.`n`n'
-        - "You must run the game's installer, and follow its instructions in order to set up LoGD."
-        - "You can go to the installer <a href='installer.php'>here</a>."
-        - "`n`nIf you're not sure why you're seeing this message, it's because this game is not properly configured right now."
-        - "If you've previously been running the game here, chances are that you lost a file called '`%{fileName}`0' from your site."
-        - "If that's the case, no worries, we can get you back up and running in no time, and the installer can help!"
+    paragraph: >
+        `#Welcome to `@Legend of the Green Dragon`0, a game by Eric Stevens & JT Traub.`n`n
+        You must run the game's installer, and follow its instructions in order to set up LoGD.
+        You can go to the installer <a href='installer.php'>here</a>.
+        `n`nIf you're not sure why you're seeing this message, it's because this game is not properly configured right now.
+        If you've previously been running the game here, chances are that you lost a file called '`%{fileName}`0' from your site.
+        If that's the case, no worries, we can get you back up and running in no time, and the installer can help!
 
 upgrade:
-    paragraph:
-        - '`#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.'
-        - 'In order to perform the upgrade, an admin will have to run through the installer.'
-        - "If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n"
-        - "`@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the game when the upgrade is complete."
+    paragraph: >
+        `#The game is temporarily unavailable while a game upgrade is applied, please be patient, the upgrade will be completed soon.
+        In order to perform the upgrade, an admin will have to run through the installer.
+        If you are an admin, please <a href='installer.php'>visit the Installer</a> and complete the upgrade process.`n`n
+        `@If you don't know what this all means, just sit tight, we're doing an upgrade and will be done soon, you will be automatically returned to the gamewhen the upgrade is complete."
 
 security:
-    paragraph:
-        - "`$Remove the file named 'public/installer.php' from your main game directory! You need to comply in order to get the game up and running."
+    paragraph: "`$Remove the file named 'public/installer.php' from your main game directory! You need to comply in order to get the game up and running."
 
 database:
     title: '`c`$Database Connection Error`0´c`n`n'
-    paragraph:
-        - '`xDue to technical problems the game is unable to connect to the database server.`n`n'
-        - 'Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'
-        - 'Sorry for the inconvenience,`n'
-        - 'Staff of {server}'
+    paragraph: |
+        `xDue to technical problems the game is unable to connect to the database server.
+
+        Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.
+
+        Sorry for the inconvenience,
+        Staff of {server}`0

@@ -6,16 +6,16 @@ subtitle: '`c`^`bYe Olde Bank´b`0´c'
 
 # Enter in bank (default option)
 default:
-    paragraph:
-        - '`6As you approach the pair of impressive carved rock crystal doors, they part to allow you entrance into the bank.'
-        - 'You find yourself standing in a room of exquisitely vaulted ceilings of carved stone.'
-        - 'Light filters through tall windows in shafts of soft radiance.'
-        - 'About you, clerks are bustling back and forth.'
-        - 'The sounds of gold being counted can be heard, though the treasure is nowhere to be seen.`n`n'
-        - 'You walk up to a counter of jet black marble.`n`n'
-        - '{ownerName}, a petite woman in an immaculately tailored business dress, greets you from behind reading spectacles with polished silver frames.`n`n'
-        - '"`5Greetings, my good lady,`0" you greet her, "`5Might I inquire as to my balance this fine day?`0"`n`n'
-        - "{ownerName} blinks for a moment and then smiles, \"`@Hmm, `&{name}`0, let's see.....`0\" she mutters as she scans down a page in her ledger.`0"
+    paragraph: >
+        `6As you approach the pair of impressive carved rock crystal doors, they part to allow you entrance into the bank.
+        You find yourself standing in a room of exquisitely vaulted ceilings of carved stone.
+        Light filters through tall windows in shafts of soft radiance.
+        About you, clerks are bustling back and forth.
+        The sounds of gold being counted can be heard, though the treasure is nowhere to be seen.`n`n
+        You walk up to a counter of jet black marble.`n`n
+        {ownerName}, a petite woman in an immaculately tailored business dress, greets you from behind reading spectacles with polished silver frames.`n`n
+        "`5Greetings, my good lady,`0" you greet her, "`5Might I inquire as to my balance this fine day?`0"`n`n
+        {ownerName} blinks for a moment and then smiles, "`@Hmm, `&{name}`0, let's see.....`0" she mutters as she scans down a page in her ledger.`0
     balance:
         positive: '`6"`@Aah, yes, here we are. You have `^{balance,number} gold`0 in our prestigious bank. Is there anything else I can do for you?`0"`0'
         negative: '`6"`@Aah, yes, here we are. You have a `$debt`0 of `^{balance,number} gold`0 in our prestigious bank. Is there anything else I can do for you?"`0'
@@ -23,9 +23,9 @@ default:
 # Tranfer money (Step 1)
 transfer:
     subtitle: '`6`bTransfer Money´b:`0`n'
-    paragraph:
-        - "{ownerName}`6 tells you, \"`@Just so that you are fully aware of our policies, you may only transfer `^{transferPerLevel,number}`0 gold per the recipient's level."
-        - 'Similarly, you may transfer no more than `^{maxTransfer,number}`0 gold total during the day.`0"`n'
+    paragraph: >
+        {ownerName}`6 tells you, "`@Just so that you are fully aware of our policies, you may only transfer `^{transferPerLevel,number}`0 gold per therecipient's level.
+        Similarly, you may transfer no more than `^{maxTransfer,number}`0 gold total during the day.`0"`n
     transferred: '`6She scans her ledgers briefly, "`@For your knowledge, you have already transferred `^{transferred,number}`0 gold today."`0`n'
     refused: '{ownerName}`6 tells you that she refuses to transfer money for someone who is in debt.`0`0'
     form:
@@ -81,17 +81,17 @@ deposit:
             submit: 'Deposit'
     # Finish a deposit
     finish:
-        fail:
-            - '`$ERROR: Not enough gold in hand to deposit.`0`n`n'
-            - '`^You plunk your `&{gold,number}`0 gold on the counter and declare that you would like to deposit all `&{amount,number}`0 gold of it.`0`n`n'
-            - '{ownerName} `6stares blandly at you for a few seconds until you become self conscious and recount your money, realizing your mistake.`0'
+        fail: >
+            `$ERROR: Not enough gold in hand to deposit.`0`n`n
+            `^You plunk your `&{gold,number}`0 gold on the counter and declare that you would like to deposit all `&{amount,number}`0 gold of it.`0`n`n
+            {ownerName} `6stares blandly at you for a few seconds until you become self conscious and recount your money, realizing your mistake.`0
         balance:
-            positive:
-                - '{ownerName} `6records your deposit of `^{amount,number}`0 gold in her ledger.`0'
-                - '"`@Thank you, `&{name}`0. You now have a balance of `^{bank,number}`0 gold in the bank and `^{gold,number}`0 gold in hand.`0"'
-            negative:
-                - '{ownerName} `6records your deposit of `^{amount,number}`0 gold in her ledger.`0'
-                - '"`@Thank you, `&{name}`0. You now have a debt of `${bank,number}`0 gold to the bank and `^{gold,number}`0 gold in hand.`0"'
+            positive: >
+                {ownerName} `6records your deposit of `^{amount,number}`0 gold in her ledger.`0
+                "`@Thank you, `&{name}`0. You now have a balance of `^{bank,number}`0 gold in the bank and `^{gold,number}`0 gold in hand.`0"
+            negative: >
+                {ownerName} `6records your deposit of `^{amount,number}`0 gold in her ledger.`0
+                "`@Thank you, `&{name}`0. You now have a debt of `${bank,number}`0 gold to the bank and `^{gold,number}`0 gold in hand.`0"
 
 # Take out a Loan
 borrow:
@@ -120,10 +120,10 @@ withdraw:
             submit: 'Withdraw'
     # Finish a withdraw
     finish:
-        fail:
-            - '`$ERROR: Not enough gold in the bank to withdraw.`0`n`n'
-            - '`6Having been informed that you have `^{bank,number}`0 gold in your account, you declare that you would like to withdraw all `^{amount,number}`0 of it.`0`n`n'
-            - '{ownerName} `6looks at you for a few moments without blinking, then advises you to take basic arithmetic. You realize your folly and think you should try again.`0'
+        fail: >
+            `$ERROR: Not enough gold in the bank to withdraw.`0`n`n
+            `6Having been informed that you have `^{bank,number}`0 gold in your account, you declare that you would like to withdraw all `^{amount,number}`0 of it.`0`n`n
+            {ownerName} `6looks at you for a few moments without blinking, then advises you to take basic arithmetic. You realize your folly and think you should try again.`0
         withdraw:
             success: '{ownerName} `6records your withdrawal of `^{amount,number}`0 gold in her ledger. "`@Thank you, `&{name}`0.  You now have a balance of `^{bank,number}`0 gold in the bank and `^{gold,number}`0 gold in hand.`0"`0'
         borrow:

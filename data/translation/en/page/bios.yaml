@@ -22,12 +22,12 @@ message:
 mail:
     block:
         subject: 'Your bio has been blocked'
-        message:
-            - 'The system administrators have decided that your bio entry is inappropriate, so it has been blocked.`n`n'
-            - 'If you wish to appeal this decision, you may do so with the petition link.'
+        message: >
+            The system administrators have decided that your bio entry is inappropriate, so it has been blocked.`n`n
+            If you wish to appeal this decision, you may do so with the petition link.
     unblock:
         subject: 'Your bio has been unblocked'
-        message:
-            - 'The system administrators have decided to unblock your bio.'
-            - ' You can once again enter a bio entry.'
+        message: >
+            The system administrators have decided to unblock your bio.
+            You can once again enter a bio entry.
 

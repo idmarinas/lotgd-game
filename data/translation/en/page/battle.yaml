@@ -79,10 +79,10 @@ combat:
             tomorrow:
                 forest: 'You may begin fighting again tomorrow.'
                 graveyard: 'You may not torment any more souls today.'
-        negative.hitpoints:
-            - 'With your dying breath you spy a small stand of mushrooms off to the side.'
-            - 'You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.'
-            - 'Even raw they have some restorative properties.`n'
+        negative.hitpoints: >
+            With your dying breath you spy a small stand of mushrooms off to the side.
+            You recognize them as some of the ones that the healer had drying in the hut and taking a chance, cram a handful into your mouth.
+            Even raw they have some restorative properties.`n
         get:
             gem: '`&You find A GEM!`0`n'
             gold: '`#You receive `^{gold,number}`0 gold!`0`n'
@@ -95,18 +95,18 @@ combat:
             turn: '`c`$A more difficult fight would have yielded an extra turn.`0´c`n'
         experience:
             forest:
-                bonus:
-                    - '`#***Because of the difficult nature of this fight, you are awarded an additional `^{bonus,number}`0 experience!`0`n'
-                    - '{calculate,select,
-                            1{`#({exp,number} + {bonus,number} = {totalExp, number})`0}
-                            other{}
-                        }'
-                penalize:
-                    - '`#***Because of the simplistic nature of this fight, you are penalized `^{bonus,number}`0 experience!`0`n'
-                    - '{calculate,select,
-                            1{`#({exp,number} - {bonus,number} = {totalExp, number})`0}
-                            other{}
-                        }'
+                bonus: >
+                    `#***Because of the difficult nature of this fight, you are awarded an additional `^{bonus,number}`0 experience!`0`n'
+                    {calculate,select,
+                        1{`#({exp,number} + {bonus,number} = {totalExp, number})`0}
+                        other{}
+                    }
+                penalize: >
+                    `#***Because of the simplistic nature of this fight, you are penalized `^{bonus,number}`0 experience!`0`n'
+                    {calculate,select,
+                        1{`#({exp,number} - {bonus,number} = {totalExp, number})`0}
+                        other{}
+                    }
                 instant.exp: '`#During this fight you received `^{experience}`0 total experience!`0`n`0'
                 total.exp: '`#You receive `^{experience,number}`0 total experience!`0`n'
             graveyard:

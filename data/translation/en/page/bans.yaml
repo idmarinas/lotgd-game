@@ -5,10 +5,12 @@ subtitle: '`c`$Welcome to the Ban Editor`0´c`n`n'
 
 # Default option
 default:
-    paragraph:
-        - 'From here, you can issue bans for players from being able to play.`n`n'
-        - 'Based on the ID = cookie on the machine AND/OR on the IP they accessed the char last the ban takes effect.`n`n'
-        - 'Note: Locked chars stay locked, even after they delete their cookie / change their IP.`n`nHowever, they can make new chars and login in that case. You cannot control this.'
+    paragraph: |
+        From here, you can issue bans for players from being able to play.
+
+        Based on the ID = cookie on the machine AND/OR on the IP they accessed the char last the ban takes effect.
+
+        Note: Locked chars stay locked, even after they delete their cookie / change their IP.`n`nHowever, they can make new chars and login in that case. You cannot control this.
     message:
         title: 'Stats of all page gens'
         gentimecount: 'Total hits: {n,number}`n'
@@ -40,10 +42,11 @@ default:
 # Setup a Ban
 setupban:
     title: 'Setting up ban information based on `${name}`0'
-    message:
-        - 'Set up a new ban by IP or by ID.`n'
-        - '`qWe recommended ID as this bans all users who are sitting on THAT machine with THAT browser. A cookie can be deleted, but the char stays locked anyway, regardless of that.`0`n`n'
-        - '`qIf you ban via IP and if you have several different users behind a NAT(sharing IPs, many big providers do this currently), you will ban much more users. However, you can ban multichars from different PCs too.`0`n'
+    message: |
+        Set up a new ban by IP or by ID.
+        `qWe recommended ID as this bans all users who are sitting on THAT machine with THAT browser. A cookie can be deleted, but the char stays locked anyway, regardless of that.`0
+
+        `qIf you ban via IP and if you have several different users behind a NAT(sharing IPs, many big providers do this currently), you will ban much more users. However, you can ban multichars from different PCs too.`0
     paragraph: 'For an IP ban, enter the beginning part of the IP you wish to ban if you wish to ban a range, or simply a full IP to ban a single IP`n`n'
     locate:
         paragraph: 'To help locate similar users to `@{name}`0, here are some other users who are close:`n'
@@ -73,12 +76,12 @@ setupban:
 # Save a ban
 saveban:
     yourself:
-        ip:
-            - "You don't really want to ban yourself now do you??"
-            - "That's your own IP address!"
-        id:
-            - "You don't really want to ban yourself now do you??"
-            - "That's your own ID!"
+        ip: >
+            You don't really want to ban yourself now do you??
+            That's your own IP address!
+        id: >
+            You don't really want to ban yourself now do you??
+            That's your own ID!
     savedBan: '{saved,select, 0{0 ban rows} other{1 ban row}} entered.`n`n'
     logoutCount: '`${count,plural, =0{Nobody} =1{1 person} other{# people}} have been logged out!`0`n`n'
 

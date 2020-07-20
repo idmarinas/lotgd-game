@@ -48,9 +48,9 @@ section:
             note:
                 user.online: '`$<span style="font-size: 20px">Warning:</span> This user is probably logged in at the moment!`0 '
         last.page: '`n`nLast Page Viewed`n'
-        iframe:
-            - "You need iframes to view the user's last hit here."
-            - 'Use the link in the nav instead.'
+        iframe: >
+            You need iframes to view the user's last hit here.
+            Use the link in the nav instead.
 news:
     account:
         delete: '`#`i{playerName}´i was unmade by the gods.`0'

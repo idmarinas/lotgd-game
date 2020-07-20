@@ -1,11 +1,11 @@
 title: 'Title Editor'
 
 section:
-    help:
-        - '`n`#You can have multiple titles for a given dragon kill rank.'
-        - 'If you do, one of those titles will be chosen at random to give to the player when a title is assigned.`n`n'
-        - 'You can have gaps in the title order.'
-        - 'If you have a gap, the title given will be for the DK rank less than or equal to the players current number of DKs.`0`n'
+    help: >
+        `n`#You can have multiple titles for a given dragon kill rank.
+        If you do, one of those titles will be chosen at random to give to the player when a title is assigned.`n`n
+        You can have gaps in the title order.
+        If you have a gap, the title given will be for the DK rank less than or equal to the players current number of DKs.`0`n
     default:
         title: '`@`c`b-=Title Editor=-´b´c`0'
         table:

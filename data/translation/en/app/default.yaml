@@ -137,9 +137,10 @@ maintenance:
         # Can't create new characters
         creation:
             title: 'The server is currently in maintenance'
-            message:
-                - 'While the server is in maintenance it is not possible to create new characters.<br><br>'
-                - 'Please wait a moment while we make the necessary changes.'
+            message: |
+                While the server is in maintenance it is not possible to create new characters.
+
+                Please wait a moment while we make the necessary changes.
 
 # Redirect message
 redirect:
@@ -149,10 +150,10 @@ redirect:
         unactive: 'You are attempting to use a module which is no longer active, or has been uninstalled.'
     badnav:
         title: 'Your navigation is broken'
-        content:
-            - '`lWhoops, your navigation is broken. Hopefully we can restore it.`0`n`n'
-            - '<a href="{locationUrl}">Click here to continue</a>'
-            - "`n`n`$If you cannot leave this page, notify the staff via <a href='{petitionUrl}'>petition</a> and tell them where this happened and what you did. Thanks.`0"
+        content: >
+            `lWhoops, your navigation is broken. Hopefully we can restore it.`0`n`n
+            <a href="{locationUrl}">Click here to continue</a>
+            `n`n`$If you cannot leave this page, notify the staff via <a href='{petitionUrl}'>petition</a> and tell them where this happened and what you did. Thanks.`0
 
 flash.message:
     module:
