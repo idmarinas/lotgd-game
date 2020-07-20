@@ -1,5 +1,4 @@
 title:
-    install:
     upgrade: 'Upgrade Needed'
     security: 'Major Security Risk'
     database: 'Database Connection Error'
