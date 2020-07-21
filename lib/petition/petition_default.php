@@ -72,7 +72,7 @@ if (\LotgdHttp::isPost())
         $msg = "$tl_server: $url\n";
         $msg .= "$tl_author: $name\n";
         $msg .= "$tl_date : $date\n";
-        $msg .= "$tl_body :\n".\Zend\Debug\Debug::dump($post, 'Post', false)."\n";
+        $msg .= "$tl_body :\n".\Tracy\Debugger::dump($post, 'Post', false)."\n";
 
         lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tl_subject, $msg);
     }
