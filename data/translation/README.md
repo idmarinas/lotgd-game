@@ -49,3 +49,26 @@ In this folder go all the translation files for the different languages followin
         >          ],
         >          'key.key7.00' => 'value7',
         >          'key.key7.01' => 'value8',
+
+
+New format for large text (avoid use array like before)
+
+key: `>`
+> Replaces line breaks with blanks
+
+key: `|`
+> Preserves line breaks
+
+Can add `-` or `+` to `>` or `+`
+-   `-` Not add line break to end
+-   `+` Add 2 line breaks to end
+
+See: https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
+
+To see all line break need add filter Twig filter "nl2br" when show text
+If the Twig translation filters are used, this is done automatically
+-   |t
+-   |trans
+-   |tl
+-   |tmf
+-   |tst
