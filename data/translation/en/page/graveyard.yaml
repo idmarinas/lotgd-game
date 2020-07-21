@@ -2,33 +2,33 @@ title: 'The Graveyard'
 
 section:
     default:
-        paragraph:
-            - '`)`c`bThe Graveyard´b´c'
-            - 'Your spirit wanders into a lonely graveyard, overgrown with sickly weeds which seem to grab at your spirit as you float past them.'
-            - 'Around you are the remains of many broken tombstones, some lying on their faces, some shattered to pieces.'
-            - 'You can almost hear the wails of the souls trapped within each plot lamenting their fates.`n`n'
-            - 'In the center of the graveyard is an ancient looking mausoleum which has been worn by the effects of untold years.'
-            - 'A sinister looking gargoyle adorns the apex of its roof; its eyes seem to follow  you, and its mouth gapes with sharp stone teeth.'
-            - 'The plaque above the door reads `${graveyardOwnerName}`0, Overlord of Death.`0'
+        paragraph: >
+            `)`c`bThe Graveyard´b´c
+            Your spirit wanders into a lonely graveyard, overgrown with sickly weeds which seem to grab at your spirit as you float past them.
+            Around you are the remains of many broken tombstones, some lying on their faces, some shattered to pieces.
+            You can almost hear the wails of the souls trapped within each plot lamenting their fates.`n`n
+            In the center of the graveyard is an ancient looking mausoleum which has been worn by the effects of untold years.
+            A sinister looking gargoyle adorns the apex of its roof; its eyes seem to follow  you, and its mouth gapes with sharp stone teeth.
+            The plaque above the door reads `${graveyardOwnerName}`0, Overlord of Death.`0
     enter:
-        paragraph:
-            - '`)`b`cThe Mausoleum´c´b'
-            - 'You enter the mausoleum and find yourself in a cold, stark marble chamber.'
-            - 'The air around you carries the chill of death itself.'
-            - 'From the darkness, two black eyes stare into your soul.'
-            - 'A clammy grasp seems to clutch your mind, and fill it with the words of the Overlord of Death, `${graveyardOwnerName}`0 himself.`n`n'
-            - '"`7Your mortal coil has forsaken you. Now you turn to me.'
-            - 'There are those within this land that have eluded my grasp and possess a life beyond life.'
-            - 'To prove your worth to me and earn my favor, go out and torment their souls.'
-            - 'Should you gain enough of my favor, I will reward you.`0`0"'
+        paragraph: >
+            `)`b`cThe Mausoleum´c´b
+            You enter the mausoleum and find yourself in a cold, stark marble chamber.
+            The air around you carries the chill of death itself.
+            From the darkness, two black eyes stare into your soul.
+            A clammy grasp seems to clutch your mind, and fill it with the words of the Overlord of Death, `${graveyardOwnerName}`0 himself.`n`n
+            "`7Your mortal coil has forsaken you. Now you turn to me.
+            There are those within this land that have eluded my grasp and possess a life beyond life.
+            To prove your worth to me and earn my favor, go out and torment their souls.
+            Should you gain enough of my favor, I will reward you.`0`0"
     restore:
         subtitle: '`)`b`cThe Mausoleum´c´b`0'
         result:
             success: '`${graveyardOwnerName}`0`) calls you weak for needing restoration, but as you have enough favor with him, he grants your request at the cost of `4{favor,number}`0 favor.`0'
             fail: '`${graveyardOwnerName}`0`) curses you and throws you from the Mausoleum, you must gain more favor with him before he will grant restoration.`0'
-            no.need:
-                - "`${graveyardOwnerName}`0`) sighs and mumbles something about, \"`7just 'cause they're dead, does that mean they don't have to think?`0\"`n`n"
-                - "Perhaps you'd like to actually `ineed´i restoration before you ask for it.`0"
+            no.need: >
+                `${graveyardOwnerName}`0`) sighs and mumbles something about, "`7just 'cause they're dead, does that mean they don't have to think?`0"`n`n
+                Perhaps you'd like to actually `ineed´i restoration before you ask for it.`0
     # Note to translators.  The text spoken by Ramius here is backwards English.
     # You might choose to maintain it in tact, or you might choose
     # to translate it to your language, and reverse the letters that way.
@@ -40,13 +40,13 @@ section:
     # power over death is mine
     # your life ego grant tu again
     # for ego know tu shall return to me again
-    resurrection:
-        - '`${graveyardOwnerName}`0 waves his skeletal arms as he begins to command the very fabric of life.`n`n'
-        - '"`)Noitcerruser evah llahs ut...`$"  The air begins to crackle around you.`n`n'
-        - '"`)Tnavres o htaed eht morf esir.`$" Your soul begins to burn with the pain of a thousand frosty fires.`n`n'
-        - '"`)Enim si htaed revo rewop.`$" Gradually you begin to become aware that the fires are dimming and are replaced by the blinding pain last known by your body before it fell.`n`n'
-        - '"`)Niaga ut tnarg oge efil ruoy.`$" You begin to look around you, and you watch as your muscles knit themselves back together.`n`n'
-        - '"`)Niaga em ot nruter llahs ut wonk oge rof.`$" With a gasp, you laboriously again draw your first breath.'
+    resurrection: >
+        `${graveyardOwnerName}`0 waves his skeletal arms as he begins to command the very fabric of life.`n`n
+        "`)Noitcerruser evah llahs ut...`$"  The air begins to crackle around you.`n`n
+        "`)Tnavres o htaed eht morf esir.`$" Your soul begins to burn with the pain of a thousand frosty fires.`n`n
+        "`)Enim si htaed revo rewop.`$" Gradually you begin to become aware that the fires are dimming and are replaced by the blinding pain last known by your body before it fell.`n`n
+        "`)Niaga ut tnarg oge efil ruoy.`$" You begin to look around you, and you watch as your muscles knit themselves back together.`n`n
+        "`)Niaga em ot nruter llahs ut wonk oge rof.`$" With a gasp, you laboriously again draw your first breath.
     question:
         highest: '`${graveyardOwnerName}`0`) speaks, "`7You have impressed me indeed. I shall grant you the ability to visit your foes in the mortal world.`0"`0'
         balance: '`n`n`)You have `6{favor,number}`0 favor with `${graveyardOwnerName}`0.`0'

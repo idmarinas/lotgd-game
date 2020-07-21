@@ -23,26 +23,26 @@ battle:
 mail:
     victory:
         subject: '`2You were killed while in {location}`0'
-        message:
-            - '`2While you were in {location}, `^{playerName}`0 initiated an attack on you with {hisHer} `^{playerWeapon}`0, and defeated you!`n`n'
-            - 'You noticed {heShe} had an initial hp of `^{playerStartHp,number}`0 and just before you died he had `^{playerHitpoints}`0 remaining.`n`n'
-            - 'As a result, you lost `${pvpDefLose,number,percent}`0 of your experience (approximately {expLose,plural, =1{1 point} other{# points}}), and `^{goldLost,number}`0 gold.`n'
-            - "{pvpMessageAdded}`n" # Custom message added
-            - "Don't you think it's time for some revenge?`0`n`n"
-            - '`7`bTechnical Notes:´b`n'
-            - 'Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0'
+        message: >
+            `2While you were in {location}, `^{playerName}`0 initiated an attack on you with {hisHer} `^{playerWeapon}`0, and defeated you!`n`n
+            You noticed {heShe} had an initial hp of `^{playerStartHp,number}`0 and just before you died he had `^{playerHitpoints}`0 remaining.`n`n
+            As a result, you lost `${pvpDefLose,number,percent}`0 of your experience (approximately {expLose,plural, =1{1 point} other{# points}}), and `^{goldLost,number}`0 gold.`n
+            {pvpMessageAdded}`n
+            Don't you think it's time for some revenge?`0`n`n
+            `7`bTechnical Notes:´b`n
+            Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0
     defeated:
         subject: '`2You were successful while you were in {location}`0'
-        message:
-            - '`2`^{playerName}`0 attacked you while you were in {location}, but you were victorious!`n`n'
-            - '{levelOpt,select,
-                    0{You would have received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold, `$however it seems you lost it all when you got back to level 1...}
-                    1{At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.}
-                    other{You received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold}
-                }`0'
-            - '`n`!{pvpMessageAdded}`0`n'
-            - '`7`bTechnical Notes:´b`n'
-            - 'Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0'
+        message: >
+            `2`^{playerName}`0 attacked you while you were in {location}, but you were victorious!`n`n
+            {levelOpt,select,
+                0{You would have received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold, `$however it seems you lost it all when you got back to level 1...}
+                1{At your level of fighting prowess, the mere reward of beating your foe is sufficient accolade.}
+                other{You received `^{expWon,number}`0 experience and `^{goldWon,number}`0 gold}
+            }`0
+            `n`!{pvpMessageAdded}`0`n
+            `7`bTechnical Notes:´b`n
+            Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0
 
 flash.message:
     pvp:

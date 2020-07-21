@@ -16,17 +16,17 @@ flash.message:
         password:
             not.match: 'Your passwords do not match.'
             changed: 'Your password has been changed.'
-            short:
-                - 'Your password is too short.'
-                - 'It must be at least 4 characters.'
-        bio:
-            - 'You cannot modify your bio.'
-            - 'It has been blocked by the administrators!'
+            short: >
+                Your password is too short.
+                It must be at least 4 characters.
+        bio: >
+            You cannot modify your bio.
+            It has been blocked by the administrators!
         email:
             changed: 'Your email address has been changed.'
-            prohibit:
-                - 'Your email cannot be changed, system settings prohibit it.'
-                - 'Use the Petition link to ask the  server administrator to change your email address if this one is no longer valid.'
+            prohibit: >
+                Your email cannot be changed, system settings prohibit it.
+                Use the Petition link to ask the  server administrator to change your email address if this one is no longer valid.
             invalid: 'That is not a valid email address.'
     settings:
         saved: 'Settings saved!'

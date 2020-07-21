@@ -29,9 +29,9 @@ graveyard:
 
 # Death messages for Dragon
 dragon:
-    '00':
-        - '`%{goodGuyName}`0 `5has been slain when {heShe} encountered `@{badGuyName}`0!!!'
-        - '{hisHer,select, his{His} other{Her}} bones now litter the cave entrance, just like the bones of those who came before.`0'
+    '00': >
+        `%{goodGuyName}`0 `5has been slain when {heShe} encountered `@{badGuyName}`0!!!
+        {hisHer,select, his{His} other{Her}} bones now litter the cave entrance, just like the bones of those who came before.`0
     count: 1 # This is total count of messages for this zone
 
 # Default death message if not find (NO delete this death message)

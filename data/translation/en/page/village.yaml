@@ -2,11 +2,11 @@
 title: '{village} Square'
 
 # Description of village
-description:
-    - '`@`c`b{village} Square´b´c'
-    - 'The village of {village} hustles and bustles.'
-    - "No one really notices that you're standing there. You see various shops and businesses along main street."
-    - 'There is a curious looking rock to one side. On every side the village is surrounded by deep dark forest.`0`n`n'
+description: >
+    `@`c`b{village} Square´b´c
+    The village of {village} hustles and bustles.
+    No one really notices that you're standing there. You see various shops and businesses along main street.
+    There is a curious looking rock to one side. On every side the village is surrounded by deep dark forest.`0`n`n
 
 # Commentary
 commentary:

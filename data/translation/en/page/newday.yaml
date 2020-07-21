@@ -11,9 +11,9 @@ section:
     default:
         title: '`#It is a New Day!`0'
         resurrection: '`@You are resurrected! This is resurrection number {resurrections,number}.`0`n'
-        open.eyes:
-            - 'You open your eyes to discover that a new day has been bestowed upon you. It is day number `^{age,number}.`0'
-            - 'You feel refreshed enough to take on the world!`n'
+        open.eyes: >
+            You open your eyes to discover that a new day has been bestowed upon you. It is day number `^{age,number}.`0
+            You feel refreshed enough to take on the world!`n
         turns: '`2Turns for today set to `^{turns,number}`0.`0`n'
         interest:
             worker: "`2Today's interest rate: `^0% (Bankers in this village only give interest to those who work for it)`0.`0`n"
@@ -39,27 +39,27 @@ section:
             yes: 'You should go into the module manager off of the super user grotto, install and activate some specialties.'
             no: 'You might want to ask your admin to install some specialties, as they are quite fun (and helpful).'
     race:
-        paragraph:
-            - 'No races were installed in this game.'
-            - "So we'll call you a 'human' and get on with it."
+        paragraph: >
+            No races were installed in this game.
+            So we'll call you a 'human' and get on with it.
         admin:
             yes: 'You should go into the module manager off of the super user grotto, install and activate some races.'
             no: "You might want to ask your admin to install some races, they're really quite fun."
     dragonpoints:
         single:
-            paragraph:
-                - '`@You have `&1`0 unspent dragon point.'
-                - 'How do you wish to spend it?`n`n'
-                - 'You earn one dragon point each time you slay the dragon.'
-                - 'Advancements made by spending dragon points are permanent!'
-                - '`n`nCurrently, the dragon points you have already spent are distributed in the following manner.`0'
+            paragraph: >
+                `@You have `&1`0 unspent dragon point.
+                How do you wish to spend it?`n`n
+                You earn one dragon point each time you slay the dragon.
+                Advancements made by spending dragon points are permanent!
+                `n`nCurrently, the dragon points you have already spent are distributed in the following manner.`0
         multi:
-            paragraph:
-                - '`@You earn one dragon point each time you slay the dragon.'
-                - 'Advancements made by spending dragon points are permanent!'
-                - '`n`nYou have `^{points,number}`@ unspent dragon points.'
-                - 'How do you wish to spend them?`n`n'
-                - 'Be sure that your allocations add up to your total unspent dragon points.'
+            paragraph: >
+                `@You earn one dragon point each time you slay the dragon.
+                Advancements made by spending dragon points are permanent!
+                `n`nYou have `^{points,number}`@ unspent dragon points.
+                How do you wish to spend them?`n`n
+                Be sure that your allocations add up to your total unspent dragon points.
             form:
                 button:
                     submit: Spend

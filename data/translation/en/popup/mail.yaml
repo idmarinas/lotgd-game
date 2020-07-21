@@ -30,10 +30,10 @@ section:
                     all: 'Check All'
                     none: 'Uncheck All'
                 submit: 'Delete Checked'
-        note:
-            - '`n`n`i`lYou currently have {inboxCount,number} messages in your inbox.`n'
-            - 'You will no longer be able to receive messages from players if you have more than {inboxLimit,number} unread messages in your inbox.`n'
-            - 'Messages are automatically deleted (read or unread) after {oldMail,number} days.´i'
+        note: >
+            `n`n`i`lYou currently have {inboxCount,number} messages in your inbox.`n
+            You will no longer be able to receive messages from players if you have more than {inboxLimit,number} unread messages in your inbox.`n
+            Messages are automatically deleted (read or unread) after {oldMail,number} days.´i
     read:
         button:
             top:
@@ -105,7 +105,7 @@ dialog:
         bulk:
             error: 'Messages could not be deleted.'
             success: 'Messages deleted successfull.'
-            empty:
-                - 'You cannot delete zero messages! What does this mean?'
-                - 'You pressed "Delete Checked" but there are no messages checked!'
-                - 'What sort of world is this that people press buttons that have no meaning?!?'
+            empty: >
+                You cannot delete zero messages! What does this mean?
+                You pressed "Delete Checked" but there are no messages checked!
+                What sort of world is this that people press buttons that have no meaning?!?
