@@ -17,7 +17,7 @@
         <label for="problem_type">{{ 'section.default.form.label.type'|t|colorize }}</label>
         <select name="problem_type" id="problem_type" class="ui lotgd dropdown">
             {% for type in petition_types %}
-                <option value="{{ type }}">{{ type }}</option>
+                <option value="{{ type }}">{{ type|t }}</option>
             {% endfor %}
         </select>
     </div>
