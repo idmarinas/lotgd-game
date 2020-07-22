@@ -39,11 +39,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
 
         if (is_array($message))
         {
-            //-- Can change union of array with this
-            $union = $message['union'] ?? ' ';
-            unset($message['union']);
-
-            return $this->mf(\implode($union, $message), $parameters, $locale);
+            \Tracy\Debugger::log($message);
         }
 
         return $this->mf($message, $parameters, $locale);
