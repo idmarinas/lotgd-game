@@ -1,7 +1,8 @@
 define([
     '../core',
-    '../external/jquery'
-], function (Lotgd, jQuery)
+    '../external/jquery',
+    'lodash/escape'
+], function (Lotgd, jQuery, escape)
 {
     'use strict'
 
@@ -17,11 +18,11 @@ define([
     Lotgd.previewfield = function (target, player, maxchars, talkline, youhave)
     {
         target = jQuery(target)
-        const message = target.val()
+        const message = escape(target.val())
         const length = message.length
         const charsleft = maxchars - length
         const color = (charsleft > 0) ? 'green' : (charsleft === 0) ? 'orange' : 'red'
-        const charsLeftText = youhave.replace('%s', charsleft)
+        const charsLeftText = youhave.replace('%s', escape(charsleft))
         const playerName = Lotgd.appoencode(player)
 
         if (length === 0)
