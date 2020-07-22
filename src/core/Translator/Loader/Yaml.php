@@ -128,7 +128,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
         {
             \is_array($value) ? reset($value) : null;
 
-            if (\is_array($value) && ! is_int(\key($value)))
+            if (\is_array($value))
             {
                 $nodePath = $path ? $path.'.'.$key : $key;
                 $messages = $this->flatten($messages, $value, $nodePath);
