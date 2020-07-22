@@ -10,4 +10,5 @@ paragraph: |
 commentary:
     talk: 'Engage in idle conversation with other gods:'
     sayLine: 'converse'
+    charsLeft: 'You have %s characters left.'
     button: 'Add'

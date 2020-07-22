@@ -14,6 +14,7 @@ commentary:
     talk: '`n`@Information of other Gods:`0`n'
     sayLine: 'says'
     button: 'Add information'
+    charsLeft: 'You have %s characters left.'
 
 section:
     default:
