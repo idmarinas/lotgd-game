@@ -42,5 +42,6 @@ return [
                 ]
             ]
         ]
-    ]
+                ],
+    'input_filter' => 'Lotgd\Core\Form\Filter\HomeSkin'
 ];
