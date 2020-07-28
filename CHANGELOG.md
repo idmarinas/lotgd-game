@@ -5,6 +5,44 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 4.3.0
+
+### :cyclone: CHANGES
+
+-   **Transfer to new Laminas/Symfony Form**
+    -   **public/configuration.php** Cronjob
+        -   Toggle to use cronjob for new day.
+        -   Create/Update a cronjob.
+    -   **public/home.php** Select skin.
+    -   **public/user.php** The form is separated into two: accounts and characters.
+        -   Use Symfony Form to edit this entities.
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   **public/donators.php** Now show corrects text and not key translator.
+-   **public/petition.php** Now show translated text of types of petitions.
+
+### :x: REMOVES
+
+-   File **lib/data/configuration_cronjob.php** Not is necesary.
+-   **Translations** yaml files, removed used arrays as multiline text. Use folded style with `>` or `|`
+    -   Can find examples in files translations
+    -   More info of YAML format in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
+
+### :notebook: NOTES
+
+-   **Migration: Zend to Laminas** migration all packages of Zend Framework to Laminas
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.2.0
 
 ### :cyclone: CHANGES
@@ -16,6 +54,9 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     //-- DB conection
     //...
     return [
+        'lotgd_core' => [
+            //-- Zend DB Config
+        ],
         'doctrine' => [
             'connection' => [
                 'orm_default' => [
