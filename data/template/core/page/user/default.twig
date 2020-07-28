@@ -23,7 +23,8 @@
     <tbody>
         {% set options = { 'text': 'section.default.table.tbody.del.confirm'|t }|json_encode|e('html_attr') %}
         {% set buttonDel = 'section.default.table.tbody.del.label'|t|uncolorize %}
-        {% set buttonEdit = 'section.default.table.tbody.edit'|t|uncolorize %}
+        {% set buttonEditAcct = 'section.default.table.tbody.edit.account'|t|uncolorize %}
+        {% set buttonEditChar = 'section.default.table.tbody.edit.character'|t|uncolorize %}
         {% set buttonBan = 'section.default.table.tbody.ban'|t|uncolorize %}
         {% set buttonLog = 'section.default.table.tbody.log'|t|uncolorize %}
 
@@ -31,17 +32,20 @@
             <tr>
                 <td>
                     <div class="ui mini icon buttons">
-                        <a href="{{ ('user.php?op=edit&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonEdit }}">
-                            <i class='icon edit'></i>
+                        <a href="{{ ('user.php?op=edit&type=acct&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonEditAcct }}" aria-label="{{ buttonEditAcct }}">
+                            <i aria-hidden="true" class='icon edit'></i>
                         </a>
-                        <a href="{{ ('user.php?op=del&userid=' ~ row.acctid)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" class="ui red button" data-tooltip="{{ buttonDel }}" data-options="{{ options }}">
-                            <i class='icon trash'></i>
+                        <a href="{{ ('user.php?op=edit&type=char&userid=' ~ row.acctid)|lotgd_url }}" class='ui teal button' data-tooltip="{{ buttonEditChar }}" aria-label="{{ buttonEditChar }}">
+                            <i aria-hidden="true" class='icon user'></i>
                         </a>
-                        <a href="{{ ('bans.php?op=setupban&userid=' ~ row.acctid)|lotgd_url }}" class="ui orange button" data-tooltip="{{ buttonBan }}">
-                            <i class="ban icon"></i>
+                        <a href="{{ ('user.php?op=del&userid=' ~ row.acctid)|lotgd_url }}" onclick="Lotgd.confirm(this, event)" class="ui red button" data-tooltip="{{ buttonDel }}" aria-label="{{ buttonDel }}" data-options="{{ options }}">
+                            <i aria-hidden="true" class='icon trash'></i>
                         </a>
-                        <a href="{{ ('user.php?op=debuglog&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonLog }}">
-                            <i class='icon file outline'></i>
+                        <a href="{{ ('bans.php?op=setupban&userid=' ~ row.acctid)|lotgd_url }}" class="ui orange button" data-tooltip="{{ buttonBan }}" aria-label="{{ buttonBan }}">
+                            <i aria-hidden="true" class="ban icon"></i>
+                        </a>
+                        <a href="{{ ('user.php?op=debuglog&userid=' ~ row.acctid)|lotgd_url }}" class='ui button' data-tooltip="{{ buttonLog }}" aria-label="{{ buttonLog }}">
+                            <i aria-hidden="true" class='icon file outline'></i>
                         </a>
                     </div>
                 </td>
