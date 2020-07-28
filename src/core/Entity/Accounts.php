@@ -78,7 +78,7 @@ class Accounts
      *
      * @ORM\Column(name="superuser", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
-    private $superuser = 1;
+    private $superuser = 0;
 
     /**
      * @var string
