@@ -12,6 +12,8 @@
     {{ 'section.edit.form.note.user.online'|t|colorize }}
 {% endif %}
 
+<h3>{{ ('section.edit.form.title.' ~ type|default('acct'))|t|colorize }}</h3>
+
 {{ form(form) }}
 
 {% if userLoggedIn %}
