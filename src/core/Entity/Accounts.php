@@ -55,7 +55,7 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="laston", type="datetime", nullable=false, options={"default": "0000-01-01 00:00:00"})
      */
     private $laston;
 
@@ -90,7 +90,7 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="lastmotd", type="datetime", nullable=false, options={"default": "0000-01-01 00:00:00"})
      */
     private $lastmotd;
 
@@ -174,7 +174,7 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="recentcomments", type="datetime", nullable=false, options={"default": "0000-01-01 00:00:00"})
      */
     private $recentcomments;
 
@@ -244,7 +244,7 @@ class Accounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
+     * @ORM\Column(name="regdate", type="datetime", nullable=false, options={"default": "0000-01-01 00:00:00"})
      */
     private $regdate;
 
@@ -253,10 +253,10 @@ class Accounts
      */
     public function __construct()
     {
-        $this->laston = new \DateTime('0000-00-00 00:00:00');
-        $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
-        $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
-        $this->regdate = new \DateTime('0000-00-00 00:00:00');
+        $this->laston = new \DateTime('0000-01-01 00:00:00');
+        $this->lastmotd = new \DateTime('0000-01-01 00:00:00');
+        $this->recentcomments = new \DateTime('0000-01-01 00:00:00');
+        $this->regdate = new \DateTime('0000-01-01 00:00:00');
     }
 
     /**
