@@ -141,7 +141,7 @@ function page_footer($saveuser = true)
     $charstats = charstats();
     restore_buff_fields();
 
-    $lastMotd = new \DateTime('0000-00-00 00:00:00');
+    $lastMotd = new \DateTime('0000-01-01 00:00:00');
     if (\Doctrine::isConnected())
     {
         $repository = \Doctrine::getRepository('LotgdCore:Motd');
