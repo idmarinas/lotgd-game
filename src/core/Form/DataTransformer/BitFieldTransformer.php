@@ -39,13 +39,6 @@ class BitFieldTransformer implements DataTransformerInterface
 
     public function reverseTransform($array)
     {
-        $bits = 0;
-
-        foreach ($array as $value)
-        {
-            $bits += $value;
-        }
-
-        return $bits;
+        return array_sum($array);
     }
 }
