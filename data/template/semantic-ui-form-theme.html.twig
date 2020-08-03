@@ -69,10 +69,21 @@
 
 {%- block choice_widget_expanded -%}
     <div {{ block('widget_container_attributes') }}>
-        {%- for child in form -%}
-        <div class="field">
-            {{- form_widget(child) -}}
-        </div>
+        {%- for name, choices in form.vars.choices -%}
+            {% if choices is iterable %}
+                <div class="field">
+                    <em>{{ name|trans({}, choice_translation_domain)}}</em>
+                </div>
+                {% for key, choice in choices %}
+                    <div class="field">
+                        {{- form_widget(form[key]) -}}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="field">
+                    {{- form_widget(form[name]) -}}
+                </div>
+            {% endif %}
         {%- endfor -%}
     </div>
 {%- endblock choice_widget_expanded -%}
