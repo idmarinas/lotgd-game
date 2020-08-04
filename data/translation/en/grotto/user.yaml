@@ -30,7 +30,9 @@ section:
                 del:
                     label: Del
                     confirm: 'Are you sure you wish to delete this user?'
-                edit: Edit
+                edit:
+                    account: Edit Account
+                    character: Edit Character
                 ban: Ban
                 log: Log
                 link:
@@ -39,6 +41,9 @@ section:
         recipient: '\\-- Recipient = `${targetName}`0'
     edit:
         form:
+            title:
+                acct: Edit account data
+                char: Edit character data
             button:
                 submit:
                     newday: 'Grant New Day'
@@ -60,6 +65,12 @@ flash.message:
         del:
             fail: 'You are trying to delete a user with superuser powers. Regardless of the type, ONLY a megauser can do so due to security reasons.'
         edit:
+            saved:
+                account: Data of account "{name}" saved!
+                character: Data of character "{name}" saved!
+            error:
+                account: Unable to saved data of account.
+                character: Unable to saved data of character.
             no.prefs: "The {module} module doesn't appear to define any user preferences."
             changed: "`2Value '<strong>{key}</strong>' has changed from '<em>{oldVal}</em>' to '<em>{newVal}</em>'.`0`n"
             module:
