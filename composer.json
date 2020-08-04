@@ -76,7 +76,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Lotgd\\": "src/",
             "Lotgd\\Core\\": "src/core/",
             "Lotgd\\Local\\": "src/local/",
             "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
