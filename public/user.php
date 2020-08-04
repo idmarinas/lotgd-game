@@ -43,75 +43,13 @@ $params = [
 \LotgdNavigation::addNav('user.nav.ban.list', 'bans.php?op=removeban');
 \LotgdNavigation::addNav('user.nav.ban.search', 'bans.php?op=searchban');
 
-// Collect a list of the mounts
-$mounts = '0,None';
-$mountRepository = \Doctrine::getRepository('LotgdCore:Mounts');
-$result = $mountRepository->findBy([], [ 'mountcategory' => 'ASC']);
-
-foreach ($result as $row)
-{
-    $mounts .= ",{$row->getMountid()},{$row->getMountcategory()}: ".\LotgdSanitize::fullSanitize($row->getMountname());
-}
-
-$specialties = ['' => 'Undecided'];
-$specialties = modulehook('specialtynames', $specialties);
-$enum = '';
-
-foreach ($specialties as $key => $name)
-{
-    $enum .= ($enum ? ',' : '')."{$key},{$name}";
-}
-
-//Inserted for v1.1.0 Dragonprime Edition to extend clan possibilities
-$ranks = [
-    CLAN_APPLICANT => 'ranks.00',
-    CLAN_MEMBER => 'ranks.010',
-    CLAN_OFFICER => 'ranks.020',
-    CLAN_ADMINISTRATIVE => 'ranks.025',
-    CLAN_LEADER => 'ranks.030',
-    CLAN_FOUNDER => 'ranks.031'
-];
-$ranksResult = modulehook('clanranks', ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null, 'userid' => $userId]);
-$ranks = $ranksResult['ranks'];
-
-$rankstring = '';
-
-foreach ($ranks as $rankId => $rankName)
-{
-    $rankstring .= ($rankstring ? ',' : '').$rankId.','.\LotgdSanitize::fullSanitize(\LotgdTranslator::t($rankName, [], $ranksResult['textDomain']));
-}
-
-$races = modulehook('racenames');
-$racesenum = '';
 //all races here expect such ones no module covers, so we add the users race first.
-if ('edit' == $op || 'save' == $op)
+if ('edit' == $op)
 {
     //add the race
     $row = $repository->extractEntity($repository->find($userId));
     $characterInfo = $row;
     $row = array_merge($row, $repository->extractEntity($row['character']));
-    $racesenum = ','.translate_inline('Undecided', 'race').',';
-
-    foreach ($races as $key => $race)
-    {
-        $racesenum .= $key.','.$race.',';
-    }
-
-    if (! \array_key_exists($row['race'], $races))
-    {
-        $racesenum .= $row['race'].','.$row['race'].',';
-    }
-    $racesenum = substr($racesenum, 0, strlen($racesenum) - 1);
-    //later on: enumpretrans, because races are already translated in a way...
-}
-
-$userinfo = include_once 'lib/data/user_account.php';
-$clanRepository = \Doctrine::getRepository('LotgdCore:Clans');
-$result = $clanRepository->findAll();
-
-foreach ($result as $clan)
-{
-    $userinfo['clanid'] .= ",{$clan->getClanid()},".str_replace(',', ';', "<{$clan->getClanshort()}> {$clan->getClanname()}");
 }
 
 if ('del' == $op)
@@ -302,7 +240,7 @@ elseif ('savemodule' == $op)
     \LotgdHttp::setQuery('subop', 'module');
 }
 
-$row = $characterInfo;
+$row = $characterInfo ?? null;
 
 switch ($op)
 {
@@ -334,25 +272,45 @@ switch ($op)
 
         if ('' == $subop)
         {
-            $row = $repository->extractEntity($repository->find($userId));
-            $row = array_merge($row, $repository->extractEntity($row['character']));
+            $type = (string) \LotgdHttp::getQuery('type') ?: 'acct';
+            $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
 
-            $params['userLoggedIn'] = $row['loggedin'];
+            $accountEntity = $repository->find($userId);
+            $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
+            \Doctrine::detach($accountEntity);
+            \Doctrine::detach($characterEntity);
 
-            //Add new composita attack
-            $row['totalattack'] = get_player_attack($row['acctid']);
-            $row['totaldefense'] = get_player_defense($row['acctid']);
+            $class = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
+            $entity = 'acct' == $type ? $accountEntity : $characterEntity;
 
-            //Add the count summary for DKs
-            $row['dragonpointssummary'] = [];
+            $form = LotgdForm::create($class, $entity, [
+                'action' => "user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}",
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ]);
 
-            if ($row['dragonkills'])
+            $form->handleRequest();
+
+            if ($form->isSubmitted() && $form->isValid())
             {
-                $row['dragonpointssummary'] = array_count_values($row['dragonpoints']);
+                $entity = $form->getData();
+
+                \Doctrine::merge($entity);
+                \Doctrine::flush();
+
+                $message = ('acct' == $type) ? 'flash.message.account.edit.saved.account' : 'flash.message.account.edit.saved.character';
+
+                $name = 'acct' == $type ? 'getLogin' : 'getName';
+
+                \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->{$name}()], $textDomain));
             }
 
-            $showformargs = modulehook('modifyuserview', ['userinfo' => $userinfo, 'user' => $row]);
-            $params['form'] = lotgd_showform($showformargs['userinfo'], $showformargs['user'], true, false, false);
+            \LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
+
+            $params['form'] = $form->createView();
+            $params['userLoggedIn'] = $accountEntity->getLoggedin();
+            $params['type'] = $type;
         }
         elseif ('module' == $subop)
         {
