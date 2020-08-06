@@ -38,6 +38,7 @@ class FormElement extends AbstractElement
         //-- Custom elements of LoTGD
         'Lotgd\Core\Form\Element\Tagify' => FormTagify::class,
         'Lotgd\Core\Form\Element\BitField' => FormBitField::class,
+        'Lotgd\Core\Form\Element\ViewOnly' => FormViewOnly::class,
     ];
 
     /**
@@ -47,30 +48,30 @@ class FormElement extends AbstractElement
      */
     protected $typeMap = [
         'checkbox' => FormCheckbox::class,
-        'color' => 'FormColor',
-        'date' => 'FormDate',
-        'datetime' => 'Form_datetime',
-        'datetime-local' => 'Form_date_time_local',
+        // 'color' => 'FormColor',
+        // 'date' => 'FormDate',
+        // 'datetime' => 'Form_datetime',
+        // 'datetime-local' => 'Form_date_time_local',
         'email' => FormEmail::class,
-        'file' => 'Form_file',
+        // 'file' => 'Form_file',
         'hidden' => FormHidden::class,
-        'image' => 'Form_image',
-        'month' => 'Form_month',
+        // 'image' => 'Form_image',
+        // 'month' => 'Form_month',
         // 'multi_checkbox' => FormMultiCheckbox::class, //-- Not use mult-checkbox use select multi
         'number' => FormNumber::class,
-        'password' => 'Form_password',
-        'radio' => 'Form_radio',
+        // 'password' => 'Form_password',
+        // 'radio' => 'Form_radio',
         'range' => FormRange::class,
         'reset' => FormReset::class,
-        'search' => 'Form_search',
+        // 'search' => 'Form_search',
         'select' => FormSelect::class,
         'submit' => FormSubmit::class,
-        'tel' => 'Form_tel',
+        // 'tel' => 'Form_tel',
         'text' => FormText::class,
         'textarea' => FormTextarea::class,
-        'time' => 'Form_time',
-        'url' => 'Form_url',
-        'week' => 'Form_week',
+        // 'time' => 'Form_time',
+        // 'url' => 'Form_url',
+        // 'week' => 'Form_week',
     ];
 
     /**
