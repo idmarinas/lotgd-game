@@ -12,7 +12,12 @@
 {# Get type of element, some elements no need a label #}
 {% set type = element.getAttribute('type') %}
 
-<div class="{{ elementError ? 'error ' : '' }}{{ element.getAttribute('required') ? 'required ' : '' }}{{ 'hidden' != type ? 'field' : '' }}">
+{% set fieldClass = (elementError ? 'error ' : '')
+    ~ (element.getAttribute('required ') ? 'required ' : '')
+    ~ ('hidden' != type ? 'field ' : '')
+%}
+
+<div class="{{ (element.getOption('show_inline') ? 'inline ' : '') ~ fieldClass }}">
     {% if element.label and 'hidden' != type %}
         {# Check the element type, some elements are rendered differently #}
         {% if 'checkbox' == type %}
