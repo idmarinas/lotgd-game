@@ -155,4 +155,23 @@ trait CoreFilter
     {
         return highlight_string("<?php \n\r".$string, true);
     }
+
+    /**
+     * Show an affirmation or negation.
+     *
+     * @param int|bool $value      Value to check
+     * @param string   $yes        Translation key
+     * @param string   $no         Translation key
+     * @param string   $textDomain Domain for translation
+     *
+     * @return text
+     */
+    public function affirmationNegation($value, $yes = 'adverb.yes', $no = 'adverb.no', $textDomain = 'app-common')
+    {
+        $value = (int) $value;
+
+        $text = 0 == $value ? $no : $yes;
+
+        return $this->getTranslator()->trans($text, [], $textDomain);
+    }
 }
