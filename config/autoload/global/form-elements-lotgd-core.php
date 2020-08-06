@@ -47,6 +47,12 @@ return [
             'objectMulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
             'objectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
             'ObjectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
+
+            //-- Added in version 4.3.0
+            //-- View only element
+            'viewonly' => Element\ViewOnly::class,
+            'viewOnly' => Element\ViewOnly::class,
+            'ViewOnly' => Element\ViewOnly::class,
         ],
         'factories' => [
             Element\GameLanguage::class => LotgdElementFactory::class,
@@ -54,6 +60,7 @@ return [
             Element\Tagify::class => ElementFactory::class,
             Element\LotgdTheme::class => LotgdElementFactory::class,
             Element\BitField::class => ElementFactory::class,
+            Element\ViewOnly::class => ElementFactory::class,
 
             //-- Added in version 4.2.0
             DoctrineElement\ObjectSelect::class => DoctrineService\ObjectSelectFactory::class,

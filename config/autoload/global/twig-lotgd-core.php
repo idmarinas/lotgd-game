@@ -40,6 +40,9 @@ return [
         //-- Added in version 4.2.0
         Symfony\Bridge\Twig\Extension\FormExtension::class,
 
+        //-- Added in version 4.3.0
+        Lotgd\Core\Twig\Extension\Form\FormViewOnly::class,
+
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
     ]
