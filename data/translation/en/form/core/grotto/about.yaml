@@ -1,0 +1,59 @@
+form.label: 'Information of server'
+
+game.setup:
+    title: Game Setup
+    pvp: Enable Slay Other Players
+    pvpday: Player Fights per day
+    pvpimmunity: Days that new players are safe from PvP
+    pvpminexp: Amount of experience when players become killable in PvP
+    soap: Clean user posts (filters bad language and splits words over 45 chars long)
+    newplayerstartgold: Amount of gold to start a new character with
+    fightsforinterest: Player must have fewer than how many forest fights to earn interest?
+    maxinterest: Max Interest Rate (%)
+    mininterest: Min Interest Rate (%)
+    daysperday: Game days per calendar day
+    specialtybonus: Extra daily uses in specialty area
+
+newday:
+    title: New Days
+    fightsforinterest: Player must have fewer than how many forest fights to earn interest?
+    maxinterest: Max Interest Rate (%)
+    mininterest: Min Interest Rate (%)
+    daysperday: Game days per calendar day
+    specialtybonus: Extra daily uses in specialty area
+
+bank:
+    title: Bank settings
+    borrowperlevel: Max amount player can borrow per level
+    allowgoldtransfer: Are players allowed to transfer gold
+    transferperlevel: Max amount player can transfer per level of recipient (if transfers are enabled)
+    mintransferlev: Minimum level a player has to be before they can transfer gold (if transfers are enabled)
+    transferreceive: Total transfers a player can receive in one play day (if transfers are enabled)
+    maxtransferout: Max amount total a player can transfer to others per level (if transfers are enabled)
+
+forest:
+    title: Forest
+    turns: Forest Fights per day
+    dropmingold: Forest Creatures always drop at least 1/4 of possible gold
+
+mail:
+    title: Mail Settings
+    mailsizelimit: Message size limit per message
+    inboxlimit: 'Limit # of messages in inbox'
+    oldmail: Automatically delete old messages after (days)
+
+content:
+    title: Content Expiration
+    expirecontent: Days to keep comments and news?  (0 for infinite)
+    expiretrashacct: Days to keep accounts that were never logged in to? (0 for infinite)
+    expirenewacct: Days to keep level 1 accounts with no dragon kills? (0 for infinite)
+    expireoldacct: Days to keep all other accounts? (0 for infinite)
+    LOGINTIMEOUT: Seconds of inactivity before auto-logoff
+
+info:
+    title: Useful Information
+    dayduration: Day Duration
+    curgametime: Current game time
+    curservertime: Current Server Time
+    lastnewday: Last new day
+    nextnewday: Next new day
