@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\EntityForm;
 
-use Laminas\Form\Element\Number;
 use Lotgd\Core\Entity\Characters;
 use Lotgd\Core\Form\Type\ClanRankType;
 use Lotgd\Core\Form\Type\RaceType;
@@ -131,7 +130,7 @@ class CharactersType extends AbstractType
                 'label' => 'char.hashorse',
                 'required' => false,
                 'empty_data' => '0',
-                'choices' => \Doctrine::getRepository('LotgdCore:Mounts')->findAll([], [ 'mountcategory' => 'ASC']),
+                'choices' => \Doctrine::getRepository('LotgdCore:Mounts')->findAll([], ['mountcategory' => 'ASC']),
                 'choice_value' => 'mountid',
                 'choice_label' => function ($clan)
                 {
