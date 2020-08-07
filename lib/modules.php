@@ -235,46 +235,6 @@ function get_module_info($shortname)
     return $moduleinfo;
 }
 
-function module_sem_acquire()
-{
-    //DANGER DANGER WILL ROBINSON
-    //use of this function can be EXTREMELY DANGEROUS
-    //If there is ANY WAY you can avoid using it, I strongly recommend you
-    //do so.  That said, I recognize that at times you need to acquire a
-    //semaphore so I'll provide a function to accomplish it.
-
-    //PLEASE make sure you call module_sem_release() AS SOON AS YOU CAN.
-
-    //Since Semaphore support in PHP is a compile time option that is off
-    //by default, I'll rely on MySQL's semaphore on table lock.  Note this
-    //is NOT as efficient as the PHP semaphore because it blocks other
-    //things too.
-    //If someone is feeling industrious, a smart function that uses the PHP
-    //semaphore when available, and otherwise call the MySQL LOCK TABLES
-    //code would be sincerely appreciated.
-
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0 and delete in future version. With Doctrine this is not necesary.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    $sql = 'LOCK TABLES '.DB::prefix('module_settings').' WRITE';
-    DB::query($sql);
-}
-
-function module_sem_release()
-{
-    trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0 and delete in future version. With Doctrine this is not necesary.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    //please see warnings in module_sem_acquire()
-    $sql = 'UNLOCK TABLES';
-
-    DB::query($sql);
-}
-
 function module_editor_navs($like, $linkprefix)
 {
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
