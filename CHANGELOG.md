@@ -16,10 +16,28 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   **public/home.php** Select skin.
     -   **public/user.php** The form is separated into two: accounts and characters.
         -   Use Symfony Form to edit this entities.
+    -   **public/about.php** The form use the new element ViewOnly to show info.
 
 ### :star: FEATURES
 
--   Nothing
+-   **Twig Template**
+    -   New filters:
+        -   `affirmation_negation` or `yes_no`
+            -   Default function parameters: `affirmationNegation($value, $yes = 'adverb.yes', $no = 'adverb.no', $textDomain = 'app-common')`
+                Can use a custom text, only need overwrite `$yes`, `$no` and `$textDomain` parameters
+-  **Form system**
+    -   _Laminas Form_:
+        -   New Elements:
+            -   ViewOnly
+    -   _Symfony Form_:
+        -   New Types:
+            -   BitFieldType
+            -   ClanRankType
+            -   CronjobListType
+            -   DateTimeType
+                -   Note: Only for add a transformer avoid errors with invalid date `0000-00-00 00:00:00`
+            -   RaceType
+            -   SpecialtyType
 
 ### :fire: DEPRECATED
 
@@ -33,9 +51,22 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :x: REMOVES
 
 -   File **lib/data/configuration_cronjob.php** Not is necesary.
+-   File **lib/data/user_account.php** Not is necesary.
 -   **Translations** yaml files, removed used arrays as multiline text. Use folded style with `>` or `|`
     -   Can find examples in files translations
     -   More info of YAML format in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
+-   **Remove obsolete functions**
+    -   **lib/modules.php**
+        -   `module_sem_acquire`
+        -   `module_sem_release`
+    -   **lib/datacache.php** delete file and all deprecated function.
+        -   `datacache`
+        -   `updatedatacache`
+        -   `invalidatedatacache`
+        -   `massinvalidate`
+        -   `datacache_empty`
+        -   `datacache_clearExpired`
+        -   `datacache_optimize`
 
 ### :notebook: NOTES
 
