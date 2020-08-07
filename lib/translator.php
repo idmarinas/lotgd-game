@@ -8,7 +8,7 @@
 function translator_setup()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     //Determine what language to use
@@ -40,7 +40,7 @@ $translation_table = [];
 function translate($indata, $namespace = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     if (false == getsetting('enabletranslation', true))
@@ -116,7 +116,7 @@ function translate($indata, $namespace = false)
 function sprintf_translate()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $args = func_get_args();
@@ -169,7 +169,7 @@ function sprintf_translate()
 function translate_inline($in, $namespace = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $out = translate($in, $namespace);
@@ -182,7 +182,7 @@ function translate_inline($in, $namespace = false)
 function translate_mail($in, $to = 0)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $session;
@@ -215,7 +215,7 @@ function translate_mail($in, $to = 0)
 function tl($in)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $out = translate($in);
@@ -227,7 +227,7 @@ function tl($in)
 function translate_loadnamespace($namespace, $language = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     if (false === $language)
@@ -275,7 +275,7 @@ $seentlbuttons = [];
 function tlbutton_push($indata, $hot = false, $namespace = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons, $translation_is_enabled, $seentlbuttons, $session, $language;
@@ -327,7 +327,7 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
 function tlbutton_pop()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons,$session;
@@ -346,7 +346,7 @@ function tlbutton_pop()
 function tlbutton_clear()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons,$session;
@@ -368,7 +368,7 @@ $translation_is_enabled = true;
 function enable_translation($enable = true)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translation_is_enabled;
@@ -382,7 +382,7 @@ $translation_namespace_stack = [];
 function tlschema($schema = false)
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translation_namespace,$translation_namespace_stack;
@@ -406,7 +406,7 @@ function tlschema($schema = false)
 function translator_check_collect_texts()
 {
     trigger_error(sprintf(
-        'Usage of %s is obsolete since 4.0.0; and delete in version 4.1.0, use new translations system.',
+        'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $tlmax = getsetting('tl_maxallowed', 0);
