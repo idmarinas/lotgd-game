@@ -54,8 +54,6 @@ if (injectmodule($module, true))
                 {
                     $data = $params['form']->getData();
 
-                    bdump($data);
-
                     process_post_save_data($data, $old, $flashMessages, $module, $textDomain);
 
                     $flashMessages .= \LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
