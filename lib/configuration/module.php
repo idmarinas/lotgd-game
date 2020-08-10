@@ -48,7 +48,6 @@ if (injectmodule($module, true))
             {
                 $old = load_module_settings($module);
                 $params['form']->setData(\LotgdHttp::getPostAll());
-                $post = \LotgdHttp::getPostAll();
 
                 if ($params['form']->isValid())
                 {
