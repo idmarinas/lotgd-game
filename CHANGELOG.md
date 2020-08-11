@@ -17,6 +17,21 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   **public/user.php** The form is separated into two: accounts and characters.
         -   Use Symfony Form to edit this entities.
     -   **public/about.php** The form use the new element ViewOnly to show info.
+-   :warning: **Modules** `MODULE_NAME_getmoduleinfo`
+    -   Changed the way to add the settings/prefs of a module.
+        -   Now can use a Laminas Form.
+            ```
+            [
+                'settings' => 'Lotgd\Local\Form\ModuleName\ModuleNameSettings',
+                'prefs-companions' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsCompanions',
+                'prefs-mounts' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsMounts',
+            ]
+            ```
+            -   With Laminas Form can validate/filter all inputs in form.
+            -   Note: in a future version of LoTGD Core, the function `lotgd_showform` will be deleted (now is deprecated function).
+                -   When this function is removed all the above options will no longer work with the old method. And need use Laminas Form or Symfony Form.
+
+            Each configuration `settings`, `prefs-.`... in `MODULE_getmoduleinfo` use a Laminas Form factory.
 
 ### :star: FEATURES
 
@@ -35,7 +50,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   ClanRankType
             -   CronjobListType
             -   DateTimeType
-                -   Note: Only for add a transformer avoid errors with invalid date `0000-00-00 00:00:00`
+                -   Note: Only for add a transformer to avoid errors with invalid date `0000-00-00 00:00:00`
             -   RaceType
             -   SpecialtyType
 
