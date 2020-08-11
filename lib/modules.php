@@ -270,12 +270,31 @@ function module_objpref_edit($type, $module, $id)
 {
     $info = get_module_info($module);
 
-    if (count($info['prefs-'.$type]) > 0)
+    $data = [];
+    $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
+    $result = $repository->findBy([ 'modulename' => $module,  'objtype' => $type, 'objid' => $id ]);
+
+    foreach ($result as $row)
     {
-        $data = [];
+        $data[$row->getSetting()] = $row->getValue();
+    }
+
+    if (is_string($info["prefs-{$type}"]))
+    {
+        $form = \LotgdLocation::get($info["prefs-{$type}"]);
+        $form->setAttribute('method', 'POST');
+        $form->setAttribute('autocomplete', 'off');
+        $form->setAttribute('class', 'ui form');
+
+        $form->setData($data);
+
+        return $form;
+    }
+    elseif (is_array($info["prefs-{$type}"]) && count($info["prefs-{$type}"]) > 0)
+    {
         $msettings = [];
 
-        foreach ($info['prefs-'.$type] as $key => $val)
+        foreach ($info["prefs-{$type}"] as $key => $val)
         {
             if (is_array($val))
             {
@@ -296,14 +315,7 @@ function module_objpref_edit($type, $module, $id)
                 $data[$key] = $x[1];
             }
         }
-        $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-        $result = $repository->findBy([ 'modulename' => $module,  'objtype' => $type, 'objid' => $id ]);
-
-        foreach ($result as $row)
-        {
-            $data[$row->getSetting()] = $row->getValue();
-        }
-        lotgd_showform($msettings, $data);
+        return lotgd_showform($msettings, $data, false, false, false);
     }
 }
 
