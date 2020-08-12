@@ -25,13 +25,15 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                 'settings' => 'Lotgd\Local\Form\ModuleName\ModuleNameSettings',
                 'prefs-companions' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsCompanions',
                 'prefs-mounts' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsMounts',
+                'prefs-creatures' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsCreatures',
+                'prefs-items' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsItems',
+                'prefs-city' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsCity',
+                'prefs-drinks' => 'Lotgd\Local\Form\ModuleName\ModuleNamePrefsDrinks',
             ]
             ```
             -   With Laminas Form can validate/filter all inputs in form.
             -   Note: in a future version of LoTGD Core, the function `lotgd_showform` will be deleted (now is deprecated function).
                 -   When this function is removed all the above options will no longer work with the old method. And need use Laminas Form or Symfony Form.
-
-            Each configuration `settings`, `prefs-.`... in `MODULE_getmoduleinfo` use a Laminas Form factory.
 
 ### :star: FEATURES
 
