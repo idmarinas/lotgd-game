@@ -78,7 +78,7 @@
         "gulp-uglify": "^3.0.2",
         "gulp-zip": "^5.0.2",
         "merge-stream": "^2.0.0",
-        "mini-css-extract-plugin": "^0.9.0",
+        "mini-css-extract-plugin": "^0.10.0",
         "minimist": "^1.2.5",
         "node-sass": "^4.14.1",
         "normalize-path": "^3.0.0",
