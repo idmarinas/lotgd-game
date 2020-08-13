@@ -13,14 +13,12 @@
 
 namespace Lotgd\Core\Doctrine\ORM;
 
-use Doctrine\ORM\{
-    EntityRepository as DoctrineEntityRepository,
-    QueryBuilder
-};
+use Doctrine\ORM\EntityRepository as DoctrineEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Gedmo\Translatable\TranslatableListener;
-use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
 use Laminas\Hydrator\ClassMethods;
 use Laminas\Paginator\Paginator;
+use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
 
 class EntityRepository extends DoctrineEntityRepository
 {
@@ -31,7 +29,7 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25, int $resultType = DoctrineAdapter::RESULT_ARRAY): Paginator
     {
-        $page = max(1, $page);
+        $page    = max(1, $page);
         $perPage = max(10, $perPage); //-- Min items per page is 10
 
         $paginator = new Paginator(new DoctrineAdapter($query, $resultType));
@@ -79,7 +77,7 @@ class EntityRepository extends DoctrineEntityRepository
 
             return $set;
         }
-        elseif ('object' != gettype($object))
+        elseif ( ! is_object($object))
         {
             return (array) $object;
         }
@@ -121,7 +119,7 @@ class EntityRepository extends DoctrineEntityRepository
      */
     protected function getHydrator(): ClassMethods
     {
-        if (! $this->repositoryHydrator)
+        if ( ! $this->repositoryHydrator)
         {
             $this->repositoryHydrator = new ClassMethods();
             //-- With this keyValue is keyValue. Otherwise it would be key_value

@@ -10,7 +10,7 @@ namespace Lotgd\Core\Installer\Pattern;
 
 trait Progress
 {
-    protected $dataInserted = false;
+    protected $dataInserted         = false;
     protected $dataUpgradesInserted = false;
 
     /**

@@ -24,17 +24,17 @@ trait ThemeList
     public function getThemeList(): array
     {
         $cacheKey = str_replace('\\', '-', ThemeList::class);
-        $cache = $this->getCache();
+        $cache    = $this->getCache();
 
         $skins = $cache->getItem($cacheKey);
 
-        if (! is_array($skins))
+        if ( ! is_array($skins))
         {
             // A generic way of allowing a theme to be selected.
             $handle = @opendir('data/template');
 
             // Template directory open failed
-            if (! $handle)
+            if ( ! $handle)
             {
                 return [];
             }

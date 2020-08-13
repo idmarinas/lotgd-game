@@ -21,10 +21,8 @@ class CreaturesRepository extends DoctrineRepository
     /**
      * Find one creature by id.
      * Creature is translated.
-     *
-     * @return array|null
      */
-    public function findOneCreatureById(int $id)
+    public function findOneCreatureById(int $id): ?array
     {
         try
         {
@@ -49,10 +47,8 @@ class CreaturesRepository extends DoctrineRepository
     /**
      * Get an array of creatures by ids.
      * Creatures is translated.
-     *
-     * @return array|null
      */
-    public function findCreaturesById(array $ids)
+    public function findCreaturesById(array $ids): ?array
     {
         try
         {

@@ -20,7 +20,7 @@ use Laminas\Db\Metadata\Metadata;
  */
 trait DbTool
 {
-    protected $connection = null;
+    protected $connection;
 
     /**
      * Check name of data base.

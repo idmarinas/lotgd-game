@@ -13,21 +13,19 @@
 namespace Lotgd\Core\Factory\Translator;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Translator\Translator as LotgdTranslator;
 use Laminas\I18n\Translator\LoaderPluginManager;
-use Laminas\ServiceManager\{
-    Factory\FactoryInterface,
-    ServiceLocatorInterface
-};
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\Validator\AbstractValidator;
+use Lotgd\Core\Translator\Translator as LotgdTranslator;
 
 class Translator implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         global $session;
 
-        $options = $container->get('GameConfig');
+        $options     = $container->get('GameConfig');
         $translation = $options['lotgd_core']['translation'] ?? [];
 
         //-- Default language is en
@@ -35,7 +33,7 @@ class Translator implements FactoryInterface
         //-- Check if the player has set a language.
         if (($session['user']['loggedin'] ?? false) && ($session['user']['prefs']['language'] ?? false))
         {
-            $language = $session['user']['prefs']['language'] ?: 'en';
+            $language                             = $session['user']['prefs']['language'] ?: 'en';
             $session['user']['prefs']['language'] = $language;
         }
 

@@ -22,8 +22,6 @@ class ModuleUserprefsRepository extends DoctrineRepository
 
     /**
      * Find modules prefs for modules.
-     *
-     * @return array
      */
     public function findModulesPrefs(array $modules, int $acctId): array
     {

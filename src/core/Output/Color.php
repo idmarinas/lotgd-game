@@ -86,8 +86,6 @@ class Color
 
     /**
      * Get array of colors.
-     *
-     * @return array
      */
     public function getColors(): array
     {

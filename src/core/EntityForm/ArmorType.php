@@ -31,21 +31,21 @@ class ArmorType extends AbstractType
         $builder
             ->add('armorname', TranslatableFieldType::class, [
                 'personal_translation' => ArmorTranslation::class,
-                'widget' => FieldType\NameTranslationType::class,
-                'field' => 'armorname',
-                'label' => 'armorname',
+                'widget'               => FieldType\NameTranslationType::class,
+                'field'                => 'armorname',
+                'label'                => 'armorname',
             ])
             ->add('level', NumberType::class, [
                 'label' => 'level',
             ])
             ->add('defense', RangeType::class, [
                 'label' => 'defense',
-                'attr' => [
-                    'min' => 1,
-                    'max' => 15,
+                'attr'  => [
+                    'min'                   => 1,
+                    'max'                   => 15,
                     'disable_slider_labels' => false,
-                    'step' => 1
-                ]
+                    'step'                  => 1,
+                ],
             ])
 
             ->add('save', SubmitType::class, ['label' => 'save.button'])
@@ -55,8 +55,8 @@ class ArmorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Armor::class,
-            'translation_domain' => 'form-core-grotto-armor'
+            'data_class'         => Armor::class,
+            'translation_domain' => 'form-core-grotto-armor',
         ]);
     }
 }

@@ -31,59 +31,59 @@ class MountsType extends AbstractType
     {
         $builder
             ->add('mountactive', CheckboxType::class, [
-                'label' => 'mountactive',
-                'required' => false
+                'label'    => 'mountactive',
+                'required' => false,
             ])
             ->add('mountname', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\NameTranslationType::class,
-                'field' => 'mountname',
-                'label' => 'mountname',
+                'widget'               => FieldType\NameTranslationType::class,
+                'field'                => 'mountname',
+                'label'                => 'mountname',
             ])
             ->add('mountdesc', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\TextareaTranslationType::class,
-                'field' => 'mountdesc',
-                'label' => 'mountdesc',
+                'widget'               => FieldType\TextareaTranslationType::class,
+                'field'                => 'mountdesc',
+                'label'                => 'mountdesc',
             ])
             ->add('mountcategory', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\CategoryTranslationType::class,
-                'field' => 'mountcategory',
-                'label' => 'mountcategory',
+                'widget'               => FieldType\CategoryTranslationType::class,
+                'field'                => 'mountcategory',
+                'label'                => 'mountcategory',
             ])
             ->add('mountlocation', LocationType::class, [
-                'label' => 'mountlocation'
+                'label' => 'mountlocation',
             ])
             ->add('mountdkcost', NumberType::class, [
-                'label' => 'mountdkcost'
+                'label' => 'mountdkcost',
             ])
             ->add('mountcostgems', NumberType::class, [
-                'label' => 'mountcostgems'
+                'label' => 'mountcostgems',
             ])
             ->add('mountfeedcost', NumberType::class, [
-                'label' => 'mountfeedcost'
+                'label' => 'mountfeedcost',
             ])
             ->add('mountforestfights', NumberType::class, [
-                'label' => 'mountforestfights'
+                'label' => 'mountforestfights',
             ])
             ->add('newday', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\TextareaTranslationType::class,
-                'field' => 'newday',
-                'label' => 'newday',
+                'widget'               => FieldType\TextareaTranslationType::class,
+                'field'                => 'newday',
+                'label'                => 'newday',
             ])
             ->add('recharge', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\TextareaTranslationType::class,
-                'field' => 'recharge',
-                'label' => 'recharge',
+                'widget'               => FieldType\TextareaTranslationType::class,
+                'field'                => 'recharge',
+                'label'                => 'recharge',
             ])
             ->add('partrecharge', TranslatableFieldType::class, [
                 'personal_translation' => MountsTranslation::class,
-                'widget' => FieldType\TextareaTranslationType::class,
-                'field' => 'partrecharge',
-                'label' => 'partrecharge',
+                'widget'               => FieldType\TextareaTranslationType::class,
+                'field'                => 'partrecharge',
+                'label'                => 'partrecharge',
             ])
             ->add('mountbuff', Common\BuffType::class, [
                 'label' => 'mountbuff',
@@ -96,8 +96,8 @@ class MountsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Mounts::class,
-            'translation_domain' => 'form-core-grotto-mounts'
+            'data_class'         => Mounts::class,
+            'translation_domain' => 'form-core-grotto-mounts',
         ]);
     }
 }

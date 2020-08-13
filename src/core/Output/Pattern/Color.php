@@ -22,7 +22,7 @@ trait Color
      */
     public function getColors()
     {
-        if (! $this->colors)
+        if ( ! $this->colors)
         {
             $this->colors = $this->getContainer(\Lotgd\Core\Output\Color::class);
         }
@@ -37,9 +37,12 @@ trait Color
      */
     public function getColorPatternOpen()
     {
-        if (! $this->colorPatternOpen)
+        if ( ! $this->colorPatternOpen)
         {
-            $this->colorPatternOpen = array_map(function ($k) { return "`{$k}"; }, array_keys($this->getColors()));
+            $this->colorPatternOpen = array_map(function ($k)
+            {
+                return "`{$k}";
+            }, array_keys($this->getColors()));
         }
 
         return $this->colorPatternOpen;
@@ -52,9 +55,12 @@ trait Color
      */
     public function getColorPatternClose()
     {
-        if (! $this->colorPatternClose)
+        if ( ! $this->colorPatternClose)
         {
-            $this->colorPatternClose = array_map(function ($k) { return "´{$k}"; }, array_keys($this->getColors()));
+            $this->colorPatternClose = array_map(function ($k)
+            {
+                return "´{$k}";
+            }, array_keys($this->getColors()));
         }
 
         return $this->colorPatternClose;
@@ -62,14 +68,15 @@ trait Color
 
     /**
      * Get replacement for code open code colors.
-     *
-     * @return void
      */
     public function getColorReplacementOpen()
     {
-        if (! $this->colorReplacement)
+        if ( ! $this->colorReplacement)
         {
-            $this->colorReplacement = array_map(function ($k) { return "<span class='$k'>"; }, array_values($this->getColors()));
+            $this->colorReplacement = array_map(function ($k)
+            {
+                return "<span class='{$k}'>";
+            }, array_values($this->getColors()));
         }
 
         return $this->colorReplacement;

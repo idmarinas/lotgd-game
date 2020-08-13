@@ -25,10 +25,10 @@ class FormViewOnly extends FormInput
      * @var array
      */
     protected $validTagAttributes = [
-        'id' => true,
-        'alt' => true,
+        'id'     => true,
+        'alt'    => true,
         'height' => true,
-        'width' => true,
+        'width'  => true,
     ];
 
     /**
@@ -50,17 +50,17 @@ class FormViewOnly extends FormInput
      */
     public function render(Environment $env, ElementInterface $element)
     {
-        $attributes = $element->getAttributes();
-        $attributes['class'] = 'ui small label ' . ($attributes['class'] ?? '');
+        $attributes          = $element->getAttributes();
+        $attributes['class'] = 'ui small label '.($attributes['class'] ?? '');
 
         $filterName = $element->getOption('apply_filter');
         $uncolorize = $env->getFilter('uncolorize')->getCallable();
-        $value = $element->getValue();
+        $value      = $element->getValue();
 
         if ((is_array($filterName) && isset($filterName['name'])) || (is_string($filterName) && $filterName))
         {
             $filterName = ($filterName['name'] ?? '') ?: $filterName;
-            $filter = $env->getFilter($filterName)->getCallable();
+            $filter     = $env->getFilter($filterName)->getCallable();
 
             $value = $filter($value);
 

@@ -33,7 +33,7 @@ trait Container
      */
     public function getContainer($name = null)
     {
-        if (! $name)
+        if ( ! $name)
         {
             return $this->serviceManager;
         }

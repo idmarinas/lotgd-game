@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\Element\Checkbox as CheckboxElement;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormCheckbox extends FormInput
 {
@@ -41,7 +41,7 @@ class FormCheckbox extends FormInput
      */
     public function render(Environment $env, ElementInterface $element)
     {
-        if (! $element instanceof CheckboxElement)
+        if ( ! $element instanceof CheckboxElement)
         {
             throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Checkbox', __METHOD__));
         }
@@ -56,9 +56,9 @@ class FormCheckbox extends FormInput
         $labelHelper = $env->getExtension(FormLabel::class);
         $labelHelper->setTranslatorTextDomain($element->getOptions()['translator_text_domain'] ?? $this->getTranslatorTextDomain());
 
-        $attributes = $element->getAttributes();
-        $attributes['name'] = $name;
-        $attributes['type'] = $this->getInputType();
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getInputType();
         $attributes['value'] = $element->getCheckedValue();
 
         if ($element->isChecked())
@@ -75,8 +75,8 @@ class FormCheckbox extends FormInput
         {
             $hiddenAttributes = [
                 'disabled' => $attributes['disabled'] ?? false,
-                'name' => $attributes['name'],
-                'value' => $element->getUncheckedValue(),
+                'name'     => $attributes['name'],
+                'value'    => $element->getUncheckedValue(),
             ];
 
             $rendered = sprintf(

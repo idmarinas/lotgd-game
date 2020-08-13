@@ -22,8 +22,6 @@ trait Bio
 {
     /**
      * Get all bios of characters that NOT are blocked.
-     *
-     * @return array
      */
     public function getCharactersUnblockedBio(): array
     {
@@ -49,8 +47,6 @@ trait Bio
 
     /**
      * Get all bios of characters that are blocked.
-     *
-     * @return array
      */
     public function getCharactersBlockedBio(): array
     {
@@ -76,8 +72,6 @@ trait Bio
 
     /**
      * Block a bio of user.
-     *
-     * @return bool
      */
     public function blockCharacterBio(int $char): bool
     {
@@ -86,8 +80,6 @@ trait Bio
 
     /**
      * Unblock a bio of user.
-     *
-     * @return bool
      */
     public function unblockCharacterBio(int $char): bool
     {

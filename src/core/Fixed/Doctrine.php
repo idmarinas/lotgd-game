@@ -25,6 +25,7 @@ class Doctrine
      *
      * @param string $name
      * @param array  $arguments
+     * @param mixed  $method
      *
      * @return mixed the returned value from the resolved method
      */
@@ -32,7 +33,7 @@ class Doctrine
     {
         if (\method_exists(self::$wrapper, $method))
         {
-            if (!self::$wrapper->isOpen())
+            if ( ! self::$wrapper->isOpen())
             {
                 self::$wrapper = self::$wrapper->create(self::$wrapper->getConnection(), self::$wrapper->getConfiguration());
             }
@@ -42,11 +43,13 @@ class Doctrine
 
         $methods = implode(', ', get_class_methods(self::$wrapper));
 
-        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**
      * Alias of updateSchema.
+     *
+     * @param mixed|null $dumpSql
      */
     public static function syncEntity(string $entity, $dumpSql = null)
     {
@@ -55,6 +58,8 @@ class Doctrine
 
     /**
      * Alias of updateSchema.
+     *
+     * @param mixed|null $dumpSql
      */
     public static function syncEntities(array $entities, $dumpSql = null)
     {
@@ -108,6 +113,8 @@ class Doctrine
 
     /**
      * Alias of updateSchema.
+     *
+     * @param mixed|null $dumpSql
      */
     public static function createSchema(array $entities, $dumpSql = null)
     {

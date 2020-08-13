@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40000;
 
+use Laminas\Hydrator\ClassMethods;
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Lotgd\Core\Output\Commentary;
 use Tracy\Debugger;
-use Laminas\Hydrator\ClassMethods;
 
 class Upgrade extends UpgradeAbstract
 {
@@ -24,8 +24,6 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Step 1: Rename tables old tables and create new tables.
-     *
-     * @return bool
      */
     public function step1(): bool
     {
@@ -63,40 +61,38 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Import data of old "commentary" table.
-     *
-     * @return bool
      */
     public function step2(): bool
     {
         try
         {
-            $hydrator = new ClassMethods();
+            $hydrator   = new ClassMethods();
             $commentary = new Commentary();
-            $page = 1;
-            $select = \DB::select('commentary_old');
-            $paginator = \DB::paginator($select, $page, 100);
+            $page       = 1;
+            $select     = \DB::select('commentary_old');
+            $paginator  = \DB::paginator($select, $page, 100);
 
-            $pageCount = $paginator->count();
+            $pageCount   = $paginator->count();
             $importCount = $paginator->getTotalItemCount();
 
             do
             {
                 foreach ($paginator as $row)
                 {
-                    $row['info'] = unserialize($row['info']);
-                    $row = array_merge((array) $row, (array) $row['info']);
+                    $row['info']     = unserialize($row['info']);
+                    $row             = array_merge((array) $row, (array) $row['info']);
                     $row['postdate'] = new \DateTime($row['postdate']);
 
-                    $row['id'] = (int) $row['commentid'];
-                    $row['extra'] = $row['info'];
-                    $row['authorName'] = (string) $row['name'];
-                    $row['clanName'] = (string) ($row['clanname'] ?? '');
+                    $row['id']            = (int) $row['commentid'];
+                    $row['extra']         = $row['info'];
+                    $row['authorName']    = (string) $row['name'];
+                    $row['clanName']      = (string) ($row['clanname'] ?? '');
                     $row['clanNameShort'] = (string) ($row['clanshort'] ?? '');
-                    $row['clanRank'] = (int) ($row['clanrank'] ?? '');
-                    $row['clanId'] = (int) ($row['clanid'] ?? '');
-                    $row['hidden'] = (int) ($row['hidecomment'] ?? '');
+                    $row['clanRank']      = (int) ($row['clanrank'] ?? '');
+                    $row['clanId']        = (int) ($row['clanid'] ?? '');
+                    $row['hidden']        = (int) ($row['hidecomment'] ?? '');
                     $row['hiddenComment'] = (string) ($row['hidereason'] ?? '');
-                    $row['hiddenBy'] = (string) ($row['hiddenby'] ?? '');
+                    $row['hiddenBy']      = (string) ($row['hiddenby'] ?? '');
 
                     $commentary->processSpecialCommands($row);
 
@@ -107,7 +103,7 @@ class Upgrade extends UpgradeAbstract
 
                 $this->doctrine->flush();
 
-                $page++;
+                ++$page;
                 $paginator = \DB::paginator($select, $page, 100);
             } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
 
@@ -128,19 +124,17 @@ class Upgrade extends UpgradeAbstract
     /**
      * Import data of old "accounts" table.
      * This table are splited in two tables: "accounts" and "characters".
-     *
-     * @return bool
      */
     public function step3(): bool
     {
         try
         {
-            $hydrator = new ClassMethods();
-            $page = 1;
-            $select = \DB::select('accounts_old');
+            $hydrator  = new ClassMethods();
+            $page      = 1;
+            $select    = \DB::select('accounts_old');
             $paginator = \DB::paginator($select, $page, 100);
 
-            $pageCount = $paginator->count();
+            $pageCount   = $paginator->count();
             $importCount = $paginator->getTotalItemCount();
 
             //-- Overrides the automatic generation of IDs in this query to avoid changing IDs of accounts.
@@ -152,22 +146,22 @@ class Upgrade extends UpgradeAbstract
             {
                 foreach ($paginator as $row)
                 {
-                    $row = (array) $row;
-                    $row['laston'] = new \DateTime($row['laston']);
-                    $row['lastmotd'] = new \DateTime($row['lastmotd']);
-                    $row['lasthit'] = new \DateTime($row['lasthit']);
-                    $row['pvpflag'] = new \DateTime($row['pvpflag']);
+                    $row                   = (array) $row;
+                    $row['laston']         = new \DateTime($row['laston']);
+                    $row['lastmotd']       = new \DateTime($row['lastmotd']);
+                    $row['lasthit']        = new \DateTime($row['lasthit']);
+                    $row['pvpflag']        = new \DateTime($row['pvpflag']);
                     $row['recentcomments'] = new \DateTime($row['recentcomments']);
-                    $row['biotime'] = new \DateTime($row['biotime']);
-                    $row['regdate'] = new \DateTime($row['regdate']);
-                    $row['clanjoindate'] = new \DateTime($row['clanjoindate']);
-                    $row['badguy'] = unserialize($row['badguy']);
-                    $row['companions'] = unserialize($row['companions']);
-                    $row['allowednavs'] = unserialize($row['allowednavs']);
-                    $row['bufflist'] = unserialize($row['bufflist']);
-                    $row['dragonpoints'] = unserialize($row['dragonpoints']);
-                    $row['prefs'] = unserialize($row['prefs']);
-                    $row['uniqueid'] = $row['uniqueid'] ?? '';
+                    $row['biotime']        = new \DateTime($row['biotime']);
+                    $row['regdate']        = new \DateTime($row['regdate']);
+                    $row['clanjoindate']   = new \DateTime($row['clanjoindate']);
+                    $row['badguy']         = unserialize($row['badguy']);
+                    $row['companions']     = unserialize($row['companions']);
+                    $row['allowednavs']    = unserialize($row['allowednavs']);
+                    $row['bufflist']       = unserialize($row['bufflist']);
+                    $row['dragonpoints']   = unserialize($row['dragonpoints']);
+                    $row['prefs']          = unserialize($row['prefs']);
+                    $row['uniqueid']       = $row['uniqueid'] ?? '';
 
                     //-- Configure account
                     $acctEntity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\Accounts());
@@ -191,7 +185,7 @@ class Upgrade extends UpgradeAbstract
 
                 $this->doctrine->flush();
 
-                $page++;
+                ++$page;
                 $paginator = \DB::paginator($select, $page, 100);
             } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
 
@@ -215,19 +209,17 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Import data of old "news" table.
-     *
-     * @return bool
      */
     public function step4(): bool
     {
         try
         {
-            $hydrator = new ClassMethods();
-            $page = 1;
-            $select = \DB::select('news_old');
+            $hydrator  = new ClassMethods();
+            $page      = 1;
+            $select    = \DB::select('news_old');
             $paginator = \DB::paginator($select, $page, 100);
 
-            $pageCount = $paginator->count();
+            $pageCount   = $paginator->count();
             $importCount = $paginator->getTotalItemCount();
 
             do
@@ -236,12 +228,12 @@ class Upgrade extends UpgradeAbstract
                 {
                     $row = (array) $row;
 
-                    $row['arguments'] = @unserialize($row['arguments']);
-                    $row['text'] = $row['newstext'];
-                    $row['date'] = new \DateTime($row['newsdate']);
+                    $row['arguments']  = @unserialize($row['arguments']);
+                    $row['text']       = $row['newstext'];
+                    $row['date']       = new \DateTime($row['newsdate']);
                     $row['textDomain'] = $row['tlschema'];
-                    $row['accountId'] = $row['accountid'];
-                    $row['newFormat'] = false; //-- This news have an old format for the news
+                    $row['accountId']  = $row['accountid'];
+                    $row['newFormat']  = false; //-- This news have an old format for the news
 
                     $entity = $hydrator->hydrate($row, new \Lotgd\Core\Entity\News());
 
@@ -250,7 +242,7 @@ class Upgrade extends UpgradeAbstract
 
                 $this->doctrine->flush();
 
-                $page++;
+                ++$page;
                 $paginator = \DB::paginator($select, $page, 100);
             } while ($paginator->getCurrentItemCount() && $page <= $pageCount);
 
@@ -270,8 +262,6 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Insert new data for this upgrade.
-     *
-     * @return bool
      */
     public function step5(): bool
     {
@@ -289,8 +279,6 @@ class Upgrade extends UpgradeAbstract
 
     /**
      * Delete old table when all rows are imported.
-     *
-     * @return bool
      */
     public function step6(): bool
     {

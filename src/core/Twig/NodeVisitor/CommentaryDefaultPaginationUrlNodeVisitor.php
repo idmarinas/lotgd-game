@@ -42,7 +42,7 @@ class CommentaryDefaultPaginationUrlNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('paginationLinkUrl'))
+        if ( ! $this->scope->has('paginationLinkUrl'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class CommentaryDefaultPaginationUrlNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('paginationLinkUrl'))
+            if ( ! $arguments->hasNode('paginationLinkUrl'))
             {
                 $arguments->setNode('paginationLinkUrl', $this->scope->get('paginationLinkUrl'));
             }

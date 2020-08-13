@@ -26,12 +26,12 @@ class TranslatableFieldType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (! class_exists($options['personal_translation']))
+        if ( ! class_exists($options['personal_translation']))
         {
             throw new \InvalidArgumentException(sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
         }
 
-        if (! $options['field'])
+        if ( ! $options['field'])
         {
             throw new \InvalidArgumentException('You should provide a field to translate');
         }
@@ -51,22 +51,22 @@ class TranslatableFieldType extends AbstractType
             $options['label_attr'] = ['class' => static::LABEL_CLASS];
         }
 
-        $view->vars['label_attr'] = $options['label_attr'];
-        $view->vars['locales'] = $options['locales'];
+        $view->vars['label_attr']      = $options['label_attr'];
+        $view->vars['locales']         = $options['locales'];
         $view->vars['required_locale'] = $options['required_locale'];
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'remove_empty' => true, //Personal Translations without content are removed
-            'property_path' => 'translations',
-            'csrf_protection' => false,
-            'personal_translation' => false, //Personal Translation class
-            'locales' => explode(',', getsetting('serverlanguages')), //the locales you wish to edit
-            'required_locale' => [getsetting('defaultlanguage')], //the required locales cannot be blank
-            'field' => false, //the field that you wish to translate
-            'widget' => PersonalTranslationType::class, //change this to another widget like 'texarea' if needed
+            'remove_empty'           => true, //Personal Translations without content are removed
+            'property_path'          => 'translations',
+            'csrf_protection'        => false,
+            'personal_translation'   => false, //Personal Translation class
+            'locales'                => explode(',', getsetting('serverlanguages')), //the locales you wish to edit
+            'required_locale'        => [getsetting('defaultlanguage')], //the required locales cannot be blank
+            'field'                  => false, //the field that you wish to translate
+            'widget'                 => PersonalTranslationType::class, //change this to another widget like 'texarea' if needed
             'entity_manager_removal' => true, //auto removes the Personal Translation thru entity manager
         ]);
 

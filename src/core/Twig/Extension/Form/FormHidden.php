@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
+use Twig\TwigFunction;
 
 class FormHidden extends FormInput
 {
@@ -24,11 +24,11 @@ class FormHidden extends FormInput
      * @var array
      */
     protected $validTagAttributes = [
-        'name' => true,
+        'name'     => true,
         'disabled' => true,
-        'form' => true,
-        'type' => true,
-        'value' => true,
+        'form'     => true,
+        'type'     => true,
+        'value'    => true,
     ];
 
     /**

@@ -14,10 +14,10 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\Query\Expr\Join;
+use Laminas\Hydrator\ClassMethods;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
-use Laminas\Hydrator\ClassMethods;
 
 class AccountsRepository extends DoctrineRepository
 {
@@ -30,10 +30,8 @@ class AccountsRepository extends DoctrineRepository
 
     /**
      * Get data of user by ID of account.
-     *
-     * @return array
      */
-    public function getUserById(int $acctId)
+    public function getUserById(int $acctId): ?array
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -94,8 +92,6 @@ class AccountsRepository extends DoctrineRepository
 
     /**
      * Get list of accounts online.
-     *
-     * @return array
      */
     public function getListAccountsOnline(): array
     {
@@ -131,10 +127,10 @@ class AccountsRepository extends DoctrineRepository
     {
         $hydrator = new ClassMethods();
 
-        $account = $hydrator->extract($data[0]);
+        $account   = $hydrator->extract($data[0]);
         $character = $hydrator->extract($account['character']);
 
-        if (! $data[1])
+        if ( ! $data[1])
         {
             $data[1] = new LotgdEntity\AccountsEverypage();
             $data[1]->setAcctid($account['acctid']);

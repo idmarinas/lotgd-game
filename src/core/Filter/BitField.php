@@ -27,7 +27,7 @@ class BitField implements FilterInterface
      */
     public function filter($value)
     {
-        if (! is_array($value))
+        if ( ! is_array($value))
         {
             return (int) $value;
         }

@@ -36,6 +36,7 @@ class Http
      *
      * @param string $name
      * @param array  $arguments
+     * @param mixed  $method
      *
      * @return mixed the returned value from the resolved method
      */
@@ -48,7 +49,7 @@ class Http
 
         $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**
@@ -63,8 +64,6 @@ class Http
 
     /**
      * Return all get parameters.
-     *
-     * @return array
      */
     public static function getQueryAll(): array
     {
@@ -127,7 +126,7 @@ class Http
         {
             $post[$var] = $val;
         }
-        elseif (isset($post[$var]) && isset($post[$var][$sub]))
+        elseif (isset($post[$var], $post[$var][$sub]))
         {
             $post[$var][$sub] = $val;
         }
@@ -137,8 +136,6 @@ class Http
 
     /**
      * Get all post data.
-     *
-     * @return array
      */
     public static function getPostAll(): array
     {
@@ -173,8 +170,6 @@ class Http
         {
             return $cookie->offsetGet($name);
         }
-
-        return null;
     }
 
     /**
@@ -192,7 +187,7 @@ class Http
     {
         setcookie($name, $value, strtotime($duration), $path, $domain, $secure, $httponly);
 
-        if (! self::$cookies instanceof Cookie)
+        if ( ! self::$cookies instanceof Cookie)
         {
             self::$cookies = self::$instance->getCookie();
         }

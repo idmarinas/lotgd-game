@@ -19,7 +19,7 @@ use Twig\Node\Node as TwigNode;
 
 class Node extends TwigNode
 {
-    public function __construct(AbstractExpression $expr, int $lineno = 0, string $tag = null)
+    public function __construct(AbstractExpression $expr, int $lineno = 0, ?string $tag = null)
     {
         parent::__construct(['expr' => $expr], [], $lineno, $tag);
     }

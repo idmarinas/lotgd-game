@@ -36,13 +36,11 @@ class AccessKeys
 
     /**
      * Create access key.
-     *
-     * @return string
      */
     public function create(string $label, array &$attributes): string
     {
         $label = $this->filter($label);
-        $key = $this->checkAccessKey($label);
+        $key   = $this->checkAccessKey($label);
 
         $this->accesskeys[strtolower($key)] = true;
 
@@ -56,11 +54,11 @@ class AccessKeys
             }
 
             $pregKey = preg_quote($key, '/');
-            $label = \preg_replace("/^$pregKey/", "`H{$key}´H", $label, 1);
+            $label   = \preg_replace("/^{$pregKey}/", "`H{$key}´H", $label, 1);
 
             if (false === strpos($label, '`H'))
             {
-                $label = preg_replace("/([^`´])$pregKey/", "\$1`H{$key}´H", $label, 1);
+                $label = preg_replace("/([^`´]){$pregKey}/", "\$1`H{$key}´H", $label, 1);
             }
         }
 
@@ -81,7 +79,7 @@ class AccessKeys
         {
             $char = substr($label, 0, 1);
 
-            if (! ($this->accesskeys[strtolower($char)] ?? false))
+            if ( ! ($this->accesskeys[strtolower($char)] ?? false))
             {
                 $i = \strpos($label, $char, 2);
 
@@ -105,7 +103,7 @@ class AccessKeys
 
         $ignoreuntil = '';
 
-        for ($i = 0; $i < $strlen; $i++)
+        for ($i = 0; $i < $strlen; ++$i)
         {
             $char = substr($label, $i, 1);
 
@@ -122,7 +120,7 @@ class AccessKeys
             {
                 $ignoreuntil = '';
             }
-            elseif (! ($this->accesskeys[strtolower($char)] ?? false) && (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) && '' == $ignoreuntil)
+            elseif ( ! ($this->accesskeys[strtolower($char)] ?? false) && (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) && '' == $ignoreuntil)
             {
                 break;
             }
@@ -133,12 +131,10 @@ class AccessKeys
 
     /**
      * Filter label.
-     *
-     * @return string
      */
     private function filter(string $label): string
     {
-        if (! $this->filterChain)
+        if ( ! $this->filterChain)
         {
             $this->filterChain = new Filter\FilterChain();
             $this->filterChain->attach(new Filter\StringTrim())

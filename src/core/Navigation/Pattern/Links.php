@@ -31,7 +31,7 @@ trait Links
      */
     public function addLink(string $link)
     {
-        if (! isset($this->links[$link]))
+        if ( ! isset($this->links[$link]))
         {
             $this->links[$link] = ['blocked' => false];
         }
@@ -118,8 +118,6 @@ trait Links
 
     /**
      * Check if link is blocked.
-     *
-     * @return bool
      */
     public function isBlocked(string $link): bool
     {
@@ -142,8 +140,6 @@ trait Links
 
     /**
      * Check if link is hide.
-     *
-     * @return bool
      */
     public function isHided(string $link): bool
     {
@@ -168,19 +164,17 @@ trait Links
      * Check if header has navs to show.
      *
      * @param string $label
-     *
-     * @return bool
      */
     public function headerHasNavs($label): bool
     {
-        if (! isset($this->navs[$label]))
+        if ( ! isset($this->navs[$label]))
         {
             return false;
         }
 
         foreach ($this->navs[$label] as $nav)
         {
-            if (! $this->isBlocked($nav['link']) || ! $this->isHided($nav['link']))
+            if ( ! $this->isBlocked($nav['link']) || ! $this->isHided($nav['link']))
             {
                 return true;
             }
@@ -191,14 +185,12 @@ trait Links
 
     /**
      * Block a link.
-     *
-     * @return self
      */
     protected function block(string $link, array $options): self
     {
         $options = array_merge([
             'blocked' => true,
-            'hide' => false
+            'hide'    => false,
         ], $options);
 
         if (isset($this->links[$link]))

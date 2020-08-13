@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Form\Element;
 
+use Laminas\Form\Element\Select;
 use Lotgd\Core\Form\LotgdElementFactoryInterface;
 use Lotgd\Core\Pattern as PatternCore;
-use Laminas\Form\Element\Select;
 
 class LotgdTheme extends Select implements LotgdElementFactoryInterface
 {

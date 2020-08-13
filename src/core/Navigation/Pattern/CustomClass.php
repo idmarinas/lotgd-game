@@ -42,7 +42,7 @@ trait CustomClass
     /**
      * Set class name for header.
      *
-     * @param string $classHeader Class name for header.
+     * @param string $classHeader class name for header
      *
      * @return self
      */
@@ -66,7 +66,7 @@ trait CustomClass
     /**
      * Set class name for nav.
      *
-     * @param string $classNav Class name for nav.
+     * @param string $classNav class name for nav
      *
      * @return self
      */

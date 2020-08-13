@@ -49,7 +49,7 @@ class Moderatedcomments
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
+     * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      */
     private $moddate = '0000-00-00 00:00:00';
 

@@ -22,8 +22,6 @@ class MotdRepository extends DoctrineRepository
 {
     /**
      * Get last MOTD.
-     *
-     * @return array|null
      */
     public function getLastMotd(?int $userId = null): ?array
     {
@@ -40,7 +38,7 @@ class MotdRepository extends DoctrineRepository
                 ->getArrayResult()
             ;
 
-            if (! $result)
+            if ( ! $result)
             {
                 return null;
             }
@@ -69,8 +67,6 @@ class MotdRepository extends DoctrineRepository
      * Get MoTD item info.
      *
      * @param int|null $userId
-     *
-     * @return array|null
      */
     public function getEditMotdItem(int $motdId): ?array
     {
@@ -88,7 +84,7 @@ class MotdRepository extends DoctrineRepository
                 ->getArrayResult()
             ;
 
-            if (! $result)
+            if ( ! $result)
             {
                 return null;
             }
@@ -111,8 +107,6 @@ class MotdRepository extends DoctrineRepository
      *
      * @param array $motd   Information of a motd
      * @param int   $userId Id of user to get it's vote
-     *
-     * @return array
      */
     public function appendPollResults(array $motd, $userId): array
     {
@@ -137,10 +131,10 @@ class MotdRepository extends DoctrineRepository
             $q = $this->_em->createQuery('SELECT p.choice FROM Lotgd\Core\Entity\PollResults p WHERE p.motditem = :motditem AND p.account = :acct');
             $q->setParameters([
                 'motditem' => $motd['motditem'],
-                'acct' => $userId
+                'acct'     => $userId,
             ]);
 
-            $result = $q->getOneOrNullResult();
+            $result                         = $q->getOneOrNullResult();
             $motd['pollResult']['userVote'] = $result['choice'] ?? null;
         }
 
@@ -173,8 +167,6 @@ class MotdRepository extends DoctrineRepository
 
     /**
      * Get last Motd date.
-     *
-     * @return \DateTime|null
      */
     public function getLastMotdDate(): ?\DateTime
     {

@@ -28,8 +28,8 @@ class TextTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
-                'constraints' => [new Assert\Length(['min' => 1, 'max' => 25, 'allowEmptyString' => false])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 1, 'max' => 25, 'allowEmptyString' => false])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class TextTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TitlesTranslation::class
+            'data_class' => TitlesTranslation::class,
         ]);
     }
 }

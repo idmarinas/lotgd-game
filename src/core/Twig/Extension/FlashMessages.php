@@ -42,7 +42,7 @@ class FlashMessages extends AbstractExtension
     public function display()
     {
         $container = $this->getFlashMessages()->getMessages();
-        $output = '';
+        $output    = '';
 
         foreach ($container as $type => $messages)
         {
@@ -51,9 +51,9 @@ class FlashMessages extends AbstractExtension
                 if (is_array($message))
                 {
                     $message['message'] = $this->getSanitize()->fullSanitize($message['message']);
-                    $message['id'] = $message['id'] ?? $id;
-                    $message['class'] = $message['class'] ?? $type;
-                    $message['close'] = $message['close'] ?? true;
+                    $message['id']      = $message['id']    ?? $id;
+                    $message['class']   = $message['class'] ?? $type;
+                    $message['close']   = $message['close'] ?? true;
 
                     $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', $message);
 
@@ -62,9 +62,9 @@ class FlashMessages extends AbstractExtension
 
                 $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', [
                     'message' => $this->getSanitize()->fullSanitize($message),
-                    'class' => $type,
-                    'close' => true,
-                    'id' => $id
+                    'class'   => $type,
+                    'close'   => true,
+                    'id'      => $id,
                 ]);
             }
         }
@@ -79,7 +79,7 @@ class FlashMessages extends AbstractExtension
      */
     public function getFlashMessages(): CoreFlashMessages
     {
-        if (! $this->flashMessages instanceof CoreFlashMessages)
+        if ( ! $this->flashMessages instanceof CoreFlashMessages)
         {
             $this->flashMessages = $this->getContainer(CoreFlashMessages::class);
         }

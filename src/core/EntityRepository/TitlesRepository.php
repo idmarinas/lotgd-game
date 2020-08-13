@@ -21,10 +21,8 @@ class TitlesRepository extends DoctrineRepository
     /**
      * Find one title by id.
      * Title is translated.
-     *
-     * @return array|null
      */
-    public function findOneTitleById(int $id)
+    public function findOneTitleById(int $id): ?array
     {
         try
         {
@@ -49,10 +47,8 @@ class TitlesRepository extends DoctrineRepository
     /**
      * Get an array of titles by ids.
      * Titles is translated.
-     *
-     * @return array|null
      */
-    public function findTitlesById(array $ids)
+    public function findTitlesById(array $ids): ?array
     {
         try
         {

@@ -31,92 +31,92 @@ class CompanionsType extends AbstractType
     {
         $builder
             ->add('companionactive', CheckboxType::class, [
-                'label' => 'companion_active',
-                'required' => false
+                'label'    => 'companion_active',
+                'required' => false,
             ])
             ->add('name', TranslatableFieldType::class, [
                 'personal_translation' => CompanionsTranslation::class,
-                'widget' => CreaturesFieldType\NameTranslationType::class,
-                'field' => 'name',
-                'label' => 'name',
+                'widget'               => CreaturesFieldType\NameTranslationType::class,
+                'field'                => 'name',
+                'label'                => 'name',
             ])
             ->add('category', TranslatableFieldType::class, [
                 'personal_translation' => CompanionsTranslation::class,
-                'widget' => CreaturesFieldType\CategoryTranslationType::class,
-                'field' => 'category',
-                'label' => 'category',
+                'widget'               => CreaturesFieldType\CategoryTranslationType::class,
+                'field'                => 'category',
+                'label'                => 'category',
             ])
             ->add('description', TranslatableFieldType::class, [
                 'personal_translation' => CompanionsTranslation::class,
-                'widget' => CreaturesFieldType\TextareaTranslationType::class,
-                'field' => 'description',
-                'label' => 'description',
+                'widget'               => CreaturesFieldType\TextareaTranslationType::class,
+                'field'                => 'description',
+                'label'                => 'description',
             ])
             ->add('dyingtext', TranslatableFieldType::class, [
                 'personal_translation' => CompanionsTranslation::class,
-                'widget' => CreaturesFieldType\TextTranslationType::class,
-                'field' => 'dyingtext',
-                'label' => 'dying_text',
+                'widget'               => CreaturesFieldType\TextTranslationType::class,
+                'field'                => 'dyingtext',
+                'label'                => 'dying_text',
             ])
             ->add('jointext', TranslatableFieldType::class, [
                 'personal_translation' => CompanionsTranslation::class,
-                'widget' => CreaturesFieldType\TextareaTranslationType::class,
-                'field' => 'jointext',
-                'label' => 'join_text',
+                'widget'               => CreaturesFieldType\TextareaTranslationType::class,
+                'field'                => 'jointext',
+                'label'                => 'join_text',
             ])
             ->add('companionlocation', LocationType::class, [
-                'label' => 'companion_location'
+                'label' => 'companion_location',
             ])
             ->add('attack', NumberType::class, [
-                'label' => 'attack'
+                'label' => 'attack',
             ])
             ->add('attackperlevel', NumberType::class, [
-                'label' => 'attack_per_level'
+                'label' => 'attack_per_level',
             ])
             ->add('defense', NumberType::class, [
-                'label' => 'defense'
+                'label' => 'defense',
             ])
             ->add('defenseperlevel', NumberType::class, [
-                'label' => 'defense_per_level'
+                'label' => 'defense_per_level',
             ])
             ->add('maxhitpoints', NumberType::class, [
-                'label' => 'max_hitpoints'
+                'label' => 'max_hitpoints',
             ])
             ->add('maxhitpointsperlevel', NumberType::class, [
-                'label' => 'max_hitpoints_per_level'
+                'label' => 'max_hitpoints_per_level',
             ])
             ->add('cannotdie', CheckboxType::class, [
-                'label' => 'cannot_die',
-                'required' => false
+                'label'    => 'cannot_die',
+                'required' => false,
             ])
             ->add('cannotbehealed', CheckboxType::class, [
-                'label' => 'cannot_be_healed',
-                'required' => false
+                'label'    => 'cannot_be_healed',
+                'required' => false,
             ])
             ->add('companioncostdks', NumberType::class, [
-                'label' => 'cost_dk'
+                'label' => 'cost_dk',
             ])
             ->add('companioncostgems', NumberType::class, [
-                'label' => 'cost_gems'
+                'label' => 'cost_gems',
             ])
             ->add('companioncostgold', NumberType::class, [
-                'label' => 'cost_gold'
+                'label' => 'cost_gold',
             ])
 
             ->add('allowinshades', CheckboxType::class, [
-                'label' => 'allow_in_shades',
-                'required' => false
+                'label'    => 'allow_in_shades',
+                'required' => false,
             ])
             ->add('allowinpvp', CheckboxType::class, [
-                'label' => 'allow_in_pvp',
-                'required' => false
+                'label'    => 'allow_in_pvp',
+                'required' => false,
             ])
             ->add('allowintrain', CheckboxType::class, [
-                'label' => 'allow_in_train',
-                'required' => false
+                'label'    => 'allow_in_train',
+                'required' => false,
             ])
             ->add('abilities', CreaturesFieldType\AbilitiesType::class, [
-                'label' => 'abilities'
+                'label' => 'abilities',
             ])
 
             ->add('save', SubmitType::class, ['label' => 'save.button'])
@@ -126,8 +126,8 @@ class CompanionsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Companions::class,
-            'translation_domain' => 'form-core-grotto-companions'
+            'data_class'         => Companions::class,
+            'translation_domain' => 'form-core-grotto-companions',
         ]);
     }
 }

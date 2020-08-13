@@ -19,7 +19,7 @@ class Scope
     private $data = [];
     private $left = false;
 
-    public function __construct(self $parent = null)
+    public function __construct(?self $parent = null)
     {
         $this->parent = $parent;
     }
@@ -52,9 +52,12 @@ class Scope
      * @scope string $key
      * @scope mixed  $value
      *
-     * @return $this
+     * @param mixed $key
+     * @param mixed $value
      *
      * @throws \LogicException
+     *
+     * @return $this
      */
     public function set($key, $value)
     {
@@ -72,6 +75,8 @@ class Scope
      * Tests if a data is visible from current scope.
      *
      * @scope string $key
+     *
+     * @param mixed $key
      *
      * @return bool
      */
@@ -95,6 +100,9 @@ class Scope
      *
      * @scope string $key
      * @scope mixed  $default
+     *
+     * @param mixed      $key
+     * @param mixed|null $default
      *
      * @return mixed
      */

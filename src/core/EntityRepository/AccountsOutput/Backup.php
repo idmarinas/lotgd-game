@@ -20,8 +20,6 @@ trait Backup
 {
     /**
      * Delete output of account.
-     *
-     * @return int
      */
     public function backupDeleteDataFromAccount(int $accountId): int
     {

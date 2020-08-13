@@ -25,7 +25,7 @@ trait Navigation
      */
     public function getNavigation()
     {
-        if (! $this->lotgdNavigation instanceof NavigationCore)
+        if ( ! $this->lotgdNavigation instanceof NavigationCore)
         {
             $this->lotgdNavigation = $this->getContainer(NavigationCore::class);
         }

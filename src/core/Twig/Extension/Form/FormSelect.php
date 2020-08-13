@@ -13,14 +13,14 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Select as SelectElement;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\View\Helper\FormHidden;
 use Laminas\Stdlib\ArrayUtils;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormSelect extends AbstractElement
 {
@@ -39,14 +39,14 @@ class FormSelect extends AbstractElement
      * @var array
      */
     protected $validSelectAttributes = [
-        'name' => true,
+        'name'         => true,
         'autocomplete' => true,
-        'autofocus' => true,
-        'disabled' => true,
-        'form' => true,
-        'multiple' => true,
-        'required' => true,
-        'size' => true
+        'autofocus'    => true,
+        'disabled'     => true,
+        'form'         => true,
+        'multiple'     => true,
+        'required'     => true,
+        'size'         => true,
     ];
 
     /**
@@ -57,8 +57,8 @@ class FormSelect extends AbstractElement
     protected $validOptionAttributes = [
         'disabled' => true,
         'selected' => true,
-        'label' => true,
-        'value' => true,
+        'label'    => true,
+        'value'    => true,
     ];
 
     /**
@@ -68,7 +68,7 @@ class FormSelect extends AbstractElement
      */
     protected $validOptgroupAttributes = [
         'disabled' => true,
-        'label' => true,
+        'label'    => true,
     ];
 
     protected $translatableAttributes = [
@@ -100,7 +100,7 @@ class FormSelect extends AbstractElement
      */
     public function render(Environment $env, ElementInterface $element)
     {
-        if (! $element instanceof SelectElement)
+        if ( ! $element instanceof SelectElement)
         {
             throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Select', __METHOD__));
         }
@@ -113,7 +113,7 @@ class FormSelect extends AbstractElement
         }
 
         $translator = $this->getTranslator();
-        $options = $element->getValueOptions();
+        $options    = $element->getValueOptions();
 
         if (null !== ($emptyOption = $element->getEmptyOption()))
         {
@@ -122,7 +122,7 @@ class FormSelect extends AbstractElement
 
         $element->setAttribute('class', 'ui lotgd dropdown '.$element->getAttribute('class'));
         $attributes = $element->getAttributes();
-        $value = $this->validateMultiValue($element->getValue(), $attributes);
+        $value      = $this->validateMultiValue($element->getValue(), $attributes);
 
         $attributes['name'] = $name;
 
@@ -166,14 +166,15 @@ class FormSelect extends AbstractElement
      * </code>
      *
      * @param array $selectedOptions Option values that should be marked as selected
+     * @param mixed $env
      *
      * @return string
      */
     public function renderOptions($env, array $options, array $selectedOptions = [])
     {
-        $template = '<option %s>%s</option>';
+        $template      = '<option %s>%s</option>';
         $optionStrings = [];
-        $escapeHtml = $env->getFilter('escape')->getCallable();
+        $escapeHtml    = $env->getFilter('escape')->getCallable();
 
         foreach ($options as $key => $optionSpec)
         {
@@ -181,7 +182,7 @@ class FormSelect extends AbstractElement
             {
                 $optionSpec = [
                     'label' => $optionSpec,
-                    'value' => $key
+                    'value' => $key,
                 ];
             }
 
@@ -191,8 +192,8 @@ class FormSelect extends AbstractElement
                 continue;
             }
 
-            $value = $optionSpec['value'] ?? '';
-            $label = $optionSpec['label'] ?? '';
+            $value    = $optionSpec['value']    ?? '';
+            $label    = $optionSpec['label']    ?? '';
             $selected = $optionSpec['selected'] ?? false;
             $disabled = $optionSpec['disabled'] ?? false;
 
@@ -217,7 +218,7 @@ class FormSelect extends AbstractElement
             }
 
             $this->validTagAttributes = $this->validOptionAttributes;
-            $optionStrings[] = sprintf(
+            $optionStrings[]          = sprintf(
                 $template,
                 $this->createAttributesString($env, $attributes),
                 $escapeHtml($env, $label, 'html')
@@ -234,6 +235,8 @@ class FormSelect extends AbstractElement
      * an optgroup is simply an option that has an additional "options" key
      * with an array following the specification for renderOptions().
      *
+     * @param mixed $env
+     *
      * @return string
      */
     public function renderOptgroup($env, array $optgroup, array $selectedOptions = [])
@@ -249,9 +252,9 @@ class FormSelect extends AbstractElement
         }
 
         $this->validTagAttributes = $this->validOptgroupAttributes;
-        $attributes = $this->createAttributesString($env, $optgroup);
+        $attributes               = $this->createAttributesString($env, $optgroup);
 
-        if (! empty($attributes))
+        if ( ! empty($attributes))
         {
             $attributes = ' '.$attributes;
         }
@@ -281,9 +284,9 @@ class FormSelect extends AbstractElement
      *
      * @param mixed $value
      *
-     * @return array
-     *
      * @throws Exception\DomainException
+     *
+     * @return array
      */
     protected function validateMultiValue($value, array $attributes)
     {
@@ -296,12 +299,12 @@ class FormSelect extends AbstractElement
         {
             return explode(',', $value);
         }
-        elseif (! is_array($value))
+        elseif ( ! is_array($value))
         {
             return [$value];
         }
 
-        if (! isset($attributes['multiple']) || ! $attributes['multiple'])
+        if ( ! isset($attributes['multiple']) || ! $attributes['multiple'])
         {
             throw new Exception\DomainException(sprintf('%s does not allow specifying multiple selected values when the element does not have a multiple '.'attribute set to a boolean true', __CLASS__));
         }
@@ -322,7 +325,7 @@ class FormSelect extends AbstractElement
      */
     protected function getFormHiddenHelper()
     {
-        if (! $this->formHiddenHelper instanceof FormHidden)
+        if ( ! $this->formHiddenHelper instanceof FormHidden)
         {
             $this->formHiddenHelper = new FormHidden();
         }

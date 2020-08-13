@@ -30,22 +30,22 @@ class TitlesType extends AbstractType
         $builder
             ->add('dk', NumberType::class, [
                 'label' => 'dk',
-                'attr' => [
-                    'min' => 0,
-                    'step' => 1
-                ]
+                'attr'  => [
+                    'min'  => 0,
+                    'step' => 1,
+                ],
             ])
             ->add('male', TranslatableFieldType::class, [
                 'personal_translation' => TitlesTranslation::class,
-                'widget' => CreaturesFieldType\TextTranslationType::class,
-                'field' => 'male',
-                'label' => 'male',
+                'widget'               => CreaturesFieldType\TextTranslationType::class,
+                'field'                => 'male',
+                'label'                => 'male',
             ])
             ->add('female', TranslatableFieldType::class, [
                 'personal_translation' => TitlesTranslation::class,
-                'widget' => CreaturesFieldType\TextTranslationType::class,
-                'field' => 'female',
-                'label' => 'female',
+                'widget'               => CreaturesFieldType\TextTranslationType::class,
+                'field'                => 'female',
+                'label'                => 'female',
             ])
             ->add('save', SubmitType::class, ['label' => 'save.button'])
         ;
@@ -54,8 +54,8 @@ class TitlesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Titles::class,
-            'translation_domain' => 'form-core-grotto-titles'
+            'data_class'         => Titles::class,
+            'translation_domain' => 'form-core-grotto-titles',
         ]);
     }
 }

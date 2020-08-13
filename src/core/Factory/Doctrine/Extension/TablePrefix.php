@@ -13,16 +13,16 @@
 namespace Lotgd\Core\Factory\Doctrine\Extension;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Doctrine\Extension\TablePrefix as LotgdTablePrefix;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Doctrine\Extension\TablePrefix as LotgdTablePrefix;
 
 class TablePrefix implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $options = $container->get('GameConfig')['lotgd_core'];
-        $prefix = $options['db']['prefix'] ?? '';
+        $prefix  = $options['db']['prefix'] ?? '';
 
         return new LotgdTablePrefix($prefix);
     }

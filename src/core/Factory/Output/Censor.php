@@ -13,17 +13,17 @@
 namespace Lotgd\Core\Factory\Output;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Output\Censor as OutputCensor;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Output\Censor as OutputCensor;
 
 class Censor implements FactoryInterface
 {
     const LOTGD_DICTIONARY_PATH = 'data/dictionary';
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $language = \Locale::getDefault();
+        $language  = \Locale::getDefault();
         $profanity = new OutputCensor();
         $profanity->addDictionary(self::LOTGD_DICTIONARY_PATH.'/en.php'); //-- Custom dictionary
 

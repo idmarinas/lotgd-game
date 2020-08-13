@@ -12,10 +12,10 @@
 
 namespace Lotgd\Core\Output;
 
+use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
 use Lotgd\Core\Pattern;
-use Laminas\Filter;
 
 class Commentary
 {
@@ -53,7 +53,7 @@ class Commentary
      */
     public function moderateComments(?array $post): bool
     {
-        if (! $post)
+        if ( ! $post)
         {
             return false;
         }
@@ -69,11 +69,11 @@ class Commentary
         global $session;
 
         //-- Clean comment
-        $post['comment'] = $this->cleanComment($post['comment']);
+        $post['comment']    = $this->cleanComment($post['comment']);
         $post['commentRaw'] = $post['comment']; //-- Only filter for save safe in DB
 
         //-- Check if have comment and them process commands in comment
-        if (! $post['comment'] || ! $this->processCommands($post))
+        if ( ! $post['comment'] || ! $this->processCommands($post))
         {
             return false;
         }
@@ -83,9 +83,9 @@ class Commentary
         {
             $clanInfo = \LotgdCache::getItem("commentary-claninfo-{$session['user']['clanid']}");
 
-            if (! is_array($clanInfo) || empty($clanInfo))
+            if ( ! is_array($clanInfo) || empty($clanInfo))
             {
-                $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
+                $clanRep  = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
                 $clanInfo = $clanRep->extractEntity($clanInfo);
 
@@ -94,19 +94,19 @@ class Commentary
                 \LotgdCache::setItem("commentary-claninfo-{$session['user']['clanid']}", $clanInfo);
             }
 
-            $post['clanId'] = $session['user']['clanid'];
-            $post['clanRank'] = $session['user']['clanrank'];
-            $post['clanName'] = $clanInfo['clanname'];
+            $post['clanId']        = $session['user']['clanid'];
+            $post['clanRank']      = $session['user']['clanrank'];
+            $post['clanName']      = $clanInfo['clanname'];
             $post['clanNameShort'] = $clanInfo['clanshort'];
         }
 
-        $post['author'] = $session['user']['acctid'];
+        $post['author']     = $session['user']['acctid'];
         $post['authorName'] = $session['user']['name'];
 
         //-- Apply profanity filter
-        $censor = $this->getCensor();
-        $post['comment'] = $censor->filter($post['comment']);
-        $post['commentOri'] = $censor->getOrigString();
+        $censor               = $this->getCensor();
+        $post['comment']      = $censor->filter($post['comment']);
+        $post['commentOri']   = $censor->getOrigString();
         $post['commentMatch'] = $censor->getMatchWords();
 
         $args = modulehook('postcomment', ['data' => $post]);
@@ -129,7 +129,7 @@ class Commentary
      */
     public function getRepository()
     {
-        if (! $this->repository instanceof CommentaryRepository)
+        if ( ! $this->repository instanceof CommentaryRepository)
         {
             $this->repository = $this->getDoctrineRepository(LotgdEntity\Commentary::class);
         }
@@ -230,7 +230,7 @@ class Commentary
      */
     public function cleanComment(?string $comment): string
     {
-        if (! $comment)
+        if ( ! $comment)
         {
             return '';
         }
@@ -288,18 +288,18 @@ class Commentary
 
         $domain = 'app-commentary';
 
-        $comsecs = [];
-        $comsecs['village'] = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
-        $comsecs['superuser'] = \LotgdTranslator::t('section.superuser', [], $domain);
-        $comsecs['shade'] = \LotgdTranslator::t('section.shade', [], $domain);
+        $comsecs                = [];
+        $comsecs['village']     = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
+        $comsecs['superuser']   = \LotgdTranslator::t('section.superuser', [], $domain);
+        $comsecs['shade']       = \LotgdTranslator::t('section.shade', [], $domain);
         $comsecs['grassyfield'] = \LotgdTranslator::t('section.grassyfield', [], $domain);
-        $comsecs['inn'] = getsetting('innname', LOCATION_INN);
-        $comsecs['motd'] = \LotgdTranslator::t('section.motd', [], $domain);
-        $comsecs['veterans'] = \LotgdTranslator::t('section.veterans', [], $domain);
+        $comsecs['inn']         = getsetting('innname', LOCATION_INN);
+        $comsecs['motd']        = \LotgdTranslator::t('section.motd', [], $domain);
+        $comsecs['veterans']    = \LotgdTranslator::t('section.veterans', [], $domain);
         $comsecs['hunterlodge'] = \LotgdTranslator::t('section.hunterlodge', [], $domain);
-        $comsecs['gardens'] = \LotgdTranslator::t('section.gardens', [], $domain);
-        $comsecs['waiting'] = \LotgdTranslator::t('section.waiting', [], $domain);
-        $comsecs['beta'] = \LotgdTranslator::t('section.beta', [], $domain);
+        $comsecs['gardens']     = \LotgdTranslator::t('section.gardens', [], $domain);
+        $comsecs['waiting']     = \LotgdTranslator::t('section.waiting', [], $domain);
+        $comsecs['beta']        = \LotgdTranslator::t('section.beta', [], $domain);
 
         // All of the ones after this will be translated in the modules.
         $comsecs = modulehook('moderate-comment-sections', $comsecs);

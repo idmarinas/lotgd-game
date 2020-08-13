@@ -13,22 +13,21 @@
 namespace Lotgd\Core\Factory\Translator;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Exception;
 use Laminas\I18n\Translator\LoaderPluginManager as ZendLoaderPluginManager;
-use Laminas\ServiceManager\{
-    Config,
-    Factory\FactoryInterface,
-    ServiceLocatorInterface
-};
+use Laminas\ServiceManager\Config;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Exception;
+
 class LoaderPluginManager implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
-        $options = $options ?: [];
+        $options       = $options ?: [];
         $pluginManager = new ZendLoaderPluginManager($container, $options);
 
         // If we do not have a GameConfig service, nothing more to do
-        if (! $container->has('GameConfig'))
+        if ( ! $container->has('GameConfig'))
         {
             return $pluginManager;
         }

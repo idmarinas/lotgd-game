@@ -14,15 +14,15 @@ use Lotgd\Core\Doctrine\ORM\EntityManager as DoctrineEntityManager;
 
 class Doctrine extends EntityManagerFactory
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $options = $container->get('GameConfig')['lotgd_core'];
+        $options       = $container->get('GameConfig')['lotgd_core'];
         $isDevelopment = (bool) ($options['development'] ?? false);
 
         /* @var $options DoctrineORMModuleEntityManager */
-        $options = $this->getOptions($container, 'entitymanager');
+        $options    = $this->getOptions($container, 'entitymanager');
         $connection = $container->get($options->getConnection());
-        $config = $container->get($options->getConfiguration());
+        $config     = $container->get($options->getConfiguration());
 
         // initializing the resolver
         // @todo should actually attach it to a fetched event manager here, and not

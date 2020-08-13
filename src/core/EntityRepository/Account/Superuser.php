@@ -46,8 +46,6 @@ trait Superuser
 
     /**
      * Get all superusers who have the given permission.
-     *
-     * @return int
      */
     public function getSuperuserCountWithPermit(int $permit): int
     {
@@ -72,8 +70,6 @@ trait Superuser
 
     /**
      * Get all superusers who have the given permission.
-     *
-     * @return array|null
      */
     public function getLoginSuperuserWithPermit(string $name, string $password, int $permit): ?array
     {
@@ -84,9 +80,9 @@ trait Superuser
             return $qb
                 ->where('u.login = :name AND u.password = :password AND BIT_AND(u.superuser, :permit) > 0')
                 ->setParameters([
-                    'name' => $name,
+                    'name'     => $name,
                     'password' => $password,
-                    'permit' => $permit
+                    'permit'   => $permit,
                 ])
                 ->setMaxResults(1)
                 ->getQuery()

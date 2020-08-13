@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
+use Laminas\Form\ElementInterface;
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Laminas\Form\ElementInterface;
 
 class FormElementError extends AbstractElement
 {
@@ -61,7 +61,7 @@ class FormElementError extends AbstractElement
 
         $messages = $messages instanceof Traversable ? iterator_to_array($messages) : $messages;
 
-        if (! is_array($messages))
+        if ( ! is_array($messages))
         {
             throw new Exception\DomainException(sprintf('%s expects that $element->getMessages() will return an array or Traversable; received "%s"', __METHOD__, (is_object($messages) ? get_class($messages) : gettype($messages))));
         }
@@ -72,7 +72,7 @@ class FormElementError extends AbstractElement
 
         return $env->renderThemeTemplate('form/element/error.twig', [
             'attributesString' => $attributes,
-            'messages' => $messages
+            'messages'         => $messages,
         ]);
     }
 

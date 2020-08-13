@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\EntityRepository\Account;
 
-use Tracy\Debugger;
 use Laminas\Paginator\Paginator;
+use Tracy\Debugger;
 
 /**
  * Functions for user account.
@@ -52,8 +52,6 @@ trait User
 
     /**
      * Search users.
-     *
-     * @return Paginator|null
      */
     public function userSearchAccounts(string $search, string $order, int $page): ?Paginator
     {

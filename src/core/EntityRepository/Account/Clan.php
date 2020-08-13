@@ -24,12 +24,10 @@ trait Clan
 {
     /**
      * Get author name for description and motd.
-     *
-     * @return array|null
      */
     public function getClanAuthorNameOfMotdDescFromAcctId(int $motdAuthor, int $descAuthor): ?array
     {
-        $query = $this->createQueryBuilder('u');
+        $query     = $this->createQueryBuilder('u');
         $descQuery = $this->createQueryBuilder('s');
 
         try

@@ -42,7 +42,7 @@ class CommentaryDefaultDomainStatusNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('textDomain'))
+        if ( ! $this->scope->has('textDomain'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class CommentaryDefaultDomainStatusNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('textDomain'))
+            if ( ! $arguments->hasNode('textDomain'))
             {
                 $arguments->setNode('textDomain', $this->scope->get('textDomain'));
             }

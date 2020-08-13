@@ -28,8 +28,8 @@ class NameTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
-                'constraints' => [new Assert\Length(['min' => 1, 'max' => 50, 'allowEmptyString' => false])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 1, 'max' => 50, 'allowEmptyString' => false])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class NameTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MountsTranslation::class
+            'data_class' => MountsTranslation::class,
         ]);
     }
 }

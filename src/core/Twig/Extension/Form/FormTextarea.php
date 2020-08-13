@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormTextarea extends AbstractElement
 {
@@ -27,18 +27,18 @@ class FormTextarea extends AbstractElement
      */
     protected $validTagAttributes = [
         'autocomplete' => true,
-        'autofocus' => true,
-        'cols' => true,
-        'dirname' => true,
-        'disabled' => true,
-        'form' => true,
-        'maxlength' => true,
-        'name' => true,
-        'placeholder' => true,
-        'readonly' => true,
-        'required' => true,
-        'rows' => true,
-        'wrap' => true,
+        'autofocus'    => true,
+        'cols'         => true,
+        'dirname'      => true,
+        'disabled'     => true,
+        'form'         => true,
+        'maxlength'    => true,
+        'name'         => true,
+        'placeholder'  => true,
+        'readonly'     => true,
+        'required'     => true,
+        'rows'         => true,
+        'wrap'         => true,
     ];
 
     /**
@@ -67,10 +67,10 @@ class FormTextarea extends AbstractElement
             throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
-        $attributes = $element->getAttributes();
+        $attributes         = $element->getAttributes();
         $attributes['name'] = $name;
-        $content = (string) $element->getValue();
-        $escapeHtml = $env->getFilter('escape')->getCallable();
+        $content            = (string) $element->getValue();
+        $escapeHtml         = $env->getFilter('escape')->getCallable();
 
         return sprintf(
             '<textarea %s>%s</textarea>',

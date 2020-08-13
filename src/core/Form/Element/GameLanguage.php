@@ -13,12 +13,12 @@
 
 namespace Lotgd\Core\Form\Element;
 
-use Lotgd\Core\Form\LotgdElementFactoryInterface;
-use Lotgd\Core\Lib\Settings;
-use Lotgd\Core\Pattern as PatternCore;
 use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Validator;
+use Lotgd\Core\Form\LotgdElementFactoryInterface;
+use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Pattern as PatternCore;
 
 class GameLanguage extends Select implements LotgdElementFactoryInterface, InputProviderInterface
 {
@@ -53,7 +53,7 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
     {
         //-- Get languages available in server.
         $settings = $this->getContainer(Settings::class);
-        $server = explode(',', $settings->getSetting('serverlanguages'));
+        $server   = explode(',', $settings->getSetting('serverlanguages'));
 
         $languages = [];
 
@@ -78,17 +78,17 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
     public function getInputSpecification()
     {
         return [
-            'name' => $this->getName(),
-            'required' => true,
-            'filters' => [],
+            'name'       => $this->getName(),
+            'required'   => true,
+            'filters'    => [],
             'validators' => [
                 ['name' => Validator\NotEmpty::class],
                 [
-                    'name' => Validator\InArray::class,
+                    'name'    => Validator\InArray::class,
                     'options' => [
-                        'haystack' => array_keys($this->validLanguages)
-                    ]
-                ]
+                        'haystack' => array_keys($this->validLanguages),
+                    ],
+                ],
             ],
         ];
     }

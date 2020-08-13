@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
+use Laminas\Form\ElementInterface;
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Laminas\Form\ElementInterface;
 
 class FormTagify extends FormInput
 {

@@ -13,21 +13,21 @@
 namespace Lotgd\Core\Factory\Navigation;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Navigation\Navigation as NavigationCore;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Navigation\Navigation as NavigationCore;
 
 class Navigation implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $config = $container->get('GameConfig');
-        $options = $config['lotgd_core'] ?? [];
+        $config  = $container->get('GameConfig');
+        $options = $config['lotgd_core']             ?? [];
         $classes = $options['navigation']['classes'] ?? [];
 
         $navigation = new NavigationCore();
 
-        if (! empty($classes) && is_array($classes))
+        if ( ! empty($classes) && is_array($classes))
         {
             $navigation->setClassHeader($classes['header'] ?: 'navhead')
                 ->setClassNav($classes['nav'] ?: 'nav')

@@ -21,8 +21,6 @@ trait CommentaryModerate
      * @param bool $showPagination
      * @param bool $canAddComment
      * @param int  $limit
-     *
-     * @return string
      */
     public function commentaryModerateBlock(array $commentary, string $textDomain): string
     {
@@ -38,9 +36,9 @@ trait CommentaryModerate
         $params = [
             'commentary' => $commentary,
             'textDomain' => $textDomain,
-            'comments' => $comments,
-            'sections' => $this->getCommentary()->commentaryLocs(),
-            'formUrl' => $this->commentaryFormUrl()
+            'comments'   => $comments,
+            'sections'   => $this->getCommentary()->commentaryLocs(),
+            'formUrl'    => $this->commentaryFormUrl(),
         ];
 
         return \LotgdTheme::renderThemeTemplate('parts/moderate/commentary.twig', $params);

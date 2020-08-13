@@ -20,8 +20,6 @@ trait Petition
 {
     /**
      * Get user petition link.
-     *
-     * @return string
      */
     public function userPetition(): string
     {
@@ -30,27 +28,25 @@ trait Petition
 
     /**
      * Get admin petition links.
-     *
-     * @return string
      */
     public function adminPetition(): string
     {
         global $session;
 
         $canEditPetitions = (($session['user']['superuser'] ?? 0) & SU_EDIT_PETITIONS);
-        $canEditUsers = (($session['user']['superuser'] ?? 0) & SU_EDIT_USERS);
-        $petitions = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
+        $canEditUsers     = (($session['user']['superuser'] ?? 0) & SU_EDIT_USERS);
+        $petitions        = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
 
         if (isset($session['user']['superuser']) && $canEditPetitions)
         {
-            $petition = \Doctrine::getRepository(\Lotgd\Core\Entity\Petitions::class);
+            $petition  = \Doctrine::getRepository(\Lotgd\Core\Entity\Petitions::class);
             $petitions = $petition->getStatusListCount();
         }
 
         return \LotgdTheme::renderThemeTemplate('parts/admin-petition.twig', [
             'canEditPetitions' => $canEditPetitions,
-            'canEditUsers' => $canEditUsers,
-            'petitions' => $petitions
+            'canEditUsers'     => $canEditUsers,
+            'petitions'        => $petitions,
         ]);
     }
 }

@@ -22,8 +22,6 @@ class ModulesRepository extends DoctrineRepository
 
     /**
      * Restart filemoddate to default value.
-     *
-     * @return int
      */
     public function reinstallModule(string $module): int
     {
@@ -52,8 +50,6 @@ class ModulesRepository extends DoctrineRepository
 
     /**
      * Find modules with this info key.
-     *
-     * @return array
      */
     public function findInfoKeyLike(string $key): array
     {
@@ -64,7 +60,7 @@ class ModulesRepository extends DoctrineRepository
             return $query->select('u.modulename')
                 ->where('u.infokeys LIKE :key AND u.active = 1')
 
-                ->setParameter('key', "%|${key}|%")
+                ->setParameter('key', "%|{$key}|%")
 
                 ->orderBy('u.modulename', 'DESC')
 

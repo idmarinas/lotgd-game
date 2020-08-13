@@ -25,7 +25,7 @@ trait Translator
      */
     public function getTranslator()
     {
-        if (! $this->lotgdTranslator instanceof TranslatorCore)
+        if ( ! $this->lotgdTranslator instanceof TranslatorCore)
         {
             $this->lotgdTranslator = $this->getContainer(TranslatorCore::class);
         }

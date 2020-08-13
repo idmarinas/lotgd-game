@@ -36,9 +36,9 @@ trait Login
             $data = $qb->addSelect('ep')
                 ->where('u.login = :login AND u.password = :password AND u.locked = :locked')
                 ->setParameters([
-                    'login' => $login,
+                    'login'    => $login,
                     'password' => $password,
-                    'locked' => false
+                    'locked'   => false,
                 ])
                 ->leftJoin(LotgdEntity\AccountsEverypage::class, 'ep', Join::WITH, $qb->expr()->eq('ep.acctid', 'u.acctid'))
                 ->getQuery()
@@ -48,7 +48,7 @@ trait Login
             //-- Fail if not found
             if (0 == count($data))
             {
-                return null;
+                return;
             }
 
             return $this->processUserData($data);
@@ -57,14 +57,12 @@ trait Login
         {
             Debugger::log($th);
 
-            return null;
+            return;
         }
     }
 
     /**
      * Logout inactive accounts.
-     *
-     * @return bool
      */
     public function logoutInactiveAccounts(int $timeout): bool
     {
@@ -93,8 +91,6 @@ trait Login
 
     /**
      * Get acctid from login.
-     *
-     * @return void
      */
     public function getAcctIdFromLogin(string $login): int
     {

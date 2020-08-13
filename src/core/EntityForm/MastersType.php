@@ -30,36 +30,36 @@ class MastersType extends AbstractType
         $builder
             ->add('creaturelevel', RangeType::class, [
                 'label' => 'creaturelevel',
-                'attr' => [
-                    'min' => 1,
-                    'max' => getsetting('maxlevel'),
+                'attr'  => [
+                    'min'                   => 1,
+                    'max'                   => getsetting('maxlevel'),
                     'disable_slider_labels' => false,
-                    'step' => 1
-                ]
+                    'step'                  => 1,
+                ],
             ])
             ->add('creaturename', TranslatableFieldType::class, [
                 'personal_translation' => MastersTranslation::class,
-                'widget' => CreaturesFieldType\NameTranslationType::class,
-                'field' => 'creaturename',
-                'label' => 'creaturename',
+                'widget'               => CreaturesFieldType\NameTranslationType::class,
+                'field'                => 'creaturename',
+                'label'                => 'creaturename',
             ])
             ->add('creatureweapon', TranslatableFieldType::class, [
                 'personal_translation' => MastersTranslation::class,
-                'widget' => CreaturesFieldType\WeaponTranslationType::class,
-                'field' => 'creatureweapon',
-                'label' => 'creatureweapon',
+                'widget'               => CreaturesFieldType\WeaponTranslationType::class,
+                'field'                => 'creatureweapon',
+                'label'                => 'creatureweapon',
             ])
             ->add('creaturelose', TranslatableFieldType::class, [
                 'personal_translation' => MastersTranslation::class,
-                'widget' => CreaturesFieldType\LoseTranslationType::class,
-                'field' => 'creaturelose',
-                'label' => 'creaturelose',
+                'widget'               => CreaturesFieldType\LoseTranslationType::class,
+                'field'                => 'creaturelose',
+                'label'                => 'creaturelose',
             ])
             ->add('creaturewin', TranslatableFieldType::class, [
                 'personal_translation' => MastersTranslation::class,
-                'widget' => CreaturesFieldType\WinTranslationType::class,
-                'field' => 'creaturewin',
-                'label' => 'creaturewin',
+                'widget'               => CreaturesFieldType\WinTranslationType::class,
+                'field'                => 'creaturewin',
+                'label'                => 'creaturewin',
             ])
             ->add('save', SubmitType::class, ['label' => 'save.button'])
         ;
@@ -68,8 +68,8 @@ class MastersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Masters::class,
-            'translation_domain' => 'form-core-grotto-master'
+            'data_class'         => Masters::class,
+            'translation_domain' => 'form-core-grotto-master',
         ]);
     }
 }

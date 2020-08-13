@@ -25,7 +25,7 @@ trait Theme
      */
     public function getTheme()
     {
-        if (! $this->lotgdTheme instanceof ThemeCore)
+        if ( ! $this->lotgdTheme instanceof ThemeCore)
         {
             $this->lotgdTheme = $this->getContainer(ThemeCore::class);
         }

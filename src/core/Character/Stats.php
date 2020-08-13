@@ -34,7 +34,7 @@ class Stats
     {
         if (null !== $value)
         {
-            if (! $this->getLastCat())
+            if ( ! $this->getLastCat())
             {
                 $this->addcharstat('Other Info');
             }
@@ -43,7 +43,7 @@ class Stats
         }
         else
         {
-            if (! isset($this->stats[$label]))
+            if ( ! isset($this->stats[$label]))
             {
                 $this->stats[$label] = [];
             }
@@ -60,11 +60,11 @@ class Stats
      */
     public function setcharstat($cat, $label = null, $val)
     {
-        if (! $label)
+        if ( ! $label)
         {
             $this->stats[$cat] = $val;
         }
-        elseif (! isset($this->stats[$cat][$label]))
+        elseif ( ! isset($this->stats[$cat][$label]))
         {
             $oldlabel = $this->getLastCat();
             $this->addcharstat($cat);
@@ -95,8 +95,6 @@ class Stats
         {
             return $this->stats[$section];
         }
-
-        return;
     }
 
     /**
@@ -105,7 +103,7 @@ class Stats
     public function wipeStats()
     {
         $this->lastCat = 'Other Info';
-        $this->stats = [];
+        $this->stats   = [];
 
         return true;
     }

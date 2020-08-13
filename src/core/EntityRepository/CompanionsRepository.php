@@ -52,10 +52,8 @@ class CompanionsRepository extends DoctrineRepository
     /**
      * Find one by id.
      * Entity is translated.
-     *
-     * @return array|null
      */
-    public function findOneCompanionById(int $id)
+    public function findOneCompanionById(int $id): ?array
     {
         try
         {
@@ -80,10 +78,8 @@ class CompanionsRepository extends DoctrineRepository
     /**
      * Get an array by ids.
      * Entities is translated.
-     *
-     * @return array|null
      */
-    public function findCompanionsById(array $ids)
+    public function findCompanionsById(array $ids): ?array
     {
         try
         {

@@ -42,7 +42,7 @@ class CommentaryDefaultLimitNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('limit'))
+        if ( ! $this->scope->has('limit'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class CommentaryDefaultLimitNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('limit'))
+            if ( ! $arguments->hasNode('limit'))
             {
                 $arguments->setNode('limit', $this->scope->get('limit'));
             }

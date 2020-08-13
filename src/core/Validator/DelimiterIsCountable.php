@@ -23,10 +23,10 @@ class DelimiterIsCountable extends IsCountable
      * @var array
      */
     protected $options = [
-        'count' => null,
-        'min' => null,
-        'max' => null,
-        'delimiter' => ','
+        'count'     => null,
+        'min'       => null,
+        'max'       => null,
+        'delimiter' => ',',
     ];
 
     /**
@@ -43,8 +43,6 @@ class DelimiterIsCountable extends IsCountable
      * Set delimiter option.
      *
      * @param string $value
-     *
-     * @return void
      */
     public function setDelimiter($value)
     {

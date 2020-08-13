@@ -33,6 +33,7 @@ class Format
      *
      * @param string $name
      * @param array  $arguments
+     * @param mixed  $method
      *
      * @return mixed the returned value from the resolved method
      */
@@ -45,7 +46,7 @@ class Format
 
         $methods = implode(', ', get_class_methods(self::$instance));
 
-        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**

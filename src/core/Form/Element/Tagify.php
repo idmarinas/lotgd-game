@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Form\Element;
 
-use Lotgd\Core\Filter as LotgdFilter;
 use Laminas\Form\Element;
 use Laminas\InputFilter\InputProviderInterface;
+use Lotgd\Core\Filter as LotgdFilter;
 
 class Tagify extends Element implements InputProviderInterface
 {
@@ -27,7 +27,7 @@ class Tagify extends Element implements InputProviderInterface
     public function getInputSpecification()
     {
         return [
-            'name' => $this->getName(),
+            'name'    => $this->getName(),
             'filters' => [
                 ['name' => LotgdFilter\UnTagify::class],
             ],

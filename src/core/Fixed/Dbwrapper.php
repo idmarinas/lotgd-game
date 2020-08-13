@@ -12,10 +12,10 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
 use Laminas\Db\Metadata\Metadata;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Paginator\Paginator;
+use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
 
 /**
  * Static class to access a basic functions of DB.
@@ -125,7 +125,7 @@ class Dbwrapper
      *
      * @return object
      */
-    public static function delete($table = null, bool $prefixed = null)
+    public static function delete($table = null, ?bool $prefixed = null)
     {
         if (defined('DB_NODB') && ! defined('LINK'))
         {
@@ -163,7 +163,7 @@ class Dbwrapper
      * Navigation menu used with Paginator.
      *
      * @param Laminas\Paginator\Paginator $paginator
-     * @param bool|null                $forcePages Force to show pages if only have 1 page
+     * @param bool|null                   $forcePages Force to show pages if only have 1 page
      */
     public static function pagination(Paginator $paginator, string $url, $forcePages = null)
     {
@@ -185,10 +185,10 @@ class Dbwrapper
             $text = ($page != $paginator->current ? 'common.pagination.page' : 'common.pagination.current');
             \LotgdNavigation::addNav($text, "{$url}{$union}page={$page}", [
                 'params' => [
-                    'page' => $page,
-                    'item' => $minItem,
-                    'total' => $maxItem
-                ]
+                    'page'  => $page,
+                    'item'  => $minItem,
+                    'total' => $maxItem,
+                ],
             ]);
         }
     }
@@ -200,7 +200,7 @@ class Dbwrapper
      *
      * @return string
      */
-    public static function expression(string $expresion = null)
+    public static function expression(?string $expresion = null)
     {
         return self::$wrapper->expression($expresion);
     }
@@ -218,7 +218,7 @@ class Dbwrapper
     /**
      * Get an array of result of DB::query.
      *
-     * @return array
+     * @param mixed $result
      */
     public static function toArray($result): array
     {
@@ -249,8 +249,6 @@ class Dbwrapper
 
     /**
      * Check if table exist.
-     *
-     * @return bool
      */
     public static function table_exists(string $tablename): bool
     {
@@ -262,7 +260,7 @@ class Dbwrapper
         try
         {
             $metadata = new Metadata(self::$wrapper->getAdapter());
-            $table = $metadata->getTable($tablename);
+            $table    = $metadata->getTable($tablename);
 
             return true;
         }
@@ -276,8 +274,6 @@ class Dbwrapper
      * Quote value for safe using in DB.
      *
      * @param string $value
-     *
-     * @return string
      */
     public static function quoteValue($value): string
     {
@@ -299,8 +295,6 @@ class Dbwrapper
 
     /**
      * Check connection to DB.
-     *
-     * @return bool
      */
     public static function connect(): bool
     {

@@ -10,7 +10,7 @@ namespace Lotgd\Core\Installer\Pattern;
 
 trait Upgrade
 {
-    protected $upgrade = false;
+    protected $upgrade        = false;
     protected $upgradeVersion = [];
 
     /**
@@ -39,8 +39,6 @@ trait Upgrade
 
     /**
      * Get if the installation is a upgrade.
-     *
-     * @return bool
      */
     public function isUpgrade(): bool
     {
@@ -49,8 +47,6 @@ trait Upgrade
 
     /**
      * Set that version is upgraded.
-     *
-     * @return self
      */
     public function upgradedVersionOn(int $version): self
     {
@@ -61,8 +57,6 @@ trait Upgrade
 
     /**
      * Get if version is upgraded.
-     *
-     * @return bool
      */
     public function isUpgradedVersion(int $version): bool
     {
@@ -71,8 +65,6 @@ trait Upgrade
 
     /**
      * Get all upgraded versions in actual install.
-     *
-     * @return array
      */
     public function getUpgradedVersion(): array
     {
@@ -81,8 +73,6 @@ trait Upgrade
 
     /**
      * Set all upgraded version in actual install.
-     *
-     * @return self
      */
     public function setUpgradedVersion(array $data): self
     {

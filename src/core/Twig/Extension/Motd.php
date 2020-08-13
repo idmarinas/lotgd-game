@@ -43,7 +43,7 @@ class Motd extends AbstractExtension
      */
     public function getMotdRepository()
     {
-        if (! $this->repository instanceof MotdRepository)
+        if ( ! $this->repository instanceof MotdRepository)
         {
             $this->repository = $this->getDoctrineRepository(\Lotgd\Core\Entity\Motd::class);
         }

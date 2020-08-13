@@ -26,116 +26,115 @@ class BuffType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'name',
-                'required' => false
+                'label'    => 'name',
+                'required' => false,
             ])
             ->add('roundmsg', TextType::class, [
-                'label' => 'roundmsg',
-                'required' => false
+                'label'    => 'roundmsg',
+                'required' => false,
             ])
             ->add('wearoff', TextType::class, [
-                'label' => 'wearoff',
-                'required' => false
+                'label'    => 'wearoff',
+                'required' => false,
             ])
             ->add('effectmsg', TextType::class, [
-                'label' => 'effectmsg',
-                'required' => false
+                'label'    => 'effectmsg',
+                'required' => false,
             ])
             ->add('effectnodmgmsg', TextType::class, [
-                'label' => 'effectnodmgmsg',
-                'required' => false
+                'label'    => 'effectnodmgmsg',
+                'required' => false,
             ])
             ->add('rounds', NumberType::class, [
-                'label' => 'rounds',
-                'required' => false
+                'label'    => 'rounds',
+                'required' => false,
             ])
             ->add('atkmod', NumberType::class, [
                 'label' => 'atkmod',
-                'attr' => [
-                    'step' => 0.01
+                'attr'  => [
+                    'step' => 0.01,
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('defmod', NumberType::class, [
                 'label' => 'defmod',
-                'attr' => [
-                    'step' => 0.01
+                'attr'  => [
+                    'step' => 0.01,
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('regen', NumberType::class, [
-                'label' => 'regen',
-                'required' => false
+                'label'    => 'regen',
+                'required' => false,
             ])
             ->add('minioncount', NumberType::class, [
-                'label' => 'minioncount',
-                'required' => false
+                'label'    => 'minioncount',
+                'required' => false,
             ])
             ->add('minbadguydamage', NumberType::class, [
-                'label' => 'minbadguydamage',
-                'required' => false
+                'label'    => 'minbadguydamage',
+                'required' => false,
             ])
             ->add('maxbadguydamage', NumberType::class, [
-                'label' => 'maxbadguydamage',
-                'required' => false
+                'label'    => 'maxbadguydamage',
+                'required' => false,
             ])
             ->add('mingoodguydamage', NumberType::class, [
-                'label' => 'mingoodguydamage',
-                'required' => false
+                'label'    => 'mingoodguydamage',
+                'required' => false,
             ])
             ->add('maxgoodguydamage', NumberType::class, [
-                'label' => 'maxgoodguydamage',
-                'required' => false
+                'label'    => 'maxgoodguydamage',
+                'required' => false,
             ])
             ->add('lifetap', NumberType::class, [
-                'label' => 'lifetap',
-                'required' => false
+                'label'    => 'lifetap',
+                'required' => false,
             ])
             ->add('damageshield', NumberType::class, [
-                'label' => 'damageshield',
-                'required' => false
+                'label'    => 'damageshield',
+                'required' => false,
             ])
             ->add('badguydmgmod', NumberType::class, [
-                'label' => 'badguydmgmod',
-                'required' => false
+                'label'    => 'badguydmgmod',
+                'required' => false,
             ])
             ->add('badguyatkmod', NumberType::class, [
-                'label' => 'badguyatkmod',
-                'required' => false
+                'label'    => 'badguyatkmod',
+                'required' => false,
             ])
             ->add('badguydefmod', NumberType::class, [
-                'label' => 'badguydefmod',
-                'required' => false
+                'label'    => 'badguydefmod',
+                'required' => false,
             ])
 
             ->add('allowinpvp', CheckboxType::class, [
-                'label' => 'allowinpvp',
-                'required' => false
+                'label'    => 'allowinpvp',
+                'required' => false,
             ])
             ->add('allowintrain', CheckboxType::class, [
-                'label' => 'allowintrain',
-                'required' => false
+                'label'    => 'allowintrain',
+                'required' => false,
             ])
             ->add('survivenewday', CheckboxType::class, [
-                'label' => 'survivenewday',
-                'required' => false
+                'label'    => 'survivenewday',
+                'required' => false,
             ])
             ->add('expireafterfight', CheckboxType::class, [
-                'label' => 'expireafterfight',
-                'required' => false
+                'label'    => 'expireafterfight',
+                'required' => false,
             ])
             ->add('invulnerable', CheckboxType::class, [
-                'label' => 'invulnerable',
-                'required' => false
+                'label'    => 'invulnerable',
+                'required' => false,
             ])
         ;
     }
 
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form-core-grotto-buffs'
+            'translation_domain' => 'form-core-grotto-buffs',
         ]);
     }
 }

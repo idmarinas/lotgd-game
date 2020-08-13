@@ -22,7 +22,7 @@ class Filesystem extends SymfonyFilesystem
      */
     public function listDir(string $dir): array
     {
-        if (! is_dir($dir))
+        if ( ! is_dir($dir))
         {
             throw new IOException(sprintf('Could not scan directory "%s", not found.', $dir));
         }

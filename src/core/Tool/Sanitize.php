@@ -12,8 +12,8 @@
 
 namespace Lotgd\Core\Tool;
 
-use Lotgd\Core\Pattern as PatternCore;
 use Laminas\Filter;
+use Lotgd\Core\Pattern as PatternCore;
 
 class Sanitize
 {
@@ -23,8 +23,6 @@ class Sanitize
     /**
      * Remove all colors code from string.
      * ONLY colors, not include italic, bold... (`i `b).
-     *
-     * @return string
      */
     public function unColorize(string $string): string
     {
@@ -35,8 +33,6 @@ class Sanitize
 
     /**
      * Remove all codes that not are suported.
-     *
-     * @return string
      */
     public function noLotgdCodes(string $string): string
     {
@@ -49,8 +45,6 @@ class Sanitize
     /**
      * Full sanitize a string, removed color and codes.
      * All LoTGD codes included (`i `b `c) and others.
-     *
-     * @return string
      */
     public function fullSanitize(string $string): string
     {
@@ -59,8 +53,6 @@ class Sanitize
 
     /**
      * Prevent for use LoTGD codes like colors and italic, bold...
-     *
-     * @return string
      */
     public function preventLotgdCodes(string $string): string
     {
@@ -69,8 +61,6 @@ class Sanitize
 
     /**
      * Module file names can only contain alpha numeric characters and underscores.
-     *
-     * @return string
      */
     public function moduleNameSanitize(string $string): string
     {
@@ -81,8 +71,6 @@ class Sanitize
      * Sanitize name of player.
      *
      * @param int $spaceAllowed
-     *
-     * @return string
      */
     public function nameSanitize($spaceAllowed, string $name): string
     {
@@ -102,8 +90,6 @@ class Sanitize
      *
      * @param int  $spaceallowed
      * @param bool $admin
-     *
-     * @return string
      */
     public function colorNameSanitize($spaceallowed, string $string, $admin = null): string
     {
@@ -126,8 +112,6 @@ class Sanitize
 
     /**
      * Sanitize html.
-     *
-     * @return string
      */
     public function htmlSanitize(string $string): string
     {
@@ -146,8 +130,6 @@ class Sanitize
      * Remove query param "c" from url.
      *
      * @param string $string Is a valid URL
-     *
-     * @return string
      */
     public function cmdSanitize($string): string
     {
@@ -164,8 +146,6 @@ class Sanitize
 
     /**
      * Remove new line code from string.
-     *
-     * @return string
      */
     public function newLineSanitize(string $string): string
     {
@@ -174,14 +154,12 @@ class Sanitize
 
     /**
      * Sanitize a string to ve valid mb encoding.
-     *
-     * @return string
      */
     public function mbSanitize(string $string): string
     {
         $encode = getsetting('charset', 'UTF-8');
 
-        while (! mb_check_encoding($string, $encode) && strlen($string) > 0)
+        while ( ! mb_check_encoding($string, $encode) && strlen($string) > 0)
         {
             $string = substr($string, 0, strlen($string) - 1);
         }
@@ -193,8 +171,6 @@ class Sanitize
      * Sanitize description of server in LoGDNet.
      *
      * @param string $in
-     *
-     * @return string
      */
     public function logdnetSanitize(string $string): string
     {
@@ -208,8 +184,6 @@ class Sanitize
 
     /**
      * Converts a string into a slug.
-     *
-     * @return string
      */
     public function slugify(string $string): string
     {

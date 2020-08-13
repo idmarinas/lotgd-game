@@ -28,8 +28,8 @@ class WinTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
-                'constraints' => [new Assert\Length(['min' => 0, 'max' => 120, 'allowEmptyString' => true])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 0, 'max' => 120, 'allowEmptyString' => true])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class WinTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CreaturesTranslation::class
+            'data_class' => CreaturesTranslation::class,
         ]);
     }
 }

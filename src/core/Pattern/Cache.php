@@ -28,7 +28,7 @@ trait Cache
      */
     public function getCache()
     {
-        if (! $this->lotgdCache instanceof StorageInterface)
+        if ( ! $this->lotgdCache instanceof StorageInterface)
         {
             $this->lotgdCache = $this->getContainer('Cache\Core\Lotgd');
         }

@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
+use Twig\TwigFunction;
 
 class FormNote extends AbstractElement
 {
@@ -35,7 +35,7 @@ class FormNote extends AbstractElement
     {
         $note = $element->getOption('note');
 
-        if (! $note)
+        if ( ! $note)
         {
             return '';
         }

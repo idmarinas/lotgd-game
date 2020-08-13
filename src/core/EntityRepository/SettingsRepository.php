@@ -20,14 +20,12 @@ class SettingsRepository extends DoctrineRepository
 {
     /**
      * Get a installed version, this avoid cache.
-     *
-     * @return string
      */
     public function getInstalledVersion(): string
     {
         try
         {
-            $query = $this->_em->createQuery("SELECT u.value FROM $this->_entityName u WHERE u.setting = 'installer_version'");
+            $query = $this->_em->createQuery("SELECT u.value FROM {$this->_entityName} u WHERE u.setting = 'installer_version'");
 
             return $query->getSingleScalarResult();
         }
@@ -41,14 +39,12 @@ class SettingsRepository extends DoctrineRepository
 
     /**
      * Set installed version.
-     *
-     * @return self
      */
     public function setInstalledVersion(string $version): self
     {
         try
         {
-            $query = $this->_em->createQuery("UPDATE $this->_entityName u SET u.value = ?1 WHERE u.setting = 'installer_version'");
+            $query = $this->_em->createQuery("UPDATE {$this->_entityName} u SET u.value = ?1 WHERE u.setting = 'installer_version'");
 
             $query->setParameter(1, $version)
                 ->execute()

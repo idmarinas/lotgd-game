@@ -28,8 +28,8 @@ class CategoryTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
-                'constraints' => [new Assert\Length(['min' => 0, 'max' => 50, 'allowEmptyString' => true])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 0, 'max' => 50, 'allowEmptyString' => true])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class CategoryTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CompanionsTranslation::class
+            'data_class' => CompanionsTranslation::class,
         ]);
     }
 }

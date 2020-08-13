@@ -37,7 +37,7 @@ trait Commentary
     ): string {
         global $session;
 
-        $this->textDomain = $textDomain; //-- Default text domain for commentary block
+        $this->textDomain           = $textDomain; //-- Default text domain for commentary block
         $session['user']['chatloc'] = $commentary['section'];
 
         $page = (int) \LotgdHttp::getQuery('commentPage', 1);
@@ -45,14 +45,14 @@ trait Commentary
         $comments = $this->getCommentary()->getComments($commentary['section'], $page, $limit);
 
         $params = [
-            'commentary' => $commentary,
-            'textDomain' => $textDomain,
-            'comments' => $comments,
-            'showPagination' => $showPagination,
-            'canAddComment' => $canAddComment,
+            'commentary'        => $commentary,
+            'textDomain'        => $textDomain,
+            'comments'          => $comments,
+            'showPagination'    => $showPagination,
+            'canAddComment'     => $canAddComment,
             'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdHttp::getServer('REQUEST_URI'),
-            'formUrl' => $this->commentaryFormUrl(),
-            'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
+            'formUrl'           => $this->commentaryFormUrl(),
+            'SU_EDIT_COMMENTS'  => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
         return \LotgdTheme::renderThemeTemplate('parts/commentary.twig', $params);
@@ -68,12 +68,12 @@ trait Commentary
         global $session;
 
         $params = [
-            'comment' => $comment,
-            'textDomain' => $textDomain,
-            'commentary' => $commentary,
+            'comment'                 => $comment,
+            'textDomain'              => $textDomain,
+            'commentary'              => $commentary,
             'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
-            'returnLink' => \LotgdHttp::getServer('REQUEST_URI'),
-            'SU_EDIT_COMMENTS' => $session['user']['superuser'] & SU_EDIT_COMMENTS
+            'returnLink'              => \LotgdHttp::getServer('REQUEST_URI'),
+            'SU_EDIT_COMMENTS'        => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
         return \LotgdTheme::renderThemeTemplate('parts/commentary/comment.twig', $params);
@@ -90,7 +90,7 @@ trait Commentary
 
         $textDomain = ($textDomain ?? $this->textDomain) ?: $this->textDomain;
 
-        $logout = (int) getsetting('LOGINTIMEOUT', 900);
+        $logout  = (int) getsetting('LOGINTIMEOUT', 900);
         $offline = new \DateTime('now');
         $offline->sub(new \DateInterval("PT{$logout}S"));
 
@@ -99,9 +99,9 @@ trait Commentary
         //-- Add basic status icons for online/offline/nearby/afk/dnd
         $icon = [ //-- Online in other chat
             // 'icon' => 'images/icons/onlinestatus/online.png',
-            'outIcon' => ' olive circle outline pulse transition looping',
+            'outIcon'    => ' olive circle outline pulse transition looping',
             'insideIcon' => 'green small circle',
-            'label' => $status['online'],
+            'label'      => $status['online'],
         ];
 
         //-- Is a message of the game
@@ -121,36 +121,36 @@ trait Commentary
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/afk.png',
-                'outIcon' => 'circle outline',
+                'outIcon'    => 'circle outline',
                 'insideIcon' => 'grey small circle',
-                'label' => $status['afk'],
+                'label'      => $status['afk'],
             ];
         }
         elseif ('DNI' == strtoupper($comment['chatloc']))
         {
             $icon = [
-                'icon' => 'images/icons/onlinestatus/dni.png',
-                'icon' => 'circle outline',
+                'icon'       => 'images/icons/onlinestatus/dni.png',
+                'icon'       => 'circle outline',
                 'insideIcon' => 'blue small circle',
-                'label' => $status['dni'],
+                'label'      => $status['dni'],
             ];
         }
         elseif ($comment['laston'] < $offline || ! $comment['loggedin'])
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/offline.png',
-                'outIcon' => 'circle outline',
+                'outIcon'    => 'circle outline',
                 'insideIcon' => 'red small circle',
-                'label' => $status['offline'],
+                'label'      => $status['offline'],
             ];
         }
         elseif ($comment['chatloc'] == $session['user']['chatloc'])
         { //-- Online and in same chat
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/nearby.png',
-                'outIcon' => ' olive circle outline tada transition looping',
+                'outIcon'    => ' olive circle outline tada transition looping',
                 'insideIcon' => 'orange small circle',
-                'label' => $status['nearby'],
+                'label'      => $status['nearby'],
             ];
         }
 
@@ -175,11 +175,11 @@ trait Commentary
         global $output;
 
         $params = [
-            'formUrl' => $this->commentaryFormUrl(),
+            'formUrl'    => $this->commentaryFormUrl(),
             'textDomain' => $textDomain,
             'commentary' => $commentary,
-            'colors' => $output->getColors(),
-            'maxChars' => getsetting('maxchars', 200) + 100
+            'colors'     => $output->getColors(),
+            'maxChars'   => getsetting('maxchars', 200) + 100,
         ];
 
         return \LotgdTheme::renderThemeTemplate('parts/commentary/add.twig', $params);
@@ -201,7 +201,7 @@ trait Commentary
 
         $data = \LotgdHttp::getPostAll();
 
-        if (! $data || empty($data))
+        if ( ! $data || empty($data))
         {
             return;
         }
@@ -216,16 +216,16 @@ trait Commentary
      */
     protected function getStatusMessages($textDomain): array
     {
-        if (! $this->onlineStatus)
+        if ( ! $this->onlineStatus)
         {
             $this->onlineStatus = [
-                'game' => $this->getTranslator()->trans('commentary.status.game', [], $textDomain),
-                'you' => $this->getTranslator()->trans('commentary.status.you', [], $textDomain),
-                'afk' => $this->getTranslator()->trans('commentary.status.afk', [], $textDomain),
-                'nearby' => $this->getTranslator()->trans('commentary.status.nearby', [], $textDomain),
+                'game'    => $this->getTranslator()->trans('commentary.status.game', [], $textDomain),
+                'you'     => $this->getTranslator()->trans('commentary.status.you', [], $textDomain),
+                'afk'     => $this->getTranslator()->trans('commentary.status.afk', [], $textDomain),
+                'nearby'  => $this->getTranslator()->trans('commentary.status.nearby', [], $textDomain),
                 'offline' => $this->getTranslator()->trans('commentary.status.offline', [], $textDomain),
-                'dni' => $this->getTranslator()->trans('commentary.status.dni', [], $textDomain),
-                'online' => $this->getTranslator()->trans('commentary.status.online', [], $textDomain),
+                'dni'     => $this->getTranslator()->trans('commentary.status.dni', [], $textDomain),
+                'online'  => $this->getTranslator()->trans('commentary.status.online', [], $textDomain),
             ];
         }
 

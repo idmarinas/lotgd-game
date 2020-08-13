@@ -31,21 +31,21 @@ class WeaponsType extends AbstractType
         $builder
             ->add('weaponname', TranslatableFieldType::class, [
                 'personal_translation' => WeaponsTranslation::class,
-                'widget' => FieldType\NameTranslationType::class,
-                'field' => 'weaponname',
-                'label' => 'weaponname',
+                'widget'               => FieldType\NameTranslationType::class,
+                'field'                => 'weaponname',
+                'label'                => 'weaponname',
             ])
             ->add('level', NumberType::class, [
                 'label' => 'level',
             ])
             ->add('damage', RangeType::class, [
                 'label' => 'damage',
-                'attr' => [
-                    'min' => 1,
-                    'max' => 15,
+                'attr'  => [
+                    'min'                   => 1,
+                    'max'                   => 15,
                     'disable_slider_labels' => false,
-                    'step' => 1
-                ]
+                    'step'                  => 1,
+                ],
             ])
 
             ->add('save', SubmitType::class, ['label' => 'save.button'])
@@ -55,8 +55,8 @@ class WeaponsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Weapons::class,
-            'translation_domain' => 'form-core-grotto-weapons'
+            'data_class'         => Weapons::class,
+            'translation_domain' => 'form-core-grotto-weapons',
         ]);
     }
 }

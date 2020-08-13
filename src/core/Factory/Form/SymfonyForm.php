@@ -33,14 +33,14 @@ use Symfony\Component\Validator\Validation;
 
 class SymfonyForm implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $em = $container->get(\Lotgd\Core\Db\Doctrine::class);
-        $managerRegistry = new ManagerRegistry('default', [], ['default' => $em], null, 'default', 'Doctrine\\ORM\\Proxy\\Proxy');
-        $csrfGenerator = new UriSafeTokenGenerator();
-        $csrfStorage = new NativeSessionTokenStorage();
-        $csrfManager = new CsrfTokenManager($csrfGenerator, $csrfStorage);
-        $filter = new Filter(new CachedReader(new AnnotationReader(), $em->getConfiguration()->getMetadataCacheImpl()));
+        $em                = $container->get(\Lotgd\Core\Db\Doctrine::class);
+        $managerRegistry   = new ManagerRegistry('default', [], ['default' => $em], null, 'default', 'Doctrine\\ORM\\Proxy\\Proxy');
+        $csrfGenerator     = new UriSafeTokenGenerator();
+        $csrfStorage       = new NativeSessionTokenStorage();
+        $csrfManager       = new CsrfTokenManager($csrfGenerator, $csrfStorage);
+        $filter            = new Filter(new CachedReader(new AnnotationReader(), $em->getConfiguration()->getMetadataCacheImpl()));
         $constraintFactory = new ConstraintValidatorFactory();
         $constraintFactory->addValidator('doctrine.orm.validator.unique', new UniqueEntityValidator($managerRegistry));
 

@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Doctrine\Persistance;
 
-use \Doctrine\Persistence\AbstractManagerRegistry;
+use Doctrine\Persistence\AbstractManagerRegistry;
 
 class ManagerRegistry extends AbstractManagerRegistry
 {
@@ -28,19 +28,19 @@ class ManagerRegistry extends AbstractManagerRegistry
         parent::__construct($name, $connections, array_keys($managers), $defaultConnection, $defaultManager, $proxyInterfaceName);
     }
 
+    public function getAliasNamespace($alias): void
+    {
+        throw new \BadMethodCallException('Namespace aliases not supported');
+    }
+
     protected function getService($name)
     {
         return $this->container[$name];
-       //alternatively supply the entity manager here instead
+        //alternatively supply the entity manager here instead
     }
 
-    protected function resetService($name)
+    protected function resetService($name): void
     {
         //don't want to lose the manager
-    }
-
-    public function getAliasNamespace($alias)
-    {
-        throw new \BadMethodCallException('Namespace aliases not supported');
     }
 }

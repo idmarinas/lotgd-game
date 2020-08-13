@@ -14,16 +14,14 @@ namespace Lotgd\Core\Factory\Component;
 
 use Interop\Container\ContainerInterface;
 use Jaxon\Jaxon as JaxonCore;
-use Laminas\ServiceManager\{
-    Factory\FactoryInterface,
-    ServiceLocatorInterface
-};
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Jaxon implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $options = $container->get('GameConfig');
+        $options      = $container->get('GameConfig');
         $jaxonOptions = $options['jaxon'] ?? [];
 
         $jaxon = new JaxonCore();

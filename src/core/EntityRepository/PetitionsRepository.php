@@ -20,12 +20,10 @@ class PetitionsRepository extends DoctrineRepository
 {
     /**
      * Get a list count of petitions.
-     *
-     * @return array
      */
     public function getStatusListCount(): array
     {
-        $qb = $this->createQueryBuilder('u');
+        $qb        = $this->createQueryBuilder('u');
         $petitions = [0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0];
 
         try
@@ -53,8 +51,6 @@ class PetitionsRepository extends DoctrineRepository
 
     /**
      * Get count of petitions for network.
-     *
-     * @return int
      */
     public function getCountPetitionsForNetwork(string $ip, string $lgi): int
     {
@@ -86,8 +82,6 @@ class PetitionsRepository extends DoctrineRepository
 
     /**
      * Delete old petitions.
-     *
-     * @return bool
      */
     public function deleteOldPetitions(): bool
     {

@@ -74,7 +74,7 @@ class Quote implements QuoteStrategy
                 continue;
             }
             // Association defined as Id field
-            $joinColumns = $class->associationMappings[$fieldName]['joinColumns'];
+            $joinColumns            = $class->associationMappings[$fieldName]['joinColumns'];
             $assocQuotedColumnNames = array_map(
                 function ($joinColumn) use ($platform)
                 {
@@ -91,7 +91,7 @@ class Quote implements QuoteStrategy
     /**
      * {@inheritdoc}
      */
-    public function getColumnAlias($columnName, $counter, AbstractPlatform $platform, ClassMetadata $class = null)
+    public function getColumnAlias($columnName, $counter, AbstractPlatform $platform, ?ClassMetadata $class = null)
     {
         // 1 ) Concatenate column name and counter
         // 2 ) Trim the column alias to the maximum identifier length of the platform.

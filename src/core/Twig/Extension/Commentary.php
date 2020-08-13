@@ -15,21 +15,17 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Output\Commentary as CommentaryCore;
 use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\Twig\NodeVisitor\{
-    CommentaryDefaultAddCommentNodeVisitor,
-    CommentaryDefaultDomainStatusNodeVisitor,
-    CommentaryDefaultLimitNodeVisitor,
-    CommentaryDefaultPaginationNodeVisitor,
-    CommentaryDefaultPaginationUrlNodeVisitor,
-    CommentaryNodeVisitor
-};
-use Lotgd\Core\Twig\TokenParser\{
-    CommentaryDefaultAddCommentTokenParser,
-    CommentaryDefaultDomainStatusTokenParser,
-    CommentaryDefaultLimitTokenParser,
-    CommentaryDefaultPaginationTokenParser,
-    CommentaryDefaultPaginationUrlTokenParser
-};
+use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultAddCommentNodeVisitor;
+use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultDomainStatusNodeVisitor;
+use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultLimitNodeVisitor;
+use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultPaginationNodeVisitor;
+use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultPaginationUrlNodeVisitor;
+use Lotgd\Core\Twig\NodeVisitor\CommentaryNodeVisitor;
+use Lotgd\Core\Twig\TokenParser\CommentaryDefaultAddCommentTokenParser;
+use Lotgd\Core\Twig\TokenParser\CommentaryDefaultDomainStatusTokenParser;
+use Lotgd\Core\Twig\TokenParser\CommentaryDefaultLimitTokenParser;
+use Lotgd\Core\Twig\TokenParser\CommentaryDefaultPaginationTokenParser;
+use Lotgd\Core\Twig\TokenParser\CommentaryDefaultPaginationUrlTokenParser;
 use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension
@@ -76,7 +72,7 @@ class Commentary extends AbstractExtension
             new CommentaryDefaultDomainStatusNodeVisitor(),
             new CommentaryDefaultLimitNodeVisitor(),
             new CommentaryDefaultPaginationNodeVisitor(),
-            new CommentaryDefaultPaginationUrlNodeVisitor()
+            new CommentaryDefaultPaginationUrlNodeVisitor(),
         ];
     }
 
@@ -124,7 +120,7 @@ class Commentary extends AbstractExtension
      */
     public function getCommentary(): CommentaryCore
     {
-        if (! $this->commentary instanceof CommentaryCore)
+        if ( ! $this->commentary instanceof CommentaryCore)
         {
             $this->commentary = $this->getContainer(CommentaryCore::class);
         }

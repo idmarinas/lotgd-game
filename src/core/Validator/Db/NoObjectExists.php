@@ -31,7 +31,7 @@ class NoObjectExists extends ObjectExists
     public function isValid($value): bool
     {
         $cleanedValue = $this->cleanSearchValue($value);
-        $match = $this->objectRepository->findOneBy($cleanedValue);
+        $match        = $this->objectRepository->findOneBy($cleanedValue);
 
         if (is_object($match))
         {

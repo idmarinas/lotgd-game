@@ -31,7 +31,7 @@ abstract class AjaxAbstract
         global $session;
 
         //-- Do nothing if there is no active session
-        if (! ($session['user']['loggedin'] ?? false))
+        if ( ! ($session['user']['loggedin'] ?? false))
         {
             return new Response();
         }
@@ -49,7 +49,7 @@ abstract class AjaxAbstract
         global $session;
 
         //-- Do nothing if there is no active session
-        if (! ($session['user']['loggedin'] ?? false))
+        if ( ! ($session['user']['loggedin'] ?? false))
         {
             $response = new Response();
 

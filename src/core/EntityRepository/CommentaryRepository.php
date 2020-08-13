@@ -25,8 +25,6 @@ class CommentaryRepository extends DoctrineRepository
      * Save comment to data base.
      *
      * @param Commentary $commentary
-     *
-     * @return bool
      */
     public function saveComment(EntityCommentary $commentary): bool
     {
@@ -47,8 +45,6 @@ class CommentaryRepository extends DoctrineRepository
 
     /**
      * Hide/Unhide comments.
-     *
-     * @return bool
      */
     public function moderateComments(array $post): bool
     {
@@ -101,8 +97,6 @@ class CommentaryRepository extends DoctrineRepository
 
     /**
      * Get all sections in comentary.
-     *
-     * @return array
      */
     public function getPublishedSections(): array
     {
@@ -140,8 +134,6 @@ class CommentaryRepository extends DoctrineRepository
 
     /**
      * Delte old comments in data base.
-     *
-     * @return int
      */
     public function deleteExpireComments(int $expire): int
     {

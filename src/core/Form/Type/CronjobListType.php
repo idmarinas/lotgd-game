@@ -33,7 +33,7 @@ class CronjobListType extends ChoiceType
 
         $resolver->setDefaults([
             'attr' => [
-                'class' => 'search selection lotgd'
+                'class' => 'search selection lotgd',
             ],
             'choices' => $defaultChoice,
         ]);

@@ -51,12 +51,10 @@ class CharactersRepository extends DoctrineRepository
     /**
      * Get a list of characters with similar name.
      * Search by character name and account login.
-     *
-     * @return array
      */
     public function findLikeName(string $name, int $limit = 100): array
     {
-        $qb = $this->createQueryBuilder('u');
+        $qb    = $this->createQueryBuilder('u');
         $query = $this->_em->createQueryBuilder();
 
         try
@@ -76,7 +74,10 @@ class CharactersRepository extends DoctrineRepository
                 ->leftJoin('LotgdCore:Characters', 'c', 'with', $qb->expr()->eq('c.id', 'u.character'))
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
-                ->setParameter('acct', \array_map(function ($val) { return $val['acctid']; }, $character))
+                ->setParameter('acct', \array_map(function ($val)
+                {
+                    return $val['acctid'];
+                }, $character))
                 ->setMaxResults($limit - count($character))
                 ->getQuery()
                 ->getArrayResult()
@@ -94,8 +95,6 @@ class CharactersRepository extends DoctrineRepository
 
     /**
      * Get info of character for PvP.
-     *
-     * @return array|null
      */
     public function getCharacterForPvp(int $characterId): ?array
     {

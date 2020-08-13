@@ -24,15 +24,15 @@ class ClanRankType extends ChoiceType
 
         //Inserted for v1.1.0 Dragonprime Edition to extend clan possibilities
         $ranks = [
-            CLAN_APPLICANT => 'ranks.00',
-            CLAN_MEMBER => 'ranks.010',
-            CLAN_OFFICER => 'ranks.020',
+            CLAN_APPLICANT      => 'ranks.00',
+            CLAN_MEMBER         => 'ranks.010',
+            CLAN_OFFICER        => 'ranks.020',
             CLAN_ADMINISTRATIVE => 'ranks.025',
-            CLAN_LEADER => 'ranks.030',
-            CLAN_FOUNDER => 'ranks.031'
+            CLAN_LEADER         => 'ranks.030',
+            CLAN_FOUNDER        => 'ranks.031',
         ];
         $ranksResult = modulehook('clanranks', ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null]);
-        $ranks = $ranksResult['ranks'];
+        $ranks       = $ranksResult['ranks'];
 
         $choices = [];
 
@@ -43,7 +43,7 @@ class ClanRankType extends ChoiceType
 
         $resolver->setDefaults([
             'attr' => [
-                'class' => 'search selection lotgd'
+                'class' => 'search selection lotgd',
             ],
             'choices' => $choices,
         ]);

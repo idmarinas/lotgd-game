@@ -25,7 +25,7 @@ trait Censor
      */
     public function getCensor()
     {
-        if (! $this->censor instanceof CensorCore)
+        if ( ! $this->censor instanceof CensorCore)
         {
             $this->censor = $this->getContainer(CensorCore::class);
         }

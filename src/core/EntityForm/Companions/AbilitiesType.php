@@ -24,11 +24,9 @@ class AbilitiesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $choice = [
-            '0' => '0'
-        ];
+        $choice = [];
 
-        for ($i = 1; $i <= 30; $i++)
+        for ($i = 0; $i <= 30; ++$i)
         {
             $choice[(string) $i] = (string) $i;
         }
@@ -41,31 +39,43 @@ class AbilitiesType extends AbstractType
                 'label' => 'defend',
             ])
             ->add('heal', ChoiceType::class, [
-                'choices' => $choice,
-                'required' => false,
-                'empty_data' => '0'
+                'choices'    => $choice,
+                'required'   => false,
+                'empty_data' => '0',
             ])
             ->add('magic', ChoiceType::class, [
-                'choices' => $choice,
-                'required' => false,
-                'empty_data' => '0'
+                'choices'    => $choice,
+                'required'   => false,
+                'empty_data' => '0',
             ])
         ;
 
         $builder->get('fighter')->addModelTransformer(new CallbackTransformer(
-            function ($value) { return (bool) $value; },
-            function ($value) { return (int) $value; }
+            function ($value)
+            {
+                return (bool) $value;
+            },
+            function ($value)
+            {
+                return (int) $value;
+            }
         ));
         $builder->get('defend')->addModelTransformer(new CallbackTransformer(
-            function ($value) { return (bool) $value; },
-            function ($value) { return (int) $value; }
+            function ($value)
+            {
+                return (bool) $value;
+            },
+            function ($value)
+            {
+                return (int) $value;
+            }
         ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form-core-grotto-companions'
+            'translation_domain' => 'form-core-grotto-companions',
         ]);
     }
 }

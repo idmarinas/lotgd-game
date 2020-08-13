@@ -14,17 +14,17 @@ class Collector
     use Pattern\Color;
     use Pattern\Code;
 
-    protected $output = ''; //!< the output to the template body
+    protected $output           = ''; //!< the output to the template body
     protected $block_new_output = false; //!< is current output blocked? boolean
     protected $colormap_esc; //!< the letters of color codes only, escaped and not escaped
     protected $nestedtags = [
         'font' => false,
-        'div' => false,
-        'em' => false,
-        'b' => false,
-        '<' => false,
-        '>' => false,
-        'B' => false,
+        'div'  => false,
+        'em'   => false,
+        'b'    => false,
+        '<'    => false,
+        '>'    => false,
+        'B'    => false,
     ]; //!<open spans, or whatever...we need to make sure that we close them on output
 
     /**
@@ -53,17 +53,17 @@ class Collector
         global $session;
 
         //-- This options are only available when user are signed in
-        if (! ($session['user']['loggedin'] ?? false))
+        if ( ! ($session['user']['loggedin'] ?? false))
         {
             return $out;
         }
 
         //-- Sustitute placeholders
         $sustitute = [
-            '{playername}' => $session['user']['playername'],
+            '{playername}'    => $session['user']['playername'],
             '{charactername}' => $session['user']['name'],
-            '{playerweapon}' => $session['user']['weapon'],
-            '{playerarmor}' => $session['user']['armor']
+            '{playerweapon}'  => $session['user']['weapon'],
+            '{playerarmor}'   => $session['user']['armor'],
         ];
 
         return str_replace(array_keys($sustitute), array_values($sustitute), $out);
@@ -151,26 +151,26 @@ class Collector
      */
     public function appoencode(string $data)
     {
-        $patternOpen = $this->getColorPatternOpen();
-        $patternClose = $this->getColorPatternClose();
+        $patternOpen     = $this->getColorPatternOpen();
+        $patternClose    = $this->getColorPatternClose();
         $replacementOpen = $this->getColorReplacementOpen();
 
         $data = str_replace($patternOpen, $replacementOpen, $data);
         $data = str_replace($patternClose, '</span>', $data);
 
         //-- Replace codes of string
-        $patternOpen = $this->getCodePatternOpen();
-        $patternClose = $this->getCodePatternClose();
-        $replacementOpen = $this->getCodeReplacementOpen();
+        $patternOpen      = $this->getCodePatternOpen();
+        $patternClose     = $this->getCodePatternClose();
+        $replacementOpen  = $this->getCodeReplacementOpen();
         $replacementClose = $this->getCodeReplacementClose();
 
         $data = str_replace($patternOpen, $replacementOpen, $data);
         $data = str_replace($patternClose, $replacementClose, $data);
 
         //-- Special codes
-        $patternOpen = $this->getCodeSpecialPatternOpen();
-        $patternClose = $this->getCodeSpecialPatternClose();
-        $replacementOpen = $this->getCodeSpecialReplacementOpen();
+        $patternOpen      = $this->getCodeSpecialPatternOpen();
+        $patternClose     = $this->getCodeSpecialPatternClose();
+        $replacementOpen  = $this->getCodeSpecialReplacementOpen();
         $replacementClose = $this->getCodeSpecialReplacementClose();
 
         $data = str_replace($patternOpen, $replacementOpen, $data);

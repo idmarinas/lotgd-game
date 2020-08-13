@@ -14,8 +14,8 @@
 namespace Lotgd\Core\Paginator\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
-use Tracy\Debugger;
 use Laminas\Paginator\Adapter\AdapterInterface;
+use Tracy\Debugger;
 
 class Doctrine implements AdapterInterface
 {
@@ -52,7 +52,7 @@ class Doctrine implements AdapterInterface
 
     public function __construct(QueryBuilder $query, int $resultType = self::RESULT_ARRAY)
     {
-        $this->doctrine = $query;
+        $this->doctrine   = $query;
         $this->resultType = $resultType;
     }
 
@@ -78,8 +78,6 @@ class Doctrine implements AdapterInterface
 
     /**
      * Returns the total number of rows in the result set.
-     *
-     * @return int
      */
     public function count(): int
     {
@@ -95,8 +93,6 @@ class Doctrine implements AdapterInterface
 
     /**
      * Count total rows.
-     *
-     * @return int
      */
     private function selectCount(): int
     {

@@ -27,7 +27,7 @@ class Translator
     /**
      * Add support for magic static method calls.
      *
-     * @param string $name
+     * @param mixed  $method
      * @param array  $arguments
      *
      * @return mixed the returned value from the resolved method
@@ -46,7 +46,7 @@ class Translator
 
         $methods = implode(', ', get_class_methods(self::$container));
 
-        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**

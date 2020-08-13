@@ -12,11 +12,11 @@
 
 namespace Lotgd\Core\Template;
 
-use Lotgd\Core\Exception;
 use Laminas\Filter\FilterChain;
 use Laminas\Filter\StringToLower;
 use Laminas\Filter\Word\SeparatorToDash;
 use Laminas\Filter\Word\UnderscoreToDash;
+use Lotgd\Core\Exception;
 
 class Theme extends Base
 {
@@ -37,6 +37,8 @@ class Theme extends Base
     /**
      * Render a theme
      * Used in pageparts.php for render a page.
+     *
+     * @param mixed $context
      */
     public function renderTheme($context)
     {
@@ -56,13 +58,13 @@ class Theme extends Base
         global $html, $session;
 
         $userPre = $html['userPre'] ?? [];
-        $user = $session['user'] ?? [];
+        $user    = $session['user'] ?? [];
         unset($user['password']);
 
         $context = array_merge([
             'userPre' => $userPre,
-            'user' => $user, //-- Actual user data for this template
-            'session' => $html['session'] ?? [] //-- Session data declared in page_header or popup_header
+            'user'    => $user, //-- Actual user data for this template
+            'session' => $html['session'] ?? [], //-- Session data declared in page_header or popup_header
         ],
         $context);
 
@@ -82,13 +84,13 @@ class Theme extends Base
         global $html, $session;
 
         $userPre = $html['userPre'] ?? [];
-        $user = $session['user'] ?? [];
+        $user    = $session['user'] ?? [];
         unset($user['password']);
 
         $context = array_merge([
             'userPre' => $userPre,
-            'user' => $user, //-- Actual user data for this template
-            'session' => $html['session'] ?? [] //-- Actual session data for this template
+            'user'    => $user, //-- Actual user data for this template
+            'session' => $html['session'] ?? [], //-- Actual session data for this template
         ],
         $context);
 
@@ -129,7 +131,7 @@ class Theme extends Base
 
             $theme = \LotgdHttp::getCookie('template');
 
-            if ('' == $theme || ! file_exists(static::TEMPLATES_BASE_DIR."/$theme"))
+            if ('' == $theme || ! file_exists(static::TEMPLATES_BASE_DIR."/{$theme}"))
             {
                 $theme = $settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
             }
@@ -141,14 +143,14 @@ class Theme extends Base
 
         //-- This is necessary in case the theme is deleted
         //-- Search for a valid theme in directory
-        if (! file_exists(static::TEMPLATES_BASE_DIR."/{$this->defaultSkin}"))
+        if ( ! file_exists(static::TEMPLATES_BASE_DIR."/{$this->defaultSkin}"))
         {
             $this->defaultSkin = $this->getValidTheme();
 
             $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
         }
 
-        if (! \LotgdHttp::getCookie('template') || $this->defaultSkin != \LotgdHttp::getCookie('template'))
+        if ( ! \LotgdHttp::getCookie('template') || $this->defaultSkin != \LotgdHttp::getCookie('template'))
         {
             \LotgdHttp::setCookie('template', $this->defaultSkin);
         }
@@ -184,7 +186,7 @@ class Theme extends Base
         {
             //-- Prepare name folder of theme, base on filename of theme
             $this->themefolder = pathinfo($this->themeName, PATHINFO_FILENAME); //-- Delete extension
-            $filterChain = new FilterChain();
+            $filterChain       = new FilterChain();
             $filterChain
                 ->attach(new StringToLower())
                 ->attach(new SeparatorToDash())
@@ -211,7 +213,7 @@ class Theme extends Base
     private function getValidTheme(): string
     {
         // A generic way of allowing a theme to be selected.
-        $skins = [];
+        $skins  = [];
         $handle = @opendir(static::TEMPLATES_BASE_DIR);
 
         while (false !== ($file = @readdir($handle)))

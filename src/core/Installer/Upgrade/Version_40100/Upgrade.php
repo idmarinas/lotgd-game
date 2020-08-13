@@ -34,17 +34,17 @@ class Upgrade extends UpgradeAbstract
             //-- Update languages to new format
             // This does not delete the configured languages, but adapts to the new format
             $languagesOri = $settings->findOneBy(['setting' => 'serverlanguages']);
-            $languages = $languagesOri->getValue();
+            $languages    = $languagesOri->getValue();
 
             $languages = explode(',', $languages);
 
-            $lang = [];
+            $lang  = [];
             $count = count($languages);
 
-            for ($i = 0; $i < $count; $i++)
+            for ($i = 0; $i < $count; ++$i)
             {
                 $lang[] = $languages[$i]; //-- Only need code
-                $i++; //-- Avoid name of language
+                ++$i; //-- Avoid name of language
             }
 
             $languagesOri->setValue(implode(',', $lang));

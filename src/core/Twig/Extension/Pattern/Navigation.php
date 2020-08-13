@@ -29,8 +29,8 @@ trait Navigation
     {
         return \LotgdTheme::renderThemeTemplate('parts/navigation.twig', [
             'navigation' => $this->getNavigation()->getNavigation(),
-            'headers' => $this->getNavigation()->getHeaders(),
-            'navs' => $this->getNavigation()->getNavs()
+            'headers'    => $this->getNavigation()->getHeaders(),
+            'navs'       => $this->getNavigation()->getNavs(),
         ]);
     }
 
@@ -39,8 +39,6 @@ trait Navigation
      *
      * @param string $label
      * @param array  $options
-     *
-     * @return string|null
      */
     public function createLink($label, $options): ?string
     {
@@ -59,9 +57,9 @@ trait Navigation
         }
 
         $attributes = $options['attributes'] ?? [];
-        $blocked = $this->getNavigation()->isBlocked($options['link']);
+        $blocked    = $this->getNavigation()->isBlocked($options['link']);
 
-        if (! $blocked)
+        if ( ! $blocked)
         {
             $label = $this->getAccesskeys()->create($label, $attributes);
         }
@@ -73,7 +71,7 @@ trait Navigation
         $attributes = $this->createAttributesString($attributes);
 
         return \appoencode(sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
-            (! $blocked ? 'a' : 'span'),
+            ( ! $blocked ? 'a' : 'span'),
             $attributes,
             $label,
             $options['current']['open'] ?? '', //-- Open style to nav if is current
@@ -86,12 +84,10 @@ trait Navigation
      *
      * @param string $label
      * @param array  $options
-     *
-     * @return string|null
      */
     public function createHeader($label, $options): ?string
     {
-        if (! $this->getNavigation()->headerHasNavs($label) && $options['hiddeEmpty'])
+        if ( ! $this->getNavigation()->headerHasNavs($label) && $options['hiddeEmpty'])
         {
             return null;
         }
@@ -121,12 +117,10 @@ trait Navigation
      * @param string|null $link           Url to use in href atribute in links
      * @param string|null $template       You can change the template for your own if you need it at a specific time
      * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
-     *
-     * @return string
      */
     public function showPagination(Paginator $paginator, ?string $link = null, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
     {
-        $template = $template ?: 'parts/pagination.twig';
+        $template       = $template ?: 'parts/pagination.twig';
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
         $pages = get_object_vars($paginator->getPages($scrollingStyle));

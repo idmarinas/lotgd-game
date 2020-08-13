@@ -15,8 +15,6 @@ trait CanInstall
 
     /**
      * Check if can install this version of game.
-     *
-     * @return bool
      */
     public function canInstall(): bool
     {
@@ -64,8 +62,6 @@ trait CanInstall
 
     /**
      * Get int value of installed version.
-     *
-     * @return int
      */
     private function getInstalledVersion(): int
     {

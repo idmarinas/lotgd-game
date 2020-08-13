@@ -19,8 +19,6 @@ class BansRepository extends DoctrineRepository
 {
     /**
      * Remove expired bans.
-     *
-     * @return int
      */
     public function removeExpireBans(): int
     {

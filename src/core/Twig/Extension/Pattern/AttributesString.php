@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Tracy\Debugger;
 use Laminas\Escaper\Exception\RuntimeException as EscaperException;
 use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\Helper\EscapeHtmlAttr;
+use Tracy\Debugger;
 
 /**
  * Create a string of attributes for a html tag.
@@ -32,9 +32,9 @@ trait AttributesString
      */
     public function createAttributesString(array $attributes)
     {
-        $escape = new EscapeHtml();
+        $escape     = new EscapeHtml();
         $escapeAttr = new EscapeHtmlAttr();
-        $strings = [];
+        $strings    = [];
 
         foreach ($attributes as $key => $value)
         {
@@ -43,7 +43,7 @@ trait AttributesString
             try
             {
                 $escapedAttribute = $escapeAttr($value);
-                $strings[] = sprintf('%s="%s"', $escape($key), $escapedAttribute);
+                $strings[]        = sprintf('%s="%s"', $escape($key), $escapedAttribute);
             }
             catch (EscaperException $x)
             {

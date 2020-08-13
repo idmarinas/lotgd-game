@@ -110,10 +110,8 @@ class MountsRepository extends DoctrineRepository
     /**
      * Find one mount by id.
      * Mount is translated.
-     *
-     * @return array|null
      */
-    public function findOneMountById(int $id)
+    public function findOneMountById(int $id): ?array
     {
         try
         {
@@ -138,10 +136,8 @@ class MountsRepository extends DoctrineRepository
     /**
      * Get an array of mounts by ids.
      * Mounts is translated.
-     *
-     * @return array|null
      */
-    public function findMountsById(array $ids)
+    public function findMountsById(array $ids): ?array
     {
         try
         {

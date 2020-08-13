@@ -22,8 +22,6 @@ trait Setting
 {
     /**
      * Moving players to new location.
-     *
-     * @return bool
      */
     public function movingPlayersToLocation(string $from, string $to): bool
     {

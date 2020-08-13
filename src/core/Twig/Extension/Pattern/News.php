@@ -27,7 +27,7 @@ trait News
             if ('deathmessage' == $item['text'])
             {
                 $deathmessage = $item['arguments']['deathmessage'] ?? [];
-                $taunt = $item['arguments']['taunt'] ?? [];
+                $taunt        = $item['arguments']['taunt']        ?? [];
 
                 $message = '';
 

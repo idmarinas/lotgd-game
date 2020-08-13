@@ -55,9 +55,9 @@ class ObjectExists extends AbstractValidator
      */
     public function __construct(array $options)
     {
-        if (! isset($options['object_repository']) || ! $options['object_repository'] instanceof ObjectRepository)
+        if ( ! isset($options['object_repository']) || ! $options['object_repository'] instanceof ObjectRepository)
         {
-            if (! array_key_exists('object_repository', $options))
+            if ( ! array_key_exists('object_repository', $options))
             {
                 $provided = 'nothing';
             }
@@ -77,7 +77,7 @@ class ObjectExists extends AbstractValidator
         }
         $this->objectRepository = $options['object_repository'];
 
-        if (! isset($options['fields']))
+        if ( ! isset($options['fields']))
         {
             throw new Exception\InvalidArgumentException('Key `fields` must be provided and be a field or a list of fields to be used when searching for  existing instances');
         }
@@ -93,7 +93,7 @@ class ObjectExists extends AbstractValidator
     public function isValid($value)
     {
         $cleanedValue = $this->cleanSearchValue($value);
-        $match = $this->objectRepository->findOneBy($cleanedValue);
+        $match        = $this->objectRepository->findOneBy($cleanedValue);
 
         if (is_object($match))
         {
@@ -108,9 +108,9 @@ class ObjectExists extends AbstractValidator
      * @param string|array $value a field value or an array of field values if more fields have been configured to be
      *                            matched
      *
-     * @return array
-     *
      * @throws \Laminas\Validator\Exception\RuntimeException
+     *
+     * @return array
      */
     protected function cleanSearchValue($value)
     {
@@ -122,7 +122,7 @@ class ObjectExists extends AbstractValidator
 
             foreach ($this->fields as $field)
             {
-                if (! array_key_exists($field, $value))
+                if ( ! array_key_exists($field, $value))
                 {
                     throw new Exception\RuntimeException(sprintf('Field "%s" was not provided, but was expected since the configured field lists needs'.' it for validation', $field));
                 }
@@ -160,7 +160,7 @@ class ObjectExists extends AbstractValidator
 
         foreach ($fields as $key => $field)
         {
-            if (! is_string($field))
+            if ( ! is_string($field))
             {
                 throw new Exception\InvalidArgumentException(sprintf('Provided fields must be strings, %s provided for key %s', gettype($field), $key));
             }

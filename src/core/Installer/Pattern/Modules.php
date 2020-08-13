@@ -10,8 +10,8 @@ namespace Lotgd\Core\Installer\Pattern;
 
 trait Modules
 {
-    protected $skipModules = false;
-    protected $modules = [];
+    protected $skipModules        = false;
+    protected $modules            = [];
     protected $recommendedModules = [
         'abigail',
         'breakin',
@@ -100,8 +100,6 @@ trait Modules
 
     /**
      * Get if installation of modules is ignored.
-     *
-     * @return bool
      */
     public function skipModules(): bool
     {
@@ -110,8 +108,6 @@ trait Modules
 
     /**
      * Set list of modules to process.
-     *
-     * @return self
      */
     public function setModules(array $modules): self
     {
@@ -122,8 +118,6 @@ trait Modules
 
     /**
      * Get list of modules to process.
-     *
-     * @return array
      */
     public function getModules(): array
     {
@@ -132,8 +126,6 @@ trait Modules
 
     /**
      * Get all recommended modules.
-     *
-     * @return array
      */
     public function getRecommendedModules(): array
     {

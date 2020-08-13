@@ -85,6 +85,7 @@ trait CoreFunction
      * Validating a protocol.
      *
      * @param string $protocol
+     * @param mixed  $url
      *
      * @return bool
      */
@@ -92,8 +93,8 @@ trait CoreFunction
     {
         // We should check all legeal protocols
         $protocols = ['http', 'https', 'ftp', 'ftps'];
-        $protocol = explode(':', $url, 2);
-        $protocol = $protocol[0];
+        $protocol  = explode(':', $url, 2);
+        $protocol  = $protocol[0];
 
         // This will take care of download strings such as: not publically released or contact admin
         return in_array($protocol, $protocols);
@@ -124,7 +125,7 @@ trait CoreFunction
      */
     public function pvpListTable(array $params): string
     {
-        $params['linkBase'] = ($params['linkBase'] ?? 'pvp.php') ?: 'pvp.php';
+        $params['linkBase']  = ($params['linkBase'] ?? 'pvp.php') ?: 'pvp.php';
         $params['linkExtra'] = ($params['linkExtra'] ?? '?act=attack') ?: '?act=attack';
 
         $params['linkAttack'] = "{$params['linkBase']}{$params['linkExtra']}";
@@ -187,7 +188,7 @@ trait CoreFunction
     public function includeModuleTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
         $alreadySandboxed = false;
-        $sandbox = null;
+        $sandbox          = null;
 
         if ($withContext)
         {
@@ -198,7 +199,7 @@ trait CoreFunction
         {
             $sandbox = $env->getExtension(SandboxExtension::class);
 
-            if (! $alreadySandboxed = $sandbox->isSandboxed())
+            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
             {
                 $sandbox->enableSandbox();
             }
@@ -210,7 +211,7 @@ trait CoreFunction
         }
         catch (LoaderError $e)
         {
-            if (! $ignoreMissing)
+            if ( ! $ignoreMissing)
             {
                 throw $e;
             }
@@ -239,7 +240,7 @@ trait CoreFunction
     public function includeThemeTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
         $alreadySandboxed = false;
-        $sandbox = null;
+        $sandbox          = null;
 
         if ($withContext)
         {
@@ -250,7 +251,7 @@ trait CoreFunction
         {
             $sandbox = $env->getExtension(SandboxExtension::class);
 
-            if (! $alreadySandboxed = $sandbox->isSandboxed())
+            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
             {
                 $sandbox->enableSandbox();
             }
@@ -262,7 +263,7 @@ trait CoreFunction
         }
         catch (LoaderError $e)
         {
-            if (! $ignoreMissing)
+            if ( ! $ignoreMissing)
             {
                 throw $e;
             }

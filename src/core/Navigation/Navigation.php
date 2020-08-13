@@ -94,18 +94,18 @@ class Navigation
      */
     public function addHeader(string $header, array $options = [])
     {
-        if (! isset($this->navigation[$header]))
+        if ( ! isset($this->navigation[$header]))
         {
             $this->navigation[$header] = [];
         }
 
         $this->headers[$header] = ArrayUtils::merge([
-            'translate' => true,
+            'translate'  => true,
             'textDomain' => $this->getTextDomain(),
             'hiddeEmpty' => true,
             'attributes' => [
-                'class' => $this->getClassHeader()
-            ]
+                'class' => $this->getClassHeader(),
+            ],
         ], $options);
         $this->lastHeader = $header;
 
@@ -114,17 +114,15 @@ class Navigation
 
     /**
      * Add header but not translate.
-     *
-     * @return void
      */
     public function addHeaderNotl(string $header, array $options = [])
     {
         return $this->addHeader($header, ArrayUtils::merge([
-            'translate' => false,
+            'translate'  => false,
             'hiddeEmpty' => true,
             'attributes' => [
-                'class' => $this->getClassHeader()
-            ]
+                'class' => $this->getClassHeader(),
+            ],
         ], $options));
     }
 
@@ -134,11 +132,11 @@ class Navigation
     public function addNav(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
-            'translate' => true,
+            'translate'  => true,
             'textDomain' => $this->getTextDomain(),
             'attributes' => [
-                'class' => $this->getClassNav()
-            ]
+                'class' => $this->getClassNav(),
+            ],
         ], $options));
     }
 
@@ -149,14 +147,14 @@ class Navigation
     public function addNavExternal(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
-            'translate' => true,
+            'translate'      => true,
             'extraParamLink' => false,
-            'textDomain' => $this->getTextDomain(),
-            'attributes' => [
-                'class' => $this->getClassNav(),
+            'textDomain'     => $this->getTextDomain(),
+            'attributes'     => [
+                'class'  => $this->getClassNav(),
                 'target' => '_blank',
-                'rel' => 'noopener noreferrer'
-            ]
+                'rel'    => 'noopener noreferrer',
+            ],
         ], $options));
     }
 
@@ -166,10 +164,10 @@ class Navigation
     public function addNavNotl(?string $label, ?string $link = null, array $options = [])
     {
         return $this->addItem($label, $link, ArrayUtils::merge([
-            'translate' => false,
+            'translate'  => false,
             'attributes' => [
-                'class' => $this->getClassNav()
-            ]
+                'class' => $this->getClassNav(),
+            ],
         ], $options));
     }
 
@@ -201,7 +199,7 @@ class Navigation
         }
 
         $this->textDomainPrev = $this->getTextDomain();
-        $this->textDomain = $domain;
+        $this->textDomain     = $domain;
 
         return $this;
     }
@@ -219,7 +217,7 @@ class Navigation
      */
     public function getLastHeader(): string
     {
-        if (! $this->lastHeader)
+        if ( ! $this->lastHeader)
         {
             $this->addHeader('common.category.navigation', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
@@ -357,7 +355,7 @@ class Navigation
     {
         foreach ($this->navs as $navs)
         {
-            if (! is_array($navs) || ! count($navs))
+            if ( ! is_array($navs) || ! count($navs))
             {
                 continue;
             }
@@ -365,7 +363,7 @@ class Navigation
             foreach ($navs as $nav)
             {
                 //-- If have 1 allowed nav, return true
-                if (! $this->isBlocked($nav['link']))
+                if ( ! $this->isBlocked($nav['link']))
                 {
                     return true;
                 }
@@ -386,14 +384,14 @@ class Navigation
 
         //-- Add nav header if not have link.
         //-- It's for compatibility, the best way to add a header is with the addHeader function
-        if (! $link && $label)
+        if ( ! $link && $label)
         {
             //-- Is better use addHeader function for add header.
             return $this->addHeader($label, ArrayUtils::merge($options,
                 [
                     'attributes' => [ //-- To prevent a header from having the class of a navigation menu.
-                        'class' => $this->getClassHeader() //-- This will overwrite the custom class.
-                    ]
+                        'class' => $this->getClassHeader(), //-- This will overwrite the custom class.
+                    ],
                 ]
             ));
         }
@@ -407,12 +405,12 @@ class Navigation
 
             if (false !== ($pos = strpos($link, '#')))
             {
-                $sublink = substr($link, 0, $pos);
-                $session['user']['allowednavs'][$sublink] = true;
+                $sublink                                         = substr($link, 0, $pos);
+                $session['user']['allowednavs'][$sublink]        = true;
                 $session['user']['allowednavs'][$sublink.$extra] = true;
             }
 
-            $session['user']['allowednavs'][$link] = true;
+            $session['user']['allowednavs'][$link]        = true;
             $session['user']['allowednavs'][$link.$extra] = true;
 
             $this->addLink($link);
@@ -420,7 +418,7 @@ class Navigation
         }
 
         //-- There is no label to add to the menu
-        if (! $label)
+        if ( ! $label)
         {
             return $this;
         }
@@ -428,11 +426,11 @@ class Navigation
         $key = $this->getKeyForNav($this->navigation[$this->getLastHeader()] ?? [], $options['remplace'] ?? false, $label);
 
         $this->navigation[$this->getLastHeader()][$key] = $label;
-        $this->navs[$this->getLastHeader()][$key] = ArrayUtils::merge($options, [
-            'link' => $link,
+        $this->navs[$this->getLastHeader()][$key]       = ArrayUtils::merge($options, [
+            'link'       => $link,
             'attributes' => [
-                'href' => $link.$extra
-            ]
+                'href' => $link.$extra,
+            ],
         ]);
 
         return $this;
@@ -440,12 +438,10 @@ class Navigation
 
     /**
      * Get key for nav.
-     *
-     * @return void
      */
     protected function getKeyForNav(array $navs, bool $remplace, string $label): int
     {
-        if (! $remplace)
+        if ( ! $remplace)
         {
             return count($navs);
         }
@@ -467,7 +463,7 @@ class Navigation
     {
         global $session;
 
-        if (! $link)
+        if ( ! $link)
         {
             return '';
         }

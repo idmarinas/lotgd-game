@@ -28,8 +28,8 @@ class TextareaTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextareaType::class, [
-                'constraints' => [new Assert\Length(['min' => 0, 'max' => 65535, 'allowEmptyString' => true])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 0, 'max' => 65535, 'allowEmptyString' => true])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class TextareaTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MountsTranslation::class
+            'data_class' => MountsTranslation::class,
         ]);
     }
 }

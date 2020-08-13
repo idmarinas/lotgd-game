@@ -47,7 +47,7 @@ class Http extends Request
     /**
      * Sanitize uri for usage.
      *
-     * @return string
+     * @param string $name
      */
     protected function sanitizeUri($name): string
     {

@@ -70,8 +70,6 @@ class Code
 
     /**
      * Get array of codes.
-     *
-     * @return array
      */
     public function getCodes(): array
     {
@@ -104,8 +102,6 @@ class Code
 
     /**
      * Get array of codes.
-     *
-     * @return array
      */
     public function getCodesSpecialOpen(): array
     {
@@ -138,8 +134,6 @@ class Code
 
     /**
      * Get array of codes.
-     *
-     * @return array
      */
     public function getCodesSpecialClose(): array
     {

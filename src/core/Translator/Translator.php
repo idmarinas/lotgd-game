@@ -32,7 +32,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
      */
     public function trans(string $message, ?array $parameters = [], ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null): string
     {
-        $locale = ($locale ?: $this->getLocale());
+        $locale     = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
 
         $message = parent::translate($message, $textDomain, $locale);
@@ -64,12 +64,12 @@ class Translator extends ZendTranslator implements TranslatorInterface
         {
             $parameters = array_merge([
                 'playerName' => $session['user']['name'] ?? '',
-                'playerSex' => $session['user']['sex'] ?? '',
-                'location' => $session['user']['location'] ?? ''
+                'playerSex'  => $session['user']['sex'] ?? '',
+                'location'   => $session['user']['location'] ?? '',
             ], $parameters);
         }
 
-        $locale = ($locale ?: $this->getLocale());
+        $locale     = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
         //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
         $parameters = array_filter($parameters, [$this, 'cleanParameters']);
@@ -113,7 +113,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
      */
     protected function loadMessages($textDomain, $locale)
     {
-        if (! isset($this->messages[$textDomain]))
+        if ( ! isset($this->messages[$textDomain]))
         {
             $this->messages[$textDomain] = [];
         }
@@ -136,7 +136,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
         $messagesLoaded |= $this->loadMessagesFromPatterns($textDomain, $locale);
         $messagesLoaded |= $this->loadMessagesFromFiles($textDomain, $locale);
 
-        if (! $messagesLoaded)
+        if ( ! $messagesLoaded)
         {
             $discoveredTextDomain = null;
 
@@ -148,7 +148,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
                 };
 
                 $event = new Event(self::EVENT_NO_MESSAGES_LOADED, $this, [
-                    'locale' => $locale,
+                    'locale'      => $locale,
                     'text_domain' => $textDomain,
                 ]);
 
@@ -163,7 +163,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
             }
 
             $this->messages[$textDomain][$locale] = $discoveredTextDomain;
-            $messagesLoaded = true;
+            $messagesLoaded                       = true;
         }
 
         if ($messagesLoaded && null !== $cache)
@@ -178,9 +178,9 @@ class Translator extends ZendTranslator implements TranslatorInterface
      * @param string $namespace
      * @param string $locale
      *
-     * @return bool
-     *
      * @throws Exception\RuntimeException When specified loader is not a file loader
+     *
+     * @return bool
      */
     protected function loadLotgdMessagesFromPatterns($namespace, $locale)
     {
@@ -203,7 +203,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
         {
             $loader = $this->getPluginManager()->get('Yaml');
 
-            if (! $loader instanceof FileLoaderInterface)
+            if ( ! $loader instanceof FileLoaderInterface)
             {
                 throw new Exception\RuntimeException('Specified loader is not a file loader');
             }

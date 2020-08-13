@@ -13,15 +13,15 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\LabelAwareInterface;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormLabel extends AbstractElement
 {
-    const APPEND = 'append';
+    const APPEND  = 'append';
     const PREPEND = 'prepend';
 
     /**
@@ -30,7 +30,7 @@ class FormLabel extends AbstractElement
      * @var array
      */
     protected $validTagAttributes = [
-        'for' => true,
+        'for'  => true,
         'form' => true,
     ];
 
@@ -55,17 +55,17 @@ class FormLabel extends AbstractElement
      *
      * @return string|FormLabel
      */
-    public function render(Environment $env, ElementInterface $element = null, ?string $translatorTextDomain = null)
+    public function render(Environment $env, ?ElementInterface $element = null, ?string $translatorTextDomain = null)
     {
-        if (! $element || empty($element->getLabel()))
+        if ( ! $element || empty($element->getLabel()))
         {
             throw new Exception\DomainException(sprintf('%s expects either label content as the second argument, or that the element provided has a label attribute; neither found', __METHOD__));
         }
 
         return $env->renderThemeTemplate('form/element/label.twig', [
-            'element' => $element,
-            'escapeLabel' => (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')),
-            'translatorTextDomain' => $element->getOptions()['translator_text_domain'] ?? $translatorTextDomain ?: $this->getTranslatorTextDomain()
+            'element'              => $element,
+            'escapeLabel'          => ( ! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')),
+            'translatorTextDomain' => $element->getOptions()['translator_text_domain'] ?? $translatorTextDomain ?: $this->getTranslatorTextDomain(),
         ]);
     }
 
@@ -93,7 +93,7 @@ class FormLabel extends AbstractElement
             return sprintf('<label %s>', $attributes);
         }
 
-        if (! $attributesOrElement instanceof ElementInterface)
+        if ( ! $attributesOrElement instanceof ElementInterface)
         {
             throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
         }
@@ -114,7 +114,7 @@ class FormLabel extends AbstractElement
 
         $attributes = ['for' => $id];
 
-        if (! empty($labelAttributes))
+        if ( ! empty($labelAttributes))
         {
             $attributes = array_merge($labelAttributes, $attributes);
         }

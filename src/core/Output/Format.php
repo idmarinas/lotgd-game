@@ -45,13 +45,13 @@ class Format
      *
      * @return string
      */
-    public function numeral($number, int $decimals = 0, string $dec_point = null, string $thousands_sep = null)
+    public function numeral($number, int $decimals = 0, ?string $dec_point = null, ?string $thousands_sep = null)
     {
-        $number = (float) $number;
+        $number   = (float) $number;
         $decimals = (int) $decimals;
 
         //-- Check if use default value or custom
-        $dec_point = $dec_point ?: $this->dec_point;
+        $dec_point     = $dec_point ?: $this->dec_point;
         $thousands_sep = $thousands_sep ?: $this->thousands_sep;
 
         //-- If decimals is negative, it is automatically determined
@@ -73,44 +73,42 @@ class Format
      *
      * @param mixed  $indate
      * @param string $default
-     *
-     * @return string
      */
     public function relativedate($indate, $default = 'never'): string
     {
-        if (! $indate instanceof \DateTime)
+        if ( ! $indate instanceof \DateTime)
         {
             $indate = new \DateTime($indate);
         }
         $nullDate = new \DateTime('0000-00-00 00:00:00');
-        $default = $default ?: 'never';
+        $default  = $default ?: 'never';
 
         if ($nullDate == $indate)
         {
             return $this->getTranslator()->trans($default, [], 'app-date');
         }
 
-        $now = new \DateTime('now');
+        $now  = new \DateTime('now');
         $diff = $now->diff($indate);
 
-        $params = [];
-        $sufix = $diff->invert ? 'ago' : 'left';
+        $params  = [];
+        $sufix   = $diff->invert ? 'ago' : 'left';
         $message = "{$sufix}.now";
 
         if ($diff->y > 0)
         {
             $params['year'] = $diff->y;
-            $message = "{$sufix}.year";
+            $message        = "{$sufix}.year";
         }
         elseif ($diff->m > 0)
         {
             $params['month'] = $diff->m;
-            $message = "{$sufix}.month";
+            $message         = "{$sufix}.month";
         }
         elseif ($diff->d > 0)
         {
             $params['day'] = $diff->d;
-            $message = "{$sufix}.day.other";
+            $message       = "{$sufix}.day.other";
 
             if (1 == $diff->d)
             {
@@ -120,12 +118,12 @@ class Format
         elseif ($diff->h > 0)
         {
             $params['hour'] = $diff->h;
-            $message = "{$sufix}.hour";
+            $message        = "{$sufix}.hour";
         }
         elseif ($diff->i > 0)
         {
             $params['min'] = $diff->i;
-            $message = "{$sufix}.min";
+            $message       = "{$sufix}.min";
         }
 
         return $this->getTranslator()->trans($message, $params, 'app-date');

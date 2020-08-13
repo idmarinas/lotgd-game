@@ -30,10 +30,10 @@ trait PageGen
         global $session;
 
         return \LotgdTheme::renderThemeTemplate('parts/page-gen.twig', [
-            'genTime' => Debugger::timer('page-generating'),
-            'avg' => ($session['user']['gentime'] / $session['user']['gentimecount']),
-            'userGenTime' => $session['user']['gentime'],
-            'userGenTimeCount' => $session['user']['gentimecount']
+            'genTime'          => Debugger::timer('page-generating'),
+            'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
+            'userGenTime'      => $session['user']['gentime'],
+            'userGenTimeCount' => $session['user']['gentimecount'],
         ]);
     }
 }

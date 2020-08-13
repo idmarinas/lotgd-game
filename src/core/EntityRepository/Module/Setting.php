@@ -22,8 +22,6 @@ trait Setting
 {
     /**
      * Find all modules that have.
-     *
-     * @return array
      */
     public function findModulesEditorNav(string $like): array
     {

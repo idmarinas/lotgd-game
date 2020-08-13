@@ -9,19 +9,17 @@
 namespace Lotgd\Core\Factory\Output;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Output\Format as OutputFormat;
 use Tracy\Debugger;
-use Laminas\ServiceManager\{
-    Factory\FactoryInterface,
-    ServiceLocatorInterface
-};
 
 class Format implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $settings = $container->get(\Lotgd\Core\Lib\Settings::class);
-        $format = new OutputFormat();
+        $format   = new OutputFormat();
         $format->setContainer($container);
 
         try

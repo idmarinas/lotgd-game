@@ -34,8 +34,8 @@ class PersonalTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => AbstractPersonalTranslation::class,
-            'translation_domain' => 'form-core-grotto-creature'
+            'data_class'         => AbstractPersonalTranslation::class,
+            'translation_domain' => 'form-core-grotto-creature',
         ]);
     }
 }

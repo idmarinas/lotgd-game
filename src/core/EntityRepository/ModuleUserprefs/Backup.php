@@ -22,8 +22,6 @@ trait Backup
 {
     /**
      * Get all module user prefs to account.
-     *
-     * @return array
      */
     public function backupGetDataFromAccount(int $accountId): array
     {
@@ -49,8 +47,6 @@ trait Backup
 
     /**
      * Delete all module user prefs of account.
-     *
-     * @return int
      */
     public function backupDeleteDataFromAccount(int $accountId): int
     {

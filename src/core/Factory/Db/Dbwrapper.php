@@ -9,18 +9,17 @@
 namespace Lotgd\Core\Factory\Db;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Db\Dbwrapper as LibDbwrapper;
-use Laminas\ServiceManager\{
-    Factory\FactoryInterface,
-    ServiceLocatorInterface
-};
+
 class Dbwrapper implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $options = $container->get('GameConfig');
         $options = $options['lotgd_core']['db'] ?? [];
-        $adapter = $options['adapter'] ?? [];
+        $adapter = $options['adapter']          ?? [];
         $adapter = is_array($adapter) ? $adapter : [];
 
         $wrapper = new LibDbwrapper($adapter);

@@ -20,8 +20,6 @@ class PaylogRepository extends DoctrineRepository
 {
     /**
      * Update process of date.
-     *
-     * @return bool
      */
     public function updateProcessDate(): bool
     {
@@ -58,14 +56,12 @@ class PaylogRepository extends DoctrineRepository
 
     /**
      * Get a list of months.
-     *
-     * @return array
      */
     public function getMonths(): array
     {
         try
         {
-            return $this->_em->createQuery("SELECT month(u.processdate) AS month, (sum(u.amount)-sum(u.txfee)) AS profit, u.processdate AS date FROM $this->_entityName AS u GROUP BY month ORDER BY month DESC")
+            return $this->_em->createQuery("SELECT month(u.processdate) AS month, (sum(u.amount)-sum(u.txfee)) AS profit, u.processdate AS date FROM {$this->_entityName} AS u GROUP BY month ORDER BY month DESC")
                 ->getArrayResult()
             ;
         }
@@ -79,8 +75,6 @@ class PaylogRepository extends DoctrineRepository
 
     /**
      * Get list paylog.
-     *
-     * @return array
      */
     public function getList(int $month): array
     {
@@ -88,10 +82,10 @@ class PaylogRepository extends DoctrineRepository
 
         try
         {
-            $month = $month ?: date('n');
-            $month = date('Y').'-'.$month;
+            $month     = $month ?: date('n');
+            $month     = date('Y').'-'.$month;
             $startDate = $month.'-01 00:00:00';
-            $endDate = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($startDate)));
+            $endDate   = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($startDate)));
 
             return $query->select('u.payid', 'u.info', 'u.response', 'u.txnid', 'u.amount', 'u.name', 'u.acctid', 'u.processed', 'u.filed', 'u.txfee', 'u.processdate')
                 ->addSelect('c.name')

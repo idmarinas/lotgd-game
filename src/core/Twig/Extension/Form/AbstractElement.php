@@ -15,13 +15,13 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Pattern as PatternCore;
-use Twig\Environment;
-use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 use Laminas\Escaper\Exception\RuntimeException as EscaperException;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\InvalidArgumentException;
 use Laminas\View\Helper\EscapeHtmlAttr;
+use Lotgd\Core\Pattern as PatternCore;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 
 /**
  * Base functionality for all form view helpers.
@@ -54,13 +54,13 @@ abstract class AbstractElement extends AbstractExtensionCore
      */
     protected $booleanAttributes = [
         'autocomplete' => ['on' => 'on',  'off' => 'off'],
-        'autofocus' => ['on' => 'autofocus', 'off' => ''],
-        'checked' => ['on' => 'checked',   'off' => ''],
-        'disabled' => ['on' => 'disabled',  'off' => ''],
-        'multiple' => ['on' => 'multiple',  'off' => ''],
-        'readonly' => ['on' => 'readonly',  'off' => ''],
-        'required' => ['on' => 'required',  'off' => ''],
-        'selected' => ['on' => 'selected',  'off' => ''],
+        'autofocus'    => ['on' => 'autofocus', 'off' => ''],
+        'checked'      => ['on' => 'checked',   'off' => ''],
+        'disabled'     => ['on' => 'disabled',  'off' => ''],
+        'multiple'     => ['on' => 'multiple',  'off' => ''],
+        'readonly'     => ['on' => 'readonly',  'off' => ''],
+        'required'     => ['on' => 'required',  'off' => ''],
+        'selected'     => ['on' => 'selected',  'off' => ''],
     ];
 
     /**
@@ -90,77 +90,77 @@ abstract class AbstractElement extends AbstractExtensionCore
      * @var array
      */
     protected $validGlobalAttributes = [
-        'accesskey' => true,
-        'class' => true,
-        'contenteditable' => true,
-        'contextmenu' => true,
-        'dir' => true,
-        'draggable' => true,
-        'dropzone' => true,
-        'hidden' => true,
-        'id' => true,
-        'lang' => true,
-        'onabort' => true,
-        'onblur' => true,
-        'oncanplay' => true,
-        'oncanplaythrough' => true,
-        'onchange' => true,
-        'onclick' => true,
-        'oncontextmenu' => true,
-        'ondblclick' => true,
-        'ondrag' => true,
-        'ondragend' => true,
-        'ondragenter' => true,
-        'ondragleave' => true,
-        'ondragover' => true,
-        'ondragstart' => true,
-        'ondrop' => true,
-        'ondurationchange' => true,
-        'onemptied' => true,
-        'onended' => true,
-        'onerror' => true,
-        'onfocus' => true,
-        'oninput' => true,
-        'oninvalid' => true,
-        'onkeydown' => true,
-        'onkeypress' => true,
-        'onkeyup' => true,
-        'onload' => true,
-        'onloadeddata' => true,
-        'onloadedmetadata' => true,
-        'onloadstart' => true,
-        'onmousedown' => true,
-        'onmousemove' => true,
-        'onmouseout' => true,
-        'onmouseover' => true,
-        'onmouseup' => true,
-        'onmousewheel' => true,
-        'onpause' => true,
-        'onplay' => true,
-        'onplaying' => true,
-        'onprogress' => true,
-        'onratechange' => true,
+        'accesskey'          => true,
+        'class'              => true,
+        'contenteditable'    => true,
+        'contextmenu'        => true,
+        'dir'                => true,
+        'draggable'          => true,
+        'dropzone'           => true,
+        'hidden'             => true,
+        'id'                 => true,
+        'lang'               => true,
+        'onabort'            => true,
+        'onblur'             => true,
+        'oncanplay'          => true,
+        'oncanplaythrough'   => true,
+        'onchange'           => true,
+        'onclick'            => true,
+        'oncontextmenu'      => true,
+        'ondblclick'         => true,
+        'ondrag'             => true,
+        'ondragend'          => true,
+        'ondragenter'        => true,
+        'ondragleave'        => true,
+        'ondragover'         => true,
+        'ondragstart'        => true,
+        'ondrop'             => true,
+        'ondurationchange'   => true,
+        'onemptied'          => true,
+        'onended'            => true,
+        'onerror'            => true,
+        'onfocus'            => true,
+        'oninput'            => true,
+        'oninvalid'          => true,
+        'onkeydown'          => true,
+        'onkeypress'         => true,
+        'onkeyup'            => true,
+        'onload'             => true,
+        'onloadeddata'       => true,
+        'onloadedmetadata'   => true,
+        'onloadstart'        => true,
+        'onmousedown'        => true,
+        'onmousemove'        => true,
+        'onmouseout'         => true,
+        'onmouseover'        => true,
+        'onmouseup'          => true,
+        'onmousewheel'       => true,
+        'onpause'            => true,
+        'onplay'             => true,
+        'onplaying'          => true,
+        'onprogress'         => true,
+        'onratechange'       => true,
         'onreadystatechange' => true,
-        'onreset' => true,
-        'onscroll' => true,
-        'onseeked' => true,
-        'onseeking' => true,
-        'onselect' => true,
-        'onshow' => true,
-        'onstalled' => true,
-        'onsubmit' => true,
-        'onsuspend' => true,
-        'ontimeupdate' => true,
-        'onvolumechange' => true,
-        'onwaiting' => true,
-        'role' => true,
-        'spellcheck' => true,
-        'style' => true,
-        'tabindex' => true,
-        'title' => true,
-        'xml:base' => true,
-        'xml:lang' => true,
-        'xml:space' => true,
+        'onreset'            => true,
+        'onscroll'           => true,
+        'onseeked'           => true,
+        'onseeking'          => true,
+        'onselect'           => true,
+        'onshow'             => true,
+        'onstalled'          => true,
+        'onsubmit'           => true,
+        'onsuspend'          => true,
+        'ontimeupdate'       => true,
+        'onvolumechange'     => true,
+        'onwaiting'          => true,
+        'role'               => true,
+        'spellcheck'         => true,
+        'style'              => true,
+        'tabindex'           => true,
+        'title'              => true,
+        'xml:base'           => true,
+        'xml:lang'           => true,
+        'xml:space'          => true,
     ];
 
     /**
@@ -199,15 +199,15 @@ abstract class AbstractElement extends AbstractExtensionCore
     public function createAttributesString(Environment $env, array $attributes): string
     {
         $attributes = $this->prepareAttributes($attributes);
-        $escape = $env->getFilter('escape')->getCallable();
+        $escape     = $env->getFilter('escape')->getCallable();
         $escapeAttr = $this->getEscapeHtmlAttrHelper();
-        $strings = [];
+        $strings    = [];
 
         foreach ($attributes as $key => $value)
         {
             $key = strtolower($key);
 
-            if (! $value && isset($this->booleanAttributes[$key]) && ('' === $this->booleanAttributes[$key]['off']))
+            if ( ! $value && isset($this->booleanAttributes[$key]) && ('' === $this->booleanAttributes[$key]['off']))
             {
                 continue;
             }
@@ -219,7 +219,7 @@ abstract class AbstractElement extends AbstractExtensionCore
             try
             {
                 $escapedAttribute = $escapeAttr($value);
-                $strings[] = sprintf('%s="%s"', $escape($env, $key, 'html'), $escapedAttribute);
+                $strings[]        = sprintf('%s="%s"', $escape($env, $key, 'html'), $escapedAttribute);
             }
             catch (EscaperException $x)
             {
@@ -256,14 +256,14 @@ abstract class AbstractElement extends AbstractExtensionCore
      *
      * @param string $attribute
      *
-     * @return AbstractHelper
-     *
      * @throws InvalidArgumentException for attribute names that are invalid
      *                                  per the HTML specifications
+     *
+     * @return AbstractHelper
      */
     public function addValidAttribute($attribute)
     {
-        if (! $this->isValidAttributeName($attribute))
+        if ( ! $this->isValidAttributeName($attribute))
         {
             throw new InvalidArgumentException(sprintf('%s is not a valid attribute name', $attribute));
         }
@@ -278,14 +278,14 @@ abstract class AbstractElement extends AbstractExtensionCore
      *
      * @param string $prefix
      *
-     * @return AbstractHelper
-     *
      * @throws InvalidArgumentException for attribute prefixes that are invalid
      *                                  per the HTML specifications for attribute names
+     *
+     * @return AbstractHelper
      */
     public function addValidAttributePrefix($prefix)
     {
-        if (! $this->isValidAttributeName($prefix))
+        if ( ! $this->isValidAttributeName($prefix))
         {
             throw new InvalidArgumentException(sprintf('%s is not a valid attribute prefix', $prefix));
         }
@@ -370,7 +370,7 @@ abstract class AbstractElement extends AbstractExtensionCore
      */
     protected function getEscapeHtmlAttrHelper()
     {
-        if (! $this->escapeHtmlAttrHelper instanceof EscapeHtmlAttr)
+        if ( ! $this->escapeHtmlAttrHelper instanceof EscapeHtmlAttr)
         {
             $this->escapeHtmlAttrHelper = new EscapeHtmlAttr();
         }
@@ -392,7 +392,7 @@ abstract class AbstractElement extends AbstractExtensionCore
         {
             $attribute = strtolower($key);
 
-            if (! isset($this->validGlobalAttributes[$attribute])
+            if ( ! isset($this->validGlobalAttributes[$attribute])
                 && ! isset($this->validTagAttributes[$attribute])
                 && ! $this->hasAllowedPrefix($attribute)
             ) {
@@ -429,7 +429,7 @@ abstract class AbstractElement extends AbstractExtensionCore
      */
     protected function prepareBooleanAttributeValue($attribute, $value)
     {
-        if (! is_bool($value) && in_array($value, $this->booleanAttributes[$attribute]))
+        if ( ! is_bool($value) && in_array($value, $this->booleanAttributes[$attribute]))
         {
             return $value;
         }

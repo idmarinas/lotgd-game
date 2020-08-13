@@ -21,10 +21,8 @@ class MastersRepository extends DoctrineRepository
     /**
      * Find one master by id.
      * Master is translated.
-     *
-     * @return array|null
      */
-    public function findOneMasterById(int $id)
+    public function findOneMasterById(int $id): ?array
     {
         try
         {
@@ -49,10 +47,8 @@ class MastersRepository extends DoctrineRepository
     /**
      * Get an array of masters by ids.
      * Masters is translated.
-     *
-     * @return array|null
      */
-    public function findMastersById(array $ids)
+    public function findMastersById(array $ids): ?array
     {
         try
         {

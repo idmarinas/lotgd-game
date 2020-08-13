@@ -35,7 +35,7 @@ class Censor extends CensorWords
      *
      * @see Snipe\BanBuilder\CensorWords
      *
-     * @return string
+     * @param mixed $fullWords
      */
     public function filter(string $string, $fullWords = false): string
     {
@@ -49,8 +49,6 @@ class Censor extends CensorWords
 
     /**
      * Get the original text.
-     *
-     * @return string
      */
     public function getOrigString(): string
     {
@@ -59,8 +57,6 @@ class Censor extends CensorWords
 
     /**
      * Get matched words.
-     *
-     * @return array
      */
     public function getMatchWords(): array
     {

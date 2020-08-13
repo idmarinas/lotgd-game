@@ -13,14 +13,14 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormRow extends AbstractElement
 {
-    const LABEL_APPEND = 'append';
+    const LABEL_APPEND  = 'append';
     const LABEL_PREPEND = 'prepend';
 
     /**
@@ -69,10 +69,10 @@ class FormRow extends AbstractElement
     public function render(Environment $env, ElementInterface $element, ?string $translatorTextDomain = null): string
     {
         return $env->renderThemeTemplate('form/element/row.twig', [
-            'element' => $element,
-            'renderErrors' => $this->renderErrors,
-            'labelAttributes' => $this->labelAttributes,
-            'translatorTextDomain' => $element->getOptions()['translator_text_domain'] ?? $translatorTextDomain
+            'element'              => $element,
+            'renderErrors'         => $this->renderErrors,
+            'labelAttributes'      => $this->labelAttributes,
+            'translatorTextDomain' => $element->getOptions()['translator_text_domain'] ?? $translatorTextDomain,
         ]);
     }
 
@@ -137,7 +137,7 @@ class FormRow extends AbstractElement
     {
         $labelPosition = strtolower($labelPosition);
 
-        if (! in_array($labelPosition, [self::LABEL_APPEND, self::LABEL_PREPEND]))
+        if ( ! in_array($labelPosition, [self::LABEL_APPEND, self::LABEL_PREPEND]))
         {
             throw new Exception\InvalidArgumentException(sprintf('%s expects either %s::LABEL_APPEND or %s::LABEL_PREPEND; received "%s"', __METHOD__, __CLASS__, __CLASS__, (string) $labelPosition));
         }

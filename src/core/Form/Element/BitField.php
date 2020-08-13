@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\Form\Element;
 
-use Lotgd\Core\Filter as LotgdFilter;
 use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Validator;
+use Lotgd\Core\Filter as LotgdFilter;
 
 class BitField extends Select implements InputProviderInterface
 {
@@ -28,8 +28,8 @@ class BitField extends Select implements InputProviderInterface
      * @var array
      */
     protected $attributes = [
-        'type' => 'select',
-        'multiple' => true
+        'type'     => 'select',
+        'multiple' => true,
     ];
 
     /**
@@ -88,13 +88,13 @@ class BitField extends Select implements InputProviderInterface
     public function getInputSpecification()
     {
         return [
-            'name' => $this->getName(),
+            'name'    => $this->getName(),
             'filters' => [
                 //-- Transform array into BitField (int)
                 ['name' => LotgdFilter\BitField::class],
             ],
             'validators' => [
-                ['name' => Validator\Digits::class]
+                ['name' => Validator\Digits::class],
             ],
         ];
     }

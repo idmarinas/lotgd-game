@@ -25,7 +25,7 @@ trait Format
      */
     public function getFormat()
     {
-        if (! $this->lotgdFormat instanceof FormatCore)
+        if ( ! $this->lotgdFormat instanceof FormatCore)
         {
             $this->lotgdFormat = $this->getContainer(FormatCore::class);
         }

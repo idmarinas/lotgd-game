@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
+use Laminas\Form\ElementInterface;
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Laminas\Form\ElementInterface;
 
 class FormRange extends FormInput
 {
@@ -25,18 +25,18 @@ class FormRange extends FormInput
      * @var array
      */
     protected $validTagAttributes = [
-        'name' => true,
+        'name'         => true,
         'autocomplete' => true,
-        'autofocus' => true,
-        'disabled' => true,
-        'form' => true,
-        'list' => true,
-        'max' => true,
-        'min' => true,
-        'step' => true,
-        'required' => true,
-        'type' => true,
-        'value' => true
+        'autofocus'    => true,
+        'disabled'     => true,
+        'form'         => true,
+        'list'         => true,
+        'max'          => true,
+        'min'          => true,
+        'step'         => true,
+        'required'     => true,
+        'type'         => true,
+        'value'        => true,
     ];
 
     /**
@@ -65,16 +65,16 @@ class FormRange extends FormInput
             throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
-        $attributes = $element->getAttributes();
-        $attributes['name'] = $name;
-        $type = $this->getType($element);
-        $attributes['type'] = $type;
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $type                = $this->getType($element);
+        $attributes['type']  = $type;
         $attributes['value'] = $element->getValue();
 
         return $env->renderThemeTemplate('form/element/range.twig', [
-            'element' => $element,
-            'attributesString' => $this->createAttributesString($env, $attributes),
-            'disableSliderLabels' => $element->getOption('disable_slider_labels')
+            'element'             => $element,
+            'attributesString'    => $this->createAttributesString($env, $attributes),
+            'disableSliderLabels' => $element->getOption('disable_slider_labels'),
         ]);
     }
 

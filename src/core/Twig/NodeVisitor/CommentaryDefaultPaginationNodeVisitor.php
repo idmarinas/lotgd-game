@@ -42,7 +42,7 @@ class CommentaryDefaultPaginationNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('showPagination'))
+        if ( ! $this->scope->has('showPagination'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class CommentaryDefaultPaginationNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('showPagination'))
+            if ( ! $arguments->hasNode('showPagination'))
             {
                 $arguments->setNode('showPagination', $this->scope->get('showPagination'));
             }

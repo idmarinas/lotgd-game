@@ -13,25 +13,21 @@
 
 namespace Lotgd\Core\Db\Pattern;
 
-use Laminas\Db\Sql\{
-    Delete,
-    Insert,
-    Predicate\Expression,
-    Select,
-    Sql,
-    Update
-};
-use Laminas\Paginator\{
-    Adapter\DbSelect as DbSelectPaginator,
-    Paginator
-};
+use Laminas\Db\Sql\Delete;
+use Laminas\Db\Sql\Insert;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Update;
+use Laminas\Paginator\Adapter\DbSelect as DbSelectPaginator;
+use Laminas\Paginator\Paginator;
 
 /**
  * Contain all methods for zend-db component.
  */
 trait Zend
 {
-    protected $sql = null;
+    protected $sql;
 
     /**
      * Select API.
@@ -142,7 +138,7 @@ trait Zend
         $page = max(1, $page);
 
         $paginatorAdapter = new DbSelectPaginator($select, $this->getAdapter());
-        $paginator = new Paginator($paginatorAdapter);
+        $paginator        = new Paginator($paginatorAdapter);
         // Curren page
         $paginator->setCurrentPageNumber($page);
         // Max number of results per pag
@@ -159,14 +155,12 @@ trait Zend
      *
      * @param string $expresion
      */
-    public function expression(string $expresion = null)
+    public function expression(?string $expresion = null)
     {
         if (is_string($expresion))
         {
             return new Expression($expresion);
         }
-
-        return;
     }
 
     /**
@@ -187,7 +181,7 @@ trait Zend
 
     public function sql()
     {
-        if (! $this->sql)
+        if ( ! $this->sql)
         {
             $this->sql = new Sql($this->getAdapter());
         }

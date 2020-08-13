@@ -14,18 +14,18 @@
 namespace Lotgd\Core\Factory\Template;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Template\Theme as TemplateTheme;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
-use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Theme implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $config = $container->get('GameConfig');
+        $config  = $container->get('GameConfig');
         $options = $config['lotgd_core'] ?? [];
 
         $template = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
@@ -33,14 +33,14 @@ class Theme implements FactoryInterface
             //-- Used dir of cache
             'cache' => 'storage/cache/template',
             //-- Used in development for reload .twig templates
-            'auto_reload' => (bool) ($options['development'] ?? false)
+            'auto_reload' => (bool) ($options['development'] ?? false),
         ]);
         $template->setContainer($container);
 
         // the Twig file that holds all the default markup for rendering forms
         // this file comes with TwigBridge
         $defaultFormTheme = 'semantic-ui-form-theme.html.twig';
-        $formEngine = new TwigRendererEngine([$defaultFormTheme], $template);
+        $formEngine       = new TwigRendererEngine([$defaultFormTheme], $template);
         $template->addRuntimeLoader(new FactoryRuntimeLoader([
             FormRenderer::class => function () use ($formEngine)
             {
@@ -51,7 +51,7 @@ class Theme implements FactoryInterface
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
 
-        if (! empty($extensions) && is_array($extensions))
+        if ( ! empty($extensions) && is_array($extensions))
         {
             foreach ($extensions as $className)
             {

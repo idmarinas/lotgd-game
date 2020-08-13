@@ -55,7 +55,7 @@ class FlashMessages
         self::TYPE_SUCCESS,
         self::TYPE_WARNING,
         self::TYPE_ERROR,
-        self::TYPE_INFO
+        self::TYPE_INFO,
     ];
 
     /**
@@ -101,7 +101,7 @@ class FlashMessages
      */
     public function getSessionManager()
     {
-        if (! $this->session instanceof ManagerInterface)
+        if ( ! $this->session instanceof ManagerInterface)
         {
             $this->setSessionManager(Container::getDefaultManager());
         }
@@ -137,15 +137,15 @@ class FlashMessages
     public function addMessage($message, $type = null)
     {
         $container = $this->getContainer();
-        $type = $type ?: self::TYPE_INFO;
+        $type      = $type ?: self::TYPE_INFO;
 
-        if (! $this->messageAdded)
+        if ( ! $this->messageAdded)
         {
             $this->getMessagesFromContainer();
             $container->setExpirationHops(1);
         }
 
-        if (! isset($container->{$type}) || ! $container->{$type} instanceof SplQueue)
+        if ( ! isset($container->{$type}) || ! $container->{$type} instanceof SplQueue)
         {
             $container->{$type} = new SplQueue();
         }
@@ -280,9 +280,9 @@ class FlashMessages
      *
      * Iterates through the session container, removing messages into the local scope.
      */
-    protected function getMessagesFromContainer()
+    protected function getMessagesFromContainer(): void
     {
-        if (! empty($this->messages) || $this->messageAdded)
+        if ( ! empty($this->messages) || $this->messageAdded)
         {
             return;
         }
@@ -294,7 +294,7 @@ class FlashMessages
         foreach ($container as $type => $messages)
         {
             $this->messages[$type] = $messages;
-            $namespaces[] = $type;
+            $namespaces[]          = $type;
         }
 
         foreach ($namespaces as $type)

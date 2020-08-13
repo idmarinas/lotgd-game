@@ -28,7 +28,7 @@ class SpecialtyType extends ChoiceType
 
         $resolver->setDefaults([
             'attr' => [
-                'class' => 'search selection lotgd'
+                'class' => 'search selection lotgd',
             ],
             'choices' => $specialties,
         ]);

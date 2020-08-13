@@ -13,13 +13,13 @@
 namespace Lotgd\Core\Factory;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Session as CoreSession;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Session as CoreSession;
 
 class Session implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $session = new CoreSession();
         $session->setContainer($container);

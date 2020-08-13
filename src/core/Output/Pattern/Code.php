@@ -29,7 +29,7 @@ trait Code
      */
     public function getCodes()
     {
-        if (! $this->codes)
+        if ( ! $this->codes)
         {
             $this->codes = $this->getContainer(\Lotgd\Core\Output\Code::class);
         }
@@ -44,9 +44,12 @@ trait Code
      */
     public function getCodePatternOpen()
     {
-        if (! $this->codePatternOpen)
+        if ( ! $this->codePatternOpen)
         {
-            $this->codePatternOpen = array_map(function ($k) { return "`{$k}"; }, array_keys($this->getCodes()));
+            $this->codePatternOpen = array_map(function ($k)
+            {
+                return "`{$k}";
+            }, array_keys($this->getCodes()));
         }
 
         return $this->codePatternOpen;
@@ -59,9 +62,12 @@ trait Code
      */
     public function getCodePatternClose()
     {
-        if (! $this->codePatternClose)
+        if ( ! $this->codePatternClose)
         {
-            $this->codePatternClose = array_map(function ($k) { return "´{$k}"; }, array_keys($this->getCodes()));
+            $this->codePatternClose = array_map(function ($k)
+            {
+                return "´{$k}";
+            }, array_keys($this->getCodes()));
         }
 
         return $this->codePatternClose;
@@ -69,14 +75,15 @@ trait Code
 
     /**
      * Get replacement  for code open code colors.
-     *
-     * @return void
      */
     public function getCodeReplacementOpen()
     {
-        if (! $this->codeReplacementOpen)
+        if ( ! $this->codeReplacementOpen)
         {
-            $this->codeReplacementOpen = array_map(function ($k) { return "<{$k}>"; }, array_values($this->getCodes()));
+            $this->codeReplacementOpen = array_map(function ($k)
+            {
+                return "<{$k}>";
+            }, array_values($this->getCodes()));
         }
 
         return $this->codeReplacementOpen;
@@ -84,14 +91,15 @@ trait Code
 
     /**
      * Get replacement for code close code colors.
-     *
-     * @return void
      */
     public function getCodeReplacementClose()
     {
-        if (! $this->codeReplacementClose)
+        if ( ! $this->codeReplacementClose)
         {
-            $this->codeReplacementClose = array_map(function ($k) { return "</{$k}>"; }, array_values($this->getCodes()));
+            $this->codeReplacementClose = array_map(function ($k)
+            {
+                return "</{$k}>";
+            }, array_values($this->getCodes()));
         }
 
         return $this->codeReplacementClose;
@@ -99,12 +107,10 @@ trait Code
 
     /**
      * Get Special  for code open code colors.
-     *
-     * @return void
      */
     public function getCodeSpecialOpen()
     {
-        if (! $this->codeSpecialOpen)
+        if ( ! $this->codeSpecialOpen)
         {
             $this->codeSpecialOpen = $this->codes->getCodesSpecialOpen();
         }
@@ -119,7 +125,7 @@ trait Code
      */
     public function getCodeSpecialClose()
     {
-        if (! $this->codeSpecialClose)
+        if ( ! $this->codeSpecialClose)
         {
             $this->codeSpecialClose = $this->codes->getCodesSpecialClose();
         }
@@ -134,7 +140,7 @@ trait Code
      */
     public function getCodeSpecialPatternOpen()
     {
-        if (! $this->codeSpecialPatternOpen)
+        if ( ! $this->codeSpecialPatternOpen)
         {
             $this->codeSpecialPatternOpen = array_keys($this->getCodeSpecialOpen());
         }
@@ -149,7 +155,7 @@ trait Code
      */
     public function getCodeSpecialPatternClose()
     {
-        if (! $this->codeSpecialPatternClose)
+        if ( ! $this->codeSpecialPatternClose)
         {
             $this->codeSpecialPatternClose = array_keys($this->getCodeSpecialClose());
         }
@@ -159,12 +165,10 @@ trait Code
 
     /**
      * Get replacement  for code open code colors.
-     *
-     * @return void
      */
     public function getCodeSpecialReplacementOpen()
     {
-        if (! $this->codeSpecialReplacementOpen)
+        if ( ! $this->codeSpecialReplacementOpen)
         {
             $this->codeSpecialReplacementOpen = array_values($this->getCodeSpecialOpen());
         }
@@ -174,12 +178,10 @@ trait Code
 
     /**
      * Get replacement for code close code colors.
-     *
-     * @return void
      */
     public function getCodeSpecialReplacementClose()
     {
-        if (! $this->codeSpecialReplacementClose)
+        if ( ! $this->codeSpecialReplacementClose)
         {
             $this->codeSpecialReplacementClose = array_values($this->getCodeSpecialClose());
         }

@@ -25,12 +25,12 @@ class RaceType extends ChoiceType
         $races = modulehook('racenames');
         $races = array_flip($races);
         $races = [
-            \LotgdTranslator::t('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN
+            \LotgdTranslator::t('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN,
         ] + $races;
 
         $resolver->setDefaults([
             'attr' => [
-                'class' => 'search selection lotgd'
+                'class' => 'search selection lotgd',
             ],
             'choices' => $races,
         ]);

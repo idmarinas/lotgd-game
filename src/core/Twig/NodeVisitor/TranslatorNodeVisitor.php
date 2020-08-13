@@ -26,18 +26,18 @@ class TranslatorNodeVisitor extends AbstractNodeVisitor
 {
     const UNDEFINED_DOMAIN = '_undefined';
 
-    private $enabled = false;
+    private $enabled  = false;
     private $messages = [];
 
     public function enable()
     {
-        $this->enabled = true;
+        $this->enabled  = true;
         $this->messages = [];
     }
 
     public function disable()
     {
-        $this->enabled = false;
+        $this->enabled  = false;
         $this->messages = [];
     }
 
@@ -59,7 +59,7 @@ class TranslatorNodeVisitor extends AbstractNodeVisitor
      */
     protected function doEnterNode(Node $node, Environment $env)
     {
-        if (! $this->enabled)
+        if ( ! $this->enabled)
         {
             return $node;
         }

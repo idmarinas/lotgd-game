@@ -21,12 +21,10 @@ class ClansRepository extends DoctrineRepository
 {
     /**
      * Get list of clans for apply to enter.
-     *
-     * @return array
      */
     public function getClanListWithMembersCount(int $order): array
     {
-        $query = $this->createQueryBuilder('u');
+        $query      = $this->createQueryBuilder('u');
         $countQuery = $this->_em->createQueryBuilder()->from(EntityCore\Characters::class, 'c');
 
         try
@@ -66,8 +64,6 @@ class ClansRepository extends DoctrineRepository
 
     /**
      * Create a new clan.
-     *
-     * @return int|null
      */
     public function createClan(array $data): ?int
     {

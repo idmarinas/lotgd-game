@@ -30,7 +30,7 @@ trait Translator
      */
     public function translate(Environment $env, $message, $parameters = [], $domain = null, $locale = null): string
     {
-        if (! $message)
+        if ( ! $message)
         {
             return '';
         }
@@ -49,7 +49,7 @@ trait Translator
      */
     public function translateMf(Environment $env, $message, $parameters = [], $locale = null): string
     {
-        if (! $message)
+        if ( ! $message)
         {
             return '';
         }
@@ -68,7 +68,7 @@ trait Translator
      */
     public function translateSt(Environment $env, $message, $domain = null, $locale = null): string
     {
-        if (! $message)
+        if ( ! $message)
         {
             return '';
         }

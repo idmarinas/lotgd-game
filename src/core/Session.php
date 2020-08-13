@@ -39,19 +39,19 @@ class Session
         $request = $this->getContainer(Http::class);
 
         $session->regenerateId(true);
-        $container->init = 1;
-        $container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
+        $container->init          = 1;
+        $container->remoteAddr    = $request->getServer()->get('REMOTE_ADDR');
         $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
-        $config = $this->getContainer('GameConfig');
+        $config                   = $this->getContainer('GameConfig');
 
-        if (! isset($config['session_manager']))
+        if ( ! isset($config['session_manager']))
         {
             return;
         }
 
         $sessionConfig = $config['session_manager'];
 
-        if (! isset($sessionConfig['validators']))
+        if ( ! isset($sessionConfig['validators']))
         {
             return;
         }
@@ -84,7 +84,7 @@ class Session
     {
         try
         {
-            $session = $this->getContainer(SessionManager::class);
+            $session   = $this->getContainer(SessionManager::class);
             $container = new Container('initialized');
 
             $session->forgetMe();

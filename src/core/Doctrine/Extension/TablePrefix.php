@@ -27,14 +27,14 @@ class TablePrefix implements EventSubscriber
         $this->prefix = (string) $prefix;
     }
 
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $classMetadata = $eventArgs->getClassMetadata();
 
-        if (! $classMetadata->isInheritanceTypeSingleTable() || $classMetadata->getName() === $classMetadata->rootEntityName)
+        if ( ! $classMetadata->isInheritanceTypeSingleTable() || $classMetadata->getName() === $classMetadata->rootEntityName)
         {
             $classMetadata->setPrimaryTable([
-                'name' => $this->prefix.$classMetadata->getTableName()
+                'name' => $this->prefix.$classMetadata->getTableName(),
             ]);
         }
 
@@ -42,7 +42,7 @@ class TablePrefix implements EventSubscriber
         {
             if (ClassMetadataInfo::MANY_TO_MANY == $mapping['type'] && $mapping['isOwningSide'])
             {
-                $mappedTableName = $mapping['joinTable']['name'];
+                $mappedTableName                                                     = $mapping['joinTable']['name'];
                 $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix.$mappedTableName;
             }
         }

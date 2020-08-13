@@ -12,13 +12,13 @@
 
 namespace Lotgd\Core\Translator\Loader;
 
-use Symfony\Component\Yaml\Exception\ParseException;
-use Symfony\Component\Yaml\Parser as YamlParser;
-use Symfony\Component\Yaml\Yaml as SymfonyYaml;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\AbstractFileLoader;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Parser as YamlParser;
+use Symfony\Component\Yaml\Yaml as SymfonyYaml;
 
 /**
  * Load a Yaml file.
@@ -31,9 +31,9 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
     public function load($locale, $filename)
     {
         $resolvedIncludePath = stream_resolve_include_path($filename);
-        $fromIncludePath = (false !== $resolvedIncludePath) ? $resolvedIncludePath : $filename;
+        $fromIncludePath     = (false !== $resolvedIncludePath) ? $resolvedIncludePath : $filename;
 
-        if (! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath))
+        if ( ! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath))
         {
             throw new Exception\InvalidArgumentException(sprintf('Could not find or open file %s for reading', $filename));
         }
@@ -51,7 +51,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         $messages = $this->flatten($messages ?: []);
 
-        if (! is_array($messages))
+        if ( ! is_array($messages))
         {
             throw new Exception\InvalidArgumentException(sprintf('Expected an array, but received %s', gettype($messages)));
         }
@@ -117,7 +117,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
      * @param array  $node Internal use
      * @param string $path Internal use
      */
-    private function flatten(array $messages, array $node = null, $path = null)
+    private function flatten(array $messages, ?array $node = null, $path = null)
     {
         if (null === $node)
         {

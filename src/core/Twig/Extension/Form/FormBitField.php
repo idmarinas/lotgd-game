@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
 use Lotgd\Core\Form\Element\BitField;
 use Lotgd\Core\Template\Theme as Environment;
 use Twig\TwigFunction;
-use Laminas\Form\ElementInterface;
-use Laminas\Form\Exception;
 
 class FormBitField extends FormSelect
 {
@@ -41,7 +41,7 @@ class FormBitField extends FormSelect
      */
     public function render(Environment $env, ElementInterface $element)
     {
-        if (! $element instanceof BitField)
+        if ( ! $element instanceof BitField)
         {
             throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Lotgd\Core\Form\Element\BitField', __METHOD__));
         }
@@ -65,6 +65,8 @@ class FormBitField extends FormSelect
 
     /**
      * Format bitfield values as array.
+     *
+     * @param mixed $value
      */
     protected function bitFieldValues($value, array $disableMask): array
     {
@@ -74,8 +76,8 @@ class FormBitField extends FormSelect
         }
 
         $optionValues = [];
-        $current = 1;
-        $bitfield = (int) $value;
+        $current      = 1;
+        $bitfield     = (int) $value;
 
         while ($current & 0x7FFFFFFF)
         {

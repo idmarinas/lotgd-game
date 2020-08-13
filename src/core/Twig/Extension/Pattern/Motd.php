@@ -20,8 +20,6 @@ trait Motd
 {
     /**
      * Get message of the day link.
-     *
-     * @return string
      */
     public function messageOfTheDay(): string
     {
@@ -34,8 +32,6 @@ trait Motd
      * Display MoTD item or poll.
      *
      * @param array $params Extra params
-     *
-     * @return string
      */
     public function display(array $motd, array $params = []): string
     {
@@ -44,7 +40,7 @@ trait Motd
         //-- Merge data
         $sub = $motd[0];
         unset($motd[0]);
-        $motd = array_merge($sub, $motd);
+        $motd   = array_merge($sub, $motd);
         $params = array_merge(['motd' => $motd], $params);
 
         if ($motd['motdtype'])

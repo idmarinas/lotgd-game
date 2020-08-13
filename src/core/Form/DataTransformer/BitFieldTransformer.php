@@ -21,7 +21,7 @@ class BitFieldTransformer implements DataTransformerInterface
 
     public function transform($bits)
     {
-        $valid = [];
+        $valid   = [];
         $current = 1;
 
         while ($current & BitFieldTransformer::MAX_BITFIELDS)

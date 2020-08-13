@@ -12,8 +12,8 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\Entity\EntityInterface;
 use Laminas\Hydrator\ClassMethods;
+use Lotgd\Core\Entity\EntityInterface;
 
 trait EntityHydrator
 {
@@ -34,8 +34,6 @@ trait EntityHydrator
      * Extract values from an object with class methods.
      *
      * @param object $object
-     *
-     * @return array
      */
     public function extractEntity($object): array
     {
@@ -58,12 +56,10 @@ trait EntityHydrator
 
     /**
      * Get Hydrator instance.
-     *
-     * @return ClassMethods
      */
     public function getHydrator(): ClassMethods
     {
-        if (! $this->hydrator)
+        if ( ! $this->hydrator)
         {
             $this->hydrator = new ClassMethods();
         }

@@ -17,8 +17,6 @@ trait CharacterFunction
 {
     /**
      * Get character race name.
-     *
-     * @return string
      */
     public function characterRace(): string
     {

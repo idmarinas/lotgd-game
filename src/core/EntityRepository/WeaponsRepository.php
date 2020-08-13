@@ -23,7 +23,7 @@ class WeaponsRepository extends DoctrineRepository
      *
      * @param int $dragonKills
      */
-    public function getMaxWeaponLevel(int $dragonKills = null): int
+    public function getMaxWeaponLevel(?int $dragonKills = null): int
     {
         $query = $this->createQueryBuilder('u');
 
@@ -78,10 +78,8 @@ class WeaponsRepository extends DoctrineRepository
 
     /**
      * Get a translated list for a level.
-     *
-     * @return array
      */
-    public function findByLevel(int $level)
+    public function findByLevel(int $level): ?array
     {
         try
         {
@@ -107,10 +105,8 @@ class WeaponsRepository extends DoctrineRepository
     /**
      * Find one by id.
      * Entity is translated.
-     *
-     * @return array|null
      */
-    public function findOneWeaponById(int $id)
+    public function findOneWeaponById(int $id): ?array
     {
         try
         {
@@ -135,10 +131,8 @@ class WeaponsRepository extends DoctrineRepository
     /**
      * Get an array by ids.
      * Entities is translated.
-     *
-     * @return array|null
      */
-    public function findWeaponsById(array $ids)
+    public function findWeaponsById(array $ids): ?array
     {
         try
         {

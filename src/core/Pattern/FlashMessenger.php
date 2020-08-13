@@ -25,7 +25,7 @@ trait FlashMessenger
      */
     public function getFlashMessenger()
     {
-        if (! $this->lotgdFlashMessenger instanceof FlashMessengerCore)
+        if ( ! $this->lotgdFlashMessenger instanceof FlashMessengerCore)
         {
             $this->lotgdFlashMessenger = $this->getContainer(FlashMessengerCore::class);
         }

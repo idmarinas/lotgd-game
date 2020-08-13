@@ -32,76 +32,76 @@ class CreaturesType extends AbstractType
     {
         $builder
             ->add('creatureimage', TextType::class, [
-                'label' => 'creatureimage',
-                'required' => false
+                'label'    => 'creatureimage',
+                'required' => false,
             ])
             ->add('creaturecategory', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class, //-- Mandatory
-                'widget' => CreaturesFieldType\CategoryTranslationType::class,
-                'field' => 'creaturecategory', //-- Mandatory
-                'label' => 'creaturecategory',
-                'required' => false
+                'widget'               => CreaturesFieldType\CategoryTranslationType::class,
+                'field'                => 'creaturecategory', //-- Mandatory
+                'label'                => 'creaturecategory',
+                'required'             => false,
             ])
             ->add('creaturename', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class,
-                'widget' => CreaturesFieldType\NameTranslationType::class,
-                'field' => 'creaturename',
-                'label' => 'creaturename',
+                'widget'               => CreaturesFieldType\NameTranslationType::class,
+                'field'                => 'creaturename',
+                'label'                => 'creaturename',
             ])
             ->add('creatureweapon', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class,
-                'widget' => CreaturesFieldType\WeaponTranslationType::class,
-                'field' => 'creatureweapon',
-                'label' => 'creatureweapon',
+                'widget'               => CreaturesFieldType\WeaponTranslationType::class,
+                'field'                => 'creatureweapon',
+                'label'                => 'creatureweapon',
             ])
             ->add('creaturedescription', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class,
-                'widget' => CreaturesFieldType\DescriptionTranslationType::class,
-                'field' => 'creaturedescription',
-                'label' => 'creaturedescription',
-                'required' => false,
+                'widget'               => CreaturesFieldType\DescriptionTranslationType::class,
+                'field'                => 'creaturedescription',
+                'label'                => 'creaturedescription',
+                'required'             => false,
             ])
             ->add('creaturewin', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class,
-                'widget' => CreaturesFieldType\WinTranslationType::class,
-                'field' => 'creaturewin',
-                'label' => 'creaturewin',
-                'required' => false,
+                'widget'               => CreaturesFieldType\WinTranslationType::class,
+                'field'                => 'creaturewin',
+                'label'                => 'creaturewin',
+                'required'             => false,
             ])
             ->add('creaturelose', TranslatableFieldType::class, [
                 'personal_translation' => CreaturesTranslation::class,
-                'widget' => CreaturesFieldType\LoseTranslationType::class,
-                'field' => 'creaturelose',
-                'label' => 'creaturelose',
-                'required' => false,
+                'widget'               => CreaturesFieldType\LoseTranslationType::class,
+                'field'                => 'creaturelose',
+                'label'                => 'creaturelose',
+                'required'             => false,
             ])
             ->add('creaturegoldbonus', NumberType::class, [
                 'label' => 'creaturegoldbonus',
-                'help' => 'creaturegoldbonus_help'
+                'help'  => 'creaturegoldbonus_help',
             ])
             ->add('creaturedefensebonus', NumberType::class, [
                 'label' => 'creaturedefensebonus',
-                'help' => 'creaturedefensebonus_help'
+                'help'  => 'creaturedefensebonus_help',
             ])
             ->add('creatureattackbonus', NumberType::class, [
                 'label' => 'creatureattackbonus',
-                'help' => 'creatureattackbonus_help'
+                'help'  => 'creatureattackbonus_help',
             ])
             ->add('creaturehealthbonus', NumberType::class, [
                 'label' => 'creaturehealthbonus',
-                'help' => 'creaturehealthbonus_help'
+                'help'  => 'creaturehealthbonus_help',
             ])
             ->add('creatureaiscript', CreatureAiType::class, [
-                'label' => 'creatureaiscript',
-                'required' => false
+                'label'    => 'creatureaiscript',
+                'required' => false,
             ])
             ->add('forest', CheckboxType::class, [
-                'label' => 'forest',
-                'required' => false
+                'label'    => 'forest',
+                'required' => false,
             ])
             ->add('graveyard', CheckboxType::class, [
-                'label' => 'graveyard',
-                'required' => false
+                'label'    => 'graveyard',
+                'required' => false,
             ])
             ->add('save', SubmitType::class, ['label' => 'save.button'])
         ;
@@ -110,8 +110,8 @@ class CreaturesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Creatures::class,
-            'translation_domain' => 'form-core-grotto-creature'
+            'data_class'         => Creatures::class,
+            'translation_domain' => 'form-core-grotto-creature',
         ]);
     }
 }

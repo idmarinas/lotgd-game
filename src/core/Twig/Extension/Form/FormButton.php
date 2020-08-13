@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\LabelAwareInterface;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormButton extends FormInput
 {
@@ -27,17 +27,17 @@ class FormButton extends FormInput
      * @var array
      */
     protected $validTagAttributes = [
-        'name' => true,
-        'autofocus' => true,
-        'disabled' => true,
-        'form' => true,
-        'formaction' => true,
-        'formenctype' => true,
-        'formmethod' => true,
+        'name'           => true,
+        'autofocus'      => true,
+        'disabled'       => true,
+        'form'           => true,
+        'formaction'     => true,
+        'formenctype'    => true,
+        'formmethod'     => true,
         'formnovalidate' => true,
-        'formtarget' => true,
-        'type' => true,
-        'value' => true,
+        'formtarget'     => true,
+        'type'           => true,
+        'value'          => true,
     ];
 
     /**
@@ -47,7 +47,7 @@ class FormButton extends FormInput
      */
     protected $validTypes = [
         'button' => 'button',
-        'reset' => 'reset',
+        'reset'  => 'reset',
         'submit' => 'submit',
     ];
 
@@ -75,7 +75,7 @@ class FormButton extends FormInput
     {
         $openTag = $this->openTag($env, $element);
 
-        $label = $element->getLabel();
+        $label      = $element->getLabel();
         $translator = $this->getTranslator();
 
         if (null === $label)
@@ -85,10 +85,10 @@ class FormButton extends FormInput
 
         $label = $translator->translate($label, $element->getOption('translator_text_domain') ?: $this->getTranslatorTextDomain());
 
-        if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape'))
+        if ( ! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape'))
         {
             $escapeHtmlHelper = $env->getFilter('escape')->getCallable();
-            $label = $escapeHtmlHelper($env, $label, 'html');
+            $label            = $escapeHtmlHelper($env, $label, 'html');
         }
 
         return $openTag.$label.$this->closeTag();
@@ -118,22 +118,22 @@ class FormButton extends FormInput
             return sprintf('<button %s>', $attributes);
         }
 
-        if (! $attributesOrElement instanceof ElementInterface)
+        if ( ! $attributesOrElement instanceof ElementInterface)
         {
             throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
         }
 
         $element = $attributesOrElement;
-        $name = $element->getName();
+        $name    = $element->getName();
 
         if (empty($name) && 0 !== $name)
         {
             throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
-        $attributes = $element->getAttributes();
-        $attributes['name'] = $name;
-        $attributes['type'] = $this->getType($element);
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getType($element);
         $attributes['value'] = $element->getValue();
 
         return sprintf(

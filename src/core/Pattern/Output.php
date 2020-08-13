@@ -25,7 +25,7 @@ trait Output
      */
     public function getOutput()
     {
-        if (! $this->lotgdOutput instanceof OutputCore)
+        if ( ! $this->lotgdOutput instanceof OutputCore)
         {
             $this->lotgdOutput = $this->getContainer(OutputCore::class);
         }

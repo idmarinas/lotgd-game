@@ -14,9 +14,9 @@
 namespace Lotgd\Core\EntityRepository\Account;
 
 use Doctrine\ORM\Query\Expr\Join;
+use Laminas\Paginator\Paginator;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
-use Laminas\Paginator\Paginator;
 
 /**
  * Functions for bans account.
@@ -25,8 +25,6 @@ trait Bans
 {
     /**
      * Search accounts.
-     *
-     * @return Paginator|null
      */
     public function bansSearchAccts(string $search, string $order, int $page): ?Paginator
     {
@@ -64,8 +62,6 @@ trait Bans
 
     /**
      * Get a basic information of account for ban.
-     *
-     * @return array
      */
     public function getBasicInfoOfAccount(int $acctId): array
     {
@@ -93,8 +89,6 @@ trait Bans
 
     /**
      * Get accounts with identical ID.
-     *
-     * @return array
      */
     public function getAccountsWithEqualId(string $uniqueId): array
     {
@@ -124,13 +118,11 @@ trait Bans
 
     /**
      * Get accounts with similar IP.
-     *
-     * @return array
      */
     public function getAccountsWithSimilarIp(string $ip, int $accountId): array
     {
         $query = $this->createQueryBuilder('u');
-        $expr = $query->expr();
+        $expr  = $query->expr();
 
         try
         {
@@ -143,21 +135,21 @@ trait Bans
             ;
             $dots = 0;
 
-            for ($x = strlen($ip); $x > 0; $x--)
+            for ($x = strlen($ip); $x > 0; --$x)
             {
                 if ($dots > 1)
                 {
                     break;
                 }
                 $thisip = substr($ip, 0, $x);
-                $query->orWhere("u.lastip LIKE ?$x")
+                $query->orWhere("u.lastip LIKE ?{$x}")
                     ->setParameter($x, "{$thisip}%")
                 ;
 
                 if ('.' == substr($ip, $x - 1, 1))
                 {
-                    $x--;
-                    $dots++;
+                    --$x;
+                    ++$dots;
                 }
             }
 
@@ -180,8 +172,6 @@ trait Bans
 
     /**
      * Log out affected players for a ban.
-     *
-     * @return int
      */
     public function logoutAffectedAccounts(string $ip, string $id, string $type): int
     {

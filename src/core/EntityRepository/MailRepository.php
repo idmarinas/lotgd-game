@@ -23,17 +23,15 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get a count of see and unsee mail.
-     *
-     * @return array
      */
     public function getCountMailOfCharacter(int $acctId): array
     {
         $default = [
-            'seenCount' => 0,
-            'notSeenCount' => 0
+            'seenCount'    => 0,
+            'notSeenCount' => 0,
         ];
 
-        if (! $acctId)
+        if ( ! $acctId)
         {
             return $default;
         }
@@ -88,13 +86,11 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get list of messages for a character.
-     *
-     * @return array
      */
     public function getCharacterMail(int $acctId, string $order, int $direction): array
     {
         $query = $this->createQueryBuilder('u');
-        $expr = $query->expr();
+        $expr  = $query->expr();
 
         switch ($order)
         {
@@ -139,13 +135,11 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get a names of senders and count msgs.
-     *
-     * @return array
      */
     public function getMailSenderNames(int $acctId): array
     {
         $query = $this->createQueryBuilder('u');
-        $expr = $query->expr();
+        $expr  = $query->expr();
 
         try
         {
@@ -173,14 +167,12 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get next and previous IDs of current mail.
-     *
-     * @return array
      */
     public function getNextPreviousMail(int $mailId, int $acctId): array
     {
         $query = $this->createQueryBuilder('u');
-        $next = $this->createQueryBuilder('n');
-        $prev = $this->createQueryBuilder('p');
+        $next  = $this->createQueryBuilder('n');
+        $prev  = $this->createQueryBuilder('p');
 
         try
         {
@@ -247,13 +239,11 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Get info of the reply message.
-     *
-     * @return array
      */
     public function replyToMessage(int $msgId, int $acct): array
     {
         $query = $this->createQueryBuilder('u');
-        $expr = $query->expr();
+        $expr  = $query->expr();
 
         try
         {
@@ -284,8 +274,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Count messages in inbox of character.
-     *
-     * @return int
      */
     public function countInboxOfCharacter(int $acctId, int $onlyUnseen): int
     {
@@ -319,8 +307,6 @@ class MailRepository extends DoctrineRepository
 
     /**
      * Delte old mails in data base.
-     *
-     * @return int
      */
     public function deleteExpireMail(int $expire): int
     {

@@ -22,7 +22,7 @@ class Theme
     /**
      * Add support for magic static method calls.
      *
-     * @param string $name
+     * @param mixed  $method
      * @param array  $arguments
      *
      * @return mixed the returned value from the resolved method
@@ -36,7 +36,7 @@ class Theme
 
         $methods = implode(', ', get_class_methods(self::$wrapper));
 
-        throw new \BadMethodCallException("Undefined method '$method'. The method name must be one of '$methods'");
+        throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**

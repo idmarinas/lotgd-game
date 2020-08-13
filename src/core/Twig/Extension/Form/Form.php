@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\Element\Csrf;
 use Laminas\Form\Factory;
 use Laminas\Form\FormInterface;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class Form extends AbstractElement
 {
@@ -30,13 +30,13 @@ class Form extends AbstractElement
      */
     protected $validTagAttributes = [
         'accept-charset' => true,
-        'action' => true,
-        'autocomplete' => true,
-        'enctype' => true,
-        'method' => true,
-        'name' => true,
-        'novalidate' => true,
-        'target' => true,
+        'action'         => true,
+        'autocomplete'   => true,
+        'enctype'        => true,
+        'method'         => true,
+        'name'           => true,
+        'novalidate'     => true,
+        'target'         => true,
     ];
 
     /**
@@ -90,7 +90,7 @@ class Form extends AbstractElement
     /**
      * Generate an opening tag.
      */
-    public function openTag(Environment $env, FormInterface $form = null): string
+    public function openTag(Environment $env, ?FormInterface $form = null): string
     {
         //-- Add form action url to allowed navs
         if ($form->getAttribute('action'))
@@ -110,7 +110,7 @@ class Form extends AbstractElement
         {
             $formAttributes = $form->getAttributes();
 
-            if (! array_key_exists('id', $formAttributes) && array_key_exists('name', $formAttributes))
+            if ( ! array_key_exists('id', $formAttributes) && array_key_exists('name', $formAttributes))
             {
                 $formAttributes['id'] = $formAttributes['name'];
             }
@@ -154,7 +154,7 @@ class Form extends AbstractElement
         }
 
         //-- Addd error class to show errors of form
-        if (! empty($form->getMessages()))
+        if ( ! empty($form->getMessages()))
         {
             $form->setAttribute('class', $form->getAttribute('class').' error');
         }
@@ -168,20 +168,18 @@ class Form extends AbstractElement
         }
 
         $buttonsRaw = $form->getOption('buttons');
-        $buttons = $buttonsRaw ? $this->generateButtonsForForm($buttonsRaw) : [];
+        $buttons    = $buttonsRaw ? $this->generateButtonsForForm($buttonsRaw) : [];
 
         return [
-            'form' => $form,
-            'security' => $security,
-            'buttons' => $buttons,
-            'translatorTextDomain' => $form->getOptions()['translator_text_domain'] ?? 'default'
+            'form'                 => $form,
+            'security'             => $security,
+            'buttons'              => $buttons,
+            'translatorTextDomain' => $form->getOptions()['translator_text_domain'] ?? 'default',
         ];
     }
 
     /**
      * Generate buttons for this form if necesary.
-     *
-     * @return void
      */
     private function generateButtonsForForm(array $buttonsRaw)
     {
@@ -193,16 +191,16 @@ class Form extends AbstractElement
         {
             $options = is_array($buttonsRaw['submit']) ? $buttonsRaw['submit'] : [];
             $options = array_merge([
-                'name' => 'submit',
-                'type' => 'submit',
+                'name'       => 'submit',
+                'type'       => 'submit',
                 'attributes' => [
-                    'id' => 'button-submit',
-                    'class' => 'ui primary button'
+                    'id'    => 'button-submit',
+                    'class' => 'ui primary button',
                 ],
                 'options' => [
-                    'label' => 'button.submit',
-                    'translator_text_domain' => 'app-form'
-                ]
+                    'label'                  => 'button.submit',
+                    'translator_text_domain' => 'app-form',
+                ],
             ], $options);
 
             $buttons['submit'] = $factory->createElement($options);
@@ -213,17 +211,17 @@ class Form extends AbstractElement
         {
             $options = is_array($buttonsRaw['reset']) ? $buttonsRaw['reset'] : [];
             $options = array_merge([
-                'name' => 'reset',
-                'type' => 'Button',
+                'name'       => 'reset',
+                'type'       => 'Button',
                 'attributes' => [
-                    'type' => 'reset',
-                    'id' => 'button-reset',
-                    'class' => 'ui secondary button'
+                    'type'  => 'reset',
+                    'id'    => 'button-reset',
+                    'class' => 'ui secondary button',
                 ],
                 'options' => [
-                    'label' => 'button.reset',
-                    'translator_text_domain' => 'app-form'
-                ]
+                    'label'                  => 'button.reset',
+                    'translator_text_domain' => 'app-form',
+                ],
             ], $options);
 
             $buttons['reset'] = $factory->createElement($options);

@@ -22,8 +22,6 @@ trait Clan
 {
     /**
      * Delete mail from system by subject.
-     *
-     * @return int
      */
     public function deleteMailFromSystemBySubj(string $subject, int $toId = 0): int
     {

@@ -47,7 +47,7 @@ class Navigation extends AbstractExtension
      */
     public function getNavigation(): CoreNavigation
     {
-        if (! $this->navigation instanceof CoreNavigation)
+        if ( ! $this->navigation instanceof CoreNavigation)
         {
             $this->navigation = $this->getContainer(CoreNavigation::class);
         }
@@ -60,7 +60,7 @@ class Navigation extends AbstractExtension
      */
     public function getAccesskeys(): CoreAccessKeys
     {
-        if (! $this->accesskeys instanceof CoreAccessKeys)
+        if ( ! $this->accesskeys instanceof CoreAccessKeys)
         {
             $this->accesskeys = $this->getContainer(CoreAccessKeys::class);
         }

@@ -57,11 +57,11 @@ class Modal extends Library implements JaxonModal
     {
         // Show the modal dialog
         $this->addCommand(['cmd' => 'semantic.show'], [
-            'id' => $content['id'] ?? null,
-            'title' => $title,
+            'id'      => $content['id'] ?? null,
+            'title'   => $title,
             'content' => $content['content'],
             'buttons' => $buttons,
-            'options' => $options]
+            'options' => $options, ]
         );
     }
 
@@ -90,11 +90,11 @@ class Modal extends Library implements JaxonModal
         $isDefaultForAlert = ($this->getName() == $this->xDialog->getOption('dialogs.default.alert'));
         // Is the library the default for confirm questions?
         $isDefaultForConfirm = ($this->getName() == $this->xDialog->getOption('dialogs.default.confirm'));
-        $aLocalVars = [
-            'yes' => $this->getYesButtonText(),
-            'no' => $this->getNoButtonText(),
-            'defaultForAlert' => $isDefaultForAlert,
-            'defaultForConfirm' => $isDefaultForConfirm
+        $aLocalVars          = [
+            'yes'               => $this->getYesButtonText(),
+            'no'                => $this->getNoButtonText(),
+            'defaultForAlert'   => $isDefaultForAlert,
+            'defaultForConfirm' => $isDefaultForConfirm,
         ];
 
         $xRenderer = new Renderer();

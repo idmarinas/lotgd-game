@@ -42,7 +42,7 @@ class CommentaryDefaultAddCommentNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('canAddComment'))
+        if ( ! $this->scope->has('canAddComment'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class CommentaryDefaultAddCommentNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('canAddComment'))
+            if ( ! $arguments->hasNode('canAddComment'))
             {
                 $arguments->setNode('canAddComment', $this->scope->get('canAddComment'));
             }

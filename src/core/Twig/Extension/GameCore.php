@@ -107,9 +107,18 @@ class GameCore extends AbstractExtension
     public function getTests()
     {
         return [
-            new TwigTest('array', function ($value) { return is_array($value); }),
-            new TwigTest('object', function ($value) { return is_object($value); }),
-            new TwigTest('instanceof', function ($instance, $class) { return $instance instanceof $class; }),
+            new TwigTest('array', function ($value)
+            {
+                return is_array($value);
+            }),
+            new TwigTest('object', function ($value)
+            {
+                return is_object($value);
+            }),
+            new TwigTest('instanceof', function ($instance, $class)
+            {
+                return $instance instanceof $class;
+            }),
         ];
     }
 

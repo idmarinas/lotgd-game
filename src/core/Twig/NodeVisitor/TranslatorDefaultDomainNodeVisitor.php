@@ -42,7 +42,7 @@ class TranslatorDefaultDomainNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if (! $this->scope->has('domain'))
+        if ( ! $this->scope->has('domain'))
         {
             return $node;
         }
@@ -51,7 +51,7 @@ class TranslatorDefaultDomainNodeVisitor extends NodeVisitorAbstract
         {
             $arguments = $node->getNode('arguments');
 
-            if (! $arguments->hasNode('domain'))
+            if ( ! $arguments->hasNode('domain'))
             {
                 $arguments->setNode('domain', $this->scope->get('domain'));
             }

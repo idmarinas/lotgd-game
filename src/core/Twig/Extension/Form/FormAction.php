@@ -60,13 +60,13 @@ class FormAction extends AbstractElement
     private function getActionParams(array $actions)
     {
         $submit = $actions['submit'] ?? null;
-        $reset = $actions['reset'] ?? null;
+        $reset  = $actions['reset']  ?? null;
 
         unset($actions['submit'], $actions['reset']);
 
         return [
-            'submit' => $submit,
-            'reset' => $reset,
+            'submit'  => $submit,
+            'reset'   => $reset,
             'buttons' => $actions,
         ];
     }

@@ -16,10 +16,10 @@ namespace Lotgd\Core\Installer;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use Lotgd\Core\Component\Filesystem;
-use Tracy\Debugger;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Hydrator\ClassMethods;
+use Lotgd\Core\Component\Filesystem;
+use Tracy\Debugger;
 
 /**
  * Script to upgrade a version.
@@ -30,7 +30,7 @@ abstract class UpgradeAbstract
 
     const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
-    const TRANSLATOR_DOMAIN = 'app-installer';
+    const TRANSLATOR_DOMAIN           = 'app-installer';
     const TRANSLATOR_KEY_TABLE_RENAME = 'upgrade.version.table.rename';
     const TRANSLATOR_KEY_TABLE_CREATE = 'upgrade.version.table.create';
     const TRANSLATOR_KEY_TABLE_IMPORT = 'upgrade.version.table.import';
@@ -48,9 +48,12 @@ abstract class UpgradeAbstract
     public function insertData(int $version): bool
     {
         $filesystem = new Filesystem();
-        $dir = self::DATA_DIR_UPDATE."/$version";
-        $files = array_map(
-            function ($value) use ($dir) { return "{$dir}/{$value}"; },
+        $dir        = self::DATA_DIR_UPDATE."/{$version}";
+        $files      = array_map(
+            function ($value) use ($dir)
+            {
+                return "{$dir}/{$value}";
+            },
             $filesystem->listDir($dir)
         );
 
@@ -65,7 +68,7 @@ abstract class UpgradeAbstract
         {
             foreach ($files as $file)
             {
-                $data = \json_decode(\file_get_contents($file), true);
+                $data     = \json_decode(\file_get_contents($file), true);
                 $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
                 $entities->initialize($data['rows']);
 
@@ -136,8 +139,8 @@ abstract class UpgradeAbstract
         try
         {
             $schemaTool = new SchemaTool($this->doctrine);
-            $metaData = $this->doctrine->getMetadataFactory()->getMetadataFor($entity);
-            $sqls = $schemaTool->getUpdateSchemaSql([$metaData], true);
+            $metaData   = $this->doctrine->getMetadataFactory()->getMetadataFor($entity);
+            $sqls       = $schemaTool->getUpdateSchemaSql([$metaData], true);
 
             if (0 === count($sqls))
             {
@@ -150,7 +153,7 @@ abstract class UpgradeAbstract
 
             $this->messages[] = \LotgdTranslator::t('upgrade.version.schema', ['count' => count($sqls)], self::TRANSLATOR_DOMAIN);
 
-            $proxyFactory = $this->doctrine->getProxyFactory();
+            $proxyFactory     = $this->doctrine->getProxyFactory();
             $this->messages[] = \LotgdTranslator::t('upgrade.version.proxy', ['classes' => $proxyFactory->generateProxyClasses([$metaData])], self::TRANSLATOR_DOMAIN);
 
             return true;

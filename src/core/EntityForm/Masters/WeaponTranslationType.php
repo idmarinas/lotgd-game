@@ -28,8 +28,8 @@ class WeaponTranslationType extends AbstractType
         $builder->add('locale', HiddenType::class)
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
-                'constraints' => [new Assert\Length(['min' => 1, 'max' => 50, 'allowEmptyString' => false])],
-                'error_bubbling' => false
+                'constraints'    => [new Assert\Length(['min' => 1, 'max' => 50, 'allowEmptyString' => false])],
+                'error_bubbling' => false,
             ])
         ;
     }
@@ -37,7 +37,7 @@ class WeaponTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MastersTranslation::class
+            'data_class' => MastersTranslation::class,
         ]);
     }
 }

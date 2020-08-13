@@ -20,15 +20,13 @@ trait Source
 {
     /**
      * Get source link.
-     *
-     * @return string
      */
     public function gameSource(): string
     {
         $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', (\LotgdHttp::getServer('REQUEST_URI')));
 
         return \LotgdTheme::renderThemeTemplate('parts/source.twig', [
-            'sourceHref' => $sourcelink
+            'sourceHref' => $sourcelink,
         ]);
     }
 }

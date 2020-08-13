@@ -23,18 +23,18 @@ class LocationType extends ChoiceType
         parent::configureOptions($resolver);
 
         $vname = getsetting('villagename', LOCATION_FIELDS);
-        $locs = [
+        $locs  = [
             $vname => [
                 'location.village.of',
                 ['name' => $vname],
-                'app-default'
-            ]
+                'app-default',
+            ],
         ];
-        $locs = modulehook('camplocs', $locs);
+        $locs        = modulehook('camplocs', $locs);
         $locs['all'] = [
             'location.everywhere',
             [],
-            'app-default'
+            'app-default',
         ];
         ksort($locs);
 
@@ -49,7 +49,7 @@ class LocationType extends ChoiceType
 
         $resolver->setDefaults([
             'attr' => [
-                'class' => 'search selection lotgd'
+                'class' => 'search selection lotgd',
             ],
             'choices' => $defaultChoice,
         ]);

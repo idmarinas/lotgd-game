@@ -20,7 +20,7 @@ trait CoreFilter
      */
     public function colorize(?string $string): string
     {
-        if (! $string)
+        if ( ! $string)
         {
             return '';
         }
@@ -34,7 +34,7 @@ trait CoreFilter
      */
     public function uncolorize(?string $string): string
     {
-        if (! $string)
+        if ( ! $string)
         {
             return '';
         }
@@ -47,7 +47,7 @@ trait CoreFilter
      */
     public function preventCodes(?string $string): string
     {
-        if (! $string)
+        if ( ! $string)
         {
             return '';
         }
@@ -71,6 +71,7 @@ trait CoreFilter
      * Format a number.
      *
      * @param int|float $nuemral
+     * @param mixed     $number
      *
      * @return string
      */
@@ -105,11 +106,11 @@ trait CoreFilter
         {
             array_shift($arguments[0]);
             $domain1 = array_shift($arguments[0]);
-            $text1 = array_shift($arguments[0]);
+            $text1   = array_shift($arguments[0]);
 
             array_shift($arguments[1]);
             $domain2 = array_shift($arguments[1]);
-            $text2 = array_shift($arguments[1]);
+            $text2   = array_shift($arguments[1]);
 
             $arg1 = vsprintf(\LotgdTranslator::t($text1, [], $domain1), $arguments[0]);
             $arg2 = vsprintf(\LotgdTranslator::t($text2, [], $domain2), $arguments[1]);

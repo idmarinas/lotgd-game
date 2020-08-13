@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
+use Twig\TwigFunction;
 
 class FormText extends FormInput
 {
@@ -24,22 +24,22 @@ class FormText extends FormInput
      * @var array
      */
     protected $validTagAttributes = [
-        'name' => true,
+        'name'         => true,
         'autocomplete' => true,
-        'autofocus' => true,
-        'dirname' => true,
-        'disabled' => true,
-        'form' => true,
-        'list' => true,
-        'maxlength' => true,
-        'minlength' => true,
-        'pattern' => true,
-        'placeholder' => true,
-        'readonly' => true,
-        'required' => true,
-        'size' => true,
-        'type' => true,
-        'value' => true,
+        'autofocus'    => true,
+        'dirname'      => true,
+        'disabled'     => true,
+        'form'         => true,
+        'list'         => true,
+        'maxlength'    => true,
+        'minlength'    => true,
+        'pattern'      => true,
+        'placeholder'  => true,
+        'readonly'     => true,
+        'required'     => true,
+        'size'         => true,
+        'type'         => true,
+        'value'        => true,
     ];
 
     /**

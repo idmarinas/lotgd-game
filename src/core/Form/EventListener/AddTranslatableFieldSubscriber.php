@@ -38,8 +38,8 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
         // , form.post_data and form.bind_norm_data event
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_SUBMIT => 'postBind',
-            FormEvents::SUBMIT => 'bindNormData'
+            FormEvents::POST_SUBMIT  => 'postBind',
+            FormEvents::SUBMIT       => 'bindNormData',
         ];
     }
 
@@ -53,8 +53,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             $content = $form->get("{$locale}_{$this->options['field']}")->getData();
 
             if (
-                null === $content &&
-                in_array($locale, $this->options['required_locale']))
+                null === $content && in_array($locale, $this->options['required_locale']))
             {
                 $form->addError(new FormError(sprintf("Field '%s' for locale '%s' cannot be blank", $this->options['field'], $locale)));
             }
@@ -75,7 +74,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             $translation->setObject($entity);
 
             //Delete the Personal Translation if its empty
-            if (! $translation->getContent() && $this->options['remove_empty'])
+            if ( ! $translation->getContent() && $this->options['remove_empty'])
             {
                 $data->removeElement($translation);
 
@@ -91,7 +90,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             //add it to entity
             $entity->addTranslation($translation);
 
-            if (! $data->contains($translation))
+            if ( ! $data->contains($translation))
             {
                 $data->add($translation);
             }
@@ -117,7 +116,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
         foreach ($this->bindTranslations($data) as $binded)
         {
             $original = method_exists($data, 'getOwner') ? $data->getOwner()->{'get'.ucfirst($this->options['field'])}() : '';
-            $content = $binded['translation']->getContent() ?: $original;
+            $content  = $binded['translation']->getContent() ?: $original;
 
             $binded['translation']->setContent($content);
 
@@ -131,10 +130,10 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
                 $this->options['widget'],
                 $binded['translation'],
                 [
-                    'label' => $binded['locale'],
+                    'label'    => $binded['locale'],
                     'required' => in_array($binded['locale'], $this->options['required_locale']),
                     // 'property_path' => 'content',
-                    'auto_initialize' => false
+                    'auto_initialize' => false,
                 ]
             ));
         }
@@ -146,7 +145,7 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
         //from the Entity for the field we are interested in
         //and combines it with the fields
 
-        $collection = [];
+        $collection            = [];
         $availableTranslations = [];
 
         foreach ($data as $Translation)
@@ -169,8 +168,8 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             }
 
             $collection[] = [
-                'locale' => $locale,
-                'fieldName' => "{$locale}_{$this->options['field']}",
+                'locale'      => $locale,
+                'fieldName'   => "{$locale}_{$this->options['field']}",
                 'translation' => $Translation,
             ];
         }

@@ -13,10 +13,10 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormInput extends AbstractElement
 {
@@ -26,36 +26,36 @@ class FormInput extends AbstractElement
      * @var array
      */
     protected $validTagAttributes = [
-        'name' => true,
-        'accept' => true,
-        'alt' => true,
-        'autocomplete' => true,
-        'autofocus' => true,
-        'checked' => true,
-        'dirname' => true,
-        'disabled' => true,
-        'form' => true,
-        'formaction' => true,
-        'formenctype' => true,
-        'formmethod' => true,
+        'name'           => true,
+        'accept'         => true,
+        'alt'            => true,
+        'autocomplete'   => true,
+        'autofocus'      => true,
+        'checked'        => true,
+        'dirname'        => true,
+        'disabled'       => true,
+        'form'           => true,
+        'formaction'     => true,
+        'formenctype'    => true,
+        'formmethod'     => true,
         'formnovalidate' => true,
-        'formtarget' => true,
-        'height' => true,
-        'list' => true,
-        'max' => true,
-        'maxlength' => true,
-        'min' => true,
-        'multiple' => true,
-        'pattern' => true,
-        'placeholder' => true,
-        'readonly' => true,
-        'required' => true,
-        'size' => true,
-        'src' => true,
-        'step' => true,
-        'type' => true,
-        'value' => true,
-        'width' => true,
+        'formtarget'     => true,
+        'height'         => true,
+        'list'           => true,
+        'max'            => true,
+        'maxlength'      => true,
+        'min'            => true,
+        'multiple'       => true,
+        'pattern'        => true,
+        'placeholder'    => true,
+        'readonly'       => true,
+        'required'       => true,
+        'size'           => true,
+        'src'            => true,
+        'step'           => true,
+        'type'           => true,
+        'value'          => true,
+        'width'          => true,
     ];
 
     /**
@@ -64,30 +64,30 @@ class FormInput extends AbstractElement
      * @var array
      */
     protected $validTypes = [
-        'text' => 'text',
-        'button' => 'button',
-        'checkbox' => 'checkbox',
-        'file' => 'file',
-        'hidden' => 'hidden',
-        'image' => 'image',
-        'password' => 'password',
-        'radio' => 'radio',
-        'reset' => 'reset',
-        'select' => 'select',
-        'submit' => 'submit',
-        'color' => 'color',
-        'date' => 'date',
-        'datetime' => 'datetime',
+        'text'           => 'text',
+        'button'         => 'button',
+        'checkbox'       => 'checkbox',
+        'file'           => 'file',
+        'hidden'         => 'hidden',
+        'image'          => 'image',
+        'password'       => 'password',
+        'radio'          => 'radio',
+        'reset'          => 'reset',
+        'select'         => 'select',
+        'submit'         => 'submit',
+        'color'          => 'color',
+        'date'           => 'date',
+        'datetime'       => 'datetime',
         'datetime-local' => 'datetime-local',
-        'email' => 'email',
-        'month' => 'month',
-        'number' => 'number',
-        'range' => 'range',
-        'search' => 'search',
-        'tel' => 'tel',
-        'time' => 'time',
-        'url' => 'url',
-        'week' => 'week',
+        'email'          => 'email',
+        'month'          => 'month',
+        'number'         => 'number',
+        'range'          => 'range',
+        'search'         => 'search',
+        'tel'            => 'tel',
+        'time'           => 'time',
+        'url'            => 'url',
+        'week'           => 'week',
     ];
 
     /**
@@ -116,10 +116,10 @@ class FormInput extends AbstractElement
             throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
-        $attributes = $element->getAttributes();
-        $attributes['name'] = $name;
-        $type = $this->getType($element);
-        $attributes['type'] = $type;
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $type                = $this->getType($element);
+        $attributes['type']  = $type;
         $attributes['value'] = $element->getValue();
 
         //-- Avoid populate password input

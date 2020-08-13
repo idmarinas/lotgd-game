@@ -20,8 +20,6 @@ class WhostypingRepository extends DoctrineRepository
 {
     /**
      * Delete old rows.
-     *
-     * @return int
      */
     public function deleteOld(int $old): int
     {

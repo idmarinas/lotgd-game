@@ -20,8 +20,6 @@ class AccountsEverypageRepository extends DoctrineRepository
 {
     /**
      * Get stats of page gen.
-     *
-     * @return array
      */
     public function getStatsPageGen(): array
     {

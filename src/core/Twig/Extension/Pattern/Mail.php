@@ -20,8 +20,6 @@ trait Mail
 {
     /**
      * Get ye olde mail link.
-     *
-     * @return string
      */
     public function yeOldeMail(): string
     {
@@ -29,14 +27,14 @@ trait Mail
 
         try
         {
-            $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
+            $mail   = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
             $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
         }
         catch (\Throwable $th)
         {
             $result = [
-                'seenCount' => 0,
-                'notSeenCount' => 0
+                'seenCount'    => 0,
+                'notSeenCount' => 0,
             ];
         }
 

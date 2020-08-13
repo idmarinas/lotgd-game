@@ -13,12 +13,12 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
-use Twig\TwigFunction;
 use Laminas\Form\Element\Collection as CollectionElement;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\FieldsetInterface;
 use Laminas\View\Helper\HelperInterface;
+use Lotgd\Core\Template\Theme as Environment;
+use Twig\TwigFunction;
 
 class FormCollection extends AbstractElement
 {
@@ -102,11 +102,11 @@ class FormCollection extends AbstractElement
      */
     public function renderTemplate(Environment $env, CollectionElement $collection)
     {
-        $elementHelper = $env->getExtension(FormElement::class);
-        $fieldsetHelper = $env->getExtension(FormCollection::class);
+        $elementHelper          = $env->getExtension(FormElement::class);
+        $fieldsetHelper         = $env->getExtension(FormCollection::class);
         $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
 
-        $textDomain = $this->getTranslatorTextDomain() ?: 'default';
+        $textDomain     = $this->getTranslatorTextDomain() ?: 'default';
         $templateMarkup = '';
 
         $elementOrFieldset = $collection->getTemplateElement();
@@ -318,11 +318,11 @@ class FormCollection extends AbstractElement
         $attributesString = $attributes ? ' '.$this->createAttributesString($env, $attributes) : '';
 
         return [
-            'collection' => $element,
-            'template' => $templateMarkup ?? '',
-            'shouldWrap' => $this->shouldWrap,
-            'attributesString' => $attributesString,
-            'translatorTextDomain' => $translatorTextDomain
+            'collection'           => $element,
+            'template'             => $templateMarkup ?? '',
+            'shouldWrap'           => $this->shouldWrap,
+            'attributesString'     => $attributesString,
+            'translatorTextDomain' => $translatorTextDomain,
         ];
     }
 }

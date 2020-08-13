@@ -34,40 +34,40 @@ class CharactersType extends AbstractType
     {
         $builder
             ->add('acct', ChoiceType::class, [
-                'label' => 'char.acct',
-                'choices' => \Doctrine::getRepository('LotgdCore:Accounts')->findAll(),
+                'label'        => 'char.acct',
+                'choices'      => \Doctrine::getRepository('LotgdCore:Accounts')->findAll(),
                 'choice_value' => 'acctid',
                 'choice_label' => function ($account)
                 {
                     return $account->getAcctid().') '.$account->getLogin();
-                }
+                },
             ])
             ->add('lasthit', DateType::class, ['label' => 'char.lasthit', 'required' => false, 'disabled' => true])
             ->add('name', TextType::class, [
-                'label' => 'char.name',
+                'label'    => 'char.name',
                 'required' => false,
-                'disabled' => true
+                'disabled' => true,
             ])
             ->add('title', TextType::class, [
-                'label' => 'char.title',
+                'label'    => 'char.title',
                 'required' => false,
-                'disabled' => ! ((bool) getsetting('edittitles', 1))
+                'disabled' => ! ((bool) getsetting('edittitles', 1)),
             ])
             ->add('ctitle', TextType::class, [
-                'label' => 'char.ctitle',
-                'required' => false
+                'label'    => 'char.ctitle',
+                'required' => false,
             ])
             ->add('playername', TextType::class, ['label' => 'char.playername'])
             ->add('sex', ChoiceType::class, [
-                'label' => 'char.sex.label',
+                'label'   => 'char.sex.label',
                 'choices' => [
-                    'char.sex.option.male' => 0,
-                    'char.sex.option.female' => 1
-                ]
+                    'char.sex.option.male'   => 0,
+                    'char.sex.option.female' => 1,
+                ],
             ])
             ->add('dragonkills', NumberType::class, [
-                'label' => 'char.dragonkills',
-                'required' => false
+                'label'    => 'char.dragonkills',
+                'required' => false,
             ])
             ->add('age', NumberType::class, ['label' => 'char.age', 'required' => false])
             ->add('dragonage', NumberType::class, ['label' => 'char.dragonage', 'required' => false])
@@ -92,15 +92,15 @@ class CharactersType extends AbstractType
             ->add('turns', NumberType::class, ['label' => 'char.turns'])
             ->add('playerfights', NumberType::class, ['label' => 'char.playerfights'])
             ->add('spirits', ChoiceType::class, [
-                'label' => 'char.spirits.label',
+                'label'   => 'char.spirits.label',
                 'choices' => [
                     'char.spirits.option.resurrected' => '-6',
-                    'char.spirits.option.very_low' => '-2',
-                    'char.spirits.option.low' => '-1',
-                    'char.spirits.option.normal' => '0',
-                    'char.spirits.option.high' => '1',
-                    'char.spirits.option.very_high' => '2'
-                ]
+                    'char.spirits.option.very_low'    => '-2',
+                    'char.spirits.option.low'         => '-1',
+                    'char.spirits.option.normal'      => '0',
+                    'char.spirits.option.high'        => '1',
+                    'char.spirits.option.very_high'   => '2',
+                ],
             ])
             ->add('resurrections', NumberType::class, ['label' => 'char.resurrections'])
             ->add('location', TextType::class, ['label' => 'char.location'])
@@ -127,30 +127,30 @@ class CharactersType extends AbstractType
             ->add('seenmaster', CheckboxType::class, ['label' => 'char.seenmaster', 'required' => false])
 
             ->add('hashorse', ChoiceType::class, [
-                'label' => 'char.hashorse',
-                'required' => false,
-                'empty_data' => '0',
-                'choices' => \Doctrine::getRepository('LotgdCore:Mounts')->findAll([], ['mountcategory' => 'ASC']),
+                'label'        => 'char.hashorse',
+                'required'     => false,
+                'empty_data'   => '0',
+                'choices'      => \Doctrine::getRepository('LotgdCore:Mounts')->findAll([], ['mountcategory' => 'ASC']),
                 'choice_value' => 'mountid',
                 'choice_label' => function ($clan)
                 {
                     return $clan->getMountid().') '.$clan->getMountname();
-                }
+                },
             ])
             ->add('fedmount', CheckboxType::class, ['label' => 'char.fedmount', 'required' => false])
 
             ->add('marriedto', NumberType::class, ['label' => 'char.marriedto', 'required' => false])
 
             ->add('clanid', ChoiceType::class, [
-                'label' => 'char.clanid',
-                'required' => false,
-                'empty_data' => '0',
-                'choices' => \Doctrine::getRepository('LotgdCore:Clans')->findAll(),
+                'label'        => 'char.clanid',
+                'required'     => false,
+                'empty_data'   => '0',
+                'choices'      => \Doctrine::getRepository('LotgdCore:Clans')->findAll(),
                 'choice_value' => 'clanid',
                 'choice_label' => function ($clan)
                 {
                     return $clan->getClanid().') '.$clan->getClanname();
-                }
+                },
             ])
             ->add('clanrank', ClanRankType::class, ['label' => 'char.clanrank', 'required' => false])
 
@@ -163,8 +163,8 @@ class CharactersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Characters::class,
-            'translation_domain' => 'form-core-grotto-account'
+            'data_class'         => Characters::class,
+            'translation_domain' => 'form-core-grotto-account',
         ]);
     }
 }

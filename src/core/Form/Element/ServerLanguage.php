@@ -13,11 +13,11 @@
 
 namespace Lotgd\Core\Form\Element;
 
-use Lotgd\Core\Filter as LotgdFilter;
-use Lotgd\Core\Validator as LotgdValidator;
 use Laminas\Form\Element\Select;
 use Laminas\InputFilter\InputProviderInterface;
 use Laminas\Validator;
+use Lotgd\Core\Filter as LotgdFilter;
+use Lotgd\Core\Validator as LotgdValidator;
 
 class ServerLanguage extends Select implements InputProviderInterface
 {
@@ -48,20 +48,20 @@ class ServerLanguage extends Select implements InputProviderInterface
     public function getInputSpecification()
     {
         return [
-            'name' => $this->getName(),
+            'name'     => $this->getName(),
             'required' => true,
-            'filters' => [
-                ['name' => LotgdFilter\ArrayToComaSeparator::class]
+            'filters'  => [
+                ['name' => LotgdFilter\ArrayToComaSeparator::class],
             ],
             'validators' => [
                 ['name' => Validator\NotEmpty::class],
                 [
-                    'name' => LotgdValidator\DelimiterIsCountable::class,
+                    'name'    => LotgdValidator\DelimiterIsCountable::class,
                     'options' => [
                         'delimiter' => ',', //-- Default value is ","
-                        'max' => 85
-                    ]
-                ]
+                        'max'       => 85,
+                    ],
+                ],
             ],
         ];
     }

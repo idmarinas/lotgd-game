@@ -32,7 +32,7 @@ class UnTagify implements FilterInterface
      */
     public function filter($value)
     {
-        if (! $value)
+        if ( ! $value)
         {
             return null;
         }

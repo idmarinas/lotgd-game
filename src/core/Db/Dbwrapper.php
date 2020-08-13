@@ -13,10 +13,8 @@
 
 namespace Lotgd\Core\Db;
 
-use Laminas\Db\Adapter\{
-    Adapter,
-    Profiler\Profiler
-};
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Profiler\Profiler;
 use Laminas\Db\ResultSet\ResultSet;
 
 /**
@@ -30,13 +28,13 @@ class Dbwrapper
     use Pattern\Zend;
 
     protected $adapter;
-    protected $generatedValue = null;
+    protected $generatedValue;
     protected $affectedRows = 0;
-    protected $errorInfo = null;
-    protected $sqlString = null;
+    protected $errorInfo;
+    protected $sqlString;
 
     protected $queriesthishit = 0;
-    protected $querytime = 0;
+    protected $querytime      = 0;
 
     /**
      * Configure adapter for DB.
@@ -47,7 +45,7 @@ class Dbwrapper
      */
     public function __construct(array $options, $force = null)
     {
-        if (! isset($options['driver']) || '' == $options['driver'])
+        if ( ! isset($options['driver']) || '' == $options['driver'])
         {
             $options['driver'] = 'Pdo_Mysql';
         }
@@ -55,11 +53,11 @@ class Dbwrapper
         if ('pdo_mysql' == strtolower($options['driver']))
         {
             $options['driver_options'] = [
-                \PDO::MYSQL_ATTR_FOUND_ROWS => true
+                \PDO::MYSQL_ATTR_FOUND_ROWS => true,
             ];
         }
 
-        if (! $this->adapter || true === $force)
+        if ( ! $this->adapter || true === $force)
         {
             $adapter = new Adapter($options);
             $adapter->setProfiler(new Profiler());
@@ -98,7 +96,7 @@ class Dbwrapper
         catch (\Throwable $ex)
         {
             $this->errorInfo = $ex->getMessage();
-            $resultSet = new ResultSet();
+            $resultSet       = new ResultSet();
 
             return $resultSet->initialize([]);
         }
@@ -113,14 +111,14 @@ class Dbwrapper
             ));
         }
 
-        $this->queriesthishit++;
+        ++$this->queriesthishit;
         $this->querytime += $profiler['elapse'];
 
         //-- Save data for usage
         $this->generatedValue = $result->getGeneratedValue();
-        $this->affectedRows = $result->getAffectedRows();
-        $this->errorInfo = $result->getResource()->errorInfo()[2];
-        $this->sqlString = $statement->getSql();
+        $this->affectedRows   = $result->getAffectedRows();
+        $this->errorInfo      = $result->getResource()->errorInfo()[2];
+        $this->sqlString      = $statement->getSql();
 
         return $result;
     }
@@ -208,12 +206,10 @@ class Dbwrapper
 
     /**
      * Get adapter for DB.
-     *
-     * @return \Laminas\Db\Adapter\Adapter
      */
     public function getAdapter(): Adapter
     {
-        if (! $this->adapter)
+        if ( ! $this->adapter)
         {
             $request = $this->getContainer(\Lotgd\Core\Http::class);
             page_header('Database Connection Error');

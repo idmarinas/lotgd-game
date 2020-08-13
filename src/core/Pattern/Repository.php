@@ -21,11 +21,13 @@ trait Repository
     /**
      * Get repository.
      *
+     * @param mixed $name
+     *
      * @return object|null
      */
     public function getDoctrineRepository($name)
     {
-        if (! $this->doctrine instanceof EntityManager)
+        if ( ! $this->doctrine instanceof EntityManager)
         {
             $this->doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
         }

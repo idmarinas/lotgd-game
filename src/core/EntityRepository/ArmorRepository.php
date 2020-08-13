@@ -22,7 +22,7 @@ class ArmorRepository extends DoctrineRepository
      *
      * @param int $dragonKills
      */
-    public function getMaxArmorLevel(int $dragonKills = null): int
+    public function getMaxArmorLevel(?int $dragonKills = null): int
     {
         $query = $this->createQueryBuilder('u');
 
@@ -80,7 +80,7 @@ class ArmorRepository extends DoctrineRepository
      *
      * @return array
      */
-    public function findByLevel(int $level)
+    public function findByLevel(int $level): ?array
     {
         try
         {
@@ -106,10 +106,8 @@ class ArmorRepository extends DoctrineRepository
     /**
      * Find one by id.
      * Entity is translated.
-     *
-     * @return array|null
      */
-    public function findOneArmorById(int $id)
+    public function findOneArmorById(int $id): ?array
     {
         try
         {
@@ -134,10 +132,8 @@ class ArmorRepository extends DoctrineRepository
     /**
      * Get an array by ids.
      * Entities is translated.
-     *
-     * @return array|null
      */
-    public function findArmorsById(array $ids)
+    public function findArmorsById(array $ids): ?array
     {
         try
         {

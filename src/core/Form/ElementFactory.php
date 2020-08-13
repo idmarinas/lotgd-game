@@ -25,10 +25,10 @@
 namespace Lotgd\Core\Form;
 
 use Interop\Container\ContainerInterface;
-use Traversable;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Traversable;
 
 /**
  * Factory for instantiating form elements.
@@ -60,7 +60,7 @@ final class ElementFactory implements FactoryInterface
             $creationOptions = iterator_to_array($creationOptions);
         }
 
-        if (! is_array($creationOptions))
+        if ( ! is_array($creationOptions))
         {
             throw new InvalidServiceException(sprintf('%s cannot use non-array, non-traversable, non-null creation options; received %s', __CLASS__, is_object($creationOptions) ? get_class($creationOptions) : gettype($creationOptions)));
         }
@@ -75,7 +75,7 @@ final class ElementFactory implements FactoryInterface
      *
      * @return object
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         if (null === $options)
         {
@@ -90,7 +90,7 @@ final class ElementFactory implements FactoryInterface
         {
             // 'Laminas\Form\Element' -> 'element'
             $parts = explode('\\', $requestedName);
-            $name = strtolower(array_pop($parts));
+            $name  = strtolower(array_pop($parts));
         }
 
         if (isset($options['options']))
@@ -133,9 +133,9 @@ final class ElementFactory implements FactoryInterface
      * @param string|null $canonicalName
      * @param string|null $requestedName
      *
-     * @return object
-     *
      * @throws InvalidServiceException
+     *
+     * @return object
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $canonicalName = null, $requestedName = null)
     {

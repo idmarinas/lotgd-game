@@ -14,9 +14,9 @@
 namespace Lotgd\Core\Installer;
 
 use Doctrine\ORM\Tools\SchemaTool;
-use Lotgd\Core\Component\Filesystem;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Hydrator\ClassMethods;
+use Lotgd\Core\Component\Filesystem;
 
 /**
  * Script to install and update game.
@@ -31,7 +31,7 @@ class Install
     use Pattern\Version;
 
     const TRANSLATOR_DOMAIN = 'app-installer';
-    const DATA_DIR_INSTALL = __DIR__.'/data/install';
+    const DATA_DIR_INSTALL  = __DIR__.'/data/install';
 
     /**
      * Make a upgrade install, avoid in clean install.
@@ -41,11 +41,11 @@ class Install
     public function makeUpgradeInstall(int $version): array
     {
         $messages = [];
-        $version = $this->getNextVersion($version); //-- Start with the next version
+        $version  = $this->getNextVersion($version); //-- Start with the next version
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
 
         //-- It is a clean installation not do nothing
-        if (! $this->isUpgrade())
+        if ( ! $this->isUpgrade())
         {
             $messages[] = \LotgdTranslator::t('upgrade.nothing', [], self::TRANSLATOR_DOMAIN);
 
@@ -59,7 +59,7 @@ class Install
                 $class = "Lotgd\Core\Installer\Upgrade\Version_{$version}\Upgrade";
 
                 //-- Check all versions of the current version and make sure that it has not already been updated.
-                if (! \class_exists($class) || $this->isUpgradedVersion($version))
+                if ( ! \class_exists($class) || $this->isUpgradedVersion($version))
                 {
                     $version = $this->getNextVersion($version);
 
@@ -69,14 +69,14 @@ class Install
                 $upgrade = new $class();
                 $upgrade->setDoctrine($doctrine);
 
-                $step = 1;
+                $step   = 1;
                 $result = true;
 
                 do
                 {
                     $result = $upgrade->{"step{$step}"}();
 
-                    $step++;
+                    ++$step;
                 } while ($result && \method_exists($upgrade, "step{$step}"));
 
                 //-- Get all messages for this upgrade
@@ -102,16 +102,16 @@ class Install
     public function makeSynchronizationTables(): array
     {
         //-- Prepare for updating core tables
-        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
-        $classes = $doctrine->getMetadataFactory()->getAllMetadata();
+        $doctrine   = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+        $classes    = $doctrine->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($doctrine);
-        $sqls = $schemaTool->getUpdateSchemaSql($classes, true);
+        $sqls       = $schemaTool->getUpdateSchemaSql($classes, true);
 
         $messages = [\LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN)];
 
         if (count($sqls))
         {
-            $messages = [];
+            $messages   = [];
             $messages[] = \LotgdTranslator::t('synchronizationTables.title', [], self::TRANSLATOR_DOMAIN);
 
             $schemaTool->updateSchema($classes, true);
@@ -163,7 +163,7 @@ class Install
         $modules = $this->getModules();
         reset($modules);
 
-        if (! count($modules))
+        if ( ! count($modules))
         {
             $messages[] = '`QNot modules found to process.`0`n';
 
@@ -196,19 +196,19 @@ class Install
         switch ($type)
         {
             case 'uninstall':
-                $result = uninstall_module($modulename);
+                $result     = uninstall_module($modulename);
                 $messages[] = \LotgdTranslator::t('installOfModules.process.uninstall', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'install':
-                $result = install_module($modulename);
+                $result     = install_module($modulename);
                 $messages[] = \LotgdTranslator::t('installOfModules.process.install', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'activate':
-                $result = activate_module($modulename);
+                $result     = activate_module($modulename);
                 $messages[] = \LotgdTranslator::t('installOfModules.process.activate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'deactivate':
-                $result = deactivate_module($modulename);
+                $result     = deactivate_module($modulename);
                 $messages[] = \LotgdTranslator::t('installOfModules.process.deactivate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
             break;
             case 'donothing':
@@ -234,8 +234,11 @@ class Install
         $messages = [];
 
         $filesystem = new Filesystem();
-        $files = array_map(
-            function ($value) { return self::DATA_DIR_INSTALL."/{$value}"; },
+        $files      = array_map(
+            function ($value)
+            {
+                return self::DATA_DIR_INSTALL."/{$value}";
+            },
             $filesystem->listDir(self::DATA_DIR_INSTALL)
         );
 
@@ -306,8 +309,6 @@ class Install
 
     /**
      * Proccess files.
-     *
-     * @return void
      */
     private function insertDataByFiles(array $files, array &$messages)
     {
@@ -315,7 +316,7 @@ class Install
 
         foreach ($files as $file)
         {
-            $data = \json_decode(\file_get_contents($file), true);
+            $data     = \json_decode(\file_get_contents($file), true);
             $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
             $entities->initialize($data['rows']);
 

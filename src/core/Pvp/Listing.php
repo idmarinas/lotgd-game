@@ -83,17 +83,17 @@ class Listing
     {
         global $session;
 
-        if (! $this->query)
+        if ( ! $this->query)
         {
-            $days = getsetting('pvpimmunity', 5);
-            $exp = getsetting('pvpminexp', 1500);
-            $levdiff = getsetting('pvprange', 2);
+            $days      = getsetting('pvpimmunity', 5);
+            $exp       = getsetting('pvpminexp', 1500);
+            $levdiff   = getsetting('pvprange', 2);
             $pvpSameId = (bool) getsetting('pvpsameid', 0);
             $pvpSameIp = (bool) getsetting('pvpsameip', 0);
 
             $this->repository = $this->getDoctrineRepository('LotgdCore:Characters');
-            $this->query = $this->repository->createQueryBuilder('u');
-            $expr = $this->query->expr();
+            $this->query      = $this->repository->createQueryBuilder('u');
+            $expr             = $this->query->expr();
 
             $this->query->select('u.id AS character_id', 'u.name', 'u.race', 'u.alive', 'u.location', 'u.sex', 'u.level', 'u.dragonkills', 'u.pvpflag', 'u.clanrank')
                 ->addSelect('a.acctid', 'a.loggedin', 'a.login', 'a.laston')
@@ -111,8 +111,8 @@ class Listing
 
                 ->setParameters([
                     'days' => $days,
-                    'exp' => $exp,
-                    'acct' => $session['user']['acctid']
+                    'exp'  => $exp,
+                    'acct' => $session['user']['acctid'],
                 ])
             ;
 
@@ -125,7 +125,7 @@ class Listing
             }
 
             //-- Not allow same ID
-            if (! $pvpSameId)
+            if ( ! $pvpSameId)
             {
                 $this->query->andWhere('a.uniqueid != :sameid')
                     ->setParameter('sameid', $session['user']['uniqueid'])
@@ -133,7 +133,7 @@ class Listing
             }
 
             //-- Not allow same IP
-            if (! $pvpSameIp)
+            if ( ! $pvpSameIp)
             {
                 $this->query->andWhere('a.lastip != :sameip')
                     ->setParameter('sameip', $session['user']['lastip'])

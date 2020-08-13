@@ -13,14 +13,14 @@
 namespace Lotgd\Core\Factory\Output;
 
 use Interop\Container\ContainerInterface;
-use Lotgd\Core\Entity\Commentary as CommentaryEntity;
-use Lotgd\Core\Output\Commentary as OutputCommentary;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Lotgd\Core\Entity\Commentary as CommentaryEntity;
+use Lotgd\Core\Output\Commentary as OutputCommentary;
 
 class Commentary implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $commentary = new OutputCommentary();
         $commentary->setContainer($container)

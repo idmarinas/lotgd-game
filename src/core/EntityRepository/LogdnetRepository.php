@@ -20,8 +20,6 @@ class LogdnetRepository extends DoctrineRepository
 {
     /**
      * Delete servers older than two weeks.
-     *
-     * @return int
      */
     public function deletedOlderServer(): int
     {
@@ -50,8 +48,6 @@ class LogdnetRepository extends DoctrineRepository
     /**
      * Degrade the popularity of any server which hasn't been updated in the past 5 minutes by 1%.
      * This means that unpopular servers will fall toward the bottom of the list.
-     *
-     * @return int
      */
     public function degradePopularity(): int
     {
@@ -83,8 +79,6 @@ class LogdnetRepository extends DoctrineRepository
 
     /**
      * Get our list of servers.
-     *
-     * @return array
      */
     public function getNetServerList(): array
     {
