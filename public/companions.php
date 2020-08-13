@@ -96,28 +96,6 @@ elseif ('take' == $op)
     $op = '';
     \LotgdHttp::setQuery('op', '');
 }
-elseif ('save' == $op)
-{
-    $subop = (string) \LotgdHttp::getQuery('subop');
-
-    if ('module' == $subop)
-    {
-        // Save modules settings
-        $module = (string) \LotgdHttp::getQuery('module');
-        $post = \LotgdHttp::getPostAll();
-        reset($post);
-
-        foreach ($post as $key => $val)
-        {
-            set_module_objpref('companions', $id, $key, $val, $module);
-        }
-
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-    }
-
-    $op =  $id ? 'edit' : '';
-    \LotgdHttp::setQuery('op', $op);
-}
 
 unset($companionEntity);
 \Doctrine::flush();
@@ -143,11 +121,50 @@ elseif ('edit' == $op || 'add' == $op)
     {
         $module = (string) \LotgdHttp::getQuery('module');
 
-        rawoutput("<form action='companions.php?op=save&subop=module&id={$id}&module={$module}' method='POST'>");
-        module_objpref_edit('companions', $module, $id);
-        rawoutput('</form>');
+        $form = module_objpref_edit('companions', $module, $id);
 
-        \LotgdNavigation::addNavAllow("companions.php?op=save&subop=module&id={$id}&module={$module}");
+        $params['isLaminas'] = $form instanceof Laminas\Form\Form;
+        $params['module'] = $module;
+        $params['id'] = $id;
+
+        if ($params['isLaminas'])
+        {
+            $form->setAttribute('action', "companions.php?op=edit&subop=module&id={$id}&module={$module}");
+            $params['formTypeTab'] = $form->getOption('form_type_tab');
+        }
+
+        if (\LotgdHttp::isPost())
+        {
+            $post = \LotgdHttp::getPostAll();
+
+            if ($params['isLaminas'])
+            {
+                $form->setData($post);
+
+                if ($form->isValid())
+                {
+                    $data = $form->getData();
+
+                    process_post_save_data($data, $id, $module);
+
+                    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+                }
+            }
+            else
+            {
+                reset($post);
+
+                process_post_save_data($post, $id, $module);
+
+                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+            }
+        }
+
+        $params['form'] = $form;
+
+        \LotgdNavigation::addNavAllow("companions.php?op=edit&subop=module&id={$id}&module={$module}");
+
+        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/companions/module.twig', $params));
 
         page_footer();
     }
@@ -197,5 +214,20 @@ elseif ('edit' == $op || 'add' == $op)
 }
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/companions.twig', $params));
+
+function process_post_save_data($data, $id, $module)
+{
+    foreach ($data as $key => $val)
+    {
+        if (is_array($val))
+        {
+            process_post_save_data($val, $id, $module);
+
+            continue;
+        }
+
+        set_module_objpref('companions', $id, $key, $val, $module);
+    }
+}
 
 page_footer();

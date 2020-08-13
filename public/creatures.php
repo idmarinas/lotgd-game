@@ -27,35 +27,7 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-if ('save' == $op)
-{
-    $post = \LotgdHttp::getPostAll();
-
-    $message = '';
-    $paramsFlashMessage = [];
-
-    if ('module' == $subop)
-    {
-        $message = 'flash.message.save.module';
-        $paramsFlashMessages = ['name' => $module];
-        // Save module settings
-        reset($post);
-
-        foreach ($post as $key => $val)
-        {
-            set_module_objpref('creatures', $creatureId, $key, $val, $module);
-        }
-    }
-
-    if ($message)
-    {
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, $paramsFlashMessage, $textDomain));
-    }
-
-    $op = 'edit';
-    unset($message, $creatureEntity, $post);
-}
-elseif ('del' == $op)
+if ('del' == $op)
 {
     $creatureEntity = $repository->find($creatureId);
 
@@ -116,10 +88,51 @@ elseif ('edit' == $op || 'add' == $op)
 
     if ('module' == $subop)
     {
-        rawoutput("<form action='creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module' method='POST'>");
-        module_objpref_edit('creatures', $module, $creatureId);
-        rawoutput('</form>');
-        \LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid=$creatureId&module=$module");
+        $form = module_objpref_edit('creatures', $module, $creatureId);
+
+        $params['isLaminas'] = $form instanceof Laminas\Form\Form;
+        $params['module'] = $module;
+        $params['creatureId'] = $creatureId;
+
+        if ($params['isLaminas'])
+        {
+            $form->setAttribute('action', "companions.php?op=edit&subop=module&creatureid={$id}&module={$module}");
+            $params['formTypeTab'] = $form->getOption('form_type_tab');
+        }
+
+        if (\LotgdHttp::isPost())
+        {
+            $post = \LotgdHttp::getPostAll();
+            $paramsFlashMessages = ['name' => $module];
+
+            if ($params['isLaminas'])
+            {
+                $form->setData($post);
+
+                if ($form->isValid())
+                {
+                    $data = $form->getData();
+
+                    process_post_save_data($data, $creatureId, $module);
+
+                    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.module', $paramsFlashMessage, $textDomain));
+                }
+            }
+            else
+            {
+                reset($post);
+
+                process_post_save_data($post, $creatureId, $module);
+
+                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.module', $paramsFlashMessage, $textDomain));
+            }
+        }
+
+        $params['form'] = $form;
+
+        \LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid={$creatureId}&module={$module}");
+
+        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/creatures/module.twig', $params));
 
         page_footer();
     }
@@ -173,5 +186,20 @@ elseif ('edit' == $op || 'add' == $op)
 }
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/creatures.twig', $params));
+
+function process_post_save_data($data, $creatureId, $module)
+{
+    foreach ($data as $key => $val)
+    {
+        if (is_array($val))
+        {
+            process_post_save_data($val, $creatureId, $module);
+
+            continue;
+        }
+
+        set_module_objpref('creatures', $creatureId, $key, $val, $module);
+    }
+}
 
 page_footer();

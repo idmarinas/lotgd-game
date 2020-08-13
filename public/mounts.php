@@ -76,29 +76,6 @@ elseif ('give' == $op)
     $op = '';
     \LotgdHttp::setQuery('op', '');
 }
-elseif ('save' == $op)
-{
-    $subop = (string) \LotgdHttp::getQuery('subop');
-
-    if ('module' == $subop)
-    {
-        // Save modules settings
-        $module = (string) \LotgdHttp::getQuery('module');
-        $post = \LotgdHttp::getPostAll();
-        reset($post);
-
-        foreach ($post as $key => $val)
-        {
-            set_module_objpref('mounts', $mountId, $key, $val, $module);
-        }
-
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-    }
-
-    $op = $mountId ? 'edit' : '';
-
-    \LotgdHttp::setQuery('op', $op);
-}
 
 \Doctrine::flush();
 
@@ -127,11 +104,52 @@ elseif ('edit' == $op || 'add' == $op)
 
     if ('module' == $subop)
     {
-        $module = \LotgdHttp::getQuery('module');
-        rawoutput("<form action='mounts.php?op=save&subop=module&id=$mountId&module=$module' method='POST'>");
-        module_objpref_edit('mounts', $module, $mountId);
-        rawoutput('</form>');
-        \LotgdNavigation::addNav('', "mounts.php?op=save&subop=module&id=$mountId&module=$module");
+        $module = (string) \LotgdHttp::getQuery('module');
+
+        $form = module_objpref_edit('mounts', $module, $mountId);
+
+        $params['isLaminas'] = $form instanceof Laminas\Form\Form;
+        $params['module'] = $module;
+        $params['mountId'] = $mountId;
+
+        if ($params['isLaminas'])
+        {
+            $form->setAttribute('action', "mounts.php?op=edit&subop=module&id=${mountId}&module=${module}");
+            $params['formTypeTab'] = $form->getOption('form_type_tab');
+        }
+
+        if (\LotgdHttp::isPost())
+        {
+            $post = \LotgdHttp::getPostAll();
+
+            if ($params['isLaminas'])
+            {
+                $form->setData($post);
+
+                if ($form->isValid())
+                {
+                    $data = $form->getData();
+
+                    process_post_save_data($data, $mountId, $module);
+
+                    \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+                }
+            }
+            else
+            {
+                reset($post);
+
+                process_post_save_data($post, $mountId, $module);
+
+                \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
+            }
+        }
+
+        $params['form'] = $form;
+
+        \LotgdNavigation::addNav('', "mounts.php?op=edit&subop=module&id=${mountId}&module=${module}");
+
+        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/mounts/module.twig', $params));
 
         page_footer();
     }
@@ -182,5 +200,20 @@ elseif ('edit' == $op || 'add' == $op)
 }
 
 rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/mounts.twig', $params));
+
+function process_post_save_data($data, $mountId, $module)
+{
+    foreach ($data as $key => $val)
+    {
+        if (is_array($val))
+        {
+            process_post_save_data($val, $mountId, $module);
+
+            continue;
+        }
+
+        set_module_objpref('mounts', $mountId, $key, $val, $module);
+    }
+}
 
 page_footer();
