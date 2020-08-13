@@ -39,12 +39,10 @@ if ($isDevelopment)
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 defined('OVERRIDE_FORCED_NAV') || define('OVERRIDE_FORCED_NAV', false);
-defined('ALLOW_ANONYMOUS') || define('ALLOW_ANONYMOUS', false);
+defined('ALLOW_ANONYMOUS')     || define('ALLOW_ANONYMOUS', false);
 
-use Lotgd\Core\Fixed\{
-    Locator as LotgdLocator,
-    Session as LotgdSession
-};
+use Lotgd\Core\Fixed\Locator as LotgdLocator;
+use Lotgd\Core\Fixed\Session as LotgdSession;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
@@ -66,14 +64,14 @@ catch (\Throwable $th)
 
 $session = &$_SESSION['session'];
 
-$session['user']['gentime'] = $session['user']['gentime'] ?? 0;
+$session['user']['gentime']      = $session['user']['gentime']      ?? 0;
 $session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
-$session['user']['gensize'] = $session['user']['gensize'] ?? 0;
-$session['user']['acctid'] = $session['user']['acctid'] ?? 0;
-$session['user']['restorepage'] = $session['user']['restorepage'] ?? '';
-$session['counter'] = $session['counter'] ?? 0;
+$session['user']['gensize']      = $session['user']['gensize']      ?? 0;
+$session['user']['acctid']       = $session['user']['acctid']       ?? 0;
+$session['user']['restorepage']  = $session['user']['restorepage']  ?? '';
+$session['counter']              = $session['counter']              ?? 0;
 
-$session['counter']++;
+++$session['counter'];
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
@@ -123,7 +121,7 @@ if (DB_CONNECTED)
     define('LINK', $link);
 }
 
-if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
+if ( ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
 {
     define('NO_SAVE_USER', true);
 
@@ -167,7 +165,7 @@ elseif (defined('IS_INSTALLER'))
     }
 }
 
-if (! IS_INSTALLER && file_exists('public/installer.php')
+if ( ! IS_INSTALLER && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
     && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
 ) {
@@ -181,7 +179,7 @@ if (! IS_INSTALLER && file_exists('public/installer.php')
     page_footer(false);
 }
 
-if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
+if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
     defined('DB_NODB') || define('DB_NODB', true);
 
@@ -190,7 +188,7 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
     $params = [
-        'server' => \LotgdHttp::getServer('SERVER_NAME')
+        'server' => \LotgdHttp::getServer('SERVER_NAME'),
     ];
 
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/database.twig', $params));
@@ -198,7 +196,7 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
     page_footer(false);
 }
 
-if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
+if (isset($session['lasthit'], $session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
 {
     // force the abandoning of the session when the user should have been
     // sent to the fields.
@@ -211,24 +209,24 @@ if (isset($session['lasthit']) && isset($session['loggedin']) && strtotime('-'.g
 $session['lasthit'] = strtotime('now');
 
 $cp = \Lotgd\Core\Application::COPYRIGHT;
-$l = \Lotgd\Core\Application::LICENSE;
+$l  = \Lotgd\Core\Application::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
 //-- Check if have a full maintenance mode activate force to log out all players
 if (getsetting('fullmaintenance', 0))
 {
-    $title = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app-default');
+    $title   = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app-default');
     $message = \LotgdTranslator::t('maintenance.server.closed.message', [], 'app-default');
 
     \LotgdFlashMessages::addErrorMessage([
-        'header' => $title,
-        'message' => $message,
+        'header'     => $title,
+        'message'    => $message,
         'blockquote' => getsetting('maintenancenote', ''),
-        'author' => getsetting('maintenanceauthor', ''),
-        'addClass' => 'icon',
-        'icon' => 'cog loading',
-        'close' => false
+        'author'     => getsetting('maintenanceauthor', ''),
+        'addClass'   => 'icon',
+        'icon'       => 'cog loading',
+        'close'      => false,
     ]);
 
     if (($session['user']['loggedin'] ?? false) && 0 >= ($session['user']['superuser'] & SU_DEVELOPER))
@@ -255,7 +253,7 @@ if (getsetting('fullmaintenance', 0))
 //-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
 elseif (getsetting('maintenance', 0))
 {
-    $title = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app-default');
+    $title   = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app-default');
     $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app-default');
 
     if ($session['user']['loggedin'])
@@ -264,27 +262,27 @@ elseif (getsetting('maintenance', 0))
     }
 
     \LotgdFlashMessages::addWarningMessage([
-        'header' => $title,
-        'message' => $message,
+        'header'     => $title,
+        'message'    => $message,
         'blockquote' => getsetting('maintenancenote', ''),
-        'author' => getsetting('maintenanceauthor', ''),
-        'addClass' => 'icon',
-        'icon' => 'cog loading',
-        'close' => false
+        'author'     => getsetting('maintenanceauthor', ''),
+        'addClass'   => 'icon',
+        'icon'       => 'cog loading',
+        'close'      => false,
     ]);
 }
 
 $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare(['everyhit', "header-$script", "footer-$script", 'holiday', 'charstats']);
+mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession = $session;
 
 $session['user']['loggedin'] = (bool) ($session['user']['loggedin'] ?? false);
-$session['loggedin'] = $session['user']['loggedin'];
+$session['loggedin']         = $session['user']['loggedin'];
 
-if (! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
+if ( ! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
     return redirect('login.php?op=logout');
 }
@@ -296,7 +294,7 @@ if (OVERRIDE_FORCED_NAV)
     $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')] = 1;
 }
 
-if (! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
+if ( ! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
 {
     $session['user']['restorepage'] = LotgdHttp::getServer('REQUEST_URI');
 }
@@ -310,15 +308,15 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
 
 $session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
 
-if (! is_array($session['bufflist']))
+if ( ! is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
 $session['user']['lastip'] = LotgdHttp::getServer('REMOTE_ADDR');
 
-if (! LotgdHttp::getCookie('lgi') || strlen(LotgdHttp::getCookie('lgi')) < 32)
+if ( ! LotgdHttp::getCookie('lgi') || strlen(LotgdHttp::getCookie('lgi')) < 32)
 {
-    if (! isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid']) < 32)
+    if ( ! isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid']) < 32)
     {
         $u = md5(microtime());
         LotgdHttp::setCookie('lgi', $u);
@@ -339,8 +337,8 @@ elseif (LotgdHttp::getCookie('lgi') && '' != LotgdHttp::getCookie('lgi'))
  *
  * @TODO Add setting to configure if register or not.
  */
-$url = LotgdHttp::getServer('SERVER_NAME');
-$uri = LotgdHttp::getServer('HTTP_REFERER');
+$url  = LotgdHttp::getServer('SERVER_NAME');
+$uri  = LotgdHttp::getServer('HTTP_REFERER');
 $site = $uri ? parse_url($uri, PHP_URL_HOST) : '';
 
 if ($url != $site && $uri && $site)
@@ -348,8 +346,8 @@ if ($url != $site && $uri && $site)
     $url = sprintf('%s://%s/%s', LotgdHttp::getServer('REQUEST_SCHEME'), $url, LotgdHttp::getServer('REQUEST_URI'));
 
     $refererRepository = Doctrine::getRepository(\Lotgd\Core\Entity\Referers::class);
-    $referers = $refererRepository->findOneByUri($uri);
-    $referers = $referers ?: new \Lotgd\Core\Entity\Referers();
+    $referers          = $refererRepository->findOneByUri($uri);
+    $referers          = $referers ?: new \Lotgd\Core\Entity\Referers();
 
     $referers->setUri($uri)
         ->incrementCount()
@@ -374,12 +372,12 @@ $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 include_once 'lib/common.php';
 
 $session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
-$playermount = getmount($session['user']['hashorse']);
+$playermount                 = getmount($session['user']['hashorse']);
 
-$temp_comp = $session['user']['companions'] ?? [];
+$temp_comp  = $session['user']['companions'] ?? [];
 $companions = [];
 
-if (! empty($temp_comp))
+if ( ! empty($temp_comp))
 {
     foreach ($temp_comp as $name => $companion)
     {
@@ -396,7 +394,7 @@ $claninfo = [];
 if ($session['user']['clanid'] ?? false)
 {
     $repository = \Doctrine::getRepository('LotgdCore:Clans');
-    $entity = $repository->find($session['user']['clanid']);
+    $entity     = $repository->find($session['user']['clanid']);
 
     if ($entity)
     {
@@ -404,13 +402,13 @@ if ($session['user']['clanid'] ?? false)
     }
     else
     {
-        $session['user']['clanid'] = 0;
+        $session['user']['clanid']   = 0;
         $session['user']['clanrank'] = 0;
     }
 }
 else
 {
-    $session['user']['clanid'] = 0;
+    $session['user']['clanid']   = 0;
     $session['user']['clanrank'] = 0;
 }
 
@@ -441,17 +439,18 @@ if ($session['user']['loggedin'])
 
 // This bit of code checks the current system load, so that high-intensity operations can be disabled or postponed during times of exceptionally high load.  Since checking system load can in itself be resource intensive, we'll only check system load once per thirty seconds, checking it against time retrieved from the database at the first load of getsetting().
 global $fiveminuteload;
-$lastcheck = getsetting('systemload_lastcheck', 0);
+$lastcheck      = getsetting('systemload_lastcheck', 0);
 $fiveminuteload = getsetting('systemload_lastload', 0);
-$currenttime = time();
+$currenttime    = time();
 
 if ($currenttime - $lastcheck > 30)
 {
     $load = exec('uptime'); //-- Only work in Linux systems
+
     if ($load)
     {
-        $load = explode('load average:', $load);
-        $load = explode(', ', $load[1]);
+        $load           = explode('load average:', $load);
+        $load           = explode(', ', $load[1]);
         $fiveminuteload = $load[1];
         savesetting('systemload_lastload', $fiveminuteload);
         savesetting('systemload_lastcheck', $currenttime);

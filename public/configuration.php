@@ -14,11 +14,11 @@ $textDomain = 'grotto-configuration';
 
 page_header('title', [], $textDomain);
 
-$save = (string) \LotgdHttp::getQuery('save');
+$save         = (string) \LotgdHttp::getQuery('save');
 $type_setting = (string) \LotgdHttp::getQuery('setting');
 
 $params = [
-    'textDomain' => $textDomain
+    'textDomain' => $textDomain,
 ];
 
 \LotgdNavigation::superuserGrottoNav();

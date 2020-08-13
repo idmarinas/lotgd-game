@@ -45,12 +45,10 @@ if ($isDevelopment)
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
 defined('OVERRIDE_FORCED_NAV') || define('OVERRIDE_FORCED_NAV', false);
-defined('ALLOW_ANONYMOUS') || define('ALLOW_ANONYMOUS', false);
+defined('ALLOW_ANONYMOUS')     || define('ALLOW_ANONYMOUS', false);
 
-use Lotgd\Core\Fixed\{
-    Locator as LotgdLocator,
-    Session as LotgdSession
-};
+use Lotgd\Core\Fixed\Locator as LotgdLocator;
+use Lotgd\Core\Fixed\Session as LotgdSession;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
@@ -70,14 +68,14 @@ catch (\Throwable $th)
 
 $session = &$_SESSION['session'];
 
-$session['user']['gentime'] = $session['user']['gentime'] ?? 0;
+$session['user']['gentime']      = $session['user']['gentime']      ?? 0;
 $session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
-$session['user']['gensize'] = $session['user']['gensize'] ?? 0;
-$session['user']['acctid'] = $session['user']['acctid'] ?? 0;
-$session['user']['restorepage'] = $session['user']['restorepage'] ?? '';
-$session['counter'] = $session['counter'] ?? 0;
+$session['user']['gensize']      = $session['user']['gensize']      ?? 0;
+$session['user']['acctid']       = $session['user']['acctid']       ?? 0;
+$session['user']['restorepage']  = $session['user']['restorepage']  ?? '';
+$session['counter']              = $session['counter']              ?? 0;
 
-$session['counter']++;
+++$session['counter'];
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
@@ -127,7 +125,7 @@ if (DB_CONNECTED)
     define('LINK', $link);
 }
 
-if (! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
+if ( ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
 {
     define('NO_SAVE_USER', true);
 
@@ -159,7 +157,7 @@ elseif (defined('IS_INSTALLER'))
     }
 }
 
-if (! IS_INSTALLER && file_exists('public/installer.php')
+if ( ! IS_INSTALLER && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
     && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
 ) {
@@ -167,7 +165,7 @@ if (! IS_INSTALLER && file_exists('public/installer.php')
     exit;
 }
 
-if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
+if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
     defined('DB_NODB') || define('DB_NODB', true);
 
@@ -175,8 +173,8 @@ if (! defined('IS_INSTALLER') && ! DB_CONNECTED)
 }
 
 if (
-    isset($session['lasthit'])
-    && isset($session['loggedin'])
+    isset($session['lasthit'], $session['loggedin'])
+
     && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
     && $session['lasthit'] > 0 && $session['loggedin']
 ) {
@@ -195,7 +193,7 @@ if (
 $session['lasthit'] = strtotime('now');
 
 $cp = \Lotgd\Core\Application::COPYRIGHT;
-$l = \Lotgd\Core\Application::LICENSE;
+$l  = \Lotgd\Core\Application::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
@@ -225,16 +223,16 @@ if (getsetting('fullmaintenance', 0))
 }
 
 $script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
-mass_module_prepare(['everyhit', "header-$script", "footer-$script", 'holiday', 'charstats']);
+mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
 // can revert to:
 $revertsession = $session;
 
 $session['user']['loggedin'] = (bool) ($session['user']['loggedin'] ?? false);
-$session['loggedin'] = $session['user']['loggedin'];
+$session['loggedin']         = $session['user']['loggedin'];
 
-if (! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
+if ( ! $session['user']['loggedin'] && ! ALLOW_ANONYMOUS)
 {
     exit;
 }
@@ -246,7 +244,7 @@ if (OVERRIDE_FORCED_NAV)
     $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')] = 1;
 }
 
-if (! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
+if ( ! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
 {
     $session['user']['restorepage'] = LotgdHttp::getServer('REQUEST_URI');
 }
@@ -260,11 +258,11 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
 
 $session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
 
-if (! is_array($session['bufflist']))
+if ( ! is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
-$session['user']['lastip'] = LotgdHttp::getServer('REMOTE_ADDR');
+$session['user']['lastip']    = LotgdHttp::getServer('REMOTE_ADDR');
 $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 
 //check the account's hash to detect player cheats which
@@ -272,12 +270,12 @@ $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 include_once 'lib/common.php';
 
 $session['user']['hashorse'] = $session['user']['hashorse'] ?? 0;
-$playermount = getmount($session['user']['hashorse']);
+$playermount                 = getmount($session['user']['hashorse']);
 
-$temp_comp = $session['user']['companions'] ?? [];
+$temp_comp  = $session['user']['companions'] ?? [];
 $companions = [];
 
-if (! empty($temp_comp))
+if ( ! empty($temp_comp))
 {
     foreach ($temp_comp as $name => $companion)
     {
@@ -294,7 +292,7 @@ $claninfo = [];
 if ($session['user']['clanid'] ?? false)
 {
     $repository = \Doctrine::getRepository('LotgdCore:Clans');
-    $entity = $repository->find($session['user']['clanid']);
+    $entity     = $repository->find($session['user']['clanid']);
 
     if ($entity)
     {
@@ -302,13 +300,13 @@ if ($session['user']['clanid'] ?? false)
     }
     else
     {
-        $session['user']['clanid'] = 0;
+        $session['user']['clanid']   = 0;
         $session['user']['clanrank'] = 0;
     }
 }
 else
 {
-    $session['user']['clanid'] = 0;
+    $session['user']['clanid']   = 0;
     $session['user']['clanrank'] = 0;
 }
 
