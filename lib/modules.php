@@ -14,6 +14,7 @@ require_once 'lib/modules/objpref.php';
 require_once 'lib/modules/prefs.php';
 require_once 'lib/modules/hook.php';
 require_once 'lib/modules/event.php';
+require_once 'lib/showform.php';
 
 /**
  * Checks if the module requirements are satisfied.  Should a module require
