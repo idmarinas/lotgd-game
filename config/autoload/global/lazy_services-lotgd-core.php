@@ -2,6 +2,6 @@
 
 return [
     'service_manager' => [
-        'lazy_services' => []
-    ]
+        'lazy_services' => [],
+    ],
 ];

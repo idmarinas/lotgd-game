@@ -20,11 +20,11 @@ return [
                 // connection parameters, see
                 // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html
                 'params' => [
-                    'host' => 'localhost',
-                    'port' => '3306',
-                    'user' => 'username',
+                    'host'     => 'localhost',
+                    'port'     => '3306',
+                    'user'     => 'username',
                     'password' => 'password',
-                    'dbname' => 'database',
+                    'dbname'   => 'database',
                 ],
             ],
         ],
@@ -70,7 +70,7 @@ return [
 
                 //-- Alias name spaces for entities
                 'entity_namespaces' => [
-                    'LotgdCore' => 'Lotgd\Core\Entity',
+                    'LotgdCore'  => 'Lotgd\Core\Entity',
                     'LotgdLocal' => 'Lotgd\Local\Entity',
                 ],
 
@@ -78,7 +78,7 @@ return [
                 'default_repository_class_name' => \Lotgd\Core\Doctrine\ORM\EntityRepository::class,
 
                 //-- Strategy
-                'quote_strategy' => 'Doctrine\ORM\Mapping\AnsiQuoteStrategy',
+                'quote_strategy'  => 'Doctrine\ORM\Mapping\AnsiQuoteStrategy',
                 'naming_strategy' => 'Doctrine\ORM\Mapping\UnderscoreNamingStrategy',
 
                 // Custom DQL functions.
@@ -86,15 +86,15 @@ return [
                 // Further docs at http://docs.doctrine-project.org/en/latest/cookbook/dql-user-defined-functions.html
                 'datetime_functions' => [
                     'month' => \DoctrineExtensions\Query\Mysql\Month::class,
-                    'year' => \DoctrineExtensions\Query\Mysql\Year::class,
-                    'date' => \DoctrineExtensions\Query\Mysql\Date::class
+                    'year'  => \DoctrineExtensions\Query\Mysql\Year::class,
+                    'date'  => \DoctrineExtensions\Query\Mysql\Date::class,
                 ],
                 'string_functions' => [
-                    'inet_aton' => \DoctrineExtensions\Query\Mysql\InetAton::class
+                    'inet_aton' => \DoctrineExtensions\Query\Mysql\InetAton::class,
                 ],
                 'numeric_functions' => [
                     'round' => \DoctrineExtensions\Query\Mysql\Round::class,
-                    'rand' => \DoctrineExtensions\Query\Mysql\Rand::class,
+                    'rand'  => \DoctrineExtensions\Query\Mysql\Rand::class,
                 ],
 
                 // Second level cache configuration (see doc to learn about configuration)
@@ -107,12 +107,12 @@ return [
             'lotgd_core' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'filesystem',
-                'paths' => ['src/core/Entity']
+                'paths' => ['src/core/Entity'],
             ],
             'lotgd_local' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'filesystem',
-                'paths' => ['src/local/Entity']
+                'paths' => ['src/local/Entity'],
             ],
 
             // Configuration for service `doctrine.driver.orm_default` service
@@ -124,7 +124,7 @@ return [
                 // Map of driver names to be used within this driver chain, indexed by
                 // entity namespace
                 'drivers' => [
-                    'Lotgd\Core\Entity' => 'lotgd_core',
+                    'Lotgd\Core\Entity'  => 'lotgd_core',
                     'Lotgd\Local\Entity' => 'lotgd_local',
                 ],
             ],
@@ -152,7 +152,7 @@ return [
                     'Gedmo\Sluggable\SluggableListener',
                     'Gedmo\Loggable\LoggableListener',
                     'Gedmo\Sortable\SortableListener',
-                    'Lotgd\Core\Doctrine\Extension\TablePrefix'
+                    'Lotgd\Core\Doctrine\Extension\TablePrefix',
                 ],
             ],
         ],
@@ -209,11 +209,11 @@ return [
         // migrations configuration
         'migrations_configuration' => [
             'orm_default' => [
-                'directory' => 'data/DoctrineORMModule/Migrations',
-                'name' => 'Doctrine Database Migrations',
-                'namespace' => 'DoctrineORMModule\Migrations',
-                'table' => 'migrations',
-                'column' => 'version',
+                'directory'       => 'data/DoctrineORMModule/Migrations',
+                'name'            => 'Doctrine Database Migrations',
+                'namespace'       => 'DoctrineORMModule\Migrations',
+                'table'           => 'migrations',
+                'column'          => 'version',
                 'custom_template' => null,
             ],
         ],
@@ -221,62 +221,62 @@ return [
         // migrations commands base config
         'migrations_cmd' => [
             'generate' => [],
-            'execute' => [],
-            'migrate' => [],
-            'status' => [],
-            'version' => [],
-            'diff' => [],
-            'latest' => [],
+            'execute'  => [],
+            'migrate'  => [],
+            'status'   => [],
+            'version'  => [],
+            'diff'     => [],
+            'latest'   => [],
         ],
 
         'cache' => [
             'apc' => [
-                'class' => 'Doctrine\Common\Cache\ApcCache',
+                'class'     => 'Doctrine\Common\Cache\ApcCache',
                 'namespace' => 'DoctrineModule',
             ],
             'apcu' => [
-                'class' => 'Doctrine\Common\Cache\ApcuCache',
+                'class'     => 'Doctrine\Common\Cache\ApcuCache',
                 'namespace' => 'DoctrineModule',
             ],
             'array' => [
-                'class' => 'Doctrine\Common\Cache\ArrayCache',
+                'class'     => 'Doctrine\Common\Cache\ArrayCache',
                 'namespace' => 'DoctrineModule',
             ],
             'filesystem' => [
-                'class' => 'Doctrine\Common\Cache\FilesystemCache',
+                'class'     => 'Doctrine\Common\Cache\FilesystemCache',
                 'directory' => 'storage/cache/DoctrineModule/cache',
                 'namespace' => 'DoctrineModule',
             ],
             'memcache' => [
-                'class' => 'Doctrine\Common\Cache\MemcacheCache',
-                'instance' => 'my_memcache_alias',
+                'class'     => 'Doctrine\Common\Cache\MemcacheCache',
+                'instance'  => 'my_memcache_alias',
                 'namespace' => 'DoctrineModule',
             ],
             'memcached' => [
-                'class' => 'Doctrine\Common\Cache\MemcachedCache',
-                'instance' => 'my_memcached_alias',
+                'class'     => 'Doctrine\Common\Cache\MemcachedCache',
+                'instance'  => 'my_memcached_alias',
                 'namespace' => 'DoctrineModule',
             ],
             'predis' => [
-                'class' => 'Doctrine\Common\Cache\PredisCache',
-                'instance' => 'my_predis_alias',
+                'class'     => 'Doctrine\Common\Cache\PredisCache',
+                'instance'  => 'my_predis_alias',
                 'namespace' => 'DoctrineModule',
             ],
             'redis' => [
-                'class' => 'Doctrine\Common\Cache\RedisCache',
-                'instance' => 'my_redis_alias',
+                'class'     => 'Doctrine\Common\Cache\RedisCache',
+                'instance'  => 'my_redis_alias',
                 'namespace' => 'DoctrineModule',
             ],
             'wincache' => [
-                'class' => 'Doctrine\Common\Cache\WinCacheCache',
+                'class'     => 'Doctrine\Common\Cache\WinCacheCache',
                 'namespace' => 'DoctrineModule',
             ],
             'xcache' => [
-                'class' => 'Doctrine\Common\Cache\XcacheCache',
+                'class'     => 'Doctrine\Common\Cache\XcacheCache',
                 'namespace' => 'DoctrineModule',
             ],
             'zenddata' => [
-                'class' => 'Doctrine\Common\Cache\ZendDataCache',
+                'class'     => 'Doctrine\Common\Cache\ZendDataCache',
                 'namespace' => 'DoctrineModule',
             ],
         ],
@@ -285,20 +285,20 @@ return [
     // Factory mappings - used to define which factory to use to instantiate a particular doctrine
     // service type
     'doctrine_factories' => [
-        'cache' => 'DoctrineModule\Service\CacheFactory',
-        'eventmanager' => 'DoctrineModule\Service\EventManagerFactory',
-        'driver' => 'DoctrineModule\Service\DriverFactory',
-        'authenticationadapter' => 'DoctrineModule\Service\Authentication\AdapterFactory',
-        'authenticationstorage' => 'DoctrineModule\Service\Authentication\StorageFactory',
-        'authenticationservice' => 'DoctrineModule\Service\Authentication\AuthenticationServiceFactory',
-        'connection' => Service\DBALConnectionFactory::class,
-        'configuration' => Service\ConfigurationFactory::class,
-        'entitymanager' => \Lotgd\Core\Factory\Db\Doctrine::class,
-        'entity_resolver' => Service\EntityResolverFactory::class,
-        'sql_logger_collector' => Service\SQLLoggerCollectorFactory::class,
-        'mapping_collector' => Service\MappingCollectorFactory::class,
-        'formannotationbuilder' => Service\FormAnnotationBuilderFactory::class,
+        'cache'                    => 'DoctrineModule\Service\CacheFactory',
+        'eventmanager'             => 'DoctrineModule\Service\EventManagerFactory',
+        'driver'                   => 'DoctrineModule\Service\DriverFactory',
+        'authenticationadapter'    => 'DoctrineModule\Service\Authentication\AdapterFactory',
+        'authenticationstorage'    => 'DoctrineModule\Service\Authentication\StorageFactory',
+        'authenticationservice'    => 'DoctrineModule\Service\Authentication\AuthenticationServiceFactory',
+        'connection'               => Service\DBALConnectionFactory::class,
+        'configuration'            => Service\ConfigurationFactory::class,
+        'entitymanager'            => \Lotgd\Core\Factory\Db\Doctrine::class,
+        'entity_resolver'          => Service\EntityResolverFactory::class,
+        'sql_logger_collector'     => Service\SQLLoggerCollectorFactory::class,
+        'mapping_collector'        => Service\MappingCollectorFactory::class,
+        'formannotationbuilder'    => Service\FormAnnotationBuilderFactory::class,
         'migrations_configuration' => Service\MigrationsConfigurationFactory::class,
-        'migrations_cmd' => Service\MigrationsCommandFactory::class,
+        'migrations_cmd'           => Service\MigrationsCommandFactory::class,
     ],
 ];

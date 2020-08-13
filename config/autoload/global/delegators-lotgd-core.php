@@ -2,6 +2,6 @@
 
 return [
     'service_manager' => [
-        'delegators' => []
-    ]
+        'delegators' => [],
+    ],
 ];

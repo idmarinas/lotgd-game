@@ -11,7 +11,7 @@ return [
 
             //-- Added in version 4.2.0
             'DoctrineModule' => 'DoctrineModule\ServiceFactory\AbstractDoctrineServiceFactory',
-        ]
+        ],
     ],
     'input_filters' => [
         'abstract_factories' => [

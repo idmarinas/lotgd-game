@@ -1,7 +1,7 @@
 <?php
 
 /**
- * All this Extension are required for Game Core
+ * All this Extension are required for Game Core.
  *
  * Extension\Class\Name::class
  */
@@ -45,5 +45,5 @@ return [
 
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
-    ]
+    ],
 ];

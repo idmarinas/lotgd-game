@@ -2,9 +2,9 @@
 
 use DoctrineModule\Form\Element as DoctrineElement;
 use DoctrineORMModule\Service as DoctrineService;
+use Laminas\Form\ElementFactory;
 use Lotgd\Core\Form\Element;
 use Lotgd\Core\Form\ElementFactory as LotgdElementFactory;
-use Laminas\Form\ElementFactory;
 
 return [
     'form_elements' => [
@@ -22,8 +22,8 @@ return [
             //-- Tagify element
             'tagify' => Element\Tagify::class,
             'Tagify' => Element\Tagify::class,
-            'tags' => Element\Tagify::class,
-            'Tags' => Element\Tagify::class,
+            'tags'   => Element\Tagify::class,
+            'Tags'   => Element\Tagify::class,
 
             //-- Select of themes.
             'lotgdtheme' => Element\LotgdTheme::class,
@@ -37,12 +37,12 @@ return [
 
             //-- Added in version 4.2.0
             //-- Doctrine elements
-            'objectselect' => DoctrineElement\ObjectSelect::class,
-            'objectSelect' => DoctrineElement\ObjectSelect::class,
-            'ObjectSelect' => DoctrineElement\ObjectSelect::class,
-            'objectradio' => DoctrineElement\ObjectRadio::class,
-            'objectRadio' => DoctrineElement\ObjectRadio::class,
-            'ObjectRadio' => DoctrineElement\ObjectRadio::class,
+            'objectselect'        => DoctrineElement\ObjectSelect::class,
+            'objectSelect'        => DoctrineElement\ObjectSelect::class,
+            'ObjectSelect'        => DoctrineElement\ObjectSelect::class,
+            'objectradio'         => DoctrineElement\ObjectRadio::class,
+            'objectRadio'         => DoctrineElement\ObjectRadio::class,
+            'ObjectRadio'         => DoctrineElement\ObjectRadio::class,
             'objectmulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
             'objectMulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
             'objectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
@@ -55,17 +55,17 @@ return [
             'ViewOnly' => Element\ViewOnly::class,
         ],
         'factories' => [
-            Element\GameLanguage::class => LotgdElementFactory::class,
+            Element\GameLanguage::class   => LotgdElementFactory::class,
             Element\ServerLanguage::class => ElementFactory::class,
-            Element\Tagify::class => ElementFactory::class,
-            Element\LotgdTheme::class => LotgdElementFactory::class,
-            Element\BitField::class => ElementFactory::class,
-            Element\ViewOnly::class => ElementFactory::class,
+            Element\Tagify::class         => ElementFactory::class,
+            Element\LotgdTheme::class     => LotgdElementFactory::class,
+            Element\BitField::class       => ElementFactory::class,
+            Element\ViewOnly::class       => ElementFactory::class,
 
             //-- Added in version 4.2.0
-            DoctrineElement\ObjectSelect::class => DoctrineService\ObjectSelectFactory::class,
-            DoctrineElement\ObjectRadio::class => DoctrineService\ObjectRadioFactory::class,
+            DoctrineElement\ObjectSelect::class        => DoctrineService\ObjectSelectFactory::class,
+            DoctrineElement\ObjectRadio::class         => DoctrineService\ObjectRadioFactory::class,
             DoctrineElement\ObjectMultiCheckbox::class => DoctrineService\ObjectMultiCheckboxFactory::class,
-        ]
-    ]
+        ],
+    ],
 ];
