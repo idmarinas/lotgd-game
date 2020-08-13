@@ -42,7 +42,7 @@ class Settings
     /**
      * Set the value of Setting.
      *
-     * @param string setting
+     * @param string $setting
      *
      * @return self
      */
@@ -64,7 +64,7 @@ class Settings
     /**
      * Set the value of Value.
      *
-     * @param string value
+     * @param string $value
      *
      * @return self
      */

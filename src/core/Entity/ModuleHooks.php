@@ -71,7 +71,7 @@ class ModuleHooks
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -93,7 +93,7 @@ class ModuleHooks
     /**
      * Set the value of Location.
      *
-     * @param string location
+     * @param string $location
      *
      * @return self
      */
@@ -115,7 +115,7 @@ class ModuleHooks
     /**
      * Set the value of Function.
      *
-     * @param string function
+     * @param string $function
      *
      * @return self
      */
@@ -137,7 +137,7 @@ class ModuleHooks
     /**
      * Set the value of Whenactive.
      *
-     * @param string whenactive
+     * @param string $whenactive
      *
      * @return self
      */
@@ -159,7 +159,7 @@ class ModuleHooks
     /**
      * Set the value of Priority.
      *
-     * @param int priority
+     * @param int $priority
      *
      * @return self
      */

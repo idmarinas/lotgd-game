@@ -89,7 +89,7 @@ class Clans
     /**
      * Set the value of Clanid.
      *
-     * @param int clanid
+     * @param int $clanid
      *
      * @return self
      */
@@ -111,7 +111,7 @@ class Clans
     /**
      * Set the value of Clanname.
      *
-     * @param string clanname
+     * @param string $clanname
      *
      * @return self
      */
@@ -133,7 +133,7 @@ class Clans
     /**
      * Set the value of Clanshort.
      *
-     * @param string clanshort
+     * @param string $clanshort
      *
      * @return self
      */
@@ -155,7 +155,7 @@ class Clans
     /**
      * Set the value of Clanmotd.
      *
-     * @param string clanmotd
+     * @param string $clanmotd
      *
      * @return self
      */
@@ -177,7 +177,7 @@ class Clans
     /**
      * Set the value of Clandesc.
      *
-     * @param string clandesc
+     * @param string $clandesc
      *
      * @return self
      */
@@ -199,7 +199,7 @@ class Clans
     /**
      * Set the value of Motdauthor.
      *
-     * @param int motdauthor
+     * @param int $motdauthor
      *
      * @return self
      */
@@ -221,7 +221,7 @@ class Clans
     /**
      * Set the value of Descauthor.
      *
-     * @param int descauthor
+     * @param int $descauthor
      *
      * @return self
      */
@@ -243,7 +243,7 @@ class Clans
     /**
      * Set the value of Customsay.
      *
-     * @param string customsay
+     * @param string $customsay
      *
      * @return self
      */

@@ -227,9 +227,9 @@ class Mounts implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(MountsTranslation $t)
+    public function addTranslation(MountsTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -239,7 +239,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountid.
      *
-     * @param int mountid
+     * @param int $mountid
      *
      * @return self
      */
@@ -261,7 +261,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountname.
      *
-     * @param string mountname
+     * @param string $mountname
      *
      * @return self
      */
@@ -283,7 +283,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountdesc.
      *
-     * @param string mountdesc
+     * @param string $mountdesc
      *
      * @return self
      */
@@ -305,7 +305,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountcategory.
      *
-     * @param string mountcategory
+     * @param string $mountcategory
      *
      * @return self
      */
@@ -327,7 +327,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountbuff.
      *
-     * @param array mountbuff
+     * @param array $mountbuff
      *
      * @return self
      */
@@ -354,7 +354,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountcostgems.
      *
-     * @param int mountcostgems
+     * @param int $mountcostgems
      *
      * @return self
      */
@@ -376,7 +376,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountcostgold.
      *
-     * @param int mountcostgold
+     * @param int $mountcostgold
      *
      * @return self
      */
@@ -398,8 +398,6 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountactive.
      *
-     * @param bool mountactive
-     *
      * @return self
      */
     public function setMountactive(bool $mountactive)
@@ -420,7 +418,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountforestfights.
      *
-     * @param int mountforestfights
+     * @param int $mountforestfights
      *
      * @return self
      */
@@ -442,7 +440,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Newday.
      *
-     * @param string newday
+     * @param string $newday
      *
      * @return self
      */
@@ -464,7 +462,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Recharge.
      *
-     * @param string recharge
+     * @param string $recharge
      *
      * @return self
      */
@@ -486,7 +484,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Partrecharge.
      *
-     * @param string partrecharge
+     * @param string $partrecharge
      *
      * @return self
      */
@@ -508,7 +506,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountfeedcost.
      *
-     * @param int mountfeedcost
+     * @param int $mountfeedcost
      *
      * @return self
      */
@@ -530,7 +528,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountlocation.
      *
-     * @param string mountlocation
+     * @param string $mountlocation
      *
      * @return self
      */
@@ -552,7 +550,7 @@ class Mounts implements Translatable
     /**
      * Set the value of Mountdkcost.
      *
-     * @param int mountdkcost
+     * @param int $mountdkcost
      *
      * @return self
      */

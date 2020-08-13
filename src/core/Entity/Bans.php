@@ -77,8 +77,6 @@ class Bans
     /**
      * Set the value of Banexpire.
      *
-     * @param \DateTime banexpire
-     *
      * @return self
      */
     public function setBanexpire(\DateTime $banexpire)
@@ -99,7 +97,7 @@ class Bans
     /**
      * Set the value of Uniqueid.
      *
-     * @param string uniqueid
+     * @param string $uniqueid
      *
      * @return self
      */
@@ -121,7 +119,7 @@ class Bans
     /**
      * Set the value of Ipfilter.
      *
-     * @param string ipfilter
+     * @param string $ipfilter
      *
      * @return self
      */
@@ -143,7 +141,7 @@ class Bans
     /**
      * Set the value of Banreason.
      *
-     * @param string banreason
+     * @param string $banreason
      *
      * @return self
      */
@@ -165,7 +163,7 @@ class Bans
     /**
      * Set the value of Banner.
      *
-     * @param string banner
+     * @param string $banner
      *
      * @return self
      */
@@ -186,8 +184,6 @@ class Bans
 
     /**
      * Set the value of Lasthit.
-     *
-     * @param \DateTime lasthit
      *
      * @return self
      */

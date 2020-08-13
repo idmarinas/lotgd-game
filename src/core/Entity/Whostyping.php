@@ -49,7 +49,7 @@ class Whostyping
     /**
      * Set the value of Name.
      *
-     * @param string name
+     * @param string $name
      *
      * @return self
      */
@@ -71,7 +71,7 @@ class Whostyping
     /**
      * Set the value of Time.
      *
-     * @param int time
+     * @param int $time
      *
      * @return self
      */
@@ -93,7 +93,7 @@ class Whostyping
     /**
      * Set the value of Section.
      *
-     * @param string section
+     * @param string $section
      *
      * @return self
      */

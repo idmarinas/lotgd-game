@@ -69,7 +69,7 @@ class ModuleObjprefs
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -91,7 +91,7 @@ class ModuleObjprefs
     /**
      * Set the value of Objtype.
      *
-     * @param string objtype
+     * @param string $objtype
      *
      * @return self
      */
@@ -113,7 +113,7 @@ class ModuleObjprefs
     /**
      * Set the value of Setting.
      *
-     * @param string setting
+     * @param string $setting
      *
      * @return self
      */
@@ -135,7 +135,7 @@ class ModuleObjprefs
     /**
      * Set the value of Objid.
      *
-     * @param int objid
+     * @param int $objid
      *
      * @return self
      */
@@ -157,7 +157,7 @@ class ModuleObjprefs
     /**
      * Set the value of Value.
      *
-     * @param string value
+     * @param string $value
      *
      * @return self
      */

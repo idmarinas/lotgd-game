@@ -109,7 +109,7 @@ class Paylog
     /**
      * Set the value of Payid.
      *
-     * @param int payid
+     * @param int $payid
      *
      * @return self
      */
@@ -131,7 +131,7 @@ class Paylog
     /**
      * Set the value of Info.
      *
-     * @param string info
+     * @param string $info
      *
      * @return self
      */
@@ -153,7 +153,7 @@ class Paylog
     /**
      * Set the value of Response.
      *
-     * @param string response
+     * @param string $response
      *
      * @return self
      */
@@ -175,7 +175,7 @@ class Paylog
     /**
      * Set the value of Txnid.
      *
-     * @param string txnid
+     * @param string $txnid
      *
      * @return self
      */
@@ -197,7 +197,7 @@ class Paylog
     /**
      * Set the value of Amount.
      *
-     * @param float amount
+     * @param float $amount
      *
      * @return self
      */
@@ -219,7 +219,7 @@ class Paylog
     /**
      * Set the value of Name.
      *
-     * @param string name
+     * @param string $name
      *
      * @return self
      */
@@ -241,7 +241,7 @@ class Paylog
     /**
      * Set the value of Acctid.
      *
-     * @param int acctid
+     * @param int $acctid
      *
      * @return self
      */
@@ -263,7 +263,7 @@ class Paylog
     /**
      * Set the value of Processed.
      *
-     * @param bool processed
+     * @param bool $processed
      *
      * @return self
      */
@@ -285,7 +285,7 @@ class Paylog
     /**
      * Set the value of Filed.
      *
-     * @param bool filed
+     * @param bool $filed
      *
      * @return self
      */
@@ -307,7 +307,7 @@ class Paylog
     /**
      * Set the value of Txfee.
      *
-     * @param float txfee
+     * @param float $txfee
      *
      * @return self
      */
@@ -328,8 +328,6 @@ class Paylog
 
     /**
      * Set the value of Processdate.
-     *
-     * @param \DateTime processdate
      *
      * @return self
      */

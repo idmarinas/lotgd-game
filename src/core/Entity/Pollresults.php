@@ -60,7 +60,7 @@ class Pollresults
     /**
      * Set the value of Resultid.
      *
-     * @param int resultid
+     * @param int $resultid
      *
      * @return self
      */
@@ -82,7 +82,7 @@ class Pollresults
     /**
      * Set the value of Choice.
      *
-     * @param int choice
+     * @param int $choice
      *
      * @return self
      */
@@ -104,7 +104,7 @@ class Pollresults
     /**
      * Set the value of Account.
      *
-     * @param int account
+     * @param int $account
      *
      * @return self
      */
@@ -126,7 +126,7 @@ class Pollresults
     /**
      * Set the value of Motditem.
      *
-     * @param int motditem
+     * @param int $motditem
      *
      * @return self
      */

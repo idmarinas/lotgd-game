@@ -103,9 +103,9 @@ class Titles implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(TitlesTranslation $t)
+    public function addTranslation(TitlesTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -115,7 +115,7 @@ class Titles implements Translatable
     /**
      * Set the value of Titleid.
      *
-     * @param int titleid
+     * @param int $titleid
      *
      * @return self
      */
@@ -137,7 +137,7 @@ class Titles implements Translatable
     /**
      * Set the value of Dk.
      *
-     * @param int dk
+     * @param int $dk
      *
      * @return self
      */
@@ -159,7 +159,7 @@ class Titles implements Translatable
     /**
      * Set the value of Ref.
      *
-     * @param string ref
+     * @param string $ref
      *
      * @return self
      */
@@ -181,7 +181,7 @@ class Titles implements Translatable
     /**
      * Set the value of Male.
      *
-     * @param string male
+     * @param string $male
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class Titles implements Translatable
     /**
      * Set the value of Female.
      *
-     * @param string female
+     * @param string $female
      *
      * @return self
      */

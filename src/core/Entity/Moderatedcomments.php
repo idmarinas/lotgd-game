@@ -46,7 +46,7 @@ class Moderatedcomments
      */
     private $moderator = 0;
 
-    /**}
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="moddate", type="datetime", nullable=false, options={"default":"0000-00-00 00:00:00"})
@@ -56,7 +56,7 @@ class Moderatedcomments
     /**
      * Set the value of Modid.
      *
-     * @param int modid
+     * @param int $modid
      *
      * @return self
      */
@@ -78,7 +78,7 @@ class Moderatedcomments
     /**
      * Set the value of Comment.
      *
-     * @param string comment
+     * @param string $comment
      *
      * @return self
      */
@@ -100,7 +100,7 @@ class Moderatedcomments
     /**
      * Set the value of Moderator.
      *
-     * @param int moderator
+     * @param int $moderator
      *
      * @return self
      */
@@ -121,8 +121,6 @@ class Moderatedcomments
 
     /**
      * Set the value of Moddate.
-     *
-     * @param \DateTime moddate
      *
      * @return self
      */

@@ -104,9 +104,9 @@ class Armor implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(ArmorTranslation $t)
+    public function addTranslation(ArmorTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -116,7 +116,7 @@ class Armor implements Translatable
     /**
      * Set the value of Armorid.
      *
-     * @param int armorid
+     * @param int $armorid
      *
      * @return self
      */
@@ -140,7 +140,7 @@ class Armor implements Translatable
     /**
      * Set the value of Armorname.
      *
-     * @param string armorname
+     * @param string $armorname
      *
      * @return self
      */
@@ -162,7 +162,7 @@ class Armor implements Translatable
     /**
      * Set the value of Value.
      *
-     * @param int value
+     * @param int $value
      *
      * @return self
      */
@@ -184,7 +184,7 @@ class Armor implements Translatable
     /**
      * Set the value of Defense.
      *
-     * @param int defense
+     * @param int $defense
      *
      * @return self
      */
@@ -206,7 +206,7 @@ class Armor implements Translatable
     /**
      * Set the value of Level.
      *
-     * @param int level
+     * @param int $level
      *
      * @return self
      */

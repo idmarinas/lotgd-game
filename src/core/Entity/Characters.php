@@ -559,18 +559,18 @@ class Characters
      */
     public function __construct()
     {
-        $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
-        $this->lasthit = new \DateTime('0000-00-00 00:00:00');
-        $this->pvpflag = new \DateTime('0000-00-00 00:00:00');
+        $this->lastmotd       = new \DateTime('0000-00-00 00:00:00');
+        $this->lasthit        = new \DateTime('0000-00-00 00:00:00');
+        $this->pvpflag        = new \DateTime('0000-00-00 00:00:00');
         $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
-        $this->biotime = new \DateTime('0000-00-00 00:00:00');
-        $this->clanjoindate = new \DateTime('0000-00-00 00:00:00');
+        $this->biotime        = new \DateTime('0000-00-00 00:00:00');
+        $this->clanjoindate   = new \DateTime('0000-00-00 00:00:00');
     }
 
     /**
      * Set the value of Id.
      *
-     * @param int id
+     * @param int $id
      *
      * @return self
      */
@@ -592,7 +592,7 @@ class Characters
     /**
      * Set the value of Acct.
      *
-     * @param int acct
+     * @param int $acct
      *
      * @return self
      */
@@ -616,7 +616,7 @@ class Characters
     /**
      * Set the value of Name.
      *
-     * @param string name
+     * @param string $name
      *
      * @return self
      */
@@ -638,7 +638,7 @@ class Characters
     /**
      * Set the value of Playername.
      *
-     * @param string playername
+     * @param string $playername
      *
      * @return self
      */
@@ -660,7 +660,7 @@ class Characters
     /**
      * Set the value of Sex.
      *
-     * @param int sex
+     * @param int $sex
      *
      * @return self
      */
@@ -682,7 +682,7 @@ class Characters
     /**
      * Set the value of Strength.
      *
-     * @param int strength
+     * @param int $strength
      *
      * @return self
      */
@@ -704,7 +704,7 @@ class Characters
     /**
      * Set the value of Dexterity.
      *
-     * @param int dexterity
+     * @param int $dexterity
      *
      * @return self
      */
@@ -726,7 +726,7 @@ class Characters
     /**
      * Set the value of Intelligence.
      *
-     * @param int intelligence
+     * @param int $intelligence
      *
      * @return self
      */
@@ -748,7 +748,7 @@ class Characters
     /**
      * Set the value of Constitution.
      *
-     * @param int constitution
+     * @param int $constitution
      *
      * @return self
      */
@@ -770,7 +770,7 @@ class Characters
     /**
      * Set the value of Wisdom.
      *
-     * @param int wisdom
+     * @param int $wisdom
      *
      * @return self
      */
@@ -792,7 +792,7 @@ class Characters
     /**
      * Set the value of Specialty.
      *
-     * @param string specialty
+     * @param string $specialty
      *
      * @return self
      */
@@ -814,7 +814,7 @@ class Characters
     /**
      * Set the value of Experience.
      *
-     * @param int experience
+     * @param int $experience
      *
      * @return self
      */
@@ -836,7 +836,7 @@ class Characters
     /**
      * Set the value of Gold.
      *
-     * @param int gold
+     * @param int $gold
      *
      * @return self
      */
@@ -858,7 +858,7 @@ class Characters
     /**
      * Set the value of Weapon.
      *
-     * @param string weapon
+     * @param string $weapon
      *
      * @return self
      */
@@ -880,7 +880,7 @@ class Characters
     /**
      * Set the value of Armor.
      *
-     * @param string armor
+     * @param string $armor
      *
      * @return self
      */
@@ -902,7 +902,7 @@ class Characters
     /**
      * Set the value of Seenmaster.
      *
-     * @param bool seenmaster
+     * @param bool $seenmaster
      *
      * @return self
      */
@@ -924,7 +924,7 @@ class Characters
     /**
      * Set the value of Level.
      *
-     * @param int level
+     * @param int $level
      *
      * @return self
      */
@@ -946,7 +946,7 @@ class Characters
     /**
      * Set the value of Defense.
      *
-     * @param int defense
+     * @param int $defense
      *
      * @return self
      */
@@ -968,7 +968,7 @@ class Characters
     /**
      * Set the value of Attack.
      *
-     * @param int attack
+     * @param int $attack
      *
      * @return self
      */
@@ -990,7 +990,7 @@ class Characters
     /**
      * Set the value of Alive.
      *
-     * @param bool alive
+     * @param bool $alive
      *
      * @return self
      */
@@ -1012,7 +1012,7 @@ class Characters
     /**
      * Set the value of Goldinbank.
      *
-     * @param int goldinbank
+     * @param int $goldinbank
      *
      * @return self
      */
@@ -1034,7 +1034,7 @@ class Characters
     /**
      * Set the value of Marriedto.
      *
-     * @param int marriedto
+     * @param int $marriedto
      *
      * @return self
      */
@@ -1056,7 +1056,7 @@ class Characters
     /**
      * Set the value of Spirits.
      *
-     * @param int spirits
+     * @param int $spirits
      *
      * @return self
      */
@@ -1078,7 +1078,7 @@ class Characters
     /**
      * Set the value of Hitpoints.
      *
-     * @param int hitpoints
+     * @param int $hitpoints
      *
      * @return self
      */
@@ -1100,7 +1100,7 @@ class Characters
     /**
      * Set the value of Maxhitpoints.
      *
-     * @param int maxhitpoints
+     * @param int $maxhitpoints
      *
      * @return self
      */
@@ -1122,7 +1122,7 @@ class Characters
     /**
      * Set the value of Permahitpoints.
      *
-     * @param int permahitpoints
+     * @param int $permahitpoints
      *
      * @return self
      */
@@ -1144,7 +1144,7 @@ class Characters
     /**
      * Set the value of Gems.
      *
-     * @param int gems
+     * @param int $gems
      *
      * @return self
      */
@@ -1166,7 +1166,7 @@ class Characters
     /**
      * Set the value of Weaponvalue.
      *
-     * @param int weaponvalue
+     * @param int $weaponvalue
      *
      * @return self
      */
@@ -1188,7 +1188,7 @@ class Characters
     /**
      * Set the value of Armorvalue.
      *
-     * @param int armorvalue
+     * @param int $armorvalue
      *
      * @return self
      */
@@ -1210,7 +1210,7 @@ class Characters
     /**
      * Set the value of Location.
      *
-     * @param string location
+     * @param string $location
      *
      * @return self
      */
@@ -1232,7 +1232,7 @@ class Characters
     /**
      * Set the value of Turns.
      *
-     * @param int turns
+     * @param int $turns
      *
      * @return self
      */
@@ -1254,7 +1254,7 @@ class Characters
     /**
      * Set the value of Title.
      *
-     * @param string title
+     * @param string $title
      *
      * @return self
      */
@@ -1276,7 +1276,7 @@ class Characters
     /**
      * Set the value of Badguy.
      *
-     * @param string badguy
+     * @param string $badguy
      *
      * @return self
      */
@@ -1300,7 +1300,7 @@ class Characters
     /**
      * Set the value of Companions.
      *
-     * @param string companions
+     * @param string $companions
      *
      * @return self
      */
@@ -1324,7 +1324,7 @@ class Characters
     /**
      * Set the value of Allowednavs.
      *
-     * @param array allowednavs
+     * @param array $allowednavs
      *
      * @return self
      */
@@ -1348,7 +1348,7 @@ class Characters
     /**
      * Set the value of Resurrections.
      *
-     * @param int resurrections
+     * @param int $resurrections
      *
      * @return self
      */
@@ -1370,7 +1370,7 @@ class Characters
     /**
      * Set the value of Weapondmg.
      *
-     * @param int weapondmg
+     * @param int $weapondmg
      *
      * @return self
      */
@@ -1392,7 +1392,7 @@ class Characters
     /**
      * Set the value of Armordef.
      *
-     * @param int armordef
+     * @param int $armordef
      *
      * @return self
      */
@@ -1414,7 +1414,7 @@ class Characters
     /**
      * Set the value of Age.
      *
-     * @param int age
+     * @param int $age
      *
      * @return self
      */
@@ -1436,7 +1436,7 @@ class Characters
     /**
      * Set the value of Charm.
      *
-     * @param int charm
+     * @param int $charm
      *
      * @return self
      */
@@ -1458,7 +1458,7 @@ class Characters
     /**
      * Set the value of Specialinc.
      *
-     * @param string specialinc
+     * @param string $specialinc
      *
      * @return self
      */
@@ -1480,7 +1480,7 @@ class Characters
     /**
      * Set the value of Specialmisc.
      *
-     * @param string specialmisc
+     * @param string $specialmisc
      *
      * @return self
      */
@@ -1502,8 +1502,6 @@ class Characters
     /**
      * Set the value of Lastmotd.
      *
-     * @param \DateTime lastmotd
-     *
      * @return self
      */
     public function setLastmotd(\DateTime $lastmotd)
@@ -1524,7 +1522,7 @@ class Characters
     /**
      * Set the value of Playerfights.
      *
-     * @param int playerfights
+     * @param int $playerfights
      *
      * @return self
      */
@@ -1546,8 +1544,6 @@ class Characters
     /**
      * Set the value of Lasthit.
      *
-     * @param \DateTime lasthit
-     *
      * @return self
      */
     public function setLasthit(\DateTime $lasthit)
@@ -1568,7 +1564,7 @@ class Characters
     /**
      * Set the value of Seendragon.
      *
-     * @param bool seendragon
+     * @param bool $seendragon
      *
      * @return self
      */
@@ -1590,7 +1586,7 @@ class Characters
     /**
      * Set the value of Dragonkills.
      *
-     * @param int dragonkills
+     * @param int $dragonkills
      *
      * @return self
      */
@@ -1612,7 +1608,7 @@ class Characters
     /**
      * Set the value of Restorepage.
      *
-     * @param string restorepage
+     * @param string $restorepage
      *
      * @return self
      */
@@ -1634,7 +1630,7 @@ class Characters
     /**
      * Set the value of Hashorse.
      *
-     * @param bool hashorse
+     * @param bool $hashorse
      *
      * @return self
      */
@@ -1656,7 +1652,7 @@ class Characters
     /**
      * Set the value of Bufflist.
      *
-     * @param string bufflist
+     * @param string $bufflist
      *
      * @return self
      */
@@ -1680,7 +1676,7 @@ class Characters
     /**
      * Set the value of Dragonpoints.
      *
-     * @param string dragonpoints
+     * @param string $dragonpoints
      *
      * @return self
      */
@@ -1704,7 +1700,7 @@ class Characters
     /**
      * Set the value of Boughtroomtoday.
      *
-     * @param bool boughtroomtoday
+     * @param bool $boughtroomtoday
      *
      * @return self
      */
@@ -1726,7 +1722,7 @@ class Characters
     /**
      * Set the value of Sentnotice.
      *
-     * @param bool sentnotice
+     * @param bool $sentnotice
      *
      * @return self
      */
@@ -1748,8 +1744,6 @@ class Characters
     /**
      * Set the value of Pvpflag.
      *
-     * @param \DateTime pvpflag
-     *
      * @return self
      */
     public function setPvpflag(\DateTime $pvpflag)
@@ -1770,7 +1764,7 @@ class Characters
     /**
      * Set the value of Transferredtoday.
      *
-     * @param int transferredtoday
+     * @param int $transferredtoday
      *
      * @return self
      */
@@ -1792,7 +1786,7 @@ class Characters
     /**
      * Set the value of Soulpoints.
      *
-     * @param int soulpoints
+     * @param int $soulpoints
      *
      * @return self
      */
@@ -1814,7 +1808,7 @@ class Characters
     /**
      * Set the value of Gravefights.
      *
-     * @param int gravefights
+     * @param int $gravefights
      *
      * @return self
      */
@@ -1836,7 +1830,7 @@ class Characters
     /**
      * Set the value of Hauntedby.
      *
-     * @param string hauntedby
+     * @param string $hauntedby
      *
      * @return self
      */
@@ -1858,7 +1852,7 @@ class Characters
     /**
      * Set the value of Deathpower.
      *
-     * @param int deathpower
+     * @param int $deathpower
      *
      * @return self
      */
@@ -1880,8 +1874,6 @@ class Characters
     /**
      * Set the value of Recentcomments.
      *
-     * @param \DateTime recentcomments
-     *
      * @return self
      */
     public function setRecentcomments(\DateTime $recentcomments)
@@ -1902,7 +1894,7 @@ class Characters
     /**
      * Set the value of Bio.
      *
-     * @param string bio
+     * @param string $bio
      *
      * @return self
      */
@@ -1924,7 +1916,7 @@ class Characters
     /**
      * Set the value of Race.
      *
-     * @param string race
+     * @param string $race
      *
      * @return self
      */
@@ -1946,8 +1938,6 @@ class Characters
     /**
      * Set the value of Biotime.
      *
-     * @param \DateTime biotime
-     *
      * @return self
      */
     public function setBiotime(\DateTime $biotime)
@@ -1968,7 +1958,7 @@ class Characters
     /**
      * Set the value of Amountouttoday.
      *
-     * @param int amountouttoday
+     * @param int $amountouttoday
      *
      * @return self
      */
@@ -1990,7 +1980,7 @@ class Characters
     /**
      * Set the value of Pk.
      *
-     * @param bool pk
+     * @param bool $pk
      *
      * @return self
      */
@@ -2012,7 +2002,7 @@ class Characters
     /**
      * Set the value of Dragonage.
      *
-     * @param int dragonage
+     * @param int $dragonage
      *
      * @return self
      */
@@ -2034,7 +2024,7 @@ class Characters
     /**
      * Set the value of Bestdragonage.
      *
-     * @param int bestdragonage
+     * @param int $bestdragonage
      *
      * @return self
      */
@@ -2056,7 +2046,7 @@ class Characters
     /**
      * Set the value of Ctitle.
      *
-     * @param string ctitle
+     * @param string $ctitle
      *
      * @return self
      */
@@ -2078,7 +2068,7 @@ class Characters
     /**
      * Set the value of Slaydragon.
      *
-     * @param bool slaydragon
+     * @param bool $slaydragon
      *
      * @return self
      */
@@ -2100,7 +2090,7 @@ class Characters
     /**
      * Set the value of Fedmount.
      *
-     * @param bool fedmount
+     * @param bool $fedmount
      *
      * @return self
      */
@@ -2122,7 +2112,7 @@ class Characters
     /**
      * Set the value of Clanid.
      *
-     * @param int clanid
+     * @param int $clanid
      *
      * @return self
      */
@@ -2144,7 +2134,7 @@ class Characters
     /**
      * Set the value of Clanrank.
      *
-     * @param int clanrank
+     * @param int $clanrank
      *
      * @return self
      */
@@ -2166,8 +2156,6 @@ class Characters
     /**
      * Set the value of Clanjoindate.
      *
-     * @param \DateTime clanjoindate
-     *
      * @return self
      */
     public function setClanjoindate(\DateTime $clanjoindate)
@@ -2188,7 +2176,7 @@ class Characters
     /**
      * Set the value of Chatloc.
      *
-     * @param string chatloc
+     * @param string $chatloc
      *
      * @return self
      */

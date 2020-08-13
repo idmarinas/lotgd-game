@@ -104,9 +104,9 @@ class Weapons implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(WeaponsTranslation $t)
+    public function addTranslation(WeaponsTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -116,7 +116,7 @@ class Weapons implements Translatable
     /**
      * Set the value of Weaponid.
      *
-     * @param int weaponid
+     * @param int $weaponid
      *
      * @return self
      */
@@ -138,7 +138,7 @@ class Weapons implements Translatable
     /**
      * Set the value of Weaponname.
      *
-     * @param string weaponname
+     * @param string $weaponname
      *
      * @return self
      */
@@ -160,7 +160,7 @@ class Weapons implements Translatable
     /**
      * Set the value of Value.
      *
-     * @param int value
+     * @param int $value
      *
      * @return self
      */
@@ -182,7 +182,7 @@ class Weapons implements Translatable
     /**
      * Set the value of Damage.
      *
-     * @param int damage
+     * @param int $damage
      *
      * @return self
      */
@@ -204,7 +204,7 @@ class Weapons implements Translatable
     /**
      * Set the value of Level.
      *
-     * @param int level
+     * @param int $level
      *
      * @return self
      */

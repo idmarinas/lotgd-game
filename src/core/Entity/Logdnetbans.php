@@ -49,7 +49,7 @@ class Logdnetbans
     /**
      * Set the value of Banid.
      *
-     * @param int banid
+     * @param int $banid
      *
      * @return self
      */
@@ -71,7 +71,7 @@ class Logdnetbans
     /**
      * Set the value of Bantype.
      *
-     * @param string bantype
+     * @param string $bantype
      *
      * @return self
      */
@@ -93,7 +93,7 @@ class Logdnetbans
     /**
      * Set the value of Banvalue.
      *
-     * @param string banvalue
+     * @param string $banvalue
      *
      * @return self
      */

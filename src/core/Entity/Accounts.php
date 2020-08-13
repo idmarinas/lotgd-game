@@ -253,16 +253,16 @@ class Accounts
      */
     public function __construct()
     {
-        $this->laston = new \DateTime('0000-00-00 00:00:00');
-        $this->lastmotd = new \DateTime('0000-00-00 00:00:00');
+        $this->laston         = new \DateTime('0000-00-00 00:00:00');
+        $this->lastmotd       = new \DateTime('0000-00-00 00:00:00');
         $this->recentcomments = new \DateTime('0000-00-00 00:00:00');
-        $this->regdate = new \DateTime('0000-00-00 00:00:00');
+        $this->regdate        = new \DateTime('0000-00-00 00:00:00');
     }
 
     /**
      * Set the value of Acctid.
      *
-     * @param int acctid
+     * @param int $acctid
      *
      * @return self
      */
@@ -284,7 +284,7 @@ class Accounts
     /**
      * Set the value of Character.
      *
-     * @param int character
+     * @param int $character
      *
      * @return self
      */
@@ -308,8 +308,6 @@ class Accounts
     /**
      * Set the value of Laston.
      *
-     * @param \DateTime laston
-     *
      * @return self
      */
     public function setLaston(\DateTime $laston)
@@ -330,7 +328,7 @@ class Accounts
     /**
      * Set the value of Password.
      *
-     * @param string password
+     * @param string $password
      *
      * @return self
      */
@@ -352,7 +350,7 @@ class Accounts
     /**
      * Set the value of Loggedin.
      *
-     * @param bool loggedin
+     * @param bool $loggedin
      *
      * @return self
      */
@@ -374,7 +372,7 @@ class Accounts
     /**
      * Set the value of Superuser.
      *
-     * @param int superuser
+     * @param int $superuser
      *
      * @return self
      */
@@ -396,7 +394,7 @@ class Accounts
     /**
      * Set the value of Login.
      *
-     * @param string login
+     * @param string $login
      *
      * @return self
      */
@@ -418,8 +416,6 @@ class Accounts
     /**
      * Set the value of Lastmotd.
      *
-     * @param \DateTime lastmotd
-     *
      * @return self
      */
     public function setLastmotd(\DateTime $lastmotd)
@@ -440,7 +436,7 @@ class Accounts
     /**
      * Set the value of Locked.
      *
-     * @param bool locked
+     * @param bool $locked
      *
      * @return self
      */
@@ -462,7 +458,7 @@ class Accounts
     /**
      * Set the value of Lastip.
      *
-     * @param string lastip
+     * @param string $lastip
      *
      * @return self
      */
@@ -484,7 +480,7 @@ class Accounts
     /**
      * Set the value of Uniqueid.
      *
-     * @param string uniqueid
+     * @param string $uniqueid
      *
      * @return self
      */
@@ -506,7 +502,7 @@ class Accounts
     /**
      * Set the value of Boughtroomtoday.
      *
-     * @param bool boughtroomtoday
+     * @param bool $boughtroomtoday
      *
      * @return self
      */
@@ -528,7 +524,7 @@ class Accounts
     /**
      * Set the value of Emailaddress.
      *
-     * @param string emailaddress
+     * @param string $emailaddress
      *
      * @return self
      */
@@ -550,7 +546,7 @@ class Accounts
     /**
      * Set the value of Replaceemail.
      *
-     * @param string replaceemail
+     * @param string $replaceemail
      *
      * @return self
      */
@@ -572,7 +568,7 @@ class Accounts
     /**
      * Set the value of Emailvalidation.
      *
-     * @param string emailvalidation
+     * @param string $emailvalidation
      *
      * @return self
      */
@@ -594,7 +590,7 @@ class Accounts
     /**
      * Set the value of Forgottenpassword.
      *
-     * @param string forgottenpassword
+     * @param string $forgottenpassword
      *
      * @return self
      */
@@ -616,7 +612,7 @@ class Accounts
     /**
      * Set the value of Sentnotice.
      *
-     * @param bool sentnotice
+     * @param bool $sentnotice
      *
      * @return self
      */
@@ -638,7 +634,7 @@ class Accounts
     /**
      * Set the value of Prefs.
      *
-     * @param string prefs
+     * @param string $prefs
      *
      * @return self
      */
@@ -662,7 +658,7 @@ class Accounts
     /**
      * Set the value of Transferredtoday.
      *
-     * @param int transferredtoday
+     * @param int $transferredtoday
      *
      * @return self
      */
@@ -684,8 +680,6 @@ class Accounts
     /**
      * Set the value of Recentcomments.
      *
-     * @param \DateTime recentcomments
-     *
      * @return self
      */
     public function setRecentcomments(\DateTime $recentcomments)
@@ -706,7 +700,7 @@ class Accounts
     /**
      * Set the value of Donation.
      *
-     * @param int donation
+     * @param int $donation
      *
      * @return self
      */
@@ -728,7 +722,7 @@ class Accounts
     /**
      * Set the value of Donationspent.
      *
-     * @param int donationspent
+     * @param int $donationspent
      *
      * @return self
      */
@@ -750,7 +744,7 @@ class Accounts
     /**
      * Set the value of Donationconfig.
      *
-     * @param string donationconfig
+     * @param string $donationconfig
      *
      * @return self
      */
@@ -774,7 +768,7 @@ class Accounts
     /**
      * Set the value of Referer.
      *
-     * @param int referer
+     * @param int $referer
      *
      * @return self
      */
@@ -796,7 +790,7 @@ class Accounts
     /**
      * Set the value of Refererawarded.
      *
-     * @param int refererawarded
+     * @param int $refererawarded
      *
      * @return self
      */
@@ -818,7 +812,7 @@ class Accounts
     /**
      * Set the value of Banoverride.
      *
-     * @param bool banoverride
+     * @param bool $banoverride
      *
      * @return self
      */
@@ -840,7 +834,7 @@ class Accounts
     /**
      * Set the value of Translatorlanguages.
      *
-     * @param string translatorlanguages
+     * @param string $translatorlanguages
      *
      * @return self
      */
@@ -862,7 +856,7 @@ class Accounts
     /**
      * Set the value of Amountouttoday.
      *
-     * @param int amountouttoday
+     * @param int $amountouttoday
      *
      * @return self
      */
@@ -884,7 +878,7 @@ class Accounts
     /**
      * Set the value of Beta.
      *
-     * @param bool beta
+     * @param bool $beta
      *
      * @return self
      */
@@ -906,15 +900,13 @@ class Accounts
     /**
      * Set the value of Regdate.
      *
-     * @param \DateTime regdate
-     *
      * @return self
      */
     public function setRegdate(\DateTime $regdate)
     {
         $this->regdate = $regdate;
 
-        if (! $regdate instanceof \DateTimeInterface)
+        if ( ! $regdate instanceof \DateTimeInterface)
         {
             $this->regdate = new \DateTime($regdate);
         }

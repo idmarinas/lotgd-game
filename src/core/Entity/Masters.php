@@ -98,9 +98,9 @@ class Masters implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(MastersTranslation $t)
+    public function addTranslation(MastersTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -110,7 +110,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creatureid.
      *
-     * @param int creatureid
+     * @param int $creatureid
      *
      * @return self
      */
@@ -132,7 +132,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creaturename.
      *
-     * @param string creaturename
+     * @param string $creaturename
      *
      * @return self
      */
@@ -154,7 +154,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creaturelevel.
      *
-     * @param int creaturelevel
+     * @param int $creaturelevel
      *
      * @return self
      */
@@ -176,7 +176,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creatureweapon.
      *
-     * @param string creatureweapon
+     * @param string $creatureweapon
      *
      * @return self
      */
@@ -198,7 +198,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creaturelose.
      *
-     * @param string creaturelose
+     * @param string $creaturelose
      *
      * @return self
      */
@@ -220,7 +220,7 @@ class Masters implements Translatable
     /**
      * Set the value of Creaturewin.
      *
-     * @param string creaturewin
+     * @param string $creaturewin
      *
      * @return self
      */

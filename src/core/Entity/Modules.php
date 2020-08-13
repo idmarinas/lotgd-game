@@ -144,7 +144,7 @@ class Modules
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -166,7 +166,7 @@ class Modules
     /**
      * Set the value of Formalname.
      *
-     * @param string formalname
+     * @param string $formalname
      *
      * @return self
      */
@@ -188,7 +188,7 @@ class Modules
     /**
      * Set the value of Description.
      *
-     * @param string description
+     * @param string $description
      *
      * @return self
      */
@@ -210,7 +210,7 @@ class Modules
     /**
      * Set the value of Moduleauthor.
      *
-     * @param string moduleauthor
+     * @param string $moduleauthor
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class Modules
     /**
      * Set the value of Active.
      *
-     * @param bool active
+     * @param bool $active
      *
      * @return self
      */
@@ -254,7 +254,7 @@ class Modules
     /**
      * Set the value of Filename.
      *
-     * @param string filename
+     * @param string $filename
      *
      * @return self
      */
@@ -276,8 +276,6 @@ class Modules
     /**
      * Set the value of Installdate.
      *
-     * @param \DateTime installdate
-     *
      * @return self
      */
     public function setInstalldate(\DateTime $installdate)
@@ -298,7 +296,7 @@ class Modules
     /**
      * Set the value of Installedby.
      *
-     * @param string installedby
+     * @param string $installedby
      *
      * @return self
      */
@@ -320,8 +318,6 @@ class Modules
     /**
      * Set the value of Filemoddate.
      *
-     * @param \DateTime filemoddate
-     *
      * @return self
      */
     public function setFilemoddate(\DateTime $filemoddate)
@@ -342,7 +338,7 @@ class Modules
     /**
      * Set the value of Type.
      *
-     * @param bool type
+     * @param bool $type
      *
      * @return self
      */
@@ -364,7 +360,7 @@ class Modules
     /**
      * Set the value of Extras.
      *
-     * @param string extras
+     * @param string $extras
      *
      * @return self
      */
@@ -386,7 +382,7 @@ class Modules
     /**
      * Set the value of Category.
      *
-     * @param string category
+     * @param string $category
      *
      * @return self
      */
@@ -408,7 +404,7 @@ class Modules
     /**
      * Set the value of Infokeys.
      *
-     * @param string infokeys
+     * @param string $infokeys
      *
      * @return self
      */
@@ -430,7 +426,7 @@ class Modules
     /**
      * Set the value of Version.
      *
-     * @param string version
+     * @param string $version
      *
      * @return self
      */
@@ -452,7 +448,7 @@ class Modules
     /**
      * Set the value of Download.
      *
-     * @param string download
+     * @param string $download
      *
      * @return self
      */

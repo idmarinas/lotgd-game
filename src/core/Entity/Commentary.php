@@ -158,7 +158,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of id.
      *
-     * @param int id
+     * @param int $id
      *
      * @return self
      */
@@ -180,7 +180,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Section.
      *
-     * @param string section
+     * @param string $section
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Author.
      *
-     * @param int author
+     * @param int $author
      *
      * @return self
      */
@@ -224,7 +224,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Comment.
      *
-     * @param string comment
+     * @param string $comment
      *
      * @return self
      */
@@ -268,8 +268,6 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Postdate.
      *
-     * @param \DateTime postdate
-     *
      * @return self
      */
     public function setPostdate(\DateTime $postdate)
@@ -290,7 +288,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of Extra.
      *
-     * @param array extra
+     * @param array $extra
      *
      * @return self
      */
@@ -312,7 +310,7 @@ class Commentary implements EntityInterface
     /**
      * Set the value of AuthorName.
      *
-     * @param string authorName
+     * @param string $authorName
      *
      * @return self
      */

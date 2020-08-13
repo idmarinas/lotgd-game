@@ -42,7 +42,7 @@ class Nastywords
     /**
      * Set the value of Type.
      *
-     * @param string type
+     * @param string $type
      *
      * @return self
      */
@@ -64,7 +64,7 @@ class Nastywords
     /**
      * Set the value of Words.
      *
-     * @param string words
+     * @param string $words
      *
      * @return self
      */

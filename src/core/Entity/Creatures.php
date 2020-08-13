@@ -242,9 +242,9 @@ class Creatures implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(CreaturesTranslation $t)
+    public function addTranslation(CreaturesTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -254,7 +254,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creatureid.
      *
-     * @param int creatureid
+     * @param int $creatureid
      *
      * @return self
      */
@@ -287,7 +287,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturename.
      *
-     * @param string creaturename
+     * @param string $creaturename
      *
      * @return self
      */
@@ -309,7 +309,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturecategory.
      *
-     * @param string creaturecategory
+     * @param string $creaturecategory
      *
      * @return self
      */
@@ -331,7 +331,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creatureimage.
      *
-     * @param string creatureimage
+     * @param string $creatureimage
      *
      * @return self
      */
@@ -353,7 +353,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturedescription.
      *
-     * @param string creaturedescription
+     * @param string $creaturedescription
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creatureweapon.
      *
-     * @param string creatureweapon
+     * @param string $creatureweapon
      *
      * @return self
      */
@@ -397,7 +397,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturegoldbonus.
      *
-     * @param string creaturegoldbonus
+     * @param string $creaturegoldbonus
      *
      * @return self
      */
@@ -419,7 +419,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creatureattackbonus.
      *
-     * @param string creatureattackbonus
+     * @param string $creatureattackbonus
      *
      * @return self
      */
@@ -441,7 +441,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturedefensebonus.
      *
-     * @param string creaturedefensebonus
+     * @param string $creaturedefensebonus
      *
      * @return self
      */
@@ -463,7 +463,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturehealthbonus.
      *
-     * @param string creaturehealthbonus
+     * @param string $creaturehealthbonus
      *
      * @return self
      */
@@ -485,7 +485,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturelose.
      *
-     * @param string creaturelose
+     * @param string $creaturelose
      *
      * @return self
      */
@@ -507,7 +507,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creaturewin.
      *
-     * @param string creaturewin
+     * @param string $creaturewin
      *
      * @return self
      */
@@ -529,7 +529,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Creatureaiscript.
      *
-     * @param string creatureaiscript
+     * @param string $creatureaiscript
      *
      * @return self
      */
@@ -551,7 +551,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Createdby.
      *
-     * @param string createdby
+     * @param string $createdby
      *
      * @return self
      */
@@ -573,7 +573,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Forest.
      *
-     * @param bool forest
+     * @param bool $forest
      *
      * @return self
      */
@@ -595,7 +595,7 @@ class Creatures implements Translatable
     /**
      * Set the value of Graveyard.
      *
-     * @param bool graveyard
+     * @param bool $graveyard
      *
      * @return self
      */

@@ -83,7 +83,7 @@ class Debuglog
     /**
      * Set the value of Id.
      *
-     * @param int id
+     * @param int $id
      *
      * @return self
      */
@@ -105,8 +105,6 @@ class Debuglog
     /**
      * Set the value of Date.
      *
-     * @param \DateTime date
-     *
      * @return self
      */
     public function setDate(\DateTime $date)
@@ -127,7 +125,7 @@ class Debuglog
     /**
      * Set the value of Actor.
      *
-     * @param int actor
+     * @param int $actor
      *
      * @return self
      */
@@ -149,7 +147,7 @@ class Debuglog
     /**
      * Set the value of Target.
      *
-     * @param int target
+     * @param int $target
      *
      * @return self
      */
@@ -171,7 +169,7 @@ class Debuglog
     /**
      * Set the value of Message.
      *
-     * @param string message
+     * @param string $message
      *
      * @return self
      */
@@ -193,7 +191,7 @@ class Debuglog
     /**
      * Set the value of Field.
      *
-     * @param string field
+     * @param string $field
      *
      * @return self
      */
@@ -215,7 +213,7 @@ class Debuglog
     /**
      * Set the value of Value.
      *
-     * @param float value
+     * @param float $value
      *
      * @return self
      */

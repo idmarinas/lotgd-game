@@ -91,7 +91,7 @@ class Mail
     /**
      * Set the value of Messageid.
      *
-     * @param int messageid
+     * @param int $messageid
      *
      * @return self
      */
@@ -113,7 +113,7 @@ class Mail
     /**
      * Set the value of Msgfrom.
      *
-     * @param int msgfrom
+     * @param int $msgfrom
      *
      * @return self
      */
@@ -135,7 +135,7 @@ class Mail
     /**
      * Set the value of Msgto.
      *
-     * @param int msgto
+     * @param int $msgto
      *
      * @return self
      */
@@ -157,7 +157,7 @@ class Mail
     /**
      * Set the value of Subject.
      *
-     * @param string subject
+     * @param string $subject
      *
      * @return self
      */
@@ -179,7 +179,7 @@ class Mail
     /**
      * Set the value of Body.
      *
-     * @param string body
+     * @param string $body
      *
      * @return self
      */
@@ -201,8 +201,6 @@ class Mail
     /**
      * Set the value of Sent.
      *
-     * @param \DateTime sent
-     *
      * @return self
      */
     public function setSent(\DateTime $sent)
@@ -223,7 +221,7 @@ class Mail
     /**
      * Set the value of Seen.
      *
-     * @param bool seen
+     * @param bool $seen
      *
      * @return self
      */
@@ -245,7 +243,7 @@ class Mail
     /**
      * Set the value of Originator.
      *
-     * @param int originator
+     * @param int $originator
      *
      * @return self
      */

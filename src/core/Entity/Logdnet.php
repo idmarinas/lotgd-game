@@ -110,7 +110,7 @@ class Logdnet
     /**
      * Set the value of Serverid.
      *
-     * @param int serverid
+     * @param int $serverid
      *
      * @return self
      */
@@ -132,7 +132,7 @@ class Logdnet
     /**
      * Set the value of Address.
      *
-     * @param string address
+     * @param string $address
      *
      * @return self
      */
@@ -154,7 +154,7 @@ class Logdnet
     /**
      * Set the value of Description.
      *
-     * @param string description
+     * @param string $description
      *
      * @return self
      */
@@ -176,7 +176,7 @@ class Logdnet
     /**
      * Set the value of Priority.
      *
-     * @param float priority
+     * @param float $priority
      *
      * @return self
      */
@@ -198,8 +198,6 @@ class Logdnet
     /**
      * Set the value of Lastupdate.
      *
-     * @param \DateTime lastupdate
-     *
      * @return self
      */
     public function setLastupdate(\DateTime $lastupdate)
@@ -220,7 +218,7 @@ class Logdnet
     /**
      * Set the value of Version.
      *
-     * @param string version
+     * @param string $version
      *
      * @return self
      */
@@ -242,7 +240,7 @@ class Logdnet
     /**
      * Set the value of Admin.
      *
-     * @param string admin
+     * @param string $admin
      *
      * @return self
      */
@@ -264,8 +262,6 @@ class Logdnet
     /**
      * Set the value of Lastping.
      *
-     * @param \DateTime lastping
-     *
      * @return self
      */
     public function setLastping(\DateTime $lastping)
@@ -286,7 +282,7 @@ class Logdnet
     /**
      * Set the value of Recentips.
      *
-     * @param string recentips
+     * @param string $recentips
      *
      * @return self
      */
@@ -308,7 +304,7 @@ class Logdnet
     /**
      * Set the value of Count.
      *
-     * @param int count
+     * @param int $count
      *
      * @return self
      */
@@ -330,7 +326,7 @@ class Logdnet
     /**
      * Set the value of Lang.
      *
-     * @param string lang
+     * @param string $lang
      *
      * @return self
      */

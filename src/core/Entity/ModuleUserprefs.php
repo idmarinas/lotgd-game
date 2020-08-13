@@ -64,7 +64,7 @@ class ModuleUserprefs
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -86,7 +86,7 @@ class ModuleUserprefs
     /**
      * Set the value of Setting.
      *
-     * @param string setting
+     * @param string $setting
      *
      * @return self
      */
@@ -108,7 +108,7 @@ class ModuleUserprefs
     /**
      * Set the value of Userid.
      *
-     * @param int userid
+     * @param int $userid
      *
      * @return self
      */
@@ -130,7 +130,7 @@ class ModuleUserprefs
     /**
      * Set the value of Value.
      *
-     * @param string value
+     * @param string $value
      *
      * @return self
      */

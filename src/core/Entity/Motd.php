@@ -75,7 +75,7 @@ class Motd
     /**
      * Set the value of Motditem.
      *
-     * @param int motditem
+     * @param int $motditem
      *
      * @return self
      */
@@ -97,7 +97,7 @@ class Motd
     /**
      * Set the value of Motdtitle.
      *
-     * @param string motdtitle
+     * @param string $motdtitle
      *
      * @return self
      */
@@ -119,7 +119,7 @@ class Motd
     /**
      * Set the value of Motdbody.
      *
-     * @param string motdbody
+     * @param string $motdbody
      *
      * @return self
      */
@@ -141,8 +141,6 @@ class Motd
     /**
      * Set the value of Motddate.
      *
-     * @param \DateTime motddate
-     *
      * @return self
      */
     public function setMotddate(\DateTime $motddate)
@@ -163,7 +161,7 @@ class Motd
     /**
      * Set the value of Motdtype.
      *
-     * @param bool motdtype
+     * @param bool $motdtype
      *
      * @return self
      */
@@ -185,7 +183,7 @@ class Motd
     /**
      * Set the value of Motdauthor.
      *
-     * @param int motdauthor
+     * @param int $motdauthor
      *
      * @return self
      */

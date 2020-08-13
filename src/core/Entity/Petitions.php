@@ -97,14 +97,14 @@ class Petitions
 
     public function __construct()
     {
-        $this->date = new \DateTime('0000-00-00 00:00:00');
+        $this->date      = new \DateTime('0000-00-00 00:00:00');
         $this->closedate = new \DateTime('0000-00-00 00:00:00');
     }
 
     /**
      * Set the value of Petitionid.
      *
-     * @param int petitionid
+     * @param int $petitionid
      *
      * @return self
      */
@@ -126,7 +126,7 @@ class Petitions
     /**
      * Set the value of Author.
      *
-     * @param int author
+     * @param int $author
      *
      * @return self
      */
@@ -148,8 +148,6 @@ class Petitions
     /**
      * Set the value of Date.
      *
-     * @param \DateTime date
-     *
      * @return self
      */
     public function setDate(\DateTime $date)
@@ -170,7 +168,7 @@ class Petitions
     /**
      * Set the value of Status.
      *
-     * @param int status
+     * @param int $status
      *
      * @return self
      */
@@ -192,7 +190,7 @@ class Petitions
     /**
      * Set the value of Body.
      *
-     * @param string body
+     * @param string $body
      *
      * @return self
      */
@@ -214,7 +212,7 @@ class Petitions
     /**
      * Set the value of Pageinfo.
      *
-     * @param string pageinfo
+     * @param string $pageinfo
      *
      * @return self
      */
@@ -236,8 +234,6 @@ class Petitions
     /**
      * Set the value of Closedate.
      *
-     * @param \DateTime closedate
-     *
      * @return self
      */
     public function setClosedate(\DateTime $closedate)
@@ -258,7 +254,7 @@ class Petitions
     /**
      * Set the value of Closeuserid.
      *
-     * @param int closeuserid
+     * @param int $closeuserid
      *
      * @return self
      */
@@ -280,7 +276,7 @@ class Petitions
     /**
      * Set the value of Ip.
      *
-     * @param string ip
+     * @param string $ip
      *
      * @return self
      */
@@ -302,7 +298,7 @@ class Petitions
     /**
      * Set the value of Id.
      *
-     * @param string id
+     * @param string $id
      *
      * @return self
      */

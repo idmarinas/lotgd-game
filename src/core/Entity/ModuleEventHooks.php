@@ -56,7 +56,7 @@ class ModuleEventHooks
     /**
      * Set the value of Event Type.
      *
-     * @param string eventType
+     * @param string $eventType
      *
      * @return self
      */
@@ -78,7 +78,7 @@ class ModuleEventHooks
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -100,7 +100,7 @@ class ModuleEventHooks
     /**
      * Set the value of Event Chance.
      *
-     * @param string eventChance
+     * @param string $eventChance
      *
      * @return self
      */

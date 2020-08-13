@@ -294,7 +294,7 @@ class Cronjob
     /**
      * Set the value of Name.
      *
-     * @param string name
+     * @param string $name
      *
      * @return self
      */
@@ -316,7 +316,7 @@ class Cronjob
     /**
      * Set the value of Command.
      *
-     * @param string command
+     * @param string $command
      *
      * @return self
      */
@@ -338,7 +338,7 @@ class Cronjob
     /**
      * Set the value of Schedule.
      *
-     * @param string schedule
+     * @param string $schedule
      *
      * @return self
      */
@@ -360,7 +360,7 @@ class Cronjob
     /**
      * Set the value of Mailer.
      *
-     * @param string mailer
+     * @param string $mailer
      *
      * @return self
      */
@@ -382,7 +382,7 @@ class Cronjob
     /**
      * Set the value of Maxruntime.
      *
-     * @param int maxruntime
+     * @param int $maxruntime
      *
      * @return self
      */
@@ -406,7 +406,7 @@ class Cronjob
     /**
      * Set the value of Smtphost.
      *
-     * @param string smtphost
+     * @param string $smtphost
      *
      * @return self
      */
@@ -430,7 +430,7 @@ class Cronjob
     /**
      * Set the value of Smtpport.
      *
-     * @param int smtpport
+     * @param int $smtpport
      *
      * @return self
      */
@@ -454,7 +454,7 @@ class Cronjob
     /**
      * Set the value of Smtpusername.
      *
-     * @param string smtpusername
+     * @param string $smtpusername
      *
      * @return self
      */
@@ -478,7 +478,7 @@ class Cronjob
     /**
      * Set the value of Smtppassword.
      *
-     * @param string smtppassword
+     * @param string $smtppassword
      *
      * @return self
      */
@@ -502,7 +502,7 @@ class Cronjob
     /**
      * Set the value of Smtpsender.
      *
-     * @param string smtpsender
+     * @param string $smtpsender
      *
      * @return self
      */
@@ -524,7 +524,7 @@ class Cronjob
     /**
      * Set the value of Smtpsendername.
      *
-     * @param string smtpsendername
+     * @param string $smtpsendername
      *
      * @return self
      */
@@ -546,7 +546,7 @@ class Cronjob
     /**
      * Set the value of Smtpsecurity.
      *
-     * @param string smtpsecurity
+     * @param string $smtpsecurity
      *
      * @return self
      */
@@ -570,7 +570,7 @@ class Cronjob
     /**
      * Set the value of Runas.
      *
-     * @param string runas
+     * @param string $runas
      *
      * @return self
      */
@@ -594,7 +594,7 @@ class Cronjob
     /**
      * Set the value of Environment.
      *
-     * @param string environment
+     * @param string $environment
      *
      * @return self
      */
@@ -618,7 +618,7 @@ class Cronjob
     /**
      * Set the value of Runonhost.
      *
-     * @param string runonhost
+     * @param string $runonhost
      *
      * @return self
      */
@@ -642,7 +642,7 @@ class Cronjob
     /**
      * Set the value of Output.
      *
-     * @param string output
+     * @param string $output
      *
      * @return self
      */
@@ -666,7 +666,7 @@ class Cronjob
     /**
      * Set the value of Dateformat.
      *
-     * @param string dateformat
+     * @param string $dateformat
      *
      * @return self
      */
@@ -688,7 +688,7 @@ class Cronjob
     /**
      * Set the value of Enabled.
      *
-     * @param bool enabled
+     * @param bool $enabled
      *
      * @return self
      */
@@ -710,7 +710,7 @@ class Cronjob
     /**
      * Set the value of Haltdir.
      *
-     * @param string haltdir
+     * @param string $haltdir
      *
      * @return self
      */
@@ -734,7 +734,7 @@ class Cronjob
     /**
      * Set the value of Debug.
      *
-     * @param bool debug
+     * @param bool $debug
      *
      * @return self
      */

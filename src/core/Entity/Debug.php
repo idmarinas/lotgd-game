@@ -63,7 +63,7 @@ class Debug
     /**
      * Set the value of Id.
      *
-     * @param int id
+     * @param int $id
      *
      * @return self
      */
@@ -85,7 +85,7 @@ class Debug
     /**
      * Set the value of Type.
      *
-     * @param string type
+     * @param string $type
      *
      * @return self
      */
@@ -107,7 +107,7 @@ class Debug
     /**
      * Set the value of Category.
      *
-     * @param string category
+     * @param string $category
      *
      * @return self
      */
@@ -129,7 +129,7 @@ class Debug
     /**
      * Set the value of Subcategory.
      *
-     * @param string subcategory
+     * @param string $subcategory
      *
      * @return self
      */
@@ -151,7 +151,7 @@ class Debug
     /**
      * Set the value of Value.
      *
-     * @param string value
+     * @param string $value
      *
      * @return self
      */

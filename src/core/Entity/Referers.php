@@ -82,7 +82,7 @@ class Referers
     /**
      * Set the value of Refererid.
      *
-     * @param int refererid
+     * @param int $refererid
      *
      * @return self
      */
@@ -104,7 +104,7 @@ class Referers
     /**
      * Set the value of Uri.
      *
-     * @param string uri
+     * @param string $uri
      *
      * @return self
      */
@@ -126,7 +126,7 @@ class Referers
     /**
      * Set the value of Count.
      *
-     * @param int count
+     * @param int $count
      *
      * @return self
      */
@@ -152,15 +152,13 @@ class Referers
      */
     public function incrementCount()
     {
-        $this->count++;
+        ++$this->count;
 
         return $this;
     }
 
     /**
      * Set the value of Last.
-     *
-     * @param \DateTime last
      *
      * @return self
      */
@@ -182,7 +180,7 @@ class Referers
     /**
      * Set the value of Site.
      *
-     * @param string site
+     * @param string $site
      *
      * @return self
      */
@@ -204,7 +202,7 @@ class Referers
     /**
      * Set the value of Dest.
      *
-     * @param string dest
+     * @param string $dest
      *
      * @return self
      */
@@ -226,7 +224,7 @@ class Referers
     /**
      * Set the value of Ip.
      *
-     * @param string ip
+     * @param string $ip
      *
      * @return self
      */

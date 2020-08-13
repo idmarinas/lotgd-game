@@ -42,7 +42,7 @@ class AccountsOutput
     /**
      * Set the value of Acctid.
      *
-     * @param int acctid
+     * @param int $acctid
      *
      * @return self
      */
@@ -64,7 +64,7 @@ class AccountsOutput
     /**
      * Set the value of Output.
      *
-     * @param string output
+     * @param string $output
      *
      * @return self
      */

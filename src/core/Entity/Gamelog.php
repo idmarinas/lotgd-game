@@ -74,7 +74,7 @@ class Gamelog
     /**
      * Set the value of Logid.
      *
-     * @param int logid
+     * @param int $logid
      *
      * @return self
      */
@@ -96,7 +96,7 @@ class Gamelog
     /**
      * Set the value of Message.
      *
-     * @param string message
+     * @param string $message
      *
      * @return self
      */
@@ -118,7 +118,7 @@ class Gamelog
     /**
      * Set the value of Category.
      *
-     * @param string category
+     * @param string $category
      *
      * @return self
      */
@@ -140,7 +140,7 @@ class Gamelog
     /**
      * Set the value of Filed.
      *
-     * @param bool filed
+     * @param bool $filed
      *
      * @return self
      */
@@ -162,8 +162,6 @@ class Gamelog
     /**
      * Set the value of Date.
      *
-     * @param \DateTime date
-     *
      * @return self
      */
     public function setDate(\DateTime $date)
@@ -184,7 +182,7 @@ class Gamelog
     /**
      * Set the value of Who.
      *
-     * @param int who
+     * @param int $who
      *
      * @return self
      */

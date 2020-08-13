@@ -56,7 +56,7 @@ class AccountsEverypage
     /**
      * Set the value of Acctid.
      *
-     * @param int acctid
+     * @param int $acctid
      *
      * @return self
      */
@@ -78,7 +78,7 @@ class AccountsEverypage
     /**
      * Set the value of Gentime.
      *
-     * @param float gentime
+     * @param float $gentime
      *
      * @return self
      */
@@ -100,7 +100,7 @@ class AccountsEverypage
     /**
      * Set the value of Gentimecount.
      *
-     * @param int gentimecount
+     * @param int $gentimecount
      *
      * @return self
      */
@@ -122,7 +122,7 @@ class AccountsEverypage
     /**
      * Set the value of Gensize.
      *
-     * @param int gensize
+     * @param int $gensize
      *
      * @return self
      */

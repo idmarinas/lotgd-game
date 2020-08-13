@@ -270,9 +270,9 @@ class Companions implements Translatable
         return $this->translations;
     }
 
-    public function addTranslation(CompanionsTranslation $t)
+    public function addTranslation(CompanionsTranslation $t): void
     {
-        if (! $this->translations->contains($t))
+        if ( ! $this->translations->contains($t))
         {
             $t->setObject($this);
             $this->translations->add($t);
@@ -282,7 +282,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companionid.
      *
-     * @param int companionid
+     * @param int $companionid
      *
      * @return self
      */
@@ -306,7 +306,7 @@ class Companions implements Translatable
     /**
      * Set the value of Name.
      *
-     * @param string name
+     * @param string $name
      *
      * @return self
      */
@@ -328,7 +328,7 @@ class Companions implements Translatable
     /**
      * Set the value of Category.
      *
-     * @param string category
+     * @param string $category
      *
      * @return self
      */
@@ -350,7 +350,7 @@ class Companions implements Translatable
     /**
      * Set the value of Description.
      *
-     * @param string description
+     * @param string $description
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class Companions implements Translatable
     /**
      * Set the value of Attack.
      *
-     * @param int attack
+     * @param int $attack
      *
      * @return self
      */
@@ -394,7 +394,7 @@ class Companions implements Translatable
     /**
      * Set the value of Attackperlevel.
      *
-     * @param int attackperlevel
+     * @param int $attackperlevel
      *
      * @return self
      */
@@ -416,7 +416,7 @@ class Companions implements Translatable
     /**
      * Set the value of Defense.
      *
-     * @param int defense
+     * @param int $defense
      *
      * @return self
      */
@@ -438,7 +438,7 @@ class Companions implements Translatable
     /**
      * Set the value of Defenseperlevel.
      *
-     * @param int defenseperlevel
+     * @param int $defenseperlevel
      *
      * @return self
      */
@@ -460,7 +460,7 @@ class Companions implements Translatable
     /**
      * Set the value of Maxhitpoints.
      *
-     * @param int maxhitpoints
+     * @param int $maxhitpoints
      *
      * @return self
      */
@@ -482,7 +482,7 @@ class Companions implements Translatable
     /**
      * Set the value of Maxhitpointsperlevel.
      *
-     * @param int maxhitpointsperlevel
+     * @param int $maxhitpointsperlevel
      *
      * @return self
      */
@@ -503,8 +503,6 @@ class Companions implements Translatable
 
     /**
      * Set the value of Abilities.
-     *
-     * @param array abilities
      *
      * @return self
      */
@@ -533,7 +531,7 @@ class Companions implements Translatable
     /**
      * Set the value of Cannotdie.
      *
-     * @param bool cannotdie
+     * @param bool $cannotdie
      *
      * @return self
      */
@@ -555,7 +553,7 @@ class Companions implements Translatable
     /**
      * Set the value of Cannotbehealed.
      *
-     * @param bool cannotbehealed
+     * @param bool $cannotbehealed
      *
      * @return self
      */
@@ -577,7 +575,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companionlocation.
      *
-     * @param string companionlocation
+     * @param string $companionlocation
      *
      * @return self
      */
@@ -599,7 +597,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companionactive.
      *
-     * @param bool companionactive
+     * @param bool $companionactive
      *
      * @return self
      */
@@ -621,7 +619,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companioncostdks.
      *
-     * @param int companioncostdks
+     * @param int $companioncostdks
      *
      * @return self
      */
@@ -643,7 +641,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companioncostgems.
      *
-     * @param int companioncostgems
+     * @param int $companioncostgems
      *
      * @return self
      */
@@ -665,7 +663,7 @@ class Companions implements Translatable
     /**
      * Set the value of Companioncostgold.
      *
-     * @param int companioncostgold
+     * @param int $companioncostgold
      *
      * @return self
      */
@@ -687,7 +685,7 @@ class Companions implements Translatable
     /**
      * Set the value of Jointext.
      *
-     * @param string jointext
+     * @param string $jointext
      *
      * @return self
      */
@@ -709,7 +707,7 @@ class Companions implements Translatable
     /**
      * Set the value of Dyingtext.
      *
-     * @param string dyingtext
+     * @param string $dyingtext
      *
      * @return self
      */
@@ -731,7 +729,7 @@ class Companions implements Translatable
     /**
      * Set the value of Allowinshades.
      *
-     * @param bool allowinshades
+     * @param bool $allowinshades
      *
      * @return self
      */
@@ -753,7 +751,7 @@ class Companions implements Translatable
     /**
      * Set the value of Allowinpvp.
      *
-     * @param bool allowinpvp
+     * @param bool $allowinpvp
      *
      * @return self
      */
@@ -775,7 +773,7 @@ class Companions implements Translatable
     /**
      * Set the value of Allowintrain.
      *
-     * @param bool allowintrain
+     * @param bool $allowintrain
      *
      * @return self
      */

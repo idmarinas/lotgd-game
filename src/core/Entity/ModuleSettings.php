@@ -51,7 +51,7 @@ class ModuleSettings
     /**
      * Set the value of Modulename.
      *
-     * @param string modulename
+     * @param string $modulename
      *
      * @return self
      */
@@ -73,7 +73,7 @@ class ModuleSettings
     /**
      * Set the value of Setting.
      *
-     * @param string setting
+     * @param string $setting
      *
      * @return self
      */
@@ -95,7 +95,7 @@ class ModuleSettings
     /**
      * Set the value of Value.
      *
-     * @param string value
+     * @param string $value
      *
      * @return self
      */

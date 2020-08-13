@@ -84,7 +84,7 @@ class Faillog
     /**
      * Set the value of Eventid.
      *
-     * @param int eventid
+     * @param int $eventid
      *
      * @return self
      */
@@ -106,8 +106,6 @@ class Faillog
     /**
      * Set the value of Date.
      *
-     * @param \DateTime date
-     *
      * @return self
      */
     public function setDate(\DateTime $date)
@@ -128,7 +126,7 @@ class Faillog
     /**
      * Set the value of Post.
      *
-     * @param string post
+     * @param string $post
      *
      * @return self
      */
@@ -150,7 +148,7 @@ class Faillog
     /**
      * Set the value of Ip.
      *
-     * @param string ip
+     * @param string $ip
      *
      * @return self
      */
@@ -172,7 +170,7 @@ class Faillog
     /**
      * Set the value of Acctid.
      *
-     * @param int acctid
+     * @param int $acctid
      *
      * @return self
      */
@@ -194,7 +192,7 @@ class Faillog
     /**
      * Set the value of Id.
      *
-     * @param string id
+     * @param string $id
      *
      * @return self
      */

@@ -87,7 +87,7 @@ class News
     /**
      * Set the value of id.
      *
-     * @param int id
+     * @param int $id
      *
      * @return self
      */
@@ -109,7 +109,7 @@ class News
     /**
      * Set the value of date.
      *
-     * @param \DateTime date
+     * @param \DateTime $date
      *
      * @return self
      */
@@ -131,7 +131,7 @@ class News
     /**
      * Set the value of text.
      *
-     * @param string text
+     * @param string $text
      *
      * @return self
      */
@@ -153,7 +153,7 @@ class News
     /**
      * Set the value of AccountId.
      *
-     * @param int accountId
+     * @param int $accountId
      *
      * @return self
      */
@@ -175,7 +175,7 @@ class News
     /**
      * Set the value of Arguments.
      *
-     * @param array arguments
+     * @param array $arguments
      *
      * @return self
      */
@@ -197,7 +197,7 @@ class News
     /**
      * Set the value of TextDomain.
      *
-     * @param string textDomain
+     * @param string $textDomain
      *
      * @return self
      */
