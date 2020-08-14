@@ -106,6 +106,8 @@ return PhpCsFixer\Config::create()
         'no_alias_functions' => true,
         // Replace core functions calls returning constants with the constants.
         'function_to_constant' => true,
+        // Add leading `\` before function invocation to speed up resolving.
+        'native_function_invocation' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
