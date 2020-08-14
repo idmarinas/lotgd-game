@@ -6,7 +6,7 @@
     {% set menu = menu ~ '<a class="%s item" data-tab="%s">%s</a>'|format(
         loop.index == 1 ? 'active' : '',
         name,
-        config.title is defined ? name : config.title
+        config.title is defined ? config.title : name
     ) %}
 
     {% set segment = segment ~ '<div class="ui %s tab segment" data-tab="%s">'|format(
@@ -16,7 +16,7 @@
 
     {% set nameE = name|replace({'\\' : '\\\\'}) %}
 
-    {% set segment = segment ~ '<div class="ui header">%s</div>'|format(config.description) %}
+    {% set segment = segment ~ '<div class="ui header">%s</div>'|format(config.description|default(name)) %}
     {% set segment = segment ~ '<div class="ui buttons">' %}
     {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'optimize\')" class="ui button">Optimize cache</a>'|format(nameE) %}
     {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearexpire\')" class="ui yellow button">Clear expire cache</a>'|format(nameE) %}
