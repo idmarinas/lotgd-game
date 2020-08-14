@@ -14,7 +14,7 @@
 - x
 
 # Para la versión 4.3.0
--   Migrar los componentes Zend a Laminas
+- x
 
 ## Cosas pendientes
 -   Adaptar los formularios a zend-form
@@ -27,6 +27,7 @@
     -   Esto obligaría a los usuarios a generar una nueva contraseña.
 -   Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc) en un mismo lugar
     -   IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
+-   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
 
 
 
@@ -95,6 +96,8 @@ vendor/bin/iniscan scan --format=html --output="D:\\Users\\idmar\\Documents\\Pro
 
 ${extensionPath}\\php-cs-fixer.phar
 
+composer-require-checker check
+
+
 ##### Generar los docs
 php phpDocumentor.phar -c phpdoc.dist.xml
-
