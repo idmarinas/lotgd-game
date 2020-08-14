@@ -128,12 +128,12 @@ maintenance:
         # Default message for maintenance (Server are closed and all user log out)
         closed:
             title: 'The server is currently suspended for maintenance'
-            message:
-                0: 'We apologise for any inconvenience, but for the moment, this server is undergoing maintenance.'
-                1: 'It should be accessible again soon.<br>'
-                2: "Since we're working on maintenance, maintenance will go quicker if you don't refresh or click that link as quick as you can, as this'll use fewer system resources."
-                3: "So check once a minute or so, but don't kill us with checking every 2 seconds please."
-                union: '<br>'
+            message: |
+                We apologise for any inconvenience, but for the moment, this server is undergoing maintenance.
+                It should be accessible again soon.
+
+                Since we're working on maintenance, maintenance will go quicker if you don't refresh or click that link as quick as you can, as this'll use fewer system resources.
+                So check once a minute or so, but don't kill us with checking every 2 seconds please.
         # Can't create new characters
         creation:
             title: 'The server is currently in maintenance'
