@@ -1,8 +1,18 @@
 <?php
 
+use Laminas\ConfigAggregator\ConfigAggregator;
+
 return [
-    \Laminas\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => false, //-- In dev it is not recommended to activate the cache
-    'lotgd_core' => [
-        'development' => true
-    ]
+    ConfigAggregator::ENABLE_CACHE => false, //-- In dev it is not recommended to activate the cache
+    'lotgd_core'                   => [
+        'development' => true,
+    ],
+    'doctrine' => [
+        'configuration' => [
+            'orm_default' => [
+                // Generate proxies automatically (Always)
+                'generate_proxies' => true,
+            ],
+        ],
+    ],
 ];
