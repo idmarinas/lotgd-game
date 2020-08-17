@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Entity\EntityInterface;
 
 trait EntityHydrator
@@ -57,11 +57,11 @@ trait EntityHydrator
     /**
      * Get Hydrator instance.
      */
-    public function getHydrator(): ClassMethods
+    public function getHydrator(): ClassMethodsHydrator
     {
         if ( ! $this->hydrator)
         {
-            $this->hydrator = new ClassMethods();
+            $this->hydrator = new ClassMethodsHydrator();
         }
 
         return $this->hydrator;

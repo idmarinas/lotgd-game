@@ -63,7 +63,7 @@ elseif ('prologue' == $op)
     $params['creatureName'] = $badguy['creaturename'];
 
     strip_all_buffs();
-    $hydrator = new \Laminas\Hydrator\ClassMethods();
+    $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
     $characterEntity = $hydrator->extract(new \Lotgd\Core\Entity\Characters());
     $dkpoints = 0;
 

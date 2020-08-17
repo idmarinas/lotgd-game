@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40000;
 
-use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Lotgd\Core\Output\Commentary;
 use Tracy\Debugger;
@@ -66,7 +66,7 @@ class Upgrade extends UpgradeAbstract
     {
         try
         {
-            $hydrator   = new ClassMethods();
+            $hydrator   = new ClassMethodsHydrator();
             $commentary = new Commentary();
             $page       = 1;
             $select     = \DB::select('commentary_old');
@@ -129,7 +129,7 @@ class Upgrade extends UpgradeAbstract
     {
         try
         {
-            $hydrator  = new ClassMethods();
+            $hydrator  = new ClassMethodsHydrator();
             $page      = 1;
             $select    = \DB::select('accounts_old');
             $paginator = \DB::paginator($select, $page, 100);
@@ -214,7 +214,7 @@ class Upgrade extends UpgradeAbstract
     {
         try
         {
-            $hydrator  = new ClassMethods();
+            $hydrator  = new ClassMethodsHydrator();
             $page      = 1;
             $select    = \DB::select('news_old');
             $paginator = \DB::paginator($select, $page, 100);

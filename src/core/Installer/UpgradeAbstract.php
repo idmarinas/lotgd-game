@@ -17,7 +17,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Laminas\Db\ResultSet\HydratingResultSet;
-use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Component\Filesystem;
 use Tracy\Debugger;
 
@@ -69,7 +69,7 @@ abstract class UpgradeAbstract
             foreach ($files as $file)
             {
                 $data     = \json_decode(\file_get_contents($file), true);
-                $entities = new HydratingResultSet(new ClassMethods(), new $data['entity']());
+                $entities = new HydratingResultSet(new ClassMethodsHydrator(), new $data['entity']());
                 $entities->initialize($data['rows']);
 
                 foreach ($entities as $entity)

@@ -16,7 +16,7 @@ namespace Lotgd\Core\Doctrine\ORM;
 use Doctrine\ORM\EntityRepository as DoctrineEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Translatable\TranslatableListener;
-use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Paginator\Paginator;
 use Lotgd\Core\Paginator\Adapter\Doctrine as DoctrineAdapter;
 
@@ -117,11 +117,11 @@ class EntityRepository extends DoctrineEntityRepository
     /**
      * Get Hydrator instance.
      */
-    protected function getHydrator(): ClassMethods
+    protected function getHydrator(): ClassMethodsHydrator
     {
         if ( ! $this->repositoryHydrator)
         {
-            $this->repositoryHydrator = new ClassMethods();
+            $this->repositoryHydrator = new ClassMethodsHydrator();
             //-- With this keyValue is keyValue. Otherwise it would be key_value
             $this->repositoryHydrator->removeNamingStrategy();
         }

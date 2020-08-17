@@ -184,7 +184,7 @@ function createBackupBasicInfo(int $accountId, $account): bool
 {
     $fileSystem = new \Lotgd\Core\Component\Filesystem();
     $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
-    $hydrator = new \Laminas\Hydrator\ClassMethods();
+    $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
     $path = "data/logd_snapshots/account-{$accountId}";
 

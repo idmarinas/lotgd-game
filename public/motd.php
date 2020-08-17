@@ -86,7 +86,7 @@ elseif ('edit' == $op)
 
     if (trim($body) && trim($subject) && ! $preview)
     {
-        $hydrator = new \Laminas\Hydrator\ClassMethods();
+        $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
         $motd = $hydrator->hydrate($motd, new \Lotgd\Core\Entity\Motd());
         $motd->setMotdbody($body)
             ->setMotdtitle($subject)
@@ -129,7 +129,7 @@ elseif('add' == $op)
     $params['motd'] = $motd;
     if (trim($body) && trim($subject) && ! $preview)
     {
-        $hydrator = new \Laminas\Hydrator\ClassMethods();
+        $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
         $motd = $hydrator->hydrate($motd, new \Lotgd\Core\Entity\Motd());
         $motd->setMotdbody($body)
             ->setMotdtitle($subject)
@@ -172,7 +172,7 @@ elseif ('addpoll' == $op)
 
         $body = serialize(['body' => $body, 'opt' => $opt]);
 
-        $hydrator = new \Laminas\Hydrator\ClassMethods();
+        $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
         $motd = $hydrator->hydrate($motd, new \Lotgd\Core\Entity\Motd());
         $motd->setMotdbody($body);
 

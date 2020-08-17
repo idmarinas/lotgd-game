@@ -56,7 +56,7 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
         return $file;
     }, $files);
 
-    $hydrator = new \Laminas\Hydrator\ClassMethods();
+    $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value
 
     //-- Overrides the automatic generation of IDs (avoid to change id of account and character)

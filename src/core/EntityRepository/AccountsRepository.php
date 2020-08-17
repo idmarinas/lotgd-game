@@ -14,7 +14,7 @@
 namespace Lotgd\Core\EntityRepository;
 
 use Doctrine\ORM\Query\Expr\Join;
-use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Doctrine\ORM\EntityRepository as DoctrineRepository;
 use Lotgd\Core\Entity as LotgdEntity;
 use Tracy\Debugger;
@@ -125,7 +125,7 @@ class AccountsRepository extends DoctrineRepository
      */
     private function processUserData(array $data)
     {
-        $hydrator = new ClassMethods();
+        $hydrator = new ClassMethodsHydrator();
 
         $account   = $hydrator->extract($data[0]);
         $character = $hydrator->extract($account['character']);
