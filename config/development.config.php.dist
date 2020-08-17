@@ -7,12 +7,4 @@ return [
     'lotgd_core'                   => [
         'development' => true,
     ],
-    'doctrine' => [
-        'configuration' => [
-            'orm_default' => [
-                // Generate proxies automatically (Always)
-                'generate_proxies' => true,
-            ],
-        ],
-    ],
 ];
