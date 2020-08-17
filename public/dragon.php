@@ -126,7 +126,7 @@ elseif ('prologue' == $op)
 
     foreach ($characterEntity as $field => $value)
     {
-        if ('id' == $field || 'acct' == $field || $nochange[$field] ?? 0)
+        if ('id' == $field || 'acct' == $field || ($nochange[$field] ?? 0))
         {
             continue;
         }
