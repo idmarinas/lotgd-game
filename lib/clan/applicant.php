@@ -30,12 +30,12 @@ if ('withdraw' == $op)
 if (($claninfo['clanid'] ?? 0) > 0)
 {
     //-- Applied for membership to a clan
-    \LotgdNavigation::addNav('Waiting Area', 'clan.php?op=waiting');
-    \LotgdNavigation::addNav('Withdraw Application', 'clan.php?op=withdraw');
+    \LotgdNavigation::addNav('nav.applicant.waiting.label', 'clan.php?op=waiting');
+    \LotgdNavigation::addNav('nav.applicant.withdraw', 'clan.php?op=withdraw');
 }
 else
 {
     //-- Hasn't applied for membership to any clan.
-    \LotgdNavigation::addNav('Apply for Membership to a Clan', 'clan.php?op=apply');
-    \LotgdNavigation::addNav('Apply for a New Clan', 'clan.php?op=new');
+    \LotgdNavigation::addNav('nav.applicant.apply.membership', 'clan.php?op=apply');
+    \LotgdNavigation::addNav('nav.applicant.apply.new', 'clan.php?op=new');
 }

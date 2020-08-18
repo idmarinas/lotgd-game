@@ -22,12 +22,16 @@ nav:
         apply:
             lobby: 'Return to the Lobby'
             new: 'Apply for a New Clan'
+            membership: Apply for Membership to a Clan
             order:
                 count: 'Order by Membercount'
                 name: 'Order by Clanname'
-        waiting.area:
-            lobby: 'Return to the Lobby'
-            rooms: 'Return to your Clan Rooms'
+        withdraw: Withdraw Application
+        waiting:
+            label: Waiting Area
+            area:
+                lobby: 'Return to the Lobby'
+                rooms: 'Return to your Clan Rooms'
     list:
         list: 'C?List Clans'
         lobby: 'Return to the Lobby'
