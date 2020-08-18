@@ -37,8 +37,8 @@ if ('val' == $op || 'forgotval' == $op)
     page_header('title.validate', [], $textDomain);
 }
 
-\LotgdNavigation::addHeader('Login page');
-\LotgdNavigation::addNav('Login', 'index.php');
+\LotgdNavigation::addHeader('common.category.login');
+\LotgdNavigation::addNav('common.nav.login', 'index.php');
 
 $accountRepo = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 
