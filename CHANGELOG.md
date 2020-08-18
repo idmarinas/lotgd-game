@@ -34,6 +34,86 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   With Laminas Form can validate/filter all inputs in form.
             -   Note: in a future version of LoTGD Core, the function `lotgd_showform` will be deleted (now is deprecated function).
                 -   When this function is removed all the above options will no longer work with the old method. And need use Laminas Form or Symfony Form.
+-   :warning: function `module_objpref_edit` changes its behavior:
+    -   Now return a string or Laminas Form instance.
+    -   Now check if prefs have a Laminas Form format or array format (old).
+        -   With the old format it issues a deprecated warning.
+    -   Se necesita cambiar en consecuencia el código que hace uso de este resultado. Example moduless `cities`, `drinks` and `inventory`. Can see other examples in core game `companions`, `creatures`
+
+    > Example for process from:
+    ```php
+        $form = module_objpref_edit('PREF_NAME', $module, $objectId);
+
+        $params['isLaminas'] = $form instanceof Laminas\Form\Form;
+        $params['module'] = $module;
+        //-- And other params need
+
+        if ($params['isLaminas'])
+        {
+            $form->setAttribute('action', 'URL_FOR_PROCESS_DATA');
+            $params['formTypeTab'] = $form->getOption('form_type_tab');
+        }
+
+        if (\LotgdHttp::isPost())
+        {
+            $post = \LotgdHttp::getPostAll();
+
+            if ($params['isLaminas'])
+            {
+                $form->setData($post);
+
+                if ($form->isValid()) //-- Check if data is valid
+                {
+                    $data = $form->getData();
+
+                    process_post_save_data($data, $objectId, $module);
+                }
+            }
+            else
+            {
+                reset($post);
+
+                process_post_save_data($post, $objectId, $module);
+            }
+        }
+
+        $params['form'] = $form;
+
+        rawoutput(\LotgdTheme::renderModuleTemplate('path/to/template.twig', $params));
+
+        //-- Function to save data
+        function process_post_save_data($data, $id, $module)
+        {
+            foreach ($data as $key => $val)
+            {
+                if (is_array($val)) //-- Check for not save an array in pref
+                {
+                    process_post_save_data($val, $id, $module);
+
+                    continue;
+                }
+
+                set_module_objpref('PREF_NAME', $id, $key, $val, $module);
+            }
+        }
+    ```
+
+    > Example of template
+    ```html
+    {% translate_default_domain textDomain %}
+
+    {% if isLaminas %}
+        {% if formTypeTab %}
+            {{ laminas_form_tab(form) }}
+        {% else %}
+            {{ laminas_form(form) }}
+        {% endif %}
+    {% else %}
+        <form action="{{ 'runmodule.php?module=cityprefs&op=editmodulesave&cityid=' ~ cityId ~ '&mdule=' ~ module }}" method="POST" autocomplete="off">
+            {{ form }}
+        </form>
+    {% endif %}
+    ````
 
 ### :star: FEATURES
 
