@@ -29,8 +29,6 @@ class Upgrade extends UpgradeAbstract
     {
         try
         {
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.to', ['version' => '4.0.0 IDMarinas Edition'], self::TRANSLATOR_DOMAIN);
-
             $this->connection->exec('RENAME TABLE `commentary` TO `commentary_old`;');
             $this->connection->exec('RENAME TABLE `accounts` TO `accounts_old`;');
             $this->connection->exec('RENAME TABLE `news` TO `news_old`;');

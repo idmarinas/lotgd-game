@@ -27,8 +27,6 @@ class Upgrade extends UpgradeAbstract
     {
         try
         {
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.to', ['version' => $this->getNameVersion(self::VERSION_NUMBER)], self::TRANSLATOR_DOMAIN);
-
             $settings = $this->doctrine->getRepository('LotgdCore:Settings');
 
             //-- Update languages to new format
