@@ -50,3 +50,9 @@ installOfModules:
         activate: '`3Activating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
         deactivate: '`3Deactivating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
         donothing: '`$Ignoring`0 `#{module}`0`n'
+
+file:
+    removed: File {file} has been removed.
+    moved: File {file_old} has been moved to {file_new}.
+    created: File {file} has been created.
+
