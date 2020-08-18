@@ -69,7 +69,7 @@ class Install
                 $upgrade = new $class();
                 $upgrade->setDoctrine($doctrine);
 
-                $step   = 1;
+                $step   = 0;
                 $result = true;
 
                 do
