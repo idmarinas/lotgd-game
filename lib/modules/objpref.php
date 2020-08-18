@@ -135,11 +135,11 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
         'modulename' => $module,
         'setting' => $name,
         'objtype' => $objtype,
-        'objid' => $objid,
-        'value' => $value
+        'objid' => $objid
     ], $entity);
 
-    $entity->setValue((float) ($entity->getValue()) + $value);
+    $value = ((float) $entity->getValue())+ $value;
+    $entity->setValue($value);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
