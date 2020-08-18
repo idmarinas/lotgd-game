@@ -28,6 +28,8 @@ abstract class UpgradeAbstract
 {
     use Pattern\Version;
 
+    const VERSION_NUMBER = -1;
+
     const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
     const TRANSLATOR_DOMAIN           = 'app-installer';
@@ -41,6 +43,16 @@ abstract class UpgradeAbstract
     protected $messages = [];
 
     /**
+     * First step of upgraded.
+     */
+    final public function step0(): bool
+    {
+        $this->messages[] = \LotgdTranslator::t('upgrade.version.to', ['version' => $this->getNameVersion(static::VERSION_NUMBER)], self::TRANSLATOR_DOMAIN);
+
+        return true;
+    }
+
+    /**
      * Insert data of an update install.
      *
      * @param int $version Version to upgrade
@@ -49,7 +61,7 @@ abstract class UpgradeAbstract
     {
         $filesystem = new Filesystem();
         $dir        = self::DATA_DIR_UPDATE."/{$version}";
-        $files      = array_map(
+        $files      = \array_map(
             function ($value) use ($dir)
             {
                 return "{$dir}/{$value}";
@@ -57,7 +69,7 @@ abstract class UpgradeAbstract
             $filesystem->listDir($dir)
         );
 
-        if (0 == count($files))
+        if (0 == \count($files))
         {
             $this->messages[] = \LotgdTranslator::t('upgrade.insertData.noFiles', ['version' => $this->getNameVersion($version)], self::TRANSLATOR_DOMAIN);
 
@@ -79,11 +91,11 @@ abstract class UpgradeAbstract
 
                 if ('insert' == $data['method'])
                 {
-                    $this->messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+                    $this->messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
                 elseif ('update' == $data['method'] || 'replace' == $data['method'])
                 {
-                    $this->messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+                    $this->messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
                 }
 
                 $this->doctrine->flush();
@@ -142,7 +154,7 @@ abstract class UpgradeAbstract
             $metaData   = $this->doctrine->getMetadataFactory()->getMetadataFor($entity);
             $sqls       = $schemaTool->getUpdateSchemaSql([$metaData], true);
 
-            if (0 === count($sqls))
+            if (0 === \count($sqls))
             {
                 $this->messages[] = \LotgdTranslator::t('upgrade.version.nothing', [], self::TRANSLATOR_DOMAIN);
 
@@ -151,7 +163,7 @@ abstract class UpgradeAbstract
 
             $schemaTool->updateSchema([$metaData], true);
 
-            $this->messages[] = \LotgdTranslator::t('upgrade.version.schema', ['count' => count($sqls)], self::TRANSLATOR_DOMAIN);
+            $this->messages[] = \LotgdTranslator::t('upgrade.version.schema', ['count' => \count($sqls)], self::TRANSLATOR_DOMAIN);
 
             $proxyFactory     = $this->doctrine->getProxyFactory();
             $this->messages[] = \LotgdTranslator::t('upgrade.version.proxy', ['classes' => $proxyFactory->generateProxyClasses([$metaData])], self::TRANSLATOR_DOMAIN);
