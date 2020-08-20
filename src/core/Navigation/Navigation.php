@@ -320,16 +320,17 @@ class Navigation
     {
         global $session;
 
-        $extra = (false === strpos($extra, '?') ? '?' : '');
+        $extra = (false === \strpos($extra, '?') ? '?' : '');
         $extra = ('?' == $extra ? '' : $extra);
 
+        $oldDomain = $this->getTextDomain();
         $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
 
         $args = modulehook('villagenav');
 
         if ($args['handled'] ?? false)
         {
-            $this->setTextDomain();
+            $this->setTextDomain($oldDomain);
 
             return;
         }
@@ -337,7 +338,7 @@ class Navigation
         {
             $this->addNav('common.villagenav.village', "village.php{$extra}", ['params' => ['location' => $session['user']['location']]]);
 
-            $this->setTextDomain();
+            $this->setTextDomain($oldDomain);
 
             return;
         }
@@ -345,7 +346,7 @@ class Navigation
         //-- User is dead
         $this->addNav('common.villagenav.shades', 'shades.php');
 
-        $this->setTextDomain();
+        $this->setTextDomain($oldDomain);
     }
 
     /**
@@ -355,7 +356,7 @@ class Navigation
     {
         foreach ($this->navs as $navs)
         {
-            if ( ! is_array($navs) || ! count($navs))
+            if ( ! \is_array($navs) || ! \count($navs))
             {
                 continue;
             }
@@ -403,9 +404,9 @@ class Navigation
             //-- Add link to allowed navs
             $extra = $this->getExtraParamLink($link);
 
-            if (false !== ($pos = strpos($link, '#')))
+            if (false !== ($pos = \strpos($link, '#')))
             {
-                $sublink                                         = substr($link, 0, $pos);
+                $sublink                                         = \substr($link, 0, $pos);
                 $session['user']['allowednavs'][$sublink]        = true;
                 $session['user']['allowednavs'][$sublink.$extra] = true;
             }
@@ -443,14 +444,14 @@ class Navigation
     {
         if ( ! $remplace)
         {
-            return count($navs);
+            return \count($navs);
         }
 
-        $key = array_search($label, $navs);
+        $key = \array_search($label, $navs);
 
         if (false === $key)
         {
-            $key = count($navs);
+            $key = \count($navs);
         }
 
         return $key;
@@ -474,8 +475,8 @@ class Navigation
             $link = \preg_replace('/[&]/', '?', $link, 1);
         }
 
-        return sprintf('%sc=%s',
-            (false === strpos($link, '?') ? '?' : '&'),
+        return \sprintf('%sc=%s',
+            (false === \strpos($link, '?') ? '?' : '&'),
             $session['counter']
         );
     }
