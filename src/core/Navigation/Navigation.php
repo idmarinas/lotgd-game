@@ -264,24 +264,22 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
-        $this->addHeader('common.superuser.category');
+        $this->addHeader('common.superuser.category', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
 
         if ($superuser & SU_EDIT_COMMENTS)
         {
-            $this->addNav('common.superuser.moderate', 'moderate.php');
+            $this->addNav('common.superuser.moderate', 'moderate.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
         {
-            $this->addNav('common.superuser.superuser', 'superuser.php');
+            $this->addNav('common.superuser.superuser', 'superuser.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
 
         if ($superuser & SU_INFINITE_DAYS)
         {
-            $this->addNav('common.superuser.newday', 'newday.php');
+            $this->addNav('common.superuser.newday', 'newday.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
         }
-        $this->setTextDomain();
     }
 
     /**
@@ -293,22 +291,17 @@ class Navigation
 
         $superuser = $session['user']['superuser'];
 
-        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
-        $this->addHeader('common.category.navigation');
-
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
         {
             $script = \LotgdHttp::getServer('SCRIPT_NAME');
 
             if ('superuser.php' != $script)
             {
-                $this->addNav('common.superuser.rsuperuser', 'superuser.php');
+                $this->addNav('common.superuser.rsuperuser', 'superuser.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
             }
         }
 
-        $this->addNav('common.superuser.mundane', 'village.php');
-
-        $this->setTextDomain();
+        $this->addNav('common.superuser.mundane', 'village.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
     }
 
     /**
@@ -323,30 +316,24 @@ class Navigation
         $extra = (false === \strpos($extra, '?') ? '?' : '');
         $extra = ('?' == $extra ? '' : $extra);
 
-        $oldDomain = $this->getTextDomain();
-        $this->setTextDomain(self::DEFAULT_NAVIGATION_TEXT_DOMAIN);
-
         $args = modulehook('villagenav');
 
         if ($args['handled'] ?? false)
         {
-            $this->setTextDomain($oldDomain);
-
             return;
         }
         elseif ($session['user']['alive'])
         {
-            $this->addNav('common.villagenav.village', "village.php{$extra}", ['params' => ['location' => $session['user']['location']]]);
-
-            $this->setTextDomain($oldDomain);
+            $this->addNav('common.villagenav.village', "village.php{$extra}", [
+                'textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN,
+                'params'     => ['location' => $session['user']['location']],
+            ]);
 
             return;
         }
 
         //-- User is dead
-        $this->addNav('common.villagenav.shades', 'shades.php');
-
-        $this->setTextDomain($oldDomain);
+        $this->addNav('common.villagenav.shades', 'shades.php', ['textDomain' => self::DEFAULT_NAVIGATION_TEXT_DOMAIN]);
     }
 
     /**
