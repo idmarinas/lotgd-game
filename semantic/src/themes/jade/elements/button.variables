@@ -30,3 +30,6 @@
 /* Active */
 @activeBackgroundColor: darken(@inputBackground, 25, relative);
 @activeColor: @textColor;
+
+/* Basic Hover */
+@basicHoverBackground: @borderColor;
