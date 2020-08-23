@@ -16,8 +16,13 @@ jaxon.command.handler.register('semantic.show', function (args)
     }
     jaxon.dialogs.semantic.modalId = modalId
 
-    const options = args.data.options || {}
-    const funcs = ['onApprove', 'onDeny']
+    const options = $.extend({}, args.data.options, {
+        onHidden ()
+        {
+            $(`#modal-${modalId}`).remove()
+        }
+    })
+    const funcs = ['onShow', 'onVisible', 'onHide', 'onApprove', 'onDeny']
 
     for (const funcId in funcs)
     {
