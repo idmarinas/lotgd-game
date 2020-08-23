@@ -500,7 +500,6 @@ function getcharstats($buffs)
     }
 
     $statbuff = \LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
-        'title' => translate_inline('`0Buffs'),
         'value' => $buffs
     ]);
 
