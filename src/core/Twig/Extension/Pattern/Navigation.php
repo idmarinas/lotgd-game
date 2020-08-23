@@ -70,7 +70,7 @@ trait Navigation
         }
         $attributes = $this->createAttributesString($attributes);
 
-        return \appoencode(sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
+        return \appoencode(\sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
             ( ! $blocked ? 'a' : 'span'),
             $attributes,
             $label,
@@ -120,15 +120,32 @@ trait Navigation
      */
     public function showPagination(Paginator $paginator, ?string $link = null, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
     {
-        $template       = $template ?: 'parts/pagination.twig';
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
-        $pages = get_object_vars($paginator->getPages($scrollingStyle));
+        $pages = \get_object_vars($paginator->getPages($scrollingStyle));
+
+        //-- Add params for template
+        if (null !== $params)
+        {
+            $pages = \array_merge($pages, (array) $params);
+        }
+
+        //-- Is a pagination for Jaxon-PHP
+        if (0 === \strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === \strpos($link, 'JaxonLotgd.Ajax.Local.'))
+        {
+            $template = $template ?: 'parts/pagination-jaxon.twig';
+
+            $pages['jaxon'] = $link;
+
+            return \LotgdTheme::renderThemeTemplate($template, $pages);
+        }
+
+        $template = $template ?: 'parts/pagination.twig';
 
         //-- Use request uri if not set link
         $link = $link ?: \LotgdHttp::getServer('REQUEST_URI');
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
-        $link = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
+        $link = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
 
         if (false === \strpos($link, '?') && false !== \strpos($link, '&'))
         {
@@ -146,11 +163,6 @@ trait Navigation
         }
 
         $pages['href'] = $link;
-
-        if (null !== $params)
-        {
-            $pages = array_merge($pages, (array) $params);
-        }
 
         return \LotgdTheme::renderThemeTemplate($template, $pages);
     }
