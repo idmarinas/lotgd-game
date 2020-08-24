@@ -1,7 +1,7 @@
 {% translate_default_domain 'app-default' %}
 
 {% if pageCount %}
-    {% set link = jaxon ~ '(%s)' %}
+    {% set link = jaxon ~ '(%s, ' ~ motdPerPage|default(5) ~ ", '" ~ monthSelected|default(null) ~ "')" %}
     <div class="ui grid">
         <div class="sixteen wide tablet only computer only center aligned column">
             <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|t({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
@@ -98,5 +98,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.ui.pagination.menu a').on('click', function ()
+        {
+            $('.ui.pagination.menu a').addClass('disabled')
+            $('.ui.pagination.menu .active.item').addClass('loading')
+        })
+    </script>
 {% endif %}
 <div class="ui hidden clearing divider"></div>
