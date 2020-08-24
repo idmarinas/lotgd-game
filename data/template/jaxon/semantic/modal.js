@@ -47,7 +47,8 @@ jaxon.command.handler.register('semantic.show', function (args)
         modal = modal + '<div class="ui header">' + args.data.title + '</div>'
     }
 
-    modal = modal + '<div class="content">' + args.data.content + '</div>'
+    const classContent = (args.data.isScrollable ? 'scrolling ' : '') + ' content'
+    modal = modal + '<div class="' + classContent + '">' + args.data.content + '</div>'
 
     if (args.data.buttons.length)
     {

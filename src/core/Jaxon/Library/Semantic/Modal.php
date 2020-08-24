@@ -57,11 +57,12 @@ class Modal extends Library implements JaxonModal
     {
         // Show the modal dialog
         $this->addCommand(['cmd' => 'semantic.show'], [
-            'id'      => $content['id'] ?? null,
-            'title'   => $title,
-            'content' => $content['content'],
-            'buttons' => $buttons,
-            'options' => $options, ]
+            'id'           => $content['id'] ?? null,
+            'title'        => $title,
+            'content'      => $content['content'],
+            'isScrollable' => $content['isScrollable'],
+            'buttons'      => $buttons,
+            'options'      => $options, ]
         );
     }
 
@@ -99,6 +100,6 @@ class Modal extends Library implements JaxonModal
 
         $xRenderer = new Renderer();
 
-        return $xRenderer->render(self::PATH_TEMPLATE_JAXON.$sTemplate, array_merge($aLocalVars, $aVars));
+        return $xRenderer->render(self::PATH_TEMPLATE_JAXON.$sTemplate, \array_merge($aLocalVars, $aVars));
     }
 }
