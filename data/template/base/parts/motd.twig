@@ -1,8 +1,8 @@
 {% translate_default_domain 'app-default' %}
 
-<a href="motd.php" target="_blank" id="motd-embed" class="motd" data-force="true" onclick="Lotgd.embed(this)">
+<a id="motd-button" class="ui tertiary button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('loading disabled');">
     {% if newMotd %}
-        <i class="certificate icon"></i>
+        <i aria-hidden="true" class="certificate icon"></i>
         {{ 'parts.motd.title'|t }}
     {% else %}
         {{ 'parts.motd.title'|t }}
