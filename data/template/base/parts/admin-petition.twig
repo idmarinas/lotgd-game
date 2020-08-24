@@ -3,13 +3,13 @@
 {# Show only to administrator that have user edit permits #}
 {% if canEditUsers %}
     <span> | </span>
-    <a href="{{ 'user.php'|lotgd_url }}"><strong>{{ 'parts.petition.editUser'|t|colorize }}</strong></a>
+    <a class="ui tertiary button " href="{{ 'user.php'|lotgd_url }}">{{ 'parts.petition.editUser'|t|colorize }}</a>
 {% endif %}
 
 {# Show only to administrators that have petitions edit permits #}
 {% if canEditPetitions %}
     <br>
-    <a href='{{ 'viewpetition.php'|lotgd_url }}'><strong>{{ 'parts.petition.admin'|t|colorize }}:</strong></a>
+    <a class="ui tertiary button " href='{{ 'viewpetition.php'|lotgd_url }}'>{{ 'parts.petition.admin'|t|colorize }}:</a>
     {{ 'parts.petition.status.05'|t({'n': petitions.5 })|colorize }} <span>|</span>
     {{ 'parts.petition.status.04'|t({'n': petitions.4 })|colorize }} <span>|</span>
     {{ 'parts.petition.status.00'|t({'n': petitions.0 })|colorize }} <span>|</span>
