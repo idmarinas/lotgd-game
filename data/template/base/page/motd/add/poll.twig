@@ -7,50 +7,73 @@
 
 {{ 'item.add.poll.form.note'|t|colorize }}
 <h4 class="header">{{ 'item.add.poll.form.title'|t|colorize }}</h4>
-<form action="{{ 'motd.php?op=addpoll'|lotgd_url }}" method="POST" class="ui form">
-    <div class="field">
-        <label for="subject">{{ 'item.edit.form.subject'|t|colorize }}</label>
-        <input type="text" id="subject" size="50" name="subject">
-    </div>
-    <div class="field">
-        <label for="body">{{ 'item.edit.form.body'|t|colorize }}</label>
-        <textarea id="body" align='right' class='input' name='body' cols='37' rows='5'></textarea>
-    </div>
-    <div class="field">
-        {{ 'item.add.poll.form.choice'|t|colorize }}
-    </div>
-    <div class="field">
-        <div class="ui three column grid" id="poll-opt">
-            <div class='field column'>
-                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
-                <input name='opt[]'>
-            </div>
-            <div class='field column'>
-                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
-                <input name='opt[]'>
-            </div>
-            <div class='field column'>
-                <label>{{ 'item.add.poll.form.opt'|t|colorize }}</label>
-                <input name='opt[]'>
-            </div>
-        </div>
-    </div>
-    <div class="field">
-        <a href class="ui secondary button" onclick="addPollItem(); return false;">{{ 'item.add.poll.form.button.opt'|t|uncolorize }}</a>
-    </div>
-    <hr>
-    <div class="field">
-        <div class="ui buttons">
-            <button type="submit" class="ui button">{{ 'item.add.poll.form.button.submit'|t|uncolorize }}</button>
-        </div>
-    </div>
-</form>
+
+{{ form(form) }}
 
 <script language='JavaScript'>
-    document.getElementById('hidepolls').innerHTML = '';
+    /* global $ */
+    var $collectionHolder = $('#motd_poll_opt')
 
-    function addPollItem()
+    // setup an "add a tag" link
+    var $addTagButton = $('<button type="button" class="ui info mini button">{{ "item.add.poll.form.button.opt.add"|t|uncolorize }}</button>')
+    $collectionHolder.parent('div').children('label').prepend($addTagButton)
+
+    $(document).ready(function ()
     {
-        document.getElementById('poll-opt').innerHTML += '<div class="field column"><label>{{ "item.add.poll.form.opt"|t|colorize }}</label><input name="opt[]""></div>';
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find('input').length)
+
+        // add a delete link to all of the existing options form elements
+        $collectionHolder.find('.required.field').each(function ()
+        {
+            addPollItemDeleteLink($(this))
+        })
+
+        $addTagButton.on('click', function (e)
+        {
+            // add a new tag form (see next code block)
+            addPollItem($collectionHolder)
+        })
+    })
+
+    function addPollItem ($collectionHolder, $newLinkLi)
+    {
+        // Get the data-prototype explained earlier
+        const prototype = $collectionHolder.data('prototype')
+
+        // get the new index
+        var index = $collectionHolder.data('index')
+
+        var newForm = prototype
+        // You need this only if you didn't set 'label' => false in your tags field in TaskType
+        // Replace '__name__label__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        // newForm = newForm.replace(/__name__label__/g, index);
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        newForm = newForm.replace(/__name__/g, index)
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1)
+
+        // Display the form option
+        newForm = addPollItemDeleteLink($(newForm))
+        $collectionHolder.append(newForm)
+    }
+
+    function addPollItemDeleteLink ($optForm)
+    {
+        const $removeFormButton = $('<button type="button" class="ui red mini button">{{ "item.add.poll.form.button.opt.del"|t|uncolorize }}</button>')
+        $optForm.children('label').prepend($removeFormButton)
+
+        $removeFormButton.on('click', function (e)
+        {
+            // remove the li for the tag form
+            $optForm.remove()
+        })
+
+        return $optForm
     }
 </script>

@@ -1,13 +1,37 @@
 {% translate_default_domain 'page-motd' %}
 
-<div class="item">
+<div class="item" id="motd-list-item-{{ motd.motditem }}">
     <div class="content">
         <div class="header">{{ motd.motdtitle }}</div>
         <div class="meta">
             {% if SU_POST_MOTD %}
-                {% set options = {'text': 'item.del.confirm'|t|uncolorize } %}
-                [ <a href="{{ ('motd.php?op=edit&id=' ~ motd.motditem)|lotgd_url }}" data-tooltip="{{ 'item.edit.label'|t|uncolorize }}" aria-label="{{ 'item.edit.label'|t|uncolorize }}"><i class="green link edit icon"></i></a> |
-                <a href="{{ ('motd.php?op=del&id=' ~ motd.motditem)|lotgd_url }}" data-options="{{ options|json_encode()|escape('html_attr') }}" onclick="Lotgd.confirm(this, event)" data-tooltip="{{ 'item.del.label'|t|uncolorize}}" aria-label="{{ 'item.del.label'|t|uncolorize}}"><i class="red link trash icon" aria-hidden="true"></i></a> ]
+                {% set options = {
+                    'icon': 'question',
+                    'showCancelButton': true,
+                    'preConfirm': "JaxonLotgd.Ajax.Core.Motd.delete(%1$s); $('#motd-list-item-edit-%1$s, #motd-list-item-delete-%1$s').addClass('disabled');"|format(motd.motditem),
+                    'text': 'item.del.confirm'|t|uncolorize
+                } %}
+                {% set options = options|json_encode()|escape('html_attr') %}
+                <span data-tooltip="{{ 'item.edit.label'|t|uncolorize }}" aria-label="{{ 'item.edit.label'|t|uncolorize }}">
+                    <a
+                        id="motd-list-item-edit-{{ motd.motditem }}"
+                        role="button"
+                        class="ui mini green icon button"
+                        onclick="JaxonLotgd.Ajax.Core.Motd.editItem({{ motd.motditem }}); $(this).addClass('loading disabled')"
+                    >
+                        <i aria-hidden="true" class="edit icon"></i>
+                    </a>
+                </span>
+                <a
+                    id="motd-list-item-delete-{{ motd.motditem }}"
+                    role="button"
+                    class="ui mini red icon button"
+                    onclick="Lotgd.swal({{ options }});"
+                    data-tooltip="{{ 'item.del.label'|t|uncolorize}}"
+                    aria-label="{{ 'item.del.label'|t|uncolorize}}"
+                >
+                    <i class="trash icon" aria-hidden="true"></i>
+                </a>
             {% endif %}
             <span class="author">{{ (motd.motdauthorname ?: 'item.author'|t)|colorize }}</span>
             <small class="date colLtCyan">{{ '{date,date,medium} {date,time}'|tmf({'date': motd.motddate }) }}</small>
