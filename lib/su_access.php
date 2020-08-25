@@ -35,8 +35,6 @@ function check_su_access($level)
         page_footer();
     }
 
-    clearnav();
-
     // This buff is useless because the graveyard (rightly, really)
     // wipes all buffs when you enter it.  This means that you never really
     // have this effect unless you log out without going to the graveyard
