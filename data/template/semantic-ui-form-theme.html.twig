@@ -178,6 +178,13 @@
     {% endapply %}
 {%- endblock radio_widget %}
 
+{%- block collection_widget -%}
+    {% if prototype is defined and not prototype.rendered %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype)|e('html_attr') }) -%}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock collection_widget -%}
+
 {# Labels #}
 
 {%- block form_label -%}
