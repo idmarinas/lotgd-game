@@ -28,7 +28,7 @@ function check_su_access($level)
 
         page_header('title.ops', [], $textDomain);
 
-        rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/ops.twig', [ 'textDomain' => $textDomain ]));
+        rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/ops.twig', ['textDomain' => $textDomain]));
 
         \LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
 
@@ -57,7 +57,6 @@ function check_su_access($level)
     //				)
     //		);
 
-
     $session['output'] = '';
 
     page_header('title.infidel', [], $textDomain);
@@ -66,18 +65,18 @@ function check_su_access($level)
 
     debuglog("Lost {$session['user']['gold']} and ".($session['user']['experience'] * 0.25).' experience trying to hack superuser pages.');
 
-    $session['user']['hitpoints'] = 0;
-    $session['user']['alive'] = 0;
-    $session['user']['soulpoints'] = 0;
+    $session['user']['hitpoints']   = 0;
+    $session['user']['alive']       = 0;
+    $session['user']['soulpoints']  = 0;
     $session['user']['gravefights'] = 0;
-    $session['user']['deathpower'] = 0;
-    $session['user']['gold'] = 0;
+    $session['user']['deathpower']  = 0;
+    $session['user']['gold']        = 0;
     $session['user']['experience'] *= 0.75;
 
     \LotgdNavigation::addNav('home.nav.news', 'news.php');
 
     $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-    $result = $repository->getSuperuserWithPermit(SU_EDIT_USERS);
+    $result     = $repository->getSuperuserWithPermit(SU_EDIT_USERS);
 
     require_once 'lib/systemmail.php';
 
@@ -85,25 +84,25 @@ function check_su_access($level)
     {
         $subj = [
             'mail.subject',
-            [ 'name' => $session['user']['name'] ],
-            $textDomain
+            ['name' => $session['user']['name']],
+            $textDomain,
         ];
         $body = [
             'mail.message',
             [
-                'name' => $session['user']['name'],
-                'uri' => \LotgdHttp::getServer('REQUEST_URI'),
-                'referer' => \LotgdHttp::getServer('HTTP_REFERER')
+                'name'    => $session['user']['name'],
+                'uri'     => \LotgdHttp::getServer('REQUEST_URI'),
+                'referer' => \LotgdHttp::getServer('HTTP_REFERER'),
             ],
-            $textDomain
+            $textDomain,
         ];
 
         systemmail($row['acctid'], $subj, $body);
     }
 
     rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/infidel.twig', [
-        'textDomain' => $textDomain,
-        'deathOverlord' => getsetting('deathoverlord', '`$Ramius')
+        'textDomain'    => $textDomain,
+        'deathOverlord' => getsetting('deathoverlord', '`$Ramius'),
     ]));
 
     page_footer();
@@ -113,10 +112,11 @@ function check_su_access($level)
  * Check Superuser premission.
  * Just check and redirect if denied you have permission.
  *
- * @param int    $permission
- * @param string $return
+ * @param int $permission
+ *
+ * @return boolean|redirect
  */
-function checkSuPermission($permission, string $return)
+function checkSuPermission($permission, ?string $return = null)
 {
     global $session;
 
@@ -128,12 +128,14 @@ function checkSuPermission($permission, string $return)
         {
             $session['user']['laston'] = new \DateTime('now');
 
-            return null;
+            return true;
         }
+    }
 
-        //-- Module preventing doing
+    if ( ! $return)
+    {
         return redirect($return);
     }
 
-    return redirect($return);
+    return false;
 }
