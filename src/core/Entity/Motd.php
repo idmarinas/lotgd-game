@@ -14,6 +14,8 @@
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 
 /**
  * Motd.
@@ -36,15 +38,32 @@ class Motd
      * @var string
      *
      * @ORM\Column(name="motdtitle", type="string", length=200, nullable=true)
+     *
+     * @Filter("StripTags")
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *     min=1,
+     *     max=200
+     * )
      */
-    private $motdtitle;
+    private $motdtitle = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="motdbody", type="text", length=65535, nullable=false)
+     *
+     * @Filter("StripTags")
+     * @Filter("StringTrim")
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *     min=1,
+     *     max=65535
+     * )
      */
-    private $motdbody;
+    private $motdbody = '';
 
     /**
      * @var \DateTime
@@ -64,6 +83,8 @@ class Motd
      * @var int
      *
      * @ORM\Column(name="motdauthor", type="integer", nullable=false, options={"unsigned": true, "default": "0"})
+     *
+     * @Assert\DivisibleBy(1)
      */
     private $motdauthor = 0;
 
