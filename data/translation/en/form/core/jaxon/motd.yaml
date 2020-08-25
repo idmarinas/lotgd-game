@@ -1,0 +1,20 @@
+item:
+    title: 'Edit a MoTD'
+    original: '`bOriginally by `@{author}`0 on {date,date}´b`n'
+    subject: 'Subject'
+    body: 'Body'
+    options: 'Options'
+    change:
+        author: 'Change Author'
+        date: 'Change Date (force popup again)'
+    button:
+        preview: Preview
+        submit: Update
+poll:
+    title: 'Add Poll'
+    note: '`$NOTE:`0`^ Polls cannot be edited after they are begun in order to ensure fairness and accuracy of results.`0'
+    choice: 'Choices'
+    opt: 'Option'
+    button:
+        opt: 'Add Poll Item'
+        submit: 'Submit poll'
