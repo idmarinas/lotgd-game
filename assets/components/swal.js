@@ -1,3 +1,4 @@
+/* eslint-disable no-new-func */
 define([
     '../core',
     '../external/swal'
@@ -21,6 +22,18 @@ define([
             swal.configChange(options)
         }
         else options = {}
+
+        const funcs = ['preConfirm', 'onBeforeOpen', 'onOpen,', 'onRender', 'onClose', 'onAfterClose', 'onDestroy']
+
+        for (const funcId in funcs)
+        {
+            const func = funcs[funcId]
+
+            if (options[func])
+            {
+                options[func] = new Function('element', options[func])
+            }
+        }
 
         const modal = swal.get().fire(options)
 
