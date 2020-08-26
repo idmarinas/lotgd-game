@@ -13,8 +13,8 @@
 
 namespace Lotgd\Ajax\Core;
 
-use Lotgd\Core\AjaxAbstract;
 use Jaxon\Response\Response;
+use Lotgd\Core\AjaxAbstract;
 
 class Mounts extends AjaxAbstract
 {
@@ -31,8 +31,8 @@ class Mounts extends AjaxAbstract
 
         try
         {
-            $repository= \Doctrine::getRepository('LotgdCore:Characters');
-            $entities = $repository->findBy(['hashorse' => $mountId]);
+            $repository = \Doctrine::getRepository('LotgdCore:Characters');
+            $entities   = $repository->findBy(['hashorse' => $mountId]);
         }
         catch (\Throwable $th)
         {
@@ -44,12 +44,13 @@ class Mounts extends AjaxAbstract
         $buttons = [
             [
                 'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
-                'class' => 'ui red deny button'
-            ]
+                'class' => 'ui red deny button',
+            ],
         ];
 
         $content = '';
-        foreach($entities as $char)
+
+        foreach ($entities as $char)
         {
             $content .= \appoencode($char->getName(), true).'<br>';
         }

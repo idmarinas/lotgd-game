@@ -48,12 +48,13 @@ class Bans extends AjaxAbstract
         $buttons = [
             [
                 'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
-                'class' => 'ui red deny button'
-            ]
+                'class' => 'ui red deny button',
+            ],
         ];
 
         $content = '';
-        foreach($result as $acct)
+
+        foreach ($result as $acct)
         {
             $content .= \appoencode($acct['name'], true).'<br>';
         }
