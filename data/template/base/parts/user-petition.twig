@@ -1,6 +1,6 @@
 {% translate_default_domain 'app-default' %}
 
 <span> | </span>
-<a href="petition.php" target="_blank" id="petition-embed" class="ui tertiary button motd" data-force="true" onclick="Lotgd.embed(this)">
+<a id="petition-button" class="ui tertiary button motd" onclick="JaxonLotgd.Ajax.Core.Petition.help(); $(this).addClass('loading disabled')">
     <strong>{{ 'parts.petition.help'|t|colorize }}</strong>
 </a>

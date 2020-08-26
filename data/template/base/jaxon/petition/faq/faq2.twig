@@ -1,7 +1,11 @@
 {% translate_default_domain textDomain %}
 
-<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
+<a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
 <hr>
+
+{{ 'section.faq2.warning'|t|uncolorize }}
+
+<br>
 
 <button id="show-spoiler" type="button" class="ui orange button">{{ 'section.faq2.show.content'|t|uncolorize }}</button>
 
@@ -28,12 +32,13 @@
     {{ 'section.faq2.content.ten'|t(_context)|colorize }}
 
     {{ 'section.faq2.content.eleven'|t(_context)|colorize }}
-
 </div>
 <hr>
-<a href="petition.php?op=faq">{{ 'section.return.content'|t|colorize }}</a>
+<a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
 
 <script>
+    /* global $ */
+
     $('#show-spoiler').on('click', function () {
         $('#spoiler').toggleClass('hidden message')
     })

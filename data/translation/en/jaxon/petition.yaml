@@ -14,17 +14,9 @@ section:
         paragraph: >
             `c`b`$Before sending a petition, please make sure you have read the motd.`n
             Petitions about problems we already know about just take up time we could be using to fix those problems.´b´c`n
-        form:
-            label:
-                charname: "Your Character's Name"
-                email: 'Your email address'
-                type: 'Type of your Problem / Enquiry'
-                description: 'Description of the problem'
-            button:
-                submit: Submit
         note: >
             Please be as descriptive as possible in your petition.
-            If you have questions about how the game works, please check out the <a href='petition.php?op=faq'>FAQ</a>.
+            If you have questions about how the game works, please check out the <a href="#" onclick='JaxonLotgd.Ajax.Core.Petition.faq()'>FAQ</a>.
             Petitions about game mechanics will more than likely not be answered unless they have something to do with a bug.
             Remember, if you are not signed in, and do not provide an email address, we have no way to contact you.
         petition.mail:
@@ -228,7 +220,7 @@ section:
                 `^17. What's with the <CLAN> thingies before peoples' names?`n
                 `#<`2CLAN`#> `&Clan Member ClanMember strikes you with the flat side of his weapon.`n
                 `3&quot;`@You dare claim ignorance of my clan's famous deeds? I am `$ClanMember`@, a member of the mighty clan CLAN, which is short for Completely Ludicrous And Nonsensical! We have performed many a deed after having planned it in the privacy of our `%Clan Hall`@.
-                Our leaders and officers are among the mightiest in the land. Bolstered by the support of our friends and clanmates, we prevail!`3"`n`n'
+                Our leaders and officers are among the mightiest in the land. Bolstered by the support of our friends and clanmates, we prevail!`3"`n`n
             eightteen: >
                 `^18. I am so confused! What is going on in the village square/Garden/Inn/etc.?`n
                 `@A hubbub.`n
@@ -339,6 +331,7 @@ section:
                 c) To make sure you see our newest Message of the Day (MoTD).`n
                 That last one is very important, since until you've viewed it the window will continue to try to open on every page load. These messages are for server announcements such as outages, current known bugs (which you really don't have to petition about, since we already know of them), and other things that the staff think you need to know about right away.`n`n
 
+petition.type: 'Type of your Problem / Enquiry'
 petition.types:
     general: General
     report.bug: Report bug
@@ -346,12 +339,16 @@ petition.types:
     comment: Comment
     other: Other
 
+jaxon:
+    load.fail:
+        help: An error occurred while loading the help request
+
 flash.message:
     section:
         default:
             error:
                 network: >
-                    `$`bError:´b There have already been {count,plural, =1{1 petition} other{# petitions}} filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.
+                    <strong>Error:</strong> There have already been {count,plural, =1{1 petition} other{# petitions}} filed from your network in the last day; to prevent abuse of the petition system, you must wait until there have been 5 or fewer within the last 24 hours.
                     If you have multiple issues to bring up with the staff of this server, you might think about consolidating those issues to reduce the overall number of petitions you file.
                 cancel: >
                     There was a problem with your petition!<br>

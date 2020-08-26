@@ -6,7 +6,8 @@
 {{ 'section.faq.content'|t|colorize }}
 <div class="ui list">
     {% for faq in faqList %}
-        <a href="{{ faq.href|lotgd_url }}" class="item">
+        {% set onclick = faq.onclick|default(faq.href) %}
+        <a href="#" onclick="{{ onclick }}" class="item">
             <i class="angle double right green icon"></i>
             <div class="content">{{ faq.link[0]|tl(faq.link[1], faq.link[2])|colorize }}</div>
         </a>
