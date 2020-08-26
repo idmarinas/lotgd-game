@@ -53,6 +53,11 @@ return [
             'viewonly' => Element\ViewOnly::class,
             'viewOnly' => Element\ViewOnly::class,
             'ViewOnly' => Element\ViewOnly::class,
+
+            //-- Petition types element
+            'petitiontype' => Element\PetitionType::class,
+            'petitionType' => Element\PetitionType::class,
+            'PetitionType' => Element\PetitionType::class,
         ],
         'factories' => [
             Element\GameLanguage::class   => LotgdElementFactory::class,
@@ -61,6 +66,7 @@ return [
             Element\LotgdTheme::class     => LotgdElementFactory::class,
             Element\BitField::class       => ElementFactory::class,
             Element\ViewOnly::class       => ElementFactory::class,
+            Element\PetitionType::class   => LotgdElementFactory::class,
 
             //-- Added in version 4.2.0
             DoctrineElement\ObjectSelect::class        => DoctrineService\ObjectSelectFactory::class,
