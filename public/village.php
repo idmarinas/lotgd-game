@@ -158,10 +158,10 @@ if (getsetting('allowclans', 1))
 
 //-- Info street
 \LotgdNavigation::addHeader('headers.info');
-\LotgdNavigation::addNav('navs.faq', 'petition.php?op=faq', [
+\LotgdNavigation::addNav('navs.faq', '#', [
     'attributes' => [
-        'data-force' => 'true',
-        'onclick' => 'Lotgd.embed(this)'
+        'id' => 'village-petition-faq',
+        'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')"
     ]
 ]);
 \LotgdNavigation::addNav('navs.news', 'news.php');
