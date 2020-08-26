@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Petitions.
@@ -49,7 +50,7 @@ class Petitions
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer", nullable=false, options={"unsigned": true})
+     * @ORM\Column(name="status", type="smallint", nullable=false, options={"unsigned": true})
      */
     private $status = 0;
 
@@ -58,14 +59,14 @@ class Petitions
      *
      * @ORM\Column(name="body", type="array", nullable=false)
      */
-    private $body;
+    private $body = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="pageinfo", type="array", nullable=false)
      */
-    private $pageinfo;
+    private $pageinfo = [];
 
     /**
      * @var \DateTime
@@ -78,6 +79,8 @@ class Petitions
      * @var int
      *
      * @ORM\Column(name="closeuserid", type="integer", nullable=false, options={"unsigned": true})
+     *
+     * @Assert\DivisibleBy(1)
      */
     private $closeuserid = 0;
 
@@ -86,14 +89,14 @@ class Petitions
      *
      * @ORM\Column(name="ip", type="string", length=40, nullable=false)
      */
-    private $ip;
+    private $ip = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="id", type="string", length=32, nullable=false)
      */
-    private $id;
+    private $id = '';
 
     public function __construct()
     {
@@ -118,7 +121,7 @@ class Petitions
     /**
      * Get the value of Petitionid.
      */
-    public function getPetitionid(): int
+    public function getPetitionid(): ?int
     {
         return $this->petitionid;
     }
