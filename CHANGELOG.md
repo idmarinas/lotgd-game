@@ -122,10 +122,15 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   `affirmation_negation` or `yes_no`
             -   Default function parameters: `affirmationNegation($value, $yes = 'adverb.yes', $no = 'adverb.no', $textDomain = 'app-common')`
                 Can use a custom text, only need overwrite `$yes`, `$no` and `$textDomain` parameters
+    -   New feature on functions:
+        -   `navigation_pagination`
+            -   Now compatible with Jaxon-PHP
+                -   Change link url for Jaxon function. Example: `navigation_pagination(paginator, 'JaxonLotgd.Ajax.Core.Motd.list' )`
 -  **Form system**
     -   _Laminas Form_:
         -   New Elements:
             -   ViewOnly
+            -   PetitionType
     -   _Symfony Form_:
         -   New Types:
             -   BitFieldType
@@ -135,6 +140,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
                 -   Note: Only for add a transformer to avoid errors with invalid date `0000-00-00 00:00:00`
             -   RaceType
             -   SpecialtyType
+-   **MOTD** now use Jaxon to load data. It is not embedded in the modal.
+-   **Petition for Hel** now use Jaxon to load data. It is not embedded in the modal.
 
 ### :fire: DEPRECATED
 
@@ -143,12 +150,17 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :wrench: FIXES
 
 -   **public/donators.php** Now show corrects text and not key translator.
--   **public/petition.php** Now show translated text of types of petitions.
+-   **lib/clan/applicant.php** Added missing translation for navs.
+-   **public/create.php** Added missing translation for navs.
+-   **lib/modules/objpref.php** `increment_module_objpref` Fixed error that change previous value.
 
 ### :x: REMOVES
 
 -   File **lib/data/configuration_cronjob.php** Not is necesary.
 -   File **lib/data/user_account.php** Not is necesary.
+-   File **public/motd.php** Now use Jaxon to load MOTD.
+-   File **public/petition.php** Now use Jaxon to load petition for help.
+    -   File **lib/petition/petition_default.php** No need now.
 -   **Translations** yaml files, removed used arrays as multiline text. Use folded style with `>` or `|`
     -   Can find examples in files translations
     -   More info of YAML format in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
