@@ -110,7 +110,7 @@ class Motd
     /**
      * Get the value of Motditem.
      */
-    public function getMotditem(): int
+    public function getMotditem(): ?int
     {
         return $this->motditem;
     }
