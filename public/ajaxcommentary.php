@@ -2,15 +2,10 @@
 
 global $session, $fiveminuteload;
 
-define('ALLOW_ANONYMOUS', true);
+define('ALLOW_ANONYMOUS', false);
 define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
-
-if (! $session['user']['loggedin'])
-{
-    return;
-}
 
 $now = time();
 $minute = round($now / 60) * 60;
