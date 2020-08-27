@@ -1,16 +1,40 @@
 <?php
 
+/**
+ * This file is part of Legend of the Green Dragon.
+ *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
+ *
+ * @since 4.0.0
+ */
+
 namespace Lotgd\Ajax\Core;
 
-use Lotgd\Core\AjaxAbstract;
 use Jaxon\Response\Response;
+use Lotgd\Ajax\Pattern\Core as PatternCore;
+use Lotgd\Core\AjaxAbstract;
+use Lotgd\Core\EntityRepository\AccountsRepository;
+use Lotgd\Core\EntityRepository\CharactersRepository;
+use Lotgd\Core\EntityRepository\MailRepository;
 
 class Mail extends AjaxAbstract
 {
+    use PatternCore\Mail\Delete;
+    use PatternCore\Mail\Inbox;
+    use PatternCore\Mail\Read;
+    use PatternCore\Mail\Send;
+    use PatternCore\Mail\Write;
+
+    const TEXT_DOMAIN = 'jaxon-mail';
+
+    protected $repositoryMail;
+    protected $repositoryAcct;
+
     /**
      * Check status of inbox.
-     *
-     * @return Response
      */
     public function status(): Response
     {
@@ -24,121 +48,65 @@ class Mail extends AjaxAbstract
         }
 
         $response = new Response();
+        $mail     = $this->getRepository();
 
-        $mail = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
         $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
 
         $response->call('Lotgd.set', 'mailCount', [
             'new' => (int) $result['notSeenCount'],
-            'old' => (int) $result['seenCount']
+            'old' => (int) $result['seenCount'],
         ]);
 
         $response->html('ye-olde-mail-count-text', \LotgdTranslator::t('parts.mail.title', [
             'new' => $result['notSeenCount'],
-            'old' => $result['seenCount']
+            'old' => $result['seenCount'],
         ], 'app-default'));
 
         return $response;
     }
 
     /**
-     * Delete mail by ID.
-     *
-     * @param int    $mailId
-     * @param string $textDomain
-     *
-     * @return Response
+     * Get text domain.
      */
-    public function deleteMail(int $mailId, string $textDomain): Response
+    public function getTextDomain(): string
     {
-        global $session;
-
-        $check = $this->checkLoggedInRedirect();
-
-        if (true !== $check)
-        {
-            return $check;
-        }
-
-        $response = new Response();
-
-        $repository = \Doctrine::getRepository('LotgdCore:Mail');
-        $delete = $repository->findOneBy([
-            'messageid' => $mailId,
-            'msgto' => $session['user']['acctid']
-        ]);
-
-        $type = 'error';
-        $message = \LotgdTranslator::t('dialog.del.one.error', [], $textDomain);
-
-        if ($delete)
-        {
-            \Doctrine::remove($delete);
-            \Doctrine::flush();
-
-            LotgdCache::removeItem("mail-{$session['user']['acctid']}");
-
-            $type = 'success';
-            $message = \LotgdTranslator::t('dialog.del.one.success', [], $textDomain);
-        }
-
-        $response->dialog->{$type}($message);
-        $response->jQuery('#mail-read-buttons')->addClass('red')->children('.ui.button')->addClass('disabled')->removeClass('loading');
-        $response->jQuery('#mail-row-'.$mailId)->remove();
-
-        return $response;
+        return self::TEXT_DOMAIN;
     }
 
     /**
-     * Delete mail in bulk by ID.
-     *
-     * @param string  $string
-     * @param string $textDomain
-     *
-     * @return Response
+     * Get repository of Mail entity.
      */
-    public function deleteBulkMail(string $string, string $textDomain): Response
+    private function getRepository(): MailRepository
     {
-        $check = $this->checkLoggedInRedirect();
-
-        if (true !== $check)
+        if ( ! $this->repositoryMail instanceof MailRepository)
         {
-            return $check;
+            $this->repositoryMail = \Doctrine::getRepository('LotgdCore:Mail');
         }
 
-        $response = new Response();
+        return $this->repositoryMail;
+    }
 
-        $post = [];
-        parse_str($string, $post);
-        $post = $post['msg'];
-
-        $repository = \Doctrine::getRepository('LotgdCore:Mail');
-
-        $count = $repository->deleteBulkMail($post);
-
-        $type = 'error';
-        $message = \LotgdTranslator::t('dialog.del.bulk.error', [], $textDomain);
-
-        if ($count)
+    /**
+     * Get repository of Characters entity.
+     */
+    private function getAcctRepository(): AccountsRepository
+    {
+        if ( ! $this->repositoryAcct instanceof AccountsRepository)
         {
-            $type = 'success';
-            $message = \LotgdTranslator::t('dialog.del.bulk.success', [], $textDomain);
-
-            foreach ($post as $mailId)
-            {
-                $response->jQuery('#mail-row-'.$mailId)->remove();
-            }
+            $this->repositoryAcct = \Doctrine::getRepository('LotgdCore:Accounts');
         }
 
-        if (! count($post))
-        {
-            $message = \LotgdTranslator::t('dialog.del.bulk.empty', [], $textDomain);
-        }
+        return $this->repositoryAcct;
+    }
 
-        $response->jQuery('.ui.delete.button, .toggle.lotgd.checkbox, #check_name_select, .ui.check.toggle.button')->removeClass('disabled');
-        $response->jQuery('.ui.delbulk.button')->removeClass('loading disabled');
-        $response->dialog->{$type}($message);
-
-        return $response;
+    /**
+     * Get default params.
+     */
+    private function getParams(): array
+    {
+        return [
+            'textDomain'    => self::TEXT_DOMAIN,
+            'mailSizeLimit' => getsetting('mailsizelimit', 1024),
+        ];
     }
 }
