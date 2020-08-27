@@ -47,11 +47,11 @@ class AccountsType extends AbstractType
                 'required' => false,
                 'disabled' => true,
             ])
-            ->add('lasthit', DateTimeType::class, [
-                'label'    => 'acct.lasthit',
-                'required' => false,
-                'disabled' => true,
-            ])
+            // ->add('lasthit', DateTimeType::class, [
+            //     'label'    => 'acct.lasthit',
+            //     'required' => false,
+            //     'disabled' => true,
+            // ])
             ->add('login', TextType::class, ['label' => 'acct.login'])
             ->add('emailaddress', EmailType::class, ['label' => 'acct.emailaddress', 'required' => false])
             ->add('locked', CheckboxType::class, ['label' => 'acct.locked', 'required' => false])
