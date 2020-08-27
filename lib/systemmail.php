@@ -29,11 +29,10 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
 
     $email = false;
 
-    if (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from > 0)
-    {
-        $email = true;
-    }
-    elseif (isset($prefs['emailonmail']) && $prefs['emailonmail'] && 0 == $from && isset($prefs['systemmail']) && $prefs['systemmail'])
+    if (
+        (isset($prefs['emailonmail']) && $prefs['emailonmail'] && $from > 0)
+        || (isset($prefs['emailonmail']) && $prefs['emailonmail'] && 0 == $from && isset($prefs['systemmail']) && $prefs['systemmail'])
+    )
     {
         $email = true;
     }
@@ -56,7 +55,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
         // unreadable
         $body = is_array($body) ? \LotgdTranslator::t($body[0], $body[1], $body[2], $prefs['language'] ?? null) : $body;
         $body = preg_replace('`n', "\n", $body);
-        $body = \LotgdSanitize::fullSanitizeize($body);
+        $body = \LotgdSanitize::fullSanitize($body);
         $subject = is_array($subject) ? \LotgdTranslator::t($subject[0], $subject[1], $subject[2], $prefs['language'] ?? null) : $subject;
         $subject = \LotgdSanitize::fullSanitize($subject);
 
