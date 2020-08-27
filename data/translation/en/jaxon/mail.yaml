@@ -109,3 +109,20 @@ dialog:
                 You cannot delete zero messages! What does this mean?
                 You pressed "Delete Checked" but there are no messages checked!
                 What sort of world is this that people press buttons that have no meaning?!?
+
+jaxon:
+    fail:
+        inbox: An error has occurred while loading the inbox
+        read: An error has occurred while loading the message
+        read.not.found: The requested message was not found
+        unread: An error has occurred in marking the message as unread
+        unread.not.found: Message not found to be marked as unread
+        reply: An error occurred when trying to reply to the message
+        send: An error occurred when trying to send the message
+        send.not.found: 'Could not find the recipient, please try again.'
+        send.inbox.full: 'You cannot send that person mail, their mailbox is full!'
+
+    message:
+        not.found: The message was not found
+    success:
+        send.mail.sent: 'Your message was sent!'

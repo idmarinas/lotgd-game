@@ -1,22 +1,26 @@
 {% translate_default_domain textDomain %}
 
+{{ include_theme('jaxon/mail/buttons.twig') }}
+
+<br>
+
 {% set statusAltText = {
     'online': 'section.read.card.user.status.online'|t|uncolorize,
     'offline': 'section.read.card.user.status.offline'|t|uncolorize
 } %}
 
 <div class="ui fluid card">
-    <div id="mail-read-buttons" class="ui top attached primary buttons">
-        <a class="ui {{ message.messageid and message.msgfrom ? '' : 'disabled' }} button" href="{{ message.messageid ? 'mail.php?op=write&reply_to=' ~ message.messageid : '' }}">
+    <div id="mail-read-buttons" class="ui top attached buttons">
+        <a class="ui {{ message.messageid and message.msgfrom ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.reply('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.reply'|t|uncolorize }}
         </a>
-        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}', '{{ textDomain }}'); $(this).addClass('loading disabled');">
+        <a class="ui red {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.del'|t|uncolorize }}
         </a>
-        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" href="{{ message.messageid ? 'mail.php?op=unread&mail_id=' ~ message.messageid : '' }}">
+        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.unread('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.unread'|t|uncolorize }}
         </a>
-        <a class="ui {{ message.msgfrom ? '' : 'disabled' }} button" href="{{ message.msgfrom ? 'petition.php?problem=' ~ problem|e('url') ~ '&abuse=yes&abuseplayer=' ~ message.msgfrom : '' }}">
+        <a class="ui {{ message.msgfrom ? '' : 'disabled' }} orange button" href="{{ message.msgfrom ? 'petition.php?problem=' ~ problem|e('url') ~ '&abuse=yes&abuseplayer=' ~ message.msgfrom : '' }}">
             {{ 'section.read.button.top.report'|t|uncolorize }}
         </a>
     </div>
@@ -31,7 +35,7 @@
         {% elseif sender.name %}
             {% set statusImage = sender.acct.loggedin ? 'online' : 'offline' %}
 
-            {% set senderName = '<img src="images/' ~ statusImage ~ '.gif" alt="' ~ statusAltText[statusImage] ~ '">' ~ sender.name|e('html')|colorize %}
+            {% set senderName = '<img src="images/' ~ statusImage ~ '.gif" alt="' ~ statusAltText[statusImage] ~ '">' ~ sender.name|colorize %}
         {% else %}
             {% set senderName = 'section.read.card.from.user.deleted.user'|t|colorize %}
         {% endif %}
@@ -67,11 +71,12 @@
             {% endif %}
         </p>
     </div>
+    {% set jaxonRead = 'JaxonLotgd.Ajax.Core.Mail.read(%s);' %}
     <div class="ui bottom attached primary buttons">
-        <a class="ui {{ paginator.previous ? '' : 'disabled' }} button" href="{{ paginator.previous ? 'mail.php?op=read&mail_id=' ~ paginator.previous : '' }}">
+        <a class="ui {{ paginator.previous ? '' : 'disabled' }} button" onclick="{{ paginator.previous ? jaxonRead|format(paginator.previous) : '' }} $(this).addClass('loading disabled')">
             {{ 'section.read.card.paginator.prev'|t|uncolorize }}
         </a>
-        <a class="ui {{ paginator.next ? '' : 'disabled' }} button" href="{{ paginator.next ? 'mail.php?op=read&mail_id=' ~ paginator.next : '' }}">
+        <a class="ui {{ paginator.next ? '' : 'disabled' }} button" onclick="{{ paginator.next ? jaxonRead|format(paginator.next) : '' }} $(this).addClass('loading disabled')">
             {{ 'section.read.card.paginator.next'|t|uncolorize }}
         </a>
     </div>

@@ -1,0 +1,35 @@
+{% translate_default_domain textDomain %}
+
+{#
+    Format for buttons
+    [
+        [
+            'buton-key-translation',
+            //-- Params (is used as translator params too)
+            {
+                'attributes': {
+                    // Additional class names
+                    'class': '',
+                    // Jaxon JavaScript function
+                    'onclick': 'JaxonLotgd.Ajax.Local.Class.Function()'
+                }
+            },
+            'translator-text-domain'
+        ]
+    ]
+#}
+
+{% set buttons = modulehook('mail_buttons', {}) %}
+
+<div class="ui one column center aligned grid">
+    <div class="column">
+        <div class="ui buttons">
+            <a class="ui button" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">{{ 'button.inbox'|t|colorize }}</a>
+            <a class="ui primary button" onclick="JaxonLotgd.Ajax.Core.Mail.write(); $(this).addClass('loading disabled')">{{ 'button.write'|t|colorize }}</a>
+
+            {% for btn in buttons %}
+                <a class="ui {{ btn[1].attributes.class }} button" onclick="{{ btn[1].attributes.onclick }}">{{ btn[0]|tl(btn[1], btn[2])|colorize }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
