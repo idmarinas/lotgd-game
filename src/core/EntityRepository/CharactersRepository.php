@@ -60,7 +60,7 @@ class CharactersRepository extends DoctrineRepository
         try
         {
             $character = $qb
-                ->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.level', 'a.login')
+                ->select('u.name', 'IDENTITY(u.acct) AS acctid', 'u.level', 'a.login', 'a.superuser')
                 ->leftJoin('LotgdCore:Accounts', 'a', 'with', $qb->expr()->eq('a.character', 'u.id'))
                 ->where('u.name LIKE :name')
                 ->setParameter('name', "%{$name}%")
@@ -70,7 +70,7 @@ class CharactersRepository extends DoctrineRepository
             ;
 
             $account = $query->from('LotgdCore:Accounts', 'u')
-                ->select('c.name', 'IDENTITY(c.acct) AS acctid', 'c.level', 'u.login')
+                ->select('c.name', 'IDENTITY(c.acct) AS acctid', 'c.level', 'u.login', 'u.superuser')
                 ->leftJoin('LotgdCore:Characters', 'c', 'with', $qb->expr()->eq('c.id', 'u.character'))
                 ->where('u.login LIKE :name AND u.acctid NOT IN (:acct)')
                 ->setParameter('name', "%{$name}%")
