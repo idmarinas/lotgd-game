@@ -48,6 +48,8 @@ trait Send
                 $message = (empty($post['subject']) || empty($post['body'])) ? 'jaxon.fail.send.subject.body' : $message;
                 $response->dialog->warning(\LotgdTranslator::t($message, [], $this->getTextDomain()));
 
+                $response->jQuery('.ui.approve.primary.button')->removeClass('loading disabled');
+
                 return $response;
             }
 
