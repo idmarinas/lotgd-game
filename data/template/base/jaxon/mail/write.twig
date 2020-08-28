@@ -26,32 +26,53 @@
 </form>
 
 <script type='text/javascript'>
+    /* global $ Lotgd */
     $('#search').dropdown({
-        preserveHTML : false,
+        preserveHTML: false,
         apiSettings: {
-            url: 'ajaxmailsearch.php?search={query}'
+            cache: false,
+            url: 'ajaxmailsearch.php?search={query}',
+            onResponse: function (response)
+            {
+                if (response.success)
+                {
+                    Lotgd.set('mail-search-response', response.results)
+                }
+
+                // make some adjustments to response
+                return response
+            }
         }
+    })
+    $('#search').on('change', function ()
+    {
+        const val = $(this).val()
+        const superuser = Lotgd.get('mail-search-response')
+        const user = superuser.find(function (user)
+        {
+            if (user.value === val)
+            {
+                return user
+            }
+        })
+
+        checkSuWarning(user)
     })
 
     var charactersLeft = '{{ "section.write.form.characters.left"|t|colorize|e("js") }}'
     var charactersOver = '{{ "section.write.form.characters.over"|t|colorize|e("js") }}'
-    var superusers = new Array()
-
-    {% for val in superusers %}
-        superusers[{{ val }}] = true
-    {% endfor %}
 
     var maxlen = '{{ mailSizeLimit }}'
 
-    function sizeCount(box)
+    function sizeCount (box)
     {
         if (box == null)
         {
             return
         }
 
-        var len = box.value.length;
-        var msg = '';
+        var len = box.value.length
+        var msg = ''
         msg = charactersOver.replace('{size}', maxlen).replace('{over}', (len-maxlen))
 
         $('button[type="submit"]').attr('disabled', true)
@@ -66,11 +87,11 @@
     }
     sizeCount(document.getElementById('body'))
 
-    function check_su_warning()
+    function checkSuWarning (user)
     {
-        var to = document.getElementById('to')
-        var warning = document.getElementById('warning')
-        if (superusers[to.value])
+        const warning = document.getElementById('warning')
+
+        if (user.superuser === true)
         {
             warning.style.visibility = 'visible'
             warning.style.display = 'block'
@@ -81,5 +102,4 @@
             warning.style.display = 'none'
         }
     }
-    check_su_warning()
 </script>
