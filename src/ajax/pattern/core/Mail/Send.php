@@ -42,9 +42,10 @@ trait Send
             $account = $repositoryAcct->find($post['to']);
             $count   = $account ? $repository->countInboxOfCharacter($account->getAcctid(), (bool) getsetting('onlyunreadmails', true)) : null;
 
-            if ( ! $account || $count >= getsetting('inboxlimit', 50))
+            if ( ! $account || $count >= getsetting('inboxlimit', 50) || (empty($post['subject']) || empty($post['body'])))
             {
                 $message = $account ? 'jaxon.fail.send.inbox.full' : 'jaxon.fail.send.not.found';
+                $message = (empty($post['subject']) || empty($post['body'])) ? 'jaxon.fail.send.subject.body' : $message;
                 $response->dialog->warning(\LotgdTranslator::t($message, [], $this->getTextDomain()));
 
                 return $response;

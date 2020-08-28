@@ -121,7 +121,7 @@ jaxon:
         send: An error occurred when trying to send the message
         send.not.found: 'Could not find the recipient, please try again.'
         send.inbox.full: 'You cannot send that person mail, their mailbox is full!'
-
+        send.subject.body: Message and subject are required
     message:
         not.found: The message was not found
     success:
