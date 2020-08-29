@@ -1,7 +1,7 @@
 {% translate_default_domain textDomain %}
 
 <div class="ui buttons">
-    <a href="{{ ('mail.php?op=write&to=' ~ petition.login|e('url'))|lotgd_url }}" target="_blank" onclick="Lotgd.embed(this)" class="ui button">
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
         {{ 'section.view.write'|t|uncolorize }}
     </a>
 </div>

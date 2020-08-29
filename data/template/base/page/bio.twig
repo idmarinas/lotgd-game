@@ -8,7 +8,7 @@
 {{ 'subtitle'|t({ 'name': character.name })|colorize }}
 
 {% if user.loggedin %}
-    <a href="{{ ('mail.php?op=write&to=' ~ character.acctid)|lotgd_url }}" target="_blank" onClick="Lotgd.embed(this)" data-tooltip="{{ 'writeMail'|t|uncolorize }}">
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ character.acctid }}')" data-tooltip="{{ 'writeMail'|t|uncolorize }}">
         <img src="images/newscroll.GIF" width="16" height="16" alt="{{ 'writeMail'|t|uncolorize }}" border="0">
     </a>
 {% endif %}
