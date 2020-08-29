@@ -161,3 +161,4 @@ flash.message:
         unactived: 'Module {module} is not active, but was attempted to be injected.'
         requisites: 'Module {module} does not meet its prerequisites.'
         unfound: 'Module {module} was not found in the modules directory.'
+    error: An error occurred while processing the request
