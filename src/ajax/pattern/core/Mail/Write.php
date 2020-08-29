@@ -20,10 +20,8 @@ trait Write
     /**
      * Write message for a user.
      */
-    public function write()
+    public function write(?int $toPlayer = null)
     {
-        global $session;
-
         $check = $this->checkLoggedInRedirect();
 
         if (true !== $check)
@@ -35,6 +33,20 @@ trait Write
         {
             $response   = new Response();
             $params     = $this->getParams();
+            $repository = $this->getAcctRepository();
+
+            if ($toPlayer)
+            {
+                $account = $repository->find($toPlayer);
+
+                if ($account)
+                {
+                    $params['row'] = [
+                        'acctid' => $account->getAcctid(),
+                        'name' => $account->getCharacter()->getName()
+                    ];
+                }
+            }
 
             $this->composer($params, $response);
         }
