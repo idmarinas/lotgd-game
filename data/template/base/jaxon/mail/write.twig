@@ -21,7 +21,7 @@
     <div class="field">
         <label for="body">{{ 'section.write.form.body'|t|colorize }}</label>
         <span id="sizemsg"></span>
-        <textarea name="body" id="body" cols="30" rows="10" onkeyup="sizeCount(this)">{{ row.body|stripslashes|replace({ '`n': '\n' })|e('html')|trim }}</textarea>
+        <textarea name="body" id="body" onkeyup="sizeCount(this)">{{ row.body|stripslashes|replace({ '`n': '\n' })|e('html')|trim }}</textarea>
     </div>
 </form>
 
@@ -73,13 +73,13 @@
 
         var len = box.value.length
         var msg = ''
-        msg = charactersOver.replace('{size}', maxlen).replace('{over}', (len-maxlen))
+        msg = charactersOver.replace('{size}', maxlen).replace('{over}', (len - maxlen))
 
         $('button[type="submit"]').attr('disabled', true)
 
         if (len <= maxlen)
         {
-            msg = charactersLeft.replace('{size}', maxlen).replace('{left}', (maxlen-len))
+            msg = charactersLeft.replace('{size}', maxlen).replace('{left}', (maxlen - len))
             $('button[type="submit"]').attr('disabled', false)
         }
 
