@@ -40,13 +40,13 @@
         <a class="ui {{ message.messageid and message.msgfrom ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.reply('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.reply'|t|uncolorize }}
         </a>
-        <a class="ui red {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}'); $(this).addClass('loading disabled');">
+        <a class="ui delete red {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.del'|t|uncolorize }}
         </a>
-        <a class="ui {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.unread('{{ message.messageid }}'); $(this).addClass('loading disabled');">
+        <a class="ui unread {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.unread('{{ message.messageid }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.unread'|t|uncolorize }}
         </a>
-        <a class="ui {{ message.msgfrom ? '' : 'disabled' }} orange button" onclick="JaxonLotgd.Ajax.Core.Petition.report('{{ message.msgfrom }}', '{{ bodyDisplay|e('html_attr') }}')">
+        <a class="ui report {{ message.msgfrom ? '' : 'disabled' }} orange button" onclick="JaxonLotgd.Ajax.Core.Petition.report('{{ message.msgfrom }}', '{{ bodyDisplay|e('html_attr') }}'); $(this).addClass('loading disabled');">
             {{ 'section.read.button.top.report'|t|uncolorize }}
         </a>
     </div>
