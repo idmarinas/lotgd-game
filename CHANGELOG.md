@@ -141,7 +141,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             -   RaceType
             -   SpecialtyType
 -   **MOTD** now use Jaxon to load data. It is not embedded in the modal.
--   **Petition for Hel** now use Jaxon to load data. It is not embedded in the modal.
+-   **Petition for Help** now use Jaxon to load data. It is not embedded in the modal.
+-   **Game Mail** _Ye Olde Mail_ now use Jaxon to load data. It is not embedded in the modal.
 
 ### :fire: DEPRECATED
 
@@ -161,6 +162,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   File **public/motd.php** Now use Jaxon to load MOTD.
 -   File **public/petition.php** Now use Jaxon to load petition for help.
     -   File **lib/petition/petition_default.php** No need now.
+-   File **public/mail.php** Now use Jaxon to load Ye Olde Mail.
 -   **Translations** yaml files, removed used arrays as multiline text. Use folded style with `>` or `|`
     -   Can find examples in files translations
     -   More info of YAML format in https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
