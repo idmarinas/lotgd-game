@@ -1,5 +1,6 @@
 title:
     default: 'Petition for Help'
+    report: 'Report a user'
     primer: 'New Player Primer'
     faq: 'Frequently Asked Questions (FAQ)'
     faq1: 'General Questions'
@@ -25,6 +26,10 @@ section:
             date: Date
             body: Body
             subject: 'New LoGD Petition at {url}'
+    report:
+        paragraph: 'Complete all the fields'
+        note: >
+            Please be as descriptive as possible in your report. If you have a questions use normal <a href="#" onclick='JaxonLotgd.Ajax.Core.Petition.help()'>petition</a>
     primer:
         title: '`n`^Welcome to the Legend of the Green Dragon New Player Primer`n`n'
         section:

@@ -14,9 +14,9 @@
 namespace Lotgd\Ajax\Core;
 
 use Jaxon\Response\Response;
+use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\PetitionsRepository;
-use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Tracy\Debugger;
 
 /**
@@ -25,6 +25,7 @@ use Tracy\Debugger;
 class Petition extends AjaxAbstract
 {
     use PatternCore\Petition\Faq;
+    use PatternCore\Petition\Report;
 
     const TEXT_DOMAIN = 'jaxon-petition';
     protected $repositoryPetition;
@@ -39,7 +40,7 @@ class Petition extends AjaxAbstract
 
         try
         {
-            $form = \LotgdLocator::get('Lotgd\Core\Form\Petition');
+            $form      = \LotgdLocator::get('Lotgd\Core\Form\Petition');
             $formClone = clone $form;
 
             if ($post)
@@ -48,7 +49,7 @@ class Petition extends AjaxAbstract
 
                 if ($form->isValid())
                 {
-                    $post = $form->getData();
+                    $post  = $form->getData();
                     $count = $repository->getCountPetitionsForNetwork(\LotgdHttp::getServer('REMOTE_ADDR'), \LotgdHttp::getCookie('lgi'));
 
                     if ($count >= 5 || (($session['user']['superuser'] ?? false) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
@@ -58,31 +59,31 @@ class Petition extends AjaxAbstract
                         return $response;
                     }
 
-                    $session['user']['acctid'] = $session['user']['acctid'] ?? 0;
+                    $session['user']['acctid']   = $session['user']['acctid']   ?? 0;
                     $session['user']['password'] = $session['user']['password'] ?? '';
 
                     $p = $session['user']['password'];
                     unset($session['user']['password']);
 
                     $post['cancelpetition'] = $post['cancelpetition'] ?? false;
-                    $post['cancelreason'] = $post['cancelreason'] ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
+                    $post['cancelreason']   = $post['cancelreason']   ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
 
                     $post = modulehook('addpetition', $post);
 
                     if ($post['cancelpetition'])
                     {
-                        $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.cancel', [ 'reason' => $post['cancelreason'] ], self::TEXT_DOMAIN));
+                        $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.cancel', ['reason' => $post['cancelreason']], self::TEXT_DOMAIN));
 
                         return $response;
                     }
 
                     $entity = $repository->hydrateEntity([
-                        'author' => $session['user']['acctid'],
-                        'date' => new \DateTime('now'),
-                        'body' => $post,
+                        'author'   => $session['user']['acctid'],
+                        'date'     => new \DateTime('now'),
+                        'body'     => $post,
                         'pageinfo' => $session,
-                        'ip' => \LotgdHttp::getServer('REMOTE_ADDR'),
-                        'id' => \LotgdHttp::getCookie('lgi')
+                        'ip'       => \LotgdHttp::getServer('REMOTE_ADDR'),
+                        'id'       => \LotgdHttp::getCookie('lgi'),
                     ]);
 
                     $session['user']['password'] = $p;
@@ -92,35 +93,9 @@ class Petition extends AjaxAbstract
 
                     // Fix the counter
                     \LotgdCache::removeItem('petitioncounts');
+
                     // If the admin wants it, email the petitions to them.
-                    if (getsetting('emailpetitions', 0))
-                    {
-                        require_once 'lib/systemmail.php';
-
-                        // Yeah, the format of this is ugly.
-                        $name = \LotgdSanitize::fullSanitize($session['user']['name']);
-
-                        $url = getsetting('serverurl', \LotgdHttp::getServer('SERVER_NAME'));
-
-                        if (! preg_match('/\\/$/', $url))
-                        {
-                            $url = $url.'/';
-                            savesetting('serverurl', $url);
-                        }
-
-                        $tl_server = \LotgdTranslator::t('section.default.petition.mail.server', [] , self::TEXT_DOMAIN);
-                        $tl_author = \LotgdTranslator::t('section.default.petition.mail.author', [] , self::TEXT_DOMAIN);
-                        $tl_date = \LotgdTranslator::t('section.default.petition.mail.date', [] , self::TEXT_DOMAIN);
-                        $tl_body = \LotgdTranslator::t('section.default.petition.mail.body', [] , self::TEXT_DOMAIN);
-                        $tl_subject = \LotgdTranslator::t('section.default.petition.mail.subject', [ 'url' => \LotgdHttp::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
-
-                        $msg = "$tl_server: $url\n";
-                        $msg .= "$tl_author: $name\n";
-                        $msg .= "$tl_date : $date\n";
-                        $msg .= "$tl_body :\n".\Tracy\Debugger::dump($post, 'Post', false)."\n";
-
-                        lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tl_subject, $msg);
-                    }
+                    $this->emailPetitionAdmin($post['charname']);
 
                     $form = $formClone;
 
@@ -182,6 +157,14 @@ class Petition extends AjaxAbstract
     }
 
     /**
+     * Get text domain.
+     */
+    public function getTextDomain(): string
+    {
+        return self::TEXT_DOMAIN;
+    }
+
+    /**
      * Get repository of Petitions entity.
      */
     private function getRepository(): PetitionsRepository
@@ -195,11 +178,41 @@ class Petition extends AjaxAbstract
     }
 
     /**
-     * Get text domain
+     * If the admin wants it, email the petitions to them.
+     *
+     * @param string $name
+     * @return void
      */
-    public function getTextDomain(): string
+    private function emailPetitionAdmin(string $name): void
     {
-        return self::TEXT_DOMAIN;
+
+        if ( ! getsetting('emailpetitions', 0))
+        {
+            return;
+        }
+
+        require_once 'lib/systemmail.php';
+
+        $url = getsetting('serverurl', \LotgdHttp::getServer('SERVER_NAME'));
+
+        if ( ! \preg_match('/\\/$/', $url))
+        {
+            $url = $url.'/';
+            savesetting('serverurl', $url);
+        }
+
+        $tl_server  = \LotgdTranslator::t('section.default.petition.mail.server', [], self::TEXT_DOMAIN);
+        $tl_author  = \LotgdTranslator::t('section.default.petition.mail.author', [], self::TEXT_DOMAIN);
+        $tl_date    = \LotgdTranslator::t('section.default.petition.mail.date', [], self::TEXT_DOMAIN);
+        $tl_body    = \LotgdTranslator::t('section.default.petition.mail.body', [], self::TEXT_DOMAIN);
+        $tl_subject = \LotgdTranslator::t('section.default.petition.mail.subject', ['url' => \LotgdHttp::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
+
+        $msg = "{$tl_server}: {$url}\n";
+        $msg .= "{$tl_author}: {$name}\n";
+        $msg .= "{$tl_date} : {$date}\n";
+        $msg .= "{$tl_body} :\n".Debugger::dump($post, 'Post', false)."\n";
+
+        lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tl_subject, $msg);
     }
 
     /**

@@ -3,3 +3,4 @@ email: 'Your email address'
 description: 'Description of the problem'
 
 button.submit: Send petition
+button.report: Send report
