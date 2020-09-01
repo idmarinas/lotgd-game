@@ -294,7 +294,7 @@ function module_objpref_edit($type, $module, $id)
     elseif (is_array($info["prefs-{$type}"]) && count($info["prefs-{$type}"]) > 0)
     {
         trigger_error(sprintf(
-            'Usage of %s style is obsolete since 4.3.0; and delete in version 5.0.0, use new "Laminas Form style" to configure prefs',
+            'Usage of %s array old style is obsolete since 4.3.0; and delete in version 5.0.0, use new "Laminas Form style" to configure prefs',
             "prefs-{$type}"
         ), E_USER_DEPRECATED);
 
