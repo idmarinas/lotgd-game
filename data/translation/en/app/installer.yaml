@@ -52,7 +52,7 @@ installOfModules:
         donothing: '`$Ignoring`0 `#{module}`0`n'
 
 file:
-    removed: File {file} has been removed.
-    moved: File {file_old} has been moved to {file_new}.
-    created: File {file} has been created.
+    removed: 'File {file} has been removed.`n'
+    moved: 'File {file_old} has been moved to {file_new}.`n'
+    created: 'File {file} has been created.`n'
 
