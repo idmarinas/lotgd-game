@@ -6,7 +6,7 @@
     [
         {
             "setting": "petition_types",
-            "value": "petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other"
+            "value": "petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.comment,petition.types.other"
         },
         {
             "setting": "serverlanguages",
