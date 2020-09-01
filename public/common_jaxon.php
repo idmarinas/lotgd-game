@@ -86,7 +86,6 @@ require_once 'lib/class/static.php';
 require_once 'lib/output.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
-require_once 'lib/datacache.php';
 require_once 'lib/sanitize.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/holiday_texts.php';
