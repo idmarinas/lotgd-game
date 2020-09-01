@@ -16,6 +16,7 @@ module.exports = {
             //-- Ignore files of development
             '!gulp{,/**}',
             '!gulpfile.js',
+            '!config/autoload/local/dbconnect.php', //-- Ignore local dbconnect file
             '!assets{,/**}',
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
             '!docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
