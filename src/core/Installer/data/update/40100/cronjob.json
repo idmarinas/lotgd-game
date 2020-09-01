@@ -1,10 +1,11 @@
 {
-    "method": "updated",
+    "method": "update-by-id",
 	"table": "cronjob",
     "entity": "Lotgd\\Core\\Entity\\Cronjob",
 	"rows":
 	[
 		{
+            "id": 4,
 			"name": "lotgdDbcleanup",
 			"command": "cronjob/dbcleanup",
 			"schedule": "0 4 * * *",
