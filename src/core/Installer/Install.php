@@ -313,6 +313,7 @@ class Install
     private function insertDataByFiles(array $files, array &$messages)
     {
         $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+        $hydrator = new ClassMethodsHydrator();
 
         foreach ($files as $file)
         {
@@ -322,6 +323,13 @@ class Install
 
             foreach ($entities as $entity)
             {
+                //-- Updated entity
+                if ('update-by-id' == $data['method'])
+                {
+                    $managed = $doctrine->find($data['entity'], $entity->getId());
+                    $entity = $hydrator->hydrate($hydrator->extract($entity), $managed);
+                }
+
                 $doctrine->merge($entity);
             }
 
@@ -329,7 +337,7 @@ class Install
             {
                 $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }
-            elseif ('update' == $data['method'] || 'replace' == $data['method'])
+            elseif ('update-by-id' == $data['method'] || 'update' == $data['method'] || 'replace' == $data['method'])
             {
                 $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }
