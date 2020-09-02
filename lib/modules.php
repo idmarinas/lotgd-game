@@ -346,8 +346,6 @@ function module_compare_versions($a, $b)
  */
 function module_condition($condition)
 {
-    global $session;
-
     $result = eval($condition);
 
     return (bool) $result;
@@ -359,12 +357,10 @@ function get_racename($thisuser = true)
     {
         global $session;
 
-        return translate_inline($session['user']['race'], 'race');
+        return \LotgdTranslator::t('character.racename', [], $session['user']['race']);
     }
-    else
-    {
-        return translate_inline($thisuser, 'race');
-    }
+
+    return \LotgdTranslator::t('character.racename', [], $thisuser);
 }
 
 function module_delete_oldvalues($table, $key)
