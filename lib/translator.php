@@ -423,3 +423,43 @@ function translator_check_collect_texts()
         savesetting('collecttexts', 0);
     }
 }
+
+function translator_uri($in)
+{
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    $uri = comscroll_sanitize($in);
+    $uri = cmd_sanitize($uri);
+
+    if ('?' == substr($uri, -1))
+    {
+        $uri = substr($uri, 0, -1);
+    }
+
+    return $uri;
+}
+
+function translator_page($in)
+{
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    $page = $in;
+
+    if (false !== strpos($page, '?'))
+    {
+        $page = substr($page, 0, strpos($page, '?'));
+    }
+    //if ($page=="runmodule.php" && 0){
+    //	//we should handle this in runmodule.php now that we have tlschema.
+    //	$matches = array();
+    //	preg_match("/[&?](module=[^&]*)/i",$in,$matches);
+    //	if (isset($matches[1])) $page.="?".$matches[1];
+    //}
+    return $page;
+}
