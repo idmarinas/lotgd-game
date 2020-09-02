@@ -6,6 +6,11 @@
 
 function reltime($date, $short = true)
 {
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "LotgdFormat::relativedate($indate, $default)" instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $x = abs(time() - $date);
     $d = (int) ($x / 86400);
     $x = $x % 86400;
