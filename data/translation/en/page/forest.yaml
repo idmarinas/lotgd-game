@@ -22,6 +22,17 @@ section:
 
 sober.message: '`&Faced with the prospect of death, you sober up a little.`0`n'
 
+# Prefix for a strong creature
+prefix.creature:
+    '00': 'Elite'
+    '01': 'Dangerous'
+    '02': 'Lethal'
+    '03': 'Savage'
+    '04': 'Deadly'
+    '05': 'Malevolent'
+    '06': 'Malignant'
+    count: 7 # This is total count of types
+
 flash.message:
     tired: 'You are too tired to search the forest any longer today. Perhaps tomorrow you will have more energy.'
     slum: "You head for the section of forest you know to contain foes that you're a bit more comfortable with."
