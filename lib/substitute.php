@@ -22,16 +22,17 @@ function substitute($string, $extra = false, $extrarep = false)
         '{armor}',
         '{creatureweapon}',
     ];
-    $replace = [translate_inline($session['user']['sex'] ? 'her' : 'him', 'buffs'),
+    $replace = [
+        ($session['user']['sex'] ? 'her' : 'him'),
         ($session['user']['sex'] ? 'she' : 'he'),
         ($session['user']['sex'] ? 'her' : 'his'),
         $session['user']['weapon'],
         $badguy['creatureweapon'],
         $session['user']['armor'],
         $badguy['creaturename'],
-        '`^'.$session['user']['name'].'`^',
+        '`^'.$session['user']['name'].'`0',
         $badguy['creaturename'],
-        '`^'.$session['user']['name'].'`^',
+        '`^'.$session['user']['name'].'`0',
         $session['user']['weapon'],
         $session['user']['armor'],
         $badguy['creatureweapon'],
@@ -43,9 +44,7 @@ function substitute($string, $extra = false, $extrarep = false)
         $replace = array_merge($replace, $extrarep);
     }
 
-    $string = str_replace($search, $replace, $string);
-
-    return $string;
+    return str_replace($search, $replace, $string);
 }
 
 function substitute_array($string, $extra = false, $extrarep = false)
@@ -84,9 +83,9 @@ function substitute_array($string, $extra = false, $extrarep = false)
         $badguy['creatureweapon'],
         $session['user']['armor'],
         $badguy['creaturename'],
-        '`^'.$session['user']['name'].'`^',
+        '`^'.$session['user']['name'].'`0',
         $badguy['creaturename'],
-        '`^'.$session['user']['name'].'`^',
+        '`^'.$session['user']['name'].'`0',
         $session['user']['weapon'],
         $session['user']['armor'],
         $badguy['creatureweapon'],
