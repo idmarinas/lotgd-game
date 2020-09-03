@@ -431,7 +431,7 @@ function translator_uri($in)
     ), E_USER_DEPRECATED);
 
     $uri = comscroll_sanitize($in);
-    $uri = cmd_sanitize($uri);
+    $uri = \LotgdSanitize::cmdSanitize($uri);
 
     if ('?' == substr($uri, -1))
     {

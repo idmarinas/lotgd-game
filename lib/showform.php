@@ -100,7 +100,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         }
         elseif ('note' == $info[1])
         {
-            $tabContent[$title_id][] = sprintf('<div class="ui small info message">%s</div>', color_sanitize($info[0]));
+            $tabContent[$title_id][] = sprintf('<div class="ui small info message">%s</div>', \LotgdSanitize::fullSanitize($info[0]));
         }
         else
         {
