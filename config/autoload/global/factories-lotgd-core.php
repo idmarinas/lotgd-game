@@ -48,6 +48,9 @@ return [
             Lotgd\Core\Jaxon::class                          => Factory\Component\Jaxon::class,
             Gedmo\Translatable\TranslatableListener::class   => Factory\Translator\TranslatableListener::class,
             'Lotgd\Core\SymfonyForm'                         => Factory\Form\SymfonyForm::class,
+
+            //-- Added in version 4.4.0
+            Lotgd\Core\EventManager::class => Factory\EventManager::class,
         ],
     ],
 ];
