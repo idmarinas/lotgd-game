@@ -95,7 +95,7 @@ class Petition extends AjaxAbstract
                     \LotgdCache::removeItem('petitioncounts');
 
                     // If the admin wants it, email the petitions to them.
-                    $this->emailPetitionAdmin($post['charname']);
+                    $this->emailPetitionAdmin($post['charname'], $post);
 
                     $form = $formClone;
 
@@ -179,13 +179,9 @@ class Petition extends AjaxAbstract
 
     /**
      * If the admin wants it, email the petitions to them.
-     *
-     * @param string $name
-     * @return void
      */
-    private function emailPetitionAdmin(string $name): void
+    private function emailPetitionAdmin(string $name, array $post): void
     {
-
         if ( ! getsetting('emailpetitions', 0))
         {
             return;
@@ -193,7 +189,8 @@ class Petition extends AjaxAbstract
 
         require_once 'lib/systemmail.php';
 
-        $url = getsetting('serverurl', \LotgdHttp::getServer('SERVER_NAME'));
+        $date = \date('Y-m-d H:i:s');
+        $url  = getsetting('serverurl', \LotgdHttp::getServer('SERVER_NAME'));
 
         if ( ! \preg_match('/\\/$/', $url))
         {
@@ -201,18 +198,18 @@ class Petition extends AjaxAbstract
             savesetting('serverurl', $url);
         }
 
-        $tl_server  = \LotgdTranslator::t('section.default.petition.mail.server', [], self::TEXT_DOMAIN);
-        $tl_author  = \LotgdTranslator::t('section.default.petition.mail.author', [], self::TEXT_DOMAIN);
-        $tl_date    = \LotgdTranslator::t('section.default.petition.mail.date', [], self::TEXT_DOMAIN);
-        $tl_body    = \LotgdTranslator::t('section.default.petition.mail.body', [], self::TEXT_DOMAIN);
-        $tl_subject = \LotgdTranslator::t('section.default.petition.mail.subject', ['url' => \LotgdHttp::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
+        $tlServer  = \LotgdTranslator::t('section.default.petition.mail.server', [], self::TEXT_DOMAIN);
+        $tlAuthor  = \LotgdTranslator::t('section.default.petition.mail.author', [], self::TEXT_DOMAIN);
+        $tlDate    = \LotgdTranslator::t('section.default.petition.mail.date', [], self::TEXT_DOMAIN);
+        $tlBody    = \LotgdTranslator::t('section.default.petition.mail.body', [], self::TEXT_DOMAIN);
+        $tlSubject = \LotgdTranslator::t('section.default.petition.mail.subject', ['url' => \LotgdHttp::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
 
-        $msg = "{$tl_server}: {$url}\n";
-        $msg .= "{$tl_author}: {$name}\n";
-        $msg .= "{$tl_date} : {$date}\n";
-        $msg .= "{$tl_body} :\n".Debugger::dump($post, 'Post', false)."\n";
+        $msg = "{$tlServer}: {$url}\n";
+        $msg .= "{$tlAuthor}: {$name}\n";
+        $msg .= "{$tlDate} : {$date}\n";
+        $msg .= "{$tlBody} :\n".Debugger::dump($post, 'Post', false)."\n";
 
-        lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tl_subject, $msg);
+        lotgd_mail(getsetting('gameadminemail', 'postmaster@localhost.com'), $tlSubject, $msg);
     }
 
     /**
