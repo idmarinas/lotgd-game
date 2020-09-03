@@ -302,8 +302,7 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
             else
             {
                 $seentlbuttons[$namespace][$indata] = true;
-                require_once 'lib/sanitize.php';
-                $uri = cmd_sanitize($namespace);
+                $uri = \LotgdSanitize::cmdSanitize($namespace);
                 $uri = comscroll_sanitize($uri);
                 $link = 'translatortool.php?u='.rawurlencode($uri).'&t='.rawurlencode($indata);
                 $link = sprintf('<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
@@ -462,4 +461,19 @@ function translator_page($in)
     //	if (isset($matches[1])) $page.="?".$matches[1];
     //}
     return $page;
+}
+
+function comscroll_sanitize($in)
+{
+    trigger_error(sprintf(
+        'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    $out = preg_replace("'&c(omscroll)?=([[:digit:]]|-)*'", '', $in);
+    $out = preg_replace("'\\?c(omscroll)?=([[:digit:]]|-)*'", '?', $out);
+    $out = preg_replace("'&(refresh|comment)=1'", '', $out);
+    $out = preg_replace("'\\?(refresh|comment)=1'", '?', $out);
+
+    return $out;
 }
