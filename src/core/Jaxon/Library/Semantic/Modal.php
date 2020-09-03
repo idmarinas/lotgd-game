@@ -15,9 +15,8 @@
 
 namespace Lotgd\Core\Jaxon\Library\Semantic;
 
-use Jaxon\Dialogs\Interfaces\Modal as JaxonModal;
+use Jaxon\Dialogs\Contracts\Modal as JaxonModal;
 use Jaxon\Dialogs\Libraries\Library;
-use Jaxon\Utils\Template\Renderer;
 
 class Modal extends Library implements JaxonModal
 {
@@ -78,15 +77,12 @@ class Modal extends Library implements JaxonModal
     }
 
     /**
-     * Render a template.
-     *
-     * @param string $sTemplate The name of template to be rendered
-     * @param string $aVars     The template vars
-     *
-     * @return string The template content
+     * @inheritDoc
      */
-    protected function render($sTemplate, array $aVars = [])
+    public function render($sTemplate, array $aVars = [])
     {
+        jaxon()->template()->addNamespace('jaxon::lotgd', self::PATH_TEMPLATE_JAXON);
+
         // Is the library the default for alert messages?
         $isDefaultForAlert = ($this->getName() == $this->xDialog->getOption('dialogs.default.alert'));
         // Is the library the default for confirm questions?
@@ -98,8 +94,6 @@ class Modal extends Library implements JaxonModal
             'defaultForConfirm' => $isDefaultForConfirm,
         ];
 
-        $xRenderer = new Renderer();
-
-        return $xRenderer->render(self::PATH_TEMPLATE_JAXON.$sTemplate, \array_merge($aLocalVars, $aVars));
+        return $this->xDialog->render("jaxon::lotgd::{$sTemplate}", \array_merge($aLocalVars, $aVars));
     }
 }

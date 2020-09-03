@@ -12,7 +12,7 @@ return [
         ],
         'dialogs' => [
             'default' => [
-                'alert' => 'toastr',
+                'message' => 'toastr',
                 'modal' => 'semantic',
             ],
             'classes' => [

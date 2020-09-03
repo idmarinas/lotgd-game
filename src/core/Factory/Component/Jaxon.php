@@ -21,21 +21,17 @@ class Jaxon implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $options      = $container->get('GameConfig');
-        $jaxonOptions = $options['jaxon'] ?? [];
+        $jaxonOptions = $container->get('GameConfig');
+        $jaxonOptions = $jaxonOptions['jaxon'] ?? [];
 
         $jaxon = new JaxonCore();
-        $jaxon->setOptions($jaxonOptions);
-
-        $jaxon->useComposerAutoloader();
+        $jaxon->di()->getConfig()->setOptions($jaxonOptions);
 
         //-- Register all class of Lotgd in dir "src/ajax/core"
-        $jaxon->addClassDir('./src/ajax/core', 'Lotgd\\Ajax\\Core\\');
-        $jaxon->registerClasses();
+        $jaxon->register(JaxonCore::CALLABLE_DIR, './src/ajax/core', ['namespace' => 'Lotgd\\Ajax\\Core\\']);
 
         //-- Register all custom class (Available globally) in dir "src/ajax/local"
-        $jaxon->addClassDir('./src/ajax/local', 'Lotgd\\Ajax\\Local\\');
-        $jaxon->registerClasses();
+        $jaxon->register(JaxonCore::CALLABLE_DIR, './src/ajax/local', ['namespace' => 'Lotgd\\Ajax\\Local\\']);
 
         $jaxon->plugin('dialog')->registerClasses();
 

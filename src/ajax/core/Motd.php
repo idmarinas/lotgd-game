@@ -13,7 +13,6 @@
 
 namespace Lotgd\Ajax\Core;
 
-use Jaxon\Request\Traits\Factory as Paginate;
 use Jaxon\Response\Response;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\MotdRepository;
@@ -25,7 +24,6 @@ use Lotgd\Ajax\Pattern\Core as PatternCore;
  */
 class Motd extends AjaxAbstract
 {
-    use Paginate;
     use PatternCore\Motd\Item;
     use PatternCore\Motd\Poll;
 
