@@ -6,7 +6,6 @@
 require_once 'common.php';
 require_once 'lib/nltoappon.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/sanitize.php';
 
 // Don't hook on to this text for your standard modules please, use "clan" instead.
 // This hook is specifically to allow modules that do other clans to create ambience.

@@ -4,7 +4,6 @@
 // translator ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/sanitize.php';
 
 $textDomain = 'page-bio';
 checkday();

@@ -5,7 +5,6 @@
 // mail ready
 require_once 'common.php';
 require_once 'lib/systemmail.php';
-require_once 'lib/sanitize.php';
 
 $result = modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDomainNavigation' => 'navigation-bank']);
 $textDomain = $result['textDomain'];

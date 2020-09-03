@@ -5,7 +5,6 @@
 // mail ready
 require_once 'common.php';
 require_once 'lib/buffs.php';
-require_once 'lib/sanitize.php';
 
 // Don't hook on to this text for your standard modules please, use "stable" instead.
 // This hook is specifically to allow modules that do other stables to create ambience.

@@ -1,7 +1,6 @@
 <?php
 
 require_once 'lib/installer/installer_functions.php';
-require_once 'lib/sanitize.php';
 
 $session['installer']['stagecompleted'] = $stage - 1;
 
@@ -99,7 +98,7 @@ foreach ($uninstalled as $key => $modulename)
 ksort($all_modules);
 reset($all_modules);
 
-if (0 == count($all_modules))
+if (empty($all_modules))
 {
     $session['installer']['skipmodules'] = true;
 }
