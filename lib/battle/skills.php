@@ -195,7 +195,7 @@ function suspend_buffs($susp = false, $msg = false)
             $msg = 'skill.buffs.gods.suspended';
         }
 
-        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = sanitize_mb($msg);
+        $lotgdBattleContent['battlerounds'][$countround]['allied'][] = \LotgdSanitize::mbSanitize($msg);
     }
 }
 
