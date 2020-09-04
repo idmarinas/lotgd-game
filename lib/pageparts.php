@@ -325,6 +325,11 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
 {
     global $html, $session;
 
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "Jaxon-PHP" to load modals and other parts instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $session['user']['chatloc'] = '';
 
     modulehook('header-popup');
@@ -355,6 +360,11 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
 function popup_footer()
 {
     global $output, $html, $session, $lotgdJaxon;
+
+    trigger_error(sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "Jaxon-PHP" to load modals and other parts instead.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
