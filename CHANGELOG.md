@@ -9,7 +9,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **public/forest.php** deleted obsolete function, and use new translator system to translate prefix of creature.
 
 ### :star: FEATURES
 
@@ -17,18 +17,45 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **lib/datetime.php**
+    -   `reltime` use `LotgdFormat::relativedate($indate, $default = 'never')` instead.
+-   **lib/pageparts.php**
+    -   `popup_header`
+    -   `popup_footer`
+    -   Note: Use Jaxon-PHP to load modals, alerts.. and a little parts of game.
+        -   For example, if you need this functions I think is better use Jaxon-PHP for better performance.
 
 ### :wrench: FIXES
 
--   Nothing
+-   **src/ajax/core/Petition.php** Fixed error with undefined vars.
 
 ### :x: REMOVES
 
--   Nothing
+-   **lib/forms.php** Removed unused file.
+-   **lib/sanitize.php** Removed file.
+    -   Removed functions
+        -   `sanitize` use new `LotgdSanitize::fullSanitize($string)` instead
+        -   `newline_sanitize` use new `LotgdSanitize::newLineSanitize($string)` instead
+        -   `color_sanitize` use new `LotgdSanitize::fullSanitize($string)` instead
+        -   `comment_sanitize` has no replacement, new commentary system, sanitize comments by default
+        -   `logdnet_sanitize` use new `LotgdSanitize::logdnetSanitize($string)` instead
+        -   `full_sanitize` use new `LotgdSanitize::fullSanitize($string)` instead
+        -   `cmd_sanitize` use new `LotgdSanitize::cmdSanitize($string)` instead
+        -   `prevent_colors` use new `LotgdSanitize::preventLotgdCodes($string)` instead
+        -   `modulename_sanitize` use new `LotgdSanitize::moduleNameSanitize($string`) instead
+        -   `stripslashes_array` has no replacement
+        -   `sanitize_name` use new `LotgdSanitize::nameSanitize($spaceallowed, $inname)` instead.
+        -   `sanitize_colorname` use new `LotgdSanitize::colorNameSanitize($spaceallowed, $inname, $admin)` instead
+        -   `sanitize_html` use new `LotgdSanitize::htmlSanitize($string)` instead
+        -   `sanitize_mb` use new `LotgdSanitize::mbSanitize($string)` instead
+    -   Moved temporary this function to `lib/translator.php`, only used by this file.
+        -   `translator_uri`
+        -   `translator_page`
+        -   `comscroll_sanitize`
 
 ### :notebook: NOTES
 
+-   **Jaxon-PHP** Migrating Jaxon-Core from 2.2.* to version 3.2.*
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
