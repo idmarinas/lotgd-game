@@ -10,9 +10,9 @@
  */
 global $html, $statbuff;
 
-$nopopups = [];
+$nopopups   = [];
 $runheaders = [];
-$html = ['content' => ''];
+$html       = ['content' => ''];
 
 /**
  * Starts page output.  Inits the template and translator modules.
@@ -27,33 +27,33 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 {
     global $html, $session, $runheaders, $nopopups;
 
-    $nopopups['login.php'] = 1;
-    $nopopups['motd.php'] = 1;
-    $nopopups['index.php'] = 1;
+    $nopopups['login.php']  = 1;
+    $nopopups['motd.php']   = 1;
+    $nopopups['index.php']  = 1;
     $nopopups['create.php'] = 1;
-    $nopopups['about.php'] = 1;
-    $nopopups['mail.php'] = 1;
+    $nopopups['about.php']  = 1;
+    $nopopups['mail.php']   = 1;
 
     $session['user']['chatloc'] = '';
 
-    if (! $title)
+    if ( ! $title)
     {
-        $title = 'title';
+        $title      = 'title';
         $textDomain = 'app-default';
     }
 
     $html['title'] = [
-        'title' => $title,
-        'params' => $params,
-        'textDomain' => $textDomain
+        'title'      => $title,
+        'params'     => $params,
+        'textDomain' => $textDomain,
     ];
 
     $script = \LotgdHttp::getServer('SCRIPT_NAME');
-    $script = substr($script, 0, strpos($script, '.'));
+    $script = \substr($script, 0, \strpos($script, '.'));
 
     if ($script)
     {
-        if (! array_key_exists($script, $runheaders))
+        if ( ! \array_key_exists($script, $runheaders))
         {
             $runheaders[$script] = false;
         }
@@ -84,7 +84,7 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
     calculate_buff_fields();
 
     $html['userPre'] = $session['user'] ?? [];
-    $html['session'] = $session ?? [];
+    $html['session'] = $session         ?? [];
     unset($html['session']['user'], $html['userPre']['password']);
 }
 
@@ -93,15 +93,17 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
  * Hooks provided:
  *	footer-{$script name}
  *	everyfooter.
+ *
+ * @param mixed $saveuser
  */
 function page_footer($saveuser = true)
 {
     global $output, $html, $session, $nopopups, $lotgdJaxon;
 
     //page footer module hooks
-    $script = \LotgdHttp::getServer('SCRIPT_NAME');
-    $script = substr($script, 0, strpos($script, '.'));
-    $replacementbits = modulehook("footer-$script", []);
+    $script          = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script          = \substr($script, 0, \strpos($script, '.'));
+    $replacementbits = modulehook("footer-{$script}", []);
 
     if ('runmodule' == $script && ($module = (string) \LotgdHttp::getQuery('module')))
     {
@@ -114,7 +116,7 @@ function page_footer($saveuser = true)
     // Problem is 'script' is a valid replacement token, so.. use an
     // invalid one which we can then blow away.
     $replacementbits['__scriptfile__'] = $script;
-    $replacementbits = modulehook('everyfooter', $replacementbits);
+    $replacementbits                   = modulehook('everyfooter', $replacementbits);
 
     if (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     {
@@ -125,7 +127,7 @@ function page_footer($saveuser = true)
     //output any template part replacements that above hooks need (eg, advertising)
     foreach ($replacementbits as $key => $val)
     {
-        if (! isset($html[$key]))
+        if ( ! isset($html[$key]))
         {
             $html[$key] = $val;
 
@@ -142,10 +144,11 @@ function page_footer($saveuser = true)
     restore_buff_fields();
 
     $lastMotd = new \DateTime('0000-00-00 00:00:00');
+
     if (\Doctrine::isConnected())
     {
         $repository = \Doctrine::getRepository('LotgdCore:Motd');
-        $lastMotd = $repository->getLastMotdDate();
+        $lastMotd   = $repository->getLastMotdDate();
     }
 
     $headscript = '';
@@ -154,7 +157,7 @@ function page_footer($saveuser = true)
 
     if (isset($session['user']['lastmotd'])
         && ($lastMotd > $session['user']['lastmotd'])
-        && (! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
+        && ( ! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
         && (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     ) {
         $session['needtoviewmotd'] = true;
@@ -169,7 +172,7 @@ function page_footer($saveuser = true)
 
     $script = '';
 
-    $session['user']['name'] = $session['user']['name'] ?? '';
+    $session['user']['name']  = $session['user']['name']  ?? '';
     $session['user']['login'] = $session['user']['login'] ?? '';
 
     //NOTICE |
@@ -182,23 +185,23 @@ function page_footer($saveuser = true)
 
     $alreadyRegisteredLogdnet = true;
 
-    if ('' == ($session['logdnet'][''] ?? '') || ! isset($session['user']['laston']) || strtotime('-1 hour') > $session['user']['laston']->getTimestamp())
+    if ('' == ($session['logdnet'][''] ?? '') || ! isset($session['user']['laston']) || \strtotime('-1 hour') > $session['user']['laston']->getTimestamp())
     {
         $alreadyRegisteredLogdnet = false;
     }
 
     $paypalData['author']['register_logdnet'] = false;
-    $paypalData['author']['item_name'] = 'Legend of the Green Dragon Author Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
-    $paypalData['author']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').'/'.LotgdHttp::getServer('REQUEST_URI');
+    $paypalData['author']['item_name']        = 'Legend of the Green Dragon Author Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
+    $paypalData['author']['item_number']      = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').'/'.LotgdHttp::getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
         $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-        $c = $repository->count([]);
-        $a = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).dirname(LotgdHttp::getServer('REQUEST_URI')));
+        $c          = $repository->count([]);
+        $a          = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).\dirname(LotgdHttp::getServer('REQUEST_URI')));
 
-        if (! preg_match("/\/$/", $a))
+        if ( ! \preg_match("/\/$/", $a))
         {
             $a = $a.'/';
             savesetting('serverurl', $a);
@@ -209,41 +212,41 @@ function page_footer($saveuser = true)
         $e = getsetting('gameadminemail', 'postmaster@localhost.com');
         $u = getsetting('logdnetserver', 'http://lotgd.net');
 
-        if (! preg_match("/\/$/", $u))
+        if ( ! \preg_match("/\/$/", $u))
         {
             $u = $u.'/';
             savesetting('logdnetserver', $u);
         }
 
         $paypalData['author']['register_logdnet'] = true;
-        $paypalData['author']['v'] = rawurlencode(\Lotgd\Core\Application::VERSION);
-        $paypalData['author']['c'] = rawurlencode($c);
-        $paypalData['author']['a'] = rawurlencode($a);
-        $paypalData['author']['l'] = rawurlencode($l);
-        $paypalData['author']['d'] = rawurlencode($d);
-        $paypalData['author']['e'] = rawurlencode($e);
-        $paypalData['author']['u'] = rawurlencode($u);
+        $paypalData['author']['v']                = \rawurlencode(\Lotgd\Core\Application::VERSION);
+        $paypalData['author']['c']                = \rawurlencode($c);
+        $paypalData['author']['a']                = \rawurlencode($a);
+        $paypalData['author']['l']                = \rawurlencode($l);
+        $paypalData['author']['d']                = \rawurlencode($d);
+        $paypalData['author']['e']                = \rawurlencode($e);
+        $paypalData['author']['u']                = \rawurlencode($u);
     }
 
     $paysite = getsetting('paypalemail', '');
 
     if ('' != $paysite)
     {
-        $paypalData['site']['paysite'] = $paysite;
-        $paypalData['site']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
-        $paypalData['site']['item_number'] = htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
+        $paypalData['site']['paysite']     = $paysite;
+        $paypalData['site']['item_name']   = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
+        $paypalData['site']['item_number'] = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
 
-        if (file_exists('public/payment.php'))
+        if (\file_exists('public/payment.php'))
         {
-            $paypalData['site']['notify_url'] = '//'.LotgdHttp::getServer('HTTP_HOST').dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
+            $paypalData['site']['notify_url'] = '//'.LotgdHttp::getServer('HTTP_HOST').\dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
     }
 
     //-- Dragon Prime
-    $paypalData['dp']['item_name'] = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $paypalData['dp']['item_name']   = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
+    $paypalData['dp']['item_number'] = \htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
     $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('core/paypal.twig', $paypalData);
@@ -263,7 +266,7 @@ function page_footer($saveuser = true)
     //output page generation time
     $gentime = \Tracy\Debugger::timer('page-footer');
     $session['user']['gentime'] += $gentime;
-    $session['user']['gentimecount']++;
+    ++$session['user']['gentimecount'];
 
     //-- Register data in debug server
     if (getsetting('debug', 0))
@@ -273,16 +276,16 @@ function page_footer($saveuser = true)
         $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Debug::class);
 
         $runtimeEntity = $repository->hydrateEntity([
-            'type' => 'pagegentime',
-            'category' => 'runtime',
+            'type'        => 'pagegentime',
+            'category'    => 'runtime',
             'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
-            'value' => $gentime
+            'value'       => $gentime,
         ]);
         $dbtimeEntity = $repository->hydrateEntity([
-            'type' => 'pagegentime',
-            'category' => 'dbtime',
+            'type'        => 'pagegentime',
+            'category'    => 'dbtime',
             'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
-            'value' => round($wrapper->getQueryTime(), 5)
+            'value'       => \round($wrapper->getQueryTime(), 5),
         ]);
 
         \Doctrine::persist($runtimeEntity);
@@ -290,7 +293,7 @@ function page_footer($saveuser = true)
     }
 
     $html['csshead'] = $html['csshead'] ?? '';
-    $html['csshead'] .= $lotgdJaxon->getCss();
+    $html['csshead']    .= $lotgdJaxon->getCss();
     $html['scripthead'] .= $lotgdJaxon->getJs();
     $html['scripthead'] .= $lotgdJaxon->getScript();
 
@@ -299,7 +302,7 @@ function page_footer($saveuser = true)
 
     $html['content'] .= $output->get_output();
     $browserOutput = \LotgdTheme::renderTheme($html);
-    $session['user']['gensize'] += strlen($browserOutput);
+    $session['user']['gensize'] += \strlen($browserOutput);
     $session['output'] = $browserOutput;
 
     if (true === $saveuser)
@@ -312,7 +315,7 @@ function page_footer($saveuser = true)
 
     unset($session['output']);
     //this somehow allows some frames to load before the user's navs say it can
-    session_write_close();
+    \session_write_close();
     echo $browserOutput;
 
     exit();
@@ -325,7 +328,7 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
 {
     global $html, $session;
 
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "Jaxon-PHP" to load modals and other parts instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -334,20 +337,20 @@ function popup_header(?string $title = null, array $params = [], ?string $textDo
 
     modulehook('header-popup');
 
-    if (! $title)
+    if ( ! $title)
     {
-        $title = 'title';
+        $title      = 'title';
         $textDomain = 'app-default';
     }
 
     $html['title'] = [
-        'title' => $title,
-        'params' => $params,
-        'textDomain' => $textDomain
+        'title'      => $title,
+        'params'     => $params,
+        'textDomain' => $textDomain,
     ];
 
     $html['userPre'] = $session['user'] ?? [];
-    $html['session'] = $session ?? [];
+    $html['session'] = $session         ?? [];
     unset($html['session']['user'], $html['userPre']['password']);
 
     //-- Add to html
@@ -361,7 +364,7 @@ function popup_footer()
 {
     global $output, $html, $session, $lotgdJaxon;
 
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "Jaxon-PHP" to load modals and other parts instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -372,11 +375,11 @@ function popup_footer()
     // invalid one which we can then blow away.
     $replacementbits = modulehook('footer-popup', []);
     //output any template part replacements that above hooks need
-    reset($replacementbits);
+    \reset($replacementbits);
 
     foreach ($replacementbits as $key => $val)
     {
-        if (! isset($html[$key]))
+        if ( ! isset($html[$key]))
         {
             $html[$key] = $val;
 
@@ -387,7 +390,7 @@ function popup_footer()
     }
 
     $html['userPost'] = $session['user'] ?? [];
-    $html['session'] = $session ?? [];
+    $html['session']  = $session         ?? [];
     unset($html['session']['user'], $html['userPost']['password']);
 
     $html['csshead'] = $html['csshead'] ?? '';
@@ -398,7 +401,7 @@ function popup_footer()
     $html['content'] .= $output->get_output();
     saveuser();
 
-    session_write_close();
+    \session_write_close();
     echo \LotgdTheme::renderThemeTemplate('popup.twig', $html);
 
     exit();
@@ -485,31 +488,31 @@ function getcharstats($buffs)
     $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
 
     $charstatInfo = $stats->getStats();
-    $charstattpl = [];
+    $charstattpl  = [];
 
     foreach ($charstatInfo as $label => $section)
     {
-        if (count($section))
+        if (\count($section))
         {
-            $arr = translate_inline($label);
+            $arr               = translate_inline($label);
             $charstattpl[$arr] = [];
-            reset($section);
+            \reset($section);
 
             foreach ($section as $name => $val)
             {
-                $a2 = translate_inline("`&$name`0");
-                $charstattpl[$arr][$a2] = "`^$val`0";
+                $a2                     = translate_inline("`&{$name}`0");
+                $charstattpl[$arr][$a2] = "`^{$val}`0";
             }
         }
     }
 
     $statbuff = \LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
-        'value' => $buffs
+        'value' => $buffs,
     ]);
 
     return appoencode(\LotgdTheme::renderThemeTemplate('sidebar/character/stats.twig', [
         'charstat' => $charstattpl,
-        'statbuff' => $statbuff
+        'statbuff' => $statbuff,
     ]), true);
 }
 
@@ -532,26 +535,26 @@ function charstats($return = true)
     {
         $u = &$session['user'];
 
-        $u['hitpoints'] = round($u['hitpoints'], 0);
-        $u['experience'] = round($u['experience'], 0);
-        $spirits = [-6 => 'Resurrected', -2 => 'Very Low', -1 => 'Low', '0' => 'Normal', 1 => 'High', 2 => 'Very High'];
+        $u['hitpoints']  = \round($u['hitpoints'], 0);
+        $u['experience'] = \round($u['experience'], 0);
+        $spirits         = [-6 => 'Resurrected', -2 => 'Very Low', -1 => 'Low', '0' => 'Normal', 1 => 'High', 2 => 'Very High'];
 
-        if (! $u['alive'])
+        if ( ! $u['alive'])
         {
             $spirits[(int) $u['spirits']] = 'DEAD';
         }
-        reset($session['bufflist']);
+        \reset($session['bufflist']);
 
         require_once 'lib/playerfunctions.php';
-        $oAtk = $atk = get_player_attack(); //Original Attack
-        $oDef = $def = get_player_defense(); //Original Defense
-        $spd = get_player_speed();
-        $hitpoints = get_player_hitpoints(); //Health of character
+        $oAtk              = $atk              = get_player_attack(); //Original Attack
+        $oDef              = $def              = get_player_defense(); //Original Defense
+        $spd               = get_player_speed();
+        $hitpoints         = get_player_hitpoints(); //Health of character
         $u['maxhitpoints'] = $hitpoints;
 
         $buffs = [];
 
-        $session['bufflist'] = array_map('array_filter', $session['bufflist'] ?? []);
+        $session['bufflist'] = \array_map('array_filter', $session['bufflist'] ?? []);
 
         foreach ($session['bufflist'] as $val)
         {
@@ -568,10 +571,10 @@ function charstats($return = true)
             if ($val['name'] > '' || $session['user']['superuser'] & SU_DEBUG_OUTPUT)
             {
                 //	removed due to performance reasons. foreach is better with only $val than to have $key ONLY for the short happiness of one debug. much greater performance gain here
-                if (is_array($val['name']))
+                if (\is_array($val['name']))
                 {
-                    $val['name'][0] = str_replace('`%', '`%%', $val['name'][0]);
-                    $val['name'] = call_user_func_array('sprintf_translate', $val['name']);
+                    $val['name'][0] = \str_replace('`%', '`%%', $val['name'][0]);
+                    $val['name']    = \call_user_func_array('sprintf_translate', $val['name']);
                 }
                 //in case it's a string
                 else
@@ -585,8 +588,8 @@ function charstats($return = true)
                 {
                     // We're about to sprintf, so, let's makes sure that
                     // `% is handled.
-                    $b = translate_inline('`#%s `7(%s rounds left)`0`n', 'buffs');
-                    $b = sprintf($b, $val['name'], $val['rounds']);
+                    $b       = translate_inline('`#%s `7(%s rounds left)`0`n', 'buffs');
+                    $b       = \sprintf($b, $val['name'], $val['rounds']);
                     $buffs[] = appoencode($b, true);
                 }
                 elseif ($val['name'])
@@ -600,31 +603,31 @@ function charstats($return = true)
             }
         }
 
-        if (! count($buffs))
+        if ( ! \count($buffs))
         {
             $buffs[] = appoencode(translate_inline('`^None`0'), true);
         }
 
-        $atk = round($atk, 2);
+        $atk = \round($atk, 2);
 
         if ($atk < $oAtk)
         {
-            $atk = round($atk, 2).'(`$'.round($atk - $oAtk, 2).'`0)';
+            $atk = \round($atk, 2).'(`$'.\round($atk - $oAtk, 2).'`0)';
         }
         elseif ($atk > $oAtk)
         {
-            $atk = round($atk, 2).'(`@+'.round($atk - $oAtk, 2).'`0)';
+            $atk = \round($atk, 2).'(`@+'.\round($atk - $oAtk, 2).'`0)';
         }
 
-        $def = round($def, 2);
+        $def = \round($def, 2);
 
         if ($def < $oDef)
         {
-            $def = round($def, 2).'(`$'.round($def - $oDef, 2).'`0)';
+            $def = \round($def, 2).'(`$'.\round($def - $oDef, 2).'`0)';
         }
         elseif ($def > $oDef)
         {
-            $def = round($def, 2).'(`@+'.round($def - $oDef, 2).'`0)';
+            $def = \round($def, 2).'(`@+'.\round($def - $oDef, 2).'`0)';
         }
 
         addcharstat(\LotgdTranslator::t('statistic.category.character.info', [], 'app-default'));
@@ -635,7 +638,7 @@ function charstats($return = true)
         if ($u['alive'])
         {
             //-- HitPoints are calculated in base to attributes
-            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app-default'), sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
+            addcharstat(\LotgdTranslator::t('statistic.stat.hitpoints', [], 'app-default'), \sprintf('%s/%s `$<span title="%s">(?)</span>`0', $u['hitpoints'].check_temp_stat('hitpoints', 1), $u['maxhitpoints'].check_temp_stat('maxhitpoints', 1), explained_get_player_hitpoints()));
 
             if (is_module_active('staminasystem'))
             {
@@ -651,8 +654,8 @@ function charstats($return = true)
                 addcharstat(\LotgdTranslator::t('statistic.stat.drunkeness', [], 'app-default'), '');
             }
             addcharstat(\LotgdTranslator::t('statistic.stat.experience', [], 'app-default'), LotgdFormat::numeral($u['experience'].check_temp_stat('experience', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app-default'), sprintf("$atk `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
-            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app-default'), sprintf("$def `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.attack', [], 'app-default'), \sprintf("{$atk} `\$<span title='%s'>(?)</span>`0", explained_get_player_attack().check_temp_stat('attack', 1)));
+            addcharstat(\LotgdTranslator::t('statistic.stat.defense', [], 'app-default'), \sprintf("{$def} `\$<span title='%s'>(?)</span>`0", explained_get_player_defense().check_temp_stat('defense', 1)));
             addcharstat(\LotgdTranslator::t('statistic.stat.speed', [], 'app-default'), $spd.check_temp_stat('speed', 1));
             addcharstat(\LotgdTranslator::t('statistic.stat.strength', [], 'app-default'), $u['strength'].check_temp_stat('strength', 1));
             addcharstat(\LotgdTranslator::t('statistic.stat.dexterity', [], 'app-default'), $u['dexterity'].check_temp_stat('dexterity', 1));
@@ -670,13 +673,13 @@ function charstats($return = true)
                 addcharstat(\LotgdTranslator::t('statistic.stat.stamina', [], 'app-default'), '');
             }
             addcharstat(\LotgdTranslator::t('statistic.stat.torments', [], 'app-default'), $u['gravefights'].check_temp_stat('gravefights', 1));
-            addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app-default'), 10 + round(($u['level'] - 1) * 1.5));
-            addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app-default'), 10 + round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.psyche', [], 'app-default'), 10 + \round(($u['level'] - 1) * 1.5));
+            addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app-default'), 10 + \round(($u['level'] - 1) * 1.5));
         }
 
         addcharstat(\LotgdTranslator::t('statistic.stat.race', [], 'app-default'), \LotgdTranslator::t('character.racename', [], (RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN, 'race'));
 
-        if (count($companions) > 0)
+        if (\count($companions) > 0)
         {
             addcharstat(\LotgdTranslator::t('statistic.category.companions', [], 'app-default'));
 
@@ -684,7 +687,7 @@ function charstats($return = true)
             {
                 if ($companion['hitpoints'] > 0 || (isset($companion['cannotdie']) && true == $companion['cannotdie']))
                 {
-                    $companion['hitpoints'] = max(0, $companion['hitpoints']);
+                    $companion['hitpoints'] = \max(0, $companion['hitpoints']);
 
                     $color = '`@';
 
@@ -700,7 +703,7 @@ function charstats($return = true)
                         $suspcode = '`7 *';
                     }
 
-                    addcharstat($companion['name'], $color.($companion['hitpoints']).'`7/`&'.($companion['maxhitpoints'])."$suspcode`0");
+                    addcharstat($companion['name'], $color.($companion['hitpoints']).'`7/`&'.($companion['maxhitpoints'])."{$suspcode}`0");
                 }
             }
         }
@@ -739,7 +742,7 @@ function charstats($return = true)
         {
             $charstat = getcharstats($buffs);
 
-            if (! is_array($session['bufflist']))
+            if ( ! \is_array($session['bufflist']))
             {
                 $session['bufflist'] = [];
             }
@@ -750,7 +753,7 @@ function charstats($return = true)
         return;
     }
 
-    if (! $ret = \LotgdCache::getItem('charlisthomepage'))
+    if ( ! $ret = \LotgdCache::getItem('charlisthomepage'))
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
@@ -759,29 +762,29 @@ function charstats($return = true)
         if (isset($list['handled']) && $list['handled'])
         {
             $onlinecount = $list['count'];
-            $ret = $list['list'];
+            $ret         = $list['list'];
         }
         else
         {
-            $result = [];
+            $result      = [];
             $onlinecount = 0;
 
             if (\Doctrine::isConnected())
             {
-                $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-                $result = $repository->getListAccountsOnline();
-                $onlinecount = count($result);
+                $repository  = \Doctrine::getRepository('LotgdCore:Accounts');
+                $result      = $repository->getListAccountsOnline();
+                $onlinecount = \count($result);
             }
 
             $ret = \LotgdTheme::renderThemeTemplate('parts/online-list.twig', [
-                'list' => $result,
+                'list'        => $result,
                 'onlineCount' => $onlinecount,
-                'textDomain' => 'page-home'
+                'textDomain'  => 'page-home',
             ]);
         }
 
         savesetting('OnlineCount', $onlinecount);
-        savesetting('OnlineCountLast', strtotime('now'));
+        savesetting('OnlineCountLast', \strtotime('now'));
         \LotgdCache::setItem('charlisthomepage', $ret);
     }
 
