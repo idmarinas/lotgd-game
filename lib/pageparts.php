@@ -289,9 +289,6 @@ function page_footer($saveuser = true)
         \Doctrine::persist($dbtimeEntity);
     }
 
-    //-- Finalize output
-    $lotgdJaxon->processRequest();
-
     $html['csshead'] = $html['csshead'] ?? '';
     $html['csshead'] .= $lotgdJaxon->getCss();
     $html['scripthead'] .= $lotgdJaxon->getJs();
@@ -378,9 +375,6 @@ function popup_footer()
 
         $html[$key] .= $val;
     }
-
-    //-- Finalize output
-    $lotgdJaxon->processRequest();
 
     $html['userPost'] = $session['user'] ?? [];
     $html['session'] = $session ?? [];
