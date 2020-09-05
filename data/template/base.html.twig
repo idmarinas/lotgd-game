@@ -29,11 +29,13 @@
 		<!-- START Cookies Consent -->
 		<script src="js/jqueryCookieGuard.1.1.0.js"></script>
 		<script>
-			$(document).ready(function(){
-				$.cookieguard();
-				$.cookieguard.cookies.add('PHP Session', '{{ session_cookie_name() }}', 'This cookie is used to track important logical information for the smooth operation of the site', true);
-				$.cookieguard.run();
-		   });
+            /* global $ */
+            $(document).ready(function ()
+            {
+                $.cookieguard()
+                $.cookieguard.cookies.add('PHP Session', '{{ session_cookie_name() }}', 'This cookie is used to track important logical information for the smooth operation of the site', true)
+                $.cookieguard.run()
+            })
 		</script>
 		<!-- END Cookies Consent -->
     </head>

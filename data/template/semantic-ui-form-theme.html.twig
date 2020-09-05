@@ -12,6 +12,7 @@
 
     {# Scripts for control #}
     <script>
+        /* global $ */
         $('#show-hidde-info-note-form-{{ name }}').on('click', function ()
         {
             const form = $('form[name="{{ name }}"]')
@@ -41,11 +42,12 @@
     </div>
     {{- block('form_widget_simple') -}}
     <script>
+        /* global $ */
         $('#{{ id }}-range').slider({
-            min: {{ attr.min }},
-            max: {{ attr.max }},
-            start: {{ value }},
-            step: {{ attr.step|default('1') }},
+            min: '{{ attr.min }}',
+            max: '{{ attr.max }}',
+            start: '{{ value }}',
+            step: '{{ attr.step|default("1") }}',
             onMove: function (value)
             {
                 $('#{{ id }}').val(value)
