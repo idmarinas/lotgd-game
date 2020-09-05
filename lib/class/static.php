@@ -7,6 +7,8 @@ use Lotgd\Core\Fixed\EventManager as LotgdEvent;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
 use Lotgd\Core\Fixed\Http as LotgdHttp;
+use Lotgd\Core\Fixed\Request as LotgdRequest;
+use Lotgd\Core\Fixed\Response as LotgdReponse;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
 use Lotgd\Core\Fixed\Sanitize as LotgdSanitize;
@@ -26,8 +28,12 @@ LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMe
 //-- Configure format instance
 LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
 
-//-- Configure Http instance
-LotgdHttp::instance(LotgdLocator::get(\Lotgd\Core\Http::class));
+//-- Configure Request instance
+LotgdHttp::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
+LotgdRequest::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
+
+//-- Configure Response instance
+LotgdReponse::instance(LotgdLocator::get(\Lotgd\Core\Http\Response::class));
 
 //-- Configure Navigation instance
 LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
