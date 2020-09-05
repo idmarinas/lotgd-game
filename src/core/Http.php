@@ -8,49 +8,18 @@
 
 namespace Lotgd\Core;
 
-use Laminas\Http\Header\Cookie;
-use Laminas\Http\PhpEnvironment\Request;
+use const E_USER_DEPRECATED;
+use Lotgd\Core\Http\Request;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated, please use %s instead',
+    Http::class,
+    Request::class
+), E_USER_DEPRECATED);
+
+/**
+ * @deprecated since 4.4.0; to be removed in 5.0.0. Use Lotgd\Core\Http\Request instead.
+ */
 class Http extends Request
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getServer($name = null, $default = null)
-    {
-        if ('REQUEST_URI' == $name || 'SCRIPT_NAME' == $name)
-        {
-            return $this->sanitizeUri(parent::getServer($name, $default));
-        }
-
-        return parent::getServer($name, $default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCookie()
-    {
-        $cookie = parent::getCookie();
-
-        return $cookie ?: new Cookie();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequestUri(): string
-    {
-        return $this->sanitizeUri(parent::getRequestUri());
-    }
-
-    /**
-     * Sanitize uri for usage.
-     *
-     * @param string $name
-     */
-    protected function sanitizeUri($name): string
-    {
-        return substr($name, strrpos($name, '/') + 1);
-    }
 }
