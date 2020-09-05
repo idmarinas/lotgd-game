@@ -211,7 +211,7 @@ class Dbwrapper
     {
         if ( ! $this->adapter)
         {
-            $request = $this->getContainer(\Lotgd\Core\Http::class);
+            $request = $this->getContainer(\Lotgd\Core\Http\Request::class);
             page_header('Database Connection Error');
             output('`c`$Database Connection Error`0´c`n`n');
             output('`xDue to technical problems the game is unable to connect to the database server.`n`n');

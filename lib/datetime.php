@@ -92,7 +92,7 @@ function checkday()
             }
             else
             {
-                $request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+                $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
 
                 $session = $revertsession;
                 $session['user']['restorepage'] = $request->getServer('REQUEST_URI');

@@ -16,6 +16,7 @@ namespace Lotgd\Core;
 use Laminas\Session\Container;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Validator;
+use Lotgd\Core\Http\Request;
 
 class Session
 {
@@ -36,7 +37,7 @@ class Session
             return;
         }
 
-        $request = $this->getContainer(Http::class);
+        $request = $this->getContainer(Request::class);
 
         $session->regenerateId(true);
         $container->init          = 1;

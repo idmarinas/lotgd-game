@@ -4,7 +4,7 @@ require_once 'lib/installer/installer_functions.php';
 
 $session['installer']['stagecompleted'] = $stage - 1;
 
-$request = \LotgdLocator::get(\Lotgd\Core\Http::class);
+$request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
 if ($request->isPost())
 {
     $session['installer']['moduleoperations'] = \LotgdHttp::getPost('modules') ?: [];
