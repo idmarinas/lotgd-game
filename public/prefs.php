@@ -1,7 +1,5 @@
 <?php
 
-use Lotgd\Core\Http;
-
 // addnews ready
 // mail ready
 // translator ready
