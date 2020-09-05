@@ -15,7 +15,6 @@ return [
             Lotgd\Core\Output\Color::class     => InvokableFactory::class,
             Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class,
             Lotgd\Core\Template\Theme::class   => Factory\Template\Theme::class,
-            Lotgd\Core\Http::class             => InvokableFactory::class,
 
             //-- Added in version 4.0.0
             Lotgd\Core\Component\FlashMessages::class          => Factory\Component\FlashMessages::class,
@@ -51,6 +50,7 @@ return [
 
             //-- Added in version 4.4.0
             Lotgd\Core\EventManager::class => Factory\EventManager::class,
+            Lotgd\Core\Http\Request::class => InvokableFactory::class,
         ],
     ],
 ];
