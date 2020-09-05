@@ -310,13 +310,15 @@ function page_footer($saveuser = true)
         saveuser();
     }
 
+    unset($session['output']);
+
     \Doctrine::flush();
     \Doctrine::clear();
 
-    unset($session['output']);
-    //this somehow allows some frames to load before the user's navs say it can
-    \session_write_close();
-    echo $browserOutput;
+    \LotgdResponse::setContent($browserOutput);
+
+    //-- Send content to browser
+    \LotgdResponse::sendContent();
 
     exit();
 }
