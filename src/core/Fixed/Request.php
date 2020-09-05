@@ -18,9 +18,9 @@ use Lotgd\Core\Http\Request as CoreRequest;
 class Request
 {
     /**
-     * Instance of Http.
+     * Instance of Request.
      *
-     * @var Lotgd\Core\Http
+     * @var Lotgd\Core\Http\Request
      */
     protected static $instance;
 
@@ -172,4 +172,4 @@ class Request
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Http', 'LotgdRequest', false);
+class_alias('Lotgd\Core\Fixed\Request', 'LotgdRequest', false);
