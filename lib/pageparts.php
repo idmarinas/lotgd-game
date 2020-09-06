@@ -147,8 +147,7 @@ function page_footer($saveuser = true)
 
     if (\Doctrine::isConnected())
     {
-        $repository = \Doctrine::getRepository('LotgdCore:Motd');
-        $lastMotd   = $repository->getLastMotdDate();
+        $lastMotd = \Doctrine::getRepository('LotgdCore:Motd')->getLastMotdDate();
     }
 
     $headscript = '';
@@ -169,8 +168,6 @@ function page_footer($saveuser = true)
     {
         $html['scripthead'] = "<script language='text/javascript'>".$headscript.'</script>';
     }
-
-    $script = '';
 
     $session['user']['name']  = $session['user']['name']  ?? '';
     $session['user']['login'] = $session['user']['login'] ?? '';
@@ -197,9 +194,8 @@ function page_footer($saveuser = true)
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
-        $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-        $c          = $repository->count([]);
-        $a          = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).\dirname(LotgdHttp::getServer('REQUEST_URI')));
+        $c = \Doctrine::getRepository('LotgdCore:Accounts')->count([]);
+        $a = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).\dirname(LotgdHttp::getServer('REQUEST_URI')));
 
         if ( ! \preg_match("/\/$/", $a))
         {
@@ -261,8 +257,6 @@ function page_footer($saveuser = true)
     //output character stats
     $html['stats'] = $charstats;
     unset($charstats);
-    //Add all script in page
-    $html['script'] = $script;
     //output page generation time
     $gentime = \Tracy\Debugger::timer('page-footer');
     $session['user']['gentime'] += $gentime;
