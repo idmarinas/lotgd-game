@@ -245,7 +245,7 @@ function page_footer($saveuser = true)
     }
 
     //-- Dragon Prime
-    $paypalData['dp']['item_name']   = getsetting('paypaltext', 'Legend of the Green Dragon DP Donation from ').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
+    $paypalData['dp']['item_name']   = 'Legend of the Green Dragon DP Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
     $paypalData['dp']['item_number'] = \htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
