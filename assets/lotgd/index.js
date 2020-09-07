@@ -1,3 +1,7 @@
+//-- To allow use jQuery and $ in inline script page
+var $ = require('jquery')
+global.$ = global.jQuery = $
+
 define([
     './core',
 
