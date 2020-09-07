@@ -26,8 +26,8 @@ if ($executionTime < 30 && 0 != $executionTime)
     $execution_met = false;
 }
 
-//-- PHP 7.1 or better is required for this version
-if (version_compare(PHP_VERSION, '7.1.0', '<'))
+//-- PHP 7.2 or better is required for this version
+if (version_compare(PHP_VERSION, '7.2.0', '<'))
 {
     $requirements_met = false;
     $php_met = false;
@@ -40,7 +40,7 @@ if (! $requirements_met)
 
     if (! $php_met)
     {
-        echo sprintf('You need PHP 7.0 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
+        echo sprintf('You need PHP 7.2 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
     }
 
     if (! $memory_met)
