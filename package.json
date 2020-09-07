@@ -33,7 +33,7 @@
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
         "@yaireo/tagify": "^3.17.10",
-        "fomantic-ui": "2.8.6",
+        "fomantic-ui": "2.8.7",
         "jquery": "^3.5.1",
         "numeral": "^2.0.6",
         "sweetalert2": "^9.17.1",
