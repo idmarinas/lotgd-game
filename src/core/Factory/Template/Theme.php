@@ -20,6 +20,7 @@ use Lotgd\Core\Template\Theme as TemplateTheme;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
+use Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension;
 
 class Theme implements FactoryInterface
 {
@@ -65,6 +66,8 @@ class Theme implements FactoryInterface
                 $template->addExtension($extension);
             }
         }
+
+        $template->addExtension(new EntryFilesTwigExtension($container));
 
         //-- Important
         $template->prepareTheme();
