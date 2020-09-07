@@ -2,7 +2,7 @@
 	$success = true;
 
 	$version = '4.2';//-- Version of LoGD
-	$phpVersion = '7.2.0';//-- PHP version need
+	$phpVersion = '7.2.5';//-- PHP version need
 
 	//-- Need 128MB
 	$_memoryLimit = @ini_get('memory_limit');
