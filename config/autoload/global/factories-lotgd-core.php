@@ -53,6 +53,7 @@ return [
             Lotgd\Core\EventManager::class  => Factory\EventManager::class,
             Lotgd\Core\Http\Request::class  => InvokableFactory::class,
             Lotgd\Core\Http\Response::class => Factory\Http\Response::class,
+            'webpack_encore.tag_renderer'   => Factory\Template\Encore::class,
         ],
     ],
 ];
