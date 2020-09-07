@@ -22,8 +22,9 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/pageparts.php**
     -   `popup_header`
     -   `popup_footer`
-    -   Note: Use Jaxon-PHP to load modals, alerts.. and a little parts of game.
+    -   Note: Use Jaxon-PHP to load modals, alerts... and a little parts of game.
         -   For example, if you need this functions I think is better use Jaxon-PHP for better performance.
+-   Class **Lotgd\Core\Http** are deprecated use `Lotgd\Core\Http\Request` instead.
 
 ### :wrench: FIXES
 
@@ -55,6 +56,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :notebook: NOTES
 
+-   **Added file to check requeriments** `lotgd-check-requeriments-4.2.php`
 -   **Jaxon-PHP** Migrating Jaxon-Core from 2.2.* to version 3.2.*
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
