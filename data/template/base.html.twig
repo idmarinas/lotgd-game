@@ -12,14 +12,14 @@
 
         <title>{% block lotgd_head_title %}{{ page_title(title) }}{% endblock %}</title>
 
-        {{ encore_entry_link_tags('lotgd') }}
+        {{ encore_entry_link_tags('lotgd', null, 'lotgd') }}
         {% block lotgd_head_theme_css %}
             {# Favicon can custom per theme #}
             <link rel="shortcut icon" href="favicon.png" type="image/png" />
         {% endblock %}
 		{{ csshead }}
 
-        {{ encore_entry_script_tags('lotgd') }}
+        {{ encore_entry_script_tags('lotgd', null, 'lotgd') }}
         {% block lotgd_head_theme_js %}{% endblock %}
 		{{ scripthead }}
 		{{ script }}
@@ -29,7 +29,7 @@
             /* global Lotgd */
             Lotgd.set('cookie_name', '{{ session_cookie_name() }}')
         </script>
-        {{ encore_entry_script_tags('cookie_guard') }}
+        {{ encore_entry_script_tags('cookie_guard', null, 'lotgd') }}
 		<!-- END Cookies Consent -->
     </head>
     <body>
@@ -43,7 +43,7 @@
 
         {% block lotgd_footer_theme_css %}{% endblock %}
 
-        {{ encore_entry_script_tags('semantic_javascripts') }}
+        {{ encore_entry_script_tags('semantic_javascripts', null, 'lotgd') }}
         {% block lotgd_footer_theme_js %}{% endblock %}
     </body>
 </html>
