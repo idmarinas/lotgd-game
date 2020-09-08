@@ -1,0 +1,95 @@
+var Encore = require('@symfony/webpack-encore')
+
+// Manually configure the runtime environment if not already configured yet by the "encore" command.
+// It's useful when you use tools that rely on webpack.config.js file.
+if (!Encore.isRuntimeEnvironmentConfigured())
+{
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
+}
+
+Encore
+    // directory where compiled assets will be stored
+    .setOutputPath('public/build/') //-- Not change this or Twig "encore_entry_*" functions fail
+    // public path used by the web server to access the output path
+    .setPublicPath('/build') //-- Not change this or Twig "encore_entry_*" functions fail
+
+    //-- Configure how CSS/JS/Images/Fonts files are exported
+    .configureFilenames({
+        js: 'js/[name].[contenthash].js',
+        css: 'css/[name].[contenthash].css',
+        images: 'images/[name].[hash:8].[ext]',
+        fonts: 'fonts/[name].[hash:8].[ext]'
+    })
+
+    //-- Add alias for some files
+    .addAliases({
+        'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss',
+        'tagify.scss$': '@yaireo/tagify/src/tagify.scss',
+        '../../theme.config$': require('path').join(
+            __dirname,
+            './themes/theme.config'
+        )
+    })
+
+    /*
+     * ENTRY CONFIG
+     *
+     * Add 1 entry for each "page" of your app
+     * (including one that's included on every page - e.g. "app")
+     *
+     * Each entry will result in one JavaScript file (e.g. app.js)
+     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
+     */
+    //-- This is the global entry used in all pages
+    .addEntry('lotgd', './assets/lotgd/lib/index.js')
+    .addEntry('cookie_guard', './assets/lotgd/js/cookie/index.js')
+    .addEntry('semantic_javascripts', './node_modules/fomantic-ui/dist/semantic.js')
+    .addEntry('lotgd_theme', './themes/lotgd.less')//-- Default theme
+
+    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+    .splitEntryChunks()
+
+    // will require an extra script tag for runtime.js
+    // but, you probably want this, unless you're building a single-page app
+    .enableSingleRuntimeChunk()
+
+    /*
+     * FEATURE CONFIG
+     *
+     * Enable & configure other features below. For a full
+     * list of features, see:
+     * https://symfony.com/doc/current/frontend.html#adding-more-features
+     */
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .enableSourceMaps(!Encore.isProduction())
+    // enables hashed filenames (e.g. app.abc123.css)
+    .enableVersioning(Encore.isProduction())
+
+    // enables @babel/preset-env polyfills
+    .configureBabelPresetEnv((config) =>
+    {
+        config.useBuiltIns = 'usage'
+        config.corejs = 3
+    })
+
+    // Image files with a weight <= 4kb are processed as base64 in the CSS file
+    .configureUrlLoader({
+        images: { limit: 4096 }
+    })
+
+    // enables Sass/SCSS support
+    .enableSassLoader()
+    // enables Less support
+    .enableLessLoader()
+    // autoprefixer
+    .enablePostCssLoader()
+
+    // uncomment to get integrity="..." attributes on your script & link tags
+    // requires WebpackEncoreBundle 1.4 or higher
+    .enableIntegrityHashes(Encore.isProduction())
+
+    // uncomment if you're having problems with a jQuery plugin
+    .autoProvidejQuery()
+
+module.exports = Encore.getWebpackConfig()
