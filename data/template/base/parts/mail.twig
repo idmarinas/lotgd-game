@@ -6,7 +6,7 @@
     {% if notSeenCount %}
         {% set icon = '<i aria-hidden="true" class="green mail icon"></i>' %}
     {% endif %}
-    <a id="mail-button" class="ui tertiary button hotmotd" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">
+    <a id="mail-button" class="ui tertiary basic button hotmotd" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">
         {{ icon }}
         <span id="ye-olde-mail-count-text">{{ 'parts.mail.title'|t({'new': notSeenCount, 'old': seenCount}) }}</span>
     </a>
@@ -21,5 +21,5 @@
         </script>
     {% endif %}
 {% else %}
-    <a class="ui tertiary button disabled">{{ 'parts.mail.anonymous'|t|colorize }}</a>
+    <a class="ui tertiary basic button disabled">{{ 'parts.mail.anonymous'|t|colorize }}</a>
 {% endif %}

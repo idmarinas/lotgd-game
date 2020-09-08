@@ -1,6 +1,6 @@
 {% translate_default_domain 'app-default' %}
 
-<a id="motd-button" class="ui tertiary button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('loading disabled');">
+<a id="motd-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('loading disabled');">
     {% if newMotd %}
         <i aria-hidden="true" class="certificate icon"></i>
         {{ 'parts.motd.title'|t }}
