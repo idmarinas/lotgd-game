@@ -224,6 +224,8 @@ assets/**
 !/themes/src/**/
 !/themes/src/jade/**
 !/themes/**/.gitkeep
+# This is only for compare with version of Fomantic UI
+!/themes/src/semantic/**
 
 # Ignore local content of LoTGD
 /src/ajax/local/
