@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block head_theme_css %}
-    <link href="themes/jade.css" rel="stylesheet" type="text/css" />
+{% block lotgd_head_theme_css %}
+    {{ encore_entry_link_tags('lotgd_theme') }}
+{% endblock %}
+
+{% block lotgd_footer_theme_js %}
+    {{ encore_entry_script_tags('lotgd_theme') }}
 {% endblock %}
