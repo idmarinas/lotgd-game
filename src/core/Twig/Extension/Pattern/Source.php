@@ -23,10 +23,6 @@ trait Source
      */
     public function gameSource(): string
     {
-        $sourcelink = 'source.php?url='.preg_replace('/[?].*/', '', (\LotgdHttp::getServer('REQUEST_URI')));
-
-        return \LotgdTheme::renderThemeTemplate('parts/source.twig', [
-            'sourceHref' => $sourcelink,
-        ]);
+        return \LotgdTheme::renderThemeTemplate('parts/source.twig', []);
     }
 }
