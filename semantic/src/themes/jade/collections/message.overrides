@@ -1,9 +1,0 @@
-/*******************************
-         Theme Overrides
-*******************************/
-
-/* Ocult notify if are empty */
-div#notify:empty
-{
-    display: none;
-}
