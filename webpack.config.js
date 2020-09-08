@@ -9,9 +9,9 @@ if (!Encore.isRuntimeEnvironmentConfigured())
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/') //-- Not change this or Twig "encore_entry_*" functions fail
+    .setOutputPath('public/build/lotgd/')
     // public path used by the web server to access the output path
-    .setPublicPath('/build') //-- Not change this or Twig "encore_entry_*" functions fail
+    .setPublicPath('/build/lotgd')
 
     //-- Configure how CSS/JS/Images/Fonts files are exported
     .configureFilenames({
@@ -46,13 +46,6 @@ Encore
     .addEntry('semantic_javascripts', './node_modules/fomantic-ui/dist/semantic.js')
     .addEntry('lotgd_theme', './themes/lotgd.less')//-- Default theme
 
-    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
-    .splitEntryChunks()
-
-    // will require an extra script tag for runtime.js
-    // but, you probably want this, unless you're building a single-page app
-    .enableSingleRuntimeChunk()
-
     /*
      * FEATURE CONFIG
      *
@@ -60,6 +53,13 @@ Encore
      * list of features, see:
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
+    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+    .splitEntryChunks()
+
+    // will require an extra script tag for runtime.js
+    // but, you probably want this, unless you're building a single-page app
+    .enableSingleRuntimeChunk()
+
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
@@ -92,4 +92,20 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
 
-module.exports = Encore.getWebpackConfig()
+const LotgdConfig = Encore.getWebpackConfig()
+LotgdConfig.name = 'lotgd' //-- This allow use "encore dev --config-name lotgd" to only build this
+
+Encore.reset() //-- Always call this, or Encore mixed all configs
+
+//-- Import custom Encore config
+var configCustom = []
+try
+{
+    configCustom = require('./webpack.config.custom')
+}
+catch (error)
+{
+    console.log('Not find custom Encore config')
+}
+
+module.exports = [LotgdConfig, ...configCustom]
