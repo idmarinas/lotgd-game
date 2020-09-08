@@ -1,0 +1,21 @@
+/*******************************
+            Dropdown
+*******************************/
+
+/*-------------------
+       Content
+--------------------*/
+
+
+/* Menu */
+@menuBackground: @inputBackground;
+
+
+/*-------------------
+       States
+--------------------*/
+
+
+/* Selected */
+@selectedBackground: @veryStrongTransparentBlack;
+@selectedColor: @invertedUnselectedTextColor;

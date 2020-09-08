@@ -1,0 +1,17 @@
+/*******************************
+         Theme Overrides
+*******************************/
+
+/*-----------------------------------------
+	Page title for LOTGD
+
+    DEPRECATED: deleted in future versions
+    Use Semantic UI instead
+--------------------------------------------*/
+.pagetitle
+{
+	font-family: @fontFamily;
+	font-variant: @lotgd_pTitleFontVariant;
+	font-size: @lotgd_pTitleFontSize;
+	color: @lotgd_pTitleTextColor;
+}

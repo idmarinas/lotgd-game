@@ -1,0 +1,35 @@
+/*******************************
+             Menu
+*******************************/
+
+/*-------------------
+      Collection
+--------------------*/
+
+/* Menu */
+@background:  @medium;
+
+
+/*--------------
+     States
+---------------*/
+
+/* Active Item */
+@activeItemBackground: @veryStrongTransparentBlack;
+@activeItemTextColor: @invertedSelectedTextColor;
+
+/* Active Hovered Item */
+@activeHoverItemBackground: @veryStrongTransparentBlack;
+@activeHoverItemColor: @invertedSelectedTextColor;
+
+@disabledTextColor: @invertedDisabledTextColor;
+
+/* Pagination */
+@paginationActiveTextColor: @invertedSelectedTextColor;
+
+/**
+ * LOTGD Styles
+ *
+ * The Legend of the Green Dragon
+ */
+ @import 'variables/menu.less';

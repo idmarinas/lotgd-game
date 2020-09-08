@@ -1,0 +1,19 @@
+/*******************************
+            Divider
+*******************************/
+
+/*-------------------
+       Element
+--------------------*/
+
+/* Text */
+@color: @invertedTextColor;
+
+
+/*******************************
+         Variations
+*******************************/
+
+/* Inverted */
+@invertedTextColor: @invertedMutedTextColor;
+@invertedHighlightColor: rgba(0, 0, 0, 0.15);

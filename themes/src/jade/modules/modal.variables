@@ -1,0 +1,17 @@
+/*******************************
+             Modal
+*******************************/
+
+@background: @pageBackground;
+
+/* Header */
+@headerBackground: transparent;
+@headerColor: @invertedTextColor;
+
+/* Content */
+@contentBackground: transparent;
+
+
+/* Modal Actions */
+@actionBackground: transparent;
+
