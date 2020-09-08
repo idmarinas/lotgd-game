@@ -51,19 +51,19 @@ define([
         {
             arr[name] = {
                 value: '',
-                set (value)
+                set (val)
                 {
-                    this.value = value
+                    this.value = val
                 },
 
-                get (param)
+                get (val)
                 {
                     if (this.value)
                     {
                         return this.value
                     }
 
-                    return param
+                    return val
                 }
             }
 
