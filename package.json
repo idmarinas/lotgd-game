@@ -102,7 +102,10 @@
     "scripts": {
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "build": "encore production --progress",
+        "lotgd-dev": "npm run dev && gulp",
+        "lotgd-prod": "npm run build && gulp --env prod",
+        "lotgd-zip": "npm run build && gulp --env prod --zip"
     },
     "browserslist": [
         "> 0.1%",
