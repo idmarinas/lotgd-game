@@ -16,7 +16,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **Webpack Encore** Now Core use Symfony Webpack-Encore to build JS and CSS of game.
     -   In this interaction can have many namespaces to build. Encore always build "lotgd" namespace.
         -   Note: Can use `webpack.config.custom-example.js` to create your own namespaces for your project (if you need).
-    -   Is a preview of new system of templates/themes of Game Core.
+    -   Is a preview of new system of templates and themes of Game Core.
         -   Note: the intention is to make the core more flexible when creating new themes for the game and to be able to create several themes at once.
 
 ### :fire: DEPRECATED
