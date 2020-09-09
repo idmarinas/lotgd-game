@@ -13,8 +13,8 @@
 # Actualmente haciendo esto
 - x
 
-# Para la versión 4.3.0
-- x
+# Para la versión 4.5.0
+- Mejorar el sistema de plantillas, para hacer la creación de temas mas sencillo
 
 ## Cosas pendientes
 -   Adaptar los formularios a zend-form
@@ -71,33 +71,3 @@ Permitir añadir al principio o al final de una categoria, añadir una categorí
 ## Doctrine
 
 Hacer que se pueda personalizar la configuración de Doctrine añadiendo más opciones, ejemplo: DoctrineORMModule para Zend
-
-
-### Comandos
-./vendor/bin/doctrine orm:convert:mapping annotation "entity" --namespace "Lotgd\Core\Entity\" --no-ansi --from-database --force
-
-./vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
-
-
-Analizar los archivos para buscar incompatibilidades
-./vendor/bin/phan -p -m="checkstyle" -o="phan.xml"
-./vendor/bin/phan -p -m="csv" -o="phan.csv"
-./vendor/bin/phan -p -m="csv" -o="phan.csv" --debug
-
-Add --debug/-D flag to generate verbose debug output.
-This is useful when looking into poor performance or unexpected behavior (e.g. infinite loops or crashes).
-
-<!-- Sin uso -->
-./vendor/bin/phpcs -p . --standard=PHPCompatibility --report-full
-vendor/bin/iniscan scan --format=html --output="D:\\Users\\idmar\\Documents\\Proyectos Web"
-
-
-#### Otro
-
-${extensionPath}\\php-cs-fixer.phar
-
-composer-require-checker check
-
-
-##### Generar los docs
-php phpDocumentor.phar -c phpdoc.dist.xml
