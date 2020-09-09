@@ -16,6 +16,7 @@ if (!Encore.isRuntimeEnvironmentConfigured())
 }
 
 Encore
+    //-- Set output and public path inside build/ dir
     .setOutputPath('public/build/example/')
     .setPublicPath('/build/example')
 
