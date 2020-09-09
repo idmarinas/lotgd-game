@@ -4,12 +4,11 @@ section:
     cache:
         description: 'Here are all the caches configured in the game.`n'
         for.core: 'Options for CORE cache "{coreCacheFolder}"'
-        cached:
-            0: 'Cache for "translations" are ALWAYS activated, for performance.'
-            1: 'Cache for "doctrine" are ALWAYS activated, for performance.'
-            2: 'Cache for "templates" are ALWAYS activated, for performance.'
-            3:  'Some parts of the game are cached, for performance reasons, such as configuration.'
-            union: '<br>'
+        cached: >
+            Cache for "translations" are ALWAYS activated, for performance.
+            Cache for "doctrine" are ALWAYS activated, for performance.
+            Cache for "templates" are ALWAYS activated, for performance.
+            Some parts of the game are cached, for performance reasons, such as configuration.
         button:
             optimize: Optimize cache
             expire: Clear expire cache
@@ -34,11 +33,11 @@ section:
                 delete: '`$Delete`0'
                 confirm: 'Are you sure you wish to delete this CronJob?'
         note:
-            info:
-                0: 'Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.'
-                1: 'This is de unique cronjob need create. Copy and change <strong>"/path/to/project"</strong> to where is the game installed. This cronjob execute all CronJobs in the game.<br>'
-                2: '* * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1'
-                union: '<br>'
+            info: |
+                Before activate this option, make sure you setup a cronjob on your machine confixx/plesk/cpanel or any other admin panel.
+                This is de unique cronjob need create. Copy and change <strong>"/path/to/project"</strong> to where is the game installed. This cronjob execute all CronJobs in the game.
+
+                * * * * * cd /path/to/project/public && php cronjob.php 1>> /dev/null 2>&1
             red: 'If you do not know what a Cronjob is... leave it turned off. If you want to know more... check out: <a class="ui red mini button" href="http://wiki.dragonprime.net/index.php?title=Cronjob">http://wiki.dragonprime.net/index.php?title=Cronjob</a>'
         form:
             button:
