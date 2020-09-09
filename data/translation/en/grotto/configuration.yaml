@@ -4,7 +4,7 @@ section:
     cache:
         description: 'Here are all the caches configured in the game.`n'
         for.core: 'Options for CORE cache "{coreCacheFolder}"'
-        cached: >
+        cached: |
             Cache for "translations" are ALWAYS activated, for performance.
             Cache for "doctrine" are ALWAYS activated, for performance.
             Cache for "templates" are ALWAYS activated, for performance.
