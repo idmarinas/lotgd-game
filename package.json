@@ -72,7 +72,7 @@
         "minimist": "^1.2.5",
         "node-sass": "^4.14.1",
         "normalize-path": "^3.0.0",
-        "postcss-loader": "^3.0.0",
+        "postcss-loader": "^4.0.1",
         "sass-loader": "^8.0.2",
         "terser-webpack-plugin": "^4.1.0",
         "url-loader": "^4.1.0",
