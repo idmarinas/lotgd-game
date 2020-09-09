@@ -17,10 +17,11 @@ use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Template\Theme as TemplateTheme;
+use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
-use Twig\RuntimeLoader\FactoryRuntimeLoader;
 use Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension;
+use Twig\RuntimeLoader\FactoryRuntimeLoader;
 
 class Theme implements FactoryInterface
 {
@@ -28,6 +29,7 @@ class Theme implements FactoryInterface
     {
         $config  = $container->get('GameConfig');
         $options = $config['lotgd_core'] ?? [];
+        $assets  = $container->get('webpack_encore.packages');
 
         $template = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
             'debug' => (bool) ($options['development'] ?? false),
@@ -52,13 +54,13 @@ class Theme implements FactoryInterface
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
 
-        if ( ! empty($extensions) && is_array($extensions))
+        if ( ! empty($extensions) && \is_array($extensions))
         {
             foreach ($extensions as $className)
             {
                 $extension = new $className();
 
-                if (method_exists($extension, 'setContainer'))
+                if (\method_exists($extension, 'setContainer'))
                 {
                     $extension->setContainer($container);
                 }
@@ -68,6 +70,7 @@ class Theme implements FactoryInterface
         }
 
         $template->addExtension(new EntryFilesTwigExtension($container));
+        $template->addExtension(new AssetExtension($assets['packages']));
 
         //-- Important
         $template->prepareTheme();
