@@ -1,0 +1,22 @@
+/*******************************
+        Site Overrides
+*******************************/
+
+//-- Special format for blockquotes
+@variations: {
+    @positive: @positiveHeaderColor;
+    @negative: @negativeHeaderColor;;
+    @info: @infoHeaderColor;
+    @warning: @warningHeaderColor;
+    @error: @errorHeaderColor;
+    @success: @successHeaderColor;
+}
+
+each(@variations,
+{
+    @color: replace(@key, '@', '');
+    .ui.@{color}.message blockquote
+    {
+        border-color: @value;
+    }
+})

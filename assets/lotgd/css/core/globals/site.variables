@@ -117,7 +117,7 @@
 --------------------*/
 
 /* For source only. */
-@imagePath : '../../../../../themes/src/jade/assets/images';
+@imagePath : '../../../../../assets/lotgd/css/core/assets/images';
 @fontPath  : '../assets/fonts';
 
 
