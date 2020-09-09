@@ -40,27 +40,27 @@ if ('' == $op)
 
     foreach ($params['companions'] as $row)
     {
-        if ($row->getCompanioncostgold() || $row->getCompanioncostgems())
+        if ($row['companioncostgold'] || $row['companioncostgems'])
         {
             $link = '';
             $navParams = [
                 'params' => [
-                    'name' => $row->getName(),
-                    'costGold' => $row->getCompanioncostgold(),
-                    'costGems' => $row->getCompanioncostgems()
+                    'name' => $row['name'],
+                    'costGold' => $row['companioncostgold'],
+                    'costGems' => $row['companioncostgems']
                 ]
             ];
 
-            if ($session['user']['gold'] >= $row->getCompanioncostgold() && $session['user']['gems'] >= $row->getCompanioncostgems() && ! isset($companions[$row->getName()]))
+            if ($session['user']['gold'] >= $row['companioncostgold'] && $session['user']['gems'] >= $row['companioncostgems'] && ! isset($companions[$row['name']]))
             {
-                $link = "mercenarycamp.php?op=buy&id={$row->getCompanionid()}";
+                $link = "mercenarycamp.php?op=buy&id={$row['companionid']}";
             }
 
             \LotgdNavigation::addNav('nav.companion.cost', $link, $navParams);
         }
-        elseif (! isset($companions[$row->getName()]))
+        elseif (! isset($companions[$row['name']]))
         {
-            \LotgdNavigation::addNav($row->getName(), "mercenarycamp.php?op=buy&id={$row['companionid']}", ['translate' => false]);
+            \LotgdNavigation::addNav($row['name'], "mercenarycamp.php?op=buy&id={$row['companionid']}", ['translate' => false]);
         }
     }
 
