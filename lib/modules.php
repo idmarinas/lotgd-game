@@ -346,6 +346,8 @@ function module_compare_versions($a, $b)
  */
 function module_condition($condition)
 {
+    global $session;
+
     $result = eval($condition);
 
     return (bool) $result;
