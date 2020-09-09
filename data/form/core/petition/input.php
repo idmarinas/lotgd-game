@@ -11,7 +11,7 @@ return [
         'id'           => 'petition',
     ],
     'options' => [
-        'translator_text_domain' => 'form-core-petition', // This is necesary for translate all labels of form
+        'translator_text_domain' => 'form-core-jaxon-petition', // This is necesary for translate all labels of form
         // Csrf element (to prevent Cross Site Request Forgery attacks)
         // It is extremely recommended to add this element in all forms
         'use_csrf_security' => true, // true|false - Default value is true
