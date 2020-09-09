@@ -54,6 +54,7 @@ return [
             Lotgd\Core\Http\Request::class  => InvokableFactory::class,
             Lotgd\Core\Http\Response::class => Factory\Http\Response::class,
             'webpack_encore.tag_renderer'   => Factory\Template\Encore::class,
+            'webpack_encore.packages'       => Factory\Template\Packages::class,
         ],
     ],
 ];
