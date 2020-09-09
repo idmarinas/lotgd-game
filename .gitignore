@@ -210,9 +210,6 @@ $RECYCLE.BIN/
 
 ### LoTGD ignores ###
 
-# Ignore all files/folders that end in .dist
-*.dist
-
 # Ignore all content of assets folder except lotgd folder and .gitkeep file (This ignore custom content)
 assets/**
 !/assets/**/
@@ -244,5 +241,8 @@ assets/**
 cli-config.php
 phan.csv
 /public/build/
+
+# Ignore all files/folders that end in .dist
+*.dist
 
 #  END LoTGD ignores
