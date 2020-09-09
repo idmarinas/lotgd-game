@@ -21,13 +21,21 @@ Encore
         fonts: 'fonts/[name].[hash:8].[ext]'
     })
 
+    // Copy files of images
+    .copyFiles({
+        from: './assets/lotgd/css/core/assets/images/',
+        // optional target path, relative to the output dir
+        // if versioning is enabled, add the file hash too
+        to: 'images/[path][name].[hash:8].[ext]'
+    })
+
     //-- Add alias for some files
     .addAliases({
         'sweetalert2.css$': 'sweetalert2/src/sweetalert2.scss',
         'tagify.scss$': '@yaireo/tagify/src/tagify.scss',
         '../../theme.config$': require('path').join(
             __dirname,
-            './themes/theme.config'
+            './assets/lotgd/theme.config'
         )
     })
 
@@ -42,9 +50,9 @@ Encore
      */
     //-- This is the global entry used in all pages
     .addEntry('lotgd', './assets/lotgd/lib/index.js')
+    .addEntry('lotgd_theme', './assets/lotgd/lotgd.less')//-- Default theme
     .addEntry('cookie_guard', './assets/lotgd/js/cookie/index.js')
-    .addEntry('semantic_javascripts', './node_modules/fomantic-ui/dist/semantic.js')
-    .addEntry('lotgd_theme', './themes/lotgd.less')//-- Default theme
+    .addEntry('semantic_ui', './node_modules/fomantic-ui/dist/semantic.js')
 
     /*
      * FEATURE CONFIG
