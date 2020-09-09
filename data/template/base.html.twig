@@ -13,6 +13,7 @@
         <title>{% block lotgd_head_title %}{{ page_title(title) }}{% endblock %}</title>
 
         {{ encore_entry_link_tags('lotgd', null, 'lotgd') }}
+        {{ encore_entry_link_tags('semantic_ui', null, 'lotgd') }}
         {% block lotgd_head_theme_css %}
             {# Favicon can custom per theme #}
             <link rel="shortcut icon" href="favicon.png" type="image/png" />
@@ -42,7 +43,7 @@
 
         {% block lotgd_footer_theme_css %}{% endblock %}
 
-        {{ encore_entry_script_tags('semantic_javascripts', null, 'lotgd') }}
+        {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
         {% block lotgd_footer_theme_js %}{% endblock %}
     </body>
 </html>
