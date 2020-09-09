@@ -7,8 +7,8 @@ description: >
 
 trade.in: >
     `7You stroll up the counter and try your best to look like you know what most of these contraptions do.
-    `!MightyE`7 looks at you and says, \"`#I'll give you `^{value,number}`# trade-in value for your `5{weaponName}`#.
-    Just click on the weapon you wish to buy, what ever 'click' means`7,\" and looks utterly confused.
+    `!MightyE`7 looks at you and says, "`#I'll give you `^{value,number}`# trade-in value for your `5{weaponName}`#.
+    Just click on the weapon you wish to buy, what ever 'click' means`7," and looks utterly confused.
     He stands there a few seconds, snapping his fingers and wondering if that is what is meant by "click," before returning to his work: standing there and looking good.`n`n
 
 nosuchweapon: "`!MightyE`0 `7looks at you, confused for a second, then realizes that you've apparently taken one too many bonks on the head, and nods and smiles.`0"

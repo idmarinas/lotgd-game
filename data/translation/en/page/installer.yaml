@@ -168,7 +168,7 @@ stage6:
     initial:
         paragraph: >
             `c`b`@Writing your "{file}" file`0´b´c
-            `2I'm attempting to write a file named \"{file}\" to your site root.`0
+            `2I'm attempting to write a file named "{file}" to your site root.`0
             `2This file tells LoGD how to connect to the database, and is necessary to continue installation.`0`n
         success: '`n`@Success!`0`2  I was able to write your "{file}" file, you can continue on to the next step.`0'
         failure: >
