@@ -35,6 +35,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :wrench: FIXES
 
 -   **src/ajax/core/Petition.php** Fixed error with undefined vars.
+-   **public/mercenarycamp.php** Fixed error with: Call to a member function on array
+-   **Forms**
+    -   **data/form/core/petition/input.php** Fixed error with text domain
+-   **Translations** Fixed error, now use new folded Yaml format
+    -   **data/translation/en/grotto/configuration.yaml**
 
 ### :x: REMOVES
 
