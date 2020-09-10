@@ -21,6 +21,8 @@ use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension;
+use Twig\Extension\ProfilerExtension;
+use Twig\Profiler\Profile;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
 
 class Theme implements FactoryInterface
@@ -71,6 +73,14 @@ class Theme implements FactoryInterface
 
         $template->addExtension(new EntryFilesTwigExtension($container));
         $template->addExtension(new AssetExtension($assets['packages']));
+
+        if ($options['development'] ?? false)
+        {
+            $profile = new Profile();
+            $template->addExtension(new ProfilerExtension($profile));
+
+            \Idmarinas\TracyBar\TwigBar::init($profile);
+        }
 
         //-- Important
         $template->prepareTheme();
