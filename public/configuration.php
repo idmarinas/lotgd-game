@@ -40,7 +40,12 @@ switch ($type_setting)
 
         $options = LotgdLocator::get('GameConfig');
 
-        $params['gameCaches'] = $options['caches'];
+        $params['gameCaches'] = [
+            'twigtemplates' => [
+                'title'       => 'Twig Templates',
+                'description' => 'Cache for Twig templates.',
+            ],
+        ] + $options['caches'];
     break;
     case 'cronjob':
         $params['tpl'] = 'cronjob';

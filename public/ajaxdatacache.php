@@ -1,18 +1,39 @@
 <?php
 
+use Lotgd\Core\Component\Filesystem;
+use Tracy\Debugger;
+
 global $session, $fiveminuteload;
 
-define('ALLOW_ANONYMOUS', false);
-define('OVERRIDE_FORCED_NAV', true);
+\define('ALLOW_ANONYMOUS', false);
+\define('OVERRIDE_FORCED_NAV', true);
 
 require_once 'common.php';
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op    = (string) \LotgdHttp::getQuery('op');
 $class = (string) \LotgdHttp::getQuery('cache');
 
 $textDomain = 'ajax-datacache';
 
-if (\LotgdLocator::has($class))
+if ('twigtemplates' == $class)
+{
+    $file = new Filesystem();
+
+    try
+    {
+        $file->remove('storage/cache/template/');
+        $file->mkdir('storage/cache/template/');
+
+        echo 'ok';
+    }
+    catch (\Throwable $th)
+    {
+        Debugger::log($th);
+
+        echo 'fail';
+    }
+}
+elseif (\LotgdLocator::has($class))
 {
     $cache = \LotgdLocator::get($class);
 
