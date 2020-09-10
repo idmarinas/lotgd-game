@@ -72,6 +72,7 @@
         "twig/twig": "^2.13"
     },
     "require-dev": {
+        "idmarinas/tracy-twig-bar": "^0.1.0",
         "macfja/tracy-doctrine-sql": "dev-master",
         "milo/vendor-versions": "^1.1",
         "phan/phan": "^3.2"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "614f1a23671b1476175bd190eb665d32",
+    "content-hash": "507c7b492fbfb7ae66a2350eb1bf1b79",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -8715,6 +8715,59 @@
             ],
             "description": "A more advanced JSONRPC implementation",
             "time": "2020-03-11T15:21:41+00:00"
+        },
+        {
+            "name": "idmarinas/tracy-twig-bar",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/idmarinas/tracy-twig-bar.git",
+                "reference": "8494bf91f99fbf52b43053f588dbb2354125bd30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/idmarinas/tracy-twig-bar/zipball/8494bf91f99fbf52b43053f588dbb2354125bd30",
+                "reference": "8494bf91f99fbf52b43053f588dbb2354125bd30",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "tracy/tracy": "^2.7",
+                "twig/twig": "^2.0 || ^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Idmarinas\\TracyPanel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "IDMarinas",
+                    "email": "35842929+idmarinas@users.noreply.github.com",
+                    "homepage": "https://github.com/idmarinas/lotgd-game",
+                    "role": "Developer, Maintainer"
+                }
+            ],
+            "description": "A Tracy panel for Twig templates",
+            "keywords": [
+                "bar",
+                "debugger",
+                "panel",
+                "tracy",
+                "twig"
+            ],
+            "funding": [
+                {
+                    "url": "https://liberapay.com/idmarinas",
+                    "type": "liberapay"
+                }
+            ],
+            "time": "2020-09-10T15:31:02+00:00"
         },
         {
             "name": "macfja/tracy-doctrine-sql",
