@@ -79,7 +79,7 @@ class Theme implements FactoryInterface
             $profile = new Profile();
             $template->addExtension(new ProfilerExtension($profile));
 
-            \Idmarinas\TracyBar\TwigBar::init($profile);
+            \Idmarinas\TracyPanel\TwigBar::init($profile);
         }
 
         //-- Important
