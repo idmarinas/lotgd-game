@@ -22,7 +22,7 @@ if ('twigtemplates' == $class)
     try
     {
         $file->remove('storage/cache/template/');
-        $file->mkdir('storage/cache/template/');
+        $file->dumpFile('storage/cache/template/.gitkeep', '');
 
         echo 'ok';
     }
