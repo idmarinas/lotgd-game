@@ -18,6 +18,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Note: Can use `webpack.config.custom-example.js` to create your own namespaces for your project (if you need).
     -   Is a preview of new system of templates and themes of Game Core.
         -   Note: the intention is to make the core more flexible when creating new themes for the game and to be able to create several themes at once.
+-   **Configuration cache** Now can clear Twig template cache.
+    -   Note: all buttons have the same effect, emptying the template cache directory.
 
 ### :fire: DEPRECATED
 
