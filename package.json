@@ -74,7 +74,6 @@
         "normalize-path": "^3.0.0",
         "postcss-loader": "^3.0.0",
         "sass-loader": "^9.0.1",
-        "terser-webpack-plugin": "^4.1.0",
         "url-loader": "^4.1.0",
         "webpack-notifier": "^1.8.0"
     },
