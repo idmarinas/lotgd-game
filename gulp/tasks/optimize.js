@@ -29,8 +29,8 @@ module.exports = function (callback)
                 normalize(config.paths.build + '/config/development{,/**}'),
                 normalize(config.paths.build + '/config/local/dbconnect.php'),
                 normalize(config.paths.build + '/config{,/**}/development{,.*}.*'),
-                normalize('!' + config.paths.build + '/composer.{json,lock}'), //-- Can use in prod server to optimize-autoloader
-                normalize('!' + config.paths.build + '/vendor/**')
+                normalize('!' + config.paths.build + '/lotgd-check-requeriments-*.php'), //-- Ignore all files: check requeriments
+                normalize('!' + config.paths.build + '/composer.{json,lock}') //-- Can use in prod server to optimize-autoloader
             ])
 
             fancyLog.info('Deleted files and directories:\n', deletedPaths.join('\n'))
