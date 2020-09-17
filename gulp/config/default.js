@@ -6,7 +6,8 @@ module.exports = {
     paths: {
         semantic: 'semantic/dist', //-- Directory of compiled files of Semantic UI
         //-- Directory for construct game
-        build: path.resolve(__dirname, '../../dist')
+        build: path.resolve(__dirname, '../../dist'),
+        skeleton: path.resolve(__dirname, '../../skeleton')
     },
     files: {
         //-- Files to copy
@@ -27,6 +28,30 @@ module.exports = {
             '!bower_components{,/**}',
             //-- Ignore because using composer to update all packages
             '!vendor{,/**}'
+        ],
+        skeleton: [
+            //-- All files includin subdirectories
+            '**{,/**,/.gitkeep}',
+            //-- Ignore files of development
+            '!{docs,gulp,release}{,/**}',
+            // '!config/autoload/local/dbconnect.php', //-- Ignore local dbconnect file
+            //-- Ignore folders not need for skeleton
+            '!{error_docs,lib,modules}{,/**}',
+            //-- Ignore files of core
+            '!config/autoload/global{,/**}',
+            '!cronjob/*.php',
+            '!data/form/core{,/**}',
+            '!public{,/**}',
+            'public/**/.gitkeep', //-- Only copy .gitkeep
+            '!public/js{,/*.js}',
+            '!src/core{,/**}',
+            '!src/ajax/core{,/**}',
+            '!src/ajax/pattern/core{,/**}',
+            '!templates/{base,core,jaxon,semantic}{,/**}',
+            //-- Ignore dependency directories
+            '!{bower_components,node_modules,vendor}{,/**}',
+            //-- Ignore all dist folders
+            '!{*.,}dist{,/**}'
         ]
     }
 }
