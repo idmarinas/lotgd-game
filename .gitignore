@@ -211,10 +211,15 @@ $RECYCLE.BIN/
 ### LoTGD ignores ###
 
 # Ignore all content of assets folder except lotgd folder and .gitkeep file (This ignore custom content)
-assets/**
+/assets/**
 !/assets/**/
 !/assets/lotgd/**
 !/assets/**/.gitkeep
+
+# Ignore local config
+/config/autoload/local/**
+!/config/autoload/local/**/
+!/config/autoload/local/.gitkeep
 
 # Ignore all content of themes folder except lotgd folder and .gitkeep file (This ignore custom content)
 /themes/src/**
@@ -224,12 +229,18 @@ assets/**
 # This is only for compare with version of Fomantic UI
 !/themes/src/semantic/**
 
-# Ignore local content of LoTGD
-/src/ajax/local/
+# Ignore local content of LoTGD (except .gitkeep)
+/src/ajax/local/**
+/src/ajax/local/**/
 !/src/ajax/local/README.md
-/src/local/
+!/src/ajax/local/**/.gitkeep
+/src/ajax/pattern/local/**
+/src/ajax/pattern/local/**/
+!/src/ajax/pattern/local/**/.gitkeep
+/src/local/**
+!/src/local/**/
 !/src/local/README.md
-!/src/local/Entity/.gitkeep
+!/src/local/**/.gitkeep
 
 # Ignore all content of storage folder except .gitkeep file
 /storage/**
@@ -244,5 +255,8 @@ phan.csv
 
 # Ignore all files/folders that end in .dist
 *.dist
+
+# Ignore skeleton generated
+skeleton/
 
 #  END LoTGD ignores
