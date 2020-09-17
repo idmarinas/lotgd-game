@@ -11,7 +11,7 @@
  * @since 4.4.0
  */
 
-namespace Lotgd\Core;
+namespace Lotgd\Core\EventManager;
 
 use Laminas\EventManager\EventManager as LaminasEventManager;
 

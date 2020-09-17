@@ -13,20 +13,15 @@
 namespace Lotgd\Core\Factory;
 
 use Interop\Container\ContainerInterface;
-use Laminas\EventManager\SharedEventManager;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
-use Lotgd\Core\EventManager as CoreEventManager;
+use Lotgd\Core\EventManagerAware;
 
 class EventManager implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        return new CoreEventManager(new SharedEventManager());
-    }
+        $eventManager = new EventManagerAware();
 
-    public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
-    {
-        return $this($services, $requestedName);
+        return $eventManager->getEventManager();
     }
 }
