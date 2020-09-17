@@ -20,6 +20,7 @@ Encore
     .setOutputPath('public/build/example/')
     .setPublicPath('/build/example')
 
+    //-- Recomended how export CSS/JS/Images/Fonts files (Same structure as core)
     .configureFilenames({
         js: 'js/[name].[contenthash].js',
         css: 'css/[name].[contenthash].css',
@@ -30,8 +31,16 @@ Encore
     /*
      * ENTRY CONFIG
      */
-    //-- This is the global entry used in all pages
     .addEntry('example', './paht/to/file')
+
+    //-- Configure your THEME
+    .addEntry('KEY_NAME_FOR_THEME', './assets/DIR_NAME/lotgd.less')
+    .addAliases({ //-- Alias for your "theme.config" file
+        '../../theme.config$': require('path').join(
+            __dirname,
+            './assets/DIR_NAME/theme.config'
+        )
+    })
 
     /*
      * FEATURE CONFIG
@@ -53,8 +62,8 @@ Encore
         images: { limit: 4096 }
     })
 
-    .enableSassLoader()
-    .enableLessLoader()
+    .enableSassLoader() //-- Optional
+    .enableLessLoader() //-- This is required for Theme
     .enablePostCssLoader()
 
     .enableIntegrityHashes(Encore.isProduction())
