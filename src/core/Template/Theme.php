@@ -20,7 +20,7 @@ use Lotgd\Core\Exception;
 
 class Theme extends Base
 {
-    const TEMPLATES_BASE_DIR = 'data/template';
+    const TEMPLATES_BASE_DIR = 'templates';
 
     protected $themeName;
     protected $themefolder;
