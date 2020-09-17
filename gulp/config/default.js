@@ -34,7 +34,6 @@ module.exports = {
             '**{,/**,/.gitkeep}',
             //-- Ignore files of development
             '!{docs,gulp,release}{,/**}',
-            // '!config/autoload/local/dbconnect.php', //-- Ignore local dbconnect file
             //-- Ignore folders not need for skeleton
             '!{error_docs,lib,modules}{,/**}',
             //-- Ignore files of core
@@ -51,7 +50,9 @@ module.exports = {
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor}{,/**}',
             //-- Ignore all dist folders
-            '!{*.,}dist{,/**}'
+            '!{*.,}dist{,/**}',
+            //-- Ignore some files
+            '!*.{txt,TXT,csv}'
         ]
     }
 }
