@@ -37,7 +37,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
 
         $message = parent::translate($message, $textDomain, $locale);
 
-        if (is_array($message))
+        if (\is_array($message))
         {
             \Tracy\Debugger::log($message);
         }
@@ -62,7 +62,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
         //-- Added same default values
         if ($session['user']['loggedin'] ?? false)
         {
-            $parameters = array_merge([
+            $parameters = \array_merge([
                 'playerName' => $session['user']['name'] ?? '',
                 'playerSex'  => $session['user']['sex'] ?? '',
                 'location'   => $session['user']['location'] ?? '',
@@ -72,7 +72,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
         $locale     = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
         //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
-        $parameters = array_filter($parameters, [$this, 'cleanParameters']);
+        $parameters = \array_filter($parameters, [$this, 'cleanParameters']);
 
         $formatter = new \MessageFormatter($locale, $message);
 
@@ -191,15 +191,15 @@ class Translator extends ZendTranslator implements TranslatorInterface
         $domains = \explode('-', $namespace);
 
         //-- Base scope is page
-        if (count($domains) < 2)
+        if (\count($domains) < 2)
         {
             $domains[1] = $domains[0];
             $domains[0] = 'page';
         }
 
-        $filename = sprintf('data/translation/%s/%s.yaml', $locale, \implode('/', $domains));
+        $filename = \sprintf('translations/%s/%s.yaml', $locale, \implode('/', $domains));
 
-        if (is_file($filename))
+        if (\is_file($filename))
         {
             $loader = $this->getPluginManager()->get('Yaml');
 
