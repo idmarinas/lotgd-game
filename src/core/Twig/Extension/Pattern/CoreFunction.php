@@ -65,7 +65,7 @@ trait CoreFunction
      */
     public function getsetting($name, $default): ?string
     {
-        return getsetting($name, $default);
+        return $this->getLotgdSettings()->getSetting($name, $default);
     }
 
     /**

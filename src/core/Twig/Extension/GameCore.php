@@ -23,6 +23,7 @@ class GameCore extends AbstractExtension
     use PatternCore\Censor;
     use PatternCore\Container;
     use PatternCore\Sanitize;
+    use PatternCore\Settings;
     use PatternCore\Theme;
     use PatternCore\Translator;
     use Pattern\CoreFilter;
@@ -66,7 +67,8 @@ class GameCore extends AbstractExtension
         return [
             new TwigFunction('url', [$this, 'baseUrl']),
 
-            new TwigFunction('getsetting', [$this, 'getsetting']),
+            new TwigFunction('get_setting', [$this, 'getsetting']),
+            new TwigFunction('getsetting', [$this, 'getsetting']), // Alias
             new TwigFunction('modulehook', [$this, 'modulehook']),
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
             new TwigFunction('gametime', [$this, 'gametime']),
