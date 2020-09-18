@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\EventManager as CoreEventManager;
+use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 
 class EventManager
 {
