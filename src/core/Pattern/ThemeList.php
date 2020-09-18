@@ -23,7 +23,7 @@ trait ThemeList
      */
     public function getThemeList(): array
     {
-        $cacheKey = str_replace('\\', '-', ThemeList::class);
+        $cacheKey = 'lotgd-core-pattern-theme-list';
         $cache    = $this->getCache();
 
         $skins = $cache->getItem($cacheKey);
