@@ -76,8 +76,13 @@ trait CoreFunction
      *
      * @return mixed
      */
-    public function modulehook($name, $data = [])
+    public function triggerEvent($name, $data = [])
     {
+        $em = $this->getEventManager();
+
+        $data = $em->prepareArgs($data);
+        $em->trigger($name, null, $data);
+
         return modulehook($name, $data);
     }
 

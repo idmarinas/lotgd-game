@@ -22,6 +22,7 @@ class GameCore extends AbstractExtension
 {
     use PatternCore\Censor;
     use PatternCore\Container;
+    use PatternCore\EventManager;
     use PatternCore\Sanitize;
     use PatternCore\Settings;
     use PatternCore\Theme;
@@ -69,7 +70,8 @@ class GameCore extends AbstractExtension
 
             new TwigFunction('get_setting', [$this, 'getsetting']),
             new TwigFunction('getsetting', [$this, 'getsetting']), // Alias
-            new TwigFunction('modulehook', [$this, 'modulehook']),
+            new TwigFunction('trigger_event', [$this, 'triggerEvent']),
+            new TwigFunction('modulehook', [$this, 'triggerEvent']), // Alias
             new TwigFunction('is_valid_protocol', [$this, 'isValidProtocol']),
             new TwigFunction('gametime', [$this, 'gametime']),
             new TwigFunction('secondstonextgameday', [$this, 'secondstonextgameday']),
