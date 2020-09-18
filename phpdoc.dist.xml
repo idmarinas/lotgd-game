@@ -26,8 +26,6 @@
         <ignore>.phan/*</ignore>
         <ignore>.vscore/*</ignore>
         <ignore>assets/*</ignore>
-        <ignore>data/template/*</ignore>
-        <ignore>data/translation/*</ignore>
         <ignore>dist/*</ignore>
         <ignore>docs/*</ignore>
         <ignore>error_docs/*</ignore>
@@ -37,6 +35,8 @@
         <ignore>release/*</ignore>
         <ignore>semantic/*</ignore>
         <ignore>storage/*</ignore>
+        <ignore>templates/*</ignore>
+        <ignore>translations/*</ignore>
         <ignore>vendor/*</ignore>
     </files>
 </phpdocumentor>

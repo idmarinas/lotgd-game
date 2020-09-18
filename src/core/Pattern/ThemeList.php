@@ -31,7 +31,7 @@ trait ThemeList
         if ( ! is_array($skins))
         {
             // A generic way of allowing a theme to be selected.
-            $handle = @opendir('data/template');
+            $handle = @opendir('templates');
 
             // Template directory open failed
             if ( ! $handle)
