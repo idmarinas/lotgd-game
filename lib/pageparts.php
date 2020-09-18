@@ -50,6 +50,7 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
     $script = \LotgdHttp::getServer('SCRIPT_NAME');
     $script = \substr($script, 0, \strpos($script, '.'));
+    $module = (string) \LotgdHttp::getQuery('module');
 
     if ($script)
     {
@@ -60,24 +61,24 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
         if (isset($runheaders[$script]) && ! $runheaders[$script])
         {
-            modulehook('everyheader', ['script' => $script]);
+            $args = \LotgdEvent::prepareArgs(['script' => $script]);
+            \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER, null, $args);
+            modulehook('everyheader', $args);
 
             if ($session['user']['loggedin'] ?? false)
             {
-                modulehook('everyheader-loggedin', ['script' => $script]);
+                $args = \LotgdEvent::prepareArgs(['script' => $script]);
+                \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER_AUTHENTICATED, null, $args);
+                modulehook('everyheader-loggedin', $args);
             }
 
             $runheaders[$script] = true;
 
-            modulehook("header-{$script}");
+            $script = 'runmodule' == $script && $module ? $module : $script;
 
-            //-- If the script is runmodule use name of module to module hook
-            if ('runmodule' == $script && ($module = (string) \LotgdHttp::getQuery('module')))
-            {
-                // This modulehook allows you to hook directly into any module without
-                // the need to hook into header-runmodule and then checking for the required module.
-                modulehook("header-{$module}");
-            }
+            \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_HEADER_SCRIPT.$script);
+            //-- Only run one, if is a runmodule, use module name
+            modulehook("header-{$script}");
         }
     }
 
@@ -101,25 +102,30 @@ function page_footer($saveuser = true)
     global $output, $html, $session, $nopopups, $lotgdJaxon;
 
     //page footer module hooks
-    $script          = \LotgdHttp::getServer('SCRIPT_NAME');
-    $script          = \substr($script, 0, \strpos($script, '.'));
-    $replacementbits = modulehook("footer-{$script}", []);
+    $script = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script = \substr($script, 0, \strpos($script, '.'));
+    $module = (string) \LotgdHttp::getQuery('module');
+    $script = ('runmodule' == $script && $module) ? $module : $script;
 
-    if ('runmodule' == $script && ($module = (string) \LotgdHttp::getQuery('module')))
-    {
-        // This modulehook allows you to hook directly into any module without
-        // the need to hook into footer-runmodule and then checking for the required module.
-        $replacementbits = modulehook("footer-{$module}", $replacementbits);
-    }
+    $args = \LotgdEvent::prepareArgs(['script' => $script]);
+    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_FOOTER_SCRIPT.$script, null, $args);
+    //-- Only run one, if is a runmodule, use module name
+    $replacementbits = modulehook("footer-{$script}", $args);
+
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
     // Problem is 'script' is a valid replacement token, so.. use an
     // invalid one which we can then blow away.
     $replacementbits['__scriptfile__'] = $script;
-    $replacementbits                   = modulehook('everyfooter', $replacementbits);
+
+    $replacementbits = \LotgdEvent::prepareArgs($replacementbits);
+    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_FOOTER, null, $replacementbits);
+    $replacementbits = modulehook('everyfooter', $replacementbits);
 
     if (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     {
+        $replacementbits = \LotgdEvent::prepareArgs($replacementbits);
+        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
         $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
     }
 
@@ -732,6 +738,7 @@ function charstats($return = true)
             addcharstat(\LotgdTranslator::t('statistic.stat.creature', [], 'app-default'), $playermount['mountname'].'`0');
         }
 
+        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_STATS);
         modulehook('charstats');
 
         if ($return)
@@ -753,7 +760,9 @@ function charstats($return = true)
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
-        $list = modulehook('onlinecharlist', []);
+        $list = \LotgdEvent::prepareArgs([]);
+        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_ONLINE_LIST, null, $list);
+        $list = modulehook('onlinecharlist', $list);
 
         if (isset($list['handled']) && $list['handled'])
         {
