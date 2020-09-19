@@ -16,7 +16,7 @@ function char_cleanup($accountId, $type): bool
 
     // this function handles the grunt work of character cleanup.
     // Run any modules hooks who want to deal with character deletion
-    $return = modulehook('character-cleanup', [
+    $return = \LotgdEvent::prepareArgs([
         'entities' => [
             //-- Delete data from DataBase of all entities here
             // 'Entity:Name' => Backup: true|false,
@@ -29,6 +29,8 @@ function char_cleanup($accountId, $type): bool
         'acctid'  => $accountId,
         'deltype' => $type,
     ]);
+    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_CLEANUP, null, $return);
+    $return = modulehook('character-cleanup', $return);
 
     $accountRepository = \Doctrine::getRepository('LotgdCore:Accounts');
     $accountEntity     = $accountRepository->find($accountId);
@@ -107,7 +109,9 @@ function char_cleanup($accountId, $type): bool
                 $clanEntity     = $clanRepository->find($accountEntity->getCharacter()->getClanid());
 
                 //-- There are no other members, we need to delete the clan.
-                modulehook('clan-delete', ['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity]);
+                $return = \LotgdEvent::prepareArgs(['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity]);
+                \LotgdEvent::trigger(\Lotgd\Core\Event::EVEN_CLAN_DELETE, null, $return);
+                modulehook('clan-delete', $return);
 
                 \Doctrine::remove($clanEntity);
 
