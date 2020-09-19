@@ -18,28 +18,28 @@ function injectmodule($modulename, $force = false)
         return $injected_modules[$force][$modulename];
     }
 
-    $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
+    $modulename     = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
-    if (file_exists($modulefilename))
+    if (\file_exists($modulefilename))
     {
         try
         {
             $repository = \Doctrine::getRepository('LotgdCore:Modules');
-            $row = $repository->find($modulename);
+            $row        = $repository->find($modulename);
         }
         catch (\Exception $ex)
         {
             $row = null;
         }
 
-        if (! $force)
+        if ( ! $force)
         {
             //our chance to abort if this module isn't currently installed
             //or doesn't meet the prerequisites.
-            if (! $row)
+            if ( ! $row)
             {
-                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', [ 'module' => $modulename ], 'app-default'));
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', ['module' => $modulename], 'app-default'));
 
                 $injected_modules[$force][$modulename] = false;
 
@@ -48,7 +48,7 @@ function injectmodule($modulename, $force = false)
 
             if ($row && ! $row->getActive())
             {
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', [ 'module' => $modulename ], 'app-default'));
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', ['module' => $modulename], 'app-default'));
 
                 $injected_modules[$force][$modulename] = false;
 
@@ -59,27 +59,27 @@ function injectmodule($modulename, $force = false)
         require_once $modulefilename;
 
         $mostrecentmodule = $modulename;
-        $info = '';
+        $info             = '';
 
-        if (! $force)
+        if ( ! $force)
         {
             //avoid calling the function if we're forcing the module
             $fname = $modulename.'_getmoduleinfo';
-            $info = $fname();
+            $info  = $fname();
 
-            $info['requires'] = $info['requires'] ?? [];
-            $info['download'] = $info['download'] ?? '';
+            $info['requires']    = $info['requires']       ?? [];
+            $info['download']    = $info['download']       ?? '';
             $info['description'] = $info['description'] ?? '';
 
-            if (! is_array($info['requires']))
+            if ( ! \is_array($info['requires']))
             {
                 $info['requires'] = [];
             }
 
-            if (! module_check_requirements($info['requires']))
+            if ( ! module_check_requirements($info['requires']))
             {
                 $injected_modules[$force][$modulename] = false;
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', [ 'module' => $modulename ], 'app-default'));
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', ['module' => $modulename], 'app-default'));
 
                 return false;
             }
@@ -88,24 +88,24 @@ function injectmodule($modulename, $force = false)
         //check to see if the module needs to be upgraded.
         if ($row)
         {
-            $filemoddate = new \DateTime(date('Y-m-d H:i:s', filemtime($modulefilename)));
+            $filemoddate = new \DateTime(\date('Y-m-d H:i:s', \filemtime($modulefilename)));
 
             if ($row->getFilemoddate() != $filemoddate || '' == $row->getInfokeys() || '|' != $row->getInfokeys()[0] || '' == $row->getVersion())
             {
                 //the file mod time is still different from that
                 //recorded in the database, time to update the database
                 //and upgrade the module.
-                debug("The module $modulename was found to have updated, upgrading the module now.");
+                debug("The module {$modulename} was found to have updated, upgrading the module now.");
 
-                if (! is_array($info))
+                if ( ! \is_array($info))
                 {
                     //we might have gotten this info above, if not,
                     //we need it now.
                     $fname = "{$modulename}_getmoduleinfo";
-                    $info = $fname();
+                    $info  = $fname();
 
-                    $info['download'] = $info['download'] ?? '';
-                    $info['version'] = $info['version'] ?? '0.0';
+                    $info['download']    = $info['download']       ?? '';
+                    $info['version']     = $info['version']         ?? '0.0';
                     $info['description'] = $info['description'] ?? '';
                 }
 
@@ -125,7 +125,7 @@ function injectmodule($modulename, $force = false)
                 {
                     return false;
                 }
-                LotgdCache::removeItem("injections-inject-$modulename");
+                LotgdCache::removeItem("injections-inject-{$modulename}");
             }
         }
         $injected_modules[$force][$modulename] = true;
@@ -133,7 +133,7 @@ function injectmodule($modulename, $force = false)
         return true;
     }
 
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.unfound', [ 'module' => $modulename ], 'app-default'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.unfound', ['module' => $modulename], 'app-default'));
     $injected_modules[$force][$modulename] = false;
 
     return false;

@@ -40,11 +40,11 @@ function substitute($string, $extra = false, $extrarep = false)
 
     if (false !== $extra && false !== $extrarep)
     {
-        $search = array_merge($search, $extra);
-        $replace = array_merge($replace, $extrarep);
+        $search  = \array_merge($search, $extra);
+        $replace = \array_merge($replace, $extrarep);
     }
 
-    return str_replace($search, $replace, $string);
+    return \str_replace($search, $replace, $string);
 }
 
 function substitute_array($string, $extra = false, $extrarep = false)
@@ -63,7 +63,7 @@ function substitute_array($string, $extra = false, $extrarep = false)
         ($session['user']['sex'] ? 'she' : 'he'),
         ($session['user']['sex'] ? 'her' : 'his'),
     ];
-    $string = str_replace($search, $replace, $string);
+    $string = \str_replace($search, $replace, $string);
 
     $search = [
         '{goodguyweapon}',
@@ -93,30 +93,29 @@ function substitute_array($string, $extra = false, $extrarep = false)
 
     if (false !== $extra && false !== $extrarep)
     {
-        $search = array_merge($search, $extra);
-        $replace = array_merge($replace, $extrarep);
+        $search  = \array_merge($search, $extra);
+        $replace = \array_merge($replace, $extrarep);
     }
     $replacement_array = [$string];
 
     // Do this the right way.
     // Iterate the string and find the replacements in order
-    $length = strlen($replacement_array[0]);
+    $length = \strlen($replacement_array[0]);
 
-    for ($x = 0; $x < $length; $x++)
+    for ($x = 0; $x < $length; ++$x)
     {
-        reset($search);
+        \reset($search);
 
         foreach ($search as $skey => $sval)
         {
             // Get the replacement for this value.
             $rval = $replace[$skey];
 
-            if (substr($replacement_array[0], $x, strlen($sval)) == $sval)
+            if (\substr($replacement_array[0], $x, \strlen($sval)) == $sval)
             {
-                array_push($replacement_array, $rval);
-                $replacement_array[0] =
-                    substr($replacement_array[0], 0, $x).'%s'.
-                    substr($replacement_array[0], $x + strlen($sval));
+                \array_push($replacement_array, $rval);
+                $replacement_array[0] = \substr($replacement_array[0], 0, $x).'%s'.
+                    \substr($replacement_array[0], $x + \strlen($sval));
                 // Making a replacement changes the length, so we need to
                 // restart at the beginning of the string.
                 $x = -1;

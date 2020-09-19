@@ -1,7 +1,7 @@
 <?php
 
-$module = (string) \LotgdHttp::getQuery('module');
-$save = (string) \LotgdHttp::getQuery('save');
+$module    = (string) \LotgdHttp::getQuery('module');
+$save      = (string) \LotgdHttp::getQuery('save');
 $isLaminas = (string) \LotgdHttp::getQuery('laminas');
 
 $flashMessages = \LotgdTranslator::t('flash.message.module.fail.inject', [], $textDomain);
@@ -10,9 +10,9 @@ if (injectmodule($module, true))
 {
     $flashMessages = '';
 
-    if ('' != $save && !$isLaminas)
+    if ('' != $save && ! $isLaminas)
     {
-        $old = load_module_settings($module);
+        $old  = load_module_settings($module);
         $post = \LotgdHttp::getPostAll();
 
         process_post_save_data($post, $old, $flashMessages, $module, $textDomain);
@@ -20,19 +20,19 @@ if (injectmodule($module, true))
         $flashMessages .= \LotgdTranslator::t('flash.message.module.save.saved', [], $textDomain);
     }
 
-    $params['moduleName'] = $module;
-    $params['moduleInfo'] = get_module_info($module);
+    $params['moduleName']     = $module;
+    $params['moduleInfo']     = get_module_info($module);
     $params['moduleSettings'] = false;
 
     if (isset($params['moduleInfo']['settings']) && ! empty($params['moduleInfo']['settings']))
     {
         $params['moduleSettings'] = true;
-        $params['isLaminas'] = false;
+        $params['isLaminas']      = false;
         $params['isModuleActive'] = is_module_active($module);
-        $moduleSettings = load_module_settings($module);
+        $moduleSettings           = load_module_settings($module);
 
         //-- Check if is a Laminas Form setting
-        if (is_string($params['moduleInfo']['settings']))
+        if (\is_string($params['moduleInfo']['settings']))
         {
             $params['isLaminas'] = true;
 
@@ -64,26 +64,26 @@ if (injectmodule($module, true))
             }
         }
         // Is old form (array)
-        elseif (is_array($params['moduleInfo']['settings']) && count($params['moduleInfo']['settings']))
+        elseif (\is_array($params['moduleInfo']['settings']) && \count($params['moduleInfo']['settings']))
         {
             $processSettings = [];
 
             foreach ($params['moduleInfo']['settings'] as $key => $val)
             {
-                if (is_array($val))
+                if (\is_array($val))
                 {
-                    $v = $val[0];
-                    $x = explode('|', $v);
+                    $v      = $val[0];
+                    $x      = \explode('|', $v);
                     $val[0] = $x[0];
-                    $x[0] = $val;
+                    $x[0]   = $val;
                 }
                 else
                 {
-                    $x = explode('|', $val);
+                    $x = \explode('|', $val);
                 }
                 $processSettings[$key] = $x[0];
 
-                if (! isset($moduleSettings[$key]) && isset($x[1]))
+                if ( ! isset($moduleSettings[$key]) && isset($x[1]))
                 {
                     $moduleSettings[$key] = $x[1];
                 }
@@ -101,23 +101,23 @@ if ($flashMessages)
 
 function process_post_save_data($post, $old, &$flashMessages, $module, $textDomain)
 {
-    reset($post);
+    \reset($post);
 
     foreach ($post as $key => $val)
     {
         //-- Compatibility with Laminas Form and fieldsets
-        if (is_array($val))
+        if (\is_array($val))
         {
             process_post_save_data($val, $old, $flashMessages, $module, $textDomain);
 
             continue;
         }
 
-        $key = stripslashes($key);
-        $val = stripslashes($val);
+        $key = \stripslashes($key);
+        $val = \stripslashes($val);
         set_module_setting($key, $val, $module);
 
-        if (! isset($old[$key]) || $old[$key] != $val)
+        if ( ! isset($old[$key]) || $old[$key] != $val)
         {
             $flashMessages .= \LotgdTranslator::t('flash.message.module.save.change', ['key' => $key, 'newValue' => $val, 'oldValue' => $old[$key]], $textDomain);
             // Notify modules

@@ -6,7 +6,7 @@ if ('' != $setspecialty)
 {
     $session['user']['specialty'] = $setspecialty;
     modulehook('set-specialty');
-    \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
+    \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 }
 else
 {
@@ -28,6 +28,6 @@ page_header('title.specialty.not', [], $textDomain);
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
 
 $session['user']['specialty'] = 'MP';
-\LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
+\LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 
 page_footer();

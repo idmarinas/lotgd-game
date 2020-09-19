@@ -7,7 +7,7 @@
 function valid_dk_title($title, $dks, $gender)
 {
     $repository = \Doctrine::getRepository('LotgdCore:Titles');
-    $query = $repository->createQueryBuilder('u');
+    $query      = $repository->createQueryBuilder('u');
 
     $query
         ->where('u.dk <= :dk')
@@ -37,7 +37,7 @@ function valid_dk_title($title, $dks, $gender)
             return true;
         }
 
-        if (! $gender && ($row->getMale() == $title))
+        if ( ! $gender && ($row->getMale() == $title))
         {
             return true;
         }
@@ -117,7 +117,7 @@ function get_dk_title($dks, $gender, $ref = false)
 
     $row = $query->getResult()[0];
 
-    if (! $row)
+    if ( ! $row)
     {
         return '';
     }

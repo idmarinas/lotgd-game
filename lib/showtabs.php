@@ -17,20 +17,20 @@
  *                           callback recibe paraments $callback($content, $title)
  * @param bool     $browse   Indicate type of menu: tabular or browse menu
  */
-function lotgd_showtabs($tabs, $print = true, callable $callback = null, $browse = false)
+function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $browse = false)
 {
     static $showtab_id = 0;
 
-    $showtab_id++;
+    ++$showtab_id;
     $tab_id = 0;
 
-    $ulMenu = [];
+    $ulMenu    = [];
     $ulContent = '';
     $tabActive = '';
 
     foreach ($tabs as $title => $content)
     {
-        $tab_id++;
+        ++$tab_id;
 
         if (1 < $tab_id)
         {
@@ -38,37 +38,37 @@ function lotgd_showtabs($tabs, $print = true, callable $callback = null, $browse
         }
         else
         {
-            $class = 'active';
+            $class     = 'active';
             $tabActive = $title;
         }
 
-        if (! $browse)
+        if ( ! $browse)
         {
             $class = 'bottom attached '.$class;
         }
         //-- Title of tab
-        $ulMenu[] = sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
+        $ulMenu[] = \sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
 
         //-- Content of tab
-        if (! $callback)
+        if ( ! $callback)
         {
-            $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
+            $ulContent .= \sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $content);
         }
         else
         {
-            $ulContent .= sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $callback($content, $title));
+            $ulContent .= \sprintf('<div class="ui %s tab segment" data-tab="%s-%s">%s</div>', $class, $showtab_id, $tab_id, $callback($content, $title));
         }
     }
 
     $content = '';
 
-    if (! $browse)
+    if ( ! $browse)
     {
-        $content .= sprintf('<div class="ui top attached lotgd tabular menu">%s</div>', implode('', $ulMenu));
+        $content .= \sprintf('<div class="ui top attached lotgd tabular menu">%s</div>', \implode('', $ulMenu));
     }
     else
     {
-        $tabMenu = array_chunk($ulMenu, ceil(count($ulMenu) / 4));
+        $tabMenu = \array_chunk($ulMenu, \ceil(\count($ulMenu) / 4));
 
         $popupMenu = '<div class="ui flowing popup transition hidden lotgd form">';
         $popupMenu .= '<div class="ui four column relaxed divided grid">';
@@ -76,12 +76,12 @@ function lotgd_showtabs($tabs, $print = true, callable $callback = null, $browse
         foreach ($tabMenu as $menu)
         {
             $popupMenu .= '<div class="column"><div class="ui list">';
-            $popupMenu .= implode('', $menu);
+            $popupMenu .= \implode('', $menu);
             $popupMenu .= '</div></div>';
         }
         $popupMenu .= '</div></div>';
 
-        $content .= sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
+        $content .= \sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
             translate_inline('Browse'),
             $popupMenu,
             $tabActive
@@ -90,7 +90,7 @@ function lotgd_showtabs($tabs, $print = true, callable $callback = null, $browse
 
     $content .= $ulContent;
 
-    if (! $print)
+    if ( ! $print)
     {
         return $content;
     }

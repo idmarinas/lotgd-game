@@ -8,11 +8,9 @@ require_once 'lib/e_rand.php';
 require_once 'lib/substitute.php';
 
 /**
- * Select 1 taunt
+ * Select 1 taunt.
  *
  * @param array $extraParams
- *
- * @return array
  */
 function select_taunt($extraParams = []): array
 {
@@ -26,7 +24,7 @@ function select_taunt($extraParams = []): array
     //-- Check if found count
     if ('count' != $count)
     {
-        $rand = mt_rand(0, max(0, $count - 1));
+        $rand = \mt_rand(0, \max(0, $count - 1));
 
         $taunt = "0{$rand}";
     }
@@ -34,13 +32,13 @@ function select_taunt($extraParams = []): array
     $params = [
         //-- The player's name (also can be specified as goodGuy
         'goodGuyName' => $session['user']['name'],
-        'goodGuy' => $session['user']['name'],
+        'goodGuy'     => $session['user']['name'],
         //-- The player's weapon (also can be specified as weapon
         'goodGuyWeapon' => $session['user']['weapon'],
-        'weapon' => $session['user']['weapon'],
+        'weapon'        => $session['user']['weapon'],
         //-- The player's armor (also can be specified as armor
         'armorName' => $session['user']['armor'],
-        'armor' => $session['user']['armor'],
+        'armor'     => $session['user']['armor'],
         //-- Subjective pronoun for the player (him her)
         'himHer' => $session['user']['sex'] ? 'her' : 'him',
         //-- Possessive pronoun for the player (his her)
@@ -49,17 +47,17 @@ function select_taunt($extraParams = []): array
         'heShe' => $session['user']['sex'] ? 'she' : 'he',
         //-- The monster's name (also can be specified as badGuy
         'badGuyName' => $badguy['creaturename'],
-        'badGuy' => $badguy['creaturename'],
+        'badGuy'     => $badguy['creaturename'],
         //-- The monster's weapon (also can be specified as creatureWeapon
-        'badGuyWeapon' => $badguy['creatureweapon'],
-        'creatureWeapon' => $badguy['creatureweapon']
+        'badGuyWeapon'   => $badguy['creatureweapon'],
+        'creatureWeapon' => $badguy['creatureweapon'],
     ];
 
     $params = \array_merge($params, $extraParams);
 
     return [
-        'taunt' => $taunt,
-        'params' => $params,
-        'textDomain' => 'partial-taunt'
+        'taunt'      => $taunt,
+        'params'     => $params,
+        'textDomain' => 'partial-taunt',
     ];
 }

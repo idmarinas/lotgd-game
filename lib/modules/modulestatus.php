@@ -12,10 +12,10 @@ function module_status($modulename, ?string $version = null)
 {
     global $injected_modules;
 
-    $modulename = \LotgdSanitize::moduleNameSanitize($modulename);
+    $modulename     = \LotgdSanitize::moduleNameSanitize($modulename);
     $modulefilename = "modules/{$modulename}.php";
 
-    if (! file_exists($modulefilename))
+    if ( ! \file_exists($modulefilename))
     {
         // The module file doesn't exist.
         return MODULE_FILE_NOT_PRESENT;
@@ -25,7 +25,7 @@ function module_status($modulename, ?string $version = null)
     $status = MODULE_NOT_INSTALLED;
 
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
-    $row = $repository->findOneBy([ 'modulename' => $modulename ]);
+    $row        = $repository->findOneBy(['modulename' => $modulename]);
 
     if ($row)
     {
@@ -39,24 +39,24 @@ function module_status($modulename, ?string $version = null)
             // In this case, the module could have been force injected or
             // not.  We still want to mark it either way.
             if (
-                (array_key_exists($modulename, $injected_modules[0]) && $injected_modules[0][$modulename])
-                || (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
+                (\array_key_exists($modulename, $injected_modules[0]) && $injected_modules[0][$modulename])
+                || (\array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
             ) {
                 $status |= MODULE_INJECTED;
             }
         }
         // Force-injected modules can be injected but not active.
-        elseif (array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
+        elseif (\array_key_exists($modulename, $injected_modules[1]) && $injected_modules[1][$modulename])
         {
             $status |= MODULE_INJECTED;
         }
 
         // Check the version number
-        if (! $version)
+        if ( ! $version)
         {
             $status |= MODULE_VERSION_OK;
         }
-        elseif (! Composer\Semver\Semver::satisfies($row->getVersion(), $version))
+        elseif ( ! Composer\Semver\Semver::satisfies($row->getVersion(), $version))
         {
             $status |= MODULE_VERSION_TOO_LOW;
         }
@@ -94,8 +94,6 @@ function is_module_installed($modulename, $version = false)
 
 /**
  * Get status of module.
- *
- * @return array
  */
 function get_module_install_status(): array
 {
@@ -105,19 +103,19 @@ function get_module_install_status(): array
     {
         // Collect the names of all installed modules.
         $repository = \Doctrine::getRepository('LotgdCore:Modules');
-        $result = $repository->findAll();
+        $result     = $repository->findAll();
     }
 
-    $installedModules = [];
+    $installedModules    = [];
     $installedCategories = [];
-    $deactivedModules = [];
-    $activedModules = [];
+    $deactivedModules    = [];
+    $activedModules      = [];
 
     if ($result)
     {
         foreach ($result as $row)
         {
-            $installedModules["{$row->getModulename()}.php"] = true;
+            $installedModules["{$row->getModulename()}.php"]                                            = true;
             ${$row->getActive() ? 'activedModules' : 'deactivedModules'}["{$row->getModulename()}.php"] = true;
 
             $installedCategories[$row->getCategory()] = ($installedCategories[$row->getCategory()] ?? 0) + 1;
@@ -126,29 +124,31 @@ function get_module_install_status(): array
     }
 
     $uninstalledModules = [];
-    $files = array_map(function ($val) use ($installedModules) {
-        if (! isset($installedModules[basename($val)]))
+    $files              = \array_map(function ($val) use ($installedModules)
+    {
+        if ( ! isset($installedModules[\basename($val)]))
         {
             return $val;
         }
-    }, glob('modules/*.php'));
-    $files = array_filter($files);
+    }, \glob('modules/*.php'));
+    $files = \array_filter($files);
 
-    $uninstalled = count($files);
-    if (count($files))
+    $uninstalled = \count($files);
+
+    if (\count($files))
     {
-        foreach($files as $file)
+        foreach ($files as $file)
         {
-            $uninstalledModules[] = basename($file, '.php');
+            $uninstalledModules[] = \basename($file, '.php');
         }
     }
 
     return [
         'installedcategories' => $installedCategories,
-        'installedmodules' => $installedModules,
-        'uninstalledmodules' => $uninstalledModules,
-        'deactivedmodules' => $deactivedModules,
-        'activedmodules' => $activedModules,
-        'uninstcount' => $uninstalled
+        'installedmodules'    => $installedModules,
+        'uninstalledmodules'  => $uninstalledModules,
+        'deactivedmodules'    => $deactivedModules,
+        'activedmodules'      => $activedModules,
+        'uninstcount'         => $uninstalled,
     ];
 }

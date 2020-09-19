@@ -38,8 +38,8 @@ function rawoutput($indata)
 function output_notl($indata)
 {
     global $output;
-    $args = func_get_args();
-    call_user_func_array([$output, 'output_notl'], $args);
+    $args = \func_get_args();
+    \call_user_func_array([$output, 'output_notl'], $args);
 }
 
 /**
@@ -53,8 +53,8 @@ function output()
 {
     global $output;
 
-    $args = func_get_args();
-    call_user_func_array([$output, 'output'], $args);
+    $args = \func_get_args();
+    \call_user_func_array([$output, 'output'], $args);
 }
 
 /**

@@ -4,13 +4,13 @@ class ServerFunctions
 {
     public static function isTheServerFull()
     {
-        if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
+        if (\abs(getsetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
         {
             $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-            $counter = $repository->count([ 'locked' => 0, 'loggedin' => 1 ]);
+            $counter    = $repository->count(['locked' => 0, 'loggedin' => 1]);
 
             savesetting('OnlineCount', $counter);
-            savesetting('OnlineCountLast', strtotime('now'));
+            savesetting('OnlineCountLast', \strtotime('now'));
         }
 
         $onlinecount = (int) getsetting('OnlineCount', 0);
@@ -26,17 +26,17 @@ class ServerFunctions
     public static function resetAllDragonkillPoints($acctid = false)
     {
         $repository = \Doctrine::getRepository('LotgdCore:Characters');
-        $query = $repository->createQueryBuilder('u');
+        $query      = $repository->createQueryBuilder('u');
 
         $query->where("u.dragonpoints <> ''");
 
-        if (is_numeric($acctid))
+        if (\is_numeric($acctid))
         {
             $query->addWhere('u.acct = :acct')
                 ->setParamater('acct', $acctid)
             ;
         }
-        elseif (is_array($acctid))
+        elseif (\is_array($acctid))
         {
             $query->addWhere('u.acct IN (:acct)')
                 ->setParamater('acct', $acctid)
@@ -55,7 +55,7 @@ class ServerFunctions
                 continue;
             } //-- Not do nothing if is an empty array
 
-            $distribution = array_count_values($dkpoints);
+            $distribution = \array_count_values($dkpoints);
 
             $entity->setDragonpoints([])
                 ->setStrength($entity->getStrength() - (int) $distribution['str'])

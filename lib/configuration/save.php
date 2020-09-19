@@ -3,6 +3,7 @@
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
 $flashMessages = '';
+
 if (1 == (int) $postSettings['blockdupeemail'] && 1 != (int) $postSettings['requirevalidemail'])
 {
     $postSettings['requirevalidemail'] = 1;
@@ -57,16 +58,16 @@ if ($postSettings['innname'] && $postSettings['innname'] != getsetting('innname'
     }
 }
 
-$old = $settings->getArray();
+$old     = $settings->getArray();
 $current = $settings->getArray();
 
 foreach ($postSettings as $key => $val)
 {
-    $val = stripslashes($val);
+    $val = \stripslashes($val);
 
-    if (! isset($current[$key]) || ($val != $current[$key]))
+    if ( ! isset($current[$key]) || ($val != $current[$key]))
     {
-        if (! isset($old[$key]))
+        if ( ! isset($old[$key]))
         {
             $old[$key] = '';
         }
@@ -75,7 +76,7 @@ foreach ($postSettings as $key => $val)
 
         $flashMessages .= \LotgdTranslator::t('flash.message.default.save.change.setting', ['key' => $key, 'oldValue' => $old[$key], 'newValue' => $val], $textDomain);
 
-        gamelog("`@Changed core setting `^$key`@ from `#{$old[$key]}`@ to `&$val`0", 'settings');
+        gamelog("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
 
         // Notify every module
         modulehook('changesetting', ['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val], true);

@@ -1,13 +1,14 @@
 <?php
 
-$type = (string) \LotgdHttp::getPost('type');
-$valueIp = (string) \LotgdHttp::getPost('ip');
-$valueId = (string) \LotgdHttp::getPost('id');
+$type         = (string) \LotgdHttp::getPost('type');
+$valueIp      = (string) \LotgdHttp::getPost('ip');
+$valueId      = (string) \LotgdHttp::getPost('id');
 $durationDays = (int) \LotgdHttp::getPost('duration');
-$durationDays = max(0, $durationDays); //-- Min value is 0
-$reason = (string) \LotgdHttp::getPost('reason');
+$durationDays = \max(0, $durationDays); //-- Min value is 0
+$reason       = (string) \LotgdHttp::getPost('reason');
 
 $duration = new \DateTime('0000-00-00');
+
 if ($durationDays)
 {
     $duration = new \DateTime('now');
@@ -15,11 +16,11 @@ if ($durationDays)
 }
 
 $process = true;
-if ('ip' == $type && substr(\LotgdHttp::getServer('REMOTE_ADDR'), 0, strlen($valueIp)) == $valueIp)
+
+if ('ip' == $type && \substr(\LotgdHttp::getServer('REMOTE_ADDR'), 0, \strlen($valueIp)) == $valueIp)
 {
     $process = false;
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('saveban.yourself.ip', [], $textDomain));
-
 }
 elseif ('id' == $type && \LotgdHttp::getCookie('lgi') == $valueId)
 {
@@ -29,9 +30,9 @@ elseif ('id' == $type && \LotgdHttp::getCookie('lgi') == $valueId)
 
 if ($process)
 {
-    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
+    $repository     = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
     $repositoryAcct = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
-    $entity = new \Lotgd\Core\Entity\Bans();
+    $entity         = new \Lotgd\Core\Entity\Bans();
 
     $entity->setBanner($session['user']['name'])
         ->setBanreason($reason)
@@ -45,7 +46,7 @@ if ($process)
         \Doctrine::merge($entity);
         \Doctrine::flush();
 
-        debuglog(sprintf('entered a ban: %s. Ends after: %s, Reason: %s.',
+        debuglog(\sprintf('entered a ban: %s. Ends after: %s, Reason: %s.',
             ('ip' == $type ? "IP: {$valueIp}" : "ID: {$valueId}"),
             $duration->format('Y-m-d'),
             $reason

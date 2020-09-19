@@ -8,7 +8,7 @@
 modulehook('newday-runonce', []);
 
 //only if not done by cron
-if (! getsetting('newdaycron', 0))
+if ( ! getsetting('newdaycron', 0))
 {
     require_once 'lib/gamelog.php';
 

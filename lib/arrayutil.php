@@ -14,6 +14,8 @@
  * @version Lotgd 1.1.2 DragonPrime Edition
  *
  * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ *
+ * @param mixed $array
  */
 /**
  * Turns the given parameter into a string.
@@ -31,9 +33,9 @@
  */
 function createstring($array)
 {
-    if (is_array($array) || is_object($array))
+    if (\is_array($array) || \is_object($array))
     {
-        $out = serialize($array);
+        $out = \serialize($array);
     }
     else
     {

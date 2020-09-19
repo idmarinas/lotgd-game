@@ -5,11 +5,11 @@
 // mail ready
 
 /**
- * Check if given email is valid
+ * Check if given email is valid.
  *
  * @param string $email
  *
- * @return boolean
+ * @return bool
  */
 function is_email($email)
 {

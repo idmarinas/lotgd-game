@@ -6,15 +6,15 @@
 function safeescape($input)
 {
     $prevchar = '';
-    $out = '';
+    $out      = '';
 
-    for ($x = 0; $x < strlen($input); $x++)
+    for ($x = 0; $x < \strlen($input); ++$x)
     {
-        $char = substr($input, $x, 1);
+        $char = \substr($input, $x, 1);
 
         if (("'" == $char || '"' == $char) && '\\' != $prevchar)
         {
-            $char = "\\$char";
+            $char = "\\{$char}";
         }
         $out .= $char;
         $prevchar = $char;

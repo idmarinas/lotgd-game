@@ -9,7 +9,7 @@ function saveuser($update_last_on = true)
     global $session, $companions;
 
     //-- It's defined as not save user, Not are a user logged in or not are defined id of account
-    if (defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
+    if (\defined('NO_SAVE_USER') || ! ($session['loggedin'] ?? false) || ! ($session['user']['acctid'] ?? false))
     {
         return false;
     }
@@ -25,7 +25,7 @@ function saveuser($update_last_on = true)
         $session['user']['laston'] = new DateTime('now');
     }
 
-    if (isset($companions) && is_array($companions))
+    if (isset($companions) && \is_array($companions))
     {
         $session['user']['companions'] = $companions;
     }
@@ -33,7 +33,7 @@ function saveuser($update_last_on = true)
     $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
 
     $everypage = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\AccountsEverypage());
-    $account = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Accounts());
+    $account   = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Accounts());
     $character = $hydrator->hydrate($session['user'], new \Lotgd\Core\Entity\Characters());
 
     $account->setCharacter($character);
@@ -47,7 +47,7 @@ function saveuser($update_last_on = true)
     {
         $acctOutput = new \Lotgd\Core\Entity\AccountsOutput();
         $acctOutput->setAcctid($session['user']['acctid'])
-            ->setOutput(gzcompress($session['output'], 1))
+            ->setOutput(\gzcompress($session['output'], 1))
         ;
 
         \Doctrine::merge($acctOutput);
@@ -56,7 +56,7 @@ function saveuser($update_last_on = true)
     \Doctrine::flush(); //Persist objects
 
     $session['user'] = [
-        'acctid' => $session['user']['acctid'],
-        'loggedin' => $session['user']['loggedin']
+        'acctid'   => $session['user']['acctid'],
+        'loggedin' => $session['user']['loggedin'],
     ];
 }

@@ -7,22 +7,22 @@ function dump_item($item)
 {
     $out = '';
 
-    if (is_array($item))
+    if (\is_array($item))
     {
         $temp = $item;
     }
     else
     {
-        $temp = @unserialize($item);
+        $temp = @\unserialize($item);
     }
 
-    if (is_array($temp))
+    if (\is_array($temp))
     {
-        $out .= 'array('.count($temp).") {<div style='padding-left: 20pt;'>";
+        $out .= 'array('.\count($temp).") {<div style='padding-left: 20pt;'>";
 
         foreach ($temp as $key => $val)
         {
-            $out .= "'$key' = '".dump_item($val)."'`n";
+            $out .= "'{$key}' = '".dump_item($val)."'`n";
         }
         $out .= '</div>}';
     }
@@ -42,38 +42,38 @@ function dump_item_ascode($item, $indent = "\t")
 {
     $out = '';
 
-    if (is_array($item))
+    if (\is_array($item))
     {
         $temp = $item;
     }
     else
     {
-        $temp = @unserialize($item);
+        $temp = @\unserialize($item);
     }
 
-    if (is_array($temp))
+    if (\is_array($temp))
     {
-        $out .= "array(\n$indent";
+        $out .= "array(\n{$indent}";
         $row = [];
 
         foreach ($temp as $key => $val)
         {
-            array_push($row, "'$key'=&gt;".dump_item_ascode($val, $indent."\t"));
+            \array_push($row, "'{$key}'=&gt;".dump_item_ascode($val, $indent."\t"));
         }
 
-        if (strlen(join(', ', $row)) > 80)
+        if (\strlen(\implode(', ', $row)) > 80)
         {
-            $out .= join(",\n$indent", $row);
+            $out .= \implode(",\n{$indent}", $row);
         }
         else
         {
-            $out .= join(', ', $row);
+            $out .= \implode(', ', $row);
         }
-        $out .= "\n$indent)";
+        $out .= "\n{$indent})";
     }
     else
     {
-        $out .= "'".htmlentities(addslashes($item), ENT_COMPAT, getsetting('charset', 'UTF-8'))."'";
+        $out .= "'".\htmlentities(\addslashes($item), ENT_COMPAT, getsetting('charset', 'UTF-8'))."'";
     }
 
     return $out;

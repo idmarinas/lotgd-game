@@ -12,13 +12,13 @@ function apply_temp_stat($name, $value, $type = 'add')
 
     if ('add' == $type)
     {
-        if (! isset($temp_user_stats['add']))
+        if ( ! isset($temp_user_stats['add']))
         {
             $temp_user_stats['add'] = [];
         }
         $temp = &$temp_user_stats['add'];
 
-        if (! isset($temp[$name]))
+        if ( ! isset($temp[$name]))
         {
             $temp[$name] = $value;
         }
@@ -27,7 +27,7 @@ function apply_temp_stat($name, $value, $type = 'add')
             $temp[$name] += $value;
         }
 
-        if (! $temp_user_stats['is_suspended'])
+        if ( ! $temp_user_stats['is_suspended'])
         {
             $session['user'][$name] += $value;
         }
@@ -36,7 +36,7 @@ function apply_temp_stat($name, $value, $type = 'add')
     }
     else
     {
-        debug("Temp stat type $type is not supported.");
+        debug("Temp stat type {$type} is not supported.");
 
         return false;
     }
@@ -63,11 +63,11 @@ function check_temp_stat($name, $color = false)
     {
         if ($v > 0)
         {
-            return ' `&('.($session['user'][$name] - round($v, 1)).'`@+'.round($v, 1).'`&)';
+            return ' `&('.($session['user'][$name] - \round($v, 1)).'`@+'.\round($v, 1).'`&)';
         }
         else
         {
-            return 0 == $v ? '' : ' `&('.($session['user'][$name] + round($v, 1)).'`$-'.round($v, 1).'`&)';
+            return 0 == $v ? '' : ' `&('.($session['user'][$name] + \round($v, 1)).'`$-'.\round($v, 1).'`&)';
         }
     }
 }
@@ -76,15 +76,15 @@ function suspend_temp_stats()
 {
     global $session, $temp_user_stats;
 
-    if (! $temp_user_stats['is_suspended'])
+    if ( ! $temp_user_stats['is_suspended'])
     {
-        reset($temp_user_stats);
+        \reset($temp_user_stats);
 
         foreach ($temp_user_stats as $type => $collection)
         {
             if ('add' == $type)
             {
-                reset($collection);
+                \reset($collection);
 
                 foreach ($collection as $attribute => $value)
                 {
@@ -108,13 +108,13 @@ function restore_temp_stats()
 
     if ($temp_user_stats['is_suspended'])
     {
-        reset($temp_user_stats);
+        \reset($temp_user_stats);
 
         foreach ($temp_user_stats as $type => $collection)
         {
             if ('add' == $type)
             {
-                reset($collection);
+                \reset($collection);
 
                 foreach ($collection as $attribute => $value)
                 {

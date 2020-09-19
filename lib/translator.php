@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -7,18 +8,19 @@
  */
 function translator_setup()
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     //Determine what language to use
-    if (defined('TRANSLATOR_IS_SET_UP'))
+    if (\defined('TRANSLATOR_IS_SET_UP'))
     {
         return;
     }
-    define('TRANSLATOR_IS_SET_UP', true);
+    \define('TRANSLATOR_IS_SET_UP', true);
     global $language, $session;
     $language = '';
+
     if (isset($session['user']['prefs']['language']))
     {
         $language = $session['user']['prefs']['language'];
@@ -27,49 +29,59 @@ function translator_setup()
     {
         $language = $_COOKIE['language'];
     }
+
     if ('' == $language)
     {
         $language = getsetting('defaultlanguage', 'en');
     }
-    define('LANGUAGE', preg_replace('/[^a-z]/i', '', $language));
+    \define('LANGUAGE', \preg_replace('/[^a-z]/i', '', $language));
 }
 $translation_table = [];
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $indata
+ * @param mixed $namespace
  */
 function translate($indata, $namespace = false)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
+
     if (false == getsetting('enabletranslation', true))
     {
         return $indata;
     }
     global $session, $translation_table, $translation_namespace;
-    if (! $namespace)
+
+    if ( ! $namespace)
     {
         $namespace = $translation_namespace;
     }
     $outdata = $indata;
-    if (! isset($namespace) || '' == $namespace)
+
+    if ( ! isset($namespace) || '' == $namespace)
     {
         tlschema();
     }
     $foundtranslation = false;
+
     if ('notranslate' != $namespace)
     {
-        if (! isset($translation_table[$namespace]) || ! is_array($translation_table[$namespace]))
+        if ( ! isset($translation_table[$namespace]) || ! \is_array($translation_table[$namespace]))
         {
             //build translation table for this page hit.
-            $translation_table[$namespace] = translate_loadnamespace($namespace, (isset($session['tlanguage']) ? $session['tlanguage'] : false));
+            $translation_table[$namespace] = translate_loadnamespace($namespace, ($session['tlanguage'] ?? false));
         }
     }
-    if (is_array($indata))
+
+    if (\is_array($indata))
     {
         //recursive translation on arrays.
         $outdata = [];
+
         foreach ($indata as $key => $val)
         {
             $outdata[$key] = translate($val, $namespace);
@@ -81,7 +93,7 @@ function translate($indata, $namespace = false)
         {
             if (isset($translation_table[$namespace][$indata]))
             {
-                $outdata = $translation_table[$namespace][$indata];
+                $outdata          = $translation_table[$namespace][$indata];
                 $foundtranslation = true;
             // Remove this from the untranslated texts table if it is
                 // in there and we are collecting texts
@@ -98,7 +110,7 @@ function translate($indata, $namespace = false)
             }
             elseif (getsetting('collecttexts', false))
             {
-                $sql = 'INSERT IGNORE INTO '.DB::prefix('untranslated')." (intext,language,namespace) VALUES ('".addslashes($indata)."', '".LANGUAGE."', "."'$namespace')";
+                $sql = 'INSERT IGNORE INTO '.DB::prefix('untranslated')." (intext,language,namespace) VALUES ('".\addslashes($indata)."', '".LANGUAGE."', "."'{$namespace}')";
                 DB::query($sql, false);
             }
             tlbutton_push($indata, ! $foundtranslation, $namespace);
@@ -108,6 +120,7 @@ function translate($indata, $namespace = false)
             $outdata = $indata;
         }
     }
+
     return $outdata;
 }
 /**
@@ -115,79 +128,91 @@ function translate($indata, $namespace = false)
  */
 function sprintf_translate()
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
-    $args = func_get_args();
+    $args      = \func_get_args();
     $setschema = false;
     // Handle if an array is passed in as the first arg
-    if (is_array($args[0]))
+    if (\is_array($args[0]))
     {
-        $args[0] = call_user_func_array('sprintf_translate', $args[0]);
+        $args[0] = \call_user_func_array('sprintf_translate', $args[0]);
     }
     else
     {
         // array_shift returns the first element of an array and shortens this array by one...
-        if (is_bool($args[0]) && array_shift($args))
+        if (\is_bool($args[0]) && \array_shift($args))
         {
-            tlschema(array_shift($args));
+            tlschema(\array_shift($args));
             $setschema = true;
         }
-        $args[0] = str_replace('`%', '`%%', $args[0]);
+        $args[0] = \str_replace('`%', '`%%', $args[0]);
         $args[0] = translate($args[0]);
+
         if ($setschema)
         {
             tlschema();
         }
     }
-    reset($args);
-    each($args); //skip the first entry which is the output text
+    \reset($args);
+    \each($args); //skip the first entry which is the output text
+
     foreach ($args as $key => $val)
     {
-        if (is_array($val))
+        if (\is_array($val))
         {
             //When passed a sub-array this represents an independant
             //translation to happen then be inserted in the master string.
-            $args[$key] = call_user_func_array('sprintf_translate', $val);
+            $args[$key] = \call_user_func_array('sprintf_translate', $val);
         }
     }
-    ob_start();
-    $return = call_user_func_array('sprintf', $args);
-    $err = ob_get_contents();
-    ob_end_clean();
+    \ob_start();
+    $return = \call_user_func_array('sprintf', $args);
+    $err    = \ob_get_contents();
+    \ob_end_clean();
+
     if ($err > '')
     {
         $args['error'] = $err;
         debug($err);
     }
+
     return $return;
 }
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $in
+ * @param mixed $namespace
  */
 function translate_inline($in, $namespace = false)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $out = translate($in, $namespace);
     rawoutput(tlbutton_clear());
+
     return $out;
 }
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $in
+ * @param mixed $to
  */
 function translate_mail($in, $to = 0)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $session;
     tlschema('mail'); // should be same schema like systemmails!
-    if (! is_array($in))
+
+    if ( ! \is_array($in))
     {
         $in = [$in];
     }
@@ -195,63 +220,72 @@ function translate_mail($in, $to = 0)
     //$in[0] = str_replace("`%","`%%",$in[0]);
     if ($to > 0)
     {
-        $language = DB::fetch_assoc(DB::query('SELECT prefs FROM '.DB::prefix('accounts')." WHERE acctid=$to"));
-        $language['prefs'] = unserialize($language['prefs']);
+        $language             = DB::fetch_assoc(DB::query('SELECT prefs FROM '.DB::prefix('accounts')." WHERE acctid={$to}"));
+        $language['prefs']    = \unserialize($language['prefs']);
         $session['tlanguage'] = $language['prefs']['language'] ? $language['prefs']['language'] : getsetting('defaultlanguage', 'en');
     }
-    reset($in);
+    \reset($in);
     // translation offered within translation tool here is in language
     // of sender!
     // translation of mails can't be done in language of recipient by
     // the sender via translation tool.
-    $out = call_user_func_array('sprintf_translate', $in);
+    $out = \call_user_func_array('sprintf_translate', $in);
     tlschema();
     unset($session['tlanguage']);
+
     return $out;
 }
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $in
  */
 function tl($in)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $out = translate($in);
+
     return tlbutton_clear().$out;
 }
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $namespace
+ * @param mixed $language
  */
 function translate_loadnamespace($namespace, $language = false)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
+
     if (false === $language)
     {
         translator_setup();
         $language = LANGUAGE;
     }
     $page = translator_page($namespace);
-    $uri = translator_uri($namespace);
+    $uri  = translator_uri($namespace);
+
     if ($page == $uri)
     {
-        $where = "uri = '$page'";
+        $where = "uri = '{$page}'";
     }
     else
     {
-        $where = "(uri='$page' OR uri='$uri')";
+        $where = "(uri='{$page}' OR uri='{$uri}')";
     }
     $sql = '
         SELECT intext,outtext
         FROM '.DB::prefix('translations')."
-        WHERE language='$language'
-            AND $where";
+        WHERE language='{$language}'
+            AND {$where}";
     /*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
-    if (! getsetting('cachetranslations', 0))
+    if ( ! getsetting('cachetranslations', 0))
     {
         $result = DB::query($sql);
     }
@@ -261,39 +295,49 @@ function translate_loadnamespace($namespace, $language = false)
         //store it for 10 Minutes, normally you don't need to refresh this often
     }
     $out = [];
+
     while ($row = DB::fetch_assoc($result))
     {
         $out[$row['intext']] = $row['outtext'];
     }
+
     return $out;
 }
 $translatorbuttons = [];
-$seentlbuttons = [];
+$seentlbuttons     = [];
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $indata
+ * @param mixed $hot
+ * @param mixed $namespace
  */
 function tlbutton_push($indata, $hot = false, $namespace = false)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons, $translation_is_enabled, $seentlbuttons, $session, $language;
-    if (! $translation_is_enabled)
+
+    if ( ! $translation_is_enabled)
     {
         return;
     }
-    if (! $namespace)
+
+    if ( ! $namespace)
     {
         $namespace = 'unknown';
     }
+
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR)
     {
-        if (! in_array($language, explode(',', $session['user']['translatorlanguages'])))
+        if ( ! \in_array($language, \explode(',', $session['user']['translatorlanguages'])))
         {
             return true;
         }
-        if (preg_replace("/[ 	\n\r]|`./", '', $indata) > '')
+
+        if (\preg_replace("/[ 	\n\r]|`./", '', $indata) > '')
         {
             if (isset($seentlbuttons[$namespace][$indata]))
             {
@@ -302,16 +346,17 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
             else
             {
                 $seentlbuttons[$namespace][$indata] = true;
-                $uri = \LotgdSanitize::cmdSanitize($namespace);
-                $uri = comscroll_sanitize($uri);
-                $link = 'translatortool.php?u='.rawurlencode($uri).'&t='.rawurlencode($indata);
-                $link = sprintf('<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
+                $uri                                = \LotgdSanitize::cmdSanitize($namespace);
+                $uri                                = comscroll_sanitize($uri);
+                $link                               = 'translatortool.php?u='.\rawurlencode($uri).'&t='.\rawurlencode($indata);
+                $link                               = \sprintf('<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
                     $link,
                     ($hot ? 'hot' : '')
                 );
             }
-            array_push($translatorbuttons, $link);
+            \array_push($translatorbuttons, $link);
         }
+
         return true;
     }
     else
@@ -325,14 +370,15 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
  */
 function tlbutton_pop()
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons,$session;
+
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR)
     {
-        return array_pop($translatorbuttons);
+        return \array_pop($translatorbuttons);
     }
     else
     {
@@ -344,15 +390,17 @@ function tlbutton_pop()
  */
 function tlbutton_clear()
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translatorbuttons,$session;
+
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_IS_TRANSLATOR)
     {
-        $return = tlbutton_pop().join('', $translatorbuttons);
+        $return            = tlbutton_pop().\implode('', $translatorbuttons);
         $translatorbuttons = [];
+
         return $return;
     }
     else
@@ -363,31 +411,37 @@ function tlbutton_clear()
 $translation_is_enabled = true;
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $enable
  */
 function enable_translation($enable = true)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translation_is_enabled;
     $translation_is_enabled = $enable;
 }
-$translation_namespace = '';
+$translation_namespace       = '';
 $translation_namespace_stack = [];
 /**
  * @deprecated 4.0.0
+ *
+ * @param mixed $schema
  */
 function tlschema($schema = false)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     global $translation_namespace,$translation_namespace_stack;
+
     if (false === $schema)
     {
-        $translation_namespace = array_pop($translation_namespace_stack);
+        $translation_namespace = \array_pop($translation_namespace_stack);
+
         if ('' == $translation_namespace)
         {
             $translation_namespace = translator_uri(LotgdHttp::getServer('REQUEST_URI'));
@@ -395,7 +449,7 @@ function tlschema($schema = false)
     }
     else
     {
-        array_push($translation_namespace_stack, $translation_namespace);
+        \array_push($translation_namespace_stack, $translation_namespace);
         $translation_namespace = $schema;
     }
 }
@@ -404,11 +458,12 @@ function tlschema($schema = false)
  */
 function translator_check_collect_texts()
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.0.0; and delete in future version, use new translations system.',
         __METHOD__
     ), E_USER_DEPRECATED);
     $tlmax = getsetting('tl_maxallowed', 0);
+
     if (getsetting('permacollect', 0))
     {
         savesetting('collecttexts', 1);
@@ -425,7 +480,7 @@ function translator_check_collect_texts()
 
 function translator_uri($in)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
         __METHOD__
     ), E_USER_DEPRECATED);
@@ -433,9 +488,9 @@ function translator_uri($in)
     $uri = comscroll_sanitize($in);
     $uri = \LotgdSanitize::cmdSanitize($uri);
 
-    if ('?' == substr($uri, -1))
+    if ('?' == \substr($uri, -1))
     {
-        $uri = substr($uri, 0, -1);
+        $uri = \substr($uri, 0, -1);
     }
 
     return $uri;
@@ -443,16 +498,16 @@ function translator_uri($in)
 
 function translator_page($in)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
     $page = $in;
 
-    if (false !== strpos($page, '?'))
+    if (false !== \strpos($page, '?'))
     {
-        $page = substr($page, 0, strpos($page, '?'));
+        $page = \substr($page, 0, \strpos($page, '?'));
     }
     //if ($page=="runmodule.php" && 0){
     //	//we should handle this in runmodule.php now that we have tlschema.
@@ -465,15 +520,14 @@ function translator_page($in)
 
 function comscroll_sanitize($in)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'The use of %s is obsolete since version 4.0.0; and remove it in version 4.1.0, has no replacement.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $out = preg_replace("'&c(omscroll)?=([[:digit:]]|-)*'", '', $in);
-    $out = preg_replace("'\\?c(omscroll)?=([[:digit:]]|-)*'", '?', $out);
-    $out = preg_replace("'&(refresh|comment)=1'", '', $out);
-    $out = preg_replace("'\\?(refresh|comment)=1'", '?', $out);
+    $out = \preg_replace("'&c(omscroll)?=([[:digit:]]|-)*'", '', $in);
+    $out = \preg_replace("'\\?c(omscroll)?=([[:digit:]]|-)*'", '?', $out);
+    $out = \preg_replace("'&(refresh|comment)=1'", '', $out);
 
-    return $out;
+    return \preg_replace("'\\?(refresh|comment)=1'", '?', $out);
 }

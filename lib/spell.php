@@ -13,20 +13,20 @@ function spell($input, $words = false, $prefix = "<span style='border: 1px dotte
         $words = getsetting('dictionary', '/usr/share/dict/words');
     }
 
-    if (file_exists($words))
+    if (\file_exists($words))
     {
-        if (! is_array($spell_dictionary) || 0 == count($spell_dictionary))
+        if ( ! \is_array($spell_dictionary) || 0 == \count($spell_dictionary))
         {
             //retrieve dictionary
-            $dict = file($words);
+            $dict = \file($words);
             //sanitize the keys to drop linefeeds from the words
-            $dict = join('', $dict);
-            $dict = explode("\n", $dict);
+            $dict = \implode('', $dict);
+            $dict = \explode("\n", $dict);
 
-            $dict = array_flip($dict);
+            $dict = \array_flip($dict);
             //words not typically found in a dict file
-            $dict['a'] = 1;
-            $dict['I'] = 1;
+            $dict['a']        = 1;
+            $dict['I']        = 1;
             $spell_dictionary = &$dict;
         }
         else
@@ -36,15 +36,15 @@ function spell($input, $words = false, $prefix = "<span style='border: 1px dotte
         //Common Contractions
         $contractions = [
             "n't" => "n't", //haven't
-            "'s" => "'s", //Joe's going to, also possessive noun
+            "'s"  => "'s", //Joe's going to, also possessive noun
             "'ll" => "'ll", //we'll
             "'re" => "'re", //they're
             "'ve" => "'ve", //Where've you been all day?
-            "'m" => "'m", //What'm I supposed to say?
-            "'d" => "'d", //He'd
+            "'m"  => "'m", //What'm I supposed to say?
+            "'d"  => "'d", //He'd
         ];
-        $input = preg_split('/([<>])/', $input, -1, PREG_SPLIT_DELIM_CAPTURE);
-        $intag = false;
+        $input  = \preg_split('/([<>])/', $input, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $intag  = false;
         $output = '';
 
         foreach ($input as $key => $val)
@@ -57,50 +57,49 @@ function spell($input, $words = false, $prefix = "<span style='border: 1px dotte
             {
                 $intag = false;
             }
-            elseif (! $intag)
+            elseif ( ! $intag)
             {
                 //spellcheck data not found within tags.
-                $line =
-                    preg_split("/([\t\n\r[:space:]-])/",
+                $line = \preg_split("/([\t\n\r[:space:]-])/",
                         $val, -1, PREG_SPLIT_DELIM_CAPTURE);
                 $val = '';
 
                 foreach ($line as $k => $v)
                 {
                     $lookups = [];
-                    $i = 0;
+                    $i       = 0;
                     //look for common variations on words
-                    $v1 = trim($v);
+                    $v1 = \trim($v);
 
                     if ($v1 > '')
                     {
-                        $lookups[$v1] = $i++;
-                        $lookups[strtolower($v1)] = $i++;
+                        $lookups[$v1]              = $i++;
+                        $lookups[\strtolower($v1)] = $i++;
                     }
                     //search for contraction endings
-                    reset($contractions);
+                    \reset($contractions);
                     //strip trailing punctuation
-                    $v2 = preg_replace("/[.?!\"']+$/", '', $v);
+                    $v2 = \preg_replace("/[.?!\"']+$/", '', $v);
 
                     foreach ($contractions as $cont => $throwaway)
                     {
-                        if (substr($v2, strlen($v2) - strlen($cont)) == $cont)
+                        if (\substr($v2, \strlen($v2) - \strlen($cont)) == $cont)
                         {
-                            $v1 = substr($v2, 0, strlen($v2) - strlen($cont));
+                            $v1 = \substr($v2, 0, \strlen($v2) - \strlen($cont));
 
                             if ($v1 > '')
                             {
-                                $lookups[$v1] = $i++;
-                                $lookups[strtolower($v1)] = $i++;
+                                $lookups[$v1]              = $i++;
+                                $lookups[\strtolower($v1)] = $i++;
                             }
                         }
                     }
-                    $v1 = preg_replace('/[^a-zA-Z]/', '', trim($v));
+                    $v1 = \preg_replace('/[^a-zA-Z]/', '', \trim($v));
 
                     if ($v1 > '')
                     {
-                        $lookups[$v1] = $i++;
-                        $lookups[strtolower($v1)] = $i++;
+                        $lookups[$v1]              = $i++;
+                        $lookups[\strtolower($v1)] = $i++;
                     }
                     else
                     {
@@ -108,7 +107,7 @@ function spell($input, $words = false, $prefix = "<span style='border: 1px dotte
                         $lookups = [];
                     }
 
-                    if (count($lookups) > 0)
+                    if (\count($lookups) > 0)
                     {
                         $found = false;
 
@@ -126,15 +125,12 @@ function spell($input, $words = false, $prefix = "<span style='border: 1px dotte
                         $found = true;
                     }
 
-                    if (! $found)
+                    if ( ! $found && \preg_match('/[[:digit:]]/', $v))
                     {
-                        if (preg_match('/[[:digit:]]/', $v))
-                        {
-                            $found = true;
-                        }
+                        $found = true;
                     }
 
-                    if (! $found)
+                    if ( ! $found)
                     {
                         $val = $val.$prefix.$v.$postfix;
                     }

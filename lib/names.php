@@ -34,7 +34,7 @@ function get_player_title($old = false)
 function get_player_basename($old = false)
 {
     global $session;
-    $name = '';
+    $name  = '';
     $title = get_player_title($old);
 
     if (false === $old)
@@ -48,11 +48,11 @@ function get_player_basename($old = false)
 
     if ($title)
     {
-        $x = strpos($name, $title);
+        $x = \strpos($name, $title);
 
         if (false !== $x)
         {
-            $name = trim(substr($name, $x + strlen($title)));
+            $name = \trim(\substr($name, $x + \strlen($title)));
         }
     }
 
@@ -70,11 +70,11 @@ function change_player_name($newname, $old = false)
 
     if ($title)
     {
-        $x = strpos($newname, $title);
+        $x = \strpos($newname, $title);
 
         if (0 === $x)
         {
-            $newname = trim(substr($newname, $x + strlen($title)));
+            $newname = \trim(\substr($newname, $x + \strlen($title)));
         }
         $newname = $title.' '.$newname;
     }

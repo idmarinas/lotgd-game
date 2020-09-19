@@ -23,26 +23,26 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $lasthook = $currenthook;
-    $currenthook = $hookname;
+    $lasthook           = $currenthook;
+    $currenthook        = $hookname;
     static $hookcomment = [];
 
     $args = $args ?: [];
 
-    if (! is_iterable ($args))
+    if ( ! \is_iterable($args))
     {
         $where = $mostrecentmodule;
 
-        if (! $where)
+        if ( ! $where)
         {
             $where = \LotgdHttp::getServer('SCRIPT_NAME');
         }
-        debug("Args parameter to modulehook $hookname from $where is not an iterable value.");
+        debug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
     }
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && ! isset($hookcomment[$hookname]))
     {
-        bdump($args, sprintf('Module hook: %s; allow inactive: (%s); only this module: (%s)',
+        bdump($args, \sprintf('Module hook: %s; allow inactive: (%s); only this module: (%s)',
             $hookname,
             ($allowinactive ? 'true' : 'false'),
             (false !== $only ? $only : 'any module')
@@ -52,10 +52,11 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     }
 
     $result = [];
+
     if (\Doctrine::isConnected())
     {
         $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-        $query = $repository->createQueryBuilder('u');
+        $query      = $repository->createQueryBuilder('u');
 
         $query
             ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
@@ -65,7 +66,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             ->addOrderBy('u.modulename')
         ;
 
-        if (! $allowinactive)
+        if ( ! $allowinactive)
         {
             $query->andWhere('m.active = 1');
         }
@@ -77,7 +78,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     // back through
     // Try at least and fix up a bogus arg so it doesn't cause additional
     // problems later.
-    if (! is_array($args))
+    if ( ! \is_array($args))
     {
         $args = ['bogus_args' => $args];
     }
@@ -97,12 +98,12 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         }
         // Skip any module invocations which should be blocked.
 
-        if (! array_key_exists($row['modulename'], $blocked_modules))
+        if ( ! \array_key_exists($row['modulename'], $blocked_modules))
         {
             $blocked_modules[$row['modulename']] = false;
         }
 
-        if (! array_key_exists($row['modulename'], $unblocked_modules))
+        if ( ! \array_key_exists($row['modulename'], $unblocked_modules))
         {
             $unblocked_modules[$row['modulename']] = false;
         }
@@ -112,7 +113,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             continue;
         }
 
-        if (! injectmodule($row['modulename'], $allowinactive))
+        if ( ! injectmodule($row['modulename'], $allowinactive))
         {
             continue;
         }
@@ -126,34 +127,33 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         // in alphabetical order by their module name (not display name).
 
         // Test the condition code
-        if (! array_key_exists('whenactive', $row))
+        if ( ! \array_key_exists('whenactive', $row))
         {
             $row['whenactive'] = '';
         }
-        $cond = trim($row['whenactive']);
+        $cond = \trim($row['whenactive']);
 
         if ('' == $cond || module_condition($cond))
         {
             // call the module's hook code
             //before, this was just string switching, NOW we make new objects everytime Oo craaaazy load, I am removing this. if you want to collapse, put it in, it's a MODULE
 
-            /*******************************************************/
-            $starttime = microtime(true);
-            /*******************************************************/
-            if (function_exists($row['function']))
+            $starttime = \microtime(true);
+
+            if (\function_exists($row['function']))
             {
                 $res = $row['function']($hookname, $args);
             }
             else
             {
-                trigger_error("Unknown function {$row['function']} for hookname $hookname in module {$row['module']}.", E_USER_WARNING);
+                \trigger_error("Unknown function {$row['function']} for hookname {$hookname} in module {$row['module']}.", E_USER_WARNING);
             }
-            /*******************************************************/
-            $endtime = microtime(true);
+
+            $endtime = \microtime(true);
 
             if ($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
             {
-                debug('Slow Hook ('.round($endtime - $starttime, 2)."s): $hookname - {$row['modulename']}`n");
+                debug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
             }
 
             if (getsetting('debug', 0))
@@ -161,28 +161,28 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
                 $repository = \Doctrine::getRepository('LotgdCore:Debug');
 
                 $entity = $repository->hydrateEntity([
-                    'type' => 'hooktime',
-                    'category' => $hookname,
+                    'type'        => 'hooktime',
+                    'category'    => $hookname,
                     'subcategory' => $row['modulename'],
-                    'value' => ($endtime - $starttime)
+                    'value'       => ($endtime - $starttime),
                 ]);
 
                 \Doctrine::persist($entity);
             }
-            /*******************************************************/
+
             // test to see if we had any output and if the module allows
             // us to collapse it
 
-            if (! is_array($res))
+            if ( ! \is_array($res))
             {
-                trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>$hookname</b>.", E_USER_WARNING);
+                \trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
                 $res = $args;
             }
 
             // Clear the collapse flag
             unset($res['nocollapse']);
             //handle return arguments.
-            if (is_array($res))
+            if (\is_array($res))
             {
                 $args = $res;
             }
@@ -193,7 +193,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     }
 
     $mostrecentmodule = $mod;
-    $currenthook = $lasthook;
+    $currenthook      = $lasthook;
 
     // And hand them back so they can be used.
     return $args;
@@ -205,9 +205,9 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 function module_wipehooks(string $module)
 {
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $result = $repository->findBy(['modulename' => $module]);
+    $result     = $repository->findBy(['modulename' => $module]);
 
-    debug("Removing all hooks for $module");
+    debug("Removing all hooks for {$module}");
 
     try
     {
@@ -218,7 +218,7 @@ function module_wipehooks(string $module)
         }
 
         $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-        $result = $repository->findBy(['modulename' => $module]);
+        $result     = $repository->findBy(['modulename' => $module]);
 
         foreach ($result as $row)
         {
@@ -237,22 +237,22 @@ function module_addeventhook($type, $chance)
 {
     global $mostrecentmodule;
 
-    debug("Adding an event hook on $type events for $mostrecentmodule");
+    debug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $entity = $repository->findOneBy(['modulename' => $mostrecentmodule, 'eventType' => $type]);
+    $entity     = $repository->findOneBy(['modulename' => $mostrecentmodule, 'eventType' => $type]);
 
     $entity = $repository->hydrateEntity([
-        'eventType' => $type,
-        'modulename' => $mostrecentmodule,
-        'eventChance' => $chance
+        'eventType'   => $type,
+        'modulename'  => $mostrecentmodule,
+        'eventChance' => $chance,
     ], $entity);
 
     \Doctrine::persist($entity);
 
     \Doctrine::flush();
 
-    LotgdCache::removeItem("event-$type");
+    LotgdCache::removeItem("event-{$type}");
 }
 
 function module_drophook($hookname, $functioncall = false)
@@ -265,7 +265,7 @@ function module_drophook($hookname, $functioncall = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $result = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
+    $result     = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
 
     foreach ($result as $row)
     {
@@ -274,7 +274,7 @@ function module_drophook($hookname, $functioncall = false)
 
     \Doctrine::flush();
 
-    LotgdCache::removeItem("hooks-hook-$hookname");
+    LotgdCache::removeItem("hooks-hook-{$hookname}");
     LotgdCache::removeItem('moduleprepare');
 }
 
@@ -318,23 +318,23 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
         $whenactive = '';
     }
 
-    debug("Adding a hook at $hookname for $mostrecentmodule to $functioncall which is active on condition '$whenactive'");
+    debug("Adding a hook at {$hookname} for {$mostrecentmodule} to {$functioncall} which is active on condition '{$whenactive}'");
     //we want to do a replace in case there's any garbage left in this table which might block new clean data from going in.
     //normally that won't be the case, and so this doesn't have any performance implications.
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $entity = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
+    $entity     = $repository->findBy(['modulename' => $mostrecentmodule, 'location' => $hookname, 'function' => $functioncall]);
 
     $entity = $repository->hydrateEntity([
         'modulename' => $mostrecentmodule,
-        'location' => $hookname,
-        'function' => $functioncall,
+        'location'   => $hookname,
+        'function'   => $functioncall,
         'whenactive' => $whenactive,
-        'priority' => $priority
+        'priority'   => $priority,
     ], $entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("hooks-hook-$hookname");
+    LotgdCache::removeItem("hooks-hook-{$hookname}");
     LotgdCache::removeItem('moduleprepare');
 }

@@ -3,9 +3,9 @@
 require_once 'lib/gamelog.php';
 
 modulehook('clan-withdraw', [
-    'clanid' => $session['user']['clanid'],
+    'clanid'   => $session['user']['clanid'],
     'clanrank' => $session['user']['clanrank'],
-    'acctid' => $session['user']['acctid']
+    'acctid'   => $session['user']['acctid'],
 ]);
 
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
@@ -29,13 +29,13 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
 
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.withdraw.promoting.leader', [
                 'name' => $result['name'],
-                'sex' => $result['sex']
+                'sex'  => $result['sex'],
             ], $textDomain));
         }
         else
         {
             $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
-            $clanEntity = $clanRepository->find($session['user']['clanid']);
+            $clanEntity     = $clanRepository->find($session['user']['clanid']);
 
             //-- There are no other members, we need to delete the clan.
             modulehook('clan-delete', ['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity]);
@@ -59,21 +59,21 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
 $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
 
 $subj = ['mail.withdraw.subject', ['name' => $session['user']['name']], $textDomain];
-$msg = ['mail.withdraw.message', ['name' => $session['user']['name']], $textDomain];
+$msg  = ['mail.withdraw.message', ['name' => $session['user']['name']], $textDomain];
 
-$mailRepository->deleteMailFromSystemBySubj(serialize($subj));
+$mailRepository->deleteMailFromSystemBySubj(\serialize($subj));
 
 $leaders = $charRepository->getLeadersFromClan($session['user']['clanid'], $session['user']['acctid']);
 
-foreach($leaders as $leader)
+foreach ($leaders as $leader)
 {
     systemmail($leader['acctid'], $subj, $msg);
 }
 
 debuglog($session['user']['login'].' has withdrawn from his/her clan nº. '.$session['user']['clanid']);
 
-$session['user']['clanid'] = 0;
-$session['user']['clanrank'] = CLAN_APPLICANT;
+$session['user']['clanid']       = 0;
+$session['user']['clanrank']     = CLAN_APPLICANT;
 $session['user']['clanjoindate'] = new \DateTime('0000-00-00 00:00:00');
 
 \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.withdraw.withdraw', [], $textDomain));

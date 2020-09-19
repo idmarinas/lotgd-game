@@ -1,6 +1,5 @@
 <?php
 
-
 // This file is obsolete and for get a Jaxon-PHP only need get it's factory, like this example
 global $lotgdJaxon;
 

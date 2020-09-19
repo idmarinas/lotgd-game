@@ -14,14 +14,14 @@ function checkban($login = false)
     elseif (false === $login)
     {
         $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
-        $cookie = $request->getCookie();
-        $ip = $request->getServer('REMOTE_ADDR');
-        $id = $cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '';
+        $cookie  = $request->getCookie();
+        $ip      = $request->getServer('REMOTE_ADDR');
+        $id      = $cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '';
     }
     else
     {
         $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-        $result = $repository->extractEntity($repository->findOneBy([ 'login' => $login ]));
+        $result     = $repository->extractEntity($repository->findOneBy(['login' => $login]));
 
         if ($result['banoverride'] || ($result['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
         {
@@ -37,7 +37,7 @@ function checkban($login = false)
     $repository = \Doctrine::getRepository('LotgdCore:Bans');
     $repository->removeExpireBans();
 
-    $query = $repository->createQueryBuilder('u');
+    $query  = $repository->createQueryBuilder('u');
     $result = $query->where("((substring(:ip ,1 , length(u.ipfilter)) = u.ipfilter AND u.ipfilter != '') OR (u.uniqueid = :id AND u.uniqueid != '')) AND (u.banexpire = '0000-00-00' OR u.banexpire >= :date)")
 
         ->setParameter('ip', $ip)
@@ -48,7 +48,7 @@ function checkban($login = false)
         ->getResult()
     ;
 
-    if (count($result))
+    if (\count($result))
     {
         $session = [];
         $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page-bans');
@@ -58,6 +58,7 @@ function checkban($login = false)
             $session['message'] .= $row->getBanreason().'`n';
 
             $message = \LotgdTranslator::t('checkban.expire.time', ['date' => $row->getBanexpire()], 'page-bans');
+
             if (new \DateTime('0000-00-00') == $row->getBanexpire() || new \DateTime('0000-00-00 00:00:00') == $row->getBanexpire())
             {
                 $message = \LotgdTranslator::t('checkban.expire.permanent', [], 'page-bans');
@@ -73,7 +74,7 @@ function checkban($login = false)
             $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page-bans');
         }
         $session['message'] .= \LotgdTranslator::t('checkban.note', [], 'page-bans');
-        header('Location: index.php');
+        \header('Location: index.php');
 
         exit();
     }

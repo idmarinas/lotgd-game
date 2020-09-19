@@ -20,7 +20,8 @@ require_once 'lib/showform.php';
  * Checks if the module requirements are satisfied.  Should a module require
  * other modules to be installed and active, then optionally makes them so.
  *
- * @param array $reqs Requirements of a module from _getmoduleinfo()
+ * @param array $reqs        Requirements of a module from _getmoduleinfo()
+ * @param mixed $forceinject
  *
  * @return bool If successful or not
  */
@@ -30,28 +31,28 @@ function module_check_requirements($reqs, $forceinject = false)
     global $mostrecentmodule;
 
     $oldmodule = $mostrecentmodule;
-    $result = true;
+    $result    = true;
 
-    if (! is_array($reqs))
+    if ( ! \is_array($reqs))
     {
         return false;
     }
 
     // Check the requirements.
-    reset($reqs);
+    \reset($reqs);
 
     foreach ($reqs as $key => $val)
     {
-        $info = explode('|', $val);
+        $info = \explode('|', $val);
 
         //-- It's need a specific version of LoTGD
         if ('lotgd' == $key)
         {
-            $version = explode(' ', \Lotgd\Core\Application::VERSION);
+            $version = \explode(' ', \Lotgd\Core\Application::VERSION);
 
             $comparison = Composer\Semver\Semver::satisfies($version[0], $info[0]);
 
-            if (! $comparison)
+            if ( ! $comparison)
             {
                 return false;
             }
@@ -59,14 +60,14 @@ function module_check_requirements($reqs, $forceinject = false)
             continue;
         }
 
-        if (! is_module_installed($key, $info[0]))
+        if ( ! is_module_installed($key, $info[0]))
         {
             return false;
         }
         // This is actually cheap since we cache the result
         $status = module_status($key);
         // If it's not injected and we should force it, do so.
-        if (! ($status & MODULE_INJECTED) && $forceinject)
+        if ( ! ($status & MODULE_INJECTED) && $forceinject)
         {
             $result = $result && injectmodule($key);
         }
@@ -89,7 +90,7 @@ $module_preload = [];
  */
 function mass_module_prepare(array $hooknames)
 {
-    sort($hooknames);
+    \sort($hooknames);
 
     global $modulehook_queries;
     global $module_preload;
@@ -97,16 +98,16 @@ function mass_module_prepare(array $hooknames)
     global $module_prefs;
     global $session;
 
-    if (! \Doctrine::isConnected())
+    if ( ! \Doctrine::isConnected())
     {
         return false;
     }
 
-    $hookRepository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
+    $hookRepository    = \Doctrine::getRepository('LotgdCore:ModuleHooks');
     $settingRepository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-    $userRepository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
+    $userRepository    = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
 
-    $query = $hookRepository->createQueryBuilder('u');
+    $query  = $hookRepository->createQueryBuilder('u');
     $result = $query
         ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
         ->where('m.active = 1 AND u.location IN (:names)')
@@ -119,19 +120,20 @@ function mass_module_prepare(array $hooknames)
     ;
 
     $modulenames = [];
+
     foreach ($result as $row)
     {
         $modulenames[] = $row->getModulename();
 
-        if (! isset($module_preload[$row->getLocation()]))
+        if ( ! isset($module_preload[$row->getLocation()]))
         {
-            $module_preload[$row->getLocation()] = [];
+            $module_preload[$row->getLocation()]     = [];
             $modulehook_queries[$row->getLocation()] = [];
         }
         //a little black magic trickery: formatting entries in
         //$modulehook_queries the same way that DB::query_cached
         //returns query results.
-        array_push($modulehook_queries[$row->getLocation()], $row);
+        \array_push($modulehook_queries[$row->getLocation()], $row);
         $module_preload[$row->getLocation()][$row->getModulename()] = $row->getFunction();
     }
 
@@ -150,7 +152,7 @@ function mass_module_prepare(array $hooknames)
     }
 
     //Load the current user's prefs for the modules on these hooks.
-    if (! isset($session['user']['acctid']))
+    if ( ! isset($session['user']['acctid']))
     {
         return true;
     }
@@ -183,53 +185,53 @@ function get_module_info($shortname)
     $mod = $mostrecentmodule;
 
     // This module couldn't be injected at all.
-    if (! injectmodule($shortname, true))
+    if ( ! injectmodule($shortname, true))
     {
         return [];
     }
 
     $missingFunctions = [];
 
-    if (! function_exists("{$shortname}_getmoduleinfo"))
+    if ( ! \function_exists("{$shortname}_getmoduleinfo"))
     {
         $missingFunctions[] = "{$shortname}_getmoduleinfo";
     }
 
-    if (! function_exists("{$shortname}_install"))
+    if ( ! \function_exists("{$shortname}_install"))
     {
         $missingFunctions[] = "{$shortname}_install";
     }
 
-    if (! function_exists("{$shortname}_uninstall"))
+    if ( ! \function_exists("{$shortname}_uninstall"))
     {
         $missingFunctions[] = "{$shortname}_uninstall";
     }
 
     $mostrecentmodule = $mod;
 
-    if (count($missingFunctions))
+    if (\count($missingFunctions))
     {
         return [
-            'name' => appoencode('`$Invalid Module! Contact Author or check file!`0'),
-            'version' => '0.0.0',
-            'author' => 'Missing functions ('.implode(', ', $missingFunctions).')',
+            'name'     => appoencode('`$Invalid Module! Contact Author or check file!`0'),
+            'version'  => '0.0.0',
+            'author'   => 'Missing functions ('.\implode(', ', $missingFunctions).')',
             'category' => 'Invalid Modules',
             'download' => '',
             'requires' => [],
-            'invalid' => true
+            'invalid'  => true,
         ];
     }
 
-    $fname = "{$shortname}_getmoduleinfo";
+    $fname      = "{$shortname}_getmoduleinfo";
     $moduleinfo = $fname();
 
-    $moduleinfo['name'] = $moduleinfo['name'] ?? "Not specified ($shortname)";
-    $moduleinfo['category'] = $moduleinfo['category'] ?? "Not specified ($shortname)";
-    $moduleinfo['author'] = $moduleinfo['author'] ?? "Not specified ($shortname)";
-    $moduleinfo['version'] = $moduleinfo['version'] ?? '0.0.0';
-    $moduleinfo['download'] = $moduleinfo['download'] ?? '';
+    $moduleinfo['name']        = $moduleinfo['name']               ?? "Not specified ({$shortname})";
+    $moduleinfo['category']    = $moduleinfo['category']       ?? "Not specified ({$shortname})";
+    $moduleinfo['author']      = $moduleinfo['author']           ?? "Not specified ({$shortname})";
+    $moduleinfo['version']     = $moduleinfo['version']         ?? '0.0.0';
+    $moduleinfo['download']    = $moduleinfo['download']       ?? '';
     $moduleinfo['description'] = $moduleinfo['description'] ?? '';
-    $moduleinfo['modulename'] = $shortname;
+    $moduleinfo['modulename']  = $shortname;
 
     $moduleinfo['requires'] = $moduleinfo['requires'] ?? [];
 
@@ -251,19 +253,19 @@ function module_editor_navs($like, $linkprefix)
             $curcat = $row->getCategory();
             \LotgdNavigation::addHeader('modules.nav.category', [
                 'textDomain' => 'navigation-app',
-                'params' => [
-                    'category' => $curcat
-                ]
+                'params'     => [
+                    'category' => $curcat,
+                ],
             ]);
         }
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
         //modules around).  This annoys me every single time I come in to this page.
-        \LotgdNavigation::addNavNotl(sprintf('%s%s%s',
+        \LotgdNavigation::addNavNotl(\sprintf('%s%s%s',
                 $row->getActive() ? '' : '`)',
                 $row->getFormalname(),
                 $row->getActive() ? '' : '`0'
-        ), $linkprefix.$row->getModulename() );
+        ), $linkprefix.$row->getModulename());
     }
 }
 
@@ -271,16 +273,16 @@ function module_objpref_edit($type, $module, $id)
 {
     $info = get_module_info($module);
 
-    $data = [];
+    $data       = [];
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $result = $repository->findBy([ 'modulename' => $module,  'objtype' => $type, 'objid' => $id ]);
+    $result     = $repository->findBy(['modulename' => $module,  'objtype' => $type, 'objid' => $id]);
 
     foreach ($result as $row)
     {
         $data[$row->getSetting()] = $row->getValue();
     }
 
-    if (is_string($info["prefs-{$type}"]))
+    if (\is_string($info["prefs-{$type}"]))
     {
         $form = \LotgdLocation::get($info["prefs-{$type}"]);
         $form->setAttribute('method', 'POST');
@@ -291,9 +293,9 @@ function module_objpref_edit($type, $module, $id)
 
         return $form;
     }
-    elseif (is_array($info["prefs-{$type}"]) && count($info["prefs-{$type}"]) > 0)
+    elseif (\is_array($info["prefs-{$type}"]) && \count($info["prefs-{$type}"]) > 0)
     {
-        trigger_error(sprintf(
+        \trigger_error(\sprintf(
             'Usage of %s array old style is obsolete since 4.3.0; and delete in version 5.0.0, use new "Laminas Form style" to configure prefs',
             "prefs-{$type}"
         ), E_USER_DEPRECATED);
@@ -302,16 +304,16 @@ function module_objpref_edit($type, $module, $id)
 
         foreach ($info["prefs-{$type}"] as $key => $val)
         {
-            if (is_array($val))
+            if (\is_array($val))
             {
-                $v = $val[0];
-                $x = explode('|', $v);
+                $v      = $val[0];
+                $x      = \explode('|', $v);
                 $val[0] = $x[0];
-                $x[0] = $val;
+                $x[0]   = $val;
             }
             else
             {
-                $x = explode('|', $val);
+                $x = \explode('|', $val);
             }
 
             $msettings[$key] = $x[0];
@@ -321,6 +323,7 @@ function module_objpref_edit($type, $module, $id)
                 $data[$key] = $x[1];
             }
         }
+
         return lotgd_showform($msettings, $data, false, false, false);
     }
 }
@@ -370,7 +373,7 @@ function module_delete_oldvalues($table, $key)
     require_once 'lib/gamelog.php';
 
     $total = 0;
-    $res = DB::query('SELECT modulename FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|$key|%'");
+    $res   = DB::query('SELECT modulename FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|{$key}|%'");
 
     while ($row = DB::fetch_assoc($res))
     {
@@ -380,21 +383,21 @@ function module_delete_oldvalues($table, $key)
 
         $func = "{$mod}_getmoduleinfo";
         $info = $func();
-        $keys = array_filter(array_keys($info[$key]), 'module_pref_filter');
-        $keys = array_map('addslashes', $keys);
-        $keys = implode("','", $keys);
+        $keys = \array_filter(\array_keys($info[$key]), 'module_pref_filter');
+        $keys = \array_map('addslashes', $keys);
+        $keys = \implode("','", $keys);
 
         if ($keys)
         {
-            DB::query('DELETE FROM '.DB::prefix($table)." WHERE modulename='$mod' AND setting NOT IN ('$keys')");
+            DB::query('DELETE FROM '.DB::prefix($table)." WHERE modulename='{$mod}' AND setting NOT IN ('{$keys}')");
         }
         $total += DB::affected_rows();
     }
 
-    gamelog("Cleaned up $total old values in $table that don't exist anymore", 'maintenance');
+    gamelog("Cleaned up {$total} old values in {$table} that don't exist anymore", 'maintenance');
 }
 
 function module_pref_filter($a)
 {
-    return ! is_numeric($a);
+    return ! \is_numeric($a);
 }

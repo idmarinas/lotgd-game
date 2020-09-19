@@ -5,9 +5,9 @@
 
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
-$setrank = (int) \LotgdHttp::getPost('setrank');
+$setrank   = (int) \LotgdHttp::getPost('setrank');
 $whoacctid = (int) \LotgdHttp::getPost('whoacctid');
-$remove = (int) \LotgdHttp::getQuery('remove');
+$remove    = (int) \LotgdHttp::getQuery('remove');
 
 if ($remove)
 {
@@ -15,11 +15,11 @@ if ($remove)
 
     $args = modulehook('clan-setrank', [
         'setrank' => 0,
-        'login' => $character->getAcct()->getLogin(),
-        'name' => $character->getName(),
-        'acctid' => $remove,
-        'clanid' => $session['user']['clanid'],
-        'oldrank' => $character->getClanrank()
+        'login'   => $character->getAcct()->getLogin(),
+        'name'    => $character->getName(),
+        'acctid'  => $remove,
+        'clanid'  => $session['user']['clanid'],
+        'oldrank' => $character->getClanrank(),
     ]);
 
     $character->setClanrank(CLAN_APPLICANT)
@@ -35,7 +35,7 @@ if ($remove)
     //delete unread application emails from this user.
     //breaks if the applicant has had their name changed via
     //dragon kill, superuser edit, or lodge color change
-    $subj = serialize(['mail.apply.subject', ['name' => $character->getName()], $textDomain]);
+    $subj = \serialize(['mail.apply.subject', ['name' => $character->getName()], $textDomain]);
 
     $mailRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
     $mailRepository->deleteMailFromSystemBySubj($subj);
@@ -50,16 +50,16 @@ elseif ($setrank > 0 && $setrank <= $session['user']['clanrank'] && $whoacctid)
     {
         $args = modulehook('clan-setrank', [
             'setrank' => $setrank,
-            'login' => $character->getAcct()->getLogin(),
-            'name' => $character->getName(),
-            'acctid' => $whoacctid,
-            'clanid' => $session['user']['clanid'],
-            'oldrank' => $character->getClanrank()
+            'login'   => $character->getAcct()->getLogin(),
+            'name'    => $character->getName(),
+            'acctid'  => $whoacctid,
+            'clanid'  => $session['user']['clanid'],
+            'oldrank' => $character->getClanrank(),
         ]);
 
-        if (! ($args['handled'] ?? false))
+        if ( ! ($args['handled'] ?? false))
         {
-            $character->setClanrank(max(0, min($session['user']['clanrank'], $setrank)));
+            $character->setClanrank(\max(0, \min($session['user']['clanrank'], $setrank)));
 
             debuglog("Player {$session['user']['name']} changed rank of {$character->getName()} to {$setrank}.", $whoacctid);
 
@@ -71,5 +71,5 @@ elseif ($setrank > 0 && $setrank <= $session['user']['clanrank'] && $whoacctid)
     }
 }
 
-$params['validRanks'] = array_intersect_key($params['ranksNames'], range(0, $session['user']['clanrank']));
+$params['validRanks'] = \array_intersect_key($params['ranksNames'], \range(0, $session['user']['clanrank']));
 $params['membership'] = $charRepository->getClanMembershipList($claninfo['clanid']);

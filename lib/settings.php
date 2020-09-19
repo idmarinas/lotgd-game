@@ -1,4 +1,5 @@
 <?php
+
 // translator ready
 // addnews ready
 // mail ready
@@ -25,7 +26,6 @@ function getsetting(string $settingname, $default = false)
 
     return $settings->getSetting($settingname, $default);
 }
-
 
 function getAllSettings()
 {

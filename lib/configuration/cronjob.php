@@ -1,8 +1,8 @@
 <?php
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op     = (string) \LotgdHttp::getQuery('op');
 $cronId = (int) \LotgdHttp::getQuery('cronid');
-$page = (int) \LotgdHttp::getQuery('page', 1);
+$page   = (int) \LotgdHttp::getQuery('page', 1);
 
 $params['cronId'] = $cronId;
 
@@ -14,7 +14,7 @@ if ('delcronjob' == $op)
 
     if ($cronEntity)
     {
-        gamelog("`4Delete CronJob `^$cronId`4 by admin {$session['user']['playername']}", 'cronjob');
+        gamelog("`4Delete CronJob `^{$cronId}`4 by admin {$session['user']['playername']}", 'cronjob');
 
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
@@ -38,11 +38,11 @@ if ('' == $op)
         $form->setData($postSettings);
 
         $messageType = 'addErrorMessage';
-        $message = 'flash.message.error';
+        $message     = 'flash.message.error';
 
         if ($form->isValid())
         {
-            $messageType = null;
+            $messageType  = null;
             $postSettings = $form->getData();
 
             require_once 'lib/configuration/save.php';
@@ -56,13 +56,13 @@ if ('' == $op)
 
     $query = $repository->createQueryBuilder('u');
 
-    if (! \LotgdHttp::isPost())
+    if ( ! \LotgdHttp::isPost())
     {
         $form->setData(['newdaycron' => getsetting('newdaycron', 0)]);
     }
 
     $params['paginator'] = $repository->getPaginator($query, $page);
-    $params['form'] = $form;
+    $params['form']      = $form;
 }
 elseif ('newcronjob' == $op)
 {
@@ -74,34 +74,34 @@ elseif ('newcronjob' == $op)
 
     $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
         'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
-        'attr' => [
-            'autocomplete' => 'off'
-        ]
+        'attr'   => [
+            'autocomplete' => 'off',
+        ],
     ]);
 
     $form->handleRequest();
 
     $paramsFlashMessages = [];
-    $message = null;
-    $messageType = 'addSuccessMessage';
+    $message             = null;
+    $messageType         = 'addSuccessMessage';
 
     if ($form->isSubmitted() && $form->isValid())
     {
-        $entity = $form->getData();
-        $method = $cronId ? 'merge' : 'persist';
+        $entity  = $form->getData();
+        $method  = $cronId ? 'merge' : 'persist';
         $message = $cronId ? 'flash.message.cronjob.updated' : 'flash.message.cronjob.created';
 
         //-- Check if clan name is taken
         $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists([
             'object_repository' => $repository,
-            'fields' => 'name',
+            'fields'            => 'name',
         ]);
 
         if ('persist' == $method && ! $noExistValidator->isValid($entity->getName()))
         {
             $paramsFlashMessages['name'] = $entity->getName();
-            $message = 'flash.message.cronjob.name.exist';
-            $messageType = 'addWarningMessage';
+            $message                     = 'flash.message.cronjob.name.exist';
+            $messageType                 = 'addWarningMessage';
         }
         else
         {
@@ -118,9 +118,9 @@ elseif ('newcronjob' == $op)
             //-- Redo form for change $cronId and set new data (generated IDs)
             $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
                 'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
-                'attr' => [
-                    'autocomplete' => 'off'
-                ]
+                'attr'   => [
+                    'autocomplete' => 'off',
+                ],
             ]);
         }
 

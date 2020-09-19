@@ -1,13 +1,13 @@
 <?php
 
 $pdks = [];
-reset($labels);
+\reset($labels);
 
 foreach ($labels as $type => $label)
 {
-    $head = explode(',', $label);
+    $head = \explode(',', $label);
 
-    if (count($head) > 1)
+    if (\count($head) > 1)
     {
         continue;
     } //got a headline here
@@ -20,14 +20,14 @@ foreach ($labels as $type => $label)
     }
 }
 $pdktotal = 0;
-$pdkneg = false;
+$pdkneg   = false;
 modulehook('pdkpointrecalc');
 
 foreach ($labels as $type => $label)
 {
-    $head = explode(',', $label);
+    $head = \explode(',', $label);
 
-    if (count($head) > 1)
+    if (\count($head) > 1)
     {
         continue;
     } //got a headline here
@@ -41,21 +41,21 @@ foreach ($labels as $type => $label)
 
 if ($pdktotal == $dkills - $dp && ! $pdkneg)
 {
-    $dp += $pdktotal;
+    $dp                              += $pdktotal;
     $session['user']['maxhitpoints'] += (5 * $pdks['hp']);
-    $session['user']['strength'] += $pdks['str'];
-    $session['user']['dexterity'] += $pdks['dex'];
+    $session['user']['strength']     += $pdks['str'];
+    $session['user']['dexterity']    += $pdks['dex'];
     $session['user']['intelligence'] += $pdks['int'];
     $session['user']['constitution'] += $pdks['con'];
-    $session['user']['wisdom'] += $pdks['wis'];
+    $session['user']['wisdom']       += $pdks['wis'];
 
-    reset($labels);
+    \reset($labels);
 
     foreach ($labels as $type => $label)
     {
-        $head = explode(',', $label);
+        $head = \explode(',', $label);
 
-        if (count($head) > 1)
+        if (\count($head) > 1)
         {
             continue;
         } //got a headline here
@@ -68,8 +68,8 @@ if ($pdktotal == $dkills - $dp && ! $pdkneg)
 
         while ($count)
         {
-            $count--;
-            array_push($session['user']['dragonpoints'], $type);
+            --$count;
+            \array_push($session['user']['dragonpoints'], $type);
         }
     }
 }

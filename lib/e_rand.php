@@ -5,7 +5,7 @@
 // mail ready
 function make_seed()
 {
-    list($usec, $sec) = explode(' ', microtime());
+    list($usec, $sec) = \explode(' ', \microtime());
 
     return (float) $sec + ((float) $usec * 100000);
 }
@@ -15,28 +15,26 @@ function make_seed()
  *
  * @param int|float $min
  * @param int|float $max
- *
- * @return int
  */
 function e_rand($min = null, $max = null): int
 {
-    if (! is_numeric($min))
+    if ( ! \is_numeric($min))
     {
-        return mt_rand();
+        return \mt_rand();
     }
-    $min = round($min);
+    $min = \round($min);
 
-    if (! is_numeric($max))
+    if ( ! \is_numeric($max))
     {
-        return mt_rand($min);
+        return \mt_rand($min);
     }
-    $max = round($max);
+    $max = \round($max);
 
-    return mt_rand(min($min, $max), max($min, $max));
+    return \mt_rand(\min($min, $max), \max($min, $max));
 }
 
 /**
- * Same as e_rand but $min and $max are multiplied by 1000
+ * Same as e_rand but $min and $max are multiplied by 1000.
  *
  * @param int|float $min
  * @param int|float $max
@@ -45,17 +43,17 @@ function e_rand($min = null, $max = null): int
  */
 function r_rand($min = null, $max = null)
 {
-    if (! is_numeric($min))
+    if ( ! \is_numeric($min))
     {
-        return mt_rand();
+        return \mt_rand();
     }
     $min *= 1000;
 
-    if (! is_numeric($max))
+    if ( ! \is_numeric($max))
     {
-        return mt_rand($min) / 1000;
+        return \mt_rand($min) / 1000;
     }
     $max *= 1000;
 
-    return mt_rand(min($min, $max), max($min, $max)) / 1000;
+    return \mt_rand(\min($min, $max), \max($min, $max)) / 1000;
 }

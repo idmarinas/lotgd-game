@@ -7,7 +7,7 @@ function module_collect_events($type, $allowinactive = false)
     $events = [];
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-    $query = $repository->createQueryBuilder('u');
+    $query      = $repository->createQueryBuilder('u');
 
     $query
         ->leftJoin('LotgdCore:Modules', 'm', 'with', $query->expr()->eq('m.modulename', 'u.modulename'))
@@ -16,7 +16,7 @@ function module_collect_events($type, $allowinactive = false)
         ->orderBy('rand()')
     ;
 
-    if (! $allowinactive)
+    if ( ! $allowinactive)
     {
         $query->andWhere('m.active = 1');
     }
@@ -32,28 +32,28 @@ function module_collect_events($type, $allowinactive = false)
         // in any way it wants, and can have if/then or other logical
         // structures, so we cannot just force the 'return' syntax unlike
         // with buffs.
-        ob_start();
+        \ob_start();
         $chance = eval($row['eventChance'].';');
-        $err = ob_get_contents();
-        ob_end_clean();
+        $err    = \ob_get_contents();
+        \ob_end_clean();
 
         if ($err > '')
         {
             debug(['error' => $err, 'Eval code' => $row['eventChance']]);
         }
 
-        $chance = max(0, min(100, $chance));
+        $chance = \max(0, \min(100, $chance));
 
-        if (($block_all_modules || array_key_exists($row['modulename'], $blocked_modules)
+        if (($block_all_modules || \array_key_exists($row['modulename'], $blocked_modules)
             && $blocked_modules[$row['modulename']])
-            && (! array_key_exists($row['modulename'], $unblocked_modules) || ! $unblocked_modules[$row['modulename']]))
+            && ( ! \array_key_exists($row['modulename'], $unblocked_modules) || ! $unblocked_modules[$row['modulename']]))
         {
             $chance = 0;
         }
 
         $events[] = [
             'modulename' => $row['modulename'],
-            'rawchance' => $chance
+            'rawchance'  => $chance,
         ];
 
         $sum += $chance;
@@ -65,7 +65,7 @@ function module_collect_events($type, $allowinactive = false)
 
         if ($sum)
         {
-            $events[$index]['normchance'] = round($event['rawchance'] / $sum * 100, 3);
+            $events[$index]['normchance'] = \round($event['rawchance'] / $sum * 100, 3);
             // If an event requests 1% chance, don't give them more!
             if ($events[$index]['normchance'] > $event['rawchance'])
             {
@@ -81,11 +81,11 @@ function module_events($eventtype, $basechance, $baseLink = false)
 {
     global $html;
 
-    if (! $baseLink)
+    if ( ! $baseLink)
     {
         $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
 
-        $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
+        $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
 
     if (e_rand(1, 100) <= $basechance)
@@ -105,10 +105,10 @@ function module_events($eventtype, $basechance, $baseLink = false)
             if ($chance > $sum && $chance <= $sum + $event['normchance'])
             {
                 $_POST['i_am_a_hack'] = 'true';
-                $html['event'] = [
+                $html['event']        = [
                     'title.special',
                     [],
-                    'partial-event'
+                    'partial-event',
                 ];
                 $op = \LotgdHttp::getQuery('op');
                 \LotgdHttp::setQuery('op', '');
@@ -132,7 +132,7 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
     {
         $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
 
-        $baseLink = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1).'?';
+        $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
 
     // Save off the mostrecent module since having that change can change
@@ -140,16 +140,16 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
     // library functions which cause them to be called.
     $mostrecentmodule = $mostrecentmodule ?? '';
 
-    $mod = $mostrecentmodule;
+    $mod                  = $mostrecentmodule;
     $_POST['i_am_a_hack'] = 'true';
 
     if (injectmodule($module, $allowinactive))
     {
         $oldnavsection = $navsection;
-        $fname = $module.'_runevent';
+        $fname         = $module.'_runevent';
         $fname($type, $baseLink);
         //hook into the running event, but only in *this* running event, not in all
-        modulehook("runevent_$module", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdHttp::getQueryAll(), 'post' => \LotgdHttp::getPostAll()]);
+        modulehook("runevent_{$module}", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdHttp::getQueryAll(), 'post' => \LotgdHttp::getPostAll()]);
         //revert nav section after we're done here.
         $navsection = $oldnavsection;
     }
@@ -159,38 +159,39 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
 
 function event_sort($a, $b)
 {
-    return strcmp($a['modulename'], $b['modulename']);
+    return \strcmp($a['modulename'], $b['modulename']);
 }
 
 function module_display_events($eventtype, $forcescript = false)
 {
     global $session;
 
-    if (! ($session['user']['superuser'] & SU_DEVELOPER))
+    if ( ! ($session['user']['superuser'] & SU_DEVELOPER))
     {
         return;
     }
 
     $script = $forcescript;
-    if (! $forcescript)
+
+    if ( ! $forcescript)
     {
         $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
-        $script = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
+        $script   = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1);
     }
 
     $events = module_collect_events($eventtype, false); //-- To avoid conflicts not allow inactive modules
 
-    if (! is_array($events) || ! count($events))
+    if ( ! \is_array($events) || ! \count($events))
     {
         return;
     }
 
-    usort($events, 'event_sort');
+    \usort($events, 'event_sort');
 
     $params = [
         'textDomain' => 'partial-event',
-        'events' => $events,
-        'script' => $script
+        'events'     => $events,
+        'script'     => $script,
     ];
 
     rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/event-trigger.twig', $params));

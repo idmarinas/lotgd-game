@@ -4,8 +4,6 @@
  * An associative array of all the settings for the given module.
  *
  * @param string $module
- *
- * @return array
  */
 function get_all_module_settings($module = false): array
 {
@@ -21,6 +19,9 @@ function get_all_module_settings($module = false): array
 
 /**
  * Get value for setting of a module.
+ *
+ * @param mixed $name
+ * @param mixed $module
  */
 function get_module_setting($name, $module = false)
 {
@@ -43,14 +44,14 @@ function get_module_setting($name, $module = false)
 
         if (isset($info['settings'][$name]))
         {
-            if (is_array($info['settings'][$name]))
+            if (\is_array($info['settings'][$name]))
             {
                 $v = $info['settings'][$name][0];
-                $x = explode('|', $v);
+                $x = \explode('|', $v);
             }
             else
             {
-                $x = explode('|', $info['settings'][$name]);
+                $x = \explode('|', $info['settings'][$name]);
             }
 
             if (isset($x[1]))
@@ -88,22 +89,22 @@ function set_module_setting($name, $value, $module = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name ]);
+    $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name]);
 
-    if (! $entity)
+    if ( ! $entity)
     {
         $entity = new \Lotgd\Core\Entity\ModuleSettings();
     }
     $entity = $repository->hydrateEntity([
         'modulename' => $module,
-        'setting' => $name,
-        'value' => $value
+        'setting'    => $name,
+        'value'      => $value,
     ], $entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-settings-$module");
+    LotgdCache::removeItem("module-settings-{$module}");
 }
 
 /**
@@ -117,7 +118,7 @@ function increment_module_setting($name, $value = 1, $module = false)
 {
     global $mostrecentmodule;
 
-    $value = (float) $value;//
+    $value = (float) $value;
 
     if (false === $module)
     {
@@ -125,9 +126,9 @@ function increment_module_setting($name, $value = 1, $module = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name ]);
+    $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name]);
 
-    if (! $entity)
+    if ( ! $entity)
     {
         $entity = new \Lotgd\Core\Entity\ModuleSettings();
     }
@@ -137,7 +138,7 @@ function increment_module_setting($name, $value = 1, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-settings-$module");
+    LotgdCache::removeItem("module-settings-{$module}");
 }
 
 /**
@@ -154,33 +155,32 @@ function clear_module_settings($module = false)
         $module = $mostrecentmodule;
     }
 
-    debug("Deleted module settings cache for $module.");
-    LotgdCache::removeItem("module-settings-$module");
+    debug("Deleted module settings cache for {$module}.");
+    LotgdCache::removeItem("module-settings-{$module}");
 }
 
 /**
  * Load settings of a module.
  *
  * @param string $module
- *
- * @return array
  */
 function load_module_settings($module): array
 {
-    $module_settings = \LotgdCache::getItem("module-settings-$module");
+    $module_settings = \LotgdCache::getItem("module-settings-{$module}");
 
-    if (! is_array($module_settings))
+    if ( ! \is_array($module_settings))
     {
         $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-        $result = $repository->findBy([ 'modulename' => $module ]);
+        $result     = $repository->findBy(['modulename' => $module]);
 
         $module_settings = [];
-        foreach($result as $val)
+
+        foreach ($result as $val)
         {
             $module_settings[$val->getSetting()] = $val->getValue();
         }
 
-        \LotgdCache::setItem("module-settings-$module", $module_settings);
+        \LotgdCache::setItem("module-settings-{$module}", $module_settings);
     }//end if
 
     return $module_settings;

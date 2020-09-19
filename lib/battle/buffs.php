@@ -16,34 +16,34 @@ function activate_buffs($tag)
 {
     global $session, $badguy, $countround, $lotgdBattleContent;
 
-    reset($session['bufflist']);
+    \reset($session['bufflist']);
 
-    $result = [];
+    $result                 = [];
     $result['invulnerable'] = 0;
-    $result['dmgmod'] = 1;
-    $result['compdmgmod'] = 1;
+    $result['dmgmod']       = 1;
+    $result['compdmgmod']   = 1;
     $result['badguydmgmod'] = 1;
-    $result['atkmod'] = 1;
-    $result['compatkmod'] = 1;
+    $result['atkmod']       = 1;
+    $result['compatkmod']   = 1;
     $result['badguyatkmod'] = 1;
-    $result['defmod'] = 1;
-    $result['compdefmod'] = 1;
+    $result['defmod']       = 1;
+    $result['compdefmod']   = 1;
     $result['badguydefmod'] = 1;
-    $result['lifetap'] = [];
-    $result['dmgshield'] = [];
+    $result['lifetap']      = [];
+    $result['dmgshield']    = [];
 
     foreach ($session['bufflist'] as $key => $buff)
     {
-        if (array_key_exists('suspended', $buff) && $buff['suspended'])
+        if (\array_key_exists('suspended', $buff) && $buff['suspended'])
         {
             continue;
         }
 
         if (isset($buff['startmsg']))
         {
-            if (is_array($buff['startmsg']))
+            if (\is_array($buff['startmsg']))
             {
-                $buff['startmsg'] = str_replace('`%', '`%%', $buff['startmsg']);
+                $buff['startmsg']                                            = \str_replace('`%', '`%%', $buff['startmsg']);
                 $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['startmsg']}`0`n");
             }
             else
@@ -136,16 +136,16 @@ function activate_buffs($tag)
 
         // If this should activate now and it hasn't already activated,
         // do the round message and mark it.
-        if ($activate && (! array_key_exists('used', $buff) || ! $buff['used']))
+        if ($activate && ( ! \array_key_exists('used', $buff) || ! $buff['used']))
         {
             // mark it used.
             $session['bufflist'][$key]['used'] = 1;
             // if it has a 'round message', run it.
             if (isset($buff['roundmsg']))
             {
-                if (is_array($buff['roundmsg']))
+                if (\is_array($buff['roundmsg']))
                 {
-                    $buff['roundmsg'] = str_replace('`%', '`%%', $buff['roundmsg']);
+                    $buff['roundmsg']                                            = \str_replace('`%', '`%%', $buff['roundmsg']);
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`5{$buff['roundmsg']}`0`n");
                 }
                 else
@@ -208,18 +208,18 @@ function activate_buffs($tag)
 
         if (isset($buff['lifetap']))
         {
-            array_push($result['lifetap'], $buff);
+            \array_push($result['lifetap'], $buff);
         }
 
         if (isset($buff['damageshield']))
         {
-            array_push($result['dmgshield'], $buff);
+            \array_push($result['dmgshield'], $buff);
         }
 
         if (isset($buff['regen']) && 'roundstart' == $tag && true == $badguy['istarget'])
         {
             $hptoregen = (int) $buff['regen'];
-            $hpdiff = $session['user']['maxhitpoints'] - $session['user']['hitpoints'];
+            $hpdiff    = $session['user']['maxhitpoints'] - $session['user']['hitpoints'];
             // Don't regen if we are above max hp
             if ($hpdiff < 0)
             {
@@ -232,30 +232,31 @@ function activate_buffs($tag)
             }
             $session['user']['hitpoints'] += $hptoregen;
             // Now, take abs value just incase this was a damaging buff
-            $hptoregen = abs($hptoregen);
+            $hptoregen = \abs($hptoregen);
 
             $msg = $buff['effectmsg'];
+
             if (0 == $hptoregen)
             {
                 $msg = $buff['effectnodmgmsg'] ?? '';
             }
 
-            if (is_array($msg))
+            if (\is_array($msg))
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`)$msg`0`n", ['{damage}'], [$hptoregen]);
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
             }
             elseif ('' != $msg)
             {
-                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`)$msg`0`n", ['{damage}'], [$hptoregen]);
+                $lotgdBattleContent['battlerounds'][$countround]['allied'][] = substitute("`){$msg}`0`n", ['{damage}'], [$hptoregen]);
             }
 
             if (isset($buff['aura']) && true == $buff['aura'])
             {
                 global $companions;
 
-                $auraeffect = (int) round($buff['regen'] / 3);
+                $auraeffect = (int) \round($buff['regen'] / 3);
 
-                if (is_array($companions) && count($companions) > 0 && 0 != $auraeffect)
+                if (\is_array($companions) && \count($companions) > 0 && 0 != $auraeffect)
                 {
                     foreach ($companions as $name => $companion)
                     {
@@ -263,9 +264,9 @@ function activate_buffs($tag)
                         // if a companion is damaged AND ( a companion ist still alive OR ( a companion is unconscious AND it's a healing effect))
                         if ($companion['hitpoints'] < $companion['maxhitpoints'] && ($companion['hitpoints'] > 0 || (true == $companion['cannotdie'] && $auraeffect > 0)))
                         {
-                            $hptoregen = min($auraeffect, $companion['maxhitpoints'] - $companion['hitpoints']);
+                            $hptoregen = \min($auraeffect, $companion['maxhitpoints'] - $companion['hitpoints']);
                             $companions[$name]['hitpoints'] += $hptoregen;
-                            $msg = substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
+                            $msg                                                         = substitute("`){$buff['auramsg']}`0`n", ['{damage}', '{companion}'], [$hptoregen, $companion['name']]);
                             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
 
                             if ($hptoregen < 0 && $companion['hitpoints'] <= 0)
@@ -295,10 +296,11 @@ function activate_buffs($tag)
             $max = $buff['maxgoodguydamage'] ?? 0;
             $min = $buff['mingoodguydamage'] ?? 0;
             $who = 1;
+
             if (isset($buff['maxbadguydamage']) && 0 != $buff['maxbadguydamage'])
             {
                 $max = $buff['maxbadguydamage'];
-                $min = isset($buff['minbadguydamage']) ? $buff['minbadguydamage'] : 0;
+                $min = $buff['minbadguydamage'] ?? 0;
                 $who = 0;
             }
             $minioncounter = 1;
@@ -314,7 +316,7 @@ function activate_buffs($tag)
                     if ($badguy['creaturehealth'] <= 0)
                     {
                         $badguy['istarget'] = false;
-                        $badguy['dead'] = true;
+                        $badguy['dead']     = true;
                     }
                 }
                 elseif (1 == $who)
@@ -335,14 +337,14 @@ function activate_buffs($tag)
                     $msg = $buff['effectmsg'] ?? '';
                 }
 
-                if (is_array($msg))
+                if (\is_array($msg))
                 {
-                    $msg = substitute("`)$msg`0`n", ['{damage}'], [abs($damage)]);
+                    $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg; //Here it's already translated
                 }
                 elseif ($msg > '')
                 {
-                    $msg = substitute("`)$msg`0`n", ['{damage}'], [abs($damage)]);
+                    $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [\abs($damage)]);
                     $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                 }
 
@@ -351,7 +353,7 @@ function activate_buffs($tag)
                     break;
                 }
 
-                $minioncounter++;
+                ++$minioncounter;
             }
         }
     }
@@ -385,7 +387,7 @@ function process_lifetaps($ltaps, $damage)
         {
             if ($healhp > $damage * $buff['lifetap'])
             {
-                $healhp = round($damage * $buff['lifetap'], 0);
+                $healhp = \round($damage * $buff['lifetap'], 0);
             }
 
             if ($healhp < 0)
@@ -404,14 +406,14 @@ function process_lifetaps($ltaps, $damage)
         }
         $session['user']['hitpoints'] += $healhp;
 
-        if (is_array($msg))
+        if (\is_array($msg))
         {
-            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
         elseif ($msg > '')
         {
-            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
+            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$healhp]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
     }
@@ -428,7 +430,7 @@ function process_dmgshield($dshield, $damage)
             continue;
         }
 
-        $realdamage = round($damage * $buff['damageshield'], 0);
+        $realdamage = \round($damage * $buff['damageshield'], 0);
 
         if ($realdamage < 0)
         {
@@ -455,17 +457,17 @@ function process_dmgshield($dshield, $damage)
         if ($badguy['creaturehealth'] <= 0)
         {
             $badguy['istarget'] = false;
-            $badguy['dead'] = true;
+            $badguy['dead']     = true;
         }
 
-        if (is_array($msg))
+        if (\is_array($msg))
         {
-            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
         elseif ($msg > '')
         {
-            $msg = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
+            $msg                                                         = substitute("`){$msg}`0`n", ['{damage}'], [$realdamage]);
             $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
         }
     }
@@ -477,28 +479,28 @@ function expire_buffs()
 
     foreach ($session['bufflist'] as $key => $buff)
     {
-        if (array_key_exists('suspended', $buff) && $buff['suspended'])
+        if (\array_key_exists('suspended', $buff) && $buff['suspended'])
         {
             continue;
         }
 
-        if (array_key_exists('used', $buff) && $buff['used'])
+        if (\array_key_exists('used', $buff) && $buff['used'])
         {
             $session['bufflist'][$key]['used'] = 0;
 
             if ($session['bufflist'][$key]['rounds'] > 0)
             {
-                $session['bufflist'][$key]['rounds']--;
+                --$session['bufflist'][$key]['rounds'];
             }
 
             if (0 == (int) $session['bufflist'][$key]['rounds'])
             {
                 if (isset($buff['wearoff']) && $buff['wearoff'])
                 {
-                    if (is_array($buff['wearoff']))
+                    if (\is_array($buff['wearoff']))
                     {
-                        $buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg = substitute('`5'.$msg.'`0`n');
+                        $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
+                        $msg             = substitute('`5'.$msg.'`0`n');
                     }
                     else
                     {
@@ -520,31 +522,31 @@ function expire_buffs_afterbattle()
     //this is a copy of the expire_buffs, but only to be called at the very end of a battle to strip buffs that are only meant to last until a victory/defeat
     //redundant due to the nature of having a check at the beginning of a battle, and now one at the end.
     //use a buff flag 'expireafterfight' which you set to 1 or TRUE
-    reset($session['bufflist']);
+    \reset($session['bufflist']);
 
     foreach ($session['bufflist'] as $key => $buff)
     {
-        if (array_key_exists('suspended', $buff) && $buff['suspended'])
+        if (\array_key_exists('suspended', $buff) && $buff['suspended'])
         {
             continue;
         }
 
-        if (array_key_exists('used', $buff) && $buff['used'])
+        if (\array_key_exists('used', $buff) && $buff['used'])
         {
-            if (array_key_exists('expireafterfight', $buff) && 1 == (int) $buff['expireafterfight'])
+            if (\array_key_exists('expireafterfight', $buff) && 1 == (int) $buff['expireafterfight'])
             {
                 if (isset($buff['wearoff']) && $buff['wearoff'])
                 {
-                    if (is_array($buff['wearoff']))
+                    if (\is_array($buff['wearoff']))
                     {
-                        $buff['wearoff'] = str_replace('`%', '`%%', $buff['wearoff']);
-                        $msg = substitute("`5{$buff['wearoff']}`0`n");
+                        $buff['wearoff'] = \str_replace('`%', '`%%', $buff['wearoff']);
+                        $msg             = substitute("`5{$buff['wearoff']}`0`n");
 
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                     else
                     {
-                        $msg = substitute("`5{$buff['wearoff']}`0`n");
+                        $msg                                                         = substitute("`5{$buff['wearoff']}`0`n");
                         $lotgdBattleContent['battlerounds'][$countround]['allied'][] = $msg;
                     }
                 }

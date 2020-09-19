@@ -13,8 +13,6 @@ require_once 'lib/substitute.php';
  * @param string $zone
  * @param array  $extraParams
  * @param array  $extrarep
- *
- * @return array
  */
 function select_deathmessage($zone = 'forest', $extraParams = []): array
 {
@@ -28,7 +26,7 @@ function select_deathmessage($zone = 'forest', $extraParams = []): array
     //-- Check if found count for zone
     if ("{$zone}.count" != $count)
     {
-        $rand = mt_rand(0, max(0, $count - 1));
+        $rand = \mt_rand(0, \max(0, $count - 1));
 
         $deathmessage = "{$zone}.0{$rand}";
     }
@@ -36,13 +34,13 @@ function select_deathmessage($zone = 'forest', $extraParams = []): array
     $params = [
         //-- The player's name (also can be specified as goodGuy
         'goodGuyName' => $session['user']['name'],
-        'goodGuy' => $session['user']['name'],
+        'goodGuy'     => $session['user']['name'],
         //-- The player's weapon (also can be specified as weapon
         'goodGuyWeapon' => $session['user']['weapon'],
-        'weapon' => $session['user']['weapon'],
+        'weapon'        => $session['user']['weapon'],
         //-- The player's armor (also can be specified as armor
         'armorName' => $session['user']['armor'],
-        'armor' => $session['user']['armor'],
+        'armor'     => $session['user']['armor'],
         //-- Subjective pronoun for the player (him her)
         'himHer' => $session['user']['sex'] ? 'her' : 'him',
         //-- Possessive pronoun for the player (his her)
@@ -51,17 +49,17 @@ function select_deathmessage($zone = 'forest', $extraParams = []): array
         'heShe' => $session['user']['sex'] ? 'she' : 'he',
         //-- The monster's name (also can be specified as badGuy
         'badGuyName' => $badguy['creaturename'],
-        'badGuy' => $badguy['creaturename'],
+        'badGuy'     => $badguy['creaturename'],
         //-- The monster's weapon (also can be specified as creatureWeapon
-        'badGuyWeapon' => $badguy['creatureweapon'],
-        'creatureWeapon' => $badguy['creatureweapon']
+        'badGuyWeapon'   => $badguy['creatureweapon'],
+        'creatureWeapon' => $badguy['creatureweapon'],
     ];
 
     $params = \array_merge($params, $extraParams);
 
     return [
         'deathmessage' => $deathmessage,
-        'params' => $params,
-        'textDomain' => 'partial-deathmessage'
+        'params'       => $params,
+        'textDomain'   => 'partial-deathmessage',
     ];
 }

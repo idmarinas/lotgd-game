@@ -4,7 +4,7 @@ function get_partner($player = false)
 {
     global $session;
 
-    if (! isset($session['user']['prefs']['sexuality']) || '' == $session['user']['prefs']['sexuality'])
+    if ( ! isset($session['user']['prefs']['sexuality']) || '' == $session['user']['prefs']['sexuality'])
     {
         $session['user']['prefs']['sexuality'] = ! $session['user']['sex'];
     }
@@ -32,7 +32,7 @@ function get_partner($player = false)
         else
         {
             $repository = \Doctrine::getRepository('LotgdCore:Accounts');
-            $name = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
+            $name       = $repository->getCharacterNameFromAcctId($session['user']['marriedto']);
 
             if ($name)
             {
@@ -41,7 +41,7 @@ function get_partner($player = false)
             else
             {
                 $session['user']['marriedto'] = 0;
-                $partner = getsetting('barmaid', '`%Violet`0');
+                $partner                      = getsetting('barmaid', '`%Violet`0');
 
                 if (SEX_MALE == $session['user']['prefs']['sexuality'])
                 {

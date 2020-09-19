@@ -1,6 +1,7 @@
 <?php
 
 $needsauthentication = false;
+
 if (DB_CHOSEN)
 {
     $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
@@ -10,32 +11,33 @@ if (DB_CHOSEN)
     {
         $needsauthentication = false;
     }
-    elseif($countSuperuser > 0)
+    elseif ($countSuperuser > 0)
     {
         $needsauthentication = true;
     }
 
     $name = \LotgdHttp::getPost('username', '');
+
     if ($name > '')
     {
-        $password = stripslashes((string) \LotgdHttp::getPost('password', ''));
-        $result = $acctRepository->getLoginSuperuserWithPermit($name, md5(md5($password)), SU_MEGAUSER);
+        $password = \stripslashes((string) \LotgdHttp::getPost('password', ''));
+        $result   = $acctRepository->getLoginSuperuserWithPermit($name, \md5(\md5($password)), SU_MEGAUSER);
 
-        if (count($result) > 0)
+        if (\count($result) > 0)
         {
             $row = $result[0];
             // Okay, we have a username with megauser, now we need to do
             // some hackery with the password.
             $needsauthentication = true;
-            $p1 = md5($password);
-            $p2 = md5($p1);
+            $p1                  = \md5($password);
+            $p2                  = \md5($p1);
 
             if ('-1' == getsetting('installer_version', '-1'))
             {
                 // Okay, they are upgrading from 0.9.7  they will have
                 // either a non-encrypted password, or an encrypted singly
                 // password.
-                if (32 == strlen($row['password']) && $row['password'] == $p1 || $row['password'] == $password)
+                if (32 == \strlen($row['password']) && $row['password'] == $p1 || $row['password'] == $password)
                 {
                     $needsauthentication = false;
                 }
@@ -73,7 +75,7 @@ if ($needsauthentication)
 }
 
 $params = [
-    'authentication' => $needsauthentication
+    'authentication' => $needsauthentication,
 ];
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-0.twig', $params));

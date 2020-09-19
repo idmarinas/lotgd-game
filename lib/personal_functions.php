@@ -5,7 +5,7 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
     global $session;
 
     $args = ['explossproportion' => $explossproportion,
-        'goldlossproportion' => $goldlossproportion];
+        'goldlossproportion'     => $goldlossproportion, ];
     $args = modulehook('killedplayer', $args);
 
     if (isset($args['donotkill']))
@@ -13,8 +13,8 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
         return;
     }
 
-    $exp = $session['user']['experience'];
-    $exploss = round($exp * $args['explossproportion']);
+    $exp     = $session['user']['experience'];
+    $exploss = \round($exp * $args['explossproportion']);
 
     if ($exploss > $exp)
     {
@@ -27,8 +27,8 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
         output('`$You lose %s experience.`n', $exploss);
     }
 
-    $gold = $session['user']['gold'];
-    $goldloss = round($gold * $args['goldlossproportion']);
+    $gold     = $session['user']['gold'];
+    $goldloss = \round($gold * $args['goldlossproportion']);
 
     if ($goldloss > $gold)
     {
@@ -42,7 +42,7 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
     }
 
     $session['user']['hitpoints'] = 0;
-    $session['user']['alive'] = false;
+    $session['user']['alive']     = false;
 
     \LotgdNavigation::addNav('Daily news', 'news.php');
     page_footer();

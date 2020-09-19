@@ -5,9 +5,9 @@
 // mail ready
 function getmount($horse = 0)
 {
-    if (! $horse)
+    if ( ! $horse)
     {
-        return null;
+        return;
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:Mounts');

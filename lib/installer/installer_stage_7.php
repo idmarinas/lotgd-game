@@ -5,21 +5,23 @@ $type = (string) \LotgdHttp::getPost('type');
 if ($type > '')
 {
     $session['installer']['fromversion'] = \LotgdHttp::getPost('version');
+
     if ('install' == $type)
     {
-        $session['installer']['fromversion'] = '-1';
+        $session['installer']['fromversion']       = '-1';
         $session['installer']['dbinfo']['upgrade'] = false;
     }
 }
 
-if (! isset($session['installer']['fromversion']) || '' == $session['installer']['fromversion'])
+if ( ! isset($session['installer']['fromversion']) || '' == $session['installer']['fromversion'])
 {
-    clearsettings();//-- To avoid possible problems with the cache
-    $version = (string) getsetting('installer_version', '-1');
-    $installer = new \Lotgd\Core\Installer\Install();
+    clearsettings(); //-- To avoid possible problems with the cache
+    $version        = (string) getsetting('installer_version', '-1');
+    $installer      = new \Lotgd\Core\Installer\Install();
     $lotgd_versions = $installer->getAllVersions();
 
     $session['installer']['dbinfo']['upgrade'] = false;
+
     if ('-1' != $version)
     {
         $session['installer']['dbinfo']['upgrade'] = true;
@@ -31,9 +33,9 @@ if (! isset($session['installer']['fromversion']) || '' == $session['installer']
     $session['installer']['stagecompleted'] = $stage - 1;
 
     $params = [
-        'upgrade' => $session['installer']['dbinfo']['upgrade'],
+        'upgrade'       => $session['installer']['dbinfo']['upgrade'],
         'lotgdVersions' => $lotgd_versions,
-        'actualVersion' => $version
+        'actualVersion' => $version,
     ];
 
     rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-7.twig', $params));

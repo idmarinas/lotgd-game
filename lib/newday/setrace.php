@@ -10,7 +10,7 @@ if ('' != $setrace)
     // Set the person to the main village/capital by default
     $session['user']['location'] = $vname;
     modulehook('setrace');
-    \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
+    \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 }
 else
 {
@@ -33,6 +33,6 @@ $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_M
 
 $session['user']['race'] = 'app-default'; // Default race
 
-\LotgdNavigation::addNav('nav.continue', "newday.php?continue=1$resline");
+\LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 
 page_footer();

@@ -10,7 +10,7 @@ function increment_specialty($colorcode, $spec = false)
 
     if (false !== $spec)
     {
-        $revertspec = $session['user']['specialty'];
+        $revertspec                   = $session['user']['specialty'];
         $session['user']['specialty'] = $spec;
     }
 

@@ -6,12 +6,12 @@
 
 function reltime($date, $short = true)
 {
-    trigger_error(sprintf(
+    \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "LotgdFormat::relativedate($indate, $default)" instead.',
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $x = abs(time() - $date);
+    $x = \abs(\time() - $date);
     $d = (int) ($x / 86400);
     $x = $x % 86400;
     $h = (int) ($x / 3600);
@@ -49,19 +49,19 @@ function reltime($date, $short = true)
 
         if ($d > 0)
         {
-            $o = "$d ".($d > 1 ? $array['days'] : $array['day']).($h > 0 ? ", $h ".($h > 1 ? $array['hours'] : $array['hour']) : '');
+            $o = "{$d} ".($d > 1 ? $array['days'] : $array['day']).($h > 0 ? ", {$h} ".($h > 1 ? $array['hours'] : $array['hour']) : '');
         }
         elseif ($h > 0)
         {
-            $o = "$h ".($h > 1 ? $array['hours'] : $array['hour']).($m > 0 ? ", $m ".($m > 1 ? $array['minutes'] : $array['minute']) : '');
+            $o = "{$h} ".($h > 1 ? $array['hours'] : $array['hour']).($m > 0 ? ", {$m} ".($m > 1 ? $array['minutes'] : $array['minute']) : '');
         }
         elseif ($m > 0)
         {
-            $o = "$m ".($m > 1 ? $array['minutes'] : $array['minute']).($s > 0 ? ", $s ".($s > 1 ? $array['seconds'] : $array['second']) : '');
+            $o = "{$m} ".($m > 1 ? $array['minutes'] : $array['minute']).($s > 0 ? ", {$s} ".($s > 1 ? $array['seconds'] : $array['second']) : '');
         }
         else
         {
-            $o = "$s ".($s > 0 ? $array['seconds'] : $array['second']);
+            $o = "{$s} ".($s > 0 ? $array['seconds'] : $array['second']);
         }
     }
 
@@ -84,7 +84,7 @@ function checkday()
             $post = $_POST;
             unset($post['i_am_a_hack']);
 
-            if (count($post) > 0)
+            if (\count($post) > 0)
             {
                 $session['user']['lasthit'] = new \DateTime('0000-00-00 00:00:00');
 
@@ -94,7 +94,7 @@ function checkday()
             {
                 $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
 
-                $session = $revertsession;
+                $session                        = $revertsession;
                 $session['user']['restorepage'] = $request->getServer('REQUEST_URI');
                 $session['user']['allowednavs'] = [];
                 \LotgdNavigation::addNavAllow('newday.php');
@@ -121,8 +121,8 @@ function is_new_day($now = 0)
 
     $t1 = gametime();
     $t2 = convertgametime($session['user']['lasthit']->getTimestamp());
-    $d1 = gmdate('Y-m-d', $t1);
-    $d2 = gmdate('Y-m-d', $t2);
+    $d1 = \gmdate('Y-m-d', $t1);
+    $d2 = \gmdate('Y-m-d', $t2);
 
     if ($d1 != $d2)
     {
@@ -134,7 +134,7 @@ function is_new_day($now = 0)
 
 function getgametime()
 {
-    return gmdate(getsetting('gametime', 'g:i a'), gametime());
+    return \gmdate(getsetting('gametime', 'g:i a'), gametime());
 }
 
 /**
@@ -144,9 +144,7 @@ function getgametime()
  */
 function gametime()
 {
-    $time = convertgametime(time());
-
-    return $time;
+    return convertgametime(\time());
 }
 
 function convertgametime(int $intime, $debug = false)
@@ -157,13 +155,13 @@ function convertgametime(int $intime, $debug = false)
     // we know that strtotime gives us an identical timestamp for
     // everywhere in the world at the same time, if it is provided with
     // the GMT offset:
-    $epoch = strtotime(getsetting('game_epoch', gmdate('Y-m-d 00:00:00 O', strtotime('-30 days'))));
-    $now = strtotime(gmdate('Y-m-d H:i:s O', $intime));
-    $logd_timestamp = round(($now - $epoch) * getsetting('daysperday', 4), 0);
+    $epoch          = \strtotime(getsetting('game_epoch', \gmdate('Y-m-d 00:00:00 O', \strtotime('-30 days'))));
+    $now            = \strtotime(\gmdate('Y-m-d H:i:s O', $intime));
+    $logd_timestamp = \round(($now - $epoch) * getsetting('daysperday', 4), 0);
 
     if ($debug)
     {
-        echo 'Game Timestamp: '.$logd_timestamp.', which makes it '.gmdate('Y-m-d H:i:s', $logd_timestamp).'<br>';
+        echo 'Game Timestamp: '.$logd_timestamp.', which makes it '.\gmdate('Y-m-d H:i:s', $logd_timestamp).'<br>';
     }
 
     return (int) $logd_timestamp;
@@ -171,19 +169,19 @@ function convertgametime(int $intime, $debug = false)
 
 function gametimedetails()
 {
-    $ret = [];
-    $ret['now'] = date('Y-m-d 00:00:00');
-    $ret['gametime'] = gametime();
-    $ret['daysperday'] = getsetting('daysperday', 4);
-    $ret['secsperday'] = 86400 / $ret['daysperday'];
-    $ret['today'] = strtotime(gmdate('Y-m-d 00:00:00 O', $ret['gametime']));
-    $ret['tomorrow'] = strtotime(gmdate('Y-m-d H:i:s O', $ret['gametime']).' + 1 day');
-    $ret['tomorrow'] = strtotime(gmdate('Y-m-d 00:00:00 O', $ret['tomorrow']));
-    $ret['secssofartoday'] = $ret['gametime'] - $ret['today'];
-    $ret['secstotomorrow'] = $ret['tomorrow'] - $ret['gametime'];
-    $ret['realsecssofartoday'] = $ret['secssofartoday'] / $ret['daysperday'];
-    $ret['realsecstotomorrow'] = $ret['secstotomorrow'] / $ret['daysperday'];
-    $ret['dayduration'] = ($ret['tomorrow'] - $ret['today']) / $ret['daysperday'];
+    $ret                       = [];
+    $ret['now']                = \date('Y-m-d 00:00:00');
+    $ret['gametime']           = gametime();
+    $ret['daysperday']         = getsetting('daysperday', 4);
+    $ret['secsperday']         = 86400 / $ret['daysperday'];
+    $ret['today']              = \strtotime(\gmdate('Y-m-d 00:00:00 O', $ret['gametime']));
+    $ret['tomorrow']           = \strtotime(\gmdate('Y-m-d H:i:s O', $ret['gametime']).' + 1 day');
+    $ret['tomorrow']           = \strtotime(\gmdate('Y-m-d 00:00:00 O', $ret['tomorrow']));
+    $ret['secssofartoday']     = $ret['gametime'] - $ret['today'];
+    $ret['secstotomorrow']     = $ret['tomorrow'] - $ret['gametime'];
+    $ret['realsecssofartoday'] = $ret['secssofartoday']             / $ret['daysperday'];
+    $ret['realsecstotomorrow'] = $ret['secstotomorrow']             / $ret['daysperday'];
+    $ret['dayduration']        = ($ret['tomorrow'] - $ret['today']) / $ret['daysperday'];
 
     return $ret;
 }
@@ -195,5 +193,5 @@ function secondstonextgameday($details = false)
         $details = gametimedetails();
     }
 
-    return strtotime("{$details['now']} + {$details['realsecstotomorrow']} seconds");
+    return \strtotime("{$details['now']} + {$details['realsecstotomorrow']} seconds");
 }

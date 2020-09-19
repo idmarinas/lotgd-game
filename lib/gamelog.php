@@ -7,11 +7,11 @@ function gamelog($message, $category = 'general', $filed = false)
     $repository = \Doctrine::getRepository('LotgdCore:Gamelog');
 
     $entity = $repository->hydrateEntity([
-        'message' => $message,
+        'message'  => $message,
         'category' => $category,
-        'filed' => ($filed ? 1 : 0),
-        'date' => new \DateTime('now'),
-        'who' => (int) $session['user']['acctid']
+        'filed'    => ($filed ? 1 : 0),
+        'date'     => new \DateTime('now'),
+        'who'      => (int) $session['user']['acctid'],
     ]);
 
     \Doctrine::persist($entity);

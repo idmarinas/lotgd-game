@@ -112,7 +112,7 @@ function check_su_access($level)
  *
  * @param int $permission
  *
- * @return boolean|redirect
+ * @return bool|redirect
  */
 function checkSuPermission($permission, ?string $return = null)
 {

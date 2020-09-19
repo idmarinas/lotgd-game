@@ -15,18 +15,19 @@ if ('delban' == $op)
 
 //-- Delete expire bans
 $removed = $repository->removeExpireBans();
+
 if ($removed)
 {
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.expired', ['count' => $removed], $textDomain));
 }
 
-$page = (int) \LotgdHttp::getQuery('page');
-$duration = (string) \LotgdHttp::getQuery('duration');
-$duration = $duration ?: 'P14D';
+$page      = (int) \LotgdHttp::getQuery('page');
+$duration  = (string) \LotgdHttp::getQuery('duration');
+$duration  = $duration ?: 'P14D';
 $notBefore = (int) \LotgdHttp::getQuery('notbefore');
-$operator = $notBefore ? '>=' : '<=';
+$operator  = $notBefore ? '>=' : '<=';
 
-$date = new \DateTime('now');
+$date  = new \DateTime('now');
 $query = $repository->createQueryBuilder('u');
 $query->orderBy('u.banexpire', 'ASC');
 
@@ -35,8 +36,8 @@ if ('searchban' == $op && $target)
     $params['showing'] = ['removeban.showing.search', ['name' => $target]];
 
     $repositoryChar = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
-    $query = $repositoryChar->createQueryBuilder('u');
-    $expr = $query->expr();
+    $query          = $repositoryChar->createQueryBuilder('u');
+    $expr           = $query->expr();
 
     $query->select('b')
         ->join(
@@ -57,18 +58,18 @@ if ('searchban' == $op && $target)
 }
 elseif ('forever' != $duration && 'all' != $duration)
 {
-    $type = substr($duration, -1);
+    $type   = \substr($duration, -1);
     $matchs = [];
-    preg_match('/[[:digit:]]+/', $duration, $matchs);
+    \preg_match('/[[:digit:]]+/', $duration, $matchs);
     $count = $matchs[0];
 
     if ('D' == $type)
     {
-        $count = $count / 7 ;
+        $count = $count / 7;
     }
     $params['showing'] = ["removeban.showing.{$type}", ['notBefore' => $notBefore, 'n' => $count]];
 
-    $query->where("u.banexpire $operator :date AND u.banexpire > '0000-00-00 00:00:00'")
+    $query->where("u.banexpire {$operator} :date AND u.banexpire > '0000-00-00 00:00:00'")
         ->setParameter('date', $date->add(new DateInterval($duration)))
     ;
 }

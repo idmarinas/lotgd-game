@@ -8,18 +8,19 @@ if (\LotgdHttp::isPost())
     $form->setData($postSettings);
 
     $messageType = 'addErrorMessage';
-    $message = 'flash.message.error';
+    $message     = 'flash.message.error';
+
     if ($form->isValid())
     {
         $messageType = null;
         $formIsValid = true;
-        $rawData = $form->getData();
+        $rawData     = $form->getData();
 
         $postSettings = [];
         //-- Merge all values, avoid duplicate keys in collections
-        foreach($rawData as $key => $value)
+        foreach ($rawData as $key => $value)
         {
-            if (is_array($value))
+            if (\is_array($value))
             {
                 $postSettings = $postSettings + $value;
 
@@ -41,12 +42,12 @@ if (\LotgdHttp::isPost())
 $details = gametimedetails();
 
 $secstonewday = secondstonextgameday($details);
-$useful_vals = [
-    'dayduration' => round(($details['dayduration'] / 60 / 60), 0).' hours',
-    'curgametime' => getgametime(),
-    'curservertime' => date('Y-m-d h:i:s a'),
-    'lastnewday' => date('h:i:s a', strtotime("-{$details['realsecssofartoday']} seconds")),
-    'nextnewday' => date('h:i:s a', strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.date('H\\h i\\m s\\s', $secstonewday).')'
+$useful_vals  = [
+    'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
+    'curgametime'   => getgametime(),
+    'curservertime' => \date('Y-m-d h:i:s a'),
+    'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
+    'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonewday).')',
 ];
 
 $form->setData([
@@ -54,35 +55,35 @@ $form->setData([
 ]);
 
 //-- Not set default values if is post request
-if(! \LotgdHttp::isPost())
+if ( ! \LotgdHttp::isPost())
 {
-    $vals = array_merge($settings->getArray(), $useful_vals);
+    $vals = \array_merge($settings->getArray(), $useful_vals);
 
     $data = [
-        'game_setup' => $vals,
+        'game_setup'  => $vals,
         'maintenance' => $vals,
-        'home' => $vals,
-        'beta' => $vals,
-        'account' => $vals,
-        'commentary' => $vals,
-        'places' => $vals,
-        'su_title' => $vals,
-        'referral' => $vals,
-        'events' => $vals,
-        'donation' => $vals,
-        'training' => $vals,
-        'clans' => $vals,
-        'newdays' => $vals,
-        'forest' => $vals,
-        'enemies' => $vals,
-        'companion' => $vals,
-        'bank' => $vals,
-        'mail' => $vals,
-        'pvp' => $vals,
-        'content' => $vals,
-        'logdnet' => $vals,
-        'daysetup' => $vals,
-        'misc' => $vals,
+        'home'        => $vals,
+        'beta'        => $vals,
+        'account'     => $vals,
+        'commentary'  => $vals,
+        'places'      => $vals,
+        'su_title'    => $vals,
+        'referral'    => $vals,
+        'events'      => $vals,
+        'donation'    => $vals,
+        'training'    => $vals,
+        'clans'       => $vals,
+        'newdays'     => $vals,
+        'forest'      => $vals,
+        'enemies'     => $vals,
+        'companion'   => $vals,
+        'bank'        => $vals,
+        'mail'        => $vals,
+        'pvp'         => $vals,
+        'content'     => $vals,
+        'logdnet'     => $vals,
+        'daysetup'    => $vals,
+        'misc'        => $vals,
     ];
 
     //-- Set values of data base

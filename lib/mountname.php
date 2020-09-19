@@ -7,18 +7,18 @@ function getmountname()
 {
     global $playermount;
 
-    $name = '';
+    $name   = '';
     $lcname = '';
 
     if (isset($playermount['mountname']))
     {
-        $name = sprintf_translate('Your %s', $playermount['mountname']);
+        $name   = sprintf_translate('Your %s', $playermount['mountname']);
         $lcname = sprintf_translate('your %s', $playermount['mountname']);
     }
 
     if (isset($playermount['newname']) && '' != $playermount['newname'])
     {
-        $name = $playermount['newname'];
+        $name   = $playermount['newname'];
         $lcname = $playermount['newname'];
     }
 

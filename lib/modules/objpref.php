@@ -11,16 +11,16 @@ function module_delete_objprefs($objtype, $objid)
     global $mostrecentmodule;
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $entities = $repository->findBy([ 'objtype' => $objtype, 'objid' => $objid ]);
+    $entities   = $repository->findBy(['objtype' => $objtype, 'objid' => $objid]);
 
-    foreach($entities as $entity)
+    foreach ($entities as $entity)
     {
         \Doctrine::remove($entity);
     }
 
     \Doctrine::flush();
 
-    LotgdCache::clearByPrefix("module-objpref-$objtype-$objid-$mostrecentmodule");
+    LotgdCache::clearByPrefix("module-objpref-{$objtype}-{$objid}-{$mostrecentmodule}");
 }
 
 /**
@@ -52,16 +52,16 @@ function get_module_objpref($objtype, $objid, $name, $module = false)
     //we couldn't find this elsewhere, load the default value if it exists.
     $info = get_module_info($module);
 
-    if (isset($info["prefs-$objtype"][$name]))
+    if (isset($info["prefs-{$objtype}"][$name]))
     {
-        if (is_array($info["prefs-$objtype"][$name]))
+        if (\is_array($info["prefs-{$objtype}"][$name]))
         {
-            $v = $info["prefs-$objtype"][$name][0];
-            $x = explode('|', $v);
+            $v = $info["prefs-{$objtype}"][$name][0];
+            $x = \explode('|', $v);
         }
         else
         {
-            $x = explode('|', $info["prefs-$objtype"][$name]);
+            $x = \explode('|', $info["prefs-{$objtype}"][$name]);
         }
 
         if (isset($x[1]))
@@ -71,8 +71,6 @@ function get_module_objpref($objtype, $objid, $name, $module = false)
             return $x[1];
         }
     }
-
-    return;
 }
 
 /**
@@ -94,19 +92,19 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
-    $entity = $repository->hydrateEntity([
+    $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid]);
+    $entity     = $repository->hydrateEntity([
         'modulename' => $module,
-        'setting' => $name,
-        'objtype' => $objtype,
-        'objid' => $objid,
-        'value' => $value
+        'setting'    => $name,
+        'objtype'    => $objtype,
+        'objid'      => $objid,
+        'value'      => $value,
     ], $entity);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-objpref-$objtype-$objid-$module", true);
+    LotgdCache::removeItem("module-objpref-{$objtype}-{$objid}-{$module}", true);
 }
 
 /**
@@ -130,21 +128,21 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-    $entity = $repository->findOneBy([ 'modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid ]);
-    $entity = $repository->hydrateEntity([
+    $entity     = $repository->findOneBy(['modulename' => $module, 'setting' => $name, 'objtype' => $objtype, 'objid' => $objid]);
+    $entity     = $repository->hydrateEntity([
         'modulename' => $module,
-        'setting' => $name,
-        'objtype' => $objtype,
-        'objid' => $objid
+        'setting'    => $name,
+        'objtype'    => $objtype,
+        'objid'      => $objid,
     ], $entity);
 
-    $value = ((float) $entity->getValue())+ $value;
+    $value = ((float) $entity->getValue()) + $value;
     $entity->setValue($value);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-objpref-$objtype-$objid-$module", true);
+    LotgdCache::removeItem("module-objpref-{$objtype}-{$objid}-{$module}", true);
 }
 
 /**
@@ -153,8 +151,6 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
  * @param string $objtype
  * @param int    $objid
  * @param string $module
- *
- * @return array
  */
 function load_module_objpref($objtype, $objid, $module = false): array
 {
@@ -165,20 +161,21 @@ function load_module_objpref($objtype, $objid, $module = false): array
         $module = $mostrecentmodule;
     }
 
-    $module_objpref = \LotgdCache::getItem("module-objpref-$objtype-$objid-$module");
+    $module_objpref = \LotgdCache::getItem("module-objpref-{$objtype}-{$objid}-{$module}");
 
-    if (! is_array($module_objpref))
+    if ( ! \is_array($module_objpref))
     {
         $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-        $result = $repository->findBy([ 'modulename' => $module, 'objtype' => $objtype, 'objid' => $objid ]);
+        $result     = $repository->findBy(['modulename' => $module, 'objtype' => $objtype, 'objid' => $objid]);
 
         $module_objpref = [];
-        foreach($result as $val)
+
+        foreach ($result as $val)
         {
             $module_objpref[$val->getSetting()] = $val->getValue();
         }
 
-        \LotgdCache::setItem("module-objpref-$objtype-$objid-$module", $module_objpref);
+        \LotgdCache::setItem("module-objpref-{$objtype}-{$objid}-{$module}", $module_objpref);
     }
 
     return $module_objpref;

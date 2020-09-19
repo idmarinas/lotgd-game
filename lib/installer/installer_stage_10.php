@@ -5,9 +5,10 @@ $superusers = $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
 
 if (0 == $superusers)
 {
-    $name = (string) \LotgdHttp::getPost('name');
+    $name  = (string) \LotgdHttp::getPost('name');
     $pass1 = (string) \LotgdHttp::getPost('pass1');
     $pass2 = (string) \LotgdHttp::getPost('pass2');
+
     if ($name)
     {
         $showform = false;
@@ -17,7 +18,7 @@ if (0 == $superusers)
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordNotMatch', [], 'page-installer'));
             $showform = true;
         }
-        elseif (strlen($pass1) < 6)
+        elseif (\strlen($pass1) < 6)
         {
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordShort', [], 'page-installer'));
             $showform = true;
@@ -27,12 +28,9 @@ if (0 == $superusers)
             // Give the superuser a decent set of privs so they can
             // do everything needed without having to first go into
             // the user editor and give themselves privs.
-            $su = SU_MEGAUSER | SU_EDIT_MOUNTS | SU_EDIT_CREATURES | SU_EDIT_PETITIONS | SU_EDIT_COMMENTS | SU_EDIT_DONATIONS |
-            SU_EDIT_USERS | SU_EDIT_CONFIG | SU_INFINITE_DAYS | SU_EDIT_EQUIPMENT | SU_EDIT_PAYLOG | SU_DEVELOPER |
-            SU_POST_MOTD | SU_MODERATE_CLANS | SU_EDIT_RIDDLES | SU_MANAGE_MODULES | SU_AUDIT_MODERATION | SU_RAW_SQL |
-            SU_VIEW_SOURCE | SU_NEVER_EXPIRE;
-            $pass = md5(md5(stripslashes(\LotgdHttp::getPost('pass1'))));
-            $sql = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='$name'";
+            $su   = SU_MEGAUSER | SU_EDIT_MOUNTS | SU_EDIT_CREATURES | SU_EDIT_PETITIONS | SU_EDIT_COMMENTS | SU_EDIT_DONATIONS | SU_EDIT_USERS | SU_EDIT_CONFIG | SU_INFINITE_DAYS | SU_EDIT_EQUIPMENT | SU_EDIT_PAYLOG | SU_DEVELOPER | SU_POST_MOTD | SU_MODERATE_CLANS | SU_EDIT_RIDDLES | SU_MANAGE_MODULES | SU_AUDIT_MODERATION | SU_RAW_SQL | SU_VIEW_SOURCE | SU_NEVER_EXPIRE;
+            $pass = \md5(\md5(\stripslashes(\LotgdHttp::getPost('pass1'))));
+            $sql  = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='{$name}'";
             DB::query($sql);
 
             try
@@ -66,7 +64,7 @@ if (0 == $superusers)
                 \Doctrine::persist($account);
                 \Doctrine::flush(); //-- Persist objects
 
-                \Doctrine::clear();//-- Detaches all objects from Doctrine!
+                \Doctrine::clear(); //-- Detaches all objects from Doctrine!
             }
             catch (\Throwable $th)
             {
@@ -89,7 +87,7 @@ if (0 == $superusers)
     {
         $params = [
             'stage' => $stage,
-            'name' => $name
+            'name'  => $name,
         ];
 
         rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-10.twig', $params));

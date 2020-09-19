@@ -8,7 +8,7 @@ $params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
 
 \LotgdNavigation::addHeader('category.options');
 
-if (count($params['clanList']))
+if (\count($params['clanList']))
 {
     \LotgdNavigation::addNav('nav.list.lobby', 'clan.php');
 

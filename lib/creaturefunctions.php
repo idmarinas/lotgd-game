@@ -11,59 +11,55 @@
 function lotgd_generate_creature_levels($level = null)
 {
     $maxlvl = getsetting('maxlevel', 15) + 5;
-    $stats = \LotgdCache::getItem("lotgd-generate-creature-levels-{$maxlvl}");
+    $stats  = \LotgdCache::getItem("lotgd-generate-creature-levels-{$maxlvl}");
 
     if (empty($stats))
     {
-        $creatureexp = 14;
-        $creaturegold = 36;
+        $creatureexp     = 14;
+        $creaturegold    = 36;
         $creaturedefense = 0;
 
-        for ($i = 1; $i <= $maxlvl; $i++)
+        for ($i = 1; $i <= $maxlvl; ++$i)
         {
             //apply algorithmic creature generation.
-            $creaturehealth = ($i * 10) + ($i - 1) - round(sqrt($i - 1));
-            $creatureattack = 1 + ($i - 1) * 2;
+            $creaturehealth = ($i * 10) + ($i - 1) - \round(\sqrt($i - 1));
+            $creatureattack = 1         + ($i - 1) * 2;
             $creaturedefense += ($i % 2 ? 1 : 2);
 
             if ($i > 1)
             {
-                $creatureexp += round(10 + 1.5 * log($i));
+                $creatureexp  += \round(10 + 1.5 * \log($i));
                 $creaturegold += (31 * ($i < 4 ? 2 : 1));
                 //give lower levels more gold
             }
             $stats[$i] = [
-                'creaturelevel' => $i,
-                'creaturehealth' => $creaturehealth,
-                'creatureattack' => $creatureattack,
+                'creaturelevel'   => $i,
+                'creaturehealth'  => $creaturehealth,
+                'creatureattack'  => $creatureattack,
                 'creaturedefense' => $creaturedefense,
-                'creatureexp' => $creatureexp,
-                'creaturegold' => $creaturegold,
+                'creatureexp'     => $creatureexp,
+                'creaturegold'    => $creaturegold,
             ];
         }
 
-        \LotgdCache::setItem("lotgd-generate-creature-levels-$maxlvl", $stats);
+        \LotgdCache::setItem("lotgd-generate-creature-levels-{$maxlvl}", $stats);
     }
 
-    return ($stats[$level] ?? $stats);
+    return $stats[$level] ?? $stats;
 }
 
 /**
  * Generate a dummy creature Doppelganger.
- *
- * @param int $level
- *
- * @return array
  */
 function lotgd_generate_doppelganger(int $level): array
 {
     global $session;
 
     //-- There is nothing in the database to challenge you, let's give you a doppelganger.
-    $badguy = lotgd_generate_creature_levels($level);
-    $badguy['creaturename'] = \LotgdTranslator::t('doppelganger', [ 'name' => $session['user']['name'] ], 'page-creatures');
+    $badguy                   = lotgd_generate_creature_levels($level);
+    $badguy['creaturename']   = \LotgdTranslator::t('doppelganger', ['name' => $session['user']['name']], 'page-creatures');
     $badguy['creatureweapon'] = $session['user']['weapon'];
-    $badguy['creaturegold'] = 0;
+    $badguy['creaturegold']   = 0;
 
     return $badguy;
 }
@@ -88,18 +84,18 @@ function lotgd_transform_creature(array $badguy, $debug = true)
         $dk = $session['user']['dragonkills'];
     }
 
-    $badguy = array_merge(lotgd_generate_creature_levels($badguy['creaturelevel']), $badguy);
+    $badguy = \array_merge(lotgd_generate_creature_levels($badguy['creaturelevel']), $badguy);
 
-    $badguy['playerdragonkills'] = $dk;
-    $badguy['creaturespeed'] = $badguy['creaturespeed'] ?? 2.5;
-    $badguy['creatureexp'] = $badguy['creatureexp'] ?? 0;
+    $badguy['playerdragonkills']  = $dk;
+    $badguy['creaturespeed']      = $badguy['creaturespeed']           ?? 2.5;
+    $badguy['creatureexp']        = $badguy['creatureexp']               ?? 0;
     $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
 
     //-- Apply multipliers
-    $badguy['creaturegold'] = round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
-    $badguy['creatureattack'] = $badguy['creatureattack'] * ($badguy['creatureattackbonus'] ?? 1);
+    $badguy['creaturegold']    = \round($badguy['creaturegold'] * ($badguy['creaturegoldbonus'] ?? 1));
+    $badguy['creatureattack']  = $badguy['creatureattack']  * ($badguy['creatureattackbonus'] ?? 1);
     $badguy['creaturedefense'] = $badguy['creaturedefense'] * ($badguy['creaturedefensebonus'] ?? 1);
-    $badguy['creaturehealth'] = round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
+    $badguy['creaturehealth']  = \round($badguy['creaturehealth'] * ($badguy['creaturehealthbonus'] ?? 1));
 
     $creatureattr = get_creature_stats($dk);
 
@@ -118,19 +114,19 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     $badguy['creaturewis'] = $creatureattr['wis'] + 10;
 
     //-- Attack, defense, health from attributes
-    $badguy['creatureattackattrs'] = get_creature_attack($creatureattr);
+    $badguy['creatureattackattrs']  = get_creature_attack($creatureattr);
     $badguy['creaturedefenseattrs'] = get_creature_defense($creatureattr);
-    $badguy['creaturehealthattrs'] = get_creature_hitpoints($creatureattr);
-    $badguy['creaturespeedattrs'] = get_creature_speed($creatureattr);
+    $badguy['creaturehealthattrs']  = get_creature_hitpoints($creatureattr);
+    $badguy['creaturespeedattrs']   = get_creature_speed($creatureattr);
 
     //-- Sum bonus
-    $badguy['creatureattack'] += $badguy['creatureattackattrs'];
+    $badguy['creatureattack']  += $badguy['creatureattackattrs'];
     $badguy['creaturedefense'] += $badguy['creaturedefenseattrs'];
-    $badguy['creaturehealth'] += $badguy['creaturehealthattrs'];
-    $badguy['creaturespeed'] += $badguy['creaturespeedattrs'];
+    $badguy['creaturehealth']  += $badguy['creaturehealthattrs'];
+    $badguy['creaturespeed']   += $badguy['creaturespeedattrs'];
 
     //-- Set max health for creature
-    $badguy['creaturemaxhealth'] = $badguy['creaturehealth'];
+    $badguy['creaturemaxhealth']      = $badguy['creaturehealth'];
     $badguy['creaturestartinghealth'] = $badguy['creaturehealth'];
 
     //-- Check if script exist
@@ -138,7 +134,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     {
         $aiscriptfile = "{$badguy['creatureaiscript']}.php";
 
-        if (file_exists($aiscriptfile))
+        if (\file_exists($aiscriptfile))
         {
             $badguy['creatureaiscript'] = "include '{$aiscriptfile}';";
         }
@@ -149,7 +145,7 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     }
 
     //-- Not show debug
-    if (! $debug)
+    if ( ! $debug)
     {
         return $badguy;
     }
@@ -167,8 +163,6 @@ function lotgd_transform_creature(array $badguy, $debug = true)
  * @param int       $mintargetlevel
  * @param bool      $packofmonsters For diferent or same creatures
  * @param bool|null $forest         TRUE for creature of forest, FALSE for graveyard and NULL for none
- *
- * @return array
  */
 function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmonsters = false, $forest = true): array
 {
@@ -176,7 +170,7 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
     $limit = ($multi > 1 ? $multi : 1);
 
     $repository = \Doctrine::getRepository('LotgdCore:Creatures');
-    $query = $repository->createQueryBuilder('u');
+    $query      = $repository->createQueryBuilder('u');
     $query->orderBy('RAND()');
 
     if (true === $forest)
@@ -199,9 +193,9 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
 
     $creatures = $query->getArrayResult();
 
-    if (count($creatures))
+    if (\count($creatures))
     {
-        foreach($creatures as $key => $creature)
+        foreach ($creatures as $key => $creature)
         {
             $creatures[$key]['creaturelevel'] = e_rand($mintargetlevel, $targetlevel);
         }
@@ -209,12 +203,12 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
 
     //-- You can add more creatures. This is good, when not find nothing in data base
     $creatures = modulehook('creature-search', [
-        'creatures' => $creatures,
-        'multi' => $multi,
-        'targetlevel' => $targetlevel,
+        'creatures'      => $creatures,
+        'multi'          => $multi,
+        'targetlevel'    => $targetlevel,
         'mintargetlevel' => $mintargetlevel,
         'packofmonsters' => $packofmonsters,
-        'forest' => $forest
+        'forest'         => $forest,
     ]);
 
     return $creatures['creatures'];
@@ -248,9 +242,9 @@ function get_creature_hitpoints($attrs)
     $wisbonus = $attrs['wis'] * .2;
     $strbonus = $attrs['str'] * .3;
 
-    $hitpoints = round($conbonus + $wisbonus + $strbonus, 0);
+    $hitpoints = \round($conbonus + $wisbonus + $strbonus, 0);
 
-    return max($hitpoints, 0);
+    return \max($hitpoints, 0);
 }
 
 function get_creature_attack($attrs)
@@ -258,29 +252,29 @@ function get_creature_attack($attrs)
     $strbonus = (1 / 3) * $attrs['str'];
     // $speedbonus = (1 / 3) * get_creature_speed($attrs);
     $wisdombonus = (1 / 6) * $attrs['wis'];
-    $intbonus = (1 / 6) * $attrs['int'];
+    $intbonus    = (1 / 6) * $attrs['int'];
 
     $attack = $strbonus + $wisdombonus + $intbonus;
 
-    return max($attack, 0);
+    return \max($attack, 0);
 }
 
 function get_creature_defense($attrs)
 {
     $wisdombonus = (1 / 4) * $attrs['wis'];
-    $constbonus = (3 / 8) * $attrs['con'];
+    $constbonus  = (3 / 8) * $attrs['con'];
     // $speedbonus = (3 / 8) * get_creature_speed($attrs);
 
     $defense = $wisdombonus + $constbonus;
 
-    return max($defense, 0);
+    return \max($defense, 0);
 }
 
 function get_creature_speed($attrs)
 {
     $speed = (1 / 2) * $attrs['dex'] + (1 / 4) * $attrs['int'] + (5 / 2);
 
-    return max($speed, 0);
+    return \max($speed, 0);
 }
 
 function lotgd_show_debug_creature(array $badguy)

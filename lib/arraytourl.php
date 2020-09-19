@@ -11,6 +11,8 @@
  * @version Lotgd 1.1.2 DragonPrime Edition
  *
  * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
+ *
+ * @param mixed $array
  */
 /**
  * Turns an array into an URL argument string.
@@ -26,7 +28,7 @@ function arraytourl($array)
 {
     //takes an array and encodes it in key=val&key=val form.
     $url = '';
-    $i = 0;
+    $i   = 0;
 
     foreach ($array as $key => $val)
     {
@@ -34,8 +36,8 @@ function arraytourl($array)
         {
             $url .= '&';
         }
-        $i++;
-        $url .= rawurlencode($key).'='.rawurlencode($val);
+        ++$i;
+        $url .= \rawurlencode($key).'='.\rawurlencode($val);
     }
 
     return $url;
@@ -50,17 +52,17 @@ function arraytourl($array)
 function urltoarray($url)
 {
     //takes a URL and returns its arguments in array form.
-    if (false !== strpos($url, '?'))
+    if (false !== \strpos($url, '?'))
     {
-        $url = substr($array, strpos($url, '?') + 1);
+        $url = \substr($array, \strpos($url, '?') + 1);
     }
-    $a = explode('&', $url);
+    $a     = \explode('&', $url);
     $array = [];
 
     foreach ($a as $val)
     {
-        $b = explode('=', $val);
-        $array[urldecode($b[0])] = urldecode($b[1]);
+        $b                        = \explode('=', $val);
+        $array[\urldecode($b[0])] = \urldecode($b[1]);
     }
 
     return $array;

@@ -2,20 +2,20 @@
 
 function activate_module($module)
 {
-    if (! is_module_installed($module) && ! install_module($module))
+    if ( ! is_module_installed($module) && ! install_module($module))
     {
         return false;
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
-    $entity = $repository->find($module);
+    $entity     = $repository->find($module);
 
     $entity->setActive(1);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("injections-inject-$module");
+    LotgdCache::removeItem("injections-inject-{$module}");
     LotgdCache::clearByPrefix('moduleprepare');
 
     return true;
@@ -23,9 +23,9 @@ function activate_module($module)
 
 function deactivate_module($module)
 {
-    if (! is_module_installed($module))
+    if ( ! is_module_installed($module))
     {
-        if (! install_module($module))
+        if ( ! install_module($module))
         {
             return false;
         }
@@ -37,14 +37,14 @@ function deactivate_module($module)
     }
 
     $repository = \Doctrine::getRepository('LotgdCore:Modules');
-    $entity = $repository->find($module);
+    $entity     = $repository->find($module);
 
     $entity->setActive(0);
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("injections-inject-$module");
+    LotgdCache::removeItem("injections-inject-{$module}");
     LotgdCache::clearByPrefix('moduleprepare');
 
     return true;
@@ -57,13 +57,13 @@ function uninstall_module($module)
         $fname = $module.'_uninstall';
         debug('Running module uninstall script`n');
 
-        if (! $fname())
+        if ( ! $fname())
         {
             return false;
         }
 
         $repository = \Doctrine::getRepository('LotgdCore:Modules');
-        $entity = $repository->find($module);
+        $entity     = $repository->find($module);
 
         debug('Deleting module entry`n');
         \Doctrine::remove($entity);
@@ -73,16 +73,18 @@ function uninstall_module($module)
 
         debug('Deleting module settings`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
-        $entities = $repository->findBy([ 'modulename' => $module ]);
+        $entities   = $repository->findBy(['modulename' => $module]);
+
         foreach ($entities as $entity)
         {
             \Doctrine::remove($entity);
         }
-        LotgdCache::removeItem("modulesettings-settings-$module");
+        LotgdCache::removeItem("modulesettings-settings-{$module}");
 
         debug('Deleting module user prefs`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
-        $entities = $repository->findBy([ 'modulename' => $module ]);
+        $entities   = $repository->findBy(['modulename' => $module]);
+
         foreach ($entities as $entity)
         {
             \Doctrine::remove($entity);
@@ -90,12 +92,13 @@ function uninstall_module($module)
 
         debug('Deleting module object prefs`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
-        $entities = $repository->findBy([ 'modulename' => $module ]);
+        $entities   = $repository->findBy(['modulename' => $module]);
+
         foreach ($entities as $entity)
         {
             \Doctrine::remove($entity);
         }
-        LotgdCache::removeItem("injections-inject-$module");
+        LotgdCache::removeItem("injections-inject-{$module}");
         LotgdCache::clearByPrefix('moduleprepare');
 
         \Doctrine::flush();
@@ -125,6 +128,7 @@ function install_module($module, $force = true)
         if ($force)
         {
             $entity = $repository->find($module);
+
             if ($entity)
             {
                 \Doctrine::remove($entity);
@@ -137,14 +141,14 @@ function install_module($module, $force = true)
         if (injectmodule($module, true))
         {
             // If we're not forcing and this is already installed, we are done
-            if (! $force && is_module_installed($module))
+            if ( ! $force && is_module_installed($module))
             {
                 return true;
             }
 
             $info = get_module_info($module);
             //check installation requirements
-            if (! module_check_requirements($info['requires']))
+            if ( ! module_check_requirements($info['requires']))
             {
                 debug('`$Module could not installed -- it did not meet its prerequisites.`n');
 
@@ -153,41 +157,41 @@ function install_module($module, $force = true)
             else
             {
                 $entity = $repository->hydrateEntity([
-                    'modulename' => $mostrecentmodule,
-                    'formalname' => $info['name'],
+                    'modulename'   => $mostrecentmodule,
+                    'formalname'   => $info['name'],
                     'moduleauthor' => $info['author'],
-                    'active' => 0,
-                    'filename' => "{$mostrecentmodule}.php",
-                    'installdate' => new \DateTime('now'),
-                    'installedby' => $name,
-                    'category' => $info['category'],
-                    'infokeys' => sprintf('|%s|', implode(array_keys($info), '|')),
-                    'version' => $info['version'],
-                    'download' => $info['download'],
-                    'description' => $info['description']
+                    'active'       => 0,
+                    'filename'     => "{$mostrecentmodule}.php",
+                    'installdate'  => new \DateTime('now'),
+                    'installedby'  => $name,
+                    'category'     => $info['category'],
+                    'infokeys'     => \sprintf('|%s|', \implode(\array_keys($info), '|')),
+                    'version'      => $info['version'],
+                    'download'     => $info['download'],
+                    'description'  => $info['description'],
                 ]);
                 \Doctrine::persist($entity);
                 \Doctrine::flush();
 
                 $fname = $mostrecentmodule.'_install';
 
-                if (isset($info['settings']) && count($info['settings']) > 0)
+                if (isset($info['settings']) && \count($info['settings']) > 0)
                 {
                     foreach ($info['settings'] as $key => $val)
                     {
-                        if (is_array($val))
+                        if (\is_array($val))
                         {
-                            $x = explode('|', $val[0]);
+                            $x = \explode('|', $val[0]);
                         }
                         else
                         {
-                            $x = explode('|', $val);
+                            $x = \explode('|', $val);
                         }
 
                         if (isset($x[1]))
                         {
                             set_module_setting($key, $x[1]);
-                            debug("Setting $key to default {$x[1]}");
+                            debug("Setting {$key} to default {$x[1]}");
                         }
                     }
                 }
@@ -198,7 +202,7 @@ function install_module($module, $force = true)
                 }
 
                 debug('`^Module installed.  It is not yet active.`n');
-                LotgdCache::removeItem("injections-inject-$mostrecentmodule");
+                LotgdCache::removeItem("injections-inject-{$mostrecentmodule}");
                 LotgdCache::clearByPrefix('moduleprepare');
 
                 return true;

@@ -9,7 +9,7 @@ function holidayize($text, $type = 'unknown')
 {
     global $session;
 
-    if (! isset($session['user']['prefs']['ihavenocheer']))
+    if ( ! isset($session['user']['prefs']['ihavenocheer']))
     {
         $session['user']['prefs']['ihavenocheer'] = 0;
     }

@@ -3,12 +3,12 @@
 $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
-$result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
+$result                   = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
 $params['motdAuthorName'] = $result['motdauthname'];
 $params['descAuthorName'] = $result['descauthname'];
 unset($result);
 
-$params['leaders'] = $charRepository->getClanLeadersCount($claninfo['clanid']);
+$params['leaders']         = $charRepository->getClanLeadersCount($claninfo['clanid']);
 $params['promotingLeader'] = false;
 
 if (0 == $params['leaders'])
@@ -34,6 +34,7 @@ if (0 == $params['leaders'])
 $params['membership'] = $charRepository->getClanMembershipDetails($claninfo['clanid']);
 
 \LotgdNavigation::addHeader('category.options');
+
 if ($session['user']['clanrank'] > CLAN_MEMBER)
 {
     \LotgdNavigation::addNav('nav.default.update', 'clan.php?op=motd');
@@ -44,6 +45,6 @@ if ($session['user']['clanrank'] > CLAN_MEMBER)
 \LotgdNavigation::addNav('nav.default.waiting.area', 'clan.php?op=waiting');
 \LotgdNavigation::addNav('nav.default.withdraw', 'clan.php?op=withdraw', [
     'attributes' => [
-        'data-options' => json_encode(['text' => \LotgdTranslator::t('section.withdraw.confirm', [], $textDomain)]),
-        'onclick' => 'Lotgd.confirm(this, event)'
-]]);
+        'data-options' => \json_encode(['text' => \LotgdTranslator::t('section.withdraw.confirm', [], $textDomain)]),
+        'onclick'      => 'Lotgd.confirm(this, event)',
+    ], ]);

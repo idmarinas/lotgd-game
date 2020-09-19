@@ -12,18 +12,19 @@ if ($session['user']['clanrank'] < CLAN_OFFICER)
 $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
 
-$result = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
+$result                   = $acctRepository->getClanAuthorNameOfMotdDescFromAcctId($claninfo['motdauthor'], $claninfo['descauthor']);
 $params['motdAuthorName'] = $result['motdauthname'];
 $params['descAuthorName'] = $result['descauthname'];
 unset($result);
 
-$clanmotd = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clanmotd'), 0, 4096));
-$clandesc = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clandesc'), 0, 4096));
+$clanmotd  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clanmotd'), 0, 4096));
+$clandesc  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clandesc'), 0, 4096));
 $customsay = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('customsay'), 0, 15));
 
 $clanEntity = $clanRepository->find($claninfo['clanid']);
 
 $invalidateCache = false;
+
 if ($clanmotd && $claninfo['clanmotd'] != $clanmotd)
 {
     $invalidateCache = true;
@@ -31,7 +32,7 @@ if ($clanmotd && $claninfo['clanmotd'] != $clanmotd)
         ->setClanmotd($clanmotd)
     ;
     $claninfo['motdauthor'] = $session['user']['acctid'];
-    $claninfo['clanmotd'] = $clanmotd;
+    $claninfo['clanmotd']   = $clanmotd;
 
     \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.motd', [], $textDomain));
 }
@@ -43,7 +44,7 @@ if ($clandesc && $claninfo['clandesc'] != $clandesc)
         ->setClandesc($clandesc)
     ;
     $claninfo['descauthor'] = $session['user']['acctid'];
-    $claninfo['clandesc'] = $clandesc;
+    $claninfo['clandesc']   = $clandesc;
 
     \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.desc', [], $textDomain));
 }

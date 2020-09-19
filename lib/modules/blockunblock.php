@@ -12,7 +12,7 @@
  * @param mixed $modulename the name of the module you wish to block or true if you want to block all modules
  */
 $block_all_modules = false;
-$blocked_modules = [];
+$blocked_modules   = [];
 function blockmodule($modulename)
 {
     global $blocked_modules, $block_all_modules, $currenthook;

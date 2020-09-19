@@ -39,30 +39,30 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
 
     if (false !== $field && false !== $value && $consolidate)
     {
-        $query = $repository->createQueryBuilder('u');
+        $query  = $repository->createQueryBuilder('u');
         $result = $query
             ->where('u.actor = :user AND u.field = :field AND u.date > :date')
 
             ->setParameter('user', $user)
             ->setParameter('field', $field)
-            ->setParameter('date', new \DateTime(date('Y-m-d 00:00:00')))
+            ->setParameter('date', new \DateTime(\date('Y-m-d 00:00:00')))
 
             ->getQuery()
             ->getResult()
         ;
 
-        if (count($result))
+        if (\count($result))
         {
-            $result = $result[0];
-            $value = $result->getValue() + $value;
+            $result  = $result[0];
+            $value   = $result->getValue() + $value;
             $message = $result->getMessage();
-            $id = $result->getId();
+            $id      = $result->getId();
         }
     }
 
     if (false !== $corevalue)
     {
-        $message .= " ($corevalue)";
+        $message .= " ({$corevalue})";
     }
 
     if (false === $field)
@@ -77,12 +77,12 @@ function debuglog($message, $target = false, $user = false, $field = false, $val
 
     $entity = $repository->find($id);
     $entity = $repository->hydrateEntity([
-        'date' => new \DateTime('now'),
-        'actor' => $user,
-        'target' => $target,
+        'date'    => new \DateTime('now'),
+        'actor'   => $user,
+        'target'  => $target,
         'message' => $message,
-        'field' => $field,
-        'value' => $value
+        'field'   => $field,
+        'value'   => $value,
     ], $entity);
 
     \Doctrine::persist($entity);
