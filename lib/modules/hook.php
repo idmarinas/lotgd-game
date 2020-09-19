@@ -18,13 +18,18 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     global $session, $modulehook_queries;
     global $currenthook;
 
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $lasthook = $currenthook;
     $currenthook = $hookname;
     static $hookcomment = [];
 
     $args = $args ?: [];
 
-    if (! is_array($args))
+    if (! is_iterable ($args))
     {
         $where = $mostrecentmodule;
 
@@ -32,7 +37,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         {
             $where = \LotgdHttp::getServer('SCRIPT_NAME');
         }
-        debug("Args parameter to modulehook $hookname from $where is not an array.");
+        debug("Args parameter to modulehook $hookname from $where is not an iterable value.");
     }
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && ! isset($hookcomment[$hookname]))
