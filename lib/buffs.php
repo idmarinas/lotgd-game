@@ -199,7 +199,7 @@ function apply_buff($name, $buff)
     }
 
     $buff = \LotgdEvent::prepareArgs(['name' => $name, 'buff' => $buff]);
-    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER, null, $buff);
+    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_MODIFY_BUFF, null, $buff);
     $buff = modulehook('modify-buff', $buff);
 
     $session['bufflist'][$name] = $buff['buff'];
@@ -212,7 +212,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
 
     $companionsallowed = getsetting('companionsallowed', 1);
     $args              = \LotgdEvent::prepareArgs(['maxallowed' => $companionsallowed]);
-    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER, null, $args);
+    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_COMPANIONS_ALLOWED, null, $args);
     $args = modulehook('companionsallowed', $args);
 
     $companionsallowed = $args['maxallowed'];
