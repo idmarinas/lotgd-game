@@ -242,6 +242,11 @@ function module_addeventhook($type, $chance)
 {
     global $mostrecentmodule;
 
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     debug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
