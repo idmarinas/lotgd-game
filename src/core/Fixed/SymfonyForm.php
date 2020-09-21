@@ -15,6 +15,16 @@ namespace Lotgd\Core\Fixed;
 
 use Symfony\Component\Form\FormFactoryInterface;
 
+use const E_USER_DEPRECATED;
+
+\trigger_error(\sprintf(
+    'Class %s is deprecated, please get the factory to create Symfony Forms (LotgdLocator::get("Lotgd\Core\SymfonyForm"))',
+    SymfonyForm::class
+), E_USER_DEPRECATED);
+
+/**
+ * @deprecated since 4.4.0; to be removed in 5.0.0. Use factory to create Symfony Forms.
+ */
 class SymfonyForm
 {
     /**
