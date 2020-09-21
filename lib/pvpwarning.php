@@ -22,5 +22,8 @@ function pvpwarning($dokill = false)
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.warning.msg', ['days' => $days, 'exp' => $exp], $textDomain));
         }
     }
-    modulehook('pvpwarning', ['dokill' => $dokill]);
+
+    $args = \LotgdHook::prepareArgs(['dokill' => $dokill]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_DO_KILL, null, $args);
+    modulehook('pvpwarning', $args);
 }

@@ -96,7 +96,9 @@ if ($session['user']['superuser'] & SU_EDIT_CONFIG)
 
 \LotgdNavigation::addHeader('superuser.category.module');
 
-modulehook('superuser', []);
+$args = \LotgdHook::prepareArgs([]);
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER, null, $args);
+modulehook('superuser', $args);
 
 rawoutput(LotgdTheme::renderLotgdTemplate('core/page/superuser.twig', [
     'textDomain' => $textDomain

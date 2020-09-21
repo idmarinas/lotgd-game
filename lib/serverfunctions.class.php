@@ -71,6 +71,8 @@ class ServerFunctions
         \Doctrine::flush();
 
         //adding a hook, nasty, but you don't call this too often
-        modulehook('dragonpointreset', [$result]);
+        $args = \LotgdHook::prepareArgs([$result]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SERVER_DRAGON_POINT_RESET, null, $args);
+        modulehook('dragonpointreset', $args);
     }
 }

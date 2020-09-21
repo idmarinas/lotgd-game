@@ -16,8 +16,9 @@ function increment_specialty($colorcode, $spec = false)
 
     if ('' != $session['user']['specialty'])
     {
-        $specialties = modulehook('incrementspecialty',
-                ['color' => $colorcode]);
+        $args = \LotgdHook::prepareArgs(['color' => $colorcode]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_SPECIALTY_INCREMENT, null, $args);
+        modulehook('incrementspecialty', $args);
     }
     else
     {
