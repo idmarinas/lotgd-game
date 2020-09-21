@@ -133,13 +133,7 @@ function page_footer($saveuser = true)
     //output any template part replacements that above hooks need (eg, advertising)
     foreach ($replacementbits as $key => $val)
     {
-        if ( ! isset($html[$key]))
-        {
-            $html[$key] = $val;
-
-            continue;
-        }
-
+        $html[$key] = $html[$key] ?? '';
         $html[$key] .= $val;
     }
 
@@ -156,8 +150,6 @@ function page_footer($saveuser = true)
         $lastMotd = \Doctrine::getRepository('LotgdCore:Motd')->getLastMotdDate();
     }
 
-    $headscript = '';
-
     $session['needtoviewmotd'] = $session['needtoviewmotd'] ?? false;
 
     if (isset($session['user']['lastmotd'])
@@ -169,11 +161,6 @@ function page_footer($saveuser = true)
     }
 
     $html['scripthead'] = '';
-
-    if ('' != $headscript)
-    {
-        $html['scripthead'] = "<script language='text/javascript'>".$headscript.'</script>';
-    }
 
     $session['user']['name']  = $session['user']['name']  ?? '';
     $session['user']['login'] = $session['user']['login'] ?? '';
