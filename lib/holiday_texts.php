@@ -19,9 +19,9 @@ function holidayize($text, $type = 'unknown')
         return $text;
     }
 
-    $args = ['text' => $text, 'type' => $type];
+    $args = \LotgdHook::prepareArgs(['text' => $text, 'type' => $type]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SPECIAL_HOLIDAY, null, $args);
     $args = modulehook('holiday', $args);
-    $text = $args['text'];
 
-    return $text;
+    return $args['text'];
 }
