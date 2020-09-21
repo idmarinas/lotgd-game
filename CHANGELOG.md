@@ -10,6 +10,10 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :cyclone: CHANGES
 
 -   **public/forest.php** deleted obsolete function, and use new translator system to translate prefix of creature.
+-   **Moved template and translation folders** to new location
+    -   `data/template/` to `templates/`
+    -   `data/translation/` to `translations/`
+    -   Note: Both are in root directory, and are in "PLURAL"
 
 ### :star: FEATURES
 
@@ -31,6 +35,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
     -   Note: Use Jaxon-PHP to load modals, alerts... and a little parts of game.
         -   For example, if you need this functions I think is better use Jaxon-PHP for better performance.
 -   Class **Lotgd\Core\Http** are deprecated use `Lotgd\Core\Http\Request` instead.
+-   Static class **Lotgd\Core\Fixed\Http** aka `LotgdHttp` are deprecated.
+    -   Use **Lotgd\Core\Fixed\Request** aka `LotgdRequest` instead.
+-   Static class **Lotgd\Core\Fixed\SymfonyForm** aka `LotgdForm` are deprecated.
+    -   Get the factory to create a Symfony Form. `LotgdLocator::get('Lotgd\Core\SymfonyForm')`
+-   Class **Lotgd\Core\SymfonyForm** are deprecated use `Lotgd\Core\Http\Request` instead.
 
 ### :wrench: FIXES
 
@@ -68,6 +77,16 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :notebook: NOTES
 
 -   **Added file to check requeriments** `lotgd-check-requeriments-4.2.php`
+-   **Added lazy services**.
+    -   These services are not always necessary, so they are only created the first time they are needed.
+        -   `Lotgd\Core\Db\Dbwrapper`
+        -   `Lotgd\Core\Installer\Install`
+        -   `Lotgd\Core\SymfonyForm`
+        -   `doctrine.cli`
+        -   `DoctrineORMModule\CliConfigurator`
+        -   `InputFilterManager`
+        -   `FormAnnotationBuilder`
+        -   `FormElementManager`
 -   **Jaxon-PHP** Migrating Jaxon-Core from 2.2.* to version 3.2.*
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
