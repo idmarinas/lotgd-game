@@ -279,7 +279,7 @@ function get_creature_speed($attrs)
     return \max($speed, 0);
 }
 
-function lotgd_show_debug_creature(array $badguy)
+function lotgd_show_debug_creature(iterable $badguy)
 {
     debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
     debug("DEBUG: {$badguy['playerdragonkills']} modification points total for attributes.");
