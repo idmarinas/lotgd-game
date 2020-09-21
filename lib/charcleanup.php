@@ -110,7 +110,7 @@ function char_cleanup($accountId, $type): bool
 
                 //-- There are no other members, we need to delete the clan.
                 $return = \LotgdEvent::prepareArgs(['clanid' => $accountEntity->getCharacter()->getClanid(), 'clanEntity' => $clanEntity]);
-                \LotgdEvent::trigger(\Lotgd\Core\Event::EVEN_CLAN_DELETE, null, $return);
+                \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CLAN_DELETE, null, $return);
                 modulehook('clan-delete', $return);
 
                 \Doctrine::remove($clanEntity);
