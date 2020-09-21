@@ -23,6 +23,7 @@ class GameCore extends AbstractExtension
     use PatternCore\Censor;
     use PatternCore\Container;
     use PatternCore\EventManager;
+    use PatternCore\HookManager;
     use PatternCore\Sanitize;
     use PatternCore\Settings;
     use PatternCore\Theme;

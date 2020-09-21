@@ -50,11 +50,12 @@ return [
             'Lotgd\Core\SymfonyForm'                         => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
-            Lotgd\Core\EventManager::class  => Factory\EventManager::class,
-            Lotgd\Core\Http\Request::class  => InvokableFactory::class,
-            Lotgd\Core\Http\Response::class => Factory\Http\Response::class,
-            'webpack_encore.tag_renderer'   => Factory\Template\Encore::class,
-            'webpack_encore.packages'       => Factory\Template\Packages::class,
+            Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class,
+            Lotgd\Core\EventManager\Hook::class  => Factory\EventManager\HookManager::class,
+            Lotgd\Core\Http\Request::class       => InvokableFactory::class,
+            Lotgd\Core\Http\Response::class      => Factory\Http\Response::class,
+            'webpack_encore.tag_renderer'        => Factory\Template\Encore::class,
+            'webpack_encore.packages'            => Factory\Template\Packages::class,
         ],
     ],
 ];

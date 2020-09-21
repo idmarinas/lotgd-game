@@ -13,22 +13,22 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\EventManager\Event;
+use Lotgd\Core\EventManager\Hook;
 
-trait EventManager
+trait HookManager
 {
-    protected $lotgdEventManager;
+    protected $lotgdHookManager;
 
     /**
      * Get EventManager instance.
      */
-    public function getEventManager(): Event
+    public function getHookManager(): Hook
     {
-        if ( ! $this->lotgdEventManager instanceof Event)
+        if ( ! $this->lotgdHookManager instanceof Hook)
         {
-            $this->lotgdEventManager = $this->getContainer(Event::class);
+            $this->lotgdHookManager = $this->getContainer(Hook::class);
         }
 
-        return $this->lotgdEventManager;
+        return $this->lotgdHookManager;
     }
 }

@@ -4,6 +4,7 @@ use Lotgd\Core\Fixed\Cache as LotgdCache;
 use Lotgd\Core\Fixed\Dbwrapper as DB;
 use Lotgd\Core\Fixed\Doctrine;
 use Lotgd\Core\Fixed\EventManager as LotgdEvent;
+use Lotgd\Core\Fixed\HookManager as LotgdHook;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
 use Lotgd\Core\Fixed\Http as LotgdHttp;
@@ -53,5 +54,8 @@ LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
 //-- Configure Symfony Form instance
 LotgdForm::instance(LotgdLocator::get('Lotgd\Core\SymfonyForm'));
 
+//-- Configure Hook Manager instance
+LotgdHook::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Hook::class));
+
 //-- Configure Event Manager instance
-LotgdEvent::instance(LotgdLocator::get(\Lotgd\Core\EventManager::class));
+LotgdEvent::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Event::class));

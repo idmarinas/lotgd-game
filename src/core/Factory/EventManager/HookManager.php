@@ -10,13 +10,13 @@
  * @since 4.4.0
  */
 
-namespace Lotgd\Core\Factory;
+namespace Lotgd\Core\Factory\EventManager;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lotgd\Core\EventManagerAware;
 
-class EventManager implements FactoryInterface
+class HookManager implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {

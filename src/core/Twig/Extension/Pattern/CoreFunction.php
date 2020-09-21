@@ -78,10 +78,10 @@ trait CoreFunction
      */
     public function triggerEvent($name, $data = [])
     {
-        $em = $this->getEventManager();
+        $hook = $this->getHookManager();
 
-        $data = $em->prepareArgs($data);
-        $em->trigger($name, null, $data);
+        $data = $hook->prepareArgs($data);
+        $hook->trigger($name, null, $data);
 
         return modulehook($name, $data);
     }
