@@ -78,7 +78,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     // back through
     // Try at least and fix up a bogus arg so it doesn't cause additional
     // problems later.
-    if ( ! \is_array($args))
+    if ( ! \is_iterable($args))
     {
         $args = ['bogus_args' => $args];
     }
@@ -173,7 +173,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             // test to see if we had any output and if the module allows
             // us to collapse it
 
-            if ( ! \is_array($res))
+            if ( ! \is_iterable($res))
             {
                 \trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
                 $res = $args;
@@ -182,7 +182,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             // Clear the collapse flag
             unset($res['nocollapse']);
             //handle return arguments.
-            if (\is_array($res))
+            if (\is_iterable($res))
             {
                 $args = $res;
             }
@@ -204,6 +204,11 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
  */
 function module_wipehooks(string $module)
 {
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
     $result     = $repository->findBy(['modulename' => $module]);
 
@@ -259,6 +264,11 @@ function module_drophook($hookname, $functioncall = false)
 {
     global $mostrecentmodule;
 
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     if (false === $functioncall)
     {
         $functioncall = "{$mostrecentmodule}_dohook";
@@ -289,6 +299,11 @@ function module_drophook($hookname, $functioncall = false)
  */
 function module_addhook($hookname, $functioncall = false, $whenactive = false)
 {
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
     module_addhook_priority($hookname, 50, $functioncall, $whenactive);
 }
 
@@ -305,6 +320,11 @@ function module_addhook($hookname, $functioncall = false, $whenactive = false)
 function module_addhook_priority($hookname, $priority = 50, $functioncall = false, $whenactive = false)
 {
     global $mostrecentmodule;
+
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+        __METHOD__
+    ), E_USER_DEPRECATED);
 
     module_drophook($hookname, $functioncall);
 
