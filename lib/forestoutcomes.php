@@ -29,15 +29,29 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
         //adapting flux as for people with many DKs they will just bathe in gold....
         $base = 30 - \min(20, \round(\sqrt($session['user']['dragonkills']) / 2));
         $base /= 1000;
-        $bonus                  = 1 + $base * ($badguy['creatureattackattrs'] + $badguy['creaturedefenseattrs']) + .001 * $badguy['creaturehealthattrs'];
+        $bonus = 1 + $base * ($badguy['creatureattackattrs'] + $badguy['creaturedefenseattrs']) + .001 * $badguy['creaturehealthattrs'];
+
         $badguy['creaturegold'] = \round($badguy['creaturegold'] * $bonus, 0);
         $badguy['creatureexp']  = \round($badguy['creatureexp'] * $bonus, 0);
     }
 
+    $badguy = \LotgdHook::prepareArgs($badguy);
+
     //-- Activate hook when find a creature
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_ENCOUNTER, null, $badguy);
     $badguy = modulehook('creatureencounter', $badguy);
 
+    $hookNew = $hook;
+    if ('buffbadguy' == $hook)
+    {
+        $hookNew =  'badguy';
+    }
+    elseif ('buffmaster' == $hook)
+    {
+        $hookNew =  'master';
+    }
     //-- Activate hook custom or default (buffbadguy)
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_BUFF.$hookNew, null, $badguy);
     $badguy = modulehook($hook, $badguy);
 
     //-- Update max creature health
