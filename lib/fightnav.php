@@ -27,7 +27,10 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     $fight = $session['user']['alive'] ? 'nav.fight.live' : 'nav.fight.death';
     $run   = $session['user']['alive'] ? 'nav.run.live' : 'nav.run.death';
 
-    modulehook('fightnav-prenav', ['script' => $script]);
+
+    $args = \LotgdHook::prepareArgs(['script' => $script]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_PRE, null, $args);
+    modulehook('fightnav-prenav', $args);
 
     \LotgdNavigation::addHeader('category.standard');
     \LotgdNavigation::addNav($fight, "{$script}op=fight");
@@ -62,21 +65,25 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     //added hook for the Stamina system
     if ( ! $session['user']['alive'])
     {
-        modulehook('fightnav-graveyard', ['script' => $script]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_GRAVEYARD, null, $args);
+        modulehook('fightnav-graveyard', $args);
     }
 
     if ($allowspecial)
     {
         \LotgdNavigation::addHeader('category.special', ['hiddeEmpty' => false]);
 
-        modulehook('fightnav-specialties', ['script' => $script]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_SPECIALTY, null, $args);
+        modulehook('fightnav-specialties', $args);
 
         if ($session['user']['superuser'] & SU_DEVELOPER)
         {
             \LotgdNavigation::addHeader('category.superuser');
             \LotgdNavigation::addNav('nav.god', "{$script}op=fight&skill=godmode");
         }
-        modulehook('fightnav', ['script' => $script]);
+
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV, null, $args);
+        modulehook('fightnav', $args);
     }
 
     if (\count($newenemies) > 1)
