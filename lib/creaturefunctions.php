@@ -202,7 +202,7 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
     }
 
     //-- You can add more creatures. This is good, when not find nothing in data base
-    $creatures = \LotgdEvent::prepareArgs([
+    $creatures = \LotgdHook::prepareArgs([
         'creatures'      => $creatures,
         'multi'          => $multi,
         'targetlevel'    => $targetlevel,
@@ -210,7 +210,7 @@ function lotgd_search_creature($multi, $targetlevel, $mintargetlevel, $packofmon
         'packofmonsters' => $packofmonsters,
         'forest'         => $forest,
     ]);
-    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CREATURE_SEARCH, null, $creatures);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_SEARCH, null, $creatures);
     $creatures = modulehook('creature-search', $creatures);
 
     return $creatures['creatures'];

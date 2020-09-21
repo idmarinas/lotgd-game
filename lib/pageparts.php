@@ -61,14 +61,14 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
         if (isset($runheaders[$script]) && ! $runheaders[$script])
         {
-            $args = \LotgdEvent::prepareArgs(['script' => $script]);
-            \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER, null, $args);
+            $args = \LotgdHook::prepareArgs(['script' => $script]);
+            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_HEADER, null, $args);
             modulehook('everyheader', $args);
 
             if ($session['user']['loggedin'] ?? false)
             {
-                $args = \LotgdEvent::prepareArgs(['script' => $script]);
-                \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_HEADER_AUTHENTICATED, null, $args);
+                $args = \LotgdHook::prepareArgs(['script' => $script]);
+                \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
                 modulehook('everyheader-loggedin', $args);
             }
 
@@ -76,7 +76,7 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
             $script = 'runmodule' == $script && $module ? $module : $script;
 
-            \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_HEADER_SCRIPT.$script);
+            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_HEADER_SCRIPT.$script);
             //-- Only run one, if is a runmodule, use module name
             modulehook("header-{$script}");
         }
@@ -107,10 +107,10 @@ function page_footer($saveuser = true)
     $module = (string) \LotgdHttp::getQuery('module');
     $script = ('runmodule' == $script && $module) ? $module : $script;
 
-    $args = \LotgdEvent::prepareArgs(['script' => $script]);
-    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_FOOTER_SCRIPT.$script, null, $args);
+    $replacementbits = \LotgdHook::prepareArgs(['script' => $script]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FOOTER_SCRIPT.$script, null, $replacementbits);
     //-- Only run one, if is a runmodule, use module name
-    $replacementbits = modulehook("footer-{$script}", $args);
+    $replacementbits = modulehook("footer-{$script}", $replacementbits);
 
     // Pass the script file down into the footer so we can do something if
     // we need to on certain pages (much like we do on the header.
@@ -118,14 +118,12 @@ function page_footer($saveuser = true)
     // invalid one which we can then blow away.
     $replacementbits['__scriptfile__'] = $script;
 
-    $replacementbits = \LotgdEvent::prepareArgs($replacementbits);
-    \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_FOOTER, null, $replacementbits);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
     $replacementbits = modulehook('everyfooter', $replacementbits);
 
     if (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     {
-        $replacementbits = \LotgdEvent::prepareArgs($replacementbits);
-        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
         $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
     }
 
@@ -725,7 +723,7 @@ function charstats($return = true)
             addcharstat(\LotgdTranslator::t('statistic.stat.creature', [], 'app-default'), $playermount['mountname'].'`0');
         }
 
-        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_STATS);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_STATS);
         modulehook('charstats');
 
         if ($return)
@@ -747,8 +745,8 @@ function charstats($return = true)
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
-        $list = \LotgdEvent::prepareArgs([]);
-        \LotgdEvent::trigger(\Lotgd\Core\Event::EVENT_CHARACTER_ONLINE_LIST, null, $list);
+        $list = \LotgdHook::prepareArgs([]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_ONLINE_LIST, null, $list);
         $list = modulehook('onlinecharlist', $list);
 
         if (isset($list['handled']) && $list['handled'])
