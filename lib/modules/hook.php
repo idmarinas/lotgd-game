@@ -175,7 +175,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
             if ( ! \is_iterable($res))
             {
-                \trigger_error("<b>{$row['function']}</b> did not return an array in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
+                \trigger_error("<b>{$row['function']}</b> did not return an iterable in the module <b>{$row['modulename']}</b> for hook <b>{$hookname}</b>.", E_USER_WARNING);
                 $res = $args;
             }
 
