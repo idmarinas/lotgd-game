@@ -48,6 +48,8 @@ else
         $attackstack['options']['type'] = 'graveyard';
 
         //no multifights currently, so this hook passes the badguy to modify
+        $attackstack = \LotgdHook::prepareArgs($attackstack);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_FIGHT_START, null, $attackstack);
         $attackstack = modulehook('graveyardfight-start', $attackstack);
 
         $session['user']['badguy'] = $attackstack;
