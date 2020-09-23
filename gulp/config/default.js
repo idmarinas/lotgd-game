@@ -52,7 +52,8 @@ module.exports = {
             //-- Ignore all dist folders
             '!{*.,}dist{,/**}',
             //-- Ignore some files
-            '!*.{txt,TXT,csv}'
+            '!*.{txt,TXT,csv}',
+            '!README.md'
         ]
     }
 }
