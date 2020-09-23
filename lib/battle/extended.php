@@ -180,6 +180,8 @@ function prepare_fight($options = [])
     }
 
     $fightoptions = $options + $basicoptions;
+    $fightoptions = \LotgdHook::prepareArgs($fightoptions);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_OPTIONS, null, $fightoptions);
     $fightoptions = modulehook('fightoptions', $fightoptions);
 
     // We'll also reset the companions here...

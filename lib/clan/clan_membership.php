@@ -13,7 +13,7 @@ if ($remove)
 {
     $character = $charRepository->getCharacterFromAcctidAndRank($remove, $session['user']['clanrank']);
 
-    $args = modulehook('clan-setrank', [
+    $args = \LotgdHook::prepareArgs([
         'setrank' => 0,
         'login'   => $character->getAcct()->getLogin(),
         'name'    => $character->getName(),
@@ -21,6 +21,8 @@ if ($remove)
         'clanid'  => $session['user']['clanid'],
         'oldrank' => $character->getClanrank(),
     ]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_SET_RANK, null, $args);
+    $args = modulehook('clan-setrank', $args);
 
     $character->setClanrank(CLAN_APPLICANT)
         ->setClanid(0)
@@ -48,7 +50,7 @@ elseif ($setrank > 0 && $setrank <= $session['user']['clanrank'] && $whoacctid)
 
     if ($character)
     {
-        $args = modulehook('clan-setrank', [
+        $args = \LotgdHook::prepareArgs([
             'setrank' => $setrank,
             'login'   => $character->getAcct()->getLogin(),
             'name'    => $character->getName(),
@@ -56,6 +58,8 @@ elseif ($setrank > 0 && $setrank <= $session['user']['clanrank'] && $whoacctid)
             'clanid'  => $session['user']['clanid'],
             'oldrank' => $character->getClanrank(),
         ]);
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_SET_RANK, null, $args);
+        $args = modulehook('clan-setrank', $args);
 
         if ( ! ($args['handled'] ?? false))
         {

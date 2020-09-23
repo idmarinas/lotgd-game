@@ -342,5 +342,6 @@ function apply_skill($skill, $l)
         ]);
     }
 
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_APPLY_SPECIALTY);
     modulehook('apply-specialties');
 }

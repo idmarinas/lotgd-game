@@ -292,7 +292,9 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     $expbonus = \round($expbonus / $count, 0);
 
     //-- No gem hunters allowed!
-    $args       = modulehook('alter-gemchance', ['chance' => getsetting('forestgemchance', 25)]);
+    $args = \LotgdHook::prepareArgs(['chance' => getsetting('forestgemchance', 25)]);
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_ALTER_GEM_CHANCE, null, $args);
+    $args       = modulehook('alter-gemchance', $args);
     $gemchances = $args['chance'];
     //-- Gems only find in forest
     if ($session['user']['level'] < getsetting('maxlevel', 15) && 1 == e_rand(1, $gemchances) && true === $forest)

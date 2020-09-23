@@ -2,6 +2,7 @@
 
 \LotgdNavigation::addHeader('category.options');
 
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_ENTER);
 modulehook('clan-enter');
 
 if ('withdraw' == $op)
