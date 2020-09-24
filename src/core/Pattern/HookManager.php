@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\EventManager\Hook;
+use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 
 trait HookManager
 {
@@ -22,9 +23,9 @@ trait HookManager
     /**
      * Get EventManager instance.
      */
-    public function getHookManager(): Hook
+    public function getHookManager(): CoreEventManager
     {
-        if ( ! $this->lotgdHookManager instanceof Hook)
+        if ( ! $this->lotgdHookManager instanceof CoreEventManager)
         {
             $this->lotgdHookManager = $this->getContainer(Hook::class);
         }

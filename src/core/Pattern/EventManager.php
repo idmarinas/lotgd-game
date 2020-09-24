@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\EventManager\Event;
+use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 
 trait EventManager
 {
@@ -22,9 +23,9 @@ trait EventManager
     /**
      * Get EventManager instance.
      */
-    public function getEventManager(): Event
+    public function getEventManager(): CoreEventManager
     {
-        if ( ! $this->lotgdEventManager instanceof Event)
+        if ( ! $this->lotgdEventManager instanceof CoreEventManager)
         {
             $this->lotgdEventManager = $this->getContainer(Event::class);
         }
