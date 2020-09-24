@@ -194,7 +194,7 @@ forest:
     forestcreaturebar:
         label: 'Forest Creatures show health ...'
         note: 'Note: The player can choose a different setting to his liking for the healthbars'
-        options:
+        option:
             text: Only Text
             bar: Only Healthbar
             textbar: Healthbar AND Text
