@@ -1,3 +1,6 @@
+{#
+    This template is deprecated an removed in version 5.0.0
+#}
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,18 +15,18 @@
 
 		<title>{% block head_theme_title %}{{ page_title(title) }}{% endblock %}</title>
 
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-        <link href="css/vendor.css" rel="stylesheet" type="text/css" />
-        {% block head_theme_css %}{% endblock %}
+        {{ encore_entry_link_tags('lotgd', null, 'lotgd') }}
+        {{ encore_entry_link_tags('semantic_ui', null, 'lotgd') }}
+        {% block head_theme_css %}
+            {# Favicon can custom per theme #}
+            <link rel="shortcut icon" href="favicon.png" type="image/png" />
+        {% endblock %}
 		{{ csshead }}
 
-		<script src="js/manifest.js"></script>
-		<script src="js/vendor.js"></script>
-		<script src="js/lotgd.js"></script>
-        <script src="js/semantic.js"></script>
+        {{ encore_entry_script_tags('lotgd', null, 'lotgd') }}
         {% block head_theme_js %}{% endblock %}
 		{{ scripthead }}
-        {{ script }}
+        {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
 	</head>
 	<body>
         {% block body %}
