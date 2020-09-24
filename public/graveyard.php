@@ -88,6 +88,7 @@ elseif ('fight' == $op)
 
 if ($battle)
 {
+    $params['tpl'] = 'default';
     $params['showGraveyardDesc'] = false;
 
     //-- Any data for personalize results
@@ -112,7 +113,7 @@ if ($battle)
     $session['user']['soulpoints'] = $session['user']['hitpoints'];
     $session['user']['hitpoints'] = $originalhitpoints;
 
-    if ($victory || $defeat || $session['user']['soulpoints'] <= 0 || $session['user']['hitpoints'] <= 0)
+    if ($victory || $defeat)
     {
         $battle = false;
         $op = '';
@@ -304,24 +305,21 @@ elseif ('haunt3' == $op)
         }
     }
 }
-else
+elseif (! $battle)
 {
     $params['tpl'] = 'default';
 
-    if (! $battle || $session['user']['soulpoints'] > 0 || $session['user']['hitpoints'] > 0)
+    \LotgdNavigation::addNav('nav.return.shades', 'shades.php');
+
+    if ($session['user']['gravefights'])
     {
-        \LotgdNavigation::addNav('nav.return.shades', 'shades.php');
-
-        if ($session['user']['gravefights'])
-        {
-            \LotgdNavigation::addHeader('category.torment');
-            \LotgdNavigation::addNav('nav.torment', 'graveyard.php?op=search');
-        }
-
-        \LotgdNavigation::addHeader('category.places');
-        \LotgdNavigation::addNav('nav.warriors', 'list.php');
-        \LotgdNavigation::addNav('nav.mausoleum', 'graveyard.php?op=enter');
+        \LotgdNavigation::addHeader('category.torment');
+        \LotgdNavigation::addNav('nav.torment', 'graveyard.php?op=search');
     }
+
+    \LotgdNavigation::addHeader('category.places');
+    \LotgdNavigation::addNav('nav.warriors', 'list.php');
+    \LotgdNavigation::addNav('nav.mausoleum', 'graveyard.php?op=enter');
 }
 
 modulehook('deathoverlord', []);
