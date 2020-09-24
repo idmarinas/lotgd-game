@@ -62,14 +62,13 @@ return [
     [
         'name' => 'forestpowerattackmulti',
         'required' => false,
-        'filters' => [],
+        'filters' => [
+            ['name' => Filter\ToFloat::class ]
+        ],
         'validators' => [
             ['name' => Validator\NotEmpty::class],
             [
                 'name' => \Laminas\I18n\Validator\IsFloat::class,
-                'options' => [
-                    'locale' => 'en'
-                ]
             ]
         ]
     ],
