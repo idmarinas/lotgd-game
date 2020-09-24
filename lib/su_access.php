@@ -18,7 +18,7 @@ function check_su_access($level)
     {
         //-- They have appropriate levels, let's see if there's a module that restricts access beyond this point.
 
-        $return = \LotgdHook::prepareArgs(['enabled' => true, 'level' => $level]);
+        $return = ['enabled' => true, 'level' => $level];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER_CHECK_SU_ACCESS, null, $return);
         $return = modulehook('check_su_access', $return);
 
@@ -123,7 +123,7 @@ function checkSuPermission($permission, ?string $return = null)
 
     if ($session['user']['superuser'] & $permission)
     {
-        $result = \LotgdHook::prepareArgs(['enabled' => true, 'permission' => $permission]);
+        $result = ['enabled' => true, 'permission' => $permission];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER_CHECK_SU_PERMISSION, null, $return);
         $result = modulehook('check-su-permission', $result);
 

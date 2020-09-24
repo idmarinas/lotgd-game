@@ -28,7 +28,7 @@ function fightnav($allowspecial = true, $allowflee = true, $script = false)
     $run   = $session['user']['alive'] ? 'nav.run.live' : 'nav.run.death';
 
 
-    $args = \LotgdHook::prepareArgs(['script' => $script]);
+    $args = ['script' => $script];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_NAV_PRE, null, $args);
     modulehook('fightnav-prenav', $args);
 

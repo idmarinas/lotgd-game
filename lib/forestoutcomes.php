@@ -35,8 +35,6 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
         $badguy['creatureexp']  = \round($badguy['creatureexp'] * $bonus, 0);
     }
 
-    $badguy = \LotgdHook::prepareArgs($badguy);
-
     //-- Activate hook when find a creature
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_ENCOUNTER, null, $badguy);
     $badguy = modulehook('creatureencounter', $badguy);

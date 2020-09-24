@@ -129,7 +129,7 @@ function process_post_save_data($post, $old, &$flashMessages, $module, $textDoma
             }
             gamelog("`@Changed module(`5{$module}`0) setting `^{$key}`0 from `#{$oldval}`0 to `&{$val}`0`0", 'settings');
 
-            $args = \LotgdHook::prepareArgs(['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val]);
+            $args = ['module' => $module, 'setting' => $key, 'old' => $oldval, 'new' => $val];
             \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SETTING_CHANGE, null, $args);
             modulehook('changesetting', $args, true);
         }

@@ -23,7 +23,7 @@ function pvpwarning($dokill = false)
         }
     }
 
-    $args = \LotgdHook::prepareArgs(['dokill' => $dokill]);
+    $args = ['dokill' => $dokill];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_DO_KILL, null, $args);
     modulehook('pvpwarning', $args);
 }

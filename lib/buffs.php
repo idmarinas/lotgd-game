@@ -198,7 +198,7 @@ function apply_buff($name, $buff)
         restore_buff_fields();
     }
 
-    $buff = \LotgdHook::prepareArgs(['name' => $name, 'buff' => $buff]);
+    $buff = ['name' => $name, 'buff' => $buff];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_MODIFY_BUFF, null, $buff);
     $buff = modulehook('modify-buff', $buff);
 
@@ -211,7 +211,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
     global $session, $companions;
 
     $companionsallowed = getsetting('companionsallowed', 1);
-    $args              = \LotgdHook::prepareArgs(['maxallowed' => $companionsallowed]);
+    $args              = ['maxallowed' => $companionsallowed];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_COMPANIONS_ALLOWED, null, $args);
     $args = modulehook('companionsallowed', $args);
 

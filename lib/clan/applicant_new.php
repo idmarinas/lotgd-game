@@ -93,7 +93,6 @@ if (1 == $apply)
 
     $args = ['ocn' => $clanNameOriginal, 'ocs' => $clanShortOriginal, 'clanname' => $clanNameFilter, 'clanshort' => $clanShortFilter];
 
-    $args = \LotgdHook::prepareArgs($args);
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_CREATE, null, $args);
     $args = modulehook('process-createclan', $args);
 

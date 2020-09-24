@@ -292,7 +292,7 @@ function battlevictory($enemies, $denyflawless = false, $forest = true)
     $expbonus = \round($expbonus / $count, 0);
 
     //-- No gem hunters allowed!
-    $args = \LotgdHook::prepareArgs(['chance' => getsetting('forestgemchance', 25)]);
+    $args = ['chance' => getsetting('forestgemchance', 25)];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FIGHT_ALTER_GEM_CHANCE, null, $args);
     $args       = modulehook('alter-gemchance', $args);
     $gemchances = $args['chance'];
@@ -546,7 +546,7 @@ function battlegainexperiencegraveyard()
             'combat.end.experience.graveyard.total.favor',
             [
                 'favor'    => $totalExp,
-                'overlord' => $deathoverlord,
+                'overlordOwnerName' => $deathoverlord,
             ],
         ];
         $session['user']['deathpower'] += $totalExp;
@@ -629,7 +629,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
     if ($candie)
     {
-        \LotgdNavigation::addNav('battle.nav.news', 'news.php');
+        \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation-app']);
 
         $session['user']['alive']          = false;
         $session['user']['hitpoints']      = 0;

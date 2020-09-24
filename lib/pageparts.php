@@ -61,13 +61,13 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 
         if (isset($runheaders[$script]) && ! $runheaders[$script])
         {
-            $args = \LotgdHook::prepareArgs(['script' => $script]);
+            $args = ['script' => $script, 'header'];
             \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_HEADER, null, $args);
             modulehook('everyheader', $args);
 
             if ($session['user']['loggedin'] ?? false)
             {
-                $args = \LotgdHook::prepareArgs(['script' => $script]);
+                $args = ['script' => $script];
                 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
                 modulehook('everyheader-loggedin', $args);
             }
@@ -107,7 +107,7 @@ function page_footer($saveuser = true)
     $module = (string) \LotgdHttp::getQuery('module');
     $script = ('runmodule' == $script && $module) ? $module : $script;
 
-    $replacementbits = \LotgdHook::prepareArgs(['script' => $script]);
+    $replacementbits = ['script' => $script];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_FOOTER_SCRIPT.$script, null, $replacementbits);
     //-- Only run one, if is a runmodule, use module name
     $replacementbits = modulehook("footer-{$script}", $replacementbits);
@@ -745,7 +745,7 @@ function charstats($return = true)
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
-        $list = \LotgdHook::prepareArgs([]);
+        $list = [];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_ONLINE_LIST, null, $list);
         $list = modulehook('onlinecharlist', $list);
 

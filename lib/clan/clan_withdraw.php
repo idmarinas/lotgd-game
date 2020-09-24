@@ -2,11 +2,11 @@
 
 require_once 'lib/gamelog.php';
 
-$args = \LotgdHook::prepareArgs([
+$args = [
     'clanid'   => $session['user']['clanid'],
     'clanrank' => $session['user']['clanrank'],
     'acctid'   => $session['user']['acctid'],
-]);
+];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_WITHDRAW, null, $args);
 modulehook('clan-withdraw', $args);
 
@@ -40,7 +40,7 @@ if ($session['user']['clanrank'] >= CLAN_LEADER)
             $clanEntity     = $clanRepository->find($session['user']['clanid']);
 
             //-- There are no other members, we need to delete the clan.
-            $args = \LotgdHook::prepareArgs(['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity]);
+            $args = ['clanid' => $session['user']['clanid'], 'clanEntity' => $clanEntity];
             \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_DELETE, null, $args);
             modulehook('clan-delete', $args);
 

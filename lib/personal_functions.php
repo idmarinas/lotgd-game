@@ -4,10 +4,10 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
 {
     global $session;
 
-    $args = \LotgdHook::prepareArgs([
+    $args = [
         'explossproportion'  => $explossproportion,
         'goldlossproportion' => $goldlossproportion,
-    ]);
+    ];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_KILLED_PLAYER, null, $args);
     $args = modulehook('killedplayer', $args);
 

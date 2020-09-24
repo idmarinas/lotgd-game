@@ -79,7 +79,7 @@ foreach ($postSettings as $key => $val)
         gamelog("`@Changed core setting `^{$key}`@ from `#{$old[$key]}`@ to `&{$val}`0", 'settings');
 
         // Notify every module
-        $args = \LotgdHook::prepareArgs(['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val]);
+        $args = ['module' => 'core', 'setting' => $key, 'old' => $old[$key], 'new' => $val];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SETTING_CHANGE, null, $args);
         modulehook('changesetting', $args, true);
     }

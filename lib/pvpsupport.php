@@ -60,7 +60,7 @@ function setup_pvp_target(int $characterId)
             $entity['playerstarthp']  = $session['user']['hitpoints'];
             $entity['fightstartdate'] = new \DateTime('now');
 
-            $args = \LotgdHook::prepareArgs(['entity' => $entity]);
+            $args = ['entity' => $entity];
             \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_ADJUST, null, $args);
             $entity = modulehook('pvpadjust', $args['entity']);
 
@@ -159,7 +159,7 @@ function pvpvictory($badguy, $killedloc)
     debuglog("started the fight and defeated {$badguy['creaturename']} in {$killedloc} (earned {$winamount} of {$badguy['creaturegold']} gold and {$wonexp} of {$lostexp} exp)", false, $session['user']['acctid']);
     debuglog("was victim and has been defeated by {$session['user']['name']} in {$killedloc} (lost {$badguy['creaturegold']} gold and {$lostexp} exp, actor tooks {$winamount} gold and {$wonexp} exp)", false, $badguy['acctid']);
 
-    $args = \LotgdHook::prepareArgs(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
+    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_WIN, null, $args);
     $args = modulehook('pvpwin', $args);
 
@@ -217,7 +217,7 @@ function pvpdefeat($badguy, $killedloc)
 {
     global $session, $lotgdBattleContent, $textDomain;
 
-    \LotgdNavigation::addNav('battle.nav.news', 'news.php');
+    \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation-app']);
 
     $badguy['acctid']       = (int) $badguy['acctid'];
     $badguy['creaturegold'] = (int) $badguy['creaturegold'];
@@ -250,7 +250,7 @@ function pvpdefeat($badguy, $killedloc)
 
     $lostexp = \round($session['user']['experience'] * getsetting('pvpattlose', 15) / 100, 0);
 
-    $args = \LotgdHook::prepareArgs(['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy]);
+    $args = ['pvpmessageadd' => '', 'handled' => false, 'badguy' => $badguy];
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_PVP_LOSS, null, $args);
     $args = modulehook('pvploss', $args);
 
