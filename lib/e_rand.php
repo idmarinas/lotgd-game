@@ -12,11 +12,8 @@ function make_seed()
 
 /**
  * Alias of mt_rand with some improvements.
- *
- * @param int|float $min
- * @param int|float $max
  */
-function e_rand($min = null, $max = null): int
+function e_rand(?int $min = null, ?int $max = null): int
 {
     if ( ! \is_numeric($min))
     {
@@ -26,7 +23,7 @@ function e_rand($min = null, $max = null): int
 
     if ( ! \is_numeric($max))
     {
-        return \mt_rand($min);
+        return \mt_rand($min, $min);
     }
     $max = \round($max);
 
