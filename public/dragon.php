@@ -264,7 +264,7 @@ if ($battle)
     }
     elseif ($defeat)
     {
-        \LotgdNavigation::addNav('battle.nav.news', 'news.php');
+        \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation-app']);
 
         $result = modulehook('dragondeath', []);
         $lotgdBattleContent['battleend'] = array_merge($lotgdBattleContent['battleend'], $result);
