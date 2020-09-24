@@ -22,7 +22,9 @@
 
         {{ encore_entry_script_tags('lotgd', null, 'lotgd') }}
         {% block lotgd_head_theme_js %}{% endblock %}
-		{{ scripthead }}
+        {{ scripthead }}
+
+        {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
 
         <!-- START Cookies Consent -->
         <script>
@@ -42,7 +44,6 @@
 
         {% block lotgd_footer_theme_css %}{% endblock %}
 
-        {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
         {% block lotgd_footer_theme_js %}{% endblock %}
     </body>
 </html>
