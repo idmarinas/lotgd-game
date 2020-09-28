@@ -21,7 +21,9 @@ if ( ! $session['user']['alive'])
 $session['user']['seenmaster'] = 0;
 
 $turnstoday = "Base: {$turnsperday}";
-$args       = modulehook('pre-newday', ['resurrection' => $resurrection, 'turnstoday' => $turnstoday]);
+$args       = ['resurrection' => $resurrection, 'turnstoday' => $turnstoday];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_NEWDAY_PRE, null, $args);
+$args       = modulehook('pre-newday', $args);
 $turnstoday = $args['turnstoday'];
 
 $interestrate = e_rand($mininterest * 100, $maxinterest * 100) / (float) 100;
@@ -53,7 +55,7 @@ elseif ($params['maxGoldForInterest'] && $session['user']['goldinbank'] >= $para
 $params['interestRate'] = $interestrate;
 
 //clear all standard buffs
-$tempbuf                     = $session['user']['bufflist'];
+$tempbuf                     = $session['user']['bufflist'] ?? [];
 $session['user']['bufflist'] = [];
 strip_all_buffs();
 
@@ -265,18 +267,23 @@ if ( ! getsetting('newdaycron', 0))
     }
 }
 
-$args = modulehook('newday', [
+$args = [
     'resurrection'         => $resurrection,
     'turnstoday'           => $turnstoday,
     'includeTemplatesPre'  => $params['includeTemplatesPre'],
     'includeTemplatesPost' => $params['includeTemplatesPost'],
-]);
+];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_NEWDAY, null, $args);
+$args = modulehook('newday', $args);
+
 $turnstoday                     = $args['turnstoday'];
 $params['includeTemplatesPre']  = $args['includeTemplatesPre'];
 $params['includeTemplatesPost'] = $args['includeTemplatesPost'];
 
 //## Process stamina for spirit
-modulehook('stamina-newday', ['spirits' => $spirits]);
+$args = ['spirits' => $spirits];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_STAMINA_NEWDAY, null, $args);
+modulehook('stamina-newday', $args);
 
 debuglog("New Day Turns: {$turnstoday}");
 

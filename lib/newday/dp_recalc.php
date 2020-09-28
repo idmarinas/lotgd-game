@@ -21,6 +21,8 @@ foreach ($labels as $type => $label)
 }
 $pdktotal = 0;
 $pdkneg   = false;
+
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_DK_POINT_RECALC, null, $args);
 modulehook('pdkpointrecalc');
 
 foreach ($labels as $type => $label)

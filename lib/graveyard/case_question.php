@@ -19,6 +19,7 @@ $default_actions = [
 ];
 
 //build navigation
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS, null, $default_actions);
 $actions = modulehook('deathoverlord_actions', $default_actions);
 
 $favorCostList = [];
@@ -78,4 +79,5 @@ foreach ($actions as $key => $value)
 
 \LotgdNavigation::addHeader('category.other');
 
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS);
 modulehook('ramiusfavors');

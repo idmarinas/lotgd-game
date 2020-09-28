@@ -89,7 +89,8 @@ if ('bribe' == $action)
         if ($params['bribeSuccess'])
         {
             \LotgdNavigation::addHeader('category.want');
-            modulehook('bartenderbribe', []);
+            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_INN_BARTENDER_BRIBE);
+            modulehook('bartenderbribe');
 
             if (getsetting('pvp', 1))
             {
@@ -151,6 +152,7 @@ elseif ('specialty' == $action)
 
     if ('' == $specialty)
     {
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES);
         $specialities = modulehook('specialtynames');
 
         \LotgdNavigation::addHeader('category.specialty');
@@ -177,7 +179,9 @@ else
 
     \LotgdNavigation::addHeader('Drinks');
 
-    $result = modulehook('ale', ['includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost']]);
+    $result = ['includeTemplatesPre' => $params['includeTemplatesPre'], 'includeTemplatesPost' => $params['includeTemplatesPost']];
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_INN_ALE, null, $result);
+    $result = modulehook('ale', $result);
 
     $params['includeTemplatesPre']  = $result['includeTemplatesPre'];
     $params['includeTemplatesPost'] = $result['includeTemplatesPost'];
