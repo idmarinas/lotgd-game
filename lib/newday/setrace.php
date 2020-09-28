@@ -9,12 +9,14 @@ if ('' != $setrace)
     $session['user']['race'] = $setrace;
     // Set the person to the main village/capital by default
     $session['user']['location'] = $vname;
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_RACE_SET);
     modulehook('setrace');
     \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 }
 else
 {
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.choose.race', [], $textDomain));
+    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_RACE_CHOOSE);
     modulehook('chooserace');
 }
 

@@ -23,6 +23,7 @@ class SpecialtyType extends ChoiceType
         parent::configureOptions($resolver);
 
         $specialties = ['' => 'Undecided'];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES, null, $specialties);
         $specialties = modulehook('specialtynames', $specialties);
         $specialties = array_flip($specialties);
 

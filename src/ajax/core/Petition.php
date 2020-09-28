@@ -68,6 +68,7 @@ class Petition extends AjaxAbstract
                     $post['cancelpetition'] = $post['cancelpetition'] ?? false;
                     $post['cancelreason']   = $post['cancelreason']   ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
 
+                    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_ADD, null, $post);
                     $post = modulehook('addpetition', $post);
 
                     if ($post['cancelpetition'])
