@@ -80,7 +80,6 @@ trait CoreFunction
     {
         $hook = $this->getHookManager();
 
-        $data = $hook->prepareArgs($data);
         $hook->trigger($name, null, $data);
 
         return modulehook($name, $data);
