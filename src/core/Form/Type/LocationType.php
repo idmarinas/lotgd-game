@@ -30,6 +30,7 @@ class LocationType extends ChoiceType
                 'app-default',
             ],
         ];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_LOCATIONS, null, $locs);
         $locs        = modulehook('camplocs', $locs);
         $locs['all'] = [
             'location.everywhere',

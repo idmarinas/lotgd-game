@@ -105,12 +105,14 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
         $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
-        $result = modulehook('character-restore', [
+        $args = [
             'entity' => $file['shortNameEntity'],
             'accountId' => $accountId,
             'data' => $file,
             'proccessed' => false
-        ]);
+        ];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CHARACTER_BACKUP_RESTORE, null, $args);
+        $result = modulehook('character-restore', $args);
 
         //-- Do nothing if it has been processed
         if (! isset($result['proccessed']) || ! $result['proccessed'])

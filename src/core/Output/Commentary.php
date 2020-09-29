@@ -109,7 +109,9 @@ class Commentary
         $post['commentOri']   = $censor->getOrigString();
         $post['commentMatch'] = $censor->getMatchWords();
 
-        $args = modulehook('postcomment', ['data' => $post]);
+        $args = ['data' => $post];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT_POST, null, $args);
+        $args = modulehook('postcomment', $args);
 
         //-- A module tells us to ignore this comment, so we will
         if ($args['ignore'] ?? false)
@@ -182,7 +184,9 @@ class Commentary
         // }
 
         //-- Process additional commands
-        $returnedHook = modulehook('commentary-command', ['command' => $command, 'section' => $data['section'], 'data' => &$data]);
+        $args = ['command' => $command, 'section' => $data['section'], 'data' => &$data];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMANDS, null, $args);
+        $returnedHook = modulehook('commentary-command', $args);
 
         $processed = true;
 
@@ -269,7 +273,9 @@ class Commentary
         $comment = $filterChain->filter($comment);
 
         //-- Process comment
-        $comment = modulehook('commentary-comment', ['comment' => $comment]);
+        $args = ['comment' => $comment];
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT, null, $args);
+        $comment = modulehook('commentary-comment', $args);
 
         return $comment['comment'];
     }
@@ -302,6 +308,7 @@ class Commentary
         $comsecs['beta']        = \LotgdTranslator::t('section.beta', [], $domain);
 
         // All of the ones after this will be translated in the modules.
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
         $comsecs = modulehook('moderate-comment-sections', $comsecs);
 
         \LotgdCache::setItem('commentary-comsecs', $comsecs);

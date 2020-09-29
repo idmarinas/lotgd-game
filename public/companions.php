@@ -78,6 +78,7 @@ elseif ('take' == $op)
         $row['maxhitpoints'] = $row['maxhitpoints'] + $row['maxhitpointsperlevel'] * $session['user']['level'];
         $row['hitpoints'] = $row['maxhitpoints'];
 
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMPANION_ALTER, null, $row);
         $row = modulehook('alter-companion', $row);
 
         require_once 'lib/buffs.php';
