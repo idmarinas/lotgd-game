@@ -10,7 +10,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 ### :cyclone: CHANGES
 
 -   **public/forest.php** deleted obsolete function, and use new translator system to translate prefix of creature.
--   **Moved template and translation folders** to new location
+-   **Moved _template_ and _translation_ folders** to new location
     -   `data/template/` to `templates/`
     -   `data/translation/` to `translations/`
     -   Note: Both are in root directory, and are in "PLURAL"
@@ -22,8 +22,15 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         -   Note: Can use `webpack.config.custom-example.js` to create your own namespaces for your project (if you need).
     -   Is a preview of new system of templates and themes of Game Core.
         -   Note: the intention is to make the core more flexible when creating new themes for the game and to be able to create several themes at once.
+    -   Note: in the next version the templates and translations will be updated.
 -   **Configuration cache** Now can clear Twig template cache.
     -   Note: all buttons have the same effect, emptying the template cache directory.
+-   **New Hook system**
+    -   Now use _Laminas EventManager_ to trigger hooks. No more `modulehook`.
+        -   This method does not use the database to trigger the hooks, so the database load is lightened.
+    -   Hook system use _Laminas EventManager_.
+    -   To know all the hooks that are implemented in the game see the file **src/core/Hook.php**, this file contains all the hooks that are available in the game core.
+    -   This is a first preview of new Hook System. Not all old hooks have a new version. Because in future change how create pages of game.
 
 ### :fire: DEPRECATED
 
@@ -40,6 +47,18 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   Static class **Lotgd\Core\Fixed\SymfonyForm** aka `LotgdForm` are deprecated.
     -   Get the factory to create a Symfony Form. `LotgdLocator::get('Lotgd\Core\SymfonyForm')`
 -   Class **Lotgd\Core\SymfonyForm** are deprecated use `Lotgd\Core\Http\Request` instead.
+-   **Old Hooks system**
+    -   The old hook system for trigger hooks in game are deprecated.
+        -  This is a `modulehook` function and associated.
+    -   Note: use New Hook system.
+    -   Functions deprecated:
+        -   **lib/modules/hook.php**
+            -   `modulehook`
+            -   `module_wipehooks`
+            -   `module_drophook`
+            -   `module_addhook`
+            -   `module_addhook_priority`
+        -   Note: Core trigger new Hook system and them old system.
 
 ### :wrench: FIXES
 
@@ -47,8 +66,11 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **public/mercenarycamp.php** Fixed error with: Call to a member function on array
 -   **Forms**
     -   **data/form/core/petition/input.php** Fixed error with text domain
--   **Translations** Fixed error, now use new folded Yaml format
-    -   **data/translation/en/grotto/configuration.yaml**
+    -   **data/form/core/grotto/configuration/.** Fixed error with range input with float values and diferent locale.
+        -   The solution for this is added filter to input, `Laminas\Filter\ToFloat` see in `data/form/core/grotto/configuration/filter/pvp.php`
+-   **Translations**
+    -   **translations/en/grotto/configuration.yaml** Fixed error, now use new folded Yaml format
+    -   **translations/en/form/grotto/configuration.yaml** Fixed error, now use correct index name
 
 ### :x: REMOVES
 
