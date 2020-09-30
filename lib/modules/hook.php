@@ -180,7 +180,10 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
             }
 
             // Clear the collapse flag
-            unset($res['nocollapse']);
+            if (isset($res['nocollapse']))
+            {
+                unset($res['nocollapse']);
+            }
             //handle return arguments.
             if (\is_iterable($res))
             {
@@ -196,7 +199,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     $currenthook      = $lasthook;
 
     // And hand them back so they can be used.
-    return $args;
+    return (array) $args;
 }
 
 /**
@@ -242,10 +245,10 @@ function module_addeventhook($type, $chance)
 {
     global $mostrecentmodule;
 
-    \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
+    // \trigger_error(\sprintf(
+    //     'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
+    //     __METHOD__
+    // ), E_USER_DEPRECATED);
 
     debug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
