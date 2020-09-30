@@ -91,38 +91,23 @@ elseif ('newcronjob' == $op)
         $method  = $cronId ? 'merge' : 'persist';
         $message = $cronId ? 'flash.message.cronjob.updated' : 'flash.message.cronjob.created';
 
-        //-- Check if clan name is taken
-        $noExistValidator = new \Lotgd\Core\Validator\Db\NoObjectExists([
-            'object_repository' => $repository,
-            'fields'            => 'name',
+        \Doctrine::{$method}($entity);
+        \Doctrine::flush();
+
+        $cronId = $entity->getId();
+
+        gamelog('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
+
+        $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
+        $cronCache->removeItem('cronjobstable');
+
+        //-- Redo form for change $cronId and set new data (generated IDs)
+        $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
+            'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
+            'attr'   => [
+                'autocomplete' => 'off',
+            ],
         ]);
-
-        if ('persist' == $method && ! $noExistValidator->isValid($entity->getName()))
-        {
-            $paramsFlashMessages['name'] = $entity->getName();
-            $message                     = 'flash.message.cronjob.name.exist';
-            $messageType                 = 'addWarningMessage';
-        }
-        else
-        {
-            \Doctrine::{$method}($entity);
-            \Doctrine::flush();
-
-            $cronId = $entity->getId();
-
-            gamelog('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
-
-            $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-            $cronCache->removeItem('cronjobstable');
-
-            //-- Redo form for change $cronId and set new data (generated IDs)
-            $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
-                'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
-                'attr'   => [
-                    'autocomplete' => 'off',
-                ],
-            ]);
-        }
 
         if ($message)
         {
