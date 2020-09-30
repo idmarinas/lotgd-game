@@ -18,6 +18,7 @@ section:
         unmanage: 'It is not possible to administer the Doctrine cache, it is self-managed.'
         twig_warning: 'Warning: With Twig Template cache, when you click on any of the buttons, they will have the same effect, empty the "storage/cache/template" dir completely'
     cronjob:
+        details: 'Details'
         table:
             description: '`@`bCronJobs available in the game´b`0'
             thead:
