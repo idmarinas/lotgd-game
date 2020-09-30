@@ -15,7 +15,6 @@ namespace Lotgd\Core\Entity;
 
 use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,8 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="cronjob")
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\CronjobRepository")
- *
- * @UniqueEntity("name")
  */
 class Cronjob
 {
