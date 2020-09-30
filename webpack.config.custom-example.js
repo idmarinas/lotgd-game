@@ -30,8 +30,10 @@ Encore
 
     /*
      * ENTRY CONFIG
+     *
+     * DIR_NAME: Is name of your custom assets inside "./assets/" folder
      */
-    .addEntry('example', './paht/to/file')
+    .addEntry('example', './assets/DIR_NAME/path/to/file')
 
     //-- Configure your THEME
     .addEntry('KEY_NAME_FOR_THEME', './assets/DIR_NAME/lotgd.less')
