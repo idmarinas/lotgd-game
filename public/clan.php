@@ -47,7 +47,9 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
-$ranks = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $session['user']['clanid']]);
+$ranks = ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
+$ranks = modulehook('clanranks', $ranks);
 $params['ranksNames'] = $ranks['ranks'];
 
 if ('detail' == $op)

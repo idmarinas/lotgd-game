@@ -44,9 +44,13 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
+$ranks = ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
 $ranks = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $target['clanid']]);
 
-$specialties = modulehook('specialtynames', ['' => \LotgdTranslator::t('character.specialtyname', [], 'app-default')]);
+$args = ['' => \LotgdTranslator::t('character.specialtyname', [], 'app-default')];
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES, null, $args);
+$specialties = modulehook('specialtynames', $args);
 
 $params = [
     'textDomain' => $textDomain,
@@ -85,6 +89,7 @@ else
 $params = modulehook('page-bio-tpl-params', $params);
 rawoutput(LotgdTheme::renderThemeTemplate('page/bio.twig', $params));
 
+\LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_BIO_END, null, $target);
 modulehook('bioend', $target);
 
 page_footer();
