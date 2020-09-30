@@ -11,11 +11,14 @@
     -   Aplicar este concepto a los módulos también
 
 # Actualmente haciendo esto
--   Añadiendo el nuevo sistema de ganchos y eventos.
+-   Corregir pantalla de configuración de CronJob
 
 # Para la versión 4.5.0
+-   Usar `composer require oxcom/zend-twig` para integrar el laminas-view con twig. Esto permite usar los helpers de laminas.
 -   Mejorar el sistema de plantillas, para hacer la creación de temas mas sencillo
     -   Mejorar el sistema para aprobechar mejor las capacidades de Twig
+-   En batalla: poner la salud de jugador y enemigos en la columpna de resultados, del jugador y enemigos, arriba y abajo
+    -   Mirar imagen Anotación 2020-09-24 153923
 -   Adaptar el sistema de tradución (los archivos)
 -   Revisar y eliminar uso de DB:: class, se usará Doctrine en su lugar.
 
@@ -29,6 +32,7 @@
         -   Esto se eliminara en esta versión
 
 ## Cosas pendientes
+-   Usar un sistema parecido al de Laminas MVC para crear las páginas.
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Login
     -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
