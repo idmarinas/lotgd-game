@@ -33,7 +33,7 @@ module.exports = {
             //-- All files includin subdirectories
             '**{,/**}',
             //-- Include .files
-            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig,/.whitesource}',
+            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
             //-- Ignore files of development
             '!{docs,release}{,/**}',
             //-- Ignore folders not need for skeleton
