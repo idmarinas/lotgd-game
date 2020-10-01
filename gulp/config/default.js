@@ -37,7 +37,7 @@ module.exports = {
             //-- Ignore files of development
             '!{docs,release}{,/**}',
             //-- Ignore folders not need for skeleton
-            '!{error_docs,lib,modules,skeleton}{,/**}',
+            '!{error_docs,lib,skeleton}{,/**}',
             //-- Ignore files of core
             '!config/autoload/global{,/**}',
             '!cronjob/*.php',
