@@ -31,9 +31,11 @@ module.exports = {
         ],
         skeleton: [
             //-- All files includin subdirectories
-            '**{,/**,/.gitkeep}',
+            '**{,/**}',
+            //-- Include .files
+            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig,/.whitesource}',
             //-- Ignore files of development
-            '!{docs,gulp,release}{,/**}',
+            '!{docs,release}{,/**}',
             //-- Ignore folders not need for skeleton
             '!{error_docs,lib,modules}{,/**}',
             //-- Ignore files of core
@@ -42,7 +44,7 @@ module.exports = {
             '!data/form/core{,/**}',
             '!public{,/**}',
             'public/**/.gitkeep', //-- Only copy .gitkeep
-            '!public/js{,/*.js}',
+            '!src/module{,/**}',
             '!src/core{,/**}',
             '!src/ajax/core{,/**}',
             '!src/ajax/pattern/core{,/**}',
