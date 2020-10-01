@@ -8,9 +8,12 @@ var del = require('del')
 //-- Configuration
 var config = require('../config/default')
 var configTasks = require('../config/tasks')
+var isProduction = configTasks.isProduction()
 
 //-- Delete distribution files
 module.exports = function (callback)
 {
-    return del([config.paths.build], configTasks.settings.del, callback)
+    const destFolder = isProduction ? config.paths.build.prod : config.paths.build.dev
+
+    return del([destFolder], configTasks.settings.del, callback)
 }

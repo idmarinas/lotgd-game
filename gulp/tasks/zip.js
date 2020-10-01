@@ -17,7 +17,7 @@ module.exports = function (callback)
     if (isProduction && createRelease)
     {
         //-- Resources folder - Only JS
-        return gulp.src(config.paths.build + '/**')
+        return gulp.src(config.paths.build.prod + '/**')
             .pipe(zip(configTasks.version + ' IDMarinas Edition.zip'))
             .on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
             .pipe(gulp.dest('release/'))

@@ -23,24 +23,26 @@ module.exports = function (callback)
         (async () =>
         {
             const deletedPaths = await del([
-                normalize(config.paths.build + '/cli-config.php'),
-                normalize(config.paths.build + '/**/*.{dist,md,lock}{,/**}'),
-                normalize(config.paths.build + '/*.{json,yml,yaml,xml,txt,TXT,csv,phar,js,php}{,/**}'),
-                normalize(config.paths.build + '/config/development{,/**}'),
-                normalize(config.paths.build + '/config/local/dbconnect.php'),
-                normalize(config.paths.build + '/config{,/**}/development{,.*}.*'),
-                normalize('!' + config.paths.build + '/lotgd-check-requeriments-*.php'), //-- Ignore all files: check requeriments
-                normalize('!' + config.paths.build + '/composer.{json,lock}') //-- Can use in prod server to optimize-autoloader
+                normalize(config.paths.build.prod + '/cli-config.php'),
+                normalize(config.paths.build.prod + '/**/*.{dist,md,lock}{,/**}'),
+                normalize(config.paths.build.prod + '/*.{json,yml,yaml,xml,txt,TXT,csv,phar,js,php}{,/**}'),
+                normalize(config.paths.build.prod + '/config/development{,/**}'),
+                normalize(config.paths.build.prod + '/config/local/dbconnect.php'),
+                normalize(config.paths.build.prod + '/config{,/**}/development{,.*}.*'),
+                normalize('!' + config.paths.build.prod + '/lotgd-check-requeriments-*.php'), //-- Ignore all files: check requeriments
+                normalize('!' + config.paths.build.prod + '/composer.{json,lock}') //-- Can use in prod server to optimize-autoloader
             ])
 
             fancyLog.info('Deleted files and directories:\n', deletedPaths.join('\n'))
         })()
     }
 
+    const destFolder = isProduction ? config.paths.build.prod : config.paths.build.dev
+
     //-- Resources folder - Only JS
-    return gulp.src(config.paths.build + '/public/js/*.js')
+    return gulp.src(`${destFolder}/public/js/*.js`)
         .pipe(gulpif(isProduction, uglify(settings.uglify.some)))
         .on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
-        .pipe(gulp.dest(config.paths.build + '/public/js'))
+        .pipe(gulp.dest(`${destFolder}/public/js`))
         .pipe(print(log.copied))
 }

@@ -1,13 +1,20 @@
 //-- Modify with your data
 
-var path = require('path')
+const path = require('path')
+const merge = require('lodash.merge')
 
-module.exports = {
+const distFolder = '../../dist'
+
+const config = {
     paths: {
         semantic: 'semantic/dist', //-- Directory of compiled files of Semantic UI
         //-- Directory for construct game
-        build: path.resolve(__dirname, '../../dist'),
-        skeleton: path.resolve(__dirname, '../../skeleton')
+        build: {
+            dist: path.resolve(__dirname, distFolder),
+            prod: path.resolve(__dirname, `${distFolder}/prod`),
+            dev: path.resolve(__dirname, `${distFolder}/dev`),
+            skeleton: path.resolve(__dirname, `${distFolder}/skeleton`)
+        }
     },
     files: {
         //-- Files to copy
@@ -22,13 +29,12 @@ module.exports = {
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
             '!docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
             '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
-            '!semantic{,/**}',
             '!entity{,/**}', //-- Autogenerate entities from BD
-            '!node_modules{,/**}',
-            '!bower_components{,/**}',
-            //-- Ignore because using composer to update all packages
-            '!vendor{,/**}'
+            '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
+            //-- Ignore dependency directories
+            '!{bower_components,node_modules,vendor}{,/**}'
         ],
+        core_files: [], //-- This is used in LoTGD Skeleton
         skeleton: [
             //-- All files includin subdirectories
             '**{,/**}',
@@ -59,3 +65,15 @@ module.exports = {
         ]
     }
 }
+
+var custom = {}
+try
+{
+    custom = require('../custom/config/default')
+}
+catch (error)
+{
+    console.log('Not find custom config default')
+}
+
+module.exports = merge(config, custom)

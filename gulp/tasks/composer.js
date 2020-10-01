@@ -16,7 +16,7 @@ module.exports = function (callback)
     if (isProduction)
     {
         return composer({
-            'working-dir': config.paths.build,
+            'working-dir': config.paths.build.prod,
             'no-dev': true,
             'no-suggest': true,
             'optimize-autoloader': true

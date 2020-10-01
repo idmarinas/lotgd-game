@@ -13,6 +13,6 @@ module.exports = function (callback)
 {
     return gulp.src(config.files.skeleton, { base: '.' })
         .on('error', function (err) { fancyLog(colors.red('[Error]'), err.toString()) })
-        .pipe(gulp.dest(config.paths.skeleton))
+        .pipe(gulp.dest(config.paths.build.skeleton))
         .pipe(print(log.copied))
 }
