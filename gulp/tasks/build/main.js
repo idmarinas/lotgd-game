@@ -23,7 +23,7 @@ module.exports = function (callback)
         const core = gulp.src(config.files.core_files)
             .pipe(gulp.dest(destFolder))
 
-        return merge(main, core)
+        return merge(core, main)
     }
 
     return main
