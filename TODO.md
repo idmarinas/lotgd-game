@@ -11,7 +11,7 @@
     -   Aplicar este concepto a los módulos también
 
 # Actualmente haciendo esto
--   Corregir pantalla de configuración de CronJob
+-   *
 
 # Para la versión 4.5.0
 -   Usar `composer require oxcom/zend-twig` para integrar el laminas-view con twig. Esto permite usar los helpers de laminas.
