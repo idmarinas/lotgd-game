@@ -113,7 +113,7 @@ if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdHttp::get
 }
 
 //-- Check connection to DB
-$link = DB::connect();
+$link = Doctrine::isConnected();
 
 define('DB_CONNECTED', (false !== $link));
 define('DB_CHOSEN', DB_CONNECTED);
