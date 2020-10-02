@@ -11,9 +11,6 @@
     -   Aplicar este concepto a los módulos también
 
 # Actualmente haciendo esto
--   *
-
-# Para la versión 4.5.0
 -   Usar `composer require oxcom/zend-twig` para integrar el laminas-view con twig. Esto permite usar los helpers de laminas.
 -   Mejorar el sistema de plantillas, para hacer la creación de temas mas sencillo
     -   Mejorar el sistema para aprobechar mejor las capacidades de Twig
