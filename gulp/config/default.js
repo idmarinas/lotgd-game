@@ -61,7 +61,7 @@ const config = {
             '!{*.,}dist{,/**}',
             //-- Ignore some files
             '!*.{txt,TXT,csv}',
-            '!README.md'
+            '!{README.md, TODO.md}'
         ]
     }
 }
