@@ -19,6 +19,8 @@ use Laminas\Db\ResultSet\ResultSet;
 
 /**
  * Class for access to data base.
+ *
+ * @deprecated 4.4.0 deleted in version 5.0.0
  */
 class Dbwrapper
 {
