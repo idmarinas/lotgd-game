@@ -25,8 +25,12 @@
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación, mixto: por consola o por web.
 -   Uso de Laminas DB, obsoleto.
+    -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminara en esta versión
+-   Eliminar compatibilidad con el uso del viejo sistema de módulos
+-   Eliminar compatibilidad con el viejo sistema de traducción.
+-   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 
 ## Cosas pendientes
 -   Usar un sistema parecido al de Laminas MVC para crear las páginas.
