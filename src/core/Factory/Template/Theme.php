@@ -60,6 +60,12 @@ class Theme implements FactoryInterface
         {
             foreach ($extensions as $className)
             {
+                //-- Allows to override/remove extensions.
+                if (empty($className))
+                {
+                    continue;
+                }
+
                 $extension = new $className();
 
                 if (\method_exists($extension, 'setContainer'))
