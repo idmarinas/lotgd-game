@@ -10,12 +10,12 @@ return [
         'factories' => [
             //-- Added in version 3.0.0
             Lotgd\Core\Character\Stats::class  => InvokableFactory::class,
-            Lotgd\Core\Db\Dbwrapper::class     => Factory\Db\Dbwrapper::class,
+            Lotgd\Core\Db\Dbwrapper::class     => Factory\Db\Dbwrapper::class, //-- Deleted in version 5.0.0
             Lotgd\Core\Lib\Settings::class     => Factory\Lib\Settings::class,
             Lotgd\Core\Output\Color::class     => InvokableFactory::class,
             Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class,
             Lotgd\Core\Template\Theme::class   => Factory\Template\Theme::class,
-            Lotgd\Core\Http::class             => InvokableFactory::class,
+            Lotgd\Core\Http::class             => InvokableFactory::class, //-- Deleted in version 5.0.0
 
             //-- Added in version 4.0.0
             Lotgd\Core\Component\FlashMessages::class          => Factory\Component\FlashMessages::class,
@@ -56,6 +56,14 @@ return [
             Lotgd\Core\Http\Response::class      => Factory\Http\Response::class,
             'webpack_encore.tag_renderer'        => Factory\Template\Encore::class,
             'webpack_encore.packages'            => Factory\Template\Packages::class,
+
+            //-- Added in version 4.5.0
+            Laminas\View\Helper\HeadLink::class     => InvokableFactory::class,
+            Laminas\View\Helper\HeadMeta::class     => Factory\View\Helper\HeadMeta::class,
+            Laminas\View\Helper\HeadScript::class   => InvokableFactory::class,
+            Laminas\View\Helper\HeadStyle::class    => InvokableFactory::class,
+            Laminas\View\Helper\HeadTitle::class    => InvokableFactory::class,
+            Laminas\View\Helper\InlineScript::class => InvokableFactory::class,
         ],
     ],
 ];
