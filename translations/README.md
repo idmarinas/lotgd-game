@@ -2,7 +2,7 @@
 
 In this folder go all the translation files for the different languages following the following structure:
 -   Used `.yaml` files to store translations.
-    -   Files are in `data/translation/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
+    -   Files are in `translations/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
         -   `[LOCALE]` It's a folder with the name of the location.  The game uses by default languages with two characters. Example "en", "es", "fr"...
         -   `[SCOPE]` It's a folder with name for a scope of file. You can look at the other folders created to get an idea of how they are used. It is mainly for organization and identification of the translation file.
         -   `[DOMAIN].yaml` It is the name of the file with the extension `.yaml`
@@ -13,7 +13,7 @@ In this folder go all the translation files for the different languages followin
             -   `pages` This is where the translation files from the main pages are stored.
             -   `partial` This is where the translations files for partials parts. (Example, deathmessages, taunts)
     -   The translations are automatically loaded by the translation factory.
-        -   It is possible to have more scopes besides `pages`, `modules`... but remember the structure of the folder `data/translation`.
+        -   It is possible to have more scopes besides `pages`, `modules`... but remember the structure of the folder `translations/`.
 -   `.yaml` files support a nesting system (array)
     -   Example:
         >     The scheme used is:
