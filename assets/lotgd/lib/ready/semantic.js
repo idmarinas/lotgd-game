@@ -28,7 +28,7 @@ define([
         })
         jQuery('.ui.lotgd.tooltip').popup()
         jQuery('.ui.lotgd.progress').progress({ precision: 10 })
-        jQuery('.ui.lotgd.message i.close').on('click', (event) =>
+        jQuery('.ui.lotgd.message i.close').on('click', event =>
         {
             jQuery(event.target).closest(jQuery(event.target).parent('.message')).transition('fade')
         })

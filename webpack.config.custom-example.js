@@ -54,7 +54,7 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
 
-    .configureBabelPresetEnv((config) =>
+    .configureBabelPresetEnv(config =>
     {
         config.useBuiltIns = 'usage'
         config.corejs = 3

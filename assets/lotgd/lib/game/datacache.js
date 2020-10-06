@@ -91,7 +91,7 @@ define([
             confirmButtonText: 'Yes, clear this',
             text: `Type the prefix of the cache data to be deleted for "${cache}"`,
             input: 'text',
-            preConfirm: (prefix) =>
+            preConfirm: prefix =>
             {
                 return jqueryGet(`ajaxdatacache.php?op=clearbyprefix&cache=${cache}&prefix=${prefix}`)
             }
