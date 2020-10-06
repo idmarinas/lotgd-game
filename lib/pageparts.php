@@ -48,6 +48,11 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
         'textDomain' => $textDomain,
     ];
 
+    $headTitle = \LotgdLocator::get(\Laminas\View\Helper\HeadTitle::class);
+
+    //-- Set a title for page
+    $headTitle(\LotgdTranslator::t($title, $params, $textDomain), 'set');
+
     $script = \LotgdHttp::getServer('SCRIPT_NAME');
     $script = \substr($script, 0, \strpos($script, '.'));
     $module = (string) \LotgdHttp::getQuery('module');
