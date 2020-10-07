@@ -7,10 +7,15 @@
 		<meta http-equiv="imagetoolbar" content="false" />
 		<meta http-equiv="Window-target" content="_top" />
         <meta name="robots" content="index, follow" />
+
         {% block lotgd_head_meta %}{% endblock %}
+
+        <!-- Dynamically added meta tags -->
+        {{ head_meta() }}
 		{{ metahead }}
 
-        <title>{% block lotgd_head_title %}{{ page_title(title) }}{% endblock %}</title>
+        <!-- Title tag for page -->
+        {{ head_title() }}
 
         {{ encore_entry_link_tags('lotgd', null, 'lotgd') }}
         {{ encore_entry_link_tags('semantic_ui', null, 'lotgd') }}
@@ -25,6 +30,13 @@
         {{ scripthead }}
 
         {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
+        {% do head_script().appendFile('path/to/file.js') %}
+        {% do head_link().appendStylesheet('path/to/file.css') %}
+
+        <!-- Dynamically added script/style code and files -->
+        {{ head_link() }}
+        {{ head_style() }}
+        {{ head_script() }}
 
         <!-- START Cookies Consent -->
         <script>
@@ -45,5 +57,8 @@
         {% block lotgd_footer_theme_css %}{% endblock %}
 
         {% block lotgd_footer_theme_js %}{% endblock %}
+
+        <!-- Dynamically added script code -->
+        {{ inline_script() }}
     </body>
 </html>
