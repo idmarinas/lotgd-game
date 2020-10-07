@@ -30,10 +30,17 @@ trait CoreFunction
     /**
      * Translate a title of page.
      *
+     * @deprecated 4.5.0 deleted in version 5.0.0
+     *
      * @return string
      */
     public function pageTitle(array $title)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s (page_title() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "head_title()" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $title = \LotgdTranslator::t($title['title'], $title['params'], $title['textDomain']);
 
         return \LotgdSanitize::fullSanitize($title);
