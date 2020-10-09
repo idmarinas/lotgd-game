@@ -26,6 +26,12 @@ use const E_USER_DEPRECATED;
  */
 class Http extends Request
 {
+    public static function __callStatic($name, $arguments)
+    {
+        \trigger_error('Usage of LotgdHttp is deprecated, please use LotgdRequest instead', E_USER_DEPRECATED);
+
+        return parent::__callStatic($name, $arguments);
+    }
 }
 
 \class_alias('Lotgd\Core\Fixed\Http', 'LotgdHttp', false);

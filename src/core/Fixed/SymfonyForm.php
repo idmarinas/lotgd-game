@@ -44,6 +44,8 @@ class SymfonyForm
      */
     public static function __callStatic($method, $arguments)
     {
+        \trigger_error('Usage LotgdForm is deprecated, please get the factory to create Symfony Forms (LotgdLocator::get("Lotgd\Core\SymfonyForm"))',E_USER_DEPRECATED);
+
         if (\method_exists(self::$instance, $method))
         {
             return self::$instance->{$method}(...$arguments);
