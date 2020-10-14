@@ -23,4 +23,4 @@ jobs:
         # uses: symfonycorp/security-checker-action@038cecb1ee1bf871d1ef43e873f813d900a1125c
       - uses: symfonycorp/security-checker-action@v2
         with:
-          lock: composer.lock
+          lock: /composer.lock
