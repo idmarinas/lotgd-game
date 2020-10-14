@@ -1,3 +1,5 @@
+![PHP Composer](https://github.com/idmarinas/lotgd-game/workflows/PHP%20Composer/badge.svg?branch=master)
+
 ![GitHub release](https://img.shields.io/github/release/idmarinas/lotgd-game.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/idmarinas/lotgd-game)
