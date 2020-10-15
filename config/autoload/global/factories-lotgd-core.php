@@ -64,6 +64,7 @@ return [
             Laminas\View\Helper\HeadStyle::class    => InvokableFactory::class,
             Laminas\View\Helper\HeadTitle::class    => InvokableFactory::class,
             Laminas\View\Helper\InlineScript::class => InvokableFactory::class,
+            Lotgd\Core\Template\Params::class       => InvokableFactory::class,
         ],
     ],
 ];
