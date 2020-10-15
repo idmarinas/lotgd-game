@@ -25,6 +25,7 @@ class Response implements FactoryInterface
         {
             throw new \RuntimeException('Cannot send headers, headers already sent');
         });
+        $response->setContainer($container);
 
         return $response;
     }
