@@ -5,6 +5,128 @@ See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 Visit the [Documentation](https://github.com/idmarinas/lotgd-game/wiki) for more details.
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).
 
+# Version: 4.5.0
+
+### :cyclone: CHANGES
+
+-   **Templates system**
+    -   `templates/module/` are moved to `templates_modules/` folder
+        -   No BC, al work as before. But from now the templates of the modules will go in this new folder.
+    -   Core templates are moved to `templates_core/` folder. These templates are not intended to be customizable
+    -   New config option `twig_templates_paths`
+        -   Now can add your templates to Twig, and use namespace.
+        -   If not want use namespace use a empty value.
+        ```php
+        'twig_templates_paths' => [
+            'path/to/templates' => 'namespace',
+            //-- If not want namespace
+            'path/to/templates' => '',
+        ],
+        ```
+
+### :star: FEATURES
+
+-   **Twig Template System**
+    -   Added new core Extension: `Head`
+        -   This extension added new funtions to Twig system:
+            -   This new functions are based in helpers of [Laminas View](https://docs.laminas.dev/laminas-view/helpers/intro/), can see documentation for now how work.
+            -   `head_link()` `<link>` element: stylesheets, feeds, favicons, trackbacks, and more.
+                ```twig
+                {% do head_script().appendStylesheet('/custom/module.css') %}
+                ```
+            -   `head_meta()` `<meta>` element is used to provide meta information about your HTML document
+                ```twig
+                {% do head_meta().appendHttpEquiv('Cache-Control', 'no-cache') %}
+                ```
+            -   `head_script()` `<script>` element is used to either provide inline client-side scripting elements or link to a remote resource.
+                -   It is a simple and less complex method of adding additional code, when it is needed in a particular template.
+                    -   Add files:
+                    ```twig
+                    {% do head_script().appendFile('path/to/file.js') %}
+                    ```
+                    -   Capture script:
+                    ```twig
+                    {% do head_script().captureStart() %}
+                        var action = '/';
+                        $('foo_form').action = action;
+                    {% do head_script().captureEnd() %}
+                    ```
+            -   `head_style()` `<style>` element is used to include CSS stylesheets inline
+                -   Add content
+                ```twig
+                {% set finalStyles = 'styles code' %}
+                {% do head_style().appendStyle(finalStyles) %}
+                ```
+                -   Capture content
+                ```twig
+                {% do head_style().captureStart() %}
+                body {
+                    background-color: 'black';
+                }
+                {% do head_style().captureEnd() %}
+                ```
+            -   `head_title()` `<title>` element is used to provide a title for an HTML document
+                ```twig
+                {% do head_title('Change to new title', 'SET') %}
+                {% do head_title('Append title', 'APPEND') %}
+                {% do head_title('Prepend title', 'PREPEND') %}
+                ```
+                -   By default always append title.
+            -   `inline_script()` work like `head_meta()` but add content before tag `</body>`
+                -   Add files:
+                ```twig
+                {% do inline_script().appendFile('path/to/file.js') %}
+                ```
+                -   Capture script:
+                ```twig
+                {% do inline_script().captureStart() %}
+                    var action = '/';
+                    $('foo_form').action = action;
+                {% do inline_script().captureEnd() %}
+                ```
+    -   Allow to remove or override some extension of core.
+        -   For this only need added a key for a extension.
+        -   Extension with a key name, can override or remove.
+        ```php
+        'twig_extensions' => [//-- Custom extensions for Twig
+            Lotgd\Core\Twig\Extension\GameCore::class,
+            // ...
+
+            //-- Added in version 4.1.0
+            // Allows to override/remove this extensions.
+            Lotgd\Core\Twig\Extension\Form\Form::class=> Lotgd\Core\Twig\Extension\Form\Form::class,
+            Lotgd\Core\Twig\Extension\Form\FormElement::class=> '', //-- Deleted extension
+            Lotgd\Core\Twig\Extension\Form\FormElementError::class=> Lotgd\Local\Twig\Extension\Custom\FormElementError::class, //-- Override extension
+            //--
+        ],
+        ```
+
+### :fire: DEPRECATED
+
+-   Twig extension:
+    -   Functions:
+        -   `page_title()` is obsolete, use `headTitle()` added in new extension.
+-   Class `Lotgd\Core\Template\Base` are deprecated use `Lotgd\Core\Template\Template` instead.
+
+### :wrench: FIXES
+
+-   Nothing
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Added lazy services**.
+    -   These services are not always necessary, so they are only created the first time they are needed.
+        -   `Lotgd\Core\Output\Censor`
+        -   `Lotgd\Core\Output\Commentary`
+        -   `Lotgd\Core\Pvp\Listing`
+-   **Jaxon-PHP** Migrating Jaxon-Core from 2.2.* to version 3.2.*
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.4.0
 
 ### :cyclone: CHANGES
