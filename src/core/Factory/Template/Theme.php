@@ -30,23 +30,23 @@ class Theme implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $config  = $container->get('GameConfig');
-        $options = $config['lotgd_core'] ?? [];
+        $opts = $config['lotgd_core'] ?? [];
         $assets  = $container->get('webpack_encore.packages');
 
-        $template = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
-            'debug' => (bool) ($options['development'] ?? false),
+        $templateSystem = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
+            'debug' => (bool) ($opts['development'] ?? false),
             //-- Used dir of cache
             'cache' => 'storage/cache/template',
             //-- Used in development for reload .twig templates
-            'auto_reload' => (bool) ($options['development'] ?? false),
+            'auto_reload' => (bool) ($opts['development'] ?? false),
         ]);
-        $template->setContainer($container);
+        $templateSystem->setContainer($container);
 
         // the Twig file that holds all the default markup for rendering forms
         // this file comes with TwigBridge
         $defaultFormTheme = 'semantic-ui-form-theme.html.twig';
-        $formEngine       = new TwigRendererEngine([$defaultFormTheme], $template);
-        $template->addRuntimeLoader(new FactoryRuntimeLoader([
+        $formEngine       = new TwigRendererEngine([$defaultFormTheme], $templateSystem);
+        $templateSystem->addRuntimeLoader(new FactoryRuntimeLoader([
             FormRenderer::class => function () use ($formEngine)
             {
                 return new FormRenderer($formEngine);
@@ -55,7 +55,32 @@ class Theme implements FactoryInterface
 
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
+        $this->addTwigExtensions($extensions, $templateSystem, $container);
 
+        $templateSystem->addExtension(new EntryFilesTwigExtension($container));
+        $templateSystem->addExtension(new AssetExtension($assets['packages']));
+
+        //-- Templates path
+        $tplPaths = $config['twig_templates_paths'] ?? [];
+        $this->addTemplatePaths($tplPaths, $templateSystem);
+
+        if ($opts['development'] ?? false)
+        {
+            $profile = new Profile();
+            $templateSystem->addExtension(new ProfilerExtension($profile));
+
+            \Idmarinas\TracyPanel\TwigBar::init($profile);
+        }
+
+        //-- Important
+        $templateSystem->prepareTheme();
+
+        return $templateSystem;
+    }
+
+    //-- Add twig extensions
+    private function addTwigExtensions($extensions, &$templateSystem, $container)
+    {
         if ( ! empty($extensions) && \is_array($extensions))
         {
             foreach ($extensions as $className)
@@ -73,25 +98,28 @@ class Theme implements FactoryInterface
                     $extension->setContainer($container);
                 }
 
-                $template->addExtension($extension);
+                $templateSystem->addExtension($extension);
             }
         }
+    }
 
-        $template->addExtension(new EntryFilesTwigExtension($container));
-        $template->addExtension(new AssetExtension($assets['packages']));
-
-        if ($options['development'] ?? false)
+    //-- Add template paths
+    private function addTemplatePaths($tplPaths, &$templateSystem)
+    {
+        if ( ! empty($tplPaths) && \is_array($tplPaths))
         {
-            $profile = new Profile();
-            $template->addExtension(new ProfilerExtension($profile));
+            foreach($tplPaths as $path => $namespace)
+            {
+                if (empty($namespace))
+                {
+                    $templateSystem->getLoader()->addPath($path);
 
-            \Idmarinas\TracyPanel\TwigBar::init($profile);
+                    continue;
+                }
+
+                $templateSystem->getLoader()->addPath($path, $namespace);
+            }
         }
-
-        //-- Important
-        $template->prepareTheme();
-
-        return $template;
     }
 
     public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
