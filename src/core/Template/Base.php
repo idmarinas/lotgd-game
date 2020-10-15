@@ -8,24 +8,12 @@
 
 namespace Lotgd\Core\Template;
 
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
+\trigger_error(\sprintf(
+    'Class %s is deprecated, please use %s instead',
+    Base::class,
+    Template::class
+), E_USER_DEPRECATED);
 
-class Base extends Environment
+class Base extends Template
 {
-    use \Lotgd\Core\Pattern\Container;
-
-    public function __construct(array $loader = [], array $options = [])
-    {
-        //-- Merge options
-        $default = [
-            'cache'      => 'storage/cache/templates',
-            'autoescape' => false,
-        ];
-        $options = array_merge($default, $options);
-
-        $loader = new FilesystemLoader($loader);
-
-        parent::__construct($loader, $options);
-    }
 }
