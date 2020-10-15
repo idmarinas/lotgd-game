@@ -7,6 +7,11 @@
  */
 
 return [
+    'twig_templates_paths' => [
+        // 'path/to/templates' => 'namespace',
+        //-- If not want namespace
+        // 'path/to/templates' => false|null|'',
+    ],
     'twig_extensions' => [//-- Custom extensions for Twig
         Lotgd\Core\Twig\Extension\GameCore::class,
         Lotgd\Core\Twig\Extension\FlashMessages::class,
