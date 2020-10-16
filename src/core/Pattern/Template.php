@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Pattern;
 
+use Lotgd\Core\Template\Theme as ThemeCore;
 use Lotgd\Core\Template\Params;
 
 trait Template
