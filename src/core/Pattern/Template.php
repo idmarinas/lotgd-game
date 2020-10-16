@@ -15,7 +15,7 @@ namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Template\Params;
 
-trait TemplateParams
+trait Template
 {
     protected $lotgdTemplateParams;
     protected $lotgdTheme;
