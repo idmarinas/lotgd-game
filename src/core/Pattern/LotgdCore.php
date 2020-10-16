@@ -16,9 +16,9 @@ trait LotgdCore
 {
     use Censor;
     use Container;
+    use Doctrine;
     use EntityHydrator;
     use Output;
-    use Repository;
     use Sanitize;
     use Translator;
 }
