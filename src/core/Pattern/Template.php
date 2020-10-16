@@ -18,7 +18,7 @@ use Lotgd\Core\Template\Params;
 trait Template
 {
     protected $lotgdTemplateParams;
-    protected $lotgdTheme;
+    protected $lotgdTemplateSystem;
 
     /**
      * Get template params instance.
@@ -40,13 +40,13 @@ trait Template
      *
      * @return object|null
      */
-    public function getTheme()
+    public function getTemplate()
     {
-        if ( ! $this->lotgdTheme instanceof ThemeCore)
+        if ( ! $this->lotgdTemplateSystem instanceof ThemeCore)
         {
-            $this->lotgdTheme = $this->getContainer(ThemeCore::class);
+            $this->lotgdTemplateSystem = $this->getContainer(ThemeCore::class);
         }
 
-        return $this->lotgdTheme;
+        return $this->lotgdTemplateSystem;
     }
 }
