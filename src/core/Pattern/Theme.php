@@ -14,6 +14,12 @@ namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Template\Theme as ThemeCore;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use %s instead',
+    Theme::class,
+    Template::class
+), E_USER_DEPRECATED);
+
 trait Theme
 {
     protected $lotgdTheme;
