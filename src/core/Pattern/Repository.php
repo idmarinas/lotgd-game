@@ -14,6 +14,12 @@ namespace Lotgd\Core\Pattern;
 
 use Doctrine\ORM\EntityManager;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use %s instead',
+    Repository::class,
+    Doctrine::class
+), E_USER_DEPRECATED);
+
 trait Repository
 {
     protected $doctrine;
