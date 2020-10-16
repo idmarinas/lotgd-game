@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Twig\Loader;
 
+use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 
 class LotgdFilesystemLoader extends FilesystemLoader
@@ -27,10 +28,10 @@ class LotgdFilesystemLoader extends FilesystemLoader
         $tpl = parent::findTemplate($template, false);
 
         //-- Fallback theme namespace to default namespace
-        if (!$tpl && false !== strpos($template, '@theme'))
+        if ( ! $tpl && false !== \strpos($template, '@theme'))
         {
-            $pos = strpos($template, '/');
-            $newTemplate = substr($template, $pos + 1);
+            $pos         = \strpos($template, '/');
+            $newTemplate = \substr($template, $pos + 1);
 
             $tpl = parent::findTemplate($newTemplate, $throw);
 
@@ -38,6 +39,11 @@ class LotgdFilesystemLoader extends FilesystemLoader
             {
                 $this->cache[$template] = $tpl; //-- Cache original them namespace
             }
+        }
+
+        if ( ! $tpl)
+        {
+            throw new LoaderError($this->errorCache[$template]);
         }
 
         return $tpl;
