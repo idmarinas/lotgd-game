@@ -25,7 +25,18 @@ trait Motd
     {
         global $session;
 
-        return \LotgdTheme::renderThemeTemplate('parts/motd.twig', ['newMotd' => $session['needtoviewmotd']]);
+        \trigger_error(\sprintf(
+            'Usage of %s (message_of_the_day() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{% block message_of_the_day parent() %}" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
+        $newMotd = $session['needtoviewmotd'];
+
+        return sprintf(
+            '<a id="motd-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass(\'loading disabled\');">%s %s</a>',
+            $newMotd ? '<i aria-hidden="true" class="certificate icon"></i>' : '',
+            $this->getTranslator()->trans('parts.motd.title', [], 'app-default')
+        );
     }
 
     /**
