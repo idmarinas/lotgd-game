@@ -68,7 +68,7 @@ class FormRow extends AbstractElement
      */
     public function render(Environment $env, ElementInterface $element, ?string $translatorTextDomain = null): string
     {
-        return $env->renderThemeTemplate('form/element/row.twig', [
+        return $env->renderTheme('form/element/row.twig', [
             'element'              => $element,
             'renderErrors'         => $this->renderErrors,
             'labelAttributes'      => $this->labelAttributes,

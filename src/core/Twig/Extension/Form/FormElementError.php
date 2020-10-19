@@ -70,7 +70,7 @@ class FormElementError extends AbstractElement
         $attributes = array_merge($this->attributes, $attributes ?? []);
         $attributes = $this->createAttributesString($env, $attributes);
 
-        return $env->renderThemeTemplate('form/element/error.twig', [
+        return $env->renderTheme('form/element/error.twig', [
             'attributesString' => $attributes,
             'messages'         => $messages,
         ]);

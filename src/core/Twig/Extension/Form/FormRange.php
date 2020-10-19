@@ -71,7 +71,7 @@ class FormRange extends FormInput
         $attributes['type']  = $type;
         $attributes['value'] = $element->getValue();
 
-        return $env->renderThemeTemplate('form/element/range.twig', [
+        return $env->renderTheme('form/element/range.twig', [
             'element'             => $element,
             'attributesString'    => $this->createAttributesString($env, $attributes),
             'disableSliderLabels' => $element->getOption('disable_slider_labels'),
