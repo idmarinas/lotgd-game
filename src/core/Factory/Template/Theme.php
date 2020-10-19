@@ -79,7 +79,7 @@ class Theme implements FactoryInterface
     }
 
     //-- Add twig extensions
-    private function addTwigExtensions($extensions, &$templateSystem, $container)
+    private function addTwigExtensions($extensions, &$templateSystem, $container): void
     {
         if ( ! empty($extensions) && \is_array($extensions))
         {
@@ -103,8 +103,12 @@ class Theme implements FactoryInterface
         }
     }
 
-    //-- Add template paths
-    private function addTemplatePaths($tplPaths, &$templateSystem)
+    /**
+     * Add template paths.
+     * With using of `prependPath` add first new path to search in this folders first.
+     * Them fallback to other paths.
+     */
+    private function addTemplatePaths($tplPaths, &$templateSystem): void
     {
         if ( ! empty($tplPaths) && \is_array($tplPaths))
         {
@@ -112,12 +116,12 @@ class Theme implements FactoryInterface
             {
                 if (empty($namespace))
                 {
-                    $templateSystem->getLoader()->addPath($path);
+                    $templateSystem->getLoader()->prependPath($path);
 
                     continue;
                 }
 
-                $templateSystem->getLoader()->addPath($path, $namespace);
+                $templateSystem->getLoader()->prependPath($path, $namespace);
             }
         }
     }
