@@ -86,10 +86,11 @@
 
 {# Scripts for control #}
 <script>
+    /* eslint-disable no-undef */
     $('.ui.grid .item').tab()
     $('#show-hidde-info-note-form-{{ formId }}').on('click', function ()
     {
-        let form = $('#{{ formId }}')
+        const form = $('#{{ formId }}')
 
         if (form.hasClass('info'))
         {
