@@ -198,42 +198,9 @@ trait CoreFunction
      */
     public function includeModuleTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
-        $alreadySandboxed = false;
-        $sandbox          = null;
+        $include = $env->getFunction('include')->getCallable();
 
-        if ($withContext)
-        {
-            $variables = \array_merge($context, $variables);
-        }
-
-        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
-        {
-            $sandbox = $env->getExtension(SandboxExtension::class);
-
-            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
-            {
-                $sandbox->enableSandbox();
-            }
-        }
-
-        try
-        {
-            return $env->resolveTemplate("module/{$template}")->render($variables);
-        }
-        catch (LoaderError $e)
-        {
-            if ( ! $ignoreMissing)
-            {
-                throw $e;
-            }
-        }
-        finally
-        {
-            if ($isSandboxed && ! $alreadySandboxed)
-            {
-                $sandbox->disableSandbox();
-            }
-        }
+        return $include($env, $context, "module/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 
     /**
@@ -250,42 +217,9 @@ trait CoreFunction
      */
     public function includeThemeTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
-        $alreadySandboxed = false;
-        $sandbox          = null;
+        $include = $env->getFunction('include')->getCallable();
 
-        if ($withContext)
-        {
-            $variables = \array_merge($context, $variables);
-        }
-
-        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
-        {
-            $sandbox = $env->getExtension(SandboxExtension::class);
-
-            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
-            {
-                $sandbox->enableSandbox();
-            }
-        }
-
-        try
-        {
-            return $env->resolveTemplate("{$env->getThemefolder()}/{$template}")->render($variables);
-        }
-        catch (LoaderError $e)
-        {
-            if ( ! $ignoreMissing)
-            {
-                throw $e;
-            }
-        }
-        finally
-        {
-            if ($isSandboxed && ! $alreadySandboxed)
-            {
-                $sandbox->disableSandbox();
-            }
-        }
+        return $include($env, $context, "{$env->getThemefolder()}/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 
     /**
@@ -302,41 +236,8 @@ trait CoreFunction
      */
     public function includeLayoutTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
-        $alreadySandboxed = false;
-        $sandbox          = null;
+        $include = $env->getFunction('include')->getCallable();
 
-        if ($withContext)
-        {
-            $variables = \array_merge($context, $variables);
-        }
-
-        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
-        {
-            $sandbox = $env->getExtension(SandboxExtension::class);
-
-            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
-            {
-                $sandbox->enableSandbox();
-            }
-        }
-
-        try
-        {
-            return $env->resolveTemplate("@theme{$env->getThemeNamespace()}/{$template}")->render($variables);
-        }
-        catch (LoaderError $e)
-        {
-            if ( ! $ignoreMissing)
-            {
-                throw $e;
-            }
-        }
-        finally
-        {
-            if ($isSandboxed && ! $alreadySandboxed)
-            {
-                $sandbox->disableSandbox();
-            }
-        }
+        return $include($env, $context, "@theme{$env->getThemeNamespace()}/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 }
