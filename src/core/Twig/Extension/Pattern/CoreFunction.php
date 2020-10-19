@@ -13,9 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Extension\SandboxExtension;
+use Lotgd\Core\Template\Theme as Environment;
 
 trait CoreFunction
 {
