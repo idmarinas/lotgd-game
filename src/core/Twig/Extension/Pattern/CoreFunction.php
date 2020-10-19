@@ -104,11 +104,11 @@ trait CoreFunction
     {
         // We should check all legeal protocols
         $protocols = ['http', 'https', 'ftp', 'ftps'];
-        $protocol  = explode(':', $url, 2);
+        $protocol  = \explode(':', $url, 2);
         $protocol  = $protocol[0];
 
         // This will take care of download strings such as: not publically released or contact admin
-        return in_array($protocol, $protocols);
+        return \in_array($protocol, $protocols);
     }
 
     /**
@@ -181,7 +181,7 @@ trait CoreFunction
      */
     public function varDump($var): string
     {
-        return '<pre>'.var_export($var, true).'</pre>';
+        return '<pre>'.\var_export($var, true).'</pre>';
     }
 
     /**
@@ -203,7 +203,7 @@ trait CoreFunction
 
         if ($withContext)
         {
-            $variables = array_merge($context, $variables);
+            $variables = \array_merge($context, $variables);
         }
 
         if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
@@ -255,7 +255,7 @@ trait CoreFunction
 
         if ($withContext)
         {
-            $variables = array_merge($context, $variables);
+            $variables = \array_merge($context, $variables);
         }
 
         if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
@@ -271,6 +271,58 @@ trait CoreFunction
         try
         {
             return $env->resolveTemplate("{$env->getThemefolder()}/{$template}")->render($variables);
+        }
+        catch (LoaderError $e)
+        {
+            if ( ! $ignoreMissing)
+            {
+                throw $e;
+            }
+        }
+        finally
+        {
+            if ($isSandboxed && ! $alreadySandboxed)
+            {
+                $sandbox->disableSandbox();
+            }
+        }
+    }
+
+    /**
+     * Render new layout system.
+     *
+     * @param array        $context
+     * @param string|array $template      The template to render or an array of templates to try consecutively
+     * @param array        $variables     The variables to pass to the template
+     * @param bool         $withContext
+     * @param bool         $ignoreMissing Whether to ignore missing templates or not
+     * @param bool         $sandboxed     Whether to sandbox the template or not
+     *
+     * @return string The rendered template
+     */
+    public function includeLayoutTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
+    {
+        $alreadySandboxed = false;
+        $sandbox          = null;
+
+        if ($withContext)
+        {
+            $variables = \array_merge($context, $variables);
+        }
+
+        if ($isSandboxed = $sandboxed && $env->hasExtension(SandboxExtension::class))
+        {
+            $sandbox = $env->getExtension(SandboxExtension::class);
+
+            if ( ! $alreadySandboxed = $sandbox->isSandboxed())
+            {
+                $sandbox->enableSandbox();
+            }
+        }
+
+        try
+        {
+            return $env->resolveTemplate("@theme{$env->getThemeNamespace()}/{$template}")->render($variables);
         }
         catch (LoaderError $e)
         {

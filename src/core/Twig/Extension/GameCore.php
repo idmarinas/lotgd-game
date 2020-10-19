@@ -103,6 +103,8 @@ class GameCore extends AbstractExtension
             //-- Include a template from theme or module
             new TwigFunction('include_theme', [$this, 'includeThemeTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
             new TwigFunction('include_module', [$this, 'includeModuleTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
+            //-- New layout system, for template
+            new TwigFunction('include_layout', [$this, 'includeLayoutTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
         ];
     }
 
