@@ -25,12 +25,14 @@ class GameCore extends AbstractExtension
     use PatternCore\EventManager;
     use PatternCore\HookManager;
     use PatternCore\Sanitize;
+    use PatternCore\Jaxon;
     use PatternCore\Settings;
     use PatternCore\Theme;
     use PatternCore\Translator;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\CharacterFunction;
+    use Pattern\Jaxon;
     use Pattern\Mail;
     use Pattern\News;
     use Pattern\PageGen;
@@ -94,6 +96,11 @@ class GameCore extends AbstractExtension
 
             //-- Character functions
             new TwigFunction('character_race', [$this, 'characterRace']),
+
+            //-- Jaxon functions
+            new TwigFunction('jaxon_css', [$this, 'jaxonCss']),
+            new TwigFunction('jaxon_js', [$this, 'jaxonJs']),
+            new TwigFunction('jaxon_script', [$this, 'jaxonScript']),
 
             //-- Other functions
             new TwigFunction('session_cookie_name', [$this, 'sessionCookieName']),
