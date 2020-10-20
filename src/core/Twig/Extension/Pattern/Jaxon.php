@@ -24,9 +24,6 @@ trait Jaxon
     public function jaxonCss(): string
     {
         return $this->getJaxon()->getCss();
-
-        // $html['scripthead'] .= $lotgdJaxon->getJs();
-        // $html['scripthead'] .= $lotgdJaxon->getScript();
     }
 
     /**
