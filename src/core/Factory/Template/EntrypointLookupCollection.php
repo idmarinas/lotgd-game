@@ -8,18 +8,18 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.4.0
+ * @since 4.5.0
  */
 
 namespace Lotgd\Core\Factory\Template;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Symfony\Component\Asset\Package;
-use Symfony\Component\Asset\Packages as CorePackages;
-use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
+use Laminas\ServiceManager\ServiceManager;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookup;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollection as SymfonyEntrypointLookupCollection;
 
-class Packages implements FactoryInterface
+class EntrypointLookupCollection implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
@@ -27,13 +27,16 @@ class Packages implements FactoryInterface
         $entrypoints = $config['webpack_encore']['builds'] ?? [];
         $entrypoints = \count($entrypoints) ? $entrypoints : [];
 
-        $packages = [];
-
         foreach ($entrypoints as $name => $path)
         {
-            $packages[$name] = new Package(new JsonManifestVersionStrategy("{$path}/manifest.json"));
+            $builds[$name] = function () use ($path)
+            {
+                return new EntrypointLookup("{$path}/entrypoints.json");
+            };
         }
 
-        return new CorePackages(null, $packages);
+        $collection = new ServiceManager(['factories' => $builds]);
+
+        return new SymfonyEntrypointLookupCollection($collection);
     }
 }

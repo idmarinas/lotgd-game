@@ -15,19 +15,15 @@ namespace Lotgd\Core\Factory\Template;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Symfony\Component\DependencyInjection\ServiceLocator;
-use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollection;
-use Symfony\WebpackEncoreBundle\Asset\TagRenderer;
+use Symfony\WebpackEncoreBundle\Asset\TagRenderer as SymfonyTagRenderer;
 
-class Encore implements FactoryInterface
+class TagRenderer implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $config = $container->get('webpack_encore.packages');
+        $packages   = $container->get('webpack_encore.packages');
+        $entrypoint = $container->get('webpack_encore.entrypoint_lookup_collection');
 
-        $builds     = new ServiceLocator($config['collections']);
-        $collection = new EntrypointLookupCollection($builds, 'lotgd');
-
-        return new TagRenderer($collection, $config['packages']);
+        return new SymfonyTagRenderer($entrypoint, $packages);
     }
 }
