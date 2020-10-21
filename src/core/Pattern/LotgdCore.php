@@ -18,7 +18,6 @@ trait LotgdCore
     use Container;
     use Doctrine;
     use EntityHydrator;
-    use Output;
     use Sanitize;
     use Translator;
 }
