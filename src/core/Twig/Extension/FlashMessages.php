@@ -20,6 +20,7 @@ use Twig\TwigFunction;
 class FlashMessages extends AbstractExtension
 {
     use PatternCore\Container;
+    use PatternCore\Template;
     use PatternCore\Sanitize;
 
     protected $flashMessages;
@@ -55,12 +56,12 @@ class FlashMessages extends AbstractExtension
                     $message['class']   = $message['class'] ?? $type;
                     $message['close']   = $message['close'] ?? true;
 
-                    $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', $message);
+                    $output .= $this->getTemplate()->renderTheme('semantic/collection/message.html.twig', $message);
 
                     continue;
                 }
 
-                $output .= \LotgdTheme::renderLotgdTemplate('semantic/collection/message.twig', [
+                $output .= $this->getTemplate()->renderTheme('semantic/collection/message.html.twig', [
                     'message' => $this->getSanitize()->fullSanitize($message),
                     'class'   => $type,
                     'close'   => true,
