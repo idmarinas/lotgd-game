@@ -27,7 +27,7 @@ trait Navigation
      */
     public function display()
     {
-        return \LotgdTheme::renderThemeTemplate('parts/navigation.twig', [
+        return $this->getTemplate()->renderTheme('_partials/_navigation.html.twig', [
             'navigation' => $this->getNavigation()->getNavigation(),
             'headers'    => $this->getNavigation()->getHeaders(),
             'navs'       => $this->getNavigation()->getNavs(),
@@ -137,7 +137,7 @@ trait Navigation
 
             $pages['jaxon'] = $link;
 
-            return \LotgdTheme::renderThemeTemplate($template, $pages);
+            return $this->getTemplate()->renderTheme($template, $pages);
         }
 
         $template = $template ?: 'parts/pagination.twig';
@@ -164,6 +164,6 @@ trait Navigation
 
         $pages['href'] = $link;
 
-        return \LotgdTheme::renderThemeTemplate($template, $pages);
+        return $this->getTemplate()->renderTheme($template, $pages);
     }
 }
