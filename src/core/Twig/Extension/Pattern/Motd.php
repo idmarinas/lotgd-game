@@ -26,17 +26,13 @@ trait Motd
         global $session;
 
         \trigger_error(\sprintf(
-            'Usage of %s (message_of_the_day() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{% block message_of_the_day parent() %}" instead.',
+            'Usage of %s (message_of_the_day() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{%% block message_of_the_day parent() %%}" instead.',
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        $newMotd = $session['needtoviewmotd'];
+        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
 
-        return sprintf(
-            '<a id="motd-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass(\'loading disabled\');">%s %s</a>',
-            $newMotd ? '<i aria-hidden="true" class="certificate icon"></i>' : '',
-            $this->getTranslator()->trans('parts.motd.title', [], 'app-default')
-        );
+        return $template->renderBlock('message_of_the_day', ['user' => ['needtoviewmotd' => $session['needtoviewmotd']]]);
     }
 
     /**
