@@ -25,6 +25,11 @@ trait Mail
     {
         global $session;
 
+        \trigger_error(\sprintf(
+            'Usage of %s (ye_olde_mail() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{%% block ye_olde_mail parent()0 %%}" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         try
         {
             $mail   = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
@@ -38,6 +43,8 @@ trait Mail
             ];
         }
 
-        return \LotgdTheme::renderThemeTemplate('parts/mail.twig', $result);
+        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
+
+        return $template->renderBlock('ye_olde_mail', ['yeOldeMail' => $result]);
     }
 }
