@@ -20,15 +20,13 @@ use Twig\TwigTest;
 
 class GameCore extends AbstractExtension
 {
-    use PatternCore\Censor;
-    use PatternCore\Container;
+    use PatternCore\LotgdCore;
     use PatternCore\EventManager;
     use PatternCore\HookManager;
-    use PatternCore\Sanitize;
     use PatternCore\Jaxon;
     use PatternCore\Settings;
     use PatternCore\Theme;
-    use PatternCore\Translator;
+    use PatternCore\Template;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
     use Pattern\CharacterFunction;
