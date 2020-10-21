@@ -1,0 +1,66 @@
+{# Button of message of the day #}
+{% block message_of_the_day %}
+    <a id="motd-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('loading disabled');">
+        {% if session.needtoviewmotd %}
+            <i aria-hidden="true" class="certificate icon"></i>
+            {{ 'parts.motd.title'|t({}, 'app-default') }}
+        {% else %}
+            {{ 'parts.motd.title'|t({}, 'app-default') }}
+        {% endif %}
+    </a>
+{% endblock message_of_the_day %}
+
+{# Button for ye olde mail "Internal mail" #}
+{% block ye_olde_mail %}
+    {% if user.login %}
+        {% set icon = '' %}
+        {% if yeOldeMail.notSeenCount %}
+            {% set icon = '<i aria-hidden="true" class="green mail icon"></i>' %}
+        {% endif %}
+        <a id="mail-button" class="ui tertiary basic button hotmotd" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">
+            {{ icon }}
+            <span id="ye-olde-mail-count-text">{{ 'parts.mail.title'|t({'new': yeOldeMail.notSeenCount, 'old': yeOldeMail.seenCount}, 'app-default') }}</span>
+        </a>
+
+        {% do inline_script().captureStart() %}
+            window.setInterval(function () { JaxonLotgd.Ajax.Core.Mail.status() }, 15000)
+        {% do inline_script().captureEnd() %}
+        {% if icon %}
+            {% do inline_script().captureStart() %}
+                $('.green.mail.icon').transition('set looping').transition('pulse', 1000)
+            {% do inline_script().captureEnd() %}
+        {% endif %}
+    {% else %}
+        <a class="ui tertiary basic button disabled">{{ 'parts.mail.anonymous'|t({}, 'app-default')|colorize }}</a>
+    {% endif %}
+{% endblock ye_olde_mail %}
+
+{# Button for user petition of help #}
+{% block user_petition %}
+    <a id="petition-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Petition.help(); $(this).addClass('loading disabled')">
+        {{ 'parts.petition.help'|t({}, 'app-default')|colorize }}
+    </a>
+{% endblock user_petition %}
+
+{# Button for Adminitrators, admin user and petitions #}
+{% block admin_petition %}
+    {# Show only to administrator that have user edit permits #}
+    {% if canEditUsers %}
+        <span> | </span>
+        <a class="ui tertiary button " href="{{ 'user.php'|lotgd_url }}">{{ 'parts.petition.editUser'|t({}, 'app-default')|colorize }}</a>
+    {% endif %}
+
+    {# Show only to administrators that have petitions edit permits #}
+    {% if canEditPetitions %}
+        <br>
+        <a class="ui tertiary button " href='{{ 'viewpetition.php'|lotgd_url }}'>{{ 'parts.petition.admin'|t({}, 'app-default')|colorize }}:</a>
+        {{ 'parts.petition.status.05'|t({'n': petitions.5 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.04'|t({'n': petitions.4 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.00'|t({'n': petitions.0 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.01'|t({'n': petitions.1 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.03'|t({'n': petitions.3 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.07'|t({'n': petitions.7 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.06'|t({'n': petitions.6 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.02'|t({'n': petitions.2 })|colorize }}
+    {% endif %}
+{% endblock admin_petition %}
