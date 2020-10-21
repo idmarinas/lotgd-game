@@ -101,6 +101,16 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         ],
         ```
 
+-   **Webpack Encore**
+    -   `encore_entry_script_tags()` and `encore_entry_link_tags()` now need pass second argument (package).
+        -   `encore_entry_script_tags(string $entryName, string $packageName = null, string $entrypointName = '_default')`
+        -   `encore_entry_link_tags(string $entryName, string $packageName = null, string $entrypointName = '_default')`
+        -   Example:
+
+            `encore_entry_script_tags('semantic_ui', 'lotgd', 'lotgd')`
+
+            `encore_entry_link_tags('semantic_ui', 'lotgd', 'lotgd')`
+
 ### :fire: DEPRECATED
 
 -   Twig extension:
@@ -110,7 +120,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :wrench: FIXES
 
--   Nothing
+-   **Webpack Encore**
+    -   `encore_entry_script_tags()` and `encore_entry_link_tags()` now do not print duplicate files.
 
 ### :x: REMOVES
 
