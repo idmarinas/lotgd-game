@@ -291,7 +291,7 @@ function page_footer($saveuser = true)
     unset($html['userPost']['password']);
 
     $html['content'] .= $output->get_output();
-    $browserOutput = \LotgdTheme::renderTheme($html);
+    $browserOutput = \LotgdTheme::renderThemeOld($html);
     $session['user']['gensize'] += \strlen($browserOutput);
     $session['output'] = $browserOutput;
 
