@@ -29,9 +29,9 @@ class Theme implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $config  = $container->get('GameConfig');
-        $opts = $config['lotgd_core'] ?? [];
-        $assets  = $container->get('webpack_encore.packages');
+        $config   = $container->get('GameConfig');
+        $opts     = $config['lotgd_core'] ?? [];
+        $packages = $container->get('webpack_encore.packages');
 
         $templateSystem = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
             'debug' => (bool) ($opts['development'] ?? false),
@@ -44,7 +44,7 @@ class Theme implements FactoryInterface
 
         // the Twig file that holds all the default markup for rendering forms
         // this file comes with TwigBridge
-        $defaultFormTheme = 'semantic-ui-form-theme.html.twig';
+        $defaultFormTheme = 'form/semantic-ui-form-theme.html.twig';
         $formEngine       = new TwigRendererEngine([$defaultFormTheme], $templateSystem);
         $templateSystem->addRuntimeLoader(new FactoryRuntimeLoader([
             FormRenderer::class => function () use ($formEngine)
@@ -58,7 +58,7 @@ class Theme implements FactoryInterface
         $this->addTwigExtensions($extensions, $templateSystem, $container);
 
         $templateSystem->addExtension(new EntryFilesTwigExtension($container));
-        $templateSystem->addExtension(new AssetExtension($assets['packages']));
+        $templateSystem->addExtension(new AssetExtension($packages));
 
         //-- Templates path
         $tplPaths = $config['twig_templates_paths'] ?? [];
@@ -76,6 +76,11 @@ class Theme implements FactoryInterface
         $templateSystem->prepareTheme();
 
         return $templateSystem;
+    }
+
+    public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
+    {
+        return $this($services, $requestedName);
     }
 
     //-- Add twig extensions
@@ -107,12 +112,15 @@ class Theme implements FactoryInterface
      * Add template paths.
      * With using of `prependPath` add first new path to search in this folders first.
      * Them fallback to other paths.
+     *
+     * @param mixed $tplPaths
+     * @param mixed $templateSystem
      */
     private function addTemplatePaths($tplPaths, &$templateSystem): void
     {
         if ( ! empty($tplPaths) && \is_array($tplPaths))
         {
-            foreach($tplPaths as $path => $namespace)
+            foreach ($tplPaths as $path => $namespace)
             {
                 if (empty($namespace))
                 {
@@ -124,10 +132,5 @@ class Theme implements FactoryInterface
                 $templateSystem->getLoader()->prependPath($path, $namespace);
             }
         }
-    }
-
-    public function createService(ServiceLocatorInterface $services, $canonicalName = null, $requestedName = null)
-    {
-        return $this($services, $requestedName);
     }
 }
