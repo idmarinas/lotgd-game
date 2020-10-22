@@ -1,3 +1,4 @@
+# OBSOLETE FOR VERSION 4.5.0
 # How create a theme for Legend of the Green Dragon
 
 To create your own "Legend of the Green Dragon" theme you need to duplicate the **"data/template/jade/"** folder and the **"data/template/jade.html "** file. These files are needed to create your own LoTGD theme.
