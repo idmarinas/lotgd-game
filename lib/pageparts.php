@@ -771,7 +771,9 @@ function charstats($return = true)
                 $onlinecount = \count($result);
             }
 
-            $ret = \LotgdTheme::renderThemeTemplate('parts/online-list.twig', [
+            $tpl = \LotgdTheme::load('_blocks/_partials.html.twig');
+
+            $ret = $tpl->renderBlock('online_list', [
                 'list'        => $result,
                 'onlineCount' => $onlinecount,
                 'textDomain'  => 'page-home',
