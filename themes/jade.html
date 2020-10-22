@@ -1,0 +1,9 @@
+{% extends '@layout/layout.html.twig' %}
+
+{% block lotgd_head_theme_css %}
+    {{ encore_entry_link_tags('lotgd_theme', 'lotgd', 'lotgd') }}
+{% endblock %}
+
+{% block lotgd_footer_theme_js %}
+    {{ encore_entry_script_tags('lotgd_theme', 'lotgd', 'lotgd') }}
+{% endblock %}
