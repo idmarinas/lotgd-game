@@ -30,7 +30,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
     /**
      * Translate a message of LoTGD WITH MessageFormatter.
      */
-    public function trans(string $message, ?array $parameters = [], ?string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null): string
+    public function trans(string $message, ?array $parameters = [], string $textDomain = self::TEXT_DOMAIN_DEFAULT, ?string $locale = null): string
     {
         $locale     = ($locale ?: $this->getLocale());
         $parameters = ($parameters ?: []);
