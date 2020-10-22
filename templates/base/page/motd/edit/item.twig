@@ -1,8 +1,0 @@
-{% translate_default_domain 'page-motd' %}
-
-<h4 class="header">{{ 'item.edit.form.title'|t|colorize }}</h4>
-{{ 'item.edit.form.original'|t({'author': motdData.motdauthorname, 'date': motdData.motddate})|colorize }}
-
-<hr>
-
-{{ form(form) }}

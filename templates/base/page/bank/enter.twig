@@ -1,9 +1,0 @@
-{% translate_default_domain textDomain %}
-
-{{ 'default.paragraph'|t({'name': user.name, 'ownerName': ownerName})|colorize }}
-
-{% if user.goldinbank >= 0 %}
-    {{ 'default.balance.positive'|t({ 'balance': user.goldinbank, 'ownerName': ownerName })|colorize }}
-{% else %}
-    {{ 'default.balance.negative'|t({ 'balance': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
-{% endif %}
