@@ -27,7 +27,9 @@ trait Navigation
      */
     public function display()
     {
-        return $this->getTemplate()->renderTheme('_partials/_navigation.html.twig', [
+        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig");
+
+        return $template->renderBlock('navigation_menu', [
             'navigation' => $this->getNavigation()->getNavigation(),
             'headers'    => $this->getNavigation()->getHeaders(),
             'navs'       => $this->getNavigation()->getNavs(),
