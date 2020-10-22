@@ -18,6 +18,16 @@ use Twig\Loader\FilesystemLoader;
 
 class LotgdFilesystemLoader extends FilesystemLoader
 {
+    protected $themeNamespace;
+
+    /**
+     * Set namespace of active theme.
+     */
+    public function setThemeNamespace(string $namespace)
+    {
+        $this->themeNamespace = $namespace;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -25,6 +35,8 @@ class LotgdFilesystemLoader extends FilesystemLoader
      */
     protected function findTemplate($template, $throw = true)
     {
+        $template = \str_replace('{theme}', "@theme{$this->themeNamespace}", $template);
+
         $tpl = parent::findTemplate($template, false);
 
         //-- Fallback theme namespace to default namespace
