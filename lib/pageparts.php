@@ -27,6 +27,11 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 {
     global $html, $session, $runheaders, $nopopups;
 
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use "\LotgdResponse::pageStart($title = null, $parameters = [], $textDomain = Translator::TEXT_DOMAIN_DEFAULT, $locale = null)" instead.',
+        __FUNCTION__
+    ), E_USER_DEPRECATED);
+
     $nopopups['login.php']  = 1;
     $nopopups['motd.php']   = 1;
     $nopopups['index.php']  = 1;
@@ -105,6 +110,11 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
 function page_footer($saveuser = true)
 {
     global $output, $html, $session, $nopopups, $lotgdJaxon;
+
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use "\LotgdResponse::pageEnd(" instead.',
+        __FUNCTION__
+    ), E_USER_DEPRECATED);
 
     //page footer module hooks
     $script = \LotgdHttp::getServer('SCRIPT_NAME');
