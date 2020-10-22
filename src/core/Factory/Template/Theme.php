@@ -74,6 +74,8 @@ class Theme implements FactoryInterface
 
         //-- Important
         $templateSystem->prepareTheme();
+        //-- Add theme namespace to loader
+        $templateSystem->getLoader()->setThemeNamespace($templateSystem->getThemeNamespace());
 
         return $templateSystem;
     }
