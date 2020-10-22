@@ -14,12 +14,12 @@
 {% block ye_olde_mail %}
     {% if user.login %}
         {% set icon = '' %}
-        {% if yeOldeMail.notSeenCount %}
+        {% if notSeenCount %}
             {% set icon = '<i aria-hidden="true" class="green mail icon"></i>' %}
         {% endif %}
         <a id="mail-button" class="ui tertiary basic button hotmotd" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">
             {{ icon }}
-            <span id="ye-olde-mail-count-text">{{ 'parts.mail.title'|t({'new': yeOldeMail.notSeenCount, 'old': yeOldeMail.seenCount}, 'app-default') }}</span>
+            <span id="ye-olde-mail-count-text">{{ 'parts.mail.title'|t({'new': notSeenCount, 'old': seenCount}, 'app-default') }}</span>
         </a>
 
         {% do inline_script().captureStart() %}
@@ -45,23 +45,23 @@
 {# Button for Adminitrators, admin user and petitions #}
 {% block admin_petition %}
     {# Show only to administrator that have user edit permits #}
-    {% if adminPetition.canEditUsers %}
+    {% if canEditUsers %}
         <span> | </span>
         <a class="ui tertiary button " href="{{ 'user.php'|lotgd_url }}">{{ 'parts.petition.editUser'|t({}, 'app-default')|colorize }}</a>
     {% endif %}
 
     {# Show only to administrators that have petitions edit permits #}
-    {% if adminPetition.canEditPetitions %}
+    {% if canEditPetitions %}
         <br>
         <a class="ui tertiary button " href='{{ 'viewpetition.php'|lotgd_url }}'>{{ 'parts.petition.admin'|t({}, 'app-default')|colorize }}:</a>
-        {{ 'parts.petition.status.05'|t({'n': adminPetition.petitions.5 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.04'|t({'n': adminPetition.petitions.4 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.00'|t({'n': adminPetition.petitions.0 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.01'|t({'n': adminPetition.petitions.1 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.03'|t({'n': adminPetition.petitions.3 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.07'|t({'n': adminPetition.petitions.7 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.06'|t({'n': adminPetition.petitions.6 })|colorize }} <span>|</span>
-        {{ 'parts.petition.status.02'|t({'n': adminPetition.petitions.2 })|colorize }}
+        {{ 'parts.petition.status.05'|t({'n': petitions.5 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.04'|t({'n': petitions.4 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.00'|t({'n': petitions.0 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.01'|t({'n': petitions.1 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.03'|t({'n': petitions.3 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.07'|t({'n': petitions.7 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.06'|t({'n': petitions.6 })|colorize }} <span>|</span>
+        {{ 'parts.petition.status.02'|t({'n': petitions.2 })|colorize }}
     {% endif %}
 {% endblock admin_petition %}
 
