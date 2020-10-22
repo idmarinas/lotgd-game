@@ -12,36 +12,21 @@
 
 namespace Lotgd\Core\Template;
 
-use Laminas\Filter\FilterChain;
-use Laminas\Filter\StringToLower;
-use Laminas\Filter\Word\SeparatorToDash;
-use Laminas\Filter\Word\UnderscoreToDash;
-use Lotgd\Core\Exception;
-
-class Theme extends Base
+class Theme extends Template
 {
-    const TEMPLATES_BASE_DIR = 'templates';
-
-    protected $themeName;
-    protected $themefolder;
-    protected $defaultSkin;
-
-    public function __construct(array $loader = [], array $options = [])
-    {
-        //-- Merge loaders
-        $loader = array_merge([static::TEMPLATES_BASE_DIR], $loader);
-
-        parent::__construct($loader, $options);
-    }
-
     /**
      * Render a theme
      * Used in pageparts.php for render a page.
      *
      * @param mixed $context
      */
-    public function renderTheme($context)
+    public function renderThemeOld($context)
     {
+        \trigger_error(\sprintf(
+            'Class %s (before renderTheme) is deprecated in 4.5.0 and deleted in 5.0.0. Use new system for render pages',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         return $this->render($this->getTheme(), (array) $context);
     }
 
@@ -57,11 +42,16 @@ class Theme extends Base
     {
         global $html, $session;
 
+        \trigger_error(\sprintf(
+            'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use "renderTheme($template, $context)" instead',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $userPre = $html['userPre'] ?? [];
         $user    = $session['user'] ?? [];
         unset($user['password']);
 
-        $context = array_merge([
+        $context = \array_merge([
             'userPre' => $userPre,
             'user'    => $user, //-- Actual user data for this template
             'session' => $html['session'] ?? [], //-- Session data declared in page_header or popup_header
@@ -78,16 +68,23 @@ class Theme extends Base
      * @param array  $context An array of parameters to pass to the template
      *
      * @return string The rendered template
+     *
+     * @deprecated 4.5.0 deleted in 5.0.0
      */
     public function renderModuleTemplate($name, $context)
     {
         global $html, $session;
 
+        \trigger_error(\sprintf(
+            'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use namespace "@module/path/to/template.html.twig" instead',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $userPre = $html['userPre'] ?? [];
         $user    = $session['user'] ?? [];
         unset($user['password']);
 
-        $context = array_merge([
+        $context = \array_merge([
             'userPre' => $userPre,
             'user'    => $user, //-- Actual user data for this template
             'session' => $html['session'] ?? [], //-- Actual session data for this template
@@ -104,134 +101,16 @@ class Theme extends Base
      * @param array  $context An array of parameters to pass to the template
      *
      * @return string The rendered template
+     *
+     * @deprecated 4.5.0 deleted in 5.0.0
      */
     public function renderLotgdTemplate($name, $context)
     {
+        \trigger_error(\sprintf(
+            'Class %s is deprecated (is only an alias) in 4.5.0 and deleted in 5.0.0, please use "render($name, $context)" instead',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         return $this->render($name, (array) $context);
-    }
-
-    /**
-     * Get active theme.
-     *
-     * @return string
-     */
-    public function getTheme()
-    {
-        return $this->themeName;
-    }
-
-    /**
-     * Get default skin of game.
-     */
-    public function getDefaultSkin(): string
-    {
-        if (empty($this->defaultSkin))
-        {
-            $settings = $this->getContainer(\Lotgd\Core\Lib\Settings::class);
-
-            $theme = \LotgdHttp::getCookie('template');
-
-            if ('' == $theme || ! file_exists(static::TEMPLATES_BASE_DIR."/{$theme}"))
-            {
-                $theme = $settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
-            }
-
-            $this->defaultSkin = $theme;
-
-            $settings->saveSetting('defaultskin', (string) $theme);
-        }
-
-        //-- This is necessary in case the theme is deleted
-        //-- Search for a valid theme in directory
-        if ( ! file_exists(static::TEMPLATES_BASE_DIR."/{$this->defaultSkin}"))
-        {
-            $this->defaultSkin = $this->getValidTheme();
-
-            $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
-        }
-
-        if ( ! \LotgdHttp::getCookie('template') || $this->defaultSkin != \LotgdHttp::getCookie('template'))
-        {
-            \LotgdHttp::setCookie('template', $this->defaultSkin);
-        }
-
-        return $this->defaultSkin;
-    }
-
-    /**
-     * Change default theme
-     * Need if change theme with form.
-     *
-     * @return $this
-     */
-    public function setDefaultSkin(string $theme)
-    {
-        $this->defaultSkin = $theme;
-
-        bdump($theme, 'Set default theme');
-
-        $this->prepareTheme();
-
-        return $this;
-    }
-
-    /**
-     * Prepare template for use.
-     */
-    public function prepareTheme()
-    {
-        $this->themeName = $this->getDefaultSkin();
-
-        if (empty($this->themefolder) || false === strpos($this->themeName, $this->themefolder))
-        {
-            //-- Prepare name folder of theme, base on filename of theme
-            $this->themefolder = pathinfo($this->themeName, PATHINFO_FILENAME); //-- Delete extension
-            $filterChain       = new FilterChain();
-            $filterChain
-                ->attach(new StringToLower())
-                ->attach(new SeparatorToDash())
-                ->attach(new UnderscoreToDash())
-            ;
-
-            $this->themefolder = $filterChain->filter($this->themefolder);
-        }
-    }
-
-    /**
-     * Get name of theme folder.
-     */
-    public function getThemeFolder(): string
-    {
-        return $this->themefolder;
-    }
-
-    /**
-     * Search for a valid theme if removed.
-     *
-     * @throws RuntimeException
-     */
-    private function getValidTheme(): string
-    {
-        // A generic way of allowing a theme to be selected.
-        $skins  = [];
-        $handle = @opendir(static::TEMPLATES_BASE_DIR);
-
-        while (false !== ($file = @readdir($handle)))
-        {
-            if ('html' == pathinfo($file, PATHINFO_EXTENSION))
-            {
-                $skins[] = $file;
-
-                break; //-- We have 1 theme, no need more
-            }
-        }
-
-        //-- Not found any valid theme
-        if (empty($skins))
-        {
-            throw new Exception\RuntimeException(sprintf('Not found a valid "theme.html" file in "%s" folder.', static::TEMPLATES_BASE_DIR), 1);
-        }
-
-        return $skins[0];
     }
 }
