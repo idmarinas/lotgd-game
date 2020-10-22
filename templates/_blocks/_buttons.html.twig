@@ -64,3 +64,8 @@
         {{ 'parts.petition.status.02'|t({'n': adminPetition.petitions.2 })|colorize }}
     {% endif %}
 {% endblock admin_petition %}
+
+{# Button of source #}
+{% block game_source %}
+    <a id="button-source" class="ui tertiary basic button" onclick="JaxonLotgd.Ajax.Core.Source.show(); $(this).addClass('loading disabled')"> {{ 'parts.source.title'|t({}, 'app-default') }} </a>
+{% endblock game_source %}
