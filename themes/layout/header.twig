@@ -34,10 +34,10 @@
                             {# End advertising module #}
 
                             <td class="right aligned bottom aligned">
-                                {% block message_of_the_day parent() %} |
-                                {% block ye_olde_mail parent() %} |
+                                {{ message_of_the_day() }} |
+                                {{ ye_olde_mail() }} |
                                 {% block user_petition parent() %}
-                                {% block admin_petition parent() %}
+                                {{ admin_petition() }}
                             </td>
                         </tr>
                     </table>
