@@ -23,6 +23,8 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
             'path/to/templates' => '',
         ],
         ```
+    -   When you try to render a template can use this keys patterns:
+        -   `{theme}` this key is replace with actual theme namespace. Example: `{theme}/path/to/template.html.twig` to `@themeJade/path/to/template.html.twig`
 
 ### :star: FEATURES
 
@@ -116,7 +118,16 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   Twig extension:
     -   Functions:
         -   `page_title()` is obsolete, use `headTitle()` added in new extension.
+        -   `game_source()` is obsolete, this function no need parameters, so can render block instead.
+            ```twig
+                {% use '_blocks/_buttons.html.twig' %} {# First import template that content the block #}
+
+                {% block game_source parent() %}
+            ```
 -   Class `Lotgd\Core\Template\Base` are deprecated use `Lotgd\Core\Template\Template` instead.
+-   **lib/pageparts.php** the following funtions are marked as obsoleted.
+    -   `page_header()` use `\LotgdResponse::pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null)` instead
+    -   `page_footer()` use `\LotgdResponse::pageEnd()` instead
 
 ### :wrench: FIXES
 
