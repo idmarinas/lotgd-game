@@ -17,40 +17,47 @@
         <!-- Title tag for page -->
         {{ head_title() }}
 
-        {{ encore_entry_link_tags('lotgd', null, 'lotgd') }}
-        {{ encore_entry_link_tags('semantic_ui', null, 'lotgd') }}
+        {{ encore_entry_link_tags('lotgd', 'lotgd', 'lotgd') }}
+        {{ encore_entry_link_tags('semantic_ui', 'lotgd', 'lotgd') }}
         {% block lotgd_head_theme_css %}
             {# Favicon can custom per theme #}
             <link rel="shortcut icon" href="favicon.png" type="image/png" />
         {% endblock %}
+        <!-- Jaxon CSS styles -->
+        {{ jaxon_css() }}
 		{{ csshead }}
 
-        {{ encore_entry_script_tags('lotgd', null, 'lotgd') }}
+        {{ encore_entry_script_tags('lotgd', 'lotgd', 'lotgd') }}
         {% block lotgd_head_theme_js %}{% endblock %}
-        {{ scripthead }}
 
-        {{ encore_entry_script_tags('semantic_ui', null, 'lotgd') }}
-        {% do head_script().appendFile('path/to/file.js') %}
-        {% do head_link().appendStylesheet('path/to/file.css') %}
+        <!-- JavaScript of Fomantic UI -->
+        {{ encore_entry_script_tags('semantic_ui', 'lotgd', 'lotgd') }}
+
+        {{ scripthead }}
+        <!-- Jaxon JS script -->
+        {{ jaxon_js() }}
 
         <!-- Dynamically added script/style code and files -->
         {{ head_link() }}
         {{ head_style() }}
         {{ head_script() }}
+        <!-- Jaxon inline Script -->
+        {{ jaxon_script() }}
 
         <!-- START Cookies Consent -->
         <script>
+            // eslint-disable-next-line no-unused-vars
             var cookieName = '{{ session_cookie_name() }}'
         </script>
-        {{ encore_entry_script_tags('cookie_guard', null, 'lotgd') }}
+        {{ encore_entry_script_tags('cookie_guard', 'lotgd', 'lotgd') }}
 		<!-- END Cookies Consent -->
     </head>
     <body>
         {% block lotgd_body %}
             <table class="lotgd table">
-                {% include 'base/body/header.twig' %}
-                {% include 'base/body/content.twig' %}
-                {% include 'base/body/footer.twig' %}
+                {% include '@layout/layout/header.twig' %}
+                {% include '@layout/layout/content.twig' %}
+                {% include '@layout/layout/footer.twig' %}
             </table>
         {% endblock %}
 
