@@ -1,0 +1,55 @@
+{% translate_default_domain 'page-home' %}
+
+{% block home_login %}
+    <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassLogin();">
+        {{ 'login.message'|t|colorize }}
+        <br>
+        <table class="ui centered center aligned very basic collapsing table">
+            <tr>
+                <td><img alt="" src='images/logindragon.gif' class='noborder'></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="ui form">
+                        <div class="inline fields">
+                            <div class="field">
+                                <input name='name' id='name' accesskey='u' placeholder="{{ 'login.username'|t|uncolorize }}">
+                            </div>
+                            <div class="field">
+                                <input name='password' id='password' accesskey='p' type='password' placeholder="{{ 'login.password'|t|uncolorize }}">
+                            </div>
+                            <div class="field">
+                                <input class="ui button" type='submit' value='{{ 'login.login'|t }}'>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <p>{{ 'login.forgot'|t|colorize }}</p>
+    </form>
+{% endblock home_login %}
+
+{% block home_select_skin %}
+    <br>
+    <table class="ui very basic collapsing centered table">
+        <tr>
+            <td>
+                {{ laminas_form(selectSkin) }}
+            </td>
+        </tr>
+    </table>
+{% endblock home_select_skin %}
+
+{% block home_server_full %}
+    <div class="ui header">{{ 'serverfull.message'|t|colorize }}</div>
+    <table class="ui centered center aligned very basic collapsing table">
+        <tr>
+            <td><img src="images/Medallion-Red.gif" alt="" class="noborder"></td>
+        </tr>
+        <tr>
+            <td class="center aligned">{{ 'serverfull.wait'|t|colorize }}</td>
+        </tr>
+    </table>
+{% endblock home_server_full %}
