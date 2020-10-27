@@ -18,9 +18,9 @@ $params = [
     'SU_EDIT_CONFIG' => ($session['user']['superuser'] & SU_EDIT_CONFIG)
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$module = (string) \LotgdHttp::getQuery('module');
-$cat = (string) \LotgdHttp::getQuery('cat');
+$op = (string) \LotgdRequest::getQuery('op');
+$module = (string) \LotgdRequest::getQuery('module');
+$cat = (string) \LotgdRequest::getQuery('cat');
 
 $repository = \Doctrine::getRepository('LotgdCore:Modules');
 
@@ -28,28 +28,28 @@ $repository = \Doctrine::getRepository('LotgdCore:Modules');
 
 if ('mass' == $op)
 {
-    if (\LotgdHttp::getPost('activate'))
+    if (\LotgdRequest::getPost('activate'))
     {
         $op = 'activate';
     }
-    elseif (\LotgdHttp::getPost('deactivate'))
+    elseif (\LotgdRequest::getPost('deactivate'))
     {
         $op = 'deactivate';
     }
-    elseif (\LotgdHttp::getPost('uninstall'))
+    elseif (\LotgdRequest::getPost('uninstall'))
     {
         $op = 'uninstall';
     }
-    elseif (\LotgdHttp::getPost('reinstall'))
+    elseif (\LotgdRequest::getPost('reinstall'))
     {
         $op = 'reinstall';
     }
-    elseif (\LotgdHttp::getPost('install'))
+    elseif (\LotgdRequest::getPost('install'))
     {
         $op = 'install';
     }
 
-    $module = \LotgdHttp::getPost('module');
+    $module = \LotgdRequest::getPost('module');
 }
 
 $theOp = $op;
@@ -75,13 +75,13 @@ foreach ($modules as $key => $module)
     {
         if (! install_module($module))
         {
-            \LotgdHttp::setQuery('cat', '');
+            \LotgdRequest::setQuery('cat', '');
             $cat = '';
             $params['messages'][] = ['module.fail.install'];
         }
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
 
         LotgdCache::clearByPrefix('hook');
         LotgdCache::clearByPrefix('module-prepare');
@@ -90,13 +90,13 @@ foreach ($modules as $key => $module)
     {
         if (! uninstall_module($module))
         {
-            \LotgdHttp::setQuery('cat', '');
+            \LotgdRequest::setQuery('cat', '');
             $cat = '';
             $params['messages'][] = ['module.fail.uninstall'];
         }
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
 
         LotgdCache::clearByPrefix('hook');
         LotgdCache::clearByPrefix('module-prepare');
@@ -108,7 +108,7 @@ foreach ($modules as $key => $module)
         activate_module($module);
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
 
         LotgdCache::clearByPrefix('hook');
         LotgdCache::clearByPrefix('module-prepare');
@@ -122,7 +122,7 @@ foreach ($modules as $key => $module)
         deactivate_module($module);
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
 
         LotgdCache::removeItem("inject-$module");
         LotgdCache::clearByPrefix('module-prepare');
@@ -133,7 +133,7 @@ foreach ($modules as $key => $module)
         // We don't care about the return value here at all.
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
 
         LotgdCache::removeItem("inject-$module");
         LotgdCache::clearByPrefix('hook');

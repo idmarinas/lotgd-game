@@ -14,8 +14,8 @@ $textDomain = 'grotto-configuration';
 
 page_header('title', [], $textDomain);
 
-$save         = (string) \LotgdHttp::getQuery('save');
-$type_setting = (string) \LotgdHttp::getQuery('setting');
+$save         = (string) \LotgdRequest::getQuery('save');
+$type_setting = (string) \LotgdRequest::getQuery('setting');
 
 $params = [
     'textDomain' => $textDomain,
@@ -29,7 +29,7 @@ $params = [
 \LotgdNavigation::addNav('configuration.nav.cache', 'configuration.php?setting=cache');
 \LotgdNavigation::addNav('configuration.nav.cronjob', 'configuration.php?setting=cronjob');
 
-\LotgdNavigation::addNavAllow(\LotgdHttp::getServer('REQUEST_URI'));
+\LotgdNavigation::addNavAllow(\LotgdRequest::getServer('REQUEST_URI'));
 
 module_editor_navs('settings', 'configuration.php?setting=module&module=');
 

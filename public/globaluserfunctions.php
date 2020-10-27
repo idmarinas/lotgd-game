@@ -11,17 +11,17 @@ page_header('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
-\LotgdHttp::addHeader('globaluserfunctions.category.actions');
-\LotgdHttp::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
+\LotgdRequest::addHeader('globaluserfunctions.category.actions');
+\LotgdRequest::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 $params = [];
 
 switch ($op)
 {
     case 'dkpointreset':
-        \LotgdHttp::addHeader('globaluserfunctions.category.dragonpoints');
-        \LotgdHttp::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
+        \LotgdRequest::addHeader('globaluserfunctions.category.dragonpoints');
+        \LotgdRequest::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
     break;
     case 'dkpointresetnow':
         \ServerFunctions::resetAllDragonkillPoints();

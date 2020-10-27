@@ -4,10 +4,10 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_COMMENTS);
 
-$op = (string) \LotgdHttp::getQuery('op');
-$area = (string) \LotgdHttp::getQuery('area');
-$subop = (string) \LotgdHttp::getQuery('subop');
-$seen = (int) \LotgdHttp::getQuery('seen');
+$op = (string) \LotgdRequest::getQuery('op');
+$area = (string) \LotgdRequest::getQuery('area');
+$subop = (string) \LotgdRequest::getQuery('subop');
+$seen = (int) \LotgdRequest::getQuery('seen');
 
 $repository = \Doctrine::getRepository('LotgdCore:Commentary');
 $textDomain = 'grotto-moderate';

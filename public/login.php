@@ -10,11 +10,11 @@ require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
-$op = (string) \LotgdHttp::getQuery('op');
-$name = (string) \LotgdHttp::getPost('name');
+$op = (string) \LotgdRequest::getQuery('op');
+$name = (string) \LotgdRequest::getPost('name');
 $iname = (string) getsetting('innname', LOCATION_INN);
 $vname = (string) getsetting('villagename', LOCATION_FIELDS);
-$force = \LotgdHttp::getPost('force');
+$force = \LotgdRequest::getPost('force');
 
 if ('' != $name)
 {
@@ -33,7 +33,7 @@ if ('' != $name)
         return redirect('home.php');
     }
 
-    $password = stripslashes((string) \LotgdHttp::getPost('password'));
+    $password = stripslashes((string) \LotgdRequest::getPost('password'));
 
     if ('!md5!' == substr($password, 0, 5))
     {
@@ -78,15 +78,15 @@ if ('' != $name)
             // this name.
             foreach ($result as $key => $row)
             {
-                $post = \LotgdHttp::getPostAll();
+                $post = \LotgdRequest::getPostAll();
 
                 $failLog = new \Lotgd\Core\Entity\Faillog();
                 $failLog->setEventid(0)
                     ->setDate(new DateTime())
                     ->setPost($post)
-                    ->setIp(\LotgdHttp::getServer('REMOTE_ADDR'))
+                    ->setIp(\LotgdRequest::getServer('REMOTE_ADDR'))
                     ->setAcctid($row['acctid'])
-                    ->setId(\LotgdHttp::getCookie('lgi') ?: '')
+                    ->setId(\LotgdRequest::getCookie('lgi') ?: '')
                 ;
 
                 \Doctrine::persist($failLog);
@@ -115,7 +115,7 @@ if ('' != $name)
                     // 5 failed attempts for superuser, 10 for regular user
                     $bans = new \Lotgd\Core\Entity\Bans();
                     $banexpire = new \DateTime('now');
-                    $bans->setIpfilter(\LotgdHttp::getServer('REMOTE_ADDR'))
+                    $bans->setIpfilter(\LotgdRequest::getServer('REMOTE_ADDR'))
                         ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page-login'))
                         ->setBanexpire($banexpire->add(new \DateInterval('PT15M'))) //-- Added 15 minutes
                         ->setBanner('System')
@@ -131,7 +131,7 @@ if ('' != $name)
                         // this failed attempt if it includes superusers.
                         $sql = 'SELECT acctid FROM '.DB::prefix('accounts').' WHERE (superuser&'.SU_EDIT_USERS.')';
                         $result2 = DB::query($sql);
-                        $subj = translate_mail(['`#%s failed to log in too many times!', \LotgdHttp::getServer('REMOTE_ADDR')], 0);
+                        $subj = translate_mail(['`#%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR')], 0);
 
                         while ($row2 = DB::fetch_assoc($result2))
                         {

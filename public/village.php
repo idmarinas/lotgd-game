@@ -79,10 +79,10 @@ if (! $session['user']['alive'])
     return redirect('shades.php');
 }
 
-$op = \LotgdHttp::getQuery('op');
-$com = \LotgdHttp::getQuery('commentPage');
-$commenting = \LotgdHttp::getQuery('commenting');
-$comment = \LotgdHttp::getPost('comment');
+$op = \LotgdRequest::getQuery('op');
+$com = \LotgdRequest::getQuery('commentPage');
+$commenting = \LotgdRequest::getQuery('commenting');
+$comment = \LotgdRequest::getPost('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
@@ -100,7 +100,7 @@ if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('vi
         $session['user']['specialmisc'] = '';
         $skipvillagedesc = true;
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
 }
 

@@ -25,7 +25,7 @@ $params = [
     'showForestMessage' => ! $dontDisplayForestMessage,
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -54,7 +54,7 @@ elseif ('search' == $op)
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.tired', [], $textDomain));
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
     else
     {
@@ -81,7 +81,7 @@ elseif ('search' == $op)
             $params['showForestMessage']    = ! $dontDisplayForestMessage;
 
             $op = '';
-            \LotgdHttp::setQuery('op', '');
+            \LotgdRequest::setQuery('op', '');
         }
         else
         {
@@ -97,7 +97,7 @@ elseif ('search' == $op)
                 $nlev = (1 == e_rand(1, 3) ? 1 : 0);
             }
 
-            $type = (string) \LotgdHttp::getQuery('type');
+            $type = (string) \LotgdRequest::getQuery('type');
 
             $extrabuff = 0;
 
@@ -316,9 +316,9 @@ elseif ('search' == $op)
             // If someone for any reason wanted to add a nav where the user cannot choose the number of rounds anymore
             // because they are already set in the nav itself, we need this here.
             // It will not break anything else. I hope.
-            if ('' != \LotgdHttp::getQuery('auto'))
+            if ('' != \LotgdRequest::getQuery('auto'))
             {
-                \LotgdHttp::setQuery('op', 'fight');
+                \LotgdRequest::setQuery('op', 'fight');
                 $op = 'fight';
             }
         }
@@ -334,7 +334,7 @@ elseif ('run' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.run.success', [], $textDomain));
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
         unsuspend_buffs();
 
         foreach ($companions as $index => $companion)
@@ -367,7 +367,7 @@ if ($battle)
         $params['showForestMessage'] = ! $dontDisplayForestMessage;
 
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
     else
     {

@@ -1,6 +1,6 @@
 <?php
 
-$setspecialty = \LotgdHttp::getQuery('setspecialty');
+$setspecialty = \LotgdRequest::getQuery('setspecialty');
 
 if ('' != $setspecialty)
 {

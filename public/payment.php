@@ -13,7 +13,7 @@ require_once 'common.php';
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
 
-$post = \LotgdHttp::getPostAll();
+$post = \LotgdRequest::getPostAll();
 reset($post);
 
 foreach ($post as $key => $value)
@@ -33,15 +33,15 @@ $header .= "Connection: close\r\n\r\n";
 $fp = fsockopen('ssl://www.paypal.com', 443, $errno, $errstr, 30);
 
 // assign posted variables to local variables
-$item_name = \LotgdHttp::getPost('item_name');
-$item_number = \LotgdHttp::getPost('item_number');
-$payment_status = \LotgdHttp::getPost('payment_status');
-$payment_amount = \LotgdHttp::getPost('mc_gross');
-$payment_currency = \LotgdHttp::getPost('mc_currency');
-$txn_id = \LotgdHttp::getPost('txn_id');
-$receiver_email = \LotgdHttp::getPost('business');
-$payer_email = \LotgdHttp::getPost('payer_email');
-$payment_fee = \LotgdHttp::getPost('mc_fee');
+$item_name = \LotgdRequest::getPost('item_name');
+$item_number = \LotgdRequest::getPost('item_number');
+$payment_status = \LotgdRequest::getPost('payment_status');
+$payment_amount = \LotgdRequest::getPost('mc_gross');
+$payment_currency = \LotgdRequest::getPost('mc_currency');
+$txn_id = \LotgdRequest::getPost('txn_id');
+$receiver_email = \LotgdRequest::getPost('business');
+$payer_email = \LotgdRequest::getPost('payer_email');
+$payment_fee = \LotgdRequest::getPost('mc_fee');
 
 $response = '';
 

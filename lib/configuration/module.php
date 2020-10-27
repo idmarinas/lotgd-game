@@ -1,8 +1,8 @@
 <?php
 
-$module    = (string) \LotgdHttp::getQuery('module');
-$save      = (string) \LotgdHttp::getQuery('save');
-$isLaminas = (string) \LotgdHttp::getQuery('laminas');
+$module    = (string) \LotgdRequest::getQuery('module');
+$save      = (string) \LotgdRequest::getQuery('save');
+$isLaminas = (string) \LotgdRequest::getQuery('laminas');
 
 $flashMessages = \LotgdTranslator::t('flash.message.module.fail.inject', [], $textDomain);
 
@@ -13,7 +13,7 @@ if (injectmodule($module, true))
     if ('' != $save && ! $isLaminas)
     {
         $old  = load_module_settings($module);
-        $post = \LotgdHttp::getPostAll();
+        $post = \LotgdRequest::getPostAll();
 
         process_post_save_data($post, $old, $flashMessages, $module, $textDomain);
 
@@ -44,10 +44,10 @@ if (injectmodule($module, true))
 
             $params['formTypeTab'] = $params['form']->getOption('form_type_tab');
 
-            if (\LotgdHttp::isPost())
+            if (\LotgdRequest::isPost())
             {
                 $old = load_module_settings($module);
-                $params['form']->setData(\LotgdHttp::getPostAll());
+                $params['form']->setData(\LotgdRequest::getPostAll());
 
                 if ($params['form']->isValid())
                 {

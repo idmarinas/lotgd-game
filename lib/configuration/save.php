@@ -88,6 +88,6 @@ foreach ($postSettings as $key => $val)
 $flashMessages .= \LotgdTranslator::t('flash.message.default.save.saved', [], $textDomain);
 
 $op = '';
-\LotgdHttp::setQuery($op, '');
+\LotgdRequest::setQuery($op, '');
 
 \LotgdFlashMessages::addInfoMessage($flashMessages);

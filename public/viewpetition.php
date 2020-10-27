@@ -22,9 +22,9 @@ $statuses = [
 $statuses = modulehook('petition-status', $statuses);
 reset($statuses);
 
-$op = (string) \LotgdHttp::getQuery('op');
-$petitionId = (int) \LotgdHttp::getQuery('id');
-$page = (int) \LotgdHttp::getQuery('page');
+$op = (string) \LotgdRequest::getQuery('op');
+$petitionId = (int) \LotgdRequest::getQuery('id');
+$page = (int) \LotgdRequest::getQuery('page');
 
 $textDomain = 'grotto-viewpetition';
 
@@ -43,7 +43,7 @@ if ('' == $op)
 {
     $params['tpl'] = 'default';
 
-    $setstat = (int) \LotgdHttp::getQuery('setstat');
+    $setstat = (int) \LotgdRequest::getQuery('setstat');
 
     if ('' != $setstat)
     {
@@ -82,7 +82,7 @@ if ('' == $op)
 elseif ('view' == $op)
 {
     $params['tpl'] = 'view';
-    $viewpageinfo = (int) \LotgdHttp::getQuery('viewpageinfo');
+    $viewpageinfo = (int) \LotgdRequest::getQuery('viewpageinfo');
 
     \LotgdNavigation::addHeader('viewpetitions.category.petitions');
     \LotgdNavigation::addHeader('viewpetitions.category.details');

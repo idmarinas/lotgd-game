@@ -1,6 +1,6 @@
 <?php
 
-$setrace = \LotgdHttp::getQuery('setrace');
+$setrace = \LotgdRequest::getQuery('setrace');
 
 if ('' != $setrace)
 {

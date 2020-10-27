@@ -13,7 +13,7 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 if ('' == $op)
 {

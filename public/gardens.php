@@ -24,10 +24,10 @@ $params = [
     'includeTemplatesPost' => []
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$com = \LotgdHttp::getQuery('commentPage');
-$commenting = \LotgdHttp::getQuery('commenting');
-$comment = \LotgdHttp::getPost('comment');
+$op = (string) \LotgdRequest::getQuery('op');
+$com = \LotgdRequest::getQuery('commentPage');
+$commenting = \LotgdRequest::getQuery('commenting');
+$comment = \LotgdRequest::getPost('comment');
 
 // Don't give people a chance at a special event if they are just browsing
 // the commentary (or talking) or dealing with any of the hooks in the village.
@@ -45,7 +45,7 @@ if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != mod
         $skipgardendesc = true;
         $params['showGardenDesc'] = ! $skipgardendesc;
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
 }
 

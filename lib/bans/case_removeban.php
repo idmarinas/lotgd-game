@@ -4,8 +4,8 @@ $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Bans::class);
 
 if ('delban' == $op)
 {
-    $ip = \LotgdHttp::getQuery('ipfilter');
-    $id = \LotgdHttp::getQuery('uniqueid');
+    $ip = \LotgdRequest::getQuery('ipfilter');
+    $id = \LotgdRequest::getQuery('uniqueid');
 
     if ($repository->deleteBan($ip, $id))
     {
@@ -21,10 +21,10 @@ if ($removed)
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('removeban.expired', ['count' => $removed], $textDomain));
 }
 
-$page      = (int) \LotgdHttp::getQuery('page');
-$duration  = (string) \LotgdHttp::getQuery('duration');
+$page      = (int) \LotgdRequest::getQuery('page');
+$duration  = (string) \LotgdRequest::getQuery('duration');
 $duration  = $duration ?: 'P14D';
-$notBefore = (int) \LotgdHttp::getQuery('notbefore');
+$notBefore = (int) \LotgdRequest::getQuery('notbefore');
 $operator  = $notBefore ? '>=' : '<=';
 
 $date  = new \DateTime('now');

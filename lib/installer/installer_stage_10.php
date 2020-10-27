@@ -5,9 +5,9 @@ $superusers = $repository->getSuperuserCountWithPermit(SU_MEGAUSER);
 
 if (0 == $superusers)
 {
-    $name  = (string) \LotgdHttp::getPost('name');
-    $pass1 = (string) \LotgdHttp::getPost('pass1');
-    $pass2 = (string) \LotgdHttp::getPost('pass2');
+    $name  = (string) \LotgdRequest::getPost('name');
+    $pass1 = (string) \LotgdRequest::getPost('pass1');
+    $pass2 = (string) \LotgdRequest::getPost('pass2');
 
     if ($name)
     {
@@ -29,7 +29,7 @@ if (0 == $superusers)
             // do everything needed without having to first go into
             // the user editor and give themselves privs.
             $su   = SU_MEGAUSER | SU_EDIT_MOUNTS | SU_EDIT_CREATURES | SU_EDIT_PETITIONS | SU_EDIT_COMMENTS | SU_EDIT_DONATIONS | SU_EDIT_USERS | SU_EDIT_CONFIG | SU_INFINITE_DAYS | SU_EDIT_EQUIPMENT | SU_EDIT_PAYLOG | SU_DEVELOPER | SU_POST_MOTD | SU_MODERATE_CLANS | SU_EDIT_RIDDLES | SU_MANAGE_MODULES | SU_AUDIT_MODERATION | SU_RAW_SQL | SU_VIEW_SOURCE | SU_NEVER_EXPIRE;
-            $pass = \md5(\md5(\stripslashes(\LotgdHttp::getPost('pass1'))));
+            $pass = \md5(\md5(\stripslashes(\LotgdRequest::getPost('pass1'))));
             $sql  = 'DELETE FROM '.DB::prefix('accounts')." WHERE login='{$name}'";
             DB::query($sql);
 

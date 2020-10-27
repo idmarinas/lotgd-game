@@ -42,14 +42,14 @@ function redirect($location, $reason = false)
     restore_buff_fields();
     $session['debug'] = \LotgdTranslator::t('redirect.redirection', [
         'locationTo'   => $location,
-        'locationFrom' => \LotgdHttp::getServer('REQUEST_URI'),
+        'locationFrom' => \LotgdRequest::getServer('REQUEST_URI'),
         'reason'       => $reason,
     ], 'app-default');
     saveuser();
 
-    $host = \LotgdHttp::getServer('HTTP_HOST');
-    $http = (443 == \LotgdHttp::getServer('SERVER_PORT')) ? 'https' : 'http';
-    $uri  = \rtrim(\dirname(\LotgdHttp::getServer('PHP_SELF')), '/\\');
+    $host = \LotgdRequest::getServer('HTTP_HOST');
+    $http = (443 == \LotgdRequest::getServer('SERVER_PORT')) ? 'https' : 'http';
+    $uri  = \rtrim(\dirname(\LotgdRequest::getServer('PHP_SELF')), '/\\');
 
     \header(\sprintf('Location: %s://%s%s/%s',
         $http,

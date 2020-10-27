@@ -14,13 +14,13 @@ function handle_event($location, $baseLink = false)
 
     if (false === $baseLink)
     {
-        $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
         $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
     $skipdesc = false;
 
     $allowinactive = false;
-    $eventhandler  = (string) \LotgdHttp::getQuery('eventhandler');
+    $eventhandler  = (string) \LotgdRequest::getQuery('eventhandler');
 
     if (($session['user']['superuser'] & SU_DEVELOPER) && '' != $eventhandler)
     {
@@ -73,7 +73,7 @@ function handle_event($location, $baseLink = false)
         $skipdesc                       = true;
         $session['user']['specialinc']  = '';
         $session['user']['specialmisc'] = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
 
     return $skipdesc;

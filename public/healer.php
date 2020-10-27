@@ -24,8 +24,8 @@ $params = [
     'healCost' => $cost
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$return = (string) \LotgdHttp::getQuery('return');
+$op = (string) \LotgdRequest::getQuery('op');
+$return = (string) \LotgdRequest::getQuery('return');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -53,7 +53,7 @@ if ('' == $op)
 }
 elseif ('buy' == $op)
 {
-    $pct = (int) \LotgdHttp::getQuery('pct');
+    $pct = (int) \LotgdRequest::getQuery('pct');
     $newcost = round($pct * $cost / 100, 0);
 
     $params['tpl'] = 'buy';
@@ -75,7 +75,7 @@ elseif ('buy' == $op)
 }
 elseif ('companion' == $op)
 {
-    $compcost = (int) \LotgdHttp::getQuery('compcost');
+    $compcost = (int) \LotgdRequest::getQuery('compcost');
 
     $params['tpl'] = 'companion';
     $params['canHeal'] = false;
@@ -85,7 +85,7 @@ elseif ('companion' == $op)
     {
         $params['canHeal'] = true;
 
-        $name = stripslashes(rawurldecode(\LotgdHttp::getQuery('name')));
+        $name = stripslashes(rawurldecode(\LotgdRequest::getQuery('name')));
 
         $session['user']['gold'] -= $compcost;
         $companions[$name]['hitpoints'] = $companions[$name]['maxhitpoints'];

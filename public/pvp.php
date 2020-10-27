@@ -20,8 +20,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$act = (string) \LotgdHttp::getQuery('act');
+$op = (string) \LotgdRequest::getQuery('op');
+$act = (string) \LotgdRequest::getQuery('act');
 
 if ('' == $op && 'attack' != $act)
 {
@@ -35,7 +35,7 @@ if ('' == $op && 'attack' != $act)
     $params['tpl'] = 'list';
     $params['paginator'] = $pvp->getPvpList($session['user']['location']);
     $params['sleepers'] = $pvp->getLocationSleepersCount($session['user']['location']);
-    $params['returnLink'] = \LotgdHttp::getServer('REQUEST_URI');
+    $params['returnLink'] = \LotgdRequest::getServer('REQUEST_URI');
     $params['pvpTimeOut'] = new \DateTime(date('Y-m-d H:i:s', strtotime("-$pvptime seconds")));
 
     \LotgdNavigation::addNav('common.nav.warriors', 'pvp.php');
@@ -43,7 +43,7 @@ if ('' == $op && 'attack' != $act)
 }
 elseif ('attack' == $act)
 {
-    $characterId = (int) \LotgdHttp::getQuery('character_id');
+    $characterId = (int) \LotgdRequest::getQuery('character_id');
 
     $badguy = setup_pvp_target($characterId);
     $options['type'] = 'pvp';
@@ -73,7 +73,7 @@ elseif ('attack' == $act)
 
     if ($failedattack)
     {
-        if (\LotgdHttp::getQuery('inn'))
+        if (\LotgdRequest::getQuery('inn'))
         {
             \LotgdNavigation::addNav('common.nav.listing', 'inn.php?op=bartender&act=listupstairs');
         }
@@ -88,16 +88,16 @@ elseif ('run' == $op)
     \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.pvp.run', [], $textDomain));
 
     $op = 'fight';
-    \LotgdHttp::setQuery('op', $op);
+    \LotgdRequest::setQuery('op', $op);
 }
 
-$skill = \LotgdHttp::getQuery('skill');
+$skill = \LotgdRequest::getQuery('skill');
 
 if ('' != $skill)
 {
     output('Your honor prevents you from using any special ability');
     $skill = '';
-    \LotgdHttp::setQuery('skill', '');
+    \LotgdRequest::setQuery('skill', '');
 }
 
 if ('fight' == $op || 'run' == $op)
@@ -132,7 +132,7 @@ if ($battle)
         }
 
         $op = '';
-        \LotgdHttp::setQuery('op', $op);
+        \LotgdRequest::setQuery('op', $op);
 
         if ($killedin == $iname)
         {
@@ -187,7 +187,7 @@ if ($battle)
     {
         $extra = '';
 
-        if (\LotgdHttp::getQuery('inn'))
+        if (\LotgdRequest::getQuery('inn'))
         {
             $extra = '?inn=1';
         }

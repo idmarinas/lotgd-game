@@ -27,7 +27,7 @@ page_header('title', [], $textDomain);
 $repository = \Doctrine::getRepository('LotgdCore:AccountsEverypage');
 $acctRepository = \Doctrine::getRepository('LotgdCore:Accounts');
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 if ('stats' == $op || '' == $op)
 {

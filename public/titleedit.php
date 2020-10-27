@@ -14,8 +14,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$id = (int) \LotgdHttp::getQuery('id');
+$op = (string) \LotgdRequest::getQuery('op');
+$id = (int) \LotgdRequest::getQuery('id');
 
 \LotgdNavigation::addNav('titleedit.category.other');
 

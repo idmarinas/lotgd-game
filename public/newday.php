@@ -8,7 +8,7 @@ require_once 'lib/buffs.php';
 
 modulehook('newday-intercept', []);
 
-$resurrection = (string) \LotgdHttp::getQuery('resurrection');
+$resurrection = (string) \LotgdRequest::getQuery('resurrection');
 $resline = ('true' == $resurrection) ? '&resurrection=true' : '';
 
 /***************
@@ -40,7 +40,7 @@ $params = [
 
 \LotgdNavigation::addHeader('category.continue');
 
-$dk = \LotgdHttp::getQuery('dk');
+$dk = \LotgdRequest::getQuery('dk');
 
 if ((count($session['user']['dragonpoints']) < $session['user']['dragonkills']) && '' != $dk)
 {
@@ -99,7 +99,7 @@ $retargs = modulehook('dkpointlabels', ['desc' => $labels, 'buy' => $canbuy]);
 $labels = $retargs['desc'];
 $canbuy = $retargs['buy'];
 
-$pdk = \LotgdHttp::getQuery('pdk');
+$pdk = \LotgdRequest::getQuery('pdk');
 
 $dp = count($session['user']['dragonpoints']);
 $dkills = $session['user']['dragonkills'];

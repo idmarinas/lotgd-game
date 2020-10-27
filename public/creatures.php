@@ -16,11 +16,11 @@ page_header('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
-$op = (string) \LotgdHttp::getQuery('op');
-$subop = (string) \LotgdHttp::getQuery('subop');
-$page = (int) \LotgdHttp::getQuery('page');
-$module = (string) \LotgdHttp::getQuery('module');
-$creatureId = ((int) \LotgdHttp::getPost('creatureid') ?: (int) \LotgdHttp::getQuery('creatureid'));
+$op = (string) \LotgdRequest::getQuery('op');
+$subop = (string) \LotgdRequest::getQuery('subop');
+$page = (int) \LotgdRequest::getQuery('page');
+$module = (string) \LotgdRequest::getQuery('module');
+$creatureId = ((int) \LotgdRequest::getPost('creatureid') ?: (int) \LotgdRequest::getQuery('creatureid'));
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Creatures::class);
 $params = [
@@ -57,7 +57,7 @@ if ('' == $op || 'search' == $op)
     \LotgdNavigation::addHeader('creatures.category.edit');
     \LotgdNavigation::addNav('creatures.nav.add', 'creatures.php?op=add');
 
-    $q = (string) trim(\LotgdHttp::getPost('q'));
+    $q = (string) trim(\LotgdRequest::getPost('q'));
 
     $query = $repository->createQueryBuilder('u');
 
@@ -100,9 +100,9 @@ elseif ('edit' == $op || 'add' == $op)
             $params['formTypeTab'] = $form->getOption('form_type_tab');
         }
 
-        if (\LotgdHttp::isPost())
+        if (\LotgdRequest::isPost())
         {
-            $post = \LotgdHttp::getPostAll();
+            $post = \LotgdRequest::getPostAll();
             $paramsFlashMessages = ['name' => $module];
 
             if ($params['isLaminas'])

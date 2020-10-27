@@ -16,26 +16,26 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$page = (int) \LotgdHttp::getQuery('page');
+$op = (string) \LotgdRequest::getQuery('op');
+$page = (int) \LotgdRequest::getQuery('page');
 $acctRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 $paylogRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Paylog::class);
 
-$name = (string) \LotgdHttp::getPost('name');
-$name = $name ?: (string) \LotgdHttp::getQuery('name');
+$name = (string) \LotgdRequest::getPost('name');
+$name = $name ?: (string) \LotgdRequest::getQuery('name');
 $params['name'] = $name;
 
-$amt = (int) \LotgdHttp::getPost('amt');
-$amt = $amt ?: (int) \LotgdHttp::getQuery('amt');
+$amt = (int) \LotgdRequest::getPost('amt');
+$amt = $amt ?: (int) \LotgdRequest::getQuery('amt');
 $params['amt'] = $amt;
 
-$reason = (string) \LotgdHttp::getPost('reason');
-$reason = $reason ?: (string) \LotgdHttp::getQuery('reason');
+$reason = (string) \LotgdRequest::getPost('reason');
+$reason = $reason ?: (string) \LotgdRequest::getQuery('reason');
 $reason = $reason ?: \LotgdTranslator::t('form.value.reason', [], $textDomain);
 $params['reason'] = $reason;
 
-$txnid = (string) \LotgdHttp::getPost('txnid');
-$txnid = $txnid ?: (string) \LotgdHttp::getQuery('txnid');
+$txnid = (string) \LotgdRequest::getPost('txnid');
+$txnid = $txnid ?: (string) \LotgdRequest::getQuery('txnid');
 $params['txnid'] = $txnid;
 
 \LotgdNavigation::superuserGrottoNav();
@@ -43,7 +43,7 @@ $params['txnid'] = $txnid;
 
 if ('save' == $op)
 {
-    $id = (int) \LotgdHttp::getQuery('id');
+    $id = (int) \LotgdRequest::getQuery('id');
 
     $account = $acctRepository->find($id);
 

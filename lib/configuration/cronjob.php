@@ -1,8 +1,8 @@
 <?php
 
-$op     = (string) \LotgdHttp::getQuery('op');
-$cronId = (int) \LotgdHttp::getQuery('cronid');
-$page   = (int) \LotgdHttp::getQuery('page', 1);
+$op     = (string) \LotgdRequest::getQuery('op');
+$cronId = (int) \LotgdRequest::getQuery('cronid');
+$page   = (int) \LotgdRequest::getQuery('page', 1);
 
 $params['cronId'] = $cronId;
 
@@ -32,9 +32,9 @@ if ('' == $op)
 {
     $form = \LotgdLocator::get('Lotgd\Core\Form\Cronjob');
 
-    if (\LotgdHttp::isPost())
+    if (\LotgdRequest::isPost())
     {
-        $postSettings = \LotgdHttp::getPostAll();
+        $postSettings = \LotgdRequest::getPostAll();
         $form->setData($postSettings);
 
         $messageType = 'addErrorMessage';
@@ -56,7 +56,7 @@ if ('' == $op)
 
     $query = $repository->createQueryBuilder('u');
 
-    if ( ! \LotgdHttp::isPost())
+    if ( ! \LotgdRequest::isPost())
     {
         $form->setData(['newdaycron' => getsetting('newdaycron', 0)]);
     }

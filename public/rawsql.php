@@ -21,13 +21,13 @@ page_header('title', [], $textDomain);
 \LotgdNavigation::addNav('rawsql.nav.sql', 'rawsql.php');
 \LotgdNavigation::addNav('rawsql.nav.php', 'rawsql.php?op=php');
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 if ('' == $op || 'sql' == $op)
 {
     $params['tpl'] = 'default';
 
-    $sql = (string) \LotgdHttp::getPost('sql');
+    $sql = (string) \LotgdRequest::getPost('sql');
 
     if ('' != $sql)
     {
@@ -61,7 +61,7 @@ else
 {
     $params['tpl'] = 'php';
 
-    $php = stripslashes((string) \LotgdHttp::getPost('php'));
+    $php = stripslashes((string) \LotgdRequest::getPost('php'));
 
     if ($php > '')
     {

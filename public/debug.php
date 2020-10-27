@@ -12,10 +12,10 @@ $textDomain = 'grotto-debug';
 
 page_header('title', [], $textDomain);
 
-$page = (int) \LotgdHttp::getQuery('page');
-$sort = (string) \LotgdHttp::getQuery('sort');
-$debug = (string) \LotgdHttp::getQuery('debug');
-$ascDescRaw = (int) \LotgdHttp::getQuery('direction');
+$page = (int) \LotgdRequest::getQuery('page');
+$sort = (string) \LotgdRequest::getQuery('sort');
+$debug = (string) \LotgdRequest::getQuery('debug');
+$ascDescRaw = (int) \LotgdRequest::getQuery('direction');
 
 $order = $sort ?: 'sum';
 $ascDesc = $ascDescRaw ? 'ASC' : 'DESC';

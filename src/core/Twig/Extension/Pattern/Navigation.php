@@ -145,7 +145,7 @@ trait Navigation
         $template = $template ?: 'parts/pagination.twig';
 
         //-- Use request uri if not set link
-        $link = $link ?: \LotgdHttp::getServer('REQUEST_URI');
+        $link = $link ?: \LotgdRequest::getServer('REQUEST_URI');
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
         $link = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
 

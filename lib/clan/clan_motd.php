@@ -17,9 +17,9 @@ $params['motdAuthorName'] = $result['motdauthname'];
 $params['descAuthorName'] = $result['descauthname'];
 unset($result);
 
-$clanmotd  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clanmotd'), 0, 4096));
-$clandesc  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('clandesc'), 0, 4096));
-$customsay = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdHttp::getPost('customsay'), 0, 15));
+$clanmotd  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdRequest::getPost('clanmotd'), 0, 4096));
+$clandesc  = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdRequest::getPost('clandesc'), 0, 4096));
+$customsay = \LotgdSanitize::mbSanitize(\mb_substr(\LotgdRequest::getPost('customsay'), 0, 15));
 
 $clanEntity = $clanRepository->find($claninfo['clanid']);
 

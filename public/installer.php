@@ -103,7 +103,7 @@ $stages = [
 ];
 
 $session['installer']['stagecompleted'] = $session['installer']['stagecompleted'] ?? -1;
-$stage = (int) \LotgdHttp::getQuery('stage', 0);
+$stage = (int) \LotgdRequest::getQuery('stage', 0);
 $stage = min($session['installer']['stagecompleted'] + 1, $stage, 11);
 $session['installer']['stagecompleted'] = max($stage, $session['installer']['stagecompleted']);
 

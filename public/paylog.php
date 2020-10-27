@@ -25,7 +25,7 @@ check_su_access(SU_EDIT_PAYLOG);
 
 $textDomain = 'grotto-paylog';
 
-$month = (int) \LotgdHttp::getQuery('month');
+$month = (int) \LotgdRequest::getQuery('month');
 
 page_header('title', [], $textDomain);
 

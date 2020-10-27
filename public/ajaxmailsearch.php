@@ -5,7 +5,7 @@
 
 require_once 'common.php';
 
-$search = (string) \LotgdHttp::getQuery('search');
+$search = (string) \LotgdRequest::getQuery('search');
 
 $repository = \Doctrine::getRepository('LotgdCore:Characters');
 

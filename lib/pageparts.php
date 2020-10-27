@@ -58,9 +58,9 @@ function page_header(?string $title = null, array $params = [], ?string $textDom
     //-- Set a title for page
     $headTitle(\LotgdTranslator::t($title, $params, $textDomain), 'set');
 
-    $script = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script = \LotgdRequest::getServer('SCRIPT_NAME');
     $script = \substr($script, 0, \strpos($script, '.'));
-    $module = (string) \LotgdHttp::getQuery('module');
+    $module = (string) \LotgdRequest::getQuery('module');
 
     if ($script)
     {
@@ -117,9 +117,9 @@ function page_footer($saveuser = true)
     ), E_USER_DEPRECATED);
 
     //page footer module hooks
-    $script = \LotgdHttp::getServer('SCRIPT_NAME');
+    $script = \LotgdRequest::getServer('SCRIPT_NAME');
     $script = \substr($script, 0, \strpos($script, '.'));
-    $module = (string) \LotgdHttp::getQuery('module');
+    $module = (string) \LotgdRequest::getQuery('module');
     $script = ('runmodule' == $script && $module) ? $module : $script;
 
     $replacementbits = ['script' => $script];
@@ -167,7 +167,7 @@ function page_footer($saveuser = true)
 
     if (isset($session['user']['lastmotd'])
         && ($lastMotd > $session['user']['lastmotd'])
-        && ( ! isset($nopopups[LotgdHttp::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdHttp::getServer('SCRIPT_NAME')])
+        && ( ! isset($nopopups[LotgdRequest::getServer('SCRIPT_NAME')]) || 1 != $nopopups[LotgdRequest::getServer('SCRIPT_NAME')])
         && (isset($session['user']['loggedin']) && $session['user']['loggedin'])
     ) {
         $session['needtoviewmotd'] = true;
@@ -195,13 +195,13 @@ function page_footer($saveuser = true)
 
     $paypalData['author']['register_logdnet'] = false;
     $paypalData['author']['item_name']        = 'Legend of the Green Dragon Author Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
-    $paypalData['author']['item_number']      = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').'/'.LotgdHttp::getServer('REQUEST_URI');
+    $paypalData['author']['item_number']      = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdRequest::getServer('HTTP_HOST').'/'.LotgdRequest::getServer('REQUEST_URI');
 
     if (getsetting('logdnet', 0) && $session['user']['loggedin'] && ! $alreadyRegisteredLogdnet)
     {
         //account counting, just for my own records, I don't use this in the calculation for server order.
         $c = \Doctrine::getRepository('LotgdCore:Accounts')->count([]);
-        $a = getsetting('serverurl', 'http://'.LotgdHttp::getServer('SERVER_NAME').(80 == LotgdHttp::getServer('SERVER_PORT') ? '' : ':'.LotgdHttp::getServer('SERVER_PORT')).\dirname(LotgdHttp::getServer('REQUEST_URI')));
+        $a = getsetting('serverurl', 'http://'.LotgdRequest::getServer('SERVER_NAME').(80 == LotgdRequest::getServer('SERVER_PORT') ? '' : ':'.LotgdRequest::getServer('SERVER_PORT')).\dirname(LotgdRequest::getServer('REQUEST_URI')));
 
         if ( ! \preg_match("/\/$/", $a))
         {
@@ -236,11 +236,11 @@ function page_footer($saveuser = true)
     {
         $paypalData['site']['paysite']     = $paysite;
         $paypalData['site']['item_name']   = getsetting('paypaltext', 'Legend of the Green Dragon Site Donation from').' '.\LotgdSanitize::fullSanitize($session['user']['name']);
-        $paypalData['site']['item_number'] = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI');
+        $paypalData['site']['item_number'] = \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.LotgdRequest::getServer('HTTP_HOST').LotgdRequest::getServer('REQUEST_URI');
 
         if (\file_exists('public/payment.php'))
         {
-            $paypalData['site']['notify_url'] = '//'.LotgdHttp::getServer('HTTP_HOST').\dirname(LotgdHttp::getServer('REQUEST_URI')).'/payment.php';
+            $paypalData['site']['notify_url'] = '//'.LotgdRequest::getServer('HTTP_HOST').\dirname(LotgdRequest::getServer('REQUEST_URI')).'/payment.php';
         }
 
         $paypalData['site']['paypalcountry_code'] = getsetting('paypalcountry-code', 'US');
@@ -248,7 +248,7 @@ function page_footer($saveuser = true)
 
     //-- Dragon Prime
     $paypalData['dp']['item_name']   = 'Legend of the Green Dragon DP Donation from '.\LotgdSanitize::fullSanitize($session['user']['name']);
-    $paypalData['dp']['item_number'] = \htmlentities($session['user']['login'].':'.LotgdHttp::getServer('HTTP_HOST').LotgdHttp::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $paypalData['dp']['item_number'] = \htmlentities($session['user']['login'].':'.LotgdRequest::getServer('HTTP_HOST').LotgdRequest::getServer('REQUEST_URI'), ENT_COMPAT, getsetting('charset', 'UTF-8'));
 
     $html['paypal'] = $html['paypal'] ?? '';
     $html['paypal'] .= \LotgdTheme::renderLotgdTemplate('core/paypal.twig', $paypalData);
@@ -278,13 +278,13 @@ function page_footer($saveuser = true)
         $runtimeEntity = $repository->hydrateEntity([
             'type'        => 'pagegentime',
             'category'    => 'runtime',
-            'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
+            'subcategory' => LotgdRequest::getServer('SCRIPT_NAME'),
             'value'       => $gentime,
         ]);
         $dbtimeEntity = $repository->hydrateEntity([
             'type'        => 'pagegentime',
             'category'    => 'dbtime',
-            'subcategory' => LotgdHttp::getServer('SCRIPT_NAME'),
+            'subcategory' => LotgdRequest::getServer('SCRIPT_NAME'),
             'value'       => \round($wrapper->getQueryTime(), 5),
         ]);
 

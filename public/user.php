@@ -9,12 +9,12 @@ require_once 'lib/names.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$op       = (string) \LotgdHttp::getQuery('op');
-$userId   = (int) \LotgdHttp::getQuery('userid');
-$page     = (int) \LotgdHttp::getQuery('page');
-$sort     = \LotgdHttp::getQuery('sort');
-$petition = \LotgdHttp::getQuery('returnpetition');
-$module   = (string) \LotgdHttp::getQuery('module');
+$op       = (string) \LotgdRequest::getQuery('op');
+$userId   = (int) \LotgdRequest::getQuery('userid');
+$page     = (int) \LotgdRequest::getQuery('page');
+$sort     = \LotgdRequest::getQuery('sort');
+$petition = \LotgdRequest::getQuery('returnpetition');
+$module   = (string) \LotgdRequest::getQuery('module');
 
 if ('lasthit' == $op)
 {
@@ -97,7 +97,7 @@ elseif ('special' == $op)
 {
     $accountEntity = $repository->find($userId);
 
-    if ('' != \LotgdHttp::getPost('newday'))
+    if ('' != \LotgdRequest::getPost('newday'))
     {
         $character = $accountEntity->getCharacter();
         $character->setLasthit(new \DateTime('0000-00-00 00:00:00'));
@@ -105,7 +105,7 @@ elseif ('special' == $op)
 
         \Doctrine::persist($character);
     }
-    elseif ('' != \LotgdHttp::getPost('fixnavs'))
+    elseif ('' != \LotgdRequest::getPost('fixnavs'))
     {
         $character = $accountEntity->getCharacter();
         $character->setAllowednavs([])
@@ -117,7 +117,7 @@ elseif ('special' == $op)
         $outputRepository = \Doctrine::getRepository('LotgdCore:AccountsOutput');
         $outputRepository->deleteOutputOfAccount($userId);
     }
-    elseif ('' != \LotgdHttp::getPost('clearvalidation'))
+    elseif ('' != \LotgdRequest::getPost('clearvalidation'))
     {
         $accountEntity->setEmailvalidation('');
     }
@@ -130,7 +130,7 @@ elseif ('special' == $op)
 elseif ('save' == $op)
 {
     $oldValues  = $repository->getUserById($userId);
-    $postValues = \LotgdHttp::getPostAll();
+    $postValues = \LotgdRequest::getPostAll();
 
     $messages = '';
 
@@ -200,7 +200,7 @@ elseif ('save' == $op)
 }
 elseif ('savemodule' == $op)
 {
-    $post = \LotgdHttp::getPostAll();
+    $post = \LotgdRequest::getPostAll();
     $post = modulehook('validateprefs', $post, true, $module);
 
     if (isset($post['validation_error']) && $post['validation_error'])
@@ -236,8 +236,8 @@ elseif ('savemodule' == $op)
     }
 
     $op = 'edit';
-    \LotgdHttp::setQuery('op', 'edit');
-    \LotgdHttp::setQuery('subop', 'module');
+    \LotgdRequest::setQuery('op', 'edit');
+    \LotgdRequest::setQuery('subop', 'module');
 }
 
 $row = $characterInfo ?? null;
@@ -247,7 +247,7 @@ switch ($op)
     case 'edit':
         $params['tpl'] = 'edit';
 
-        $subop = (string) \LotgdHttp::getQuery('subop');
+        $subop = (string) \LotgdRequest::getQuery('subop');
 
         if ('' != $petition)
         {
@@ -258,11 +258,11 @@ switch ($op)
         \LotgdNavigation::addHeader('user.category.operations');
         \LotgdNavigation::addNav('user.nav.last.hit', "user.php?op=lasthit&userid={$userId}");
         \LotgdNavigation::addNav('user.nav.debuglog', "user.php?op=debuglog&userid={$userId}{$returnpetition}");
-        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".\urlencode(\LotgdHttp::getServer('REQUEST_URI')));
+        \LotgdNavigation::addNav('user.nav.bio', "bio.php?char={$userId}&ret=".\urlencode(\LotgdRequest::getServer('REQUEST_URI')));
 
         if ($session['user']['superuser'] & SU_EDIT_DONATIONS)
         {
-            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.\rawurlencode($row['login']).'&ret='.\urlencode(\LotgdHttp::getServer('REQUEST_URI')));
+            \LotgdNavigation::addNav('user.nav.donation', 'donators.php?op=add1&name='.\rawurlencode($row['login']).'&ret='.\urlencode(\LotgdRequest::getServer('REQUEST_URI')));
         }
 
         \LotgdNavigation::addHeader('user.category.bans');
@@ -272,7 +272,7 @@ switch ($op)
 
         if ('' == $subop)
         {
-            $type                = (string) \LotgdHttp::getQuery('type') ?: 'acct';
+            $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
             $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
 
             $accountEntity   = $repository->find($userId);
@@ -314,7 +314,7 @@ switch ($op)
         }
         elseif ('module' == $subop)
         {
-            $module = (string) \LotgdHttp::getQuery('module');
+            $module = (string) \LotgdRequest::getQuery('module');
 
             \LotgdNavigation::addHeader('user.category.operations');
             \LotgdNavigation::addNav('user.nav.edit', "user.php?op=edit&userid={$userId}{$returnpetition}");
@@ -400,18 +400,18 @@ switch ($op)
 
         $repoAcctEveryPage = \Doctrine::getRepository('LotgdCore:AccountsEverypage');
 
-        $page  = (int) \LotgdHttp::getQuery('page');
-        $sort  = (string) \LotgdHttp::getQuery('sort');
+        $page  = (int) \LotgdRequest::getQuery('page');
+        $sort  = (string) \LotgdRequest::getQuery('sort');
         $order = (string) ($sort ?: 'acctid');
 
-        $query = (string) \LotgdHttp::getPost('q');
-        $query = (string) ($query ?: \LotgdHttp::getQuery('q'));
+        $query = (string) \LotgdRequest::getPost('q');
+        $query = (string) ($query ?: \LotgdRequest::getQuery('q'));
 
         $params['query']     = $query ? "q={$query}" : '';
         $params['paginator'] = $repository->userSearchAccounts($query, $order, $page);
         $params['stats']     = $repoAcctEveryPage->getStatsPageGen();
 
-        $params['paginatorLink'] = \LotgdHttp::getServer('REQUEST_URI');
+        $params['paginatorLink'] = \LotgdRequest::getServer('REQUEST_URI');
     break;
 }
 

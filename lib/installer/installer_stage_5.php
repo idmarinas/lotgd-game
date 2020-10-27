@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\UnderscoreNamingStrategy as DoctrineUnderscoreNamingStr
 use Lotgd\Core\Doctrine\Extension\TablePrefix as DoctrineTablePrefix;
 use Lotgd\Core\Doctrine\Strategy\Quote as DoctrineQuoteStrategy;
 
-$session['installer']['dbinfo']['DB_PREFIX'] = \LotgdHttp::getPost('DB_PREFIX') ?: '';
+$session['installer']['dbinfo']['DB_PREFIX'] = \LotgdRequest::getPost('DB_PREFIX') ?: '';
 
 if ($session['installer']['dbinfo']['DB_PREFIX'] > '' && '_' != \substr($session['installer']['dbinfo']['DB_PREFIX'], -1))
 {
@@ -80,11 +80,11 @@ $missing  = \count($tableNames) - $game;
 
 $upgrade = ($missing * 10 < $game); //-- Looks like an upgrade
 
-if ('install' == \LotgdHttp::getQuery('type'))
+if ('install' == \LotgdRequest::getQuery('type'))
 {
     $upgrade = false;
 }
-elseif ('upgrade' == \LotgdHttp::getQuery('type'))
+elseif ('upgrade' == \LotgdRequest::getQuery('type'))
 {
     $upgrade = true;
 }
@@ -93,7 +93,7 @@ $session['installer']['dbinfo']['upgrade'] = $upgrade;
 
 if ($upgrade && \count($conflict) > 0)
 {
-    if ('confirm_overwrite' == \LotgdHttp::getQuery('op'))
+    if ('confirm_overwrite' == \LotgdRequest::getQuery('op'))
     {
         $session['sure i want to overwrite the tables'] = true;
     }

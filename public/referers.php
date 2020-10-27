@@ -10,9 +10,9 @@ check_su_access(SU_EDIT_CONFIG);
 
 $repository = \Doctrine::getRepository('LotgdCore:Referers');
 
-$op = (string) \LotgdHttp::getQuery('op');
-$sort = (string) \LotgdHttp::getQuery('sort');
-$ascDescRaw = (int) \LotgdHttp::getQuery('direction');
+$op = (string) \LotgdRequest::getQuery('op');
+$sort = (string) \LotgdRequest::getQuery('sort');
+$ascDescRaw = (int) \LotgdRequest::getQuery('direction');
 
 $sort = $sort ?: 'count';
 $ascDesc = $ascDescRaw ? 'ASC' : 'DESC';

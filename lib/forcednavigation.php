@@ -8,7 +8,7 @@ function do_forced_nav($anonymous, $overrideforced)
 {
     global $session;
 
-    $requestUri = \LotgdHttp::getServer('REQUEST_URI');
+    $requestUri = \LotgdRequest::getServer('REQUEST_URI');
 
     rawoutput("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
 

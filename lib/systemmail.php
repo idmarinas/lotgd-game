@@ -67,7 +67,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
             'sendername'   => $fromline,
             'receivername' => $toline,
             'body'         => $body,
-            'gameurl'      => \LotgdHttp::getServer('REQUEST_SCHEME').'://'.\LotgdHttp::getServer('SERVER_NAME'),
+            'gameurl'      => \LotgdRequest::getServer('REQUEST_SCHEME').'://'.\LotgdRequest::getServer('SERVER_NAME'),
         ], 'app-mail');
 
         lotgd_mail($accountEntityTo->getEmailaddress(), \LotgdSanitize::fullSanitize($mailSubject), appoencode($mailMessage, true));

@@ -26,7 +26,7 @@ page_header('title', [], $textDomain);
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-$op = \LotgdHttp::getQuery('op');
+$op = \LotgdRequest::getQuery('op');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
 
 $params['opt'] = 'list';
@@ -41,7 +41,7 @@ if ('' == $op)
 }
 elseif ('buy' == $op)
 {
-    $id = (int) \LotgdHttp::getQuery('id');
+    $id = (int) \LotgdRequest::getQuery('id');
 
     $params['opt'] = 'buy';
     $params['result'] = $repository->findOneArmorById($id);

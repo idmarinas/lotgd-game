@@ -32,7 +32,7 @@ $battle = false;
 $victory = false;
 $defeat = false;
 
-$masterId = (int) \LotgdHttp::getQuery('master');
+$masterId = (int) \LotgdRequest::getQuery('master');
 
 $repository = \Doctrine::getRepository('LotgdCore:Masters');
 
@@ -69,7 +69,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
     $dks = $session['user']['dragonkills'];
     $exprequired = exp_for_next_level($level, $dks);
 
-    $op = (string) \LotgdHttp::getQuery('op');
+    $op = (string) \LotgdRequest::getQuery('op');
 
     if ('' == $op)
     {
@@ -93,7 +93,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
     {
         $params['tpl'] = 'challenge';
 
-        if (\LotgdHttp::getQuery('victory'))
+        if (\LotgdRequest::getQuery('victory'))
         {
             $victory = true;
             $defeat = false;
@@ -221,7 +221,7 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
         suspend_companions('allowintrain');
 
         //-- Superuser Gain level
-        if (\LotgdHttp::getQuery('victory'))
+        if (\LotgdRequest::getQuery('victory'))
         {
             $victory = true;
             $defeat = false;

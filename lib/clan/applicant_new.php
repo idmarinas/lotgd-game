@@ -1,13 +1,13 @@
 <?php
 
-$apply = (int) \LotgdHttp::getQuery('apply');
+$apply = (int) \LotgdRequest::getQuery('apply');
 
 $params['clanShortNameLength'] = getsetting('clanshortnamelength', 5);
 
 if (1 == $apply)
 {
-    $clanNameOriginal  = (string) \LotgdHttp::getPost('clanname');
-    $clanShortOriginal = (string) \LotgdHttp::getPost('clanshort');
+    $clanNameOriginal  = (string) \LotgdRequest::getPost('clanname');
+    $clanShortOriginal = (string) \LotgdRequest::getPost('clanshort');
 
     //-- Validate clan name
     $chainNameValidator = new \Laminas\Validator\ValidatorChain();

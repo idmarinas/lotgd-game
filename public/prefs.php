@@ -28,7 +28,7 @@ $params = [
 
 page_header('title', [], $textDomain);
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 \LotgdNavigation::addHeader('common.category.navigation');
 \LotgdNavigation::addNav('common.nav.update', 'prefs.php');
@@ -113,7 +113,7 @@ else
 {
     checkday();
 
-    \LotgdNavigation::addNav('common.nav.bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode(\LotgdHttp::getServer('REQUEST_URI')));
+    \LotgdNavigation::addNav('common.nav.bio', 'bio.php?char='.$session['user']['acctid'].'&ret='.urlencode(\LotgdRequest::getServer('REQUEST_URI')));
     if ($session['user']['alive'])
     {
         \LotgdNavigation::villageNav();
@@ -123,10 +123,10 @@ else
         \LotgdNavigation::addNav('common.nav.news', 'news.php');
     }
 
-    $post = \LotgdHttp::getPostAll();
+    $post = \LotgdRequest::getPostAll();
     unset($post['showFormTabIndex']);
 
-    if (\LotgdHttp::isPost())
+    if (\LotgdRequest::isPost())
     {
         $pass1 = $post['pass1'];
         $pass2 = $post['pass2'];
@@ -183,7 +183,7 @@ else
                 {
                     continue;
                 }
-                $val = \LotgdHttp::getPost($key);
+                $val = \LotgdRequest::getPost($key);
                 $x = explode('___', $key);
                 $module = $x[0];
                 $key = $x[1];
@@ -229,8 +229,8 @@ else
                         $shortname = $session['user']['login'];
 
                         //-- Use "protocol-less" URLs
-                        $serveraddress = sprintf('//%s?op=val&id=%s', \LotgdHttp::getServer('SERVER_NAME').'/create.php', $emailverification);
-                        $serverurl = sprintf('//%s', \LotgdHttp::getServer('SERVER_NAME'));
+                        $serveraddress = sprintf('//%s?op=val&id=%s', \LotgdRequest::getServer('SERVER_NAME').'/create.php', $emailverification);
+                        $serverurl = sprintf('//%s', \LotgdRequest::getServer('SERVER_NAME'));
 
                         $subj = \LotgdTranslator::t('mail.subject', [], $textDomain);
 
@@ -343,7 +343,7 @@ else
 
     $prefs = &$session['user']['prefs'];
     $prefs['bio'] = $session['user']['bio'];
-    $prefs['template'] = \LotgdHttp::getCookie('template') ?: getsetting('defaultskin', 'jade.htm');
+    $prefs['template'] = \LotgdRequest::getCookie('template') ?: getsetting('defaultskin', 'jade.htm');
     $prefs['sexuality'] = $prefs['sexuality'] ?? ! $session['user']['sex'] ?: ! $session['user']['sex'];
     $prefs['email'] = $session['user']['emailaddress'];
     $prefs['timeformat'] = $prefs['timeformat'] ?? '[m/d h:ia]';

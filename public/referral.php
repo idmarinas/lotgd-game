@@ -11,7 +11,7 @@ $textDomain = 'page-referral';
 
 if (! $session['user']['loggedin'])
 {
-    $referral = (string) \LotgdHttp::getQuery('r');
+    $referral = (string) \LotgdRequest::getQuery('r');
 
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.referral.create', [ 'referral' => $referral ], $textDomain));
 
@@ -33,7 +33,7 @@ else
     \LotgdNavigation::villageNav();
 }
 
-$url = getsetting('serverurl', sprintf('%s://%s', \LotgdHttp::getServer('REQUEST_SCHEME'), \LotgdHttp::getServer('HTTP_HOST')));
+$url = getsetting('serverurl', sprintf('%s://%s', \LotgdRequest::getServer('REQUEST_SCHEME'), \LotgdRequest::getServer('HTTP_HOST')));
 
 if (! preg_match('/\\/$/', $url))
 {

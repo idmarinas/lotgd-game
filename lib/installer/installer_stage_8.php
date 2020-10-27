@@ -8,7 +8,7 @@ $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
 
 if ($request->isPost())
 {
-    $session['installer']['moduleoperations'] = \LotgdHttp::getPost('modules') ?: [];
+    $session['installer']['moduleoperations'] = \LotgdRequest::getPost('modules') ?: [];
     $session['installer']['stagecompleted']   = $stage;
 
     return redirect('installer.php?stage='.($stage + 1));

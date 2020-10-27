@@ -17,9 +17,9 @@ page_header('title', [], 'page-news');
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 
 $newsPerPage = 50;
-$page = (int) \LotgdHttp::getQuery('page');
-$day = (int) \LotgdHttp::getQuery('day');
-$op = (string) \LotgdHttp::getQuery('op');
+$page = (int) \LotgdRequest::getQuery('page');
+$day = (int) \LotgdRequest::getQuery('day');
+$op = (string) \LotgdRequest::getQuery('op');
 $timestamp = strtotime("-{$day} days");
 $params = ['date' => $timestamp];
 
@@ -35,7 +35,7 @@ if ('delete' == $op)
 {
     checkSuPermission(SU_EDIT_COMMENTS, 'news.php');
 
-    $newsId = (int) \LotgdHttp::getQuery('newsid');
+    $newsId = (int) \LotgdRequest::getQuery('newsid');
     $newsRepo->deleteNewsId($newsId);
 }
 

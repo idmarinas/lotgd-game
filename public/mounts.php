@@ -5,8 +5,8 @@
 // translator ready
 require_once 'common.php';
 
-$op = \LotgdHttp::getQuery('op');
-$mountId = \LotgdHttp::getQuery('id');
+$op = \LotgdRequest::getQuery('op');
+$mountId = \LotgdRequest::getQuery('id');
 
 check_su_access(SU_EDIT_MOUNTS);
 
@@ -33,7 +33,7 @@ if ('deactivate' == $op)
     \Doctrine::persist($entity);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
     LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('activate' == $op)
@@ -44,7 +44,7 @@ elseif ('activate' == $op)
     \Doctrine::persist($entity);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
     LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('del' == $op)
@@ -59,7 +59,7 @@ elseif ('del' == $op)
     module_delete_objprefs('mounts', $mountId);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
     LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('give' == $op)
@@ -74,7 +74,7 @@ elseif ('give' == $op)
     apply_buff('mount', $buff);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 
 \Doctrine::flush();
@@ -100,11 +100,11 @@ elseif ('edit' == $op || 'add' == $op)
 
     \LotgdNavigation::addNav('mounts.nav.properties', "mounts.php?op=edit&id=$mountId");
     module_editor_navs('prefs-mounts', "mounts.php?op=edit&subop=module&id=$mountId&module=");
-    $subop = \LotgdHttp::getQuery('subop');
+    $subop = \LotgdRequest::getQuery('subop');
 
     if ('module' == $subop)
     {
-        $module = (string) \LotgdHttp::getQuery('module');
+        $module = (string) \LotgdRequest::getQuery('module');
 
         $form = module_objpref_edit('mounts', $module, $mountId);
 
@@ -118,9 +118,9 @@ elseif ('edit' == $op || 'add' == $op)
             $params['formTypeTab'] = $form->getOption('form_type_tab');
         }
 
-        if (\LotgdHttp::isPost())
+        if (\LotgdRequest::isPost())
         {
-            $post = \LotgdHttp::getPostAll();
+            $post = \LotgdRequest::getPostAll();
 
             if ($params['isLaminas'])
             {

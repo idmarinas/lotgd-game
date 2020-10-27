@@ -24,9 +24,9 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$subop = (string) \LotgdHttp::getQuery('subop');
-$page = (int) \LotgdHttp::getQuery('page');
+$op = (string) \LotgdRequest::getQuery('op');
+$subop = (string) \LotgdRequest::getQuery('subop');
+$page = (int) \LotgdRequest::getQuery('page');
 $subop = $subop ?: 'best';
 $op = $op ?: 'kills';
 $order = ('worst' == $subop) ? 'ASC' : 'DESC';

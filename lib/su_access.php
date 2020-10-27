@@ -92,8 +92,8 @@ function check_su_access($level)
             'mail.message',
             [
                 'name'    => $session['user']['name'],
-                'uri'     => \LotgdHttp::getServer('REQUEST_URI'),
-                'referer' => \LotgdHttp::getServer('HTTP_REFERER'),
+                'uri'     => \LotgdRequest::getServer('REQUEST_URI'),
+                'referer' => \LotgdRequest::getServer('HTTP_REFERER'),
             ],
             $textDomain,
         ];

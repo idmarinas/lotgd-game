@@ -4,9 +4,9 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$op = (string) \LotgdHttp::getQuery('op');
-$accountId = (int) \LotgdHttp::getQuery('acctid');
-$page = (int) \LotgdHttp::getQuery('page');
+$op = (string) \LotgdRequest::getQuery('op');
+$accountId = (int) \LotgdRequest::getQuery('acctid');
+$page = (int) \LotgdRequest::getQuery('page');
 
 $params = [
     'textDomain' => 'grotto-characterbackup',
@@ -37,7 +37,7 @@ if ('delete' == $op)
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t($message, ['path' => "{$path}/account-{$accountId}"], $params['textDomain']));
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($pathCharacterData))
 {
@@ -144,14 +144,14 @@ elseif ('restore' == $op && \file_exists($pathAccountData) && \file_exists($path
     $fileSystem->remove("{$path}/account-{$accountId}");
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 elseif ('restore' == $op && (! \file_exists($pathAccountData) || ! \file_exists($pathCharacterData)))
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.restore.miss.mandatory', [], $params['textDomain']));
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 
 if ('' == $op)

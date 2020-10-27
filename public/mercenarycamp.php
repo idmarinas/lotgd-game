@@ -27,8 +27,8 @@ $params = [
     'textDomain' => $textDomain,
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
-$skip = (int) \LotgdHttp::getQuery('skip');
+$op = (string) \LotgdRequest::getQuery('op');
+$skip = (int) \LotgdRequest::getQuery('skip');
 
 if ('' == $op)
 {
@@ -70,7 +70,7 @@ elseif ('heal' == $op)
 {
     $params['tpl'] = 'heal';
 
-    $name = stripslashes(rawurldecode(\LotgdHttp::getQuery('name')));
+    $name = stripslashes(rawurldecode(\LotgdRequest::getQuery('name')));
 
     $pointsToHeal = $companions[$name]['maxhitpoints'] - $companions[$name]['hitpoints'];
     $costToHeal = round(log($session['user']['level'] + 1) * ($pointsToHeal + 10) * 1.33);
@@ -100,7 +100,7 @@ elseif ('buy' == $op)
 
     $params['tpl'] = 'buy';
 
-    $companionId = (int) \LotgdHttp::getQuery('id');
+    $companionId = (int) \LotgdRequest::getQuery('id');
 
     $entity = $repository->find($companionId);
 

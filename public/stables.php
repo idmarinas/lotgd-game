@@ -42,8 +42,8 @@ if (! empty($playermount))
 }
 $confirm = 0;
 
-$op = (string) \LotgdHttp::getQuery('op');
-$mountId = (int) \LotgdHttp::getQuery('id');
+$op = (string) \LotgdRequest::getQuery('op');
+$mountId = (int) \LotgdRequest::getQuery('id');
 
 $mountRepository = \Doctrine::getRepository('LotgdCore:Mounts');
 
@@ -79,7 +79,7 @@ elseif ('buymount' == $op)
     else
     {
         $op = 'confirmbuy';
-        \LotgdHttp::setQuery('op', $op);
+        \LotgdRequest::setQuery('op', $op);
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-$order = (int) \LotgdHttp::getQuery('order');
+$order = (int) \LotgdRequest::getQuery('order');
 
 $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
 

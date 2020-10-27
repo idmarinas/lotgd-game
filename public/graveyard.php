@@ -16,7 +16,7 @@ unset($result);
 
 page_header('title', [], $textDomain);
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 $skipgraveyardtext = handle_event('graveyard');
 
@@ -117,7 +117,7 @@ if ($battle)
     {
         $battle = false;
         $op = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
         $skipgraveyardtext = true;
         $params['showGraveyardDesc'] = ! $skipgraveyardtext;
     }
@@ -234,7 +234,7 @@ elseif ('haunt2' == $op)
     \LotgdNavigation::addNav('nav.shades', 'shades.php');
     \LotgdNavigation::addNav('nav.return.mausoleum', 'graveyard.php?op=enter');
 
-    $name = (string) \LotgdHttp::getPost('name');
+    $name = (string) \LotgdRequest::getPost('name');
 
     $repository = \Doctrine::getRepository('LotgdCore:Characters');
     $params['characters'] = $repository->findLikeName("%{$name}%", 100);
@@ -261,7 +261,7 @@ elseif ('haunt3' == $op)
     \LotgdNavigation::addNav('nav.shades', 'shades.php');
     \LotgdNavigation::addNav('nav.return.mausoleum', 'graveyard.php?op=enter');
 
-    $characterId = (int) \LotgdHttp::getQuery('charid');
+    $characterId = (int) \LotgdRequest::getQuery('charid');
 
     $repository = \Doctrine::getRepository('LotgdCore:Characters');
     $params['character'] = $repository->find($characterId);

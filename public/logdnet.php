@@ -77,18 +77,18 @@ function lotgdsort($a, $b)
     return ($costa < $costb) ? -1 : 1;
 }
 
-$op = \LotgdHttp::getQuery('op');
+$op = \LotgdRequest::getQuery('op');
 
 if ('' == $op)
 {
     $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
 
-    $addy = (string) \LotgdHttp::getQuery('addy');
-    $desc = (string) \LotgdHttp::getQuery('desc');
-    $vers = (string) \LotgdHttp::getQuery('version');
-    $admin = (string) \LotgdHttp::getQuery('admin');
-    $count = (int) \LotgdHttp::getQuery('c') * 1;
-    $lang = (string) \LotgdHttp::getQuery('l');
+    $addy = (string) \LotgdRequest::getQuery('addy');
+    $desc = (string) \LotgdRequest::getQuery('desc');
+    $vers = (string) \LotgdRequest::getQuery('version');
+    $admin = (string) \LotgdRequest::getQuery('admin');
+    $count = (int) \LotgdRequest::getQuery('c') * 1;
+    $lang = (string) \LotgdRequest::getQuery('l');
 
     $vers = $vers ?: 'Unknown';
 
@@ -105,7 +105,7 @@ if ('' == $op)
         'address' => $addy,
         'lang' => $lang,
         'count' => $count,
-        'recentips' => \LotgdHttp::getServer('REMOTE_ADDR'),
+        'recentips' => \LotgdRequest::getServer('REMOTE_ADDR'),
         'description' => $desc,
         'version' => $vers,
         'admin' => $admin,
@@ -137,13 +137,13 @@ if ('' == $op)
     $repository->degradePopularity();
 
     //Now, if we're using version 2 of LoGDnet, we'll return the appropriate code.
-    $v = \LotgdHttp::getQuery('v');
+    $v = \LotgdRequest::getQuery('v');
 
     if ((int) $v >= 2)
     {
         $currency = getsetting('paypalcurrency', 'USD');
         $info = [];
-        $info[''] = '<!--data from '.\LotgdHttp::getServer('HTTP_HOST').'-->
+        $info[''] = '<!--data from '.\LotgdRequest::getServer('HTTP_HOST').'-->
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="business" value="logd@mightye.org">

@@ -2,9 +2,9 @@
 
 $form = \LotgdLocator::get('Lotgd\Core\Form\Configuration');
 
-if (\LotgdHttp::isPost())
+if (\LotgdRequest::isPost())
 {
-    $postSettings = \LotgdHttp::getPostAll();
+    $postSettings = \LotgdRequest::getPostAll();
     $form->setData($postSettings);
 
     $messageType = 'addErrorMessage';
@@ -55,7 +55,7 @@ $form->setData([
 ]);
 
 //-- Not set default values if is post request
-if ( ! \LotgdHttp::isPost())
+if ( ! \LotgdRequest::isPost())
 {
     $vals = \array_merge($settings->getArray(), $useful_vals);
 

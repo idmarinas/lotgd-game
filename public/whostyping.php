@@ -30,8 +30,8 @@ if ($fiveminuteload >= 8)
     exit();
 }
 
-$section = \LotgdHttp::getquery('section');
-$updateplayer = \LotgdHttp::getquery('updateplayer');
+$section = \LotgdRequest::getquery('section');
+$updateplayer = \LotgdRequest::getquery('updateplayer');
 $name = addslashes(($session['user']['name'] ?? ''));
 $now = time();
 

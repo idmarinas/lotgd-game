@@ -23,7 +23,7 @@ $params = [
 
 page_header('title', [], $textDomain);
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 $repository = \Doctrine::getRepository('LotgdCore:Weapons');
 
 //-- Change text domain for navigation
@@ -40,7 +40,7 @@ if ('' == $op)
 }
 elseif ('buy' == $op)
 {
-    $id = (int) \LotgdHttp::getQuery('id');
+    $id = (int) \LotgdRequest::getQuery('id');
 
     $params['opt'] = 'buy';
     $params['result'] = $repository->findOneWeaponById($id);

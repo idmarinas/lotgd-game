@@ -12,7 +12,7 @@ $textDomainNavigation = $result['textDomainNavigation'];
 
 page_header('title', [], $textDomain);
 
-$op = \LotgdHttp::getQuery('op');
+$op = \LotgdRequest::getQuery('op');
 
 $params = [
     'textDomain' => $textDomain,
@@ -27,8 +27,8 @@ if ('transfer' == $op)
 }
 elseif ('transfer2' == $op)
 {
-    $to = \LotgdHttp::getPost('to');
-    $amt = abs((int) \LotgdHttp::getPost('amount', 0));
+    $to = \LotgdRequest::getPost('to');
+    $amt = abs((int) \LotgdRequest::getPost('amount', 0));
     $params['opt'] = 'transfer2';
     $params['amount'] = $amt;
     $params['to'] = $to;
@@ -40,8 +40,8 @@ elseif ('transfer2' == $op)
 }
 elseif ('transfer3' == $op)
 {
-    $amt = abs((int) \LotgdHttp::getPost('amount'));
-    $to = (int) \LotgdHttp::getPost('to');
+    $amt = abs((int) \LotgdRequest::getPost('amount'));
+    $to = (int) \LotgdRequest::getPost('to');
     $maxout = $session['user']['level'] * getsetting('maxtransferout', 25);
     $params['opt'] = 'transfer3';
     $params['maxOut'] = $maxout;
@@ -117,7 +117,7 @@ elseif ('deposit' == $op)
 }
 elseif ('depositfinish' == $op)
 {
-    $amount = abs((int) \LotgdHttp::getPost('amount'));
+    $amount = abs((int) \LotgdRequest::getPost('amount'));
     $amount = (0 == $amount) ? $session['user']['gold'] : $amount;
 
     $params['amount'] = $amount;
@@ -145,14 +145,14 @@ elseif ('withdraw' == $op)
 }
 elseif ('withdrawfinish' == $op)
 {
-    $amount = abs((int) \LotgdHttp::getPost('amount'));
+    $amount = abs((int) \LotgdRequest::getPost('amount'));
     $amount = (0 == $amount) ? $session['user']['goldinbank'] : $amount;
 
     $params['opt'] = 'withdrawend';
     $params['amount'] = $amount;
     $params['withdrawal'] = false;
 
-    if ($amount > $session['user']['goldinbank'] && '' != \LotgdHttp::getPost('borrow'))
+    if ($amount > $session['user']['goldinbank'] && '' != \LotgdRequest::getPost('borrow'))
     {
         $lefttoborrow = $amount;
         $maxborrow = $session['user']['level'] * getsetting('borrowperlevel', 20);

@@ -10,9 +10,9 @@ check_su_access(SU_EDIT_EQUIPMENT);
 $values = [1 => 48, 225, 585, 990, 1575, 2250, 2790, 3420, 4230, 5040, 5850, 6840, 8010, 9000, 10350];
 
 $textDomain = 'grotto-armoreditor';
-$armorlevel = (int) \LotgdHttp::getQuery('level');
-$op = (string) \LotgdHttp::getQuery('op');
-$id = (int) \LotgdHttp::getQuery('id');
+$armorlevel = (int) \LotgdRequest::getQuery('level');
+$op = (string) \LotgdRequest::getQuery('op');
+$id = (int) \LotgdRequest::getQuery('id');
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Armor::class);
 
 $params = [

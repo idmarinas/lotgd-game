@@ -27,7 +27,7 @@ $params = [
     'acctOld' => $old
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 page_header('title.create', [], $textDomain);
 
@@ -49,7 +49,7 @@ if (getsetting('fullmaintenance', 0) || getsetting('maintenance', 0))
 
 if ('forgotval' == $op)
 {
-    $forgottenCode = \LotgdHttp::getQuery('id', 0);
+    $forgottenCode = \LotgdRequest::getQuery('id', 0);
 
     $account = $accountRepo->findOneBy(['forgottenpassword' => $forgottenCode]);
 
@@ -83,7 +83,7 @@ if ('forgotval' == $op)
 }
 elseif ('val' == $op)
 {
-    $code = \LotgdHttp::getQuery('id', 0);
+    $code = \LotgdRequest::getQuery('id', 0);
 
     $account = $accountRepo->findOneBy(['emailvalidation' => $code]);
 
@@ -158,7 +158,7 @@ elseif ('val' == $op)
 }
 elseif ('forgot' == $op)
 {
-    $charname = (string) \LotgdHttp::getPost('charname', '');
+    $charname = (string) \LotgdRequest::getPost('charname', '');
 
     if ($charname)
     {
@@ -190,8 +190,8 @@ elseif ('forgot' == $op)
             'login' => $account->getLogin(),
             'acctid' => $account->getAcctid(),
             'emailaddress' => $account->getEmailaddress(),
-            'requester_ip' => \LotgdHttp::getServer('REMOTE_ADDR'),
-            'gameurl' => '//'.(\LotgdHttp::getServer('SERVER_NAME').\LotgdHttp::getServer('SCRIPT_NAME')),
+            'requester_ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
+            'gameurl' => '//'.(\LotgdRequest::getServer('SERVER_NAME').\LotgdRequest::getServer('SCRIPT_NAME')),
             'forgottenid' => $account->getForgottenpassword(),
         ], 'app-mail', $language);
 
@@ -210,7 +210,7 @@ elseif ('forgot' == $op)
 elseif ('create' == $op)
 {
     $emailverification = '';
-    $shortname = trim((string) \LotgdHttp::getPost('name'));
+    $shortname = trim((string) \LotgdRequest::getPost('name'));
     $shortname = \LotgdSanitize::nameSanitize(getsetting('spaceinname', 0), $shortname);
     $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
 
@@ -222,9 +222,9 @@ elseif ('create' == $op)
     }
 
     $blockaccount = false;
-    $email = (string) \LotgdHttp::getPost('email');
-    $pass1 = (string) \LotgdHttp::getPost('pass1');
-    $pass2 = (string) \LotgdHttp::getPost('pass2');
+    $email = (string) \LotgdRequest::getPost('email');
+    $pass1 = (string) \LotgdRequest::getPost('pass1');
+    $pass2 = (string) \LotgdRequest::getPost('pass2');
 
     if (1 == getsetting('blockdupeemail', 0) && 1 == getsetting('requireemail', 0))
     {
@@ -238,7 +238,7 @@ elseif ('create' == $op)
         }
     }
 
-    $passlen = (int) \LotgdHttp::getPost('passlen');
+    $passlen = (int) \LotgdRequest::getPost('passlen');
 
     if ('!md5!' != substr($pass1, 0, 5) && '!md52!' != substr($pass1, 0, 6))
     {
@@ -275,7 +275,7 @@ elseif ('create' == $op)
         $blockaccount = true;
     }
 
-    $args = modulehook('check-create', \LotgdHttp::getPostAll());
+    $args = modulehook('check-create', \LotgdRequest::getPostAll());
 
     if (isset($args['blockaccount']) && $args['blockaccount'])
     {
@@ -297,7 +297,7 @@ elseif ('create' == $op)
         return redirect('create.php');
     }
 
-    $sex = (int) \LotgdHttp::getPost('sex');
+    $sex = (int) \LotgdRequest::getPost('sex');
     // Inserted the following line to prevent hacking
     // Reported by Eliwood
     if (SEX_MALE != $sex)
@@ -313,7 +313,7 @@ elseif ('create' == $op)
     {
         $emailverification = md5(date('Y-m-d H:i:s').$email);
     }
-    $refer = \LotgdHttp::getQuery('r');
+    $refer = \LotgdRequest::getQuery('r');
 
     $referer = 0;
 
@@ -342,8 +342,8 @@ elseif ('create' == $op)
             ->setPassword((string) $dbpass)
             ->setSuperuser((int) getsetting('defaultsuperuser', 0))
             ->setRegdate(new \DateTime())
-            ->setUniqueid(\LotgdHttp::getCookie('lgi') ?: '')
-            ->setLastip(\LotgdHttp::getServer('REMOTE_ADDR'))
+            ->setUniqueid(\LotgdRequest::getCookie('lgi') ?: '')
+            ->setLastip(\LotgdRequest::getServer('REMOTE_ADDR'))
             ->setEmailaddress($email)
             ->setEmailvalidation($emailverification)
             ->setReferer($referer)
@@ -374,7 +374,7 @@ elseif ('create' == $op)
         \Doctrine::persist($accountEntity);
         \Doctrine::flush(); //-- Persist objects
 
-        $args = \LotgdHttp::getPostAll();
+        $args = \LotgdRequest::getPostAll();
         $args['acctid'] = $accountEntity->getAcctid();
         modulehook('process-create', $args);
 
@@ -385,7 +385,7 @@ elseif ('create' == $op)
                 'login' => $shortname,
                 'acctid' => $accountEntity->getAcctid(),
                 'emailaddress' => $accountEntity->getEmailaddress(),
-                'gameurl' => 'https://'.(\LotgdHttp::getServer('SERVER_NAME').'/'.\LotgdHttp::getServer('SCRIPT_NAME')),
+                'gameurl' => 'https://'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
                 'validationid' => $emailverification,
             ], 'app-mail');
 
@@ -420,7 +420,7 @@ elseif ('create' == $op)
     }
 }
 
-$refer = (string) \LotgdHttp::getQuery('r');
+$refer = (string) \LotgdRequest::getQuery('r');
 
 $params['refer'] = '';
 

@@ -5,9 +5,9 @@
 
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 
-$setrank   = (int) \LotgdHttp::getPost('setrank');
-$whoacctid = (int) \LotgdHttp::getPost('whoacctid');
-$remove    = (int) \LotgdHttp::getQuery('remove');
+$setrank   = (int) \LotgdRequest::getPost('setrank');
+$whoacctid = (int) \LotgdRequest::getPost('whoacctid');
+$remove    = (int) \LotgdRequest::getQuery('remove');
 
 if ($remove)
 {

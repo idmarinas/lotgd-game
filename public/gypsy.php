@@ -19,7 +19,7 @@ $params = [
     'cost' =>  $session['user']['level'] * 20
 ];
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);

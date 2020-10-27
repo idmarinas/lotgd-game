@@ -1,6 +1,6 @@
 <?php
 
-$clanId = (int) \LotgdHttp::getQuery('clanid');
+$clanId = (int) \LotgdRequest::getQuery('clanid');
 
 $charRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
@@ -10,13 +10,13 @@ $params['SU_AUDIT_MODERATION'] = $session['user']['superuser'] & SU_AUDIT_MODERA
 
 page_header('title.detail', ['clanName' => \LotgdSanitize::fullSanitize($params['clanDetail']->getClanname()), 'clanShortName' => $params['clanDetail']->getClanshort()]);
 
-if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost())
+if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdRequest::isPost())
 {
-    $clanName  = \LotgdSanitize::fullSanitize((string) \LotgdHttp::getPost('clanname'));
-    $clanShort = \LotgdSanitize::fullSanitize((string) \LotgdHttp::getPost('clanshort'));
+    $clanName  = \LotgdSanitize::fullSanitize((string) \LotgdRequest::getPost('clanname'));
+    $clanShort = \LotgdSanitize::fullSanitize((string) \LotgdRequest::getPost('clanshort'));
 
-    $blockDesc   = \LotgdHttp::getPost('block');
-    $unblockDesc = \LotgdHttp::getPost('unblock');
+    $blockDesc   = \LotgdRequest::getPost('block');
+    $unblockDesc = \LotgdRequest::getPost('unblock');
 
     if ($clanName && $clanShort)
     {
@@ -55,4 +55,4 @@ if (($session['user']['superuser'] & SU_AUDIT_MODERATION) && \LotgdHttp::isPost(
 }
 
 $params['membership'] = $charRepository->getClanMembershipList($clanId);
-$params['returnLink'] = \LotgdHttp::getServer('REQUEST_URI');
+$params['returnLink'] = \LotgdRequest::getServer('REQUEST_URI');

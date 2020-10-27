@@ -36,11 +36,11 @@ $params = [
 
 page_header('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
 
-$op = (string) \LotgdHttp::getQuery('op');
-$subop = (string) \LotgdHttp::getQuery('subop');
-$com = \LotgdHttp::getQuery('commentPage');
-$commenting = \LotgdHttp::getQuery('commenting');
-$comment = \LotgdHttp::getPost('comment');
+$op = (string) \LotgdRequest::getQuery('op');
+$subop = (string) \LotgdRequest::getQuery('subop');
+$com = \LotgdRequest::getQuery('commentPage');
+$commenting = \LotgdRequest::getQuery('commenting');
+$comment = \LotgdRequest::getPost('comment');
 
 $params['op'] = $op;
 
@@ -66,7 +66,7 @@ switch ($op)
         \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
     break;
     case 'bartender':
-        $action = (string) \LotgdHttp::getQuery('act');
+        $action = (string) \LotgdRequest::getQuery('act');
 
         $params['tpl'] = 'bartender';
         $params['action'] = $action;
@@ -76,7 +76,7 @@ switch ($op)
     case 'room':
         $params['tpl'] = 'room';
 
-        $pay = (int) \LotgdHttp::getQuery('pay');
+        $pay = (int) \LotgdRequest::getQuery('pay');
 
         \LotgdNavigation::addHeader('category.other');
         \LotgdNavigation::addNav('nav.return.inn', 'inn.php');
@@ -174,7 +174,7 @@ switch ($op)
             $session['user']['specialmisc'] = '';
             $skipinndesc = true;
             $op = '';
-            \LotgdHttp::setQuery('op', '');
+            \LotgdRequest::setQuery('op', '');
         }
 
         \LotgdNavigation::addHeader('category.do');

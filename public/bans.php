@@ -10,8 +10,8 @@ check_su_access(SU_EDIT_BANS);
 $textDomain = 'page-bans';
 $params = [ 'textDomain' => $textDomain ];
 
-$op = \LotgdHttp::getQuery('op');
-$userId = (int) \LotgdHttp::getQuery('userid');
+$op = \LotgdRequest::getQuery('op');
+$userId = (int) \LotgdRequest::getQuery('userid');
 
 page_header('title', [], $textDomain);
 
@@ -42,7 +42,7 @@ switch ($op)
     case 'searchban':
         $params['searchBan'] = true;
 
-        $target = (string) \LotgdHttp::getPost('target');
+        $target = (string) \LotgdRequest::getPost('target');
 
     case 'removeban':
     case 'delban':
@@ -55,18 +55,18 @@ switch ($op)
         $params['opt'] = 'default';
 
         $repoAcctEveryPage = \Doctrine::getRepository(\Lotgd\Core\Entity\AccountsEverypage::class);
-        $page = (int) \LotgdHttp::getQuery('page');
-        $sort = (string) \LotgdHttp::getQuery('sort');
+        $page = (int) \LotgdRequest::getQuery('page');
+        $sort = (string) \LotgdRequest::getQuery('sort');
         $order = (string) ($sort ?: 'acctid');
 
-        $query = (string) \LotgdHttp::getPost('q');
-        $query = (string) ($query ?: \LotgdHttp::getQuery('q'));
+        $query = (string) \LotgdRequest::getPost('q');
+        $query = (string) ($query ?: \LotgdRequest::getQuery('q'));
 
         $params['query'] = $query ? "q={$query}" : '';
         $params['paginator'] = $repository->bansSearchAccts($query, $order, $page);
         $params['stats'] = $repoAcctEveryPage->getStatsPageGen();
 
-        $params['paginatorLink'] = \LotgdHttp::getServer('REQUEST_URI');
+        $params['paginatorLink'] = \LotgdRequest::getServer('REQUEST_URI');
     break;
 }
 

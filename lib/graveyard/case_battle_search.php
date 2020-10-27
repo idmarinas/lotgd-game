@@ -4,7 +4,7 @@ if ($session['user']['gravefights'] <= 0)
 {
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.no.torments', [], $textDomain));
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 else
 {
@@ -26,7 +26,7 @@ else
         $session['user']['specialmisc'] = '';
         $skipgraveyardtext              = true;
         $op                             = '';
-        \LotgdHttp::setQuery('op', '');
+        \LotgdRequest::setQuery('op', '');
     }
     else
     {

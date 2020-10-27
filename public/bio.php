@@ -8,8 +8,8 @@ require_once 'common.php';
 $textDomain = 'page-bio';
 checkday();
 
-$ret = \LotgdHttp::getQuery('ret');
-$char = \LotgdHttp::getQuery('char');
+$ret = \LotgdRequest::getQuery('ret');
+$char = \LotgdRequest::getQuery('char');
 
 $return = 'list.php';
 if ($ret)

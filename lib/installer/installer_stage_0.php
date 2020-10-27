@@ -16,11 +16,11 @@ if (DB_CHOSEN)
         $needsauthentication = true;
     }
 
-    $name = \LotgdHttp::getPost('username', '');
+    $name = \LotgdRequest::getPost('username', '');
 
     if ($name > '')
     {
-        $password = \stripslashes((string) \LotgdHttp::getPost('password', ''));
+        $password = \stripslashes((string) \LotgdRequest::getPost('password', ''));
         $result   = $acctRepository->getLoginSuperuserWithPermit($name, \md5(\md5($password)), SU_MEGAUSER);
 
         if (\count($result) > 0)

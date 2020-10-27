@@ -103,7 +103,7 @@ require_once 'lib/translator.php';
 require_once 'lib/jaxon.php';
 
 // Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdHttp::getServer('REQUEST_URI'), PHP_URL_PATH)))
+if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
 {
     return false;
 }
@@ -165,7 +165,7 @@ elseif (defined('IS_INSTALLER'))
 
 if ( ! IS_INSTALLER && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
-    && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
+    && 'installer.php' != substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     page_header('title.security', [], 'app-common');
@@ -186,7 +186,7 @@ if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
     $params = [
-        'server' => \LotgdHttp::getServer('SERVER_NAME'),
+        'server' => \LotgdRequest::getServer('SERVER_NAME'),
     ];
 
     rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/database.twig', $params));
@@ -270,7 +270,7 @@ elseif (getsetting('maintenance', 0))
     ]);
 }
 
-$script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
+$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
 mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
@@ -289,12 +289,12 @@ $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.p
 
 if (OVERRIDE_FORCED_NAV)
 {
-    $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')] = 1;
+    $nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')] = 1;
 }
 
-if ( ! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
+if ( ! isset($nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')])
 {
-    $session['user']['restorepage'] = LotgdHttp::getServer('REQUEST_URI');
+    $session['user']['restorepage'] = LotgdRequest::getServer('REQUEST_URI');
 }
 
 $session['user']['alive'] = false;
@@ -310,24 +310,24 @@ if ( ! is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
-$session['user']['lastip'] = LotgdHttp::getServer('REMOTE_ADDR');
+$session['user']['lastip'] = LotgdRequest::getServer('REMOTE_ADDR');
 
-if ( ! LotgdHttp::getCookie('lgi') || strlen(LotgdHttp::getCookie('lgi')) < 32)
+if ( ! LotgdRequest::getCookie('lgi') || strlen(LotgdRequest::getCookie('lgi')) < 32)
 {
     if ( ! isset($session['user']['uniqueid']) || strlen($session['user']['uniqueid']) < 32)
     {
         $u = md5(microtime());
-        LotgdHttp::setCookie('lgi', $u);
+        LotgdRequest::setCookie('lgi', $u);
         $session['user']['uniqueid'] = $u;
     }
     elseif (isset($session['user']['uniqueid']))
     {
-        LotgdHttp::setCookie('lgi', $session['user']['uniqueid']);
+        LotgdRequest::setCookie('lgi', $session['user']['uniqueid']);
     }
 }
-elseif (LotgdHttp::getCookie('lgi') && '' != LotgdHttp::getCookie('lgi'))
+elseif (LotgdRequest::getCookie('lgi') && '' != LotgdRequest::getCookie('lgi'))
 {
-    $session['user']['uniqueid'] = LotgdHttp::getCookie('lgi');
+    $session['user']['uniqueid'] = LotgdRequest::getCookie('lgi');
 }
 
 /**
@@ -335,13 +335,13 @@ elseif (LotgdHttp::getCookie('lgi') && '' != LotgdHttp::getCookie('lgi'))
  *
  * @TODO Add setting to configure if register or not.
  */
-$url  = LotgdHttp::getServer('SERVER_NAME');
-$uri  = LotgdHttp::getServer('HTTP_REFERER');
+$url  = LotgdRequest::getServer('SERVER_NAME');
+$uri  = LotgdRequest::getServer('HTTP_REFERER');
 $site = $uri ? parse_url($uri, PHP_URL_HOST) : '';
 
 if ($url != $site && $uri && $site)
 {
-    $url = sprintf('%s://%s/%s', LotgdHttp::getServer('REQUEST_SCHEME'), $url, LotgdHttp::getServer('REQUEST_URI'));
+    $url = sprintf('%s://%s/%s', LotgdRequest::getServer('REQUEST_SCHEME'), $url, LotgdRequest::getServer('REQUEST_URI'));
 
     $refererRepository = Doctrine::getRepository(\Lotgd\Core\Entity\Referers::class);
     $referers          = $refererRepository->findOneByUri($uri);
@@ -352,7 +352,7 @@ if ($url != $site && $uri && $site)
         ->setLast(new DateTime('now'))
         ->setSite($site)
         ->setDest($url)
-        ->setIp(LotgdHttp::getServer('REMOTE_ADDR'))
+        ->setIp(LotgdRequest::getServer('REMOTE_ADDR'))
     ;
 
     \Doctrine::merge($referers);

@@ -42,9 +42,9 @@ else
     LotgdNavigation::addNav('list.nav.full', 'list.php?page=1');
 }
 
-$op = \LotgdHttp::getQuery('op');
-$page = (int) \LotgdHttp::getQuery('page');
-$search = (string) \LotgdHttp::getPost('name');
+$op = \LotgdRequest::getQuery('op');
+$page = (int) \LotgdRequest::getQuery('page');
+$search = (string) \LotgdRequest::getPost('name');
 $playersperpage = 50;
 $params = [];
 

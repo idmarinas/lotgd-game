@@ -12,8 +12,8 @@ $textDomain = 'page-bios';
 
 page_header('title', [], $textDomain);
 
-$op = (string) \LotgdHttp::getQuery('op');
-$userid = (int) \LotgdHttp::getQuery('charid');
+$op = (string) \LotgdRequest::getQuery('op');
+$userid = (int) \LotgdRequest::getQuery('charid');
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
 

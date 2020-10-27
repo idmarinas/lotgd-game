@@ -60,8 +60,8 @@ trait Report
                         'date' => new \DateTime('now'),
                         'body' => $post,
                         'pageinfo' => $session,
-                        'ip' => \LotgdHttp::getServer('REMOTE_ADDR'),
-                        'id' => \LotgdHttp::getCookie('lgi')
+                        'ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
+                        'id' => \LotgdRequest::getCookie('lgi')
                     ]);
 
                     $session['user']['password'] = $p;

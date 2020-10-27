@@ -293,7 +293,7 @@ class Navigation
 
         if ($superuser & ~SU_DOESNT_GIVE_GROTTO)
         {
-            $script = \LotgdHttp::getServer('SCRIPT_NAME');
+            $script = \LotgdRequest::getServer('SCRIPT_NAME');
 
             if ('superuser.php' != $script)
             {

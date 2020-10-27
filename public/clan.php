@@ -14,7 +14,7 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 $costGold = (int) getsetting('goldtostartclan', 10000);
 $costGems = (int) getsetting('gemstostartclan', 15);
@@ -146,8 +146,8 @@ page_footer();
 function clanform()
 {
     $data = [
-        'clanname' => htmlentities(stripslashes(\LotgdHttp::getPost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
-        'clanshort' => htmlentities(stripslashes(\LotgdHttp::getPost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
+        'clanname' => htmlentities(stripslashes(\LotgdRequest::getPost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
+        'clanshort' => htmlentities(stripslashes(\LotgdRequest::getPost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
     ];
 
     rawoutput(LotgdTheme::renderThemeTemplate('page/clan/new.twig', $data));

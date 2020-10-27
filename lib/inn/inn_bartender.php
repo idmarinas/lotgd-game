@@ -2,8 +2,8 @@
 
 if ('bribe' == $action)
 {
-    $amt  = (int) \LotgdHttp::getQuery('amt');
-    $type = (string) \LotgdHttp::getQuery('type');
+    $amt  = (int) \LotgdRequest::getQuery('amt');
+    $type = (string) \LotgdRequest::getQuery('type');
 
     $params['type']   = $type;
     $params['amount'] = $amt;
@@ -121,7 +121,7 @@ elseif ('listupstairs' == $action)
 
     $params['paginator']  = $pvp->getPvpList($params['innName']);
     $params['sleepers']   = $pvp->getLocationSleepersCount($params['innName']);
-    $params['returnLink'] = \LotgdHttp::getServer('REQUEST_URI');
+    $params['returnLink'] = \LotgdRequest::getServer('REQUEST_URI');
     $params['pvpTimeOut'] = new \DateTime(\date('Y-m-d H:i:s', \strtotime("-{$pvptime} seconds")));
     $params['isInn']      = true;
 
@@ -131,8 +131,8 @@ elseif ('colors' == $action)
 {
     $outputColor = \LotgdLocator::get(\Lotgd\Core\Output\Collector::class);
 
-    $params['testText'] = (string) \LotgdHttp::getPost('testText');
-    $params['formUrl']  = (string) \LotgdHttp::getServer('REQUEST_URI');
+    $params['testText'] = (string) \LotgdRequest::getPost('testText');
+    $params['formUrl']  = (string) \LotgdRequest::getServer('REQUEST_URI');
 
     $colors = $outputColor->getColors();
 
@@ -145,8 +145,8 @@ elseif ('colors' == $action)
 }
 elseif ('specialty' == $action)
 {
-    $specialty = (string) \LotgdHttp::getQuery('specialty');
-    $uri       = (string) \LotgdHttp::getServer('REQUEST_URI');
+    $specialty = (string) \LotgdRequest::getQuery('specialty');
+    $uri       = (string) \LotgdRequest::getServer('REQUEST_URI');
 
     $params['specialty'] = $specialty;
 

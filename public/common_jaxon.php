@@ -107,7 +107,7 @@ require_once 'lib/translator.php';
 require_once 'lib/jaxon.php';
 
 // Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdHttp::getServer('REQUEST_URI'), PHP_URL_PATH)))
+if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
 {
     return false;
 }
@@ -157,7 +157,7 @@ elseif (defined('IS_INSTALLER'))
 
 if ( ! IS_INSTALLER && file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
-    && 'installer.php' != substr(\LotgdHttp::getServer('SCRIPT_NAME'), -13)
+    && 'installer.php' != substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     exit;
@@ -220,7 +220,7 @@ if (getsetting('fullmaintenance', 0))
     exit;
 }
 
-$script = substr(LotgdHttp::getServer('SCRIPT_NAME'), 0, strrpos(LotgdHttp::getServer('SCRIPT_NAME'), '.'));
+$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
 mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
@@ -239,12 +239,12 @@ $nokeeprestore = ['newday.php' => 1, 'badnav.php' => 1, 'motd.php' => 1, 'mail.p
 
 if (OVERRIDE_FORCED_NAV)
 {
-    $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')] = 1;
+    $nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')] = 1;
 }
 
-if ( ! isset($nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdHttp::getServer('SCRIPT_NAME')])
+if ( ! isset($nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')]) || ! $nokeeprestore[LotgdRequest::getServer('SCRIPT_NAME')])
 {
-    $session['user']['restorepage'] = LotgdHttp::getServer('REQUEST_URI');
+    $session['user']['restorepage'] = LotgdRequest::getServer('REQUEST_URI');
 }
 
 $session['user']['alive'] = false;
@@ -260,7 +260,7 @@ if ( ! is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
-$session['user']['lastip']    = LotgdHttp::getServer('REMOTE_ADDR');
+$session['user']['lastip']    = LotgdRequest::getServer('REMOTE_ADDR');
 $session['user']['superuser'] = $session['user']['superuser'] ?? 0;
 
 //check the account's hash to detect player cheats which

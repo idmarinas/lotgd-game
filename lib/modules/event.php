@@ -83,7 +83,7 @@ function module_events($eventtype, $basechance, $baseLink = false)
 
     if ( ! $baseLink)
     {
-        $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
 
         $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
@@ -110,10 +110,10 @@ function module_events($eventtype, $basechance, $baseLink = false)
                     [],
                     'partial-event',
                 ];
-                $op = \LotgdHttp::getQuery('op');
-                \LotgdHttp::setQuery('op', '');
+                $op = \LotgdRequest::getQuery('op');
+                \LotgdRequest::setQuery('op', '');
                 module_do_event($eventtype, $event['modulename'], false, $baseLink);
-                \LotgdHttp::setQuery('op', $op);
+                \LotgdRequest::setQuery('op', $op);
 
                 return 1;
             }
@@ -130,7 +130,7 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
 
     if (false === $baseLink)
     {
-        $PHP_SELF = LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = LotgdRequest::getServer('PHP_SELF');
 
         $baseLink = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1).'?';
     }
@@ -149,7 +149,7 @@ function module_do_event($type, $module, $allowinactive = false, $baseLink = fal
         $fname         = $module.'_runevent';
         $fname($type, $baseLink);
         //hook into the running event, but only in *this* running event, not in all
-        modulehook("runevent_{$module}", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdHttp::getQueryAll(), 'post' => \LotgdHttp::getPostAll()]);
+        modulehook("runevent_{$module}", ['type' => $type, 'baselink' => $baseLink, 'get' => \LotgdRequest::getQueryAll(), 'post' => \LotgdRequest::getPostAll()]);
         //revert nav section after we're done here.
         $navsection = $oldnavsection;
     }
@@ -175,7 +175,7 @@ function module_display_events($eventtype, $forcescript = false)
 
     if ( ! $forcescript)
     {
-        $PHP_SELF = \LotgdHttp::getServer('PHP_SELF');
+        $PHP_SELF = \LotgdRequest::getServer('PHP_SELF');
         $script   = \substr($PHP_SELF, \strrpos($PHP_SELF, '/') + 1);
     }
 

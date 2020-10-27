@@ -1,10 +1,10 @@
 <?php
 
-$type = (string) \LotgdHttp::getPost('type');
+$type = (string) \LotgdRequest::getPost('type');
 
 if ($type > '')
 {
-    $session['installer']['fromversion'] = \LotgdHttp::getPost('version');
+    $session['installer']['fromversion'] = \LotgdRequest::getPost('version');
 
     if ('install' == $type)
     {

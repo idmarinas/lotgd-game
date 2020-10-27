@@ -11,8 +11,8 @@ require_once 'common.php';
 require_once 'lib/dump_item.php';
 require_once 'lib/modules.php';
 
-$module =  (string) \LotgdHttp::getQuery('module');
-$admin = (bool) \LotgdHttp::getQuery('admin');
+$module =  (string) \LotgdRequest::getQuery('module');
+$admin = (bool) \LotgdRequest::getQuery('admin');
 
 if (injectmodule($module, $admin))
 {

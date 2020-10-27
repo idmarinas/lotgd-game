@@ -40,7 +40,7 @@ trait Commentary
         $this->textDomain           = $textDomain; //-- Default text domain for commentary block
         $session['user']['chatloc'] = $commentary['section'];
 
-        $page = (int) \LotgdHttp::getQuery('commentPage', 1);
+        $page = (int) \LotgdRequest::getQuery('commentPage', 1);
 
         $comments = $this->getCommentary()->getComments($commentary['section'], $page, $limit);
 
@@ -50,7 +50,7 @@ trait Commentary
             'comments'          => $comments,
             'showPagination'    => $showPagination,
             'canAddComment'     => $canAddComment,
-            'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdHttp::getServer('REQUEST_URI'),
+            'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdRequest::getServer('REQUEST_URI'),
             'formUrl'           => $this->commentaryFormUrl(),
             'SU_EDIT_COMMENTS'  => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
@@ -72,7 +72,7 @@ trait Commentary
             'textDomain'              => $textDomain,
             'commentary'              => $commentary,
             'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
-            'returnLink'              => \LotgdHttp::getServer('REQUEST_URI'),
+            'returnLink'              => \LotgdRequest::getServer('REQUEST_URI'),
             'SU_EDIT_COMMENTS'        => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
@@ -190,7 +190,7 @@ trait Commentary
      */
     public function saveComment(): void
     {
-        $moderate = \LotgdHttp::getPost('hideComment');
+        $moderate = \LotgdRequest::getPost('hideComment');
 
         if ($moderate)
         {
@@ -199,7 +199,7 @@ trait Commentary
             return;
         }
 
-        $data = \LotgdHttp::getPostAll();
+        $data = \LotgdRequest::getPostAll();
 
         if ( ! $data || empty($data))
         {
@@ -237,7 +237,7 @@ trait Commentary
      */
     protected function commentaryFormUrl(): string
     {
-        $url = \LotgdHttp::getServer('REQUEST_URI');
+        $url = \LotgdRequest::getServer('REQUEST_URI');
 
         //-- Sanitize link: Delete previous queries of: "page", "c", "commentPage" and "frombio"
         $url = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);

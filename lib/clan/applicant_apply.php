@@ -1,6 +1,6 @@
 <?php
 
-$clanId = (int) \LotgdHttp::getQuery('clanid');
+$clanId = (int) \LotgdRequest::getQuery('clanid');
 
 $clanRepository = \Doctrine::getRepository(\Lotgd\Core\Entity\Clans::class);
 
@@ -47,7 +47,7 @@ if ($clanId > 0)
     return redirect('clan.php?op=waiting');
 }
 
-$order = (int) \LotgdHttp::getQuery('order');
+$order = (int) \LotgdRequest::getQuery('order');
 
 $params['clanList'] = $clanRepository->getClanListWithMembersCount($order);
 

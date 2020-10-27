@@ -26,8 +26,8 @@ page_header('title', [], $textDomain);
 \LotgdNavigation::addHeader('companions.category.editor');
 \LotgdNavigation::addNav('companions.nav.add', 'companions.php?op=add');
 
-$op = (string) \LotgdHttp::getQuery('op');
-$id = (int) \LotgdHttp::getQuery('id');
+$op = (string) \LotgdRequest::getQuery('op');
+$id = (int) \LotgdRequest::getQuery('id');
 
 if ('deactivate' == $op)
 {
@@ -37,7 +37,7 @@ if ('deactivate' == $op)
     \Doctrine::persist($companionEntity);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 
     LotgdCache::removeItem("companionsdata-{$id}");
 }
@@ -49,7 +49,7 @@ elseif ('activate' == $op)
     \Doctrine::persist($companionEntity);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 
     LotgdCache::removeItem("companiondata-{$id}");
 }
@@ -60,7 +60,7 @@ elseif ('del' == $op)
     \Doctrine::remove($companionEntity);
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 
     module_delete_objprefs('companions', $id);
     LotgdCache::removeItem("companiondata-$id");
@@ -95,7 +95,7 @@ elseif ('take' == $op)
     }
 
     $op = '';
-    \LotgdHttp::setQuery('op', '');
+    \LotgdRequest::setQuery('op', '');
 }
 
 unset($companionEntity);
@@ -116,11 +116,11 @@ elseif ('edit' == $op || 'add' == $op)
 
     module_editor_navs('prefs-companions', "companions.php?op=edit&subop=module&id={$id}&module=");
 
-    $subop = (string) \LotgdHttp::getQuery('subop');
+    $subop = (string) \LotgdRequest::getQuery('subop');
 
     if ('module' == $subop)
     {
-        $module = (string) \LotgdHttp::getQuery('module');
+        $module = (string) \LotgdRequest::getQuery('module');
 
         $form = module_objpref_edit('companions', $module, $id);
 
@@ -134,9 +134,9 @@ elseif ('edit' == $op || 'add' == $op)
             $params['formTypeTab'] = $form->getOption('form_type_tab');
         }
 
-        if (\LotgdHttp::isPost())
+        if (\LotgdRequest::isPost())
         {
-            $post = \LotgdHttp::getPostAll();
+            $post = \LotgdRequest::getPostAll();
 
             if ($params['isLaminas'])
             {

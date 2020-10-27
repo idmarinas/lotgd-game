@@ -22,7 +22,7 @@ trait CoreFunction
      */
     public function baseUrl(string $query): string
     {
-        return \sprintf('//%s/%s', \LotgdHttp::getServer('SERVER_NAME'), $query);
+        return \sprintf('//%s/%s', \LotgdRequest::getServer('SERVER_NAME'), $query);
     }
 
     /**

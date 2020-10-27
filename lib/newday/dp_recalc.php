@@ -11,7 +11,7 @@ foreach ($labels as $type => $label)
     {
         continue;
     } //got a headline here
-    $pdks[$type] = (int) \LotgdHttp::getPost($type);
+    $pdks[$type] = (int) \LotgdRequest::getPost($type);
     $pdktotal += (int) $pdks[$type];
 
     if ((int) $pdks[$type] < 0)

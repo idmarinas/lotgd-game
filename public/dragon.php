@@ -23,11 +23,11 @@ $params = [
 page_header('title', [], $textDomain);
 
 $battle = false;
-$op = (string) \LotgdHttp::getQuery('op');
+$op = (string) \LotgdRequest::getQuery('op');
 
 if ('' == $op)
 {
-    if (! \LotgdHttp::getQuery('nointro'))
+    if (! \LotgdRequest::getQuery('nointro'))
     {
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('battle.combat.run', [], $textDomain));
     }
@@ -57,7 +57,7 @@ if ('' == $op)
 }
 elseif ('prologue' == $op)
 {
-    $flawless = (int) \LotgdHttp::getQuery('flawless');
+    $flawless = (int) \LotgdRequest::getQuery('flawless');
 
     $params['flawless'] = $flawless;
     $params['creatureName'] = $badguy['creaturename'];
@@ -215,7 +215,7 @@ elseif ('run' == $op)
     $op = 'fight';
     $battle = true;
 
-    \LotgdHttp::setQuery('op', 'fight');
+    \LotgdRequest::setQuery('op', 'fight');
 }
 elseif ('fight' == $op)
 {

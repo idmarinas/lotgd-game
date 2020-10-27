@@ -9,7 +9,7 @@ check_su_access(0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO);
 
 $textDomain = 'grotto-superuser';
 
-$op = \LotgdHttp::getQuery('op');
+$op = \LotgdRequest::getQuery('op');
 
 if ('keepalive' == $op)
 {
@@ -21,7 +21,7 @@ if ('keepalive' == $op)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    echo '<html><meta http-equiv="Refresh" content="30;url='.LotgdHttp::getServer('REQUEST_URI').'"></html><body>'.date('Y-m-d H:i:s').'</body></html>';
+    echo '<html><meta http-equiv="Refresh" content="30;url='.LotgdRequest::getServer('REQUEST_URI').'"></html><body>'.date('Y-m-d H:i:s').'</body></html>';
 
     exit();
 }

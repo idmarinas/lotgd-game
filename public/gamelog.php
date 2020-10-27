@@ -17,11 +17,11 @@ page_header('title', [], $textDomain);
 \LotgdNavigation::addHeader('common.nav.navigation');
 \LotgdNavigation::superuserGrottoNav();
 
-$category = (string) \LotgdHttp::getQuery('cat');
-$sortorder = (int) \LotgdHttp::getQuery('sortorder'); // 0 = DESC 1= ASC
-$sortby = (string) \LotgdHttp::getQuery('sortby');
+$category = (string) \LotgdRequest::getQuery('cat');
+$sortorder = (int) \LotgdRequest::getQuery('sortorder'); // 0 = DESC 1= ASC
+$sortby = (string) \LotgdRequest::getQuery('sortby');
 $asc_desc = (0 == $sortorder ? 'DESC' : 'ASC');
-$page = (int) \LotgdHttp::getQuery('page');
+$page = (int) \LotgdRequest::getQuery('page');
 
 $params = [];
 $repository = \Doctrine::getRepository('LotgdCore:Gamelog');

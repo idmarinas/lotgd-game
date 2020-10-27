@@ -50,7 +50,7 @@ class Petition extends AjaxAbstract
                 if ($form->isValid())
                 {
                     $post  = $form->getData();
-                    $count = $repository->getCountPetitionsForNetwork(\LotgdHttp::getServer('REMOTE_ADDR'), \LotgdHttp::getCookie('lgi'));
+                    $count = $repository->getCountPetitionsForNetwork(\LotgdRequest::getServer('REMOTE_ADDR'), \LotgdRequest::getCookie('lgi'));
 
                     if ($count >= 5 || (($session['user']['superuser'] ?? false) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
                     {
@@ -83,8 +83,8 @@ class Petition extends AjaxAbstract
                         'date'     => new \DateTime('now'),
                         'body'     => $post,
                         'pageinfo' => $session,
-                        'ip'       => \LotgdHttp::getServer('REMOTE_ADDR'),
-                        'id'       => \LotgdHttp::getCookie('lgi'),
+                        'ip'       => \LotgdRequest::getServer('REMOTE_ADDR'),
+                        'id'       => \LotgdRequest::getCookie('lgi'),
                     ]);
 
                     $session['user']['password'] = $p;
@@ -191,7 +191,7 @@ class Petition extends AjaxAbstract
         require_once 'lib/systemmail.php';
 
         $date = \date('Y-m-d H:i:s');
-        $url  = getsetting('serverurl', \LotgdHttp::getServer('SERVER_NAME'));
+        $url  = getsetting('serverurl', \LotgdRequest::getServer('SERVER_NAME'));
 
         if ( ! \preg_match('/\\/$/', $url))
         {
@@ -203,7 +203,7 @@ class Petition extends AjaxAbstract
         $tlAuthor  = \LotgdTranslator::t('section.default.petition.mail.author', [], self::TEXT_DOMAIN);
         $tlDate    = \LotgdTranslator::t('section.default.petition.mail.date', [], self::TEXT_DOMAIN);
         $tlBody    = \LotgdTranslator::t('section.default.petition.mail.body', [], self::TEXT_DOMAIN);
-        $tlSubject = \LotgdTranslator::t('section.default.petition.mail.subject', ['url' => \LotgdHttp::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
+        $tlSubject = \LotgdTranslator::t('section.default.petition.mail.subject', ['url' => \LotgdRequest::getServer('SERVER_NAME')], self::TEXT_DOMAIN);
 
         $msg = "{$tlServer}: {$url}\n";
         $msg .= "{$tlAuthor}: {$name}\n";

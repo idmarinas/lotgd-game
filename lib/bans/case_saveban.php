@@ -1,11 +1,11 @@
 <?php
 
-$type         = (string) \LotgdHttp::getPost('type');
-$valueIp      = (string) \LotgdHttp::getPost('ip');
-$valueId      = (string) \LotgdHttp::getPost('id');
-$durationDays = (int) \LotgdHttp::getPost('duration');
+$type         = (string) \LotgdRequest::getPost('type');
+$valueIp      = (string) \LotgdRequest::getPost('ip');
+$valueId      = (string) \LotgdRequest::getPost('id');
+$durationDays = (int) \LotgdRequest::getPost('duration');
 $durationDays = \max(0, $durationDays); //-- Min value is 0
-$reason       = (string) \LotgdHttp::getPost('reason');
+$reason       = (string) \LotgdRequest::getPost('reason');
 
 $duration = new \DateTime('0000-00-00');
 
@@ -17,12 +17,12 @@ if ($durationDays)
 
 $process = true;
 
-if ('ip' == $type && \substr(\LotgdHttp::getServer('REMOTE_ADDR'), 0, \strlen($valueIp)) == $valueIp)
+if ('ip' == $type && \substr(\LotgdRequest::getServer('REMOTE_ADDR'), 0, \strlen($valueIp)) == $valueIp)
 {
     $process = false;
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('saveban.yourself.ip', [], $textDomain));
 }
-elseif ('id' == $type && \LotgdHttp::getCookie('lgi') == $valueId)
+elseif ('id' == $type && \LotgdRequest::getCookie('lgi') == $valueId)
 {
     $process = false;
     \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('saveban.yourself.id', [], $textDomain));

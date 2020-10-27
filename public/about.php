@@ -10,7 +10,7 @@ require_once 'lib/showform.php';
 page_header('title', [], 'page-about');
 
 checkday();
-$op = LotgdHttp::getQuery('op');
+$op = LotgdRequest::getQuery('op');
 
 if ($session['user']['loggedin'])
 {

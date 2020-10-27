@@ -10,8 +10,8 @@ global $session, $fiveminuteload;
 
 require_once 'common.php';
 
-$op    = (string) \LotgdHttp::getQuery('op');
-$class = (string) \LotgdHttp::getQuery('cache');
+$op    = (string) \LotgdRequest::getQuery('op');
+$class = (string) \LotgdRequest::getQuery('cache');
 
 $textDomain = 'ajax-datacache';
 
@@ -68,7 +68,7 @@ elseif (\LotgdLocator::has($class))
     }
     elseif ('clearbyprefix' == $op)
     {
-        $prefix = \LotgdHttp::getQuery('prefix');
+        $prefix = \LotgdRequest::getQuery('prefix');
 
         $cache->clearByPrefix($prefix);
 
