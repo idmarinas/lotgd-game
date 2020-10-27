@@ -4,18 +4,18 @@
 // addnews ready
 // mail ready
 
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-if (LotgdHttp::existInPost('template'))
+if (\LotgdRequest::existInPost('template'))
 {
-    $skin = LotgdHttp::getPost('template');
+    $skin = \LotgdRequest::getPost('template');
 
     if ($skin > '')
     {
-        LotgdHttp::setCookie('template', $skin, strtotime('+45 days'));
-        LotgdTheme::setDefaultSkin($skin);
+        \LotgdRequest::setCookie('template', $skin, \strtotime('+45 days'));
+        \LotgdTheme::setDefaultSkin($skin);
     }
 }
 
@@ -24,52 +24,45 @@ if ($session['loggedin'] ?? false)
     return redirect('badnav.php');
 }
 
-$op = \LotgdHttp::getQuery('op');
+//-- Init page
+\LotgdResponse::pageStart('title', [], 'page-home');
 
-page_header('title', [], 'page-home');
-
-LotgdNavigation::addHeader('home.category.new');
-LotgdNavigation::addNav('home.nav.create', 'create.php');
-
-LotgdNavigation::addHeader('home.category.func');
-LotgdNavigation::addNav('home.nav.forgot', 'create.php?op=forgot');
-LotgdNavigation::addNav('home.nav.list', 'list.php');
-LotgdNavigation::addNav('home.nav.news', 'news.php');
-
-LotgdNavigation::addHeader('home.category.other');
-LotgdNavigation::addNav('home.nav.about', 'about.php');
-LotgdNavigation::addNav('home.nav.setup', 'about.php?op=setup');
-LotgdNavigation::addNav('home.nav.net', 'logdnet.php?op=list');
+$op = \LotgdRequest::getQuery('op');
 
 //-- Parameters to be passed to the template
 $params = [
-    'villagename' => getsetting('villagename', LOCATION_FIELDS),
-    'includeTemplatesPre' => [], //-- Templates that are in top of content (but below of title)
+    'villagename'           => getsetting('villagename', LOCATION_FIELDS),
+    'includeTemplatesPre'   => [], //-- Templates that are in top of content (but below of title)
     'includeTemplatesIndex' => [], //-- Templates that are in index below of new player
-    'includeTemplatesPost' => [] //-- Templates that are in bottom of content
+    'includeTemplatesPost'  => [], //-- Templates that are in bottom of content
+    'gameclock'             => getsetting('homecurtime', 1) ? getgametime() : null,
+    'newdaytimer'           => getsetting('homenewdaytime', 1) ? secondstonextgameday() : null,
 ];
 
-if (getsetting('homecurtime', 1))
-{
-    $params['gameclock'] = getgametime();
-}
+\LotgdNavigation::addHeader('home.category.new');
+\LotgdNavigation::addNav('home.nav.create', 'create.php');
 
-if (getsetting('homenewdaytime', 1))
-{
-    $params['newdaytimer'] = secondstonextgameday();
-}
+\LotgdNavigation::addHeader('home.category.func');
+\LotgdNavigation::addNav('home.nav.forgot', 'create.php?op=forgot');
+\LotgdNavigation::addNav('home.nav.list', 'list.php');
+\LotgdNavigation::addNav('home.nav.news', 'news.php');
+
+\LotgdNavigation::addHeader('home.category.other');
+\LotgdNavigation::addNav('home.nav.about', 'about.php');
+\LotgdNavigation::addNav('home.nav.setup', 'about.php?op=setup');
+\LotgdNavigation::addNav('home.nav.net', 'logdnet.php?op=list');
 
 //-- Get newest player name if show in home page
 if (getsetting('homenewestplayer', 1))
 {
     $name = (string) getsetting('newestPlayerName', '');
-    $old = (int) getsetting('newestPlayerOld', 0);
-    $new = (int) getsetting('newestplayer', 0);
+    $old  = (int) getsetting('newestPlayerOld', 0);
+    $new  = (int) getsetting('newestplayer', 0);
 
     if (0 != $new && $old != $new)
     {
         $character = Doctrine::getRepository(\Lotgd\Core\Entity\Characters::class);
-        $name = $character->getCharacterNameFromAcctId($new);
+        $name      = $character->getCharacterNameFromAcctId($new);
         savesetting('newestPlayerName', $name);
         savesetting('newestPlayerOld', $new);
     }
@@ -77,36 +70,39 @@ if (getsetting('homenewestplayer', 1))
     $params['newestplayer'] = $name;
 }
 
-if (abs(getsetting('OnlineCountLast', 0) - strtotime('now')) > 60)
+if (\abs(getsetting('OnlineCountLast', 0) - \strtotime('now')) > 60)
 {
     $account = Doctrine::getRepository(\Lotgd\Core\Entity\Accounts::class);
 
     savesetting('OnlineCount', $account->getCountAcctsOnline((int) getsetting('LOGINTIMEOUT', 900)));
-    savesetting('OnlineCountLast', strtotime('now'));
+    savesetting('OnlineCountLast', \strtotime('now'));
 }
 
 $params['OnlineCount'] = getsetting('OnlineCount', 0);
 
 $results = modulehook('hometext', []);
-if(is_array($results) && count($results))
+
+if (\is_array($results) && \count($results))
 {
     $params['hookHomeText'] = $results;
 }
 
-if (! LotgdHttp::getCookie('lgi'))
+if ( ! \LotgdRequest::getCookie('lgi'))
 {
-    LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'app-default'));
-    LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('session.cookies.info', [], 'app-default'));
+    \LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'app-default'));
+    \LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('session.cookies.info', [], 'app-default'));
 }
 
 $params['serverFull'] = true;
+
 if ($params['OnlineCount'] < getsetting('maxonline', 0) || 0 == getsetting('maxonline', 0))
 {
     $params['serverFull'] = false;
 }
 
 $results = modulehook('homemiddle', []);
-if(is_array($results) && count($results))
+
+if (\is_array($results) && \count($results))
 {
     $params['hookHomeMiddle'] = $results;
 }
@@ -117,9 +113,10 @@ $params['loginBanner'] = getsetting('loginbanner');
 $params['serverVersion'] = \Lotgd\Core\Application::VERSION;
 
 $params['selectSkin'] = false;
+
 if (getsetting('homeskinselect', 1))
 {
-    $prefs['template'] = LotgdHttp::getCookie('template') ?: '';
+    $prefs['template'] = LotgdRequest::getCookie('template') ?: '';
 
     if ('' == $prefs['template'])
     {
@@ -133,6 +130,7 @@ if (getsetting('homeskinselect', 1))
 }
 
 $params = modulehook('page-home-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/home.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/home.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
