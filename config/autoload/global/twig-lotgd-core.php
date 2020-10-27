@@ -51,6 +51,7 @@ return [
 
         //-- Added in version 4.5.0
         Lotgd\Core\Twig\Extension\Head::class,
+        Lotgd\Core\Twig\Extension\Donation::class, //-- Twig functions for donation buttons (Paypal buttons)
 
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
