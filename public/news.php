@@ -12,7 +12,8 @@ if ($session['user']['loggedin'] ?? false)
     checkday();
 }
 
-page_header('title', [], 'page-news');
+//-- Init page
+\LotgdResponse::pageStart('title', [], 'page-news');
 
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 
@@ -95,6 +96,7 @@ if ($session['user']['loggedin'])
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
 $params = modulehook('page-news-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/news.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/news.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
