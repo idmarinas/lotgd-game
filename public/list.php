@@ -7,7 +7,8 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-page_header('title', [], 'page-list');
+//-- Init page
+\LotgdResponse::pageStart('title', [], 'page-list');
 
 if ($session['user']['loggedin'])
 {
@@ -120,6 +121,7 @@ $params['result'] = $result;
 DB::pagination($result, 'list.php');
 
 $params = modulehook('page-list-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/list.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::renderTheme('pages/list.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

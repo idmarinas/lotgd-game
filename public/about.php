@@ -7,7 +7,8 @@ define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/showform.php';
 
-page_header('title', [], 'page-about');
+//-- Init page
+\LotgdResponse::pageStart('title', [], 'page-about');
 
 checkday();
 $op = LotgdRequest::getQuery('op');
@@ -28,20 +29,24 @@ LotgdNavigation::addNav('about.nav.setup', 'about.php?op=setup');
 LotgdNavigation::addNav('about.nav.module', 'about.php?op=listmodules');
 LotgdNavigation::addNav('about.nav.license', 'about.php?op=license');
 
-$params = [];
+$params = [
+    'block_tpl' => 'about_home'
+];
+
 if ('listmodules' == $op)
 {
     LotgdNavigation::blockLink('about.php?op=listmodules');
 
+    $params['block_tpl'] = 'about_modules';
+
     $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Modules::class);
     $params['result'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'formalname' => 'ASC']);
-
-    $params = modulehook('page-about-modules-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/about/modules.twig', $params));
 }
 elseif ('setup' == $op)
 {
     LotgdNavigation::blockLink('about.php?op=setup');
+
+    $params['block_tpl'] = 'about_setup';
 
     $details = gametimedetails();
     $secstonextday = secondstonextgameday($details);
@@ -70,16 +75,12 @@ elseif ('setup' == $op)
     $form->setData($data);
 
     $params['form'] = $form;
-
-    $params = modulehook('page-about-setup-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/about/setup.twig', $params));
 }
 elseif ('license' == $op)
 {
     LotgdNavigation::blockLink('about.php?op=license');
 
-    $params = modulehook('page-about-license-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/about/license.twig', $params));
+    $params['block_tpl'] = 'about_license';
 }
 else
 {
@@ -90,9 +91,10 @@ else
     {
         $params['hookAbout'] = $results;
     }
-
-    $params = modulehook('page-about-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/about.twig', $params));
 }
 
-page_footer();
+$params = modulehook('page-about-tpl-params', $params);
+\LotgdResponse::pageAddContent(LotgdTheme::render('@core/pages/about.html.twig', $params));
+
+//-- Finalize page
+\LotgdResponse::pageEnd();
