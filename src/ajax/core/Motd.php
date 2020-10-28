@@ -14,10 +14,10 @@
 namespace Lotgd\Ajax\Core;
 
 use Jaxon\Response\Response;
+use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\MotdRepository;
 use Tracy\Debugger;
-use Lotgd\Ajax\Pattern\Core as PatternCore;
 
 /**
  * Dialog for MOTD.
@@ -27,8 +27,9 @@ class Motd extends AjaxAbstract
     use PatternCore\Motd\Item;
     use PatternCore\Motd\Poll;
 
-    const TEXT_DOMAIN = 'page-motd';
+    const TEXT_DOMAIN = 'jaxon-motd';
     protected $repositoryMotd;
+    protected $templateMotd;
 
     /**
      * List all MOTD.
@@ -88,7 +89,7 @@ class Motd extends AjaxAbstract
                 $session['user']['lastmotd'] = $lastMotd;
             }
 
-            $content = \LotgdTheme::renderThemeTemplate('page/motd.twig', $params);
+            $content = $this->getTemplate()->renderBlock('motd_list', $params);
         }
         catch (\Throwable $th)
         {
@@ -157,11 +158,24 @@ class Motd extends AjaxAbstract
     }
 
     /**
-     * Get text domain
+     * Get text domain.
      */
     public function getTextDomain(): string
     {
         return self::TEXT_DOMAIN;
+    }
+
+    /**
+     * Get template of block for MOTD.
+     */
+    protected function getTemplate()
+    {
+        if ( ! $this->templateMotd)
+        {
+            $this->templateMotd = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_motd.html.twig');
+        }
+
+        return $this->templateMotd;
     }
 
     /**

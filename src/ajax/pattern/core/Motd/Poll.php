@@ -87,7 +87,7 @@ trait Poll
 
             $params['form'] = $form->createView();
 
-            $content = \LotgdTheme::renderThemeTemplate('page/motd/add/poll.twig', $params);
+            $content = $this->getTemplate()->renderBlock('motd_poll_add', $params);
 
             $script = \stripslashes('<div class="ui active centered inline loader"></div>');
             //-- Options

@@ -45,13 +45,15 @@ trait Motd
         $motd   = array_merge($sub, $motd);
         $params = array_merge(['motd' => $motd], $params);
 
+        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_motd.html.twig");
+
         if ($motd['motdtype'])
         {
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
 
-            return \LotgdTheme::renderThemeTemplate('page/motd/parts/poll.twig', $params);
+            return $template->renderBlock('motd_item_poll', $params);
         }
 
-        return \LotgdTheme::renderThemeTemplate('page/motd/parts/item.twig', $params);
+        return $template->renderBlock('motd_item_item', $params);
     }
 }

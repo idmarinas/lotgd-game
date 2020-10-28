@@ -84,7 +84,7 @@ trait Item
 
             $params['form'] = $form->createView();
 
-            $content = \LotgdTheme::renderThemeTemplate('page/motd/add/item.twig', $params);
+            $content = $this->getTemplate()->renderBlock('motd_item_add', $params);
 
             $script = \stripslashes('<div class="ui active centered inline loader"></div>');
             //-- Options
@@ -198,7 +198,7 @@ trait Item
             $params['form']     = $form->createView();
             $params['motdData'] = $repository->getEditMotdItem($id);
 
-            $content = \LotgdTheme::renderThemeTemplate('page/motd/edit/item.twig', $params);
+            $content = $this->getTemplate()->renderBlock('motd_item_edit', $params);
 
             $script = \stripslashes('<div class="ui active centered inline loader"></div>');
             //-- Options
