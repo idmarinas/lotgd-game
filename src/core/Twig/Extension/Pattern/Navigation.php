@@ -135,9 +135,16 @@ trait Navigation
         //-- Is a pagination for Jaxon-PHP
         if (0 === \strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === \strpos($link, 'JaxonLotgd.Ajax.Local.'))
         {
-            $template = $template ?: 'parts/pagination-jaxon.twig';
+            $template = $template ?: 'pagination_jaxon';
 
             $pages['jaxon'] = $link;
+
+            if ('pagination_jaxon' == $template)
+            {
+                $tpl = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig");
+
+                return $tpl->renderBlock($template, $pages);
+            }
 
             return $this->getTemplate()->renderTheme($template, $pages);
         }
