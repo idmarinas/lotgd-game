@@ -185,7 +185,8 @@ elseif ('net' == $op)
 }
 else
 {
-    page_header('title', [], 'page-logdnet');
+    //-- Init page
+    \LotgdResponse::pageStart('title', [], 'page-logdnet');
 
     \LotgdNavigation::addHeader('common.category.login');
     \LotgdNavigation::addNav('common.nav.login', 'index.php');
@@ -234,9 +235,10 @@ else
     bdump($servers, 'Server list found');
     $params['servers'] = $servers;
 
-    rawoutput(\LotgdTheme::renderThemeTemplate('page/logdnet.twig', $params));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/logdnet.html.twig', $params));
 
-    page_footer();
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 
 function apply_logdnet_bans($logdnet)

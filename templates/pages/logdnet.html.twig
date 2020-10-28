@@ -1,0 +1,40 @@
+{% translate_default_domain 'page-logdnet' %}
+
+{{ 'description.paragraph'|t|colorize }}
+
+{{ 'description.ban.title'|t|colorize }}
+<ul>
+    <li>{{ 'description.ban.reason.00'|t|colorize }}</li>
+    <li>{{ 'description.ban.reason.01'|t|colorize }}</li>
+    <li>{{ 'description.ban.reason.02'|t|colorize }}</li>
+    <li>{{ 'description.ban.reason.03'|t|colorize }}</li>
+</ul>
+{{ 'description.ban.other'|t|colorize }}
+{{ 'description.ban.paragraph'|t|colorize }}
+
+<table class="ui very compact striped selected table">
+    <thead>
+        <tr>
+            <th scope="col">{{ 'servers.server'|t }}</th>
+            <th scope="col">{{ 'servers.version'|t }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for server in servers %}
+            <tr>
+                <td>
+                    <a href="{{ server.address|escape('html_attr') }}" target="_blank" rel="noopener noreferrer">
+                        {{ server.description|default('servers.noDescription'|t)|e('html')|replace({'`&amp;' : '`&'})|colorize }}
+                    </a>
+                </td>
+                <td class="collapsing">
+                    {{ '`^%s`0'|format(server.version|default('??'))|colorize }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">{{ 'servers.notFound'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
