@@ -91,7 +91,7 @@ trait Report
             $params['form'] = $form;
 
             // Dialog content
-            $content = \LotgdTheme::renderThemeTemplate('jaxon/petition/report.twig', $params);
+            $content = $this->getTemplate()->renderBlock('petition_report', $params);
 
             // Dialog title
             $title = \LotgdTranslator::t('title.report', [], $this->getTextDomain());

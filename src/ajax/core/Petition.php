@@ -29,6 +29,7 @@ class Petition extends AjaxAbstract
 
     const TEXT_DOMAIN = 'jaxon-petition';
     protected $repositoryPetition;
+    protected $templatePetition;
 
     public function help(?array $post = null): Response
     {
@@ -49,58 +50,12 @@ class Petition extends AjaxAbstract
 
                 if ($form->isValid())
                 {
-                    $post  = $form->getData();
-                    $count = $repository->getCountPetitionsForNetwork(\LotgdRequest::getServer('REMOTE_ADDR'), \LotgdRequest::getCookie('lgi'));
+                    $result = $this->processForm($form, $formClone, $repository, $response);
 
-                    if ($count >= 5 || (($session['user']['superuser'] ?? false) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
+                    if ($result)
                     {
-                        $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.network', ['count' => $count], self::TEXT_DOMAIN));
-
-                        return $response;
+                        return $result;
                     }
-
-                    $session['user']['acctid']   = $session['user']['acctid']   ?? 0;
-                    $session['user']['password'] = $session['user']['password'] ?? '';
-
-                    $p = $session['user']['password'];
-                    unset($session['user']['password']);
-
-                    $post['cancelpetition'] = $post['cancelpetition'] ?? false;
-                    $post['cancelreason']   = $post['cancelreason']   ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
-
-                    \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_ADD, null, $post);
-                    $post = modulehook('addpetition', $post);
-
-                    if ($post['cancelpetition'])
-                    {
-                        $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.cancel', ['reason' => $post['cancelreason']], self::TEXT_DOMAIN));
-
-                        return $response;
-                    }
-
-                    $entity = $repository->hydrateEntity([
-                        'author'   => $session['user']['acctid'],
-                        'date'     => new \DateTime('now'),
-                        'body'     => $post,
-                        'pageinfo' => $session,
-                        'ip'       => \LotgdRequest::getServer('REMOTE_ADDR'),
-                        'id'       => \LotgdRequest::getCookie('lgi'),
-                    ]);
-
-                    $session['user']['password'] = $p;
-
-                    \Doctrine::persist($entity);
-                    \Doctrine::flush();
-
-                    // Fix the counter
-                    \LotgdCache::removeItem('petitioncounts');
-
-                    // If the admin wants it, email the petitions to them.
-                    $this->emailPetitionAdmin($post['charname'], $post);
-
-                    $form = $formClone;
-
-                    $response->dialog->success(\LotgdTranslator::t('flash.message.section.default.success.send', [], self::TEXT_DOMAIN));
                 }
             }
             elseif ($session['user']['loggedin'] ?? false)
@@ -114,7 +69,7 @@ class Petition extends AjaxAbstract
             $params['form'] = $form;
 
             // Dialog content
-            $content = \LotgdTheme::renderThemeTemplate('jaxon/petition/help.twig', $params);
+            $content = $this->getTemplate()->renderBlock('petition_help', $params);
 
             // Dialog title
             $title = \LotgdTranslator::t('title.default', [], self::TEXT_DOMAIN);
@@ -163,6 +118,19 @@ class Petition extends AjaxAbstract
     public function getTextDomain(): string
     {
         return self::TEXT_DOMAIN;
+    }
+
+    /**
+     * Get template of block for Petition.
+     */
+    protected function getTemplate()
+    {
+        if ( ! $this->templatePetition)
+        {
+            $this->templatePetition = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_petition.html.twig');
+        }
+
+        return $this->templatePetition;
     }
 
     /**
@@ -223,5 +191,63 @@ class Petition extends AjaxAbstract
             'daysPerDay'  => getsetting('daysperday', 2),
             'multimaster' => (int) getsetting('multimaster', 1),
         ];
+    }
+
+    private function processForm(&$form, &$formClone, $repository, $response)
+    {
+        global $session;
+
+        $post  = $form->getData();
+        $count = $repository->getCountPetitionsForNetwork(\LotgdRequest::getServer('REMOTE_ADDR'), \LotgdRequest::getCookie('lgi'));
+
+        if ($count >= 5 || (($session['user']['superuser'] ?? false) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
+        {
+            $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.network', ['count' => $count], self::TEXT_DOMAIN));
+
+            return $response;
+        }
+
+        $session['user']['acctid']   = $session['user']['acctid']   ?? 0;
+        $session['user']['password'] = $session['user']['password'] ?? '';
+
+        $p = $session['user']['password'];
+        unset($session['user']['password']);
+
+        $post['cancelpetition'] = $post['cancelpetition'] ?? false;
+        $post['cancelreason']   = $post['cancelreason']   ?? '' ?: \LotgdTranslator::t('section.default.post.cancel', [], self::TEXT_DOMAIN);
+
+        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_ADD, null, $post);
+        $post = modulehook('addpetition', $post);
+
+        if ($post['cancelpetition'])
+        {
+            $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.cancel', ['reason' => $post['cancelreason']], self::TEXT_DOMAIN));
+
+            return $response;
+        }
+
+        $entity = $repository->hydrateEntity([
+            'author'   => $session['user']['acctid'],
+            'date'     => new \DateTime('now'),
+            'body'     => $post,
+            'pageinfo' => $session,
+            'ip'       => \LotgdRequest::getServer('REMOTE_ADDR'),
+            'id'       => \LotgdRequest::getCookie('lgi'),
+        ]);
+
+        $session['user']['password'] = $p;
+
+        \Doctrine::persist($entity);
+        \Doctrine::flush();
+
+        // Fix the counter
+        \LotgdCache::removeItem('petitioncounts');
+
+        // If the admin wants it, email the petitions to them.
+        $this->emailPetitionAdmin($post['charname'], $post);
+
+        $form = $formClone;
+
+        $response->dialog->success(\LotgdTranslator::t('flash.message.section.default.success.send', [], self::TEXT_DOMAIN));
     }
 }

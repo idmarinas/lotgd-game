@@ -43,14 +43,14 @@ trait Faq
             if ($faq)
             {
                 $faq     = \max(1, \min(4, $faq));
-                $content = \LotgdTheme::renderThemeTemplate("jaxon/petition/faq/faq{$faq}.twig", $params);
+                $content = $this->getTemplate()->renderBlock("petition_faq{$faq}", $params);
             }
             else
             {
                 $params['faqList'] = $this->faqToc();
 
                 // Dialog content
-                $content = \LotgdTheme::renderThemeTemplate('jaxon/petition/faq.twig', $params);
+                $content = $this->getTemplate()->renderBlock('petition_faq', $params);
             }
 
             $response->dialog->show($title, ['content' => $content, 'isScrollable' => true], $buttons, $options);
@@ -98,7 +98,7 @@ trait Faq
             $params['pvpDefGain']    = getsetting('pvpdefgain', 10);
 
             // Dialog content
-            $content = \LotgdTheme::renderThemeTemplate('jaxon/petition/primer.twig', $params);
+            $content = $this->getTemplate()->renderBlock('petition_primer', $params);
 
             $response->dialog->show($title, ['content' => $content, 'isScrollable' => true], $buttons, $options);
         }
