@@ -29,7 +29,8 @@ $params = [
 
 $op = (string) \LotgdRequest::getQuery('op');
 
-page_header('title.create', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title.create', [], $textDomain);
 
 if ('val' == $op || 'forgotval' == $op)
 {
@@ -77,9 +78,10 @@ if ('forgotval' == $op)
     $params['account'] = $account;
 
     $params = modulehook('page-create-forgotval-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/create/forgot/val.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot_val', '{theme}/pages/create/_partial.html.twig', $params));
 
-    page_footer();
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 elseif ('val' == $op)
 {
@@ -152,9 +154,10 @@ elseif ('val' == $op)
     savesetting('newestplayername', $account->getCharacter()->getName());
 
     $params = modulehook('page-create-val-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/create/email/val.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_email_val', '{theme}/pages/create/_partial.html.twig', $params));
 
-    page_footer();
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 elseif ('forgot' == $op)
 {
@@ -203,9 +206,10 @@ elseif ('forgot' == $op)
     }
 
     $params = modulehook('page-create-forgot-tpl-params', $params);
-    rawoutput(LotgdTheme::renderThemeTemplate('page/create/forgot.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot', '{theme}/pages/create/_partial.html.twig', $params));
 
-    page_footer();
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 elseif ('create' == $op)
 {
@@ -404,11 +408,10 @@ elseif ('create' == $op)
         $params['login'] = $shortname;
         $params['password'] = $pass1;
 
-        rawoutput(LotgdTheme::renderThemeTemplate('page/create/account/login.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/create/_partial.html.twig', $params));
 
-        \Doctrine::clear(); //-- Detaches all objects from Doctrine!
-
-        page_footer();
+        //-- Finalize page
+        \LotgdResponse::pageEnd();
     }
     catch (\Throwable $th)
     {
@@ -440,9 +443,9 @@ $result = modulehook('create-form', ['templates' => []]);
 $params['templates'] = $result['templates'];
 
 \Doctrine::flush(); //-- Persist objects
-\Doctrine::clear(); //-- Detaches all objects from Doctrine!
 
 $params = modulehook('page-create-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/create.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/create.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
