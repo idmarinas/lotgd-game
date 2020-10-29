@@ -45,7 +45,7 @@ class Source extends AjaxAbstract
                 'textDomain' => self::TEXT_DOMAIN
             ];
 
-            $content = \LotgdTheme::renderLotgdTemplate('core/jaxon/source.twig', $params);
+            $content = $this->getTemplate()->renderBlock('source_show', $params);
 
             $response->dialog->show($title, ['content' => $content, 'isScrollable' => true], $buttons);
         }
@@ -59,5 +59,18 @@ class Source extends AjaxAbstract
         $response->jQuery('#button-source')->removeClass('loading disabled');
 
         return $response;
+    }
+
+    /**
+     * Get template of block for Petition.
+     */
+    protected function getTemplate()
+    {
+        if ( ! $this->templatePetition)
+        {
+            $this->templatePetition = \LotgdTheme::load('@core/_blocks/_source.html.twig');
+        }
+
+        return $this->templatePetition;
     }
 }
