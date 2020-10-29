@@ -12,7 +12,8 @@ check_su_access(SU_EDIT_CONFIG);
 
 $textDomain = 'grotto-configuration';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $save         = (string) \LotgdRequest::getQuery('save');
 $type_setting = (string) \LotgdRequest::getQuery('setting');
@@ -65,6 +66,7 @@ switch ($type_setting)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/configuration.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::render('@core/pages/configuration.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
