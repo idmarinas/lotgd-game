@@ -508,11 +508,13 @@ function getcharstats($buffs)
         }
     }
 
-    $statbuff = \LotgdTheme::renderThemeTemplate('sidebar/character/statbuff.twig', [
+    $template = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_character_stats.html.twig');
+
+    $statbuff = $template->renderBlock('character_stat_buff', [
         'value' => $buffs,
     ]);
 
-    return appoencode(\LotgdTheme::renderThemeTemplate('sidebar/character/stats.twig', [
+    return appoencode($template->renderBlock('character_stats', [
         'charstat' => $charstattpl,
         'statbuff' => $statbuff,
     ]), true);
@@ -781,7 +783,7 @@ function charstats($return = true)
                 $onlinecount = \count($result);
             }
 
-            $tpl = \LotgdTheme::load('_blocks/_partials.html.twig');
+            $tpl = \LotgdTheme::load('@theme'.\LotgdTheme::getThemeNamespace().'/_blocks/_partials.html.twig');
 
             $ret = $tpl->renderBlock('online_list', [
                 'list'        => $result,
