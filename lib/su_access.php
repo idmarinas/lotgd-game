@@ -12,7 +12,7 @@ function check_su_access($level)
 
     $textDomain = 'partial-access';
 
-    rawoutput('<!--Su_Restricted-->');
+    \LotgdResponse::pageAddContent('<!--Su_Restricted-->');
 
     if ($session['user']['superuser'] & $level)
     {
@@ -29,13 +29,13 @@ function check_su_access($level)
             return;
         }
 
-        page_header('title.ops', [], $textDomain);
+        \LotgdResponse::pageStart('title.ops', [], $textDomain);
 
-        rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/ops.twig', ['textDomain' => $textDomain]));
+        \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('access_ops', '@core/_blocks/_access.html.twig', ['textDomain' => $textDomain]));
 
         \LotgdNavigation::addNav('common.superuser.mundane', 'village.php');
 
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
 
     // This buff is useless because the graveyard (rightly, really)
@@ -60,7 +60,7 @@ function check_su_access($level)
 
     $session['output'] = '';
 
-    page_header('title.infidel', [], $textDomain);
+    \LotgdResponse::pageStart('title.infidel', [], $textDomain);
 
     addnews('`&%s was smitten down for attempting to defile the gods (they tried to hack superuser pages).', $session['user']['name']);
 
@@ -101,12 +101,12 @@ function check_su_access($level)
         systemmail($row['acctid'], $subj, $body);
     }
 
-    rawoutput(LotgdTheme::renderLotgdTemplate('core/partial/access/infidel.twig', [
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('access_infidel', '@core/_blocks/_access.html.twig', [
         'textDomain'    => $textDomain,
         'deathOverlord' => getsetting('deathoverlord', '`$Ramius'),
     ]));
 
-    page_footer();
+    \LotgdResponse::pageEnd();
 }
 
 /**
