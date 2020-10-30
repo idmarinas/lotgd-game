@@ -59,8 +59,6 @@ if ('detail' == $op)
 {
     $params['tpl'] = 'applicant/detail';
 
-    \LotgdResponse::pageTitle('title.detail', [], $textDomain);
-
     require_once 'lib/clan/detail.php';
 }
 elseif ('list' == $op)
