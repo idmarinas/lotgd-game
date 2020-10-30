@@ -23,11 +23,7 @@ trait Motd
      */
     public function messageOfTheDay(): string
     {
-        global $session;
-
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
-
-        return $template->renderBlock('message_of_the_day', ['user' => ['needtoviewmotd' => $session['needtoviewmotd']]]);
+        return $this->getTemplate()->renderBlock('message_of_the_day', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
     }
 
     /**
@@ -45,15 +41,13 @@ trait Motd
         $motd   = array_merge($sub, $motd);
         $params = array_merge(['motd' => $motd], $params);
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_motd.html.twig");
-
+        $blockName = 'motd_item_item';
         if ($motd['motdtype'])
         {
+            $blockName = 'motd_item_poll';
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
-
-            return $template->renderBlock('motd_item_poll', $params);
         }
 
-        return $template->renderBlock('motd_item_item', $params);
+        return $this->getTemplate()->renderBlock($blockName, "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_motd.html.twig", $params);
     }
 }

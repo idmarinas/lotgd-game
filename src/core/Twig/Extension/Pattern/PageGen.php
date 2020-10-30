@@ -29,9 +29,7 @@ trait PageGen
     {
         global $session;
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig");
-
-        return $template->renderBlock('game_page_gen', [
+        return $this->getTemplate()->renderBlock('game_page_gen', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", [
             'genTime'          => Debugger::timer('page-generating'),
             'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
             'userGenTime'      => $session['user']['gentime'],

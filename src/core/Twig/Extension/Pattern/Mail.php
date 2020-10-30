@@ -38,8 +38,6 @@ trait Mail
             ];
         }
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
-
-        return $template->renderBlock('ye_olde_mail', $result);
+        return $this->getTemplate()->renderBlock('ye_olde_mail', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", $result);
     }
 }

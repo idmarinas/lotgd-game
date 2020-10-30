@@ -28,8 +28,6 @@ trait Source
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
-
-        return $template->renderBlock('game_source', []);
+        return $this->getTemplate()->renderBlock('game_source', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
     }
 }

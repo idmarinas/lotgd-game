@@ -28,9 +28,7 @@ trait Petition
             __METHOD__
         ), E_USER_DEPRECATED);
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
-
-        return $template->renderBlock('user_petition', []);
+        return $this->getTemplate()->renderBlock('user_petition', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
     }
 
     /**
@@ -50,9 +48,7 @@ trait Petition
             $petitions = $petition->getStatusListCount();
         }
 
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig");
-
-        return $template->renderBlock('admin_petition', [
+        return $this->getTemplate()->renderBlock('admin_petition', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", [
             'canEditPetitions' => $canEditPetitions,
             'canEditUsers'     => $canEditUsers,
             'petitions'        => $petitions,

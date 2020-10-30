@@ -27,9 +27,7 @@ trait Navigation
      */
     public function display()
     {
-        $template = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig");
-
-        return $template->renderBlock('navigation_menu', [
+        return $this->getTemplate()->renderBlock('navigation_menu', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", [
             'navigation' => $this->getNavigation()->getNavigation(),
             'headers'    => $this->getNavigation()->getHeaders(),
             'navs'       => $this->getNavigation()->getNavs(),
@@ -141,9 +139,7 @@ trait Navigation
 
             if ('pagination_jaxon' == $template)
             {
-                $tpl = $this->getTemplate()->load("@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig");
-
-                return $tpl->renderBlock($template, $pages);
+                return $this->getTemplate()->renderBlock($template, "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", $pages);
             }
 
             return $this->getTemplate()->renderTheme($template, $pages);
