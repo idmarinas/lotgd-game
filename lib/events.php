@@ -48,7 +48,8 @@ function handle_event($location, $baseLink = false)
             'partial-event',
         ];
 
-        page_header('title.special', [], 'partial-event');
+        //-- Init page
+        \LotgdResponse::pageStart('title.special', [], 'partial-event');
 
         if (\strstr($specialinc, ':'))
         {
@@ -67,7 +68,7 @@ function handle_event($location, $baseLink = false)
         if (\LotgdNavigation::checkNavs())
         {
             // The page rendered some linkage, so we just want to exit.
-            return page_footer();
+            return  \LotgdResponse::pageEnd();
         }
 
         $skipdesc                       = true;
