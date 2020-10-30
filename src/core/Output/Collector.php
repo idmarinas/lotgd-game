@@ -34,6 +34,11 @@ class Collector
      */
     public function rawoutput($indata)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use "LotgdResponse::pageAddContent(string $content)" instead',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         if ($this->block_new_output)
         {
             return;
@@ -51,6 +56,11 @@ class Collector
     public function sustitute(string $out): string
     {
         global $session;
+
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use Twig templates.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
 
         //-- This options are only available when user are signed in
         if ( ! ($session['user']['loggedin'] ?? false))
@@ -91,7 +101,8 @@ class Collector
             }
         }
 
-        return $text;
+        //-- Added content added to response
+        return \LotgdResponse::getContent().$text;
     }
 
     /**
@@ -133,6 +144,12 @@ class Collector
     public function debug($text, $force = false)
     {
         global $session;
+
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use new "LotgdResponse::pageDebug(string $content, boolean $force)"',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $temp = $this->get_block_new_output();
         $this->set_block_new_output(false);
 
