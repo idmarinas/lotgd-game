@@ -125,13 +125,15 @@ if ( ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_IN
 
     defined('DB_NODB') || define('DB_NODB', true);
 
-    page_header('title.install', [], 'app-common');
+    \LotgdResponse::pageStart('title.install', [], 'app-common');
 
     \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/install.twig', ['fileName' => \Lotgd\Core\Application::FILE_DB_CONNECT]));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_install', '@core/_blocks/_common.html.twig', [
+        'fileName' => \Lotgd\Core\Application::FILE_DB_CONNECT
+    ]));
 
-    page_footer(false);
+    \LotgdResponse::pageEnd(false);
 }
 elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
 {
@@ -141,13 +143,13 @@ elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1'
 {
     define('NO_SAVE_USER', true);
 
-    page_header('title.upgrade', [], 'app-common');
+    \LotgdResponse::pageStart('title.upgrade', [], 'app-common');
 
     \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/upgrade.twig', []));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_upgrade', '@core/_blocks/_common.html.twig', []));
 
-    page_footer(false);
+    \LotgdResponse::pageEnd(false);
 }
 // If is installer check if tables are created
 elseif (defined('IS_INSTALLER'))
@@ -168,30 +170,28 @@ if ( ! IS_INSTALLER && file_exists('public/installer.php')
     && 'installer.php' != substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
-    page_header('title.security', [], 'app-common');
+    \LotgdResponse::pageStart('title.security', [], 'app-common');
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/security.twig', []));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_security', '@core/_blocks/_common.html.twig', []));
 
-    page_footer(false);
+    \LotgdResponse::pageEnd(false);
 }
 
 if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
     defined('DB_NODB') || define('DB_NODB', true);
 
-    page_header('title.database', [], 'app-common');
+    \LotgdResponse::pageStart('title.security', [], 'app-common');
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
-    $params = [
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_database', '@core/_blocks/_common.html.twig', [
         'server' => \LotgdRequest::getServer('SERVER_NAME'),
-    ];
+    ]));
 
-    rawoutput(\LotgdTheme::renderLotgdTemplate('core/common/database.twig', $params));
-
-    page_footer(false);
+    \LotgdResponse::pageEnd(false);
 }
 
 if (isset($session['lasthit'], $session['loggedin']) && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit'] && $session['lasthit'] > 0 && $session['loggedin'])
