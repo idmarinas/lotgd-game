@@ -25,6 +25,17 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
         ```
     -   When you try to render a template can use this keys patterns:
         -   `{theme}` this key is replace with actual theme namespace. Example: `{theme}/path/to/template.html.twig` to `@themeJade/path/to/template.html.twig`
+-   **New Page generation**
+    -   New system to generate the page.
+        -   Functions `page_header()` and `page_footer()` are obsoletes in 4.5.0. Deleted in version 5.0.0
+        -   New system use:
+            -   `LotgdResponse::pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null)` do same as `page_header()`
+                -   If only want change title of page not call other time this function use `LotgdResponse::pageTitle(string $message, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null)`
+                -   If you call `LotgdResponse::pageStart` you activate other time the hooks and all code in `LotgdResponse::pageStart` other time, this slower the performance of page.
+            -   `LotgdResponse::pageEnd(boolean $saveuser)` do same as `page_footer()`
+            -   `LotgdResponse::pageAddContent($content)` this replace `rawoutput()`, add more content to page.
+            -   `LotgdResponse::pageSetContent($content)` this replace all previous content with new content.
+        -   Examples: can see `public/home.php` and other page to know how use this new system.
 
 ### :star: FEATURES
 
@@ -136,7 +147,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 
 ### :x: REMOVES
 
--   Nothing
+-   **public/source.php** This section now render with Jaxon, so, no needed this page.
 
 ### :notebook: NOTES
 
