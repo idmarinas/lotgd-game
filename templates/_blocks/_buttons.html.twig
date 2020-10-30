@@ -14,7 +14,7 @@
 
 {# Button for ye olde mail "Internal mail" #}
 {% block ye_olde_mail %}
-    {% if user.login %}
+    {% if user.loggedin %}
         {% set icon = '' %}
         {% if notSeenCount %}
             {% set icon = '<i aria-hidden="true" class="green mail icon"></i>' %}
