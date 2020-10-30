@@ -14,7 +14,8 @@ $battle = false;
 
 $textDomain = 'page-pvp';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -201,6 +202,7 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-pvp-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/pvp.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/pvp.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

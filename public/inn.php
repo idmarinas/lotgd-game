@@ -34,7 +34,8 @@ $params = [
     'includeTemplatesPost' => [] //-- Templates that are in bottom of content
 ];
 
-page_header('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', ['name' => \LotgdSanitize::fullSanitize($params['innName'])], $textDomain);
 
 $op = (string) \LotgdRequest::getQuery('op');
 $subop = (string) \LotgdRequest::getQuery('subop');
@@ -233,7 +234,7 @@ switch ($op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-inn-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/inn.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/inn.html.twig', $params));
 
 if ('default' == $params['tpl'])
 {
@@ -242,4 +243,5 @@ if ('default' == $params['tpl'])
     module_display_events('inn', 'inn.php');
 }
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

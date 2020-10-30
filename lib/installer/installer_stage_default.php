@@ -17,4 +17,4 @@ unset($session['installer']);
 //-- Cache is cleared to force update
 LotgdCache::flush();
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/default.twig', []));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/default.twig', $params));

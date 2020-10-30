@@ -1,6 +1,7 @@
 <?php
 
-page_header('title.default', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title.default', [], $textDomain);
 
 $params['tpl']                 = 'default';
 $params['moduleStaminaSystem'] = is_module_active('staminasystem');

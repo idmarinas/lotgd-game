@@ -6,6 +6,7 @@ title:
     race:
         not: 'No Races Installed'
         choose: 'A little history about yourself'
+    dragonpoints: Dragon Points
 
 section:
     default:

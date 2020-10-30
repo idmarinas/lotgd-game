@@ -7,7 +7,8 @@ check_su_access(SU_MEGAUSER);
 
 $textDomain = 'grotto-globaluserfunctions';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -33,6 +34,7 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/globaluserfunctions.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/globaluserfunctions.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

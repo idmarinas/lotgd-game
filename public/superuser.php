@@ -26,7 +26,8 @@ if ('keepalive' == $op)
     exit();
 }
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 \LotgdNavigation::addNav('superuser.nav.logout', 'login.php?op=logout');
@@ -100,7 +101,9 @@ $args = [];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_SUPERUSER, null, $args);
 modulehook('superuser', $args);
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/superuser.twig', [
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/superuser.html.twig', [
     'textDomain' => $textDomain
 ]));
-page_footer();
+
+//-- Finalize page
+\LotgdResponse::pageEnd();

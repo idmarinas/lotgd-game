@@ -1,0 +1,13 @@
+{% translate_default_domain textDomain %}
+
+{% if isLaminas %}
+    {% if formTypeTab %}
+        {{ laminas_form_tab(form) }}
+    {% else %}
+        {{ laminas_form(form) }}
+    {% endif %}
+{% else %}
+    <form action="{{ 'companions.php?op=edit&subop=module&id=' ~ id ~ '&module=' ~ module }}" method="POST" autocomplete="off">
+        {{ form }}
+    </form>
+{% endif %}

@@ -12,7 +12,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title.default', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title.default', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -42,7 +43,7 @@ if ('pay' == $op)
 }
 elseif ('talk' == $op)
 {
-    page_header('title.talk', [], $textDomain);
+    \LotgdResponse::pageTitle('title.talk', [], $textDomain);
 
     $params['tpl'] = 'talk';
 
@@ -78,6 +79,7 @@ else
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-gypsy-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/gypsy.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/gypsy.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

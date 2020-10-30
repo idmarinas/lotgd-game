@@ -8,7 +8,8 @@ check_su_access(SU_EDIT_USERS);
 
 $textDomain = 'grotto-titleedit';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -169,6 +170,7 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/titleedit.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/titleedit.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

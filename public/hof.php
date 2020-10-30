@@ -18,7 +18,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -323,6 +324,7 @@ $params['footerTitle'] = [
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-hof-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/hof.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/hof.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

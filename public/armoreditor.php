@@ -20,7 +20,8 @@ $params = [
     'armorLevel' => $armorlevel
 ];
 
-page_header('title', ['level' => $armorlevel], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', ['level' => $armorlevel], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 \LotgdNavigation::addHeader('armoreditor.category.editor');
@@ -101,6 +102,7 @@ for ($i = 0; $i <= $max; $i++)
 
 $params['armors'] = $repository->findByLevel($armorlevel, ['defense' => 'ASC']);
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/armoreditor.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/armoreditor.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

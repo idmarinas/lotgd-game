@@ -1,6 +1,7 @@
 <?php
 
-page_header('Dragon Points');
+//-- Init page
+\LotgdResponse::pageStart('title.dragonpoints', [], $textDomain);
 
 \reset($labels);
 

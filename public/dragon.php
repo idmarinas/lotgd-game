@@ -20,7 +20,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $battle = false;
 $op = (string) \LotgdRequest::getQuery('op');
@@ -202,7 +203,7 @@ elseif ('prologue' == $op)
 
     //-- This is only for params not use for other purpose
     $params = modulehook('page-dragon-tpl-params', $params);
-    rawoutput(\LotgdTheme::renderThemeTemplate('page/dragon.twig', $params));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/dragon.html.twig', $params));
 
     \LotgdNavigation::addNav('common.nav.newday', 'news.php');
 
@@ -281,4 +282,5 @@ if ($battle)
     battleshowresults($lotgdBattleContent);
 }
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

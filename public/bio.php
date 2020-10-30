@@ -61,7 +61,8 @@ $params = [
     'RACE_UNKNOWN' => RACE_UNKNOWN
 ];
 
-page_header('title', [ 'name' => \LotgdSanitize::fullSanitize($target['name']) ], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [ 'name' => \LotgdSanitize::fullSanitize($target['name']) ], $textDomain);
 
 \LotgdNavigation::addHeader('common.category.return');
 
@@ -87,9 +88,10 @@ else
 }
 //-- This is only for params not use for other purpose
 $params = modulehook('page-bio-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/bio.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/bio.html.twig', $params));
 
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_BIO_END, null, $target);
 modulehook('bioend', $target);
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

@@ -16,7 +16,8 @@ $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $dontDisplayForestMessage = handle_event('forest');
 
@@ -434,9 +435,10 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-forest-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/forest.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/forest.html.twig', $params));
 
 //-- Display events
 ('' == $op) && module_display_events('forest', 'forest.php');
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

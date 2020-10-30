@@ -12,7 +12,8 @@ $textDomain = 'grotto-masters';
 $op = (string) \LotgdRequest::getQuery('op');
 $masterId = (int) (string) \LotgdRequest::getQuery('master_id');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -99,6 +100,7 @@ if ('' == $op)
     $params['masters'] = $repository->findAll();
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/masters.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/masters.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

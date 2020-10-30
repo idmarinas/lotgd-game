@@ -26,7 +26,8 @@ $params = [
     'selfDelete' => (int) getsetting('selfdelete', 0)
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $op = (string) \LotgdRequest::getQuery('op');
 
@@ -514,6 +515,7 @@ else
 }
 
 $params = modulehook('page-prefs-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/prefs.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/prefs.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

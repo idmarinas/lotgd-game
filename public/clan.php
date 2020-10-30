@@ -38,6 +38,9 @@ $params = [
 \LotgdNavigation::addHeader('category.options');
 \LotgdNavigation::addNav('nav.list.list', 'clan.php?op=list');
 
+//-- Init page
+\LotgdResponse::pageStart();
+
 $ranks = [
     CLAN_APPLICANT => 'ranks.00',
     CLAN_MEMBER => 'ranks.010',
@@ -56,7 +59,7 @@ if ('detail' == $op)
 {
     $params['tpl'] = 'applicant/detail';
 
-    page_header('title.detail', [], $textDomain);
+    \LotgdResponse::pageTitle('title.detail', [], $textDomain);
 
     require_once 'lib/clan/detail.php';
 }
@@ -64,7 +67,7 @@ elseif ('list' == $op)
 {
     $params['tpl'] = 'applicant/list';
 
-    page_header('title.list', [], $textDomain);
+    \LotgdResponse::pageTitle('title.list', [], $textDomain);
 
     require_once 'lib/clan/list.php';
 }
@@ -72,7 +75,7 @@ elseif ('waiting' == $op)
 {
     $params['tpl'] = 'applicant/waiting';
 
-    page_header('title.applicant', [], $textDomain);
+    \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
     \LotgdNavigation::addHeader('category.options');
 
@@ -83,7 +86,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'apply' == $op)
 {
     $params['tpl'] = 'applicant/apply';
 
-    page_header('title.applicant', [], $textDomain);
+    \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
     require_once 'lib/clan/applicant_apply.php';
 }
@@ -91,7 +94,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'new' == $op)
 {
     $params['tpl'] = 'applicant/new';
 
-    page_header('title.applicant', [], $textDomain);
+    \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
     require_once 'lib/clan/applicant_new.php';
 }
@@ -99,7 +102,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'])
 {
     $params['tpl'] = 'applicant';
 
-    page_header('title.applicant', [], $textDomain);
+    \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
     require_once 'lib/clan/applicant.php';
 }
@@ -107,7 +110,7 @@ elseif ('' == $op)
 {
     $params['tpl'] = 'default';
 
-    page_header('title.default', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
+    \LotgdResponse::pageTitle('title.default', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
     require_once 'lib/clan/clan_default.php';
 }
@@ -115,7 +118,7 @@ elseif ('motd' == $op)
 {
     $params['tpl'] = 'motd';
 
-    page_header('title.motd', [], $textDomain);
+    \LotgdResponse::pageTitle('title.motd', [], $textDomain);
 
     require_once 'lib/clan/clan_motd.php';
 }
@@ -123,7 +126,7 @@ elseif ('membership' == $op)
 {
     $params['tpl'] = 'membership';
 
-    page_header('title.membership', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
+    \LotgdResponse::pageTitle('title.membership', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
     require_once 'lib/clan/clan_membership.php';
 }
@@ -139,9 +142,10 @@ elseif ('withdraw' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-clan-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/clan.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::renderTheme('pages/clan.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
 
 function clanform()
 {

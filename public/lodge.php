@@ -24,7 +24,8 @@ $pointsavailable = max(0, $session['user']['donation'] - $session['user']['donat
 //-- Have access to Lodge
 $entry = ($session['user']['donation'] > 0) || ($session['user']['superuser'] & SU_EDIT_COMMENTS);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -85,6 +86,7 @@ elseif ('points' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-lodge-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/lodge.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/lodge.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

@@ -1,0 +1,24 @@
+{% translate_default_domain 'page-installer' %}
+
+{{ 'stage10.subtitle'|t|colorize }}
+
+<form action="installer.php?stage={{ stage }}" method="POST" class="ui form">
+    <div class="field">
+        <label for="name">{{ 'stage10.form.label.name'|t }}</label>
+        <input type="text" name="name" id="name" value="{{ name|e }}">
+    </div>
+
+    <div class="field">
+        <label for="pass1">{{ 'stage10.form.label.pass1'|t }}</label>
+        <input name="pass1" type="password">
+    </div>
+
+    <div class="field">
+        <label for="pass2">{{ 'stage10.form.label.pass2'|t }}</label>
+        <input name="pass2" type="password">
+    </div>
+
+    <div class='inline field'>
+        <button type="submit" class="ui button">{{ 'stage10.form.button.submit'|t|uncolorize }}</button>
+    </div>
+</form>

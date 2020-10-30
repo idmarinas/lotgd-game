@@ -18,7 +18,8 @@ if (! $session['user']['loggedin'])
     return redirect('create.php?r='.rawurlencode($referral));
 }
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -59,6 +60,7 @@ $params['referrers'] = $query->select('u.refererawarded')
 ;
 
 $params = modulehook('page-referral-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/referral.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/referral.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

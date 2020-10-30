@@ -107,7 +107,8 @@ $stage = (int) \LotgdRequest::getQuery('stage', 0);
 $stage = min($session['installer']['stagecompleted'] + 1, $stage, 11);
 $session['installer']['stagecompleted'] = max($stage, $session['installer']['stagecompleted']);
 
-page_header('title', [
+//-- Init page
+\LotgdResponse::pageStart('title',  [
     'stage' => \LotgdTranslator::t("stages.0{$stage}", [], 'navigation-installer')
 ], 'page-installer');
 
@@ -162,4 +163,5 @@ if (! $noinstallnavs)
     \LotgdNavigation::setTextDomain();
 }
 
-page_footer(false);
+//-- Finalize page
+\LotgdResponse::pageEnd(false);

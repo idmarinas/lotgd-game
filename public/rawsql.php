@@ -13,7 +13,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -83,6 +84,7 @@ else
     }
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/rawsql.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/rawsql.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

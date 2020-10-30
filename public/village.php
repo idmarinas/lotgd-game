@@ -64,7 +64,8 @@ elseif (! $params['newestname'] && $params['newestplayer'])
     savesetting('newestplayername', $params['newestname']);
 }
 
-page_header('title', $params, $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', $params, $textDomain);
 
 $skipvillagedesc = handle_event('village');
 checkday();
@@ -191,11 +192,12 @@ $params['commentarySection'] = 'village'; //-- Commentary section
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/village.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/village.html.twig', $params));
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
 
 module_display_events('village', 'village.php');
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

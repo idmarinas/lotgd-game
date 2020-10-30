@@ -13,7 +13,8 @@ $params = [ 'textDomain' => $textDomain ];
 $op = \LotgdRequest::getQuery('op');
 $userId = (int) \LotgdRequest::getQuery('userid');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 \LotgdNavigation::addHeader('bans.category.bans');
@@ -70,6 +71,7 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/bans.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/bans.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

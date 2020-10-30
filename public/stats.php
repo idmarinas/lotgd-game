@@ -13,7 +13,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -83,6 +84,8 @@ elseif ('graph' == $op)
     ;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/stats.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/stats.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
+

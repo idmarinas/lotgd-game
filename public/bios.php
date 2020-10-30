@@ -10,7 +10,8 @@ check_su_access(SU_EDIT_COMMENTS);
 
 $textDomain = 'page-bios';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $op = (string) \LotgdRequest::getQuery('op');
 $userid = (int) \LotgdRequest::getQuery('charid');
@@ -54,6 +55,8 @@ if ($session['user']['superuser'] & SU_EDIT_COMMENTS)
 
 \LotgdNavigation::addNav('bios.nav.refresh', 'bios.php');
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/bios.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/bios.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
+

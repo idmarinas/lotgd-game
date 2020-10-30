@@ -11,7 +11,8 @@ if ('' != $setspecialty)
 }
 else
 {
-    page_header('title.specialty.choose', [], $textDomain);
+    //-- Init page
+    \LotgdResponse::pageStart('title.specialty.choose', [], $textDomain);
     \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.choose.specialty', [], $textDomain));
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_CHOOSE);
     modulehook('choose-specialty');
@@ -20,16 +21,19 @@ else
 //-- Have navs
 if (\LotgdNavigation::checkNavs())
 {
-    page_footer();
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 
 $params['tpl'] = 'specialty';
 
-page_header('title.specialty.not', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title.specialty.not', [], $textDomain);
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
 
 $session['user']['specialty'] = 'MP';
 \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

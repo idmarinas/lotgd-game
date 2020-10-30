@@ -27,7 +27,8 @@ $textDomain = 'grotto-paylog';
 
 $month = (int) \LotgdRequest::getQuery('month');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $repository = \Doctrine::getRepository('LotgdCore:Paylog');
 
@@ -57,6 +58,7 @@ foreach($months as $val)
 
 $params['paylog'] = $repository->getList($month);
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/paylog.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/paylog.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

@@ -55,7 +55,8 @@ foreach($sections as $section)
 
 \LotgdNavigation::addHeader('moderate.category.clan.halls');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 if ('' == $op)
 {
@@ -105,6 +106,7 @@ elseif (
     }
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/moderate.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/moderate.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

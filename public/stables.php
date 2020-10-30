@@ -25,7 +25,8 @@ $params = [
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::addHeader('category.other');
 \LotgdNavigation::villageNav();
@@ -250,6 +251,7 @@ if (0 == $confirm)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-stables-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/stables.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/stables.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

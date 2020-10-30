@@ -13,7 +13,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $skipgardendesc = handle_event('gardens');
 
@@ -59,8 +60,9 @@ modulehook('gardens', []);
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-gardens-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/gardens.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/gardens.html.twig', $params));
 
 module_display_events('gardens', 'gardens.php');
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

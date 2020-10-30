@@ -19,7 +19,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -411,6 +412,7 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-train-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/train.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/train.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

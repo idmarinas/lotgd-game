@@ -53,7 +53,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -90,6 +91,7 @@ foreach($result as $row)
     $params['paginator'][$row[0]->getSite()]['rows'][] = $row[0];
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/referers.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/referers.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

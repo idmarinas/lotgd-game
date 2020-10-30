@@ -19,7 +19,8 @@ $params = [
     'textDomain' => $textDomain
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -214,7 +215,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/companions.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/companions.html.twig', $params));
 
 function process_post_save_data($data, $id, $module)
 {
@@ -231,4 +232,5 @@ function process_post_save_data($data, $id, $module)
     }
 }
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

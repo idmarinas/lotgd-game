@@ -28,7 +28,8 @@ $page = (int) \LotgdRequest::getQuery('page');
 
 $textDomain = 'grotto-viewpetition';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -151,6 +152,8 @@ elseif ('view' == $op)
     }
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/viewpetition.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/viewpetition.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
+

@@ -12,7 +12,8 @@ check_su_access(SU_EDIT_CONFIG);
 
 $textDomain = 'grotto-gamelog';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::addHeader('common.nav.navigation');
 \LotgdNavigation::superuserGrottoNav();
@@ -75,6 +76,8 @@ foreach ($categories as $value)
         ]
     ]);
 }
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/gamelog.twig', $params));
 
-page_footer();
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/gamelog.html.twig', $params));
+
+//-- Finalize page
+\LotgdResponse::pageEnd();

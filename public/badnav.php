@@ -40,7 +40,8 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     if (! is_array($session['user']['allowednavs']) || 0 == count($session['user']['allowednavs']) || '' == $outputHtml)
     {
         $session['user']['allowednavs'] = [];
-        page_header('title', [], 'page-badnav');
+        //-- Init page
+        \LotgdResponse::pageStart('title', [], 'page-badnav');
 
         if ($session['user']['alive'])
         {
@@ -51,7 +52,10 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
             \LotgdNavigation::addNav('badnav.shades', 'shades.php');
         }
 
-        rawoutput(LotgdTheme::renderThemeTemplate('page/badnav.twig', []));
+        \LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/badnav.html.twig', $params));
+
+        //-- Finalize page
+        \LotgdResponse::pageEnd();
 
         page_footer();
     }

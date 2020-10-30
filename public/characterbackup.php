@@ -12,7 +12,8 @@ $params = [
     'textDomain' => 'grotto-characterbackup',
 ];
 
-page_header('title.default', [], $params['textDomain']);
+//-- Init page
+\LotgdResponse::pageStart('title.default', [], $params['textDomain']);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -188,6 +189,7 @@ elseif ('view' == $op)
     }, $files);
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/characterbackup.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/characterbackup.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

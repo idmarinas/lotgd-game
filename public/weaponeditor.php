@@ -16,7 +16,8 @@ $repository = \Doctrine::getRepository('LotgdCore:Weapons');
 
 $textDomain = 'grotto-weaponeditor';
 
-page_header('title', ['level' => $weaponlevel], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', ['level' => $weaponlevel], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -111,6 +112,7 @@ for ($i = 0; $i <= $max; $i++)
 
 $params['weapons'] = $repository->findByLevel($weaponlevel, ['damage' => 'ASC']);
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/weaponeditor.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/weaponeditor.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

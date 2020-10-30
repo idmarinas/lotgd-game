@@ -18,7 +18,8 @@ $params = [
 
 $repository = \Doctrine::getRepository('LotgdCore:Mounts');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -199,7 +200,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/mounts.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/mounts.html.twig', $params));
 
 function process_post_save_data($data, $mountId, $module)
 {
@@ -216,4 +217,5 @@ function process_post_save_data($data, $mountId, $module)
     }
 }
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

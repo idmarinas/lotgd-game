@@ -10,7 +10,8 @@ $result = modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDoma
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $op = \LotgdRequest::getQuery('op');
 
@@ -235,6 +236,7 @@ if (getsetting('allowgoldtransfer', 1) && ($session['user']['level'] >= getsetti
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-bank-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/bank.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/bank.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

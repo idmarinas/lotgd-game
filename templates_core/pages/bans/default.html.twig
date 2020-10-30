@@ -1,0 +1,55 @@
+{% translate_default_domain textDomain %}
+
+{{ 'default.paragraph'|t|colorize }}
+
+<div class="ui info message">
+    <h4 class="header">{{ 'default.message.title'|t|colorize }}</h4>
+    {{ 'default.message.gentimecount'|t({'n' : stats.gentimecount})|colorize }}
+    {{ 'default.message.gentime'|t({'n' : stats.gentime})|colorize }}
+    {{ 'default.message.genavg'|t({'n' : (stats.gentime / max(stats.gentimecount, 1))})|colorize }}
+    {{ 'default.message.gensize'|t({'bytes' : stats.gensize|default(0)|byte_units_format_binary})|colorize }}
+</div>
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <tr>
+            <th>{{ 'default.table.headers.ops'|t|uncolorize }}</th>
+            <th><a href="{{ ('bans.php?sort=acctid' ~ query)|lotgd_url }}">{{ 'default.table.headers.acid'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=login' ~ query)|lotgd_url }}">{{ 'default.table.headers.login'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=name' ~ query)|lotgd_url }}">{{ 'default.table.headers.nm'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=level' ~ query)|lotgd_url }}">{{ 'default.table.headers.lev'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=laston' ~ query)|lotgd_url }}">{{ 'default.table.headers.lon'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=gentimecount' ~ query)|lotgd_url }}">{{ 'default.table.headers.hits'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=lastip' ~ query)|lotgd_url }}">{{ 'default.table.headers.lip'|t|uncolorize }}</a></th>
+            <th><a href="{{ ('bans.php?sort=uniqueid' ~ query)|lotgd_url }}">{{ 'default.table.headers.lid'|t|uncolorize }}</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in paginator %}
+            <tr>
+                <td class="collapsing">
+                    <a href="{{ ('bans.php?op=setupban&userid=' ~ row.acctid)|lotgd_url }}">{{ 'default.table.tbody.link.ban'|t|colorize }}</a>
+                </td>
+                <td class="collapsing">{{ row.acctid|numeral }}</td>
+                <td class="collapsing">{{ row.login }}</td>
+                <td class="collapsing">
+                    {{ '`&%s`0'|format(row.name)|colorize }}
+                    {% if row.loggedin %}
+                        {{ 'default.table.tbody.online'|t|colorize }}
+                    {% endif %}
+                </td>
+                <td class="collapsing">{{ '`^%s`0'|format(row.level)|colorize }}</td>
+                <td class="collapsing">{{ '{date,date}'|tmf({'date': row.laston}) }}</td>
+                <td class="collapsing">{{ row.gentimecount|numeral }}</td>
+                <td class="collapsing">{{ row.lastip }}</td>
+                <td class="collapsing">{{ row.uniqueid }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">{{ 'default.table.empty'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ navigation_pagination(paginator, paginatorLink) }}

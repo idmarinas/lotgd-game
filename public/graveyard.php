@@ -14,7 +14,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $op = (string) \LotgdRequest::getQuery('op');
 
@@ -326,7 +327,7 @@ modulehook('deathoverlord', []);
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-graveyard-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/graveyard.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/graveyard.html.twig', $params));
 
 if ('default' == $params['tpl'])
 {
@@ -336,4 +337,5 @@ if ('default' == $params['tpl'])
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

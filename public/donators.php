@@ -10,7 +10,8 @@ check_su_access(SU_EDIT_DONATIONS);
 
 $textDomain = 'grotto-donators';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain
@@ -168,6 +169,7 @@ elseif ('' == $op || $op)
     $params['paginator'] = $acctRepository->getPaginator($query, $page);
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/donators.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/donators.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

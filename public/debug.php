@@ -10,7 +10,8 @@ check_su_access(SU_EDIT_CONFIG);
 
 $textDomain = 'grotto-debug';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $page = (int) \LotgdRequest::getQuery('page');
 $sort = (string) \LotgdRequest::getQuery('sort');
@@ -49,6 +50,7 @@ if ('hooksort' == $debug)
 
 $params['paginator'] = $repository->getPaginator($query, $page, 50);
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/debug.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/debug.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

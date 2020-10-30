@@ -7,7 +7,8 @@ require_once 'lib/datetime.php';
 
 $textDomain = 'page-account';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 checkday();
 
@@ -35,6 +36,8 @@ $params = [
 ];
 
 $params = modulehook('page-account-tpl-params', $params);
-rawoutput(LotgdTheme::renderThemeTemplate('page/account.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/account.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
+

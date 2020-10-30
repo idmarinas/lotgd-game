@@ -24,7 +24,8 @@ if ('lasthit' == $op)
 
 $textDomain = 'grotto-user';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $repository = \Doctrine::getRepository('LotgdCore:Accounts');
 
@@ -415,9 +416,10 @@ switch ($op)
     break;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/user.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/user.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
 
 function show_bitfield($val)
 {

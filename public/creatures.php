@@ -12,7 +12,8 @@ check_su_access(SU_EDIT_CREATURES);
 
 $textDomain = 'grotto-creatures';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -185,7 +186,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/creatures.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/creatures.html.twig', $params));
 
 function process_post_save_data($data, $creatureId, $module)
 {
@@ -202,4 +203,5 @@ function process_post_save_data($data, $creatureId, $module)
     }
 }
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

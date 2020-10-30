@@ -23,7 +23,8 @@ $params = [
     'includeTemplatesPost' => [] //-- Templates that are in bottom of content
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -54,6 +55,7 @@ page_header('title', [], $textDomain);
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-shades-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/shades.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/shades.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

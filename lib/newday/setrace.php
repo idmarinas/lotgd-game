@@ -23,13 +23,16 @@ else
 //-- Have navs
 if (\LotgdNavigation::checkNavs())
 {
-    page_header('title.race.choose', [], $textDomain);
-    page_footer();
+    //-- Init page
+    \LotgdResponse::pageStart('title.race.choose', [], $textDomain);
+    //-- Finalize page
+    \LotgdResponse::pageEnd();
 }
 
 $params['tpl'] = 'race';
 
-page_header('title.race.not', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title.race.not', [], $textDomain);
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
 
@@ -37,4 +40,5 @@ $session['user']['race'] = 'app-default'; // Default race
 
 \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

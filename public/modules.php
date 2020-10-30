@@ -9,7 +9,8 @@ check_su_access(SU_MANAGE_MODULES);
 
 $textDomain = 'grotto-modules';
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();
 
@@ -271,6 +272,7 @@ elseif ('activated' == $op || 'activated' == $cat)
     $params['modules'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'installdate' => 'DESC']);
 }
 
-rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/modules.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/modules.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

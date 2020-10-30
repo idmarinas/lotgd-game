@@ -21,7 +21,8 @@ $params = [
     'tradeinvalue' => $tradeinvalue,
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 //-- Change text domain for navigation
 \LotgdNavigation::setTextDomain($textDomainNavigation);
@@ -73,6 +74,7 @@ elseif ('buy' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-armor-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/armor.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/armor.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

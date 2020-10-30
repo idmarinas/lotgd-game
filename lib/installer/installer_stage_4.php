@@ -179,4 +179,4 @@ else
     $params['issues'] = $issues;
 }
 
-rawoutput(LotgdTheme::renderLotgdTemplate('core/page/installer/stage-4.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-4.twig', $params));

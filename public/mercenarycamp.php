@@ -21,7 +21,8 @@ $repository = \Doctrine::getRepository('LotgdCore:Companions');
 
 \LotgdNavigation::addHeader('category.navigation');
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $params = [
     'textDomain' => $textDomain,
@@ -138,9 +139,10 @@ elseif ('buy' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-mercenarycamp-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/mercenarycamp.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/mercenarycamp.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
 
 /**
  * Undocumented function.

@@ -12,7 +12,8 @@ $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 //-- Calculate cost for healing
 $cost = log($session['user']['level']) * (($session['user']['maxhitpoints'] - $session['user']['hitpoints']) + 10);
@@ -155,6 +156,7 @@ else
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-healer-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/healer.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/healer.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();

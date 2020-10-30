@@ -29,13 +29,16 @@ if ($session['user']['dragonkills'] > 0 || $session['user']['superuser'] & SU_ED
     $title = 'title.veteran';
 }
 
-page_header($title, [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart($title, [], $textDomain);
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-rock-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/rock.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/rock.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
+

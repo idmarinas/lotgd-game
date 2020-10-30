@@ -21,7 +21,8 @@ $params = [
     'tradeinvalue' => $tradeinvalue,
 ];
 
-page_header('title', [], $textDomain);
+//-- Init page
+\LotgdResponse::pageStart('title', [], $textDomain);
 
 $op = (string) \LotgdRequest::getQuery('op');
 $repository = \Doctrine::getRepository('LotgdCore:Weapons');
@@ -73,6 +74,7 @@ elseif ('buy' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-weapon-tpl-params', $params);
-rawoutput(\LotgdTheme::renderThemeTemplate('page/weapon.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/weapon.html.twig', $params));
 
-page_footer();
+//-- Finalize page
+\LotgdResponse::pageEnd();
