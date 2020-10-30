@@ -34,7 +34,7 @@ $op = (string) \LotgdRequest::getQuery('op');
 
 if ('val' == $op || 'forgotval' == $op)
 {
-    page_header('title.validate', [], $textDomain);
+    \LotgdResponse::pageTitle('title.validate', [], $textDomain);
 }
 
 \LotgdNavigation::addHeader('common.category.login');
