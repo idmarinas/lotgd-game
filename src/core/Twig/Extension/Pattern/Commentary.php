@@ -211,20 +211,6 @@ trait Commentary
     }
 
     /**
-     * Template block for commentary.
-     * Only load one time.
-     */
-    protected function getTemplateBlock()
-    {
-        if ( ! $this->templateCommentaryBlock)
-        {
-            $this->templateCommentaryBlock = $this->getTemplate()->load('{theme}/_blocks/_commentary.html.twig');
-        }
-
-        return $this->templateCommentaryBlock;
-    }
-
-    /**
      * Get status messages of player.
      *
      * @param string $textDomain
