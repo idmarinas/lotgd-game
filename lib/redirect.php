@@ -25,18 +25,10 @@ function redirect($location, $reason = false)
         //-- Finalize output
         $lotgdJaxon->processRequest();
 
-        $failOutput = [
-            'title' => [
-                'title'      => 'redirect.badnav.title',
-                'params'     => [],
-                'textDomain' => 'app-default',
-            ],
-            'content'    => appoencode($content, true),
-            'csshead'    => $lotgdJaxon->getCss(),
-            'scripthead' => $lotgdJaxon->getJs(),
-            'scripthead' => $lotgdJaxon->getScript(),
-        ];
-        $session['output'] = \LotgdTheme::renderThemeTemplate('popup.twig', $failOutput);
+        \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app-default');
+        \LotgdTheme::getTemplateParams()->set('content', appoencode($content, true));
+
+        $session['output'] = \LotgdTheme::renderLayout(\LotgdTheme::getTemplateParams()->toArray());
     }
 
     restore_buff_fields();
