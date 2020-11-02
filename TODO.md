@@ -7,20 +7,19 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Mejorar el sistema de plantillas, para hacer la creación de temas mas sencillo
-    -   Mejorar el sistema para aprobechar mejor las capacidades de Twig
--   En batalla: poner la salud de jugador y enemigos en la columna de resultados, del jugador y enemigos, arriba y abajo
-    -   Mirar imagen Anotación 2020-09-24 153923
 -   Revisar y eliminar uso de DB:: class, se usará Doctrine en su lugar.
 -   Usar el zend-http component, para generar la respuesta del servidor (sustituir page_header y page_footer)
     -   Revisar el page_header y page_footer que queden sin sustituir,
-    preparar las plantillas para las páginas (faltan por transferir algunas plantillas tanto del core como del theme)
+-   Preparar las plantillas para las páginas (faltan por transferir algunas plantillas tanto del core como del theme)
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
+-   Revisar pageEnd para ver si se finaliza jaxon request
+-   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
 
 # Para la versión 4.6.0
 -   Revisar las plantillas, para seguir simplificando
     -   Crear los bloques en la misma plantilla principal, de la página
     -   Twig macros, se pueden usar para sustituir bloques que se necesita pasar variables (motd item/poll y similar)
+    -   Cada página tendra su plantilla (home.html.twig) que contiene todo lo que se necesita para esa pagina, dividida en bloques
 -   Helpers de Laminas view en Twig functions....
     -   Agregar el basePath helper
 -   ???? Crear el nuevo sistema de módulos
