@@ -15,20 +15,27 @@ namespace Lotgd\Core;
 
 class Hook
 {
+    //-- HOOKS readapted in Core 4.5.0
+
+    /**
+     * Page Hooks.
+     */
+    // Every header. Old: everyheader
+    const HOOK_EVERY_HEADER = 'lotgd.page.every.header';
+
+    // Every footer. Old: everyfooter
+    const HOOK_EVERY_FOOTER = 'lotgd.page.every.footer';
+
+    // Every header authenticated. Old: everyheader-loggedin
+    const HOOK_EVERY_HEADER_AUTHENTICATED = 'lotgd.page.every.header.authenticated';
+
+    // Every footer authenticated. Old: everyfooter-loggedin
+    const HOOK_EVERY_FOOTER_AUTHENTICATED = 'lotgd.page.every.footer.authenticated';
+
+
     /**
      * Hooks header/footer page
      */
-    // Every header
-    const HOOK_EVERY_HEADER = 'lotgd.page.every.header';
-
-    // Every footer
-    const HOOK_EVERY_FOOTER = 'lotgd.page.every.footer';
-
-    // Every header authenticated
-    const HOOK_EVERY_HEADER_AUTHENTICATED = 'lotgd.page.every.header.authenticated';
-
-    // Every footer authenticated
-    const HOOK_EVERY_FOOTER_AUTHENTICATED = 'lotgd.page.every.footer.authenticated';
 
     // In header for script
     const HOOK_HEADER_SCRIPT = 'lotgd.page.header.script.';
