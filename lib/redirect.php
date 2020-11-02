@@ -5,7 +5,7 @@
 // mail ready
 function redirect($location, $reason = false)
 {
-    global $session, $lotgdJaxon;
+    global $session;
 
     // This function is deliberately not localized.  It is meant as error handling.
     $session['debug'] = $session['debug'] ?? '';
@@ -21,9 +21,6 @@ function redirect($location, $reason = false)
             'locationUrl' => $location,
             'petitionUrl' => 'petition.php',
         ], 'app-default');
-
-        //-- Finalize output
-        $lotgdJaxon->processRequest();
 
         \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app-default');
         \LotgdTheme::getTemplateParams()->set('content', appoencode($content, true));
