@@ -1,0 +1,43 @@
+{#
+	All variables that get this template and type of content
+	[
+		'showbar' => boolean,
+		'showhptext' => boolean,
+		'who' => string,
+		'isTarget' => boolean,
+		'name' => string,
+		'level' => int,
+		'healthtext' => string,
+		'hpvalue' => int,
+		'hptotal' => int
+	]
+#}
+
+{% translate_default_domain 'page-battle' %}
+
+<table class="ui collapsing very basic very compact table">
+	<tr>
+		<td colspan="3">
+            {% set nametext = (name is iterable ? name[0]|tl(name[1], name[2] ?: 'page-battle') : name) %}
+			{% if isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
+			{{ '(%s) %s (Level `b%s´b)`0'|t|format(who|t, nametext, level)|colorize }}
+			{% if not showbar %}
+				{% if hpvalue > 0 %}: {% if showhptext %}{{ ( '`6' ~ hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ '`7DEFEATED`0'|t|colorize }}{% endif %}
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		{% if showbar %}
+			<td>&nbsp;&nbsp;{{ healthtext|t|colorize }}:&nbsp;</td>
+			<td style="width: 150px;">
+				<div style="margin: 0em;" class="ui tiny indicating lotgd progress battle" data-value="{{ hpvalue }}" data-total="{{ hptotal }}">
+					<div class="bar"></div>
+				</div>
+			</td>
+		{% endif %}
+		{% if showbar and showhptext %}
+			{% set text = hpvalue > 0 ? '' : '`7DEFEATED`0'|t|colorize %}
+			<td>&nbsp;{{ '(%s/%s) %s`0`n'|format(hpvaluetext, hptotaltext, text)|colorize }}</td>
+		{% endif %}
+	</tr>
+</table>
