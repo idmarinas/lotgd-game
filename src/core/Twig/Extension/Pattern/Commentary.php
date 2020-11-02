@@ -16,6 +16,7 @@ namespace Lotgd\Core\Twig\Extension\Pattern;
 trait Commentary
 {
     protected $onlineStatus;
+    protected $templateCommentaryBlock;
 
     /**
      * Default text domain for translator.
@@ -55,7 +56,7 @@ trait Commentary
             'SU_EDIT_COMMENTS'  => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return \LotgdTheme::renderThemeTemplate('parts/commentary.twig', $params);
+        return $this->getTemplateBlock()->renderBlock('commentary_block', $params);
     }
 
     /**
@@ -76,7 +77,7 @@ trait Commentary
             'SU_EDIT_COMMENTS'        => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return \LotgdTheme::renderThemeTemplate('parts/commentary/comment.twig', $params);
+        return $this->getTemplateBlock()->renderBlock('commentary_comment', $params);
     }
 
     /**
@@ -105,7 +106,7 @@ trait Commentary
         ];
 
         //-- Is a message of the game
-        if ('GAME' == strtoupper($comment['command']))
+        if ('GAME' == \strtoupper($comment['command']))
         {
             return \sprintf('<span data-tooltip="%1$s"><i class="gamepad icon" aria-label="%1$s"></i></span>',
                 $status['game']
@@ -117,7 +118,7 @@ trait Commentary
                 $status['you']
             );
         }
-        elseif ('AFK' == strtoupper($comment['chatloc']))
+        elseif ('AFK' == \strtoupper($comment['chatloc']))
         {
             $icon = [
                 // 'icon' => 'images/icons/onlinestatus/afk.png',
@@ -126,7 +127,7 @@ trait Commentary
                 'label'      => $status['afk'],
             ];
         }
-        elseif ('DNI' == strtoupper($comment['chatloc']))
+        elseif ('DNI' == \strtoupper($comment['chatloc']))
         {
             $icon = [
                 'icon'       => 'images/icons/onlinestatus/dni.png',
@@ -182,7 +183,7 @@ trait Commentary
             'maxChars'   => getsetting('maxchars', 200) + 100,
         ];
 
-        return \LotgdTheme::renderThemeTemplate('parts/commentary/add.twig', $params);
+        return $this->getTemplateBlock()->renderBlock('commentary_add', $params);
     }
 
     /**
@@ -207,6 +208,20 @@ trait Commentary
         }
 
         $this->getCommentary()->saveComment($data);
+    }
+
+    /**
+     * Template block for commentary.
+     * Only load one time.
+     */
+    protected function getTemplateBlock()
+    {
+        if ( ! $this->templateCommentaryBlock)
+        {
+            $this->templateCommentaryBlock = $this->getTemplate()->load('{theme}/_blocks/_commentary.html.twig');
+        }
+
+        return $this->templateCommentaryBlock;
     }
 
     /**
@@ -240,8 +255,8 @@ trait Commentary
         $url = \LotgdRequest::getServer('REQUEST_URI');
 
         //-- Sanitize link: Delete previous queries of: "page", "c", "commentPage" and "frombio"
-        $url = preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);
-        $url = preg_replace('/op=fight/i', 'op=continue', $url);
+        $url = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);
+        $url = \preg_replace('/op=fight/i', 'op=continue', $url);
 
         if (false === \strpos($url, '?') && false !== \strpos($url, '&'))
         {
