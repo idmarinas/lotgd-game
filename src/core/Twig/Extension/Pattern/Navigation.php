@@ -114,11 +114,12 @@ trait Navigation
     /**
      * Show pagination for a instance of Paginator.
      *
-     * @param string|null $link           Url to use in href atribute in links
-     * @param string|null $template       You can change the template for your own if you need it at a specific time
-     * @param string|null $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
+     * @param string|null       $link           Url to use in href atribute in links
+     * @param string|array|null $template       You can change the template for your own if you need it at a specific time
+     *                                          For render a block use array ['block_name', 'path/to/template']
+     * @param string|null       $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
      */
-    public function showPagination(Paginator $paginator, ?string $link = null, ?string $template = null, ?string $scrollingStyle = null, ?array $params = null): string
+    public function showPagination(Paginator $paginator, ?string $link = null, $template = null, ?string $scrollingStyle = null, ?array $params = null): string
     {
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
@@ -133,19 +134,14 @@ trait Navigation
         //-- Is a pagination for Jaxon-PHP
         if (0 === \strpos($link, 'JaxonLotgd.Ajax.Core.') || 0 === \strpos($link, 'JaxonLotgd.Ajax.Local.'))
         {
-            $template = $template ?: 'pagination_jaxon';
+            $template = $template ?: ['pagination_jaxon', '{theme}/_blocks/_partials.html.twig'];
 
             $pages['jaxon'] = $link;
 
-            if ('pagination_jaxon' == $template)
-            {
-                return $this->getTemplate()->renderBlock($template, "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", $pages);
-            }
-
-            return $this->getTemplate()->renderTheme($template, $pages);
+            return $this->renderPagination($template, $pages);
         }
 
-        $template = $template ?: 'parts/pagination.twig';
+        $template = $template ?: ['pagination', '{theme}/_blocks/_partials.html.twig'];
 
         //-- Use request uri if not set link
         $link = $link ?: \LotgdRequest::getServer('REQUEST_URI');
@@ -168,6 +164,23 @@ trait Navigation
         }
 
         $pages['href'] = $link;
+
+        return $this->renderPagination($template, $pages);
+    }
+
+    /**
+     * Render template for pagination.
+     *
+     * @param string|array|null $template
+     * @param array             $pages
+     */
+    protected function renderPagination($template, $pages): string
+    {
+        //-- Render block template
+        if (\is_array($template))
+        {
+            return $this->getTemplate()->renderBlock($template[0], $template[1], $pages);
+        }
 
         return $this->getTemplate()->renderTheme($template, $pages);
     }
