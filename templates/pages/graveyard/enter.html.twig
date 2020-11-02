@@ -1,0 +1,8 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.enter.paragraph'|t({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
+
+{% set result = modulehook('mausoleum') %}
+{% for message in result %}
+    {{ message[0]|tl(message[1], message[2])|colorize }}
+{% endfor %}

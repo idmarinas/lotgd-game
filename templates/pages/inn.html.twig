@@ -1,0 +1,18 @@
+{% translate_default_domain textDomain %}
+
+<span class="ui inverted purple text">
+    {% for tpl, params in includeTemplatesPre %}
+        {% include tpl with params %}
+    {% endfor %}
+
+    {% if showInnDescription %}
+        <div class="center aligned"><strong>{{ innName|colorize }}</strong></div>
+    {% endif %}
+
+    {{ include_layout('pages/inn/' ~ tpl|default('default') ~ '.html.twig') }}
+
+    {% for tpl, params in includeTemplatesPost %}
+        {% include tpl with params %}
+    {% endfor %}
+</span>
+

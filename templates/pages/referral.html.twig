@@ -1,0 +1,32 @@
+{% translate_default_domain textDomain %}
+
+{{ 'paragraph'|t({ 'refererAward': refererAward, 'referMinLevel': referMinLevel, 'playerReferralUrl': '%sreferral.php?r=%s'|format(serverUrl, user.login|e('url')) })|colorize }}
+
+{{ 'table.title'|t|colorize }}
+
+<table class="ui collapsing very basic table">
+    <thead>
+        <tr>
+            <th scope="col">{{ 'table.thead.name'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.dk'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.level'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.awarded'|t|uncolorize }}</th>
+        </tr>
+    </thead>
+    {% set yes = 'table.tbody.yes'|t|colorize %}
+    {% set no = 'table.tbody.no'|t|colorize %}
+    <tbody>
+        {% for character in referrers %}
+            <tr>
+                <td>{{ character.name|colorize }}</td>
+                <td>{{ character.dragonkills|numeral }}</td>
+                <td>{{ character.level|numeral }}</td>
+                <td>{{ (character.refererawarded ? yes : no)|colorize }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">{{ 'table.tbody.none'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

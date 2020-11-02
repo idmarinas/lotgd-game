@@ -1,0 +1,12 @@
+{% translate_default_domain textDomain %}
+
+{% if result %}
+    {% if buyIt %}
+        {{ 'payweapon'|t(_context|merge({'playerWeapon': userPre.weapon, 'weaponName': result.weaponname}))|colorize }}
+    {% else %}
+        {{ 'notenoughgold'|t(_context|merge({'weaponName': result.weaponname}))|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'nosuchweapon'|t(_context)|colorize }}
+    {{ 'tryagain'|t(_context)|colorize }}
+{% endif %}

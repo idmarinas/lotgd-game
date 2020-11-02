@@ -1,0 +1,7 @@
+{% translate_default_domain textDomain %}
+
+{% if not battle %}
+    {{ 'subtitle'|t|colorize }}
+
+    {{ include_layout('pages/train/' ~ tpl|default('default') ~ '.html.twig') }}
+{% endif %}

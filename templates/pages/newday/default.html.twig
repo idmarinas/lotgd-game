@@ -1,0 +1,76 @@
+{% translate_default_domain textDomain %}
+
+<h1 class="ui header center aligned">{{ 'section.default.title'|t|colorize }}</h1>
+
+{# Resurrection #}
+{% if resurrected %}
+    {{ 'section.default.resurrection'|t({ 'resurrections': user.resurrections })|colorize }}
+{% endif %}
+
+{# You discover it's a new day O_O #}
+{{ 'section.default.open.eyes'|t({ 'age': user.age })|colorize }}
+
+{# Show turns if not have stamina system module active #}
+{% if not moduleStaminaSystem %}
+    {{ 'section.default.turns'|t({ 'turns': turnsPerDay })|colorize }}
+{% endif %}
+
+{% if canGetInterest %}
+    {{ 'section.default.interest.worker'|t(_context)|colorize }}
+{% elseif maxInterest %}
+    {{ 'section.default.interest.max'|t(_context)|colorize }}
+{% else %}
+    {{ 'section.default.interest.rate'|t({ 'rate': interestRate - 1 })|colorize }}
+    {% if userPre.goldinbank >= 0 %}
+        {{ 'section.default.interest.earned'|t({ 'gold': (userPre.goldinbank * (interestRate - 1)) })|colorize }}
+    {% else %}
+        {{ 'section.default.interest.debt'|t({ 'gold': (userPre.goldinbank * (interestRate - 1)) })|colorize }}
+    {% endif %}
+{% endif %}
+
+{{ 'section.default.hitpoints'|t({ 'maxHitpoints': user.maxhitpoints })|colorize }}
+
+{# Buffs messages #}
+{% for message in buffMessages %}
+    {{ message|colorize }}<br>
+{% endfor %}
+
+{% if not moduleStaminaSystem and forestTurnDragonKill %}
+    {{ 'section.default.forest.turns'|t({ 'turns': forestTurnDragonKill })|colorize }}
+{% endif %}
+
+{# Spirit of character #}
+{{ 'section.default.spirit.level'|t({ 'spirit': spirits[spirit]|t })|colorize }}
+
+{% if spirit|abs %}
+    {% set balance = (resurrectionTurns > 0 ? 'gain' : 'lost') %}
+    {% if moduleStaminaSystem %}
+        {{ 'section.default.spirit.stamina'|t({ 'balance': balance })|colorize }}
+    {% else %}
+        {{ 'section.default.spirit.turns'|t({ 'balance': balance, 'turns': resurrectionTurns|abs })|colorize }}
+    {% endif %}
+{% endif %}
+
+{% if user.hashorse %}
+    {% if mountMessage is array %}
+        {{ mountMessage[0]|format(mountMessage[1])|colorize }}
+    {% else %}
+        {{ mountMessage|colorize }}
+    {% endif %}
+
+    {% if mountTurns != 0 %}
+        {% set state = mountTurns > 0 ? 'gain' : 'lost' %}
+
+        {{ 'section.default.horse.yes'|t({ 'state': state, 'turns': mountTurns })|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'section.default.horse.no'|t({ 'playerWeapon': user.weapon })|colorize }}
+{% endif %}
+
+{# Haunted by ghost #}
+{% if haunted %}
+    {{ ('section.default.haunted.' ~ (moduleStaminaSystem ? 'stamina' : 'turns'))|t({ 'name': haunted })|colorize }}
+{% endif %}
+
+
+

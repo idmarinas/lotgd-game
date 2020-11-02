@@ -1,0 +1,14 @@
+{% translate_default_domain textDomain %}
+
+{% if showGraveyardDesc %}
+    {{ 'section.default.paragraph'|t({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
+
+    {% set result = modulehook('graveyard-desc') %}
+    {% for message in result %}
+        {% if message is array %}
+            {{ message[0]|tl(message[1], message[2])|colorize }}
+        {% else %}
+            {{ message|colorize }}
+        {% endif %}
+    {% endfor %}
+{% endif %}

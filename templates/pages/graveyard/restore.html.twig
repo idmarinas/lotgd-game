@@ -1,0 +1,11 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.restore.subtitle'|t|colorize }}
+
+{% if restored is same as(true) %}
+    {{ 'section.restore.result.success'|t({ 'graveyardOwnerName': graveyardOwnerName, 'favor': favorToHeal })|colorize }}
+{% elseif restored is same as(false) %}
+    {{ 'section.restore.result.fail'|t({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
+{% else %}
+    {{ 'section.restore.result.no.need'|t({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
+{% endif %}

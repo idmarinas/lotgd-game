@@ -1,0 +1,5 @@
+{% translate_default_domain textDomain %}
+
+{% if not battle %}
+    {{ include_layout('pages/pvp/' ~ tpl|default('default') ~ '.html.twig') }}
+{% endif %}

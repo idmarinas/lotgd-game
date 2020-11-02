@@ -1,0 +1,7 @@
+{% translate_default_domain textDomain %}
+
+{% if user.seenmaster %}
+    {{ 'section.challenge.seen.master'|t(_context)|colorize }}
+{% elseif not battle %}
+    {{ 'section.challenge.cant'|t(_context)|colorize }}
+{% endif %}

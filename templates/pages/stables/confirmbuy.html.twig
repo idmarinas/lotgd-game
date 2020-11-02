@@ -1,0 +1,15 @@
+{% translate_default_domain textDomain %}
+
+{% if mount %}
+    {% if mountBuyed %}
+        {% if mountReplace %}
+
+        {% else %}
+
+        {% endif %}
+    {% else %}
+        {{ 'confirmbuy.no.money'|t(_context)|colorize }}
+    {% endif %}
+{% else %}
+    {{ 'section.not.found.beast'|t(_context)|colorize }}
+{% endif %}

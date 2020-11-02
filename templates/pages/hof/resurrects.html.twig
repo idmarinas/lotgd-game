@@ -1,0 +1,27 @@
+{% translate_default_domain textDomain %}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <th>{{ 'section.days.table.thead.rank'|t|uncolorize }}</th>
+        <th>{{ 'section.days.table.thead.name'|t|uncolorize }}</th>
+        <th>{{ 'section.days.table.thead.level'|t|uncolorize }}</th>
+    </thead>
+    <tbody>
+        {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
+        {% for character in paginator %}
+            <tr>
+                <td>{{ loop.index + rank }}</td>
+                <td>{{ character.name|colorize }}</td>
+                <td>{{ character.level }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">{{ 'section.days.table.tbody.none'|t|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ footerTitle[0]|t(footerTitle[1])|colorize }}
+
+{{ navigation_pagination(paginator) }}

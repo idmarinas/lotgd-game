@@ -1,0 +1,9 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.question.paragraph'|t(_context)|colorize }}
+
+{% if user.experience >= expRequired %}
+    {{ 'section.question.exp.have'|t(_context)|colorize }}
+{% else %}
+    {{ 'section.question.exp.need'|t(_context)|colorize }}
+{% endif %}

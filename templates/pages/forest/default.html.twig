@@ -1,0 +1,14 @@
+{% translate_default_domain textDomain %}
+
+{% if showForestMessage %}
+    {{ 'section.default.description'|t|colorize }}
+
+    {% set result = modulehook('forest-desc') %}
+    {% for message in result %}
+        {% if message is array %}
+            {{ message[0]|tl(message[1], message[2])|colorize }}
+        {% else %}
+            {{ message|colorize }}
+        {% endif %}
+    {% endfor %}
+{% endif %}

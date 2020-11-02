@@ -1,0 +1,7 @@
+{% translate_default_domain textDomain %}
+
+{{ include_layout('pages/stables/' ~ tpl|default('default') ~ '.html.twig') }}
+
+{% if confirm == 0 and user.hashorse %}
+    {{ 'section.offer'|t(_context)|colorize }}
+{% endif %}

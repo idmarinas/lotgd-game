@@ -1,0 +1,9 @@
+{% translate_default_domain textDomain %}
+
+{{ 'section.specialty.paragraph'|t|colorize }}
+
+{% if isAdmin %}
+    {{ 'section.specialty.admin.yes'|t|colorize }}
+{% else %}
+    {{ 'section.specialty.admin.no'|t|colorize }}
+{% endif %}

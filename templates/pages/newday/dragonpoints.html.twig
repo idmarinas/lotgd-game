@@ -1,0 +1,80 @@
+{% translate_default_domain textDomain %}
+
+{% if points > 1 %}
+    {{ 'section.dragonpoints.multi.paragraph'|t({ 'points': points })|colorize }}
+
+    <form id="dragon-points-form" action="{{ formUrl|lotgd_url }}" method="post">
+        <table class="ui very compact basic collapsing centered table">
+            {% for type, label in labels %}
+                {% set head = label|split(',') %}
+
+                {% if head|length > 1 %}
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="collapsing center aligned">{{ '`b`4%s`0´b'|format(head[0])|colorize }}</th>
+                        </tr>
+                    </thead>
+                {% elseif canBuy[type] %}
+                    <tr>
+                        <td class="collapsing">{{ label|colorize }}</td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td><input type="number" id="{{ type }}" name="{{ type }}" value="" onchange="pointsLeft(this)"></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr><td colspan="2">&nbsp;</td></tr>
+            <tr>
+                <td colspan="2" class="center aligned">
+                    <button type="submit" class="ui button">{{ 'section.dragonpoints.multi.form.button.submit'|t|uncolorize }}</button>
+                </td>
+            </tr>
+            <tr><td colspan="2">&nbsp;</td></tr>
+            <tr>
+                <td colspan="2" class="center aligned"><div id="amt-left"></div></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        var points = parseInt('{{ points }}')
+
+        var textLeft = '{{ "section.dragonpoints.form.points.left"|t|colorize }}'
+        var textOver = '{{ "section.dragonpoints.form.points.over"|t|colorize }}'
+
+        function pointsLeft()
+        {
+            var pointsTotal = 0;
+            $('input[type="number"]').each(function (index, elem)
+            {
+                pointsTotal += elem.val()
+            })
+
+            let text = (pointsTotal >= 0) ? textLeft : textOver;
+
+            $('#amt-left').html(text.replace('%s', pointsTotal).replace('%s', (points - pointsTotal)))
+        }
+    </script>
+{% else %}
+    {{ 'section.dragonpoints.single.paragraph'|t(_context)|colorize }}
+
+    <table class="ui very compact basic collapsing centered table">
+        {% for type, label in labels %}
+            {% set head = label|split(',') %}
+
+            {% if head|length > 1 %}
+                <thead>
+                    <tr>
+                        <th colspan="2" class="center aligned">{{ '`b`4%s`0´b'|format(head[0])|colorize }}</th>
+                    </tr>
+                </thead>
+            {% elseif canBuy[type] and canBuy[type] != 'unknown' %}
+                <tr>
+                    <td>{{ label|colorize }}</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>{{ '`@%s`0'|format(distribution[type]|numeral)|colorize }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endif %}
+

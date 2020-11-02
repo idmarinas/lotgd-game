@@ -1,0 +1,6 @@
+{% translate_default_domain textDomain %}
+
+<!-- Avoid displaying forest text when in battle -->
+{% if not battle %}
+    {{ include_layout('pages/forest/' ~ tpl|default('default') ~ '.html.twig') }}
+{% endif %}

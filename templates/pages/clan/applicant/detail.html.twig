@@ -1,0 +1,68 @@
+{% translate_default_domain textDomain %}
+
+{% if SU_AUDIT_MODERATION %}
+<div class="ui modal editClan">
+    <i class="close icon"></i>
+    <div class="header">{{ 'section.detail.form.title'|t|colorize }}</div>
+    <div class="content">
+        <form id="formEditClan" action="{{ ('clan.php?op=detail&clanid=' ~ clanDetail.clanid)|lotgd_url }}" method="POST" class="ui form">
+            <div class="field">
+                <label for="clanname">{{ 'section.detail.form.label.name'|t|colorize }}</label>
+                <input id="clanname" name="clanname" value="{{ clanDetail.clanname|e }}" />
+            </div>
+            <div class="field">
+                <label for="clanshort">{{ 'section.detail.form.label.short'|t|colorize }}</label>
+                <input id="clanshort" name="clanname" value="{{ clanDetail.clanshort|e }}" />
+            </div>
+            <div class="field">
+                {% if 4294967295 == clanDetail.descauthor %}
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" id="unblock" name="unblock" value="1">
+                        <label for="unblock">{{ 'section.detail.form.label.toggle.unblock'|t|colorize }}</label>
+                    </div>
+                {% else %}
+                    <div class="ui toggle checkbox">
+                        <input type="checkbox" id="block" name="block" value="1">
+                        <label for="block">{{ 'section.detail.form.label.toggle.block'|t|colorize }}</label>
+                    </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">{{ 'section.detail.form.button.cancel'|t|uncolorize }}</div>
+        <div class="ui positive right labeled icon button">{{ 'section.detail.form.button.submit'|t|uncolorize }} <i class="edit icon"></i></div>
+    </div>
+</div>
+
+<button class="ui orange button" onclick="$('.ui.modal.editClan').modal({ onApprove : function() { $('#formEditClan').submit(); } }).modal('show')">{{ 'section.detail.button.modal'|t|uncolorize }}</button>
+{% endif %}
+
+<div class="ui segment">{{ 'section.detail.description'|t({ 'description': clanDetail.clandesc })|colorize }}</div>
+
+{{ 'section.detail.membership'|t({ 'clanName': clanDetail.clanname, 'clanShortName': clanDetail.clanshort })|colorize }}
+
+<table class="ui very compact striped selectable table">
+    <thead>
+        <th>{{ 'section.detail.table.theader.rank'|t|uncolorize }}</th>
+        <th>{{ 'section.detail.table.theader.name'|t|uncolorize }}</th>
+        <th>{{ 'section.detail.table.theader.level'|t|uncolorize }}</th>
+        <th>{{ 'section.detail.table.theader.dragonkill'|t|uncolorize }}</th>
+        <th>{{ 'section.detail.table.theader.join.date'|t|uncolorize }}</th>
+    </thead>
+    <tbody>
+        {% set totalDragonkills = 0 %}
+        {% for member in membership %}
+            {% set totalDragonkills = totalDragonkills + member.dragonkills %}
+            <tr>
+                <td>{{ ranksNames[member.clanrank]|t|colorize }}</td>
+                <td>{{ '`&<a href="%s">%s</a>`0'|format(('bio.php?char=' ~ member.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url, member.name)|colorize }}</td>
+                <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
+                <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
+                <td>{{ '`${date,date} {date,time}`0'|tmf({ 'date': member.clanjoindate })|colorize }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{{ 'section.membership.total.dragonkills'|t({ dragonkills: totalDragonkills })|colorize }}

@@ -1,0 +1,26 @@
+{% translate_default_domain textDomain %}
+
+{% if user.goldinbank >= 0 %}
+    {{ 'deposit.balance.positive'|t({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
+{% else %}
+    {{ 'deposit.balance.negative'|t({ 'gold': user.goldinbank|abs, 'ownerName': ownerName })|colorize }}
+{% endif %}
+
+{{ 'deposit.searching'|t({ 'gold': user.gold, 'ownerName': ownerName })|colorize }}
+
+<form action="{{ 'bank.php?op=depositfinish'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+    <div class="field">
+        <label for="amount">
+            {% if user.goldinbank >= 0 %}
+                {{ 'deposit.form.input.amount.label.dep'|t({'ownerName': ownerName})|colorize }}
+            {% else %}
+                {{ 'deposit.form.input.amount.label.pay'|t({'ownerName': ownerName})|colorize }}
+            {% endif %}
+        </label>
+        <div class="ui action input">
+            <input type="number" id="amount" name="amount">
+            <button type="submit" class="ui button">{{ 'deposit.form.button.submit'|t|uncolorize }}</button>
+        </div>
+        {{ 'deposit.form.input.amount.note'|t(_context)|colorize }}
+    </div>
+</form>

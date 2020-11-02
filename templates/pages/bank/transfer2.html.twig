@@ -1,0 +1,38 @@
+{% translate_default_domain textDomain %}
+
+{{ 'transfer2.subtitle'|t|colorize }}
+
+{% set count = characters|length %}
+
+{% if count == 1 %}
+    <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <input type="hidden" name="to" value="{{ characters[0].id }}">
+        <input type="hidden" name="amount" value="{{ amount }}">
+        <div class="field">
+            {{ 'transfer2.form.confirm'|t({ 'amount': amount, 'name': characters[0].name })|colorize }}
+        </div>
+        <div class="field">
+            <button class="ui button">{{ 'transfer2.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </form>
+{% elseif count > 1 %}
+    {% if count == 100 %}
+        {{ 'transfer2.results.toMuch'|t({'ownerName': ownerName})|colorize }}
+    {% endif %}
+    <form action="{{ 'bank.php?op=transfer3'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        <input type="hidden" name="amount" value="{{ amount }}">
+        <div class="field">
+            <label for="to">{{ 'transfer2.form.results'|t({ 'amount': amount })|colorize }}</label>
+            <select name="to" id="to" class="ui search selection lotgd dropdown">
+                {% for char in characters %}
+                    <option value="{{ char.id }}">{{ char.name|uncolorize }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field">
+            <button class="ui button">{{ 'transfer2.form.button.submit'|t|uncolorize }}</button>
+        </div>
+    </form>
+{% else %}
+    {{ 'transfer2.notFound'|t|colorize }}
+{% endif %}

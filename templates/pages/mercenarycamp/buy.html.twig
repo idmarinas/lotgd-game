@@ -1,0 +1,13 @@
+{% translate_default_domain textDomain %}
+
+{% if companionHire is same as(true) %}
+    {{ 'section.buy.success'|t|colorize }}
+
+    {% if companion.jointext %}
+        {{ companion.jointext|colorize }}
+    {% endif %}
+{% elseif companionHire is same as(false) %}
+    {{ 'section.buy.too.many'|t|colorize }}
+{% else %}
+    {{ 'section.buy.error'|t|colorize }}
+{% endif %}
