@@ -51,7 +51,7 @@ trait Inbox
             $params['inboxCount'] = \count($params['mails']);
 
             // Dialog content
-            $content = \LotgdTheme::renderThemeTemplate('jaxon/mail/inbox.twig', $params);
+            $content = $this->getTemplate()->renderBlock('mail_inbox', $params);
 
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());

@@ -43,7 +43,7 @@ trait Write
                 {
                     $params['row'] = [
                         'acctid' => $account->getAcctid(),
-                        'name' => $account->getCharacter()->getName()
+                        'name'   => $account->getCharacter()->getName(),
                     ];
                 }
             }
@@ -90,19 +90,19 @@ trait Write
             }
 
             $subj = \LotgdTranslator::t('section.write.reply.subject', [
-                'subject' => ''
+                'subject' => '',
             ], $this->getTextDomain());
 
-            if (0 !== strncmp($row['subject'], $subj, strlen($subj)))
+            if (0 !== \strncmp($row['subject'], $subj, \strlen($subj)))
             {
                 $row['subject'] = \LotgdTranslator::t('section.write.reply.subject', [
-                    'subject' => $row['subject']
+                    'subject' => $row['subject'],
                 ], $this->getTextDomain());
             }
-            $row['body'] = sprintf("\n\n---%s---\n%s",
+            $row['body'] = \sprintf("\n\n---%s---\n%s",
                 \LotgdTranslator::t('section.write.reply.body', [
-                    'name' => trim(\LotgdSanitize::fullSanitize($row['name'])),
-                    'date' => $row['sent']
+                    'name' => \trim(\LotgdSanitize::fullSanitize($row['name'])),
+                    'date' => $row['sent'],
                 ], $this->getTextDomain()),
                 $row['body']
             );
@@ -114,7 +114,7 @@ trait Write
                 \array_push($params['superusers'], $row['acctid']);
             }
 
-            $params['row'] = $row;
+            $params['row']   = $row;
             $params['msgId'] = $reply;
 
             $this->composer($params, $response);
@@ -132,7 +132,7 @@ trait Write
     private function composer(&$params, &$response)
     {
         // Dialog content
-        $content = \LotgdTheme::renderThemeTemplate('jaxon/mail/write.twig', $params);
+        $content = $this->getTemplate()->renderBlock('mail_write', $params);
 
         // Dialog title
         $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
@@ -141,7 +141,7 @@ trait Write
         $buttons = [
             [
                 'title' => \LotgdTranslator::t('section.write.form.button.submit', [], $this->getTextDomain()),
-                'class' => 'ui approve primary button'
+                'class' => 'ui approve primary button',
             ],
             [
                 'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
@@ -157,7 +157,7 @@ trait Write
                 JaxonLotgd.Ajax.Core.Mail.send(jaxon.getFormValues('mail-message'));
 
                 return false;
-            "
+            ",
         ];
 
         $response->dialog->show($title, ['content' => $content, 'isScrollable' => true], $buttons, $options);

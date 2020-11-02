@@ -17,7 +17,6 @@ use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\AccountsRepository;
-use Lotgd\Core\EntityRepository\CharactersRepository;
 use Lotgd\Core\EntityRepository\MailRepository;
 
 class Mail extends AjaxAbstract
@@ -32,6 +31,7 @@ class Mail extends AjaxAbstract
 
     protected $repositoryMail;
     protected $repositoryAcct;
+    protected $templateMail;
 
     /**
      * Check status of inbox.
@@ -76,7 +76,7 @@ class Mail extends AjaxAbstract
     /**
      * Get repository of Mail entity.
      */
-    private function getRepository(): MailRepository
+    protected function getRepository(): MailRepository
     {
         if ( ! $this->repositoryMail instanceof MailRepository)
         {
@@ -89,7 +89,7 @@ class Mail extends AjaxAbstract
     /**
      * Get repository of Characters entity.
      */
-    private function getAcctRepository(): AccountsRepository
+    protected function getAcctRepository(): AccountsRepository
     {
         if ( ! $this->repositoryAcct instanceof AccountsRepository)
         {
@@ -102,11 +102,24 @@ class Mail extends AjaxAbstract
     /**
      * Get default params.
      */
-    private function getParams(): array
+    protected function getParams(): array
     {
         return [
             'textDomain'    => self::TEXT_DOMAIN,
             'mailSizeLimit' => getsetting('mailsizelimit', 1024),
         ];
+    }
+
+    /**
+     * Get template block for Mail.
+     */
+    protected function getTemplate()
+    {
+        if ( ! $this->templateMail)
+        {
+            $this->templateMail = \LotgdTheme::load('{theme}/_blocks/_mail.html.twig');
+        }
+
+        return $this->templateMail;
     }
 }

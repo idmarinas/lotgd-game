@@ -38,7 +38,7 @@ trait Read
 
             $message = $repository->findOneBy([
                 'messageid' => $id,
-                'msgto' => $session['user']['acctid']
+                'msgto'     => $session['user']['acctid'],
             ]);
 
             if ( ! $message)
@@ -51,7 +51,7 @@ trait Read
             $charRepository = \Doctrine::getRepository('LotgdCore:Characters');
 
             $params['message'] = clone $message;
-            $params['sender'] = $charRepository->findOneByAcct($message->getMsgfrom());
+            $params['sender']  = $charRepository->findOneByAcct($message->getMsgfrom());
 
             $params['paginator'] = $repository->getNextPreviousMail($message->getMessageid(), $session['user']['acctid']);
 
@@ -62,7 +62,7 @@ trait Read
             \Doctrine::flush();
 
             // Dialog content
-            $content = \LotgdTheme::renderThemeTemplate('jaxon/mail/read.twig', $params);
+            $content = $this->getTemplate()->renderBlock('mail_read', $params);
 
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
@@ -94,8 +94,6 @@ trait Read
 
     /**
      * Mark message as unread.
-     *
-     * @return void
      */
     public function unread(?int $id): Response
     {
@@ -115,7 +113,7 @@ trait Read
 
             $unread = $repository->findOneBy([
                 'messageid' => $id,
-                'msgto' => $session['user']['acctid']
+                'msgto'     => $session['user']['acctid'],
             ]);
 
             if ( ! $unread)
