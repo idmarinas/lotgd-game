@@ -1,0 +1,24 @@
+{% block partial_event_trigger %}
+    {% translate_default_domain textDomain %}
+
+    <table class="ui small very compact striped table">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'table.thead.name'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.rchance'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.thead.nchance'|t|uncolorize }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>
+                        <a href="{{ ( script ~ '?eventhandler=module-' ~ event.modulename)|lotgd_url }}">{{ event.modulename }}</a>
+                    </td>
+                    <td>{{ event.rawchance|numeral }}%</td>
+                    <td>{{ event.normchance|numeral }}%</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock partial_event_trigger %}
