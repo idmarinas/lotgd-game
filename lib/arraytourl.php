@@ -8,7 +8,7 @@
  *
  * @copyright Copyright © 2002-2005, Eric Stevens & JT Traub, © 2006-2009, Dragonprime Development Team
  *
- * @version Lotgd 1.1.2 DragonPrime Edition
+ * @version 1.1.2 Lotgd DragonPrime Edition
  *
  * @license http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode
  *
