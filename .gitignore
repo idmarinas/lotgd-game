@@ -248,15 +248,11 @@ $RECYCLE.BIN/
 !/storage/**/.gitkeep
 
 # Other files/folders
-/docs/
 cli-config.php
 phan.csv
 /public/build/
 
 # Ignore all files/folders that end in .dist
 *.dist
-
-# Ignore skeleton generated
-skeleton/
 
 #  END LoTGD ignores
