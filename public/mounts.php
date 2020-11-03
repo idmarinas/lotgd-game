@@ -152,7 +152,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/mounts/module.twig', $params));
 
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {

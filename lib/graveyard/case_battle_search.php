@@ -17,7 +17,7 @@ else
     {
         if (\LotgdNavigation::checkNavs())
         {
-            page_footer();
+            \LotgdResponse::pageEnd();
         }
 
         // If we're going back to the graveyard, make sure to reset

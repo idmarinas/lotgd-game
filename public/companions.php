@@ -168,7 +168,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/companions/module.twig', $params));
 
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {

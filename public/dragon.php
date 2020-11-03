@@ -207,7 +207,7 @@ elseif ('prologue' == $op)
 
     \LotgdNavigation::addNav('common.nav.newday', 'news.php');
 
-    page_footer();
+    \LotgdResponse::pageEnd();
 }
 elseif ('run' == $op)
 {
@@ -272,7 +272,7 @@ if ($battle)
 
         battleshowresults($lotgdBattleContent);
 
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {

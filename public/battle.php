@@ -869,5 +869,5 @@ if ($battleShowResult)
 //-- If battle end in defeat, break page after show content
 if ($defeat && $battleShowResult)
 {
-    page_footer();
+    \LotgdResponse::pageEnd();
 }

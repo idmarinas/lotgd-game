@@ -71,7 +71,7 @@ elseif ('search' == $op)
         {
             if (\LotgdNavigation::checkNavs())
             {
-                page_footer();
+                \LotgdResponse::pageEnd();
             }
 
             // If we're showing the forest, make sure to reset the special

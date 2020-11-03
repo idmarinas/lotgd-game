@@ -36,7 +36,7 @@ if (! $op && '' == $com && ! $comment && ! $refresh && ! $commenting && 0 != mod
 {
     if (\LotgdNavigation::checkNavs())
     {
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {

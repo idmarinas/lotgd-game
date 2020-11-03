@@ -135,7 +135,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/creatures/module.twig', $params));
 
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {

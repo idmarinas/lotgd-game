@@ -362,7 +362,7 @@ switch ($op)
                 lotgd_showform($msettings, $data);
                 rawoutput('</form>');
 
-                page_footer();
+                \LotgdResponse::pageEnd();
             }
             else
             {

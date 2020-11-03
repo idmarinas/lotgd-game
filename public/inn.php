@@ -167,7 +167,7 @@ switch ($op)
         {
             if (\LotgdNavigation::checkNavs())
             {
-                page_footer();
+                \LotgdResponse::pageEnd();
             }
 
             // Reset the special for good.

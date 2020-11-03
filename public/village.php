@@ -92,7 +92,7 @@ if (! $op && '' == $com && ! $comment && ! $commenting && 0 != module_events('vi
 {
     if (\LotgdNavigation::checkNavs())
     {
-        page_footer();
+        \LotgdResponse::pageEnd();
     }
     else
     {
