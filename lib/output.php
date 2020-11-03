@@ -9,6 +9,8 @@ $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
  * Block any output statements temporarily.
  *
  * @param $block should output be blocked
+ *
+ * @deprecated
  */
 function set_block_new_output($block)
 {
@@ -20,6 +22,8 @@ function set_block_new_output($block)
  * Raw output (unprocessed) appended to the output buffer.
  *
  * @param $indata
+ *
+ * @deprecated
  */
 function rawoutput($indata)
 {
@@ -33,7 +37,9 @@ function rawoutput($indata)
  *
  * @param $indata If an array is passed then the format for sprintf is assumed otherwise a simple string is assumed
  *
- * @see sprintf, apponencode
+ * @see apponencode
+ *
+ * @deprecated
  */
 function output_notl($indata)
 {
@@ -48,6 +54,8 @@ function output_notl($indata)
  * @param What to output. If an array is passed then the format used by sprintf is assumed
  *
  * @see output_notl
+ *
+ * @deprecated
  */
 function output()
 {
@@ -62,6 +70,8 @@ function output()
  *
  * @param $text The string to output
  * @param  $force If true, force debug output even for non SU/non flagged
+ *
+ * @deprecated
  */
 function debug($text, $force = false)
 {
