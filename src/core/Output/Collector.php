@@ -31,6 +31,8 @@ class Collector
      * Raw output (unprocessed) appended to the output buffer.
      *
      * @param $indata the raw material to be outputted
+     *
+     * @deprecated 4.5.0 Delete in version 5.0.0, use "LotgdResponse::pageAddContent(string $content)" instead
      */
     public function rawoutput($indata)
     {
@@ -52,6 +54,8 @@ class Collector
 
     /**
      * Search and replace keywords.
+     *
+     * @deprecated 4.5.0 Delete in version 5.0.0, use Twig templates
      */
     public function sustitute(string $out): string
     {
@@ -140,6 +144,8 @@ class Collector
      *
      * @param $text The input text or variable to debug, string
      * @param $force Default is false, if true it will always be outputted to ANY user. If false, only SU_DEBUG will see it.
+     *
+     * @deprecated 4.5.0 Delete in version 5.0.0, use new "LotgdResponse::pageDebug(string $content, boolean $force)"
      */
     public function debug($text, $force = false)
     {
@@ -198,7 +204,7 @@ class Collector
     /**
      * Colormap for use with sanitize commands.
      *
-     * @return Returns only the codes with no spaces: $colorcode$colorcode...
+     * @return string Returns only the codes with no spaces: $colorcode$colorcode...
      */
     public function get_colormap()
     {
@@ -208,7 +214,7 @@ class Collector
     /**
      * Returns the Colormap like get_colormap() but escapes the dollar letter or the slash.
      *
-     * @return Returns only the codes with no spaces: $colorcode$colorcode...
+     * @return string Returns only the codes with no spaces: $colorcode$colorcode...
      */
     public function get_colormap_escaped()
     {
@@ -218,7 +224,7 @@ class Collector
     /**
      * Returns the Colormap like get_colormap() but escapes the dollar letter or the slash.
      *
-     * @return Returns only the codes as an array
+     * @return array Returns only the codes as an array
      */
     public function get_colormap_escaped_array()
     {
