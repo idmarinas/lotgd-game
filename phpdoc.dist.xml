@@ -1,42 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<phpdocumentor>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+        xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
+>
     <title>Legend of the Green Dragon</title>
-    <parser>
-        <target>output-cache.dist</target>
-        <encoding>utf8</encoding>
-        <markers>
-            <item>TODO</item>
-            <item>FIXME</item>
-        </markers>
-        <extensions>
-            <extension>php</extension>
-        </extensions>
-        <visibility></visibility>
-    </parser>
-    <transformer>
-        <target>docs</target>
-    </transformer>
-    <transformations>
-        <template name="responsive" />
-    </transformations>
-    <files>
-        <directory>.</directory>
-        <ignore>.git/*</ignore>
-        <ignore>.github/*</ignore>
-        <ignore>.phan/*</ignore>
-        <ignore>.vscore/*</ignore>
-        <ignore>assets/*</ignore>
-        <ignore>dist/*</ignore>
-        <ignore>docs/*</ignore>
-        <ignore>error_docs/*</ignore>
-        <ignore>gulp/*</ignore>
-        <ignore>output-cache.dist/*</ignore>
-        <ignore>node_modules/*</ignore>
-        <ignore>release/*</ignore>
-        <ignore>semantic/*</ignore>
-        <ignore>storage/*</ignore>
-        <ignore>templates/*</ignore>
-        <ignore>translations/*</ignore>
-        <ignore>vendor/*</ignore>
-    </files>
+    <paths>
+        <output>docs</output>
+        <cache>output-cache.dist</cache>
+    </paths>
+    <version number="4.5.0">
+        <api>
+            <source dsn=".">
+                <path>src</path>
+                <path>lib</path>
+                <path>config</path>
+            </source>
+            <markers>
+                <marker>TODO</marker>
+                <marker>FIXME</marker>
+            </markers>
+        </api>
+    </version>
 </phpdocumentor>
