@@ -7,13 +7,7 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Revisar y eliminar uso de DB:: class, se usará Doctrine en su lugar.
--   Usar el zend-http component, para generar la respuesta del servidor (sustituir page_header y page_footer)
-    -   Revisar el page_header y page_footer que queden sin sustituir,
--   Preparar las plantillas para las páginas (faltan por transferir algunas plantillas tanto del core como del theme)
--   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
--   Revisar pageEnd para ver si se finaliza jaxon request
--   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
+-   ....
 
 # Para la versión 4.6.0
 -   Revisar las plantillas, para seguir simplificando
@@ -22,24 +16,31 @@
     -   Cada página tendra su plantilla (home.html.twig) que contiene todo lo que se necesita para esa pagina, dividida en bloques
 -   Helpers de Laminas view en Twig functions....
     -   Agregar el basePath helper
--   ???? Crear el nuevo sistema de módulos
-    -   Un sistema compatible con el viejo
 
 # Para la versión 4.7.0
 -   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+-   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
+    -   Se tiene que ir quitando estas clases, y mover las fuciones a otras zonas.
+    -   Ejemplo: el colorize (appoencode) se moverá a otra clase
 
 # Para la versión 4.8.0
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
 
+# Para la versión 4.9.0
+-   ???? Crear el nuevo sistema de módulos
+    -   Un sistema compatible con el viejo
+
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación, mixto: por consola o por web.
--   Uso de Laminas DB, obsoleto.
+-   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
-        -   Esto se eliminara en esta versión
+        -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
 -   Eliminar compatibilidad con el uso del viejo sistema de módulos
+    -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de traducción.
+    -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 
 
@@ -60,6 +61,7 @@
         -   Templates: permitir reemplazar una pantilla de un bundle con otra propia, es una forma fácil de personalizar y crear temas propios.
 
 ## Cosas pendientes
+-   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Login
     -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
