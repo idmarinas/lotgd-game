@@ -56,8 +56,6 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
 
         //-- Finalize page
         \LotgdResponse::pageEnd();
-
-        page_footer();
     }
 
     echo $outputHtml;
