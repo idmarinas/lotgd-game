@@ -139,6 +139,7 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 -   **lib/pageparts.php** the following funtions are marked as obsoleted.
     -   `page_header()` use `\LotgdResponse::pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null)` instead
     -   `page_footer()` use `\LotgdResponse::pageEnd()` instead
+-   Class `Lotgd\Core\Db\Dbwrapper` are deprecated use Doctrine to create queries to Data Base
 
 ### :wrench: FIXES
 
