@@ -54,7 +54,7 @@ const config = {
             '!src/core{,/**}',
             '!src/ajax/core{,/**}',
             '!src/ajax/pattern/core{,/**}',
-            '!templates/{base,core,jaxon,semantic}{,/**}',
+            '!templates_core{,/**}',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor}{,/**}',
             //-- Ignore all dist folders
@@ -66,7 +66,7 @@ const config = {
     }
 }
 
-var custom = {}
+let custom = {}
 try
 {
     custom = require('../custom/config/default')
