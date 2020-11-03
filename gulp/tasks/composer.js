@@ -3,13 +3,13 @@
  */
 
 //-- Dependencies
-var composer = require('gulp-composer')
+const composer = require('gulp-composer')
 
 //-- Configuration
-var config = require('../config/default')
-var configTasks = require('../config/tasks')
+const config = require('../config/default')
+const configTasks = require('../config/tasks')
 
-var isProduction = configTasks.isProduction()
+const isProduction = configTasks.isProduction()
 
 module.exports = function (callback)
 {

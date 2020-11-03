@@ -1,11 +1,10 @@
 /** *****************************
-                 Release Config
+    Release Config
 ***************************** **/
-var npmPackage
-var version
+let npmPackage
 
 /** *****************************
-                 Derived Values
+    Derived Values
 ***************************** **/
 try
 {
@@ -21,12 +20,12 @@ catch (error)
 }
 
 // looks for version in config or package.json (whichever is available)
-version = (npmPackage && npmPackage.version !== undefined && npmPackage.name === 'idmarinas-lotgd')
+const version = (npmPackage && npmPackage.version !== undefined && npmPackage.name === 'idmarinas-lotgd')
     ? npmPackage.version
     : 'x.y.z'
 
 /** *****************************
-                         Export
+    Export
 ***************************** **/
 
 const commonBanner = ' /*' + '\n' +
@@ -47,7 +46,7 @@ module.exports = {
     url: npmPackage.homepage,
     year: () =>
     {
-        var date = new Date()
+        const date = new Date()
 
         return date.getFullYear()
     },

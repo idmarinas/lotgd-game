@@ -1,11 +1,11 @@
 //-- Dependencies
-var release = require('./project/release')
-var env = require('minimist')(process.argv.slice(2))
+const release = require('./project/release')
+const env = require('minimist')(process.argv.slice(2))
 
 //-- Options
-var themeOptions = { theme: env.theme || 'jade' }
-var envOptions = { env: env.env || 'development' }
-var options = Object.assign(env, envOptions, themeOptions)
+const themeOptions = { theme: env.theme || 'jade' }
+const envOptions = { env: env.env || 'development' }
+const options = Object.assign(env, envOptions, themeOptions)
 
 module.exports = {
     banner: release.banner,

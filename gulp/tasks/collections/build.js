@@ -9,4 +9,5 @@ module.exports = function (gulp)
     gulp.task('build').description = 'Builds all files from source'
 
     gulp.task('main', main)
-    gulp.task('main').description = 'Copy main files of application'}
+    gulp.task('main').description = 'Copy main files of application'
+}

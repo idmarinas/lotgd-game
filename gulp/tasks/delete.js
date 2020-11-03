@@ -3,12 +3,12 @@
  */
 
 //-- Dependencies
-var del = require('del')
+const del = require('del')
 
 //-- Configuration
-var config = require('../config/default')
-var configTasks = require('../config/tasks')
-var isProduction = configTasks.isProduction()
+const config = require('../config/default')
+const configTasks = require('../config/tasks')
+const isProduction = configTasks.isProduction()
 
 //-- Delete distribution files
 module.exports = function (callback)

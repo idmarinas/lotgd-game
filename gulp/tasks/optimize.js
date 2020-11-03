@@ -1,19 +1,19 @@
 //-- Dependencies
-var gulp = require('gulp')
-var print = require('gulp-print').default
-var gulpif = require('gulp-if')
-var uglify = require('gulp-uglify')
-var fancyLog = require('fancy-log')
-var colors = require('ansi-colors')
-var del = require('del')
+const gulp = require('gulp')
+const print = require('gulp-print').default
+const gulpif = require('gulp-if')
+const uglify = require('gulp-uglify')
+const fancyLog = require('fancy-log')
+const colors = require('ansi-colors')
+const del = require('del')
 const normalize = require('normalize-path')
 
 //-- Configuration
-var config = require('../config/default')
-var configTasks = require('../config/tasks')
-var log = configTasks.log
-var isProduction = configTasks.isProduction()
-var settings = configTasks.settings
+const config = require('../config/default')
+const configTasks = require('../config/tasks')
+const log = configTasks.log
+const isProduction = configTasks.isProduction()
+const settings = configTasks.settings
 
 module.exports = function (callback)
 {
