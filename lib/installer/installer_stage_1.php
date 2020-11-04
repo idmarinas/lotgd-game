@@ -36,4 +36,4 @@ else
     $session['installer']['stagecompleted'] = -1;
 }
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-1.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-1.html.twig', $params));

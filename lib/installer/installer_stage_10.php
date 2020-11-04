@@ -90,7 +90,7 @@ if (0 == $superusers)
             'name'  => $name,
         ];
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-10.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-10.html.twig', $params));
     }
 }
 else

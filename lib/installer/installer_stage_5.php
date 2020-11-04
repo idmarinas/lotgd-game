@@ -110,4 +110,4 @@ $params = [
     'DB_PREFIX' => $session['installer']['dbinfo']['DB_PREFIX'] ?? '',
 ];
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-5.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-5.html.twig', $params));

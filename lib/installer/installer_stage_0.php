@@ -78,4 +78,4 @@ $params = [
     'authentication' => $needsauthentication,
 ];
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-0.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-0.html.twig', $params));

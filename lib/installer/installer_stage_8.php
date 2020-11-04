@@ -111,4 +111,4 @@ $params = [
     'stage'              => $stage,
 ];
 
-\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-8.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-8.html.twig', $params));

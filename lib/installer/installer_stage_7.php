@@ -38,7 +38,7 @@ if ( ! isset($session['installer']['fromversion']) || '' == $session['installer'
         'actualVersion' => $version,
     ];
 
-    \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-7.twig', $params));
+    \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-7.html.twig', $params));
 }
 else
 {
