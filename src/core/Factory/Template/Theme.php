@@ -33,7 +33,7 @@ class Theme implements FactoryInterface
         $opts     = $config['lotgd_core'] ?? [];
         $packages = $container->get('webpack_encore.packages');
 
-        $templateSystem = new TemplateTheme(['./vendor/symfony/twig-bridge/Resources/views/Form'], [
+        $templateSystem = new TemplateTheme([], [
             'debug' => (bool) ($opts['development'] ?? false),
             //-- Used dir of cache
             'cache' => 'storage/cache/template',
@@ -41,6 +41,9 @@ class Theme implements FactoryInterface
             'auto_reload' => (bool) ($opts['development'] ?? false),
         ]);
         $templateSystem->setContainer($container);
+
+        //-- Added templates Symfony Forms with namespace
+        $templateSystem->getLoader()->prependPath('./vendor/symfony/twig-bridge/Resources/views/Form', 'symfonyForm');
 
         // the Twig file that holds all the default markup for rendering forms
         // this file comes with TwigBridge
