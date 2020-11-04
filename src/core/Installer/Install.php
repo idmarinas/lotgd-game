@@ -329,6 +329,14 @@ class Install
                     $managed = $doctrine->find($data['entity'], $entity->getId());
                     $entity = $hydrator->hydrate($hydrator->extract($entity), $managed);
                 }
+                //-- Updated entity by field
+                elseif (0 === strpos($data['method'], 'update-by-field-'))
+                {
+                    $field = substr($data['method'], 16);
+                    $repository = $doctrine->getRepository($data['entity']);
+                    $managed = $repository->findOneBy([ $field => $entity->{'get'.ucfirst($field)}() ]);
+                    $entity = $hydrator->hydrate($hydrator->extract($entity), $managed);
+                }
 
                 $doctrine->merge($entity);
             }
@@ -337,7 +345,7 @@ class Install
             {
                 $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }
-            elseif ('update-by-id' == $data['method'] || 'update' == $data['method'] || 'replace' == $data['method'])
+            elseif (0 === strpos($data['method'], 'update-by-') || 'update' == $data['method'] || 'replace' == $data['method'])
             {
                 $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }

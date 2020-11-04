@@ -1,5 +1,5 @@
 {
-    "method": "update-by-id",
+    "method": "update-by-field-name",
 	"table": "cronjob",
     "entity": "Lotgd\\Core\\Entity\\Cronjob",
 	"rows":
