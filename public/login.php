@@ -153,8 +153,6 @@ if ('' != $name)
             }//end foreach
         }//end if (DB::num_rows)
 
-        \Doctrine::clear(); //-- Detaches all objects from Doctrine!
-
         return redirect('index.php');
     }
 

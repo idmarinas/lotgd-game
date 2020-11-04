@@ -63,8 +63,6 @@ if (0 == $superusers)
                 $account->setCharacter($character);
                 \Doctrine::persist($account);
                 \Doctrine::flush(); //-- Persist objects
-
-                \Doctrine::clear(); //-- Detaches all objects from Doctrine!
             }
             catch (\Throwable $th)
             {

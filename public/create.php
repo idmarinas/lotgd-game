@@ -395,8 +395,6 @@ elseif ('create' == $op)
 
             lotgd_mail($email, $subj, appoencode($msg, true));
 
-            \Doctrine::clear(); //-- Detaches all objects from Doctrine!
-
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
 
             return redirect('index.php');
