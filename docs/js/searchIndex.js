@@ -13326,6 +13326,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Template-Template.html#constant_TEMPLATES_MODULES_BASE_DIR"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024mandatoryFunctionsErrors",
+            "name": "mandatoryFunctionsErrors",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#property_mandatoryFunctionsErrors"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024themeName",
             "name": "themeName",
             "summary": "",
