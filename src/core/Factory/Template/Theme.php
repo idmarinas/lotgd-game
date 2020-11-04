@@ -47,7 +47,7 @@ class Theme implements FactoryInterface
 
         // the Twig file that holds all the default markup for rendering forms
         // this file comes with TwigBridge
-        $defaultFormTheme = 'form/semantic-ui-form-theme.html.twig';
+        $defaultFormTheme = '{theme}/form/semantic-ui-form-theme.html.twig';
         $formEngine       = new TwigRendererEngine([$defaultFormTheme], $templateSystem);
         $templateSystem->addRuntimeLoader(new FactoryRuntimeLoader([
             FormRenderer::class => function () use ($formEngine)
