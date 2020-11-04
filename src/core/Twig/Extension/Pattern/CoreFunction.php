@@ -198,7 +198,7 @@ trait CoreFunction
     {
         $include = $env->getFunction('include')->getCallable();
 
-        return $include($env, $context, "module/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
+        return $include($env, $context, "module/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 
     /**
@@ -217,7 +217,7 @@ trait CoreFunction
     {
         $include = $env->getFunction('include')->getCallable();
 
-        return $include($env, $context, "{$env->getThemefolder()}/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
+        return $include($env, $context, "{$env->getThemefolder()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 
     /**
@@ -236,6 +236,6 @@ trait CoreFunction
     {
         $include = $env->getFunction('include')->getCallable();
 
-        return $include($env, $context, "@theme{$env->getThemeNamespace()}/{$template}", $variables, $withContext, $ignoreMissing, $sandboxed);
+        return $include($env, $context, "@theme{$env->getThemeNamespace()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 }
