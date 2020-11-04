@@ -1,4 +1,4 @@
-{% use 'form_div_layout.html.twig' %}
+{% use '@symfonyForm/form_div_layout.html.twig' %}
 
 {%- block form_start -%}
     {%- set attr = attr|merge({class: ('ui ' ~ attr.class|default(''))|trim }) -%}
