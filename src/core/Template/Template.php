@@ -50,9 +50,8 @@ class Template extends Environment
         ];
         $options = \array_merge($default, $options);
 
-        //-- Merge loaders
-        $loader = \array_merge(['templates' /* Compatibility with modules (temporal) */], $loader);
         array_push($loader, static::TEMPLATES_BASE_DIR); // Main templates is always last, is the last area where Twig will look
+        array_push($loader, 'templates'); // Compatibility with modules (temporal , remove in future before 5.0.0)
         $loader = new LotgdFilesystemLoader($loader);
 
         //-- Added path to templates modules
