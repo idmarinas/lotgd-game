@@ -134,7 +134,7 @@ class Theme implements FactoryInterface
                     continue;
                 }
 
-                $templateSystem->getLoader()->prependPath($path, $namespace);
+                $templateSystem->getLoader()->addPath($path, $namespace);
             }
         }
     }
