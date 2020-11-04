@@ -1,5 +1,3 @@
-{% use '{theme}/_blocks/_buttons.html.twig' %}
-
 <tr>
     <td>
         <table class="lotgd table">
@@ -14,7 +12,7 @@
                     <table class="lotgd table">
                         <tr>
                             <td class="top aligned">{{ game_copyright() }} <br> Design: Jade Template &copy; Josh Canning 2004 of <a href='http://hfs.cjb.net/' target="_blank" rel="noopener noreferrer">HFS</a></td>
-                            <td class="top aligned right aligned collapsing">{% block game_source parent() %}<br />{{ game_version() }}<br />{{ game_page_gen() }}</td>
+                            <td class="top aligned right aligned collapsing">{{ game_source() }}<br />{{ game_version() }}<br />{{ game_page_gen() }}</td>
                         </tr>
                     </table>
                 </td>

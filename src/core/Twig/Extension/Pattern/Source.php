@@ -23,11 +23,6 @@ trait Source
      */
     public function gameSource(): string
     {
-        \trigger_error(\sprintf(
-            'Usage of %s (game_source() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{%% block game_source parent() %%}" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        return $this->getTemplate()->renderBlock('game_source', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
+        return $this->getTemplate()->renderBlock('game_source', '{theme}/_blocks/_buttons.html.twig', []);
     }
 }
