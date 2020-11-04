@@ -15,7 +15,7 @@
 		{{ metahead }}
 
         <!-- Title tag for page -->
-        {{ head_title() }}
+        <title>{{ head_title().renderTitle() }}</title>
 
         {{ encore_entry_link_tags('lotgd', 'lotgd', 'lotgd') }}
         {{ encore_entry_link_tags('semantic_ui', 'lotgd', 'lotgd') }}
@@ -46,7 +46,7 @@
 
         <!-- START Cookies Consent -->
         <script>
-            // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line no-unused-vars, no-var
             var cookieName = '{{ session_cookie_name() }}'
         </script>
         {{ encore_entry_script_tags('cookie_guard', 'lotgd', 'lotgd') }}
