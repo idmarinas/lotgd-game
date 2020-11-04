@@ -28,7 +28,7 @@ class Template extends Environment
     use Pattern\Template;
 
     const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
-    const TEMPLATES_BASE_DIR         = 'templates'; //-- Main templates folder.
+    const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
     const TEMPLATES_CORE_BASE_DIR    = 'templates_core'; //-- Core templates of game (Not intended to be customizable)
     const TEMPLATES_MODULES_BASE_DIR = 'templates_modules'; //-- Folder for templates of modules.
 
@@ -51,7 +51,8 @@ class Template extends Environment
         $options = \array_merge($default, $options);
 
         //-- Merge loaders
-        $loader = \array_merge([static::TEMPLATES_BASE_DIR], $loader);
+        $loader = \array_merge(['templates' /* Compatibility with modules (temporal) */], $loader);
+        array_push($loader, static::TEMPLATES_BASE_DIR); // Main templates is always last, is the last area where Twig will look
         $loader = new LotgdFilesystemLoader($loader);
 
         //-- Added path to templates modules
