@@ -60,8 +60,8 @@ const config = {
             //-- Ignore all dist folders
             '!{*.,}dist{,/**}',
             //-- Ignore some files
-            '!*.{txt,TXT,csv}',
-            '!{README.md, TODO.md}'
+            '!*.{txt,TXT,csv,phar}',
+            '!{README.md,TODO.md,phpdoc.dist.xml}'
         ]
     }
 }
