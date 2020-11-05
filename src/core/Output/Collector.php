@@ -49,6 +49,7 @@ class Collector
         if (is_string($indata) && ! is_null($indata))
         {
             $this->output .= $indata."\n";
+            \LotgdResponse::pageAddContent($indata);
         }
     }
 
@@ -105,8 +106,7 @@ class Collector
             }
         }
 
-        //-- Added content added to response
-        return \LotgdResponse::getContent().$text;
+        return $text;
     }
 
     /**
