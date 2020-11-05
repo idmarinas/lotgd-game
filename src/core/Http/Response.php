@@ -81,8 +81,13 @@ class Response extends HttpResponse
      * Add content to response.
      * To overwrite content use pageSetContent($value) or setContent($value).
      */
-    public function pageAddContent(string $value): void
+    public function pageAddContent(?string $value): void
     {
+        if (! $value)
+        {
+            return;
+        }
+
         $this->setContent($this->getContent().$value);
     }
 
@@ -90,8 +95,13 @@ class Response extends HttpResponse
      * Alias of setContent().
      * THIS OVERWRITE ALL CONTENT, to add more content use pageAddContent($value).
      */
-    public function pageSetContent(string $value): void
+    public function pageSetContent(?string $value): void
     {
+        if (! $value)
+        {
+            return;
+        }
+
         $this->setContent($value);
     }
 
