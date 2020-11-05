@@ -10,7 +10,7 @@ function do_forced_nav($anonymous, $overrideforced)
 
     $requestUri = \LotgdRequest::getServer('REQUEST_URI');
 
-    rawoutput("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
+    \LotgdResponse::pageAddContent("<!--\nAllowAnonymous: ".($anonymous ? 'True' : 'False')."\nOverride Forced Nav: ".($overrideforced ? 'True' : 'False')."\n-->");
 
     if ($session['user']['acctid'] ?? false)
     {

@@ -193,7 +193,7 @@ function translate_inline($in, $namespace = false)
         __METHOD__
     ), E_USER_DEPRECATED);
     $out = translate($in, $namespace);
-    rawoutput(tlbutton_clear());
+    \LotgdResponse::pageAddContent(tlbutton_clear());
 
     return $out;
 }

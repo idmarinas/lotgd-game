@@ -168,7 +168,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
     if ($print)
     {
-        rawoutput($content);
+        \LotgdResponse::pageAddContent($content);
     }
 
     tlschema('showform');
@@ -179,7 +179,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
     {
         if ($print)
         {
-            rawoutput("<input class='ui button' type='submit' value='{$save}'>");
+            \LotgdResponse::pageAddContent("<input class='ui button' type='submit' value='{$save}'>");
         }
         else
         {
@@ -480,7 +480,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             foreach ($vals as $k => $v)
             {
                 $vals[$k] = translate($v);
-                rawoutput(tlbutton_pop());
+                \LotgdResponse::pageAddContent(tlbutton_pop());
             }
             tlschema();
             $select = "<select class='ui lotgd dropdown' name='{$keyout}'>";

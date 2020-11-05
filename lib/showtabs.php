@@ -95,5 +95,5 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
         return $content;
     }
 
-    rawoutput($content);
+    \LotgdResponse::pageAddContent($content);
 }

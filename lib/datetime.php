@@ -77,7 +77,7 @@ function checkday()
 
     if ($session['user']['loggedin'] ?? false)
     {
-        rawoutput('<!--CheckNewDay()-->');
+        \LotgdResponse::pageAddContent('<!--CheckNewDay()-->');
 
         if (is_new_day())
         {
