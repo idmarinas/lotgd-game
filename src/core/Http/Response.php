@@ -57,11 +57,10 @@ class Response extends HttpResponse
 
         $args = ['script' => $script, 'module' => $module];
         $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
-        modulehook('everyheader', $args); //-- This hook will be removed in version 5.0.0
+        $args = modulehook('everyheader', $args); //-- This hook will be removed in version 5.0.0
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $args = ['script' => $script, 'module' => $module];
             $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
             modulehook('everyheader-loggedin', $args); //-- This hook will be removed in version 5.0.0
         }
@@ -139,13 +138,12 @@ class Response extends HttpResponse
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $replacementbits = ['script' => $script, 'module' => $module];
             $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
             $replacementbits = modulehook('everyfooter-loggedin', $replacementbits); //-- This hook will be removed in version 5.0.0
         }
 
         unset($replacementbits['__scriptfile__'], $replacementbits['script']);
-        //output any template part replacements that above hooks need (eg, advertising)
+        //output any template part replacements that above hooks need (eg, advertising)º
         foreach ($replacementbits as $key => $val)
         {
             $content = $this->getTemplateParams()->get($key, '').$val;
