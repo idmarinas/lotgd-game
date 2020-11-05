@@ -581,7 +581,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
         if (isset($badguy['creaturewin']) && $badguy['creaturewin'] > '')
         {
-            $lotgdBattleContent['battleend'][] = substitute_array("`b`&{$badguy['creaturewin']}`0´b`n");
+            $lotgdBattleContent['battleend'][] = substitute("`b`&{$badguy['creaturewin']}`0´b`n");
         }
     }
 
