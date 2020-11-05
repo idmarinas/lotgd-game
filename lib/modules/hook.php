@@ -212,28 +212,24 @@ function module_wipehooks(string $module)
         __METHOD__
     ), E_USER_DEPRECATED);
 
-    $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');
-    $result     = $repository->findBy(['modulename' => $module]);
-
-    debug("Removing all hooks for {$module}");
+    $delHooks = \Doctrine::createQueryBuilder();
+    $delHooks->where('u.modulename = :name')
+        ->setParameter('name', $module)
+    ;
+    $delHooksEvents = clone $delHooks;
 
     try
     {
-        foreach ($result as $row)
-        {
-            \Doctrine::remove($row);
-            \LotgdCache::removeItem('hooks-hook-'.$row->getLocation());
-        }
+        debug("Removing all hooks for {$module}");
 
-        $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
-        $result     = $repository->findBy(['modulename' => $module]);
-
-        foreach ($result as $row)
-        {
-            \Doctrine::remove($row);
-        }
-
-        \Doctrine::flush();
+        $delHooks->delete('LotgdCore:ModuleHooks', 'u')
+            ->getQuery()
+            ->execute()
+        ;
+        $delHooksEvents->delete('LotgdCore:ModuleEventHooks', 'u')
+            ->getQuery()
+            ->execute()
+        ;
     }
     catch (\Throwable $ex)
     {
