@@ -25,19 +25,19 @@
 				{% if hpvalue > 0 %}: {% if showhptext %}{{ ( '`6' ~ hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ '`7DEFEATED`0'|t|colorize }}{% endif %}
 			{% endif %}
 		</td>
-	</tr>
-	<tr>
-		{% if showbar %}
-			<td>&nbsp;&nbsp;{{ healthtext|t|colorize }}:&nbsp;</td>
-			<td style="width: 150px;">
-				<div style="margin: 0em;" class="ui tiny indicating lotgd progress battle" data-value="{{ hpvalue }}" data-total="{{ hptotal }}">
-					<div class="bar"></div>
-				</div>
-			</td>
-		{% endif %}
-		{% if showbar and showhptext %}
-			{% set text = hpvalue > 0 ? '' : '`7DEFEATED`0'|t|colorize %}
-			<td>&nbsp;{{ '(%s/%s) %s`0`n'|format(hpvaluetext, hptotaltext, text)|colorize }}</td>
-		{% endif %}
-	</tr>
+    </tr>
+    {% if showbar %}
+        <tr>
+            <td>&nbsp;&nbsp;{{ healthtext|t|colorize }}:&nbsp;</td>
+            <td style="width: 150px;">
+                <div style="margin: 0em;" class="ui tiny indicating lotgd progress battle" data-value="{{ hpvalue }}" data-total="{{ hptotal }}">
+                    <div class="bar"></div>
+                </div>
+            </td>
+            {% if showhptext %}
+                {% set text = hpvalue > 0 ? '' : '`7DEFEATED`0'|t|colorize %}
+                <td>&nbsp;{{ '(%s/%s) %s`0`n'|format(hpvaluetext, hptotaltext, text)|colorize }}</td>
+            {% endif %}
+        </tr>
+    {% endif %}
 </table>
