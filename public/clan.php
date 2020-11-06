@@ -144,13 +144,3 @@ $params = modulehook('page-clan-tpl-params', $params);
 
 //-- Finalize page
 \LotgdResponse::pageEnd();
-
-function clanform()
-{
-    $data = [
-        'clanname' => htmlentities(stripslashes(\LotgdRequest::getPost('clanname')), ENT_COMPAT, getsetting('charset', 'UTF-8')),
-        'clanshort' => htmlentities(stripslashes(\LotgdRequest::getPost('clanshort')), ENT_COMPAT, getsetting('charset', 'UTF-8'))
-    ];
-
-    rawoutput(LotgdTheme::renderThemeTemplate('page/clan/new.twig', $data));
-}
