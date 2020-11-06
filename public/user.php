@@ -357,10 +357,10 @@ switch ($op)
                     $data[$row->getSetting()] = $row->getValue();
                 }
 
-                rawoutput("<form action='user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}' method='POST'>");
+                \LotgdResponse::pageAddContent("<form action='user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}' method='POST'>");
                 \LotgdNavigation::addNavAllow("user.php?op=savemodule&module={$module}&userid={$userId}{$returnpetition}");
                 lotgd_showform($msettings, $data);
-                rawoutput('</form>');
+                \LotgdResponse::pageAddContent('</form>');
 
                 \LotgdResponse::pageEnd();
             }
