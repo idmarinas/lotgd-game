@@ -166,7 +166,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNavAllow("companions.php?op=edit&subop=module&id={$id}&module={$module}");
 
-        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/companions/module.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/companions/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }

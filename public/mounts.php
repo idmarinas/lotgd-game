@@ -150,7 +150,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNav('', "mounts.php?op=edit&subop=module&id=${mountId}&module=${module}");
 
-        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/mounts/module.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/mounts/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }

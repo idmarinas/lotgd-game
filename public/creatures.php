@@ -133,7 +133,7 @@ elseif ('edit' == $op || 'add' == $op)
 
         \LotgdNavigation::addNavAllow("creatures.php?op=save&subop=module&creatureid={$creatureId}&module={$module}");
 
-        rawoutput(\LotgdTheme::renderLotgdTemplate('core/page/creatures/module.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/creatures/module.html.twig', $params));
 
         \LotgdResponse::pageEnd();
     }
