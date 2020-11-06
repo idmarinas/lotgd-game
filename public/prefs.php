@@ -480,7 +480,7 @@ else
     {
         //we have an email change request here
         $replacearray = explode('|', $session['user']['replaceemail']);
-        output('`$There is an email change request pending to the email address `q"%s`$" that was given at the timestamp %s (Server Time Zone).`n', $replacearray[0], $replacearray[1]);
+        \LotgdResponse::pageAddContent(appoencode(\LotgdTranslator::t('replace.email.pending', ['email' => $replacearray[0], 'time' => $replacearray[1]], $textDomain)));
         $expirationdate = strtotime('+ '.getsetting('playerchangeemaildays', 3).' days', strtotime($replacearray[1]));
         $left = $expirationdate - strtotime('now');
         $hoursleft = round($left / (60 * 60), 1);
@@ -490,24 +490,24 @@ else
         {
             if ($hoursleft > 0)
             {
-                output('`n`qIf not cancelled, the option to automatically accept the new email address without verification will be due in approximately %s hours and can be done on this page.`n`n', $hoursleft);
+                \LotgdResponse::pageAddContent(appoencode(\LotgdTranslator::t('replace.email.hours.left', [ 'hours' => $hoursleft ], $textDomain)));
             }
             else
             {
                 // display the direct link to change it.
-                $changeemail = translate_inline('Force your email address NOW');
-                output('`n`qTime is up, you can now accept the change via this button:`n`n');
-                rawoutput("<form action='prefs.php?op=forcechangeemail' method='POST'><input type='submit' class='ui button' value='$changeemail'></form><br>");
+                $changeemail = \LotgdTranslator::t('replace.email.button.force', [], $textDomain);
+                \LotgdResponse::pageAddContent(appoencode(\LotgdTranslator::t('replace.email.time.out', [], $textDomain)));
+                \LotgdResponse::pageAddContent("<form action='prefs.php?op=forcechangeemail' method='POST'><input type='submit' class='ui button' value='$changeemail'></form><br>");
                 \LotgdNavigation::addNavAllow('prefs.php?op=forcechangeemail');
             }
         }
         else
         {
-            output('`$If you have trouble with this, please petition.`n`n');
+            \LotgdResponse::pageAddContent(appoencode(\LotgdTranslator::t('replace.email.trouble', [], $textDomain)));
         }
-        $cancelemail = translate_inline('Cancel email change request');
-        output('`$Cancel the request with the following button:`n`n');
-        rawoutput("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='ui button' value='$cancelemail'></form><br>");
+        $cancelemail = \LotgdTranslator::t('replace.email.button.cancel', [], $textDomain);
+        \LotgdResponse::pageAddContent(appoencode(\LotgdTranslator::t('replace.email.cancel', [], $textDomain)));
+        \LotgdResponse::pageAddContent("<form action='prefs.php?op=cancelemail' method='POST'><input type='submit' class='ui button' value='$cancelemail'></form><br>");
         \LotgdNavigation::addNavAllow('prefs.php?op=cancelemail');
     }
 

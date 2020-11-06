@@ -11,6 +11,16 @@ section:
     forcechangeemail: '`$The email change request to the address "`q{email}`0" has been forced. Links sent will not work anymore.`0`n`n'
     cancelemail: '`$The email change request to the address "`q{email}`0" has been cancelled. Links sent will not work anymore.`0`n`n'
 
+replace.email:
+    pending: '`$There is an email change request pending to the email address `q"{email}"`0 that was given at the timestamp {time} (Server Time Zone).`0`n'
+    hours.left: '`n`qIf not cancelled, the option to automatically accept the new email address without verification will be due in approximately {hours} hours and can be done on this page.`0`n`n'
+    time.out: '`n`qTime is up, you can now accept the change via this button:`0`n`n'
+    trouble: '`$If you have trouble with this, please petition.`0`n`n'
+    cancel: '`$Cancel the request with the following button:`0`n`n'
+    button:
+        force: 'Force your email address NOW'
+        cancel: 'Cancel email change request'
+
 flash.message:
     form:
         password:
