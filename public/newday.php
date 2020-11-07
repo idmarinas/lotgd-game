@@ -63,6 +63,7 @@ if ((count($session['user']['dragonpoints']) < $session['user']['dragonkills']) 
         case 'wis':
             $session['user']['wisdom']++;
             break;
+        default;
     }
 }
 
