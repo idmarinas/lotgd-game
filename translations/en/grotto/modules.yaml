@@ -41,14 +41,14 @@ table:
 
 module:
     performing:
-        install: '`2Performing `^install`0 on `%{module}`0`n'
-        uninstall: '`2Performing `^uninstall`0 on `%{module}`0`n'
-        activate: '`2Performing `^activate`0 on `%{module}`0`n'
-        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`n'
-        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`n'
+        install: '`2Performing `^install`0 on `%{module}`0`0`n'
+        uninstall: '`2Performing `^uninstall`0 on `%{module}`0`0`n'
+        activate: '`2Performing `^activate`0 on `%{module}`0`0`n'
+        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`0`n'
+        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`0`n'
     fail:
-        install: '`$Error, module could not be installed!`n`n'
+        install: '`$Error, module could not be installed!`0`n`n'
         uninstall: 'Unable to inject module. Module not uninstalled.`n'
-        activate: '`2Performing `^activate`0 on `%{module}`0`n'
-        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`n'
-        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`n'
+        activate: '`2Performing `^activate`0 on `%{module}`0`0`n'
+        deactivate: '`2Performing `^deactivate`0 on `%{module}`0`0`n'
+        reinstall: '`2Performing `^reinstall`0 on `%{module}`0`0`n'
