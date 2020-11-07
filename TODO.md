@@ -14,6 +14,7 @@
     -   Crear los bloques en la misma plantilla principal, de la página
     -   Twig macros, se pueden usar para sustituir bloques que se necesita pasar variables (motd item/poll y similar)
     -   Cada página tendra su plantilla (home.html.twig) que contiene todo lo que se necesita para esa pagina, dividida en bloques
+-   gedmo/doctrine-extensions migrar a la versión 3.0.0
 -   Helpers de Laminas view en Twig functions....
     -   Agregar el basePath helper
 
