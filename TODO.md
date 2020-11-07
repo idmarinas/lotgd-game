@@ -104,3 +104,7 @@ Esta plantilla hereda todas las variables de la plantilla padre.
 ## Menu de navegación
 
 Permitir añadir al principio o al final de una categoria, añadir una categoría al final o al inicio
+
+#### Comandos
+
+`/vendor/bin/doctrine orm:schema-tool:update --dump-sql --force`
