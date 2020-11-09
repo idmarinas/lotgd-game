@@ -1,7 +1,6 @@
 # How work new assets
 
 `assets/` now save all CSS/JS/IMG and other content.
-La carpeta "lotgd" guarda el contenido del core y puede ser usada para crear un tema personalizado.
 
 ### How create new theme?
 
@@ -24,4 +23,4 @@ Need this files is
 
 In `assets` folder can include your js and other content
 
-Them need create a custom `webpack.config.custom.js` (See: `webpack.config.custom-example.js`) your build your theme and JS
+Them need create a custom `webpack.config.custom.js` (See: `webpack.config.custom-example.js`) for build your theme and JS
