@@ -53,9 +53,9 @@
 -   Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 
-# Para la versión X1.0.0
--   Esta actualización requiere de que se valla migrando ciertos paquetes de Laminas a Symfony
--   Usar un sistema parecido al de Laminas MVC para crear las páginas.
+# ¿? Para la versión X1.0.0
+-   ¿? Esta actualización requiere de que se valla migrando ciertos paquetes de Laminas a Symfony
+-   ¿? Usar un sistema parecido al de Laminas MVC para crear las páginas.
     -   Posibilidad 1 de una migración a Laminas MVC framework (ya que todo el core usa módulos de Laminas)
     -   Posibilidad 2 de una migración a Symfony Framework (Esto seria la opción más lógica en el sentido de que viene con un sitema de plantillas que permite sustituir las de un bundle por otras propias)
         -   Creo que se migrará todo el código a los módulos de Symfony Framework, para así poder aprobechar sus capacidades, que son muy útiles en el LoTGD
