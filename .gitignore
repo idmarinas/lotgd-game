@@ -222,12 +222,13 @@ $RECYCLE.BIN/
 !/config/autoload/local/.gitkeep
 
 # Ignore all content of themes folder except lotgd folder and .gitkeep file (This ignore custom content)
-/themes/src/**
-!/themes/src/**/
-!/themes/src/jade/**
+/themes/**
+!/themes/**/
+!/themes/jade.html
+!/themes/layout.html.html
+!/themes/README.md
+!/themes/layout/**
 !/themes/**/.gitkeep
-# This is only for compare with version of Fomantic UI
-!/themes/src/semantic/**
 
 # Ignore local content of LoTGD (except .gitkeep)
 /src/ajax/local/**
