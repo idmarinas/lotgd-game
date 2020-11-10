@@ -1,0 +1,30 @@
+{% translate_default_domain 'page-battle' %}
+
+{% macro combat_health_bar(data) %}
+    <table class="ui collapsing very basic very compact table">
+        <tr>
+            <td colspan="3">
+                {% set nametext = (data.name is iterable ? data.name[0]|tl(data.name[1], data.name[2] ?: 'page-battle') : data.name) %}
+                {% if data.isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
+                {{ '(%s) %s (Level `b%s´b)`0'|t|format(data.who|t, nametext, data.level)|colorize }}
+                {% if not data.showbar %}
+                    {% if data.hpvalue > 0 %}: {% if data.showhptext %}{{ ( '`6' ~ data.hpvaluetext ~ '`0')|colorize }}{% endif %}{% else %}{{ '`7DEFEATED`0'|t|colorize }}{% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% if data.showbar %}
+            <tr>
+                <td>&nbsp;&nbsp;{{ data.healthtext|t|colorize }}:&nbsp;</td>
+                <td style="width: 150px;">
+                    <div style="margin: 0em;" class="ui tiny indicating lotgd progress battle" data-value="{{ data.hpvalue }}" data-total="{{ data.hptotal }}">
+                        <div class="bar"></div>
+                    </div>
+                </td>
+                {% if data.showhptext %}
+                    {% set text = data.hpvalue > 0 ? '' : '`7DEFEATED`0'|t|colorize %}
+                    <td>&nbsp;{{ '(%s/%s) %s`0`n'|format(data.hpvaluetext, data.hptotaltext, text)|colorize }}</td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    </table>
+{% endmacro %}

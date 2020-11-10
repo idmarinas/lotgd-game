@@ -1,3 +1,5 @@
+{% from '{theme}/pages/_macros/_battle.html.twig' import combat_health_bar as health_bar %}
+
 {% translate_default_domain 'page-battle' %}
 
 {{ 'title'|t|colorize }}
@@ -35,14 +37,14 @@
 <div class="ui top attached divided segment">
     <div class="ui divided stackable two column grid">
         <div class="column">
-            {{ include_layout('pages/battle/combathealthbar.html.twig', battlebars.start.player) }}
+            {{ health_bar(battlebars.start.player) }}
             {% for companion in battlebars.start.companions %}
-                {{ include_layout('pages/battle/combathealthbar.html.twig', companion) }}
+                {{ health_bar(companion) }}
             {% endfor %}
         </div>
         <div class="column">
             {% for enemy in battlebars.start.enemies %}
-                {{ include_layout('pages/battle/combathealthbar.html.twig', enemy) }}
+                {{ health_bar(enemy) }}
             {% endfor %}
         </div>
     </div>
@@ -85,14 +87,14 @@
 <div class="ui {{ battleend ? '' : 'bottom' }} attached divided segment">
     <div class="ui divided stackable two column grid">
         <div class="column">
-            {{ include_layout('pages/battle/combathealthbar.html.twig', battlebars.end.player) }}
+            {{ health_bar(battlebars.end.player) }}
             {% for companion in battlebars.end.companions %}
-                {{ include_layout('pages/battle/combathealthbar.html.twig', companion) }}
+                {{ health_bar(companion) }}
             {% endfor %}
         </div>
         <div class="column">
             {% for enemy in battlebars.end.enemies %}
-                {{ include_layout('pages/battle/combathealthbar.html.twig', enemy) }}
+                {{ health_bar(enemy) }}
             {% endfor %}
         </div>
     </div>
