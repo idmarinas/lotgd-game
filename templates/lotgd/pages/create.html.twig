@@ -1,4 +1,4 @@
-{% use '{theme}/pages/create/_partial.html.twig' %}
+{% use '{theme}/pages/_blocks/_create.html.twig' %}
 
 {% translate_default_domain 'page-create' %}
 
@@ -13,9 +13,9 @@
         </div>
     </div>
 {% elseif not allowCreation %}
-    {% block create_account_disabled parent() %}
+    {{ block('create_account_disabled') }}
 {% elseif serverFull %}
-    {% block create_server_full parent() %}
+    {{ block('create_server_full') }}
 {% else %}
-    {% block create_account_create parent() %}
+    {{ block('create_account_create') }}
 {% endif %}
