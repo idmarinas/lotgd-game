@@ -57,13 +57,13 @@ $params['ranksNames'] = $ranks['ranks'];
 
 if ('detail' == $op)
 {
-    $params['tpl'] = 'applicant/detail';
+    $params['tpl'] = 'clan_applicant_detail';
 
     require_once 'lib/clan/detail.php';
 }
 elseif ('list' == $op)
 {
-    $params['tpl'] = 'applicant/list';
+    $params['tpl'] = 'clan_applicant_list';
 
     \LotgdResponse::pageTitle('title.list', [], $textDomain);
 
@@ -71,7 +71,7 @@ elseif ('list' == $op)
 }
 elseif ('waiting' == $op)
 {
-    $params['tpl'] = 'applicant/waiting';
+    $params['tpl'] = 'clan_applicant_waiting';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
@@ -82,7 +82,7 @@ elseif ('waiting' == $op)
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'apply' == $op)
 {
-    $params['tpl'] = 'applicant/apply';
+    $params['tpl'] = 'clan_applicant_apply';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
@@ -90,7 +90,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'apply' == $op)
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'new' == $op)
 {
-    $params['tpl'] = 'applicant/new';
+    $params['tpl'] = 'clan_applicant_new';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
@@ -98,7 +98,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'] && 'new' == $op)
 }
 elseif (CLAN_APPLICANT == $session['user']['clanrank'])
 {
-    $params['tpl'] = 'applicant';
+    $params['tpl'] = 'clan_applicant';
 
     \LotgdResponse::pageTitle('title.applicant', [], $textDomain);
 
@@ -106,7 +106,7 @@ elseif (CLAN_APPLICANT == $session['user']['clanrank'])
 }
 elseif ('' == $op)
 {
-    $params['tpl'] = 'default';
+    $params['tpl'] = 'clan_default';
 
     \LotgdResponse::pageTitle('title.default', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
@@ -114,7 +114,7 @@ elseif ('' == $op)
 }
 elseif ('motd' == $op)
 {
-    $params['tpl'] = 'motd';
+    $params['tpl'] = 'clan_motd';
 
     \LotgdResponse::pageTitle('title.motd', [], $textDomain);
 
@@ -122,7 +122,7 @@ elseif ('motd' == $op)
 }
 elseif ('membership' == $op)
 {
-    $params['tpl'] = 'membership';
+    $params['tpl'] = 'clan_membership';
 
     \LotgdResponse::pageTitle('title.membership', ['name' => \LotgdSanitize::fullSanitize($claninfo['clanname'])], $textDomain);
 
@@ -130,7 +130,7 @@ elseif ('membership' == $op)
 }
 elseif ('withdraw' == $op)
 {
-    $params['tpl'] = 'withdraw';
+    $params['tpl'] = 'clan_withdraw';
 
     require_once 'lib/clan/clan_withdraw.php';
 }
