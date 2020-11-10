@@ -7,9 +7,6 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   ....
-
-# Para la versión 4.6.0
 -   Revisar las plantillas, para seguir simplificando
     -   Crear los bloques en la misma plantilla principal, de la página
     -   Twig macros, se pueden usar para sustituir bloques que se necesita pasar variables (motd item/poll y similar)

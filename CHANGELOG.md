@@ -7,6 +7,34 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
 
+# Version: 4.6.0
+
+### :cyclone: CHANGES
+
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   Nothing
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Doctrine Extension** Migrating `gedmo/doctrine-extensions` from 2.4.* to version 3.0.*
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.5.0
 
 ### :cyclone: CHANGES
