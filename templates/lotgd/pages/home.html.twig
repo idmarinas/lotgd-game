@@ -1,4 +1,4 @@
-{% use '{theme}/pages/home/_partial.html.twig' %}
+{% use '{theme}/pages/_blocks/_home.html.twig' %}
 
 {% translate_default_domain 'page-home' %}
 
@@ -37,9 +37,9 @@
 
     {# Show the login form or a full server message #}
     {% if not serverFull %}
-        {% block home_login parent() %}
+        {{ block('home_login') }}
     {% else %}
-        {% block home_server_full parent() %}
+        {{ block('home_server_full') }}
     {% endif %}
 
     {# Results messages of hook "homemiddle" #}
@@ -60,7 +60,7 @@
     {% endfor %}
 
     {% if selectSkin %}
-        {% block home_select_skin parent() %}
+        {{ block('home_select_skin') }}
     {% endif %}
 </div>
 
