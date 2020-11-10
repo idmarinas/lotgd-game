@@ -1,0 +1,20 @@
+{% translate_default_domain textDomain %}
+
+{% block forest_default %}
+    {% if showForestMessage %}
+        {{ 'section.default.description'|t|colorize }}
+
+        {% set result = modulehook('forest-desc') %}
+        {% for message in result %}
+            {% if message is array %}
+                {{ message[0]|tl(message[1], message[2])|colorize }}
+            {% else %}
+                {{ message|colorize }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock forest_default %}
+
+{% block forest_dragon %}
+    {{ 'section.dragon.description'|t({ 'partner': partner })|colorize }}
+{% endblock forest_dragon %}
