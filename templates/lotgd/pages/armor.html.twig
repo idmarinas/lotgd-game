@@ -1,6 +1,7 @@
+{% use '{theme}/pages/_blocks/_armor.html.twig' %}
+
 {% translate_default_domain textDomain %}
 
 {{ ('`c`b`%' ~ 'title'|t ~ '`0´b´c')|colorize }}
 
-{{ include_layout('pages/armor/' ~ opt ~ '.html.twig') }}
-
+{{ block('armor_' ~ opt) }}
