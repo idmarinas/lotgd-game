@@ -3,7 +3,7 @@
         Csrf element (to prevent Cross Site Request Forgery attacks)
         It is extremely recommended to add this element in all forms
     #}
-    {% if security is instanceof('\\Zend\\Form\\ElementInterface') %}
+    {% if security is instanceof('\\Laminas\\Form\\ElementInterface') %}
         {{ laminas_form_element(security) }}
     {% endif %}
 
@@ -12,7 +12,7 @@
     {% if label %}
         {% set label = label|tst(translatorTextDomain) %}
 
-        {% if form is not instanceof('\\Zend\\Form\\LabelAwareInterface') or not form.getLabelOption('disable_html_escape') %}
+        {% if form is not instanceof('\\Laminas\\Form\\LabelAwareInterface') or not form.getLabelOption('disable_html_escape') %}
             {% set label = label|e('html') %}
         {% endif %}
 
@@ -21,7 +21,7 @@
 
     {# Render all elements #}
     {% for element in form %}
-        {% if element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
+        {% if element is instanceof('\\Laminas\\Form\\FieldsetInterface') %}
             {{ laminas_form_fieldset(element, translatorTextDomain) }}
         {% else %}
             {{ laminas_form_row(element, translatorTextDomain) }}

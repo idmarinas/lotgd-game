@@ -1,9 +1,9 @@
 {% set markup = '' %}
 
 {% for element in collection %}
-    {% if element is instanceof('\\Zend\\Form\\FieldsetInterface') %}
+    {% if element is instanceof('\\Laminas\\Form\\FieldsetInterface') %}
         {% set markup = markup ~ laminas_form_fieldset(element, translatorTextDomain) %}
-    {% elseif element is instanceof('\\Zend\\Form\\ElementInterface') %}
+    {% elseif element is instanceof('\\Laminas\\Form\\ElementInterface') %}
         {% set markup = markup ~ laminas_form_row(element, translatorTextDomain) %}
     {% endif %}
 {% endfor %}
@@ -15,7 +15,7 @@
         {% set label = label|tst(translatorTextDomain) %}
 
         {# Escape label #}
-        {% if collection is not instanceof('\\Zend\\Form\\LabelAwareInterface') or not element.getLabelOption('disable_html_escape') %}
+        {% if collection is not instanceof('\\Laminas\\Form\\LabelAwareInterface') or not element.getLabelOption('disable_html_escape') %}
             {% set label = label|e('html') %}
         {% endif %}
         <div class="ui top attached header">{{ label }}</div>

@@ -23,7 +23,7 @@
         {% if 'checkbox' == type %}
             {{ elementString }}
         {% else %}
-            {% if element is not instanceof('\\Zend\\Form\\Element\\Button')  %}
+            {% if element is not instanceof('\\Laminas\\Form\\Element\\Button')  %}
                 {# Render label #}
                 {{ laminas_form_label(element, translatorTextDomain)}}
             {% endif %}
