@@ -6,8 +6,9 @@
  * @see https://github.com/idmarinas/lotgd-game
  *
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 4.5.0
  */
 
 namespace Lotgd\Core\Factory\View\Helper;
