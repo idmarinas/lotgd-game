@@ -16,6 +16,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **Templates**
     -   `templates/lotgd/pages` pages of LoTGD use blocks/macros template to reduce number of templates and complexity.
     -   `templates/lotgd/form` remove reference to Zend and use Laminas.
+-   **Twig System**
+    -   Rename extension file `src/core/Twig/Extension/Head.php` to `src/core/Twig/Extension/Helpers.php`
+    -   New Twig functions
+        -   `base_path(string|null)` Returns site's base path, or file with base path prepended
 
 ### :star: FEATURES
 
@@ -35,6 +39,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :notebook: NOTES
 
+-   **Added lazy services**.
+    -   These services are not always necessary, so they are only created the first time they are needed.
+        -   `Laminas\View\Helper\BasePath`
 -   **Doctrine Extension** Migrating `gedmo/doctrine-extensions` from 2.4.* to version 3.0.*
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
