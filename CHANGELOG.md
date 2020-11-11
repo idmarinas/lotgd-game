@@ -8,11 +8,14 @@ Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md
 Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
 
+
 # Version: 4.6.0
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Templates**
+    -   `templates/lotgd/pages` pages of LoTGD use blocks/macros template to reduce number of templates and complexity.
+    -   `templates/lotgd/form` remove reference to Zend and use Laminas.
 
 ### :star: FEATURES
 
