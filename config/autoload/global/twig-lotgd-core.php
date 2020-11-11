@@ -50,7 +50,7 @@ return [
         Lotgd\Core\Twig\Extension\Form\FormViewOnly::class,
 
         //-- Added in version 4.5.0
-        Lotgd\Core\Twig\Extension\Head::class,
+        Lotgd\Core\Twig\Extension\Helpers::class,
         Lotgd\Core\Twig\Extension\Donation::class, //-- Twig functions for donation buttons (Paypal buttons)
 
         //-- Extension of a third party
