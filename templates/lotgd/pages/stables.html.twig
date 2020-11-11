@@ -1,6 +1,8 @@
+{% use '{theme}/pages/_blocks/_stables.html.twig' %}
+
 {% translate_default_domain textDomain %}
 
-{{ include_layout('pages/stables/' ~ tpl|default('default') ~ '.html.twig') }}
+{{ block('stables_' ~ tpl|default('default')) }}
 
 {% if confirm == 0 and user.hashorse %}
     {{ 'section.offer'|t(_context)|colorize }}
