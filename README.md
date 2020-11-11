@@ -4,7 +4,6 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/idmarinas/lotgd-game.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/idmarinas/lotgd-game)
 [![Website](https://img.shields.io/website-up-down-green-red/https/lotgd.infommo.es.svg?label=lotgd-demo)](https://lotgd.infommo.es)
-[![Build in PHP](https://img.shields.io/badge/PHP-^7.2-8892BF.svg?logo=php)](http://php.net/)
 ![Installation](https://img.shields.io/badge/install-sucess-green.svg?maxAge=2592000)
 ![Upgrade](https://img.shields.io/badge/upgrade-success-green.svg?maxAge=2592000)
 ![Working](https://img.shields.io/badge/working-succes-green.svg?maxAge=2592000)
@@ -25,6 +24,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
 ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/idmarinas/lotgd-game?cacheSeconds=86400)
 
+[![Build in PHP](https://img.shields.io/badge/PHP-^7.2-8892BF.svg?logo=php)](http://php.net/)
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
 [![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
