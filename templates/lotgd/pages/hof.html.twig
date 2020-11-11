@@ -1,5 +1,7 @@
+{% use '{theme}/pages/_blocks/_hof.html.twig' %}
+
 {% translate_default_domain textDomain %}
 
 {{ subTitle[0]|t(subTitle[1])|colorize }}
 
-{{ include_layout('pages/hof/' ~ tpl|default('default') ~ '.html.twig') }}
+{{ block('hof_' ~ tpl|default('default')) }}
