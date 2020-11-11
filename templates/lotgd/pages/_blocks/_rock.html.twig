@@ -1,0 +1,13 @@
+{% translate_default_domain textDomain %}
+
+{% block rock_default %}
+    {{ 'section.default.paragraph'|t|colorize }}
+{% endblock rock_default %}
+
+{% block rock_veteran %}
+    {{ 'section.veteran.paragraph'|t|colorize }}
+
+    {{ commentary_block({
+        'section': 'veterans'
+    }, textDomain) }}
+{% endblock rock_veteran %}
