@@ -1,0 +1,49 @@
+{% translate_default_domain textDomain %}
+
+{% block lodge_default %}
+    {{ 'section.default.paragraph'|t|colorize }}
+
+    {% if canEntry %}
+        {% set result = modulehook('lodge-desc') %}
+        {% for message in result %}
+            {{ message[0]|tl(message[1], message[2])|colorize }}
+        {% endfor %}
+
+        {{ 'section.default.can.entry.yes'|t({ 'donationPoints': user.donation, 'donationPointsAvailable': pointsAvailable, 'sex': user.sex })|colorize }}
+
+        {{ commentary_block({
+            'section': 'hunterlodge',
+            'textDomainStatus': 'app-commentary'
+        }, textDomain) }}
+    {% else %}
+        {{ 'section.default.can.entry.no'|t({ 'barkeep': barkeep, 'innName': innName })|colorize }}
+    {% endif %}
+{% endblock lodge_default %}
+
+{% block lodge_points %}
+    {{ 'section.points.list'|t|colorize }}
+
+    {% set result = modulehook('donator_point_messages', donatorPointMessages) %}
+    {% for message in result %}
+        {{ message[0]|tl(message[1], message[2])|colorize }}
+    {% endfor %}
+
+    <br>
+
+    {{ 'section.points.description'|t({ 'currencySymbol': currencySymbol })|colorize }}
+
+    {% if refererAward %}
+        {{ 'section.points.referer'|t({ 'refererAward': refererAward, 'referMinLevel': referMinLevel })|colorize }}
+    {% endif %}
+
+    {{ 'section.points.paragraph'|t|colorize }}
+
+    {% set result = modulehook('pointsdesc', {}) %}
+    <ul class="ui ordered list">
+        {% for message in result %}
+            <div class="item">{{ message[0]|tl(message[1], message[2])|colorize }}</div>
+        {% else %}
+            <div class="item">{{ 'section.points.messages.desc'|t|colorize }}</div>
+        {% endfor %}
+    </ul>
+{% endblock lodge_points %}
