@@ -23,9 +23,10 @@ use Laminas\View\Helper\Placeholder\Container\AbstractContainer as Placeholder;
 use Twig\TwigFunction;
 
 /**
- * Class to show/capture head/inline scripts/styles and files.
+ * Class for use Laminas Helpers: like show/capture head/inline scripts/styles and files.
+ * and others.
  */
-class Head extends AbstractExtension
+class Helpers extends AbstractExtension
 {
     protected $HeadLink;
     protected $HeadMeta;
@@ -33,6 +34,7 @@ class Head extends AbstractExtension
     protected $HeadStyle;
     protected $HeadTitle;
     protected $InlineScript;
+    protected $BasePath;
 
     public function getFunctions()
     {
