@@ -1,0 +1,12 @@
+{% translate_default_domain textDomain %}
+
+{% block pvp_default %}
+{% endblock pvp_default %}
+
+{% block pvp_list %}
+    {{ 'section.default.paragraph'|t({ 'count': user.playerfights })|colorize }}
+
+    {{ pvp_list_table({ 'paginator': paginator, 'returnLink': returnLink, 'pvpTimeOut': pvpTimeOut }) }}
+
+    {{ pvp_list_sleepers({ 'sleepers': sleepers }) }}
+{% endblock pvp_list %}
