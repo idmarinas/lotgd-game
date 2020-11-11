@@ -1,3 +1,5 @@
+{% use '{theme}/pages/_blocks/_gypsy.html.twig' %}
+
 {% translate_default_domain textDomain %}
 
-{{ include_layout('pages/gypsy/' ~ tpl|default('default') ~ '.html.twig') }}
+{{ block('gypsy_' ~ tpl|default('default')) }}
