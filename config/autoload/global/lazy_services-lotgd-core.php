@@ -24,6 +24,9 @@ return [
                 'OutputCensor'     => Lotgd\Core\Output\Censor::class,
                 'OutputCommentary' => Lotgd\Core\Output\Commentary::class,
                 'PvpListing'       => Lotgd\Core\Pvp\Listing::class,
+
+                //-- Added in version 4.6.0
+                'HelperBasePath' => Laminas\View\Helper\BasePath::class,
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()
