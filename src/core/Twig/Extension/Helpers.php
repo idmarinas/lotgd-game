@@ -45,6 +45,7 @@ class Helpers extends AbstractExtension
             new TwigFunction('head_style', [$this, 'headStyle']),
             new TwigFunction('head_title', [$this, 'headTitle']),
             new TwigFunction('inline_script', [$this, 'inlineScript']),
+            new TwigFunction('base_path', [$this, 'basePath']),
         ];
     }
 
@@ -134,6 +135,20 @@ class Helpers extends AbstractExtension
     public function inlineScript($mode = InlineScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = [], $type = 'text/javascript')
     {
         return $this->getInstance('InlineScript')->__invoke($mode, $spec, $placement, $attrs, $type);
+    }
+
+    /**
+     * Returns site's base path, or file with base path prepended.
+     *
+     * $file is appended to the base path for simplicity.
+     *
+     * @throws Exception\RuntimeException
+     *
+     * @return string
+     */
+    public function basePath(?string $file = null)
+    {
+        return $this->getInstance('BasePath')->__invoke($file);
     }
 
     /**
