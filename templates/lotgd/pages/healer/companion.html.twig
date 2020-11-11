@@ -1,7 +1,0 @@
-{% translate_default_domain textDomain %}
-
-{% if canHeal is same as(true) %}
-    {{ 'section.companion.heal.success'|t({ 'companionName': companionName })|colorize }}
-{% else %}
-    {{ 'section.companion.heal.fail'|t({ 'cost': newHealCost })|colorize }}
-{% endif %}

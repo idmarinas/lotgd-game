@@ -1,5 +1,7 @@
+{% use '{theme}/pages/_blocks/_healer.html.twig' %}
+
 {% translate_default_domain textDomain %}
 
 {{ 'subtitle'|t|colorize }}
 
-{{ include_layout('pages/healer/' ~ tpl|default('default') ~ '.html.twig') }}
+{{ block('healer_' ~ tpl|default('default')) }}
