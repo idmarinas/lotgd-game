@@ -38,10 +38,12 @@ checks:
 plugins:
     editorconfig:
         enabled: true
+        channel: beta
         exclude_patterns:
             - "images/"
             - "docs/"
             - "release/"
+            - "storage/"
             - "**/*.ico"
             - "**/*.png"
             - "**/*.zip"
@@ -56,17 +58,17 @@ plugins:
         enabled: true
         exclude_patterns:
             - "assets/"
-            - "cache/"
-            - "crawl/"
             - "error_docs/"
             - "gulp/"
             - "docs/"
-            - "logd_snapshots/"
             - "public/images/"
             - "public/css/"
             - "public/js/"
             - "public/themes/"
             - "templates/"
+            - "templates_core/"
+            - "templates_modules/"
+            - "storage/"
             - "vendor/"
             - "**/*.ico"
             - "**/*.png"
@@ -83,12 +85,9 @@ plugins:
         enabled: true
         exclude_patterns:
             - "assets/"
-            - "cache/"
-            - "crawl/"
             - "error_docs/"
             - "docs/"
             - "gulp/"
-            - "logd_snapshots/"
             - "public/images/"
             - "public/css/"
             - "public/js/"
@@ -96,6 +95,7 @@ plugins:
             - "templates/"
             - "templates_core/"
             - "templates_modules/"
+            - "storage/"
             - "vendor/"
         config:
             file_extensions: "php"
@@ -109,12 +109,9 @@ plugins:
         enabled: false
         exclude_patterns:
             - "assets/"
-            - "cache/"
-            - "crawl/"
             - "error_docs/"
             - "gulp/"
             - "docs/"
-            - "logd_snapshots/"
             - "public/images/"
             - "public/css/"
             - "public/js/"
@@ -122,6 +119,7 @@ plugins:
             - "templates/"
             - "templates_core/"
             - "templates_modules/"
+            - "storage/"
             - "vendor/"
         config:
             file_extensions: "php"
@@ -152,12 +150,9 @@ plugins:
                 - "src/"
             exclude_analysis_directory_list:
                 - "assets/"
-                - "cache/"
-                - "crawl/"
                 - "docs/"
                 - "error_docs/"
                 - "gulp/"
-                - "logd_snapshots/"
                 - "public/images/"
                 - "public/css/"
                 - "public/js/"
@@ -165,6 +160,7 @@ plugins:
                 - "templates/"
                 - "templates_core/"
                 - "templates_modules/"
+                - "storage/"
                 - "vendor/"
 exclude_patterns:
     - "config/"
