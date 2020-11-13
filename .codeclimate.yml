@@ -41,8 +41,10 @@ plugins:
         exclude_patterns:
             - "images/"
             - "docs/"
+            - "release/"
             - "**/*.ico"
             - "**/*.png"
+            - "**/*.zip"
         config:
             editorconfig: .editorconfig
     nodesecurity:
