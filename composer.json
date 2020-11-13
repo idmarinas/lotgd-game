@@ -61,6 +61,7 @@
         "symfony/console": "^5.1",
         "symfony/doctrine-bridge": "^5.1",
         "symfony/filesystem": "^5.1",
+        "symfony/finder": "^5.1",
         "symfony/form": "^5.1",
         "symfony/options-resolver": "^5.1",
         "symfony/security-csrf": "^5.1",
