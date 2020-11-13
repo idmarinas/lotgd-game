@@ -1,120 +1,124 @@
 <?php
-	$success = true;
+    $success = true;
 
-	$version = '4.2';//-- Version of LoGD
-	$phpVersion = '7.2.5';//-- PHP version need
+    $version    = '4.2'; //-- Version of LoGD
+    $phpVersion = '7.2.5'; //-- PHP version need
 
-	//-- Need 128MB
-	$_memoryLimit = @ini_get('memory_limit');
-	$memoryLimit = $_memoryLimit;
-	preg_match( "#^(\d+)(\w+)$#", strtolower($memoryLimit), $match );
-	if( $match[2] == 'g' )
-	{
-		$memoryLimit = intval( $memoryLimit ) * 1024 * 1024 * 1024;
-	}
-	else if ( $match[2] == 'm' )
-	{
-		$memoryLimit = intval( $memoryLimit ) * 1024 * 1024;
-	}
-	else if ( $match[2] == 'k' )
-	{
-		$memoryLimit = intval( $memoryLimit ) * 1024;
-	}
-	else
-	{
-		$memoryLimit = intval( $memoryLimit );
-	}
+    //-- Need 128MB
+    $_memoryLimit = @\ini_get('memory_limit');
+    $memoryLimit  = $_memoryLimit;
+    \preg_match("#^(\d+)(\w+)$#", \strtolower($memoryLimit), $match);
 
-	$executionTime = @ini_get('max_execution_time');
+    if ('g' == $match[2])
+    {
+        $memoryLimit = (int) $memoryLimit * 1024 * 1024 * 1024;
+    }
+    elseif ('m' == $match[2])
+    {
+        $memoryLimit = (int) $memoryLimit * 1024 * 1024;
+    }
+    elseif ('k' == $match[2])
+    {
+        $memoryLimit = (int) $memoryLimit * 1024;
+    }
+    else
+    {
+        $memoryLimit = (int) $memoryLimit;
+    }
 
-	//-- Extensions
-	$extensions = [
-		"bcmath" => "BC Math",
-		"curl" => "cURL",
-		"exif" => "Exif",
-		"gd" => "GD",
-		"intl" => "Intl",
-		"json" => "Json",
-		"mbstring" => "Multibyte String",
-		"pdo" => "PDO",
-		"pdo_mysql" => "PDO MySQL",
-		"session" => "Session",
-	];
+    $executionTime = @\ini_get('max_execution_time');
 
-	class CustomMysqli extends mysqli
-	{
-		public function __construct()
-		{
-			parent::init();
-			parent::options( MYSQLI_OPT_CONNECT_TIMEOUT, 5 );
-			return call_user_func_array( 'parent::__construct', func_get_args() );
-		}
-	}
+    //-- Extensions
+    $extensions = [
+        'bcmath'    => 'BC Math',
+        'curl'      => 'cURL',
+        'exif'      => 'Exif',
+        'gd'        => 'GD',
+        'intl'      => 'Intl',
+        'json'      => 'Json',
+        'mbstring'  => 'Multibyte String',
+        'pdo'       => 'PDO',
+        'pdo_mysql' => 'PDO MySQL',
+        'session'   => 'Session',
+    ];
 
-	$phpString = '';
+    class CustomMysqli extends mysqli
+    {
+        public function __construct()
+        {
+            parent::init();
+            parent::options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
 
-	if (version_compare( PHP_VERSION, $phpVersion ) >= 0)
-	{
-		$phpString .= '<li class="success">PHP version '.PHP_VERSION.'.</li>';
-	}
-	else
-	{
-		$success = false;
-		$phpString .= '<li class="fail">You are not running a compatible version of PHP. You need PHP '.$phpVersion.' or above (Your server have '.PHP_VERSION.'). You should contact your hosting provider or system administrator to ask for an upgrade.</li>';
-	}
+            return \call_user_func_array('parent::__construct', \func_get_args());
+        }
+    }
 
-	if ($memoryLimit >= 128 * 1024 * 1024)
-	{
-		$phpString .= '<li class="success">'.$_memoryLimit.' memory limit.</li>';
-	}
-	else
-	{
-		$success = false;
-		$phpString .= '<li class="fail">Your PHP memory limit is too low. It needs to be set to 128M or more. You should contact your hosting provider or system administrator to ask for this to be changed.</li>';
-	}
+    $phpString = '';
 
-	if ($executionTime >= 30 && 0 != $executionTime)
-	{
-		$phpString .= '<li class="success">'.$executionTime.' seconds of max execution time.</li>';
-	}
-	else
-	{
-		$success = false;
-		$phpString .= '<li class="fail">Your PHP max execution time limit is too low. It needs to be set to 30 seg or more. You should contact your hosting provider or system administrator to ask for this to be changed.</li>';
-	}
+    if (\version_compare(PHP_VERSION, $phpVersion) >= 0)
+    {
+        $phpString .= '<li class="success">PHP version '.PHP_VERSION.'.</li>';
+    }
+    else
+    {
+        $success = false;
+        $phpString .= '<li class="fail">You are not running a compatible version of PHP. You need PHP '.$phpVersion.' or above (Your server have '.PHP_VERSION.'). You should contact your hosting provider or system administrator to ask for an upgrade.</li>';
+    }
 
-	//-- Check require extensions
-	foreach($extensions as $ext => $name)
-	{
-		if (extension_loaded($ext))
-		{
-			$phpString .= '<li class="success">'.$name.' extension loaded.</li>';
-		}
-		else
-		{
-			$success = false;
-			$phpString .= '<li class="fail">You do not have the '.$name.' PHP extension loaded which is required. You should contact your hosting provider or system administrator to ask for it to be enabled.</li>';
-		}
-	}
+    if ($memoryLimit >= 128 * 1024 * 1024)
+    {
+        $phpString .= '<li class="success">'.$_memoryLimit.' memory limit.</li>';
+    }
+    else
+    {
+        $success = false;
+        $phpString .= '<li class="fail">Your PHP memory limit is too low. It needs to be set to 128M or more. You should contact your hosting provider or system administrator to ask for this to be changed.</li>';
+    }
 
-	$mysql = @new CustomMysqli('localhost');
-	$mysqlString = '';
-	if ($mysql->connect_errno)
-	{
-		$mysqlString .= '<li class="advisory">MySQL connection could not be established to perform version check. Make sure your MySQL Server version is 5.5.3 or above (5.6.2 or above recommended).</li>';
-	}
-	else
-	{
-		if (version_compare( $mysql->server_info, '5.6.2' ) >= 0)
-		{
-			$mysqlString .= '<li class="success">MySQL version '.$mysql->server_info.'.</li>';
-		}
-		else
-		{
-			$success = false;
-			$mysqlString .= '<li class="fail">You are not running a compatible version of MySQL. You need MySQL 5.5.3 or above. You should contact your hosting provider or system administrator to ask for an upgrade.</li>';
-		}
-	}
+    if ($executionTime >= 30 && 0 != $executionTime)
+    {
+        $phpString .= '<li class="success">'.$executionTime.' seconds of max execution time.</li>';
+    }
+    else
+    {
+        $success = false;
+        $phpString .= '<li class="fail">Your PHP max execution time limit is too low. It needs to be set to 30 seg or more. You should contact your hosting provider or system administrator to ask for this to be changed.</li>';
+    }
+
+    //-- Check require extensions
+    foreach ($extensions as $ext => $name)
+    {
+        if (\extension_loaded($ext))
+        {
+            $phpString .= '<li class="success">'.$name.' extension loaded.</li>';
+        }
+        else
+        {
+            $success = false;
+            $phpString .= '<li class="fail">You do not have the '.$name.' PHP extension loaded which is required. You should contact your hosting provider or system administrator to ask for it to be enabled.</li>';
+        }
+    }
+
+    $mysql       = @new CustomMysqli('localhost');
+    $mysqlString = '';
+
+    if ($mysql->connect_errno)
+    {
+        $mysqlString .= '<li class="advisory">MySQL connection could not be established to perform version check. Make sure your MySQL Server version is 5.5.3 or above (5.6.2 or above recommended).</li>';
+    }
+    else
+    {
+        if (\version_compare($mysql->server_info, '5.6.2') >= 0)
+        {
+            $mysqlString .= '<li class="success">MySQL version '.$mysql->server_info.'.</li>';
+        }
+        else
+        {
+            $success = false;
+            $mysqlString .= '<li class="fail">You are not running a compatible version of MySQL. You need MySQL 5.5.3 or above. You should contact your hosting provider or system administrator to ask for an upgrade.</li>';
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
