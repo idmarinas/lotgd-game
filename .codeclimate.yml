@@ -37,7 +37,7 @@ checks:
         enabled: true
 plugins:
     editorconfig:
-        enabled: false
+        enabled: true
         channel: beta
         exclude_patterns:
             - "images/"
@@ -181,4 +181,5 @@ exclude_patterns:
     - "semantic/"
     - "composer.lock"
     - "package-lock.json"
+    - "phpDocumentor.phar"
     - "public/js/jqueryCookieGuard.1.1.0.js"
