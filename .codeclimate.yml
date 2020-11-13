@@ -37,7 +37,7 @@ checks:
         enabled: true
 plugins:
     editorconfig:
-        enabled: true
+        enabled: false
         channel: beta
         exclude_patterns:
             - "images/"
