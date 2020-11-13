@@ -47,6 +47,7 @@ plugins:
             - "**/*.ico"
             - "**/*.png"
             - "**/*.zip"
+            - "**/*.phar"
         config:
             editorconfig: .editorconfig
     nodesecurity:
@@ -178,8 +179,8 @@ exclude_patterns:
     - "**/*_test.go"
     - "**/*.d.ts"
     - "**/*.zip"
+    - "**/*.phar"
     - "semantic/"
     - "composer.lock"
     - "package-lock.json"
-    - "phpDocumentor.phar"
     - "public/js/jqueryCookieGuard.1.1.0.js"
