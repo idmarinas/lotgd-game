@@ -23,7 +23,17 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :star: FEATURES
 
--   Nothing
+-   **New LoTGD Console**
+    -   New feature, LoTGD console, work similar to Symfony Framework console, (use Symfony console component)
+    -   Commands that have:
+        -   `about` see a information of Lotgd application
+        -   `storage:cache_stats` Show stats of storage cache folder.
+        -   `storage:cache_clear` Clear storage cache and keep the default cache structure.
+            -   Note: for custom cache folders, add file `.gitkeep` and this command not remove your folders for cache.
+    -   How use:
+        -   In terminal/console use `php bin/console` and this see information and list of commands.
+    -   You can add your custom commands, only need add class name to `config/autoload/local/console-lotgd-core.php`
+        -   Can see example in `config/autoload/global/console-lotgd-core.php`
 
 ### :fire: DEPRECATED
 
