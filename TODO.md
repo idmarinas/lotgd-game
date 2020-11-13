@@ -7,17 +7,11 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Revisar las plantillas, para seguir simplificando
-    -   Crear los bloques en la misma plantilla principal, de la página
-    -   Twig macros, se pueden usar para sustituir bloques que se necesita pasar variables (motd item/poll y similar)
-    -   Cada página tendra su plantilla (home.html.twig) que contiene todo lo que se necesita para esa pagina, dividida en bloques
--   gedmo/doctrine-extensions migrar a la versión 3.0.0
--   Helpers de Laminas view en Twig functions....
-    -   Agregar el basePath helper
+-   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
 
 # Para la versión 4.7.0
--   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
     -   Se tiene que ir quitando estas clases, y mover las fuciones a otras zonas.
     -   Ejemplo: el colorize (appoencode) se moverá a otra clase
@@ -30,7 +24,8 @@
     -   Un sistema compatible con el viejo
 
 # Para la versión 5.0.0
--   Un nuevo sistema de instalación, mixto: por consola o por web.
+-   Un nuevo sistema de instalación, mixto: por consola o por web. Creo que mejor seria por consola.
+    -   Pero es posible que no todos los server admin tengan esta opción
 -   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
@@ -66,6 +61,38 @@
     -   Esto obligaría a los usuarios a generar una nueva contraseña.
 -   Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc) en un mismo lugar
     -   IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
+
+## Cosas a mirar
+-   https://symfony.com/doc/current/components/process.html
+-   https://symfony.com/doc/current/components/config.html
+-   https://symfony.com/doc/current/components/finder.html
+-   https://symfony.com/doc/current/components/console.html Ya se agrego la consola, pero sirve como referencia.
+-   https://symfony.com/doc/current/components/options_resolver.html
+    -   Para configurar los componentes y opciones que se pueden usar 
+    -   Esto permite que cada componente tenga las opciones que necesita y los tipos de valor correctos
+        
+        ```php
+        In many cases you may need to define multiple configurations for each option. For example, suppose the InvoiceMailer class has an host option that isrequired and a transport option which can be one of sendmail, mail and smtp. You can improve the readability of the code avoiding to duplicate option namefor each configuration using the define() method:
+        // ...
+        class InvoiceMailer
+        {
+            // ...
+            public function configureOptions(OptionsResolver $resolver)
+            {
+                // ...
+                $resolver->define('host')
+                    ->required()
+                    ->default('smtp.example.org')
+                    ->allowedTypes('string')
+                    ->info('The IP address or hostname');
+
+                $resolver->define('transport')
+                    ->required()
+                    ->default('transport')
+                    ->allowedValues(['sendmail', 'mail', 'smtp']);
+            }
+        }
+        ```
 
 ### Sólo falta los módulos.
 -   Adaptar los formularios a zend-form (Módulos)
