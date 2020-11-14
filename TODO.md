@@ -7,9 +7,10 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
+-   ...
 
 # Para la versión 4.7.0
+-   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
