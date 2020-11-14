@@ -15,7 +15,11 @@
 		{{ metahead }}
 
         <!-- Title tag for page -->
-        <title>{{ head_title().renderTitle() }}</title>
+        <title>
+            {% block lotgd_head_title %}
+                {{ head_title().renderTitle() }}
+            {% endblock lotgd_head_title %}
+        </title>
 
         {{ encore_entry_link_tags('lotgd', 'lotgd', 'lotgd') }}
         {{ encore_entry_link_tags('semantic_ui', 'lotgd', 'lotgd') }}
