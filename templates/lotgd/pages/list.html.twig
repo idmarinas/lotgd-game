@@ -1,6 +1,6 @@
 {% translate_default_domain 'page-list' %}
 
-{% if userPost.loggedin %}
+{% if user.loggedin %}
     <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
         <div class="field inline">
             <label for="">{{ 'form.search.label'|t }}</label>
@@ -45,7 +45,7 @@
                 </td>
                 <td class="colLtYellow">{{ warrior.level }}</td>
                 <td class="colLtWhite">
-                    {% if userPost.loggedin %}
+                    {% if user.loggedin %}
                         <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ warrior.acctid }}')">
                             <img src="images/newscroll.GIF" width="16" height="16" alt="{{ writemail }}" border="0">
                         </a>
