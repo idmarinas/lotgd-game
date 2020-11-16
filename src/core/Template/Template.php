@@ -84,7 +84,13 @@ class Template extends Environment
      */
     public function renderTheme($name, array $context = []): string
     {
-        return $this->render("@theme{$this->themeNamespace}/{$name}", (array) $context);
+        \trigger_error(\sprintf(
+            'Class %s is deprecated in 4.6.0 and deleted in 4.7.0. Use render() with {theme}. Example: \LotgdTheme::render("{theme}/path/to/template.html.twig");',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
+
+        return $this->render("{theme}/{$name}", (array) $context);
     }
 
     /**
