@@ -194,7 +194,8 @@
         </div>
     </form>
 
-    {% do inline_script().captureStart() %}
+    <script>
+        /* global $ Lotgd */
         $('#search').dropdown({
             preserveHTML: false,
             apiSettings: {
@@ -264,7 +265,7 @@
                 warning.style.display = 'none'
             }
         }
-    {% do inline_script().captureEnd() %}
+    </script>
 {% endblock mail_write %}
 
 {% block mail_read %}
