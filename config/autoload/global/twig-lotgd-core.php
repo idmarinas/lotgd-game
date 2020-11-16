@@ -7,6 +7,8 @@
  */
 
 return [
+    //-- Add global params for all templates
+    'twig_global_params' => [],
     'twig_templates_paths' => [
         //-- For a THEME need this
         //-- Namespace are prefixed for "theme" and the name of "themes/file_theme.html"
