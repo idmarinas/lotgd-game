@@ -22,7 +22,7 @@ function increment_specialty($colorcode, $spec = false)
     }
     else
     {
-        output('`7You have no direction in the world, you should rest and make some important decisions about your life.`0`n');
+        \LotgdResponse::pageAddContent(\LotgdTranslator::t('increment.specialty.none', [], 'app-default'));
     }
 
     if (false !== $spec)

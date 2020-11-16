@@ -67,6 +67,9 @@ character:
     mount: '`iNone´i'
     bio: '`iNo biography provided`i'
 
+# Increment specialty
+increment.specialty.none: '`7You have no direction in the world, you should rest and make some important decisions about your life.`0`n'
+
 # Statistics of character (right navegation bar)
 statistic:
     category:
