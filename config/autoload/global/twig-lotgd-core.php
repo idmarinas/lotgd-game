@@ -8,6 +8,11 @@
 
 return [
     'twig_templates_paths' => [
+        //-- For a THEME need this
+        //-- Namespace are prefixed for "theme" and the name of "themes/file_theme.html"
+        //-- Example: for "themes/jade.html" theme
+        // 'templates/jade' => 'themeJade',
+        //-- Other
         // 'path/to/templates' => 'namespace',
         //-- If not want namespace
         // 'path/to/templates' => false|null|'',
