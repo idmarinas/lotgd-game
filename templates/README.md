@@ -7,7 +7,8 @@ Add `templates/yourTheme` to Twig engine
 //-- config/autoload/local/twig-templates-YourServer-local.php
 return [
     'twig_templates_paths' => [
-        'templates/yourTheme' => 'yourtheme',
+        //-- Remember prefixed with `theme`
+        'templates/yourTheme' => 'themeYourtheme',
     ],
 ];
 ```
