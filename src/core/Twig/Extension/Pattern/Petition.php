@@ -23,11 +23,6 @@ trait Petition
      */
     public function userPetition(): string
     {
-        \trigger_error(\sprintf(
-            'Usage of %s (user_petition() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "{%% block user_petition parent() %%}" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
         return $this->getTemplate()->renderBlock('user_petition', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
     }
 
