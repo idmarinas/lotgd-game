@@ -34,18 +34,45 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   In terminal/console use `php bin/console` and this see information and list of commands.
     -   You can add your custom commands, only need add class name to `config/autoload/local/console-lotgd-core.php`
         -   Can see example in `config/autoload/global/console-lotgd-core.php`
+-   **Twig template system**
+    -   Global params, now can add global params to Twig templated, this params are available for all templates.
+        ```php
+        //-- config/autoload/local/twig-lotgd-local.php
+        return [
+            'twig_global_params' => [
+                'your' => 'param value'
+            ],
+        ]
+        ```
+        -   Default globals:
+            -   `enviroment` register when Template system is created (in factory). Values: `dev` or `prod`
+            -   `userPre` register when call `\LotgdResponse::pageStart();`
+            -   `sessionPre` register when call `\LotgdResponse::pageStart();`
+            -   `user` register when instantiate Template system (`__construct()`) and call `\LotgdTheme::render()`, `LotgdTheme::renderBlock()`, `\LotgdTheme::load()` and `\LotgdResponse::pageEnd();`
+            -   `session` register when instantiate Template system (`__construct()`) and call `\LotgdTheme::render()`, `LotgdTheme::renderBlock()`, `\LotgdTheme::load()` and `\LotgdResponse::pageEnd();`
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **scr/core/Template/Template.php** 
+    -   `renderTheme()` is obsolete.
+        -   Use `render()` with {theme} pattern to render a theme template.
+            -   Example: `\LotgdTheme::render("{theme}/path/to/template.html.twig");`
+                -   This search template `@themeJade/path/to/template.html.twig`
+                    -   Where `@themeJade` is the actual theme actived.
+    -   `renderLayout()` is obsolete
+        -   Use `render()` with `@layout` namespace
+            -   Example: `\LotgdTheme::render("@layout/path/to/template.html.twig");`
 
 ### :wrench: FIXES
 
--   Nothing
+-   **templates/lotgd/_blocks/_mail.html.twig** Fixed error with To field select (Here add to inline script not is valid, this show in Jaxon script)
+-   **templates/lotgd/pages/list.html.twig** Fixed error, templates not get `userPost` value, only user, that is the actual value.
+-   **templates/lotgd/_blocks/_commentary.html.twig** Fixed error, where it showed the mark that all comments were recent
 
 ### :x: REMOVES
 
--   Nothing
+-   **lib/spell.php** This file is not in use, and not is used. Use new Censor system. 
+    -   `$censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class); $censor->filter(string)`
 
 ### :notebook: NOTES
 
