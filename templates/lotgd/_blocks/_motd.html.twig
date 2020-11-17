@@ -203,10 +203,6 @@
 {% endblock motd_item_add %}
 
 {% block motd_poll_add %}
-    {% if preview %}
-    {% include 'base/page/motd/parts/item.twig' with {'SU_POST_MOTD': 0} %}
-    <hr>
-    {% endif %}
 
     {{ 'item.add.poll.form.note'|t|colorize }}
     <h4 class="header">{{ 'item.add.poll.form.title'|t|colorize }}</h4>
