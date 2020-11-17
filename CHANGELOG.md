@@ -62,6 +62,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `renderLayout()` is obsolete
         -   Use `render()` with `@layout` namespace
             -   Example: `\LotgdTheme::render("@layout/path/to/template.html.twig");`
+-   **Twig functions**
+    -   `include_module` use new Template System with `@module` namespace
+    -   `include_theme` use new Template System for themes.
+    -   `include_layout` use pattern `{theme}`. Example: `{theme}/path/to/template.html.twig`
 
 ### :wrench: FIXES
 

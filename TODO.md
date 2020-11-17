@@ -16,6 +16,8 @@
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
     -   Se tiene que ir quitando estas clases, y mover las fuciones a otras zonas.
     -   Ejemplo: el colorize (appoencode) se moverá a otra clase
+-   Eliminar la función `renderTheme` de la clase Template.php
+-   Eliminar la función `renderLayout` de la clase Template.php
 
 # Para la versión 4.8.0
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
