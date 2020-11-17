@@ -196,6 +196,11 @@ trait CoreFunction
      */
     public function includeModuleTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
+        \trigger_error(\sprintf(
+            'Usage of `include_module` is obsolete since 4.6.0; and delete in version 4.7.0, use "new theme system for module" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $include = $env->getFunction('include')->getCallable();
 
         return $include($env, $context, "module/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
@@ -215,6 +220,11 @@ trait CoreFunction
      */
     public function includeThemeTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
+        \trigger_error(\sprintf(
+            'Usage of `include_theme` is obsolete since 4.6.0; and delete in version 4.7.0, use "new theme system" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $include = $env->getFunction('include')->getCallable();
 
         return $include($env, $context, "{$env->getThemefolder()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
@@ -234,6 +244,11 @@ trait CoreFunction
      */
     public function includeLayoutTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
     {
+        \trigger_error(\sprintf(
+            'Usage of `include_layout` is obsolete since 4.6.0; and delete in version 4.7.0, use "{theme}/path/to/template.html.twig" instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $include = $env->getFunction('include')->getCallable();
 
         return $include($env, $context, "@theme{$env->getThemeNamespace()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
