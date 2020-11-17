@@ -25,7 +25,6 @@ use Twig\Environment;
 class Template extends Environment
 {
     use Pattern\Container;
-    use Pattern\Template;
 
     const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
     const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
@@ -50,8 +49,8 @@ class Template extends Environment
         ];
         $options = \array_merge($default, $options);
 
-        array_push($loader, static::TEMPLATES_BASE_DIR); // Main templates is always last, is the last area where Twig will look
-        array_push($loader, 'templates'); // Compatibility with modules (temporal , remove in future before 5.0.0)
+        \array_push($loader, static::TEMPLATES_BASE_DIR); // Main templates is always last, is the last area where Twig will look
+        \array_push($loader, 'templates'); // Compatibility with modules (temporal , remove in future before 5.0.0)
         $loader = new LotgdFilesystemLoader($loader);
 
         //-- Added path to templates modules
@@ -64,6 +63,8 @@ class Template extends Environment
         $loader->addPath(static::TEMPLATES_LAYOUT_DIR, 'layout');
 
         parent::__construct($loader, $options);
+
+        $this->updateGlobals();
     }
 
     /**
@@ -73,6 +74,11 @@ class Template extends Environment
      */
     public function renderLayout($context): string
     {
+        \trigger_error(\sprintf(
+            'Class %s is deprecated in 4.6.0 and deleted in 4.7.0. Use render() with layout namespace. Example: \LotgdTheme::render("@layout/path/to/template.html.twig");',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         return $this->render("@layout/{$this->getTheme()}", (array) $context);
     }
 
@@ -89,7 +95,6 @@ class Template extends Environment
             __METHOD__
         ), E_USER_DEPRECATED);
 
-
         return $this->render("{theme}/{$name}", (array) $context);
     }
 
@@ -101,18 +106,11 @@ class Template extends Environment
      */
     public function render($name, array $context = []): string
     {
-        global $session;
-
         $params = $this->getTemplateParams()->toArray(); //-- All parameters for template, include userPre
 
-        $user   = $session['user'] ?? [];
-        $sesion = $session         ?? [];
-        unset($sesion['user'], $user['password']);
+        $this->updateGlobals();
 
-        $context = \array_merge([
-            'user'    => $user, //-- Actual user data for this call
-            'session' => $sesion, //-- Actual session data for this call
-        ], $params, $context);
+        $context = \array_merge($params, $context);
 
         return parent::render($name, (array) $context);
     }
@@ -125,22 +123,23 @@ class Template extends Environment
      */
     public function renderBlock($blockName, $template, array $context = [])
     {
-        global $session;
-
         $params = $this->getTemplateParams()->toArray(); //-- All parameters for template, include userPre
 
-        $user   = $session['user'] ?? [];
-        $sesion = $session         ?? [];
-        unset($sesion['user'], $user['password']);
+        $context = \array_merge($params, $context);
 
-        $context = \array_merge([
-            'user'    => $user, //-- Actual user data for this call
-            'session' => $sesion, //-- Actual session data for this call
-        ], $params, $context);
-
-        $tpl = $this->getTemplate()->load($template);
+        $tpl = $this->load($template);
 
         return $tpl->renderBlock($blockName, $context);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function load($name)
+    {
+        $this->updateGlobals();
+
+        return parent::load($name);
     }
 
     /**
@@ -278,5 +277,20 @@ class Template extends Environment
         }
 
         return $skins[0];
+    }
+
+    /**
+     * Update globals parameters.
+     */
+    protected function updateGlobals(): void
+    {
+        global $session;
+
+        $user   = $session['user'] ?? [];
+        $sesion = $session         ?? [];
+        unset($sesion['user'], $user['password']);
+
+        $this->addGlobal('user', $user); //-- Actual user data for this call
+        $this->addGlobal('session', $sesion); //-- Actual session data for this call
     }
 }
