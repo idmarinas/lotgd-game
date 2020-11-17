@@ -25,6 +25,7 @@ use Twig\Environment;
 class Template extends Environment
 {
     use Pattern\Container;
+    use Pattern\Template;
 
     const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
     const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
