@@ -71,10 +71,8 @@ class Response extends HttpResponse
         $sesionPre = $session         ?? [];
         unset($sesionPre['user'], $userPre['password']);
 
-        $this->getTemplateParams()
-            ->set('userPre', $userPre)
-            ->set('sessionPre', $sesionPre)
-        ;
+        $this->getTemplate()->addGlobal('userPre', $userPre);
+        $this->getTemplate()->addGlobal('sessionPre', $sesionPre);
     }
 
     /**
@@ -188,11 +186,12 @@ class Response extends HttpResponse
         unset($sesion['user'], $user['password']);
 
         $this->getTemplateParams()
-            ->set('user', $user) //-- Update user info
-            ->set('session', $sesion) //-- Update session info
             ->set('stats', $charstats) //-- Output character stats
             ->set('content', $this->getContent()) //-- Set content
         ;
+        //-- Twig Globals
+        $this->getTemplate()->addGlobal('user', $user); //-- Update user info
+        $this->getTemplate()->addGlobal('session', $sesion); //-- Update session info
 
         //-- output page generation time
         $gentime = \Tracy\Debugger::timer('page-footer');
