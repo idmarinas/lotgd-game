@@ -64,7 +64,7 @@ return [
             Laminas\View\Helper\HeadStyle::class          => InvokableFactory::class,
             Laminas\View\Helper\HeadTitle::class          => InvokableFactory::class,
             Laminas\View\Helper\InlineScript::class       => InvokableFactory::class,
-            Lotgd\Core\Template\Params::class             => Factory\Template\Params::class,
+            Lotgd\Core\Template\Params::class             => InvokableFactory::class,
             'webpack_encore.entrypoint_lookup_collection' => Factory\Template\EntrypointLookupCollection::class,
 
             //-- Added in version 4.6.0

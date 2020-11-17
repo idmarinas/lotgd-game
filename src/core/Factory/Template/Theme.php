@@ -32,13 +32,14 @@ class Theme implements FactoryInterface
         $config   = $container->get('GameConfig');
         $opts     = $config['lotgd_core'] ?? [];
         $packages = $container->get('webpack_encore.packages');
+        $isDevelopment = (bool) ($opts['development'] ?? false);
 
         $templateSystem = new TemplateTheme([], [
-            'debug' => (bool) ($opts['development'] ?? false),
+            'debug' => $isDevelopment,
             //-- Used dir of cache
             'cache' => 'storage/cache/template',
             //-- Used in development for reload .twig templates
-            'auto_reload' => (bool) ($opts['development'] ?? false),
+            'auto_reload' => $isDevelopment,
         ]);
         $templateSystem->setContainer($container);
 
@@ -56,6 +57,11 @@ class Theme implements FactoryInterface
             },
         ]));
 
+        //-- Register globals params
+        $globals = $config['twig_global_params'] ?? [];
+        $globals = array_merge($globals, ['enviroment' => $isDevelopment ? 'dev' : 'prod' ]);
+        $this->registerGlobals($globals, $templateSystem);
+
         //-- Custom extensions
         $extensions = $config['twig_extensions'] ?? [];
         $this->addTwigExtensions($extensions, $templateSystem, $container);
@@ -67,7 +73,7 @@ class Theme implements FactoryInterface
         $tplPaths = $config['twig_templates_paths'] ?? [];
         $this->addTemplatePaths($tplPaths, $templateSystem);
 
-        if ($opts['development'] ?? false)
+        if ($isDevelopment)
         {
             $profile = new Profile();
             $templateSystem->addExtension(new ProfilerExtension($profile));
@@ -89,7 +95,7 @@ class Theme implements FactoryInterface
     }
 
     //-- Add twig extensions
-    private function addTwigExtensions($extensions, &$templateSystem, $container): void
+    private function addTwigExtensions($extensions, TemplateTheme &$templateSystem, $container): void
     {
         if ( ! empty($extensions) && \is_array($extensions))
         {
@@ -119,9 +125,8 @@ class Theme implements FactoryInterface
      * Them fallback to other paths.
      *
      * @param mixed $tplPaths
-     * @param mixed $templateSystem
      */
-    private function addTemplatePaths($tplPaths, &$templateSystem): void
+    private function addTemplatePaths($tplPaths, TemplateTheme &$templateSystem): void
     {
         if ( ! empty($tplPaths) && \is_array($tplPaths))
         {
@@ -136,6 +141,19 @@ class Theme implements FactoryInterface
 
                 $templateSystem->getLoader()->addPath($path, $namespace);
             }
+        }
+    }
+
+    /**
+     * Register global parameters.
+     *
+     * @param array $globals
+     */
+    private function registerGlobals($globals, TemplateTheme &$templateSystem)
+    {
+        foreach ($globals as $name => $value)
+        {
+            $templateSystem->addGlobal($name, $value);
         }
     }
 }
