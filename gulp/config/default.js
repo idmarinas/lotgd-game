@@ -45,6 +45,7 @@ const config = {
             //-- Ignore folders not need for skeleton
             '!{error_docs,lib,skeleton}{,/**}',
             //-- Ignore files of core
+            '!assets/lotgd/css/semantic{,/**',
             '!config/autoload/global{,/**}',
             '!cronjob/*.php',
             '!data/form/core{,/**}',
