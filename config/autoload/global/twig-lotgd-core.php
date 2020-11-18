@@ -60,6 +60,9 @@ return [
         Lotgd\Core\Twig\Extension\Helpers::class,
         Lotgd\Core\Twig\Extension\Donation::class, //-- Twig functions for donation buttons (Paypal buttons)
 
+        //-- Added in version 4.6.0
+        Lotgd\Core\Twig\Extension\AdvertisingGoogle::class,
+
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
     ],
