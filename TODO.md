@@ -10,7 +10,7 @@
 -   ...
 
 # Para la versión 4.7.0
--   Agregar un sistema de publicidad en el core (principalmente el Google Adsense)
+-   Agregar un sistema de publicidad en el core que permita vender espacios de publicidad en el juego.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
@@ -21,6 +21,8 @@
 
 # Para la versión 4.8.0
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
+    -   No sirve, no se puede usar
+    -   Intentar dividir el array en la posición deseada, agregar el item y luego fusionar los dos arrays.
 
 # Para la versión 4.9.0
 -   ???? Crear el nuevo sistema de módulos
