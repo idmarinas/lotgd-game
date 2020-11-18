@@ -10,14 +10,17 @@
 -   ...
 
 # Para la versión 4.7.0
+-   Eliminar la función `renderTheme` de la clase Template.php
+-   Eliminar la función `renderLayout` de la clase Template.php
+-   LotgdForm
+    -   Borrar el uso de la clase LotgdForm (se usará la factory en su lugar)
+    -   Borrar la creación de la clase estática LotgdForm
 -   Agregar un sistema de publicidad en el core que permita vender espacios de publicidad en el juego.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
     -   Se tiene que ir quitando estas clases, y mover las fuciones a otras zonas.
     -   Ejemplo: el colorize (appoencode) se moverá a otra clase
--   Eliminar la función `renderTheme` de la clase Template.php
--   Eliminar la función `renderLayout` de la clase Template.php
 
 # Para la versión 4.8.0
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
