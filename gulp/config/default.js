@@ -56,6 +56,7 @@ const config = {
             '!src/ajax/pattern/core{,/**}',
             '!templates_core{,/**}',
             '!templates/lotgd{,/**}',
+            '!translations/en{,/**}',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor}{,/**}',
             //-- Ignore all dist folders
