@@ -238,3 +238,25 @@
     {% endif %}
     <div class="ui hidden clearing divider"></div>
 {% endblock pagination %}
+
+{% block ad_wrapper %}
+    <table class="lotgd collapsing table">
+        <tr>
+            <td class="border tlc"></td>
+            <td class="border tm"></td>
+            <td class="border trc"></td>
+        </tr>
+        <tr>
+            <td class="border tlt"></td>
+            <td>
+                {{ ad_content }}
+            </td>
+            <td class="border trt"></td>
+        </tr>
+        <tr>
+            <td class="border blc"></td>
+            <td class="border btm"></td>
+            <td class="border brc"></td>
+        </tr>
+    </table>
+{% endblock ad_wrapper %}
