@@ -50,6 +50,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
             -   `sessionPre` register when call `\LotgdResponse::pageStart();`
             -   `user` register when instantiate Template system (`__construct()`) and call `\LotgdTheme::render()`, `LotgdTheme::renderBlock()`, `\LotgdTheme::load()` and `\LotgdResponse::pageEnd();`
             -   `session` register when instantiate Template system (`__construct()`) and call `\LotgdTheme::render()`, `LotgdTheme::renderBlock()`, `\LotgdTheme::load()` and `\LotgdResponse::pageEnd();`
+-   **Simple Advertising Google AdSense**
+    -   Now can show Ads of Google AdSense in LoTGD. Using Twig function
+    -   `google_ad('ad_header')`
+    -   Can see configuration in `config/autoload/global/advertising-lotgd-core.php` 
 
 ### :fire: DEPRECATED
 
