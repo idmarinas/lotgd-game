@@ -22,7 +22,6 @@ use Twig\TwigFunction;
 
 class Translator extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Translator;
     use Pattern\Translator;
 

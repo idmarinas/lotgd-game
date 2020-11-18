@@ -18,7 +18,6 @@ use Twig\TwigFunction;
 
 class Donation extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Translator;
     use PatternCore\Template;
     use PatternCore\Http;

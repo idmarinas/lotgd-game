@@ -19,7 +19,6 @@ use Twig\TwigFunction;
 
 class Motd extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Repository;
     use PatternCore\Translator;
     use PatternCore\Template;

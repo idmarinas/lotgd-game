@@ -20,7 +20,6 @@ use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Translator;
     use PatternCore\Template;
     use Pattern\AttributesString;

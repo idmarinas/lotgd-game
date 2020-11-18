@@ -30,7 +30,6 @@ use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Translator;
     use PatternCore\Template;
     use Pattern\Commentary;

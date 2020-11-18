@@ -19,7 +19,6 @@ use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
-    use PatternCore\Container;
     use PatternCore\Template;
     use PatternCore\Sanitize;
 
