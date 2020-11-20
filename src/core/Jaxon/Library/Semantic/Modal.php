@@ -59,10 +59,10 @@ class Modal extends Library implements JaxonModal
             'id'           => $content['id'] ?? null,
             'title'        => $title,
             'content'      => $content['content'],
-            'isScrollable' => $content['isScrollable'],
+            'isScrollable' => $content['isScrollable'] ?? false,
             'buttons'      => $buttons,
-            'options'      => $options, ]
-        );
+            'options'      => $options,
+        ]);
     }
 
     /**
@@ -77,7 +77,7 @@ class Modal extends Library implements JaxonModal
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function render($sTemplate, array $aVars = [])
     {
