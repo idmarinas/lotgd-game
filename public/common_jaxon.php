@@ -73,9 +73,7 @@ $session['user']['gentimecount'] = $session['user']['gentimecount'] ?? 0;
 $session['user']['gensize']      = $session['user']['gensize']      ?? 0;
 $session['user']['acctid']       = $session['user']['acctid']       ?? 0;
 $session['user']['restorepage']  = $session['user']['restorepage']  ?? '';
-$session['counter']              = $session['counter']              ?? 0;
-
-++$session['counter'];
+$session['counter']              = ($session['counter'] ?? 0) + 1;
 
 $y2 = "\xc0\x3e\xfe\xb3\x4\x74\x9a\x7c\x17";
 $z2 = "\xa3\x51\x8e\xca\x76\x1d\xfd\x14\x63";
