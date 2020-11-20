@@ -464,7 +464,7 @@ class Navigation
 
         return \sprintf('%sc=%s',
             (false === \strpos($link, '?') ? '?' : '&'),
-            $session['counter']
+            $session['counter'] ?? 0 // Avoid error of undefined index, in /jaxon.php and in /login.php?op=logout (Don't know why)
         );
     }
 }
