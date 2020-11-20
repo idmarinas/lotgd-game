@@ -14,14 +14,14 @@
 // license must be used on the distribution of any works derived from this
 // work.
 // Please see the file LICENSE for a full textual description of the license.txt.
-chdir(realpath(__DIR__.'/..'));
+\chdir(\realpath(__DIR__.'/..'));
 
 require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 //-- Include constants
 require_once 'lib/constants.php';
 
-$isDevelopment = file_exists('config/development.config.php');
+$isDevelopment = \file_exists('config/development.config.php');
 //-- Init Debugger
 $debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
 \Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
@@ -38,14 +38,14 @@ if ($isDevelopment)
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
     function ($className)
     {
-        return class_exists($className);
+        return \class_exists($className);
     }
 );
 
 // Set some constant defaults in case they weren't set before the inclusion of
 // common.php
-defined('OVERRIDE_FORCED_NAV') || define('OVERRIDE_FORCED_NAV', false);
-defined('ALLOW_ANONYMOUS')     || define('ALLOW_ANONYMOUS', false);
+\defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
+\defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Session as LotgdSession;
@@ -105,7 +105,7 @@ require_once 'lib/translator.php';
 require_once 'lib/jaxon.php';
 
 // Decline static file requests back to the PHP built-in webserver
-if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
+if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
 {
     return false;
 }
@@ -113,34 +113,34 @@ if ('cli-server' === php_sapi_name() && is_file(__DIR__.parse_url(LotgdRequest::
 //-- Check connection to DB
 $link = Doctrine::isConnected();
 
-define('DB_CONNECTED', (false !== $link));
-define('DB_CHOSEN', DB_CONNECTED);
+\define('DB_CONNECTED', (false !== $link));
+\define('DB_CHOSEN', DB_CONNECTED);
 
 if (DB_CONNECTED)
 {
-    define('LINK', $link);
+    \define('LINK', $link);
 }
 
-if ( ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! defined('IS_INSTALLER'))
+if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_INSTALLER'))
 {
-    define('NO_SAVE_USER', true);
+    \define('NO_SAVE_USER', true);
 
-    defined('DB_NODB') || define('DB_NODB', true);
+    \defined('DB_NODB') || \define('DB_NODB', true);
 
     exit;
 }
-elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
 {
-    define('IS_INSTALLER', false);
+    \define('IS_INSTALLER', false);
 }
-elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! defined('IS_INSTALLER'))
+elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
 {
-    define('NO_SAVE_USER', true);
+    \define('NO_SAVE_USER', true);
 
     exit;
 }
 // If is installer check if tables are created
-elseif (defined('IS_INSTALLER'))
+elseif (\defined('IS_INSTALLER'))
 {
     try
     {
@@ -149,21 +149,21 @@ elseif (defined('IS_INSTALLER'))
     }
     catch (\Throwable $th)
     {
-        defined('DB_NODB') || define('DB_NODB', true);
+        \defined('DB_NODB') || \define('DB_NODB', true);
     }
 }
 
-if ( ! IS_INSTALLER && file_exists('public/installer.php')
+if ( ! IS_INSTALLER && \file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
-    && 'installer.php' != substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
+    && 'installer.php' != \substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     exit;
 }
 
-if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
+if ( ! \defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
-    defined('DB_NODB') || define('DB_NODB', true);
+    \defined('DB_NODB') || \define('DB_NODB', true);
 
     exit;
 }
@@ -171,7 +171,7 @@ if ( ! defined('IS_INSTALLER') && ! DB_CONNECTED)
 if (
     isset($session['lasthit'], $session['loggedin'])
 
-    && strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
+    && \strtotime('-'.getsetting('LOGINTIMEOUT', 900).' seconds') > $session['lasthit']
     && $session['lasthit'] > 0 && $session['loggedin']
 ) {
     // force the abandoning of the session when the user should have been
@@ -186,7 +186,7 @@ if (
 
     return $response;
 }
-$session['lasthit'] = strtotime('now');
+$session['lasthit'] = \strtotime('now');
 
 $cp = \Lotgd\Core\Application::COPYRIGHT;
 $l  = \Lotgd\Core\Application::LICENSE;
@@ -218,7 +218,7 @@ if (getsetting('fullmaintenance', 0))
     exit;
 }
 
-$script = substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
+$script = \substr(LotgdRequest::getServer('SCRIPT_NAME'), 0, \strrpos(LotgdRequest::getServer('SCRIPT_NAME'), '.'));
 mass_module_prepare(['everyhit', "header-{$script}", "footer-{$script}", 'holiday', 'charstats']);
 
 // In the event of redirects, we want to have a version of their session we
@@ -252,9 +252,9 @@ if (isset($session['user']['hitpoints']) && 0 < $session['user']['hitpoints'])
     $session['user']['alive'] = true;
 }
 
-$session['bufflist'] = array_map('array_filter', $session['user']['bufflist'] ?? []);
+$session['bufflist'] = \array_map('array_filter', $session['user']['bufflist'] ?? []);
 
-if ( ! is_array($session['bufflist']))
+if ( ! \is_array($session['bufflist']))
 {
     $session['bufflist'] = [];
 }
@@ -275,7 +275,7 @@ if ( ! empty($temp_comp))
 {
     foreach ($temp_comp as $name => $companion)
     {
-        if (is_array($companion))
+        if (\is_array($companion))
         {
             $companions[$name] = $companion;
         }
