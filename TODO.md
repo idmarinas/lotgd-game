@@ -10,6 +10,7 @@
 -   ...
 
 # Para la versión 4.7.0
+-   CronJob -> revisar que no le fuerze la actualizacion/instalación al cronjob (cli)
 -   Eliminar la función `renderTheme` de la clase Template.php
 -   Eliminar la función `renderLayout` de la clase Template.php
 -   LotgdForm
