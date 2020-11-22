@@ -38,8 +38,6 @@ const config = {
         skeleton: [
             //-- All files includin subdirectories
             '**{,/**}',
-            //-- Include .files
-            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
             //-- Ignore files of development
             '!{docs,release}{,/**}',
             //-- Ignore folders not need for skeleton
@@ -47,6 +45,7 @@ const config = {
             //-- Ignore files of core
             '!assets/lotgd/css/semantic{,/**}',
             '!config/autoload/global{,/**}',
+            '!config/autoload/local{,/**}',
             '!cronjob/*.php',
             '!data/form/core{,/**}',
             '!public{,/**}',
@@ -66,7 +65,9 @@ const config = {
             '!{*.,}dist{,/**}',
             //-- Ignore some files
             '!*.{txt,TXT,csv,phar}',
-            '!{README.md,TODO.md,phpdoc.dist.xml}'
+            '!{README.md,TODO.md,phpdoc.dist.xml}',
+            //-- Include .files
+            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}'
         ]
     }
 }
