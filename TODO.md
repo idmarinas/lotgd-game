@@ -10,6 +10,7 @@
 -   ...
 
 # Para la versión 4.7.0
+-   Añadir extensions a Twig, revisar para que no intente agregar la misma dos veces
 -   CronJob -> revisar que no le fuerze la actualizacion/instalación al cronjob (cli)
 -   Eliminar la función `renderTheme` de la clase Template.php
 -   Eliminar la función `renderLayout` de la clase Template.php
