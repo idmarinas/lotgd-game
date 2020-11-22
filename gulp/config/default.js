@@ -46,6 +46,7 @@ const config = {
             '!assets/lotgd/css/semantic{,/**}',
             '!config/autoload/global{,/**}',
             '!config/autoload/local{,/**}',
+            '!config/autoload/lotgd.config.php',
             '!cronjob/*.php',
             '!data/form/core{,/**}',
             '!public{,/**}',
@@ -58,7 +59,7 @@ const config = {
             '!templates_core{,/**}',
             '!templates/lotgd{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/templates/lotgd" folder
             '!themes{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/themes" folder
-            '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations" folder
+            '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations/en" folder
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor}{,/**}',
             //-- Ignore all dist folders
