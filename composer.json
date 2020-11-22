@@ -5,14 +5,14 @@
         "process-timeout": 5000,
         "sort-packages": true,
         "platform": {
-            "php": "7.2.5"
+            "php": "7.3.0"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "CC-BY-NC-SA-2.0",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "ext-bcmath": "*",
         "ext-curl": "*",
         "ext-exif": "*",
