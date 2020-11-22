@@ -51,13 +51,15 @@ const config = {
             '!data/form/core{,/**}',
             '!public{,/**}',
             'public/**/.gitkeep', //-- Only copy .gitkeep
+            '!modules{,/**}',
             '!src/module{,/**}',
             '!src/core{,/**}',
             '!src/ajax/core{,/**}',
             '!src/ajax/pattern/core{,/**}',
             '!templates_core{,/**}',
-            '!templates/lotgd{,/**}',
-            '!translations/en{,/**}',
+            '!templates/lotgd{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/templates/lotgd" folder
+            '!themes{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/themes" folder
+            '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations" folder
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor}{,/**}',
             //-- Ignore all dist folders
