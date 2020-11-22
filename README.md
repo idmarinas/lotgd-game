@@ -24,7 +24,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4553239eac9e717f1cce/maintainability)](https://codeclimate.com/github/idmarinas/lotgd-game/maintainability)
 ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/idmarinas/lotgd-game?cacheSeconds=86400)
 
-[![Build in PHP](https://img.shields.io/badge/PHP-^7.2-8892BF.svg?logo=php)](http://php.net/)
+[![Build in PHP](https://img.shields.io/badge/PHP-^7.3-8892BF.svg?logo=php)](http://php.net/)
 [![built with gulp](https://img.shields.io/badge/gulp-builds_this_project-eb4a4b.svg?logo=gulp)](http://gulpjs.com/)
 [![built with webpack](https://img.shields.io/badge/webpack-builds_javascript-175d96.svg?logo=webpack)](https://webpack.js.org)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=idmarinas/lotgd-game)](https://dependabot.com)
@@ -62,6 +62,7 @@ If you want more modules, in ([DragonPrime](http://dragonprime.net)) you can fin
 -   From the 2.7.0 IDMarinas Edition you need PHP 7.0 or better
 -   From the 4.0.0 IDMarinas Edition you need PHP 7.1 or better
 -   From the 4.2.0 IDMarinas Edition you need PHP 7.2 or better
+-   From the 4.6.0 IDMarinas Edition you need PHP 7.3 or better
 
 # Other
 
