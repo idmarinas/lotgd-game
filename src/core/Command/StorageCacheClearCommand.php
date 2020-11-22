@@ -14,7 +14,6 @@
 namespace Lotgd\Core\Command;
 
 use Lotgd\Core\Kernel;
-use Lotgd\Core\ServiceManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -52,12 +51,10 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var ServiceManager $sm */
-        $sm     = $this->getApplication()->getServiceManager();
+        /** @var Kernel $sm */
+        $kernel = $this->getApplication()->getKernel();
         $style  = new SymfonyStyle($input, $output);
         $fs     = new Filesystem();
-        $config = $sm->get('GameConfig');
-        $kernel = new Kernel($config['lotgd_core']['development'] ? 'dev' : 'prod', $config['lotgd_core']['development'] ?? false);
 
         $find = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->files()->notName('.gitkeep');
 

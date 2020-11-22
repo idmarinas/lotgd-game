@@ -20,6 +20,7 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 final class Application extends ConsoleApplication
 {
     protected $serviceManager;
+    protected $appKernel;
 
     public function __construct(ServiceManager $sm)
     {
@@ -38,12 +39,30 @@ final class Application extends ConsoleApplication
         return $this->serviceManager;
     }
 
+    /**
+     * Get App kernel.
+     */
+    public function getKernel(): Kernel
+    {
+        if ( ! $this->appKernel instanceof Kernel)
+        {
+            /** @var ServiceManager $sm */
+            $sm          = $this->getServiceManager();
+            $config      = $sm->get('GameConfig');
+            $development = $config['lotgd_core']['development'] ?? false;
+
+            $this->appKernel = new Kernel($development ? 'dev' : 'prod', $development ?? false);
+        }
+
+        return $this->appKernel;
+    }
+
     protected function registerCommands()
     {
-        $config = $this->serviceManager->get('GameConfig');
+        $config   = $this->serviceManager->get('GameConfig');
         $commands = $config['console']['commands'];
 
-        foreach($commands as $command)
+        foreach ($commands as $command)
         {
             $this->add(new $command());
         }
