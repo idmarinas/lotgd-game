@@ -51,7 +51,7 @@ final class Application extends ConsoleApplication
             $config      = $sm->get('GameConfig');
             $development = $config['lotgd_core']['development'] ?? false;
 
-            $this->appKernel = new Kernel($development ? 'dev' : 'prod', $development ?? false);
+            $this->appKernel = new Kernel($development ? 'dev' : 'prod', $development);
         }
 
         return $this->appKernel;
