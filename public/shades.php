@@ -40,10 +40,10 @@ $params = [
 // read the FAQs, and if they first try to speak when dead
 // there is no way for them to unmute themselves without this link.
 \LotgdNavigation::addHeader('category.other');
-\LotgdNavigation::addNav('nav.faq', 'petition.php?op=faq', [
+\LotgdNavigation::addNav('nav.faq', '#', [
     'attributes' => [
-        'data-force' => 'true',
-        'onclick' => 'Lotgd.embed(this)'
+        'id' => 'shades-petition-faq',
+        'onclick' => "JaxonLotgd.Ajax.Core.Petition.faq(); $(this).addClass('disabled')"
     ]
 ]);
 
