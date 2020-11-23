@@ -65,6 +65,8 @@
 
 ## Cosas pendientes
 -   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
+-   Crear un sistema de publicidad interno (que permite comprar espacios publicitarios)
+    -   Compatible con el sistema simple (los tipo Google AdSense)
 -   Modificar el sistema de logeo, para usar una clase (principalmente por el tema de la contraseña)
     -   Login
     -   Cambiar la forma en la que se códifican las contraseñas y se hace el login.
