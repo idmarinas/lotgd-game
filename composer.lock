@@ -2204,16 +2204,16 @@
         },
         {
             "name": "jaxon-php/jaxon-dialogs",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jaxon-php/jaxon-dialogs.git",
-                "reference": "d58cfc5e8ca5881eeb5024c94f135381f46aeee1"
+                "reference": "f2a2d3187d7f7df9087b92b6d75f223e5b378a70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jaxon-php/jaxon-dialogs/zipball/d58cfc5e8ca5881eeb5024c94f135381f46aeee1",
-                "reference": "d58cfc5e8ca5881eeb5024c94f135381f46aeee1",
+                "url": "https://api.github.com/repos/jaxon-php/jaxon-dialogs/zipball/f2a2d3187d7f7df9087b92b6d75f223e5b378a70",
+                "reference": "f2a2d3187d7f7df9087b92b6d75f223e5b378a70",
                 "shasum": ""
             },
             "require": {
@@ -2250,7 +2250,7 @@
                 "php",
                 "xajax"
             ],
-            "time": "2019-12-07T14:50:35+00:00"
+            "time": "2020-11-23T00:05:44+00:00"
         },
         {
             "name": "laminas/laminas-authentication",
