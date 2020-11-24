@@ -117,7 +117,7 @@ if (DB_CONNECTED)
     \define('LINK', $link);
 }
 
-if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_INSTALLER'))
+if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_INSTALLER') && 'cli' != substr(php_sapi_name(), 0, 3))
 {
     \define('NO_SAVE_USER', true);
 
@@ -137,7 +137,7 @@ elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1'
 {
     \define('IS_INSTALLER', false);
 }
-elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
+elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER') && 'cli' != substr(php_sapi_name(), 0, 3))
 {
     \define('NO_SAVE_USER', true);
 
@@ -166,6 +166,7 @@ elseif (\defined('IS_INSTALLER'))
 if ( ! IS_INSTALLER && \file_exists('public/installer.php')
     && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
     && 'installer.php' != \substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
+    && 'cli' != substr(php_sapi_name(), 0, 3)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     \LotgdResponse::pageStart('title.security', [], 'app-common');
