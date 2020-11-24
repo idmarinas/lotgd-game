@@ -681,7 +681,7 @@ function charstats($return = true)
             addcharstat(\LotgdTranslator::t('statistic.stat.spirit', [], 'app-default'), 10 + \round(($u['level'] - 1) * 1.5));
         }
 
-        addcharstat(\LotgdTranslator::t('statistic.stat.race', [], 'app-default'), \LotgdTranslator::t('character.racename', [], (RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN, 'race'));
+        addcharstat(\LotgdTranslator::t('statistic.stat.race', [], 'app-default'), \LotgdTranslator::t('character.racename', [], (RACE_UNKNOWN != $u['race']) ? $u['race'] : RACE_UNKNOWN));
 
         if (\count($companions) > 0)
         {
