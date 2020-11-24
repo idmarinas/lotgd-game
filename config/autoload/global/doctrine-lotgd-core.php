@@ -99,6 +99,9 @@ return [
 
                 // Second level cache configuration (see doc to learn about configuration)
                 'second_level_cache' => [],
+                'types' => [
+                    'datetime' => \Lotgd\Core\Doctrine\DBAL\DateTimeType::class,
+                ],
             ],
         ],
 
