@@ -12,7 +12,8 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once __DIR__.'/common.php';
 
-$jobby = new Jobby\Jobby();
+$cron = new \Cron\Cron();
+$resolver = new \Cron\Resolver\ArrayResolver();
 
 //-- To avoid potential problems with other cache data and optimization/removal processes
 $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
@@ -30,12 +31,13 @@ if (! is_array($cronjobs) || empty($cronjobs))
 //-- Add all cronjobs to Jobby CronJob
 foreach ($cronjobs as $key => $job)
 {
-    $job = array_filter($job);
+    $shell = new \Cron\Job\ShellJob();
+    $shell->setCommand("php {$job['command']}.php");
+    $shell->setSchedule(new \Cron\Schedule\CrontabSchedule($job['schedule']));
 
-    $jobName = $job['name'];
-    $job['command'] = "php {$job['command']}.php";
-    unset($job['name'], $job['id']);
-    $jobby->add($jobName, $job);
+    $resolver->addJob($shell);
 }
 
-$jobby->run();
+$cron->setExecutor(new \Cron\Executor\Executor());
+$cron->setResolver($resolver);
+$cron->run();
