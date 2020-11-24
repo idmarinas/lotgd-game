@@ -78,7 +78,7 @@ if ('forgotval' == $op)
     $params['account'] = $account;
 
     $params = modulehook('page-create-forgotval-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot_val', '{theme}/pages/create/_partial.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot_val', '{theme}/pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -154,7 +154,7 @@ elseif ('val' == $op)
     savesetting('newestplayername', $account->getCharacter()->getName());
 
     $params = modulehook('page-create-val-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_email_val', '{theme}/pages/create/_partial.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_email_val', '{theme}/pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -206,7 +206,7 @@ elseif ('forgot' == $op)
     }
 
     $params = modulehook('page-create-forgot-tpl-params', $params);
-    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot', '{theme}/pages/create/_partial.html.twig', $params));
+    \LotgdResponse::pageAddContent(LotgdTheme::renderBlock('create_forgot', '{theme}/pages/_blocks/_create.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();
@@ -406,7 +406,7 @@ elseif ('create' == $op)
         $params['login'] = $shortname;
         $params['password'] = $pass1;
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/create/_partial.html.twig', $params));
+        \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/_blocks/_create.html.twig', $params));
 
         //-- Finalize page
         \LotgdResponse::pageEnd();
