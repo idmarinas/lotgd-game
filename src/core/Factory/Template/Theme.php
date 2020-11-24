@@ -102,7 +102,8 @@ class Theme implements FactoryInterface
             foreach ($extensions as $className)
             {
                 //-- Allows to override/remove extensions.
-                if (empty($className))
+                //-- Avoid register duplicated extension
+                if (empty($className) || $templateSystem->hasExtension($className))
                 {
                     continue;
                 }
