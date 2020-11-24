@@ -77,6 +77,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **templates/lotgd/_blocks/_mail.html.twig** Fixed error with To field select (Here add to inline script not is valid, this show in Jaxon script)
 -   **templates/lotgd/pages/list.html.twig** Fixed error, templates not get `userPost` value, only user, that is the actual value.
 -   **templates/lotgd/_blocks/_commentary.html.twig** Fixed error, where it showed the mark that all comments were recent
+-   **Doctrine** Fixed occasional error with the datetime 0000-00-00 00:00:00, being an invalid date, when saving it in the database used -0001-11-30 00:00:00
 
 ### :x: REMOVES
 
