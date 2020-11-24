@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "716d9e5354adb9e5aa72d9dab62af901",
+    "content-hash": "1d60281b066a99af08802a7123575d9d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -449,6 +449,51 @@
             "homepage": "https://github.com/container-interop/container-interop",
             "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "cron/cron",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cron/Cron.git",
+                "reference": "8156b9532ecc64ed5aa5c4ebdfc4346d2ef91c4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cron/Cron/zipball/8156b9532ecc64ed5aa5c4ebdfc4346d2ef91c4d",
+                "reference": "8156b9532ecc64ed5aa5c4ebdfc4346d2ef91c4d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "symfony/process": "^2.4|^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cron\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dries De Peuter",
+                    "email": "dries@nousefreak.be"
+                }
+            ],
+            "description": "Cronjobs",
+            "time": "2019-11-23T12:08:49+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1775,124 +1820,6 @@
             "time": "2020-10-27T21:46:55+00:00"
         },
         {
-            "name": "dragonmantank/cron-expression",
-            "version": "v3.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dragonmantank/cron-expression.git",
-                "reference": "48212cdc0a79051d50d7fc2f0645c5a321caf926"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/48212cdc0a79051d50d7fc2f0645c5a321caf926",
-                "reference": "48212cdc0a79051d50d7fc2f0645c5a321caf926",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1|^8.0"
-            },
-            "replace": {
-                "mtdowling/cron-expression": "^1.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^0.11|^0.12",
-                "phpunit/phpunit": "^7.0|^8.0|^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cron\\": "src/Cron/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Tankersley",
-                    "email": "chris@ctankersley.com",
-                    "homepage": "https://github.com/dragonmantank"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/dragonmantank",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-10-13T01:26:01+00:00"
-        },
-        {
-            "name": "egulias/email-validator",
-            "version": "2.1.24",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/lexer": "^1.0.1",
-                "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.10"
-            },
-            "require-dev": {
-                "dominicsayers/isemail": "^3.0.7",
-                "phpunit/phpunit": "^4.8.36|^7.5.15",
-                "satooshi/php-coveralls": "^1.0.1"
-            },
-            "suggest": {
-                "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Egulias\\EmailValidator\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eduardo Gulias Davis"
-                }
-            ],
-            "description": "A library for validating emails against several RFCs",
-            "homepage": "https://github.com/egulias/EmailValidator",
-            "keywords": [
-                "email",
-                "emailvalidation",
-                "emailvalidator",
-                "validation",
-                "validator"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/egulias",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-14T15:56:27+00:00"
-        },
-        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.13.0",
             "source": {
@@ -2084,57 +2011,6 @@
                 "uploadable"
             ],
             "time": "2020-09-23T16:40:45+00:00"
-        },
-        {
-            "name": "hellogerard/jobby",
-            "version": "v3.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jobbyphp/jobby.git",
-                "reference": "a02846de7056fa648e299c9ba426e7f73a9e26cb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jobbyphp/jobby/zipball/a02846de7056fa648e299c9ba426e7f73a9e26cb",
-                "reference": "a02846de7056fa648e299c9ba426e7f73a9e26cb",
-                "shasum": ""
-            },
-            "require": {
-                "dragonmantank/cron-expression": "^3.0",
-                "opis/closure": "^3.5",
-                "php": ">=5.6",
-                "swiftmailer/swiftmailer": "^5.4|^6.0",
-                "symfony/process": "^2.7|^3.0|^4.0|^5.0"
-            },
-            "require-dev": {
-                "mp091689/dump-die": "^1.0",
-                "phpunit/phpunit": "^4.6",
-                "symfony/filesystem": "^2.7|^3.0|^4.0|^5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jobby\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gerard Sychay",
-                    "email": "hellogerard@gmail.com",
-                    "homepage": "https://github.com/hellogerard"
-                },
-                {
-                    "name": "Michael Contento",
-                    "homepage": "https://github.com/michaelcontento"
-                }
-            ],
-            "description": "Manage all your cron jobs without modifying crontab. Handles locking, logging, error emails, and more.",
-            "homepage": "https://github.com/jobbyphp/jobby",
-            "time": "2020-07-25T20:18:15+00:00"
         },
         {
             "name": "jaxon-php/jaxon-core",
@@ -5479,67 +5355,6 @@
             "time": "2020-09-26T10:30:38+00:00"
         },
         {
-            "name": "opis/closure",
-            "version": "3.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opis/closure.git",
-                "reference": "943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5",
-                "reference": "943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.4 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "jeremeamia/superclosure": "^2.0",
-                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Opis\\Closure\\": "src/"
-                },
-                "files": [
-                    "functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marius Sarca",
-                    "email": "marius.sarca@gmail.com"
-                },
-                {
-                    "name": "Sorin Sarca",
-                    "email": "sarca_sorin@hotmail.com"
-                }
-            ],
-            "description": "A library that can be used to serialize closures (anonymous functions) and arbitrary objects.",
-            "homepage": "https://opis.io/closure",
-            "keywords": [
-                "anonymous functions",
-                "closure",
-                "function",
-                "serializable",
-                "serialization",
-                "serialize"
-            ],
-            "time": "2020-11-07T02:01:34+00:00"
-        },
-        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -5917,68 +5732,6 @@
                 "swear"
             ],
             "time": "2018-08-30T22:45:56+00:00"
-        },
-        {
-            "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "shasum": ""
-            },
-            "require": {
-                "egulias/email-validator": "~2.0",
-                "php": ">=7.0.0",
-                "symfony/polyfill-iconv": "^1.0",
-                "symfony/polyfill-intl-idn": "^1.10",
-                "symfony/polyfill-mbstring": "^1.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.1",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
-            },
-            "suggest": {
-                "ext-intl": "Needed to support internationalized email addresses",
-                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.2-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "lib/swift_required.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Corbyn"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "https://swiftmailer.symfony.com",
-            "keywords": [
-                "email",
-                "mail",
-                "mailer"
-            ],
-            "time": "2019-11-12T09:31:26+00:00"
         },
         {
             "name": "symfony/asset",
@@ -7387,83 +7140,6 @@
             "time": "2020-10-23T14:02:19+00:00"
         },
         {
-            "name": "symfony/polyfill-iconv",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-iconv.git",
-                "reference": "c536646fdb4f29104dd26effc2fdcb9a5b085024"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/c536646fdb4f29104dd26effc2fdcb9a5b085024",
-                "reference": "c536646fdb4f29104dd26effc2fdcb9a5b085024",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "suggest": {
-                "ext-iconv": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.20-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Iconv\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Iconv extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "iconv",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-10-23T14:02:19+00:00"
-        },
-        {
             "name": "symfony/polyfill-intl-grapheme",
             "version": "v1.20.0",
             "source": {
@@ -7596,90 +7272,6 @@
             "keywords": [
                 "compatibility",
                 "icu",
-                "intl",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-10-23T14:02:19+00:00"
-        },
-        {
-            "name": "symfony/polyfill-intl-idn",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "3b75acd829741c768bc8b1f84eb33265e7cc5117"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/3b75acd829741c768bc8b1f84eb33265e7cc5117",
-                "reference": "3b75acd829741c768bc8b1f84eb33265e7cc5117",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "symfony/polyfill-intl-normalizer": "^1.10",
-                "symfony/polyfill-php72": "^1.10"
-            },
-            "suggest": {
-                "ext-intl": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.20-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Laurent Bassin",
-                    "email": "laurent@bassin.info"
-                },
-                {
-                    "name": "Trevor Rowbotham",
-                    "email": "trevor.rowbotham@pm.me"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "idn",
                 "intl",
                 "polyfill",
                 "portable",
@@ -7839,79 +7431,6 @@
             "keywords": [
                 "compatibility",
                 "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-10-23T14:02:19+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php72",
-            "version": "v1.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "cede45fcdfabdd6043b3592e83678e42ec69e930"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/cede45fcdfabdd6043b3592e83678e42ec69e930",
-                "reference": "cede45fcdfabdd6043b3592e83678e42ec69e930",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.20-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
                 "polyfill",
                 "portable",
                 "shim"
