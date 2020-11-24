@@ -86,6 +86,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :notebook: NOTES
 
+-   Replace **Jobby** for **Cron/Cron** (as it seems that Jobby does not work in PHP 7.3)
 -   :warning: **PHP** LoTGD Core now need min PHP version 7.3
 -   **Added lazy services**.
     -   These services are not always necessary, so they are only created the first time they are needed.
