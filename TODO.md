@@ -7,17 +7,11 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   ...
-
-# Para la versión 4.7.0
--   Añadir extensions a Twig, revisar para que no intente agregar la misma dos veces
--   CronJob -> revisar que no le fuerze la actualizacion/instalación al cronjob (cli)
 -   Eliminar la función `renderTheme` de la clase Template.php
 -   Eliminar la función `renderLayout` de la clase Template.php
 -   LotgdForm
     -   Borrar el uso de la clase LotgdForm (se usará la factory en su lugar)
     -   Borrar la creación de la clase estática LotgdForm
--   Agregar un sistema de publicidad en el core que permita vender espacios de publicidad en el juego.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
