@@ -130,7 +130,7 @@ if (getsetting('homeskinselect', 1))
 }
 
 $params = modulehook('page-home-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/home.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/home.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

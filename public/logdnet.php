@@ -235,7 +235,7 @@ else
     bdump($servers, 'Server list found');
     $params['servers'] = $servers;
 
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/logdnet.html.twig', $params));
+    \LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/logdnet.html.twig', $params));
 
     //-- Finalize page
     \LotgdResponse::pageEnd();

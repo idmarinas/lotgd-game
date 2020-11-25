@@ -60,7 +60,7 @@ modulehook('gardens', []);
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-gardens-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/gardens.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/gardens.html.twig', $params));
 
 module_display_events('gardens', 'gardens.php');
 

@@ -134,7 +134,7 @@ $params['turnsPerDay'] = $turnsperday;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-newday-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/newday.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/newday.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

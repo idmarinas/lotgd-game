@@ -121,7 +121,7 @@ $params['result'] = $result;
 DB::pagination($result, 'list.php');
 
 $params = modulehook('page-list-tpl-params', $params);
-\LotgdResponse::pageAddContent(LotgdTheme::renderTheme('pages/list.html.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::render('{theme}/pages/list.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

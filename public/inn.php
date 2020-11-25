@@ -234,7 +234,7 @@ switch ($op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-inn-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/inn.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/inn.html.twig', $params));
 
 if ('default' == $params['tpl'])
 {

@@ -60,7 +60,7 @@ $params['referrers'] = $query->select('u.refererawarded')
 ;
 
 $params = modulehook('page-referral-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/referral.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/referral.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -140,7 +140,7 @@ elseif ('withdraw' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-clan-tpl-params', $params);
-\LotgdResponse::pageAddContent(LotgdTheme::renderTheme('pages/clan.html.twig', $params));
+\LotgdResponse::pageAddContent(LotgdTheme::render('{theme}/pages/clan.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

@@ -86,7 +86,7 @@ elseif ('points' == $op)
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-lodge-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/lodge.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/lodge.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

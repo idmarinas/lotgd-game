@@ -435,7 +435,7 @@ $params['battle'] = $battle;
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-forest-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/forest.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/forest.html.twig', $params));
 
 //-- Display events
 ('' == $op) && module_display_events('forest', 'forest.php');

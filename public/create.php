@@ -443,7 +443,7 @@ $params['templates'] = $result['templates'];
 \Doctrine::flush(); //-- Persist objects
 
 $params = modulehook('page-create-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/create.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/create.html.twig', $params));
 
 //-- Finalize page
 \LotgdResponse::pageEnd();

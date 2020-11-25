@@ -192,7 +192,7 @@ $params['commentarySection'] = 'village'; //-- Commentary section
 
 //-- This is only for params not use for other purpose
 $params = modulehook('page-village-tpl-params', $params);
-\LotgdResponse::pageAddContent(\LotgdTheme::renderTheme('pages/village.html.twig', $params));
+\LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/village.html.twig', $params));
 
 //-- Restore text domain for navigation
 \LotgdNavigation::setTextDomain();
