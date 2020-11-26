@@ -58,6 +58,9 @@ modal:
         cancel: 'Cancel'
         ok: 'Ok'
 
+# Jaxon petitions
+jaxon.fail.request: 'An error has occurred while processing your request'
+
 # Character info
 character:
     # Name for default race
