@@ -7,13 +7,11 @@ use Lotgd\Core\Fixed\EventManager as LotgdEvent;
 use Lotgd\Core\Fixed\HookManager as LotgdHook;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
-use Lotgd\Core\Fixed\Http as LotgdHttp;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
 use Lotgd\Core\Fixed\Request as LotgdRequest;
 use Lotgd\Core\Fixed\Response as LotgdReponse;
 use Lotgd\Core\Fixed\Sanitize as LotgdSanitize;
-use Lotgd\Core\Fixed\SymfonyForm as LotgdForm;
 use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 
@@ -30,7 +28,6 @@ LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMe
 LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
 
 //-- Configure Request instance
-LotgdHttp::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
 LotgdRequest::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
 
 //-- Configure Response instance
@@ -50,9 +47,6 @@ LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translato
 
 //-- Configure Cache instance
 LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
-
-//-- Configure Symfony Form instance
-LotgdForm::instance(LotgdLocator::get('Lotgd\Core\SymfonyForm'));
 
 //-- Configure Hook Manager instance
 LotgdHook::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Hook::class));
