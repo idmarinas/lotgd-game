@@ -44,6 +44,8 @@ mail:
             `7`bTechnical Notes:´b`n
             Although you might not have been in {location} when you got this message, you were in {location} when the fight was started, which was at {date,date} {date,time} according to the server (the fight lasted about {dateRelative}).`0
 
+honor: 'Your honor prevents you from using any special ability'
+
 flash.message:
     pvp:
         start:
