@@ -22,7 +22,14 @@
 -   ???? Crear el nuevo sistema de módulos
     -   Un sistema compatible con el viejo
 
-# Para la versión 5.0.0
+# Para la versión 5.0.0 (idea)
+-   Migrar al uso de Symfony usando el http-kernel
+-   https://symfony.com/doc/current/components/http_kernel.html
+    -   Se migrará 
+        -   La configuración
+        -   El uso del service manager
+
+# Para la versión 6.0.0
 -   Un nuevo sistema de instalación, mixto: por consola o por web. Creo que mejor seria por consola.
     -   Pero es posible que no todos los server admin tengan esta opción
 -   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
