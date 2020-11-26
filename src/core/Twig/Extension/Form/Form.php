@@ -60,7 +60,7 @@ class Form extends AbstractElement
     {
         $params = $this->getFormParams($form);
 
-        return $env->renderTheme('form/form.html.twig', $params);
+        return $env->render('{theme}/form/form.html.twig', $params);
     }
 
     /**
@@ -73,7 +73,7 @@ class Form extends AbstractElement
     {
         $params = $this->getFormParams($form);
 
-        return $env->renderTheme('form/tab.html.twig', $params);
+        return $env->render('{theme}/form/tab.html.twig', $params);
     }
 
     /**
@@ -84,7 +84,7 @@ class Form extends AbstractElement
     {
         $params = $this->getFormParams($form);
 
-        return $env->renderTheme('form/menu.html.twig', $params);
+        return $env->render('{theme}/form/menu.html.twig', $params);
     }
 
     /**

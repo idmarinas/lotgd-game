@@ -55,12 +55,12 @@ class FlashMessages extends AbstractExtension
                     $message['class']   = $message['class'] ?? $type;
                     $message['close']   = $message['close'] ?? true;
 
-                    $output .= $this->getTemplate()->renderTheme('semantic/collection/message.html.twig', $message);
+                    $output .= $this->getTemplate()->render('{theme}/semantic/collection/message.html.twig', $message);
 
                     continue;
                 }
 
-                $output .= $this->getTemplate()->renderTheme('semantic/collection/message.html.twig', [
+                $output .= $this->getTemplate()->render('{theme}/semantic/collection/message.html.twig', [
                     'message' => $this->getSanitize()->fullSanitize($message),
                     'class'   => $type,
                     'close'   => true,

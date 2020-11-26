@@ -34,7 +34,7 @@ class FormTagify extends FormInput
      */
     public function render(Environment $env, ElementInterface $element): string
     {
-        return $env->renderTheme('form/element/tagify.html.twig', [
+        return $env->render('{theme}/form/element/tagify.html.twig', [
             'element' => $element,
         ]);
     }

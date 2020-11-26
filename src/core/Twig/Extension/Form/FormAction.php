@@ -36,7 +36,7 @@ class FormAction extends AbstractElement
     {
         $params = $this->getActionParams($actions);
 
-        return $env->renderTheme('form/action/button.html.twig', $params);
+        return $env->render('{theme}/form/action/button.html.twig', $params);
     }
 
     /**
@@ -46,7 +46,7 @@ class FormAction extends AbstractElement
     {
         $params = $this->getActionParams($actions);
 
-        return $env->renderTheme('form/action/row.html.twig', $params);
+        return $env->render('{theme}/form/action/row.html.twig', $params);
     }
 
     /**

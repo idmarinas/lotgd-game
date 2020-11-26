@@ -182,6 +182,6 @@ trait Navigation
             return $this->getTemplate()->renderBlock($template[0], $template[1], $pages);
         }
 
-        return $this->getTemplate()->renderTheme($template, $pages);
+        return $this->getTemplate()->render("{theme}/{$template}", $pages);
     }
 }

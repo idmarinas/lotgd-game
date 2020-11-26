@@ -75,7 +75,7 @@ class FormCollection extends AbstractElement
     {
         $params = $this->getCollectionParams($env, $element, $translatorTextDomain);
 
-        return $env->renderTheme('form/element/fieldset.html.twig', $params);
+        return $env->render('{theme}/form/element/fieldset.html.twig', $params);
     }
 
     /**
@@ -92,7 +92,7 @@ class FormCollection extends AbstractElement
 
         $params = $this->getCollectionParams($env, $element, $translatorTextDomain);
 
-        return $env->renderTheme('form/element/fieldset/tab.html.twig', $params);
+        return $env->render('{theme}/form/element/fieldset/tab.html.twig', $params);
     }
 
     /**

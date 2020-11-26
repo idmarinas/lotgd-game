@@ -62,7 +62,7 @@ class FormLabel extends AbstractElement
             throw new Exception\DomainException(sprintf('%s expects either label content as the second argument, or that the element provided has a label attribute; neither found', __METHOD__));
         }
 
-        return $env->renderTheme('form/element/label.html.twig', [
+        return $env->render('{theme}/form/element/label.html.twig', [
             'element'              => $element,
             'escapeLabel'          => ( ! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')),
             'translatorTextDomain' => $element->getOptions()['translator_text_domain'] ?? $translatorTextDomain ?: $this->getTranslatorTextDomain(),
