@@ -29,7 +29,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES
 
--   Nothing
+-   Removed usage of some obsolete functions in files.
 
 ### :notebook: NOTES
 
