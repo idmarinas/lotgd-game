@@ -50,11 +50,12 @@ elseif ('edit' == $op)
     \Lotgdnavigation::addHeader('masters.category.functions');
     \Lotgdnavigation::addNav('masters.nav.return', 'masters.php');
 
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
     $masterEntity = $repository->find($masterId);
     $masterEntity = $masterEntity ?: new \Lotgd\Core\Entity\Masters();
     \Doctrine::detach($masterEntity);
 
-    $form = LotgdForm::create(Lotgd\Core\EntityForm\MastersType::class, $masterEntity, [
+    $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MastersType::class, $masterEntity, [
         'action' => "masters.php?op=edit&master_id={$masterId}",
         'attr' => [
             'autocomplete' => 'off'
@@ -76,7 +77,7 @@ elseif ('edit' == $op)
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.success', [ 'name' => $entity->getCreaturename()], $textDomain));
 
         //-- Redo form for change $masterId and set new data (generated IDs)
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\MastersType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MastersType::class, $entity, [
             'action' => "masters.php?op=edit&master_id={$masterId}",
             'attr' => [
                 'autocomplete' => 'off'

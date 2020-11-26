@@ -139,12 +139,13 @@ elseif ('edit' == $op || 'add' == $op)
     }
     else
     {
+        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
         $creatureEntity = $repository->find($creatureId);
         $creatureArray = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
         $creatureEntity = $creatureEntity ?: new \Lotgd\Core\Entity\Creatures();
         \Doctrine::detach($creatureEntity);
 
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\CreaturesType::class, $creatureEntity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CreaturesType::class, $creatureEntity, [
             'action' => "creatures.php?op=edit&creatureid={$creatureId}",
             'attr' => [
                 'autocomplete' => 'off'
@@ -166,7 +167,7 @@ elseif ('edit' == $op || 'add' == $op)
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.save.saved', [], $textDomain));
 
             //-- Redo form for change $creatureId and set new data (generated IDs)
-            $form = LotgdForm::create(Lotgd\Core\EntityForm\CreaturesType::class, $entity, [
+            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CreaturesType::class, $entity, [
                 'action' => "creatures.php?op=edit&creatureid={$creatureId}",
                 'attr' => [
                     'autocomplete' => 'off'

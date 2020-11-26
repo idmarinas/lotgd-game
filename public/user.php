@@ -273,6 +273,7 @@ switch ($op)
 
         if ('' == $subop)
         {
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
             $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
             $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
 
@@ -284,7 +285,7 @@ switch ($op)
             $class  = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
             $entity = 'acct' == $type ? $accountEntity : $characterEntity;
 
-            $form = LotgdForm::create($class, $entity, [
+            $form = $lotgdFormFactory->create($class, $entity, [
                 'action' => "user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}",
                 'attr'   => [
                     'autocomplete' => 'off',

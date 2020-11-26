@@ -158,10 +158,11 @@ elseif ('edit' == $op || 'add' == $op)
     {
         $params['tpl'] = 'edit';
 
+        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
         $entity = $entity ?: new \Lotgd\Core\Entity\Mounts();
         \Doctrine::detach($entity);
 
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
             'action' => "mounts.php?op=edit&id={$mountId}",
             'attr' => [
                 'autocomplete' => 'off'
@@ -183,7 +184,7 @@ elseif ('edit' == $op || 'add' == $op)
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
 
             //-- Redo form for change $mountId and set new data (generated IDs)
-            $form = LotgdForm::create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
+            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
                 'action' => "mounts.php?op=edit&id={$mountId}",
                 'attr' => [
                     'autocomplete' => 'off'

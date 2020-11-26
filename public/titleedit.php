@@ -117,11 +117,12 @@ switch ($op)
         $params['tpl'] = 'edit';
         $params['id'] = $id;
 
+        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
         $entity = $repository->find($id);
         $entity = $entity ?: new \Lotgd\Core\Entity\Titles();
         \Doctrine::detach($entity);
 
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
             'action' => "titleedit.php?op=edit&id={$id}",
             'attr' => [
                 'autocomplete' => 'off'
@@ -143,7 +144,7 @@ switch ($op)
             \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.edit.save.success', [], $textDomain));
 
             //-- Redo form for change $id and set new data (generated IDs)
-            $form = LotgdForm::create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
+            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
                 'action' => "titleedit.php?op=edit&id={$id}",
                 'attr' => [
                     'autocomplete' => 'off'

@@ -68,11 +68,12 @@ elseif ('newcronjob' == $op)
 {
     $params['tpl'] = 'cronjob-new';
 
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
     $entity = $repository->find($cronId);
     $entity = $entity ?: new \Lotgd\Core\Entity\Cronjob();
     \Doctrine::detach($entity);
 
-    $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
+    $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
         'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
         'attr'   => [
             'autocomplete' => 'off',
@@ -102,7 +103,7 @@ elseif ('newcronjob' == $op)
         $cronCache->removeItem('cronjobstable');
 
         //-- Redo form for change $cronId and set new data (generated IDs)
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
             'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
             'attr'   => [
                 'autocomplete' => 'off',

@@ -35,6 +35,7 @@ if ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
     $weaponEntity = $repository->find($id);
     $weaponEntity = $weaponEntity ?: new \Lotgd\Core\Entity\Weapons();
     \Doctrine::detach($weaponEntity);
@@ -45,7 +46,7 @@ if ('edit' == $op || 'add' == $op)
         $weaponEntity->setDamage($repository->getNextDamageLevel($weaponEntity->getLevel()));
     }
 
-    $form = LotgdForm::create(Lotgd\Core\EntityForm\WeaponsType::class, $weaponEntity, [
+    $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\WeaponsType::class, $weaponEntity, [
         'action' => "weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}",
         'attr' => [
             'autocomplete' => 'off'
@@ -72,7 +73,7 @@ if ('edit' == $op || 'add' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->getWeaponname()], $textDomain));
 
         //-- Redo form for change $level and set new data (generated IDs)
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\WeaponsType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\WeaponsType::class, $entity, [
             'action' => "weaponeditor.php?op=edit&id={$id}&level={$weaponlevel}",
             'attr' => [
                 'autocomplete' => 'off'

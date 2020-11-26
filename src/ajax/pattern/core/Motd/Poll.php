@@ -38,6 +38,7 @@ trait Poll
         // Dialog content
         try
         {
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 
@@ -53,7 +54,7 @@ trait Poll
                 ],
             ];
 
-            $form = \LotgdForm::create(MotdPollType::class, new EntityMotd(), [
+            $form = $lotgdFormFactory->create(MotdPollType::class, new EntityMotd(), [
                 'action' => '',
                 'attr'   => [
                     'autocomplete' => 'off',

@@ -172,12 +172,13 @@ elseif ('edit' == $op || 'add' == $op)
     }
     else
     {
+        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
         $companionEntity = $repository->find($id);
         $creatureArray = $companionEntity ? $repository->extractEntity($companionEntity) : [];
         $companionEntity = $companionEntity ?: new \Lotgd\Core\Entity\Companions();
         \Doctrine::detach($companionEntity);
 
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\CompanionsType::class, $companionEntity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $companionEntity, [
             'action' => "companions.php?op=edit&id={$id}",
             'attr' => [
                 'autocomplete' => 'off'
@@ -201,7 +202,7 @@ elseif ('edit' == $op || 'add' == $op)
             LotgdCache::removeItem("companiondata-{$id}");
 
             //-- Redo form for change $id and set new data (generated IDs)
-            $form = LotgdForm::create(Lotgd\Core\EntityForm\CompanionsType::class, $entity, [
+            $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $entity, [
                 'action' => "companions.php?op=edit&id={$id}",
                 'attr' => [
                     'autocomplete' => 'off'

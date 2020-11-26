@@ -32,6 +32,7 @@ if ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
     $armorEntity = $repository->find($id);
     $armorEntity = $armorEntity ?: new \Lotgd\Core\Entity\Armor();
     \Doctrine::detach($armorEntity);
@@ -42,7 +43,7 @@ if ('edit' == $op || 'add' == $op)
         $armorEntity->setDefense($repository->getNextDefenseLevel($armorEntity->getLevel()));
     }
 
-    $form = LotgdForm::create(Lotgd\Core\EntityForm\ArmorType::class, $armorEntity, [
+    $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\ArmorType::class, $armorEntity, [
         'action' => "armoreditor.php?op=edit&id={$id}&level={$armorlevel}",
         'attr' => [
             'autocomplete' => 'off'
@@ -69,7 +70,7 @@ if ('edit' == $op || 'add' == $op)
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->getArmorName()], $textDomain));
 
         //-- Redo form for change $level and set new data (generated IDs)
-        $form = LotgdForm::create(Lotgd\Core\EntityForm\ArmorType::class, $entity, [
+        $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\ArmorType::class, $entity, [
             'action' => "armoreditor.php?op=edit&id={$id}&level={$armorlevel}",
             'attr' => [
                 'autocomplete' => 'off'

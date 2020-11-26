@@ -38,6 +38,7 @@ trait Item
 
         try
         {
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 
@@ -53,7 +54,7 @@ trait Item
                 ],
             ];
 
-            $form = \LotgdForm::create(MotdType::class, new EntityMotd(), [
+            $form = $lotgdFormFactory->create(MotdType::class, new EntityMotd(), [
                 'action' => '',
                 'attr'   => [
                     'autocomplete' => 'off',
@@ -142,6 +143,7 @@ trait Item
 
         try
         {
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 
@@ -157,7 +159,7 @@ trait Item
                 ],
             ];
 
-            $form = \LotgdForm::create(MotdEditType::class, $entity, [
+            $form = $lotgdFormFactory->create(MotdEditType::class, $entity, [
                 'action' => '',
                 'attr'   => [
                     'autocomplete' => 'off',
