@@ -96,7 +96,7 @@ $skill = \LotgdRequest::getQuery('skill');
 
 if ('' != $skill)
 {
-    output('Your honor prevents you from using any special ability');
+    \LotgdResponse::pageAddContent(\LotgdTranslator::t('honor', [], $textDomain));
     $skill = '';
     \LotgdRequest::setQuery('skill', '');
 }
