@@ -29,10 +29,16 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES
 
--   Removed usage of some obsolete functions in files.
+-   **lib/class/static.phnp** 
+    -   Remove static class `LotgdForm` use factory to get this `$formFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');`
+    -   Remove static class `LotgdHttp` use `LotgdRequest` instead.
+-   **src/core/Template/Template.php** Remove function `renderTheme()`
+-   **src/core/Fixed/SymfonyForm.php** Removed file
+-   **src/core/Fixed/Http.php** Removed file
 
 ### :notebook: NOTES
 
+-   Removed/Replace usage of some obsolete functions in files.
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 

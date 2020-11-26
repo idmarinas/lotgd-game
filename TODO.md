@@ -7,15 +7,10 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Eliminar la función `renderTheme` de la clase Template.php
--   Eliminar la función `renderLayout` de la clase Template.php
--   LotgdForm
-    -   Borrar el uso de la clase LotgdForm (se usará la factory en su lugar)
-    -   Borrar la creación de la clase estática LotgdForm
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
-    -   Se tiene que ir quitando estas clases, y mover las fuciones a otras zonas.
+    -   Se tiene que ir quitando estas clases, y mover las funciones a otras zonas.
     -   Ejemplo: el colorize (appoencode) se moverá a otra clase
 
 # Para la versión 4.8.0
