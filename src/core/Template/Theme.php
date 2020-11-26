@@ -43,7 +43,7 @@ class Theme extends Template
         global $html, $session;
 
         \trigger_error(\sprintf(
-            'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use "renderTheme($template, $context)" instead',
+            'Class %s is deprecated in 4.5.0 and deleted in 5.0.0, please use {theme} pattern "{theme}/path/to/template.html.twig" instead',
             __METHOD__
         ), E_USER_DEPRECATED);
 
