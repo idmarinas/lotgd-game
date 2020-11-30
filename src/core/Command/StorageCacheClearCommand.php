@@ -58,6 +58,12 @@ EOF
 
         $find = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->files()->notName('.gitkeep');
 
+        //-- Only remove proxy cache in dev environment
+        if ($kernel->getEnvironment() == 'prod')
+        {
+            $find->notPath('DoctrineORMModule/Proxy');
+        }
+
         if ($find->count())
         {
             try
