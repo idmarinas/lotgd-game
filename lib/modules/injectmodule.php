@@ -95,7 +95,7 @@ function injectmodule($modulename, $force = false)
                 //the file mod time is still different from that
                 //recorded in the database, time to update the database
                 //and upgrade the module.
-                debug("The module {$modulename} was found to have updated, upgrading the module now.");
+                \LotgdResponse::pageDebug("The module {$modulename} was found to have updated, upgrading the module now.");
 
                 if ( ! \is_array($info))
                 {

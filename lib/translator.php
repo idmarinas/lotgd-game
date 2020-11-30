@@ -175,7 +175,7 @@ function sprintf_translate()
     if ($err > '')
     {
         $args['error'] = $err;
-        debug($err);
+        \LotgdResponse::pageDebug($err);
     }
 
     return $return;
@@ -284,7 +284,7 @@ function translate_loadnamespace($namespace, $language = false)
         FROM '.DB::prefix('translations')."
         WHERE language='{$language}'
             AND {$where}";
-    /*	debug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
+    /*	\LotgdResponse::pageDebug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
     if ( ! getsetting('cachetranslations', 0))
     {
         $result = DB::query($sql);

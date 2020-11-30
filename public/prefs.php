@@ -176,7 +176,7 @@ else
             }
 
             // If this is a module userpref handle and skip
-            debug("Setting $key to $val");
+            \LotgdResponse::pageDebug("Setting $key to $val");
 
             if (strstr($key, '___'))
             {

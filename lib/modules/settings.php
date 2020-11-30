@@ -155,7 +155,7 @@ function clear_module_settings($module = false)
         $module = $mostrecentmodule;
     }
 
-    debug("Deleted module settings cache for {$module}.");
+    \LotgdResponse::pageDebug("Deleted module settings cache for {$module}.");
     LotgdCache::removeItem("module-settings-{$module}");
 }
 

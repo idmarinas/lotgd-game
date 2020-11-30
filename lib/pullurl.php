@@ -107,7 +107,7 @@ function _sock($url)
 
     if ($info['timed_out'])
     {
-        debug("Call to {$url} timed out!");
+        \LotgdResponse::pageDebug("Call to {$url} timed out!");
         $done = false;
     }
 

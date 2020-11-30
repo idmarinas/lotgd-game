@@ -65,7 +65,7 @@ elseif ('attack' == $act)
         $session['user']['badguy'] = $attackstack;
         $session['user']['playerfights']--;
 
-        debug($session['user']['badguy']);
+        \LotgdResponse::pageDebug($session['user']['badguy']);
     }
     elseif (is_string($badguy))
     {

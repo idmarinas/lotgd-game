@@ -36,7 +36,7 @@ if ('' == $op || 'sql' == $op)
 
         $params['sql'] = $sql;
 
-        debug('Ran Raw SQL: '.$sql);
+        \LotgdResponse::pageDebug('Ran Raw SQL: '.$sql);
 
         try
         {

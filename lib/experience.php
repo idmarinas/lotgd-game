@@ -28,7 +28,7 @@ function exp_for_next_level($curlevel, $curdk)
         //error!
         if ('' == $expstring)
         {
-            debug('`$Setting "exp-array" is empty. Configure this setting. Return 0 as exp need for next level.`0');
+            \LotgdResponse::pageDebug('`$Setting "exp-array" is empty. Configure this setting. Return 0 as exp need for next level.`0');
 
             return 0;
         }

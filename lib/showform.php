@@ -307,7 +307,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 else
                 {
                     //any other ways to represent this?
-                    debug('You must pass an array as the value when using a checklist.');
+                    \LotgdResponse::pageDebug('You must pass an array as the value when using a checklist.');
                     $checked = false;
                 }
                 $select .= "<div class='ui lotgd checkbox'><input type='checkbox' name='{$keyout}[{$optval}]' value='1'".($checked == $optval ? ' checked' : '').'><label>'.("{$optdis}").'</label></div>';

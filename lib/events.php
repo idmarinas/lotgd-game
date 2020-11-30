@@ -61,7 +61,7 @@ function handle_event($location, $baseLink = false)
 
             if (($endtime - $starttime) >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
             {
-                debug('Slow Event ('.\round($endtime - $starttime, 2)."s): {$location} - {$modulename}`n");
+                \LotgdResponse::pageDebug('Slow Event ('.\round($endtime - $starttime, 2)."s): {$location} - {$modulename}`n");
             }
         }
 

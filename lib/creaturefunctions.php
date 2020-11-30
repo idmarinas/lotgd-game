@@ -281,15 +281,15 @@ function get_creature_speed($attrs)
 
 function lotgd_show_debug_creature(iterable $badguy)
 {
-    debug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
-    debug("DEBUG: {$badguy['playerdragonkills']} modification points total for attributes.");
-    debug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
-    debug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
-    debug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
-    debug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
-    debug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
-    debug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
-    debug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
-    debug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
-    debug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
+    \LotgdResponse::pageDebug("DEBUG: Basic information: Atk: {$badguy['creatureattack']}, Def: {$badguy['creaturedefense']}, HP: {$badguy['creaturehealth']}");
+    \LotgdResponse::pageDebug("DEBUG: {$badguy['playerdragonkills']} modification points total for attributes.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturestrbonus']} allocated to strength.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturedexbonus']} allocated to dexterity.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creatureconbonus']} allocated to constitution.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creatureintbonus']} allocated to intelligence.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturewisbonus']} allocated to wisdom.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creatureattackattrs']} modification of attack.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturedefenseattrs']} modification of defense.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturespeedattrs']} modification of speed.");
+    \LotgdResponse::pageDebug("DEBUG: +{$badguy['creaturehealthattrs']} modification of hitpoints.");
 }

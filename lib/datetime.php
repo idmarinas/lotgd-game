@@ -161,7 +161,7 @@ function convertgametime(int $intime, $debug = false)
 
     if ($debug)
     {
-        debug('Game Timestamp: '.$logd_timestamp.', which makes it '.\gmdate('Y-m-d H:i:s', $logd_timestamp));
+        \LotgdResponse::pageDebug('Game Timestamp: '.$logd_timestamp.', which makes it '.\gmdate('Y-m-d H:i:s', $logd_timestamp));
     }
 
     return (int) $logd_timestamp;

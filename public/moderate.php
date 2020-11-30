@@ -102,7 +102,7 @@ elseif (
     }
     else
     {
-        debug('There was an error while trying to access your clan.');
+        \LotgdResponse::pageDebug('There was an error while trying to access your clan.');
     }
 }
 

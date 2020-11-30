@@ -65,13 +65,13 @@ function uninstall_module($module)
         $repository = \Doctrine::getRepository('LotgdCore:Modules');
         $entity     = $repository->find($module);
 
-        debug('Deleting module entry`n');
+        \LotgdResponse::pageDebug('Deleting module entry`n');
         \Doctrine::remove($entity);
 
-        debug('Deleting module hooks`n');
+        \LotgdResponse::pageDebug('Deleting module hooks`n');
         module_wipehooks($module);
 
-        debug('Deleting module settings`n');
+        \LotgdResponse::pageDebug('Deleting module settings`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
         $entities   = $repository->findBy(['modulename' => $module]);
 
@@ -81,7 +81,7 @@ function uninstall_module($module)
         }
         LotgdCache::removeItem("modulesettings-settings-{$module}");
 
-        debug('Deleting module user prefs`n');
+        \LotgdResponse::pageDebug('Deleting module user prefs`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleUserprefs');
         $entities   = $repository->findBy(['modulename' => $module]);
 
@@ -90,7 +90,7 @@ function uninstall_module($module)
             \Doctrine::remove($entity);
         }
 
-        debug('Deleting module object prefs`n');
+        \LotgdResponse::pageDebug('Deleting module object prefs`n');
         $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
         $entities   = $repository->findBy(['modulename' => $module]);
 
@@ -117,7 +117,7 @@ function install_module($module, $force = true)
 
     if (LotgdSanitize::moduleNameSanitize($module) != $module)
     {
-        debug("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
+        \LotgdResponse::pageDebug("Error, module file names can only contain alpha numeric characters and underscores before the trailing .php`n`nGood module names include 'testmodule.php', 'joesmodule2.php', while bad module names include, 'test.module.php' or 'joes module.php'`n");
 
         return false;
     }
@@ -150,7 +150,7 @@ function install_module($module, $force = true)
             //check installation requirements
             if ( ! module_check_requirements($info['requires']))
             {
-                debug('`$Module could not installed -- it did not meet its prerequisites.`n');
+                \LotgdResponse::pageDebug('`$Module could not installed -- it did not meet its prerequisites.`n');
 
                 return false;
             }
@@ -191,7 +191,7 @@ function install_module($module, $force = true)
                         if (isset($x[1]))
                         {
                             set_module_setting($key, $x[1]);
-                            debug("Setting {$key} to default {$x[1]}");
+                            \LotgdResponse::pageDebug("Setting {$key} to default {$x[1]}");
                         }
                     }
                 }
@@ -201,7 +201,7 @@ function install_module($module, $force = true)
                     return false;
                 }
 
-                debug('`^Module installed.  It is not yet active.`n');
+                \LotgdResponse::pageDebug('`^Module installed.  It is not yet active.`n');
                 LotgdCache::removeItem("injections-inject-{$mostrecentmodule}");
                 LotgdCache::clearByPrefix('moduleprepare');
 
@@ -210,9 +210,9 @@ function install_module($module, $force = true)
         }
         else
         {
-            debug('`$Module could not be injected.');
-            debug('Module not installed.');
-            debug('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
+            \LotgdResponse::pageDebug('`$Module could not be injected.');
+            \LotgdResponse::pageDebug('Module not installed.');
+            \LotgdResponse::pageDebug('This is probably due to the module file having a parse error or not existing in the filesystem.`n');
 
             return false;
         }

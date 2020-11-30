@@ -195,7 +195,7 @@ elseif ('search' == $op)
                 $multi += $targetlevel - 17; //-- More dificult if have more level than 15
                 // $targetlevel = 17; //-- Not avoid level range setting
             }
-            debug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
+            \LotgdResponse::pageDebug("Creatures: {$multi} Targetlevel: {$targetlevel} Mintargetlevel: {$mintargetlevel}");
 
             $packofmonsters = (bool) (0 == \mt_rand(0, 5) && getsetting('allowpackofmonsters', true)); // true or false
             $packofmonsters = ($multi > 1) ? $packofmonsters : false;

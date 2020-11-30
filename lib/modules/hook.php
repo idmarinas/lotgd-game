@@ -37,7 +37,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
         {
             $where = \LotgdRequest::getServer('SCRIPT_NAME');
         }
-        debug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
+        \LotgdResponse::pageDebug("Args parameter to modulehook {$hookname} from {$where} is not an iterable value.");
     }
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && ! isset($hookcomment[$hookname]))
@@ -153,7 +153,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
             if ($endtime - $starttime >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
             {
-                debug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
+                \LotgdResponse::pageDebug('Slow Hook ('.\round($endtime - $starttime, 2)."s): {$hookname} - {$row['modulename']}`n");
             }
 
             if (getsetting('debug', 0))
@@ -220,7 +220,7 @@ function module_wipehooks(string $module)
 
     try
     {
-        debug("Removing all hooks for {$module}");
+        \LotgdResponse::pageDebug("Removing all hooks for {$module}");
 
         $delHooks->delete('LotgdCore:ModuleHooks', 'u')
             ->getQuery()
@@ -246,7 +246,7 @@ function module_addeventhook($type, $chance)
     //     __METHOD__
     // ), E_USER_DEPRECATED);
 
-    debug("Adding an event hook on {$type} events for {$mostrecentmodule}");
+    \LotgdResponse::pageDebug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
     $entity     = $repository->findOneBy(['modulename' => $mostrecentmodule, 'eventType' => $type]);
@@ -342,7 +342,7 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
         $whenactive = '';
     }
 
-    debug("Adding a hook at {$hookname} for {$mostrecentmodule} to {$functioncall} which is active on condition '{$whenactive}'");
+    \LotgdResponse::pageDebug("Adding a hook at {$hookname} for {$mostrecentmodule} to {$functioncall} which is active on condition '{$whenactive}'");
     //we want to do a replace in case there's any garbage left in this table which might block new clean data from going in.
     //normally that won't be the case, and so this doesn't have any performance implications.
     $repository = \Doctrine::getRepository('LotgdCore:ModuleHooks');

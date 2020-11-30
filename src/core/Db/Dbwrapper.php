@@ -107,7 +107,7 @@ class Dbwrapper
 
         if ($profiler['elapse'] >= 0.5)
         {
-            debug(sprintf('Slow Query (%ss): %s',
+            \LotgdResponse::pageDebug(sprintf('Slow Query (%ss): %s',
                 round($profiler['elapse'], 3),
                 htmlentities($statement->getSql(), ENT_COMPAT, 'UTF-8')
             ));

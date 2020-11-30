@@ -81,11 +81,11 @@ function calculate_buff_fields()
                         {
                             if ('' == $errors)
                             {
-                                debug("Buffs[{$buffname}][{$property}] evaluates successfully to {$val}");
+                                \LotgdResponse::pageDebug("Buffs[{$buffname}][{$property}] evaluates successfully to {$val}");
                             }
                             else
                             {
-                                debug("Buffs[{$buffname}][{$property}] has an evaluation error<br>"
+                                \LotgdResponse::pageDebug("Buffs[{$buffname}][{$property}] has an evaluation error<br>"
                                 .\htmlentities($origstring, ENT_COMPAT, getsetting('charset', 'UTF-8')).' becomes <br>'
                                 .\htmlentities($value, ENT_COMPAT, getsetting('charset', 'UTF-8')).'<br>'
                                 .$errors);
@@ -248,7 +248,7 @@ function apply_companion($name, $companion, $ignorelimit = false)
     }
     else
     {
-        debug('Failed to add companion due to restrictions regarding the maximum amount of companions allowed.');
+        \LotgdResponse::pageDebug('Failed to add companion due to restrictions regarding the maximum amount of companions allowed.');
 
         return false;
     }

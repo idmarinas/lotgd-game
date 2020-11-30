@@ -36,7 +36,7 @@ function apply_temp_stat($name, $value, $type = 'add')
     }
     else
     {
-        debug("Temp stat type {$type} is not supported.");
+        \LotgdResponse::pageDebug("Temp stat type {$type} is not supported.");
 
         return false;
     }

@@ -39,7 +39,7 @@ function module_collect_events($type, $allowinactive = false)
 
         if ($err > '')
         {
-            debug(['error' => $err, 'Eval code' => $row['eventChance']]);
+            \LotgdResponse::pageDebug(['error' => $err, 'Eval code' => $row['eventChance']]);
         }
 
         $chance = \max(0, \min(100, $chance));

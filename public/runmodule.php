@@ -32,7 +32,7 @@ if (injectmodule($module, $admin))
 
     if ($time >= 1.00 && ($session['user']['superuser'] & SU_DEBUG_OUTPUT))
     {
-        debug('Slow Module ('.round($time, 2)."s): $mostrecentmodule`n");
+        \LotgdResponse::pageDebug('Slow Module ('.round($time, 2)."s): $mostrecentmodule`n");
     }
 }
 else

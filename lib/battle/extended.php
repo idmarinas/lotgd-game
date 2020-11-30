@@ -801,12 +801,12 @@ function rollcompaniondamage($companion)
         $adjustedselfdefense = ($companion['defense'] * $adjustment * $compdefmod);
 
         /*
-        debug("Base creature defense: " . $badguy['creaturedefense']);
-        debug("Creature defense mod: $creaturedefmod");
-        debug("Adjustment: $adjustment");
-        debug("Adjusted creature defense: $adjustedcreaturedefense");
-        debug("Adjusted creature attack: $creatureattack");
-        debug("Adjusted self defense: $adjustedselfdefense");
+        \LotgdResponse::pageDebug("Base creature defense: " . $badguy['creaturedefense']);
+        \LotgdResponse::pageDebug("Creature defense mod: $creaturedefmod");
+        \LotgdResponse::pageDebug("Adjustment: $adjustment");
+        \LotgdResponse::pageDebug("Adjusted creature defense: $adjustedcreaturedefense");
+        \LotgdResponse::pageDebug("Adjusted creature attack: $creatureattack");
+        \LotgdResponse::pageDebug("Adjusted self defense: $adjustedselfdefense");
         */
 
         while ( ! isset($creaturedmg) || ! isset($selfdmg) || 0 == $creaturedmg && 0 == $selfdmg)
@@ -818,19 +818,19 @@ function rollcompaniondamage($companion)
                 $atk *= 3;
             }
             /*
-            debug("Attack score: $atk");
+            \LotgdResponse::pageDebug("Attack score: $atk");
             */
 
             $patkroll = bell_rand(0, $atk);
             /*
-            debug("Player Attack roll: $patkroll");
+            \LotgdResponse::pageDebug("Player Attack roll: $patkroll");
             */
 
             // Set up for crit detection
             $atk      = $patkroll;
             $catkroll = bell_rand(0, $adjustedcreaturedefense);
             /*
-            debug("Creature defense roll: $catkroll");
+            \LotgdResponse::pageDebug("Creature defense roll: $catkroll");
             */
 
             $creaturedmg = 0 - (int) ($catkroll - $patkroll);
@@ -849,8 +849,8 @@ function rollcompaniondamage($companion)
             $pdefroll = bell_rand(0, $adjustedselfdefense);
             $catkroll = bell_rand(0, $creatureattack);
             /*
-               debug("Creature attack roll: $catkroll");
-               debug("Player defense roll: $pdefroll");
+               \LotgdResponse::pageDebug("Creature attack roll: $catkroll");
+               \LotgdResponse::pageDebug("Player defense roll: $pdefroll");
              */
             $selfdmg = 0 - (int) ($pdefroll - $catkroll);
 

@@ -88,25 +88,25 @@ class Doctrine
 
         if (0 === count($sqls))
         {
-            debug('Nothing to update - your database is already in sync with the current entities metadata.');
+            \LotgdResponse::pageDebug('Nothing to update - your database is already in sync with the current entities metadata.');
 
             return 0;
         }
 
         if ($dumpSql)
         {
-            debug(implode(';'.PHP_EOL, $sqls).';');
+            \LotgdResponse::pageDebug(implode(';'.PHP_EOL, $sqls).';');
         }
 
-        debug('Updating database schema...');
+        \LotgdResponse::pageDebug('Updating database schema...');
         $schemaTool->updateSchema($metaData, true);
 
         $pluralization = (1 === count($sqls)) ? 'query was' : 'queries were';
 
-        debug(sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', count($sqls), $pluralization));
+        \LotgdResponse::pageDebug(sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', count($sqls), $pluralization));
 
         $proxyFactory = self::$wrapper->getProxyFactory();
-        debug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
+        \LotgdResponse::pageDebug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
 
         return count($sqls);
     }
@@ -137,7 +137,7 @@ class Doctrine
 
         $schemaTool->dropSchema($classes);
 
-        debug(sprintf('Drop schemas for %s classes: "%s"', count($entities), implode('", "', $entities)));
+        \LotgdResponse::pageDebug(sprintf('Drop schemas for %s classes: "%s"', count($entities), implode('", "', $entities)));
     }
 
     /**
