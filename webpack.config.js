@@ -50,7 +50,6 @@ Encore
      */
     //-- This is the global entry used in all pages
     .addEntry('lotgd', './assets/lotgd/lib/index.js')
-    .addEntry('lotgd_theme', './assets/lotgd/lotgd.less')//-- Default theme
     .addEntry('cookie_guard', './assets/lotgd/js/cookie/index.js')
     .addEntry('semantic_ui', './node_modules/fomantic-ui/dist/semantic.js')
 
@@ -100,20 +99,7 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
 
-const LotgdConfig = Encore.getWebpackConfig()
-LotgdConfig.name = 'lotgd' //-- This allow use "encore dev --config-name lotgd" to only build this
+//-- Theme are configured in diferent file
+const configCustom = require('./webpack.config.theme')(Encore)
 
-Encore.reset() //-- Always call this, or Encore mixed all configs
-
-//-- Import custom Encore config
-let configCustom = []
-try
-{
-    configCustom = require('./webpack.config.custom')
-}
-catch (error)
-{
-    console.log('Not find custom Encore config')
-}
-
-module.exports = [LotgdConfig, ...configCustom]
+module.exports = [...configCustom]
