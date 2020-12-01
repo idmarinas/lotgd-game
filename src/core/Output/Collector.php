@@ -13,6 +13,9 @@ namespace Lotgd\Core\Output;
     Collector::class
 ), E_USER_DEPRECATED);
 
+/**
+ * @deprecated since 4.7.0; to be removed in future version, please use new clases and functions to replace this class..
+ */
 class Collector
 {
     use \Lotgd\Core\Pattern\Container;
