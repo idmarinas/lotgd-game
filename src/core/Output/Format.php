@@ -21,6 +21,8 @@ class Format
 {
     use PatternCore\Container;
     use PatternCore\Translator;
+    use Pattern\Color;
+    use Pattern\Code;
 
     /**
      * Style of decimal point.
@@ -57,15 +59,15 @@ class Format
         //-- If decimals is negative, it is automatically determined
         if ($decimals < 0)
         {
-            $decimals = strlen(substr(strrchr($number, '.'), 1));
+            $decimals = \strlen(\substr(\strrchr($number, '.'), 1));
         }
 
         //-- This avoid decimals with only ceros
-        $number = (float) round($number, $decimals);
+        $number = (float) \round($number, $decimals);
         //-- Count the decimals again
-        $decimals = strlen(substr(strrchr($number, '.'), 1));
+        $decimals = \strlen(\substr(\strrchr($number, '.'), 1));
 
-        return number_format($number, $decimals, $dec_point, $thousands_sep);
+        return \number_format($number, $decimals, $dec_point, $thousands_sep);
     }
 
     /**
@@ -127,6 +129,49 @@ class Format
         }
 
         return $this->getTranslator()->trans($message, $params, 'app-date');
+    }
+
+    /**
+     * This function puts the lotgd formatting `whatever into HTML tags.
+     *
+     * @param string $string the LoTGD formatted string
+     */
+    public function colorize(string $string)
+    {
+        $patternOpen     = $this->getColorPatternOpen();
+        $patternClose    = $this->getColorPatternClose();
+        $replacementOpen = $this->getColorReplacementOpen();
+
+        $string = \str_replace($patternOpen, $replacementOpen, $string);
+        $string = \str_replace($patternClose, '</span>', $string);
+
+        //-- Replace codes of string
+        $patternOpen      = $this->getCodePatternOpen();
+        $patternClose     = $this->getCodePatternClose();
+        $replacementOpen  = $this->getCodeReplacementOpen();
+        $replacementClose = $this->getCodeReplacementClose();
+
+        $string = \str_replace($patternOpen, $replacementOpen, $string);
+        $string = \str_replace($patternClose, $replacementClose, $string);
+
+        //-- Special codes
+        $patternOpen      = $this->getCodeSpecialPatternOpen();
+        $patternClose     = $this->getCodeSpecialPatternClose();
+        $replacementOpen  = $this->getCodeSpecialReplacementOpen();
+        $replacementClose = $this->getCodeSpecialReplacementClose();
+
+        $string = \str_replace($patternOpen, $replacementOpen, $string);
+
+        return \str_replace($patternClose, $replacementClose, $string);
+    }
+
+    /**
+     * Full sanitize a string, removed color and codes.
+     * All LoTGD codes included (`i `b `c) and others.
+     */
+    public function uncolorize(string $string): string
+    {
+        return \preg_replace('/[`´]./u', '', $string);
     }
 
     /**
