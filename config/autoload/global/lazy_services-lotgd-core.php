@@ -27,6 +27,10 @@ return [
 
                 //-- Added in version 4.6.0
                 'HelperBasePath' => Laminas\View\Helper\BasePath::class,
+
+                //-- Added in version 4.7.0
+                'LotgdHttpDeprecated' => Lotgd\Core\Http::class,
+                'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()
