@@ -1,8 +1,5 @@
 <?php
 
-//-- INIT Output Collector
-$output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
-
 /*function support without the object call */
 
 /**
@@ -14,7 +11,9 @@ $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
  */
 function set_block_new_output($block)
 {
-    global $output;
+    //-- INIT Output Collector
+    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
+
     $output->set_block_new_output($block);
 }
 
@@ -27,12 +26,11 @@ function set_block_new_output($block)
  */
 function rawoutput($indata)
 {
-    global $output;
+    //-- INIT Output Collector
+    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
 
     $output->rawoutput($indata);
 }
-
-/**
 
 /**
  * Generates the appropriate output based on the LOGD coding system (ie: `b: Bold, `i: Italic).
@@ -44,7 +42,9 @@ function rawoutput($indata)
  */
 function debug($text, $force = false)
 {
-    global $output;
+    //-- INIT Output Collector
+    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
+
     $output->debug($text, $force);
 }
 
@@ -58,8 +58,6 @@ function debug($text, $force = false)
  */
 function appoencode(string $data, $priv = false)
 {
-    global $output;
-
     \trigger_error(\sprintf(
         'Usage of %s is obsolete since 4.7.0; and delete in future version, use new "LotgdFormat::colorize($string)"',
         __METHOD__
