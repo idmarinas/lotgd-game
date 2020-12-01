@@ -32,6 +32,7 @@ class Commentary extends AbstractExtension
 {
     use PatternCore\Translator;
     use PatternCore\Template;
+    use PatternCore\Output;
     use Pattern\Commentary;
     use Pattern\CommentaryModerate;
 

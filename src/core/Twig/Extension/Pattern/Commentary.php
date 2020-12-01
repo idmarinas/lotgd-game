@@ -173,13 +173,11 @@ trait Commentary
      */
     public function addComment(array $commentary, string $textDomain): string
     {
-        global $output;
-
         $params = [
             'formUrl'    => $this->commentaryFormUrl(),
             'textDomain' => $textDomain,
             'commentary' => $commentary,
-            'colors'     => $output->getColors(),
+            'colors'     => $this->getColor()->getColors(),
             'maxChars'   => getsetting('maxchars', 200) + 100,
         ];
 

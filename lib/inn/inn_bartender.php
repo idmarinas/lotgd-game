@@ -129,7 +129,7 @@ elseif ('listupstairs' == $action)
 }
 elseif ('colors' == $action)
 {
-    $outputColor = \LotgdLocator::get(\Lotgd\Core\Output\Collector::class);
+    $outputColor = \LotgdLocator::get(\Lotgd\Core\Output\Colors::class);
 
     $params['testText'] = (string) \LotgdRequest::getPost('testText');
     $params['formUrl']  = (string) \LotgdRequest::getServer('REQUEST_URI');
