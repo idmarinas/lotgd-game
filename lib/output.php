@@ -33,45 +33,14 @@ function rawoutput($indata)
 }
 
 /**
- * Handles color and style encoding, and appends to the output buffer ($output).
- *
- * @param $indata If an array is passed then the format for sprintf is assumed otherwise a simple string is assumed
- *
- * @see apponencode
- *
- * @deprecated
- */
-function output_notl($indata)
-{
-    global $output;
-    $args = \func_get_args();
-    \call_user_func_array([$output, 'output_notl'], $args);
-}
 
 /**
- * Outputs a translated, color/style encoded string to the browser.
+ * Generates the appropriate output based on the LOGD coding system (ie: `b: Bold, `i: Italic).
  *
- * @param What to output. If an array is passed then the format used by sprintf is assumed
+ * @param string $data The string to be output
+ * @param bool   $priv Indicates if the passed string ($data) contains HTML
  *
- * @see output_notl
- *
- * @deprecated
- */
-function output()
-{
-    global $output;
-
-    $args = \func_get_args();
-    \call_user_func_array([$output, 'output'], $args);
-}
-
-/**
- * Generate debug output for players who have the SU_DEBUG_OUTPUT flag set in the superuser mask.
- *
- * @param $text The string to output
- * @param  $force If true, force debug output even for non SU/non flagged
- *
- * @deprecated
+ * @return string An output (HTML) formatted string
  */
 function debug($text, $force = false)
 {
@@ -91,5 +60,10 @@ function appoencode(string $data, $priv = false)
 {
     global $output;
 
-    return $output->appoencode($data, $priv);
+    \trigger_error(\sprintf(
+        'Usage of %s is obsolete since 4.7.0; and delete in future version, use new "LotgdFormat::colorize($string)"',
+        __METHOD__
+    ), E_USER_DEPRECATED);
+
+    return \LotgdFormat::colorize($data);
 }
