@@ -8,6 +8,11 @@
 
 namespace Lotgd\Core\Output;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated in 4.7.0 and deleted in future version, please use new clases and functions to replace this class.',
+    Collector::class
+), E_USER_DEPRECATED);
+
 class Collector
 {
     use \Lotgd\Core\Pattern\Container;
@@ -32,12 +37,12 @@ class Collector
      *
      * @param $indata the raw material to be outputted
      *
-     * @deprecated 4.5.0 Delete in version 5.0.0, use "LotgdResponse::pageAddContent(string $content)" instead
+     * @deprecated 4.5.0 Delete in future version, use "LotgdResponse::pageAddContent(string $content)" instead
      */
     public function rawoutput($indata)
     {
         \trigger_error(\sprintf(
-            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use "LotgdResponse::pageAddContent(string $content)" instead',
+            'Usage of %s is obsolete since 4.5.0; and delete in future version, use "LotgdResponse::pageAddContent(string $content)" instead',
             __METHOD__
         ), E_USER_DEPRECATED);
 
@@ -56,14 +61,14 @@ class Collector
     /**
      * Search and replace keywords.
      *
-     * @deprecated 4.5.0 Delete in version 5.0.0, use Twig templates
+     * @deprecated 4.5.0 Delete in future version, use Twig templates
      */
     public function sustitute(string $out): string
     {
         global $session;
 
         \trigger_error(\sprintf(
-            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use Twig templates.',
+            'Usage of %s is obsolete since 4.5.0; and delete in future version, use Twig templates.',
             __METHOD__
         ), E_USER_DEPRECATED);
 
@@ -145,14 +150,14 @@ class Collector
      * @param $text The input text or variable to debug, string
      * @param $force Default is false, if true it will always be outputted to ANY user. If false, only SU_DEBUG will see it.
      *
-     * @deprecated 4.5.0 Delete in version 5.0.0, use new "LotgdResponse::pageDebug(string $content, boolean $force)"
+     * @deprecated 4.5.0 Delete in future version, use new "LotgdResponse::pageDebug(string $content, boolean $force)"
      */
     public function debug($text, $force = false)
     {
         global $session;
 
         \trigger_error(\sprintf(
-            'Usage of %s is obsolete since 4.5.0; and delete in version 5.0.0, use new "LotgdResponse::pageDebug(string $content, boolean $force)"',
+            'Usage of %s is obsolete since 4.5.0; and delete in future version, use new "LotgdResponse::pageDebug(string $content, boolean $force)"',
             __METHOD__
         ), E_USER_DEPRECATED);
 
@@ -174,6 +179,11 @@ class Collector
      */
     public function appoencode(string $data)
     {
+        \trigger_error(\sprintf(
+            'Usage of %s is obsolete since 4.7.0; and delete in future version, use new "LotgdFormat::colorize($string)"',
+            __METHOD__
+        ), E_USER_DEPRECATED);
+
         $patternOpen     = $this->getColorPatternOpen();
         $patternClose    = $this->getColorPatternClose();
         $replacementOpen = $this->getColorReplacementOpen();
