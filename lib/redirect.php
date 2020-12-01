@@ -23,7 +23,7 @@ function redirect($location, $reason = false)
         ], 'app-default');
 
         \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app-default');
-        \LotgdTheme::getTemplateParams()->set('content', appoencode($content, true));
+        \LotgdTheme::getTemplateParams()->set('content', \LotgdFormat::colorize($content, true));
 
         $session['output'] = \LotgdTheme::renderLayout(\LotgdTheme::getTemplateParams()->toArray());
     }

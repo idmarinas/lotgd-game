@@ -70,7 +70,7 @@ trait Navigation
         }
         $attributes = $this->createAttributesString($attributes);
 
-        return \appoencode(\sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
+        return \LotgdFormat::colorize(\sprintf('<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
             ( ! $blocked ? 'a' : 'span'),
             $attributes,
             $label,
@@ -107,7 +107,7 @@ trait Navigation
         return \sprintf('<%1$s %2$s>%3$s</%1$s>',
             (string) ($options['tag'] ?? 'span'),
             $attributes,
-            appoencode($label, true)
+            \LotgdFormat::colorize($label, true)
         );
     }
 

@@ -25,7 +25,7 @@ trait CoreFilter
             return '';
         }
 
-        return appoencode($string, true);
+        return \LotgdFormat::colorize($string, true);
     }
 
     /**

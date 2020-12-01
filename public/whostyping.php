@@ -74,7 +74,7 @@ foreach($result as $row)
 {
     if ($row->getTime() > $old)
     {
-        echo appoencode($row->getName().'`0 takes a breath...`n');
+        echo \LotgdFormat::colorize($row->getName().'`0 takes a breath...`n');
     }
 }
 

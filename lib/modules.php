@@ -212,7 +212,7 @@ function get_module_info($shortname)
     if (\count($missingFunctions))
     {
         return [
-            'name'     => appoencode('`$Invalid Module! Contact Author or check file!`0'),
+            'name'     => \LotgdFormat::colorize('`$Invalid Module! Contact Author or check file!`0'),
             'version'  => '0.0.0',
             'author'   => 'Missing functions ('.\implode(', ', $missingFunctions).')',
             'category' => 'Invalid Modules',

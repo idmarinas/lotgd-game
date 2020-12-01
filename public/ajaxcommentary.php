@@ -43,7 +43,7 @@ else
 
     $commentary = preparecommentaryblock($section, $message, $limit, $talkline, false, false, false, false, $showmodlink, $returnlink);
 
-    echo appoencode($commentary, true);
+    echo \LotgdFormat::colorize($commentary, true);
 }
 saveuser();
 

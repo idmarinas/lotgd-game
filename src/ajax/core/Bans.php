@@ -56,7 +56,7 @@ class Bans extends AjaxAbstract
 
         foreach ($result as $acct)
         {
-            $content .= \appoencode($acct['name'], true).'<br>';
+            $content .= \LotgdFormat::colorize($acct['name'], true).'<br>';
         }
 
         // Show the dialog

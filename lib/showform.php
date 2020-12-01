@@ -110,7 +110,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
             $result   = $callback($info, $row, $key, $keyout, $val, $extensions);
 
             $tabContent[$title_id][] = \sprintf('<div class="inline field"><label class="left floated">%s</label>%s</div>',
-                appoencode($info[0]),
+                \LotgdFormat::colorize($info[0]),
                 $result
             );
 
@@ -574,7 +574,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             //don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
             if (isset($row[$key]))
             {
-                $text = '<span>'.appoencode(dump_item($row[$key])).'</span>';
+                $text = '<span>'.\LotgdFormat::colorize(dump_item($row[$key])).'</span>';
                 $text .= "<input type='hidden' name='".\addslashes($key)."' value='".\addslashes($row[$key])."'>";
 
                 return $text;

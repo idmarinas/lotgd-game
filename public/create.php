@@ -198,7 +198,7 @@ elseif ('forgot' == $op)
             'forgottenid' => $account->getForgottenpassword(),
         ], 'app-mail', $language);
 
-        lotgd_mail($account->getEmailaddress(), $subj, appoencode($msg, true));
+        lotgd_mail($account->getEmailaddress(), $subj, \LotgdFormat::colorize($msg, true));
 
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.sent', [], $textDomain));
 
@@ -393,7 +393,7 @@ elseif ('create' == $op)
                 'validationid' => $emailverification,
             ], 'app-mail');
 
-            lotgd_mail($email, $subj, appoencode($msg, true));
+            lotgd_mail($email, $subj, \LotgdFormat::colorize($msg, true));
 
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
 

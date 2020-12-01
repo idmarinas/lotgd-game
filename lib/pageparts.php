@@ -514,7 +514,7 @@ function getcharstats($buffs)
         'value' => $buffs,
     ]);
 
-    return appoencode($template->renderBlock('character_stats', [
+    return \LotgdFormat::colorize($template->renderBlock('character_stats', [
         'charstat' => $charstattpl,
         'statbuff' => $statbuff,
     ]), true);
@@ -594,22 +594,22 @@ function charstats($return = true)
                     // `% is handled.
                     $b       = translate_inline('`#%s `7(%s rounds left)`0`n', 'buffs');
                     $b       = \sprintf($b, $val['name'], $val['rounds']);
-                    $buffs[] = appoencode($b, true);
+                    $buffs[] = \LotgdFormat::colorize($b, true);
                 }
                 elseif ($val['name'])
                 {
-                    $buffs[] = appoencode("`#{$val['name']}`0`n", true);
+                    $buffs[] = \LotgdFormat::colorize("`#{$val['name']}`0`n", true);
                 }
                 else
                 {
-                    $buffs[] = appoencode("<code>`7{$val['schema']}`0</code>`n", true);
+                    $buffs[] = \LotgdFormat::colorize("<code>`7{$val['schema']}`0</code>`n", true);
                 }
             }
         }
 
         if ( ! \count($buffs))
         {
-            $buffs[] = appoencode(translate_inline('`^None`0'), true);
+            $buffs[] = \LotgdFormat::colorize(translate_inline('`^None`0'), true);
         }
 
         $atk = \round($atk, 2);

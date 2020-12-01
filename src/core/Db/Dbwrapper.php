@@ -215,13 +215,13 @@ class Dbwrapper
         {
             $request = $this->getContainer(\Lotgd\Core\Http\Request::class);
             \LotgdResponse::pageStart('Database Connection Error');
-            \LotgdResponse::pageAddContent(appoencode('`c`$Database Connection Error`0´c`n`n'));
-            \LotgdResponse::pageAddContent(appoencode('`xDue to technical problems the game is unable to connect to the database server.`n`n'));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize('`c`$Database Connection Error`0´c`n`n'));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize('`xDue to technical problems the game is unable to connect to the database server.`n`n'));
 
             //the admin did not want to notify him with a script
-            \LotgdResponse::pageAddContent(appoencode('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'));
-            \LotgdResponse::pageAddContent(appoencode('Sorry for the inconvenience,`n'));
-            \LotgdResponse::pageAddContent(appoencode(sprintf('Staff of %s', $request->getServer('SERVER_NAME')), true));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize('Sorry for the inconvenience,`n'));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize(sprintf('Staff of %s', $request->getServer('SERVER_NAME')), true));
             \LotgdNavigation::addNav('Home', 'index.php');
             \LotgdResponse::pageEnd();
         }

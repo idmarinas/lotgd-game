@@ -52,7 +52,7 @@ class Mounts extends AjaxAbstract
 
         foreach ($entities as $char)
         {
-            $content .= \appoencode($char->getName(), true).'<br>';
+            $content .= \LotgdFormat::colorize($char->getName(), true).'<br>';
         }
 
         // Show the dialog
