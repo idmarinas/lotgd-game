@@ -12,18 +12,24 @@
 
 namespace Lotgd\Core\Pattern;
 
+use Lotgd\Core\Output\Code;
 use Lotgd\Core\Output\Collector as OutputCore;
+use Lotgd\Core\Output\Color;
 
 trait Output
 {
     protected $lotgdOutput;
+    protected $lotgdColor;
+    protected $lotgdCode;
 
     /**
      * Get output instance.
      *
-     * @return object|null
+     * @return OutputCore
+     *
+     * @deprecated 4.7.0
      */
-    public function getOutput()
+    public function getOutput(): OutputCore
     {
         if ( ! $this->lotgdOutput instanceof OutputCore)
         {
@@ -31,5 +37,35 @@ trait Output
         }
 
         return $this->lotgdOutput;
+    }
+
+    /**
+     * Get color instance
+     *
+     * @return Color
+     */
+    public function getColor(): Color
+    {
+        if ( ! $this->lotgdColor instanceof Color)
+        {
+            $this->lotgdColor = $this->getContainer(Color::class);
+        }
+
+        return $this->lotgdColor;
+    }
+
+    /**
+     * Get Instance of code
+     *
+     * @return Code
+     */
+    public function getCode(): Code
+    {
+        if ( ! $this->lotgdCode instanceof Code)
+        {
+            $this->lotgdCode = $this->getContainer(Code::class);
+        }
+
+        return $this->lotgdCode;
     }
 }
