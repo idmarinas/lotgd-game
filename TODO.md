@@ -7,29 +7,24 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
+-   ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más frecuencia.
+    -   Usar otra forma
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
--   Revisar las funciones de Output/Collector para reemplazar todas las funciones.
-    -   Se tiene que ir quitando estas clases, y mover las funciones a otras zonas.
-    -   Ejemplo: el colorize (appoencode) se moverá a otra clase
-
-# Para la versión 4.8.0
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
     -   No sirve, no se puede usar
     -   Intentar dividir el array en la posición deseada, agregar el item y luego fusionar los dos arrays.
 
-# Para la versión 4.9.0
--   ???? Crear el nuevo sistema de módulos
-    -   Un sistema compatible con el viejo
-
-# Para la versión 5.0.0 (idea)
+# Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
 -   https://symfony.com/doc/current/components/http_kernel.html
     -   Se migrará 
         -   La configuración
         -   El uso del service manager
+-   Se usará una sistema similar al Symfony como transición
 
 # Para la versión 6.0.0
+-   Seguir la transición hacia un sistema Synfony Framework
 -   Un nuevo sistema de instalación, mixto: por consola o por web. Creo que mejor seria por consola.
     -   Pero es posible que no todos los server admin tengan esta opción
 -   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
@@ -42,6 +37,14 @@
     -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 
+# Para la versión >= 7.0.0 
+-   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
+-   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework.
+-   Los módulos antiguos seguiran funcionando hasta la versión 6.0.0 donde se eliminará el viejo sistema
+    -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
+-   Esto se descarta a favor de módulos tipo Bundle (Synfony Framework)
+    -   ???? Crear el nuevo sistema de módulos
+        -   Un sistema compatible con el viejo
 
 ## Para la versión X.0.0
 -   Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.

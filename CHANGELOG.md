@@ -13,7 +13,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   **Console commands**
+    -   **storage:cache_clear** now not remove cache of Doctrine proxy in production environment.
 
 ### :star: FEATURES
 
@@ -21,7 +22,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **src/core/Output/Collector.php** this Class are deprecated (and all functions)
+-   **lib/output.php**
+    -   `appoencode` use `LotgdFormat::colorize($string)` instead
 
 ### :wrench: FIXES
 
@@ -35,9 +38,17 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **src/core/Template/Template.php** Remove function `renderTheme()`
 -   **src/core/Fixed/SymfonyForm.php** Removed file
 -   **src/core/Fixed/Http.php** Removed file
+-   **lib/output.php**
+    -   Function `output`
+    -   Function `output_notl`
+-   **public/ajaxcommentary.php** Removed file, not in use
 
 ### :notebook: NOTES
 
+-   **Added lazy services**.
+    -   These services are not always necessary (some are deprecated), so they are only created the first time they are needed.
+        -   `Lotgd\Core\Http`
+        -   `Lotgd\Core\Output\Collector`
 -   Removed/Replace usage of some obsolete functions in files.
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
