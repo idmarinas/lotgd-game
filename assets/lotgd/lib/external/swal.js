@@ -74,8 +74,8 @@ define([
             progressSteps: [],
             currentProgressStep: null,
             progressStepsDistance: '40px',
-            onOpen: null,
-            onClose: null
+            didOpen: null,
+            willClose: null
         },
         swalCustom: {},
 
