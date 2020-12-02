@@ -75,5 +75,7 @@ module.exports = function (Encore)
     const CustomTheme = Encore.getWebpackConfig()
     CustomTheme.name = 'custom_theme'
 
-    return [LotgdConfig, CustomTheme]
+    Encore.reset()
+
+    return [LotgdConfig] //-- Add here config for your theme
 }
