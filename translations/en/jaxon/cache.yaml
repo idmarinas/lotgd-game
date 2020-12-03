@@ -1,0 +1,7 @@
+fail: 'An error occurred when deleting the cache of "{name}"'
+
+success: 'Cache for "{name}" deleted succesfully.'
+
+not.found:
+    function: 'The function to be performed cannot be found'
+    factory: 'The factory "{name}" is not configured'
