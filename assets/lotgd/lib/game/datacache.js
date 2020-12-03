@@ -1,8 +1,7 @@
 define([
     '../core',
-    '../external/jquery',
     '../external/swal'
-], function (Lotgd, jQuery, Swal)
+], function (Lotgd, Swal)
 {
     'use strict'
 
@@ -16,36 +15,36 @@ define([
      * @param {string} cache Name of cache
      * @param {string} type optimize|clearexpire|clearall|clearbyprefix
      */
-    Lotgd.datacache = function (cache, type)
+    Lotgd.datacache = function (cache, type, JaxonLotgd)
     {
         let options = {}
         if (type === 'optimize')
         {
-            options = optimize(cache)
+            options = optimize(cache, JaxonLotgd)
         }
         else if (type === 'clearexpire')
         {
-            options = clearexpire(cache)
+            options = clearexpire(cache, JaxonLotgd)
         }
         else if (type === 'clearall')
         {
-            options = clearall(cache)
+            options = clearall(cache, JaxonLotgd)
         }
         else if (type === 'clearbyprefix')
         {
-            options = clearbyprefix(cache)
+            options = clearbyprefix(cache, JaxonLotgd)
         }
         else
         {
             return
         }
 
-        options = jQuery.extend({ icon: 'question', showLoaderOnConfirm: true, showCancelButton: true }, options)
+        options = Object.assign({ icon: 'question', showCancelButton: true }, options)
         Swal.configChange(options)
         Swal.get().fire(options)
     }
 
-    function optimize (cache)
+    function optimize (cache, JaxonLotgd)
     {
         return {
             title: 'Optimize data cache',
@@ -53,12 +52,12 @@ define([
             text: `Want optimize data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jqueryGet(`ajaxdatacache.php?op=optimize&cache=${cache}`)
+                return JaxonLotgd.Ajax.Core.Cache.optimize(cache)
             }
         }
     }
 
-    function clearexpire (cache)
+    function clearexpire (cache, JaxonLotgd)
     {
         return {
             title: 'Clear expire data cache',
@@ -66,12 +65,12 @@ define([
             text: `Want clear expire data cache for "${cache}"?`,
             preConfirm: () =>
             {
-                return jqueryGet(`ajaxdatacache.php?op=clearexpire&cache=${cache}`)
+                return JaxonLotgd.Ajax.Core.Cache.clearexpire(cache)
             }
         }
     }
 
-    function clearall (cache)
+    function clearall (cache, JaxonLotgd)
     {
         return {
             title: 'Clear all data cache',
@@ -79,12 +78,12 @@ define([
             text: `This action empty the cache directory of "${cache}", Want clear all data cache?`,
             preConfirm: () =>
             {
-                return jqueryGet(`ajaxdatacache.php?op=clearall&cache=${cache}`)
+                return JaxonLotgd.Ajax.Core.Cache.clearall(cache)
             }
         }
     }
 
-    function clearbyprefix (cache)
+    function clearbyprefix (cache, JaxonLotgd)
     {
         return {
             title: 'Clear data cache by prefix',
@@ -93,31 +92,9 @@ define([
             input: 'text',
             preConfirm: prefix =>
             {
-                return jqueryGet(`ajaxdatacache.php?op=clearbyprefix&cache=${cache}&prefix=${prefix}`)
+                return JaxonLotgd.Ajax.Core.Cache.clearbyprefix(cache, prefix)
             }
         }
-    }
-
-    /**
-     * Pattern function to execute a url
-     *
-     * @param {string} url Url to execute
-     */
-    function jqueryGet (url)
-    {
-        return jQuery.get(url).then(response =>
-        {
-            if (response.trim() !== 'ok')
-            {
-                throw new Error(response.statusText)
-            }
-
-            return response
-        })
-            .catch(error =>
-            {
-                Swal.get().showValidationMessage(error)
-            })
     }
 
     return Lotgd

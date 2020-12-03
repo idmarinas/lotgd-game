@@ -18,10 +18,10 @@
 
     {% set segment = segment ~ '<div class="ui header">%s</div>'|format(config.description|default(name)) %}
     {% set segment = segment ~ '<div class="ui buttons">' %}
-    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'optimize\')" class="ui button">Optimize cache</a>'|format(nameE) %}
-    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearexpire\')" class="ui yellow button">Clear expire cache</a>'|format(nameE) %}
-    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearall\')" class="ui red button">Clear all cache</a>'|format(nameE) %}
-    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearbyprefix\')" class="ui orange button">Clear by prefix cache</a>'|format(nameE) %}
+    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'optimize\', JaxonLotgd)" class="ui button">Optimize cache</a>'|format(nameE) %}
+    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearexpire\', JaxonLotgd)" class="ui yellow button">Clear expire cache</a>'|format(nameE) %}
+    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearall\', JaxonLotgd)" class="ui red button">Clear all cache</a>'|format(nameE) %}
+    {% set segment = segment ~ '<a onclick="Lotgd.datacache(\'%s\', \'clearbyprefix\', JaxonLotgd)" class="ui orange button">Clear by prefix cache</a>'|format(nameE) %}
     {% set segment = segment ~ '</div>' %}
 
     {% set segment = segment ~ '</div>' %}
