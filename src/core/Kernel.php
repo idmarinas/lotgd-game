@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel
 {
-    const VERSION = '4.7.0  IDMarinas Edition'; // Version of game in public display format.
+    const VERSION = '4.7.0 IDMarinas Edition'; // Version of game in public display format.
     const VERSION_ID = 40700; // Identify version of game in numeric format.
     const MAJOR_VERSION = 4;
     const MINOR_VERSION = 7;
