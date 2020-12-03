@@ -42,6 +42,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   Function `output`
     -   Function `output_notl`
 -   **public/ajaxcommentary.php** Removed file, not in use
+-   **public/ajaxdatacache.php** Removed file, now use Jaxon to proccess cache deletion.
 
 ### :notebook: NOTES
 

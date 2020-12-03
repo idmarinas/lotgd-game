@@ -7,8 +7,6 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más frecuencia.
-    -   Usar otra forma
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
@@ -72,6 +70,8 @@
     -   Esto obligaría a los usuarios a generar una nueva contraseña.
 -   Códigos de color, cambiar y unir todos los códigos de color, (color, negrita, cursiva, etc) en un mismo lugar
     -   IDEA: usar la clase BBCode, ejemplo como se usa en foros y similar
+-   ¿? Permitir que en los eventos, el chance pueda ser superior a 100, para priorizar que un evento pueda pasar con más frecuencia.
+    -   Usar otra forma
 
 ## Cosas a mirar
 -   https://symfony.com/doc/current/components/process.html
