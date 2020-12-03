@@ -7,11 +7,7 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Usar macros y blocks donde se pueda.
--   Navegación: clase de php ArrayObject, puede servir para agregar la funcionalidad de agregar un link en una posición concreta
-    -   No sirve, no se puede usar
-    -   Intentar dividir el array en la posición deseada, agregar el item y luego fusionar los dos arrays.
+-   Migrando laminas/i18n a symfony/translation
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
@@ -34,6 +30,8 @@
 -   Eliminar compatibilidad con el viejo sistema de traducción.
     -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de creación de formularios.
+-   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Usar macros y blocks donde se pueda.
 
 # Para la versión >= 7.0.0 
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
