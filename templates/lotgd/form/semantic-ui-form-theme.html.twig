@@ -210,6 +210,12 @@
             {%- else -%}
                 {{- label|trans(label_translation_parameters, translation_domain) -}}
             {%- endif -%}
+            {% if help %}
+                {% set helpLabel = 'element.has.note'|tst('app-form') %}
+                <span aria-label="{{ helpLabel }}" data-tooltip="{{ helpLabel }}">
+                    <i aria-hidden="true" class="blue info icon"></i>
+                </span>
+            {% endif %}
         </{{ element|default('label') }}>
     {%- endif -%}
 {%- endblock form_label -%}
@@ -238,6 +244,35 @@
 {%- endblock form_help %}
 
 {# Rows #}
+
+{%- block tagify_row -%}
+    <div {{ block('row_attributes') }}>
+        {{- form_label(form) -}}
+        <button class="tags-select" id="button-{{ id }}" type="button">+</button>
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+    <script>
+        /* eslint-disable no-undef */
+        const input = document.getElementById('{{ id }}')
+
+        const tagify = Lotgd.tagify(input, {
+            autocomplete: {
+                enabled: false
+            },
+            dropdown: {
+                enabled: false
+            }
+        })
+        const button = document.getElementById('button-{{ id }}')
+
+        button.addEventListener('click', () =>
+        {
+            tagify.addEmptyTag()
+        })
+    </script>
+{%- endblock tagify_row -%}
 
 {%- block translatable_row -%}
 
