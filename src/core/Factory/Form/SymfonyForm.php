@@ -21,6 +21,7 @@ use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Doctrine\Persistance\ManagerRegistry;
+use Lotgd\Core\Form\Extension\FiltersExtension;
 use Lotgd\Core\Symfony\Validator\ConstraintValidatorFactory;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
@@ -52,6 +53,7 @@ class SymfonyForm implements FactoryInterface
             ->addExtension(new CsrfExtension($csrfManager))
             ->addExtension(new ValidatorExtension($validator->getValidator()))
             ->addTypeExtension(new FormTypeExtension($filter, true))
+            ->addTypeExtension(new FiltersExtension())
         ;
 
         return $formFactory->getFormFactory();
