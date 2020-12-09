@@ -82,6 +82,7 @@ class GameSetupType extends AbstractType
         $builder->add('gameadminemail', EmailType::class, [
             'required'    => false,
             'label'       => 'game.setup.game.admin.email',
+            'empty_data'  => '',
             'constraints' => [
                 new Assert\Email(),
             ],
