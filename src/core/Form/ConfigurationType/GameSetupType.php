@@ -37,7 +37,7 @@ class GameSetupType extends AbstractType
         // Allow creation of new characters
         $builder->add('allowcreation', CheckboxType::class, [
             'required' => false,
-            'label' => 'game.setup.allow.creation'
+            'label'    => 'game.setup.allow.creation',
         ]);
         //- Name for the server
         $builder->add('servername', TextType::class, [
@@ -53,7 +53,7 @@ class GameSetupType extends AbstractType
         ]);
         // Server URL
         $builder->add('serverurl', TextType::class, [
-            'required' => false,
+            'required'    => false,
             'label'       => 'game.setup.server.url',
             'constraints' => [
                 new Assert\Url(),
@@ -61,35 +61,35 @@ class GameSetupType extends AbstractType
         ]);
         // Login Banner
         $builder->add('loginbanner', TextType::class, [
-            'required' => false,
+            'required'    => false,
             'label'       => 'game.setup.login.banner',
             'constraints' => [
                 new Assert\Length(['min' => 1, 'max' => 255, 'allowEmptyString' => false]),
             ],
             'filters' => [
-                new Filter\StripTags()
-            ]
+                new Filter\StripTags(),
+            ],
         ]);
         // Max # of players online
         $builder->add('maxonline', NumberType::class, [
-            'required' => false,
-            'label' => 'game.setup.max.online',
+            'required'    => false,
+            'label'       => 'game.setup.max.online',
             'constraints' => [
-                new Assert\DivisibleBy(1)
-            ]
+                new Assert\DivisibleBy(1),
+            ],
         ]);
         // Admin Email
         $builder->add('gameadminemail', EmailType::class, [
-            'required' => false,
-            'label'    => 'game.setup.game.admin.email',
+            'required'    => false,
+            'label'       => 'game.setup.game.admin.email',
             'constraints' => [
-                new Assert\Email()
-            ]
+                new Assert\Email(),
+            ],
         ]);
         // Should submitted petitions be emailed to Admin Email address?
         $builder->add('emailpetitions', CheckboxType::class, [
             'required' => false,
-            'label' => 'game.setup.email.petitions'
+            'label'    => 'game.setup.email.petitions',
         ]);
         // Languages actives on this server
         $builder->add('serverlanguages', LanguageType::class, [
@@ -116,25 +116,25 @@ class GameSetupType extends AbstractType
         ]);
         // What types can petitions be?
         $builder->add('petition_types', TagifyType::class, [
-            'label'      => 'game.setup.petition.types.label',
-            'help'       => 'game.setup.petition.types.note',
-            'empty_data' => 'petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other',
+            'label'       => 'game.setup.petition.types.label',
+            'help'        => 'game.setup.petition.types.note',
+            'empty_data'  => 'petition.types.general,petition.types.report.bug,petition.types.suggestion,petition.types.commentpetition.types.other',
             'constraints' => [
-                new Assert\Length(['min' => 0, 'max' => 255])
-            ]
+                new Assert\Length(['min' => 0, 'max' => 255]),
+            ],
         ]);
         // Should DK titles be editable in user editor
         $builder->add('edittitles', CheckboxType::class, [
             'required' => false,
-            'label' => 'game.setup.edit.titles',
+            'label'    => 'game.setup.edit.titles',
         ]);
         // How many items should be shown on the motdlist
         $builder->add('motditems', NumberType::class, [
-            'label' => 'game.setup.motd.items',
-            'empty_data' => 5,
+            'label'       => 'game.setup.motd.items',
+            'empty_data'  => 5,
             'constraints' => [
-                new Assert\DivisibleBy(1)
-            ]
+                new Assert\DivisibleBy(1),
+            ],
         ]);
 
         //-- Transformations
