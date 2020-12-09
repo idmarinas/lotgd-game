@@ -319,6 +319,7 @@
     <div {{ block('row_attributes') }}>
         {{- form_widget(form) -}}
     </div>
+    {{- form_help(form) -}}
     {{- form_errors(form) -}}
 {%- endblock checkbox_row -%}
 
@@ -326,6 +327,7 @@
     <div {{ block('row_attributes') }}>
         {{- form_widget(form) -}}
     </div>
+    {{- form_help(form) -}}
     {{- form_errors(form) -}}
 {%- endblock radio_row -%}
 
