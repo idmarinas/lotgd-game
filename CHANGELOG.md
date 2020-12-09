@@ -9,6 +9,39 @@ Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
 
 
+# Version: 4.8.0
+
+### :cyclone: CHANGES
+
+-   **Forms** Replace all Laminas Form for Symfony Form
+    -   Example: Configuration, cronjob...
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   **Laminas Form** is deprecated since 4.8.0
+    -   All files related to Laminas Form deleted in version 4.9.0
+
+### :wrench: FIXES
+
+-   Nothing
+
+### :x: REMOVES
+
+-   Nothing
+
+### :notebook: NOTES
+
+-   **Added lazy services**.
+    -   These services are not always necessary (some are deprecated), so they are only created the first time they are needed.
+        -   `Lotgd\Core\Http`
+        -   `Lotgd\Core\Output\Collector`
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.7.0
 
 ### :cyclone: CHANGES
@@ -53,7 +86,6 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Removed/Replace usage of some obsolete functions in files.
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
-
 
 # Version: 4.6.0
 
