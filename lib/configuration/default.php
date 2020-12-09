@@ -1,43 +1,6 @@
 <?php
 
-$form = \LotgdLocator::get('Lotgd\Core\Form\Configuration');
-
-if (\LotgdRequest::isPost())
-{
-    $postSettings = \LotgdRequest::getPostAll();
-    $form->setData($postSettings);
-
-    $messageType = 'addErrorMessage';
-    $message     = 'flash.message.error';
-
-    if ($form->isValid())
-    {
-        $messageType = null;
-        $formIsValid = true;
-        $rawData     = $form->getData();
-
-        $postSettings = [];
-        //-- Merge all values, avoid duplicate keys in collections
-        foreach ($rawData as $key => $value)
-        {
-            if (\is_array($value))
-            {
-                $postSettings = $postSettings + $value;
-
-                continue;
-            }
-
-            $postSettings = $postSettings + [$key => $value];
-        }
-
-        require_once 'lib/configuration/save.php';
-    }
-
-    if ($messageType)
-    {
-        \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'app-form'));
-    }
-}
+use Lotgd\Core\Form\ConfigurationType;
 
 $details = gametimedetails();
 
@@ -50,44 +13,73 @@ $useful_vals  = [
     'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonewday).')',
 ];
 
-$form->setData([
-    'daysetup' => $useful_vals,
+$vals = \array_merge($settings->getArray(), $useful_vals);
+
+$data = [
+    'game_setup'  => $vals,
+    'maintenance' => $vals,
+    'home'        => $vals,
+    'account'     => $vals,
+    'commentary'  => $vals,
+    'places'      => $vals,
+    'su_title'    => $vals,
+    'referral'    => $vals,
+    'events'      => $vals,
+    'donation'    => $vals,
+    'training'    => $vals,
+    'clans'       => $vals,
+    'newdays'     => $vals,
+    'forest'      => $vals,
+    'enemies'     => $vals,
+    'companion'   => $vals,
+    'bank'        => $vals,
+    'mail'        => $vals,
+    'pvp'         => $vals,
+    'content'     => $vals,
+    'logdnet'     => $vals,
+    'daysetup'    => $vals,
+    'misc'        => $vals,
+];
+
+$lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+
+$form = $lotgdFormFactory->create(ConfigurationType::class, $data, [
+    'action' => 'configuration.php?setting=default&save=save',
+    'attr'   => [
+        'autocomplete' => 'off',
+    ],
 ]);
 
-//-- Not set default values if is post request
-if ( ! \LotgdRequest::isPost())
+\LotgdNavigation::addNavAllow('configuration.php?setting=default&save=save');
+
+$form->handleRequest();
+
+if ($form->isSubmitted() && $form->isValid())
 {
-    $vals = \array_merge($settings->getArray(), $useful_vals);
+    $messageType = null;
+    $formIsValid = true;
+    $rawData = $form->getData();
 
-    $data = [
-        'game_setup'  => $vals,
-        'maintenance' => $vals,
-        'home'        => $vals,
-        'beta'        => $vals,
-        'account'     => $vals,
-        'commentary'  => $vals,
-        'places'      => $vals,
-        'su_title'    => $vals,
-        'referral'    => $vals,
-        'events'      => $vals,
-        'donation'    => $vals,
-        'training'    => $vals,
-        'clans'       => $vals,
-        'newdays'     => $vals,
-        'forest'      => $vals,
-        'enemies'     => $vals,
-        'companion'   => $vals,
-        'bank'        => $vals,
-        'mail'        => $vals,
-        'pvp'         => $vals,
-        'content'     => $vals,
-        'logdnet'     => $vals,
-        'daysetup'    => $vals,
-        'misc'        => $vals,
-    ];
+    $postSettings = [];
+    //-- Merge all values, avoid duplicate keys in collections
+    foreach ($rawData as $key => $value)
+    {
+        if (\is_array($value))
+        {
+            $postSettings = $postSettings + $value;
 
-    //-- Set values of data base
-    $form->setData($data);
+            continue;
+        }
+
+        $postSettings = $postSettings + [$key => $value];
+    }
+
+    require_once 'lib/configuration/save.php';
+
+    if ($messageType)
+    {
+        \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'app-form'));
+    }
 }
 
-$params['form'] = $form;
+$params['form'] = $form->createView();
