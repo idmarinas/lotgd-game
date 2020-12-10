@@ -44,10 +44,10 @@
     <script>
         /* global $ */
         $('#{{ id }}-range').slider({
-            min: '{{ attr.min }}',
-            max: '{{ attr.max }}',
-            start: '{{ value }}',
-            step: '{{ attr.step|default("1") }}',
+            min: Number('{{ attr.min }}'),
+            max: Number('{{ attr.max }}'),
+            start: Number('{{ value }}'),
+            step: Number('{{ attr.step|default("1") }}'),
             onMove: function (value)
             {
                 $('#{{ id }}').val(value)
