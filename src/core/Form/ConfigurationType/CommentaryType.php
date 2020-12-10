@@ -13,6 +13,7 @@
 
 namespace Lotgd\Core\Form\ConfigurationType;
 
+use Laminas\Filter;
 use Lotgd\Core\Form\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -20,7 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-use Webmozart\Assert\Assert as AssertAssert;
 
 class CommentaryType extends AbstractType
 {
@@ -33,66 +33,69 @@ class CommentaryType extends AbstractType
             // Clean user posts (filters bad language and splits words over 45 chars long)
             ->add('soap', CheckboxType::class, [
                 'required' => false,
-                'label' => 'commentary.soap'
+                'label'    => 'commentary.soap',
             ])
             // Max # of color changes usable in one comment
             ->add('maxcolors', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 5,
                     'max' => 40,
                 ],
-                'empty_data' => 5,
-                'label' => 'commentary.maxcolors',
+                'empty_data'  => 5,
+                'label'       => 'commentary.maxcolors',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
-                ]
+                    new Assert\DivisibleBy(1),
+                ],
             ])
             // Limit posts to let one user post only up to 50% of the last posts (else turn it off)
             ->add('postinglimit', CheckboxType::class, [
                 'required' => false,
-                'label' => 'commentary.postinglimit'
+                'label'    => 'commentary.postinglimit',
             ])
             // Length of the chatline in chars
             ->add('maxcolors', RangeType::class, [
                 'required' => false,
-                'attr' => [
-                    'min' => 5,
-                    'max' => 1000,
+                'attr'     => [
+                    'min'                   => 5,
+                    'max'                   => 1000,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 40,
-                'label' => 'commentary.maxcolors',
+                'empty_data'  => 40,
+                'label'       => 'commentary.maxcolors',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
-                ]
+                    new Assert\DivisibleBy(1),
+                ],
             ])
             // Number of maximum chars for a single chat line
             ->add('maxchars', RangeType::class, [
                 'required' => false,
-                'attr' => [
-                    'min' => 50,
-                    'max' => 1000,
+                'attr'     => [
+                    'min'                   => 50,
+                    'max'                   => 1000,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 50,
-                'label' => 'commentary.maxchars',
+                'empty_data'  => 50,
+                'label'       => 'commentary.maxchars',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
-                ]
+                    new Assert\DivisibleBy(1),
+                ],
             ])
             // Sections to exclude from comment moderation
             ->add('moderateexcludes', TextareaType::class, [
-                'required' => false,
+                'required'   => false,
                 'empty_data' => '',
-                'label' => 'commentary.moderateexcludes',
+                'label'      => 'commentary.moderateexcludes',
                 'constraits' => [
                     new Assert\AtLeastOneOf([
                         'constraints' => [
                             new Assert\Length(['min' => 0, 'max' => 255]),
-                            new Assert\Blank()
-                        ]
-                    ])
+                            new Assert\Blank(),
+                        ],
+                    ]),
+                ],
+                'filters' => [
+                    new Filter\StripTags()
                 ]
             ])
         ;
