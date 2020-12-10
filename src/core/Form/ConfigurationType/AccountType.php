@@ -45,7 +45,8 @@ class AccountType extends AbstractType
                 'empty_data' => 50,
                 'label'      => 'account.newplayerstartgold',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
+                    new Assert\DivisibleBy(1),
+                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('maxrestartgold', NumberType::class, [
@@ -53,7 +54,8 @@ class AccountType extends AbstractType
                 'empty_data' => 50,
                 'label'      => 'account.maxrestartgold',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
+                    new Assert\DivisibleBy(1),
+                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('maxrestartgems', NumberType::class, [
@@ -61,7 +63,8 @@ class AccountType extends AbstractType
                 'empty_data' => 10,
                 'label'      => 'account.maxrestartgems',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
+                    new Assert\DivisibleBy(1),
+                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('playerchangeemail', CheckboxType::class, [
@@ -83,7 +86,8 @@ class AccountType extends AbstractType
                 'empty_data' => 1,
                 'label'      => 'account.playerchangeemaildays',
                 'constraints' => [
-                    new Assert\DivisibleBy(1)
+                    new Assert\DivisibleBy(1),
+                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('validationtarget', ChoiceType::class, [
