@@ -274,8 +274,23 @@
     </script>
 {%- endblock tagify_row -%}
 
-{%- block translatable_row -%}
+{%- block view_only_row -%}
+<div {{ block('row_attributes') }}>
+        {{ form_label(form) }}
+        {% set value = value|default(form.parent.vars.value[name]) %}
+        <span>
+            {% if apply_filter %}
+                {{ value|apply_filter(apply_filter)|uncolorize }}
+            {% else %}
+                {{ value|uncolorize }}
+            {% endif %}
+        </span>
+        {{- form_help(form) -}}
+    </div>
+    {{ bdump(_context, 'view_only') }}
+{%- endblock view_only_row -%}
 
+{%- block translatable_row -%}
     {% set sanitized_name = full_name|replace({'[' : '_', ']' : '_'}) %}
 
     <div {{ block('row_attributes') }} id="{{ sanitized_name }}translatable">
