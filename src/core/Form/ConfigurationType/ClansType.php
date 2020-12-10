@@ -31,51 +31,51 @@ class ClansType extends AbstractType
             // Enable Clan System?
             ->add('allowclans', CheckboxType::class, [
                 'required' => false,
-                'label' => 'clans.allowclans',
+                'label'    => 'clans.allowclans',
             ])
             // Gold to start a clan
             ->add('goldtostartclan', NumberType::class, [
-                'required' => false,
-                'empty_data' => 10000,
-                'label' => 'clans.goldtostartclan',
+                'required'    => false,
+                'empty_data'  => 10000,
+                'label'       => 'clans.goldtostartclan',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Gems to start a clan
             ->add('gemstostartclan', NumberType::class, [
-                'required' => false,
-                'empty_data' => 15,
-                'label' => 'clans.gemstostartclan',
+                'required'    => false,
+                'empty_data'  => 15,
+                'label'       => 'clans.gemstostartclan',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Can clan officers who are also moderators moderate their own clan even if they cannot moderate all clans?
             ->add('officermoderate', CheckboxType::class, [
                 'required' => false,
-                'label' => 'clans.officermoderate',
+                'label'    => 'clans.officermoderate',
             ])
             // Hard sanitize for all but latin chars  in the clan name at creation?
             ->add('clannamesanitize', CheckboxType::class, [
                 'required' => false,
-                'label' => 'clans.clannamesanitize',
+                'label'    => 'clans.clannamesanitize',
             ])
             // Hard sanitizie for all but latin chars in the short name at creation?
             ->add('clanshortnamesanitize', CheckboxType::class, [
                 'required' => false,
-                'label' => 'clans.clanshortnamesanitize',
+                'label'    => 'clans.clanshortnamesanitize',
             ])
             // Length of the short name (max 20)
             ->add('clanshortnamelength', NumberType::class, [
-                'required' => false,
-                'empty_data' => 3,
-                'label' => 'clans.clanshortnamelength',
+                'required'    => false,
+                'empty_data'  => 3,
+                'label'       => 'clans.clanshortnamelength',
                 'constraints' => [
-                    new Assert\Range(['min' => 3, 'max' => 20])
-                ]
+                    new Assert\Range(['min' => 3, 'max' => 20]),
+                ],
             ])
         ;
 

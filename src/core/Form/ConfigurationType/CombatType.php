@@ -29,17 +29,17 @@ class CombatType extends AbstractType
         $builder
             ->add('autofight', CheckboxType::class, [
                 'required' => false,
-                'label' => 'combat.autofight',
+                'label'    => 'combat.autofight',
             ])
             ->add('autofightfull', ChoiceType::class, [
                 'required' => false,
-                'choices' => [
-                    'combat.autofightfull.option.never' => 0,
+                'choices'  => [
+                    'combat.autofightfull.option.never'  => 0,
                     'combat.autofightfull.option.always' => 1,
-                    'combat.autofightfull.option.flee' => 2,
+                    'combat.autofightfull.option.flee'   => 2,
                 ],
                 'empty_data' => 0,
-                'label' => 'combat.autofightfull.label',
+                'label'      => 'combat.autofightfull.label',
             ])
         ;
 

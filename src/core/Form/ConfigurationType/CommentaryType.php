@@ -83,9 +83,9 @@ class CommentaryType extends AbstractType
             ])
             // Sections to exclude from comment moderation
             ->add('moderateexcludes', TextareaType::class, [
-                'required'   => false,
-                'empty_data' => '',
-                'label'      => 'commentary.moderateexcludes',
+                'required'    => false,
+                'empty_data'  => '',
+                'label'       => 'commentary.moderateexcludes',
                 'constraints' => [
                     new Assert\AtLeastOneOf([
                         'constraints' => [
@@ -95,8 +95,8 @@ class CommentaryType extends AbstractType
                     ]),
                 ],
                 'filters' => [
-                    new Filter\StripTags()
-                ]
+                    new Filter\StripTags(),
+                ],
             ])
         ;
 

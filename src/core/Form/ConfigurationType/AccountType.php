@@ -32,7 +32,7 @@ class AccountType extends AbstractType
     {
         $builder->add('defaultsuperuser', BitFieldType::class, [
             'required' => false,
-            'choices' => [
+            'choices'  => [
                 'account.defaultsuperuser.options.infinite.days' => SU_INFINITE_DAYS,
                 'account.defaultsuperuser.options.view.source'   => SU_VIEW_SOURCE,
                 'account.defaultsuperuser.options.developer'     => SU_DEVELOPER,
@@ -41,58 +41,58 @@ class AccountType extends AbstractType
             'label' => 'account.defaultsuperuser.label',
         ])
             ->add('newplayerstartgold', NumberType::class, [
-                'required' => false,
-                'empty_data' => 50,
-                'label'      => 'account.newplayerstartgold',
+                'required'    => false,
+                'empty_data'  => 50,
+                'label'       => 'account.newplayerstartgold',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             ->add('maxrestartgold', NumberType::class, [
-                'required' => false,
-                'empty_data' => 50,
-                'label'      => 'account.maxrestartgold',
+                'required'    => false,
+                'empty_data'  => 50,
+                'label'       => 'account.maxrestartgold',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             ->add('maxrestartgems', NumberType::class, [
-                'required' => false,
-                'empty_data' => 10,
-                'label'      => 'account.maxrestartgems',
+                'required'    => false,
+                'empty_data'  => 10,
+                'label'       => 'account.maxrestartgems',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             ->add('playerchangeemail', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.playerchangeemail',
+                'label'    => 'account.playerchangeemail',
             ])
             ->add('playerchangeemailauto', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.playerchangeemailauto.label',
-                'help'  => 'account.playerchangeemailauto.note',
+                'label'    => 'account.playerchangeemailauto.label',
+                'help'     => 'account.playerchangeemailauto.note',
             ])
             ->add('playerchangeemaildays', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min'  => 1,
                     'max'  => 30,
                     'step' => 1,
                 ],
-                'empty_data' => 1,
-                'label'      => 'account.playerchangeemaildays',
+                'empty_data'  => 1,
+                'label'       => 'account.playerchangeemaildays',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             ->add('validationtarget', ChoiceType::class, [
                 'required' => false,
-                'choices' => [
+                'choices'  => [
                     'account.validationtarget.options.old' => 0,
                     'account.validationtarget.options.new' => 1,
                 ],
@@ -101,27 +101,27 @@ class AccountType extends AbstractType
             ])
             ->add('requireemail', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.requireemail',
+                'label'    => 'account.requireemail',
             ])
             ->add('requirevalidemail', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.requirevalidemail',
+                'label'    => 'account.requirevalidemail',
             ])
             ->add('blockdupeemail', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.blockdupeemail',
+                'label'    => 'account.blockdupeemail',
             ])
             ->add('spaceinname', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.spaceinname',
+                'label'    => 'account.spaceinname',
             ])
             ->add('allowoddadminrenames', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.allowoddadminrenames',
+                'label'    => 'account.allowoddadminrenames',
             ])
             ->add('selfdelete', CheckboxType::class, [
                 'required' => false,
-                'label' => 'account.selfdelete',
+                'label'    => 'account.selfdelete',
             ])
         ;
 

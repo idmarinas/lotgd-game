@@ -32,142 +32,142 @@ class BankType extends AbstractType
             // Max forest fights remaining to earn interest?
             ->add('fightsforinterest', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 0,
                     'max' => 10,
                 ],
-                'empty_data' => 1,
-                'label'      => 'bank.fightsforinterest',
+                'empty_data'  => 1,
+                'label'       => 'bank.fightsforinterest',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Max Interest Rate (%)
             ->add('maxinterest', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 5,
                     'max' => 10,
                 ],
-                'empty_data' => 5,
-                'label'      => 'bank.maxinterest',
+                'empty_data'  => 5,
+                'label'       => 'bank.maxinterest',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Min Interest Rate (%)
             ->add('mininterest', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 0,
                     'max' => 5,
                 ],
-                'empty_data' => 1,
-                'label'      => 'bank.mininterest',
+                'empty_data'  => 1,
+                'label'       => 'bank.mininterest',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Over what amount of gold does the bank cease paying interest?
             ->add('maxgoldforinterest', NumberType::class, [
-                'required' => false,
-                'empty_data' => 100000,
-                'label'      => 'bank.maxgoldforinterest',
+                'required'    => false,
+                'empty_data'  => 100000,
+                'label'       => 'bank.maxgoldforinterest',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Max player can borrow per level (val * level for max)
             ->add('borrowperlevel', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min'                   => 5,
                     'max'                   => 200,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 5,
-                'label'      => 'bank.borrowperlevel',
+                'empty_data'  => 5,
+                'label'       => 'bank.borrowperlevel',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Allow players to transfer gold
             ->add('allowgoldtransfer', CheckboxType::class, [
                 'required' => false,
-                'label' => 'bank.allowgoldtransfer',
+                'label'    => 'bank.allowgoldtransfer',
             ])
             // Max player can receive from a transfer (val * level)
             ->add('transferperlevel', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min'                   => 5,
                     'max'                   => 100,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 5,
-                'label'      => 'bank.transferperlevel',
+                'empty_data'  => 5,
+                'label'       => 'bank.transferperlevel',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Min level a player (0 DK's) needs to transfer gold
             ->add('mintransferlev', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 1,
                     'max' => 5,
                 ],
-                'empty_data' => 1,
-                'label'      => 'bank.mintransferlev',
+                'empty_data'  => 1,
+                'label'       => 'bank.mintransferlev',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Total transfers a player can receive in one day
             ->add('transferreceive', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min' => 0,
                     'max' => 5,
                 ],
-                'empty_data' => 1,
-                'label'      => 'bank.transferreceive',
+                'empty_data'  => 1,
+                'label'       => 'bank.transferreceive',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Amount player can transfer to others (val * level)
             ->add('maxtransferout', RangeType::class, [
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'min'                   => 5,
                     'max'                   => 100,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 5,
-                'label'      => 'bank.maxtransferout',
+                'empty_data'  => 5,
+                'label'       => 'bank.maxtransferout',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Fee for express inn payment (x or x%)
             ->add('innfee', NumberType::class, [
-                'required' => false,
-                'empty_data' => 0,
-                'label'      => 'bank.innfee',
+                'required'    => false,
+                'empty_data'  => 0,
+                'label'       => 'bank.innfee',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
         ;
 

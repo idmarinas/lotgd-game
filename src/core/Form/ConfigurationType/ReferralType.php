@@ -28,22 +28,22 @@ class ReferralType extends AbstractType
     {
         $builder
             ->add('refereraward', NumberType::class, [
-                'required' => false,
-                'label' => 'referral.refereraward',
-                'empty_data' => 25,
+                'required'    => false,
+                'label'       => 'referral.refereraward',
+                'empty_data'  => 25,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             ->add('referminlevel', NumberType::class, [
-                'required' => false,
-                'label' => 'referral.referminlevel',
-                'empty_data' => 10,
+                'required'    => false,
+                'label'       => 'referral.referminlevel',
+                'empty_data'  => 10,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
         ;
 

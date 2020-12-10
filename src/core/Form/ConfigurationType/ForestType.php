@@ -87,12 +87,12 @@ class ForestType extends AbstractType
                     'step'                  => 0.1,
                     'disable_slider_labels' => true,
                 ],
-                'empty_data' => 1.5,
+                'empty_data'  => 1.5,
                 'constraints' => [
                     new Assert\DivisibleBy(0.1),
                     new Assert\Positive(),
-                    new Assert\Range(['min' => 1, 'max' => 10])
-                ]
+                    new Assert\Range(['min' => 1, 'max' => 10]),
+                ],
             ])
             // Player will find a gem one in X times
             ->add('forestgemchance', RangeType::class, [
@@ -108,7 +108,7 @@ class ForestType extends AbstractType
             // Should monsters which get buffed with extra HP/Att/Def get a gold+exp bonus?
             ->add('disablebonuses', CheckboxType::class, [
                 'required' => false,
-                'label' => 'forest.disablebonuses',
+                'label'    => 'forest.disablebonuses',
             ])
             // What percentage of experience should be lost?
             ->add('forestexploss', RangeType::class, [

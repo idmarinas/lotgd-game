@@ -38,9 +38,9 @@ class SuTitleType extends AbstractType
         $builder
             // Enable chat tags in general
             ->add('enable_chat_tags', CheckboxType::class, [
-                'required'    => false,
-                'label'       => 'su.title.enable_chat_tags.label',
-                'help'        => 'su.title.enable_chat_tags.note',
+                'required' => false,
+                'label'    => 'su.title.enable_chat_tags.label',
+                'help'     => 'su.title.enable_chat_tags.note',
             ])
             // Title for the mega user
             ->add('chat_tag_megauser', TextType::class, [

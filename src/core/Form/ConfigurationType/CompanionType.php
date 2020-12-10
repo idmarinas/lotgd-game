@@ -31,22 +31,22 @@ class CompanionType extends AbstractType
             // Enable the usage of companions
             ->add('enablecompanions', CheckboxType::class, [
                 'required' => false,
-                'label' => 'companion.enablecompanions',
+                'label'    => 'companion.enablecompanions',
             ])
             // How many companions are allowed per player
             ->add('companionsallowed', NumberType::class, [
-                'required' => false,
-                'label' => 'companion.companionsallowed.label',
-                'help' => 'companion.companionsallowed.note',
+                'required'    => false,
+                'label'       => 'companion.companionsallowed.label',
+                'help'        => 'companion.companionsallowed.note',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Are companions allowed to level up?
             ->add('companionslevelup', CheckboxType::class, [
                 'required' => false,
-                'label' => 'companion.companionslevelup',
+                'label'    => 'companion.companionslevelup',
             ])
         ;
 

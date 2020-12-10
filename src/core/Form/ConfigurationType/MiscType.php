@@ -30,33 +30,33 @@ class MiscType extends AbstractType
         $builder
             // Cost to resurrect from the dead?
             ->add('resurrectioncost', NumberType::class, [
-                'required' => false,
-                'label' => 'misc.resurrectioncost',
-                'empty_data' => 100,
+                'required'    => false,
+                'label'       => 'misc.resurrectioncost',
+                'empty_data'  => 100,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // The Barkeeper may help you to switch your specialty?
             ->add('allowspecialswitch', CheckboxType::class, [
                 'required' => false,
-                'label' => 'misc.allowspecialswitch',
+                'label'    => 'misc.allowspecialswitch',
             ])
             // Maximum number of items to be shown in the warrior list
             ->add('maxlistsize', NumberType::class, [
-                'required' => false,
-                'label' => 'misc.maxlistsize',
-                'empty_data' => 25,
+                'required'    => false,
+                'label'       => 'misc.maxlistsize',
+                'empty_data'  => 25,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\Positive()
-                ]
+                    new Assert\Positive(),
+                ],
             ])
             // Does Merick have feed onhand for creatures
             ->add('allowfeed', CheckboxType::class, [
                 'required' => false,
-                'label' => 'misc.allowfeed',
+                'label'    => 'misc.allowfeed',
             ])
         ;
 

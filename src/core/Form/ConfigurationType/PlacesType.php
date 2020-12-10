@@ -28,61 +28,61 @@ class PlacesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $constraints = [
-            new Assert\Length(['min' => 3, 'max' => 255])
+            new Assert\Length(['min' => 3, 'max' => 255]),
         ];
 
         $filters = [
-            new Filter\StripTags()
+            new Filter\StripTags(),
         ];
 
         $builder
             // Name for the main village
             ->add('villagename', TextType::class, [
-                'label' => 'places.villagename',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.villagename',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the inn
             ->add('innname', TextType::class, [
-                'label' => 'places.innname',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.innname',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the barkeep
             ->add('barkeep', TextType::class, [
-                'label' => 'places.barkeep',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.barkeep',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the barmaid
             ->add('barmaid', TextType::class, [
-                'label' => 'places.barmaid',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.barmaid',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the bard
             ->add('bard', TextType::class, [
-                'label' => 'places.bard',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.bard',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the clan registrar
             ->add('clanregistrar', TextType::class, [
-                'label' => 'places.clanregistrar',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.clanregistrar',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the banker
             ->add('bankername', TextType::class, [
-                'label' => 'places.bankername',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.bankername',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
             // Name of the death overlord
             ->add('deathoverlord', TextType::class, [
-                'label' => 'places.deathoverlord',
-                'filters' => $filters,
-                'constraints' => $constraints
+                'label'       => 'places.deathoverlord',
+                'filters'     => $filters,
+                'constraints' => $constraints,
             ])
         ;
 

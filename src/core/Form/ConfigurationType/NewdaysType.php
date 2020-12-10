@@ -31,46 +31,46 @@ class NewdaysType extends AbstractType
             // Game days per calendar day
             ->add('daysperday', RangeType::class, [
                 'required' => false,
-                'label' => 'newdays.daysperday',
-                'attr' => [
+                'label'    => 'newdays.daysperday',
+                'attr'     => [
                     'min' => 1,
                     'max' => 24,
                 ],
-                'empty_data' => 1
+                'empty_data' => 1,
             ])
             // Extra daily uses in specialty area
             ->add('specialtybonus', RangeType::class, [
                 'required' => false,
-                'label' => 'newdays.specialtybonus',
-                'attr' => [
+                'label'    => 'newdays.specialtybonus',
+                'attr'     => [
                     'min' => 0,
                     'max' => 5,
                 ],
-                'empty_data' => 1
+                'empty_data' => 1,
             ])
             // Modify (+ or -) the number of turns deducted after a resurrection as an absolute (number) or relative (number followed by %)
             ->add('resurrectionturns', TextType::class, [
-                'required' => false,
-                'label' => 'newdays.resurrectionturns',
+                'required'    => false,
+                'label'       => 'newdays.resurrectionturns',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 0, 'max' => 255]),
+                ],
             ])
             // What weapon is standard for new players or players who just killed the dragon?
             ->add('startweapon', TextType::class, [
-                'required' => false,
-                'label' => 'newdays.startweapon',
+                'required'    => false,
+                'label'       => 'newdays.startweapon',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 0, 'max' => 255]),
+                ],
             ])
             // What armor is standard for new players or players who just killed the dragon?
             ->add('startarmor', TextType::class, [
-                'required' => false,
-                'label' => 'newdays.startarmor',
+                'required'    => false,
+                'label'       => 'newdays.startarmor',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 0, 'max' => 255]),
+                ],
             ])
         ;
 

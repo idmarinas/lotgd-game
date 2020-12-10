@@ -33,34 +33,33 @@ class TrainingType extends AbstractType
             // Masters hunt down truant students
             ->add('automaster', CheckboxType::class, [
                 'required' => false,
-                'label' => 'training.automaster',
+                'label'    => 'training.automaster',
             ])
             // Can players gain multiple levels (challenge multiple masters) per game day?
             ->add('multimaster', CheckboxType::class, [
                 'required' => false,
-                'label' => 'training.multimaster',
+                'label'    => 'training.multimaster',
             ])
             // Display news if somebody fought his master?
             ->add('displaymasternews', CheckboxType::class, [
                 'required' => false,
-                'label' => 'training.displaymasternews',
+                'label'    => 'training.displaymasternews',
             ])
             // Which is the maximum attainable level (at which also the Dragon shows up)?
             ->add('maxlevel', NumberType::class, [
-                'label' => 'training.maxlevel.label',
-                'help' => 'training.maxlevel.note',
+                'label'       => 'training.maxlevel.label',
+                'help'        => 'training.maxlevel.note',
                 'constraints' => [
-                    new DivisibleBy(1)
-                ]
+                    new DivisibleBy(1),
+                ],
             ])
             // Give here what experience is necessary for each level
             ->add('exp-array', TextType::class, [
-                'label' => 'training.exp.array.label',
-                'help' => 'training.exp.array.note',
+                'label'       => 'training.exp.array.label',
+                'help'        => 'training.exp.array.note',
                 'constraints' => [
-                    new Length(['min' => 0, 'max' => 255])
-                ]
-
+                    new Length(['min' => 0, 'max' => 255]),
+                ],
             ])
         ;
 

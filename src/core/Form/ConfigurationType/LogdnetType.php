@@ -32,24 +32,24 @@ class LogdnetType extends AbstractType
             // Register with LoGDnet?
             ->add('logdnet', CheckboxType::class, [
                 'required' => false,
-                'label' => 'logdnet.logdnet.label',
-                'help' => 'logdnet.logdnet.note'
+                'label'    => 'logdnet.logdnet.label',
+                'help'     => 'logdnet.logdnet.note',
             ])
             // Server Description (75 chars max)
             ->add('serverdesc', TextType::class, [
-                'required' => false,
-                'label' => 'logdnet.serverdesc',
+                'required'    => false,
+                'label'       => 'logdnet.serverdesc',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 75])
-                ]
+                    new Assert\Length(['min' => 0, 'max' => 75]),
+                ],
             ])
             // Master LoGDnet Server (default http://logdnet.logd.com/)
             ->add('logdnetserver', TextType::class, [
-                'required' => false,
-                'label' => 'logdnet.logdnetserver',
+                'required'    => false,
+                'label'       => 'logdnet.logdnetserver',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 0, 'max' => 255]),
+                ],
             ])
             // How long we wait for responses from that server (in seconds)
             ->add('curltimeout', RangeType::class, [
@@ -57,13 +57,13 @@ class LogdnetType extends AbstractType
                     'min' => 1,
                     'max' => 10,
                 ],
-                'empty_data' => 2,
-                'label' => 'logdnet.curltimeout',
-                'constraints'=> [
+                'empty_data'  => 2,
+                'label'       => 'logdnet.curltimeout',
+                'constraints' => [
                     new Assert\DivisibleBy(1),
                     new Assert\Positive(),
-                    new Assert\Range(['min' => 1, 'max' => 10])
-                ]
+                    new Assert\Range(['min' => 1, 'max' => 10]),
+                ],
             ])
         ;
 

@@ -31,46 +31,46 @@ class MailType extends AbstractType
         $builder
             // Message size limit per message
             ->add('mailsizelimit', NumberType::class, [
-                'required' => false,
-                'label' => 'mail.mailsizelimit',
-                'empty_data' => 1024,
+                'required'    => false,
+                'label'       => 'mail.mailsizelimit',
+                'empty_data'  => 1024,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\Positive()
-                ]
+                    new Assert\Positive(),
+                ],
             ])
             // Limit # of messages in inbox
             ->add('inboxlimit', NumberType::class, [
-                'required' => false,
-                'label' => 'mail.inboxlimit',
-                'empty_data' => 50,
+                'required'    => false,
+                'label'       => 'mail.inboxlimit',
+                'empty_data'  => 50,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\Positive()
-                ]
+                    new Assert\Positive(),
+                ],
             ])
             // Automatically delete old messages after (days)
             ->add('oldmail', NumberType::class, [
-                'required' => false,
-                'label' => 'mail.oldmail',
-                'empty_data' => 50,
+                'required'    => false,
+                'label'       => 'mail.oldmail',
+                'empty_data'  => 50,
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\PositiveOrZero()
-                ]
+                    new Assert\PositiveOrZero(),
+                ],
             ])
             // Warning to give when attempting to YoM an admin?
             ->add('superuseryommessage', TextareaType::class, [
-                'required' => false,
-                'label' => 'mail.superuseryommessage',
+                'required'    => false,
+                'label'       => 'mail.superuseryommessage',
                 'constraints' => [
-                    new Assert\Length(['min' => 3, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 3, 'max' => 255]),
+                ],
             ])
             // Only unread mail count towards the inbox limit?
             ->add('onlyunreadmails', CheckboxType::class, [
                 'required' => false,
-                'label' => 'mail.onlyunreadmails',
+                'label'    => 'mail.onlyunreadmails',
             ])
         ;
 

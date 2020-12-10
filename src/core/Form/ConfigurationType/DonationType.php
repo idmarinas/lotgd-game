@@ -18,7 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,53 +33,53 @@ class DonationType extends AbstractType
         $builder
             // Points to award for $1 (or 1 of whatever currency you allow players to donate)
             ->add('dpointspercurrencyunit', NumberType::class, [
-                'required' => false,
-                'label' => 'donation.dpointspercurrencyunit',
+                'required'    => false,
+                'label'       => 'donation.dpointspercurrencyunit',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
-                    new Assert\Positive()
-                ]
+                    new Assert\Positive(),
+                ],
             ])
             // Email address of Admin's paypal account
             ->add('paypalemail', EmailType::class, [
-                'required' => false,
-                'label' => 'donation.paypalemail',
+                'required'    => false,
+                'label'       => 'donation.paypalemail',
                 'constraints' => [
-                    new Assert\Email()
-                ]
+                    new Assert\Email(),
+                ],
             ])
             // Currency type
             ->add('paypalcurrency', CurrencyType::class, [
                 'required' => false,
-                'label' => 'donation.paypalcurrency',
+                'label'    => 'donation.paypalcurrency',
                 'attr'     => [
                     'class' => 'search fluid three column',
                 ],
                 'constraints' => [
                     new Assert\Currency(),
-                    new Assert\Length(['min' => 3, 'max' => 100])
-                ]
+                    new Assert\Length(['min' => 3, 'max' => 100]),
+                ],
             ])
             // What country's predominant language do you wish to have displayed in your PayPal screen?
             ->add('paypalcountry-code', CountryType::class, [
                 'required' => false,
-                'label' => 'donation.paypalcountry.code',
+                'label'    => 'donation.paypalcountry.code',
                 'attr'     => [
                     'class' => 'search fluid three column',
                 ],
                 'constraints' => [
-                    new Assert\Country()
-                ]
+                    new Assert\Country(),
+                ],
             ])
             // What text should be displayed as item name in the donations screen(player name will be added after it)?
             ->add('paypaltext', TextType::class, [
-                'required' => false,
-                'empty_data' => 'Legend of the Green Dragon Site Donation from',
-                'label' => 'donation.paypaltext.label',
-                'help' => 'donation.paypaltext.note',
+                'required'    => false,
+                'empty_data'  => 'Legend of the Green Dragon Site Donation from',
+                'label'       => 'donation.paypaltext.label',
+                'help'        => 'donation.paypaltext.note',
                 'constraints' => [
-                    new Assert\Length(['min' => 3, 'max' => 255])
-                ]
+                    new Assert\Length(['min' => 3, 'max' => 255]),
+                ],
             ])
         ;
 
