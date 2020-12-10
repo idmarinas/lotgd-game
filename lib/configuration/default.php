@@ -18,6 +18,7 @@ $vals = \array_merge($settings->getArray(), $useful_vals);
 $data = [
     'game_setup'  => $vals,
     'maintenance' => $vals,
+    'combat'      => $vals,
     'home'        => $vals,
     'account'     => $vals,
     'commentary'  => $vals,
@@ -58,7 +59,7 @@ if ($form->isSubmitted() && $form->isValid())
 {
     $messageType = null;
     $formIsValid = true;
-    $rawData = $form->getData();
+    $rawData     = $form->getData();
 
     $postSettings = [];
     //-- Merge all values, avoid duplicate keys in collections
