@@ -37,7 +37,7 @@ class CompanionType extends AbstractType
             ->add('companionsallowed', NumberType::class, [
                 'required' => false,
                 'label' => 'companion.companionsallowed.label',
-                'note' => 'companion.companionsallowed.note',
+                'help' => 'companion.companionsallowed.note',
                 'constraints' => [
                     new Assert\DivisibleBy(1),
                     new Assert\PositiveOrZero()
