@@ -41,8 +41,6 @@ class SuTitleType extends AbstractType
                 'required'    => false,
                 'label'       => 'su.title.enable_chat_tags.label',
                 'help'        => 'su.title.enable_chat_tags.note',
-                'constraints' => $constraints,
-                'filters'     => $filters,
             ])
             // Title for the mega user
             ->add('chat_tag_megauser', TextType::class, [
