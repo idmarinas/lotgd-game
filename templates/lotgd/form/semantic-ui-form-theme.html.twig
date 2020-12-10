@@ -333,17 +333,17 @@
 {%- block checkbox_row -%}
     <div {{ block('row_attributes') }}>
         {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
     </div>
-    {{- form_help(form) -}}
-    {{- form_errors(form) -}}
 {%- endblock checkbox_row -%}
 
 {%- block radio_row -%}
     <div {{ block('row_attributes') }}>
         {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
     </div>
-    {{- form_help(form) -}}
-    {{- form_errors(form) -}}
 {%- endblock radio_row -%}
 
 {# Support #}
