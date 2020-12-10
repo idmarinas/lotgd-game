@@ -16,6 +16,7 @@ namespace Lotgd\Core\Form\Type;
 use Lotgd\Core\Form\DataTransformer\BitFieldTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BitFieldType extends ChoiceType
 {
@@ -27,5 +28,13 @@ class BitFieldType extends ChoiceType
         $builder->addModelTransformer(new BitFieldTransformer());
 
         parent::buildForm($builder, $options);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('multiple', true);
+        $resolver->setDefault('expanded', true);
     }
 }
