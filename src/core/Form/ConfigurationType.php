@@ -69,6 +69,12 @@ class ConfigurationType extends AbstractType
                     continue;
                 }
 
+                //-- Deleted fields that are disabled
+                $fieldsField = array_filter($fieldsField, function ($val)
+                {
+                    return ! $val->isDisabled();
+                });
+
                 $data[$name] = array_intersect_key($data[$name], $fieldsField);
             }
 
