@@ -38,7 +38,8 @@ class CombatType extends AbstractType
                     'combat.autofightfull.option.always' => 1,
                     'combat.autofightfull.option.flee' => 2,
                 ],
-                'label' => 'combat.autofightfull',
+                'empty_data' => 0,
+                'label' => 'combat.autofightfull.label',
             ])
         ;
 
