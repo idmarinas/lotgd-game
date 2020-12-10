@@ -63,6 +63,9 @@ return [
         //-- Added in version 4.6.0
         Lotgd\Core\Twig\Extension\AdvertisingGoogle::class,
 
+        //-- Added in version 4.8.0
+        Lotgd\Core\Twig\Extension\ApplyFilter::class,
+
         //-- Extension of a third party
         Marek\Twig\ByteUnitsExtension::class,
     ],
