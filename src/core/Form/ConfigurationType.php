@@ -43,7 +43,7 @@ class ConfigurationType extends AbstractType
         $builder->add('newdays', ConfigurationType\NewdaysType::class, ['label' => 'newdays.title']);
         $builder->add('forest', ConfigurationType\ForestType::class, ['label' => 'forest.title']);
         $builder->add('enemies', ConfigurationType\EnemiesType::class, ['label' => 'enemies.title']);
-        $builder->add('companion', ConfigurationType\CompanionType::class, ['label' => 'comapanion.title']);
+        $builder->add('companion', ConfigurationType\CompanionType::class, ['label' => 'companion.title']);
         $builder->add('bank', ConfigurationType\BankType::class, ['label' => 'bank.title']);
         $builder->add('mail', ConfigurationType\MailType::class, ['label' => 'mail.title']);
         $builder->add('pvp', ConfigurationType\PvpType::class, ['label' => 'pvp.title']);
