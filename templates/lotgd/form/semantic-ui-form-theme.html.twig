@@ -6,8 +6,13 @@
     {%- set attr = attr|merge({class: attr.class ~ (errors|length ? ' error' : '') }) -%}
     {{- parent() -}}
 
-    <div class="right floated header item">
-        <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+    <div class="ui header">
+        {% if form.vars.label %}
+            {{- form_label(form) -}}
+        {% endif %}
+        <div class="right floated sub header">
+            <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+        </div>
     </div>
 
     {# Scripts for control #}
