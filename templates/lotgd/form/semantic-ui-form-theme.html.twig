@@ -12,34 +12,37 @@
 
     {{- parent() -}}
 
-    <div class="ui header">
-        {% if form.vars.label %}
-            {{- form_label(form) -}}
-        {% endif %}
-        <div class="right floated sub header">
-            <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+    {# Hidde if hide_info_button int attr is true #}
+    {% if attr.hide_info_button is not defined or not attr.hide_info_button %}
+        <div class="ui header">
+            {% if form.vars.label %}
+                {{- form_label(form) -}}
+            {% endif %}
+            <div class="right floated sub header">
+                <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+            </div>
         </div>
-    </div>
 
-    {# Scripts for control #}
-    <script>
-        /* global $ */
-        $('#show-hidde-info-note-form-{{ name }}').on('click', function ()
-        {
-            const form = $('form[name="{{ name }}"]')
-
-            if (form.hasClass('info'))
+        {# Scripts for control #}
+        <script>
+            /* global $ */
+            $('#show-hidde-info-note-form-{{ name }}').on('click', function ()
             {
-                form.removeClass('info')
-                $(this).removeClass('green').addClass('red')
+                const form = $('form[name="{{ name }}"]')
 
-                return
-            }
+                if (form.hasClass('info'))
+                {
+                    form.removeClass('info')
+                    $(this).removeClass('green').addClass('red')
 
-            form.addClass('info')
-            $(this).removeClass('red').addClass('green')
-        })
-    </script>
+                    return
+                }
+
+                form.addClass('info')
+                $(this).removeClass('red').addClass('green')
+            })
+        </script>
+    {% endif %}
 {%- endblock form_start -%}
 
 {# Widgets #}
