@@ -8,15 +8,44 @@
 
 require_once 'common.php';
 
-if (\LotgdRequest::existInPost('template'))
-{
-    $skin = \LotgdRequest::getPost('template');
+$params = [];
 
-    if ($skin > '')
+if (getsetting('homeskinselect', 1))
+{
+    $template = LotgdRequest::getCookie('template') ?: '';
+
+    if ('' == $template)
     {
-        \LotgdRequest::setCookie('template', $skin, \strtotime('+45 days'));
-        \LotgdTheme::setDefaultSkin($skin);
+        $template = getsetting('defaultskin', 'jade.htm');
     }
+
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+
+    $form = $lotgdFormFactory->create(Lotgd\Core\Form\HomeType::class, ['defaultskin' => $template], [
+        'action' => 'home.php',
+        'attr'   => [
+            'autocomplete' => 'off',
+            'class' => 'center aligned',
+            'hide_info_button' => true
+        ],
+    ]);
+
+    $form->handleRequest();
+
+    if ($form->isSubmitted() && $form->isValid())
+    {
+        $post = $form->getData();
+
+        $skin = $post['defaultskin'];
+
+        if ($skin > '')
+        {
+            \LotgdRequest::setCookie('template', $skin, \strtotime('+45 days'));
+            \LotgdTheme::setDefaultSkin($skin);
+        }
+    }
+
+    $params['selectSkin'] = $form->createview();
 }
 
 if ($session['loggedin'] ?? false)
@@ -30,14 +59,14 @@ if ($session['loggedin'] ?? false)
 $op = \LotgdRequest::getQuery('op');
 
 //-- Parameters to be passed to the template
-$params = [
+$params = array_merge([
     'villagename'           => getsetting('villagename', LOCATION_FIELDS),
     'includeTemplatesPre'   => [], //-- Templates that are in top of content (but below of title)
     'includeTemplatesIndex' => [], //-- Templates that are in index below of new player
     'includeTemplatesPost'  => [], //-- Templates that are in bottom of content
     'gameclock'             => getsetting('homecurtime', 1) ? getgametime() : null,
     'newdaytimer'           => getsetting('homenewdaytime', 1) ? secondstonextgameday() : null,
-];
+], $params);
 
 \LotgdNavigation::addHeader('home.category.new');
 \LotgdNavigation::addNav('home.nav.create', 'create.php');
@@ -111,23 +140,6 @@ if (\is_array($results) && \count($results))
 $params['loginBanner'] = getsetting('loginbanner');
 //-- Version of the game the server is running
 $params['serverVersion'] = \Lotgd\Core\Application::VERSION;
-
-$params['selectSkin'] = false;
-
-if (getsetting('homeskinselect', 1))
-{
-    $prefs['template'] = LotgdRequest::getCookie('template') ?: '';
-
-    if ('' == $prefs['template'])
-    {
-        $prefs['template'] = getsetting('defaultskin', 'jade.htm');
-    }
-
-    $form = \LotgdLocator::get('Lotgd\Core\Form\HomeSkin');
-    $form->setData(['template' => $prefs['template']]);
-
-    $params['selectSkin'] = $form;
-}
 
 $params = modulehook('page-home-tpl-params', $params);
 \LotgdResponse::pageAddContent(\LotgdTheme::render('{theme}/pages/home.html.twig', $params));
