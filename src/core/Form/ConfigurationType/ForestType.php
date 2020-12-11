@@ -51,6 +51,11 @@ class ForestType extends AbstractType
                 'label' => 'forest.forestcreaturebar.label',
                 'help'  => 'forest.forestcreaturebar.note',
             ])
+            // Forest Creatures drop at least 1/4 of max gold
+            ->add('dropmingold', CheckboxType::class, [
+                'required' => false,
+                'label'    => 'forest.dropmingold',
+            ])
             // Allow players to Seek Suicidally?
             ->add('suicide', CheckboxType::class, [
                 'required' => false,
