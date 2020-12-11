@@ -37,12 +37,12 @@ class ApplyFilter extends AbstractExtension
     /**
      * Create a template to render a filters.
      */
-    public function applyFilter(Environment $env, $context = [], $value, $filters)
+    public function applyFilter(Environment $env, $context, $value, $filters)
     {
         $name = 'apply_filter_'.\md5($filters);
 
         $template = \sprintf('{{ %s|%s }}', $name, $filters);
-        $template = $env->loadTemplate($template);
+        $template = $env->createTemplate($template);
 
         $context[$name] = $value;
 
