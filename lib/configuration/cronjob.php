@@ -61,8 +61,6 @@ if ('' == $op)
 
     $query = $repository->createQueryBuilder('u');
 
-    bdump($form->createView());
-
     $params['paginator'] = $repository->getPaginator($query, $page);
     $params['form']      = $form->createView();
 }
