@@ -59,7 +59,7 @@
         {% include tpl with params %}
     {% endfor %}
 
-    {% if selectSkin %}
+    {% if selectSkin is defined %}
         {{ block('home_select_skin') }}
     {% endif %}
 </div>
