@@ -78,6 +78,11 @@
     {%- set attr = attr|merge({class: attr.class ~ ' form' }) -%}
     {%- set attr = attr|merge({class: attr.class ~ (errors|length ? ' error' : '') }) -%}
 
+    {# Allow url of action #}
+    {% if action %}
+        {% set action = action|lotgd_url %}
+    {% endif %}
+
     {%- do form.setMethodRendered() -%}
     {% set method = method|upper %}
     {%- if method in ["GET", "POST"] -%}

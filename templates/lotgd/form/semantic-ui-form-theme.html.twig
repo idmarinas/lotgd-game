@@ -4,6 +4,12 @@
     {%- set attr = attr|merge({class: ('ui ' ~ attr.class|default(''))|trim }) -%}
     {%- set attr = attr|merge({class: attr.class ~ ' form' }) -%}
     {%- set attr = attr|merge({class: attr.class ~ (errors|length ? ' error' : '') }) -%}
+
+    {# Allow url of action #}
+    {% if action %}
+        {% set action = action|lotgd_url %}
+    {% endif %}
+
     {{- parent() -}}
 
     <div class="ui header">
@@ -292,7 +298,6 @@
         </span>
         {{- form_help(form) -}}
     </div>
-    {{ bdump(_context, 'view_only') }}
 {%- endblock view_only_row -%}
 
 {%- block translatable_row -%}
