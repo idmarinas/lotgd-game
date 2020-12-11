@@ -30,7 +30,11 @@ return [
 
                 //-- Added in version 4.7.0
                 'LotgdHttpDeprecated' => Lotgd\Core\Http::class,
-                'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class
+                'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class,
+
+                //-- Added in version 4.8.0
+                'DoctrineModule\Service\CliFactory' => 'DoctrineModule\Service\CliFactory',
+                'EventOfEvents' => Lotgd\Core\EventManager\Event::class
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()
