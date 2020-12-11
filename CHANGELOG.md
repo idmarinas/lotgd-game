@@ -23,7 +23,6 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :fire: DEPRECATED
 
 -   **Laminas Form** is deprecated since 4.8.0
-    -   All files related to Laminas Form deleted in version 4.9.0
 
 ### :wrench: FIXES
 
@@ -37,8 +36,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Added lazy services**.
     -   These services are not always necessary (some are deprecated), so they are only created the first time they are needed.
-        -   `Lotgd\Core\Http`
-        -   `Lotgd\Core\Output\Collector`
+        -   `DoctrineModule\Service\CliFactory`
+        -   `Lotgd\Core\EventManager\Event`
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
