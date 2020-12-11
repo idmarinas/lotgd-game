@@ -1,5 +1,7 @@
 <?php
 
+use Lotgd\Core\Form\CronjobType;
+
 $op     = (string) \LotgdRequest::getQuery('op');
 $cronId = (int) \LotgdRequest::getQuery('cronid');
 $page   = (int) \LotgdRequest::getQuery('page', 1);
@@ -30,23 +32,26 @@ if ('delcronjob' == $op)
 
 if ('' == $op)
 {
-    $form = \LotgdLocator::get('Lotgd\Core\Form\Cronjob');
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
 
-    if (\LotgdRequest::isPost())
+    $form = $lotgdFormFactory->create(CronjobType::class, [
+        'newdaycron' => getsetting('newdaycron', 0),
+    ], [
+        'action' => 'configuration.php?setting=cronjob&save=save',
+        'attr'   => [
+            'autocomplete' => 'off',
+        ],
+    ]);
+
+    $form->handleRequest();
+
+    if ($form->isSubmitted() && $form->isValid())
     {
-        $postSettings = \LotgdRequest::getPostAll();
-        $form->setData($postSettings);
+        $messageType  = null;
+        $formIsValid  = true;
+        $postSettings = $form->getData();
 
-        $messageType = 'addErrorMessage';
-        $message     = 'flash.message.error';
-
-        if ($form->isValid())
-        {
-            $messageType  = null;
-            $postSettings = $form->getData();
-
-            require_once 'lib/configuration/save.php';
-        }
+        require_once 'lib/configuration/save.php';
 
         if ($messageType)
         {
@@ -56,21 +61,18 @@ if ('' == $op)
 
     $query = $repository->createQueryBuilder('u');
 
-    if ( ! \LotgdRequest::isPost())
-    {
-        $form->setData(['newdaycron' => getsetting('newdaycron', 0)]);
-    }
+    bdump($form->createView());
 
     $params['paginator'] = $repository->getPaginator($query, $page);
-    $params['form']      = $form;
+    $params['form']      = $form->createView();
 }
 elseif ('newcronjob' == $op)
 {
     $params['tpl'] = 'cronjob-new';
 
     $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
-    $entity = $repository->find($cronId);
-    $entity = $entity ?: new \Lotgd\Core\Entity\Cronjob();
+    $entity           = $repository->find($cronId);
+    $entity           = $entity ?: new \Lotgd\Core\Entity\Cronjob();
     \Doctrine::detach($entity);
 
     $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
