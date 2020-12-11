@@ -3,7 +3,7 @@
 // translator ready
 // addnews ready
 // mail ready
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 require_once 'lib/showform.php';
 
@@ -30,7 +30,7 @@ LotgdNavigation::addNav('about.nav.module', 'about.php?op=listmodules');
 LotgdNavigation::addNav('about.nav.license', 'about.php?op=license');
 
 $params = [
-    'block_tpl' => 'about_home'
+    'block_tpl' => 'about_home',
 ];
 
 if ('listmodules' == $op)
@@ -39,7 +39,7 @@ if ('listmodules' == $op)
 
     $params['block_tpl'] = 'about_modules';
 
-    $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Modules::class);
+    $repository       = \Doctrine::getRepository(\Lotgd\Core\Entity\Modules::class);
     $params['result'] = $repository->findBy(['active' => 1], ['category' => 'ASC', 'formalname' => 'ASC']);
 }
 elseif ('setup' == $op)
@@ -48,33 +48,38 @@ elseif ('setup' == $op)
 
     $params['block_tpl'] = 'about_setup';
 
-    $details = gametimedetails();
+    $details       = gametimedetails();
     $secstonextday = secondstonextgameday($details);
-    $useful_vals = [
-        'dayduration' => round(($details['dayduration'] / 60 / 60), 0).' hours',
-        'curgametime' => getgametime(),
-        'curservertime' => date('Y-m-d h:i:s a'),
-        'lastnewday' => date('h:i:s a', strtotime("-{$details['realsecssofartoday']} seconds")),
-        'nextnewday' => date('h:i:s a', strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.date('H\\h i\\m s\\s', $secstonextday).')'
+    $useful_vals   = [
+        'dayduration'   => \round(($details['dayduration'] / 60 / 60), 0).' hours',
+        'curgametime'   => getgametime(),
+        'curservertime' => \date('Y-m-d h:i:s a'),
+        'lastnewday'    => \date('h:i:s a', \strtotime("-{$details['realsecssofartoday']} seconds")),
+        'nextnewday'    => \date('h:i:s a', \strtotime("+{$details['realsecstotomorrow']} seconds")).' ('.\date('H\\h i\\m s\\s', $secstonextday).')',
     ];
 
     $localsettings = $settings->getArray();
 
-    $vals = array_merge($localsettings, $useful_vals);
+    $vals = \array_merge($localsettings, $useful_vals);
 
-    $form = \LotgdLocator::get('Lotgd\Core\Form\About');
     $data = [
         'game_setup' => $vals,
-        'newday' => $vals,
-        'bank' => $vals,
-        'forest' => $vals,
-        'mail' => $vals,
-        'content' => $vals,
-        'info' => $vals,
+        'newday'     => $vals,
+        'bank'       => $vals,
+        'forest'     => $vals,
+        'mail'       => $vals,
+        'content'    => $vals,
+        'info'       => $vals,
     ];
-    $form->setData($data);
 
-    $params['form'] = $form;
+    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+
+    $form = $lotgdFormFactory->create(Lotgd\Core\Form\AboutType::class, $data, [
+        'action' => 'none',
+        'method' => 'none'
+    ]);
+
+    $params['form'] = $form->createView();
 }
 elseif ('license' == $op)
 {
@@ -87,7 +92,8 @@ else
     LotgdNavigation::blockLink('about.php');
 
     $results = modulehook('about', []);
-    if(is_array($results) && count($results))
+
+    if (\is_array($results) && \count($results))
     {
         $params['hookAbout'] = $results;
     }

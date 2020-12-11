@@ -175,5 +175,8 @@
 {% block about_setup %}
     <h3>{{ 'setup.title'|t|colorize }}</h3>
 
-    {{ laminas_form_tab(form) }}
+    {# This apply tabs theme only for this form #}
+    {% form_theme form '{theme}/form/semantic-ui-tabs-form-theme.html.twig' %}
+
+    {{ form(form) }}
 {% endblock about_setup %}
