@@ -204,11 +204,11 @@
 {# Labels #}
 
 {%- block form_label -%}
-    {% if label is not same as(false) -%}
+    {%- if label is not same as(false) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
-        {% if label is empty -%}
+        {%- if label is empty -%}
             {%- if label_format is not empty -%}
                 {% set label = label_format|replace({
                     '%name%': name,
@@ -224,12 +224,12 @@
             {%- else -%}
                 {{- label|trans(label_translation_parameters, translation_domain) -}}
             {%- endif -%}
-            {% if help %}
+            {%- if help -%}
                 {% set helpLabel = 'element.has.note'|tst('app-form') %}
                 <span aria-label="{{ helpLabel }}" data-tooltip="{{ helpLabel }}">
                     <i aria-hidden="true" class="blue info icon"></i>
                 </span>
-            {% endif %}
+            {%- endif -%}
         </{{ element|default('label') }}>
     {%- endif -%}
 {%- endblock form_label -%}
@@ -290,14 +290,14 @@
 
 {%- block view_only_row -%}
 <div {{ block('row_attributes') }}>
-        {{ form_label(form) }}
+        {{- form_label(form) -}}
         {% set value = value|default(form.parent.vars.value[name]) %}
-        <span>
-            {% if apply_filter %}
+        <span class="ui small label">
+            {%- if apply_filter -%}
                 {{ value|apply_filter(apply_filter)|uncolorize }}
-            {% else %}
+            {%- else -%}
                 {{ value|uncolorize }}
-            {% endif %}
+            {%- endif -%}
         </span>
         {{- form_help(form) -}}
     </div>
@@ -379,7 +379,7 @@
 
 {%- block row_attributes -%}
     {% apply spaceless %}
-        {% set attr = {'class': 'field'} %}
+        {% set attr = attr|merge({'class': 'field ' ~ attr.class}) %}
         {% if required is defined and required %}
             {% set attr = attr|merge({class: 'required ' ~ attr.class}) %}
         {% endif %}
