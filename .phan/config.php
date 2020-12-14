@@ -11,13 +11,14 @@ use Phan\Issue;
  *   (E.g. this only includes direct composer dependencies - You may have to manually add indirect composer dependencies to 'directory_list')
  * - Look at 'plugins' and add or remove plugins if appropriate (see https://github.com/phan/phan/tree/master/.phan/plugins#plugins)
  * - Add global suppressions for pre-existing issues to suppress_issue_types (https://github.com/phan/phan/wiki/Tutorial-for-Analyzing-a-Large-Sloppy-Code-Base)
+ *   - Consider setting up a baseline if there are a large number of pre-existing issues (see `phan --extended-help`)
  *
  * This configuration will be read and overlaid on top of the
  * default configuration. Command line arguments will be applied
  * after this file is read.
  *
- * @see src/Phan/Config.php
- * See Config for all configurable options.
+ * @see https://github.com/phan/phan/wiki/Phan-Config-Settings for all configurable options
+ * @see https://github.com/phan/phan/tree/master/src/Phan/Config.php
  *
  * A Note About Paths
  * ==================
@@ -35,6 +36,11 @@ use Phan\Issue;
  */
 return [
 
+    // The PHP version that the codebase will be checked for compatibility against.
+    // For best results, the PHP binary used to run Phan should have the same PHP version.
+    // (Phan relies on Reflection for some types, param counts,
+    // and checks for undefined classes/methods/functions)
+    //
     // Supported values: `'5.6'`, `'7.0'`, `'7.1'`, `'7.2'`, `'7.3'`, `'7.4'`, `null`.
     // If this is set to `null`,
     // then Phan assumes the PHP version which is closest to the minor version
@@ -42,8 +48,8 @@ return [
     //
     // Note that the **only** effect of choosing `'5.6'` is to infer that functions removed in php 7.0 exist.
     // (See `backward_compatibility_checks` for additional options)
-    // Automatically inferred from composer.json requirement for "php" of "^7.1"
-    'target_php_version' => '7.2',
+    // Automatically inferred from composer.json requirement for "php" of "^7.3"
+    'target_php_version' => '7.3',
 
     // If enabled, missing properties will be created when
     // they are first seen. If false, we'll report an
@@ -94,23 +100,27 @@ return [
     // (and reveal some bugs).
     'strict_method_checking' => false,
 
+    // If enabled, Phan will warn if **any** type of the object expression for a property access
+    // does not contain that property.
+    'strict_object_checking' => false,
+
     // If enabled, Phan will warn if **any** type in the argument's union type
     // cannot be cast to a type in the parameter's expected union type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
     'strict_param_checking' => false,
 
-    // If enabled, Phan will warn if **any** type in a returned value's union type
-    // cannot be cast to the declared return type.
-    // Setting this to true will introduce numerous false positives
-    // (and reveal some bugs).
-    'strict_return_checking' => false,
-
     // If enabled, Phan will warn if **any** type in a property assignment's union type
     // cannot be cast to a type in the property's declared union type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
     'strict_property_checking' => false,
+
+    // If enabled, Phan will warn if **any** type in a returned value's union type
+    // cannot be cast to the declared return type.
+    // Setting this to true will introduce numerous false positives
+    // (and reveal some bugs).
+    'strict_return_checking' => false,
 
     // If true, seemingly undeclared variables in the global
     // scope will be ignored.
@@ -120,10 +130,13 @@ return [
     'ignore_undeclared_variables_in_global_scope' => true,
 
     // Set this to false to emit `PhanUndeclaredFunction` issues for internal functions that Phan has signatures for,
-    // but aren't available in the codebase, or the internal functions used to run Phan
+    // but aren't available in the codebase, or from Reflection.
     // (may lead to false positives if an extension isn't loaded)
     //
     // If this is true(default), then Phan will not warn.
+    //
+    // Even when this is false, Phan will still infer return values and check parameters of internal functions
+    // if Phan has the signatures.
     'ignore_undeclared_functions_with_known_signatures' => true,
 
     // Backwards Compatibility Checking. This is slow
@@ -137,42 +150,17 @@ return [
     // [php7cc (no longer maintained)](https://github.com/sstalle/php7cc)
     // and [php7mar](https://github.com/Alexia/php7mar),
     // which have different backwards compatibility checks.
-    'backward_compatibility_checks' => true,
+    //
+    // If you are still using versions of php older than 5.6,
+    // `PHP53CompatibilityPlugin` may be worth looking into if you are not running
+    // syntax checks for php 5.3 through another method such as
+    // `InvokePHPNativeSyntaxCheckPlugin` (see .phan/plugins/README.md).
+    'backward_compatibility_checks' => false,
 
     // If true, check to make sure the return type declared
     // in the doc-block (if any) matches the return type
     // declared in the method signature.
     'check_docblock_signature_return_type_match' => false,
-
-    // If true, make narrowed types from phpdoc params override
-    // the real types from the signature, when real types exist.
-    // (E.g. allows specifying desired lists of subclasses,
-    //  or to indicate a preference for non-nullable types over nullable types)
-    //
-    // Affects analysis of the body of the method and the param types passed in by callers.
-    //
-    // (*Requires `check_docblock_signature_param_type_match` to be true*)
-    'prefer_narrowed_phpdoc_param_type' => true,
-
-    // (*Requires `check_docblock_signature_return_type_match` to be true*)
-    //
-    // If true, make narrowed types from phpdoc returns override
-    // the real types from the signature, when real types exist.
-    //
-    // (E.g. allows specifying desired lists of subclasses,
-    // or to indicate a preference for non-nullable types over nullable types)
-    //
-    // This setting affects the analysis of return statements in the body of the method and the return types passed in by callers.
-    'prefer_narrowed_phpdoc_return_type' => true,
-
-    // If enabled, check all methods that override a
-    // parent method to make sure its signature is
-    // compatible with the parent's.
-    //
-    // This check can add quite a bit of time to the analysis.
-    //
-    // This will also check if final methods are overridden, etc.
-    'analyze_signature_compatibility' => true,
 
     // This setting maps case-insensitive strings to union types.
     //
@@ -201,6 +189,9 @@ return [
     // as variables (like `$class->$property` or
     // `$class->$method()`) in ways that we're unable
     // to make sense of.
+    //
+    // To more aggressively detect dead code,
+    // you may want to set `dead_code_detection_prefer_false_negative` to `false`.
     'dead_code_detection' => false,
 
     // Set to true in order to attempt to detect unused variables.
@@ -214,6 +205,13 @@ return [
     // This has some false positives involving loops,
     // variables set in branches of loops, and global variables.
     'redundant_condition_detection' => false,
+
+    // If enabled, Phan will act as though it's certain of real return types of a subset of internal functions,
+    // even if those return types aren't available in reflection (real types were taken from php 7.3 or 8.0-dev, depending on target_php_version).
+    //
+    // Note that with php 7 and earlier, php would return null or false for many internal functions if the argument types or counts were incorrect.
+    // As a result, enabling this setting with target_php_version 8.0 may result in false positives for `--redundant-condition-detection` when codebases also support php 7.x.
+    'assume_real_types_for_internal_functions' => false,
 
     // If true, this runs a quick version of checks that takes less
     // time at the cost of not running as thorough
@@ -246,28 +244,6 @@ return [
     // `string` instead of an `int` as declared.
     'quick_mode' => false,
 
-    // If true, then before analysis, try to simplify AST into a form
-    // which improves Phan's type inference in edge cases.
-    //
-    // This may conflict with `dead_code_detection`.
-    // When this is true, this slows down analysis slightly.
-    //
-    // E.g. rewrites `if ($a = value() && $a > 0) {...}`
-    // into `$a = value(); if ($a) { if ($a > 0) {...}}`
-    'simplify_ast' => false,
-
-    // If true, Phan will read `class_alias` calls in the global scope,
-    // then (1) create aliases from the *parsed* files if no class definition was found,
-    // and (2) emit issues in the global scope if the source or target class is invalid.
-    // (If there are multiple possible valid original classes for an aliased class name,
-    //  the one which will be created is unspecified.)
-    // NOTE: THIS IS EXPERIMENTAL, and the implementation may change.
-    'enable_class_alias_support' => true,
-
-    // Enable or disable support for generic templated
-    // class types.
-    'generic_types_enabled' => true,
-
     // Override to hardcode existence and types of (non-builtin) globals in the global scope.
     // Class names should be prefixed with `\`.
     //
@@ -282,7 +258,7 @@ return [
     'minimum_severity' => Issue::SEVERITY_LOW,
 
     // Add any issue types (such as `'PhanUndeclaredMethod'`)
-    // to this black-list to inhibit them from being reported.
+    // to this list to inhibit them from being reported.
     'suppress_issue_types' => [],
 
     // A regular expression to match files to be excluded
@@ -292,10 +268,10 @@ return [
     // directories/files, unanalyzable files, or files that
     // can't be removed for whatever reason.
     // (e.g. `'@Test\.php$@'`, or `'@vendor/.*/(tests|Tests)/@'`)
-    'exclude_file_regex' => '@^vendor/.*/(tests?|Tests?|doc|examples)/@',
+    'exclude_file_regex' => '@^vendor/.*/(tests?|Tests?|docs|examples)/@',
 
-    // A file list that defines files that will be excluded
-    // from parsing and analysis and will not be read at all.
+    // A list of files that will be excluded from parsing and analysis
+    // and will not be read at all.
     //
     // This is useful for excluding hopelessly unanalyzable
     // files that can't be removed for whatever reason.
@@ -327,6 +303,7 @@ return [
     ],
 
     // Enable this to enable checks of require/include statements referring to valid paths.
+    // The settings `include_paths` and `warn_about_relative_include_statement` affect the checks.
     'enable_include_path_checks' => true,
 
     // The number of processes to fork off during the analysis
@@ -375,33 +352,32 @@ return [
         'public',
         'src/ajax/core',
         'src/ajax/local',
+        'src/ajax/pattern/core',
+        'src/ajax/pattern/local',
         'src/core',
         'src/local',
         'vendor/beberlei/doctrineextensions/src',
+        'vendor/bukashk0zzz/filter-bundle',
+        'vendor/cocur/slugify/src',
         'vendor/composer/semver/src',
+        'vendor/cron/cron/src',
+        'vendor/doctrine/doctrine-orm-module/src',
         'vendor/doctrine/orm/lib/Doctrine/ORM',
         'vendor/ezyang/htmlpurifier/library',
-        'vendor/hellogerard/jobby/src',
+        'vendor/gedmo/doctrine-extensions/src',
+        'vendor/idmarinas/tracy-twig-bar/src',
         'vendor/jaxon-php/jaxon-core/src',
         'vendor/jaxon-php/jaxon-dialogs/src',
-        'vendor/macfja/tracy-doctrine-sql/lib',
-        'vendor/marioblazek/twig-byte-units-extension/src',
-        'vendor/milo/vendor-versions/src',
-        'vendor/phan/phan/src/Phan',
-        'vendor/snipe/banbuilder/src',
-        'vendor/symfony/filesystem',
-        'vendor/symfony/yaml',
-        'vendor/tracy/tracy/src',
-        'vendor/twig/twig/lib',
-        'vendor/twig/twig/src',
         'vendor/laminas/laminas-cache/src',
         'vendor/laminas/laminas-code/src',
         'vendor/laminas/laminas-config-aggregator/src',
         'vendor/laminas/laminas-config/src',
         'vendor/laminas/laminas-db/src',
-        'vendor/zendframework/zend-debug/src',
+        'vendor/laminas/laminas-dependency-plugin/src',
         'vendor/laminas/laminas-escaper/src',
+        'vendor/laminas/laminas-eventmanager/src',
         'vendor/laminas/laminas-filter/src',
+        'vendor/laminas/laminas-form/src',
         'vendor/laminas/laminas-http/src',
         'vendor/laminas/laminas-hydrator/src',
         'vendor/laminas/laminas-i18n/src',
@@ -413,8 +389,28 @@ return [
         'vendor/laminas/laminas-servicemanager/src',
         'vendor/laminas/laminas-session/src',
         'vendor/laminas/laminas-stdlib/src',
-        'vendor/laminas/laminas-validator/src',
         'vendor/laminas/laminas-view/src',
+        'vendor/macfja/tracy-doctrine-sql/lib',
+        'vendor/marioblazek/twig-byte-units-extension/src',
+        'vendor/milo/vendor-versions/src',
+        'vendor/phan/phan/src/Phan',
+        'vendor/snipe/banbuilder/src',
+        'vendor/symfony/console',
+        'vendor/symfony/doctrine-bridge',
+        'vendor/symfony/filesystem',
+        'vendor/symfony/finder',
+        'vendor/symfony/form',
+        'vendor/symfony/framework-bundle',
+        'vendor/symfony/options-resolver',
+        'vendor/symfony/security-csrf',
+        'vendor/symfony/translation',
+        'vendor/symfony/twig-bridge',
+        'vendor/symfony/validator',
+        'vendor/symfony/webpack-encore-bundle/src',
+        'vendor/symfony/yaml',
+        'vendor/tracy/tracy/src',
+        'vendor/twig/twig/lib',
+        'vendor/twig/twig/src',
     ],
 
     // A list of individual files to include in analysis
