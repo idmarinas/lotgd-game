@@ -16,9 +16,11 @@ namespace Lotgd\Core\Doctrine\ORM;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class EntityManager extends DoctrineEntityManager
 {
+    private $repositoryHydrator;
     private $isConnected;
 
     /**
@@ -42,8 +44,8 @@ class EntityManager extends DoctrineEntityManager
     public function isConnected(): bool
     {
         if (
-            defined('DB_NODB')
-            || (null === $this->isConnected && ! file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
+            \defined('DB_NODB')
+            || (null === $this->isConnected && ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
             || false === $this->isConnected
         ) {
             $this->isConnected = false;
@@ -54,5 +56,56 @@ class EntityManager extends DoctrineEntityManager
         $this->isConnected = $this->getConnection()->ping();
 
         return $this->isConnected;
+    }
+
+    /**
+     * Hydrate an object by populating getter/setter methods.
+     *
+     * @return object
+     */
+    public function hydrateEntity(array $data, object $entity)
+    {
+        return $this->geLaminastHydrator()->hydrate($data, $entity);
+    }
+
+    /**
+     * Extract values from an object with class methods.
+     *
+     * @param object|array $object
+     */
+    public function extractEntity($object): array
+    {
+        if (\is_array($object))
+        {
+            $set = [];
+
+            foreach ($object as $key => $value)
+            {
+                $set[$key] = $this->extractEntity($value);
+            }
+
+            return $set;
+        }
+        elseif ( ! \is_object($object))
+        {
+            return (array) $object;
+        }
+
+        return $this->geLaminastHydrator()->extract($object);
+    }
+
+    /**
+     * Get Hydrator instance.
+     */
+    private function geLaminastHydrator(): ClassMethodsHydrator
+    {
+        if ( ! $this->repositoryHydrator)
+        {
+            $this->repositoryHydrator = new ClassMethodsHydrator();
+            //-- With this keyValue is keyValue. Otherwise it would be key_value
+            $this->repositoryHydrator->removeNamingStrategy();
+        }
+
+        return $this->repositoryHydrator;
     }
 }
