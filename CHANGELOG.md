@@ -14,11 +14,15 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :cyclone: CHANGES
 
 -   **Forms** Replace all Laminas Form for Symfony Form
-    -   Example: Configuration, cronjob...
+    -   Example: Configuration, cronjob... (all forms in data/form/core)
 
 ### :star: FEATURES
 
--   Nothing
+-   **Doctrine Entity Manager**
+    -   Added to EntityManager class this functions:
+        -   `hydrateEntity(array $data, object $entity)`
+        -   `extractEntity(object|array $object)`
+    -   Can use with statis class `Doctrine::hydrateEntity($data, $entity)` and `Doctrine::extractEntity($entity)`
 
 ### :fire: DEPRECATED
 
