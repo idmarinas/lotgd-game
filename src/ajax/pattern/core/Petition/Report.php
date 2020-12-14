@@ -13,6 +13,7 @@
 namespace Lotgd\Ajax\Pattern\Core\Petition;
 
 use Jaxon\Response\Response;
+use Lotgd\Core\Form\PetitionType;
 use Tracy\Debugger;
 
 trait Report
@@ -34,19 +35,23 @@ trait Report
 
         try
         {
-            $form = \LotgdLocator::get('Lotgd\Core\Form\Petition');
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+
+            $form = $lotgdFormFactory->create(PetitionType::class, null, [
+                'action' => '',
+                'attr'   => [
+                    'autocomplete' => 'off',
+                ],
+            ]);
             $form->remove('problem_type');
-            $inputFilter = $form->getInputFilter();
-            $inputFilter->remove('problem_type');
-            $form->setInputFilter($inputFilter);
 
             $formClone = clone $form;
 
             if ($post)
             {
-                $form->setData($post);
+                $form->submit($post[$form->getName()]);
 
-                if ($form->isValid())
+                if ($form->isSubmitted() && $form->isValid())
                 {
                     $post = $form->getData();
                     $post['playerAbuseId'] = $playerId;
@@ -73,7 +78,7 @@ trait Report
                     \LotgdCache::removeItem('petitioncounts');
 
                     // If the admin wants it, email the petitions to them.
-                    $this->emailPetitionAdmin($post['charname']);
+                    $this->emailPetitionAdmin($post['charname'], $post);
 
                     $form = $formClone;
 
@@ -88,7 +93,7 @@ trait Report
                 ]);
             }
 
-            $params['form'] = $form;
+            $params['form'] = $form->createView();
 
             // Dialog content
             $content = $this->getTemplate()->renderBlock('petition_report', $params);

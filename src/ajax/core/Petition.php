@@ -17,6 +17,7 @@ use Jaxon\Response\Response;
 use Lotgd\Ajax\Pattern\Core as PatternCore;
 use Lotgd\Core\AjaxAbstract;
 use Lotgd\Core\EntityRepository\PetitionsRepository;
+use Lotgd\Core\Form\PetitionType;
 use Tracy\Debugger;
 
 /**
@@ -41,14 +42,22 @@ class Petition extends AjaxAbstract
 
         try
         {
-            $form      = \LotgdLocator::get('Lotgd\Core\Form\Petition');
+            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+
+            $form = $lotgdFormFactory->create(PetitionType::class, null, [
+                'action' => '',
+                'attr'   => [
+                    'autocomplete' => 'off',
+                ],
+            ]);
+
             $formClone = clone $form;
 
             if ($post)
             {
-                $form->setData($post);
+                $form->submit($post[$form->getName()]);
 
-                if ($form->isValid())
+                if ($form->isSubmitted() && $form->isValid())
                 {
                     $result = $this->processForm($form, $formClone, $repository, $response);
 
@@ -66,7 +75,7 @@ class Petition extends AjaxAbstract
                 ]);
             }
 
-            $params['form'] = $form;
+            $params['form'] = $form->createView();
 
             // Dialog content
             $content = $this->getTemplate()->renderBlock('petition_help', $params);
@@ -193,7 +202,7 @@ class Petition extends AjaxAbstract
         ];
     }
 
-    private function processForm(&$form, &$formClone, $repository, $response)
+    private function processForm(&$form, $formClone, $repository, $response)
     {
         global $session;
 
