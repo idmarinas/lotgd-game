@@ -136,33 +136,6 @@ plugins:
                 enabled: false
             Squiz ControlStructures ControlSignature SpaceAfterKeyword:
                 enabled: false
-    phan:
-        enabled: false
-        config:
-            file_extensions: "php"
-            target_php_version: "7.1"
-            minimum_severity: 3
-            ignore_undeclared: true
-            output_mode: "codeclimate"
-            directory:
-                - "config/"
-                - "cronjob/"
-                - "lib/"
-                - "src/"
-            exclude_analysis_directory_list:
-                - "assets/"
-                - "docs/"
-                - "error_docs/"
-                - "gulp/"
-                - "public/images/"
-                - "public/css/"
-                - "public/js/"
-                - "public/themes/"
-                - "templates/"
-                - "templates_core/"
-                - "templates_modules/"
-                - "storage/"
-                - "vendor/"
 exclude_patterns:
     - "config/"
     - "db/"
