@@ -87,7 +87,13 @@
         "idmarinas/tracy-twig-bar": "^0.1",
         "macfja/tracy-doctrine-sql": "dev-master",
         "milo/vendor-versions": "^1.1",
-        "phan/phan": "^3.2"
+        "phan/phan": "^3.2",
+        "symfony/browser-kit": "5.2.*",
+        "symfony/css-selector": "5.2.*",
+        "symfony/debug-bundle": "5.2.*",
+        "symfony/stopwatch": "5.2.*",
+        "symfony/var-dumper": "5.2.*",
+        "symfony/web-profiler-bundle": "5.2.*"
     },
     "autoload": {
         "psr-4": {
