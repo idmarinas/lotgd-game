@@ -1,6 +1,6 @@
 <?php
 /**
- * For no repeat same parts in common and common_jaxon
+ * For no repeat same parts in common and common_jaxon.
  */
 \chdir(\realpath(__DIR__.'/..'));
 
@@ -35,10 +35,12 @@ if ($isDevelopment)
 \defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
 \defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
-use Symfony\Component\Dotenv\Dotenv;
+use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Session as LotgdSession;
-use Lotgd\Core\Fixed\Kernel as LotgdKernel;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\HttpFoundation\Request;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
@@ -47,7 +49,14 @@ LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
 LotgdSession::instance(LotgdLocator::get(\Lotgd\Core\Session::class));
 
 //-- Prepare LoTGD Kernel
-(new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
+(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+
+if ($_SERVER['APP_DEBUG'])
+{
+    \umask(0000);
+
+    Debug::enable();
+}
 
 LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
 LotgdKernel::boot();
