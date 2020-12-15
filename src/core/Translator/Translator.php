@@ -22,6 +22,8 @@ use Laminas\Validator\Translator\TranslatorInterface;
 /**
  * Class translator for Legend of the Green Dragon.
  * Extends class Laminas\I18n\Translator\Translator.
+ *
+ * @deprecated 4.8.0
  */
 class Translator extends ZendTranslator implements TranslatorInterface
 {
