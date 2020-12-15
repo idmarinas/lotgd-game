@@ -37,12 +37,18 @@ if ($isDevelopment)
 
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Session as LotgdSession;
+use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
 
 //-- Configure Session
 LotgdSession::instance(LotgdLocator::get(\Lotgd\Core\Session::class));
+
+//-- Prepare LoTGD Kernel
+(new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
+
+\LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
 
 //-- Init session
 try
