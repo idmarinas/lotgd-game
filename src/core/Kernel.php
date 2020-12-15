@@ -15,18 +15,22 @@ namespace Lotgd\Core;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 class Kernel extends BaseKernel
 {
-    const VERSION = '4.7.0 IDMarinas Edition'; // Version of game in public display format.
-    const VERSION_ID = 40700; // Identify version of game in numeric format.
-    const MAJOR_VERSION = 4;
-    const MINOR_VERSION = 7;
+    use MicroKernelTrait;
+
+    const VERSION         = '4.7.0 IDMarinas Edition'; // Version of game in public display format.
+    const VERSION_ID      = 40700; // Identify version of game in numeric format.
+    const MAJOR_VERSION   = 4;
+    const MINOR_VERSION   = 7;
     const RELEASE_VERSION = 0;
-    const EXTRA_VERSION = '';
-    const VERSION_NUMBER = self::VERSION_ID; //-- Alias of VERSION_ID
+    const EXTRA_VERSION   = '';
+    const VERSION_NUMBER  = self::VERSION_ID; //-- Alias of VERSION_ID
     const FILE_DB_CONNECT = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
-    const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
     /**
      * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is copyright as per below.
@@ -58,29 +62,19 @@ class Kernel extends BaseKernel
         return \dirname(__DIR__, 2);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCacheDir()
+    protected function configureContainer(ContainerConfigurator $container, LoaderInterface $loader): void
     {
-        return $this->getProjectDir().'/storage/cache';
+        $confDir = $this->getProjectDir().'/config';
+
+        $container->import($confDir.'/{packages}/*.yaml');
+        $container->import($confDir.'/{packages}/'.$this->environment.'/*.yaml');
+
+        $container->import($confDir.'/services.yaml');
+        $container->import($confDir.'/{services}_'.$this->environment.'.yaml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLogDir()
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        return $this->getProjectDir().'/storage/log';
-    }
-
-    public function registerBundles(): iterable
-    {
-        return [];
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-        // Not used
+        // Not in use
     }
 }
