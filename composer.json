@@ -106,5 +106,11 @@
             "allow-contrib": false,
             "require": "5.2.*"
         }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
