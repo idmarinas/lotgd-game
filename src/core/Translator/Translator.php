@@ -197,7 +197,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
             $domains[0] = 'page';
         }
 
-        $filename = \sprintf('translations/%s/%s.yaml', $locale, \implode('/', $domains));
+        $filename = \sprintf('translations/%1$s/%2$s.%1$s.yaml', $locale, \implode('/', $domains));
 
         if (\is_file($filename))
         {
