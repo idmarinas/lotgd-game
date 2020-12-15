@@ -29,10 +29,10 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/core/Entity'
                 prefix: 'Lotgd\Core\Entity'
-                alias: Core
+                alias: LotgdCore
             Local:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/local/Entity'
                 prefix: 'Lotgd\Local\Entity'
-                alias: Local
+                alias: LotgdLocal
