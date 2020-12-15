@@ -15,18 +15,50 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Forms** Replace all Laminas Form for Symfony Form
     -   Example: Configuration, cronjob... (all forms in data/form/core)
+-   **Translator system**
+    -   Migrated from **Laminas i18n** to **Symfony Translation**
+    -   All Core translator files are renamed to `domain+intl-icu.locale.loader`
+    -   New format for translation files (name only)
+        -   `domain.locale.loader` Normal translation file name
+        -   `domain+intl-icu.locale.loader` Translation file name with icu support
+        -   Notes:
+            -   **_domain_**: Domains are a way to organize messages into groups.
+            -   **_locale_**: The locale that the translations are for.
+            -   **_loader_**: How Symfony should load and parse the file.
+    -   Is a Symfony Translator that support all options of Symfony Framework.
+    -   Can organize your translation files in folders:
+        -   When Symfony Translation load all translations resource, merge all content in same domain for each locale like this:
+            ```php
+            new MessageCatalogue('en', [
+                'domain' => [
+                    'key' => 'translation text'
+                ]
+            ])
+            ```
+        -   So if have multile files with same domain, for example:
+            -   `translations/en/navigation/bank.en.yaml`
+            -   `translations/en/page/bank.en.yaml`
+            -   Symfony Translation merge all in same domain and if any key are repeat last key added replace first key.
 
 ### :star: FEATURES
 
+-   **LoTGD Kernel** Added a LoTGD Kernel (Based in Symfony Framework) to Core Game.
+    -   This is the first iteration for migrate to Symfony Framwork app.
+        -   For now only is for new Translation system, that migrate from Laminas i18n to Symfony Translation
 -   **Doctrine Entity Manager**
     -   Added to EntityManager class this functions:
         -   `hydrateEntity(array $data, object $entity)`
         -   `extractEntity(object|array $object)`
-    -   Can use with statis class `Doctrine::hydrateEntity($data, $entity)` and `Doctrine::extractEntity($entity)`
+    -   Can use with static class `Doctrine::hydrateEntity($data, $entity)` and `Doctrine::extractEntity($entity)`
 
 ### :fire: DEPRECATED
 
 -   **Laminas Form** is deprecated since 4.8.0
+-   **Laminas translation** is deprecated since 4.8.0
+    -  **src/core/Translator/Translator.php**
+    -   **src/core/Fixed/Translator.php**
+    -   Usage of `LotgdTranslator::` is obsolete since 4.8.0
+        -   Use `$translator = LotgdKernel::getContainer()->get("translator")`
 
 ### :wrench: FIXES
 
@@ -34,7 +66,16 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES
 
--   Nothing
+-   **lib/jaxon.php** Removed this file, use factory to get a instance `\LotgdLocator::get(Lotgd\Core\Jaxon::class);`
+-   **Functions**
+    -   **lib/pageparts.php** This functions not are use for Core Game and Core Modules
+        -   `page_header()` use `LotgdResponse::pageStart()`
+        -   `page_footer()` use `LotgdResponse::pageEnd()`
+        -   `popup_header` and `popup_footer()` Use Jaxon instead
+-   **public/common_jaxon.php** Removed some required files:
+    -   **lib/output.php** Not need this in Jaxon petitions
+    -   **lib/redirect.php** Not need this redirect, Jaxon have a redirect method.
+    -   **lib/translator.php** Not need all translation system in Jaxon use new translation system.
 
 ### :notebook: NOTES
 
