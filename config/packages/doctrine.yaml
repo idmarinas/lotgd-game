@@ -4,7 +4,7 @@ doctrine:
         dbname: '%env(DATABASE_NAME)%'
         user: '%env(DATABASE_USER)%'
         password: '%env(DATABASE_PASSWORD)%'
-        host: '127.0.0.1'
+        host: '%env(DATABASE_HOST)'
         port: 3306
         driver: '%env(DATABASE_DRIVER)%'
         charset: utf8
