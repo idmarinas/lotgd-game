@@ -26,6 +26,21 @@
             "./src/Repository/.gitignore"
         ]
     },
+    "php": {
+        "version": "7.3.0"
+    },
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
+        },
+        "files": [
+            "./config/packages/stof_doctrine_extensions.yaml"
+        ]
+    },
     "symfony/framework-bundle": {
         "version": "5.2",
         "recipe": {

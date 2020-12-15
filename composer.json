@@ -65,6 +65,7 @@
         "laminas/laminas-view": "^2.11",
         "marioblazek/twig-byte-units-extension": "^1.0",
         "snipe/banbuilder": "^2.3",
+        "stof/doctrine-extensions-bundle": "^1.5",
         "symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
         "symfony/filesystem": "5.2.*",
