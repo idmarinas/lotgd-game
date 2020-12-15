@@ -23,26 +23,31 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    # Lotgd\Core\:
-    #     resource: '../src/core'
-    #     exclude:
-    #         - '../src/core/DependencyInjection/'
-    #         - '../src/core/Entity/'
-    #         - '../src/core/Application.php'
-    #         - '../src/core/Event.php'
-    #         - '../src/core/EventManagerAware.php'
-    #         - '../src/core/Hook.php'
-    #         - '../src/core/Http.php'
-    #         - '../src/core/Kernel.php'
-    #         - '../src/core/ServiceManager.php'
-    #         - '../src/core/Session.php'
-    #         - '../src/core/Tests/'
-    # Lotgd\Local\:
-    #     resource: '../src/local'
-    #     exclude:
-    #         - '../src/local/DependencyInjection/'
-    #         - '../src/local/Entity/'
-    #         - '../src/local/Tests/'
+    Lotgd\Core\:
+        resource: '../src/core'
+        exclude:
+            - '../src/core/DependencyInjection/'
+            - '../src/core/Entity/'
+            - '../src/core/EntityForm/'
+            - '../src/core/Form/'
+            - '../src/core/Twig/'
+            - '../src/core/Application.php'
+            - '../src/core/Event.php'
+            - '../src/core/EventManagerAware.php'
+            - '../src/core/Hook.php'
+            - '../src/core/Http.php'
+            - '../src/core/Kernel.php'
+            - '../src/core/ServiceManager.php'
+            - '../src/core/Session.php'
+            - '../src/core/Tests/'
+    Lotgd\Local\:
+        resource: '../src/local'
+        exclude:
+            - '../src/local/DependencyInjection/'
+            - '../src/local/Entity/'
+            - '../src/local/Form/'
+            - '../src/local/Twig/'
+            - '../src/local/Tests/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
