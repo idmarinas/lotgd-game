@@ -7,6 +7,7 @@ use Lotgd\Core\Fixed\EventManager as LotgdEvent;
 use Lotgd\Core\Fixed\HookManager as LotgdHook;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
+use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
 use Lotgd\Core\Fixed\Request as LotgdRequest;
@@ -19,7 +20,7 @@ use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
 
 //-- Configure Doctrine
-Doctrine::wrapper(LotgdLocator::get(\Lotgd\Core\Db\Doctrine::class));
+Doctrine::wrapper(LotgdKernel::getContainer()->get('doctrine.orm.entity_manager'));
 
 //-- Configure Flash Messages
 LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMessages::class));
