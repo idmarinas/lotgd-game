@@ -6,7 +6,7 @@ doctrine:
         password: '%env(DATABASE_PASSWORD)%'
         host: '127.0.0.1'
         port: 3306
-        driver: '%env(DATABA_DRIVER)%'
+        driver: '%env(DATABASE_DRIVER)%'
         charset: utf8
         mapping_types:
             enum: string
