@@ -199,7 +199,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
             $domains[0] = 'page';
         }
 
-        $filename = \sprintf('translations/%1$s/%2$s.%1$s.yaml', $locale, \implode('/', $domains));
+        $filename = $this->constructFile($locale, $domains);
 
         if (\is_file($filename))
         {
@@ -223,5 +223,25 @@ class Translator extends ZendTranslator implements TranslatorInterface
         }
 
         return $messagesLoaded;
+    }
+
+    private function constructFile($locale, $domains): string
+    {
+        //-- Symfony Translator format domain+intl-icu.locale.yaml
+        $filename = \sprintf('translations/%1$s/%2$s+intl-icu.%1$s.yaml', $locale, \implode('/', $domains));
+
+        if ( ! \is_file($filename))
+        {
+            //-- Symfony Translator format domain.locale.yaml
+            $filename = \sprintf('translations/%1$s/%2$s.%1$s.yaml', $locale, \implode('/', $domains));
+
+            if ( ! is_file($filename))
+            {
+                //-- Laminas format domain.yaml (old) this format not are loaded by Symfony Translator
+                $filename = \sprintf('translations/%1$s/%2$s.yaml', $locale, \implode('/', $domains));
+            }
+        }
+
+        return $filename;
     }
 }
