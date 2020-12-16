@@ -5113,16 +5113,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.11.4",
+            "version": "2.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "3bbb2e94287383604c898284a18d2d06cf17301e"
+                "reference": "16611035d7b3a6ef2c636a9268c213146123b663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/3bbb2e94287383604c898284a18d2d06cf17301e",
-                "reference": "3bbb2e94287383604c898284a18d2d06cf17301e",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/16611035d7b3a6ef2c636a9268c213146123b663",
+                "reference": "16611035d7b3a6ef2c636a9268c213146123b663",
                 "shasum": ""
             },
             "require": {
@@ -5134,7 +5134,7 @@
                 "php": "^5.6 || ^7.0"
             },
             "replace": {
-                "zendframework/zend-view": "self.version"
+                "zendframework/zend-view": "^2.11.4"
             },
             "require-dev": {
                 "laminas/laminas-authentication": "^2.5",
@@ -5158,7 +5158,7 @@
                 "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
                 "laminas/laminas-session": "^2.8.1",
                 "laminas/laminas-uri": "^2.5",
-                "phpunit/phpunit": "^5.7.15 || ^6.0.8"
+                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.18"
             },
             "suggest": {
                 "laminas/laminas-authentication": "Laminas\\Authentication component",
@@ -5179,12 +5179,6 @@
                 "bin/templatemap_generator.php"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\View\\": "src/"
@@ -5200,7 +5194,13 @@
                 "laminas",
                 "view"
             ],
-            "time": "2019-12-31T18:03:30+00:00"
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-12-15T14:57:08+00:00"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
