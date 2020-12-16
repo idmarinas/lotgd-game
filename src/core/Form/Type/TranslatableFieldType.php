@@ -26,9 +26,9 @@ class TranslatableFieldType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ( ! class_exists($options['personal_translation']))
+        if ( ! \class_exists($options['personal_translation']))
         {
-            throw new \InvalidArgumentException(sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
+            throw new \InvalidArgumentException(\sprintf("Unable to find personal translation class: '%s'", $options['personal_translation']));
         }
 
         if ( ! $options['field'])
@@ -36,7 +36,7 @@ class TranslatableFieldType extends AbstractType
             throw new \InvalidArgumentException('You should provide a field to translate');
         }
 
-        $subscriber = new AddTranslatableFieldSubscriber($builder->getFormFactory(), $options);
+        $subscriber = new AddTranslatableFieldSubscriber($builder->getFormFactory());
         $builder->addEventSubscriber($subscriber);
     }
 
@@ -63,7 +63,7 @@ class TranslatableFieldType extends AbstractType
             'property_path'          => 'translations',
             'csrf_protection'        => false,
             'personal_translation'   => false, //Personal Translation class
-            'locales'                => explode(',', getsetting('serverlanguages')), //the locales you wish to edit
+            'locales'                => \explode(',', getsetting('serverlanguages')), //the locales you wish to edit
             'required_locale'        => [getsetting('defaultlanguage')], //the required locales cannot be blank
             'field'                  => false, //the field that you wish to translate
             'widget'                 => PersonalTranslationType::class, //change this to another widget like 'texarea' if needed
