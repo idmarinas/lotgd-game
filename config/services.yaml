@@ -24,7 +24,7 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     Lotgd\Core\:
-        resource: '../src/core/*'
+        resource: '../src/core/'
         exclude:
             - '../src/core/DependencyInjection/'
             - '../src/core/Form/Element/'
@@ -46,7 +46,7 @@ services:
             - '../src/core/ServiceManager.php'
             - '../src/core/Session.php'
     Lotgd\Local\:
-        resource: '../src/local/*'
+        resource: '../src/local/'
         exclude:
             - '../src/local/DependencyInjection/'
             - '../src/local/Entity/'
