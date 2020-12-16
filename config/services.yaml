@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    lotgd_core.doctrine_prefix: ''
+    lotgd_core.doctrine_prefix: '%env(DATABASE_PREFIX)%'
     doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
 
 services:
@@ -27,25 +27,16 @@ services:
         resource: '../src/core'
         exclude:
             - '../src/core/DependencyInjection/'
-            - '../src/core/Entity/'
-            - '../src/core/EntityForm/'
+            - '../src/core/Form/{Element/,ElementFactory.php,LotgdElementFactoryInterface.php}'
             - '../src/core/Form/'
             - '../src/core/Twig/'
-            - '../src/core/Application.php'
-            - '../src/core/Event.php'
-            - '../src/core/EventManagerAware.php'
-            - '../src/core/Hook.php'
-            - '../src/core/Http.php'
-            - '../src/core/Kernel.php'
-            - '../src/core/ServiceManager.php'
-            - '../src/core/Session.php'
             - '../src/core/Tests/'
+            - '../src/core/{Application,Event,EventManagerAware,Hook,Http,Kernel,ServiceManager,Session}.php'
     Lotgd\Local\:
         resource: '../src/local'
         exclude:
             - '../src/local/DependencyInjection/'
             - '../src/local/Entity/'
-            - '../src/local/Form/'
             - '../src/local/Twig/'
             - '../src/local/Tests/'
 
