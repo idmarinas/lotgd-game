@@ -62,12 +62,43 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
     ]);
     unset($configuration);
 
-    $code = $file->generate();
+    //-- New configuration file ".env.local.php"
+    $configuration = [
+        'APP_ENV' => 'prod',
+        'APP_SECRET' => 'df101269101f1d609fed34f9d233954b',
+        'DATABASE_NAME' => $session['installer']['dbinfo']['DB_NAME'],
+        'DATABASE_PREFIX' => $session['installer']['dbinfo']['DB_PREFIX'],
+        'DATABASE_USER' => $session['installer']['dbinfo']['DB_USER'],
+        'DATABASE_PASSWORD' => $session['installer']['dbinfo']['DB_PASS'],
+        'DATABASE_HOST' => $session['installer']['dbinfo']['DB_HOST'] == 'localhost' ? '127.0.0.1' : $session['installer']['dbinfo']['DB_HOST'],
+        'DATABASE_DRIVER' => \strtolower($session['installer']['dbinfo']['DB_DRIVER']),
+        'DATABASE_VERSION' => "'' //-- Remember configure this"
+    ];
 
-    $result = \file_put_contents(\Lotgd\Core\Application::FILE_DB_CONNECT, $code);
+    $fileEnv = FileGenerator::fromArray([
+        'docblock' => DocBlockGenerator::fromArray([
+            'shortDescription' => 'This file is automatically created by installer.php',
+            'longDescription'  => null,
+            'tags'             => [
+                [
+                    'name'        => 'create',
+                    'description' => \date('M d, Y h:i a'),
+                ],
+            ],
+        ]),
+        'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';',
+    ]);
 
-    $failure = ! (false !== $result);
-    $success = ! ($failure);
+    $code    = $file->generate();
+    $codeEnv = $fileEnv->generate();
+
+    $result    = \file_put_contents(\Lotgd\Core\Application::FILE_DB_CONNECT, $code);
+    $resultEnv = \file_put_contents('.env.local.php', $codeEnv);
+
+    $failure    = ! (false !== $result);
+    $success    = ! ($failure);
+    $failureEnv = ! (false !== $resultEnv);
+    $successEnv = ! ($failureEnv);
 }
 
 //-- Delete the old cache file from the Service Manager and force it to generate it again.
@@ -84,8 +115,11 @@ if ( ! $success)
 $params['initial']         = $initial;
 $params['success']         = $success;
 $params['failure']         = $failure ?? null;
+$params['successEnv']      = $successEnv;
+$params['failureEnv']      = $failureEnv ?? null;
 $params['FILE_DB_CONNECT'] = \Lotgd\Core\Application::FILE_DB_CONNECT;
 $params['CACHE_FILE']      = \Lotgd\Core\ServiceManager::CACHE_FILE;
-$params['code']            = $code ?? null;
+$params['code']            = $code       ?? null;
+$params['codeEnv']         = $codeEnv ?? null;
 
 \LotgdResponse::pageAddContent(\LotgdTheme::render('@core/pages/installer/stage-6.html.twig', $params));
