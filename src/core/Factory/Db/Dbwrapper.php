@@ -13,6 +13,14 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Lotgd\Core\Db\Dbwrapper as LibDbwrapper;
 
+\trigger_error(\sprintf(
+    'Usage of Factory %s is deprecated, please use Doctrine of LoTGD Kernel instead. "$doctrine = LotgdKernel::getContainer()->get("doctrine.orm.entity_manager")" or "Doctrine::" static class',
+    Dbwrapper::class
+), E_USER_DEPRECATED);
+
+/**
+ * @deprecated 4.4.0
+ */
 class Dbwrapper implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)

@@ -12,6 +12,14 @@ use DoctrineORMModule\Service\EntityManagerFactory;
 use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\ORM\EntityManager as DoctrineEntityManager;
 
+\trigger_error(\sprintf(
+    'Usage of Factory %s is deprecated, please use Doctrine of LoTGD Kernel instead. "$doctrine = LotgdKernel::getContainer()->get("doctrine.orm.entity_manager")" or "Doctrine::" static class',
+    Doctrine::class
+), E_USER_DEPRECATED);
+
+/**
+ * @deprecated 4.8.0
+ */
 class Doctrine extends EntityManagerFactory
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
