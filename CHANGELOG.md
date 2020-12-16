@@ -59,6 +59,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   **src/core/Fixed/Translator.php**
     -   Usage of `LotgdTranslator::` is obsolete since 4.8.0
         -   Use `$translator = LotgdKernel::getContainer()->get("translator")`
+-   **Doctrine factory of Laminas** Usage of `LotgdLocator::get(\Lotgd\Core\Db\Doctrine::class)` is deprecated
+    -   Use `LotgdKernel::getContainer()->get('doctrine')` or `LotgdKernel::getContainer()->get('doctrine.orm.entity_manager')`
+    -   **Note**: `Doctrine::` static class use new `LotgdKernel::getContainer()->get('doctrine.orm.entity_manager')`
+    .   Have same configuration.
 
 ### :wrench: FIXES
 
@@ -79,10 +83,17 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :notebook: NOTES
 
+-   **IMPORTANT when upgrade to this version** 
+    -   For this version to work properly you must upload the file `.env.local.php.dummy` in the same directory and rename it to `.env.local.php
+        -   You must also configure all the keys in the file with the information from the Database so that you can configure the Doctrine from the Kernel correctly (Use the `config/autoload/local/dbconnect.php` file to complete the data in `.env.local.php`)
+        -   This is necessary for the kernel to load correctly.
 -   **Added lazy services**.
     -   These services are not always necessary (some are deprecated), so they are only created the first time they are needed.
         -   `DoctrineModule\Service\CliFactory`
         -   `Lotgd\Core\EventManager\Event`
+        -   `Lotgd\Core\Doctrine\Extension\TablePrefix`
+        -   `Lotgd\Core\Db\Doctrine`
+        -   `Doctrine\ORM\EntityManager`
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
