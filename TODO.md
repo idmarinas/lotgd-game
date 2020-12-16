@@ -7,7 +7,8 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Se migra laminas-form a Symfony-form (todo lo que se generaba por laminas form, ahora pasa a Symfony form)
+-   Utilizar el symfony translation en algunas páginas
+-   Revisar que no se  usa la factoria laminas para doctrine en algunas zonas.
 -   Agregar sistema al core, para poder añadir terminos y condiciones y politica de privacidad, sin necesidad de módulo.
 
 # Para la versión 5.0.0

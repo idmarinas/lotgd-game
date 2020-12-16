@@ -79,12 +79,12 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **public/common_jaxon.php** Removed some required files:
     -   **lib/output.php** Not need this in Jaxon petitions
     -   **lib/redirect.php** Not need this redirect, Jaxon have a redirect method.
-    -   **lib/translator.php** Not need all translation system in Jaxon use new translation system.
+    -   **lib/translator.php** Not need old translation system in Jaxon use new translation system.
 
 ### :notebook: NOTES
 
 -   **IMPORTANT when upgrade to this version** 
-    -   For this version to work properly you must upload the file `.env.local.php.dummy` in the same directory and rename it to `.env.local.php
+    -   For this version to work properly you must upload the file `.env.local.php.dummy` in the same directory and rename it to `.env.local.php`
         -   You must also configure all the keys in the file with the information from the Database so that you can configure the Doctrine from the Kernel correctly (Use the `config/autoload/local/dbconnect.php` file to complete the data in `.env.local.php`)
         -   This is necessary for the kernel to load correctly.
 -   **Added lazy services**.
