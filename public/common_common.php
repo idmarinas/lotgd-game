@@ -40,7 +40,6 @@ use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Session as LotgdSession;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\HttpFoundation\Request;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
