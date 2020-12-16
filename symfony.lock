@@ -1,4 +1,16 @@
 {
+    "bukashk0zzz/filter-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "0f1035a5f7174f09663157a87f9a0849e85ed369"
+        },
+        "files": [
+            "./config/packages/bukashk0zzz_filter.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -43,6 +55,18 @@
     },
     "symfony/browser-kit": {
         "version": "v5.2.0"
+    },
+    "symfony/console": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "c6d02bdfba9da13c22157520e32a602dbee8a75c"
+        },
+        "files": [
+            "./bin/console"
+        ]
     },
     "symfony/css-selector": {
         "version": "v5.2.0"
