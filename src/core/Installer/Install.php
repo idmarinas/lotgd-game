@@ -312,11 +312,21 @@ class Install
      */
     private function insertDataByFiles(array $files, array &$messages)
     {
+        global $session;
+
         $doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
         $hydrator = new ClassMethodsHydrator();
 
+        $session['installer']['insert_data_by_files'] = $session['installer']['insert_data_by_files'] ?? [];
+
         foreach ($files as $file)
         {
+            //-- Check if data are inserted/processed
+            if (isset($session['installer']['insert_data_by_files'][$file]) && $session['installer']['insert_data_by_files'][$file])
+            {
+                continue;
+            }
+
             $data     = \json_decode(\file_get_contents($file), true);
             $entities = new HydratingResultSet(new ClassMethodsHydrator(), new $data['entity']());
             $entities->initialize($data['rows']);
@@ -351,6 +361,9 @@ class Install
             }
 
             $doctrine->flush();
+
+            //-- Mark file as inserted
+            $session['installer']['insert_data_by_files'][$file] = true;
         }
     }
 }
