@@ -32,7 +32,7 @@ const config = {
             '!entity{,/**}', //-- Autogenerate entities from BD
             '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
             //-- Ignore dependency directories
-            '!{bower_components,node_modules,vendor}{,/**}'
+            '!{bower_components,node_modules,vendor,var}{,/**}'
         ],
         core_files: [], //-- This is used in LoTGD Skeleton
         skeleton: [
@@ -67,7 +67,7 @@ const config = {
             //-- Ignore all dist folders
             '!{*.,}dist{,/**}',
             //-- Ignore dependency directories
-            '!{bower_components,node_modules,vendor}{,/**}'
+            '!{bower_components,node_modules,vendor,var}{,/**}'
         ]
     }
 }
