@@ -140,7 +140,7 @@ trait CoreFunction
         $params['linkAttack'] = "{$params['linkBase']}{$params['linkExtra']}";
         $params['linkAttack'] .= ($params['isInn'] ?? false) ? '&inn=1' : '';
 
-        return $this->getTheme()->renderBlock('pvp_list', '{theme}/_blocks/_pvp.html.twig', $params);
+        return $this->getTemplate()->renderBlock('pvp_list', '{theme}/_blocks/_pvp.html.twig', $params);
     }
 
     /**
@@ -148,7 +148,7 @@ trait CoreFunction
      */
     public function pvpListSleepers(array $params): string
     {
-        return $this->getTheme()->renderBlock('pvp_sleepers', '{theme}/_blocks/_pvp.html.twig', $params);
+        return $this->getTemplate()->renderBlock('pvp_sleepers', '{theme}/_blocks/_pvp.html.twig', $params);
     }
 
     /**

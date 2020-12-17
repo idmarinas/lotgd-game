@@ -25,7 +25,6 @@ class GameCore extends AbstractExtension
     use PatternCore\HookManager;
     use PatternCore\Jaxon;
     use PatternCore\Settings;
-    use PatternCore\Theme;
     use PatternCore\Template;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
