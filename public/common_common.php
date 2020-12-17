@@ -59,6 +59,12 @@ LotgdSession::instance(LotgdLocator::get(\Lotgd\Core\Session::class));
 LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
 LotgdKernel::boot();
 
+//-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+if ($isDevelopment)
+{
+    \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+}
+
 //-- Init session
 try
 {
