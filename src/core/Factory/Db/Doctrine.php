@@ -43,7 +43,7 @@ class Doctrine extends EntityManagerFactory
         //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
         if ($isDevelopment)
         {
-            \MacFJA\Tracy\DoctrineSql::init($entityManager);
+            \MacFJA\Tracy\DoctrineSql::init($entityManager, 'Laminas');
         }
 
         return $entityManager;
