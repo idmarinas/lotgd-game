@@ -8,7 +8,7 @@
 // license must be used on the distribution of any works derived from this
 // work.
 // Please see the file LICENSE for a full textual description of the license.txt.
-require_once './common_common.php';
+require_once 'common_common.php';
 
 //-- Prepare static classes
 require_once 'lib/class/static.php';
