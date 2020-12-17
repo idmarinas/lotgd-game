@@ -39,12 +39,20 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
             -   `translations/en/navigation/bank.en.yaml`
             -   `translations/en/page/bank.en.yaml`
             -   Symfony Translation merge all in same domain and if any key are repeat last key added replace first key.
+-   **Doctrine ORM**
+    -   Doctrine are now configure with **LoTGD Kernel**, see notes in **FEATURES -> LoTGD Kernel**
 
 ### :star: FEATURES
 
 -   **LoTGD Kernel** Added a LoTGD Kernel (Based in Symfony Framework) to Core Game.
     -   This is the first iteration for migrate to Symfony Framwork app.
-        -   For now only is for new Translation system, that migrate from Laminas i18n to Symfony Translation
+        -   For now is used for:
+            -   **Doctrine**, if you need use Doctrine ORM use `LotgdKernel::get('doctrine.orm.entity_manager')` or `LotgdKernel::getContainer()->get('doctrine.orm.entity_manager')`
+                -   Note: static class `Doctrine::` use new service of kernel, if you use this static class, not need change nothing.
+                -   Note 2: All core game use new kernel services for use Doctrine (or 99.99%)
+            -   **Translation system** Translation are moved to Symfony Translation, if you want use this new system use `LotgdKernel.get('translation')`  
+                -   Note: static class `LotgdTranslator::` use old Laminas translation.
+    -   _Laminas Service Manager_ are deprecated, and all factories will be moved to LoTGD Kernel in future versions.
 -   **Doctrine Entity Manager**
     -   Added to EntityManager class this functions:
         -   `hydrateEntity(array $data, object $entity)`
@@ -80,10 +88,13 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   **lib/output.php** Not need this in Jaxon petitions
     -   **lib/redirect.php** Not need this redirect, Jaxon have a redirect method.
     -   **lib/translator.php** Not need old translation system in Jaxon use new translation system.
+-   **src/core/Pattern/Repository.php** Remove obsolete trait/pattern, use `Lotgd\Core\Pattern\Doctrine` instead
+-   **src/core/Pattern/Theme.php** Remove obsolete trait/pattern, use `Lotgd\Core\Pattern\Template` instead
 
 ### :notebook: NOTES
 
 -   **IMPORTANT when upgrade to this version** 
+    -   Game try to create file `.env.local.php` if not find, you need create by yourself if game cant create file.
     -   For this version to work properly you must upload the file `.env.local.php.dummy` in the same directory and rename it to `.env.local.php`
         -   You must also configure all the keys in the file with the information from the Database so that you can configure the Doctrine from the Kernel correctly (Use the `config/autoload/local/dbconnect.php` file to complete the data in `.env.local.php`)
         -   This is necessary for the kernel to load correctly.
