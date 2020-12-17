@@ -20,7 +20,7 @@ const config = {
         //-- Files to copy
         main: [
             //-- All files includin subdirectories
-            '**{,/**,/.htaccess,/.gitkeep}',
+            '**{,/**}',
             //-- Ignore files of development
             '!gulp{,/**}',
             '!gulpfile.js',
@@ -31,6 +31,8 @@ const config = {
             '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
             '!entity{,/**}', //-- Autogenerate entities from BD
             '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
+            //-- Include .files
+            '{/**/.gitkeep,/.env,/.htaccess}',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor,var}{,/**}'
         ],
