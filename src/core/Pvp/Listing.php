@@ -18,7 +18,7 @@ use Lotgd\Core\Pattern as PatternCore;
 class Listing
 {
     use PatternCore\Container;
-    use PatternCore\Repository;
+    use PatternCore\Doctrine;
 
     protected $repository;
     protected $query;
