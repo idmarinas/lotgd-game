@@ -39,7 +39,6 @@ use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Session as LotgdSession;
 use Symfony\Component\Dotenv\Dotenv;
-// use Symfony\Component\ErrorHandler\Debug;
 
 //-- Prepare service manager
 LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
@@ -48,21 +47,92 @@ LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
 LotgdSession::instance(LotgdLocator::get(\Lotgd\Core\Session::class));
 
 //-- Prepare LoTGD Kernel
-(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
-
-// if ($_SERVER['APP_DEBUG']) {
-//     \umask(0000);
-
-//     Debug::enable();
-// }
-
-LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
-LotgdKernel::boot();
-
-//-- Add Sql requests made by Doctrine in the Tracy debugger bar.
-if ($isDevelopment)
+try
 {
-    \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+    (new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+
+    LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
+    LotgdKernel::boot();
+
+    //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+    if ($isDevelopment)
+    {
+        \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+    }
+}
+catch (\Throwable $th)
+{
+    //-- Create a .env.local.php
+    //-- This code will be deleted in future version
+    if (\file_exists('config/autoload/local/dbconnect.php'))
+    {
+        //-- Check if exist old dbconnect.php and updated to new format
+        //-- Only for upgrade from previous versions (1.0.0 IDMarinas edition and up / 2.7.0 IDMarinas edition and below)
+        $dbconnect = include 'config/autoload/local/dbconnect.php';
+        $doctrine  = $dbconnect['doctrine']['connection']['orm_default']['params'];
+        $laminas   = $dbconnect['lotgd_core']['db'];
+
+        //-- New configuration file ".env.local.php"
+        $configuration = [
+            'APP_ENV'           => 'prod',
+            'APP_SECRET'        => \bin2hex(\random_bytes(16)),
+            'DATABASE_NAME'     => $doctrine['dbname'],
+            'DATABASE_PREFIX'   => $laminas['prefix'],
+            'DATABASE_USER'     => $doctrine['user'],
+            'DATABASE_PASSWORD' => $doctrine['password'],
+            'DATABASE_HOST'     => 'localhost' == $laminas['adapter']['hostname'] ? '127.0.0.1' : $laminas['adapter']['hostname'],
+            'DATABASE_DRIVER'   => $doctrine['driver'],
+            'DATABASE_VERSION'  => '5.5',
+        ];
+
+        $file = Laminas\Code\Generator\FileGenerator::fromArray([
+            'docblock' => Laminas\Code\Generator\DocBlockGenerator::fromArray([
+                'shortDescription' => \sprintf('This file is automatically created in version %s.', Lotgd\Core\Kernel::VERSION),
+                'longDescription'  => null,
+                'tags'             => [
+                    [
+                        'name'        => 'important',
+                        'description' => 'Remember configure DATABASE_VERSION with version of your DB Server',
+                    ],
+                    [
+                        'name'        => 'created',
+                        'description' => \date('M d, Y h:i a'),
+                    ],
+                ],
+            ]),
+            'body' => 'return '.new Laminas\Code\Generator\ValueGenerator($configuration, Laminas\Code\Generator\ValueGenerator::TYPE_ARRAY_SHORT).';',
+        ]);
+
+        $code   = $file->generate();
+        $result = \file_put_contents('.env.local.php', $code);
+
+        if (false !== $result)
+        {
+            (new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+
+            LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
+            LotgdKernel::boot();
+
+            //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
+            if ($isDevelopment)
+            {
+                \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+            }
+        }
+        else
+        {
+            $message = 'Unfortunately, I was not able to write your ".env.local.php" file.<br>';
+            $message .= 'You will have to create this file yourself, and upload it to your web server.<br>';
+            $message .= 'The contents of this file should be as follows:<br>';
+            $message .= '<blockquote><pre>'.\htmlentities($code, ENT_COMPAT, 'UTF-8').'</pre></blockquote>';
+            $message .= 'Create a new file, past the entire contents from above into it.';
+            $message .= "When you have that done, save the file as '.env.local.php' and upload this to the location you have LoGD at.";
+            $message .= 'You can refresh this page to see if you were successful.';
+
+            die($message);
+        }
+    }
+    //-- End - This code will be deleted in future version
 }
 
 //-- Init session
