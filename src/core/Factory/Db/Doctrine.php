@@ -13,7 +13,7 @@ use Interop\Container\ContainerInterface;
 use Lotgd\Core\Doctrine\ORM\EntityManager as DoctrineEntityManager;
 
 \trigger_error(\sprintf(
-    'Usage of Factory %s is deprecated, please use Doctrine of LoTGD Kernel instead. "$doctrine = LotgdKernel::getContainer()->get("doctrine.orm.entity_manager")" or "Doctrine::" static class',
+    'Usage of Factory %s is deprecated, please use Doctrine of LoTGD Kernel instead. "$doctrine = LotgdKernel::get("doctrine.orm.entity_manager")" or "Doctrine::" static class',
     Doctrine::class
 ), E_USER_DEPRECATED);
 

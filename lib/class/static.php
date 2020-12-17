@@ -20,7 +20,7 @@ use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
 
 //-- Configure Doctrine
-Doctrine::wrapper(LotgdKernel::getContainer()->get('doctrine.orm.entity_manager'));
+Doctrine::wrapper(LotgdKernel::get('doctrine.orm.entity_manager'));
 
 //-- Configure Flash Messages
 LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMessages::class));
