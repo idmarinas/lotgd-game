@@ -18,8 +18,7 @@ module.exports = function (callback)
         return composer({
             'working-dir': config.paths.build.prod,
             'no-dev': true,
-            'no-suggest': true,
-            'optimize-autoloader': true
+            'no-suggest': true
         })
     }
     else
