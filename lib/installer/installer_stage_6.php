@@ -67,11 +67,6 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 
     $failure = ! (false !== $result);
     $success = ! ($failure);
-}
-
-//-- Create or recreate if not exist or dbconnect.php not exist
-if ( ! \file_exists('.env.local.php') || ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
-{
     //-- New configuration file ".env.local.php"
     $configuration = [
         'APP_ENV'           => 'prod',
@@ -123,8 +118,8 @@ if ( ! $success)
 
 $params['initial']         = $initial;
 $params['success']         = $success;
-$params['failure']         = $failure ?? null;
 $params['successEnv']      = $successEnv;
+$params['failure']         = $failure ?? null;
 $params['failureEnv']      = $failureEnv ?? null;
 $params['FILE_DB_CONNECT'] = \Lotgd\Core\Application::FILE_DB_CONNECT;
 $params['CACHE_FILE']      = \Lotgd\Core\ServiceManager::CACHE_FILE;
