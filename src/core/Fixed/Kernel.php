@@ -18,17 +18,18 @@ use Lotgd\Core\Kernel as CoreKernel;
 class Kernel
 {
     /**
-     * Intance of Kernel
+     * Intance of Kernel.
      *
      * @var CoreKernel
      */
     protected static $instance;
+    protected static $container;
 
     /**
      * Add support for magic static method calls.
      *
-     * @param mixed  $method
-     * @param array  $arguments
+     * @param mixed $method
+     * @param array $arguments
      *
      * @return mixed the returned value from the resolved method
      */
@@ -39,9 +40,23 @@ class Kernel
             return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$instance));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
+    }
+
+    /**
+     * Short method for get a service.
+     * This replace to ::getContainer()->get('service_name).
+     */
+    public static function get(string $serviceName)
+    {
+        if ( ! self::$container)
+        {
+            self::$container = self::$instance->getContainer();
+        }
+
+        return self::$container->get($serviceName);
     }
 
     /**
@@ -53,4 +68,4 @@ class Kernel
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Kernel', 'LotgdKernel', false);
+\class_alias('Lotgd\Core\Fixed\Kernel', 'LotgdKernel', false);
