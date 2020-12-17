@@ -69,7 +69,8 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
     $success = ! ($failure);
 }
 
-if ( ! \file_exists('.env.local.php'))
+//-- Create or recreate if not exist or dbconnect.php not exist
+if ( ! \file_exists('.env.local.php') || ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
 {
     //-- New configuration file ".env.local.php"
     $configuration = [
