@@ -42,7 +42,7 @@ class Install
     {
         $messages = [];
         $version  = $this->getNextVersion($version); //-- Start with the next version
-        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+        $doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
 
         //-- It is a clean installation not do nothing
         if ( ! $this->isUpgrade())
@@ -80,7 +80,7 @@ class Install
                 } while ($result && \method_exists($upgrade, "step{$step}"));
 
                 //-- Get all messages for this upgrade
-                $messages = array_merge($messages, $upgrade->getMessages());
+                $messages = \array_merge($messages, $upgrade->getMessages());
 
                 $this->upgradedVersionOn($version);
                 $version = $this->getNextVersion($version);
@@ -102,21 +102,21 @@ class Install
     public function makeSynchronizationTables(): array
     {
         //-- Prepare for updating core tables
-        $doctrine   = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+        $doctrine   = \LotgdKernel::get('doctrine.orm.entity_manager');
         $classes    = $doctrine->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($doctrine);
         $sqls       = $schemaTool->getUpdateSchemaSql($classes, true);
 
         $messages = [\LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN)];
 
-        if (count($sqls))
+        if (\count($sqls))
         {
             $messages   = [];
             $messages[] = \LotgdTranslator::t('synchronizationTables.title', [], self::TRANSLATOR_DOMAIN);
 
             $schemaTool->updateSchema($classes, true);
 
-            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => count($sqls)], self::TRANSLATOR_DOMAIN);
+            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => \count($sqls)], self::TRANSLATOR_DOMAIN);
             $messages[] = \LotgdTranslator::t('synchronizationTables.proxy', ['classes' => $doctrine->getProxyFactory()->generateProxyClasses($classes)], self::TRANSLATOR_DOMAIN);
         }
 
@@ -143,7 +143,7 @@ class Install
         //-- Insert data of upgrade installs
         $messagesUpgrade = $this->makeInsertDataOfUpdates();
 
-        return array_merge($messages, $messagesUpgrade);
+        return \array_merge($messages, $messagesUpgrade);
     }
 
     /**
@@ -161,9 +161,9 @@ class Install
         }
 
         $modules = $this->getModules();
-        reset($modules);
+        \reset($modules);
 
-        if ( ! count($modules))
+        if ( ! \count($modules))
         {
             $messages[] = '`QNot modules found to process.`0`n';
 
@@ -172,8 +172,8 @@ class Install
 
         foreach ($modules as $modulename => $options)
         {
-            $ops = explode(',', $options);
-            reset($ops);
+            $ops = \explode(',', $options);
+            \reset($ops);
 
             foreach ($ops as $op)
             {
@@ -234,7 +234,7 @@ class Install
         $messages = [];
 
         $filesystem = new Filesystem();
-        $files      = array_map(
+        $files      = \array_map(
             function ($value)
             {
                 return self::DATA_DIR_INSTALL."/{$value}";
@@ -242,7 +242,7 @@ class Install
             $filesystem->listDir(self::DATA_DIR_INSTALL)
         );
 
-        if (0 == count($files))
+        if (0 == \count($files))
         {
             $this->dataInsertedOff();
             $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
@@ -281,9 +281,9 @@ class Install
 
         $messages = [];
 
-        $files = glob(UpgradeAbstract::DATA_DIR_UPDATE.'/**/*.json');
+        $files = \glob(UpgradeAbstract::DATA_DIR_UPDATE.'/**/*.json');
 
-        if (0 == count($files))
+        if (0 == \count($files))
         {
             $this->dataUpgradesInsertedOff();
             $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
@@ -312,7 +312,7 @@ class Install
      */
     private function insertDataByFiles(array $files, array &$messages)
     {
-        $doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+        $doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
         $hydrator = new ClassMethodsHydrator();
 
         foreach ($files as $file)
@@ -327,15 +327,15 @@ class Install
                 if ('update-by-id' == $data['method'])
                 {
                     $managed = $doctrine->find($data['entity'], $entity->getId());
-                    $entity = $hydrator->hydrate($hydrator->extract($entity), $managed);
+                    $entity  = $hydrator->hydrate($hydrator->extract($entity), $managed);
                 }
                 //-- Updated entity by field
-                elseif (0 === strpos($data['method'], 'update-by-field-'))
+                elseif (0 === \strpos($data['method'], 'update-by-field-'))
                 {
-                    $field = substr($data['method'], 16);
+                    $field      = \substr($data['method'], 16);
                     $repository = $doctrine->getRepository($data['entity']);
-                    $managed = $repository->findOneBy([ $field => $entity->{'get'.ucfirst($field)}() ]);
-                    $entity = $hydrator->hydrate($hydrator->extract($entity), $managed);
+                    $managed    = $repository->findOneBy([$field => $entity->{'get'.\ucfirst($field)}()]);
+                    $entity     = $hydrator->hydrate($hydrator->extract($entity), $managed);
                 }
 
                 $doctrine->merge($entity);
@@ -343,11 +343,11 @@ class Install
 
             if ('insert' == $data['method'])
             {
-                $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+                $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }
-            elseif (0 === strpos($data['method'], 'update-by-') || 'update' == $data['method'] || 'replace' == $data['method'])
+            elseif (0 === \strpos($data['method'], 'update-by-') || 'update' == $data['method'] || 'replace' == $data['method'])
             {
-                $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
+                $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
             }
 
             $doctrine->flush();

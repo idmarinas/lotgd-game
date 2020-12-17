@@ -36,7 +36,7 @@ class SymfonyForm implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $em                = $container->get(\Lotgd\Core\Db\Doctrine::class);
+        $em = \LotgdKernel::get('doctrine.orm.entity_manager');
         $managerRegistry   = new ManagerRegistry('default', [], ['default' => $em], null, 'default', 'Doctrine\\ORM\\Proxy\\Proxy');
         $csrfGenerator     = new UriSafeTokenGenerator();
         $csrfStorage       = new NativeSessionTokenStorage();
