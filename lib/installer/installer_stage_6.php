@@ -53,7 +53,7 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
             'longDescription'  => null,
             'tags'             => [
                 [
-                    'name'        => 'create',
+                    'name'        => 'created',
                     'description' => \date('M d, Y h:i a'),
                 ],
             ],
@@ -62,6 +62,15 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
     ]);
     unset($configuration);
 
+    $code   = $file->generate();
+    $result = \file_put_contents(\Lotgd\Core\Application::FILE_DB_CONNECT, $code);
+
+    $failure = ! (false !== $result);
+    $success = ! ($failure);
+}
+
+if ( ! \file_exists('.env.local.php'))
+{
     //-- New configuration file ".env.local.php"
     $configuration = [
         'APP_ENV'           => 'prod',
@@ -72,7 +81,7 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
         'DATABASE_PASSWORD' => $session['installer']['dbinfo']['DB_PASS'],
         'DATABASE_HOST'     => 'localhost' == $session['installer']['dbinfo']['DB_HOST'] ? '127.0.0.1' : $session['installer']['dbinfo']['DB_HOST'],
         'DATABASE_DRIVER'   => \strtolower($session['installer']['dbinfo']['DB_DRIVER']),
-        'DATABASE_VERSION'  => "'' //-- Remember configure this",
+        'DATABASE_VERSION'  => '5.5',
     ];
 
     $fileEnv = FileGenerator::fromArray([
@@ -81,7 +90,11 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
             'longDescription'  => null,
             'tags'             => [
                 [
-                    'name'        => 'create',
+                    'name'        => 'important',
+                    'description' => 'Remember configure DATABASE_VERSION with version of your DB Server',
+                ],
+                [
+                    'name'        => 'created',
                     'description' => \date('M d, Y h:i a'),
                 ],
             ],
@@ -89,14 +102,9 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT))
         'body' => 'return '.new ValueGenerator($configuration, ValueGenerator::TYPE_ARRAY_SHORT).';',
     ]);
 
-    $code    = $file->generate();
-    $codeEnv = $fileEnv->generate();
-
-    $result    = \file_put_contents(\Lotgd\Core\Application::FILE_DB_CONNECT, $code);
+    $codeEnv   = $fileEnv->generate();
     $resultEnv = \file_put_contents('.env.local.php', $codeEnv);
 
-    $failure    = ! (false !== $result);
-    $success    = ! ($failure);
     $failureEnv = ! (false !== $resultEnv);
     $successEnv = ! ($failureEnv);
 }
