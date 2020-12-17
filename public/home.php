@@ -118,8 +118,9 @@ if (\is_array($results) && \count($results))
 
 if ( ! \LotgdRequest::getCookie('lgi'))
 {
-    \LotgdFlashMessages::addWarningMessage(LotgdTranslator::t('session.cookies.unactive', [], 'app-default'));
-    \LotgdFlashMessages::addInfoMessage(LotgdTranslator::t('session.cookies.info', [], 'app-default'));
+    $translator = \LotgdKernel::getContainer()->get('translator');
+    \LotgdFlashMessages::addWarningMessage($translator->trans('session.cookies.unactive', [], 'default'));
+    \LotgdFlashMessages::addInfoMessage($translator->trans('session.cookies.info', [], 'default'));
 }
 
 $params['serverFull'] = true;
