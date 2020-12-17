@@ -18,7 +18,7 @@ class Settings implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $settings = new LibSettings();
-        $settings->setDoctrine($container->get(\Lotgd\Core\Db\Doctrine::class))
+        $settings->setDoctrine(\LotgdKernel::get('doctrine.orm.entity_manager'))
             ->setCache($container->get('Cache\Core\Lotgd'))
             ->loadSettings()
         ;

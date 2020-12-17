@@ -52,7 +52,7 @@ trait Doctrine
     {
         if ( ! $this->doctrine instanceof EntityManager)
         {
-            $this->doctrine = $this->getContainer(\Lotgd\Core\Db\Doctrine::class);
+            $this->doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
         }
 
         return $this->doctrine;
