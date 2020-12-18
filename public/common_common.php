@@ -62,6 +62,8 @@ try
 }
 catch (\Throwable $th)
 {
+    Tracy\Debugger::log($th);
+
     //-- Create a .env.local.php
     //-- This code will be deleted in future version
     if (\file_exists('config/autoload/local/dbconnect.php'))
@@ -108,16 +110,14 @@ catch (\Throwable $th)
 
         if (false !== $result)
         {
-            (new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+            $host = $_SERVER['HTTP_HOST'];
 
-            LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
-            LotgdKernel::boot();
+            \header(\sprintf('Location: //%s/%s',
+                $host,
+                'home.php'
+            ));
 
-            //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
-            if ($isDevelopment)
-            {
-                \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
-            }
+            exit();
         }
         else
         {
