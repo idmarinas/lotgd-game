@@ -61,6 +61,7 @@ const config = {
             '!templates/lotgd{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/templates/lotgd" folder
             '!themes{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/themes" folder
             '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations/en" folder
+            '!src/{Controller,Entity,Repository}{,/**}', //-- Not need for now this folders
             //-- Ignore some files
             '!*.{txt,TXT,csv,phar}',
             '!{README.md,TODO.md,phpdoc.dist.xml}',
