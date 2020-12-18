@@ -40,7 +40,7 @@ class RegenerateAppSecretCommand extends Command
             {
                 $fs     = new Filesystem();
                 $secret = \bin2hex(\random_bytes(16));
-                $str    = \preg_replace("/{$matches['secret']}/", "APP_SECRET={$secret}\n", $str);
+                $str    = \preg_replace("/{$matches['secret']}/", "APP_SECRET={$secret}", $str);
 
                 $fs->dumpFile('.env', $str);
 
