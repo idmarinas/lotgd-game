@@ -65,7 +65,7 @@ const config = {
             '!*.{txt,TXT,csv,phar}',
             '!{README.md,TODO.md,phpdoc.dist.xml}',
             //-- Include .files
-            '{/**/.gitkeep,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
+            '{/**/.gitkeep,/.env,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
             //-- Ignore all dist folders
             '!{*.,}dist{,/**}',
             //-- Ignore dependency directories
