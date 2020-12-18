@@ -27,6 +27,7 @@ class HomeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('defaultskin', LotgdThemeType::class, [
+            'required' => false,
             'label' => 'home.defaultskin',
         ]);
         $builder->add('submit', SubmitType::class, [
