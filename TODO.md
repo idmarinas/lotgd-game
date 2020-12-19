@@ -7,12 +7,15 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
+- ...
+
+# Para la versión 4.9.0
 -   Utilizar el symfony translation en algunas páginas
--   Revisar que no se  usa la factoria laminas para doctrine en algunas zonas.
--   Agregar sistema al core, para poder añadir terminos y condiciones y politica de privacidad, sin necesidad de módulo.
+    -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
+-   Agregar sistema al core, para poder añadir terminos y condiciones y politica de privacidad, sin necesidad de módulo.
 -   https://symfony.com/doc/current/components/http_kernel.html
     -   Se migrará 
         -   La configuración
