@@ -7,6 +7,7 @@ const fancyLog = require('fancy-log')
 const colors = require('ansi-colors')
 const del = require('del')
 const normalize = require('normalize-path')
+const fs = require('fs')
 
 //-- Configuration
 const config = require('../config/default')
@@ -20,6 +21,26 @@ module.exports = function (callback)
     //-- This files not is necesary in production
     if (isProduction)
     {
+        (async () =>
+        {
+            const file = config.paths.build.prod + '/.env'
+
+            fs.readFile(file, 'utf8', function (err, data)
+            {
+                if (err)
+                {
+                    return console.log(err)
+                }
+
+                const result = data.replace(/APP_ENV=dev/g, 'APP_ENV=prod')
+
+                fs.writeFile(file, result, 'utf8', function (error)
+                {
+                    if (error) return console.log(error)
+                })
+            })
+        })();
+
         (async () =>
         {
             const deletedPaths = await del([
