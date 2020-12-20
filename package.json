@@ -1,7 +1,7 @@
 {
     "name": "idmarinas-lotgd",
     "title": "The Legend of the Green Dragon",
-    "version": "4.8.0",
+    "version": "4.8.1",
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization for PHP >= 7.2.",
     "time": "2017-04-21",
     "engines": {
