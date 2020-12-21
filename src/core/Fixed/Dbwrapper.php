@@ -17,8 +17,14 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Paginator\Paginator;
 use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated, please use Doctrine instead. "$doctrine = LotgdKernel::get("doctrine.orm.entity_manager")"',
+    Dbwrapper::class
+), E_USER_DEPRECATED);
+
 /**
  * Static class to access a basic functions of DB.
+ * @deprecated 4.4.0
  */
 class Dbwrapper
 {
