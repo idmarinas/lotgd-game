@@ -8,8 +8,8 @@
 
 namespace Lotgd\Core\Lib;
 
-use Laminas\Cache\Storage\StorageInterface;
 use Lotgd\Core\Doctrine\ORM\EntityManager;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class Settings
 {
@@ -36,37 +36,16 @@ class Settings
         }
         elseif ('datacachepath' == $settingname)
         {
-            return $this->cache->getOptions()->getCacheDir();
+            return '"storage/cache" and "var/cache"';
         }
 
-        if ( ! is_array($this->settings) || ('object' == gettype($this) && ! isset($this->settings[$settingname])))
-        {
-            $this->loadSettings();
-        }
+        $this->loadSettings();
 
         if ( ! isset($this->settings[$settingname]))
         {
-            //nothing set, we have to use the default value
-            if (file_exists("lib/data/{$this->tablename}.php"))
-            {
-                require "lib/data/{$this->tablename}.php";
-            }
-
             $setDefault = $default;
 
-            if (false === $default)
-            {
-                $setDefault = '';
-
-                if (isset($defaults[$settingname]))
-                {
-                    $setDefault = $defaults[$settingname];
-                }
-            }
-
             $this->saveSetting($settingname, $setDefault);
-
-            return $setDefault;
         }
 
         return $this->settings[$settingname];
@@ -103,7 +82,9 @@ class Settings
 
         $this->settings[$settingname] = $value;
 
-        $this->cache->setItem($this->getCacheKey(), $this->settings);
+        $item = $this->cache->getItem($this->getCacheKey());
+        $item->set($this->settings);
+        $this->cache->save($item);
 
         return true;
     }
@@ -111,44 +92,53 @@ class Settings
     /**
      * Load all settings in table.
      */
-    public function loadSettings()
+    public function loadSettings(): void
     {
-        $this->settings = $this->cache->getItem($this->getCacheKey());
+        $item = $this->cache->getItem($this->getCacheKey());
 
         //-- Not do nothing if not have connection to DB
         if (false === $this->isConnected())
         {
-            return null;
+            $this->settings = [];
+
+            return;
         }
-        elseif ( ! is_array($this->settings) || empty($this->settings))
+
+        //-- Cache is invalid
+        if ( ! $item->isHit())
         {
             try
             {
-                $this->settings = [];
-                $result         = $this->repository()->findAll();
-
-                if ( ! count($result))
-                {
-                    $this->cache->removeItem($this->getCacheKey());
-
-                    return null;
-                }
+                $sets   = [];
+                $result = $this->repository()->findAll();
 
                 foreach ($result as $row)
                 {
-                    $row                             = $this->repository()->extractEntity($row);
-                    $this->settings[$row['setting']] = $row['value'];
+                    $sets[$row->getSetting()] = $row->getValue();
                 }
 
-                $this->cache->setItem($this->getCacheKey(), $this->settings);
+                $item->expiresAt(new \DateTime('tomorrow'));
+
+                //-- If not found mark as expired
+                if ( ! \count($sets))
+                {
+                    $item->expiresAt(new \DateTime('now'));
+                }
+
+                $item->set($sets);
             }
             catch (\Exception $ex)
             {
                 \bdump('Cant get Settings.');
 
-                $this->settings = [];
+                $item->expiresAfter(1);  // 1 seconds
+
+                $item->set([]);
             }
         }
+
+        $this->cache->save($item);
+        $this->settings = $item->get();
     }
 
     /**
@@ -157,7 +147,7 @@ class Settings
     public function clearSettings()
     {
         //scraps the $this->loadSettings() data to force it to reload.
-        $this->cache->removeItem($this->getCacheKey());
+        $this->cache->delete($this->getCacheKey());
         $this->settings = [];
         $this->loadSettings();
     }
@@ -169,10 +159,7 @@ class Settings
      */
     public function getAllSettings()
     {
-        if ( ! is_array($this->settings) || empty($this->settings))
-        {
-            $this->loadSettings();
-        }
+        $this->loadSettings();
 
         return $this->settings;
     }
@@ -221,7 +208,7 @@ class Settings
     {
         if ( ! $this->repository)
         {
-            $this->repository = $this->doctrine->getRepository('LotgdCore:'.ucfirst($this->tablename));
+            $this->repository = $this->doctrine->getRepository('LotgdCore:'.\ucfirst($this->tablename));
         }
 
         return $this->repository;
@@ -240,7 +227,7 @@ class Settings
      *
      * @return $this
      */
-    public function setCache(StorageInterface $cache)
+    public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
 
