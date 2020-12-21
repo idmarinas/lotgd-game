@@ -86,6 +86,9 @@
     "symfony/dom-crawler": {
         "version": "v5.2.0"
     },
+    "symfony/expression-language": {
+        "version": "v5.2.1"
+    },
     "symfony/framework-bundle": {
         "version": "5.2",
         "recipe": {
