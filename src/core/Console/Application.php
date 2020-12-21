@@ -22,9 +22,10 @@ final class Application extends ConsoleApplication
     protected $serviceManager;
     protected $appKernel;
 
-    public function __construct(ServiceManager $sm)
+    public function __construct(ServiceManager $sm, Kernel $kernel)
     {
         $this->serviceManager = $sm;
+        $this->appKernel = $kernel;
 
         parent::__construct('LoTGD', Kernel::VERSION);
 
@@ -44,16 +45,6 @@ final class Application extends ConsoleApplication
      */
     public function getKernel(): Kernel
     {
-        if ( ! $this->appKernel instanceof Kernel)
-        {
-            /** @var ServiceManager $sm */
-            $sm          = $this->getServiceManager();
-            $config      = $sm->get('GameConfig');
-            $development = $config['lotgd_core']['development'] ?? false;
-
-            $this->appKernel = new Kernel($development ? 'dev' : 'prod', $development);
-        }
-
         return $this->appKernel;
     }
 

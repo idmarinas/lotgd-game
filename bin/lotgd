@@ -3,8 +3,10 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Lotgd\Core\Console\Application;
+use Lotgd\Core\Kernel;
 use Lotgd\Core\ServiceManager;
 use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Dotenv\Dotenv;
 
 if ( ! \in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true))
 {
@@ -22,9 +24,8 @@ require_once \dirname(__DIR__).'/lib/constants.php';
 $isDev = \file_exists(\dirname(__DIR__).'/config/development.config.php');
 
 $input = new ArgvInput();
-$env   = $input->getParameterOption(['--env', '-e'], $isDev, true);
 
-if (null !== $env)
+if (null !== $env = $input->getParameterOption(['--env', '-e'], $isDev, true))
 {
     \putenv('APP_ENV='.$_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $env);
 }
@@ -36,7 +37,10 @@ AnnotationRegistry::registerLoader(
     }
 );
 
-$serviceManager = new ServiceManager();
+(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
 
-$application = new Application($serviceManager);
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$sm     = new ServiceManager();
+
+$application = new Application($sm, $kernel);
 $application->run($input);
