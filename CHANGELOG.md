@@ -13,7 +13,20 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   Migrating to Symfony Cache.
+    -   Some parts of LoTGD Core use Symfony Cache instad of Laminas Cache.
+    -   Can create your pools or use default app cache.
+        -   `LotgdKernel::get('cache.app')` for use default cache app
+    -   Example for create new cache pools:
+        ```yaml
+            framework:
+                cache:
+                    # Namespaced pools use the above "app" backend by default
+                    pools:
+                        core.settings.cache:
+                            adapter: cache.app # Use default configuration
+                            public: true
+        ```
 
 ### :star: FEATURES
 
@@ -23,7 +36,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Nothing
 
-### :x: REMOVES
+### :x: REMOVES and/or Break Changes
 
 -   Nothing
 

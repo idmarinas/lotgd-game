@@ -7,18 +7,17 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Revisar las exclusiones en los services (commands)
--   Lotgd console, pasarle el kernel nuevo, no crear uno "falso"  y ademas el service manager  
+-   Revisar para sustituir Laminas Request y Response
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
--   Revisar la installación, para comprobar errores DB
+-   Revisar la installación, para comprobar errores DB::
 
 # Para la versión 4.10.0
 - ...
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
--   Agregar sistema al core, para poder añadir terminos y condiciones y politica de privacidad, sin necesidad de módulo.
+-   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
 -   https://symfony.com/doc/current/components/http_kernel.html
     -   Se migrará 
         -   La configuración
@@ -44,7 +43,7 @@
 # Para la versión >= 7.0.0 
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 -   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework.
--   Los módulos antiguos seguiran funcionando hasta la versión 6.0.0 donde se eliminará el viejo sistema
+-   Los módulos antiguos seguiran funcionando hasta la versión 8.0.0 (o alguna versión más adelante) donde se eliminará el viejo sistema
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 -   Esto se descarta a favor de módulos tipo Bundle (Synfony Framework)
     -   ???? Crear el nuevo sistema de módulos
