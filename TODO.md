@@ -7,11 +7,14 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
-- ...
-
-# Para la versión 4.9.0
+-   Revisar las exclusiones en los services (commands)
+-   Lotgd console, pasarle el kernel nuevo, no crear uno "falso"  y ademas el service manager  
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
+-   Revisar la installación, para comprobar errores DB
+
+# Para la versión 4.10.0
+- ...
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
