@@ -45,11 +45,10 @@ services:
             - '../src/local/Command/'
             - '../src/local/Exception/'
             - '../src/local/Factory/'
-            - '../src/local/Entity/'
             - '../src/local/Fixed/'
             - '../src/local/Installer/'
-            - '../src/local/Twig/'
             - '../src/local/Tests/'
+            - '../src/local/Twig/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
