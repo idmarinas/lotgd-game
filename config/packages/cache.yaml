@@ -17,5 +17,5 @@ framework:
         # Namespaced pools use the above "app" backend by default
         pools:
             core.settings.cache:
-                adapter: cache.app
+                adapter: cache.app # Use some configuration of app cache
                 public: true
