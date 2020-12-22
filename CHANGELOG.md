@@ -13,8 +13,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Migrating to Symfony Cache.
+-   _Migrating_ to **Symfony Cache**.
     -   Some parts of LoTGD Core use Symfony Cache instad of Laminas Cache.
+        -   Core settings
     -   Can create your pools or use default app cache.
         -   `LotgdKernel::get('cache.app')` for use default cache app
     -   Example for create new cache pools:
@@ -32,6 +33,13 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Nothing
 
+### :fire: DEPRECATED
+
+-   **Laminas Cache** is deprecated since 4.9.0
+    -   `Cache\Core\Lotgd` use `$cache = \LotgdKernel::get('cache.app');` instead, for default app cache.
+    -   For create your own cache, can add new pools in `config/packages/cache.yaml`. See in CHANGES section
+    -   Fixed class **src/core/Fixed/Cache.php** is deprecated since 4.9.0
+
 ### :wrench: FIXES
 
 -   Nothing
@@ -42,9 +50,6 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :notebook: NOTES
 
--   **Added lazy services**.
-    -   These services are not always necessary (some are deprecated), so they are only created the first time they are needed.
-        -   ...
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 

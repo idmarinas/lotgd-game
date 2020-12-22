@@ -8,6 +8,7 @@
 
 # Actualmente haciendo esto
 -   Revisar para sustituir Laminas Request y Response
+-   Reemplazando parte del uso de `LotgdCache::` por `$cache = LotgdKernel::get('cache.app')`
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 -   Revisar la installación, para comprobar errores DB::
