@@ -17,6 +17,7 @@ section:
         note: 'It is not possible to activate or deactivate the cache of the game "Cache\Core\Lotgd", "Cache\Core\Cronjob" and "Cache\Core\Translator" it is not possible remove them, the game expects them to be configured.'
         unmanage: 'It is not possible to administer the Doctrine cache, it is self-managed.'
         twig_warning: 'Warning: With Twig Template cache, when you click on any of the buttons, they will have the same effect, empty the "storage/cache/template" dir completely'
+        deprecated_warning: 'All caches listed here except "Twig templates" use the old Laminas Cache system which is obsolete. At the moment it is not possible to perform optimization and cleaning tasks with Symfony Cache.'
     cronjob:
         details: 'Details'
         table:
