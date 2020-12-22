@@ -11,6 +11,12 @@
  * It's best to create your own cache by following these examples.
  */
 
+/**
+ * Usage of Laminas Cache are deprecated. Use Symfony Cache. Default app cache: "\LotgdKernel::get('cache.app');".
+ * Can add more caches by adding new pools in file "config/packages/cache.yaml"
+ *
+ * @deprecated 4.9.0
+ */
 return [
     'caches' => [
         //-- This is a main cache of Game, please not modify

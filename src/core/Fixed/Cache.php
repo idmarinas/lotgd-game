@@ -15,6 +15,14 @@ namespace Lotgd\Core\Fixed;
 
 use Laminas\Cache\Storage\StorageInterface;
 
+\trigger_error(\sprintf(
+    'Class %s is deprecated, please use Doctrine instead. "$cache = \LotgdKernel::get("cache.app")"',
+    Cache::class
+), E_USER_DEPRECATED);
+
+/**
+ * @deprecated 4.9.0
+ */
 class Cache
 {
     /**
