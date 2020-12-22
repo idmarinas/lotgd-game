@@ -123,7 +123,7 @@ class Response extends HttpResponse
 
         if ($force || isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT)
         {
-            $this->pageAddContent('<div class="debug">'.\Tracy\Debugger::dump($text, true).'</div>');
+            $this->pageAddContent(\Tracy\Debugger::dump($text, true));
         }
     }
 
