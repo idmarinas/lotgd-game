@@ -135,9 +135,10 @@ class Settings
 
                 $item->set([]);
             }
+
+            $this->cache->save($item);
         }
 
-        $this->cache->save($item);
         $this->settings = $item->get();
     }
 
