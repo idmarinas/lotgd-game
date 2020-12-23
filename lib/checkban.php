@@ -13,10 +13,8 @@ function checkban($login = false)
     }
     elseif (false === $login)
     {
-        $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
-        $cookie  = $request->getCookie();
-        $ip      = $request->getServer('REMOTE_ADDR');
-        $id      = $cookie->offsetExists('lgi') ? $cookie->offsetGet('lgi') : '';
+        $ip = \LotgdRequest::getServer('REMOTE_ADDR');
+        $id = \LotgdRequest::getCookie('lgi', '');
     }
     else
     {
