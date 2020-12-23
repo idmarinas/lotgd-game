@@ -36,14 +36,18 @@ if ($seen)
 
 $commentary = new \Lotgd\Core\Output\Commentary();
 $params['sectionName'] = $commentary->commentaryLocs();
-$sections = \LotgdCache::getItem('commentary-published-sections');
+$cache = \LotgdKernel::get('cache.app');
+$item = $cache->getItem('commentary-published-sections');
 
-if (! is_array($sections) || ! count($sections))
+if (! $item->isHit())
 {
     $sections = $repository->getPublishedSections();
 
-    \LotgdCache::setItem('commentary-published-sections', $sections);
+    $item->set($sections);
+    $cache->save($item);
 }
+
+$sections = $item->get();
 
 \LotgdNavigation::addHeader('moderate.category.sections');
 ($session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO) && \LotgdNavigation::addNavNotl($params['sectionName']['superuser'], 'moderate.php?area=superuser');

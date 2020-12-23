@@ -81,9 +81,10 @@ class Commentary
         //-- Add data of clan
         if ($session['user']['clanid'] && $session['user']['clanrank'])
         {
-            $clanInfo = \LotgdCache::getItem("commentary-claninfo-{$session['user']['clanid']}");
+            $cache = \LotgdKernel::get('cache.app');
+            $item = $cache->getItem("commentary-claninfo-{$session['user']['clanid']}");
 
-            if ( ! is_array($clanInfo) || empty($clanInfo))
+            if ( ! $item->isHit())
             {
                 $clanRep  = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
@@ -91,8 +92,11 @@ class Commentary
 
                 $clanInfo['clanrank'] = $session['user']['clanrank'];
 
-                \LotgdCache::setItem("commentary-claninfo-{$session['user']['clanid']}", $clanInfo);
+                $item->set($clanInfo);
+                $cache->save($clanInfo);
             }
+
+            $clanInfo = $item->get();
 
             $post['clanId']        = $session['user']['clanid'];
             $post['clanRank']      = $session['user']['clanrank'];
@@ -285,35 +289,35 @@ class Commentary
      */
     public function commentaryLocs(): array
     {
-        $comsecs = \LotgdCache::getItem('commentary-comsecs');
+        $cache = \LotgdKernel::get('cache.app');
+        $item = $cache->getItem('commentary-comsecs');
 
-        if (is_array($comsecs) && count($comsecs))
+        if ( ! $item->isHit())
         {
-            return $comsecs;
+            $domain = 'app-commentary';
+
+            $comsecs                = [];
+            $comsecs['village']     = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
+            $comsecs['superuser']   = \LotgdTranslator::t('section.superuser', [], $domain);
+            $comsecs['shade']       = \LotgdTranslator::t('section.shade', [], $domain);
+            $comsecs['grassyfield'] = \LotgdTranslator::t('section.grassyfield', [], $domain);
+            $comsecs['inn']         = getsetting('innname', LOCATION_INN);
+            $comsecs['motd']        = \LotgdTranslator::t('section.motd', [], $domain);
+            $comsecs['veterans']    = \LotgdTranslator::t('section.veterans', [], $domain);
+            $comsecs['hunterlodge'] = \LotgdTranslator::t('section.hunterlodge', [], $domain);
+            $comsecs['gardens']     = \LotgdTranslator::t('section.gardens', [], $domain);
+            $comsecs['waiting']     = \LotgdTranslator::t('section.waiting', [], $domain);
+            $comsecs['beta']        = \LotgdTranslator::t('section.beta', [], $domain);
+
+            // All of the ones after this will be translated in the modules.
+            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
+            $comsecs = modulehook('moderate-comment-sections', $comsecs);
+
+            $item->set($comsecs);
+            $cache->save($item);
         }
 
-        $domain = 'app-commentary';
-
-        $comsecs                = [];
-        $comsecs['village']     = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
-        $comsecs['superuser']   = \LotgdTranslator::t('section.superuser', [], $domain);
-        $comsecs['shade']       = \LotgdTranslator::t('section.shade', [], $domain);
-        $comsecs['grassyfield'] = \LotgdTranslator::t('section.grassyfield', [], $domain);
-        $comsecs['inn']         = getsetting('innname', LOCATION_INN);
-        $comsecs['motd']        = \LotgdTranslator::t('section.motd', [], $domain);
-        $comsecs['veterans']    = \LotgdTranslator::t('section.veterans', [], $domain);
-        $comsecs['hunterlodge'] = \LotgdTranslator::t('section.hunterlodge', [], $domain);
-        $comsecs['gardens']     = \LotgdTranslator::t('section.gardens', [], $domain);
-        $comsecs['waiting']     = \LotgdTranslator::t('section.waiting', [], $domain);
-        $comsecs['beta']        = \LotgdTranslator::t('section.beta', [], $domain);
-
-        // All of the ones after this will be translated in the modules.
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
-        $comsecs = modulehook('moderate-comment-sections', $comsecs);
-
-        \LotgdCache::setItem('commentary-comsecs', $comsecs);
-
-        return $comsecs;
+        return $item->get();
     }
 
     /**
