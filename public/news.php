@@ -91,7 +91,7 @@ if ($session['user']['loggedin'])
 //-- Superuser menu
 \LotgdNavigation::superuser();
 
-\DB::pagination($params['result'], "news.php?day={$day}");
+\LotgdNavigation::pagination($params['result'], "news.php?day={$day}");
 
 $params['SU_EDIT_COMMENTS'] = $session['user']['superuser'] & SU_EDIT_COMMENTS;
 
