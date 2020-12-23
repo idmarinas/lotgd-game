@@ -53,6 +53,7 @@ class Request extends HttpRequest
      */
     public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
     {
+        $this->cookies->set($name, $value);
         \LotgdResponse::_i()->headers->setCookie(Cookie::create($name, $value, strtotime($duration), $path, $domain, $secure, $httponly));
     }
 
