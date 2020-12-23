@@ -21,7 +21,7 @@ use Lotgd\Core\Template\Theme as Environment;
 trait Translator
 {
     /**
-     * Translate a string using translator.
+     * Translate a string using Laminas Translator.
      *
      * @param string $message
      * @param array  $parameters
@@ -38,6 +38,26 @@ trait Translator
         $nl2br = $env->getFilter('nl2br')->getCallable();
 
         return $nl2br($this->getTranslator()->trans($message, $parameters, $domain, $locale));
+    }
+
+    /**
+     * Translate a string using Symfony Translator.
+     *
+     * @param string $message
+     * @param array  $parameters
+     * @param string $domain
+     * @param string $locale
+     */
+    public function symfonyTrans(Environment $env, $message, $parameters = [], $domain = null, $locale = null): string
+    {
+        if ( ! $message)
+        {
+            return '';
+        }
+
+        $nl2br = $env->getFilter('nl2br')->getCallable();
+
+        return $nl2br($this->symfonyTranslator()->trans($message, $parameters, $domain, $locale));
     }
 
     /**
@@ -83,6 +103,18 @@ trait Translator
      */
     public function translatorDefaultLocale(): string
     {
-        return $this->getTranslator()->getLocale();
+        //-- Priorize locale of Symfony translator
+        if ($this->symfonyTranslator()->getLocale() == $this->getTranslator()->getLocale())
+        {
+            return $this->symfonyTranslator()->getLocale();
+        }
+
+        //-- Warning in bdump if not are equal
+        bdump(sprintf('Laminas i18m "%s" Symfony Translator "%s"',
+            $this->getTranslator()->getLocale(),
+            $this->symfonyTranslator()->getLocale()
+        ), 'Locales of translator not equal');
+
+        return $this->symfonyTranslator()->getLocale();
     }
 }
