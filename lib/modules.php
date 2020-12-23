@@ -368,35 +368,6 @@ function get_racename($thisuser = true)
     return \LotgdTranslator::t('character.racename', [], $thisuser);
 }
 
-function module_delete_oldvalues($table, $key)
-{
-    require_once 'lib/gamelog.php';
-
-    $total = 0;
-    $res   = DB::query('SELECT modulename FROM '.DB::prefix('modules')." WHERE infokeys LIKE '%|{$key}|%'");
-
-    while ($row = DB::fetch_assoc($res))
-    {
-        $mod = $row['modulename'];
-
-        require_once "modules/{$mod}.php";
-
-        $func = "{$mod}_getmoduleinfo";
-        $info = $func();
-        $keys = \array_filter(\array_keys($info[$key]), 'module_pref_filter');
-        $keys = \array_map('addslashes', $keys);
-        $keys = \implode("','", $keys);
-
-        if ($keys)
-        {
-            DB::query('DELETE FROM '.DB::prefix($table)." WHERE modulename='{$mod}' AND setting NOT IN ('{$keys}')");
-        }
-        $total += DB::affected_rows();
-    }
-
-    gamelog("Cleaned up {$total} old values in {$table} that don't exist anymore", 'maintenance');
-}
-
 function module_pref_filter($a)
 {
     return ! \is_numeric($a);
