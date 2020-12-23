@@ -63,7 +63,7 @@ function get_module_setting($name, $module = false)
             }
         }
 
-        return;
+        return null;
     }
 }
 
@@ -104,7 +104,7 @@ function set_module_setting($name, $value, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-settings-{$module}");
+    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -138,7 +138,7 @@ function increment_module_setting($name, $value = 1, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-settings-{$module}");
+    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -156,7 +156,7 @@ function clear_module_settings($module = false)
     }
 
     \LotgdResponse::pageDebug("Deleted module settings cache for {$module}.");
-    LotgdCache::removeItem("module-settings-{$module}");
+    \LotgdKernel::get('cache.app')->delete("module-settings-{$module}");
 }
 
 /**
@@ -166,9 +166,10 @@ function clear_module_settings($module = false)
  */
 function load_module_settings($module): array
 {
-    $module_settings = \LotgdCache::getItem("module-settings-{$module}");
+    $cache = \LotgdKernel::get('cache.app');
+    $item  = $cache->getItem("module-settings-{$module}");
 
-    if ( ! \is_array($module_settings))
+    if ( ! $item->isHit())
     {
         $repository = \Doctrine::getRepository('LotgdCore:ModuleSettings');
         $result     = $repository->findBy(['modulename' => $module]);
@@ -180,8 +181,9 @@ function load_module_settings($module): array
             $module_settings[$val->getSetting()] = $val->getValue();
         }
 
-        \LotgdCache::setItem("module-settings-{$module}", $module_settings);
-    }//end if
+        $item->set($module_settings);
+        $cache->save($item);
+    }
 
-    return $module_settings;
+    return $item->get();
 }

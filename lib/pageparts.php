@@ -363,7 +363,11 @@ function charstats($return = true)
         return;
     }
 
-    if ( ! $ret = \LotgdCache::getItem('charlisthomepage'))
+    $cache = \LotgdKernel::get('cache.app');
+
+    $item = $cache->getItem('char-list-home-page');
+
+    if ( ! $item->isHit())
     {
         $onlinecount = 0;
         // If a module wants to do it's own display of the online chars, let it.
@@ -384,13 +388,10 @@ function charstats($return = true)
             if (\Doctrine::isConnected())
             {
                 $repository  = \Doctrine::getRepository('LotgdCore:Accounts');
-                $result      = $repository->getListAccountsOnline();
-                $onlinecount = \count($result);
+                $onlinecount = $repository->count(['loggedin' => '1', 'locked' => '0']);
             }
 
-            $tpl = \LotgdTheme::load('{theme}/_blocks/_partials.html.twig');
-
-            $ret = $tpl->renderBlock('online_list', [
+            $ret = \LotgdTheme::renderBlock('online_list', '{theme}/_blocks/_partials.html.twig', [
                 'list'        => $result,
                 'onlineCount' => $onlinecount,
                 'textDomain'  => 'page-home',
@@ -399,8 +400,12 @@ function charstats($return = true)
 
         savesetting('OnlineCount', $onlinecount);
         savesetting('OnlineCountLast', \strtotime('now'));
-        \LotgdCache::setItem('charlisthomepage', $ret);
+
+        $item->expiresAfter(600);
+        $item->set($ret);
+
+        $cache->save($item);
     }
 
-    return $ret;
+    return $item->get();
 }

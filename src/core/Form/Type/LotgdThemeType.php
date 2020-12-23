@@ -63,11 +63,10 @@ class LotgdThemeType extends ChoiceType
      */
     private function getThemeList(): array
     {
-        $cacheKey = 'lotgd-core-pattern-theme-list';
+        $cache = \LotgdKernel::get('cache.app');
+        $item = $cache->getItem('lotgd-core-pattern-theme-list');
 
-        $skins = \LotgdCache::getItem($cacheKey);
-
-        if ( ! \is_array($skins))
+        if ( ! $item->isHit())
         {
             // A generic way of allowing a theme to be selected.
             $handle = @\opendir('themes');
@@ -89,9 +88,11 @@ class LotgdThemeType extends ChoiceType
                 }
             }
 
-            \LotgdCache::setItem($cacheKey, $skins);
+            $item->expiresAt(new \DateTime('tomorrow'));
+            $item->set($skins);
+            $cache->save($item);
         }
 
-        return $skins;
+        return $item->get();
     }
 }

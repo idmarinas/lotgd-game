@@ -179,7 +179,7 @@ if ('' != $name)
     $session['sentnotice'] = 0;
     $session['user']['laston'] = new \DateTime('now');
 
-    LotgdCache::removeItem('charlisthomepage');
+    \LotgdKernel::get('cache.app')->delete('char-list-home-page');
     LotgdCache::removeItem('list.php-warsonline');
 
     // Handle the change in number of users online
@@ -238,7 +238,7 @@ elseif ('logout' == $op)
 
         $session['user']['loggedin'] = false;
 
-        LotgdCache::removeItem('charlisthomepage');
+        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
         LotgdCache::removeItem('list.php-warsonline');
 
         // Let's throw a logout module hook in here so that modules

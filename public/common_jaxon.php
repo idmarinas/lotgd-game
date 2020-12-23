@@ -138,7 +138,7 @@ if (getsetting('fullmaintenance', 0))
             $session['user']['restorepage'] = 'inn.php?op=strolldown';
         }
 
-        LotgdCache::removeItem('charlisthomepage');
+        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
         LotgdCache::removeItem('list.php-warsonline');
 
         saveuser();

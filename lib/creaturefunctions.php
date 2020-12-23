@@ -10,11 +10,13 @@
  */
 function lotgd_generate_creature_levels($level = null)
 {
+    $cache = \LotgdKernel::get('cache.app');
     $maxlvl = getsetting('maxlevel', 15) + 5;
-    $stats  = \LotgdCache::getItem("lotgd-generate-creature-levels-{$maxlvl}");
+    $item  = $cache->getItem("lotgd-generate-creature-levels-{$maxlvl}");
 
-    if (empty($stats))
+    if ( ! $item->isHit())
     {
+        $stats = [];
         $creatureexp     = 14;
         $creaturegold    = 36;
         $creaturedefense = 0;
@@ -42,8 +44,11 @@ function lotgd_generate_creature_levels($level = null)
             ];
         }
 
-        \LotgdCache::setItem("lotgd-generate-creature-levels-{$maxlvl}", $stats);
+        $item->set($stats);
+        $cache->save($item);
     }
+
+    $stats = $item->get();
 
     return $stats[$level] ?? $stats;
 }
