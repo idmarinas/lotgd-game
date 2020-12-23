@@ -169,7 +169,7 @@ class Collector
 
         if ($force || isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT)
         {
-            $this->rawoutput('<div class="debug">'.\Tracy\Debugger::dump($text, true).'</div>');
+            $this->rawoutput(\Tracy\Debugger::dump($text, true));
         }
 
         $this->set_block_new_output($temp);
