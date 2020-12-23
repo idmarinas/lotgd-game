@@ -12,8 +12,8 @@ $textDomain = 'grotto-globaluserfunctions';
 
 \LotgdNavigation::superuserGrottoNav();
 
-\LotgdRequest::addHeader('globaluserfunctions.category.actions');
-\LotgdRequest::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
+\LotgdNavigation::addHeader('globaluserfunctions.category.actions');
+\LotgdNavigation::addAdd('globaluserfunctions.nav.reset', 'globaluserfunctions.php?op=dkpointreset');
 
 $op = (string) \LotgdRequest::getQuery('op');
 $params = [];
@@ -21,8 +21,8 @@ $params = [];
 switch ($op)
 {
     case 'dkpointreset':
-        \LotgdRequest::addHeader('globaluserfunctions.category.dragonpoints');
-        \LotgdRequest::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
+        \LotgdNavigation::addHeader('globaluserfunctions.category.dragonpoints');
+        \LotgdNavigation::addNav('globaluserfunctions.nav.reset.now', 'globaluserfunctions.php?op=dkpointresetnow');
     break;
     case 'dkpointresetnow':
         \ServerFunctions::resetAllDragonkillPoints();
