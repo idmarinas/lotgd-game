@@ -115,7 +115,7 @@ class Request extends HttpRequest
      */
     public function getPost($name, $default = null)
     {
-        $this->request->get($name, $default);
+        return $this->request->get($name, $default);
     }
 
     /**
