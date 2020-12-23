@@ -13,14 +13,14 @@
 
 namespace Lotgd\Core\Fixed;
 
-use  Lotgd\Core\Session as CoreSession;
+use  Symfony\Component\HttpFoundation\Session\Session as CoreSession;
 
 class Session
 {
     /**
      * Instance of Session.
      *
-     * @var Lotgd\Core\Session
+     * @var Symfony\Component\HttpFoundation\Session\Session
      */
     protected static $instance;
 

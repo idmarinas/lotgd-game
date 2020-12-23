@@ -35,16 +35,23 @@ if ($isDevelopment)
 \defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
 \defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
+use Lotgd\Core\Fixed\Cache as LotgdCache;
+use Lotgd\Core\Fixed\Dbwrapper as DB;
+use Lotgd\Core\Fixed\Doctrine;
+use Lotgd\Core\Fixed\EventManager as LotgdEvent;
+use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
+use Lotgd\Core\Fixed\Format as LotgdFormat;
+use Lotgd\Core\Fixed\HookManager as LotgdHook;
 use Lotgd\Core\Fixed\Kernel as LotgdKernel;
 use Lotgd\Core\Fixed\Locator as LotgdLocator;
+use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
+use Lotgd\Core\Fixed\Request as LotgdRequest;
+use Lotgd\Core\Fixed\Response as LotgdReponse;
+use Lotgd\Core\Fixed\Sanitize as LotgdSanitize;
 use Lotgd\Core\Fixed\Session as LotgdSession;
+use Lotgd\Core\Fixed\Theme as LotgdTheme;
+use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 use Symfony\Component\Dotenv\Dotenv;
-
-//-- Prepare service manager
-LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
-
-//-- Configure Session
-LotgdSession::instance(LotgdLocator::get(\Lotgd\Core\Session::class));
 
 //-- Prepare LoTGD Kernel
 try
@@ -66,7 +73,7 @@ catch (\Throwable $th)
 
     //-- Create a .env.local.php
     //-- This code will be deleted in future version
-    if (\file_exists('config/autoload/local/dbconnect.php') && ! file_exists('.env.local.php'))
+    if (\file_exists('config/autoload/local/dbconnect.php') && ! \file_exists('.env.local.php'))
     {
         //-- Check if exist old dbconnect.php and updated to new format
         //-- Only for upgrade from previous versions (1.0.0 IDMarinas edition and up / 2.7.0 IDMarinas edition and below)
@@ -129,21 +136,49 @@ catch (\Throwable $th)
             $message .= "When you have that done, save the file as '.env.local.php' and upload this to the location you have LoGD at.";
             $message .= 'You can refresh this page to see if you were successful.';
 
-            die($message);
+            exit($message);
         }
     }
     //-- End - This code will be deleted in future version
 }
 
+/*
+ * Prepare static classes
+ */
+
+//-- Configure Session
+LotgdSession::instance(LotgdKernel::get('session'));
 //-- Init session
-try
-{
-    LotgdSession::bootstrapSession();
-}
-catch (\Throwable $th)
-{
-    LotgdSession::bootstrapSession(true);
-}
+LotgdSession::start();
+
+//-- Prepare service manager
+LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
+//-- Configure DB
+DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
+//-- Configure Doctrine
+Doctrine::wrapper(LotgdKernel::get('doctrine.orm.entity_manager'));
+//-- Configure Flash Messages
+LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMessages::class));
+//-- Configure format instance
+LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
+//-- Configure Request instance
+LotgdRequest::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
+//-- Configure Response instance
+LotgdReponse::instance(LotgdLocator::get(\Lotgd\Core\Http\Response::class));
+//-- Configure Navigation instance
+LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
+//-- Configure Theme template
+LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
+//-- Configure Sanitize instance
+LotgdSanitize::instance(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
+//-- Configure Translator
+LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
+//-- Configure Cache instance
+LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
+//-- Configure Hook Manager instance
+LotgdHook::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Hook::class));
+//-- Configure Event Manager instance
+LotgdEvent::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Event::class));
 
 $session = &$_SESSION['session'];
 

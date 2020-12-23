@@ -248,7 +248,7 @@ elseif ('logout' == $op)
         modulehook('player-logout');
         saveuser();
 
-        \LotgdSession::sessionLogOut();
+        \LotgdSession::invalidate();
 
         \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page-login'));
     }
@@ -258,7 +258,7 @@ elseif ('logout' == $op)
 }
 
 //- If you enter an empty username, don't just say oops.. do something useful.
-\LotgdSession::sessionLogOut();
+\LotgdSession::invalidate();
 \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page-login'));
 
 return redirect('index.php');

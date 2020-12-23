@@ -29,7 +29,6 @@ return [
             /* LAZY */ Lotgd\Core\Pvp\Listing::class           => Factory\Pvp\Listing::class,
             Lotgd\Core\Tool\Sanitize::class                    => Factory\Tool\Sanitize::class,
             Lotgd\Core\Translator\Translator::class            => Factory\Translator\Translator::class, //-- Deprecated - migrate to Symfony Translation
-            Lotgd\Core\Session::class                          => Factory\Session::class,
             Laminas\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
             Laminas\Session\Config\ConfigInterface::class      => Laminas\Session\Service\SessionConfigFactory::class,
             Laminas\Session\ManagerInterface::class            => Laminas\Session\Service\SessionManagerFactory::class,

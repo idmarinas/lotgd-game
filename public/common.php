@@ -10,8 +10,6 @@
 // Please see the file LICENSE for a full textual description of the license.txt.
 require_once 'common_common.php';
 
-//-- Prepare static classes
-require_once 'lib/class/static.php';
 // Include some commonly needed and useful routines
 require_once 'lib/output.php';
 require_once 'lib/settings.php';
@@ -175,7 +173,7 @@ if (getsetting('fullmaintenance', 0))
 
         saveuser();
 
-        \LotgdSession::sessionLogOut();
+        \LotgdSession::invalidate();
 
         $session = [];
 
