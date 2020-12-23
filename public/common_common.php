@@ -66,7 +66,7 @@ catch (\Throwable $th)
 
     //-- Create a .env.local.php
     //-- This code will be deleted in future version
-    if (\file_exists('config/autoload/local/dbconnect.php'))
+    if (\file_exists('config/autoload/local/dbconnect.php') && ! file_exists('.env.local.php'))
     {
         //-- Check if exist old dbconnect.php and updated to new format
         //-- Only for upgrade from previous versions (1.0.0 IDMarinas edition and up / 2.7.0 IDMarinas edition and below)
