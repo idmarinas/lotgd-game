@@ -54,6 +54,14 @@ class Response
     {
         self::$instance = $instance;
     }
+
+    /**
+     * Get the instance.
+     */
+    public static function _i()
+    {
+        return self::$instance;
+    }
 }
 
 class_alias('Lotgd\Core\Fixed\Response', 'LotgdResponse', false);

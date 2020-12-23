@@ -41,8 +41,8 @@ class Session
 
         $session->regenerateId(true);
         $container->init          = 1;
-        $container->remoteAddr    = $request->getServer()->get('REMOTE_ADDR');
-        $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
+        $container->remoteAddr    = $request->getServer('REMOTE_ADDR');
+        $container->httpUserAgent = $request->getServer('HTTP_USER_AGENT');
         $config                   = $this->getContainer('GameConfig');
 
         if ( ! isset($config['session_manager']))

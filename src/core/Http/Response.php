@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Http;
 
-use Laminas\Http\PhpEnvironment\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Hook;
 use Lotgd\Core\Pattern;
@@ -51,9 +51,9 @@ class Response extends HttpResponse
             $this->pageTitle($title, $parameters, $textDomain, $locale);
         }
 
-        $script = $this->getHttpRequest()->getServer('SCRIPT_NAME');
+        $script = \LotgdRequest::getServer('SCRIPT_NAME');
         $script = \substr($script, 0, \strpos($script, '.'));
-        $module = (string) $this->getHttpRequest()->getQuery('module');
+        $module = (string) \LotgdRequest::getQuery('module');
 
         $args = ['script' => $script, 'module' => $module];
         $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
@@ -136,9 +136,9 @@ class Response extends HttpResponse
     {
         global $session;
 
-        $script = $this->getHttpRequest()->getServer('SCRIPT_NAME');
+        $script = \LotgdRequest::getServer('SCRIPT_NAME');
         $script = \substr($script, 0, \strpos($script, '.'));
-        $module = (string) $this->getHttpRequest()->getQuery('module');
+        $module = (string) \LotgdRequest::getQuery('module');
 
         $replacementbits = ['script' => $script, '__scriptfile__' => $script, 'module' => $module];
         $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
@@ -214,9 +214,10 @@ class Response extends HttpResponse
         $this->getDoctrine()->clear();
 
         $this->setContent($browserOutput);
+        $this->prepare(\LotgdRequest::_i()); //-- Fix any incompatibility with the HTTP specification
 
         //-- Send content to browser
-        $this->sendContent();
+        $this->send();
 
         exit();
     }

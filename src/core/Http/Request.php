@@ -13,11 +13,12 @@
 
 namespace Lotgd\Core\Http;
 
-use Laminas\Http\Header\Cookie;
-use Laminas\Http\PhpEnvironment\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class Request extends HttpRequest
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,20 +26,113 @@ class Request extends HttpRequest
     {
         if ('REQUEST_URI' == $name || 'SCRIPT_NAME' == $name)
         {
-            return $this->sanitizeUri(parent::getServer($name, $default));
+            return $this->sanitizeUri($this->server->get($name, $default));
         }
 
-        return parent::getServer($name, $default);
+        return $this->server->get($name, $default);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCookie()
+    public function getCookie($name, $default = null)
     {
-        $cookie = parent::getCookie();
+        return $this->cookies->get($name, $default);
+    }
 
-        return $cookie ?: new Cookie();
+    /**
+     * Send a cookie.
+     *
+     * @param string $name
+     * @param string $value
+     * @param string $duration
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     * @param bool   $httponly
+     */
+    public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
+    {
+        \LotgdResponse::_i()->headers->setCookie(Cookie::create($name, $value, strtotime($duration), $path, $domain, $secure, $httponly));
+    }
+
+    /**
+     * Return all get parameters.
+     */
+    public function getQueryAll(): array
+    {
+        return $this->query->all();
+    }
+
+    /**
+     * Return a parameter.
+     */
+    public function getQuery($name, $default = null)
+    {
+        return $this->query->get($name, $default);
+    }
+
+    /**
+     * Set single get parameter.
+     *
+     * @param mixed $value
+     * @param bool  $force
+     */
+    public function setQuery(string $name, $value)
+    {
+        $this->query->set($name, $value);
+    }
+
+    /**
+     * Check if "name" are in post data.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function existInPost($name)
+    {
+        return $this->request->has($name);
+    }
+
+    /**
+     * Set single post parameter.
+     *
+     * @param string $name
+     * @param mixed  $val
+     */
+    public function setPost($name, $val)
+    {
+        $this->request->set($name, $val);
+    }
+
+    /**
+     * Get single post parameter.
+     *
+     * @param string $name
+     * @param mixed  $default
+     */
+    public function getPost($name, $default = null)
+    {
+        $this->request->get($name, $default);
+    }
+
+    /**
+     * Get all post data.
+     */
+    public function getPostAll()
+    {
+        return $this->request->all();
+    }
+
+    /**
+     * Check if is a post request.
+     *
+     * @return bool
+     */
+    public function isPost()
+    {
+        return $this->isMethod('post');
     }
 
     /**

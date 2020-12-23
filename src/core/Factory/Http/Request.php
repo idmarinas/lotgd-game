@@ -7,22 +7,19 @@
  *
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  *
- * @since 4.4.0
+ * @since 4.9.0
  */
 
 namespace Lotgd\Core\Factory\Http;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Lotgd\Core\Http\Response as HttpResponse;
+use Lotgd\Core\Http\Request as HttpRequest;
 
-class Response implements FactoryInterface
+class Request implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $response = new HttpResponse();
-        $response->setContainer($container);
-
-        return $response;
+        return HttpRequest::createFromGlobals();
     }
 }
