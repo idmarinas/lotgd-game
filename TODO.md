@@ -7,14 +7,14 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Revisar para sustituir Laminas Request y Response
--   Reemplazando parte del uso de `LotgdCache::` por `$cache = LotgdKernel::get('cache.app')`
+-   Sustituir Laminas session por Symfony\Component\HttpFoundation\Session\Session
+    -   Sustitur los FlashMessages por el de session
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 -   Revisar la installación, para comprobar errores DB::
 
 # Para la versión 4.10.0
-- ...
+-   Seguir migrando el uso de `LotgdCache::` por `$cache = LotgdKernel::get('cache.app')`
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel

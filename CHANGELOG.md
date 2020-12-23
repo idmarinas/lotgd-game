@@ -13,9 +13,18 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   _Migrating_ to **Symfony Cache**.
-    -   Some parts of LoTGD Core use Symfony Cache instad of Laminas Cache.
-        -   Core settings
+-   _Migrating_ **Laminas Cache** to **Symfony Cache**.
+    -   Some parts of LoTGD Core use Symfony Cache instead of Laminas Cache.
+        -   `lib/installer/installer_stage_default.php` 
+        -   `lib/modules/settings.php` 
+        -   `lib/newday/logoutaccts.php`
+        -   `lib/creaturefuntions.php` function `lotgd_generate_creature_levels()` 
+        -   `lib/experience.php` function `exp_for_next_level()` 
+        -   `lib/pageparts.php` function `charstats()` 
+        -   `public/moderate.php` 
+        -   `src/core/Form/Type/LotgdThemeType.php`
+        -   `src/core/Lib/Settings.php`
+        -   `src/core/Output/Commentary.php`
     -   Can create your pools or use default app cache.
         -   `LotgdKernel::get('cache.app')` for use default cache app
     -   Example for create new cache pools:
@@ -28,6 +37,15 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
                             adapter: cache.app # Use default configuration
                             public: true
         ```
+-   _Migrating_ **Laminas Http** to **Symfony HttpFoundation**
+    -   `LotgdRequest` and `LotgdResponse` static class now use **Symfony HttpFoundation**
+    -   May be cause *BC* if you use more options than LoTGD Core used.
+        -   May be not need update nothing.
+-   _Migrating_ **Laminas Session** to **Symfony Session**
+    -   `LotgdSession` static class now use **Symfony Session**
+    -   Can get a object session with `Lotgdkernel::get('session')`
+_   **LotgdNavigation** static class
+    -   Added `pagination` function, to create a pagination navs.
 
 ### :star: FEATURES
 
@@ -37,16 +55,19 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Laminas Cache** is deprecated since 4.9.0
     -   `Cache\Core\Lotgd` use `$cache = \LotgdKernel::get('cache.app');` instead, for default app cache.
-    -   For create your own cache, can add new pools in `config/packages/cache.yaml`. See in CHANGES section
+    -   For create your own cache, can add new pools in `config/packages/cache.yaml`. See in **CHANGES** section
     -   Fixed class **src/core/Fixed/Cache.php** is deprecated since 4.9.0
 
 ### :wrench: FIXES
 
--   Nothing
+-   **public/common_common.php** No recreate ".env.local.php" file if exist
+-   **public/glkobaluserfunctions.php** Fixed error, now use `LotgdNavigation::` instead of `LotgdRequest::`
 
 ### :x: REMOVES and/or Break Changes
 
--   Nothing
+-   Remove dependency of **Laminas Http** from `composer.json`
+-   Remove dependency of **Laminas Session** from `composer.json`
+-   **lib/modules.php** Remove function `module_delete_oldvalues` not in use
 
 ### :notebook: NOTES
 
