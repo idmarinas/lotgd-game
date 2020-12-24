@@ -68,10 +68,14 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Remove dependency of **Laminas Http** from `composer.json`
 -   Remove dependency of **Laminas Session** from `composer.json`
+-   Remove dependency of **DoctrineOrmModule** from `composer.json`
 -   **lib/modules.php** Remove function `module_delete_oldvalues` not in use
 -   **src/core/Component/FlashMessages.php** and **src/core/Factory/Component/FlashMessages.php**
     -   Can use `LotgdKernel::get('session')->getFlashBag()` or `LotgdFlashMessages::` static class (recomended static class).
 -   _BC_ **src/core/Pattern/FlashMessenger.php** if you use this file, remove it, and use  `LotgdFlashMessages::` static class
+-   **src/core/Output/Collector.php** deleted deprecated functions:
+    -   `sustitute(string $out)`
+-   **Doctrine Factory** Remove Doctrine Orm Module factory, use `$doctrine = LotgdKernel::get('doctrine.orm.entity_manager')` or `Doctrine::` static class
 
 ### :notebook: NOTES
 
