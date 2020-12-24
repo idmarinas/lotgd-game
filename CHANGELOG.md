@@ -35,21 +35,21 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
                     pools:
                         core.settings.cache:
                             adapter: cache.app # Use default configuration
-                            public: true
+                            public: true # Thnis is necesary for get your cache from service container. Example: LotgdKernel::get('core.settings.app')
         ```
 -   _Migrated_ **Laminas Http** to **Symfony HttpFoundation**
-    -   `LotgdRequest` and `LotgdResponse` static class now use **Symfony HttpFoundation**
+    -   `LotgdRequest::` and `LotgdResponse::` static class now use **Symfony HttpFoundation**
     -   May be cause *BC* if you use more options than LoTGD Core used.
         -   May be not need update nothing.
 -   _Migrated_ **Laminas Session** to **Symfony Session**
-    -   `LotgdSession` static class now use **Symfony Session**
+    -   `LotgdSession::` static class now use **Symfony Session**
     -   Can get a object session with `Lotgdkernel::get('session')`
 -   _Migrated_ **Lotgd\Core\Component\FlashMessages** to **Symfony Session FlashBag**
-    -   `LotgdFlashMessages` static class now use `LotgdKernel::get('session')->getFlashBag()`
+    -   `LotgdFlashMessages::` static class now use `LotgdKernel::get('session')->getFlashBag()`
 
 ### :star: FEATURES
 
--   **LotgdNavigation** static class
+-   **LotgdNavigation::** static class
     -   Added `pagination` function, to create a pagination navs.
 
 ### :fire: DEPRECATED
@@ -62,7 +62,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :wrench: FIXES
 
 -   **public/common_common.php** No recreate ".env.local.php" file if exist
--   **public/glkobaluserfunctions.php** Fixed error, now use `LotgdNavigation::` instead of `LotgdRequest::`
+-   **public/globaluserfunctions.php** Fixed error, now use `LotgdNavigation::` instead of `LotgdRequest::`
 
 ### :x: REMOVES and/or Break Changes
 
@@ -70,7 +70,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove dependency of **Laminas Session** from `composer.json`
 -   **lib/modules.php** Remove function `module_delete_oldvalues` not in use
 -   **src/core/Component/FlashMessages.php** and **src/core/Factory/Component/FlashMessages.php**
-    -   Can use `LotgdKernel::get('session')->getFlashBag()` or `LotgdFlashMessages` static class (recomended static class).
+    -   Can use `LotgdKernel::get('session')->getFlashBag()` or `LotgdFlashMessages::` static class (recomended static class).
+-   _BC_ **src/core/Pattern/FlashMessenger.php** if you use this file, remove it, and use  `LotgdFlashMessages::` static class
 
 ### :notebook: NOTES
 

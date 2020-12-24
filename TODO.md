@@ -7,8 +7,6 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Sustituir Laminas session por Symfony\Component\HttpFoundation\Session\Session
-    -   Sustitur los FlashMessages por el de session
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 -   Revisar la installación, para comprobar errores DB::
@@ -23,7 +21,7 @@
     -   Se migrará 
         -   La configuración
         -   El uso del service manager
--   Se usará una sistema similar al Symfony como transición
+-   Se usará un sistema similar al Symfony como transición
 
 # Para la versión 6.0.0
 -   Seguir la transición hacia un sistema Synfony Framework
