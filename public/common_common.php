@@ -158,7 +158,7 @@ DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
 //-- Configure Doctrine
 Doctrine::wrapper(LotgdKernel::get('doctrine.orm.entity_manager'));
 //-- Configure Flash Messages
-LotgdFlashMessages::setContainer(LotgdLocator::get(\Lotgd\Core\Component\FlashMessages::class));
+LotgdFlashMessages::instance(LotgdKernel::get('session')->getFlashBag());
 //-- Configure format instance
 LotgdFormat::instance(LotgdLocator::get(\Lotgd\Core\Output\Format::class));
 //-- Configure Request instance

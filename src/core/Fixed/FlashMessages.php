@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\Component\FlashMessages as ComponentFlashMessages;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag as ComponentFlashMessages;
 
 class FlashMessages
 {
@@ -22,7 +22,7 @@ class FlashMessages
      *
      * @var Lotgd\Core\Component\FlashMessages
      */
-    protected static $container;
+    protected static $instance;
 
     /**
      * Add support for magic static method calls.
@@ -35,22 +35,85 @@ class FlashMessages
      */
     public static function __callStatic($method, $arguments)
     {
-        if (\method_exists(self::$container, $method))
+        if (\method_exists(self::$instance, $method))
         {
-            return self::$container->{$method}(...$arguments);
+            return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$container));
+        $methods = implode(', ', get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
 
     /**
+     * Add message.
+     *
+     * @param array|string $message
+     * @param string       $type
+     *
+     * @return void
+     */
+    public static function addMessage($message, $type = null)
+    {
+        $type = $type ?: 'info';
+
+        self::$instance->add($type, $message);
+    }
+
+    /**
+     * Add a "info" message.
+     *
+     * @param array|string $message
+     *
+     * @return FlashMessages
+     */
+    public static function addInfoMessage($message)
+    {
+        self::$instance->add('info', $message);
+    }
+
+    /**
+     * Add a "success" message.
+     *
+     * @param array|string $message
+     *
+     * @return FlashMessages
+     */
+    public static function addSuccessMessage($message)
+    {
+        self::$instance->add('success', $message);
+    }
+
+    /**
+     * Add a "error" message.
+     *
+     * @param array|string $message
+     *
+     * @return FlashMessages
+     */
+    public static function addErrorMessage($message)
+    {
+        self::$instance->add('error', $message);
+    }
+
+    /**
+     * Add a "warning" message.
+     *
+     * @param array|string $message
+     *
+     * @return FlashMessages
+     */
+    public static function addWarningMessage($message)
+    {
+        self::$instance->add('warning', $message);
+    }
+
+    /**
      * Set container of FlashMessages.
      */
-    public static function setContainer(ComponentFlashMessages $container)
+    public static function instance(ComponentFlashMessages $instance)
     {
-        self::$container = $container;
+        self::$instance = $instance;
     }
 }
 

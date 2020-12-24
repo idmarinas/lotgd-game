@@ -19,8 +19,8 @@ use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
-    use PatternCore\Template;
     use PatternCore\Sanitize;
+    use PatternCore\Template;
 
     protected $flashMessages;
 
@@ -41,18 +41,20 @@ class FlashMessages extends AbstractExtension
      */
     public function display()
     {
-        $container = $this->getFlashMessages()->getMessages();
-        $output    = '';
+        $output   = '';
+        $flashBag = \LotgdKernel::get('session')->getFlashBag();
 
-        foreach ($container as $type => $messages)
+        foreach ($flashBag->all() as $type => $messages)
         {
             foreach ($messages as $id => $message)
             {
-                if (is_array($message))
+                $messageId = "{$type}-{$id}";
+
+                if (\is_array($message))
                 {
                     $message['message'] = $this->getSanitize()->fullSanitize($message['message']);
-                    $message['id']      = $message['id']    ?? $id;
-                    $message['class']   = $message['class'] ?? $type;
+                    $message['id']      = $message['id'] ?? $messageId;
+                    $message['class']   = ($message['class'] ?? '').' '.$type;
                     $message['close']   = $message['close'] ?? true;
 
                     $output .= $this->getTemplate()->render('{theme}/semantic/collection/message.html.twig', $message);
@@ -64,12 +66,10 @@ class FlashMessages extends AbstractExtension
                     'message' => $this->getSanitize()->fullSanitize($message),
                     'class'   => $type,
                     'close'   => true,
-                    'id'      => $id,
+                    'id'      => $messageId,
                 ]);
             }
         }
-
-        $this->getFlashMessages()->clearMessagesFromContainer();
 
         return $output;
     }

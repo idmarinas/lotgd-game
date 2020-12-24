@@ -18,7 +18,6 @@ return [
             /* LAZY */ Lotgd\Core\Http::class             => InvokableFactory::class, //-- Deprecated - Deleted in version 5.0.0
 
             //-- Added in version 4.0.0
-            Lotgd\Core\Component\FlashMessages::class          => Factory\Component\FlashMessages::class,
             /* LAZY */ Lotgd\Core\Installer\Install::class     => Factory\Installer\Install::class,
             Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class,
             Lotgd\Core\Navigation\AccessKeys::class            => InvokableFactory::class,
