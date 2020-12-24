@@ -46,12 +46,14 @@
 
     $defaul46  = \array_merge($default, ['php_version' => '7.3.0']);
     $default48 = \array_merge($defaul46, ['extensions' => \array_merge($extensions, ['ctype' => 'Ctype', 'iconv' => 'Iconv'])]);
+    $default49 = \array_merge($defaul48, ['execution_time' => 60]); //-- Increased execution_time for version 4.9.0
 
     $requeriments = [
         //-- LotgdVersion => Requeriments
         '4.2' => $default,
         '4.6' => $defaul46,
         '4.8' => $default48,
+        '4.9' => $default49,
     ];
 
     $results = [];
