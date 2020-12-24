@@ -62,37 +62,6 @@ class Collector
     }
 
     /**
-     * Search and replace keywords.
-     *
-     * @deprecated 4.5.0 Delete in future version, use Twig templates
-     */
-    public function sustitute(string $out): string
-    {
-        global $session;
-
-        \trigger_error(\sprintf(
-            'Usage of %s is obsolete since 4.5.0; and delete in future version, use Twig templates.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        //-- This options are only available when user are signed in
-        if ( ! ($session['user']['loggedin'] ?? false))
-        {
-            return $out;
-        }
-
-        //-- Sustitute placeholders
-        $sustitute = [
-            '{playername}'    => $session['user']['playername'],
-            '{charactername}' => $session['user']['name'],
-            '{playerweapon}'  => $session['user']['weapon'],
-            '{playerarmor}'   => $session['user']['armor'],
-        ];
-
-        return str_replace(array_keys($sustitute), array_values($sustitute), $out);
-    }
-
-    /**
      * Returns the formatted output.
      *
      * @return the complete output for the {content} tag
