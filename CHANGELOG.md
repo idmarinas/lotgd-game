@@ -37,19 +37,20 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
                             adapter: cache.app # Use default configuration
                             public: true
         ```
--   _Migrating_ **Laminas Http** to **Symfony HttpFoundation**
+-   _Migrated_ **Laminas Http** to **Symfony HttpFoundation**
     -   `LotgdRequest` and `LotgdResponse` static class now use **Symfony HttpFoundation**
     -   May be cause *BC* if you use more options than LoTGD Core used.
         -   May be not need update nothing.
--   _Migrating_ **Laminas Session** to **Symfony Session**
+-   _Migrated_ **Laminas Session** to **Symfony Session**
     -   `LotgdSession` static class now use **Symfony Session**
     -   Can get a object session with `Lotgdkernel::get('session')`
-_   **LotgdNavigation** static class
-    -   Added `pagination` function, to create a pagination navs.
+-   _Migrated_ **Lotgd\Core\Component\FlashMessages** to **Symfony Session FlashBag**
+    -   `LotgdFlashMessages` static class now use `LotgdKernel::get('session')->getFlashBag()`
 
 ### :star: FEATURES
 
--   Nothing
+-   **LotgdNavigation** static class
+    -   Added `pagination` function, to create a pagination navs.
 
 ### :fire: DEPRECATED
 
@@ -68,6 +69,8 @@ _   **LotgdNavigation** static class
 -   Remove dependency of **Laminas Http** from `composer.json`
 -   Remove dependency of **Laminas Session** from `composer.json`
 -   **lib/modules.php** Remove function `module_delete_oldvalues` not in use
+-   **src/core/Component/FlashMessages.php** and **src/core/Factory/Component/FlashMessages.php**
+    -   Can use `LotgdKernel::get('session')->getFlashBag()` or `LotgdFlashMessages` static class (recomended static class).
 
 ### :notebook: NOTES
 
