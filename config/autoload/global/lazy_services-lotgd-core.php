@@ -12,9 +12,6 @@ return [
                 'LotgdInstaller' => Lotgd\Core\Installer\Install::class,
                 //-- Symfony Form is only needed for entity modification mainly.
                 'Lotgd\Core\SymfonyForm' => 'Lotgd\Core\SymfonyForm',
-                //-- Is rarely used.
-                'doctrine.cli'            => 'doctrine.cli',
-                'DoctrineCliConfigurator' => DoctrineORMModule\CliConfigurator::class,
                 //-- Laminas Form not likely to be used in all requests
                 'InputFilterManager'    => 'InputFilterManager',
                 'FormAnnotationBuilder' => 'FormAnnotationBuilder',
@@ -33,11 +30,7 @@ return [
                 'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class,
 
                 //-- Added in version 4.8.0
-                'DoctrineModule\Service\CliFactory' => 'DoctrineModule\Service\CliFactory',
                 'EventOfEvents'                     => Lotgd\Core\EventManager\Event::class,
-                'DoctrineExtensionTablePrefix'      => Lotgd\Core\Doctrine\Extension\TablePrefix::class,
-                'LotgdDoctrineOrmEntityManager'     => 'Lotgd\Core\Db\Doctrine',
-                'DoctrineOrmEntityManager'          => 'Doctrine\ORM\EntityManager',
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()

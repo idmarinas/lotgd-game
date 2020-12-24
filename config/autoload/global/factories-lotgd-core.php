@@ -1,7 +1,5 @@
 <?php
 
-use DoctrineORMModule\CliConfigurator;
-use DoctrineORMModule\Service;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Lotgd\Core\Factory;
 
@@ -39,10 +37,6 @@ return [
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead
 
             //-- Added in version 4.2.0
-            /* LAZY */ 'doctrine.cli'                                   => 'DoctrineModule\Service\CliFactory',
-            /* LAZY */ CliConfigurator::class                           => Service\CliConfiguratorFactory::class,
-            /* LAZY */ 'Doctrine\ORM\EntityManager'                     => Service\EntityManagerAliasCompatFactory::class, //-- Deprecated Factory - use \LotgdKernel::get('doctrine.orm.entity_manager)
-            /* LAZY */ Lotgd\Core\Doctrine\Extension\TablePrefix::class => Factory\Doctrine\Extension\TablePrefix::class, //-- Deprecated Factory
             Lotgd\Core\Jaxon::class                                     => Factory\Component\Jaxon::class,
             Gedmo\Translatable\TranslatableListener::class              => Factory\Translator\TranslatableListener::class, //-- Deprecated Factory
             /* LAZY */ 'Lotgd\Core\SymfonyForm'                         => Factory\Form\SymfonyForm::class,
