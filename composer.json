@@ -36,7 +36,6 @@
         "composer/semver": "^3.2",
         "cron/cron": "^1.4",
         "doctrine/doctrine-bundle": "^2.2",
-        "doctrine/doctrine-orm-module": "^3.0",
         "doctrine/orm": "^2.7",
         "ezyang/htmlpurifier": "^4.13",
         "gedmo/doctrine-extensions": "^3.0",
