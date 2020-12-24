@@ -38,7 +38,6 @@ if ($isDevelopment)
 use Lotgd\Core\Fixed\Cache as LotgdCache;
 use Lotgd\Core\Fixed\Dbwrapper as DB;
 use Lotgd\Core\Fixed\Doctrine;
-use Lotgd\Core\Fixed\EventManager as LotgdEvent;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
 use Lotgd\Core\Fixed\HookManager as LotgdHook;
@@ -177,8 +176,6 @@ LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translato
 LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
 //-- Configure Hook Manager instance
 LotgdHook::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Hook::class));
-//-- Configure Event Manager instance
-LotgdEvent::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Event::class));
 
 $session = &$_SESSION['session'];
 
