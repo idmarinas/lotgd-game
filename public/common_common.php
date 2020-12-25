@@ -60,6 +60,11 @@ try
     LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
     LotgdKernel::boot();
 
+    if (\file_exists('config/autoload/local/dbconnect.php') && ! \file_exists('.env.local.php'))
+    {
+        throw new Lotgd\Core\Exception\Exception('Need create ".env.local.php" from "config/autoload/local/dbconnect.php"');
+    }
+
     //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
     if ($isDevelopment)
     {
