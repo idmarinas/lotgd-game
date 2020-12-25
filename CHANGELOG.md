@@ -79,6 +79,12 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :notebook: NOTES
 
+-   **Upgrade/Install problems**
+    -   If you have some problems when install or upgrade this version:
+        -   First try to empty cache: `var/` delete this folder.
+            -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
+        -   Second read info in `storage/log/tracy/*` files, and see the problem
+        -   If you can resolver problem go to: https://github.com/idmarinas/lotgd-game/issues
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
