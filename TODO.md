@@ -9,7 +9,6 @@
 # Actualmente haciendo esto
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
--   Revisar la installación, para comprobar errores DB::
 
 # Para la versión 4.10.0
 -   Seguir migrando el uso de `LotgdCache::` por `$cache = LotgdKernel::get('cache.app')`
@@ -64,6 +63,9 @@
         -   Creo que se migrará todo el código a los módulos de Symfony Framework, para así poder aprobechar sus capacidades, que son muy útiles en el LoTGD
         -   Templates: permitir reemplazar una pantilla de un bundle con otra propia, es una forma fácil de personalizar y crear temas propios.
 
+# ¿? Para la versión X2.0.0
+-   Migrar LoTGD Core a formato Symfony Bundle
+
 ## Cosas pendientes
 -   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
 -   Crear un sistema de publicidad interno (que permite comprar espacios publicitarios)
@@ -109,19 +111,11 @@
         }
         ```
 
-### Sólo falta los módulos.
--   Adaptar los formularios a zend-form (Módulos)
-    -   Los formularios usan también el sistema de traducción y es necesario actualizarlo
-        -   Se ha adaptado el formulario de configuración básica del juego (settings)
-        -   Se irán adaptando el resto de formularios con cada actualización
-    -   En algunas partes se usa Symfony Form
-
-
 ## Puede ser complicado
 -   *
 
 ## Complicado
--   Módulos, usar un sistema similar al que usa zenframework con sus módulos. pasar los módulos actuales a un sistema similar al manejado por zenframework.
+-   *
 
 * * *
 
