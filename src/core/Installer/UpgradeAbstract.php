@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Lotgd\Core\Component\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Tracy\Debugger;
 
 /**
@@ -59,15 +59,9 @@ abstract class UpgradeAbstract
      */
     public function insertData(int $version): bool
     {
-        $filesystem = new Filesystem();
-        $dir        = self::DATA_DIR_UPDATE."/{$version}";
-        $files      = \array_map(
-            function ($value) use ($dir)
-            {
-                return "{$dir}/{$value}";
-            },
-            $filesystem->listDir($dir)
-        );
+        $dir    = self::DATA_DIR_UPDATE."/{$version}";
+        $finder = new Finder();
+        $files  = $finder->files()->in($dir);
 
         if (0 == \count($files))
         {
@@ -80,6 +74,8 @@ abstract class UpgradeAbstract
         {
             foreach ($files as $file)
             {
+                $file = (string) $file;
+
                 $data     = \json_decode(\file_get_contents($file), true);
                 $entities = new HydratingResultSet(new ClassMethodsHydrator(), new $data['entity']());
                 $entities->initialize($data['rows']);

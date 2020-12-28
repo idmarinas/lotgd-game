@@ -16,7 +16,7 @@ namespace Lotgd\Core\Installer;
 use Doctrine\ORM\Tools\SchemaTool;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Lotgd\Core\Component\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Script to install and update game.
@@ -233,14 +233,9 @@ class Install
 
         $messages = [];
 
-        $filesystem = new Filesystem();
-        $files      = \array_map(
-            function ($value)
-            {
-                return self::DATA_DIR_INSTALL."/{$value}";
-            },
-            $filesystem->listDir(self::DATA_DIR_INSTALL)
-        );
+        $finder = new Finder();
+
+        $files = $finder->files()->in(self::DATA_DIR_INSTALL);
 
         if (0 == \count($files))
         {
@@ -252,7 +247,7 @@ class Install
 
         try
         {
-            $this->insertDataByFiles($files, $messages);
+            $this->insertDataByFiles(\iterator_to_array($files), $messages);
             $this->dataInsertedOn();
         }
         catch (\Throwable $th)
@@ -321,6 +316,8 @@ class Install
 
         foreach ($files as $file)
         {
+            $file = (string) $file;
+
             //-- Check if data are inserted/processed
             if (isset($session['installer']['insert_data_by_files'][$file]) && $session['installer']['insert_data_by_files'][$file])
             {
