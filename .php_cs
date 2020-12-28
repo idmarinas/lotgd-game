@@ -22,7 +22,9 @@ return PhpCsFixer\Config::create()
         // Binary operators should be surrounded by space as configured.
         'binary_operator_spaces' => ['default'=>'align_single_space_minimal'],
         // An empty line feed must precede any configured statement.
-        'blank_line_before_statement' => true,
+        'blank_line_before_statement' => [
+            'statements' => ['declare', 'die', 'do', 'exit', 'for', 'foreach', 'goto', 'if', 'return', 'switch', 'throw', 'try', 'while', 'yield'],
+        ],
         // The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.
         'braces' => ['position_after_anonymous_constructs'=>'next','position_after_control_structures'=>'next','position_after_functions_and_oop_constructs'=>'next'],
         // Using `isset($var) &&` multiple times should be done in one call.
