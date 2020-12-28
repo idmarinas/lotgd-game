@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Entity;
 
+use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Bukashk0zzz\FilterBundle\Annotation\FilterAnnotation as Filter;
 
 /**
  * Motd.

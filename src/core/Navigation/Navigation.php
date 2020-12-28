@@ -28,7 +28,7 @@ class Navigation
     /**
      * Default text domain for navigation menu.
      */
-    const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation-app';
+    public const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation-app';
 
     /**
      * Headers for navigation menu with options.
@@ -375,7 +375,8 @@ class Navigation
         if ( ! $link && $label)
         {
             //-- Is better use addHeader function for add header.
-            return $this->addHeader($label, ArrayUtils::merge($options,
+            return $this->addHeader($label, ArrayUtils::merge(
+                $options,
                 [
                     'attributes' => [ //-- To prevent a header from having the class of a navigation menu.
                         'class' => $this->getClassHeader(), //-- This will overwrite the custom class.
@@ -462,7 +463,8 @@ class Navigation
             $link = \preg_replace('/[&]/', '?', $link, 1);
         }
 
-        return \sprintf('%sc=%s',
+        return \sprintf(
+            '%sc=%s',
             (false === \strpos($link, '?') ? '?' : '&'),
             $session['counter'] ?? 0 // Avoid error of undefined index, in /jaxon.php and in /login.php?op=logout (Don't know why)
         );

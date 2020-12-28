@@ -51,7 +51,7 @@ class AccountsRepository extends DoctrineRepository
         }
 
         //-- Fail if not found
-        if (0 == count($data))
+        if (0 == \count($data))
         {
             Debugger::log($th);
 
@@ -142,6 +142,6 @@ class AccountsRepository extends DoctrineRepository
 
         unset($account['character'], $character['acct']);
 
-        return array_merge($account, $character, $everypage);
+        return \array_merge($account, $character, $everypage);
     }
 }

@@ -39,10 +39,10 @@ trait Color
     {
         if ( ! $this->colorPatternOpen)
         {
-            $this->colorPatternOpen = array_map(function ($k)
+            $this->colorPatternOpen = \array_map(function ($k)
             {
                 return "`{$k}";
-            }, array_keys($this->getColors()));
+            }, \array_keys($this->getColors()));
         }
 
         return $this->colorPatternOpen;
@@ -57,10 +57,10 @@ trait Color
     {
         if ( ! $this->colorPatternClose)
         {
-            $this->colorPatternClose = array_map(function ($k)
+            $this->colorPatternClose = \array_map(function ($k)
             {
                 return "´{$k}";
-            }, array_keys($this->getColors()));
+            }, \array_keys($this->getColors()));
         }
 
         return $this->colorPatternClose;
@@ -73,10 +73,10 @@ trait Color
     {
         if ( ! $this->colorReplacement)
         {
-            $this->colorReplacement = array_map(function ($k)
+            $this->colorReplacement = \array_map(function ($k)
             {
                 return "<span class='{$k}'>";
-            }, array_values($this->getColors()));
+            }, \array_values($this->getColors()));
         }
 
         return $this->colorReplacement;

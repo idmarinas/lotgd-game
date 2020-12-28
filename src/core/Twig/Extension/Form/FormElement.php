@@ -19,7 +19,7 @@ use Twig\TwigFunction;
 
 class FormElement extends AbstractElement
 {
-    const DEFAULT_HELPER = FormInput::class;
+    public const DEFAULT_HELPER = FormInput::class;
 
     /**
      * Instance map to view helper.

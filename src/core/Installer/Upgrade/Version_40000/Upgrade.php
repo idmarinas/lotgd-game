@@ -20,7 +20,7 @@ use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
 {
-    const VERSION_NUMBER = 40000;
+    public const VERSION_NUMBER = 40000;
 
     /**
      * Step 1: Rename tables old tables and create new tables.
@@ -77,8 +77,8 @@ class Upgrade extends UpgradeAbstract
             {
                 foreach ($paginator as $row)
                 {
-                    $row['info']     = unserialize($row['info']);
-                    $row             = array_merge((array) $row, (array) $row['info']);
+                    $row['info']     = \unserialize($row['info']);
+                    $row             = \array_merge((array) $row, (array) $row['info']);
                     $row['postdate'] = new \DateTime($row['postdate']);
 
                     $row['id']            = (int) $row['commentid'];
@@ -153,12 +153,12 @@ class Upgrade extends UpgradeAbstract
                     $row['biotime']        = new \DateTime($row['biotime']);
                     $row['regdate']        = new \DateTime($row['regdate']);
                     $row['clanjoindate']   = new \DateTime($row['clanjoindate']);
-                    $row['badguy']         = unserialize($row['badguy']);
-                    $row['companions']     = unserialize($row['companions']);
-                    $row['allowednavs']    = unserialize($row['allowednavs']);
-                    $row['bufflist']       = unserialize($row['bufflist']);
-                    $row['dragonpoints']   = unserialize($row['dragonpoints']);
-                    $row['prefs']          = unserialize($row['prefs']);
+                    $row['badguy']         = \unserialize($row['badguy']);
+                    $row['companions']     = \unserialize($row['companions']);
+                    $row['allowednavs']    = \unserialize($row['allowednavs']);
+                    $row['bufflist']       = \unserialize($row['bufflist']);
+                    $row['dragonpoints']   = \unserialize($row['dragonpoints']);
+                    $row['prefs']          = \unserialize($row['prefs']);
                     $row['uniqueid']       = $row['uniqueid'] ?? '';
 
                     //-- Configure account
@@ -226,7 +226,7 @@ class Upgrade extends UpgradeAbstract
                 {
                     $row = (array) $row;
 
-                    $row['arguments']  = @unserialize($row['arguments']);
+                    $row['arguments']  = @\unserialize($row['arguments']);
                     $row['text']       = $row['newstext'];
                     $row['date']       = new \DateTime($row['newsdate']);
                     $row['textDomain'] = $row['tlschema'];

@@ -110,17 +110,17 @@ class Form extends AbstractElement
         {
             $formAttributes = $form->getAttributes();
 
-            if ( ! array_key_exists('id', $formAttributes) && array_key_exists('name', $formAttributes))
+            if ( ! \array_key_exists('id', $formAttributes) && \array_key_exists('name', $formAttributes))
             {
                 $formAttributes['id'] = $formAttributes['name'];
             }
 
-            $attributes = array_merge($attributes, $formAttributes);
+            $attributes = \array_merge($attributes, $formAttributes);
         }
 
         if ($attributes)
         {
-            return sprintf('<form %s>', $this->createAttributesString($env, $attributes));
+            return \sprintf('<form %s>', $this->createAttributesString($env, $attributes));
         }
 
         return '<form>';
@@ -148,7 +148,7 @@ class Form extends AbstractElement
     private function getFormParams(FormInterface $form): array
     {
         //-- Prepare form for show
-        if (method_exists($form, 'prepare'))
+        if (\method_exists($form, 'prepare'))
         {
             $form->prepare();
         }
@@ -189,8 +189,8 @@ class Form extends AbstractElement
         //-- Default is always added submit button
         if (null === ($buttonsRaw['submit'] ?? null) || $buttonsRaw['submit'])
         {
-            $options = is_array($buttonsRaw['submit']) ? $buttonsRaw['submit'] : [];
-            $options = array_merge([
+            $options = \is_array($buttonsRaw['submit']) ? $buttonsRaw['submit'] : [];
+            $options = \array_merge([
                 'name'       => 'submit',
                 'type'       => 'submit',
                 'attributes' => [
@@ -209,8 +209,8 @@ class Form extends AbstractElement
         //-- Default is not added reset button
         if ($buttonsRaw['reset'] ?? false)
         {
-            $options = is_array($buttonsRaw['reset']) ? $buttonsRaw['reset'] : [];
-            $options = array_merge([
+            $options = \is_array($buttonsRaw['reset']) ? $buttonsRaw['reset'] : [];
+            $options = \array_merge([
                 'name'       => 'reset',
                 'type'       => 'Button',
                 'attributes' => [
@@ -229,7 +229,7 @@ class Form extends AbstractElement
 
         unset($buttonsRaw['reset'], $buttonsRaw['submit'], $options);
 
-        if (is_array($buttonsRaw) && ! empty($buttonsRaw))
+        if (\is_array($buttonsRaw) && ! empty($buttonsRaw))
         {
             foreach ($buttonsRaw as $index => $button)
             {

@@ -56,26 +56,27 @@ class ConfigurationType extends AbstractType
 
         //-- Listener to delete data duplicated in each field
         //-- Each field have all data settings, but not need all of this data
-        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event)
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event)
         {
             $fields = $event->getForm()->all();
             $data = $event->getData();
 
-            foreach($fields as $name => $field)
+            foreach ($fields as $name => $field)
             {
                 $fieldsField = $field->all();
-                if (!isset($data[$name]))
+
+                if ( ! isset($data[$name]))
                 {
                     continue;
                 }
 
                 //-- Deleted fields that are disabled
-                $fieldsField = array_filter($fieldsField, function ($val)
+                $fieldsField = \array_filter($fieldsField, function ($val)
                 {
                     return ! $val->isDisabled();
                 });
 
-                $data[$name] = array_intersect_key($data[$name], $fieldsField);
+                $data[$name] = \array_intersect_key($data[$name], $fieldsField);
             }
 
             $event->setData($data);

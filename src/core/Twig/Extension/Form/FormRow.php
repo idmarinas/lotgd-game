@@ -20,8 +20,8 @@ use Twig\TwigFunction;
 
 class FormRow extends AbstractElement
 {
-    const LABEL_APPEND  = 'append';
-    const LABEL_PREPEND = 'prepend';
+    public const LABEL_APPEND  = 'append';
+    public const LABEL_PREPEND = 'prepend';
 
     /**
      * The class that is added to element that have errors.
@@ -135,11 +135,11 @@ class FormRow extends AbstractElement
      */
     public function setLabelPosition($labelPosition)
     {
-        $labelPosition = strtolower($labelPosition);
+        $labelPosition = \strtolower($labelPosition);
 
-        if ( ! in_array($labelPosition, [self::LABEL_APPEND, self::LABEL_PREPEND]))
+        if ( ! \in_array($labelPosition, [self::LABEL_APPEND, self::LABEL_PREPEND]))
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s expects either %s::LABEL_APPEND or %s::LABEL_PREPEND; received "%s"', __METHOD__, __CLASS__, __CLASS__, (string) $labelPosition));
+            throw new Exception\InvalidArgumentException(\sprintf('%s expects either %s::LABEL_APPEND or %s::LABEL_PREPEND; received "%s"', __METHOD__, __CLASS__, __CLASS__, (string) $labelPosition));
         }
         $this->labelPosition = $labelPosition;
 

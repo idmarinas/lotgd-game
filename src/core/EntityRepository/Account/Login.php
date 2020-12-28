@@ -46,7 +46,7 @@ trait Login
             ;
 
             //-- Fail if not found
-            if (0 == count($data))
+            if (0 == \count($data))
             {
                 return;
             }

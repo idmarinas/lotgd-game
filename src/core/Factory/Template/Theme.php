@@ -29,9 +29,9 @@ class Theme implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $config   = $container->get('GameConfig');
-        $opts     = $config['lotgd_core'] ?? [];
-        $packages = $container->get('webpack_encore.packages');
+        $config        = $container->get('GameConfig');
+        $opts          = $config['lotgd_core'] ?? [];
+        $packages      = $container->get('webpack_encore.packages');
         $isDevelopment = (bool) ($opts['development'] ?? false);
 
         $templateSystem = new TemplateTheme([], [
@@ -59,7 +59,7 @@ class Theme implements FactoryInterface
 
         //-- Register globals params
         $globals = $config['twig_global_params'] ?? [];
-        $globals = array_merge($globals, ['enviroment' => $isDevelopment ? 'dev' : 'prod' ]);
+        $globals = \array_merge($globals, ['enviroment' => $isDevelopment ? 'dev' : 'prod']);
         $this->registerGlobals($globals, $templateSystem);
 
         //-- Custom extensions

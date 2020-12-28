@@ -59,7 +59,7 @@ class BitField extends Select implements InputProviderInterface
     {
         foreach ($mask as $key => $value)
         {
-            if (is_bool($value))
+            if (\is_bool($value))
             {
                 $this->disabledMask[$key] = $value;
 

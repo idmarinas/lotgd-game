@@ -80,7 +80,7 @@ class FormButton extends FormInput
 
         if (null === $label)
         {
-            throw new Exception\DomainException(sprintf('%s expects either button content as the second argument, '.'or that the element provided has a label value; neither found', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s expects either button content as the second argument, '.'or that the element provided has a label value; neither found', __METHOD__));
         }
 
         $label = $translator->translate($label, $element->getOption('translator_text_domain') ?: $this->getTranslatorTextDomain());
@@ -111,16 +111,16 @@ class FormButton extends FormInput
             return '<button>';
         }
 
-        if (is_array($attributesOrElement))
+        if (\is_array($attributesOrElement))
         {
             $attributes = $this->createAttributesString($env, $attributesOrElement);
 
-            return sprintf('<button %s>', $attributes);
+            return \sprintf('<button %s>', $attributes);
         }
 
         if ( ! $attributesOrElement instanceof ElementInterface)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
+            throw new Exception\InvalidArgumentException(\sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (\is_object($attributesOrElement) ? \get_class($attributesOrElement) : \gettype($attributesOrElement))));
         }
 
         $element = $attributesOrElement;
@@ -128,7 +128,7 @@ class FormButton extends FormInput
 
         if (empty($name) && 0 !== $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $attributes          = $element->getAttributes();
@@ -136,7 +136,7 @@ class FormButton extends FormInput
         $attributes['type']  = $this->getType($element);
         $attributes['value'] = $element->getValue();
 
-        return sprintf(
+        return \sprintf(
             '<button %s>',
             $this->createAttributesString($env, $attributes)
         );
@@ -168,7 +168,7 @@ class FormButton extends FormInput
     protected function getType(ElementInterface $element)
     {
         $type = (string) $element->getAttribute('type');
-        $type = strtolower($type);
+        $type = \strtolower($type);
 
         return $this->validTypes[$type] ?? 'submit';
     }

@@ -45,7 +45,7 @@ class MotdRepository extends DoctrineRepository
 
             $motd = $result[0][0];
             unset($result[0][0]);
-            $motd = array_merge($motd, $result[0]);
+            $motd = \array_merge($motd, $result[0]);
 
             //-- Is a poll
             if ($motd['motdtype'])
@@ -92,7 +92,7 @@ class MotdRepository extends DoctrineRepository
             $motd = $result[0][0];
             unset($result[0][0]);
 
-            return array_merge($motd, $result[0]);
+            return \array_merge($motd, $result[0]);
         }
         catch (\Throwable $th)
         {

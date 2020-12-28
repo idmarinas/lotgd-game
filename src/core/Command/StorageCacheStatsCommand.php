@@ -36,9 +36,10 @@ class StorageCacheStatsCommand extends Command
     {
         $this
             ->setDescription('Show stats of cache')
-            ->setHelp(<<<'EOF'
-The <info>%command.name%</info> command to show stats of cache directory.
-EOF
+            ->setHelp(
+                <<<'EOF'
+                    The <info>%command.name%</info> command to show stats of cache directory.
+                    EOF
             )
         ;
     }

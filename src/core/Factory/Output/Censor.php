@@ -19,7 +19,7 @@ use Lotgd\Core\Output\Censor as OutputCensor;
 
 class Censor implements FactoryInterface
 {
-    const LOTGD_DICTIONARY_PATH = 'data/dictionary';
+    public const LOTGD_DICTIONARY_PATH = 'data/dictionary';
 
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
@@ -32,7 +32,7 @@ class Censor implements FactoryInterface
             $profanity->addDictionary($language);
             $customLanguage = self::LOTGD_DICTIONARY_PATH."/{$language}.php";
 
-            if (file_exists($customLanguage))
+            if (\file_exists($customLanguage))
             {
                 $profanity->addDictionary($customLanguage);
             }

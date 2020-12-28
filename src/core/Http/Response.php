@@ -13,19 +13,19 @@
 
 namespace Lotgd\Core\Http;
 
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Laminas\View\Helper\HeadTitle;
 use Lotgd\Core\Hook;
 use Lotgd\Core\Pattern;
 use Lotgd\Core\Translator\Translator;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class Response extends HttpResponse
 {
     use Pattern\Container;
-    use Pattern\Http;
-    use Pattern\HookManager;
-    use Pattern\Template;
     use Pattern\Doctrine;
+    use Pattern\HookManager;
+    use Pattern\Http;
+    use Pattern\Template;
     use Pattern\Translator;
 
     /**
@@ -81,7 +81,7 @@ class Response extends HttpResponse
      */
     public function pageAddContent(?string $value): void
     {
-        if (! $value)
+        if ( ! $value)
         {
             return;
         }
@@ -95,7 +95,7 @@ class Response extends HttpResponse
      */
     public function pageSetContent(?string $value): void
     {
-        if (! $value)
+        if ( ! $value)
         {
             return;
         }

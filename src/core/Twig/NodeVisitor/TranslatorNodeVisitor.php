@@ -24,7 +24,7 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
  */
 class TranslatorNodeVisitor extends AbstractNodeVisitor
 {
-    const UNDEFINED_DOMAIN = '_undefined';
+    public const UNDEFINED_DOMAIN = '_undefined';
 
     private $enabled  = false;
     private $messages = [];

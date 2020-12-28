@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\EventManager\Hook;
 use Lotgd\Core\EventManager\EventManager as CoreEventManager;
+use Lotgd\Core\EventManager\Hook;
 
 trait HookManager
 {

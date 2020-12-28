@@ -42,7 +42,7 @@ class AccessKeys
         $label = $this->filter($label);
         $key   = $this->checkAccessKey($label);
 
-        $this->accesskeys[strtolower($key)] = true;
+        $this->accesskeys[\strtolower($key)] = true;
 
         if ('' != $key || ' ' != $key)
         {
@@ -50,15 +50,15 @@ class AccessKeys
 
             if (false === \strpos($label, $key))
             {
-                $label = '('.strtoupper($key).') '.$label;
+                $label = '('.\strtoupper($key).') '.$label;
             }
 
-            $pregKey = preg_quote($key, '/');
+            $pregKey = \preg_quote($key, '/');
             $label   = \preg_replace("/^{$pregKey}/", "`H{$key}´H", $label, 1);
 
-            if (false === strpos($label, '`H'))
+            if (false === \strpos($label, '`H'))
             {
-                $label = preg_replace("/([^`´]){$pregKey}/", "\$1`H{$key}´H", $label, 1);
+                $label = \preg_replace("/([^`´]){$pregKey}/", "\$1`H{$key}´H", $label, 1);
             }
         }
 
@@ -77,9 +77,9 @@ class AccessKeys
         //-- Check explicit access Example: "G?The Graveyard"
         if ('?' == $label[1])
         {
-            $char = substr($label, 0, 1);
+            $char = \substr($label, 0, 1);
 
-            if ( ! ($this->accesskeys[strtolower($char)] ?? false))
+            if ( ! ($this->accesskeys[\strtolower($char)] ?? false))
             {
                 $i = \strpos($label, $char, 2);
 
@@ -99,13 +99,13 @@ class AccessKeys
             $label = \substr($label, 2);
         }
 
-        $strlen = strlen($label);
+        $strlen = \strlen($label);
 
         $ignoreuntil = '';
 
         for ($i = 0; $i < $strlen; ++$i)
         {
-            $char = substr($label, $i, 1);
+            $char = \substr($label, $i, 1);
 
             if ('&' == $char)
             {
@@ -113,14 +113,14 @@ class AccessKeys
             }
             elseif ('`' == $char || '´' == $char || "'" == $char)
             {
-                $ignoreuntil = substr($label, $i + 1, 1);
+                $ignoreuntil = \substr($label, $i + 1, 1);
             }
 
             if ($ignoreuntil == $char)
             {
                 $ignoreuntil = '';
             }
-            elseif ( ! ($this->accesskeys[strtolower($char)] ?? false) && (false !== strpos('abcdefghijklmnopqrstuvwxyz0123456789', strtolower($char))) && '' == $ignoreuntil)
+            elseif ( ! ($this->accesskeys[\strtolower($char)] ?? false) && (false !== \strpos('abcdefghijklmnopqrstuvwxyz0123456789', \strtolower($char))) && '' == $ignoreuntil)
             {
                 break;
             }

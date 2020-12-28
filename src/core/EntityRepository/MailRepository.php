@@ -41,9 +41,9 @@ class MailRepository extends DoctrineRepository
         try
         {
             return $qb->select(
-                    'SUM(CASE WHEN u.seen = 1 THEN 1 ELSE 0 END) AS seenCount',
-                    'SUM(CASE WHEN u.seen = 0 THEN 1 ELSE 0 END) AS notSeenCount'
-                )
+                'SUM(CASE WHEN u.seen = 1 THEN 1 ELSE 0 END) AS seenCount',
+                'SUM(CASE WHEN u.seen = 0 THEN 1 ELSE 0 END) AS notSeenCount'
+            )
                 ->where('u.msgto = :acct')
                 ->setParameters(['acct' => $acctId])
                 ->getQuery()
@@ -92,16 +92,18 @@ class MailRepository extends DoctrineRepository
         $query = $this->createQueryBuilder('u');
         $expr  = $query->expr();
 
-        switch ($order)
-        {
+        switch ($order) {
             case 'subject':
                 $order = 'u.subject';
+
             break;
             case 'name':
                 $order = 'c.name';
+
             break;
             default: //date
                 $order = 'u.sent';
+
             break;
         }
 

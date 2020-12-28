@@ -31,7 +31,7 @@ class RegenerateAppSecretCommand extends Command
 
         if (\is_file($file) && \is_readable($file) && \is_writable($file))
         {
-            $str = \file_get_contents($file);
+            $str     = \file_get_contents($file);
             $pattern = '/^(?<secret>APP_SECRET=.+)$/m';
 
             \preg_match($pattern, $str, $matches);

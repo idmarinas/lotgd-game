@@ -68,7 +68,7 @@ function handle_event($location, $baseLink = false)
         if (\LotgdNavigation::checkNavs())
         {
             // The page rendered some linkage, so we just want to exit.
-            return  \LotgdResponse::pageEnd();
+            return \LotgdResponse::pageEnd();
         }
 
         $skipdesc                       = true;

@@ -21,7 +21,7 @@ use Twig\NodeVisitor\AbstractNodeVisitor;
 
 class CommentaryNodeVisitor extends AbstractNodeVisitor
 {
-    const UNDEFINED = '_undefined';
+    public const UNDEFINED = '_undefined';
 
     private $enabled  = false;
     private $messages = [];

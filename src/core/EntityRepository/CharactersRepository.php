@@ -78,12 +78,12 @@ class CharactersRepository extends DoctrineRepository
                 {
                     return $val['acctid'];
                 }, $character))
-                ->setMaxResults($limit - count($character))
+                ->setMaxResults($limit - \count($character))
                 ->getQuery()
                 ->getArrayResult()
             ;
 
-            return array_merge($character, $account);
+            return \array_merge($character, $account);
         }
         catch (\Throwable $th)
         {

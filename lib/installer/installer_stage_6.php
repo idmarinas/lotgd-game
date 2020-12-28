@@ -119,7 +119,7 @@ if ( ! $success)
 $params['initial']         = $initial;
 $params['success']         = $success;
 $params['successEnv']      = $successEnv;
-$params['failure']         = $failure ?? null;
+$params['failure']         = $failure    ?? null;
 $params['failureEnv']      = $failureEnv ?? null;
 $params['FILE_DB_CONNECT'] = \Lotgd\Core\Application::FILE_DB_CONNECT;
 $params['CACHE_FILE']      = \Lotgd\Core\ServiceManager::CACHE_FILE;

@@ -31,8 +31,8 @@ class CronjobType extends AbstractType
             'label'    => 'newdaycron',
         ]);
         $builder->add('submit', SubmitType::class, [
-            'label' => 'button.save',
-            'translation_domain' => 'app-form'
+            'label'              => 'button.save',
+            'translation_domain' => 'app-form',
         ]);
 
         parent::buildForm($builder, $options);

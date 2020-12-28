@@ -29,8 +29,8 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function getPaginator(QueryBuilder $query, int $page = 1, int $perPage = 25, int $resultType = DoctrineAdapter::RESULT_ARRAY): Paginator
     {
-        $page    = max(1, $page);
-        $perPage = max(1, $perPage); //-- Min items per page is 1
+        $page    = \max(1, $page);
+        $perPage = \max(1, $perPage); //-- Min items per page is 1
 
         $paginator = new Paginator(new DoctrineAdapter($query, $resultType));
         //- Set current page
@@ -50,7 +50,7 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function hydrateEntity(array $data, $entity = null)
     {
-        if ('object' != gettype($entity))
+        if ('object' != \gettype($entity))
         {
             $entity = $this->_entityName;
             $entity = new $entity();
@@ -66,7 +66,7 @@ class EntityRepository extends DoctrineEntityRepository
      */
     public function extractEntity($object): array
     {
-        if (is_array($object))
+        if (\is_array($object))
         {
             $set = [];
 
@@ -77,7 +77,7 @@ class EntityRepository extends DoctrineEntityRepository
 
             return $set;
         }
-        elseif ( ! is_object($object))
+        elseif ( ! \is_object($object))
         {
             return (array) $object;
         }

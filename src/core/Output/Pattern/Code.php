@@ -46,10 +46,10 @@ trait Code
     {
         if ( ! $this->codePatternOpen)
         {
-            $this->codePatternOpen = array_map(function ($k)
+            $this->codePatternOpen = \array_map(function ($k)
             {
                 return "`{$k}";
-            }, array_keys($this->getCodes()));
+            }, \array_keys($this->getCodes()));
         }
 
         return $this->codePatternOpen;
@@ -64,10 +64,10 @@ trait Code
     {
         if ( ! $this->codePatternClose)
         {
-            $this->codePatternClose = array_map(function ($k)
+            $this->codePatternClose = \array_map(function ($k)
             {
                 return "´{$k}";
-            }, array_keys($this->getCodes()));
+            }, \array_keys($this->getCodes()));
         }
 
         return $this->codePatternClose;
@@ -80,10 +80,10 @@ trait Code
     {
         if ( ! $this->codeReplacementOpen)
         {
-            $this->codeReplacementOpen = array_map(function ($k)
+            $this->codeReplacementOpen = \array_map(function ($k)
             {
                 return "<{$k}>";
-            }, array_values($this->getCodes()));
+            }, \array_values($this->getCodes()));
         }
 
         return $this->codeReplacementOpen;
@@ -96,10 +96,10 @@ trait Code
     {
         if ( ! $this->codeReplacementClose)
         {
-            $this->codeReplacementClose = array_map(function ($k)
+            $this->codeReplacementClose = \array_map(function ($k)
             {
                 return "</{$k}>";
-            }, array_values($this->getCodes()));
+            }, \array_values($this->getCodes()));
         }
 
         return $this->codeReplacementClose;
@@ -142,7 +142,7 @@ trait Code
     {
         if ( ! $this->codeSpecialPatternOpen)
         {
-            $this->codeSpecialPatternOpen = array_keys($this->getCodeSpecialOpen());
+            $this->codeSpecialPatternOpen = \array_keys($this->getCodeSpecialOpen());
         }
 
         return $this->codeSpecialPatternOpen;
@@ -157,7 +157,7 @@ trait Code
     {
         if ( ! $this->codeSpecialPatternClose)
         {
-            $this->codeSpecialPatternClose = array_keys($this->getCodeSpecialClose());
+            $this->codeSpecialPatternClose = \array_keys($this->getCodeSpecialClose());
         }
 
         return $this->codeSpecialPatternClose;
@@ -170,7 +170,7 @@ trait Code
     {
         if ( ! $this->codeSpecialReplacementOpen)
         {
-            $this->codeSpecialReplacementOpen = array_values($this->getCodeSpecialOpen());
+            $this->codeSpecialReplacementOpen = \array_values($this->getCodeSpecialOpen());
         }
 
         return $this->codeSpecialReplacementOpen;
@@ -183,7 +183,7 @@ trait Code
     {
         if ( ! $this->codeSpecialReplacementClose)
         {
-            $this->codeSpecialReplacementClose = array_values($this->getCodeSpecialClose());
+            $this->codeSpecialReplacementClose = \array_values($this->getCodeSpecialClose());
         }
 
         return $this->codeSpecialReplacementClose;

@@ -17,7 +17,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class BooleanTransformer implements DataTransformerInterface
 {
-
     public function transform($value)
     {
         return (bool) $value;

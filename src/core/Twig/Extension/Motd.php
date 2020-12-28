@@ -19,10 +19,10 @@ use Twig\TwigFunction;
 
 class Motd extends AbstractExtension
 {
-    use PatternCore\Doctrine;
-    use PatternCore\Translator;
-    use PatternCore\Template;
     use Pattern\Motd;
+    use PatternCore\Doctrine;
+    use PatternCore\Template;
+    use PatternCore\Translator;
 
     protected $repository;
 

@@ -20,21 +20,21 @@ use Twig\TwigTest;
 
 class GameCore extends AbstractExtension
 {
-    use PatternCore\LotgdCore;
-    use PatternCore\EventManager;
-    use PatternCore\HookManager;
-    use PatternCore\Jaxon;
-    use PatternCore\Settings;
-    use PatternCore\Template;
+    use Pattern\CharacterFunction;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
-    use Pattern\CharacterFunction;
     use Pattern\Jaxon;
     use Pattern\Mail;
     use Pattern\News;
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
+    use PatternCore\EventManager;
+    use PatternCore\HookManager;
+    use PatternCore\Jaxon;
+    use PatternCore\LotgdCore;
+    use PatternCore\Settings;
+    use PatternCore\Template;
 
     /**
      * {@inheritdoc}
@@ -120,11 +120,11 @@ class GameCore extends AbstractExtension
         return [
             new TwigTest('array', function ($value)
             {
-                return is_array($value);
+                return \is_array($value);
             }),
             new TwigTest('object', function ($value)
             {
-                return is_object($value);
+                return \is_object($value);
             }),
             new TwigTest('instanceof', function ($instance, $class)
             {

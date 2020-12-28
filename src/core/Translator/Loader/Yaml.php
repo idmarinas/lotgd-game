@@ -30,12 +30,12 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        $resolvedIncludePath = stream_resolve_include_path($filename);
+        $resolvedIncludePath = \stream_resolve_include_path($filename);
         $fromIncludePath     = (false !== $resolvedIncludePath) ? $resolvedIncludePath : $filename;
 
-        if ( ! $fromIncludePath || ! is_file($fromIncludePath) || ! is_readable($fromIncludePath))
+        if ( ! $fromIncludePath || ! \is_file($fromIncludePath) || ! \is_readable($fromIncludePath))
         {
-            throw new Exception\InvalidArgumentException(sprintf('Could not find or open file %s for reading', $filename));
+            throw new Exception\InvalidArgumentException(\sprintf('Could not find or open file %s for reading', $filename));
         }
 
         $yamlParser = new YamlParser();
@@ -46,14 +46,14 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
         }
         catch (ParseException $e)
         {
-            throw new Exception\InvalidArgumentException(sprintf('Error parsing YAML, invalid file "%s"', $fromIncludePath), 0, $e);
+            throw new Exception\InvalidArgumentException(\sprintf('Error parsing YAML, invalid file "%s"', $fromIncludePath), 0, $e);
         }
 
         $messages = $this->flatten($messages ?: []);
 
-        if ( ! is_array($messages))
+        if ( ! \is_array($messages))
         {
-            throw new Exception\InvalidArgumentException(sprintf('Expected an array, but received %s', gettype($messages)));
+            throw new Exception\InvalidArgumentException(\sprintf('Expected an array, but received %s', \gettype($messages)));
         }
 
         $textDomain = new TextDomain($messages);
@@ -126,7 +126,7 @@ class Yaml extends AbstractFileLoader implements FileLoaderInterface
 
         foreach ($node as $key => $value)
         {
-            \is_array($value) ? reset($value) : null;
+            \is_array($value) ? \reset($value) : null;
 
             if (\is_array($value))
             {

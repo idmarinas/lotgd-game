@@ -44,7 +44,7 @@ class FormNote extends AbstractElement
 
         $note = $this->getTranslator()->translate($note, $translatorTextDomain);
 
-        return sprintf('<div class="ui tiny info message">%s</div>', $note);
+        return \sprintf('<div class="ui tiny info message">%s</div>', $note);
     }
 
     /**

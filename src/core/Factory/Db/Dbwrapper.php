@@ -28,7 +28,7 @@ class Dbwrapper implements FactoryInterface
         $options = $container->get('GameConfig');
         $options = $options['lotgd_core']['db'] ?? [];
         $adapter = $options['adapter']          ?? [];
-        $adapter = is_array($adapter) ? $adapter : [];
+        $adapter = \is_array($adapter) ? $adapter : [];
 
         $wrapper = new LibDbwrapper($adapter);
         $wrapper->setPrefix($options['prefix'] ?? '');

@@ -21,8 +21,8 @@ use Twig\TwigFunction;
 
 class FormLabel extends AbstractElement
 {
-    const APPEND  = 'append';
-    const PREPEND = 'prepend';
+    public const APPEND  = 'append';
+    public const PREPEND = 'prepend';
 
     /**
      * Attributes valid for the label tag.
@@ -59,7 +59,7 @@ class FormLabel extends AbstractElement
     {
         if ( ! $element || empty($element->getLabel()))
         {
-            throw new Exception\DomainException(sprintf('%s expects either label content as the second argument, or that the element provided has a label attribute; neither found', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s expects either label content as the second argument, or that the element provided has a label attribute; neither found', __METHOD__));
         }
 
         return $env->render('{theme}/form/element/label.html.twig', [
@@ -86,23 +86,23 @@ class FormLabel extends AbstractElement
             return '<label>';
         }
 
-        if (is_array($attributesOrElement))
+        if (\is_array($attributesOrElement))
         {
             $attributes = $this->createAttributesString($env, $attributesOrElement);
 
-            return sprintf('<label %s>', $attributes);
+            return \sprintf('<label %s>', $attributes);
         }
 
         if ( ! $attributesOrElement instanceof ElementInterface)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement))));
+            throw new Exception\InvalidArgumentException(\sprintf('%s expects an array or Laminas\Form\ElementInterface instance; received "%s"', __METHOD__, (\is_object($attributesOrElement) ? \get_class($attributesOrElement) : \gettype($attributesOrElement))));
         }
 
         $id = $this->getId($attributesOrElement);
 
         if (null === $id)
         {
-            throw new Exception\DomainException(sprintf('%s expects the Element provided to have either a name or an id present; neither found', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s expects the Element provided to have either a name or an id present; neither found', __METHOD__));
         }
 
         $labelAttributes = [];
@@ -116,12 +116,12 @@ class FormLabel extends AbstractElement
 
         if ( ! empty($labelAttributes))
         {
-            $attributes = array_merge($labelAttributes, $attributes);
+            $attributes = \array_merge($labelAttributes, $attributes);
         }
 
         $attributes = $this->createAttributesString($env, $attributes);
 
-        return sprintf('<label %s>', $attributes);
+        return \sprintf('<label %s>', $attributes);
     }
 
     /**

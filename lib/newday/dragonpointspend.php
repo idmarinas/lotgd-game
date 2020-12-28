@@ -28,6 +28,7 @@ else
         if (\count($head) > 1)
         {
             \LotgdNavigation::addHeader($head[0]); //got a headline here
+
             continue;
         }
 

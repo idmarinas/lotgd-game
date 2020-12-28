@@ -28,10 +28,10 @@ trait ThemeList
 
         $skins = $cache->getItem($cacheKey);
 
-        if ( ! is_array($skins))
+        if ( ! \is_array($skins))
         {
             // A generic way of allowing a theme to be selected.
-            $handle = @opendir('themes');
+            $handle = @\opendir('themes');
 
             // Template directory open failed
             if ( ! $handle)
@@ -41,11 +41,11 @@ trait ThemeList
 
             $skins = [];
 
-            while (false !== ($file = @readdir($handle)))
+            while (false !== ($file = @\readdir($handle)))
             {
-                if ('html' == pathinfo($file, PATHINFO_EXTENSION))
+                if ('html' == \pathinfo($file, PATHINFO_EXTENSION))
                 {
-                    $skins[$file] = str_replace(['-', '_'], ' ', ucfirst(substr($file, 0, strpos($file, '.htm'))));
+                    $skins[$file] = \str_replace(['-', '_'], ' ', \ucfirst(\substr($file, 0, \strpos($file, '.htm'))));
                 }
             }
 

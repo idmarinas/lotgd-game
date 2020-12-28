@@ -15,12 +15,9 @@ class ServerFunctions
 
         $onlinecount = (int) getsetting('OnlineCount', 0);
 
-        if ($onlinecount >= getsetting('maxonline', 0) && 0 != getsetting('maxonline', 0))
-        {
-            return true;
-        }
+        return (bool) ($onlinecount >= getsetting('maxonline', 0) && 0 != getsetting('maxonline', 0))
 
-        return false;
+         ;
     }
 
     public static function resetAllDragonkillPoints($acctid = false)

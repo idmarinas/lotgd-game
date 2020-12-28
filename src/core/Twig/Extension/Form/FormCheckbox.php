@@ -43,14 +43,14 @@ class FormCheckbox extends FormInput
     {
         if ( ! $element instanceof CheckboxElement)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Checkbox', __METHOD__));
+            throw new Exception\InvalidArgumentException(\sprintf('%s requires that the element is of type Laminas\Form\Element\Checkbox', __METHOD__));
         }
 
         $name = $element->getName();
 
         if (empty($name) && 0 !== $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $labelHelper = $env->getExtension(FormLabel::class);
@@ -66,7 +66,7 @@ class FormCheckbox extends FormInput
             $attributes['checked'] = 'checked';
         }
 
-        $rendered = sprintf(
+        $rendered = \sprintf(
             '<input %s>',
             $this->createAttributesString($env, $attributes)
         );
@@ -79,13 +79,14 @@ class FormCheckbox extends FormInput
                 'value'    => $element->getUncheckedValue(),
             ];
 
-            $rendered = sprintf(
+            $rendered = \sprintf(
                 '<input type="hidden" %s>',
                 $this->createAttributesString($env, $hiddenAttributes)
             ).$rendered;
         }
 
-        return sprintf('<div class="ui checkbox %s">%s %s</div>',
+        return \sprintf(
+            '<div class="ui checkbox %s">%s %s</div>',
             $attributes['class'] ?? '',
             $rendered,
             $labelHelper->render($env, $element)

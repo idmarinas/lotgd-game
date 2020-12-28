@@ -81,7 +81,8 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
         }
         $popupMenu .= '</div></div>';
 
-        $content .= \sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
+        $content .= \sprintf(
+            '<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
             translate_inline('Browse'),
             $popupMenu,
             $tabActive

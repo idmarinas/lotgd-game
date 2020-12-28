@@ -19,8 +19,8 @@ namespace Lotgd\Core\Output;
 class Collector
 {
     use \Lotgd\Core\Pattern\Container;
-    use Pattern\Color;
     use Pattern\Code;
+    use Pattern\Color;
 
     protected $output           = ''; //!< the output to the template body
     protected $block_new_output = false; //!< is current output blocked? boolean
@@ -54,7 +54,7 @@ class Collector
             return;
         }
 
-        if (is_string($indata) && ! is_null($indata))
+        if (\is_string($indata) && ! \is_null($indata))
         {
             $this->output .= $indata."\n";
             \LotgdResponse::pageAddContent($indata);
@@ -70,7 +70,7 @@ class Collector
     {
         $text = $this->output;
         //clean up unclosed output tags.
-        foreach (array_keys($this->nestedtags) as $key => $val)
+        foreach (\array_keys($this->nestedtags) as $key => $val)
         {
             if ('font' == $key)
             {
@@ -160,8 +160,8 @@ class Collector
         $patternClose    = $this->getColorPatternClose();
         $replacementOpen = $this->getColorReplacementOpen();
 
-        $data = str_replace($patternOpen, $replacementOpen, $data);
-        $data = str_replace($patternClose, '</span>', $data);
+        $data = \str_replace($patternOpen, $replacementOpen, $data);
+        $data = \str_replace($patternClose, '</span>', $data);
 
         //-- Replace codes of string
         $patternOpen      = $this->getCodePatternOpen();
@@ -169,8 +169,8 @@ class Collector
         $replacementOpen  = $this->getCodeReplacementOpen();
         $replacementClose = $this->getCodeReplacementClose();
 
-        $data = str_replace($patternOpen, $replacementOpen, $data);
-        $data = str_replace($patternClose, $replacementClose, $data);
+        $data = \str_replace($patternOpen, $replacementOpen, $data);
+        $data = \str_replace($patternClose, $replacementClose, $data);
 
         //-- Special codes
         $patternOpen      = $this->getCodeSpecialPatternOpen();
@@ -178,9 +178,9 @@ class Collector
         $replacementOpen  = $this->getCodeSpecialReplacementOpen();
         $replacementClose = $this->getCodeSpecialReplacementClose();
 
-        $data = str_replace($patternOpen, $replacementOpen, $data);
+        $data = \str_replace($patternOpen, $replacementOpen, $data);
 
-        return str_replace($patternClose, $replacementClose, $data);
+        return \str_replace($patternClose, $replacementClose, $data);
     }
 
     /**
@@ -190,7 +190,7 @@ class Collector
      */
     public function get_colormap()
     {
-        return implode('', array_keys($this->getColors()));
+        return \implode('', \array_keys($this->getColors()));
     }
 
     /**
@@ -200,7 +200,7 @@ class Collector
      */
     public function get_colormap_escaped()
     {
-        return implode('', $this->get_colormap_escaped_array());
+        return \implode('', $this->get_colormap_escaped_array());
     }
 
     /**
@@ -223,6 +223,6 @@ class Collector
             unset($cols[$letter]);
         }
 
-        return array_keys($cols);
+        return \array_keys($cols);
     }
 }

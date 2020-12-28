@@ -27,7 +27,7 @@ use Laminas\Validator\Translator\TranslatorInterface;
  */
 class Translator extends ZendTranslator implements TranslatorInterface
 {
-    const TEXT_DOMAIN_DEFAULT = 'page-default';
+    public const TEXT_DOMAIN_DEFAULT = 'page-default';
 
     /**
      * Translate a message of LoTGD WITH MessageFormatter.
@@ -97,17 +97,15 @@ class Translator extends ZendTranslator implements TranslatorInterface
      */
     protected function cleanParameters($param): bool
     {
-        if (
+        return (bool) (
             \is_string($param) //-- Allow string values
             || \is_numeric($param) //-- Allow numeric values
             || \is_bool($param) //-- Allow bool values
             || \is_null($param) //-- Allow null value (Formatter can handle this value)
             || $param instanceof \DateTime //-- Allow DateTime object
-        ) {
-            return true;
-        }
+        )
 
-        return false;
+         ;
     }
 
     /**
@@ -235,7 +233,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
             //-- Symfony Translator format domain.locale.yaml
             $filename = \sprintf('translations/%1$s/%2$s.%1$s.yaml', $locale, \implode('/', $domains));
 
-            if ( ! is_file($filename))
+            if ( ! \is_file($filename))
             {
                 //-- Laminas format domain.yaml (old) this format not are loaded by Symfony Translator
                 $filename = \sprintf('translations/%1$s/%2$s.yaml', $locale, \implode('/', $domains));

@@ -24,6 +24,7 @@ use Lotgd\Core\Db\Dbwrapper as CoreDbwrapper;
 
 /**
  * Static class to access a basic functions of DB.
+ *
  * @deprecated 4.4.0
  */
 class Dbwrapper
@@ -44,7 +45,7 @@ class Dbwrapper
      */
     public static function query($sql)
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             $resultSet = new ResultSet();
 
@@ -79,7 +80,7 @@ class Dbwrapper
      */
     public static function select($table = null, $prefixed = null)
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             return false;
         }
@@ -97,7 +98,7 @@ class Dbwrapper
      */
     public static function insert($table = null, $prefixed = null)
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             return false;
         }
@@ -115,7 +116,7 @@ class Dbwrapper
      */
     public static function update($table = null, $prefixed = null)
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             return false;
         }
@@ -133,7 +134,7 @@ class Dbwrapper
      */
     public static function delete($table = null, ?bool $prefixed = null)
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             return false;
         }
@@ -180,13 +181,13 @@ class Dbwrapper
             return;
         }
 
-        $union = false === strpos($url, '?') ? '?' : '&';
+        $union = false === \strpos($url, '?') ? '?' : '&';
         \LotgdNavigation::addHeader('common.pagination.title');
 
         foreach ($paginator->pagesInRange as $page)
         {
             $minItem = (($page - 1) * $paginator->itemCountPerPage) + 1;
-            $maxItem = min($paginator->itemCountPerPage * $page, $paginator->totalItemCount);
+            $maxItem = \min($paginator->itemCountPerPage * $page, $paginator->totalItemCount);
 
             $text = ($page != $paginator->current ? 'common.pagination.page' : 'common.pagination.current');
             \LotgdNavigation::addNav($text, "{$url}{$union}page={$page}", [
@@ -258,7 +259,7 @@ class Dbwrapper
      */
     public static function table_exists(string $tablename): bool
     {
-        if (defined('DB_NODB') && ! defined('LINK'))
+        if (\defined('DB_NODB') && ! \defined('LINK'))
         {
             return false;
         }
@@ -318,4 +319,4 @@ class Dbwrapper
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Dbwrapper', 'DB', false);
+\class_alias('Lotgd\Core\Fixed\Dbwrapper', 'DB', false);

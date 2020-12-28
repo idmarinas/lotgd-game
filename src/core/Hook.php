@@ -21,244 +21,243 @@ class Hook
      * Page Hooks.
      */
     // Every header. Old: everyheader
-    const HOOK_EVERY_HEADER = 'lotgd.page.every.header';
+    public const HOOK_EVERY_HEADER = 'lotgd.page.every.header';
 
     // Every footer. Old: everyfooter
-    const HOOK_EVERY_FOOTER = 'lotgd.page.every.footer';
+    public const HOOK_EVERY_FOOTER = 'lotgd.page.every.footer';
 
     // Every header authenticated. Old: everyheader-loggedin
-    const HOOK_EVERY_HEADER_AUTHENTICATED = 'lotgd.page.every.header.authenticated';
+    public const HOOK_EVERY_HEADER_AUTHENTICATED = 'lotgd.page.every.header.authenticated';
 
     // Every footer authenticated. Old: everyfooter-loggedin
-    const HOOK_EVERY_FOOTER_AUTHENTICATED = 'lotgd.page.every.footer.authenticated';
-
+    public const HOOK_EVERY_FOOTER_AUTHENTICATED = 'lotgd.page.every.footer.authenticated';
 
     /**
-     * Hooks header/footer page
+     * Hooks header/footer page.
      */
 
     // In header for script
-    const HOOK_HEADER_SCRIPT = 'lotgd.page.header.script.';
+    public const HOOK_HEADER_SCRIPT = 'lotgd.page.header.script.';
 
     // In footer for script
-    const HOOK_FOOTER_SCRIPT = 'lotgd.page.footer.script.';
+    public const HOOK_FOOTER_SCRIPT = 'lotgd.page.footer.script.';
 
     /**
-     * Hooks of character
+     * Hooks of character.
      */
     // End of generated characters stats
-    const HOOK_CHARACTER_STATS = 'lotgd.character.stats';
+    public const HOOK_CHARACTER_STATS = 'lotgd.character.stats';
 
     // When generated characters stats, but character is offline
-    const HOOK_CHARACTER_ONLINE_LIST = 'lotgd.character.online.list';
+    public const HOOK_CHARACTER_ONLINE_LIST = 'lotgd.character.online.list';
 
     // Modify character buff
-    const HOOK_CHARACTER_MODIFY_BUFF = 'lotgd.character.modify.buff';
+    public const HOOK_CHARACTER_MODIFY_BUFF = 'lotgd.character.modify.buff';
 
     // Character companions
-    const HOOK_CHARACTER_COMPANIONS_ALLOWED = 'lotgd.character.companions.allowed';
+    public const HOOK_CHARACTER_COMPANIONS_ALLOWED = 'lotgd.character.companions.allowed';
 
     // Character cleanup
-    const HOOK_CHARACTER_CLEANUP = 'lotgd.character.cleanup';
+    public const HOOK_CHARACTER_CLEANUP = 'lotgd.character.cleanup';
 
     // Character killed player
-    const HOOK_CHARACTER_KILLED_PLAYER = 'lotgd.character.killed.player';
+    public const HOOK_CHARACTER_KILLED_PLAYER = 'lotgd.character.killed.player';
 
     // Character increment specialty
-    const HOOK_CHARACTER_SPECIALTY_INCREMENT = 'lotgd.character.specialty.increment';
+    public const HOOK_CHARACTER_SPECIALTY_INCREMENT = 'lotgd.character.specialty.increment';
 
     // Character pvp adjust
-    const HOOK_CHARACTER_PVP_ADJUST = 'lotgd.character.pvp.adjust';
+    public const HOOK_CHARACTER_PVP_ADJUST = 'lotgd.character.pvp.adjust';
 
     // Character pvp win
-    const HOOK_CHARACTER_PVP_WIN = 'lotgd.character.pvp.win';
+    public const HOOK_CHARACTER_PVP_WIN = 'lotgd.character.pvp.win';
 
     // Character pvp loss
-    const HOOK_CHARACTER_PVP_LOSS = 'lotgd.character.pvp.loss';
+    public const HOOK_CHARACTER_PVP_LOSS = 'lotgd.character.pvp.loss';
 
     // Character pvp do kill
-    const HOOK_CHARACTER_PVP_DO_KILL = 'lotgd.character.pvp.do.kill';
+    public const HOOK_CHARACTER_PVP_DO_KILL = 'lotgd.character.pvp.do.kill';
 
     // Character restore backup. Old: character-restore
-    const HOOK_CHARACTER_BACKUP_RESTORE = 'lotgd.character.backup.restore';
+    public const HOOK_CHARACTER_BACKUP_RESTORE = 'lotgd.character.backup.restore';
 
     /**
-     * Hooks of companions
+     * Hooks of companions.
      */
     // Alter companion. Old: alter-companion
-    const HOOK_COMPANION_ALTER = 'lotgd.companion.alter';
+    public const HOOK_COMPANION_ALTER = 'lotgd.companion.alter';
 
     /**
-     * Hooks of clan
+     * Hooks of clan.
      */
     // Delete clan
-    const HOOK_CLAN_DELETE = 'lotgd.clan.delete';
+    public const HOOK_CLAN_DELETE = 'lotgd.clan.delete';
 
     // Create clan
-    const HOOK_CLAN_CREATE = 'lotgd.clan.create';
+    public const HOOK_CLAN_CREATE = 'lotgd.clan.create';
 
     // Enter clan
-    const HOOK_CLAN_ENTER = 'lotgd.clan.enter';
+    public const HOOK_CLAN_ENTER = 'lotgd.clan.enter';
 
     // Set clan rank
-    const HOOK_CLAN_RANK_SET = 'lotgd.clan.rank.set';
+    public const HOOK_CLAN_RANK_SET = 'lotgd.clan.rank.set';
 
     // Set clan rank
-    const HOOK_CLAN_RANK_LIST = 'lotgd.clan.rank.list';
+    public const HOOK_CLAN_RANK_LIST = 'lotgd.clan.rank.list';
 
     // Set clan rank
-    const HOOK_CLAN_WITHDRAW = 'lotgd.clan.withdraw';
+    public const HOOK_CLAN_WITHDRAW = 'lotgd.clan.withdraw';
 
     /**
-     * Hooks of forest/creatures
+     * Hooks of forest/creatures.
      */
     // Creature search
-    const HOOK_CREATURE_SEARCH = 'lotgd.creature.search';
+    public const HOOK_CREATURE_SEARCH = 'lotgd.creature.search';
 
     // Creature encounter
-    const HOOK_CREATURE_ENCOUNTER = 'lotgd.creature.encounter';
+    public const HOOK_CREATURE_ENCOUNTER = 'lotgd.creature.encounter';
 
     // Creature buff
-    const HOOK_CREATURE_BUFF = 'lotgd.creature.buff.';
+    public const HOOK_CREATURE_BUFF = 'lotgd.creature.buff.';
 
     /**
-     * Hooks of graveyard
+     * Hooks of graveyard.
      */
     // Start a battle
-    const HOOK_GRAVEYARD_FIGHT_START = 'lotgd.graveyard.fight.start';
+    public const HOOK_GRAVEYARD_FIGHT_START = 'lotgd.graveyard.fight.start';
 
     // Question, actions
-    const HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS = 'lotgd.graveyard.death.overlord.actions';
+    public const HOOK_GRAVEYARD_DEATH_OVERLORD_ACTIONS = 'lotgd.graveyard.death.overlord.actions';
 
     // Question, actions
-    const HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS = 'lotgd.graveyard.death.overlord.favors';
+    public const HOOK_GRAVEYARD_DEATH_OVERLORD_FAVORS = 'lotgd.graveyard.death.overlord.favors';
 
     /**
-     * Hooks of Inn
+     * Hooks of Inn.
      */
     // Bribe bartender
-    const HOOK_INN_BARTENDER_BRIBE = 'lotgd.inn.bartender.bribe';
+    public const HOOK_INN_BARTENDER_BRIBE = 'lotgd.inn.bartender.bribe';
 
     // Ale
-    const HOOK_INN_ALE = 'lotgd.inn.ale';
+    public const HOOK_INN_ALE = 'lotgd.inn.ale';
 
     /**
-     * Hooks Fight
+     * Hooks Fight.
      */
     // Nav PRE
-    const HOOK_FIGHT_NAV_PRE = 'lotgd.fight.nav.pre';
+    public const HOOK_FIGHT_NAV_PRE = 'lotgd.fight.nav.pre';
 
     // Nav Graveyard
-    const HOOK_FIGHT_NAV_GRAVEYARD = 'lotgd.fight.nav.graveyard';
+    public const HOOK_FIGHT_NAV_GRAVEYARD = 'lotgd.fight.nav.graveyard';
 
     // Nav Specialties
-    const HOOK_FIGHT_NAV_SPECIALTY = 'lotgd.fight.nav.specialty';
+    public const HOOK_FIGHT_NAV_SPECIALTY = 'lotgd.fight.nav.specialty';
 
     // Nav
-    const HOOK_FIGHT_NAV = 'lotgd.fight.nav';
+    public const HOOK_FIGHT_NAV = 'lotgd.fight.nav';
 
     // Options
-    const HOOK_FIGHT_OPTIONS = 'lotgd.fight.options';
+    public const HOOK_FIGHT_OPTIONS = 'lotgd.fight.options';
 
     // Alter gem chance
-    const HOOK_FIGHT_ALTER_GEM_CHANCE = 'lotgd.fight.alter.gem.chance';
+    public const HOOK_FIGHT_ALTER_GEM_CHANCE = 'lotgd.fight.alter.gem.chance';
 
     // Apply specialties
-    const HOOK_FIGHT_APPLY_SPECIALTY = 'lotgd.fight.apply.specialty';
+    public const HOOK_FIGHT_APPLY_SPECIALTY = 'lotgd.fight.apply.specialty';
 
     /**
-     * Core hooks
+     * Core hooks.
      */
     // Everyhit. Old: everyhit
-    const HOOK_CORE_EVERYHIT = 'lotgd.core.everyhit';
+    public const HOOK_CORE_EVERYHIT = 'lotgd.core.everyhit';
 
     // Everyhit loggedin. Old: everyhit-loggedin
-    const HOOK_CORE_EVERYHIT_LOGGEDIN = 'lotgd.core.everyhit.loggedin';
+    public const HOOK_CORE_EVERYHIT_LOGGEDIN = 'lotgd.core.everyhit.loggedin';
 
     // Check login. Old: check-login
-    const HOOK_CORE_LOGIN_CHECK = 'lotgd.core.login.check';
+    public const HOOK_CORE_LOGIN_CHECK = 'lotgd.core.login.check';
 
     // Player login. Old: player-login
-    const HOOK_CORE_LOGIN_PLAYER = 'lotgd.core.login.player';
+    public const HOOK_CORE_LOGIN_PLAYER = 'lotgd.core.login.player';
 
     // Player logout. Old: player-logout
-    const HOOK_CORE_LOGOUT_PLAYER = 'lotgd.core.logout.player';
+    public const HOOK_CORE_LOGOUT_PLAYER = 'lotgd.core.logout.player';
 
     // Add petition. Old: addpetition
-    const HOOK_CORE_PETITION_ADD = 'lotgd.core.pettion.add';
+    public const HOOK_CORE_PETITION_ADD = 'lotgd.core.pettion.add';
 
     // Petition faq toc. Old: faq-toc
-    const HOOK_CORE_PETITION_FAQ_TOC = 'lotgd.core.pettion.faq.toc';
+    public const HOOK_CORE_PETITION_FAQ_TOC = 'lotgd.core.pettion.faq.toc';
 
     // Change setting
-    const HOOK_CORE_SETTING_CHANGE = 'lotgd.core.setting.change';
+    public const HOOK_CORE_SETTING_CHANGE = 'lotgd.core.setting.change';
 
     // Specialty names: Old: specialtynames
-    const HOOK_CORE_SPECIALTY_NAMES = 'lotgd.core.specialty.names';
+    public const HOOK_CORE_SPECIALTY_NAMES = 'lotgd.core.specialty.names';
 
     // DK point recalc. Old: pdkpointrecalc
-    const HOOK_CORE_DK_POINT_RECALC = 'lotgd.core.pdk.point.recalc';
+    public const HOOK_CORE_DK_POINT_RECALC = 'lotgd.core.pdk.point.recalc';
 
     // New day run once. Old: newday-runonce
-    const HOOK_CORE_NEWDAY_RUNONCE = 'lotgd.core.newday.runonce';
+    public const HOOK_CORE_NEWDAY_RUNONCE = 'lotgd.core.newday.runonce';
 
     // Pre new day. Old: pre-newday
-    const HOOK_CORE_NEWDAY_PRE = 'lotgd.core.newday.pre';
+    public const HOOK_CORE_NEWDAY_PRE = 'lotgd.core.newday.pre';
 
     // New day. Old: newday
-    const HOOK_CORE_NEWDAY = 'lotgd.core.newday';
+    public const HOOK_CORE_NEWDAY = 'lotgd.core.newday';
 
     // Set race. Old: setrace
-    const HOOK_CORE_RACE_SET = 'lotgd.core.race.set';
+    public const HOOK_CORE_RACE_SET = 'lotgd.core.race.set';
 
     // Choose race. Old: chooserace
-    const HOOK_CORE_RACE_CHOOSE = 'lotgd.core.race.choose';
+    public const HOOK_CORE_RACE_CHOOSE = 'lotgd.core.race.choose';
 
     // Set specialty. Old: set-specialty
-    const HOOK_CORE_SPECIALTY_SET = 'lotgd.core.specialty.set';
+    public const HOOK_CORE_SPECIALTY_SET = 'lotgd.core.specialty.set';
 
     // Choose specialty. Old: choose-specialty
-    const HOOK_CORE_SPECIALTY_CHOOSE = 'lotgd.core.specialty.choose';
+    public const HOOK_CORE_SPECIALTY_CHOOSE = 'lotgd.core.specialty.choose';
 
     /**
-     * Hook comentary
+     * Hook comentary.
      */
     // Post comment. Old: postcomment
-    const HOOK_COMENTARY_COMMENT_POST = 'lotgd.core.comentary.comment.post';
+    public const HOOK_COMENTARY_COMMENT_POST = 'lotgd.core.comentary.comment.post';
 
     // Commands. Old: commentary-command
-    const HOOK_COMENTARY_COMMANDS = 'lotgd.core.comentary.commands';
+    public const HOOK_COMENTARY_COMMANDS = 'lotgd.core.comentary.commands';
 
     // Comment. Old: commentary-comment
-    const HOOK_COMENTARY_COMMENT = 'lotgd.core.comentary.comment';
+    public const HOOK_COMENTARY_COMMENT = 'lotgd.core.comentary.comment';
 
     // Moderate sections. Old: moderate-comment-sections
-    const HOOK_COMENTARY_MODERATE_SECTIONS = 'lotgd.core.comentary.moderate.sections';
+    public const HOOK_COMENTARY_MODERATE_SECTIONS = 'lotgd.core.comentary.moderate.sections';
 
     /**
-     * Other hooks
+     * Other hooks.
      */
     // Special holiday
-    const HOOK_SPECIAL_HOLIDAY = 'lotgd.other.holiday';
+    public const HOOK_SPECIAL_HOLIDAY = 'lotgd.other.holiday';
 
     // Dragonpoints reset
-    const HOOK_SERVER_DRAGON_POINT_RESET = 'lotgd.other.server.dragon.point.reset';
+    public const HOOK_SERVER_DRAGON_POINT_RESET = 'lotgd.other.server.dragon.point.reset';
 
     // Superuser
-    const HOOK_SUPERUSER = 'lotgd.other.superuser';
+    public const HOOK_SUPERUSER = 'lotgd.other.superuser';
 
     // Check su access
-    const HOOK_SUPERUSER_CHECK_SU_ACCESS = 'lotgd.other.superuser.check.su.access';
+    public const HOOK_SUPERUSER_CHECK_SU_ACCESS = 'lotgd.other.superuser.check.su.access';
 
     // Check su permission
-    const HOOK_SUPERUSER_CHECK_SU_PERMISSION = 'lotgd.other.superuser.check.su.permission';
+    public const HOOK_SUPERUSER_CHECK_SU_PERMISSION = 'lotgd.other.superuser.check.su.permission';
 
     // Check su permission. Old: stamina-newday
-    const HOOK_OTHER_STAMINA_NEWDAY = 'lotgd.other.stamina.newday';
+    public const HOOK_OTHER_STAMINA_NEWDAY = 'lotgd.other.stamina.newday';
 
     // Locations. Old: camplocs
-    const HOOK_OTHER_LOCATIONS = 'lotgd.other.locations';
+    public const HOOK_OTHER_LOCATIONS = 'lotgd.other.locations';
 
     // End of bio page. Old: bioend
-    const HOOK_OTHER_BIO_END = 'lotgd.other.bio.end';
+    public const HOOK_OTHER_BIO_END = 'lotgd.other.bio.end';
 }

@@ -205,7 +205,7 @@ abstract class AbstractElement extends AbstractExtensionCore
 
         foreach ($attributes as $key => $value)
         {
-            $key = strtolower($key);
+            $key = \strtolower($key);
 
             if ( ! $value && isset($this->booleanAttributes[$key]) && ('' === $this->booleanAttributes[$key]['off']))
             {
@@ -219,16 +219,16 @@ abstract class AbstractElement extends AbstractExtensionCore
             try
             {
                 $escapedAttribute = $escapeAttr($value);
-                $strings[]        = sprintf('%s="%s"', $escape($env, $key, 'html'), $escapedAttribute);
+                $strings[]        = \sprintf('%s="%s"', $escape($env, $key, 'html'), $escapedAttribute);
             }
             catch (EscaperException $x)
             {
                 // If an escaper exception happens, escape only the key, and use a blank value.
-                $strings[] = sprintf('%s=""', $escape($env, $key, 'html'));
+                $strings[] = \sprintf('%s=""', $escape($env, $key, 'html'));
             }
         }
 
-        return implode(' ', $strings);
+        return \implode(' ', $strings);
     }
 
     /**
@@ -265,7 +265,7 @@ abstract class AbstractElement extends AbstractExtensionCore
     {
         if ( ! $this->isValidAttributeName($attribute))
         {
-            throw new InvalidArgumentException(sprintf('%s is not a valid attribute name', $attribute));
+            throw new InvalidArgumentException(\sprintf('%s is not a valid attribute name', $attribute));
         }
 
         $this->validTagAttributes[$attribute] = true;
@@ -287,7 +287,7 @@ abstract class AbstractElement extends AbstractExtensionCore
     {
         if ( ! $this->isValidAttributeName($prefix))
         {
-            throw new InvalidArgumentException(sprintf('%s is not a valid attribute prefix', $prefix));
+            throw new InvalidArgumentException(\sprintf('%s is not a valid attribute prefix', $prefix));
         }
 
         $this->validTagAttributePrefixes[] = $prefix;
@@ -390,13 +390,14 @@ abstract class AbstractElement extends AbstractExtensionCore
     {
         foreach ($attributes as $key => $value)
         {
-            $attribute = strtolower($key);
+            $attribute = \strtolower($key);
 
             if ( ! isset($this->validGlobalAttributes[$attribute])
                 && ! isset($this->validTagAttributes[$attribute])
                 && ! $this->hasAllowedPrefix($attribute)
             ) {
                 unset($attributes[$key]);
+
                 continue;
             }
 
@@ -429,7 +430,7 @@ abstract class AbstractElement extends AbstractExtensionCore
      */
     protected function prepareBooleanAttributeValue($attribute, $value)
     {
-        if ( ! is_bool($value) && in_array($value, $this->booleanAttributes[$attribute]))
+        if ( ! \is_bool($value) && \in_array($value, $this->booleanAttributes[$attribute]))
         {
             return $value;
         }
@@ -467,7 +468,7 @@ abstract class AbstractElement extends AbstractExtensionCore
         {
             foreach ($this->translatableAttributePrefixes as $prefix)
             {
-                if (0 === mb_strpos($key, $prefix))
+                if (0 === \mb_strpos($key, $prefix))
                 {
                     // prefix matches => return translated $value
                     return $translator($value, $this->getTranslatorTextDomain());
@@ -476,7 +477,7 @@ abstract class AbstractElement extends AbstractExtensionCore
 
             foreach (self::$defaultTranslatableHtmlAttributePrefixes as $prefix)
             {
-                if (0 === mb_strpos($key, $prefix))
+                if (0 === \mb_strpos($key, $prefix))
                 {
                     // default prefix matches => return translated $value
                     return $translator($value, $this->getTranslatorTextDomain());
@@ -499,7 +500,7 @@ abstract class AbstractElement extends AbstractExtensionCore
      */
     protected function isValidAttributeName($attribute)
     {
-        return preg_match('/^[^\t\n\f \/>"\'=]+$/', $attribute);
+        return \preg_match('/^[^\t\n\f \/>"\'=]+$/', $attribute);
     }
 
     /**
@@ -513,7 +514,7 @@ abstract class AbstractElement extends AbstractExtensionCore
     {
         foreach ($this->validTagAttributePrefixes as $prefix)
         {
-            if (substr($attribute, 0, strlen($prefix)) === $prefix)
+            if (\substr($attribute, 0, \strlen($prefix)) === $prefix)
             {
                 return true;
             }

@@ -22,12 +22,12 @@ class Doctrine implements AdapterInterface
     /**
      * Use getScalarResult to get results.
      */
-    const RESULT_SCALAR = 1;
+    public const RESULT_SCALAR = 1;
 
     /**
      * Use getArrayResult to get results.
      */
-    const RESULT_ARRAY = 2;
+    public const RESULT_ARRAY = 2;
 
     /**
      * Doctrine instance of QueryBuilder.

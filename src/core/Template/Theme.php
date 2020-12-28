@@ -51,12 +51,14 @@ class Theme extends Template
         $user    = $session['user'] ?? [];
         unset($user['password']);
 
-        $context = \array_merge([
+        $context = \array_merge(
+            [
             'userPre' => $userPre,
             'user'    => $user, //-- Actual user data for this template
             'session' => $html['session'] ?? [], //-- Session data declared in page_header or popup_header
         ],
-        $context);
+            $context
+        );
 
         return $this->render("{$this->themefolder}/{$name}", (array) $context);
     }
@@ -84,12 +86,14 @@ class Theme extends Template
         $user    = $session['user'] ?? [];
         unset($user['password']);
 
-        $context = \array_merge([
+        $context = \array_merge(
+            [
             'userPre' => $userPre,
             'user'    => $user, //-- Actual user data for this template
             'session' => $html['session'] ?? [], //-- Actual session data for this template
         ],
-        $context);
+            $context
+        );
 
         return $this->render("module/{$name}", (array) $context);
     }

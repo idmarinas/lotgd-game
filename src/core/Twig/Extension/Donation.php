@@ -18,11 +18,11 @@ use Twig\TwigFunction;
 
 class Donation extends AbstractExtension
 {
-    use PatternCore\Translator;
-    use PatternCore\Template;
-    use PatternCore\Http;
     use Pattern\AttributesString;
     use Pattern\Navigation;
+    use PatternCore\Http;
+    use PatternCore\Template;
+    use PatternCore\Translator;
 
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class Donation extends AbstractExtension
 
         $params = [
             'item_number' => \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').'/'.$request->getServer('REQUEST_URI'),
-            'notify_url' => '//'.$request->getServer('HTTP_HOST').\dirname($request->getServer('REQUEST_URI')).'/payment.php'
+            'notify_url'  => '//'.$request->getServer('HTTP_HOST').\dirname($request->getServer('REQUEST_URI')).'/payment.php',
         ];
 
         return $this->getTemplate()->render('@core/paypal.html.twig', $params);

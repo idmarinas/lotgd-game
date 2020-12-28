@@ -24,7 +24,7 @@ use Tracy\Debugger;
  */
 class Cache extends AjaxAbstract
 {
-    const TEXT_DOMAIN = 'jaxon-cache';
+    public const TEXT_DOMAIN = 'jaxon-cache';
 
     public function optimize($class): Response
     {

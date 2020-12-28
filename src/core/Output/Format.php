@@ -19,10 +19,10 @@ use Lotgd\Core\Pattern as PatternCore;
  */
 class Format
 {
+    use Pattern\Code;
+    use Pattern\Color;
     use PatternCore\Container;
     use PatternCore\Translator;
-    use Pattern\Color;
-    use Pattern\Code;
 
     /**
      * Style of decimal point.

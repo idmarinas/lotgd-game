@@ -66,7 +66,7 @@ if (0 == $superusers)
             }
             catch (\Throwable $th)
             {
-                die('Failed to create Admin account and character. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.');
+                exit('Failed to create Admin account and character. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.');
             }
 
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.success', ['name' => $name], 'page-installer'));

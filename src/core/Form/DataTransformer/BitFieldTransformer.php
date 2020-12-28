@@ -17,7 +17,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class BitFieldTransformer implements DataTransformerInterface
 {
-    const MAX_BITFIELDS = 0x7FFFFFFF;
+    public const MAX_BITFIELDS = 0x7FFFFFFF;
 
     public function transform($bits)
     {
@@ -39,6 +39,6 @@ class BitFieldTransformer implements DataTransformerInterface
 
     public function reverseTransform($array)
     {
-        return array_sum($array);
+        return \array_sum($array);
     }
 }

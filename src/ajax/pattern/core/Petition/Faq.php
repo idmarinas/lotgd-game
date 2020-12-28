@@ -118,6 +118,7 @@ trait Faq
     private function faqToc(): array
     {
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_PETITION_FAQ_TOC);
+
         return modulehook('faq-toc', [
             [
                 'onclick' => 'JaxonLotgd.Ajax.Core.Petition.primer()',

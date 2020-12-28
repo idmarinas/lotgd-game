@@ -27,12 +27,11 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class UnTagifyTransformer implements DataTransformerInterface
 {
-
     public function reverseTransform($value)
     {
-        if ($value[0] == '[')
+        if ('[' == $value[0])
         {
-            return implode(',', array_column(json_decode($value), 'value'));
+            return \implode(',', \array_column(\json_decode($value), 'value'));
         }
 
         return $value;
@@ -40,9 +39,9 @@ class UnTagifyTransformer implements DataTransformerInterface
 
     public function transform($value)
     {
-        if ($value[0] == '[')
+        if ('[' == $value[0])
         {
-            return implode(',', array_column(json_decode($value), 'value'));
+            return \implode(',', \array_column(\json_decode($value), 'value'));
         }
 
         return $value;

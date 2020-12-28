@@ -135,18 +135,18 @@ trait Bans
             ;
             $dots = 0;
 
-            for ($x = strlen($ip); $x > 0; --$x)
+            for ($x = \strlen($ip); $x > 0; --$x)
             {
                 if ($dots > 1)
                 {
                     break;
                 }
-                $thisip = substr($ip, 0, $x);
+                $thisip = \substr($ip, 0, $x);
                 $query->orWhere("u.lastip LIKE ?{$x}")
                     ->setParameter($x, "{$thisip}%")
                 ;
 
-                if ('.' == substr($ip, $x - 1, 1))
+                if ('.' == \substr($ip, $x - 1, 1))
                 {
                     --$x;
                     ++$dots;

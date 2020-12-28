@@ -7,6 +7,6 @@ return [
             Lotgd\Core\Command\RegenerateAppSecretCommand::class,
             Lotgd\Core\Command\StorageCacheClearCommand::class,
             Lotgd\Core\Command\StorageCacheStatsCommand::class,
-        ]
-    ]
+        ],
+    ],
 ];

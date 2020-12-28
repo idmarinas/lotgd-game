@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
-use  Symfony\Component\HttpFoundation\Session\Session as CoreSession;
+use Symfony\Component\HttpFoundation\Session\Session as CoreSession;
 
 class Session
 {
@@ -27,8 +27,8 @@ class Session
     /**
      * Add support for magic static method calls.
      *
-     * @param mixed  $method
-     * @param array  $arguments
+     * @param mixed $method
+     * @param array $arguments
      *
      * @return mixed the returned value from the resolved method
      */
@@ -39,7 +39,7 @@ class Session
             return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$instance));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -55,4 +55,4 @@ class Session
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Session', 'LotgdSession', false);
+\class_alias('Lotgd\Core\Fixed\Session', 'LotgdSession', false);

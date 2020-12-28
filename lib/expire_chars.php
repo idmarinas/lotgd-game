@@ -100,10 +100,11 @@ $query      = $repository->createQueryBuilder('a');
 
 $query
     ->where('BIT_AND(a.superuser, :permit) = 0')
-    ->andWhere($expr->orX(
-            '1 = 0',
-            $old ? $expr->lt('a.laston', ':dateOld') : null
-        ),
+    ->andWhere(
+        $expr->orX(
+        '1 = 0',
+        $old ? $expr->lt('a.laston', ':dateOld') : null
+    ),
         $expr->andX(
             $expr->neq('a.emailaddress', ':empty'),
             $expr->eq('a.sentnotice', 0)

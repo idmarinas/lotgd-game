@@ -520,9 +520,9 @@ class Companions implements Translatable
      */
     public function getAbilities()
     {
-        if (is_string($this->abilities))
+        if (\is_string($this->abilities))
         {
-            $this->abilities = unserialize($this->abilities);
+            $this->abilities = \unserialize($this->abilities);
         }
 
         return $this->abilities;

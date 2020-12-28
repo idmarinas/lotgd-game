@@ -19,7 +19,7 @@ class UniqueObject extends ObjectExists
     /**
      * Error constants.
      */
-    const ERROR_OBJECT_NOT_UNIQUE = 'objectNotUnique';
+    public const ERROR_OBJECT_NOT_UNIQUE = 'objectNotUnique';
 
     /**
      * @var array Message templates
@@ -54,20 +54,20 @@ class UniqueObject extends ObjectExists
 
         if ( ! isset($options['object_manager']) || ! $options['object_manager'] instanceof ObjectManager)
         {
-            if ( ! array_key_exists('object_manager', $options))
+            if ( ! \array_key_exists('object_manager', $options))
             {
                 $provided = 'nothing';
             }
-            elseif (is_object($options['object_manager']))
+            elseif (\is_object($options['object_manager']))
             {
-                $provided = get_class($options['object_manager']);
+                $provided = \get_class($options['object_manager']);
             }
             else
             {
-                $provided = gettype($options['object_manager']);
+                $provided = \gettype($options['object_manager']);
             }
 
-            throw new Exception\InvalidArgumentException(sprintf('Option "object_manager" is required and must be an instance of  Doctrine\Common\Persistence\ObjectManager, %s given', $provided));
+            throw new Exception\InvalidArgumentException(\sprintf('Option "object_manager" is required and must be an instance of  Doctrine\Common\Persistence\ObjectManager, %s given', $provided));
         }
 
         $this->objectManager = $options['object_manager'];
@@ -90,7 +90,7 @@ class UniqueObject extends ObjectExists
         $cleanedValue = $this->cleanSearchValue($value);
         $match        = $this->objectRepository->findOneBy($cleanedValue);
 
-        if ( ! is_object($match))
+        if ( ! \is_object($match))
         {
             return true;
         }
@@ -98,7 +98,7 @@ class UniqueObject extends ObjectExists
         $expectedIdentifiers = $this->getExpectedIdentifiers($context);
         $foundIdentifiers    = $this->getFoundIdentifiers($match);
 
-        if (0 == count(array_diff_assoc($expectedIdentifiers, $foundIdentifiers)))
+        if (0 == \count(\array_diff_assoc($expectedIdentifiers, $foundIdentifiers)))
         {
             return true;
         }
@@ -153,7 +153,7 @@ class UniqueObject extends ObjectExists
 
         foreach ($this->getIdentifiers() as $identifierField)
         {
-            if ( ! array_key_exists($identifierField, $context))
+            if ( ! \array_key_exists($identifierField, $context))
             {
                 throw new Exception\RuntimeException(\sprintf('Expected context to contain %s', $identifierField));
             }

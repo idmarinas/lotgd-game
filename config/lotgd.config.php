@@ -2,7 +2,7 @@
 
 return [
     \Laminas\ConfigAggregator\ConfigAggregator::ENABLE_CACHE => true, //-- This cache config of service manager recomended in production
-    'lotgd_core' => [
+    'lotgd_core'                                             => [
         'translation' => [
             'locale'             => ['language' => 'en', 'fallbackLanguage' => 'en'],
             'translator_plugins' => [

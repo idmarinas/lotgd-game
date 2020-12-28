@@ -19,8 +19,8 @@ use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
 {
-    const VERSION_NUMBER = 40300;
-    const CONFIG_DIR_GLOBAL = 'config/autoload/global';
+    public const VERSION_NUMBER    = 40300;
+    public const CONFIG_DIR_GLOBAL = 'config/autoload/global';
 
     /**
      * Step 1: Deleted some files that are not needed.

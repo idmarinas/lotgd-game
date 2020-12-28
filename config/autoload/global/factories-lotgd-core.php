@@ -37,9 +37,9 @@ return [
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead
 
             //-- Added in version 4.2.0
-            Lotgd\Core\Jaxon::class                                     => Factory\Component\Jaxon::class,
-            Gedmo\Translatable\TranslatableListener::class              => Factory\Translator\TranslatableListener::class, //-- Deprecated Factory
-            /* LAZY */ 'Lotgd\Core\SymfonyForm'                         => Factory\Form\SymfonyForm::class,
+            Lotgd\Core\Jaxon::class                        => Factory\Component\Jaxon::class,
+            Gedmo\Translatable\TranslatableListener::class => Factory\Translator\TranslatableListener::class, //-- Deprecated Factory
+            /* LAZY */ 'Lotgd\Core\SymfonyForm'            => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
             /* LAZY */ Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class,

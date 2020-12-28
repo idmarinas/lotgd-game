@@ -67,8 +67,8 @@ function injectmodule($modulename, $force = false)
             $fname = $modulename.'_getmoduleinfo';
             $info  = $fname();
 
-            $info['requires']    = $info['requires']       ?? [];
-            $info['download']    = $info['download']       ?? '';
+            $info['requires']    = $info['requires']    ?? [];
+            $info['download']    = $info['download']    ?? '';
             $info['description'] = $info['description'] ?? '';
 
             if ( ! \is_array($info['requires']))
@@ -104,8 +104,8 @@ function injectmodule($modulename, $force = false)
                     $fname = "{$modulename}_getmoduleinfo";
                     $info  = $fname();
 
-                    $info['download']    = $info['download']       ?? '';
-                    $info['version']     = $info['version']         ?? '0.0';
+                    $info['download']    = $info['download']    ?? '';
+                    $info['version']     = $info['version']     ?? '0.0';
                     $info['description'] = $info['description'] ?? '';
                 }
 

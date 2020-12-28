@@ -71,6 +71,7 @@ trait Version
         '4.6.0 IDMarinas Edition'         => 40600,
         '4.7.0 IDMarinas Edition'         => 40700,
         '4.8.0 IDMarinas Edition'         => 40800,
+        '4.9.0 IDMarinas Edition'         => 40900,
     ];
 
     /**
@@ -86,9 +87,9 @@ trait Version
      */
     public function getPreviusVersion(int $version): int
     {
-        $vers = array_values($this->versions);
+        $vers = \array_values($this->versions);
 
-        $actual = array_search($version, $vers);
+        $actual = \array_search($version, $vers);
 
         if (false === $actual)
         {
@@ -107,9 +108,9 @@ trait Version
      */
     public function getNextVersion(int $version): int
     {
-        $vers = array_values($this->versions);
+        $vers = \array_values($this->versions);
 
-        $actual = array_search($version, $vers);
+        $actual = \array_search($version, $vers);
 
         if (false === $actual)
         {
@@ -128,7 +129,7 @@ trait Version
      */
     public function getNameVersion(int $version): string
     {
-        return array_search($version, $this->versions);
+        return \array_search($version, $this->versions);
     }
 
     /**

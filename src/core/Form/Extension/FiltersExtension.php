@@ -19,8 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FiltersExtension extends AbstractTypeExtension
 {
@@ -33,7 +33,8 @@ class FiltersExtension extends AbstractTypeExtension
         {
             $filters = $event->getForm()->getConfig()->getOption('filters');
             $data = $event->getData();
-            foreach($filters as $filter)
+
+            foreach ($filters as $filter)
             {
                 $data = $filter->filter($data);
             }
@@ -51,7 +52,8 @@ class FiltersExtension extends AbstractTypeExtension
 
         //-- Filters should always be converted to an array
         //-- Filter need be instance of
-        $filtersNormalizer = function (Options $options, $filters) {
+        $filtersNormalizer = function (Options $options, $filters)
+        {
             $filters = \is_object($filters) ? [$filters] : (array) $filters;
 
             foreach ($filters as $key => $filter)

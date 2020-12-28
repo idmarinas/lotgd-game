@@ -35,8 +35,10 @@ function rawoutput($indata)
 /**
  * Generates the appropriate output based on the LOGD coding system (ie: `b: Bold, `i: Italic).
  *
- * @param string $data The string to be output
- * @param bool   $priv Indicates if the passed string ($data) contains HTML
+ * @param string $data  The string to be output
+ * @param bool   $priv  Indicates if the passed string ($data) contains HTML
+ * @param mixed  $text
+ * @param mixed  $force
  *
  * @return string An output (HTML) formatted string
  */

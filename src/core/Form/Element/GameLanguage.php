@@ -53,7 +53,7 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
     {
         //-- Get languages available in server.
         $settings = $this->getContainer(Settings::class);
-        $server   = explode(',', $settings->getSetting('serverlanguages'));
+        $server   = \explode(',', $settings->getSetting('serverlanguages'));
 
         $languages = [];
 
@@ -86,7 +86,7 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
                 [
                     'name'    => Validator\InArray::class,
                     'options' => [
-                        'haystack' => array_keys($this->validLanguages),
+                        'haystack' => \array_keys($this->validLanguages),
                     ],
                 ],
             ],

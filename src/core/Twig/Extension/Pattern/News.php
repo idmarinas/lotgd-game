@@ -31,7 +31,7 @@ trait News
 
                 $message = '';
 
-                if (count($deathmessage))
+                if (\count($deathmessage))
                 {
                     $msg = $this->getTranslator()->trans($deathmessage['deathmessage'], $deathmessage['params'] ?? [], $deathmessage['textDomain']);
 
@@ -44,7 +44,7 @@ trait News
                     $message .= $msg;
                 }
 
-                if (count($taunt))
+                if (\count($taunt))
                 {
                     $msg = $this->getTranslator()->trans($taunt['taunt'], $taunt['params'] ?? [], $taunt['textDomain']);
 

@@ -110,7 +110,8 @@ trait Translator
         }
 
         //-- Warning in bdump if not are equal
-        bdump(sprintf('Laminas i18m "%s" Symfony Translator "%s"',
+        bdump(\sprintf(
+            'Laminas i18m "%s" Symfony Translator "%s"',
             $this->getTranslator()->getLocale(),
             $this->symfonyTranslator()->getLocale()
         ), 'Locales of translator not equal');

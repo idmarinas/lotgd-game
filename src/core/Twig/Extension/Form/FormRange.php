@@ -62,7 +62,7 @@ class FormRange extends FormInput
 
         if (null === $name || '' === $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $attributes          = $element->getAttributes();

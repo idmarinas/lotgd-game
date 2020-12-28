@@ -23,7 +23,7 @@ class BasePath implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         $request = $container->get(Request::class);
-        $helper = new HelperBasePath();
+        $helper  = new HelperBasePath();
         $helper->setBasePath($request->getBasePath());
 
         return $helper;

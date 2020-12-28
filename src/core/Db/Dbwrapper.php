@@ -52,7 +52,7 @@ class Dbwrapper
             $options['driver'] = 'Pdo_Mysql';
         }
 
-        if ('pdo_mysql' == strtolower($options['driver']))
+        if ('pdo_mysql' == \strtolower($options['driver']))
         {
             $options['driver_options'] = [
                 \PDO::MYSQL_ATTR_FOUND_ROWS => true,
@@ -107,9 +107,10 @@ class Dbwrapper
 
         if ($profiler['elapse'] >= 0.5)
         {
-            \LotgdResponse::pageDebug(sprintf('Slow Query (%ss): %s',
-                round($profiler['elapse'], 3),
-                htmlentities($statement->getSql(), ENT_COMPAT, 'UTF-8')
+            \LotgdResponse::pageDebug(\sprintf(
+                'Slow Query (%ss): %s',
+                \round($profiler['elapse'], 3),
+                \htmlentities($statement->getSql(), ENT_COMPAT, 'UTF-8')
             ));
         }
 
@@ -127,7 +128,7 @@ class Dbwrapper
 
     public function getAffectedRows($result = null): int
     {
-        if (is_object($result) && \method_exists($result, 'getAffectedRows'))
+        if (\is_object($result) && \method_exists($result, 'getAffectedRows'))
         {
             return $result->getAffectedRows();
         }
@@ -137,14 +138,14 @@ class Dbwrapper
 
     public static function current(&$result)
     {
-        if (is_array($result))
+        if (\is_array($result))
         {
-            $val = current($result);
-            next($result);
+            $val = \current($result);
+            \next($result);
 
             return $val;
         }
-        elseif (is_object($result))
+        elseif (\is_object($result))
         {
             return $result->next();
         }
@@ -154,11 +155,11 @@ class Dbwrapper
 
     public static function count($result): int
     {
-        if (is_array($result))
+        if (\is_array($result))
         {
-            return count($result);
+            return \count($result);
         }
-        elseif (is_object($result))
+        elseif (\is_object($result))
         {
             return $result->count();
         }
@@ -198,7 +199,7 @@ class Dbwrapper
      */
     public function errorInfo($result = null)
     {
-        if (null !== $result && is_object($result))
+        if (null !== $result && \is_object($result))
         {
             return $result->getResource()->errorInfo()[2];
         }
@@ -221,7 +222,7 @@ class Dbwrapper
             //the admin did not want to notify him with a script
             \LotgdResponse::pageAddContent(\LotgdFormat::colorize('Please notify the head admin or any other staff member you know via email or any other means you have at hand to care about this.`n`n'));
             \LotgdResponse::pageAddContent(\LotgdFormat::colorize('Sorry for the inconvenience,`n'));
-            \LotgdResponse::pageAddContent(\LotgdFormat::colorize(sprintf('Staff of %s', $request->getServer('SERVER_NAME')), true));
+            \LotgdResponse::pageAddContent(\LotgdFormat::colorize(\sprintf('Staff of %s', $request->getServer('SERVER_NAME')), true));
             \LotgdNavigation::addNav('Home', 'index.php');
             \LotgdResponse::pageEnd();
         }

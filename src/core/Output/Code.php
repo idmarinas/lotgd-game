@@ -63,7 +63,7 @@ class Code
      */
     public function addCodes(array $codes)
     {
-        $this->codes = array_merge($this->codes, $codes);
+        $this->codes = \array_merge($this->codes, $codes);
 
         return $this;
     }
@@ -95,7 +95,7 @@ class Code
      */
     public function addCodesSpecialOpen(array $codes)
     {
-        $this->codesSpecialOpen = array_merge($this->codesSpecialOpen, $codes);
+        $this->codesSpecialOpen = \array_merge($this->codesSpecialOpen, $codes);
 
         return $this;
     }
@@ -127,7 +127,7 @@ class Code
      */
     public function addCodesSpecialClose(array $codes)
     {
-        $this->codesSpecialClose = array_merge($this->codesSpecialClose, $codes);
+        $this->codesSpecialClose = \array_merge($this->codesSpecialClose, $codes);
 
         return $this;
     }

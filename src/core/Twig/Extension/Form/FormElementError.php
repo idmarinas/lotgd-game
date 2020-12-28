@@ -59,15 +59,15 @@ class FormElementError extends AbstractElement
             return '';
         }
 
-        $messages = $messages instanceof Traversable ? iterator_to_array($messages) : $messages;
+        $messages = $messages instanceof Traversable ? \iterator_to_array($messages) : $messages;
 
-        if ( ! is_array($messages))
+        if ( ! \is_array($messages))
         {
-            throw new Exception\DomainException(sprintf('%s expects that $element->getMessages() will return an array or Traversable; received "%s"', __METHOD__, (is_object($messages) ? get_class($messages) : gettype($messages))));
+            throw new Exception\DomainException(\sprintf('%s expects that $element->getMessages() will return an array or Traversable; received "%s"', __METHOD__, (\is_object($messages) ? \get_class($messages) : \gettype($messages))));
         }
 
         // Prepare attributes for opening tag
-        $attributes = array_merge($this->attributes, $attributes ?? []);
+        $attributes = \array_merge($this->attributes, $attributes ?? []);
         $attributes = $this->createAttributesString($env, $attributes);
 
         return $env->render('{theme}/form/element/error.html.twig', [

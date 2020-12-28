@@ -19,7 +19,7 @@ use Laminas\Filter\FilterInterface;
  * Convert format:
  *      [value,value2]
  * into:
- *      'value,value2'
+ *      'value,value2'.
  */
 class ArrayToComaSeparator implements FilterInterface
 {
@@ -28,9 +28,9 @@ class ArrayToComaSeparator implements FilterInterface
      */
     public function filter($value)
     {
-        if (is_array($value))
+        if (\is_array($value))
         {
-            return implode(',', $value);
+            return \implode(',', $value);
         }
 
         return $value;

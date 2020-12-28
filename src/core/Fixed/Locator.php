@@ -27,8 +27,8 @@ class Locator
     /**
      * Add support for magic static method calls.
      *
-     * @param mixed  $method
-     * @param array  $arguments
+     * @param mixed $method
+     * @param array $arguments
      *
      * @return mixed the returned value from the resolved method
      */
@@ -39,7 +39,7 @@ class Locator
             return self::$sm->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$sm));
+        $methods = \implode(', ', \get_class_methods(self::$sm));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -63,4 +63,4 @@ class Locator
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Locator', 'LotgdLocator', false);
+\class_alias('Lotgd\Core\Fixed\Locator', 'LotgdLocator', false);

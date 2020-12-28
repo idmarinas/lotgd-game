@@ -94,6 +94,7 @@ function _sock($url)
         if ("\r\n" == $buf && $skip)
         {
             $skip = 0;
+
             continue;
         }
 

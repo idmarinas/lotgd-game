@@ -38,10 +38,11 @@ class StorageCacheClearCommand extends Command
     {
         $this
             ->setDescription('Clears the cache')
-            ->setHelp(<<<'EOF'
-The <info>%command.name%</info> command clears the cache, ignoring the .gitkeep files.
-This allows you to keep the default cache structure.
-EOF
+            ->setHelp(
+                <<<'EOF'
+                    The <info>%command.name%</info> command clears the cache, ignoring the .gitkeep files.
+                    This allows you to keep the default cache structure.
+                    EOF
             )
         ;
     }
@@ -59,7 +60,7 @@ EOF
         $find = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->files()->notName('.gitkeep');
 
         //-- Only remove proxy cache in dev environment
-        if ($kernel->getEnvironment() == 'prod')
+        if ('prod' == $kernel->getEnvironment())
         {
             $find->notPath('DoctrineORMModule/Proxy');
         }
@@ -81,12 +82,9 @@ EOF
                             $finder->in($file->getPathname())->ignoreDotFiles(false);
 
                             //-- No delete dirs with .gitkeep files or not are empty
-                            if ($finder->count())
-                            {
-                                return false;
-                            }
+                            return ! ($finder->count())
 
-                            return true;
+                             ;
                         }
 
                         return true;

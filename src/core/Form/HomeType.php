@@ -28,7 +28,7 @@ class HomeType extends AbstractType
     {
         $builder->add('defaultskin', LotgdThemeType::class, [
             'required' => false,
-            'label' => 'home.defaultskin',
+            'label'    => 'home.defaultskin',
         ]);
         $builder->add('submit', SubmitType::class, [
             'label'              => 'button.save',

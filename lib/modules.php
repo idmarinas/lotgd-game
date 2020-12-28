@@ -225,11 +225,11 @@ function get_module_info($shortname)
     $fname      = "{$shortname}_getmoduleinfo";
     $moduleinfo = $fname();
 
-    $moduleinfo['name']        = $moduleinfo['name']               ?? "Not specified ({$shortname})";
-    $moduleinfo['category']    = $moduleinfo['category']       ?? "Not specified ({$shortname})";
-    $moduleinfo['author']      = $moduleinfo['author']           ?? "Not specified ({$shortname})";
-    $moduleinfo['version']     = $moduleinfo['version']         ?? '0.0.0';
-    $moduleinfo['download']    = $moduleinfo['download']       ?? '';
+    $moduleinfo['name']        = $moduleinfo['name']        ?? "Not specified ({$shortname})";
+    $moduleinfo['category']    = $moduleinfo['category']    ?? "Not specified ({$shortname})";
+    $moduleinfo['author']      = $moduleinfo['author']      ?? "Not specified ({$shortname})";
+    $moduleinfo['version']     = $moduleinfo['version']     ?? '0.0.0';
+    $moduleinfo['download']    = $moduleinfo['download']    ?? '';
     $moduleinfo['description'] = $moduleinfo['description'] ?? '';
     $moduleinfo['modulename']  = $shortname;
 
@@ -261,10 +261,11 @@ function module_editor_navs($like, $linkprefix)
         //I really think we should give keyboard shortcuts even if they're
         //susceptible to change (which only happens here when the admin changes
         //modules around).  This annoys me every single time I come in to this page.
-        \LotgdNavigation::addNavNotl(\sprintf('%s%s%s',
-                $row->getActive() ? '' : '`)',
-                $row->getFormalname(),
-                $row->getActive() ? '' : '`0'
+        \LotgdNavigation::addNavNotl(\sprintf(
+            '%s%s%s',
+            $row->getActive() ? '' : '`)',
+            $row->getFormalname(),
+            $row->getActive() ? '' : '`0'
         ), $linkprefix.$row->getModulename());
     }
 }

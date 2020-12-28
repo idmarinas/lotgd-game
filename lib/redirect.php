@@ -40,7 +40,8 @@ function redirect($location, $reason = false)
     $http = (443 == \LotgdRequest::getServer('SERVER_PORT')) ? 'https' : 'http';
     $uri  = \rtrim(\dirname(\LotgdRequest::getServer('PHP_SELF')), '/\\');
 
-    \header(\sprintf('Location: %s://%s%s/%s',
+    \header(\sprintf(
+        'Location: %s://%s%s/%s',
         $http,
         $host,
         $uri,

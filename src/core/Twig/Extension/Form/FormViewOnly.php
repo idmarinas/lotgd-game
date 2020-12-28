@@ -57,20 +57,21 @@ class FormViewOnly extends FormInput
         $uncolorize = $env->getFilter('uncolorize')->getCallable();
         $value      = $element->getValue();
 
-        if ((is_array($filterName) && isset($filterName['name'])) || (is_string($filterName) && $filterName))
+        if ((\is_array($filterName) && isset($filterName['name'])) || (\is_string($filterName) && $filterName))
         {
             $filterName = ($filterName['name'] ?? '') ?: $filterName;
             $filter     = $env->getFilter($filterName)->getCallable();
 
             $value = $filter($value);
 
-            if (isset($filterName['params']) && is_array($filterName['params']))
+            if (isset($filterName['params']) && \is_array($filterName['params']))
             {
                 $value = $filter($value, ...$filterName['params']);
             }
         }
 
-        return sprintf('<span %s>%s</span>',
+        return \sprintf(
+            '<span %s>%s</span>',
             $this->createAttributesString($env, $attributes),
             $uncolorize($value)
         );

@@ -30,11 +30,11 @@ use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension
 {
-    use PatternCore\Translator;
-    use PatternCore\Template;
-    use PatternCore\Output;
     use Pattern\Commentary;
     use Pattern\CommentaryModerate;
+    use PatternCore\Output;
+    use PatternCore\Template;
+    use PatternCore\Translator;
 
     protected $commentary;
     protected $translator;
@@ -88,27 +88,27 @@ class Commentary extends AbstractExtension
     public function getTokenParsers()
     {
         return [
-            /**
+            /*
              * @param int
              * {% commentary_limit_comments 35 %}
              */
             new CommentaryDefaultLimitTokenParser(),
-            /**
+            /*
              * @param bool
              * {% commentary_show_pagination true %}
              */
             new CommentaryDefaultPaginationTokenParser(),
-            /**
+            /*
              * @param string
              * {% commentary_pagination_link_url 'foobar.php' %}
              */
             new CommentaryDefaultPaginationUrlTokenParser(),
-            /**
+            /*
              * @param bool
              * {% commentary_can_add_comments true %}
              */
             new CommentaryDefaultAddCommentTokenParser(),
-            /**
+            /*
              * @param string
              * {% commentary_domain_status 'foobar' %}
              */

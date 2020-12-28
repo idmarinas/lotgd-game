@@ -113,7 +113,7 @@ class FormInput extends AbstractElement
 
         if (null === $name || '' === $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $attributes          = $element->getAttributes();
@@ -128,7 +128,8 @@ class FormInput extends AbstractElement
             $attributes['value'] = '';
         }
 
-        return sprintf('<input %s>',
+        return \sprintf(
+            '<input %s>',
             $this->createAttributesString($env, $attributes)
         );
     }
@@ -150,7 +151,7 @@ class FormInput extends AbstractElement
     {
         $type = (string) $element->getAttribute('type');
 
-        $type = strtolower($type);
+        $type = \strtolower($type);
 
         return $this->validTypes[$type] ?? 'text';
     }

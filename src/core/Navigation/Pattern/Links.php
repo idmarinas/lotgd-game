@@ -68,7 +68,7 @@ trait Links
     {
         if (isset($this->links[$link]))
         {
-            $this->links[$link] = array_merge($this->links[$link], ['blocked' => false, 'hide' => false]);
+            $this->links[$link] = \array_merge($this->links[$link], ['blocked' => false, 'hide' => false]);
 
             return $this;
         }
@@ -87,7 +87,7 @@ trait Links
     {
         if (isset($this->partialLinks[$link]))
         {
-            $this->partialLinks[$link] = array_merge($this->partialLinks[$link], ['blocked' => true, 'hide' => false]);
+            $this->partialLinks[$link] = \array_merge($this->partialLinks[$link], ['blocked' => true, 'hide' => false]);
 
             return $this;
         }
@@ -106,7 +106,7 @@ trait Links
     {
         if (isset($this->partialLinks[$link]))
         {
-            $this->partialLinks[$link] = array_merge($this->partialLinks[$link], ['blocked' => false]);
+            $this->partialLinks[$link] = \array_merge($this->partialLinks[$link], ['blocked' => false]);
 
             return $this;
         }
@@ -129,7 +129,7 @@ trait Links
         //-- Check if are blocked by partial link
         foreach ($this->partialLinks as $partial => $options)
         {
-            if (substr($link, 0, strlen($partial)) == $partial && ($options['blocked'] ?? false))
+            if (\substr($link, 0, \strlen($partial)) == $partial && ($options['blocked'] ?? false))
             {
                 return true;
             }
@@ -151,7 +151,7 @@ trait Links
         //-- Check if are blocked by partial link
         foreach ($this->partialLinks as $partial => $options)
         {
-            if (substr($link, 0, strlen($partial)) == $partial && ($options['hide'] ?? false))
+            if (\substr($link, 0, \strlen($partial)) == $partial && ($options['hide'] ?? false))
             {
                 return true;
             }
@@ -188,14 +188,14 @@ trait Links
      */
     protected function block(string $link, array $options): self
     {
-        $options = array_merge([
+        $options = \array_merge([
             'blocked' => true,
             'hide'    => false,
         ], $options);
 
         if (isset($this->links[$link]))
         {
-            $this->links[$link] = array_merge($this->links[$link], $options);
+            $this->links[$link] = \array_merge($this->links[$link], $options);
 
             return $this;
         }

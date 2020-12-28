@@ -53,20 +53,20 @@ trait Report
 
                 if ($form->isSubmitted() && $form->isValid())
                 {
-                    $post = $form->getData();
+                    $post                  = $form->getData();
                     $post['playerAbuseId'] = $playerId;
-                    $post['abuseMessage'] = $message;
+                    $post['abuseMessage']  = $message;
 
                     $p = $session['user']['password'];
                     unset($session['user']['password']);
 
                     $entity = $repository->hydrateEntity([
-                        'author' => $session['user']['acctid'],
-                        'date' => new \DateTime('now'),
-                        'body' => $post,
+                        'author'   => $session['user']['acctid'],
+                        'date'     => new \DateTime('now'),
+                        'body'     => $post,
                         'pageinfo' => $session,
-                        'ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
-                        'id' => \LotgdRequest::getCookie('lgi')
+                        'ip'       => \LotgdRequest::getServer('REMOTE_ADDR'),
+                        'id'       => \LotgdRequest::getCookie('lgi'),
                     ]);
 
                     $session['user']['password'] = $p;

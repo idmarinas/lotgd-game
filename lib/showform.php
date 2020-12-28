@@ -109,7 +109,8 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
             $callback = $callback ?: 'lotgd_show_form_field';
             $result   = $callback($info, $row, $key, $keyout, $val, $extensions);
 
-            $tabContent[$title_id][] = \sprintf('<div class="inline field"><label class="left floated">%s</label>%s</div>',
+            $tabContent[$title_id][] = \sprintf(
+                '<div class="inline field"><label class="left floated">%s</label>%s</div>',
                 \LotgdFormat::colorize($info[0]),
                 $result
             );
@@ -122,17 +123,19 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
     foreach ($tabContent as $key => $value)
     {
-        $text = \sprintf('<div class="ui form">%s</div>',
+        $text = \sprintf(
+            '<div class="ui form">%s</div>',
             \implode('', $value)
         );
 
         if (0 < $key)
         {
-            $text = \sprintf('<div class="ui tab segment %s" data-tab="tab-%s">%s</div>',
-            (1 == $key ? 'active' : null),
-            $key,
-            $text
-        );
+            $text = \sprintf(
+                '<div class="ui tab segment %s" data-tab="tab-%s">%s</div>',
+                (1 == $key ? 'active' : null),
+                $key,
+                $text
+            );
         }
 
         $content .= $text;
@@ -155,7 +158,8 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         }
         $popupMenu .= '</div></div>';
 
-        $menu = \sprintf('<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
+        $menu = \sprintf(
+            '<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
             translate_inline('Browse'),
             $popupMenu,
             $tabActive
@@ -201,8 +205,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
     $title   = $default[0];
     $default = $default[1] ?? null;
 
-    switch ($title)
-    {
+    switch ($title) {
         case 'title':
         case 'note':
             break;
@@ -271,6 +274,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $select .= '</select>';
 
             return $select;
+
             break;
         case 'checkpretrans':
             $pretrans = 1;
@@ -314,6 +318,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             }
 
             return $select;
+
             break;
         case 'radiopretrans':
             $pretrans = 1;
@@ -368,6 +373,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $select .= '</select>';
 
             return $select;
+
             break;
 
         case 'range':
@@ -393,6 +399,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $select .= '</select>';
 
             return $select;
+
             break;
         case 'floatrange':
             $min  = \round((float) $info[2], 2);
@@ -413,6 +420,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $select .= '</select>';
 
             return $select;
+
             break;
         case 'bitfieldpretrans':
             $pretrans = 1;
@@ -458,6 +466,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             }
 
             return '<div class="left floated">'.$input.'</div><br clear="all">';
+
         break;
         case 'datelength':
             // However, there was a bug with your translation code wiping
@@ -492,6 +501,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             $select .= '</select>';
 
             return $select;
+
             break;
         case 'enumpretrans':
             $pretrans = 1;
@@ -539,6 +549,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             }
 
             return "<input type='password' name='{$keyout}' value='".\htmlentities($out, ENT_COMPAT, getsetting('charset', 'UTF-8'))."'>";
+
         break;
         case 'bool':
             $value = $row[$key] ?? $default ?: 0;
@@ -569,6 +580,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
             {
                 return '<span>'.dump_item($row[$key]).'</span>';
             }
+
             break;
         case 'viewhiddenonly':
             //don't unset it, transfer it, hide it. This is now used for legacy support of playernames that are empty and showform won't carry the name over to extract the real one
@@ -579,12 +591,14 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
                 return $text;
             }
+
             break;
         case 'readonly':
             if (isset($row[$key]))
             {
                 return "<input type='text' readonly name='".\addslashes($key)."' value='".\addslashes($row[$key])."'>";
             }
+
         break;
         case 'rawtextarearesizeable':
         case 'textarearesizeable':
@@ -683,6 +697,7 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
 
                 return "<input type='text' name='{$keyout}' value=\"".\htmlentities($val, ENT_COMPAT, getsetting('charset', 'UTF-8')).'">';
             }
+
         break;
     }
 }

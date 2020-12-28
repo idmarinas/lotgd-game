@@ -349,7 +349,8 @@ function tlbutton_push($indata, $hot = false, $namespace = false)
                 $uri                                = \LotgdSanitize::cmdSanitize($namespace);
                 $uri                                = comscroll_sanitize($uri);
                 $link                               = 'translatortool.php?u='.\rawurlencode($uri).'&t='.\rawurlencode($indata);
-                $link                               = \sprintf('<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
+                $link                               = \sprintf(
+                    '<a href="%s" class="t%s" id="translator" data-force="true" onclick="Lotgd.embed(this)">T</a>',
                     $link,
                     ($hot ? 'hot' : '')
                 );

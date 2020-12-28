@@ -118,7 +118,7 @@ trait Zend
      */
     public function execute($object)
     {
-        if ('object' != gettype($object))
+        if ('object' != \gettype($object))
         {
             return false;
         }
@@ -135,7 +135,7 @@ trait Zend
      */
     public function paginator($select, int $page = 1, int $perpage = 25)
     {
-        $page = max(1, $page);
+        $page = \max(1, $page);
 
         $paginatorAdapter = new DbSelectPaginator($select, $this->getAdapter());
         $paginator        = new Paginator($paginatorAdapter);
@@ -157,7 +157,7 @@ trait Zend
      */
     public function expression(?string $expresion = null)
     {
-        if (is_string($expresion))
+        if (\is_string($expresion))
         {
             return new Expression($expresion);
         }

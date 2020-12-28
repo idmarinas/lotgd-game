@@ -23,7 +23,7 @@ class RaceType extends ChoiceType
         parent::configureOptions($resolver);
 
         $races = modulehook('racenames');
-        $races = array_flip($races);
+        $races = \array_flip($races);
         $races = [
             \LotgdTranslator::t('character.racename', [], RACE_UNKNOWN) => RACE_UNKNOWN,
         ] + $races;

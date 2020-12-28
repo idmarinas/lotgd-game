@@ -99,7 +99,8 @@ trait Write
                     'subject' => $row['subject'],
                 ], $this->getTextDomain());
             }
-            $row['body'] = \sprintf("\n\n---%s---\n%s",
+            $row['body'] = \sprintf(
+                "\n\n---%s---\n%s",
                 \LotgdTranslator::t('section.write.reply.body', [
                     'name' => \trim(\LotgdSanitize::fullSanitize($row['name'])),
                     'date' => $row['sent'],

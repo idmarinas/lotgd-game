@@ -28,21 +28,21 @@ class ServiceManager extends ZendServiceManager
      *
      * @var string
      */
-    const LOTGD_CONFIG = 'config/lotgd.config.php';
+    public const LOTGD_CONFIG = 'config/lotgd.config.php';
 
     /**
      * Development configuration for game.
      *
      * @var string
      */
-    const LOTGD_DEV_CONFIG = 'config/development.config.php';
+    public const LOTGD_DEV_CONFIG = 'config/development.config.php';
 
     /**
      * Name of cache file.
      *
      * @var string
      */
-    const CACHE_FILE = 'storage/cache/service-manager.config.php';
+    public const CACHE_FILE = 'storage/cache/service-manager.config.php';
 
     public function __construct()
     {

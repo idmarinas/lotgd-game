@@ -45,7 +45,7 @@ trait Prefix
             // game, your county, your state, your nation, your planet and
             // your universe!
             // Example: you change name of a table
-            if (file_exists('prefixes.php'))
+            if (\file_exists('prefixes.php'))
             {
                 $specialPrefixes = include_once 'prefixes.php';
             }
@@ -58,9 +58,9 @@ trait Prefix
             }
         }
 
-        if (is_array($tablename))
+        if (\is_array($tablename))
         {
-            $key = key($tablename);
+            $key = \key($tablename);
 
             return [$key => $prefixNew.$tablename[$key]];
         }

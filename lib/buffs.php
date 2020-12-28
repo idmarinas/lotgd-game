@@ -285,10 +285,7 @@ function has_buff($name)
 {
     global $session;
 
-    if (isset($session['bufflist'][$name]))
-    {
-        return true;
-    }
+    return (bool) (isset($session['bufflist'][$name]))
 
-    return false;
+     ;
 }

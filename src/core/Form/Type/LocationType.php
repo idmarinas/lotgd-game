@@ -37,7 +37,7 @@ class LocationType extends ChoiceType
             [],
             'app-default',
         ];
-        ksort($locs);
+        \ksort($locs);
 
         $defaultChoice = [];
 

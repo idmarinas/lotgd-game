@@ -25,7 +25,7 @@ class ManagerRegistry extends AbstractManagerRegistry
     public function __construct($name, array $connections, array $managers, $defaultConnection, $defaultManager, $proxyInterfaceName)
     {
         $this->container = $managers;
-        parent::__construct($name, $connections, array_keys($managers), $defaultConnection, $defaultManager, $proxyInterfaceName);
+        parent::__construct($name, $connections, \array_keys($managers), $defaultConnection, $defaultManager, $proxyInterfaceName);
     }
 
     public function getAliasNamespace($alias): void

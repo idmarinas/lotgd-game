@@ -102,14 +102,14 @@ class FormSelect extends AbstractElement
     {
         if ( ! $element instanceof SelectElement)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Laminas\Form\Element\Select', __METHOD__));
+            throw new Exception\InvalidArgumentException(\sprintf('%s requires that the element is of type Laminas\Form\Element\Select', __METHOD__));
         }
 
         $name = $element->getName();
 
         if (empty($name) && 0 !== $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $translator = $this->getTranslator();
@@ -126,21 +126,21 @@ class FormSelect extends AbstractElement
 
         $attributes['name'] = $name;
 
-        if (array_key_exists('multiple', $attributes) && $attributes['multiple'])
+        if (\array_key_exists('multiple', $attributes) && $attributes['multiple'])
         {
             $attributes['name'] .= '[]';
         }
         $this->validTagAttributes = $this->validSelectAttributes;
 
-        $rendered = sprintf(
+        $rendered = \sprintf(
             '<select %s>%s</select>',
             $this->createAttributesString($env, $attributes),
             $this->renderOptions($env, $options, $value)
         );
 
         // Render hidden element
-        $useHiddenElement = method_exists($element, 'useHiddenElement')
-            && method_exists($element, 'getUnselectedValue')
+        $useHiddenElement = \method_exists($element, 'useHiddenElement')
+            && \method_exists($element, 'getUnselectedValue')
             && $element->useHiddenElement();
 
         if ($useHiddenElement)
@@ -178,7 +178,7 @@ class FormSelect extends AbstractElement
 
         foreach ($options as $key => $optionSpec)
         {
-            if (is_scalar($optionSpec))
+            if (\is_scalar($optionSpec))
             {
                 $optionSpec = [
                     'label' => $optionSpec,
@@ -186,9 +186,10 @@ class FormSelect extends AbstractElement
                 ];
             }
 
-            if (isset($optionSpec['options']) && is_array($optionSpec['options']))
+            if (isset($optionSpec['options']) && \is_array($optionSpec['options']))
             {
                 $optionStrings[] = $this->renderOptgroup($env, $optionSpec, $selectedOptions);
+
                 continue;
             }
 
@@ -210,22 +211,22 @@ class FormSelect extends AbstractElement
                 );
             }
 
-            $attributes = compact('value', 'selected', 'disabled');
+            $attributes = \compact('value', 'selected', 'disabled');
 
-            if (isset($optionSpec['attributes']) && is_array($optionSpec['attributes']))
+            if (isset($optionSpec['attributes']) && \is_array($optionSpec['attributes']))
             {
-                $attributes = array_merge($attributes, $optionSpec['attributes']);
+                $attributes = \array_merge($attributes, $optionSpec['attributes']);
             }
 
             $this->validTagAttributes = $this->validOptionAttributes;
-            $optionStrings[]          = sprintf(
+            $optionStrings[]          = \sprintf(
                 $template,
                 $this->createAttributesString($env, $attributes),
                 $escapeHtml($env, $label, 'html')
             );
         }
 
-        return implode("\n", $optionStrings);
+        return \implode("\n", $optionStrings);
     }
 
     /**
@@ -245,7 +246,7 @@ class FormSelect extends AbstractElement
 
         $options = [];
 
-        if (isset($optgroup['options']) && is_array($optgroup['options']))
+        if (isset($optgroup['options']) && \is_array($optgroup['options']))
         {
             $options = $optgroup['options'];
             unset($optgroup['options']);
@@ -259,7 +260,7 @@ class FormSelect extends AbstractElement
             $attributes = ' '.$attributes;
         }
 
-        return sprintf(
+        return \sprintf(
             $template,
             $attributes,
             $this->renderOptions($options, $selectedOptions)
@@ -295,18 +296,18 @@ class FormSelect extends AbstractElement
             return [];
         }
 
-        if (is_string($value))
+        if (\is_string($value))
         {
-            return explode(',', $value);
+            return \explode(',', $value);
         }
-        elseif ( ! is_array($value))
+        elseif ( ! \is_array($value))
         {
             return [$value];
         }
 
         if ( ! isset($attributes['multiple']) || ! $attributes['multiple'])
         {
-            throw new Exception\DomainException(sprintf('%s does not allow specifying multiple selected values when the element does not have a multiple '.'attribute set to a boolean true', __CLASS__));
+            throw new Exception\DomainException(\sprintf('%s does not allow specifying multiple selected values when the element does not have a multiple '.'attribute set to a boolean true', __CLASS__));
         }
 
         return $value;

@@ -43,7 +43,7 @@ class FormBitField extends FormSelect
     {
         if ( ! $element instanceof BitField)
         {
-            throw new Exception\InvalidArgumentException(sprintf('%s requires that the element is of type Lotgd\Core\Form\Element\BitField', __METHOD__));
+            throw new Exception\InvalidArgumentException(\sprintf('%s requires that the element is of type Lotgd\Core\Form\Element\BitField', __METHOD__));
         }
 
         $element->setAttribute('class', 'search selection '.$element->getAttribute('class'));
@@ -70,7 +70,7 @@ class FormBitField extends FormSelect
      */
     protected function bitFieldValues($value, array $disableMask): array
     {
-        if (is_array($value))
+        if (\is_array($value))
         {
             return $value;
         }

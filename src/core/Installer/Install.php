@@ -30,8 +30,8 @@ class Install
     use Pattern\Upgrade;
     use Pattern\Version;
 
-    const TRANSLATOR_DOMAIN = 'app-installer';
-    const DATA_DIR_INSTALL  = __DIR__.'/data/install';
+    public const TRANSLATOR_DOMAIN = 'app-installer';
+    public const DATA_DIR_INSTALL  = __DIR__.'/data/install';
 
     /**
      * Make a upgrade install, avoid in clean install.

@@ -31,6 +31,7 @@ foreach ($actions as $key => $value)
         if ( ! isset($value['hidden']) || ! $value['hidden'])
         {
             unset($actions[$key]);
+
             continue; //-- Strip hidden
         }
 

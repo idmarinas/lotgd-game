@@ -22,13 +22,13 @@ class CronjobListType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $files = glob('cronjob/{*/,}*.php', GLOB_BRACE);
+        $files = \glob('cronjob/{*/,}*.php', GLOB_BRACE);
 
         $defaultChoice = ['none' => null];
 
         foreach ($files as $file)
         {
-            $defaultChoice[$file] = rtrim($file, '.php');
+            $defaultChoice[$file] = \rtrim($file, '.php');
         }
 
         $resolver->setDefaults([

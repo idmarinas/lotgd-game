@@ -54,9 +54,9 @@ class DelimiterIsCountable extends IsCountable
      */
     public function isValid($value)
     {
-        if (is_string($value))
+        if (\is_string($value))
         {
-            $value = explode($this->getDelimiter(), $value);
+            $value = \explode($this->getDelimiter(), $value);
         }
 
         return parent::isValid($value);

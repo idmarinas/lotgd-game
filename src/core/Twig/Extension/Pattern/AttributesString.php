@@ -38,21 +38,21 @@ trait AttributesString
 
         foreach ($attributes as $key => $value)
         {
-            $key = strtolower($key);
+            $key = \strtolower($key);
 
             try
             {
                 $escapedAttribute = $escapeAttr($value);
-                $strings[]        = sprintf('%s="%s"', $escape($key), $escapedAttribute);
+                $strings[]        = \sprintf('%s="%s"', $escape($key), $escapedAttribute);
             }
             catch (EscaperException $x)
             {
                 Debugger::log($x);
                 // If an escaper exception, escape only the key, and use a blank value.
-                $strings[] = sprintf('%s=""', $escape($key));
+                $strings[] = \sprintf('%s=""', $escape($key));
             }
         }
 
-        return implode(' ', $strings);
+        return \implode(' ', $strings);
     }
 }

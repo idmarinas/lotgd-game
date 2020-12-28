@@ -20,10 +20,10 @@ use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension
 {
-    use PatternCore\Translator;
-    use PatternCore\Template;
     use Pattern\AttributesString;
     use Pattern\Navigation;
+    use PatternCore\Template;
+    use PatternCore\Translator;
 
     protected $navigation;
     protected $translator;

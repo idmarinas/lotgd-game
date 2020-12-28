@@ -124,12 +124,9 @@ function is_new_day($now = 0)
     $d1 = \gmdate('Y-m-d', $t1);
     $d2 = \gmdate('Y-m-d', $t2);
 
-    if ($d1 != $d2)
-    {
-        return true;
-    }
+    return (bool) ($d1 != $d2)
 
-    return false;
+     ;
 }
 
 function getgametime()

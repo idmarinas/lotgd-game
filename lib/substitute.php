@@ -119,6 +119,7 @@ function substitute_array($string, $extra = false, $extrarep = false)
                 // Making a replacement changes the length, so we need to
                 // restart at the beginning of the string.
                 $x = -1;
+
                 break;
             }
         }

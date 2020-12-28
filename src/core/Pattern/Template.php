@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\Template\Theme as ThemeCore;
 use Lotgd\Core\Template\Params;
+use Lotgd\Core\Template\Theme as ThemeCore;
 
 trait Template
 {

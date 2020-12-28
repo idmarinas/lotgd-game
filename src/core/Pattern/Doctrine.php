@@ -28,8 +28,6 @@ trait Doctrine
      * Get repository.
      *
      * @param mixed $name
-     *
-     * @return object|null
      */
     public function getDoctrineRepository($name): ?object
     {
@@ -44,9 +42,7 @@ trait Doctrine
     }
 
     /**
-     * Get doctrine entity manager instance
-     *
-     * @return void
+     * Get doctrine entity manager instance.
      */
     public function getDoctrine(): EntityManager
     {

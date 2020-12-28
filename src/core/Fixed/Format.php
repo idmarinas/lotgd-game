@@ -44,7 +44,7 @@ class Format
             return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$instance));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -60,4 +60,4 @@ class Format
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);
+\class_alias('Lotgd\Core\Fixed\Format', 'LotgdFormat', false);

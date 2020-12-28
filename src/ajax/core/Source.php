@@ -22,7 +22,7 @@ use Tracy\Debugger;
  */
 class Source extends AjaxAbstract
 {
-    const TEXT_DOMAIN = 'jaxon-source';
+    public const TEXT_DOMAIN = 'jaxon-source';
 
     public function show(): Response
     {
@@ -42,7 +42,7 @@ class Source extends AjaxAbstract
             ];
 
             $params = [
-                'textDomain' => self::TEXT_DOMAIN
+                'textDomain' => self::TEXT_DOMAIN,
             ];
 
             $content = $this->getTemplate()->renderBlock('source_show', $params);

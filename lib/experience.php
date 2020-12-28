@@ -15,11 +15,11 @@
  */
 function exp_for_next_level($curlevel, $curdk)
 {
-    $cache    = \LotgdKernel::get('cache.app');
+    $cache = \LotgdKernel::get('cache.app');
     //the exp is first 3 times the starting one, then later goes down to <25% from the previous one. It is harder to obtain enough exp though.
     $expstring = getsetting('exp-array', '100,400,1002,1912,3140,4707,6641,8985,11795,15143,19121,23840,29437,36071,43930');
-    $maxlevel = getsetting('maxlevel', 15);
-    $cacheKey = 'exp-for-next-level-array-'.\md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}";
+    $maxlevel  = getsetting('maxlevel', 15);
+    $cacheKey  = 'exp-for-next-level-array-'.\md5($expstring)."-lvl-{$maxlevel}-dk-{$curdk}";
 
     $item = $cache->getItem($cacheKey); //fetch all for that DK if already calculated!
 

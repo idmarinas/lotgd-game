@@ -13,8 +13,8 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 use Laminas\Paginator\Paginator;
+use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 
 class Navigation
 {
@@ -28,8 +28,8 @@ class Navigation
     /**
      * Add support for magic static method calls.
      *
-     * @param mixed  $method
-     * @param array  $arguments
+     * @param mixed $method
+     * @param array $arguments
      *
      * @return mixed the returned value from the resolved method
      */
@@ -40,7 +40,7 @@ class Navigation
             return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$instance));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -68,13 +68,13 @@ class Navigation
             return;
         }
 
-        $union = false === strpos($url, '?') ? '?' : '&';
+        $union = false === \strpos($url, '?') ? '?' : '&';
         self::$instance->addHeader('common.pagination.title');
 
         foreach ($paginator->pagesInRange as $page)
         {
             $minItem = (($page - 1) * $paginator->itemCountPerPage) + 1;
-            $maxItem = min($paginator->itemCountPerPage * $page, $paginator->totalItemCount);
+            $maxItem = \min($paginator->itemCountPerPage * $page, $paginator->totalItemCount);
 
             $text = ($page != $paginator->current ? 'common.pagination.page' : 'common.pagination.current');
             self::$instance->addNav($text, "{$url}{$union}page={$page}", [
@@ -88,4 +88,4 @@ class Navigation
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Navigation', 'LotgdNavigation', false);
+\class_alias('Lotgd\Core\Fixed\Navigation', 'LotgdNavigation', false);

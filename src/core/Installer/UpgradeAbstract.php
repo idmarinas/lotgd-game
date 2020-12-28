@@ -28,15 +28,15 @@ abstract class UpgradeAbstract
 {
     use Pattern\Version;
 
-    const VERSION_NUMBER = -1;
+    public const VERSION_NUMBER = -1;
 
-    const DATA_DIR_UPDATE = __DIR__.'/data/update';
+    public const DATA_DIR_UPDATE = __DIR__.'/data/update';
 
-    const TRANSLATOR_DOMAIN           = 'app-installer';
-    const TRANSLATOR_KEY_TABLE_RENAME = 'upgrade.version.table.rename';
-    const TRANSLATOR_KEY_TABLE_CREATE = 'upgrade.version.table.create';
-    const TRANSLATOR_KEY_TABLE_IMPORT = 'upgrade.version.table.import';
-    const TRANSLATOR_KEY_TABLE_DELETE = 'upgrade.version.table.delete';
+    public const TRANSLATOR_DOMAIN           = 'app-installer';
+    public const TRANSLATOR_KEY_TABLE_RENAME = 'upgrade.version.table.rename';
+    public const TRANSLATOR_KEY_TABLE_CREATE = 'upgrade.version.table.create';
+    public const TRANSLATOR_KEY_TABLE_IMPORT = 'upgrade.version.table.import';
+    public const TRANSLATOR_KEY_TABLE_DELETE = 'upgrade.version.table.delete';
 
     protected $doctrine;
     protected $connection;

@@ -25,8 +25,6 @@ trait Output
     /**
      * Get output instance.
      *
-     * @return OutputCore
-     *
      * @deprecated 4.7.0
      */
     public function getOutput(): OutputCore
@@ -40,9 +38,7 @@ trait Output
     }
 
     /**
-     * Get color instance
-     *
-     * @return Color
+     * Get color instance.
      */
     public function getColor(): Color
     {
@@ -55,9 +51,7 @@ trait Output
     }
 
     /**
-     * Get Instance of code
-     *
-     * @return Code
+     * Get Instance of code.
      */
     public function getCode(): Code
     {

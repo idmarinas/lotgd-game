@@ -36,9 +36,7 @@ trait Translator
     }
 
     /**
-     * Symfony Translator instance
-     *
-     * @return TranslationTranslator
+     * Symfony Translator instance.
      */
     public function symfonyTranslator(): TranslationTranslator
     {

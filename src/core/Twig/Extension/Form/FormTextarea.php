@@ -64,7 +64,7 @@ class FormTextarea extends AbstractElement
 
         if (empty($name) && 0 !== $name)
         {
-            throw new Exception\DomainException(sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
+            throw new Exception\DomainException(\sprintf('%s requires that the element has an assigned name; none discovered', __METHOD__));
         }
 
         $attributes         = $element->getAttributes();
@@ -72,7 +72,7 @@ class FormTextarea extends AbstractElement
         $content            = (string) $element->getValue();
         $escapeHtml         = $env->getFilter('escape')->getCallable();
 
-        return sprintf(
+        return \sprintf(
             '<textarea %s>%s</textarea>',
             $this->createAttributesString($env, $attributes),
             $escapeHtml($env, $content, 'html')

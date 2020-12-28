@@ -46,7 +46,8 @@ if ('searchban' == $op && $target)
             \Doctrine\ORM\Query\Expr\Join::WITH,
             $expr->eq('a.acctid', 'u.acct')
         )
-        ->join(\Lotgd\Core\Entity\Bans::class,
+        ->join(
+            \Lotgd\Core\Entity\Bans::class,
             'b',
             \Doctrine\ORM\Query\Expr\Join::WITH,
             $expr->orX($expr->like('b.ipfilter', 'a.lastip'), $expr->like('b.uniqueid', 'a.uniqueid'))

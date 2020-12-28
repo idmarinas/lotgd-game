@@ -42,7 +42,8 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 
     if (isset($session['user']['superuser']) && $session['user']['superuser'] & SU_DEBUG_OUTPUT && ! isset($hookcomment[$hookname]))
     {
-        bdump($args, \sprintf('Module hook: %s; allow inactive: (%s); only this module: (%s)',
+        bdump($args, \sprintf(
+            'Module hook: %s; allow inactive: (%s); only this module: (%s)',
             $hookname,
             ($allowinactive ? 'true' : 'false'),
             (false !== $only ? $only : 'any module')

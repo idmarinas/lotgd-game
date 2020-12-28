@@ -30,7 +30,7 @@ class ArmorRepository extends DoctrineRepository
         {
             $query->select('MAX(u.level)');
 
-            if (is_int($dragonKills))
+            if (\is_int($dragonKills))
             {
                 $query->where('u.level <= :lvl')
                     ->setParameters(['lvl' => $dragonKills])

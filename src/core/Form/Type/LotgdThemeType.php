@@ -64,7 +64,7 @@ class LotgdThemeType extends ChoiceType
     private function getThemeList(): array
     {
         $cache = \LotgdKernel::get('cache.app');
-        $item = $cache->getItem('lotgd-core-pattern-theme-list');
+        $item  = $cache->getItem('lotgd-core-pattern-theme-list');
 
         if ( ! $item->isHit())
         {
@@ -83,7 +83,7 @@ class LotgdThemeType extends ChoiceType
             {
                 if ('html' == \pathinfo($file, PATHINFO_EXTENSION))
                 {
-                    $value = \str_replace(['-', '_'], ' ', \ucfirst(\substr($file, 0, \strpos($file, '.htm'))));
+                    $value         = \str_replace(['-', '_'], ' ', \ucfirst(\substr($file, 0, \strpos($file, '.htm'))));
                     $skins[$value] = $file;
                 }
             }

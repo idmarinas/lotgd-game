@@ -41,7 +41,7 @@ class Doctrine
             return self::$wrapper->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$wrapper));
+        $methods = \implode(', ', \get_class_methods(self::$wrapper));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -86,7 +86,7 @@ class Doctrine
         }
         $sqls = $schemaTool->getUpdateSchemaSql($metaData, true);
 
-        if (0 === count($sqls))
+        if (0 === \count($sqls))
         {
             \LotgdResponse::pageDebug('Nothing to update - your database is already in sync with the current entities metadata.');
 
@@ -95,20 +95,20 @@ class Doctrine
 
         if ($dumpSql)
         {
-            \LotgdResponse::pageDebug(implode(';'.PHP_EOL, $sqls).';');
+            \LotgdResponse::pageDebug(\implode(';'.PHP_EOL, $sqls).';');
         }
 
         \LotgdResponse::pageDebug('Updating database schema...');
         $schemaTool->updateSchema($metaData, true);
 
-        $pluralization = (1 === count($sqls)) ? 'query was' : 'queries were';
+        $pluralization = (1 === \count($sqls)) ? 'query was' : 'queries were';
 
-        \LotgdResponse::pageDebug(sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', count($sqls), $pluralization));
+        \LotgdResponse::pageDebug(\sprintf('Database schema updated successfully! "<info>%s</info>" %s executed', \count($sqls), $pluralization));
 
         $proxyFactory = self::$wrapper->getProxyFactory();
-        \LotgdResponse::pageDebug(sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
+        \LotgdResponse::pageDebug(\sprintf('Proxy classes generated to "%s"', $proxyFactory->generateProxyClasses($metaData)));
 
-        return count($sqls);
+        return \count($sqls);
     }
 
     /**
@@ -137,7 +137,7 @@ class Doctrine
 
         $schemaTool->dropSchema($classes);
 
-        \LotgdResponse::pageDebug(sprintf('Drop schemas for %s classes: "%s"', count($entities), implode('", "', $entities)));
+        \LotgdResponse::pageDebug(\sprintf('Drop schemas for %s classes: "%s"', \count($entities), \implode('", "', $entities)));
     }
 
     /**
@@ -151,4 +151,4 @@ class Doctrine
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Doctrine', 'Doctrine', false);
+\class_alias('Lotgd\Core\Fixed\Doctrine', 'Doctrine', false);

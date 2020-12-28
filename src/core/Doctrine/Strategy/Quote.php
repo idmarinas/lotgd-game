@@ -71,18 +71,19 @@ class Quote implements QuoteStrategy
             if (isset($class->fieldMappings[$fieldName]))
             {
                 $quotedColumnNames[] = $this->getColumnName($fieldName, $class, $platform);
+
                 continue;
             }
             // Association defined as Id field
             $joinColumns            = $class->associationMappings[$fieldName]['joinColumns'];
-            $assocQuotedColumnNames = array_map(
+            $assocQuotedColumnNames = \array_map(
                 function ($joinColumn) use ($platform)
                 {
                     return $platform->quoteIdentifier($joinColumn['name']);
                 },
                 $joinColumns
             );
-            $quotedColumnNames = array_merge($quotedColumnNames, $assocQuotedColumnNames);
+            $quotedColumnNames = \array_merge($quotedColumnNames, $assocQuotedColumnNames);
         }
 
         return $quotedColumnNames;
@@ -99,9 +100,9 @@ class Quote implements QuoteStrategy
         // 3 ) Strip non alphanumeric characters
         // 4 ) Prefix with "_" if the result its numeric
         $columnName = $columnName.$counter;
-        $columnName = substr($columnName, -$platform->getMaxIdentifierLength());
-        $columnName = preg_replace('/[^A-Za-z0-9_]/', '', $columnName);
-        $columnName = is_numeric($columnName) ? '_'.$columnName : $columnName;
+        $columnName = \substr($columnName, -$platform->getMaxIdentifierLength());
+        $columnName = \preg_replace('/[^A-Za-z0-9_]/', '', $columnName);
+        $columnName = \is_numeric($columnName) ? '_'.$columnName : $columnName;
 
         return $platform->getSQLResultCasing($columnName);
     }

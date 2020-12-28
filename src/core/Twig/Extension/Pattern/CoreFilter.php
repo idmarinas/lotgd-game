@@ -102,25 +102,25 @@ trait CoreFilter
      */
     public function sprintfnews($string, array $arguments)
     {
-        if (is_array($arguments[0]) && is_array($arguments[1]))
+        if (\is_array($arguments[0]) && \is_array($arguments[1]))
         {
-            array_shift($arguments[0]);
-            $domain1 = array_shift($arguments[0]);
-            $text1   = array_shift($arguments[0]);
+            \array_shift($arguments[0]);
+            $domain1 = \array_shift($arguments[0]);
+            $text1   = \array_shift($arguments[0]);
 
-            array_shift($arguments[1]);
-            $domain2 = array_shift($arguments[1]);
-            $text2   = array_shift($arguments[1]);
+            \array_shift($arguments[1]);
+            $domain2 = \array_shift($arguments[1]);
+            $text2   = \array_shift($arguments[1]);
 
-            $arg1 = vsprintf(\LotgdTranslator::t($text1, [], $domain1), $arguments[0]);
-            $arg2 = vsprintf(\LotgdTranslator::t($text2, [], $domain2), $arguments[1]);
+            $arg1 = \vsprintf(\LotgdTranslator::t($text1, [], $domain1), $arguments[0]);
+            $arg2 = \vsprintf(\LotgdTranslator::t($text2, [], $domain2), $arguments[1]);
 
-            return sprintf($string, $arg1, $arg2);
+            return \sprintf($string, $arg1, $arg2);
         }
 
         \array_unshift($arguments, $string);
 
-        return call_user_func_array('sprintf', $arguments);
+        return \call_user_func_array('sprintf', $arguments);
     }
 
     /**
@@ -142,7 +142,7 @@ trait CoreFilter
      */
     public function highlightFile($file)
     {
-        return highlight_file($file, true);
+        return \highlight_file($file, true);
     }
 
     /**
@@ -154,7 +154,7 @@ trait CoreFilter
      */
     public function highlightString($string)
     {
-        return highlight_string("<?php \n\r".$string, true);
+        return \highlight_string("<?php \n\r".$string, true);
     }
 
     /**

@@ -38,13 +38,14 @@ trait Motd
         //-- Merge data
         $sub = $motd[0];
         unset($motd[0]);
-        $motd   = array_merge($sub, $motd);
-        $params = array_merge(['motd' => $motd], $params);
+        $motd   = \array_merge($sub, $motd);
+        $params = \array_merge(['motd' => $motd], $params);
 
         $blockName = 'motd_item_item';
+
         if ($motd['motdtype'])
         {
-            $blockName = 'motd_item_poll';
+            $blockName      = 'motd_item_poll';
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
         }
 

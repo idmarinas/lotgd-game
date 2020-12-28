@@ -22,13 +22,13 @@ class CreatureAiType extends ChoiceType
     {
         parent::configureOptions($resolver);
 
-        $files = glob('creatureai/{*/,}*.php', GLOB_BRACE);
+        $files = \glob('creatureai/{*/,}*.php', GLOB_BRACE);
 
         $defaultChoice = ['none' => null];
 
         foreach ($files as $file)
         {
-            $defaultChoice[$file] = rtrim($file, '.php');
+            $defaultChoice[$file] = \rtrim($file, '.php');
         }
 
         $resolver->setDefaults([

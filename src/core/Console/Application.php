@@ -25,7 +25,7 @@ final class Application extends ConsoleApplication
     public function __construct(ServiceManager $sm, Kernel $kernel)
     {
         $this->serviceManager = $sm;
-        $this->appKernel = $kernel;
+        $this->appKernel      = $kernel;
 
         parent::__construct('LoTGD', Kernel::VERSION);
 

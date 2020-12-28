@@ -18,7 +18,7 @@ use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
 {
-    const VERSION_NUMBER = 40100;
+    public const VERSION_NUMBER = 40100;
 
     /**
      * Step 1: Update settings.
@@ -34,10 +34,10 @@ class Upgrade extends UpgradeAbstract
             $languagesOri = $settings->findOneBy(['setting' => 'serverlanguages']);
             $languages    = $languagesOri->getValue();
 
-            $languages = explode(',', $languages);
+            $languages = \explode(',', $languages);
 
             $lang  = [];
-            $count = count($languages);
+            $count = \count($languages);
 
             for ($i = 0; $i < $count; ++$i)
             {
@@ -45,7 +45,7 @@ class Upgrade extends UpgradeAbstract
                 ++$i; //-- Avoid name of language
             }
 
-            $languagesOri->setValue(implode(',', $lang));
+            $languagesOri->setValue(\implode(',', $lang));
 
             $this->doctrine->persist($languagesOri);
 

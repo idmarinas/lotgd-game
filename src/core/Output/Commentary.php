@@ -82,7 +82,7 @@ class Commentary
         if ($session['user']['clanid'] && $session['user']['clanrank'])
         {
             $cache = \LotgdKernel::get('cache.app');
-            $item = $cache->getItem("commentary-claninfo-{$session['user']['clanid']}");
+            $item  = $cache->getItem("commentary-claninfo-{$session['user']['clanid']}");
 
             if ( ! $item->isHit())
             {
@@ -159,7 +159,7 @@ class Commentary
         }
         //-- /game will have a specific function for the system
 
-        $command = strtoupper($data['comment']);
+        $command = \strtoupper($data['comment']);
 
         //-- Deletes the user's last written comment, only if no more than 24 hours have passed.
         // if ('GREM' == $command || '::GREM' == $command || '/GREM' == $command)
@@ -213,19 +213,19 @@ class Commentary
      */
     public function processSpecialCommands(array &$data): bool
     {
-        if ('/me' == substr($data['comment'], 0, 3))
+        if ('/me' == \substr($data['comment'], 0, 3))
         {
-            $data['comment'] = trim(substr($data['comment'], 3));
+            $data['comment'] = \trim(\substr($data['comment'], 3));
             $data['command'] = 'me';
         }
-        elseif ('::' == substr($data['comment'], 0, 1))
+        elseif ('::' == \substr($data['comment'], 0, 1))
         {
-            $data['comment'] = trim(substr($data['comment'], 2));
+            $data['comment'] = \trim(\substr($data['comment'], 2));
             $data['command'] = 'me';
         }
-        elseif (':' == substr($data['comment'], 0, 1))
+        elseif (':' == \substr($data['comment'], 0, 1))
         {
-            $data['comment'] = trim(substr($data['comment'], 1));
+            $data['comment'] = \trim(\substr($data['comment'], 1));
             $data['command'] = 'me';
         }
 
@@ -255,21 +255,21 @@ class Commentary
 
         //-- Only accept correct format, all italic open tag need close tag.
         //-- Other wise, italic format is removed.
-        if (substr_count($comment, '`i') != substr_count($comment, '´i'))
+        if (\substr_count($comment, '`i') != \substr_count($comment, '´i'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`i/', '/´i/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all bold open tag need close tag.
         //-- Other wise, bold format is removed.
-        if (substr_count($comment, '`b') != substr_count($comment, '´b'))
+        if (\substr_count($comment, '`b') != \substr_count($comment, '´b'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`b/', '/´b/'], 'replacement' => '']));
         }
 
         //-- Only accept correct format, all center open tag need close tag.
         //-- Other wise, center format is removed.
-        if (substr_count($comment, '`c') != substr_count($comment, '´c'))
+        if (\substr_count($comment, '`c') != \substr_count($comment, '´c'))
         {
             $filterChain->attach(new Filter\PregReplace(['pattern' => ['/`c/', '/´c/'], 'replacement' => '']));
         }
@@ -290,7 +290,7 @@ class Commentary
     public function commentaryLocs(): array
     {
         $cache = \LotgdKernel::get('cache.app');
-        $item = $cache->getItem('commentary-comsecs');
+        $item  = $cache->getItem('commentary-comsecs');
 
         if ( ! $item->isHit())
         {

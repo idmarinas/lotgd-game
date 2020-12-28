@@ -28,8 +28,6 @@ trait Jaxon
 
     /**
      * Get Jaxon Js.
-     *
-     * @return string
      */
     public function jaxonJs(): string
     {
@@ -38,8 +36,6 @@ trait Jaxon
 
     /**
      * Get Jaxon Script.
-     *
-     * @return string
      */
     public function jaxonScript(): string
     {

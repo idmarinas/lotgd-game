@@ -13,7 +13,7 @@ return [
         'dialogs' => [
             'default' => [
                 'message' => 'toastr',
-                'modal' => 'semantic',
+                'modal'   => 'semantic',
             ],
             'classes' => [
                 'semantic' => \Lotgd\Core\Jaxon\Library\Semantic\Modal::class,

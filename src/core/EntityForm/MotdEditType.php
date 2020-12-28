@@ -26,14 +26,14 @@ class MotdEditType extends MotdType
 
         $builder
             ->add('changeauthor', CheckboxType::class, [
-                'mapped' => false,
+                'mapped'   => false,
                 'required' => false,
-                'label' => 'item.change.author',
+                'label'    => 'item.change.author',
             ])
             ->add('changedate', CheckboxType::class, [
-                'mapped' => false,
+                'mapped'   => false,
                 'required' => false,
-                'label' => 'item.change.date',
+                'label'    => 'item.change.date',
             ])
         ;
     }

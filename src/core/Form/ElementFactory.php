@@ -57,12 +57,12 @@ final class ElementFactory implements FactoryInterface
 
         if ($creationOptions instanceof Traversable)
         {
-            $creationOptions = iterator_to_array($creationOptions);
+            $creationOptions = \iterator_to_array($creationOptions);
         }
 
-        if ( ! is_array($creationOptions))
+        if ( ! \is_array($creationOptions))
         {
-            throw new InvalidServiceException(sprintf('%s cannot use non-array, non-traversable, non-null creation options; received %s', __CLASS__, is_object($creationOptions) ? get_class($creationOptions) : gettype($creationOptions)));
+            throw new InvalidServiceException(\sprintf('%s cannot use non-array, non-traversable, non-null creation options; received %s', __CLASS__, \is_object($creationOptions) ? \get_class($creationOptions) : \gettype($creationOptions)));
         }
 
         $this->setCreationOptions($creationOptions);
@@ -89,8 +89,8 @@ final class ElementFactory implements FactoryInterface
         else
         {
             // 'Laminas\Form\Element' -> 'element'
-            $parts = explode('\\', $requestedName);
-            $name  = strtolower(array_pop($parts));
+            $parts = \explode('\\', $requestedName);
+            $name  = \strtolower(\array_pop($parts));
         }
 
         if (isset($options['options']))
@@ -100,7 +100,7 @@ final class ElementFactory implements FactoryInterface
 
         $instance = new $requestedName($name, $options);
 
-        if (method_exists($instance, 'setContainer'))
+        if (\method_exists($instance, 'setContainer'))
         {
             $instance->setContainer($container);
         }
@@ -139,17 +139,17 @@ final class ElementFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $canonicalName = null, $requestedName = null)
     {
-        if (class_exists($canonicalName))
+        if (\class_exists($canonicalName))
         {
             return $this($serviceLocator, $canonicalName, $this->creationOptions);
         }
 
-        if (is_string($requestedName) && class_exists($requestedName))
+        if (\is_string($requestedName) && \class_exists($requestedName))
         {
             return $this($serviceLocator, $requestedName, $this->creationOptions);
         }
 
-        throw new InvalidServiceException(sprintf('%s requires that the requested name is provided on invocation; please update your tests or '.'consuming container', __CLASS__));
+        throw new InvalidServiceException(\sprintf('%s requires that the requested name is provided on invocation; please update your tests or '.'consuming container', __CLASS__));
     }
 
     /**

@@ -32,31 +32,31 @@ class PetitionType extends AbstractType
     {
         $builder
             ->add('charname', TextType::class, [
-                'label' => 'charname',
+                'label'       => 'charname',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 100])
+                    new Assert\Length(['min' => 0, 'max' => 100]),
                 ],
                 'filters' => [
-                    new StripTags()
-                ]
+                    new StripTags(),
+                ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'email',
+                'label'       => 'email',
                 'constraints' => [
-                    new Assert\Email()
-                ]
+                    new Assert\Email(),
+                ],
             ])
             ->add('problem_type', PetitionTypesType::class, [
                 'label' => 'petition.type',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'description',
+                'label'       => 'description',
                 'constraints' => [
-                    new Assert\Length(['min' => 0, 'max' => 65000])
+                    new Assert\Length(['min' => 0, 'max' => 65000]),
                 ],
                 'filters' => [
-                    new StripTags()
-                ]
+                    new StripTags(),
+                ],
             ])
 
         ;

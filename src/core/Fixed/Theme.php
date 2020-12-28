@@ -22,8 +22,8 @@ class Theme
     /**
      * Add support for magic static method calls.
      *
-     * @param mixed  $method
-     * @param array  $arguments
+     * @param mixed $method
+     * @param array $arguments
      *
      * @return mixed the returned value from the resolved method
      */
@@ -34,7 +34,7 @@ class Theme
             return self::$wrapper->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$wrapper));
+        $methods = \implode(', ', \get_class_methods(self::$wrapper));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -48,4 +48,4 @@ class Theme
     }
 }
 
-class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);
+\class_alias('Lotgd\Core\Fixed\Theme', 'LotgdTheme', false);

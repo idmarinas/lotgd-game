@@ -27,7 +27,7 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
     if ($exploss > 0)
     {
         $session['user']['experience'] -= $exploss;
-        \LotgdResponse::pageAddContent(\LotgdFormat::colorize(sprintf('`$You lose %s experience.`n', $exploss), true));
+        \LotgdResponse::pageAddContent(\LotgdFormat::colorize(\sprintf('`$You lose %s experience.`n', $exploss), true));
     }
 
     $gold     = $session['user']['gold'];
@@ -41,7 +41,7 @@ function killplayer($explossproportion = 0.1, $goldlossproportion = 1)
     if ($goldloss > 0)
     {
         $session['user']['gold'] -= $goldloss;
-        \LotgdResponse::pageAddContent(\LotgdFormat::colorize(sprintf('`$You lose %s gold.`n', $goldloss), true));
+        \LotgdResponse::pageAddContent(\LotgdFormat::colorize(\sprintf('`$You lose %s gold.`n', $goldloss), true));
     }
 
     $session['user']['hitpoints'] = 0;

@@ -27,7 +27,7 @@ class Motd extends AjaxAbstract
     use PatternCore\Motd\Item;
     use PatternCore\Motd\Poll;
 
-    const TEXT_DOMAIN = 'jaxon-motd';
+    public const TEXT_DOMAIN = 'jaxon-motd';
     protected $repositoryMotd;
     protected $templateMotd;
 

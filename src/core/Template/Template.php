@@ -27,10 +27,10 @@ class Template extends Environment
     use Pattern\Container;
     use Pattern\Template;
 
-    const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
-    const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
-    const TEMPLATES_CORE_BASE_DIR    = 'templates_core'; //-- Core templates of game (Not intended to be customizable)
-    const TEMPLATES_MODULES_BASE_DIR = 'templates_modules'; //-- Folder for templates of modules.
+    public const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
+    public const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
+    public const TEMPLATES_CORE_BASE_DIR    = 'templates_core'; //-- Core templates of game (Not intended to be customizable)
+    public const TEMPLATES_MODULES_BASE_DIR = 'templates_modules'; //-- Folder for templates of modules.
 
     protected $mandatoryFunctionsErrors = [];
     protected $themeName;
@@ -113,7 +113,7 @@ class Template extends Environment
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function load($name)
     {

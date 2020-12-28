@@ -30,7 +30,7 @@ return [
                 'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class,
 
                 //-- Added in version 4.8.0
-                'EventOfEvents'                     => Lotgd\Core\EventManager\Event::class,
+                'EventOfEvents' => Lotgd\Core\EventManager\Event::class,
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()

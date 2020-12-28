@@ -125,7 +125,7 @@ class FormCollection extends AbstractElement
             $templateMarkup .= $elementHelper->render($env, $elementOrFieldset);
         }
 
-        return sprintf(
+        return \sprintf(
             $this->getTemplateWrapper(),
             $escapeHtmlAttribHelper($templateMarkup)
         );

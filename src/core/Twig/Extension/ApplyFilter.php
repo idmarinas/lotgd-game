@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Template\Theme as Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Lotgd\Core\Template\Theme as Environment;
 
 class ApplyFilter extends AbstractExtension
 {
@@ -36,6 +36,10 @@ class ApplyFilter extends AbstractExtension
 
     /**
      * Create a template to render a filters.
+     *
+     * @param mixed $context
+     * @param mixed $value
+     * @param mixed $filters
      */
     public function applyFilter(Environment $env, $context, $value, $filters)
     {

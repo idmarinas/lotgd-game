@@ -10,13 +10,13 @@
  */
 function lotgd_generate_creature_levels($level = null)
 {
-    $cache = \LotgdKernel::get('cache.app');
+    $cache  = \LotgdKernel::get('cache.app');
     $maxlvl = getsetting('maxlevel', 15) + 5;
-    $item  = $cache->getItem("lotgd-generate-creature-levels-{$maxlvl}");
+    $item   = $cache->getItem("lotgd-generate-creature-levels-{$maxlvl}");
 
     if ( ! $item->isHit())
     {
-        $stats = [];
+        $stats           = [];
         $creatureexp     = 14;
         $creaturegold    = 36;
         $creaturedefense = 0;
@@ -92,8 +92,8 @@ function lotgd_transform_creature(array $badguy, $debug = true)
     $badguy = \array_merge(lotgd_generate_creature_levels($badguy['creaturelevel']), $badguy);
 
     $badguy['playerdragonkills']  = $dk;
-    $badguy['creaturespeed']      = $badguy['creaturespeed']           ?? 2.5;
-    $badguy['creatureexp']        = $badguy['creatureexp']               ?? 0;
+    $badguy['creaturespeed']      = $badguy['creaturespeed']      ?? 2.5;
+    $badguy['creatureexp']        = $badguy['creatureexp']        ?? 0;
     $badguy['physicalresistance'] = $badguy['physicalresistance'] ?? 0;
 
     //-- Apply multipliers

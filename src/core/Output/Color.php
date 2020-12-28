@@ -79,7 +79,7 @@ class Color
      */
     public function addColors(array $colors)
     {
-        $this->colors = array_merge($this->colors, $colors);
+        $this->colors = \array_merge($this->colors, $colors);
 
         return $this;
     }

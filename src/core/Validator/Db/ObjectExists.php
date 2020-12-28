@@ -21,7 +21,7 @@ class ObjectExists extends AbstractValidator
     /**
      * Error constants.
      */
-    const ERROR_NO_OBJECT_FOUND = 'noObjectFound';
+    public const ERROR_NO_OBJECT_FOUND = 'noObjectFound';
 
     /**
      * @var array Message templates
@@ -57,23 +57,23 @@ class ObjectExists extends AbstractValidator
     {
         if ( ! isset($options['object_repository']) || ! $options['object_repository'] instanceof ObjectRepository)
         {
-            if ( ! array_key_exists('object_repository', $options))
+            if ( ! \array_key_exists('object_repository', $options))
             {
                 $provided = 'nothing';
             }
             else
             {
-                if (is_object($options['object_repository']))
+                if (\is_object($options['object_repository']))
                 {
-                    $provided = get_class($options['object_repository']);
+                    $provided = \get_class($options['object_repository']);
                 }
                 else
                 {
-                    $provided = gettype($options['object_repository']);
+                    $provided = \gettype($options['object_repository']);
                 }
             }
 
-            throw new Exception\InvalidArgumentException(sprintf('Option "object_repository" is required and must be an instance of  Doctrine\Common\Persistence\ObjectRepository, %s given', $provided));
+            throw new Exception\InvalidArgumentException(\sprintf('Option "object_repository" is required and must be an instance of  Doctrine\Common\Persistence\ObjectRepository, %s given', $provided));
         }
         $this->objectRepository = $options['object_repository'];
 
@@ -95,7 +95,7 @@ class ObjectExists extends AbstractValidator
         $cleanedValue = $this->cleanSearchValue($value);
         $match        = $this->objectRepository->findOneBy($cleanedValue);
 
-        if (is_object($match))
+        if (\is_object($match))
         {
             return true;
         }
@@ -114,7 +114,7 @@ class ObjectExists extends AbstractValidator
      */
     protected function cleanSearchValue($value)
     {
-        $value = is_object($value) ? [$value] : (array) $value;
+        $value = \is_object($value) ? [$value] : (array) $value;
 
         if (ArrayUtils::isHashTable($value))
         {
@@ -122,20 +122,20 @@ class ObjectExists extends AbstractValidator
 
             foreach ($this->fields as $field)
             {
-                if ( ! array_key_exists($field, $value))
+                if ( ! \array_key_exists($field, $value))
                 {
-                    throw new Exception\RuntimeException(sprintf('Field "%s" was not provided, but was expected since the configured field lists needs'.' it for validation', $field));
+                    throw new Exception\RuntimeException(\sprintf('Field "%s" was not provided, but was expected since the configured field lists needs'.' it for validation', $field));
                 }
                 $matchedFieldsValues[$field] = $value[$field];
             }
         }
         else
         {
-            $matchedFieldsValues = @array_combine($this->fields, $value);
+            $matchedFieldsValues = @\array_combine($this->fields, $value);
 
             if (false === $matchedFieldsValues)
             {
-                throw new Exception\RuntimeException(sprintf('Provided values count is %s, while expected number of fields to be matched is %s', count($value), count($this->fields)));
+                throw new Exception\RuntimeException(\sprintf('Provided values count is %s, while expected number of fields to be matched is %s', \count($value), \count($this->fields)));
             }
         }
 
@@ -160,11 +160,11 @@ class ObjectExists extends AbstractValidator
 
         foreach ($fields as $key => $field)
         {
-            if ( ! is_string($field))
+            if ( ! \is_string($field))
             {
-                throw new Exception\InvalidArgumentException(sprintf('Provided fields must be strings, %s provided for key %s', gettype($field), $key));
+                throw new Exception\InvalidArgumentException(\sprintf('Provided fields must be strings, %s provided for key %s', \gettype($field), $key));
             }
         }
-        $this->fields = array_values($fields);
+        $this->fields = \array_values($fields);
     }
 }

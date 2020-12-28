@@ -46,7 +46,8 @@ if ($process)
         \Doctrine::merge($entity);
         \Doctrine::flush();
 
-        debuglog(\sprintf('entered a ban: %s. Ends after: %s, Reason: %s.',
+        debuglog(\sprintf(
+            'entered a ban: %s. Ends after: %s, Reason: %s.',
             ('ip' == $type ? "IP: {$valueIp}" : "ID: {$valueId}"),
             $duration->format('Y-m-d'),
             $reason

@@ -40,13 +40,14 @@ function buffbadguy($badguy, $hook = 'buffbadguy')
     $badguy = modulehook('creatureencounter', $badguy);
 
     $hookNew = $hook;
+
     if ('buffbadguy' == $hook)
     {
-        $hookNew =  'badguy';
+        $hookNew = 'badguy';
     }
     elseif ('buffmaster' == $hook)
     {
-        $hookNew =  'master';
+        $hookNew = 'master';
     }
     //-- Activate hook custom or default (buffbadguy)
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CREATURE_BUFF.$hookNew, null, $badguy);

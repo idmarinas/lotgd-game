@@ -13,9 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Pattern as PatternCore;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFunction;
-use Lotgd\Core\Pattern as PatternCore;
 
 class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
 {
@@ -49,24 +49,24 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
      */
     public function showGoogleAd(string $adId): string
     {
-        $config = $this->getAdsConfig();
+        $config   = $this->getAdsConfig();
         $adConfig = $config[$adId] ?? null;
 
         //-- Google AdSense is disabled
         //-- Not found Ad config
         //-- Slot not isset or are empty
-        if (! $this->advertisingGoogleIsActived() || ! $adConfig || ! isset($adConfig['slot']) || ! $adConfig['slot'])
+        if ( ! $this->advertisingGoogleIsActived() || ! $adConfig || ! isset($adConfig['slot']) || ! $adConfig['slot'])
         {
             return '';
         }
 
-        $ins = sprintf('<ins class="adsbygoogle"
+        $ins = \sprintf(
+            '<ins class="adsbygoogle"
             style="%1$s"
             data-ad-client="%2$s"
             data-ad-slot="%3$s"
             data-ad-format="%4$s"
             data-full-width-responsive="%5$s"></ins>',
-
             $adConfig['style'] ?? '',
             $config['client'],
             $adConfig['slot'],
@@ -85,7 +85,7 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
     {
         $config = $this->getAdsConfig();
 
-        return (isset($config['client']) && $config['client']);
+        return isset($config['client']) && $config['client'];
     }
 
     protected function getAdsConfig()

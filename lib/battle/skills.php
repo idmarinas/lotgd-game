@@ -287,26 +287,31 @@ function apply_bodyguard($level)
                 $badguyatkmod = 1.05;
                 $defmod       = 0.95;
                 $rounds       = -1;
+
             break;
             case 2:
                 $badguyatkmod = 1.1;
                 $defmod       = 0.9;
                 $rounds       = -1;
+
             break;
             case 3:
                 $badguyatkmod = 1.2;
                 $defmod       = 0.8;
                 $rounds       = -1;
+
             break;
             case 4:
                 $badguyatkmod = 1.3;
                 $defmod       = 0.7;
                 $rounds       = -1;
+
             break;
             case 5:
                 $badguyatkmod = 1.4;
                 $defmod       = 0.6;
                 $rounds       = -1;
+
             break;
         }
 

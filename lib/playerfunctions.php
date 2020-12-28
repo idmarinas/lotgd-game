@@ -56,12 +56,18 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate('%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC',
-            ($conbonus >= 0 ? '`8+' : '`$-'), \abs($conbonus),
-            ($wisbonus >= 0 ? '`8+' : '`$-'), \abs($wisbonus),
-            ($strbonus >= 0 ? '`8+' : '`$-'), \abs($strbonus),
-            ($levelbonus >= 0 ? '`8+' : '`$-'), \abs($levelbonus),
-            ($user['permahitpoints'] >= 0 ? '`8+' : '`$-'), \abs($user['permahitpoints'])
+        return sprintf_translate(
+            '%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC',
+            ($conbonus >= 0 ? '`8+' : '`$-'),
+            \abs($conbonus),
+            ($wisbonus >= 0 ? '`8+' : '`$-'),
+            \abs($wisbonus),
+            ($strbonus >= 0 ? '`8+' : '`$-'),
+            \abs($strbonus),
+            ($levelbonus >= 0 ? '`8+' : '`$-'),
+            \abs($levelbonus),
+            ($user['permahitpoints'] >= 0 ? '`8+' : '`$-'),
+            \abs($user['permahitpoints'])
         );
     }
 
@@ -152,14 +158,22 @@ function explained_get_player_attack($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate('%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ',
-            ($strbonus >= 0 ? '`8+' : '`$-'), \abs($strbonus),
-            ($speedbonus >= 0 ? '`8+' : '`$-'), \abs($speedbonus),
-            ($wisdombonus >= 0 ? '`8+' : '`$-'), \abs($wisdombonus),
-            ($intbonus >= 0 ? '`8+' : '`$-'), \abs($intbonus),
-            ($weapondmg >= 0 ? '`8+' : '`$-'), \abs($weapondmg),
-            ($levelbonus >= 0 ? '`8+' : '`$-'), \abs($levelbonus),
-            ($miscbonus >= 0 ? '`8+' : '`$-'), \abs($miscbonus)
+        return sprintf_translate(
+            '%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ',
+            ($strbonus >= 0 ? '`8+' : '`$-'),
+            \abs($strbonus),
+            ($speedbonus >= 0 ? '`8+' : '`$-'),
+            \abs($speedbonus),
+            ($wisdombonus >= 0 ? '`8+' : '`$-'),
+            \abs($wisdombonus),
+            ($intbonus >= 0 ? '`8+' : '`$-'),
+            \abs($intbonus),
+            ($weapondmg >= 0 ? '`8+' : '`$-'),
+            \abs($weapondmg),
+            ($levelbonus >= 0 ? '`8+' : '`$-'),
+            \abs($levelbonus),
+            ($miscbonus >= 0 ? '`8+' : '`$-'),
+            \abs($miscbonus)
         );
     }
 
@@ -245,13 +259,20 @@ function explained_get_player_defense($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate('%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC',
-            ($wisdombonus >= 0 ? '`8+' : '`$-'), \abs($wisdombonus),
-            ($constbonus >= 0 ? '`8+' : '`$-'), \abs($constbonus),
-            ($speedbonus >= 0 ? '`8+' : '`$-'), \abs($speedbonus),
-            ($armordef >= 0 ? '`8+' : '`$-'), \abs($armordef),
-            ($levelbonus >= 0 ? '`8+' : '`$-'), \abs($levelbonus),
-            ($miscbonus >= 0 ? '`8+' : '`$-'), \abs($miscbonus)
+        return sprintf_translate(
+            '%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC',
+            ($wisdombonus >= 0 ? '`8+' : '`$-'),
+            \abs($wisdombonus),
+            ($constbonus >= 0 ? '`8+' : '`$-'),
+            \abs($constbonus),
+            ($speedbonus >= 0 ? '`8+' : '`$-'),
+            \abs($speedbonus),
+            ($armordef >= 0 ? '`8+' : '`$-'),
+            \abs($armordef),
+            ($levelbonus >= 0 ? '`8+' : '`$-'),
+            \abs($levelbonus),
+            ($miscbonus >= 0 ? '`8+' : '`$-'),
+            \abs($miscbonus)
         );
     }
 

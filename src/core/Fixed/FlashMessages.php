@@ -40,7 +40,7 @@ class FlashMessages
             return self::$instance->{$method}(...$arguments);
         }
 
-        $methods = implode(', ', get_class_methods(self::$instance));
+        $methods = \implode(', ', \get_class_methods(self::$instance));
 
         throw new \BadMethodCallException("Undefined method '{$method}'. The method name must be one of '{$methods}'");
     }
@@ -50,8 +50,6 @@ class FlashMessages
      *
      * @param array|string $message
      * @param string       $type
-     *
-     * @return void
      */
     public static function addMessage($message, $type = null)
     {
@@ -117,4 +115,4 @@ class FlashMessages
     }
 }
 
-class_alias('Lotgd\Core\Fixed\FlashMessages', 'LotgdFlashMessages', false);
+\class_alias('Lotgd\Core\Fixed\FlashMessages', 'LotgdFlashMessages', false);
