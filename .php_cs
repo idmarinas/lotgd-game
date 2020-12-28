@@ -15,7 +15,6 @@ return PhpCsFixer\Config::create()
         '@PSR2' => true,
         '@Symfony' => true,
         '@PHP73Migration' => true,
-        '@PHP74Migration' => true,
         // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
         'align_multiline_comment' => true,
         // PHP arrays should be declared using the configured syntax.
