@@ -4498,16 +4498,16 @@
         },
         {
             "name": "matthiasmullie/minify",
-            "version": "1.3.64",
+            "version": "1.3.65",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/minify.git",
-                "reference": "38f9d58c739687e269f46c6dff4647de9e2eb855"
+                "reference": "227f19062451c55a797e0cc667ef983834e6580c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/38f9d58c739687e269f46c6dff4647de9e2eb855",
-                "reference": "38f9d58c739687e269f46c6dff4647de9e2eb855",
+                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/227f19062451c55a797e0cc667ef983834e6580c",
+                "reference": "227f19062451c55a797e0cc667ef983834e6580c",
                 "shasum": ""
             },
             "require": {
@@ -4554,7 +4554,21 @@
                 "minifier",
                 "minify"
             ],
-            "time": "2020-12-23T13:37:53+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/[user1",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/matthiasmullie] # Replace with up to 4 GitHub Sponsors-enabled usernames e.g.",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/user2",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-12-27T21:43:29+00:00"
         },
         {
             "name": "matthiasmullie/path-converter",
@@ -9373,16 +9387,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "3.2.8",
+            "version": "3.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "ba0e5e2a8041b970f6fa03ae3e7ea8a4e6c1c18e"
+                "reference": "39d52b47bbd9e423a76b7a4ce25b1dd8742ee131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/ba0e5e2a8041b970f6fa03ae3e7ea8a4e6c1c18e",
-                "reference": "ba0e5e2a8041b970f6fa03ae3e7ea8a4e6c1c18e",
+                "url": "https://api.github.com/repos/phan/phan/zipball/39d52b47bbd9e423a76b7a4ce25b1dd8742ee131",
+                "reference": "39d52b47bbd9e423a76b7a4ce25b1dd8742ee131",
                 "shasum": ""
             },
             "require": {
@@ -9442,7 +9456,7 @@
                 "php",
                 "static"
             ],
-            "time": "2020-12-23T19:14:41+00:00"
+            "time": "2020-12-26T19:12:51+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

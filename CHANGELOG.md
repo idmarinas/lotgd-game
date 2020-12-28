@@ -13,6 +13,38 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
+-   Nothing
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   Nothing
+
+### :x: REMOVES and/or Break Changes
+
+-   Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
+
+### :notebook: NOTES
+
+-   **Upgrade/Install problems**
+    -   First try to empty cache: `var/` delete this folder.
+        -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
+    -   Second read info in `storage/log/tracy/*` files, and see the problem
+    -   If you can resolver problem go to: https://github.com/idmarinas/lotgd-game/issues
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
+# Version: 4.9.0
+
+### :cyclone: CHANGES
+
 -   _Migrating_ **Laminas Cache** to **Symfony Cache**.
     -   Some parts of LoTGD Core use Symfony Cache instead of Laminas Cache.
         -   `lib/installer/installer_stage_default.php` 
