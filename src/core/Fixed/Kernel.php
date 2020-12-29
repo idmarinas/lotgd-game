@@ -47,7 +47,7 @@ class Kernel
 
     /**
      * Short method for get a service.
-     * This replace to ::getContainer()->get('service_name).
+     * This replace to LotgdKernel::getContainer()->get('service_name').
      */
     public static function get(string $serviceName)
     {
@@ -62,9 +62,17 @@ class Kernel
     /**
      * Set instance of Kernel.
      */
-    public static function instance(CoreKernel $instance)
+    public static function instance(CoreKernel $instance): void
     {
         self::$instance = $instance;
+    }
+
+    /**
+     * Get instance of Kernel.
+     */
+    public static function getInstance()
+    {
+        return self::$instance;
     }
 }
 
