@@ -58,11 +58,6 @@ if ($customsay && $claninfo['customsay'] != $customsay)
     \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('section.motd.messagess.saved.say', [], $textDomain));
 }
 
-if ($invalidateCache)
-{
-    LotgdCache::removeItem("clandata-{$claninfo['clanid']}");
-}
-
 \Doctrine::persist($clanEntity);
 \Doctrine::flush();
 

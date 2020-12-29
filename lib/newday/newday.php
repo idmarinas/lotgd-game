@@ -15,7 +15,6 @@ if ( ! $session['user']['alive'])
     $params['resurrected'] = true;
     ++$session['user']['resurrections'];
     $session['user']['alive'] = true;
-    LotgdCache::removeItem('list.php-warsonline');
 }
 
 ++$session['user']['age'];

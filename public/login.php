@@ -180,7 +180,6 @@ if ('' != $name)
     $session['user']['laston'] = new \DateTime('now');
 
     \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-    LotgdCache::removeItem('list.php-warsonline');
 
     // Handle the change in number of users online
     translator_check_collect_texts();
@@ -239,7 +238,6 @@ elseif ('logout' == $op)
         $session['user']['loggedin'] = false;
 
         \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-        LotgdCache::removeItem('list.php-warsonline');
 
         // Let's throw a logout module hook in here so that modules
         // like the stafflist which need to invalidate the cache

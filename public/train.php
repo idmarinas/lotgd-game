@@ -306,8 +306,6 @@ if ($master > 0 && $session['user']['level'] < getsetting('maxlevel', 15))
                 $companions = $newcompanions;
             }
 
-            LotgdCache::removeItem('list.php-warsonline');
-
             if (getsetting('displaymasternews', 1))
             {
                 $days = (1 == $session['user']['age']) ? 'day' : 'days';

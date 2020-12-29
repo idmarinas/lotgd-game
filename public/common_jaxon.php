@@ -137,7 +137,6 @@ if (getsetting('fullmaintenance', 0))
         }
 
         \LotgdKernel::get('cache.app')->delete('char-list-home-page');
-        LotgdCache::removeItem('list.php-warsonline');
 
         saveuser();
 
