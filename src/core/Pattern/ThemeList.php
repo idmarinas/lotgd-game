@@ -24,12 +24,12 @@ trait ThemeList
     public function getThemeList(): array
     {
         $cacheKey = 'lotgd-core-pattern-theme-list';
-        $cache    = $this->getCache();
+        $cache    = $this->getCacheApp();
 
-        $skins = $cache->getItem($cacheKey);
-
-        if ( ! \is_array($skins))
+        return $cache->getItem($cacheKey, function ($item)
         {
+            $item->expiresAt(new \DateTime('tomorrow')); //-- Update each day
+
             // A generic way of allowing a theme to be selected.
             $handle = @\opendir('themes');
 
@@ -49,9 +49,7 @@ trait ThemeList
                 }
             }
 
-            $cache->setItem($cacheKey, $skins);
-        }
-
-        return $skins;
+            return $skins;
+        });
     }
 }
