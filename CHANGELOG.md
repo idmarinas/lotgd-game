@@ -13,11 +13,15 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   _Migrated_ **Laminas Cache** to **Symfony Cache**.
+    -   Deleted usage of `LotgdCache::` that not have used.
 
 ### :star: FEATURES
 
--   Nothing
+-   **Traits**:
+    -   `src/core/Pattern/Container.php` new functions:
+        -   `getKernel()` get the new LoTGD Kernel
+        -   `getService(string $name)` get a service from LoTGD Kernel
 
 ### :fire: DEPRECATED
 
