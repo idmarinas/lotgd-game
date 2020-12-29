@@ -88,6 +88,7 @@
         "lotgd-dev": "npm run dev && gulp",
         "lotgd-prod": "npm run build && gulp --env prod",
         "lotgd-zip": "npm run build && gulp --env prod --zip",
+        "lotgd-release": "npm run build && gulp --env prod --zip && php phpDocumentor.phar",
         "lotgd-skeleton": "gulp skeleton"
     },
     "browserslist": [
