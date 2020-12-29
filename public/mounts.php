@@ -35,7 +35,6 @@ if ('deactivate' == $op)
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
-    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('activate' == $op)
 {
@@ -46,7 +45,6 @@ elseif ('activate' == $op)
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
-    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('del' == $op)
 {
@@ -61,7 +59,6 @@ elseif ('del' == $op)
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
-    LotgdCache::removeItem("mountdata-$mountId");
 }
 elseif ('give' == $op)
 {
@@ -190,8 +187,6 @@ elseif ('edit' == $op || 'add' == $op)
                     'autocomplete' => 'off'
                 ]
             ]);
-
-            LotgdCache::removeItem("mountdata-$mountId");
         }
 
         //-- In this position can updated $mountId var
