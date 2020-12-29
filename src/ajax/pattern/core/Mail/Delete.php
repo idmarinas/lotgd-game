@@ -46,8 +46,6 @@ trait Delete
             \Doctrine::remove($delete);
             \Doctrine::flush();
 
-            \LotgdCache::removeItem("mail-{$session['user']['acctid']}");
-
             $type    = 'success';
             $message = \LotgdTranslator::t('dialog.del.one.success', [], $this->getTextDomain());
         }

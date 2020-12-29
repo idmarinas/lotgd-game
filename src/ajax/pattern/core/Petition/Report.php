@@ -74,9 +74,6 @@ trait Report
                     \Doctrine::persist($entity);
                     \Doctrine::flush();
 
-                    // Fix the counter
-                    \LotgdCache::removeItem('petitioncounts');
-
                     // If the admin wants it, email the petitions to them.
                     $this->emailPetitionAdmin($post['charname'], $post);
 

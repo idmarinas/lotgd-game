@@ -63,8 +63,6 @@ trait Send
             $response = $this->inbox();
 
             $response->dialog->success(\LotgdTranslator::t('jaxon.success.send.mail.sent', [], $this->getTextDomain()));
-
-            \LotgdCache::removeItem("mail-{$account->getAcctid()}");
         }
         catch (\Throwable $th)
         {

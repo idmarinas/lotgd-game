@@ -261,8 +261,6 @@ function module_addeventhook($type, $chance)
     \Doctrine::persist($entity);
 
     \Doctrine::flush();
-
-    LotgdCache::removeItem("event-{$type}");
 }
 
 function module_drophook($hookname, $functioncall = false)
@@ -288,9 +286,6 @@ function module_drophook($hookname, $functioncall = false)
     }
 
     \Doctrine::flush();
-
-    LotgdCache::removeItem("hooks-hook-{$hookname}");
-    LotgdCache::removeItem('moduleprepare');
 }
 
 /**
@@ -359,7 +354,4 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
 
     \Doctrine::persist($entity);
     \Doctrine::flush();
-
-    LotgdCache::removeItem("hooks-hook-{$hookname}");
-    LotgdCache::removeItem('moduleprepare');
 }

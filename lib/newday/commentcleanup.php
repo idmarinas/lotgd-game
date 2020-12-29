@@ -15,7 +15,6 @@
     $result     = $repository->deleteExpireMail($time);
 
     gamelog("Deleted {$result} records from mail older than {$time} days.", 'maintenance');
-    LotgdCache::clearByPrefix('mail');
 
     //CONTENT
 

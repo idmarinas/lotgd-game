@@ -64,7 +64,6 @@ if ($updateplayer)
     {
         $repository->deleteOld($old);
     }
-    LotgdCache::removeItem("whostyping-whostyping_$section");
 }
 
 //retrieve, deleting as appropriate

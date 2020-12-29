@@ -159,8 +159,6 @@ trait Poll
 
         $response->dialog->{$type}($message);
 
-        \LotgdCache::removeItem("poll-{$id}");
-
         return $response;
     }
 }

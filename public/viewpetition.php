@@ -58,8 +58,6 @@ if ('' == $op)
             ;
             \Doctrine::persist($result);
             \Doctrine::flush();
-
-            LotgdCache::removeItem('petition_counts');
         }
     }
 

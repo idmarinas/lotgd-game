@@ -85,8 +85,6 @@ $session['installer']['dbinfo'] = $session['installer']['dbinfo'] ?? [
 
 $noinstallnavs = false;
 
-LotgdCache::removeItem('gamesettings');
-
 $stages = [
     'stages.00',
     'stages.01',

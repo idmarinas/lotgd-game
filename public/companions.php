@@ -39,8 +39,6 @@ if ('deactivate' == $op)
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
-
-    LotgdCache::removeItem("companionsdata-{$id}");
 }
 elseif ('activate' == $op)
 {
@@ -51,8 +49,6 @@ elseif ('activate' == $op)
 
     $op = '';
     \LotgdRequest::setQuery('op', '');
-
-    LotgdCache::removeItem("companiondata-{$id}");
 }
 elseif ('del' == $op)
 {
@@ -64,7 +60,6 @@ elseif ('del' == $op)
     \LotgdRequest::setQuery('op', '');
 
     module_delete_objprefs('companions', $id);
-    LotgdCache::removeItem("companiondata-$id");
 }
 elseif ('take' == $op)
 {
@@ -198,8 +193,6 @@ elseif ('edit' == $op || 'add' == $op)
             $id = $entity->getCompanionid();
 
             \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('flash.message.actions.save.success', [], $textDomain));
-
-            LotgdCache::removeItem("companiondata-{$id}");
 
             //-- Redo form for change $id and set new data (generated IDs)
             $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $entity, [

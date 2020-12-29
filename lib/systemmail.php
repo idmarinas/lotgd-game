@@ -72,6 +72,4 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
 
         lotgd_mail($accountEntityTo->getEmailaddress(), \LotgdSanitize::fullSanitize($mailSubject), \LotgdFormat::colorize($mailMessage, true));
     }
-
-    LotgdCache::removeItem("mail-{$to}");
 }

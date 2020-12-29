@@ -129,8 +129,6 @@ trait Read
             \Doctrine::persist($unread);
             \Doctrine::flush();
 
-            \LotgdCache::removeItem("mail-{$session['user']['acctid']}");
-
             //-- Return to inbox
             $response = $this->inbox();
         }

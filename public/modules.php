@@ -83,9 +83,6 @@ foreach ($modules as $key => $module)
 
         $op = '';
         \LotgdRequest::setQuery('op', '');
-
-        LotgdCache::clearByPrefix('hook');
-        LotgdCache::clearByPrefix('module-prepare');
     }
     elseif ('uninstall' == $theOp)
     {
@@ -98,11 +95,6 @@ foreach ($modules as $key => $module)
 
         $op = '';
         \LotgdRequest::setQuery('op', '');
-
-        LotgdCache::clearByPrefix('hook');
-        LotgdCache::clearByPrefix('module-prepare');
-
-        LotgdCache::removeItem("inject-$module");
     }
     elseif ('activate' == $theOp)
     {
@@ -110,11 +102,6 @@ foreach ($modules as $key => $module)
 
         $op = '';
         \LotgdRequest::setQuery('op', '');
-
-        LotgdCache::clearByPrefix('hook');
-        LotgdCache::clearByPrefix('module-prepare');
-
-        LotgdCache::removeItem("inject-$module");
 
         injectmodule($module, true);
     }
@@ -124,9 +111,6 @@ foreach ($modules as $key => $module)
 
         $op = '';
         \LotgdRequest::setQuery('op', '');
-
-        LotgdCache::removeItem("inject-$module");
-        LotgdCache::clearByPrefix('module-prepare');
     }
     elseif ('reinstall' == $theOp)
     {
@@ -135,10 +119,6 @@ foreach ($modules as $key => $module)
 
         $op = '';
         \LotgdRequest::setQuery('op', '');
-
-        LotgdCache::removeItem("inject-$module");
-        LotgdCache::clearByPrefix('hook');
-        LotgdCache::clearByPrefix('module-prepare');
 
         injectmodule($module, true);
     }
