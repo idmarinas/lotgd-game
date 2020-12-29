@@ -51,8 +51,7 @@ if ('suicide' == $op && $params['selfDelete'])
         $session['loggedin'] = false;
         $session['user']['loggedin'] = false;
 
-        LotgdCache::removeItem('charlisthomepage');
-        LotgdCache::removeItem('list.php-warsonline');
+        \LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
         return redirect('home.php');
     }
