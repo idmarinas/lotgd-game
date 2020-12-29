@@ -10,8 +10,11 @@
 -   Utilizar el symfony translation en algunas páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 
-# Para la versión 4.10.0
--   Seguir migrando el uso de `LotgdCache::` por `$cache = LotgdKernel::get('cache.app')`
+# Módulos
+-   Migrar el uso de `LotgdCache::` a `$cache = LotgdKernel::get('cache.app')`
+
+# Para la versión 4.11.0
+-   ...
 
 # Para la versión 5.0.0
 -   Migrar al uso de Symfony usando el http-kernel
@@ -141,4 +144,8 @@ Permitir añadir al principio o al final de una categoria, añadir una categorí
 
 #### Comandos
 
-`/vendor/bin/doctrine orm:schema-tool:update --dump-sql --force`
+composer dump-env prod
+
+./vendor/bin/phan -m csv -o phan.csv
+
+composer install --no-dev --no-suggest --optimize-autoloader
