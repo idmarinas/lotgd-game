@@ -9,7 +9,7 @@ Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
 
 
-# Version: 4.9.0
+# Version: 4.10.0
 
 ### :cyclone: CHANGES
 
