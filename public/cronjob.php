@@ -16,17 +16,17 @@ $cron = new \Cron\Cron();
 $resolver = new \Cron\Resolver\ArrayResolver();
 
 //-- To avoid potential problems with other cache data and optimization/removal processes
-$cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
+$cache = \LotgdKernel::get('core.cronjobs.cache');
 
-$cronjobs = $cronCache->getItem('tablecronjobs'); //-- Cache for 1 day
-if (! is_array($cronjobs) || empty($cronjobs))
+$cronjobs = $cache->get('tablecronjobs', function ($item)
 {
+    $item->expiresAt(new \DateTime('tomorrow')); //-- Update each day
+
     $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Cronjob::class);
     $entities = $repository->findBy(['enabled' => 1]);
-    $cronjobs = $repository->extractEntity($entities);
 
-    $cronCache->setItem('tablecronjobs', $cronjobs);
-}
+    return $repository->extractEntity($entities);
+});
 
 //-- Add all cronjobs to Jobby CronJob
 foreach ($cronjobs as $key => $job)
