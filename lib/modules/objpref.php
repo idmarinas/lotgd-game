@@ -20,7 +20,7 @@ function module_delete_objprefs($objtype, $objid)
 
     \Doctrine::flush();
 
-    LotgdCache::clearByPrefix("module-objpref-{$objtype}-{$objid}-{$mostrecentmodule}");
+    \LotgdKernel::get('cache.app')->invalidateTags(["module-objpref-{$objtype}-{$objid}"]);
 }
 
 /**
@@ -104,7 +104,7 @@ function set_module_objpref($objtype, $objid, $name, $value, $module = false)
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-objpref-{$objtype}-{$objid}-{$module}", true);
+    \LotgdKernel::get('cache.app')->delete("module-objpref-{$objtype}-{$objid}-{$module}");
 }
 
 /**
@@ -142,7 +142,7 @@ function increment_module_objpref($objtype, $objid, $name, $value = 1, $module =
     \Doctrine::persist($entity);
     \Doctrine::flush();
 
-    LotgdCache::removeItem("module-objpref-{$objtype}-{$objid}-{$module}", true);
+    \LotgdKernel::get('cache.app')->delete("module-objpref-{$objtype}-{$objid}-{$module}", true);
 }
 
 /**
@@ -161,10 +161,13 @@ function load_module_objpref($objtype, $objid, $module = false): array
         $module = $mostrecentmodule;
     }
 
-    $module_objpref = \LotgdCache::getItem("module-objpref-{$objtype}-{$objid}-{$module}");
+    $cache = \LotgdKernel::get('cache.app');
 
-    if ( ! \is_array($module_objpref))
+    return $cache->get("module-objpref-{$objtype}-{$objid}-{$module}", function ($item) use ($module, $objtype, $objid)
     {
+        $item->expiresAfter(600);
+        $item->tag("module-objpref-{$objtype}-{$objid}");
+
         $repository = \Doctrine::getRepository('LotgdCore:ModuleObjprefs');
         $result     = $repository->findBy(['modulename' => $module, 'objtype' => $objtype, 'objid' => $objid]);
 
@@ -175,8 +178,6 @@ function load_module_objpref($objtype, $objid, $module = false): array
             $module_objpref[$val->getSetting()] = $val->getValue();
         }
 
-        \LotgdCache::setItem("module-objpref-{$objtype}-{$objid}-{$module}", $module_objpref);
-    }
-
-    return $module_objpref;
+        return $module_objpref;
+    });
 }
