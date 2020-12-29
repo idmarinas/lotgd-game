@@ -89,7 +89,7 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Pattern-Container.html"><abbr title="\Lotgd\Core\Pattern\Container">Container</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Repository.html"><abbr title="\Lotgd\Core\Pattern\Repository">Repository</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Pattern-Container.html"><abbr title="\Lotgd\Core\Pattern\Container">Container</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Doctrine.html"><abbr title="\Lotgd\Core\Pattern\Doctrine">Doctrine</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
@@ -114,11 +114,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Pattern-Repository.html#property_doctrine">$doctrine</a>
+    <a href="classes/Lotgd-Core-Pattern-Doctrine.html#property_doctrine">$doctrine</a>
     <span>
-                &nbsp;: mixed            </span>
+                &nbsp;: <abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>            </span>
 </dt>
-<dd></dd>
+<dd>Doctrine instance.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Pvp-Listing.html#property_query">$query</a>
@@ -149,7 +149,14 @@
 <dd>Get container.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Pattern-Repository.html#method_getDoctrineRepository">getDoctrineRepository()</a>
+    <a href="classes/Lotgd-Core-Pattern-Doctrine.html#method_getDoctrine">getDoctrine()</a>
+    <span>
+                        &nbsp;: <abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr>    </span>
+</dt>
+<dd>Get doctrine entity manager instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Doctrine.html#method_getDoctrineRepository">getDoctrineRepository()</a>
     <span>
                         &nbsp;: object|null    </span>
 </dt>
@@ -211,24 +218,26 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_doctrine">
         $doctrine
-        <a href="classes/Lotgd-Core-Pattern-Repository.html#property_doctrine" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Pattern-Doctrine.html#property_doctrine" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Repository.php"><a href="files/src-core-pattern-repository.html"><abbr title="src/core/Pattern/Repository.php">Repository.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Doctrine.php"><a href="files/src-core-pattern-doctrine.html"><abbr title="src/core/Pattern/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">25</span>
 </aside>
 
-    
+        <p class="phpdocumentor-summary">Doctrine instance.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
     <span class="phpdocumentor-signature__name">$doctrine</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -380,14 +389,48 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDoctrineRepository">
-        getDoctrineRepository()
-        <a href="classes/Lotgd-Core-Pattern-Repository.html#method_getDoctrineRepository" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getDoctrine">
+        getDoctrine()
+        <a href="classes/Lotgd-Core-Pattern-Doctrine.html#method_getDoctrine" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Repository.php"><a href="files/src-core-pattern-repository.html"><abbr title="src/core/Pattern/Repository.php">Repository.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Doctrine.php"><a href="files/src-core-pattern-doctrine.html"><abbr title="src/core/Pattern/Doctrine.php">Doctrine.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get doctrine entity manager instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getDoctrine</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\ORM\EntityManager">EntityManager</abbr></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getDoctrineRepository">
+        getDoctrineRepository()
+        <a href="classes/Lotgd-Core-Pattern-Doctrine.html#method_getDoctrineRepository" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Doctrine.php"><a href="files/src-core-pattern-doctrine.html"><abbr title="src/core/Pattern/Doctrine.php">Doctrine.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get repository.</p>

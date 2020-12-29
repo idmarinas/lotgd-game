@@ -93,7 +93,7 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Pattern-Container.html"><abbr title="\Lotgd\Core\Pattern\Container">Container</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Commentary.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Commentary">Commentary</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-CommentaryModerate.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\CommentaryModerate">CommentaryModerate</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Commentary.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Commentary">Commentary</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-CommentaryModerate.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\CommentaryModerate">CommentaryModerate</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Output.html"><abbr title="\Lotgd\Core\Pattern\Output">Output</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
@@ -126,6 +126,34 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Twig-Extension-Commentary.html#property_commentaryNodeVisitor">$commentaryNodeVisitor</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdCode">$lotgdCode</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdColor">$lotgdColor</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdOutput">$lotgdOutput</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Translator.html#property_lotgdSymfonyTranslator">$lotgdSymfonyTranslator</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -223,6 +251,20 @@
 <dd>Show if status of player (Online, Offline, Nearby).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#method_getCode">getCode()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Output-Code.html"><abbr title="\Lotgd\Core\Output\Code">Code</abbr></a>    </span>
+</dt>
+<dd>Get Instance of code.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#method_getColor">getColor()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Output-Color.html"><abbr title="\Lotgd\Core\Output\Color">Color</abbr></a>    </span>
+</dt>
+<dd>Get color instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getCommentary">getCommentary()</a>
     <span>
                         &nbsp;: <a href="classes/Lotgd-Core-Output-Commentary.html"><abbr title="\Lotgd\Core\Output\Commentary">Commentary</abbr></a>    </span>
@@ -265,6 +307,13 @@
 <dd>{@inheritdoc}</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Output.html#method_getOutput">getOutput()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Output-Collector.html"><abbr title="\Lotgd\Core\Output\Collector">Collector</abbr></a>    </span>
+</dt>
+<dd>Get output instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Pattern-Template.html#method_getTemplate">getTemplate()</a>
     <span>
                         &nbsp;: object|null    </span>
@@ -305,6 +354,13 @@
                         &nbsp;: mixed    </span>
 </dt>
 <dd>Set container (Service Manager).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Translator.html#method_symfonyTranslator">symfonyTranslator()</a>
+    <span>
+                        &nbsp;: <abbr title="\Symfony\Component\Translation\Translator">Translator</abbr>    </span>
+</dt>
+<dd>Symfony Translator instance.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Commentary.html#method_commentaryFormUrl">commentaryFormUrl()</a>
@@ -406,6 +462,126 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_lotgdCode">
+        $lotgdCode
+        <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdCode" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdCode</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lotgdColor">
+        $lotgdColor
+        <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdColor" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdColor</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lotgdOutput">
+        $lotgdOutput
+        <a href="classes/Lotgd-Core-Pattern-Output.html#property_lotgdOutput" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdOutput</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lotgdSymfonyTranslator">
+        $lotgdSymfonyTranslator
+        <a href="classes/Lotgd-Core-Pattern-Translator.html#property_lotgdSymfonyTranslator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdSymfonyTranslator</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_lotgdTemplateParams">
         $lotgdTemplateParams
         <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateParams" class="headerlink"><i class="fas fa-link"></i></a>
@@ -475,7 +651,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 </aside>
 
     
@@ -663,7 +839,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Commentary.php"><a href="files/src-core-twig-extension-pattern-commentary.html"><abbr title="src/core/Twig/Extension/Pattern/Commentary.php">Commentary.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">177</span>
 </aside>
 
         <p class="phpdocumentor-summary">Add form for add comment.</p>
@@ -952,6 +1128,74 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getCode">
+        getCode()
+        <a href="classes/Lotgd-Core-Pattern-Output.html#method_getCode" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get Instance of code.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Code.html"><abbr title="\Lotgd\Core\Output\Code">Code</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Code.html"><abbr title="\Lotgd\Core\Output\Code">Code</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getColor">
+        getColor()
+        <a href="classes/Lotgd-Core-Pattern-Output.html#method_getColor" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get color instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getColor</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Color.html"><abbr title="\Lotgd\Core\Output\Color">Color</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Color.html"><abbr title="\Lotgd\Core\Output\Color">Color</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getCommentary">
         getCommentary()
         <a href="classes/Lotgd-Core-Twig-Extension-Commentary.html#method_getCommentary" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1163,6 +1407,55 @@
         class="phpdocumentor-element
             -method
             -public
+            -deprecated                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getOutput">
+        getOutput()
+        <a href="classes/Lotgd-Core-Pattern-Output.html#method_getOutput" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Output.php"><a href="files/src-core-pattern-output.html"><abbr title="src/core/Pattern/Output.php">Output.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get output instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature -deprecated">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getOutput</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Collector.html"><abbr title="\Lotgd\Core\Output\Collector">Collector</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">deprecated</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">4.7.0</span>
+                                                                                
+                                                 <section class="phpdocumentor-description"></section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Output-Collector.html"><abbr title="\Lotgd\Core\Output\Collector">Collector</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_getTemplate">
@@ -1274,7 +1567,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get translator instance.</p>
@@ -1308,7 +1601,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Commentary.php"><a href="files/src-core-twig-extension-pattern-commentary.html"><abbr title="src/core/Twig/Extension/Pattern/Commentary.php">Commentary.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">192</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 </aside>
 
         <p class="phpdocumentor-summary">Save comment to data base.</p>
@@ -1376,6 +1669,40 @@
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_symfonyTranslator">
+        symfonyTranslator()
+        <a href="classes/Lotgd-Core-Pattern-Translator.html#method_symfonyTranslator" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Symfony Translator instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">symfonyTranslator</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\Translation\Translator">Translator</abbr></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\Translation\Translator">Translator</abbr></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -protected
                                                         "
 >
@@ -1386,7 +1713,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Commentary.php"><a href="files/src-core-twig-extension-pattern-commentary.html"><abbr title="src/core/Twig/Extension/Pattern/Commentary.php">Commentary.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">240</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get a valid url to use in commentary form.</p>
@@ -1420,7 +1747,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Commentary.php"><a href="files/src-core-twig-extension-pattern-commentary.html"><abbr title="src/core/Twig/Extension/Pattern/Commentary.php">Commentary.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get status messages of player.</p>

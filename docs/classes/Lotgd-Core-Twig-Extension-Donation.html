@@ -93,7 +93,7 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Pattern-Container.html"><abbr title="\Lotgd\Core\Pattern\Container">Container</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Http.html"><abbr title="\Lotgd\Core\Pattern\Http">Http</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-AttributesString.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\AttributesString">AttributesString</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Navigation">Navigation</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Twig-Extension-Pattern-AttributesString.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\AttributesString">AttributesString</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Navigation">Navigation</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Http.html"><abbr title="\Lotgd\Core\Pattern\Http">Http</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
@@ -126,6 +126,13 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Pattern-Http.html#property_lotgdHttpResponse">$lotgdHttpResponse</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Translator.html#property_lotgdSymfonyTranslator">$lotgdSymfonyTranslator</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -257,6 +264,13 @@
 </dt>
 <dd>Show pagination for a instance of Paginator.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Pattern-Translator.html#method_symfonyTranslator">symfonyTranslator()</a>
+    <span>
+                        &nbsp;: <abbr title="\Symfony\Component\Translation\Translator">Translator</abbr>    </span>
+</dt>
+<dd>Symfony Translator instance.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html#method_renderPagination">renderPagination()</a>
     <span>
@@ -343,6 +357,36 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_lotgdSymfonyTranslator">
+        $lotgdSymfonyTranslator
+        <a href="classes/Lotgd-Core-Pattern-Translator.html#property_lotgdSymfonyTranslator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdSymfonyTranslator</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_lotgdTemplateParams">
         $lotgdTemplateParams
         <a href="classes/Lotgd-Core-Pattern-Template.html#property_lotgdTemplateParams" class="headerlink"><i class="fas fa-link"></i></a>
@@ -412,7 +456,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 </aside>
 
     
@@ -521,7 +565,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Navigation.php"><a href="files/src-core-twig-extension-pattern-navigation.html"><abbr title="src/core/Twig/Extension/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 </aside>
 
         <p class="phpdocumentor-summary">Create a header section.</p>
@@ -627,7 +671,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Donation.php"><a href="files/src-core-twig-extension-donation.html"><abbr title="src/core/Twig/Extension/Donation.php">Donation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 </aside>
 
     
@@ -704,7 +748,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Donation.php"><a href="files/src-core-twig-extension-donation.html"><abbr title="src/core/Twig/Extension/Donation.php">Donation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -806,7 +850,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Donation.php"><a href="files/src-core-twig-extension-donation.html"><abbr title="src/core/Twig/Extension/Donation.php">Donation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -908,7 +952,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get translator instance.</p>
@@ -986,7 +1030,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Navigation.php"><a href="files/src-core-twig-extension-pattern-navigation.html"><abbr title="src/core/Twig/Extension/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 </aside>
 
         <p class="phpdocumentor-summary">Show pagination for a instance of Paginator.</p>
@@ -1055,6 +1099,40 @@ For render a block use array ['block_name', 'path/to/template']</p>
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_symfonyTranslator">
+        symfonyTranslator()
+        <a href="classes/Lotgd-Core-Pattern-Translator.html#method_symfonyTranslator" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Translator.php"><a href="files/src-core-pattern-translator.html"><abbr title="src/core/Pattern/Translator.php">Translator.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Symfony Translator instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">symfonyTranslator</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\Translation\Translator">Translator</abbr></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Symfony\Component\Translation\Translator">Translator</abbr></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -protected
                                                         "
 >
@@ -1065,7 +1143,7 @@ For render a block use array ['block_name', 'path/to/template']</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Pattern/Navigation.php"><a href="files/src-core-twig-extension-pattern-navigation.html"><abbr title="src/core/Twig/Extension/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">177</span>
+    <span class="phpdocumentor-element-found-in__line">179</span>
 </aside>
 
         <p class="phpdocumentor-summary">Render template for pagination.</p>

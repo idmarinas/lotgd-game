@@ -111,7 +111,7 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#property_container">$container</a>
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#property_instance">$instance</a>
     <span>
                 &nbsp;: <abbr title="\Lotgd\Core\Fixed\Lotgd\Core\Component\FlashMessages">FlashMessages</abbr>            </span>
 </dt>
@@ -125,7 +125,42 @@
 <dd>Add support for magic static method calls.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_setContainer">setContainer()</a>
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addErrorMessage">addErrorMessage()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a>    </span>
+</dt>
+<dd>Add a &quot;error&quot; message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addInfoMessage">addInfoMessage()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a>    </span>
+</dt>
+<dd>Add a &quot;info&quot; message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addMessage">addMessage()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Add message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addSuccessMessage">addSuccessMessage()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a>    </span>
+</dt>
+<dd>Add a &quot;success&quot; message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addWarningMessage">addWarningMessage()</a>
+    <span>
+                        &nbsp;: <a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a>    </span>
+</dt>
+<dd>Add a &quot;warning&quot; message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_instance">instance()</a>
     <span>
                         &nbsp;: mixed    </span>
 </dt>
@@ -150,9 +185,9 @@
             -protected
             -static                                            "
 >
-    <h4 class="phpdocumentor-element__name" id="property_container">
-        $container
-        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#property_container" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_instance">
+        $instance
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#property_instance" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -167,7 +202,7 @@
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type"><abbr title="\Lotgd\Core\Fixed\Lotgd\Core\Component\FlashMessages">FlashMessages</abbr></span>
-    <span class="phpdocumentor-signature__name">$container</span>
+    <span class="phpdocumentor-signature__name">$instance</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -242,29 +277,262 @@
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setContainer">
-        setContainer()
-        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_setContainer" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_addErrorMessage">
+        addErrorMessage()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addErrorMessage" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Set container of FlashMessages.</p>
+        <p class="phpdocumentor-summary">Add a &quot;error&quot; message.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">setContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Component-FlashMessages.html"><abbr title="\Lotgd\Core\Component\FlashMessages">FlashMessages</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addErrorMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Lotgd-Core-Component-FlashMessages.html"><abbr title="\Lotgd\Core\Component\FlashMessages">FlashMessages</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addInfoMessage">
+        addInfoMessage()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addInfoMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add a &quot;info&quot; message.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addInfoMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addMessage">
+        addMessage()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add message.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addSuccessMessage">
+        addSuccessMessage()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addSuccessMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">80</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add a &quot;success&quot; message.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addSuccessMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addWarningMessage">
+        addWarningMessage()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_addWarningMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">104</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Add a &quot;warning&quot; message.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addWarningMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$message</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Fixed-FlashMessages.html"><abbr title="\Lotgd\Core\Fixed\FlashMessages">FlashMessages</abbr></a></span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_instance">
+        instance()
+        <a href="classes/Lotgd-Core-Fixed-FlashMessages.html#method_instance" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Fixed/FlashMessages.php"><a href="files/src-core-fixed-flashmessages.html"><abbr title="src/core/Fixed/FlashMessages.php">FlashMessages.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">112</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Set container of FlashMessages.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">instance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\Session\Flash\FlashBag">FlashBag</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$instance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$instance</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\HttpFoundation\Session\Flash\FlashBag">FlashBag</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 

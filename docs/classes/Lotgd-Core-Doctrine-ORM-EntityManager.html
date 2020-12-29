@@ -96,7 +96,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 </aside>
 
         
@@ -121,6 +121,13 @@
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#property_repositoryHydrator">$repositoryHydrator</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_create">create()</a>
     <span>
@@ -129,11 +136,32 @@
 <dd>{@inheritdoc}</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_extractEntity">extractEntity()</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Extract values from an object with class methods.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_hydrateEntity">hydrateEntity()</a>
+    <span>
+                        &nbsp;: object    </span>
+</dt>
+<dd>Hydrate an object by populating getter/setter methods.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_isConnected">isConnected()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
 <dd>Check if has a connection with DataBase.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_geLaminastHydrator">geLaminastHydrator()</a>
+    <span>
+                        &nbsp;: <abbr title="\Laminas\Hydrator\ClassMethodsHydrator">ClassMethodsHydrator</abbr>    </span>
+</dt>
+<dd>Get Hydrator instance.</dd>
 
         </dl>
 
@@ -163,7 +191,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
     
@@ -171,6 +199,36 @@
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$isConnected</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_repositoryHydrator">
+        $repositoryHydrator
+        <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#property_repositoryHydrator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$repositoryHydrator</span>
     </code>
 
     
@@ -197,7 +255,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -248,6 +306,102 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_extractEntity">
+        extractEntity()
+        <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_extractEntity" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">76</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Extract values from an object with class methods.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">extractEntity</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">object|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$object</span>
+                : <span class="phpdocumentor-signature__argument__return-type">object|array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hydrateEntity">
+        hydrateEntity()
+        <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_hydrateEntity" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Hydrate an object by populating getter/setter methods.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">hydrateEntity</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$data</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entity</span>
+                : <span class="phpdocumentor-signature__argument__return-type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">object</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_isConnected">
         isConnected()
         <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_isConnected" class="headerlink"><i class="fas fa-link"></i></a>
@@ -255,7 +409,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 </aside>
 
         <p class="phpdocumentor-summary">Check if has a connection with DataBase.</p>
@@ -271,6 +425,40 @@
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_geLaminastHydrator">
+        geLaminastHydrator()
+        <a href="classes/Lotgd-Core-Doctrine-ORM-EntityManager.html#method_geLaminastHydrator" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Doctrine/ORM/EntityManager.php"><a href="files/src-core-doctrine-orm-entitymanager.html"><abbr title="src/core/Doctrine/ORM/EntityManager.php">EntityManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Get Hydrator instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__name">geLaminastHydrator</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Hydrator\ClassMethodsHydrator">ClassMethodsHydrator</abbr></span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Laminas\Hydrator\ClassMethodsHydrator">ClassMethodsHydrator</abbr></span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
