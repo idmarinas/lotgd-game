@@ -38,13 +38,13 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :notebook: NOTES
 
 -   **Upgrade/Install for version 4.9.0 and up**
-    -   First upload files to your server (production compilation): 
-    -   Second to empty cache: 
+    -   First, upload files to your server (production compilation): 
+    -   Second, empty cache: 
         -   `var/` delete this folder (or use comand in console `php bin/console cache:clear`).
             -   From version 4.9.0 use Symfony Kernel, so work like Symfony Framework.
         -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
-    -   Second read info in `storage/log/tracy/*` files, and see the problem.
-    -   If you can't resolver problem go to: https://github.com/idmarinas/lotgd-game/issues
+    -   Third, read info in `storage/log/tracy/*` files, and see the problem.
+    -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
 -   **composer.json** Updated/Added/Deleted dependencies
 -   **package.json** Updated/Added/Deleted dependencies
 
