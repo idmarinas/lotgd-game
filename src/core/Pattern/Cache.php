@@ -13,6 +13,7 @@
 namespace Lotgd\Core\Pattern;
 
 use Laminas\Cache\Storage\StorageInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * Return instance of cache of game "Cache\Core\Lotgd".
@@ -20,11 +21,14 @@ use Laminas\Cache\Storage\StorageInterface;
 trait Cache
 {
     protected $lotgdCache;
+    protected $lotgdCacheApp;
 
     /**
      * Get cache instance.
      *
-     * @return object|null
+     * @deprecated 4.9.0 use getCacheApp() instead
+     *
+     * @return object
      */
     public function getCache()
     {
@@ -34,5 +38,20 @@ trait Cache
         }
 
         return $this->lotgdCache;
+    }
+
+    /**
+     * Get app cache instance.
+     *
+     * @return object
+     */
+    public function getCacheApp()
+    {
+        if ( ! $this->lotgdCacheApp instanceof CacheInterface)
+        {
+            $this->lotgdCacheApp = \LotgdKernel::get('cache.app');
+        }
+
+        return $this->lotgdCacheApp;
     }
 }
