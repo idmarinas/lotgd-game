@@ -20,8 +20,7 @@ if ('delcronjob' == $op)
 
         \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('flash.message.cronjob.deleted', [], $textDomain));
 
-        $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-        $cronCache->removeItem('cronjobstable');
+        \LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
 
         \Doctrine::remove($cronEntity);
         \Doctrine::flush();
@@ -99,8 +98,7 @@ elseif ('newcronjob' == $op)
 
         gamelog('`@'.$cronId ? 'Updated' : 'Create'." CronJob`0 `^{$entity->getName()}`0`$ by admin {$session['user']['playername']}`0", 'cronjob');
 
-        $cronCache = \LotgdLocator::get('Cache\Core\Cronjob');
-        $cronCache->removeItem('cronjobstable');
+        \LotgdKernel::get('core.cronjobs.cache')->delete('cronjobstable');
 
         //-- Redo form for change $cronId and set new data (generated IDs)
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
