@@ -43,6 +43,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   `var/` delete this folder (or use comand in console `php bin/console cache:clear`).
             -   From version 4.9.0 use Symfony Kernel, so work like Symfony Framework.
         -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
+            -   Not delete `.gitkeep` files. Remember to keep the main structure of the folder `storage/cache/`
+            -   It is highly recommended to use the command  `php bin/lotgd storage:cache_clear` instead delete folder.
     -   Third, read info in `storage/log/tracy/*` files, and see the problem.
     -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
 -   **composer.json** Updated/Added/Deleted dependencies
