@@ -9,10 +9,14 @@
 namespace Lotgd\Core\Pattern;
 
 use Interop\Container\ContainerInterface;
+use Lotgd\Core\Kernel;
+use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
 
 trait Container
 {
     protected $serviceManager;
+    protected $lotgdKernel;
+    protected $lotgdKernelContainer;
 
     /**
      * Set container (Service Manager).
@@ -39,5 +43,33 @@ trait Container
         }
 
         return $this->serviceManager->get($name);
+    }
+
+    /**
+     * Get container.
+     *
+     * @param string $name
+     */
+    public function getService($name)
+    {
+        if ( ! $this->lotgdKernelContainer instanceof DependencyInjectionContainerInterface)
+        {
+            $this->lotgdKernelContainer = $this->getKernel()->getContainer();
+        }
+
+        return $this->lotgdKernelContainer->get($name);
+    }
+
+    /**
+     * Get LoTGD Kernel.
+     */
+    public function getKernel(): Kernel
+    {
+        if ( ! $this->lotgdKernel instanceof Kernel)
+        {
+            $this->lotgdKernel = \LotgdKernel::getInstance();
+        }
+
+        return $this->lotgdKernel;
     }
 }
