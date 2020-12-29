@@ -83,7 +83,7 @@
         "symfony/webpack-encore-bundle": "^1.8",
         "symfony/yaml": "5.2.*",
         "tracy/tracy": "^2.8",
-        "twig/twig": "^2.13"
+        "twig/twig": "^2.14"
     },
     "require-dev": {
         "idmarinas/tracy-twig-bar": "^0.1",

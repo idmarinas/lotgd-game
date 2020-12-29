@@ -10451,6 +10451,11 @@ Search.appendIndex(
             "summary": "Intance\u0020of\u0020Kernel.",
             "url": "classes/Lotgd-Core-Fixed-Kernel.html#property_instance"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "Get\u0020instance\u0020of\u0020Kernel.",
+            "url": "classes/Lotgd-Core-Fixed-Kernel.html#method_getInstance"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Fixed\\Kernel\u003A\u003A\u0024container",
             "name": "container",
             "summary": "",
@@ -13566,10 +13571,20 @@ Search.appendIndex(
             "summary": "Get\u0020cache\u0020instance.",
             "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCache"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003AgetCacheApp\u0028\u0029",
+            "name": "getCacheApp",
+            "summary": "Get\u0020app\u0020cache\u0020instance.",
+            "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCacheApp"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003A\u0024lotgdCache",
             "name": "lotgdCache",
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-Cache.html#property_lotgdCache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003A\u0024lotgdCacheApp",
+            "name": "lotgdCacheApp",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pattern-Cache.html#property_lotgdCacheApp"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Censor",
             "name": "Censor",
@@ -13601,10 +13616,30 @@ Search.appendIndex(
             "summary": "Get\u0020container.",
             "url": "classes/Lotgd-Core-Pattern-Container.html#method_getContainer"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003AgetService\u0028\u0029",
+            "name": "getService",
+            "summary": "Get\u0020container.",
+            "url": "classes/Lotgd-Core-Pattern-Container.html#method_getService"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003AgetKernel\u0028\u0029",
+            "name": "getKernel",
+            "summary": "Get\u0020LoTGD\u0020Kernel.",
+            "url": "classes/Lotgd-Core-Pattern-Container.html#method_getKernel"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003A\u0024serviceManager",
             "name": "serviceManager",
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-Container.html#property_serviceManager"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003A\u0024lotgdKernel",
+            "name": "lotgdKernel",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernel"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Container\u003A\u003A\u0024lotgdKernelContainer",
+            "name": "lotgdKernelContainer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Doctrine",
             "name": "Doctrine",
