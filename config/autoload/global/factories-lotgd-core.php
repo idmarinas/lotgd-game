@@ -38,7 +38,6 @@ return [
 
             //-- Added in version 4.2.0
             Lotgd\Core\Jaxon::class                        => Factory\Component\Jaxon::class,
-            Gedmo\Translatable\TranslatableListener::class => Factory\Translator\TranslatableListener::class, //-- Deprecated Factory
             /* LAZY */ 'Lotgd\Core\SymfonyForm'            => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
