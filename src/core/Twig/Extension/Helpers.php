@@ -20,6 +20,7 @@ use Laminas\View\Helper\HeadStyle;
 use Laminas\View\Helper\HeadTitle;
 use Laminas\View\Helper\InlineScript;
 use Laminas\View\Helper\Placeholder\Container\AbstractContainer as Placeholder;
+use Lotgd\Core\Pattern\Http;
 use Twig\TwigFunction;
 
 /**
@@ -28,13 +29,15 @@ use Twig\TwigFunction;
  */
 class Helpers extends AbstractExtension
 {
+    use Http;
+
     protected $HeadLink;
     protected $HeadMeta;
     protected $HeadScript;
     protected $HeadStyle;
     protected $HeadTitle;
     protected $InlineScript;
-    protected $BasePath;
+    protected $basePath;
 
     public function getFunctions()
     {
@@ -142,13 +145,21 @@ class Helpers extends AbstractExtension
      *
      * $file is appended to the base path for simplicity.
      *
-     * @throws Exception\RuntimeException
-     *
      * @return string
      */
     public function basePath(?string $file = null)
     {
-        return $this->getInstance('BasePath')->__invoke($file);
+        if ( ! $this->basePath)
+        {
+            $this->basePath = $this->getHttpRequest()->getBasePath();
+        }
+
+        if (null !== $file)
+        {
+            $file = '/'.\ltrim($file, '/');
+        }
+
+        return $this->basePath.$file;
     }
 
     /**
