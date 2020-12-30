@@ -31,12 +31,13 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :wrench: FIXES
 
--   Nothing
+-   **public/create.php** Fixed error in creation of forgot password url
 
 ### :x: REMOVES and/or Break Changes
 
 -   Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
 -   **BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
+-   Remove factory `Laminas\View\Helper\BasePath` no need.
 
 ### :notebook: NOTES
 
