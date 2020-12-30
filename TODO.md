@@ -26,29 +26,33 @@
 -   Se usará un sistema similar al Symfony como transición
 
 # Para la versión 6.0.0
--   Seguir la transición hacia un sistema Synfony Framework
--   Un nuevo sistema de instalación, mixto: por consola o por web. Creo que mejor seria por consola.
-    -   Pero es posible que no todos los server admin tengan esta opción
+-   Seguir la transición hacia un sistema Symfony Framework
+-   Un nuevo sistema de instalación por consola.
 -   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
--   Eliminar compatibilidad con el uso del viejo sistema de módulos
-    -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de traducción.
-    -   Esto también elimina el uso de DB::
 -   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 
-# Para la versión >= 7.0.0 
+# Para la versión 7.0.0 
+-   Esta versión LoTGD Core será una app Symfony Framework.
+-   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
+    -   Mejor por consola
+    -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 -   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework.
--   Los módulos antiguos seguiran funcionando hasta la versión 8.0.0 (o alguna versión más adelante) donde se eliminará el viejo sistema
+-   Los módulos antiguos seguiran funcionando.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
--   Esto se descarta a favor de módulos tipo Bundle (Synfony Framework)
-    -   ???? Crear el nuevo sistema de módulos
-        -   Un sistema compatible con el viejo
+
+# Para la versión 8.0.0
+-   Esta versión LoTGD Core se transforma en un Symfony Bundle.
+-   Eliminar compatibilidad con el uso del viejo sistema de módulos
+-   Se usa un sistema de módulos tipo Bundle (módulos complejos)
+    -   Para módulos simples que no requieran de mucha complicación se usara un namespace `Lotgd\Core\Module` dentro de la carpeta `src/Module`
+        -   También se permite módulos simples que hagan uso de la estructura de Symfony Framework. Pero está pensado para módulos simples (con muy pocos archivos) 
 
 ## Para la versión X.0.0
 -   Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
@@ -143,6 +147,8 @@ Esta plantilla hereda todas las variables de la plantilla padre.
 Permitir añadir al principio o al final de una categoria, añadir una categoría al final o al inicio
 
 #### Comandos
+
+php phpDocumentor.phar
 
 composer dump-env prod
 
