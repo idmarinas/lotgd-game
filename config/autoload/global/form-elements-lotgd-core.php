@@ -1,7 +1,5 @@
 <?php
 
-use DoctrineModule\Form\Element as DoctrineElement;
-use DoctrineORMModule\Service as DoctrineService;
 use Laminas\Form\ElementFactory;
 use Lotgd\Core\Form\Element;
 use Lotgd\Core\Form\ElementFactory as LotgdElementFactory;
@@ -35,19 +33,6 @@ return [
             'bitField' => Element\BitField::class,
             'BitField' => Element\BitField::class,
 
-            //-- Added in version 4.2.0
-            //-- Doctrine elements
-            'objectselect'        => DoctrineElement\ObjectSelect::class,
-            'objectSelect'        => DoctrineElement\ObjectSelect::class,
-            'ObjectSelect'        => DoctrineElement\ObjectSelect::class,
-            'objectradio'         => DoctrineElement\ObjectRadio::class,
-            'objectRadio'         => DoctrineElement\ObjectRadio::class,
-            'ObjectRadio'         => DoctrineElement\ObjectRadio::class,
-            'objectmulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
-            'objectMulticheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
-            'objectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
-            'ObjectMultiCheckbox' => DoctrineElement\ObjectMultiCheckbox::class,
-
             //-- Added in version 4.3.0
             //-- View only element
             'viewonly' => Element\ViewOnly::class,
@@ -67,11 +52,6 @@ return [
             Element\BitField::class       => ElementFactory::class,
             Element\ViewOnly::class       => ElementFactory::class,
             Element\PetitionType::class   => LotgdElementFactory::class,
-
-            //-- Added in version 4.2.0
-            DoctrineElement\ObjectSelect::class        => DoctrineService\ObjectSelectFactory::class,
-            DoctrineElement\ObjectRadio::class         => DoctrineService\ObjectRadioFactory::class,
-            DoctrineElement\ObjectMultiCheckbox::class => DoctrineService\ObjectMultiCheckboxFactory::class,
         ],
     ],
 ];
