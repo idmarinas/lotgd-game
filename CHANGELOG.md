@@ -15,6 +15,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   _Migrated_ **Laminas Cache** to **Symfony Cache**.
     -   Deleted usage of `LotgdCache::` that not have used.
+-   _Migrated_ **Jaxon Factory** to **Jaxon LoTGD Kernel**
+    -   Now can get a instance of Jaxon with `LotgdKernel::get('lotgd.core.jaxon')`
 
 ### :star: FEATURES
 
@@ -34,6 +36,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :x: REMOVES and/or Break Changes
 
 -   Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
+-   **BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
 
 ### :notebook: NOTES
 
