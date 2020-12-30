@@ -22,9 +22,6 @@ return [
                 'OutputCommentary' => Lotgd\Core\Output\Commentary::class,
                 'PvpListing'       => Lotgd\Core\Pvp\Listing::class,
 
-                //-- Added in version 4.6.0
-                'HelperBasePath' => Laminas\View\Helper\BasePath::class,
-
                 //-- Added in version 4.7.0
                 'LotgdHttpDeprecated'            => Lotgd\Core\Http::class,
                 'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class,

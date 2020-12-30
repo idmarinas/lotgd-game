@@ -37,12 +37,12 @@ return [
             /* LAZY */ 'Lotgd\Core\SymfonyForm'            => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
-            /* LAZY */ Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class,
-            Lotgd\Core\EventManager\Hook::class             => Factory\EventManager\HookManager::class,
-            Lotgd\Core\Http\Request::class                  => Factory\Http\Request::class,
-            Lotgd\Core\Http\Response::class                 => Factory\Http\Response::class,
-            'webpack_encore.tag_renderer'                   => Factory\Template\TagRenderer::class,
-            'webpack_encore.packages'                       => Factory\Template\Packages::class,
+            /* LAZY */ Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class, //-- This factory no need migrate (Symfony have a event system)
+            Lotgd\Core\EventManager\Hook::class             => Factory\EventManager\HookManager::class, //-- This factory no need migrate (Symfony have a event system)
+            Lotgd\Core\Http\Request::class                  => Factory\Http\Request::class, //-- This factory no need in Kernel (Symfony do it)
+            Lotgd\Core\Http\Response::class                 => Factory\Http\Response::class, //-- This factory no need in Kernel (Symfony do it)
+            'webpack_encore.tag_renderer'                   => Factory\Template\TagRenderer::class, //-- This factory no need migrate
+            'webpack_encore.packages'                       => Factory\Template\Packages::class, //-- This factory no need migrate
 
             //-- Added in version 4.5.0
             Laminas\View\Helper\HeadLink::class           => InvokableFactory::class,
@@ -52,7 +52,7 @@ return [
             Laminas\View\Helper\HeadTitle::class          => InvokableFactory::class,
             Laminas\View\Helper\InlineScript::class       => InvokableFactory::class,
             Lotgd\Core\Template\Params::class             => InvokableFactory::class,
-            'webpack_encore.entrypoint_lookup_collection' => Factory\Template\EntrypointLookupCollection::class,
+            'webpack_encore.entrypoint_lookup_collection' => Factory\Template\EntrypointLookupCollection::class, //-- This factory no need migrate
         ],
     ],
 ];
