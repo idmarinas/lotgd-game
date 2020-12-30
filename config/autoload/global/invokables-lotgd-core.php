@@ -1,8 +1,5 @@
 <?php
 
-use Doctrine\DBAL\Tools\Console;
-use Doctrine\ORM\Tools\Console\Command;
-
 return [
     'service_manager' => [
         'invokables' => [
