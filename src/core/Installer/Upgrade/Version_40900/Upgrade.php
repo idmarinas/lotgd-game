@@ -8,7 +8,7 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.8.0
+ * @since 4.9.0
  */
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40900;
