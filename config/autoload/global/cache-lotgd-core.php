@@ -37,26 +37,6 @@ return [
                 ],
             ],
         ],
-        //-- This cache is exclusive to the cronjob
-        'Cache\Core\Cronjob' => [
-            'title'       => 'LoTGD CronjJob',
-            'description' => 'Cache of CronJob, this is exclusive of cronjob, is use to cache all available cronjobs.',
-            'adapter'     => 'filesystem',
-            'options'     => [
-                'ttl'         => 900,
-                'key_pattern' => '/^[a-z0-9_\+\-\/\.]*$/Di',
-                'cache_dir'   => 'storage/cache/cronjob',
-                //-- Not is necesary, this dir is only for cronjobs
-                // 'dir_permission' => 0777, //-- For avoid problems when optimize cache
-                'namespace' => 'cronjob',
-            ],
-            'plugins' => [
-                'serializer',
-                'exception_handler' => [
-                    'throw_exceptions' => false,
-                ],
-            ],
-        ],
         //-- This cache is exclusive for translations. NOT use for other purpose.
         'Cache\Core\Translator' => [
             'title'       => 'LoTGD Translator',
