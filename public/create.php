@@ -194,7 +194,7 @@ elseif ('forgot' == $op)
             'acctid' => $account->getAcctid(),
             'emailaddress' => $account->getEmailaddress(),
             'requester_ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
-            'gameurl' => '//'.(\LotgdRequest::getServer('SERVER_NAME').\LotgdRequest::getServer('SCRIPT_NAME')),
+            'gameurl' => '//'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
             'forgottenid' => $account->getForgottenpassword(),
         ], 'app-mail', $language);
 
