@@ -27,9 +27,6 @@ return [
             Lotgd\Core\Tool\Sanitize::class                    => Factory\Tool\Sanitize::class,
             Lotgd\Core\Translator\Translator::class            => Factory\Translator\Translator::class, //-- Deprecated - migrate to Symfony Translation
             Laminas\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
-            Laminas\Session\Config\ConfigInterface::class      => Laminas\Session\Service\SessionConfigFactory::class,
-            Laminas\Session\ManagerInterface::class            => Laminas\Session\Service\SessionManagerFactory::class,
-            Laminas\Session\Storage\StorageInterface::class    => Laminas\Session\Service\StorageFactory::class,
 
             //-- Added in version 4.1.0
             /* LAZY */ 'InputFilterManager'    => Laminas\InputFilter\InputFilterPluginManagerFactory::class, //-- Deprecated - Use Symfony Form instead
