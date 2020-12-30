@@ -11,8 +11,9 @@ framework:
         name: LegendOfTheGreenDragon
         enabled: true
         handler_id: null
-        cookie_secure: auto
+        cookie_secure: true
         cookie_samesite: lax
+        use_cookies: true
 
     #esi: true
     #fragments: true
