@@ -34,7 +34,6 @@ return [
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead
 
             //-- Added in version 4.2.0
-            Lotgd\Core\Jaxon::class                        => Factory\Component\Jaxon::class,
             /* LAZY */ 'Lotgd\Core\SymfonyForm'            => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0

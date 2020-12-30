@@ -12,7 +12,7 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\Jaxon as CoreJaxon;
+use Lotgd\Core\Service\Jaxon as CoreJaxon;
 
 trait Jaxon
 {
@@ -27,7 +27,7 @@ trait Jaxon
     {
         if ( ! $this->lotgdJaxon instanceof CoreJaxon)
         {
-            $this->lotgdJaxon = $this->getContainer(CoreJaxon::class);
+            $this->lotgdJaxon = $this->getService('lotgd.core.jaxon');
         }
 
         return $this->lotgdJaxon;

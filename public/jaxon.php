@@ -8,7 +8,7 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common_jaxon.php';
 
-$jaxon = \LotgdLocator::get(Lotgd\Core\Jaxon::class);
+$jaxon = \LotgdKernel::get('lotgd.core.jaxon');
 
 if($jaxon->canProcessRequest())
 {
