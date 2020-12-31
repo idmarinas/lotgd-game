@@ -13,7 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Component\FlashMessages as CoreFlashMessages;
 use Lotgd\Core\Pattern as PatternCore;
 use Twig\TwigFunction;
 
@@ -21,8 +20,6 @@ class FlashMessages extends AbstractExtension
 {
     use PatternCore\Sanitize;
     use PatternCore\Template;
-
-    protected $flashMessages;
 
     /**
      * {@inheritdoc}
@@ -42,7 +39,7 @@ class FlashMessages extends AbstractExtension
     public function display()
     {
         $output   = '';
-        $flashBag = \LotgdKernel::get('session')->getFlashBag();
+        $flashBag = $this->getService('session')->getFlashBag();
 
         foreach ($flashBag->all() as $type => $messages)
         {
@@ -72,19 +69,6 @@ class FlashMessages extends AbstractExtension
         }
 
         return $output;
-    }
-
-    /**
-     * Get instance of FlashMessages instance.
-     */
-    public function getFlashMessages(): CoreFlashMessages
-    {
-        if ( ! $this->flashMessages instanceof CoreFlashMessages)
-        {
-            $this->flashMessages = $this->getContainer(CoreFlashMessages::class);
-        }
-
-        return $this->flashMessages;
     }
 
     /**
