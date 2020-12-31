@@ -10,7 +10,7 @@ if (0 != \ini_get('max_execution_time'))
 /**
  * Configure de installer class.
  */
-$installer     = LotgdLocator::get(\Lotgd\Core\Installer\Install::class);
+$installer     = LotgdKernel::get(\Lotgd\Core\Installer\Install::class);
 $actualVersion = (string) getsetting('installer_version', '-1');
 
 //-- Check if can install this version
