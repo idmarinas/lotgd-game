@@ -90,36 +90,19 @@ services:
         alias: Lotgd\Core\Service\Jaxon
         public: true
 
-#     <?php
-
-# return [
-#     'jaxon' => [
-#         'core' => [
-#             'request' => [
-#                 'uri' => 'jaxon.php',
-#             ],
-#             'process' => [
-#                 'exit' => false,
-#             ],
-#         ],
-#         'dialogs' => [
-#             'default' => [
-#                 'message' => 'toastr',
-#                 'modal'   => 'semantic',
-#             ],
-#             'classes' => [
-#                 'semantic' => \Lotgd\Core\Jaxon\Library\Semantic\Modal::class,
-#             ],
-#             'toastr' => [
-#                 'options' => [
-#                     'progressBar'       => true,
-#                     'newestOnTop'       => false,
-#                     'closeButton'       => true,
-#                     'preventDuplicates' => true,
-#                     'timeOut'           => 30000,
-#                     'extendedTimeOut'   => 15000,
-#                 ],
-#             ],
-#         ],
-#     ],
-# ];
+    # View Laminas Service
+    Laminas\View\Helper\HeadLink:
+        public: true
+    Laminas\View\Helper\HeadMeta:
+        public: true
+        calls:
+            - setView: ['@Laminas\View\Renderer\PhpRenderer']
+    Laminas\View\Helper\HeadScript:
+        public: true
+    Laminas\View\Helper\HeadStyle:
+        public: true
+    Laminas\View\Helper\HeadTitle:
+        public: true
+    Laminas\View\Helper\InlineScript:
+        public: true
+    Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
