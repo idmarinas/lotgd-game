@@ -156,9 +156,7 @@ trait CoreFunction
      */
     public function sessionCookieName(): string
     {
-        $config = $this->getContainer('GameConfig');
-
-        return $config['session_config']['name'] ?? 'PHPSESSID';
+        return $this->getService('session')->getName();
     }
 
     /**
