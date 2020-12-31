@@ -108,9 +108,9 @@ services:
     Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
 
     # Output code and color
-    Lotgd\Core\Output\Code::class:
+    Lotgd\Core\Output\Code:
         public: true
-    Lotgd\Core\Output\Color::class:
+    Lotgd\Core\Output\Color:
         public: true
 
     # LoTGD Installer
