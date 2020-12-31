@@ -26,7 +26,7 @@ class Sanitize
      */
     public function unColorize(string $string): string
     {
-        $colors = \preg_quote(\implode('', \array_keys($this->getOutput()->getColors())));
+        $colors = \preg_quote(\implode('', \array_keys($this->getColor()->getColors())));
 
         return \preg_replace("/[`´][0{$colors}]/u", '', $string);
     }
@@ -36,7 +36,7 @@ class Sanitize
      */
     public function noLotgdCodes(string $string): string
     {
-        $codes = \array_merge($this->getOutput()->getColors(), $this->getOutput()->getCodes());
+        $codes = \array_merge($this->getColor()->getColors(), $this->getCode()->getCodes());
         $codes = \preg_quote(\implode('', \array_keys($codes)));
 
         return \preg_replace("/[`´][{$codes}]/u", '', $string);
@@ -93,7 +93,7 @@ class Sanitize
      */
     public function colorNameSanitize($spaceallowed, string $string, $admin = null): string
     {
-        $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
+        $colors = \preg_quote(\implode('', $this->getColor()->getColors()));
 
         if ($admin && getsetting('allowoddadminrenames', 0))
         {
@@ -174,7 +174,7 @@ class Sanitize
      */
     public function logdnetSanitize(string $string): string
     {
-        $colors = \preg_quote(\implode('', $this->getOutput()->getColors()));
+        $colors = \preg_quote(\implode('', $this->getColor()->getColors()));
         // to keep the regexp from boinging this, we need to make sure
         // that we're not replacing in with the ` mark.
         $string = \preg_replace("/[`´](?=[^0{$colors}bicn])/u", \chr(1).\chr(1), $string);
