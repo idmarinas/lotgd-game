@@ -49,7 +49,7 @@ function uninstall_module($module)
     if (injectmodule($module, true))
     {
         $fname = $module.'_uninstall';
-        debug('Running module uninstall script`n');
+        \LotgdResponse::pageDebug('Running module uninstall script`n');
 
         if ( ! $fname())
         {

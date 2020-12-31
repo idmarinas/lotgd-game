@@ -35,7 +35,7 @@ if ('' != $postSettings['defaultsuperuser'])
 //-- Moving players if change name of village
 if ($postSettings['villagename'] && $postSettings['villagename'] != getsetting('villagename', LOCATION_FIELDS))
 {
-    debug('Updating village name -- moving players');
+    \LotgdResponse::pageDebug('Updating village name -- moving players');
 
     //-- Moving from, to
     $charRepository->movingPlayersToLocation(getsetting('villagename', LOCATION_FIELDS), $postSettings['villagename']);
