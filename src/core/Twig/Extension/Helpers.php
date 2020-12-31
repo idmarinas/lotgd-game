@@ -179,7 +179,7 @@ class Helpers extends AbstractExtension
 
         if ( ! $this->{$instance} instanceof $className)
         {
-            $this->{$instance} = $this->getContainer($className);
+            $this->{$instance} = $this->getService($className);
         }
 
         return $this->{$instance};
