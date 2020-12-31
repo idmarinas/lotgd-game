@@ -35,19 +35,11 @@ function rawoutput($indata)
 /**
  * Generates the appropriate output based on the LOGD coding system (ie: `b: Bold, `i: Italic).
  *
- * @param string $data  The string to be output
- * @param bool   $priv  Indicates if the passed string ($data) contains HTML
- * @param mixed  $text
- * @param mixed  $force
- *
- * @return string An output (HTML) formatted string
+ * @deprecated use \LotgdResponse::pageDebug($text, $force) instead
  */
 function debug($text, $force = false)
 {
-    //-- INIT Output Collector
-    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
-
-    $output->debug($text, $force);
+    \LotgdResponse::pageDebug($text, $force);
 }
 
 /**
@@ -57,6 +49,8 @@ function debug($text, $force = false)
  * @param bool   $priv Indicates if the passed string ($data) contains HTML
  *
  * @return string An output (HTML) formatted string
+ *
+ * @deprecated use LotgdFormat::colorize($data) instead
  */
 function appoencode(string $data, $priv = false)
 {
