@@ -38,6 +38,9 @@
             "./src/Repository/.gitignore"
         ]
     },
+    "ocramius/proxy-manager": {
+        "version": "2.2.3"
+    },
     "php": {
         "version": "7.3.0"
     },
@@ -120,6 +123,9 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.2.1"
     },
     "symfony/stopwatch": {
         "version": "v5.2.0"
