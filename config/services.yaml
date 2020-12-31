@@ -106,3 +106,14 @@ services:
     Laminas\View\Helper\InlineScript:
         public: true
     Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
+
+    # Output code and color
+    Lotgd\Core\Output\Code::class:
+        public: true
+    Lotgd\Core\Output\Color::class:
+        public: true
+
+    # LoTGD Installer
+    Lotgd\Core\Installer\Install:
+        lazy: true
+        public: true
