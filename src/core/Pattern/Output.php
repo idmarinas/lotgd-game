@@ -13,7 +13,6 @@
 namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Output\Code;
-use Lotgd\Core\Output\Collector as OutputCore;
 use Lotgd\Core\Output\Color;
 
 trait Output
@@ -21,21 +20,6 @@ trait Output
     protected $lotgdOutput;
     protected $lotgdColor;
     protected $lotgdCode;
-
-    /**
-     * Get output instance.
-     *
-     * @deprecated 4.7.0
-     */
-    public function getOutput(): OutputCore
-    {
-        if ( ! $this->lotgdOutput instanceof OutputCore)
-        {
-            $this->lotgdOutput = $this->getContainer(OutputCore::class);
-        }
-
-        return $this->lotgdOutput;
-    }
 
     /**
      * Get color instance.
