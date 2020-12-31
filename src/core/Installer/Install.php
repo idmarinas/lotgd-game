@@ -42,7 +42,7 @@ class Install
     {
         $messages = [];
         $version  = $this->getNextVersion($version); //-- Start with the next version
-        $doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
+        $doctrine = $this->getService('doctrine.orm.entity_manager');
 
         //-- It is a clean installation not do nothing
         if ( ! $this->isUpgrade())
@@ -102,7 +102,7 @@ class Install
     public function makeSynchronizationTables(): array
     {
         //-- Prepare for updating core tables
-        $doctrine   = \LotgdKernel::get('doctrine.orm.entity_manager');
+        $doctrine   = $this->getService('doctrine.orm.entity_manager');
         $classes    = $doctrine->getMetadataFactory()->getAllMetadata();
         $schemaTool = new SchemaTool($doctrine);
         $sqls       = $schemaTool->getUpdateSchemaSql($classes, true);
@@ -309,7 +309,7 @@ class Install
     {
         global $session;
 
-        $doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
+        $doctrine = $this->getService('doctrine.orm.entity_manager');
         $hydrator = new ClassMethodsHydrator();
 
         $session['installer']['insert_data_by_files'] = $session['installer']['insert_data_by_files'] ?? [];
