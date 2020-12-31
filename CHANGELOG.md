@@ -2,7 +2,7 @@
 
 See CHANGELOG.txt for see changes made for Oliver Brendel +nb Edition
 
-Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details. 
+Visit the [Wiki](https://github.com/idmarinas/lotgd-game/wiki) for more details.  
 Visit the [Documentation](https://idmarinas.github.io/lotgd-game/) for more details.  
 Visit the [README](https://github.com/idmarinas/lotgd-game/blob/master/README.md).   
 Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V2.md)  
@@ -17,6 +17,14 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   Deleted usage of `LotgdCache::` that not have used.
 -   _Migrated_ **Jaxon Factory** to **Jaxon LoTGD Kernel**
     -   Now can get a instance of Jaxon with `LotgdKernel::get('lotgd.core.jaxon')`
+-   _Migrated_ **Factories** to **LoTGD Kernel Services**
+    -   Note: For get use `LotgdKernel::get('Laminas\View\Helper\HeadLink')` for example 
+    -   `Laminas\View\Helper\HeadLink`
+    -   `Laminas\View\Helper\HeadMeta`
+    -   `Laminas\View\Helper\HeadScript`
+    -   `Laminas\View\Helper\HeadStyle`
+    -   `Laminas\View\Helper\HeadTitle`
+    -   `Laminas\View\Helper\InlineScript`
 
 ### :star: FEATURES
 
@@ -35,9 +43,25 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES and/or Break Changes
 
--   Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
--   **BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
+-   **Potential BC**: Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
+-   **Potential BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
 -   Remove factory `Laminas\View\Helper\BasePath` no need.
+-   Remove factories for `Laminas View Helper`, use service instead. Example: `LotgdKernel::get('Laminas\View\Helper\HeadLink')`
+    -   `Laminas\View\Helper\HeadLink`
+    -   `Laminas\View\Helper\HeadMeta`
+    -   `Laminas\View\Helper\HeadScript`
+    -   `Laminas\View\Helper\HeadStyle`
+    -   `Laminas\View\Helper\HeadTitle`
+    -   `Laminas\View\Helper\InlineScript`
+-   **lib/output.php** Delete deprecated functions
+    -   `rawoutput($indata)`
+    -   `set_block_new_output($block)` 
+-   **src/core/Output/Collector.php** Delete deprecated functions
+    -   `rawoutput($indata)`
+    -   `get_output()`
+    -   `get_rawoutput()`
+    -   `debug($text, $force)`
+    -   `appoencode(string $data)`
 
 ### :notebook: NOTES
 
