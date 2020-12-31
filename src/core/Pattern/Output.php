@@ -28,7 +28,7 @@ trait Output
     {
         if ( ! $this->lotgdColor instanceof Color)
         {
-            $this->lotgdColor = $this->getContainer(Color::class);
+            $this->lotgdColor = $this->getService(Color::class);
         }
 
         return $this->lotgdColor;
@@ -41,7 +41,7 @@ trait Output
     {
         if ( ! $this->lotgdCode instanceof Code)
         {
-            $this->lotgdCode = $this->getContainer(Code::class);
+            $this->lotgdCode = $this->getService(Code::class);
         }
 
         return $this->lotgdCode;
