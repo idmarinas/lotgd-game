@@ -45,6 +45,7 @@ return [
             'webpack_encore.packages'                       => Factory\Template\Packages::class, //-- This factory no need migrate
 
             //-- Added in version 4.5.0
+            Lotgd\Core\Template\Params::class             => InvokableFactory::class, //-- This factory no need migrate.
             'webpack_encore.entrypoint_lookup_collection' => Factory\Template\EntrypointLookupCollection::class, //-- This factory no need migrate
         ],
     ],
