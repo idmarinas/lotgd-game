@@ -25,6 +25,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `Laminas\View\Helper\HeadStyle`
     -   `Laminas\View\Helper\HeadTitle`
     -   `Laminas\View\Helper\InlineScript`
+-   _Migrated_ **LoTGD Install factory** to **LoTGD Install Kernel service**
 
 ### :star: FEATURES
 
@@ -35,7 +36,11 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **src/core/Pattern/Container.php** marked deprecated functions
+    -   `setContainer(ContainerInterface $container)` 
+    -   `getContainer($name = null)` 
+    -   `Laminas Service Manager` is marked as deprecated, all factories are moved to LoTGD Kernel
+    -   Avoid use `Laminas Service Manager` and use LoTGD Kernel
 
 ### :wrench: FIXES
 
@@ -56,12 +61,20 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **lib/output.php** Delete deprecated functions
     -   `rawoutput($indata)`
     -   `set_block_new_output($block)` 
--   **src/core/Output/Collector.php** Delete deprecated functions
+-   **src/core/Output/Collector.php** Delete deprecated class (file) and all functions
+    -   `set_block_new_output($block)`
+    -   `get_block_new_output()`
+    -   `get_colormap_escaped()`
+    -   `get_colormap_escaped_array()`
+    -   `get_colormap()`
     -   `rawoutput($indata)`
     -   `get_output()`
     -   `get_rawoutput()`
     -   `debug($text, $force)`
     -   `appoencode(string $data)`
+
+-   **src/core/Pattern/Output.php** delete deprecated funtion
+    -   `getOutput()`
 
 ### :notebook: NOTES
 
