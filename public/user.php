@@ -82,7 +82,6 @@ elseif ('lasthit' == $op)
 
     if ('' == $output2)
     {
-        $output2 = \LotgdLocator::build(\Lotgd\Core\Output\Collector::class);
         $text    = 'This user has had his navs fixed OR has an empty page stored. Nothing can be displayed to you -_-';
         $output2 = "<html><head><link href=\"templates/common/colors.css\" rel=\"stylesheet\" type=\"text/css\"></head><body style='background-color: #000000; color:red;'>{$text}</body></html>";
     }
