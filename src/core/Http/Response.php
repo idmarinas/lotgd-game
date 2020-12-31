@@ -34,7 +34,7 @@ class Response extends HttpResponse
     public function pageTitle(string $message, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
     {
         $title     = $this->getTranslator()->trans($message, $parameters, $textDomain, $locale);
-        $headTitle = $this->getContainer(HeadTitle::class);
+        $headTitle = $this->getService(HeadTitle::class);
 
         $headTitle($title, 'set');
     }
