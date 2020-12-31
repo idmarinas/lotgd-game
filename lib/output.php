@@ -3,36 +3,6 @@
 /*function support without the object call */
 
 /**
- * Block any output statements temporarily.
- *
- * @param $block should output be blocked
- *
- * @deprecated
- */
-function set_block_new_output($block)
-{
-    //-- INIT Output Collector
-    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
-
-    $output->set_block_new_output($block);
-}
-
-/**
- * Raw output (unprocessed) appended to the output buffer.
- *
- * @param $indata
- *
- * @deprecated
- */
-function rawoutput($indata)
-{
-    //-- INIT Output Collector
-    $output = LotgdLocator::get(Lotgd\Core\Output\Collector::class);
-
-    $output->rawoutput($indata);
-}
-
-/**
  * Generates the appropriate output based on the LOGD coding system (ie: `b: Bold, `i: Italic).
  *
  * @deprecated use \LotgdResponse::pageDebug($text, $force) instead
