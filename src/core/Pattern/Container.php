@@ -20,6 +20,8 @@ trait Container
 
     /**
      * Set container (Service Manager).
+     *
+     * @deprecated 4.10.0
      */
     public function setContainer(ContainerInterface $container)
     {
@@ -34,6 +36,8 @@ trait Container
      * @param string $name
      *
      * @return object
+     *
+     * @deprecated 4.10.0
      */
     public function getContainer($name = null)
     {
