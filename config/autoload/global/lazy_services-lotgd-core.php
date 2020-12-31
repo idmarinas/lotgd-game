@@ -8,8 +8,6 @@ return [
 
                 //-- This method of connecting to the database is rarely used.
                 'LaminasDb' => Lotgd\Core\Db\Dbwrapper::class,
-                //-- The installer is only needed when you are installing/updating the game.
-                'LotgdInstaller' => Lotgd\Core\Installer\Install::class,
                 //-- Symfony Form is only needed for entity modification mainly.
                 'Lotgd\Core\SymfonyForm' => 'Lotgd\Core\SymfonyForm',
                 //-- Laminas Form not likely to be used in all requests
@@ -23,8 +21,7 @@ return [
                 'PvpListing'       => Lotgd\Core\Pvp\Listing::class,
 
                 //-- Added in version 4.7.0
-                'LotgdHttpDeprecated'            => Lotgd\Core\Http::class,
-                'LotgdOutputCollectorDeprecated' => Lotgd\Core\Output\Collector::class,
+                'LotgdHttpDeprecated' => Lotgd\Core\Http::class,
 
                 //-- Added in version 4.8.0
                 'EventOfEvents' => Lotgd\Core\EventManager\Event::class,

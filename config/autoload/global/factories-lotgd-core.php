@@ -7,21 +7,17 @@ return [
     'service_manager' => [
         'factories' => [
             //-- Added in version 3.0.0
-            Lotgd\Core\Character\Stats::class             => InvokableFactory::class,
-            /* LAZY */ Lotgd\Core\Db\Dbwrapper::class     => Factory\Db\Dbwrapper::class, //-- Deprecated - Deleted in version 5.0.0
-            Lotgd\Core\Lib\Settings::class                => Factory\Lib\Settings::class,
-            Lotgd\Core\Output\Color::class                => InvokableFactory::class,
-            /* LAZY */ Lotgd\Core\Output\Collector::class => Factory\Output\Collector::class, //-- Deprecated
-            Lotgd\Core\Template\Theme::class              => Factory\Template\Theme::class,
-            /* LAZY */ Lotgd\Core\Http::class             => InvokableFactory::class, //-- Deprecated - Deleted in version 5.0.0
+            Lotgd\Core\Character\Stats::class         => InvokableFactory::class,
+            /* LAZY */ Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class, //-- Deprecated - Deleted in version 5.0.0
+            Lotgd\Core\Lib\Settings::class            => Factory\Lib\Settings::class,
+            Lotgd\Core\Template\Theme::class          => Factory\Template\Theme::class,
+            /* LAZY */ Lotgd\Core\Http::class         => InvokableFactory::class, //-- Deprecated - Deleted in version 5.0.0
 
             //-- Added in version 4.0.0
-            /* LAZY */ Lotgd\Core\Installer\Install::class     => Factory\Installer\Install::class,
             Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class,
             Lotgd\Core\Navigation\AccessKeys::class            => InvokableFactory::class,
             /* LAZY */ Lotgd\Core\Output\Censor::class         => Factory\Output\Censor::class,
             /* LAZY */ Lotgd\Core\Output\Commentary::class     => Factory\Output\Commentary::class,
-            Lotgd\Core\Output\Code::class                      => InvokableFactory::class,
             Lotgd\Core\Output\Format::class                    => Factory\Output\Format::class,
             /* LAZY */ Lotgd\Core\Pvp\Listing::class           => Factory\Pvp\Listing::class,
             Lotgd\Core\Tool\Sanitize::class                    => Factory\Tool\Sanitize::class,
@@ -34,7 +30,7 @@ return [
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead
 
             //-- Added in version 4.2.0
-            /* LAZY */ 'Lotgd\Core\SymfonyForm'            => Factory\Form\SymfonyForm::class,
+            /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
             /* LAZY */ Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class, //-- This factory no need migrate (Symfony have a event system)
