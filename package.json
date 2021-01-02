@@ -32,11 +32,11 @@
     "homepage": "http://lotgd.infommo.es",
     "license": "SEE LICENSE IN <LICENSE.txt>",
     "dependencies": {
-        "@yaireo/tagify": "^3.21.5",
+        "@yaireo/tagify": "^3.22.0",
         "fomantic-ui": "2.8.7",
         "jquery": "^3.5.1",
         "numeral": "^2.0.6",
-        "sweetalert2": "^10.12.6",
+        "sweetalert2": "^10.12.7",
         "toastr": "^2.1.4"
     },
     "devDependencies": {
@@ -52,7 +52,7 @@
         "babel-register": "^6.26.0",
         "core-js": "^3.8.1",
         "del": "^6.0.0",
-        "eslint": "^7.16.0",
+        "eslint": "^7.17.0",
         "eslint-config-standard": "^16.0.2",
         "eslint-friendly-formatter": "^4.0.1",
         "eslint-loader": "^4.0.2",
@@ -72,7 +72,7 @@
         "minimist": "^1.2.5",
         "normalize-path": "^3.0.0",
         "postcss-loader": "^4.1.0",
-        "sass": "^1.30.0",
+        "sass": "^1.32.0",
         "sass-loader": "^10.1.0",
         "url-loader": "^4.1.1",
         "webpack-notifier": "^1.12.0"
