@@ -98,7 +98,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `config/autoload/global/initializers-lotgd-core.php`
     -   `config/autoload/global/input-filter-lotgd-core.php`
     -   `config/autoload/global/invokables-lotgd-core.php`
+    -   `config/autoload/global/jaxon-lotgd-core.php` Jaxon are migrated to Kernel
     -   `config/autoload/global/services-lotgd-core.php`
+    -   `config/autoload/global/session-lotgd-core.php` Session are migrated to Kernel
     -   `config/autoload/global/shared-lotgd-core.php`
 
 ### :notebook: NOTES
