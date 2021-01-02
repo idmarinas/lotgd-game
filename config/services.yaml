@@ -118,7 +118,7 @@ services:
         public: true
     Laminas\View\Renderer\PhpRenderer: ~ # Laminas\View\Helper\HeadMeta
 
-    # Output code and color
+    # Output
     Lotgd\Core\Output\Code:
         public: true
     Lotgd\Core\Output\Color:
@@ -128,6 +128,10 @@ services:
         calls:
             - setDecPoint: ['%NUMBER_FORMAT_DECIMAL_POINT%']
             - setThousandsSep: ['%NUMBER_FORMAT_THOUSANDS_SEP%']
+    Lotgd\Core\Output\Censor:
+        alias: Lotgd\Core\Service\Censor
+        lazy: true
+        public: true
 
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
