@@ -31,6 +31,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   _Migrated_ **Lotgd\Core\Output\Censor factory** to **LoTGD Kernel service**
 -   _Migrated_ **Lotgd\Core\Pvp\Listing factory** to **LoTGD Kernel service**
 -   _Migrated_ **Lotgd\Core\Output\Commentary factory** to **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Navigation\AccessKeys factory** to **LoTGD Kernel service**
 
 ### :star: FEATURES
 
@@ -61,6 +62,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory `Lotgd\Core\Output\Format` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
 -   Remove factory `Lotgd\Core\Pvp\Listing` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Pvp\Listing')`
 -   Remove factory `Lotgd\Core\Output\Commentary` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Commentary')`
+-   Remove factory `Lotgd\Core\Navigation\AccessKeys` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Navigation\AccessKeys')`
 -   Remove factories for `Laminas View Helper`, use service instead. Example: `LotgdKernel::get('Laminas\View\Helper\HeadLink')`
     -   `Laminas\View\Helper\HeadLink`
     -   `Laminas\View\Helper\HeadMeta`
