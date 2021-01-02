@@ -216,7 +216,7 @@ elseif ('create' == $op)
     $emailverification = '';
     $shortname = trim((string) \LotgdRequest::getPost('name'));
     $shortname = \LotgdSanitize::nameSanitize(getsetting('spaceinname', 0), $shortname);
-    $censor = \LotgdLocator::get(\Lotgd\Core\Output\Censor::class);
+    $censor = \LotgdKernel::get(\Lotgd\Core\Output\Censor::class);
 
     if ($censor->filter($shortname) != $shortname)
     {
