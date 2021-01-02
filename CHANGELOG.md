@@ -86,10 +86,19 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `get_rawoutput()`
     -   `debug($text, $force)`
     -   `appoencode(string $data)`
-
 -   **src/core/Pattern/Output.php** delete deprecated function
     -   `getOutput()`
 -   **src/core/Http.php** remove deprecated class file (and factory).
+-   **Removed some config files**
+    -   Note: this files not are in use by LoTGD Core.
+    -   `config/autoload/global/delegators-lotgd-core.php`
+    -   `config/autoload/global/form-lotgd-core.php`
+    -   `config/autoload/global/hydrators-lotgd-core.php`
+    -   `config/autoload/global/initializers-lotgd-core.php`
+    -   `config/autoload/global/input-filter-lotgd-core.php`
+    -   `config/autoload/global/invokables-lotgd-core.php`
+    -   `config/autoload/global/services-lotgd-core.php`
+    -   `config/autoload/global/shared-lotgd-core.php`
 
 ### :notebook: NOTES
 
