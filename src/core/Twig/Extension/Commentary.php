@@ -123,7 +123,7 @@ class Commentary extends AbstractExtension
     {
         if ( ! $this->commentary instanceof CommentaryCore)
         {
-            $this->commentary = $this->getContainer(CommentaryCore::class);
+            $this->commentary = $this->getService(CommentaryCore::class);
         }
 
         return $this->commentary;

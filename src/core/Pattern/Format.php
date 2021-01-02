@@ -27,7 +27,7 @@ trait Format
     {
         if ( ! $this->lotgdFormat instanceof FormatCore)
         {
-            $this->lotgdFormat = $this->getContainer(FormatCore::class);
+            $this->lotgdFormat = $this->getService(FormatCore::class);
         }
 
         return $this->lotgdFormat;
