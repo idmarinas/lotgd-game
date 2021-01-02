@@ -27,7 +27,7 @@ trait Sanitize
     {
         if ( ! $this->lotgdSanitize instanceof SanitizeCore)
         {
-            $this->lotgdSanitize = $this->getContainer(SanitizeCore::class);
+            $this->lotgdSanitize = $this->getService(SanitizeCore::class);
         }
 
         return $this->lotgdSanitize;
