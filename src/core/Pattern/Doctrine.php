@@ -48,7 +48,7 @@ trait Doctrine
     {
         if ( ! $this->doctrine instanceof EntityManager)
         {
-            $this->doctrine = \LotgdKernel::get('doctrine.orm.entity_manager');
+            $this->doctrine = $this->getService('doctrine.orm.entity_manager');
         }
 
         return $this->doctrine;
