@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     lotgd_core.doctrine_prefix: "%env(DATABASE_PREFIX)%"
+    lotgd_core.number.format.decimal.point: '.'
+    lotgd_core.number.format.thousands.sep: ','
     doctrine.orm.entity_manager.class: Lotgd\Core\Doctrine\ORM\EntityManager
 
 services:
@@ -126,8 +128,8 @@ services:
     Lotgd\Core\Output\Format:
         public: true
         calls:
-            - setDecPoint: ['%env(NUMBER_FORMAT_DECIMAL_POINT)%']
-            - setThousandsSep: ['%env(NUMBER_FORMAT_THOUSANDS_SEP)%']
+            - setDecPoint: ['%lotgd_core.number.format.decimal.point%']
+            - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
     Lotgd\Core\Service\Censor:
         lazy: true
     Lotgd\Core\Output\Censor:
