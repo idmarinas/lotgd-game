@@ -1,8 +1,0 @@
-<?php
-
-return [
-    'hydrators' => [
-        'factories' => [
-        ],
-    ],
-];
