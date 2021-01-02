@@ -126,17 +126,18 @@ services:
     Lotgd\Core\Output\Format:
         public: true
         calls:
-            - setDecPoint: ['%NUMBER_FORMAT_DECIMAL_POINT%']
-            - setThousandsSep: ['%NUMBER_FORMAT_THOUSANDS_SEP%']
+            - setDecPoint: ['%env(NUMBER_FORMAT_DECIMAL_POINT)%']
+            - setThousandsSep: ['%env(NUMBER_FORMAT_THOUSANDS_SEP)%']
+    Lotgd\Core\Service\Censor:
+        lazy: true
     Lotgd\Core\Output\Censor:
         alias: Lotgd\Core\Service\Censor
-        lazy: true
         public: true
     Lotgd\Core\Output\Commentary:
         lazy: true
         public: true
         calls:
-            - setEntity: '@Lotgd\Core\Entity\Commentary'
+            - setEntity: ['@Lotgd\Core\Entity\Commentary']
 
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
