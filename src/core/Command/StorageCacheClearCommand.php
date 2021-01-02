@@ -57,7 +57,9 @@ class StorageCacheClearCommand extends Command
         $style  = new SymfonyStyle($input, $output);
         $fs     = new Filesystem();
 
-        $find = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->files()->notName('.gitkeep');
+        $cacheDir = $kernel->getProjectDir().'/storage/cache';
+
+        $find = (new Finder())->ignoreUnreadableDirs()->in($cacheDir)->files()->notName('.gitkeep');
 
         //-- Only remove proxy cache in dev environment
         if ('prod' == $kernel->getEnvironment())
@@ -73,7 +75,7 @@ class StorageCacheClearCommand extends Command
 
                 //-- Remove empty dirs
                 $findD = new Finder();
-                $findD->in($kernel->getCacheDir())->directories()
+                $findD->in($cacheDir)->directories()
                     ->filter(function (\SplFileInfo $file)
                     {
                         if ($file->isDir())

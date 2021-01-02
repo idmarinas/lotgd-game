@@ -57,13 +57,16 @@ final class AboutCommand extends Command
         /** @var Kernel $sm */
         $kernel = $this->getApplication()->getKernel();
 
+        $cacheDir = $kernel->getProjectDir().'/storage/cache';
+        $logDir = $kernel->getProjectDir().'/storage/log';
+
         $rows = [
             ['<info>LoTGD Core</>'],
             new TableSeparator(),
             ['Version', Kernel::VERSION],
             ['Environment', $kernel->getEnvironment()],
-            ['Cache directory', self::formatPath($kernel->getCacheDir(), $kernel->getProjectDir()).' (<comment>'.self::formatFileSize($kernel->getCacheDir()).'</>)'],
-            ['Log directory', self::formatPath($kernel->getLogDir(), $kernel->getProjectDir()).' (<comment>'.self::formatFileSize($kernel->getLogDir()).'</>)'],
+            ['Cache directory', self::formatPath($cacheDir, $kernel->getProjectDir()).' (<comment>'.self::formatFileSize($cacheDir).'</>)'],
+            ['Log directory', self::formatPath($logDir, $kernel->getProjectDir()).' (<comment>'.self::formatFileSize($logDir).'</>)'],
             new TableSeparator(),
 
             ['<info>PHP</>'],

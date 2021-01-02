@@ -53,13 +53,15 @@ class StorageCacheStatsCommand extends Command
         $kernel = $this->getApplication()->getKernel();
         $style  = new SymfonyStyle($input, $output);
 
-        $findFiles = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->files()->notName('.gitkeep');
-        $findDir   = (new Finder())->ignoreUnreadableDirs()->in($kernel->getCacheDir())->directories();
+        $cacheDir = $kernel->getProjectDir().'/storage/cache';
+
+        $findFiles = (new Finder())->ignoreUnreadableDirs()->in($cacheDir)->files()->notName('.gitkeep');
+        $findDir   = (new Finder())->ignoreUnreadableDirs()->in($cacheDir)->directories();
 
         $row = [
             ['Total files', $findFiles->count()],
             ['Total dirs', $findDir->count()],
-            ['Total size', self::formatFileSize($kernel->getCacheDir())],
+            ['Total size', self::formatFileSize($cacheDir)],
         ];
 
         $style->table(['Cache stats'], $row);
