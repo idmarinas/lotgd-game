@@ -91,6 +91,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **src/core/Http.php** remove deprecated class file (and factory).
 -   **Removed some config files**
     -   Note: this files not are in use by LoTGD Core.
+    -   **BC** only if you update this global files
     -   `config/autoload/global/delegators-lotgd-core.php`
     -   `config/autoload/global/form-lotgd-core.php`
     -   `config/autoload/global/hydrators-lotgd-core.php`
