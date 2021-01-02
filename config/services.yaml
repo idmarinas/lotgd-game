@@ -132,6 +132,11 @@ services:
         alias: Lotgd\Core\Service\Censor
         lazy: true
         public: true
+    Lotgd\Core\Output\Commentary:
+        lazy: true
+        public: true
+        calls:
+            - setEntity: '@Lotgd\Core\Entity\Commentary'
 
     # LoTGD Installer
     Lotgd\Core\Installer\Install:

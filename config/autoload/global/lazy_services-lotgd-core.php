@@ -15,9 +15,6 @@ return [
                 'FormAnnotationBuilder' => 'FormAnnotationBuilder',
                 'FormElementManager'    => 'FormElementManager',
 
-                //-- Added in version 4.5.0
-                'OutputCommentary' => Lotgd\Core\Output\Commentary::class,
-
                 //-- Added in version 4.8.0
                 'EventOfEvents' => Lotgd\Core\EventManager\Event::class,
             ],
