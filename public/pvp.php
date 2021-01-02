@@ -30,7 +30,7 @@ if ('' == $op && 'attack' != $act)
 
     pvpwarning();
 
-    $pvp = \LotgdLocator::get(\Lotgd\Core\Pvp\Listing::class);
+    $pvp = \LotgdKernel::get(\Lotgd\Core\Pvp\Listing::class);
     $pvptime = getsetting('pvptimeout', 600);
 
     $params['tpl'] = 'list';

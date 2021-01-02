@@ -115,7 +115,7 @@ if ('bribe' == $action)
 }
 elseif ('listupstairs' == $action)
 {
-    $pvp = \LotgdLocator::get(\Lotgd\Core\Pvp\Listing::class);
+    $pvp = \LotgdKernel::get(\Lotgd\Core\Pvp\Listing::class);
 
     $pvptime = getsetting('pvptimeout', 600);
 
