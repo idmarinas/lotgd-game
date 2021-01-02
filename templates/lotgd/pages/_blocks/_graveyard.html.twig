@@ -54,7 +54,7 @@
             <tbody>
                 {% for char in characters %}
                     <tr>
-                        <td><a href="{{ ('graveyard.php?op=haunt3&charid=' ~ char.id)|lorgd_url }}">{{ char.name|colorize }}</a></td>
+                        <td><a href="{{ ('graveyard.php?op=haunt3&charid=' ~ char.id)|lotgd_url }}">{{ char.name|colorize }}</a></td>
                         <td>{{ char.level }}</td>
                     </tr>
                 {% endfor %}
