@@ -154,3 +154,7 @@ services:
     # LoTGD PvP
     Lotgd\Core\Pvp\Listing:
         public: true
+
+    # LoTGD Tools
+    Lotgd\Core\Tool\Sanitize:
+        public: true

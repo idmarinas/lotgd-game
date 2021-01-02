@@ -14,7 +14,6 @@ return [
             //-- Added in version 4.0.0
             Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class,
             Lotgd\Core\Navigation\AccessKeys::class            => InvokableFactory::class,
-            Lotgd\Core\Tool\Sanitize::class                    => Factory\Tool\Sanitize::class,
             Lotgd\Core\Translator\Translator::class            => Factory\Translator\Translator::class, //-- Deprecated - migrate to Symfony Translation
             Laminas\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
 

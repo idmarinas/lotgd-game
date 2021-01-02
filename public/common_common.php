@@ -174,7 +174,7 @@ LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::c
 //-- Configure Theme template
 LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
 //-- Configure Sanitize instance
-LotgdSanitize::instance(LotgdLocator::get(\Lotgd\Core\Tool\Sanitize::class));
+LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
 //-- Configure Translator
 LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
 //-- Configure Cache instance
