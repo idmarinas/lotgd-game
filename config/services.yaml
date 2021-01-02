@@ -159,3 +159,7 @@ services:
     # LoTGD Tools
     Lotgd\Core\Tool\Sanitize:
         public: true
+
+    # LoTGD navigation
+    Lotgd\Core\Navigation\AccessKeys:
+        public: true

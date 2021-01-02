@@ -62,7 +62,7 @@ class Navigation extends AbstractExtension
     {
         if ( ! $this->accesskeys instanceof CoreAccessKeys)
         {
-            $this->accesskeys = $this->getContainer(CoreAccessKeys::class);
+            $this->accesskeys = $this->getService(CoreAccessKeys::class);
         }
 
         return $this->accesskeys;
