@@ -129,7 +129,7 @@ class Template extends Environment
     {
         if (empty($this->defaultSkin))
         {
-            $settings = $this->getContainer(\Lotgd\Core\Lib\Settings::class);
+            $settings = $this->getService(\Lotgd\Core\Lib\Settings::class);
 
             $theme = \LotgdRequest::getCookie('template');
 

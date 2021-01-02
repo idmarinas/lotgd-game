@@ -31,7 +31,7 @@ class PetitionType extends Select implements LotgdElementFactoryInterface, Input
     public function prepare(): self
     {
         //-- Get petitions available in server.
-        $settings  = $this->getContainer(Settings::class);
+        $settings  = $this->getService(Settings::class);
         $petitions = \explode(',', $settings->getSetting('petition_types'));
 
         $choices = [];

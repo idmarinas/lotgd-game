@@ -24,7 +24,7 @@ class PetitionTypesType extends ChoiceType
         parent::configureOptions($resolver);
 
         //-- Get petitions available in server.
-        $settings  = \LotgdLocator::get(Settings::class);
+        $settings  = \LotgdKernel::get(Settings::class);
         $petitions = \explode(',', $settings->getSetting('petition_types'));
 
         $choices = [];

@@ -52,7 +52,7 @@ class GameLanguage extends Select implements LotgdElementFactoryInterface, Input
     public function prepare()
     {
         //-- Get languages available in server.
-        $settings = $this->getContainer(Settings::class);
+        $settings = $this->getService(Settings::class);
         $server   = \explode(',', $settings->getSetting('serverlanguages'));
 
         $languages = [];

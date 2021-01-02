@@ -18,7 +18,7 @@ class Format implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $settings = $container->get(\Lotgd\Core\Lib\Settings::class);
+        $settings = \LotgdKernel::get(\Lotgd\Core\Lib\Settings::class);
         $format   = new OutputFormat();
         $format->setContainer($container);
 

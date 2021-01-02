@@ -101,7 +101,7 @@ class GameSetupType extends AbstractType
             ],
         ]);
 
-        $settings = \LotgdLocator::get(\Lotgd\Core\Lib\Settings::class);
+        $settings = \LotgdKernel::get(\Lotgd\Core\Lib\Settings::class);
         $server   = \explode(',', $settings->getSetting('serverlanguages'));
         $langs    = \Symfony\Component\Intl\Languages::getNames();
         $choices  = \array_filter($langs, function ($key) use ($server)

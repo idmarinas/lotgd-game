@@ -26,7 +26,7 @@ trait Settings
     {
         if ( ! $this->lotgdSettings instanceof LibSettings)
         {
-            $this->lotgdSettings = $this->getContainer(LibSettings::class);
+            $this->lotgdSettings = $this->getService(LibSettings::class);
         }
 
         return $this->lotgdSettings;

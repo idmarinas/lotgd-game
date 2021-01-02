@@ -4,7 +4,7 @@
 // addnews ready
 // mail ready
 
-$settings = LotgdLocator::get(Lotgd\Core\Lib\Settings::class);
+$settings = LotgdKernel::get(Lotgd\Core\Lib\Settings::class);
 
 function savesetting(string $settingname, $value)
 {
