@@ -26,6 +26,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `Laminas\View\Helper\HeadTitle`
     -   `Laminas\View\Helper\InlineScript`
 -   _Migrated_ **LoTGD Install factory** to **LoTGD Install Kernel service**
+-   _Migrated_ **Lotgd\Core\Lib\Settings factory** to **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Output\Format factory** to **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Output\Censor factory** to **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Pvp\Listing factory** to **LoTGD Kernel service**
 
 ### :star: FEATURES
 
@@ -51,6 +55,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **Potential BC**: Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
 -   **Potential BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
 -   Remove factory `Laminas\View\Helper\BasePath` no need.
+-   Remove factory `Lotgd\Core\Lib\Settings` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Lib\Settings')`
+-   Remove factory `Lotgd\Core\Output\Format` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
+-   Remove factory `Lotgd\Core\Output\Format` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
+-   Remove factory `Lotgd\Core\Pvp\Listing` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Pvp\Listing')`
 -   Remove factories for `Laminas View Helper`, use service instead. Example: `LotgdKernel::get('Laminas\View\Helper\HeadLink')`
     -   `Laminas\View\Helper\HeadLink`
     -   `Laminas\View\Helper\HeadMeta`
@@ -73,8 +81,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `debug($text, $force)`
     -   `appoencode(string $data)`
 
--   **src/core/Pattern/Output.php** delete deprecated funtion
+-   **src/core/Pattern/Output.php** delete deprecated function
     -   `getOutput()`
+-   **src/core/Http.php** remove deprecated class file (and factory).
 
 ### :notebook: NOTES
 
