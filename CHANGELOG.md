@@ -32,6 +32,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   _Migrated_ **Lotgd\Core\Pvp\Listing factory** to **LoTGD Kernel service**
 -   _Migrated_ **Lotgd\Core\Output\Commentary factory** to **LoTGD Kernel service**
 -   _Migrated_ **Lotgd\Core\Navigation\AccessKeys factory** to **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Character\Stats factory** to **LoTGD Kernel service**
 
 ### :star: FEATURES
 
@@ -56,6 +57,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Potential BC**: Remove component `Lotgd\Core\Component\Filesystem.php` use `Symfony Filesystem` direct
 -   **Potential BC**: Remove factory of `Lotgd\Core\Jaxon` use `LotgdKernel::get('lotgd.core.jaxon')`
+-   **Potential BC**: Remove factory of `Lotgd\Core\Character\Stats` use `LotgdKernel::get('Lotgd\Core\Character\Stats')`
 -   Remove factory `Laminas\View\Helper\BasePath` no need.
 -   Remove factory `Lotgd\Core\Lib\Settings` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Lib\Settings')`
 -   Remove factory `Lotgd\Core\Output\Format` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
