@@ -163,3 +163,7 @@ services:
     # LoTGD navigation
     Lotgd\Core\Navigation\AccessKeys:
         public: true
+
+    # Lotgd
+    Lotgd\Core\Character\Stats:
+        public: true

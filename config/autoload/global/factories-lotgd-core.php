@@ -7,7 +7,6 @@ return [
     'service_manager' => [
         'factories' => [
             //-- Added in version 3.0.0
-            Lotgd\Core\Character\Stats::class         => InvokableFactory::class,
             /* LAZY */ Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class, //-- Deprecated - Deleted in version 5.0.0
             Lotgd\Core\Template\Theme::class          => Factory\Template\Theme::class,
 

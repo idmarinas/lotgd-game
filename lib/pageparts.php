@@ -19,7 +19,7 @@ $html       = ['content' => ''];
  */
 function wipe_charstats()
 {
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdKernel::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->wipeStats();
 }
@@ -32,7 +32,7 @@ function wipe_charstats()
  */
 function addcharstat($label, $value = null)
 {
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdKernel::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->addcharstat($label, $value);
 }
@@ -47,7 +47,7 @@ function addcharstat($label, $value = null)
  */
 function getcharstat($cat, $label)
 {
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdKernel::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->getcharstat($cat, $label);
 }
@@ -61,7 +61,7 @@ function getcharstat($cat, $label)
  */
 function setcharstat($cat, $label, $val)
 {
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdKernel::get(Lotgd\Core\Character\Stats::class);
 
     return $stats->setcharstat($cat, $label, $val);
 }
@@ -92,7 +92,7 @@ function getcharstats($buffs)
     //returns output formatted character statistics.
     global $statbuff;
 
-    $stats = \LotgdLocator::get(Lotgd\Core\Character\Stats::class);
+    $stats = \LotgdKernel::get(Lotgd\Core\Character\Stats::class);
 
     $charstatInfo = $stats->getStats();
     $charstattpl  = [];
