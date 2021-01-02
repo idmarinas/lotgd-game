@@ -145,3 +145,7 @@ services:
             - setDoctrine: ['@doctrine.orm.entity_manager']
             - setCache: ['@core.settings.cache']
             - loadSettings: []
+
+    # LoTGD PvP
+    Lotgd\Core\Pvp\Listing:
+        public: true
