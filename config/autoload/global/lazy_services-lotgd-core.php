@@ -16,7 +16,6 @@ return [
                 'FormElementManager'    => 'FormElementManager',
 
                 //-- Added in version 4.5.0
-                'OutputCensor'     => Lotgd\Core\Output\Censor::class,
                 'OutputCommentary' => Lotgd\Core\Output\Commentary::class,
                 'PvpListing'       => Lotgd\Core\Pvp\Listing::class,
 

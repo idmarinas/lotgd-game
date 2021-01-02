@@ -14,7 +14,6 @@ return [
             //-- Added in version 4.0.0
             Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class,
             Lotgd\Core\Navigation\AccessKeys::class            => InvokableFactory::class,
-            /* LAZY */ Lotgd\Core\Output\Censor::class         => Factory\Output\Censor::class,
             /* LAZY */ Lotgd\Core\Output\Commentary::class     => Factory\Output\Commentary::class,
             /* LAZY */ Lotgd\Core\Pvp\Listing::class           => Factory\Pvp\Listing::class,
             Lotgd\Core\Tool\Sanitize::class                    => Factory\Tool\Sanitize::class,
