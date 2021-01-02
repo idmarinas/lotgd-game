@@ -3,7 +3,6 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once 'lib/class/static.php';
 require_once 'lib/e_rand.php';
 require_once 'lib/substitute.php';
 
