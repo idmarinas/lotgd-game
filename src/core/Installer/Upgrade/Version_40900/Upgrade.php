@@ -19,7 +19,7 @@ use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
 {
-    public const VERSION_NUMBER    = 40800;
+    public const VERSION_NUMBER    = 40900;
     public const CONFIG_DIR_GLOBAL = 'config/autoload/global';
 
     /**
