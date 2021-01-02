@@ -123,6 +123,11 @@ services:
         public: true
     Lotgd\Core\Output\Color:
         public: true
+    Lotgd\Core\Output\Format:
+        public: true
+        calls:
+            - setDecPoint: ['%NUMBER_FORMAT_DECIMAL_POINT%']
+            - setThousandsSep: ['%NUMBER_FORMAT_THOUSANDS_SEP%']
 
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
