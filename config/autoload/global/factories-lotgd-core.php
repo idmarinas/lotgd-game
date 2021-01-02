@@ -11,7 +11,6 @@ return [
             /* LAZY */ Lotgd\Core\Db\Dbwrapper::class => Factory\Db\Dbwrapper::class, //-- Deprecated - Deleted in version 5.0.0
             Lotgd\Core\Lib\Settings::class            => Factory\Lib\Settings::class,
             Lotgd\Core\Template\Theme::class          => Factory\Template\Theme::class,
-            /* LAZY */ Lotgd\Core\Http::class         => InvokableFactory::class, //-- Deprecated - Deleted in version 5.0.0
 
             //-- Added in version 4.0.0
             Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class,

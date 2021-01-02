@@ -20,9 +20,6 @@ return [
                 'OutputCommentary' => Lotgd\Core\Output\Commentary::class,
                 'PvpListing'       => Lotgd\Core\Pvp\Listing::class,
 
-                //-- Added in version 4.7.0
-                'LotgdHttpDeprecated' => Lotgd\Core\Http::class,
-
                 //-- Added in version 4.8.0
                 'EventOfEvents' => Lotgd\Core\EventManager\Event::class,
             ],
