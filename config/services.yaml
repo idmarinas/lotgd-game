@@ -128,3 +128,11 @@ services:
     Lotgd\Core\Installer\Install:
         lazy: true
         public: true
+
+    # LoTGD Settings
+    Lotgd\Core\Lib\Settings:
+        public: true
+        calls:
+            - setDoctrine: ['@doctrine.orm.entity_manager']
+            - setCache: ['@core.settings.cache']
+            - loadSettings: []
