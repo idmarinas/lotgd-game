@@ -20,7 +20,6 @@ require_once './common_common.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
 require_once 'lib/holiday_texts.php';
-require_once 'lib/arrayutil.php';
 require_once 'lib/debuglog.php';
 require_once 'lib/su_access.php';
 require_once 'lib/datetime.php';

@@ -15,7 +15,6 @@ require_once 'lib/output.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
 require_once 'lib/holiday_texts.php';
-require_once 'lib/arrayutil.php';
 require_once 'lib/redirect.php';
 require_once 'lib/debuglog.php';
 require_once 'lib/su_access.php';
