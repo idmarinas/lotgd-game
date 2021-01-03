@@ -631,4 +631,5 @@ if ( ! function_exists(''))
         }
         //We're above 0.99997
         return $min + $val * ($max - $min);
+    }
 }
