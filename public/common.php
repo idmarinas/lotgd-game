@@ -11,7 +11,6 @@
 require_once 'common_common.php';
 
 // Include some commonly needed and useful routines
-require_once 'lib/output.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
 require_once 'lib/holiday_texts.php';
