@@ -23,7 +23,7 @@ function e_rand(?int $min = null, ?int $max = null): int
 
     if ( ! \is_numeric($max))
     {
-        return \mt_rand($min, $min);
+        return $min;
     }
     $max = \round($max);
 
