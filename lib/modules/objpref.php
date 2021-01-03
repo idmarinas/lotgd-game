@@ -162,7 +162,7 @@ function load_module_objpref($objtype, $objid, $module = false): array
     }
 
     $objid = (int) $objid;
-    $cache = \LotgdKernel::get('cache.app.taggable');
+    $cache = \LotgdKernel::get('core.lotgd.cache');
 
     return $cache->get("module-objpref-{$objtype}-{$objid}-{$module}", function ($item) use ($module, $objtype, $objid)
     {

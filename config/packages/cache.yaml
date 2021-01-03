@@ -16,6 +16,10 @@ framework:
 
         # Namespaced pools use the above "app" backend by default
         pools:
+            core.lotgd.cache:
+                adapter: cache.app
+                public: true
+                tags: true
             core.settings.cache:
                 adapter: cache.app # Use same configuration of app cache
                 public: true # For access with LotgdKernel::get('core.settings.cache')
