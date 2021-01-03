@@ -4,19 +4,6 @@
 // translator ready
 // mail ready
 
-$defines = [];
-function myDefine($name, $value)
-{
-    global $defines;
-
-    //-- No try to define a defined constant
-    if ( ! \defined($name))
-    {
-        \define($name, $value);
-        $defines[$name] = $value;
-    }
-}
-
 //Superuser constants
 \defined('SU_MEGAUSER')             || \define('SU_MEGAUSER', 1);
 \defined('SU_EDIT_MOUNTS')          || \define('SU_EDIT_MOUNTS', 2);
