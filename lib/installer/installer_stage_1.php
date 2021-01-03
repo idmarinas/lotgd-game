@@ -1,7 +1,5 @@
 <?php
 
-require_once 'lib/pullurl.php';
-
 $licenseview  = \implode('', pullurl('http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode'));
 $licenseview  = \str_replace("\n", '', $licenseview);
 $licenseview  = \str_replace("\r", '', $licenseview);
