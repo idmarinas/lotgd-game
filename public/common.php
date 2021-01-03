@@ -14,7 +14,6 @@ require_once 'common_common.php';
 require_once 'lib/output.php';
 require_once 'lib/settings.php';
 require_once 'lib/gamelog.php';
-require_once 'lib/e_rand.php';
 require_once 'lib/holiday_texts.php';
 require_once 'lib/arrayutil.php';
 require_once 'lib/redirect.php';
