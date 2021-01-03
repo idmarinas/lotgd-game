@@ -33,7 +33,6 @@ const config = {
             //-- Include .files
             '{/**/.gitkeep,/.env,/.htaccess}',
             '!{*.,}dist{,/**}', //-- Ignore all dist folders
-            '!src/{functions,functions_old}.php',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor,var}{,/**}'
         ],
@@ -70,6 +69,7 @@ const config = {
             '{/**/.gitkeep,/.env,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
             //-- Ignore all dist folders
             '!{*.,}dist{,/**}',
+            '!src/{functions,functions_old}.php',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor,var}{,/**}'
         ]
