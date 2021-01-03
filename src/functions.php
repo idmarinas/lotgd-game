@@ -376,8 +376,3 @@ if ( ! \function_exists('nltoappon'))
         return \str_replace("\n", '`n', $out);
     }
 }
-
-if ( ! \function_exists(''))
-{
-    // code...
-}
