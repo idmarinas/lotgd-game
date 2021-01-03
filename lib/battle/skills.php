@@ -3,7 +3,6 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once 'lib/bell_rand.php';
 require_once 'lib/buffs.php';
 
 function rolldamage()
