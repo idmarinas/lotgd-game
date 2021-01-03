@@ -161,7 +161,8 @@ function load_module_objpref($objtype, $objid, $module = false): array
         $module = $mostrecentmodule;
     }
 
-    $cache = \LotgdKernel::get('cache.app');
+    $objid = (int) $objid;
+    $cache = \LotgdKernel::get('cache.app.taggable');
 
     return $cache->get("module-objpref-{$objtype}-{$objid}-{$module}", function ($item) use ($module, $objtype, $objid)
     {
