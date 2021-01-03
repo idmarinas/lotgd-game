@@ -9,24 +9,24 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
-        '@PHP56Migration' => true,
-        '@PHP70Migration' => true,
-        '@PHP71Migration' => true,
-        '@PSR2' => true,
-        '@Symfony' => true,
-        '@PHP73Migration' => true,
+        '@PHP56Migration'     => true,
+        '@PHP70Migration'     => true,
+        '@PHP71Migration'     => true,
+        '@PSR2'               => true,
+        '@Symfony'            => true,
+        '@PHP73Migration'     => true,
         // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
         'align_multiline_comment' => true,
         // PHP arrays should be declared using the configured syntax.
         'array_syntax' => false,
         // Binary operators should be surrounded by space as configured.
-        'binary_operator_spaces' => ['default'=>'align_single_space_minimal'],
+        'binary_operator_spaces' => ['default' => 'align_single_space_minimal'],
         // An empty line feed must precede any configured statement.
         'blank_line_before_statement' => [
             'statements' => ['declare', 'die', 'do', 'exit', 'for', 'foreach', 'goto', 'if', 'return', 'switch', 'throw', 'try', 'while', 'yield'],
         ],
         // The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.
-        'braces' => ['position_after_anonymous_constructs'=>'next','position_after_control_structures'=>'next','position_after_functions_and_oop_constructs'=>'next'],
+        'braces' => ['position_after_anonymous_constructs' => 'next', 'position_after_control_structures' => 'next', 'position_after_functions_and_oop_constructs' => 'next'],
         // Using `isset($var) &&` multiple times should be done in one call.
         'combine_consecutive_issets' => true,
         // Calling `unset` on multiple items should be done in one call.
@@ -36,7 +36,7 @@ return PhpCsFixer\Config::create()
         // Remove extra spaces in a nullable typehint.
         'compact_nullable_typehint' => true,
         // Equal sign in declare statement should be surrounded by spaces or not following configuration.
-        'declare_equal_normalize' => ['space'=>'single'],
+        'declare_equal_normalize' => ['space' => 'single'],
         // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
         'dir_constant' => true,
         // Replace deprecated `ereg` regular expression functions with `preg`.
@@ -58,7 +58,7 @@ return PhpCsFixer\Config::create()
         // DocBlocks must start with two asterisks, multiline comments must start with a single asterisk, after the opening slash. Both must end with a single asterisk before the closing slash.
         'multiline_comment_opening_closing' => true,
         // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
-        'multiline_whitespace_before_semicolons' => ['strategy'=>'new_line_for_chained_calls'],
+        'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
         // Add leading `\` before function invocation to speed up resolving.
         'native_function_invocation' => true,
         // Master functions shall be used instead of aliases.
@@ -107,7 +107,7 @@ return PhpCsFixer\Config::create()
         'simplified_null_return' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
-        ->exclude('vendor')
-        ->in(__DIR__)
+    ->exclude('vendor')
+    ->in(__DIR__)
     )
 ;
