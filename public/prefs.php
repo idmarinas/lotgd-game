@@ -16,7 +16,6 @@ if (isset($_POST['template']))
 }
 
 require_once 'common.php';
-require_once 'lib/is_email.php';
 require_once 'lib/showform.php';
 
 $textDomain = 'page-prefs';

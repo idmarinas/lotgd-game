@@ -4,7 +4,6 @@
 // addnews ready
 // mail ready
 
-require_once 'lib/arraytourl.php';
 require_once 'lib/modules/injectmodule.php';
 require_once 'lib/modules/modulestatus.php';
 require_once 'lib/modules/blockunblock.php';

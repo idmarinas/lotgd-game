@@ -3,7 +3,6 @@
 // translator ready
 // addnews ready
 // mail ready
-require_once 'lib/is_email.php';
 
 function systemmail($to, $subject, $body, $from = 0, $noemail = false)
 {
