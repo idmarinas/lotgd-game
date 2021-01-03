@@ -40,6 +40,21 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `src/core/Pattern/Container.php` new functions:
         -   `getKernel()` get the new LoTGD Kernel
         -   `getService(string $name)` get a service from LoTGD Kernel
+-   **src/functions.php**
+    -   This file contain functions that are in `lib/` dir
+    -   This file is autoload by `composer`
+    -   Functions migrated:
+        -   `e_rand`
+        -   `r_rand`
+        -   `is_email`
+        -   `createstring`
+        -   `bell_rand`
+        -   `list_files`
+        -   `_curl`
+        -   `_sock`
+        -   `pullurl`
+        -   `safeescape`
+        -   `nltoappon`
 
 ### :fire: DEPRECATED
 
@@ -102,6 +117,24 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `config/autoload/global/services-lotgd-core.php`
     -   `config/autoload/global/session-lotgd-core.php` Session are migrated to Kernel
     -   `config/autoload/global/shared-lotgd-core.php`
+-   **lib/e_rand.php** delete file.
+    -   Deleted functions:
+        -   `make_seed()` 
+-   **lib/is_email.php** delete file.
+-   **lib/arraytourl.php** delete file.
+    -   Deleted functions:
+        -   `arraytourl()` 
+        -   `urltoarray()` 
+-   **lib/arrayutil.php** delete file.
+-   **lib/bell_rand.php** delete file.
+-   **lib/listfiles.php** delete file.
+-   **lib/pullurl.php** delete file.
+-   **lib/safeescape.php** delete file.
+-   **lib/nltoappon.php** delete file.
+-   **lib/output.php** delete file.
+    -   Delete obsolete functions:
+        -   `debug()`
+        -   `appoencode()`
 
 ### :notebook: NOTES
 
