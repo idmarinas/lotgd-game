@@ -17,7 +17,7 @@
         <!-- Title tag for page -->
         <title>
             {% block lotgd_head_title %}
-                {{ head_title().renderTitle() }}
+                {{ head_title().renderTitle()|uncolorize }}
             {% endblock lotgd_head_title %}
         </title>
 
