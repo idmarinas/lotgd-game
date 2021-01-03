@@ -11,8 +11,6 @@
  */
 function lotgd_mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '')
 {
-    require_once 'lib/nltoappon.php';
-
     $message = \LotgdSanitize::fullSanitize(\str_replace('`n', '<br>', nltoappon($message)));
     $headers = [];
 

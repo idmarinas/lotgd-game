@@ -4,7 +4,6 @@
 // addnews ready
 // mail ready
 require_once 'common.php';
-require_once 'lib/nltoappon.php';
 require_once 'lib/systemmail.php';
 
 // Don't hook on to this text for your standard modules please, use "clan" instead.
