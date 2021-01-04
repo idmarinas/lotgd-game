@@ -20,7 +20,7 @@ class FlashMessages
     /**
      * Instance of FlashMessages.
      *
-     * @var Lotgd\Core\Component\FlashMessages
+     * @var object
      */
     protected static $instance;
 
