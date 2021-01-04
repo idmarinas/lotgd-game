@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/functions_old.php';
+
 /**
  * This file is part of Legend of the Green Dragon.
  *
