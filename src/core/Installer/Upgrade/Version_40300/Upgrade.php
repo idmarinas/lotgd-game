@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Installer\Upgrade\Version_40300;
 
-use Lotgd\Core\Component\Filesystem;
+use Symfony\Component\Filesystem\Filesystem;
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Tracy\Debugger;
 

@@ -150,7 +150,7 @@ function createBackupOfEntity(int $accountId, $repository, string $entityName): 
         return false;
     }
 
-    $fileSystem = new \Lotgd\Core\Component\Filesystem();
+    $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
     $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
 
     try
@@ -180,7 +180,7 @@ function createBackupOfEntity(int $accountId, $repository, string $entityName): 
  */
 function createBackupBasicInfo(int $accountId, $account): bool
 {
-    $fileSystem = new \Lotgd\Core\Component\Filesystem();
+    $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
     $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
     $hydrator   = new \Laminas\Hydrator\ClassMethodsHydrator();
     $hydrator->removeNamingStrategy(); //-- With this keyValue is keyValue. Otherwise it would be key_value

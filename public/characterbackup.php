@@ -19,7 +19,7 @@ $params = [
 
 \LotgdNavigation::addNav('navigation.nav.update', 'characterbackup.php', ['textDomain' => $params['textDomain']]);
 
-$fileSystem = new \Lotgd\Core\Component\Filesystem();
+$fileSystem = new \Symfony\Component\Filesystem\Filesystem();
 $serializer = new Laminas\Serializer\Adapter\PhpSerialize();
 $path = 'storage/logd_snapshots';
 $pathAccountData = "{$path}/account-{$accountId}/LotgdCore_Accounts.data";
