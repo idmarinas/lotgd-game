@@ -17,28 +17,30 @@
 -   ...
 
 # Para la versión 5.0.0
--   Migrar al uso de Symfony usando el http-kernel
--   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
--   https://symfony.com/doc/current/components/http_kernel.html
-    -   Se migrará 
-        -   La configuración
-        -   El uso del service manager
--   Se usará un sistema similar al Symfony como transición
-
-# Para la versión 6.0.0
--   Seguir la transición hacia un sistema Symfony Framework
 -   Un nuevo sistema de instalación por consola.
--   Uso de Laminas DB, obsoleto. `DB::` class `Lotgd\Core\Db\Dbwrapper`
+-   MIgración al uso de Symfony usando el http-kernel (completado en esta versión)
+    -   Se elimina Laminas service manager.
+    -   https://symfony.com/doc/current/components/http_kernel.html
+        -   Se migrará 
+            -   La configuración
+            -   El uso del service manager
+-   Se usará un sistema similar al Symfony como transición
+-   Se elimina Laminas DB. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
+
+# Para la versión 6.0.0
+-   Seguir la transición hacia un sistema Symfony Framework
 -   Eliminar compatibilidad con el viejo sistema de traducción.
 -   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
+-   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
 
 # Para la versión 7.0.0 
 -   Esta versión LoTGD Core será una app Symfony Framework.
+    -   Migrar a la estructura propia de Symfony Framework
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   Mejor por consola
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
