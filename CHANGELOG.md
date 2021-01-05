@@ -87,9 +87,6 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `Laminas\View\Helper\HeadStyle`
     -   `Laminas\View\Helper\HeadTitle`
     -   `Laminas\View\Helper\InlineScript`
--   **lib/output.php** Delete deprecated functions
-    -   `rawoutput($indata)`
-    -   `set_block_new_output($block)` 
 -   **src/core/Output/Collector.php** Delete deprecated class (file) and all functions
     -   `set_block_new_output($block)`
     -   `get_block_new_output()`
@@ -133,6 +130,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **lib/nltoappon.php** delete file.
 -   **lib/output.php** delete file.
     -   Delete obsolete functions:
+        -   `rawoutput($indata)`
+        -   `set_block_new_output($block)` 
         -   `debug()`
         -   `appoencode()`
 
