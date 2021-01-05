@@ -23,7 +23,7 @@ doctrine:
             collate: utf8_unicode_ci
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         quote_strategy: doctrine.orm.quote_strategy.ansi
         auto_mapping: true
         default_repository_class: Lotgd\Core\Doctrine\ORM\EntityRepository
