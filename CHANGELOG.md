@@ -67,6 +67,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :wrench: FIXES
 
 -   **public/create.php** Fixed error in creation of forgot password url
+-   **themes/layout.html.twig** and **themes/layout/header.html.twig** use `uncolorize` filter to sanitize title. (This avoid show color codes as plain text)
 
 ### :x: REMOVES and/or Break Changes
 
@@ -176,7 +177,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
                     pools:
                         core.settings.cache:
                             adapter: cache.app # Use default configuration
-                            public: true # Thnis is necesary for get your cache from service container. Example: LotgdKernel::get('core.settings.app')
+                            public: true # This is necesary for get your cache from service container. Example: LotgdKernel::get('core.settings.app')
         ```
 -   _Migrated_ **Laminas Http** to **Symfony HttpFoundation**
     -   `LotgdRequest::` and `LotgdResponse::` static class now use **Symfony HttpFoundation**
