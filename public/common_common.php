@@ -170,7 +170,7 @@ LotgdRequest::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
 //-- Configure Response instance
 LotgdReponse::instance(LotgdLocator::get(\Lotgd\Core\Http\Response::class));
 //-- Configure Navigation instance
-LotgdNavigation::instance(LotgdLocator::get(\Lotgd\Core\Navigation\Navigation::class));
+LotgdNavigation::instance(LotgdKernel::get(\Lotgd\Core\Navigation\Navigation::class));
 //-- Configure Theme template
 LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
 //-- Configure Sanitize instance

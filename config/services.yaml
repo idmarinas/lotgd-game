@@ -167,3 +167,8 @@ services:
     # Lotgd
     Lotgd\Core\Character\Stats:
         public: true
+    Lotgd\Core\Navigation\Navigation:
+        public: true
+        calls:
+            - setClassHeader: ['navhead']
+            - setClassNav: ['nav']

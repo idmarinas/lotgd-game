@@ -13,8 +13,6 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
-use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 use Lotgd\Core\Pattern as PatternCore;
 use Twig\TwigFunction;
 
@@ -24,10 +22,8 @@ class Navigation extends AbstractExtension
     use Pattern\Navigation;
     use PatternCore\Template;
     use PatternCore\Translator;
+    use PatternCore\Navigation;
 
-    protected $navigation;
-    protected $translator;
-    protected $accesskeys;
 
     /**
      * {@inheritdoc}
@@ -40,32 +36,6 @@ class Navigation extends AbstractExtension
             new TwigFunction('navigation_create_header', [$this, 'createHeader']),
             new TwigFunction('navigation_pagination', [$this, 'showPagination']),
         ];
-    }
-
-    /**
-     * Get Navigation instance.
-     */
-    public function getNavigation(): CoreNavigation
-    {
-        if ( ! $this->navigation instanceof CoreNavigation)
-        {
-            $this->navigation = $this->getContainer(CoreNavigation::class);
-        }
-
-        return $this->navigation;
-    }
-
-    /**
-     * Get Navigation instance.
-     */
-    public function getAccesskeys(): CoreAccessKeys
-    {
-        if ( ! $this->accesskeys instanceof CoreAccessKeys)
-        {
-            $this->accesskeys = $this->getService(CoreAccessKeys::class);
-        }
-
-        return $this->accesskeys;
     }
 
     /**

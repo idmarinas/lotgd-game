@@ -11,7 +11,6 @@ return [
             Lotgd\Core\Template\Theme::class          => Factory\Template\Theme::class,
 
             //-- Added in version 4.0.0
-            Lotgd\Core\Navigation\Navigation::class            => Factory\Navigation\Navigation::class, //-- This factory no need migrate (In future LoTGD Core use Symfony Router)
             Lotgd\Core\Translator\Translator::class            => Factory\Translator\Translator::class, //-- Deprecated - migrate to Symfony Translation
             Laminas\I18n\Translator\LoaderPluginManager::class => Factory\Translator\LoaderPluginManager::class,
 
