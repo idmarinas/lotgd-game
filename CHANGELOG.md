@@ -9,6 +9,50 @@ Visit **_V2_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/CHANGELOG-V3.md)  
 
 
+# Version: 4.11.0
+
+### :cyclone: CHANGES
+
+-   _Migrated_ **Lotgd\Core\Navigation\Navigation** factory to **LoTGD Kernel service**
+    -   `LotgdNavigation::` static class get the new Kernel service
+-   _Migrated_ **Lotgd\Core\Http\Request** and **Lotgd\Core\Http\Response** factory to **LoTGD Kernel service**
+    -   `LotgdRequest::` and `LotgdResponse` static class get the new Kernel service
+
+### :star: FEATURES
+
+-   Nothing
+
+### :fire: DEPRECATED
+
+-   Nothing
+
+### :wrench: FIXES
+
+-   Nothing
+
+### :x: REMOVES and/or Break Changes
+
+-   Remove factory of `Lotgd\Core\EventManager\Event` not in use.
+-   Remove factory of `Lotgd\Core\Navigation\Navigation` use `LotgdKernel::get('Lotgd\Core\Navigation\Navigation')` instead.
+-   Remove factory of `Lotgd\Core\Http\Request` use `LotgdKernel::get('Lotgd\Core\Http\Request')` instead.
+-   Remove factory of `Lotgd\Core\Http\Response` use `LotgdKernel::get('Lotgd\Core\Http\Response')` instead.
+
+### :notebook: NOTES
+
+-   **Upgrade/Install for version 4.9.0 and up**
+    -   First, upload files to your server (production compilation): 
+    -   Second, empty cache: 
+        -   `var/` delete this folder (or use comand in console `php bin/console cache:clear`).
+            -   From version 4.9.0 use Symfony Kernel, so work like Symfony Framework.
+        -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
+            -   Not delete `.gitkeep` files. Remember to keep the main structure of the folder `storage/cache/`
+            -   It is highly recommended to use the command  `php bin/lotgd storage:cache_clear` instead delete folder.
+            -   Note: if fail when run console command, manual delete: `storage/cache/service-manager.config.php` 
+    -   Third, read info in `storage/log/tracy/*` files, and see the problem.
+    -   If you can't solve the problem go to: [Repository issues](https://github.com/idmarinas/lotgd-game/issues)
+-   **composer.json** Updated/Added/Deleted dependencies
+-   **package.json** Updated/Added/Deleted dependencies
+
 # Version: 4.10.0
 
 ### :cyclone: CHANGES
