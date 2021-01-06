@@ -72,6 +72,7 @@ trait Version
         '4.7.0 IDMarinas Edition'         => 40700,
         '4.8.0 IDMarinas Edition'         => 40800,
         '4.9.0 IDMarinas Edition'         => 40900,
+        '4.10.0 IDMarinas Edition'        => 41000,
     ];
 
     /**
