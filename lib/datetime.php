@@ -92,10 +92,8 @@ function checkday()
             }
             else
             {
-                $request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
-
                 $session                        = $revertsession;
-                $session['user']['restorepage'] = $request->getServer('REQUEST_URI');
+                $session['user']['restorepage'] = \LotgdRequest::getServer('REQUEST_URI');
                 $session['user']['allowednavs'] = [];
                 \LotgdNavigation::addNavAllow('newday.php');
 

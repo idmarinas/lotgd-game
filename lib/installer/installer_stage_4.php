@@ -1,14 +1,12 @@
 <?php
 
-$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
-
-if ($request->isPost())
+if (\LotgdRequest::isPost())
 {
-    $session['installer']['dbinfo']['DB_DRIVER'] = (string) $request->getPost('DB_DRIVER', '');
-    $session['installer']['dbinfo']['DB_HOST']   = (string) $request->getPost('DB_HOST', '');
-    $session['installer']['dbinfo']['DB_USER']   = (string) $request->getPost('DB_USER', '');
-    $session['installer']['dbinfo']['DB_PASS']   = (string) $request->getPost('DB_PASS', '');
-    $session['installer']['dbinfo']['DB_NAME']   = (string) $request->getPost('DB_NAME', '');
+    $session['installer']['dbinfo']['DB_DRIVER'] = (string) \LotgdRequest::getPost('DB_DRIVER', '');
+    $session['installer']['dbinfo']['DB_HOST']   = (string) \LotgdRequest::getPost('DB_HOST', '');
+    $session['installer']['dbinfo']['DB_USER']   = (string) \LotgdRequest::getPost('DB_USER', '');
+    $session['installer']['dbinfo']['DB_PASS']   = (string) \LotgdRequest::getPost('DB_PASS', '');
+    $session['installer']['dbinfo']['DB_NAME']   = (string) \LotgdRequest::getPost('DB_NAME', '');
 }
 
 //-- Settings for Database Adapter
