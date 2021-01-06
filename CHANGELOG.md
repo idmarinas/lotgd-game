@@ -41,6 +41,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory of `Lotgd\Core\Http\Response` use `LotgdKernel::get('Lotgd\Core\Http\Response')` instead.
 -   Remove factory of `Lotgd\Core\EventManager\Hook` use `LotgdKernel::get('Lotgd\Core\EventManager\Hook')` instead.
 -   Remove factory of `Lotgd\Core\Template\Params` use `LotgdKernel::get('Lotgd\Core\Template\Params')` instead.
+-   Remove file `src/core/Factory/Doctrine/Extension/TablePrefix.php` not in use.
 
 ### :notebook: NOTES
 
