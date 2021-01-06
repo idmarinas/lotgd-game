@@ -29,7 +29,7 @@ trait Http
     {
         if ( ! $this->lotgdHttpRequest instanceof Request)
         {
-            $this->lotgdHttpRequest = $this->getContainer(Request::class);
+            $this->lotgdHttpRequest = $this->getService(Request::class);
         }
 
         return $this->lotgdHttpRequest;
@@ -44,7 +44,7 @@ trait Http
     {
         if ( ! $this->lotgdHttpResponse instanceof Response)
         {
-            $this->lotgdHttpResponse = $this->getContainer(Response::class);
+            $this->lotgdHttpResponse = $this->getService(Response::class);
         }
 
         return $this->lotgdHttpResponse;

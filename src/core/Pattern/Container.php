@@ -46,6 +46,12 @@ trait Container
             return $this->serviceManager;
         }
 
+        //-- TEMP: avoid error when not configure instance of service manager
+        if ( ! $this->serviceManager instanceof ContainerInterface)
+        {
+            return \LotgdLocator::get($name);
+        }
+
         return $this->serviceManager->get($name);
     }
 

@@ -172,3 +172,7 @@ services:
         calls:
             - setClassHeader: ['navhead']
             - setClassNav: ['nav']
+    Lotgd\Core\Http\Request:
+        public: true
+    Lotgd\Core\Http\Response:
+        public: true

@@ -24,8 +24,6 @@ return [
 
             //-- Added in version 4.4.0
             Lotgd\Core\EventManager\Hook::class             => Factory\EventManager\HookManager::class, //-- This factory no need migrate (Symfony have a event system)
-            Lotgd\Core\Http\Request::class                  => Factory\Http\Request::class, //-- This factory no need in Kernel (Symfony do it)
-            Lotgd\Core\Http\Response::class                 => Factory\Http\Response::class, //-- This factory no need in Kernel (Symfony do it)
             'webpack_encore.tag_renderer'                   => Factory\Template\TagRenderer::class, //-- This factory no need migrate
             'webpack_encore.packages'                       => Factory\Template\Packages::class, //-- This factory no need migrate
 

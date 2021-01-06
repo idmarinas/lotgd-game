@@ -166,9 +166,9 @@ LotgdFlashMessages::instance(LotgdKernel::get('session')->getFlashBag());
 //-- Configure format instance
 LotgdFormat::instance(LotgdKernel::get(\Lotgd\Core\Output\Format::class));
 //-- Configure Request instance
-LotgdRequest::instance(LotgdLocator::get(\Lotgd\Core\Http\Request::class));
+LotgdRequest::instance(LotgdKernel::get(\Lotgd\Core\Http\Request::class));
 //-- Configure Response instance
-LotgdReponse::instance(LotgdLocator::get(\Lotgd\Core\Http\Response::class));
+LotgdReponse::instance(LotgdKernel::get(\Lotgd\Core\Http\Response::class));
 //-- Configure Navigation instance
 LotgdNavigation::instance(LotgdKernel::get(\Lotgd\Core\Navigation\Navigation::class));
 //-- Configure Theme template

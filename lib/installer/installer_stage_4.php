@@ -1,6 +1,6 @@
 <?php
 
-$request = \LotgdLocator::get(\Lotgd\Core\Http\Request::class);
+$request = \LotgdKernel::get(\Lotgd\Core\Http\Request::class);
 
 if ($request->isPost())
 {
