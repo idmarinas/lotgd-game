@@ -14,9 +14,6 @@ return [
                 'InputFilterManager'    => 'InputFilterManager',
                 'FormAnnotationBuilder' => 'FormAnnotationBuilder',
                 'FormElementManager'    => 'FormElementManager',
-
-                //-- Added in version 4.8.0
-                'EventOfEvents' => Lotgd\Core\EventManager\Event::class,
             ],
 
             // directory where proxy classes will be written - default to system_get_tmp_dir()

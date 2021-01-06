@@ -24,7 +24,6 @@ return [
             /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
-            /* LAZY */ Lotgd\Core\EventManager\Event::class => Factory\EventManager\EventManager::class, //-- This factory no need migrate (Symfony have a event system)
             Lotgd\Core\EventManager\Hook::class             => Factory\EventManager\HookManager::class, //-- This factory no need migrate (Symfony have a event system)
             Lotgd\Core\Http\Request::class                  => Factory\Http\Request::class, //-- This factory no need in Kernel (Symfony do it)
             Lotgd\Core\Http\Response::class                 => Factory\Http\Response::class, //-- This factory no need in Kernel (Symfony do it)
