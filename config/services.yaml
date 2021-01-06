@@ -37,7 +37,6 @@ services:
             - "../src/core/Hook.php"
             - "../src/core/Kernel.php"
             - "../src/core/ServiceManager.php"
-            - "../src/core/Session.php"
     Lotgd\Local\:
         resource: "../src/local/"
         exclude:
