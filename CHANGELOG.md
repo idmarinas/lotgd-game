@@ -17,6 +17,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `LotgdNavigation::` static class get the new Kernel service
 -   _Migrated_ **Lotgd\Core\Http\Request** and **Lotgd\Core\Http\Response** factory to **LoTGD Kernel service**
     -   `LotgdRequest::` and `LotgdResponse` static class get the new Kernel service
+-   _Migrated_ **Lotgd\Core\EventManager\Hook** **LoTGD Kernel service**
+    -   `LotgdHook::` static class get the new Kernel service
+-   _Migrated_ **Lotgd\Core\Template\Params** **LoTGD Kernel service**
 
 ### :star: FEATURES
 
@@ -36,6 +39,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory of `Lotgd\Core\Navigation\Navigation` use `LotgdKernel::get('Lotgd\Core\Navigation\Navigation')` instead.
 -   Remove factory of `Lotgd\Core\Http\Request` use `LotgdKernel::get('Lotgd\Core\Http\Request')` instead.
 -   Remove factory of `Lotgd\Core\Http\Response` use `LotgdKernel::get('Lotgd\Core\Http\Response')` instead.
+-   Remove factory of `Lotgd\Core\EventManager\Hook` use `LotgdKernel::get('Lotgd\Core\EventManager\Hook')` instead.
+-   Remove factory of `Lotgd\Core\Template\Params` use `LotgdKernel::get('Lotgd\Core\Template\Params')` instead.
 
 ### :notebook: NOTES
 

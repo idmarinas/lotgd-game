@@ -18,7 +18,7 @@
 
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación por consola.
--   MIgración al uso de Symfony usando el http-kernel (completado en esta versión)
+-   Migración al uso de Symfony usando el http-kernel (completado en esta versión)
     -   Se elimina Laminas service manager.
     -   https://symfony.com/doc/current/components/http_kernel.html
         -   Se migrará 
