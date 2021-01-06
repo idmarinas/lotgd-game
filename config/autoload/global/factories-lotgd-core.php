@@ -19,7 +19,7 @@ return [
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead  - Deleted in version 5.0.0
 
             //-- Added in version 4.2.0
-            /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class,
+            /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class, //-- This factory no need migrate, Symfony have a Form service LotgdKernel::get('form.factory')
 
             //-- Added in version 4.4.0
             'webpack_encore.tag_renderer' => Factory\Template\TagRenderer::class, //-- This factory no need migrate
