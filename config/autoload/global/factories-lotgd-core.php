@@ -1,6 +1,5 @@
 <?php
 
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use Lotgd\Core\Factory;
 
 return [
@@ -23,8 +22,8 @@ return [
             /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class,
 
             //-- Added in version 4.4.0
-            'webpack_encore.tag_renderer'                   => Factory\Template\TagRenderer::class, //-- This factory no need migrate
-            'webpack_encore.packages'                       => Factory\Template\Packages::class, //-- This factory no need migrate
+            'webpack_encore.tag_renderer' => Factory\Template\TagRenderer::class, //-- This factory no need migrate
+            'webpack_encore.packages'     => Factory\Template\Packages::class, //-- This factory no need migrate
 
             //-- Added in version 4.5.0
             'webpack_encore.entrypoint_lookup_collection' => Factory\Template\EntrypointLookupCollection::class, //-- This factory no need migrate
