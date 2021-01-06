@@ -174,5 +174,7 @@ services:
             - setClassNav: ['nav']
     Lotgd\Core\Http\Request:
         public: true
+        class:   Lotgd\Core\Http\Request
+        factory: '@Lotgd\Core\Service\HttpRequestFactory'
     Lotgd\Core\Http\Response:
         public: true
