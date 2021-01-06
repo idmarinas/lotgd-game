@@ -180,7 +180,7 @@ LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translato
 //-- Configure Cache instance
 LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
 //-- Configure Hook Manager instance
-LotgdHook::instance(LotgdLocator::get(\Lotgd\Core\EventManager\Hook::class));
+LotgdHook::instance(LotgdKernel::get(\Lotgd\Core\EventManager\Hook::class));
 
 $session = &$_SESSION['session'];
 

@@ -172,9 +172,15 @@ services:
         calls:
             - setClassHeader: ['navhead']
             - setClassNav: ['nav']
+    Lotgd\Core\EventManager\Hook:
+        public: true
+        class:   Lotgd\Core\EventManager\Hook
+        factory: '@Lotgd\Core\Service\HookManagerFactory'
     Lotgd\Core\Http\Request:
         public: true
         class:   Lotgd\Core\Http\Request
         factory: '@Lotgd\Core\Service\HttpRequestFactory'
     Lotgd\Core\Http\Response:
+        public: true
+    Lotgd\Core\Template\Params:
         public: true

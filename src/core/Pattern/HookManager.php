@@ -27,7 +27,7 @@ trait HookManager
     {
         if ( ! $this->lotgdHookManager instanceof CoreEventManager)
         {
-            $this->lotgdHookManager = $this->getContainer(Hook::class);
+            $this->lotgdHookManager = $this->getService(Hook::class);
         }
 
         return $this->lotgdHookManager;

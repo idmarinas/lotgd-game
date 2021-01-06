@@ -30,7 +30,7 @@ trait Template
     {
         if ( ! $this->lotgdTemplateParams instanceof Params)
         {
-            $this->lotgdTemplateParams = $this->getContainer(Params::class);
+            $this->lotgdTemplateParams = $this->getService(Params::class);
         }
 
         return $this->lotgdTemplateParams;

@@ -6,19 +6,18 @@
  * @see https://github.com/idmarinas/lotgd-game
  *
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
+ * @author IDMarinas
  *
- * @since 4.4.0
+ * @since 4.11.0
  */
 
-namespace Lotgd\Core\Factory\EventManager;
+namespace Lotgd\Core\Service;
 
-use Interop\Container\ContainerInterface;
-use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lotgd\Core\EventManagerAware;
 
-class HookManager implements FactoryInterface
+class HookManagerFactory
 {
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function __invoke()
     {
         $eventManager = new EventManagerAware();
 
