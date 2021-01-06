@@ -19,7 +19,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `LotgdRequest::` and `LotgdResponse` static class get the new Kernel service
 -   _Migrated_ **Lotgd\Core\EventManager\Hook** **LoTGD Kernel service**
     -   `LotgdHook::` static class get the new Kernel service
--   _Migrated_ **Lotgd\Core\Template\Params** **LoTGD Kernel service**
+-   _Migrated_ **Lotgd\Core\Template\Params** factory to **LoTGD Kernel service**
 
 ### :star: FEATURES
 
