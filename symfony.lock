@@ -278,6 +278,9 @@
     "phan/phan": {
         "version": "3.2.10"
     },
+    "php": {
+        "version": "7.3.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
