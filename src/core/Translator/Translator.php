@@ -16,6 +16,7 @@ namespace Lotgd\Core\Translator;
 use Laminas\EventManager\Event;
 use Laminas\I18n\Exception;
 use Laminas\I18n\Translator\Loader\FileLoaderInterface;
+use Laminas\I18n\Translator\TextDomain;
 use Laminas\I18n\Translator\Translator as ZendTranslator;
 use Laminas\Validator\Translator\TranslatorInterface;
 
@@ -188,14 +189,8 @@ class Translator extends ZendTranslator implements TranslatorInterface
 
         //-- Use - as delimiter for folders.
         //-- Base structure is scope-domain
-        $domains = \explode('-', $namespace);
-
-        //-- Base scope is page
-        if (\count($domains) < 2)
-        {
-            $domains[1] = $domains[0];
-            $domains[0] = 'page';
-        }
+        //-- Not have base scope, so can add files to root of translations/[locale] (For better compatibility with Symfony translator)
+        $domains = \explode('-', $namespace)
 
         $filename = $this->constructFile($locale, $domains);
 
