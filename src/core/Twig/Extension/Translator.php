@@ -65,7 +65,6 @@ class Translator extends AbstractExtension
              * Laminas Translator
              */
             new TwigFilter('t', [$this, 'translate'], ['needs_environment' => true]),
-            new TwigFilter('trans', [$this, 'translate'], ['needs_environment' => true]),
             //-- If you use "translate_default_domain" in template, use "tl" to change domain of translation.
             new TwigFilter('tl', [$this, 'translate'], ['needs_environment' => true]),
             //-- Use MessageFormatter to formater message.
@@ -77,6 +76,7 @@ class Translator extends AbstractExtension
              * Symfony Translator
              */
             new TwigFilter('ts', [$this, 'symfonyTrans'], ['needs_environment' => true]),
+            new TwigFilter('trans', [$this, 'symfonyTrans'], ['needs_environment' => true]),
         ];
     }
 

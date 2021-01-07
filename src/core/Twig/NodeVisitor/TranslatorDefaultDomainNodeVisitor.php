@@ -47,7 +47,7 @@ class TranslatorDefaultDomainNodeVisitor extends NodeVisitorAbstract
             return $node;
         }
 
-        if ($node instanceof FilterExpression && \in_array($node->getNode('filter')->getAttribute('value'), ['t']))
+        if ($node instanceof FilterExpression && \in_array($node->getNode('filter')->getAttribute('value'), ['t', 'trans']))
         {
             $arguments = $node->getNode('arguments');
 
