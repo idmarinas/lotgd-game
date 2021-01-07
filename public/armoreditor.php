@@ -9,6 +9,7 @@ check_su_access(SU_EDIT_EQUIPMENT);
 
 $values = [1 => 48, 225, 585, 990, 1575, 2250, 2790, 3420, 4230, 5040, 5850, 6840, 8010, 9000, 10350];
 
+$translator = \LotgdKernel::get('translator');
 $textDomain = 'grotto_armoreditor';
 $armorlevel = (int) \LotgdRequest::getQuery('level');
 $op = (string) \LotgdRequest::getQuery('op');
@@ -67,7 +68,7 @@ if ('edit' == $op || 'add' == $op)
         $id = $entity->getArmorId();
         $armorlevel = $entity->getLevel();
 
-        \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->getArmorName()], $textDomain));
+        \LotgdFlashMessages::addSuccessMessage($translator->trans($message, ['name' => $entity->getArmorName()], $textDomain));
 
         //-- Redo form for change $level and set new data (generated IDs)
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\ArmorType::class, $entity, [
@@ -86,7 +87,7 @@ elseif ('del' == $op)
 {
     $armor = $repository->find($id);
 
-    \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t('armor.form.del.success', ['id' => $id], $textDomain));
+    \LotgdFlashMessages::addSuccessMessage($translator->trans('armor.form.del.success', ['id' => $id], $textDomain));
     \Doctrine::remove($armor);
     \Doctrine::flush();
 }
