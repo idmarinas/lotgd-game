@@ -59,7 +59,7 @@ class CronjobType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Cronjob::class,
-            'translation_domain' => 'form-core-grotto-cronjob',
+            'translation_domain' => 'form_core_cronjob',
         ]);
     }
 }

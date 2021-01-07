@@ -34,7 +34,7 @@ class MotdType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Motd::class,
-            'translation_domain' => 'form-core-jaxon-motd',
+            'translation_domain' => 'form_core_motd',
         ]);
     }
 }

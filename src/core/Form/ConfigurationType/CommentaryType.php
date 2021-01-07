@@ -107,7 +107,7 @@ class CommentaryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => null,
-            'translation_domain' => 'form-core-grotto-configuration',
+            'translation_domain' => 'form_core_configuration',
         ]);
     }
 }

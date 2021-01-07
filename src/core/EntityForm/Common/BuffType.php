@@ -134,7 +134,7 @@ class BuffType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form-core-grotto-buffs',
+            'translation_domain' => 'form_core_buffs',
         ]);
     }
 }

@@ -127,7 +127,7 @@ class CompanionsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Companions::class,
-            'translation_domain' => 'form-core-grotto-companions',
+            'translation_domain' => 'form_core_companions',
         ]);
     }
 }

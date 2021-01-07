@@ -8,7 +8,7 @@ require_once 'common.php';
 require_once 'lib/showform.php';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], 'page-about');
+\LotgdResponse::pageStart('title', [], 'page_about');
 
 checkday();
 $op = LotgdRequest::getQuery('op');

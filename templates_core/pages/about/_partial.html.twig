@@ -1,4 +1,4 @@
-{% translate_default_domain 'page-about' %}
+{% translate_default_domain 'page_about' %}
 
 {% block about_home %}
     {# NOTICE
@@ -140,10 +140,10 @@
                     </tr>
                     {% set cat = module.category %}
                     <tr>
-                        <th scope="col" class="collapsing">{{ 'modules.name'|t }}</th>
-                        <th scope="col" class="collapsing">{{ 'modules.version'|t }}</th>
-                        <th scope="col">{{ 'modules.author'|t }}</th>
-                        <th scope="col" class="collapsing">{{ 'modules.download.location'|t }}</th>
+                        <th scope="col" class="collapsing">{{ 'modules.name'|trans }}</th>
+                        <th scope="col" class="collapsing">{{ 'modules.version'|trans }}</th>
+                        <th scope="col">{{ 'modules.author'|trans }}</th>
+                        <th scope="col" class="collapsing">{{ 'modules.download.location'|trans }}</th>
                     </tr>
                 </thead>
             {% endif %}
@@ -154,26 +154,26 @@
                 <td>{{ '`^%s`0'|format(module.moduleauthor)|colorize }}</td>
                 <td class="collapsing">
                     {% if module.download == 'core_module' %}
-                        <a href="http://dragonprime.net/index.php?module=Downloads;catd=4" target="_blank" rel="noopener noreferrer">{{ 'modules.core'|t }}</a>
+                        <a href="http://dragonprime.net/index.php?module=Downloads;catd=4" target="_blank" rel="noopener noreferrer">{{ 'modules.core'|trans }}</a>
                     {% elseif module.download %}
                         {% if is_valid_protocol(module.download) %}
-                            {{ '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>'|format(module.download, 'modules.download.title'|t) }}
+                            {{ '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>'|format(module.download, 'modules.download.title'|trans) }}
                         {% else %}
-                            {{ 'modules.download.contact'|t|colorize }}
+                            {{ 'modules.download.contact'|trans|colorize }}
                         {% endif %}
                     {% else %}
-                        {{ 'modules.download.notPublic'|t|colorize }}
+                        {{ 'modules.download.notPublic'|trans|colorize }}
                     {% endif %}
                 </td>
             </tr>
         {% else %}
-            <tbody><tr><td>{{ 'modules.notInstalled'|t|colorize }}</td></tr></tbody>
+            <tbody><tr><td>{{ 'modules.notInstalled'|trans|colorize }}</td></tr></tbody>
         {% endfor %}
     </table>
 {% endblock about_modules %}
 
 {% block about_setup %}
-    <h3>{{ 'setup.title'|t|colorize }}</h3>
+    <h3>{{ 'setup.title'|trans|colorize }}</h3>
 
     {# This apply tabs theme only for this form #}
     {% form_theme form '{theme}/form/semantic-ui-tabs-form-theme.html.twig' %}

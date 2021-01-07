@@ -164,7 +164,7 @@ class CharactersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Characters::class,
-            'translation_domain' => 'form-core-grotto-account',
+            'translation_domain' => 'form_core_account',
         ]);
     }
 }

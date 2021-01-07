@@ -111,7 +111,7 @@ class CreaturesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Creatures::class,
-            'translation_domain' => 'form-core-grotto-creature',
+            'translation_domain' => 'form_core_creature',
         ]);
     }
 }

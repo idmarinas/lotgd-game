@@ -56,7 +56,7 @@ class ArmorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Armor::class,
-            'translation_domain' => 'form-core-grotto-armor',
+            'translation_domain' => 'form_core_armor',
         ]);
     }
 }

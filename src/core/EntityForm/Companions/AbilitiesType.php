@@ -75,7 +75,7 @@ class AbilitiesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'form-core-grotto-companions',
+            'translation_domain' => 'form_core_companions',
         ]);
     }
 }

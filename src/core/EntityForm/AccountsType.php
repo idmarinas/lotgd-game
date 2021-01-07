@@ -131,7 +131,7 @@ class AccountsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Accounts::class,
-            'translation_domain' => 'form-core-grotto-account',
+            'translation_domain' => 'form_core_account',
         ]);
     }
 }

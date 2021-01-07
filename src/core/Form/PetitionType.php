@@ -68,7 +68,7 @@ class PetitionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => null,
-            'translation_domain' => 'form-core-jaxon-petition',
+            'translation_domain' => 'form_core_petition',
         ]);
     }
 }

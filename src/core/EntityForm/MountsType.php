@@ -97,7 +97,7 @@ class MountsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Mounts::class,
-            'translation_domain' => 'form-core-grotto-mounts',
+            'translation_domain' => 'form_core_mounts',
         ]);
     }
 }

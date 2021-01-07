@@ -56,7 +56,7 @@ class WeaponsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Weapons::class,
-            'translation_domain' => 'form-core-grotto-weapons',
+            'translation_domain' => 'form_core_weapons',
         ]);
     }
 }

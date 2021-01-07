@@ -101,7 +101,7 @@ trait Report
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('button.report', [], 'form-core-jaxon-petition'),
+                    'title' => \LotgdTranslator::t('button.report', [], 'form_core_petition'),
                     'class' => 'ui green approve button',
                 ],
                 [

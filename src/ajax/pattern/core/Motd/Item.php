@@ -45,7 +45,7 @@ trait Item
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('item.button.submit', [], 'form-core-jaxon-motd'),
+                    'title' => \LotgdTranslator::t('item.button.submit', [], 'form_core_motd'),
                     'class' => 'ui green approve button',
                 ],
                 [
@@ -150,7 +150,7 @@ trait Item
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('item.button.submit', [], 'form-core-jaxon-motd'),
+                    'title' => \LotgdTranslator::t('item.button.submit', [], 'form_core_motd'),
                     'class' => 'ui green approve button',
                 ],
                 [

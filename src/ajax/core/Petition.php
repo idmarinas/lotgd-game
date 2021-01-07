@@ -86,7 +86,7 @@ class Petition extends AjaxAbstract
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('button.submit', [], 'form-core-jaxon-petition'),
+                    'title' => \LotgdTranslator::t('button.submit', [], 'form_core_petition'),
                     'class' => 'ui green approve button',
                 ],
                 [

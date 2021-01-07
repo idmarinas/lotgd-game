@@ -42,7 +42,7 @@ class MotdEditType extends MotdType
     {
         $resolver->setDefaults([
             'data_class'         => Motd::class,
-            'translation_domain' => 'form-core-jaxon-motd',
+            'translation_domain' => 'form_core_motd',
         ]);
     }
 }

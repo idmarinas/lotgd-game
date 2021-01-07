@@ -69,7 +69,7 @@ class MastersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Masters::class,
-            'translation_domain' => 'form-core-grotto-master',
+            'translation_domain' => 'form_core_master',
         ]);
     }
 }

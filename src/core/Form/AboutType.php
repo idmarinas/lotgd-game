@@ -49,7 +49,7 @@ class AboutType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => null,
             'label'              => 'form.label',
-            'translation_domain' => 'form-core-grotto-about',
+            'translation_domain' => 'form_core_about',
         ]);
     }
 }

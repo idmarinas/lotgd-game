@@ -55,7 +55,7 @@ class TitlesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => Titles::class,
-            'translation_domain' => 'form-core-grotto-titles',
+            'translation_domain' => 'form_core_titles',
         ]);
     }
 }

@@ -42,7 +42,7 @@ class HomeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => null,
-            'translation_domain' => 'form-core-grotto-home',
+            'translation_domain' => 'form_core_home',
         ]);
     }
 }
