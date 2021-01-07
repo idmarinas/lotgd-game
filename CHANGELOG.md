@@ -20,14 +20,27 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   _Migrated_ **Lotgd\Core\EventManager\Hook** **LoTGD Kernel service**
     -   `LotgdHook::` static class get the new Kernel service
 -   _Migrated_ **Lotgd\Core\Template\Params** factory to **LoTGD Kernel service**
+-   **Translation system**
+    -   **Laminas Translator**
+        -   Remove default scope `page` from text domain.
+        -   Now can add translator files to `translations/[locale]` folder, and no need move to `translations/[locale]/page` folder
+    -   **Twig translation filter**
+        -   Filter `trans` now use Symfony Translator
+-   **LoTGD pages**
+    -   Merge translations for `page` and `navigation` in same file.
+        -   Example: `page_armor` and `navigation_armor` in `page_armor`
+    -   Templates of pages now use `trans` filter:
+        -   `public/about.php`
 
 ### :star: FEATURES
 
--   Nothing
+-   **src/core/Pattern/Cache.php**
+    -   Added new function for get LoTGD Cache App Tagged. Service `core.lotgd.cache` 
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   **Lotgd\Core\ServiceManager** are deprecated and deleted in version 5.0.0
+    -   Use **LoTGD Kernel service** for create service.
 
 ### :wrench: FIXES
 
@@ -42,6 +55,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory of `Lotgd\Core\EventManager\Hook` use `LotgdKernel::get('Lotgd\Core\EventManager\Hook')` instead.
 -   Remove factory of `Lotgd\Core\Template\Params` use `LotgdKernel::get('Lotgd\Core\Template\Params')` instead.
 -   Remove file `src/core/Factory/Doctrine/Extension/TablePrefix.php` not in use.
+-   Remove file `src/core/Pattern/EventManager.php` not in use.
 
 ### :notebook: NOTES
 
