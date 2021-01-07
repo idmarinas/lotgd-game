@@ -26,9 +26,9 @@ trait ThemeList
         $cacheKey = 'lotgd-core-pattern-theme-list';
         $cache    = $this->getCacheApp();
 
-        return $cache->getItem($cacheKey, function ($item)
+        return $cache->getItem($cacheKey, function ()
         {
-            $item->expiresAt(new \DateTime('tomorrow')); //-- Update each day
+            //-- This is a perma cache, for update need clear cache
 
             // A generic way of allowing a theme to be selected.
             $handle = @\opendir('themes');
