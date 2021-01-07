@@ -49,7 +49,22 @@ trait Cache
     {
         if ( ! $this->lotgdCacheApp instanceof CacheInterface)
         {
-            $this->lotgdCacheApp = \LotgdKernel::get('cache.app');
+            $this->lotgdCacheApp = $this->getService('cache.app');
+        }
+
+        return $this->lotgdCacheApp;
+    }
+
+    /**
+     * Get app cache instance.
+     *
+     * @return object
+     */
+    public function getCacheAppTag()
+    {
+        if ( ! $this->lotgdCacheApp instanceof CacheInterface)
+        {
+            $this->lotgdCacheApp = $this->getService('core.lotgd.cache');
         }
 
         return $this->lotgdCacheApp;
