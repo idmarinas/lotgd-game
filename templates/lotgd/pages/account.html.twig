@@ -1,43 +1,43 @@
-{% translate_default_domain 'page-account' %}
+{% translate_default_domain 'page_account' %}
 
-{{ 'paragraph'|t|colorize }}
+{{ 'paragraph'|trans|colorize }}
 
 <table class="ui table">
     <tbody>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.created'|t }}</td>
-            <td>{{ 'table.value.created'|t({'date': user.regdate}) }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.created'|trans }}</td>
+            <td>{{ 'table.value.created'|trans({'date': user.regdate}) }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.commented'|t }}</td>
-            <td>{{ 'table.value.commented'|t({'date': user.recentcomments}) }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.commented'|trans }}</td>
+            <td>{{ 'table.value.commented'|trans({'date': user.recentcomments}) }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.pvped'|t }}</td>
-            <td>{{ 'table.value.pvped'|t({'date': user.pvpflag}) }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.pvped'|trans }}</td>
+            <td>{{ 'table.value.pvped'|trans({'date': user.pvpflag}) }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.dragonkills'|t }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.dragonkills'|trans }}</td>
             <td>{{ user.dragonkills|numeral }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.gentimecount'|t }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.gentimecount'|trans }}</td>
             <td>{{ user.gentimecount|numeral }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.gentime'|t }}</td>
-            <td>{{ 'table.value.gentime'|t({'n': user.gentime, 'avg': (user.gentime / user.gentimecount)}) }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.gentime'|trans }}</td>
+            <td>{{ 'table.value.gentime'|trans({'n': user.gentime, 'avg': (user.gentime / user.gentimecount)}) }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.acctnumber'|t }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.acctnumber'|trans }}</td>
             <td>{{ (user.acctid - 1)|numeral }}</td>
         </tr>
         <tr>
-            <td class="collapsing right aligned">{{ 'table.title.dragonpoints'|t }}</td>
+            <td class="collapsing right aligned">{{ 'table.title.dragonpoints'|trans }}</td>
             <td>
                 {% for key, value in dragonpoints %}
                     <div class="ui label">
-                        {{ ('table.value.attr.' ~ key)|t }}
+                        {{ ('table.value.attr.' ~ key)|trans }}
                         <div class="detail">{{ value|numeral }}</div>
                     </div>
                 {% endfor %}

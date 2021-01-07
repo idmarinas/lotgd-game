@@ -5,7 +5,7 @@
 require_once 'common.php';
 require_once 'lib/datetime.php';
 
-$textDomain = 'page-account';
+$textDomain = 'page_account';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
