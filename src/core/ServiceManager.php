@@ -20,6 +20,8 @@ use Laminas\ServiceManager\ServiceManager as ZendServiceManager;
 
 /**
  * Generated a Service Manager for Game.
+ *
+ * @deprecated 4.11.0 deleted in version 5.0.0. Use LoTGD Kernel for create services.
  */
 class ServiceManager extends ZendServiceManager
 {
