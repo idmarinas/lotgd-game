@@ -1,16 +1,16 @@
 {% translate_default_domain textDomain %}
 
 {% block armor_list %}
-    {{ 'description'|t|colorize }}
+    {{ 'description'|trans|colorize }}
 
-    {{ 'tradein'|t({'armorname': user.armor, 'value': tradeinvalue})|colorize }}
+    {{ 'tradein'|trans({'armorname': user.armor, 'value': tradeinvalue})|colorize }}
 
     <table class='ui very compact striped selectable table'>
         <thead>
             <tr>
-                <th scope="col">{{ 'table.header.name'|t|uncolorize }}</th>
-                <th scope="col">{{ 'table.header.defense'|t|uncolorize }}</th>
-                <th scope="col">{{ 'table.header.cost'|t|uncolorize }}</th>
+                <th scope="col">{{ 'table.header.name'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'table.header.defense'|trans|uncolorize }}</th>
+                <th scope="col">{{ 'table.header.cost'|trans|uncolorize }}</th>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">{{ 'table.notFound'|t|colorize }}</td>
+                    <td colspan="3">{{ 'table.notFound'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -51,12 +51,12 @@
 {% block armor_buy %}
     {% if result %}
         {% if buyIt %}
-            {{ 'payarmor'|t({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}
+            {{ 'payarmor'|trans({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}
         {% else %}
-            {{ 'notenoughgold'|t({'armorname': result.armorname})|colorize }}
+            {{ 'notenoughgold'|trans({'armorname': result.armorname})|colorize }}
         {% endif %}
     {% else %}
-        {{ 'nosuchweapon'|t|colorize }}
-        {{ 'tryagain'|t|colorize }}
+        {{ 'nosuchweapon'|trans|colorize }}
+        {{ 'tryagain'|trans|colorize }}
     {% endif %}
 {% endblock armor_buy %}
