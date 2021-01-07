@@ -190,7 +190,7 @@ class Translator extends ZendTranslator implements TranslatorInterface
         //-- Use - as delimiter for folders.
         //-- Base structure is scope-domain
         //-- Not have base scope, so can add files to root of translations/[locale] (For better compatibility with Symfony translator)
-        $domains = \explode('-', $namespace)
+        $domains = \explode('-', $namespace);
 
         $filename = $this->constructFile($locale, $domains);
 
