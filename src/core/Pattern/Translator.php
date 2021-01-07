@@ -42,7 +42,7 @@ trait Translator
     {
         if ( ! $this->lotgdSymfonyTranslator instanceof TranslationTranslator)
         {
-            $this->lotgdSymfonyTranslator = \LotgdKernel::get('translator');
+            $this->lotgdSymfonyTranslator = $this->getService('translator');
         }
 
         return $this->lotgdSymfonyTranslator;
