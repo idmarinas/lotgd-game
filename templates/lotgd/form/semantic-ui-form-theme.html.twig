@@ -19,7 +19,7 @@
                 {{- form_label(form) -}}
             {% endif %}
             <div class="right floated sub header">
-                <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+                <span class="ui red text" id="show-hidde-info-note-form-{{ name }}">{{ 'show.hide.note.info'|trans('form_app') }}</span>
             </div>
         </div>
 
@@ -225,7 +225,7 @@
                 {{- label|trans(label_translation_parameters, translation_domain) -}}
             {%- endif -%}
             {%- if help -%}
-                {% set helpLabel = 'element.has.note'|tst('app-form') %}
+                {% set helpLabel = 'element.has.note'|trans('form_app') %}
                 <span aria-label="{{ helpLabel }}" data-tooltip="{{ helpLabel }}">
                     <i aria-hidden="true" class="blue info icon"></i>
                 </span>
