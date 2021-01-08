@@ -199,7 +199,7 @@ class Form extends AbstractElement
                 ],
                 'options' => [
                     'label'                  => 'button.submit',
-                    'translator_text_domain' => 'app-form',
+                    'translator_text_domain' => 'form_app',
                 ],
             ], $options);
 
@@ -220,7 +220,7 @@ class Form extends AbstractElement
                 ],
                 'options' => [
                     'label'                  => 'button.reset',
-                    'translator_text_domain' => 'app-form',
+                    'translator_text_domain' => 'form_app',
                 ],
             ], $options);
 

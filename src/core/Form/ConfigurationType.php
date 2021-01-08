@@ -52,7 +52,7 @@ class ConfigurationType extends AbstractType
         $builder->add('daysetup', ConfigurationType\DaysetupType::class, ['label' => 'daysetup.title']);
         $builder->add('misc', ConfigurationType\MiscType::class, ['label' => 'misc.title']);
 
-        $builder->add('submit', SubmitType::class, ['label' => 'button.save', 'translation_domain' => 'app-form']);
+        $builder->add('submit', SubmitType::class, ['label' => 'button.save', 'translation_domain' => 'form_app']);
 
         //-- Listener to delete data duplicated in each field
         //-- Each field have all data settings, but not need all of this data

@@ -32,7 +32,7 @@ class HomeType extends AbstractType
         ]);
         $builder->add('submit', SubmitType::class, [
             'label'              => 'button.save',
-            'translation_domain' => 'app-form',
+            'translation_domain' => 'form_app',
         ]);
 
         parent::buildForm($builder, $options);

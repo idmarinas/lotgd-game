@@ -54,7 +54,7 @@ if ('' == $op)
 
         if ($messageType)
         {
-            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'app-form'));
+            \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, [], 'form_app'));
         }
     }
 
