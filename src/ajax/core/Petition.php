@@ -28,7 +28,7 @@ class Petition extends AjaxAbstract
     use PatternCore\Petition\Faq;
     use PatternCore\Petition\Report;
 
-    public const TEXT_DOMAIN = 'jaxon-petition';
+    public const TEXT_DOMAIN = 'jaxon_petition';
     protected $repositoryPetition;
     protected $templatePetition;
 

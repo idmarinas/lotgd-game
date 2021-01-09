@@ -9,7 +9,7 @@ $accountId = (int) \LotgdRequest::getQuery('acctid');
 $page = (int) \LotgdRequest::getQuery('page');
 
 $params = [
-    'textDomain' => 'grotto-characterbackup',
+    'textDomain' => 'grotto_characterbackup',
 ];
 
 //-- Init page

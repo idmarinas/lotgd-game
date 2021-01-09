@@ -42,7 +42,7 @@ class PetitionType extends Select implements LotgdElementFactoryInterface, Input
         }
 
         $this->setValueOptions($choices);
-        $this->setOption('translator_text_domain', 'jaxon-petition');
+        $this->setOption('translator_text_domain', 'jaxon_petition');
 
         return $this;
     }

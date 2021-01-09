@@ -41,7 +41,7 @@ if ('suicide' == $op && $params['selfDelete'])
 
     if (char_cleanup($userId, CHAR_DELETE_SUICIDE))
     {
-        addnews('delete.character', [ 'name' => $session['user']['name'] ], 'partial-news', true);
+        addnews('delete.character', [ 'name' => $session['user']['name'] ], 'partial_news', true);
 
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.delete.character', [], $textDomain));
 

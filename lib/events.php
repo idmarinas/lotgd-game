@@ -45,11 +45,11 @@ function handle_event($location, $baseLink = false)
         $html['event'] = [
             'title.special',
             [],
-            'partial-event',
+            'partial_event',
         ];
 
         //-- Init page
-        \LotgdResponse::pageStart('title.special', [], 'partial-event');
+        \LotgdResponse::pageStart('title.special', [], 'partial_event');
 
         if (\strstr($specialinc, ':'))
         {

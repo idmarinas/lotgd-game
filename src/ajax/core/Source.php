@@ -22,7 +22,7 @@ use Tracy\Debugger;
  */
 class Source extends AjaxAbstract
 {
-    public const TEXT_DOMAIN = 'jaxon-source';
+    public const TEXT_DOMAIN = 'jaxon_source';
 
     public function show(): Response
     {

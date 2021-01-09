@@ -36,7 +36,7 @@ class PetitionTypesType extends ChoiceType
 
         $resolver->setDefaults([
             'choices'            => $choices,
-            'translation_domain' => 'jaxon-petition',
+            'translation_domain' => 'jaxon_petition',
         ]);
     }
 }

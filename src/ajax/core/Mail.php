@@ -27,7 +27,7 @@ class Mail extends AjaxAbstract
     use PatternCore\Mail\Send;
     use PatternCore\Mail\Write;
 
-    public const TEXT_DOMAIN = 'jaxon-mail';
+    public const TEXT_DOMAIN = 'jaxon_mail';
 
     protected $repositoryMail;
     protected $repositoryAcct;

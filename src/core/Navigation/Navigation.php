@@ -81,7 +81,7 @@ class Navigation
      *                        [
      *                           //-- Core use this `translate` and `params` if exist
      *                           'translate' => true, //-- Determine if want translate header or not
-     *                           'textDomain' => 'navigation-app', //-- Determine domain for a nav.
+     *                           'textDomain' => 'navigation_app', //-- Determine domain for a nav.
      *                           'params' => [ //-- This is used en translation, if you need
      *                               'key' => 'value',
      *                               'key1' => 'value1',

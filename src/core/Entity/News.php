@@ -75,7 +75,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false, options={"default": "partial-news"})
+     * @ORM\Column(type="string", length=255, nullable=false, options={"default": "partial_news"})
      */
     private $textDomain = '';
 

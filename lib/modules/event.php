@@ -108,7 +108,7 @@ function module_events($eventtype, $basechance, $baseLink = false)
                 $html['event']        = [
                     'title.special',
                     [],
-                    'partial-event',
+                    'partial_event',
                 ];
                 $op = \LotgdRequest::getQuery('op');
                 \LotgdRequest::setQuery('op', '');
@@ -189,7 +189,7 @@ function module_display_events($eventtype, $forcescript = false)
     \usort($events, 'event_sort');
 
     $params = [
-        'textDomain' => 'partial-event',
+        'textDomain' => 'partial_event',
         'events'     => $events,
         'script'     => $script,
     ];

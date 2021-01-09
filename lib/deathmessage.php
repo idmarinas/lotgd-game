@@ -16,7 +16,7 @@ function select_deathmessage($zone = 'forest', $extraParams = []): array
 {
     global $session, $badguy;
 
-    $count = \LotgdTranslator::translate("{$zone}.count", 'partial-deathmessage');
+    $count = \LotgdTranslator::translate("{$zone}.count", 'partial_deathmessage');
 
     //-- Default message, if fail in count
     //-- Always shows the default message if the key is not found in the specified language when translating.

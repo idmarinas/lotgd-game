@@ -107,7 +107,7 @@ $session['installer']['stagecompleted'] = max($stage, $session['installer']['sta
 
 //-- Init page
 \LotgdResponse::pageStart('title',  [
-    'stage' => \LotgdTranslator::t("stages.0{$stage}", [], 'navigation-installer')
+    'stage' => \LotgdTranslator::t("stages.0{$stage}", [], 'navigation_installer')
 ], 'page_installer');
 
 if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))
@@ -141,7 +141,7 @@ switch ($stage)
 
 if (! $noinstallnavs)
 {
-    \LotgdNavigation::setTextDomain('navigation-installer');
+    \LotgdNavigation::setTextDomain('navigation_installer');
     if ($session['user']['loggedin'] ?? false)
     {
         \LotgdNavigation::addNav('backToGame', $session['user']['restorepage']);

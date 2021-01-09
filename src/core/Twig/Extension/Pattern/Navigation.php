@@ -49,7 +49,7 @@ trait Navigation
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
         }
         else
         {
@@ -95,7 +95,7 @@ trait Navigation
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
         }
         else
         {
