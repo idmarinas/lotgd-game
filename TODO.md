@@ -72,9 +72,6 @@
         -   Creo que se migrará todo el código a los módulos de Symfony Framework, para así poder aprobechar sus capacidades, que son muy útiles en el LoTGD
         -   Templates: permitir reemplazar una pantilla de un bundle con otra propia, es una forma fácil de personalizar y crear temas propios.
 
-# ¿? Para la versión X2.0.0
--   Migrar LoTGD Core a formato Symfony Bundle
-
 ## Cosas pendientes
 -   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
 -   Crear un sistema de publicidad interno (que permite comprar espacios publicitarios)
