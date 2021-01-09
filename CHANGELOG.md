@@ -26,11 +26,12 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   Now can add translator files to `translations/[locale]` folder, and no need move to `translations/[locale]/page` folder
     -   **Twig translation filter**
         -   Filter `trans` now use Symfony Translator
+    -   Translation files in `translations/en`
+        -   Renave all files prefixed with name of folder and moved to root folder `translations/en`
+            -   Example: `translations/en/page/about.yaml` to `translations/en/page_about.yaml` 
+        -   This is for compatibility with Laminas Translator        
 -   **LoTGD pages**
-    -   Merge translations for `page` and `navigation` in same file.
-        -   Example: `page_armor` and `navigation_armor` in `page_armor`
-    -   Templates of pages now use `trans` filter:
-        -   `public/about.php`
+    -   Templates of pages now use `trans` filter. 
 
 ### :star: FEATURES
 
