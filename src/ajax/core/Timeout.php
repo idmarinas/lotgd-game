@@ -34,12 +34,12 @@ class Timeout extends AjaxAbstract
 
         if ($timeout <= 1)
         {
-            $text    = \LotgdTranslator::t('session.timeout', [], 'app-default');
+            $text    = \LotgdTranslator::t('session.timeout', [], 'app_default');
             $warning = '<b>'.$text.'</b>';
         }
         elseif ($timeout < 120)
         {
-            $text    = \LotgdTranslator::t('session.time_out_in', ['n' => $timeout], 'app-default');
+            $text    = \LotgdTranslator::t('session.time_out_in', ['n' => $timeout], 'app_default');
             $warning = \sprintf($text, $timeout);
         }
         else

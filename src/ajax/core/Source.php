@@ -36,7 +36,7 @@ class Source extends AjaxAbstract
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
+                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                     'class' => 'ui red deny button',
                 ],
             ];
@@ -53,7 +53,7 @@ class Source extends AjaxAbstract
         {
             Debugger::log($th);
 
-            $response->dialog->error(\LotgdTranslator::t('flash.message.error', [], 'app-default'));
+            $response->dialog->error(\LotgdTranslator::t('flash.message.error', [], 'app_default'));
         }
 
         $response->jQuery('#button-source')->removeClass('loading disabled');

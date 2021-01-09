@@ -294,7 +294,7 @@ class Commentary
 
         if ( ! $item->isHit())
         {
-            $domain = 'app-commentary';
+            $domain = 'app_commentary';
 
             $comsecs                = [];
             $comsecs['village']     = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);

@@ -73,11 +73,11 @@ class CommentaryRepository extends DoctrineRepository
                 $comment->setHiddenByName($session['user']['name']);
 
                 //-- Hide message
-                $message = \LotgdTranslator::t('comment.moderation.hide', ['name' => $session['user']['name']], 'app-commentary');
+                $message = \LotgdTranslator::t('comment.moderation.hide', ['name' => $session['user']['name']], 'app_commentary');
                 //--  Unhide message
                 if ($hiddenOld && ! $hiddenNew)
                 {
-                    $message = \LotgdTranslator::t('comment.moderation.unhide', ['name' => $session['user']['name']], 'app-commentary');
+                    $message = \LotgdTranslator::t('comment.moderation.unhide', ['name' => $session['user']['name']], 'app_commentary');
                 }
 
                 $comment->setHiddenComment($message);

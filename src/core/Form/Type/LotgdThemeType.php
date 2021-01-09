@@ -27,7 +27,7 @@ class LotgdThemeType extends ChoiceType
             $vname => [
                 'location.village.of',
                 ['name' => $vname],
-                'app-default',
+                'app_default',
             ],
         ];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_OTHER_LOCATIONS, null, $locs);
@@ -35,7 +35,7 @@ class LotgdThemeType extends ChoiceType
         $locs['all'] = [
             'location.everywhere',
             [],
-            'app-default',
+            'app_default',
         ];
         \ksort($locs);
 

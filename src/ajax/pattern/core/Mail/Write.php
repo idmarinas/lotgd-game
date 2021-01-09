@@ -145,7 +145,7 @@ trait Write
                 'class' => 'ui approve primary button',
             ],
             [
-                'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
+                'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                 'class' => 'ui red deny button',
             ],
         ];

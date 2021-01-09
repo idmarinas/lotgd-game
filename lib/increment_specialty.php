@@ -22,7 +22,7 @@ function increment_specialty($colorcode, $spec = false)
     }
     else
     {
-        \LotgdResponse::pageAddContent(\LotgdTranslator::t('increment.specialty.none', [], 'app-default'));
+        \LotgdResponse::pageAddContent(\LotgdTranslator::t('increment.specialty.none', [], 'app_default'));
     }
 
     if (false !== $spec)

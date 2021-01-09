@@ -18,11 +18,11 @@
             {% endfor %}
         {% else %}
             <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
-                <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+                <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app_commentary')|uncolorize }}</button>
                 {% for comment in comments|reverse %}
                     {{ display_one_comment(comment, textDomain, commentary) }}
                 {% endfor %}
-                <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+                <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app_commentary')|uncolorize }}</button>
             </form>
         {% endif %}
     </div>
@@ -46,12 +46,12 @@
         {% commentary_domain_status defaultTextDomainStatus %}
     {% endif %}
 
-    {% set recent = 'comment.recent'|tl(null, 'app-commentary') %}
+    {% set recent = 'comment.recent'|tl(null, 'app_commentary') %}
     <div class="comment {{ comment.hidden ? 'del' : '' }}">
         <div class="content">
             <div class="text">
                 {% if SU_EDIT_COMMENTS %}
-                    <div class="ui toggle lotgd checkbox" data-tooltip="{{ 'form.toggle.hide'|tl(null, 'app-commentary')|uncolorize }}">
+                    <div class="ui toggle lotgd checkbox" data-tooltip="{{ 'form.toggle.hide'|tl(null, 'app_commentary')|uncolorize }}">
                         <input type="hidden" name="hideComment[{{ comment.id }}]" value="0">
                         <input type="checkbox" name="hideComment[{{ comment.id }}]" {{ comment.hidden ? 'checked' : '' }} value="1">
                     </div>
@@ -83,8 +83,8 @@
             {# Actions for see bio and send mail to the author of comment #}
             {% if comment.command != 'game' %}
                 {% set bioLink = ('bio.php?char=' ~ comment.author ~ '&ret=' ~ returnLink|e('url'))|lotgd_url %}
-                {% set bioLabel = 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') %}
-                {% set mailLabel = 'form.button.mail'|tl({'name': comment.authorName|uncolorize|trim}, 'app-commentary') %}
+                {% set bioLabel = 'form.button.bio'|tl({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
+                {% set mailLabel = 'form.button.mail'|tl({'name': comment.authorName|uncolorize|trim}, 'app_commentary') %}
 
                 <div class="actions">
                     <a class="ui mini blue icon button" aria-label="{{ bioLabel }}" data-tooltip="{{ bioLabel }}" href="{{ bioLink }}">
@@ -224,14 +224,14 @@
     {# Show comments (new comment included) #}
     <div class="ui minimal small comments">
         <form action="{{ formUrl|lotgd_url }}" method="POST" autocomplete="off">
-            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app_commentary')|uncolorize }}</button>
             {% for section, comment in comments|reverse %}
                 <h5 class="ui dividing header">{{ sections[section]|default(section)  }}</h5>
                 {% for com in comment %}
                     {{ display_one_comment(com, textDomain, commentary) }}
                 {% endfor %}
             {% endfor %}
-            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app-commentary')|uncolorize }}</button>
+            <button type="submit" name="hidde" class="ui button">{{ 'form.button.hide'|tl(null, 'app_commentary')|uncolorize }}</button>
         </form>
     </div>
 

@@ -42,7 +42,7 @@
         <div class="header item">{{ label }}</div>
     {% endif %}
     <div class="right floated header item">
-        <span class="ui red text" id="show-hidde-info-note-form-{{ formId }}">{{ 'show.hide.note.info'|tst('app-form') }}</span>
+        <span class="ui red text" id="show-hidde-info-note-form-{{ formId }}">{{ 'show.hide.note.info'|tst('app_form') }}</span>
     </div>
 </div>
 
@@ -62,7 +62,7 @@
                             {{ label|e('html') }}
 
                             {% if tab.has_error %}
-                                {% set errorText = 'fieldset.has.error'|tst('app-form') %}
+                                {% set errorText = 'fieldset.has.error'|tst('app_form') %}
                                 <span data-tooltip="{{ errorText }}" aria-label="{{ errorText }}">
                                     <i aria-hidden="true" class="red times icon"></i>
                                 </span>

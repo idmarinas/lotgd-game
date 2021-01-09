@@ -111,7 +111,7 @@ if (
 
     $response = new \Jaxon\Response\Response();
 
-    $response->dialog->warning(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+    $response->dialog->warning(\LotgdTranslator::t('session.timeout', [], 'app_default'));
 
     return $response;
 }

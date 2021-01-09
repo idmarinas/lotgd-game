@@ -39,7 +39,7 @@ else
 {
     do_forced_nav(false, false);
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('redirect.module.unactive', [], 'app-default'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('redirect.module.unactive', [], 'app_default'));
 
     if ($session['user']['loggedin'])
     {

@@ -48,7 +48,7 @@ $ranks = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
 $ranks = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $target['clanid']]);
 
-$args = ['' => \LotgdTranslator::t('character.specialtyname', [], 'app-default')];
+$args = ['' => \LotgdTranslator::t('character.specialtyname', [], 'app_default')];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_SPECIALTY_NAMES, null, $args);
 $specialties = modulehook('specialtynames', $args);
 

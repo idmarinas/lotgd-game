@@ -105,7 +105,7 @@ trait Report
                     'class' => 'ui green approve button',
                 ],
                 [
-                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
+                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                     'class' => 'ui red deny button',
                 ],
             ];
@@ -127,7 +127,7 @@ trait Report
         {
             Debugger::log($th);
 
-            $response->dialog->error(\LotgdTranslator::t('flash.message.error', [], 'app-default'));
+            $response->dialog->error(\LotgdTranslator::t('flash.message.error', [], 'app_default'));
             $response->jQuery('.ui.report.button')->removeClass('loading disabled');
         }
 

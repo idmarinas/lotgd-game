@@ -62,7 +62,7 @@
 //Miscellaneous
 \defined('INT_MAX') || \define('INT_MAX', 4294967295);
 
-\defined('RACE_UNKNOWN') || \define('RACE_UNKNOWN', 'app-unknown');
+\defined('RACE_UNKNOWN') || \define('RACE_UNKNOWN', 'app_unknown');
 
 //Character Deletion Types
 \defined('CHAR_DELETE_AUTO')   || \define('CHAR_DELETE_AUTO', 1);

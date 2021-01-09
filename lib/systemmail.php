@@ -59,7 +59,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
 
         $mailSubject = \LotgdTranslator::t('notificationmail.subject', [
             'subject' => $subject,
-        ], 'app-mail');
+        ], 'app_mail');
 
         $mailMessage = \LotgdTranslator::t('notificationmail.body', [
             'subject'      => $subject,
@@ -67,7 +67,7 @@ function systemmail($to, $subject, $body, $from = 0, $noemail = false)
             'receivername' => $toline,
             'body'         => $body,
             'gameurl'      => \LotgdRequest::getServer('REQUEST_SCHEME').'://'.\LotgdRequest::getServer('SERVER_NAME'),
-        ], 'app-mail');
+        ], 'app_mail');
 
         lotgd_mail($accountEntityTo->getEmailaddress(), \LotgdSanitize::fullSanitize($mailSubject), \LotgdFormat::colorize($mailMessage, true));
     }

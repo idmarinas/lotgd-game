@@ -21,9 +21,9 @@ function do_forced_nav($anonymous, $overrideforced)
         if ( ! $account)
         {
             $session            = [];
-            $session['message'] = \LotgdTranslator::t('session.login.incorrect', [], 'app-default');
+            $session['message'] = \LotgdTranslator::t('session.login.incorrect', [], 'app_default');
 
-            return redirect('home.php', \LotgdTranslator::t('session.login.account.disappeared', [], 'app-default'));
+            return redirect('home.php', \LotgdTranslator::t('session.login.account.disappeared', [], 'app_default'));
         }
 
         $session['user']                = $account;
@@ -34,9 +34,9 @@ function do_forced_nav($anonymous, $overrideforced)
         {
             $session = [];
 
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app_default'));
 
-            return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
+            return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app_default'));
         }
 
         if (($session['user']['allowednavs'][$requestUri] ?? false) && true !== $overrideforced)
@@ -45,13 +45,13 @@ function do_forced_nav($anonymous, $overrideforced)
         }
         elseif (true !== $overrideforced)
         {
-            return redirect('badnav.php', \LotgdTranslator::t('session.login.account.notAllowed', ['uri' => $requestUri], 'app-default'));
+            return redirect('badnav.php', \LotgdTranslator::t('session.login.account.notAllowed', ['uri' => $requestUri], 'app_default'));
         }
     }
     elseif ( ! $anonymous)
     {
-        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+        \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app_default'));
 
-        return redirect('home.php', \LotgdTranslator::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app-default'));
+        return redirect('home.php', \LotgdTranslator::t('session.login.anonymous.notLogged', ['uri' => $requestUri], 'app_default'));
     }
 }

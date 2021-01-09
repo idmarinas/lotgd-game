@@ -20,9 +20,9 @@ function redirect($location, $reason = false)
         $content = \LotgdTranslator::t('redirect.badnav.content', [
             'locationUrl' => $location,
             'petitionUrl' => 'petition.php',
-        ], 'app-default');
+        ], 'app_default');
 
-        \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app-default');
+        \LotgdResponse::pageTitle('redirect.badnav.title', [], 'app_default');
         \LotgdTheme::getTemplateParams()->set('content', \LotgdFormat::colorize($content, true));
 
         $session['output'] = \LotgdTheme::renderLayout(\LotgdTheme::getTemplateParams()->toArray());
@@ -33,7 +33,7 @@ function redirect($location, $reason = false)
         'locationTo'   => $location,
         'locationFrom' => \LotgdRequest::getServer('REQUEST_URI'),
         'reason'       => $reason,
-    ], 'app-default');
+    ], 'app_default');
     saveuser();
 
     $host = \LotgdRequest::getServer('HTTP_HOST');
@@ -50,7 +50,7 @@ function redirect($location, $reason = false)
 
     // we should never hit this one here. in case we do, show the debug output along with some text
     // this might be the case if your php session handling is messed up or something.
-    // echo \LotgdTranslator::t('redirect.whoops', [], 'app-default');
+    // echo \LotgdTranslator::t('redirect.whoops', [], 'app_default');
     // echo $session['debug'];
 
     exit();

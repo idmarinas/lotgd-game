@@ -23,14 +23,14 @@ trait CanInstall
         //-- Can't install it: is the same version
         if (\Lotgd\Core\Application::VERSION_NUMBER == $version)
         {
-            $this->cantInstallMessage = \LotgdTranslator::t('canInstall.version.same', [], 'app-installer');
+            $this->cantInstallMessage = \LotgdTranslator::t('canInstall.version.same', [], 'app_installer');
 
             return false;
         }
         //-- This new system can only upgrade from version 3.0.0 IDMarinas Edition
         elseif ($version < 30000)
         {
-            $this->cantInstallMessage = \LotgdTranslator::t('canInstall.version.less', [], 'app-installer');
+            $this->cantInstallMessage = \LotgdTranslator::t('canInstall.version.less', [], 'app_installer');
 
             return false;
         }

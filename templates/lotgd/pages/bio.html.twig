@@ -25,14 +25,14 @@
 {{ 'bio.race'|trans({ 'race': 'character.racename'|tl(null, character.race|default(RACE_UNKNOWN)) })|colorize }}
 {{ 'bio.gender'|trans({ 'sex': character.sex })|colorize }}
 {{ 'bio.specialty'|trans({ 'specialty': specialties[character.specialty] })|colorize }}
-{{ 'bio.creature'|trans({ 'mount': character.mountname|default('character.mount'|tl(null, 'app-default')) })|colorize }}
+{{ 'bio.creature'|trans({ 'mount': character.mountname|default('character.mount'|tl(null, 'app_default')) })|colorize }}
 
 {% set result = modulehook('biostat', { 'target': character, 'messages': {} }) %}
 {% for message in result.messages %}
     {{ message[0]|tl(message[1], message[2])|colorize }}
 {% endfor %}
 
-{{ 'bio.bio'|trans({ 'bio': character.bio|default('character.bio'|tl(null, 'app-default'))|censor|colorize })|colorize }}
+{{ 'bio.bio'|trans({ 'bio': character.bio|default('character.bio'|tl(null, 'app_default'))|censor|colorize })|colorize }}
 
 {{ 'bio.news'|trans({'character': character.name})|colorize }}
 <br>

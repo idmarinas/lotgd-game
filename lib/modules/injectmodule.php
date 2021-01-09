@@ -39,7 +39,7 @@ function injectmodule($modulename, $force = false)
             //or doesn't meet the prerequisites.
             if ( ! $row)
             {
-                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', ['module' => $modulename], 'app-default'));
+                \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.uninstalled', ['module' => $modulename], 'app_default'));
 
                 $injected_modules[$force][$modulename] = false;
 
@@ -48,7 +48,7 @@ function injectmodule($modulename, $force = false)
 
             if ($row && ! $row->getActive())
             {
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', ['module' => $modulename], 'app-default'));
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.unactive', ['module' => $modulename], 'app_default'));
 
                 $injected_modules[$force][$modulename] = false;
 
@@ -79,7 +79,7 @@ function injectmodule($modulename, $force = false)
             if ( ! module_check_requirements($info['requires']))
             {
                 $injected_modules[$force][$modulename] = false;
-                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', ['module' => $modulename], 'app-default'));
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('flash.message.module.requisites', ['module' => $modulename], 'app_default'));
 
                 return false;
             }
@@ -132,7 +132,7 @@ function injectmodule($modulename, $force = false)
         return true;
     }
 
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.unfound', ['module' => $modulename], 'app-default'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('flash.message.module.unfound', ['module' => $modulename], 'app_default'));
     $injected_modules[$force][$modulename] = false;
 
     return false;

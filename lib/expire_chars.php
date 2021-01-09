@@ -126,11 +126,11 @@ foreach ($result as $entity)
 {
     $prefs = $entity->getPrefs();
 
-    $subject = \LotgdTranslator::t('expirationnotice.subject', [], 'app-mail', $prefs['language'] ?? null);
+    $subject = \LotgdTranslator::t('expirationnotice.subject', [], 'app_mail', $prefs['language'] ?? null);
     $message = \LotgdTranslator::t('expirationnotice.body', [
         'charname' => $entity->getLogin(),
         'server'   => $server,
-    ], 'app-mail', $prefs['language'] ?? null);
+    ], 'app_mail', $prefs['language'] ?? null);
 
     lotgd_mail($entity->getEmailaddress(), $subject, $message);
 

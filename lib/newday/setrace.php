@@ -36,7 +36,7 @@ $params['tpl'] = 'race';
 
 $params['isAdmin'] = ($session['user']['superuser'] & (SU_MEGAUSER | SU_MANAGE_MODULES));
 
-$session['user']['race'] = 'app-default'; // Default race
+$session['user']['race'] = 'app_default'; // Default race
 
 \LotgdNavigation::addNav('nav.continue', "newday.php?continue=1{$resline}");
 

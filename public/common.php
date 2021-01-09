@@ -53,7 +53,7 @@ if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_
 
     \defined('DB_NODB') || \define('DB_NODB', true);
 
-    \LotgdResponse::pageStart('title.install', [], 'app-common');
+    \LotgdResponse::pageStart('title.install', [], 'app_common');
 
     \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
 
@@ -71,7 +71,7 @@ elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1'
 {
     \define('NO_SAVE_USER', true);
 
-    \LotgdResponse::pageStart('title.upgrade', [], 'app-common');
+    \LotgdResponse::pageStart('title.upgrade', [], 'app_common');
 
     \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
 
@@ -99,7 +99,7 @@ if ( ! IS_INSTALLER && \file_exists('public/installer.php')
     && 'cli' != substr(php_sapi_name(), 0, 3)
 ) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
-    \LotgdResponse::pageStart('title.security', [], 'app-common');
+    \LotgdResponse::pageStart('title.security', [], 'app_common');
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
@@ -112,7 +112,7 @@ if ( ! \defined('IS_INSTALLER') && ! DB_CONNECTED)
 {
     \defined('DB_NODB') || \define('DB_NODB', true);
 
-    \LotgdResponse::pageStart('title.security', [], 'app-common');
+    \LotgdResponse::pageStart('title.security', [], 'app_common');
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
@@ -129,9 +129,9 @@ if (isset($session['lasthit'], $session['loggedin']) && \strtotime('-'.getsettin
     // sent to the fields.
     $session = [];
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app-default'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('session.timeout', [], 'app_default'));
 
-    return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app-default'));
+    return redirect('home.php', \LotgdTranslator::t('session.login.account.notLogged', [], 'app_default'));
 }
 $session['lasthit'] = \strtotime('now');
 
@@ -143,8 +143,8 @@ do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 //-- Check if have a full maintenance mode activate force to log out all players
 if (getsetting('fullmaintenance', 0))
 {
-    $title   = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app-default');
-    $message = \LotgdTranslator::t('maintenance.server.closed.message', [], 'app-default');
+    $title   = \LotgdTranslator::t('maintenance.server.closed.title', [], 'app_default');
+    $message = \LotgdTranslator::t('maintenance.server.closed.message', [], 'app_default');
 
     \LotgdFlashMessages::addErrorMessage([
         'header'     => $title,
@@ -179,12 +179,12 @@ if (getsetting('fullmaintenance', 0))
 //-- Check if have a maintenance mode that players cannot login anymore and show a message to log out immediateley at a safe location.
 elseif (getsetting('maintenance', 0))
 {
-    $title   = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app-default');
-    $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app-default');
+    $title   = \LotgdTranslator::t('maintenance.server.warning.title', [], 'app_default');
+    $message = \LotgdTranslator::t('maintenance.server.warning.message', [], 'app_default');
 
     if ($session['user']['loggedin'])
     {
-        $message .= \LotgdTranslator::t('maintenance.server.warning.loggedin', [], 'app-default');
+        $message .= \LotgdTranslator::t('maintenance.server.warning.loggedin', [], 'app_default');
     }
 
     \LotgdFlashMessages::addWarningMessage([
@@ -346,7 +346,7 @@ if ($session['user']['superuser'] & SU_MEGAUSER)
 //Server runs in Debug mode, tell the superuser about it
 if (getsetting('debug', 0) && SU_EDIT_CONFIG == ($session['user']['superuser'] & SU_EDIT_CONFIG))
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('maintenance.debug.mode', [], 'app-default'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('maintenance.debug.mode', [], 'app_default'));
 }
 
 // WARNING:

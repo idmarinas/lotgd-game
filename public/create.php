@@ -187,7 +187,7 @@ elseif ('forgot' == $op)
 
         $language = ($account->getPrefs()['language'] ?? '') ?: getsetting('defaultlanguage', 'en');
 
-        $subj = \LotgdTranslator::t('forgotpassword.subject', [], 'app-mail', $language);
+        $subj = \LotgdTranslator::t('forgotpassword.subject', [], 'app_mail', $language);
         $msg = \LotgdTranslator::t('forgotpassword.body', [
             'login' => $account->getLogin(),
             'acctid' => $account->getAcctid(),
@@ -195,7 +195,7 @@ elseif ('forgot' == $op)
             'requester_ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
             'gameurl' => '//'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
             'forgottenid' => $account->getForgottenpassword(),
-        ], 'app-mail', $language);
+        ], 'app_mail', $language);
 
         lotgd_mail($account->getEmailaddress(), $subj, \LotgdFormat::colorize($msg, true));
 
@@ -383,14 +383,14 @@ elseif ('create' == $op)
 
         if ('' != $emailverification)
         {
-            $subj = \LotgdTranslator::t('verificationmail.subject', [], 'app-mail');
+            $subj = \LotgdTranslator::t('verificationmail.subject', [], 'app_mail');
             $msg = \LotgdTranslator::t('verificationmail.body', [
                 'login' => $shortname,
                 'acctid' => $accountEntity->getAcctid(),
                 'emailaddress' => $accountEntity->getEmailaddress(),
                 'gameurl' => 'https://'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
                 'validationid' => $emailverification,
-            ], 'app-mail');
+            ], 'app_mail');
 
             lotgd_mail($email, $subj, \LotgdFormat::colorize($msg, true));
 

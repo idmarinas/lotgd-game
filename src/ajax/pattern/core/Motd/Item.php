@@ -49,7 +49,7 @@ trait Item
                     'class' => 'ui green approve button',
                 ],
                 [
-                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
+                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                     'class' => 'ui red deny button',
                 ],
             ];
@@ -154,7 +154,7 @@ trait Item
                     'class' => 'ui green approve button',
                 ],
                 [
-                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app-default'),
+                    'title' => \LotgdTranslator::t('modal.buttons.cancel', [], 'app_default'),
                     'class' => 'ui red deny button',
                 ],
             ];

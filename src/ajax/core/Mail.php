@@ -60,7 +60,7 @@ class Mail extends AjaxAbstract
         $response->html('ye-olde-mail-count-text', \LotgdTranslator::t('parts.mail.title', [
             'new' => $result['notSeenCount'],
             'old' => $result['seenCount'],
-        ], 'app-default'));
+        ], 'app_default'));
 
         return $response;
     }
