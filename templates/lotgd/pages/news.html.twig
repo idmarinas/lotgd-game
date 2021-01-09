@@ -1,4 +1,4 @@
-{% translate_default_domain 'page-news' %}
+{% translate_default_domain 'page_news' %}
 
 {% use '{theme}/_blocks/_motd.html.twig' %}
 
@@ -16,12 +16,12 @@
 {% endblock news_last_motd %}
 
 {% if result.count() <= 1 %}
-    {{ 'list.title'|t({'d': date})|colorize }}
+    {{ 'list.title'|trans({'d': date})|colorize }}
 {% else %}
-    {{ 'list.title'|t({'d': date, 'n': result.count()})|colorize }}
+    {{ 'list.title'|trans({'d': date, 'n': result.count()})|colorize }}
 {% endif %}
 
-{% set del = 'list.del'|t %}
+{% set del = 'list.del'|trans %}
 {% for news in result %}
     {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
 
@@ -34,7 +34,7 @@
     </div>
 {% else %}
     {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}
-    {{ 'list.notFound'|t|colorize }}
+    {{ 'list.notFound'|trans|colorize }}
 {% endfor %}
 
 {{ '`c`2-=-`@=-=`2-=-`@=-=`2-=-`@=-=`2-=-`0´c'|colorize }}

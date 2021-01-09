@@ -8,7 +8,7 @@ require_once 'lib/dhms.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'grotto-debug';
+$textDomain = 'grotto_debug';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

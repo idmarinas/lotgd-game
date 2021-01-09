@@ -58,6 +58,6 @@ function select_deathmessage($zone = 'forest', $extraParams = []): array
     return [
         'deathmessage' => $deathmessage,
         'params'       => $params,
-        'textDomain'   => 'partial-deathmessage',
+        'textDomain'   => 'partial_deathmessage',
     ];
 }

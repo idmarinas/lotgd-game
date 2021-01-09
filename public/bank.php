@@ -6,7 +6,7 @@
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 
-$result = modulehook('bank-text-domain', ['textDomain' => 'page-bank', 'textDomainNavigation' => 'navigation-bank']);
+$result = modulehook('bank-text-domain', ['textDomain' => 'page_bank', 'textDomainNavigation' => 'navigation_bank']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 

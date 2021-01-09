@@ -4,7 +4,7 @@
     {% include tpl with params %}
 {% endfor %}
 
-{{ 'paragraph'|t({ 'clock': gametime() })|colorize }}
+{{ 'paragraph'|trans({ 'clock': gametime() })|colorize }}
 
 {% for tpl, params in includeTemplatesPost %}
     {% include tpl with params %}

@@ -5,5 +5,5 @@
 {{ block('stables_' ~ tpl|default('default')) }}
 
 {% if confirm == 0 and user.hashorse %}
-    {{ 'section.offer'|t(_context)|colorize }}
+    {{ 'section.offer'|trans(_context)|colorize }}
 {% endif %}

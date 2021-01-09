@@ -2,23 +2,23 @@
 
 <div class="ui buttons">
     <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.write('{{ petition.acctid }}')" class="ui button">
-        {{ 'section.view.write'|t|uncolorize }}
+        {{ 'section.view.write'|trans|uncolorize }}
     </a>
 </div>
 
-<h2>{{ 'section.view.category'|t({ 'category': petition.body.problem_type })|colorize }}</h2>
+<h2>{{ 'section.view.category'|trans({ 'category': petition.body.problem_type })|colorize }}</h2>
 
-{{ 'section.view.from'|t({ 'name': petition.authorName })|colorize }}
+{{ 'section.view.from'|trans({ 'name': petition.authorName })|colorize }}
 
-{{ 'section.view.date'|t({ 'date': petition.date, 'relative': petition.date|relative_date })|colorize }}
+{{ 'section.view.date'|trans({ 'date': petition.date, 'relative': petition.date|relative_date })|colorize }}
 
-{{ 'section.view.status'|t({ 'status': statuses[petition.status]|t })|colorize }}
+{{ 'section.view.status'|trans({ 'status': statuses[petition.status]|trans })|colorize }}
 
 {% if petition.closedate.getTimestamp %}
-    {{ 'section.view.close.date'|t({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
+    {{ 'section.view.close.date'|trans({ 'name': petition.closerName, 'date': petition.closedate, 'relative': petition.closedate|relative_date })|colorize }}
 {% endif %}
 
-{{ 'section.view.body'|t|colorize }}
+{{ 'section.view.body'|trans|colorize }}
 <table class="ui very compact very basic table">
     <tr>
         <td class="collapsing right aligned">{{ '`$[ipaddress]`0'|colorize }}</td>
@@ -43,6 +43,6 @@
 }, textDomain) }}
 
 {% if viewPageInfo %}
-    {{ 'section.view.page.info'|t|colorize }}
+    {{ 'section.view.page.info'|trans|colorize }}
     <pre style="background-color: white;">{{ var_dump(petition.pageinfo)|highlight_string }}</pre>
 {% endif %}

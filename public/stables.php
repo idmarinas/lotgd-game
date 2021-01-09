@@ -8,7 +8,7 @@ require_once 'lib/buffs.php';
 
 // Don't hook on to this text for your standard modules please, use "stable" instead.
 // This hook is specifically to allow modules that do other stables to create ambience.
-$result = modulehook('stables-text-domain', ['textDomain' => 'page-stables', 'textDomainNavigation' => 'navigation-stables']);
+$result = modulehook('stables-text-domain', ['textDomain' => 'page_stables', 'textDomainNavigation' => 'navigation_stables']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

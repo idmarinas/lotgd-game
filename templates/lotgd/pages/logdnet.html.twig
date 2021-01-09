@@ -1,22 +1,22 @@
-{% translate_default_domain 'page-logdnet' %}
+{% translate_default_domain 'page_logdnet' %}
 
-{{ 'description.paragraph'|t|colorize }}
+{{ 'description.paragraph'|trans|colorize }}
 
-{{ 'description.ban.title'|t|colorize }}
+{{ 'description.ban.title'|trans|colorize }}
 <ul>
-    <li>{{ 'description.ban.reason.00'|t|colorize }}</li>
-    <li>{{ 'description.ban.reason.01'|t|colorize }}</li>
-    <li>{{ 'description.ban.reason.02'|t|colorize }}</li>
-    <li>{{ 'description.ban.reason.03'|t|colorize }}</li>
+    <li>{{ 'description.ban.reason.00'|trans|colorize }}</li>
+    <li>{{ 'description.ban.reason.01'|trans|colorize }}</li>
+    <li>{{ 'description.ban.reason.02'|trans|colorize }}</li>
+    <li>{{ 'description.ban.reason.03'|trans|colorize }}</li>
 </ul>
-{{ 'description.ban.other'|t|colorize }}
-{{ 'description.ban.paragraph'|t|colorize }}
+{{ 'description.ban.other'|trans|colorize }}
+{{ 'description.ban.paragraph'|trans|colorize }}
 
 <table class="ui very compact striped selected table">
     <thead>
         <tr>
-            <th scope="col">{{ 'servers.server'|t }}</th>
-            <th scope="col">{{ 'servers.version'|t }}</th>
+            <th scope="col">{{ 'servers.server'|trans }}</th>
+            <th scope="col">{{ 'servers.version'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
             <tr>
                 <td>
                     <a href="{{ server.address|escape('html_attr') }}" target="_blank" rel="noopener noreferrer">
-                        {{ server.description|default('servers.noDescription'|t)|e('html')|replace({'`&amp;' : '`&'})|colorize }}
+                        {{ server.description|default('servers.noDescription'|trans)|e('html')|replace({'`&amp;' : '`&'})|colorize }}
                     </a>
                 </td>
                 <td class="collapsing">
@@ -33,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">{{ 'servers.notFound'|t|colorize }}</td>
+                <td colspan="2">{{ 'servers.notFound'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

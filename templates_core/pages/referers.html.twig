@@ -3,11 +3,11 @@
 <table class="ui structured very compact striped table">
     <thead>
         <tr>
-            <th scope="col">{{ 'table.thead.count'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.last'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.url'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.dest'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.ip'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.count'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.last'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.url'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.dest'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.ip'|trans|uncolorize }}</th>
         </tr>
     </thead>
     {% for site, row in paginator %}
@@ -15,7 +15,7 @@
             <tr>
                 <th scope="col">{{ row.data.total|numeral }}</th>
                 <th scope="col" class="collapsing">{{ row.data.recent|relative_date }}</th>
-                <th scope="col">{{ site|default('table.tbody.none'|t)|colorize }}</th>
+                <th scope="col">{{ site|default('table.tbody.none'|trans)|colorize }}</th>
                 <th scope="col" colspan="2"></th>
             </tr>
         </thead>
@@ -25,8 +25,8 @@
                     <td>{{ data.count|numeral }}</td>
                     <td>{{ data.last|relative_date }}</td>
                     <td>{{ data.uri }}</td>
-                    <td>{{ data.dest|default('table.tbody.no.set'|t)|colorize }}</td>
-                    <td>{{ data.ip|default('table.tbody.no.set'|t)|colorize }}</td>
+                    <td>{{ data.dest|default('table.tbody.no.set'|trans)|colorize }}</td>
+                    <td>{{ data.ip|default('table.tbody.no.set'|trans)|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -34,5 +34,5 @@
 </table>
 
 <div class="ui message warning">
-    {{ 'message.warning'|t|colorize }}
+    {{ 'message.warning'|trans|colorize }}
 </div>

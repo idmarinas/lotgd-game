@@ -9,7 +9,7 @@ require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "graveyard" instead.
 // This hook is specifically to allow modules that do other graveyards to create ambience.
-$result = modulehook('graveyard-text-domain', ['textDomain' => 'page-graveyard', 'textDomainNavigation' => 'navigation-graveyard']);
+$result = modulehook('graveyard-text-domain', ['textDomain' => 'page_graveyard', 'textDomainNavigation' => 'navigation_graveyard']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

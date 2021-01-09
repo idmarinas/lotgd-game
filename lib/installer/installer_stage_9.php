@@ -25,7 +25,7 @@ if ( ! $session['installer']['dbinfo']['upgrade'])
 
 if (false === $installer->canInstall() && $installer->isUpgrade())
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage9.unableUpgrade', ['version' => \Lotgd\Core\Application::VERSION], 'page-installer'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage9.unableUpgrade', ['version' => \Lotgd\Core\Application::VERSION], 'page_installer'));
     \LotgdFlashMessages::addWarningMessage($installer->getFailInstallMessage());
 
     return redirect('home.php');

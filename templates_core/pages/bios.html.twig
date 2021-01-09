@@ -1,15 +1,15 @@
 {% translate_default_domain textDomain %}
 
 <div class="ui top attached header">
-    {{ 'player.bios.unblocked'|t|colorize }}
+    {{ 'player.bios.unblocked'|trans|colorize }}
 </div>
 <div class="ui warning attached message">
-    {{ 'message.uncesored'|t|colorize }}
+    {{ 'message.uncesored'|trans|colorize }}
 </div>
 
-{% set recent = 'recent'|t %}
-{% set setblock = 'block'|t %}
-{% set setunblock = 'unblock'|t %}
+{% set recent = 'recent'|trans %}
+{% set setblock = 'block'|trans %}
+{% set setunblock = 'unblock'|trans %}
 
 {% for row in unblocked %}
     <div class="ui {{ loop.last ? 'bottom attached' : 'attached' }} segment">
@@ -26,10 +26,10 @@
 <br>
 
 <div class="ui top attached header">
-    {{ 'player.bios.blocked'|t|colorize }}
+    {{ 'player.bios.blocked'|trans|colorize }}
 </div>
 <div class="ui warning {{ blocked|length ?: 'bottom' }} attached message">
-    {{ 'message.cesored'|t|colorize }}
+    {{ 'message.cesored'|trans|colorize }}
 </div>
 
 {% for row in blocked %}

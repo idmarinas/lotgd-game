@@ -167,12 +167,12 @@ trait CoreFilter
      *
      * @return text
      */
-    public function affirmationNegation($value, $yes = 'adverb.yes', $no = 'adverb.no', $textDomain = 'app-common')
+    public function affirmationNegation($value, $yes = 'adverb.yes', $no = 'adverb.no', $textDomain = 'app_common')
     {
         $value = (int) $value;
 
         $text = 0 == $value ? $no : $yes;
 
-        return $this->getTranslator()->trans($text, [], $textDomain);
+        return $this->symfonyTranslator()->trans($text, [], $textDomain);
     }
 }

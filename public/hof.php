@@ -13,7 +13,7 @@ checkday();
 
 // Don't hook on to this text for your standard modules please, use "hof" instead.
 // This hook is specifically to allow modules that do other hofs to create ambience.
-$result = modulehook('hof-text-domain', ['textDomain' => 'page-hof', 'textDomainNavigation' => 'navigation-hof']);
+$result = modulehook('hof-text-domain', ['textDomain' => 'page_hof', 'textDomainNavigation' => 'navigation_hof']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

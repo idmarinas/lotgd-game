@@ -12,7 +12,7 @@ check_su_access(SU_EDIT_MOUNTS);
 
 $repository = \Doctrine::getRepository(\Lotgd\Core\Entity\Companions::class);
 
-$textDomain = 'grotto-companions';
+$textDomain = 'grotto_companions';
 $hydrator = new \Laminas\Hydrator\ClassMethodsHydrator();
 
 $params = [

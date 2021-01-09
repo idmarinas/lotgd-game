@@ -1,19 +1,19 @@
-{% translate_default_domain 'page-installer' %}
+{% translate_default_domain 'page_installer' %}
 
-{{ 'stage7.subtitle'|t|colorize }}
-{{ 'stage7.paragraph'|t|colorize }}
+{{ 'stage7.subtitle'|trans|colorize }}
+{{ 'stage7.paragraph'|trans|colorize }}
 
 <form action="installer.php?stage=7" method="POST" class="ui form">
     <div class="ui grid">
         <div class="middle aligned two wide column">
-            <label id="labelText">{{ 'stage7.form.label.label'|t|colorize }}</label>
+            <label id="labelText">{{ 'stage7.form.label.label'|trans|colorize }}</label>
         </div>
         <div class="fourteen wide column">
             <div class="grouped fields">
                 <div class="inline field">
                     <div class="ui toggle radio checkbox">
                         <input id="upgrade" type="radio" value="upgrade" name="type" {{ upgrade ? 'checked' : '' }}>
-                        <label for="upgrade">{{ 'stage7.form.label.upgrade'|t|colorize }}</label>
+                        <label for="upgrade">{{ 'stage7.form.label.upgrade'|trans|colorize }}</label>
                     </div>
                     <select name="version" id="version" class="ui search lotgd dropdown">
                         {% for name, key in lotgdVersions %}
@@ -24,11 +24,11 @@
                 <div class="field">
                     <div class="ui toggle radio checkbox">
                         <input id="install" type='radio' value='install' name='type'  {{ upgrade ? '' : 'checked' }}>
-                        <label for="install">{{ 'stage7.form.label.install'|t|colorize }}</label>
+                        <label for="install">{{ 'stage7.form.label.install'|trans|colorize }}</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="field"><button type="submit" class="ui button">{{ 'stage7.form.submit'|t|uncolorize }}</button></div>
+    <div class="field"><button type="submit" class="ui button">{{ 'stage7.form.submit'|trans|uncolorize }}</button></div>
 </form>

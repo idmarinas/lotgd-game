@@ -6,7 +6,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_USERS);
 
-$textDomain = 'grotto-titleedit';
+$textDomain = 'grotto_titleedit';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

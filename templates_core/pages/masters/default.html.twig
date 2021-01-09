@@ -1,15 +1,15 @@
 {% translate_default_domain textDomain %}
 
-{% set options = {'text': 'section.default.table.tbody.confirm.del'|t|uncolorize }|json_encode %}
+{% set options = {'text': 'section.default.table.tbody.confirm.del'|trans|uncolorize }|json_encode %}
 <table class="ui very compact striped table">
     <thead>
         <tr>
-            <th scope="col">{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.level'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.weapon'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.win'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.lose'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.level'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.weapon'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.win'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.lose'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
@@ -17,8 +17,8 @@
             <tr>
                 <td>
                     <div class="ui mini icon buttons">
-                        <a data-tooltip="{{ 'section.default.table.tbody.edit'|t|uncolorize }}" href="{{ ('masters.php?op=edit&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui icon button"><i class="edit icon"></i></a>
-                        <a data-tooltip="{{ 'section.default.table.tbody.del'|t|uncolorize }}" href="{{ ('masters.php?op=del&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui red icon button" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
+                        <a data-tooltip="{{ 'section.default.table.tbody.edit'|trans|uncolorize }}" href="{{ ('masters.php?op=edit&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui icon button"><i class="edit icon"></i></a>
+                        <a data-tooltip="{{ 'section.default.table.tbody.del'|trans|uncolorize }}" href="{{ ('masters.php?op=del&master_id=' ~ master.creatureid)|lotgd_url }}" class="ui red icon button" onclick="Lotgd.confirm(this, event)" data-options="{{ options|e('html_attr') }}">
                             <i class="trash icon"></i>
                         </a>
                     </div>
@@ -31,10 +31,10 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">{{ 'section.default.table.tbody.not.found'|t|colorize }}</td>
+                <td colspan="6">{{ 'section.default.table.tbody.not.found'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-{{ 'section.default.paragraph'|t|colorize }}
+{{ 'section.default.paragraph'|trans|colorize }}

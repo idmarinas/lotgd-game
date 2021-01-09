@@ -7,7 +7,7 @@ require_once 'common.php';
 
 // Don't hook on to this text for your standard modules please, use "healer" instead.
 // This hook is specifically to allow modules that do other healers to create ambience.
-$result = modulehook('healer-text-domain', ['textDomain' => 'page-healer', 'textDomainNavigation' => 'navigation-healer']);
+$result = modulehook('healer-text-domain', ['textDomain' => 'page_healer', 'textDomainNavigation' => 'navigation_healer']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

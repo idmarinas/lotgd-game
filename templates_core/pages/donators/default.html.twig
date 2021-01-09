@@ -3,9 +3,9 @@
 <table class="ui very compact striped selectable table">
     <thead>
         <tr>
-            <th scope="col">{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.points'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.spent'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.points'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.spent'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
             </tr>
         {% else %}
             <tr>
-                <td class="center aligned" colspan="3">{{ 'section.default.table.tbody.no.found'|t|colorize }}</td>
+                <td class="center aligned" colspan="3">{{ 'section.default.table.tbody.no.found'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

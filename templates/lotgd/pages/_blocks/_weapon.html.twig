@@ -3,27 +3,27 @@
 {% block weapon_buy %}
     {% if result %}
         {% if buyIt %}
-            {{ 'payweapon'|t(_context|merge({'playerWeapon': userPre.weapon, 'weaponName': result.weaponname}))|colorize }}
+            {{ 'payweapon'|trans(_context|merge({'playerWeapon': userPre.weapon, 'weaponName': result.weaponname}))|colorize }}
         {% else %}
-            {{ 'notenoughgold'|t(_context|merge({'weaponName': result.weaponname}))|colorize }}
+            {{ 'notenoughgold'|trans(_context|merge({'weaponName': result.weaponname}))|colorize }}
         {% endif %}
     {% else %}
-        {{ 'nosuchweapon'|t(_context)|colorize }}
-        {{ 'tryagain'|t(_context)|colorize }}
+        {{ 'nosuchweapon'|trans(_context)|colorize }}
+        {{ 'tryagain'|trans(_context)|colorize }}
     {% endif %}
 {% endblock weapon_buy %}
 
 {% block weapon_default %}
-    {{ 'description'|t(_context|merge({'sex': user.sex }))|colorize }}
+    {{ 'description'|trans(_context|merge({'sex': user.sex }))|colorize }}
 
-    {{ 'trade.in'|t(_context|merge({'weaponName': user.weapon, 'value': tradeinvalue}))|colorize }}
+    {{ 'trade.in'|trans(_context|merge({'weaponName': user.weapon, 'value': tradeinvalue}))|colorize }}
 
     <table class='ui very compact striped selectable table'>
         <thead>
             <tr>
-                <th scope="col">{{ 'Name'|t }}</th>
-                <th scope="col">{{ 'Damage'|t }}</th>
-                <th scope="col">{{ 'Cost'|t }}</th>
+                <th scope="col">{{ 'Name'|trans }}</th>
+                <th scope="col">{{ 'Damage'|trans }}</th>
+                <th scope="col">{{ 'Cost'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="3">{{ 'Not found any weapon'|t }}</td></tr>
+                <tr><td colspan="3">{{ 'Not found any weapon'|trans }}</td></tr>
             {% endfor %}
         </tbody>
     </table>

@@ -186,7 +186,7 @@ elseif ('net' == $op)
 else
 {
     //-- Init page
-    \LotgdResponse::pageStart('title', [], 'page-logdnet');
+    \LotgdResponse::pageStart('title', [], 'page_logdnet');
 
     \LotgdNavigation::addHeader('common.category.login');
     \LotgdNavigation::addNav('common.nav.login', 'index.php');

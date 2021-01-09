@@ -2,7 +2,7 @@
 
 {% block forest_default %}
     {% if showForestMessage %}
-        {{ 'section.default.description'|t|colorize }}
+        {{ 'section.default.description'|trans|colorize }}
 
         {% set result = modulehook('forest-desc') %}
         {% for message in result %}
@@ -16,5 +16,5 @@
 {% endblock forest_default %}
 
 {% block forest_dragon %}
-    {{ 'section.dragon.description'|t({ 'partner': partner })|colorize }}
+    {{ 'section.dragon.description'|trans({ 'partner': partner })|colorize }}
 {% endblock forest_dragon %}

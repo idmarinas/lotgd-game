@@ -108,12 +108,12 @@ $session['installer']['stagecompleted'] = max($stage, $session['installer']['sta
 //-- Init page
 \LotgdResponse::pageStart('title',  [
     'stage' => \LotgdTranslator::t("stages.0{$stage}", [], 'navigation-installer')
-], 'page-installer');
+], 'page_installer');
 
 if (file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && (3 == $stage || 4 == $stage || 5 == $stage))
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage8.fileDbConnect.exists', [], 'page-installer'));
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.fileDbConnect.info', ['file' => \Lotgd\Core\Application::FILE_DB_CONNECT], 'page-installer'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage8.fileDbConnect.exists', [], 'page_installer'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.fileDbConnect.info', ['file' => \Lotgd\Core\Application::FILE_DB_CONNECT], 'page_installer'));
 
     $stage = 6;
     $session['installer']['stagecompleted'] = $stage;

@@ -1,5 +1,5 @@
-{% translate_default_domain 'page-globaluserfunctions' %}
+{% translate_default_domain 'page_globaluserfunctions' %}
 
-{{ 'subtitle'|t|colorize }}
+{{ 'subtitle'|trans|colorize }}
 
 {% include '@core/pages/globaluserfunctions/' ~ tpl|default('default') ~ '.html.twig' %}

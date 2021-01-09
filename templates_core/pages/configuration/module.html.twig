@@ -3,11 +3,11 @@
 {% if moduleSettings %}
     <p>
         {% if isModuleActive %}
-            {{ 'section.module.is.actived'|t|colorize }}
-            <a href="{{ ('modules.php?op=deactivate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui red mini button">{{ 'section.module.button.deactivate'|t|uncolorize }}</a>
+            {{ 'section.module.is.actived'|trans|colorize }}
+            <a href="{{ ('modules.php?op=deactivate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui red mini button">{{ 'section.module.button.deactivate'|trans|uncolorize }}</a>
         {% else %}
-            {{ 'section.module.is.deactived'|t|colorize }}
-            <a href="{{ ('modules.php?op=activate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui green mini button">{{ 'section.module.button.activate'|t|uncolorize }}</a>
+            {{ 'section.module.is.deactived'|trans|colorize }}
+            <a href="{{ ('modules.php?op=activate&module=' ~ moduleName ~ '&cat=' ~ moduleInfo.category|e('url'))|lotgd_url }}" class="ui green mini button">{{ 'section.module.button.activate'|trans|uncolorize }}</a>
         {% endif %}
     </p>
 
@@ -23,5 +23,5 @@
         </form>
     {% endif %}
 {% else %}
-    {{ 'section.module.no.settings'|t({ 'name': moduleInfo.name })|colorize }}
+    {{ 'section.module.no.settings'|trans({ 'name': moduleInfo.name })|colorize }}
 {% endif %}

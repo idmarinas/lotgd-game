@@ -12,7 +12,7 @@ if ($session['user']['alive'])
 
 // Don't hook on to this text for your standard modules please, use "shades" instead.
 // This hook is specifically to allow modules that do other shades to create ambience.
-$result = modulehook('shades-text-domain', ['textDomain' => 'page-shades', 'textDomainNavigation' => 'navigation-shades']);
+$result = modulehook('shades-text-domain', ['textDomain' => 'page_shades', 'textDomainNavigation' => 'navigation_shades']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

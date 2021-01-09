@@ -1,21 +1,21 @@
 {% translate_default_domain textDomain %}
 
 {% block clan_applicant %}
-    {{ 'section.applicant.subtitle'|t|colorize }}
+    {{ 'section.applicant.subtitle'|trans|colorize }}
 
-    {{ 'section.applicant.enter'|t({ 'clanOwnerName': clanOwnerName })|colorize }}
+    {{ 'section.applicant.enter'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
 
     {% if clanInfo.clanid > 0 %}
-        {{ 'section.applicant.waiting'|t({ 'clanOwnerName': clanOwnerName, 'clanName': clanInfo.clanname })|colorize }}
+        {{ 'section.applicant.waiting'|trans({ 'clanOwnerName': clanOwnerName, 'clanName': clanInfo.clanname })|colorize }}
     {% else %}
-        {{ 'section.applicant.no.membership'|t|colorize }}
+        {{ 'section.applicant.no.membership'|trans|colorize }}
     {% endif %}
 {% endblock clan_applicant %}
 
 {% block clan_default %}
     {% if clanInfo.clanmotd %}
         <blockquote>
-            {{ 'section.default.current.motd'|t({ author: motdAuthorName|uncolorize })|colorize }}
+            {{ 'section.default.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
             {{ clanInfo.clanmotd|nl2br|colorize }}
         </blockquote>
     {% endif %}
@@ -35,49 +35,49 @@
 
     {% if clanInfo.clandesc %}
         <blockquote>
-            {{ 'section.default.current.desc'|t({ author: descAuthorName|uncolorize })|colorize }}
+            {{ 'section.default.current.desc'|trans({ author: descAuthorName|uncolorize })|colorize }}
             {{ clanInfo.clandesc|nl2br|colorize }}
         </blockquote>
     {% endif %}
 
     {% if leaders == 0 and promotingLeader %}
-        {{ 'section.default.no.leader.asigned'|t( {'name': newLeader })|colorize }}
+        {{ 'section.default.no.leader.asigned'|trans( {'name': newLeader })|colorize }}
     {% elseif leaders == 0 and promotingLeader %}
-        {{ 'section.default.no.leader.unasigned'|t|colorize }}
+        {{ 'section.default.no.leader.unasigned'|trans|colorize }}
     {% endif %}
 
-    {{ 'section.default.membership'|t|colorize }}
+    {{ 'section.default.membership'|trans|colorize }}
 
     {% for member in membership %}
-        {{ ranksNames[member.clanrank]|default('ranks.unknown')|t|colorize ~ ': ' ~ member.count }}<br>
+        {{ ranksNames[member.clanrank]|default('ranks.unknown')|trans|colorize ~ ': ' ~ member.count }}<br>
     {% endfor %}
 {% endblock clan_default %}
 
 {% block clan_membership %}
-    {{ 'section.membership.legend'|t|colorize }}
+    {{ 'section.membership.legend'|trans|colorize }}
 
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.membership.table.theader.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.level'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.dragonkill'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.join.date'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.laston'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.membership.table.theader.ops'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.level'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.dragonkill'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.join.date'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.laston'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.membership.table.theader.ops'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set totalDragonkills = 0 %}
-            {% set options = {'text': 'section.membership.form.confirm'|t|uncolorize }|json_encode %}
-            {% set optionsFounder = {'text': 'section.membership.form.demote.founder'|t|uncolorize }|json_encode %}
-            {% set stepdown = 'section.membership.form.stepdown'|t|uncolorize %}
-            {% set remove = 'section.membership.form.remove'|t|uncolorize %}
-            {% set submit = 'section.membership.form.submit'|t|uncolorize %}
+            {% set options = {'text': 'section.membership.form.confirm'|trans|uncolorize }|json_encode %}
+            {% set optionsFounder = {'text': 'section.membership.form.demote.founder'|trans|uncolorize }|json_encode %}
+            {% set stepdown = 'section.membership.form.stepdown'|trans|uncolorize %}
+            {% set remove = 'section.membership.form.remove'|trans|uncolorize %}
+            {% set submit = 'section.membership.form.submit'|trans|uncolorize %}
 
             {% for member in membership %}
                 {% set totalDragonkills = totalDragonkills + member.dragonkills %}
                 <tr>
-                    <td>{{ ranksNames[member.clanrank]|t|colorize }}</td>
+                    <td>{{ ranksNames[member.clanrank]|trans|colorize }}</td>
                     <td>{{ '`&%s`0'|format(member.name)|colorize }}</td>
                     <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
                     <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
@@ -104,7 +104,7 @@
                                     <input type="hidden" name="whoacctid" value="{{ member.acctid }}">
                                     <select class='ui combo lotgd dropdown' name='setrank'>
                                         {% for key, rank in validRanks if key <= user.clanrank and constant('CLAN_FOUNDER') != key %}
-                                            <option value="{{ key }}" {{ member.clanrank == key ? 'selected' : '' }}>{{ rank|t|uncolorize }}</option>
+                                            <option value="{{ key }}" {{ member.clanrank == key ? 'selected' : '' }}>{{ rank|trans|uncolorize }}</option>
                                         {% endfor %}
                                     </select>
                                     <button class="ui icon button tooltip top aligned" data-tooltip="{{ submit }}" type="submit"><i class='configure icon'></i></button>
@@ -115,7 +115,7 @@
                                 {{ deleteButton }}
                             {% endif %}
                         {% else %}
-                            {{ 'section.membership.table.tbody.none'|t|colorize }}
+                            {{ 'section.membership.table.tbody.none'|trans|colorize }}
                         {% endif %}
                     </td>
                 </tr>
@@ -123,62 +123,62 @@
         </tbody>
     </table>
 
-    {{ 'section.membership.total.dragonkills'|t({ dragonkills: totalDragonkills })|colorize }}
+    {{ 'section.membership.total.dragonkills'|trans({ dragonkills: totalDragonkills })|colorize }}
 {% endblock clan_membership %}
 
 {% block clan_motd %}
     {% if clanInfo.clanmotd %}
         <blockquote>
-            {{ 'section.motd.current.motd'|t({ author: motdAuthorName|uncolorize })|colorize }}
+            {{ 'section.motd.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
             {{ clanInfo.clanmotd|nl2br|colorize }}
         </blockquote>
     {% endif %}
 
     {% if clanInfo.clandesc %}
         <blockquote>
-            {{ 'section.motd.current.desc'|t({ author: descAuthorName|uncolorize })|colorize }}
+            {{ 'section.motd.current.desc'|trans({ author: descAuthorName|uncolorize })|colorize }}
             {{ clanInfo.clandesc|nl2br|colorize }}
         </blockquote>
     {% endif %}
 
     <form action="{{ 'clan.php?op=motd'|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
         <div class="field">
-            <label for="clanmotd">{{ 'section.motd.form.clanmotd.label'|t|colorize }}</label>
+            <label for="clanmotd">{{ 'section.motd.form.clanmotd.label'|trans|colorize }}</label>
             <textarea name="clanmotd" id="clanmotd">{{ clanInfo.clanmotd|e('html') }}</textarea>
         </div>
         <div class="field">
             {% if constant('INT_MAX') != clanInfo.descauthor %}
-                <label for="clandesc">{{ 'section.motd.form.clandesc.label'|t|colorize }}</label>
+                <label for="clandesc">{{ 'section.motd.form.clandesc.label'|trans|colorize }}</label>
                 <textarea name="clandesc">{{ clanInfo.clandesc|e('html') }}</textarea>
             {% else %}
-                {{ 'section.motd.form.clandesc.blocked'|t|colorize }}
+                {{ 'section.motd.form.clandesc.blocked'|trans|colorize }}
             {% endif %}
         </div>
 
         {% if user.clanrank >= constant('CLAN_LEADER') %}
             <div class="field">
-                <label for="">{{ 'section.motd.form.customsay.label'|t|colorize }}</label>
+                <label for="">{{ 'section.motd.form.customsay.label'|trans|colorize }}</label>
                 <input type="text" name='customsay' value="{{ clanInfo.customsay|e('html') }}" maxlength="15">
             </div>
         {% endif %}
 
         <div class="field">
-            <button type="submit" class="ui button">{{ 'section.motd.form.button.submit'|t|uncolorize }}</button>
+            <button type="submit" class="ui button">{{ 'section.motd.form.button.submit'|trans|uncolorize }}</button>
         </div>
     </form>
 {% endblock clan_motd %}
 
 {% block clan_applicant_apply %}
     {% if clanList|length %}
-        {{ 'section.applicant.apply.clan.list'|t({ 'clanOwnerName': clanOwnerName, 'playerName': user.name, 'playerWeapon': user.weapon })|colorize }}
+        {{ 'section.applicant.apply.clan.list'|trans({ 'clanOwnerName': clanOwnerName, 'playerName': user.name, 'playerWeapon': user.weapon })|colorize }}
     {% endif %}
 
     {% for clan in clanList %}
         &#149; <a href="{{ ('clan.php?op=apply&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
         &#60;{{ clan.clanshort|uncolorize }}&#62;
-        ({{ 'section.applicant.apply.clan.members'|t({ 'n': clan.members })|colorize }}) <br>
+        ({{ 'section.applicant.apply.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
     {% else %}
-        {{ 'section.applicant.apply.no.clans'|t({ 'clanOwnerName': clanOwnerName })|colorize }}
+        {{ 'section.applicant.apply.no.clans'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
     {% endfor %}
 {% endblock clan_applicant_apply %}
 
@@ -186,59 +186,59 @@
     {% if SU_AUDIT_MODERATION %}
         <div class="ui modal editClan">
             <i class="close icon"></i>
-            <div class="header">{{ 'section.detail.form.title'|t|colorize }}</div>
+            <div class="header">{{ 'section.detail.form.title'|trans|colorize }}</div>
             <div class="content">
                 <form id="formEditClan" action="{{ ('clan.php?op=detail&clanid=' ~ clanDetail.clanid)|lotgd_url }}" method="POST" class="ui form">
                     <div class="field">
-                        <label for="clanname">{{ 'section.detail.form.label.name'|t|colorize }}</label>
+                        <label for="clanname">{{ 'section.detail.form.label.name'|trans|colorize }}</label>
                         <input id="clanname" name="clanname" value="{{ clanDetail.clanname|e }}" />
                     </div>
                     <div class="field">
-                        <label for="clanshort">{{ 'section.detail.form.label.short'|t|colorize }}</label>
+                        <label for="clanshort">{{ 'section.detail.form.label.short'|trans|colorize }}</label>
                         <input id="clanshort" name="clanname" value="{{ clanDetail.clanshort|e }}" />
                     </div>
                     <div class="field">
                         {% if 4294967295 == clanDetail.descauthor %}
                             <div class="ui toggle checkbox">
                                 <input type="checkbox" id="unblock" name="unblock" value="1">
-                                <label for="unblock">{{ 'section.detail.form.label.toggle.unblock'|t|colorize }}</label>
+                                <label for="unblock">{{ 'section.detail.form.label.toggle.unblock'|trans|colorize }}</label>
                             </div>
                         {% else %}
                             <div class="ui toggle checkbox">
                                 <input type="checkbox" id="block" name="block" value="1">
-                                <label for="block">{{ 'section.detail.form.label.toggle.block'|t|colorize }}</label>
+                                <label for="block">{{ 'section.detail.form.label.toggle.block'|trans|colorize }}</label>
                             </div>
                         {% endif %}
                     </div>
                 </form>
             </div>
             <div class="actions">
-                <div class="ui black deny button">{{ 'section.detail.form.button.cancel'|t|uncolorize }}</div>
-                <div class="ui positive right labeled icon button">{{ 'section.detail.form.button.submit'|t|uncolorize }} <i class="edit icon"></i></div>
+                <div class="ui black deny button">{{ 'section.detail.form.button.cancel'|trans|uncolorize }}</div>
+                <div class="ui positive right labeled icon button">{{ 'section.detail.form.button.submit'|trans|uncolorize }} <i class="edit icon"></i></div>
             </div>
         </div>
 
-        <button class="ui orange button" onclick="$('.ui.modal.editClan').modal({ onApprove : function() { $('#formEditClan').submit(); } }).modal('show')">{{ 'section.detail.button.modal'|t|uncolorize }}</button>
+        <button class="ui orange button" onclick="$('.ui.modal.editClan').modal({ onApprove : function() { $('#formEditClan').submit(); } }).modal('show')">{{ 'section.detail.button.modal'|trans|uncolorize }}</button>
     {% endif %}
 
-    <div class="ui segment">{{ 'section.detail.description'|t({ 'description': clanDetail.clandesc })|colorize }}</div>
+    <div class="ui segment">{{ 'section.detail.description'|trans({ 'description': clanDetail.clandesc })|colorize }}</div>
 
-    {{ 'section.detail.membership'|t({ 'clanName': clanDetail.clanname, 'clanShortName': clanDetail.clanshort })|colorize }}
+    {{ 'section.detail.membership'|trans({ 'clanName': clanDetail.clanname, 'clanShortName': clanDetail.clanshort })|colorize }}
 
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.detail.table.theader.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.detail.table.theader.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.detail.table.theader.level'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.detail.table.theader.dragonkill'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.detail.table.theader.join.date'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.detail.table.theader.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.detail.table.theader.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.detail.table.theader.level'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.detail.table.theader.dragonkill'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.detail.table.theader.join.date'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set totalDragonkills = 0 %}
             {% for member in membership %}
                 {% set totalDragonkills = totalDragonkills + member.dragonkills %}
                 <tr>
-                    <td>{{ ranksNames[member.clanrank]|t|colorize }}</td>
+                    <td>{{ ranksNames[member.clanrank]|trans|colorize }}</td>
                     <td>{{ '`&<a href="%s">%s</a>`0'|format(('bio.php?char=' ~ member.acctid ~ '&ret=' ~ returnLink|e('url'))|lotgd_url, member.name)|colorize }}</td>
                     <td>{{ '`^%s`0'|format(member.level)|colorize }}</td>
                     <td>{{ '`$%s`0'|format(member.dragonkills)|colorize }}</td>
@@ -248,60 +248,60 @@
         </tbody>
     </table>
 
-    {{ 'section.membership.total.dragonkills'|t({ dragonkills: totalDragonkills })|colorize }}
+    {{ 'section.membership.total.dragonkills'|trans({ dragonkills: totalDragonkills })|colorize }}
 {% endblock clan_applicant_detail %}
 
 {% block clan_applicant_list %}
     {% if clanList|length %}
-        {{ 'section.list.description'|t({ 'clanOwnerName': clanOwnerName })|colorize }}
+        {{ 'section.list.description'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
     {% endif %}
 
     {% for clan in clanList %}
         &#149; <a href="{{ ('clan.php?op=detail&clanid=' ~ clan.clanid )|lotgd_url }}">{{ clan.clanname|uncolorize }}</a>
         &#60;{{ clan.clanshort|uncolorize }}&#62;
-        ({{ 'section.list.clan.members'|t({ 'n': clan.members })|colorize }}) <br>
+        ({{ 'section.list.clan.members'|trans({ 'n': clan.members })|colorize }}) <br>
     {% else %}
-        {{ 'section.list.no.clans'|t({ 'clanOwnerName': clanOwnerName })|colorize }}
+        {{ 'section.list.no.clans'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
     {% endfor %}
 {% endblock clan_applicant_list %}
 
 {% block clan_applicant_new %}
-    {{ 'section.applicant.new.description'|t({ 'clanOwnerName': clanOwnerName, 'costGold': costGold, 'costGems': costGems })|colorize }}
+    {{ 'section.applicant.new.description'|trans({ 'clanOwnerName': clanOwnerName, 'costGold': costGold, 'costGems': costGems })|colorize }}
 
     <br>
     <br>
     {% if user.gold >= costGold and user.gems >= costGems %}
-        {{ 'section.applicant.new.register.requirements.fulfilled'|t|colorize }}
+        {{ 'section.applicant.new.register.requirements.fulfilled'|trans|colorize }}
         <br>
         <br>
         <form class="ui segment form" action="{{ 'clan.php?op=new&apply=1'|lotgd_url }}" method="POST">
-            {{ 'section.applicant.new.form.title'|t|colorize }}
+            {{ 'section.applicant.new.form.title'|trans|colorize }}
             <div class="field">
-                <label>{{ 'section.applicant.new.form.label.name'|t|colorize }}</label>
+                <label>{{ 'section.applicant.new.form.label.name'|trans|colorize }}</label>
                 <input name="clanname" value="{{ clanName }}">
             </div>
             <div class="field">
-                <label>{{ 'section.applicant.new.form.label.short.name'|t|colorize }}</label>
+                <label>{{ 'section.applicant.new.form.label.short.name'|trans|colorize }}</label>
                 <input name="clanshort" value="{{ clanShort }}">
             </div>
             <div class="ui info message">
-                {{ 'section.applicant.new.form.note'|t|uncolorize }}
+                {{ 'section.applicant.new.form.note'|trans|uncolorize }}
             </div>
             <div class="field">
-                <button type="submit" class="ui button">{{ 'section.applicant.new.form.button.submit'|t }}</button>
+                <button type="submit" class="ui button">{{ 'section.applicant.new.form.button.submit'|trans }}</button>
             </div>
         </form>
     {% elseif user.gold < costGold %}
-        {{ 'section.applicant.new.register.requirements.no.gold'|t|colorize }}
+        {{ 'section.applicant.new.register.requirements.no.gold'|trans|colorize }}
     {% elseif user.gems < costGems %}
-        {{ 'section.applicant.new.register.requirements.no.gems'|t|colorize }}
+        {{ 'section.applicant.new.register.requirements.no.gems'|trans|colorize }}
     {% endif %}
 {% endblock clan_applicant_new %}
 
 {% block clan_applicant_waiting %}
-    {{ 'section.applicant.subtitle'|t|colorize }}
+    {{ 'section.applicant.subtitle'|trans|colorize }}
 
-    {{ 'section.applicant.waiting.area'|t|colorize }}
+    {{ 'section.applicant.waiting.area'|trans|colorize }}
 
     {{ commentary_block({
         'section': 'waiting'

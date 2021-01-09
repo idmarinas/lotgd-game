@@ -11,7 +11,7 @@ require_once 'lib/serverfunctions.class.php';
 
 checkban();
 
-$textDomain = 'page-create'; //-- Namespace, textDomain for page
+$textDomain = 'page_create'; //-- Namespace, textDomain for page
 
 $trash = (int) getsetting('expiretrashacct', 1);
 $new = (int) getsetting('expirenewacct', 10);

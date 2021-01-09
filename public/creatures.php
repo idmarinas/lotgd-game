@@ -9,7 +9,7 @@ require_once 'lib/showform.php';
 
 check_su_access(SU_EDIT_CREATURES);
 
-$textDomain = 'grotto-creatures';
+$textDomain = 'grotto_creatures';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

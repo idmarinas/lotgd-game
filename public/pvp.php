@@ -12,7 +12,7 @@ require_once 'lib/taunt.php';
 $iname = getsetting('innname', LOCATION_INN);
 $battle = false;
 
-$textDomain = 'page-pvp';
+$textDomain = 'page_pvp';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

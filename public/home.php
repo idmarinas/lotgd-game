@@ -54,7 +54,7 @@ if ($session['loggedin'] ?? false)
 }
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], 'page-home');
+\LotgdResponse::pageStart('title', [], 'page_home');
 
 $op = \LotgdRequest::getQuery('op');
 

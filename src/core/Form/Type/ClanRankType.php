@@ -31,7 +31,7 @@ class ClanRankType extends ChoiceType
             CLAN_LEADER         => 'ranks.030',
             CLAN_FOUNDER        => 'ranks.031',
         ];
-        $ranksResult = ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null];
+        $ranksResult = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
         \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranksResult);
         $ranksResult = modulehook('clanranks', $ranksResult);
         $ranks       = $ranksResult['ranks'];

@@ -1,7 +1,7 @@
 {% translate_default_domain textDomain %}
 
 {% for message in messages %}
-    {{ message[0]|t(message[1])|colorize }}
+    {{ message[0]|trans(message[1])|colorize }}
 {% endfor %}
 
 {% if cat == 'installed' %}

@@ -8,7 +8,7 @@ define('ALLOW_ANONYMOUS', true);
 require_once 'common.php';
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], 'page-list');
+\LotgdResponse::pageStart('title', [], 'page_list');
 
 if ($session['user']['loggedin'])
 {

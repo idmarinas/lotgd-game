@@ -5,7 +5,7 @@
 // mail ready
 require_once 'common.php';
 
-$textDomain = 'page-bio';
+$textDomain = 'page_bio';
 checkday();
 
 $ret = \LotgdRequest::getQuery('ret');
@@ -44,7 +44,7 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
-$ranks = ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null];
+$ranks = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
 $ranks = modulehook('clanranks', ['ranks' => $ranks, 'clanid' => $target['clanid']]);
 

@@ -41,7 +41,7 @@ if (($session['user']['loggedin'] ?? false) && ($session['loggedin'] ?? false))
     {
         $session['user']['allowednavs'] = [];
         //-- Init page
-        \LotgdResponse::pageStart('title', [], 'page-badnav');
+        \LotgdResponse::pageStart('title', [], 'page_badnav');
 
         if ($session['user']['alive'])
         {

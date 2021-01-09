@@ -7,7 +7,7 @@ define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 
-$textDomain = 'page-referral';
+$textDomain = 'page_referral';
 
 if (! $session['user']['loggedin'])
 {

@@ -47,7 +47,7 @@ elseif('expire' == $op)
 
 \Doctrine::flush();
 
-$textDomain = 'grotto-referers';
+$textDomain = 'grotto_referers';
 
 $params = [
     'textDomain' => $textDomain

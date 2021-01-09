@@ -3,19 +3,19 @@
 <table class="ui very compact striped table">
     <thead>
         <tr>
-            <th scope="col">{{ 'table.thead.date'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.id'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.type'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.gross'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.fee'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.net'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.processed'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.who'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.date'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.id'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.type'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.gross'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.fee'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.net'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.processed'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.who'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
-        {% set yes = 'table.tbody.yes'|t|colorize %}
-        {% set no = 'table.tbody.no'|t|colorize %}
+        {% set yes = 'table.tbody.yes'|trans|colorize %}
+        {% set no = 'table.tbody.no'|trans|colorize %}
         {% for log in paylog %}
             <tr>
                 <td>{{ '{date,date} <br> {date,time}'|tmf({ 'date': log.info.payment_date }) }}</td>
@@ -41,7 +41,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8" class="center aligned">{{ 'table.tbody.no.records'|t|colorize }}</td>
+                <td colspan="8" class="center aligned">{{ 'table.tbody.no.records'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

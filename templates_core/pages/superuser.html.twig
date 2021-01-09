@@ -7,7 +7,7 @@
     {% endfor %}
 </div>
 
-{{ 'paragraph'|t({'sex': user.sex})|colorize }}
+{{ 'paragraph'|trans({'sex': user.sex})|colorize }}
 
 {{ commentary_block({
     'section': 'superuser',

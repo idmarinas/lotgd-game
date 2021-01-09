@@ -1,10 +1,10 @@
 {% translate_default_domain textDomain %}
 
-{{ 'section.add.confirm'|t({ 'amt': amt })|colorize }}
+{{ 'section.add.confirm'|trans({ 'amt': amt })|colorize }}
 
 {% if reason %}
     <br>
-    {{ 'section.add.reason'|t({ 'reason': reason })|colorize }}
+    {{ 'section.add.reason'|trans({ 'reason': reason })|colorize }}
 {% endif %}
 <div class="ui relaxed divided list">
     {% for donation in paginator %}
@@ -17,7 +17,7 @@
             <a class="header" href="{{ ('donators.php?op=save&id=' ~ donation.acctid ~ '&amt=' ~ amt ~ '&reason=' ~ reason|e('url') ~ '&txnid=' ~ txnid)|lotgd_url }}">
                 {{ donation.name|colorize }}
             </a>
-            <div class="description">{{ 'section.add.donation.detail'|t({ 'have': donation.donation, 'spent': donation.donationspent  })|colorize }}</div>
+            <div class="description">{{ 'section.add.donation.detail'|trans({ 'have': donation.donation, 'spent': donation.donationspent  })|colorize }}</div>
         </div>
     </div>
 {% endfor %}

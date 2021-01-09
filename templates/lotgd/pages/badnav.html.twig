@@ -1,7 +1,7 @@
-{% translate_default_domain 'page-badnav' %}
+{% translate_default_domain 'page_badnav' %}
 
 {% if user.alive %}
-    {{ 'navsCorrupt.village'|t({'location': user.location})|colorize }}
+    {{ 'navsCorrupt.village'|trans({'location': user.location})|colorize }}
 {% else %}
-    {{ 'navsCorrupt.shades'|t|colorize }}
+    {{ 'navsCorrupt.shades'|trans|colorize }}
 {% endif %}

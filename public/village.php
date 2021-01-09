@@ -31,7 +31,7 @@ $valid_loc = modulehook('validlocation', $valid_loc);
 
 // Don't hook on to this text for your standard modules please, use "village" instead.
 // This hook is specifically to allow modules that do other villages to create ambience.
-$result = modulehook('village-text-domain', ['textDomain' => 'page-village', 'textDomainNavigation' => 'navigation-village']);
+$result = modulehook('village-text-domain', ['textDomain' => 'page_village', 'textDomainNavigation' => 'navigation_village']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

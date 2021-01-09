@@ -18,7 +18,7 @@ if (isset($_POST['template']))
 require_once 'common.php';
 require_once 'lib/showform.php';
 
-$textDomain = 'page-prefs';
+$textDomain = 'page_prefs';
 
 $params = [
     'textDomain' => $textDomain,

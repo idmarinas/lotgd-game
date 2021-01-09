@@ -26,7 +26,7 @@ $op = (string) \LotgdRequest::getQuery('op');
 $petitionId = (int) \LotgdRequest::getQuery('id');
 $page = (int) \LotgdRequest::getQuery('page');
 
-$textDomain = 'grotto-viewpetition';
+$textDomain = 'grotto_viewpetition';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

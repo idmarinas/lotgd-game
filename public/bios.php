@@ -8,7 +8,7 @@ require_once 'lib/systemmail.php';
 
 check_su_access(SU_EDIT_COMMENTS);
 
-$textDomain = 'page-bios';
+$textDomain = 'page_bios';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

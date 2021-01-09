@@ -1,8 +1,8 @@
 {% from '{theme}/pages/_macros/_battle.html.twig' import combat_health_bar as health_bar %}
 
-{% translate_default_domain 'page-battle' %}
+{% translate_default_domain 'page_battle' %}
 
-{{ 'title'|t|colorize }}
+{{ 'title'|trans|colorize }}
 
 {# Information of criature/s #}
 <div class="ui items">
@@ -14,13 +14,13 @@
                 </div>
             {% endif %}
             <div class="content">
-                <div>{{ 'encounter'|t({ 'name': badguy.creaturename, 'weapon': badguy.creatureweapon})|colorize }}</div>
+                <div>{{ 'encounter'|trans({ 'name': badguy.creaturename, 'weapon': badguy.creatureweapon})|colorize }}</div>
                 {% if badguy.creaturecategory %}
-                    <div class="meta">{{ 'category'|t({'name': badguy.creaturecategory})|colorize }}</div>
+                    <div class="meta">{{ 'category'|trans({'name': badguy.creaturecategory})|colorize }}</div>
                 {% endif %}
                 {% if badguy.creaturedescription %}
                     <div class="description">
-                        <p>{{ badguy.creaturedescription|t|colorize }}</p>
+                        <p>{{ badguy.creaturedescription|trans|colorize }}</p>
                     </div>
                 {% endif %}
             </div>
@@ -30,7 +30,7 @@
 
 {# Information when battle start #}
 {% for msg in battlestart %}
-    {{ msg|t|colorize }}
+    {{ msg|trans|colorize }}
 {% endfor %}
 
 {# Show HP of combatants #}
@@ -52,7 +52,7 @@
 
 {# Rounds results #}
 {% if battlerounds|length %}
-    <h5 class="ui attached header">{{ 'battle.result'|t({'n': battlerounds|length})|colorize }}</h5>
+    <h5 class="ui attached header">{{ 'battle.result'|trans({'n': battlerounds|length})|colorize }}</h5>
     <div class="ui attached divided segment">
         <div class="ui divided list">
             {% for rounds in battlerounds %}
@@ -61,18 +61,18 @@
                         <div class="column">
                             {% for allied in rounds.allied %}
                                 {% if allied is array %}
-                                    {{ allied[0]|tl(allied[1], (allied[2] ?: 'page-battle'))|colorize }}
+                                    {{ allied[0]|tl(allied[1], (allied[2] ?: 'page_battle'))|colorize }}
                                 {% else %}
-                                    {{ allied|t|colorize }}
+                                    {{ allied|trans|colorize }}
                                 {% endif %}
                             {% endfor %}
                         </div>
                         <div class="column">
                             {% for enemy in rounds.enemy %}
                                 {% if enemy is array %}
-                                    {{ enemy[0]|tl(enemy[1], (enemy[2] ?: 'page-battle'))|colorize }}
+                                    {{ enemy[0]|tl(enemy[1], (enemy[2] ?: 'page_battle'))|colorize }}
                                 {% else %}
-                                    {{ enemy|t|colorize }}
+                                    {{ enemy|trans|colorize }}
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -102,13 +102,13 @@
 
 {# Information of end of battle #}
 {% if battleend %}
-    <h5 class="ui attached header">{{ 'battle.end'|t|colorize }}</h5>
+    <h5 class="ui attached header">{{ 'battle.end'|trans|colorize }}</h5>
     <div class="ui bottom attached divided segment">
         {% for msg in battleend %}
             {% if msg is array %}
-                {{ msg[0]|tl(msg[1], (msg[2] ?: 'page-battle'))|colorize }}
+                {{ msg[0]|tl(msg[1], (msg[2] ?: 'page_battle'))|colorize }}
             {% else %}
-                {{ msg|t|colorize }}
+                {{ msg|trans|colorize }}
             {% endif %}
         {% endfor %}
     </div>

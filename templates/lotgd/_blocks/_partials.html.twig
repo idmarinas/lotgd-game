@@ -1,17 +1,17 @@
 {# List of online characters #}
 {% block online_list %}
-    {{ 'online.list.title'|t({ 'n': onlineCount }, textDomain)|colorize }}
+    {{ 'online.list.title'|trans({ 'n': onlineCount }, textDomain)|colorize }}
 
     {% for row in list %}
         {{ '`^%s`0`n'|format(row.name)|colorize }}
     {% else %}
-        {{ 'online.list.none'|t({}, textDomain)|colorize }}
+        {{ 'online.list.none'|trans({}, textDomain)|colorize }}
     {% endfor %}
 {% endblock online_list %}
 
 {# Stats of page generation #}
 {% block game_page_gen %}
-    {{ 'parts.pageGen'|t({
+    {{ 'parts.pageGen'|trans({
         'genTime': genTime,
         'avg': avg,
         'userGenTime': userGenTime,
@@ -41,16 +41,16 @@
 {% endblock navigation_menu %}
 
 {% block pagination_jaxon %}
-    {% translate_default_domain 'app-default' %}
+    {% translate_default_domain 'app_default' %}
 
     {% if pageCount %}
         {% set link = jaxon ~ '(%s, ' ~ motdPerPage|default(5) ~ ", '" ~ monthSelected|default(null) ~ "')" %}
         <div class="ui grid">
             <div class="sixteen wide tablet only computer only center aligned column">
-                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|t({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(first) }}">
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(first) }}">
                             <i class="fast backward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -69,19 +69,19 @@
                     <!-- Links to number pages -->
                     {% for page in pagesInRange %}
                         {% if page != current %}
-                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|t({'page': page})|uncolorize }}" href="javascript:;" onclick="{{ link|format(page) }}">
+                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="javascript:;" onclick="{{ link|format(page) }}">
                                 {{ page }}
                             </a>
                         {% else %}
                             <div class="active item" aria-hidden="true">
-                                {{ 'parts.pagination.menu.current'|t({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
+                                {{ 'parts.pagination.menu.current'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
                             </div>
                         {% endif %}
                     {% endfor %}
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(next) }}">
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(next) }}">
                             <i class="step forward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -90,7 +90,7 @@
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(last) }}">
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(last) }}">
                             <i class="fast forward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -99,10 +99,10 @@
                 </div>
             </div>
             <div class="sixteen wide mobile only center aligned column">
-                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|t|uncolorize }}">
+                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|trans|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(first) }}">
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(first) }}">
                             <i class="fast backward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -111,7 +111,7 @@
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(previous) }}">
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(previous) }}">
                             <i class="step backward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -123,7 +123,7 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(next) }}">
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(next) }}">
                             <i class="step forward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -132,7 +132,7 @@
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|t|uncolorize }}" href="javascript:;" onclick="{{ link|format(last) }}">
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="javascript:;" onclick="{{ link|format(last) }}">
                             <i class="fast forward icon" aria-hidden="true"></i>
                         </a>
                     {% else %}
@@ -154,15 +154,15 @@
 {% endblock pagination_jaxon %}
 
 {% block pagination %}
-    {% translate_default_domain 'app-default' %}
+    {% translate_default_domain 'app_default' %}
 
     {% if pageCount %}
         <div class="ui grid">
             <div class="sixteen wide tablet only computer only center aligned column">
-                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|t({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
+                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.description'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
@@ -177,41 +177,41 @@
                     <!-- Links to number pages -->
                     {% for page in pagesInRange %}
                         {% if page != current %}
-                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|t({'page': page})|uncolorize }}" href="{{ (href ~ 'page=' ~ page)|lotgd_url }}">{{ page }}</a>
+                            <a class="item" aria-label="{{ 'parts.pagination.menu.page'|trans({'page': page})|uncolorize }}" href="{{ (href ~ 'page=' ~ page)|lotgd_url }}">{{ page }}</a>
                         {% else %}
                             <div class="active item" aria-hidden="true">
-                                {{ 'parts.pagination.menu.current'|t({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
+                                {{ 'parts.pagination.menu.current'|trans({ 'firstItemNumber': firstItemNumber, 'lastItemNumber': lastItemNumber, 'totalItemCount': totalItemCount })|colorize }}
                             </div>
                         {% endif %}
                     {% endfor %}
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}
                 </div>
             </div>
             <div class="sixteen wide mobile only center aligned column">
-                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|t|uncolorize }}">
+                <div class="ui pagination menu" role="navigation" aria-label="{{ 'parts.pagination.label'|trans|uncolorize }}">
                     <!-- Link to first page -->
                     {% if previous %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.first'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ first)|lotgd_url }}"><i class="fast backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast backward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to previous page -->
                     {% if previous %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.previous'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ previous)|lotgd_url }}"><i class="step backward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step backward icon"></i></div>
                     {% endif %}
@@ -221,14 +221,14 @@
 
                     <!-- Link to next page -->
                     {% if next %}
-                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item" aria-label="{{ 'parts.pagination.menu.next'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ next)|lotgd_url }}"><i class="step forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="step forward icon"></i></div>
                     {% endif %}
 
                     <!-- Link to last page -->
                     {% if next %}
-                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|t|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
+                        <a class="icon item"  aria-label="{{ 'parts.pagination.menu.last'|trans|uncolorize }}" href="{{ (href ~ 'page=' ~ last)|lotgd_url }}"><i class="fast forward icon" aria-hidden="true"></i></a>
                     {% else %}
                         <div class="disabled icon item" aria-hidden="true"><i class="fast forward icon"></i></div>
                     {% endif %}

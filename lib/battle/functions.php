@@ -629,7 +629,7 @@ function battledefeat($enemies, $where = 'forest', $candie = true, $lostexp = tr
 
     if ($candie)
     {
-        \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation-app']);
+        \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation_app']);
 
         $session['user']['alive']          = false;
         $session['user']['hitpoints']      = 0;

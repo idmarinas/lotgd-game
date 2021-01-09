@@ -3,7 +3,7 @@
 {% translate_default_domain textDomain %}
 
 {% if not battle %}
-    {{ 'subtitle'|t|colorize }}
+    {{ 'subtitle'|trans|colorize }}
 
     {{ block('train_' ~ tpl|default('default')) }}
 {% endif %}

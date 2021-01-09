@@ -49,17 +49,17 @@ function checkban($login = false)
     if (\count($result))
     {
         $session = [];
-        $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page-bans');
+        $session['message'] .= \LotgdTranslator::t('checkban.ban', [], 'page_bans');
 
         foreach ($result as $row)
         {
             $session['message'] .= $row->getBanreason().'`n';
 
-            $message = \LotgdTranslator::t('checkban.expire.time', ['date' => $row->getBanexpire()], 'page-bans');
+            $message = \LotgdTranslator::t('checkban.expire.time', ['date' => $row->getBanexpire()], 'page_bans');
 
             if (new \DateTime('0000-00-00') == $row->getBanexpire() || new \DateTime('0000-00-00 00:00:00') == $row->getBanexpire())
             {
-                $message = \LotgdTranslator::t('checkban.expire.permanent', [], 'page-bans');
+                $message = \LotgdTranslator::t('checkban.expire.permanent', [], 'page_bans');
             }
 
             $session['message'] .= $message;
@@ -69,9 +69,9 @@ function checkban($login = false)
             \Doctrine::flush();
 
             $session['message'] .= '`n';
-            $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page-bans');
+            $session['message'] .= \LotgdTranslator::t('checkban.by', ['by' => $row['banner']], 'page_bans');
         }
-        $session['message'] .= \LotgdTranslator::t('checkban.note', [], 'page-bans');
+        $session['message'] .= \LotgdTranslator::t('checkban.note', [], 'page_bans');
         \header('Location: index.php');
 
         exit();

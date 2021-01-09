@@ -10,7 +10,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'grotto-gamelog';
+$textDomain = 'grotto_gamelog';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

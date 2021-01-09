@@ -10,7 +10,7 @@ function check_su_access($level)
 
     $thispage_superuser_level = $thispage_superuser_level | $level;
 
-    $textDomain = 'partial-access';
+    $textDomain = 'partial_access';
 
     \LotgdResponse::pageAddContent('<!--Su_Restricted-->');
 

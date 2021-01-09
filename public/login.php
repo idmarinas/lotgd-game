@@ -28,7 +28,7 @@ if ('' != $name)
     {
         //sanity check if the server is / got full --> back to home
         $session['user'] = [];
-        \LotgdFlashMessaged::addWarningMessage(\LotgdTranslator::t('login.full', [], 'page-login'));
+        \LotgdFlashMessaged::addWarningMessage(\LotgdTranslator::t('login.full', [], 'page_login'));
 
         return redirect('home.php');
     }
@@ -58,7 +58,7 @@ if ('' != $name)
     //-- Not found account
     if (! $account)
     {
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page-login'));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
         //now we'll log the failed attempt and begin to issue bans if
         //there are too many, plus notify the admins.
@@ -116,7 +116,7 @@ if ('' != $name)
                     $bans = new \Lotgd\Core\Entity\Bans();
                     $banexpire = new \DateTime('now');
                     $bans->setIpfilter(\LotgdRequest::getServer('REMOTE_ADDR'))
-                        ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page-login'))
+                        ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page_login'))
                         ->setBanexpire($banexpire->add(new \DateInterval('PT15M'))) //-- Added 15 minutes
                         ->setBanner('System')
                         ->setLasthit(new \DateTime('0000-00-00 00:00:00'))
@@ -169,7 +169,7 @@ if ('' != $name)
     if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
     {
         $session['user'] = [];
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page-login'));
+        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page_login'));
 
         return redirect('home.php');
     }
@@ -200,7 +200,7 @@ if ('' != $name)
     {
         $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
 
-        $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page-login');
+        $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page_login');
         header("Location: {$session['user']['restorepage']}");
         saveuser();
         echo $str;
@@ -248,7 +248,7 @@ elseif ('logout' == $op)
 
         \LotgdSession::invalidate();
 
-        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page-login'));
+        \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('logout.success', [], 'page_login'));
     }
     $session = [];
 
@@ -257,6 +257,6 @@ elseif ('logout' == $op)
 
 //- If you enter an empty username, don't just say oops.. do something useful.
 \LotgdSession::invalidate();
-\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page-login'));
+\LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('fail.empty', [], 'page_login'));
 
 return redirect('index.php');

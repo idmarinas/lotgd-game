@@ -12,11 +12,11 @@
 
 <form action="{{ 'rawsql.php?op=php'|lotgd_url }}" method="POST" class="ui form">
     <div class="field">
-        <label for="php">{{ 'section.php.form.textarea.php.label'|t|uncolorize }}</label>
+        <label for="php">{{ 'section.php.form.textarea.php.label'|trans|uncolorize }}</label>
         {{ '`$&lt;?php`0'|colorize }}
         <textarea name="php" id="php">{{ php }}</textarea>
     </div>
     <div class="field">
-        <button type="submit" class="ui button">{{ 'section.php.form.button.submit'|t|uncolorize }}</button>
+        <button type="submit" class="ui button">{{ 'section.php.form.button.submit'|trans|uncolorize }}</button>
     </div>
 </form>

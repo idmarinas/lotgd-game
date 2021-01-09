@@ -11,7 +11,7 @@ require_once 'lib/battle/skills.php';
 
 // Don't hook on to this text for your standard modules please, use "forest" instead.
 // This hook is specifically to allow modules that do other forests to create ambience.
-$result               = modulehook('forest-text-domain', ['textDomain' => 'page-forest', 'textDomainNavigation' => 'navigation-forest']);
+$result               = modulehook('forest-text-domain', ['textDomain' => 'page_forest', 'textDomainNavigation' => 'navigation_forest']);
 $textDomain           = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

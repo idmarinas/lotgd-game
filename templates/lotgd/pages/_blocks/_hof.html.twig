@@ -3,10 +3,10 @@
 {% block hof_charm %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.charm.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.charm.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.charm.table.thead.gender'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.charm.table.thead.race'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.charm.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.charm.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.charm.table.thead.gender'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.charm.table.thead.race'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -14,18 +14,18 @@
                 <tr>
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
-                    <td>{{ 'section.charm.table.tbody.gender'|t({ 'sex': character.sex })|colorize }}</td>
+                    <td>{{ 'section.charm.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
                     <td>{{ 'character.racename'|tl(null, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.charm.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.charm.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_charm %}
@@ -33,9 +33,9 @@
 {% block hof_days %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.days.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.days.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.days.table.thead.best'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.best'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -47,13 +47,13 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.days.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.days.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_days %}
@@ -61,12 +61,12 @@
 {% block hof_default %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.default.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.kills'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.level'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.days'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.best'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.kills'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.level'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.days'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.best'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -81,13 +81,13 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.default.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.default.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_default %}
@@ -95,8 +95,8 @@
 {% block hof_gems %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.gems.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.gems.table.thead.name'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.gems.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.gems.table.thead.name'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -107,13 +107,13 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.gems.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.gems.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_gems %}
@@ -121,9 +121,9 @@
 {% block hof_money %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.money.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.money.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.money.table.thead.gold'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.money.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.money.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.money.table.thead.gold'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -135,15 +135,15 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.money.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.money.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ 'section.money.table.tbody.footer'|t|colorize }}
+    {{ 'section.money.table.tbody.footer'|trans|colorize }}
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_money %}
@@ -151,9 +151,9 @@
 {% block hof_resurrections %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.days.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.days.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.days.table.thead.level'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.days.table.thead.level'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -165,13 +165,13 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.days.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.days.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_resurrections %}
@@ -179,10 +179,10 @@
 {% block hof_tough %}
     <table class="ui very compact striped selectable table">
         <thead>
-            <th scope="col">{{ 'section.tough.table.thead.rank'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.tough.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.tough.table.thead.gender'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.tough.table.thead.race'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.tough.table.thead.rank'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.tough.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.tough.table.thead.gender'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.tough.table.thead.race'|trans|uncolorize }}</th>
         </thead>
         <tbody>
             {% set rank = attribute(paginator, 'getCurrentPageNumber') * attribute(paginator, 'getItemCountPerPage') - attribute(paginator, 'getItemCountPerPage') %}
@@ -190,18 +190,18 @@
                 <tr>
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
-                    <td>{{ 'section.tough.table.tbody.gender'|t({ 'sex': character.sex })|colorize }}</td>
+                    <td>{{ 'section.tough.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
                     <td>{{ 'character.racename'|tl(null, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">{{ 'section.tough.table.tbody.none'|t|colorize }}</td>
+                    <td colspan="6">{{ 'section.tough.table.tbody.none'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    {{ footerTitle[0]|t(footerTitle[1])|colorize }}
+    {{ footerTitle[0]|trans(footerTitle[1])|colorize }}
 
     {{ navigation_pagination(paginator) }}
 {% endblock hof_tough %}

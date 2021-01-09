@@ -10,7 +10,7 @@ $subop = (string) \LotgdRequest::getQuery('subop');
 $seen = (int) \LotgdRequest::getQuery('seen');
 
 $repository = \Doctrine::getRepository('LotgdCore:Commentary');
-$textDomain = 'grotto-moderate';
+$textDomain = 'grotto_moderate';
 $params = [
     'textDomain' => $textDomain,
     'area' => $area

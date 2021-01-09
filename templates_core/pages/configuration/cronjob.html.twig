@@ -1,31 +1,31 @@
 {% translate_default_domain textDomain %}
 
-<div class="ui info message">{{ 'section.cronjob.note.info'|t|uncolorize }}</div>
+<div class="ui info message">{{ 'section.cronjob.note.info'|trans|uncolorize }}</div>
 
-<div class="ui red message">{{ 'section.cronjob.note.red'|t|uncolorize }}</div>
+<div class="ui red message">{{ 'section.cronjob.note.red'|trans|uncolorize }}</div>
 
 {{ form(form) }}
-<a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob'|lotgd_url }}">{{ 'section.cronjob.form.button.new'|t|uncolorize }}</a>
+<a class="ui right floated button" href="{{ 'configuration.php?setting=cronjob&op=newcronjob'|lotgd_url }}">{{ 'section.cronjob.form.button.new'|trans|uncolorize }}</a>
 <br>
 <br>
 
-{% set yes = 'section.cronjob.table.tbody.yes'|t|colorize %}
-{% set no = 'section.cronjob.table.tbody.no'|t|colorize %}
-{% set edit = 'section.cronjob.table.tbody.edit'|t|colorize %}
-{% set delete = 'section.cronjob.table.tbody.delete'|t|colorize %}
-{% set options = {'text': 'section.cronjob.table.tbody.confirm'|t}|json_encode %}
+{% set yes = 'section.cronjob.table.tbody.yes'|trans|colorize %}
+{% set no = 'section.cronjob.table.tbody.no'|trans|colorize %}
+{% set edit = 'section.cronjob.table.tbody.edit'|trans|colorize %}
+{% set delete = 'section.cronjob.table.tbody.delete'|trans|colorize %}
+{% set options = {'text': 'section.cronjob.table.tbody.confirm'|trans}|json_encode %}
 
-{{ 'section.cronjob.table.description'|t|colorize }}
+{{ 'section.cronjob.table.description'|trans|colorize }}
 
 <table class="ui very compact striped selectable table">
     <thead>
         <tr>
-            <th scope="col">{{ 'section.cronjob.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.cronjob.table.thead.command'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.cronjob.table.thead.schedule'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.cronjob.table.thead.debug'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.cronjob.table.thead.enabled'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.cronjob.table.thead.opcs'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.command'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.schedule'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.debug'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.enabled'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.cronjob.table.thead.opcs'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>

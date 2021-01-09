@@ -394,7 +394,7 @@ function charstats($return = true)
             $ret = \LotgdTheme::renderBlock('online_list', '{theme}/_blocks/_partials.html.twig', [
                 'list'        => $result,
                 'onlineCount' => $onlinecount,
-                'textDomain'  => 'page-home',
+                'textDomain'  => 'page_home',
             ]);
         }
 

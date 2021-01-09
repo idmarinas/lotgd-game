@@ -22,7 +22,7 @@ if ('lasthit' == $op)
     $_POST['i_am_a_hack'] = 'true';
 }
 
-$textDomain = 'grotto-user';
+$textDomain = 'grotto_user';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

@@ -9,7 +9,7 @@ checkday();
 
 // Don't hook on to this text for your standard modules please, use "armor" instead.
 // This hook is specifically to allow modules that do other armors to create ambience.
-$result = modulehook('armor-text-domain', ['textDomain' => 'page_armor', 'textDomainNavigation' => 'page_armor']);
+$result = modulehook('armor-text-domain', ['textDomain' => 'page_armor', 'textDomainNavigation' => 'navigation_armor']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

@@ -22,9 +22,9 @@ if (return_bytes($phpram) < 12582912 && -1 != $phpram && ! $session['installer']
 {
     // enter this ONLY if it's not an upgrade and if the limit is really too low
 
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.memory.warning', [], 'page-installer'));
-    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.memory.message', [], 'page-installer'));
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage8.memory.error', [], 'page-installer'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.memory.warning', [], 'page_installer'));
+    \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('stage8.memory.message', [], 'page_installer'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage8.memory.error', [], 'page_installer'));
 
     $session['installer']['stagecompleted'] = 8;
     $session['installer']['skipmodules']    = true;

@@ -8,7 +8,7 @@ require_once 'lib/systemmail.php';
 
 // Don't hook on to this text for your standard modules please, use "clan" instead.
 // This hook is specifically to allow modules that do other clans to create ambience.
-$result = modulehook('clan-text-domain', ['textDomain' => 'page-clan', 'textDomainNavigation' => 'navigation-clan']);
+$result = modulehook('clan-text-domain', ['textDomain' => 'page_clan', 'textDomainNavigation' => 'navigation_clan']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);
@@ -49,7 +49,7 @@ $ranks = [
     CLAN_FOUNDER => 'ranks.031'
 ];
 
-$ranks = ['ranks' => $ranks, 'textDomain' => 'page-clan', 'clanid' => null];
+$ranks = ['ranks' => $ranks, 'textDomain' => 'page_clan', 'clanid' => null];
 \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CLAN_RANK_LIST, null, $ranks);
 $ranks = modulehook('clanranks', $ranks);
 $params['ranksNames'] = $ranks['ranks'];

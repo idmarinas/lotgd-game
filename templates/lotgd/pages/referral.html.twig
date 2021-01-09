@@ -1,20 +1,20 @@
 {% translate_default_domain textDomain %}
 
-{{ 'paragraph'|t({ 'refererAward': refererAward, 'referMinLevel': referMinLevel, 'playerReferralUrl': '%sreferral.php?r=%s'|format(serverUrl, user.login|e('url')) })|colorize }}
+{{ 'paragraph'|trans({ 'refererAward': refererAward, 'referMinLevel': referMinLevel, 'playerReferralUrl': '%sreferral.php?r=%s'|format(serverUrl, user.login|e('url')) })|colorize }}
 
-{{ 'table.title'|t|colorize }}
+{{ 'table.title'|trans|colorize }}
 
 <table class="ui collapsing very basic table">
     <thead>
         <tr>
-            <th scope="col">{{ 'table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.dk'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.level'|t|uncolorize }}</th>
-            <th scope="col">{{ 'table.thead.awarded'|t|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.dk'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.level'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'table.thead.awarded'|trans|uncolorize }}</th>
         </tr>
     </thead>
-    {% set yes = 'table.tbody.yes'|t|colorize %}
-    {% set no = 'table.tbody.no'|t|colorize %}
+    {% set yes = 'table.tbody.yes'|trans|colorize %}
+    {% set no = 'table.tbody.no'|trans|colorize %}
     <tbody>
         {% for character in referrers %}
             <tr>
@@ -25,7 +25,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">{{ 'table.tbody.none'|t|colorize }}</td>
+                <td colspan="3">{{ 'table.tbody.none'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

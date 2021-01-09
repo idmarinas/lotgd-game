@@ -24,7 +24,7 @@ $dailypvpfights = getsetting('pvpday', 3);
 
 // Don't hook on to this text for your standard modules please, use "newday" instead.
 // This hook is specifically to allow modules that do other newdays to create ambience.
-$result = modulehook('newday-text-domain', ['textDomain' => 'page-newday', 'textDomainNavigation' => 'navigation-newday']);
+$result = modulehook('newday-text-domain', ['textDomain' => 'page_newday', 'textDomainNavigation' => 'navigation_newday']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

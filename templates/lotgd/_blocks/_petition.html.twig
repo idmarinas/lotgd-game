@@ -1,64 +1,64 @@
-{% translate_default_domain 'jaxon-petition' %}
+{% translate_default_domain 'jaxon_petition' %}
 
 {% block petition_help %}
-    {{ 'section.default.paragraph'|t|colorize }}
+    {{ 'section.default.paragraph'|trans|colorize }}
 
     {{ form(form) }}
 
     <br>
-    {{ 'section.default.note'|t|colorize }}
+    {{ 'section.default.note'|trans|colorize }}
 {% endblock petition_help %}
 
 {% block petition_report %}
-    {{ 'section.report.paragraph'|t|colorize }}
+    {{ 'section.report.paragraph'|trans|colorize }}
 
     <br>
 
     {{ form(form) }}
 
     <br>
-    {{ 'section.report.note'|t|colorize }}
+    {{ 'section.report.note'|trans|colorize }}
 {% endblock petition_report %}
 
 {% block petition_primer %}
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
-    {{ 'section.primer.title'|t|colorize }}
+    {{ 'section.primer.title'|trans|colorize }}
 
-    {{ 'section.primer.section.village.title'|t|colorize }}
-    {{ 'section.primer.section.village.paragraph'|t(_context)|colorize }}
+    {{ 'section.primer.section.village.title'|trans|colorize }}
+    {{ 'section.primer.section.village.paragraph'|trans(_context)|colorize }}
 
-    {{ 'section.primer.section.noob.title'|t|colorize }}
-    {{ 'section.primer.section.noob.paragraph'|t(_context)|colorize }}
+    {{ 'section.primer.section.noob.title'|trans|colorize }}
+    {{ 'section.primer.section.noob.paragraph'|trans(_context)|colorize }}
     {% if multimaster == 0 %}
-        {{ 'section.primer.section.noob.multimaster'|t|colorize }}
+        {{ 'section.primer.section.noob.multimaster'|trans|colorize }}
     {% endif %}
 
-    {{ 'section.primer.section.death.title'|t|colorize }}
-    {{ 'section.primer.section.death.paragraph'|t(_context)|colorize }}
+    {{ 'section.primer.section.death.title'|trans|colorize }}
+    {{ 'section.primer.section.death.paragraph'|trans(_context)|colorize }}
 
-    {{ 'section.primer.section.day.title'|t|colorize }}
-    {{ 'section.primer.section.day.paragraph'|t(_context)|colorize }}
+    {{ 'section.primer.section.day.title'|trans|colorize }}
+    {{ 'section.primer.section.day.paragraph'|trans(_context)|colorize }}
 
     {% if pvp %}
-        {{ 'section.primer.section.pvp.title'|t|colorize }}
-        {{ 'section.primer.section.pvp.paragraph'|t(_context)|colorize }}
+        {{ 'section.primer.section.pvp.title'|trans|colorize }}
+        {{ 'section.primer.section.pvp.paragraph'|trans(_context)|colorize }}
     {% endif %}
 
-    {{ 'section.primer.section.ready.title'|t|colorize }}
-    {{ 'section.primer.section.ready.paragraph'|t(_context)|colorize }}
+    {{ 'section.primer.section.ready.title'|trans|colorize }}
+    {{ 'section.primer.section.ready.paragraph'|trans(_context)|colorize }}
 
     <br>
     <hr>
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
 {% endblock petition_primer %}
 
 {% block petition_faq %}
-    {{ 'section.faq.title'|t|colorize }}
-    {{ 'section.faq.paragraph'|t|colorize }}
+    {{ 'section.faq.title'|trans|colorize }}
+    {{ 'section.faq.paragraph'|trans|colorize }}
 
-    {{ 'section.faq.content'|t|colorize }}
+    {{ 'section.faq.content'|trans|colorize }}
     <div class="ui list">
         {% for faq in faqList %}
             {% set onclick = faq.onclick|default(faq.href) %}
@@ -69,90 +69,90 @@
         {% endfor %}
     </div>
 
-    {{ 'section.faq.end'|t|colorize }}
+    {{ 'section.faq.end'|trans|colorize }}
 {% endblock petition_faq %}
 
 {% block petition_faq1 %}
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
-    {{ 'section.faq1.content.one'|t(_context)|colorize }}
+    {{ 'section.faq1.content.one'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.two'|t(_context)|colorize }}
+    {{ 'section.faq1.content.two'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.three'|t(_context)|colorize }}
+    {{ 'section.faq1.content.three'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.four'|t(_context)|colorize }}
+    {{ 'section.faq1.content.four'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.five'|t(_context)|colorize }}
+    {{ 'section.faq1.content.five'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.six'|t(_context)|colorize }}
+    {{ 'section.faq1.content.six'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.seven'|t(_context)|colorize }}
+    {{ 'section.faq1.content.seven'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.eight'|t(_context)|colorize }}
+    {{ 'section.faq1.content.eight'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.nine'|t(_context)|colorize }}
+    {{ 'section.faq1.content.nine'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.ten'|t(_context)|colorize }}
+    {{ 'section.faq1.content.ten'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.eleven'|t(_context)|colorize }}
+    {{ 'section.faq1.content.eleven'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.twelve'|t(_context)|colorize }}
+    {{ 'section.faq1.content.twelve'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.thirteen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.thirteen'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.fourteen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.fourteen'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.fifteen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.fifteen'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.sixteen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.sixteen'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.seventeen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.seventeen'|trans(_context)|colorize }}
 
-    {{ 'section.faq1.content.eightteen'|t(_context)|colorize }}
+    {{ 'section.faq1.content.eightteen'|trans(_context)|colorize }}
 
     <br>
     <hr>
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
 {% endblock petition_faq1 %}
 
 {% block petition_faq2 %}
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
-    {{ 'section.faq2.warning'|t|uncolorize }}
+    {{ 'section.faq2.warning'|trans|uncolorize }}
 
     <br>
 
-    <button id="show-spoiler" type="button" class="ui orange button">{{ 'section.faq2.show.content'|t|uncolorize }}</button>
+    <button id="show-spoiler" type="button" class="ui orange button">{{ 'section.faq2.show.content'|trans|uncolorize }}</button>
 
     <div id="spoiler" class="ui hidden message">
         <br>
-        {{ 'section.faq2.content.one'|t(_context)|colorize }}
+        {{ 'section.faq2.content.one'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.two'|t(_context)|colorize }}
+        {{ 'section.faq2.content.two'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.three'|t(_context)|colorize }}
+        {{ 'section.faq2.content.three'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.four'|t(_context)|colorize }}
+        {{ 'section.faq2.content.four'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.five'|t(_context)|colorize }}
+        {{ 'section.faq2.content.five'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.six'|t(_context)|colorize }}
+        {{ 'section.faq2.content.six'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.seven'|t(_context)|colorize }}
+        {{ 'section.faq2.content.seven'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.eight'|t(_context)|colorize }}
+        {{ 'section.faq2.content.eight'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.nine'|t(_context)|colorize }}
+        {{ 'section.faq2.content.nine'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.ten'|t(_context)|colorize }}
+        {{ 'section.faq2.content.ten'|trans(_context)|colorize }}
 
-        {{ 'section.faq2.content.eleven'|t(_context)|colorize }}
+        {{ 'section.faq2.content.eleven'|trans(_context)|colorize }}
     </div>
     <hr>
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
 
     <script>
         /* global $ */
@@ -165,21 +165,21 @@
 {% endblock petition_faq2 %}
 
 {% block petition_faq3 %}
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
-    {{ 'section.faq3.title'|t(_context)|colorize }}
+    {{ 'section.faq3.title'|trans(_context)|colorize }}
 
-    {{ 'section.faq3.content.one'|t(_context)|colorize }}
+    {{ 'section.faq3.content.one'|trans(_context)|colorize }}
 
-    {{ 'section.faq3.content.two'|t(_context)|colorize }}
+    {{ 'section.faq3.content.two'|trans(_context)|colorize }}
 
-    {{ 'section.faq3.content.three'|t(_context)|colorize }}
+    {{ 'section.faq3.content.three'|trans(_context)|colorize }}
 
-    {{ 'section.faq3.content.four'|t(_context)|colorize }}
+    {{ 'section.faq3.content.four'|trans(_context)|colorize }}
 
-    {{ 'section.faq3.content.five'|t(_context)|colorize }}
+    {{ 'section.faq3.content.five'|trans(_context)|colorize }}
 
     <hr>
-    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|t|colorize }}</a>
+    <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
 {% endblock petition_faq3 %}

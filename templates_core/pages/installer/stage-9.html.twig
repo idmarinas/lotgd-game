@@ -1,11 +1,11 @@
-{% translate_default_domain 'page-installer' %}
+{% translate_default_domain 'page_installer' %}
 
-{{ 'stage9.subtitle'|t|colorize }}
+{{ 'stage9.subtitle'|trans|colorize }}
 
 {# Pre-Install: before update core tables execute this code of install #}
-{{ 'stage9.upgradeInstall.title'|t|colorize }}
-{{ 'stage9.upgradeInstall.paragraph'|t|colorize }}
-{{ 'stage9.upgradeInstall.log'|t|colorize }}
+{{ 'stage9.upgradeInstall.title'|trans|colorize }}
+{{ 'stage9.upgradeInstall.paragraph'|trans|colorize }}
+{{ 'stage9.upgradeInstall.log'|trans|colorize }}
 
 <div class="ui segment">
     {% for message in upgradeInstall %}
@@ -13,12 +13,12 @@
     {% endfor %}
 </div>
 
-{{ 'stage9.building.title'|t|colorize }}
-{{ 'stage9.building.paragraph'|t|colorize }}
+{{ 'stage9.building.title'|trans|colorize }}
+{{ 'stage9.building.paragraph'|trans|colorize }}
 
 {# Synchronization of core tables, you can found this entities in "src/core/Entity" #}
-{{ 'stage9.sync.title'|t|colorize }}
-{{ 'stage9.sync.paragraph'|t|colorize }}
+{{ 'stage9.sync.title'|trans|colorize }}
+{{ 'stage9.sync.paragraph'|trans|colorize }}
 
 <div class="ui segment">
     {% for message in synchronizationTables %}
@@ -27,8 +27,8 @@
 </div>
 
 {# Insert data #}
-{{ 'stage9.data.title'|t|colorize }}
-{{ 'stage9.data.paragraph'|t|colorize }}
+{{ 'stage9.data.title'|trans|colorize }}
+{{ 'stage9.data.paragraph'|trans|colorize }}
 
 <div class="ui segment">
     {% for message in insertData %}
@@ -37,8 +37,8 @@
 </div>
 
 {# Installation of modules #}
-{{ 'stage9.modules.title'|t|colorize }}
-{{ 'stage9.modules.paragraph'|t|colorize }}
+{{ 'stage9.modules.title'|trans|colorize }}
+{{ 'stage9.modules.paragraph'|trans|colorize }}
 
 <div class="ui segment">
     {% for message in installOfModules %}
@@ -46,4 +46,4 @@
     {% endfor %}
 </div>
 
-{{ 'stage9.ready'|t|colorize }}
+{{ 'stage9.ready'|trans|colorize }}

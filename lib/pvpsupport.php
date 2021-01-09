@@ -217,7 +217,7 @@ function pvpdefeat($badguy, $killedloc)
 {
     global $session, $lotgdBattleContent, $textDomain;
 
-    \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation-app']);
+    \LotgdNavigation::addNav('battle.nav.news', 'news.php', ['textDomain' => 'navigation_app']);
 
     $badguy['acctid']       = (int) $badguy['acctid'];
     $badguy['creaturegold'] = (int) $badguy['creaturegold'];

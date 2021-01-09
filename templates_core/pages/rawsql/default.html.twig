@@ -1,16 +1,16 @@
 {% translate_default_domain textDomain %}
 
 {% if isResult %}
-    {{ 'section.default.result.count'|t({'n': rowCount})|colorize }}
+    {{ 'section.default.result.count'|trans({'n': rowCount})|colorize }}
 {% endif %}
 
 <form action="{{ 'rawsql.php'|lotgd_url }}" method="POST" class="ui form">
     <div class="field">
-        <label for="sql">{{ 'section.default.form.textarea.sql.label'|t|uncolorize }}</label>
+        <label for="sql">{{ 'section.default.form.textarea.sql.label'|trans|uncolorize }}</label>
         <textarea name="sql" id="sql">{{ sql }}</textarea>
     </div>
     <div class="field">
-        <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|t|uncolorize }}</button>
+        <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
     </div>
 </form>
 

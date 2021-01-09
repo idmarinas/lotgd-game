@@ -28,7 +28,7 @@ use Laminas\Validator\Translator\TranslatorInterface;
  */
 class Translator extends ZendTranslator implements TranslatorInterface
 {
-    public const TEXT_DOMAIN_DEFAULT = 'page-default';
+    public const TEXT_DOMAIN_DEFAULT = 'page_default';
 
     /**
      * Translate a message of LoTGD WITH MessageFormatter.

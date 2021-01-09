@@ -5,7 +5,7 @@ require_once 'lib/serverfunctions.class.php';
 
 check_su_access(SU_MEGAUSER);
 
-$textDomain = 'grotto-globaluserfunctions';
+$textDomain = 'grotto_globaluserfunctions';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

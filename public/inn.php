@@ -11,7 +11,7 @@ require_once 'lib/partner.php';
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
-$result = modulehook('inn-text-domain', ['textDomain' => 'page-inn', 'textDomainNavigation' => 'navigation-inn']);
+$result = modulehook('inn-text-domain', ['textDomain' => 'page_inn', 'textDomainNavigation' => 'navigation_inn']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

@@ -3,7 +3,7 @@
 <form action="{{ ('moderate.php?area=' ~ area)|lotgd_url }}" method="POST">
     <button type="submit" class="ui labeled icon button">
         <i class="refresh icon"></i>
-        {{ 'form.button.submit'|t({ 'section': sectionName[area]|default(area|default('...'))})|uncolorize }}
+        {{ 'form.button.submit'|trans({ 'section': sectionName[area]|default(area|default('...'))})|uncolorize }}
     </button>
 </form>
 

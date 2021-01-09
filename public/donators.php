@@ -8,7 +8,7 @@ require_once 'lib/systemmail.php';
 
 check_su_access(SU_EDIT_DONATIONS);
 
-$textDomain = 'grotto-donators';
+$textDomain = 'grotto_donators';
 
 //-- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);

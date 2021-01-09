@@ -62,7 +62,7 @@ function lotgd_generate_doppelganger(int $level): array
 
     //-- There is nothing in the database to challenge you, let's give you a doppelganger.
     $badguy                   = lotgd_generate_creature_levels($level);
-    $badguy['creaturename']   = \LotgdTranslator::t('doppelganger', ['name' => $session['user']['name']], 'page-creatures');
+    $badguy['creaturename']   = \LotgdTranslator::t('doppelganger', ['name' => $session['user']['name']], 'page_creatures');
     $badguy['creatureweapon'] = $session['user']['weapon'];
     $badguy['creaturegold']   = 0;
 

@@ -1,14 +1,14 @@
-{% translate_default_domain 'page-installer' %}
+{% translate_default_domain 'page_installer' %}
 
-{{ 'stage8.subtitle'|t|colorize }}
+{{ 'stage8.subtitle'|trans|colorize }}
 
-{{ 'stage8.paragraph'|t|colorize }}
+{{ 'stage8.paragraph'|trans|colorize }}
 
 <form action="installer.php?stage={{ stage }}" method="POST">
     <div class="ui top attached buttons">
-        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|t|uncolorize }}</button>
-        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|t|uncolorize }}</button>
-        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|t|uncolorize }}</button>
+        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|trans|uncolorize }}</button>
+        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|trans|uncolorize }}</button>
+        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|trans|uncolorize }}</button>
     </div>
     <div class="field">
         <table class="ui attached compact selectable striped table">
@@ -18,10 +18,10 @@
                         <th scope="col" colspan="6">{{ category }}</th>
                     </tr>
                     <tr>
-                        <th scope="col">{{ 'stage8.form.table.head.install'|t|colorize }}</th>
-                        <th scope="col">{{ 'stage8.form.table.head.recommended'|t|colorize }}</th>
-                        <th scope="col">{{ 'stage8.form.table.head.name'|t|colorize }}</th>
-                        <th scope="col">{{ 'stage8.form.table.head.author'|t|colorize }}</th>
+                        <th scope="col">{{ 'stage8.form.table.head.install'|trans|colorize }}</th>
+                        <th scope="col">{{ 'stage8.form.table.head.recommended'|trans|colorize }}</th>
+                        <th scope="col">{{ 'stage8.form.table.head.name'|trans|colorize }}</th>
+                        <th scope="col">{{ 'stage8.form.table.head.author'|trans|colorize }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,18 +53,18 @@
                             <td class="collapsing">
                                 <div class="ui radio checkbox">
                                     <input type="radio" name="modules[{{ modulename }}]" id="uninstall-{{ modulename }}" value="{{ uninstallop }}" {{ uninstallcheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
-                                    <label>{{ 'stage8.form.table.body.opts.uninstalled'|t|colorize }}</label>
+                                    <label>{{ 'stage8.form.table.body.opts.uninstalled'|trans|colorize }}</label>
                                 </div>
                                 <div class="ui radio checkbox">
                                     <input type="radio" name="modules[{{ modulename }}]" id="install-{{ modulename }}" value="{{ installop }}" {{ installcheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
-                                    <label>{{ 'stage8.form.table.body.opts.installed'|t|colorize }}</label>
+                                    <label>{{ 'stage8.form.table.body.opts.installed'|trans|colorize }}</label>
                                 </div>
                                 <div class="ui radio checkbox">
                                     <input type="radio" {{ not module.invalid and isRecommended ? 'data-recommended' : '' }} name="modules[{{ modulename }}]" id="activate-{{ modulename }}" value="{{ activateop }}" {{ activatecheck ? 'checked' : ''}} {{ module.invalid ? 'disabled' : '' }}>
-                                    <label>{{ 'stage8.form.table.body.opts.activated'|t|colorize }}</label>
+                                    <label>{{ 'stage8.form.table.body.opts.activated'|trans|colorize }}</label>
                                 </div>
                             </td>
-                            <td class="collapsing">{{ isRecommended ? 'stage8.form.table.body.recommended.yes'|t|colorize : 'stage8.form.table.body.recommended.no'|t|colorize }}</td>
+                            <td class="collapsing">{{ isRecommended ? 'stage8.form.table.body.recommended.yes'|trans|colorize : 'stage8.form.table.body.recommended.no'|trans|colorize }}</td>
                             <td>
                                 <span title="{{ module.description }}">{{ module.formalname|colorize }}</span>
                                 [{{ '`%%%s`0'|format(modulename)|colorize }}]
@@ -75,15 +75,15 @@
                 </tbody>
             {% else %}
                 <tr class="center aligned">
-                    <td>{{ 'stage8.no.modules'|t|colorize }}</td>
+                    <td>{{ 'stage8.no.modules'|trans|colorize }}</td>
                 </tr>
             {% endfor %}
         </table>
     </div>
     <div class="ui bottom attached buttons">
-        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|t|uncolorize }}</button>
-        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|t|uncolorize }}</button>
-        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|t|uncolorize }}</button>
+        <button type="submit" name="modulesok" class="ui button">{{ 'stage8.form.button.submit'|trans|uncolorize }}</button>
+        <button type="button" onclick="Lotgd.recommendedModules()" class="ui secondary button">{{ 'stage8.form.button.install'|trans|uncolorize }}</button>
+        <button type="reset" class="ui yellow button">{{ 'stage8.form.button.reset'|trans|uncolorize }}</button>
     </div>
 </form>
 

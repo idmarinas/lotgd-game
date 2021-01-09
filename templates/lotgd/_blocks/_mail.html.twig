@@ -1,23 +1,23 @@
-{% translate_default_domain 'jaxon-mail' %}
+{% translate_default_domain 'jaxon_mail' %}
 
 {% block mail_inbox %}
     {{ block('mail_buttons') }}
 
     <br>
 
-    {{ 'section.default.subtitle'|t|colorize }}
+    {{ 'section.default.subtitle'|trans|colorize }}
     <br>
     {% for msg in message %}
-        <br>{{ msg[0]|t(msg[1])|colorize }}
+        <br>{{ msg[0]|trans(msg[1])|colorize }}
     {% endfor %}
     <br>
     {% if mails|length %}
         {% set statusAltText = {
-            'online': 'section.default.table.tbody.status.online'|t|uncolorize,
-            'offline': 'section.default.table.tbody.status.offline'|t|uncolorize
+            'online': 'section.default.table.tbody.status.online'|trans|uncolorize,
+            'offline': 'section.default.table.tbody.status.offline'|trans|uncolorize
         } %}
-        {% set newMsg = 'section.default.table.tbody.msg.new'|t|uncolorize %}
-        {% set oldMsg = 'section.default.table.tbody.msg.old'|t|uncolorize %}
+        {% set newMsg = 'section.default.table.tbody.msg.new'|trans|uncolorize %}
+        {% set oldMsg = 'section.default.table.tbody.msg.old'|trans|uncolorize %}
 
         {% set arrow = sortDirection ? '<i class="sort descending icon"></i>' : '<i class="sort ascending icon"></i>' %}
 
@@ -30,21 +30,21 @@
                             {% set directionSubject = ('subject' == sortOrder ? newDirection : sortDirection) %}
                             <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.inbox('subject', '{{ directionSubject }}'); $(this).addClass('disabled')">
                                 {{ 'subject' == sortOrder ? arrow : '' }}
-                                {{ 'section.default.table.thead.subject'|t|uncolorize }}
+                                {{ 'section.default.table.thead.subject'|trans|uncolorize }}
                             </a>
                         </th>
                         <th scope="col">
                             {% set directionName = ('name' == sortOrder ? newDirection : sortDirection) %}
                             <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.inbox('name', '{{ directionName }}'); $(this).addClass('disabled')">
                                     {{ 'name' == sortOrder ? arrow : '' }}
-                                {{ 'section.default.table.thead.from'|t|uncolorize }}
+                                {{ 'section.default.table.thead.from'|trans|uncolorize }}
                             </a>
                         </th>
                         <th scope="col">
                             {% set directionDate = ('date' == sortOrder ? newDirection : sortDirection) %}
                             <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.inbox('date', '{{ directionDate }}'); $(this).addClass('disabled')">
                                     {{ 'date' == sortOrder ? arrow : '' }}
-                                {{ 'section.default.table.thead.date'|t|uncolorize }}
+                                {{ 'section.default.table.thead.date'|trans|uncolorize }}
                             </a>
                         </th>
                     </tr>
@@ -72,7 +72,7 @@
                                     {% if subject is array %}
                                         {{ subject[0]|tl(subject[1], subject[2])|colorize }}
                                     {% elseif not subject %}
-                                        {{ mail.subject|default('section.default.table.tbody.no.subject'|t)|e('html')|colorize }}
+                                        {{ mail.subject|default('section.default.table.tbody.no.subject'|trans)|e('html')|colorize }}
                                     {% else %}
                                         {{ subject|e('html')|colorize }}
                                     {% endif %}
@@ -80,14 +80,14 @@
                             </td>
                             <td class="collapsing">
                                 {% if 0 == mail.msgfrom %}
-                                    {{ 'section.default.table.tbody.from.system'|t|colorize }}
+                                    {{ 'section.default.table.tbody.from.system'|trans|colorize }}
                                 {% elseif mail.name %}
                                     {% set statusImage = mail.loggedin ? 'online' : 'offline' %}
 
                                     <img src="images/{{ statusImage }}.gif" alt="{{ statusAltText[statusImage] }}">
                                     {{ mail.name|colorize }}
                                 {% else %}
-                                    {{ 'section.default.table.tbody.from.deleted.user'|t|colorize }}
+                                    {{ 'section.default.table.tbody.from.deleted.user'|trans|colorize }}
                                 {% endif %}
                             </td>
                             <td class="collapsing">{{ '{date,date} {date,time}'|tmf({ 'date': mail.sent }) }}</td>
@@ -100,20 +100,20 @@
                     <div class="five wide column">
                         <div class="ui fluid floating labeled icon dropdown button" id="check_name_select">
                             <i class="user icon"></i>
-                            <span class="text">{{ 'section.default.form.dropdown.senders.name'|t|colorize }}</span>
+                            <span class="text">{{ 'section.default.form.dropdown.senders.name'|trans|colorize }}</span>
                             <div class="menu">
-                                <div class="header">{{ 'section.default.form.dropdown.senders.label'|t|colorize }}</div>
+                                <div class="header">{{ 'section.default.form.dropdown.senders.label'|trans|colorize }}</div>
                                 <div class="divider"></div>
                                 {% for sender in senders %}
                                     <div class="item" data-value="{{ sender.msgfrom }}">
                                         <span class="description">{{ sender.count }}</span>
                                         <span class="text">
                                             {% if 0 == sender.msgfrom %}
-                                                {{ 'section.default.table.tbody.from.system'|t|uncolorize }}
+                                                {{ 'section.default.table.tbody.from.system'|trans|uncolorize }}
                                             {% elseif sender.name %}
                                                 {{ sender.name|uncolorize|e('html') }}
                                             {% else %}
-                                                ({{ sender.msgfrom }}) {{ 'section.default.table.tbody.from.deleted.user'|t|uncolorize }}
+                                                ({{ sender.msgfrom }}) {{ 'section.default.table.tbody.from.deleted.user'|trans|uncolorize }}
                                             {% endif %}
                                         </span>
                                     </div>
@@ -122,19 +122,19 @@
                         </div>
                     </div>
                     <div class="three wide column">
-                        <button type="button" class="ui toggle check fluid button">{{ 'section.default.form.button.check.all'|t|uncolorize }}</button>
+                        <button type="button" class="ui toggle check fluid button">{{ 'section.default.form.button.check.all'|trans|uncolorize }}</button>
                     </div>
                     <div class="four wide column">
-                        <button class="ui red fluid delbulk button" type="button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteBulkMail(jaxon.getFormValues('mail-inbox-form')); $(this).addClass('loading disabled'); $('.ui.delete.button, .toggle.lotgd.checkbox, #check_name_select, .ui.check.toggle.button').addClass('disabled');">{{ 'section.default.form.button.submit'|t|uncolorize }}</button>
+                        <button class="ui red fluid delbulk button" type="button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteBulkMail(jaxon.getFormValues('mail-inbox-form')); $(this).addClass('loading disabled'); $('.ui.delete.button, .toggle.lotgd.checkbox, #check_name_select, .ui.check.toggle.button').addClass('disabled');">{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
                     </div>
                 </div>
             </div>
         </form>
     {% else %}
-        {{ 'section.default.no.mail'|t|colorize }}
+        {{ 'section.default.no.mail'|trans|colorize }}
     {% endif %}
 
-    {{ 'section.default.note'|t({ 'inboxCount': inboxCount , 'inboxLimit': inboxLimit, 'oldMail': oldMail })|colorize }}
+    {{ 'section.default.note'|trans({ 'inboxCount': inboxCount , 'inboxLimit': inboxLimit, 'oldMail': oldMail })|colorize }}
 
     {% do inline_script().captureStart() %}
         $('.ui.toggle.lotgd.checkbox').checkbox()
@@ -150,8 +150,8 @@
 
         $('.ui.toggle.button.check').state({
             text: {
-                inactive: '{{ "section.default.form.button.check.all"|t|uncolorize }}',
-                active: '{{ "section.default.form.button.check.none"|t|uncolorize }}'
+                inactive: '{{ "section.default.form.button.check.all"|trans|uncolorize }}',
+                active: '{{ "section.default.form.button.check.none"|trans|uncolorize }}'
             }
         })
             .on('click', function ()
@@ -172,7 +172,7 @@
     <form id="mail-message" method="POST" class="ui form">
         <input type="hidden" name="return_to" value="{{ msgId }}">
         <div class="inline field">
-            <label for="to">{{ 'section.write.form.to'|t|colorize }}</label>
+            <label for="to">{{ 'section.write.form.to'|trans|colorize }}</label>
             {% if row.acctid %}
                 <input type="hidden" name="to" id="to" value="{{ row.acctid }}">
                 <div class="input">{{ row.name|colorize }}</div>
@@ -181,14 +181,14 @@
             {% endif %}
         </div>
         <div class="field">
-            <label for="subject">{{ 'section.write.form.subject'|t|colorize }}</label>
+            <label for="subject">{{ 'section.write.form.subject'|trans|colorize }}</label>
             <input type="text" name="subject" id="subject" value="{{ row.subject|stripslashes|e('html')|trim }}">
         </div>
         <div class="ui warning message" id="warning" style="visibility: hidden; display: none;">
-            {{ 'section.write.mail.notice'|t|uncolorize }}
+            {{ 'section.write.mail.notice'|trans|uncolorize }}
         </div>
         <div class="field">
-            <label for="body">{{ 'section.write.form.body'|t|colorize }}</label>
+            <label for="body">{{ 'section.write.form.body'|trans|colorize }}</label>
             <span id="sizemsg"></span>
             <textarea name="body" id="body" onkeyup="sizeCount(this)">{{ row.body|stripslashes|replace({ '`n': '\n' })|e('html')|trim }}</textarea>
         </div>
@@ -222,8 +222,8 @@
             checkSuWarning(user)
         })
 
-        const charactersLeft = '{{ "section.write.form.characters.left"|t|colorize|e("js") }}'
-        const charactersOver = '{{ "section.write.form.characters.over"|t|colorize|e("js") }}'
+        const charactersLeft = '{{ "section.write.form.characters.left"|trans|colorize|e("js") }}'
+        const charactersOver = '{{ "section.write.form.characters.over"|trans|colorize|e("js") }}'
 
         const maxlen = '{{ mailSizeLimit }}'
 
@@ -274,8 +274,8 @@
     <br>
 
     {% set statusAltText = {
-        'online': 'section.read.card.user.status.online'|t|uncolorize,
-        'offline': 'section.read.card.user.status.offline'|t|uncolorize
+        'online': 'section.read.card.user.status.online'|trans|uncolorize,
+        'offline': 'section.read.card.user.status.offline'|trans|uncolorize
     } %}
 
     {% if 0 == message.msgfrom %}
@@ -287,17 +287,17 @@
 
 
     {% if not message %}.
-        {% set subjectDisplay = 'section.read.card.no.message.header'|t|colorize %}
+        {% set subjectDisplay = 'section.read.card.no.message.header'|trans|colorize %}
     {% elseif subject is array %}
         {% set subjectDisplay = subject[0]|tl(subject[1], subject[2])|colorize %}
     {% elseif not subject %}
-        {% set subjectDisplay = message.subject|default('section.read.card.no.subject'|t)|e('html')|colorize %}
+        {% set subjectDisplay = message.subject|default('section.read.card.no.subject'|trans)|e('html')|colorize %}
     {% else %}
         {% set subjectDisplay = subject|e('html')|colorize %}
     {% endif %}
 
     {% if not message %}
-        {% set bodyDisplay = 'section.read.card.no.message.body'|t|colorize %}
+        {% set bodyDisplay = 'section.read.card.no.message.body'|trans|colorize %}
     {% elseif body is array %}
         {% set bodyDisplay = body[0]|tl(body[1], body[2])|colorize %}
     {% else %}
@@ -307,35 +307,35 @@
     <div class="ui fluid card">
         <div id="mail-read-buttons" class="ui top attached buttons">
             <a class="ui {{ message.messageid and message.msgfrom ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.reply('{{ message.messageid }}'); $(this).addClass('loading disabled');">
-                {{ 'section.read.button.top.reply'|t|uncolorize }}
+                {{ 'section.read.button.top.reply'|trans|uncolorize }}
             </a>
             <a class="ui delete red {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.deleteMail('{{ message.messageid }}'); $(this).addClass('loading disabled');">
-                {{ 'section.read.button.top.del'|t|uncolorize }}
+                {{ 'section.read.button.top.del'|trans|uncolorize }}
             </a>
             <a class="ui unread {{ message.messageid ? '' : 'disabled' }} button" onclick="JaxonLotgd.Ajax.Core.Mail.unread('{{ message.messageid }}'); $(this).addClass('loading disabled');">
-                {{ 'section.read.button.top.unread'|t|uncolorize }}
+                {{ 'section.read.button.top.unread'|trans|uncolorize }}
             </a>
             <a class="ui report {{ message.msgfrom ? '' : 'disabled' }} orange button" onclick="JaxonLotgd.Ajax.Core.Petition.report('{{ message.msgfrom }}', '{{ bodyDisplay|e('html_attr') }}'); $(this).addClass('loading disabled');">
-                {{ 'section.read.button.top.report'|t|uncolorize }}
+                {{ 'section.read.button.top.report'|trans|uncolorize }}
             </a>
         </div>
         <div class="content">
             {% if not message.seen and message %}
-                <span class="ui teal ribbon label">{{ 'section.read.card.new'|t|uncolorize }}</span>
+                <span class="ui teal ribbon label">{{ 'section.read.card.new'|trans|uncolorize }}</span>
             {% endif %}
-            <div class="right floated meta">{{ 'section.read.card.sent'|t({ 'date': message.sent })|colorize }}</div>
+            <div class="right floated meta">{{ 'section.read.card.sent'|trans({ 'date': message.sent })|colorize }}</div>
 
             {% if 0 == message.msgfrom %}
-                {% set senderName = 'section.read.card.from.user.system'|t|colorize %}
+                {% set senderName = 'section.read.card.from.user.system'|trans|colorize %}
             {% elseif sender.name %}
                 {% set statusImage = sender.acct.loggedin ? 'online' : 'offline' %}
 
                 {% set senderName = '<img src="images/' ~ statusImage ~ '.gif" alt="' ~ statusAltText[statusImage] ~ '">' ~ sender.name|colorize %}
             {% else %}
-                {% set senderName = 'section.read.card.from.user.deleted.user'|t|colorize %}
+                {% set senderName = 'section.read.card.from.user.deleted.user'|trans|colorize %}
             {% endif %}
 
-            {{ 'section.read.card.from.label'|t({ 'name': senderName })|colorize }}
+            {{ 'section.read.card.from.label'|trans({ 'name': senderName })|colorize }}
         </div>
         <div class="content">
             <span class="ui header">{{ subjectDisplay }}</span>
@@ -344,10 +344,10 @@
         {% set jaxonRead = 'JaxonLotgd.Ajax.Core.Mail.read(%s);' %}
         <div class="ui bottom attached primary buttons">
             <a class="ui {{ paginator.previous ? '' : 'disabled' }} button" onclick="{{ paginator.previous ? jaxonRead|format(paginator.previous) : '' }} $(this).addClass('loading disabled')">
-                {{ 'section.read.card.paginator.prev'|t|uncolorize }}
+                {{ 'section.read.card.paginator.prev'|trans|uncolorize }}
             </a>
             <a class="ui {{ paginator.next ? '' : 'disabled' }} button" onclick="{{ paginator.next ? jaxonRead|format(paginator.next) : '' }} $(this).addClass('loading disabled')">
-                {{ 'section.read.card.paginator.next'|t|uncolorize }}
+                {{ 'section.read.card.paginator.next'|trans|uncolorize }}
             </a>
         </div>
     </div>
@@ -378,8 +378,8 @@
     <div class="ui one column center aligned grid">
         <div class="column">
             <div class="ui buttons">
-                <a class="ui button" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">{{ 'button.inbox'|t|colorize }}</a>
-                <a class="ui primary button" onclick="JaxonLotgd.Ajax.Core.Mail.write(); $(this).addClass('loading disabled')">{{ 'button.write'|t|colorize }}</a>
+                <a class="ui button" onclick="JaxonLotgd.Ajax.Core.Mail.inbox(); $(this).addClass('loading disabled')">{{ 'button.inbox'|trans|colorize }}</a>
+                <a class="ui primary button" onclick="JaxonLotgd.Ajax.Core.Mail.write(); $(this).addClass('loading disabled')">{{ 'button.write'|trans|colorize }}</a>
 
                 {% for btn in buttons %}
                     <a class="ui {{ btn[1].attributes.class }} button" onclick="{{ btn[1].attributes.onclick }}">{{ btn[0]|tl(btn[1], btn[2])|colorize }}</a>

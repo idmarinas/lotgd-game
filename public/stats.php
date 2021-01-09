@@ -7,7 +7,7 @@ require_once 'common.php';
 
 check_su_access(SU_EDIT_CONFIG);
 
-$textDomain = 'grotto-stats';
+$textDomain = 'grotto_stats';
 
 $params = [
     'textDomain' => $textDomain

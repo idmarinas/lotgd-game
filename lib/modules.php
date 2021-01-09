@@ -251,7 +251,7 @@ function module_editor_navs($like, $linkprefix)
         {
             $curcat = $row->getCategory();
             \LotgdNavigation::addHeader('modules.nav.category', [
-                'textDomain' => 'navigation-app',
+                'textDomain' => 'navigation_app',
                 'params'     => [
                     'category' => $curcat,
                 ],

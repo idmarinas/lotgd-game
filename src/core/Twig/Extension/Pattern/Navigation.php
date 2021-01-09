@@ -49,11 +49,11 @@ trait Navigation
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
         }
         else
         {
-            $label = $this->getTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
@@ -95,11 +95,11 @@ trait Navigation
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->getTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation-app', $options['locale'] ?? null);
         }
         else
         {
-            $label = $this->getTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
+            $label = $this->symfonyTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];

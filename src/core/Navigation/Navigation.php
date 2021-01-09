@@ -28,7 +28,7 @@ class Navigation
     /**
      * Default text domain for navigation menu.
      */
-    public const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation-app';
+    public const DEFAULT_NAVIGATION_TEXT_DOMAIN = 'navigation_app';
 
     /**
      * Headers for navigation menu with options.

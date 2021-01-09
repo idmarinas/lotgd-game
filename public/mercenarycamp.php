@@ -9,7 +9,7 @@ checkday();
 
 // Don't hook on to this text for your standard modules please, use "inn" instead.
 // This hook is specifically to allow modules that do other inns to create ambience.
-$result = modulehook('mercenarycamp-text-domain', ['textDomain' => 'page-mercenarycamp', 'textDomainNavigation' => 'navigation-mercenarycamp']);
+$result = modulehook('mercenarycamp-text-domain', ['textDomain' => 'page_mercenarycamp', 'textDomainNavigation' => 'navigation_mercenarycamp']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

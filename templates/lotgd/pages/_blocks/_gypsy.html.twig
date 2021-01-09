@@ -1,11 +1,11 @@
 {% translate_default_domain textDomain %}
 
 {% block gypsy_default %}
-    {{ 'section.default.paragraph'|t({ 'sex': user.sex, 'cost': cost })|colorize }}
+    {{ 'section.default.paragraph'|trans({ 'sex': user.sex, 'cost': cost })|colorize }}
 {% endblock gypsy_default %}
 
 {% block gypsy_pay %}
-    {{ 'section.pay.paragraph'|t({ 'gold': user.gold })|colorize }}
+    {{ 'section.pay.paragraph'|trans({ 'gold': user.gold })|colorize }}
 {% endblock gypsy_pay %}
 
 {% block gypsy_talk %}

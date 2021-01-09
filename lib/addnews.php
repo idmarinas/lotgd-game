@@ -7,7 +7,7 @@
  * @param string $textDomain
  * @param bool   $hideFromBio
  */
-function addnews($text, array $params = [], $textDomain = 'partial-news', ?bool $hideFromBio = null)
+function addnews($text, array $params = [], $textDomain = 'partial_news', ?bool $hideFromBio = null)
 {
     global $session;
 

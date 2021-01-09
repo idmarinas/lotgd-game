@@ -7,9 +7,9 @@ require_once 'common.php';
 
 check_su_access(SU_MANAGE_MODULES);
 
-$textDomain = 'grotto-modules';
+$textDomain = 'grotto_modules';
 
-//-- Init page
+//_- Init page
 \LotgdResponse::pageStart('title', [], $textDomain);
 
 \LotgdNavigation::superuserGrottoNav();

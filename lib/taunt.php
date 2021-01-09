@@ -56,6 +56,6 @@ function select_taunt($extraParams = []): array
     return [
         'taunt'      => $taunt,
         'params'     => $params,
-        'textDomain' => 'partial-taunt',
+        'textDomain' => 'partial_taunt',
     ];
 }

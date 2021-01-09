@@ -3,29 +3,29 @@
 <form action="{{ 'creatures.php?op=search'|lotgd_url }}" method="POST" class="ui form">
     <div class="field">
         <div class="ui action input">
-            <input name="q" id="q" placeholder="{{ 'section.default.form.input.search'|t|uncolorize }}">
-            <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|t|uncolorize }}</button>
+            <input name="q" id="q" placeholder="{{ 'section.default.form.input.search'|trans|uncolorize }}">
+            <button type="submit" class="ui button">{{ 'section.default.form.button.submit'|trans|uncolorize }}</button>
         </div>
     </div>
 </form>
 
-{% set yes = 'section.default.table.tbody.yes'|t %}
-{% set no = 'section.default.table.tbody.no'|t %}
-{% set edit = 'section.default.table.tbody.edit'|t %}
-{% set del = 'section.default.table.tbody.del'|t %}
-{% set options = { 'text': 'section.default.table.tbody.confirm'|t }|json_encode %}
+{% set yes = 'section.default.table.tbody.yes'|trans %}
+{% set no = 'section.default.table.tbody.no'|trans %}
+{% set edit = 'section.default.table.tbody.edit'|trans %}
+{% set del = 'section.default.table.tbody.del'|trans %}
+{% set options = { 'text': 'section.default.table.tbody.confirm'|trans }|json_encode %}
 
 <table class="ui very compact striped selectable table">
     <thead>
         <tr>
-            <th scope="col">{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.name'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.cat'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.weapon'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.script'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.winmsg'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.diemsg'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.author'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.name'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.cat'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.weapon'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.script'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.winmsg'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.diemsg'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.author'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
@@ -51,7 +51,7 @@
             </tr>
         {% else %}
             <tr>
-                <td class="center aligned" colspan="8">{{ 'section.default.table.tbody.no.creatures'|t|colorize }}</td>
+                <td class="center aligned" colspan="8">{{ 'section.default.table.tbody.no.creatures'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

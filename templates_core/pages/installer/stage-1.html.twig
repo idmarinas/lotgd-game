@@ -1,19 +1,19 @@
-{% translate_default_domain 'page-installer' %}
+{% translate_default_domain 'page_installer' %}
 
-{{ 'stage1.subtitle'|t|colorize }}
-{{ 'stage1.paragraph'|t|colorize }}
+{{ 'stage1.subtitle'|trans|colorize }}
+{{ 'stage1.paragraph'|trans|colorize }}
 
 {% if cclicense %}
     <div style='height: 350px; max-height: 350px; overflow: auto; color: #FFFFFF; background-color: #000000; padding: 10px;'>
         {{ cclicense }}
     </div>
 {% else %}
-    {{ 'stage1.cclicense.paragraph'|t({'link': '<a target="_blank" rel="noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode">Creative Commons</a>'})|colorize }}
+    {{ 'stage1.cclicense.paragraph'|trans({'link': '<a target="_blank" rel="noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode">Creative Commons</a>'})|colorize }}
 {% endif %}
 
 {% if lotgdlicense %}
-    {{ 'stage1.lotgdlicense.plainText'|t|colorize }}
+    {{ 'stage1.lotgdlicense.plainText'|trans|colorize }}
     {{ lotgdlicense|nl2br }}
 {% else %}
-    {{ 'stage1.lotgdlicense.paragraph'|t({'expected': lotgdlicenseExpected, 'got': lotgdlicenseGot})|colorize }}
+    {{ 'stage1.lotgdlicense.paragraph'|trans({'expected': lotgdlicenseExpected, 'got': lotgdlicenseGot})|colorize }}
 {% endif %}

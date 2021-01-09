@@ -7,7 +7,7 @@ require_once 'lib/names.php';
 
 check_su_access(SU_EDIT_BANS);
 
-$textDomain = 'page-bans';
+$textDomain = 'page_bans';
 $params = [ 'textDomain' => $textDomain ];
 
 $op = \LotgdRequest::getQuery('op');

@@ -1,34 +1,34 @@
-{% translate_default_domain 'page-list' %}
+{% translate_default_domain 'page_list' %}
 
 {% if user.loggedin %}
     <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
         <div class="field inline">
-            <label for="">{{ 'form.search.label'|t }}</label>
+            <label for="">{{ 'form.search.label'|trans }}</label>
             <div class="ui action input">
                 <input name='name'>
-                <button type='submit' class='ui button'>{{ 'form.search.button'|t }}</button>
+                <button type='submit' class='ui button'>{{ 'form.search.button'|trans }}</button>
             </div>
         </div>
     </form>
     <br>
 {% endif %}
-<strong>{{ title.title|t(title.params)|colorize }}</strong>
+<strong>{{ title.title|trans(title.params)|colorize }}</strong>
 <br>
-{% set writemail = 'table.opcs.writemail'|t|uncolorize %}
-{% set alive = 'table.opcs.alive'|t|colorize %}
-{% set dead = 'table.opcs.dead'|t|colorize %}
-{% set unconscious = 'table.opcs.unconscious'|t|colorize %}
+{% set writemail = 'table.opcs.writemail'|trans|uncolorize %}
+{% set alive = 'table.opcs.alive'|trans|colorize %}
+{% set dead = 'table.opcs.dead'|trans|colorize %}
+{% set unconscious = 'table.opcs.unconscious'|trans|colorize %}
 
 <table class="ui very compact striped table">
     <thead>
         <tr>
-            <th scope="col">{{ 'table.header.alive'|t }}</th>
-            <th scope="col">{{ 'table.header.level'|t }}</th>
-            <th scope="col">{{ 'table.header.name'|t }}</th>
-            <th scope="col">{{ 'table.header.location'|t }}</th>
-            <th scope="col">{{ 'table.header.race'|t }}</th>
-            <th scope="col">{{ 'table.header.sex'|t }}</th>
-            <th scope="col">{{ 'table.header.last'|t }}</th>
+            <th scope="col">{{ 'table.header.alive'|trans }}</th>
+            <th scope="col">{{ 'table.header.level'|trans }}</th>
+            <th scope="col">{{ 'table.header.name'|trans }}</th>
+            <th scope="col">{{ 'table.header.location'|trans }}</th>
+            <th scope="col">{{ 'table.header.race'|trans }}</th>
+            <th scope="col">{{ 'table.header.sex'|trans }}</th>
+            <th scope="col">{{ 'table.header.last'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -58,16 +58,16 @@
                     {% set loggedin =  ('now'|date('U') - warrior.laston|date('U') < getsetting('LOGINTIMEOUT', 900) and warrior.loggedin) %}
                     {{ '`&%s`0'|format(warrior.location)|colorize }}
                     {% if loggedin %}
-                        {{ 'table.warrior.isOnline'|t|colorize }}
+                        {{ 'table.warrior.isOnline'|trans|colorize }}
                     {% endif %}
                 </td>
                 <td>{{ ('character.racename'|tl(null, warrior.race ?: constant('RACE_UNKNOWN')))|colorize }}</td>
-                <td>{{ 'table.warrior.sex'|t({'sex': warrior.sex})|colorize }}</td>
+                <td>{{ 'table.warrior.sex'|trans({'sex': warrior.sex})|colorize }}</td>
                 <td>{{ warrior.laston|relative_date }}</td>
             </tr>
         {% else %}
             <tr>
-                <td class="center aligned" colspan="7">{{ 'table.warrior.notfound'|t|colorize }}</td>
+                <td class="center aligned" colspan="7">{{ 'table.warrior.notfound'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

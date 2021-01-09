@@ -13,7 +13,7 @@ if ($session['user']['loggedin'] ?? false)
 }
 
 //-- Init page
-\LotgdResponse::pageStart('title', [], 'page-news');
+\LotgdResponse::pageStart('title', [], 'page_news');
 
 $hookIntercept = modulehook('news-intercept', ['showLastMotd' => true]);
 

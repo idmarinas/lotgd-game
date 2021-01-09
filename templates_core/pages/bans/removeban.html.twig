@@ -6,10 +6,10 @@
             <div class="ui segment">
                 <form action="{{ 'bans.php?op=searchban'|lotgd_url }}" autocomplete="off" method="POST" class="ui form">
                     <div class="inline field">
-                        <label for="target">{{ 'searchban.form.search.label'|t|colorize }}</label>
+                        <label for="target">{{ 'searchban.form.search.label'|trans|colorize }}</label>
                         <div class="ui action input">
                             <input type="text" name="target" id="target">
-                            <button type="submit" class="ui button">{{ 'searchban.form.search.button.submit'|t|uncolorize }}</button>
+                            <button type="submit" class="ui button">{{ 'searchban.form.search.button.submit'|trans|uncolorize }}</button>
                         </div>
                     </div>
                 </form>
@@ -20,26 +20,26 @@
 {% endif %}
 
 {% if showing is array %}
-    {{ showing[0]|t(showing[1])|colorize }}
+    {{ showing[0]|trans(showing[1])|colorize }}
 {% else %}
-    {{ showing|t|colorize }}
+    {{ showing|trans|colorize }}
 {% endif %}
 
 <table class="ui very compact striped selectable table">
     <thead>
         <tr>
-            <th>{{ 'removeban.table.header.ops'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.bauth'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.ipd'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.dur'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.mssg'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.aff'|t|colorize }}</th>
-            <th>{{ 'removeban.table.header.last'|t|colorize }}</th>
+            <th>{{ 'removeban.table.header.ops'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.bauth'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.ipd'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.dur'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.mssg'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.aff'|trans|colorize }}</th>
+            <th>{{ 'removeban.table.header.last'|trans|colorize }}</th>
         </tr>
     </thead>
     <tbody>
-        {% set liftban = 'removeban.table.body.link.liftban'|t|colorize %}
-        {% set affected = 'removeban.table.body.link.affected'|t|colorize %}
+        {% set liftban = 'removeban.table.body.link.liftban'|trans|colorize %}
+        {% set affected = 'removeban.table.body.link.affected'|trans|colorize %}
         {% for row in paginator %}
             <tr>
                 <td>
@@ -57,7 +57,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">{{ 'removeban.table.empty'|t|colorize }}</td>
+                <td colspan="7">{{ 'removeban.table.empty'|trans|colorize }}</td>
             </tr>
         {% endfor %}
     </tbody>

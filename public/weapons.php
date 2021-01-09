@@ -9,7 +9,7 @@ checkday();
 
 // Don't hook on to this text for your standard modules please, use "weapon" instead.
 // This hook is specifically to allow modules that do other weapons to create ambience.
-$result = modulehook('weapon-text-domain', ['textDomain' => 'page-weapon', 'textDomainNavigation' => 'navigation-weapon']);
+$result = modulehook('weapon-text-domain', ['textDomain' => 'page_weapon', 'textDomainNavigation' => 'navigation_weapon']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

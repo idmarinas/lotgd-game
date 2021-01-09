@@ -14,7 +14,7 @@ require_once 'lib/forestoutcomes.php';
 
 // Don't hook on to this text for your standard modules please, use "train" instead.
 // This hook is specifically to allow modules that do other trains to create ambience.
-$result = modulehook('train-text-domain', ['textDomain' => 'page-train', 'textDomainNavigation' => 'navigation-train']);
+$result = modulehook('train-text-domain', ['textDomain' => 'page_train', 'textDomainNavigation' => 'navigation_train']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

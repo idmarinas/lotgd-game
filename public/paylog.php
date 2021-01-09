@@ -23,7 +23,7 @@ check_su_access(SU_EDIT_PAYLOG);
 +-----------+---------------------+------+-----+---------+----------------+
 */
 
-$textDomain = 'grotto-paylog';
+$textDomain = 'grotto_paylog';
 
 $month = (int) \LotgdRequest::getQuery('month');
 

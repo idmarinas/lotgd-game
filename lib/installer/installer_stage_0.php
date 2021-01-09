@@ -54,7 +54,7 @@ if (DB_CHOSEN)
         }
         else
         {
-            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('stage0.authentication.login.fail', [], 'page-installer'));
+            \LotgdFlashMessages::addInfoMessage(\LotgdTranslator::t('stage0.authentication.login.fail', [], 'page_installer'));
 
             return redirect('installer.php?stage=0');
         }

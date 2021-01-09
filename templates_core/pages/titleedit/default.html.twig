@@ -1,20 +1,20 @@
 {% translate_default_domain textDomain %}
 
-{{ 'section.default.title'|t|colorize }}
+{{ 'section.default.title'|trans|colorize }}
 
 <table class="ui very compact striped table">
     <thead>
         <tr>
-            <th scope="col">{{ 'section.default.table.thead.ops'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.dks'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.mtit'|t|uncolorize }}</th>
-            <th scope="col">{{ 'section.default.table.thead.ftit'|t|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.ops'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.dks'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.mtit'|trans|uncolorize }}</th>
+            <th scope="col">{{ 'section.default.table.thead.ftit'|trans|uncolorize }}</th>
         </tr>
     </thead>
     <tbody>
-        {% set edit = 'section.default.table.tbody.edit'|t|uncolorize %}
-        {% set del = 'section.default.table.tbody.del'|t|uncolorize %}
-        {% set options = {'text': 'section.default.table.tbody.confirm'|t|uncolorize }|json_encode|e('html_attr') %}
+        {% set edit = 'section.default.table.tbody.edit'|trans|uncolorize %}
+        {% set del = 'section.default.table.tbody.del'|trans|uncolorize %}
+        {% set options = {'text': 'section.default.table.tbody.confirm'|trans|uncolorize }|json_encode|e('html_attr') %}
 
         {% for row in paginator %}
             <tr>

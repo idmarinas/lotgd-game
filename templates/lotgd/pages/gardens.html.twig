@@ -5,7 +5,7 @@
 {% endfor %}
 
 {% if showGardenDesc %}
-    {{ 'description'|t|colorize }}
+    {{ 'description'|trans|colorize }}
 {% endif %}
 
 {% for tpl, params in includeTemplatesPost %}

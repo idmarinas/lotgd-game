@@ -15,12 +15,12 @@ if (0 == $superusers)
 
         if ($pass1 != $pass2)
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordNotMatch', [], 'page-installer'));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordNotMatch', [], 'page_installer'));
             $showform = true;
         }
         elseif (\strlen($pass1) < 6)
         {
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordShort', [], 'page-installer'));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.passwordShort', [], 'page_installer'));
             $showform = true;
         }
         else
@@ -69,7 +69,7 @@ if (0 == $superusers)
                 exit('Failed to create Admin account and character. Your first check should be to make sure that MYSQL (if that is your type) is not in strict mode.');
             }
 
-            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.success', ['name' => $name], 'page-installer'));
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.post.success', ['name' => $name], 'page_installer'));
             savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 
             return redirect('home.php');
@@ -93,7 +93,7 @@ if (0 == $superusers)
 }
 else
 {
-    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.alreadySuperuser', [], 'page-installer'));
+    \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('stage10.alreadySuperuser', [], 'page_installer'));
 
     savesetting('installer_version', \Lotgd\Core\Application::VERSION);
 

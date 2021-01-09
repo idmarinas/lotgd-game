@@ -33,7 +33,7 @@ class Response extends HttpResponse
      */
     public function pageTitle(string $message, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
     {
-        $title     = $this->getTranslator()->trans($message, $parameters, $textDomain, $locale);
+        $title     = $this->symfonyTranslator()->trans($message, $parameters, $textDomain, $locale);
         $headTitle = $this->getService(HeadTitle::class);
 
         $headTitle($title, 'set');
@@ -194,7 +194,7 @@ class Response extends HttpResponse
         $this->getTemplate()->addGlobal('session', $sesion); //-- Update session info
 
         //-- output page generation time
-        $gentime = \Tracy\Debugger::timer('page-footer');
+        $gentime = \Tracy\Debugger::timer('page_footer');
         $session['user']['gentime'] += $gentime;
         ++$session['user']['gentimecount'];
 

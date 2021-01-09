@@ -8,7 +8,7 @@ require_once 'lib/events.php';
 
 // Don't hook on to this text for your standard modules please, use "gardens" instead.
 // This hook is specifically to allow modules that do other gardenss to create ambience.
-$result = modulehook('gardens-text-domain', ['textDomain' => 'page-gardens', 'textDomainNavigation' => 'navigation-gardens']);
+$result = modulehook('gardens-text-domain', ['textDomain' => 'page_gardens', 'textDomainNavigation' => 'navigation_gardens']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

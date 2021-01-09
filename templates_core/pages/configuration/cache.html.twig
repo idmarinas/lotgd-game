@@ -27,9 +27,9 @@
     {% set segment = segment ~ '</div>' %}
 {% endfor %}
 
-<h3 class="ui block header">{{ 'section.cache.description'|t|colorize }}</h3>
-<div class="ui warning message">{{ 'section.cache.twig_warning'|t|uncolorize }}</div>
-<div class="ui warning message">{{ 'section.cache.deprecated_warning'|t|uncolorize }}</div>
+<h3 class="ui block header">{{ 'section.cache.description'|trans|colorize }}</h3>
+<div class="ui warning message">{{ 'section.cache.twig_warning'|trans|uncolorize }}</div>
+<div class="ui warning message">{{ 'section.cache.deprecated_warning'|trans|uncolorize }}</div>
 <div class="ui grid">
     <div class="four wide column">
         <div class="ui lotgd vertical fluid tabular menu">
@@ -41,6 +41,6 @@
     </div>
 </div>
 <br>
-<div class="ui warning message">{{ 'section.cache.note'|t|uncolorize }}</div>
-<div class="ui error message">{{ 'section.cache.unmanage'|t|uncolorize }}</div>
-<div class="ui info message">{{ 'section.cache.cached'|t|uncolorize }}</div>
+<div class="ui warning message">{{ 'section.cache.note'|trans|uncolorize }}</div>
+<div class="ui error message">{{ 'section.cache.unmanage'|trans|uncolorize }}</div>
+<div class="ui info message">{{ 'section.cache.cached'|trans|uncolorize }}</div>

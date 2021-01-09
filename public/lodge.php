@@ -8,7 +8,7 @@ require_once 'lib/names.php';
 
 // Don't hook on to this text for your standard modules please, use "lodge" instead.
 // This hook is specifically to allow modules that do other lodges to create ambience.
-$result = modulehook('lodge-text-domain', ['textDomain' => 'page-lodge', 'textDomainNavigation' => 'navigation-lodge']);
+$result = modulehook('lodge-text-domain', ['textDomain' => 'page_lodge', 'textDomainNavigation' => 'navigation_lodge']);
 $textDomain = $result['textDomain'];
 $textDomainNavigation = $result['textDomainNavigation'];
 unset($result);

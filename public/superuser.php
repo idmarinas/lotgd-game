@@ -7,7 +7,7 @@ require_once 'common.php';
 
 check_su_access(0xFFFFFFFF & ~SU_DOESNT_GIVE_GROTTO);
 
-$textDomain = 'grotto-superuser';
+$textDomain = 'grotto_superuser';
 
 $op = \LotgdRequest::getQuery('op');
 

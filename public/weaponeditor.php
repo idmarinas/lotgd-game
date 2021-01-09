@@ -14,7 +14,7 @@ $id = (int) \LotgdRequest::getQuery('id');
 $weaponlevel = (int) \LotgdRequest::getQuery('level');
 $repository = \Doctrine::getRepository('LotgdCore:Weapons');
 
-$textDomain = 'grotto-weaponeditor';
+$textDomain = 'grotto_weaponeditor';
 
 //-- Init page
 \LotgdResponse::pageStart('title', ['level' => $weaponlevel], $textDomain);
