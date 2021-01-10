@@ -11,15 +11,14 @@
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 
 # Módulos
--   Migrar el uso de `LotgdCache::` a `$cache = LotgdKernel::get('cache.app')`
+-   ...
 
-# Para la versión 4.11.0
+# Para la versión 4.12.0
 -   ...
 
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación por consola.
 -   Migración al uso de Symfony usando el http-kernel (completado en esta versión)
-    -   Se elimina Laminas service manager.
     -   https://symfony.com/doc/current/components/http_kernel.html
         -   Se migrará 
             -   La configuración
@@ -29,16 +28,18 @@
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
+-   **BD** Eliminar compatibilidad con Laminas Service Manager.
+-   **BC** Eliminar compatibilidad con Laminas Cache.
+-   **BD** Eliminar compatibilidad con Laminas Translation.
+-   **BD** Eliminar compatibilidad con Laminas Form.
 
 # Para la versión 6.0.0
 -   Seguir la transición hacia un sistema Symfony Framework
--   Eliminar compatibilidad con el viejo sistema de traducción.
--   Eliminar compatibilidad con el viejo sistema de creación de formularios.
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
 -   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
 
-# Para la versión 7.0.0 
+# Para la versión 7.0.0  (LoTGD Core as Symfony APP)
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Migrar a la estructura propia de Symfony Framework
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
@@ -49,7 +50,7 @@
 -   Los módulos antiguos seguiran funcionando.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 
-# Para la versión 8.0.0
+# Para la versión 8.0.0 (LoTGD CORE as Bundle)
 -   Esta versión LoTGD Core se transforma en un Symfony Bundle.
 -   Eliminar compatibilidad con el uso del viejo sistema de módulos
 -   Se usa un sistema de módulos tipo Bundle (módulos complejos)

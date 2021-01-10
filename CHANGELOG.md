@@ -32,11 +32,16 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   This is for compatibility with Laminas Translator        
 -   **LoTGD pages**
     -   Templates of pages now use `trans` filter. 
+        -   Adapted all text domains to use with Symfony Translator.
+        -   Work with Laminas Translator too.
 
 ### :star: FEATURES
 
 -   **src/core/Pattern/Cache.php**
     -   Added new function for get LoTGD Cache App Tagged. Service `core.lotgd.cache` 
+-   **src/core/Paginator/Adapter/Doctrine.php**
+    -   Added option to get results as objects.
+        -   Const `HYDRATE_OBJECT`
 
 ### :fire: DEPRECATED
 
