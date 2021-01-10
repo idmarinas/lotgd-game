@@ -2,61 +2,6 @@
 
 require_once '../lib/installer/installer_functions.php';
 
-/**
- * Checking basic prerequisites for LOTGD.
- */
-
-$requirements_met = true;
-$php_met = true;
-$memory_met = true;
-$execution_met = true;
-
-//-- Need 128M
-if (return_bytes(ini_get('memory_limit')) < 128 * 1024 * 1024)
-{
-    $requirements_met = false;
-    $memory_met = false;
-}
-
-$executionTime = ini_get('max_execution_time');
-//-- For avoid error when execute xDebug or similar
-if ($executionTime < 30 && 0 != $executionTime)
-{
-    $requirements_met = false;
-    $execution_met = false;
-}
-
-//-- PHP 7.2 or better is required for this version
-if (version_compare(PHP_VERSION, '7.2.0', '<'))
-{
-    $requirements_met = false;
-    $php_met = false;
-}
-
-if (! $requirements_met)
-{
-    //we have NO output object possibly :( hence no nice formatting
-    echo '<h1>Requirements not sufficient</h1><br><br><big>';
-
-    if (! $php_met)
-    {
-        echo sprintf('You need PHP 7.2 to install this version. Please upgrade from your existing PHP version %s.<br>', PHP_VERSION);
-    }
-
-    if (! $memory_met)
-    {
-        echo 'Your PHP memory limit is too low. It needs to be set to 128M or more.<br>';
-    }
-
-    if (! $execution_met)
-    {
-        echo 'Your PHP execution time is too low. It needs to be set to 30 or more.<br>';
-    }
-    echo '</big>';
-
-    exit(1);
-}
-
 chdir(realpath(__DIR__ . '/..'));
 
 define('ALLOW_ANONYMOUS', true);
