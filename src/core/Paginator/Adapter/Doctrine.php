@@ -30,6 +30,11 @@ class Doctrine implements AdapterInterface
     public const RESULT_ARRAY = 2;
 
     /**
+     * Hydrates an object graph. This is the default behavior.
+     */
+    public const HYDRATE_OBJECT = 3;
+
+    /**
      * Doctrine instance of QueryBuilder.
      *
      * @var QueryBuilder
@@ -71,6 +76,10 @@ class Doctrine implements AdapterInterface
         if (self::RESULT_SCALAR == $this->resultType)
         {
             return $qb->getQuery()->getScalarResult();
+        }
+        elseif (self::HYDRATE_OBJECT == $this->resultType)
+        {
+            return $qb->getQuery()->getResult();
         }
 
         return $qb->getQuery()->getArrayResult();
