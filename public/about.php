@@ -72,7 +72,7 @@ elseif ('setup' == $op)
         'info'       => $vals,
     ];
 
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
     $form = $lotgdFormFactory->create(Lotgd\Core\Form\AboutType::class, $data, [
         'action' => 'none',

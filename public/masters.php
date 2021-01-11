@@ -50,7 +50,7 @@ elseif ('edit' == $op)
     \Lotgdnavigation::addHeader('masters.category.functions');
     \Lotgdnavigation::addNav('masters.nav.return', 'masters.php');
 
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $masterEntity = $repository->find($masterId);
     $masterEntity = $masterEntity ?: new \Lotgd\Core\Entity\Masters();
     \Doctrine::detach($masterEntity);
@@ -62,7 +62,7 @@ elseif ('edit' == $op)
         ]
     ]);
 
-    $form->handleRequest();
+    $form->handleRequest(\LotgdRequest::_i());
 
     if ($form->isSubmitted() && $form->isValid())
     {

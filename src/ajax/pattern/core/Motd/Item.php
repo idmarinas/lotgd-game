@@ -38,7 +38,7 @@ trait Item
 
         try
         {
-            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+            $lotgdFormFactory = \LotgdKernel::get('form.factory');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 
@@ -143,7 +143,7 @@ trait Item
 
         try
         {
-            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+            $lotgdFormFactory = \LotgdKernel::get('form.factory');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 

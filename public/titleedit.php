@@ -117,7 +117,7 @@ switch ($op)
         $params['tpl'] = 'edit';
         $params['id'] = $id;
 
-        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+        $lotgdFormFactory = \LotgdKernel::get('form.factory');
         $entity = $repository->find($id);
         $entity = $entity ?: new \Lotgd\Core\Entity\Titles();
         \Doctrine::detach($entity);
@@ -129,7 +129,7 @@ switch ($op)
             ]
         ]);
 
-        $form->handleRequest();
+        $form->handleRequest(\LotgdRequest::_i());
 
         if ($form->isSubmitted() && $form->isValid())
         {

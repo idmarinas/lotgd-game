@@ -35,7 +35,7 @@ if ('edit' == $op || 'add' == $op)
 {
     $params['tpl'] = 'edit';
 
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $weaponEntity = $repository->find($id);
     $weaponEntity = $weaponEntity ?: new \Lotgd\Core\Entity\Weapons();
     \Doctrine::detach($weaponEntity);
@@ -53,7 +53,7 @@ if ('edit' == $op || 'add' == $op)
         ]
     ]);
 
-    $form->handleRequest();
+    $form->handleRequest(\LotgdRequest::_i());
 
     if ($form->isSubmitted() && $form->isValid())
     {

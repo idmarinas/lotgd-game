@@ -19,7 +19,7 @@ if (getsetting('homeskinselect', 1))
         $template = getsetting('defaultskin', 'jade.htm');
     }
 
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
     $form = $lotgdFormFactory->create(Lotgd\Core\Form\HomeType::class, ['defaultskin' => $template], [
         'action' => 'home.php',
@@ -30,7 +30,7 @@ if (getsetting('homeskinselect', 1))
         ],
     ]);
 
-    $form->handleRequest();
+    $form->handleRequest(\LotgdRequest::_i());
 
     if ($form->isSubmitted() && $form->isValid())
     {

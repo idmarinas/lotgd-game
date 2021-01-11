@@ -272,7 +272,7 @@ switch ($op)
 
         if ('' == $subop)
         {
-            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+            $lotgdFormFactory = \LotgdKernel::get('form.factory');
             $type                = (string) \LotgdRequest::getQuery('type') ?: 'acct';
             $characterRepository = \Doctrine::getRepository('LotgdCore:Characters');
 
@@ -291,7 +291,7 @@ switch ($op)
                 ],
             ]);
 
-            $form->handleRequest();
+            $form->handleRequest(\LotgdRequest::_i());
 
             if ($form->isSubmitted() && $form->isValid())
             {

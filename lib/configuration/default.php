@@ -42,7 +42,7 @@ $data = [
     'misc'        => $vals,
 ];
 
-$lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+$lotgdFormFactory = \LotgdKernel::get('form.factory');
 
 $form = $lotgdFormFactory->create(ConfigurationType::class, $data, [
     'action' => 'configuration.php?setting=default&save=save',
@@ -53,7 +53,7 @@ $form = $lotgdFormFactory->create(ConfigurationType::class, $data, [
 
 \LotgdNavigation::addNavAllow('configuration.php?setting=default&save=save');
 
-$form->handleRequest();
+$form->handleRequest(\LotgdRequest::_i());
 
 if ($form->isSubmitted() && $form->isValid())
 {

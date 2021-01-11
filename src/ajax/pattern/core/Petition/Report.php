@@ -35,7 +35,7 @@ trait Report
 
         try
         {
-            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+            $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
             $form = $lotgdFormFactory->create(PetitionType::class, null, [
                 'action' => '',

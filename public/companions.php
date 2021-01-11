@@ -167,7 +167,7 @@ elseif ('edit' == $op || 'add' == $op)
     }
     else
     {
-        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+        $lotgdFormFactory = \LotgdKernel::get('form.factory');
         $companionEntity = $repository->find($id);
         $creatureArray = $companionEntity ? $repository->extractEntity($companionEntity) : [];
         $companionEntity = $companionEntity ?: new \Lotgd\Core\Entity\Companions();
@@ -180,7 +180,7 @@ elseif ('edit' == $op || 'add' == $op)
             ]
         ]);
 
-        $form->handleRequest();
+        $form->handleRequest(\LotgdRequest::_i());
 
         if ($form->isSubmitted() && $form->isValid())
         {

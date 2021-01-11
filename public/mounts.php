@@ -155,7 +155,7 @@ elseif ('edit' == $op || 'add' == $op)
     {
         $params['tpl'] = 'edit';
 
-        $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+        $lotgdFormFactory = \LotgdKernel::get('form.factory');
         $entity = $entity ?: new \Lotgd\Core\Entity\Mounts();
         \Doctrine::detach($entity);
 
@@ -166,7 +166,7 @@ elseif ('edit' == $op || 'add' == $op)
             ]
         ]);
 
-        $form->handleRequest();
+        $form->handleRequest(\LotgdRequest::_i());
 
         if ($form->isSubmitted() && $form->isValid())
         {

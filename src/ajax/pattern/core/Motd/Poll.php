@@ -38,7 +38,7 @@ trait Poll
         // Dialog content
         try
         {
-            $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+            $lotgdFormFactory = \LotgdKernel::get('form.factory');
             // Dialog title
             $title = \LotgdTranslator::t('title', [], $this->getTextDomain());
 

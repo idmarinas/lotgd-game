@@ -31,7 +31,7 @@ if ('delcronjob' == $op)
 
 if ('' == $op)
 {
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
 
     $form = $lotgdFormFactory->create(CronjobType::class, [
         'newdaycron' => getsetting('newdaycron', 0),
@@ -42,7 +42,7 @@ if ('' == $op)
         ],
     ]);
 
-    $form->handleRequest();
+    $form->handleRequest(\LotgdRequest::_i());
 
     if ($form->isSubmitted() && $form->isValid())
     {
@@ -67,7 +67,7 @@ elseif ('newcronjob' == $op)
 {
     $params['tpl'] = 'cronjob-new';
 
-    $lotgdFormFactory = \LotgdLocator::get('Lotgd\Core\SymfonyForm');
+    $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $entity           = $repository->find($cronId);
     $entity           = $entity ?: new \Lotgd\Core\Entity\Cronjob();
     \Doctrine::detach($entity);
@@ -79,7 +79,7 @@ elseif ('newcronjob' == $op)
         ],
     ]);
 
-    $form->handleRequest();
+    $form->handleRequest(\LotgdRequest::_i());
 
     $paramsFlashMessages = [];
     $message             = null;
