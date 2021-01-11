@@ -18,9 +18,6 @@ return [
             /* LAZY */ 'FormAnnotationBuilder' => Laminas\Form\Annotation\AnnotationBuilderFactory::class, //-- Deprecated - Use Symfony Form instead
             /* LAZY */ 'FormElementManager'    => Laminas\Form\FormElementManagerFactory::class, //-- Deprecated - Use Symfony Form instead
 
-            //-- Added in version 4.2.0 - Deleted in version 5.0.0
-            /* LAZY */ 'Lotgd\Core\SymfonyForm' => Factory\Form\SymfonyForm::class, //-- This factory no need migrate, Symfony have a Form service LotgdKernel::get('form.factory')
-
             //-- Added in version 4.4.0 - Deleted in version 5.0.0
             'webpack_encore.tag_renderer' => Factory\Template\TagRenderer::class, //-- This factory no need migrate
             'webpack_encore.packages'     => Factory\Template\Packages::class, //-- This factory no need migrate

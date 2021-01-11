@@ -4,12 +4,8 @@ return [
     'service_manager' => [
         'lazy_services' => [
             'class_map' => [
-                //-- Added in version 4.4.0
-
                 //-- This method of connecting to the database is rarely used.
                 'LaminasDb' => Lotgd\Core\Db\Dbwrapper::class,
-                //-- Symfony Form is only needed for entity modification mainly.
-                'Lotgd\Core\SymfonyForm' => 'Lotgd\Core\SymfonyForm',
                 //-- Laminas Form not likely to be used in all requests
                 'InputFilterManager'    => 'InputFilterManager',
                 'FormAnnotationBuilder' => 'FormAnnotationBuilder',
