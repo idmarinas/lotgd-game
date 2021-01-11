@@ -150,6 +150,8 @@ Permitir añadir al principio o al final de una categoria, añadir una categorí
 
 php phpDocumentor.phar
 
+php bin/console debug:container
+
 composer dump-env prod
 
 ./vendor/bin/phan -m csv -o phan.csv
