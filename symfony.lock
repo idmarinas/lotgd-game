@@ -215,14 +215,8 @@
     "laminas/laminas-log": {
         "version": "2.13.0"
     },
-    "laminas/laminas-mail": {
-        "version": "2.12.5"
-    },
     "laminas/laminas-math": {
         "version": "3.2.0"
-    },
-    "laminas/laminas-mime": {
-        "version": "2.7.4"
     },
     "laminas/laminas-paginator": {
         "version": "2.9.0"
@@ -663,9 +657,6 @@
     },
     "tracy/tracy": {
         "version": "v2.8.1"
-    },
-    "true/punycode": {
-        "version": "v2.1.1"
     },
     "twig/extra-bundle": {
         "version": "v2.14.3"
