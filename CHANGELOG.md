@@ -66,6 +66,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   For work with LoTGD Kernel need make this change:
         -   Symfony Form as LoTGD kernel need pass request as argument in `handleRequest`
         -   Replace `$form->handleRequest();` for `$form->handleRequest(\LotgdRequest::_i());`
+-   **Potential BC** Remove composer package `laminas/laminas-mail` use `LotgdKernel::get('lotgd.core.mailer')` (Symfony Mailer)
 
 ### :notebook: NOTES
 
