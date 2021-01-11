@@ -78,12 +78,6 @@ class AddTranslatableFieldSubscriber implements EventSubscriberInterface
             {
                 $data->removeElement($translation);
 
-                // //-- Delete the Personal Translation if its empty
-                // if ($translation->getId() && $options['entity_manager_removal'])
-                // {
-                //     \Doctrine::remove($translation);
-                // }
-
                 continue;
             }
 
