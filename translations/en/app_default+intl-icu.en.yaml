@@ -11,7 +11,7 @@ session:
     login:
         incorrect: '`4Error, your login was incorrect`0'
         account:
-            disappeared: Account Disappeared!'
+            disappeared: Account Disappeared!
             notLogged: 'Account not logged in but session thinks they are.'
             notAllowed: 'Navigation not allowed to {uri}'
         anonymous:
