@@ -62,6 +62,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory of `Lotgd\Core\Template\Params` use `LotgdKernel::get('Lotgd\Core\Template\Params')` instead.
 -   Remove file `src/core/Factory/Doctrine/Extension/TablePrefix.php` not in use.
 -   Remove file `src/core/Pattern/EventManager.php` not in use.
+-   **BC** Remove factory `Lotgd\Core\SymfonyForm` use `\LotgdKernel::get('form.factory');` instead.
+    -   For work with LoTGD Kernel need make this change:
+        -   Symfony Form as LoTGD kernel need pass request as argument in `handleRequest`
+        -   Replace `$form->handleRequest();` for `$form->handleRequest(\LotgdRequest::_i());`
 
 ### :notebook: NOTES
 
