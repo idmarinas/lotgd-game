@@ -184,3 +184,6 @@ services:
         public: true
     Lotgd\Core\Template\Params:
         public: true
+    lotgd.core.mailer: # Temporal
+        alias: mailer
+        public: true
