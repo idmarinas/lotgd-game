@@ -27,7 +27,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   **Twig translation filter**
         -   Filter `trans` now use Symfony Translator
     -   Translation files in `translations/en`
-        -   Renave all files prefixed with name of folder and moved to root folder `translations/en`
+        -   Rename all files prefixed with name of folder and moved to root folder `translations/en`
             -   Example: `translations/en/page/about.yaml` to `translations/en/page_about.yaml` 
         -   This is for compatibility with Laminas Translator        
 -   **LoTGD pages**
@@ -52,7 +52,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   Nothing
 
-### :x: REMOVES and/or Break Changes
+### :x: REMOVES and Break Changes
 
 -   Remove factory of `Lotgd\Core\EventManager\Event` not in use.
 -   Remove factory of `Lotgd\Core\Navigation\Navigation` use `LotgdKernel::get('Lotgd\Core\Navigation\Navigation')` instead.
