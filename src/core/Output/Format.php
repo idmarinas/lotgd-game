@@ -87,7 +87,7 @@ class Format
 
         if ($nullDate == $indate)
         {
-            return $this->symfonyTranslator()->trans($default, [], 'date');
+            return $this->symfonyTranslator()->trans($default, [], 'app_date');
         }
 
         $now  = new \DateTime('now');
@@ -128,7 +128,7 @@ class Format
             $message       = "{$sufix}.min";
         }
 
-        return $this->symfonyTranslator()->trans($message, $params, 'date');
+        return $this->symfonyTranslator()->trans($message, $params, 'app_date');
     }
 
     /**

@@ -29,7 +29,6 @@ class GameCore extends AbstractExtension
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
-    use PatternCore\EventManager;
     use PatternCore\HookManager;
     use PatternCore\Jaxon;
     use PatternCore\LotgdCore;
