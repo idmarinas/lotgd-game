@@ -7,7 +7,7 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto
--   Utilizar el symfony translation en algunas páginas
+-   Utilizar el symfony translation en todas las páginas
     -   Revisar los archivos de traducción para evitar que las claves se sobreescriban en Symfony Translation
 
 # Módulos
@@ -28,7 +28,7 @@
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
--   **BD** Eliminar compatibilidad con Laminas Service Manager.
+-   **BC** Eliminar compatibilidad con Laminas Service Manager.
 -   **BC** Eliminar compatibilidad con Laminas Cache.
 -   **BD** Eliminar compatibilidad con Laminas Translation.
 -   **BD** Eliminar compatibilidad con Laminas Form.
