@@ -36,7 +36,7 @@ class EventsType extends AbstractType
                     'disable_slider_labels' => true,
                 ],
                 'empty_data'  => 10,
-                'label'       => 'enemies.forestchance',
+                'label'       => 'events.forestchance',
                 'constraints' => [new Assert\DivisibleBy(1)],
             ])
             // Chance for Something Special in any village
@@ -48,7 +48,7 @@ class EventsType extends AbstractType
                     'disable_slider_labels' => true,
                 ],
                 'empty_data'  => 5,
-                'label'       => 'enemies.villagechance',
+                'label'       => 'events.villagechance',
                 'constraints' => [new Assert\DivisibleBy(1)],
             ])
             // Chance for Something Special in the Inn
@@ -60,7 +60,7 @@ class EventsType extends AbstractType
                     'disable_slider_labels' => true,
                 ],
                 'empty_data'  => 5,
-                'label'       => 'enemies.innchance',
+                'label'       => 'events.innchance',
                 'constraints' => [new Assert\DivisibleBy(1)],
             ])
             // Chance for Something Special in the Graveyard
@@ -72,7 +72,7 @@ class EventsType extends AbstractType
                     'disable_slider_labels' => true,
                 ],
                 'empty_data'  => 10,
-                'label'       => 'enemies.gravechance',
+                'label'       => 'events.gravechance',
                 'constraints' => [new Assert\DivisibleBy(1)],
             ])
             // Chance for Something Special in the Gardens
@@ -84,7 +84,7 @@ class EventsType extends AbstractType
                     'disable_slider_labels' => true,
                 ],
                 'empty_data'  => 5,
-                'label'       => 'enemies.gardenchance',
+                'label'       => 'events.gardenchance',
                 'constraints' => [new Assert\DivisibleBy(1)],
             ])
         ;
