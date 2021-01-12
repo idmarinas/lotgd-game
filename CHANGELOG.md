@@ -50,7 +50,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :wrench: FIXES
 
--   Nothing
+-   **Form Configuration Events** use correct label for Events chances.
 
 ### :x: REMOVES and Break Changes
 
