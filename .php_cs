@@ -1,11 +1,10 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.17.2|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:2.17.3|configurator
  * you can change this configuration by importing this file.
  */
 return PhpCsFixer\Config::create()
-    ->setUsingCache(false)
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
@@ -17,14 +16,14 @@ return PhpCsFixer\Config::create()
         '@PHP73Migration'     => true,
         // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
         'align_multiline_comment' => true,
+        // Each element of an array must be indented exactly once.
+        'array_indentation' => true,
         // PHP arrays should be declared using the configured syntax.
-        'array_syntax' => false,
+        'array_syntax' => ['syntax' => 'short'],
         // Binary operators should be surrounded by space as configured.
         'binary_operator_spaces' => ['default' => 'align_single_space_minimal'],
         // An empty line feed must precede any configured statement.
-        'blank_line_before_statement' => [
-            'statements' => ['declare', 'die', 'do', 'exit', 'for', 'foreach', 'goto', 'if', 'return', 'switch', 'throw', 'try', 'while', 'yield'],
-        ],
+        'blank_line_before_statement' => true,
         // The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.
         'braces' => ['position_after_anonymous_constructs' => 'next', 'position_after_control_structures' => 'next', 'position_after_functions_and_oop_constructs' => 'next'],
         // Using `isset($var) &&` multiple times should be done in one call.
