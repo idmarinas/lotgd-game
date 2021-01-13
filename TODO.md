@@ -58,6 +58,8 @@
         -   También se permite módulos simples que hagan uso de la estructura de Symfony Framework. Pero está pensado para módulos simples (con muy pocos archivos) 
 
 ## Para la versión X.0.0
+-   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
+    -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
 -   Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
     -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
 -   Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente cono el sistema de combate nuevo.
