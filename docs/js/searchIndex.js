@@ -9701,41 +9701,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Factory-Db-Dbwrapper.html#method_createService"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Doctrine\\Extension\\TablePrefix",
-            "name": "TablePrefix",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Doctrine-Extension-TablePrefix.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Doctrine\\Extension\\TablePrefix\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Doctrine-Extension-TablePrefix.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Doctrine\\Extension\\TablePrefix\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Doctrine-Extension-TablePrefix.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\EventManager\\EventManager",
-            "name": "EventManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-EventManager-EventManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\EventManager\\EventManager\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-EventManager-EventManager.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\EventManager\\HookManager",
-            "name": "HookManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-EventManager-HookManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\EventManager\\HookManager\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-EventManager-HookManager.html#method___invoke"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Form\\SymfonyForm",
             "name": "SymfonyForm",
             "summary": "",
@@ -9750,41 +9715,6 @@ Search.appendIndex(
             "name": "createService",
             "summary": "",
             "url": "classes/Lotgd-Core-Factory-Form-SymfonyForm.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Http\\Request",
-            "name": "Request",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Http-Request.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Http\\Request\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Http-Request.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Http\\Response",
-            "name": "Response",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Http-Response.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Http\\Response\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Http-Response.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Navigation\\Navigation",
-            "name": "Navigation",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Navigation-Navigation.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Navigation\\Navigation\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Navigation-Navigation.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Navigation\\Navigation\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Navigation-Navigation.html#method_createService"
         },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Template\\EntrypointLookupCollection",
             "name": "EntrypointLookupCollection",
@@ -13196,6 +13126,11 @@ Search.appendIndex(
             "summary": "Use\u0020getArrayResult\u0020to\u0020get\u0020results.",
             "url": "classes/Lotgd-Core-Paginator-Adapter-Doctrine.html#constant_RESULT_ARRAY"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Paginator\\Adapter\\Doctrine\u003A\u003AHYDRATE_OBJECT",
+            "name": "HYDRATE_OBJECT",
+            "summary": "Hydrates\u0020an\u0020object\u0020graph.\u0020This\u0020is\u0020the\u0020default\u0020behavior.",
+            "url": "classes/Lotgd-Core-Paginator-Adapter-Doctrine.html#constant_HYDRATE_OBJECT"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Paginator\\Adapter\\Doctrine\u003A\u003A\u0024doctrine",
             "name": "doctrine",
             "summary": "Doctrine\u0020instance\u0020of\u0020QueryBuilder.",
@@ -13225,6 +13160,11 @@ Search.appendIndex(
             "name": "getCacheApp",
             "summary": "Get\u0020app\u0020cache\u0020instance.",
             "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCacheApp"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003AgetCacheAppTag\u0028\u0029",
+            "name": "getCacheAppTag",
+            "summary": "Get\u0020app\u0020cache\u0020instance.",
+            "url": "classes/Lotgd-Core-Pattern-Cache.html#method_getCacheAppTag"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Cache\u003A\u003A\u0024lotgdCache",
             "name": "lotgdCache",
@@ -13346,21 +13286,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-EntityHydrator.html#property_entity"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\EventManager",
-            "name": "EventManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-EventManager.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\EventManager\u003A\u003AgetEventManager\u0028\u0029",
-            "name": "getEventManager",
-            "summary": "Get\u0020EventManager\u0020instance.",
-            "url": "classes/Lotgd-Core-Pattern-EventManager.html#method_getEventManager"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Pattern\\EventManager\u003A\u003A\u0024lotgdEventManager",
-            "name": "lotgdEventManager",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Pattern-EventManager.html#property_lotgdEventManager"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Format",
             "name": "Format",
             "summary": "",
@@ -13446,10 +13371,20 @@ Search.appendIndex(
             "summary": "Get\u0020navigation\u0020instance.",
             "url": "classes/Lotgd-Core-Pattern-Navigation.html#method_getNavigation"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Navigation\u003A\u003AgetAccesskeys\u0028\u0029",
+            "name": "getAccesskeys",
+            "summary": "Get\u0020Navigation\u0020instance.",
+            "url": "classes/Lotgd-Core-Pattern-Navigation.html#method_getAccesskeys"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Navigation\u003A\u003A\u0024lotgdNavigation",
             "name": "lotgdNavigation",
             "summary": "",
             "url": "classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdNavigation"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Navigation\u003A\u003A\u0024lotgdAccesskeys",
+            "name": "lotgdAccesskeys",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdAccesskeys"
         },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Output",
             "name": "Output",
@@ -15246,35 +15181,10 @@ Search.appendIndex(
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getFunctions"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003AgetNavigation\u0028\u0029",
-            "name": "getNavigation",
-            "summary": "Get\u0020Navigation\u0020instance.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getNavigation"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003AgetAccesskeys\u0028\u0029",
-            "name": "getAccesskeys",
-            "summary": "Get\u0020Navigation\u0020instance.",
-            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getAccesskeys"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
             "summary": "\u007B\u0040inheritdoc\u007D",
             "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getName"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024navigation",
-            "name": "navigation",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_navigation"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024translator",
-            "name": "translator",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_translator"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Navigation\u003A\u003A\u0024accesskeys",
-            "name": "accesskeys",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-Navigation.html#property_accesskeys"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\Pattern\\AttributesString",
             "name": "AttributesString",
@@ -16396,6 +16306,76 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_bell_rand"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group",
+            "name": "Group",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-Group.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-Group.html#method_setId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-Group.html#property_id"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User",
+            "name": "User",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-User.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-User.html#method_setId"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Entity-User-User.html#property_id"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade",
+            "name": "Upgrade",
+            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "Step\u00201\u003A\u0020Update\u0020text\u0020domain\u0020of\u0020news\u0020table.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003AVERSION_NUMBER",
+            "name": "VERSION_NUMBER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#constant_VERSION_NUMBER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
+            "name": "CONFIG_DIR_GLOBAL",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\HookManagerFactory",
+            "name": "HookManagerFactory",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-HookManagerFactory.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\HookManagerFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-HookManagerFactory.html#method___invoke"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\HttpRequestFactory",
+            "name": "HttpRequestFactory",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-HttpRequestFactory.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Service\\HttpRequestFactory\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Service-HttpRequestFactory.html#method___invoke"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -16516,6 +16496,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-entity-common.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Entity\\User",
+            "name": "User",
+            "summary": "",
+            "url": "namespaces/lotgd-core-entity-user.html"
+        },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm",
             "name": "EntityForm",
             "summary": "",
@@ -16626,35 +16611,10 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-factory.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Doctrine\\Extension",
-            "name": "Extension",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-doctrine-extension.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Doctrine",
-            "name": "Doctrine",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-doctrine.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\EventManager",
-            "name": "EventManager",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-eventmanager.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Form",
             "name": "Form",
             "summary": "",
             "url": "namespaces/lotgd-core-factory-form.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Http",
-            "name": "Http",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-http.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Navigation",
-            "name": "Navigation",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-navigation.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Template",
             "name": "Template",
@@ -16765,6 +16725,11 @@ Search.appendIndex(
             "name": "Version_41000",
             "summary": "",
             "url": "namespaces/lotgd-core-installer-upgrade-version-41000.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100",
+            "name": "Version_41100",
+            "summary": "",
+            "url": "namespaces/lotgd-core-installer-upgrade-version-41100.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic",
             "name": "Semantic",

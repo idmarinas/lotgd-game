@@ -93,13 +93,13 @@
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Lotgd-Core-Twig-Extension-Pattern-AttributesString.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\AttributesString">AttributesString</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Navigation">Navigation</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>                    </span>
+                            <a href="classes/Lotgd-Core-Twig-Extension-Pattern-AttributesString.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\AttributesString">AttributesString</abbr></a>,                             <a href="classes/Lotgd-Core-Twig-Extension-Pattern-Navigation.html"><abbr title="\Lotgd\Core\Twig\Extension\Pattern\Navigation">Navigation</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Template.html"><abbr title="\Lotgd\Core\Pattern\Template">Template</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Translator.html"><abbr title="\Lotgd\Core\Pattern\Translator">Translator</abbr></a>,                             <a href="classes/Lotgd-Core-Pattern-Navigation.html"><abbr title="\Lotgd\Core\Pattern\Navigation">Navigation</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 </aside>
 
         
@@ -118,7 +118,7 @@
 
 <dl class="phpdocumentor-table-of-contents">
                 <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_accesskeys">$accesskeys</a>
+    <a href="classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdAccesskeys">$lotgdAccesskeys</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -133,6 +133,13 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Pattern-Container.html#property_lotgdKernelContainer">$lotgdKernelContainer</a>
+    <span>
+                &nbsp;: mixed            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdNavigation">$lotgdNavigation</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -167,21 +174,7 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_navigation">$navigation</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager">$serviceManager</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_translator">$translator</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
@@ -216,7 +209,7 @@
 <dd>Display navigation menu.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getAccesskeys">getAccesskeys()</a>
+    <a href="classes/Lotgd-Core-Pattern-Navigation.html#method_getAccesskeys">getAccesskeys()</a>
     <span>
                         &nbsp;: <a href="classes/Lotgd-Core-Navigation-AccessKeys.html"><abbr title="\Lotgd\Core\Navigation\AccessKeys">AccessKeys</abbr></a>    </span>
 </dt>
@@ -251,11 +244,11 @@
 <dd>{@inheritdoc}</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getNavigation">getNavigation()</a>
+    <a href="classes/Lotgd-Core-Pattern-Navigation.html#method_getNavigation">getNavigation()</a>
     <span>
-                        &nbsp;: <a href="classes/Lotgd-Core-Navigation-Navigation.html"><abbr title="\Lotgd\Core\Navigation\Navigation">Navigation</abbr></a>    </span>
+                        &nbsp;: object|null    </span>
 </dt>
-<dd>Get Navigation instance.</dd>
+<dd>Get navigation instance.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Pattern-Container.html#method_getService">getService()</a>
@@ -332,23 +325,23 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_accesskeys">
-        $accesskeys
-        <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_accesskeys" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_lotgdAccesskeys">
+        $lotgdAccesskeys
+        <a href="classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdAccesskeys" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Navigation.php"><a href="files/src-core-pattern-navigation.html"><abbr title="src/core/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$accesskeys</span>
+    <span class="phpdocumentor-signature__name">$lotgdAccesskeys</span>
     </code>
 
     
@@ -409,6 +402,36 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$lotgdKernelContainer</span>
+    </code>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lotgdNavigation">
+        $lotgdNavigation
+        <a href="classes/Lotgd-Core-Pattern-Navigation.html#property_lotgdNavigation" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Navigation.php"><a href="files/src-core-pattern-navigation.html"><abbr title="src/core/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">$lotgdNavigation</span>
     </code>
 
     
@@ -542,36 +565,6 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_navigation">
-        $navigation
-        <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_navigation" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">28</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$navigation</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_serviceManager">
         $serviceManager
         <a href="classes/Lotgd-Core-Pattern-Container.html#property_serviceManager" class="headerlink"><i class="fas fa-link"></i></a>
@@ -589,36 +582,6 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$serviceManager</span>
-    </code>
-
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_translator">
-        $translator
-        <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#property_translator" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-</aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$translator</span>
     </code>
 
     
@@ -825,12 +788,12 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_getAccesskeys">
         getAccesskeys()
-        <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getAccesskeys" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Pattern-Navigation.html#method_getAccesskeys" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Navigation.php"><a href="files/src-core-pattern-navigation.html"><abbr title="src/core/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get Navigation instance.</p>
@@ -924,7 +887,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -958,7 +921,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get LoTGD Kernel.</p>
@@ -992,7 +955,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 </aside>
 
         <p class="phpdocumentor-summary">{@inheritdoc}</p>
@@ -1021,19 +984,19 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_getNavigation">
         getNavigation()
-        <a href="classes/Lotgd-Core-Twig-Extension-Navigation.html#method_getNavigation" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Lotgd-Core-Pattern-Navigation.html#method_getNavigation" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Twig/Extension/Navigation.php"><a href="files/src-core-twig-extension-navigation.html"><abbr title="src/core/Twig/Extension/Navigation.php">Navigation.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Navigation.php"><a href="files/src-core-pattern-navigation.html"><abbr title="src/core/Pattern/Navigation.php">Navigation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Get Navigation instance.</p>
+        <p class="phpdocumentor-summary">Get navigation instance.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getNavigation</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Navigation-Navigation.html"><abbr title="\Lotgd\Core\Navigation\Navigation">Navigation</abbr></a></span></code>
+                <span class="phpdocumentor-signature__name">getNavigation</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -1041,7 +1004,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Lotgd-Core-Navigation-Navigation.html"><abbr title="\Lotgd\Core\Navigation\Navigation">Navigation</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">object|null</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -1060,7 +1023,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/core/Pattern/Container.php"><a href="files/src-core-pattern-container.html"><abbr title="src/core/Pattern/Container.php">Container.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 </aside>
 
         <p class="phpdocumentor-summary">Get container.</p>
