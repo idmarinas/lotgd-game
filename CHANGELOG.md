@@ -541,7 +541,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Templates system**
     -   `templates/module/` are moved to `templates_modules/` folder
-        -   No BC, al work as before. But from now the templates of the modules will go in this new folder.
+        -   No BC, all work as before. But from now the templates of the modules will go in this new folder.
     -   Core templates are moved to `templates_core/` folder. These templates are not intended to be customizable
     -   New config option `twig_templates_paths`
         -   Now can add your templates to Twig, and use namespace.
