@@ -2,5 +2,6 @@ framework:
     default_locale: en
     translator:
         default_path: '%kernel.project_dir%/translations'
+        formatter: 'Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter'
         fallbacks:
             - en

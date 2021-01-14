@@ -187,3 +187,6 @@ services:
     lotgd.core.mailer: # Temporal
         alias: mailer
         public: true
+    Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
+        arguments:
+            - '@identity_translator'
