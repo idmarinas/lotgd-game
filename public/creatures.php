@@ -142,7 +142,6 @@ elseif ('edit' == $op || 'add' == $op)
         $creatureEntity = $repository->find($creatureId);
         $creatureArray = $creatureEntity ? $repository->extractEntity($creatureEntity) : [];
         $creatureEntity = $creatureEntity ?: new \Lotgd\Core\Entity\Creatures();
-        \Doctrine::detach($creatureEntity);
 
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CreaturesType::class, $creatureEntity, [
             'action' => "creatures.php?op=edit&creatureid={$creatureId}",
@@ -156,9 +155,8 @@ elseif ('edit' == $op || 'add' == $op)
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
-            $method = $entity->getCreatureid() ? 'merge' : 'persist';
 
-            \Doctrine::{$method}($entity);
+            \Doctrine::persist($entity);
             \Doctrine::flush();
 
             $creatureId = $entity->getCreatureid();
@@ -173,6 +171,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
+        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $creatureId var
         \LotgdNavigation::addHeader('creatures.category.edit');

@@ -70,7 +70,6 @@ elseif ('newcronjob' == $op)
     $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $entity           = $repository->find($cronId);
     $entity           = $entity ?: new \Lotgd\Core\Entity\Cronjob();
-    \Doctrine::detach($entity);
 
     $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CronjobType::class, $entity, [
         'action' => "configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}",
@@ -88,10 +87,9 @@ elseif ('newcronjob' == $op)
     if ($form->isSubmitted() && $form->isValid())
     {
         $entity  = $form->getData();
-        $method  = $cronId ? 'merge' : 'persist';
         $message = $cronId ? 'flash.message.cronjob.updated' : 'flash.message.cronjob.created';
 
-        \Doctrine::{$method}($entity);
+        \Doctrine::persist($entity);
         \Doctrine::flush();
 
         $cronId = $entity->getId();
@@ -113,6 +111,7 @@ elseif ('newcronjob' == $op)
             \LotgdFlashMessages::{$messageType}(\LotgdTranslator::t($message, $paramsFlashMessages, $textDomain));
         }
     }
+    \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
     //-- In this position can updated $cronId var
     \LotgdNavigation::addNavAllow("configuration.php?setting=cronjob&op=newcronjob&cronid={$cronId}");

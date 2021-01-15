@@ -120,7 +120,6 @@ switch ($op)
         $lotgdFormFactory = \LotgdKernel::get('form.factory');
         $entity = $repository->find($id);
         $entity = $entity ?: new \Lotgd\Core\Entity\Titles();
-        \Doctrine::detach($entity);
 
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\TitlesType::class, $entity, [
             'action' => "titleedit.php?op=edit&id={$id}",
@@ -134,9 +133,8 @@ switch ($op)
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
-            $method = $entity->getTitleid() ? 'merge' : 'persist';
 
-            \Doctrine::{$method}($entity);
+            \Doctrine::persist($entity);
             \Doctrine::flush();
 
             $id = $entity->getTitleid();
@@ -151,6 +149,7 @@ switch ($op)
                 ]
             ]);
         }
+        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $id var
         \LotgdNavigation::addNavAllow("titleedit.php?op=edit&id={$id}");

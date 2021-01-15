@@ -171,7 +171,6 @@ elseif ('edit' == $op || 'add' == $op)
         $companionEntity = $repository->find($id);
         $creatureArray = $companionEntity ? $repository->extractEntity($companionEntity) : [];
         $companionEntity = $companionEntity ?: new \Lotgd\Core\Entity\Companions();
-        \Doctrine::detach($companionEntity);
 
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\CompanionsType::class, $companionEntity, [
             'action' => "companions.php?op=edit&id={$id}",
@@ -185,9 +184,8 @@ elseif ('edit' == $op || 'add' == $op)
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
-            $method = $entity->getCompanionid() ? 'merge' : 'persist';
 
-            \Doctrine::{$method}($entity);
+            \Doctrine::persist($entity);
             \Doctrine::flush();
 
             $id = $entity->getCompanionid();
@@ -202,6 +200,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
+        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
         \LotgdNavigation::addNavAllow("companions.php?op=edit&id={$id}");
 

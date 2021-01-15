@@ -157,7 +157,6 @@ elseif ('edit' == $op || 'add' == $op)
 
         $lotgdFormFactory = \LotgdKernel::get('form.factory');
         $entity = $entity ?: new \Lotgd\Core\Entity\Mounts();
-        \Doctrine::detach($entity);
 
         $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MountsType::class, $entity, [
             'action' => "mounts.php?op=edit&id={$mountId}",
@@ -171,9 +170,8 @@ elseif ('edit' == $op || 'add' == $op)
         if ($form->isSubmitted() && $form->isValid())
         {
             $entity = $form->getData();
-            $method = $entity->getMountid() ? 'merge' : 'persist';
 
-            \Doctrine::{$method}($entity);
+            \Doctrine::persist($entity);
             \Doctrine::flush();
 
             $mountId = $entity->getMountid();
@@ -188,6 +186,7 @@ elseif ('edit' == $op || 'add' == $op)
                 ]
             ]);
         }
+        \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
         //-- In this position can updated $mountId var
         \LotgdNavigation::addNavAllow("mounts.php?op=edit&id={$mountId}");

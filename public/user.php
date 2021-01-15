@@ -278,8 +278,6 @@ switch ($op)
 
             $accountEntity   = $repository->find($userId);
             $characterEntity = $characterRepository->find($accountEntity->getCharacter()->getId());
-            \Doctrine::detach($accountEntity);
-            \Doctrine::detach($characterEntity);
 
             $class  = 'acct' == $type ? \Lotgd\Core\EntityForm\AccountsType::class : \Lotgd\Core\EntityForm\CharactersType::class;
             $entity = 'acct' == $type ? $accountEntity : $characterEntity;
@@ -297,7 +295,7 @@ switch ($op)
             {
                 $entity = $form->getData();
 
-                \Doctrine::merge($entity);
+                \Doctrine::persist($entity);
                 \Doctrine::flush();
 
                 $message = ('acct' == $type) ? 'flash.message.account.edit.saved.account' : 'flash.message.account.edit.saved.character';
@@ -306,6 +304,7 @@ switch ($op)
 
                 \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->{$name}()], $textDomain));
             }
+            \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
             \LotgdNavigation::addNavAllow("user.php?op=edit&type={$type}&userid={$userId}{$returnpetition}");
 

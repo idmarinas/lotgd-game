@@ -36,7 +36,6 @@ if ('edit' == $op || 'add' == $op)
     $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $armorEntity = $repository->find($id);
     $armorEntity = $armorEntity ?: new \Lotgd\Core\Entity\Armor();
-    \Doctrine::detach($armorEntity);
 
     if (!$id)
     {
@@ -58,9 +57,7 @@ if ('edit' == $op || 'add' == $op)
         $entity = $form->getData();
         $entity->setValue($values[$entity->getDefense()]);
 
-        $method = $entity->getArmorId() ? 'merge' : 'persist';
-
-        \Doctrine::{$method}($entity);
+        \Doctrine::persist($entity);
         \Doctrine::flush();
 
         $message = ($id) ? 'armor.form.edit' : 'armor.form.new';
@@ -78,6 +75,7 @@ if ('edit' == $op || 'add' == $op)
             ]
         ]);
     }
+    \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
     \LotgdNavigation::addNavAllow("armoreditor.php?op=edit&id={$id}&level={$armorlevel}");
 

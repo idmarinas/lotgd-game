@@ -53,7 +53,6 @@ elseif ('edit' == $op)
     $lotgdFormFactory = \LotgdKernel::get('form.factory');
     $masterEntity = $repository->find($masterId);
     $masterEntity = $masterEntity ?: new \Lotgd\Core\Entity\Masters();
-    \Doctrine::detach($masterEntity);
 
     $form = $lotgdFormFactory->create(Lotgd\Core\EntityForm\MastersType::class, $masterEntity, [
         'action' => "masters.php?op=edit&master_id={$masterId}",
@@ -67,9 +66,8 @@ elseif ('edit' == $op)
     if ($form->isSubmitted() && $form->isValid())
     {
         $entity = $form->getData();
-        $method = $entity->getCreatureid() ? 'merge' : 'persist';
 
-        \Doctrine::{$method}($entity);
+        \Doctrine::persist($entity);
         \Doctrine::flush();
 
         $masterId = $entity->getCreatureid();
@@ -84,6 +82,7 @@ elseif ('edit' == $op)
             ]
         ]);
     }
+    \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
     \LotgdNavigation::addNavAllow("masters.php?op=edit&master_id={$masterId}");
 
