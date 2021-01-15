@@ -67,9 +67,13 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove file `src/core/Factory/Doctrine/Extension/TablePrefix.php` not in use.
 -   Remove file `src/core/Pattern/EventManager.php` not in use.
 -   **BC** Remove factory `Lotgd\Core\SymfonyForm` use `\LotgdKernel::get('form.factory');` instead.
-    -   For work with LoTGD Kernel need make this change:
-        -   Symfony Form as LoTGD kernel need pass request as argument in `handleRequest`
+    -   For work with LoTGD Kernel need make this changes:
+        -   Delete `Doctrine::detach($entity);` no is needed. 
         -   Replace `$form->handleRequest();` for `$form->handleRequest(\LotgdRequest::_i());`
+        -   Replace `$method = $entity->getId() ? 'merge' : 'persist';` and `\Doctrine::{$method}($entity);` for `\Doctrine::persist($entity);`
+            -   No need check if is a new or update.
+        -   Add `\Doctrine::clear();` after block `if ($form->isSubmitted() && $form->isValid()) { /* ... */ }`
+            -   This is **important** for _avoid_ **Doctrine save** a **invalid form**.
 -   **Potential BC** Remove composer package `laminas/laminas-mail` use `LotgdKernel::get('lotgd.core.mailer')` (Symfony Mailer)
 
 ### :notebook: NOTES
