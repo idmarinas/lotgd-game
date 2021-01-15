@@ -42,6 +42,9 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **src/core/Paginator/Adapter/Doctrine.php**
     -   Added option to get results as objects.
         -   Const `HYDRATE_OBJECT`
+-   **src/core/Pattern/Translator.php** new function
+    -   `messageFormatter($message, $parameters, $locale)` Only format a message with `MessageFormatter::class`.
+        -   This function NO translate the message
 
 ### :fire: DEPRECATED
 
