@@ -47,6 +47,10 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 -   **Lotgd\Core\ServiceManager** are deprecated and deleted in version 5.0.0
     -   Use **LoTGD Kernel service** for create service.
+-   **Lotgd\Core\Hook** are deprecated and deleted in version 7.0.0 (or before)
+    -   In version 7.0.0 LoTGD Core is a Symfony App
+    -   LoTGD Core use Symfony Event system in this version, that is more powerfull.
+    -   For now use old hook system.
 
 ### :wrench: FIXES
 

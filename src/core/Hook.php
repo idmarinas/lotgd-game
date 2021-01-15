@@ -13,6 +13,9 @@
 
 namespace Lotgd\Core;
 
+/**
+ * @deprecated 4.11.0 in favor of Symfony Event Dispacher in version 7.0.0 (LoTGD Core is a Symfony App in this version)
+ */
 class Hook
 {
     //-- HOOKS readapted in Core 4.5.0
