@@ -29,7 +29,6 @@ class CategoryTranslationType extends AbstractType
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
                 'constraints'    => [new Assert\Length(['min' => 1, 'max' => 50, 'allowEmptyString' => false])],
-                'error_bubbling' => false,
             ])
         ;
     }

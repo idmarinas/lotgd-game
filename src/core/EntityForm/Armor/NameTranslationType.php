@@ -29,7 +29,6 @@ class NameTranslationType extends AbstractType
             ->add('field', HiddenType::class)
             ->add('content', TextType::class, [
                 'constraints'    => [new Assert\Length(['min' => 1, 'max' => 128, 'allowEmptyString' => false])],
-                'error_bubbling' => false,
             ])
         ;
     }

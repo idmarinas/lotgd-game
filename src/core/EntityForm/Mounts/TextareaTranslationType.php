@@ -29,7 +29,6 @@ class TextareaTranslationType extends AbstractType
             ->add('field', HiddenType::class)
             ->add('content', TextareaType::class, [
                 'constraints'    => [new Assert\Length(['min' => 0, 'max' => 65535, 'allowEmptyString' => true])],
-                'error_bubbling' => false,
             ])
         ;
     }

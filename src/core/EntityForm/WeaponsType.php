@@ -37,6 +37,7 @@ class WeaponsType extends AbstractType
             ])
             ->add('level', NumberType::class, [
                 'label' => 'level',
+                'html5' => true
             ])
             ->add('damage', RangeType::class, [
                 'label' => 'damage',
