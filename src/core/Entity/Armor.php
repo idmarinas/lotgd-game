@@ -144,7 +144,7 @@ class Armor implements Translatable
      *
      * @return self
      */
-    public function setArmorname($armorname)
+    public function setArmorname(string $armorname)
     {
         $this->armorname = $armorname;
 
@@ -166,7 +166,7 @@ class Armor implements Translatable
      *
      * @return self
      */
-    public function setValue($value)
+    public function setValue(int $value)
     {
         $this->value = $value;
 
@@ -188,7 +188,7 @@ class Armor implements Translatable
      *
      * @return self
      */
-    public function setDefense($defense)
+    public function setDefense(int $defense)
     {
         $this->defense = $defense;
 
@@ -210,7 +210,7 @@ class Armor implements Translatable
      *
      * @return self
      */
-    public function setLevel($level)
+    public function setLevel(int $level)
     {
         $this->level = $level;
 

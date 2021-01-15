@@ -142,7 +142,7 @@ class Weapons implements Translatable
      *
      * @return self
      */
-    public function setWeaponname($weaponname)
+    public function setWeaponname(string $weaponname)
     {
         $this->weaponname = $weaponname;
 
@@ -164,7 +164,7 @@ class Weapons implements Translatable
      *
      * @return self
      */
-    public function setValue($value)
+    public function setValue(int $value)
     {
         $this->value = $value;
 
@@ -186,7 +186,7 @@ class Weapons implements Translatable
      *
      * @return self
      */
-    public function setDamage($damage)
+    public function setDamage(int $damage)
     {
         $this->damage = $damage;
 
@@ -208,7 +208,7 @@ class Weapons implements Translatable
      *
      * @return self
      */
-    public function setLevel($level)
+    public function setLevel(int $level)
     {
         $this->level = $level;
 
