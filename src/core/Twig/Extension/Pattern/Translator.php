@@ -76,7 +76,7 @@ trait Translator
 
         $nl2br = $env->getFilter('nl2br')->getCallable();
 
-        return $nl2br($this->getTranslator()->mf($message, $parameters, $locale));
+        return $nl2br($this->messageFormatter($message, $parameters, $locale));
     }
 
     /**

@@ -53,7 +53,7 @@ trait Navigation
         }
         else
         {
-            $label = $this->symfonyTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
+            $label = $this->messageFormatter($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
@@ -99,7 +99,7 @@ trait Navigation
         }
         else
         {
-            $label = $this->symfonyTranslator()->mf($label, $options['params'] ?? [], $options['locale'] ?? null);
+            $label = $this->messageFormatter($label, $options['params'] ?? [], $options['locale'] ?? null);
         }
 
         $attributes = $options['attributes'] ?? [];
