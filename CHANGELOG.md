@@ -45,6 +45,12 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **src/core/Pattern/Translator.php** new function
     -   `messageFormatter($message, $parameters, $locale)` Only format a message with `MessageFormatter::class`.
         -   This function NO translate the message
+-   **LoTGD Core Advertising Bundle**
+    -   Create new bundle for advertising providers like Google Adsense
+        -   Providers available:
+            -   _Google Adsense_
+    -   Can create your on providers.
+    -   In this version **LoTGD Core 4.11.0** need add your Twig Extension as a factory of Laminas Service Manager like other Twig Extensions.
 
 ### :fire: DEPRECATED
 
