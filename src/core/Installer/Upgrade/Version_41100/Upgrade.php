@@ -23,9 +23,44 @@ class Upgrade extends UpgradeAbstract
     public const CONFIG_DIR_GLOBAL = 'config/autoload/global';
 
     /**
-     * Step 1: Update text domain of news table.
+     * Step 1: Remove some files.
      */
     public function step1(): bool
+    {
+
+        try
+        {
+            $files = [
+                self::CONFIG_DIR_GLOBAL.'/advertising-lotgd-core.php',
+            ];
+
+            try
+            {
+                $fs = new Filesystem();
+
+                $fs->remove($files);
+
+                $this->messages[] = \LotgdTranslator::t('file.removed', ['file' => '"'.\implode('", "', $files).'"'], self::TRANSLATOR_DOMAIN);
+            }
+            catch (\Throwable $th)
+            {
+                $this->messages[] = $th->getMessage();
+            }
+
+            return true;
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+
+            return false;
+        }
+    }
+
+    /**
+     * Step 1: Update text domain of news table.
+     */
+    public function step2(): bool
     {
         try
         {
