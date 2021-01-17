@@ -62,23 +62,34 @@ class Kernel extends BaseKernel
         return \dirname(__DIR__, 2);
     }
 
-    protected function configureContainer(ContainerConfigurator $container, LoaderInterface $loader): void
+    protected function configureContainer(ContainerConfigurator $container): void
     {
-        $confDir = $this->getProjectDir().'/config';
+        $container->import($this->getProjectDir().'/config/{packages}/*.yaml');
+        $container->import($this->getProjectDir().'/config/{packages}/'.$this->environment.'/*.yaml');
 
-        $container->import($confDir.'/{packages}/*.yaml');
-        $container->import($confDir.'/{packages}/'.$this->environment.'/*.yaml');
-
-        $container->import($confDir.'/services.yaml');
-        $container->import($confDir.'/{services}_'.$this->environment.'.yaml');
+        if (\is_file($this->getProjectDir().'/config/services.yaml'))
+        {
+            $container->import($this->getProjectDir().'/config/services.yaml');
+            $container->import($this->getProjectDir().'/config/{services}_'.$this->environment.'.yaml');
+        }
+        elseif (\is_file($path = $this->getProjectDir().'/config/services.php'))
+        {
+            (require $path)($container->withPath($path), $this);
+        }
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $confDir = $this->getProjectDir().'/config';
+        $routes->import($this->getProjectDir().'/config/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import($this->getProjectDir().'/config/{routes}/*.yaml');
 
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import($confDir.'/{routes}/*.yaml');
-        $routes->import($confDir.'/routes.yaml');
+        if (\is_file($this->getProjectDir().'/config/routes.yaml'))
+        {
+            $routes->import($this->getProjectDir().'/config/routes.yaml');
+        }
+        elseif (\is_file($path = $this->getProjectDir().'/config/routes.php'))
+        {
+            (require $path)($routes->withPath($path), $this);
+        }
     }
 }
