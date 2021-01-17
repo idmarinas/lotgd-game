@@ -47,35 +47,16 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
     /**
      * Show ad of Google.
      */
-    public function showGoogleAd(string $adId): string
+    public function showGoogleAd(string $adSlot): string
     {
-        $config   = $this->getAdsConfig();
-        $adConfig = $config[$adId] ?? null;
+        $ad = $this->getAdsenseService()->getSlot($adSlot);
 
-        //-- Google AdSense is disabled
-        //-- Not found Ad config
-        //-- Slot not isset or are empty
-        if ( ! $this->advertisingGoogleIsActived() || ! $adConfig || ! isset($adConfig['slot']) || ! $adConfig['slot'])
+        if ($ad)
         {
-            return '';
+            return $this->getTemplateBlock()->renderBlock('ad_wrapper', ['ad_content' => $ad]);
         }
 
-        $ins = \sprintf(
-            '<ins class="adsbygoogle"
-            style="%1$s"
-            data-ad-client="%2$s"
-            data-ad-slot="%3$s"
-            data-ad-format="%4$s"
-            data-full-width-responsive="%5$s"></ins>',
-            $adConfig['style'] ?? '',
-            $config['client'],
-            $adConfig['slot'],
-            $adConfig['format'],
-            $adConfig['responsive']
-        );
-        $script = '<script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>';
-
-        return $this->getTemplateBlock()->renderBlock('ad_wrapper', ['ad_content' => $ins.$script]);
+        return '';
     }
 
     /**
@@ -83,17 +64,14 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
      */
     public function advertisingGoogleIsActived(): bool
     {
-        $config = $this->getAdsConfig();
-
-        return isset($config['client']) && $config['client'];
+        return $this->getAdsenseService()->isEnabled();
     }
 
-    protected function getAdsConfig()
+    protected function getAdsenseService()
     {
         if ( ! $this->adsGoogle)
         {
-            $config          = $this->getContainer('GameConfig');
-            $this->adsGoogle = $config['advertising']['google'] ?? [];
+            $this->adsGoogle = $this->getService('lotgd_core_advertising.adsense');
         }
 
         return $this->adsGoogle;
