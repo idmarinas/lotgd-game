@@ -97,6 +97,7 @@
         "symfony/browser-kit": "5.2.*",
         "symfony/css-selector": "5.2.*",
         "symfony/debug-bundle": "5.2.*",
+        "symfony/maker-bundle": "^1.28",
         "symfony/stopwatch": "5.2.*",
         "symfony/var-dumper": "5.2.*",
         "symfony/web-profiler-bundle": "5.2.*"
@@ -108,7 +109,8 @@
             "Lotgd\\Ajax\\Core\\": "src/ajax/core/",
             "Lotgd\\Ajax\\Local\\": "src/ajax/local/",
             "Lotgd\\Ajax\\Pattern\\Core\\": "src/ajax/pattern/core/",
-            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/"
+            "Lotgd\\Ajax\\Pattern\\Local\\": "src/ajax/pattern/local/",
+            "LotgdCore\\AdvertisingBundle\\": "lib/AdvertisingBundle/src/"
         },
 		"files": ["src/functions.php"]
     },
