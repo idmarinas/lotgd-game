@@ -303,6 +303,11 @@ switch ($op)
                 $name = 'acct' == $type ? 'getLogin' : 'getName';
 
                 \LotgdFlashMessages::addSuccessMessage(\LotgdTranslator::t($message, ['name' => $entity->{$name}()], $textDomain));
+
+                if ($session['user']['acctid'] == $userId)
+                {
+                    $session['user'] = $repository->getUserById($userId);
+                }
             }
             \Doctrine::clear(); //-- Avoid Doctrine save a invalid Form
 
