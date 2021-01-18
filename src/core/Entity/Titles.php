@@ -143,7 +143,7 @@ class Titles implements Translatable
      */
     public function setDk($dk)
     {
-        $this->dk = $dk;
+        $this->dk = (int) $dk;
 
         return $this;
     }
