@@ -116,7 +116,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="experience", type="bigint", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="experience", type="integer", nullable=false, options={"default": 0, "unsigned": true})
      */
     private $experience = 0;
 
@@ -373,11 +373,11 @@ class Characters
     private $restorepage = '';
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="hashorse", type="integer", nullable=false, options={"default": 0})
+     * @ORM\Column(name="hashorse", type="integer", nullable=true, options={"default": 0})
      */
-    private $hashorse = 0;
+    private $hashorse;
 
     /**
      * @var string
@@ -529,12 +529,12 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="clanid", type="integer", nullable=false, options={"default": 0, "unsigned": true})
+     * @ORM\Column(name="clanid", type="integer", nullable=true, options={"default": 0, "unsigned": true})
      */
-    private $clanid = 0;
+    private $clanid;
 
     /**
-     * @var bool
+     * @var int
      *
      * @ORM\Column(name="clanrank", type="smallint", nullable=false, options={"default": 0, "unsigned": true})
      */
@@ -686,7 +686,7 @@ class Characters
      *
      * @return self
      */
-    public function setStrength($strength)
+    public function setStrength(int $strength)
     {
         $this->strength = $strength;
 
@@ -708,7 +708,7 @@ class Characters
      *
      * @return self
      */
-    public function setDexterity($dexterity)
+    public function setDexterity(int $dexterity)
     {
         $this->dexterity = $dexterity;
 
@@ -730,7 +730,7 @@ class Characters
      *
      * @return self
      */
-    public function setIntelligence($intelligence)
+    public function setIntelligence(int $intelligence)
     {
         $this->intelligence = $intelligence;
 
@@ -752,7 +752,7 @@ class Characters
      *
      * @return self
      */
-    public function setConstitution($constitution)
+    public function setConstitution(int $constitution)
     {
         $this->constitution = $constitution;
 
@@ -774,7 +774,7 @@ class Characters
      *
      * @return self
      */
-    public function setWisdom($wisdom)
+    public function setWisdom(int $wisdom)
     {
         $this->wisdom = $wisdom;
 
@@ -820,7 +820,7 @@ class Characters
      */
     public function setExperience($experience)
     {
-        $this->experience = $experience;
+        $this->experience = (int) $experience;
 
         return $this;
     }
@@ -840,7 +840,7 @@ class Characters
      *
      * @return self
      */
-    public function setGold($gold)
+    public function setGold(int $gold)
     {
         $this->gold = $gold;
 
@@ -928,7 +928,7 @@ class Characters
      *
      * @return self
      */
-    public function setLevel($level)
+    public function setLevel(int $level)
     {
         $this->level = $level;
 
@@ -950,7 +950,7 @@ class Characters
      *
      * @return self
      */
-    public function setDefense($defense)
+    public function setDefense(int $defense)
     {
         $this->defense = $defense;
 
@@ -972,7 +972,7 @@ class Characters
      *
      * @return self
      */
-    public function setAttack($attack)
+    public function setAttack(int $attack)
     {
         $this->attack = $attack;
 
@@ -1016,7 +1016,7 @@ class Characters
      *
      * @return self
      */
-    public function setGoldinbank($goldinbank)
+    public function setGoldinbank(int $goldinbank)
     {
         $this->goldinbank = $goldinbank;
 
@@ -1038,7 +1038,7 @@ class Characters
      *
      * @return self
      */
-    public function setMarriedto($marriedto)
+    public function setMarriedto(int $marriedto)
     {
         $this->marriedto = $marriedto;
 
@@ -1084,7 +1084,7 @@ class Characters
      */
     public function setHitpoints($hitpoints)
     {
-        $this->hitpoints = $hitpoints;
+        $this->hitpoints = (int) $hitpoints;
 
         return $this;
     }
@@ -1106,7 +1106,7 @@ class Characters
      */
     public function setMaxhitpoints($maxhitpoints)
     {
-        $this->maxhitpoints = $maxhitpoints;
+        $this->maxhitpoints = (int) $maxhitpoints;
 
         return $this;
     }
@@ -1128,7 +1128,7 @@ class Characters
      */
     public function setPermahitpoints($permahitpoints)
     {
-        $this->permahitpoints = $permahitpoints;
+        $this->permahitpoints = (int) $permahitpoints;
 
         return $this;
     }
@@ -1148,7 +1148,7 @@ class Characters
      *
      * @return self
      */
-    public function setGems($gems)
+    public function setGems(int $gems)
     {
         $this->gems = $gems;
 
@@ -1170,7 +1170,7 @@ class Characters
      *
      * @return self
      */
-    public function setWeaponvalue($weaponvalue)
+    public function setWeaponvalue(int $weaponvalue)
     {
         $this->weaponvalue = $weaponvalue;
 
@@ -1192,7 +1192,7 @@ class Characters
      *
      * @return self
      */
-    public function setArmorvalue($armorvalue)
+    public function setArmorvalue(int $armorvalue)
     {
         $this->armorvalue = $armorvalue;
 
@@ -1236,7 +1236,7 @@ class Characters
      *
      * @return self
      */
-    public function setTurns($turns)
+    public function setTurns(int $turns)
     {
         $this->turns = $turns;
 
@@ -1352,7 +1352,7 @@ class Characters
      *
      * @return self
      */
-    public function setResurrections($resurrections)
+    public function setResurrections(int $resurrections)
     {
         $this->resurrections = $resurrections;
 
@@ -1374,7 +1374,7 @@ class Characters
      *
      * @return self
      */
-    public function setWeapondmg($weapondmg)
+    public function setWeapondmg(int $weapondmg)
     {
         $this->weapondmg = $weapondmg;
 
@@ -1396,7 +1396,7 @@ class Characters
      *
      * @return self
      */
-    public function setArmordef($armordef)
+    public function setArmordef(int $armordef)
     {
         $this->armordef = $armordef;
 
@@ -1418,7 +1418,7 @@ class Characters
      *
      * @return self
      */
-    public function setAge($age)
+    public function setAge(int $age)
     {
         $this->age = $age;
 
@@ -1440,7 +1440,7 @@ class Characters
      *
      * @return self
      */
-    public function setCharm($charm)
+    public function setCharm(int $charm)
     {
         $this->charm = $charm;
 
@@ -1526,7 +1526,7 @@ class Characters
      *
      * @return self
      */
-    public function setPlayerfights($playerfights)
+    public function setPlayerfights(int $playerfights)
     {
         $this->playerfights = $playerfights;
 
@@ -1590,7 +1590,7 @@ class Characters
      *
      * @return self
      */
-    public function setDragonkills($dragonkills)
+    public function setDragonkills(int $dragonkills)
     {
         $this->dragonkills = $dragonkills;
 
@@ -1630,11 +1630,11 @@ class Characters
     /**
      * Set the value of Hashorse.
      *
-     * @param bool $hashorse
+     * @param int $hashorse
      *
      * @return self
      */
-    public function setHashorse($hashorse)
+    public function setHashorse(?int $hashorse)
     {
         $this->hashorse = $hashorse;
 
@@ -1644,7 +1644,7 @@ class Characters
     /**
      * Get the value of Hashorse.
      */
-    public function getHashorse(): bool
+    public function getHashorse(): ?int
     {
         return $this->hashorse;
     }
@@ -1768,7 +1768,7 @@ class Characters
      *
      * @return self
      */
-    public function setTransferredtoday($transferredtoday)
+    public function setTransferredtoday(int $transferredtoday)
     {
         $this->transferredtoday = $transferredtoday;
 
@@ -1790,7 +1790,7 @@ class Characters
      *
      * @return self
      */
-    public function setSoulpoints($soulpoints)
+    public function setSoulpoints(int $soulpoints)
     {
         $this->soulpoints = $soulpoints;
 
@@ -1812,7 +1812,7 @@ class Characters
      *
      * @return self
      */
-    public function setGravefights($gravefights)
+    public function setGravefights(int $gravefights)
     {
         $this->gravefights = $gravefights;
 
@@ -1856,7 +1856,7 @@ class Characters
      *
      * @return self
      */
-    public function setDeathpower($deathpower)
+    public function setDeathpower(int $deathpower)
     {
         $this->deathpower = $deathpower;
 
@@ -1898,7 +1898,7 @@ class Characters
      *
      * @return self
      */
-    public function setBio($bio)
+    public function setBio(string $bio)
     {
         $this->bio = $bio;
 
@@ -1962,7 +1962,7 @@ class Characters
      *
      * @return self
      */
-    public function setAmountouttoday($amountouttoday)
+    public function setAmountouttoday(int $amountouttoday)
     {
         $this->amountouttoday = $amountouttoday;
 
@@ -2006,7 +2006,7 @@ class Characters
      *
      * @return self
      */
-    public function setDragonage($dragonage)
+    public function setDragonage(int $dragonage)
     {
         $this->dragonage = $dragonage;
 
@@ -2028,7 +2028,7 @@ class Characters
      *
      * @return self
      */
-    public function setBestdragonage($bestdragonage)
+    public function setBestdragonage(int $bestdragonage)
     {
         $this->bestdragonage = $bestdragonage;
 
@@ -2116,7 +2116,7 @@ class Characters
      *
      * @return self
      */
-    public function setClanid($clanid)
+    public function setClanid(?int $clanid)
     {
         $this->clanid = $clanid;
 
@@ -2126,7 +2126,7 @@ class Characters
     /**
      * Get the value of Clanid.
      */
-    public function getClanid(): int
+    public function getClanid(): ?int
     {
         return $this->clanid;
     }
@@ -2138,7 +2138,7 @@ class Characters
      *
      * @return self
      */
-    public function setClanrank($clanrank)
+    public function setClanrank(int $clanrank)
     {
         $this->clanrank = $clanrank;
 
