@@ -197,7 +197,7 @@ class Accounts
      *
      * @ORM\Column(name="donationconfig", type="array")
      */
-    private $donationconfig;
+    private $donationconfig = [];
 
     /**
      * @var int
@@ -528,7 +528,7 @@ class Accounts
      *
      * @return self
      */
-    public function setEmailaddress($emailaddress)
+    public function setEmailaddress(string $emailaddress)
     {
         $this->emailaddress = $emailaddress;
 
@@ -748,7 +748,7 @@ class Accounts
      *
      * @return self
      */
-    public function setDonationconfig($donationconfig)
+    public function setDonationconfig(array $donationconfig)
     {
         $this->donationconfig = $donationconfig;
 
@@ -772,7 +772,7 @@ class Accounts
      *
      * @return self
      */
-    public function setReferer($referer)
+    public function setReferer(int $referer)
     {
         $this->referer = $referer;
 

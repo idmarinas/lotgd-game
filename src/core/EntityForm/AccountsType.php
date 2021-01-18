@@ -53,7 +53,11 @@ class AccountsType extends AbstractType
             //     'disabled' => true,
             // ])
             ->add('login', TextType::class, ['label' => 'acct.login'])
-            ->add('emailaddress', EmailType::class, ['label' => 'acct.emailaddress', 'required' => false])
+            ->add('emailaddress', EmailType::class, [
+                'required' => false,
+                'empty_data' => '',
+                'label' => 'acct.emailaddress',
+            ])
             ->add('locked', CheckboxType::class, ['label' => 'acct.locked', 'required' => false])
             ->add('lastip', TextType::class, [
                 'label'    => 'acct.lastip',
