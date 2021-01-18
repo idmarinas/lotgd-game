@@ -160,7 +160,7 @@ class Masters implements Translatable
      */
     public function setCreaturelevel($creaturelevel)
     {
-        $this->creaturelevel = $creaturelevel;
+        $this->creaturelevel = (int) $creaturelevel;
 
         return $this;
     }
