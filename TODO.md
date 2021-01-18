@@ -152,6 +152,8 @@ Permitir añadir al principio o al final de una categoria, añadir una categorí
 
 #### Comandos
 
+php bin/console doctrine:schema:update --force --dump-sql
+
 php phpDocumentor.phar
 
 php bin/console debug:container
