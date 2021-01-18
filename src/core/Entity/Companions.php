@@ -378,7 +378,7 @@ class Companions implements Translatable
      */
     public function setAttack($attack)
     {
-        $this->attack = $attack;
+        $this->attack = (int) $attack;
 
         return $this;
     }
@@ -400,7 +400,7 @@ class Companions implements Translatable
      */
     public function setAttackperlevel($attackperlevel)
     {
-        $this->attackperlevel = $attackperlevel;
+        $this->attackperlevel = (int) $attackperlevel;
 
         return $this;
     }
@@ -422,7 +422,7 @@ class Companions implements Translatable
      */
     public function setDefense($defense)
     {
-        $this->defense = $defense;
+        $this->defense = (int) $defense;
 
         return $this;
     }
@@ -444,7 +444,7 @@ class Companions implements Translatable
      */
     public function setDefenseperlevel($defenseperlevel)
     {
-        $this->defenseperlevel = $defenseperlevel;
+        $this->defenseperlevel = (int) $defenseperlevel;
 
         return $this;
     }
@@ -466,7 +466,7 @@ class Companions implements Translatable
      */
     public function setMaxhitpoints($maxhitpoints)
     {
-        $this->maxhitpoints = $maxhitpoints;
+        $this->maxhitpoints = (int) $maxhitpoints;
 
         return $this;
     }
@@ -488,7 +488,7 @@ class Companions implements Translatable
      */
     public function setMaxhitpointsperlevel($maxhitpointsperlevel)
     {
-        $this->maxhitpointsperlevel = $maxhitpointsperlevel;
+        $this->maxhitpointsperlevel = (int) $maxhitpointsperlevel;
 
         return $this;
     }
@@ -625,7 +625,7 @@ class Companions implements Translatable
      */
     public function setCompanioncostdks($companioncostdks)
     {
-        $this->companioncostdks = $companioncostdks;
+        $this->companioncostdks = (int) $companioncostdks;
 
         return $this;
     }
@@ -647,7 +647,7 @@ class Companions implements Translatable
      */
     public function setCompanioncostgems($companioncostgems)
     {
-        $this->companioncostgems = $companioncostgems;
+        $this->companioncostgems = (int) $companioncostgems;
 
         return $this;
     }
@@ -669,7 +669,7 @@ class Companions implements Translatable
      */
     public function setCompanioncostgold($companioncostgold)
     {
-        $this->companioncostgold = $companioncostgold;
+        $this->companioncostgold = (int) $companioncostgold;
 
         return $this;
     }
