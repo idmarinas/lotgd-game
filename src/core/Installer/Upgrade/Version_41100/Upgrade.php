@@ -27,7 +27,6 @@ class Upgrade extends UpgradeAbstract
      */
     public function step1(): bool
     {
-
         try
         {
             $files = [
@@ -58,42 +57,42 @@ class Upgrade extends UpgradeAbstract
     }
 
     /**
-     * Step 1: Update text domain of news table.
+     * Step 2: Update text domain of news table.
      */
     public function step2(): bool
     {
         try
         {
             $repository = $this->doctrine->getRepository('LotgdCore:News');
-            $page = 1;
-            $query = $repository->createQueryBuilder('u');
-            $paginator = $repository->getPaginator($query, $page, 100, Doctrine::HYDRATE_OBJECT);
-            $pageCount   = $paginator->count();
+            $page       = 1;
+            $query      = $repository->createQueryBuilder('u');
+            $paginator  = $repository->getPaginator($query, $page, 100, Doctrine::HYDRATE_OBJECT);
+            $pageCount  = $paginator->count();
             $totalCount = $paginator->getTotalItemCount();
 
             do
             {
-                foreach($paginator as $entity)
+                foreach ($paginator as $entity)
                 {
-                    if ($entity->getTextDomain() == '')
+                    if ('' == $entity->getTextDomain())
                     {
                         $data = $entity->getArguments();
 
                         if (isset($data['deathmessage']))
                         {
-                            $data['deathmessage']['textDomain'] = str_replace('-', '_', $data['deathmessage']['textDomain']);
+                            $data['deathmessage']['textDomain'] = \str_replace('-', '_', $data['deathmessage']['textDomain']);
                         }
 
                         if (isset($data['taunt']))
                         {
-                            $data['taunt']['textDomain'] = str_replace('-', '_', $data['taunt']['textDomain']);
+                            $data['taunt']['textDomain'] = \str_replace('-', '_', $data['taunt']['textDomain']);
                         }
 
                         $entity->setArguments($data);
                     }
                     else
                     {
-                        $entity->setTextDomain(str_replace('-', '_', $entity->getTextDomain()));
+                        $entity->setTextDomain(\str_replace('-', '_', $entity->getTextDomain()));
                     }
 
                     $this->doctrine->persist($entity);
@@ -117,5 +116,37 @@ class Upgrade extends UpgradeAbstract
 
             return false;
         }
+    }
+
+    /**
+     * Step 3: Update field donationconfig.
+     */
+    public function step3(): bool
+    {
+        try
+        {
+            $query = $this->doctrine->createQueryBuilder();
+
+            $count = $query->update('LotgdCore:Accounts', 'u')
+                ->set('donationconfig', ':new')
+
+                ->where('donationconfig = :old')
+
+                ->setParameter('new', 'a:0:{}')
+                ->setParameter('old', 's:0:""')
+
+                ->getQuery()
+                ->execute()
+            ;
+
+            $this->messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => $count, 'table' => 'accounts'], self::TRANSLATOR_DOMAIN);
+        }
+        catch (\Throwable $th)
+        {
+            Debugger::log($th);
+            $this->messages[] = $th->getMessage();
+        }
+
+        return true;
     }
 }
