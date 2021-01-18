@@ -84,13 +84,14 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
         -   Add `\Doctrine::clear();` after block `if ($form->isSubmitted() && $form->isValid()) { /* ... */ }`
             -   This is **important** for _avoid_ **Doctrine save** a **invalid form**.
 -   **Potential BC** Remove composer package `laminas/laminas-mail` use `LotgdKernel::get('lotgd.core.mailer')` (Symfony Mailer)
+-   **config/autoload/global/advertising-lotgd-core.php** delete, use `config/packages/lotgd_core_advertising.yaml` for config Adsense
 
 ### :notebook: NOTES
 
 -   **Upgrade/Install for version 4.9.0 and up**
     -   First, upload files to your server (production compilation): 
     -   Second, empty cache: 
-        -   `var/` delete this folder (or use comand in console `php bin/console cache:clear`).
+        -   `var/` delete this folder (or use command in console `php bin/console cache:clear`).
             -   From version 4.9.0 use Symfony Kernel, so work like Symfony Framework.
         -   `storage/cache/*` can empty with console comand `php bin/lotgd storage:cache_clear`
             -   Not delete `.gitkeep` files. Remember to keep the main structure of the folder `storage/cache/`
