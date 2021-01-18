@@ -13496,6 +13496,16 @@ Search.appendIndex(
             "summary": "Symfony\u0020Translator\u0020instance.",
             "url": "classes/Lotgd-Core-Pattern-Translator.html#method_symfonyTranslator"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003AmessageFormatter\u0028\u0029",
+            "name": "messageFormatter",
+            "summary": "Only\u0020format\u0020a\u0020message\u0020with\u0020MessageFormatter.",
+            "url": "classes/Lotgd-Core-Pattern-Translator.html#method_messageFormatter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003AcleanParameters\u0028\u0029",
+            "name": "cleanParameters",
+            "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
+            "url": "classes/Lotgd-Core-Pattern-Translator.html#method_cleanParameters"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Pattern\\Translator\u003A\u003A\u0024lotgdTranslator",
             "name": "lotgdTranslator",
             "summary": "",
@@ -13881,10 +13891,10 @@ Search.appendIndex(
             "summary": "Determine\u0020if\u0020Google\u0020AdSense\u0020is\u0020active.",
             "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_advertisingGoogleIsActived"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetAdsConfig\u0028\u0029",
-            "name": "getAdsConfig",
+            "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetAdsenseService\u0028\u0029",
+            "name": "getAdsenseService",
             "summary": "",
-            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getAdsConfig"
+            "url": "classes/Lotgd-Core-Twig-Extension-AdvertisingGoogle.html#method_getAdsenseService"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Extension\\AdvertisingGoogle\u003A\u003AgetTemplateBlock\u0028\u0029",
             "name": "getTemplateBlock",
@@ -16306,36 +16316,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_bell_rand"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group",
-            "name": "Group",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-Group.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-Group.html#method_setId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\Group\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-Group.html#property_id"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User",
-            "name": "User",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-User.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-User.html#method_setId"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User\\User\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Entity-User-User.html#property_id"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade",
             "name": "Upgrade",
             "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
@@ -16343,8 +16323,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep1\u0028\u0029",
             "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Update\u0020text\u0020domain\u0020of\u0020news\u0020table.",
+            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003Astep2\u0028\u0029",
+            "name": "step2",
+            "summary": "Step\u00201\u003A\u0020Update\u0020text\u0020domain\u0020of\u0020news\u0020table.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#method_step2"
         },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41100\\Upgrade\u003A\u003AVERSION_NUMBER",
             "name": "VERSION_NUMBER",
@@ -16376,10 +16361,280 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Service-HttpRequestFactory.html#method___invoke"
         },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Configuration",
+            "name": "Configuration",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Configuration.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Configuration\u003A\u003AgetConfigTreeBuilder\u0028\u0029",
+            "name": "getConfigTreeBuilder",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Configuration.html#method_getConfigTreeBuilder"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension",
+            "name": "LotgdCoreAdvertisingExtension",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AloadInternal\u0028\u0029",
+            "name": "loadInternal",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_loadInternal"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AgetConfigurator\u0028\u0029",
+            "name": "getConfigurator",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_getConfigurator"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AconfigureProviderAndService\u0028\u0029",
+            "name": "configureProviderAndService",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_configureProviderAndService"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003AbuildConfigurationForProviderType\u0028\u0029",
+            "name": "buildConfigurationForProviderType",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#method_buildConfigurationForProviderType"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003ASUPPORTED_PROVIDER_TYPES",
+            "name": "SUPPORTED_PROVIDER_TYPES",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#constant_SUPPORTED_PROVIDER_TYPES"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\LotgdCoreAdvertisingExtension\u003A\u003A\u0024configurators",
+            "name": "configurators",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-LotgdCoreAdvertisingExtension.html#property_configurators"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\AdsenseProviderConfiguration",
+            "name": "AdsenseProviderConfiguration",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-AdsenseProviderConfiguration.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\AdsenseProviderConfiguration\u003A\u003AbuildConfiguration\u0028\u0029",
+            "name": "buildConfiguration",
+            "summary": "Build\u0020configuration\u0020for\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-AdsenseProviderConfiguration.html#method_buildConfiguration"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\GenericProviderConfiguration",
+            "name": "GenericProviderConfiguration",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-GenericProviderConfiguration.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\GenericProviderConfiguration\u003A\u003AbuildConfiguration\u0028\u0029",
+            "name": "buildConfiguration",
+            "summary": "Build\u0020configuration\u0020for\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-GenericProviderConfiguration.html#method_buildConfiguration"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\ProviderConfigurationInterface",
+            "name": "ProviderConfigurationInterface",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-ProviderConfigurationInterface.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider\\ProviderConfigurationInterface\u003A\u003AbuildConfiguration\u0028\u0029",
+            "name": "buildConfiguration",
+            "summary": "Build\u0020configuration\u0020for\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-DependencyInjection-Provider-ProviderConfigurationInterface.html#method_buildConfiguration"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\LotgdCoreAdvertisingBundle",
+            "name": "LotgdCoreAdvertisingBundle",
+            "summary": "Advertising\u0020bundle\u0020for\u0020LoTGD\u0020Core.",
+            "url": "classes/LotgdCore-AdvertisingBundle-LotgdCoreAdvertisingBundle.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising",
+            "name": "AdsenseAdvertising",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method___construct"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AgetSlot\u0028\u0029",
+            "name": "getSlot",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_getSlot"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AisEnabled\u0028\u0029",
+            "name": "isEnabled",
+            "summary": "Is\u0020enable\u0020if\u0020enable\u0020is\u0020true\u0020and\u0020client\u0020are\u0020configured.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_isEnabled"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003AaddGoogleAdsenseScript\u0028\u0029",
+            "name": "addGoogleAdsenseScript",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#method_addGoogleAdsenseScript"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024hasAds",
+            "name": "hasAds",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_hasAds"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024scriptRendered",
+            "name": "scriptRendered",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_scriptRendered"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024inlineScript",
+            "name": "inlineScript",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_inlineScript"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024environment",
+            "name": "environment",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_environment"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract",
+            "name": "AdvertisingAbstract",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AisEnabled\u0028\u0029",
+            "name": "isEnabled",
+            "summary": "Check\u0020if\u0020provider\u0020is\u0020active.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_isEnabled"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AisAdvertisingEnabled\u0028\u0029",
+            "name": "isAdvertisingEnabled",
+            "summary": "Check\u0020if\u0020advertising\u0020module\u0020is\u0020enable.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_isAdvertisingEnabled"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AenableAdvertising\u0028\u0029",
+            "name": "enableAdvertising",
+            "summary": "Enable\u0020advertising\u0020module.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_enableAdvertising"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AdisableAdvertising\u0028\u0029",
+            "name": "disableAdvertising",
+            "summary": "Disable\u0020advertising\u0020module.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_disableAdvertising"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "Add\u0020configuration\u0020for\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_configure"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003AgetConfig\u0028\u0029",
+            "name": "getConfig",
+            "summary": "Get\u0020configuration\u0020of\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#method_getConfig"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024configuration",
+            "name": "configuration",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_configuration"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024advertisingEnable",
+            "name": "advertisingEnable",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_advertisingEnable"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface",
+            "name": "AdvertisingInterface",
+            "summary": "",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AisEnabled\u0028\u0029",
+            "name": "isEnabled",
+            "summary": "Check\u0020if\u0020provider\u0020is\u0020active.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_isEnabled"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AisAdvertisingEnabled\u0028\u0029",
+            "name": "isAdvertisingEnabled",
+            "summary": "Check\u0020if\u0020advertising\u0020module\u0020is\u0020enable.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_isAdvertisingEnabled"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AenableAdvertising\u0028\u0029",
+            "name": "enableAdvertising",
+            "summary": "Enable\u0020advertising\u0020module.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_enableAdvertising"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AdisableAdvertising\u0028\u0029",
+            "name": "disableAdvertising",
+            "summary": "Disable\u0020advertising\u0020module.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_disableAdvertising"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "Add\u0020configuration\u0020for\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_configure"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface\u003A\u003AgetConfig\u0028\u0029",
+            "name": "getConfig",
+            "summary": "Get\u0020configuration\u0020of\u0020provider.",
+            "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingInterface.html#method_getConfig"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Translation\\Formatter\\MessageFormatter",
+            "name": "MessageFormatter",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Symfony-Translation-Formatter-MessageFormatter.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Translation\\Formatter\\MessageFormatter\u003A\u003AformatIntl\u0028\u0029",
+            "name": "formatIntl",
+            "summary": "\u007B\u0040inheritdoc\u007D",
+            "url": "classes/Lotgd-Core-Symfony-Translation-Formatter-MessageFormatter.html#method_formatIntl"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Translation\\Formatter\\MessageFormatter\u003A\u003AcleanParameters\u0028\u0029",
+            "name": "cleanParameters",
+            "summary": "Clean\u0020param\u0020of\u0020a\u0020value.",
+            "url": "classes/Lotgd-Core-Symfony-Translation-Formatter-MessageFormatter.html#method_cleanParameters"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection",
+            "name": "DependencyInjection",
+            "summary": "",
+            "url": "namespaces/lotgdcore-advertisingbundle-dependencyinjection.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\DependencyInjection\\Provider",
+            "name": "Provider",
+            "summary": "",
+            "url": "namespaces/lotgdcore-advertisingbundle-dependencyinjection-provider.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle",
+            "name": "AdvertisingBundle",
+            "summary": "",
+            "url": "namespaces/lotgdcore-advertisingbundle.html"
+        },                {
+            "fqsen": "\\LotgdCore",
+            "name": "LotgdCore",
+            "summary": "",
+            "url": "namespaces/lotgdcore.html"
+        },                {
+            "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider",
+            "name": "Provider",
+            "summary": "",
+            "url": "namespaces/lotgdcore-advertisingbundle-provider.html"
+        },                {
+            "fqsen": "\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator",
+            "name": "Configurator",
+            "summary": "",
+            "url": "namespaces/symfony-component-dependencyinjection-loader-configurator.html"
+        },                {
+            "fqsen": "\\Symfony\\Component\\DependencyInjection\\Loader",
+            "name": "Loader",
+            "summary": "",
+            "url": "namespaces/symfony-component-dependencyinjection-loader.html"
+        },                {
+            "fqsen": "\\Symfony\\Component\\DependencyInjection",
+            "name": "DependencyInjection",
+            "summary": "",
+            "url": "namespaces/symfony-component-dependencyinjection.html"
+        },                {
+            "fqsen": "\\Symfony\\Component",
+            "name": "Component",
+            "summary": "",
+            "url": "namespaces/symfony-component.html"
+        },                {
+            "fqsen": "\\Symfony",
+            "name": "Symfony",
+            "summary": "",
+            "url": "namespaces/symfony.html"
         },                {
             "fqsen": "\\Lotgd\\Ajax\\Core",
             "name": "Core",
@@ -16495,11 +16750,6 @@ Search.appendIndex(
             "name": "Common",
             "summary": "",
             "url": "namespaces/lotgd-core-entity-common.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Entity\\User",
-            "name": "User",
-            "summary": "",
-            "url": "namespaces/lotgd-core-entity-user.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\EntityForm",
             "name": "EntityForm",
@@ -16796,15 +17046,25 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-service.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Symfony\\Validator",
-            "name": "Validator",
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Translation\\Formatter",
+            "name": "Formatter",
             "summary": "",
-            "url": "namespaces/lotgd-core-symfony-validator.html"
+            "url": "namespaces/lotgd-core-symfony-translation-formatter.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Translation",
+            "name": "Translation",
+            "summary": "",
+            "url": "namespaces/lotgd-core-symfony-translation.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Symfony",
             "name": "Symfony",
             "summary": "",
             "url": "namespaces/lotgd-core-symfony.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Symfony\\Validator",
+            "name": "Validator",
+            "summary": "",
+            "url": "namespaces/lotgd-core-symfony-validator.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Template",
             "name": "Template",
