@@ -16468,12 +16468,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024hasAds",
             "name": "hasAds",
-            "summary": "",
+            "summary": "Indicate\u0020if\u0020has\u0020an\u0020ads.",
             "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_hasAds"
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024scriptRendered",
             "name": "scriptRendered",
-            "summary": "",
+            "summary": "Indicate\u0020if\u0020script\u0020is\u0020rendered.",
             "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_scriptRendered"
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024inlineScript",
@@ -16483,7 +16483,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdsenseAdvertising\u003A\u003A\u0024environment",
             "name": "environment",
-            "summary": "",
+            "summary": "Environment\u0020of\u0020app.",
             "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdsenseAdvertising.html#property_environment"
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract",
@@ -16523,12 +16523,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024configuration",
             "name": "configuration",
-            "summary": "",
+            "summary": "Configuration\u0020for\u0020Provider.",
             "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_configuration"
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingAbstract\u003A\u003A\u0024advertisingEnable",
             "name": "advertisingEnable",
-            "summary": "",
+            "summary": "Indicate\u0020if\u0020advertising\u0020bundle\u0020is\u0020enable\u0020or\u0020disabled.",
             "url": "classes/LotgdCore-AdvertisingBundle-Provider-AdvertisingAbstract.html#property_advertisingEnable"
         },                {
             "fqsen": "\\LotgdCore\\AdvertisingBundle\\Provider\\AdvertisingInterface",
