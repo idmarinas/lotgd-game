@@ -17,9 +17,30 @@ use Laminas\View\Helper\InlineScript;
 
 final class AdsenseAdvertising extends AdvertisingAbstract
 {
+    /**
+     * Indicate if has an ads.
+     *
+     * @var bool
+     */
     protected $hasAds = false;
+
+    /**
+     * Indicate if script is rendered.
+     *
+     * @var bool
+     */
     protected $scriptRendered = false;
+
+    /**
+     * @var InlineScript
+     */
     protected $inlineScript;
+
+    /**
+     * Environment of app.
+     *
+     * @var string
+     */
     protected $environment;
 
     public function __construct(InlineScript $inlineScript, string $environment)

@@ -15,7 +15,18 @@ namespace LotgdCore\AdvertisingBundle\Provider;
 
 abstract class AdvertisingAbstract implements AdvertisingInterface
 {
+    /**
+     * Configuration for Provider.
+     *
+     * @var array
+     */
     protected $configuration;
+
+    /**
+     * Indicate if advertising bundle is enable or disabled.
+     *
+     * @var bool
+     */
     protected $advertisingEnable;
 
     /**
