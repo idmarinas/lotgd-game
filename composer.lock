@@ -3987,16 +3987,16 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.6.1",
+            "version": "3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "d55e4e78fc7c9bbef1e9e098dada979eeef04439"
+                "reference": "69a33802574e34357da6937602622a8a8db69883"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/d55e4e78fc7c9bbef1e9e098dada979eeef04439",
-                "reference": "d55e4e78fc7c9bbef1e9e098dada979eeef04439",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/69a33802574e34357da6937602622a8a8db69883",
+                "reference": "69a33802574e34357da6937602622a8a8db69883",
                 "shasum": ""
             },
             "require": {
@@ -4062,7 +4062,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-10T22:25:38+00:00"
+            "time": "2021-01-17T17:08:19+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -4626,16 +4626,16 @@
         },
         {
             "name": "nucleos/user-bundle",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nucleos/NucleosUserBundle.git",
-                "reference": "1d8523b1d77245cce773597537d56a73219d6433"
+                "reference": "38af93f750925b050e61b665fd22f4c745f5bb45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nucleos/NucleosUserBundle/zipball/1d8523b1d77245cce773597537d56a73219d6433",
-                "reference": "1d8523b1d77245cce773597537d56a73219d6433",
+                "url": "https://api.github.com/repos/nucleos/NucleosUserBundle/zipball/38af93f750925b050e61b665fd22f4c745f5bb45",
+                "reference": "38af93f750925b050e61b665fd22f4c745f5bb45",
                 "shasum": ""
             },
             "require": {
@@ -4738,7 +4738,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-12-28T08:20:46+00:00"
+            "time": "2021-01-16T22:09:09+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
