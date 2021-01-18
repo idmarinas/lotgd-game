@@ -1016,9 +1016,9 @@ class Characters
      *
      * @return self
      */
-    public function setGoldinbank(int $goldinbank)
+    public function setGoldinbank($goldinbank)
     {
-        $this->goldinbank = $goldinbank;
+        $this->goldinbank = (int) $goldinbank;
 
         return $this;
     }
@@ -1526,9 +1526,9 @@ class Characters
      *
      * @return self
      */
-    public function setPlayerfights(int $playerfights)
+    public function setPlayerfights($playerfights)
     {
-        $this->playerfights = $playerfights;
+        $this->playerfights = (int) $playerfights;
 
         return $this;
     }
@@ -1812,9 +1812,9 @@ class Characters
      *
      * @return self
      */
-    public function setGravefights(int $gravefights)
+    public function setGravefights($gravefights)
     {
-        $this->gravefights = $gravefights;
+        $this->gravefights = (int) $gravefights;
 
         return $this;
     }

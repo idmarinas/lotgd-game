@@ -25,6 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 
 class CreaturesType extends AbstractType
 {
@@ -78,18 +79,42 @@ class CreaturesType extends AbstractType
             ->add('creaturegoldbonus', NumberType::class, [
                 'label' => 'creaturegoldbonus',
                 'help'  => 'creaturegoldbonus_help',
+                'html5' => true,
+                'attr'  => [
+                    'min'                   => 0,
+                    'max'                   => 99.99,
+                    'step'                  => 0.01,
+                ],
             ])
             ->add('creaturedefensebonus', NumberType::class, [
                 'label' => 'creaturedefensebonus',
                 'help'  => 'creaturedefensebonus_help',
+                'html5' => true,
+                'attr'  => [
+                    'min'                   => 0,
+                    'max'                   => 99.99,
+                    'step'                  => 0.01,
+                ],
             ])
             ->add('creatureattackbonus', NumberType::class, [
                 'label' => 'creatureattackbonus',
                 'help'  => 'creatureattackbonus_help',
+                'html5' => true,
+                'attr'  => [
+                    'min'                   => 0,
+                    'max'                   => 99.99,
+                    'step'                  => 0.01,
+                ],
             ])
             ->add('creaturehealthbonus', NumberType::class, [
                 'label' => 'creaturehealthbonus',
                 'help'  => 'creaturehealthbonus_help',
+                'html5' => true,
+                'attr'  => [
+                    'min'                   => 0,
+                    'max'                   => 99.99,
+                    'step'                  => 0.01,
+                ],
             ])
             ->add('creatureaiscript', CreatureAiType::class, [
                 'label'    => 'creatureaiscript',
@@ -105,6 +130,22 @@ class CreaturesType extends AbstractType
             ])
             ->add('save', SubmitType::class, ['label' => 'save.button'])
         ;
+
+        $callback = new CallbackTransformer(
+            function ($toString)
+            {
+                return (float) $toString;
+            },
+            function ($toFloat)
+            {
+                return (string) $toFloat;
+            }
+        );
+
+        $builder->get('creaturegoldbonus')->addModelTransformer($callback);
+        $builder->get('creaturedefensebonus')->addModelTransformer($callback);
+        $builder->get('creatureattackbonus')->addModelTransformer($callback);
+        $builder->get('creaturehealthbonus')->addModelTransformer($callback);
     }
 
     public function configureOptions(OptionsResolver $resolver)
