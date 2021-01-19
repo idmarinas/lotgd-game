@@ -14,9 +14,11 @@
 
 # Para la versión 4.12.0
 -   Migrar Twig (el sistema de templates y theme) al kernel
+-   Última versión de la serie 4.y.z
 
 # Advertising bundle
 -   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
+    -   Posiblemente esto ya se pueda hacer
 
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación por consola.
@@ -26,7 +28,7 @@
             -   La configuración
             -   El uso del service manager
 -   Se usará un sistema similar al Symfony como transición
--   Se elimina Laminas DB. `DB::` class `Lotgd\Core\Db\Dbwrapper`
+-   **BC** Se elimina Laminas DB. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
@@ -34,12 +36,20 @@
 -   **BC** Eliminar compatibilidad con Laminas Cache.
 -   **BD** Eliminar compatibilidad con Laminas Translation.
 -   **BD** Eliminar compatibilidad con Laminas Form.
+-   Los módulos antiguos seguiran funcionando pero estan obsoletos.
+    -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
+-   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 
 # Para la versión 6.0.0
 -   Seguir la transición hacia un sistema Symfony Framework
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
--   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
+-   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
+    -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
+-   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
+    -   Se simplifica la forma en la que se calcula las estadísticas del perosnaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
+-   **BC** Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
+    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 
 # Para la versión 7.0.0  (LoTGD Core as Symfony APP)
 -   Esta versión LoTGD Core será una app Symfony Framework.
@@ -47,27 +57,20 @@
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
     -   Mejor por consola
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
--   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
--   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework.
--   Los módulos antiguos seguiran funcionando.
-    -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
+-   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework. 
+    -   Se reemplaza por completo el viejo sistema de módulos
+-   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
 
 # Para la versión 8.0.0 (LoTGD CORE as Bundle)
 -   Esta versión LoTGD Core se transforma en un Symfony Bundle.
--   Eliminar compatibilidad con el uso del viejo sistema de módulos
--   Se usa un sistema de módulos tipo Bundle (módulos complejos)
-    -   Para módulos simples que no requieran de mucha complicación se usara un namespace `Lotgd\Core\Module` dentro de la carpeta `src/Module`
-        -   También se permite módulos simples que hagan uso de la estructura de Symfony Framework. Pero está pensado para módulos simples (con muy pocos archivos) 
+-   Se usa un sistema de módulos tipo Bundle
+    -   Pensado para módulos que se tengan intención de compartir (en en proyectos propios o con terceros)
+    -   La configuración personal se hace como una web en  Symfony Framework
 
 ## Para la versión X.0.0
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
--   Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
-    -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
--   Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente cono el sistema de combate nuevo.
-    -   Se simplifica la forma en la que se calcula las estadísticas del perosnaje, haciendo que tanto los personajes jugador como los creados por el servidor, tengan una forma de creación muy similar.
--   Habilidades y sus buffs. Usar la base de datos para guardar los buffs, y asi poder traducir ciertos campos.
-    -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
+-   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
 
 # ¿? Para la versión X1.0.0
 -   ¿? Esta actualización requiere de que se valla migrando ciertos paquetes de Laminas a Symfony
