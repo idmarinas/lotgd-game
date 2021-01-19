@@ -1236,9 +1236,9 @@ class Characters
      *
      * @return self
      */
-    public function setTurns(int $turns)
+    public function setTurns($turns)
     {
-        $this->turns = $turns;
+        $this->turns = (int) $turns;
 
         return $this;
     }
