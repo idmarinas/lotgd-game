@@ -686,9 +686,9 @@ class Characters
      *
      * @return self
      */
-    public function setStrength(int $strength)
+    public function setStrength($strength)
     {
-        $this->strength = $strength;
+        $this->strength = (int) $strength;
 
         return $this;
     }
@@ -708,9 +708,9 @@ class Characters
      *
      * @return self
      */
-    public function setDexterity(int $dexterity)
+    public function setDexterity($dexterity)
     {
-        $this->dexterity = $dexterity;
+        $this->dexterity = (int) $dexterity;
 
         return $this;
     }
@@ -730,9 +730,9 @@ class Characters
      *
      * @return self
      */
-    public function setIntelligence(int $intelligence)
+    public function setIntelligence($intelligence)
     {
-        $this->intelligence = $intelligence;
+        $this->intelligence = (int) $intelligence;
 
         return $this;
     }
@@ -752,9 +752,9 @@ class Characters
      *
      * @return self
      */
-    public function setConstitution(int $constitution)
+    public function setConstitution($constitution)
     {
-        $this->constitution = $constitution;
+        $this->constitution = (int) $constitution;
 
         return $this;
     }
@@ -774,9 +774,9 @@ class Characters
      *
      * @return self
      */
-    public function setWisdom(int $wisdom)
+    public function setWisdom($wisdom)
     {
-        $this->wisdom = $wisdom;
+        $this->wisdom = (int) $wisdom;
 
         return $this;
     }
@@ -840,9 +840,9 @@ class Characters
      *
      * @return self
      */
-    public function setGold(int $gold)
+    public function setGold($gold)
     {
-        $this->gold = $gold;
+        $this->gold = (int) $gold;
 
         return $this;
     }
@@ -928,9 +928,9 @@ class Characters
      *
      * @return self
      */
-    public function setLevel(int $level)
+    public function setLevel($level)
     {
-        $this->level = $level;
+        $this->level = (int) $level;
 
         return $this;
     }
@@ -950,9 +950,9 @@ class Characters
      *
      * @return self
      */
-    public function setDefense(int $defense)
+    public function setDefense($defense)
     {
-        $this->defense = $defense;
+        $this->defense = (int) $defense;
 
         return $this;
     }
@@ -972,9 +972,9 @@ class Characters
      *
      * @return self
      */
-    public function setAttack(int $attack)
+    public function setAttack($attack)
     {
-        $this->attack = $attack;
+        $this->attack = (int) $attack;
 
         return $this;
     }
@@ -1038,9 +1038,9 @@ class Characters
      *
      * @return self
      */
-    public function setMarriedto(int $marriedto)
+    public function setMarriedto($marriedto)
     {
-        $this->marriedto = $marriedto;
+        $this->marriedto = (int) $marriedto;
 
         return $this;
     }
@@ -1148,9 +1148,9 @@ class Characters
      *
      * @return self
      */
-    public function setGems(int $gems)
+    public function setGems($gems)
     {
-        $this->gems = $gems;
+        $this->gems = (int) $gems;
 
         return $this;
     }
@@ -1170,9 +1170,9 @@ class Characters
      *
      * @return self
      */
-    public function setWeaponvalue(int $weaponvalue)
+    public function setWeaponvalue($weaponvalue)
     {
-        $this->weaponvalue = $weaponvalue;
+        $this->weaponvalue = (int) $weaponvalue;
 
         return $this;
     }
@@ -1192,9 +1192,9 @@ class Characters
      *
      * @return self
      */
-    public function setArmorvalue(int $armorvalue)
+    public function setArmorvalue($armorvalue)
     {
-        $this->armorvalue = $armorvalue;
+        $this->armorvalue = (int) $armorvalue;
 
         return $this;
     }
@@ -1352,9 +1352,9 @@ class Characters
      *
      * @return self
      */
-    public function setResurrections(int $resurrections)
+    public function setResurrections($resurrections)
     {
-        $this->resurrections = $resurrections;
+        $this->resurrections = (int) $resurrections;
 
         return $this;
     }
@@ -1374,9 +1374,9 @@ class Characters
      *
      * @return self
      */
-    public function setWeapondmg(int $weapondmg)
+    public function setWeapondmg($weapondmg)
     {
-        $this->weapondmg = $weapondmg;
+        $this->weapondmg = (int) $weapondmg;
 
         return $this;
     }
@@ -1396,9 +1396,9 @@ class Characters
      *
      * @return self
      */
-    public function setArmordef(int $armordef)
+    public function setArmordef($armordef)
     {
-        $this->armordef = $armordef;
+        $this->armordef = (int) $armordef;
 
         return $this;
     }
@@ -1418,9 +1418,9 @@ class Characters
      *
      * @return self
      */
-    public function setAge(int $age)
+    public function setAge($age)
     {
-        $this->age = $age;
+        $this->age = (int) $age;
 
         return $this;
     }
@@ -1440,9 +1440,9 @@ class Characters
      *
      * @return self
      */
-    public function setCharm(int $charm)
+    public function setCharm($charm)
     {
-        $this->charm = $charm;
+        $this->charm = (int) $charm;
 
         return $this;
     }
@@ -1590,9 +1590,9 @@ class Characters
      *
      * @return self
      */
-    public function setDragonkills(int $dragonkills)
+    public function setDragonkills($dragonkills)
     {
-        $this->dragonkills = $dragonkills;
+        $this->dragonkills = (int) $dragonkills;
 
         return $this;
     }
@@ -1768,9 +1768,9 @@ class Characters
      *
      * @return self
      */
-    public function setTransferredtoday(int $transferredtoday)
+    public function setTransferredtoday($transferredtoday)
     {
-        $this->transferredtoday = $transferredtoday;
+        $this->transferredtoday = (int) $transferredtoday;
 
         return $this;
     }
@@ -1790,9 +1790,9 @@ class Characters
      *
      * @return self
      */
-    public function setSoulpoints(int $soulpoints)
+    public function setSoulpoints($soulpoints)
     {
-        $this->soulpoints = $soulpoints;
+        $this->soulpoints = (int) $soulpoints;
 
         return $this;
     }
@@ -1856,9 +1856,9 @@ class Characters
      *
      * @return self
      */
-    public function setDeathpower(int $deathpower)
+    public function setDeathpower($deathpower)
     {
-        $this->deathpower = $deathpower;
+        $this->deathpower = (int) $deathpower;
 
         return $this;
     }
@@ -1962,9 +1962,9 @@ class Characters
      *
      * @return self
      */
-    public function setAmountouttoday(int $amountouttoday)
+    public function setAmountouttoday($amountouttoday)
     {
-        $this->amountouttoday = $amountouttoday;
+        $this->amountouttoday = (int) $amountouttoday;
 
         return $this;
     }
@@ -2006,9 +2006,9 @@ class Characters
      *
      * @return self
      */
-    public function setDragonage(int $dragonage)
+    public function setDragonage($dragonage)
     {
-        $this->dragonage = $dragonage;
+        $this->dragonage = (int) $dragonage;
 
         return $this;
     }
@@ -2028,9 +2028,9 @@ class Characters
      *
      * @return self
      */
-    public function setBestdragonage(int $bestdragonage)
+    public function setBestdragonage($bestdragonage)
     {
-        $this->bestdragonage = $bestdragonage;
+        $this->bestdragonage = (int) $bestdragonage;
 
         return $this;
     }
@@ -2138,9 +2138,9 @@ class Characters
      *
      * @return self
      */
-    public function setClanrank(int $clanrank)
+    public function setClanrank($clanrank)
     {
-        $this->clanrank = $clanrank;
+        $this->clanrank = (int) $clanrank;
 
         return $this;
     }
