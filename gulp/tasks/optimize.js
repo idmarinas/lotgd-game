@@ -44,7 +44,7 @@ module.exports = function (callback)
         (async () =>
         {
             const deletedPaths = await del([
-                normalize(config.paths.build.prod + '/cli-config.php'),
+                normalize(config.paths.build.prod + '/sonar-project.properties'),
                 normalize(config.paths.build.prod + '/**/*.{dist,md,lock}{,/**}'),
                 normalize(config.paths.build.prod + '/*.{json,yml,yaml,xml,txt,TXT,csv,phar,js,php}{,/**}'),
                 normalize(config.paths.build.prod + '/config/development{,/**}'),
