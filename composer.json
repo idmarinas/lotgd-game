@@ -123,6 +123,12 @@
             "require": "5.2.*"
         }
     },
+    "funding": [
+		{
+			"type": "paypal",
+			"url": "https://www.paypal.me/idmarinas"
+		}
+	],
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
