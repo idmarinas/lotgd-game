@@ -86,7 +86,7 @@ class Petition extends AjaxAbstract
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('button.submit', [], 'form_core_petition'),
+                    'title' => \LotgdKernel::get('translator')->trans('button.submit', [], 'form_core_petition'),
                     'class' => 'ui green approve button',
                 ],
                 [
@@ -209,7 +209,7 @@ class Petition extends AjaxAbstract
         $post  = $form->getData();
         $count = $repository->getCountPetitionsForNetwork(\LotgdRequest::getServer('REMOTE_ADDR'), \LotgdRequest::getCookie('lgi'));
 
-        if ($count >= 5 || (($session['user']['superuser'] ?? false) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
+        if ($count >= 5 || ! (isset($session['user']['superuser']) && $session['user']['superuser'] & ~SU_DOESNT_GIVE_GROTTO))
         {
             $response->dialog->warning(\LotgdTranslator::t('flash.message.section.default.error.network', ['count' => $count], self::TEXT_DOMAIN));
 
