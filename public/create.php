@@ -3,7 +3,7 @@
 // translator ready
 // addnews ready
 // mail ready
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 require_once 'lib/checkban.php';
@@ -13,17 +13,17 @@ checkban();
 
 $textDomain = 'page_create'; //-- Namespace, textDomain for page
 
-$trash = (int) getsetting('expiretrashacct', 1);
-$new = (int) getsetting('expirenewacct', 10);
-$old = (int) getsetting('expireoldacct', 45);
+$trash  = (int) getsetting('expiretrashacct', 1);
+$new    = (int) getsetting('expirenewacct', 10);
+$old    = (int) getsetting('expireoldacct', 45);
 $params = [
-    'allowCreation' => (bool) getsetting('allowcreation', 1),
-    'serverFull' => ServerFunctions::isTheServerFull(),
-    'requireEmail' => (int) getsetting('requireemail', 0),
+    'allowCreation'     => (bool) getsetting('allowcreation', 1),
+    'serverFull'        => ServerFunctions::isTheServerFull(),
+    'requireEmail'      => (int) getsetting('requireemail', 0),
     'requireValidEmail' => (int) getsetting('requirevalidemail', 0),
-    'acctTrash' => $trash,
-    'acctNew' => $new,
-    'acctOld' => $old
+    'acctTrash'         => $trash,
+    'acctNew'           => $new,
+    'acctOld'           => $old,
 ];
 
 $op = (string) \LotgdRequest::getQuery('op');
@@ -53,7 +53,7 @@ if ('forgotval' == $op)
 
     $account = $accountRepo->findOneBy(['forgottenpassword' => $forgottenCode]);
 
-    if (! $account)
+    if ( ! $account)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.pass.paragraph', [], $textDomain));
 
@@ -67,7 +67,7 @@ if ('forgotval' == $op)
     \Doctrine::merge($account);
 
     //-- Rare case: we have somebody who deleted his first validation email and then requests a forgotten PW...
-    if ('' != $account->getEmailvalidation() && 'x' != substr($account->getEmailvalidation(), 0, 1))
+    if ('' != $account->getEmailvalidation() && 'x' != \substr($account->getEmailvalidation(), 0, 1))
     {
         $account->getEmailvalidation('');
     }
@@ -88,7 +88,7 @@ elseif ('val' == $op)
 
     $account = $accountRepo->findOneBy(['emailvalidation' => $code]);
 
-    if (! $account)
+    if ( ! $account)
     {
         \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('validating.email.paragraph.fail', [], $textDomain));
 
@@ -100,9 +100,9 @@ elseif ('val' == $op)
     if ($account->getReplaceemail())
     {
         $params['emailChanged'] = true;
-        $replace_array = explode('|', $account->getReplaceemail());
-        $replaceemail = $replace_array[0]; //1==date
-        $oldEmail = $account->getEmailaddress();
+        $replace_array          = \explode('|', $account->getReplaceemail());
+        $replaceemail           = $replace_array[0]; //1==date
+        $oldEmail               = $account->getEmailaddress();
 
         debuglog('Email change request validated by link from '.$oldEmail.' to '.$replaceemail, $account->getAcctid(), $account->getAcctid(), 'Email');
 
@@ -121,13 +121,13 @@ elseif ('val' == $op)
 
             $acctSuper = $accountRepo->getSuperuserWithPermit(SU_EDIT_USERS);
 
-            if (count($acctSuper))
+            if (\count($acctSuper))
             {
-                $subj = \LotgdTranslator::t('yeoldemail.subject', ['name' => $account->getName()], $textDomain);
+                $subj  = \LotgdTranslator::t('yeoldemail.subject', ['name' => $account->getName()], $textDomain);
                 $alert = \LotgdTranslator::t('yeoldemail.alert', [
                     'newEmail' => $replaceemail,
-                    'oldMail' => $oldEmail,
-                    'login' => $account->getLogin()
+                    'oldMail'  => $oldEmail,
+                    'login'    => $account->getLogin(),
                 ], $textDomain);
                 $msg = \LotgdTranslator::t('yeoldemail.message', ['alert' => $alert], $textDomain);
 
@@ -166,14 +166,14 @@ elseif ('forgot' == $op)
     {
         $account = $accountRepo->findOneBy(['login' => $charname]);
 
-        if (! $account)
+        if ( ! $account)
         {
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.notFound', [], $textDomain));
 
             return redirect('create.php?op=forgot');
         }
 
-        if (! trim($account->getEmailaddress()))
+        if ( ! \trim($account->getEmailaddress()))
         {
             \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('forgot.account.noEmail', [], $textDomain));
 
@@ -182,19 +182,19 @@ elseif ('forgot' == $op)
 
         if ('' == $account->getForgottenpassword())
         {
-            $account->setForgottenpassword(substr('x'.md5(date('Y-m-d H:i:s').$account->getPassword()), 0, 32));
+            $account->setForgottenpassword(\substr('x'.\md5(\date('Y-m-d H:i:s').$account->getPassword()), 0, 32));
         }
 
         $language = ($account->getPrefs()['language'] ?? '') ?: getsetting('defaultlanguage', 'en');
 
         $subj = \LotgdTranslator::t('forgotpassword.subject', [], 'app_mail', $language);
-        $msg = \LotgdTranslator::t('forgotpassword.body', [
-            'login' => $account->getLogin(),
-            'acctid' => $account->getAcctid(),
+        $msg  = \LotgdTranslator::t('forgotpassword.body', [
+            'login'        => $account->getLogin(),
+            'acctid'       => $account->getAcctid(),
             'emailaddress' => $account->getEmailaddress(),
             'requester_ip' => \LotgdRequest::getServer('REMOTE_ADDR'),
-            'gameurl' => '//'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
-            'forgottenid' => $account->getForgottenpassword(),
+            'gameurl'      => '//'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
+            'forgottenid'  => $account->getForgottenpassword(),
         ], 'app_mail', $language);
 
         lotgd_mail($account->getEmailaddress(), $subj, \LotgdFormat::colorize($msg, true));
@@ -213,18 +213,17 @@ elseif ('forgot' == $op)
 elseif ('create' == $op)
 {
     $emailverification = '';
-    $shortname = trim((string) \LotgdRequest::getPost('name'));
-    $shortname = \LotgdSanitize::nameSanitize(getsetting('spaceinname', 0), $shortname);
-    $censor = \LotgdKernel::get(\Lotgd\Core\Output\Censor::class);
+    $shortname         = \trim((string) \LotgdRequest::getPost('name'));
+    $shortname         = \LotgdSanitize::nameSanitize(getsetting('spaceinname', 0), $shortname);
+    $censor            = \LotgdKernel::get(\Lotgd\Core\Output\Censor::class);
+    $blockaccount      = false;
 
     if ($censor->filter($shortname) != $shortname)
     {
+        $blockaccount = true;
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.badLanguage', [], $textDomain));
-
-        return redirect('create.php');
     }
 
-    $blockaccount = false;
     $email = (string) \LotgdRequest::getPost('email');
     $pass1 = (string) \LotgdRequest::getPost('pass1');
     $pass2 = (string) \LotgdRequest::getPost('pass2');
@@ -236,16 +235,15 @@ elseif ('create' == $op)
         if ($result)
         {
             \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.email.duplicate', [], $textDomain));
-
-            return redirect('create.php');
+            $blockaccount = true;
         }
     }
 
     $passlen = (int) \LotgdRequest::getPost('passlen');
 
-    if ('!md5!' != substr($pass1, 0, 5) && '!md52!' != substr($pass1, 0, 6))
+    if ('!md5!' != \substr($pass1, 0, 5) && '!md52!' != \substr($pass1, 0, 6))
     {
-        $passlen = strlen($pass1);
+        $passlen = \strlen($pass1);
     }
 
     if ($passlen <= 3)
@@ -260,13 +258,13 @@ elseif ('create' == $op)
         $blockaccount = true;
     }
 
-    if (strlen($shortname) < 3)
+    if (\strlen($shortname) < 3)
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.minLength', [], $textDomain));
         $blockaccount = true;
     }
 
-    if (strlen($shortname) > 25)
+    if (\strlen($shortname) > 25)
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.maxLength', [], $textDomain));
         $blockaccount = true;
@@ -285,138 +283,134 @@ elseif ('create' == $op)
         $blockaccount = true;
     }
 
-    if ($blockaccount)
-    {
-        return redirect('create.php');
-    }
-
-    $shortname = preg_replace("/\s+/", ' ', $shortname);
-    $result = $accountRepo->findOneBy(['login' => $shortname]);
+    $shortname = \preg_replace("/\s+/", ' ', $shortname);
+    $result    = $accountRepo->findOneBy(['login' => $shortname]);
 
     if ($result)
     {
+        $blockaccount = true;
+
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.name.duplicate', [], $textDomain));
-
-        return redirect('create.php');
     }
 
-    $sex = (int) \LotgdRequest::getPost('sex');
-    // Inserted the following line to prevent hacking
-    // Reported by Eliwood
-    if (SEX_MALE != $sex)
+    if ( ! $blockaccount)
     {
-        $sex = SEX_FEMALE;
-    }
-
-    require_once 'lib/titles.php';
-
-    $title = get_dk_title(0, $sex);
-
-    if (getsetting('requirevalidemail', 0))
-    {
-        $emailverification = md5(date('Y-m-d H:i:s').$email);
-    }
-    $refer = \LotgdRequest::getQuery('r');
-
-    $referer = 0;
-
-    if ($refer > '')
-    {
-        $result = $accountRepo->findOneBy(['login' => $refer]);
-        $referer = $result->getAcctid();
-    }
-
-    $dbpass = '';
-
-    if ('!md5!' == substr($pass1, 0, 5))
-    {
-        $dbpass = md5(substr($pass1, 5));
-    }
-    else
-    {
-        $dbpass = md5(md5($pass1));
-    }
-
-    try
-    {
-        //-- Configure account
-        $accountEntity = new \Lotgd\Core\Entity\Accounts();
-        $accountEntity->setLogin((string) $shortname)
-            ->setPassword((string) $dbpass)
-            ->setSuperuser((int) getsetting('defaultsuperuser', 0))
-            ->setRegdate(new \DateTime())
-            ->setUniqueid(\LotgdRequest::getCookie('lgi') ?: '')
-            ->setLastip(\LotgdRequest::getServer('REMOTE_ADDR'))
-            ->setEmailaddress($email)
-            ->setEmailvalidation($emailverification)
-            ->setReferer($referer)
-        ;
-
-        //-- Need for get a ID of new account
-        \Doctrine::persist($accountEntity);
-        \Doctrine::flush(); //Persist objects
-
-        //-- Configure character
-        $characterEntity = new \Lotgd\Core\Entity\Characters();
-        $characterEntity->setPlayername((string) $shortname)
-            ->setSex($sex)
-            ->setName("{$title} {$shortname}")
-            ->setTitle($title)
-            ->setGold((int) getsetting('newplayerstartgold', 50))
-            ->setLocation(getsetting('villagename', LOCATION_FIELDS))
-            ->setAcct($accountEntity)
-
-        ;
-
-        //-- Need for get ID of new character
-        \Doctrine::persist($characterEntity);
-        \Doctrine::flush(); //-- Persist objects
-
-        //-- Set ID of character and update Account
-        $accountEntity->setCharacter($characterEntity);
-        \Doctrine::persist($accountEntity);
-        \Doctrine::flush(); //-- Persist objects
-
-        $args = \LotgdRequest::getPostAll();
-        $args['acctid'] = $accountEntity->getAcctid();
-        modulehook('process-create', $args);
-
-        if ('' != $emailverification)
+        $sex = (int) \LotgdRequest::getPost('sex');
+        // Inserted the following line to prevent hacking
+        // Reported by Eliwood
+        if (SEX_MALE != $sex)
         {
-            $subj = \LotgdTranslator::t('verificationmail.subject', [], 'app_mail');
-            $msg = \LotgdTranslator::t('verificationmail.body', [
-                'login' => $shortname,
-                'acctid' => $accountEntity->getAcctid(),
-                'emailaddress' => $accountEntity->getEmailaddress(),
-                'gameurl' => 'https://'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
-                'validationid' => $emailverification,
-            ], 'app_mail');
-
-            lotgd_mail($email, $subj, \LotgdFormat::colorize($msg, true));
-
-            \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
-
-            return redirect('index.php');
+            $sex = SEX_FEMALE;
         }
 
-        savesetting('newestplayer', $accountEntity->getAcctid());
-        savesetting('newestplayername', $characterEntity->getName());
+        require_once 'lib/titles.php';
 
-        $params['login'] = $shortname;
-        $params['password'] = $pass1;
+        $title = get_dk_title(0, $sex);
 
-        \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/_blocks/_create.html.twig', $params));
+        if (getsetting('requirevalidemail', 0))
+        {
+            $emailverification = \md5(\date('Y-m-d H:i:s').$email);
+        }
+        $refer = \LotgdRequest::getQuery('r');
 
-        //-- Finalize page
-        \LotgdResponse::pageEnd();
-    }
-    catch (\Throwable $th)
-    {
-        \Tracy\Debugger::log($th);
+        $referer = 0;
 
-        \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.error', [], $textDomain));
+        if ($refer > '')
+        {
+            $result  = $accountRepo->findOneBy(['login' => $refer]);
+            $referer = $result->getAcctid();
+        }
 
-        return redirect('create.php');
+        $dbpass = '';
+
+        if ('!md5!' == \substr($pass1, 0, 5))
+        {
+            $dbpass = \md5(\substr($pass1, 5));
+        }
+        else
+        {
+            $dbpass = \md5(\md5($pass1));
+        }
+
+        try
+        {
+            //-- Configure account
+            $accountEntity = new \Lotgd\Core\Entity\Accounts();
+            $accountEntity->setLogin((string) $shortname)
+                ->setPassword((string) $dbpass)
+                ->setSuperuser((int) getsetting('defaultsuperuser', 0))
+                ->setRegdate(new \DateTime())
+                ->setUniqueid(\LotgdRequest::getCookie('lgi') ?: '')
+                ->setLastip(\LotgdRequest::getServer('REMOTE_ADDR'))
+                ->setEmailaddress($email)
+                ->setEmailvalidation($emailverification)
+                ->setReferer($referer)
+            ;
+
+            //-- Need for get a ID of new account
+            \Doctrine::persist($accountEntity);
+            \Doctrine::flush(); //Persist objects
+
+            //-- Configure character
+            $characterEntity = new \Lotgd\Core\Entity\Characters();
+            $characterEntity->setPlayername((string) $shortname)
+                ->setSex($sex)
+                ->setName("{$title} {$shortname}")
+                ->setTitle($title)
+                ->setGold((int) getsetting('newplayerstartgold', 50))
+                ->setLocation(getsetting('villagename', LOCATION_FIELDS))
+                ->setAcct($accountEntity)
+
+            ;
+
+            //-- Need for get ID of new character
+            \Doctrine::persist($characterEntity);
+            \Doctrine::flush(); //-- Persist objects
+
+            //-- Set ID of character and update Account
+            $accountEntity->setCharacter($characterEntity);
+            \Doctrine::persist($accountEntity);
+            \Doctrine::flush(); //-- Persist objects
+
+            $args           = \LotgdRequest::getPostAll();
+            $args['acctid'] = $accountEntity->getAcctid();
+            modulehook('process-create', $args);
+
+            if ('' != $emailverification)
+            {
+                $subj = \LotgdTranslator::t('verificationmail.subject', [], 'app_mail');
+                $msg  = \LotgdTranslator::t('verificationmail.body', [
+                    'login'        => $shortname,
+                    'acctid'       => $accountEntity->getAcctid(),
+                    'emailaddress' => $accountEntity->getEmailaddress(),
+                    'gameurl'      => 'https://'.(\LotgdRequest::getServer('SERVER_NAME').'/'.\LotgdRequest::getServer('SCRIPT_NAME')),
+                    'validationid' => $emailverification,
+                ], 'app_mail');
+
+                lotgd_mail($email, $subj, \LotgdFormat::colorize($msg, true));
+
+                \LotgdFlashMessages::addWarningMessage(\LotgdTranslator::t('create.account.emailVerification', ['email' => $email], $textDomain));
+
+                return redirect('index.php');
+            }
+
+            savesetting('newestplayer', $accountEntity->getAcctid());
+            savesetting('newestplayername', $characterEntity->getName());
+
+            $params['login']    = $shortname;
+            $params['password'] = $pass1;
+
+            \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('create_account_login', '{theme}/pages/_blocks/_create.html.twig', $params));
+
+            //-- Finalize page
+            \LotgdResponse::pageEnd();
+        }
+        catch (\Throwable $th)
+        {
+            \Tracy\Debugger::log($th);
+
+            \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('create.account.error', [], $textDomain));
+        }
     }
 }
 
@@ -426,7 +420,7 @@ $params['refer'] = '';
 
 if ($refer)
 {
-    $params['refer'] = '&r='.htmlentities($refer, ENT_COMPAT, getsetting('charset', 'UTF-8'));
+    $params['refer'] = '&r='.\htmlentities($refer, ENT_COMPAT, getsetting('charset', 'UTF-8'));
 }
 
 /**
@@ -436,7 +430,7 @@ if ($refer)
  *      'tpl-tame' => ['key' => 'value']
  * ].
  */
-$result = modulehook('create-form', ['templates' => []]);
+$result              = modulehook('create-form', ['templates' => []]);
 $params['templates'] = $result['templates'];
 
 \Doctrine::flush(); //-- Persist objects
