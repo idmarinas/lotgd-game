@@ -289,7 +289,7 @@ indexes={
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Lotgd-Core-Entity-Characters.html#property_clanrank">$clanrank</a>
     <span>
-                &nbsp;: bool            </span>
+                &nbsp;: int            </span>
 </dt>
 <dd></dd>
 
@@ -401,7 +401,7 @@ indexes={
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Lotgd-Core-Entity-Characters.html#property_hashorse">$hashorse</a>
     <span>
-                &nbsp;: bool            </span>
+                &nbsp;: int            </span>
 </dt>
 <dd></dd>
 
@@ -800,7 +800,7 @@ indexes={
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Entity-Characters.html#method_getClanid">getClanid()</a>
     <span>
-                        &nbsp;: int    </span>
+                        &nbsp;: int|null    </span>
 </dt>
 <dd>Get the value of Clanid.</dd>
 
@@ -926,7 +926,7 @@ indexes={
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Lotgd-Core-Entity-Characters.html#method_getHashorse">getHashorse()</a>
     <span>
-                        &nbsp;: bool    </span>
+                        &nbsp;: int|null    </span>
 </dt>
 <dd>Get the value of Hashorse.</dd>
 
@@ -2541,7 +2541,7 @@ indexes={
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">$clanid</span>
-     = <span class="phpdocumentor-signature__default-value">0</span></code>
+    </code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -2556,7 +2556,7 @@ indexes={
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(name=&quot;clanid&quot;, type=&quot;integer&quot;, nullable=false, options={&quot;default&quot;: 0, &quot;unsigned&quot;: true})</p>
+                                                 <section class="phpdocumentor-description"><p>(name=&quot;clanid&quot;, type=&quot;integer&quot;, nullable=true, options={&quot;default&quot;: 0, &quot;unsigned&quot;: true})</p>
 </section>
 
                                     </dd>
@@ -2631,7 +2631,7 @@ indexes={
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">$clanrank</span>
      = <span class="phpdocumentor-signature__default-value">0</span></code>
 
@@ -3108,7 +3108,7 @@ indexes={
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(name=&quot;experience&quot;, type=&quot;bigint&quot;, nullable=false, options={&quot;default&quot;: 0, &quot;unsigned&quot;: true})</p>
+                                                 <section class="phpdocumentor-description"><p>(name=&quot;experience&quot;, type=&quot;integer&quot;, nullable=false, options={&quot;default&quot;: 0, &quot;unsigned&quot;: true})</p>
 </section>
 
                                     </dd>
@@ -3367,9 +3367,9 @@ indexes={
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">bool</span>
+        <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">$hashorse</span>
-     = <span class="phpdocumentor-signature__default-value">0</span></code>
+    </code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -3384,7 +3384,7 @@ indexes={
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>(name=&quot;hashorse&quot;, type=&quot;integer&quot;, nullable=false, options={&quot;default&quot;: 0})</p>
+                                                 <section class="phpdocumentor-description"><p>(name=&quot;hashorse&quot;, type=&quot;integer&quot;, nullable=true, options={&quot;default&quot;: 0})</p>
 </section>
 
                                     </dd>
@@ -5795,7 +5795,7 @@ indexes={
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getClanid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+                <span class="phpdocumentor-signature__name">getClanid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -5803,7 +5803,7 @@ indexes={
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
+    <span class="phpdocumentor-signature__response_type">int|null</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -6407,7 +6407,7 @@ indexes={
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getHashorse</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                <span class="phpdocumentor-signature__name">getHashorse</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -6415,7 +6415,7 @@ indexes={
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type">int|null</span>
             &mdash;
             <section class="phpdocumentor-description"></section>
 
@@ -9306,7 +9306,7 @@ indexes={
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setHashorse</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hashorse</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                <span class="phpdocumentor-signature__name">setHashorse</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hashorse</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -9314,7 +9314,7 @@ indexes={
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$hashorse</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
