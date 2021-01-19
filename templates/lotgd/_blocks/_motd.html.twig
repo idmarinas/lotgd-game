@@ -9,49 +9,49 @@
     {% endif %}
 
     <div class="ui divided items">
-    {% for motd in paginator %}
-        {{ motd_show_item(motd, {'SU_POST_MOTD': SU_POST_MOTD}) }}
-    {% else %}
-        <div class="item">
-            <div class="content">
-                <div class="ui error message">
-                    {{ 'list.empty'|trans|uncolorize }}
+        {% for motd in paginator %}
+            {{ motd_show_item(motd, {'SU_POST_MOTD': SU_POST_MOTD}) }}
+        {% else %}
+            <div class="item">
+                <div class="content">
+                    <div class="ui error message">
+                        {{ 'list.empty'|trans|uncolorize }}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
     </div>
     <div class="ui header divider"></div>
     <br>
     <div class="ui centered grid">
-    <div class="inline field">
-        <label for="month-archive">{{ 'list.form.label'|trans }}</label>
-        <div class="ui action input" id="month-archive">
-            <div class="ui compact clearable selection lotgd dropdown">
-                <input type="hidden" id="motd-month" value="">
-                <i aria-hidden="true" class="dropdown icon"></i>
-                <span class="default text">{{ 'list.form.select.select'|trans|uncolorize }}</span>
-                <div class="menu">
-                    {% if motdMothCountPerYear %}
-                        {% for row in motdMothCountPerYear %}
-                            {% set month = row.year ~ '-' ~ row.month %}
-                            <div class="item" {{ month == monthSelected ? 'selected' : '' }} data-value="{{ month }}" >
-                                {{ '{date,date,YYY, LLLL} ({count,number})'|tmf({'date': row.date, 'count': row.count}) }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="item">{{ 'list.form.select.empty'|trans|uncolorize }}</div>
-                    {% endif %}
+        <div class="inline field">
+            <label for="month-archive">{{ 'list.form.label'|trans }}</label>
+            <div class="ui action input" id="month-archive">
+                <div class="ui compact clearable selection lotgd dropdown">
+                    <input type="hidden" id="motd-month" value="">
+                    <i aria-hidden="true" class="dropdown icon"></i>
+                    <span class="default text">{{ 'list.form.select.select'|trans|uncolorize }}</span>
+                    <div class="menu">
+                        {% if motdMothCountPerYear %}
+                            {% for row in motdMothCountPerYear %}
+                                {% set month = row.year ~ '-' ~ row.month %}
+                                <div class="item" {{ month == monthSelected ? 'selected' : '' }} data-value="{{ month }}" >
+                                    {{ '{date,date,YYY, LLLL} ({count,number})'|tmf({'date': row.date, 'count': row.count}) }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="item">{{ 'list.form.select.empty'|trans|uncolorize }}</div>
+                        {% endif %}
+                    </div>
                 </div>
+                <a id="motd-button-selected" role="button" class="ui button" aria-label="{{ 'list.form.button.descriptive.submit'|trans|uncolorize }}" onclick="JaxonLotgd.Ajax.Core.Motd.list(1, null, $('#motd-month').val()); $(this).addClass('disabled'); $('#motd-button-current').addClass('disabled')">
+                    {{ 'list.form.button.label.submit'|trans|uncolorize }}
+                </a>
+                <a id="motd-button-current" role="button" aria-label="{{ 'list.form.button.descriptive.current'|trans|uncolorize }}" class="ui secondary button" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('disabled'); $('#motd-button-selected').addClass('disabled')">
+                    {{ 'list.form.button.label.current'|trans|uncolorize }}
+                </a>
             </div>
-            <a id="motd-button-selected" role="button" class="ui button" aria-label="{{ 'list.form.button.descriptive.submit'|trans|uncolorize }}" onclick="JaxonLotgd.Ajax.Core.Motd.list(1, null, $('#motd-month').val()); $(this).addClass('disabled'); $('#motd-button-current').addClass('disabled')">
-                {{ 'list.form.button.label.submit'|trans|uncolorize }}
-            </a>
-            <a id="motd-button-current" role="button" aria-label="{{ 'list.form.button.descriptive.current'|trans|uncolorize }}" class="ui secondary button" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('disabled'); $('#motd-button-selected').addClass('disabled')">
-                {{ 'list.form.button.label.current'|trans|uncolorize }}
-            </a>
         </div>
-    </div>
     </div>
     <div class="ui hidden header divider"></div>
     {{ navigation_pagination(paginator, 'JaxonLotgd.Ajax.Core.Motd.list', null, null, {
@@ -169,10 +169,10 @@
                                 {% endif %}
                             </div>
                             <div class="content">
-                                <div class="header">{{ option|colorize }}</div>
+                                <div class="header">{{ option|uncolorize }}</div>
                                 {% set percent = motd.pollResult.totalVotes ? (motd.pollResult.opt[id] / motd.pollResult.totalVotes) : 0 %}
                                 {% set params = {'votes': motd.pollResult.opt[id], 'percent': percent} %}
-                                <spam class="meta">{{ 'item.poll.result.opt'|trans(params)|colorize }}</spam>
+                                <span class="meta">{{ 'item.poll.result.opt'|trans(params)|uncolorize }}</span>
                                 <div class="description">
                                     <div class="ui remove margin tiny green progress" data-value="{{ motd.pollResult.opt[id] }}" data-total="{{ motd.pollResult.totalVotes }}">
                                         <div class="bar"></div>
