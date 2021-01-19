@@ -45,7 +45,7 @@ trait Poll
             // The dialog buttons
             $buttons = [
                 [
-                    'title' => \LotgdTranslator::t('poll.button.submit', [], 'form_core_motd'),
+                    'title' => \LotgdKernel::get('translator')->trans('poll.button.submit', [], 'form_core_motd'),
                     'class' => 'ui green approve button',
                 ],
                 [
