@@ -22,6 +22,7 @@
 
 # Para la versión 5.0.0
 -   Un nuevo sistema de instalación por consola.
+    -   Sólo podrá actualizar desde la versión anterior (4.12.0)
 -   Migración al uso de Symfony usando el http-kernel (completado en esta versión)
     -   https://symfony.com/doc/current/components/http_kernel.html
         -   Se migrará 
