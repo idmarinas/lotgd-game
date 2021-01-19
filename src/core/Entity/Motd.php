@@ -77,7 +77,7 @@ class Motd
      *
      * @ORM\Column(name="motdtype", type="boolean", nullable=false, options={"default": "0"})
      */
-    private $motdtype = 0;
+    private $motdtype = false;
 
     /**
      * @var int
@@ -188,7 +188,7 @@ class Motd
      */
     public function setMotdtype($motdtype)
     {
-        $this->motdtype = $motdtype;
+        $this->motdtype = (bool) $motdtype;
 
         return $this;
     }
