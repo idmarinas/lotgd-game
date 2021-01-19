@@ -68,7 +68,7 @@ try
     //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
     if ($isDevelopment)
     {
-        \MacFJA\Tracy\DoctrineSql::init(\LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
+        \MacFJA\Tracy\DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
     }
 }
 catch (\Throwable $th)
