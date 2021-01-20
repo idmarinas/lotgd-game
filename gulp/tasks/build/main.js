@@ -15,16 +15,6 @@ module.exports = function (callback)
 {
     const destFolder = isProduction ? config.paths.build.prod : config.paths.build.dev
 
-    const main = gulp.src(config.files.main, { base: '.' })
+    return gulp.src(config.files.main, { base: '.' })
         .pipe(gulp.dest(destFolder))
-
-    if (config.files.core_files.length)
-    {
-        const core = gulp.src(config.files.core_files)
-            .pipe(gulp.dest(destFolder))
-
-        return merge(core, main)
-    }
-
-    return main
 }
