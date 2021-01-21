@@ -9921,66 +9921,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Factory-Form-SymfonyForm.html#method_createService"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\EntrypointLookupCollection",
-            "name": "EntrypointLookupCollection",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-EntrypointLookupCollection.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\EntrypointLookupCollection\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-EntrypointLookupCollection.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Packages",
-            "name": "Packages",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Packages.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Packages\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Packages.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\TagRenderer",
-            "name": "TagRenderer",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-TagRenderer.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\TagRenderer\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-TagRenderer.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme",
-            "name": "Theme",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme\u003A\u003A__invoke\u0028\u0029",
-            "name": "__invoke",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html#method___invoke"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme\u003A\u003AcreateService\u0028\u0029",
-            "name": "createService",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html#method_createService"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme\u003A\u003AaddTwigExtensions\u0028\u0029",
-            "name": "addTwigExtensions",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html#method_addTwigExtensions"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme\u003A\u003AaddTemplatePaths\u0028\u0029",
-            "name": "addTemplatePaths",
-            "summary": "Add\u0020template\u0020paths.",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html#method_addTemplatePaths"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template\\Theme\u003A\u003AregisterGlobals\u0028\u0029",
-            "name": "registerGlobals",
-            "summary": "Register\u0020global\u0020parameters.",
-            "url": "classes/Lotgd-Core-Factory-Template-Theme.html#method_registerGlobals"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Translator\\LoaderPluginManager",
             "name": "LoaderPluginManager",
             "summary": "",
@@ -13901,11 +13841,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Symfony-Validator-ConstraintValidatorFactory.html#method_addValidator"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Base",
-            "name": "Base",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Template-Base.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Params",
             "name": "Params",
             "summary": "",
@@ -13913,7 +13848,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template",
             "name": "Template",
-            "summary": "",
+            "summary": "This\u0020class\u0020are\u0020deprecate,\u0020and\u0020only\u0020is\u0020for\u0020transition\u0020to\u0020Symfony\u0020Kernel.",
             "url": "classes/Lotgd-Core-Template-Template.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A__construct\u0028\u0029",
@@ -13935,6 +13870,11 @@ Search.appendIndex(
             "name": "renderBlock",
             "summary": "Render\u0020a\u0020block\u0020of\u0020a\u0020template.",
             "url": "classes/Lotgd-Core-Template-Template.html#method_renderBlock"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTemplateParams\u0028\u0029",
+            "name": "getTemplateParams",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTemplateParams"
         },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003Aload\u0028\u0029",
             "name": "load",
@@ -13981,6 +13921,301 @@ Search.appendIndex(
             "summary": "Update\u0020globals\u0020parameters.",
             "url": "classes/Lotgd-Core-Template-Template.html#method_updateGlobals"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetBaseTemplateClass\u0028\u0029",
+            "name": "getBaseTemplateClass",
+            "summary": "sobree\u0020scribir\u0020las\u0020funciones\u0020originales",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getBaseTemplateClass"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetBaseTemplateClass\u0028\u0029",
+            "name": "setBaseTemplateClass",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setBaseTemplateClass"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AenableDebug\u0028\u0029",
+            "name": "enableDebug",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_enableDebug"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AdisableDebug\u0028\u0029",
+            "name": "disableDebug",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_disableDebug"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AisDebug\u0028\u0029",
+            "name": "isDebug",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_isDebug"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AenableAutoReload\u0028\u0029",
+            "name": "enableAutoReload",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_enableAutoReload"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AdisableAutoReload\u0028\u0029",
+            "name": "disableAutoReload",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_disableAutoReload"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AisAutoReload\u0028\u0029",
+            "name": "isAutoReload",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_isAutoReload"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AenableStrictVariables\u0028\u0029",
+            "name": "enableStrictVariables",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_enableStrictVariables"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AdisableStrictVariables\u0028\u0029",
+            "name": "disableStrictVariables",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_disableStrictVariables"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AisStrictVariables\u0028\u0029",
+            "name": "isStrictVariables",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_isStrictVariables"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetCache\u0028\u0029",
+            "name": "getCache",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getCache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetCache\u0028\u0029",
+            "name": "setCache",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setCache"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTemplateClass\u0028\u0029",
+            "name": "getTemplateClass",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTemplateClass"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003Adisplay\u0028\u0029",
+            "name": "display",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_display"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AloadTemplate\u0028\u0029",
+            "name": "loadTemplate",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_loadTemplate"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AloadClass\u0028\u0029",
+            "name": "loadClass",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_loadClass"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AcreateTemplate\u0028\u0029",
+            "name": "createTemplate",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_createTemplate"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AisTemplateFresh\u0028\u0029",
+            "name": "isTemplateFresh",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_isTemplateFresh"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AresolveTemplate\u0028\u0029",
+            "name": "resolveTemplate",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_resolveTemplate"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetLexer\u0028\u0029",
+            "name": "setLexer",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setLexer"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003Atokenize\u0028\u0029",
+            "name": "tokenize",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_tokenize"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetParser\u0028\u0029",
+            "name": "setParser",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setParser"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_parse"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetCompiler\u0028\u0029",
+            "name": "setCompiler",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setCompiler"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003Acompile\u0028\u0029",
+            "name": "compile",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_compile"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AcompileSource\u0028\u0029",
+            "name": "compileSource",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_compileSource"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetLoader\u0028\u0029",
+            "name": "setLoader",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setLoader"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetLoader\u0028\u0029",
+            "name": "getLoader",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getLoader"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetCharset\u0028\u0029",
+            "name": "setCharset",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setCharset"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetCharset\u0028\u0029",
+            "name": "getCharset",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getCharset"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AhasExtension\u0028\u0029",
+            "name": "hasExtension",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_hasExtension"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddRuntimeLoader\u0028\u0029",
+            "name": "addRuntimeLoader",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addRuntimeLoader"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetExtension\u0028\u0029",
+            "name": "getExtension",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getExtension"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetRuntime\u0028\u0029",
+            "name": "getRuntime",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getRuntime"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddExtension\u0028\u0029",
+            "name": "addExtension",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addExtension"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AsetExtensions\u0028\u0029",
+            "name": "setExtensions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_setExtensions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetExtensions\u0028\u0029",
+            "name": "getExtensions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getExtensions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddTokenParser\u0028\u0029",
+            "name": "addTokenParser",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addTokenParser"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTokenParsers\u0028\u0029",
+            "name": "getTokenParsers",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTokenParsers"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTags\u0028\u0029",
+            "name": "getTags",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTags"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddNodeVisitor\u0028\u0029",
+            "name": "addNodeVisitor",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addNodeVisitor"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetNodeVisitors\u0028\u0029",
+            "name": "getNodeVisitors",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getNodeVisitors"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddFilter\u0028\u0029",
+            "name": "addFilter",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addFilter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetFilter\u0028\u0029",
+            "name": "getFilter",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getFilter"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AregisterUndefinedFilterCallback\u0028\u0029",
+            "name": "registerUndefinedFilterCallback",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_registerUndefinedFilterCallback"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetFilters\u0028\u0029",
+            "name": "getFilters",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getFilters"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddTest\u0028\u0029",
+            "name": "addTest",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addTest"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTests\u0028\u0029",
+            "name": "getTests",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTests"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetTest\u0028\u0029",
+            "name": "getTest",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getTest"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddFunction\u0028\u0029",
+            "name": "addFunction",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addFunction"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetFunction\u0028\u0029",
+            "name": "getFunction",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getFunction"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AregisterUndefinedFunctionCallback\u0028\u0029",
+            "name": "registerUndefinedFunctionCallback",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_registerUndefinedFunctionCallback"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetFunctions\u0028\u0029",
+            "name": "getFunctions",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getFunctions"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AaddGlobal\u0028\u0029",
+            "name": "addGlobal",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_addGlobal"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetGlobals\u0028\u0029",
+            "name": "getGlobals",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getGlobals"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AmergeGlobals\u0028\u0029",
+            "name": "mergeGlobals",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_mergeGlobals"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetUnaryOperators\u0028\u0029",
+            "name": "getUnaryOperators",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getUnaryOperators"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003AgetBinaryOperators\u0028\u0029",
+            "name": "getBinaryOperators",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#method_getBinaryOperators"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003ATEMPLATES_LAYOUT_DIR",
             "name": "TEMPLATES_LAYOUT_DIR",
             "summary": "",
@@ -14026,30 +14261,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Template-Template.html#property_defaultSkin"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Theme",
-            "name": "Theme",
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024decorated",
+            "name": "decorated",
             "summary": "",
-            "url": "classes/Lotgd-Core-Template-Theme.html"
+            "url": "classes/Lotgd-Core-Template-Template.html#property_decorated"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Theme\u003A\u003ArenderThemeOld\u0028\u0029",
-            "name": "renderThemeOld",
-            "summary": "Render\u0020a\u0020theme\nUsed\u0020in\u0020pageparts.php\u0020for\u0020render\u0020a\u0020page.",
-            "url": "classes/Lotgd-Core-Template-Theme.html#method_renderThemeOld"
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024lotgdRequest",
+            "name": "lotgdRequest",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#property_lotgdRequest"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Theme\u003A\u003ArenderThemeTemplate\u0028\u0029",
-            "name": "renderThemeTemplate",
-            "summary": "Renders\u0020a\u0020template\u0020of\u0020the\u0020theme.",
-            "url": "classes/Lotgd-Core-Template-Theme.html#method_renderThemeTemplate"
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024lotgdParams",
+            "name": "lotgdParams",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#property_lotgdParams"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Theme\u003A\u003ArenderModuleTemplate\u0028\u0029",
-            "name": "renderModuleTemplate",
-            "summary": "Renders\u0020a\u0020template\u0020of\u0020module.",
-            "url": "classes/Lotgd-Core-Template-Theme.html#method_renderModuleTemplate"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Template\\Theme\u003A\u003ArenderLotgdTemplate\u0028\u0029",
-            "name": "renderLotgdTemplate",
-            "summary": "Renders\u0020a\u0020template\u0020of\u0020LOTGD.",
-            "url": "classes/Lotgd-Core-Template-Theme.html#method_renderLotgdTemplate"
+            "fqsen": "\\Lotgd\\Core\\Template\\Template\u003A\u003A\u0024settings",
+            "name": "settings",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Template-Template.html#property_settings"
         },                {
             "fqsen": "\\Lotgd\\Core\\Tool\\Sanitize",
             "name": "Sanitize",
@@ -15946,6 +16176,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Loader-LotgdFilesystemLoader.html"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Loader\\LotgdFilesystemLoader\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Loader-LotgdFilesystemLoader.html#method___construct"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Loader\\LotgdFilesystemLoader\u003A\u003AsetThemeNamespace\u0028\u0029",
             "name": "setThemeNamespace",
             "summary": "Set\u0020namespace\u0020of\u0020active\u0020theme.",
@@ -15960,6 +16195,11 @@ Search.appendIndex(
             "name": "themeNamespace",
             "summary": "",
             "url": "classes/Lotgd-Core-Twig-Loader-LotgdFilesystemLoader.html#property_themeNamespace"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Twig\\Loader\\LotgdFilesystemLoader\u003A\u003A\u0024decoratedLoader",
+            "name": "decoratedLoader",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Twig-Loader-LotgdFilesystemLoader.html#property_decoratedLoader"
         },                {
             "fqsen": "\\Lotgd\\Core\\Twig\\Node\\CommentaryDefaultAddCommentNode",
             "name": "CommentaryDefaultAddCommentNode",
@@ -16586,6 +16826,26 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#function_bell_rand"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade",
+            "name": "Upgrade",
+            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003AVERSION_NUMBER",
+            "name": "VERSION_NUMBER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_VERSION_NUMBER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
+            "name": "CONFIG_DIR_GLOBAL",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -16871,11 +17131,6 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/lotgd-core-factory-form.html"
         },                {
-            "fqsen": "\\Lotgd\\Core\\Factory\\Template",
-            "name": "Template",
-            "summary": "",
-            "url": "namespaces/lotgd-core-factory-template.html"
-        },                {
             "fqsen": "\\Lotgd\\Core\\Factory\\Translator",
             "name": "Translator",
             "summary": "",
@@ -16985,6 +17240,11 @@ Search.appendIndex(
             "name": "Version_41100",
             "summary": "",
             "url": "namespaces/lotgd-core-installer-upgrade-version-41100.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200",
+            "name": "Version_41200",
+            "summary": "",
+            "url": "namespaces/lotgd-core-installer-upgrade-version-41200.html"
         },                {
             "fqsen": "\\Lotgd\\Core\\Jaxon\\Library\\Semantic",
             "name": "Semantic",
