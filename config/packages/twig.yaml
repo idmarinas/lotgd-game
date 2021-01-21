@@ -12,6 +12,8 @@ twig:
     globals:
         userPre: ~ # Not remove, if for avoid errors
         user: ~ # Not remove, if for avoid errors
+        sessionPre: ~ # Not remove, if for avoid errors
+        session: ~ # Not remove, if for avoid errors
     form_themes: [
         'lotgd/form/semantic-ui-form-theme.html.twig'
     ]
