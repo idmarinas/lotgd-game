@@ -129,9 +129,9 @@ class Upgrade extends UpgradeAbstract
             $query = $this->doctrine->createQueryBuilder();
 
             $count = $query->update('LotgdCore:Accounts', 'u')
-                ->set('donationconfig', ':new')
+                ->set('u.donationconfig', ':new')
 
-                ->where('donationconfig = :old')
+                ->where('u.donationconfig = :old')
 
                 ->setParameter('new', 'a:0:{}')
                 ->setParameter('old', 's:0:""')
