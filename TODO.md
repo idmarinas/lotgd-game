@@ -13,7 +13,6 @@
 -   ...
 
 # Para la versión 4.12.0
--   Migrar Twig (el sistema de templates y theme) al kernel
 -   Última versión de la serie 4.y.z
 
 # Advertising bundle
