@@ -71,15 +71,8 @@ class Response extends HttpResponse
         $sesionPre = $session         ?? [];
         unset($sesionPre['user'], $userPre['password']);
 
-        try
-        {
-            $this->getTemplate()->addGlobal('userPre', $userPre);
-            $this->getTemplate()->addGlobal('sessionPre', $sesionPre);
-        }
-        catch (\Throwable $th)
-        {
-            // not need catch
-        }
+        $this->getTemplate()->addGlobal('userPre', $userPre);
+        $this->getTemplate()->addGlobal('sessionPre', $sesionPre);
     }
 
     /**
