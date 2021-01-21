@@ -131,10 +131,11 @@ class Upgrade extends UpgradeAbstract
             $count = $query->update('LotgdCore:Accounts', 'u')
                 ->set('u.donationconfig', ':new')
 
-                ->where('u.donationconfig = :old')
+                ->where('u.donationconfig = :old or u.donationconfig = :old2')
 
                 ->setParameter('new', 'a:0:{}')
                 ->setParameter('old', 's:0:""')
+                ->setParameter('old2', 's:0:"";')
 
                 ->getQuery()
                 ->execute()
