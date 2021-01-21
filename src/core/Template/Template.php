@@ -103,6 +103,11 @@ class Template extends Environment
         return $tpl->renderBlock($blockName, $context);
     }
 
+    public function getTemplateParams()
+    {
+        return $this->lotgdParams;
+    }
+
     /**
      * {@inheritDoc}
      */
