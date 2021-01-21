@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Template\Params;
-use Lotgd\Core\Template\Theme as ThemeCore;
+use Twig\Environment as ThemeCore;
 
 trait Template
 {
@@ -45,7 +45,7 @@ trait Template
     {
         if ( ! $this->lotgdTemplateSystem instanceof ThemeCore)
         {
-            $this->lotgdTemplateSystem = $this->getContainer(ThemeCore::class);
+            $this->lotgdTemplateSystem = $this->getService('twig');
         }
 
         return $this->lotgdTemplateSystem;

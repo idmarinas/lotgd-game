@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Fixed;
 
-use Lotgd\Core\Template\Theme as CoreTheme;
+use Lotgd\Core\Template\Template as CoreTheme;
 
 class Theme
 {

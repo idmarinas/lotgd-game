@@ -13,12 +13,19 @@
 
 namespace Lotgd\Core\Twig\Loader;
 
-use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
+use Twig\Loader\LoaderInterface;
+use Twig\Loader\SourceContextLoaderInterface;
 
-class LotgdFilesystemLoader extends FilesystemLoader
+class LotgdFilesystemLoader extends FilesystemLoader implements LoaderInterface, SourceContextLoaderInterface
 {
     protected $themeNamespace;
+    private $decoratedLoader;
+
+    public function __construct(FilesystemLoader $decoratedLoader)
+    {
+        $this->decoratedLoader = $decoratedLoader;
+    }
 
     /**
      * Set namespace of active theme.
@@ -37,7 +44,7 @@ class LotgdFilesystemLoader extends FilesystemLoader
     {
         $template = \str_replace('{theme}', "@theme{$this->themeNamespace}", $template);
 
-        $tpl = parent::findTemplate($template, false);
+        $tpl = $this->decoratedLoader->findTemplate($template, false);
 
         //-- Fallback theme namespace to default namespace
         if ( ! $tpl && false !== \strpos($template, '@theme'))
@@ -45,17 +52,12 @@ class LotgdFilesystemLoader extends FilesystemLoader
             $pos         = \strpos($template, '/');
             $newTemplate = \substr($template, $pos + 1);
 
-            $tpl = parent::findTemplate($newTemplate, $throw);
+            $tpl = $this->decoratedLoader->findTemplate($newTemplate, $throw);
 
             if ($tpl)
             {
-                $this->cache[$template] = $tpl; //-- Cache original them namespace
+                $this->decoratedLoader->cache[$template] = $tpl; //-- Cache original them namespace
             }
-        }
-
-        if ( ! $tpl)
-        {
-            throw new LoaderError($this->errorCache[$template]);
         }
 
         return $tpl;

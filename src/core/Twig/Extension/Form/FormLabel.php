@@ -16,7 +16,7 @@ namespace Lotgd\Core\Twig\Extension\Form;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\LabelAwareInterface;
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class FormLabel extends AbstractElement

@@ -17,7 +17,7 @@ use Laminas\Form\Element\Collection as CollectionElement;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\FieldsetInterface;
 use Laminas\View\Helper\HelperInterface;
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class FormCollection extends AbstractElement

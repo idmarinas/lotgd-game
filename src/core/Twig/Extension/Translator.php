@@ -75,8 +75,8 @@ class Translator extends AbstractExtension
             /*
              * Symfony Translator
              */
-            new TwigFilter('ts', [$this, 'symfonyTrans'], ['needs_environment' => true]),
-            new TwigFilter('trans', [$this, 'symfonyTrans'], ['needs_environment' => true]),
+            // new TwigFilter('ts', [$this, 'symfonyTrans'], ['needs_environment' => true]),
+            // new TwigFilter('trans', [$this, 'symfonyTrans'], ['needs_environment' => true]),
         ];
     }
 

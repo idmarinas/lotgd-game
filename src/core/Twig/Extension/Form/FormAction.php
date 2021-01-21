@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Form;
 
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class FormAction extends AbstractElement

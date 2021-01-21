@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 

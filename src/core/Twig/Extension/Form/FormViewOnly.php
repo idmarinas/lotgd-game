@@ -14,7 +14,7 @@
 namespace Lotgd\Core\Twig\Extension\Form;
 
 use Laminas\Form\ElementInterface;
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class FormViewOnly extends FormInput

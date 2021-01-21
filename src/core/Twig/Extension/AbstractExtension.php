@@ -16,7 +16,7 @@ namespace Lotgd\Core\Twig\Extension;
 use Lotgd\Core\Pattern as PatternCore;
 use Twig\Extension\AbstractExtension as AbstractExtensionCore;
 
-class AbstractExtension extends AbstractExtensionCore
+abstract class AbstractExtension extends AbstractExtensionCore
 {
     use PatternCore\Container;
 }

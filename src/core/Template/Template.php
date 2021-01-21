@@ -18,15 +18,18 @@ use Laminas\Filter\Word\DashToCamelCase;
 use Laminas\Filter\Word\SeparatorToDash;
 use Laminas\Filter\Word\UnderscoreToDash;
 use Lotgd\Core\Exception;
-use Lotgd\Core\Pattern;
-use Lotgd\Core\Twig\Loader\LotgdFilesystemLoader;
+use Lotgd\Core\Http\Request;
 use Twig\Environment;
+use Lotgd\Core\Lib\Settings;
 
+/**
+ * This class are deprecate, and only is for transition to Symfony Kernel.
+ * Is replace for a new Theme System
+ *
+ * @deprecated 4.12.0 delete in future versions
+ */
 class Template extends Environment
 {
-    use Pattern\Container;
-    use Pattern\Template;
-
     public const TEMPLATES_LAYOUT_DIR       = 'themes'; //-- Themes folder.
     public const TEMPLATES_BASE_DIR         = 'templates/lotgd'; //-- Main templates folder.
     public const TEMPLATES_CORE_BASE_DIR    = 'templates_core'; //-- Core templates of game (Not intended to be customizable)
@@ -37,34 +40,22 @@ class Template extends Environment
     protected $themeNamespace;
     protected $themefolder;
     protected $defaultSkin;
+    protected $decorated;
+    protected $lotgdRequest;
+    protected $lotgdParams;
+    protected $settings;
 
     /**
      * {@inheritdoc}.
      */
-    public function __construct(array $loader = [], array $options = [])
+    public function __construct(Environment $decorated, Request $request, Params $params, Settings $settings)
     {
-        //-- Merge options
-        $default = [
-            'cache'      => 'storage/cache/templates',
-            'autoescape' => false,
-        ];
-        $options = \array_merge($default, $options);
+        $this->decorated = $decorated;
+        $this->lotgdRequest = $request;
+        $this->lotgdParams = $params;
+        $this->settings = $settings;
 
-        \array_push($loader, static::TEMPLATES_BASE_DIR); // Main templates is always last, is the last area where Twig will look
-        \array_push($loader, 'templates'); // Compatibility with modules (temporal , remove in future before 5.0.0)
-        $loader = new LotgdFilesystemLoader($loader);
-
-        //-- Added path to templates modules
-        $loader->addPath(static::TEMPLATES_MODULES_BASE_DIR, 'module');
-
-        //-- Added path to core templates
-        $loader->addPath(static::TEMPLATES_CORE_BASE_DIR, 'core');
-
-        //-- Added path to layout templates (themes)
-        $loader->addPath(static::TEMPLATES_LAYOUT_DIR, 'layout');
-
-        parent::__construct($loader, $options);
-
+        $this->prepareTheme();
         $this->updateGlobals();
     }
 
@@ -75,7 +66,7 @@ class Template extends Environment
      */
     public function renderLayout($context): string
     {
-        return $this->render("@layout/{$this->getTheme()}", (array) $context);
+        return $this->decorated->render("@layout/{$this->getTheme()}", (array) $context);
     }
 
     /**
@@ -86,13 +77,13 @@ class Template extends Environment
      */
     public function render($name, array $context = []): string
     {
-        $params = $this->getTemplateParams()->toArray(); //-- All parameters for template, include userPre
+        $params = $this->lotgdParams->toArray(); //-- All parameters for template, include userPre
 
         $this->updateGlobals();
 
         $context = \array_merge($params, $context);
 
-        return parent::render($name, (array) $context);
+        return $this->decorated->render($name, (array) $context);
     }
 
     /**
@@ -103,7 +94,7 @@ class Template extends Environment
      */
     public function renderBlock($blockName, $template, array $context = [])
     {
-        $params = $this->getTemplateParams()->toArray(); //-- All parameters for template, include userPre
+        $params = $this->lotgdParams->toArray(); //-- All parameters for template, include userPre
 
         $context = \array_merge($params, $context);
 
@@ -119,7 +110,7 @@ class Template extends Environment
     {
         $this->updateGlobals();
 
-        return parent::load($name);
+        return $this->decorated->load($name);
     }
 
     /**
@@ -129,18 +120,16 @@ class Template extends Environment
     {
         if (empty($this->defaultSkin))
         {
-            $settings = $this->getService(\Lotgd\Core\Lib\Settings::class);
-
-            $theme = \LotgdRequest::getCookie('template');
+            $theme = $this->lotgdRequest->getCookie('template');
 
             if ('' == $theme || ! \file_exists(static::TEMPLATES_LAYOUT_DIR."/{$theme}"))
             {
-                $theme = $settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
+                $theme = $this->settings->getSetting('defaultskin', 'jade.html') ?: 'jade.html';
             }
 
             $this->defaultSkin = $theme;
 
-            $settings->saveSetting('defaultskin', (string) $theme);
+            $this->settings->saveSetting('defaultskin', (string) $theme);
         }
 
         //-- This is necessary in case the theme is deleted
@@ -149,12 +138,12 @@ class Template extends Environment
         {
             $this->defaultSkin = $this->getValidTheme();
 
-            $settings->saveSetting('defaultskin', (string) $this->defaultSkin);
+            $this->settings->saveSetting('defaultskin', (string) $this->defaultSkin);
         }
 
-        if ( ! \LotgdRequest::getCookie('template') || $this->defaultSkin != \LotgdRequest::getCookie('template'))
+        if ( ! $this->lotgdRequest->getCookie('template') || $this->defaultSkin != $this->lotgdRequest->getCookie('template'))
         {
-            \LotgdRequest::setCookie('template', $this->defaultSkin);
+            $this->lotgdRequest->setCookie('template', $this->defaultSkin);
         }
 
         return $this->defaultSkin;
@@ -226,6 +215,10 @@ class Template extends Environment
             $this->themefolder    = $filterChain->filter($this->themefolder);
             $filter               = new DashToCamelCase();
             $this->themeNamespace = $filter->filter($this->themefolder);
+
+            //-- Add theme namespace to loader
+            $chain = $this->getLoader()->getLoaders();
+            $chain[0]->setThemeNamespace($this->getThemeNamespace());
         }
     }
 
@@ -270,7 +263,306 @@ class Template extends Environment
         $sesion = $session         ?? [];
         unset($sesion['user'], $user['password']);
 
-        $this->addGlobal('user', $user); //-- Actual user data for this call
-        $this->addGlobal('session', $sesion); //-- Actual session data for this call
+        $this->decorated->addGlobal('user', $user); //-- Actual user data for this call
+        $this->decorated->addGlobal('session', $sesion); //-- Actual session data for this call
+    }
+
+    /**
+     * sobree scribir las funciones originales
+     */
+
+    public function getBaseTemplateClass()
+    {
+        return $this->decorated->getBaseTemplateClass();
+    }
+
+    public function setBaseTemplateClass($class)
+    {
+        $this->decorated->setBaseTemplateClass($class);
+    }
+
+    public function enableDebug()
+    {
+        $this->decorated->enableDebug();
+    }
+
+    public function disableDebug()
+    {
+        $this->decorated->disableDebug();
+    }
+
+    public function isDebug()
+    {
+        return $this->decorated->isDebug();
+    }
+
+    public function enableAutoReload()
+    {
+        $this->decorated->enableAutoReload();
+    }
+
+    public function disableAutoReload()
+    {
+        $this->decorated->disableAutoReload();
+    }
+
+    public function isAutoReload()
+    {
+        return $this->decorated->isAutoReload();
+    }
+
+    public function enableStrictVariables()
+    {
+        $this->decorated->enableStrictVariables();
+    }
+
+    public function disableStrictVariables()
+    {
+        $this->decorated->disableStrictVariables();
+    }
+
+    public function isStrictVariables()
+    {
+        $this->decorated->isStrictVariables();
+    }
+
+    public function getCache($original = true)
+    {
+        return $this->decorated->getCache($original);
+    }
+
+    public function setCache($cache)
+    {
+        $this->decorated->setCache($cache);
+    }
+
+    public function getTemplateClass($name, $index = null)
+    {
+        return $this->decorated->getTemplateClass($name, $index);
+    }
+
+    public function display($name, array $context = [])
+    {
+        $this->load($name)->display($context);
+    }
+
+    public function loadTemplate($name, $index = null)
+    {
+        return $this->decorated->loadTemplate($name, $index);
+    }
+
+    public function loadClass($cls, $name, $index = null)
+    {
+        return $this->decorated->loadClass($cls, $name, $index);
+    }
+
+    public function createTemplate($template, string $name = null)
+    {
+        $this->decorated->createTemplate($template, $name);
+    }
+
+    public function isTemplateFresh($name, $time)
+    {
+        $this->decorated->isTemplateFresh($name, $time);
+    }
+
+    public function resolveTemplate($names)
+    {
+        return $this->decorated->resolveTemplate($names);
+    }
+
+    public function setLexer($lexer)
+    {
+        $this->decorated->setLexer($lexer);
+    }
+
+    public function tokenize($source)
+    {
+        $this->decorated->tokenize($source);
+    }
+
+    public function setParser($parser)
+    {
+        $this->decorated->setParser($parser);
+    }
+
+    public function parse($stream)
+    {
+        return $this->decorated->parse($stream);
+    }
+
+    public function setCompiler($compiler)
+    {
+        $this->decorated->setCompiler($compiler);
+    }
+
+    public function compile($node)
+    {
+        return $this->decorated->compile($node);
+    }
+
+    public function compileSource($source)
+    {
+        return $this->decorated->compileSource($source);
+    }
+
+    public function setLoader($loader)
+    {
+        $this->decorated->setLoader($loader);
+    }
+
+    public function getLoader()
+    {
+        return $this->decorated->getLoader();
+    }
+
+    public function setCharset($charset)
+    {
+        $this->decorated->setCharset($charset);
+    }
+
+    public function getCharset()
+    {
+        return $this->decorated->getCharset();
+    }
+
+    public function hasExtension($class)
+    {
+        return $this->decorated->hasExtension($class);
+    }
+
+    public function addRuntimeLoader($loader)
+    {
+        $this->decorated->addRuntimeLoader($loader);
+    }
+
+    public function getExtension($class)
+    {
+        return $this->decorated->getExtension($class);
+    }
+
+    public function getRuntime($class)
+    {
+        $this->decorated->getRuntime($class);
+    }
+
+    public function addExtension($extension)
+    {
+        $this->decorated->addExtension($extension);
+    }
+
+    public function setExtensions(array $extensions)
+    {
+        $this->decorated->setExtensions($extensions);
+    }
+
+    public function getExtensions()
+    {
+        return $this->extensionSet->getExtensions();
+    }
+
+    public function addTokenParser($parser)
+    {
+        $this->decorated->addTokenParser($parser);
+    }
+
+    public function getTokenParsers()
+    {
+        return $this->decorated->getTokenParsers();
+    }
+
+    public function getTags()
+    {
+        $this->decorated->getTags();
+    }
+
+    public function addNodeVisitor($visitor)
+    {
+        $this->decorated->addNodeVisitor($visitor);
+    }
+
+    public function getNodeVisitors()
+    {
+        return $this->decorated->getNodeVisitors();
+    }
+
+    public function addFilter($filter)
+    {
+        $this->decorated->addFilter($filter);
+    }
+
+    public function getFilter($name)
+    {
+        return $this->decorated->getFilter($name);
+    }
+
+    public function registerUndefinedFilterCallback(callable $callable)
+    {
+        $this->decorated->registerUndefinedFilterCallback($callable);
+    }
+
+    public function getFilters()
+    {
+        return $this->decorated->getFilters();
+    }
+
+    public function addTest($test)
+    {
+        $this->decorated->addTest($test);
+    }
+
+    public function getTests()
+    {
+        return $this->decorated->getTests();
+    }
+
+    public function getTest($name)
+    {
+        return $this->decorated->getTest($name);
+    }
+
+    public function addFunction($function)
+    {
+        $this->decorated->addFunction($function);
+    }
+
+    public function getFunction($name)
+    {
+        return $this->decorated->getFunction($name);
+    }
+
+    public function registerUndefinedFunctionCallback(callable $callable)
+    {
+        $this->decorated->registerUndefinedFunctionCallback($callable);
+    }
+
+    public function getFunctions()
+    {
+        return $this->decorated->getFunctions();
+    }
+
+    public function addGlobal($name, $value)
+    {
+        $this->decorated->addGlobal($name, $value);
+    }
+
+    public function getGlobals()
+    {
+        return $this->decorated->getGlobals();
+    }
+
+    public function mergeGlobals(array $context)
+    {
+        return $this->decorated->mergeGlobals($context);
+    }
+
+    public function getUnaryOperators()
+    {
+        return $this->decorated->getUnaryOperators();
+    }
+
+    public function getBinaryOperators()
+    {
+        return $this->decorated->getBinaryOperators();
     }
 }

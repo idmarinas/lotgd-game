@@ -190,3 +190,108 @@ services:
     Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
         arguments:
             - '@identity_translator'
+    # Twig extensions
+    Lotgd\Core\Twig\Extension\GameCore:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\FlashMessages:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Motd:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Navigation:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Translator:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Commentary:
+        tags:
+            - { name: twig.extension }
+
+    #-- Removed in version 5.0.0
+    Lotgd\Core\Twig\Extension\Form\Form:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormAction:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormBitField:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormButton:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormCheckbox:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormCollection:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormElement:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormElementError:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormEmail:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormHidden:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormInput:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormLabel:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormNote:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormNumber:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormRange:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormRow:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormSelect:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormTagify:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormText:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormTextarea:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Form\FormViewOnly:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Helpers:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\Donation: #-- Twig functions for donation buttons (Paypal buttons)
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\AdvertisingGoogle:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Twig\Extension\ApplyFilter:
+        tags:
+            - { name: twig.extension }
+    Marek\Twig\ByteUnitsExtension:
+        tags:
+            - { name: twig.extension }
+    Lotgd\Core\Template\Template:
+        decorates: twig
+    lotgd.core.twig.loader:
+        class: Lotgd\Core\Twig\Loader\LotgdFilesystemLoader
+        arguments:
+            - '@twig.loader.filesystem'

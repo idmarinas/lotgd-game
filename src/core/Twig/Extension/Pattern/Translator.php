@@ -13,7 +13,7 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 
 /**
  * Trait to translator.

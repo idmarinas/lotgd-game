@@ -1,3 +1,17 @@
-# For now not use
-# twig:
-#     default_path: '%kernel.project_dir%/templates'
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    strict_variables: false
+    autoescape: false
+    auto_reload: '%kernel.debug%'
+    paths:
+        '%kernel.project_dir%/templates_modules': 'module'
+        '%kernel.project_dir%/templates_core': 'core'
+        '%kernel.project_dir%/themes': 'layout'
+        '%kernel.project_dir%/templates/lotgd': ~
+    # Globals variables
+    globals:
+        userPre: ~ # Not remove, if for avoid errors
+        user: ~ # Not remove, if for avoid errors
+    form_themes: [
+        'lotgd/form/semantic-ui-form-theme.html.twig'
+    ]

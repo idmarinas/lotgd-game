@@ -19,7 +19,7 @@ use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 use Laminas\Form\View\Helper\FormHidden;
 use Laminas\Stdlib\ArrayUtils;
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class FormSelect extends AbstractElement

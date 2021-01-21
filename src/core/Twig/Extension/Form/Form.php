@@ -16,7 +16,7 @@ namespace Lotgd\Core\Twig\Extension\Form;
 use Laminas\Form\Element\Csrf;
 use Laminas\Form\Factory;
 use Laminas\Form\FormInterface;
-use Lotgd\Core\Template\Theme as Environment;
+use Twig\Environment as Environment;
 use Twig\TwigFunction;
 
 class Form extends AbstractElement
