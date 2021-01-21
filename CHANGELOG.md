@@ -13,7 +13,8 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   _Migrated_ **Lotgd\Core\Template\Theme** factory to **LoTGD Kernel service**
+    -   `LotgdNavigation::` static class get the new Kernel service
 
 ### :star: FEATURES
 
@@ -29,7 +30,14 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES/Break Changes
 
--   Nothing
+-   Remove factory of `Lotgd\Core\Template\Theme` use `LotgdKernel::get('twig')` instead.
+    -   Remove related files:
+        -   `src/core/Factory/Template/EntrypointLookupCollection.php` 
+        -   `src/core/Factory/Template/Packages.php` 
+        -   `src/core/Factory/Template/TagRender.php` 
+        -   `src/core/Factory/Template/Theme.php` 
+-   Remove file `src/core/Template/Base.php` not in use and is deprecated.
+-   Remove deprecated file `src/core/Template/Theme.php`.
 
 ### :notebook: NOTES
 
