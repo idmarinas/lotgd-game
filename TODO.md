@@ -95,6 +95,11 @@
     -   Usar otra forma
 
 ## Cosas a mirar
+-   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
+-   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
+    -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
+-   https://symfony.com/doc/current/workflow.html
+-   https://github.com/vimeo/psalm/blob/master/docs/running_psalm/installation.md
 -   https://symfony.com/doc/current/components/process.html
 -   https://symfony.com/doc/current/components/config.html
 -   https://symfony.com/doc/current/components/finder.html
