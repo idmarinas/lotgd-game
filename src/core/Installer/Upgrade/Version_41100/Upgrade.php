@@ -15,6 +15,7 @@ namespace Lotgd\Core\Installer\Upgrade\Version_41100;
 
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Lotgd\Core\Paginator\Adapter\Doctrine;
+use Symfony\Component\Filesystem\Filesystem;
 use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
