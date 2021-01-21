@@ -68,6 +68,11 @@ try
     //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
     if ($isDevelopment)
     {
+        $profile = new Twig\Profiler\Profile();
+        $twig = LotgdKernel::get('twig');
+        $twig->addExtension(new Twig\Extension\ProfilerExtension($profile));
+
+        \Idmarinas\TracyPanel\TwigBar::init($profile);
         \MacFJA\Tracy\DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
     }
 }
@@ -172,7 +177,7 @@ LotgdReponse::instance(LotgdKernel::get(\Lotgd\Core\Http\Response::class));
 //-- Configure Navigation instance
 LotgdNavigation::instance(LotgdKernel::get(\Lotgd\Core\Navigation\Navigation::class));
 //-- Configure Theme template
-LotgdTheme::wrapper(LotgdLocator::get(\Lotgd\Core\Template\Theme::class));
+LotgdTheme::wrapper(LotgdKernel::get('twig'));
 //-- Configure Sanitize instance
 LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
 //-- Configure Translator
