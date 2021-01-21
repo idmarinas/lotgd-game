@@ -15,6 +15,7 @@ namespace Lotgd\Core\Installer\Upgrade\Version_41100;
 
 use Lotgd\Core\Installer\UpgradeAbstract;
 use Lotgd\Core\Paginator\Adapter\Doctrine;
+use Symfony\Component\Filesystem\Filesystem;
 use Tracy\Debugger;
 
 class Upgrade extends UpgradeAbstract
@@ -128,9 +129,9 @@ class Upgrade extends UpgradeAbstract
             $query = $this->doctrine->createQueryBuilder();
 
             $count = $query->update('LotgdCore:Accounts', 'u')
-                ->set('donationconfig', ':new')
+                ->set('u.donationconfig', ':new')
 
-                ->where('donationconfig = :old')
+                ->where('u.donationconfig = :old')
 
                 ->setParameter('new', 'a:0:{}')
                 ->setParameter('old', 's:0:""')
