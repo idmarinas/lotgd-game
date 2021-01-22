@@ -21,9 +21,6 @@ services:
         resource: "../src/core/"
         exclude:
             - "../src/core/DependencyInjection/"
-            - "../src/core/Form/Element/"
-            - "../src/core/Form/ElementFactory.php"
-            - "../src/core/Form/LotgdElementFactoryInterface.php"
             - "../src/core/Exception/"
             - "../src/core/Fixed/"
             - "../src/core/Installer/"
@@ -37,7 +34,6 @@ services:
         resource: "../src/local/"
         exclude:
             - "../src/local/DependencyInjection/"
-            - "../src/local/Form/Element/"
             - "../src/local/Exception/"
             - "../src/local/Fixed/"
             - "../src/local/Installer/"
@@ -203,71 +199,6 @@ services:
         tags:
             - { name: twig.extension }
     Lotgd\Core\Twig\Extension\Commentary:
-        tags:
-            - { name: twig.extension }
-
-    #-- Removed in version 5.0.0
-    Lotgd\Core\Twig\Extension\Form\Form:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormAction:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormBitField:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormButton:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormCheckbox:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormCollection:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormElement:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormElementError:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormEmail:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormHidden:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormInput:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormLabel:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormNote:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormNumber:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormRange:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormRow:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormSelect:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormTagify:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormText:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormTextarea:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Form\FormViewOnly:
         tags:
             - { name: twig.extension }
     Lotgd\Core\Twig\Extension\Helpers:
