@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Request extends HttpRequest
 {
+    /** @var Response */
+    protected $response;
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +56,7 @@ class Request extends HttpRequest
     public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
     {
         $this->cookies->set($name, $value);
-        \LotgdResponse::_i()->headers->setCookie(Cookie::create($name, $value, \strtotime($duration), $path, $domain, $secure, $httponly));
+        $this->response->headers->setCookie(Cookie::create($name, $value, \strtotime($duration), $path, $domain, $secure, $httponly));
     }
 
     /**
@@ -144,6 +147,13 @@ class Request extends HttpRequest
     public function getRequestUri(): string
     {
         return $this->sanitizeUri(parent::getRequestUri());
+    }
+
+    public function setResponse(Response $response): self
+    {
+        $this->response = $response;
+
+        return $this;
     }
 
     /**

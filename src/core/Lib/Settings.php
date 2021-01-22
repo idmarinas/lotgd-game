@@ -48,7 +48,7 @@ class Settings
             $this->saveSetting($settingname, $setDefault);
         }
 
-        return $this->settings[$settingname];
+        return $this->settings[$settingname] ?? null;
     }
 
     /**

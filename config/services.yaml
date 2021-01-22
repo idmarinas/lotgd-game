@@ -180,6 +180,8 @@ services:
         public: true
         class:   Lotgd\Core\Http\Request
         factory: '@Lotgd\Core\Service\HttpRequestFactory'
+        calls:
+            - setResponse: [ '@Lotgd\Core\Http\Response' ]
     Lotgd\Core\Http\Response:
         public: true
     Lotgd\Core\Template\Params:
