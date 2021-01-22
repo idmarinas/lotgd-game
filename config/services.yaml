@@ -24,7 +24,6 @@ services:
             - "../src/core/Form/Element/"
             - "../src/core/Form/ElementFactory.php"
             - "../src/core/Form/LotgdElementFactoryInterface.php"
-            - "../src/core/Command/"
             - "../src/core/Exception/"
             - "../src/core/Factory/"
             - "../src/core/Fixed/"
@@ -42,7 +41,6 @@ services:
         exclude:
             - "../src/local/DependencyInjection/"
             - "../src/local/Form/Element/"
-            - "../src/local/Command/"
             - "../src/local/Exception/"
             - "../src/local/Factory/"
             - "../src/local/Fixed/"
