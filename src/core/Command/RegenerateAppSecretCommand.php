@@ -23,6 +23,21 @@ class RegenerateAppSecretCommand extends Command
 {
     protected static $defaultName = 'lotgd:regenerate:app_secret';
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this
+            ->setDescription('Regenerate APP_SECRET for application in .env file')
+            ->setHelp(
+                <<<'EOT'
+                    The <info>%command.name%</info> command regenerate APP_SECRET value of .env file for LoTGD application.
+                    EOT
+            )
+        ;
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
