@@ -15,6 +15,8 @@ namespace Lotgd\Core;
 
 /**
  * Contain information about application/game.
+ *
+ * @deprecated 5.0.0 deleted in future version. Use Lotgd\Core\Kernel.
  */
 class Application extends Kernel
 {
