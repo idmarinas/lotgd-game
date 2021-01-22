@@ -12351,6 +12351,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41100-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
         },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade",
+            "name": "Upgrade",
+            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003Astep1\u0028\u0029",
+            "name": "step1",
+            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#method_step1"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003AVERSION_NUMBER",
+            "name": "VERSION_NUMBER",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_VERSION_NUMBER"
+        },                {
+            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
+            "name": "CONFIG_DIR_GLOBAL",
+            "summary": "",
+            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
+        },                {
             "fqsen": "\\Lotgd\\Core\\Installer\\UpgradeAbstract",
             "name": "UpgradeAbstract",
             "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
@@ -16825,26 +16845,6 @@ Search.appendIndex(
             "name": "bell_rand",
             "summary": "",
             "url": "namespaces/default.html#function_bell_rand"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade",
-            "name": "Upgrade",
-            "summary": "Script\u0020to\u0020upgrade\u0020a\u0020version.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003Astep1\u0028\u0029",
-            "name": "step1",
-            "summary": "Step\u00201\u003A\u0020Remove\u0020some\u0020files.",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#method_step1"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003AVERSION_NUMBER",
-            "name": "VERSION_NUMBER",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_VERSION_NUMBER"
-        },                {
-            "fqsen": "\\Lotgd\\Core\\Installer\\Upgrade\\Version_41200\\Upgrade\u003A\u003ACONFIG_DIR_GLOBAL",
-            "name": "CONFIG_DIR_GLOBAL",
-            "summary": "",
-            "url": "classes/Lotgd-Core-Installer-Upgrade-Version-41200-Upgrade.html#constant_CONFIG_DIR_GLOBAL"
         },                {
             "fqsen": "\\",
             "name": "\\",
