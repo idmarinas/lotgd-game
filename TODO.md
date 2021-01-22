@@ -6,20 +6,9 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# Actualmente haciendo esto
--   ...
-
-# Módulos
--   ...
-
-# Para la versión 4.12.0
--   Última versión de la serie 4.y.z
-
-# Advertising bundle
--   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
-    -   Posiblemente esto ya se pueda hacer
-
-# Para la versión 5.0.0
+# Actualmente haciendo esto (5.0.0)
+-   El eliminar el uso de: Lotgd\Core\Validator\Db
+    -   Encontrado en `lib/clan/applicant_new.php`
 -   Un nuevo sistema de instalación por consola.
     -   Sólo podrá actualizar desde la versión anterior (4.12.0)
 -   Migración al uso de Symfony usando el http-kernel (completado en esta versión)
@@ -39,6 +28,16 @@
 -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
+
+# Módulos
+-   ...
+
+# Para la versión 4.12.0
+-   Última versión de la serie 4.y.z
+
+# Advertising bundle
+-   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
+    -   Posiblemente esto ya se pueda hacer
 
 # Para la versión 6.0.0
 -   Seguir la transición hacia un sistema Symfony Framework

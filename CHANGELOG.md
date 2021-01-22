@@ -19,7 +19,11 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :fire: DEPRECATED
 
--   Nothing
+-   All static class in **src/core/Fixed/** folder are deprecated. If possible use the services as you would do in a Symfony app.
+    -   All these classes will be removed in version 7.0.0.
+-   **Old module system** are deprecated and deleted in version 7.0.0
+    -   Use a Symfony Bundle type module when you can.
+        -   You can see a little example of Bundle in `lib/AdvertisingBundle` and you can search for the web.
 
 ### :wrench: FIXES
 
@@ -27,7 +31,20 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :x: REMOVES/Break Changes
 
--   Nothing
+-   **BC** remove LoTGD console `bin/lotgd` use `bin/console`
+    -   Removed command `src/core/Command/StorageCacheClearCommand.php` 
+    -   Removed command `src/core/Command/StorageCacheStatsCommand.php`
+        -   Symfony have the same command. `php bin/console cache:clear` and `php bin/console about` can see stats.
+            -   This command not touch `storage/` folder only `var/` folder.
+-   **BC** removed files/config related to **Laminas Form** use **Symfony Form** instead.
+-   **BC** removed Service Manager to create factories **Laminas Service Manager** use LoTGD Kernel instead (and all related files).
+-   **BC** removed static class **LotgdCache** because **Laminas Cache** and **Symfony Cache** work diferent.
+-   **BC** removed static class **Dbwrapper** because **Laminas DB** is deleted use **Doctrine**
+-   **BC** removed static class **LotgdLocator** because **Laminas Service Manager** is deleted use **LotgdKernel** for get services.
+-   **BC** remove function of `get/set(container)` in file `src/core/Pattern/Container.php`
+-   **BC** remove function of pattern `src/core/Pattern/Cache.php`
+    -   `getCache()` use `getCacheApp()` or `getCacheAppTag` for a tagged version.
+        -   Not create an alias because _Laminas_ and _Symfony_ work diferent.
 
 ### :notebook: NOTES
 
