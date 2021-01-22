@@ -12,7 +12,6 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Lotgd\Core\Translator\Translator as TranslatorCore;
 use Symfony\Component\Translation\Translator as TranslationTranslator;
 
 trait Translator
@@ -21,18 +20,11 @@ trait Translator
     protected $lotgdSymfonyTranslator;
 
     /**
-     * Get translator instance.
-     *
-     * @return object|null
+     * Alias
      */
     public function getTranslator()
     {
-        if ( ! $this->lotgdTranslator instanceof TranslatorCore)
-        {
-            $this->lotgdTranslator = $this->getContainer(TranslatorCore::class);
-        }
-
-        return $this->lotgdTranslator;
+        return $this->symfonyTranslator();
     }
 
     /**
