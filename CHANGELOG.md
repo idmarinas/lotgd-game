@@ -11,7 +11,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 
 ### :cyclone: CHANGES
 
--   Nothing
+-   Static class **LotgdTranslator** now get a instance of `Symfony Translator`
 
 ### :star: FEATURES
 
