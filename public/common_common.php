@@ -9,19 +9,6 @@ require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 //-- Include constants
 require_once 'lib/constants.php';
 
-$isDevelopment = \file_exists('config/development.config.php');
-//-- Init Debugger
-$debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
-\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
-\Tracy\Debugger::timer('page-generating');
-\Tracy\Debugger::timer('page-footer');
-\Tracy\Debugger::$maxDepth = 5; // default: 3
-//-- Extensions for Tracy
-if ($isDevelopment)
-{
-    \Tracy\Debugger::getBar()->addPanel(new \Milo\VendorVersions\Panel());
-}
-
 //-- Autoload annotations
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(
     function ($className)
@@ -35,14 +22,11 @@ if ($isDevelopment)
 \defined('OVERRIDE_FORCED_NAV') || \define('OVERRIDE_FORCED_NAV', false);
 \defined('ALLOW_ANONYMOUS')     || \define('ALLOW_ANONYMOUS', false);
 
-use Lotgd\Core\Fixed\Cache as LotgdCache;
-use Lotgd\Core\Fixed\Dbwrapper as DB;
 use Lotgd\Core\Fixed\Doctrine;
 use Lotgd\Core\Fixed\FlashMessages as LotgdFlashMessages;
 use Lotgd\Core\Fixed\Format as LotgdFormat;
 use Lotgd\Core\Fixed\HookManager as LotgdHook;
 use Lotgd\Core\Fixed\Kernel as LotgdKernel;
-use Lotgd\Core\Fixed\Locator as LotgdLocator;
 use Lotgd\Core\Fixed\Navigation as LotgdNavigation;
 use Lotgd\Core\Fixed\Request as LotgdRequest;
 use Lotgd\Core\Fixed\Response as LotgdReponse;
@@ -52,11 +36,24 @@ use Lotgd\Core\Fixed\Theme as LotgdTheme;
 use Lotgd\Core\Fixed\Translator as LotgdTranslator;
 use Symfony\Component\Dotenv\Dotenv;
 
+(new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
+
+$isDevelopment = 'prod' != $_SERVER['APP_ENV'];
+//-- Init Debugger
+$debuggerMode = $isDevelopment ? \Tracy\Debugger::DEVELOPMENT : \Tracy\Debugger::PRODUCTION;
+\Tracy\Debugger::enable($debuggerMode, __DIR__.'/../storage/log/tracy');
+\Tracy\Debugger::timer('page-generating');
+\Tracy\Debugger::timer('page-footer');
+\Tracy\Debugger::$maxDepth = 5; // default: 3
+//-- Extensions for Tracy
+if ($isDevelopment)
+{
+    \Tracy\Debugger::getBar()->addPanel(new \Milo\VendorVersions\Panel());
+}
+
 //-- Prepare LoTGD Kernel
 try
 {
-    (new Dotenv())->bootEnv(\dirname(__DIR__).'/.env');
-
     LotgdKernel::instance(new Lotgd\Core\Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']));
     LotgdKernel::boot();
 
@@ -65,14 +62,16 @@ try
         throw new Lotgd\Core\Exception\Exception('Need create ".env.local.php" from "config/autoload/local/dbconnect.php"');
     }
 
-    //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
     if ($isDevelopment)
     {
+        //-- Add Twig template in the Tracy debugger bar.
         $profile = new Twig\Profiler\Profile();
         $twig = LotgdKernel::get('twig');
         $twig->addExtension(new Twig\Extension\ProfilerExtension($profile));
 
         \Idmarinas\TracyPanel\TwigBar::init($profile);
+
+        //-- Add Sql requests made by Doctrine in the Tracy debugger bar.
         \MacFJA\Tracy\DoctrineSql::init(LotgdKernel::get('doctrine.orm.entity_manager'), 'Symfony');
     }
 }
@@ -160,10 +159,6 @@ LotgdSession::instance(LotgdKernel::get('session'));
 //-- Init session
 LotgdSession::start();
 
-//-- Prepare service manager
-LotgdLocator::setServiceManager(new \Lotgd\Core\ServiceManager());
-//-- Configure DB
-DB::wrapper(LotgdLocator::get(Lotgd\Core\Db\Dbwrapper::class));
 //-- Configure Doctrine
 Doctrine::wrapper(LotgdKernel::get('doctrine.orm.entity_manager'));
 //-- Configure Flash Messages
@@ -181,9 +176,7 @@ LotgdTheme::wrapper(LotgdKernel::get('twig'));
 //-- Configure Sanitize instance
 LotgdSanitize::instance(LotgdKernel::get(\Lotgd\Core\Tool\Sanitize::class));
 //-- Configure Translator
-LotgdTranslator::setContainer(LotgdLocator::get(\Lotgd\Core\Translator\Translator::class));
-//-- Configure Cache instance
-LotgdCache::instance(LotgdLocator::get('Cache\Core\Lotgd'));
+LotgdTranslator::setContainer(LotgdKernel::get('translator'));
 //-- Configure Hook Manager instance
 LotgdHook::instance(LotgdKernel::get(\Lotgd\Core\EventManager\Hook::class));
 
