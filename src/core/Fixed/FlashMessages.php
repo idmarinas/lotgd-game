@@ -15,6 +15,9 @@ namespace Lotgd\Core\Fixed;
 
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag as ComponentFlashMessages;
 
+/**
+ * @deprecated 5.0.0
+ */
 class FlashMessages
 {
     /**

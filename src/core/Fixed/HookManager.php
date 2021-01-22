@@ -15,6 +15,9 @@ namespace Lotgd\Core\Fixed;
 
 use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 
+/**
+ * @deprecated 5.0.0
+ */
 class HookManager
 {
     /**

@@ -16,6 +16,9 @@ namespace Lotgd\Core\Fixed;
 use Laminas\Paginator\Paginator;
 use Lotgd\Core\Navigation\Navigation as CoreNavigation;
 
+/**
+ * @deprecated 5.0.0
+ */
 class Navigation
 {
     /**

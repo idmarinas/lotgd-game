@@ -15,6 +15,9 @@ namespace Lotgd\Core\Fixed;
 
 use Lotgd\Core\Http\Response as CoreResponse;
 
+/**
+ * @deprecated 5.0.0
+ */
 class Response
 {
     /**

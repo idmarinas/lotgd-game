@@ -15,6 +15,9 @@ namespace Lotgd\Core\Fixed;
 
 use Lotgd\Core\Http\Request as CoreRequest;
 
+/**
+ * @deprecated 5.0.0
+ */
 class Request
 {
     /**
