@@ -12,7 +12,6 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Laminas\Cache\Storage\StorageInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 /**
@@ -20,25 +19,7 @@ use Symfony\Contracts\Cache\CacheInterface;
  */
 trait Cache
 {
-    protected $lotgdCache;
     protected $lotgdCacheApp;
-
-    /**
-     * Get cache instance.
-     *
-     * @deprecated 4.9.0 use getCacheApp() instead
-     *
-     * @return object
-     */
-    public function getCache()
-    {
-        if ( ! $this->lotgdCache instanceof StorageInterface)
-        {
-            $this->lotgdCache = $this->getContainer('Cache\Core\Lotgd');
-        }
-
-        return $this->lotgdCache;
-    }
 
     /**
      * Get app cache instance.
