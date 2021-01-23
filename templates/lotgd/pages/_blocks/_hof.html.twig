@@ -15,7 +15,7 @@
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
                     <td>{{ 'section.charm.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
-                    <td>{{ 'character.racename'|trans(null, character.race)|colorize }}</td>
+                    <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -191,7 +191,7 @@
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
                     <td>{{ 'section.tough.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
-                    <td>{{ 'character.racename'|trans(null, character.race)|colorize }}</td>
+                    <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>

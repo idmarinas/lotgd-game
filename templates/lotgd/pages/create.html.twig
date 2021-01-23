@@ -5,11 +5,11 @@
 {% if maintenanceMode %}
     <div class="ui centered horizontal card">
         <div class="image">
-            <img src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|trans(null, 'app_default')|uncolorize }}">
+            <img src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|trans({}, 'app_default')|uncolorize }}">
         </div>
         <div class="content">
-            <a class="header">{{ 'maintenance.server.creation.title'|trans(null, 'app_default') }}</a>
-            <div class="description">{{ 'maintenance.server.creation.message'|trans(null, 'app_default') }}</div>
+            <a class="header">{{ 'maintenance.server.creation.title'|trans({}, 'app_default') }}</a>
+            <div class="description">{{ 'maintenance.server.creation.message'|trans({}, 'app_default') }}</div>
         </div>
     </div>
 {% elseif not allowCreation %}
