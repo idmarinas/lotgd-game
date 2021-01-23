@@ -207,9 +207,9 @@ function translate_mail($in, $to = 0)
     //$in[0] = str_replace("`%","`%%",$in[0]);
     if ($to > 0)
     {
-        $language             = DB::fetch_assoc(DB::query("SELECT prefs FROM accounts WHERE acctid={$to}"));
-        $language['prefs']    = \unserialize($language['prefs']);
-        $session['tlanguage'] = $language['prefs']['language'] ? $language['prefs']['language'] : getsetting('defaultlanguage', 'en');
+        $language = \Doctrine::getConnection()->query('SELECT prefs FROM accounts WHERE acctid=1')->fetchOne();
+        $language    = \unserialize($language);
+        $session['tlanguage'] = $language['language'] ? $language['language'] : getsetting('defaultlanguage', 'en');
     }
     \reset($in);
     // translation offered within translation tool here is in language
@@ -274,16 +274,16 @@ function translate_loadnamespace($namespace, $language = false)
     /*	\LotgdResponse::pageDebug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
     if ( ! getsetting('cachetranslations', 0))
     {
-        $result = DB::query($sql);
+        $result = \Doctrine::getConnection()->query($sql);
     }
     else
     {
-        $result = DB::query($sql);
+        $result = \Doctrine::getConnection()->query($sql);
         //store it for 10 Minutes, normally you don't need to refresh this often
     }
     $out = [];
 
-    while ($row = DB::fetch_assoc($result))
+    while ($row = $result->fetchAll())
     {
         $out[$row['intext']] = $row['outtext'];
     }
