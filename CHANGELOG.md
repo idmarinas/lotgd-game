@@ -39,12 +39,37 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **BC** removed files/config related to **Laminas Form** use **Symfony Form** instead.
 -   **BC** removed Service Manager to create factories **Laminas Service Manager** use LoTGD Kernel instead (and all related files).
 -   **BC** removed static class **LotgdCache** because **Laminas Cache** and **Symfony Cache** work diferent.
--   **BC** removed static class **Dbwrapper** because **Laminas DB** is deleted use **Doctrine**
+-   **BC** removed static class **Dbwrapper** as **DB::** because **Laminas DB** is deleted use **Doctrine**
 -   **BC** removed static class **LotgdLocator** because **Laminas Service Manager** is deleted use **LotgdKernel** for get services.
--   **BC** remove function of `get/set(container)` in file `src/core/Pattern/Container.php`
--   **BC** remove function of pattern `src/core/Pattern/Cache.php`
+-   **BC** removed function of `get/set(container)` in file `src/core/Pattern/Container.php`
+-   **BC** removed function of pattern `src/core/Pattern/Cache.php`
     -   `getCache()` use `getCacheApp()` or `getCacheAppTag` for a tagged version.
         -   Not create an alias because _Laminas_ and _Symfony_ work diferent.
+-   **BC** removed **Translation Twig Extension** 
+    -   Removed filters:
+        -   `t` use `trans` filter
+        -   `ts` use `trans` filter
+        -   `tl` use `trans` filter
+        -   `tst` use `trans` filter
+        -   `tmf` use  `mf` (this funcion not translate only is a formatter)
+    -   Removed token `{% translate_default_domain 'foobar' %}` use `{% trans_default_domain 'foobar'%}`
+-   **BC** remove file `lib/translator.php` and all functions:
+    -   `translator_setup()`
+    -   `translate()`
+    -   `sprintf_translate()`
+    -   `translate_inline()`
+    -   `translate_mail()`
+    -   `tl()`
+    -   `translate_loadnamespace()`
+    -   `tlbutton_push()`
+    -   `tlbutton_pop()`
+    -   `tlbutton_clear()`
+    -   `enable_translation()`
+    -   `tlschema()`
+    -   `translator_check_collect_texts()`
+    -   `translator_uri()`
+    -   `translator_page()`
+    -   `comscroll_sanitize()`
 
 ### :notebook: NOTES
 
