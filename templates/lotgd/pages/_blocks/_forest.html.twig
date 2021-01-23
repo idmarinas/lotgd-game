@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block forest_default %}
     {% if showForestMessage %}
@@ -7,7 +7,7 @@
         {% set result = modulehook('forest-desc') %}
         {% for message in result %}
             {% if message is array %}
-                {{ message[0]|tl(message[1], message[2])|colorize }}
+                {{ message[0]|trans(message[1], message[2])|colorize }}
             {% else %}
                 {{ message|colorize }}
             {% endif %}

@@ -41,7 +41,7 @@
 {% endblock navigation_menu %}
 
 {% block pagination_jaxon %}
-    {% translate_default_domain 'app_default' %}
+    {% trans_default_domain 'app_default' %}
 
     {% if pageCount %}
         {% set link = jaxon ~ '(%s, ' ~ motdPerPage|default(5) ~ ", '" ~ monthSelected|default(null) ~ "')" %}
@@ -154,7 +154,7 @@
 {% endblock pagination_jaxon %}
 
 {% block pagination %}
-    {% translate_default_domain 'app_default' %}
+    {% trans_default_domain 'app_default' %}
 
     {% if pageCount %}
         <div class="ui grid">

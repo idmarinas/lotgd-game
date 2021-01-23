@@ -1,8 +1,8 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% set result = modulehook('biotop', { 'target': character, 'messages': {} }) %}
 {% for message in result.messages %}
-    {{ message[0]|tl(message[1], message[2])|colorize }}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
 {% endfor %}
 
 {{ 'subtitle'|trans({ 'name': character.name })|colorize }}
@@ -14,7 +14,7 @@
 {% endif %}
 <br><br>
 {% if character.clanname and getsetting('allowclans', false) %}
-    {{ 'bio.clan'|trans({ 'player': character.name, 'rankName': ranks[character.clanrank]|default('ranks.00')|tl(null, 'page_clan'), 'clanName': character.clanname })|colorize }}
+    {{ 'bio.clan'|trans({ 'player': character.name, 'rankName': ranks[character.clanrank]|default('ranks.00')|trans(null, 'page_clan'), 'clanName': character.clanname })|colorize }}
 {% endif %}
 
 {{ 'bio.title'|trans({ 'title': character.title })|colorize }}
@@ -22,17 +22,17 @@
 {{ 'bio.dragonkills'|trans({ 'dragonkills': character.dragonkills })|colorize }}
 {{ 'bio.status'|trans({ 'status': character.loggedin })|colorize }}
 {{ 'bio.resurrections'|trans({ 'resurrections': character.resurrections  })|colorize }}
-{{ 'bio.race'|trans({ 'race': 'character.racename'|tl(null, character.race|default(RACE_UNKNOWN)) })|colorize }}
+{{ 'bio.race'|trans({ 'race': 'character.racename'|trans(null, character.race|default(RACE_UNKNOWN)) })|colorize }}
 {{ 'bio.gender'|trans({ 'sex': character.sex })|colorize }}
 {{ 'bio.specialty'|trans({ 'specialty': specialties[character.specialty] })|colorize }}
-{{ 'bio.creature'|trans({ 'mount': character.mountname|default('character.mount'|tl(null, 'app_default')) })|colorize }}
+{{ 'bio.creature'|trans({ 'mount': character.mountname|default('character.mount'|trans(null, 'app_default')) })|colorize }}
 
 {% set result = modulehook('biostat', { 'target': character, 'messages': {} }) %}
 {% for message in result.messages %}
-    {{ message[0]|tl(message[1], message[2])|colorize }}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
 {% endfor %}
 
-{{ 'bio.bio'|trans({ 'bio': character.bio|default('character.bio'|tl(null, 'app_default'))|censor|colorize })|colorize }}
+{{ 'bio.bio'|trans({ 'bio': character.bio|default('character.bio'|trans(null, 'app_default'))|censor|colorize })|colorize }}
 
 {{ 'bio.news'|trans({'character': character.name})|colorize }}
 <br>

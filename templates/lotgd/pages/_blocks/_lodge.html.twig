@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block lodge_default %}
     {{ 'section.default.paragraph'|trans|colorize }}
@@ -6,7 +6,7 @@
     {% if canEntry %}
         {% set result = modulehook('lodge-desc') %}
         {% for message in result %}
-            {{ message[0]|tl(message[1], message[2])|colorize }}
+            {{ message[0]|trans(message[1], message[2])|colorize }}
         {% endfor %}
 
         {{ 'section.default.can.entry.yes'|trans({ 'donationPoints': user.donation, 'donationPointsAvailable': pointsAvailable, 'sex': user.sex })|colorize }}
@@ -25,7 +25,7 @@
 
     {% set result = modulehook('donator_point_messages', donatorPointMessages) %}
     {% for message in result %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 
     <br>
@@ -41,7 +41,7 @@
     {% set result = modulehook('pointsdesc', {}) %}
     <ul class="ui ordered list">
         {% for message in result %}
-            <div class="item">{{ message[0]|tl(message[1], message[2])|colorize }}</div>
+            <div class="item">{{ message[0]|trans(message[1], message[2])|colorize }}</div>
         {% else %}
             <div class="item">{{ 'section.points.messages.desc'|trans|colorize }}</div>
         {% endfor %}

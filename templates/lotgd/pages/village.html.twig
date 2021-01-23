@@ -14,11 +14,11 @@
             ]
         ]
 #}
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% set result = modulehook('village-header') %}
 {% for message in result %}
-    {{ message[0]|tl(message[1], message[2])|colorize }}
+    {{ message[0]|trans(message[1], message[2])|colorize }}
 {% endfor %}
 
 {% if showVillageDesc %}
@@ -29,7 +29,7 @@
     {% set result = modulehook('village-desc') %}
     {% for message in result %}
         {% if message is array %}
-            {{ message[0]|tl(message[1], message[2])|colorize }}
+            {{ message[0]|trans(message[1], message[2])|colorize }}
         {% else %}
             {{ message|colorize }}
         {% endif %}
@@ -39,7 +39,7 @@
         {{ newtext|trans({'name': newestname })|colorize }}
 
         {% if SU_EDIT_USERS and newestplayer %}
-            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer)|lotgd_url }}">{{ 'opt.edit'|tl({}, 'app_default') }}</a>]
+            [<a href="{{ ('user.php?op=edit&userid=' ~ newestplayer)|lotgd_url }}">{{ 'opt.edit'|trans({}, 'app_default') }}</a>]
         {% endif %}
     {% endif %}
     <br>

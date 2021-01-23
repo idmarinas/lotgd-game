@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block inn_bartender %}
     {% if 'bribe' == action %}
@@ -59,13 +59,13 @@
 
         {{ 'section.default.paragraph'|trans({ 'sex': user.sex, 'barkeep': barkeep, 'partner': partner })|colorize }}
 
-        {{ 'section.default.talk'|trans({ 'talk': talk[0]|tl(talk[1], talk[2]) })|colorize }}
+        {{ 'section.default.talk'|trans({ 'talk': talk[0]|trans(talk[1], talk[2]) })|colorize }}
 
         {{ 'section.default.clock'|trans({ 'gameclock': gameclock })|colorize }}
 
         {% set result = modulehook('inn-desc') %}
         {% for message in result %}
-            {{ message[0]|tl(message[1], message[2])|colorize }}
+            {{ message[0]|trans(message[1], message[2])|colorize }}
         {% endfor %}
     {% endif %}
 {% endblock inn_default %}

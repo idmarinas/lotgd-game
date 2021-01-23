@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block graveyard_default %}
     {% if showGraveyardDesc %}
@@ -7,7 +7,7 @@
         {% set result = modulehook('graveyard-desc') %}
         {% for message in result %}
             {% if message is array %}
-                {{ message[0]|tl(message[1], message[2])|colorize }}
+                {{ message[0]|trans(message[1], message[2])|colorize }}
             {% else %}
                 {{ message|colorize }}
             {% endif %}
@@ -20,7 +20,7 @@
 
     {% set result = modulehook('mausoleum') %}
     {% for message in result %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 {% endblock graveyard_enter %}
 
@@ -85,11 +85,11 @@
     {{ 'section.question.balance'|trans({ 'favor': user.deathpower, 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
     {% if highest[0] %}
-        {{ highest[0]|tl(highest[1], highest[2])|colorize }}
+        {{ highest[0]|trans(highest[1], highest[2])|colorize }}
     {% endif %}
 
     {% if texts[0] %}
-        {{ texts[0]|tl(texts[1], texts[2])|colorize }}
+        {{ texts[0]|trans(texts[1], texts[2])|colorize }}
     {% endif %}
 {% endblock graveyard_question %}
 

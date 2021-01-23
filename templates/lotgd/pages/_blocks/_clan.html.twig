@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block clan_applicant %}
     {{ 'section.applicant.subtitle'|trans|colorize }}
@@ -30,7 +30,7 @@
         {% include tpl with params %}
     {% endfor %}
     {% for message in result.messages %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 
     {% if clanInfo.clandesc %}

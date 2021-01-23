@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 <table class="ui very compact selectable striped table">
     <thead>
@@ -71,7 +71,7 @@
 
     {% set result = modulehook('petitions-descriptions', []) %}
     {% for message in result %}
-        <li>{{ message[0]|tl(message[1], message[2])|colorize }}</li>
+        <li>{{ message[0]|trans(message[1], message[2])|colorize }}</li>
     {% endfor %}
 </ul>
 

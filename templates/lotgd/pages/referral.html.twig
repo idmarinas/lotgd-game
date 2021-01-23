@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {{ 'paragraph'|trans({ 'refererAward': refererAward, 'referMinLevel': referMinLevel, 'playerReferralUrl': '%sreferral.php?r=%s'|format(serverUrl, user.login|e('url')) })|colorize }}
 

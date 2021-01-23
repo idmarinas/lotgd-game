@@ -1,5 +1,5 @@
 {% use '{theme}/pages/_blocks/_graveyard.html.twig' %}
 
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {{ block('graveyard_' ~ tpl|default('default')) }}

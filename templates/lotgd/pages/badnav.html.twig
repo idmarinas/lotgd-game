@@ -1,4 +1,4 @@
-{% translate_default_domain 'page_badnav' %}
+{% trans_default_domain 'page_badnav' %}
 
 {% if user.alive %}
     {{ 'navsCorrupt.village'|trans({'location': user.location})|colorize }}

@@ -1,10 +1,10 @@
-{% translate_default_domain 'page_battle' %}
+{% trans_default_domain 'page_battle' %}
 
 {% macro combat_health_bar(data) %}
     <table class="ui collapsing very basic very compact table">
         <tr>
             <td colspan="3">
-                {% set nametext = (data.name is iterable ? data.name[0]|tl(data.name[1], data.name[2] ?: '_battle') : data.name) %}
+                {% set nametext = (data.name is iterable ? data.name[0]|trans(data.name[1], data.name[2] ?: '_battle') : data.name) %}
                 {% if data.isTarget %}<i class="yellow bullseye icon"></i>{% endif %}
                 {{ '(%s) %s (Level `b%s´b)`0'|trans|format(data.who|trans, nametext, data.level)|colorize }}
                 {% if not data.showbar %}

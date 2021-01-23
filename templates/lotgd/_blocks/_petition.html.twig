@@ -1,4 +1,4 @@
-{% translate_default_domain 'jaxon_petition' %}
+{% trans_default_domain 'jaxon_petition' %}
 
 {% block petition_help %}
     {{ 'section.default.paragraph'|trans|colorize }}
@@ -64,7 +64,7 @@
             {% set onclick = faq.onclick|default(faq.href) %}
             <a href="#" onclick="{{ onclick }}" class="item">
                 <i class="angle double right green icon"></i>
-                <div class="content">{{ faq.link[0]|tl(faq.link[1], faq.link[2])|colorize }}</div>
+                <div class="content">{{ faq.link[0]|trans(faq.link[1], faq.link[2])|colorize }}</div>
             </a>
         {% endfor %}
     </div>

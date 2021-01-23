@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% block stables_buymount %}
     {{ 'section.buymount.confirm' }}
@@ -29,7 +29,7 @@
 
     {% set result = modulehook('stables-desc') %}
     {% for message in result %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 {% endblock stables_default %}
 

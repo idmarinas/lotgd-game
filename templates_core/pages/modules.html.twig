@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% for message in messages %}
     {{ message[0]|trans(message[1])|colorize }}
