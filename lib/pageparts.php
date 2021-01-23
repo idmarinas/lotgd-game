@@ -185,11 +185,6 @@ function charstats($return = true)
                     $val['name'][0] = \str_replace('`%', '`%%', $val['name'][0]);
                     $val['name']    = \call_user_func_array('sprintf', $val['name']);
                 }
-                //in case it's a string
-                else
-                {
-                    $val['name'] = $val['name'];
-                }
 
                 $val['rounds'] = $val['rounds'] ?? 0;
 
