@@ -13,46 +13,17 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorDefaultDomainNodeVisitor;
-use Lotgd\Core\Twig\NodeVisitor\TranslatorNodeVisitor;
-use Lotgd\Core\Twig\TokenParser\TranslatorDefaultDomainTokenParser;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class Translator extends AbstractExtension
 {
-    use Pattern\Translator;
-    use PatternCore\Translator;
-
     protected $translator;
-    protected $translatorNodeVisitor;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNodeVisitors()
+    public function __construct(TranslatorInterface $translator)
     {
-        return [$this->getTranslationNodeVisitor(), new TranslatorDefaultDomainNodeVisitor()];
-    }
-
-    public function getTranslationNodeVisitor()
-    {
-        return $this->translatorNodeVisitor ?: $this->translatorNodeVisitor = new TranslatorNodeVisitor();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTokenParsers()
-    {
-        return [
-            /*
-             * @param string
-             * {% translate_default_domain 'foobar' %}
-             */
-            new TranslatorDefaultDomainTokenParser(),
-        ];
+        $this->translator = $translator;
     }
 
     /**
@@ -61,22 +32,9 @@ class Translator extends AbstractExtension
     public function getFilters()
     {
         return [
-            /*
-             * Laminas Translator
-             */
-            new TwigFilter('t', [$this, 'translate'], ['needs_environment' => true]),
-            //-- If you use "translate_default_domain" in template, use "tl" to change domain of translation.
-            new TwigFilter('tl', [$this, 'translate'], ['needs_environment' => true]),
             //-- Use MessageFormatter to formater message.
-            new TwigFilter('tmf', [$this, 'translateMf'], ['needs_environment' => true]),
-            //-- Only select a translation WITHOUT MessageFormatter.
-            new TwigFilter('tst', [$this, 'translateSt'], ['needs_environment' => true]),
-
-            /*
-             * Symfony Translator
-             */
-            // new TwigFilter('ts', [$this, 'symfonyTrans'], ['needs_environment' => true]),
-            // new TwigFilter('trans', [$this, 'symfonyTrans'], ['needs_environment' => true]),
+            new TwigFilter('tmf', [$this, 'messageFormatter']), //-- Alias
+            new TwigFilter('mf', [$this, 'messageFormatter']),
         ];
     }
 
@@ -91,10 +49,65 @@ class Translator extends AbstractExtension
     }
 
     /**
+     * Only format a message with MessageFormatter.
+     */
+    public function messageFormatter(?string $message, ?array $parameters = [], ?string $locale = null): string
+    {
+        //-- Not do nothing if message is empty
+        //-- MessageFormatter fail if message is empty
+        if (! $message)
+        {
+            return '';
+        }
+
+        $locale     = ($locale ?: $this->translator->getLocale());
+        $parameters = ($parameters ?: []);
+        //-- Delete all values that not are allowed (can cause a error when use \MessageFormatter::format($params))
+        $parameters = \array_filter($parameters, [$this, 'cleanParameters']);
+
+        $formatter = new \MessageFormatter($locale, $message);
+
+        $msg = $formatter->format($parameters);
+
+        //-- Dump error to debug
+        if ($formatter->getErrorCode())
+        {
+            bdump($formatter->getPattern());
+            bdump($formatter->getErrorMessage());
+        }
+
+        return $msg;
+    }
+
+    /**
+     * Get locale for translator.
+     */
+    public function translatorDefaultLocale(): string
+    {
+        return $this->translator->getLocale();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'translator';
+    }
+
+    /**
+     * Clean param of a value.
+     *
+     * @param mixed $param
+     */
+    private function cleanParameters($param): bool
+    {
+        return (bool) (
+            \is_string($param) //-- Allow string values
+            || \is_numeric($param) //-- Allow numeric values
+            || \is_bool($param) //-- Allow bool values
+            || \is_null($param) //-- Allow null value (Formatter can handle this value)
+            || $param instanceof \DateTime //-- Allow DateTime object
+        );
     }
 }
