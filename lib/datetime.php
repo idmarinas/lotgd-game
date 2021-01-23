@@ -23,7 +23,6 @@ function reltime($date, $short = true)
     if ($short)
     {
         $array = ['d' => 'd', 'h' => 'h', 'm' => 'm', 's' => 's'];
-        $array = translate_inline($array, 'datetime');
 
         if ($d > 0)
         {
@@ -45,7 +44,6 @@ function reltime($date, $short = true)
     else
     {
         $array = ['day' => 'day', 'days' => 'days', 'hour' => 'hour', 'hours' => 'hours', 'minute' => 'minute', 'minutes' => 'minutes', 'second' => 'second', 'seconds' => 'second'];
-        $array = translate_inline($array, 'datetime'); //translate it... tl-ready now
 
         if ($d > 0)
         {

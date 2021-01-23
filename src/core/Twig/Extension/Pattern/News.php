@@ -65,8 +65,7 @@ trait News
 
         //-- This old of make news, are deprecated and deleted in future version.
         //-- Delete old news of your server.
-        $message = translate($item['text'], $item['textDomain']);
 
-        return $this->sprintfnews(\str_replace('`%', '`%%', $message), $item['arguments'] ?? []);
+        return $this->sprintfnews(\str_replace('`%', '`%%', $item['text']), $item['arguments'] ?? []);
     }
 }

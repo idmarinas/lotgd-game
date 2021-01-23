@@ -181,9 +181,6 @@ if ('' != $name)
 
     \LotgdKernel::get('cache.app')->delete('char-list-home-page');
 
-    // Handle the change in number of users online
-    translator_check_collect_texts();
-
     // Let's throw a login module hook in here so that modules
     // like the stafflist which need to invalidate the cache
     // when someone logs in or off can do so.
