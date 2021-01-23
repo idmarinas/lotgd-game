@@ -20,7 +20,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :cyclone: CHANGES
 
 -   _Migrated_ **Lotgd\Core\Template\Theme** factory to **LoTGD Kernel service**
-    -   `LotgdNavigation::` static class get the new Kernel service
+    -   `LotgdTheme::` static class get the new Kernel service
 
 ### :star: FEATURES
 
