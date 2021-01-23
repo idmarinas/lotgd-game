@@ -98,20 +98,7 @@ function translate($indata, $namespace = false)
             // Remove this from the untranslated texts table if it is
                 // in there and we are collecting texts
                 // This delete is horrible on very heavily translated games.
-                // It has been requested to be removed.
-                /*
-                if (getsetting("collecttexts", false)) {
-                    $sql = "DELETE FROM " . DB::prefix("untranslated") .
-                        " WHERE intext='" . addslashes($indata) .
-                        "' AND language='" . LANGUAGE . "'";
-                    DB::query($sql);
-                }
-                */
-            }
-            elseif (getsetting('collecttexts', false))
-            {
-                $sql = 'INSERT IGNORE INTO '.DB::prefix('untranslated')." (intext,language,namespace) VALUES ('".\addslashes($indata)."', '".LANGUAGE."', "."'{$namespace}')";
-                DB::query($sql, false);
+                // It has be
             }
             tlbutton_push($indata, ! $foundtranslation, $namespace);
         }
@@ -220,7 +207,7 @@ function translate_mail($in, $to = 0)
     //$in[0] = str_replace("`%","`%%",$in[0]);
     if ($to > 0)
     {
-        $language             = DB::fetch_assoc(DB::query('SELECT prefs FROM '.DB::prefix('accounts')." WHERE acctid={$to}"));
+        $language             = DB::fetch_assoc(DB::query("SELECT prefs FROM accounts WHERE acctid={$to}"));
         $language['prefs']    = \unserialize($language['prefs']);
         $session['tlanguage'] = $language['prefs']['language'] ? $language['prefs']['language'] : getsetting('defaultlanguage', 'en');
     }
@@ -279,9 +266,9 @@ function translate_loadnamespace($namespace, $language = false)
     {
         $where = "(uri='{$page}' OR uri='{$uri}')";
     }
-    $sql = '
+    $sql = "
         SELECT intext,outtext
-        FROM '.DB::prefix('translations')."
+        FROM translations
         WHERE language='{$language}'
             AND {$where}";
     /*	\LotgdResponse::pageDebug(nl2br(htmlentities($sql, ENT_COMPAT, getsetting("charset", "UTF-8")))); */
