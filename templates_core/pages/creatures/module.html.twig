@@ -1,13 +1,5 @@
 {% trans_default_domain textDomain %}
 
-{% if isLaminas %}
-    {% if formTypeTab %}
-        {{ laminas_form_tab(form) }}
-    {% else %}
-        {{ laminas_form(form) }}
-    {% endif %}
-{% else %}
-    <form action="{{ 'creatures.php?op=edit&subop=module&creatureid=' ~ creatureId ~ '&module=' ~ module }}" method="POST" autocomplete="off">
-        {{ form }}
-    </form>
-{% endif %}
+<form action="{{ 'creatures.php?op=edit&subop=module&creatureid=' ~ creatureId ~ '&module=' ~ module }}" method="POST" autocomplete="off">
+    {{ form }}
+</form>

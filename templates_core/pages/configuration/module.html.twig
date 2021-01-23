@@ -11,17 +11,9 @@
         {% endif %}
     </p>
 
-    {% if isLaminas %}
-        {% if formTypeTab %}
-            {{ laminas_form_tab(form) }}
-        {% else %}
-            {{ laminas_form(form) }}
-        {% endif %}
-    {% else %}
-        <form action="{{ ('configuration.php?setting=module&module=' ~ moduleName ~ '&save=save')|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
-            {{ form }}
-        </form>
-    {% endif %}
+    <form action="{{ ('configuration.php?setting=module&module=' ~ moduleName ~ '&save=save')|lotgd_url }}" method="POST" autocomplete="off" class="ui form">
+        {{ form }}
+    </form>
 {% else %}
     {{ 'section.module.no.settings'|trans({ 'name': moduleInfo.name })|colorize }}
 {% endif %}
