@@ -1,6 +1,6 @@
-{% trans_default_domain 'page_home' %}
-
 {% block home_login %}
+    {% trans_default_domain 'page_home' %}
+
     <form action="{{ 'login.php'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassLogin();">
         {{ 'login.message'|trans|colorize }}
         <br>
@@ -32,6 +32,8 @@
 {% endblock home_login %}
 
 {% block home_select_skin %}
+    {% trans_default_domain 'page_home' %}
+
     <br>
     <table class="ui very basic collapsing centered table">
         <tr>
@@ -43,6 +45,8 @@
 {% endblock home_select_skin %}
 
 {% block home_server_full %}
+    {% trans_default_domain 'page_home' %}
+
     <div class="ui header">{{ 'serverfull.message'|trans|colorize }}</div>
     <table class="ui centered center aligned very basic collapsing table">
         <tr>

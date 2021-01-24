@@ -1,6 +1,6 @@
-{% trans_default_domain 'partial_pvp' %}
-
 {% block pvp_list %}
+    {% trans_default_domain 'partial_pvp' %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <tr>
@@ -52,6 +52,8 @@
 {% endblock pvp_list %}
 
 {% block pvp_sleepers %}
+    {% trans_default_domain 'partial_pvp' %}
+
     {% if sleepers|length %}
         {{ 'sleepers.paragraph'|trans|colorize }}
 

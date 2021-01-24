@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block train_autochallenge %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.autochallenge.paragraph'|trans(_context)|colorize }}
 
     {% if playerHealed %}
@@ -9,6 +9,8 @@
 {% endblock train_autochallenge %}
 
 {% block train_challenge %}
+    {% trans_default_domain textDomain %}
+
     {% if user.seenmaster %}
         {{ 'section.challenge.seen.master'|trans(_context)|colorize }}
     {% elseif not battle %}
@@ -17,14 +19,20 @@
 {% endblock train_challenge %}
 
 {% block train_default %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.default.paragraph'|trans(_context)|colorize }}
 {% endblock train_default %}
 
 {% block train_maxlevel %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.maxlevel.paragraph'|trans|colorize }}
 {% endblock train_maxlevel %}
 
 {% block train_question %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.question.paragraph'|trans(_context)|colorize }}
 
     {% if user.experience >= expRequired %}

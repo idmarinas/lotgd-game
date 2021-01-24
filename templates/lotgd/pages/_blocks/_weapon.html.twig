@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block weapon_buy %}
+    {% trans_default_domain textDomain %}
+
     {% if result %}
         {% if buyIt %}
             {{ 'payweapon'|trans(_context|merge({'playerWeapon': userPre.weapon, 'weaponName': result.weaponname}))|colorize }}
@@ -14,6 +14,8 @@
 {% endblock weapon_buy %}
 
 {% block weapon_default %}
+    {% trans_default_domain textDomain %}
+
     {{ 'description'|trans(_context|merge({'sex': user.sex }))|colorize }}
 
     {{ 'trade.in'|trans(_context|merge({'weaponName': user.weapon, 'value': tradeinvalue}))|colorize }}

@@ -1,6 +1,6 @@
-{% trans_default_domain 'jaxon_mail' %}
-
 {% block mail_inbox %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {{ block('mail_buttons') }}
 
     <br>
@@ -169,6 +169,8 @@
 {% endblock mail_inbox %}
 
 {% block mail_write %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     <form id="mail-message" method="POST" class="ui form">
         <input type="hidden" name="return_to" value="{{ msgId }}">
         <div class="inline field">
@@ -269,6 +271,8 @@
 {% endblock mail_write %}
 
 {% block mail_read %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {{ block('mail_buttons') }}
 
     <br>
@@ -354,6 +358,8 @@
 {% endblock mail_read %}
 
 {% block mail_buttons %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {#
         Format for buttons
         [

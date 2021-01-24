@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block lodge_default %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.default.paragraph'|trans|colorize }}
 
     {% if canEntry %}
@@ -21,6 +21,8 @@
 {% endblock lodge_default %}
 
 {% block lodge_points %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.points.list'|trans|colorize }}
 
     {% set result = modulehook('donator_point_messages', donatorPointMessages) %}

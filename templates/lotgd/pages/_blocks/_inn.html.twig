@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block inn_bartender %}
+    {% trans_default_domain textDomain %}
+
     {% if 'bribe' == action %}
         {% if type %}
             {% if bribeSuccess %}
@@ -39,6 +39,8 @@
 {% endblock inn_bartender %}
 
 {% block inn_converse %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.converse'|trans|colorize }}
 
     {{ commentary_block({
@@ -48,6 +50,8 @@
 {% endblock inn_converse %}
 
 {% block inn_default %}
+    {% trans_default_domain textDomain %}
+
     {% if showInnDescription %}
         {% if 'strolldown' == op %}
             {{ 'section.default.op.stroll'|trans|colorize }}
@@ -71,6 +75,8 @@
 {% endblock inn_default %}
 
 {% block inn_room %}
+    {% trans_default_domain textDomain %}
+
     {% if boughtRoomToday %}
         {{ 'section.room.bought'|trans|colorize }}
     {% else %}

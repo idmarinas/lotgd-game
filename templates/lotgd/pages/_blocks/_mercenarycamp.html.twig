@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block mercenarycamp_buy %}
+    {% trans_default_domain textDomain %}
+
     {% if companionHire is same as(true) %}
         {{ 'section.buy.success'|trans|colorize }}
 
@@ -15,6 +15,8 @@
 {% endblock mercenarycamp_buy %}
 
 {% block mercenarycamp_default %}
+    {% trans_default_domain textDomain %}
+
     {% if showDescription %}
         {{ 'section.default.description'|trans(_context)|colorize }}
     {% endif %}
@@ -31,6 +33,8 @@
 {% endblock mercenarycamp_default %}
 
 {% block mercenarycamp_heal %}
+    {% trans_default_domain textDomain %}
+
     {% if companionHealed %}
         {{ 'section.heal.paid'|trans({ 'companionName': companionName })|colorize }}
     {% else %}

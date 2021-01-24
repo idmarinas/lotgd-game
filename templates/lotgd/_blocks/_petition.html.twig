@@ -1,6 +1,6 @@
-{% trans_default_domain 'jaxon_petition' %}
-
 {% block petition_help %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     {{ 'section.default.paragraph'|trans|colorize }}
 
     {{ form(form) }}
@@ -10,6 +10,8 @@
 {% endblock petition_help %}
 
 {% block petition_report %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     {{ 'section.report.paragraph'|trans|colorize }}
 
     <br>
@@ -21,6 +23,8 @@
 {% endblock petition_report %}
 
 {% block petition_primer %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
@@ -55,6 +59,8 @@
 {% endblock petition_primer %}
 
 {% block petition_faq %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     {{ 'section.faq.title'|trans|colorize }}
     {{ 'section.faq.paragraph'|trans|colorize }}
 
@@ -73,6 +79,8 @@
 {% endblock petition_faq %}
 
 {% block petition_faq1 %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
@@ -118,6 +126,8 @@
 {% endblock petition_faq1 %}
 
 {% block petition_faq2 %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 
@@ -165,6 +175,8 @@
 {% endblock petition_faq2 %}
 
 {% block petition_faq3 %}
+    {% trans_default_domain 'jaxon_petition' %}
+
     <a href="#" onclick="JaxonLotgd.Ajax.Core.Petition.faq()">{{ 'section.return.content'|trans|colorize }}</a>
     <hr>
 

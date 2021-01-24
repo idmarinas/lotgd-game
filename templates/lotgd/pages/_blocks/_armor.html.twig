@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block armor_list %}
+    {% trans_default_domain textDomain %}
+
     {{ 'description'|trans|colorize }}
 
     {{ 'tradein'|trans({'armorname': user.armor, 'value': tradeinvalue})|colorize }}
@@ -49,6 +49,8 @@
 {% endblock armor_list %}
 
 {% block armor_buy %}
+    {% trans_default_domain textDomain %}
+
     {% if result %}
         {% if buyIt %}
             {{ 'payarmor'|trans({'playerarmor': userPre.armor, 'armorname': result.armorname})|colorize }}

@@ -1,6 +1,6 @@
-{% trans_default_domain textDomain %}
-
 {% block newday_default %}
+    {% trans_default_domain textDomain %}
+
     <h1 class="ui header center aligned">{{ 'section.default.title'|trans|colorize }}</h1>
 
     {# Resurrection #}
@@ -75,6 +75,8 @@
 {% endblock newday_default %}
 
 {% block newday_dragonpoints %}
+    {% trans_default_domain textDomain %}
+
     {% if points > 1 %}
         {{ 'section.dragonpoints.multi.paragraph'|trans({ 'points': points })|colorize }}
 
@@ -157,6 +159,8 @@
 {% endblock newday_dragonpoints %}
 
 {% block newday_race %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.race.paragraph'|trans|colorize }}
 
     {% if isAdmin %}
@@ -167,6 +171,8 @@
 {% endblock newday_race %}
 
 {% block newday_specialty %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.specialty.paragraph'|trans|colorize }}
 
     {% if isAdmin %}

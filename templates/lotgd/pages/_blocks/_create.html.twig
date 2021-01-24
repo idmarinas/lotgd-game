@@ -1,6 +1,6 @@
-{% trans_default_domain 'page_create' %}
-
 {% block create_server_full %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui centered center aligned very basic collapsing table">
         <tr>
             <td><img src="images/Medallion-Red.gif" class="noborder" alt="{{ 'serverfull'|trans|uncolorize }}"></td>
@@ -12,6 +12,8 @@
 {% endblock create_server_full %}
 
 {% block create_forgot %}
+    {% trans_default_domain textDomain %}
+
     <form action="{{ 'create.php?op=forgot'|lotgd_url }}" method="POST">
         <div class="ui form">
             <div class="inline field">
@@ -24,6 +26,8 @@
 {% endblock create_forgot %}
 
 {% block create_forgot_val %}
+    {% trans_default_domain textDomain %}
+
     {{ 'validating.pass.success'|trans|colorize }}
     <form action="{{ 'login.php'|lotgd_url }}" method="POST">
         <input name="name" value="{{ account.login }}" type="hidden">
@@ -48,6 +52,8 @@
 {% endblock create_forgot_val %}
 
 {% block create_email_val %}
+    {% trans_default_domain textDomain %}
+
     {{ 'validating.email.title'|trans|colorize }}
 
     {{ 'validating.email.paragraph.success'|trans({'login': account.login})|colorize }}
@@ -66,11 +72,15 @@
 {% endblock create_email_val %}
 
 {% block create_account_disabled %}
+    {% trans_default_domain textDomain %}
+
     {{ 'create.account.disabled.message'|trans|colorize }}
     {{ 'create.account.disabled.contact'|trans|colorize }}
 {% endblock create_account_disabled %}
 
 {% block create_account_create %}
+    {% trans_default_domain textDomain %}
+
     {{ 'create.title'|trans|colorize }}
 
     <br>
@@ -145,6 +155,8 @@
 {% endblock create_account_create %}
 
 {% block create_account_login %}
+    {% trans_default_domain textDomain %}
+
     {{ 'create.account.login.text'|trans({'name': login})|colorize }}
     <form action="{{ 'login.php'|lotgd_url }}" method="POST">
         <input name="name" value="{{ login }}" type="hidden">
