@@ -2,22 +2,15 @@ title: 'Game Settings'
 
 section:
     cache:
-        description: 'Here are all the caches configured in the game.`n'
-        for.core: 'Options for CORE cache "{coreCacheFolder}"'
-        cached: |
-            Cache for "translations" are ALWAYS activated, for performance.
-            Cache for "doctrine" are ALWAYS activated, for performance.
-            Cache for "templates" are ALWAYS activated, for performance.
-            Some parts of the game are cached, for performance reasons, such as configuration.
-        button:
-            optimize: Optimize cache
-            expire: Clear expire cache
-            all: Clear all cache
-            prefix: Clear by prefix cache
-        note: 'It is not possible to activate or deactivate the cache of the game "Cache\Core\Lotgd", "Cache\Core\Cronjob" and "Cache\Core\Translator" it is not possible remove them, the game expects them to be configured.'
-        unmanage: 'It is not possible to administer the Doctrine cache, it is self-managed.'
-        twig_warning: 'Warning: With Twig Template cache, when you click on any of the buttons, they will have the same effect, empty the "storage/cache/template" dir completely'
-        deprecated_warning: 'All caches listed here except "Twig templates" use the old Laminas Cache system which is obsolete. At the moment it is not possible to perform optimization and cleaning tasks with Symfony Cache.'
+        description: |
+            If you need clear cache because change any config in "config/" folder.
+            Use console in root of project folder.
+            "php bin/console cache:clear"
+
+            Other option is delete folder "var/cache/" in root project folder.
+            Remember that "var/cache/" folder need permits read/write for www-data user (Web server).
+
+            Note: clear cache take a moment, be patient.
     cronjob:
         details: 'Details'
         table:
