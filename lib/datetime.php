@@ -4,68 +4,6 @@
 // translator ready
 // mail ready
 
-function reltime($date, $short = true)
-{
-    \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use "LotgdFormat::relativedate($indate, $default)" instead.',
-        __METHOD__
-    ), E_USER_DEPRECATED);
-
-    $x = \abs(\time() - $date);
-    $d = (int) ($x / 86400);
-    $x = $x % 86400;
-    $h = (int) ($x / 3600);
-    $x = $x % 3600;
-    $m = (int) ($x / 60);
-    $x = $x % 60;
-    $s = (int) ($x);
-
-    if ($short)
-    {
-        $array = ['d' => 'd', 'h' => 'h', 'm' => 'm', 's' => 's'];
-
-        if ($d > 0)
-        {
-            $o = $d.$array['d'].' '.($h > 0 ? $h.$array['h'] : '');
-        }
-        elseif ($h > 0)
-        {
-            $o = $h.$array['h'].' '.($m > 0 ? $m.$array['m'] : '');
-        }
-        elseif ($m > 0)
-        {
-            $o = $m.$array['m'].' '.($s > 0 ? $s.$array['s'] : '');
-        }
-        else
-        {
-            $o = $s.$array['s'];
-        }
-    }
-    else
-    {
-        $array = ['day' => 'day', 'days' => 'days', 'hour' => 'hour', 'hours' => 'hours', 'minute' => 'minute', 'minutes' => 'minutes', 'second' => 'second', 'seconds' => 'second'];
-
-        if ($d > 0)
-        {
-            $o = "{$d} ".($d > 1 ? $array['days'] : $array['day']).($h > 0 ? ", {$h} ".($h > 1 ? $array['hours'] : $array['hour']) : '');
-        }
-        elseif ($h > 0)
-        {
-            $o = "{$h} ".($h > 1 ? $array['hours'] : $array['hour']).($m > 0 ? ", {$m} ".($m > 1 ? $array['minutes'] : $array['minute']) : '');
-        }
-        elseif ($m > 0)
-        {
-            $o = "{$m} ".($m > 1 ? $array['minutes'] : $array['minute']).($s > 0 ? ", {$s} ".($s > 1 ? $array['seconds'] : $array['second']) : '');
-        }
-        else
-        {
-            $o = "{$s} ".($s > 0 ? $array['seconds'] : $array['second']);
-        }
-    }
-
-    return $o;
-}
-
 /**
  * Check if is a new day.
  */
@@ -120,9 +58,7 @@ function is_new_day($now = 0)
     $d1 = \gmdate('Y-m-d', $t1);
     $d2 = \gmdate('Y-m-d', $t2);
 
-    return (bool) ($d1 != $d2)
-
-     ;
+    return (bool) ($d1 != $d2);
 }
 
 function getgametime()
