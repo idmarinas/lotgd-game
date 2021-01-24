@@ -45,14 +45,20 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **BC** removed function of pattern `src/core/Pattern/Cache.php`
     -   `getCache()` use `getCacheApp()` or `getCacheAppTag` for a tagged version.
         -   Not create an alias because _Laminas_ and _Symfony_ work diferent.
--   **BC** removed **Translation Twig Extension** 
-    -   Removed filters:
-        -   `t` use `trans` filter
-        -   `ts` use `trans` filter
-        -   `tl` use `trans` filter
-        -   `tst` use `trans` filter
-        -   `tmf` use  `mf` (this funcion not translate only is a formatter)
-    -   Removed token `{% translate_default_domain 'foobar' %}` use `{% trans_default_domain 'foobar'%}`
+-   **BC** **Twig Extensions** 
+    -   **Translation extension**
+        -   Removed filters:
+            -   `t` use `trans` filter
+            -   `ts` use `trans` filter
+            -   `tl` use `trans` filter
+            -   `tst` use `trans` filter
+            -   `tmf` use  `mf` (this funcion not translate only is a formatter)
+        -   Removed token `{% translate_default_domain 'foobar' %}` use `{% trans_default_domain 'foobar'%}`
+    -   **Core Extension**
+        -   Remove function `page_title()` use `head_title()` instead.
+-   Removed cronjob `cronjob/cacheoptimize.php`
+-   Removed deprecated function of `lib/datetime.php` file:
+    -   `reltime()` use `LotgdFormat::relativedate($indate, $default)` instead
 -   **BC** remove file `lib/translator.php` and all functions:
     -   `translator_setup()`
     -   `translate()`
