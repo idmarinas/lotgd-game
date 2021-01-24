@@ -40,6 +40,9 @@
         "toastr": "^2.1.4"
     },
     "devDependencies": {
+        "@symfony/stimulus-bridge": "^1.1.0",
+        "regenerator-runtime": "^0.13.2",
+        "stimulus": "^2.0.0",
         "@babel/core": "^7.12.10",
         "@babel/plugin-transform-runtime": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
@@ -82,6 +85,7 @@
         "url": "https://github.com/idmarinas/lotgd-game.git"
     },
     "scripts": {
+        "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",
