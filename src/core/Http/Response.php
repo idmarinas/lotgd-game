@@ -142,12 +142,12 @@ class Response extends HttpResponse
 
         $replacementbits = ['script' => $script, '__scriptfile__' => $script, 'module' => $module];
         $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
-        $replacementbits = modulehook('everyfooter', $replacementbits); //-- This hook will be removed in version 5.0.0
+        $replacementbits = modulehook('everyfooter', $replacementbits);
 
         if ($session['user']['loggedin'] ?? false)
         {
             $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
-            $replacementbits = modulehook('everyfooter-loggedin', $replacementbits); //-- This hook will be removed in version 5.0.0
+            $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
         }
 
         unset($replacementbits['__scriptfile__'], $replacementbits['script']);
