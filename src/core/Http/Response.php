@@ -57,12 +57,12 @@ class Response extends HttpResponse
 
         $args = ['script' => $script, 'module' => $module];
         $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
-        $args = modulehook('everyheader', $args); //-- This hook will be removed in version 5.0.0
+        $args = modulehook('everyheader', $args);
 
         if ($session['user']['loggedin'] ?? false)
         {
             $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
-            modulehook('everyheader-loggedin', $args); //-- This hook will be removed in version 5.0.0
+            modulehook('everyheader-loggedin', $args);
         }
 
         calculate_buff_fields();
