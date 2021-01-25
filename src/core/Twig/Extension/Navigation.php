@@ -19,6 +19,7 @@ use Lotgd\Core\Navigation\Navigation as NavigationCore;
 use Lotgd\Core\Output\Format;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 class Navigation extends AbstractExtension
 {
@@ -45,6 +46,15 @@ class Navigation extends AbstractExtension
         $this->request    = $request;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('lotgd_url', [$this, 'lotgdUrl']),
+        ];
+    }
     /**
      * {@inheritdoc}
      */
