@@ -13,12 +13,19 @@
 namespace Lotgd\Core\Tool;
 
 use Laminas\Filter;
-use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\Output\Code;
+use Lotgd\Core\Output\Color;
 
 class Sanitize
 {
-    use PatternCore\Container;
-    use PatternCore\Output;
+    protected $color;
+    protected $code;
+
+    public function __construct(Color $color, Code $code)
+    {
+        $this->color = $color;
+        $this->code  = $code;
+    }
 
     /**
      * Remove all colors code from string.
@@ -26,7 +33,7 @@ class Sanitize
      */
     public function unColorize(string $string): string
     {
-        $colors = \preg_quote(\implode('', \array_keys($this->getColor()->getColors())));
+        $colors = \preg_quote(\implode('', \array_keys($this->color->getColors())));
 
         return \preg_replace("/[`´][0{$colors}]/u", '', $string);
     }
@@ -36,7 +43,7 @@ class Sanitize
      */
     public function noLotgdCodes(string $string): string
     {
-        $codes = \array_merge($this->getColor()->getColors(), $this->getCode()->getCodes());
+        $codes = \array_merge($this->color->getColors(), $this->code->getCodes());
         $codes = \preg_quote(\implode('', \array_keys($codes)));
 
         return \preg_replace("/[`´][{$codes}]/u", '', $string);
@@ -93,7 +100,7 @@ class Sanitize
      */
     public function colorNameSanitize($spaceallowed, string $string, $admin = null): string
     {
-        $colors = \preg_quote(\implode('', $this->getColor()->getColors()));
+        $colors = \preg_quote(\implode('', $this->color->getColors()));
 
         if ($admin && getsetting('allowoddadminrenames', 0))
         {
@@ -174,7 +181,7 @@ class Sanitize
      */
     public function logdnetSanitize(string $string): string
     {
-        $colors = \preg_quote(\implode('', $this->getColor()->getColors()));
+        $colors = \preg_quote(\implode('', $this->color->getColors()));
         // to keep the regexp from boinging this, we need to make sure
         // that we're not replacing in with the ` mark.
         $string = \preg_replace("/[`´](?=[^0{$colors}bicn])/u", \chr(1).\chr(1), $string);
