@@ -13,36 +13,61 @@
 
 namespace Lotgd\Core\Http;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Laminas\View\Helper\HeadTitle;
-use Lotgd\Core\Hook;
-use Lotgd\Core\Pattern;
-use Lotgd\Core\Translator\Translator;
+use Lotgd\Core\EventManager\EventManager;
+Use Lotgd\Core\Hook;
+use Lotgd\Core\Kernel;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
+use Lotgd\Core\Template\Params;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class Response extends HttpResponse
 {
-    use Pattern\Container;
-    use Pattern\Doctrine;
-    use Pattern\HookManager;
-    use Pattern\Http;
-    use Pattern\Template;
-    use Pattern\Translator;
+    protected $translator;
+    protected $doctrine;
+    protected $headTitle;
+    protected $template;
+    protected $request;
+    protected $hookManager;
+    protected $params;
+
+    public function __construct(
+        TranslatorInterface $translator,
+        EntityManagerInterface $doctrine,
+        HeadTitle $headTitle,
+        Environment $template,
+        Request $request,
+        EventManager $hookManager,
+        Params $params
+    ) {
+        $this->translator  = $translator;
+        $this->doctrine    = $doctrine;
+        $this->headTitle   = $headTitle;
+        $this->template    = $template;
+        $this->request     = $request;
+        $this->hookManager = $hookManager;
+        $this->params = $params;
+
+        parent::__construct();
+    }
 
     /**
      * Set title for page.
      */
-    public function pageTitle(string $message, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
+    public function pageTitle(string $message, ?array $parameters = [], string $textDomain = Kernel::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
     {
-        $title     = $this->symfonyTranslator()->trans($message, $parameters, $textDomain, $locale);
-        $headTitle = $this->getService(HeadTitle::class);
+        $title = $this->translator->trans($message, $parameters, $textDomain, $locale);
 
-        $headTitle($title, 'set');
+        $this->headTitle->__invoke($title, 'set');
     }
 
     /**
      * Start page.
      */
-    public function pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Translator::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
+    public function pageStart(?string $title = null, ?array $parameters = [], string $textDomain = Kernel::TEXT_DOMAIN_DEFAULT, ?string $locale = null): void
     {
         global $session;
 
@@ -51,17 +76,17 @@ class Response extends HttpResponse
             $this->pageTitle($title, $parameters, $textDomain, $locale);
         }
 
-        $script = \LotgdRequest::getServer('SCRIPT_NAME');
+        $script = $this->request->getServer('SCRIPT_NAME');
         $script = \substr($script, 0, \strpos($script, '.'));
-        $module = (string) \LotgdRequest::getQuery('module');
+        $module = (string) $this->request->getQuery('module');
 
         $args = ['script' => $script, 'module' => $module];
-        $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
+        $this->hookManager->trigger(Hook::HOOK_EVERY_HEADER, null, $args);
         $args = modulehook('everyheader', $args);
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $this->getHookManager()->trigger(Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
+            $this->hookManager->trigger(Hook::HOOK_EVERY_HEADER_AUTHENTICATED, null, $args);
             modulehook('everyheader-loggedin', $args);
         }
 
@@ -71,8 +96,8 @@ class Response extends HttpResponse
         $sesionPre = $session         ?? [];
         unset($sesionPre['user'], $userPre['password']);
 
-        $this->getTemplate()->addGlobal('userPre', $userPre);
-        $this->getTemplate()->addGlobal('sessionPre', $sesionPre);
+        $this->template->addGlobal('userPre', $userPre);
+        $this->template->addGlobal('sessionPre', $sesionPre);
     }
 
     /**
@@ -136,17 +161,17 @@ class Response extends HttpResponse
     {
         global $session;
 
-        $script = \LotgdRequest::getServer('SCRIPT_NAME');
+        $script = $this->request->getServer('SCRIPT_NAME');
         $script = \substr($script, 0, \strpos($script, '.'));
-        $module = (string) \LotgdRequest::getQuery('module');
+        $module = (string) $this->request->getQuery('module');
 
         $replacementbits = ['script' => $script, '__scriptfile__' => $script, 'module' => $module];
-        $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
+        $this->hookManager->trigger(Hook::HOOK_EVERY_FOOTER, null, $replacementbits);
         $replacementbits = modulehook('everyfooter', $replacementbits);
 
         if ($session['user']['loggedin'] ?? false)
         {
-            $this->getHookManager()->trigger(Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
+            $this->hookManager->trigger(Hook::HOOK_EVERY_FOOTER_AUTHENTICATED, null, $replacementbits);
             $replacementbits = modulehook('everyfooter-loggedin', $replacementbits);
         }
 
@@ -154,8 +179,8 @@ class Response extends HttpResponse
         //output any template part replacements that above hooks need (eg, advertising)º
         foreach ($replacementbits as $key => $val)
         {
-            $content = $this->getTemplateParams()->get($key, '').$val;
-            $this->getTemplateParams()->set($key, $content);
+            $content = $this->params->get($key, '').$val;
+            $this->params->set($key, $content);
         }
 
         $session['user']['name']  = $session['user']['name']  ?? '';
@@ -164,9 +189,9 @@ class Response extends HttpResponse
         //-- START - Check if see or not MoTD
         $lastMotd = new \DateTime('0000-00-00 00:00:00');
 
-        if ($this->getDoctrine()->isConnected())
+        if ($this->doctrine->isConnected())
         {
-            $lastMotd = $this->getDoctrine()->getRepository('LotgdCore:Motd')->getLastMotdDate();
+            $lastMotd = $this->doctrine->getRepository('LotgdCore:Motd')->getLastMotdDate();
         }
         $session['needtoviewmotd'] = $session['needtoviewmotd'] ?? false;
 
@@ -185,20 +210,20 @@ class Response extends HttpResponse
         $sesion = $session         ?? [];
         unset($sesion['user'], $user['password']);
 
-        $this->getTemplateParams()
+        $this->params
             ->set('stats', $charstats) //-- Output character stats
             ->set('content', $this->getContent()) //-- Set content
         ;
         //-- Twig Globals
-        $this->getTemplate()->addGlobal('user', $user); //-- Update user info
-        $this->getTemplate()->addGlobal('session', $sesion); //-- Update session info
+        $this->template->addGlobal('user', $user); //-- Update user info
+        $this->template->addGlobal('session', $sesion); //-- Update session info
 
         //-- output page generation time
         $gentime = \Tracy\Debugger::timer('page_footer');
         $session['user']['gentime'] += $gentime;
         ++$session['user']['gentimecount'];
 
-        $browserOutput = $this->getTemplate()->renderLayout($this->getTemplateParams()->toArray());
+        $browserOutput = $this->template->renderLayout($this->params->toArray());
 
         $session['user']['gensize'] += \strlen($browserOutput);
         $session['output'] = $browserOutput;
@@ -210,16 +235,33 @@ class Response extends HttpResponse
 
         unset($session['output']);
 
-        $this->getDoctrine()->flush();
-        $this->getDoctrine()->clear();
+        $this->doctrine->flush();
+        $this->doctrine->clear();
 
         $this->setContent($browserOutput);
-        $this->prepare(\LotgdRequest::_i()); //-- Fix any incompatibility with the HTTP specification
+        $this->prepare($this->request); //-- Fix any incompatibility with the HTTP specification
 
         //-- Send content to browser
         $this->send();
 
         exit();
+    }
+
+    /**
+     * Send a cookie.
+     *
+     * @param string $name
+     * @param string $value
+     * @param string $duration
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     * @param bool   $httponly
+     */
+    public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
+    {
+        $this->request->cookies->set($name, $value);
+        $this->headers->setCookie(Cookie::create($name, $value, \strtotime($duration), $path, $domain, $secure, $httponly));
     }
 
     /**
