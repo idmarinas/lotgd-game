@@ -24,7 +24,9 @@ services:
             - "../src/core/Exception/"
             - "../src/core/Fixed/"
             - "../src/core/Tests/"
-            - "../src/core/Twig/"
+            - "../src/core/Twig/Node/"
+            - "../src/core/Twig/NodeVisitor/"
+            - "../src/core/Twig/TokenParser/"
             - "../src/core/Application.php"
             - "../src/core/EventManagerAware.php"
             - "../src/core/Hook.php"
@@ -36,7 +38,9 @@ services:
             - "../src/local/Exception/"
             - "../src/local/Fixed/"
             - "../src/local/Tests/"
-            - "../src/local/Twig/"
+            - "../src/local/Twig/Node/"
+            - "../src/local/Twig/NodeVisitor/"
+            - "../src/local/Twig/TokenParser/"
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -190,42 +194,13 @@ services:
             - '@identity_translator'
 
     # Twig extensions
-    Lotgd\Core\Twig\Extension\GameCore:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\FlashMessages:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Motd:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Navigation:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Translator:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Commentary:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Helpers:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\Donation: #-- Twig functions for donation buttons (Paypal buttons)
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\AdvertisingGoogle:
-        tags:
-            - { name: twig.extension }
-    Lotgd\Core\Twig\Extension\ApplyFilter:
-        tags:
-            - { name: twig.extension }
     Marek\Twig\ByteUnitsExtension:
         tags:
             - { name: twig.extension }
+
+    # Template system
     Lotgd\Core\Template\Template:
         decorates: twig
-    lotgd.core.twig.loader:
-        class: Lotgd\Core\Twig\Loader\LotgdFilesystemLoader
+    Lotgd\Core\Twig\Loader\LotgdFilesystemLoader:
         arguments:
             - '@twig.loader.filesystem'
