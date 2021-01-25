@@ -13,17 +13,37 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\Http\Request;
+use Lotgd\Core\Navigation\AccessKeys;
+use Lotgd\Core\Navigation\Navigation as NavigationCore;
+use Lotgd\Core\Output\Format;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\TwigFunction;
 
 class Navigation extends AbstractExtension
 {
     use Pattern\AttributesString;
     use Pattern\Navigation;
-    use PatternCore\Template;
-    use PatternCore\Translator;
-    use PatternCore\Navigation;
 
+    protected $translator;
+    protected $navigation;
+    protected $accessKeys;
+    protected $format;
+    protected $request;
+
+    public function __construct(
+        TranslatorInterface $translator,
+        NavigationCore $navigation,
+        AccessKeys $accessKeys,
+        Format $format,
+        Request $request
+    ) {
+        $this->translator = $translator;
+        $this->navigation = $navigation;
+        $this->accessKeys = $accessKeys;
+        $this->format     = $format;
+        $this->request    = $request;
+    }
 
     /**
      * {@inheritdoc}
@@ -31,10 +51,10 @@ class Navigation extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('navigation_menu', [$this, 'display']),
+            new TwigFunction('navigation_menu', [$this, 'display'], ['needs_environment' => true]),
             new TwigFunction('navigation_create_link', [$this, 'createLink']),
             new TwigFunction('navigation_create_header', [$this, 'createHeader']),
-            new TwigFunction('navigation_pagination', [$this, 'showPagination']),
+            new TwigFunction('navigation_pagination', [$this, 'showPagination'], ['needs_environment' => true]),
         ];
     }
 
