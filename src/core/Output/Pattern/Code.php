@@ -10,7 +10,6 @@ namespace Lotgd\Core\Output\Pattern;
 
 trait Code
 {
-    protected $codes;
     protected $codePatternOpen;
     protected $codePatternClose;
     protected $codeReplacementOpen;
@@ -29,11 +28,6 @@ trait Code
      */
     public function getCodes()
     {
-        if ( ! $this->codes)
-        {
-            $this->codes = $this->getService(\Lotgd\Core\Output\Code::class);
-        }
-
         return $this->codes->getCodes();
     }
 

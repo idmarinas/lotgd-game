@@ -12,7 +12,9 @@
 
 namespace Lotgd\Core\Output;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use \Lotgd\Core\Output\Code;
+use Lotgd\Core\Output\Color;
 
 /**
  * Format a string.
@@ -21,8 +23,10 @@ class Format
 {
     use Pattern\Code;
     use Pattern\Color;
-    use PatternCore\Container;
-    use PatternCore\Translator;
+
+    protected $codes;
+    protected $colors;
+    protected $translator;
 
     /**
      * Style of decimal point.
@@ -37,6 +41,13 @@ class Format
      * @var string
      */
     protected $thousands_sep;
+
+    public function __construct(TranslatorInterface $translator, Code $code, Color $colors)
+    {
+        $this->translator = $translator;
+        $this->code = $code;
+        $this->colors = $colors;
+    }
 
     /**
      * Format a number.
@@ -87,7 +98,7 @@ class Format
 
         if ($nullDate == $indate)
         {
-            return $this->symfonyTranslator()->trans($default, [], 'app_date');
+            return $this->translator->trans($default, [], 'app_date');
         }
 
         $now  = new \DateTime('now');
@@ -128,7 +139,7 @@ class Format
             $message       = "{$sufix}.min";
         }
 
-        return $this->symfonyTranslator()->trans($message, $params, 'app_date');
+        return $this->translator->trans($message, $params, 'app_date');
     }
 
     /**
