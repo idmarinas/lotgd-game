@@ -12,16 +12,19 @@
 
 namespace Lotgd\Core\Pvp;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Lotgd\Core\Pattern as PatternCore;
 
 class Listing
 {
-    use PatternCore\Container;
-    use PatternCore\Doctrine;
-
     protected $repository;
     protected $query;
+
+    public function __construct(EntityManagerInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * Get a list of players available for pvp.
