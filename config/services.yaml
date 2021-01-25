@@ -23,7 +23,6 @@ services:
             - "../src/core/DependencyInjection/"
             - "../src/core/Exception/"
             - "../src/core/Fixed/"
-            - "../src/core/Installer/"
             - "../src/core/Tests/"
             - "../src/core/Twig/"
             - "../src/core/Application.php"
@@ -36,7 +35,6 @@ services:
             - "../src/local/DependencyInjection/"
             - "../src/local/Exception/"
             - "../src/local/Fixed/"
-            - "../src/local/Installer/"
             - "../src/local/Tests/"
             - "../src/local/Twig/"
 
@@ -132,6 +130,10 @@ services:
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
         lazy: true
+        calls:
+            - setDirData: ['%kernel.project_dir%/data/installer']
+    lotgd.core.install:
+        alias: Lotgd\Core\Installer\Install
         public: true
 
     # LoTGD Settings
@@ -182,6 +184,7 @@ services:
     Lotgd\Core\Symfony\Translation\Formatter\MessageFormatter:
         arguments:
             - '@identity_translator'
+
     # Twig extensions
     Lotgd\Core\Twig\Extension\GameCore:
         tags:
