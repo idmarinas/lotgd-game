@@ -14,6 +14,11 @@ namespace Lotgd\Core\Pattern;
 
 use Lotgd\Core\Service\Jaxon as CoreJaxon;
 
+trigger_error(Jaxon::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait Jaxon
 {
     protected $lotgdJaxon;

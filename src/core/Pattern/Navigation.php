@@ -15,6 +15,11 @@ namespace Lotgd\Core\Pattern;
 use Lotgd\Core\Navigation\AccessKeys as CoreAccessKeys;
 use Lotgd\Core\Navigation\Navigation as NavigationCore;
 
+trigger_error(Navigation::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait Navigation
 {
     protected $lotgdNavigation;

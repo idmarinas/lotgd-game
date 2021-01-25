@@ -11,6 +11,11 @@ namespace Lotgd\Core\Pattern;
 use Lotgd\Core\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
 
+trigger_error(Container::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait Container
 {
     protected $lotgdKernel;
