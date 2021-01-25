@@ -67,6 +67,7 @@
         "symfony/form": "5.2.*",
         "symfony/framework-bundle": "5.2.*",
         "symfony/intl": "5.2.*",
+        "symfony/lock": "5.2.*",
         "symfony/mailer": "5.2.*",
         "symfony/options-resolver": "5.2.*",
         "symfony/proxy-manager-bridge": "5.2.*",
