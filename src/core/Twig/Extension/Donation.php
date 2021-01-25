@@ -15,6 +15,7 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Lotgd\Core\Http\Request;
 use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Donation extends AbstractExtension

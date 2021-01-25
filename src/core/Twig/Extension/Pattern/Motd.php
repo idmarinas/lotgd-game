@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 /**
  * Trait to message of the day.
  */
@@ -21,9 +23,9 @@ trait Motd
     /**
      * Get message of the day link.
      */
-    public function messageOfTheDay(): string
+    public function messageOfTheDay(Environment $env): string
     {
-        return $this->getTemplate()->renderBlock('message_of_the_day', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
+        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('message_of_the_day', []);
     }
 
     /**
@@ -31,7 +33,7 @@ trait Motd
      *
      * @param array $params Extra params
      */
-    public function display(array $motd, array $params = []): string
+    public function display(Environment $env, array $motd, array $params = []): string
     {
         global $session;
 
@@ -49,6 +51,6 @@ trait Motd
             $params['motd'] = $this->getMotdRepository()->appendPollResults($motd, $session['user']['acctid'] ?? null);
         }
 
-        return $this->getTemplate()->renderBlock($blockName, "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_motd.html.twig", $params);
+        return $env->load('{theme}/_blocks/_motd.html.twig')->renderBlock($blockName, $params);
     }
 }

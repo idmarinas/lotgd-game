@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 trait CommentaryModerate
 {
     /**
@@ -22,9 +24,9 @@ trait CommentaryModerate
      * @param bool $canAddComment
      * @param int  $limit
      */
-    public function commentaryModerateBlock(array $commentary, string $textDomain): string
+    public function commentaryModerateBlock(Environment $env, array $commentary, string $textDomain): string
     {
-        $paginator = $this->getCommentary()->getCommentsModerate();
+        $paginator = $this->commentary->getCommentsModerate();
 
         $comments = [];
 
@@ -37,10 +39,10 @@ trait CommentaryModerate
             'commentary' => $commentary,
             'textDomain' => $textDomain,
             'comments'   => $comments,
-            'sections'   => $this->getCommentary()->commentaryLocs(),
+            'sections'   => $this->commentary->commentaryLocs(),
             'formUrl'    => $this->commentaryFormUrl(),
         ];
 
-        return $this->getTemplateBlock()->renderBlock('commentary_moderate', $params);
+        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_moderate', $params);
     }
 }

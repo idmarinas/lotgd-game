@@ -22,6 +22,6 @@ trait CharacterFunction
     {
         global $session;
 
-        return $this->getTranslator()->trans('character.racename', [], $session['user']['race']);
+        return $this->translator->trans('character.racename', [], $session['user']['race']);
     }
 }

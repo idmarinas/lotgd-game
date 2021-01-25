@@ -13,8 +13,9 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Lotgd\Core\Http\Request;
+use Lotgd\Core\Output\Color;
 use Lotgd\Core\Output\Commentary as CommentaryCore;
-use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultAddCommentNodeVisitor;
 use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultDomainStatusNodeVisitor;
 use Lotgd\Core\Twig\NodeVisitor\CommentaryDefaultLimitNodeVisitor;
@@ -26,18 +27,19 @@ use Lotgd\Core\Twig\TokenParser\CommentaryDefaultDomainStatusTokenParser;
 use Lotgd\Core\Twig\TokenParser\CommentaryDefaultLimitTokenParser;
 use Lotgd\Core\Twig\TokenParser\CommentaryDefaultPaginationTokenParser;
 use Lotgd\Core\Twig\TokenParser\CommentaryDefaultPaginationUrlTokenParser;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Commentary extends AbstractExtension
 {
     use Pattern\Commentary;
     use Pattern\CommentaryModerate;
-    use PatternCore\Output;
-    use PatternCore\Template;
-    use PatternCore\Translator;
 
     protected $commentary;
     protected $translator;
+    protected $request;
+    protected $color;
     protected $commentaryNodeVisitor;
 
     /**
@@ -47,17 +49,29 @@ class Commentary extends AbstractExtension
      */
     protected $onlineStatus;
 
+    public function __construct(
+        CommentaryCore $commentary,
+        TranslatorInterface $translator,
+        Request $request,
+        Color $color
+    ) {
+        $this->commentary = $commentary;
+        $this->translator = $translator;
+        $this->request    = $request;
+        $this->color      = $color;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new TwigFunction('commentary_block', [$this, 'commentaryBlock']),
-            new TwigFunction('commentary_moderate_block', [$this, 'commentaryModerateBlock']),
-            new TwigFunction('display_one_comment', [$this, 'displayOneComment']),
+            new TwigFunction('commentary_block', [$this, 'commentaryBlock'], ['needs_environment' => true]),
+            new TwigFunction('commentary_moderate_block', [$this, 'commentaryModerateBlock'], ['needs_environment' => true]),
+            new TwigFunction('display_one_comment', [$this, 'displayOneComment'], ['needs_environment' => true]),
             new TwigFunction('display_status_online_player', [$this, 'displayStatusOnlinePlayer']),
-            new TwigFunction('add_comment', [$this, 'addComment']),
+            new TwigFunction('add_comment', [$this, 'addComment'], ['needs_environment' => true]),
             new TwigFunction('save_comment', [$this, 'saveComment']),
         ];
     }
@@ -117,37 +131,10 @@ class Commentary extends AbstractExtension
     }
 
     /**
-     * Get the Commentary instance.
-     */
-    public function getCommentary(): CommentaryCore
-    {
-        if ( ! $this->commentary instanceof CommentaryCore)
-        {
-            $this->commentary = $this->getService(CommentaryCore::class);
-        }
-
-        return $this->commentary;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'commentary';
-    }
-
-    /**
-     * Template block for commentary.
-     * Only load one time.
-     */
-    protected function getTemplateBlock()
-    {
-        if ( ! $this->templateCommentaryBlock)
-        {
-            $this->templateCommentaryBlock = $this->getTemplate()->load('{theme}/_blocks/_commentary.html.twig');
-        }
-
-        return $this->templateCommentaryBlock;
     }
 }

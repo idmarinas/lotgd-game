@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Twig\Extension;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
@@ -55,7 +56,7 @@ class Translator extends AbstractExtension
     {
         //-- Not do nothing if message is empty
         //-- MessageFormatter fail if message is empty
-        if (! $message)
+        if ( ! $message)
         {
             return '';
         }

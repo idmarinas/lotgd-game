@@ -13,16 +13,21 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFunction;
+use LotgdCore\AdvertisingBundle\Provider\AdsenseAdvertising;
 
 class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
 {
-    use PatternCore\Template;
-
     protected $adsGoogle;
     protected $templatePartialsBlock;
+
+    public function __construct(AdsenseAdvertising $adsGoogle)
+    {
+        $this->adsGoogle = $adsGoogle;
+    }
 
     /**
      * {@inheritdoc}
@@ -30,7 +35,7 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
     public function getFunctions()
     {
         return [
-            new TwigFunction('google_ad', [$this, 'showGoogleAd']),
+            new TwigFunction('google_ad', [$this, 'showGoogleAd'], ['needs_environment' => true]),
         ];
     }
 
@@ -47,13 +52,13 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
     /**
      * Show ad of Google.
      */
-    public function showGoogleAd(string $adSlot): string
+    public function showGoogleAd(Environment $env, string $adSlot): string
     {
-        $ad = $this->getAdsenseService()->getSlot($adSlot);
+        $ad = $this->adsGoogle->getSlot($adSlot);
 
         if ($ad)
         {
-            return $this->getTemplateBlock()->renderBlock('ad_wrapper', ['ad_content' => $ad]);
+            return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('ad_wrapper', ['ad_content' => $ad]);
         }
 
         return '';
@@ -64,30 +69,6 @@ class AdvertisingGoogle extends AbstractExtension implements GlobalsInterface
      */
     public function advertisingGoogleIsActived(): bool
     {
-        return $this->getAdsenseService()->isEnabled();
-    }
-
-    protected function getAdsenseService()
-    {
-        if ( ! $this->adsGoogle)
-        {
-            $this->adsGoogle = $this->getService('lotgd_core_advertising.adsense');
-        }
-
-        return $this->adsGoogle;
-    }
-
-    /**
-     * Template block for partials.
-     * Only load one time.
-     */
-    protected function getTemplateBlock()
-    {
-        if ( ! $this->templatePartialsBlock)
-        {
-            $this->templatePartialsBlock = $this->getTemplate()->load('{theme}/_blocks/_partials.html.twig');
-        }
-
-        return $this->templatePartialsBlock;
+        return $this->adsGoogle->isEnabled();
     }
 }

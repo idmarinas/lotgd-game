@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 /**
  * Trait to created user petition link.
  */
@@ -21,15 +23,15 @@ trait Petition
     /**
      * Get user petition link.
      */
-    public function userPetition(): string
+    public function userPetition(Environment $env): string
     {
-        return $this->getTemplate()->renderBlock('user_petition', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", []);
+        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('user_petition', []);
     }
 
     /**
      * Get admin petition links.
      */
-    public function adminPetition(): string
+    public function adminPetition(Environment $env): string
     {
         global $session;
 
@@ -39,11 +41,11 @@ trait Petition
 
         if (isset($session['user']['superuser']) && $canEditPetitions)
         {
-            $petition  = \Doctrine::getRepository(\Lotgd\Core\Entity\Petitions::class);
+            $petition  = $this->doctrine->getRepository(\Lotgd\Core\Entity\Petitions::class);
             $petitions = $petition->getStatusListCount();
         }
 
-        return $this->getTemplate()->renderBlock('admin_petition', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", [
+        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('admin_petition', [
             'canEditPetitions' => $canEditPetitions,
             'canEditUsers'     => $canEditUsers,
             'petitions'        => $petitions,

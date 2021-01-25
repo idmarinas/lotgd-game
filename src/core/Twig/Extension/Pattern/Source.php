@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 /**
  * Trait to created source link.
  */
@@ -21,8 +23,8 @@ trait Source
     /**
      * Get source link.
      */
-    public function gameSource(): string
+    public function gameSource(Environment $env): string
     {
-        return $this->getTemplate()->renderBlock('game_source', '{theme}/_blocks/_buttons.html.twig', []);
+        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('game_source', []);
     }
 }

@@ -13,23 +13,20 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
 use Lotgd\Core\Tool\Sanitize;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
-    use PatternCore\Sanitize;
-
     protected $session;
     protected $sanitize;
 
-    public function __construct(Session $session, Sanitize $sanitize)
+    public function __construct(SessionInterface $session, Sanitize $sanitize)
     {
-        $this->session = $session;
+        $this->session  = $session;
         $this->sanitize = $sanitize;
     }
 

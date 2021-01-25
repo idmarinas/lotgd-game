@@ -62,7 +62,7 @@ trait Navigation
 
         if ( ! $blocked)
         {
-            $label = $this->getAccesskeys()->create($label, $attributes);
+            $label = $this->accessKeys->create($label, $attributes);
         }
 
         if ($blocked)
@@ -169,6 +169,18 @@ trait Navigation
         $pages['href'] = $link;
 
         return $this->renderPagination($env, $template, $pages);
+    }
+
+    /**
+     * Add a link, but not nav.
+     *
+     * @param string $string
+     */
+    public function lotgdUrl(string $link): string
+    {
+        $this->navigation->addNavAllow($link);
+
+        return $link;
     }
 
     /**

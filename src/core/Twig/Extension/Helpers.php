@@ -21,6 +21,7 @@ use Laminas\View\Helper\HeadTitle;
 use Laminas\View\Helper\InlineScript;
 use Laminas\View\Helper\Placeholder\Container\AbstractContainer as Placeholder;
 use Lotgd\Core\Http\Request;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**

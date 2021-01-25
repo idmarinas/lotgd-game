@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
 use Tracy\Debugger;
+use Twig\Environment;
 
 /**
  * Trait to generate page gen time.
@@ -25,11 +26,11 @@ trait PageGen
      *
      * @return string
      */
-    public function gamePageGen()
+    public function gamePageGen(Environment $env)
     {
         global $session;
 
-        return $this->getTemplate()->renderBlock('game_page_gen', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", [
+        return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('game_page_gen', [
             'genTime'          => Debugger::timer('page-generating'),
             'avg'              => ($session['user']['gentime'] / $session['user']['gentimecount']),
             'userGenTime'      => $session['user']['gentime'],
