@@ -13,14 +13,10 @@
 
 namespace Lotgd\Core\Http;
 
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 class Request extends HttpRequest
 {
-    /** @var Response */
-    protected $response;
-
     /**
      * {@inheritdoc}
      */
@@ -40,23 +36,6 @@ class Request extends HttpRequest
     public function getCookie($name, $default = null)
     {
         return $this->cookies->get($name, $default);
-    }
-
-    /**
-     * Send a cookie.
-     *
-     * @param string $name
-     * @param string $value
-     * @param string $duration
-     * @param string $path
-     * @param string $domain
-     * @param bool   $secure
-     * @param bool   $httponly
-     */
-    public function setCookie($name, $value, $duration = '+120 days', $path = '', $domain = '', $secure = true, $httponly = true)
-    {
-        $this->cookies->set($name, $value);
-        $this->response->headers->setCookie(Cookie::create($name, $value, \strtotime($duration), $path, $domain, $secure, $httponly));
     }
 
     /**
@@ -147,13 +126,6 @@ class Request extends HttpRequest
     public function getRequestUri(): string
     {
         return $this->sanitizeUri(parent::getRequestUri());
-    }
-
-    public function setResponse(Response $response): self
-    {
-        $this->response = $response;
-
-        return $this;
     }
 
     /**
