@@ -13,8 +13,6 @@
 namespace Lotgd\Core\Output;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use \Lotgd\Core\Output\Code;
-use Lotgd\Core\Output\Color;
 
 /**
  * Format a string.
@@ -45,8 +43,8 @@ class Format
     public function __construct(TranslatorInterface $translator, Code $code, Color $colors)
     {
         $this->translator = $translator;
-        $this->code = $code;
-        $this->colors = $colors;
+        $this->codes      = $code;
+        $this->colors     = $colors;
     }
 
     /**
