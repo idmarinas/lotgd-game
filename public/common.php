@@ -244,12 +244,12 @@ if ( ! LotgdRequest::getCookie('lgi') || \strlen(LotgdRequest::getCookie('lgi'))
     if ( ! isset($session['user']['uniqueid']) || \strlen($session['user']['uniqueid']) < 32)
     {
         $u = \md5(\microtime());
-        LotgdRequest::setCookie('lgi', $u);
+        LotgdResponse::setCookie('lgi', $u);
         $session['user']['uniqueid'] = $u;
     }
     elseif (isset($session['user']['uniqueid']))
     {
-        LotgdRequest::setCookie('lgi', $session['user']['uniqueid']);
+        LotgdResponse::setCookie('lgi', $session['user']['uniqueid']);
     }
 }
 elseif (LotgdRequest::getCookie('lgi') && '' != LotgdRequest::getCookie('lgi'))
