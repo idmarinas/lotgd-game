@@ -168,6 +168,8 @@ services:
         public: true
         class:   Lotgd\Core\EventManager\Hook
         factory: '@Lotgd\Core\Service\HookManagerFactory'
+    Lotgd\Core\EventManagerAware:
+        alias: Lotgd\Core\EventManager\Hook
     Lotgd\Core\Http\Request:
         public: true
         class:   Lotgd\Core\Http\Request
