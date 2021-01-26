@@ -142,8 +142,6 @@ services:
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
         lazy: true
-        calls:
-            - setDirData: ['%kernel.project_dir%/data/installer']
     lotgd.core.install:
         alias: Lotgd\Core\Installer\Install
         public: true
