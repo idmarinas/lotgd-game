@@ -42,6 +42,10 @@ services:
             - "../src/local/Twig/NodeVisitor/"
             - "../src/local/Twig/TokenParser/"
 
+    Lotgd\Core\Installer\Command\:
+        resource: "../src/core/Installer/Command"
+        tags: ['console.command']
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     # App\Controller\:
