@@ -74,6 +74,19 @@
             "./src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "baaa439e3e3179e69e3da84b671f0a3e4a2f56ad"
+        },
+        "files": [
+            "./config/packages/doctrine_migrations.yaml",
+            "./migrations/.gitignore"
+        ]
+    },
     "doctrine/event-manager": {
         "version": "1.1.1"
     },
@@ -85,6 +98,9 @@
     },
     "doctrine/lexer": {
         "version": "1.2.1"
+    },
+    "doctrine/migrations": {
+        "version": "3.0.2"
     },
     "doctrine/orm": {
         "version": "2.8.1"
@@ -103,6 +119,9 @@
     },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.1"
     },
     "gabrielelana/byte-units": {
         "version": "0.5.0"
@@ -208,9 +227,6 @@
             "./src/Entity/User/Group.php",
             "./src/Entity/User/User.php"
         ]
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
     },
     "paragonie/random_compat": {
         "version": "v9.99.99"
