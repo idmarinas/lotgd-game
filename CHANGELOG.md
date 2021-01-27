@@ -12,15 +12,25 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 ### :cyclone: CHANGES
 
 -   Static class **LotgdTranslator** now get a instance of `Symfony Translator`
+-   `Lotgd\Core\Http\Request` and `Lotgd\Core\Http\Response`
+    -   Move function `setCookie()` from `Request` to `Response`
 
 ### :star: FEATURES
 
--   Nothing
+-   **New installation system**
+    -   Use Symfony Console and commands for run a install and upgrade the game core.
+        -   Game only detect if are installed, not detect if need a upgrade.
+    -   Install game is easy run the follow command: `php bin/console lotgd:install`
+    -   Note: As a Symfony App (50% or so ^_^) you need run commands in terminal from root directory of game. 
+    -   _New installer_ not install modules, you need manual install the bundle.
+        -   Remember that **Old module system** are deprecated and deleted in version 7.0.0
 
 ### :fire: DEPRECATED
 
 -   All static class in **src/core/Fixed/** folder are deprecated. If possible use the services as you would do in a Symfony app.
     -   All these classes will be removed in version 7.0.0.
+-   All pattern class in **src/core/Pattern/** folder are deprecated. If possible use Dependency Injection.
+    -   All these patterns will be removed in version 7.0.0.
 -   **Old module system** are deprecated and deleted in version 7.0.0
     -   Use a Symfony Bundle type module when you can.
         -   You can see a little example of Bundle in `lib/AdvertisingBundle` and you can search for the web.
@@ -55,7 +65,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
             -   `tmf` use  `mf` (this funcion not translate only is a formatter)
         -   Removed token `{% translate_default_domain 'foobar' %}` use `{% trans_default_domain 'foobar'%}`
     -   **Core Extension**
-        -   Remove function `page_title()` use `head_title()` instead.
+        -   Removed function `{{ page_title() }}` use `{{ head_title() }}` instead.
+        -   Removed function `{{ include_layout() }}`
+        -   Removed function `{{ include_theme() }}`
+        -   Removed function `{{ include_module() }}`
 -   Removed cronjob `cronjob/cacheoptimize.php`
 -   Removed deprecated function of `lib/datetime.php` file:
     -   `reltime()` use `LotgdFormat::relativedate($indate, $default)` instead
@@ -76,9 +89,16 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
     -   `translator_uri()`
     -   `translator_page()`
     -   `comscroll_sanitize()`
+-   Removed Jaxon command `src/ajax/core/Cache.php` 
+-   Removed entity `src/core/Entity/Nastywords.php` not in use
+-   **BC** :warning: Tables deleted:
+    -   `translations` and `untranslated` not in use, use new translation system
+    -   `nastywords` not in use, use new Censor system `Lotgd\Core\Output\Censor` can get as service
 
 ### :notebook: NOTES
 
+-   **Notes**:
+    -   :warning: Since version 5.0.0 Installer is only via terminal (command: `php bin/console lotgd:install`)
 -   **Upgrade/Install for version 4.9.0 and up**
     -   First, upload files to your server (production compilation):
     -   Second, empty cache:

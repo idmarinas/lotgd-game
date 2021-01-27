@@ -223,7 +223,7 @@ Visit **_V3_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Remove factory `Laminas\View\Helper\BasePath` no need.
 -   Remove factory `Lotgd\Core\Lib\Settings` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Lib\Settings')`
 -   Remove factory `Lotgd\Core\Output\Format` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
--   Remove factory `Lotgd\Core\Output\Censor` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Format')`
+-   Remove factory `Lotgd\Core\Output\Censor` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Censor')`
 -   Remove factory `Lotgd\Core\Pvp\Listing` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Pvp\Listing')`
 -   Remove factory `Lotgd\Core\Output\Commentary` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Output\Commentary')`
 -   Remove factory `Lotgd\Core\Navigation\AccessKeys` use service instead. Example: `LotgdKernel::get('Lotgd\Core\Navigation\AccessKeys')`
