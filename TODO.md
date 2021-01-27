@@ -7,6 +7,8 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto (5.0.0)
+-   Crear el comando para crear usuarios (principalmente por el administrador) sólo permitirá crear un usuario administrador
+    -   Al finalizar la instalación dar el aviso para crear usuario.
 -   El eliminar el uso de: Lotgd\Core\Validator\Db
     -   Encontrado en `lib/clan/applicant_new.php`
 -   Un nuevo sistema de instalación por consola.
