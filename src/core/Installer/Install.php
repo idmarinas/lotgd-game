@@ -8,359 +8,123 @@
  * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
  *
- * @since 4.0.0
+ * @since 5.0.0
  */
 
 namespace Lotgd\Core\Installer;
 
-use Doctrine\ORM\Tools\SchemaTool;
-use Laminas\Db\ResultSet\HydratingResultSet;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use Symfony\Component\Finder\Finder;
+use Lotgd\Core\Entity\Settings as EntitySettings;
+use Lotgd\Core\Kernel;
+use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * Script to install and update game.
- */
-class Install
+class Install extends InstallerAbstract
 {
-    use \Lotgd\Core\Pattern\Container;
-    use Pattern\CanInstall;
-    use Pattern\Modules;
-    use Pattern\Progress;
-    use Pattern\Upgrade;
+    use Pattern\CheckInstallation;
     use Pattern\Version;
 
-    public const TRANSLATOR_DOMAIN = 'app_installer';
-    public const DATA_DIR_INSTALL  = __DIR__.'/data/install';
+    protected $installedVersionData;
+    protected $installedVersionDataFile;
 
     /**
-     * Make a upgrade install, avoid in clean install.
-     *
-     * @param int $version Is the actual version installed
+     * Determine the installed version.
      */
-    public function makeUpgradeInstall(int $version): array
+    public function getVersionInstalled(): int
     {
-        $messages = [];
-        $version  = $this->getNextVersion($version); //-- Start with the next version
-        $doctrine = $this->getService('doctrine.orm.entity_manager');
+        $this->installedVersionDataFile = $this->getDirData().'/installed_version_data.data';
 
-        //-- It is a clean installation not do nothing
-        if ( ! $this->isUpgrade())
+        if (\is_file($this->installedVersionDataFile))
         {
-            $messages[] = \LotgdTranslator::t('upgrade.nothing', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
+            $this->installedVersionData = \file_get_contents($this->installedVersionDataFile);
         }
 
+        if ($this->installedVersionData)
+        {
+            return $this->installedVersionData;
+        }
+
+        //-- Check in version 5.0.0 and up
         try
         {
-            do
-            {
-                $class = "Lotgd\Core\Installer\Upgrade\Version_{$version}\Upgrade";
+            $repo = $this->doctrine->getRepository(EntitySettings::class);
+            $version = $repo->findOneBy(['setting' => 'installer_version_id']);
 
-                //-- Check all versions of the current version and make sure that it has not already been updated.
-                if ( ! \class_exists($class) || $this->isUpgradedVersion($version))
-                {
-                    $version = $this->getNextVersion($version);
-
-                    continue;
-                }
-
-                $upgrade = new $class();
-                $upgrade->setDoctrine($doctrine);
-
-                $step   = 0;
-                $result = true;
-
-                do
-                {
-                    $result = $upgrade->{"step{$step}"}();
-
-                    ++$step;
-                } while ($result && \method_exists($upgrade, "step{$step}"));
-
-                //-- Get all messages for this upgrade
-                $messages = \array_merge($messages, $upgrade->getMessages());
-
-                $this->upgradedVersionOn($version);
-                $version = $this->getNextVersion($version);
-            } while ($version > 0 && ! $this->isUpgradedVersion($version));
+            $versionInstalled = (int) $version->getValue();
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
-            $messages[] = \LotgdTranslator::t('upgrade.error', [], self::TRANSLATOR_DOMAIN);
-            $messages[] = $th->getMessage();
+            //-- No version installed is a new install
+            $versionInstalled = 0;
         }
 
-        return $messages;
-    }
-
-    /**
-     * Synchronize the tables in the database.
-     */
-    public function makeSynchronizationTables(): array
-    {
-        //-- Prepare for updating core tables
-        $doctrine   = $this->getService('doctrine.orm.entity_manager');
-        $classes    = $doctrine->getMetadataFactory()->getAllMetadata();
-        $schemaTool = new SchemaTool($doctrine);
-        $sqls       = $schemaTool->getUpdateSchemaSql($classes, true);
-
-        $messages = [\LotgdTranslator::t('synchronizationTables.nothing', [], self::TRANSLATOR_DOMAIN)];
-
-        if (\count($sqls))
+        //-- Check for installations 4.12.0 and down.
+        if ( ! $versionInstalled)
         {
-            $messages   = [];
-            $messages[] = \LotgdTranslator::t('synchronizationTables.title', [], self::TRANSLATOR_DOMAIN);
-
-            $schemaTool->updateSchema($classes, true);
-
-            $messages[] = \LotgdTranslator::t('synchronizationTables.schema', ['count' => \count($sqls)], self::TRANSLATOR_DOMAIN);
-            $messages[] = \LotgdTranslator::t('synchronizationTables.proxy', ['classes' => $doctrine->getProxyFactory()->generateProxyClasses($classes)], self::TRANSLATOR_DOMAIN);
-        }
-
-        return $messages;
-    }
-
-    /**
-     * Insert data of a clean/upgrade install.
-     */
-    public function makeInsertData(): array
-    {
-        $messages = [];
-
-        //-- It is a upgrade installation not insert data
-        if ($this->isUpgrade())
-        {
-            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
-        //-- Insert data of clean install
-        $messages = $this->makeInsertDataOfClean();
-        //-- Insert data of upgrade installs
-        $messagesUpgrade = $this->makeInsertDataOfUpdates();
-
-        return \array_merge($messages, $messagesUpgrade);
-    }
-
-    /**
-     * Install the selected modules.
-     */
-    public function makeInstallOfModules(): array
-    {
-        $messages = [];
-
-        if ($this->skipModules())
-        {
-            $messages[] = \LotgdTranslator::t('installOfModules.skipped', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
-        $modules = $this->getModules();
-        \reset($modules);
-
-        if ( ! \count($modules))
-        {
-            $messages[] = '`QNot modules found to process.`0`n';
-
-            return $messages;
-        }
-
-        foreach ($modules as $modulename => $options)
-        {
-            $ops = \explode(',', $options);
-            \reset($ops);
-
-            foreach ($ops as $op)
+            try
             {
-                $this->moduleProcess($op, $modulename, $messages);
+                $repo = $this->doctrine->getRepository(EntitySettings::class);
+                $version = $repo->findOneBy(['setting' => 'installer_version']);
+
+                $versionInstalled = $this->getIntVersion($version->getValue());
+            }
+            catch (\Throwable $th)
+            {
+                //-- No version installed is a new install
+                $versionInstalled = 0;
             }
         }
 
-        return $messages;
+        $versions = $this->getInstallerVersions();
+
+        $this->installedVersionData = $versions[\array_search($versionInstalled, $versions)] ?? -2;
+
+        return $this->installedVersionData;
     }
 
     /**
-     * Process with the module.
-     *
-     * @param string $type
-     * @param string $modulename
-     * @param array  $messages
+     * Get an array with versions that need install.
      */
-    protected function moduleProcess($type, $modulename, &$messages)
+    public function getVersionsToInstall(int $fromVersion, int $toVersion): array
     {
-        switch ($type)
+        return \array_filter($this->getInstallerVersions(), function ($version) use ($fromVersion, $toVersion)
         {
-            case 'uninstall':
-                $result     = uninstall_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.uninstall', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
-            break;
-            case 'install':
-                $result     = install_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.install', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
-            break;
-            case 'activate':
-                $result     = activate_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.activate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
-            break;
-            case 'deactivate':
-                $result     = deactivate_module($modulename);
-                $messages[] = \LotgdTranslator::t('installOfModules.process.deactivate', ['module' => $modulename, 'result' => $result], self::TRANSLATOR_DOMAIN);
-            break;
-            case 'donothing':
-                $messages[] = \LotgdTranslator::t('installOfModules.process.donothing', ['module' => $modulename], self::TRANSLATOR_DOMAIN);
-            break;
-            default: break;
-        }
+            return (bool) ($version > $fromVersion && $version <= $toVersion || -1 == $fromVersion);
+        });
     }
 
-    /**
-     * Insert data of clean install.
-     */
-    protected function makeInsertDataOfClean(): array
+    public function start(): bool
     {
-        //-- Data inserted, not need inserted other time
-        if ($this->dataInserted())
-        {
-            $messages[] = \LotgdTranslator::t('insertData.dataInserted', [], self::TRANSLATOR_DOMAIN);
+        $this->getVersionInstalled();
 
-            return $messages;
-        }
+        return true;
+    }
 
-        $messages = [];
+    public function finish(): bool
+    {
+        //-- Save installation version in file
+        (new Filesystem())->dumpFile($this->installedVersionDataFile, Kernel::VERSION_ID);
 
-        $finder = new Finder();
-
-        $files = $finder->files()->in(self::DATA_DIR_INSTALL);
-
-        if (0 == \count($files))
-        {
-            $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
+        //-- Save installation version in Data Base
         try
         {
-            $this->insertDataByFiles(\iterator_to_array($files), $messages);
-            $this->dataInsertedOn();
+            $versionId = new EntitySettings();
+            $version = new EntitySettings();
+
+            $versionId->setSetting('installer_version_id')
+                ->setValue(Kernel::VERSION_ID)
+            ;
+            $version->setSetting('installer_version')
+                ->setValue(Kernel::VERSION)
+            ;
+
+            $this->doctrine->persist($versionId);
+            $this->doctrine->persist($version);
+            $this->doctrine->flush();
         }
         catch (\Throwable $th)
         {
-            \Tracy\Debugger::log($th);
-            $this->dataInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
-            $messages[] = $th->getMessage();
+            //-- No need capture
         }
 
-        return $messages;
-    }
-
-    /**
-     * Insert data of updates.
-     */
-    protected function makeInsertDataOfUpdates(): array
-    {
-        //-- Data inserted not need inserted other time
-        if ($this->dataUpgradesInserted())
-        {
-            $messages[] = \LotgdTranslator::t('insertData.dataInsertedUpgrade', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
-        $messages = [];
-
-        $files = \glob(UpgradeAbstract::DATA_DIR_UPDATE.'/**/*.json');
-
-        if (0 == \count($files))
-        {
-            $this->dataUpgradesInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.noFiles', [], self::TRANSLATOR_DOMAIN);
-
-            return $messages;
-        }
-
-        try
-        {
-            $this->insertDataByFiles($files, $messages);
-            $this->dataUpgradesInsertedOn();
-        }
-        catch (\Throwable $th)
-        {
-            \Tracy\Debugger::log($th);
-            $this->dataUpgradesInsertedOff();
-            $messages[] = \LotgdTranslator::t('insertData.error', [], self::TRANSLATOR_DOMAIN);
-            $messages[] = $th->getMessage();
-        }
-
-        return $messages;
-    }
-
-    /**
-     * Proccess files.
-     */
-    private function insertDataByFiles(array $files, array &$messages)
-    {
-        global $session;
-
-        $doctrine = $this->getService('doctrine.orm.entity_manager');
-        $hydrator = new ClassMethodsHydrator();
-
-        $session['installer']['insert_data_by_files'] = $session['installer']['insert_data_by_files'] ?? [];
-
-        foreach ($files as $file)
-        {
-            $file = (string) $file;
-
-            //-- Check if data are inserted/processed
-            if (isset($session['installer']['insert_data_by_files'][$file]) && $session['installer']['insert_data_by_files'][$file])
-            {
-                continue;
-            }
-
-            $data     = \json_decode(\file_get_contents($file), true);
-            $entities = new HydratingResultSet(new ClassMethodsHydrator(), new $data['entity']());
-            $entities->initialize($data['rows']);
-
-            foreach ($entities as $entity)
-            {
-                //-- Updated entity
-                if ('update-by-id' == $data['method'])
-                {
-                    $managed = $doctrine->find($data['entity'], $entity->getId());
-                    $entity  = $hydrator->hydrate($hydrator->extract($entity), $managed);
-                }
-                //-- Updated entity by field
-                elseif (0 === \strpos($data['method'], 'update-by-field-'))
-                {
-                    $field      = \substr($data['method'], 16);
-                    $repository = $doctrine->getRepository($data['entity']);
-                    $managed    = $repository->findOneBy([$field => $entity->{'get'.\ucfirst($field)}()]);
-                    $entity     = $hydrator->hydrate($hydrator->extract($entity), $managed);
-                }
-
-                $doctrine->merge($entity);
-            }
-
-            if ('insert' == $data['method'])
-            {
-                $messages[] = \LotgdTranslator::t('insertData.data.insert', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-            }
-            elseif (0 === \strpos($data['method'], 'update-by-') || 'update' == $data['method'] || 'replace' == $data['method'])
-            {
-                $messages[] = \LotgdTranslator::t('insertData.data.update', ['count' => \count($data['rows']), 'table' => $data['table']], self::TRANSLATOR_DOMAIN);
-            }
-
-            $doctrine->flush();
-
-            //-- Mark file as inserted
-            $session['installer']['insert_data_by_files'][$file] = true;
-        }
+        return true;
     }
 }
