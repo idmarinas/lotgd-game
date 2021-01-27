@@ -24,10 +24,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class InstallerAbstract
 {
     public const TRANSLATOR_DOMAIN           = 'app_installer';
-    public const TRANSLATOR_KEY_TABLE_RENAME = 'upgrade.version.table.rename';
-    public const TRANSLATOR_KEY_TABLE_CREATE = 'upgrade.version.table.create';
-    public const TRANSLATOR_KEY_TABLE_IMPORT = 'upgrade.version.table.import';
-    public const TRANSLATOR_KEY_TABLE_DELETE = 'upgrade.version.table.delete';
 
     protected $totaSteps;
     protected $style;
