@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210127115800 extends AbstractMigration
+final class Version20210127183022 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -54,7 +54,6 @@ final class Version20210127115800 extends AbstractMigration
         $this->addSql('CREATE TABLE motd (motditem INT UNSIGNED AUTO_INCREMENT NOT NULL, motdtitle VARCHAR(200) DEFAULT NULL, motdbody TEXT NOT NULL, motddate DATETIME DEFAULT \'0000-00-00 00:00:00\', motdtype TINYINT(1) DEFAULT \'0\' NOT NULL, motdauthor INT UNSIGNED DEFAULT 0 NOT NULL, PRIMARY KEY(motditem)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mounts (mountid INT UNSIGNED AUTO_INCREMENT NOT NULL, mountname VARCHAR(50) NOT NULL, mountdesc TEXT DEFAULT NULL, mountcategory VARCHAR(50) NOT NULL, mountbuff LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', mountcostgems INT UNSIGNED DEFAULT 0 NOT NULL, mountcostgold INT UNSIGNED DEFAULT 0 NOT NULL, mountactive TINYINT(1) DEFAULT \'1\' NOT NULL, mountforestfights INT DEFAULT 0 NOT NULL, newday TEXT NOT NULL, recharge TEXT NOT NULL, partrecharge TEXT NOT NULL, mountfeedcost INT UNSIGNED DEFAULT 20 NOT NULL, mountlocation VARCHAR(25) DEFAULT \'all\' NOT NULL, mountdkcost INT UNSIGNED DEFAULT 0 NOT NULL, PRIMARY KEY(mountid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mounts_translation (id INT UNSIGNED AUTO_INCREMENT NOT NULL, object_id INT UNSIGNED DEFAULT NULL, content LONGTEXT DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, locale VARCHAR(8) NOT NULL, field VARCHAR(32) NOT NULL, INDEX IDX_A992825E232D562B (object_id), UNIQUE INDEX lookup_unique_idx (locale, object_id, field), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE nastywords (type VARCHAR(10) NOT NULL, words TEXT DEFAULT NULL, PRIMARY KEY(type)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE news (id INT UNSIGNED AUTO_INCREMENT NOT NULL, date DATE DEFAULT \'0000-00-00\' NOT NULL, text TEXT NOT NULL, account_id INT UNSIGNED NOT NULL, arguments LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', new_format TINYINT(1) DEFAULT \'1\' NOT NULL, text_domain VARCHAR(255) DEFAULT \'partial_news\' NOT NULL, INDEX account_id (account_id), INDEX date (date), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE paylog (payid INT UNSIGNED AUTO_INCREMENT NOT NULL, info LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', response TEXT NOT NULL, txnid VARCHAR(32) NOT NULL, amount DOUBLE PRECISION NOT NULL, name VARCHAR(50) NOT NULL, acctid INT UNSIGNED NOT NULL, processed TINYINT(1) NOT NULL, filed TINYINT(1) NOT NULL, txfee DOUBLE PRECISION NOT NULL, processdate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, INDEX txnid (txnid), PRIMARY KEY(payid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE petitions (petitionid INT UNSIGNED AUTO_INCREMENT NOT NULL, author INT UNSIGNED NOT NULL, date DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, status SMALLINT UNSIGNED NOT NULL, body LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', pageinfo LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', closedate DATETIME DEFAULT \'0000-00-00 00:00:00\' NOT NULL, closeuserid INT UNSIGNED NOT NULL, ip VARCHAR(40) NOT NULL, id VARCHAR(32) NOT NULL, PRIMARY KEY(petitionid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB');
@@ -123,7 +122,6 @@ final class Version20210127115800 extends AbstractMigration
         $this->addSql('DROP TABLE motd');
         $this->addSql('DROP TABLE mounts');
         $this->addSql('DROP TABLE mounts_translation');
-        $this->addSql('DROP TABLE nastywords');
         $this->addSql('DROP TABLE news');
         $this->addSql('DROP TABLE paylog');
         $this->addSql('DROP TABLE petitions');
