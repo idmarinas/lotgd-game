@@ -1,0 +1,13 @@
+user.create:
+    question:
+        login: 'Login and character name: '
+        login.exists: This login is already in use
+        email: 'Email address for account (can omit): '
+        email.exists: This email is already in use
+        password:
+            one: 'Enter password for account: '
+            two: 'Reenter password for confirm: '
+            not.match: Passwords do not match
+        is.admin: 'Is account an administrador? (default is no): '
+    success: Account created succesfully
+    fail: Create of account failed
