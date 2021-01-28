@@ -18,7 +18,9 @@ installer:
             install: 'Installation of LoTGD Core is aborted.'
             command: 'Installation for version "{version}" has been fail'
             database: 'Migration of Data Basa has been fail or canceled.'
-        create.user: Remember to create the administrator user from the user creation command
+        user:
+            create: Create the administrator user
+            info: When asked if the account is an administrator, select 1 to create an account as administrator.
     progressbar:
         install:
             label: Installing LoTGD Core installation
