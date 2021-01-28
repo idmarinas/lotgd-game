@@ -156,6 +156,15 @@ final class LotgdInstallCommand extends Command
         $installerBar->finish(); //-- Ensures that the progress bar is at 100%
 
         $style->newLine();
+        $style->newLine();
+        $style->newLine();
+
+        $style->title($this->translator->trans('installer.installation.user.create', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+        $style->info($this->translator->trans('installer.installation.user.info', [], InstallerAbstract::TRANSLATOR_DOMAIN));
+
+        //-- Create user admin
+        $command = $this->getApplication()->find('lotgd:user:create');
+        $command->run($input, $output);
 
         return Command::SUCCESS;
     }
