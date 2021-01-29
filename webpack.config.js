@@ -75,7 +75,7 @@ Encore
 
     .configureBabel(config =>
     {
-        config.plugins.push('@babel/plugin-proposal-class-properties');
+        config.plugins.push('@babel/plugin-proposal-class-properties')
     })
 
     // enables @babel/preset-env polyfills
@@ -96,12 +96,6 @@ Encore
     .enableLessLoader()
     // autoprefixer
     .enablePostCssLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment if you use React
-    //.enableReactPreset()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
