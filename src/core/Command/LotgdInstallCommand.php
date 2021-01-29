@@ -26,6 +26,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -96,14 +97,13 @@ final class LotgdInstallCommand extends Command
         $helper      = $this->getHelper('question');
         $nameVersion = $this->installer->getNameVersion($fromVersion);
         $type        = 'Clean Install' == $nameVersion ? 'clean' : 'version';
-        $question    = new ChoiceQuestion(
+        $question = new ConfirmationQuestion(
             $this->translator->trans("installer.check.installation.verify.{$type}", ['version' => $nameVersion], InstallerAbstract::TRANSLATOR_DOMAIN),
-            ['No', 'Yes'],
-            0
+            false
         );
 
         //-- If is incorrect ask to select installed version
-        if ('No' == $helper->ask($input, $output, $question))
+        if (! $helper->ask($input, $output, $question))
         {
             $versions = $this->installer->getInstallerVersions();
 

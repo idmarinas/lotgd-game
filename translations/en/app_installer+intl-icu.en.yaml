@@ -2,10 +2,10 @@ installer:
     command.running: 'The command "{name}" is already running in another process.'
     check.installation:
         verify:
-            version: 'We detect "{version}" installed in server. Is correct? (defaults is No)'
-            clean: 'We detect that is a new install or not version is detected. Is correct? (defaults is No)'
+            version: 'We detect "{version}" installed in server. Is correct? (defaults is No): '
+            clean: 'We detect that is a new install or not version is detected. Is correct? (defaults is No): '
         version:
-            choice: 'Please select version installed in your server: (defaults is new install)'
+            choice: 'Please select version installed in your server: (defaults is new install): '
             invalid: 'We have detected that the version from "{from}" or the version to "{to}" are not valid (one or both).'
             same: 'You cannot install, you try to install the same version that is already installed'
             less:
