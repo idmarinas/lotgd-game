@@ -81,4 +81,21 @@ class Version50000 extends InstallerAbstract
 
         return true;
     }
+
+    //-- Delete old cache folder
+    public function step4()
+    {
+        $fs = new Filesystem();
+
+        try
+        {
+            $fs->remove($this->getProjectDir().'/storage/cache/');
+        }
+        catch (\Throwable $th)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
