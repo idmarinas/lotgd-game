@@ -130,6 +130,8 @@ services:
             - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
     Lotgd\Core\Service\Censor:
         lazy: true
+        arguments:
+            - '%kernel.default_locale%'
     Lotgd\Core\Output\Censor:
         alias: Lotgd\Core\Service\Censor
         public: true
