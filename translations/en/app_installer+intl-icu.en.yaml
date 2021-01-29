@@ -1,5 +1,12 @@
 installer:
     command.running: 'The command "{name}" is already running in another process.'
+    license:
+        read: |
+            Before continuing, you must read and understand the following license agreement.
+            By continuing with this installation, you indicate your agreement with the terms of the license found on the next link.
+        question: 'Agree this license? (default is no): '
+        reject: 'Installation cancelled, license rejected.'
+        confirmation: 'By using this software, you indicate your agreement to the license terms found on the previous link.'
     check.installation:
         verify:
             version: 'We detect "{version}" installed in server. Is correct? (defaults is No): '

@@ -74,6 +74,32 @@ final class LotgdInstallCommand extends Command
             return Command::SUCCESS;
         }
 
+        $output->writeln('');
+        $output->writeln('<fg=green>'.$this->banner().'</>');
+        $output->writeln('');
+
+        $text = $this->translator->trans('installer.license.read', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $output->writeln("<info>{$text}</>");
+        $output->writeln('<href=http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode>http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode</>');
+
+        $helper   = $this->getHelper('question');
+        $question = new ConfirmationQuestion($this->translator->trans('installer.license.question', [], InstallerAbstract::TRANSLATOR_DOMAIN), false);
+
+        $output->writeln('');
+        if ( ! $helper->ask($input, $output, $question))
+        {
+            $text = $this->translator->trans('installer.license.reject', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+            $output->writeln("<error>{$text}</>");
+
+            return Command::SUCCESS;
+        }
+
+        $text = $this->translator->trans('installer.license.confirmation', [], InstallerAbstract::TRANSLATOR_DOMAIN);
+        $output->writeln('');
+        $output->writeln("<comment>{$text}</>");
+
+        unset($text);
+
         return $this->doExecute($input, $output);
     }
 
@@ -83,6 +109,7 @@ final class LotgdInstallCommand extends Command
         $app    = $this->getApplication();
         $kernel = $app->getKernel();
         $style  = new SymfonyStyle($input, $output);
+        $style->newLine();
 
         //-- Configure installer
         $this->installer->configureConsole($input, $output);
@@ -97,13 +124,13 @@ final class LotgdInstallCommand extends Command
         $helper      = $this->getHelper('question');
         $nameVersion = $this->installer->getNameVersion($fromVersion);
         $type        = 'Clean Install' == $nameVersion ? 'clean' : 'version';
-        $question = new ConfirmationQuestion(
+        $question    = new ConfirmationQuestion(
             $this->translator->trans("installer.check.installation.verify.{$type}", ['version' => $nameVersion], InstallerAbstract::TRANSLATOR_DOMAIN),
             false
         );
 
         //-- If is incorrect ask to select installed version
-        if (! $helper->ask($input, $output, $question))
+        if ( ! $helper->ask($input, $output, $question))
         {
             $versions = $this->installer->getInstallerVersions();
 
@@ -269,5 +296,20 @@ final class LotgdInstallCommand extends Command
         $installerBar->setProgressCharacter("\033[32m-\033[0m");
 
         return $installerBar;
+    }
+
+    /**
+     * Beautiful banner ^_^.
+     */
+    private function banner(): string
+    {
+        return '
+██╗      ██████╗ ████████╗ ██████╗ ██████╗      ██████╗ ██████╗ ██████╗ ███████╗
+██║     ██╔═══██╗╚══██╔══╝██╔════╝ ██╔══██╗    ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+██║     ██║   ██║   ██║   ██║  ███╗██║  ██║    ██║     ██║   ██║██████╔╝█████╗
+██║     ██║   ██║   ██║   ██║   ██║██║  ██║    ██║     ██║   ██║██╔══██╗██╔══╝
+███████╗╚██████╔╝   ██║   ╚██████╔╝██████╔╝    ╚██████╗╚██████╔╝██║  ██║███████╗
+╚══════╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═════╝      ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝'
+        ;
     }
 }
