@@ -12,14 +12,21 @@
 
 namespace Lotgd\Core\Output;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Filter;
 use Lotgd\Core\Entity as LotgdEntity;
+use Lotgd\Core\Entity\Commentary as EntityCommentary;
 use Lotgd\Core\EntityRepository\CommentaryRepository;
-use Lotgd\Core\Pattern;
+use Lotgd\Core\EventManager\EventManager;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Commentary
 {
-    use Pattern\LotgdCore;
+    public const TEXT_DOMAIN = 'app_commentary';
 
     /**
      * Repository of commentary.
@@ -27,6 +34,31 @@ class Commentary
      * @var CommentaryRepository
      */
     protected $repository;
+    protected $translator;
+    protected $cache;
+    protected $censor;
+    protected $hook;
+    protected $flashBag;
+    protected $doctrine;
+    protected $normalizer;
+
+    public function __construct(
+        TranslatorInterface $translator,
+        CacheInterface $appCache,
+        Censor $censor,
+        EventManager $hook,
+        FlashBagInterface $flashBag,
+        EntityManagerInterface $doctrine,
+        DenormalizerInterface $normalizer
+    ) {
+        $this->translator = $translator;
+        $this->cache      = $appCache;
+        $this->censor     = $censor;
+        $this->hook       = $hook;
+        $this->flashBag   = $flashBag;
+        $this->doctrine   = $doctrine;
+        $this->normalizer = $normalizer;
+    }
 
     /**
      * Get comments in the section.
@@ -81,22 +113,19 @@ class Commentary
         //-- Add data of clan
         if ($session['user']['clanid'] && $session['user']['clanrank'])
         {
-            $cache = \LotgdKernel::get('cache.app');
-            $item  = $cache->getItem("commentary-claninfo-{$session['user']['clanid']}");
-
-            if ( ! $item->isHit())
+            $clanInfo = $this->cache->get("commentary-claninfo-{$session['user']['clanid']}", function (ItemInterface $item) use ($session)
             {
-                $clanRep  = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
+                $item->expiresAt(new \DateTime('tomorrow'));
+
+                /** @var Entity\Core\EntityRepository\ClanRepository */
+                $clanRep = $this->doctrine->getRepository(\Lotgd\Core\Entity\Clans::class);
                 $clanInfo = $clanRep->findOneBy(['clanid' => $session['user']['clanid']]);
                 $clanInfo = $clanRep->extractEntity($clanInfo);
 
                 $clanInfo['clanrank'] = $session['user']['clanrank'];
 
-                $item->set($clanInfo);
-                $cache->save($clanInfo);
-            }
-
-            $clanInfo = $item->get();
+                return $clanInfo;
+            });
 
             $post['clanId']        = $session['user']['clanid'];
             $post['clanRank']      = $session['user']['clanrank'];
@@ -108,13 +137,12 @@ class Commentary
         $post['authorName'] = $session['user']['name'];
 
         //-- Apply profanity filter
-        $censor               = $this->getCensor();
-        $post['comment']      = $censor->filter($post['comment']);
-        $post['commentOri']   = $censor->getOrigString();
-        $post['commentMatch'] = $censor->getMatchWords();
+        $post['comment']      = $this->censor->filter($post['comment']);
+        $post['commentOri']   = $this->censor->getOrigString();
+        $post['commentMatch'] = $this->censor->getMatchWords();
 
         $args = ['data' => $post];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT_POST, null, $args);
+        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT_POST, null, $args);
         $args = modulehook('postcomment', $args);
 
         //-- A module tells us to ignore this comment, so we will
@@ -137,7 +165,7 @@ class Commentary
     {
         if ( ! $this->repository instanceof CommentaryRepository)
         {
-            $this->repository = $this->getDoctrineRepository(LotgdEntity\Commentary::class);
+            $this->repository = $this->doctrine->getRepository(LotgdEntity\Commentary::class);
         }
 
         return $this->repository;
@@ -189,7 +217,7 @@ class Commentary
 
         //-- Process additional commands
         $args = ['command' => $command, 'section' => $data['section'], 'data' => &$data];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMANDS, null, $args);
+        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMANDS, null, $args);
         $returnedHook = modulehook('commentary-command', $args);
 
         $processed = true;
@@ -199,7 +227,7 @@ class Commentary
             //if for some reason you're going to involve a command that can be a mix of upper and lower case, set $args['skipCommand'] and $args['ignore'] to true and handle it in postcomment instead.
             if (isset($returnedHook['processed']) && ! $returnedHook['processed'])
             {
-                \LotgdFlashMessages::addInfoMessage(\LotgdFormat::colorize("`c`b`JCommand Not Recognized´b`0`nWhen you type in ALL CAPS, the game doesn't think you're talking to other players; it thinks you're trying to perform an action within the game.  For example, typing `#GREM`0 will remove the last comment you posted, as long as you posted it less than two minutes ago.  Typing `#AFK`0 or `#BRB`0 will turn your online status bar grey, so that people know you're `#A`0way `#F`0rom the `#K`0eyboard (or, if you prefer, that you'll `#B`0e `#R`0ight `#B`0ack).  Typing `#DNI`0 will let other players know that you're busy talking to one particular player - maybe somewhere off-camera - and that you don't want to be interrupted right now.`nSome areas have special hidden commands or other easter eggs that you can hunt for. This time around, you didn't trigger anything special.´c`0`n"));
+                $this->flashBag->add('info', $this->translator->trans('command.unrecognized', [], self::TEXT_DOMAIN));
             }
 
             $processed = false;
@@ -278,7 +306,7 @@ class Commentary
 
         //-- Process comment
         $args = ['comment' => $comment];
-        \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT, null, $args);
+        $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_COMMENT, null, $args);
         $comment = modulehook('commentary-comment', $args);
 
         return $comment['comment'];
@@ -289,35 +317,28 @@ class Commentary
      */
     public function commentaryLocs(): array
     {
-        $cache = \LotgdKernel::get('cache.app');
-        $item  = $cache->getItem('commentary-comsecs');
-
-        if ( ! $item->isHit())
+        return $this->cache->get('commentary-comsecs', function (ItemInterface $item)
         {
-            $domain = 'app_commentary';
+            $item->expiresAt(new \DateTime('tomorrow'));
 
-            $comsecs                = [];
-            $comsecs['village']     = \LotgdTranslator::t('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], $domain);
-            $comsecs['superuser']   = \LotgdTranslator::t('section.superuser', [], $domain);
-            $comsecs['shade']       = \LotgdTranslator::t('section.shade', [], $domain);
-            $comsecs['grassyfield'] = \LotgdTranslator::t('section.grassyfield', [], $domain);
-            $comsecs['inn']         = getsetting('innname', LOCATION_INN);
-            $comsecs['motd']        = \LotgdTranslator::t('section.motd', [], $domain);
-            $comsecs['veterans']    = \LotgdTranslator::t('section.veterans', [], $domain);
-            $comsecs['hunterlodge'] = \LotgdTranslator::t('section.hunterlodge', [], $domain);
-            $comsecs['gardens']     = \LotgdTranslator::t('section.gardens', [], $domain);
-            $comsecs['waiting']     = \LotgdTranslator::t('section.waiting', [], $domain);
-            $comsecs['beta']        = \LotgdTranslator::t('section.beta', [], $domain);
+            $comsecs = [];
+            $comsecs['village'] = $this->translator->trans('section.village', ['village' => getsetting('villagename', LOCATION_FIELDS)], self::TEXT_DOMAIN);
+            $comsecs['superuser'] = $this->translator->trans('section.superuser', [], self::TEXT_DOMAIN);
+            $comsecs['shade'] = $this->translator->trans('section.shade', [], self::TEXT_DOMAIN);
+            $comsecs['grassyfield'] = $this->translator->trans('section.grassyfield', [], self::TEXT_DOMAIN);
+            $comsecs['inn'] = getsetting('innname', LOCATION_INN);
+            $comsecs['motd'] = $this->translator->trans('section.motd', [], self::TEXT_DOMAIN);
+            $comsecs['veterans'] = $this->translator->trans('section.veterans', [], self::TEXT_DOMAIN);
+            $comsecs['hunterlodge'] = $this->translator->trans('section.hunterlodge', [], self::TEXT_DOMAIN);
+            $comsecs['gardens'] = $this->translator->trans('section.gardens', [], self::TEXT_DOMAIN);
+            $comsecs['waiting'] = $this->translator->trans('section.waiting', [], self::TEXT_DOMAIN);
+            $comsecs['beta'] = $this->translator->trans('section.beta', [], self::TEXT_DOMAIN);
 
             // All of the ones after this will be translated in the modules.
-            \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
-            $comsecs = modulehook('moderate-comment-sections', $comsecs);
+            $this->hook->trigger(\Lotgd\Core\Hook::HOOK_COMENTARY_MODERATE_SECTIONS, null, $comsecs);
 
-            $item->set($comsecs);
-            $cache->save($item);
-        }
-
-        return $item->get();
+            return modulehook('moderate-comment-sections', $comsecs);
+        });
     }
 
     /**
@@ -353,7 +374,7 @@ class Commentary
      */
     protected function injectComment(array $data): bool
     {
-        $commentary = $this->hydrateEntity($data);
+        $commentary = $this->normalizer->denormalize($data, EntityCommentary::class);
 
         return $this->getRepository()->saveComment($commentary);
     }
