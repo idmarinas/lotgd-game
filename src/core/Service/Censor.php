@@ -19,17 +19,16 @@ class Censor extends OutputCensor
 {
     public const LOTGD_DICTIONARY_PATH = 'data/dictionary';
 
-    public function __construct()
+    public function __construct($locale)
     {
         parent::__construct();
 
-        $language  = \Locale::getDefault();
         $this->addDictionary(self::LOTGD_DICTIONARY_PATH.'/en.php'); //-- Custom dictionary
 
-        if ('en' != $language)
+        if ('en' != $locale)
         {
-            $this->addDictionary($language);
-            $customLanguage = self::LOTGD_DICTIONARY_PATH."/{$language}.php";
+            $this->addDictionary($locale);
+            $customLanguage = self::LOTGD_DICTIONARY_PATH."/{$locale}.php";
 
             if (\is_file($customLanguage))
             {

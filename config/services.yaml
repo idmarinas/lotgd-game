@@ -130,14 +130,14 @@ services:
             - setThousandsSep: ['%lotgd_core.number.format.thousands.sep%']
     Lotgd\Core\Service\Censor:
         lazy: true
+        arguments:
+            - '%kernel.default_locale%'
     Lotgd\Core\Output\Censor:
         alias: Lotgd\Core\Service\Censor
         public: true
     Lotgd\Core\Output\Commentary:
         lazy: true
         public: true
-        calls:
-            - setEntity: ['@Lotgd\Core\Entity\Commentary']
 
     # LoTGD Installer
     Lotgd\Core\Installer\Install:
