@@ -25,6 +25,11 @@ commentary:
         dni: "DNI (please don't try to talk to this player right now!)"
         online: 'Online'
 
+command.unrecognized: |
+    Command Not Recognized
+    When you type in ALL CAPS, the game doesn't think you're talking to other players; it thinks you're trying to perform an action within the game.  For example, typing GREM will remove the last comment you posted, as long as you posted it less than two minutes ago.  Typing AFK or BRB will turn your online status bar grey, so that people know you're Away From the Keyboard (or, if you prefer, that you'll Be Right Back).  Typing DNI will let other players know that you're busy talking to one particular player - maybe somewhere off-camera - and that you don't want to be interrupted right now.
+    Some areas have special hidden commands or other easter eggs that you can hunt for. This time around, you didn't trigger anything special.
+
 # Sections for comment moderation
 section:
     village: '{village} Square'
