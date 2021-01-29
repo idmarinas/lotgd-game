@@ -214,9 +214,9 @@ elseif ('search' == $op)
             }
             else
             {
-                $count  = (int) \LotgdTranslator::translate('prefix.creature.count', $textDomain);
+                $count  = (int) \LotgdTranslator::translate('prefix.creature.count', [], $textDomain);
                 $key    = \mt_rand(0, $count);
-                $prefix = \LotgdTranslator::translate("prefix.creature.0{$key}", $textDomain);
+                $prefix = \LotgdTranslator::translate("prefix.creature.0{$key}", [], $textDomain);
                 //-- Check if have a valid name
                 $prefix = "prefix.creature.0{$key}" == $prefix ? 'Elite' : $prefix;
 

@@ -56,7 +56,7 @@ function explained_get_player_hitpoints($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate(
+        return sprintf(
             '%s %s`0 CON %s %s`0 WIS %s %s`0 STR %s %s`0 Train %s %s`0 MISC',
             ($conbonus >= 0 ? '`8+' : '`$-'),
             \abs($conbonus),
@@ -71,7 +71,7 @@ function explained_get_player_hitpoints($player = false, $colored = false)
         );
     }
 
-    return sprintf_translate('%s CON %s WIS %s STR %s Train %s MISC', $conbonus, $wisbonus, $strbonus, $levelbonus, $user['permahitpoints']);
+    return sprintf('%s CON %s WIS %s STR %s Train %s MISC', $conbonus, $wisbonus, $strbonus, $levelbonus, $user['permahitpoints']);
 }
 
 function get_player_attack($player = false)
@@ -158,7 +158,7 @@ function explained_get_player_attack($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate(
+        return sprintf(
             '%s %s`0 STR %s %s`0 SPD %s %s`0 WIS %s %s`0 INT %s %s`0 Weapon %s %s`0 Train %s %s`0 MISC ',
             ($strbonus >= 0 ? '`8+' : '`$-'),
             \abs($strbonus),
@@ -177,7 +177,7 @@ function explained_get_player_attack($player = false, $colored = false)
         );
     }
 
-    return sprintf_translate('%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ', $strbonus, $speedbonus, $wisdombonus, $intbonus, $weapondmg, $levelbonus, $miscbonus);
+    return sprintf('%s STR + %s SPD + %s WIS+ %s INT + %s Weapon + %s Train + %s MISC ', $strbonus, $speedbonus, $wisdombonus, $intbonus, $weapondmg, $levelbonus, $miscbonus);
 }
 
 function get_player_defense($player = false)
@@ -259,7 +259,7 @@ function explained_get_player_defense($player = false, $colored = false)
 
     if ($colored)
     {
-        return sprintf_translate(
+        return sprintf(
             '%s %s`0 WIS %s %s`0 CON %s %s`0 SPD %s %s`0 Armor %s %s`0 Train %s %s`0 MISC',
             ($wisdombonus >= 0 ? '`8+' : '`$-'),
             \abs($wisdombonus),
@@ -276,7 +276,7 @@ function explained_get_player_defense($player = false, $colored = false)
         );
     }
 
-    return sprintf_translate('%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ', $wisdombonus, $constbonus, $speedbonus, $armordef, $levelbonus, $miscbonus);
+    return sprintf('%s WIS + %s CON + %s SPD + %s Armor + %s Train + %s MISC ', $wisdombonus, $constbonus, $speedbonus, $armordef, $levelbonus, $miscbonus);
 }
 
 function get_player_speed($player = false)

@@ -13,13 +13,22 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\Tool\Sanitize;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class FlashMessages extends AbstractExtension
 {
-    use PatternCore\Sanitize;
-    use PatternCore\Template;
+    protected $session;
+    protected $sanitize;
+
+    public function __construct(SessionInterface $session, Sanitize $sanitize)
+    {
+        $this->session  = $session;
+        $this->sanitize = $sanitize;
+    }
 
     /**
      * {@inheritdoc}
@@ -27,7 +36,7 @@ class FlashMessages extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('show_flash_messages', [$this, 'display']),
+            new TwigFunction('show_flash_messages', [$this, 'display'], ['needs_environment' => true]),
         ];
     }
 
@@ -36,10 +45,10 @@ class FlashMessages extends AbstractExtension
      *
      * @return string
      */
-    public function display()
+    public function display(Environment $env)
     {
         $output   = '';
-        $flashBag = $this->getService('session')->getFlashBag();
+        $flashBag = $this->session->getFlashBag();
 
         foreach ($flashBag->all() as $type => $messages)
         {
@@ -49,18 +58,18 @@ class FlashMessages extends AbstractExtension
 
                 if (\is_array($message))
                 {
-                    $message['message'] = $this->getSanitize()->fullSanitize($message['message']);
+                    $message['message'] = $this->sanitize->fullSanitize($message['message']);
                     $message['id']      = $message['id'] ?? $messageId;
                     $message['class']   = ($message['class'] ?? '').' '.$type;
                     $message['close']   = $message['close'] ?? true;
 
-                    $output .= $this->getTemplate()->render('{theme}/semantic/collection/message.html.twig', $message);
+                    $output .= $env->render('{theme}/semantic/collection/message.html.twig', $message);
 
                     continue;
                 }
 
-                $output .= $this->getTemplate()->render('{theme}/semantic/collection/message.html.twig', [
-                    'message' => $this->getSanitize()->fullSanitize($message),
+                $output .= $env->render('{theme}/semantic/collection/message.html.twig', [
+                    'message' => $this->sanitize->fullSanitize($message),
                     'class'   => $type,
                     'close'   => true,
                     'id'      => $messageId,

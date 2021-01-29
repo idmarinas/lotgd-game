@@ -1,5 +1,7 @@
 {# List of online characters #}
 {% block online_list %}
+    {% trans_default_domain 'app_default' %}
+
     {{ 'online.list.title'|trans({ 'n': onlineCount }, textDomain)|colorize }}
 
     {% for row in list %}
@@ -11,6 +13,8 @@
 
 {# Stats of page generation #}
 {% block game_page_gen %}
+    {% trans_default_domain 'app_default' %}
+
     {{ 'parts.pageGen'|trans({
         'genTime': genTime,
         'avg': avg,
@@ -21,6 +25,8 @@
 
 {# Menu of navigation with all links #}
 {% block navigation_menu %}
+    {% trans_default_domain 'app_default' %}
+
     <div role="navigation">
         {% for section, nav in navigation if nav|length > 0 or headers[section]['hiddeEmpty'] == false %}
             {% set sectionText = navigation_create_header(section, headers[section]) %}
@@ -41,7 +47,7 @@
 {% endblock navigation_menu %}
 
 {% block pagination_jaxon %}
-    {% translate_default_domain 'app_default' %}
+    {% trans_default_domain 'app_default' %}
 
     {% if pageCount %}
         {% set link = jaxon ~ '(%s, ' ~ motdPerPage|default(5) ~ ", '" ~ monthSelected|default(null) ~ "')" %}
@@ -154,7 +160,7 @@
 {% endblock pagination_jaxon %}
 
 {% block pagination %}
-    {% translate_default_domain 'app_default' %}
+    {% trans_default_domain 'app_default' %}
 
     {% if pageCount %}
         <div class="ui grid">

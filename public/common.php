@@ -28,7 +28,6 @@ require_once 'lib/mounts.php';
 require_once 'lib/lotgd_mail.php';
 require_once 'lib/playerfunctions.php';
 require_once 'lib/pageparts.php';
-require_once 'lib/translator.php';
 
 // Decline static file requests back to the PHP built-in webserver
 if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getServer('REQUEST_URI'), PHP_URL_PATH)))
@@ -47,78 +46,30 @@ if (DB_CONNECTED)
     \define('LINK', $link);
 }
 
-if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_INSTALLER') && 'cli' != substr(php_sapi_name(), 0, 3))
-{
-    \define('NO_SAVE_USER', true);
-
-    \defined('DB_NODB') || \define('DB_NODB', true);
-
+//-- Check if game is installed
+if (
+    'cli' != \substr(PHP_SAPI, 0, 3) //-- Not check if is a cli (CronJob)
+    && ! \file_exists('data/installer/installed_version_data.data') //-- New file for save version of game
+) {
+    //-- New installer not check for update
     \LotgdResponse::pageStart('title.install', [], 'app_common');
 
-    \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
+    \LotgdNavigation::addNav('common.nav.installer', 'home.php');
 
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_install', '@core/_blocks/_common.html.twig', [
-        'fileName' => \Lotgd\Core\Application::FILE_DB_CONNECT,
-    ]));
+    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_install', '@core/_blocks/_common.html.twig', []));
 
     \LotgdResponse::pageEnd(false);
 }
-elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
+
+//-- This file not is necesary, so if find delete it.
+elseif (\file_exists('public/installer.php') && 'cli' != \substr(PHP_SAPI, 0, 3))
 {
-    \define('IS_INSTALLER', false);
-}
-elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER') && 'cli' != substr(php_sapi_name(), 0, 3))
-{
-    \define('NO_SAVE_USER', true);
-
-    \LotgdResponse::pageStart('title.upgrade', [], 'app_common');
-
-    \LotgdNavigation::addNav('common.nav.installer', 'installer.php');
-
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_upgrade', '@core/_blocks/_common.html.twig', []));
-
-    \LotgdResponse::pageEnd(false);
-}
-// If is installer check if tables are created
-elseif (\defined('IS_INSTALLER'))
-{
-    try
-    {
-        $repository = \Doctrine::getRepository('LotgdCore:Settings');
-        $repository->findOneBy(['setting' => 'installer_version']);
-    }
-    catch (\Throwable $th)
-    {
-        \defined('DB_NODB') || \define('DB_NODB', true);
-    }
-}
-
-if ( ! IS_INSTALLER && \file_exists('public/installer.php')
-    && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
-    && 'installer.php' != \substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
-    && 'cli' != substr(php_sapi_name(), 0, 3)
-) {
     // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
     \LotgdResponse::pageStart('title.security', [], 'app_common');
 
     \LotgdNavigation::addNav('common.nav.home', 'index.php');
 
     \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_security', '@core/_blocks/_common.html.twig', []));
-
-    \LotgdResponse::pageEnd(false);
-}
-
-if ( ! \defined('IS_INSTALLER') && ! DB_CONNECTED)
-{
-    \defined('DB_NODB') || \define('DB_NODB', true);
-
-    \LotgdResponse::pageStart('title.security', [], 'app_common');
-
-    \LotgdNavigation::addNav('common.nav.home', 'index.php');
-
-    \LotgdResponse::pageAddContent(\LotgdTheme::renderBlock('common_database', '@core/_blocks/_common.html.twig', [
-        'server' => \LotgdRequest::getServer('SERVER_NAME'),
-    ]));
 
     \LotgdResponse::pageEnd(false);
 }
@@ -135,8 +86,8 @@ if (isset($session['lasthit'], $session['loggedin']) && \strtotime('-'.getsettin
 }
 $session['lasthit'] = \strtotime('now');
 
-$cp = \Lotgd\Core\Application::COPYRIGHT;
-$l  = \Lotgd\Core\Application::LICENSE;
+$cp = \Lotgd\Core\Kernel::COPYRIGHT;
+$l  = \Lotgd\Core\Kernel::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
@@ -245,12 +196,12 @@ if ( ! LotgdRequest::getCookie('lgi') || \strlen(LotgdRequest::getCookie('lgi'))
     if ( ! isset($session['user']['uniqueid']) || \strlen($session['user']['uniqueid']) < 32)
     {
         $u = \md5(\microtime());
-        LotgdRequest::setCookie('lgi', $u);
+        LotgdResponse::setCookie('lgi', $u);
         $session['user']['uniqueid'] = $u;
     }
     elseif (isset($session['user']['uniqueid']))
     {
-        LotgdRequest::setCookie('lgi', $session['user']['uniqueid']);
+        LotgdResponse::setCookie('lgi', $session['user']['uniqueid']);
     }
 }
 elseif (LotgdRequest::getCookie('lgi') && '' != LotgdRequest::getCookie('lgi'))

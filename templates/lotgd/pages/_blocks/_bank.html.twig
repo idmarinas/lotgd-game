@@ -1,6 +1,6 @@
-{% translate_default_domain textDomain %}
-
 {% block bank_borrow %}
+    {% trans_default_domain textDomain %}
+
     {% if user.goldinbank >= 0 %}
         {{ 'borrow.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
     {% else %}
@@ -22,6 +22,8 @@
 {% endblock bank_borrow %}
 
 {% block bank_deposit %}
+    {% trans_default_domain textDomain %}
+
     {% if user.goldinbank >= 0 %}
         {{ 'deposit.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
     {% else %}
@@ -50,6 +52,8 @@
 
 {# Deposit end #}
 {% block depositend %}
+    {% trans_default_domain textDomain %}
+
     {% if deposited %}
         {% if user.goldinbank >= 0 %}
             {{ 'deposit.finish.balance.positive'|trans({ 'amount': amount, 'name': user.name, 'bank': user.goldinbank, 'gold': user.gold, 'ownerName': ownerName })|colorize }}
@@ -62,6 +66,8 @@
 {% endblock depositend %}
 
 {% block bank_enter %}
+    {% trans_default_domain textDomain %}
+
     {{ 'default.paragraph'|trans({'name': user.name, 'ownerName': ownerName})|colorize }}
 
     {% if user.goldinbank >= 0 %}
@@ -72,6 +78,8 @@
 {% endblock bank_enter %}
 
 {% block bank_transfer %}
+    {% trans_default_domain textDomain %}
+
     {% if user.goldinbank >= 0 %}
         {{ 'transfer.subtitle'|trans|colorize }}
         {{ 'transfer.paragraph'|trans({'transferPerLevel': transferPerLevel, 'maxTransfer': maxTransfer, 'ownerName': ownerName})|colorize }}
@@ -99,6 +107,8 @@
 {% endblock bank_transfer %}
 
 {% block bank_transfer2 %}
+    {% trans_default_domain textDomain %}
+
     {{ 'transfer2.subtitle'|trans|colorize }}
 
     {% set count = characters|length %}
@@ -138,6 +148,8 @@
 {% endblock bank_transfer2 %}
 
 {% block bank_transfer3 %}
+    {% trans_default_domain textDomain %}
+
     {{ 'transfer2.subtitle'|trans|colorize }}
 
     {% if transferred is same as(true) %}
@@ -161,6 +173,8 @@
 {% endblock bank_transfer3 %}
 
 {% block bank_withdraw %}
+    {% trans_default_domain textDomain %}
+
     {% if user.goldinbank >= 0 %}
         {{ 'withdraw.balance.positive'|trans({ 'gold': user.goldinbank, 'ownerName': ownerName })|colorize }}
     {% else %}
@@ -182,6 +196,8 @@
 
 {# Withdraw end #}
 {% block bank_withdrawend %}
+    {% trans_default_domain textDomain %}
+
     {% if withdrawal is same as(false) %}
         {{ 'withdraw.finish.fail'|trans({ 'bank': user.goldinbank, 'amount': amount, 'ownerName': ownerName })|colorize }}
     {% elseif withdrawal is same as(true) %}

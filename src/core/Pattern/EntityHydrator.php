@@ -15,6 +15,11 @@ namespace Lotgd\Core\Pattern;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Lotgd\Core\Entity\EntityInterface;
 
+trigger_error(EntityHydrator::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait EntityHydrator
 {
     protected $hydrator;

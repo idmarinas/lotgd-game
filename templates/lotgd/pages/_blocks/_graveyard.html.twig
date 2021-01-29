@@ -1,13 +1,13 @@
-{% translate_default_domain textDomain %}
-
 {% block graveyard_default %}
+    {% trans_default_domain textDomain %}
+
     {% if showGraveyardDesc %}
         {{ 'section.default.paragraph'|trans({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
         {% set result = modulehook('graveyard-desc') %}
         {% for message in result %}
             {% if message is array %}
-                {{ message[0]|tl(message[1], message[2])|colorize }}
+                {{ message[0]|trans(message[1], message[2])|colorize }}
             {% else %}
                 {{ message|colorize }}
             {% endif %}
@@ -16,15 +16,19 @@
 {% endblock graveyard_default %}
 
 {% block graveyard_enter %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.enter.paragraph'|trans({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
     {% set result = modulehook('mausoleum') %}
     {% for message in result %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 {% endblock graveyard_enter %}
 
 {% block graveyard_haunt %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.haunt.paragraph'|trans({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
     <form action="{{ 'graveyard.php?op=haunt2'|lotgd_url }}">
@@ -39,6 +43,8 @@
 {% endblock graveyard_haunt %}
 
 {% block graveyard_haunt2 %}
+    {% trans_default_domain textDomain %}
+
     {% set count = characters|length %}
 
     {% if count %}
@@ -66,6 +72,8 @@
 {% endblock graveyard_haunt2 %}
 
 {% block graveyard_haunt3 %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.haunt3.subtitle'|trans|colorize }}
 
     {% if haunted is same as(true) %}
@@ -82,18 +90,22 @@
 {% endblock graveyard_haunt3 %}
 
 {% block graveyard_question %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.question.balance'|trans({ 'favor': user.deathpower, 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 
     {% if highest[0] %}
-        {{ highest[0]|tl(highest[1], highest[2])|colorize }}
+        {{ highest[0]|trans(highest[1], highest[2])|colorize }}
     {% endif %}
 
     {% if texts[0] %}
-        {{ texts[0]|tl(texts[1], texts[2])|colorize }}
+        {{ texts[0]|trans(texts[1], texts[2])|colorize }}
     {% endif %}
 {% endblock graveyard_question %}
 
 {% block graveyard_restore %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.restore.subtitle'|trans|colorize }}
 
     {% if restored is same as(true) %}
@@ -106,5 +118,7 @@
 {% endblock graveyard_restore %}
 
 {% block graveyard_resurrection %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.resurrection'|trans({ 'graveyardOwnerName': graveyardOwnerName })|colorize }}
 {% endblock graveyard_resurrection %}

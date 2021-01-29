@@ -6,44 +6,48 @@
     -   mail.php
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
-# Actualmente haciendo esto
--   ...
-
-# Módulos
--   ...
-
-# Para la versión 4.12.0
--   Última versión de la serie 4.y.z
-
-# Advertising bundle
--   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
-    -   Posiblemente esto ya se pueda hacer
-
-# Para la versión 5.0.0
+# Actualmente haciendo esto (5.0.0)
+-   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
+-   Instalador, informar sobre la licencia.
+-   El eliminar el uso de: Lotgd\Core\Validator\Db
+    -   Encontrado en `lib/clan/applicant_new.php`
 -   Un nuevo sistema de instalación por consola.
     -   Sólo podrá actualizar desde la versión anterior (4.12.0)
--   Migración al uso de Symfony usando el http-kernel (completado en esta versión)
-    -   https://symfony.com/doc/current/components/http_kernel.html
-        -   Se migrará 
-            -   La configuración
-            -   El uso del service manager
 -   Se usará un sistema similar al Symfony como transición
 -   **BC** Se elimina Laminas DB. `DB::` class `Lotgd\Core\Db\Dbwrapper`
     -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
     -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
         -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
--   **BC** Eliminar compatibilidad con Laminas Service Manager.
--   **BC** Eliminar compatibilidad con Laminas Cache.
--   **BD** Eliminar compatibilidad con Laminas Translation.
--   **BD** Eliminar compatibilidad con Laminas Form.
--   Los módulos antiguos seguiran funcionando pero estan obsoletos.
+-   El antiguo sistema de módulos está obsolete desde esta versión
+    -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 
-# Para la versión 6.0.0
--   Seguir la transición hacia un sistema Symfony Framework
+# Módulos
+-   ...
+
+# Para la versión 5.1.0
+-   Mirar el uso de un bundle tipo settings:
+    -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
+    -   https://github.com/HelisLT/settings-manager-bundle#usage lastest 16 days ago
+    -   https://github.com/craue/CraueConfigBundle/tree/2.5.0 lastest on 17 Dec 2020
+
+# Para la versión 5.2.0
+-   ¿? Sustituir Entity\Account por Entity\User
+-   Mirar si se puede integrar con el sistema de autentificación de symfony si no es muy enrevesado.
+
+# Para la versión 5.3.0
+-   Migrar al nuevo sitema de plantillas
+    -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
     -   Usar macros y blocks donde se pueda.
+
+# Advertising bundle
+-   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
+    -   Posiblemente esto ya se pueda hacer
+
+# Para la versión 6.0.0
+-   Seguir la transición hacia un sistema Symfony Framework
 -   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
     -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
 -   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
@@ -62,6 +66,7 @@
 -   **BC** Eliminar compatibilidad con el uso del viejo sistema de módulos
 
 # Para la versión 8.0.0 (LoTGD CORE as Bundle)
+-   ¿? Determinar si es viable usarlo tipo bundle, o crearlo para que se genere el contenido tipo bundle.
 -   Esta versión LoTGD Core se transforma en un Symfony Bundle.
 -   Se usa un sistema de módulos tipo Bundle
     -   Pensado para módulos que se tengan intención de compartir (en en proyectos propios o con terceros)
@@ -71,14 +76,6 @@
 -   Motd, permitir la traducción, y que las encuestas tengan una configuración fuera de un campo serializado.
     -   Poner las opciones de la encuesta en una tabla separada. Permitiendo que las opciones también se puedan traducir.
 -   Agregar sistema al core, para poder añadir términos y condiciones y politica de privacidad, sin necesidad de módulo.
-
-# ¿? Para la versión X1.0.0
--   ¿? Esta actualización requiere de que se valla migrando ciertos paquetes de Laminas a Symfony
--   ¿? Usar un sistema parecido al de Laminas MVC para crear las páginas.
-    -   Posibilidad 1 de una migración a Laminas MVC framework (ya que todo el core usa módulos de Laminas)
-    -   Posibilidad 2 de una migración a Symfony Framework (Esto seria la opción más lógica en el sentido de que viene con un sitema de plantillas que permite sustituir las de un bundle por otras propias)
-        -   Creo que se migrará todo el código a los módulos de Symfony Framework, para así poder aprobechar sus capacidades, que son muy útiles en el LoTGD
-        -   Templates: permitir reemplazar una pantilla de un bundle con otra propia, es una forma fácil de personalizar y crear temas propios.
 
 ## Cosas pendientes
 -   Añadir un check para comprobar si se han usado las funciones obligatorias (copyright(), game_version() .... )
@@ -94,6 +91,11 @@
     -   Usar otra forma
 
 ## Cosas a mirar
+-   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
+-   Panel de administración
+    -   https://github.com/sonata-project/SonataAdminBundle 
+    -   https://github.com/EasyCorp/EasyAdminBundle
+-   https://github.com/sonata-project/SonataPageBundle 
 -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
 -   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
@@ -102,7 +104,6 @@
 -   https://symfony.com/doc/current/components/process.html
 -   https://symfony.com/doc/current/components/config.html
 -   https://symfony.com/doc/current/components/finder.html
--   https://symfony.com/doc/current/components/console.html Ya se agrego la consola, pero sirve como referencia.
 -   https://symfony.com/doc/current/components/options_resolver.html
     -   Para configurar los componentes y opciones que se pueden usar 
     -   Esto permite que cada componente tenga las opciones que necesita y los tipos de valor correctos
@@ -137,26 +138,6 @@
 -   *
 
 * * *
-
-
-## Temas
-
-Los hook admiten incluir plantillas de forma dinamica en los archivos twig.
-La forma de hacerlo es incluir en los parametros una key con el nombre del hook en formate kamelCaseTpl donde se incluya la templates a incluir. Es un array para poder incluir más.
-Ejemplo:
-
-```php
-$params = modulehook('create-form', $params);
-
-//-- Alternativa para las plantilas de los módulos
-$params['createFormTpl'] = ['MyModule/template.twig'];
-```
-
-Esta plantilla hereda todas las variables de la plantilla padre.
-
-## Menu de navegación
-
-Permitir añadir al principio o al final de una categoria, añadir una categoría al final o al inicio
 
 #### Comandos
 

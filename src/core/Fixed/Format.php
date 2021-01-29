@@ -18,6 +18,8 @@ use Lotgd\Core\Output\Format as CoreFormat;
 /**
  * This class is for format a string
  * For example: format a number or a date.
+ *
+ * @deprecated 5.0.0
  */
 class Format
 {

@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 /**
  * Trait to created ye olde mail link.
  */
@@ -21,13 +23,13 @@ trait Mail
     /**
      * Get ye olde mail link.
      */
-    public function yeOldeMail(): string
+    public function yeOldeMail(Environment $env): string
     {
         global $session;
 
         try
         {
-            $mail   = \Doctrine::getRepository(\Lotgd\Core\Entity\Mail::class);
+            $mail   = $this->doctrine->getRepository(\Lotgd\Core\Entity\Mail::class);
             $result = $mail->getCountMailOfCharacter((int) ($session['user']['acctid'] ?? 0));
         }
         catch (\Throwable $th)
@@ -38,6 +40,6 @@ trait Mail
             ];
         }
 
-        return $this->getTemplate()->renderBlock('ye_olde_mail', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_buttons.html.twig", $result);
+        return $env->load('{theme}/_blocks/_buttons.html.twig')->renderBlock('ye_olde_mail', $result);
     }
 }

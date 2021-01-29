@@ -14,7 +14,6 @@
 namespace Lotgd\Core;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -23,14 +22,15 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public const VERSION         = '4.12.0 IDMarinas Edition'; // Version of game in public display format.
-    public const VERSION_ID      = 41200; // Identify version of game in numeric format.
-    public const MAJOR_VERSION   = 4;
-    public const MINOR_VERSION   = 12;
-    public const RELEASE_VERSION = 0;
-    public const EXTRA_VERSION   = '';
-    public const VERSION_NUMBER  = self::VERSION_ID; //-- Alias of VERSION_ID
-    public const FILE_DB_CONNECT = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
+    public const VERSION             = '5.0.0 IDMarinas Edition'; // Version of game in public display format.
+    public const VERSION_ID          = 50000; // Identify version of game in numeric format.
+    public const MAJOR_VERSION       = 5;
+    public const MINOR_VERSION       = 0;
+    public const RELEASE_VERSION     = 0;
+    public const EXTRA_VERSION       = '';
+    public const VERSION_NUMBER      = self::VERSION_ID; //-- Alias of VERSION_ID
+    public const FILE_DB_CONNECT     = 'config/autoload/local/dbconnect.php'; // The file where the database connection data is stored.
+    public const TEXT_DOMAIN_DEFAULT = 'app_default';
 
     /**
      * This series of scripts (collectively known as Legend of the Green Dragon or LotGD) is copyright as per below.

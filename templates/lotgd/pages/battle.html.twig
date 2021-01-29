@@ -1,6 +1,6 @@
 {% from '{theme}/pages/_macros/_battle.html.twig' import combat_health_bar as health_bar %}
 
-{% translate_default_domain 'page_battle' %}
+{% trans_default_domain 'page_battle' %}
 
 {{ 'title'|trans|colorize }}
 
@@ -61,7 +61,7 @@
                         <div class="column">
                             {% for allied in rounds.allied %}
                                 {% if allied is array %}
-                                    {{ allied[0]|tl(allied[1], (allied[2] ?: 'page_battle'))|colorize }}
+                                    {{ allied[0]|trans((allied[1] ?: {}), (allied[2] ?: 'page_battle'))|colorize }}
                                 {% else %}
                                     {{ allied|trans|colorize }}
                                 {% endif %}
@@ -69,8 +69,9 @@
                         </div>
                         <div class="column">
                             {% for enemy in rounds.enemy %}
+                                {{ bdump(enemy) }}
                                 {% if enemy is array %}
-                                    {{ enemy[0]|tl(enemy[1], (enemy[2] ?: 'page_battle'))|colorize }}
+                                    {{ enemy[0]|trans((enemy[1] ?: {}), (enemy[2] ?: 'page_battle'))|colorize }}
                                 {% else %}
                                     {{ enemy|trans|colorize }}
                                 {% endif %}
@@ -106,7 +107,7 @@
     <div class="ui bottom attached divided segment">
         {% for msg in battleend %}
             {% if msg is array %}
-                {{ msg[0]|tl(msg[1], (msg[2] ?: 'page_battle'))|colorize }}
+                {{ msg[0]|trans((msg[1]|default({})), (msg[2] ?: 'page_battle'))|colorize }}
             {% else %}
                 {{ msg|trans|colorize }}
             {% endif %}

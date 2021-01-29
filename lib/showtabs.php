@@ -47,7 +47,7 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
             $class = 'bottom attached '.$class;
         }
         //-- Title of tab
-        $ulMenu[] = \sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, translate($title));
+        $ulMenu[] = \sprintf('<a class="%s item" data-tab="%s-%s">%s</a>', $class, $showtab_id, $tab_id, $title);
 
         //-- Content of tab
         if ( ! $callback)
@@ -83,7 +83,7 @@ function lotgd_showtabs($tabs, $print = true, ?callable $callback = null, $brows
 
         $content .= \sprintf(
             '<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
-            translate_inline('Browse'),
+            'Browse',
             $popupMenu,
             $tabActive
         );

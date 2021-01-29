@@ -28,7 +28,7 @@ class Settings
      *
      * @return string
      */
-    public function getSetting($settingname, $default = false)
+    public function getSetting($settingname, $default = null)
     {
         if ('usedatacache' == $settingname)
         {
@@ -43,12 +43,10 @@ class Settings
 
         if ( ! isset($this->settings[$settingname]))
         {
-            $setDefault = $default;
-
-            $this->saveSetting($settingname, $setDefault);
+            $this->saveSetting($settingname, $default);
         }
 
-        return $this->settings[$settingname];
+        return $this->settings[$settingname] ?? $default;
     }
 
     /**

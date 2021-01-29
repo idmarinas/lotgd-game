@@ -1,6 +1,6 @@
-{% translate_default_domain 'jaxon_motd' %}
-
 {% block motd_list %}
+    {% trans_default_domain 'jaxon_motd' %}
+
     {% if SU_POST_MOTD %}
     <div class="ui buttons">
         <a class="ui motd item button" onclick="JaxonLotgd.Ajax.Core.Motd.addItem(); $(this).addClass('loading disabled')">{{ 'item.button.add.motd'|trans|uncolorize }}</a>
@@ -61,6 +61,8 @@
 {% endblock motd_list %}
 
 {% block motd_item_item %}
+    {% trans_default_domain 'jaxon_motd' %}
+
     <div class="item" id="motd-list-item-{{ motd.motditem }}">
         <div class="content">
             <div class="header">{{ motd.motdtitle }}</div>
@@ -105,6 +107,8 @@
 {% endblock motd_item_item %}
 
 {% block motd_item_poll %}
+    {% trans_default_domain 'jaxon_motd' %}
+
     <div class="item" id="motd-list-item-{{ motd.motditem }}">
         <div class="content">
             <div class="header">{{ 'item.poll.poll'|trans|colorize }}: {{ motd.motdtitle }}</div>
@@ -188,6 +192,8 @@
 {% endblock motd_item_poll %}
 
 {% block motd_item_edit %}
+    {% trans_default_domain 'jaxon_motd' %}
+
     <h4 class="header">{{ 'item.edit.form.title'|trans|colorize }}</h4>
     {{ 'item.edit.form.original'|trans({'author': motdData.motdauthorname, 'date': motdData.motddate})|colorize }}
 
@@ -197,12 +203,15 @@
 {% endblock motd_item_edit %}
 
 {% block motd_item_add %}
+    {% trans_default_domain 'jaxon_motd' %}
+
     <h4 class="header">{{ 'item.add.item.form.title'|trans|colorize }}</h4>
 
     {{ form(form) }}
 {% endblock motd_item_add %}
 
 {% block motd_poll_add %}
+    {% trans_default_domain 'jaxon_motd' %}
 
     {{ 'item.add.poll.form.note'|trans|colorize }}
     <h4 class="header">{{ 'item.add.poll.form.title'|trans|colorize }}</h4>

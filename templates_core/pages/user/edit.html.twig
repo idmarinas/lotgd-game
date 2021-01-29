@@ -1,4 +1,4 @@
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 <form action="{{ ('user.php?op=special&userid=' ~ userId ~ returnPetition)|lotgd_url }}" method="POST" class="ui form">
     <button type="submit" class="ui button" name="newday" value="1">{{ 'section.edit.form.button.submit.newday'|trans|uncolorize }}</button>

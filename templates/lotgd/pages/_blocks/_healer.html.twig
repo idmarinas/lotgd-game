@@ -1,6 +1,6 @@
-{% translate_default_domain textDomain %}
-
 {% block healer_buy %}
+    {% trans_default_domain textDomain %}
+
     {% if canHeal is same as(true) %}
         {{ 'section.buy.healed.paragraph'|trans|colorize }}
 
@@ -17,6 +17,8 @@
 {% endblock healer_buy %}
 
 {% block healer_companion %}
+    {% trans_default_domain textDomain %}
+
     {% if canHeal is same as(true) %}
         {{ 'section.companion.heal.success'|trans({ 'companionName': companionName })|colorize }}
     {% else %}
@@ -25,6 +27,8 @@
 {% endblock healer_companion %}
 
 {% block healer_default %}
+    {% trans_default_domain textDomain %}
+
     {% if needHeal is same as(true) %}
         {{ 'section.default.heal.damaged'|trans({ 'healCost': healCost })|colorize }}
     {% elseif needHeal is same as(false) %}

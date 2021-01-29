@@ -101,13 +101,13 @@ function getcharstats($buffs)
     {
         if (\count($section))
         {
-            $arr               = translate_inline($label);
+            $arr               = $label;
             $charstattpl[$arr] = [];
             \reset($section);
 
             foreach ($section as $name => $val)
             {
-                $a2                     = translate_inline("`&{$name}`0");
+                $a2                     = "`&{$name}`0";
                 $charstattpl[$arr][$a2] = "`^{$val}`0";
             }
         }
@@ -183,12 +183,7 @@ function charstats($return = true)
                 if (\is_array($val['name']))
                 {
                     $val['name'][0] = \str_replace('`%', '`%%', $val['name'][0]);
-                    $val['name']    = \call_user_func_array('sprintf_translate', $val['name']);
-                }
-                //in case it's a string
-                else
-                {
-                    $val['name'] = translate_inline($val['name']);
+                    $val['name']    = \call_user_func_array('sprintf', $val['name']);
                 }
 
                 $val['rounds'] = $val['rounds'] ?? 0;
@@ -197,7 +192,7 @@ function charstats($return = true)
                 {
                     // We're about to sprintf, so, let's makes sure that
                     // `% is handled.
-                    $b       = translate_inline('`#%s `7(%s rounds left)`0`n', 'buffs');
+                    $b       = '`#%s `7(%s rounds left)`0`n';
                     $b       = \sprintf($b, $val['name'], $val['rounds']);
                     $buffs[] = \LotgdFormat::colorize($b, true);
                 }
@@ -214,7 +209,7 @@ function charstats($return = true)
 
         if ( ! \count($buffs))
         {
-            $buffs[] = \LotgdFormat::colorize(translate_inline('`^None`0'), true);
+            $buffs[] = \LotgdFormat::colorize('`^None`0', true);
         }
 
         $atk = \round($atk, 2);
@@ -327,7 +322,7 @@ function charstats($return = true)
             addcharstat(\LotgdTranslator::t('statistic.stat.favor', [], 'app_default'), $u['deathpower'].check_temp_stat('deathpower', 1));
         }
 
-        addcharstat(\LotgdTranslator::t('statistic.stat.spirits', [], 'app_default'), translate_inline('`b'.$spirits[(int) $u['spirits']].'´b'));
+        addcharstat(\LotgdTranslator::t('statistic.stat.spirits', [], 'app_default'), '`b'.$spirits[(int) $u['spirits']].'´b');
         addcharstat(\LotgdTranslator::t('statistic.stat.gold', [], 'app_default'), LotgdFormat::numeral($u['gold'].check_temp_stat('gold', 1)));
         addcharstat(\LotgdTranslator::t('statistic.stat.gems', [], 'app_default'), LotgdFormat::numeral($u['gems'].check_temp_stat('gems', 1)));
 

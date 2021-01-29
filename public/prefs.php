@@ -338,7 +338,7 @@ else
         'bio' => 'Short Character Biography (255 chars max),string,255',
     ];
 
-    $warn = translate_inline('Your password is too short.  It must be at least 4 characters long.');
+    $warn = 'Your password is too short.  It must be at least 4 characters long.';
 
     $prefs = &$session['user']['prefs'];
     $prefs['bio'] = $session['user']['bio'];

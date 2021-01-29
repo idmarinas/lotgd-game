@@ -5,9 +5,6 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
-    "brick/varexporter": {
-        "version": "0.3.3"
-    },
     "bukashk0zzz/filter-bundle": {
         "version": "2.0",
         "recipe": {
@@ -77,6 +74,19 @@
             "./src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "baaa439e3e3179e69e3da84b671f0a3e4a2f56ad"
+        },
+        "files": [
+            "./config/packages/doctrine_migrations.yaml",
+            "./migrations/.gitignore"
+        ]
+    },
     "doctrine/event-manager": {
         "version": "1.1.1"
     },
@@ -88,6 +98,9 @@
     },
     "doctrine/lexer": {
         "version": "1.2.1"
+    },
+    "doctrine/migrations": {
+        "version": "3.0.2"
     },
     "doctrine/orm": {
         "version": "2.8.1"
@@ -107,6 +120,9 @@
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.1"
+    },
     "gabrielelana/byte-units": {
         "version": "0.5.0"
     },
@@ -122,68 +138,8 @@
     "jaxon-php/jaxon-dialogs": {
         "version": "v3.1.2"
     },
-    "laminas/laminas-cache": {
-        "version": "2.10.0"
-    },
-    "laminas/laminas-cache-storage-adapter-apc": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-apcu": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-blackhole": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-dba": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-ext-mongodb": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-filesystem": {
-        "version": "1.1.0"
-    },
-    "laminas/laminas-cache-storage-adapter-memcache": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-memcached": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-memory": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-mongodb": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-redis": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-session": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-wincache": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-xcache": {
-        "version": "1.0.1"
-    },
-    "laminas/laminas-cache-storage-adapter-zend-server": {
-        "version": "1.0.1"
-    },
     "laminas/laminas-code": {
         "version": "3.5.1"
-    },
-    "laminas/laminas-config": {
-        "version": "3.4.0"
-    },
-    "laminas/laminas-config-aggregator": {
-        "version": "1.4.0"
-    },
-    "laminas/laminas-db": {
-        "version": "2.11.3"
-    },
-    "laminas/laminas-dependency-plugin": {
-        "version": "2.1.0"
     },
     "laminas/laminas-escaper": {
         "version": "2.7.0"
@@ -194,16 +150,10 @@
     "laminas/laminas-filter": {
         "version": "2.10.0"
     },
-    "laminas/laminas-form": {
-        "version": "2.15.0"
-    },
     "laminas/laminas-hydrator": {
         "version": "3.2.0"
     },
     "laminas/laminas-i18n": {
-        "version": "2.11.0"
-    },
-    "laminas/laminas-inputfilter": {
         "version": "2.11.0"
     },
     "laminas/laminas-json": {
@@ -229,9 +179,6 @@
     },
     "laminas/laminas-stdlib": {
         "version": "3.3.1"
-    },
-    "laminas/laminas-validator": {
-        "version": "2.13.4"
     },
     "laminas/laminas-view": {
         "version": "2.12.0"
@@ -281,9 +228,6 @@
             "./src/Entity/User/User.php"
         ]
     },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
-    },
     "paragonie/random_compat": {
         "version": "v9.99.99"
     },
@@ -316,9 +260,6 @@
     },
     "psr/log": {
         "version": "1.1.3"
-    },
-    "psr/simple-cache": {
-        "version": "1.0.1"
     },
     "sabre/event": {
         "version": "5.1.2"
@@ -448,6 +389,9 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.2.2"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -459,6 +403,18 @@
     },
     "symfony/intl": {
         "version": "v5.2.1"
+    },
+    "symfony/lock": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "13350583a83fa636bf45a5fb62da3bdc73be52a1"
+        },
+        "files": [
+            "./config/packages/lock.yaml"
+        ]
     },
     "symfony/mailer": {
         "version": "4.3",
@@ -564,6 +520,9 @@
     "symfony/security-http": {
         "version": "v5.2.1"
     },
+    "symfony/serializer": {
+        "version": "v5.2.2"
+    },
     "symfony/service-contracts": {
         "version": "v2.2.0"
     },
@@ -640,12 +599,12 @@
         ]
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.6",
+        "version": "1.9",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "1.6",
-            "ref": "f362ed8e8aa99a8cb216e6bdb2ac833dfb7643dd"
+            "version": "1.9",
+            "ref": "579d8de06df2ceb34d39e84e84c0c051b9b5ac68"
         },
         "files": [
             "./assets/app.js",
@@ -672,9 +631,6 @@
     },
     "twig/twig": {
         "version": "v2.14.3"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"

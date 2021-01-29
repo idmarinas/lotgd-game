@@ -1,4 +1,4 @@
-{% translate_default_domain 'page_list' %}
+{% trans_default_domain 'page_list' %}
 
 {% if user.loggedin %}
     <form action="{{ 'list.php?op=search'|lotgd_url }}" method="POST">
@@ -61,7 +61,7 @@
                         {{ 'table.warrior.isOnline'|trans|colorize }}
                     {% endif %}
                 </td>
-                <td>{{ ('character.racename'|tl(null, warrior.race ?: constant('RACE_UNKNOWN')))|colorize }}</td>
+                <td>{{ ('character.racename'|trans({}, warrior.race ?: constant('RACE_UNKNOWN')))|colorize }}</td>
                 <td>{{ 'table.warrior.sex'|trans({'sex': warrior.sex})|colorize }}</td>
                 <td>{{ warrior.laston|relative_date }}</td>
             </tr>

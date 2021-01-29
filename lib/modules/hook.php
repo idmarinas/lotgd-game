@@ -19,7 +19,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
     global $currenthook;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Hook System.',
+        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -209,7 +209,7 @@ function modulehook($hookname, $args = false, $allowinactive = false, $only = fa
 function module_wipehooks(string $module)
 {
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Hook/Event System.',
+        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -242,11 +242,6 @@ function module_addeventhook($type, $chance)
 {
     global $mostrecentmodule;
 
-    // \trigger_error(\sprintf(
-    //     'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Event System.',
-    //     __METHOD__
-    // ), E_USER_DEPRECATED);
-
     \LotgdResponse::pageDebug("Adding an event hook on {$type} events for {$mostrecentmodule}");
 
     $repository = \Doctrine::getRepository('LotgdCore:ModuleEventHooks');
@@ -268,7 +263,7 @@ function module_drophook($hookname, $functioncall = false)
     global $mostrecentmodule;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Hook System.',
+        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -300,7 +295,7 @@ function module_drophook($hookname, $functioncall = false)
 function module_addhook($hookname, $functioncall = false, $whenactive = false)
 {
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Hook System.',
+        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
         __METHOD__
     ), E_USER_DEPRECATED);
 
@@ -322,7 +317,7 @@ function module_addhook_priority($hookname, $priority = 50, $functioncall = fals
     global $mostrecentmodule;
 
     \trigger_error(\sprintf(
-        'Usage of %s is obsolete since 4.4.0; and delete in version 5.0.0, use new Hook System.',
+        'Usage of %s is obsolete since 4.4.0; and delete in version 7.0.0',
         __METHOD__
     ), E_USER_DEPRECATED);
 

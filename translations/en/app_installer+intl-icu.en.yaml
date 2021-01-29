@@ -1,58 +1,40 @@
-canInstall:
-    version:
-        same: '`4You cannot install, you try to install the same version that is already installed.`0`n'
-        less: >
-            `4Cannot upgrade from a previous version to 3.0.0 IDMarinas Edition.
-            Please upgrade to version 3.0.0 IDMarinas Edition and then try a higher version.`0`n
-
-upgrade:
-    nothing: '`QNothing to do.`0`n'
-    error: '`$A problem has been encountered and an error occurred while do a pre-install.`0`n'
-    insertData:
-        noFiles: '`$Not new data to insert for version {version}.`0`n'
-        error: '`$A problem has been encountered and an error occurred while inserting the data of upgrade into the database.`0`n'
-    version:
-        to: '`c`bUpgrading to version `i{version}´i´b´c`n'
-        nothing: 'Nothing to update - your database is already in sync with the current entity metadata.`n'
-        schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
-        proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
-        data: '`@Update data for "{name}"`0'
-        table:
-            import: '`2Imported {count,plural, =1{`b1´b row} other{`b#´b rows}} into new table `@`b`i{table}´i´b`.`0`n'
-            rename: '`QRename the old table `2`b`i{old}´i´b`0 to `2`b`i{new}´i´b`0.`0`n'
-            create: '`@Create table `2`b`i{table}´i´b`0 with new structure.`0`n'
-            delete: '`$Delete table `4`b`i{table}´i´b`0 from database.`0`n'
-
-insertData:
-    dataInserted: '`QIt is not necessary to re-insert the data`0`n'
-    dataInsertedUpgrade: '`QIt is not necessary to re-insert the data for upgrades`0`n'
-    noFiles: '`2No data files were found, game data cannot be inserted. Please check this out and report.`0`n'
-    data:
-        insert: '`@`iInserted´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
-        update: '`@`iUpdated´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
-        replace: '`@`iReplaced´i a total of {count,plural, =1{1 row} other{`2`b#´b`0 rows}} in table "`2`b{table}´b`0".`0`n'
-    error: '`$A problem has been encountered and an error occurred while inserting the data into the database.`0`n'
-
-synchronizationTables:
-    title: '`@Updating database schema...`0`n'
-    nothing: '`@Nothing to update - your database is already in sync with the current entities metadata.`0`n'
-    schema: '`@Database schema updated successfully! {count,plural, =1{"`b`21`0´b" query was} other{"`b`2#`0´b" queries were}} executed.`0`n'
-    proxy: '`@Proxy classes generated "`b`2{classes}`0´b".`0`n'
-
-upgradeInsertData:
-    nothing: '`QNothing to upgrade.`0`n'
-
-installOfModules:
-    skipped: '`QThe installation of the modules has been skipped.`0`n'
-    process:
-        uninstall: '`3Uninstalling`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
-        install: '`3Installing`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
-        activate: '`3Activating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
-        deactivate: '`3Deactivating`0 `#{module}`0: {result,select, 1{`@OK!`0} other{`$Failed!`0}}`n'
-        donothing: '`$Ignoring`0 `#{module}`0`n'
-
-file:
-    removed: 'File {file} has been removed.`n'
-    moved: 'File {file_old} has been moved to {file_new}.`n'
-    created: 'File {file} has been created.`n'
-
+installer:
+    command.running: 'The command "{name}" is already running in another process.'
+    license:
+        read: |
+            Before continuing, you must read and understand the following license agreement.
+            By continuing with this installation, you indicate your agreement with the terms of the license found on the next link.
+        question: 'Agree this license? (default is no): '
+        reject: 'Installation cancelled, license rejected.'
+        confirmation: 'By using this software, you indicate your agreement to the license terms found on the previous link.'
+    check.installation:
+        verify:
+            version: 'We detect "{version}" installed in server. Is correct? (defaults is No): '
+            clean: 'We detect that is a new install or not version is detected. Is correct? (defaults is No): '
+        version:
+            choice: 'Please select version installed in your server: (defaults is new install): '
+            invalid: 'We have detected that the version from "{from}" or the version to "{to}" are not valid (one or both).'
+            same: 'You cannot install, you try to install the same version that is already installed'
+            less:
+                info: Cannot upgrade from a previous version to 4.12.0 IDMarinas Edition.
+                upgrade: Please upgrade to version 4.12.0 IDMarinas Edition and then try a higher version.
+            superior: 'This is crazy, you want to install a lower version on a server with a higher version?'
+    installation:
+        info.total: LoTGD Installer need install {n,plural, =1{"1" version} other{"#" versions}} of LoTGD Core. Please wait to finish.
+        abort:
+            install: 'Installation of LoTGD Core is aborted.'
+            command: 'Installation for version "{version}" has been fail'
+            database: 'Migration of Data Basa has been fail or canceled.'
+        user:
+            create: Create the administrator user
+            info: When asked if the account is an administrator, select 1 to create an account as administrator.
+    progressbar:
+        install:
+            label: Installing LoTGD Core installation
+            end: LoTGD Core installed correctly
+            progress:
+                version: 'Installing "{name}"'
+                database: 'Migrating Data Base to lastest version'
+                cache.clear: 'Clearing the cache for LoTGD Core'
+                steps: ' Step {step,number} completed of {total,number}'
+                completed: All steps completed

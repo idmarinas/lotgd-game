@@ -1,6 +1,6 @@
-{% translate_default_domain 'jaxon_mail' %}
-
 {% block mail_inbox %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {{ block('mail_buttons') }}
 
     <br>
@@ -70,7 +70,7 @@
                                 <a href="#" onclick="JaxonLotgd.Ajax.Core.Mail.read('{{ mail.messageid }}')">
                                     <img src="images/{{ mail.seen ? 'old' : 'new' }}scroll.GIF" width="16px" height="16px" alt="{{ mail.seen ? oldMsg : newMsg }}">
                                     {% if subject is array %}
-                                        {{ subject[0]|tl(subject[1], subject[2])|colorize }}
+                                        {{ subject[0]|trans(subject[1], subject[2])|colorize }}
                                     {% elseif not subject %}
                                         {{ mail.subject|default('section.default.table.tbody.no.subject'|trans)|e('html')|colorize }}
                                     {% else %}
@@ -169,6 +169,8 @@
 {% endblock mail_inbox %}
 
 {% block mail_write %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     <form id="mail-message" method="POST" class="ui form">
         <input type="hidden" name="return_to" value="{{ msgId }}">
         <div class="inline field">
@@ -269,6 +271,8 @@
 {% endblock mail_write %}
 
 {% block mail_read %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {{ block('mail_buttons') }}
 
     <br>
@@ -289,7 +293,7 @@
     {% if not message %}.
         {% set subjectDisplay = 'section.read.card.no.message.header'|trans|colorize %}
     {% elseif subject is array %}
-        {% set subjectDisplay = subject[0]|tl(subject[1], subject[2])|colorize %}
+        {% set subjectDisplay = subject[0]|trans(subject[1], subject[2])|colorize %}
     {% elseif not subject %}
         {% set subjectDisplay = message.subject|default('section.read.card.no.subject'|trans)|e('html')|colorize %}
     {% else %}
@@ -299,7 +303,7 @@
     {% if not message %}
         {% set bodyDisplay = 'section.read.card.no.message.body'|trans|colorize %}
     {% elseif body is array %}
-        {% set bodyDisplay = body[0]|tl(body[1], body[2])|colorize %}
+        {% set bodyDisplay = body[0]|trans(body[1], body[2])|colorize %}
     {% else %}
         {% set bodyDisplay = message.body %}
     {% endif %}
@@ -354,6 +358,8 @@
 {% endblock mail_read %}
 
 {% block mail_buttons %}
+    {% trans_default_domain 'jaxon_mail' %}
+
     {#
         Format for buttons
         [
@@ -382,7 +388,7 @@
                 <a class="ui primary button" onclick="JaxonLotgd.Ajax.Core.Mail.write(); $(this).addClass('loading disabled')">{{ 'button.write'|trans|colorize }}</a>
 
                 {% for btn in buttons %}
-                    <a class="ui {{ btn[1].attributes.class }} button" onclick="{{ btn[1].attributes.onclick }}">{{ btn[0]|tl(btn[1], btn[2])|colorize }}</a>
+                    <a class="ui {{ btn[1].attributes.class }} button" onclick="{{ btn[1].attributes.onclick }}">{{ btn[0]|trans(btn[1], btn[2])|colorize }}</a>
                 {% endfor %}
             </div>
         </div>

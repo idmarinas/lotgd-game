@@ -25,7 +25,7 @@ trait CoreFilter
             return '';
         }
 
-        return \LotgdFormat::colorize($string, true);
+        return $this->format->colorize($string, true);
     }
 
     /**
@@ -39,7 +39,7 @@ trait CoreFilter
             return '';
         }
 
-        return \LotgdSanitize::fullSanitize($string);
+        return $this->sanitize->fullSanitize($string);
     }
 
     /**
@@ -52,19 +52,7 @@ trait CoreFilter
             return '';
         }
 
-        return \LotgdSanitize::preventLotgdCodes($string);
-    }
-
-    /**
-     * Add a link, but not nav.
-     *
-     * @param string $string
-     */
-    public function lotgdUrl(string $link): string
-    {
-        \LotgdNavigation::addNavAllow($link);
-
-        return $link;
+        return $this->sanitize->preventLotgdCodes($string);
     }
 
     /**
@@ -77,7 +65,7 @@ trait CoreFilter
      */
     public function numeral($number, ?int $decimals = 0)
     {
-        return \LotgdFormat::numeral($number, $decimals);
+        return $this->format->numeral($number, (int) $decimals);
     }
 
     /**
@@ -90,7 +78,7 @@ trait CoreFilter
      */
     public function relativedate($string, $default = null)
     {
-        return \LotgdFormat::relativedate($string, $default);
+        return $this->format->relativedate($string, $default);
     }
 
     /**
@@ -112,8 +100,8 @@ trait CoreFilter
             $domain2 = \array_shift($arguments[1]);
             $text2   = \array_shift($arguments[1]);
 
-            $arg1 = \vsprintf(\LotgdTranslator::t($text1, [], $domain1), $arguments[0]);
-            $arg2 = \vsprintf(\LotgdTranslator::t($text2, [], $domain2), $arguments[1]);
+            $arg1 = \vsprintf($this->translator->trans($text1, [], $domain1), $arguments[0]);
+            $arg2 = \vsprintf($this->translator->trans($text2, [], $domain2), $arguments[1]);
 
             return \sprintf($string, $arg1, $arg2);
         }
@@ -128,9 +116,7 @@ trait CoreFilter
      */
     public function censor(?string $string): string
     {
-        $censor = $this->getCensor();
-
-        return $censor->filter($string);
+        return $this->censor->filter($string);
     }
 
     /**
@@ -173,6 +159,6 @@ trait CoreFilter
 
         $text = 0 == $value ? $no : $yes;
 
-        return $this->symfonyTranslator()->trans($text, [], $textDomain);
+        return $this->translator->trans($text, [], $textDomain);
     }
 }

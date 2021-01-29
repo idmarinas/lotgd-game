@@ -13,6 +13,8 @@
 
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
+use Twig\Environment;
+
 trait Commentary
 {
     protected $onlineStatus;
@@ -29,6 +31,7 @@ trait Commentary
      * Display de commentary block.
      */
     public function commentaryBlock(
+        Environment $env,
         array $commentary,
         string $textDomain,
         ?string $paginationLinkUrl = null,
@@ -41,9 +44,9 @@ trait Commentary
         $this->textDomain           = $textDomain; //-- Default text domain for commentary block
         $session['user']['chatloc'] = $commentary['section'];
 
-        $page = (int) \LotgdRequest::getQuery('commentPage', 1);
+        $page = (int) $this->request->getQuery('commentPage', 1);
 
-        $comments = $this->getCommentary()->getComments($commentary['section'], $page, $limit);
+        $comments = $this->commentary->getComments($commentary['section'], $page, $limit);
 
         $params = [
             'commentary'        => $commentary,
@@ -51,12 +54,12 @@ trait Commentary
             'comments'          => $comments,
             'showPagination'    => $showPagination,
             'canAddComment'     => $canAddComment,
-            'paginationLinkUrl' => $paginationLinkUrl ?? \LotgdRequest::getServer('REQUEST_URI'),
+            'paginationLinkUrl' => $paginationLinkUrl ?? $this->request->getServer('REQUEST_URI'),
             'formUrl'           => $this->commentaryFormUrl(),
             'SU_EDIT_COMMENTS'  => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return $this->getTemplateBlock()->renderBlock('commentary_block', $params);
+        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_block', $params);
     }
 
     /**
@@ -64,7 +67,7 @@ trait Commentary
      *
      * @param string $textDomain
      */
-    public function displayOneComment(array $comment, $textDomain, array $commentary): string
+    public function displayOneComment(Environment $env, array $comment, $textDomain, array $commentary): string
     {
         global $session;
 
@@ -73,11 +76,11 @@ trait Commentary
             'textDomain'              => $textDomain,
             'commentary'              => $commentary,
             'defaultTextDomainStatus' => $commentary['textDomainStatus'] ?? null,
-            'returnLink'              => \LotgdRequest::getServer('REQUEST_URI'),
+            'returnLink'              => $this->request->getServer('REQUEST_URI'),
             'SU_EDIT_COMMENTS'        => $session['user']['superuser'] & SU_EDIT_COMMENTS,
         ];
 
-        return $this->getTemplateBlock()->renderBlock('commentary_comment', $params);
+        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_comment', $params);
     }
 
     /**
@@ -174,17 +177,17 @@ trait Commentary
      * @param array  $commentary Array with commentary data
      * @param string $textDomain Text domain for translator
      */
-    public function addComment(array $commentary, string $textDomain): string
+    public function addComment(Environment $env, array $commentary, string $textDomain): string
     {
         $params = [
             'formUrl'    => $this->commentaryFormUrl(),
             'textDomain' => $textDomain,
             'commentary' => $commentary,
-            'colors'     => $this->getColor()->getColors(),
+            'colors'     => $this->color->getColors(),
             'maxChars'   => getsetting('maxchars', 200) + 100,
         ];
 
-        return $this->getTemplateBlock()->renderBlock('commentary_add', $params);
+        return $env->load('{theme}/_blocks/_commentary.html.twig')->renderBlock('commentary_add', $params);
     }
 
     /**
@@ -192,23 +195,23 @@ trait Commentary
      */
     public function saveComment(): void
     {
-        $moderate = \LotgdRequest::getPost('hideComment');
+        $moderate = $this->request->getPost('hideComment');
 
         if ($moderate)
         {
-            $this->getCommentary()->moderateComments($moderate);
+            $this->commentary->moderateComments($moderate);
 
             return;
         }
 
-        $data = \LotgdRequest::getPostAll();
+        $data = $this->request->getPostAll();
 
         if ( ! $data || empty($data))
         {
             return;
         }
 
-        $this->getCommentary()->saveComment($data);
+        $this->commentary->saveComment($data);
     }
 
     /**
@@ -221,13 +224,13 @@ trait Commentary
         if ( ! $this->onlineStatus)
         {
             $this->onlineStatus = [
-                'game'    => $this->getTranslator()->trans('commentary.status.game', [], $textDomain),
-                'you'     => $this->getTranslator()->trans('commentary.status.you', [], $textDomain),
-                'afk'     => $this->getTranslator()->trans('commentary.status.afk', [], $textDomain),
-                'nearby'  => $this->getTranslator()->trans('commentary.status.nearby', [], $textDomain),
-                'offline' => $this->getTranslator()->trans('commentary.status.offline', [], $textDomain),
-                'dni'     => $this->getTranslator()->trans('commentary.status.dni', [], $textDomain),
-                'online'  => $this->getTranslator()->trans('commentary.status.online', [], $textDomain),
+                'game'    => $this->translator->trans('commentary.status.game', [], $textDomain),
+                'you'     => $this->translator->trans('commentary.status.you', [], $textDomain),
+                'afk'     => $this->translator->trans('commentary.status.afk', [], $textDomain),
+                'nearby'  => $this->translator->trans('commentary.status.nearby', [], $textDomain),
+                'offline' => $this->translator->trans('commentary.status.offline', [], $textDomain),
+                'dni'     => $this->translator->trans('commentary.status.dni', [], $textDomain),
+                'online'  => $this->translator->trans('commentary.status.online', [], $textDomain),
             ];
         }
 
@@ -239,7 +242,7 @@ trait Commentary
      */
     protected function commentaryFormUrl(): string
     {
-        $url = \LotgdRequest::getServer('REQUEST_URI');
+        $url = $this->request->getServer('REQUEST_URI');
 
         //-- Sanitize link: Delete previous queries of: "page", "c", "commentPage" and "frombio"
         $url = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)|(?:[?&]frombio=[[:alnum:]])/i', '', $url);

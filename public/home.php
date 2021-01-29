@@ -40,7 +40,7 @@ if (getsetting('homeskinselect', 1))
 
         if ($skin > '')
         {
-            \LotgdRequest::setCookie('template', $skin, '+45 days');
+            \LotgdResponse::setCookie('template', $skin, '+45 days');
             \LotgdTheme::setDefaultSkin($skin);
         }
     }

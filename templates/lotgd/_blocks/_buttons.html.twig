@@ -1,7 +1,7 @@
-{% translate_default_domain 'app_default' %}
-
 {# Button of message of the day #}
 {% block message_of_the_day %}
+    {% trans_default_domain 'app_default' %}
+
     <a id="motd-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Motd.list(); $(this).addClass('loading disabled');">
         {% if session.needtoviewmotd %}
             <i aria-hidden="true" class="certificate icon"></i>
@@ -14,6 +14,8 @@
 
 {# Button for ye olde mail "Internal mail" #}
 {% block ye_olde_mail %}
+    {% trans_default_domain 'app_default' %}
+
     {% if user.loggedin %}
         {% set icon = '' %}
         {% if notSeenCount %}
@@ -39,6 +41,8 @@
 
 {# Button for user petition of help #}
 {% block user_petition %}
+    {% trans_default_domain 'app_default' %}
+
     <a id="petition-button" class="ui tertiary basic button motd" onclick="JaxonLotgd.Ajax.Core.Petition.help(); $(this).addClass('loading disabled')">
         {{ 'parts.petition.help'|trans|colorize }}
     </a>
@@ -46,6 +50,8 @@
 
 {# Button for Adminitrators, admin user and petitions #}
 {% block admin_petition %}
+    {% trans_default_domain 'app_default' %}
+
     {# Show only to administrator that have user edit permits #}
     {% if canEditUsers %}
         <span> | </span>
@@ -69,6 +75,8 @@
 
 {# Button of source #}
 {% block game_source %}
+    {% trans_default_domain 'app_default' %}
+
     <a id="button-source" class="ui tertiary basic button" onclick="JaxonLotgd.Ajax.Core.Source.show(); $(this).addClass('loading disabled')">
         {{ 'parts.source.title'|trans }}
     </a>

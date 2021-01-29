@@ -1,6 +1,6 @@
 {% use '{theme}/pages/_blocks/_newday.html.twig' %}
 
-{% translate_default_domain textDomain %}
+{% trans_default_domain textDomain %}
 
 {% for tpl, params in includeTemplatesPre %}
     {% include tpl with params %}

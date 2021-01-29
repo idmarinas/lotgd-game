@@ -15,6 +15,11 @@ namespace Lotgd\Core\Pattern;
 use Lotgd\Core\Output\Code;
 use Lotgd\Core\Output\Color;
 
+trigger_error(Output::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait Output
 {
     protected $lotgdOutput;

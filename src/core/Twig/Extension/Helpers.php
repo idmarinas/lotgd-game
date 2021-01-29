@@ -20,7 +20,8 @@ use Laminas\View\Helper\HeadStyle;
 use Laminas\View\Helper\HeadTitle;
 use Laminas\View\Helper\InlineScript;
 use Laminas\View\Helper\Placeholder\Container\AbstractContainer as Placeholder;
-use Lotgd\Core\Pattern\Http;
+use Lotgd\Core\Http\Request;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
@@ -29,15 +30,32 @@ use Twig\TwigFunction;
  */
 class Helpers extends AbstractExtension
 {
-    use Http;
-
-    protected $HeadLink;
-    protected $HeadMeta;
-    protected $HeadScript;
-    protected $HeadStyle;
-    protected $HeadTitle;
-    protected $InlineScript;
+    protected $request;
+    protected $headLink;
+    protected $headMeta;
+    protected $headScript;
+    protected $headStyle;
+    protected $headTitle;
+    protected $inlineScript;
     protected $basePath;
+
+    public function __construct(
+        Request $request,
+        HeadLink $headLink,
+        HeadMeta $headMeta,
+        HeadScript $headScript,
+        HeadStyle $headStyle,
+        HeadTitle $headTitle,
+        InlineScript $inlineScript
+    ) {
+        $this->request      = $request;
+        $this->headLink     = $headLink;
+        $this->headMeta     = $headMeta;
+        $this->headScript   = $headScript;
+        $this->headStyle    = $headStyle;
+        $this->headTitle    = $headTitle;
+        $this->inlineScript = $inlineScript;
+    }
 
     public function getFunctions()
     {
@@ -62,7 +80,7 @@ class Helpers extends AbstractExtension
      */
     public function headLink(?array $attributes = null, $placement = Placeholder::APPEND)
     {
-        return $this->getInstance('HeadLink')->__invoke($attributes, $placement);
+        return $this->headLink->__invoke($attributes, $placement);
     }
 
     /**
@@ -78,7 +96,7 @@ class Helpers extends AbstractExtension
      */
     public function headMeta($content = null, $keyValue = null, $keyType = 'name', $modifiers = [], $placement = Placeholder::APPEND)
     {
-        return $this->getInstance('HeadMeta')->__invoke($content, $keyValue, $keyType, $modifiers, $placement);
+        return $this->headMeta->__invoke($content, $keyValue, $keyType, $modifiers, $placement);
     }
 
     /**
@@ -94,7 +112,7 @@ class Helpers extends AbstractExtension
      */
     public function headScript($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = [], $type = 'text/javascript')
     {
-        return $this->getInstance('HeadScript')->__invoke($mode, $spec, $placement, $attrs, $type);
+        return $this->headScript->__invoke($mode, $spec, $placement, $attrs, $type);
     }
 
     /**
@@ -108,7 +126,7 @@ class Helpers extends AbstractExtension
      */
     public function headStyle($content = null, $placement = 'APPEND', $attributes = [])
     {
-        return $this->getInstance('HeadStyle')->__invoke($content, $placement, $attributes);
+        return $this->headStyle->__invoke($content, $placement, $attributes);
     }
 
     /**
@@ -121,7 +139,7 @@ class Helpers extends AbstractExtension
      */
     public function headTitle($title = null, $setType = null)
     {
-        return $this->getInstance('HeadTitle')->__invoke($title, $setType);
+        return $this->headTitle->__invoke($title, $setType);
     }
 
     /**
@@ -137,7 +155,7 @@ class Helpers extends AbstractExtension
      */
     public function inlineScript($mode = InlineScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = [], $type = 'text/javascript')
     {
-        return $this->getInstance('InlineScript')->__invoke($mode, $spec, $placement, $attrs, $type);
+        return $this->inlineScript->__invoke($mode, $spec, $placement, $attrs, $type);
     }
 
     /**
@@ -151,7 +169,7 @@ class Helpers extends AbstractExtension
     {
         if ( ! $this->basePath)
         {
-            $this->basePath = $this->getHttpRequest()->getBasePath();
+            $this->basePath = $this->request->getBasePath();
         }
 
         if (null !== $file)
@@ -168,20 +186,5 @@ class Helpers extends AbstractExtension
     public function getName()
     {
         return 'head';
-    }
-
-    /**
-     * Get intance of Laminas View Head*.
-     */
-    private function getInstance(string $instance): object
-    {
-        $className = "Laminas\\View\Helper\\{$instance}";
-
-        if ( ! $this->{$instance} instanceof $className)
-        {
-            $this->{$instance} = $this->getService($className);
-        }
-
-        return $this->{$instance};
     }
 }

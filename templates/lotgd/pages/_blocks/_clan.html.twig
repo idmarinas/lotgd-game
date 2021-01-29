@@ -1,6 +1,6 @@
-{% translate_default_domain textDomain %}
-
 {% block clan_applicant %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.applicant.subtitle'|trans|colorize }}
 
     {{ 'section.applicant.enter'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
@@ -13,6 +13,8 @@
 {% endblock clan_applicant %}
 
 {% block clan_default %}
+    {% trans_default_domain textDomain %}
+
     {% if clanInfo.clanmotd %}
         <blockquote>
             {{ 'section.default.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
@@ -30,7 +32,7 @@
         {% include tpl with params %}
     {% endfor %}
     {% for message in result.messages %}
-        {{ message[0]|tl(message[1], message[2])|colorize }}
+        {{ message[0]|trans(message[1], message[2])|colorize }}
     {% endfor %}
 
     {% if clanInfo.clandesc %}
@@ -54,6 +56,8 @@
 {% endblock clan_default %}
 
 {% block clan_membership %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.membership.legend'|trans|colorize }}
 
     <table class="ui very compact striped selectable table">
@@ -127,6 +131,8 @@
 {% endblock clan_membership %}
 
 {% block clan_motd %}
+    {% trans_default_domain textDomain %}
+
     {% if clanInfo.clanmotd %}
         <blockquote>
             {{ 'section.motd.current.motd'|trans({ author: motdAuthorName|uncolorize })|colorize }}
@@ -169,6 +175,8 @@
 {% endblock clan_motd %}
 
 {% block clan_applicant_apply %}
+    {% trans_default_domain textDomain %}
+
     {% if clanList|length %}
         {{ 'section.applicant.apply.clan.list'|trans({ 'clanOwnerName': clanOwnerName, 'playerName': user.name, 'playerWeapon': user.weapon })|colorize }}
     {% endif %}
@@ -183,6 +191,8 @@
 {% endblock clan_applicant_apply %}
 
 {% block clan_applicant_detail %}
+    {% trans_default_domain textDomain %}
+
     {% if SU_AUDIT_MODERATION %}
         <div class="ui modal editClan">
             <i class="close icon"></i>
@@ -252,6 +262,8 @@
 {% endblock clan_applicant_detail %}
 
 {% block clan_applicant_list %}
+    {% trans_default_domain textDomain %}
+
     {% if clanList|length %}
         {{ 'section.list.description'|trans({ 'clanOwnerName': clanOwnerName })|colorize }}
     {% endif %}
@@ -266,6 +278,8 @@
 {% endblock clan_applicant_list %}
 
 {% block clan_applicant_new %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.applicant.new.description'|trans({ 'clanOwnerName': clanOwnerName, 'costGold': costGold, 'costGems': costGems })|colorize }}
 
     <br>
@@ -299,6 +313,8 @@
 {% endblock clan_applicant_new %}
 
 {% block clan_applicant_waiting %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.applicant.subtitle'|trans|colorize }}
 
     {{ 'section.applicant.waiting.area'|trans|colorize }}

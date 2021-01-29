@@ -14,6 +14,7 @@
 namespace Lotgd\Core\Twig\Extension\Pattern;
 
 use Laminas\Paginator\Paginator;
+use Twig\Environment;
 
 /**
  * Trait to navigation display.
@@ -25,12 +26,12 @@ trait Navigation
      *
      * @return string
      */
-    public function display()
+    public function display(Environment $env)
     {
-        return $this->getTemplate()->renderBlock('navigation_menu', "@theme{$this->getTemplate()->getThemeNamespace()}/_blocks/_partials.html.twig", [
-            'navigation' => $this->getNavigation()->getNavigation(),
-            'headers'    => $this->getNavigation()->getHeaders(),
-            'navs'       => $this->getNavigation()->getNavs(),
+        return $env->load('{theme}/_blocks/_partials.html.twig')->renderBlock('navigation_menu', [
+            'navigation' => $this->navigation->getNavigation(),
+            'headers'    => $this->navigation->getHeaders(),
+            'navs'       => $this->navigation->getNavs(),
         ]);
     }
 
@@ -42,14 +43,14 @@ trait Navigation
      */
     public function createLink($label, $options): ?string
     {
-        if ($this->getNavigation()->isHided($options['link']))
+        if ($this->navigation->isHided($options['link']))
         {
             return null;
         }
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
+            $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
         }
         else
         {
@@ -57,11 +58,11 @@ trait Navigation
         }
 
         $attributes = $options['attributes'] ?? [];
-        $blocked    = $this->getNavigation()->isBlocked($options['link']);
+        $blocked    = $this->navigation->isBlocked($options['link']);
 
         if ( ! $blocked)
         {
-            $label = $this->getAccesskeys()->create($label, $attributes);
+            $label = $this->accessKeys->create($label, $attributes);
         }
 
         if ($blocked)
@@ -70,7 +71,7 @@ trait Navigation
         }
         $attributes = $this->createAttributesString($attributes);
 
-        return \LotgdFormat::colorize(\sprintf(
+        return $this->format->colorize(\sprintf(
             '<%1$s %2$s>%4$s %3$s %5$s</%1$s>',
             ( ! $blocked ? 'a' : 'span'),
             $attributes,
@@ -88,14 +89,14 @@ trait Navigation
      */
     public function createHeader($label, $options): ?string
     {
-        if ( ! $this->getNavigation()->headerHasNavs($label) && $options['hiddeEmpty'])
+        if ( ! $this->navigation->headerHasNavs($label) && $options['hiddeEmpty'])
         {
             return null;
         }
 
         if ($options['translate'] ?? false)
         {
-            $label = $this->symfonyTranslator()->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
+            $label = $this->translator->trans($label, $options['params'] ?? [], $options['textDomain'] ?? 'navigation_app', $options['locale'] ?? null);
         }
         else
         {
@@ -109,7 +110,7 @@ trait Navigation
             '<%1$s %2$s>%3$s</%1$s>',
             (string) ($options['tag'] ?? 'span'),
             $attributes,
-            \LotgdFormat::colorize($label, true)
+            $this->format->colorize($label, true)
         );
     }
 
@@ -121,7 +122,7 @@ trait Navigation
      *                                          For render a block use array ['block_name', 'path/to/template']
      * @param string|null       $scrollingStyle Options: All, Elastic, Jumping, Sliding. Default is Sliding
      */
-    public function showPagination(Paginator $paginator, ?string $link = null, $template = null, ?string $scrollingStyle = null, ?array $params = null): string
+    public function showPagination(Environment $env, Paginator $paginator, ?string $link = null, $template = null, ?string $scrollingStyle = null, ?array $params = null): string
     {
         $scrollingStyle = $scrollingStyle ?: 'Sliding';
 
@@ -140,13 +141,13 @@ trait Navigation
 
             $pages['jaxon'] = $link;
 
-            return $this->renderPagination($template, $pages);
+            return $this->renderPagination($env, $template, $pages);
         }
 
         $template = $template ?: ['pagination', '{theme}/_blocks/_partials.html.twig'];
 
         //-- Use request uri if not set link
-        $link = $link ?: \LotgdRequest::getServer('REQUEST_URI');
+        $link = $link ?: $this->request->getServer('REQUEST_URI');
         //-- Sanitize link / Delete previous queries of: "page", "c" and "commentPage"
         $link = \preg_replace('/(?:[?&]c=[[:digit:]]+)|(?:[?&]page=[[:digit:]]+)|(?:[?&]commentPage=[[:digit:]]+)/i', '', $link);
 
@@ -167,7 +168,19 @@ trait Navigation
 
         $pages['href'] = $link;
 
-        return $this->renderPagination($template, $pages);
+        return $this->renderPagination($env, $template, $pages);
+    }
+
+    /**
+     * Add a link, but not nav.
+     *
+     * @param string $string
+     */
+    public function lotgdUrl(string $link): string
+    {
+        $this->navigation->addNavAllow($link);
+
+        return $link;
     }
 
     /**
@@ -176,14 +189,14 @@ trait Navigation
      * @param string|array|null $template
      * @param array             $pages
      */
-    protected function renderPagination($template, $pages): string
+    protected function renderPagination(Environment $env, $template, $pages): string
     {
         //-- Render block template
         if (\is_array($template))
         {
-            return $this->getTemplate()->renderBlock($template[0], $template[1], $pages);
+            return $env->load($template[1])->renderBlock($template[0], $pages);
         }
 
-        return $this->getTemplate()->render("{theme}/{$template}", $pages);
+        return $env->render("{theme}/{$template}", $pages);
     }
 }

@@ -8,52 +8,18 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Interop\Container\ContainerInterface;
 use Lotgd\Core\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface as DependencyInjectionContainerInterface;
 
+trigger_error(Container::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
+ */
 trait Container
 {
-    protected $serviceManager;
     protected $lotgdKernel;
     protected $lotgdKernelContainer;
-
-    /**
-     * Set container (Service Manager).
-     *
-     * @deprecated 4.10.0
-     */
-    public function setContainer(ContainerInterface $container)
-    {
-        $this->serviceManager = $container;
-
-        return $this;
-    }
-
-    /**
-     * Get container.
-     *
-     * @param string $name
-     *
-     * @return object
-     *
-     * @deprecated 4.10.0
-     */
-    public function getContainer($name = null)
-    {
-        if ( ! $name)
-        {
-            return $this->serviceManager;
-        }
-
-        //-- TEMP: avoid error when not configure instance of service manager
-        if ( ! $this->serviceManager instanceof ContainerInterface)
-        {
-            return \LotgdLocator::get($name);
-        }
-
-        return $this->serviceManager->get($name);
-    }
 
     /**
      * Get container.

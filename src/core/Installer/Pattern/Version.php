@@ -3,7 +3,12 @@
 /**
  * This file is part of Legend of the Green Dragon.
  *
+ * @see https://github.com/idmarinas/lotgd-game
+ *
+ * @license https://github.com/idmarinas/lotgd-game/blob/master/LICENSE.txt
  * @author IDMarinas
+ *
+ * @since 5.0.0
  */
 
 namespace Lotgd\Core\Installer\Pattern;
@@ -15,8 +20,8 @@ trait Version
      *
      * @var array
      */
-    protected $versions = [
-        '-1'                              => -1, //needed just as a placeholder for new installs.
+    protected $lotgd_versions = [
+        'Clean Install'                   => -1, //needed just as a placeholder for new installs.
         '0.9'                             => 900,
         '0.9.1'                           => 901,
         '0.9.2'                           => 902,
@@ -62,7 +67,7 @@ trait Version
         '2.6.0 IDMarinas Edition'         => 20600,
         '2.7.0 IDMarinas Edition'         => 20700,
         '3.0.0 IDMarinas Edition'         => 30000,
-        '4.0.0 IDMarinas Edition'         => 40000,
+        '4.0.0 IDMarinas Edition'         => 40000, //-- New Installer
         '4.1.0 IDMarinas Edition'         => 40100,
         '4.2.0 IDMarinas Edition'         => 40200,
         '4.3.0 IDMarinas Edition'         => 40300,
@@ -74,6 +79,8 @@ trait Version
         '4.9.0 IDMarinas Edition'         => 40900,
         '4.10.0 IDMarinas Edition'        => 41000,
         '4.11.0 IDMarinas Edition'        => 41100,
+        '4.12.0 IDMarinas Edition'        => 41200,
+        '5.0.0 IDMarinas Edition'         => 50000, //-- New Installer
     ];
 
     /**
@@ -81,49 +88,7 @@ trait Version
      */
     public function getIntVersion(string $version): int
     {
-        return $this->versions[$version] ?? 0;
-    }
-
-    /**
-     * Get the previous version of the given version.
-     */
-    public function getPreviusVersion(int $version): int
-    {
-        $vers = \array_values($this->versions);
-
-        $actual = \array_search($version, $vers);
-
-        if (false === $actual)
-        {
-            return 0;
-        }
-        elseif (isset($vers[$actual - 1]))
-        {
-            return $vers[$actual - 1];
-        }
-
-        return 0;
-    }
-
-    /**
-     * Get the next version of the given version.
-     */
-    public function getNextVersion(int $version): int
-    {
-        $vers = \array_values($this->versions);
-
-        $actual = \array_search($version, $vers);
-
-        if (false === $actual)
-        {
-            return 0;
-        }
-        elseif (isset($vers[$actual + 1]))
-        {
-            return $vers[$actual + 1];
-        }
-
-        return 0;
+        return $this->lotgd_versions[$version] ?? 0;
     }
 
     /**
@@ -131,14 +96,38 @@ trait Version
      */
     public function getNameVersion(int $version): string
     {
-        return \array_search($version, $this->versions);
+        $version = \max(-1, $version) ?: -1;
+
+        return (string) \array_search($version, $this->lotgd_versions);
+    }
+
+    /**
+     * Check if ID is a valid version.
+     */
+    public function isValidVersion(int $version): bool
+    {
+        $version = \max(-1, $version) ?: -1;
+
+        return false !== \array_search($version, $this->lotgd_versions);
     }
 
     /**
      * Get array of versions.
      */
-    public function getAllVersions(): array
+    public function getInstallerVersions(): array
     {
-        return $this->versions;
+        //-- Only version up of 4.12.0 IDMarinas Edition is allowed in installer
+        return \array_filter($this->lotgd_versions, function ($version)
+        {
+            return $version > 41200 || -1 == $version;
+        });
+    }
+
+    /**
+     * Get array of versions.
+     */
+    public function getFullListOfVersion(): array
+    {
+        return $this->lotgd_versions;
     }
 }

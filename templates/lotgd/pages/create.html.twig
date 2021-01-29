@@ -1,15 +1,15 @@
 {% use '{theme}/pages/_blocks/_create.html.twig' %}
 
-{% translate_default_domain 'page_create' %}
+{% trans_default_domain 'page_create' %}
 
 {% if maintenanceMode %}
     <div class="ui centered horizontal card">
         <div class="image">
-            <img src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|tl(null, 'app_default')|uncolorize }}">
+            <img src="images/logindragon.gif" alt="{{ 'maintenance.server.creation.title'|trans({}, 'app_default')|uncolorize }}">
         </div>
         <div class="content">
-            <a class="header">{{ 'maintenance.server.creation.title'|tl(null, 'app_default') }}</a>
-            <div class="description">{{ 'maintenance.server.creation.message'|tl(null, 'app_default') }}</div>
+            <a class="header">{{ 'maintenance.server.creation.title'|trans({}, 'app_default') }}</a>
+            <div class="description">{{ 'maintenance.server.creation.message'|trans({}, 'app_default') }}</div>
         </div>
     </div>
 {% elseif not allowCreation %}

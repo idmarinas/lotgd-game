@@ -1,10 +1,12 @@
-{% translate_default_domain textDomain %}
-
 {% block prefs_cancelemail %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.cancelemail'|trans({ 'email': email })|colorize }}
 {% endblock prefs_cancelemail %}
 
 {% block prefs_default %}
+    {% trans_default_domain textDomain %}
+
     <form action="{{ 'prefs.php?op=save'|lotgd_url }}" method="POST" onsubmit="Lotgd.md5PassRegister()">
         {{ form }}
     </form>
@@ -21,5 +23,7 @@
 {% endblock prefs_default %}
 
 {% block prefs_forcechangeemail %}
+    {% trans_default_domain textDomain %}
+
     {{ 'section.forcechangeemail'|trans({ 'email': email })|colorize }}
 {% endblock prefs_forcechangeemail %}

@@ -19,41 +19,39 @@ const config = {
     files: {
         //-- Files to copy
         main: [
-            //-- All files includin subdirectories
+            //-- All files including subdirectories
             '**{,/**}',
-            //-- Ignore files of development
-            '!gulp{,/**}',
-            '!gulpfile.js',
-            '!config/autoload/local/dbconnect.php', //-- Ignore local dbconnect file
-            '!assets{,/**}',
-            '!docs{,/**}', //-- Ignore the "docs/" folder, you don't need to publish it on your server.
-            '!release{,/**}', //-- These are the compiled files of the different versions ready to use in production.
-            '!entity{,/**}', //-- Autogenerate entities from BD
-            '!_core_files{,/**}', //-- This files are merge if need, in Custom local Skeleton
+            //-- Ignore files/folders of development
+            '!{assets,docs,gulp,gulpfile.js,release,entity,_core_files}{,/**}',
             //-- Include .files
             '{/**/.gitkeep,/.env,/.htaccess}',
-            '!{*.,}dist{,/**}', //-- Ignore all dist folders
+            //-- Ignore content of
+            '!data/installer{,/**}',
+            'data/installer/README.md', //-- But include README.md
+            //-- Ignore all dist folders/files
+            '!{*.,}dist{,/**}',
             //-- Ignore dependency directories
             '!{bower_components,node_modules,vendor,var}{,/**}'
         ],
         core_files: [], //-- This is used in LoTGD Skeleton
         skeleton: [
-            //-- All files includin subdirectories
+            //-- All files including subdirectories
             '**{,/**}',
+            //-- Ignore some extension and files
+            '!*.{txt,TXT,csv,phar}',
+            '!{README.md,TODO.md,phpdoc.dist.xml}',
             //-- Ignore files of development
             '!{docs,release}{,/**}',
+            //-- Ignore content of
+            '!data/installer{,/**}',
+            'data/installer/README.md', //-- But include README.md
             //-- Ignore folders not need for skeleton
-            '!{error_docs,lib,skeleton}{,/**}',
+            '!{error_docs,lib,migrations}{,/**}',
             //-- Ignore files of core
             '!assets/lotgd/css/semantic{,/**}',
-            '!config/autoload/global{,/**}',
-            '!config/autoload/local{,/**}',
-            '!config/lotgd.config.php',
             '!cronjob/*.php',
-            '!data/form/core{,/**}',
             '!public{,/**}',
             '!modules{,/**}',
-            '!src/module{,/**}',
             '!src/core{,/**}',
             '!src/ajax/core{,/**}',
             '!src/ajax/pattern/core{,/**}',
@@ -62,12 +60,9 @@ const config = {
             '!themes{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/themes" folder
             '!translations/en{,/**}', //-- No need in skeleton Can see examples in copy that you need have in "_core_files/translations/en" folder
             '!src/{Controller,Entity,Repository}{,/**}', //-- Not need for now this folders
-            //-- Ignore some files
-            '!*.{txt,TXT,csv,phar}',
-            '!{README.md,TODO.md,phpdoc.dist.xml}',
             //-- Include .files
             '{/**/.gitkeep,/.env,/.codeclimate.yml,/.editorconfig,/.eslintignore,/.eslintrc.js,/.gitignore,/.php_cs,/.stickler.yml,/.watchmanconfig}',
-            //-- Ignore all dist folders
+            //-- Ignore all dist folders/files
             '!{*.,}dist{,/**}',
             '!src/{functions,functions_old}.php',
             //-- Ignore dependency directories

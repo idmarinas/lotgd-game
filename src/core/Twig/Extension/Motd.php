@@ -13,27 +13,31 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\EntityRepository\MotdRepository;
 use Lotgd\Core\Pattern as PatternCore;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Motd extends AbstractExtension
 {
     use Pattern\Motd;
-    use PatternCore\Doctrine;
-    use PatternCore\Template;
-    use PatternCore\Translator;
 
+    protected $doctrine;
     protected $repository;
 
+    public function __construct(EntityManagerInterface $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
     /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new TwigFunction('motd_show_item', [$this, 'display']),
-            new TwigFunction('message_of_the_day', [$this, 'messageOfTheDay']),
+            new TwigFunction('motd_show_item', [$this, 'display'], ['needs_environment' => true]),
+            new TwigFunction('message_of_the_day', [$this, 'messageOfTheDay'], ['needs_environment' => true]),
         ];
     }
 
@@ -46,7 +50,7 @@ class Motd extends AbstractExtension
     {
         if ( ! $this->repository instanceof MotdRepository)
         {
-            $this->repository = $this->getDoctrineRepository(\Lotgd\Core\Entity\Motd::class);
+            $this->repository = $this->doctrine->getRepository(\Lotgd\Core\Entity\Motd::class);
         }
 
         return $this->repository;

@@ -1,5 +1,3 @@
-{% translate_default_domain 'partial_sidebar' %}
-
 {% block character_stat_head %}
     <tr>
         <td class='charhead' colspan='2'>
@@ -20,6 +18,8 @@
 {% endblock character_stat_row %}
 
 {% block character_stat_buff %}
+    {% trans_default_domain 'partial_sidebar' %}
+
     <tr>
         <td class='charhead' colspan='2'>
             <strong>{{ 'character.buff_title'|trans|colorize }}:</strong>

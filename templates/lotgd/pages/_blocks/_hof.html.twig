@@ -1,6 +1,6 @@
-{% translate_default_domain textDomain %}
-
 {% block hof_charm %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.charm.table.thead.rank'|trans|uncolorize }}</th>
@@ -15,7 +15,7 @@
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
                     <td>{{ 'section.charm.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
-                    <td>{{ 'character.racename'|tl(null, character.race)|colorize }}</td>
+                    <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -31,6 +31,8 @@
 {% endblock hof_charm %}
 
 {% block hof_days %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
@@ -59,6 +61,8 @@
 {% endblock hof_days %}
 
 {% block hof_default %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.default.table.thead.rank'|trans|uncolorize }}</th>
@@ -93,6 +97,8 @@
 {% endblock hof_default %}
 
 {% block hof_gems %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.gems.table.thead.rank'|trans|uncolorize }}</th>
@@ -119,6 +125,8 @@
 {% endblock hof_gems %}
 
 {% block hof_money %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.money.table.thead.rank'|trans|uncolorize }}</th>
@@ -149,6 +157,8 @@
 {% endblock hof_money %}
 
 {% block hof_resurrections %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.days.table.thead.rank'|trans|uncolorize }}</th>
@@ -177,6 +187,8 @@
 {% endblock hof_resurrections %}
 
 {% block hof_tough %}
+    {% trans_default_domain textDomain %}
+
     <table class="ui very compact striped selectable table">
         <thead>
             <th scope="col">{{ 'section.tough.table.thead.rank'|trans|uncolorize }}</th>
@@ -191,7 +203,7 @@
                     <td>{{ loop.index + rank }}</td>
                     <td>{{ character.name|colorize }}</td>
                     <td>{{ 'section.tough.table.tbody.gender'|trans({ 'sex': character.sex })|colorize }}</td>
-                    <td>{{ 'character.racename'|tl(null, character.race)|colorize }}</td>
+                    <td>{{ 'character.racename'|trans({}, character.race)|colorize }}</td>
                 </tr>
             {% else %}
                 <tr>

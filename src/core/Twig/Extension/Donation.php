@@ -13,16 +13,19 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Lotgd\Core\Http\Request;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Donation extends AbstractExtension
 {
-    use Pattern\AttributesString;
-    use Pattern\Navigation;
-    use PatternCore\Http;
-    use PatternCore\Template;
-    use PatternCore\Translator;
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
 
     /**
      * {@inheritdoc}
@@ -30,22 +33,20 @@ class Donation extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('donation_buttons', [$this, 'display']),
+            new TwigFunction('donation_buttons', [$this, 'display'], ['needs_environment' => true]),
         ];
     }
 
-    public function display()
+    public function display(Environment $env)
     {
         global $session;
 
-        $request = $this->getHttpRequest();
-
         $params = [
-            'item_number' => \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$request->getServer('HTTP_HOST').'/'.$request->getServer('REQUEST_URI'),
-            'notify_url'  => '//'.$request->getServer('HTTP_HOST').\dirname($request->getServer('REQUEST_URI')).'/payment.php',
+            'item_number' => \htmlentities($session['user']['login'], ENT_COMPAT, getsetting('charset', 'UTF-8')).':'.$this->request->getServer('HTTP_HOST').'/'.$this->request->getServer('REQUEST_URI'),
+            'notify_url'  => '//'.$this->request->getServer('HTTP_HOST').\dirname($this->request->getServer('REQUEST_URI')).'/payment.php',
         ];
 
-        return $this->getTemplate()->render('@core/paypal.html.twig', $params);
+        return $env->render('@core/paypal.html.twig', $params);
     }
 
     /**

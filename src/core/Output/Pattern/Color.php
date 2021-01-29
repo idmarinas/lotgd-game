@@ -10,7 +10,6 @@ namespace Lotgd\Core\Output\Pattern;
 
 trait Color
 {
-    protected $colors;
     protected $colorPatternOpen;
     protected $colorPatternClose;
     protected $colorReplacement;
@@ -22,11 +21,6 @@ trait Color
      */
     public function getColors()
     {
-        if ( ! $this->colors)
-        {
-            $this->colors = $this->getService(\Lotgd\Core\Output\Color::class);
-        }
-
         return $this->colors->getColors();
     }
 

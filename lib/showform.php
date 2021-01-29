@@ -70,11 +70,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
         if (\is_array($info[0]))
         {
-            $info[0] = \call_user_func_array('sprintf_translate', $info[0]);
-        }
-        else
-        {
-            $info[0] = translate($info[0]);
+            $info[0] = \call_user_func_array('sprintf', $info[0]);
         }
 
         if (isset($info[1]))
@@ -160,7 +156,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
 
         $menu = \sprintf(
             '<div class="ui menu lotgd form "><a class="browse item active">%s <i class="dropdown icon"></i></a>%s<div class="header item">%s</div></div>',
-            translate_inline('Browse'),
+            'Browse',
             $popupMenu,
             $tabActive
         );
@@ -175,9 +171,7 @@ function lotgd_showform($layout, $row, $nosave = false, $keypref = false, $print
         \LotgdResponse::pageAddContent($content);
     }
 
-    tlschema('showform');
-    $save = translate_inline('Save');
-    tlschema();
+    $save = 'Save';
 
     if ( ! $nosave)
     {
@@ -292,11 +286,6 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 list($k, $v) = \each($info);
                 $optdis      = $v;
 
-                if ( ! $pretrans)
-                {
-                    $optdis = translate_inline($optdis);
-                }
-
                 if (\is_array($row[$key]))
                 {
                     if ($row[$key][$optval])
@@ -336,10 +325,6 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 list($k, $v) = \each($info);
                 $optdis      = $v;
 
-                if ( ! $pretrans)
-                {
-                    $optdis = translate_inline($optdis);
-                }
                 $select .= ("<div class='ui radio checkbox'><input type='radio' name='{$keyout}' value='{$optval}'".($row[$key] == $optval ? ' checked' : '').'><label>'.("{$optdis}").'</label></div>');
             }
 
@@ -447,20 +432,12 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                                     .($disablemask & (int) $v ? '' : ' disabled')." value='1'> ";
                     list($k, $v) = \each($info);
 
-                    if ( ! isset($pretrans) || ! $pretrans)
-                    {
-                        $v = translate_inline($v);
-                    }
                     $input .= \sprintf('<label>%s</label></div><br>', $v);
                 }
                 else
                 {
                     list($k, $v) = \each($info);
 
-                    if ( ! isset($pretrans) || ! $pretrans)
-                    {
-                        $v = translate_inline($v);
-                    }
                     $input .= \sprintf('%s<br>', $v);
                 }
             }
@@ -484,14 +461,11 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 '6 months', '9 months', '12 months',
                 '1 year',
             ];
-            tlschema('showform');
 
             foreach ($vals as $k => $v)
             {
-                $vals[$k] = translate($v);
-                \LotgdResponse::pageAddContent(tlbutton_pop());
+                $vals[$k] = $v;
             }
-            tlschema();
             $select = "<select class='ui lotgd dropdown' name='{$keyout}'>";
 
             foreach ($vals as $k => $v)
@@ -520,10 +494,6 @@ function lotgd_show_form_field($info, $row, $key, $keyout, $val, $extensions)
                 list($k, $v) = \each($info);
                 $optdis      = $v;
 
-                if ( ! isset($pretrans) || ! $pretrans)
-                {
-                    $optdis = translate_inline($optdis);
-                }
                 $selected = 0;
 
                 if (isset($row[$key]) && $row[$key] == $optval)

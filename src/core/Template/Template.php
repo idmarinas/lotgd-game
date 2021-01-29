@@ -19,12 +19,12 @@ use Laminas\Filter\Word\SeparatorToDash;
 use Laminas\Filter\Word\UnderscoreToDash;
 use Lotgd\Core\Exception;
 use Lotgd\Core\Http\Request;
-use Twig\Environment;
 use Lotgd\Core\Lib\Settings;
+use Twig\Environment;
 
 /**
  * This class are deprecate, and only is for transition to Symfony Kernel.
- * Is replace for a new Theme System
+ * Is replace for a new Theme System.
  *
  * @deprecated 4.12.0 delete in future versions
  */
@@ -50,10 +50,10 @@ class Template extends Environment
      */
     public function __construct(Environment $decorated, Request $request, Params $params, Settings $settings)
     {
-        $this->decorated = $decorated;
+        $this->decorated    = $decorated;
         $this->lotgdRequest = $request;
-        $this->lotgdParams = $params;
-        $this->settings = $settings;
+        $this->lotgdParams  = $params;
+        $this->settings     = $settings;
 
         $this->prepareTheme();
         $this->updateGlobals();
@@ -148,7 +148,7 @@ class Template extends Environment
 
         if ( ! $this->lotgdRequest->getCookie('template') || $this->defaultSkin != $this->lotgdRequest->getCookie('template'))
         {
-            $this->lotgdRequest->setCookie('template', $this->defaultSkin);
+            \setcookie('template', $this->defaultSkin, \strtotime('+45 days'));
         }
 
         return $this->defaultSkin;
@@ -228,54 +228,8 @@ class Template extends Environment
     }
 
     /**
-     * Search for a valid theme if removed.
-     *
-     * @throws RuntimeException
+     * sobree scribir las funciones originales.
      */
-    protected function getValidTheme(): string
-    {
-        // A generic way of allowing a theme to be selected.
-        $skins  = [];
-        $handle = @\opendir(static::TEMPLATES_LAYOUT_DIR);
-
-        while (false !== ($file = @\readdir($handle)))
-        {
-            if ('html' == \pathinfo($file, PATHINFO_EXTENSION))
-            {
-                $skins[] = $file;
-
-                break; //-- We have 1 theme, no need more
-            }
-        }
-
-        //-- Not found any valid theme
-        if (empty($skins))
-        {
-            throw new Exception\RuntimeException(\sprintf('Not found a valid "theme.html" file in "%s" folder.', static::TEMPLATES_LAYOUT_DIR), 1);
-        }
-
-        return $skins[0];
-    }
-
-    /**
-     * Update globals parameters.
-     */
-    protected function updateGlobals(): void
-    {
-        global $session;
-
-        $user   = $session['user'] ?? [];
-        $sesion = $session         ?? [];
-        unset($sesion['user'], $user['password']);
-
-        $this->decorated->addGlobal('user', $user); //-- Actual user data for this call
-        $this->decorated->addGlobal('session', $sesion); //-- Actual session data for this call
-    }
-
-    /**
-     * sobree scribir las funciones originales
-     */
-
     public function getBaseTemplateClass()
     {
         return $this->decorated->getBaseTemplateClass();
@@ -361,7 +315,7 @@ class Template extends Environment
         return $this->decorated->loadClass($cls, $name, $index);
     }
 
-    public function createTemplate($template, string $name = null)
+    public function createTemplate($template, ?string $name = null)
     {
         $this->decorated->createTemplate($template, $name);
     }
@@ -569,5 +523,50 @@ class Template extends Environment
     public function getBinaryOperators()
     {
         return $this->decorated->getBinaryOperators();
+    }
+
+    /**
+     * Search for a valid theme if removed.
+     *
+     * @throws RuntimeException
+     */
+    protected function getValidTheme(): string
+    {
+        // A generic way of allowing a theme to be selected.
+        $skins  = [];
+        $handle = @\opendir(static::TEMPLATES_LAYOUT_DIR);
+
+        while (false !== ($file = @\readdir($handle)))
+        {
+            if ('html' == \pathinfo($file, PATHINFO_EXTENSION))
+            {
+                $skins[] = $file;
+
+                break; //-- We have 1 theme, no need more
+            }
+        }
+
+        //-- Not found any valid theme
+        if (empty($skins))
+        {
+            throw new Exception\RuntimeException(\sprintf('Not found a valid "theme.html" file in "%s" folder.', static::TEMPLATES_LAYOUT_DIR), 1);
+        }
+
+        return $skins[0];
+    }
+
+    /**
+     * Update globals parameters.
+     */
+    protected function updateGlobals(): void
+    {
+        global $session;
+
+        $user   = $session['user'] ?? [];
+        $sesion = $session         ?? [];
+        unset($sesion['user'], $user['password']);
+
+        $this->decorated->addGlobal('user', $user); //-- Actual user data for this call
+        $this->decorated->addGlobal('session', $sesion); //-- Actual session data for this call
     }
 }

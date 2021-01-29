@@ -13,27 +13,62 @@
 
 namespace Lotgd\Core\Twig\Extension;
 
-use Lotgd\Core\Pattern as PatternCore;
+use Doctrine\ORM\EntityManagerInterface;
+use Lotgd\Core\EventManager\EventManager as CoreEventManager;
+use Lotgd\Core\Http\Request;
+use Lotgd\Core\Lib\Settings;
+use Lotgd\Core\Output\Censor;
+use Lotgd\Core\Output\Format;
+use Lotgd\Core\Tool\Sanitize;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\TwigTest;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GameCore extends AbstractExtension
 {
     use Pattern\CharacterFunction;
     use Pattern\CoreFilter;
     use Pattern\CoreFunction;
-    use Pattern\Jaxon;
     use Pattern\Mail;
     use Pattern\News;
     use Pattern\PageGen;
     use Pattern\Petition;
     use Pattern\Source;
-    use PatternCore\HookManager;
-    use PatternCore\Jaxon;
-    use PatternCore\LotgdCore;
-    use PatternCore\Settings;
-    use PatternCore\Template;
+
+    protected $request;
+    protected $format;
+    protected $sanitize;
+    protected $translator;
+    protected $censor;
+    protected $settings;
+    protected $hookManager;
+    protected $doctrine;
+    protected $session;
+
+    public function __construct(
+        Request $request,
+        Format $format,
+        Sanitize $sanitize,
+        TranslatorInterface $translator,
+        Censor $censor,
+        Settings $settings,
+        CoreEventManager $hookManager,
+        EntityManagerInterface $doctrine,
+        SessionInterface $session
+    ) {
+        $this->request     = $request;
+        $this->format      = $format;
+        $this->sanitize    = $sanitize;
+        $this->translator  = $translator;
+        $this->censor      = $censor;
+        $this->settings    = $settings;
+        $this->hookManager = $hookManager;
+        $this->doctrine    = $doctrine;
+        $this->session    = $session;
+    }
 
     /**
      * {@inheritdoc}
@@ -45,7 +80,6 @@ class GameCore extends AbstractExtension
             new TwigFilter('uncolorize', [$this, 'uncolorize']),
             new TwigFilter('prevent_codes', [$this, 'preventCodes']),
             new TwigFilter('nltoappon', [$this, 'nltoappon']),
-            new TwigFilter('lotgd_url', [$this, 'lotgdUrl']),
             new TwigFilter('numeral', [$this, 'numeral']),
             new TwigFilter('relative_date', [$this, 'relativedate']),
             new TwigFilter('unserialize', 'unserialize'),
@@ -78,36 +112,25 @@ class GameCore extends AbstractExtension
             new TwigFunction('page_title', [$this, 'pageTitle']),
             new TwigFunction('game_version', [$this, 'gameVersion']),
             new TwigFunction('game_copyright', [$this, 'gameCopyright']),
-            new TwigFunction('game_source', [$this, 'gameSource']),
-            new TwigFunction('game_page_gen', [$this, 'gamePageGen']),
+            new TwigFunction('game_source', [$this, 'gameSource'], ['needs_environment' => true]),
+            new TwigFunction('game_page_gen', [$this, 'gamePageGen'], ['needs_environment' => true]),
 
-            new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail']),
-            new TwigFunction('user_petition', [$this, 'userPetition']),
-            new TwigFunction('admin_petition', [$this, 'adminPetition']),
+            new TwigFunction('ye_olde_mail', [$this, 'yeOldeMail'], ['needs_environment' => true]),
+            new TwigFunction('user_petition', [$this, 'userPetition'], ['needs_environment' => true]),
+            new TwigFunction('admin_petition', [$this, 'adminPetition'], ['needs_environment' => true]),
 
             new TwigFunction('show_news_item', [$this, 'showNewsItem']),
 
-            new TwigFunction('pvp_list_table', [$this, 'pvpListTable']),
-            new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers']),
+            new TwigFunction('pvp_list_table', [$this, 'pvpListTable'], ['needs_environment' => true]),
+            new TwigFunction('pvp_list_sleepers', [$this, 'pvpListSleepers'], ['needs_environment' => true]),
 
             //-- Character functions
             new TwigFunction('character_race', [$this, 'characterRace']),
-
-            //-- Jaxon functions
-            new TwigFunction('jaxon_css', [$this, 'jaxonCss']),
-            new TwigFunction('jaxon_js', [$this, 'jaxonJs']),
-            new TwigFunction('jaxon_script', [$this, 'jaxonScript']),
 
             //-- Other functions
             new TwigFunction('session_cookie_name', [$this, 'sessionCookieName']),
             new TwigFunction('var_dump', [$this, 'varDump']),
             new TwigFunction('bdump', [$this, 'bdump']),
-
-            //-- Include a template from theme or module
-            new TwigFunction('include_theme', [$this, 'includeThemeTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
-            new TwigFunction('include_module', [$this, 'includeModuleTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
-            //-- New layout system, for template
-            new TwigFunction('include_layout', [$this, 'includeLayoutTemplate'], ['needs_environment' => true, 'needs_context' => true, 'is_safe' => ['all']]),
         ];
     }
 

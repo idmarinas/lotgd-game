@@ -44,7 +44,7 @@
         'mysql_version'  => '5.5.3',
     ];
 
-    $default46  = \array_merge($default, ['php_version' => '7.3.0']);
+    $default46 = \array_merge($default, ['php_version' => '7.3.0']);
     $default48 = \array_merge($default46, ['extensions' => \array_merge($extensions, ['ctype' => 'Ctype', 'iconv' => 'Iconv'])]);
     $default49 = \array_merge($default48, ['execution_time' => 60]); //-- Increased execution_time for version 4.9.0
 

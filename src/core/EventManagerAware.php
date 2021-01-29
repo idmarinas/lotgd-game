@@ -18,6 +18,9 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\SharedEventManager;
 use Lotgd\Core\EventManager\EventManager as CoreEventManager;
 
+/**
+ * @deprecated 5.0.0
+ */
 class EventManagerAware implements EventManagerAwareInterface
 {
     protected $events;

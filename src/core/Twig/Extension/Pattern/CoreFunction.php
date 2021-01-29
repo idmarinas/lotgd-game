@@ -22,26 +22,7 @@ trait CoreFunction
      */
     public function baseUrl(string $query): string
     {
-        return \sprintf('//%s/%s', \LotgdRequest::getServer('SERVER_NAME'), $query);
-    }
-
-    /**
-     * Translate a title of page.
-     *
-     * @deprecated 4.5.0 deleted in version 5.0.0
-     *
-     * @return string
-     */
-    public function pageTitle(array $title)
-    {
-        \trigger_error(\sprintf(
-            'Usage of %s (page_title() Twig function) is obsolete since 4.5.0; and delete in version 5.0.0, use "head_title()" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        $title = \LotgdTranslator::t($title['title'], $title['params'], $title['textDomain']);
-
-        return \LotgdSanitize::fullSanitize($title);
+        return \sprintf('//%s/%s', $this->request->getServer('SERVER_NAME'), $query);
     }
 
     /**
@@ -49,7 +30,7 @@ trait CoreFunction
      */
     public function gameVersion(): string
     {
-        return \Lotgd\Core\Application::VERSION;
+        return \Lotgd\Core\Kernel::VERSION;
     }
 
     /**
@@ -57,7 +38,7 @@ trait CoreFunction
      */
     public function gameCopyright(): string
     {
-        return \Lotgd\Core\Application::LICENSE.\Lotgd\Core\Application::COPYRIGHT;
+        return \Lotgd\Core\Kernel::LICENSE.\Lotgd\Core\Kernel::COPYRIGHT;
     }
 
     /**
@@ -70,7 +51,7 @@ trait CoreFunction
      */
     public function getsetting($name, $default): ?string
     {
-        return $this->getLotgdSettings()->getSetting($name, $default);
+        return $this->settings->getSetting($name, $default);
     }
 
     /**
@@ -83,9 +64,7 @@ trait CoreFunction
      */
     public function triggerEvent($name, $data = [])
     {
-        $hook = $this->getHookManager();
-
-        $hook->trigger($name, null, $data);
+        $this->hookManager->trigger($name, null, $data);
 
         return modulehook($name, $data);
     }
@@ -132,7 +111,7 @@ trait CoreFunction
     /**
      * Render a PvP table list.
      */
-    public function pvpListTable(array $params): string
+    public function pvpListTable(Environment $env, array $params): string
     {
         $params['linkBase']  = ($params['linkBase'] ?? 'pvp.php') ?: 'pvp.php';
         $params['linkExtra'] = ($params['linkExtra'] ?? '?act=attack') ?: '?act=attack';
@@ -140,15 +119,15 @@ trait CoreFunction
         $params['linkAttack'] = "{$params['linkBase']}{$params['linkExtra']}";
         $params['linkAttack'] .= ($params['isInn'] ?? false) ? '&inn=1' : '';
 
-        return $this->getTemplate()->renderBlock('pvp_list', '{theme}/_blocks/_pvp.html.twig', $params);
+        return $env->load('{theme}/_blocks/_pvp.html.twig')->renderBlock('pvp_list', $params);
     }
 
     /**
      * Render a count of sleepers for zone.
      */
-    public function pvpListSleepers(array $params): string
+    public function pvpListSleepers(Environment $env, array $params): string
     {
-        return $this->getTemplate()->renderBlock('pvp_sleepers', '{theme}/_blocks/_pvp.html.twig', $params);
+        return $env->load('{theme}/_blocks/_pvp.html.twig')->renderBlock('pvp_sleepers', $params);
     }
 
     /**
@@ -156,7 +135,7 @@ trait CoreFunction
      */
     public function sessionCookieName(): string
     {
-        return $this->getService('session')->getName();
+        return $this->session->getName();
     }
 
     /**
@@ -178,77 +157,5 @@ trait CoreFunction
     public function varDump($var): string
     {
         return '<pre>'.\var_export($var, true).'</pre>';
-    }
-
-    /**
-     * Renders a module template.
-     *
-     * @param array        $context
-     * @param string|array $template      The template to render or an array of templates to try consecutively
-     * @param array        $variables     The variables to pass to the template
-     * @param bool         $withContext
-     * @param bool         $ignoreMissing Whether to ignore missing templates or not
-     * @param bool         $sandboxed     Whether to sandbox the template or not
-     *
-     * @return string The rendered template
-     */
-    public function includeModuleTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
-    {
-        \trigger_error(\sprintf(
-            'Usage of `include_module` is obsolete since 4.6.0; and delete in version 4.7.0, use "new theme system for module" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        $include = $env->getFunction('include')->getCallable();
-
-        return $include($env, $context, "module/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
-    }
-
-    /**
-     * Renders a theme template.
-     *
-     * @param array        $context
-     * @param string|array $template      The template to render or an array of templates to try consecutively
-     * @param array        $variables     The variables to pass to the template
-     * @param bool         $withContext
-     * @param bool         $ignoreMissing Whether to ignore missing templates or not
-     * @param bool         $sandboxed     Whether to sandbox the template or not
-     *
-     * @return string The rendered template
-     */
-    public function includeThemeTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
-    {
-        \trigger_error(\sprintf(
-            'Usage of `include_theme` is obsolete since 4.6.0; and delete in version 4.7.0, use "new theme system" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        $include = $env->getFunction('include')->getCallable();
-
-        return $include($env, $context, "{$env->getThemefolder()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
-    }
-
-    /**
-     * Render new layout system.
-     *
-     * @param array        $context
-     * @param string|array $template      The template to render or an array of templates to try consecutively
-     * @param array        $variables     The variables to pass to the template
-     * @param bool         $withContext
-     * @param bool         $ignoreMissing Whether to ignore missing templates or not
-     * @param bool         $sandboxed     Whether to sandbox the template or not
-     *
-     * @return string The rendered template
-     */
-    public function includeLayoutTemplate(Environment $env, $context, $template, $variables = [], $withContext = true, $ignoreMissing = false, $sandboxed = false)
-    {
-        \trigger_error(\sprintf(
-            'Usage of `include_layout` is obsolete since 4.6.0; and delete in version 4.7.0, use "{theme}/path/to/template.html.twig" instead.',
-            __METHOD__
-        ), E_USER_DEPRECATED);
-
-        $include = $env->getFunction('include')->getCallable();
-
-        return $include($env, $context, "@theme{$env->getThemeNamespace()}/{$template}", (array) $variables, $withContext, $ignoreMissing, $sandboxed);
     }
 }

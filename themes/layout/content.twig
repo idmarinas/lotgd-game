@@ -48,7 +48,7 @@
                                             {{ show_flash_messages() }}
 
                                             {% if event %}
-                                                <h1 class="center aligned">{{ event[0]|t(event[1], event[2])|colorize }}</h1>
+                                                <h1 class="center aligned">{{ event[0]|trans(event[1], event[2])|colorize }}</h1>
                                             {% endif %}
                                             {# This is all content of game #}
                                             {{ content }}

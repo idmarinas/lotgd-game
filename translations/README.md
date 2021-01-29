@@ -1,74 +1,36 @@
-# Translations files
+# Translation Resource/File Names and Locations
 
-In this folder go all the translation files for the different languages following the following structure:
--   Used `.yaml` files to store translations.
-    -   Files are in `translations/[LOCALE]/[SCOPE]/[DOMAIN].yaml`
-        -   `[LOCALE]` It's a folder with the name of the location.  The game uses by default languages with two characters. Example "en", "es", "fr"...
-        -   `[SCOPE]` It's a folder with name for a scope of file. You can look at the other folders created to get an idea of how they are used. It is mainly for organization and identification of the translation file.
-        -   `[DOMAIN].yaml` It is the name of the file with the extension `.yaml`
-        -   By default have this main scopes:
-            -   `app` This is where the translations files of main CORE are stored.
-            -   `modules` This is where the translation files of the modules are stored.
-            -   `navigation` This is where the translation files of the navigation menus are stored.
-            -   `pages` This is where the translation files from the main pages are stored.
-            -   `partial` This is where the translations files for partials parts. (Example, deathmessages, taunts)
-    -   The translations are automatically loaded by the translation factory.
-        -   It is possible to have more scopes besides `pages`, `modules`... but remember the structure of the folder `translations/`.
--   `.yaml` files support a nesting system (array)
-    -   Example:
-        >     The scheme used is:
-        >          key:
-        >              key2:
-        >                  key3: 'value'
-        >              key4:
-        >                  - 'value1'
-        >                  - 'value2'
-        >              key5:
-        >                  0: 'value3'
-        >                  1: 'value4'
-        >              key6:
-        >                  '0': 'value5'
-        >                  '1': 'value6'
-        >              key7:
-        >                  '00': 'value7'
-        >                  '01': 'value8'
-        >
-        >     Becomes:
-        >          'key.key2.key3' => 'value',
-        >          'key.key4' => [
-        >             0 => 'value1',
-        >             1 => 'value2'
-        >          ],
-        >          'key.key5' => [
-        >             0 => 'value3',
-        >             1 => 'value4'
-        >          ],
-        >          'key.key6' => [
-        >             0 => 'value5',
-        >             1 => 'value6'
-        >          ],
-        >          'key.key7.00' => 'value7',
-        >          'key.key7.01' => 'value8',
+Symfony Framework looks for translations files in the following default locations:
 
+-   `translations/` directory (at the root of the project);
+-   `Resources/translations/` directory inside of any bundle.
 
-New format for large text (avoid use array like before)
+The locations are listed here with the highest priority first. That is, you can override the translation messages of a bundle in the first directory.
 
-key: `>`
-> Replaces line breaks with blanks
+The override mechanism works at a key level: only the overridden keys need to be listed in a higher priority message file. When a key is not found in a message file, the translator will automatically fall back to the lower priority message files.
 
-key: `|`
-> Preserves line breaks
+The filename of the translation files is also important: each message file must be named according to the following path: `domain.locale.loader`:
 
-Can add `-` or `+` to `>` or `+`
--   `-` Not add line break to end
--   `+` Add 2 line breaks to end
+-   **domain**: Domains are a way to organize messages into groups. 
+-   **locale**: The locale that the translations are for (e.g. en_GB, en, etc);
+-   **loader**: How Symfony should load and parse the file (e.g. xlf, php, yaml, etc).
 
-See: https://symfony.com/doc/4.4/components/yaml/yaml_format.html#strings
+The loader can be the name of any registered loader. By default, Symfony provides many loaders:
 
-To see all line break need add filter Twig filter "nl2br" when show text
-If the Twig translation filters are used, this is done automatically
--   |t
--   |trans
--   |tl
--   |tmf
--   |tst
+-   `.yaml:` YAML file
+-   `.xlf:` XLIFF file;
+-   `.php:` Returning a PHP array;
+-   `.csv:` CSV file;
+-   `.json:` JSON file;
+-   `.ini:` INI file;
+-   `.dat`, `.res:` ICU resource bundle;
+-   `.mo:` Machine object format;
+-   `.po:` Portable object format;
+-   `.qt:` QT Translations XML file;
+
+The choice of which loader to use is entirely up to you and is a matter of taste. The recommended option is to use YAML for simple projects and use XLIFF if you’re generating translations with specialized programs or teams.
+
+> Note: LoTGD Core organize translations files into locales folder
+
+More info in [Symfony Translation component](https://symfony.com/doc/5.2/translation.html)
+Other info [Symfony Yaml](https://symfony.com/doc/5.2/components/yaml/yaml_format.html#strings)

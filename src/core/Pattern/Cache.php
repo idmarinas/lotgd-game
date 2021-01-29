@@ -12,33 +12,18 @@
 
 namespace Lotgd\Core\Pattern;
 
-use Laminas\Cache\Storage\StorageInterface;
 use Symfony\Contracts\Cache\CacheInterface;
+
+trigger_error(Cache::class . ' is deprecated, if possible use Dependency Injection.', E_USER_DEPRECATED);
 
 /**
  * Return instance of cache of game "Cache\Core\Lotgd".
+ *
+ * @deprecated 5.0.0 use Dependency Injection when you can, and LotgdKernel::get(ServiceName) when not can use Dependency Injection.
  */
 trait Cache
 {
-    protected $lotgdCache;
     protected $lotgdCacheApp;
-
-    /**
-     * Get cache instance.
-     *
-     * @deprecated 4.9.0 use getCacheApp() instead
-     *
-     * @return object
-     */
-    public function getCache()
-    {
-        if ( ! $this->lotgdCache instanceof StorageInterface)
-        {
-            $this->lotgdCache = $this->getContainer('Cache\Core\Lotgd');
-        }
-
-        return $this->lotgdCache;
-    }
 
     /**
      * Get app cache instance.

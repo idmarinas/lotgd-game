@@ -23,7 +23,7 @@ trait Jaxon
      */
     public function jaxonCss(): string
     {
-        return $this->getJaxon()->getCss();
+        return $this->jaxon->getCss();
     }
 
     /**
@@ -31,7 +31,7 @@ trait Jaxon
      */
     public function jaxonJs(): string
     {
-        return $this->getJaxon()->getJs();
+        return $this->jaxon->getJs();
     }
 
     /**
@@ -39,6 +39,6 @@ trait Jaxon
      */
     public function jaxonScript(): string
     {
-        return $this->getJaxon()->getScript();
+        return $this->jaxon->getScript();
     }
 }

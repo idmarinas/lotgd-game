@@ -15,13 +15,19 @@ if (! isset($_GET['op']) || 'list' != $_GET['op'])
 require_once 'common.php';
 
 use Laminas\Filter;
+use Lotgd\Core\Installer\Pattern\Version;
 
 function lotgdsort($a, $b)
 {
     // $a and $b are table rows.
 
-    $versions = new \Lotgd\Core\Installer\Install();
-    $official_prefixes = $versions->getAllVersions();
+    class FakeInstall
+    {
+        use Version;
+    }
+
+    $versions = new FakeInstall();
+    $official_prefixes = $versions->getFullListOfVersion();
     unset($official_prefixes['-1']);
     $official_prefixes = array_keys($official_prefixes);
 
