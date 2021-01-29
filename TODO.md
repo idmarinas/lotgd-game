@@ -7,8 +7,8 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto (5.0.0)
--   Crear el comando para crear usuarios (principalmente por el administrador) sólo permitirá crear un usuario administrador
-    -   Al finalizar la instalación dar el aviso para crear usuario.
+-   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
+-   Instalador, informar sobre la licencia.
 -   El eliminar el uso de: Lotgd\Core\Validator\Db
     -   Encontrado en `lib/clan/applicant_new.php`
 -   Un nuevo sistema de instalación por consola.
@@ -27,12 +27,20 @@
 -   ...
 
 # Para la versión 5.1.0
+-   Mirar el uso de un bundle tipo settings:
+    -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
+    -   https://github.com/HelisLT/settings-manager-bundle#usage lastest 16 days ago
+    -   https://github.com/craue/CraueConfigBundle/tree/2.5.0 lastest on 17 Dec 2020
+
+# Para la versión 5.2.0
 -   ¿? Sustituir Entity\Account por Entity\User
 -   Mirar si se puede integrar con el sistema de autentificación de symfony si no es muy enrevesado.
 
-# Para la versión 5.2.0
+# Para la versión 5.3.0
 -   Migrar al nuevo sitema de plantillas
     -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
+-   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
+    -   Usar macros y blocks donde se pueda.
 
 # Advertising bundle
 -   Permitir desactivarlo en tiempo de ejecución (un módulo que lo desactiva por ejemplo)
@@ -40,8 +48,6 @@
 
 # Para la versión 6.0.0
 -   Seguir la transición hacia un sistema Symfony Framework
--   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
-    -   Usar macros y blocks donde se pueda.
 -   **BC** Rehacer el sistema de combate, usando el principio del resto del juego y haciendo uso de una factoria.
     -   Hacer el que sistema de combate sea mas personalizable, se pueda extender las clases para añadir más opciones.
 -   **BC** Rehacer los personajes, para que sean mas sencillos de extender, tambien para que se complemente como el sistema de combate nuevo.
@@ -85,6 +91,11 @@
     -   Usar otra forma
 
 ## Cosas a mirar
+-   https://github.com/KnpLabs/KnpPaginatorBundle para la paginación
+-   Panel de administración
+    -   https://github.com/sonata-project/SonataAdminBundle 
+    -   https://github.com/EasyCorp/EasyAdminBundle
+-   https://github.com/sonata-project/SonataPageBundle 
 -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
 -   SonataBlockBundle puede ser interesante para agregar bloques en lugares concretos
     -   https://sonata-project.org/bundles/block/master/doc/reference/events.html
@@ -93,7 +104,6 @@
 -   https://symfony.com/doc/current/components/process.html
 -   https://symfony.com/doc/current/components/config.html
 -   https://symfony.com/doc/current/components/finder.html
--   https://symfony.com/doc/current/components/console.html Ya se agrego la consola, pero sirve como referencia.
 -   https://symfony.com/doc/current/components/options_resolver.html
     -   Para configurar los componentes y opciones que se pueden usar 
     -   Esto permite que cada componente tenga las opciones que necesita y los tipos de valor correctos
