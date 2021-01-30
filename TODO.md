@@ -7,24 +7,20 @@
         -   en el inbox cambiar el select para informar de cuantos mensajes tiene cada uno de los remitentes
 
 # Actualmente haciendo esto (5.0.0)
--   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
--   Instalador, informar sobre la licencia.
--   El eliminar el uso de: Lotgd\Core\Validator\Db
-    -   Encontrado en `lib/clan/applicant_new.php`
--   Un nuevo sistema de instalación por consola.
-    -   Sólo podrá actualizar desde la versión anterior (4.12.0)
+-   Instalador (documentacion)
+    -   Agregar los pasos para instalr
+    -   Modificar/añadir los archivos .env.prod, .env.local etc, segun sea
+    -   Informar del comando composer dump-env prod/dev/test
 -   Se usará un sistema similar al Symfony como transición
--   **BC** Se elimina Laminas DB. `DB::` class `Lotgd\Core\Db\Dbwrapper`
-    -   Eliminar uso de DB:: class, se usará Doctrine en su lugar.
-    -   En las actualizaciones (a la 4.0.0, por ejemplo) se hace uso de Laminas DB
-        -   Esto se eliminará en esta versión, ya que se incluirá un nuevo instalador
 -   El antiguo sistema de módulos está obsolete desde esta versión
     -   Los módulos antiguos seguiran funcionando pero estan obsoletos.
     -   El nuevo sistema tipo Bundle remplaza al sistema de módulos antiguos.
 -   A partir de esta versión se empezará a usar un sistema de módulos tipo Bundle
 
 # Módulos
--   ...
+-   Eliminar uso de DB::
+    -   Seria compatible con la version 4.12.0
+-   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
 
 # Para la versión 5.1.0
 -   Mirar el uso de un bundle tipo settings:
