@@ -15,7 +15,6 @@ namespace Lotgd\Core\Twig\Extension;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Lotgd\Core\EntityRepository\MotdRepository;
-use Lotgd\Core\Pattern as PatternCore;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -30,6 +29,7 @@ class Motd extends AbstractExtension
     {
         $this->doctrine = $doctrine;
     }
+
     /**
      * {@inheritdoc}
      */
