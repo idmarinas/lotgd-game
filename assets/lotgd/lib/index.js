@@ -1,5 +1,5 @@
 //-- To allow use jQuery and $ in inline script page
-var $ = require('jquery')
+const $ = require('jquery')
 global.$ = global.jQuery = $
 
 define([
