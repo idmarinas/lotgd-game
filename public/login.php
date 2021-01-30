@@ -122,7 +122,13 @@ if ('' != $name)
                         $su = true;
                     }
                     ++$c;
-                    $alert .= "`3{$row2['date']->format('Y-m-d H:i:s')}`0: Failed attempt from `&{$row2['ip']}`7 [`3{$row2['id']}`0] to log on to `^{$row2['login']}`0`n";
+                    $alert .= sprintf(
+                        '`7`3%s`0: Failed attempt from `&%s`0 [`3%s`0] to log on to `^%s`0`0`n',
+                        $row2['date']->format('Y-m-d H:i:s'),
+                        $row2['ip'],
+                        $row2['id'],
+                        $row2['login']
+                    );
                 }
 
                 if ($c >= 10)
@@ -146,7 +152,7 @@ if ('' != $name)
                         // this failed attempt if it includes superusers.
                         $result2 = $repositoryAccounts->getSuperuserWithPermit(SU_EDIT_USERS);
 
-                        $subj = \sprintf('`#%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR'));
+                        $subj = \sprintf('%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR'));
 
                         foreach ($result2 as $row2)
                         {
