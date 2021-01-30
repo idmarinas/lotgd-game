@@ -45,7 +45,7 @@ trait Superuser
     }
 
     /**
-     * Get all superusers who have the given permission.
+     * Get count of superusers who have the given permission.
      */
     public function getSuperuserCountWithPermit(int $permit): int
     {
@@ -69,7 +69,7 @@ trait Superuser
     }
 
     /**
-     * Get all superusers who have the given permission.
+     * Superuser login.
      */
     public function getLoginSuperuserWithPermit(string $name, string $password, int $permit): ?array
     {
