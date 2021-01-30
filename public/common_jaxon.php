@@ -39,64 +39,6 @@ if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getS
     return false;
 }
 
-//-- Check connection to DB
-$link = Doctrine::isConnected();
-
-\define('DB_CONNECTED', (false !== $link));
-\define('DB_CHOSEN', DB_CONNECTED);
-
-if (DB_CONNECTED)
-{
-    \define('LINK', $link);
-}
-
-if ( ! \file_exists(\Lotgd\Core\Application::FILE_DB_CONNECT) && ! \defined('IS_INSTALLER'))
-{
-    \define('NO_SAVE_USER', true);
-
-    \defined('DB_NODB') || \define('DB_NODB', true);
-
-    exit;
-}
-elseif (\Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
-{
-    \define('IS_INSTALLER', false);
-}
-elseif (\Lotgd\Core\Application::VERSION != getsetting('installer_version', '-1') && ! \defined('IS_INSTALLER'))
-{
-    \define('NO_SAVE_USER', true);
-
-    exit;
-}
-// If is installer check if tables are created
-elseif (\defined('IS_INSTALLER'))
-{
-    try
-    {
-        $repository = \Doctrine::getRepository('LotgdCore:Settings');
-        $repository->findOneBy(['setting' => 'installer_version']);
-    }
-    catch (\Throwable $th)
-    {
-        \defined('DB_NODB') || \define('DB_NODB', true);
-    }
-}
-
-if ( ! IS_INSTALLER && \file_exists('public/installer.php')
-    && \Lotgd\Core\Application::VERSION == getsetting('installer_version', '-1')
-    && 'installer.php' != \substr(\LotgdRequest::getServer('SCRIPT_NAME'), -13)
-) {
-    // here we have a nasty situation. The installer file exists (ready to be used to get out of any bad situation like being defeated etc and it is no upgrade or new installation. It MUST be deleted
-    exit;
-}
-
-if ( ! \defined('IS_INSTALLER') && ! DB_CONNECTED)
-{
-    \defined('DB_NODB') || \define('DB_NODB', true);
-
-    exit;
-}
-
 if (
     isset($session['lasthit'], $session['loggedin'])
 
@@ -117,8 +59,8 @@ if (
 }
 $session['lasthit'] = \strtotime('now');
 
-$cp = \Lotgd\Core\Application::COPYRIGHT;
-$l  = \Lotgd\Core\Application::LICENSE;
+$cp = \Lotgd\Core\Kernel::COPYRIGHT;
+$l  = \Lotgd\Core\Kernel::LICENSE;
 
 do_forced_nav(ALLOW_ANONYMOUS, OVERRIDE_FORCED_NAV);
 
