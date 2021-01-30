@@ -94,6 +94,10 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   **BC** :warning: Tables deleted:
     -   `translations` and `untranslated` not in use, use new translation system
     -   `nastywords` not in use, use new Censor system `Lotgd\Core\Output\Censor` can get as service
+-   **BC** remove validators not in use.
+    -   **src/core/Validator/Db/NoObjectExists.php** 
+    -   **src/core/Validator/Db/ObjectExists.php**
+    -   **src/core/Validator/DelimeterIsCountable.php**
 
 ### :notebook: NOTES
 
