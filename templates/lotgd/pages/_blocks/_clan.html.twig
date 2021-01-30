@@ -284,27 +284,14 @@
 
     <br>
     <br>
-    {% if user.gold >= costGold and user.gems >= costGems %}
+    {% if user.gold >= costGold and user.gems >= costGems and not clan_created %}
         {{ 'section.applicant.new.register.requirements.fulfilled'|trans|colorize }}
         <br>
         <br>
-        <form class="ui segment form" action="{{ 'clan.php?op=new&apply=1'|lotgd_url }}" method="POST">
-            {{ 'section.applicant.new.form.title'|trans|colorize }}
-            <div class="field">
-                <label>{{ 'section.applicant.new.form.label.name'|trans|colorize }}</label>
-                <input name="clanname" value="{{ clanName }}">
-            </div>
-            <div class="field">
-                <label>{{ 'section.applicant.new.form.label.short.name'|trans|colorize }}</label>
-                <input name="clanshort" value="{{ clanShort }}">
-            </div>
-            <div class="ui info message">
-                {{ 'section.applicant.new.form.note'|trans|uncolorize }}
-            </div>
-            <div class="field">
-                <button type="submit" class="ui button">{{ 'section.applicant.new.form.button.submit'|trans }}</button>
-            </div>
-        </form>
+        {{ form(form) }}
+        <div class="ui info message">
+            {{ 'section.applicant.new.form.note'|trans|uncolorize }}
+        </div>
     {% elseif user.gold < costGold %}
         {{ 'section.applicant.new.register.requirements.no.gold'|trans|colorize }}
     {% elseif user.gems < costGems %}

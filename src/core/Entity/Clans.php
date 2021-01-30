@@ -14,6 +14,8 @@
 namespace Lotgd\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Clans.
@@ -25,6 +27,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     }
  * )
  * @ORM\Entity(repositoryClass="Lotgd\Core\EntityRepository\ClansRepository")
+ *
+ * @UniqueEntity("clanname")
  */
 class Clans
 {
@@ -41,6 +45,15 @@ class Clans
      * @var string
      *
      * @ORM\Column(name="clanname", type="string", length=255, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=2,
+     *     max=250
+     * )
+     * @Assert\Regex(
+     *     pattern="/[^\p{L} '-]/",
+     *     match=false,
+     * )
      */
     private $clanname;
 
@@ -48,6 +61,15 @@ class Clans
      * @var string
      *
      * @ORM\Column(name="clanshort", type="string", length=50, nullable=false)
+     *
+     * @Assert\Length(
+     *     min=2,
+     *     max=5
+     * )
+     * @Assert\Regex(
+     *     pattern="/[^[:alpha:]]/",
+     *     match=false,
+     * )
      */
     private $clanshort;
 
