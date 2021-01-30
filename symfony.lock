@@ -180,6 +180,9 @@
     "laminas/laminas-stdlib": {
         "version": "3.3.1"
     },
+    "laminas/laminas-validator": {
+        "version": "2.14.4"
+    },
     "laminas/laminas-view": {
         "version": "2.12.0"
     },
