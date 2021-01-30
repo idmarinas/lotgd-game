@@ -35,17 +35,6 @@ if ('cli-server' === \PHP_SAPI && \is_file(__DIR__.\parse_url(LotgdRequest::getS
     return false;
 }
 
-//-- Check connection to DB
-$link = Doctrine::isConnected();
-
-\define('DB_CONNECTED', (false !== $link));
-\define('DB_CHOSEN', DB_CONNECTED);
-
-if (DB_CONNECTED)
-{
-    \define('LINK', $link);
-}
-
 //-- Check if game is installed
 if (
     'cli' != \substr(PHP_SAPI, 0, 3) //-- Not check if is a cli (CronJob)
