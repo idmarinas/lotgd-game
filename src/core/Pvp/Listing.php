@@ -14,16 +14,17 @@ namespace Lotgd\Core\Pvp;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Lotgd\Core\Pattern as PatternCore;
 
 class Listing
 {
+    protected $doctrine;
+    /** @var \Lotgd\Core\EntityRepository\CharactersRepository */
     protected $repository;
     protected $query;
 
-    public function __construct(EntityManagerInterface $repository)
+    public function __construct(EntityManagerInterface $doctrine)
     {
-        $this->repository = $repository;
+        $this->doctrine = $doctrine;
     }
 
     /**
@@ -94,7 +95,7 @@ class Listing
             $pvpSameId = (bool) getsetting('pvpsameid', 0);
             $pvpSameIp = (bool) getsetting('pvpsameip', 0);
 
-            $this->repository = $this->getDoctrineRepository('LotgdCore:Characters');
+            $this->repository = $this->doctrine->getRepository('LotgdCore:Characters');
             $this->query      = $this->repository->createQueryBuilder('u');
             $expr             = $this->query->expr();
 
