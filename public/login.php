@@ -3,15 +3,15 @@
 // mail ready
 // addnews ready
 // translator ready
-define('ALLOW_ANONYMOUS', true);
+\define('ALLOW_ANONYMOUS', true);
 
 require_once 'common.php';
 require_once 'lib/systemmail.php';
 require_once 'lib/checkban.php';
 require_once 'lib/serverfunctions.class.php';
 
-$op = (string) \LotgdRequest::getQuery('op');
-$name = (string) \LotgdRequest::getPost('name');
+$op    = (string) \LotgdRequest::getQuery('op');
+$name  = (string) \LotgdRequest::getPost('name');
 $iname = (string) getsetting('innname', LOCATION_INN);
 $vname = (string) getsetting('villagename', LOCATION_FIELDS);
 $force = \LotgdRequest::getPost('force');
@@ -33,30 +33,30 @@ if ('' != $name)
         return redirect('home.php');
     }
 
-    $password = stripslashes((string) \LotgdRequest::getPost('password'));
+    $password = \stripslashes((string) \LotgdRequest::getPost('password'));
 
-    if ('!md5!' == substr($password, 0, 5))
+    if ('!md5!' == \substr($password, 0, 5))
     {
-        $password = md5(substr($password, 5));
+        $password = \md5(\substr($password, 5));
     }
-    elseif ('!md52!' == substr($password, 0, 6) && 38 == strlen($password) && $force)
+    elseif ('!md52!' == \substr($password, 0, 6) && 38 == \strlen($password) && $force)
     {
-        $password = substr($password, 6);
-        $password = preg_replace('/[^a-f0-9]/', '', $password);
+        $password = \substr($password, 6);
+        $password = \preg_replace('/[^a-f0-9]/', '', $password);
     }
     else
     {
-        $password = md5(md5($password));
+        $password = \md5(\md5($password));
     }
 
     checkban(); //check if this computer is banned
 
     //-- Using Doctrine repository to process login
     $repositoryAccounts = Doctrine::getRepository(Lotgd\Core\Entity\Accounts::class);
-    $account = $repositoryAccounts->processLoginGetAcctData($name, $password);
+    $account            = $repositoryAccounts->processLoginGetAcctData($name, $password);
 
     //-- Not found account
-    if (! $account)
+    if ( ! $account)
     {
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.incorrect', [], 'page_login'));
 
@@ -72,7 +72,7 @@ if ('' != $name)
             ->getResult()
         ;
 
-        if (count($result))
+        if (\count($result))
         {
             // just in case there manage to be multiple accounts on
             // this name.
@@ -92,28 +92,43 @@ if ('' != $name)
                 \Doctrine::persist($failLog);
                 \Doctrine::flush(); //Persist objects
 
-                $sql = 'SELECT '.DB::prefix('faillog').'.*, '.DB::prefix('accounts').'.superuser,name,login FROM '.DB::prefix('faillog').' INNER JOIN '.DB::prefix('accounts').' ON '.DB::prefix('accounts').'.acctid='.DB::prefix('faillog').".acctid WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND date>'".date('Y-m-d H:i:s', strtotime('-1 day'))."'";
-                $result2 = DB::query($sql);
+                $query = \Doctrine::createQueryBuilder();
+                $expr  = $query->expr();
 
-                $c = 0;
+                $query->select('u.ip', 'u.date', 'u.id', 'a.superuser', 'a.login')
+                    ->from('LotgdCore:Faillog', 'u')
+
+                    ->join('LotgdCore:Accounts', 'a', 'with', $expr->eq('a.acctid', 'u.acctid'))
+
+                    ->where('u.ip = :ip AND u.date > :date')
+
+                    ->setParameters([
+                        'ip'   => \LotgdRequest::getServer('REMOTE_ADDR'),
+                        'date' => \date('Y-m-d H:i:s', \strtotime('-1 day')),
+                    ])
+                ;
+
+                $c     = 0;
                 $alert = '';
-                $su = false;
+                $su    = false;
 
-                while ($row2 = DB::fetch_assoc($result2))
+                $failResult = $query->getQuery()->getResult();
+
+                foreach ($failResult as $row2)
                 {
                     if ($row2['superuser'] > 0)
                     {
-                        $c++;
+                        ++$c;
                         $su = true;
                     }
-                    $c++;
-                    $alert .= "`3{$row2['date']}`7: Failed attempt from `&{$row2['ip']}`7 [`3{$row2['id']}`7] to log on to `^{$row2['login']}`7 ({$row2['name']}`7)`n";
+                    ++$c;
+                    $alert .= "`3{$row2['date']->format('Y-m-d H:i:s')}`0: Failed attempt from `&{$row2['ip']}`7 [`3{$row2['id']}`0] to log on to `^{$row2['login']}`0`n";
                 }
 
                 if ($c >= 10)
                 {
                     // 5 failed attempts for superuser, 10 for regular user
-                    $bans = new \Lotgd\Core\Entity\Bans();
+                    $bans      = new \Lotgd\Core\Entity\Bans();
                     $banexpire = new \DateTime('now');
                     $bans->setIpfilter(\LotgdRequest::getServer('REMOTE_ADDR'))
                         ->setBanreason(\LotgdTranslator::t('login.banMessage', [], 'page_login'))
@@ -129,24 +144,14 @@ if ('' != $name)
                     {
                         // send a system message to admins regarding
                         // this failed attempt if it includes superusers.
-                        $sql = 'SELECT acctid FROM '.DB::prefix('accounts').' WHERE (superuser&'.SU_EDIT_USERS.')';
-                        $result2 = DB::query($sql);
-                        $subj = translate_mail(['`#%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR')], 0);
+                        $result2 = $repositoryAccounts->getSuperuserWithPermit(SU_EDIT_USERS);
 
-                        while ($row2 = DB::fetch_assoc($result2))
+                        $subj = \sprintf('`#%s failed to log in too many times!', \LotgdRequest::getServer('REMOTE_ADDR'));
+
+                        foreach ($result2 as $row2)
                         {
-                            //delete old messages that
-                            $sql = 'DELETE FROM '.DB::prefix('mail')." WHERE msgto={$row2['acctid']} AND msgfrom=0 AND subject = '".serialize($subj)."' AND seen=0";
-                            DB::query($sql);
-
-                            $noemail = false;
-
-                            if (DB::affected_rows() > 0)
-                            {
-                                $noemail = true;
-                            }
-                            $msg = translate_mail(['This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert], 0);
-                            systemmail($row2['acctid'], $subj, $msg, 0, $noemail);
+                            $msg = \sprintf('This message is generated as a result of one or more of the accounts having been a superuser account.  Log Follows:`n`n%s', $alert);
+                            systemmail($row2['acctid'], $subj, $msg, 0);
                         }//end for
                     }//end if($su)
                 }//end if($c>=10)
@@ -166,7 +171,7 @@ if ('' != $name)
     \LotgdHook::trigger(\Lotgd\Core\Hook::HOOK_CORE_LOGIN_CHECK);
     modulehook('check-login');
 
-    if ('' != $session['user']['emailvalidation'] && 'x' != substr($session['user']['emailvalidation'], 0, 1))
+    if ('' != $session['user']['emailvalidation'] && 'x' != \substr($session['user']['emailvalidation'], 0, 1))
     {
         $session['user'] = [];
         \LotgdFlashMessages::addErrorMessage(\LotgdTranslator::t('login.validate', [], 'page_login'));
@@ -174,9 +179,9 @@ if ('' != $name)
         return redirect('home.php');
     }
 
-    $session['loggedin'] = true;
-    $session['laston'] = date('Y-m-d H:i:s');
-    $session['sentnotice'] = 0;
+    $session['loggedin']       = true;
+    $session['laston']         = \date('Y-m-d H:i:s');
+    $session['sentnotice']     = 0;
     $session['user']['laston'] = new \DateTime('now');
 
     \LotgdKernel::get('cache.app')->delete('char-list-home-page');
@@ -188,17 +193,17 @@ if ('' != $name)
     modulehook('player-login');
 
     //-- Check for valid restorepage
-    if (empty($session['user']['restorepage']) || is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])
+    if (empty($session['user']['restorepage']) || \is_numeric($session['user']['restorepage']) || 'login.php' == $session['user']['restorepage'])
     {
         $session['user']['restorepage'] = 'news.php';
     }
 
     if ($session['user']['loggedin'])
     {
-        $link = sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
+        $link = \sprintf('<a href="%s">%s</a>', $session['user']['restorepage'], $session['user']['restorepage']);
 
         $str = \LotgdTranslator::t('login.redirect', ['link' => $link], 'page_login');
-        header("Location: {$session['user']['restorepage']}");
+        \header("Location: {$session['user']['restorepage']}");
         saveuser();
         echo $str;
 
