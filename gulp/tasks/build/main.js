@@ -3,7 +3,6 @@
 ***************************** **/
 //-- Dependencias
 const gulp = require('gulp')
-const merge = require('merge-stream')
 
 //-- Configuration
 const config = require('../../config/default')
