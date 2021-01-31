@@ -128,7 +128,7 @@
         }
     },
     "archive": {
-        "exclude": ["release", "docs"]
+        "exclude": ["release/", "docs/"]
     },
     "funding": [
 		{
