@@ -1,7 +1,13 @@
 # security:
 #     encoders:
+#         legacy:
+#             algorithm: md5
+#             encode_as_base64: false
+#             iterations: 2
 #         Nucleos\UserBundle\Model\UserInterface:
 #             algorithm: auto
+#             migrate_from:
+#                 - legacy
 
 #     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
 #     providers:
