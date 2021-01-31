@@ -4,5 +4,5 @@ module.exports = function (cb)
 {
     console.info('Building application')
 
-    return series('delete', 'core', 'main', 'optimize', 'composer', 'zip')(cb)
+    return series('delete', 'core', 'main', 'optimize')(cb)
 }
