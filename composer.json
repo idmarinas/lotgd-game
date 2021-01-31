@@ -127,6 +127,9 @@
             "require": "5.2.*"
         }
     },
+    "archive": {
+        "exclude": ["release", "docs"]
+    },
     "funding": [
 		{
 			"type": "paypal",
