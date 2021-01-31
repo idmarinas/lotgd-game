@@ -19,20 +19,9 @@
 
 # Módulos
 -   Eliminar uso de DB::
-    -   Seria compatible con la version 4.12.0
 -   Lotgd\Core\Pattern mirar donde se usa e intentar quitarlo.
 
 # Para la versión 5.1.0
--   Mirar el uso de un bundle tipo settings:
-    -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
-    -   https://github.com/HelisLT/settings-manager-bundle#usage lastest 16 days ago
-    -   https://github.com/craue/CraueConfigBundle/tree/2.5.0 lastest on 17 Dec 2020
-
-# Para la versión 5.2.0
--   ¿? Sustituir Entity\Account por Entity\User
--   Mirar si se puede integrar con el sistema de autentificación de symfony si no es muy enrevesado.
-
-# Para la versión 5.3.0
 -   Migrar al nuevo sitema de plantillas
     -   https://github.com/Sylius/SyliusThemeBundle para crear temas en LoTGD
 -   Revisar plantillas y traducciones (ver si se puede mejorar la estructura de las traducciones)
@@ -52,10 +41,21 @@
     -   Estos buffs pueden servir para muchas cosas, las monturas por ejemplo.
 
 # Para la versión 7.0.0  (LoTGD Core as Symfony APP)
+-   Sustituir Entity\Account por Entity\User
+-   Mirar el uso de un bundle tipo settings:
+    -   https://github.com/dmishh/SettingsBundle lastest on 28 Jun 2016
+    -   O mejor crear uno propio que sustituya:
+        -   Los settings de los modulos
+        -   Los prefs-user de los modulos (guardar datos del modulo con respecto al modulo)
+        -   Menos importante
+            -   Puede solaparse con las caracteristicas de los bundles
+            -   Los prefs-* (ejemplo prefs-city, prefs-mount) datos, del modulo con respecto a alguna caracteristica, como puede ser una ciudad, montura
 -   Esta versión LoTGD Core será una app Symfony Framework.
     -   Migrar a la estructura propia de Symfony Framework
 -   Se actualiza el sistema de instalación para admitir la instalación por consola o via web.
-    -   Mejor por consola
+    -   La instalación por consola ya se creeo en la versión 5.0.0
+        -   Se mirará incluir una versión de instalación por web
+            -   Problematico la creación del usuario admin
     -   Para los admin que no dispongan de esta opción se agrega la opción de instalación via web.
 -   Se usará un sistema de módulos tipo Bundle, igual que Symfony Framework. 
     -   Se reemplaza por completo el viejo sistema de módulos
