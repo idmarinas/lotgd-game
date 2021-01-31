@@ -91,10 +91,9 @@
         "build": "encore production --progress",
         "lotgd-dev": "npm run dev && gulp",
         "lotgd-prod": "npm run build && gulp --env prod",
-        "lotgd-zip": "npm run build && gulp --env prod --zip",
         "lotgd-skeleton": "gulp skeleton",
         "lotgd-docs": "php phpDocumentor.phar",
-        "lotgd-release": "npm run lotgd-zip && npm run lotgd-docs && npm run lotgd-skeleton"
+        "lotgd-release": "npm run lotgd-prod && npm run lotgd-docs && npm run lotgd-skeleton"
     },
     "browserslist": [
         "> 0.1%",
