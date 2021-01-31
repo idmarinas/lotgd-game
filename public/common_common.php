@@ -7,7 +7,7 @@
 require_once 'vendor/autoload.php'; //-- Autoload class for new options of game
 
 //-- Include constants
-require_once 'lib/constants.php';
+require_once 'src/constants.php';
 
 //-- Autoload annotations
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(

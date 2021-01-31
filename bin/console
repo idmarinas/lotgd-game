@@ -18,7 +18,7 @@ if ( ! \in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true))
 require \dirname(__DIR__).'/vendor/autoload.php';
 
 //-- Include constants
-require_once \dirname(__DIR__).'/lib/constants.php';
+require_once \dirname(__DIR__).'/src/constants.php';
 
 if ( ! \class_exists(Application::class) || ! \class_exists(Dotenv::class))
 {

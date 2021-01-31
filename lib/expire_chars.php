@@ -4,7 +4,7 @@
 // addnews ready
 // mail ready
 
-require_once 'lib/constants.php';
+require_once 'src/constants.php';
 require_once 'lib/charcleanup.php';
 require_once 'lib/gamelog.php';
 
