@@ -1,5 +1,6 @@
 {
     "name": "idmarinas/lotgd",
+    "version": "5.0.0",
     "description": "A new version of The Legend of the Green Dragon, upgrade scripts and optimization , migrating to a Symfony Application",
     "config": {
         "optimize-autoloader": true,
@@ -112,6 +113,12 @@
         },
 		"files": ["src/functions.php"]
     },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
+    },
     "conflict": {
         "symfony/symfony": "*"
     },
@@ -126,11 +133,5 @@
 			"type": "paypal",
 			"url": "https://www.paypal.me/idmarinas"
 		}
-	],
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
-        }
-    }
+	]
 }
