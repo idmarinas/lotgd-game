@@ -14,6 +14,7 @@ Visit **_V4_** [Changelog](https://github.com/idmarinas/lotgd-game/blob/master/C
 -   Static class **LotgdTranslator** now get a instance of `Symfony Translator`
 -   `Lotgd\Core\Http\Request` and `Lotgd\Core\Http\Response`
     -   Move function `setCookie()` from `Request` to `Response`
+-   Moved `lib/constants.php` to `src/constants.php`
 
 ### :star: FEATURES
 
